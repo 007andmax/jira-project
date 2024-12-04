@@ -1,0 +1,40 @@
+<div
+    class="merge-ticket-item qt-df "
+    (click)="selectPrimaryTicket()"
+>
+    <div class="qt-radio contract-type-select__radio">
+        <input
+            [attr.id]="'ticket-' + item.id"
+            type="radio"
+            name="radio"
+            value="1"
+            [checked]="primaryTicket && primaryTicket.id === item.id"
+        >
+        <label [attr.for]="'ticket-' + item.id"></label>
+    </div>
+    <div>
+        <div class="qt-df qt-ai-c qt-mb-6">
+            <span class="number-ticket">Tkt# {{item.number}}</span>
+            <span
+                class="tag__modern qt-ml-4"
+                *ngIf="primaryTicket && primaryTicket.id === item.id"
+            >
+                Primary
+            </span>
+        </div>
+        <div
+            class="qt-mb-4 subject-ticket"
+            [textContent]="item.subject"
+        ></div>
+        <div class="qt-df qt-ai-c create-ticket">
+            <span
+                class="date-ticket"
+                [textContent]="getCreatAt()"
+            ></span>
+            <span
+                class="qt-ml-12"
+                [textContent]="getCompanyName()"
+            ></span>
+        </div>
+    </div>
+</div>

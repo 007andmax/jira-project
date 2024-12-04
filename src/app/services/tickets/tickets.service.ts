@@ -21,6 +21,9 @@ export class TicketsService {
   public getDashboardByServices(data) {
     return this.http.post(this.apiUrl + `dashboard/ticket/byServices`, data);
   }
+  public mergeTickets(data) {
+    return this.http.put(this.apiUrl + `v2/tickets/merge`, data);
+  }
   public getTicketsPriorities() {
     return this.http.get(this.apiUrl + `priorityLevel?page=0&size=100`);
   }

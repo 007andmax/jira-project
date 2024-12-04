@@ -1,0 +1,78 @@
+<div class="merge-ticket-item">
+    <div>
+        <div class="qt-df qt-ai-c qt-mb-6">
+            <span class="number-ticket">Tkt# {{getTicket().number}}</span>
+        </div>
+        <div
+            class="qt-mb-4 subject-ticket"
+            [textContent]="getTicket().subject"
+        ></div>
+        <div class="qt-df qt-ai-c create-ticket">
+            <span
+                class="date-ticket"
+                [textContent]="getCreatAt()"
+            ></span>
+            <span
+                class="qt-ml-12"
+                [textContent]="getCompanyName()"
+            ></span>
+        </div>
+    </div>
+    <div
+        *ngIf="editNote"
+        ngbDropdown
+        [container]="'body'"
+    >
+        <textarea
+            id="description-note"
+            [value]="mergeTicket.note"
+            (input)="onChangeNote($event)"
+            class="terms-n-conditions__textarea qt-input-block__textarea"
+            placeholder="Enter job description"
+            appTextArea
+            maxlength="500"
+            cols="30"
+            rows="3"
+        ></textarea>
+        <div class="qt-df qt-ai-c">
+            <div
+                id="dropdownBasic1"
+                ngbDropdownToggle
+                class="qt-df qt-ai-c"
+            >
+                <div class="qt-icon icon__globe qt-sz-16  "></div>
+                <div [textContent]="mergeTicket.noteType == 'PUBLIC' ? 'Visible to All Users' : 'Visible to Tech users only'"></div>
+                <i class="qt-icon icon__arrow-down qt-sz-20"></i>
+            </div>
+            <div class="qt-df">
+                <button
+                    class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+                    (click)="closed()"
+                >
+                    Cancel
+                </button>
+                <button class="qt-button   qt-jc-c">Save</button>
+            </div>
+        </div>
+        <ul
+            class="qt-dropdown-menu"
+            ngbDropdownMenu
+            aria-labelledby="dropdownBasic1"
+        >
+            <li
+                class="pointer"
+                (click)="mergeTicket.setNoteType('PUBLIC')"
+                ngbDropdownItem
+            >
+                Visible to All Users
+            </li>
+            <li
+                class="pointer"
+                (click)="mergeTicket.setNoteType('PRIVATE')"
+                ngbDropdownItem
+            >
+                Visible to Tech users only
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
+.tag__modern {
+    border-color: $blue-light-200;
+    background-color: $blue-light-25;
+    color: $blue-light-700;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 4px;
+    text-transform: capitalize;
+}
+
+.merge-ticket-item {
+    border: 1px solid $gray-200;
+    border-radius: 8px;
+    padding: 12px;
+    position: relative;
+
+    &::after {
+        position: absolute;
+        content: "";
+        left: 0;
+        top: 12px;
+        bottom: 12px;
+        width: 2px;
+        background-color: $blue-light-600;
+    }
+
+    .number-ticket {
+        font-size: 12px;
+        color: $gray-500;
+    }
+
+    .subject-ticket {
+        font-size: 14px;
+        font-weight: 500;
+        color: $gray-900;
+    }
+
+    .create-ticket {
+        font-size: 12px;
+        font-weight: 400;
+        color: $gray-500;
+    }
+
+    .date-ticket {
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            right: -7px;
+            top: calc(50% - 2px);
+            background-color: $gray-400;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+        }
+    }
+}

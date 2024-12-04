@@ -7,28 +7,64 @@
             <div class="qt-aside__title">Merge Ticket</div>
         </div>
     </div>
-    <div class="qt-aside-modern__content">
+    <div
+        class="qt-aside-modern__content"
+        *ngIf="step == 'STEP_1'"
+    >
         <ng-template
             ngFor
             let-item
             [ngForOf]="tickets"
             [ngForTrackBy]="trackById"
         >
-            <div>
-                <div class="qt-df qt-ai-c qt-mb-6">
-                    <span class="number-ticket">Tkt# {{item.number}}</span>
-                    <span class="tag__modern qt-ml-4">Primary</span>
-                </div>
-                <div
-                    class="qt-mb-4"
-                    [textContent]="item.subject"
-                ></div>
-                <div class="qt-df qt-ai-c ">
-                    <span [textContent]="getCreatAt(item)"></span>
-                    <span [textContent]="getCompanyName(item)"></span>
-                </div>
-            </div>
+            <app-merge-tickets-item
+                [item]="item"
+                [primaryTicket]="primaryTicket"
+                (onSetSelected)="selectPrimaryTicket($event)"
+            ></app-merge-tickets-item>
         </ng-template>
+    </div>
+    <div
+        class="qt-aside-modern__content"
+        *ngIf="step == 'STEP_2'"
+    >
+        <div class="qt-df qt-ai-c qt-jc-sb">
+            <p>Primary Ticket</p>
+            <button
+                class="qt-button --gray --md filter-button qt-mr-8 qt-df"
+                (click)="primary.setEditNote(true)"
+            >
+                <span class="qt-icon icon__edit qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                <span>Edit Note</span>
+            </button>
+        </div>
+        <app-merge-tickets-edit-item
+            #primary
+            [mergeTicket]="listMergeTickets[0]"
+            [tickets]="tickets"
+        ></app-merge-tickets-edit-item>
+        <div>
+            <div class="qt-df qt-ai-c qt-jc-sb">
+                <p [textContent]="'Secondary Tickets (' + getNoPrimaryTickets().length + ')'"></p>
+                <button class="qt-button --gray --md filter-button qt-mr-8 qt-df">
+                    <span class="qt-icon icon__edit qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                    <span>Edit Note</span>
+                </button>
+            </div>
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="listMergeTickets"
+                [ngForTrackBy]="trackById"
+            >
+                <app-merge-tickets-edit-item
+                    #mergeTicket
+                    *ngIf="!item.isPrimary"
+                    [mergeTicket]="item"
+                    [tickets]="tickets"
+                ></app-merge-tickets-edit-item>
+            </ng-template>
+        </div>
     </div>
     <div class="qt-aside-modern__footer">
         <div class="qt-df qt-w100">
@@ -42,10 +78,13 @@
                 class="qt-button qt-w100 qt-jc-c"
                 appDisabledBtn
                 #addBtn="disabled"
-                (onClick)="add()"
+                (onClick)="changeStep()"
                 [ngClass]="{'--loading':addBtn.isBlock()}"
             >
-                <span *ngIf="!addBtn.isBlock()">Continue</span>
+                <span
+                    *ngIf="!addBtn.isBlock()"
+                    [textContent]="step == 'STEP_1' ? 'Continue' : 'Merge'"
+                ></span>
                 <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
             </button>
         </div>
