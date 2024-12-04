@@ -1,0 +1,241 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
+.ticket-add-aside {
+    .ticket-priority {
+        width: 160px;
+        font-size: 12px;
+
+        .dropdown-toggle {
+            height: 32px;
+            border: none;
+            background-color: $white;
+        }
+
+        .default-value {
+            top: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .users-to-notify {
+        margin-top: 0;
+    }
+
+    &__priority-level-input {
+        display: none;
+    }
+}
+
+.qt-aside-modern {
+    width: 480px !important;
+}
+
+.qt-aside {
+    &__title {
+        margin-right: 8px;
+    }
+
+    &__ticket-name {
+        @include body-r__m;
+        color: $gray-700;
+        padding: 2px 12px 2px 12px;
+        background-color: $gray-100;
+        border-radius: 24px;
+
+        span {
+            position: relative;
+
+            &:after {
+                content: " ";
+                position: absolute;
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background-color: $gray-400;
+                top: calc(50% - 2px);
+                left: -6px;
+            }
+        }
+    }
+
+    .create-ticket-btn {
+        margin-right: 16px;
+        width: 140px;
+    }
+}
+
+.users-to-notify {
+    margin-top: 35px;
+
+    &__title {
+        @include сaption-l__sb;
+        color: $gray-900;
+        margin-bottom: 14px;
+    }
+
+    .save-template {
+        display: flex;
+    }
+
+    /deep/ #dropdownTechuser {
+        max-height: 24px;
+        max-width: 24px;
+        border-radius: 50%;
+        margin-right: 4px;
+        overflow: hidden;
+        color: transparent;
+        background-image: url("/assets/img/icons/users.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    &__add_users {
+        width: 32px;
+        height: 32px;
+        background-size: contain;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    /deep/ .select-wrapper.dropdown-assign-ticket {
+        right: unset;
+        bottom: 45px;
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
+    }
+}
+
+.assigned-users-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    .default-user-avatar {
+        width: 24px;
+        height: 24px;
+    }
+
+    .assigned-ticket-user__item {
+        width: 24px;
+        height: 24px;
+        margin-right: 2px;
+        position: relative;
+        font-size: 10px;
+        cursor: pointer;
+
+        .assigned-ticket-user__checkmark {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+
+            &:before {
+                position: absolute;
+                content: "";
+                width: 16px;
+                height: 16px;
+                border: 1px solid $gray-300;
+                background: $white;
+                border-radius: 50%;
+                bottom: -7px;
+            }
+        }
+
+        input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+
+            &:checked~.assigned-ticket-user__checkmark {
+                &:before {
+                    background-image: url("/assets/img/icons/status-green.svg");
+                    border: none;
+                }
+            }
+        }
+    }
+}
+
+.assigned-users-type {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 2px;
+}
+
+#add-ticket-describe-issue {
+    height: auto;
+    min-height: 64px;
+}
+
+[contenteditable="true"]:empty:before {
+    content: attr(placeholder);
+    pointer-events: none;
+    display: block;
+    /* For Firefox */
+    color: $gray-400;
+}
+
+.device-user {
+    width: 24px;
+    height: 24px;
+}
+
+.qt-input-block__label {
+    &::after {
+        display: none;
+    }
+}
+
+.qt-aside-modern__footer {
+    box-shadow: 0px -2px 4px rgba(16, 24, 40, 0.05);
+    padding: 18px 32px;
+
+    .qt-button {
+        height: 36px;
+    }
+}
+
+.company-actions {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 999;
+}
+.tag__modern {
+    border-color: $blue-light-200;
+    background-color: $blue-light-25;
+    color: $blue-light-700;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 4px;
+    text-transform:capitalize;
+}
+.merge-ticket-item {
+    border: 1px solid $gray-200;
+    border-radius: 8px;
+    padding: 12px;
+    position: relative;
+    &::after {
+        position: absolute;
+        content: "";
+        left: 0;
+        top: 12px;
+        bottom: 12px;
+        width: 2px;
+        background-color: $blue-light-600;
+    }
+    .number-ticket {
+        font-size: 12px;
+        color: $gray-500;
+    }
+}

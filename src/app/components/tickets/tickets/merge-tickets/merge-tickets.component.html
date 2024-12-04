@@ -1,0 +1,53 @@
+<div
+    [hidden]="!opened"
+    class="qt-aside-modern qt-aside-modern--page-settings"
+>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-info qt-df qt-ai-c">
+            <div class="qt-aside__title">Merge Ticket</div>
+        </div>
+    </div>
+    <div class="qt-aside-modern__content">
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="tickets"
+            [ngForTrackBy]="trackById"
+        >
+            <div>
+                <div class="qt-df qt-ai-c qt-mb-6">
+                    <span class="number-ticket">Tkt# {{item.number}}</span>
+                    <span class="tag__modern qt-ml-4">Primary</span>
+                </div>
+                <div
+                    class="qt-mb-4"
+                    [textContent]="item.subject"
+                ></div>
+                <div class="qt-df qt-ai-c ">
+                    <span [textContent]="getCreatAt(item)"></span>
+                    <span [textContent]="getCompanyName(item)"></span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df qt-w100">
+            <button
+                class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+                (click)="closed()"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button qt-w100 qt-jc-c"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="add()"
+                [ngClass]="{'--loading':addBtn.isBlock()}"
+            >
+                <span *ngIf="!addBtn.isBlock()">Continue</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+            </button>
+        </div>
+    </div>
+</div>

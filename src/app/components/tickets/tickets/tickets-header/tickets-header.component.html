@@ -26,6 +26,14 @@
                 <!-- </button> -->
                 <button
                     class="qt-button --gray --md filter-button qt-mr-8 qt-df"
+                    *ngIf="ticketsStateService.getTicketsForMerge().length > 0"
+                    (click)="mergeTicket()"
+                >
+                    <span class="qt-icon icon__merge qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                    <span>Merge Ticket</span>
+                </button>
+                <button
+                    class="qt-button --gray --md filter-button qt-mr-8 qt-df"
                     [ngClass]="{'active':toggleFilter,
                   'is-exist-filters':isExistFilters()}"
                     (click)="onToggleFilter(!toggleFilter)"

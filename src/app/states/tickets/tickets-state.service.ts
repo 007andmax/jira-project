@@ -10,6 +10,7 @@ import { StatusColor } from 'src/app/components/tickets/class/status-color';
 import { TicketsFilter } from 'src/app/components/tickets/tickets/class/tickets-filter';
 import { TicketGlobalFilter } from 'src/app/components/tickets/tickets/class/ticket-global-filter';
 import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page/tickets-priority/class/tickets-priority';
+import { Ticket } from 'src/app/components/tickets/class/ticket';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,7 @@ export class TicketsStateService {
   leftPanelFilter: EventEmitter<any> = new EventEmitter();
   onToggleFilter: EventEmitter<any> = new EventEmitter();
   onChangeFilterField: EventEmitter<any> = new EventEmitter();
+  onSelectAll: EventEmitter<any> = new EventEmitter();
   ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
   listStatusColor: Array<StatusColor> = [];
   ticketsStatus: Array<TicketStatus> = [];
@@ -51,6 +53,8 @@ export class TicketsStateService {
   globalFilterForRemove: TicketGlobalFilter = null;
   ticketsPriorities: Array<TicketsPriority> = [];
   listTicketsPrioritiesForRemove: Array<TicketsPriority> = [];
+  ticketsForMerge: Array<Ticket> = [];
+  onMegeTickets: EventEmitter<any> = new EventEmitter();
   actualNumber: string;
   constructor(private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsService: TicketsService) { }
@@ -132,7 +136,27 @@ export class TicketsStateService {
 
     })
   }
-
+  public mergeTicket() {
+    this.onMegeTickets.emit(null);
+  }
+  public addTicketForMerge(data) {
+    this.ticketsForMerge.push(data);
+  }
+  public initSelectAllTickets(data) {
+    this.onSelectAll.emit(data);
+  }
+  public resetSelectedTicketsForMerge() {
+    this.ticketsForMerge = [];
+  }
+  public removeSelectedTicketForMerge(index) {
+    this.ticketsForMerge.slice(index, 1)
+  }
+  public getTicketsForMerge() {
+    return this.ticketsForMerge;
+  }
+  public setTicketsForMerge(data) {
+    this.ticketsForMerge = data;
+  }
   public changeFilterField(data) {
     this.onChangeFilterField.emit(data);
   }

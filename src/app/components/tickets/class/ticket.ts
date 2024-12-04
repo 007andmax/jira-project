@@ -27,6 +27,7 @@ export class Ticket {
     userCompanies: Array<string>;
     customStatus: string;
     isCompanyDeleted: boolean;
+    selected: boolean = false;
     constructor(data) {
         this.assignedUserId = data.assignedUserId;
         this.attachmentsCount = data.attachmentsCount;
@@ -59,5 +60,7 @@ export class Ticket {
     public setAssignedUserId(id) {
         this.assignedUserId = id;
     }
-
+    public checkDisableSelect() {
+        return !(this.status == 'IN_PROGRESS' || this.status == 'ON_HOLD' || this.status == null || this.customStatus != null);
+    }
 }

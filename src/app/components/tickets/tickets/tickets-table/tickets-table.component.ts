@@ -23,6 +23,7 @@ import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service
   providers: [TicketsListService]
 })
 export class TicketsTableComponent implements OnInit, OnDestroy {
+  // @ViewChild('header') header: UsersHeaderComponent;
   ticketsFilter: TicketsFilter = new TicketsFilter();
   showPreloader: boolean = true;
   public infiniteScrollDisabled = true;
@@ -35,6 +36,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   idEditTicket: string = '';
   ticketsStatus: Array<TicketStatus> = [];
   toggleFilter: boolean = false;
+  selectAll: boolean = false;
   container = document.body.querySelector(".main-container");
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
@@ -117,6 +119,35 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.toggleFilter = data;
     })
     this.sub.add(onToggleFilter);
+  }
+  toggleAllTickets(event) {
+    if (event.target.checked) {
+      this.ticketsStateService.initSelectAllTickets(true);
+      this.selectAll = true;
+      this.tickets.forEach(item => {
+        if (!item.checkDisableSelect()) item.selected = true;
+      })
+      this.ticketsStateService.resetSelectedTicketsForMerge();
+      this.tickets.forEach(item => {
+        if (item.selected) this.ticketsStateService.addTicketForMerge(item);
+      })
+    } else {
+      this.ticketsStateService.initSelectAllTickets(false);
+      this.selectAll = false;
+      this.tickets.forEach(item => {
+        if (!item.checkDisableSelect()) item.selected = false;
+      })
+      this.tickets.forEach(item => item.selected = false)
+      this.ticketsStateService.resetSelectedTicketsForMerge();
+    }
+    // this.header.setUsers(this.users);
+    this.cd.detectChanges();
+  }
+  onSelectTicket(ticket) {
+    this.tickets.find(item => item.id === ticket.id).selected = ticket.selected;
+    this.selectAll = (this.tickets.some(item => item.selected == false)) ? false : true;
+    // this.header.setUsers(this.users);
+    this.cd.detectChanges();
   }
   onToggleFilter(data) {
     this.ticketsStateService.changeToggleFilter(data);

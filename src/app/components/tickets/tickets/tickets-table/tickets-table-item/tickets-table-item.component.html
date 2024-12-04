@@ -2,6 +2,24 @@
     [ngClass]="{'--selected': selected}"
     class="qt-table-modern__row"
 >
+    <div class="ticket-table__check">
+        <div class="qt-df">
+            <label
+                class="qt-checkbox"
+                [ngClass]="{'--disabled':ticket.checkDisableSelect()}"
+                [attr.for]="'ticket-' + ticket.id"
+            >
+                <input
+                    [attr.id]="'ticket-' + ticket.id"
+                    [(ngModel)]="ticket.selected"
+                    type="checkbox"
+                    (change)="selectTicket($event)"
+                    [disabled]="ticket.checkDisableSelect()"
+                >
+                <span></span>
+            </label>
+        </div>
+    </div>
     <div class="ticket-table__requested-by">
         <div class="qt-df qt-ai-c ticket-table__requested-by-inner">
             <div

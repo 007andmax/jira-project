@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { Ticket } from '../../../class/ticket';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { User } from 'src/app/components/users/class/user';
@@ -8,6 +8,7 @@ import { TicketsListService } from '../../services/tickets-list.service';
 import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { StatusColor } from '../../../class/status-color';
 import { Subscription } from 'rxjs';
+import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 
 @Component({
   selector: 'app-tickets-table-item',
@@ -25,6 +26,7 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
   @Input() listColors: Array<StatusColor> = [];
   @Input() selected: boolean = false;
   @Input() ticketsStatus: Array<TicketStatus> = [];
+  @Output() onSelectTicket = new EventEmitter<any>();
   assignedUser: User;
   requestedUser: User;
   indexNoAvatar: number = 0;
@@ -32,7 +34,9 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(public usersStateService: UsersStateService,
     public ticketsListService: TicketsListService,
-    private companiesStateService: CompaniesStateService) { }
+    private companiesStateService: CompaniesStateService,
+    private ticketsStateService: TicketsStateService,
+    public cd: ChangeDetectorRef,) { }
 
 
   ngOnInit() {
@@ -43,6 +47,11 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
       this.requestedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.createdUserId);
     })
     this.sub.add(getOnUsers);
+    let onSelectAll = this.ticketsStateService.onSelectAll.subscribe(data => {
+      this.ticket.selected = data;
+      this.cd.markForCheck();
+    })
+    this.sub.add(onSelectAll);
   }
   public getUserName(user) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
@@ -55,6 +64,20 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
     }
     return moment(date).format('DD MMM')
   }
+  selectTicket(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (event.target.checked) {
+      this.ticketsStateService.addTicketForMerge(this.ticket);
+    } else {
+      let list = this.ticketsStateService.getTicketsForMerge();
+      let index = list.findIndex(item => item.id === this.ticket.id);
+      if (index > -1) this.ticketsStateService.removeSelectedTicketForMerge(index);
+    }
+    this.onSelectTicket.emit(this.ticket);
+    this.cd.detectChanges();
+  }
+
   getAssignedUserNameForAvatar(user) {
     if (!user) return '';
     if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
