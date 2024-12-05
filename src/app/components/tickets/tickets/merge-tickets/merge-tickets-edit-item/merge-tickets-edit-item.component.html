@@ -27,6 +27,7 @@
         </div>
     </div>
     <div
+        class="edit-note"
         *ngIf="editNote"
         ngbDropdown
         [container]="'body'"
@@ -39,18 +40,20 @@
             placeholder="Enter job description"
             appTextArea
             maxlength="500"
-            cols="30"
-            rows="3"
+            [height]="'120px'"
         ></textarea>
-        <div class="qt-df qt-ai-c">
+        <div class="qt-df qt-ai-c note-type">
             <div
                 id="dropdownBasic1"
                 ngbDropdownToggle
                 class="qt-df qt-ai-c"
             >
                 <div class="qt-icon icon__globe qt-sz-16  "></div>
-                <div [textContent]="mergeTicket.noteType == 'PUBLIC' ? 'Visible to All Users' : 'Visible to Tech users only'"></div>
-                <i class="qt-icon icon__arrow-down qt-sz-20"></i>
+                <div
+                    class="qt-ml-8"
+                    [textContent]="mergeTicket.noteType == 'PUBLIC' ? 'Visible to All Users' : 'Visible to Tech users only'"
+                ></div>
+                <i class="qt-icon icon__arrow-down qt-sz-20 qt-ml-8"></i>
             </div>
             <!-- <div class="qt-df">
                 <button

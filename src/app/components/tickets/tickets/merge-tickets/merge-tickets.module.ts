@@ -7,6 +7,7 @@ import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticke
 import { MergeTicketsItemComponent } from './merge-tickets-item/merge-tickets-item.component';
 import { MergeTicketsEditItemComponent } from './merge-tickets-edit-item/merge-tickets-edit-item.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 
 
 
@@ -18,7 +19,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         FormsModule,
         DisabledBtnModule,
         PreloaderTicketModule,
-        NgbModule
+        NgbModule,
+        TextAreaModule
     ],
     exports: [MergeTicketsComponent]
 })

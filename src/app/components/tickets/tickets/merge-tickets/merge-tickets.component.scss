@@ -218,12 +218,17 @@
 }
 .qt-aside-modern__header {
     height: auto !important;
-    padding: 24px !important;
+    padding: 32px 24px 24px 24px !important;
 }
 .qt-aside-modern__content {
+    padding: 24px !important;
     height: calc(100% - 200px) !important;
 }
+.merge-ticket-modern {
+    padding: 24px !important;
+}
 .merge-ticket-edit-note {
+   
     height: 28px !important;
     padding: 4px 7px !important;
     span {
@@ -231,6 +236,14 @@
         font-weight: 500;
     }
 }
+.qt-aside__description {
+    line-height: normal;
+}
 app-merge-tickets-item,app-merge-tickets-edit-item {
     display: block;
+}
+.merge-ticket-title {
+    color: $gray-700;
+    font-size: 14px;
+    font-weight: 500;
 }

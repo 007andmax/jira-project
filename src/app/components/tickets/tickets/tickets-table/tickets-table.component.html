@@ -3,22 +3,7 @@
         <div class="qt-page-list__header-thead-container">
             <div class="qt-table-modern qt-page-list__header-thead">
                 <div class="qt-page-list__header-thead__row">
-                    <div class="users-table__check">
-                        <div class="qt-df">
-                            <label
-                                class="qt-checkbox"
-                                for="all-tickets"
-                            >
-                                <input
-                                    id="all-tickets"
-                                    [(ngModel)]="selectAll"
-                                    (change)="toggleAllTickets($event)"
-                                    type="checkbox"
-                                >
-                                <span></span>
-                            </label>
-                        </div>
-                    </div>
+                    <div class="users-table__check"></div>
                     <div
                         class="ticket-table__requested-by pointer"
                         (click)="onFilter('created')"

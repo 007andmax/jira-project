@@ -2,17 +2,23 @@
     [hidden]="!opened"
     class="qt-aside-modern qt-aside-modern--page-settings"
 >
-    <div class="qt-aside-modern__header">
+    <div
+        class="qt-aside-modern__header"
+        [ngClass]="{'merge-ticket-modern':step == 'STEP_2'}"
+    >
         <div class="qt-aside-modern__header-info">
             <div
                 *ngIf="step == 'STEP_2'"
-                class="close-btn qt-mb-8"
+                class="close-btn qt-mb-8 qt-sz-20"
                 (click)="closed()"
             >
                 <span class="qt-icon icon__arrow-back qt-ic-c qt-sz-20 qt-va-m qt-dib"></span>
             </div>
-            <div class="qt-aside__title qt-mr-8">Merge Ticket</div>
-            <p [textContent]="tickets.length + ' ticket(s) selected (interactions from secondary tickets will be added to the primary ticket).'"></p>
+            <div class="qt-aside__title qt-mb-8">Merge Ticket</div>
+            <div
+                class="qt-aside__description"
+                [textContent]="tickets.length + ' ticket(s) selected (interactions from secondary tickets will be added to the primary ticket).'"
+            ></div>
         </div>
     </div>
     <div
@@ -39,7 +45,7 @@
         *ngIf="step == 'STEP_2'"
     >
         <div class="qt-df qt-ai-c qt-jc-sb qt-mb-12">
-            <p>Primary Ticket</p>
+            <div class="merge-ticket-title">Primary Ticket</div>
             <button
                 class="qt-button --gray merge-ticket-edit-note qt-df"
                 (click)="primary.toggleEditNote()"
@@ -55,7 +61,10 @@
         ></app-merge-tickets-edit-item>
         <div class="qt-mt-16">
             <div class="qt-df qt-ai-c qt-jc-sb qt-mb-12">
-                <p [textContent]="'Secondary Tickets (' + getNoPrimaryTickets().length + ')'"></p>
+                <div
+                    class="merge-ticket-title"
+                    [textContent]="'Secondary Tickets (' + getNoPrimaryTickets().length + ')'"
+                ></div>
             </div>
             <ng-template
                 ngFor
