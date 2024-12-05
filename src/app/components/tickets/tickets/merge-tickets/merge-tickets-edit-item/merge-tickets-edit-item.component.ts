@@ -16,10 +16,7 @@ export class MergeTicketsEditItemComponent implements OnInit {
   constructor(private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
-    if (this.mergeTicket.isPrimary) {
-      let numbersTickets = this.tickets.filter(item => item.id != this.mergeTicket.ticketId).map(item => item.number);
-      this.mergeTicket.note = `Tickets with IDs ${numbersTickets.map((item, index) => index == 0 ? `#${item}` : ` and #${item}`)} are merged into this ticket.`
-    }
+
   }
   getCreatAt() {
     let date = new Date(this.getTicket().createdAt);
@@ -34,10 +31,10 @@ export class MergeTicketsEditItemComponent implements OnInit {
     return this.tickets.find(item => item.id == this.mergeTicket.ticketId);
   }
 
-  public setEditNote(data) {
-    this.editNote = data;
+  public toggleEditNote() {
+    this.editNote = !this.editNote;
   }
-  onChangeJobDescription(event) {
+  onChangeNote(event) {
     this.mergeTicket.note = event.target.value;
   }
 }

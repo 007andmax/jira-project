@@ -54,6 +54,12 @@ export class MergeTicketsComponent implements OnInit, OnDestroy {
       this.step = 'STEP_1';
     }
   }
+  removeTicket(item) {
+    console.log("removeTicket");
+    if (this.tickets.length == 2) return;
+    let index = this.tickets.findIndex(ticket => ticket.id == item.id);
+    if (index > -1) this.tickets.splice(index, 1);
+  }
   changeStep() {
     if (this.step == "STEP_2") {
       this.addBtn.setDisabled(true);
@@ -66,8 +72,9 @@ export class MergeTicketsComponent implements OnInit, OnDestroy {
       })
     }
     if (this.step == "STEP_1" && this.primaryTicket) {
-      this.listMergeTickets = [new MergeTickets({ ticketId: this.primaryTicket.id, isPrimary: true })];
-      this.listMergeTickets = [...this.listMergeTickets, ...this.tickets.filter(item => item.id !== this.primaryTicket.id).map(item => new MergeTickets({ ticketId: item.id }))];
+      let numbersTickets = this.tickets.filter(item => item.id != this.primaryTicket.id).map(item => item.number);
+      this.listMergeTickets = [new MergeTickets({ ticketId: this.primaryTicket.id, isPrimary: true, note: `Tickets with IDs ${numbersTickets.map((item, index) => index == 0 ? `#${item}` : ` and #${item}`)} are merged into this ticket.` })];
+      this.listMergeTickets = [...this.listMergeTickets, ...this.tickets.filter(item => item.id !== this.primaryTicket.id).map(item => new MergeTickets({ ticketId: item.id, note: `Current ticket has been merged into the ticket with ID ${this.primaryTicket.number}` }))];
       this.step = "STEP_2";
     }
   }

@@ -4,23 +4,33 @@
 >
     <div class="qt-radio contract-type-select__radio">
         <input
-            [attr.id]="'ticket-' + item.id"
+            [attr.id]="'merge-ticket-' + item.id"
             type="radio"
             name="radio"
             value="1"
             [checked]="primaryTicket && primaryTicket.id === item.id"
         >
-        <label [attr.for]="'ticket-' + item.id"></label>
+        <label [attr.for]="'merge-ticket-' + item.id"></label>
     </div>
-    <div>
-        <div class="qt-df qt-ai-c qt-mb-6">
-            <span class="number-ticket">Tkt# {{item.number}}</span>
-            <span
-                class="tag__modern qt-ml-4"
-                *ngIf="primaryTicket && primaryTicket.id === item.id"
+    <div class="qt-w100">
+        <div class="qt-df qt-ai-c qt-jc-sb qt-mb-6">
+            <div class="qt-df qt-ai-c">
+                <span class="number-ticket">Tkt# {{item.number}}</span>
+                <span
+                    class="tag__modern qt-ml-4"
+                    *ngIf="primaryTicket && primaryTicket.id === item.id"
+                >
+                    Primary
+                </span>
+            </div>
+            <div
+                [ngClass]="{'--disabled-primary':primaryTicket && primaryTicket.id === item.id,
+            'pointer' : primaryTicket && primaryTicket.id !== item.id}"
+                class="qt-button --square-md  --gray merge-ticket-remove "
+                (click)="remove($event)"
             >
-                Primary
-            </span>
+                <i class="qt-icon icon__close qt-sz-16"></i>
+            </div>
         </div>
         <div
             class="qt-mb-4 subject-ticket"

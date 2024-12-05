@@ -27,6 +27,7 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
   @Input() selected: boolean = false;
   @Input() ticketsStatus: Array<TicketStatus> = [];
   @Output() onSelectTicket = new EventEmitter<any>();
+  @Output() onSelectForDetail = new EventEmitter<any>();
   assignedUser: User;
   requestedUser: User;
   indexNoAvatar: number = 0;
@@ -35,7 +36,7 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
   constructor(public usersStateService: UsersStateService,
     public ticketsListService: TicketsListService,
     private companiesStateService: CompaniesStateService,
-    private ticketsStateService: TicketsStateService,
+    public ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -77,7 +78,9 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
     this.onSelectTicket.emit(this.ticket);
     this.cd.detectChanges();
   }
-
+  selectForDetail() {
+    this.onSelectForDetail.emit(null)
+  }
   getAssignedUserNameForAvatar(user) {
     if (!user) return '';
     if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;

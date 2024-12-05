@@ -60,7 +60,11 @@ export class Ticket {
     public setAssignedUserId(id) {
         this.assignedUserId = id;
     }
-    public checkDisableSelect() {
-        return !(this.status == 'IN_PROGRESS' || this.status == 'ON_HOLD' || this.status == null || this.customStatus != null);
+    public checkDisableSelect(list) {
+        if (this.status == 'IN_PROGRESS' || this.status == 'ON_HOLD' || this.status == null || this.customStatus != null) {
+            return (list.length > 0 ? list[0].companyId != this.companyId : false);
+        } else {
+            return true;
+        }
     }
 }

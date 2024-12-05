@@ -211,3 +211,26 @@
     right: 0px;
     z-index: 999;
 }
+.merge-tickets-description {
+    font-size: 14px;
+    font-weight: 400;
+    color: $gray-500;
+}
+.qt-aside-modern__header {
+    height: auto !important;
+    padding: 24px !important;
+}
+.qt-aside-modern__content {
+    height: calc(100% - 200px) !important;
+}
+.merge-ticket-edit-note {
+    height: 28px !important;
+    padding: 4px 7px !important;
+    span {
+        font-size: 13px;
+        font-weight: 500;
+    }
+}
+app-merge-tickets-item,app-merge-tickets-edit-item {
+    display: block;
+}

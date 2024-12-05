@@ -78,8 +78,8 @@
                         [ngForOf]="tickets"
                         [ngForTrackBy]="trackById"
                     >
-                        <!-- (click)="editTicket(ticket.id)" -->
                         <app-tickets-table-item
+                            (onSelectForDetail)="editTicket(ticket.id)"
                             [selected]="idEditTicket === ticket.id"
                             (onSelectTicket)="onSelectTicket($event)"
                             [listColors]="listColors"

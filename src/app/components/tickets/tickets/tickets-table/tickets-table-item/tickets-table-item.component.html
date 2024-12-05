@@ -6,7 +6,7 @@
         <div class="qt-df">
             <label
                 class="qt-checkbox"
-                [ngClass]="{'--disabled':ticket.checkDisableSelect()}"
+                [ngClass]="{'--disabled':ticket.checkDisableSelect(ticketsStateService.getTicketsForMerge())}"
                 [attr.for]="'ticket-' + ticket.id"
             >
                 <input
@@ -14,13 +14,16 @@
                     [(ngModel)]="ticket.selected"
                     type="checkbox"
                     (change)="selectTicket($event)"
-                    [disabled]="ticket.checkDisableSelect()"
+                    [disabled]="ticket.checkDisableSelect(ticketsStateService.getTicketsForMerge())"
                 >
                 <span></span>
             </label>
         </div>
     </div>
-    <div class="ticket-table__requested-by">
+    <div
+        class="ticket-table__requested-by"
+        (click)="selectForDetail()"
+    >
         <div class="qt-df qt-ai-c ticket-table__requested-by-inner">
             <div
                 class="qt-table-modern__circle-avatar"
@@ -34,7 +37,10 @@
             ></div>
         </div>
     </div>
-    <div class="--strong ticket-table__subject">
+    <div
+        class="--strong ticket-table__subject"
+        (click)="selectForDetail()"
+    >
         <div class="ellipsis">
             {{'Tkt# ' + ticket.number + ' - ' + ticket.subject}}
             <span
@@ -45,7 +51,10 @@
             ></span>
         </div>
     </div>
-    <div class="ticket-table__company">
+    <div
+        class="ticket-table__company"
+        (click)="selectForDetail()"
+    >
         <div
             class="ellipsis"
             [ngClass]="{'qt-color-red-600':ticket.isCompanyDeleted}"
@@ -62,6 +71,7 @@
     <div
         class="ticket-table__assignee"
         *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0"
+        (click)="selectForDetail()"
     >
         <div class="qt-df multi-assign-user-container">
             <ng-template
@@ -119,10 +129,12 @@
     <div
         class="ticket-table__assignee"
         *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || !ticket.assignedUserId && !ticket.multiAssignedUsers"
+        (click)="selectForDetail()"
     ></div>
     <div
         class="ticket-table__assignee"
         *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers"
+        (click)="selectForDetail()"
     >
         <div class="qt-df">
             <div
@@ -136,7 +148,10 @@
             ></div>
         </div>
     </div>
-    <div class="ticket-table__status">
+    <div
+        class="ticket-table__status"
+        (click)="selectForDetail()"
+    >
         <span
             class="tag__modern"
             [ngStyle]="getStyleStatus((ticket.customStatus) ? ticket.customStatus : ticket.status)"
@@ -167,6 +182,7 @@
         </span>
     </div>
     <div
+        (click)="selectForDetail()"
         class="ticket-table__created-date"
         [textContent]="getCreateAt()"
     ></div>

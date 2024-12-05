@@ -71,7 +71,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       if (data.assignedUser) ticket.setAssignedUserId(data.assignedUser.id);
       let findIndex = this.tickets.findIndex(item => item.id === ticket.id);
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
-        if (findIndex > -1) this.tickets[findIndex] = data;
+        if (findIndex > -1) this.tickets[findIndex] = ticket;
       } else {
         if (findIndex > -1) this.tickets.splice(findIndex, 1);
       }
@@ -125,7 +125,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.ticketsStateService.initSelectAllTickets(true);
       this.selectAll = true;
       this.tickets.forEach(item => {
-        if (!item.checkDisableSelect()) item.selected = true;
+        if (!item.checkDisableSelect(this.ticketsStateService.getTicketsForMerge())) item.selected = true;
       })
       this.ticketsStateService.resetSelectedTicketsForMerge();
       this.tickets.forEach(item => {
@@ -135,7 +135,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.ticketsStateService.initSelectAllTickets(false);
       this.selectAll = false;
       this.tickets.forEach(item => {
-        if (!item.checkDisableSelect()) item.selected = false;
+        item.selected = false;
       })
       this.tickets.forEach(item => item.selected = false)
       this.ticketsStateService.resetSelectedTicketsForMerge();

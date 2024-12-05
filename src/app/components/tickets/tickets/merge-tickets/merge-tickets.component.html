@@ -3,8 +3,16 @@
     class="qt-aside-modern qt-aside-modern--page-settings"
 >
     <div class="qt-aside-modern__header">
-        <div class="qt-aside-modern__header-info qt-df qt-ai-c">
-            <div class="qt-aside__title">Merge Ticket</div>
+        <div class="qt-aside-modern__header-info">
+            <div
+                *ngIf="step == 'STEP_2'"
+                class="close-btn qt-mb-8"
+                (click)="closed()"
+            >
+                <span class="qt-icon icon__arrow-back qt-ic-c qt-sz-20 qt-va-m qt-dib"></span>
+            </div>
+            <div class="qt-aside__title qt-mr-8">Merge Ticket</div>
+            <p [textContent]="tickets.length + ' ticket(s) selected (interactions from secondary tickets will be added to the primary ticket).'"></p>
         </div>
     </div>
     <div
@@ -18,9 +26,11 @@
             [ngForTrackBy]="trackById"
         >
             <app-merge-tickets-item
+                class="qt-mb-16"
                 [item]="item"
                 [primaryTicket]="primaryTicket"
                 (onSetSelected)="selectPrimaryTicket($event)"
+                (onRemove)="removeTicket(item)"
             ></app-merge-tickets-item>
         </ng-template>
     </div>
@@ -28,13 +38,13 @@
         class="qt-aside-modern__content"
         *ngIf="step == 'STEP_2'"
     >
-        <div class="qt-df qt-ai-c qt-jc-sb">
+        <div class="qt-df qt-ai-c qt-jc-sb qt-mb-12">
             <p>Primary Ticket</p>
             <button
-                class="qt-button --gray --md filter-button qt-mr-8 qt-df"
-                (click)="primary.setEditNote(true)"
+                class="qt-button --gray merge-ticket-edit-note qt-df"
+                (click)="primary.toggleEditNote()"
             >
-                <span class="qt-icon icon__edit qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                <span class="qt-icon icon__edit qt-sz-16 qt-bg-contain qt-dib qt-mr-4"></span>
                 <span>Edit Note</span>
             </button>
         </div>
@@ -43,13 +53,9 @@
             [mergeTicket]="listMergeTickets[0]"
             [tickets]="tickets"
         ></app-merge-tickets-edit-item>
-        <div>
-            <div class="qt-df qt-ai-c qt-jc-sb">
+        <div class="qt-mt-16">
+            <div class="qt-df qt-ai-c qt-jc-sb qt-mb-12">
                 <p [textContent]="'Secondary Tickets (' + getNoPrimaryTickets().length + ')'"></p>
-                <button class="qt-button --gray --md filter-button qt-mr-8 qt-df">
-                    <span class="qt-icon icon__edit qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
-                    <span>Edit Note</span>
-                </button>
             </div>
             <ng-template
                 ngFor
@@ -58,6 +64,7 @@
                 [ngForTrackBy]="trackById"
             >
                 <app-merge-tickets-edit-item
+                    class="qt-mb-12"
                     #mergeTicket
                     *ngIf="!item.isPrimary"
                     [mergeTicket]="item"

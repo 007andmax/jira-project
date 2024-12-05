@@ -149,7 +149,7 @@ export class TicketsStateService {
     this.ticketsForMerge = [];
   }
   public removeSelectedTicketForMerge(index) {
-    this.ticketsForMerge.slice(index, 1)
+    this.ticketsForMerge.splice(index, 1)
   }
   public getTicketsForMerge() {
     return this.ticketsForMerge;

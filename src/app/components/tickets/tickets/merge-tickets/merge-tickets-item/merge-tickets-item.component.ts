@@ -12,6 +12,7 @@ export class MergeTicketsItemComponent implements OnInit {
   @Input() item: Ticket;
   @Input() primaryTicket: Ticket;
   @Output() onSetSelected = new EventEmitter();
+  @Output() onRemove = new EventEmitter();
   constructor(private companiesStateService: CompaniesStateService,) { }
 
   ngOnInit() {
@@ -28,7 +29,12 @@ export class MergeTicketsItemComponent implements OnInit {
     let find = this.companiesStateService.getCompanies().find(item => item.id === this.item.companyId);
     return (find) ? find.name : '';
   }
-  onChangeNote(event) {
-    // this.user.jobDescription = event.target.value;
+  remove(event) {
+    console.log("remove");
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.primaryTicket && this.primaryTicket.id == this.item.id) return;
+    this.onRemove.emit(null);
   }
+
 }
