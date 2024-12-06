@@ -1,28 +1,29 @@
 <div
     class="merge-ticket-item qt-df "
-    (click)="selectPrimaryTicket()"
+    [ngClass]="{'merge-ticket-primary':primaryTicket && primaryTicket.id === item.id }"
 >
+    <!-- [checked]="primaryTicket && primaryTicket.id === item.id" -->
     <div
-        class="qt-radio contract-type-select__radio"
+        [ngClass]="{'primary-checked':primaryTicket && primaryTicket.id === item.id,
+    'primary-unchecked': !primaryTicket || primaryTicket && primaryTicket.id !== item.id}"
+        class="qt-button --square-md  --gray qt-mr-12"
         placement="top"
         ngbTooltip="Set as Primary"
         container="body"
+        (click)="selectPrimaryTicket()"
     >
-        <input
-            [attr.id]="'merge-ticket-' + item.id"
-            type="radio"
-            name="radio"
-            value="1"
-            [checked]="primaryTicket && primaryTicket.id === item.id"
-        >
-        <label [attr.for]="'merge-ticket-' + item.id"></label>
+        <i
+            [ngClass]="{'icon__primary-checked':primaryTicket && primaryTicket.id === item.id,
+    'icon__primary-unchecked': !primaryTicket || primaryTicket && primaryTicket.id !== item.id}"
+            class="qt-icon qt-icon__background-unset  qt-sz-20"
+        ></i>
     </div>
     <div class="qt-w100">
         <div class="qt-df qt-ai-c qt-jc-sb qt-mb-4">
-            <div class="qt-df qt-ai-c">
+            <div class="qt-df qt-ai-c relative">
                 <span class="number-ticket">Tkt# {{item.number}}</span>
                 <span
-                    class="tag__modern qt-ml-4"
+                    class="tag__modern"
                     *ngIf="primaryTicket && primaryTicket.id === item.id"
                 >
                     Primary

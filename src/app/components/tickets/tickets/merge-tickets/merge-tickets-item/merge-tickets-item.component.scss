@@ -9,24 +9,20 @@
     font-weight: 500;
     padding: 4px;
     text-transform: capitalize;
+    position: absolute;
+    top: -3px;
+    right: -58px;
 }
 
 .merge-ticket-item {
+    min-height: 84px;
     width: 100%;
     border: 1px solid $gray-200;
     border-radius: 8px;
     padding: 12px;
     position: relative;
 
-    &::after {
-        position: absolute;
-        content: "";
-        left: 0;
-        top: 12px;
-        bottom: 12px;
-        width: 2px;
-        background-color: $blue-light-600;
-    }
+   
 
     .number-ticket {
         font-size: 12px;
@@ -74,4 +70,26 @@
      .icon__close {
         background-color: $gray-200;
     }
+}
+.primary-unchecked,.primary-checked {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    background-color: $gray-100;
+    border-radius: 8px;
+}
+.primary-checked {
+    background-color: $blue-light-25;
+}
+.merge-ticket-primary {
+
+    &::after {
+            position: absolute;
+            content: "";
+            left: 0;
+            top: 12px;
+            bottom: 12px;
+            width: 2px;
+            background-color: $blue-light-600;
+        }
 }

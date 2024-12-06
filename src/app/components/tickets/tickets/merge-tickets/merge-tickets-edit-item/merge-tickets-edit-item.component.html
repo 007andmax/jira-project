@@ -1,4 +1,7 @@
-<div class="merge-ticket-item">
+<div
+    class="merge-ticket-item"
+    [ngClass]="{'merge-ticket-primary':mergeTicket.isPrimary }"
+>
     <div>
         <div class="qt-df qt-ai-c qt-jc-sb qt-mb-6">
             <span class="number-ticket">Tkt# {{getTicket().number}}</span>

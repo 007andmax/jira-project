@@ -31,7 +31,7 @@ export class MergeTicketsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let onMegeTickets = this.ticketsStateService.onMegeTickets.subscribe(data => {
       this.opened = true;
-      this.tickets = this.ticketsStateService.getTicketsForMerge();
+      this.tickets = JSON.parse(JSON.stringify(this.ticketsStateService.getTicketsForMerge())).map(item => new Ticket(item));
       this.cd.detectChanges();
     })
     this.sub.add(onMegeTickets);

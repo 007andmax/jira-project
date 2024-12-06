@@ -218,14 +218,14 @@
 }
 .qt-aside-modern__header {
     height: auto !important;
-    padding: 32px 24px 24px 24px !important;
+    padding: 30px 24px 24px 24px !important;
 }
 .qt-aside-modern__content {
     padding: 24px !important;
     height: calc(100% - 200px) !important;
 }
 .merge-ticket-modern {
-    padding: 20px 24px 24px 24px !important;
+    padding: 19px 24px 24px 24px !important;
 }
 .merge-ticket-edit-note {
    
@@ -238,6 +238,8 @@
 }
 .qt-aside__description {
     line-height: normal;
+    color: $gray-500;
+    font-size: 14px;
 }
 app-merge-tickets-item,app-merge-tickets-edit-item {
     display: block;

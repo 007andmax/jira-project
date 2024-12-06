@@ -87,6 +87,8 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.ticketsFilter = data;
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);
+      this.tickets.forEach(item => item.selected = false);
+      this.ticketsStateService.resetSelectedTicketsForMerge();
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -166,6 +168,8 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.ticketsStateService.onToggleAddTicket();
   }
   ngOnDestroy(): void {
+    this.ticketsStateService.resetSelectedTicketsForMerge();
+    this.tickets.forEach(item => item.selected = false);
     if (this.customerPortalStateService.isCustomerPortal && this.ticketsRealTimeService.subsribeToTicketsCustomerUser) this.ticketsRealTimeService.subsribeToTicketsCustomerUser.unsubscribe();
     this.sub.unsubscribe();
   }
