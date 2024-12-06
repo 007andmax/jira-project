@@ -1,7 +1,4 @@
-<div
-    class="merge-ticket-item qt-df "
-    [ngClass]="{'merge-ticket-primary':primaryTicket && primaryTicket.id === item.id }"
->
+<div class="merge-ticket-item qt-df ">
     <!-- [checked]="primaryTicket && primaryTicket.id === item.id" -->
     <div
         [ngClass]="{'primary-checked':primaryTicket && primaryTicket.id === item.id,
@@ -53,4 +50,9 @@
             ></span>
         </div>
     </div>
+    <span
+        *ngIf="item.priorityLevel && item.priorityLevel.isDisplay"
+        class="priority-icon"
+        [ngStyle]="{'background-color':  listColors[item.priorityLevel.color] && listColors[item.priorityLevel.color].textColor}"
+    ></span>
 </div>

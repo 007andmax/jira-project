@@ -3,6 +3,7 @@ import { MergeTickets } from '../class/merge-tickets';
 import { Ticket } from '../../../class/ticket';
 import * as moment from 'moment';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { StatusColor } from '../../../class/status-color';
 
 @Component({
   selector: 'app-merge-tickets-edit-item',
@@ -12,6 +13,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 export class MergeTicketsEditItemComponent implements OnInit {
   @Input() mergeTicket: MergeTickets;
   @Input() tickets: Array<Ticket> = [];
+  @Input() listColors: Array<StatusColor> = [];
   editNote: boolean = false;
   constructor(private companiesStateService: CompaniesStateService) { }
 

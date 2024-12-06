@@ -42,6 +42,7 @@ import { TicketDetailContactDetailsComponent } from './ticket-detail-contact-det
 import { TicketDetailPasswordsDetailsComponent } from './ticket-detail-passwords/ticket-detail-passwords-details/ticket-detail-passwords-details.component';
 import { TicketDetailDocumentsDetailsComponent } from './ticket-detail-documents/ticket-detail-documents-details/ticket-detail-documents-details.component';
 import { TicketDetailTicketsDetailsComponent } from './ticket-detail-tickets/ticket-detail-tickets-details/ticket-detail-tickets-details.component';
+import { TicketDetailEditTagsComponent } from './ticket-detail-edit-tags/ticket-detail-edit-tags.component';
 
 @Component({
   selector: 'ticket-detail',
@@ -63,6 +64,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   @ViewChild('passwordRecordDetail') passwordRecordDetail: TicketDetailPasswordsDetailsComponent;
   @ViewChild('documentsRecordDetail') documentsRecordDetail: TicketDetailDocumentsDetailsComponent;
   @ViewChild('ticketsDetailList') ticketsDetailList: TicketDetailTicketsDetailsComponent;
+  @ViewChild('ticketTags') ticketTags: TicketDetailEditTagsComponent;
   isInit: boolean = false;
   ticketProfile: TicketProfile = new TicketProfile();
   showFormUpdate: boolean = false;
@@ -154,6 +156,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
         this.updateListAssignedUser();
         this.updateLisUpdateUser();
+        console.log("ticket", ticket);
+        this.ticketTags.setSelectedTags(ticket.tags);
         this.changeCompany.selectItemWithOutChanges(this.companiesStateService.getCompanies().find(item => item.id == this.ticketProfile.companyId));
         if (isChangeCompany && this.ticketProfile.createdUser && !this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getPasswordsDocuments(this.ticketProfile.createdUser.id);
         if (isChangeUser && !this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getDevicesByCompany(this.ticketProfile.company.id);

@@ -41,6 +41,7 @@
             <app-merge-tickets-item
                 class="qt-mb-16"
                 [item]="item"
+                [listColors]="listColors"
                 [primaryTicket]="primaryTicket"
                 (onSetSelected)="selectPrimaryTicket($event)"
                 (onRemove)="removeTicket(item)"
@@ -63,6 +64,7 @@
         </div>
         <app-merge-tickets-edit-item
             #primary
+            [listColors]="listColors"
             [mergeTicket]="listMergeTickets[0]"
             [tickets]="tickets"
         ></app-merge-tickets-edit-item>
@@ -82,6 +84,7 @@
                 <app-merge-tickets-edit-item
                     class="qt-mb-12"
                     #mergeTicket
+                    [listColors]="listColors"
                     *ngIf="!item.isPrimary"
                     [mergeTicket]="item"
                     [tickets]="tickets"

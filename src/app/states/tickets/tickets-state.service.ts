@@ -44,6 +44,7 @@ export class TicketsStateService {
   leftPanelFilter: EventEmitter<any> = new EventEmitter();
   onToggleFilter: EventEmitter<any> = new EventEmitter();
   onChangeFilterField: EventEmitter<any> = new EventEmitter();
+  onResetlistTicketsPrioritiesForRemove: EventEmitter<any> = new EventEmitter();
   onSelectAll: EventEmitter<any> = new EventEmitter();
   ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
   listStatusColor: Array<StatusColor> = [];
@@ -147,6 +148,7 @@ export class TicketsStateService {
   }
   public resetSelectedTicketsForMerge() {
     this.ticketsForMerge = [];
+    this.onResetlistTicketsPrioritiesForRemove.emit(null);
   }
   public removeSelectedTicketForMerge(index) {
     this.ticketsForMerge.splice(index, 1)

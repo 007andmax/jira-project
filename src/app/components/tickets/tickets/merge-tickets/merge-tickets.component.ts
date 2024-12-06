@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Ticket } from '../../class/ticket';
 import * as moment from 'moment';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { MergeTickets } from './class/merge-tickets';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { StatusColor } from '../../class/status-color';
 
 @Component({
   selector: 'app-merge-tickets',
@@ -20,6 +21,7 @@ export class MergeTicketsComponent implements OnInit, OnDestroy {
   opened: boolean = false;
   step: string = "STEP_1";
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  listColors: Array<StatusColor> = [];
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private ticketsStateService: TicketsStateService,
@@ -35,6 +37,13 @@ export class MergeTicketsComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(onMegeTickets);
+    if (this.ticketsStateService.getListStatusColor().length > 0) {
+      this.listColors = this.ticketsStateService.getListStatusColor();
+    }
+    let getOnInitColor = this.ticketsStateService.getOnInitColor().subscribe(data => {
+      this.listColors = data;
+    })
+    this.sub.add(getOnInitColor);
   }
   getNoPrimaryTickets() {
     return this.tickets.filter(item => item.id != this.primaryTicket.id);
@@ -48,6 +57,8 @@ export class MergeTicketsComponent implements OnInit, OnDestroy {
       this.listMergeTickets = [];
       this.opened = false;
       this.primaryTicket = null;
+      this.ticketsStateService.resetSelectedTicketsForMerge();
+
     }
     if (this.step == 'STEP_2') {
       this.listMergeTickets = [];

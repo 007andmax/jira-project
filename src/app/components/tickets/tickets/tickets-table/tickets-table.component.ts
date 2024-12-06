@@ -120,6 +120,10 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.toggleFilter = data;
     })
     this.sub.add(onToggleFilter);
+    let onResetlistTicketsPrioritiesForRemove = this.ticketsStateService.onResetlistTicketsPrioritiesForRemove.subscribe(res => {
+      this.tickets.forEach(item => item.selected = false);
+    })
+    this.sub.add(onResetlistTicketsPrioritiesForRemove);
   }
   onSelectTicket(ticket) {
     this.tickets.find(item => item.id === ticket.id).selected = ticket.selected;

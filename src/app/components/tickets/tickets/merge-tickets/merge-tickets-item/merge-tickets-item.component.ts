@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Ticket } from '../../../class/ticket';
 import * as moment from 'moment';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { StatusColor } from '../../../class/status-color';
 
 @Component({
   selector: 'app-merge-tickets-item',
@@ -13,6 +14,7 @@ export class MergeTicketsItemComponent implements OnInit {
   @Input() primaryTicket: Ticket;
   @Output() onSetSelected = new EventEmitter();
   @Output() onRemove = new EventEmitter();
+  @Input() listColors: Array<StatusColor> = [];
   constructor(private companiesStateService: CompaniesStateService,) { }
 
   ngOnInit() {
