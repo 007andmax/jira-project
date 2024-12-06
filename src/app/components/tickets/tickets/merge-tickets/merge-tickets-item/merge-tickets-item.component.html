@@ -2,7 +2,12 @@
     class="merge-ticket-item qt-df "
     (click)="selectPrimaryTicket()"
 >
-    <div class="qt-radio contract-type-select__radio">
+    <div
+        class="qt-radio contract-type-select__radio"
+        placement="top"
+        ngbTooltip="Set as Primary"
+        container="body"
+    >
         <input
             [attr.id]="'merge-ticket-' + item.id"
             type="radio"

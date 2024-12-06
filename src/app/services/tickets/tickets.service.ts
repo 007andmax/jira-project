@@ -22,7 +22,12 @@ export class TicketsService {
     return this.http.post(this.apiUrl + `dashboard/ticket/byServices`, data);
   }
   public mergeTickets(data) {
-    return this.http.put(this.apiUrl + `v2/tickets/merge`, data);
+    return this.http.put(this.apiUrl + `v2/tickets/merge`, data).pipe(
+      tap(data => {
+        this.toastrService.success("Tickets have been successfully merged");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public getTicketsPriorities() {
     return this.http.get(this.apiUrl + `priorityLevel?page=0&size=100`);

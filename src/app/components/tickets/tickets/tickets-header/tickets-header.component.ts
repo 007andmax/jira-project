@@ -162,7 +162,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     this.ticketsStateService.onToggleAddTicket();
   }
   mergeTicket() {
-    this.ticketsStateService.mergeTicket();
+    if (this.ticketsStateService.getTicketsForMerge().length > 1) this.ticketsStateService.mergeTicket();
   }
 
   /**
