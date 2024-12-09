@@ -51,19 +51,17 @@ export class MergeTicketsComponent implements OnInit, OnDestroy {
   selectPrimaryTicket(item) {
     this.primaryTicket = item;
   }
+  back() {
+    this.step = 'STEP_1';
+    this.listMergeTickets = [];
+  }
   closed() {
-    if (this.step == 'STEP_1') {
-      this.tickets = [];
-      this.listMergeTickets = [];
-      this.opened = false;
-      this.primaryTicket = null;
-      this.ticketsStateService.resetSelectedTicketsForMerge();
-
-    }
-    if (this.step == 'STEP_2') {
-      this.listMergeTickets = [];
-      this.step = 'STEP_1';
-    }
+    this.tickets = [];
+    this.listMergeTickets = [];
+    this.opened = false;
+    this.primaryTicket = null;
+    this.ticketsStateService.resetSelectedTicketsForMerge();
+    this.step = 'STEP_1';
   }
   removeTicket(item) {
     console.log("removeTicket");
@@ -75,7 +73,7 @@ export class MergeTicketsComponent implements OnInit, OnDestroy {
     if (this.step == "STEP_2") {
       this.addBtn.setDisabled(true);
       this.ticketsService.mergeTickets(this.listMergeTickets).subscribe(res => {
-        this.step = 'STEP_1';
+
         this.addBtn.setDisabled(false);
         this.closed();
       }, err => {

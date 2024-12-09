@@ -9,8 +9,8 @@
         <div class="qt-aside-modern__header-info">
             <div
                 *ngIf="step == 'STEP_2'"
-                class="close-btn qt-mb-8 qt-sz-20"
-                (click)="closed()"
+                class="close-btn qt-mb-8 qt-sz-20 qt-pointer"
+                (click)="back()"
             >
                 <span class="qt-icon icon__arrow-back qt-ic-c qt-sz-20 qt-va-m qt-dib"></span>
             </div>
@@ -105,7 +105,8 @@
                 appDisabledBtn
                 #addBtn="disabled"
                 (onClick)="changeStep()"
-                [ngClass]="{'--loading':addBtn.isBlock()}"
+                [ngClass]="{'--loading':addBtn.isBlock(),'--disabled':(step == 'STEP_1') ? !primaryTicket : false}"
+                [disabled]="(step == 'STEP_1') ? !primaryTicket : false"
             >
                 <span
                     *ngIf="!addBtn.isBlock()"
