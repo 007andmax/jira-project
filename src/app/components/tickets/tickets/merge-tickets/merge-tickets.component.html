@@ -107,6 +107,10 @@
                 (onClick)="changeStep()"
                 [ngClass]="{'--loading':addBtn.isBlock(),'--disabled':(step == 'STEP_1') ? !primaryTicket : false}"
                 [disabled]="(step == 'STEP_1') ? !primaryTicket : false"
+                placement="top"
+                container="body"
+                ngbTooltip="Please select a primary ticket"
+                [disableTooltip]="primaryTicket"
             >
                 <span
                     *ngIf="!addBtn.isBlock()"
