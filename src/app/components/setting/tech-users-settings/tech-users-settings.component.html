@@ -475,6 +475,8 @@
                     [placeholder]="'Select'"
                     [sort]="false"
                     [isBlockClear]="true"
+                    [validate]="submitted && f.techRole.status == 'VALID' || !submitted"
+                    [errorMessage]="'Set tech user role'"
                     (onSelectedItem)="onChangeRole($event)"
                 >
                 </app-drop-down>
@@ -770,6 +772,8 @@
                     [placeholder]="'Select'"
                     [sort]="false"
                     [isBlockClear]="true"
+                    [validate]="submitted && f.techRole.status == 'VALID' || !submitted"
+                    [errorMessage]="'Set tech user role'"
                     (onSelectedItem)="onChangeRole($event)"
                 >
                 </app-drop-down>

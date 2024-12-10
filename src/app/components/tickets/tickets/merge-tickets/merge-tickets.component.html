@@ -17,9 +17,15 @@
             <div class="qt-aside__title qt-mb-8">Merge Ticket</div>
             <div
                 *ngIf="step == 'STEP_1'"
-                class="qt-aside__description"
+                class="qt-aside__description qt-mb-8"
                 [textContent]="tickets.length + ' ticket(s) selected (interactions from secondary tickets will be added to the primary ticket).'"
             ></div>
+            <div
+                *ngIf="step == 'STEP_1'"
+                class="qt-aside__description "
+            >
+                Please select a primary ticket to continue the merge process
+            </div>
             <div
                 *ngIf="step == 'STEP_2'"
                 class="qt-aside__description"
@@ -49,7 +55,7 @@
         </ng-template>
     </div>
     <div
-        class="qt-aside-modern__content"
+        class="qt-aside-modern__content qt-aside-modern__content-step2"
         *ngIf="step == 'STEP_2'"
     >
         <div class="qt-df qt-ai-c qt-jc-sb qt-mb-12">

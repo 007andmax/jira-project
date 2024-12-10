@@ -222,6 +222,10 @@
 }
 .qt-aside-modern__content {
     padding: 24px !important;
+    height: calc(100% - 225px) !important;
+}
+.qt-aside-modern__content-step2 {
+    padding: 24px !important;
     height: calc(100% - 200px) !important;
 }
 .merge-ticket-modern {

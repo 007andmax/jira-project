@@ -119,7 +119,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
           Validators.pattern(emailPattern)
         ])
       ],
-      techRole: [''],
+      techRole: ['', [Validators.required]],
       newDevice: [''],
       userEmailNotificationId: [''],
       ticketCreated: [''],
@@ -237,6 +237,8 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.techUserForm.patchValue({
       techRole: data
     });
+    this.techUserForm.controls["techRole"].setErrors(null);
+    console.log(this.techUserForm.controls["techRole"]);
   }
   getLastLoginAt(date) {
     return moment(date).format("HH:mm A, DD MMM");
@@ -359,7 +361,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.techUserForm.reset();
     if (this.create) {
       this.techUserForm.patchValue({
-        techRole: this.techRoles[0],
         userEmailNotifications: {
           newDevice: false,
           ticketCreated: false,
@@ -548,6 +549,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   onCreateSubmit() {
     this.submitted = true;
     this.isEmailIdUnique = true;
+    console.log("this.techUserForm", this.techUserForm);
     // stop here if form is invalid
     if (this.techUserForm.invalid) {
       return;
@@ -709,6 +711,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
+    console.log("this.techUserForm", this.techUserForm);
     if (this.techUserForm.invalid) {
       return;
     }
