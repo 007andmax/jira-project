@@ -94,7 +94,9 @@ export class CompanyUserComponent implements OnInit {
       }
       this.setFilters(data);
       this.onScroll();
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
     this.sub.add(geLefttFilter);
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
@@ -300,15 +302,18 @@ export class CompanyUserComponent implements OnInit {
       this.filter.page += 1;
       this.showPreloader = false;
       this.showPendingPreloader = false;
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
-    this.cd.detectChanges();
   }
   public setDefaultScoll() {
     this.filter.page = 0;
     this.userListService.setBlockList(false);
     this.users = [];
-    this.cd.detectChanges();
+    if (!this.cd['destroyed']) {
+      this.cd.detectChanges();
+    }
   }
   public trackById(index, item) {
     return item.id;
