@@ -66,8 +66,8 @@
                             [ngForTrackBy]="trackById"
                         >
                             <app-tickets-table-item
+                                (onSelectForDetail)="editTicket(ticket.id)"
                                 [selected]="idEditTicket === ticket.id"
-                                (click)="editTicket(ticket.id)"
                                 [listColors]="listColors"
                                 [ticketsStatus]="ticketsStatus"
                                 [setTicket]="ticket"
@@ -113,4 +113,5 @@
         </div>
     </div>
 </div>
+<app-merge-tickets></app-merge-tickets>
 <!-- <app-ticket-add-aside></app-ticket-add-aside> -->
