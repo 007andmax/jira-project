@@ -39,7 +39,7 @@ export class DocumentsAddInfoComponent implements OnInit, OnDestroy {
   @Input() companyId: string;
   @Input() templateId: string;
   @Input() documentValidate: DocumentValidate = new DocumentValidate();
-  @ViewChild('companyTypeDp', { static: true }) companyTypeDp: DropDownComponent;
+  @ViewChild('companyTypeDp', { static: false }) companyTypeDp: DropDownComponent;
   @ViewChild('categoriesDp', { static: false }) categoriesDp: DropDownComponent;
   @ViewChild('linked', { static: false }) linked: DocumentsLinkedComponent;
   @ViewChild('reviewDp', { static: false }) reviewDp: DatePickerComponent;
@@ -85,7 +85,7 @@ export class DocumentsAddInfoComponent implements OnInit, OnDestroy {
     }
   }
   onResetCompanyType() {
-    this.companyTypeDp.clearWithOutChanges();
+    if (this.companyTypeDp) this.companyTypeDp.clearWithOutChanges();
     this.documentAdd.setClientType(null);
     this.onChangeRequiredCompanyType.emit(this.requiredCompanyType);
     this.cd.detectChanges();

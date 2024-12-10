@@ -57,7 +57,7 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
     this.documentEdit.setTags(data);
   }
   onResetCompanyType() {
-    this.companyTypeDp.clearWithOutChanges();
+    if (this.companyTypeDp) this.companyTypeDp.clearWithOutChanges();
     this.documentEdit.setClientType(null);
   }
   onSelectCompanyType(data) {
