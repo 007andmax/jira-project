@@ -85,7 +85,7 @@ export class TicketsPermissionsService {
     };
   }
   /**
- * @description Check ticket is open or not
+ * @description Check if the ticket is open or not
  * @param ticket - Object Ticket
  * @returns {Boolean} This is the result
 */
@@ -93,7 +93,7 @@ export class TicketsPermissionsService {
     return ticket.status !== 'COMPLETED' && !this.isSpamOrTrash(ticket);
   }
   /**
-   * @description Check ticket is reported or spam or trash
+   * @description Check if the ticket is reported as spam or trash
    * @param ticket - Object Ticket
    * @returns {Boolean} This is the result
   */
@@ -102,7 +102,7 @@ export class TicketsPermissionsService {
   }
 
   /**
-     * @description Check ticket in Billable item page and don't have invoice
+     * @description Check if the ticket can be billed and does not have an invoice
      * @param ticket - Object Ticket
      * @returns {Boolean} This is the result
     */
@@ -111,14 +111,17 @@ export class TicketsPermissionsService {
   }
 
   /**
-     * @description Check user can edit ticket, check fields isOwner / assignedUser / multiAssignedUsers / accountType / permissions
+     * @description Check if the current logged-in user type -  tech company owner / generic tech user / client user. 
+        Check if the current logged-in tech user is assigned to the ticket.
+        Check if the current logged-n tech user has enabled permission to edit another user tickets
      * @param ticket - Object Ticket
      * @returns {Boolean} This is the result
     */
   isUpdateModeAllowed = (ticket) => {
     if (!ticket.status) return false;
     if (this.usersStateService.getCurrentUser() && (this.usersStateService.getCurrentUser().isOwner || this.usersStateService.getCurrentUser().accountType === "CLIENT") && this.isTicketOpen(ticket)) return true;
-    if (this.permissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && (ticket.assignedUser && ticket.assignedUser.id != this.usersStateService.getCurrentUser().id && ticket.multiAssignedUsers && !ticket.multiAssignedUsers.some(item => item.id == this.usersStateService.getCurrentUser().id)) && this.isTicketOpen(ticket)) return true;
+    if ((this.permissionsService.isAllowed('EDIT_TICKETS') && (ticket.assignedUser && ticket.assignedUser.id == this.usersStateService.getCurrentUser().id && ticket.multiAssignedUsers && ticket.multiAssignedUsers.some(item => item.id == this.usersStateService.getCurrentUser().id)) ||
+      this.permissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && (ticket.assignedUser && ticket.assignedUser.id != this.usersStateService.getCurrentUser().id && ticket.multiAssignedUsers && !ticket.multiAssignedUsers.some(item => item.id == this.usersStateService.getCurrentUser().id))) && this.isTicketOpen(ticket)) return true;
     return false;
   }
 
