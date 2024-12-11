@@ -56,7 +56,7 @@
                     ></app-ticket-profile-updates-service-duration>
                     <app-date-picker
                         [dropdownClass]="['date-picker']"
-                        [placement]="'top'"
+                        [placement]="'bottom-left'"
                         [editMode]="true"
                         [editDate]="service.getDateTimeWithTimeOffset(companiesStateService.getCurrentCompany())"
                         [useMinDate]="false"
@@ -123,7 +123,7 @@
                 <app-date-picker
                     #datePicker
                     [dropdownClass]="['date-picker']"
-                    [placement]="'top'"
+                    [placement]="'top-left'"
                     [editMode]="true"
                     [editDate]="currentService.getDateTimeWithTimeOffset(companiesStateService.getCurrentCompany())"
                     [useMinDate]="false"

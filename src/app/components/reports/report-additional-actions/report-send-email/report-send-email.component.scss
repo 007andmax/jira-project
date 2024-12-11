@@ -182,3 +182,27 @@ margin-left: 150px !important;
         transform: translate(1px, -2px) rotate(-1deg);
     }
 }
+.draft-email-sidebar__editor-tab {
+    background-color: $gray-100;
+    border-radius: 8px;
+    padding: 4px;
+
+    .draft-email-sidebar__editor-tab-item {
+        height: 32px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 500;
+        color: $gray-500;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .active {
+        font-weight: 600;
+        color: $blue-light-600;
+        background-color: $white;
+    }
+}

@@ -4,8 +4,6 @@
         #formField
         ngbDropdown
         [autoClose]="'outside'"
-        [placement]="placement"
-        [container]="'body'"
         #assignedUserDp="ngbDropdown"
         [container]="container"
         (openChange)="onCloseDropDown($event)"
@@ -105,6 +103,16 @@
                                     class="user-description"
                                     [textContent]="user.primaryEmail"
                                 ></div>
+                                <div
+                                    class="qt-df qt-ai-c"
+                                    *ngIf="customerCompany.jobTitleDto"
+                                >
+                                    <div class="qt-icon icon__permission-role qt-sz-16 qt-mr-4"></div>
+                                    <span
+                                        class="user-description"
+                                        [textContent]="customerCompany.jobTitleDto.name"
+                                    ></span>
+                                </div>
                             </div>
                             <i
                                 class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"

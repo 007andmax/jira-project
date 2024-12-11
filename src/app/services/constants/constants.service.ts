@@ -20,7 +20,7 @@ export class ConstantsService {
 
   public getConstants() {
 
-    return this.http.get(this.apiUrl + `/data/getConstants`);
+    return this.http.get(this.apiUrl + `data/getConstants`);
 
   }
 

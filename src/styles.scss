@@ -516,8 +516,6 @@ app-company-dash-detail {
   company-associate,
   app-taxes,
   documents-linked,
-  app-draft-email-recipients,
-  draft-email-user-recipients,
   app-file-manager-add-file-tags {
     > .qt-temporary-col-fix { // TODO change this temporary class (this class create for remove bootstrap col class)
       margin-top: 12px;
@@ -615,15 +613,6 @@ app-company-dash-detail {
       content: "Taxes" !important;
     }
   }
-  draft-email-user-recipients,
-  app-draft-email-recipients {
-    .hide-all-user {
-      .mat-form-field-infix {
-        max-height: 42px !important;
-        overflow: auto !important;
-      }
-    }
-  }
   .service-tab-content,
   .product-tab-content {
     .icon__delete {
@@ -645,6 +634,98 @@ app-company-dash-detail {
     }
   }
 }
+
+.new-companies-content__modal--content {
+  app-draft-email-recipients,
+  draft-email-user-recipients {
+    >.qt-temporary-col-fix {
+      // TODO change this temporary class (this class create for remove bootstrap col class)
+      margin-top: 12px;
+
+      .mat-form-field {
+        width: 100%;
+      }
+
+      .mat-form-field-infix {
+        border: none;
+      }
+
+      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+        padding: 0;
+        position: relative;
+      }
+
+      .mat-form-field-appearance-legacy .mat-form-field-label {
+        padding: 12px 10px 10px 36px;
+        font-size: 13px;
+        font-weight: 400;
+        color: $gray-400;
+      }
+
+      .mat-form-field-infix {
+        border: 1px solid $gray-200;
+        box-shadow: inset 0 1px 2px rgba(16, 24, 40, .05);
+        border-radius: 6px;
+        padding: 0px !important;
+        position: relative;
+
+        &:hover {
+          border-color: $gray-300;
+        }
+
+        &:before {
+          left: 12px;
+          top: 10px;
+          position: absolute;
+          content: "";
+          width: 20px;
+          height: 20px;
+          background: url("./assets/img/icons/tags.svg");
+        }
+
+        input {
+          height: 38px !important;
+          padding: 11px 14px;
+          margin: 0;
+          min-width: 100px;
+        }
+      }
+    }
+
+    >.qt-temporary-col-fix {
+
+      .qt-input-block__input,
+      // Fix input style
+      .qt-input-block input {
+        border-color: transparent;
+        box-shadow: unset;
+      }
+
+      margin-top: 0; // Fix style for no-column, delete after remove bootstrap col class
+
+      .mat-form-field {
+        margin-top: 0;
+      }
+
+      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+        &:before {
+          display: none;
+        }
+      }
+    }
+  }
+
+  draft-email-user-recipients,
+  app-draft-email-recipients {
+    .hide-all-user {
+      .mat-form-field-infix {
+        max-height: 42px !important;
+        overflow: auto !important;
+      }
+    }
+  }
+}
+ 
 .recurring-tickets-content__modal {
   .app-drop-down__right-icon {
     bottom: 20px;
@@ -3073,6 +3154,13 @@ app-ticket-edit-aside {
       top: 9px;
     }
   }
+  .mat-chip-with-trailing-icon {
+    background-color: $gray-100 !important;
+    font-weight: 500 !important;
+    color: $gray-600 !important;
+    padding: 6px !important;
+    font-size: 13px !important;
+  }
 }
 
 // create product
@@ -3548,8 +3636,15 @@ app-company-devices-edit-ip,app-company-devices-edit-mac {
 }
 .cotract-billable-tooltip {
   .tooltip-inner {
-    width: 400px;
-    min-width: 400px;
+    width: 420px;
+    min-width: 420px;
+  }
+}
+.dshboard-billable-tooltip {
+  .tooltip-inner {
+    width: 270px;
+    min-width: 270px;
+    text-align: justify;
   }
 }
 app-multi-company-drop-down {
@@ -3570,5 +3665,20 @@ app-multi-company-drop-down {
   }
   .mat-form-field {
       width: 100%;
+  }
+}
+textarea {
+  &:hover {
+    border: 1px solid $gray-300 !important;
+    border-radius: 8px;
+  }
+  &:focus {
+    border: 1px solid $blue-light-600 !important;
+    border-radius: 8px;
+  }
+  &:disabled {
+    border: 1px solid $gray-200 !important;
+    background-color: $gray-50 !important;
+    border-radius: 8px;
   }
 }

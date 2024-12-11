@@ -22,6 +22,7 @@ import { AssignedTicketUserItemComponent } from './assigned-ticket-user/assigned
 import { AssignedTicketUserModule } from './assigned-ticket-user/assigned-ticket-user.module';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
+import { UsersDropDownModule } from 'src/app/components/shared/users-drop-down/users-drop-down.module';
 
 
 
@@ -43,7 +44,8 @@ import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat
         DynamicTooltipModule,
         CompanyUsersDropDownModule,
         AssignedTicketUserModule,
-        MatErrorModule
+        MatErrorModule,
+        UsersDropDownModule
     ],
     exports: [TicketAddAsideComponent]
 })

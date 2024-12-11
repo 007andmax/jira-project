@@ -136,7 +136,7 @@ export class DevicesService {
     return this.http.post(this.apiUrl + `devices/remoteInstall`, data);
   }
   public sendDescription(companyId, networkDeviceId, description) {
-    return this.http.post(this.apiUrl + `/devices/sendDescription?companyId=${companyId}&networkDeviceId=${networkDeviceId}`, description);
+    return this.http.post(this.apiUrl + `devices/sendDescription?companyId=${companyId}&networkDeviceId=${networkDeviceId}`, description);
   }
   public getLastScanDevices(companyId) {
     return this.http.get(this.apiUrl + `devices/networkScan?companyId=${companyId}`);
@@ -158,7 +158,7 @@ export class DevicesService {
     return this.http.get(this.apiUrl + `devices/extended?companyId=${companyId}`);
   }
   public editAgentInfo(data) {
-    return this.http.post(this.apiUrl + '/devices/editAgentInfo', data);
+    return this.http.post(this.apiUrl + 'devices/editAgentInfo', data);
   }
   public sendPowerAction(companyId, agentIds, action) {
     if (!Array.isArray(agentIds)) {
@@ -171,14 +171,14 @@ export class DevicesService {
   }
 
   sendDeviceStatusRequest(companyId, agentIds, actions) {
-    return this.http.post(this.apiUrl + '/devices/agentStatuses', {
+    return this.http.post(this.apiUrl + 'devices/agentStatuses', {
       companyId: companyId,
       agentIds: agentIds,
       actions: actions
     });
   }
   public deleteCustomDevice(deviceId) {
-    return this.http.delete(this.apiUrl + `/devices/custom/${deviceId}`).pipe(
+    return this.http.delete(this.apiUrl + `devices/custom/${deviceId}`).pipe(
       tap(data => {
         this.toastrService.success("The custom device has been successfully deleted");
         this.appStateService.changeDetectorRef();
@@ -190,17 +190,17 @@ export class DevicesService {
     if (!Array.isArray(devicesIds)) {
       devicesIds = [devicesIds];
     }
-    return this.http.post(this.apiUrl + '/devices/sendUninstallAgentRequest?companyId=' + companyId, devicesIds);
+    return this.http.post(this.apiUrl + 'devices/sendUninstallAgentRequest?companyId=' + companyId, devicesIds);
   }
   public createRemoteSession(deviceId, companyId, connectionType, ticketId) {
-    return this.http.get(this.apiUrl + '/remote/createRemoteSession?deviceId=' + deviceId + '&connectionType=' + connectionType + '&companyId=' + companyId + (ticketId ? '&ticketId=' + ticketId : ''));
+    return this.http.get(this.apiUrl + 'remote/createRemoteSession?deviceId=' + deviceId + '&connectionType=' + connectionType + '&companyId=' + companyId + (ticketId ? '&ticketId=' + ticketId : ''));
   }
   markDeviceAsMaster(companyId, agentId) {
     var request = {
       "masterAgentId": agentId,
       "clientCompanyId": companyId
     }
-    return this.http.post(this.apiUrl + '/devices/updateMasterAgent', request);
+    return this.http.post(this.apiUrl + 'devices/updateMasterAgent', request);
 
   }
 
@@ -211,6 +211,6 @@ export class DevicesService {
     if (!connectionType) {
       throw 'connectionType is required!';
     }
-    return this.http.get(this.apiUrl + '/devices/getSessionId?remoteSessionId=' + remoteSessionId + '&connectionType=' + connectionType);
+    return this.http.get(this.apiUrl + 'devices/getSessionId?remoteSessionId=' + remoteSessionId + '&connectionType=' + connectionType);
   }
 }

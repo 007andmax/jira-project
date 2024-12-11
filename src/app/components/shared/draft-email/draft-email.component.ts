@@ -218,7 +218,7 @@ export class DraftEmailComponent implements OnInit, OnDestroy {
     return new Promise((resolve, reject) => {
       this.setDisableUplaodFile(true);
 
-      if (file.size > 4194304) {
+      if (file.size > 15728640) {
         reject({ code: 500 });
         return;
       }

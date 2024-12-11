@@ -1,10 +1,21 @@
 @import "./src/assets/styles/variable";
 
 .toggle-all-users {
-    text-align: right;
-    color: $blue-light-600;
+    padding: 5px 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: $gray-500;
+    border: 1px solid $gray-200;
+    border-radius: 6px;
+    width: fit-content;
     cursor: pointer;
-    font-size: 12px;
+    position: absolute;
+    top: -42px;
+    right: 0px;
+
+    span {
+        line-height: normal;
+    }
 }
 .dropdown-recipients-body {
     cursor: pointer;
@@ -12,22 +23,12 @@
 ::ng-deep.dropdown-recipients-body .mat-chip {
     cursor: default;
 }
-.user-name {
-    min-width: 50px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+ 
 .dropdown-item {
     display: flex !important;
     width: 100% !important;
 }
-.user-email {
-    min-width: 50px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+ 
 .--input-error {
     position: relative;
     input {
@@ -37,3 +38,59 @@
 .invalid-feedback {
     bottom: 0px !important;
 }
+.assigne-user-avatar {
+    width: 36px;
+    height: 36px;
+    font-weight: 500;
+    font-size: 16px;
+    background-size: cover !important;
+    background-position: center !important;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $white;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: $gray-900;
+    line-height: normal;
+    margin-bottom: 2px;
+
+}
+
+.user-description {
+    font-size: 13px;
+    font-weight: 400;
+    color: $gray-500;
+    line-height: normal;
+    margin-bottom: 2px;
+}
+ .user-container {
+     align-items: self-start !important;
+     padding: 6px 8px !important;
+     position: relative !important;
+     height: auto !important;
+
+     &:hover {
+         background: $gray-50 !important;
+        border-radius: 6px;
+     }
+ }
+ .app-drop-down__dropdown {
+    width: 100%;
+    top: 20px !important;
+    max-height: 357px !important;
+ }
+ .--selected {
+     background: $gray-50;
+     border-radius: 6px;
+ }
+
+ .icon__done {
+     top: calc(50% - 10px);
+     position: absolute;
+     right: 8px;
+ }

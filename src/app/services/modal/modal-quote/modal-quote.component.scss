@@ -1,17 +1,5 @@
 @import "./src/assets/styles/variable";
-.user-name {
-    min-width: 50px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.user-email {
-    min-width: 50px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: $gray-500;
-}
+    
 .modal-quote-user-item {
     font-size: 14px;
     transition: all 0.3s;
@@ -27,4 +15,60 @@
 }
 .qt-input-block__textarea {
     height: max-content;
+}
+ .assigne-user-avatar {
+     width: 36px;
+     height: 36px;
+     font-weight: 500;
+     font-size: 16px;
+     background-size: cover !important;
+     background-position: center !important;
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     color: $white;
+ }
+ .user-name {
+     font-size: 14px;
+     font-weight: 600;
+     color: $gray-900;
+     line-height: normal;
+     margin-bottom: 2px;
+
+ }
+
+ .user-description {
+     font-size: 13px;
+     font-weight: 400;
+     color: $gray-500;
+     line-height: normal;
+     margin-bottom: 2px;
+ }
+
+ .user-container {
+     align-items: self-start !important;
+     padding: 6px 8px !important;
+     position: relative !important;
+     height: auto !important;
+
+     &:hover {
+         background: $gray-50 !important;
+         border-radius: 6px;
+     }
+ }
+ .app-drop-down__dropdown {
+    width: 446px;
+    position: absolute !important;
+    top: 7px;
+    max-height: 357px !important;
+ }
+ .--selected {
+     background: $gray-50;
+     border-radius: 6px;
+ }
+.icon__done {
+    top: calc(50% - 10px);
+    position: absolute;
+    right: 8px;
 }

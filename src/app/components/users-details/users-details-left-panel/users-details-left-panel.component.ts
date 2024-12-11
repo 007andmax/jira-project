@@ -223,7 +223,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
     return null
   }
   parseAddress(item) {
-    return `${item.suiteNumber ? item.suiteNumber + ', ' : ''}${item.address} ${item.postalCode}`;
+    return `${item.suiteNumber ? item.suiteNumber + ', ' : ''}${item.address == null ? "No information yet" : item.address} ${item.address ? item.postalCode : ''}`;
   }
   addCompany() {
     this.usersStateService.showAddCustomerCompaniesInfo();

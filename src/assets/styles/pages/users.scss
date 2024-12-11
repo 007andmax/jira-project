@@ -455,14 +455,13 @@ app-users-table {
     }
 
     .mat-standard-chip.mat-chip-with-trailing-icon {
-      padding-top: 6px;
-      padding-bottom: 6px;
-      padding-right: 7px;
-      padding-left: 8px;
+      padding: 6px !important;
       @include сaption-l;
+      font-weight: 500 !important;
       margin-right: 0px;
-      color: $gray-600;
-      background-color: $gray-25;
+      color: $gray-600 !important;
+      background-color: $gray-100 !important;
+      font-size: 13px !important;
     }
 
     .mat-chip.mat-standard-chip .mat-chip-remove::before {
@@ -482,22 +481,6 @@ app-users-table {
   .qt-aside-modern__content.new-companies-content__modal--content {
     .mat-form-field-infix {
       padding: 3px 5px 4px 5px;
-    }
-  }
-
-  &__editor-tab {
-    display: flex;
-    color: $gray-900;
-    @include сaption-l__sb;
-  }
-
-  &__editor-tab-item {
-    padding: 0 8px 8px 8px;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    &.active {
-      color: $blue-light-600;
-      border-color: $blue-light-600;
     }
   }
 
@@ -726,6 +709,25 @@ app-users-details {
         }
         &:after {
           content: unset;
+        }
+      }
+    }
+
+    .qt-page-list__body {
+      &.--subscription-column-0,
+      &.--subscription-column-1 {
+        .users-table__contract-no {
+          flex: 0 0 198px;
+        }
+      }
+      &.--subscription-column-2 {
+        .users-table__contract-no {
+          flex: 0 0 344px;
+        }
+      }
+      &.--subscription-column-3 {
+        .users-table__contract-no {
+          flex: 0 0 480px;
         }
       }
     }

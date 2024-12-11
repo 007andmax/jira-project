@@ -30,11 +30,11 @@ export class CompanyProfileAddress {
 
     }
     public checkForAdd() {
-        if (this.address.length > 0
-            || this.locationName.length > 0
-            || this.suiteNumber.length > 0
-            || this.postalCode.length > 0
-            || this.phoneNumbers[0].number.length > 0) return true;
+        if (this.address && this.address.length > 0
+            || this.locationName && this.locationName.length > 0
+            || this.suiteNumber && this.suiteNumber.length > 0
+            || this.postalCode && this.postalCode.length > 0
+            || this.phoneNumbers.length > 0 && this.phoneNumbers[0].number.length > 0) return true;
         return false;
     }
     public initSameAsBilling(data) {

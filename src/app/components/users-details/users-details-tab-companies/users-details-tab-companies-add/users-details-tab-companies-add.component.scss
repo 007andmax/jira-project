@@ -80,10 +80,9 @@ tr {
     width: 32px;
     height: 32px;
     border-radius: 6px;
-    border:1px solid $gray-200;
-    background-color: $white;
-    &:hover {
-        background-color: $gray-50;
+    background-color: $blue-light-600;
+    .icon__done {
+        background-color: $white;
     }
 }
 .add-company-icon-container-disable {

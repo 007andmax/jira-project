@@ -72,7 +72,7 @@ export class TicketProfileFormUpdate {
         this.type = data;
     }
     public isValidateNote() {
-        return this.type === "NOTE" && this.note.length > 0;
+        return this.type === "NOTE";
     }
     public isValidateProduct() {
         return this.type === "PRODUCT" && this.products.length > 0;

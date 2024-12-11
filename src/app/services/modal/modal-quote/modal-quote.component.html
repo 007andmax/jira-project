@@ -56,29 +56,65 @@
                         >
                     </app-mat-chip-list>
                     <div
-                        class="mat-autocomplete-panel quote-email-dropdown mat-autocomplete-visible"
+                        class="app-drop-down__dropdown"
                         ngbDropdownMenu
                         aria-labelledby="dropdownServices"
                     >
-                        <app-mat-option
-                            class="modal-quote-user-item"
+                        <div
+                            class="qt-df user-container pointer"
                             *ngFor="let user of usersClients"
                             ngbDropdownItem
                             (click)="selected(user)"
                         >
-                            <span class="user-name">{{getFirstLastName(user)}}</span>
-                            <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
-                        </app-mat-option>
+                            <div class="qt-df">
+                                <div
+                                    class="assigne-user-avatar qt-mr-12"
+                                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                                ></div>
+                                <div>
+                                    <div class="user-name qt-mb-2">{{getFirstLastName(user)}}</div>
+                                    <div class="user-description qt-mb-2">{{user.primaryEmail}}</div>
+                                    <div
+                                        class="qt-df qt-ai-c"
+                                        *ngIf="companyId && getJobTitleDto(user)"
+                                    >
+                                        <div class="qt-icon icon__permission-role qt-sz-16 qt-mr-4"></div>
+                                        <span
+                                            class="user-description"
+                                            [textContent]="getJobTitleDto(user).name"
+                                        ></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <i
+                                *ngIf="isSelected(user)"
+                                class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                            ></i>
+                        </div>
                         <hr>
-                        <app-mat-option
-                            class="modal-quote-user-item"
+                        <div
+                            class="qt-df user-container pointer"
                             *ngFor="let user of usersTechnical"
                             ngbDropdownItem
                             (click)="selected(user)"
                         >
-                            <span class="user-name">{{getFirstLastName(user)}}</span>
-                            <span class="user-email qt-ml-8">{{user.primaryEmail}}</span>
-                        </app-mat-option>
+                            <div class="qt-df">
+                                <div
+                                    class="assigne-user-avatar qt-mr-12"
+                                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                                ></div>
+                                <div>
+                                    <div class="user-name qt-mb-2">{{getFirstLastName(user)}}</div>
+                                    <div class="user-description qt-mb-2">{{user.primaryEmail}}</div>
+                                </div>
+                            </div>
+                            <i
+                                *ngIf="isSelected(user)"
+                                class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                            ></i>
+                        </div>
                     </div>
                 </app-mat-form-field>
                 <div

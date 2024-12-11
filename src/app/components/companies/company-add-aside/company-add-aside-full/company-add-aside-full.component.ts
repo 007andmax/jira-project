@@ -19,6 +19,8 @@ import { CompanyProfileAddress } from '../../class/company-profile-address';
 import { MODE_EDIT_SUBSCRIPTION, MODE_HIDE_ACTIVE } from 'src/app/const/users';
 import { UsersService } from 'src/app/services/users/users.service';
 import { CompanyUsersDropDownComponent } from 'src/app/components/tickets/tickets/ticket-add-aside/company-users-drop-down/company-users-drop-down.component';
+import { TimeZone } from '../../company-time-zone/class/time-zone';
+import { CompanyTimeZoneStateService } from '../../company-time-zone/services/company-time-zone-state.service';
 
 @Component({
   selector: 'company-add-aside-full',
@@ -40,6 +42,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   @ViewChild('paymentMethod', { static: false }) paymentMethod: DropDownComponent;
   @ViewChild('companyTypeDp', { static: false }) companyTypeDp: DropDownComponent;
   @ViewChild('userDp', { static: false }) userDp: CompanyUsersDropDownComponent;
+  selectedTimeZone: TimeZone;
   industries: Array<CrmCompanyIndustry> = [];
   locationIsinit: boolean = false;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
@@ -60,6 +63,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     private companiesService: CompaniesService,
     private crmStateService: CrmStateService,
     private usersService: UsersService,
+    private companyTimeZoneState: CompanyTimeZoneStateService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
@@ -107,6 +111,16 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     this.company.addresses[1].sameAsBilling = true;
     this.company.addresses[1].isPrimary = false;
     this.onCroppImage();
+    if (this.companyTimeZoneState.getTimeZone().length > 0) this.setTimeZone(this.companyTimeZoneState.getTimeZone());
+    if (this.companyTimeZoneState.getTimeZone().length == 0) this.companyTimeZoneState.onGetTimeZone();
+    let onTimeZone = this.companyTimeZoneState.onTimeZone.subscribe(data => {
+      this.setTimeZone(this.companyTimeZoneState.getTimeZone());
+    })
+    this.sub.add(onTimeZone);
+  }
+  setTimeZone(data) {
+    let list = data.map(item => new TimeZone(item));
+    this.selectedTimeZone = list.find(item => item.second === this.companiesStateService.getCurrentCompany().addresses[0].timeZone.name);
   }
   onGetUsers(data) {
     this.users = data.filter(item => {
@@ -314,6 +328,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   }
   public onChangeTimeZone(data) {
     this.company.addresses[0].locale = (data) ? data.second : '';
+    this.selectedTimeZone = data;
   }
   public onSelectPaymentMethod(item) {
     this.company.defaultPaymentMethod = item.value;

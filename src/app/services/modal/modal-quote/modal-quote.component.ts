@@ -14,6 +14,7 @@ import { SUPPORT_MODAL_ACTION_SEND } from 'src/app/const/support';
 import { SupportStateService } from 'src/app/states/support/support-state.service';
 import { QuoteEdit } from 'src/app/components/billing/quotes/class/quote-edit';
 import { QuotePreview } from 'src/app/components/billing/quotes/class/quote-preview';
+import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 
 /**
  * Modal quote component
@@ -22,8 +23,7 @@ import { QuotePreview } from 'src/app/components/billing/quotes/class/quote-prev
   selector: 'app-modal-quote',
   templateUrl: './modal-quote.component.html',
   styleUrls: ['./modal-quote.component.scss'],
-  providers: [NgbModalConfig, NgbModal]
-
+  providers: [NgbModalConfig, NgbModal, TicketsListService],
 })
 export class ModalQuoteComponent implements OnInit, OnDestroy {
 
@@ -48,7 +48,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   showConfirm: boolean = false;
   sub: Subscription = new Subscription();
   isChange: boolean = false;
-
+  companyId: string;
 
   private unsubscribe: Subject<void> = new Subject();
   @Input() public data;
@@ -70,7 +70,9 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     private supportStateService: SupportStateService,
     private modalService: NgbModal,
     config: NgbModalConfig,
-    private usersStateService: UsersStateService
+    private usersStateService: UsersStateService,
+    public ticketsListService: TicketsListService,
+
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -83,6 +85,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.initResendMode();
     if (this.action === QUOTE_MODAL_ACTION_ADD) this.subject = this.data.description ? JSON.parse(JSON.stringify(this.data.description)) : "";
+    this.companyId = (this.data instanceof QuoteEdit || this.data instanceof QuotePreview) ? this.data.company.id : this.data.companyId;
     this.getAllUsers((this.data instanceof QuoteEdit || this.data instanceof QuotePreview) ? this.data.company.id : this.data.companyId);
     /* this.userInput.nativeElement.onblur = (e) => {
        if (this.matAutocomplete.isOpen) {
@@ -96,7 +99,9 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
   }
-
+  getJobTitleDto(user) {
+    return user.customerCompaniesInfo.find(item => item.companyId == this.companyId).jobTitleDto;
+  }
   @HostListener('document:click', ['$event'])
   clickout(event) {
     if (event.target.tagName === 'NGB-MODAL-WINDOW' && this.initialized && !this.showConfirm) this.onCheckChange();
@@ -267,7 +272,9 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
       input.value = '';
     }
   }
-
+  public isSelected(user) {
+    return this.selectedUsers.some(item => item == user.primaryEmail);
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
