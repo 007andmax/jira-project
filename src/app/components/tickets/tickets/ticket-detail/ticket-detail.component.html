@@ -219,7 +219,7 @@
                             [tooltipMessage]="'You can set a new company for the ticket unless the ticket contains at least one product/service update.'"
                             [selectedCustomerCompany]="ticketProfile.selectedCustomerCompany"
                             [isShowTooltip]="true"
-                            [isDisabled]="getCompany(ticketProfile.company.id).isUnknown || customerPortalStateService.isCustomerPortal"
+                            [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || getCompany(ticketProfile.company.id) && getCompany(ticketProfile.company.id).isUnknown || customerPortalStateService.isCustomerPortal"
                             (onSelectedItem)="onSelectUser($event.user,$event.customerCompany)"
                         ></company-users-drop-down>
                     </div>

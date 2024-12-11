@@ -10,11 +10,13 @@ import { Subscription } from 'rxjs';
 import { StatusColor } from '../../../class/status-color';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
+import { TicketsPermissionsService } from '../services/tickets-permissions.service';
 
 @Component({
   selector: 'app-ticket-change-status',
   templateUrl: './ticket-change-status.component.html',
-  styleUrls: ['./ticket-change-status.component.scss']
+  styleUrls: ['./ticket-change-status.component.scss'],
+  providers: [TicketsPermissionsService]
 })
 export class TicketChangeStatusComponent implements OnInit, OnDestroy {
   @Input() ticketProfile: TicketProfile = new TicketProfile();
@@ -29,6 +31,7 @@ export class TicketChangeStatusComponent implements OnInit, OnDestroy {
     public customerPortalStateService: CustomerPortalStateService,
     public ticketsService: TicketsService,
     public cd: ChangeDetectorRef,
+    public ticketsPermissionsService: TicketsPermissionsService,
     private leftPanelService: LeftPanelService,) { }
 
 
