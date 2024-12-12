@@ -8,12 +8,14 @@
                 (click)="toggleEditNote()"
             >
                 <span class="qt-icon icon__edit qt-sz-16 qt-bg-contain qt-dib qt-mr-4"></span>
-                <span>Edit Note</span>
+                <span>Edit ticket</span>
             </button>
         </div>
         <div
+            [hidden]="!mergeTicket.isPrimary && editNote"
             class="qt-mb-4 subject-ticket"
-            [textContent]="getTicket().subject"
+            [ngClass]="{'subject-ticket-not-primary':!mergeTicket.isPrimary}"
+            [textContent]="mergeTicket.isPrimary ? getTicket().subject : mergeTicket.subject"
         ></div>
         <div class="qt-df qt-ai-c create-ticket">
             <span
@@ -32,16 +34,45 @@
         ngbDropdown
         [container]="'body'"
     >
-        <textarea
-            id="description-note"
-            [value]="mergeTicket.note"
-            (input)="onChangeNote($event)"
-            class="terms-n-conditions__textarea qt-input-block__textarea"
-            placeholder="Enter job description"
-            appTextArea
-            maxlength="500"
-            [height]="'120px'"
-        ></textarea>
+        <div
+            class="qt-inputs-row qt-mb-4"
+            *ngIf="!mergeTicket.isPrimary"
+        >
+            <div class="qt-input-block">
+                <label
+                    for="add-ticket-subject"
+                    class="qt-input-block__label qt-pl-12"
+                >
+                    Subject
+                </label>
+                <input
+                    class="qt-input-block__input"
+                    [(ngModel)]="mergeTicket.subject"
+                    (change)="onChangeSubject($event)"
+                    type="text"
+                    maxlength="300"
+                    placeholder="Write Ticket Subject"
+                >
+            </div>
+        </div>
+        <div class="qt-input-block">
+            <label
+                for="add-ticket-subject"
+                class="qt-input-block__label qt-pl-12"
+            >
+                Note
+            </label>
+            <textarea
+                id="description-note"
+                [value]="mergeTicket.note"
+                (input)="onChangeNote($event)"
+                class="terms-n-conditions__textarea qt-input-block__textarea"
+                placeholder="Enter job description"
+                appTextArea
+                maxlength="500"
+                [height]="'120px'"
+            ></textarea>
+        </div>
         <div class="qt-df qt-ai-c note-type">
             <div
                 id="dropdownBasic1"

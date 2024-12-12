@@ -57,7 +57,7 @@
     .edit-note {
         margin:0px -12px -12px -12px;
         textarea {
-            padding: 16px;
+            padding: 12px;
             border-radius: 0px;
             margin-bottom: -7px;
            
@@ -92,4 +92,11 @@
     bottom: 12px;
     width: 2px;
     height: auto;
+}
+.qt-input-block__input {
+    padding: 11px 12px !important;
+}
+.subject-ticket-not-primary {
+    word-break: break-word;
+    padding: 0px 120px 0px 0px;
 }

@@ -39,4 +39,7 @@ export class MergeTicketsEditItemComponent implements OnInit {
   onChangeNote(event) {
     this.mergeTicket.note = event.target.value;
   }
+  onChangeSubject(event) {
+    this.mergeTicket.subject = event.target.value;
+  }
 }

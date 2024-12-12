@@ -3,6 +3,7 @@ export class MergeTickets {
     "isPrimary": boolean = false;
     "note": string;
     "noteType": string = "PUBLIC";
+    subject: string;
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];
