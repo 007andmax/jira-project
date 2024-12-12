@@ -377,7 +377,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     }
   }
   toggleSubject() {
-    if (!this.getPermissions('EDIT_TICKETS')) return;
+    if (!this.ticketsPermissionsService.isActionVisible('update', this.ticketProfile, null, null)) return;
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-subject").value;
     var textOld = this.ticketProfile.subject;
     this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';
