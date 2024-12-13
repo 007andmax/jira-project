@@ -9,7 +9,7 @@
         [editItem]="selectedTicketStatus"
         [list]="list"
         [sort]="true"
-        [isDisabled]="ticketProfile.status === 'COMPLETED' || ticketProfile.status === null || customerPortalStateService.isCustomerPortal"
+        [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || customerPortalStateService.isCustomerPortal"
         (onSelectedItem)="changeTicketStatus($event)"
     ></app-drop-down>
 </div>
