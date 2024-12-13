@@ -566,15 +566,12 @@
         ></div>
         <div *ngIf="!Preloader">
             <div class="company-device-aside__menu">
-                <div
-                    class="company-device-aside__menu-item qt-pointer"
-                    [ngClass]="{'--active': assetData.ID === assetData.ID}"
-                >
+                <div class="company-device-aside__menu-item qt-pointer">
                     <ng-template
                         #asideMenuItem
                         class="tooltip"
-                        [textContent]="assetData.Title || assetData.Name"
                     >
+                        <div [textContent]="parseTitleAndName(assetData)"></div>
                     </ng-template>
                     <div
                         placement="left"
@@ -606,7 +603,7 @@
                     ></div>
                     <div
                         class="qt-fs-13 qt-ff-sb qt-lh-154 company-device-aside__header-title"
-                        [textContent]="assetData.Title || assetData.Name"
+                        [textContent]="parseTitleAndName(assetData)"
                     >
                     </div>
                 </div>

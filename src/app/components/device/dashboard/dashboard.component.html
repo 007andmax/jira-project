@@ -397,7 +397,7 @@
                                 <div *ngIf="logicalDisk?.length == 0">
                                     <span
                                         class="msg"
-                                        [textContent]="No Disk"
+                                        [textContent]="'No Disk'"
                                     ></span>
                                 </div>
                             </div>
@@ -725,6 +725,7 @@
 
 
 
+
                 <div
                     class="sidebar-popup note"
                     [class.opened]="editNote"
@@ -838,6 +839,7 @@
 
 
 
+
                                 <button
                                     type="button"
                                     class="btn btn-danger pull-right"
@@ -857,6 +859,7 @@
     class="loading"
     *ngIf="loading"
 ></div>
+
 
 
 
