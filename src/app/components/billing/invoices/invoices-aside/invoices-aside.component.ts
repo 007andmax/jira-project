@@ -173,10 +173,14 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
         if (!this.isChangeAmountReceived) item.setPaymentAmount(parseFloat((((item.totalSum - item.paidSum) * 100) / 100).toFixed(2)));
       }
     })
-    if (!this.isChangeAmountReceived) this.amountReceived = this.invoices.reduce((a, b) => {
-      if (b.selected) return a + (b.totalSum - b.paidSum);
-      return a + 0;
-    }, 0);
+    if (!this.isChangeAmountReceived) {
+      this.amountReceived = this.invoices.reduce((a, b) => {
+        if (b.selected) return a + (b.totalSum - b.paidSum);
+        return a + 0;
+      }, 0);
+      this.amountReceived_str = this.amountReceived.toFixed(2);
+    }
+
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
   onSelectCompany(items) {
