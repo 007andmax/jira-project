@@ -398,15 +398,18 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
         default:
           break;
       }
-
+      console.log("relatedPermissions", relatedPermissions);
+      console.log("permissions", permissions);
       if (relatedPermissions) {
+
         relatedPermissions.forEach(relatedPermission => {
           const relatedIndex = permissions.indexOf(relatedPermission);
-
-          if (relatedIndex > 1) {
+          console.log("relatedIndex", relatedIndex);
+          if (relatedIndex > -1) {
             permissions.splice(relatedIndex, 1);
           }
         });
+        console.log("permissions", permissions);
       }
     } else {
       permissions.push(permission);
