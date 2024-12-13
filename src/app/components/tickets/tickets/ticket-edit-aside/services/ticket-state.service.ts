@@ -25,6 +25,7 @@ export class TicketStateService {
   servicesList: EventEmitter<any> = new EventEmitter();
   onSetTabUpdate: EventEmitter<any> = new EventEmitter();
   onEditUpdate: EventEmitter<any> = new EventEmitter();
+  onRemoveUpdate: EventEmitter<any> = new EventEmitter();
   onEditUpdateByForm: EventEmitter<any> = new EventEmitter();
   changeUpdatesTicket: EventEmitter<any> = new EventEmitter();
   closedTicket: EventEmitter<any> = new EventEmitter();
@@ -194,6 +195,9 @@ export class TicketStateService {
   }
   public getTicketRoutingId() {
     return this.ticketRoutingId;
+  }
+  public removeUpdate(data) {
+    this.onRemoveUpdate.emit(data);
   }
   public setEditUpdate(data) {
     this.onEditUpdate.emit(data);

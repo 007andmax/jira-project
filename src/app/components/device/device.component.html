@@ -34,13 +34,13 @@
                         *ngIf="UpTime != ''"
                     >
                         <h6>Up Time</h6>
-                        <h5>{{UpTime}}</h5>
+                        <h5 [textContent]="UpTime"></h5>
                     </div>
                     <div
                         class="head-device"
                         *ngIf="UpTime == ''"
                     >
-                        <h6>{{offline}}</h6>
+                        <h6 [textContent]="offline"></h6>
                     </div>
                 </div>
             </div>
@@ -148,8 +148,10 @@
                     src="/html/assets/img/device/counter.svg"
                     alt="Print"
                 >
-                <span id="counter">
-                    {{padNumber(totalHours)}} hr : {{padNumber(totalMinutes)}} min : {{padNumber(totalSeconds)}} sec
+                <span
+                    id="counter"
+                    [textContent]="padNumber(totalHours) + ' hr : ' + padNumber(totalMinutes) + ' min : ' + padNumber(totalSeconds) + ' sec'"
+                >
                 </span>
             </div>
         </div>
@@ -223,6 +225,8 @@
         </div>
     </div>
 </ng-template>
+
+
 
 
 <ng-template #templatePowersell>

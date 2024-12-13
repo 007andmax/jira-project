@@ -93,14 +93,14 @@
             <li
                 [ngClass]="{'--selected' :type === 'PRODUCTS'}"
                 (click)="type = 'PRODUCTS'"
+                [textContent]="'Products (' + contractsOther.productExpenses.length + ')'"
             >
-                Products ({{contractsOther.productExpenses.length}})
             </li>
             <li
                 [ngClass]="{'--selected' :type === 'SERVICES'}"
                 (click)="type = 'SERVICES'"
+                [textContent]="'Service (' + contractsOther.serviceExpenses.length + ')'"
             >
-                Service ({{contractsOther.serviceExpenses.length}})
             </li>
         </ul>
         <div

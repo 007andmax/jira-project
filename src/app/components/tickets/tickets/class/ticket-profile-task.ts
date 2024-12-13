@@ -9,6 +9,7 @@ export class TicketProfileTask {
     "assignedUser": CurrentUser;
     selected: boolean = false;
     isInitEdit: boolean = false;
+    isInitRequest: boolean = false;
     dateForDatePicker: number = new Date().getTime();
     constructor(data = null) {
         if (data) {
@@ -20,6 +21,9 @@ export class TicketProfileTask {
             this.setDate(moment(date).format('YYYY/MM/DD'));
         }
 
+    }
+    public setIsInitRequest(data) {
+        this.isInitRequest = data;
     }
     public setStatus(data) {
         this.status = data;

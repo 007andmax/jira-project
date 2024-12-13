@@ -10,6 +10,7 @@
         <i
             class="icn-16 qt-icon icon__calendar pointer"
             *ngIf="!selectedDateModel || type !== 'COMPANY_DEVICE'"
+            ngbDropdownToggle
         ></i>
         <input
             [disabled]="isDisabled"
@@ -40,7 +41,12 @@
             class="detail-ticket-txt"
             [textContent]="geTextDate()"
         ></span>
-        <i class="icn-16 qt-icon icon__calendar pointer"></i>
+        <i
+            class="icn-16 qt-icon icon__calendar pointer"
+            ngbDropdownToggle
+            (mouseenter)="dateTooltip.show($event.target)"
+            (mouseleave)="dateTooltip.hide()"
+        ></i>
         <input
             [disabled]="isDisabled"
             type="text"
@@ -50,8 +56,6 @@
             id="dropdownDate"
             [value]="geTextDate()"
             readonly
-            (mouseenter)="dateTooltip.show($event.target)"
-            (mouseleave)="dateTooltip.hide()"
         >
     </div>
     <input

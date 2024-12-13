@@ -6,8 +6,8 @@
     <ng-template
         #asideMenuItem
         class="tooltip"
+        [textContent]="getTextForTooltip()"
     >
-        {{getTextForTooltip()}}
     </ng-template>
     <div
         placement="left"

@@ -9,11 +9,11 @@
         <div
             class="modal-body"
             style="width: 250px;"
-        >
-            {{ currentUser.isOwner
+            [textContent]="currentUser.isOwner
           ? 'You can not use invoicing feature, because you have not entered the company\'s address.'
           : 'The owner of the company has not filled the address of the company, therefore you can not use invoicing feature.'
-        }}
+        "
+        >
         </div>
         <div
             class="modal-footer"
@@ -34,7 +34,7 @@
                     class="qt-page-list__back-button qt-df qt-ai-c qt-jc-c pointer"
                     (click)="back()"
                 >
-                  <div class="qt-icon icon__arrow-left button-icon qt-sz-16"></div>
+                    <div class="qt-icon icon__arrow-left button-icon qt-sz-16"></div>
                 </div>
                 <h6
                     class="qt-page-list__header-title"

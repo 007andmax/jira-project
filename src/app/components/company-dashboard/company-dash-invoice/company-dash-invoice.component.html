@@ -24,10 +24,10 @@
                         <td
                             (click)="onPreviewInvoice(invoice)"
                             class="pointer"
+                            [textContent]="invoice.number"
                         >
-                            {{invoice.number}}
                         </td>
-                        <td>{{invoice.dateName}}</td>
+                        <td [textContent]="invoice.dateName"></td>
                         <td
                             *ngIf="invoice.paidOn"
                             class="paid"
@@ -46,7 +46,7 @@
                         >
                             Outstanding
                         </td>
-                        <td>{{invoice.totalSum | currency}}</td>
+                        <td [textContent]="invoice.totalSum | currency"></td>
                     </tr>
                 </ng-template>
             </tbody>

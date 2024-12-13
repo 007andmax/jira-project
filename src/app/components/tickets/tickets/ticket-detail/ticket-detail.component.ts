@@ -148,7 +148,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     let getOnUpdateTicket = this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       let ticket = new Ticket(data);
       let isChangeCompany = data.companyId != this.ticketProfile.companyId;
-      let isChangeUser = data.createdUser.id != this.ticketProfile.createdUser.id;
+      let isChangeUser = data.createdUser && data.createdUser.id != this.ticketProfile.createdUser.id;
       if (this.ticketProfile.id === ticket.id) {
         this.ticketProfile.update(data);
         this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
@@ -179,6 +179,28 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     });
     this.sub.add(getOnChangeFieldTicket);
+    let onRemoveUpdate = this.ticketStateService.onRemoveUpdate.subscribe(res => {
+      this.ticketProfile.removeUpdate(res);
+    })
+    this.sub.add(onRemoveUpdate);
+    let onEditUpdate = this.ticketStateService.onEditUpdate.subscribe(newChange => {
+      let update = this.ticketProfile.updates.find(item => item.id === newChange.id),
+        attachments = newChange.attachments;
+      if (update) {
+        this.ticketProfile.setUpdate(newChange);
+      } else {
+        this.ticketProfile.addUpdate(newChange);
+      }
+      this.detailHeader.resetClosedBtn();
+      if (attachments && attachments.length) {
+        for (var i = 0; i < attachments.length; i++) {
+          this.ticketProfile.addAttachment(attachments[i]);
+        }
+      }
+      this.cd.detectChanges();
+      this.datePickerStateService.onInitReset();
+    })
+    this.sub.add(onEditUpdate);
     let getOnChangeUpdatesTicket = this.ticketStateService.getOnChangeUpdatesTicket().subscribe(newChange => {
       if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED' || newChange.action === 'UPDATE_EXPENSE_DELETED') {
         let update = this.ticketProfile.updates.find(item => item.id === newChange.data.id),

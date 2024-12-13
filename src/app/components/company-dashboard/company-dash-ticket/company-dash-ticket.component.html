@@ -1,16 +1,48 @@
 <div class="cmp-board-tickets cmn-box qt-df">
-  <div class="cmp-board-title-wrap qt-df">
-    <h6>Tickets</h6>
-    <div ngbDropdown class="qt-df qt-ai-c">
-      <div class="qt-icon icon__calendar qt-sz-20 qt-fs-0"></div>
-      <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>{{ticketFrequency}}</button>
-      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <button class="item" ngbDropdownItem (click)="getTicketGraph('Monthly')">Monthly</button>
-        <button class="item" ngbDropdownItem (click)="getTicketGraph('Weekly')">Weekly</button>
-        <button class="item" ngbDropdownItem (click)="getTicketGraph('Daily')">Daily</button>
-      </div>
-      <div class="qt-icon icon__arrow-down qt-sz-16 qt-fs-0"></div>
+    <div class="cmp-board-title-wrap qt-df">
+        <h6>Tickets</h6>
+        <div
+            ngbDropdown
+            class="qt-df qt-ai-c"
+        >
+            <div class="qt-icon icon__calendar qt-sz-20 qt-fs-0"></div>
+            <button
+                class="selected-item"
+                id="dropdownBasic1"
+                ngbDropdownToggle
+                [textContent]="ticketFrequency"
+            ></button>
+            <div
+                ngbDropdownMenu
+                aria-labelledby="dropdownBasic1"
+            >
+                <button
+                    class="item"
+                    ngbDropdownItem
+                    (click)="getTicketGraph('Monthly')"
+                >
+                    Monthly
+                </button>
+                <button
+                    class="item"
+                    ngbDropdownItem
+                    (click)="getTicketGraph('Weekly')"
+                >
+                    Weekly
+                </button>
+                <button
+                    class="item"
+                    ngbDropdownItem
+                    (click)="getTicketGraph('Daily')"
+                >
+                    Daily
+                </button>
+            </div>
+            <div class="qt-icon icon__arrow-down qt-sz-16 qt-fs-0"></div>
+        </div>
     </div>
-   </div>
-  <nvd3 [options]="lineChartOptions" [data]="lineData"></nvd3>
+    <nvd3
+        [options]="lineChartOptions"
+        [data]="lineData"
+    ></nvd3>
 </div>

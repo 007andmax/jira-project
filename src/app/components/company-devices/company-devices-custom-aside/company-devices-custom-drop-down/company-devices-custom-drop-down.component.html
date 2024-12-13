@@ -27,14 +27,14 @@
                     *ngIf="tag.name.length >= 30"
                     (mouseenter)="productTooltip.setContent(tag.name);productTooltip.show($event.target)"
                     (mouseleave)="productTooltip.hide()"
+                    [textContent]="tag.name"
                 >
-                    {{tag.name}}
                 </div>
                 <div
                     class="clip-text"
                     *ngIf="tag.name.length < 30"
+                    [textContent]="tag.name"
                 >
-                    {{tag.name}}
                 </div>
             </app-mat-chip>
             <input
