@@ -32,7 +32,6 @@ export class MergeTicketsItemComponent implements OnInit {
     return (find) ? find.name : '';
   }
   remove(event) {
-    console.log("remove");
     event.preventDefault();
     event.stopPropagation();
     if (this.primaryTicket && this.primaryTicket.id == this.item.id) return;

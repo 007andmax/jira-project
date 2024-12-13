@@ -64,7 +64,6 @@ export class MergeTicketsComponent implements OnInit, OnDestroy {
     this.step = 'STEP_1';
   }
   removeTicket(item) {
-    console.log("removeTicket");
     if (this.tickets.length == 2) return;
     let index = this.tickets.findIndex(ticket => ticket.id == item.id);
     if (index > -1) this.tickets.splice(index, 1);
@@ -86,6 +85,9 @@ export class MergeTicketsComponent implements OnInit, OnDestroy {
       this.listMergeTickets = [...this.listMergeTickets, ...this.tickets.filter(item => item.id !== this.primaryTicket.id).map(item => new MergeTickets({ ticketId: item.id, note: `Current ticket has been merged into the ticket with ID ${this.primaryTicket.number}`, subject: `Current ticket has been merged into the ticket with ID ${this.primaryTicket.number}` }))];
       this.step = "STEP_2";
     }
+  }
+  public trackById(index, item) {
+    return item.id;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

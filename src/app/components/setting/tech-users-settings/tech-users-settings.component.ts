@@ -238,7 +238,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
       techRole: data
     });
     this.techUserForm.controls["techRole"].setErrors(null);
-    console.log(this.techUserForm.controls["techRole"]);
   }
   getLastLoginAt(date) {
     return moment(date).format("HH:mm A, DD MMM");
@@ -549,7 +548,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   onCreateSubmit() {
     this.submitted = true;
     this.isEmailIdUnique = true;
-    console.log("this.techUserForm", this.techUserForm);
     // stop here if form is invalid
     if (this.techUserForm.invalid) {
       return;
@@ -711,7 +709,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
-    console.log("this.techUserForm", this.techUserForm);
     if (this.techUserForm.invalid) {
       return;
     }

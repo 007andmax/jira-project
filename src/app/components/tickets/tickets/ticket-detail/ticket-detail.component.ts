@@ -156,7 +156,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
         this.updateListAssignedUser();
         this.updateLisUpdateUser();
-        console.log("ticket", ticket);
         this.ticketTags.setSelectedTags(ticket.tags);
         this.changeCompany.selectItemWithOutChanges(this.companiesStateService.getCompanies().find(item => item.id == this.ticketProfile.companyId));
         if (isChangeCompany && this.ticketProfile.createdUser && !this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getPasswordsDocuments(this.ticketProfile.createdUser.id);
