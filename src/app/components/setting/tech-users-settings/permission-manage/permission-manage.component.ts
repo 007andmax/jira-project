@@ -35,6 +35,7 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
 
   companiesRelatedPermissions = [];
   userRelatedPermissions = [];
+  ticketRelatedPermissions = [];
   accountingRelatedPermissions = [];
   productsRelatedPermissions = [];
   passwordsRelatedPermissions = [];
@@ -54,6 +55,7 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
   ) {
     this.companiesRelatedPermissions = this.permissionManageService.getCompaniesRelatedPermissions();
     this.userRelatedPermissions = this.permissionManageService.getUserRelatedPermissions();
+    this.ticketRelatedPermissions = this.permissionManageService.getTicketRelatedPermissions();
     this.accountingRelatedPermissions = this.permissionManageService.getAccountingRelatedPermissions();
     this.productsRelatedPermissions = this.permissionManageService.getProductsRelatedPermissions();
     this.passwordsRelatedPermissions = this.permissionManageService.getPasswordsRelatedPermissions();
@@ -372,6 +374,9 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
         case 'VIEW_USERS':
           relatedPermissions = this.userRelatedPermissions;
           break;
+        case 'EDIT_TICKETS':
+          relatedPermissions = this.ticketRelatedPermissions;
+          break;
         case 'VIEW_ACCOUNTING':
           relatedPermissions = this.accountingRelatedPermissions;
           break;
@@ -452,6 +457,11 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
     } else if (
       role.permissions.indexOf('EDIT_CATEGORY') === -1 &&
       this.editCategoryDocumentsRelatedPermissions.indexOf(permission) > -1
+    ) {
+      return true;
+    } else if (
+      role.permissions.indexOf('EDIT_TICKETS') === -1 &&
+      this.ticketRelatedPermissions.indexOf(permission) > -1
     ) {
       return true;
     } else {
