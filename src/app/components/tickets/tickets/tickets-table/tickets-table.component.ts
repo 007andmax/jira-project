@@ -23,6 +23,7 @@ import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service
   providers: [TicketsListService]
 })
 export class TicketsTableComponent implements OnInit, OnDestroy {
+  // @ViewChild('header') header: UsersHeaderComponent;
   ticketsFilter: TicketsFilter = new TicketsFilter();
   showPreloader: boolean = true;
   public infiniteScrollDisabled = true;
@@ -55,7 +56,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     }
     let getOnAddTicket = this.ticketsStateService.getOnAddTicket().subscribe(data => {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data) && !this.tickets.find(item => item.id == data.id) && !(this.page_number == 0 && this.showPreloader)) {
-        this.tickets.unshift(data);
+        this.tickets.unshift(new Ticket(data));
         this.cd.detectChanges();
       }
     })
@@ -69,7 +70,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       if (data.assignedUser) ticket.setAssignedUserId(data.assignedUser.id);
       let findIndex = this.tickets.findIndex(item => item.id === ticket.id);
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
-        if (findIndex > -1) this.tickets[findIndex] = data;
+        if (findIndex > -1) this.tickets[findIndex] = ticket;
       } else {
         if (findIndex > -1) this.tickets.splice(findIndex, 1);
       }
@@ -86,6 +87,8 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.ticketsFilter = data;
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);
+      this.tickets.forEach(item => item.selected = false);
+      this.ticketsStateService.resetSelectedTicketsForMerge();
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -117,6 +120,14 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.toggleFilter = data;
     })
     this.sub.add(onToggleFilter);
+    let onResetlistTicketsPrioritiesForRemove = this.ticketsStateService.onResetlistTicketsPrioritiesForRemove.subscribe(res => {
+      this.tickets.forEach(item => item.selected = false);
+    })
+    this.sub.add(onResetlistTicketsPrioritiesForRemove);
+  }
+  onSelectTicket(ticket) {
+    this.tickets.find(item => item.id === ticket.id).selected = ticket.selected;
+    this.cd.detectChanges();
   }
   onToggleFilter(data) {
     this.ticketsStateService.changeToggleFilter(data);
@@ -161,6 +172,8 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.ticketsStateService.onToggleAddTicket();
   }
   ngOnDestroy(): void {
+    this.ticketsStateService.resetSelectedTicketsForMerge();
+    this.tickets.forEach(item => item.selected = false);
     if (this.customerPortalStateService.isCustomerPortal && this.ticketsRealTimeService.subsribeToTicketsCustomerUser) this.ticketsRealTimeService.subsribeToTicketsCustomerUser.unsubscribe();
     this.sub.unsubscribe();
   }

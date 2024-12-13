@@ -1,3 +1,4 @@
+import { Tag } from 'src/app/interfaces/tag/tag';
 import { TicketsPriority } from '../../setting/ticket-settings-page/tickets-priority/class/tickets-priority';
 import { MultiAssignedUsers } from './multi-assigned-users';
 
@@ -27,6 +28,8 @@ export class Ticket {
     userCompanies: Array<string>;
     customStatus: string;
     isCompanyDeleted: boolean;
+    selected: boolean = false;
+    tags: Array<Tag> = [];
     constructor(data) {
         this.assignedUserId = data.assignedUserId;
         this.attachmentsCount = data.attachmentsCount;
@@ -55,9 +58,16 @@ export class Ticket {
         this.userCompanies = data.userCompanies;
         this.customStatus = data.customStatus;
         this.isCompanyDeleted = data.isCompanyDeleted;
+        this.tags = data.tags;
     }
     public setAssignedUserId(id) {
         this.assignedUserId = id;
     }
-
+    public checkDisableSelect(list) {
+        if (this.status == 'IN_PROGRESS' || this.status == 'ON_HOLD' || this.status == null || this.customStatus != null) {
+            return (list.length > 0 ? list[0].companyId != this.companyId : false);
+        } else {
+            return true;
+        }
+    }
 }

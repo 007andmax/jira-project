@@ -235,6 +235,7 @@
                     [selectedCompanyId]="ticketProfile.company.id"
                 ></ticket-detail-linked-agents>
                 <ticket-detail-edit-tags
+                    #ticketTags
                     [ticketProfile]="ticketProfile"
                     [selectedTag]="ticketProfile.tags"
                     (tagsChange)="onChangeTags($event,false)"

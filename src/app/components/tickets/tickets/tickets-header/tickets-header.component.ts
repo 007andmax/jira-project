@@ -7,6 +7,7 @@ import { AppService } from 'src/app/states/app/app.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { TicketsFilter } from '../class/tickets-filter';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { Ticket } from '../../class/ticket';
 
 @Component({
   selector: 'app-tickets-header',
@@ -31,8 +32,9 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   count = 0;
   toggleFilter: boolean = false;
   countFilter: number = 0;
+  tickets: Array<Ticket> = [];
   selectedListType: TitleListType = new TitleListType('My Tickets', 'USERS');
-  constructor(private ticketsStateService: TicketsStateService,
+  constructor(public ticketsStateService: TicketsStateService,
     public appService: AppService,
     public customerPortalStateService: CustomerPortalStateService,
     public cd: ChangeDetectorRef,) { }
@@ -66,6 +68,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onToggleFilter);
   }
+  ocheck
   /**
 * @description Update value "countFilter" by which filters is use
 */
@@ -158,6 +161,10 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   onAddTicket() {
     this.ticketsStateService.onToggleAddTicket();
   }
+  mergeTicket() {
+    if (this.ticketsStateService.getTicketsForMerge().length > 1) this.ticketsStateService.mergeTicket();
+  }
+
   /**
 * @description Track list by "id" field, retrun field "id"
 * @param {Number} index - selected 
@@ -167,6 +174,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   public trackById(index, item) {
     return item.id;
   }
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

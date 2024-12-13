@@ -1,0 +1,129 @@
+<div
+    [hidden]="!opened"
+    class="qt-aside-modern qt-aside-modern--page-settings"
+>
+    <div
+        class="qt-aside-modern__header"
+        [ngClass]="{'merge-ticket-modern':step == 'STEP_2'}"
+    >
+        <div class="qt-aside-modern__header-info">
+            <div
+                *ngIf="step == 'STEP_2'"
+                class="close-btn qt-mb-8 qt-sz-20 qt-pointer"
+                (click)="back()"
+            >
+                <span class="qt-icon icon__arrow-back qt-ic-c qt-sz-20 qt-va-m qt-dib"></span>
+            </div>
+            <div class="qt-aside__title qt-mb-8">Merge Ticket</div>
+            <div
+                *ngIf="step == 'STEP_1'"
+                class="qt-aside__description qt-mb-8"
+                [textContent]="tickets.length + ' ticket(s) selected (interactions from secondary tickets will be added to the primary ticket).'"
+            ></div>
+            <div
+                *ngIf="step == 'STEP_1'"
+                class="qt-aside__description "
+            >
+                Please select a primary ticket to continue the merge process
+            </div>
+            <div
+                *ngIf="step == 'STEP_2'"
+                class="qt-aside__description"
+            >
+                Review tickets you're merging and edit notes from here
+            </div>
+        </div>
+    </div>
+    <div
+        class="qt-aside-modern__content"
+        *ngIf="step == 'STEP_1'"
+    >
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="tickets"
+            [ngForTrackBy]="trackById"
+        >
+            <app-merge-tickets-item
+                class="qt-mb-16"
+                [item]="item"
+                [listColors]="listColors"
+                [primaryTicket]="primaryTicket"
+                (onSetSelected)="selectPrimaryTicket($event)"
+                (onRemove)="removeTicket(item)"
+            ></app-merge-tickets-item>
+        </ng-template>
+    </div>
+    <div
+        class="qt-aside-modern__content qt-aside-modern__content-step2"
+        *ngIf="step == 'STEP_2'"
+    >
+        <div class="qt-df qt-ai-c qt-jc-sb qt-mb-12">
+            <div class="merge-ticket-title">Primary Ticket</div>
+            <button
+                class="qt-button --gray merge-ticket-edit-note qt-df"
+                (click)="primary.toggleEditNote()"
+            >
+                <span class="qt-icon icon__edit qt-sz-16 qt-bg-contain qt-dib qt-mr-4"></span>
+                <span>Edit Note</span>
+            </button>
+        </div>
+        <app-merge-tickets-edit-item
+            #primary
+            [listColors]="listColors"
+            [mergeTicket]="listMergeTickets[0]"
+            [tickets]="tickets"
+        ></app-merge-tickets-edit-item>
+        <div class="qt-mt-16">
+            <div class="qt-df qt-ai-c qt-jc-sb qt-mb-12">
+                <div
+                    class="merge-ticket-title"
+                    [textContent]="'Secondary Tickets (' + getNoPrimaryTickets().length + ')'"
+                ></div>
+            </div>
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="listMergeTickets"
+                [ngForTrackBy]="trackById"
+            >
+                <app-merge-tickets-edit-item
+                    class="qt-mb-12"
+                    #mergeTicket
+                    [listColors]="listColors"
+                    *ngIf="!item.isPrimary"
+                    [mergeTicket]="item"
+                    [tickets]="tickets"
+                ></app-merge-tickets-edit-item>
+            </ng-template>
+        </div>
+    </div>
+    <div class="qt-aside-modern__footer">
+        <div class="qt-df qt-w100">
+            <button
+                class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+                (click)="closed()"
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button qt-w100 qt-jc-c"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="changeStep()"
+                [ngClass]="{'--loading':addBtn.isBlock(),'--disabled':(step == 'STEP_1') ? !primaryTicket : false}"
+                [disabled]="(step == 'STEP_1') ? !primaryTicket : false"
+                placement="top"
+                container="body"
+                ngbTooltip="Please select a primary ticket"
+                [disableTooltip]="primaryTicket"
+            >
+                <span
+                    *ngIf="!addBtn.isBlock()"
+                    [textContent]="step == 'STEP_1' ? 'Continue' : 'Merge'"
+                ></span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+            </button>
+        </div>
+    </div>
+</div>
