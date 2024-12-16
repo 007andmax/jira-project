@@ -193,7 +193,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       })
   }
   onCheckDuplicatedService() {
-    if (this.contractsBlockTime.services.length === 0 || !this.contractsBlockTime.checkDuplicatedServices()) return;
+    if (this.contractsBlockTime.services.length === 0 || !this.contractsBlockTime.checkDuplicatedServices() || !this.contractsBlockTime.companyId) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
