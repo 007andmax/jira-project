@@ -162,7 +162,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
       })
   }
   onCheckDuplicatedBlockTimeServices() {
-    if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices()) return;
+    if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.companyId) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, null, this.contractsUserDevice.getBlockTimeServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
@@ -177,7 +177,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
       })
   }
   onCheckDuplicatedServiceContractServices() {
-    if (this.contractsUserDevice.serviceContractServices.length === 0 || !this.contractsUserDevice.checkDuplicatedServiceContractServices()) return;
+    if (this.contractsUserDevice.serviceContractServices.length === 0 || !this.contractsUserDevice.checkDuplicatedServiceContractServices() || !this.contractsUserDevice.companyId) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, null, this.contractsUserDevice.getServiceContractServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {

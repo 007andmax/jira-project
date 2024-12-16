@@ -85,9 +85,13 @@
                                         <div class="tab-pane__table-cell active-users-table__user-name">
                                             <div class="qt-df qt-ai-c">
                                                 <span
-                                                    class="tab-pane__table-avatar"
+                                                    class="tab-pane__table-avatar user-dp"
                                                     *ngIf="techUser.avatar !== null"
+                                                    [ngClass]="{'offline':techUser.online == false,
+                                                        'online':techUser.online == true && techUser.lockScreen == false,
+                                                    'away':techUser.online == true && techUser.lockScreen == true}"
                                                 >
+                                                    <span class="img-circle qt-sz-36 icon__user-avatar qt-bg-contain"></span>
                                                     <span class="user-tech-dp">
                                                         <img
                                                             *ngIf="techUser.isEmailVerified"
@@ -96,19 +100,14 @@
                             }}"
                                                             alt="user"
                                                         >
-                                                        <div
-                                                            class="tab-pane__table-avatar user-dp"
-                                                            [ngClass]="[techUser.online == false ? 'offline' : '', (techUser.online == true && techUser.lockScreen == false) ? 'online' : '', (techUser.online === true && techUser.lockScreen === true) ? 'away' : '']"
-                                                            style="background-color: #2BC7C6;"
-                                                            *ngIf="!techUser.isEmailVerified"
-                                                        >
-                                                            {{ displayFrstLstChar(techUser) }}
-                                                        </div>
                                                     </span>
                                                 </span>
                                                 <span
-                                                    class="tab-pane__table-avatar user-dp online"
+                                                    class="tab-pane__table-avatar user-dp"
                                                     *ngIf="techUser.avatar === null"
+                                                    [ngClass]="{'offline':techUser.online == false,
+                                                        'online':techUser.online == true && techUser.lockScreen == false,
+                                                    'away':techUser.online == true && techUser.lockScreen == true}"
                                                 >
                                                     <span class="img-circle qt-sz-36 icon__user-avatar qt-bg-contain"></span>
                                                 </span>

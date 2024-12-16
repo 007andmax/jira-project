@@ -286,6 +286,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
           this.IdList = users.map(({ id }) => id);
           if (techUsers) {
             this.techUsers = techUsers.map(item => new User(item));
+            console.log("this.techUsers", this.techUsers);
             this.techUserIdList = techUsers.map(({ id }) => id);
             var IdList1 = [];
             if (this.techUserIdList) {

@@ -48,6 +48,7 @@ export class User {
     jobTypeId: string;
     userEmailNotifications: UserEmailNotifications;
     customerCompaniesInfo: Array<UserCustomerCompaniesInfo> = [];
+    lockScreen: boolean;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
