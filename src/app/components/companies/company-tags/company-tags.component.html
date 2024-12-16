@@ -81,7 +81,10 @@
                         >
                         <span></span>
                         <div class="text-content">
-                            <div class="name">{{item.word}}</div>
+                            <div
+                                class="name"
+                                [textContent]="item.word"
+                            ></div>
                             <div
                                 class="description"
                                 *ngIf="item.defaultTag && item.defaultTag === 'USER_TAG'"

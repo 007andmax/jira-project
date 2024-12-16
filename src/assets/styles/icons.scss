@@ -237,6 +237,13 @@ Example:
   &__badge-bill-ticketed {
     background-image: url("/assets/img/icons/badge-bill-ticketed.svg");
   }
+  &__primary-checked {
+    background-image: url("/assets/img/icons/primary-checked.svg");
+  }
+
+  &__primary-unchecked {
+    background-image: url("/assets/img/icons/primary-unchecked.svg");
+  }
   // END Color Icon
 
   // Start Monochrome image
@@ -485,6 +492,9 @@ Example:
   }
   &__filter {
     mask-image: url("/assets/img/icons/filter.svg");
+  }
+  &__merge {
+    mask-image: url("/assets/img/icons/merge.svg");
   }
   &__commissions {
     mask-image: url("/assets/img/icons/commissions.svg");
@@ -791,5 +801,8 @@ Example:
   }
   &__background {
     background-color: $background;
+  }
+  &__background-unset {
+    background-color: unset;
   }
 }

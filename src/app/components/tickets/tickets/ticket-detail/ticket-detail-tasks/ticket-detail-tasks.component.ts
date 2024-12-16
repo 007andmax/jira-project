@@ -57,10 +57,10 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
         let index = this.list.findIndex(item => item.id == data.data.id);
         this.list[index] = new TicketProfileTask(data.data);
       }
-      if (data.action == "TASK_SAVED") this.list.push(new TicketProfileTask(data.data));
+      if (data.action == "TASK_SAVED" && !this.list.some(item => item.id == data.data.id)) this.list.push(new TicketProfileTask(data.data));
       if (data.action == "TASK_REMOVED") {
         let index = this.list.findIndex(item => item.id == data.data);
-        this.list.splice(index, 1);
+        if (index > -1) this.list.splice(index, 1);
       }
       this.ticketStateService.setListTasks(this.list);
       this.cd.detectChanges();
@@ -104,8 +104,10 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.message = `Are you sure you want to delete this task?`;
   }
   onDelete() {
-    this.ticketsService.removeTicketTask(this.ticketStateService.getTaskForRemove().id).subscribe(data => {
-
+    let id = JSON.parse(JSON.stringify(this.ticketStateService.getTaskForRemove().id));
+    this.ticketsService.removeTicketTask(id).subscribe(data => {
+      let index = this.list.findIndex(item => item.id == id);
+      if (index > -1) this.list.splice(index, 1);
     })
   }
   onAddTicketTask() {
@@ -115,16 +117,23 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
       catchError(error => of(undefined))).subscribe(data => {
         this.showAdd = false;
         this.addTask = new TicketProfileTask();
+        if (!this.list.some(item => item.id == data.id)) this.list.push(new TicketProfileTask(data));
       }, err => {
         setTimeout(() => this.addTaskBtn.setInit(true), 2000);
       })
   }
   onEditTicketTask(item) {
     if (item.isInitEdit) {
-      if (item.subject.length === 0) return;
+      if (item.subject.length === 0 || item.isInitRequest) return;
+      item.setIsInitRequest(true);
       this.ticketsService.editTicketTask(item.getDataForUpdate()).pipe(map((res) => res),
         catchError(error => of(undefined))).subscribe(data => {
           item.onInitEdit(false);
+          let index = this.list.findIndex(item => item.id == data.id);
+          this.list[index] = new TicketProfileTask(data);
+          item.setIsInitRequest(false);
+        }, err => {
+          item.setIsInitRequest(false);
         })
     }
   }

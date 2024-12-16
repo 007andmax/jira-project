@@ -46,7 +46,7 @@
                                             class="edit-field"
                                             [attr.data-tooltip]="tooltip(20,asset.Name)"
                                         >
-                                            <div>{{ displayValue(20,asset.Name) }}</div>
+                                            <div [textContent]="displayValue(20,asset.Name)"></div>
                                         </span>
                                     </li>
                                     <li style="width:28%">
@@ -69,7 +69,10 @@
                                             class="edit-field"
                                             [attr.data-tooltip]="tooltip(27,caption)"
                                         >
-                                            <div style="width: 140%;">{{ displayValue(27,caption) }}</div>
+                                            <div
+                                                style="width: 140%;"
+                                                [textContent]="displayValue(27,caption)"
+                                            ></div>
                                         </span>
                                     </li>
                                     <li>
@@ -157,14 +160,12 @@
                                     <li>
                                         <span>Agent Version</span>
                                         <span class="edit-field">
-                                            <div>{{ asset.AgentVersion }}</div>
+                                            <div [textContent]="asset.AgentVersion"></div>
                                         </span>
                                     </li>
                                     <li style="width:28%">
                                         <span>Last Reboot</span>
-                                        <div>
-                                            {{ asset.LastRebootDate | date: DateTimeFormat }}
-                                        </div>
+                                        <div [textContent]="asset.LastRebootDate | date: DateTimeFormat"></div>
                                     </li>
                                     <li style="width:37%">
                                         <span>Serial Number</span>
@@ -179,21 +180,9 @@
                                     </li>
                                     <li>
                                         <span>Date</span>
-                                        <div>
-                                            {{asset.VersionInstallDate | date: 'dd/MM/yyyy'}}
-                                        </div>
+                                        <div [textContent]="asset.VersionInstallDate | date: 'dd/MM/yyyy'"></div>
                                     </li>
                                 </ul>
-
-
-
-
-
-
-
-
-
-
                                 <ul
                                     class="list-unstyled"
                                     *ngIf="!isNonAgentDevice"
@@ -204,7 +193,7 @@
                                             class="edit-field"
                                             [attr.data-tooltip]="tooltip(20,asset.Name)"
                                         >
-                                            <div>{{ displayValue(20,asset.Name) }}</div>
+                                            <div [textContent]="displayValue(20,asset.Name)"></div>
                                         </span>
                                     </li>
                                     <li style="width:28%">
@@ -287,9 +276,7 @@
                                     </li>
                                     <li style="width:28%">
                                         <span>Last Reboot</span>
-                                        <div>
-                                            {{ asset.LastRebootDate | date: DateTimeFormat }}
-                                        </div>
+                                        <div [textContent]="asset.LastRebootDate | date: DateTimeFormat"></div>
                                     </li>
                                 </ul>
                             </div>
@@ -308,10 +295,11 @@
                                         *ngFor="let drive of logicalDisk"
                                     >
                                         <div
-                                            class="progress-circle p{{ drive.percent }}"
+                                            [ngClass]="'p' + drive.percent"
+                                            class="progress-circle "
                                             [class.over50]="drive.percent > 50"
                                         >
-                                            <span>{{ drive.percent }}%</span>
+                                            <span [textContent]="drive.percent + '%'"></span>
                                             <div class="left-half-clipper">
                                                 <div
                                                     class="first50-bar"
@@ -336,28 +324,16 @@
                                             </div>
                                         </div>
                                         <div class="drive-status">
-                                            <span class="drive-name">
-                                                {{ drive.Caption }} ({{ drive.FileSystem }} on drive)
+                                            <span
+                                                class="drive-name"
+                                                [textContent]="drive.Caption + ' ('+ drive.FileSystem+' on drive)'"
+                                            >
                                             </span>
-
-
-
-
-
-
-
-
-
-
-
-
-
                                             <span
                                                 class="drive-limit"
                                                 *ngIf="drive.FreeSpace != '' && drive.Size != ''"
+                                                [textContent]="diskSpaceDiff(drive.Size, drive.FreeSpace) +'GB /' + convertToGB(drive.Size) + 'GB'"
                                             >
-                                                {{ diskSpaceDiff(drive.Size, drive.FreeSpace) }}GB /
-                        {{ convertToGB(drive.Size) }}GB
                                             </span>
                                         </div>
                                     </li>
@@ -375,10 +351,11 @@
                                         *ngFor="let network of networkDisk"
                                     >
                                         <div
-                                            class="progress-circle p{{ network.percent }}"
+                                            [ngClass]="'p'+ network.percent"
+                                            class="progress-circle "
                                             [class.over50]="network.percent > 50"
                                         >
-                                            <span>{{ network.percent }}%</span>
+                                            <span [textContent]="network.percent + '%'"></span>
                                             <div class="left-half-clipper">
                                                 <div
                                                     class="first50-bar"
@@ -403,34 +380,25 @@
                                             </div>
                                         </div>
                                         <div class="drive-status">
-                                            <span class="drive-name">
-                                                {{ network.Caption }} ({{ network.FileSystem }} on drive)
+                                            <span
+                                                class="drive-name"
+                                                [textContent]="network.Caption + ' ('+ network.FileSystem +' on drive)'"
+                                            >
                                             </span>
-
-
-
-
-
-
-
-
-
-
-
-
-
                                             <span
                                                 class="drive-limit"
                                                 *ngIf="network.FreeSpace != '' && network.Size != ''"
+                                                [textContent]="diskSpaceDiff(network.Size, network.FreeSpace) +'GB /' + convertToGB(network.Size) +'GB'"
                                             >
-                                                {{ diskSpaceDiff(network.Size, network.FreeSpace) }}GB /
-                      {{ convertToGB(network.Size) }}GB
                                             </span>
                                         </div>
                                     </li>
                                 </ul>
                                 <div *ngIf="logicalDisk?.length == 0">
-                                    <span class="msg">{{'No Disk'}}</span>
+                                    <span
+                                        class="msg"
+                                        [textContent]="'No Disk'"
+                                    ></span>
                                 </div>
                             </div>
                             <div
@@ -739,6 +707,25 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <div
                     class="sidebar-popup note"
                     [class.opened]="editNote"
@@ -834,6 +821,25 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 <button
                                     type="button"
                                     class="btn btn-danger pull-right"
@@ -853,6 +859,25 @@
     class="loading"
     *ngIf="loading"
 ></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

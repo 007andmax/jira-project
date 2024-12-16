@@ -119,7 +119,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
           Validators.pattern(emailPattern)
         ])
       ],
-      techRole: [''],
+      techRole: ['', [Validators.required]],
       newDevice: [''],
       userEmailNotificationId: [''],
       ticketCreated: [''],
@@ -237,6 +237,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.techUserForm.patchValue({
       techRole: data
     });
+    this.techUserForm.controls["techRole"].setErrors(null);
   }
   getLastLoginAt(date) {
     return moment(date).format("HH:mm A, DD MMM");
@@ -359,7 +360,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.techUserForm.reset();
     if (this.create) {
       this.techUserForm.patchValue({
-        techRole: this.techRoles[0],
         userEmailNotifications: {
           newDevice: false,
           ticketCreated: false,

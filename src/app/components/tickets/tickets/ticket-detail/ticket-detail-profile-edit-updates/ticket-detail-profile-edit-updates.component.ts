@@ -31,7 +31,8 @@ export class TicketDetailProfileEditUpdatesComponent implements OnInit {
       if (!this.selectProducts.product.valdiateSaleCost) return;
       this.isUpdate = true;
       this.updateBtn.setDisabled(true);
-      this.ticketsService.updateExpense(this.selectProducts.product.getDateForUpdate(this.update.id)).subscribe(data => {
+      this.ticketsService.updateExpense(this.selectProducts.product.getDateForUpdate(this.update.id)).subscribe(res => {
+        this.ticketStateService.setEditUpdate(res);
         this.isUpdate = false;
         this.updateBtn.setDisabled(false);
         this.close();
@@ -40,7 +41,8 @@ export class TicketDetailProfileEditUpdatesComponent implements OnInit {
     if (this.update.type === "SERVICE") {
       this.isUpdate = true;
       this.updateBtn.setDisabled(true);
-      this.ticketsService.updateExpense(this.selectServices.service.getDateForUpdate(this.update.id)).subscribe(data => {
+      this.ticketsService.updateExpense(this.selectServices.service.getDateForUpdate(this.update.id)).subscribe(res => {
+        this.ticketStateService.setEditUpdate(res);
         //  this.onEdit.emit(null);
         this.isUpdate = false;
         this.updateBtn.setDisabled(false);

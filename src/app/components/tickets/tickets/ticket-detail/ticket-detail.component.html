@@ -35,7 +35,8 @@
                     <ticket-detail-info-status [ticketProfile]="ticketProfile"></ticket-detail-info-status>
                     <div class="ticket-detail-page-title qt-mt-10 qt-mb-16 qt-mr-24 qt-ml-24">
                         <div
-                            class="ticket-detail-page-title__text pointer"
+                            class="ticket-detail-page-title__text "
+                            [ngClass]="{'pointer':ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)}"
                             [hidden]="modeSubject === 'edit'"
                             (click)="toggleSubject()"
                         >
@@ -45,7 +46,7 @@
                             class
                             [hidden]="modeSubject === 'view'"
                             appClickOtside
-                            [init]="modeSubject === 'edit'"
+                            [init]="modeSubject === 'edit' && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                             [class]="'.ticket-detail-page-title'"
                             (onOutSide)="toggleSubject()"
                         >
@@ -144,9 +145,9 @@
                                 >
                                     <div
                                         class="ticket-detail-page__editor"
-                                        [ngClass]="{'no-edit-note':!getPermissions('EDIT_TICKETS'),'pointer':ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)}"
+                                        [ngClass]="{'no-edit-note':!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null),'pointer':ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)}"
                                         (blur)="modeDescription = 'edit'"
-                                        [attr.contenteditable]="getPermissions('EDIT_TICKETS') && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+                                        [attr.contenteditable]="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                                         id="ticket-note"
                                         placeholder="Enter description here"
                                     ></div>
@@ -219,7 +220,7 @@
                             [tooltipMessage]="'You can set a new company for the ticket unless the ticket contains at least one product/service update.'"
                             [selectedCustomerCompany]="ticketProfile.selectedCustomerCompany"
                             [isShowTooltip]="true"
-                            [isDisabled]="getCompany(ticketProfile.company.id).isUnknown || customerPortalStateService.isCustomerPortal"
+                            [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || getCompany(ticketProfile.company.id) && getCompany(ticketProfile.company.id).isUnknown || customerPortalStateService.isCustomerPortal"
                             (onSelectedItem)="onSelectUser($event.user,$event.customerCompany)"
                         ></company-users-drop-down>
                     </div>
@@ -234,6 +235,7 @@
                     [selectedCompanyId]="ticketProfile.company.id"
                 ></ticket-detail-linked-agents>
                 <ticket-detail-edit-tags
+                    #ticketTags
                     [ticketProfile]="ticketProfile"
                     [selectedTag]="ticketProfile.tags"
                     (tagsChange)="onChangeTags($event,false)"

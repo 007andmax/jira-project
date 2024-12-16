@@ -20,7 +20,7 @@
                 ngbTooltip="Record payment"
                 container="body"
             >
-              <div class="qt-sz-20 qt-icon icon__payment-received"></div>
+                <div class="qt-sz-20 qt-icon icon__payment-received"></div>
             </div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
@@ -30,7 +30,7 @@
                 ngbTooltip="Send"
                 container="body"
             >
-              <div class="qt-sz-20 qt-icon icon__email-send"></div>
+                <div class="qt-sz-20 qt-icon icon__email-send"></div>
             </div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
@@ -40,7 +40,7 @@
                 ngbTooltip="Resend with PDF"
                 container="body"
             >
-              <div class="qt-sz-20 qt-icon icon__resend"></div>
+                <div class="qt-sz-20 qt-icon icon__resend"></div>
             </div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
@@ -49,7 +49,7 @@
                 ngbTooltip="Print"
                 container="body"
             >
-              <div class="qt-sz-20 qt-icon icon__print"></div>
+                <div class="qt-sz-20 qt-icon icon__print"></div>
             </div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
@@ -58,7 +58,7 @@
                 ngbTooltip="Download"
                 container="body"
             >
-              <div class="qt-sz-20 qt-icon icon__download"></div>
+                <div class="qt-sz-20 qt-icon icon__download"></div>
             </div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
@@ -78,7 +78,7 @@
                 ngbTooltip="Refund payment"
                 container="body"
             >
-              <div class="qt-icon icon__return-money qt-sz-20"></div>
+                <div class="qt-icon icon__return-money qt-sz-20"></div>
             </div>
             <div
                 class="qt-icon icon__close qt-aside-modern__header-close"
@@ -129,7 +129,7 @@
                 >
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 qt-df qt-ai-c qt-jc-c">
-                          <div class="qt-icon icon__billing qt-sz-20"></div>
+                            <div class="qt-icon icon__billing qt-sz-20"></div>
                         </div>
                         <div>
                             <div class="qt-fs-12 qt-fw-600 qt-lh-133  qt-color-gray-900 ">Create Invoice</div>
@@ -141,7 +141,7 @@
                     </div>
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 qt-df qt-ai-c qt-jc-c">
-                          <div class="qt-icon icon__email-send qt-sz-20"></div>
+                            <div class="qt-icon icon__email-send qt-sz-20"></div>
                         </div>
                         <div>
                             <div class="qt-fs-12 qt-fw-600 qt-lh-133  qt-color-gray-900 ">Send Invoice</div>
@@ -150,7 +150,7 @@
                     </div>
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 qt-df qt-ai-c qt-jc-c">
-                          <div class="qt-icon icon__show qt-sz-20"></div>
+                            <div class="qt-icon icon__show qt-sz-20"></div>
                         </div>
                         <div>
                             <div class="qt-fs-12 qt-fw-600 qt-lh-133  qt-color-gray-900 ">Read on</div>
@@ -163,7 +163,7 @@
                     </div>
                     <div class="qt-df qt-ai-c invoice-status-timeline__steps-info">
                         <div class="step-citcle qt-mr-5 qt-df qt-ai-c qt-jc-c">
-                          <div class="qt-icon icon__taxes qt-sz-20"></div>
+                            <div class="qt-icon icon__taxes qt-sz-20"></div>
                         </div>
                         <div>
                             <div class="qt-fs-12 qt-fw-600 qt-lh-133  qt-color-gray-900 ">Get paid</div>
@@ -277,7 +277,10 @@
                     >
                         <div class="qt-mb-16">
                             <div class="invoice-preview__item-header qt-color-gray-900 qt-df qt-pt-8 qt-pb-8 qt-pl-12 qt-pr-12 qt-ai-c">
-                                <div class="invoice-preview__item-header-number qt-fs-10 qt-fw-600 qt-mr-16 qt-lh-12">#Ticket {{ticket.number}}</div>
+                                <div
+                                    class="invoice-preview__item-header-number qt-fs-10 qt-fw-600 qt-mr-16 qt-lh-12"
+                                    [textContent]="'#Ticket ' + ticket.number"
+                                ></div>
                                 <div class="invoice-preview__item-header-date qt-fs-12 qt-mr-12 qt-lh-133">
                                     <span class="qt-fs-11 qt-mr-4 qt-fw-600 qt-lh-127">Date</span>
                                     {{getDate(ticket.closedAt)}}

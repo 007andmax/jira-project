@@ -252,7 +252,7 @@
                             &.updated {
                                 figure {
                                     &::after {
-                                        background: url('../../../../assets/img/icons/status-green.svg') no-repeat center;
+                                        background: url('/assets/img/icons/status-green.svg') no-repeat center;
                                     }
                                 }
                             }
@@ -260,7 +260,7 @@
                             &.alert {
                                 figure {
                                     &::after {
-                                        background: url('../../../../assets/img/icons/warning.svg') no-repeat center;
+                                        background: url('/assets/img/icons/warning.svg') no-repeat center;
                                     }
                                 }
                             }
@@ -405,7 +405,7 @@
                                     left: -6px;
                                     width: 12px;
                                     height: 12px;
-                                    background: url('../../../../assets/img/icons/timeline.svg') no-repeat center;
+                                    background: url('/assets/img/icons/timeline.svg') no-repeat center;
                                     top: 0;
                                     z-index: 1;
                                 }

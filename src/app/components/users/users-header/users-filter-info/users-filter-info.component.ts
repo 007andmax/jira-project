@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { UserGlobalFilter } from '../../class/user-global-filters';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
@@ -8,11 +8,12 @@ import { Subscription } from 'rxjs';
   templateUrl: './users-filter-info.component.html',
   styleUrls: ['./users-filter-info.component.scss']
 })
-export class UsersFilterInfoComponent implements OnInit {
+export class UsersFilterInfoComponent implements OnInit, OnDestroy {
   globalFilter: UserGlobalFilter = new UserGlobalFilter();
   sub: Subscription = new Subscription();
   constructor(public usersStateService: UsersStateService,
     private cd: ChangeDetectorRef,) { }
+
 
   ngOnInit() {
     let onInitGlobalFilter = this.usersStateService.onInitGlobalFilter.subscribe((data: UserGlobalFilter) => {
@@ -21,8 +22,13 @@ export class UsersFilterInfoComponent implements OnInit {
     this.sub.add(onInitGlobalFilter);
     let getOnChangeTypeFilter = this.usersStateService.onClearGlobalFilter.subscribe(type => {
       this.globalFilter = new UserGlobalFilter();
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
     this.sub.add(getOnChangeTypeFilter);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

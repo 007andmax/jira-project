@@ -235,7 +235,9 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
     this.sub.add(onInstallWindowsUpdates);
     this.todaysDate = Date.now();
   }
-
+  public parseTitleAndName(assetData) {
+    return assetData.Title || assetData.Name;
+  }
   getCountSelected() {
     return this.assetList.filter(item => item.selected).length;
   }

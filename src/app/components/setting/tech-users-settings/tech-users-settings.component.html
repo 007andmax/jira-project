@@ -85,9 +85,13 @@
                                         <div class="tab-pane__table-cell active-users-table__user-name">
                                             <div class="qt-df qt-ai-c">
                                                 <span
-                                                    class="tab-pane__table-avatar"
+                                                    class="tab-pane__table-avatar user-dp"
                                                     *ngIf="techUser.avatar !== null"
+                                                    [ngClass]="{'offline':techUser.online == false,
+                                                        'online':techUser.online == true && techUser.lockScreen == false,
+                                                    'away':techUser.online == true && techUser.lockScreen == true}"
                                                 >
+                                                    <span class="img-circle qt-sz-36 icon__user-avatar qt-bg-contain"></span>
                                                     <span class="user-tech-dp">
                                                         <img
                                                             *ngIf="techUser.isEmailVerified"
@@ -96,19 +100,14 @@
                             }}"
                                                             alt="user"
                                                         >
-                                                        <div
-                                                            class="tab-pane__table-avatar user-dp"
-                                                            [ngClass]="[techUser.online == false ? 'offline' : '', (techUser.online == true && techUser.lockScreen == false) ? 'online' : '', (techUser.online === true && techUser.lockScreen === true) ? 'away' : '']"
-                                                            style="background-color: #2BC7C6;"
-                                                            *ngIf="!techUser.isEmailVerified"
-                                                        >
-                                                            {{ displayFrstLstChar(techUser) }}
-                                                        </div>
                                                     </span>
                                                 </span>
                                                 <span
-                                                    class="tab-pane__table-avatar user-dp online"
+                                                    class="tab-pane__table-avatar user-dp"
                                                     *ngIf="techUser.avatar === null"
+                                                    [ngClass]="{'offline':techUser.online == false,
+                                                        'online':techUser.online == true && techUser.lockScreen == false,
+                                                    'away':techUser.online == true && techUser.lockScreen == true}"
                                                 >
                                                     <span class="img-circle qt-sz-36 icon__user-avatar qt-bg-contain"></span>
                                                 </span>
@@ -410,12 +409,13 @@
             </div>
         </div>
         <form [formGroup]="techUserForm">
-            <div class="qt-input-block qt-input-line">
+            <div class="qt-input-block qt-input-line --required">
                 <label class="qt-input-block__label">First Name</label>
                 <input
                     type="text"
                     class="qt-input-block__input"
                     formControlName="firstName"
+                    [ngClass]="{'--input-error' : submitted && f.firstName.errors}"
                     placeholder="Enter First Name"
                 >
                 <div
@@ -427,13 +427,14 @@
                     <div *ngIf="f.firstName.errors.maxlength">First name is too large.</div>
                 </div>
             </div>
-            <div class="qt-input-block qt-input-line">
+            <div class="qt-input-block qt-input-line --required">
                 <label class="qt-input-block__label">Last Name</label>
                 <input
                     type="text"
                     class="form-input"
                     formControlName="lastName"
                     placeholder="Enter Last Name"
+                    [ngClass]="{'--input-error' : submitted && f.lastName.errors}"
                 >
                 <div
                     *ngIf="submitted && f.lastName.errors"
@@ -443,7 +444,7 @@
                     <div *ngIf="f.lastName.errors.maxlength">Last name is too large.</div>
                 </div>
             </div>
-            <div class="qt-input-block qt-input-line">
+            <div class="qt-input-block qt-input-line --required">
                 <label class="qt-input-block__label">Email</label>
                 <input
                     type="text"
@@ -452,6 +453,7 @@
                     #primaryEmail
                     (blur)="isEmailUnique(primaryEmail.value)"
                     placeholder="Enter Email Address"
+                    [ngClass]="{'--input-error' : submitted && f.primaryEmail.errors}"
                 >
                 <label
                     *ngIf="!isEmailIdUnique"
@@ -467,7 +469,7 @@
                     <div *ngIf="f.primaryEmail.errors.pattern">Email must be a valid email address</div>
                 </div>
             </div>
-            <div class="qt-input-block qt-input-line">
+            <div class="qt-input-block qt-input-line --required">
                 <label class="qt-input-block__label">Set Tech User Role</label>
                 <app-drop-down
                     [class]="['qt-select-input-40']"
@@ -475,6 +477,8 @@
                     [placeholder]="'Select'"
                     [sort]="false"
                     [isBlockClear]="true"
+                    [validate]="submitted && f.techRole.status == 'VALID' || !submitted"
+                    [errorMessage]="'Set tech user role'"
                     (onSelectedItem)="onChangeRole($event)"
                 >
                 </app-drop-down>
@@ -705,12 +709,13 @@
             </div>
         </div>
         <form [formGroup]="techUserForm">
-            <div class="qt-input-block qt-input-line">
+            <div class="qt-input-block qt-input-line --required">
                 <label class="qt-input-block__label">First Name</label>
                 <input
                     type="text"
                     formControlName="firstName"
                     class="qt-input-block__input"
+                    [ngClass]="{'--input-error' : submitted && f.firstName.errors}"
                 >
                 <div
                     *ngIf="submitted && f.firstName.errors"
@@ -721,12 +726,13 @@
                     <div *ngIf="f.firstName.errors.maxlength">First name is too large.</div>
                 </div>
             </div>
-            <div class="qt-input-block qt-input-line">
+            <div class="qt-input-block qt-input-line --required">
                 <label class="qt-input-block__label">Last Name</label>
                 <input
                     type="text"
                     class="qt-input-block__input"
                     formControlName="lastName"
+                    [ngClass]="{'--input-error' : submitted && f.lastName.errors}"
                 >
                 <div
                     *ngIf="submitted && f.lastName.errors"
@@ -737,7 +743,7 @@
                     <div *ngIf="f.lastName.errors.maxlength">Last name is too large.</div>
                 </div>
             </div>
-            <div class="qt-input-block qt-input-line">
+            <div class="qt-input-block qt-input-line --required">
                 <label class="qt-input-block__label">Email</label>
                 <input
                     type="text"
@@ -746,6 +752,7 @@
                     #primaryEmail
                     (blur)="isEmailUnique(primaryEmail.value)"
                     formControlName="primaryEmail"
+                    [ngClass]="{'--input-error' : submitted && f.primaryEmail.errors}"
                 >
                 <div
                     *ngIf="submitted && f.primaryEmail.errors"
@@ -761,7 +768,7 @@
                     This email already occupied.
                 </label>
             </div>
-            <div class="qt-input-block qt-input-line">
+            <div class="qt-input-block qt-input-line --required">
                 <label class="qt-input-block__label">Set Tech User Role</label>
                 <app-drop-down
                     [class]="['qt-select-input-40']"
@@ -770,6 +777,8 @@
                     [placeholder]="'Select'"
                     [sort]="false"
                     [isBlockClear]="true"
+                    [validate]="submitted && f.techRole.status == 'VALID' || !submitted"
+                    [errorMessage]="'Set tech user role'"
                     (onSelectedItem)="onChangeRole($event)"
                 >
                 </app-drop-down>

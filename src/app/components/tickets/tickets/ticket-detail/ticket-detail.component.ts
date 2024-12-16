@@ -42,6 +42,7 @@ import { TicketDetailContactDetailsComponent } from './ticket-detail-contact-det
 import { TicketDetailPasswordsDetailsComponent } from './ticket-detail-passwords/ticket-detail-passwords-details/ticket-detail-passwords-details.component';
 import { TicketDetailDocumentsDetailsComponent } from './ticket-detail-documents/ticket-detail-documents-details/ticket-detail-documents-details.component';
 import { TicketDetailTicketsDetailsComponent } from './ticket-detail-tickets/ticket-detail-tickets-details/ticket-detail-tickets-details.component';
+import { TicketDetailEditTagsComponent } from './ticket-detail-edit-tags/ticket-detail-edit-tags.component';
 
 @Component({
   selector: 'ticket-detail',
@@ -63,6 +64,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   @ViewChild('passwordRecordDetail', { static: false }) passwordRecordDetail: TicketDetailPasswordsDetailsComponent;
   @ViewChild('documentsRecordDetail', { static: false }) documentsRecordDetail: TicketDetailDocumentsDetailsComponent;
   @ViewChild('ticketsDetailList', { static: false }) ticketsDetailList: TicketDetailTicketsDetailsComponent;
+  @ViewChild('ticketTags', { static: true }) ticketTags: TicketDetailEditTagsComponent;
   isInit: boolean = false;
   ticketProfile: TicketProfile = new TicketProfile();
   showFormUpdate: boolean = false;
@@ -148,12 +150,13 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     let getOnUpdateTicket = this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       let ticket = new Ticket(data);
       let isChangeCompany = data.companyId != this.ticketProfile.companyId;
-      let isChangeUser = data.createdUser.id != this.ticketProfile.createdUser.id;
+      let isChangeUser = data.createdUser && data.createdUser.id != this.ticketProfile.createdUser.id;
       if (this.ticketProfile.id === ticket.id) {
         this.ticketProfile.update(data);
         this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
         this.updateListAssignedUser();
         this.updateLisUpdateUser();
+        this.ticketTags.setSelectedTags(ticket.tags);
         this.changeCompany.selectItemWithOutChanges(this.companiesStateService.getCompanies().find(item => item.id == this.ticketProfile.companyId));
         if (isChangeCompany && this.ticketProfile.createdUser && !this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getPasswordsDocuments(this.ticketProfile.createdUser.id);
         if (isChangeUser && !this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getDevicesByCompany(this.ticketProfile.company.id);
@@ -179,6 +182,28 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     });
     this.sub.add(getOnChangeFieldTicket);
+    let onRemoveUpdate = this.ticketStateService.onRemoveUpdate.subscribe(res => {
+      this.ticketProfile.removeUpdate(res);
+    })
+    this.sub.add(onRemoveUpdate);
+    let onEditUpdate = this.ticketStateService.onEditUpdate.subscribe(newChange => {
+      let update = this.ticketProfile.updates.find(item => item.id === newChange.id),
+        attachments = newChange.attachments;
+      if (update) {
+        this.ticketProfile.setUpdate(newChange);
+      } else {
+        this.ticketProfile.addUpdate(newChange);
+      }
+      this.detailHeader.resetClosedBtn();
+      if (attachments && attachments.length) {
+        for (var i = 0; i < attachments.length; i++) {
+          this.ticketProfile.addAttachment(attachments[i]);
+        }
+      }
+      this.cd.detectChanges();
+      this.datePickerStateService.onInitReset();
+    })
+    this.sub.add(onEditUpdate);
     let getOnChangeUpdatesTicket = this.ticketStateService.getOnChangeUpdatesTicket().subscribe(newChange => {
       if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED' || newChange.action === 'UPDATE_EXPENSE_DELETED') {
         let update = this.ticketProfile.updates.find(item => item.id === newChange.data.id),
@@ -377,7 +402,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     }
   }
   toggleSubject() {
-    if (!this.getPermissions('EDIT_TICKETS')) return;
+    if (!this.ticketsPermissionsService.isActionVisible('update', this.ticketProfile, null, null)) return;
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-subject").value;
     var textOld = this.ticketProfile.subject;
     this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';

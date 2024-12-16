@@ -39,6 +39,11 @@
 .payments-report__col-date {
     width: 120px;
 }
-.payments-report__col-invoice,.payments-report__col-amount {
+.payments-report__col-amount {
     width: 150px;
+}
+.payments-report__col-invoice {
+    min-width: 150px;
+    max-width: 250px;
+    white-space: break-spaces !important;
 }

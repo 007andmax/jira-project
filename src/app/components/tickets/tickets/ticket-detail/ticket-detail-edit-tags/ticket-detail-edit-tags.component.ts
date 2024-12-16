@@ -137,6 +137,11 @@ export class TicketDetailEditTagsComponent implements OnInit, OnDestroy {
     this.tags = this.reqTags.filter(item => item.word.includes(event.target.value));
   }
 
+  public setSelectedTags(tags) {
+    this.selectedTag = tags;
+    this.cd.detectChanges();
+  }
+
   /**
    * Close tags list
    */

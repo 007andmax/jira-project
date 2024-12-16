@@ -20,6 +20,7 @@ export class PermissionManageService {
   ];
 
   userRelatedPermissions = ['CREATE_USERS', 'EDIT_USERS', 'ARCHIVE_USERS'];
+  ticketRelatedPermissions = ['EDIT_ANOTHER_USERS_TICKET', 'REOPEN_CLOSED_TICKETS', 'DELETE_TICKETS'];
   accountingRelatedPermissions = ['CREATE_INVOICE', 'ROLLBACK_INVOICE'];
   productsRelatedPermissions = ['MANAGE_PRODUCTS'];
   passwordsRelatedPermissions = [
@@ -34,9 +35,9 @@ export class PermissionManageService {
   sections = {
     'Tickets Area': [
       'EDIT_TICKETS',
-      'DELETE_TICKETS',
-      'REOPEN_CLOSED_TICKETS',
       'EDIT_ANOTHER_USERS_TICKET',
+      'REOPEN_CLOSED_TICKETS',
+      'DELETE_TICKETS',
       'CREATE_TICKET_NOTE_TEMPLATE',
       'EDIT_TICKET_NOTE_TEMPLATE',
       'DELETE_TICKET_NOTE_TEMPLATE'
@@ -146,6 +147,12 @@ export class PermissionManageService {
    */
   getUserRelatedPermissions() {
     return this.userRelatedPermissions.slice();
+  }
+  /**
+ * permission on tickets
+ */
+  getTicketRelatedPermissions() {
+    return this.ticketRelatedPermissions.slice();
   }
 
   /**

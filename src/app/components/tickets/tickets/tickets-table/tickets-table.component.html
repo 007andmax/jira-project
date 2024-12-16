@@ -3,6 +3,7 @@
         <div class="qt-page-list__header-thead-container">
             <div class="qt-table-modern qt-page-list__header-thead">
                 <div class="qt-page-list__header-thead__row">
+                    <div class="ticket-table__check"></div>
                     <div
                         class="ticket-table__requested-by pointer"
                         (click)="onFilter('created')"
@@ -63,8 +64,9 @@
                         [ngForTrackBy]="trackById"
                     >
                         <app-tickets-table-item
+                            (onSelectForDetail)="editTicket(ticket.id)"
                             [selected]="idEditTicket === ticket.id"
-                            (click)="editTicket(ticket.id)"
+                            (onSelectTicket)="onSelectTicket($event)"
                             [listColors]="listColors"
                             [ticketsStatus]="ticketsStatus"
                             [setTicket]="ticket"
@@ -91,7 +93,7 @@
             class="mobile-action-btn"
             (click)="onAddTicket()"
         >
-          <div class="qt-icon icon__add qt-icon__white qt-sz-16"></div>
+            <div class="qt-icon icon__add qt-icon__white qt-sz-16"></div>
         </div>
     </div>
     <div

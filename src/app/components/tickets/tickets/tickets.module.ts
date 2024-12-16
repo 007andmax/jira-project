@@ -10,13 +10,15 @@ import { TicketsRoutingModule } from './tickets-routing.module';
 import { ServicesListModule } from '../../shared/services-list/services-list.module';
 import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 import { TicketsFilterModule } from './tickets-header/tickets-filter/tickets-filter.module';
-
-
+import { FormsModule } from '@angular/forms';
+import { MergeTicketsComponent } from './merge-tickets/merge-tickets.component';
+import { MergeTicketsModule } from './merge-tickets/merge-tickets.module';
 
 
 @NgModule({
     declarations: [TicketsComponent,
         TicketsTableComponent,
+
 
     ],
     imports: [
@@ -27,7 +29,9 @@ import { TicketsFilterModule } from './tickets-header/tickets-filter/tickets-fil
         TicketsTableItemModule,
         TicketsRoutingModule,
         ServicesListModule,
-        TicketsFilterModule
+        TicketsFilterModule,
+        FormsModule,
+        MergeTicketsModule
     ],
 
 

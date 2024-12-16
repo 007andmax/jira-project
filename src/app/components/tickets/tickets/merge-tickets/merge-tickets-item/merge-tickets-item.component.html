@@ -1,0 +1,58 @@
+<div class="merge-ticket-item qt-df ">
+    <!-- [checked]="primaryTicket && primaryTicket.id === item.id" -->
+    <div
+        [ngClass]="{'primary-checked':primaryTicket && primaryTicket.id === item.id,
+    'primary-unchecked': !primaryTicket || primaryTicket && primaryTicket.id !== item.id}"
+        class="qt-button --square-md  --gray qt-mr-12"
+        placement="top"
+        ngbTooltip="Set as Primary"
+        container="body"
+        (click)="selectPrimaryTicket()"
+    >
+        <i
+            [ngClass]="{'icon__primary-checked':primaryTicket && primaryTicket.id === item.id,
+    'icon__primary-unchecked': !primaryTicket || primaryTicket && primaryTicket.id !== item.id}"
+            class="qt-icon qt-icon__background-unset  qt-sz-20"
+        ></i>
+    </div>
+    <div class="qt-w100">
+        <div class="qt-df qt-ai-c qt-jc-sb qt-mb-4">
+            <div class="qt-df qt-ai-c relative">
+                <span class="number-ticket">Tkt# {{item.number}}</span>
+                <span
+                    class="tag__modern"
+                    *ngIf="primaryTicket && primaryTicket.id === item.id"
+                >
+                    Primary
+                </span>
+            </div>
+            <div
+                [ngClass]="{'--disabled-primary':primaryTicket && primaryTicket.id === item.id,
+            'pointer' : primaryTicket && primaryTicket.id !== item.id}"
+                class="qt-button --square-md  --gray merge-ticket-remove "
+                (click)="remove($event)"
+            >
+                <i class="qt-icon icon__close qt-sz-16"></i>
+            </div>
+        </div>
+        <div
+            class="qt-mb-4 subject-ticket"
+            [textContent]="item.subject"
+        ></div>
+        <div class="qt-df qt-ai-c create-ticket">
+            <span
+                class="date-ticket"
+                [textContent]="getCreatAt()"
+            ></span>
+            <span
+                class="qt-ml-12"
+                [textContent]="getCompanyName()"
+            ></span>
+        </div>
+    </div>
+    <span
+        *ngIf="item.priorityLevel && item.priorityLevel.isDisplay"
+        class="priority-icon"
+        [ngStyle]="{'background-color':  listColors[item.priorityLevel.color] && listColors[item.priorityLevel.color].textColor}"
+    ></span>
+</div>

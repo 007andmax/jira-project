@@ -1,8 +1,10 @@
 <div class="qt-page-list__header --sticky">
     <div class="qt-page-list__header-title-line qt-mb-16">
         <div class="qt-page-list__header-title-line--left">
-            <h6 class="qt-page-list__header-title">
-                All Companies ({{calculateCount.getCurrent()}})
+            <h6
+                class="qt-page-list__header-title"
+                [textContent]="'All Companies (' + calculateCount.getCurrent() + ')'"
+            >
             </h6>
         </div>
         <div class="qt-page-list__header-title-line--rigth">

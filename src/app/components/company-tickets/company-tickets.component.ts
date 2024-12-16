@@ -73,7 +73,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     }
     let getOnAddTicket = this.ticketsStateService.getOnAddTicket().subscribe(data => {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data) && !this.tickets.find(item => item.id == data.id) && !(this.page_number == 0 && this.showPreloader)) {
-        this.tickets.unshift(data);
+        this.tickets.unshift(new Ticket(data));
       }
     })
     this.sub.add(getOnAddTicket);
@@ -82,7 +82,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       if (data.assignedUser) ticket.setAssignedUserId(data.assignedUser.id);
       let findIndex = this.tickets.findIndex(item => item.id === ticket.id);
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
-        if (findIndex > -1) this.tickets[findIndex] = data;
+        if (findIndex > -1) this.tickets[findIndex] = ticket;
       } else {
         if (findIndex > -1) this.tickets.splice(findIndex, 1);
       }

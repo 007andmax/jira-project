@@ -335,9 +335,15 @@ app-tickets-table-item {
     position: static;
 
     .ellipsis {
-      position: static;
-      transform: unset;
-    }
+        position: static;
+        transform: unset;
+        width: calc(412px - 16px);
+        flex: 1;
+    
+        @include media-breakpoint-down($md) {
+          max-width: calc(345px - 16px);
+        }
+      }
   }
 
   span.priority-icon {

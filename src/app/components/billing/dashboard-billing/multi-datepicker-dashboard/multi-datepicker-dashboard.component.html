@@ -44,8 +44,8 @@
                 [class.faded]="isHovered(date) || isInside(date)"
                 (mouseenter)="hoveredDate = date"
                 (mouseleave)="hoveredDate = null"
+                [textContent]="date.day"
             >
-                {{ date.day }}
             </span>
         </ng-template>
         <div class="date-picker-actions clearfix">
@@ -75,6 +75,8 @@
                     year to date
                 </button>
             </div>
+
+
 
 
 
