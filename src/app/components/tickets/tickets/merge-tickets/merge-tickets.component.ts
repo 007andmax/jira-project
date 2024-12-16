@@ -20,7 +20,7 @@ export class MergeTicketsComponent implements OnInit, OnDestroy {
   primaryTicket: Ticket;
   opened: boolean = false;
   step: string = "STEP_1";
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
   listColors: Array<StatusColor> = [];
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
