@@ -165,11 +165,12 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     this.ticketValidate = new TicketValidate();
     this.shareUsersList = [];
     this.elRef.nativeElement.querySelector('#add-ticket-describe-issue').innerHTML = '';
-    this.opened = false;
     if (this.deviceDP) this.deviceDP.clearClient();
     if (this.userDP) this.userDP.clearClient();
     if (this.clientUserDP) this.clientUserDP.clearWithOutChanges();
     if (this.techUserDP) this.techUserDP.clearClient();
+    this.opened = false;
+
     this.uplaodFile.onClearState();
     this.cd.detectChanges();
 
