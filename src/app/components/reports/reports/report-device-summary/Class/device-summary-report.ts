@@ -7,7 +7,7 @@ export class DeviceSummaryReportFilter {
     new FilterListTop("model", ""),
     new FilterListTop("companyName", ""),
   ];
-  constructor() {}
+  constructor() { }
 
   public onFilter(field, Device) {
     let index = this.filterTop.findIndex((item) => item.field === field);
@@ -61,46 +61,46 @@ export class DeviceSummaryReportFilter {
   private onFilterModel(Device) {
     Device.sort((a, b) =>
       this.getDeviceModel(a).toLowerCase() >
-      this.getDeviceModel(b).toLowerCase()
+        this.getDeviceModel(b).toLowerCase()
         ? 1
         : this.getDeviceModel(b).toLowerCase() >
           this.getDeviceModel(a).toLowerCase()
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
   }
   private getDeviceModel(Device) {
-    return Device.Model||'';
+    return Device.Model || '';
   }
 
   private onFilterManufacturer(Device) {
     Device.sort((a, b) =>
       this.getManufacturer(a).toLowerCase() >
-      this.getManufacturer(b).toLowerCase()
+        this.getManufacturer(b).toLowerCase()
         ? 1
         : this.getManufacturer(b).toLowerCase() >
           this.getManufacturer(a).toLowerCase()
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
   }
   private getManufacturer(Device) {
-    return Device.Manufacturer||'';
+    return Device.Manufacturer || '';
   }
 
   public onFilterName(Device) {
     Device.sort((a, b) =>
       this.getNameDevice(a).toLowerCase() >
-      this.getNameDevice(b).toLowerCase()
+        this.getNameDevice(b).toLowerCase()
         ? 1
         : this.getNameDevice(b).toLowerCase() >
           this.getNameDevice(a).toLowerCase()
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
   }
   private getNameDevice(Device) {
-    return Device.Name||'';
+    return Device.Name || '';
   }
   public clearFilter() {
     this.filterTop.forEach((item) => (item.filter = ""));
@@ -109,16 +109,16 @@ export class DeviceSummaryReportFilter {
   public onFilterCompanyName(Device) {
     Device.sort((a, b) =>
       this.getCompanyName(a).toLowerCase() >
-      this.getCompanyName(b).toLowerCase()
+        this.getCompanyName(b).toLowerCase()
         ? 1
         : this.getCompanyName(b).toLowerCase() >
           this.getCompanyName(a).toLowerCase()
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
   }
 
   private getCompanyName(Device) {
-    return Device.CompanyName||'';
+    return Device.CompanyName || '';
   }
 }

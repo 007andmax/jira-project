@@ -68,7 +68,7 @@ export class SoftwareFilter {
     );
   }
   private getInstallSoftware(software) {
-    return software.InstallDate;
+    return software.InstallDate || '';
   }
 
   private onFilterVersion(software) {
@@ -83,7 +83,7 @@ export class SoftwareFilter {
     );
   }
   private getVersionSoftware(software) {
-    return software.DisplayVersion;
+    return software.DisplayVersion || '';
   }
 
   private onFilterPulisher(software) {
@@ -98,7 +98,7 @@ export class SoftwareFilter {
     );
   }
   private getPublisherSoftware(software) {
-    return software.Publisher;
+    return software.Publisher || '';
   }
 
   public onFilterName(software) {
@@ -113,7 +113,7 @@ export class SoftwareFilter {
     );
   }
   private getNameSoftware(software) {
-    return software.DisplayName;
+    return software.DisplayName || '';
   }
   public clearFilter() {
     this.filterTop.forEach((item) => (item.filter = ""));

@@ -4,7 +4,7 @@ export class DeviceNetworkDetailReportFilter {
   filterTop: Array<FilterListTop> = [
     new FilterListTop("name", "ASC"),
   ];
-  constructor() {}
+  constructor() { }
 
   public onFilter(field, Device) {
     let index = this.filterTop.findIndex((item) => item.field === field);
@@ -29,12 +29,12 @@ export class DeviceNetworkDetailReportFilter {
         ? 1
         : this.getNameDevice(b).toLowerCase() >
           this.getNameDevice(a).toLowerCase()
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
   }
   private getNameDevice(Device) {
-    return Device.Name||'';
+    return Device.Name || '';
   }
   public clearFilter() {
     this.filterTop.forEach((item) => (item.filter = ""));
