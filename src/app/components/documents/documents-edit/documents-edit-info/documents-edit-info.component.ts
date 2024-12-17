@@ -18,8 +18,8 @@ export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
   @Input() documentEdit: Document;
   @Input() linked: DocumentsLinkedComponent;
   @Input() categoryId: string;
-  @ViewChild('categoriesDp', { static: false }) categoriesDp: DropDownComponent;
-  @ViewChild('tagsDp', { static: false }) tagsDp: CompanyTagsComponent;
+  @ViewChild('categoriesDp') categoriesDp: DropDownComponent;
+  @ViewChild('tagsDp') tagsDp: CompanyTagsComponent;
   sub: Subscription = new Subscription();
 
   ngOnInit() {

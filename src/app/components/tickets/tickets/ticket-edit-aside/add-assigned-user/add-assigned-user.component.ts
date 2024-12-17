@@ -34,8 +34,8 @@ export class AddAssignedUserComponent implements OnInit {
 
   @Output() hidden = new EventEmitter<any>();
   @Output() onSelected = new EventEmitter<any>();
-  @ViewChild('userInput', { static: false }) userInput: ElementRef<HTMLInputElement>;
-  @ViewChild('assignedUserDp', { static: false }) assignedUserDp: NgbDropdown;
+  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
+  @ViewChild('assignedUserDp') assignedUserDp: NgbDropdown;
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services

@@ -22,7 +22,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
   styleUrls: ['./users-details-tab-companies-item.component.scss']
 })
 export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy {
-  @ViewChild('userRolesDP', { static: false }) userRolesDP: DropDownComponent;
+  @ViewChild('userRolesDP') userRolesDP: DropDownComponent;
   @Input() customerCompaniesInfo: UserCustomerCompaniesInfo;
   @Input() user: UserProfile = new UserProfile();
   @Output() onUpdate = new EventEmitter<any>();

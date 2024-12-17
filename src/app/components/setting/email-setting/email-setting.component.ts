@@ -57,8 +57,8 @@ export class EmailSettingComponent implements OnInit, OnDestroy {
       encryptionType: "TLS"
     }
   };
-  @ViewChild("incomingEmail", { static: false }) incomingEmail: IncomingEmailComponent;
-  @ViewChild("outgoingEmail", { static: false }) outgoingEmail: OutgoingEmailComponent;
+  @ViewChild("incomingEmail") incomingEmail: IncomingEmailComponent;
+  @ViewChild("outgoingEmail") outgoingEmail: OutgoingEmailComponent;
   constructor(private emailSettingService: EmailSettingService,
     private settingStateService: SettingStateService) { }
 

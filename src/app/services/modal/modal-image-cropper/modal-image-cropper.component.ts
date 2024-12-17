@@ -21,7 +21,7 @@ export class ModalImageCropperComponent implements OnInit, OnDestroy {
   public id = null;
   imageBase64 = '';
   show = false;
-  @ViewChild('imageCroper', { static: false }) imageCroper;
+  @ViewChild('imageCroper') imageCroper;
   constructor(public cd: ChangeDetectorRef,
     private imageCropperStateService: ImageCropperStateService, private companiesService: CompaniesService,
     private modalImageCropperStateService: ModalImageCropperStateService,

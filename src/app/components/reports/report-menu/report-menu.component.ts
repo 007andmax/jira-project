@@ -81,11 +81,11 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   @Output() onRequest = new EventEmitter<any>();
   @Output() onSelectedClient = new EventEmitter<any>();
 
-  @ViewChild('durationsTechSaleDP', { static: false }) durationsTechSaleDP: DropDownComponent;
-  @ViewChild('dp', { static: false }) datePicker: any;
-  @ViewChild('dpDevices', { static: false }) dpDevices: SoftwareSummaryDevicesDroDownComponent;
-  @ViewChild('contractDetailDp', { static: false }) contractDetailDp: ContractDetailDropDownComponent;
-  @ViewChild('dpInterval', { static: false }) dpInterval: ContractDetailIntervalsDropDownComponent;
+  @ViewChild('durationsTechSaleDP') durationsTechSaleDP: DropDownComponent;
+  @ViewChild('dp') datePicker: any;
+  @ViewChild('dpDevices') dpDevices: SoftwareSummaryDevicesDroDownComponent;
+  @ViewChild('contractDetailDp') contractDetailDp: ContractDetailDropDownComponent;
+  @ViewChild('dpInterval') dpInterval: ContractDetailIntervalsDropDownComponent;
 
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,

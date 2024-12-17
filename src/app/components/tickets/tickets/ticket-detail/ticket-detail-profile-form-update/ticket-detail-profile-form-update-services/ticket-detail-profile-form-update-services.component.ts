@@ -19,10 +19,10 @@ import { TicketProfileUpdatesServiceTimepickerComponent } from '../../../ticket-
 })
 export class TicketDetailProfileFormUpdateServicesComponent implements OnInit, OnDestroy {
   isUpdate: boolean = false;
-  @ViewChild('durationPicker', { static: false }) durationPicker: TicketProfileUpdatesServiceDurationComponent;
-  @ViewChild('timePicker', { static: false }) timePicker: TicketProfileUpdatesServiceTimepickerComponent;
-  @ViewChild('serviceDP', { static: false }) serviceDP: ServicesListComponent;
-  @ViewChild('datePicker', { static: false }) datePicker: DatePickerComponent;
+  @ViewChild('durationPicker') durationPicker: TicketProfileUpdatesServiceDurationComponent;
+  @ViewChild('timePicker') timePicker: TicketProfileUpdatesServiceTimepickerComponent;
+  @ViewChild('serviceDP') serviceDP: ServicesListComponent;
+  @ViewChild('datePicker') datePicker: DatePickerComponent;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   areTicketsTerminated: boolean = false;
   areTicketsPresented: boolean = false;

@@ -9,7 +9,7 @@ import { map } from "rxjs/operators";
 })
 export class EmailNotificationsComponent implements OnInit {
   emailNotifications: any;
-  @ViewChild('emailForm', { static: false }) emailForm: any;
+  @ViewChild('emailForm') emailForm: any;
   constructor(
     private settingService: SettingService,
   ) { }

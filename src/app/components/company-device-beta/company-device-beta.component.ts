@@ -40,8 +40,8 @@ export class CompanyDeviceBetaComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownManufacturer', { static: true }) dropdownManufacturer: DropDownComponent;
   @ViewChild('installdatePicker', { static: true }) installdatePicker: DatePickerComponent;
   @ViewChild('warrantydatePicker', { static: true }) warrantydatePicker: DatePickerComponent;
-  @ViewChild('dropdownManufacturersidebar', { static: false }) dropdownManufacturersidebar: DropDownComponent;
-  @ViewChild('dropdownModelSidebar', { static: false }) dropdownModelSidebar: DropDownComponent;
+  @ViewChild('dropdownManufacturersidebar') dropdownManufacturersidebar: DropDownComponent;
+  @ViewChild('dropdownModelSidebar') dropdownModelSidebar: DropDownComponent;
   @ViewChild('dropdownServices', { static: true }) selectedInput: ElementRef<HTMLInputElement>;
   selectAllDevices: boolean = false;
   assetList: any[] = [];

@@ -52,18 +52,18 @@ import { TicketDetailEditTagsComponent } from './ticket-detail-edit-tags/ticket-
 
 })
 export class TicketDetailComponent implements OnInit, OnDestroy {
-  @ViewChild('ticketMessage', { static: false }) ticketMessage: TicketDetailMessageComponent;
+  @ViewChild('ticketMessage') ticketMessage: TicketDetailMessageComponent;
   @ViewChild('ticketProfileUpdates', { static: true }) ticketProfileUpdates: TicketDetailProfileUpdatesComponent;
-  @ViewChild('ticketTasks', { static: false }) ticketTasks: TicketDetailTasksComponent;
-  @ViewChild('detailHeader', { static: false }) detailHeader: TicketDetailHeaderComponent;
-  @ViewChild('changeStatus', { static: false }) changeStatus: TicketDetailChangeStatusComponent;
-  @ViewChild('userDP', { static: false }) userDP: CompanyUsersDropDownComponent;
-  @ViewChild('changeCompany', { static: false }) changeCompany: TicketDetailChangeCompanyComponent;
-  @ViewChild('ticketsDetail', { static: false }) ticketsDetail: TicketDetailTicketsComponent;
-  @ViewChild('contactDetail', { static: false }) contactDetail: TicketDetailContactDetailsComponent;
-  @ViewChild('passwordRecordDetail', { static: false }) passwordRecordDetail: TicketDetailPasswordsDetailsComponent;
-  @ViewChild('documentsRecordDetail', { static: false }) documentsRecordDetail: TicketDetailDocumentsDetailsComponent;
-  @ViewChild('ticketsDetailList', { static: false }) ticketsDetailList: TicketDetailTicketsDetailsComponent;
+  @ViewChild('ticketTasks') ticketTasks: TicketDetailTasksComponent;
+  @ViewChild('detailHeader') detailHeader: TicketDetailHeaderComponent;
+  @ViewChild('changeStatus') changeStatus: TicketDetailChangeStatusComponent;
+  @ViewChild('userDP') userDP: CompanyUsersDropDownComponent;
+  @ViewChild('changeCompany') changeCompany: TicketDetailChangeCompanyComponent;
+  @ViewChild('ticketsDetail') ticketsDetail: TicketDetailTicketsComponent;
+  @ViewChild('contactDetail') contactDetail: TicketDetailContactDetailsComponent;
+  @ViewChild('passwordRecordDetail') passwordRecordDetail: TicketDetailPasswordsDetailsComponent;
+  @ViewChild('documentsRecordDetail') documentsRecordDetail: TicketDetailDocumentsDetailsComponent;
+  @ViewChild('ticketsDetailList') ticketsDetailList: TicketDetailTicketsDetailsComponent;
   @ViewChild('ticketTags', { static: true }) ticketTags: TicketDetailEditTagsComponent;
   isInit: boolean = false;
   ticketProfile: TicketProfile = new TicketProfile();

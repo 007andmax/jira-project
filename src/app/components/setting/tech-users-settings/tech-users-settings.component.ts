@@ -66,9 +66,9 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   new TitleListType("Secure two-factor authentication - by email", "SECURE"),
   new TitleListType("Secure two-factor authentication - Google authenticator", "GOOGLE_SECURE")];
   authenticationTypesType = new TitleListType("Password only", "DISABLED");
-  @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
-  @ViewChild('editBtn', { static: false }) editBtn: DisabledBtnDirective;
-  @ViewChild('userPermissions', { static: false }) userPermissions: PermissionManageComponent;
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('editBtn') editBtn: DisabledBtnDirective;
+  @ViewChild('userPermissions') userPermissions: PermissionManageComponent;
   sub: Subscription = new Subscription();
   constructor(
     private techUsersService: TechUsersService,

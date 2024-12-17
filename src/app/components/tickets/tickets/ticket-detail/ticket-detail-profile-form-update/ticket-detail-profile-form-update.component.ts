@@ -37,11 +37,11 @@ import { TicketDetailProfileFormUpdateHeaderComponent } from './ticket-detail-pr
 export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy {
   ticketProfile: TicketProfile = new TicketProfile();
   ticketProfileFormUpdate: TicketProfileFormUpdate = new TicketProfileFormUpdate();
-  @ViewChild('updateHeader', { static: false }) updateHeader: TicketDetailProfileFormUpdateHeaderComponent;
-  @ViewChild('update_closeBtn', { static: false }) update_closeBtn: DisabledBtnDirective;
-  @ViewChild('updateBtn', { static: false }) updateBtn: DisabledBtnDirective;
-  @ViewChild('addMoreMobileBtn', { static: false }) addMoreMobileBtn: DisabledBtnDirective;
-  @ViewChild('updateMobileBtn', { static: false }) updateMobileBtn: DisabledBtnDirective;
+  @ViewChild('updateHeader') updateHeader: TicketDetailProfileFormUpdateHeaderComponent;
+  @ViewChild('update_closeBtn') update_closeBtn: DisabledBtnDirective;
+  @ViewChild('updateBtn') updateBtn: DisabledBtnDirective;
+  @ViewChild('addMoreMobileBtn') addMoreMobileBtn: DisabledBtnDirective;
+  @ViewChild('updateMobileBtn') updateMobileBtn: DisabledBtnDirective;
   @ViewChild('noteList', { static: true }) noteList: TicketProfileFormUpdateNoteListComponent;
   @Input() lisUpdateUser: Array<CurrentUser> = [];
   @Input() set ticket(value) {
@@ -62,9 +62,9 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
   currentUser: CurrentUser;
   sub: Subscription = new Subscription();
 
-  @ViewChild('selectNote', { static: false }) selectNote: TicketDetailProfileFormUpdateNoteComponent;
-  @ViewChild('selectServices', { static: false }) selectServices: TicketDetailProfileFormUpdateServicesComponent;
-  @ViewChild('selectProducts', { static: false }) selectProducts: TicketDetailProfileFormUpdateProductsComponent;
+  @ViewChild('selectNote') selectNote: TicketDetailProfileFormUpdateNoteComponent;
+  @ViewChild('selectServices') selectServices: TicketDetailProfileFormUpdateServicesComponent;
+  @ViewChild('selectProducts') selectProducts: TicketDetailProfileFormUpdateProductsComponent;
   @Output() onCloseForm = new EventEmitter();
   constructor(public ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef,

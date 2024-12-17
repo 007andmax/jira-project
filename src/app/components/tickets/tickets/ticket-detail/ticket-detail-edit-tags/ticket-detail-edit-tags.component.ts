@@ -34,7 +34,7 @@ export class TicketDetailEditTagsComponent implements OnInit, OnDestroy {
   editItem: any;
   init: boolean = false;
   isChangeInput: boolean = false;
-  @ViewChild('userInput', { static: false }) userInput: ElementRef<HTMLInputElement>;
+  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @Output() tagsChange = new EventEmitter();
   @ViewChild('tagsDp', { static: true }) tagsDp: any;
   @Output() tagsRemove = new EventEmitter();

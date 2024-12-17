@@ -21,14 +21,14 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./company-devices-aside-system.component.scss']
 })
 export class CompanyDevicesAsideSystemComponent implements OnInit, OnDestroy {
-  @ViewChild('datePickerInstalledOn', { static: false }) datePickerInstalledOn: DatePickerComponent;
-  @ViewChild('datePickerWarranty', { static: false }) datePickerWarranty: DatePickerComponent;
-  @ViewChild('nameLabel', { static: false }) nameLabel: CompanyDevicesEditLabelComponent;
-  @ViewChild('assetTagLabel', { static: false }) assetTagLabel: CompanyDevicesEditLabelComponent;
-  @ViewChild('ipAddressLabel', { static: false }) ipAddressLabel: CompanyDevicesEditLabelComponent;
-  @ViewChild('locationLabel', { static: false }) locationLabel: CompanyDevicesEditLabelComponent;
-  @ViewChild('manufacturerDd', { static: false }) manufacturerDd: DropDownComponent;
-  @ViewChild('modelDd', { static: false }) modelDd: DropDownComponent;
+  @ViewChild('datePickerInstalledOn') datePickerInstalledOn: DatePickerComponent;
+  @ViewChild('datePickerWarranty') datePickerWarranty: DatePickerComponent;
+  @ViewChild('nameLabel') nameLabel: CompanyDevicesEditLabelComponent;
+  @ViewChild('assetTagLabel') assetTagLabel: CompanyDevicesEditLabelComponent;
+  @ViewChild('ipAddressLabel') ipAddressLabel: CompanyDevicesEditLabelComponent;
+  @ViewChild('locationLabel') locationLabel: CompanyDevicesEditLabelComponent;
+  @ViewChild('manufacturerDd') manufacturerDd: DropDownComponent;
+  @ViewChild('modelDd') modelDd: DropDownComponent;
   @Input() device: DeviceExtended;
   @Input() customDevice: DeviceCompany;
   models: Array<ModelDevice> = [];

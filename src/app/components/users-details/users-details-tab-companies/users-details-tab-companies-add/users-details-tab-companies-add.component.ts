@@ -25,7 +25,7 @@ export class UsersDetailsTabCompaniesAddComponent implements OnInit {
   sub: Subscription = new Subscription();
   userRoles: Array<UserRole> = [];
   defaultSubscriptions: UserDefaultSubscription = new UserDefaultSubscription(null);
-  @ViewChild('userRolesDP', { static: false }) userRolesDP: DropDownComponent;
+  @ViewChild('userRolesDP') userRolesDP: DropDownComponent;
   @Input() user: UserProfile = new UserProfile();
   @Output() onClose = new EventEmitter<any>();
   @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;

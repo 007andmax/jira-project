@@ -20,7 +20,7 @@ export class NonContractServicesEditComponent implements OnInit, OnDestroy {
   validate: NonContractServiceValidate = new NonContractServiceValidate();
   service: NonContractServices;
   sub: Subscription = new Subscription();
-  @ViewChild('glNumberSelect', { static: false }) glNumberSelect: DropDownComponent;
+  @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
   @Output() onClose = new EventEmitter<any>();
   constructor(private glNumberStateService: GlNumberStateService,
     private glNumberService: GlNumberService,

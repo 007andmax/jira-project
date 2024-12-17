@@ -24,7 +24,7 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
   statusColors: Array<StatusColor> = [];
   editTicketsStatus: TicketStatus;
   sort = "ASC";
-  @ViewChild('addStatusBtn', { static: false }) addStatusBtn: ClickOutsideDirective;
+  @ViewChild('addStatusBtn') addStatusBtn: ClickOutsideDirective;
   sub: Subscription = new Subscription();
   constructor(private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,

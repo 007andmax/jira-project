@@ -21,7 +21,7 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
   selectedCompany: any;
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
-  @ViewChild('customDateDP', { static: false }) customDateDP: DatePickerComponent;
+  @ViewChild('customDateDP') customDateDP: DatePickerComponent;
   @Output() onClose = new EventEmitter<any>();
   @Input() contractsOther: ServiceAgreement = new ServiceAgreement();
   formatDate: string = FORMAT_DATE_2;

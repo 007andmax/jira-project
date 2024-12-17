@@ -49,9 +49,9 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
   userRoles: Array<UserRole> = [];
   @ViewChild('editBtn', { static: true }) editBtn: DisabledBtnDirective;
   @ViewChild('companyTags', { static: true }) companyTags: CompanyTagsComponent;
-  @ViewChild('jobTitleDp', { static: false }) jobTitleDp: DropDownComponent;
+  @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   @ViewChild('jobTypeDp', { static: true }) jobTypeDp: DropDownComponent;
-  @ViewChild('userRolesDP', { static: false }) userRolesDP: DropDownComponent;
+  @ViewChild('userRolesDP') userRolesDP: DropDownComponent;
   constructor(private imageCropperStateService: ImageCropperStateService,
     public ticketsListService: TicketsListService,
     public usersStateService: UsersStateService,

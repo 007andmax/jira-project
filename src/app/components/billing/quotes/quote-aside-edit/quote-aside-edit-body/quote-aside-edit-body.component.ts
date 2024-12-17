@@ -26,7 +26,7 @@ import { InvoiceTicketsService } from 'src/app/services/accounting/accounting-se
   styleUrls: ['./quote-aside-edit-body.component.scss']
 })
 export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
-  @ViewChild('servicesList', { static: false }) servicesList: ServiceListQuoteComponent;
+  @ViewChild('servicesList') servicesList: ServiceListQuoteComponent;
   @Input() validate: QuoteValdiateEdit = new QuoteValdiateEdit();
   @Output() onStopPreloader = new EventEmitter();
   quoteCompany: CompanyItem;

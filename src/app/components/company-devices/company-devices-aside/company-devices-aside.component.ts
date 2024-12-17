@@ -25,8 +25,8 @@ import { CompanyDevicesAsideNetworkTabComponent } from './company-devices-aside-
 export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
   @Input() companyId: string;
   @Input() devicesCompany: Array<DeviceCompany> = [];
-  @ViewChild("system", { static: false }) system: CompanyDevicesAsideSystemComponent;
-  @ViewChild("network", { static: false }) network: CompanyDevicesAsideNetworkTabComponent;
+  @ViewChild("system") system: CompanyDevicesAsideSystemComponent;
+  @ViewChild("network") network: CompanyDevicesAsideNetworkTabComponent;
   tab: string = "SYSTEM";
   devices: Array<DeviceExtended> = [];
   customDevices: Array<DeviceCompany> = [];

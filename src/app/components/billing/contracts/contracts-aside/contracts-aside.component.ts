@@ -13,10 +13,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./contracts-aside.component.scss']
 })
 export class ContractsAsideComponent implements OnInit, OnDestroy {
-  @ViewChild('hourlyContract', { static: false }) hourlyContract: ContractsAsideHourlyBillingComponent;
-  @ViewChild('blockTimeContract', { static: false }) blockTimeContract: ContractsAsideBlockTimeBillingComponent;
-  @ViewChild('deviceUserContract', { static: false }) deviceUserContract: ContractsAsideUserDeviceBillingComponent;
-  @ViewChild('otherContract', { static: false }) otherContract: ContractsAsideProductServiceContractsComponent;
+  @ViewChild('hourlyContract') hourlyContract: ContractsAsideHourlyBillingComponent;
+  @ViewChild('blockTimeContract') blockTimeContract: ContractsAsideBlockTimeBillingComponent;
+  @ViewChild('deviceUserContract') deviceUserContract: ContractsAsideUserDeviceBillingComponent;
+  @ViewChild('otherContract') otherContract: ContractsAsideProductServiceContractsComponent;
   type: string = null;
   step: number = 1;
   sub: Subscription = new Subscription();

@@ -89,7 +89,7 @@ export class OutgoingEmailComponent implements OnInit {
   @Input() savedSMTPSettingsInput: any;
   @Input() portIsEmptyInput: any;
   @Input() usedEmailViaInput: any;
-  @ViewChild('testServerBtn', { static: false }) testServerBtn: DisabledBtnDirective;
+  @ViewChild('testServerBtn') testServerBtn: DisabledBtnDirective;
   constructor(
     private emailSettingService: EmailSettingService,
     private settingService: SettingService,

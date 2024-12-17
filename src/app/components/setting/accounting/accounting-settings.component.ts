@@ -31,7 +31,7 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
   @ViewChild('invoiceSettings', { static: true }) invoiceSettings: InvoiceSettingsComponent;
   @ViewChild('quotesSettings', { static: true }) quotesSettings: QuotesSettingsComponent;
   @ViewChild('accountingYear', { static: true }) accountingYear: AccountingYearComponent;
-  @ViewChild('taxesSettings', { static: false }) taxesSettings: TaxesSettingsComponent;
+  @ViewChild('taxesSettings') taxesSettings: TaxesSettingsComponent;
   @ViewChild('glNumber', { static: true }) glNumber: GlNumberSettingsComponent;
   @ViewChild('customNotes', { static: true }) customNotes: CustomNotesSettingsComponent;
   loading = false;

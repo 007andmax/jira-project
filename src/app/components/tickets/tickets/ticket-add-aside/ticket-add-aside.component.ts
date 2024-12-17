@@ -39,12 +39,12 @@ import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-c
 })
 export class TicketAddAsideComponent implements OnInit, OnDestroy {
   @ViewChild('userDP', { static: true }) userDP: CompanyUsersDropDownComponent;
-  @ViewChild('techUserDP', { static: false }) techUserDP: DropDownComponent;
+  @ViewChild('techUserDP') techUserDP: DropDownComponent;
   @ViewChild('deviceDP', { static: true }) deviceDP: DropDownComponent;
   @ViewChild('uplaodFile', { static: true }) uplaodFile: UploadAreaComponent;
   @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
-  @ViewChild('techUsersDp', { static: false }) techUsersDp: AssignedTicketUserComponent;
-  @ViewChild('clientUserDP', { static: false }) clientUserDP: UsersDropDownComponent;
+  @ViewChild('techUsersDp') techUsersDp: AssignedTicketUserComponent;
+  @ViewChild('clientUserDP') clientUserDP: UsersDropDownComponent;
   actualNumber: string = '';
   opened = false;
   isAdd = false;

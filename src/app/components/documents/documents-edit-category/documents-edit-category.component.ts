@@ -16,7 +16,7 @@ import { DocumentEditCategory } from './class/document-edit-category';
 
 })
 export class DocumentsEditCategoryComponent implements OnInit, OnDestroy {
-  @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   opened: boolean = false;
   documentEditCategory: DocumentEditCategory;
   companies: Array<Company> = [];
