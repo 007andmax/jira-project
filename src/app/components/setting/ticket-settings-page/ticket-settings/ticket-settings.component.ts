@@ -21,7 +21,7 @@ export class TicketSettingsComponent implements OnInit, OnDestroy {
   new CompanySetting('15 minutes', 'FIFTEEN_MINUTES')];
   timepickerTypes = [new CompanySetting('Start-End time picker', 'TIME_PICKER'),
   new CompanySetting('Duration picker', 'DURATION_PICKER')];
-  @ViewChild('intervalsDp', { static: true }) intervalsDp: DropDownComponent;
+  @ViewChild('intervalsDp', { static: false }) intervalsDp: DropDownComponent;
   loading = true;
   submitted = false;
   used = false;
