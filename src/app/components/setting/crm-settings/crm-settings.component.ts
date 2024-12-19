@@ -20,10 +20,10 @@ import { fadeInAnimation } from 'src/app/animations';
 })
 export class CrmSettingsComponent implements OnInit, OnDestroy {
   activeTab: string = "companyIndustry";
-  @ViewChild("industry", { static: true }) industry: CrmCompanyIndustryComponent;
-  @ViewChild("jobTitle", { static: true }) jobTitle: CrmCompanyJobTitleComponent;
-  @ViewChild("serviceType", { static: true }) serviceType: CrmCompanyServiceTypeComponent;
-  @ViewChild("jobType", { static: true }) jobType: CrmCompanyJobTypeComponent;
+  @ViewChild("industry", { static: false }) industry: CrmCompanyIndustryComponent;
+  @ViewChild("jobTitle", { static: false }) jobTitle: CrmCompanyJobTitleComponent;
+  @ViewChild("serviceType", { static: false }) serviceType: CrmCompanyServiceTypeComponent;
+  @ViewChild("jobType", { static: false }) jobType: CrmCompanyJobTypeComponent;
   constructor(private crmStateService: CrmStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal) { }

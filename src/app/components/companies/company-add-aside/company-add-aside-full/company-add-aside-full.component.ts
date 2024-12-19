@@ -101,7 +101,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       let user = this.users.find(item => item.id == this.company.contacts[0].id);
       if (user) this.userDp.selectItemWithOutChanges({ user: user, customerCompany: user.customerCompaniesInfo[0] });
     }
-    this.paymentTerm.selectItemWithOutChanges(this.paymentTerms.find(item => item.value == this.companiesStateService.getCurrentCompany().paymentTerms));
+    if (this.paymentTerm) this.paymentTerm.selectItemWithOutChanges(this.paymentTerms.find(item => item.value == this.companiesStateService.getCurrentCompany().paymentTerms));
     this.company.paymentTerms = JSON.parse(JSON.stringify(this.companiesStateService.getCurrentCompany().paymentTerms));
 
     if (this.companiesStateService.getCurrentCompany().defaultPaymentMethod) {
