@@ -13,6 +13,7 @@
                     class="qt-mb-8"
                     [src]="companiesStateService.getCompanyLogoUrl(currentCompany)"
                     alt
+                    *ngIf="checkLogo()"
                 >
                 <div
                     class="qt-fs-13 qt-color-gray-900 qt-fw-600"
