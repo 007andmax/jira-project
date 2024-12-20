@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TicketDetailProfileUpdatesServiceHeaderInfoComponent } from './ticketdetailprofileupdatesserviceheaderinfo.component';
+import { TicketDetailProfileUpdatesServiceHeaderInfoComponent } from './ticket-detail-profile-updates-service-header-info.component';
 
 describe('TicketDetailProfileUpdatesServiceHeaderInfoComponent', () => {
   let component: TicketDetailProfileUpdatesServiceHeaderInfoComponent;
@@ -8,7 +8,7 @@ describe('TicketDetailProfileUpdatesServiceHeaderInfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TicketDetailProfileUpdatesServiceHeaderInfoComponent ]
+      declarations: [TicketDetailProfileUpdatesServiceHeaderInfoComponent]
     })
       .compileComponents();
   }));

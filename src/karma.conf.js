@@ -25,6 +25,7 @@ module.exports = function (config) {
     autoWatch: true,
     browsers: ['Chrome'],
     singleRun: false,
-    restartOnFileChange: true
+    restartOnFileChange: true,
+    logLevel: config.LOG_DEBUG,
   });
 };
