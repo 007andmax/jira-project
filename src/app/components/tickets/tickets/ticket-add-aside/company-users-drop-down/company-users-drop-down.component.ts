@@ -77,7 +77,6 @@ export class CompanyUsersDropDownComponent extends DropDownComponent {
  * @description Clear selected fileds, input and reset list
 */
   clearClient() {
-    console.log("clearClient");
     this.isAdd = false;
     this.selectedItem = null;
     this.selectedCustomerCompany = null;

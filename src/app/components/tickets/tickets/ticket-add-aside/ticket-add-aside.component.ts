@@ -158,7 +158,6 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
 
       });
     }
-    console.log("this.userDP", this.userDP);
     this.selectedCustomerCompany = null;
     this.selectedCompany = null;
     this.ticketAdd = new TicketAdd();
