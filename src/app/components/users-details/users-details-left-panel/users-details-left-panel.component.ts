@@ -85,6 +85,12 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
     this.modelForm.controls["primaryEmail"].setValue(this.user.primaryEmail);
     this.cd.detectChanges();
   }
+  changePhoneNumber(item, event) {
+    console.log("event.target.value", event.target.value);
+    console.log("item", item);
+    item.controls["value"].setValue(event.target.value);
+
+  }
   checkEmail(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const primaryContactEmail = (control.value && control.value.match(this.reEmail));
@@ -93,6 +99,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
   }
   checkPhone(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
+      console.log("control.value.length", control.value.length);
       return control.value.length > 0 && control.value.length < 14 ? { validPhoneNumber: { value: control.value } } : null;
     };
   }
@@ -114,6 +121,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
   updateUser() {
     this.submitted = true;
     if (this.modelForm.invalid || !this.isChange) {
+      console.log("this.modelForm", this.modelForm)
       return;
     }
     this.user.phoneNumbers = this.modelForm.value.phones.map(item => new PhoneNumber(item.name, item.value));
