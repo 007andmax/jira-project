@@ -39,6 +39,20 @@
     </a>
     <a
         href
+        [link]="'subscription-services'"
+        target="_blank"
+        appRightClickBlank
+        *ngIf="!customerPortalStateService.isCustomerPortal"
+    >
+        <li
+            [ngClass]="{'--active':activePage === 'subscription-services'}"
+            (click)="goToState('subscription-services')"
+        >
+            Subscription Services
+        </li>
+    </a>
+    <a
+        href
         [link]="'billable'"
         target="_blank"
         appRightClickBlank

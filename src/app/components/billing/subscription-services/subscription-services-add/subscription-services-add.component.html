@@ -1,0 +1,86 @@
+<div
+    class="default-services-page__aside qt-aside-modern"
+    *ngIf="showAdd"
+>
+    <form [formGroup]="modelForm">
+        <div class="qt-aside-modern__header">
+            <div class="qt-aside-modern__header-title">Create Service</div>
+            <div
+                class="qt-aside-modern__header-close qt-icon icon__close"
+                (click)="close()"
+            ></div>
+        </div>
+        <div class="qt-aside-modern__content">
+            <div class="qt-inputs-row">
+                <div
+                    class="qt-input-block"
+                    [ngClass]="{'--input-error':submitted && f2.name.errors}"
+                >
+                    <div class="qt-input-block__label">Service Name</div>
+                    <input
+                        placeholder="Service Name"
+                        formControlName="name"
+                        type="text"
+                        minlength="1"
+                        maxlength="100"
+                    >
+                    <app-mat-error
+                        class="invalid-feedback"
+                        *ngIf="submitted && f2.name.errors"
+                    >
+                        Service name is required
+                    </app-mat-error>
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div
+                    class="qt-input-block qt-w50"
+                    [ngClass]="{'--input-error':submitted && f2.rate.errors}"
+                >
+                    <div class="qt-input-block__label">Hourly Rate($)</div>
+                    <input
+                        formControlName="rate"
+                        type="text"
+                        number
+                        placeholder="Per Hour Rate"
+                        [money]="true"
+                        appToFixed
+                    >
+                    <app-mat-error
+                        class="invalid-feedback"
+                        *ngIf="submitted && f2.rate.errors"
+                    >
+                        Hour rate is required
+                    </app-mat-error>
+                </div>
+                <div class="qt-input-block qt-w50">
+                    <div class="create-product-taxes-select">
+                        <app-taxes
+                            [selectedTax]="defaultSelectedTax"
+                            (taxesChange)="onTaxesChange($event)"
+                        ></app-taxes>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="qt-aside-modern__footer">
+            <div class="qt-df qt-w100">
+                <button
+                    class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+                    (click)="close()"
+                >
+                    Cancel
+                </button>
+                <button
+                    class="qt-button qt-w100 qt-jc-c"
+                    appDisabledBtn
+                    #addBtn="disabled"
+                    (onClick)="add()"
+                >
+                    <span *ngIf="!addBtn.isBlock()">Create Service</span>
+                    <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -416,6 +416,11 @@ const routes: Routes = [
     loadChildren: () => import('./components/file-manager/file-manager-category/file-manager-category.module').then(m => m.FileManagementCategoryModule),
     canActivate: [PermissionNoSuperAdminService]
   },
+  {
+    path: ':domain/subscription-services',
+    loadChildren: () => import('./components/billing/subscription-services/subscription-services.module').then(m => m.SubscriptionServicesModule),
+    canActivate: [PermissionNoSuperAdminService]
+  },
 ];
 
 /**

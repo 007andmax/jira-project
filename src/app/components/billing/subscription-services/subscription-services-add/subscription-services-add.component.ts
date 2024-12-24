@@ -1,0 +1,99 @@
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { SubscriptionServices } from '../class/subscription-services';
+import { SubscriptionServicesStateService } from 'src/app/states/subscription-services/subscription-services-state.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
+import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
+import { Tax } from 'src/class/taxes/tax';
+import { NonContractServices } from '../../non-contract-services/class/non-contract-service';
+import { NonContractServiceValidate } from '../../non-contract-services/class/non-contract-service-validate';
+import { SubscriptionServicesService } from 'src/app/services/subscription-services/subscription-services.service';
+
+@Component({
+  selector: 'app-subscription-services-add',
+  templateUrl: './subscription-services-add.component.html',
+  styleUrls: ['./subscription-services-add.component.scss']
+})
+export class SubscriptionServicesAddComponent implements OnInit, OnDestroy {
+  sub: Subscription = new Subscription();
+  modelForm: FormGroup;
+  submitted: boolean = false;
+  defaultSelectedTax: Array<Tax> = [];
+  showAdd: boolean = false;
+  @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
+  constructor(
+    private subscriptionServicesService: SubscriptionServicesService,
+    private taxesStateService: TaxesStateService,
+    private subscriptionServicesStateService: SubscriptionServicesStateService,
+    public cd: ChangeDetectorRef,
+    public formBuilder: FormBuilder,
+  ) { }
+
+  ngOnInit() {
+    let getShowAsideForAdd = this.subscriptionServicesStateService.showAsideForAdd.subscribe(data => {
+      this.showAdd = true;
+      if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
+    })
+    this.sub.add(getShowAsideForAdd);
+    let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
+      this.setDefaultTaxes(data);
+    })
+    this.sub.add(getOnTaxess);
+    this.modelForm = this.formBuilder.group({
+      name: [
+        "",
+        [Validators.required, Validators.minLength(1), Validators.maxLength(100)]
+      ],
+      rate: [0,
+        [Validators.required]
+      ],
+      taxIds: [
+        []
+      ],
+    })
+  }
+
+  onChangeName() {
+    // if (this.service.name.length > 3 && this.service.name.length < 100) this.validate.resetName();
+  }
+  onChangeRate(event) {
+    /*  this.service.rate = Number(event.target.value);
+      if (this.service.rate >= 0) this.validate.resetRate();*/
+  }
+  private setDefaultTaxes(lsitTaxes) {
+    let taxes = lsitTaxes.filter(item => item.isDefault === true);
+    this.modelForm.controls["taxIds"].setValue(taxes.map(item => item.id))
+    this.defaultSelectedTax = taxes;
+    this.taxesStateService.setTaxesFromtEdit(taxes);
+  }
+  onTaxesChange(data) {
+    this.modelForm.controls["taxIds"].setValue(data.map(item => item.id))
+  }
+  add() {
+    this.submitted = true;
+    if (this.modelForm.invalid) {
+      console.log("this.modelForm", this.modelForm);
+      return;
+    }
+    this.addBtn.setDisabled(true);
+    this.subscriptionServicesService.addService(this.modelForm.value).subscribe(data => {
+      this.addBtn.setDisabled(false);
+      this.close();
+    }, err => {
+      this.addBtn.setDisabled(false);
+    })
+  }
+  close() {
+    this.showAdd = false;
+    this.modelForm.reset();
+    if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+  get f2() {
+    return this.modelForm.controls;
+  }
+}
