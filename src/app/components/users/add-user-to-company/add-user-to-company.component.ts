@@ -105,7 +105,7 @@ export class AddUserToCompanyComponent implements OnInit, OnDestroy {
     return item.id;
   }
   approveConfirm() {
-    let usersId = this.users.filter(item => item.selected).map(item => item.id);
+    let usersId = this.getSelectedUsers().map(item => item.id);
     console.log("usersId", usersId);
     if (usersId.length > 0) {
       this.addBtn.setDisabled(true);
