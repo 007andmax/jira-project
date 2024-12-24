@@ -152,6 +152,7 @@ import { UsersDetailsComponent } from './components/users-details/users-details.
 import { UsersDetailsHeaderComponent } from './components/users-details/users-details-header/users-details-header.component';
 import { UsersDetailsLeftPanelComponent } from './components/users-details/users-details-left-panel/users-details-left-panel.component';
 import { SubscriptionServicesComponent } from './components/billing/subscription-services/subscription-services.component';
+import { SubscriptionServicesCheckUseComponent } from './components/billing/subscription-services/subscription-services-check-use/subscription-services-check-use.component';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -182,6 +183,7 @@ declare var $: any;
     ManufacturesCheckUseComponent,
     UserDeArchiveNotificationComponent,
     PreviewFileComponent,
+    SubscriptionServicesCheckUseComponent
   ],
   imports: [
     BrowserModule,
@@ -254,7 +256,8 @@ declare var $: any;
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     UsersCheckUseComponent,
-    ManufacturesCheckUseComponent
+    ManufacturesCheckUseComponent,
+    SubscriptionServicesCheckUseComponent
   ],
   providers: [
     {

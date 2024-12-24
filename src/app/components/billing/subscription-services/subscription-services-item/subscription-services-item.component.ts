@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { SubscriptionServices } from '../class/subscription-services';
 import { Subscription } from 'rxjs';
 import { REMOVE_SUBSCRIBE_SERVICE } from 'src/app/const/confirm';
@@ -7,6 +7,8 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { SubscriptionServicesStateService } from 'src/app/states/subscription-services/subscription-services-state.service';
+import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
+import { SubscriptionServicesCheckUseComponent } from '../subscription-services-check-use/subscription-services-check-use.component';
 
 @Component({
   selector: 'app-subscription-services-item',
@@ -21,7 +23,9 @@ export class SubscriptionServicesItemComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private subscriptionServicesStateService: SubscriptionServicesStateService,
-    private permissionsService: PermissionsService) { }
+    private taxesStateService: TaxesStateService,
+    private permissionsService: PermissionsService,
+    public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
 
@@ -30,7 +34,8 @@ export class SubscriptionServicesItemComponent implements OnInit, OnDestroy {
     return this.permissionsService.isAllowed(action)
   }
   getSelectedTaxNames(taxes) {
-    return taxes && taxes.map((tax) => {
+    let list = this.taxesStateService.getTaxes().filter(item => taxes.some(tax => tax == item.id))
+    return list && list.map((tax) => {
       return tax.name + ' ' + tax.rate + '%';
     }).join(', ') || 'No taxes';
   };
@@ -39,10 +44,12 @@ export class SubscriptionServicesItemComponent implements OnInit, OnDestroy {
   }
   delete() {
     this.confirmStateService.setConfirmAction(REMOVE_SUBSCRIBE_SERVICE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to delete ${this.service.name}?`;
+    const modalRef = this.modalService.open(SubscriptionServicesCheckUseComponent, { windowClass: 'xs-modal user-modal', container: "app-subscription-services", backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.service = this.service;
     this.subscriptionServicesStateService.setServiceForRemove(this.service);
+    this.cd.detectChanges();
   }
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

@@ -7,6 +7,10 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { SubscriptionServicesStateService } from 'src/app/states/subscription-services/subscription-services-state.service';
+import { REMOVE_SUBSCRIBE_SERVICE } from 'src/app/const/confirm';
+import { SubscriptionServicesRealTimeService } from 'src/app/states/subscription-services/subscription-services-real-time.service';
+import { SubscriptionServicesFilter } from './class/subscription-services-filter';
+import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 
 @Component({
   selector: 'app-subscription-services',
@@ -18,8 +22,7 @@ import { SubscriptionServicesStateService } from 'src/app/states/subscription-se
 })
 export class SubscriptionServicesComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
-  showEditService: boolean = false;
-  editService: SubscriptionServices;
+  filter: SubscriptionServicesFilter = new SubscriptionServicesFilter();
   list: Array<SubscriptionServices> = [];
   sub: Subscription = new Subscription();
   constructor(private subscriptionServicesService: SubscriptionServicesService,
@@ -27,6 +30,8 @@ export class SubscriptionServicesComponent implements OnInit, OnDestroy {
     private leftPanelStateService: LeftPanelStateService,
     private permissionsService: PermissionsService,
     private subscriptionServicesStateService: SubscriptionServicesStateService,
+    private subscriptionServicesRealTimeService: SubscriptionServicesRealTimeService,
+    private taxesStateService: TaxesStateService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -38,39 +43,39 @@ export class SubscriptionServicesComponent implements OnInit, OnDestroy {
       this.showPreloader = false;
       this.cd.detectChanges();
     })
-    /* let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-       if (data) {
-         if (this.confirmStateService.getConfirmAction() === REMOVE_DEFAULT_SERVICE) this.removeService(this.nonContractServicesStateService.getServiceForRemove());
-       }
-     })
-     this.sub.add(getConfirm);
-     let changeServiceArray = this.nonContractServicesRealTimeService.changeServiceArray.subscribe(newChange => {
-       if (newChange.action === 'SERVICE_SAVED') {
-         const Index = this.list.findIndex((item) => item.versionedId.id === newChange.data.versionedId.id);
-         if (Index > -1) this.list[Index] = new NonContractServices(newChange.data);
-         if (Index === -1) this.list.unshift(new NonContractServices(newChange.data));
- 
-       }
-       if (newChange.action === 'SERVICE_DELETED') {
-         const Index = this.list.findIndex((item) => item.versionedId.id === newChange.data.versionedId.id);
-         if (Index > -1) this.list.splice(Index, 1);
- 
-       }
-       this.cd.detectChanges();
-     })
-     this.sub.add(changeServiceArray);*/
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === REMOVE_SUBSCRIBE_SERVICE) this.removeService(this.subscriptionServicesStateService.getServiceForRemove());
+      }
+    })
+    this.sub.add(getConfirm);
+    let changeServiceArray = this.subscriptionServicesRealTimeService.changeServicesArray.subscribe(newChange => {
+      if (newChange.action === 'SUBSCRIPTION_SERVICE_SAVED') {
+        const Index = this.list.findIndex((item) => item.id === newChange.data.id);
+        if (Index > -1) this.list[Index] = new SubscriptionServices(newChange.data);
+        if (Index === -1) this.list.unshift(new SubscriptionServices(newChange.data));
+      }
+      if (newChange.action === 'SUBSCRIPTION_SERVICE_DELETED') {
+        const Index = this.list.findIndex((item) => item.id === newChange.data);
+        if (Index > -1) this.list.splice(Index, 1);
+      }
+      this.cd.detectChanges();
+    })
+    this.sub.add(changeServiceArray);
   }
-  /* public removeService(service) {
-     this.nonContractServicesService.deleteService(service.versionedId.id).subscribe(data => {
- 
-     })
-   }
-  
-   onEditService(service) {
-     this.editService = new NonContractServices(JSON.parse(JSON.stringify(service)));
-     this.nonContractServicesStateService.toggleAsideForEdit(this.editService);
-     this.showEditService = true;
-   }*/
+  public removeService(service) {
+    this.subscriptionServicesService.deleteService(service.id).subscribe(data => {
+
+    })
+  }
+  public onFilter(field) {
+    this.filter.onFilter(field, this.list, this.taxesStateService.getTaxes());
+    this.cd.detectChanges();
+  }
+
+  onEditService(service) {
+    this.subscriptionServicesStateService.toggleAsideForEdit(service);
+  }
   onShowAddAside() {
     this.subscriptionServicesStateService.toggleAsideForAdd();
   }

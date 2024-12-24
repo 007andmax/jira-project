@@ -7,7 +7,11 @@ import { SubscriptionServices } from 'src/app/components/billing/subscription-se
 export class SubscriptionServicesStateService {
   serviceForRemove: SubscriptionServices = null;
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
+  showAsideForEdit: EventEmitter<any> = new EventEmitter();
   constructor() { }
+  public toggleAsideForEdit(data) {
+    this.showAsideForEdit.emit(data);
+  }
   public toggleAsideForAdd() {
     this.showAsideForAdd.emit();
   }

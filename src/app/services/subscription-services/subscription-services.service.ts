@@ -24,12 +24,31 @@ export class SubscriptionServicesService {
     private appStateService: AppStateService
 
   ) { }
+  public deleteService(id) {
 
+    return this.http.delete(this.apiUrl + `subscriptionServices/${id}`).pipe(
+      tap(data => {
+        this.toastrService.success("The service has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public getServices() {
     return this.http.get(this.apiUrl + `subscriptionServices`);
   }
+  public validateServiceForRemove(id) {
+    return this.http.get(this.apiUrl + `subscriptionServices/validate/${id}`);
+  }
   public addService(data) {
     return this.http.post(this.apiUrl + `subscriptionServices`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The new service has been successfully uploaded");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public editService(id, data) {
+    return this.http.put(this.apiUrl + `subscriptionServices/${id}`, data).pipe(
       tap(data => {
         this.toastrService.success("The new service has been successfully uploaded");
         this.appStateService.changeDetectorRef();

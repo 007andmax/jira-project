@@ -2,7 +2,8 @@ export class SubscriptionServices {
     "id": string;
     "name": string;
     "rate": number;
-    "taxes": [];
+    "taxIds": [];
+    updateServicePricesInContracts: boolean = false;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
