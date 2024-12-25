@@ -62,10 +62,25 @@ export class SubscriptionServicesComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(changeServiceArray);
+    let onFastAdd = this.subscriptionServicesStateService.onFastAdd.subscribe(data => {
+      const Index = this.list.findIndex((item) => item.id === data.id);
+      if (Index === -1) this.list.unshift(new SubscriptionServices(data));
+    })
+    this.sub.add(onFastAdd);
+    let onFastEdit = this.subscriptionServicesStateService.onFastEdit.subscribe(data => {
+      const Index = this.list.findIndex((item) => item.id === data.id);
+      if (Index > -1) this.list[Index] = new SubscriptionServices(data);
+    })
+    this.sub.add(onFastEdit);
+    let onFastRemove = this.subscriptionServicesStateService.onFastRemove.subscribe(data => {
+      const Index = this.list.findIndex((item) => item.id === data);
+      if (Index > -1) this.list.splice(Index, 1);
+    })
+    this.sub.add(onFastRemove);
   }
   public removeService(service) {
     this.subscriptionServicesService.deleteService(service.id).subscribe(data => {
-
+      this.subscriptionServicesStateService.fastRemoveService(service.id);
     })
   }
   public onFilter(field) {

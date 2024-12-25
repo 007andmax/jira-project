@@ -11,6 +11,27 @@
         class="default-service-table__taxes"
         [textContent]="getSelectedTaxNames(service.taxIds)"
     ></div>
+    <div class="default-service-table__gl">
+        <app-drop-down
+            #glNumberSelect
+            [class]="['--small-padding']"
+            [list]="glNumbers"
+            [placeholder]="'Select GL'"
+            [container]="'body'"
+            [change]="false"
+            [editItem]="selectedGlNumber"
+            [add]="true"
+            [field]="'glNumber'"
+            uiType="dark"
+            heightInput="32px"
+            dropdownWidth="392px"
+            [reducerItem]="glDropDownItemName"
+            (onAddItem)="onAddGlNumber($event)"
+            [isDisabled]="!getPermissions('MANAGE_SERVICES')"
+            (onSelectedItem)="onSelectGlNumbers($event)"
+        >
+        </app-drop-down>
+    </div>
     <div class="default-service-table__menu">
         <div
             *ngIf="getPermissions('MANAGE_SERVICES')"

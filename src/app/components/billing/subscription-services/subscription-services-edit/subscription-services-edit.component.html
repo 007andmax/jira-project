@@ -65,6 +65,28 @@
                     </div>
                 </div>
             </div>
+            <div class="qt-df">
+                <div class="qt-w100 qt-mb-16">
+                    <div class="qt-input-block">
+                        <label>GL Number</label>
+                        <gl-numbers-drop-down
+                            [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']"
+                            [list]="glNumbers"
+                            #glNumberSelect
+                            [placeholder]="'Select GL'"
+                            [container]="'body'"
+                            [editItem]="selectedGlNumber"
+                            [add]="true"
+                            [search]="true"
+                            [change]="true"
+                            [field]="'glNumber'"
+                            [reducerItem]="glDropDownItemName"
+                            (onAddItem)="onAddGlNumber($event)"
+                            (onSelectedItem)="onSelectGlNumbers($event)"
+                        ></gl-numbers-drop-down>
+                    </div>
+                </div>
+            </div>
             <div class="qt-inputs-row">
                 <label
                     class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"

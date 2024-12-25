@@ -10,6 +10,9 @@ import { Tax } from 'src/class/taxes/tax';
 import { NonContractServices } from '../../non-contract-services/class/non-contract-service';
 import { NonContractServiceValidate } from '../../non-contract-services/class/non-contract-service-validate';
 import { SubscriptionServicesService } from 'src/app/services/subscription-services/subscription-services.service';
+import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
+import { GlNumber } from 'src/class/gl-number/gl-number';
+import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
 
 @Component({
   selector: 'app-subscription-services-add',
@@ -22,6 +25,7 @@ export class SubscriptionServicesAddComponent implements OnInit, OnDestroy {
   submitted: boolean = false;
   defaultSelectedTax: Array<Tax> = [];
   showAdd: boolean = false;
+  glNumbers: Array<GlNumber> = [];
   @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
   constructor(
     private subscriptionServicesService: SubscriptionServicesService,
@@ -29,6 +33,8 @@ export class SubscriptionServicesAddComponent implements OnInit, OnDestroy {
     private subscriptionServicesStateService: SubscriptionServicesStateService,
     public cd: ChangeDetectorRef,
     public formBuilder: FormBuilder,
+    private glNumberStateService: GlNumberStateService,
+    private glNumberService: GlNumberService
   ) { }
 
   ngOnInit() {
@@ -52,15 +58,33 @@ export class SubscriptionServicesAddComponent implements OnInit, OnDestroy {
       taxIds: [
         []
       ],
+      glNumberId: [""]
+    })
+    if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
+    let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
+      this.glNumbers = this.sortGlNumbers(data);
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
+    })
+    this.sub.add(getOnGlNumbers);
+  }
+  private sortGlNumbers(data) {
+    return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
+      1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
+  }
+  onAddGlNumber(data) {
+    this.glNumberService.addGlNumber(data, "").subscribe((res: any) => {
+      this.modelForm.controls["glNumberId"].setValue(res.id)
     })
   }
-
-  onChangeName() {
-    // if (this.service.name.length > 3 && this.service.name.length < 100) this.validate.resetName();
+  onSelectGlNumbers(data) {
+    console.log("data", data);
+    this.modelForm.controls["glNumberId"].setValue(data.id)
   }
-  onChangeRate(event) {
-    /*  this.service.rate = Number(event.target.value);
-      if (this.service.rate >= 0) this.validate.resetRate();*/
+  glDropDownItemName(item) {
+    return `${item["glNumber"]} - ${(item["description"] && item["description"].length > 0) ? item["description"]
+      : "No description"}`;
   }
   private setDefaultTaxes(lsitTaxes) {
     let taxes = lsitTaxes.filter(item => item.isDefault === true);
@@ -79,6 +103,7 @@ export class SubscriptionServicesAddComponent implements OnInit, OnDestroy {
     }
     this.addBtn.setDisabled(true);
     this.subscriptionServicesService.addService(this.modelForm.value).subscribe(data => {
+      this.subscriptionServicesStateService.fastAddService(data);
       this.addBtn.setDisabled(false);
       this.close();
     }, err => {
@@ -86,8 +111,10 @@ export class SubscriptionServicesAddComponent implements OnInit, OnDestroy {
     })
   }
   close() {
+    this.submitted = false;
     this.showAdd = false;
     this.modelForm.reset();
+    this.modelForm.patchValue({ rate: 0 })
     if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
   }
   ngOnDestroy(): void {

@@ -15,6 +15,7 @@ import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { SubscriptionServicesEditComponent } from './subscription-services-edit/subscription-services-edit.component';
 import { SubscriptionServicesCheckUseComponent } from './subscription-services-check-use/subscription-services-check-use.component';
+import { GlNumbersDropDownModule } from '../../inventory/gl-numbers-drop-down/gl-numbers-drop-down.module';
 
 
 
@@ -38,7 +39,8 @@ import { SubscriptionServicesCheckUseComponent } from './subscription-services-c
         MatErrorModule,
         TaxesModule,
         ToFixedModule,
-        NumberModule
+        NumberModule,
+        GlNumbersDropDownModule
     ],
 
 
