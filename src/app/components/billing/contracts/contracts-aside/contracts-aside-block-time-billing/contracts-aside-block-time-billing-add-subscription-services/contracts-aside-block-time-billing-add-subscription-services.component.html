@@ -1,0 +1,33 @@
+<div
+    class="add-service-container qt-pos-rel"
+    ngbDropdown
+    placement="bottom-left"
+>
+    <button
+        class="qt-button --gray --sm"
+        id="dropdownBasic2"
+        ngbDropdownToggle
+    >
+        + Add Service
+    </button>
+    <ul
+        class="qt-dropdown-menu list-services --open-bot"
+        ngbDropdownMenu
+        aria-labelledby="dropdownBasic2"
+    >
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="subscriptionServices"
+            let-i="index"
+        >
+            <li
+                class="pointer"
+                ngbDropdownItem
+                [textContent]="item.name"
+                (click)="select(item)"
+                [ngClass]="{'--selected':isSelected(item.id)}"
+            ></li>
+        </ng-template>
+    </ul>
+</div>

@@ -6,12 +6,16 @@ export class ContractsUserDeviceService {
     validate: boolean = true;
     validateDuplicated: boolean = true;
     rate_str: string;
-    constructor(count, name, rate, taxIds) {
+    "subscriptionService": any;
+    "discountAmount": string = "20";
+    "discountType": string = "PERCENT";
+    constructor(count, name, rate, taxIds, serviceId) {
         this.count = count;
         this.name = name;
         this.rate = rate;
         this.taxIds = taxIds;
         this.rate_str = this.rate.toFixed(2);
+        this.subscriptionService = serviceId
     }
     public getDataForCreate() {
         return {
@@ -19,6 +23,9 @@ export class ContractsUserDeviceService {
             name: this.name,
             rate: String(this.rate),
             taxIds: this.taxIds,
+            subscriptionService: this.subscriptionService,
+            discountAmount: this.discountAmount,
+            discountType: this.discountType
         }
     }
     public setValidate(data) {

@@ -27,6 +27,7 @@ import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users
 import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
 import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
+import { ContractsAsideBlockTimeBillingAddSubscriptionServicesComponent } from './contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-subscription-services/contracts-aside-block-time-billing-add-subscription-services.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.mo
         ContractsAsideUserDeviceBillingComponent,
         ContractsAsideProductServiceContractsComponent,
         ContractsAsideTopComponent,
-        ContractsAsideHourlyBillingDefaultServiceComponent
+        ContractsAsideHourlyBillingDefaultServiceComponent,
+        ContractsAsideBlockTimeBillingAddSubscriptionServicesComponent
 
     ],
     imports: [

@@ -77,8 +77,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
       this.onCheckServicesForAdd(data);
     })
     this.sub.add(getConfirm);
-    this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(1, "Managed workstations", 0, this.defaultSelectedTax.map(item => item.id)),
-    new ContractsUserDeviceService(1, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))]
     if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();
   }
   public onInitCopy() {
@@ -194,9 +192,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   onSetServiceContractServicesType(event, type) {
     if (event.target.checked) {
       this.contractsUserDevice.billType = type;
-      if (type === "DEVICE") this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(1, "Managed workstations", 0, this.defaultSelectedTax.map(item => item.id)),
-      new ContractsUserDeviceService(1, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))];
-      if (type === "USER") this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(1, "Managed users", 0, this.defaultSelectedTax.map(item => item.id))];
     }
   }
   onServiceTaxesChange(data) {
@@ -236,8 +231,8 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   addBlockTimeService() {
     this.contractsUserDevice.blockTimeServices.push(new ContractsBlockTimeService("", 0));
   }
-  addServiceContractService() {
-    this.contractsUserDevice.serviceContractServices.push(new ContractsUserDeviceService(1, "", 0, this.defaultSelectedTax.map(item => item.id)));
+  addServiceContractService(item) {
+    this.contractsUserDevice.serviceContractServices.push(new ContractsUserDeviceService(1, item.name, item.rate, item.taxIds, { id: item.id }));
   }
   onRemoveServices(i) {
     this.contractsUserDevice.services.splice(i, 1);

@@ -6,6 +6,7 @@ import { ContractsAsideBlockTimeBillingComponent } from './contracts-aside-block
 import { ContractsAsideUserDeviceBillingComponent } from './contracts-aside-user-device-billing/contracts-aside-user-device-billing.component';
 import { ContractsAsideProductServiceContractsComponent } from './contracts-aside-product-service-contracts/contracts-aside-product-service-contracts.component';
 import { Subscription } from 'rxjs';
+import { SubscriptionServicesService } from 'src/app/services/subscription-services/subscription-services.service';
 
 @Component({
   selector: 'app-contracts-aside',
@@ -21,7 +22,8 @@ export class ContractsAsideComponent implements OnInit, OnDestroy {
   step: number = 1;
   sub: Subscription = new Subscription();
   constructor(private contractsStateService: ContractsStateService,
-    private nonContractServicesService: NonContractServicesService
+    private nonContractServicesService: NonContractServicesService,
+    private subscriptionServicesService: SubscriptionServicesService,
   ) { }
 
   ngOnInit() {
@@ -37,6 +39,9 @@ export class ContractsAsideComponent implements OnInit, OnDestroy {
       this.contractsStateService.setDefaultService(data);
     })
     this.sub.add(getNonContractServices);
+    this.subscriptionServicesService.getServices().subscribe(data => {
+      this.contractsStateService.setSubscriptionServices(data);
+    })
   }
   onCreate() {
     if (this.hourlyContract) this.hourlyContract.onCreate();

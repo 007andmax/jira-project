@@ -10,6 +10,7 @@ export class ServiceAgreementBlockTimeServices {
     validate: boolean = true;
     validateDuplicated: boolean = true;
     rate_str: string;
+    subscriptionService: any;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

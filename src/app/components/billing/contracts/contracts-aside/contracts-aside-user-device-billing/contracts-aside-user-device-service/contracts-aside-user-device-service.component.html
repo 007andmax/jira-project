@@ -17,8 +17,7 @@
             class="qt-input-in-table"
             [ngClass]="{'--input-error' : !service.validate || !service.validateDuplicated}"
             [(ngModel)]="service.name"
-            (blur)="checkName()"
-            (input)="onChange()"
+            readonly
         >
     </td>
     <td class="col-count --editable">
