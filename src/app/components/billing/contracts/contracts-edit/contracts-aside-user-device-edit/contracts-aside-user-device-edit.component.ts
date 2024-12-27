@@ -14,6 +14,7 @@ import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 import { ContractsAsideUserDeviceServiceComponent } from '../../contracts-aside/contracts-aside-user-device-billing/contracts-aside-user-device-service/contracts-aside-user-device-service.component';
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
+import { SubscriptionServicesStateService } from 'src/app/states/subscription-services/subscription-services-state.service';
 
 @Component({
   selector: 'app-contracts-aside-user-device-edit',
@@ -45,6 +46,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
   constructor(private companiesStateService: CompaniesStateService,
     private taxesStateService: TaxesStateService,
     private nonContractServicesService: NonContractServicesService,
+    private subscriptionServicesStateService: SubscriptionServicesStateService,
     private contractsService: ContractsService,
     public cd: ChangeDetectorRef) { }
 
@@ -112,6 +114,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.contractsService.updateContract(this.contractsUserDevice.getDataForUpdateServiceContract(this.toggleMaximumAmountHours)).subscribe(res => {
+            this.subscriptionServicesStateService.refreshServicesAgreements();
             this.onClose.emit(null);
           })
         } else {

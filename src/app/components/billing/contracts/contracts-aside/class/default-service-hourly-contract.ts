@@ -19,7 +19,8 @@ export class DefaultServicesHourlyContract extends NonContractServices {
             rate: this.rate,
             taxIds: this.taxes.map(item => item.id),
             subscriptionService: { id: this.versionedId.id },
-            parentDefaultServiceId: this.versionedId.id
+            parentDefaultServiceId: this.versionedId.id,
+            basedOnDefault: true
         }
     }
     public setDataFromCopy(data: ContractsHourlyService, taxesList: Array<Tax>) {

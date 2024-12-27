@@ -19,6 +19,7 @@ import { Subscription } from 'rxjs';
 import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement-block-time-services';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
+import { SubscriptionServicesStateService } from 'src/app/states/subscription-services/subscription-services-state.service';
 
 
 @Component({
@@ -54,6 +55,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     public cd: ChangeDetectorRef,
     private contractsStateService: ContractsStateService,
+    private subscriptionServicesStateService: SubscriptionServicesStateService,
     private nonContractServicesService: NonContractServicesService,) { }
 
   ngOnInit() {
@@ -91,6 +93,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, this.contractsBlockTime.id, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.contractsService.updateContract(this.contractsBlockTime.getDataForUpdateBlockTime()).subscribe(res => {
+            this.subscriptionServicesStateService.refreshServicesAgreements();
             this.onClose.emit(null);
           })
         } else {

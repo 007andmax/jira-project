@@ -169,6 +169,8 @@ export class ContractsUserDevice {
         })
         let validateDuplicated = (this.serviceContractServices.find(item => !item.validateDuplicated)) ? false : true;
         let validate = (this.serviceContractServices.find(item => !item.validate)) ? false : true;
+        console.log("validateDuplicated", validateDuplicated);
+        console.log("validate", validate);
         return validateDuplicated && validate;
     }
     public checkDuplicatedBlockTimeServices() {

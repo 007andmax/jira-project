@@ -12,6 +12,9 @@ export class ServiceAgreementBlockTimeServices {
     rate_str: string;
     subscriptionService: any;
     parentDefaultServiceId: any;
+    discountAmount: number;
+    discountSum: number;
+    discountType: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -33,6 +36,25 @@ export class ServiceAgreementBlockTimeServices {
             name: this.name,
             rate: this.rate,
             taxIds: this.taxIds,
+        }
+    }
+    public getDataForUpdateSubscriptionServices() {
+        return {
+            "parentDefaultServiceId": this.id,
+            "basedOnDefault": this.basedOnDefault,
+            "rate": this.rate
+        }
+    }
+    public getDataForUpdateContractServices() {
+        return {
+            "count": this.count,
+            "rate": this.rate,
+            "taxIds": this.taxIds,
+            "subscriptionService": {
+                "id": this.id
+            },
+            "discountAmount": this.discountAmount,
+            "discountType": this.discountType
         }
     }
     public setValidate(data) {

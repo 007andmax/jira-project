@@ -11,6 +11,8 @@ import { REMOVE_SUBSCRIBE_SERVICE } from 'src/app/const/confirm';
 import { SubscriptionServicesRealTimeService } from 'src/app/states/subscription-services/subscription-services-real-time.service';
 import { SubscriptionServicesFilter } from './class/subscription-services-filter';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
+import { ServiceAgreement } from '../contracts/class/service-agreement';
+import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 
 @Component({
   selector: 'app-subscription-services',
@@ -21,6 +23,8 @@ import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
   styleUrls: ['./subscription-services.component.scss']
 })
 export class SubscriptionServicesComponent implements OnInit, OnDestroy {
+  serviceAgreement: ServiceAgreement;
+  showEditContract: boolean = false;
   showPreloader: boolean = true;
   filter: SubscriptionServicesFilter = new SubscriptionServicesFilter();
   list: Array<SubscriptionServices> = [];
@@ -32,6 +36,7 @@ export class SubscriptionServicesComponent implements OnInit, OnDestroy {
     private subscriptionServicesStateService: SubscriptionServicesStateService,
     private subscriptionServicesRealTimeService: SubscriptionServicesRealTimeService,
     private taxesStateService: TaxesStateService,
+    private contractsStateService: ContractsStateService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -77,6 +82,21 @@ export class SubscriptionServicesComponent implements OnInit, OnDestroy {
       if (Index > -1) this.list.splice(Index, 1);
     })
     this.sub.add(onFastRemove);
+    let getOnEdit = this.contractsStateService.getOnEdit().subscribe(data => {
+      this.serviceAgreement = data;
+      this.showEditContract = true;
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
+    })
+    this.sub.add(getOnEdit);
+    let getOnToggleEdit = this.contractsStateService.getOnToggleEdit().subscribe(data => {
+      this.showEditContract = false;
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
+    })
+    this.sub.add(getOnToggleEdit);
   }
   public removeService(service) {
     this.subscriptionServicesService.deleteService(service.id).subscribe(data => {

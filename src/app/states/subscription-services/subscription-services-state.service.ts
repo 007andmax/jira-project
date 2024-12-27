@@ -11,7 +11,11 @@ export class SubscriptionServicesStateService {
   onFastAdd: EventEmitter<any> = new EventEmitter();
   onFastEdit: EventEmitter<any> = new EventEmitter();
   onFastRemove: EventEmitter<any> = new EventEmitter();
+  onRefreshServicesAgreements: EventEmitter<any> = new EventEmitter();
   constructor() { }
+  public refreshServicesAgreements() {
+    this.onRefreshServicesAgreements.emit(null);
+  }
   public fastRemoveService(data) {
     this.onFastRemove.emit(data);
   }

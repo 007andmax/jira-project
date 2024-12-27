@@ -6,3 +6,8 @@
     text-transform: none;
     text-align: left;
 }
+::ng-deep .check-contracts-edit {
+.contracts-page__aside {
+    z-index: 9999 !important;
+}
+}

@@ -8,6 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SubscriptionServicesService } from 'src/app/services/subscription-services/subscription-services.service';
 import { SubscriptionServicesContracts } from '../class/subscription-services-contract';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
+import { SubscriptionServicesStateService } from 'src/app/states/subscription-services/subscription-services-state.service';
 
 @Component({
   selector: 'app-subscription-services-check-use',
@@ -26,19 +27,21 @@ export class SubscriptionServicesCheckUseComponent implements OnInit, OnDestroy 
     public ticketsListService: TicketsListService,
     private confirmStateService: ConfirmStateService,
     public activeModal: NgbActiveModal,
+    private subscriptionServicesStateService: SubscriptionServicesStateService,
     private subscriptionServicesService: SubscriptionServicesService) { }
 
   ngOnInit() {
+    this.validateServiceForRemove();
+    let onRefreshServicesAgreements = this.subscriptionServicesStateService.onRefreshServicesAgreements.subscribe(data => {
+      this.validateServiceForRemove();
+    })
+    this.sub.add(onRefreshServicesAgreements);
+  }
+  validateServiceForRemove() {
+    this.showPreloader = true;
     this.subscriptionServicesService.validateServiceForRemove(this.service.id).subscribe((data: any) => {
       this.getContracts(data);
     })
-    /*let onRefreshProductsAgreements = this.inventoryStateService.onRefreshProductsAgreements.subscribe(data => {
-          this.showPreloader = true;
-          this.productService.validateproductForRemove(this.inventory.versionedId.id).subscribe((data: any) => {
-            this.getAgreements(data);
-          });
-        })
-        this.sub.add(onRefreshProductsAgreements);*/
   }
   getContracts(data) {
     this.valid = data.valid;
@@ -49,7 +52,7 @@ export class SubscriptionServicesCheckUseComponent implements OnInit, OnDestroy 
 
   showContract(agreement) {
     this.contractsService.getServiceAgreement(agreement.id).subscribe(data => {
-      this.contractsStateService.setPreview(data);
+      this.contractsStateService.setEdit(data);
     })
   }
   cancelConfirm() {

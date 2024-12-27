@@ -31,7 +31,8 @@ export class SubscriptionServices {
             glNumberId: this.glNumberId,
             updateServicePricesInContracts: this.updateServicePricesInContracts,
             subscriptionService: { id: this.id },
-            parentDefaultServiceId: this.id
+            parentDefaultServiceId: this.id,
+            basedOnDefault: true
         }
     }
 }

@@ -228,6 +228,8 @@ export class ServiceAgreement {
         })
         let validateDuplicated = (this.serviceContractServices.find(item => !item.validateDuplicated)) ? false : true;
         let validate = (this.serviceContractServices.find(item => !item.validate)) ? false : true;
+        console.log("validateDuplicated", validateDuplicated);
+        console.log("validate", validate);
         return validateDuplicated && validate;
     }
     public getAllServicesName() {
@@ -257,7 +259,7 @@ export class ServiceAgreement {
             id: this.id,
             billType: this.billType,
             blockRate: (this.blockRate) ? this.blockRate : undefined,
-            blockTimeServices: (toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForUpdate()) : null,
+            blockTimeServices: (toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForUpdateSubscriptionServices()) : null,
             companyId: this.companyId,
             contractWithBlockTime: toggleMaximumAmountHours,
             customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
@@ -269,8 +271,8 @@ export class ServiceAgreement {
             rateExceeding: (this.rateExceeding && this.rateExceeding.length > 0) ? this.rateExceeding : null,
             serviceExpenses: null,
             productExpenses: null,
-            serviceContractServices: this.serviceContractServices.map(item => item.getDataForUpdate()),
-            serviceContractServicesToTrack: (!toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForUpdate()) : [],
+            serviceContractServices: this.serviceContractServices.map(item => item.getDataForUpdateContractServices()),
+            serviceContractServicesToTrack: (!toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForUpdateSubscriptionServices()) : [],
             services: this.services.map(item => item.getDataForCreate()),
             reviewDate: this.reviewDate,
             startDate: this.startDate,
@@ -283,7 +285,7 @@ export class ServiceAgreement {
     public getDataForUpdateBlockTime() {
         return {
             blockRate: this.blockRate,
-            blockTimeServices: this.blockTimeServices.map(item => item.getDataForUpdate()),
+            blockTimeServices: this.blockTimeServices.map(item => item.getDataForUpdateSubscriptionServices()),
             companyId: this.companyId,
             customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
             description: this.description,
