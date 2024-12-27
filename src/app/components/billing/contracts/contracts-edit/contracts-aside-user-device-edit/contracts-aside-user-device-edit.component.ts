@@ -218,8 +218,8 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     this.maximumAmount.open();
     this.contractsUserDevice.setTaxIds(data.map(item => item.id));
   }
-  addBlockTimeService() {
-    this.contractsUserDevice.blockTimeServices.push(new ServiceAgreementBlockTimeServices(this.contractsUserDevice.getDefaultBlockTimeService()));
+  addBlockTimeService(data) {
+    this.contractsUserDevice.blockTimeServices.push(new ServiceAgreementBlockTimeServices(data.setDataFromBillableService()));
   }
   addServiceContractService() {
     this.contractsUserDevice.serviceContractServices.push(new ServiceAgreementBlockTimeServices(this.contractsUserDevice.getDefaultBlockTimeService()));

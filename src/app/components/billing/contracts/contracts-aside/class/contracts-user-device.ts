@@ -9,8 +9,7 @@ import { ContractsOtherService } from './contracts-other-service';
 export class ContractsUserDevice {
     billType: string = "DEVICE";
     blockRate: number;
-    blockTimeServices: Array<ContractsBlockTimeService> = [new ContractsBlockTimeService("Managed Services Onsite", 0),
-    new ContractsBlockTimeService("Managed Services Remote", 0)];
+    blockTimeServices: Array<ContractsBlockTimeService> = [];
     companyId: string;
     contractWithBlockTime: boolean = false;
     customInterval: any;
@@ -41,7 +40,7 @@ export class ContractsUserDevice {
     public setDataFromCopy(data: ServiceAgreement) {
         this.billType = data.billType;
         this.blockRate = (data.blockRate.length > 0) ? Number(data.blockRate) : undefined;
-        this.blockTimeServices = (data.blockTimeServices.length > 0) ? data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate)) : data.serviceContractServicesToTrack.map(item => new ContractsBlockTimeService(item.name, item.rate));
+        this.blockTimeServices = (data.blockTimeServices.length > 0) ? data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate, item.parentDefaultServiceId)) : data.serviceContractServicesToTrack.map(item => new ContractsBlockTimeService(item.name, item.rate, item.parentDefaultServiceId));
         this.companyId = data.companyId;
         this.contractWithBlockTime = (data.rateExceeding && (data.includedHours || data.includedHours == 0)) ? true : false;
         this.customInterval = data.customInterval;

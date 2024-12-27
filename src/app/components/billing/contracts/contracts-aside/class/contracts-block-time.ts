@@ -6,8 +6,7 @@ import { ServiceAgreement } from '../../class/service-agreement';
 export class ContractsBlockTime {
     billType: any;
     blockRate: string = "";
-    blockTimeServices: Array<ContractsBlockTimeService> = [new ContractsBlockTimeService("On site block time service", 5),
-    new ContractsBlockTimeService("Remote block time service", 5)];
+    blockTimeServices: Array<ContractsBlockTimeService> = [];
     companyId: string;
     customInterval: number;
     description: string = "";
@@ -30,7 +29,7 @@ export class ContractsBlockTime {
     public setDataFromCopy(data: ServiceAgreement) {
         this.billType = data.billType;
         this.blockRate = Number(data.blockRate).toFixed(2);
-        this.blockTimeServices = data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate));
+        this.blockTimeServices = data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate, item.id));
         this.companyId = data.companyId;
         this.customInterval = data.customInterval;
         this.description = data.description;

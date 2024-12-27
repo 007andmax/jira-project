@@ -216,12 +216,10 @@
                 </tbody>
             </table>
         </div>
-        <button
-            class="qt-button --gray --sm qt-mb-24"
-            (click)="addBlockTimeService()"
-        >
-            + Add Service
-        </button>
+        <app-contracts-aside-block-time-billing-add-default-service
+            class="qt-mb-24"
+            (onSelect)="addBlockTimeService($event)"
+        ></app-contracts-aside-block-time-billing-add-default-service>
         <div class="qt-df qt-mb-24">
             <div
                 class="qt-toggle qt-mr-8"

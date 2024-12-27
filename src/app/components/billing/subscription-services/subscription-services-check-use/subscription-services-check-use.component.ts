@@ -7,6 +7,7 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SubscriptionServicesService } from 'src/app/services/subscription-services/subscription-services.service';
 import { SubscriptionServicesContracts } from '../class/subscription-services-contract';
+import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 
 @Component({
   selector: 'app-subscription-services-check-use',
@@ -21,10 +22,9 @@ export class SubscriptionServicesCheckUseComponent implements OnInit, OnDestroy 
   valid: boolean = false;
   sub: Subscription = new Subscription();
   constructor(private contractsService: ContractsService,
-
+    private contractsStateService: ContractsStateService,
     public ticketsListService: TicketsListService,
     private confirmStateService: ConfirmStateService,
-
     public activeModal: NgbActiveModal,
     private subscriptionServicesService: SubscriptionServicesService) { }
 
@@ -49,7 +49,7 @@ export class SubscriptionServicesCheckUseComponent implements OnInit, OnDestroy 
 
   showContract(agreement) {
     this.contractsService.getServiceAgreement(agreement.id).subscribe(data => {
-      //   this.contractsStateService.setEdit(data);
+      this.contractsStateService.setPreview(data);
     })
   }
   cancelConfirm() {

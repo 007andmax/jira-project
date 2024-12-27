@@ -11,6 +11,17 @@ export class DefaultServicesHourlyContract extends NonContractServices {
         super(data);
         this.rate_str = this.rate.toFixed(2);
     }
+    public setDataFromBillableService() {
+        return {
+            count: 1,
+            id: this.versionedId.id,
+            name: this.name,
+            rate: this.rate,
+            taxIds: this.taxes.map(item => item.id),
+            subscriptionService: { id: this.versionedId.id },
+            parentDefaultServiceId: this.versionedId.id
+        }
+    }
     public setDataFromCopy(data: ContractsHourlyService, taxesList: Array<Tax>) {
         this.selected = true;
         this.billable = data.billable;

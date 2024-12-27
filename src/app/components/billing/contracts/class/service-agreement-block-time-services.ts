@@ -11,6 +11,7 @@ export class ServiceAgreementBlockTimeServices {
     validateDuplicated: boolean = true;
     rate_str: string;
     subscriptionService: any;
+    parentDefaultServiceId: any;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

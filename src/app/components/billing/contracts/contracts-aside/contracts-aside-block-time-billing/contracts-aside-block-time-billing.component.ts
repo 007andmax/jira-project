@@ -242,7 +242,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.contractsBlockTime.maxRolloverHours = "";
   }
   addCustomService() {
-    this.contractsBlockTime.blockTimeServices.push(new ContractsBlockTimeService("", 5));
+    //   this.contractsBlockTime.blockTimeServices.push(new ContractsBlockTimeService("", 5));
   }
   onRemoveDefaultService(i) {
     this.contractsBlockTime.services.splice(i, 1);

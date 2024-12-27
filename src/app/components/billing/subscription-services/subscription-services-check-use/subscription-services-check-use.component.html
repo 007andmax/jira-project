@@ -25,9 +25,7 @@
                 You can’t delete a service that associate with contracts, Please remove the service from following contracts before you delete it.
             </p>
             <div class="contract-container qt-mt-16">
-                <h3>
-                    <pre [textContent]="service.name"></pre>
-                </h3>
+                <h3 [textContent]="service.name"></h3>
                 <p [textContent]="'Associate with ' + list.length + ' following contracts'"></p>
                 <div class="contract-container-agreements qt-mt-8">
                     <ng-template

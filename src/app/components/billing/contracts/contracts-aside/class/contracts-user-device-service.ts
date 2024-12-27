@@ -20,7 +20,6 @@ export class ContractsUserDeviceService {
     public getDataForCreate() {
         return {
             count: this.count,
-            name: this.name,
             rate: String(this.rate),
             taxIds: this.taxIds,
             subscriptionService: this.subscriptionService,
