@@ -12,14 +12,7 @@
         >
             The duplicated service name
         </app-mat-error>
-        <input
-            type="text"
-            class="qt-input-in-table"
-            [ngClass]="{'--input-error' : !service.validate || !service.validateDuplicated}"
-            [(ngModel)]="service.name"
-            (blur)="checkName()"
-            (input)="onChange()"
-        >
+        {{service.name}}
     </td>
     <td>
         <div

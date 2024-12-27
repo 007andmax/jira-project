@@ -11,7 +11,7 @@ export class DefaultServicesHourlyContract extends NonContractServices {
         super(data);
         this.rate_str = this.rate.toFixed(2);
     }
-    public setDataFromBillableService() {
+    public getDataFromBillableService() {
         return {
             count: 1,
             id: this.versionedId.id,

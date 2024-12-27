@@ -1,5 +1,5 @@
 <tr>
-    <td class="--editable">
+    <td class="service-name --editable">
         <app-mat-error
             class="qt-tooltip-error qt-w-auto-important"
             *ngIf="!service.validate"
@@ -12,13 +12,7 @@
         >
             The duplicated service name
         </app-mat-error>
-        <input
-            type="text"
-            class="qt-input-in-table"
-            [ngClass]="{'--input-error' : !service.validate || !service.validateDuplicated}"
-            [(ngModel)]="service.name"
-            readonly
-        >
+        {{service.name}}
     </td>
     <td class="col-count --editable">
         <input

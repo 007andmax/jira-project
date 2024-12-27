@@ -204,8 +204,8 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
     this.toggleTimeRollover = data;
     this.contractsBlockTime.maxRolloverHours = "";
   }
-  addCustomService() {
-    this.contractsBlockTime.blockTimeServices.push(new ServiceAgreementBlockTimeServices(this.contractsBlockTime.getDefaultBlockTimeService()));
+  addCustomService(data) {
+    this.contractsBlockTime.blockTimeServices.push(new ServiceAgreementBlockTimeServices(data.getDataFromBillableService()));
   }
   onRemoveDefaultService(i) {
     this.contractsBlockTime.services.splice(i, 1);

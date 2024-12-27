@@ -219,10 +219,11 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     this.contractsUserDevice.setTaxIds(data.map(item => item.id));
   }
   addBlockTimeService(data) {
-    this.contractsUserDevice.blockTimeServices.push(new ServiceAgreementBlockTimeServices(data.setDataFromBillableService()));
+    this.contractsUserDevice.blockTimeServices.push(new ServiceAgreementBlockTimeServices(data.getDataFromBillableService()));
+    this.onCheckDuplicatedBlockTimeServices();
   }
-  addServiceContractService() {
-    this.contractsUserDevice.serviceContractServices.push(new ServiceAgreementBlockTimeServices(this.contractsUserDevice.getDefaultBlockTimeService()));
+  addServiceContractService(data) {
+    this.contractsUserDevice.serviceContractServices.push(new ServiceAgreementBlockTimeServices(data.getDataFromBillableService()));
     if (this.contractsUserDevice.invoiceAsSingleItem) this.contractsUserDevice.serviceContractServices[this.contractsUserDevice.serviceContractServices.length - 1].setTaxIds(this.taxesServicesDP.selectedTax.map(item => item.id));
   }
   onRemoveServices(i) {
@@ -278,6 +279,9 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
 
   public trackById(index, item) {
     return item.id;
+  }
+  public trackByServiceContractServicesId(index, item) {
+    return item.subscriptionService.id;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

@@ -158,12 +158,7 @@
                 </tbody>
             </table>
         </div>
-        <button
-            class="qt-button --gray --sm"
-            (click)="addServiceContractService()"
-        >
-            + Add Service
-        </button>
+        <app-contracts-aside-block-time-billing-add-subscription-services (onSelect)="addServiceContractService($event)"></app-contracts-aside-block-time-billing-add-subscription-services>
         <div class="qt-df qt-ai-c single-invoice">
             <div
                 class="qt-toggle qt-mr-8"
@@ -205,6 +200,7 @@
                         ngFor
                         let-item
                         [ngForOf]="contractsUserDevice.blockTimeServices"
+                        [ngForTrackBy]="trackById"
                         let-i="index"
                     >
                         <app-contracts-aside-block-time-billing-customer-service
