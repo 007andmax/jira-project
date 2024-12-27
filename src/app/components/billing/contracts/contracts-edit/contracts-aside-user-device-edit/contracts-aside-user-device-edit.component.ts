@@ -223,7 +223,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     this.onCheckDuplicatedBlockTimeServices();
   }
   addServiceContractService(data) {
-    this.contractsUserDevice.serviceContractServices.push(new ServiceAgreementBlockTimeServices(data.getDataFromBillableService()));
+    this.contractsUserDevice.serviceContractServices.push(new ServiceAgreementBlockTimeServices(data.getDataForBillableService()));
     if (this.contractsUserDevice.invoiceAsSingleItem) this.contractsUserDevice.serviceContractServices[this.contractsUserDevice.serviceContractServices.length - 1].setTaxIds(this.taxesServicesDP.selectedTax.map(item => item.id));
   }
   onRemoveServices(i) {

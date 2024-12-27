@@ -21,4 +21,17 @@ export class SubscriptionServices {
             updateServicePricesInContracts: this.updateServicePricesInContracts
         }
     }
+    public getDataForBillableService() {
+        return {
+            count: 1,
+            id: this.id,
+            "name": this.name,
+            "rate": this.rate,
+            "taxIds": this.taxIds,
+            glNumberId: this.glNumberId,
+            updateServicePricesInContracts: this.updateServicePricesInContracts,
+            subscriptionService: { id: this.id },
+            parentDefaultServiceId: this.id
+        }
+    }
 }

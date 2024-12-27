@@ -236,7 +236,20 @@ export class ContractsUserDevice {
             type: "SERVICE_CONTRACT",
         }
     }
-
+    public checkDuplicatedBlockTimeAndTrackServices() {
+        this.blockTimeServices.forEach(item => {
+            item.validateDuplicated = true;
+        });
+        let list = [...this.blockTimeServices, ...this.services];
+        list.forEach((item1, i) => {
+            list.forEach((item2, u) => {
+                if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated) item2.validateDuplicated = false;
+            })
+        })
+        let validateDuplicated = (list.find(item => !item.validateDuplicated)) ? false : true;
+        let validate = (list.find(item => !item.validate)) ? false : true;
+        return validateDuplicated && validate;
+    }
     public checkDuplicatedServices() {
         this.services.forEach(item => {
             item.validateDuplicated = true;
@@ -252,5 +265,8 @@ export class ContractsUserDevice {
     }
     public getAllServicesName() {
         return [...this.getBlockTimeServicesName(), ...this.getServicesName(), ...this.getServiceContractServicesName()];
+    }
+    public getServiceContractServicesServicesName() {
+        return [...this.getServicesName(), ...this.getServiceContractServicesName()];
     }
 }
