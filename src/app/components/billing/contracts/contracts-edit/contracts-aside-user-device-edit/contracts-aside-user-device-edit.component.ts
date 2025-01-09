@@ -222,7 +222,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     this.contractsUserDevice.setTaxIds(data.map(item => item.id));
   }
   addBlockTimeService(data) {
-    this.contractsUserDevice.blockTimeServices.push(new ServiceAgreementBlockTimeServices(data.getDataFromBillableService()));
+    this.contractsUserDevice.blockTimeServices.push(new ServiceAgreementBlockTimeServices(data.getDataFromBillableService(), true));
     this.onCheckDuplicatedBlockTimeServices();
   }
   addServiceContractService(data) {

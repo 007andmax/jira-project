@@ -15,12 +15,14 @@ export class ServiceAgreementBlockTimeServices {
     discountAmount: number;
     discountSum: number;
     discountType: string;
-    constructor(data = null) {
+    isAdded: boolean = false;
+    constructor(data = null, isAdded = false) {
         if (data) {
             for (const key in data) {
                 this[key] = data[key];
             }
             this.rate_str = this.rate.toFixed(2);
+            this.isAdded = isAdded;
         }
     }
     public setTaxIds(data) {
@@ -40,12 +42,14 @@ export class ServiceAgreementBlockTimeServices {
     }
     public getDataForUpdateSubscriptionServices() {
         let data: any = {
-            "parentDefaultServiceId": this.id,
             "basedOnDefault": this.basedOnDefault,
             "rate": this.rate,
             billable: this.billable,
             taxIds: this.taxIds,
         }
+        console.log("this.isAdded", this.isAdded);
+        if (this.isAdded) data.parentDefaultServiceId = this.id;
+        if (!this.isAdded) data.id = this.id;
         if (this.count) data.count = this.count;
         if (this.commissionRate) data.commissionRate = this.commissionRate;
         return data

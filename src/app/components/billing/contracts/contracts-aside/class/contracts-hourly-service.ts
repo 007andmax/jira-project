@@ -8,7 +8,8 @@ export class ContractsHourlyService {
     rate: number;
     taxIds: Array<String> = [];
     rate_str: string;
-    constructor(basedOnDefault, billable, commissionRate, id, name, rate, taxIds) {
+    isAdded: boolean = false;
+    constructor(basedOnDefault, billable, commissionRate, id, name, rate, taxIds, isAdded = false) {
         this.basedOnDefault = basedOnDefault;
         this.billable = billable;
         this.commissionRate = commissionRate;
@@ -17,16 +18,30 @@ export class ContractsHourlyService {
         this.rate = rate;
         this.taxIds = taxIds;
         this.rate_str = this.rate.toFixed(2);
+        this.isAdded = isAdded;
 
     }
     public getDataForCreate() {
         return {
+            parentDefaultServiceId: this.id,
             basedOnDefault: this.basedOnDefault,
             billable: this.billable,
             commissionRate: this.commissionRate,
-            parentDefaultServiceId: this.id,
             rate: this.rate,
             taxIds: this.taxIds
         }
+    }
+    public getDataForUpdate() {
+        let data: any = {
+            basedOnDefault: this.basedOnDefault,
+            billable: this.billable,
+            commissionRate: this.commissionRate,
+            rate: this.rate,
+            taxIds: this.taxIds
+        }
+        console.log("this.isAdded", this.isAdded);
+        if (this.isAdded) data.parentDefaultServiceId = this.id;
+        if (!this.isAdded) data.id = this.id;
+        return data
     }
 }

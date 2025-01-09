@@ -119,7 +119,7 @@ export class ServiceAgreement {
         this.shares = data;
     }
     public addDefaultService(item) {
-        this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id)))
+        this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id), true))
     }
     public getServiceContractServicesName() {
         return this.serviceContractServices.map(item => item.name);
@@ -271,7 +271,7 @@ export class ServiceAgreement {
             productExpenses: null,
             serviceContractServices: this.serviceContractServices.map(item => item.getDataForUpdateContractServices()),
             serviceContractServicesToTrack: (!toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForUpdateSubscriptionServices()) : [],
-            services: this.services.map(item => item.getDataForCreate()),
+            services: this.services.map(item => item.getDataForUpdate()),
             reviewDate: this.reviewDate,
             startDate: this.startDate,
             taxIds: (toggleMaximumAmountHours) ? this.taxIds : null,
@@ -294,7 +294,7 @@ export class ServiceAgreement {
             interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring : null,
             maxRolloverHours: this.maxRolloverHours,
             rateExceeding: this.rateExceeding,
-            services: this.services.map(item => item.getDataForCreate()),
+            services: this.services.map(item => item.getDataForUpdate()),
             shares: this.shares,
             startDate: this.startDate,
             taxIds: this.taxIds,
