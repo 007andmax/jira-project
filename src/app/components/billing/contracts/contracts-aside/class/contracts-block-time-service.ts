@@ -1,3 +1,5 @@
+import { count } from "console";
+
 export class ContractsBlockTimeService {
     name: string;
     rate: string;
@@ -21,7 +23,8 @@ export class ContractsBlockTimeService {
         return {
             "parentDefaultServiceId": this.parentDefaultServiceId,
             "basedOnDefault": this.basedOnDefault,
-            rate: rate
+            rate: rate,
+
         }
     }
 }

@@ -29,6 +29,7 @@ import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-do
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 import { ContractsAsideBlockTimeBillingAddSubscriptionServicesComponent } from './contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-subscription-services/contracts-aside-block-time-billing-add-subscription-services.component';
 import { ContractsAsideBlockTimeBillingAddSubscriptionServicesModule } from './contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-subscription-services/contracts-aside-block-time-billing-add-subscription-services.module';
+import { ContractsAsideDiscountComponent } from './contracts-aside-discount/contracts-aside-discount.component';
 
 
 @NgModule({

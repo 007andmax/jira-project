@@ -105,5 +105,7 @@ export class SubscriptionServicesEditComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
-
+  get f2() {
+    return this.modelForm.controls;
+  }
 }

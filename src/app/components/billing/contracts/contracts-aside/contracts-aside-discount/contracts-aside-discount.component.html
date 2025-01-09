@@ -1,0 +1,47 @@
+<div
+    class="light-dropdown new-taxes-area-edit taxes-dropdown"
+    ngbDropdown
+    #taxesDropDown="ngbDropdown"
+>
+    <div class="qt-df">
+        <input
+            type="text"
+            class="qt-input-in-table qt-text-right"
+            decimalNumber
+            placeholder="1"
+            [value]="service.discountAmount"
+            (onChange)="onChangeDiscountAmount($event)"
+        >
+        <input
+            type="text"
+            [value]="getSelected()"
+            autocomplete="new-password"
+            readonly
+            placeholder="Discount"
+            id="dropdownTypeTaxes"
+            class="qt-input-block__input qt-dropdown-input"
+            ngbDropdownToggle
+        >
+        <i class="icn-sm qt-icon icon__arrow-down report-caret-icon"></i>
+    </div>
+    <div
+        ngbDropdownMenu
+        class="taxes-dropdown__dropdown"
+        aria-labelledby="dropdownTypeTaxes"
+    >
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="list"
+            [ngForTrackBy]="trackById"
+        >
+            <div
+                class="dropdown-item"
+                ngbDropdownItem
+                (click)="selected(item)"
+            >
+                <button [textContent]="item.title"></button>
+            </div>
+        </ng-template>
+    </div>
+</div>

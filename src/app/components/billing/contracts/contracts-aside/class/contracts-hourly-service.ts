@@ -24,8 +24,7 @@ export class ContractsHourlyService {
             basedOnDefault: this.basedOnDefault,
             billable: this.billable,
             commissionRate: this.commissionRate,
-            id: this.id,
-            name: this.name,
+            parentDefaultServiceId: this.id,
             rate: this.rate,
             taxIds: this.taxIds
         }

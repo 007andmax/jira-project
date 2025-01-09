@@ -51,6 +51,9 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
     this.service.taxIds = data.map(item => item.id);
     this.onChangeDisplayBillableTooltip();
   }
+  onChangeDiscount(data) {
+    this.service.discountType = data.type;
+  }
   checkName() {
     this.onCheckName.emit(null);
   }

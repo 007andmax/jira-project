@@ -35,6 +35,13 @@
             (taxesChange)="onTaxesChange($event)"
         ></app-invoice-form-ticket-edit-taxes>
     </td>
+    <td class="col-discount --editable">
+        <app-contracts-aside-discount
+            [service]="service"
+            class="qt-taxes-multiselect"
+            (onChange)="onChangeDiscount($event)"
+        ></app-contracts-aside-discount>
+    </td>
     <td class="col-price --editable ">
         <input
             type="text"

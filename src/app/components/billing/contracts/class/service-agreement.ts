@@ -2,9 +2,7 @@ import { ContractsHourlyService } from '../contracts-aside/class/contracts-hourl
 import * as moment from "moment";
 import { ServiceAgreementBlockTimeServices } from './service-agreement-block-time-services';
 import { СontractsBlockTimeShare } from '../contracts-aside/class/contracts-block-time-share';
-import { v4 as uuidv4 } from 'uuid';
 import { ContractsBlockTimeDefaultService } from '../contracts-aside/class/contracts-block-time-default-service';
-
 import { ContractsOtherProduct } from '../contracts-aside/class/contracts-other-product';
 import { ServiceAgreementServiceExpenses } from './service-agreement-service-expenses';
 export class ServiceAgreement {
@@ -334,16 +332,4 @@ export class ServiceAgreement {
         }
         return sum;
     };
-    public getDefaultBlockTimeService() {
-        return {
-            basedOnDefault: true,
-            billable: true,
-            commissionRate: 0,
-            count: 0,
-            id: uuidv4(),
-            name: "",
-            rate: 0,
-            taxIds: []
-        }
-    }
 }

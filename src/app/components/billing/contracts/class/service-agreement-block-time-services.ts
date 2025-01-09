@@ -39,11 +39,16 @@ export class ServiceAgreementBlockTimeServices {
         }
     }
     public getDataForUpdateSubscriptionServices() {
-        return {
+        let data: any = {
             "parentDefaultServiceId": this.id,
             "basedOnDefault": this.basedOnDefault,
-            "rate": this.rate
+            "rate": this.rate,
+            billable: this.billable,
+            taxIds: this.taxIds,
         }
+        if (this.count) data.count = this.count;
+        if (this.commissionRate) data.commissionRate = this.commissionRate;
+        return data
     }
     public getDataForUpdateContractServices() {
         return {
