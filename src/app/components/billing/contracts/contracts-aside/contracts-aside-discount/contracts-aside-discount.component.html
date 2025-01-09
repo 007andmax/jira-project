@@ -22,7 +22,10 @@
             class="qt-input-block__input qt-dropdown-input"
             ngbDropdownToggle
         >
-        <i class="icn-sm qt-icon icon__arrow-down report-caret-icon"></i>
+        <i
+            class="icn-sm qt-icon icon__arrow-down report-caret-icon"
+            ngbDropdownToggle
+        ></i>
     </div>
     <div
         ngbDropdownMenu
@@ -39,6 +42,7 @@
                 class="dropdown-item"
                 ngbDropdownItem
                 (click)="selected(item)"
+                [ngClass]="{'--selected': checkSelected(item)}"
             >
                 <button [textContent]="item.title"></button>
             </div>

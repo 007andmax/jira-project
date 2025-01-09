@@ -25,6 +25,9 @@ export class ContractsAsideDiscountComponent implements OnInit {
     this.service.discountAmount = event;
   }
   getSelected() {
-    return this.selectedItem ? this.selectedItem.title : '';
+    return this.selectedItem ? this.selectedItem.type == "FIXED" ? "$" : '%' : '';
+  }
+  checkSelected(item) {
+    return this.selectedItem && this.selectedItem.type == item.type;
   }
 }
