@@ -7,7 +7,7 @@ export class ContractsUserDeviceService {
     validateDuplicated: boolean = true;
     rate_str: string;
     "subscriptionService": any;
-    "discountAmount": string = "0";
+    "discountAmount": string;
     "discountType": string = "PERCENT";
     constructor(count, name, rate, taxIds, serviceId) {
         this.count = count;
