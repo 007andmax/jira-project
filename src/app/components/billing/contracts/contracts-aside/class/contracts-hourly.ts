@@ -14,10 +14,10 @@ export class ContractsHourly {
 
 
     }
-    public setDataFromCopy(data:ServiceAgreement) {
+    public setDataFromCopy(data: ServiceAgreement) {
         this.companyId = data.companyId;
         this.description = data.description;
-        this.endDate  = data.endDate;
+        this.endDate = data.endDate;
         this.services = data.services;
         this.startDate = data.startDate;
         this.type = data.type;
@@ -30,14 +30,14 @@ export class ContractsHourly {
             endDate: this.endDate,
             services: this.services.map(item => item.getDataForCreate()),
             startDate: this.startDate,
-            reviewDate:this.reviewDate,
+            reviewDate: this.reviewDate,
             type: this.type
         }
     }
     public onAddServices(defaultServices: Array<DefaultServicesHourlyContract>) {
         this.services = [];
         defaultServices.forEach(item => {
-            if (item.selected) this.services.push(new ContractsHourlyService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id)));
+            if (item.selected) this.services.push(new ContractsHourlyService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id), item.parentDefaultServiceId));
         })
     }
     public setCompanyId(data) {

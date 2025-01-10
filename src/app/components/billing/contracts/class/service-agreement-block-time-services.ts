@@ -51,7 +51,7 @@ export class ServiceAgreementBlockTimeServices {
         if (this.isAdded) data.parentDefaultServiceId = this.id;
         if (!this.isAdded) {
             data.id = this.id;
-            data.parentDefaultServiceId = this.id;
+            data.parentDefaultServiceId = this.parentDefaultServiceId;
         }
         if (this.count) data.count = this.count;
         if (this.commissionRate) data.commissionRate = this.commissionRate;

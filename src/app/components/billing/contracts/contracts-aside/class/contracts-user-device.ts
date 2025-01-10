@@ -55,7 +55,7 @@ export class ContractsUserDevice {
         }
         this.rateExceeding = (data.rateExceeding) ? Number(data.rateExceeding).toFixed(2) : undefined;
         this.serviceContractServices = data.serviceContractServices.map(item => new ContractsUserDeviceService(item.count, item.name, item.rate, item.taxIds, item.subscriptionService));
-        this.services = data.services.map(item => new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, (item.commissionRate) ? item.commissionRate : 0, item.id, item.name, item.rate, item.taxIds));
+        this.services = data.services.map(item => new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, (item.commissionRate) ? item.commissionRate : 0, item.id, item.name, item.rate, item.taxIds, item.parentDefaultServiceId));
         this.startDate = data.startDate;
         this.taxIds = data.taxIds;
         if (data.manualCreateBillableItem != undefined) this.manualCreateBillableItem = data.manualCreateBillableItem;
@@ -80,7 +80,7 @@ export class ContractsUserDevice {
         return sum;
     }
     public addDefaultService(item) {
-        this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id)))
+        this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id), item.parentDefaultServiceId))
     }
     public setTaxIds(data) {
         this.taxIds = data;

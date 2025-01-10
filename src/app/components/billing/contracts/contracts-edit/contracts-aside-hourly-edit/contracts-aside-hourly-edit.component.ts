@@ -57,7 +57,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
       })
   }
   onAddService(data: DefaultServicesHourlyContract) {
-    this.contractsHourly.services.push(new ContractsBlockTimeDefaultService(true, data.billable, data.commissionRate, data.versionedId.id, data.name, data.rate, data.taxes.map(item => item.id)));
+    this.contractsHourly.services.push(new ContractsBlockTimeDefaultService(true, data.billable, data.commissionRate, data.versionedId.id, data.name, data.rate, data.taxes.map(item => item.id), data.parentDefaultServiceId));
     this.showAddService = false;
   }
   onToggleAllServices(event) {

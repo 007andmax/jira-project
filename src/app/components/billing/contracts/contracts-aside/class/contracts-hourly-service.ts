@@ -9,7 +9,8 @@ export class ContractsHourlyService {
     taxIds: Array<String> = [];
     rate_str: string;
     isAdded: boolean = false;
-    constructor(basedOnDefault, billable, commissionRate, id, name, rate, taxIds, isAdded = false) {
+    parentDefaultServiceId: string;
+    constructor(basedOnDefault, billable, commissionRate, id, name, rate, taxIds, parentDefaultServiceId, isAdded = false) {
         this.basedOnDefault = basedOnDefault;
         this.billable = billable;
         this.commissionRate = commissionRate;
@@ -19,7 +20,7 @@ export class ContractsHourlyService {
         this.taxIds = taxIds;
         this.rate_str = this.rate.toFixed(2);
         this.isAdded = isAdded;
-
+        this.parentDefaultServiceId = parentDefaultServiceId;
     }
     public getDataForCreate() {
         return {
@@ -43,7 +44,7 @@ export class ContractsHourlyService {
         if (this.isAdded) data.parentDefaultServiceId = this.id;
         if (!this.isAdded) {
             data.id = this.id;
-            data.parentDefaultServiceId = this.id;
+            data.parentDefaultServiceId = this.parentDefaultServiceId;
         }
         return data
     }
