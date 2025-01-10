@@ -49,7 +49,10 @@ export class ServiceAgreementBlockTimeServices {
         }
         console.log("this.isAdded", this.isAdded);
         if (this.isAdded) data.parentDefaultServiceId = this.id;
-        if (!this.isAdded) data.id = this.id;
+        if (!this.isAdded) {
+            data.id = this.id;
+            data.parentDefaultServiceId = this.id;
+        }
         if (this.count) data.count = this.count;
         if (this.commissionRate) data.commissionRate = this.commissionRate;
         return data

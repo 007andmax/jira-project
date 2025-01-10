@@ -30,4 +30,7 @@ export class ContractsAsideDiscountComponent implements OnInit {
   checkSelected(item) {
     return this.selectedItem && this.selectedItem.type == item.type;
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
 }

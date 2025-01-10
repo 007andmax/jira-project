@@ -245,7 +245,7 @@ export class ServiceAgreement {
             companyId: this.companyId,
             description: this.description,
             endDate: this.endDate,
-            services: this.services.filter(item => item.selected).map(item => item.getDataForCreate()),
+            services: this.services.filter(item => item.selected).map(item => item.getDataForUpdate()),
             startDate: this.startDate,
             reviewDate: this.reviewDate,
             type: this.type
