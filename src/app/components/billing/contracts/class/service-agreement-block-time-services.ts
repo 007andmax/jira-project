@@ -63,7 +63,7 @@ export class ServiceAgreementBlockTimeServices {
             "rate": this.rate,
             "taxIds": this.taxIds,
             "subscriptionService": {
-                "id": this.id
+                "id": this.subscriptionService.id
             },
             "discountAmount": this.discountAmount,
             "discountType": this.discountType
