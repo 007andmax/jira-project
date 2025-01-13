@@ -132,7 +132,10 @@
                 </tbody>
             </table>
         </div>
-        <app-contracts-aside-block-time-billing-add-subscription-services (onSelect)="addServiceContractService($event)"></app-contracts-aside-block-time-billing-add-subscription-services>
+        <app-contracts-aside-block-time-billing-add-subscription-services
+            [showError]="!validate.getServiceContractServices()"
+            (onSelect)="addServiceContractService($event)"
+        ></app-contracts-aside-block-time-billing-add-subscription-services>
         <div class="qt-df qt-ai-c single-invoice">
             <div
                 class="qt-toggle qt-mr-8"
@@ -187,6 +190,7 @@
         </div>
         <app-contracts-aside-block-time-billing-add-default-service
             class="qt-mb-24"
+            [showError]="!validate.getBlockTimeServices()"
             (onSelect)="addBlockTimeService($event)"
         ></app-contracts-aside-block-time-billing-add-default-service>
         <div class="qt-df">

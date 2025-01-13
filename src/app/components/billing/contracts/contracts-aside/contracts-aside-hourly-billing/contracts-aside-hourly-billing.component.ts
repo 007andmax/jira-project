@@ -109,6 +109,12 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
           this.contractsService.createContract(false, this.contractsHourly.getDataForCreate()).subscribe(contract => {
             this.onClose.emit(null);
           })
+        } else {
+          let names = Object.keys(data);
+          this.defaultServices.forEach(item => {
+            let find = names.find(name => name === item.name);
+            if (find) item.validate = false;
+          })
         }
       }, err => {
 

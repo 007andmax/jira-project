@@ -7,6 +7,7 @@ export class DefaultServicesHourlyContract extends NonContractServices {
     selected: boolean = false;
     isCopy: boolean = false;
     rate_str: string;
+    validate: boolean = true;
     constructor(data = null) {
         super(data);
         this.rate_str = this.rate.toFixed(2);

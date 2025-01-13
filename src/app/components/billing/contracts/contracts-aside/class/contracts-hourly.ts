@@ -10,6 +10,7 @@ export class ContractsHourly {
     startDate: string;
     type: string = "HOURLY";
     reviewDate: string;
+    validate: boolean = true;
     constructor() {
 
 

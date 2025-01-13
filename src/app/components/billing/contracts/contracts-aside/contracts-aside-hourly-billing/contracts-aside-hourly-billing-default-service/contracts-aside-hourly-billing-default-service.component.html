@@ -15,6 +15,12 @@
             type="text"
             [(ngModel)]="defaultService.name"
         >
+        <app-mat-error
+            class="qt-tooltip-error qt-w-auto-important"
+            *ngIf="!defaultService.validate"
+        >
+            An agreement with current service name already using for current company
+        </app-mat-error>
     </td>
     <td class="service-table__billable">
         <label class="qt-checkbox">

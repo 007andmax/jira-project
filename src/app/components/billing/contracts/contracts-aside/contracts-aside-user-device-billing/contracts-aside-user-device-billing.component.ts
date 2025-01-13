@@ -229,10 +229,12 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.contractsUserDevice.setTaxIds(data.map(item => item.id));
   }
   addBlockTimeService(data) {
+    this.validate.resetBlockTimeServices();
     this.contractsUserDevice.blockTimeServices.push(new ContractsBlockTimeService(data.name, data.rate, data.versionedId.id));
     this.onCheckDuplicatedBlockTimeServices();
   }
   addServiceContractService(item) {
+    this.validate.resetServiceContractServices();
     this.contractsUserDevice.serviceContractServices.push(new ContractsUserDeviceService(1, item.name, item.rate, item.taxIds, { id: item.id }));
   }
   onRemoveServices(i) {

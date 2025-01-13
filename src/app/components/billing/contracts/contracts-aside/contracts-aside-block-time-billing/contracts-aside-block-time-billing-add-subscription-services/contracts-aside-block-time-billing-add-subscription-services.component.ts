@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SubscriptionServices } from 'src/app/components/billing/subscription-services/class/subscription-services';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
@@ -12,6 +12,7 @@ export class ContractsAsideBlockTimeBillingAddSubscriptionServicesComponent impl
   subscriptionServices: Array<SubscriptionServices> = [];
   selectedItem: SubscriptionServices;
   sub: Subscription = new Subscription();
+  @Input() showError: boolean = false;
   @Output() onSelect = new EventEmitter<any>();
   constructor(private contractsStateService: ContractsStateService,) { }
 
