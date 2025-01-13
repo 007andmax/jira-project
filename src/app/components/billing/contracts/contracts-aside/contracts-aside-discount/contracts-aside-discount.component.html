@@ -9,6 +9,7 @@
             class="qt-input-in-table qt-text-right"
             decimalNumber
             placeholder="0.00"
+            [defaultValue]="''"
             [value]="service.discountAmount ? service.discountAmount : ''"
             (onChange)="onChangeDiscountAmount($event)"
         >

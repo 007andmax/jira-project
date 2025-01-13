@@ -114,6 +114,7 @@
                         >
                             Tax
                         </th>
+                        <th class="col-tax">Discount</th>
                         <th class="col-price">Price</th>
                         <th></th>
                     </tr>
@@ -137,6 +138,11 @@
                                 *ngIf="!contractsUserDevice.invoiceAsSingleItem"
                                 class="col-tax"
                                 [textContent]="getSelectedTaxes(item.taxIds)"
+                            >
+                            </td>
+                            <td
+                                class="col-tax"
+                                [textContent]="getDiscount(item)"
                             >
                             </td>
                             <td

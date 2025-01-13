@@ -23,8 +23,8 @@ export class ContractsUserDeviceService {
             rate: String(this.rate),
             taxIds: this.taxIds,
             subscriptionService: this.subscriptionService,
-            discountAmount: this.discountAmount,
-            discountType: this.discountType
+            discountAmount: this.discountAmount ? this.discountAmount : undefined,
+            discountType: this.discountAmount ? this.discountType : undefined
         }
     }
     public setValidate(data) {

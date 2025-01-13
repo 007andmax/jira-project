@@ -62,6 +62,9 @@ export class ContractsAsideUserDeviceBillingPreviewComponent implements OnInit, 
       return `${item.name} ${item.rate}%`;
     }).join(",");
   }
+  getDiscount(item) {
+    return !item.discountAmount ? 'N/A' : `${item.discountAmount} ${item.discountType == "FIXED" ? "$" : '%'}`
+  }
   public trackById(index, item) {
     return item.id;
   }
