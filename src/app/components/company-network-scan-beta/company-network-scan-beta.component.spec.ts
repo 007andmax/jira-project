@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CompanyNetworkScanComponent } from './company-network-scan-beta.component';
+import { CompanyNetworkScanBetaComponent } from './company-network-scan-beta.component';
 
-describe('CompanyNetworkScanComponent', () => {
-  let component: CompanyNetworkScanComponent;
-  let fixture: ComponentFixture<CompanyNetworkScanComponent>;
+describe('CompanyNetworkScanBetaComponent', () => {
+  let component: CompanyNetworkScanBetaComponent;
+  let fixture: ComponentFixture<CompanyNetworkScanBetaComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CompanyNetworkScanComponent]
+      declarations: [CompanyNetworkScanBetaComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CompanyNetworkScanComponent);
+    fixture = TestBed.createComponent(CompanyNetworkScanBetaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DefaultServicesContractsComponent } from './non-contract-services-contracts.component';
+import { NonContractServicesContractsComponent } from './non-contract-services-contracts.component';
 
-describe('DefaultServicesContractsComponent', () => {
-  let component: DefaultServicesContractsComponent;
-  let fixture: ComponentFixture<DefaultServicesContractsComponent>;
+describe('NonContractServicesContractsComponent', () => {
+  let component: NonContractServicesContractsComponent;
+  let fixture: ComponentFixture<NonContractServicesContractsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DefaultServicesContractsComponent]
+      declarations: [NonContractServicesContractsComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DefaultServicesContractsComponent);
+    fixture = TestBed.createComponent(NonContractServicesContractsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

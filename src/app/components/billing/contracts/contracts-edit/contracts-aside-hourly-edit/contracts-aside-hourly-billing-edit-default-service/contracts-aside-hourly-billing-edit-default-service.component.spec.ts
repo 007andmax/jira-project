@@ -3,18 +3,18 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContractsAsideHourlyBillingEditDefaultServiceComponent } from './contracts-aside-hourly-billing-edit-default-service.component';
 
 describe('ContractsAsideHourlyBillingEditDefaultServiceComponent', () => {
-  let component: AppContractsAsideHourlyBillingEditDefaultServiceComponent;
-  let fixture: ComponentFixture<AppContractsAsideHourlyBillingEditDefaultServiceComponent>;
+  let component: ContractsAsideHourlyBillingEditDefaultServiceComponent;
+  let fixture: ComponentFixture<ContractsAsideHourlyBillingEditDefaultServiceComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppContractsAsideHourlyBillingEditDefaultServiceComponent ]
+      declarations: [ContractsAsideHourlyBillingEditDefaultServiceComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AppContractsAsideHourlyBillingEditDefaultServiceComponent);
+    fixture = TestBed.createComponent(ContractsAsideHourlyBillingEditDefaultServiceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
