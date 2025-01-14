@@ -28,6 +28,8 @@ import { MatChipListModule } from '../../shared/mat-chip-list/mat-chip-list.modu
 import { MatChipModule } from '../../shared/mat-chip/mat-chip.module';
 import { MatFormFieldModule } from '../../shared/mat-form-field/mat-form-field.module';
 import { MatOptionModule } from '../../shared/mat-option/mat-option.module';
+import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
+import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 
 
 
@@ -65,7 +67,9 @@ import { MatOptionModule } from '../../shared/mat-option/mat-option.module';
         MatChipModule,
         MatFormFieldModule,
         MatChipListModule,
-        MatOptionModule
+        MatOptionModule,
+        DecimalNumberModule,
+        ToFixedModule
     ],
 
 

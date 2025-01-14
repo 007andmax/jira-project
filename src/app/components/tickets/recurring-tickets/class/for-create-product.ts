@@ -3,13 +3,13 @@ import { Product } from 'src/app/interfaces/product/product';
 import { ProductRecurringTicket } from '../interfaces/product-recurring-ticket';
 
 export class ForCreateProduct {
-    cost: number;
+    cost: number = 0;
     description: string = '';
     glNumber: any;
     ilc: any;
     manufacture: string;
     name: string;
-    sale: number;
+    sale: number = 0;
     taxes: any;
     versionedId: VersionedId;
     quantity: number;
