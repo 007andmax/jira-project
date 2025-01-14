@@ -18,11 +18,11 @@
     <td class="contract-product-products-table__price --editable">
         <input
             class="payment-input qt-input-in-table"
-            number
-            [money]="true"
-            [ngModel]="product.salePrice_str"
-            (ngModelChange)="onChangeSalePrice($event)"
+            decimalNumber
+            [useFixed]="true"
             appToFixed
+            [value]="product.salePrice"
+            (onChange)="onChangeSalePrice($event)"
         >
     </td>
     <td

@@ -5,6 +5,7 @@ import { ProductListModule } from 'src/app/components/shared/product-list/produc
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { FormsModule } from '@angular/forms';
 import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
+import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-n
         ProductListModule,
         NumberModule,
         FormsModule,
-        DecimalNumberModule
+        DecimalNumberModule,
+        ToFixedModule
 
     ],
     exports: [ContractsAsideOtherProductComponent]
