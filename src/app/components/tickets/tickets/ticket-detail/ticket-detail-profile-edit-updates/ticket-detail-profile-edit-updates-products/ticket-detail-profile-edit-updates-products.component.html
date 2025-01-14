@@ -16,11 +16,11 @@
                         <span class="qt-input-prefix">Cost</span>
                         <input
                             class="qt-input-block__input cost qt-input-prepend"
-                            number
-                            [money]="true"
-                            [ngModel]="product.item.cost_str"
-                            (change)="onChangeCost($event)"
+                            decimalNumber
+                            [useFixed]="true"
                             appToFixed
+                            [value]="product.item.cost"
+                            (onChange)="onChangeCost($event)"
                             (blur)="onValidateSaleCost()"
                             *ngIf="getPermissions('VIEW_PRODUCT_COST')"
                         >
@@ -47,11 +47,11 @@
                         <input
                             class="qt-input-block__input price qt-input-prepend"
                             [ngClass]="{'--input-error':!product.valdiateSaleCost}"
-                            number
-                            [money]="true"
-                            [ngModel]="product.item.sale_str"
-                            (change)="onChangeSale($event)"
+                            decimalNumber
+                            [useFixed]="true"
                             appToFixed
+                            [value]="product.item.sale"
+                            (onChange)="onChangeSale($event)"
                             (blur)="onValidateSaleCost()"
                         >
                         <app-mat-error

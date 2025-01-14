@@ -90,6 +90,8 @@ import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.modul
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
 import { CompanyUsersDropDownModule } from '../ticket-add-aside/company-users-drop-down/company-users-drop-down.module';
+import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
+import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 
 
 
@@ -189,7 +191,9 @@ import { CompanyUsersDropDownModule } from '../ticket-add-aside/company-users-dr
         MatFormFieldModule,
         MatChipListModule,
         MatErrorModule,
-        CompanyUsersDropDownModule
+        CompanyUsersDropDownModule,
+        DecimalNumberModule,
+        ToFixedModule
     ],
 
 
