@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContractsAsideBlockTimeBillingPreviewComponent } from './ContractsAsideBlockTimeBillingPreviewComponent';
+import { ContractsAsideBlockTimeBillingPreviewComponent } from './contracts-aside-block-time-billing-preview.component';
 
 describe('ContractsAsideBlockTimeBillingPreviewComponent', () => {
   let component: ContractsAsideBlockTimeBillingPreviewComponent;

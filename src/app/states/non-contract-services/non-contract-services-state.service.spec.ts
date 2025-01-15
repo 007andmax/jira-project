@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DefaultServicesStateService } from './non-contract-services-state.service';
+import { NonContractServicesStateService } from './non-contract-services-state.service';
 
-describe('DefaultServicesStateService', () => {
+describe('NonContractServicesStateService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: DefaultServicesStateService = TestBed.get(DefaultServicesStateService);
+    const service: NonContractServicesStateService = TestBed.get(NonContractServicesStateService);
     expect(service).toBeTruthy();
   });
 });

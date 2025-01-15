@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DefaultServicesRealTimeService } from './non-contract-services-real-time.service';
+import { NonContractServicesRealTimeService } from './non-contract-services-real-time.service';
 
-describe('DefaultServicesRealTimeService', () => {
+describe('NonContractServicesRealTimeService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: DefaultServicesRealTimeService = TestBed.get(DefaultServicesRealTimeService);
+    const service: NonContractServicesRealTimeService = TestBed.get(NonContractServicesRealTimeService);
     expect(service).toBeTruthy();
   });
 });

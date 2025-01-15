@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserRolePermissionsComponent } from './customer-permissions.component';
+import { CustomerPermissionsComponent } from './customer-permissions.component';
 
-describe('UserRolePermissionsComponent', () => {
-  let component: UserRolePermissionsComponent;
-  let fixture: ComponentFixture<UserRolePermissionsComponent>;
+describe('CustomerPermissionsComponent', () => {
+  let component: CustomerPermissionsComponent;
+  let fixture: ComponentFixture<CustomerPermissionsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [UserRolePermissionsComponent]
+      declarations: [CustomerPermissionsComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserRolePermissionsComponent);
+    fixture = TestBed.createComponent(CustomerPermissionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

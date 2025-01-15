@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+declare var d3;
 
 @Component({
   selector: 'app-company-dash-ticket',
