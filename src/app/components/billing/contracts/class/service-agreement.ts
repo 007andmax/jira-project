@@ -332,4 +332,11 @@ export class ServiceAgreement {
         }
         return sum;
     };
+    public calculateTotalDiscount() {
+        let sum = 0;
+        this.serviceContractServices.forEach(item => {
+            sum += item.discountSum;
+        })
+        return sum;
+    };
 }

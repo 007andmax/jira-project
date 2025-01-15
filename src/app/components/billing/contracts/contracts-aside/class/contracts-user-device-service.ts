@@ -9,13 +9,17 @@ export class ContractsUserDeviceService {
     "subscriptionService": any;
     "discountAmount": string;
     "discountType": string = "PERCENT";
-    constructor(count, name, rate, taxIds, serviceId) {
+    discountSum: number = 0;
+    constructor(count, name, rate, taxIds, serviceId, discountAmount = null, discountType = null, discountSum = null) {
         this.count = count;
         this.name = name;
         this.rate = rate;
         this.taxIds = taxIds;
         this.rate_str = this.rate.toFixed(2);
         this.subscriptionService = serviceId
+        if (discountAmount) this.discountAmount = discountAmount;
+        if (discountType) this.discountType = discountType;
+        if (discountSum) this.discountSum = discountSum;
     }
     public getDataForCreate() {
         return {
