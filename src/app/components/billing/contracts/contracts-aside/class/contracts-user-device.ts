@@ -86,6 +86,13 @@ export class ContractsUserDevice {
         })
         return sum;
     }
+    public calculateServiceDiscount() {
+        let sum = 0;
+        this.serviceContractServices.forEach(item => {
+            sum += (item.count * item.rate * (Number(item.discountAmount) || 0) / 100);
+        })
+        return sum;
+    }
     public addDefaultService(item) {
         this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id), item.parentDefaultServiceId))
     }
