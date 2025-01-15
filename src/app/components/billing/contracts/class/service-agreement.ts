@@ -332,6 +332,14 @@ export class ServiceAgreement {
         }
         return sum;
     };
+    public calculateServiceDiscount() {
+        let sum = 0;
+        this.serviceContractServices.forEach(item => {
+            if (item.discountType == "PERCENT") sum += (item.count * item.rate * (Number(item.discountAmount) || 0) / 100);
+            if (item.discountType == "FIXED") sum += (Number(item.discountAmount) || 0);
+        })
+        return sum;
+    }
     public calculateTotalDiscount() {
         let sum = 0;
         this.serviceContractServices.forEach(item => {
