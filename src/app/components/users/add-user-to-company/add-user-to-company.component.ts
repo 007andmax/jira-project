@@ -106,7 +106,6 @@ export class AddUserToCompanyComponent implements OnInit, OnDestroy {
   }
   approveConfirm() {
     let usersId = this.getSelectedUsers().map(item => item.id);
-    console.log("usersId", usersId);
     if (usersId.length > 0) {
       this.addBtn.setDisabled(true);
       this.usersService.addUserToCompany(this.company.id, usersId).subscribe(data => {
@@ -121,9 +120,7 @@ export class AddUserToCompanyComponent implements OnInit, OnDestroy {
     return this.reqUsers.filter(item => item.selected);
   }
   onSelectUser(user) {
-    console.log("user", user);
     this.reqUsers.find(item => item.id === user.id).selected = user.selected;
-    console.log("this.reqUsers", this.reqUsers.filter(item => item.selected));
     this.clearSearch();
     this.cd.detectChanges();
   }
