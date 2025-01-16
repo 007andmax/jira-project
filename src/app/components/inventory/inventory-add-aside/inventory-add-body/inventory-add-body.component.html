@@ -25,6 +25,7 @@
             <input
                 type="text"
                 class="qt-input-40 inventory-add-body__input"
+                [ngClass]="{'--input-error' : !validate.getILCIsExist()}"
                 [(ngModel)]="inventory.ilc"
                 (blur)="onCheckILC()"
                 placeholder="Enter ILC Number"

@@ -31,6 +31,7 @@
                 <div class="qt-input-block__label">ILC Number</div>
                 <input
                     type="text"
+                    [ngClass]="{'--input-error' : !validate.getILCIsExist()}"
                     [(ngModel)]="inventory.ilc"
                     (blur)="onCheckILC()"
                     placeholder="Enter ILC Number"
