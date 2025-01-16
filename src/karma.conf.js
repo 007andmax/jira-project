@@ -11,7 +11,8 @@ module.exports = function (config) {
     ],
     client: {
       jasmine: {},
-      clearContext: false // leave Jasmine Spec Runner output visible in browser
+      clearContext: false, // Leave Jasmine Spec Runner output visible in browser
+      useIframe: false // Prevent issues with Webpack hot reloading
     },
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, './coverage'),
@@ -27,5 +28,9 @@ module.exports = function (config) {
     singleRun: false,
     restartOnFileChange: true,
     logLevel: config.LOG_DEBUG,
+    proxies: {
+      '/assets/': '/assets/'
+    },
   });
+
 };
