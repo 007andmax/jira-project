@@ -16,12 +16,8 @@ export class ToFixedDirective {
     this.element.nativeElement.addEventListener("blur", (event) => {
       this.blockCheck = false;
     });
-
-
   }
   ngAfterViewInit() {
-
-    console.log("this.element.nativeElement.value", this.element.nativeElement.value)
     this.parseValue();
   }
   ngDoCheck() {

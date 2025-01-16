@@ -55,7 +55,6 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
     this.addedProductList[index].item.cost_str = value.toFixed(2);
   }
   public onChangeCost(val) {
-    console.log("val", val);
     let value = Number(val);
     this.currentProduct.item.cost = value;
     this.currentProduct.item.cost_str = value.toFixed(2);
