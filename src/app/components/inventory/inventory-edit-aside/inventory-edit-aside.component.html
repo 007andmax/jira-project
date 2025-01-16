@@ -15,10 +15,17 @@
                 <div class="qt-input-block__label">Item Number</div>
                 <input
                     type="text"
+                    [ngClass]="{'--input-error' : !validate.getManufactureIsExist()}"
                     [(ngModel)]="inventory.manufacture"
                     (blur)="onCheckManufacture()"
                     placeholder="Enter Item Number"
                 >
+                <app-mat-error
+                    class="invalid-feedback"
+                    *ngIf="!validate.getManufactureIsExist()"
+                >
+                    This number is already occupied
+                </app-mat-error>
             </div>
             <div class="qt-input-block qt-f50">
                 <div class="qt-input-block__label">ILC Number</div>
@@ -76,15 +83,20 @@
         <div class="qt-inputs-row">
             <div class="qt-input-block">
                 <div class="qt-input-block__label">Description</div>
-                <textarea
-                    appTextArea
-                    [height]="'100px'"
-                    rows="5"
-                    id="inventory-description"
-                    placeholder="Write Product Description"
-                    (input)="onChangeDescription($event)"
-                    (paste)="onPastDescription($event)"
-                ></textarea>
+                <div
+                    class="editable-description"
+                    [ngClass]="{'--input-error' : !validate.getDescription()}"
+                >
+                    <textarea
+                        appTextArea
+                        [height]="'100px'"
+                        rows="5"
+                        id="inventory-description"
+                        placeholder="Write Product Description"
+                        (input)="onChangeDescription($event)"
+                        (paste)="onPastDescription($event)"
+                    ></textarea>
+                </div>
                 <app-mat-error
                     class="invalid-feedback"
                     *ngIf="!validate.getDescription()"
@@ -148,6 +160,7 @@
                     type="text"
                     decimalNumber
                     [useFixed]="true"
+                    [ngClass]="{'--input-error' : !validate.getSale()}"
                     appToFixed
                     [value]="inventory.sale"
                     (input)="validate.resetSale()"
