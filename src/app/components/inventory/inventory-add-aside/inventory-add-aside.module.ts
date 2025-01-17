@@ -12,6 +12,7 @@ import { GlNumbersDropDownModule } from '../gl-numbers-drop-down/gl-numbers-drop
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         GlNumbersDropDownModule,
         DisabledBtnModule,
         PreloaderTicketModule,
-        MatErrorModule
+        MatErrorModule,
+        ToFixedModule
     ],
     exports: [InventoryAddAsideComponent]
 

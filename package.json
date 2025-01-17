@@ -81,19 +81,21 @@
     "acorn": "7.1.0",
     "angular2-template-loader": "0.6.2",
     "codelyzer": "4.5.0",
-    "jasmine": "^5.4.0",
-    "jasmine-core": "~3.5.x",
-    "jasmine-spec-reporter": "^4.2.1",
-    "karma": "~4.4.1",
-    "karma-chrome-launcher": "~3.1.0",
+    "jasmine": "5.4.0",
+    "jasmine-core": "3.5.0",
+    "jasmine-spec-reporter": "4.2.1",
+    "karma": "6.3.17",
+    "karma-chrome-launcher": "3.1.1",
     "karma-coverage-istanbul-reporter": "~3.0.x",
-    "karma-jasmine": "~3.1.1",
+    "karma-jasmine": "4.0.2",
     "karma-jasmine-html-reporter": "~1.5.4",
     "protractor": "5.4.0",
     "ts-loader": "5.3.3",
     "ts-node": "7.0.0",
     "tslint": "5.11.0",
-    "typescript": "3.5.3"
+    "typescript": "3.5.3",
+    "webpack": "4.44.2",
+    "webpack-dev-middleware": "3.7.3"
   },
   "browser": {
     "crypto": false

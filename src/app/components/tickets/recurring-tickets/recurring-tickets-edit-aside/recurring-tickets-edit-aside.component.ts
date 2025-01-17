@@ -177,6 +177,18 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.recurringState.getCreateTicket().setDescription(event.target.value);
 
   }
+  onChangeCost(val, product) {
+    let value = Number(val);
+    product.cost = value;
+    product.cost_str = value.toFixed(2);
+    //  product.markup = this.getMarkups(product);
+  }
+  onChangeSale(val, product) {
+    let value = Number(val);
+    product.sale = value;
+    product.sale_str = value.toFixed(2);
+    //product.markup = this.getMarkups();
+  }
 
   /**
    * Subscribe to change tech user

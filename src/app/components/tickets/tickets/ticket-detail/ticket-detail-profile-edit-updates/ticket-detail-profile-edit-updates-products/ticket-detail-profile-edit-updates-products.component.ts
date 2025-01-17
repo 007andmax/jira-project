@@ -45,12 +45,12 @@ export class TicketDetailProfileEditUpdatesProductsComponent implements OnInit, 
     this.isUpdate = false;
   }
   public onChangeSaleProduct(val, index) {
-    let value = Number(val.target.value);
+    let value = Number(val);
     this.addedProductList[index].item.sale = value;
     this.addedProductList[index].item.sale_str = value.toFixed(2);
   }
   public onChangeCostProduct(val, index) {
-    let value = Number(val.target.value);
+    let value = Number(val);
     this.addedProductList[index].item.cost = value;
     this.addedProductList[index].item.cost.str = value.toFixed(2);
   }
@@ -137,7 +137,7 @@ export class TicketDetailProfileEditUpdatesProductsComponent implements OnInit, 
     this.product.valdiateSaleCost = true;
   }
   public onChangeCost(val) {
-    let value = Number(val.target.value);
+    let value = Number(val);
     this.product.item.cost = value;
     this.product.item.cost_str = value.toFixed(2);
   }
@@ -150,7 +150,7 @@ export class TicketDetailProfileEditUpdatesProductsComponent implements OnInit, 
     this.product.setTexes(item);
   }
   public onChangeSale(val) {
-    let value = Number(val.target.value);
+    let value = Number(val);
     this.product.item.sale = value;
     this.product.item.sale_str = value.toFixed(2);
   }

@@ -161,9 +161,11 @@
                             <div class="qt-input-block__label">Product Cost</div>
                             <input
                                 type="text"
-                                number
-                                [money]="'true'"
-                                [(ngModel)]="product.cost"
+                                decimalNumber
+                                [useFixed]="true"
+                                appToFixed
+                                [value]="product.cost"
+                                (onChange)="onChangeCost($event,product)"
                                 placeholder="Write Product Cost"
                             >
                         </div>
@@ -181,9 +183,11 @@
                             <div class="qt-input-block__label">Product Price</div>
                             <input
                                 type="text"
-                                number
-                                [money]="'true'"
-                                [(ngModel)]="product.sale"
+                                decimalNumber
+                                [useFixed]="true"
+                                appToFixed
+                                [value]="product.sale"
+                                (onChange)="onChangeSale($event,product)"
                                 placeholder="Write Product Price"
                             >
                         </div>
