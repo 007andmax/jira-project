@@ -35,11 +35,25 @@
 @import './pages/documents.scss';
 
 // Old ng1 styles
-@import './ng1-old/ng1-old-all.scss';
-@import './ng1-old/modal-popup.scss';
-@import './ng1-old/nv.d3.scss';
-@import './ng1-old/report.scss';
-@import './ng1-old/users.scss';
+//@import './ng1-old/ng1-old-all.scss';
+@import 'components/button-with-loading-indicator'; // New
+@import './components/common.scss'; // New
+
+//@import './ng1-old/modal-popup.scss';
+@import './components/unlock-screen-wrapper.scss'; // New
+
+@import './vendor/nv.d3.scss';
+
+//@import './ng1-old/report.scss';
+@import './pages/report.scss'; // New
+
+//@import './ng1-old/users.scss';
+
 @import './ng1-old/bootstrap-custom';
+@import './components/normalize.scss'; // New
+@import './components/scaffolding'; // New
+@import './components/type'; // New
+@import './components/forms'; // New
+
 @import './ng1-old/fix-style.scss';
 
