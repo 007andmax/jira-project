@@ -27,9 +27,9 @@ module.exports = function (config) {
     browsers: ['Chrome'],
     singleRun: false,
     restartOnFileChange: true,
-    logLevel: config.LOG_DEBUG,
+    //  logLevel: config.LOG_DEBUG,
     proxies: {
-      '/assets/': '/assets/'
+      '/assets/': 'src/assets/'
     },
   });
 
