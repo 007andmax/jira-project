@@ -26,6 +26,9 @@ export class ContractsAsideBlockTimeBillingDefaultServiceComponent implements On
   onChangeDiscountAmount(event) {
     this.service.discountAmount = event;
   }
+  onChangeDiscount(data) {
+    this.service.discountType = data.type;
+  }
   getTaxes(taxes) {
 
     let listTaxes = [];

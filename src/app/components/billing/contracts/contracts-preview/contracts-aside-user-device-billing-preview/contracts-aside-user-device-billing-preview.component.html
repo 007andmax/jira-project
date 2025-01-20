@@ -286,6 +286,7 @@
                 <tr>
                     <th class="track-and-bill-table__service-name">Service Name</th>
                     <th class="track-and-bill-table__billable">Billable</th>
+                    <th class="track-and-bill-table__tax">Discount</th>
                     <th class="track-and-bill-table__tax">Tax</th>
                     <th class="track-and-bill-table__hourly-rate">Hourly Rate</th>
                     <th></th>
@@ -314,6 +315,10 @@
                                 <span></span>
                             </label>
                         </td>
+                        <td
+                            class="service-table__tax"
+                            [textContent]="getDiscount(item)"
+                        ></td>
                         <td
                             class="service-table__tax"
                             [textContent]="getSelectedTaxes(item.taxIds)"
