@@ -38,7 +38,7 @@ export class ContractsHourly {
     public onAddServices(defaultServices: Array<DefaultServicesHourlyContract>) {
         this.services = [];
         defaultServices.forEach(item => {
-            if (item.selected) this.services.push(new ContractsHourlyService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id), item.parentDefaultServiceId));
+            if (item.selected) this.services.push(new ContractsHourlyService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id), item.parentDefaultServiceId, false, item.discountAmount, item.discountType));
         })
     }
     public setCompanyId(data) {

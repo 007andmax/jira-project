@@ -10,7 +10,9 @@ export class ContractsHourlyService {
     rate_str: string;
     isAdded: boolean = false;
     parentDefaultServiceId: string;
-    constructor(basedOnDefault, billable, commissionRate, id, name, rate, taxIds, parentDefaultServiceId, isAdded = false) {
+    "discountAmount": string;
+    "discountType": string = "PERCENT";
+    constructor(basedOnDefault, billable, commissionRate, id, name, rate, taxIds, parentDefaultServiceId, isAdded = false, discountAmount, discountType) {
         this.basedOnDefault = basedOnDefault;
         this.billable = billable;
         this.commissionRate = commissionRate;
@@ -21,6 +23,8 @@ export class ContractsHourlyService {
         this.rate_str = this.rate.toFixed(2);
         this.isAdded = isAdded;
         this.parentDefaultServiceId = parentDefaultServiceId;
+        if (discountAmount) this.discountAmount = discountAmount;
+        if (discountType) this.discountType = discountType;
     }
     public getDataForCreate() {
         return {
@@ -29,7 +33,9 @@ export class ContractsHourlyService {
             billable: this.billable,
             commissionRate: this.commissionRate,
             rate: this.rate,
-            taxIds: this.taxIds
+            taxIds: this.taxIds,
+            discountAmount: this.discountAmount ? this.discountAmount : undefined,
+            discountType: this.discountAmount ? this.discountType : undefined
         }
     }
     public getDataForUpdate() {
@@ -38,7 +44,9 @@ export class ContractsHourlyService {
             billable: this.billable,
             commissionRate: this.commissionRate,
             rate: this.rate,
-            taxIds: this.taxIds
+            taxIds: this.taxIds,
+            discountAmount: this.discountAmount ? this.discountAmount : undefined,
+            discountType: this.discountAmount ? this.discountType : undefined
         }
         console.log("this.isAdded", this.isAdded);
         if (this.isAdded) data.parentDefaultServiceId = this.id;

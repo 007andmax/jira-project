@@ -26,6 +26,28 @@
         </label>
     </td>
     <td class="service-table__tax">
+        <div class="qt-df">
+            <input
+                type="text"
+                class="qt-input-in-table qt-text-right"
+                decimalNumber
+                placeholder="0.00"
+                [defaultValue]="''"
+                [value]="service.discountAmount ? service.discountAmount : ''"
+                (onChange)="onChangeDiscountAmount($event)"
+            >
+            <input
+                type="text"
+                value="%"
+                autocomplete="new-password"
+                readonly
+                placeholder="Discount"
+                id="dropdownTypeTaxes"
+                class="qt-input-block__input"
+            >
+        </div>
+    </td>
+    <td class="service-table__tax">
         <app-taxes
             class="qt-taxes-multiselect"
             #taxes

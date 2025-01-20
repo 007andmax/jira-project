@@ -22,6 +22,9 @@ export class ContractsAsideHourlyBillingDefaultServiceComponent implements OnIni
   toggleService() {
     this.onSelectService.emit(null);
   }
+  onChangeDiscountAmount(event) {
+    this.defaultService.discountAmount = event;
+  }
   public onChangeRate(val) {
     let value = Number(val);
     this.defaultService.rate = value;

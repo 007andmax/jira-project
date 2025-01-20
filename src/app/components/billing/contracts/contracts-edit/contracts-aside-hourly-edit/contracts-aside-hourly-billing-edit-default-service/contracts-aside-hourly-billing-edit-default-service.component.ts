@@ -35,6 +35,9 @@ export class ContractsAsideHourlyBillingEditDefaultServiceComponent implements O
     });
     this.taxesDropDown.setEditItems(listTaxes);
   }
+  onChangeDiscountAmount(event) {
+    this.service.discountAmount = event;
+  }
   onTaxesChange(data) {
     this.service.taxIds = data.map(item => {
       return item.id;

@@ -24,6 +24,28 @@
         </label>
     </td>
     <td class="track-and-bill-table__tax --editable">
+        <div class="qt-df">
+            <input
+                type="text"
+                class="qt-input-in-table qt-text-right"
+                decimalNumber
+                placeholder="0.00"
+                [defaultValue]="''"
+                [value]="service.discountAmount ? service.discountAmount : ''"
+                (onChange)="onChangeDiscountAmount($event)"
+            >
+            <input
+                type="text"
+                value="%"
+                autocomplete="new-password"
+                readonly
+                placeholder="Discount"
+                id="dropdownTypeTaxes"
+                class="qt-input-block__input"
+            >
+        </div>
+    </td>
+    <td class="track-and-bill-table__tax --editable">
         <app-taxes
             [hidden]="!service.billable"
             class="qt-taxes-multiselect"

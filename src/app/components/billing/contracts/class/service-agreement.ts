@@ -45,7 +45,7 @@ export class ServiceAgreement {
                 this[key] = data[key];
             }
             this.services = data.services.map(item => {
-                return new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, item.commissionRate, item.id, item.name, item.rate, item.taxIds, item.parentDefaultServiceId);
+                return new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, item.commissionRate, item.id, item.name, item.rate, item.taxIds, item.parentDefaultServiceId, false, item.discountAmount, item.discountType);
             })
             this.services.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
                 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
@@ -119,7 +119,7 @@ export class ServiceAgreement {
         this.shares = data;
     }
     public addDefaultService(item) {
-        this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id), item.parentDefaultServiceId, true))
+        this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id), item.parentDefaultServiceId, true, item.discountAmount, item.discountType))
     }
     public getServiceContractServicesName() {
         return this.serviceContractServices.map(item => item.name);

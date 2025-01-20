@@ -8,6 +8,8 @@ export class DefaultServicesHourlyContract extends NonContractServices {
     isCopy: boolean = false;
     rate_str: string;
     validate: boolean = true;
+    "discountAmount": string;
+    "discountType": string = "PERCENT";
     constructor(data = null) {
         super(data);
         this.rate_str = this.rate.toFixed(2);
@@ -36,6 +38,8 @@ export class DefaultServicesHourlyContract extends NonContractServices {
         this.taxes = taxesList.filter(item => {
             let find = data.taxIds.find(taxId => taxId === item.id);
             return (find) ? true : false;
-        })
+        });
+        this.discountAmount = data.discountAmount ? data.discountAmount : undefined;
+        this.discountType = data.discountAmount ? data.discountType : undefined;
     }
 }
