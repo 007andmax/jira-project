@@ -8,18 +8,18 @@
         <p [textContent]="message"></p>
     </div>
     <div class="archive-modal__footer">
-        <div class="qt-df">
-            <button
-                class="btn-new btn-primary"
-                (click)=approveConfirm()
-            >
-                Yes, create
-            </button>
+        <div class="qt-df qt-jc-fe">
             <button
                 class="btn-new disabled"
                 (click)=cancelConfirm()
             >
-                No, don't create
+                Cancel
+            </button>
+            <button
+                class="btn-new btn-primary"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
             </button>
         </div>
     </div>
