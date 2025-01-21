@@ -12,7 +12,11 @@ export class SubscriptionServicesStateService {
   onFastEdit: EventEmitter<any> = new EventEmitter();
   onFastRemove: EventEmitter<any> = new EventEmitter();
   onRefreshServicesAgreements: EventEmitter<any> = new EventEmitter();
+  onConfirm: EventEmitter<any> = new EventEmitter();
   constructor() { }
+  public setConfirm(data) {
+    this.onConfirm.emit(data);
+  }
   public refreshServicesAgreements() {
     this.onRefreshServicesAgreements.emit(null);
   }

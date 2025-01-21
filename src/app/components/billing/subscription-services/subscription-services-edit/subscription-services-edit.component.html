@@ -95,7 +95,8 @@
                     <input
                         id="email-payment"
                         type="checkbox"
-                        updateServicePricesInContracts="rate"
+                        formControlName="updateServicePricesInContracts"
+                        (change)="onChangeUpdateServicePricesInContracts($event)"
                     >
                     <span></span>
                     <div class="qt-ml-8 qt-fw-400 qt-lh-1">
@@ -116,7 +117,7 @@
                     class="qt-button qt-w100 qt-jc-c"
                     appDisabledBtn
                     #editService="disabled"
-                    (onClick)="save()"
+                    (onClick)="onSave()"
                 >
                     <span *ngIf="!editService.isBlock()">Edit Service</span>
                     <app-preloader-ticket *ngIf="editService.isBlock()"></app-preloader-ticket>

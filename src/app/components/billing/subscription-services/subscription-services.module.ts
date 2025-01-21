@@ -17,6 +17,7 @@ import { SubscriptionServicesEditComponent } from './subscription-services-edit/
 import { SubscriptionServicesCheckUseComponent } from './subscription-services-check-use/subscription-services-check-use.component';
 import { GlNumbersDropDownModule } from '../../inventory/gl-numbers-drop-down/gl-numbers-drop-down.module';
 import { ContractsEditModule } from '../contracts/contracts-edit/contracts-edit.module';
+import { SubscriptionServicesConfirmComponent } from './subscription-services-confirm/subscription-services-confirm.component';
 
 
 

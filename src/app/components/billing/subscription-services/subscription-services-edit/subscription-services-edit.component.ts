@@ -10,6 +10,8 @@ import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.s
 import { GlNumber } from 'src/class/gl-number/gl-number';
 import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SubscriptionServicesConfirmComponent } from '../subscription-services-confirm/subscription-services-confirm.component';
 
 @Component({
   selector: 'app-subscription-services-edit',
@@ -33,6 +35,7 @@ export class SubscriptionServicesEditComponent implements OnInit, OnDestroy {
     private subscriptionServicesStateService: SubscriptionServicesStateService,
     private glNumberStateService: GlNumberStateService,
     public cd: ChangeDetectorRef,
+    private modalService: NgbModal,
     private glNumberService: GlNumberService,
     public formBuilder: FormBuilder,) { }
 
@@ -65,6 +68,13 @@ export class SubscriptionServicesEditComponent implements OnInit, OnDestroy {
       this.glNumbers = this.sortGlNumbers(data);
     })
     this.sub.add(getOnGlNumbers);
+    let onConfirm = this.subscriptionServicesStateService.onConfirm.subscribe(res => {
+      if (res) this.save();
+    })
+    this.sub.add(onConfirm);
+  }
+  onChangeUpdateServicePricesInContracts(event) {
+    this.modelForm.controls["updateServicePricesInContracts"].setValue(event.target.checked);
   }
   private sortGlNumbers(data) {
     return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
@@ -88,11 +98,19 @@ export class SubscriptionServicesEditComponent implements OnInit, OnDestroy {
     this.selectedGlNumber = data;
     this.modelForm.controls["glNumberId"].setValue(data.id)
   }
-  save() {
+  public onSave() {
     if (this.modelForm.invalid) {
       console.log("this.modelForm", this.modelForm);
       return;
     }
+    if (this.modelForm.value.updateServicePricesInContracts) {
+      const modalRef = this.modalService.open(SubscriptionServicesConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.message = `Do you want to apply a new service price to all contracts where the service is used?`;
+    } else {
+      this.save();
+    }
+  }
+  save() {
     this.editService.setDisabled(true);
     this.subscriptionServicesService.editService(this.service.id, this.modelForm.value).subscribe(data => {
       this.subscriptionServicesStateService.fastEditService(data);

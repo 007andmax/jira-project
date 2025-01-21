@@ -153,6 +153,7 @@ import { UsersDetailsHeaderComponent } from './components/users-details/users-de
 import { UsersDetailsLeftPanelComponent } from './components/users-details/users-details-left-panel/users-details-left-panel.component';
 import { SubscriptionServicesComponent } from './components/billing/subscription-services/subscription-services.component';
 import { SubscriptionServicesCheckUseComponent } from './components/billing/subscription-services/subscription-services-check-use/subscription-services-check-use.component';
+import { SubscriptionServicesConfirmComponent } from './components/billing/subscription-services/subscription-services-confirm/subscription-services-confirm.component';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -183,7 +184,8 @@ declare var $: any;
     ManufacturesCheckUseComponent,
     UserDeArchiveNotificationComponent,
     PreviewFileComponent,
-    SubscriptionServicesCheckUseComponent
+    SubscriptionServicesCheckUseComponent,
+    SubscriptionServicesConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -257,7 +259,8 @@ declare var $: any;
     GlNumberCheckUseComponent,
     UsersCheckUseComponent,
     ManufacturesCheckUseComponent,
-    SubscriptionServicesCheckUseComponent
+    SubscriptionServicesCheckUseComponent,
+    SubscriptionServicesConfirmComponent
   ],
   providers: [
     {
