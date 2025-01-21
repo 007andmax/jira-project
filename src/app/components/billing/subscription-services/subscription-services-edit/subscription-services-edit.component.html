@@ -114,9 +114,12 @@
                 </button>
                 <button
                     class="qt-button qt-w100 qt-jc-c"
-                    (click)="save()"
+                    appDisabledBtn
+                    #editService="disabled"
+                    (onClick)="save()"
                 >
-                    Edit Service
+                    <span *ngIf="!editService.isBlock()">Edit Service</span>
+                    <app-preloader-ticket *ngIf="editService.isBlock()"></app-preloader-ticket>
                 </button>
             </div>
         </div>

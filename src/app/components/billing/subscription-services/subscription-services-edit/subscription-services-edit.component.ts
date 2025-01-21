@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SubscriptionServices } from '../class/subscription-services';
 import { Subscription } from 'rxjs';
@@ -9,6 +9,7 @@ import { Tax } from 'src/class/taxes/tax';
 import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
 import { GlNumber } from 'src/class/gl-number/gl-number';
 import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-subscription-services-edit',
@@ -24,6 +25,7 @@ export class SubscriptionServicesEditComponent implements OnInit, OnDestroy {
   selectedGlNumber: GlNumber;
   glNumbers: Array<GlNumber> = [];
   sub: Subscription = new Subscription();
+  @ViewChild('editService', { static: false }) editService: DisabledBtnDirective;
   @Output() onClose = new EventEmitter<any>();
   constructor(
     private subscriptionServicesService: SubscriptionServicesService,
@@ -91,12 +93,14 @@ export class SubscriptionServicesEditComponent implements OnInit, OnDestroy {
       console.log("this.modelForm", this.modelForm);
       return;
     }
+    this.editService.setDisabled(true);
     this.subscriptionServicesService.editService(this.service.id, this.modelForm.value).subscribe(data => {
       this.subscriptionServicesStateService.fastEditService(data);
       this.close();
     })
   }
   close() {
+    this.editService.setDisabled(false);
     this.submitted = false;
     this.open = false;
     this.modelForm.reset();

@@ -23,6 +23,7 @@ export class ServiceAgreementBlockTimeServices {
             }
             this.rate_str = this.rate.toFixed(2);
             this.isAdded = isAdded;
+            if (!data.discountType) this.discountType = "PERCENT";
         }
     }
     public setTaxIds(data) {

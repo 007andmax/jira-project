@@ -58,7 +58,7 @@ export class SubscriptionServicesAddComponent implements OnInit, OnDestroy {
       taxIds: [
         []
       ],
-      glNumberId: [""]
+      glNumberId: [null]
     })
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
@@ -102,7 +102,8 @@ export class SubscriptionServicesAddComponent implements OnInit, OnDestroy {
       return;
     }
     this.addBtn.setDisabled(true);
-    this.subscriptionServicesService.addService(this.modelForm.value).subscribe(data => {
+
+    this.subscriptionServicesService.addService({ ...this.modelForm.value, glNumberId: this.modelForm.value.glNumberId ? this.modelForm.value.glNumberId : undefined }).subscribe(data => {
       this.subscriptionServicesStateService.fastAddService(data);
       this.addBtn.setDisabled(false);
       this.close();

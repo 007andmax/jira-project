@@ -53,7 +53,7 @@ export class ContractsAsideBlockTimeBillingPreviewComponent implements OnInit, O
     }
   }
   getDiscount(item) {
-    return item.discountAmount && item.discountAmount != undefined ? `${item.discountAmount} %` : '';
+    return item.discountAmount && item.discountAmount != undefined ? `${item.discountAmount} %` : 'N/A';
   }
   getIntervalText() {
     return this.selectedInterval.toLowerCase();

@@ -28,6 +28,7 @@ import { ContractsAsideUserDeviceServiceComponent } from './contracts-aside-user
   providers: [ContractsListService]
 })
 export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestroy {
+  @Output() onInitRequestForAdd = new EventEmitter<any>();
   @ViewChild('taxes', { static: true }) taxesDP: TaxesComponent;
   @ViewChild('taxesServices', { static: true }) taxesServicesDP: TaxesComponent;
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
@@ -119,6 +120,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, null, this.contractsUserDevice.getServiceContractServicesServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
+          this.onInitRequestForAdd.emit(null);
           this.contractsService.createContract(createBillableItem, this.contractsUserDevice.getDataForCreate(this.toggleMaximumAmountHours)).subscribe(res => {
             this.onClose.emit(null);
           })

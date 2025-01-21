@@ -30,6 +30,8 @@ import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.mo
 import { ContractsAsideBlockTimeBillingAddSubscriptionServicesComponent } from './contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-subscription-services/contracts-aside-block-time-billing-add-subscription-services.component';
 import { ContractsAsideBlockTimeBillingAddSubscriptionServicesModule } from './contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-subscription-services/contracts-aside-block-time-billing-add-subscription-services.module';
 import { ContractsAsideDiscountComponent } from './contracts-aside-discount/contracts-aside-discount.component';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
 
 
 @NgModule({
@@ -63,7 +65,9 @@ import { ContractsAsideDiscountComponent } from './contracts-aside-discount/cont
         NumberModule,
         CompanyDropDownModule,
         MatErrorModule,
-        ContractsAsideBlockTimeBillingAddSubscriptionServicesModule
+        ContractsAsideBlockTimeBillingAddSubscriptionServicesModule,
+        DisabledBtnModule,
+        PreloaderTicketModule
 
     ],
     exports: [ContractsAsideComponent]

@@ -30,6 +30,7 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
 })
 export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestroy {
   @Output() onClose = new EventEmitter<any>();
+  @Output() onInitRequestForAdd = new EventEmitter<any>();
   @ViewChild('customDateDP', { static: false }) customDateDP: DatePickerComponent;
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
@@ -156,6 +157,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
+          this.onInitRequestForAdd.emit(null);
           this.contractsService.createContract(createBillableItem, this.contractsBlockTime.getDataForCreate()).subscribe(res => {
             this.onClose.emit(null);
           })

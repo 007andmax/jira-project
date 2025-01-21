@@ -20,6 +20,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./contracts-aside-hourly-billing.component.scss']
 })
 export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
+  @Output() onInitRequestForAdd = new EventEmitter<any>();
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
   @ViewChild('topContract', { static: true }) topContract: ContractsAsideTopComponent;
@@ -106,6 +107,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
       moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, null, servicesName).subscribe(data => {
         if (Object.keys(data).length === 0) {
+          this.onInitRequestForAdd.emit(null);
           this.contractsService.createContract(false, this.contractsHourly.getDataForCreate()).subscribe(contract => {
             this.onClose.emit(null);
           })
