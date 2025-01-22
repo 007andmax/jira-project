@@ -59,7 +59,7 @@ export class ServiceAgreementBlockTimeServices {
         return data
     }
     public getDataForUpdateContractServices() {
-        return {
+        let data: any = {
             "count": this.count,
             "rate": this.rate,
             "taxIds": this.taxIds,
@@ -68,7 +68,9 @@ export class ServiceAgreementBlockTimeServices {
             },
             "discountAmount": this.discountAmount ? this.discountAmount : undefined,
             "discountType": this.discountAmount ? this.discountType : undefined
-        }
+        };
+        if (!this.isAdded) data.id = this.id;
+        return data
     }
     public setValidate(data) {
         this.validate = data;
