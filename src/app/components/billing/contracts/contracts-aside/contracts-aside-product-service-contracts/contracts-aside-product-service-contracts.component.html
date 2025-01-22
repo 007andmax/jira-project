@@ -59,6 +59,7 @@
                 type="text"
                 [(ngModel)]="contractsOther.description"
                 (input)="validate.resetDescription()"
+                maxlength="255"
             >
             <app-mat-error
                 class="invalid-feedback"

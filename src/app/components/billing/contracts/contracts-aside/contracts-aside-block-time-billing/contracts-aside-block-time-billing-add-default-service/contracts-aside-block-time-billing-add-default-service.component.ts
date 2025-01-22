@@ -29,7 +29,7 @@ export class ContractsAsideBlockTimeBillingAddDefaultServiceComponent implements
   public isSelected(id) {
     return this.selectedItem && this.selectedItem.versionedId.id == id;
   }
-  select(data) {
+  public select(data) {
     this.selectedItem = data;
     this.onSelect.emit(data);
   }

@@ -76,6 +76,7 @@
                 type="text"
                 [(ngModel)]="contractsUserDevice.description"
                 (input)="validate.resetDescription()"
+                maxlength="255"
             >
             <app-mat-error
                 class="invalid-feedback"
@@ -90,11 +91,11 @@
             Select how you bill your customer. Managed Services will be added to Service time
             <i
                 #managedServices="ngbTooltip"
-                class="icon__help default-services-page__question-icon qt-sz-12 qt-ic-c qt-ml-8"
+                class="qt-icon icon__help default-services-page__question-icon qt-sz-12 qt-ic-c qt-ml-8"
                 placement="top"
                 container="body"
                 [tooltipClass]="'cotract-billable-tooltip'"
-                ngbTooltip="If you change the existing 'Service name', 'Count', 'Tax' or 'Price' and update the contract then the new values will be applied to an appropriate contract service that has not been invoiced yet. The total amount for unbilled services will be recalculated taking into account the new values."
+                ngbTooltip="If you change the existing 'Count', 'Tax' or 'Price' and update the contract then the new values will be applied to an appropriate contract service that has not been invoiced yet. The total amount for unbilled services will be recalculated taking into account the new values."
             ></i>
         </div>
         <div class="qt-df qt-ai-c qt-mb-25">

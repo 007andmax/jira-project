@@ -44,6 +44,7 @@
                 type="text"
                 [(ngModel)]="contractsHourly.description"
                 (input)="onChangeDescription()"
+                maxlength="255"
             >
             <app-mat-error
                 class="invalid-feedback"

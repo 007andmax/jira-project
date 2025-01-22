@@ -49,26 +49,3 @@ describe('ContractsAsideDiscountComponent unit test', () => {
     });
   });
 });
-describe('ContractsAsideDiscountComponent integration test', () => {
-  let component: ContractsAsideDiscountComponent;
-  let fixture: ComponentFixture<ContractsAsideDiscountComponent>;
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [CommonModule,
-        FormsModule,
-        NgbModule,
-        NumberModule,
-        DecimalNumberModule,
-        MatErrorModule],
-      declarations: [ContractsAsideDiscountComponent]
-    })
-    fixture = TestBed.createComponent(ContractsAsideDiscountComponent);
-    component = fixture.componentInstance;
-  });
-  /* it('should contain "title" property', () => {
-     const bannerElement: HTMLElement = fixture.nativeElement;
-     component.title = "test";
-     fixture.detectChanges();
-     expect(bannerElement.querySelector(".app-drop-down__title").textContent).toContain('test');
-   });*/
-});
