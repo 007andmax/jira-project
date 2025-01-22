@@ -17,14 +17,14 @@
                     ></span>
                 </div>
                 <button
-                    class="qt-btn --transparent"
+                    class="qt-button --transparent --md"
                     (click)="clearAll()"
                     *ngIf="countFilter > 0"
                 >
                     Clear All
                 </button>
                 <button
-                    class="qt-btn btn-filter qt-ml-8"
+                    class="qt-button qt-button-filter --md qt-ml-8"
                     [ngClass]="{'active':!toggleFilter}"
                     (click)="toggleFilter  = !toggleFilter"
                 >

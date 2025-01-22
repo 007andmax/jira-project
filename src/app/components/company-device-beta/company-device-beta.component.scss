@@ -270,10 +270,6 @@ span.qt-input-search:before {
   background-color: $gray-400;
 }
 
-.qt-btn.--outline-blue {
-  margin-left: 5px !important;
-}
-
 .Max-300-Words-limit {
   width: 117px;
   height: 16px;
@@ -527,13 +523,6 @@ table.qt-table-modern tbody tr td {
 .qt-page-list__header-title-line {
   width: 85%;
   margin: 0 auto !important;
-}
-
-.qt-btn {
-  &.--outline-gray {
-    background-color: $gray-100 !important;
-    top:28px;
-  }
 }
 
 .computerModel

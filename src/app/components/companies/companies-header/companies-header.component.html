@@ -58,14 +58,14 @@
                     </div>
                 </div>
                 <button
-                    class="qt-btn --transparent"
+                    class="qt-button --transparent --md"
                     (click)="clearAll()"
                     *ngIf="countFilter > 0"
                 >
                     Clear All
                 </button>
                 <button
-                    class="qt-btn btn-filter qt-mr-8 qt-ml-8 qt-df"
+                    class="qt-button qt-button-filter --md qt-mr-8 qt-ml-8 qt-df"
                     [ngClass]="{'active':toggleFilter,
                  'is-exist-filters':isExistFilters()}"
                     (click)="onToggleFilter(!toggleFilter)"

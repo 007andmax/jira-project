@@ -9,7 +9,7 @@
         <div class="qt-page-list__header-title-line--rigth">
             <div class="qt-df qt-ai-c">
                 <button
-                    class="qt-btn --transparent"
+                    class="qt-button --transparent --md"
                     (click)="clearAll()"
                     *ngIf="countFilter > 0"
                 >
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <button
-                    class="qt-btn btn-filter qt-ml-8"
+                    class="qt-button qt-button-filter --md qt-ml-8"
                     [ngClass]="{'active':!toggleFilter}"
                     (click)="toggleFilter  = !toggleFilter"
                 >
