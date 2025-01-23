@@ -123,6 +123,8 @@ export class TicketDetailProfileFormUpdateServicesComponent implements OnInit, O
     this.currentService.setItem(item);
     this.currentService.setItemOrder(this.getItemOrger());
     this.currentService.setValidate(true);
+    console.log("this.currentService", this.currentService);
+    console.log("item", item);
   }
   public removeService(i) {
     this.addedServiceList.splice(i, 1);
