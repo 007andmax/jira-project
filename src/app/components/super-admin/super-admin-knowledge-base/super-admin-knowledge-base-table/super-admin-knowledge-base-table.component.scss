@@ -55,15 +55,6 @@ app-tickets-table-item {
     display: flex;
 }
 
-::ng-deep .filter-button.--gray:focus {
-    background-color: $white;
-}
-
-::ng-deep .filter-button.active:focus {
-    background-color: #16a4fa10;
-}
-
-
 .qt-page-list__body {
     padding: 0 32px;
 }

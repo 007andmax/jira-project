@@ -359,7 +359,7 @@ input.qt-dropdown-input {
       left: calc(50% - 9px);
     }
   }
-  //&:not(.--gray):not(.--outline):not(.--transparent):not(.qt-button-filter) { // TODO check
+  //&:not(.--gray):not(.--outline):not(.--transparent):not(.qt-button-filter --gray) { // TODO check
   //  &:hover {
   //    color: $white;
   //  }
@@ -435,30 +435,6 @@ input.qt-dropdown-input {
     background: transparent;
     color: $blue-light-600;
     text-decoration: underline;
-  }
-
-  &-filter {
-    padding-left: 30px;
-    background-repeat: no-repeat;
-    background-position: 10px center;
-    background-size: 16px;
-    background-color: $white;
-    color: $gray-500;
-    border: none;
-    background-image: url('/assets/img/icons/filter.svg');
-
-    &.active {
-      background-color: #16a4fa10;
-      color: $blue-light-600;
-      padding-left: 16px;
-      border: none;
-      background-image: none;
-    }
-
-    &:focus {
-      background-color: $white;
-      color: $gray-500;
-    }
   }
 
   &.qt-button-square__afterpend {

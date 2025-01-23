@@ -29,16 +29,17 @@
                     </div>
                 </div>
                 <button
-                    class="qt-button qt-button-filter --md qt-ml-8"
+                    class="qt-button qt-button-filter --gray --md qt-ml-8"
                     [ngClass]="{'active':!toggleFilter}"
                     (click)="toggleFilter  = !toggleFilter"
                 >
+                    <span class="qt-icon icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                     <span
                         class="filter-counter qt-circle qt-sz-18 qt-fw-600 qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
                         *ngIf="countFilter > 0"
                         [textContent]="countFilter"
                     ></span>
-                    Filters
+                    <span>Filters</span>
                 </button>
                 <button
                     class="qt-button --gray --md qt-ml-8"

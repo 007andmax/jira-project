@@ -174,7 +174,7 @@
             </span>
             <a
                 (click)="openMap(content,companyDetailing.addresses[0])"
-                class="btn btn-outline"
+                class="qt-button --outline --sm"
             >
                 <span class="qt-icon icon__map-pin qt-icon__blue-light-600 qt-sz-16 qt-dib qt-mr-4"></span>
                 Get Direction
@@ -210,7 +210,7 @@
             </span>
             <a
                 (click)="openMap(content,companyDetailing.addresses.length > 1 ? companyDetailing.addresses[1] : null)"
-                class="btn btn-outline"
+                class="qt-button --outline --sm"
             >
                 <span class="qt-icon icon__map-pin qt-icon__blue-light-600 qt-sz-16 qt-dib qt-mr-4"></span>
                 Get Direction
@@ -363,14 +363,14 @@
         <a
             href="javascript:;"
             (click)="downloadAgent()"
-            class="btn btn-outline download-agent"
+            class="qt-button --outline qt-f-1 download-agent"
         >
             <span class="qt-icon icon__download qt-icon__blue-light-600 qt-sz-16 qt-dib"></span>
             Download Agent
         </a>
         <a
             (click)="edit()"
-            class="btn btn-primary"
+            class="qt-button qt-f-1"
             *ngIf="getPermissions('EDIT_COMPANIES')"
         >
             Edit Company
