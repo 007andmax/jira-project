@@ -26,7 +26,10 @@ export class CompanyService implements Service {
     taxes: Array<Tax>;
     updatedAt: number;
     versionedId: VersionedId;
+    discountType: string;
+    discountAmount: string;
     constructor() { }
+
 
 
 }

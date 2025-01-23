@@ -21,6 +21,8 @@ export class ForCreateService implements Service {
     duration: number;
     noValid: boolean = false;
     errors: Array<String>;
+    discountType: string;
+    discountAmount: string;
     constructor(data = null) {
         if (!data) return;
         this.blockTimeServiceAgreement = data.blockTimeServiceAgreement;
@@ -41,6 +43,7 @@ export class ForCreateService implements Service {
         this.duration = data.duration;
 
     }
+
     public setDescription(description) {
         this.description = description;
     }

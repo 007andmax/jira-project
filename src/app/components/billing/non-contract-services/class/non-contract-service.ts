@@ -28,6 +28,8 @@ export class NonContractServices implements Service {
     isStub: boolean;
     originService: any;
     parentDefaultServiceId: string;
+    discountType: string;
+    discountAmount: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -37,6 +39,7 @@ export class NonContractServices implements Service {
         }
 
     }
+
     public onInitForAdd() {
         this.billable = true;
         this.isDefault = true;
