@@ -1,7 +1,7 @@
 <main class="mainSidebar">
   <div class="cmn-wrapper">
     <div class="device-container">
-        <div class="page-container">            
+        <div class="page-container">
             <div class="page-header">
               <h3 class="window">Window update</h3>
             </div>
@@ -9,8 +9,8 @@
               <div class="tabletitle">
                 <ngb-tabset>
                   <ngb-tab title="Available updates">
-                    <ng-template ngbTabContent>                                     
-                  <div class="table-wrap">                  
+                    <ng-template ngbTabContent>
+                  <div class="table-wrap">
                     <table class="fixed">
                       <thead>
                         <tr *ngIf="windowUpdatePendingList.length>0">
@@ -19,13 +19,13 @@
                           <th class="product">Product</th>
                           <th class="product">Class</th>
                           <th class="product">Size</th>
-                        </tr>                            
+                        </tr>
                       </thead>
                       <tbody class="window-update-table">
                         <tr *ngFor="let data of windowUpdatePendingList; let i = index;">
                           <td class="tabletd">
                             <input
-                                    type="checkbox"                                    
+                                    type="checkbox"
                                     (change)="postWindowUpdatePending(i)"
                                     *ngIf="!data.loading"
                             />
@@ -35,7 +35,7 @@
                           <td class="tablespace">{{data.Product}}</td>
                           <td class="tablespace">{{categoriesSep(data.Categories)}}</td>
                           <td class="tablespace">{{sizeConvert(data.Size)}} MB</td>
-                      </tr>                                                
+                      </tr>
                     </tbody>
                   </table>
                     <table class="qt-page-list__body-tbody qt-table-modern company-devices-table" *ngIf="windowUpdatePendingList.length==0">
@@ -44,19 +44,19 @@
                               <td colspan="10" class="text-center">No Available Updates</td>
                           </tr>
                       </tbody>
-                  </table>                 
+                  </table>
                   <div *ngIf="windowUpdatePendingList.length > 0">
-                    <a  class="btn btn-dowanload abutton" [ngClass]="selected == 0 ? 'disabled': '' " (click)="InstallUpdate()">
+                    <a  class="qt-button abutton" [ngClass]="selected == 0 ? 'disabled': '' " (click)="InstallUpdate()">
                       Install
-                  </a>                                                      
-                  </div>              
+                  </a>
+                  </div>
               </div>
                     </ng-template>
                   </ngb-tab>
 
                   <ngb-tab title="Install updates">
-                    <ng-template ngbTabContent>                                     
-                  <div class="table-wrap">                  
+                    <ng-template ngbTabContent>
+                  <div class="table-wrap">
                     <table class="fixed">
                       <thead>
                         <tr *ngIf="installedWindowsUpdateList.length>0">
@@ -64,7 +64,7 @@
                           <th class="product">Product</th>
                           <th class="product">Class</th>
                           <th class="product">Size</th>
-                        </tr>                   
+                        </tr>
                       </thead>
                       <tbody class="window-update-table">
                         <tr *ngFor="let install of installedWindowsUpdateList; let i = index;">
@@ -72,7 +72,7 @@
                           <td class="tablespace">{{install.Product}}</td>
                           <td class="tablespace">{{categoriesSep(install.Categories)}}</td>
                           <td class="tablespace">{{sizeConvert(install.Size)}} MB</td>
-                      </tr>                                                          
+                      </tr>
                     </tbody>
                   </table>
                     <table class="qt-page-list__body-tbody qt-table-modern company-devices-table" *ngIf="installedWindowsUpdateList.length==0">
@@ -81,15 +81,15 @@
                               <td colspan="10" class="text-center">No Installed Updates</td>
                           </tr>
                       </tbody>
-                  </table>                                                 
+                  </table>
               </div>
                     </ng-template>
                   </ngb-tab>
 
 
                   <ngb-tab title="Blocked updates">
-                    <ng-template ngbTabContent>                                     
-                  <div class="table-wrap">                  
+                    <ng-template ngbTabContent>
+                  <div class="table-wrap">
                     <table class="fixed">
                       <thead>
                         <tr *ngIf="blockedWindowsUpdateList.length>0">
@@ -97,15 +97,15 @@
                           <th class="product">Product</th>
                           <th class="product">Class</th>
                           <th class="product">Size</th>
-                        </tr>                   
+                        </tr>
                       </thead>
-                      <tbody class="window-update-table">                                            
+                      <tbody class="window-update-table">
                         <tr *ngFor="let blocked of blockedWindowsUpdateList; let i = index;">
                             <td class="tablespace">{{blocked.Title}}</td>
                             <td class="tablespace">{{blocked.Product}}</td>
                             <td class="tablespace">{{blocked.Categories}}</td>
                             <td class="tablespace">{{sizeConvert(blocked.Size)}} MB</td>
-                        </tr>                                                           
+                        </tr>
                     </tbody>
                   </table>
                     <table class="qt-page-list__body-tbody qt-table-modern company-devices-table" *ngIf="blockedWindowsUpdateList.length==0">
@@ -114,13 +114,13 @@
                               <td colspan="10" class="text-center">No Blocked Updates</td>
                           </tr>
                       </tbody>
-                  </table>                                                 
+                  </table>
               </div>
                     </ng-template>
-                  </ngb-tab>                                  
-                </ngb-tabset>                
+                  </ngb-tab>
+                </ngb-tabset>
               </div>
-            </div>              
+            </div>
         </div>
     </div>
     <div class="Rectangle" *ngIf="windowupdateview">

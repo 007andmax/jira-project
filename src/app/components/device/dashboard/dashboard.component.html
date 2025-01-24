@@ -682,14 +682,14 @@
                         <div class="btn-row">
                             <button
                                 type="submit"
-                                class="btn btn-primary"
+                                class="qt-button"
                                 [disabled]="!assetNotesForm.form.valid"
                             >
                                 Create Note
                             </button>
                             <a
                                 href="javascript:;"
-                                class="btn btn-secondary"
+                                class="qt-button --gray"
                                 (click)="closeNotes()"
                             >
                                 Cancel
@@ -803,14 +803,14 @@
                             <div class="btn-row">
                                 <button
                                     type="submit"
-                                    class="btn btn-primary"
+                                    class="qt-button"
                                     [disabled]="!editassetNotesForm.form.valid"
                                 >
                                     Edit Note
                                 </button>
                                 <a
                                     href="javascript:;"
-                                    class="btn btn-secondary"
+                                    class="qt-button --gray"
                                     (click)="editCloseNotes()"
                                 >
                                     Cancel
@@ -847,7 +847,7 @@
 
                                 <button
                                     type="button"
-                                    class="btn btn-danger pull-right"
+                                    class="qt-button --red pull-right"
                                     (click)="deleteNote()"
                                 >
                                     Delete
@@ -961,7 +961,7 @@
                                             *ngIf="windowUpdatePendingList.length>0"
                                         >
                                             <a
-                                                class="btn btn-dowanload footer"
+                                                class="qt-button footer"
                                                 [ngClass]="selected==0? 'disabled': '' "
                                                 (click)="InstallUpdate()"
                                             >

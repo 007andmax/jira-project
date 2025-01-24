@@ -430,11 +430,22 @@ input.qt-dropdown-input {
   }
 
   &.--transparent {
-    padding-inline: 8px;
-    border: none;
-    background: transparent;
+    position: relative;
+    padding-inline: 0;
+    border: transparent;
     color: $blue-light-600;
-    text-decoration: underline;
+    background-color: transparent;
+    font-weight: 400;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 6px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: $blue-light-600;
+    }
   }
 
   &.qt-button-square__afterpend {

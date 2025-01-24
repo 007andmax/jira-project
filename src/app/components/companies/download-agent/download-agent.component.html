@@ -6,27 +6,27 @@
     ></button>
     <h5 class="qt-fw-600">Download the installer</h5>
     <button
-        class="btn btn-primary"
+        class="qt-button qt-w100 qt-mb-16"
         (click)="downloadAgent()"
     >
-        <i class="qt-icon icon__microsoft  qt-icon__white qt-sz-32 qt-bg-contain qt-mr-6 qt-dib qt-va-m"></i>
+        <i class="qt-icon icon__microsoft qt-mr-8 qt-icon__white qt-sz-32 qt-bg-contain qt-mr-6 qt-dib qt-va-m"></i>
         <span>Download for Windows</span>
     </button>
     <!-- <button
-        class="btn btn-primary"
+        class="qt-button"
         (click)="downloadDemoAgent()"
     >
         <i class="qt-icon icon__microsoft  qt-icon__whiteqt-sz-32 qt-bg-contain qt-mr-6 qt-dib qt-va-m"></i>
         <span>Demo Offline agent</span>
     </button> -->
-    <!-- <button class="btn btn-primary not-active"><i class="apple-icn"></i><span>Download for Mac</span></button> -->
-    <button class="btn btn-primary not-active">
+    <!-- <button class="qt-button not-active"><i class="apple-icn"></i><span>Download for Mac</span></button> -->
+    <button class="qt-button qt-w100 qt-mb-12 not-active">
         <i class="qt-sz-32 qt-bg-contain qt-mr-6 qt-dib qt-va-m"></i>
         <span>Download for Linux</span>
     </button>
-    <p>OR</p>
+    <p class="qt-color-gray-400 qt-fs-12 qt-lh-1">OR</p>
     <button
-        class="btn primary-default ng-isolate-scope"
+        class="qt-button --outline qt-w100 primary-default ng-isolate-scope"
         (click)="getDonwloadLink()"
         custom-disabled="false"
         ng-disabled="false"

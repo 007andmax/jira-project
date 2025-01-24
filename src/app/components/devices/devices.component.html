@@ -1924,14 +1924,14 @@
         <div class="modal-footer">
             <button
                 type="button"
-                class="btn btn-danger"
+                class="qt-button --red"
                 (click)="Reboot(assetId)"
             >
                 Yes
             </button>
             <button
                 type="button"
-                class="btn btn-secondary"
+                class="qt-button --gray"
                 (click)="decline()"
             >
                 No
@@ -1969,7 +1969,7 @@
                         </p>
                         <a
                             (click)="createConnection(connectionType);"
-                            class="btn btn-primary"
+                            class="qt-button"
                         >
                             Launch Quicktech Connect
                         </a>
@@ -1983,7 +1983,7 @@
             </p>
             <a
                 (click)="getViewer();"
-                class="btn btn-dowanload"
+                class="qt-button"
             >
                 Download Viewer
             </a>
@@ -2027,7 +2027,7 @@
                         <a
                             (click)="createScreenConnect()"
                             *ngIf="guestConnected == true && hostConnected == false"
-                            class="btn btn-primary"
+                            class="qt-button"
                         >
                             Launch Screen Connect
                         </a>
@@ -2041,7 +2041,7 @@
             </p>
             <a
                 (click)="getViewer();"
-                class="btn btn-dowanload"
+                class="qt-button"
             >
                 Download Viewer
             </a>

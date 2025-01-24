@@ -58,7 +58,7 @@
                             <button
                                 id="button-cmd"
                                 type="button"
-                                class="btn btn-primary"
+                                class="qt-button"
                                 (click)="copyToTerminalFunc(editCmd,-1);"
                             >
                                 Run Command
@@ -253,11 +253,11 @@
                                             type="submit"
                                             value="Save"
                                             (click)="createCommand()"
-                                            class="btn btn-primary"
+                                            class="qt-button"
                                         >
                                         <a
                                             href="javascript:;"
-                                            class="btn btn-secondary"
+                                            class="qt-button --gray"
                                             aria-label="Close"
                                             (click)="resetCmdModal();create = !create"
                                         >
@@ -394,7 +394,7 @@
                 <a
                     href="javascript:;"
                     (click)="openRunScript();"
-                    class="btn btn-primary"
+                    class="qt-button"
                 >
                   <span class="qt-icon icon__run-script qt-sz-16 qt-icon__white qt-dib qt-ml-4"></span>
                   <span class="qt-icon icon__run-script qt-dib qt-sz-20 qt-icon__white qt-mr-6"></span>
@@ -864,7 +864,7 @@
                                     <button
                                         type="button"
                                         *ngIf="scriptDetailModal.default === false"
-                                        class="btn btn-primary"
+                                        class="qt-button"
                                         (click)="updateMyScript()"
                                     >
                                         Save
@@ -872,21 +872,21 @@
                                     <button
                                         type="button"
                                         *ngIf="scriptDetailModal.default === true"
-                                        class="btn btn-primary"
+                                        class="qt-button"
                                         (click)="cloneScript(scriptDetailModal.id)"
                                     >
                                         Clone Script
                                     </button>
                                     <button
                                         type="button"
-                                        class="btn btn-primary"
+                                        class="qt-button"
                                         (click)="copyScriptToggle(scriptDetailModal, 'copy')"
                                     >
                                         Copy Script
                                     </button>
                                     <button
                                         type="button"
-                                        class="btn btn-secondary"
+                                        class="qt-button --gray"
                                         (click)="scriptDetail = !scriptDetail"
                                     >
                                         Back
@@ -936,7 +936,7 @@
                 <div class="confirm-btn">
                     <button
                         type="button"
-                        class="btn btn-secondary"
+                        class="qt-button --gray"
                         aria-label="Close"
                         (click)="modal.dismiss('Cross click')"
                     >
@@ -944,7 +944,7 @@
                     </button>
                     <button
                         type="button"
-                        class="btn btn-remove"
+                        class="qt-button --red"
                         (click)="deleteCommand();modal.dismiss('Cross click')"
                     >
                         Remove
@@ -1044,7 +1044,7 @@
 
                     <button
                         type="button"
-                        class="btn btn-small"
+                        class="qt-button --gray"
                         (click)="addNewCategory()"
                     >
                         <span class="qt-icon icon__add qt-sz-16 qt-icon__white qt-dib qt-mr-8"></span>
