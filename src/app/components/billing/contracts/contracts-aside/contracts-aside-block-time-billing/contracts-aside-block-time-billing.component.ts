@@ -96,6 +96,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.contractsBlockTime.setTaxIds(taxes.map(item => item.id));
   }
   public onInitCopy() {
+    console.log("this.сontractsStateService.getContractForCopy()", this.сontractsStateService.getContractForCopy());
     this.contractsBlockTime.setDataFromCopy(this.сontractsStateService.getContractForCopy());
     this.selectedInterval = this.contractsBlockTime.intervalstring;
     this.startDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
