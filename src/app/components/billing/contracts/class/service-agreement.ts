@@ -323,6 +323,13 @@ export class ServiceAgreement {
             enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
         }
     }
+    public calculateTotalAmountServiceContract() {
+        let sum = 0;
+        this.serviceContractServices.forEach(item => {
+            sum += (item.count * item.rate);
+        })
+        return sum;
+    };
     public calculateTotalAmount() {
         let sum = 0;
         if (Number(this.includedHours) && Number(this.blockRate)) {

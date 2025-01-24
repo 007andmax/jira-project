@@ -74,6 +74,7 @@ export class ContractsUserDevice {
     }
     public calculateTotalAmount() {
         let sum = 0;
+        console.log("this.serviceContractServices", this.serviceContractServices);
         this.serviceContractServices.forEach(item => {
             sum += (item.count * item.rate);
         })
