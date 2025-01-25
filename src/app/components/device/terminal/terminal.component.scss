@@ -58,37 +58,11 @@ main {
                                 outline: none !important;
                             }
                         }
-                        .btn.btn-primary{
-                            height: 40px;
-                            @include border-radius(4px);
-                            padding: 11.5px 10px;
-                            width: 125px;
-                            text-align: center;
-                            font-size: 13px;
-                            position: absolute;
-                            right: 8px;
-                            bottom: 8px;
-                        }
                     }
                 }
             }
         }
         .right-sidebar {
-            & > div {
-                & > .btn.btn-primary {
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
-                    @include border-radius(0);
-                    font-size: 13px;
-                    padding: 10px;
-                    img {
-                        max-width: 20px;
-                        margin-right: 5px;
-                    }
-                }
-            }
             &.terminal-sidebar {
                 right: 0 !important;
                 border-left: 1px solid $gray-200;
@@ -308,14 +282,6 @@ main {
                                         textarea {
                                             height: 315px;
                                             font-weight: 500;
-                                        }
-                                    }
-                                    .btn {
-                                        min-width: inherit;
-                                        padding: 13px 16px;
-                                        &.btn-secondary {
-                                            border: solid 1px $gray-300;
-                                            background-color: $white !important;
                                         }
                                     }
                                 }
@@ -638,17 +604,6 @@ main {
                         textarea {
                             height: 200px;
                         }
-                        .form-row {
-                            .btn {
-                                margin-right: 15px;
-                                padding: 10px 20px;
-                                font-size: 13px;
-                                &.btn-secondary {
-                                    border: solid 1px $gray-300;
-                                    background-color: $white !important;
-                                }
-                            }
-                        }
                         .f-col{
                             &.col-70{
                                 width: 65%;
@@ -933,23 +888,6 @@ body {
                 .confirm-btn {
                     align-items: center;
                     justify-content: flex-start !important;
-                    button{
-                        &.btn.btn-small {
-                            margin-left: 0 !important;
-                            background-color: transparent;
-                            border: 1px solid $blue-light-600;
-                            color: $blue-light-600;
-                            font-size: 12px !important;
-                            padding: 9px 8px !important;
-                            display: -ms-flexbox !important;
-                            display: -webkit-flex !important;
-                            display: flex !important;
-                            align-items: center;
-                            justify-content: center;
-                            line-height: 1;
-                            margin-top: 10px;
-                        }
-                    }
                 }
             }
         }

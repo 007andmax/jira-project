@@ -285,13 +285,13 @@
     }
   }
 
-  label.btn-primary.tech-tickets__toggle-menu-button {
+  label.tech-tickets__toggle-menu-button {
     height: 20px;
     background-color: transparent;
     border-radius: 4px;
     padding: 4px 6px;
     border: none;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     color: $gray-600;

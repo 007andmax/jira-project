@@ -808,14 +808,6 @@
     p {
         margin-bottom: 14px;
     }
-
-    .btn {
-        min-width: 231px !important;
-        padding: 16.5px 15px;
-        display: inline-block;
-        height: auto;
-        line-height: 1;
-    }
 }
 
 .viewer-footer {
@@ -854,10 +846,6 @@
 
 .restart-modal .close {
     margin-top: -10px;
-}
-
-.restart-modal .modal-footer .btn {
-    background-color: $red-600;
 }
 
 .btn-update,

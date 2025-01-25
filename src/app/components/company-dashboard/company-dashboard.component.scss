@@ -90,48 +90,6 @@
 
     /*** All buttons ***/
 
-    //.btn {
-    //    font-size: 13px;
-    //    font-weight: 600;
-    //    line-height: normal;
-    //    letter-spacing: normal;
-    //    color: $white;
-    //    cursor: pointer;
-    //    border: 1px solid transparent;
-    //    outline: none !important;
-    //    background-color: $blue-light-600;
-    //    padding: 12px 24px;
-    //    @include border-radius(4px);
-    //    @include transition(0.4s);
-    //    text-align: center;
-    //    height: auto;
-    //    &.btn-primary {
-    //        background-color: $blue-light-600;
-    //        color: $white;
-    //        border-color: $blue-light-600;
-    //        &:hover,
-    //        &:focus {
-    //            background-color: $blue-light-600;
-    //            color: $white;
-    //            border-color: $blue-light-600;
-    //        }
-    //    }
-    //    &.btn-secondary {
-    //        background-color: $background;
-    //        color: $gray-600;
-    //        &:hover,
-    //        &:focus {
-    //            background-color: $background;
-    //            color: $gray-600;
-    //        }
-    //    }
-    //    &.btn-outline {
-    //        background-color: transparent;
-    //        border-color: $blue-light-600;
-    //        color: $blue-light-600;
-    //    }
-    //}
-
     /*** static link ***/
     .static-link {
         font-size: 12px;
@@ -302,22 +260,6 @@
                                 font-size: 13px;
                                 line-height: 20px;
                                 color: $gray-900;
-                            }
-                            .btn.btn-outline {
-                                height: 28px;
-                                width: auto;
-                                padding: 5px 8px;
-                                align-items: center;
-                                justify-content: center;
-                                @include flexbox;
-                                font-size: 12px;
-                                font-weight: 600;
-                                line-height: 1.33;
-                                color: $blue-light-600;
-                                border-radius: 4px;
-                                img {
-                                    margin-right: 4px;
-                                }
                             }
                             p {
                                 margin: 0;
@@ -1019,9 +961,6 @@
                 flex: 1;
               }
             }
-            .btn-new {
-              height: 28px;
-            }
             .dropdown {
                 position: relative;
                 width: 115px;
@@ -1186,20 +1125,6 @@
                 letter-spacing: normal;
                 color: $blue-light-600;
             }
-        }
-        .btn {
-            position: absolute;
-            bottom: 15px;
-            left: 15px;
-            right: 14px;
-            @include border-radius(4px);
-            background-color: $sky-blue-600;
-            font-size: 12px;
-            font-weight: 600;
-            line-height: 1.33;
-            letter-spacing: normal;
-            color: $blue-light-600;
-            padding: 7.5px 15px;
         }
         ul {
             width: 100%;
@@ -1596,38 +1521,6 @@
                         width: 100%;
                         justify-content: flex-end;
                         flex-direction: row;
-                        .btn {
-                            height: 40px;
-                            @include flexbox;
-                            align-items: center;
-                            justify-content: center;
-                            &.btn-secondary {
-                                outline: none !important;
-                                border: solid 1px $gray-300;
-                                background-color: $white;
-                                font-size: 13px;
-                                font-weight: 600;
-                                line-height: normal;
-                                letter-spacing: normal;
-                                color: $gray-600;
-                                padding: 12px 24px;
-                            }
-                            &.btn-primary {
-                                font-size: 13px;
-                                font-weight: 600;
-                                line-height: normal;
-                                letter-spacing: normal;
-                                cursor: pointer;
-                                outline: none !important;
-                                padding: 12px 24px;
-                                @include border-radius(4px);
-                                @include transition(0.4s);
-                                text-align: center;
-                                background-color: $blue-light-600;
-                                color: $white;
-                                border-color: $blue-light-600;
-                            }
-                        }
                     }
                 }
             }
