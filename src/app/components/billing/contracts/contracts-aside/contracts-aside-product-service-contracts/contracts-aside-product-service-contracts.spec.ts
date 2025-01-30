@@ -34,6 +34,7 @@ import { ContractsAsideSelectTypeComponent } from '../contracts-aside-select-typ
 import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-aside-top.component';
 import { ContractsAsideUserDeviceBillingComponent } from '../contracts-aside-user-device-billing/contracts-aside-user-device-billing.component';
 import { ContractsAsideComponent } from '../contracts-aside.component';
+import { ServiceAgreement } from '../../class/service-agreement';
 
 
 
@@ -121,5 +122,115 @@ describe('ContractsAsideProductServiceContractsComponent unit test', () => {
     expect(com.getMinStartDate("30 days", startDate)).toEqual(checkStartDate30.getTime() - (29 * day));
     expect(com.getMinStartDate("15 days", startDate)).toEqual(checkStartDate15.getTime() - (14 * day));
     expect(com.getMinStartDate("7 days", startDate)).toEqual(checkStartDate7.getTime() - (6 * day));
+  });
+  it('check "onInitCopy"', () => {
+    const fixture = TestBed.createComponent(ContractsAsideProductServiceContractsComponent);
+    const com = fixture.debugElement.componentInstance;
+    let contractForCopy = new ServiceAgreement({
+      "id": "b7cf4cc8-580d-44aa-9400-7e05c5a67f06",
+      "description": "wefewfwef",
+      "type": "SERVICE_CONTRACT",
+      "status": "CURRENT",
+      "billType": "DEVICE",
+      "includedHours": null,
+      "glNumber": null,
+      "companyId": "32457670-d947-4de6-ab86-0731bdf02f70",
+      "startDate": "2025/01/21",
+      "endDate": "2075/01/20",
+      "reviewDate": "2026/01/21",
+      "amount": 510.98,
+      "services": [
+        {
+          "id": "be7e6935-8975-4c69-8a75-c33aabe12f71",
+          "name": "e-commerce",
+          "rate": 151.13,
+          "count": null,
+          "billable": true,
+          "basedOnDefault": true,
+          "commissionRate": null,
+          "taxIds": [
+            "8d321592-ffbd-487a-95c5-4789fa9a58c6"
+          ]
+        },
+        {
+          "id": "74bf930c-5ae2-4764-aca6-61ebc280ced9",
+          "name": "_Hourly",
+          "rate": 100.0,
+          "count": null,
+          "billable": true,
+          "basedOnDefault": true,
+          "commissionRate": 44.0,
+          "taxIds": [
+            "c56f4316-4bad-4155-93d3-52f841eae15b",
+            "8d321592-ffbd-487a-95c5-4789fa9a58c6"
+          ]
+        }
+      ],
+      "blockTimeServices": [],
+      "interval": "MONTHLY",
+      "customInterval": null,
+      "blockRate": null,
+      "rateExceeding": null,
+      "enableTimeRollover": false,
+      "maxRolloverHours": null,
+      "shares": [],
+      "taxIds": [],
+      "serviceContractServices": [
+        {
+          "id": "221de3db-2d1e-4fd4-a2ec-4771a130591e",
+          "name": "architecture ver2",
+          "rate": 199.99,
+          "count": 1,
+          "billable": false,
+          "basedOnDefault": false,
+          "commissionRate": 13.0,
+          "taxIds": []
+        },
+        {
+          "id": "6eb36d66-a2a5-4533-ba1d-06750af36bfb",
+          "name": "interface",
+          "rate": 199.99,
+          "count": 1,
+          "billable": false,
+          "basedOnDefault": false,
+          "commissionRate": 13.0,
+          "taxIds": [
+            "8d321592-ffbd-487a-95c5-4789fa9a58c6"
+          ]
+        },
+        {
+          "id": "64ff9256-92dc-4a75-9e86-920725a6888c",
+          "name": "aef23f ver2",
+          "rate": 111.0,
+          "count": 1,
+          "billable": false,
+          "basedOnDefault": false,
+          "commissionRate": 13.0,
+          "taxIds": [
+            "8d321592-ffbd-487a-95c5-4789fa9a58c6"
+          ]
+        }
+      ],
+      "serviceContractServicesToTrack": [
+        {
+          "id": "8d98257f-e6fa-47b9-8cc1-8c13d82da9ac",
+          "name": "e-services",
+          "rate": 0.0,
+          "count": null,
+          "billable": false,
+          "basedOnDefault": true,
+          "commissionRate": null,
+          "taxIds": []
+        }
+      ],
+      "serviceExpenses": [],
+      "productExpenses": [],
+      "invoiceAsSingleItem": false,
+      "manualCreateBillableItem": false,
+      "enableInvoiceAutoCreate": false
+    });
+    com.сontractsStateService.setContractForCopy(contractForCopy);
+    com.onInitCopy()
+    expect(com.selectedInterval).toEqual(com.contractsOther.intervalstring);
   });
 });
