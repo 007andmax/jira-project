@@ -27,13 +27,15 @@ export class FileManagerFile {
     public setTags(data) {
         this.tags = data;
     }
-    public getDataForUpate() {
-        return {
+    public getDataForUpate(isChangefile = false) {
+        let data: any = {
             "name": this.name,
             "description": this.description,
             "tags": this.tags.map(item => ({ id: item.id })),
-            "categoryId": this.categoryId
+            "categoryId": this.categoryId,
         }
+        if (isChangefile) data.mediaFileId = this.mediaFileId;
+        return data
     }
     public parseCreatedAt() {
         return (this.createdAt) ? this.createdAt : '';

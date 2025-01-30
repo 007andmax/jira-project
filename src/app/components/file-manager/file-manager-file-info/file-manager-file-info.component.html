@@ -159,6 +159,13 @@
         (tagsChange)="onChangeTags($event)"
         (tagsRemove)="onChangeTags($event)"
     ></app-file-manager-file-info-tags>
+    <input
+        [hidden]="true"
+        type="file"
+        #fileDropRef
+        id="fileDropRef"
+        (change)="fileBrowseHandler($event.target.files)"
+    >
 </div>
 <div
     class="aside-filters-content__footer qt-df qt-ai-c"
