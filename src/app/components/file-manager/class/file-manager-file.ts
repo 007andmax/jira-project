@@ -15,6 +15,7 @@ export class FileManagerFile {
     "uploaderName": string;
     "updatedBy": string;
     "updatedAt": string;
+    thumbnailUrl: string;
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];
