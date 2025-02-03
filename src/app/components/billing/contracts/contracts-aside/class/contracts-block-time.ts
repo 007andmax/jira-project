@@ -29,7 +29,7 @@ export class ContractsBlockTime {
     public setDataFromCopy(data: ServiceAgreement) {
         this.billType = data.billType;
         this.blockRate = Number(data.blockRate).toFixed(2);
-        this.blockTimeServices = data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate, item.id));
+        this.blockTimeServices = data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate, item.parentDefaultServiceId));
         this.companyId = data.companyId;
         this.customInterval = data.customInterval;
         this.description = data.description;
