@@ -28,7 +28,7 @@ export class ContractsHourlyService {
     }
     public getDataForCreate() {
         return {
-            parentDefaultServiceId: this.id,
+            parentDefaultServiceId: this.parentDefaultServiceId ? this.parentDefaultServiceId : this.id,
             basedOnDefault: this.basedOnDefault,
             billable: this.billable,
             commissionRate: this.commissionRate,

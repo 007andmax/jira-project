@@ -96,6 +96,7 @@ export class ContractsUserDevice {
         return sum;
     }
     public addDefaultService(item) {
+        console.log("item", item);
         this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id), item.parentDefaultServiceId, false, item.discountAmount, item.discountType))
     }
     public setTaxIds(data) {
