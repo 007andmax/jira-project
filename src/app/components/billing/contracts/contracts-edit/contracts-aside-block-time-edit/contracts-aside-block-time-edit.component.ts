@@ -101,11 +101,17 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
           let names = Object.keys(data);
           this.contractsBlockTime.blockTimeServices.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
           this.contractsBlockTime.services.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
         }
       }, err => {
@@ -154,7 +160,10 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
           let names = Object.keys(data);
           this.contractsBlockTime.blockTimeServices.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
         }
       }, err => {

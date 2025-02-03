@@ -30,6 +30,7 @@ export class NonContractServices implements Service {
     parentDefaultServiceId: string;
     discountType: string;
     discountAmount: string;
+    descriptionValidate: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

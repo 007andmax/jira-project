@@ -128,15 +128,24 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
           let names = Object.keys(data);
           this.contractsUserDevice.blockTimeServices.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
           this.contractsUserDevice.services.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
           this.contractsUserDevice.serviceContractServices.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
         }
       }, err => {
@@ -169,7 +178,10 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
           let names = Object.keys(data);
           this.contractsUserDevice.blockTimeServices.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
         }
       }, err => {
@@ -184,7 +196,10 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
           let names = Object.keys(data);
           this.contractsUserDevice.serviceContractServices.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
         }
       }, err => {

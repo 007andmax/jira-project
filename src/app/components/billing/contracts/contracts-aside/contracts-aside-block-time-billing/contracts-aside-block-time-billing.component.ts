@@ -166,11 +166,17 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
           let names = Object.keys(data);
           this.contractsBlockTime.blockTimeServices.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = names[item.name];
+            }
           })
           this.contractsBlockTime.services.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = names[item.name];
+            }
           })
         }
       }, err => {
@@ -189,7 +195,10 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
           let names = Object.keys(data);
           this.contractsBlockTime.blockTimeServices.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = names[item.name];
+            }
           })
         }
       }, err => {

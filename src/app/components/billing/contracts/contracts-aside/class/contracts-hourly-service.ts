@@ -10,6 +10,7 @@ export class ContractsHourlyService {
     rate_str: string;
     isAdded: boolean = false;
     parentDefaultServiceId: string;
+    descriptionValidate: string;
     "discountAmount": string;
     "discountType": string = "PERCENT";
     constructor(basedOnDefault, billable, commissionRate, id, name, rate, taxIds, parentDefaultServiceId, isAdded = false, discountAmount, discountType) {

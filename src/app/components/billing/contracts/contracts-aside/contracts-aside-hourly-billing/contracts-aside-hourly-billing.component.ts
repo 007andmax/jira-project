@@ -115,7 +115,10 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
           let names = Object.keys(data);
           this.defaultServices.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
         }
       }, err => {

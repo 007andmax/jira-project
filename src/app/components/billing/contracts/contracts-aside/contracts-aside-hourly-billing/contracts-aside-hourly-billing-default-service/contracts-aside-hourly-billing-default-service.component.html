@@ -13,13 +13,14 @@
         <input
             class="qt-input-in-table"
             type="text"
-            [(ngModel)]="defaultService.name"
+            [value]="defaultService.name"
+            readonly
         >
         <app-mat-error
             class="qt-tooltip-error qt-w-auto-important"
             *ngIf="!defaultService.validate"
         >
-            An agreement with current service name already using for current company
+            A contract with the current service exists for the current company. The contract description - "{{defaultService.descriptionValidate}}"
         </app-mat-error>
     </td>
     <td class="service-table__billable">

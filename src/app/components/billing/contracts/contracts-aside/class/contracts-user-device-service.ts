@@ -10,6 +10,7 @@ export class ContractsUserDeviceService {
     "discountAmount": string;
     "discountType": string = "PERCENT";
     discountSum: number = 0;
+    descriptionValidate: string;
     constructor(count, name, rate, taxIds, serviceId, discountAmount = null, discountType = null, discountSum = null) {
         this.count = count;
         this.name = name;
