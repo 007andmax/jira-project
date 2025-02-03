@@ -13,7 +13,8 @@
         <input
             class="qt-input-in-table"
             type="text"
-            [(ngModel)]="service.name"
+            [value]="service.name"
+            readonly
         >
     </td>
     <td class="service-table__billable">
