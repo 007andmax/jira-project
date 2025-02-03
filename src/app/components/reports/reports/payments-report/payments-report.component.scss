@@ -2,7 +2,8 @@
 @import "./src/assets/styles/fonts";
 
 .payments-total-container,.table-name {
-    width: 1384px;
+    min-width: 1384px;
+    max-width: 90%;
     margin: 0 auto;
     background-color: $white;
     padding: 0 24px;
@@ -23,6 +24,12 @@
 }
 .qt-report__body-table-body {
     margin: 0 auto 20px auto;
+    width: 100%;
+}
+.qt-report__body-table-body-container {
+    min-width: 1384px;
+    max-width: 90%;
+    margin: 0px auto;
 }
 .line {
     display: block;
