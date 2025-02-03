@@ -41,5 +41,6 @@ export class DefaultServicesHourlyContract extends NonContractServices {
         });
         this.discountAmount = data.discountAmount ? data.discountAmount : undefined;
         this.discountType = data.discountAmount ? data.discountType : undefined;
+        this.parentDefaultServiceId = data.parentDefaultServiceId;
     }
 }
