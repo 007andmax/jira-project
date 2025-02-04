@@ -100,6 +100,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
 
         this.validate.setDate(false);
       }
+      console.log("this.validate", this.validate);
     })
   }
   public searchDuplicatedServiceNames() {
@@ -149,7 +150,10 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
   }
   onSelectCompany(data) {
     this.contractsHourly.setCompanyId((data) ? data.id : null);
-    if (data) this.validate.resetCompany();
+    if (data) {
+      this.validate.resetCompany();
+      this.validate.resetDate();
+    }
   }
   onChangeStartDate(data) {
     this.contractsHourly.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

@@ -4,8 +4,8 @@
             #companiesDP
             [title]="'Company Name'"
             [placeholder]="'Select Company'"
-            [validate]="validateCompany"
-            [errorMessage]="'Company is required'"
+            [validate]="validateCompany && validateServicesDate"
+            [errorMessage]="!validateCompany ? 'Company is required' : 'There is already an existing hourly contract for the current company.'"
             [clientType]="'CLIENT'"
             [field]="'name'"
             [search]="true"

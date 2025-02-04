@@ -17,6 +17,7 @@ export class ContractsAsideTopComponent implements OnInit, OnDestroy {
   new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER')];
   @Input() selectedType = new ContractsFilterType('Hourly', 'HOURLY', null);
   @Input() validateCompany: boolean = true;
+  @Input() validateServicesDate: boolean = true;
   @Output() onSelectCompany = new EventEmitter<any>();
   @ViewChild('companiesDP', { static: true }) companiesDP: CompanyDropDownComponent;
   sub: Subscription = new Subscription();
