@@ -168,14 +168,14 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
             let find = names.find(name => name === item.name);
             if (find) {
               item.validate = false;
-              item.descriptionValidate = names[item.name];
+              item.descriptionValidate = data[item.name];
             }
           })
           this.contractsBlockTime.services.forEach(item => {
             let find = names.find(name => name === item.name);
             if (find) {
               item.validate = false;
-              item.descriptionValidate = names[item.name];
+              item.descriptionValidate = data[item.name];
             }
           })
         }
@@ -197,7 +197,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
             let find = names.find(name => name === item.name);
             if (find) {
               item.validate = false;
-              item.descriptionValidate = names[item.name];
+              item.descriptionValidate = data[item.name];
             }
           })
         }
