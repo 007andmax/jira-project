@@ -153,7 +153,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       let isChangeUser = data.createdUser && data.createdUser.id != this.ticketProfile.createdUser.id;
       if (this.ticketProfile.id === ticket.id) {
         this.ticketProfile.update(data);
-        console.log("this.ticketProfile", this.ticketProfile);
         this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
         this.updateListAssignedUser();
         this.updateLisUpdateUser();
