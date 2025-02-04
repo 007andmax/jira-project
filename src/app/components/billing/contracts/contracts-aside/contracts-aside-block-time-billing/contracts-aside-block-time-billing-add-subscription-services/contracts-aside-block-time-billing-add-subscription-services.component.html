@@ -32,7 +32,6 @@
                 ngbDropdownItem
                 [textContent]="item.name"
                 (click)="select(item)"
-                [ngClass]="{'--selected':isSelected(item.id)}"
             ></li>
         </ng-template>
     </ul>
