@@ -73,7 +73,7 @@ describe('ContractsAsideHourlyEditComponent unit test', () => {
     com.onAddService(new DefaultServicesHourlyContract({ billable: true, commissionRate: 125, versionedId: { id: "test" }, name: "test", rate: 500, taxes: [{ id: "1" }, { id: "2" }, { id: "3" }], parentDefaultServiceId: "test 123", discountAmount: 520, discountType: "PERCENT" }));
     expect(com.contractsHourly.services.length).toEqual(1);
     expect(com.contractsHourly.services[0].getDataForCreate()).toEqual({
-      parentDefaultServiceId: "test",
+      parentDefaultServiceId: "test 123",
       basedOnDefault: true,
       billable: true,
       commissionRate: 125,

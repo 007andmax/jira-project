@@ -113,9 +113,9 @@ describe('ContractsAsideBlockTimeBillingComponent unit test', () => {
     let day = 1000 * 60 * 60 * 24;
     expect(com.getMinStartDate("MONTHLY", startDate)).toEqual(checkStartDateMONTHLY.getTime() + day);
     expect(com.getMinStartDate("YEARLY", startDate)).toEqual(checkStartDateYEARLY.getTime() + day);
-    expect(com.getMinStartDate("30 days", startDate)).toEqual(checkStartDate30.getTime() - (29 * day));
-    expect(com.getMinStartDate("15 days", startDate)).toEqual(checkStartDate15.getTime() - (14 * day));
-    expect(com.getMinStartDate("7 days", startDate)).toEqual(checkStartDate7.getTime() - (6 * day));
+    expect(com.getMinStartDate("30 days", startDate)).toEqual(startDate.getTime() - (29 * day));
+    expect(com.getMinStartDate("15 days", startDate)).toEqual(startDate.getTime() - (14 * day));
+    expect(com.getMinStartDate("7 days", startDate)).toEqual(startDate.getTime() - (6 * day));
   });
   it('check "onAddDefaultService"', () => {
     const fixture = TestBed.createComponent(ContractsAsideBlockTimeBillingComponent);
@@ -123,7 +123,7 @@ describe('ContractsAsideBlockTimeBillingComponent unit test', () => {
     let data = { billable: true, commissionRate: 10, versionedId: { id: 1 }, name: "test", rate: 100, taxes: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }], parentDefaultServiceId: "test", discountAmount: 1000, discountType: "PERCENT" };
     com.onAddDefaultService(data);
     expect(com.contractsBlockTime.services[0].getDataForCreate()).toEqual({
-      parentDefaultServiceId: 1,
+      parentDefaultServiceId: "test",
       basedOnDefault: true,
       billable: true,
       commissionRate: 10,

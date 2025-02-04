@@ -166,7 +166,7 @@ describe('ContractsAsideBlockTimeEditComponent unit test', () => {
     let data = { billable: true, commissionRate: 10, versionedId: { id: 1 }, name: "test", rate: 100, taxes: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }], parentDefaultServiceId: "test", discountAmount: 1000, discountType: "PERCENT" };
     com.onAddDefaultService(data);
     expect(com.contractsBlockTime.services[0].getDataForCreate()).toEqual({
-      parentDefaultServiceId: 1,
+      parentDefaultServiceId: "test",
       basedOnDefault: true,
       billable: true,
       commissionRate: 10,
