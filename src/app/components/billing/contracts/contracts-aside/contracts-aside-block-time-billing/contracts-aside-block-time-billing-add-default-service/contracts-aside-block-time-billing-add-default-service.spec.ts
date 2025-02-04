@@ -26,6 +26,6 @@ describe('ContractsAsideBlockTimeBillingAddDefaultServiceComponent unit test', (
     const fixture = TestBed.createComponent(ContractsAsideBlockTimeBillingAddDefaultServiceComponent);
     const com = fixture.debugElement.componentInstance;
     com.select(new DefaultServicesHourlyContract({ versionedId: { id: "test" }, rate: 100 }));
-    expect(com.isSelected("test")).toEqual(true);
+    expect(com.isSelected("test 2")).toEqual(true);
   });
 });
