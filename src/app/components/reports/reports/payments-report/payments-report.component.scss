@@ -2,7 +2,8 @@
 @import "./src/assets/styles/fonts";
 
 .payments-total-container,.table-name {
-    width: 1384px;
+    min-width: 1384px;
+    max-width: 90%;
     margin: 0 auto;
     background-color: $white;
     padding: 0 24px;
@@ -23,6 +24,12 @@
 }
 .qt-report__body-table-body {
     margin: 0 auto 20px auto;
+    width: 100%;
+}
+.qt-report__body-table-body-container {
+    min-width: 1384px;
+    max-width: 90%;
+    margin: 0px auto;
 }
 .line {
     display: block;
@@ -45,5 +52,10 @@
 .payments-report__col-invoice {
     min-width: 150px;
     max-width: 250px;
+    white-space: break-spaces !important;
+}
+.payments-report__col-company-name {
+    min-width: 150px;
+    max-width: 550px;
     white-space: break-spaces !important;
 }
