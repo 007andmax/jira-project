@@ -8,14 +8,14 @@ export class EditPayment {
     date: string;
     reference: string;
     paymentMethod: string;
-    constructor(data:Payment) {
+    constructor(data: Payment) {
         this.note = data.note;
         this.paymentData = data.paymentData;
-        this.paymentId= data.id;
+        this.paymentId = data.id;
         this.reference = data.reference;
         this.paymentMethod = data.paymentMethod;
     }
-    public getDataForRequest(data:Payment) {
+    public getDataForRequest(data: Payment) {
         return {
             note: (this.note != data.note) ? this.note : null,
             paymentData: this.paymentData,
@@ -25,20 +25,19 @@ export class EditPayment {
             paymentMethod: (this.paymentMethod != data.paymentMethod) ? this.paymentMethod : null
         }
     }
-    public setPaymentMethod (data) {
+    public setPaymentMethod(data) {
         this.paymentMethod = data;
     }
     public setDate(day, month, year, timeOffset) {
         let current = new Date();
-
         if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
-            this.date = moment(finalDate.getTime()).format('YYYY-MM-DD');
+            this.date = moment(finalDate.getTime()).format("YYYY-MM-DD");
         } else {
             let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
             let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
-            this.date = moment(finalDate.getTime()).format('YYYY-MM-DD');
+            this.date = moment(finalDate.getTime()).format("YYYY-MM-DD");
         }
     }
 }
