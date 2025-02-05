@@ -112,7 +112,10 @@
             </div>
         </div>
     </div>
-    <div class="light-dropdown new-product-gl-select qt-select-input-40 qt-dropdown-input">
+    <div
+        class="light-dropdown new-product-gl-select qt-select-input-40 qt-dropdown-input"
+        [ngClass]="{'--disabled':isDisabled}"
+    >
         <i
             class="icn-sm qt-icon icon__arrow-down report-caret-icon"
             ngbDropdownToggle

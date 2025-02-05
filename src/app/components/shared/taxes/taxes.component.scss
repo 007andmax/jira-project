@@ -116,3 +116,8 @@
   background-color: $background !important;
   color: $gray-600 !important;
 }
+.--disabled {
+  input {
+      cursor: default !important;
+  }
+}

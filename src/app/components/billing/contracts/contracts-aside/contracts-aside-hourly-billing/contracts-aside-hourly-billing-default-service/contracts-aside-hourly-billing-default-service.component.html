@@ -24,11 +24,15 @@
         </app-mat-error>
     </td>
     <td class="service-table__billable">
-        <label class="qt-checkbox">
+        <label
+            class="qt-checkbox"
+            [ngClass]="{'--disabled':!defaultService.selected}"
+        >
             <input
                 type="checkbox"
                 [(ngModel)]="defaultService.billable"
                 (change)="onChangeBillable($event)"
+                [disabled]="!defaultService.selected"
             >
             <span></span>
         </label>
@@ -43,6 +47,7 @@
                 [defaultValue]="''"
                 [value]="defaultService.discountAmount ? defaultService.discountAmount : ''"
                 (onChange)="onChangeDiscountAmount($event)"
+                [disabled]="!defaultService.selected"
             >
             <input
                 type="text"
@@ -52,6 +57,7 @@
                 placeholder="Discount"
                 id="dropdownTypeTaxes"
                 class="qt-input-block__input"
+                [disabled]="!defaultService.selected"
             >
         </div>
     </td>
@@ -62,6 +68,7 @@
             [isLabel]="false"
             [isAdd]="false"
             (taxesChange)="onTaxesChange($event)"
+            [isDisabled]="!defaultService.selected"
         ></app-taxes>
     </td>
     <td class="service-table__rate">
@@ -73,6 +80,7 @@
             (ngModelChange)="onChangeRate($event)"
             (blur)="onCeckRate()"
             appToFixed
+            [disabled]="!defaultService.selected"
         >
         <app-mat-error
             class="qt-tooltip-error qt-w-auto-important"
