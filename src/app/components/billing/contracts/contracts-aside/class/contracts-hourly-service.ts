@@ -9,6 +9,7 @@ export class ContractsHourlyService {
     taxIds: Array<String> = [];
     rate_str: string;
     isAdded: boolean = false;
+    validateRate: boolean = true;
     parentDefaultServiceId: string;
     descriptionValidate: string;
     "discountAmount": string;

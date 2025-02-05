@@ -133,6 +133,7 @@
                 [ngForTrackBy]="trackById"
             >
                 <app-contracts-aside-hourly-billing-default-service
+                    #serviceItem
                     (onSelectService)="onSelectService()"
                     [defaultService]="item"
                 ></app-contracts-aside-hourly-billing-default-service>

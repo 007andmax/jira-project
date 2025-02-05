@@ -1,6 +1,31 @@
 .qt-tooltip-error {
     left: 0px;
 }
-.service-table__name {
+.service-table__name,.service-table__rate {
     position: relative;
+}
+.service-disabled {
+    td {
+        background-color: #F9FAFB;
+        input {
+            background-color: #F9FAFB;
+        }
+        ::ng-deep app-taxes {
+            input {
+                background-color: #F9FAFB !important;
+            }
+        }
+    }
+}
+.service-table__rate {
+    .qt-tooltip-error {
+        left: unset;
+        right: 0px;
+        width: 290px !important;
+        max-width: 290px !important;
+        &::before {
+            right: 12px;
+            left: unset;
+        }
+    }
 }

@@ -11,7 +11,7 @@ export class ContractsAsideHourlyBillingDefaultServiceComponent implements OnIni
   @Input() defaultService: DefaultServicesHourlyContract;
   @ViewChild('taxes', { static: true }) taxesDropDown: TaxesComponent;
   @Output() onSelectService = new EventEmitter<any>();
-  constructor() { }
+  constructor(private elRef: ElementRef) { }
 
   ngOnInit() {
     this.taxesDropDown.setEditItems(this.defaultService.taxes);
@@ -19,8 +19,23 @@ export class ContractsAsideHourlyBillingDefaultServiceComponent implements OnIni
   onTaxesChange(data) {
     this.defaultService.taxes = data;
   }
-  toggleService() {
+  toggleService(event) {
+    if (!event.target.checked) {
+      this.defaultService.billable = false;
+      this.resetRate();
+    }
     this.onSelectService.emit(null);
+  }
+  onChangeBillable(event) {
+    if (!event.target.checked) {
+      this.resetRate();
+      console.log("this.defaultService", this.defaultService);
+    }
+  }
+  resetRate() {
+    this.defaultService.rate = 0;
+    this.defaultService.rate_str = "0.00";
+    this.elRef.nativeElement.querySelector(".payment-input").value = "0.00";
   }
   onChangeDiscountAmount(event) {
     this.defaultService.discountAmount = event;
@@ -28,6 +43,10 @@ export class ContractsAsideHourlyBillingDefaultServiceComponent implements OnIni
   public onChangeRate(val) {
     let value = Number(val);
     this.defaultService.rate = value;
+    this.defaultService.validateRate = true;
+  }
+  onCeckRate() {
+    if (this.defaultService.rate == 0) this.defaultService.billable = false;
   }
   public trackById(index, item) {
     return item.id;

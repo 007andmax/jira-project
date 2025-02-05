@@ -1,10 +1,10 @@
-<tr>
+<tr [ngClass]="{'service-disabled':!defaultService.selected}">
     <td class="service-table__check">
         <label class="qt-checkbox">
             <input
                 type="checkbox"
                 [(ngModel)]="defaultService.selected"
-                (change)="toggleService()"
+                (change)="toggleService($event)"
             >
             <span></span>
         </label>
@@ -28,6 +28,7 @@
             <input
                 type="checkbox"
                 [(ngModel)]="defaultService.billable"
+                (change)="onChangeBillable($event)"
             >
             <span></span>
         </label>
@@ -70,7 +71,14 @@
             [money]="true"
             [ngModel]="defaultService.rate_str"
             (ngModelChange)="onChangeRate($event)"
+            (blur)="onCeckRate()"
             appToFixed
         >
+        <app-mat-error
+            class="qt-tooltip-error qt-w-auto-important"
+            *ngIf="!defaultService.validateRate"
+        >
+            The price cannot $0.00 if the service is billable
+        </app-mat-error>
     </td>
 </tr>

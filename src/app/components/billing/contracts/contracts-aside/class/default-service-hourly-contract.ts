@@ -8,6 +8,7 @@ export class DefaultServicesHourlyContract extends NonContractServices {
     isCopy: boolean = false;
     rate_str: string;
     validate: boolean = true;
+    validateRate: boolean = true;
     "discountAmount": string;
     "discountType": string = "PERCENT";
     constructor(data = null) {

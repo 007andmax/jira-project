@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter, OnDestroy, ElementRef } from '@angular/core';
 import { ContractsHourlyService } from '../../../contracts-aside/class/contracts-hourly-service';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/class/taxes/tax';
@@ -16,7 +16,9 @@ export class ContractsAsideHourlyBillingEditDefaultServiceComponent implements O
   @Input() service: ContractsHourlyService;
   @ViewChild('taxes', { static: true }) taxesDropDown: TaxesComponent;
   @Output() onSelectService = new EventEmitter<any>();
-  constructor(private taxesStateService: TaxesStateService,) { }
+  constructor(private taxesStateService: TaxesStateService,
+    private elRef: ElementRef
+  ) { }
 
   ngOnInit() {
     if (this.taxesStateService.getTaxes().length > 0) this.getTaxes(this.taxesStateService.getTaxes());
@@ -43,12 +45,31 @@ export class ContractsAsideHourlyBillingEditDefaultServiceComponent implements O
       return item.id;
     });
   }
-  toggleService() {
+  toggleService(event) {
+    if (!event.target.checked) {
+      this.service.billable = false;
+      this.resetRate();
+    }
     this.onSelectService.emit(null);
+  }
+  onChangeBillable(event) {
+    if (!event.target.checked) {
+      this.resetRate();
+      console.log("this.service", this.service);
+    }
+  }
+  resetRate() {
+    this.service.rate = 0;
+    this.service.rate_str = "0.00";
+    this.elRef.nativeElement.querySelector(".payment-input").value = "0.00";
   }
   public onChangeRate(val) {
     let value = Number(val);
     this.service.rate = value;
+    this.service.validateRate = true;
+  }
+  onCeckRate() {
+    if (this.service.rate == 0) this.service.billable = false;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
