@@ -28,7 +28,7 @@ export class UserAdd {
       this.phoneNumbers = data.phoneNumbers;
     }
     this.customSubscriptionIds = data.customSubscriptions.map(item => item.id);
-    this.welcomeEmail = data.welcomeEmail;
+    this.welcomeEmail = data.sendPortalInvitation;
     this.avatar = data.avatar;
     this.firstName = data.firstName;
     this.lastName = data.lastName;

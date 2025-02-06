@@ -112,6 +112,7 @@ export class UsersComponent implements OnInit, OnDestroy {
       if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH") {
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
         if (userIndex > -1) this.users[userIndex].onUpdate(data.data);
+        if (userIndex === -1) this.users.unshift(new User(data.data));
         if (!this.filter.isArchive && data.action === 'USER_ARCHIVED') {
           if (userIndex > -1) this.users.splice(userIndex, 1);
         }
