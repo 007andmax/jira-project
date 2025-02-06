@@ -19,6 +19,7 @@
             <input
                 type="checkbox"
                 [(ngModel)]="service.billable"
+                (change)="onChangeBillable($event)"
             >
             <span></span>
         </label>
@@ -33,6 +34,7 @@
                 [defaultValue]="''"
                 [value]="service.discountAmount ? service.discountAmount : ''"
                 (onChange)="onChangeDiscountAmount($event)"
+                [disabled]="!service.billable"
             >
             <input
                 type="text"
@@ -42,6 +44,7 @@
                 placeholder="Discount"
                 id="dropdownTypeTaxes"
                 class="qt-input-block__input"
+                [disabled]="!service.billable"
             >
         </div>
     </td>

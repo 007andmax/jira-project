@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ContractsBlockTimeDefaultService } from '../../class/contracts-block-time-default-service';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
@@ -14,7 +14,9 @@ export class ContractsAsideBlockTimeBillingDefaultServiceComponent implements On
   @Output() onRemove = new EventEmitter<any>();
   @ViewChild('taxesDropDown', { static: true }) taxesDropDown: TaxesComponent;
   sub: Subscription = new Subscription();
-  constructor(private taxesStateService: TaxesStateService,) { }
+  constructor(private taxesStateService: TaxesStateService,
+    public cd: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
     if (this.taxesStateService.getTaxes().length > 0) this.getTaxes(this.taxesStateService.getTaxes());
@@ -38,6 +40,9 @@ export class ContractsAsideBlockTimeBillingDefaultServiceComponent implements On
 
     });
     this.taxesDropDown.setEditItems(listTaxes);
+  }
+  onChangeBillable(event) {
+    this.cd.detectChanges();
   }
   remove() {
     this.onRemove.emit(null);
