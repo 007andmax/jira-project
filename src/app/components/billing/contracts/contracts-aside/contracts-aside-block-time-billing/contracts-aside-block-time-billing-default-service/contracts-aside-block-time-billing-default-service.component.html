@@ -50,23 +50,23 @@
     </td>
     <td class="track-and-bill-table__tax --editable">
         <app-taxes
-            [hidden]="!service.billable"
             class="qt-taxes-multiselect"
             #taxesDropDown
             [isLabel]="false"
             [isAdd]="false"
+            [isDisabled]="!service.billable"
             (taxesChange)="onTaxesChange($event)"
         ></app-taxes>
     </td>
     <td class="track-and-bill-table__hourly-rate --editable">
         <input
-            *ngIf="service.billable"
             class="payment-input qt-input-in-table"
             number
             [money]="true"
             [ngModel]="service.rate_str"
             (ngModelChange)="onChangeRate($event)"
             appToFixed
+            [disabled]="!service.billable"
         >
     </td>
     <td>
