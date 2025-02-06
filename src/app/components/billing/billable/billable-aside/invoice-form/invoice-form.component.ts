@@ -132,7 +132,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   }
 
   onCheckUpdateGlobalNote() {
-    if (this.globalNote) this.changeGlobalNote = true;
+    if (this.invoice.invoiceDataDto.termsAndConditions) this.changeGlobalNote = true;
   }
 
   onUpdateGlobalNote() {
