@@ -55,6 +55,7 @@ export class EditPaymentComponent implements OnInit, OnDestroy {
   }
   onChangeDate(data) {
     this.editPayment.setDate(data.day, data.month, data.year, this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    console.log("this.editPayment", this.editPayment);
   }
   onChangeAmountReceived(event) {
     this.amountReceived = Number(event.target.value);
