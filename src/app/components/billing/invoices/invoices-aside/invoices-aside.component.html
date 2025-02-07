@@ -37,8 +37,8 @@
                     [editMode]="true"
                     [editDate]="today"
                     [useMinDate]="false"
-                    New
-                    Quote
+                    [container]="'body'"
+                    [dropdownClass]="['date-picker']"
                     [useMaxDate]="true"
                     (onChange)="onChangeDate($event)"
                 ></app-date-picker>
