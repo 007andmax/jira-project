@@ -329,7 +329,7 @@ export class ServiceAgreement {
         this.serviceContractServices.forEach(item => {
             sum += (item.count * item.rate);
         })
-        return sum + this.taxSum;
+        return sum;
     };
     public calculateTotalAmount() {
         let sum = 0;
@@ -338,7 +338,7 @@ export class ServiceAgreement {
         } else {
             sum = 0;
         }
-        return sum + this.taxSum;
+        return sum;
     };
     public calculateServiceDiscount() {
         let sum = 0;

@@ -41,6 +41,7 @@ export class ContractsComponent implements OnInit, OnDestroy {
     this.sub.add(getOnToggleCreate);
     let getOnPreview = this.contractsStateService.getOnPreview().subscribe(data => {
       this.serviceAgreement = data;
+      console.log("this.serviceAgreement", this.serviceAgreement);
       this.showPreview = true;
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
