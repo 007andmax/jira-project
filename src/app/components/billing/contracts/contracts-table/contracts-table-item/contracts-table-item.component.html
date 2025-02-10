@@ -68,7 +68,7 @@
     ></div>
     <div
         class="contracts-table__amount"
-        [textContent]="contract.amount | currency"
+        [textContent]="(contract.amount + contract.taxSum) | currency"
         (click)="preview()"
     ></div>
     <div

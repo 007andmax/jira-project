@@ -247,12 +247,16 @@
                     <div>Review Date</div>
                     <div [textContent]="parsedateForTotal(contractsOther.reviewDate)"></div>
                 </div>
+                <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
+                    <div>Tax</div>
+                    <div [textContent]="contractsOther.taxSum | currency"></div>
+                </div>
                 <div class="contract-total__divider qt-mt-15 qt-mb-15"></div>
                 <div class="qt-df qt-jc-sb invoice-total__total-line">
                     <div class="qt-fs-13 qt-fw-b">Total</div>
                     <div
                         class="qt-fs-16 qt-fw-b"
-                        [textContent]="contractsOther.amount | currency"
+                        [textContent]="(contractsOther.amount + contractsOther.taxSum) | currency"
                     ></div>
                 </div>
             </div>

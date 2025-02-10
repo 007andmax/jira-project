@@ -39,6 +39,7 @@ export class ServiceAgreement {
     enableInvoiceAutoCreate: boolean;
     blockRate_str: string;
     rateExceeding_str: string;
+    taxSum: number;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -328,7 +329,7 @@ export class ServiceAgreement {
         this.serviceContractServices.forEach(item => {
             sum += (item.count * item.rate);
         })
-        return sum;
+        return sum + this.taxSum;
     };
     public calculateTotalAmount() {
         let sum = 0;
@@ -337,7 +338,7 @@ export class ServiceAgreement {
         } else {
             sum = 0;
         }
-        return sum;
+        return sum + this.taxSum;
     };
     public calculateServiceDiscount() {
         let sum = 0;
