@@ -14,6 +14,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { By } from '@angular/platform-browser';
 import { DecimalNumberDirective } from 'src/app/directives/decimal-number/decimal-number.directive';
 import { numberDirective } from 'src/app/directives/number/number.directive';
+import { CommonService } from 'src/app/services/common/common.service';
 
 
 
@@ -37,6 +38,7 @@ describe('ContractsAsideBlockTimeBillingDefaultServiceComponent unit test', () =
           timeOut: 5000,
           onActivateTick: true
         })],
+
       declarations: [ContractsAsideBlockTimeBillingDefaultServiceComponent
       ]
     }).compileComponents();
@@ -59,47 +61,40 @@ describe('ContractsAsideBlockTimeBillingDefaultServiceComponent unit test', () =
   });
 });
 
-/*describe('ContractsAsideBlockTimeBillingDefaultServiceComponent integration test', () => {
- let component: ContractsAsideBlockTimeBillingDefaultServiceComponent;
- let fixture: ComponentFixture<ContractsAsideBlockTimeBillingDefaultServiceComponent>;
- beforeEach(() => {
-   TestBed.configureTestingModule({
-     imports: [CommonModule,
-       FormsModule,
-       NgbModule,
-       TaxesModule,
-       NumberModule,
-       MatErrorModule,
-       DecimalNumberModule,
-       ContractsAsideDiscountModule,
-       HttpClientModule,
-       ToastrModule.forRoot({
-         closeButton: true,
-         timeOut: 5000,
-         onActivateTick: true
-       })],
-     declarations: [ContractsAsideBlockTimeBillingDefaultServiceComponent
-     ],
-   })
-   fixture = TestBed.createComponent(ContractsAsideBlockTimeBillingDefaultServiceComponent);
-   component = fixture.componentInstance;
- });
- it('change discount input', async () => {
-    //const com = fixture.debugElement.componentInstance;
-    component.service = new ContractsBlockTimeDefaultService(true, true, 0, "test", "test name", 0, [], "123", false, "100", "PERCENT");
-    // get the name's input and display elements from the DOM
-    const hostElement: HTMLElement = fixture.nativeElement!;
-    const discountInput: HTMLInputElement = hostElement.querySelector('.track-and-bill-table__discount input');
- 
-    // simulate user entering a new name into the input box
-    discountInput.value = "500";
-    // Dispatch a DOM event so that Angular learns of input value change.
-    //discountInput.dispatchEvent(new Event('input'));
-    discountInput.blur();
-    fixture.detectChanges();
-    // Wait for Angular to update the display binding through the title pipe
-    await fixture.whenStable();
-    expect(component.service.discountAmount).toBe('500.00');
+describe('ContractsAsideBlockTimeBillingDefaultServiceComponent integration test', () => {
+  let component: ContractsAsideBlockTimeBillingDefaultServiceComponent;
+  let fixture: ComponentFixture<ContractsAsideBlockTimeBillingDefaultServiceComponent>;
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [CommonModule,
+        FormsModule,
+        NgbModule,
+        TaxesModule,
+        NumberModule,
+        MatErrorModule,
+        DecimalNumberModule,
+        ContractsAsideDiscountModule,
+        HttpClientModule,
+        ToastrModule.forRoot({
+          closeButton: true,
+          timeOut: 5000,
+          onActivateTick: true
+        })],
+      providers: [{ provide: CommonService }],
+      declarations: [ContractsAsideBlockTimeBillingDefaultServiceComponent
+      ],
+    })
+    fixture = TestBed.createComponent(ContractsAsideBlockTimeBillingDefaultServiceComponent);
+    component = fixture.componentInstance;
   });
-
-});*/
+  it('should only allow numeric input', async () => {
+    component.service = new ContractsBlockTimeDefaultService(true, true, 0, "test", "test name", 0, [], "123", false, "100", "PERCENT");
+    const discountInput: HTMLInputElement = fixture.debugElement.query(By.css('.track-and-bill-table__discount input')).nativeElement;
+    fixture.detectChanges();
+    discountInput.value = '123abc';
+    discountInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    await fixture.whenStable();
+    expect(component.service.discountAmount).toBe('123'); // "abc" should be removed
+  });
+}); 
