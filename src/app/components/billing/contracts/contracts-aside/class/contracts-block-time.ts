@@ -25,6 +25,7 @@ export class ContractsBlockTime {
     reviewDate: string;
     manualCreateBillableItem: boolean = false;
     enableInvoiceAutoCreate: boolean = false;
+    taxSum: number = 0;
     constructor() { }
     public setDataFromCopy(data: ServiceAgreement) {
         this.billType = data.billType;

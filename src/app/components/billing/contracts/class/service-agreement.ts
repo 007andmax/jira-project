@@ -348,6 +348,23 @@ export class ServiceAgreement {
         })
         return sum;
     }
+    public calculateServiceTaxes() {
+        let sum = 0;
+        this.serviceContractServices.forEach(item => {
+            sum += item.taxSum;
+        })
+        return sum;
+    }
+    public calculateServiceOthersTaxes() {
+        let sum = 0;
+        this.productExpenses.forEach(item => {
+            sum += item.taxSum;
+        })
+        this.serviceExpenses.forEach(item => {
+            sum += item.taxSum;
+        })
+        return sum;
+    }
     public calculateTotalDiscount() {
         let sum = 0;
         this.serviceContractServices.forEach(item => {

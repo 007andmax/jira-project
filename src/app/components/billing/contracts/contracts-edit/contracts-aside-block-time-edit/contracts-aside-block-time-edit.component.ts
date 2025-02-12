@@ -235,6 +235,8 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
   }
   onTaxesChange(data) {
     this.customerTooltip.open();
+    let rate = data.map(item => item.rate).reduce((a, b) => a + b, 0);
+    this.contractsBlockTime.taxSum = this.contractsBlockTime.calculateTotalAmount() * rate / 100;
     this.contractsBlockTime.setTaxIds(data.map(item => item.id));
   }
   onSelectInterval(data) {

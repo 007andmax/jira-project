@@ -45,17 +45,22 @@ export class ContractsAsideOtherServiceComponent implements OnInit, OnDestroy {
     let timeInMinutes = this.service.quantity * 60;
     let hours = Math.floor(timeInMinutes / 60);
     return Math.round(timeInMinutes - (hours * 60));
-
+  }
+  public onChangeTaxSum() {
+    let rate = this.service.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+    this.service.taxSum = this.service.rate * this.service.quantity * rate / 100;
   }
   public onChangeDescription() {
     this.service.resetValidateDescription();
   }
   public onChangeDurationService(data) {
     this.service.setQuantity(data);
+    this.onChangeTaxSum();
   }
   select(data: NonContractServices) {
     this.editItem = data;
     this.service.setData(data);
+    this.onChangeTaxSum();
   }
   onChangeDatePickerService(data) {
     this.service.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

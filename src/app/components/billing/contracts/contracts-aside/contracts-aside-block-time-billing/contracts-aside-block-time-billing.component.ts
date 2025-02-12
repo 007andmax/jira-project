@@ -184,6 +184,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       })
   }
   onAddDefaultService(data) {
+    console.log("data", data);
     this.contractsBlockTime.addDefaultService(data);
     this.onCheckDuplicatedService();
   }
@@ -269,6 +270,8 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.validate.resetCompany();
   }
   onTaxesChange(data) {
+    let rate = data.map(item => item.rate).reduce((a, b) => a + b, 0);
+    this.contractsBlockTime.taxSum = this.contractsBlockTime.calculateTotalAmount() * rate / 100;
     this.contractsBlockTime.setTaxIds(data.map(item => item.id));
   }
   onSelectInterval(data) {
