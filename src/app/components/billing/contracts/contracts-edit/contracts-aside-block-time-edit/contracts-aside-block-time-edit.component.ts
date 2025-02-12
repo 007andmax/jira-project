@@ -60,9 +60,9 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.contractsBlockTime.companyId);
-    if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
+    if (this.taxesStateService.getTaxes().length > 0) this.getTaxes(this.taxesStateService.getTaxes());
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
-      this.taxes = data;
+      this.getTaxes(data);
     })
     this.sub.add(getOnTaxess);
     console.log("this.contractsBlockTime", this.contractsBlockTime);
@@ -87,6 +87,15 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
       this.toggleNotifyAgentsUser = true;
     }
     this.minStartDate = this.getMinStartDate(this.contractsBlockTime.intervalstring, this.contractsBlockTime.startDate);
+  }
+  getTaxes(taxes) {
+    let listTaxes = [];
+    this.contractsBlockTime.taxIds.forEach(id => {
+      let find = taxes.find(tax => tax.id === id);
+      if (find) listTaxes.push(find);
+    });
+    this.contractsBlockTime.taxes = listTaxes;
+    this.taxes = taxes;
   }
   public onEdit() {
     if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices() && !this.contractsBlockTime.checkDuplicatedServices()) return;
@@ -233,11 +242,18 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
   onChangeRate(data) {
     this.contractsBlockTime.rateExceeding = data;
   }
-  onTaxesChange(data) {
-    this.customerTooltip.open();
-    let rate = data.map(item => item.rate).reduce((a, b) => a + b, 0);
+  public onChangeTaxSum() {
+    let rate = this.contractsBlockTime.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
     this.contractsBlockTime.taxSum = this.contractsBlockTime.calculateTotalAmount() * rate / 100;
+  }
+  onChangeBlockRate(data) {
+    this.contractsBlockTime.blockRate = data;
+    this.onChangeTaxSum();
+  }
+  onTaxesChange(data) {
+    this.contractsBlockTime.taxes = data;
     this.contractsBlockTime.setTaxIds(data.map(item => item.id));
+    this.onChangeTaxSum();
   }
   onSelectInterval(data) {
     this.selectedInterval = data;

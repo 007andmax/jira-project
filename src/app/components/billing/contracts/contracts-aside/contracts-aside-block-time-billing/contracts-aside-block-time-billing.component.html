@@ -80,7 +80,7 @@
                     placeholder="1"
                     (input)="validate.resetIncludedHours()"
                     [value]="contractsBlockTime.includedHours"
-                    (onChange)="contractsBlockTime.includedHours=$event"
+                    (onChange)="onChangeIncludedHours($event)"
                 >
                 <app-mat-error
                     class="invalid-feedback"
@@ -101,7 +101,7 @@
                         placeholder="0.00"
                         [value]="contractsBlockTime.blockRate"
                         (input)="validate.resetBlockRate()"
-                        (onChange)="contractsBlockTime.blockRate=$event"
+                        (onChange)="onChangeBlockRate($event)"
                     >
                     <app-mat-error
                         class="invalid-feedback"

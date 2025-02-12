@@ -94,6 +94,8 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     let taxes = lsitTaxes.filter(item => item.isDefault === true);
     this.taxesDP.setEditItems(taxes);
     this.contractsBlockTime.setTaxIds(taxes.map(item => item.id));
+    this.contractsBlockTime.taxes = taxes;
+    this.onChangeTaxSum();
   }
   public onInitCopy() {
     console.log("this.сontractsStateService.getContractForCopy()", this.сontractsStateService.getContractForCopy());
@@ -119,6 +121,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       })
       this.toggleNotifyAgentsUser = true;
     }
+    this.onChangeTaxSum();
   }
   selectAllUsers() {
     this.techState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
@@ -269,10 +272,22 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.contractsBlockTime.setCompanyId((data) ? data.id : null);
     this.validate.resetCompany();
   }
-  onTaxesChange(data) {
-    let rate = data.map(item => item.rate).reduce((a, b) => a + b, 0);
+  public onChangeTaxSum() {
+    let rate = this.contractsBlockTime.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
     this.contractsBlockTime.taxSum = this.contractsBlockTime.calculateTotalAmount() * rate / 100;
+  }
+  onChangeBlockRate(data) {
+    this.contractsBlockTime.blockRate = data;
+    this.onChangeTaxSum();
+  }
+  onChangeIncludedHours(data) {
+    this.contractsBlockTime.includedHours = data;
+    this.onChangeTaxSum();
+  }
+  onTaxesChange(data) {
+    this.contractsBlockTime.taxes = data;
     this.contractsBlockTime.setTaxIds(data.map(item => item.id));
+    this.onChangeTaxSum();
   }
   onSelectInterval(data) {
     this.selectedInterval = data;

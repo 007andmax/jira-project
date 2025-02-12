@@ -52,7 +52,7 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
   }
   onTaxesChange(data) {
     this.service.taxIds = data.map(item => item.id);
-    this.service.taxes = data.taxes;
+    this.service.taxes = data;
     this.onChangeTaxSum();
     this.onChangeDisplayBillableTooltip();
   }

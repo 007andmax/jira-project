@@ -126,7 +126,7 @@
                         placeholder="0.00"
                         [value]="contractsBlockTime.blockRate_str"
                         (input)="validate.resetBlockRate()"
-                        (onChange)="contractsBlockTime.blockRate=$event"
+                        (onChange)="onChangeBlockRate($event)"
                     >
                     <app-mat-error
                         class="invalid-feedback"

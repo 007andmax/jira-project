@@ -40,6 +40,7 @@ export class ServiceAgreement {
     blockRate_str: string;
     rateExceeding_str: string;
     taxSum: number;
+    taxes: Array<any> = [];
     constructor(data = null) {
         if (data) {
             for (const key in data) {
