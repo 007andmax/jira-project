@@ -13,7 +13,13 @@
         ></app-drop-down>
         <app-mat-error
             class="invalid-feedback"
-            *ngIf="!validate.getValidate() || !validate.getDuplicateName()"
+            *ngIf="!validate.getValidate()"
+        >
+            A contract with the current service exists for the current company. The contract description - "{{validate.descriptionValidate}}"
+        </app-mat-error>
+        <app-mat-error
+            class="invalid-feedback"
+            *ngIf="!validate.getDuplicateName()"
         >
             Duplicate Service
         </app-mat-error>

@@ -10,6 +10,7 @@ import { CommonService } from 'src/app/services/common/common.service';
 export class DecimalNumberDirective {
   @Output() onChange = new EventEmitter();
   @Input("useFixed") useFixed: boolean = false;
+  @Input("defaultValue") defaultValue: string = null;
   constructor(private element: ElementRef, private commonService: CommonService) { }
   ngOnInit() {
     this.element.nativeElement.addEventListener("input", (event) => {
@@ -22,7 +23,11 @@ export class DecimalNumberDirective {
           if (parseFloat(event.target.value) !== NaN) event.target.value = parseFloat(event.target.value).toFixed(2);
         }
       } else {
-        event.target.value = (this.useFixed) ? "0.00" : "0";
+        if (this.defaultValue != null) {
+          event.target.value = this.defaultValue;
+        } else {
+          event.target.value = (this.useFixed) ? "0.00" : "0";
+        }
       }
       this.onChange.emit(event.target.value);
     });

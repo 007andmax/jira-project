@@ -28,6 +28,7 @@ import { ContractsAsideEditHourlyAddDefaultServiceModule } from './contracts-asi
 import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
 import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
+import { ContractsAsideBlockTimeBillingAddSubscriptionServicesModule } from '../contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-subscription-services/contracts-aside-block-time-billing-add-subscription-services.module';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.mo
         ContractsAsideOtherProductModule,
         NumberModule,
         ContractsAsideEditHourlyAddDefaultServiceModule,
-        MatErrorModule
+        MatErrorModule,
+        ContractsAsideBlockTimeBillingAddSubscriptionServicesModule
     ],
     exports: [ContractsEditComponent,
     ]

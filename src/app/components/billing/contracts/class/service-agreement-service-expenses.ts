@@ -9,6 +9,8 @@ export class ServiceAgreementServiceExpenses {
     name: string;
     validate: boolean = true;
     validateDescription: boolean = true;
+    taxSum: number = 0;
+    taxes: Array<any> = [];
     constructor(data) {
         this.date = data.date;
         this.description = data.description;

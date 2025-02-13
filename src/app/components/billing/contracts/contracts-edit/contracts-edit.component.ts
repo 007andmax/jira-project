@@ -7,6 +7,7 @@ import { NonContractServicesService } from 'src/app/services/non-contract-servic
 import { ContractsAsideUserDeviceEditComponent } from './contracts-aside-user-device-edit/contracts-aside-user-device-edit.component';
 import { ContractsAsideProductServiceEditComponent } from './contracts-aside-product-service-edit/contracts-aside-product-service-edit.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { SubscriptionServicesService } from 'src/app/services/subscription-services/subscription-services.service';
 
 @Component({
   selector: 'app-contracts-edit',
@@ -22,11 +23,15 @@ export class ContractsEditComponent implements OnInit {
   @Input() serviceAgreement: ServiceAgreement;
   constructor(private contractsStateService: ContractsStateService,
     public cd: ChangeDetectorRef,
-    private nonContractServicesService: NonContractServicesService,) { }
+    private nonContractServicesService: NonContractServicesService,
+    private subscriptionServicesService: SubscriptionServicesService,) { }
 
   ngOnInit() {
     this.nonContractServicesService.getNonContractServices().subscribe(data => {
       this.contractsStateService.setDefaultService(data);
+    })
+    this.subscriptionServicesService.getServices().subscribe(data => {
+      this.contractsStateService.setSubscriptionServices(data);
     })
   }
   edit() {

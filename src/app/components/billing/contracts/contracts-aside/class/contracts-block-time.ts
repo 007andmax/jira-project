@@ -6,8 +6,7 @@ import { ServiceAgreement } from '../../class/service-agreement';
 export class ContractsBlockTime {
     billType: any;
     blockRate: string = "";
-    blockTimeServices: Array<ContractsBlockTimeService> = [new ContractsBlockTimeService("On site block time service", 5),
-    new ContractsBlockTimeService("Remote block time service", 5)];
+    blockTimeServices: Array<ContractsBlockTimeService> = [];
     companyId: string;
     customInterval: number;
     description: string = "";
@@ -26,11 +25,13 @@ export class ContractsBlockTime {
     reviewDate: string;
     manualCreateBillableItem: boolean = false;
     enableInvoiceAutoCreate: boolean = false;
+    taxSum: number = 0;
+    taxes: Array<any> = [];
     constructor() { }
     public setDataFromCopy(data: ServiceAgreement) {
         this.billType = data.billType;
         this.blockRate = Number(data.blockRate).toFixed(2);
-        this.blockTimeServices = data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate));
+        this.blockTimeServices = data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate, item.parentDefaultServiceId));
         this.companyId = data.companyId;
         this.customInterval = data.customInterval;
         this.description = data.description;
@@ -44,7 +45,7 @@ export class ContractsBlockTime {
             this.intervalstring = (data.customInterval === 30) ? '30 days' : (data.customInterval === 15) ? '15 days' : '7 days';
         }
         this.rateExceeding = Number(data.rateExceeding).toFixed(2);
-        this.services = data.services.map(item => new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, (item.commissionRate) ? item.commissionRate : 0, item.id, item.name, item.rate, item.taxIds));
+        this.services = data.services.map(item => new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, (item.commissionRate) ? item.commissionRate : 0, item.id, item.name, item.rate, item.taxIds, item.parentDefaultServiceId, false, item.discountAmount, item.discountType));
         this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));
         this.startDate = data.startDate;
         this.taxIds = data.taxIds;
@@ -65,7 +66,8 @@ export class ContractsBlockTime {
         this.shares = data;
     }
     public addDefaultService(item) {
-        this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id)))
+        console.log("item", item);
+        this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id), item.parentDefaultServiceId, false, item.discountAmount, item.discountType))
     }
     public setTaxIds(data) {
         this.taxIds = data;
@@ -132,6 +134,20 @@ export class ContractsBlockTime {
         })
         let validateDuplicated = (this.blockTimeServices.find(item => !item.validateDuplicated)) ? false : true;
         let validate = (this.blockTimeServices.find(item => !item.validate)) ? false : true;
+        return validateDuplicated && validate;
+    }
+    public checkDuplicatedBlockTimeAndTrackServices() {
+        this.blockTimeServices.forEach(item => {
+            item.validateDuplicated = true;
+        });
+        let list = [...this.blockTimeServices, ...this.services];
+        list.forEach((item1, i) => {
+            list.forEach((item2, u) => {
+                if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated) item2.validateDuplicated = false;
+            })
+        })
+        let validateDuplicated = (list.find(item => !item.validateDuplicated)) ? false : true;
+        let validate = (list.find(item => !item.validate)) ? false : true;
         return validateDuplicated && validate;
     }
     public checkDuplicatedServices() {

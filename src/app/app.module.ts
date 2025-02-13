@@ -151,6 +151,9 @@ import { MultiCompanyDropDownComponent } from './components/shared/multi-company
 import { UsersDetailsComponent } from './components/users-details/users-details.component';
 import { UsersDetailsHeaderComponent } from './components/users-details/users-details-header/users-details-header.component';
 import { UsersDetailsLeftPanelComponent } from './components/users-details/users-details-left-panel/users-details-left-panel.component';
+import { SubscriptionServicesComponent } from './components/billing/subscription-services/subscription-services.component';
+import { SubscriptionServicesCheckUseComponent } from './components/billing/subscription-services/subscription-services-check-use/subscription-services-check-use.component';
+import { SubscriptionServicesConfirmComponent } from './components/billing/subscription-services/subscription-services-confirm/subscription-services-confirm.component';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -181,6 +184,8 @@ declare var $: any;
     ManufacturesCheckUseComponent,
     UserDeArchiveNotificationComponent,
     PreviewFileComponent,
+    SubscriptionServicesCheckUseComponent,
+    SubscriptionServicesConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -253,7 +258,9 @@ declare var $: any;
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
     UsersCheckUseComponent,
-    ManufacturesCheckUseComponent
+    ManufacturesCheckUseComponent,
+    SubscriptionServicesCheckUseComponent,
+    SubscriptionServicesConfirmComponent
   ],
   providers: [
     {

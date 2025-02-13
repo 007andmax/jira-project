@@ -8,10 +8,14 @@
         (click)="preview()"
     ></div>
     <div
-        class="contracts-table__description"
-        [textContent]="contract.description"
+        class="contracts-table__description "
         (click)="preview()"
-    ></div>
+    >
+        <div
+            class="ellipsis"
+            [textContent]="contract.description"
+        ></div>
+    </div>
     <div
         class="contracts-table__contract-type"
         [textContent]="getType()"
@@ -64,7 +68,7 @@
     ></div>
     <div
         class="contracts-table__amount"
-        [textContent]="contract.amount | currency"
+        [textContent]="(contract.amount + contract.taxSum) | currency"
         (click)="preview()"
     ></div>
     <div

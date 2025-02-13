@@ -9,8 +9,7 @@ import { ContractsOtherService } from './contracts-other-service';
 export class ContractsUserDevice {
     billType: string = "DEVICE";
     blockRate: number;
-    blockTimeServices: Array<ContractsBlockTimeService> = [new ContractsBlockTimeService("Managed Services Onsite", 0),
-    new ContractsBlockTimeService("Managed Services Remote", 0)];
+    blockTimeServices: Array<ContractsBlockTimeService> = [];
     companyId: string;
     contractWithBlockTime: boolean = false;
     customInterval: any;
@@ -41,7 +40,7 @@ export class ContractsUserDevice {
     public setDataFromCopy(data: ServiceAgreement) {
         this.billType = data.billType;
         this.blockRate = (data.blockRate.length > 0) ? Number(data.blockRate) : undefined;
-        this.blockTimeServices = (data.blockTimeServices.length > 0) ? data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate)) : data.serviceContractServicesToTrack.map(item => new ContractsBlockTimeService(item.name, item.rate));
+        this.blockTimeServices = (data.blockTimeServices.length > 0) ? data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate, item.parentDefaultServiceId)) : data.serviceContractServicesToTrack.map(item => new ContractsBlockTimeService(item.name, item.rate, item.parentDefaultServiceId));
         this.companyId = data.companyId;
         this.contractWithBlockTime = (data.rateExceeding && (data.includedHours || data.includedHours == 0)) ? true : false;
         this.customInterval = data.customInterval;
@@ -55,8 +54,8 @@ export class ContractsUserDevice {
             this.intervalstring = (data.customInterval === 30) ? '30 days' : (data.customInterval === 15) ? '15 days' : '7 days';
         }
         this.rateExceeding = (data.rateExceeding) ? Number(data.rateExceeding).toFixed(2) : undefined;
-        this.serviceContractServices = data.serviceContractServices.map(item => new ContractsUserDeviceService(item.count, item.name, item.rate, item.taxIds));
-        this.services = data.services.map(item => new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, (item.commissionRate) ? item.commissionRate : 0, item.id, item.name, item.rate, item.taxIds));
+        this.serviceContractServices = data.serviceContractServices.map(item => new ContractsUserDeviceService(item.count, item.name, item.rate, item.taxIds, item.subscriptionService, item.discountAmount, item.discountType ? item.discountType : "PERCENT", item.discountSum));
+        this.services = data.services.map(item => new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, (item.commissionRate) ? item.commissionRate : 0, item.id, item.name, item.rate, item.taxIds, item.parentDefaultServiceId, false, item.discountAmount, item.discountType));
         this.startDate = data.startDate;
         this.taxIds = data.taxIds;
         if (data.manualCreateBillableItem != undefined) this.manualCreateBillableItem = data.manualCreateBillableItem;
@@ -75,13 +74,39 @@ export class ContractsUserDevice {
     }
     public calculateTotalAmount() {
         let sum = 0;
+        console.log("this.serviceContractServices", this.serviceContractServices);
         this.serviceContractServices.forEach(item => {
-            sum += (item.count * item.rate);
+            let rate = item.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+            if (item.discountType == "PERCENT") sum += (item.count * item.rate * (1 - (Number(item.discountAmount) || 0) / 100) * (1 + rate / 100));
+            if (item.discountType == "FIXED") sum += (((item.count * item.rate) - Number(item.discountAmount)) * (1 + rate / 100));
+        })
+        return sum;
+    }
+    public calculateTotalDiscount() {
+        let sum = 0;
+        this.serviceContractServices.forEach(item => {
+            sum += item.discountSum;
+        })
+        return sum;
+    }
+    public calculateServiceDiscount() {
+        let sum = 0;
+        this.serviceContractServices.forEach(item => {
+            if (item.discountType == "PERCENT") sum += (item.count * item.rate * (Number(item.discountAmount) || 0) / 100);
+            if (item.discountType == "FIXED") sum += (Number(item.discountAmount) || 0);
+        })
+        return sum;
+    }
+    public calculateServiceTaxes() {
+        let sum = 0;
+        this.serviceContractServices.forEach(item => {
+            sum += item.taxSum;
         })
         return sum;
     }
     public addDefaultService(item) {
-        this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id)))
+        console.log("item", item);
+        this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id), item.parentDefaultServiceId, false, item.discountAmount, item.discountType))
     }
     public setTaxIds(data) {
         this.taxIds = data;
@@ -170,6 +195,8 @@ export class ContractsUserDevice {
         })
         let validateDuplicated = (this.serviceContractServices.find(item => !item.validateDuplicated)) ? false : true;
         let validate = (this.serviceContractServices.find(item => !item.validate)) ? false : true;
+        console.log("validateDuplicated", validateDuplicated);
+        console.log("validate", validate);
         return validateDuplicated && validate;
     }
     public checkDuplicatedBlockTimeServices() {
@@ -237,7 +264,20 @@ export class ContractsUserDevice {
             type: "SERVICE_CONTRACT",
         }
     }
-
+    public checkDuplicatedBlockTimeAndTrackServices() {
+        this.blockTimeServices.forEach(item => {
+            item.validateDuplicated = true;
+        });
+        let list = [...this.blockTimeServices, ...this.services];
+        list.forEach((item1, i) => {
+            list.forEach((item2, u) => {
+                if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated) item2.validateDuplicated = false;
+            })
+        })
+        let validateDuplicated = (list.find(item => !item.validateDuplicated)) ? false : true;
+        let validate = (list.find(item => !item.validate)) ? false : true;
+        return validateDuplicated && validate;
+    }
     public checkDuplicatedServices() {
         this.services.forEach(item => {
             item.validateDuplicated = true;
@@ -253,5 +293,8 @@ export class ContractsUserDevice {
     }
     public getAllServicesName() {
         return [...this.getBlockTimeServicesName(), ...this.getServicesName(), ...this.getServiceContractServicesName()];
+    }
+    public getServiceContractServicesServicesName() {
+        return [...this.getServicesName(), ...this.getServiceContractServicesName()];
     }
 }

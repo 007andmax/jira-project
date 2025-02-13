@@ -14,6 +14,7 @@ export class ContractItem {
     startDate: number;
     status: string;
     type: string;
+    taxSum: number;
     enableInvoiceAutoCreate: boolean;
     manualCreateBillableItem: boolean;
     constructor(data = null) {

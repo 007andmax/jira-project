@@ -86,6 +86,11 @@
                         ></div>
                     </div>
                 </th>
+                <th class="service-table__discount">
+                    <div class="qt-df qt-ai-c qt-jc-fe">
+                        <div>Discount</div>
+                    </div>
+                </th>
                 <th class="service-table__tax">
                     <div class="qt-df qt-ai-c qt-jc-fe">
                         <div>Tax</div>
@@ -136,6 +141,10 @@
                             <span></span>
                         </label>
                     </td>
+                    <td
+                        class="service-table__discount"
+                        [textContent]="getDiscount(item)"
+                    ></td>
                     <td
                         class="service-table__tax"
                         [textContent]="getSelectedTaxes(item.taxIds)"

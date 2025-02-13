@@ -30,6 +30,7 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
 })
 export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestroy {
   @Output() onClose = new EventEmitter<any>();
+  @Output() onInitRequestForAdd = new EventEmitter<any>();
   @ViewChild('customDateDP', { static: false }) customDateDP: DatePickerComponent;
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
@@ -93,8 +94,11 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     let taxes = lsitTaxes.filter(item => item.isDefault === true);
     this.taxesDP.setEditItems(taxes);
     this.contractsBlockTime.setTaxIds(taxes.map(item => item.id));
+    this.contractsBlockTime.taxes = taxes;
+    this.onChangeTaxSum();
   }
   public onInitCopy() {
+    console.log("this.сontractsStateService.getContractForCopy()", this.сontractsStateService.getContractForCopy());
     this.contractsBlockTime.setDataFromCopy(this.сontractsStateService.getContractForCopy());
     this.selectedInterval = this.contractsBlockTime.intervalstring;
     this.startDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
@@ -117,6 +121,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       })
       this.toggleNotifyAgentsUser = true;
     }
+    this.onChangeTaxSum();
   }
   selectAllUsers() {
     this.techState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
@@ -156,6 +161,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
+          this.onInitRequestForAdd.emit(null);
           this.contractsService.createContract(createBillableItem, this.contractsBlockTime.getDataForCreate()).subscribe(res => {
             this.onClose.emit(null);
           })
@@ -163,11 +169,17 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
           let names = Object.keys(data);
           this.contractsBlockTime.blockTimeServices.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
           this.contractsBlockTime.services.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
         }
       }, err => {
@@ -175,18 +187,22 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       })
   }
   onAddDefaultService(data) {
+    console.log("data", data);
     this.contractsBlockTime.addDefaultService(data);
     this.onCheckDuplicatedService();
   }
   onCheckDuplicatedCustomService() {
-    if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices() || !this.contractsBlockTime.companyId) return;
+    if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeAndTrackServices() || !this.contractsBlockTime.companyId) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getBlockTimeServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
           this.contractsBlockTime.blockTimeServices.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
         }
       }, err => {
@@ -194,7 +210,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       })
   }
   onCheckDuplicatedService() {
-    if (this.contractsBlockTime.services.length === 0 || !this.contractsBlockTime.checkDuplicatedServices() || !this.contractsBlockTime.companyId) return;
+    if (this.contractsBlockTime.services.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeAndTrackServices() || !this.contractsBlockTime.companyId) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
@@ -241,8 +257,10 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.toggleTimeRollover = data;
     this.contractsBlockTime.maxRolloverHours = "";
   }
-  addCustomService() {
-    this.contractsBlockTime.blockTimeServices.push(new ContractsBlockTimeService("", 5));
+  addCustomService(data) {
+    this.validate.resetBlockTimeServices();
+    this.contractsBlockTime.blockTimeServices.push(new ContractsBlockTimeService(data.name, data.rate, data.versionedId.id));
+    this.onCheckDuplicatedCustomService();
   }
   onRemoveDefaultService(i) {
     this.contractsBlockTime.services.splice(i, 1);
@@ -254,8 +272,22 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.contractsBlockTime.setCompanyId((data) ? data.id : null);
     this.validate.resetCompany();
   }
+  public onChangeTaxSum() {
+    let rate = this.contractsBlockTime.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+    this.contractsBlockTime.taxSum = this.contractsBlockTime.calculateTotalAmount() * rate / 100;
+  }
+  onChangeBlockRate(data) {
+    this.contractsBlockTime.blockRate = data;
+    this.onChangeTaxSum();
+  }
+  onChangeIncludedHours(data) {
+    this.contractsBlockTime.includedHours = data;
+    this.onChangeTaxSum();
+  }
   onTaxesChange(data) {
+    this.contractsBlockTime.taxes = data;
     this.contractsBlockTime.setTaxIds(data.map(item => item.id));
+    this.onChangeTaxSum();
   }
   onSelectInterval(data) {
     this.selectedInterval = data;

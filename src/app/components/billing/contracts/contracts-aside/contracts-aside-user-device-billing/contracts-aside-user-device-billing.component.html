@@ -58,6 +58,7 @@
                 type="text"
                 [(ngModel)]="contractsUserDevice.description"
                 (input)="validate.resetDescription()"
+                maxlength="255"
             >
             <app-mat-error
                 class="invalid-feedback"
@@ -108,6 +109,7 @@
                         >
                             Tax
                         </th>
+                        <th class="col-discount">Discount</th>
                         <th class="col-price">Price</th>
                         <th></th>
                     </tr>
@@ -118,7 +120,7 @@
                         let-item
                         [ngForOf]="contractsUserDevice.serviceContractServices"
                         let-i="index"
-                        [ngForTrackBy]="trackById"
+                        [ngForTrackBy]="trackByServiceContractServicesId"
                     >
                         <app-contracts-aside-user-device-service
                             #deviceService
@@ -131,12 +133,10 @@
                 </tbody>
             </table>
         </div>
-        <button
-            class="qt-button --gray --sm"
-            (click)="addServiceContractService()"
-        >
-            + Add Service
-        </button>
+        <app-contracts-aside-block-time-billing-add-subscription-services
+            [showError]="!validate.getServiceContractServices()"
+            (onSelect)="addServiceContractService($event)"
+        ></app-contracts-aside-block-time-billing-add-subscription-services>
         <div class="qt-df qt-ai-c single-invoice">
             <div
                 class="qt-toggle qt-mr-8"
@@ -189,12 +189,11 @@
                 </tbody>
             </table>
         </div>
-        <button
-            class="qt-button --gray --sm qt-mb-24"
-            (click)="addBlockTimeService()"
-        >
-            + Add Service
-        </button>
+        <app-contracts-aside-block-time-billing-add-default-service
+            class="qt-mb-24"
+            [showError]="!validate.getBlockTimeServices()"
+            (onSelect)="addBlockTimeService($event)"
+        ></app-contracts-aside-block-time-billing-add-default-service>
         <div class="qt-df">
             <div
                 class="qt-toggle qt-mr-8"
@@ -281,6 +280,7 @@
                 <tr>
                     <th class="track-and-bill-table__service-name">Service Name</th>
                     <th class="track-and-bill-table__billable">Billable</th>
+                    <th class="track-and-bill-table__discount">Discount</th>
                     <th class="track-and-bill-table__tax">Tax</th>
                     <th class="track-and-bill-table__hourly-rate">Hourly Rate</th>
                     <th></th>
@@ -369,6 +369,14 @@
             <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
                 <div>Review Date</div>
                 <div [textContent]="parsedateForTotal(contractsUserDevice.reviewDate)"></div>
+            </div>
+            <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
+                <div>Total Discount</div>
+                <div [textContent]="contractsUserDevice.calculateServiceDiscount() | currency"></div>
+            </div>
+            <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
+                <div>Tax</div>
+                <div [textContent]="contractsUserDevice.calculateServiceTaxes() | currency"></div>
             </div>
             <div class="contract-total__divider qt-mt-15 qt-mb-15"></div>
             <div class="qt-df qt-jc-sb invoice-total__total-line">

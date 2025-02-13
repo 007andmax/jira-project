@@ -92,6 +92,7 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
           this.add();
         } else {
           this.validate.setValidate(false);
+          this.validate.setDescriptionValidate(data[this.service.name]);
         }
       }, err => {
         this.validate.setValidate(false);

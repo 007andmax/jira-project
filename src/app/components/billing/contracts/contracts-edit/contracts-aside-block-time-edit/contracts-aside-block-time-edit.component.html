@@ -76,6 +76,7 @@
                 type="text"
                 [(ngModel)]="contractsBlockTime.description"
                 (input)="validate.resetDescription()"
+                maxlength="255"
             >
             <app-mat-error
                 class="invalid-feedback"
@@ -125,7 +126,7 @@
                         placeholder="0.00"
                         [value]="contractsBlockTime.blockRate_str"
                         (input)="validate.resetBlockRate()"
-                        (onChange)="contractsBlockTime.blockRate=$event"
+                        (onChange)="onChangeBlockRate($event)"
                     >
                     <app-mat-error
                         class="invalid-feedback"
@@ -186,21 +187,19 @@
                         [ngForOf]="contractsBlockTime.blockTimeServices"
                         let-i="index"
                     >
-                        <app-contracts-aside-block-time-edit-customer-service
+                        <app-contracts-aside-block-time-billing-customer-service
                             [service]="item"
                             (onRemove)="onRemoveCustomService(i)"
                             (onCheckName)="onCheckDuplicatedCustomService()"
-                        ></app-contracts-aside-block-time-edit-customer-service>
+                        ></app-contracts-aside-block-time-billing-customer-service>
                     </ng-template>
                 </tbody>
             </table>
         </div>
-        <button
-            class="qt-button --gray --sm"
-            (click)="addCustomService()"
-        >
-            + Add Service
-        </button>
+        <app-contracts-aside-block-time-billing-add-default-service
+            class="qt-mb-24"
+            (onSelect)="addCustomService($event)"
+        ></app-contracts-aside-block-time-billing-add-default-service>
         <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16 qt-mt-16">
             <div class="qt-df">
                 <div
@@ -303,6 +302,7 @@
                 <tr>
                     <th class="track-and-bill-table__service-name">Service Name</th>
                     <th class="track-and-bill-table__billable">Billable</th>
+                    <th class="track-and-bill-table__tax">Discount</th>
                     <th class="track-and-bill-table__tax">Tax</th>
                     <th class="track-and-bill-table__hourly-rate">Hourly Rate</th>
                     <th></th>
@@ -400,12 +400,20 @@
                 <div>Review Date</div>
                 <div [textContent]="parsedateForTotal(contractsBlockTime.getReviewDateByMilliseconds())"></div>
             </div>
+            <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
+                <div>Sub Total</div>
+                <div [textContent]="contractsBlockTime.calculateTotalAmount() | currency"></div>
+            </div>
+            <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
+                <div>Tax</div>
+                <div [textContent]="contractsBlockTime.taxSum | currency"></div>
+            </div>
             <div class="contract-total__divider qt-mt-15 qt-mb-15"></div>
             <div class="qt-df qt-jc-sb invoice-total__total-line">
                 <div class="qt-fs-13 qt-fw-b">Total</div>
                 <div
                     class="qt-fs-16 qt-fw-b"
-                    [textContent]="contractsBlockTime.calculateTotalAmount() | currency"
+                    [textContent]="(contractsBlockTime.calculateTotalAmount() + contractsBlockTime.taxSum) | currency"
                 ></div>
             </div>
         </div>

@@ -35,7 +35,7 @@
                 </div>
                 <div class="qt-df">
                     <app-ticket-profile-updates-service-timepicker
-                        *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
+                        *ngIf="currentCompany && currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
                         [validate]="service.validateQuantity"
                         [errorMessage]="'You have to set any time value'"
                         (onChangeStart)="onChangeStartTimePickerService($event,i)"
@@ -111,7 +111,7 @@
                     [errorMessage]="'You have to set any time value'"
                     (onChangeStart)="onChangeStartTimePicker($event)"
                     (onChangeEnd)="onChangeEndTimePicker($event)"
-                    *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
+                    *ngIf="currentCompany && currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
                 ></app-ticket-profile-updates-service-timepicker>
                 <app-ticket-profile-updates-service-duration
                     #durationPicker

@@ -31,15 +31,18 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
   }
   getTaxes(taxes) {
     let listTaxes = [];
+
     this.service.taxIds.forEach(id => {
       let find = taxes.find(tax => tax.id === id);
       if (find) listTaxes.push(find);
-
     });
+    this.service.taxes = listTaxes;
+    this.onChangeTaxSum();
     this.setSelectedTaxes(listTaxes);
   }
   onChangeCount(event) {
     this.service.count = event;
+    this.onChangeTaxSum();
   }
   onChangeDisplayBillableTooltip() {
     this.onDisplayBillableTooltip.emit(null);
@@ -49,7 +52,16 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
   }
   onTaxesChange(data) {
     this.service.taxIds = data.map(item => item.id);
+    this.service.taxes = data;
+    this.onChangeTaxSum();
     this.onChangeDisplayBillableTooltip();
+  }
+  public onChangeTaxSum() {
+    let rate = this.service.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+    this.service.taxSum = this.service.count * this.service.rate * rate / 100;
+  }
+  onChangeDiscount(data) {
+    this.service.discountType = data.type;
   }
   checkName() {
     this.onCheckName.emit(null);
@@ -61,6 +73,7 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
   public onChangeRate(val) {
     let value = Number(val);
     this.service.rate = value;
+    this.onChangeTaxSum();
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

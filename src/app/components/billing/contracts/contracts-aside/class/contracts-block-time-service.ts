@@ -1,12 +1,17 @@
+import { count } from "console";
+
 export class ContractsBlockTimeService {
     name: string;
     rate: string;
     validate: boolean = true;
     validateDuplicated: boolean = true;
     descriptionValidate: string;
-    constructor(name, rate) {
+    "parentDefaultServiceId": string;
+    "basedOnDefault": boolean = true;
+    constructor(name, rate, parentDefaultServiceId) {
         this.name = name;
         this.rate = rate;
+        this.parentDefaultServiceId = parentDefaultServiceId;
     }
     public setValidate(data) {
         this.validate = data;
@@ -16,8 +21,10 @@ export class ContractsBlockTimeService {
     }
     public getDataForCreate(rate) {
         return {
-            name: this.name,
-            rate: rate
+            "parentDefaultServiceId": this.parentDefaultServiceId,
+            "basedOnDefault": this.basedOnDefault,
+            rate: rate,
+
         }
     }
 }

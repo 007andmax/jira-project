@@ -21,7 +21,7 @@ export class QuoteService implements Service {
     billable: boolean;
     billableQuantity: number;
     description: string;
-    discountAmount: number;
+    discountAmount: string;
     discountSum: number;
     discountType: string;
     editedExpense: boolean;
@@ -43,7 +43,7 @@ export class QuoteService implements Service {
 
     }
     public getDataForUpdate() {
-        let service: Service = {
+        let service: any = {
             blockTimeServiceAgreement: this.blockTimeServiceAgreement,
             canUseInTicket: this.canUseInTicket,
             commissionRate: this.commissionRate,

@@ -1,0 +1,128 @@
+<div
+    class="qt-aside-modern default-services-page__aside"
+    *ngIf="open"
+>
+    <form [formGroup]="modelForm">
+        <div class="qt-aside-modern__header">
+            <div class="qt-aside-modern__header-title">Edit Service</div>
+            <div
+                class="qt-aside-modern__header-close qt-icon icon__close"
+                (click)="close()"
+            ></div>
+        </div>
+        <div class="qt-aside-modern__content">
+            <div class="qt-inputs-row qt-mb-16">
+                <div
+                    class="qt-input-block"
+                    [ngClass]="{'--input-error':submitted && f2.name.errors}"
+                >
+                    <div class="qt-input-block__label">Service Name</div>
+                    <input
+                        placeholder="Service Name"
+                        formControlName="name"
+                        type="text"
+                        minlength="1"
+                        maxlength="100"
+                    >
+                    <app-mat-error
+                        class="invalid-feedback --pos-static"
+                        *ngIf="submitted && f2.name.errors"
+                    >
+                        Service name is required
+                    </app-mat-error>
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-w50">
+                    <div
+                        class="qt-input-block"
+                        [ngClass]="{'--input-error':submitted && f2.rate.errors}"
+                    >
+                        <div class="qt-input-block__label">Hourly Rate($)</div>
+                        <input
+                            formControlName="rate"
+                            type="text"
+                            number
+                            placeholder="Per Hour Rate"
+                            [money]="true"
+                            appToFixed
+                        >
+                        <app-mat-error
+                            class="invalid-feedback"
+                            *ngIf="submitted && f2.rate.errors"
+                        >
+                            Hour rate is required
+                        </app-mat-error>
+                    </div>
+                </div>
+                <div class="qt-input-block qt-w50">
+                    <div class="create-product-taxes-select">
+                        <app-taxes
+                            #taxSelect
+                            [selectedTax]="selectedTaxes"
+                            (taxesChange)="onTaxesChange($event)"
+                        ></app-taxes>
+                    </div>
+                </div>
+            </div>
+            <div class="qt-df">
+                <div class="qt-w100 qt-mb-16">
+                    <div class="qt-input-block">
+                        <label>GL Number</label>
+                        <gl-numbers-drop-down
+                            [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']"
+                            [list]="glNumbers"
+                            #glNumberSelect
+                            [placeholder]="'Select GL'"
+                            [container]="'body'"
+                            [editItem]="selectedGlNumber"
+                            [add]="true"
+                            [search]="true"
+                            [change]="true"
+                            [field]="'glNumber'"
+                            [reducerItem]="glDropDownItemName"
+                            (onAddItem)="onAddGlNumber($event)"
+                            (onSelectedItem)="onSelectGlNumbers($event)"
+                        ></gl-numbers-drop-down>
+                    </div>
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <label
+                    class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                    for="email-payment"
+                >
+                    <input
+                        id="email-payment"
+                        type="checkbox"
+                        formControlName="updateServicePricesInContracts"
+                        (change)="onChangeUpdateServicePricesInContracts($event)"
+                    >
+                    <span></span>
+                    <div class="qt-ml-8 qt-fw-400 qt-lh-1">
+                        Apply a new price to services in the existing contract.
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div class="qt-aside-modern__footer">
+            <div class="qt-df qt-w100">
+                <button
+                    class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+                    (click)="close()"
+                >
+                    Cancel
+                </button>
+                <button
+                    class="qt-button qt-w100 qt-jc-c"
+                    appDisabledBtn
+                    #editService="disabled"
+                    (onClick)="onSave()"
+                >
+                    <span *ngIf="!editService.isBlock()">Edit Service</span>
+                    <app-preloader-ticket *ngIf="editService.isBlock()"></app-preloader-ticket>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -37,4 +37,11 @@ tr.--selected {
 .qt-table-modern__row {
   height: auto;
   min-height: 48px;
+  .billable-payment-table__menu {
+      display: flex !important;
+      justify-content: center;
+      .icon__more {
+          height: 16px !important;
+      }
+  }
 }

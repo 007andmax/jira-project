@@ -5,6 +5,8 @@ export class ContractsOtherProduct {
     salePrice: number;
     validate: boolean = true;
     salePrice_str: string;
+    taxSum: number = 0;
+    taxes: Array<any> = [];
     constructor(productId, quantity, salePrice, description) {
         this.productId = productId;
         this.quantity = quantity;

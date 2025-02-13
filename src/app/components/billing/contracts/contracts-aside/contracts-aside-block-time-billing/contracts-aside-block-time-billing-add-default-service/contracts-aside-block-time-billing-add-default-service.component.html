@@ -10,6 +10,12 @@
     >
         + Add Service
     </button>
+    <app-mat-error
+        class="invalid-feedback"
+        *ngIf="showError"
+    >
+        Please add at least one service to create a new contract
+    </app-mat-error>
     <ul
         class="qt-dropdown-menu list-services --open-bot"
         ngbDropdownMenu
@@ -26,7 +32,6 @@
                 ngbDropdownItem
                 [textContent]="item.name"
                 (click)="select(item)"
-                [ngClass]="{'--selected':isSelected(item.versionedId.id)}"
             ></li>
         </ng-template>
     </ul>

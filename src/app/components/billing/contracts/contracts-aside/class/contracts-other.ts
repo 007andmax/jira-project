@@ -57,4 +57,14 @@ export class ContractsOther extends ContractsUserDevice {
             enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
         }
     }
+    public calculateServiceTaxes() {
+        let sum = 0;
+        this.productExpenses.forEach(item => {
+            sum += item.taxSum;
+        })
+        this.serviceExpenses.forEach(item => {
+            sum += item.taxSum;
+        })
+        return sum;
+    }
 }
