@@ -28,6 +28,8 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
   }
   public setSelectedTaxes(listTaxes) {
     this.taxesDropDown.setEditItems(listTaxes);
+    this.service.taxes = listTaxes;
+    this.onChangeTaxSum();
   }
   getTaxes(taxes) {
     let listTaxes = [];

@@ -293,4 +293,11 @@ export class ContractsUserDevice {
     public getServiceContractServicesServicesName() {
         return [...this.getServicesName(), ...this.getServiceContractServicesName()];
     }
+    public calculateSubTotalAmountServiceContract() {
+        let sum = 0;
+        this.serviceContractServices.forEach(item => {
+            sum += (item.count * item.rate);
+        })
+        return sum;
+    };
 }
