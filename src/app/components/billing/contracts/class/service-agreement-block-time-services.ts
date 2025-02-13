@@ -18,6 +18,7 @@ export class ServiceAgreementBlockTimeServices {
     isAdded: boolean = false;
     descriptionValidate: string;
     taxSum: number = 0;
+    taxes: Array<any> = [];
     constructor(data = null, isAdded = false) {
         if (data) {
             for (const key in data) {

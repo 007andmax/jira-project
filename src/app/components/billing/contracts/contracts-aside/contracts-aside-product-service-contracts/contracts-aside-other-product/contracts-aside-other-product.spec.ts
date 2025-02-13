@@ -44,7 +44,8 @@ describe('ContractsAsideOtherProductComponent unit test', () => {
     com.onChangeProduct(new InventoryItem({
       sale: 100,
       versionedId: { id: 500 },
-      description: "description"
+      description: "description",
+      taxes: [{ rate: 1 }, { rate: 2 }, { rate: 3 }]
     }));
     expect(com.product.quantity).toEqual(1);
     expect(com.product.salePrice).toEqual(100);
