@@ -98,7 +98,6 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.onChangeTaxSum();
   }
   public onInitCopy() {
-    console.log("this.сontractsStateService.getContractForCopy()", this.сontractsStateService.getContractForCopy());
     this.contractsBlockTime.setDataFromCopy(this.сontractsStateService.getContractForCopy());
     this.selectedInterval = this.contractsBlockTime.intervalstring;
     this.startDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
@@ -187,7 +186,6 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       })
   }
   onAddDefaultService(data) {
-    console.log("data", data);
     this.contractsBlockTime.addDefaultService(data);
     this.onCheckDuplicatedService();
   }

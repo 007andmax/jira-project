@@ -65,7 +65,6 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
       this.getTaxes(data);
     })
     this.sub.add(getOnTaxess);
-    console.log("this.contractsBlockTime", this.contractsBlockTime);
     if (this.contractsBlockTime.interval) {
       this.selectedInterval = this.contractsBlockTime.interval;
     } else {

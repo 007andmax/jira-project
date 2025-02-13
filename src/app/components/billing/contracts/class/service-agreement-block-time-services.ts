@@ -51,7 +51,6 @@ export class ServiceAgreementBlockTimeServices {
             billable: this.billable,
             taxIds: this.taxIds,
         }
-        console.log("this.isAdded", this.isAdded);
         if (this.isAdded) data.parentDefaultServiceId = this.id;
         if (!this.isAdded) {
             data.id = this.id;

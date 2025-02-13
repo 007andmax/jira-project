@@ -79,7 +79,6 @@ export class SubscriptionServicesAddComponent implements OnInit, OnDestroy {
     })
   }
   onSelectGlNumbers(data) {
-    console.log("data", data);
     this.modelForm.controls["glNumberId"].setValue(data.id)
   }
   glDropDownItemName(item) {
@@ -98,7 +97,6 @@ export class SubscriptionServicesAddComponent implements OnInit, OnDestroy {
   add() {
     this.submitted = true;
     if (this.modelForm.invalid) {
-      console.log("this.modelForm", this.modelForm);
       return;
     }
     this.addBtn.setDisabled(true);

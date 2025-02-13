@@ -252,7 +252,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   }
   addServiceContractService(item) {
     this.validate.resetServiceContractServices();
-    console.log("item", item);
     this.contractsUserDevice.serviceContractServices.push(new ContractsUserDeviceService(1, item.name, item.rate, item.taxIds, { id: item.id }));
     this.onCheckDuplicatedServiceContractServices();
   }

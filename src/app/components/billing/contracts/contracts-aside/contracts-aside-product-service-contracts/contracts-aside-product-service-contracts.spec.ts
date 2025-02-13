@@ -115,7 +115,6 @@ describe('ContractsAsideProductServiceContractsComponent unit test', () => {
     let checkStartDate7 = new Date();
     checkStartDateMONTHLY.setMonth(checkStartDateMONTHLY.getMonth() - 1);
     checkStartDateYEARLY.setFullYear(checkStartDateYEARLY.getFullYear() - 1);
-    console.log("checkStartDateMONTHLY", checkStartDateMONTHLY);
     let day = 1000 * 60 * 60 * 24;
     expect(com.getMinStartDate("MONTHLY", startDate)).toEqual(checkStartDateMONTHLY.getTime() + day);
     expect(com.getMinStartDate("YEARLY", startDate)).toEqual(checkStartDateYEARLY.getTime() + day);

@@ -228,8 +228,6 @@ export class ServiceAgreement {
         })
         let validateDuplicated = (this.serviceContractServices.find(item => !item.validateDuplicated)) ? false : true;
         let validate = (this.serviceContractServices.find(item => !item.validate)) ? false : true;
-        console.log("validateDuplicated", validateDuplicated);
-        console.log("validate", validate);
         return validateDuplicated && validate;
     }
     public getAllServicesName() {
@@ -334,7 +332,6 @@ export class ServiceAgreement {
     };
     public calculateTotalAmountServiceContract() {
         let sum = 0;
-        console.log("this.serviceContractServices", this.serviceContractServices);
         this.serviceContractServices.forEach(item => {
             let rate = item.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
             if (item.discountType == "PERCENT") sum += (item.count * item.rate * (1 - (Number(item.discountAmount) || 0) / 100) * (1 + rate / 100));

@@ -45,7 +45,6 @@ export class SubscriptionServicesEditComponent implements OnInit, OnDestroy {
       this.modelForm.patchValue({ name: this.service.name, rate: this.service.rate, taxIds: this.service.taxIds, updateServicePricesInContracts: this.service.updateServicePricesInContracts, glNumberId: this.service.glNumberId })
       if (this.glNumbers.length > 0) this.selectedGlNumber = this.glNumbers.find(item => item.id == this.service.glNumberId);
       if (this.taxesStateService.getTaxes().length > 0) this.selectedTaxes = this.taxesStateService.getTaxes().filter(item => this.service.taxIds.some(tax => tax == item.id));
-      console.log("this.selectedGlNumber", this.selectedGlNumber);
       this.open = true;
     })
     this.sub.add(getShowAsideForEdit);
@@ -100,7 +99,6 @@ export class SubscriptionServicesEditComponent implements OnInit, OnDestroy {
   }
   public onSave() {
     if (this.modelForm.invalid) {
-      console.log("this.modelForm", this.modelForm);
       return;
     }
     if (this.modelForm.value.updateServicePricesInContracts) {

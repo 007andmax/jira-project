@@ -102,7 +102,6 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
 
         this.validate.setDate(false);
       }
-      console.log("this.validate", this.validate);
     })
   }
   public searchDuplicatedServiceNames() {

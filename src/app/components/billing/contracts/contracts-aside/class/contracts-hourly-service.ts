@@ -50,7 +50,6 @@ export class ContractsHourlyService {
             discountAmount: this.discountAmount ? this.discountAmount : undefined,
             discountType: this.discountAmount ? this.discountType : undefined
         }
-        console.log("this.isAdded", this.isAdded);
         if (this.isAdded) data.parentDefaultServiceId = this.id;
         if (!this.isAdded) {
             data.id = this.id;

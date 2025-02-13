@@ -161,9 +161,7 @@ export class TicketDetailProfileEditUpdatesServicesComponent implements OnInit, 
     this.sub.add(getOnGetServicesList);
   }
   public selectService(item) {
-    console.log("item", item);
     this.service.setItem(item);
-    console.log("this.service", this.service);
   }
   public onChangeStartTimePicker(data) {
     this.service.setDurationStart(data);
