@@ -375,6 +375,10 @@
                 <div [textContent]="contractsUserDevice.calculateServiceDiscount() | currency"></div>
             </div>
             <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
+                <div>Sub Total</div>
+                <div [textContent]="contractsUserDevice.calculateSubTotalAmountServiceContract() | currency"></div>
+            </div>
+            <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
                 <div>Tax</div>
                 <div [textContent]="contractsUserDevice.calculateServiceTaxes() | currency"></div>
             </div>
