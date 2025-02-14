@@ -55,7 +55,6 @@ export class ContractsAsideHourlyBillingEditDefaultServiceComponent implements O
   onChangeBillable(event) {
     if (!event.target.checked) {
       this.resetRate();
-      console.log("this.service", this.service);
     }
   }
   resetRate() {

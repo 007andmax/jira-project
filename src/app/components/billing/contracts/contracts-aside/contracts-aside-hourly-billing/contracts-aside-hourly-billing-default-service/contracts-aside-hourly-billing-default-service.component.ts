@@ -29,7 +29,6 @@ export class ContractsAsideHourlyBillingDefaultServiceComponent implements OnIni
   onChangeBillable(event) {
     if (!event.target.checked) {
       this.resetRate();
-      console.log("this.defaultService", this.defaultService);
     }
   }
   resetRate() {

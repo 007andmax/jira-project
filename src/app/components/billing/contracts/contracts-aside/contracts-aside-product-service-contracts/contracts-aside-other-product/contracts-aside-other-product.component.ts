@@ -20,7 +20,6 @@ export class ContractsAsideOtherProductComponent implements OnInit {
     }
   }
   public onChangeProduct(data) {
-    console.log("data", data);
     this.editProduct = data;
     if (data) {
       this.product.quantity = 1;

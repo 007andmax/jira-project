@@ -65,7 +65,6 @@ describe('ContractsService', () => {
     service.getServiceAgreements().subscribe(
       () => fail('should have failed with an error'),
       error => {
-        console.log("error", error);
         expect(error.status).toBe(500);
       }
     );
