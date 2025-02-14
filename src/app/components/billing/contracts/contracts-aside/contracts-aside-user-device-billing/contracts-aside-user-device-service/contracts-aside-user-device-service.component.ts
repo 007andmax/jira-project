@@ -60,7 +60,8 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
   }
   public onChangeTaxSum() {
     let rate = this.service.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
-    this.service.taxSum = this.service.count * this.service.rate * rate / 100;
+    if (this.service.discountType == "PERCENT") this.service.taxSum = (this.service.count * this.service.rate * (1 - (Number(this.service.discountAmount) || 0) / 100) * rate / 100);
+    if (this.service.discountType == "FIXED") this.service.taxSum = (((this.service.count * this.service.rate) - Number(this.service.discountAmount)) * rate / 100);
   }
   onChangeDiscount(data) {
     this.service.discountType = data.type;
