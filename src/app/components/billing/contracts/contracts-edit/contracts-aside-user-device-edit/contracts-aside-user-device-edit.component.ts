@@ -104,15 +104,16 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     if (this.contractsUserDevice.invoiceAsSingleItem) this.taxesServicesDP.setEditItems(taxes);
   }
   public onEdit() {
-    if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.checkDuplicatedServiceContractServices()
+    console.log("this.validate", this.validate);
+    if (!this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.checkDuplicatedServiceContractServices()
       || !this.contractsUserDevice.checkDuplicatedServices() || !this.validate.isValidate(this.contractsUserDevice)) {
       this.cd.detectChanges();
       return;
     };
-    this.onInitRequestForEdit.emit(null);
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
+          this.onInitRequestForEdit.emit(null);
           this.contractsService.updateContract(this.contractsUserDevice.getDataForUpdateServiceContract(this.toggleMaximumAmountHours)).subscribe(res => {
             this.subscriptionServicesStateService.refreshServicesAgreements();
             this.onClose.emit(null);

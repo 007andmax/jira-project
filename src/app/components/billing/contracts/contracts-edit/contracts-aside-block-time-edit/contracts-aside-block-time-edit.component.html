@@ -198,6 +198,7 @@
         </div>
         <app-contracts-aside-block-time-billing-add-default-service
             class="qt-mb-24"
+            [showError]="!validate.getBlockTimeServices()"
             (onSelect)="addCustomService($event)"
         ></app-contracts-aside-block-time-billing-add-default-service>
         <div class="qt-df qt-jc-sb qt-ai-c qt-mb-16 qt-mt-16">

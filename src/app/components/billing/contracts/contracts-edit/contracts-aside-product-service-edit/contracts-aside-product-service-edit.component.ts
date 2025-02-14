@@ -24,6 +24,7 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
   @ViewChild('customDateDP', { static: false }) customDateDP: DatePickerComponent;
   @Output() onClose = new EventEmitter<any>();
   @Input() contractsOther: ServiceAgreement = new ServiceAgreement();
+  @Output() onInitRequestForEdit = new EventEmitter<any>();
   formatDate: string = FORMAT_DATE_2;
   startDate = new Date().getTime();
   reviewDate = new Date().getTime();
@@ -53,6 +54,7 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
       this.cd.detectChanges();
       return;
     }
+    this.onInitRequestForEdit.emit(null);
     this.contractsService.updateContract(this.contractsOther.getDataForUpdateOtherContract()).subscribe(res => {
       this.onClose.emit(null);
     })
