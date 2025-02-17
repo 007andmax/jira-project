@@ -258,7 +258,7 @@
                 </div>
                 <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
                     <div>Tax</div>
-                    <div [textContent]="contractsOther.taxSum | currency"></div>
+                    <div [textContent]="contractsOther.calculateServiceOthersTaxes() | currency"></div>
                 </div>
                 <div class="contract-total__divider qt-mt-15 qt-mb-15"></div>
                 <div class="qt-df qt-jc-sb invoice-total__total-line">

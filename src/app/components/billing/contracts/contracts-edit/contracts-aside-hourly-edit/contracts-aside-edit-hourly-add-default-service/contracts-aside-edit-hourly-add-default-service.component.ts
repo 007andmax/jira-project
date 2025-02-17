@@ -73,7 +73,7 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
     this.service.taxes = taxes;
     this.defaultSelectedTax = taxes;
     this.service.taxes = this.defaultSelectedTax;
-    this.taxesStateService.setTaxesFromtEdit(taxes);
+    // this.taxesStateService.setTaxesFromtEdit(taxes);
   }
   public searchDuplicatedServiceNames() {
     this.service.name = this.serviceDropDown.getInputText();

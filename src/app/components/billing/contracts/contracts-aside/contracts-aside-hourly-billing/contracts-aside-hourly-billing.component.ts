@@ -74,6 +74,8 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
       service.selected = true;
       return service;
     });
+    this.defaultServices.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   public onInitCopy() {
     this.contractsHourly.setDataFromCopy(this.contractsStateService.getContractForCopy());

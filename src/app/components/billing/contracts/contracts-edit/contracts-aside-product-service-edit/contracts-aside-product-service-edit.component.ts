@@ -47,6 +47,8 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
     }
     this.contractsOther.setIntervalString(this.selectedInterval);
     this.minStartDate = this.getMinStartDate(this.contractsOther.intervalstring, this.contractsOther.startDate);
+
+    console.log("contractsOther,,", this.contractsOther)
   }
 
   public onEdit() {
