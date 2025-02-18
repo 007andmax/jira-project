@@ -83,7 +83,7 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
     })
   }
   addService() {
-    this.contractsOther.serviceExpenses.push(new ContractsOtherService(new Date().getTime(), "", 0, "", null));
+    this.contractsOther.serviceExpenses.push(new ContractsOtherService(new Date().getTime(), "", 0, "", null, 0));
     this.validate.resetServicesOrProducts();
   }
   addProduct() {
