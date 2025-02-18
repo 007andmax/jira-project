@@ -158,6 +158,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
   onAddService(data) {
     this.defaultServices.push(new DefaultServicesHourlyContract(data));
     this.showAddService = false;
+    console.log("this.defaultServices", this.defaultServices);
   }
   onSelectCompany(data) {
     this.contractsHourly.setCompanyId((data) ? data.id : null);

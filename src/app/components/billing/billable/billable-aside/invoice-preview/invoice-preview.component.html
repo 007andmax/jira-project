@@ -170,10 +170,21 @@
                                         class="invoice-preview__col-tax"
                                         [innerHTML]="getServiceTaxes(service)"
                                     ></td>
-                                    <td
-                                        class="invoice-preview__col-amount"
-                                        [textContent]="service.sum | currency"
-                                    ></td>
+                                    <td class="invoice-preview__col-amount">
+                                        {{service.sum | currency}}
+                                        <div
+                                            *ngIf="service.discountType && service.discountAmount && service.discountType == 'FIXED'"
+                                            class="discount-container qt-mt-4"
+                                        >
+                                            Disc: {{service.discountAmount | currency}}
+                                        </div>
+                                        <div
+                                            *ngIf="service.discountType && service.discountAmount && service.discountType == 'PERCENT'"
+                                            class="discount-container qt-mt-4"
+                                        >
+                                            Disc: {{service.discountAmount}}%
+                                        </div>
+                                    </td>
                                 </tr>
                             </ng-template>
                             <ng-template
@@ -220,10 +231,21 @@
                                         class="invoice-preview__col-tax"
                                         [innerHTML]="getSelectedTaxes(product.taxes)"
                                     ></td>
-                                    <td
-                                        class="invoice-preview__col-amount"
-                                        [textContent]="product.sum | currency"
-                                    ></td>
+                                    <td class="invoice-preview__col-amount">
+                                        {{product.sum | currency}}
+                                        <div
+                                            *ngIf="product.discountType && product.discountAmount && product.discountType == 'FIXED'"
+                                            class="discount-container qt-mt-4"
+                                        >
+                                            Disc: {{product.discountAmount | currency}}
+                                        </div>
+                                        <div
+                                            *ngIf="product.discountType && product.discountAmount && product.discountType == 'PERCENT'"
+                                            class="discount-container qt-mt-4"
+                                        >
+                                            Disc: {{product.discountAmount}}%
+                                        </div>
+                                    </td>
                                 </tr>
                             </ng-template>
                         </tbody>
