@@ -34,10 +34,7 @@ export class ContractsAsideOtherServiceComponent implements OnInit, OnDestroy {
       this.defaultServices.sort((a, b) => a.name.localeCompare(b.name));
     })
     this.sub.add(getOnDefaultServices);
-    if (this.service.serviceId.length > 0) {
-      this.editItem = new NonContractServices(this.service);
-      this.onChangeTaxSum();
-    }
+    if (this.service.serviceId.length > 0) this.editItem = new NonContractServices(this.service);
   }
   public getHours() {
     let timeInMinutes = this.service.quantity * 60;

@@ -20,6 +20,7 @@ export class ServiceAgreementServiceExpenses {
         this.serviceId = data.serviceId;
         this.name = data.name;
         this.taxes = data.taxes;
+        if (data) this.rate = data.rate;
     }
     public getDataForUpdate() {
         return {

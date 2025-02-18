@@ -9,12 +9,13 @@ export class ContractsOtherService {
     validateDescription: boolean = true;
     taxes: Array<any> = [];
     taxSum: number = 0;
-    constructor(date, description, quantity, serviceId, name) {
+    constructor(date, description, quantity, serviceId, name, rate) {
         this.date = date;
         this.description = description;
         this.quantity = quantity;
         this.serviceId = serviceId;
         this.name = name;
+        this.rate = rate;
     }
     public setData(data) {
         if (data) {

@@ -63,8 +63,18 @@ export class ServiceAgreement {
             this.rateExceeding_str = parseFloat(this.rateExceeding).toFixed(2);
             this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice, item.description, item.taxes));
             this.serviceExpenses = data.serviceExpenses.map(item => new ServiceAgreementServiceExpenses(item));
+            this.productExpenses.forEach(item => this.onCalculateTaxSumForProductExpenses(item));
+            this.serviceExpenses.forEach(item => this.onCalculateTaxSumForServiceExpenses(item));
             this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));
         }
+    }
+    public onCalculateTaxSumForServiceExpenses(service) {
+        let rate = service.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+        service.taxSum = service.rate * service.quantity * rate / 100;
+    }
+    public onCalculateTaxSumForProductExpenses(product) {
+        let rate = product.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+        product.taxSum = product.salePrice * product.quantity * rate / 100;
     }
     public setManualCreateBillableItem(data) {
         this.manualCreateBillableItem = data;
