@@ -15,6 +15,7 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
 import { ContractsAsideUserDeviceServiceComponent } from '../../contracts-aside/contracts-aside-user-device-billing/contracts-aside-user-device-service/contracts-aside-user-device-service.component';
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { SubscriptionServicesStateService } from 'src/app/states/subscription-services/subscription-services-state.service';
+import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 
 @Component({
   selector: 'app-contracts-aside-user-device-edit',
@@ -48,6 +49,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     private nonContractServicesService: NonContractServicesService,
     private subscriptionServicesStateService: SubscriptionServicesStateService,
     private contractsService: ContractsService,
+    private contractsStateService: ContractsStateService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -116,6 +118,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
           this.onInitRequestForEdit.emit(null);
           this.contractsService.updateContract(this.contractsUserDevice.getDataForUpdateServiceContract(this.toggleMaximumAmountHours)).subscribe(res => {
             this.subscriptionServicesStateService.refreshServicesAgreements();
+            this.contractsStateService.fastEditContract(res);
             this.onClose.emit(null);
           })
         } else {

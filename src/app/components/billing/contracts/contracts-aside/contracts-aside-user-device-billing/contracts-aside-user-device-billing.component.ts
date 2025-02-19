@@ -122,6 +122,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
         if (Object.keys(data).length === 0) {
           this.onInitRequestForAdd.emit(null);
           this.contractsService.createContract(createBillableItem, this.contractsUserDevice.getDataForCreate(this.toggleMaximumAmountHours)).subscribe(res => {
+            this.сontractsStateService.fastAddContract(res);
             this.onClose.emit(null);
           })
         } else {

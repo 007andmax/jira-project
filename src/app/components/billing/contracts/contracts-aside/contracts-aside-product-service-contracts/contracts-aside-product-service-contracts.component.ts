@@ -79,6 +79,7 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
   onCheckServicesForAdd(createBillableItem) {
     this.onInitRequestForAdd.emit(null);
     this.contractsService.createContract(createBillableItem, this.contractsOther.getDataForCreateOther()).subscribe(res => {
+      this.сontractsStateService.fastAddContract(res);
       this.onClose.emit(null);
     })
   }

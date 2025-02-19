@@ -28,8 +28,19 @@ export class ContractsStateService {
   onConfirm: EventEmitter<any> = new EventEmitter();
   productList = [];
   filterContracts: ContractsFilter = new ContractsFilter();
+  onFastAdd: EventEmitter<any> = new EventEmitter();
+  onFastEdit: EventEmitter<any> = new EventEmitter();
+  onFastRemove: EventEmitter<any> = new EventEmitter();
   constructor() { }
-
+  public fastEditContract(data) {
+    this.onFastEdit.emit(data);
+  }
+  public fastRemoveService(data) {
+    this.onFastRemove.emit(data);
+  }
+  public fastAddContract(data) {
+    this.onFastAdd.emit(data);
+  }
   public getContractsFilter() {
     return this.filterContracts;
   }

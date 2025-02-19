@@ -10,6 +10,7 @@ import * as moment from "moment";
 import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
 import { ContractsBlockTimeDefaultService } from '../../contracts-aside/class/contracts-block-time-default-service';
 import { ContractsAsideHourlyBillingDefaultServiceComponent } from '../../contracts-aside/contracts-aside-hourly-billing/contracts-aside-hourly-billing-default-service/contracts-aside-hourly-billing-default-service.component';
+import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 @Component({
   selector: 'app-contracts-aside-hourly-edit',
   templateUrl: './contracts-aside-hourly-edit.component.html',
@@ -29,6 +30,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
     private nonContractServicesService: NonContractServicesService,
+    private contractsStateService: ContractsStateService,
   ) { }
 
   ngOnInit() {
@@ -51,6 +53,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
       moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, this.contractsHourly.id, servicesName).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.contractsService.updateContract(this.contractsHourly.getDataForUpdateHourly()).subscribe(contract => {
+            this.contractsStateService.fastEditContract(contract);
             this.onClose.emit(null);
           })
         }
@@ -85,6 +88,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
     this.contractsHourly.services.forEach(item => {
       if (!item.selected) {
         this.selectAllServices = false;
+        item.validateRate = true;
       }
     })
   }

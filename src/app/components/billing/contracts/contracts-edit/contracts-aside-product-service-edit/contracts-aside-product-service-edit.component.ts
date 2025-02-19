@@ -10,6 +10,7 @@ import { ContractsOtherValidate } from '../../contracts-aside/class/contracts-ot
 import * as moment from "moment";
 import { ServiceAgreementServiceExpenses } from '../../class/service-agreement-service-expenses';
 import { ContractsOtherProduct } from '../../contracts-aside/class/contracts-other-product';
+import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 
 @Component({
   selector: 'app-contracts-aside-product-service-edit',
@@ -36,6 +37,7 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
+    private contractsStateService: ContractsStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -58,6 +60,7 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
     }
     this.onInitRequestForEdit.emit(null);
     this.contractsService.updateContract(this.contractsOther.getDataForUpdateOtherContract()).subscribe(res => {
+      this.contractsStateService.fastEditContract(res);
       this.onClose.emit(null);
     })
   }

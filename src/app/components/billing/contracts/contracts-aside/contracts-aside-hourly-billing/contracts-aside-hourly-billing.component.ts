@@ -113,6 +113,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
         if (Object.keys(data).length === 0) {
           this.onInitRequestForAdd.emit(null);
           this.contractsService.createContract(false, this.contractsHourly.getDataForCreate()).subscribe(contract => {
+            this.contractsStateService.fastAddContract(contract);
             this.onClose.emit(null);
           })
         } else {
@@ -149,6 +150,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
     this.defaultServices.forEach(item => {
       if (!item.selected) {
         this.selectAllServices = false;
+        item.validateRate = true;
       }
     })
   }

@@ -105,6 +105,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
           this.onInitRequestForEdit.emit(null);
           this.contractsService.updateContract(this.contractsBlockTime.getDataForUpdateBlockTime()).subscribe(res => {
             this.subscriptionServicesStateService.refreshServicesAgreements();
+            this.contractsStateService.fastEditContract(res);
             this.onClose.emit(null);
           })
         } else {
