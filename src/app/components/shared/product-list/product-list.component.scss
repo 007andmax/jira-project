@@ -140,8 +140,8 @@
     margin: 0 16px;
     border-bottom: 1px solid $gray-200;
 
-    .select-product__item-title ,
-    .select-product__item-title .collapsed {
+    .select-product__item-title,
+    .select-product__item-title {
       font-weight: 500;
       font-size: 14px;
       line-height: 17px;
@@ -151,6 +151,11 @@
 
       &:active {
         box-shadow: unset;
+      }
+
+      &.collapsed:hover {
+        background-color: $gray-50;
+        color: $blue-light-600;
       }
     }
   }
