@@ -27,7 +27,7 @@ export class CompanyService implements Service {
     updatedAt: number;
     versionedId: VersionedId;
     discountType: string;
-    discountAmount: string;
+    discountAmount: number;
     constructor() { }
 
 

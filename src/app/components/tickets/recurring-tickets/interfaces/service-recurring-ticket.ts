@@ -5,4 +5,6 @@ export class ServiceRecurringTicket {
     service: Service;
     duration: number;
     serviceDescription: string;
+    discountAmount: number;
+    discountType: string;
 }

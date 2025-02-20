@@ -52,7 +52,7 @@ export class QuoteAdd {
         this.number = quote.number;
         this.purchaseOrder = quote.purchaseOrder;
         this.products = quote.products.map(item => new QuoteAddProduct("PERCENT", item, item.itemOrder, item.quantity, this.getMarkups(item)));
-        this.services = quote.services.map(item => new QuoteAddService(item.description, "PERCENT", item, item.itemOrder, item.quantity));
+        this.services = quote.services.map(item => new QuoteAddService(item.description, "PERCENT", item.discountAmount, item, item.itemOrder, item.quantity));
         this.note = quote.note;
         this.requestPayment = quote.requestPayment;
         this.validUntil = quote.validUntil;
@@ -122,7 +122,7 @@ export class QuoteAdd {
         this.products.push(new QuoteAddProduct("PERCENT", item, 0, 1, this.getMarkups(item)))
     }
     public addService(item) {
-        this.services.push(new QuoteAddService("", "PERCENT", item, 0, 1))
+        this.services.push(new QuoteAddService("", "PERCENT", 0, item, 0, 1))
     }
     public getMarkups(item) {
         if (item.sale > 0 && item.cost > 0) return Math.round((item.sale - item.cost) / item.cost * 100);

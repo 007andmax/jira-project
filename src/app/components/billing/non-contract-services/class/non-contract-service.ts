@@ -29,7 +29,7 @@ export class NonContractServices implements Service {
     originService: any;
     parentDefaultServiceId: string;
     discountType: string;
-    discountAmount: string;
+    discountAmount: number;
     descriptionValidate: string;
     constructor(data = null) {
         if (data) {
