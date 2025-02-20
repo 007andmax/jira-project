@@ -34,6 +34,7 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
   allUsers = [];
 
   companiesRelatedPermissions = [];
+  agreementRelatedPermissions = [];
   userRelatedPermissions = [];
   ticketRelatedPermissions = [];
   accountingRelatedPermissions = [];
@@ -54,6 +55,7 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService,
   ) {
     this.companiesRelatedPermissions = this.permissionManageService.getCompaniesRelatedPermissions();
+    this.agreementRelatedPermissions = this.permissionManageService.getAgreementRelatedPermissions();
     this.userRelatedPermissions = this.permissionManageService.getUserRelatedPermissions();
     this.ticketRelatedPermissions = this.permissionManageService.getTicketRelatedPermissions();
     this.accountingRelatedPermissions = this.permissionManageService.getAccountingRelatedPermissions();
@@ -371,6 +373,9 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
             'VIEW_PASSWORD'
           ]);
           break;
+        case 'VIEW_SERVICE_AGREEMENTS':
+          relatedPermissions = this.agreementRelatedPermissions;
+          break;
         case 'VIEW_USERS':
           relatedPermissions = this.userRelatedPermissions;
           break;
@@ -460,6 +465,11 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
     } else if (
       role.permissions.indexOf('EDIT_TICKETS') === -1 &&
       this.ticketRelatedPermissions.indexOf(permission) > -1
+    ) {
+      return true;
+    } else if (
+      role.permissions.indexOf('VIEW_SERVICE_AGREEMENTS') === -1 &&
+      this.agreementRelatedPermissions.indexOf(permission) > -1
     ) {
       return true;
     } else {

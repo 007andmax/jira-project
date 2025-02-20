@@ -157,17 +157,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
     this.recurringState.getCreateTicket().setDescription(value);
   }
-  private getServiceAgreements(id) {
-    this.contractsService.getServiceAgreementsByCompany(id).subscribe((data: any) => {
-      this.agreements = data;
-      this.areTicketsPresented = (this.agreements.length > 0) ? true : false;
-    })
-  }
-  checkServiceTerminated(service) {
-    if (!service.serviceAgreement && !service.serviceContractServiceAgreement) return false;
-    let serviceAgreement = this.agreements.find(item => service.serviceAgreement && service.serviceAgreement.id == item.id || service.serviceContractServiceAgreement && service.serviceContractServiceAgreement.id == item.id);
-    return serviceAgreement ? (serviceAgreement.status === 'EXPIRED' || serviceAgreement.status === 'TERMINATED') : false;
-  }
   /**
   * Subscribe to change description
   * @param event - description event
@@ -268,7 +257,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
       this.recurringState.setClient(selectClient);
       this.onCheckListServices();
       this.getCompanyDevices();
-      this.getServiceAgreements(this.selectedClient.id);
     }
     if (this.services[0] instanceof ForCreateService) {
 

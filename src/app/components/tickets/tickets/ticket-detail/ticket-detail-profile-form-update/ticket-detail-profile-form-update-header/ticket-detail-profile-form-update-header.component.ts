@@ -51,12 +51,6 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
     }
     this.ticketProfileFormUpdate.setShares(this.selectedUsers);
   }
-  isShowAssignedUser() {
-    if (this.tab == "SERVICE") {
-      return this.ticketStateService.isShowAddService();
-    }
-    return true;
-  }
   isSelected(data) {
     return this.ticketProfileFormUpdate.getTechUser().id === data.id;
   }

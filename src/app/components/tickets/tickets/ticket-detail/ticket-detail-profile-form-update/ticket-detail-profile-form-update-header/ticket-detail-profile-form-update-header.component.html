@@ -50,7 +50,7 @@
         ></ticket-detail-profile-form-update-visible-users>
         <div
             class="qt-button qt-button--with-icon --gray --sm pointer qt-ml-auto"
-            *ngIf="tab === 'SERVICE' && ticketStateService.isShowAddService()"
+            *ngIf="tab === 'SERVICE'"
             (click)="addService()"
         >
             <div class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-4 qt-button-icon"></div>
@@ -68,7 +68,6 @@
     <add-assigned-user-note
         #addAssignedUser
         [container]="'body'"
-        *ngIf="isShowAssignedUser()"
         [compayId]="ticketProfile.company.id"
         [type]="ticketProfileFormUpdate.noteType"
         [userList]="usersForUpdate"

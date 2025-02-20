@@ -277,7 +277,6 @@
                 ></app-product-list-quote>
                 <app-service-list-quote
                     #servicesList
-                    [isDisabled]="areTicketsPresented && areTicketsTerminated"
                     [quoteCompany]="quoteCompany"
                     (onSelect)="onAddService($event)"
                 ></app-service-list-quote>

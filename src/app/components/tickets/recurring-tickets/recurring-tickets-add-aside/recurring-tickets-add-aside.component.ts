@@ -41,8 +41,6 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public validate: Validate = new Validate();
   copy: boolean = false;
   formatDate: string = FORMAT_DATE_2;
-  areTicketsPresented: boolean = false;
-  areTicketsTerminated: boolean = false;
   @ViewChild('deviceDp', { static: false }) deviceDp: DevicesRecurringTicketsComponent;
   sub: Subscription = new Subscription();
   @ViewChild('techUsersDp', { static: false }) techUsersDp: AssignedTicketUserComponent;
@@ -268,7 +266,6 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
       this.recurringState.setClient(selectClient);
       this.onCheckListServices();
       this.getCompanyDevices();
-      this.getServiceAgreements(this.selectedClient.id);
     }
     if (this.services[0] instanceof ForCreateService) {
 
@@ -305,15 +302,6 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public getMarkups(product) {
     if (product.sale > 0 && product.cost > 0) return Math.round((product.sale - product.cost) / product.cost * 100);
     return 0;
-  }
-  private getServiceAgreements(id) {
-    this.contractsService.getServiceAgreementsByCompany(id).subscribe((data: any) => {
-      let Agreements = data;
-      this.areTicketsPresented = (Agreements.length > 0) ? true : false;
-      this.areTicketsTerminated = Agreements.every((el) => {
-        return el.status === 'EXPIRED' || el.status === 'TERMINATED'
-      })
-    })
   }
   /**
  * Subscribe to show ticker
