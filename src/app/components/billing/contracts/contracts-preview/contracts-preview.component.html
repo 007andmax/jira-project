@@ -39,21 +39,21 @@
             <button
                 class="qt-button qt-mr-12"
                 (click)="edit()"
-                *ngIf="serviceAgreement.status !== 'TERMINATED'"
+                *ngIf="getPermissions('EDIT_SERVICE_AGREEMENTS') && serviceAgreement.status !== 'TERMINATED'"
             >
                 Edit
             </button>
             <button
                 class="qt-button qt-mr-12"
                 (click)="terminateAndCopy()"
-                *ngIf="serviceAgreement.status !== 'TERMINATED'"
+                *ngIf="getPermissions('EDIT_SERVICE_AGREEMENTS') && serviceAgreement.status !== 'TERMINATED'"
             >
                 Terminate and copy
             </button>
             <button
                 class="qt-button qt-mr-12"
                 (click)="terminateAndClose()"
-                *ngIf="serviceAgreement.status !== 'TERMINATED'"
+                *ngIf="getPermissions('EDIT_SERVICE_AGREEMENTS') && serviceAgreement.status !== 'TERMINATED'"
             >
                 Terminate and close
             </button>

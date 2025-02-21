@@ -12,7 +12,7 @@ export class ContractsHourlyService {
     validateRate: boolean = true;
     parentDefaultServiceId: string;
     descriptionValidate: string;
-    "discountAmount": string;
+    "discountAmount": number;
     "discountType": string = "PERCENT";
     constructor(basedOnDefault, billable, commissionRate, id, name, rate, taxIds, parentDefaultServiceId, isAdded = false, discountAmount, discountType) {
         this.basedOnDefault = basedOnDefault;

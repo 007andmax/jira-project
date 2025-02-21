@@ -14,10 +14,7 @@ export class ContractsAsideOtherProductComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (this.product.productId.length > 0) {
-      this.editProduct = new InventoryItem(this.product);
-      this.onChangeTaxSum();
-    }
+    if (this.product.productId.length > 0) this.editProduct = new InventoryItem(this.product);
   }
   public onChangeProduct(data) {
     this.editProduct = data;

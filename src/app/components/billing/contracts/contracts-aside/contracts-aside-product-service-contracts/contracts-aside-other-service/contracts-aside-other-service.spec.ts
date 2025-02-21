@@ -41,7 +41,7 @@ describe('ContractsAsideOtherServiceComponent unit test', () => {
   it('check "service"', () => {
     const fixture = TestBed.createComponent(ContractsAsideOtherServiceComponent);
     const com = fixture.debugElement.componentInstance;
-    com.service = new ContractsOtherService(new Date().getTime(), "description", 150, "123", "test");
+    com.service = new ContractsOtherService(new Date().getTime(), "description", 150, "123", "test", 10);
     com.onChangeDurationService(60);
     expect(com.getHours()).toEqual(60);
     expect(com.getMinutes()).toEqual(0);

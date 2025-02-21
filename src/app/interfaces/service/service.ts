@@ -17,5 +17,5 @@ export interface Service {
     updatedAt: number
     versionedId: VersionedId;
     discountType: string;
-    discountAmount: string;
+    discountAmount: number;
 }

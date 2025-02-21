@@ -35,6 +35,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
   validate: ContractsBlockTimeValidate = new ContractsBlockTimeValidate();
   @Input() contractsBlockTime: ServiceAgreement = new ServiceAgreement();
   @Output() onClose = new EventEmitter<any>();
+  @Output() onInitRequestForEdit = new EventEmitter<any>();
   formatDate: string = FORMAT_DATE_2;
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';
@@ -97,12 +98,14 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
     this.taxes = taxes;
   }
   public onEdit() {
-    if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices() && !this.contractsBlockTime.checkDuplicatedServices()) return;
+    if (!this.contractsBlockTime.checkDuplicatedBlockTimeServices() || !this.contractsBlockTime.checkDuplicatedServices() || !this.validate.isValidate(this.contractsBlockTime)) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, this.contractsBlockTime.id, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
+          this.onInitRequestForEdit.emit(null);
           this.contractsService.updateContract(this.contractsBlockTime.getDataForUpdateBlockTime()).subscribe(res => {
             this.subscriptionServicesStateService.refreshServicesAgreements();
+            this.contractsStateService.fastEditContract(res);
             this.onClose.emit(null);
           })
         } else {
@@ -226,7 +229,9 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
     this.contractsBlockTime.maxRolloverHours = "";
   }
   addCustomService(data) {
+    this.validate.resetBlockTimeServices();
     this.contractsBlockTime.blockTimeServices.push(new ServiceAgreementBlockTimeServices(data.getDataFromBillableService(), true));
+    this.onCheckDuplicatedCustomService();
   }
   onRemoveDefaultService(i) {
     this.contractsBlockTime.services.splice(i, 1);

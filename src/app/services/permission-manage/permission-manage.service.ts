@@ -18,7 +18,7 @@ export class PermissionManageService {
     'CREATE_PASSWORD',
     'EDIT_PASSWORD'
   ];
-
+  agreementRelatedPermissions = ['EDIT_SERVICE_AGREEMENTS', 'DELETE_SERVICE_AGREEMENTS'];
   userRelatedPermissions = ['CREATE_USERS', 'EDIT_USERS', 'ARCHIVE_USERS'];
   ticketRelatedPermissions = ['EDIT_ANOTHER_USERS_TICKET', 'REOPEN_CLOSED_TICKETS', 'DELETE_TICKETS'];
   accountingRelatedPermissions = ['CREATE_INVOICE', 'ROLLBACK_INVOICE'];
@@ -62,8 +62,9 @@ export class PermissionManageService {
       'MANAGE_PRODUCTS',
       'VIEW_PRODUCT_COST',
       'MANAGE_SERVICES',
-      'DELETE_SERVICE_AGREEMENTS',
       'VIEW_SERVICE_AGREEMENTS',
+      'EDIT_SERVICE_AGREEMENTS',
+      'DELETE_SERVICE_AGREEMENTS',
       'VIEW_ACCOUNTING_DASHBOARD'
     ],
     Devices: ['NETWORK_SCAN_CLIENTS', 'REMOTE_CONNECTIONS', 'MODIFY_SETTINGS'],
@@ -141,7 +142,12 @@ export class PermissionManageService {
   getCompaniesRelatedPermissions() {
     return this.companiesRelatedPermissions.slice();
   }
-
+  /**
+     * permission on users
+     */
+  getAgreementRelatedPermissions() {
+    return this.agreementRelatedPermissions.slice();
+  }
   /**
    * permission on users
    */

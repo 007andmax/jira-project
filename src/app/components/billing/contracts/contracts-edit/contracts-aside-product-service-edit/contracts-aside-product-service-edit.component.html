@@ -162,23 +162,28 @@
                 </tbody>
             </table>
         </div>
-        <button
-            class="qt-button --gray --sm"
-            (click)="addProduct()"
-            *ngIf="type === 'PRODUCTS'"
-        >
-            + Add Product
-        </button>
-        <button
-            class="qt-button --gray --sm"
-            (click)="addService()"
-            *ngIf="type === 'SERVICES'"
-        >
-            + Add Service
-        </button>
-        <app-mat-error *ngIf="!validate.getServicesOrProducts()">
-            At least one {{(type === 'PRODUCTS' ? 'product' : 'service')}} should be added
-        </app-mat-error>
+        <div class="qt-pos-rel">
+            <button
+                class="qt-button --gray --sm"
+                (click)="addProduct()"
+                *ngIf="type === 'PRODUCTS'"
+            >
+                + Add Product
+            </button>
+            <button
+                class="qt-button --gray --sm"
+                (click)="addService()"
+                *ngIf="type === 'SERVICES'"
+            >
+                + Add Service
+            </button>
+            <app-mat-error
+                class="invalid-feedback error-expenses"
+                *ngIf="!validate.getServicesOrProducts()"
+            >
+                At least one {{(type === 'PRODUCTS' ? 'product' : 'service')}} should be added
+            </app-mat-error>
+        </div>
     </div>
     <div class="qt-pt-16 qt-pb-16">
         <div class="qt-df qt-jc-sb qt-ai-c">
@@ -253,7 +258,7 @@
                 </div>
                 <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
                     <div>Tax</div>
-                    <div [textContent]="contractsOther.taxSum | currency"></div>
+                    <div [textContent]="contractsOther.calculateServiceOthersTaxes() | currency"></div>
                 </div>
                 <div class="contract-total__divider qt-mt-15 qt-mb-15"></div>
                 <div class="qt-df qt-jc-sb invoice-total__total-line">

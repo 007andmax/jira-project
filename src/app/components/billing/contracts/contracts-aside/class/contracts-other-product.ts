@@ -7,12 +7,13 @@ export class ContractsOtherProduct {
     salePrice_str: string;
     taxSum: number = 0;
     taxes: Array<any> = [];
-    constructor(productId, quantity, salePrice, description) {
+    constructor(productId, quantity, salePrice, description, taxes = []) {
         this.productId = productId;
         this.quantity = quantity;
         this.salePrice = salePrice;
         this.salePrice_str = this.salePrice.toFixed(2);
         this.description = description;
+        this.taxes = taxes;
     }
     public getDataForCrate() {
         return {

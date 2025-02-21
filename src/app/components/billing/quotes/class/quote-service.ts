@@ -21,7 +21,7 @@ export class QuoteService implements Service {
     billable: boolean;
     billableQuantity: number;
     description: string;
-    discountAmount: string;
+    discountAmount: number;
     discountSum: number;
     discountType: string;
     editedExpense: boolean;
@@ -61,6 +61,7 @@ export class QuoteService implements Service {
         return {
             description: this.description,
             discountType: this.discountType,
+            discountAmount: this.discountAmount,
             item: service,
             itemOrder: this.itemOrder,
             quantity: this.quantity,

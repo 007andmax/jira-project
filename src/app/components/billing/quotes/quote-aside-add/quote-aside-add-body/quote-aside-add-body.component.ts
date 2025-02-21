@@ -39,8 +39,6 @@ export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
   changeGlobalNote: boolean = false;
   termsAndConditions: string;
   companies = [];
-  areTicketsPresented: boolean = false;
-  areTicketsTerminated: boolean = false;
   services: Array<Service> = [];
   sub: Subscription = new Subscription();
   constructor(private companiesState: CompaniesStateService,
@@ -95,7 +93,6 @@ export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
     if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
     this.cd.detectChanges();
     this.getServicesList();
-    this.getServiceAgreements(this.quoteCompany.id);
   }
   public onChangeQuoteNumber(data) {
     this.quote.number = data;
@@ -118,15 +115,6 @@ export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       this.onCheckValidateServicesByCompany();
     });
-  }
-  private getServiceAgreements(id) {
-    this.contractsService.getServiceAgreementsByCompany(id).subscribe((data: any) => {
-      let Agreements = data;
-      this.areTicketsPresented = (Agreements.length > 0) ? true : false;
-      this.areTicketsTerminated = Agreements.every((el) => {
-        return el.status === 'EXPIRED' || el.status === 'TERMINATED'
-      })
-    })
   }
 
   public onCheckValidateServicesByCompany() {
@@ -228,7 +216,6 @@ export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
       this.validate.resetCompany();
       //  this.servicesList.getServicesList();
       this.getServicesList();
-      this.getServiceAgreements(this.quoteCompany.id);
       this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
       if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
     } else {

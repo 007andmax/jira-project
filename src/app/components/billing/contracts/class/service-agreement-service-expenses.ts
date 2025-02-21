@@ -19,6 +19,8 @@ export class ServiceAgreementServiceExpenses {
         this.serviceExpenseDurationStart = data.serviceExpenseDurationStart;
         this.serviceId = data.serviceId;
         this.name = data.name;
+        this.taxes = data.taxes;
+        if (data) this.rate = data.rate;
     }
     public getDataForUpdate() {
         return {

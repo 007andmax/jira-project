@@ -74,6 +74,8 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
       service.selected = true;
       return service;
     });
+    this.defaultServices.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   public onInitCopy() {
     this.contractsHourly.setDataFromCopy(this.contractsStateService.getContractForCopy());
@@ -111,6 +113,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
         if (Object.keys(data).length === 0) {
           this.onInitRequestForAdd.emit(null);
           this.contractsService.createContract(false, this.contractsHourly.getDataForCreate()).subscribe(contract => {
+            this.contractsStateService.fastAddContract(contract);
             this.onClose.emit(null);
           })
         } else {
@@ -147,6 +150,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
     this.defaultServices.forEach(item => {
       if (!item.selected) {
         this.selectAllServices = false;
+        item.validateRate = true;
       }
     })
   }
@@ -156,6 +160,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
   onAddService(data) {
     this.defaultServices.push(new DefaultServicesHourlyContract(data));
     this.showAddService = false;
+    console.log("this.defaultServices", this.defaultServices);
   }
   onSelectCompany(data) {
     this.contractsHourly.setCompanyId((data) ? data.id : null);

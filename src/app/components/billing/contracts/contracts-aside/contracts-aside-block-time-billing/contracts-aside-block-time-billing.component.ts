@@ -162,6 +162,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
         if (Object.keys(data).length === 0) {
           this.onInitRequestForAdd.emit(null);
           this.contractsService.createContract(createBillableItem, this.contractsBlockTime.getDataForCreate()).subscribe(res => {
+            this.сontractsStateService.fastAddContract(res);
             this.onClose.emit(null);
           })
         } else {

@@ -4,7 +4,7 @@
 >
     <div
         class="contracts-table__company"
-        [textContent]="contract.company.name"
+        [textContent]="contract.companyName"
         (click)="preview()"
     ></div>
     <div
@@ -97,7 +97,7 @@
             <li
                 class="pointer"
                 ngbDropdownItem
-                [hidden]="contract.status == 'TERMINATED' || contract.status == 'EXPIRED' || contract.type == 'HOURLY'"
+                [hidden]="!getPermissions('EDIT_SERVICE_AGREEMENTS') || contract.status == 'TERMINATED' || contract.status == 'EXPIRED' || contract.type == 'HOURLY'"
                 (click)="forceCreate()"
             >
                 <div class="qt-icon icon__force-create qt-sz-20 qt-mr-12"></div>
@@ -107,7 +107,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="editContract()"
-                *ngIf="contract.status !== 'TERMINATED'"
+                *ngIf="getPermissions('EDIT_SERVICE_AGREEMENTS') && contract.status !== 'TERMINATED'"
             >
                 <div class="qt-icon icon__edit qt-sz-20 qt-mr-12"></div>
                 Edit contract
@@ -116,7 +116,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="terminateContract()"
-                *ngIf="contract.status !== 'TERMINATED'"
+                *ngIf="getPermissions('EDIT_SERVICE_AGREEMENTS') && contract.status !== 'TERMINATED'"
             >
                 <div class="qt-icon icon__block qt-sz-20 qt-mr-12"></div>
                 Terminate

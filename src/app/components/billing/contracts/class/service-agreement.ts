@@ -52,6 +52,8 @@ export class ServiceAgreement {
             this.services.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
                 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
             this.blockTimeServices = data.blockTimeServices.map(item => new ServiceAgreementBlockTimeServices(item));
+            this.blockTimeServices.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+                1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
             this.serviceContractServicesToTrack = data.serviceContractServicesToTrack.map(item => new ServiceAgreementBlockTimeServices(item));
             this.serviceContractServices = data.serviceContractServices.map(item => new ServiceAgreementBlockTimeServices(item))
             this.maxRolloverHours = (data.maxRolloverHours) ? String(data.maxRolloverHours) : "";
@@ -59,10 +61,20 @@ export class ServiceAgreement {
             this.blockRate = (typeof data.blockRate === "number") ? String(data.blockRate) : "";
             this.blockRate_str = parseFloat(this.blockRate).toFixed(2);
             this.rateExceeding_str = parseFloat(this.rateExceeding).toFixed(2);
-            this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice, item.description));
+            this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice, item.description, item.taxes));
             this.serviceExpenses = data.serviceExpenses.map(item => new ServiceAgreementServiceExpenses(item));
+            this.productExpenses.forEach(item => this.onCalculateTaxSumForProductExpenses(item));
+            this.serviceExpenses.forEach(item => this.onCalculateTaxSumForServiceExpenses(item));
             this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));
         }
+    }
+    public onCalculateTaxSumForServiceExpenses(service) {
+        let rate = service.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+        service.taxSum = service.rate * service.quantity * rate / 100;
+    }
+    public onCalculateTaxSumForProductExpenses(product) {
+        let rate = product.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+        product.taxSum = product.salePrice * product.quantity * rate / 100;
     }
     public setManualCreateBillableItem(data) {
         this.manualCreateBillableItem = data;
