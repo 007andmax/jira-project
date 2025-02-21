@@ -417,7 +417,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
         this.recurringState.getCreateTicket().clearProducts();
       }
     }
-    this.services.filter((item: ForCreateService) => item.versionedId).forEach(item => this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration, item.discountType, item.discountAmount)));
+    this.services.filter((item: ForCreateService) => item.versionedId).forEach(item => this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration, item.discountAmount)));
     if (this.ticketForEdit && this.ticketForEdit.id) {
 
       this.recurringState.getCreateTicket().checkForEdit(this.ticketForEdit);
