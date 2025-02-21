@@ -106,7 +106,6 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     if (this.contractsUserDevice.invoiceAsSingleItem) this.taxesServicesDP.setEditItems(taxes);
   }
   public onEdit() {
-    console.log("this.validate", this.validate);
     if (!this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.checkDuplicatedServiceContractServices()
       || !this.contractsUserDevice.checkDuplicatedServices() || !this.validate.isValidate(this.contractsUserDevice)) {
       this.cd.detectChanges();

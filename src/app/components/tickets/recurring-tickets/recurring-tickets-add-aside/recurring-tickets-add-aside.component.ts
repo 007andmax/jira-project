@@ -340,7 +340,6 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public setService(item, index) {
     let newItem = { ...item, ...{ description: this.services[index].description, duration: (this.services[index].duration) ? this.services[index].duration : 1 } };
     // let  service = new ForCreateService(newItem);
-    console.log("newItem", newItem);
     this.services[index] = new ForCreateService(newItem);
     /*  this.services[index].setName(item.name);
       this.services[index].setVersionedId(item.setVersionedId);

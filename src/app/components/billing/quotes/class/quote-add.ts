@@ -123,7 +123,6 @@ export class QuoteAdd {
     }
     public addService(item) {
         this.services.push(new QuoteAddService("", item.discountType, item.discountAmount, item, 0, 1))
-        console.log("this.services", this.services);
     }
     public getMarkups(item) {
         if (item.sale > 0 && item.cost > 0) return Math.round((item.sale - item.cost) / item.cost * 100);

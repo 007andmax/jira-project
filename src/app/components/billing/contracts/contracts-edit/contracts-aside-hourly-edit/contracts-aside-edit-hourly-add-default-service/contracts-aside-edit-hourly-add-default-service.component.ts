@@ -56,7 +56,6 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
   selectService(data) {
     this.validate.resetDuplicateName();
     this.validate.resetValidate();
-    console.log("data", data);
     if (data) {
       this.service = new DefaultServicesHourlyContract(JSON.parse(JSON.stringify(data)));
     } else {

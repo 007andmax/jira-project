@@ -125,9 +125,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.setCronForEdit(data.cronExpression);
     this.onChangeCron(data.cronExpression);
     this.cd.detectChanges();
-    console.log("data", data);
-    console.log("this.services", this.services);
-
   }
 
   /**
@@ -297,7 +294,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
  */
   public setService(item, index) {
     let newItem = { ...item, ...{ description: this.services[index].description, duration: (this.services[index].duration) ? this.services[index].duration : 1 } };
-    console.log("newItem", newItem);
     this.services[index] = new ForCreateService(newItem);
     this.cd.detectChanges();
   }
