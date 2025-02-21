@@ -1,3 +1,4 @@
+@import "./src/assets/styles/variable";
 
 ::ng-deep.new-quote-table__col-item {
     app-drop-down {
@@ -7,4 +8,22 @@
             z-index: 100;
         }
     }
+}
+.discount-container {
+    border: 1px solid $green-200;
+    border-radius: 4px;
+    padding: 2px 6px;
+    background-color: $green-25;
+    color: $green-700;
+    font-size: 12px;
+    height: auto;
+    line-height: 16px;
+    width: fit-content;
+    margin-left: auto;
+}
+
+.new-quote-table__col-amount {
+    width: 120px;
+    max-width: 120px;
+    text-align: right;
 }

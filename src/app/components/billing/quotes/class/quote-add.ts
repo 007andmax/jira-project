@@ -122,7 +122,8 @@ export class QuoteAdd {
         this.products.push(new QuoteAddProduct("PERCENT", item, 0, 1, this.getMarkups(item)))
     }
     public addService(item) {
-        this.services.push(new QuoteAddService("", "PERCENT", 0, item, 0, 1))
+        this.services.push(new QuoteAddService("", item.discountType, item.discountAmount, item, 0, 1))
+        console.log("this.services", this.services);
     }
     public getMarkups(item) {
         if (item.sale > 0 && item.cost > 0) return Math.round((item.sale - item.cost) / item.cost * 100);

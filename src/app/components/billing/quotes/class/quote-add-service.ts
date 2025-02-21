@@ -20,6 +20,9 @@ export class QuoteAddService {
     }
     public setItem(data) {
         this.item = data;
+        this.discountType = data.discountType;
+        this.discountAmount = data.discountAmount;
+        console.log("this.discountAmount", this.discountAmount);
     }
     public setValdiate(data) {
         this.validate = data;

@@ -42,10 +42,21 @@
         [innerHTML]="getSelectedTaxes(service.item.taxes)"
     >
     </td>
-    <td
-        class="new-quote-table__col-amount"
-        [textContent]="getPriceService(service) | currency"
-    ></td>
+    <td class="new-quote-table__col-amount">
+        {{getPriceService(service) | currency}}
+        <div
+            *ngIf="service.discountType && service.discountAmount && service.discountType == 'FIXED'"
+            class="discount-container qt-mt-4"
+        >
+            Disc: {{service.discountAmount | currency}}
+        </div>
+        <div
+            *ngIf="service.discountType && service.discountAmount && service.discountType == 'PERCENT'"
+            class="discount-container qt-mt-4"
+        >
+            Disc: {{service.discountAmount}}%
+        </div>
+    </td>
     <td>
         <div
             class="qt-icon icon__inactive qt-ic-c qt-sz-16"
