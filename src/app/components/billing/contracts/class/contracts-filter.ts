@@ -63,7 +63,7 @@ export class ContractsFilter {
     return list.filter((item) => this.checkFilterItem(item));
   }
   public checkFilterItem(item) {
-    return ((this.selectedCompany) ? item.company.id === this.selectedCompany.id : true)
+    return ((this.selectedCompany) ? item.companyId === this.selectedCompany.id : true)
       && ((this.selectedStatus) ? item.status === this.selectedStatus.status : true)
       && ((this.selectedStartDate && this.selectedEndDate) ? item.getStartDateByMilliseconds() >= this.selectedStartDate && item.getStartDateByMilliseconds() <= this.selectedEndDate : true)
       && ((this.selectedType) ? item.type === this.selectedType.type && item.billType === this.selectedType.billType : true)
@@ -228,8 +228,8 @@ export class ContractsFilter {
       1 : ((b.description.toLowerCase() > a.description.toLowerCase()) ? -1 : 0));
   }
   private onFilterCompanyName(list) {
-    list.sort((a, b) => (a.company.name.toLowerCase() > b.company.name.toLowerCase()) ?
-      1 : ((b.company.name.toLowerCase() > a.company.name.toLowerCase()) ? -1 : 0));
+    list.sort((a, b) => (a.companyName.toLowerCase() > b.companyName.toLowerCase()) ?
+      1 : ((b.companyName.toLowerCase() > a.companyName.toLowerCase()) ? -1 : 0));
   }
   private clearFilter() {
     this.filter.forEach(item => item.filter = '');
