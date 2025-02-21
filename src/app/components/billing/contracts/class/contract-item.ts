@@ -3,7 +3,8 @@ import { ContractItemCompany } from './contract-item-company';
 export class ContractItem {
     amount: number;
     billType: string;
-    company: ContractItemCompany;
+    companyId: string;
+    companyName: string;
     customInterval: any;
     description: string;
     endDate: number;

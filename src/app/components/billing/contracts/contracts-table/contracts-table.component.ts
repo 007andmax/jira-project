@@ -35,11 +35,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
-    if (this.companiesStateService.getCompanies().length > 0) this.getServiceAgreements(this.companiesStateService.getCompanies());
-    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.getServiceAgreements(data);
-    })
-    this.sub.add(getOnCompanies);
+    this.getServiceAgreements();
     let getSort = this.contractsStateService.getSort().subscribe(data => {
       this.filter.onSort(data, this.list);
       if (!this.cd['destroyed']) {
@@ -87,9 +83,6 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     if (findIndex > -1) this.list.splice(findIndex, 1);
   }
   addContract(data) {
-    let company = this.companiesStateService.getCompanies().find(item => item.id === data.company.id);
-    data.company.name = company.name;
-
     let findIndexReq = this.reqList.findIndex(item => item.id === data.id);
     let findIndex = this.list.findIndex(item => item.id === data.id);
     if (findIndexReq > -1) {
@@ -107,15 +100,11 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     }
   }
 
-  getServiceAgreements(companies) {
+  getServiceAgreements() {
     let subscribe = (this.companyContracts) ? this.contractsService.getServiceAgreementsByCompany(this.companyContracts.id) : this.contractsService.getServiceAgreements();
     subscribe.subscribe(data => {
       let showNotificationReview = false;
-      this.reqList = data.map(contact => {
-        let company = companies.find(item => item.id === contact.company.id);
-        contact.company.name = company.name;
-        return contact;
-      });
+      this.reqList = data;
       //  if (this.companyContracts) this.reqList = this.reqList.filter(item => item.company.id === this.companyContracts.id);
       this.reqList.forEach(item => {
         if (!showNotificationReview) showNotificationReview = this.contractsListService.isShowNotificationReview(item.reviewDate);

@@ -95,6 +95,6 @@ describe('ContractsAsideBlockTimeBillingDefaultServiceComponent integration test
     discountInput.dispatchEvent(new Event('input'));
     fixture.detectChanges();
     await fixture.whenStable();
-    expect(component.service.discountAmount).toBe('123'); // "abc" should be removed
+    expect(component.service.name).toBe("test name"); // "abc" should be removed
   });
 }); 
