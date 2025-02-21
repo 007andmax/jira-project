@@ -475,13 +475,6 @@
     padding: 8px;
     max-height: 174px;
   }
-
-  [aria-labelledby="dropdownDuration"] {
-    padding: 0;
-  }
-  .durationoverlay__content {
-    border: unset;
-  }
 }
 ::ng-deep ticket-detail-profile-form-update .cps-block__visible-user .dropdown-menu {
   max-height: 212px;
