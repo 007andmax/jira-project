@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FileManagerCategory } from '../class/file-manager-category';
 import { FileManagerFile } from '../class/file-manager-file';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
@@ -10,6 +10,7 @@ import { FileManagementStateService } from 'src/app/states/file-management/file-
 import { FileManagementRealTimeService } from 'src/app/states/file-management/file-management-real-time.service';
 import * as moment from "moment";
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-file-manager-file-info',
@@ -33,6 +34,8 @@ export class FileManagerFileInfoComponent implements OnInit, OnDestroy {
     public fileManagementRealTimeService: FileManagementRealTimeService,
     public cd: ChangeDetectorRef,
     public ticketsService: TicketsService,
+    private toastrService: ToastrService,
+    public elRef: ElementRef
   ) { }
 
   ngOnInit() {
@@ -151,5 +154,57 @@ export class FileManagerFileInfoComponent implements OnInit, OnDestroy {
       e.initEvent('click', true, true);
       link.dispatchEvent(e);
     })
+  }
+  public initUploadFiles() {
+    this.elRef.nativeElement.querySelector('#fileDropRef').click()
+  }
+  fileBrowseHandler(files) {
+    this.prepareFilesList(files);
+  }
+  prepareFilesList(files: Array<any>) {
+    this.uploadFilesSimulator(files);
+  }
+  uploadFilesSimulator(files) {
+    /*const reader = new FileReader();
+    reader.onload = () => {
+      this.files[index].src = reader.result;
+    };
+    reader.readAsDataURL(files[0]);*/
+    if (files[0].size > 15728640) {
+      this.toastrService.error(`The size is too big. You can upload a file up to 15MB in size.`);
+      return;
+    }
+    //  this.isUploading = true;
+    this.uploadFile(files[0]).then((data: any) => {
+      let response = JSON.parse(data.response);
+      this.file.mediaFileId = response.id;
+      this.fileManagementService.editFile(this.file.id, this.file.getDataForUpate(true)).subscribe(res => {
+        this.fileManagementStateService.editFile(res);
+      })
+      //  this.isUploading = false;
+    }, err => {
+      //  this.isUploading = false;
+    });
+
+  }
+  uploadFile(file) {
+    return new Promise((resolve, reject) => {
+      var fd = new FormData();
+      fd.append("file", file);
+      var xhr = new XMLHttpRequest();
+      xhr.addEventListener("load", (event) => {
+        if (xhr.status == 200) resolve(xhr);
+        if (xhr.status != 200) reject(JSON.parse(xhr.response));
+      }, false);
+
+      xhr.upload.onprogress = (event) => {
+        file.progress = Math.round((event.loaded / event.total) * 100);
+      }
+      xhr.addEventListener("error", (error) => {
+        reject(error);
+      }, false);
+      xhr.open("POST", "/file?isAvatar=false&attachmentType=FILE_MANAGEMENT");
+      xhr.send(fd);
+    });
   }
 }
