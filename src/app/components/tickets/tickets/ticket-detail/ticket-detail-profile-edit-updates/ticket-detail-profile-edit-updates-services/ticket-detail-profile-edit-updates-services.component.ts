@@ -153,7 +153,6 @@ export class TicketDetailProfileEditUpdatesServicesComponent implements OnInit, 
   }
   ngOnInit() {
     this.service = new TicketProfileService(this.update.services[0]);
-    console.log("this.service", this.service);
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.getServices();
     let getOnGetServicesList = this.ticketStateService.getOnGetServicesList().subscribe(data => {
