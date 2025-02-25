@@ -169,6 +169,10 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     });
     this.sub.add(stompClient);
+    let onFastEdit = this.usersStateService.onFastEdit.subscribe(res => {
+      this.cd.detectChanges();
+    })
+    this.sub.add(onFastEdit);
   }
   delete() {
     if (this.user.customerCompaniesInfo.find(item => item.isPrimaryContact)) {

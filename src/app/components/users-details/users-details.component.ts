@@ -96,6 +96,7 @@ export class UsersDetailsComponent implements OnInit {
   onUpdateUser(data) {
     this.user.onEdit(new User(data));
     this.leftPanel.updateForm();
+    this.cd.detectChanges();
   }
   getColors() {
     if (this.ticketsStateService.getListStatusColor().length === 0) {
