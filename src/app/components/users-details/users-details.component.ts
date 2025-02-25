@@ -94,7 +94,7 @@ export class UsersDetailsComponent implements OnInit {
     })
   }
   onUpdateUser(data) {
-    this.user.onEdit(new User(data.data));
+    this.user.onEdit(new User(data));
     this.leftPanel.updateForm();
   }
   getColors() {

@@ -122,7 +122,7 @@ export class WebsocketService {
     this.stompClient.onConnect = (data) => {
       //   that.subsribeToKafka();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToPermissions();
-      that.subsribeToUsers();
+      //  that.subsribeToUsers();
       that.subsribeToDevices();
       that.subsribeToCompany();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToPasswordRecods();
