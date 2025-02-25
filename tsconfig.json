@@ -10,7 +10,7 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "downlevelIteration": true,
-    "target": "es5",
+    "target": "es2015",
     "module": "esnext",
     "types": [
       "node"
