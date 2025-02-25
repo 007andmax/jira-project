@@ -181,6 +181,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
     this.addBtn.setDisabled(true);
     this.usersService.addUser(this.user.getUserForAdd()).subscribe(data => {
       this.addBtn.setDisabled(false);
+      this.usersStateService.fastAddUser(data);
       this.close();
 
     }, err => {

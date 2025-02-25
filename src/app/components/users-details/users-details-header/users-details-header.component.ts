@@ -52,6 +52,7 @@ export class UsersDetailsHeaderComponent implements OnInit {
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
       this.addBtn.setDisabled(false);
       this.selectedCustomerCompaniesInfo = [];
+      this.usersStateService.fastEditUser(data);
     }, err => {
       this.addBtn.setDisabled(false);
     })

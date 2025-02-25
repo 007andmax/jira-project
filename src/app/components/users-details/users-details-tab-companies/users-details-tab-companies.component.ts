@@ -37,7 +37,7 @@ export class UsersDetailsTabCompaniesComponent implements OnInit, OnDestroy {
   }
   updateUser() {
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
-
+      this.usersStateService.fastEditUser(data);
     })
   }
   ngDoCheck() {

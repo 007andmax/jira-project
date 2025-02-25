@@ -95,22 +95,26 @@ export class MarketingComponent implements OnInit {
       }
     })
     this.sub.add(getConfirm);
+    let onFastAdd = this.usersStateService.onFastAdd.subscribe(res => {
+      this.onUpdateUser(res);
+    })
+    this.sub.add(onFastAdd);
+    let onFastEdit = this.usersStateService.onFastEdit.subscribe(res => {
+      this.onUpdateUser(res);
+    })
+    this.sub.add(onFastEdit);
+    let onFastArchive = this.usersStateService.onFastArchive.subscribe(res => {
+      this.onFastArchiveUser(res);
+    })
+    this.sub.add(onFastArchive);
+    let onFastDeArchive = this.usersStateService.onFastDeArchive.subscribe(res => {
+      this.onFastDeArchiveUser(res);
+    })
+    this.sub.add(onFastDeArchive);
     let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
-      if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH") {
-        const userIndex = this.users.findIndex((item) => item.id === data.data.id);
-        if (userIndex > -1) this.users[userIndex].onUpdate(data.data);
-        if (userIndex === -1) this.users.unshift(new User(data.data));
-        if (data.action === 'USER_ARCHIVED') {
-          const userIndex = this.users.findIndex((item) => item.id === data.data.id);
-          if (userIndex > -1) this.users.splice(userIndex, 1);
-        }
-      }
-      if (data.action === 'USERS_DEARCHIVED' && data.data.accountType !== "TECH") {
-        data.data.forEach(user => {
-          const reqIndex = this.users.findIndex((item) => item.id === user.id);
-          if (reqIndex > -1) this.users[reqIndex].onUpdate(user);
-        })
-      }
+      if ((data.action === 'USER_SAVED') && data.data.accountType !== "TECH") this.onUpdateUser(data.data);
+      if (data.action === 'USER_ARCHIVED' && data.data.accountType !== "TECH") this.onFastArchiveUser(data.data);
+      if (data.action === 'USERS_DEARCHIVED' && data.data.accountType !== "TECH") this.onFastDeArchiveUser(data.data);
       if (data.action === 'USER_SUBMITTED_TICKET' && data.data.accountType !== "TECH") {
 
         const Index = this.users.findIndex((item) => item.id === data.data.id);
@@ -143,6 +147,26 @@ export class MarketingComponent implements OnInit {
     this.sub.add(onGetListCustomSubscription);
     this.cd.markForCheck();
   }
+  onUpdateUser(data) {
+    const userIndex = this.users.findIndex((item) => item.id === data.id);
+    if (userIndex > -1) this.users[userIndex].onUpdate(data);
+    if (userIndex === -1) this.users.unshift(new User(data));
+  }
+  onFastArchiveUser(data) {
+    const userIndex = this.users.findIndex((item) => item.id === data.id);
+    if (userIndex > -1) this.users[userIndex].onUpdate(data);
+    if (!this.filter.isArchive) {
+      if (userIndex > -1) this.users.splice(userIndex, 1);
+    }
+  }
+  onFastDeArchiveUser(data) {
+    data.forEach(user => {
+      if (this.filter.isArchive) {
+        const userIndex = this.users.findIndex((item) => item.id === user.id);
+        if (userIndex > -1) this.users.splice(userIndex, 1);
+      }
+    })
+  }
   onCloseFilters() {
     this.header.setToggleFilter(false);
   }
@@ -168,6 +192,10 @@ export class MarketingComponent implements OnInit {
       ids.map(item => this.usersService.onArchiveUsers(item))
     )
       .subscribe(res => {
+        res.forEach(item => {
+          this.usersStateService.fastArchiveUser(item);
+        })
+        console.log("res", res);
       });
   }
   setIdDetailUser(data) {
@@ -227,11 +255,13 @@ export class MarketingComponent implements OnInit {
   }
   private onDeArchiveUser(id) {
     let Dearchiveusers = this.usersService.onDeArchiveUsers(id).subscribe(data => {
+      this.usersStateService.fastDeArchive([data]);
     })
     this.userListService.addSubscription(Dearchiveusers);
   }
   private onArchiveUser(id) {
     let archiveUser = this.usersService.onArchiveUsers(id).subscribe(data => {
+      this.usersStateService.fastArchiveUser(data);
       if (this.filter.getClientType()) {
         let index = this.users.findIndex(item => item.id === id);
         if (index > -1) this.users.splice(index, 1);

@@ -42,6 +42,7 @@ export class CustomerPermissionsRemoveRoleComponent implements OnInit, OnDestroy
     userForUpdate.onEdit(this.usersStateService.getAllUsers().find(item => item.id == user.id));
     userForUpdate.customerCompaniesInfo = user.customerCompanyInfo;
     this.usersService.updateUser(userForUpdate.getUserForUpdate(this.usersStateService.getAllUsers().find(item => item.id == user.id))).subscribe(data => {
+      this.usersStateService.fastEditUser(data);
       //  this.close();
     })
   }

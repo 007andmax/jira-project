@@ -80,13 +80,22 @@ export class UsersDetailsComponent implements OnInit {
     this.usersStateService.onShowAddCustomerCompaniesInfo.subscribe(data => {
       this.tab = 'companies';
     })
+    let onFastEdit = this.usersStateService.onFastEdit.subscribe(res => {
+      this.onUpdateUser(res);
+    })
+    this.sub.add(onFastEdit);
+    let onFastArchive = this.usersStateService.onFastArchive.subscribe(res => {
+      this.onUpdateUser(res);
+    })
+    this.sub.add(onFastArchive);
     let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
-      if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH" && data.data.id == this.user.id) {
-        this.user.onEdit(new User(data.data));
-        this.leftPanel.updateForm();
-      }
+      if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH" && data.data.id == this.user.id) this.onUpdateUser(data.data);
       this.cd.detectChanges();
     })
+  }
+  onUpdateUser(data) {
+    this.user.onEdit(new User(data.data));
+    this.leftPanel.updateForm();
   }
   getColors() {
     if (this.ticketsStateService.getListStatusColor().length === 0) {
