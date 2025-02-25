@@ -188,7 +188,6 @@ export class CompanyUserComponent implements OnInit {
       list.map(item => this.usersService.onArchiveUsers(item.id))
     )
       .subscribe(res => {
-        console.log("res", res);
         res.forEach(item => {
           this.usersStateService.fastArchiveUser(item);
         })

@@ -195,7 +195,6 @@ export class MarketingComponent implements OnInit {
         res.forEach(item => {
           this.usersStateService.fastArchiveUser(item);
         })
-        console.log("res", res);
       });
   }
   setIdDetailUser(data) {
