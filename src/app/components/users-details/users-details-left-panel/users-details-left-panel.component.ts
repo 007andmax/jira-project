@@ -85,6 +85,9 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
     this.modelForm.controls["primaryEmail"].setValue(this.user.primaryEmail);
     this.cd.detectChanges();
   }
+  changePhoneNumber(item, event) {
+    item.controls["value"].setValue(event.target.value);
+  }
   checkEmail(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const primaryContactEmail = (control.value && control.value.match(this.reEmail));

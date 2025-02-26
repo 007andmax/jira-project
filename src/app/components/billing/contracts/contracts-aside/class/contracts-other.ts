@@ -17,7 +17,7 @@ export class ContractsOther extends ContractsUserDevice {
             this.intervalstring = (data.customInterval === 30) ? '30 days' : (data.customInterval === 15) ? '15 days' : '7 days';
         }
         this.productExpenses = data.productExpenses;
-        this.serviceExpenses = data.serviceExpenses.map(item => new ContractsOtherService(item.date, item.description, item.quantity, item.serviceId, item.name));
+        this.serviceExpenses = data.serviceExpenses.map(item => new ContractsOtherService(item.date, item.description, item.quantity, item.serviceId, item.name, item.rate));
         this.startDate = data.startDate;
         this.reviewDate = data.reviewDate;
         if (data.manualCreateBillableItem != undefined) this.manualCreateBillableItem = data.manualCreateBillableItem;
@@ -56,5 +56,15 @@ export class ContractsOther extends ContractsUserDevice {
             manualCreateBillableItem: this.manualCreateBillableItem,
             enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
         }
+    }
+    public calculateServiceTaxes() {
+        let sum = 0;
+        this.productExpenses.forEach(item => {
+            sum += item.taxSum;
+        })
+        this.serviceExpenses.forEach(item => {
+            sum += item.taxSum;
+        })
+        return sum;
     }
 }

@@ -7,9 +7,25 @@ export class DefaultServicesHourlyContract extends NonContractServices {
     selected: boolean = false;
     isCopy: boolean = false;
     rate_str: string;
+    validate: boolean = true;
+    validateRate: boolean = true;
+    "discountAmount": number;
+    "discountType": string = "PERCENT";
     constructor(data = null) {
         super(data);
         this.rate_str = this.rate.toFixed(2);
+    }
+    public getDataFromBillableService() {
+        return {
+            count: 1,
+            id: this.versionedId.id,
+            name: this.name,
+            rate: this.rate,
+            taxIds: this.taxes.map(item => item.id),
+            subscriptionService: { id: this.versionedId.id },
+            parentDefaultServiceId: this.versionedId.id,
+            basedOnDefault: true
+        }
     }
     public setDataFromCopy(data: ContractsHourlyService, taxesList: Array<Tax>) {
         this.selected = true;
@@ -23,6 +39,9 @@ export class DefaultServicesHourlyContract extends NonContractServices {
         this.taxes = taxesList.filter(item => {
             let find = data.taxIds.find(taxId => taxId === item.id);
             return (find) ? true : false;
-        })
+        });
+        this.discountAmount = data.discountAmount ? data.discountAmount : undefined;
+        this.discountType = data.discountAmount ? data.discountType : undefined;
+        this.parentDefaultServiceId = data.parentDefaultServiceId;
     }
 }

@@ -41,9 +41,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public validate: Validate = new Validate();
   copy: boolean = false;
   formatDate: string = FORMAT_DATE_2;
-  areTicketsPresented: boolean = false;
-  areTicketsTerminated: boolean = false;
-  @ViewChild('deviceDp') deviceDp: DevicesRecurringTicketsComponent;
+  @ViewChild('deviceDp', { static: false }) deviceDp: DevicesRecurringTicketsComponent;
   sub: Subscription = new Subscription();
   @ViewChild('techUsersDp') techUsersDp: AssignedTicketUserComponent;
   /**
@@ -268,7 +266,6 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
       this.recurringState.setClient(selectClient);
       this.onCheckListServices();
       this.getCompanyDevices();
-      this.getServiceAgreements(this.selectedClient.id);
     }
     if (this.services[0] instanceof ForCreateService) {
 
@@ -290,14 +287,21 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
 
   }
-  private getServiceAgreements(id) {
-    this.contractsService.getServiceAgreementsByCompany(id).subscribe((data: any) => {
-      let Agreements = data;
-      this.areTicketsPresented = (Agreements.length > 0) ? true : false;
-      this.areTicketsTerminated = Agreements.every((el) => {
-        return el.status === 'EXPIRED' || el.status === 'TERMINATED'
-      })
-    })
+  onChangeCost(val, product) {
+    let value = Number(val);
+    product.cost = value;
+    product.cost_str = value.toFixed(2);
+    //  product.markup = this.getMarkups(product);
+  }
+  onChangeSale(val, product) {
+    let value = Number(val);
+    product.sale = value;
+    product.sale_str = value.toFixed(2);
+    //product.markup = this.getMarkups();
+  }
+  public getMarkups(product) {
+    if (product.sale > 0 && product.cost > 0) return Math.round((product.sale - product.cost) / product.cost * 100);
+    return 0;
   }
   /**
  * Subscribe to show ticker
@@ -467,7 +471,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.recurringState.getCreateTicket().resetServices();
     this.createService.setRulesCreateTicket(this.recurringState.getCreateTicket());
     this.products.forEach((item: ForCreateProduct) => (item.name || item.description) && this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.versionedId.id, item.quantity, item.discount)));
-    this.services.forEach((item: ForCreateService) => (item.name) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
+    this.services.forEach((item: ForCreateService) => (item.name) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration, item.discountAmount)));
     this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {
       if (!this.copy) {
         this.close();

@@ -3,6 +3,8 @@ export class ContractsUserDeviceValidate {
     description: boolean = true;
     includedHours: boolean = true;
     rateExceeding: boolean = true;
+    serviceContractServices: boolean = true;
+    blockTimeServices: boolean = true;
     constructor() { }
 
     public resetRateExceeding() {
@@ -17,6 +19,18 @@ export class ContractsUserDeviceValidate {
     }
     public resetDescription() {
         this.description = true;
+    }
+    public resetServiceContractServices() {
+        this.serviceContractServices = true;
+    }
+    public resetBlockTimeServices() {
+        this.blockTimeServices = true;
+    }
+    public getServiceContractServices() {
+        return this.serviceContractServices;
+    }
+    public getBlockTimeServices() {
+        return this.blockTimeServices;
     }
     public getCompany() {
         return this.company;
@@ -43,6 +57,8 @@ export class ContractsUserDeviceValidate {
             if (contractsBlockTime.includedHours === "" || contractsBlockTime.includedHours === "0") this.includedHours = false;
             if (contractsBlockTime.rateExceeding !== "" && Number(contractsBlockTime.rateExceeding) === 0) this.rateExceeding = false;
         }
-        return this.company && this.description && this.includedHours && this.rateExceeding;
+        if (contractsBlockTime.serviceContractServices.length == 0) this.serviceContractServices = false;
+        if (contractsBlockTime.blockTimeServices.length == 0) this.blockTimeServices = false;
+        return this.company && this.description && this.includedHours && this.rateExceeding && this.serviceContractServices && this.blockTimeServices;
     }
 }

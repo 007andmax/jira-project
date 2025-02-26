@@ -28,12 +28,12 @@ declare var $: any;
   styleUrls: ['./accounting-settings.component.scss']
 })
 export class AccountingSettingsComponent implements OnInit, OnDestroy {
-  @ViewChild('invoiceSettings', { static: true }) invoiceSettings: InvoiceSettingsComponent;
-  @ViewChild('quotesSettings', { static: true }) quotesSettings: QuotesSettingsComponent;
-  @ViewChild('accountingYear', { static: true }) accountingYear: AccountingYearComponent;
-  @ViewChild('taxesSettings') taxesSettings: TaxesSettingsComponent;
-  @ViewChild('glNumber', { static: true }) glNumber: GlNumberSettingsComponent;
-  @ViewChild('customNotes', { static: true }) customNotes: CustomNotesSettingsComponent;
+  @ViewChild('invoiceSettings', { static: false }) invoiceSettings: InvoiceSettingsComponent;
+  @ViewChild('quotesSettings', { static: false }) quotesSettings: QuotesSettingsComponent;
+  @ViewChild('accountingYear', { static: false }) accountingYear: AccountingYearComponent;
+  @ViewChild('taxesSettings', { static: false }) taxesSettings: TaxesSettingsComponent;
+  @ViewChild('glNumber', { static: false }) glNumber: GlNumberSettingsComponent;
+  @ViewChild('customNotes', { static: false }) customNotes: CustomNotesSettingsComponent;
   loading = false;
   toggleAddTax: boolean = false;
   activeTab: string = "invoiceSettings";

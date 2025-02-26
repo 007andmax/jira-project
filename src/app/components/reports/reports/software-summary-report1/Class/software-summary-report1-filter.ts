@@ -7,7 +7,7 @@ export class SoftwareSummaryReportFilter {
     new FilterListTop("device", ""),
     new FilterListTop("companyName", ""),
   ];
-  constructor() {}
+  constructor() { }
 
   public onFilter(field, software) {
     let index = this.filterTop.findIndex((item) => item.field === field);
@@ -61,46 +61,46 @@ export class SoftwareSummaryReportFilter {
   private onFilterdevice(software) {
     software.sort((a, b) =>
       this.getVersionSoftware(a).toLowerCase() >
-      this.getVersionSoftware(b).toLowerCase()
+        this.getVersionSoftware(b).toLowerCase()
         ? 1
         : this.getVersionSoftware(b).toLowerCase() >
           this.getVersionSoftware(a).toLowerCase()
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
   }
   private getVersionSoftware(software) {
-    return software.AssetNames||'';
+    return software.AssetNames || '';
   }
 
   private onFilterPulisher(software) {
     software.sort((a, b) =>
       this.getPublisherSoftware(a).toLowerCase() >
-      this.getPublisherSoftware(b).toLowerCase()
+        this.getPublisherSoftware(b).toLowerCase()
         ? 1
         : this.getPublisherSoftware(b).toLowerCase() >
           this.getPublisherSoftware(a).toLowerCase()
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
   }
   private getPublisherSoftware(software) {
-    return software.Publisher||'';
+    return software.Publisher || '';
   }
 
   public onFilterName(software) {
     software.sort((a, b) =>
       this.getNameSoftware(a).toLowerCase() >
-      this.getNameSoftware(b).toLowerCase()
+        this.getNameSoftware(b).toLowerCase()
         ? 1
         : this.getNameSoftware(b).toLowerCase() >
           this.getNameSoftware(a).toLowerCase()
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
   }
   private getNameSoftware(software) {
-    return software.DisplayName||'';
+    return software.DisplayName || '';
   }
   public clearFilter() {
     this.filterTop.forEach((item) => (item.filter = ""));
@@ -109,16 +109,16 @@ export class SoftwareSummaryReportFilter {
   public onFilterCompanyName(software) {
     software.sort((a, b) =>
       this.getNameCompanyName(a).toLowerCase() >
-      this.getNameSoftware(b).toLowerCase()
+        this.getNameSoftware(b).toLowerCase()
         ? 1
         : this.getNameSoftware(b).toLowerCase() >
           this.getNameSoftware(a).toLowerCase()
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
   }
 
   private getNameCompanyName(software) {
-    return software.CompanyName||'';
+    return software.CompanyName || '';
   }
 }

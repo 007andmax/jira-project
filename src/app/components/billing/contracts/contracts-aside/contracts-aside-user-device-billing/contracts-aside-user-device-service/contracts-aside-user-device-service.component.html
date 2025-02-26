@@ -1,10 +1,10 @@
 <tr>
-    <td class="--editable">
+    <td class="service-name --editable">
         <app-mat-error
             class="qt-tooltip-error qt-w-auto-important"
             *ngIf="!service.validate"
         >
-            An agreement with current service name already using for current company
+            A contract with the current service exists for the current company. The contract description - "{{service.descriptionValidate}}"
         </app-mat-error>
         <app-mat-error
             class="qt-tooltip-error qt-w-auto-important"
@@ -12,14 +12,7 @@
         >
             The duplicated service name
         </app-mat-error>
-        <input
-            type="text"
-            class="qt-input-in-table"
-            [ngClass]="{'--input-error' : !service.validate || !service.validateDuplicated}"
-            [(ngModel)]="service.name"
-            (blur)="checkName()"
-            (input)="onChange()"
-        >
+        {{service.name}}
     </td>
     <td class="col-count --editable">
         <input
@@ -41,6 +34,13 @@
             #taxesDropDown
             (taxesChange)="onTaxesChange($event)"
         ></app-invoice-form-ticket-edit-taxes>
+    </td>
+    <td class="col-discount --editable">
+        <app-contracts-aside-discount
+            [service]="service"
+            class="qt-taxes-multiselect"
+            (onChange)="onChangeDiscount($event)"
+        ></app-contracts-aside-discount>
     </td>
     <td class="col-price --editable ">
         <input

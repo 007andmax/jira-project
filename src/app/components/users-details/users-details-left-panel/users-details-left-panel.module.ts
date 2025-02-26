@@ -9,6 +9,7 @@ import { CompanyTagsModule } from '../../companies/company-tags/company-tags.mod
 import { UserCustomSubscriptionModule } from '../../users/users-aside/user-custom-subscription/user-custom-subscription.module';
 import { NgxMaskModule } from 'ngx-mask';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 
 @NgModule({
   declarations: [UsersDetailsLeftPanelComponent],
@@ -22,7 +23,8 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
     ReactiveFormsModule,
     UserCustomSubscriptionModule,
     NgxMaskModule.forRoot(),
-    TextAreaModule
+    TextAreaModule,
+    KeyUpEnterModule
   ],
   exports: [UsersDetailsLeftPanelComponent]
 })

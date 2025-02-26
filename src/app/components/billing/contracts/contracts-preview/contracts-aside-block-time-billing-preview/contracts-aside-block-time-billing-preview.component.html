@@ -234,6 +234,7 @@
                 <tr>
                     <th class="track-and-bill-table__service-name">Service Name</th>
                     <th class="track-and-bill-table__billable">Billable</th>
+                    <th class="track-and-bill-table__tax">Discount</th>
                     <th class="track-and-bill-table__tax">Tax</th>
                     <th class="track-and-bill-table__hourly-rate">Hourly Rate</th>
                     <th></th>
@@ -262,6 +263,10 @@
                                 <span></span>
                             </label>
                         </td>
+                        <td
+                            class="track-and-bill-table__tax"
+                            [textContent]="getDiscount(service)"
+                        ></td>
                         <td class="track-and-bill-table__tax">
                             <span
                                 [hidden]="!service.billable"
@@ -352,12 +357,20 @@
                 <div>Review Date</div>
                 <div [textContent]="parsedateForTotal(contractsBlockTime.reviewDate)"></div>
             </div>
+            <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
+                <div>Sub Total</div>
+                <div [textContent]="contractsBlockTime.calculateTotalAmount() | currency"></div>
+            </div>
+            <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
+                <div>Tax</div>
+                <div [textContent]="contractsBlockTime.taxSum | currency"></div>
+            </div>
             <div class="contract-total__divider qt-mt-15 qt-mb-15"></div>
             <div class="qt-df qt-jc-sb invoice-total__total-line">
                 <div class="qt-fs-13 qt-fw-b">Total</div>
                 <div
                     class="qt-fs-16 qt-fw-b"
-                    [textContent]="contractsBlockTime.calculateTotalAmount() | currency"
+                    [textContent]="(contractsBlockTime.calculateTotalAmount() + contractsBlockTime.taxSum) | currency"
                 ></div>
             </div>
         </div>

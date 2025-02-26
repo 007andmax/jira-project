@@ -401,11 +401,7 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
 
   public isShowAddUpdate() {
     if (this.tab !== 'QUICK_SUPPORT') {
-      if (this.tab == 'SERVICE') {
-        return this.ticketStateService.isShowAddService();
-      } else {
-        return true;
-      }
+      return true;
     } else {
       return false;
     }

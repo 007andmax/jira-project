@@ -9,6 +9,8 @@ export class ServiceAgreementServiceExpenses {
     name: string;
     validate: boolean = true;
     validateDescription: boolean = true;
+    taxSum: number = 0;
+    taxes: Array<any> = [];
     constructor(data) {
         this.date = data.date;
         this.description = data.description;
@@ -17,6 +19,8 @@ export class ServiceAgreementServiceExpenses {
         this.serviceExpenseDurationStart = data.serviceExpenseDurationStart;
         this.serviceId = data.serviceId;
         this.name = data.name;
+        this.taxes = data.taxes;
+        if (data) this.rate = data.rate;
     }
     public getDataForUpdate() {
         return {

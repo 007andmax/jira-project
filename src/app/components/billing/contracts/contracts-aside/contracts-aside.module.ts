@@ -27,6 +27,11 @@ import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users
 import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
 import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
+import { ContractsAsideBlockTimeBillingAddSubscriptionServicesComponent } from './contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-subscription-services/contracts-aside-block-time-billing-add-subscription-services.component';
+import { ContractsAsideBlockTimeBillingAddSubscriptionServicesModule } from './contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-subscription-services/contracts-aside-block-time-billing-add-subscription-services.module';
+import { ContractsAsideDiscountComponent } from './contracts-aside-discount/contracts-aside-discount.component';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
 
 
 @NgModule({
@@ -59,7 +64,10 @@ import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.mo
         ContractsAsideOtherProductModule,
         NumberModule,
         CompanyDropDownModule,
-        MatErrorModule
+        MatErrorModule,
+        ContractsAsideBlockTimeBillingAddSubscriptionServicesModule,
+        DisabledBtnModule,
+        PreloaderTicketModule
 
     ],
     exports: [ContractsAsideComponent]

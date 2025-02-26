@@ -5,7 +5,7 @@ export class HardwareSummaryReportFilter {
     new FilterListTop("company", "ASC"),
     new FilterListTop("device", "ASC"),
   ];
-  constructor() {}
+  constructor() { }
 
   public onFilter(field, Device) {
     let index = this.filterTop.findIndex((item) => item.field === field);
@@ -41,12 +41,12 @@ export class HardwareSummaryReportFilter {
         ? 1
         : this.getNameDevice(b).toLowerCase() >
           this.getNameDevice(a).toLowerCase()
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
   }
   private getNameDevice(Device) {
-    return Device.CompanyName||'';
+    return Device.CompanyName || '';
   }
   public clearFilter() {
     this.filterTop.forEach((item) => (item.filter = ""));
@@ -58,12 +58,12 @@ export class HardwareSummaryReportFilter {
         ? 1
         : this.getDevice(b).toLowerCase() >
           this.getDevice(a).toLowerCase()
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
   }
 
   private getDevice(Device) {
-    return Device.Name||'';
+    return Device.Name || '';
   }
 }

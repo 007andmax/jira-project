@@ -25,22 +25,31 @@ export class ContractsAsideOtherProductComponent implements OnInit {
       this.product.productId = data.versionedId.id;
       this.product.validate = true;
       this.product.description = data.description;
+      this.product.taxes = data.taxes;
+      this.onChangeTaxSum();
     } else {
       this.product.quantity = 0;
       this.product.salePrice = 0;
       this.product.salePrice_str = "0.00";
       this.product.productId = "";
       this.product.description = null;
+      this.product.taxSum = 0;
+      this.product.taxes = [];
     }
-
+  }
+  public onChangeTaxSum() {
+    let rate = this.product.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+    this.product.taxSum = this.product.salePrice * this.product.quantity * rate / 100;
   }
   public onChangeQuantity(val) {
     let value = Number(val);
     this.product.quantity = value;
+    this.onChangeTaxSum();
   }
   public onChangeSalePrice(val) {
     let value = Number(val);
     this.product.salePrice = value;
+    this.onChangeTaxSum();
   }
   getSubTotal() {
     return (this.product.quantity * this.product.salePrice).toFixed(2);

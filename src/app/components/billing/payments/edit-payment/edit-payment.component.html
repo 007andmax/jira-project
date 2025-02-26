@@ -33,6 +33,8 @@
                     [editDate]="payment.createdAt"
                     [useMinDate]="false"
                     [useMaxDate]="true"
+                    [container]="'body'"
+                    [dropdownClass]="['date-picker']"
                     (onChange)="onChangeDate($event)"
                 ></app-date-picker>
             </div>

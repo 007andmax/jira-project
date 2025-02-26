@@ -40,22 +40,6 @@ export class ProductSalesReportComponent implements OnInit {
     this.headers.push("Purchase cost");
     this.headers.push("Sale price");
     this.headers.push("Discount");
-
-
-    /*this.classes.push("1");
-    if (this.productSalesReport.type === 'SUMMARY') this.classes.push("col-md-1");
-    this.classes.push("col-md-1");
-    if (this.productSalesReport.type === 'SUMMARY') {
-      this.classes.push("col-md-3");
-    }  else {
-      this.classes.push("col-md-4");
-    }
-    this.classes.push("col-md-2");
-    this.classes.push("col-md-2");
-    this.classes.push("col-md-2");
-    this.classes.push("col-md-1");
-    this.classes.push("col-md-1");*/
-
     this.productSalesReport.lines.forEach((line, index) => {
       let list = [];
       list.push(line.date);
@@ -69,13 +53,7 @@ export class ProductSalesReportComponent implements OnInit {
       list.push(`$${this.parseTotal(line.salePrice)}`);
       list.push(`$${this.parseTotal(line.discount)}`);
       this.list.push(list);
-      if (index === this.productSalesReport.lines.length - 2) {
-        this.styles.push({ 'color': line.salePrice < line.purchaseCost ? 'red' : 'none' });
-      } else if (index === this.productSalesReport.lines.length - 1) {
-        this.styles.push({ 'color': 'red' });
-      } else {
-        this.styles.push({ 'color': !line.invoiceNumber ? 'red' : 'none' });
-      }
+      this.styles.push({ 'color': !line.invoiceNumber ? 'red' : 'none' });
     })
     let list = [];
     for (let i = 0; i < ((this.productSalesReport.type === 'SUMMARY') ? 6 : 5); i++) {

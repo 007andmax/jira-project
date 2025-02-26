@@ -1,0 +1,38 @@
+<div
+    class="add-service-container qt-pos-rel"
+    ngbDropdown
+    placement="bottom-left"
+>
+    <button
+        class="qt-button --gray --sm"
+        id="dropdownBasic2"
+        ngbDropdownToggle
+    >
+        + Add Service
+    </button>
+    <app-mat-error
+        class="invalid-feedback"
+        *ngIf="showError"
+    >
+        Please add at least one service to create a new contract
+    </app-mat-error>
+    <ul
+        class="qt-dropdown-menu list-services --open-bot"
+        ngbDropdownMenu
+        aria-labelledby="dropdownBasic2"
+    >
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="subscriptionServices"
+            let-i="index"
+        >
+            <li
+                class="pointer"
+                ngbDropdownItem
+                [textContent]="item.name"
+                (click)="select(item)"
+            ></li>
+        </ng-template>
+    </ul>
+</div>

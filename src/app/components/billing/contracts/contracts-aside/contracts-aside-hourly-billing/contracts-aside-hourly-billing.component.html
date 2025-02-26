@@ -2,6 +2,7 @@
     <app-contracts-aside-top
         #topContract
         [validateCompany]="validate.company"
+        [validateServicesDate]="validate.date"
         (onSelectCompany)="onSelectCompany($event)"
         [selectedType]="selectedType"
     ></app-contracts-aside-top>
@@ -44,6 +45,7 @@
                 type="text"
                 [(ngModel)]="contractsHourly.description"
                 (input)="onChangeDescription()"
+                maxlength="255"
             >
             <app-mat-error
                 class="invalid-feedback"
@@ -91,6 +93,11 @@
                         ></div>
                     </div>
                 </th>
+                <th class="service-table__discount">
+                    <div class="qt-df qt-ai-c qt-jc-fe">
+                        <div>Discount</div>
+                    </div>
+                </th>
                 <th class="service-table__tax">
                     <div class="qt-df qt-ai-c qt-jc-fe">
                         <div>Tax</div>
@@ -126,6 +133,7 @@
                 [ngForTrackBy]="trackById"
             >
                 <app-contracts-aside-hourly-billing-default-service
+                    #serviceItem
                     (onSelectService)="onSelectService()"
                     [defaultService]="item"
                 ></app-contracts-aside-hourly-billing-default-service>

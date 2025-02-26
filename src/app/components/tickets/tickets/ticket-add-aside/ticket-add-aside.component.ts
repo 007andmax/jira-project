@@ -38,8 +38,8 @@ import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-c
   styleUrls: ['./ticket-add-aside.component.scss']
 })
 export class TicketAddAsideComponent implements OnInit, OnDestroy {
-  @ViewChild('userDP', { static: true }) userDP: CompanyUsersDropDownComponent;
-  @ViewChild('techUserDP') techUserDP: DropDownComponent;
+  @ViewChild('userDP', { static: false }) userDP: CompanyUsersDropDownComponent;
+  @ViewChild('techUserDP', { static: false }) techUserDP: DropDownComponent;
   @ViewChild('deviceDP', { static: true }) deviceDP: DropDownComponent;
   @ViewChild('uplaodFile', { static: true }) uplaodFile: UploadAreaComponent;
   @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
@@ -158,7 +158,6 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
 
       });
     }
-    this.toggleAddCompany = false;
     this.selectedCustomerCompany = null;
     this.selectedCompany = null;
     this.ticketAdd = new TicketAdd();
@@ -169,6 +168,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     if (this.userDP) this.userDP.clearClient();
     if (this.clientUserDP) this.clientUserDP.clearWithOutChanges();
     if (this.techUserDP) this.techUserDP.clearClient();
+    this.toggleAddCompany = false;
     this.opened = false;
 
     this.uplaodFile.onClearState();
@@ -330,7 +330,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   onGetDevices() {
     this.ticketAdd.setPreloaderDevices(true);
     this.devicesService.getCompanyDevices(this.selectedCompany.id).subscribe((data: any) => {
-      this.devices = (data[this.selectedCompany.id]) ? JSON.parse(JSON.stringify(data[this.selectedCompany.id])).filter(item => !item.isCustom).map(item => new Device(item)) : [];
+      this.devices = (data && data[this.selectedCompany.id]) ? JSON.parse(JSON.stringify(data[this.selectedCompany.id])).filter(item => !item.isCustom).map(item => new Device(item)) : [];
       this.devices.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
         1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
       this.ticketAdd.setPreloaderDevices(false);

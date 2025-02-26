@@ -5,12 +5,15 @@ export class ContractsOtherProduct {
     salePrice: number;
     validate: boolean = true;
     salePrice_str: string;
-    constructor(productId, quantity, salePrice, description) {
+    taxSum: number = 0;
+    taxes: Array<any> = [];
+    constructor(productId, quantity, salePrice, description, taxes = []) {
         this.productId = productId;
         this.quantity = quantity;
         this.salePrice = salePrice;
         this.salePrice_str = this.salePrice.toFixed(2);
         this.description = description;
+        this.taxes = taxes;
     }
     public getDataForCrate() {
         return {

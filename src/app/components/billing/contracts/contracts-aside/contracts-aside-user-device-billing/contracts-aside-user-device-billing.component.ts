@@ -28,6 +28,7 @@ import { ContractsAsideUserDeviceServiceComponent } from './contracts-aside-user
   providers: [ContractsListService]
 })
 export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestroy {
+  @Output() onInitRequestForAdd = new EventEmitter<any>();
   @ViewChild('taxes', { static: true }) taxesDP: TaxesComponent;
   @ViewChild('taxesServices', { static: true }) taxesServicesDP: TaxesComponent;
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
@@ -77,8 +78,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
       this.onCheckServicesForAdd(data);
     })
     this.sub.add(getConfirm);
-    this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(1, "Managed workstations", 0, this.defaultSelectedTax.map(item => item.id)),
-    new ContractsUserDeviceService(1, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))]
     if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();
   }
   public onInitCopy() {
@@ -121,22 +120,33 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, null, this.contractsUserDevice.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
+          this.onInitRequestForAdd.emit(null);
           this.contractsService.createContract(createBillableItem, this.contractsUserDevice.getDataForCreate(this.toggleMaximumAmountHours)).subscribe(res => {
+            this.сontractsStateService.fastAddContract(res);
             this.onClose.emit(null);
           })
         } else {
           let names = Object.keys(data);
           this.contractsUserDevice.blockTimeServices.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
           this.contractsUserDevice.services.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
           this.contractsUserDevice.serviceContractServices.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
         }
       }, err => {
@@ -144,7 +154,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
       })
   }
   onCheckDuplicatedServices() {
-    if (this.contractsUserDevice.services.length === 0 || !this.contractsUserDevice.checkDuplicatedServices() || !this.contractsUserDevice.companyId) return;
+    if (this.contractsUserDevice.services.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeAndTrackServices() || !this.contractsUserDevice.companyId) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, null, this.contractsUserDevice.getServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
@@ -162,14 +172,17 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
       })
   }
   onCheckDuplicatedBlockTimeServices() {
-    if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.companyId) return;
+    if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeAndTrackServices() || !this.contractsUserDevice.companyId) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, null, this.contractsUserDevice.getBlockTimeServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
           this.contractsUserDevice.blockTimeServices.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
         }
       }, err => {
@@ -184,7 +197,10 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
           let names = Object.keys(data);
           this.contractsUserDevice.serviceContractServices.forEach(item => {
             let find = names.find(name => name === item.name);
-            if (find) item.validate = false;
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
         }
       }, err => {
@@ -194,9 +210,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   onSetServiceContractServicesType(event, type) {
     if (event.target.checked) {
       this.contractsUserDevice.billType = type;
-      if (type === "DEVICE") this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(1, "Managed workstations", 0, this.defaultSelectedTax.map(item => item.id)),
-      new ContractsUserDeviceService(1, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))];
-      if (type === "USER") this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(1, "Managed users", 0, this.defaultSelectedTax.map(item => item.id))];
     }
   }
   onServiceTaxesChange(data) {
@@ -233,11 +246,15 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   onTaxesChange(data) {
     this.contractsUserDevice.setTaxIds(data.map(item => item.id));
   }
-  addBlockTimeService() {
-    this.contractsUserDevice.blockTimeServices.push(new ContractsBlockTimeService("", 0));
+  addBlockTimeService(data) {
+    this.validate.resetBlockTimeServices();
+    this.contractsUserDevice.blockTimeServices.push(new ContractsBlockTimeService(data.name, data.rate, data.versionedId.id));
+    this.onCheckDuplicatedBlockTimeServices();
   }
-  addServiceContractService() {
-    this.contractsUserDevice.serviceContractServices.push(new ContractsUserDeviceService(1, "", 0, this.defaultSelectedTax.map(item => item.id)));
+  addServiceContractService(item) {
+    this.validate.resetServiceContractServices();
+    this.contractsUserDevice.serviceContractServices.push(new ContractsUserDeviceService(1, item.name, item.rate, item.taxIds, { id: item.id }));
+    this.onCheckDuplicatedServiceContractServices();
   }
   onRemoveServices(i) {
     this.contractsUserDevice.services.splice(i, 1);
@@ -300,6 +317,9 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   }
   public trackById(index, item) {
     return item.id;
+  }
+  public trackByServiceContractServicesId(index, item) {
+    return item.subscriptionService.id;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

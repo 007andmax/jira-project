@@ -1,10 +1,12 @@
 export class CreateRecurringTicketsService {
-    serviceId:string;
+    serviceId: string;
     description: string;
     duration: number;
-    constructor (serviceId,description,duration) {
+    discount: number;
+    constructor(serviceId, description, duration, discountAmount) {
         this.serviceId = serviceId;
         this.description = description;
         this.duration = duration;
+        this.discount = discountAmount;
     }
 }

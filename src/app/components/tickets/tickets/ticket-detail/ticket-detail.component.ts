@@ -156,7 +156,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
         this.updateListAssignedUser();
         this.updateLisUpdateUser();
-        this.ticketTags.setSelectedTags(ticket.tags);
+        if (this.ticketTags) this.ticketTags.setSelectedTags(ticket.tags);
         this.changeCompany.selectItemWithOutChanges(this.companiesStateService.getCompanies().find(item => item.id == this.ticketProfile.companyId));
         if (isChangeCompany && this.ticketProfile.createdUser && !this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getPasswordsDocuments(this.ticketProfile.createdUser.id);
         if (isChangeUser && !this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getDevicesByCompany(this.ticketProfile.company.id);
@@ -167,10 +167,11 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
           if (this.documentsRecordDetail) this.documentsRecordDetail.initDefaultPasswordRecordList();
           if (this.ticketsDetailList) this.ticketsDetailList.initDefaultTicketsList();
           this.ticketStateService.getServicesList(this.ticketProfile);
-          let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
-          if (user) this.ticketProfile.setSelectedCustomerCompany(user.customerCompaniesInfo.find(item => item.companyId == this.ticketProfile.companyId));
+          if (this.ticketProfile.createdUser) {
+            let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
+            if (user) this.ticketProfile.setSelectedCustomerCompany(user.customerCompaniesInfo.find(item => item.companyId == this.ticketProfile.companyId));
+          }
         }
-
       }
       this.cd.detectChanges();
     })
@@ -350,8 +351,10 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       if (this.ticketMessage) this.ticketMessage.reset();
       this.ticketProfileUpdates.resetShowLoadMoreUpdates();
       if (this.ticketTasks) this.ticketTasks.getTicketTasks(id);
-      let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
-      if (user) this.ticketProfile.setSelectedCustomerCompany(user.customerCompaniesInfo.find(item => item.companyId == this.ticketProfile.companyId));
+      if (this.ticketProfile.createdUser) {
+        let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
+        if (user) this.ticketProfile.setSelectedCustomerCompany(user.customerCompaniesInfo.find(item => item.companyId == this.ticketProfile.companyId));
+      }
       this.onInitRealTimes();
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();

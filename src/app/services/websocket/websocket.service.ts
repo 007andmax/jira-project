@@ -41,6 +41,7 @@ import { CustomerRoleRealTimeService } from 'src/app/states/customer-role/custom
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { DeviceTagsRealTimeService } from 'src/app/states/device-tags/device-tags-real-time.service';
 import { FileManagementRealTimeService } from 'src/app/states/file-management/file-management-real-time.service';
+import { SubscriptionServicesRealTimeService } from 'src/app/states/subscription-services/subscription-services-real-time.service';
 
 
 /**
@@ -102,7 +103,8 @@ export class WebsocketService {
     private customerRoleRealTimeService: CustomerRoleRealTimeService,
     private customerPortalStateService: CustomerPortalStateService,
     private deviceTagsRealTimeService: DeviceTagsRealTimeService,
-    private fileManagementRealTimeService: FileManagementRealTimeService
+    private fileManagementRealTimeService: FileManagementRealTimeService,
+    private subscriptionServicesRealTimeService: SubscriptionServicesRealTimeService
 
   ) {
   }
@@ -151,6 +153,7 @@ export class WebsocketService {
       that.subsribeToNoteTemplateSubscription();
       if (!that.customerPortalStateService.isCustomerPortal) that.subsribeToEmailNotification();
       that.subsribeToCustomerRole();
+      that.subsribeToSubscriptionService();
       if (data.command === "CONNECTED") this.websocketStateService.initConnection();
       that.onInit.emit(true);
       that.isInit = true;
@@ -200,6 +203,18 @@ export class WebsocketService {
         this.connect();
       }
     }, 1000);
+  }
+  private subsribeToSubscriptionService() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/subscriptionService`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.subscriptionServicesRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+
+        }
+      });
+      this.devicesStateService.initWebSocket();
+    }, 3000);
   }
   private subsribeToDevices() {
     setTimeout(() => {

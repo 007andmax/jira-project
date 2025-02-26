@@ -59,13 +59,9 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     paging: false,
     info: false
   };
-  @ViewChild("tickets", { static: true }) tickets: ElementRef;
-  @ViewChild("devicesTags", { static: true }) devicesTags: ManageTagsDevicesComponent;
-  @ViewChild("filesTags", { static: true }) filesTags: ManageTagsFilesComponent;
-  private tabSet: ViewContainerRef;
-  @ViewChild(NgbTabset, { static: true }) set content(content: ViewContainerRef) {
-    this.tabSet = content;
-  };
+  @ViewChild("tickets", { static: false }) tickets: ElementRef;
+  @ViewChild("devicesTags", { static: false }) devicesTags: ManageTagsDevicesComponent;
+  @ViewChild("filesTags", { static: false }) filesTags: ManageTagsFilesComponent;
   showPendingPreloader = false;
   container = document.body.querySelector(".main-container");
   dtTrigger = new Subject();

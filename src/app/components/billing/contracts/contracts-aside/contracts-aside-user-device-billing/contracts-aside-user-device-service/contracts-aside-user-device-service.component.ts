@@ -28,14 +28,16 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
   }
   public setSelectedTaxes(listTaxes) {
     this.taxesDropDown.setEditItems(listTaxes);
+    this.service.taxes = listTaxes;
   }
   getTaxes(taxes) {
     let listTaxes = [];
+
     this.service.taxIds.forEach(id => {
       let find = taxes.find(tax => tax.id === id);
       if (find) listTaxes.push(find);
-
     });
+    this.service.taxes = listTaxes;
     this.setSelectedTaxes(listTaxes);
   }
   onChangeCount(event) {
@@ -49,7 +51,19 @@ export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestr
   }
   onTaxesChange(data) {
     this.service.taxIds = data.map(item => item.id);
+    this.service.taxes = data;
     this.onChangeDisplayBillableTooltip();
+  }
+  ngDoCheck() {
+    this.onChangeTaxSum();
+  }
+  public onChangeTaxSum() {
+    let rate = this.service.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+    if (this.service.discountType == "PERCENT") this.service.taxSum = (this.service.count * this.service.rate * (1 - (Number(this.service.discountAmount) || 0) / 100) * rate / 100);
+    if (this.service.discountType == "FIXED") this.service.taxSum = (((this.service.count * this.service.rate) - Number(this.service.discountAmount)) * rate / 100);
+  }
+  onChangeDiscount(data) {
+    this.service.discountType = data.type;
   }
   checkName() {
     this.onCheckName.emit(null);

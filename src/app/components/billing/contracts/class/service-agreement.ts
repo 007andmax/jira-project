@@ -2,9 +2,7 @@ import { ContractsHourlyService } from '../contracts-aside/class/contracts-hourl
 import * as moment from "moment";
 import { ServiceAgreementBlockTimeServices } from './service-agreement-block-time-services';
 import { СontractsBlockTimeShare } from '../contracts-aside/class/contracts-block-time-share';
-import { v4 as uuidv4 } from 'uuid';
 import { ContractsBlockTimeDefaultService } from '../contracts-aside/class/contracts-block-time-default-service';
-
 import { ContractsOtherProduct } from '../contracts-aside/class/contracts-other-product';
 import { ServiceAgreementServiceExpenses } from './service-agreement-service-expenses';
 export class ServiceAgreement {
@@ -41,17 +39,21 @@ export class ServiceAgreement {
     enableInvoiceAutoCreate: boolean;
     blockRate_str: string;
     rateExceeding_str: string;
+    taxSum: number;
+    taxes: Array<any> = [];
     constructor(data = null) {
         if (data) {
             for (const key in data) {
                 this[key] = data[key];
             }
             this.services = data.services.map(item => {
-                return new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, item.commissionRate, item.id, item.name, item.rate, item.taxIds);
+                return new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, item.commissionRate, item.id, item.name, item.rate, item.taxIds, item.parentDefaultServiceId, false, item.discountAmount, item.discountType);
             })
             this.services.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
                 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
             this.blockTimeServices = data.blockTimeServices.map(item => new ServiceAgreementBlockTimeServices(item));
+            this.blockTimeServices.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+                1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
             this.serviceContractServicesToTrack = data.serviceContractServicesToTrack.map(item => new ServiceAgreementBlockTimeServices(item));
             this.serviceContractServices = data.serviceContractServices.map(item => new ServiceAgreementBlockTimeServices(item))
             this.maxRolloverHours = (data.maxRolloverHours) ? String(data.maxRolloverHours) : "";
@@ -59,10 +61,20 @@ export class ServiceAgreement {
             this.blockRate = (typeof data.blockRate === "number") ? String(data.blockRate) : "";
             this.blockRate_str = parseFloat(this.blockRate).toFixed(2);
             this.rateExceeding_str = parseFloat(this.rateExceeding).toFixed(2);
-            this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice, item.description));
+            this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice, item.description, item.taxes));
             this.serviceExpenses = data.serviceExpenses.map(item => new ServiceAgreementServiceExpenses(item));
+            this.productExpenses.forEach(item => this.onCalculateTaxSumForProductExpenses(item));
+            this.serviceExpenses.forEach(item => this.onCalculateTaxSumForServiceExpenses(item));
             this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));
         }
+    }
+    public onCalculateTaxSumForServiceExpenses(service) {
+        let rate = service.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+        service.taxSum = service.rate * service.quantity * rate / 100;
+    }
+    public onCalculateTaxSumForProductExpenses(product) {
+        let rate = product.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+        product.taxSum = product.salePrice * product.quantity * rate / 100;
     }
     public setManualCreateBillableItem(data) {
         this.manualCreateBillableItem = data;
@@ -121,7 +133,7 @@ export class ServiceAgreement {
         this.shares = data;
     }
     public addDefaultService(item) {
-        this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id)))
+        this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id), item.parentDefaultServiceId, true, item.discountAmount, item.discountType))
     }
     public getServiceContractServicesName() {
         return this.serviceContractServices.map(item => item.name);
@@ -245,7 +257,7 @@ export class ServiceAgreement {
             companyId: this.companyId,
             description: this.description,
             endDate: this.endDate,
-            services: this.services.filter(item => item.selected).map(item => item.getDataForCreate()),
+            services: this.services.filter(item => item.selected).map(item => item.getDataForUpdate()),
             startDate: this.startDate,
             reviewDate: this.reviewDate,
             type: this.type
@@ -257,7 +269,7 @@ export class ServiceAgreement {
             id: this.id,
             billType: this.billType,
             blockRate: (this.blockRate) ? this.blockRate : undefined,
-            blockTimeServices: (toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForUpdate()) : null,
+            blockTimeServices: (toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForUpdateSubscriptionServices()) : null,
             companyId: this.companyId,
             contractWithBlockTime: toggleMaximumAmountHours,
             customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
@@ -269,9 +281,9 @@ export class ServiceAgreement {
             rateExceeding: (this.rateExceeding && this.rateExceeding.length > 0) ? this.rateExceeding : null,
             serviceExpenses: null,
             productExpenses: null,
-            serviceContractServices: this.serviceContractServices.map(item => item.getDataForUpdate()),
-            serviceContractServicesToTrack: (!toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForUpdate()) : [],
-            services: this.services.map(item => item.getDataForCreate()),
+            serviceContractServices: this.serviceContractServices.map(item => item.getDataForUpdateContractServices()),
+            serviceContractServicesToTrack: (!toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForUpdateSubscriptionServices()) : [],
+            services: this.services.map(item => item.getDataForUpdate()),
             reviewDate: this.reviewDate,
             startDate: this.startDate,
             taxIds: (toggleMaximumAmountHours) ? this.taxIds : null,
@@ -283,7 +295,7 @@ export class ServiceAgreement {
     public getDataForUpdateBlockTime() {
         return {
             blockRate: this.blockRate,
-            blockTimeServices: this.blockTimeServices.map(item => item.getDataForUpdate()),
+            blockTimeServices: this.blockTimeServices.map(item => item.getDataForUpdateSubscriptionServices()),
             companyId: this.companyId,
             customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
             description: this.description,
@@ -294,7 +306,7 @@ export class ServiceAgreement {
             interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring : null,
             maxRolloverHours: this.maxRolloverHours,
             rateExceeding: this.rateExceeding,
-            services: this.services.map(item => item.getDataForCreate()),
+            services: this.services.map(item => item.getDataForUpdate()),
             shares: this.shares,
             startDate: this.startDate,
             taxIds: this.taxIds,
@@ -323,6 +335,22 @@ export class ServiceAgreement {
             enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
         }
     }
+    public calculateSubTotalAmountServiceContract() {
+        let sum = 0;
+        this.serviceContractServices.forEach(item => {
+            sum += (item.count * item.rate);
+        })
+        return sum;
+    };
+    public calculateTotalAmountServiceContract() {
+        let sum = 0;
+        this.serviceContractServices.forEach(item => {
+            let rate = item.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+            if (item.discountType == "PERCENT") sum += (item.count * item.rate * (1 - (Number(item.discountAmount) || 0) / 100) * (1 + rate / 100));
+            if (item.discountType == "FIXED") sum += (((item.count * item.rate) - Number(item.discountAmount)) * (1 + rate / 100));
+        })
+        return sum;
+    };
     public calculateTotalAmount() {
         let sum = 0;
         if (Number(this.includedHours) && Number(this.blockRate)) {
@@ -332,16 +360,36 @@ export class ServiceAgreement {
         }
         return sum;
     };
-    public getDefaultBlockTimeService() {
-        return {
-            basedOnDefault: true,
-            billable: true,
-            commissionRate: 0,
-            count: 0,
-            id: uuidv4(),
-            name: "",
-            rate: 0,
-            taxIds: []
-        }
+    public calculateServiceDiscount() {
+        let sum = 0;
+        this.serviceContractServices.forEach(item => {
+            if (item.discountType == "PERCENT") sum += (item.count * item.rate * (Number(item.discountAmount) || 0) / 100);
+            if (item.discountType == "FIXED") sum += (Number(item.discountAmount) || 0);
+        })
+        return sum;
     }
+    public calculateServiceTaxes() {
+        let sum = 0;
+        this.serviceContractServices.forEach(item => {
+            sum += item.taxSum;
+        })
+        return sum;
+    }
+    public calculateServiceOthersTaxes() {
+        let sum = 0;
+        this.productExpenses.forEach(item => {
+            sum += item.taxSum;
+        })
+        this.serviceExpenses.forEach(item => {
+            sum += item.taxSum;
+        })
+        return sum;
+    }
+    public calculateTotalDiscount() {
+        let sum = 0;
+        this.serviceContractServices.forEach(item => {
+            sum += item.discountSum;
+        })
+        return sum;
+    };
 }

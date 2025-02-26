@@ -28,10 +28,10 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   loading = false;
   activeTab: string = "ticketSettings";
   sub: Subscription = new Subscription();
-  @ViewChild('ticketSettings', { static: true }) ticketSettings: TicketSettingsComponent;
-  @ViewChild('ticketsStatus', { static: true }) ticketsStatus: TicketsStatusComponent;
-  @ViewChild('cannedResponses', { static: true }) cannedResponses: CannedResponsesComponent;
-  @ViewChild('ticketPriority', { static: true }) ticketPriority: TicketsPriorityComponent;
+  @ViewChild('ticketSettings', { static: false }) ticketSettings: TicketSettingsComponent;
+  @ViewChild('ticketsStatus', { static: false }) ticketsStatus: TicketsStatusComponent;
+  @ViewChild('cannedResponses', { static: false }) cannedResponses: CannedResponsesComponent;
+  @ViewChild('ticketPriority', { static: false }) ticketPriority: TicketsPriorityComponent;
   constructor(private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private ticketsService: TicketsService,

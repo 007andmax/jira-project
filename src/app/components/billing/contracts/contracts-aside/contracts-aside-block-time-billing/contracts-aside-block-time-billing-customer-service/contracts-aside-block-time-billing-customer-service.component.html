@@ -4,7 +4,7 @@
             class="qt-tooltip-error qt-w-auto-important"
             *ngIf="!service.validate"
         >
-            An agreement with current service name already using for current company
+            A contract with the current service exists for the current company. The contract description - "{{service.descriptionValidate}}"
         </app-mat-error>
         <app-mat-error
             class="qt-tooltip-error qt-w-auto-important"
@@ -12,14 +12,7 @@
         >
             The duplicated service name
         </app-mat-error>
-        <input
-            type="text"
-            class="qt-input-in-table"
-            [ngClass]="{'--input-error' : !service.validate || !service.validateDuplicated}"
-            [(ngModel)]="service.name"
-            (blur)="checkName()"
-            (input)="onChange()"
-        >
+        {{service.name}}
     </td>
     <td>
         <div

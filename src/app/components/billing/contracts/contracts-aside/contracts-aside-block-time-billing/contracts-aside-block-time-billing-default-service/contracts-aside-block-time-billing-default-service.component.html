@@ -5,7 +5,7 @@
             class="qt-tooltip-error qt-w-auto-important"
             *ngIf="!service.validate"
         >
-            The selected service is used in the contract - "{{service.descriptionValidate}}" with the same dates.
+            A contract with the current service exists for the current company. The contract description - "{{service.descriptionValidate}}"
         </app-mat-error>
         <app-mat-error
             class="qt-tooltip-error qt-w-auto-important"
@@ -19,29 +19,54 @@
             <input
                 type="checkbox"
                 [(ngModel)]="service.billable"
+                (change)="onChangeBillable($event)"
             >
             <span></span>
         </label>
     </td>
+    <td class="track-and-bill-table__discount --editable">
+        <div class="qt-df">
+            <input
+                type="text"
+                class="qt-input-in-table qt-text-right"
+                decimalNumber
+                placeholder="0.00"
+                [defaultValue]="''"
+                [value]="service.discountAmount ? service.discountAmount : ''"
+                (onChange)="onChangeDiscountAmount($event)"
+                [disabled]="!service.billable"
+            >
+            <input
+                type="text"
+                value="%"
+                autocomplete="new-password"
+                readonly
+                placeholder="Discount"
+                id="dropdownTypeTaxes"
+                class="qt-input-block__input"
+                [disabled]="!service.billable"
+            >
+        </div>
+    </td>
     <td class="track-and-bill-table__tax --editable">
         <app-taxes
-            [hidden]="!service.billable"
             class="qt-taxes-multiselect"
             #taxesDropDown
             [isLabel]="false"
             [isAdd]="false"
+            [isDisabled]="!service.billable"
             (taxesChange)="onTaxesChange($event)"
         ></app-taxes>
     </td>
     <td class="track-and-bill-table__hourly-rate --editable">
         <input
-            *ngIf="service.billable"
             class="payment-input qt-input-in-table"
             number
             [money]="true"
             [ngModel]="service.rate_str"
             (ngModelChange)="onChangeRate($event)"
             appToFixed
+            [disabled]="!service.billable"
         >
     </td>
     <td>

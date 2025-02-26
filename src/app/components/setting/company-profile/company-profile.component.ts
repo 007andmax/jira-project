@@ -24,9 +24,9 @@ declare var $: any;
 export class CompanyProfileComponent implements OnInit, OnDestroy {
   tabSet: string = "tab1";
   public loading = true;
-  @ViewChild('workspace', { static: true }) workspace: CompanyProfileWorkspaceComponent;
-  @ViewChild('profile', { static: true }) profile: CompanyProfileProfileComponent;
-  @ViewChild('operationalhours', { static: true }) operationalhours: CompanyProfileOperationalHoursComponent;
+  @ViewChild('workspace', { static: false }) workspace: CompanyProfileWorkspaceComponent;
+  @ViewChild('profile', { static: false }) profile: CompanyProfileProfileComponent;
+  @ViewChild('operationalhours', { static: false }) operationalhours: CompanyProfileOperationalHoursComponent;
   sub: Subscription = new Subscription();
   constructor(
     private companyProfileService: CompanyProfileService,

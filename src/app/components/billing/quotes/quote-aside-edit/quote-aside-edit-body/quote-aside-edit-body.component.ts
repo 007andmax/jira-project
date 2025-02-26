@@ -36,8 +36,6 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
   quote: QuoteEdit;
   changeGlobalNote: boolean = false;
   companies = [];
-  areTicketsPresented: boolean = false;
-  areTicketsTerminated: boolean = false;
   sub: Subscription = new Subscription();
   constructor(private quoteStateService: QuoteStateService,
     private companiesState: CompaniesStateService,
@@ -86,19 +84,9 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
         this.servicesList.getServicesList();
         this.onStopPreloader.emit(null);
         this.elRef.nativeElement.querySelector("#description-global-note").value = this.quote.termsAndConditions;
-        this.getServiceAgreements(this.quote.company.id);
       })
     })
     this.sub.add(getOnEdit);
-  }
-  private getServiceAgreements(id) {
-    this.contractsService.getServiceAgreementsByCompany(id).subscribe((data: any) => {
-      let Agreements = data;
-      this.areTicketsPresented = (Agreements.length > 0) ? true : false;
-      this.areTicketsTerminated = Agreements.every((el) => {
-        return el.status === 'EXPIRED' || el.status === 'TERMINATED'
-      })
-    })
   }
   public resetQuote() {
     this.quote = null;

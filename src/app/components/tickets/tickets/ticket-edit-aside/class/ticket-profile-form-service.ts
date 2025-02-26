@@ -4,7 +4,6 @@ export class TicketProfileFormService {
     completed: boolean = true;
     date: number = new Date().getTime();
     description: string = "";
-    discountType: "PERCENT"
     durationEnd: number;
     durationStart: number;
     item: Service;
@@ -107,7 +106,7 @@ export class TicketProfileFormService {
             completed: this.completed,
             date: this.date,
             description: this.description,
-            discountType: this.discountType,
+            discountType: this.item.discountType,
             durationEnd: this.durationEnd,
             durationStart: this.durationStart,
             item: {
@@ -117,7 +116,8 @@ export class TicketProfileFormService {
             quantity: this.quantity,
             user: {
                 id: techUser.id
-            }
+            },
+            discountAmount: this.item.discountAmount
         }
     }
 }

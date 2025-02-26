@@ -4,6 +4,7 @@ import { ServiceAgreement } from '../../components/billing/contracts/class/servi
 import { NonContractServices } from '../../components/billing/non-contract-services/class/non-contract-service';
 import { Company } from '../../interfaces/company/company';
 import { ContractsFilter } from 'src/app/components/billing/contracts/class/contracts-filter';
+import { SubscriptionServices } from 'src/app/components/billing/subscription-services/class/subscription-services';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class ContractsStateService {
   contractForDelete: ContractItem;
   contractForCopy: ServiceAgreement;
   defaultServices: Array<NonContractServices> = [];
+  subscriptionServices: Array<SubscriptionServices> = [];
   onFilter: EventEmitter<any> = new EventEmitter();
   onShowNotificationReview: EventEmitter<any> = new EventEmitter();
   onSort: EventEmitter<any> = new EventEmitter();
@@ -22,11 +24,23 @@ export class ContractsStateService {
   onToggleEdit: EventEmitter<any> = new EventEmitter();
   onChangeType: EventEmitter<any> = new EventEmitter();
   onDefaultServices: EventEmitter<any> = new EventEmitter();
+  onSubscriptionServices: EventEmitter<any> = new EventEmitter();
   onConfirm: EventEmitter<any> = new EventEmitter();
   productList = [];
   filterContracts: ContractsFilter = new ContractsFilter();
+  onFastAdd: EventEmitter<any> = new EventEmitter();
+  onFastEdit: EventEmitter<any> = new EventEmitter();
+  onFastRemove: EventEmitter<any> = new EventEmitter();
   constructor() { }
-
+  public fastEditContract(data) {
+    this.onFastEdit.emit(data);
+  }
+  public fastRemoveService(data) {
+    this.onFastRemove.emit(data);
+  }
+  public fastAddContract(data) {
+    this.onFastAdd.emit(data);
+  }
   public getContractsFilter() {
     return this.filterContracts;
   }
@@ -87,6 +101,13 @@ export class ContractsStateService {
   public setDefaultService(data) {
     this.defaultServices = data;
     this.onDefaultServices.emit(data);
+  }
+  public getSubscriptionServices() {
+    return this.subscriptionServices;
+  }
+  public setSubscriptionServices(data) {
+    this.subscriptionServices = data;
+    this.onSubscriptionServices.emit(data);
   }
   public getOnDefaultServices() {
     return this.onDefaultServices;

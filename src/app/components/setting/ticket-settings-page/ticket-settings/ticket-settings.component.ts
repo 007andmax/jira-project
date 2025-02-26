@@ -21,7 +21,7 @@ export class TicketSettingsComponent implements OnInit, OnDestroy {
   new CompanySetting('15 minutes', 'FIFTEEN_MINUTES')];
   timepickerTypes = [new CompanySetting('Start-End time picker', 'TIME_PICKER'),
   new CompanySetting('Duration picker', 'DURATION_PICKER')];
-  @ViewChild('intervalsDp', { static: true }) intervalsDp: DropDownComponent;
+  @ViewChild('intervalsDp', { static: false }) intervalsDp: DropDownComponent;
   loading = true;
   submitted = false;
   used = false;
@@ -29,7 +29,6 @@ export class TicketSettingsComponent implements OnInit, OnDestroy {
   nextValid: '';
   public currentUser: any;
   currentCompany: any;
-  hasChange: boolean = false;
   sub: Subscription = new Subscription();
   constructor(
     private formBuilder: FormBuilder,
@@ -128,11 +127,6 @@ export class TicketSettingsComponent implements OnInit, OnDestroy {
             ticketCount: res.number
           });
         }
-        const initialValue = this.ticketForm.value
-        this.ticketForm.valueChanges.subscribe(value => {
-          this.hasChange = Object.keys(initialValue).some(key => value[key] !=
-            initialValue[key])
-        });
       },
       error => { }
     );
@@ -182,14 +176,13 @@ export class TicketSettingsComponent implements OnInit, OnDestroy {
           : null
       }
     };
-    if (this.hasChange) this.invoiceTicketsService.updateTicketsetting(objTicket).subscribe(
+    this.invoiceTicketsService.updateTicketsetting(objTicket).subscribe(
       (res: any) => {
         if (res && res.code === 409) {
           this.nextValid = res.message;
           this.ticketForm.patchValue({
             count: this.ticketForm.value.ticketCount
           });
-          this.hasChange = false;
         }
       },
       error => {

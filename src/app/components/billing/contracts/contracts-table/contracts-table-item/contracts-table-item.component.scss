@@ -16,3 +16,9 @@ tr {
     max-width: 300px !important;
   }
 }
+.ellipsis {
+    position: static;
+    transform: unset;
+    width: calc(200px - 16px);
+    flex: 1;
+}

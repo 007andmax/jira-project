@@ -99,6 +99,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
           if (window.location.href.includes(`/companies`)) this.state = 'new-companies';
           if (window.location.href.includes(`/billing-dashboard`)) this.state = 'billing-dashboard';
           if (window.location.href.includes(`/non-contract-services`)) this.state = 'non-contract-services';
+          if (window.location.href.includes(`/subscription-services`)) this.state = 'subscription-services';
           if (window.location.href.includes(`/billable`)) this.state = 'new-billable';
           if (window.location.href.includes(`/invoices`)) this.state = 'new-billable-invoices';
           if (window.location.href.includes(`/quotes`)) this.state = 'quotes-component';
@@ -323,6 +324,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
       if (this.state === 'new-companies') this.goToLink(`companies`);
       if (this.state === 'billing-dashboard') this.goToLink('billing-dashboard');
       if (this.state === 'non-contract-services') this.goToLink('non-contract-services');
+      if (this.state === 'subscription-services') this.goToLink('subscription-services');
       if (this.state === 'new-billable') this.goToLink('billable');
       if (this.state === 'new-billable-invoices') this.goToLink('invoices');
       if (this.state === 'quotes-component') this.goToLink('quotes');

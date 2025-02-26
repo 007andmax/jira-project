@@ -1,0 +1,13 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+@import './src/assets/styles/components/tables.scss';
+
+.tooltip {
+    text-transform: none;
+    text-align: left;
+}
+::ng-deep .check-contracts-edit {
+.contracts-page__aside {
+    z-index: 9999 !important;
+}
+}

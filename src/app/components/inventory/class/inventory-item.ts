@@ -21,6 +21,7 @@ export class InventoryItem {
     isEdit: boolean = false;
     productType: any;
     selected: boolean = false;
+    taxes: Array<any> = [];
     constructor(data = null) {
         if (data != null) {
             this.versionedId = data.versionedId;
@@ -36,6 +37,7 @@ export class InventoryItem {
             this.taxIds = data.taxIds;
             this.active = data.active;
             this.productType = data.productType;
+            this.taxes = data.taxes;
             if (this.cost) this.cost_str = this.cost.toFixed(2);
             if (this.sale) this.sale_str = this.sale.toFixed(2);
         }

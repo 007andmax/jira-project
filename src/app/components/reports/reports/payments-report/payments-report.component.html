@@ -89,7 +89,10 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="onInit">
+        <div
+            class="qt-report__body-table-body-container"
+            *ngIf="onInit"
+        >
             <ng-template
                 ngFor
                 let-table
@@ -134,7 +137,10 @@
                                     [textContent]="perseInvoices(item.partialPaidInvoices)"
                                 >
                                 </td>
-                                <td [textContent]="item.clientCompanyName"></td>
+                                <td
+                                    class="payments-report__col-company-name"
+                                    [textContent]="item.clientCompanyName"
+                                ></td>
                                 <td [textContent]="item.reference"></td>
                                 <td
                                     class="payments-report__col-amount"

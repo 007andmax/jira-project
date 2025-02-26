@@ -13,21 +13,25 @@
     <app-contracts-aside-hourly-billing
         #hourlyContract
         *ngIf="step === 2 && type === 'HOURLY'"
+        (onInitRequestForAdd)="disabledBtnForAdd()"
         (onClose)="closed()"
     ></app-contracts-aside-hourly-billing>
     <app-contracts-aside-block-time-billing
         #blockTimeContract
         *ngIf="step === 2 && type === 'BLOCK_TIME'"
+        (onInitRequestForAdd)="disabledBtnForAdd()"
         (onClose)="closed()"
     ></app-contracts-aside-block-time-billing>
     <app-contracts-aside-user-device-billing
         #deviceUserContract
         *ngIf="step === 2 && (type === 'SERVICE_CONTRACT_DEVICE' || type === 'SERVICE_CONTRACT_USER')"
+        (onInitRequestForAdd)="disabledBtnForAdd()"
         (onClose)="closed()"
     ></app-contracts-aside-user-device-billing>
     <app-contracts-aside-product-service-contracts
         #otherContract
         *ngIf="step === 2 && type === 'SERVICE_CONTRACT_OTHER'"
+        (onInitRequestForAdd)="disabledBtnForAdd()"
         (onClose)="closed()"
     ></app-contracts-aside-product-service-contracts>
     <div class="qt-aside-modern__footer">
@@ -48,9 +52,12 @@
             <button
                 class="qt-button qt-mr-12"
                 *ngIf="step === 2"
-                (click)="onCreate()"
+                appDisabledBtn
+                #addContract="disabled"
+                (onClick)="onCreate()"
             >
-                Create Contract
+                <span *ngIf="!addContract.isBlock()">Create Contract</span>
+                <app-preloader-ticket *ngIf="addContract.isBlock()"></app-preloader-ticket>
             </button>
         </div>
     </div>

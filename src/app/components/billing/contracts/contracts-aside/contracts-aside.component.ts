@@ -6,6 +6,8 @@ import { ContractsAsideBlockTimeBillingComponent } from './contracts-aside-block
 import { ContractsAsideUserDeviceBillingComponent } from './contracts-aside-user-device-billing/contracts-aside-user-device-billing.component';
 import { ContractsAsideProductServiceContractsComponent } from './contracts-aside-product-service-contracts/contracts-aside-product-service-contracts.component';
 import { Subscription } from 'rxjs';
+import { SubscriptionServicesService } from 'src/app/services/subscription-services/subscription-services.service';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-contracts-aside',
@@ -13,15 +15,17 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./contracts-aside.component.scss']
 })
 export class ContractsAsideComponent implements OnInit, OnDestroy {
-  @ViewChild('hourlyContract') hourlyContract: ContractsAsideHourlyBillingComponent;
-  @ViewChild('blockTimeContract') blockTimeContract: ContractsAsideBlockTimeBillingComponent;
-  @ViewChild('deviceUserContract') deviceUserContract: ContractsAsideUserDeviceBillingComponent;
-  @ViewChild('otherContract') otherContract: ContractsAsideProductServiceContractsComponent;
+  @ViewChild('hourlyContract', { static: false }) hourlyContract: ContractsAsideHourlyBillingComponent;
+  @ViewChild('blockTimeContract', { static: false }) blockTimeContract: ContractsAsideBlockTimeBillingComponent;
+  @ViewChild('deviceUserContract', { static: false }) deviceUserContract: ContractsAsideUserDeviceBillingComponent;
+  @ViewChild('otherContract', { static: false }) otherContract: ContractsAsideProductServiceContractsComponent;
+  @ViewChild('addContract', { static: false }) addContract: DisabledBtnDirective;
   type: string = null;
   step: number = 1;
   sub: Subscription = new Subscription();
   constructor(private contractsStateService: ContractsStateService,
-    private nonContractServicesService: NonContractServicesService
+    private nonContractServicesService: NonContractServicesService,
+    private subscriptionServicesService: SubscriptionServicesService,
   ) { }
 
   ngOnInit() {
@@ -37,6 +41,9 @@ export class ContractsAsideComponent implements OnInit, OnDestroy {
       this.contractsStateService.setDefaultService(data);
     })
     this.sub.add(getNonContractServices);
+    this.subscriptionServicesService.getServices().subscribe(data => {
+      this.contractsStateService.setSubscriptionServices(data);
+    })
   }
   onCreate() {
     if (this.hourlyContract) this.hourlyContract.onCreate();
@@ -51,6 +58,10 @@ export class ContractsAsideComponent implements OnInit, OnDestroy {
   closed() {
     this.contractsStateService.toggleCreate(false);
     this.contractsStateService.setContractForCopy(null);
+    if (this.addContract) this.addContract.setDisabled(false);
+  }
+  public disabledBtnForAdd() {
+    this.addContract.setDisabled(true);
   }
   onSelectType(data) {
     this.type = data;

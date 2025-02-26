@@ -19,7 +19,7 @@ import { fadeInAnimation } from 'src/app/animations';
 export class MarketingEmailComponent implements OnInit, OnDestroy {
 
   activeTab: string = "companyIndustry";
-  @ViewChild("subscriptionType", { static: true }) subscriptionType: MarketingSubscriptionTypeComponent;
+  @ViewChild("subscriptionType", { static: false }) subscriptionType: MarketingSubscriptionTypeComponent;
 
   constructor(private confirmStateService: ConfirmStateService,
     private marketingEmailStateService: MarketingEmailStateService,

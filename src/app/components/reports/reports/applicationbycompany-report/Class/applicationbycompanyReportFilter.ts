@@ -4,7 +4,7 @@ export class ApplicationByCompanyReportFilter {
   filterTop: Array<FilterListTop> = [
     new FilterListTop("DisplayName", "ASC"),
   ];
-  constructor() {}
+  constructor() { }
 
   public onFilter(field, Device) {
     let index = this.filterTop.findIndex((item) => item.field === field);
@@ -29,12 +29,12 @@ export class ApplicationByCompanyReportFilter {
         ? 1
         : this.getNameDevice(b).toLowerCase() >
           this.getNameDevice(a).toLowerCase()
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
   }
   private getNameDevice(Device) {
-    return Device.AssetNames||'';
+    return Device.AssetNames || '';
   }
   public clearFilter() {
     this.filterTop.forEach((item) => (item.filter = ""));

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
 import { DefaultServicesHourlyContract } from '../../class/default-service-hourly-contract';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { Subscription } from 'rxjs';
@@ -12,6 +12,7 @@ export class ContractsAsideBlockTimeBillingAddDefaultServiceComponent implements
   defaultServices: Array<DefaultServicesHourlyContract> = [];
   selectedItem: DefaultServicesHourlyContract;
   sub: Subscription = new Subscription();
+  @Input() showError: boolean = false;
   @Output() onSelect = new EventEmitter<any>();
   constructor(private contractsStateService: ContractsStateService,) { }
 
@@ -28,7 +29,7 @@ export class ContractsAsideBlockTimeBillingAddDefaultServiceComponent implements
   public isSelected(id) {
     return this.selectedItem && this.selectedItem.versionedId.id == id;
   }
-  select(data) {
+  public select(data) {
     this.selectedItem = data;
     this.onSelect.emit(data);
   }

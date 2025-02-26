@@ -40,7 +40,7 @@ export class UserUpdate {
       }
     });
     if (this.phoneNumbers.length === 1 && this.phoneNumbers[0].number === "") this.phoneNumbers = [];
-    this.welcomeEmail = data.welcomeEmail;
+    this.welcomeEmail = data.sendPortalInvitation;
     this.tags = data.tags.map(item => {
       return { id: item.id }
     })

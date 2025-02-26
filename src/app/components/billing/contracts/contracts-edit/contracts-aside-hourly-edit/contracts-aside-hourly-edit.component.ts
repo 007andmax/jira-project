@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, QueryList, ViewChildren } from '@angular/core';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ServiceAgreement } from '../../class/service-agreement';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
@@ -9,6 +9,8 @@ import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import * as moment from "moment";
 import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
 import { ContractsBlockTimeDefaultService } from '../../contracts-aside/class/contracts-block-time-default-service';
+import { ContractsAsideHourlyBillingDefaultServiceComponent } from '../../contracts-aside/contracts-aside-hourly-billing/contracts-aside-hourly-billing-default-service/contracts-aside-hourly-billing-default-service.component';
+import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 @Component({
   selector: 'app-contracts-aside-hourly-edit',
   templateUrl: './contracts-aside-hourly-edit.component.html',
@@ -21,19 +23,21 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   validate: ContractsHourlyValidate = new ContractsHourlyValidate();
   @Input() contractsHourly: ServiceAgreement = new ServiceAgreement();
   @Output() onClose = new EventEmitter<any>();
+  @ViewChildren("serviceItem") serviceItems: QueryList<ContractsAsideHourlyBillingDefaultServiceComponent>;
   formatDate: string = FORMAT_DATE_2;
   showAddService: boolean = false;
   selectAllServices: boolean = true;
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
     private nonContractServicesService: NonContractServicesService,
+    private contractsStateService: ContractsStateService,
   ) { }
 
   ngOnInit() {
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.contractsHourly.companyId);
   }
   public onEdit() {
-    if (this.contractsHourly.services.filter(item => item.selected).length === 0 || !this.validate.isValidate(this.contractsHourly)) return;
+    if (this.contractsHourly.services.filter(item => item.selected).length === 0 || !this.validate.isValidate(this.contractsHourly) || !this.validate.isValidateRateServices(this.contractsHourly.services)) return;
     this.contractsService.validateCrossingDatesHourly(moment(this.contractsHourly.startDate).format('DD MMM YYYY'), moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, this.contractsHourly.id).subscribe((data: any) => {
       if (data.valid) {
         this.validate.resetDate();
@@ -49,6 +53,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
       moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, this.contractsHourly.id, servicesName).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.contractsService.updateContract(this.contractsHourly.getDataForUpdateHourly()).subscribe(contract => {
+            this.contractsStateService.fastEditContract(contract);
             this.onClose.emit(null);
           })
         }
@@ -57,12 +62,20 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
       })
   }
   onAddService(data: DefaultServicesHourlyContract) {
-    this.contractsHourly.services.push(new ContractsBlockTimeDefaultService(true, data.billable, data.commissionRate, data.versionedId.id, data.name, data.rate, data.taxes.map(item => item.id)));
+    this.contractsHourly.services.push(new ContractsBlockTimeDefaultService(true, data.billable, data.commissionRate, data.versionedId.id, data.name, data.rate, data.taxes.map(item => item.id), data.parentDefaultServiceId, true, data.discountAmount, data.discountType));
     this.showAddService = false;
   }
   onToggleAllServices(event) {
     this.contractsHourly.services.forEach(item => {
       item.selected = event.target.checked;
+      if (!event.target.checked) {
+        item.billable = false;
+        item.rate = 0;
+        item.rate_str = "0.00";
+        this.serviceItems.toArray().forEach(item => {
+          item.resetRate();
+        })
+      }
     })
     this.selectAllServices = event.target.checked;
   }
@@ -74,6 +87,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
     this.contractsHourly.services.forEach(item => {
       if (!item.selected) {
         this.selectAllServices = false;
+        item.validateRate = true;
       }
     })
   }

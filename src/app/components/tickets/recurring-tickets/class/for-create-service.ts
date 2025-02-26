@@ -21,6 +21,8 @@ export class ForCreateService implements Service {
     duration: number;
     noValid: boolean = false;
     errors: Array<String>;
+    discountType: string;
+    discountAmount: number;
     constructor(data = null) {
         if (!data) return;
         this.blockTimeServiceAgreement = data.blockTimeServiceAgreement;
@@ -39,8 +41,10 @@ export class ForCreateService implements Service {
         this.description = data.description;
         this.quantity = data.quantity;
         this.duration = data.duration;
-
+        this.discountType = data.discountType;
+        this.discountAmount = data.discountAmount;
     }
+
     public setDescription(description) {
         this.description = description;
     }
@@ -85,6 +89,8 @@ export class ForCreateService implements Service {
             this.errors = errors;
             this.noValid = true;
         }
+        this.discountType = data.service.discountType;
+        this.discountAmount = data.service.discountAmount;
     }
 }
 

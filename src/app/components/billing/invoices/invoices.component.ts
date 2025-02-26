@@ -136,14 +136,14 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   getTotal() {
     let total = 0;
     this.invoices.forEach(item => {
-      total += item.totalSum;
+      if (item.status != 'DELETED') total += item.totalSum;
     })
     return total;
   }
   getTotalBalanceDue() {
     let total = 0;
     this.invoices.forEach(item => {
-      total += ((item.totalSum || item.sum) - item.paidSum);
+      if (item.status != 'DELETED') total += ((item.totalSum || item.sum) - item.paidSum);
     })
     return total;
   }

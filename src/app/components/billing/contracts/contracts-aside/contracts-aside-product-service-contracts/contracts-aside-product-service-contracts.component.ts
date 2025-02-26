@@ -24,6 +24,7 @@ import { ContractsListService } from '../../services/contracts-list.service';
 })
 export class ContractsAsideProductServiceContractsComponent implements OnInit, OnDestroy {
   selectedType = new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER');
+  @Output() onInitRequestForAdd = new EventEmitter<any>();
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
   @ViewChild('topContract', { static: true }) topContract: ContractsAsideTopComponent;
@@ -76,12 +77,14 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
     this.topContract.companiesDP.selectedItem = this.companiesStateService.getCompanies().find(item => item.id === this.contractsOther.companyId);
   }
   onCheckServicesForAdd(createBillableItem) {
+    this.onInitRequestForAdd.emit(null);
     this.contractsService.createContract(createBillableItem, this.contractsOther.getDataForCreateOther()).subscribe(res => {
+      this.сontractsStateService.fastAddContract(res);
       this.onClose.emit(null);
     })
   }
   addService() {
-    this.contractsOther.serviceExpenses.push(new ContractsOtherService(new Date().getTime(), "", 0, "", null));
+    this.contractsOther.serviceExpenses.push(new ContractsOtherService(new Date().getTime(), "", 0, "", null, 0));
     this.validate.resetServicesOrProducts();
   }
   addProduct() {

@@ -18,7 +18,7 @@ import { AddAssignedUserComponent } from '../../../ticket-edit-aside/add-assigne
 })
 export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   @Input() ticketProfile: TicketProfile = new TicketProfile();
-  @ViewChild('addAssignedUser', { static: true }) addAssignedUser: AddAssignedUserComponent;
+  @ViewChild('addAssignedUser', { static: false }) addAssignedUser: AddAssignedUserComponent;
   @Input() ticketProfileFormUpdate: TicketProfileFormUpdate = new TicketProfileFormUpdate();
   @Input() currentUser: CurrentUser;
   @Input() tab: string;
@@ -51,12 +51,6 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
     }
     this.ticketProfileFormUpdate.setShares(this.selectedUsers);
   }
-  isShowAssignedUser() {
-    if (this.tab == "SERVICE") {
-      return this.ticketStateService.isShowAddService();
-    }
-    return true;
-  }
   isSelected(data) {
     return this.ticketProfileFormUpdate.getTechUser().id === data.id;
   }
@@ -72,9 +66,14 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   public onChangeType(data) {
     this.ticketProfileFormUpdate.setNoteType(data);
     this.usersForUpdate = this.getUsersForUpdate(this.ticketProfileFormUpdate.noteType);
-    this.addAssignedUser.resetList(this.usersForUpdate);
-    this.selectedUsers = this.selectedUsers.filter(item => item.accountType !== "CLIENT");
+    if (this.addAssignedUser) this.addAssignedUser.resetList(this.usersForUpdate);
+    if (data == "PUBLIC") {
+      this.selectedUsers = this.selectedUsers.filter(item => item.accountType !== "CLIENT");
+    } else {
+      this.selectedUsers = [];
+    }
     this.ticketProfileFormUpdate.setShares(this.selectedUsers);
+
   }
   getUsersForUpdate(type) {
     let userList = this.usersStateService.getAllUsers();

@@ -218,7 +218,6 @@ export class TicketStateService {
       this.servicesForTicket = res.filter(item => item.canUseInTicket);
       this.servicesForTicket.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-      if (!this.customerPortalStateService.isCustomerPortal && this.permissionsService.isAllowed("VIEW_SERVICE_AGREEMENTS")) this.getServiceAgreements(ticketProfile);
       this.servicesList.emit(this.servicesForTicket);
       this.servicePreloader = false;
       this.onServicePreloader.emit(this.servicePreloader);
@@ -235,19 +234,6 @@ export class TicketStateService {
   }
   public getOnChangeUpdatesTicket() {
     return this.changeUpdatesTicket;
-  }
-
-  private getServiceAgreements(ticketProfile) {
-    this.contractsService.getServiceAgreementsByCompany(ticketProfile.company.id).subscribe((data: any) => {
-      let Agreements = data;
-      this.areTicketsPresented = (Agreements.length > 0) ? true : false;
-      this.areTicketsTerminated = Agreements.every((el) => {
-        return el.status === 'EXPIRED' || el.status === 'TERMINATED'
-      })
-    })
-  }
-  public isShowAddService() {
-    return (this.areTicketsPresented && !this.areTicketsTerminated || !this.areTicketsPresented) && this.permissionsService.isAllowed("VIEW_SERVICE_AGREEMENTS");
   }
   public setProductForRemove(data) {
     this.productForRemove = data;

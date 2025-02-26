@@ -3,7 +3,8 @@ import { ContractItemCompany } from './contract-item-company';
 export class ContractItem {
     amount: number;
     billType: string;
-    company: ContractItemCompany;
+    companyId: string;
+    companyName: string;
     customInterval: any;
     description: string;
     endDate: number;
@@ -14,6 +15,7 @@ export class ContractItem {
     startDate: number;
     status: string;
     type: string;
+    taxSum: number;
     enableInvoiceAutoCreate: boolean;
     manualCreateBillableItem: boolean;
     constructor(data = null) {

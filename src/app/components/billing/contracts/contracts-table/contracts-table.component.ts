@@ -31,16 +31,11 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private contractsRealTimeService: ContractsRealTimeService,
     private contractsListService: ContractsListService,
-    private customerPortalStateService: CustomerPortalStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
-    if (this.companiesStateService.getCompanies().length > 0) this.getServiceAgreements(this.companiesStateService.getCompanies());
-    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-      this.getServiceAgreements(data);
-    })
-    this.sub.add(getOnCompanies);
+    this.getServiceAgreements();
     let getSort = this.contractsStateService.getSort().subscribe(data => {
       this.filter.onSort(data, this.list);
       if (!this.cd['destroyed']) {
@@ -63,47 +58,53 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    let onFastAdd = this.contractsStateService.onFastAdd.subscribe(data => {
+      this.addContract(data);
+    })
+    this.sub.add(onFastAdd);
+    let onFastEdit = this.contractsStateService.onFastEdit.subscribe(data => {
+      this.addContract(data);
+    })
+    this.sub.add(onFastEdit);
     let changeContractsArray = this.contractsRealTimeService.changeContractsArray.subscribe(data => {
       if (data.action === 'SERVICE_AGREEMENT_SAVED') {
-        let company = this.companiesStateService.getCompanies().find(item => item.id === data.data.company.id);
-        data.data.company.name = company.name;
-
-        let findIndexReq = this.reqList.findIndex(item => item.id === data.data.id);
-        let findIndex = this.list.findIndex(item => item.id === data.data.id);
-        if (findIndexReq > -1) {
-          this.reqList[findIndexReq] = new ContractItem(data.data);
-        } else {
-          this.reqList.push(new ContractItem(data.data));
-        }
-        if (findIndex > -1) {
-          this.list[findIndex] = new ContractItem(data.data);
-        } else {
-          if (this.filter.checkFilterItem(data.data)) {
-            this.list.push(new ContractItem(data.data));
-            this.filter.onSortList(this.list);
-          }
-        }
-
+        this.addContract(data.data);
       } else if (data.action === 'SERVICE_AGREEMENT_DELETED') {
-        let findIndexReq = this.reqList.findIndex(item => item.id === data.data.id);
-        let findIndex = this.list.findIndex(item => item.id === data.data.id);
-        if (findIndexReq > -1) this.reqList.splice(findIndexReq, 1);
-        if (findIndex > -1) this.list.splice(findIndex, 1);
+        this.removeContract(data.data.id);
       }
       this.cd.detectChanges();
     })
     this.sub.add(changeContractsArray);
   }
+  removeContract(id) {
+    let findIndexReq = this.reqList.findIndex(item => item.id === id);
+    let findIndex = this.list.findIndex(item => item.id === id);
+    if (findIndexReq > -1) this.reqList.splice(findIndexReq, 1);
+    if (findIndex > -1) this.list.splice(findIndex, 1);
+  }
+  addContract(data) {
+    let findIndexReq = this.reqList.findIndex(item => item.id === data.id);
+    let findIndex = this.list.findIndex(item => item.id === data.id);
+    if (findIndexReq > -1) {
+      this.reqList[findIndexReq] = new ContractItem(data);
+    } else {
+      this.reqList.push(new ContractItem(data));
+    }
+    if (findIndex > -1) {
+      this.list[findIndex] = new ContractItem(data);
+    } else {
+      if (this.filter.checkFilterItem(data)) {
+        this.list.push(new ContractItem(data));
+        this.filter.onSortList(this.list);
+      }
+    }
+  }
 
-  getServiceAgreements(companies) {
+  getServiceAgreements() {
     let subscribe = (this.companyContracts) ? this.contractsService.getServiceAgreementsByCompany(this.companyContracts.id) : this.contractsService.getServiceAgreements();
     subscribe.subscribe(data => {
       let showNotificationReview = false;
-      this.reqList = data.map(contact => {
-        let company = companies.find(item => item.id === contact.company.id);
-        contact.company.name = company.name;
-        return contact;
-      });
+      this.reqList = data;
       //  if (this.companyContracts) this.reqList = this.reqList.filter(item => item.company.id === this.companyContracts.id);
       this.reqList.forEach(item => {
         if (!showNotificationReview) showNotificationReview = this.contractsListService.isShowNotificationReview(item.reviewDate);
@@ -123,8 +124,8 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     })
   }
   onDelete(data) {
-    this.contractsService.delete(data.id).subscribe(data => {
-
+    this.contractsService.delete(data.id).subscribe(res => {
+      this.removeContract(data.id);
     })
   }
   onTerminate(data) {

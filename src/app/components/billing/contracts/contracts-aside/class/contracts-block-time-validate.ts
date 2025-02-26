@@ -1,17 +1,17 @@
 export class ContractsBlockTimeValidate {
-    company:boolean = true;
-    description:boolean = true;
-    includedHours:boolean = true;
-    blockRate:boolean = true;
-    rateExceeding:boolean = true;
-
-    constructor() {}
+    company: boolean = true;
+    description: boolean = true;
+    includedHours: boolean = true;
+    blockRate: boolean = true;
+    rateExceeding: boolean = true;
+    blockTimeServices: boolean = true;
+    constructor() { }
 
     public resetRateExceeding() {
         this.rateExceeding = true;
     }
     public resetBlockRate() {
-        this.blockRate  = true;
+        this.blockRate = true;
     }
     public resetIncludedHours() {
         this.includedHours = true;
@@ -22,19 +22,25 @@ export class ContractsBlockTimeValidate {
     public resetDescription() {
         this.description = true;
     }
+    public resetBlockTimeServices() {
+        this.blockTimeServices = true;
+    }
     public getCompany() {
         return this.company;
     }
-    public getDescription () {
+    public getBlockTimeServices() {
+        return this.blockTimeServices;
+    }
+    public getDescription() {
         return this.description;
     }
-    public getIncludedHours () {
+    public getIncludedHours() {
         return this.includedHours;
     }
-    public getBlockRate () {
+    public getBlockRate() {
         return this.blockRate;
     }
-    public getRateExceeding () {
+    public getRateExceeding() {
         return this.rateExceeding;
     }
     public isValidate(contractsBlockTime) {
@@ -43,6 +49,7 @@ export class ContractsBlockTimeValidate {
         if (contractsBlockTime.includedHours === "") this.includedHours = false;
         if (contractsBlockTime.blockRate === "") this.blockRate = false;
         if (contractsBlockTime.rateExceeding === "") this.rateExceeding = false;
-        return this.company && this.description && this.includedHours && this.blockRate && this.rateExceeding;
+        if (contractsBlockTime.blockTimeServices.length == 0) this.blockTimeServices = false;
+        return this.company && this.description && this.includedHours && this.blockRate && this.rateExceeding && this.blockTimeServices;
     }
 }

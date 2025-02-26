@@ -1,32 +1,37 @@
 export class ContractsOtherService {
-    rate:number = 0;
+    rate: number = 0;
     name: string = "";
     date: number;
     description: string;
     quantity: number;
     serviceId: string;
-    validate:boolean = true;
-    validateDescription:boolean = true;
-    constructor(date, description, quantity, serviceId,name) {
+    validate: boolean = true;
+    validateDescription: boolean = true;
+    taxes: Array<any> = [];
+    taxSum: number = 0;
+    constructor(date, description, quantity, serviceId, name, rate) {
         this.date = date;
         this.description = description;
         this.quantity = quantity;
         this.serviceId = serviceId;
         this.name = name;
+        this.rate = rate;
     }
-    public setData (data) {
+    public setData(data) {
         if (data) {
             this.name = data.name;
             this.description = "";
             this.serviceId = data.versionedId.id;
             this.rate = data.rate;
+            this.taxes = data.taxes;
         } else {
             this.name = "";
             this.description = "";
             this.serviceId = "";
             this.rate = 0;
+            this.taxes = [];
         }
-     
+
 
         this.validate = true;
         this.quantity = 0;
@@ -40,7 +45,7 @@ export class ContractsOtherService {
             serviceId: this.serviceId,
         }
     }
-    public resetValidateDescription () {
+    public resetValidateDescription() {
         this.validateDescription = true;
     }
     public setQuantity(data) {

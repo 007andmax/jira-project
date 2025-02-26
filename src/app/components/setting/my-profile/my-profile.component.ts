@@ -19,11 +19,11 @@ declare var $: any;
 })
 export class MyProfileComponent implements OnInit, OnDestroy {
   activeTab: string = "profile";
-  @ViewChild('profile', { static: true }) profile: ProfileComponent;
-  @ViewChild('account', { static: true }) account: AccountComponent;
-  @ViewChild('emailNotifications') emailNotifications: EmailNotificationsComponent;
-  @ViewChild('activityHistory') activityHistory: ActivityHistoryComponent;
-  @ViewChild('tickets') tickets: TicketsMyProfileComponent;
+  @ViewChild('profile', { static: false }) profile: ProfileComponent;
+  @ViewChild('account', { static: false }) account: AccountComponent;
+  @ViewChild('emailNotifications', { static: false }) emailNotifications: EmailNotificationsComponent;
+  @ViewChild('activityHistory', { static: false }) activityHistory: ActivityHistoryComponent;
+  @ViewChild('tickets', { static: false }) tickets: TicketsMyProfileComponent;
   constructor(private settingStateService: SettingStateService,
     public customerPortalStateService: CustomerPortalStateService,) { }
 

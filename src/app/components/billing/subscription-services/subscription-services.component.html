@@ -1,0 +1,109 @@
+<div class="qt-page-list default-services-page">
+    <div class="qt-page-list__header --sticky">
+        <div class="qt-page-list__header-title-line">
+            <div class="qt-page-list__header-title-line--left">
+                <h6 class="qt-page-list__header-title">Subscription Services</h6>
+            </div>
+            <div class="qt-page-list__header-title-line--rigth">
+                <button
+                    class="qt-button --gray --md"
+                    (click)="onShowAddAside()"
+                    *ngIf="getPermissions('MANAGE_SERVICES')"
+                >
+                    Create Service
+                </button>
+            </div>
+        </div>
+        <div class="qt-page-list__header-thead-container">
+            <div class="qt-table-modern qt-page-list__header-thead">
+                <div class="qt-table-modern qt-page-list__header-thead">
+                    <div class="qt-page-list__header-thead__row">
+                        <div
+                            class="default-service-table__service-name pointer"
+                            (click)="onFilter('name')"
+                        >
+                            Service Name
+                            <span class="qt-table-modern__sorting"></span>
+                        </div>
+                        <div
+                            class="default-service-table__rate pointer"
+                            (click)="onFilter('rate')"
+                        >
+                            Price/Rate
+                            <span class="qt-table-modern__sorting"></span>
+                        </div>
+                        <div
+                            class="default-service-table__taxes pointer"
+                            (click)="onFilter('taxes')"
+                        >
+                            Taxes
+                            <span class="qt-table-modern__sorting"></span>
+                        </div>
+                        <div class="default-service-table__gl">
+                            GL Number
+                            <ng-template
+                                #tipContent
+                                class="tooltip"
+                            >
+                                General ledger Number
+                                <br>
+                                are numerals you assign
+                                <br>
+                                to different debit or
+                                <br>
+                                credit entries to make
+                                <br>
+                                accounting easier and
+                                <br>
+                                more functional.
+                            </ng-template>
+                            <span
+                                class="qt-icon icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
+                                placement="top"
+                                [ngbTooltip]="tipContent"
+                                container="body"
+                            ></span>
+                        </div>
+                        <div class="default-service-table__menu"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="qt-page-list__body">
+        <div class="qt-page-list__body-table-container --height-unset services-list">
+            <div class="qt-page-list__body-tbody  qt-table-modern default-service-table">
+                <div class="tbody">
+                    <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="list"
+                        [ngForTrackBy]="trackById"
+                    >
+                        <app-subscription-services-item
+                            [service]="item"
+                            (onEditService)="onEditService($event)"
+                        ></app-subscription-services-item>
+                    </ng-template>
+                </div>
+            </div>
+            <div
+                class="no-exist-elements"
+                *ngIf="!showPreloader && list.length == 0"
+            >
+                We couldn't find any results
+            </div>
+            <div
+                class="loading"
+                *ngIf="showPreloader"
+            ></div>
+        </div>
+    </div>
+</div>
+<app-subscription-services-add></app-subscription-services-add>
+<app-subscription-services-edit></app-subscription-services-edit>
+<app-contracts-edit
+    class="check-contracts-edit"
+    *ngIf="showEditContract"
+    [serviceAgreement]="serviceAgreement"
+></app-contracts-edit>

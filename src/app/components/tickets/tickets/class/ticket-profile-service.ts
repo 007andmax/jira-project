@@ -112,6 +112,8 @@ export class TicketProfileService {
     }
     public setItem(data) {
         this.item = data;
+        this.discountAmount = this.item.discountAmount;
+        this.discountType = this.item.discountType;
     }
     public getDateForUpdate(id) {
         let user = (!this.user) ? { id: "" } : this.user;

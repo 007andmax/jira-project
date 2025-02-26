@@ -125,7 +125,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.setCronForEdit(data.cronExpression);
     this.onChangeCron(data.cronExpression);
     this.cd.detectChanges();
-
   }
 
   /**
@@ -157,17 +156,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
     this.recurringState.getCreateTicket().setDescription(value);
   }
-  private getServiceAgreements(id) {
-    this.contractsService.getServiceAgreementsByCompany(id).subscribe((data: any) => {
-      this.agreements = data;
-      this.areTicketsPresented = (this.agreements.length > 0) ? true : false;
-    })
-  }
-  checkServiceTerminated(service) {
-    if (!service.serviceAgreement && !service.serviceContractServiceAgreement) return false;
-    let serviceAgreement = this.agreements.find(item => service.serviceAgreement && service.serviceAgreement.id == item.id || service.serviceContractServiceAgreement && service.serviceContractServiceAgreement.id == item.id);
-    return serviceAgreement ? (serviceAgreement.status === 'EXPIRED' || serviceAgreement.status === 'TERMINATED') : false;
-  }
   /**
   * Subscribe to change description
   * @param event - description event
@@ -176,6 +164,18 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
     this.recurringState.getCreateTicket().setDescription(event.target.value);
 
+  }
+  onChangeCost(val, product) {
+    let value = Number(val);
+    product.cost = value;
+    product.cost_str = value.toFixed(2);
+    //  product.markup = this.getMarkups(product);
+  }
+  onChangeSale(val, product) {
+    let value = Number(val);
+    product.sale = value;
+    product.sale_str = value.toFixed(2);
+    //product.markup = this.getMarkups();
   }
 
   /**
@@ -256,7 +256,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
       this.recurringState.setClient(selectClient);
       this.onCheckListServices();
       this.getCompanyDevices();
-      this.getServiceAgreements(this.selectedClient.id);
     }
     if (this.services[0] instanceof ForCreateService) {
 
@@ -414,7 +413,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
         this.recurringState.getCreateTicket().clearProducts();
       }
     }
-    this.services.filter((item: ForCreateService) => item.versionedId).forEach(item => this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
+    this.services.filter((item: ForCreateService) => item.versionedId).forEach(item => this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration, item.discountAmount)));
     if (this.ticketForEdit && this.ticketForEdit.id) {
 
       this.recurringState.getCreateTicket().checkForEdit(this.ticketForEdit);

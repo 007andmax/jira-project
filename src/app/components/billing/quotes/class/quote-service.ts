@@ -43,7 +43,7 @@ export class QuoteService implements Service {
 
     }
     public getDataForUpdate() {
-        let service: Service = {
+        let service: any = {
             blockTimeServiceAgreement: this.blockTimeServiceAgreement,
             canUseInTicket: this.canUseInTicket,
             commissionRate: this.commissionRate,
@@ -61,6 +61,7 @@ export class QuoteService implements Service {
         return {
             description: this.description,
             discountType: this.discountType,
+            discountAmount: this.discountAmount,
             item: service,
             itemOrder: this.itemOrder,
             quantity: this.quantity,

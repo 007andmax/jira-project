@@ -27,6 +27,9 @@ export class InvoicePreviewComponent implements OnInit {
   getCurrentCompanyPhone() {
     return (this.currentCompany.addresses[0].phoneNumbers.length > 0) ? this.currentCompany.addresses[0].phoneNumbers[0].number : ''
   }
+  checkLogo() {
+    return (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.cropped && this.currentCompany.logo.cropped.id || this.currentCompany && this.currentCompany.logo && this.currentCompany.logo.origin && this.currentCompany.logo.origin.id)
+  }
   getContactsPhone() {
     return (this.company.contacts[0].phoneNumbers && this.company.contacts[0].phoneNumbers.length > 0) ? this.company.contacts[0].phoneNumbers[0].number : ''
   }

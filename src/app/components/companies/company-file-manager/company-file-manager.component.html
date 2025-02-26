@@ -130,11 +130,20 @@
         >
             <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
                 <div class="aside-filters-header__title">File Info</div>
-                <div
-                    class="qt-button --square-md --gray pointer"
-                    (click)="onToggleFileInfo(false)"
-                >
-                    <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+                <div class="qt-df qt-ai-c">
+                    <div
+                        *ngIf="fileInfoContainer.isImage()"
+                        class="qt-button --square-md --gray qt-ml-8 info-file-label-edit qt-fs-0 qt-mr-8"
+                        (click)="fileInfoContainer.initUploadFiles()"
+                    >
+                        <div class="qt-icon icon__edit qt-sz-16"></div>
+                    </div>
+                    <div
+                        class="qt-button --square-md --gray pointer"
+                        (click)="onToggleFileInfo(false)"
+                    >
+                        <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+                    </div>
                 </div>
             </div>
             <div class="aside-filters-content">

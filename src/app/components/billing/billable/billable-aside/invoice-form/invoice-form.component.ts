@@ -132,12 +132,13 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   }
 
   onCheckUpdateGlobalNote() {
-    if (this.globalNote) this.changeGlobalNote = true;
+    if (this.invoice.invoiceDataDto.termsAndConditions) this.changeGlobalNote = true;
   }
 
   onUpdateGlobalNote() {
     this.invoiceTicketsService.updateTermsAndConditions(this.elRef.nativeElement.querySelector("#description-global-note").value).subscribe(data => {
       this.changeGlobalNote = false;
+      this.invoice.invoiceDataDto.termsAndConditions = this.elRef.nativeElement.querySelector("#description-global-note").value;
       this.billableStateService.setGlobalNote({
         id: this.globalNote.id,
         line1: this.elRef.nativeElement.querySelector("#description-global-note").value,

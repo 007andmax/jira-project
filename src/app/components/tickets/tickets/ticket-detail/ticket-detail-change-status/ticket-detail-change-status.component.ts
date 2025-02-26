@@ -45,8 +45,8 @@ export class TicketDetailChangeStatusComponent extends TicketChangeStatusCompone
     this.dp.selectItemWithOutChanges(this.selectedTicketStatus);
   }
   changeTicketStatus(item) {
+    this.selectedTicketStatus = item;
     this.ticketsService.changeStatus(this.ticketProfile.id, item.type).subscribe((data: any) => {
-      this.selectedTicketStatus = item;
       this.toastrService.success(`The tickets “${this.ticketProfile.number}” status has been changed`);
       this.appStateService.changeDetectorRef();
     })

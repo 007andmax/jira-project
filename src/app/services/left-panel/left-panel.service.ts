@@ -67,6 +67,7 @@ export class LeftPanelService {
   isBillingState(state) {
     return (state === 'billing-dashboard'
       || state === 'non-contract-services'
+      || state === 'subscription-services'
       || state === 'new-billable'
       || state === 'new-billable-tickets'
       || state === 'new-billable-invoices'

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, OnDestroy, QueryList, ViewChildren } from '@angular/core';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { ContractsHourly } from '../class/contracts-hourly';
@@ -14,15 +14,18 @@ import { Tax } from 'src/app/interfaces/service/tax';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-aside-top.component';
 import { Subscription } from 'rxjs';
+import { ContractsAsideHourlyBillingDefaultServiceComponent } from './contracts-aside-hourly-billing-default-service/contracts-aside-hourly-billing-default-service.component';
 @Component({
   selector: 'app-contracts-aside-hourly-billing',
   templateUrl: './contracts-aside-hourly-billing.component.html',
   styleUrls: ['./contracts-aside-hourly-billing.component.scss']
 })
 export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
+  @Output() onInitRequestForAdd = new EventEmitter<any>();
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
   @ViewChild('topContract', { static: true }) topContract: ContractsAsideTopComponent;
+  @ViewChildren("serviceItem") serviceItems: QueryList<ContractsAsideHourlyBillingDefaultServiceComponent>;
   validate: ContractsHourlyValidate = new ContractsHourlyValidate();
   defaultServices: Array<DefaultServicesHourlyContract> = [];
   selectedType = new ContractsFilterType('Hourly', 'HOURLY', null);
@@ -71,6 +74,8 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
       service.selected = true;
       return service;
     });
+    this.defaultServices.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   public onInitCopy() {
     this.contractsHourly.setDataFromCopy(this.contractsStateService.getContractForCopy());
@@ -90,7 +95,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
   }
   public onCreate() {
     this.contractsHourly.onAddServices(this.defaultServices);
-    if (this.contractsHourly.services.length === 0 || !this.validate.isValidate(this.contractsHourly)) return;
+    if (this.contractsHourly.services.length === 0 || !this.validate.isValidate(this.contractsHourly) || !this.validate.isValidateRateServices(this.defaultServices)) return;
     this.contractsService.validateCrossingDatesHourly(moment(this.contractsHourly.startDate).format('DD MMM YYYY'), moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, null).subscribe((data: any) => {
       if (data.valid) {
         this.validate.resetDate();
@@ -106,8 +111,19 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
       moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, null, servicesName).subscribe(data => {
         if (Object.keys(data).length === 0) {
+          this.onInitRequestForAdd.emit(null);
           this.contractsService.createContract(false, this.contractsHourly.getDataForCreate()).subscribe(contract => {
+            this.contractsStateService.fastAddContract(contract);
             this.onClose.emit(null);
+          })
+        } else {
+          let names = Object.keys(data);
+          this.defaultServices.forEach(item => {
+            let find = names.find(name => name === item.name);
+            if (find) {
+              item.validate = false;
+              item.descriptionValidate = data[item.name];
+            }
           })
         }
       }, err => {
@@ -118,6 +134,14 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
 
     this.defaultServices.forEach(item => {
       item.selected = event.target.checked;
+      if (!event.target.checked) {
+        item.billable = false;
+        item.rate = 0;
+        item.rate_str = "0.00";
+        this.serviceItems.toArray().forEach(item => {
+          item.resetRate();
+        })
+      }
     })
     this.selectAllServices = event.target.checked;
   }
@@ -126,6 +150,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
     this.defaultServices.forEach(item => {
       if (!item.selected) {
         this.selectAllServices = false;
+        item.validateRate = true;
       }
     })
   }
@@ -138,7 +163,10 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
   }
   onSelectCompany(data) {
     this.contractsHourly.setCompanyId((data) ? data.id : null);
-    if (data) this.validate.resetCompany();
+    if (data) {
+      this.validate.resetCompany();
+      this.validate.resetDate();
+    }
   }
   onChangeStartDate(data) {
     this.contractsHourly.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

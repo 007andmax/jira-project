@@ -28,9 +28,9 @@ export class DeviceSettingComponent implements OnInit {
   modelbutton: boolean;
   techCompany: any;
   manufactureId: Number;
-  @ViewChild("deviceType", { static: true }) deviceType: DeviceSettingDeviceTypeComponent;
-  @ViewChild("manufacture", { static: true }) manufacture: DeviceSettingManufactureComponent;
-  @ViewChild("model", { static: true }) model: DeviceSettingModelComponent;
+  @ViewChild("deviceType", { static: false }) deviceType: DeviceSettingDeviceTypeComponent;
+  @ViewChild("manufacture", { static: false }) manufacture: DeviceSettingManufactureComponent;
+  @ViewChild("model", { static: false }) model: DeviceSettingModelComponent;
   addDeviceType: boolean = false;
   addManufacture: boolean = false;
   addModel: boolean = false;

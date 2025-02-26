@@ -36,6 +36,9 @@ export class ContractsAsideHourlyBillingPreviewComponent implements OnInit, OnDe
     });
     this.sub.add(getOnTaxess);
   }
+  getDiscount(item) {
+    return item.discountAmount && item.discountAmount != undefined ? `${item.discountAmount} %` : '';
+  }
   getSelectedTaxes(taxes) {
     let selectedTax = [];
     this.taxes.forEach(item => {

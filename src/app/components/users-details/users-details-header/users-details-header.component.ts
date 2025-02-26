@@ -24,7 +24,7 @@ export class UsersDetailsHeaderComponent implements OnInit {
   @Input() user: UserProfile = new UserProfile();
   @Output() onEdit = new EventEmitter<any>();
   @Output() onDraftEmail = new EventEmitter<any>();
-  @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
+  @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
   selectedCustomerCompaniesInfo: Array<UserCustomerCompaniesInfo> = [];
   constructor(public customerPortalStateService: CustomerPortalStateService,
     private companiesStateService: CompaniesStateService,

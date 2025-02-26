@@ -2,7 +2,7 @@ import { NonContractServiceValidate } from '../../../../non-contract-services/cl
 
 export class ContractsHourlyAddDefaultServiceValidate extends NonContractServiceValidate {
     validate: boolean = true;
-
+    descriptionValidate: string = "";
     public setName(data) {
         this.name = data;
     }
@@ -14,5 +14,8 @@ export class ContractsHourlyAddDefaultServiceValidate extends NonContractService
     }
     public getValidate() {
         return this.validate;
+    }
+    public setDescriptionValidate(data) {
+        this.descriptionValidate = data;
     }
 }

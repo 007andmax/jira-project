@@ -60,9 +60,8 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
       this.service = new DefaultServicesHourlyContract(JSON.parse(JSON.stringify(data)));
     } else {
       this.service = new DefaultServicesHourlyContract();
-      this.service.taxes = this.defaultSelectedTax;
     }
-
+    this.service.taxes = this.defaultSelectedTax;
   }
   onChangeRate(event) {
     this.service.rate = Number(event.target.value);
@@ -73,7 +72,7 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
     this.service.taxes = taxes;
     this.defaultSelectedTax = taxes;
     this.service.taxes = this.defaultSelectedTax;
-    this.taxesStateService.setTaxesFromtEdit(taxes);
+    // this.taxesStateService.setTaxesFromtEdit(taxes);
   }
   public searchDuplicatedServiceNames() {
     this.service.name = this.serviceDropDown.getInputText();
@@ -92,6 +91,7 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
           this.add();
         } else {
           this.validate.setValidate(false);
+          this.validate.setDescriptionValidate(data[this.service.name]);
         }
       }, err => {
         this.validate.setValidate(false);
