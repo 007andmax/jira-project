@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
- 
+
 
 /*describe('TicketStateService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

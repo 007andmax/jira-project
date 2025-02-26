@@ -26,7 +26,6 @@ export class TerminalComponent implements OnInit, OnDestroy {
   loading = false;
   his = '';
   sub: Subscription = new Subscription();
-  @ViewChild('commandFrm', { static: true }) form: any;
   commandModal: commandModal = {
     title: '',
     command: '',
@@ -353,9 +352,7 @@ export class TerminalComponent implements OnInit, OnDestroy {
 
   createCommand() {
     this.submitted = true;
-    if (this.form.invalid) {
-      return;
-    }
+
     this.loading = true;
     let data = {
       title: this.commandModal.title,

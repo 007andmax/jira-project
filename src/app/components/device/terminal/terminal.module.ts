@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TerminalComponent } from './terminal.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TerminalRoutingModule } from './terminal-routing.module';
 
@@ -13,7 +13,8 @@ import { TerminalRoutingModule } from './terminal-routing.module';
         CommonModule,
         FormsModule,
         NgbModule,
-        TerminalRoutingModule
+        TerminalRoutingModule,
+        ReactiveFormsModule
     ],
 
 

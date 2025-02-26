@@ -40,8 +40,13 @@
                         >
                             <p *ngFor="let split of splitCommand">
                                 <span *ngIf="split != 'line'">{{split}}</span>
-                                <span *ngIf="split == 'line'" [innerHtml]="htmldata"></span>
+                                <span
+                                    *ngIf="split == 'line'"
+                                    [innerHtml]="htmldata"
+                                ></span>
                             </p>
+
+
 
                             <!-- <textarea>C:\Users\Sam\Desktop></textarea> -->
                         </div>
@@ -79,7 +84,7 @@
                     class="add-btn"
                     (click)="openAddModal();"
                 >
-                  <span class="qt-icon icon__add qt-sz-16 qt-icon__white qt-dib"></span>
+                    <span class="qt-icon icon__add qt-sz-16 qt-icon__white qt-dib"></span>
                 </a>
                 <!-- Modal Add New Command -->
                 <div
@@ -92,10 +97,7 @@
                         </h2>
                     </div>
                     <div class="modal-body">
-                        <form
-                            novalidate
-                            #commandFrm="ngForm"
-                        >
+                        <form novalidate>
                             <div class="f-row">
                                 <div class="f-col col-100">
                                     <label for="Title">Command Title</label>
@@ -230,6 +232,8 @@
                                                 name="command"
                                                 (keyup)="countLineNumber()"
                                             >
+
+
 
 
 
@@ -396,8 +400,8 @@
                     (click)="openRunScript();"
                     class="btn btn-primary"
                 >
-                  <span class="qt-icon icon__run-script qt-sz-16 qt-icon__white qt-dib qt-ml-4"></span>
-                  <span class="qt-icon icon__run-script qt-dib qt-sz-20 qt-icon__white qt-mr-6"></span>
+                    <span class="qt-icon icon__run-script qt-sz-16 qt-icon__white qt-dib qt-ml-4"></span>
+                    <span class="qt-icon icon__run-script qt-dib qt-sz-20 qt-icon__white qt-mr-6"></span>
                     Script Library
                 </a>
             </div>
@@ -679,7 +683,7 @@
                             title="Close"
                             (click)="emptyScriptDetail()"
                         >
-                           <span class="qt-icon icon__arrow-back qt-ic-c qt-sz-24 qt-va-m qt-dib"></span>
+                            <span class="qt-icon icon__arrow-back qt-ic-c qt-sz-24 qt-va-m qt-dib"></span>
                         </a>
                         Script Library
                     </h2>
@@ -846,6 +850,8 @@
 
 
 
+
+
                                         </textarea>
                                     </div>
                                     <textarea
@@ -898,6 +904,8 @@
                 </div>
             </div>
         </aside>
+
+
 
 
 
@@ -1008,7 +1016,7 @@
                                     data-tooltip="Add"
                                     (click)="createCategory(category)"
                                 >
-                                  <span class="qt-icon icon__done qt-icon__white qt-sz-16"></span>
+                                    <span class="qt-icon icon__done qt-icon__white qt-sz-16"></span>
                                 </a>
                                 <a
                                     *ngIf="!category.edit && !category.create"
@@ -1034,7 +1042,11 @@
 
 
 
+
+
                 <div class="confirm-btn">
+
+
 
 
 

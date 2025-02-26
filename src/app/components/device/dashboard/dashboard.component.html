@@ -627,10 +627,7 @@
                     </a>
                 </div>
                 <div class="middle-content">
-                    <form
-                        (ngSubmit)="addAssetNote()"
-                        #assetNotesForm="ngForm"
-                    >
+                    <form (ngSubmit)="addAssetNote()">
                         <div class="f-row">
                             <div class="f-col col-100">
                                 <label>Note Subject</label>
@@ -680,7 +677,6 @@
                             <button
                                 type="submit"
                                 class="btn btn-primary"
-                                [disabled]="!assetNotesForm.form.valid"
                             >
                                 Create Note
                             </button>
@@ -694,6 +690,10 @@
                         </div>
                     </form>
                 </div>
+
+
+
+
 
 
 
@@ -747,10 +747,7 @@
                         </a>
                     </div>
                     <div class="middle-content">
-                        <form
-                            (ngSubmit)="editAssetNote()"
-                            #editassetNotesForm="ngForm"
-                        >
+                        <form (ngSubmit)="editAssetNote()">
                             <div class="f-row">
                                 <div class="f-col col-100">
                                     <label>Note Subject</label>
@@ -800,7 +797,6 @@
                                 <button
                                     type="submit"
                                     class="btn btn-primary"
-                                    [disabled]="!editassetNotesForm.form.valid"
                                 >
                                     Edit Note
                                 </button>
@@ -811,6 +807,10 @@
                                 >
                                     Cancel
                                 </a>
+
+
+
+
 
 
 
@@ -859,6 +859,10 @@
     class="loading"
     *ngIf="loading"
 ></div>
+
+
+
+
 
 
 

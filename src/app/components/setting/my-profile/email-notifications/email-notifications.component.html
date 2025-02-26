@@ -9,7 +9,7 @@
                 <form
                     class="email-note-wrape"
                     (ngSubmit)="onSubmit()"
-                    #emailForm="ngForm"
+                    [formGroup]="emailForm"
                     *ngIf="emailNotifications"
                 >
                     <label class="qt-checkbox qt-mb-16">
