@@ -23,9 +23,9 @@ describe('ContractsService', () => {
       providers: [ContractsService]
     });
 
-    // Use TestBed.get() instead of TestBed.inject()
-    service = TestBed.get(ContractsService);
-    httpMock = TestBed.get(HttpTestingController);
+    // Use TestBed.inject() instead of TestBed.inject()
+    service = TestBed.inject(ContractsService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
   // Verify no outstanding requests after each test
