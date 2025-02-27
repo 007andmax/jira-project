@@ -10,6 +10,7 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 })
 export class UserDeArchiveNotificationComponent implements OnInit {
   @Input() user: User;
+  @Input() message: string;
   constructor(private confirmStateService: ConfirmStateService,
     public activeModal: NgbActiveModal,
   ) { }

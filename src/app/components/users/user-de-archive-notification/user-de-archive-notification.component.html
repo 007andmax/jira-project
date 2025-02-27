@@ -7,10 +7,7 @@
         <h3>Restore User</h3>
         <div class="exist-agreements">
             <p>You cannot restore the user.</p>
-            <p>
-                There exists an active user with the same email address.
-            </p>
-            <p [textContent]="'The existing active user: ' + user.firstName + ' ' + user.lastName"></p>
+            <p [textContent]="message"></p>
         </div>
     </div>
 </div>
