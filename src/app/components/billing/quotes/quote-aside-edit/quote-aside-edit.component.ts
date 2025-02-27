@@ -46,8 +46,8 @@ export class QuoteAsideEditComponent implements OnInit, OnDestroy {
           this.close();
         })
       }, err => {
-        this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
         this.saveAndSendBtn.setDisabled(false);
+        this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
       });
     })
     this.sub.add(getHandleSendModeEdit);
@@ -81,8 +81,8 @@ export class QuoteAsideEditComponent implements OnInit, OnDestroy {
         this.close();
       });
     }, err => {
-      this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
       this.saveAndDownloadBtn.setDisabled(false);
+      this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
     });
   }
   public saveAndContinue() {
@@ -93,8 +93,8 @@ export class QuoteAsideEditComponent implements OnInit, OnDestroy {
       this.saveAndContinueBtn.setDisabled(false);
       this.close();
     }, err => {
-      this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
       this.saveAndContinueBtn.setDisabled(false);
+      this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
     });
   }
   public saveAndApprove() {
@@ -109,8 +109,8 @@ export class QuoteAsideEditComponent implements OnInit, OnDestroy {
             this.close();
           });
       }, err => {
-        this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
         this.saveAndApproveBtn.setDisabled(false);
+        this.validate.setErrorMessage(err.error.validationResults.saleQuotePostDto);
       });
   }
   onPreview() {
