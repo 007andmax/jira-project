@@ -30,7 +30,7 @@
     "@angular/upgrade": "9.1.13",
     "@fortawesome/angular-fontawesome": "0.3.0",
     "@fortawesome/fontawesome-svg-core": "1.2.25",
-    "@kolkov/angular-editor": "1.0.0",
+    "@kolkov/angular-editor": "1.0.3",
     "@ng-bootstrap/ng-bootstrap": "5.3.0",
     "@popperjs/core": "2.6.0",
     "@stomp/stompjs": "6.1.0",
