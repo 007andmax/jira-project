@@ -319,6 +319,7 @@ input.qt-dropdown-input {
   padding: 10px 20px;
   display: flex;
   align-items: center;
+  justify-content: center;
   border: none;
   width: fit-content;
   cursor: pointer;
@@ -358,11 +359,11 @@ input.qt-dropdown-input {
       left: calc(50% - 9px);
     }
   }
-  &:not(.--gray):not(.--outline) {
-    &:hover {
-      color: $white;
-    }
-  }
+  //&:not(.--gray):not(.--outline):not(.--transparent):not(.qt-button-filter --gray) { // TODO check
+  //  &:hover {
+  //    color: $white;
+  //  }
+  //}
   &:focus {
     outline: none;
     background-color: $blue-light-600;
@@ -378,7 +379,6 @@ input.qt-dropdown-input {
   &:hover {
     background-color: $blue-light-500;
   }
-
 
   &.--outline {
     color: $blue-light-600;
@@ -428,6 +428,26 @@ input.qt-dropdown-input {
       }
     }
   }
+
+  &.--transparent {
+    position: relative;
+    padding-inline: 0;
+    border: transparent;
+    color: $blue-light-600;
+    background-color: transparent;
+    font-weight: 400;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 6px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: $blue-light-600;
+    }
+  }
+
   &.qt-button-square__afterpend {
     border-left: unset;
   }
@@ -1604,24 +1624,6 @@ button.qt-button.--gray:focus {
   padding: 11px 10px;
   height: 100%;
   box-shadow: unset;
-}
-
-.qt-btn {
-  display: flex;
-  align-items: center;
-  border-radius: 4px;
-  font-weight: 600;
-  &.--outline {
-    color: $blue-light-600;
-    border: solid 1px $blue-light-600;
-    background-color: $white;
-  }
-  &.--small {
-    height: 28px;
-    font-size: 12px;
-    padding-left: 8px;
-    padding-right: 8px;
-  }
 }
 
 .qt-toggle {

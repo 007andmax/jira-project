@@ -178,9 +178,6 @@ html.no-d3-tooltip .nvtooltip .value {
       }
     }
   }
-  .btn-new.btn-primary-white {
-    height: 36px;
-  }
   .qt-report__body {
     @include media-breakpoint-up($md) {
       min-height: calc(100vh - 211px);
@@ -347,13 +344,6 @@ html.no-d3-tooltip .nvtooltip .value {
 .run-report-content .form-group .report-caret-icon {
   top: calc(50% - 3px);
   right: 16px;
-}
-
-.run-report-content .btn {
-  margin-bottom: 20px;
-  vertical-align: bottom;
-  background-color: $green-600;
-  width: 100px;
 }
 
 .run-report-content .content,

@@ -470,9 +470,11 @@
 ::ng-deep div.autocomplete-user-tags .mat-option:hover {
   background-color: $gray-50 !important;
 }
-::ng-deep ticket-detail-profile-form-update .dropdown-menu {
-  padding: 8px;
-  max-height: 174px;
+::ng-deep ticket-detail-profile-form-update {
+  .dropdown-menu {
+    padding: 8px;
+    max-height: 174px;
+  }
 }
 ::ng-deep ticket-detail-profile-form-update .cps-block__visible-user .dropdown-menu {
   max-height: 212px;

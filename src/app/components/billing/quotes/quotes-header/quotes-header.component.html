@@ -9,7 +9,7 @@
         <div class="qt-page-list__header-title-line--rigth">
             <div class="qt-df qt-ai-c">
                 <button
-                    class="qt-btn --transparent"
+                    class="qt-button --transparent --md"
                     (click)="clearAll()"
                     *ngIf="countFilter > 0"
                 >
@@ -25,20 +25,21 @@
                         (click)="delete()"
                     >
                         <div class="qt-icon icon__delete qt-icon__red-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
-                        <div class="qt-lh-1">Archive Quote</div>
+                        <div class="qt-lh-1 qt-color-red-600">Archive Quote</div>
                     </div>
                 </div>
                 <button
-                    class="qt-btn btn-filter qt-ml-8"
+                    class="qt-button qt-button-filter --gray --md qt-ml-8"
                     [ngClass]="{'active':!toggleFilter}"
                     (click)="toggleFilter  = !toggleFilter"
                 >
+                    <span class="qt-icon icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                     <span
                         class="filter-counter qt-circle qt-sz-18 qt-fw-600 qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
                         *ngIf="countFilter > 0"
                         [textContent]="countFilter"
                     ></span>
-                    Filters
+                    <span>Filters</span>
                 </button>
                 <button
                     class="qt-button --gray --md qt-ml-8"

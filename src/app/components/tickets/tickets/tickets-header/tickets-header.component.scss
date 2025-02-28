@@ -5,17 +5,6 @@
   margin-right: 8px;
 }
 
-.filter-button {
-  &.active {
-    color: $blue-light-600;
-    background-color: #16a4fa10;
-    border-color: transparent;
-
-    .icon__filter {
-      background-color: $blue-light-600;
-    }
-  }
-}
 .list-filters {
   display: none;
   margin: -8px -8px 8px -8px;

@@ -104,23 +104,6 @@ h6,
     }
   }
 }
-
-.btn-new.btn-primary-white {
-  background: $white;
-  color: $blue-light-600;
-  border: 1px solid $blue-light-600;
-  @include сaption-l__m;
-  .qt-icon {
-    transition: .3s ease-in-out background-color;
-  }
-  &:hover {
-    background: $blue-light-600;
-    color: $white;
-    .qt-icon {
-      background-color: $white;
-    }
-  }
-}
 .radio-container {
   display: flex;
   margin: 0;
@@ -725,7 +708,7 @@ app-company-dash-detail {
     }
   }
 }
- 
+
 .recurring-tickets-content__modal {
   .app-drop-down__right-icon {
     bottom: 20px;
@@ -825,12 +808,6 @@ app-company-dash-detail {
     }
   }
   &__footer {
-    .btn-new {
-      height: 40px;
-      border-radius: 4px;
-      width: 100%;
-      @include body-m__sb;
-    }
     button + button {
       margin-left: 16px;
     }
@@ -1454,12 +1431,6 @@ app-quotes-item {
     }
   }
 
-  .new-companies-content__header {
-    .btn-new {
-      height: 36px;
-    }
-  }
-
   .qt-page-list__header-filters app-drop-down {
     display: contents;
   }
@@ -2047,12 +2018,6 @@ app-quotes-item {
       top: 50%;
       transform: translateY(-50%);
     }
-  }
-
-  .btn-new.btn-primary-white {
-    display: inline-flex;
-    padding: 6px 8px;
-    height: 28px;
   }
 }
 .new-companies-content__modal {
@@ -3350,15 +3315,6 @@ input.--input-error:hover {
     height: 36px !important;
   }
 
-  .btn {
-    height: 36px;
-    flex-shrink: 0;
-  }
-
-  .btn-primary-white {
-    height: 36px;
-  }
-
   .product-list-ticket {
     padding-bottom: 0;
   }
@@ -3492,22 +3448,6 @@ add-category-product {
   .qt-input-block {
     label {
       margin-bottom: 8px;
-    }
-  }
-  .btn-primary {
-    min-width: auto;
-  }
-  .btn-new {
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 17px;
-    height: 36px;
-    .disabled {
-      color: $gray-500;
-    }
-    .btn-primary {
-      font-weight: 600;
     }
   }
   input {

@@ -54,6 +54,14 @@
 }
 .product-list-ticket {
   width: 100%;
+
+  &.company-report {
+    width: 100%;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    font-weight: 600;
+  }
 }
 .report-title {
   top: unset !important;

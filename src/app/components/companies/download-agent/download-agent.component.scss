@@ -1,0 +1,17 @@
+@import "./src/assets/styles/variable";
+
+.download-agent-modal {
+  padding: 50px 75px;
+  position: relative;
+}
+.download-agent-modal .qt-button.not-active {
+  background-color: $gray-600;
+  border-color: $gray-600;
+  cursor: default;
+  pointer-events: none;
+
+  &:hover {
+    background-color: $blue-light-600;
+    color: $white;
+  }
+}

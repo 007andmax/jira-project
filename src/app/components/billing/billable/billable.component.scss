@@ -7,10 +7,6 @@ app-billable-item {
     padding-left: 24px !important;
     flex: 0 0 52px;
 }
-.--outline-blue[disabled] {
-    border: solid 1px $blue-light-300;
-    color: $blue-light-300;
-}
 .billable-table__menu {
     padding-right: 16px;
     width: 55px;

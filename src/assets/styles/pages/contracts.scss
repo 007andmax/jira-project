@@ -24,24 +24,6 @@
     }
   }
 
-  .filter-button {
-    padding-left: 30px;
-    background-repeat: no-repeat;
-    background-position: 10px center;
-    background-size: 16px;
-    background-color: $white;
-    color: $gray-900;
-    border: none;
-    background-image: url(/assets/img/icons/filter.svg);
-    &.active {
-      background-color: #16a4fa10;
-      color: $blue-light-600;
-      padding-left: 16px;
-      border: none;
-      background-image: none;
-    }
-  }
-
   .contracts-table__amount {
     flex: 0 0 85px;
     padding-right: 10px !important;

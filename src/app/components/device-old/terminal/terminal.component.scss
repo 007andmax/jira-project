@@ -557,20 +557,6 @@
               display: flex;
               align-items: center;
               justify-content: flex-end;
-              .btn{
-                padding:13px 16px;
-                text-align:center;
-                margin-left:10px;
-                font-size:13px;
-                &.btn-secondary{
-                  border: solid 1px $gray-300;
-                  background-color: $white !important;
-                }
-                &.btn-remove{
-                  background-color: $red-600;
-                  border-color: $red-600;
-                }
-              }
             }
           }
         }
@@ -633,21 +619,6 @@
       .confirm-btn {
         align-items: center;
         justify-content: flex-start !important;
-        button{
-          &.btn.btn-small {
-            margin-left: 0 !important;
-            background-color: transparent;
-            border: 1px solid $blue-light-600;
-            color: $blue-light-600;
-            font-size: 12px !important;
-            padding: 9px 8px !important;
-            display: flex !important;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-            margin-top: 10px;
-          }
-        }
       }
     }
   }
