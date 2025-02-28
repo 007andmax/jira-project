@@ -154,6 +154,7 @@ import { UsersDetailsLeftPanelComponent } from './components/users-details/users
 import { SubscriptionServicesComponent } from './components/billing/subscription-services/subscription-services.component';
 import { SubscriptionServicesCheckUseComponent } from './components/billing/subscription-services/subscription-services-check-use/subscription-services-check-use.component';
 import { SubscriptionServicesConfirmComponent } from './components/billing/subscription-services/subscription-services-confirm/subscription-services-confirm.component';
+import { CannedResponsesAsideModule } from './components/setting/ticket-settings-page/canned-responses/canned-responses-aside/canned-responses-aside.module';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -180,7 +181,6 @@ declare var $: any;
     UsersCheckUseComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
-    CannedResponsesAsideComponent,
     ManufacturesCheckUseComponent,
     UserDeArchiveNotificationComponent,
     PreviewFileComponent,
@@ -238,8 +238,8 @@ declare var $: any;
     MatErrorModule,
     MatChipListModule,
     MatChipModule,
-    FileManagementAddFileModule
-  ],
+    FileManagementAddFileModule,
+    CannedResponsesAsideModule],
   entryComponents: [
     ConfirmComponent,
     DownloadAgentComponent,

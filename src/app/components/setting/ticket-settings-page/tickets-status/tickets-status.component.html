@@ -66,23 +66,25 @@
                         This Ticket Status is already occupied
                     </app-mat-error>
                 </div>
-                <div class="tab-pane__table-cell ticket-status-table__color">123123123
+                <div class="tab-pane__table-cell ticket-status-table__color">
                     <div
                         class="form-row tag-color-container"
                         ngbDropdown
                     >
-                        <div id="dropdownBasic1">
-                            <i
-                                class="tag-color pointer"
+                        <div id="dropdownBasic2">
+                            <div
+                                class="qt-df qt-ai-c qt-jc-c qt-sz-24 tag-color pointer"
                                 ngbDropdownToggle
                                 [ngStyle]="{'background-color':statusColors[addStatus.color].textColor ,
                             'border-color': statusColors[addStatus.color].textColor}"
-                            ></i>
+                            >
+                                <div class="qt-icon icon__color-picker qt-icon__white qt-sz-16 qt-icon__white"></div>
+                            </div>
                         </div>
                         <div
                             ngbDropdownMenu
                             class="status-container-db"
-                            aria-labelledby="dropdownBasic1"
+                            aria-labelledby="dropdownBasic2"
                         >
                             <div class="status-container">
                                 <div
@@ -91,12 +93,14 @@
                                     (click)="setColor(i)"
                                     ngbDropdownItem
                                 >
-                                    <i
-                                        class="tag-color"
+                                    <div
+                                        class="qt-df qt-ai-c qt-jc-c qt-sz-24 tag-color"
                                         [ngClass]="{'--active':addStatus.color == i}"
                                         [ngStyle]="{'background-color':tagColor.textColor ,
                             'border-color': tagColor.textColor}"
-                                    ></i>
+                                    >
+                                        <div class="qt-icon icon__done qt-icon__white qt-sz-16 qt-icon__white"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -194,7 +198,7 @@
                                 [ngStyle]="{'background-color':statusColors[item.color] && statusColors[item.color].textColor ,
                             'border-color': statusColors[item.color] && statusColors[item.color].textColor}"
                             >
-                              <div class="qt-icon icon__color-picker qt-icon__white qt-sz-16 qt-icon__white"></div>
+                                <div class="qt-icon icon__color-picker qt-icon__white qt-sz-16 qt-icon__white"></div>
                             </div>
                         </div>
                         <div
