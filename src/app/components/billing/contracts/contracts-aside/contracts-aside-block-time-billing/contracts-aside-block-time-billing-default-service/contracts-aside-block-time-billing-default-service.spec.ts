@@ -80,7 +80,7 @@ describe('ContractsAsideBlockTimeBillingDefaultServiceComponent integration test
           timeOut: 5000,
           onActivateTick: true
         })],
-      providers: [{ provide: CommonService }],
+      providers: [{ provide: CommonService, useValue: undefined }],
       declarations: [ContractsAsideBlockTimeBillingDefaultServiceComponent
       ],
     })
