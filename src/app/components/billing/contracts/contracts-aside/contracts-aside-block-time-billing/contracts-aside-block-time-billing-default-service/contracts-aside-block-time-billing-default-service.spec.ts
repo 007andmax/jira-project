@@ -15,6 +15,7 @@ import { By } from '@angular/platform-browser';
 import { DecimalNumberDirective } from 'src/app/directives/decimal-number/decimal-number.directive';
 import { numberDirective } from 'src/app/directives/number/number.directive';
 import { CommonService } from 'src/app/services/common/common.service';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -37,8 +38,8 @@ describe('ContractsAsideBlockTimeBillingDefaultServiceComponent unit test', () =
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        })],
-
+        }),
+        NoopAnimationsModule],
       declarations: [ContractsAsideBlockTimeBillingDefaultServiceComponent
       ]
     }).compileComponents();
@@ -79,7 +80,8 @@ describe('ContractsAsideBlockTimeBillingDefaultServiceComponent integration test
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        })],
+        }),
+        NoopAnimationsModule],
       providers: [{ provide: CommonService, useValue: undefined }],
       declarations: [ContractsAsideBlockTimeBillingDefaultServiceComponent
       ],

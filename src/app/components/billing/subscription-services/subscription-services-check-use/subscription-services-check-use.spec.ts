@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { SubscriptionServicesCheckUseComponent } from './subscription-services-check-use.component';
 import { SubscriptionServices } from '../class/subscription-services';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -43,7 +44,8 @@ describe('SubscriptionServicesCheckUseComponent unit test', () => {
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        })],
+        }),
+        NoopAnimationsModule],
       declarations: [SubscriptionServicesCheckUseComponent
       ],
       providers: [NgbActiveModal]

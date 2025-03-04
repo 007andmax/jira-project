@@ -25,6 +25,7 @@ import { ContractsAsideOtherServiceModule } from '../../contracts-aside/contract
 import { ContractsAsideUserDeviceServiceModule } from '../../contracts-aside/contracts-aside-user-device-billing/contracts-aside-user-device-service/contracts-aside-user-device-service.module';
 import { ContractsAsideEditHourlyAddDefaultServiceModule } from './contracts-aside-edit-hourly-add-default-service/contracts-aside-edit-hourly-add-default-service.module';
 import { ContractsAsideHourlyBillingEditDefaultServiceComponent } from './contracts-aside-hourly-billing-edit-default-service/contracts-aside-hourly-billing-edit-default-service.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 describe('ContractsAsideHourlyEditComponent unit test', () => {
@@ -59,7 +60,8 @@ describe('ContractsAsideHourlyEditComponent unit test', () => {
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        })],
+        }),
+        NoopAnimationsModule],
       declarations: [ContractsAsideHourlyEditComponent,
         ContractsAsideHourlyBillingEditDefaultServiceComponent
       ],

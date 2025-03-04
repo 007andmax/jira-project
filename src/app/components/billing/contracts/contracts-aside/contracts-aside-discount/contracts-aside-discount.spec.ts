@@ -12,6 +12,7 @@ import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-n
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { ContractsAsideDiscountComponent } from './contracts-aside-discount.component';
 import { ContractsUserDeviceService } from '../class/contracts-user-device-service';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -26,7 +27,8 @@ describe('ContractsAsideDiscountComponent unit test', () => {
         NgbModule,
         NumberModule,
         DecimalNumberModule,
-        MatErrorModule],
+        MatErrorModule,
+        NoopAnimationsModule],
       declarations: [ContractsAsideDiscountComponent
       ],
     }).compileComponents();

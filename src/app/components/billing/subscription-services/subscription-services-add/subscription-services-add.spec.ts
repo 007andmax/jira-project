@@ -15,6 +15,7 @@ import { SubscriptionServicesRoutingModule } from '../subscription-services-rout
 import { SubscriptionServicesAddComponent } from './subscription-services-add.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -42,7 +43,8 @@ describe('SubscriptionServicesAddComponent unit test', () => {
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        })],
+        }),
+        NoopAnimationsModule],
       declarations: [SubscriptionServicesAddComponent
       ],
     }).compileComponents();

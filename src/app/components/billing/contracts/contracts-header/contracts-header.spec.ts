@@ -7,6 +7,7 @@ import { ContractsFilterComponent } from '../contracts-filter/contracts-filter.c
 import { ContractsHeaderComponent } from './contracts-header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 describe('ContractsHeaderComponent unit test', () => {
@@ -24,7 +25,8 @@ describe('ContractsHeaderComponent unit test', () => {
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        })],
+        }),
+        NoopAnimationsModule],
       declarations: [ContractsHeaderComponent,
         ContractsFilterComponent
       ],

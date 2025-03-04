@@ -4,6 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 import { ContractsAsideBlockTimeBillingAddDefaultServiceComponent } from './contracts-aside-block-time-billing-add-default-service.component';
 import { DefaultServicesHourlyContract } from '../../class/default-service-hourly-contract';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -15,7 +16,8 @@ describe('ContractsAsideBlockTimeBillingAddDefaultServiceComponent unit test', (
     TestBed.configureTestingModule({
       imports: [CommonModule,
         NgbModule,
-        MatErrorModule],
+        MatErrorModule,
+        NoopAnimationsModule],
       declarations: [ContractsAsideBlockTimeBillingAddDefaultServiceComponent
       ],
     }).compileComponents();

@@ -14,6 +14,7 @@ import { ContractsAsideUserDeviceServiceComponent } from './contracts-aside-user
 import { ContractsUserDeviceService } from '../../class/contracts-user-device-service';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -37,7 +38,8 @@ describe('ContractsAsideUserDeviceServiceComponent unit test', () => {
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        })],
+        }),
+        NoopAnimationsModule],
       declarations: [
         ContractsAsideUserDeviceServiceComponent
       ],

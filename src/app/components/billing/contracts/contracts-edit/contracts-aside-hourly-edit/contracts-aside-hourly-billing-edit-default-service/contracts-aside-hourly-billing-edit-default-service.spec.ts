@@ -26,6 +26,7 @@ import { ContractsAsideHourlyBillingEditDefaultServiceComponent } from './contra
 import { ContractsHourlyService } from '../../../contracts-aside/class/contracts-hourly-service';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 describe('ContractsAsideHourlyBillingEditDefaultServiceComponent unit test', () => {
@@ -60,7 +61,8 @@ describe('ContractsAsideHourlyBillingEditDefaultServiceComponent unit test', () 
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        })],
+        }),
+        NoopAnimationsModule],
       declarations: [ContractsAsideHourlyBillingEditDefaultServiceComponent
       ],
     }).compileComponents();

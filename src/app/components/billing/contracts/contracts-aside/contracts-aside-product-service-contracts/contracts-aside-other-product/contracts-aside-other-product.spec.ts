@@ -10,6 +10,7 @@ import { InventoryItem } from 'src/app/components/inventory/class/inventory-item
 import { ContractsOtherProduct } from '../../class/contracts-other-product';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -30,7 +31,8 @@ describe('ContractsAsideOtherProductComponent unit test', () => {
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        })],
+        }),
+        NoopAnimationsModule],
       declarations: [ContractsAsideOtherProductComponent
       ],
     }).compileComponents();

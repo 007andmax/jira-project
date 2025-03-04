@@ -25,7 +25,7 @@ import { ServiceAgreement } from '../../class/service-agreement';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { DefaultServicesHourlyContract } from '../../contracts-aside/class/default-service-hourly-contract';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -61,7 +61,7 @@ describe('ContractsAsideBlockTimeEditComponent unit test', () => {
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        }), BrowserAnimationsModule],
+        }), NoopAnimationsModule],
       declarations: [ContractsAsideBlockTimeEditComponent
       ],
     }).compileComponents();
