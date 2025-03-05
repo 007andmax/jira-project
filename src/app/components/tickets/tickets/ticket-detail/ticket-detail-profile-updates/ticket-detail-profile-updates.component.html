@@ -64,15 +64,4 @@
             *ngIf="showLoadMoreUpdates && page > 0"
         ></div>
     </div>
-    <div
-        *ngIf="showLoadMoreUpdates && ticketProfile.unloadedUpdates > 0"
-        class="button-loader"
-        (click)="fetchUpdates()"
-    >
-        Load More Updates
-        <span
-            *ngIf="showPreloader"
-            class="loading"
-        ></span>
-    </div>
 </div>

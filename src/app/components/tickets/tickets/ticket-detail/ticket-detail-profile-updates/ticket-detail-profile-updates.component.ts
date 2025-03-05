@@ -84,7 +84,7 @@ export class TicketDetailProfileUpdatesComponent implements OnInit, OnDestroy {
       this.showPreloader = false;
       this.showLoadMoreUpdates = false;
       this.infiniteScrollDisabled = false;
-      if (resp.length < 5) this.ticketsListService.setBlockList(true);
+      if (resp.length < 10) this.ticketsListService.setBlockList(true);
       this.page += 1;
       this.cd.detectChanges();
     })
@@ -93,18 +93,7 @@ export class TicketDetailProfileUpdatesComponent implements OnInit, OnDestroy {
     this.infiniteScrollDisabled = true;
     this.getUpdates(this.ticketProfile.id);
   }
-  fetchUpdates() {
-    if (this.showPreloader) return;
-    this.showPreloader = true;
-    this.ticketsService.fetchUpdates(this.ticketProfile).subscribe((resp: any) => {
-      this.onFetchUpdates.emit(resp);
-      this.showPreloader = false;
-      this.showLoadMoreUpdates = false;
-      this.cd.detectChanges();
-    })
-  }
   getCountUpdates() {
-
     return (this.showLoadMoreUpdates) ? this.updates.length + this.ticketProfile.unloadedUpdates : this.updates.length;
   }
   public resetShowLoadMoreUpdates() {

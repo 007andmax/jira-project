@@ -103,17 +103,8 @@ export class TicketsService {
         return data;
       }));
   }
-  public fetchUpdates(ticket) {
-    var loadedIds = [];
-    if (ticket.updates) {
-      for (var i = 0; i < ticket.updates.length; i++) {
-        loadedIds.push(ticket.updates[i].id)
-      }
-    }
-    return this.http.post(this.apiUrl + `v2/tickets/${ticket.id}/updates/fetch`, loadedIds);
-  }
   public getUpdates(ticketId, page) {
-    return this.http.get(this.apiUrl + `v2/tickets/${ticketId}/updates?page=${page}&size=5`);
+    return this.http.get(this.apiUrl + `v2/tickets/${ticketId}/updates?page=${page}&size=10`);
   }
   public changeSubjectNoteTicket(id, subject, note, companyId = null, createdBy = null) {
     let data: any = { id: id, subject: subject, note: note, createdBy: createdBy };
