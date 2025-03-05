@@ -92,6 +92,7 @@ import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat
 import { CompanyUsersDropDownModule } from '../ticket-add-aside/company-users-drop-down/company-users-drop-down.module';
 import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
 import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
+import { TicketDetailTotalStatisticsComponent } from './ticket-detail-total-statistics/ticket-detail-total-statistics.component';
 
 
 
@@ -151,7 +152,8 @@ import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
         AddAssignedUserNoteComponent,
         TicketDetailTicketsDetailsComponent,
         TicketDetailTicketsComponent,
-        TicketDetailTicketsStatusComponent
+        TicketDetailTicketsStatusComponent,
+        TicketDetailTotalStatisticsComponent
 
     ],
     imports: [

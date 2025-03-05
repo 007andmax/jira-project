@@ -193,6 +193,7 @@
                 *ngIf="!showPreloader"
             >
                 <ticket-detail-claim-info [ticketProfile]="ticketProfile"></ticket-detail-claim-info>
+                <app-ticket-detail-total-statistics [ticketProfile]="ticketProfile"></app-ticket-detail-total-statistics>
                 <ticket-detail-change-status
                     #changeStatus
                     [ticketProfile]="ticketProfile"
