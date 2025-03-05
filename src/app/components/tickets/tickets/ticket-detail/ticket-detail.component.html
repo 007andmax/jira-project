@@ -171,7 +171,6 @@
                     ></ticket-detail-message>
                     <ticket-detail-profile-updates
                         #ticketProfileUpdates
-                        [hidden]="!ticketProfile.updates || ticketProfile.updates.length === 0"
                         (onFetchUpdates)="onFetchUpdates($event)"
                         [ticketProfile]="ticketProfile"
                         [updates]="ticketProfile.updates"

@@ -60,6 +60,9 @@ export class TicketProfile {
     isCompanyDeleted: boolean = false;
     deviceId: string;
     selectedCustomerCompany: UserCustomerCompaniesInfo;
+    "totalTimeWorked": number;
+    "totalProductsPrice": number;
+    "companyServiceType": string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -86,9 +89,6 @@ export class TicketProfile {
                     id: item.id
                 }
                 return tag;
-            })
-            this.updates = data.updates.map(item => {
-                return new TicketProfileUpdate(item);
             })
             this.priorityLevel = new TicketsPriority(data.priorityLevel);
         }

@@ -112,6 +112,9 @@ export class TicketsService {
     }
     return this.http.post(this.apiUrl + `v2/tickets/${ticket.id}/updates/fetch`, loadedIds);
   }
+  public getUpdates(ticketId, page) {
+    return this.http.get(this.apiUrl + `v2/tickets/${ticketId}/updates?page=${page}&size=5`);
+  }
   public changeSubjectNoteTicket(id, subject, note, companyId = null, createdBy = null) {
     let data: any = { id: id, subject: subject, note: note, createdBy: createdBy };
     if (companyId) data.companyId = companyId;

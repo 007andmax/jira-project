@@ -349,7 +349,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       if (this.ticketProfile.createdUser && !this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getPasswordsDocuments(this.ticketProfile.createdUser.id);
       if (!this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getDevicesByCompany(this.ticketProfile.company.id);
       if (this.ticketMessage) this.ticketMessage.reset();
-      this.ticketProfileUpdates.resetShowLoadMoreUpdates();
+      this.ticketProfileUpdates.getUpdates(id);
       if (this.ticketTasks) this.ticketTasks.getTicketTasks(id);
       if (this.ticketProfile.createdUser) {
         let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);

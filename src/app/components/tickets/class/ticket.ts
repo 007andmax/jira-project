@@ -30,6 +30,9 @@ export class Ticket {
     isCompanyDeleted: boolean;
     selected: boolean = false;
     tags: Array<Tag> = [];
+    "totalTimeWorked": number;
+    "totalProductsPrice": number;
+    "companyServiceType": string;
     constructor(data) {
         this.assignedUserId = data.assignedUserId;
         this.attachmentsCount = data.attachmentsCount;
@@ -59,6 +62,9 @@ export class Ticket {
         this.customStatus = data.customStatus;
         this.isCompanyDeleted = data.isCompanyDeleted;
         this.tags = data.tags;
+        this.totalTimeWorked = data.totalTimeWorked;
+        this.totalProductsPrice = data.totalProductsPrice;
+        this.companyServiceType = data.companyServiceType;
     }
     public setAssignedUserId(id) {
         this.assignedUserId = id;

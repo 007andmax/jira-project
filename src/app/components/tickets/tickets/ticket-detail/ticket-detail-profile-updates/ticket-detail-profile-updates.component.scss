@@ -247,3 +247,11 @@
         top: calc(50% - 15px);
     }
 }
+.ticket-updates__ticket {
+    overflow: auto;
+    position: relative;
+}
+.pengind-loading {
+    bottom: 20px;
+    top: auto;
+}
