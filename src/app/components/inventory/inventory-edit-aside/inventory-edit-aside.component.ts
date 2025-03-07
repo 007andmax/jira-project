@@ -175,7 +175,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     let value = Number(val);
     this.inventory.sale = Number(this.quoteStateService.roundToTwo((value * this.inventory.cost / 100 + this.inventory.cost)));
     this.inventory.sale_str = this.inventory.sale.toFixed(2);
-    this.inventory.markup = this.roundingMarkup(value);
+    this.inventory.markup = value;
   }
   formatterGLNumber = (result: string) => {
     return `${result["glNumber"]} - ${(result["description"] && result["description"].length > 0) ? result["description"]
@@ -185,14 +185,9 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
     return result ? `${result["glNumber"]} - ${(result["description"] && result["description"].length > 0) ? result["description"]
       : "No description"}` : "";
   };
-  private roundingMarkup(markup) {
-    return (!this.isInteger(markup)) ? Math.ceil(markup * 10) / 10 : markup;
-  }
-  private isInteger(num): boolean {
-    return (num ^ 0) === num;
-  }
+
   public getMarkups() {
-    if (this.inventory.sale > 0 && this.inventory.cost > 0) return Math.round((this.inventory.sale - this.inventory.cost) / this.inventory.cost * 100);
+    if (this.inventory.sale > 0 && this.inventory.cost > 0) return Number(this.quoteStateService.roundToTwo((this.inventory.sale - this.inventory.cost) / this.inventory.cost * 100));
     return 0;
   }
   onChangeSale(val) {

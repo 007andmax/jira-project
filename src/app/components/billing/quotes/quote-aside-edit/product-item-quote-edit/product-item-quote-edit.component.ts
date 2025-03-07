@@ -37,14 +37,14 @@ export class ProductItemQuoteEditComponent implements OnInit {
     this.product.markup = this.getMarkups();
   }
   public getMarkups() {
-    if (this.product.sale > 0 && this.product.cost > 0) return Math.round((this.product.sale - this.product.cost) / this.product.cost * 100);
+    if (this.product.sale > 0 && this.product.cost > 0) return Number(this.quoteStateService.roundToTwo((this.product.sale - this.product.cost) / this.product.cost * 100));
     return 0;
   }
   changeMarkup(val) {
     let value = Number(val);
     this.product.sale = Number(this.quoteStateService.roundToTwo((value * this.product.cost / 100 + this.product.cost)));
     this.product.sale_str = this.product.sale.toFixed(2);
-    this.product.markup = this.roundingMarkup(value);
+    this.product.markup = value;
   }
   removeProduct() {
     this.onRemoveProduct.emit(null);
@@ -59,12 +59,6 @@ export class ProductItemQuoteEditComponent implements OnInit {
     return taxes.map(item => {
       return `${item.name} ${item.rate}%`;
     }).join("<br>");
-  }
-  private roundingMarkup(markup) {
-    return (!this.isInteger(markup)) ? Math.ceil(markup * 10) / 10 : markup;
-  }
-  private isInteger(num): boolean {
-    return (num ^ 0) === num;
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

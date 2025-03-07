@@ -24,7 +24,7 @@ export class TicketProfileFormItemProduct implements Product {
             for (const key in data) {
                 this[key] = data[key];
             }
-            this.cost_str = this.cost.toFixed(2);
+            if (this.cost) this.cost_str = this.cost.toFixed(2);
             this.sale_str = this.sale.toFixed(2);
         }
     }

@@ -102,8 +102,11 @@ export class QuoteEdit extends QuotePreview {
         this.products.push(new QuoteProduct({ ...item, discountType: "PERCENT", itemOrder: 0, quantity: 1, markup: this.getMarkups(item) }));
     }
     public getMarkups(item) {
-        if (item.sale > 0 && item.cost > 0) return Math.round((item.sale - item.cost) / item.cost * 100);
+        if (item.sale > 0 && item.cost > 0) return Number(this.roundToTwo((item.sale - item.cost) / item.cost * 100));
         return 0;
+    }
+    public roundToTwo(num) {
+        return parseFloat((Math.round(Number(num + 'e+2')) + "e-2")).toFixed(2);
     }
     public addService(item) {
         this.services.push(new QuoteService({ ...item, discountType: "PERCENT", itemOrder: 0, quantity: 1 }));
