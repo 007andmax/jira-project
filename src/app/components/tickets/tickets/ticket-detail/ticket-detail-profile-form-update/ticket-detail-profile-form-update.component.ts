@@ -32,11 +32,12 @@ import { TicketDetailProfileFormUpdateHeaderComponent } from './ticket-detail-pr
 @Component({
   selector: 'ticket-detail-profile-form-update',
   templateUrl: './ticket-detail-profile-form-update.component.html',
-  styleUrls: ['./ticket-detail-profile-form-update.component.scss']
+  styleUrls: ['./ticket-detail-profile-form-update.component.scss'],
+  providers: [TicketsListService]
 })
 export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy {
   ticketProfile: TicketProfile = new TicketProfile();
-  ticketProfileFormUpdate: TicketProfileFormUpdate = new TicketProfileFormUpdate();
+  @Input() ticketProfileFormUpdate: TicketProfileFormUpdate = new TicketProfileFormUpdate();
   @ViewChild('updateHeader', { static: false }) updateHeader: TicketDetailProfileFormUpdateHeaderComponent;
   @ViewChild('update_closeBtn', { static: false }) update_closeBtn: DisabledBtnDirective;
   @ViewChild('updateBtn', { static: false }) updateBtn: DisabledBtnDirective;
@@ -356,6 +357,11 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
       this.ticketProfileFormUpdate.setTechUser(this.currentUser);
     })
     this.sub.add(onGetCurrentUser);
+    let onSetNoteType = this.ticketStateService.onSetNoteType.subscribe(data => {
+      this.ticketProfileFormUpdate.setNoteType(data);
+      this.updateHeader.onChangeType(data);
+    })
+    this.sub.add(onSetNoteType);
     let oneTimeConnectionArray = this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
       if (newChange.action === 'ONE_TIME_DOWNLOADED' || newChange.action === 'ONE_TIME_INSTALLED' || newChange.action === 'ONE_TIME_CONNECTION_OPEN' || newChange.action === 'ONE_TIME_URL_GENERATED' || newChange.action === 'ONE_TIME_URL_OPEN' || newChange.action === 'ONE_TIME_ONLINE' || newChange.action === 'ONE_TIME_OFFLINE') {
         if (newChange.data.oneTime) {
@@ -392,6 +398,7 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
     if (this.tab === 'NOTE' && this.noteList) this.noteList.onGetNoteList();
     this.ticketProfileFormUpdate.setType(this.tab);
     if (this.tab == "NOTE" && this.customerPortalStateService.isCustomerPortal) this.ticketProfileFormUpdate.setNoteType("PUBLIC");
+    if (this.tab == "NOTE" && !this.customerPortalStateService.isCustomerPortal) this.ticketProfileFormUpdate.setNoteType(this.ticketStateService.getNoteType());
     $("ticket-detail-profile-form-update").css({ left: $(".ticket-detail-page-content__body").offset().left - 64 });
     window.addEventListener('resize', this.resize);
   }

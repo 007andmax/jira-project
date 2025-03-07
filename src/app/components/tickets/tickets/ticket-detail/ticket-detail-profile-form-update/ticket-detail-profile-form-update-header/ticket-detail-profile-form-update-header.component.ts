@@ -1,4 +1,4 @@
-import { EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/components/users/class/user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -9,6 +9,8 @@ import { TicketProfileFormUpdate } from '../../../ticket-edit-aside/class/ticket
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 import { AddAssignedUserNoteComponent } from './add-assigned-user-note/add-assigned-user-note.component';
 import { AddAssignedUserComponent } from '../../../ticket-edit-aside/add-assigned-user/add-assigned-user.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TicketDetailProfileFormUpdateComponent } from '../ticket-detail-profile-form-update.component';
 
 @Component({
   selector: 'ticket-detail-profile-form-update-header',
@@ -29,7 +31,9 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   listTechUsers: Array<User> = [];
   constructor(public ticketsListService: TicketsListService,
     public ticketStateService: TicketStateService,
-    public usersStateService: UsersStateService,) { }
+    private modalService: NgbModal,
+    public usersStateService: UsersStateService,
+    public cd: ChangeDetectorRef,) { }
 
 
   ngOnInit() {
@@ -38,14 +42,19 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
     this.usersForUpdate = this.getUsersForUpdate(this.ticketProfileFormUpdate.noteType);
     this.listTechUsers = this.getUsersForUpdate("PRIVATE");
     if (this.tab == "SERVICE" || this.tab == "PRODUCT") this.ticketProfileFormUpdate.setTechUser(this.currentUser);
+    console.log("this.ticketProfileFormUpdate", this.ticketProfileFormUpdate);
   }
   public setTab(data) {
     this.tab = data;
     if (this.tab == "NOTE") {
-      let users = this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === this.ticketProfile.company.id));
-      this.selectedUsers = [...users.filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.ticketProfile.company.id).defaultSubscriptions.ticketManagerSubscription.enabled).map(item => new CurrentUser(item))]
-      if (this.ticketProfile.createdUser) this.selectedUsers.push(this.ticketProfile.createdUser);
-      this.selectedUsers = this.selectedUsers.filter((item, pos) => this.selectedUsers.findIndex(accountItem => accountItem.id == item.id) == pos);
+      if (this.ticketProfileFormUpdate.noteType == "PUBLIC") {
+        let users = this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === this.ticketProfile.company.id));
+        this.selectedUsers = [...users.filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.ticketProfile.company.id).defaultSubscriptions.ticketManagerSubscription.enabled).map(item => new CurrentUser(item))]
+        if (this.ticketProfile.createdUser) this.selectedUsers.push(this.ticketProfile.createdUser);
+        this.selectedUsers = this.selectedUsers.filter((item, pos) => this.selectedUsers.findIndex(accountItem => accountItem.id == item.id) == pos);
+      } else {
+        this.selectedUsers = [];
+      }
     } else {
       this.selectedUsers = [];
     }
@@ -63,12 +72,22 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   public trackByIndex(index, item) {
     return index;
   }
+  onExpand() {
+    const modalRef = this.modalService.open(TicketDetailProfileFormUpdateComponent, { windowClass: 'xs-modal ticket-note-modal', container: "ticket-detail", backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.ticket = this.ticketProfile;
+    modalRef.componentInstance.ticketProfileFormUpdate = this.ticketProfileFormUpdate;
+    // modalRef.componentInstance.selectNote.setNote(this.ticketProfileFormUpdate.note);
+    this.cd.detectChanges();
+  }
   public onChangeType(data) {
     this.ticketProfileFormUpdate.setNoteType(data);
     this.usersForUpdate = this.getUsersForUpdate(this.ticketProfileFormUpdate.noteType);
     if (this.addAssignedUser) this.addAssignedUser.resetList(this.usersForUpdate);
     if (data == "PUBLIC") {
-      this.selectedUsers = this.selectedUsers.filter(item => item.accountType !== "CLIENT");
+      let users = this.usersStateService.getAllUsers().filter(user => user.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === this.ticketProfile.company.id));
+      this.selectedUsers = [...users.filter(user => user.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === this.ticketProfile.company.id).defaultSubscriptions.ticketManagerSubscription.enabled).map(item => new CurrentUser(item))]
+      if (this.ticketProfile.createdUser) this.selectedUsers.push(this.ticketProfile.createdUser);
+      this.selectedUsers = this.selectedUsers.filter((item, pos) => this.selectedUsers.findIndex(accountItem => accountItem.id == item.id) == pos);
     } else {
       this.selectedUsers = [];
     }

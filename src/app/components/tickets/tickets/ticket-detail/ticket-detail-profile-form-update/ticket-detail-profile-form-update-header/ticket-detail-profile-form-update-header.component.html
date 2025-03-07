@@ -44,10 +44,6 @@
             </div>
         </div>
         <div class="divider-line"></div>
-        <ticket-detail-profile-form-update-visible-users
-            *ngIf="tab === 'NOTE'"
-            (onChangeType)="onChangeType($event)"
-        ></ticket-detail-profile-form-update-visible-users>
         <div
             class="qt-button qt-button--with-icon --gray --sm pointer qt-ml-auto"
             *ngIf="tab === 'SERVICE'"
@@ -64,6 +60,16 @@
             <div class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-4 qt-button-icon"></div>
             Add Product
         </div>
+        <button
+            *ngIf="tab === 'NOTE'"
+            placement="top"
+            [ngbTooltip]="'Expand'"
+            (click)="onExpand()"
+            class="btn-expand qt-mr-16"
+            container="body"
+        >
+            <div class="qt-icon icon__expand qt-za-16 qt-sz-16"></div>
+        </button>
     </div>
     <add-assigned-user-note
         #addAssignedUser

@@ -24,6 +24,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 export class TicketStateService {
   servicesList: EventEmitter<any> = new EventEmitter();
   onSetTabUpdate: EventEmitter<any> = new EventEmitter();
+  onSetNoteType: EventEmitter<any> = new EventEmitter();
   onEditUpdate: EventEmitter<any> = new EventEmitter();
   onRemoveUpdate: EventEmitter<any> = new EventEmitter();
   onEditUpdateByForm: EventEmitter<any> = new EventEmitter();
@@ -52,6 +53,7 @@ export class TicketStateService {
   onCloseTicket: EventEmitter<any> = new EventEmitter();
   onOpenTicket: EventEmitter<any> = new EventEmitter();
   devices: Array<DeviceCompany> = [];
+  noteType: string = "PUBLIC";
   sub: Subscription = new Subscription();
   constructor(private contractsService: ContractsService,
     private recurringService: RecurringService,
@@ -65,6 +67,14 @@ export class TicketStateService {
     this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
       this.changeUpdatesTicket.emit(newChange);
     });
+  }
+  public setNoteType(data) {
+    this.noteType = data;
+    this.onSetNoteType.emit(data);
+  }
+
+  public getNoteType() {
+    return this.noteType;
   }
   public fastCloseTicket() {
     this.onCloseTicket.emit(null);
