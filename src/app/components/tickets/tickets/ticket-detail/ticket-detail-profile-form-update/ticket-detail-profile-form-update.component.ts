@@ -6,7 +6,7 @@ import { CurrentUser } from 'src/class/current-user/current-user';
 import { TicketDetailProfileFormUpdateNoteComponent } from './ticket-detail-profile-form-update-note/ticket-detail-profile-form-update-note.component';
 import { TicketDetailProfileFormUpdateProductsComponent } from './ticket-detail-profile-form-update-products/ticket-detail-profile-form-update-products.component';
 import { TicketDetailProfileFormUpdateServicesComponent } from './ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription, forkJoin } from 'rxjs';
 import { CompanyDevicesRemoteAccessComponent } from 'src/app/components/company-devices/company-devices-remote-access/company-devices-remote-access.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
@@ -33,7 +33,7 @@ import { TicketDetailProfileFormUpdateHeaderComponent } from './ticket-detail-pr
   selector: 'ticket-detail-profile-form-update',
   templateUrl: './ticket-detail-profile-form-update.component.html',
   styleUrls: ['./ticket-detail-profile-form-update.component.scss'],
-  providers: [TicketsListService]
+  providers: [TicketsListService, NgbModalConfig, NgbModal, NgbActiveModal]
 })
 export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy {
   ticketProfile: TicketProfile = new TicketProfile();
@@ -83,6 +83,7 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
     private permissionsService: PermissionsService,
     public addUsersNotifyStateService: AddUsersNotifyStateService,
     public customerPortalStateService: CustomerPortalStateService,
+    public activeModal: NgbActiveModal,
     public ticketsListService: TicketsListService) { }
   onSelectedNote(data) {
     this.elRef.nativeElement.querySelector("#chat").innerHTML = data;
@@ -427,7 +428,9 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
     })
   }
   close() {
-    this.onCloseForm.emit(null);
+    // this.onCloseForm.emit(null);
+    console.log("close");
+    this.activeModal.dismiss('Cross click');
   }
   ngOnDestroy(): void {
     window.removeEventListener('resize', this.resize);

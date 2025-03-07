@@ -93,7 +93,6 @@ import { CompanyUsersDropDownModule } from '../ticket-add-aside/company-users-dr
 import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
 import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 import { TicketDetailTotalStatisticsComponent } from './ticket-detail-total-statistics/ticket-detail-total-statistics.component';
-import { TicketDetailProfileFormUpdateNoteExpandComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-note-expand/ticket-detail-profile-form-update-note-expand.component';
 
 
 
@@ -155,8 +154,6 @@ import { TicketDetailProfileFormUpdateNoteExpandComponent } from './ticket-detai
         TicketDetailTicketsComponent,
         TicketDetailTicketsStatusComponent,
         TicketDetailTotalStatisticsComponent,
-        TicketDetailProfileFormUpdateNoteExpandComponent
-
     ],
     imports: [
         CommonModule,

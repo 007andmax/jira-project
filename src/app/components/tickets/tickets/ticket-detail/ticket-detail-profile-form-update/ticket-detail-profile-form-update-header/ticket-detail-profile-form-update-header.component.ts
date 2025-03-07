@@ -37,7 +37,14 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
 
 
   ngOnInit() {
-    this.setTab(this.tab);
+    if (this.ticketProfileFormUpdate.shares.length > 0) {
+      this.ticketProfileFormUpdate.shares.forEach(element => {
+        let user = this.usersStateService.getAllUsers().find(item => item.id == element.user.id);
+        if (user) this.selectedUsers.push(new CurrentUser(user));
+      });
+    } else {
+      this.setTab(this.tab);
+    }
     this.usersForUpdate = this.getUsersForUpdate(this.ticketProfileFormUpdate.noteType);
     this.usersForUpdate = this.getUsersForUpdate(this.ticketProfileFormUpdate.noteType);
     this.listTechUsers = this.getUsersForUpdate("PRIVATE");
