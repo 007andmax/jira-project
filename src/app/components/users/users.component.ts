@@ -270,9 +270,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   private onDeArchiveUser(id) {
     let Dearchiveusers = this.usersService.onDeArchiveUsers(id).subscribe(data => {
       this.usersStateService.fastDeArchive([data]);
-
     }, err => {
-      console.log("err", err);
       const modalRef = this.modalService.open(UserDeArchiveNotificationComponent, { windowClass: 'xs-modal user-modal', container: "app-users", backdrop: 'static', keyboard: false });
       modalRef.componentInstance.user = this.usersStateService.getUserForDeArchive();
       modalRef.componentInstance.message = err.error.message;
