@@ -25,6 +25,7 @@ export class TicketStateService {
   servicesList: EventEmitter<any> = new EventEmitter();
   onSetTabUpdate: EventEmitter<any> = new EventEmitter();
   onSetNoteType: EventEmitter<any> = new EventEmitter();
+  onOpenModalNote: EventEmitter<any> = new EventEmitter();
   onEditUpdate: EventEmitter<any> = new EventEmitter();
   onRemoveUpdate: EventEmitter<any> = new EventEmitter();
   onEditUpdateByForm: EventEmitter<any> = new EventEmitter();
@@ -67,6 +68,9 @@ export class TicketStateService {
     this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
       this.changeUpdatesTicket.emit(newChange);
     });
+  }
+  public openModalNote() {
+    this.onOpenModalNote.emit(null);
   }
   public setNoteType(data) {
     this.noteType = data;

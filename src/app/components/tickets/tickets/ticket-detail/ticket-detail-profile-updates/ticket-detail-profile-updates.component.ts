@@ -93,9 +93,6 @@ export class TicketDetailProfileUpdatesComponent implements OnInit, OnDestroy {
     this.infiniteScrollDisabled = true;
     this.getUpdates(this.ticketProfile.id);
   }
-  getCountUpdates() {
-    return (this.showLoadMoreUpdates) ? this.updates.length + this.ticketProfile.unloadedUpdates : this.updates.length;
-  }
   public resetShowLoadMoreUpdates() {
     this.showLoadMoreUpdates = true;
   }

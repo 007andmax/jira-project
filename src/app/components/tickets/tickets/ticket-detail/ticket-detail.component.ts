@@ -43,6 +43,8 @@ import { TicketDetailPasswordsDetailsComponent } from './ticket-detail-passwords
 import { TicketDetailDocumentsDetailsComponent } from './ticket-detail-documents/ticket-detail-documents-details/ticket-detail-documents-details.component';
 import { TicketDetailTicketsDetailsComponent } from './ticket-detail-tickets/ticket-detail-tickets-details/ticket-detail-tickets-details.component';
 import { TicketDetailEditTagsComponent } from './ticket-detail-edit-tags/ticket-detail-edit-tags.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TicketDetailProfileFormUpdateComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.component';
 
 @Component({
   selector: 'ticket-detail',
@@ -54,6 +56,8 @@ import { TicketDetailEditTagsComponent } from './ticket-detail-edit-tags/ticket-
 export class TicketDetailComponent implements OnInit, OnDestroy {
   @ViewChild('ticketMessage', { static: false }) ticketMessage: TicketDetailMessageComponent;
   @ViewChild('ticketProfileUpdates', { static: true }) ticketProfileUpdates: TicketDetailProfileUpdatesComponent;
+  @ViewChild('ticketProfileFormUpdates', { static: true }) ticketProfileFormUpdates: TicketDetailProfileFormUpdateComponent;
+
   @ViewChild('ticketTasks', { static: false }) ticketTasks: TicketDetailTasksComponent;
   @ViewChild('detailHeader', { static: false }) detailHeader: TicketDetailHeaderComponent;
   @ViewChild('changeStatus', { static: false }) changeStatus: TicketDetailChangeStatusComponent;
@@ -103,6 +107,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     private devicesService: DevicesService,
     private datePickerStateService: DatePickerStateService,
     public customerPortalStateService: CustomerPortalStateService,
+    private modalService: NgbModal,
     private companiesStateService: CompaniesStateService) { }
 
 
@@ -256,6 +261,14 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(onOpenTicket);
+    this.ticketStateService.onOpenModalNote.subscribe(res => {
+      this.showFormUpdate = false;
+      const modalRef = this.modalService.open(TicketDetailProfileFormUpdateComponent, { windowClass: 'xs-modal ticket-note-modal', keyboard: true });
+      modalRef.componentInstance.ticket = this.ticketProfile;
+      // modalRef.componentInstance.ticketProfileFormUpdate = this.ticketProfileFormUpdates.ticketProfileFormUpdate;
+      // modalRef.componentInstance.selectNote.setNote(this.ticketProfileFormUpdate.note);
+      this.cd.detectChanges();
+    })
   }
   removeCustomDevice(ids) {
     forkJoin(

@@ -176,6 +176,7 @@
                         [updates]="ticketProfile.updates"
                     ></ticket-detail-profile-updates>
                     <ticket-detail-profile-form-update
+                        #ticketProfileFormUpdates
                         (onCloseForm)="showFormUpdate = false"
                         *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && showFormUpdate || showFormUpdate && customerPortalStateService.isCustomerPortal"
                         [ticket]="ticketProfile"

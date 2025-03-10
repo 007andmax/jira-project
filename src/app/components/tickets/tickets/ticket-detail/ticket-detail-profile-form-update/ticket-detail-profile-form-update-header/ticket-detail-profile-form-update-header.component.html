@@ -1,5 +1,8 @@
 <div class="cps-block__header">
-    <div class="cps-block__visible-user qt-df qt-ai-c qt-pt-10 qt-pb-10 qt-pl-16 qt-pr-16 qt-mb-4">
+    <div
+        *ngIf="tab !== 'NOTE'"
+        class="cps-block__visible-user qt-df qt-ai-c qt-pt-10 qt-pb-10 qt-pl-16 qt-pr-16 qt-mb-4"
+    >
         <div ngbDropdown>
             <div
                 class="cps-block__photo"
@@ -60,16 +63,6 @@
             <div class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-4 qt-button-icon"></div>
             Add Product
         </div>
-        <button
-            *ngIf="tab === 'NOTE'"
-            placement="top"
-            [ngbTooltip]="'Expand'"
-            (click)="onExpand()"
-            class="btn-expand qt-mr-16"
-            container="body"
-        >
-            <div class="qt-icon icon__expand qt-za-16 qt-sz-16"></div>
-        </button>
     </div>
     <add-assigned-user-note
         #addAssignedUser

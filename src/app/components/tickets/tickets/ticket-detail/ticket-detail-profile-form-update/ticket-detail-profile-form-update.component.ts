@@ -428,7 +428,7 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
     })
   }
   close() {
-    // this.onCloseForm.emit(null);
+    this.onCloseForm.emit(null);
     console.log("close");
     this.activeModal.dismiss('Cross click');
   }

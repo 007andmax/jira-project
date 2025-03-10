@@ -63,6 +63,7 @@ export class TicketProfile {
     "totalTimeWorked": number;
     "totalProductsPrice": number;
     "companyServiceType": string;
+    updatesCount: number;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

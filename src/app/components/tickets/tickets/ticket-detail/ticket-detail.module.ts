@@ -93,6 +93,7 @@ import { CompanyUsersDropDownModule } from '../ticket-add-aside/company-users-dr
 import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
 import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 import { TicketDetailTotalStatisticsComponent } from './ticket-detail-total-statistics/ticket-detail-total-statistics.component';
+import { TicketDetailProfileFormUpdateModule } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.module';
 
 
 
@@ -116,12 +117,12 @@ import { TicketDetailTotalStatisticsComponent } from './ticket-detail-total-stat
         TicketDetailProfileUpdatesServiceHeaderInfoComponent,
         TicketDetailTasksComponent,
         TicketDetailHeaderComponent,
-        TicketDetailProfileFormUpdateComponent,
-        TicketDetailProfileFormUpdateVisibleUsersComponent,
-        TicketDetailProfileFormUpdateNoteComponent,
-        TicketDetailProfileFormUpdateServicesComponent,
-        TicketDetailProfileFormUpdateHeaderComponent,
-        TicketDetailProfileFormUpdateProductsComponent,
+        // TicketDetailProfileFormUpdateComponent,
+        //  TicketDetailProfileFormUpdateVisibleUsersComponent,
+        //  TicketDetailProfileFormUpdateNoteComponent,
+        //   TicketDetailProfileFormUpdateServicesComponent,
+        //  TicketDetailProfileFormUpdateHeaderComponent,
+        //  TicketDetailProfileFormUpdateProductsComponent,
         TicketDetailClaimInfoComponent,
         TicketDetailInfoStatusComponent,
         TicketDetailChangeStatusComponent,
@@ -148,8 +149,8 @@ import { TicketDetailTotalStatisticsComponent } from './ticket-detail-total-stat
         TicketDetailPasswordsDetailsComponent,
         TicketDetailDevicesItemComponent,
         TicketDetailDevicesDetailsComponent,
-        TicketDetailProfileFormUpdateSupportComponent,
-        AddAssignedUserNoteComponent,
+        //   TicketDetailProfileFormUpdateSupportComponent,
+        //  AddAssignedUserNoteComponent,
         TicketDetailTicketsDetailsComponent,
         TicketDetailTicketsComponent,
         TicketDetailTicketsStatusComponent,
@@ -194,9 +195,10 @@ import { TicketDetailTotalStatisticsComponent } from './ticket-detail-total-stat
         MatErrorModule,
         CompanyUsersDropDownModule,
         DecimalNumberModule,
-        ToFixedModule
+        ToFixedModule,
+        TicketDetailProfileFormUpdateModule
     ],
-    entryComponents: [TicketDetailProfileFormUpdateComponent]
+
 
 
 })

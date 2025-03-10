@@ -33,6 +33,7 @@ export class Ticket {
     "totalTimeWorked": number;
     "totalProductsPrice": number;
     "companyServiceType": string;
+    updatesCount: number;
     constructor(data) {
         this.assignedUserId = data.assignedUserId;
         this.attachmentsCount = data.attachmentsCount;
@@ -65,6 +66,7 @@ export class Ticket {
         this.totalTimeWorked = data.totalTimeWorked;
         this.totalProductsPrice = data.totalProductsPrice;
         this.companyServiceType = data.companyServiceType;
+        this.updatesCount = data.updatesCount;
     }
     public setAssignedUserId(id) {
         this.assignedUserId = id;

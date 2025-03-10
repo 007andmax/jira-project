@@ -1,5 +1,5 @@
 <div class="add-assigned-user-note">
-    <span>Notify to All:</span>
+    <span>Notify to:</span>
     <app-mat-form-field
         #formField
         ngbDropdown
@@ -152,4 +152,13 @@
             </ng-template>
         </div>
     </app-mat-form-field>
+    <button
+        placement="top"
+        [ngbTooltip]="'Expand'"
+        (click)="onExpand()"
+        class="btn-expand"
+        container="body"
+    >
+        <div class="qt-icon icon__expand qt-za-16 qt-sz-16"></div>
+    </button>
 </div>
