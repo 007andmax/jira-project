@@ -8,6 +8,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketStateService } from '../../../../ticket-edit-aside/services/ticket-state.service';
 import { CompanyUserNote } from './class/company-user-note';
 import { UserNoteValidate } from './class/user-note-validate';
+import { TicketProfileFormUpdate } from '../../../../ticket-edit-aside/class/ticket-profile-form-update';
 
 @Component({
   selector: 'add-assigned-user-note',
@@ -76,7 +77,9 @@ export class AddAssignedUserNoteComponent implements OnInit {
       }
     }
   }
-
+  onExpand() {
+    this.ticketStateService.openModalNote();
+  }
   public resetList(data) {
     this.userList = data;
     this.users = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUserNote(item));

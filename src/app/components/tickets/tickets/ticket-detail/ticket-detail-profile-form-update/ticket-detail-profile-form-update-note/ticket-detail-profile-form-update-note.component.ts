@@ -20,6 +20,9 @@ export class TicketDetailProfileFormUpdateNoteComponent implements OnInit {
   public fileBrowseHandler(files) {
     this.prepareFilesList(files);
   }
+  setNote(data) {
+    this.elRef.nativeElement.querySelector("#chat").innerHTML = data;
+  }
   prepareFilesList(files: Array<any>) {
     for (const item of files) {
       item.progress = 0;

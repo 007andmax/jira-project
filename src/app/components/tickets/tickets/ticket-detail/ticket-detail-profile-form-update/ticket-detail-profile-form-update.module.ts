@@ -28,13 +28,12 @@ import { ServicesListModule } from 'src/app/components/shared/services-list/serv
 import { TicketProfileUpdatesServiceDurationModule } from '../../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.module';
 import { TicketProfileUpdatesServiceTimepickerModule } from '../../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.module';
 import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.module';
+import { TicketDetailProfileFormUpdateHeaderModule } from './ticket-detail-profile-form-update-header/ticket-detail-profile-form-update-header.module';
+import { TicketDetailProfileFormUpdateNoteModule } from './ticket-detail-profile-form-update-note/ticket-detail-profile-form-update-note.module';
 
 @NgModule({
     declarations: [
         TicketDetailProfileFormUpdateComponent,
-        AddAssignedUserNoteComponent,
-        TicketDetailProfileFormUpdateHeaderComponent,
-        TicketDetailProfileFormUpdateNoteComponent,
         TicketDetailProfileFormUpdateProductsComponent,
         TicketDetailProfileFormUpdateServicesComponent,
         TicketDetailProfileFormUpdateSupportComponent,
@@ -62,7 +61,9 @@ import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/
         TicketProfileUpdatesServiceTimepickerModule,
         TicketProfileUpdatesServiceDurationModule,
         DatePickerModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        TicketDetailProfileFormUpdateHeaderModule,
+        TicketDetailProfileFormUpdateNoteModule
     ],
     exports: [TicketDetailProfileFormUpdateComponent],
     entryComponents: [TicketDetailProfileFormUpdateComponent]

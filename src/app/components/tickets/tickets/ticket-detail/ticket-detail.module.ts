@@ -94,6 +94,8 @@ import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-n
 import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 import { TicketDetailTotalStatisticsComponent } from './ticket-detail-total-statistics/ticket-detail-total-statistics.component';
 import { TicketDetailProfileFormUpdateModule } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.module';
+import { TicketDetailNoteModalComponent } from './ticket-detail-note-modal/ticket-detail-note-modal.component';
+import { TicketDetailNoteModalModule } from './ticket-detail-note-modal/ticket-detail-note-modal.module';
 
 
 
@@ -155,6 +157,7 @@ import { TicketDetailProfileFormUpdateModule } from './ticket-detail-profile-for
         TicketDetailTicketsComponent,
         TicketDetailTicketsStatusComponent,
         TicketDetailTotalStatisticsComponent,
+
     ],
     imports: [
         CommonModule,
@@ -196,7 +199,8 @@ import { TicketDetailProfileFormUpdateModule } from './ticket-detail-profile-for
         CompanyUsersDropDownModule,
         DecimalNumberModule,
         ToFixedModule,
-        TicketDetailProfileFormUpdateModule
+        TicketDetailProfileFormUpdateModule,
+
     ],
 
 

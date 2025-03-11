@@ -79,14 +79,7 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   public trackByIndex(index, item) {
     return index;
   }
-  onExpand() {
-    this.ticketStateService.openModalNote();
-    /* const modalRef = this.modalService.open(TicketDetailProfileFormUpdateComponent, { windowClass: 'xs-modal ticket-note-modal', container: "ticket-detail", backdrop: 'static', keyboard: false });
-     modalRef.componentInstance.ticket = this.ticketProfile;
-     modalRef.componentInstance.ticketProfileFormUpdate = this.ticketProfileFormUpdate;
-     // modalRef.componentInstance.selectNote.setNote(this.ticketProfileFormUpdate.note);
-     this.cd.detectChanges();*/
-  }
+
   public onChangeType(data) {
     this.ticketProfileFormUpdate.setNoteType(data);
     this.usersForUpdate = this.getUsersForUpdate(this.ticketProfileFormUpdate.noteType);
