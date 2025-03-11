@@ -264,13 +264,19 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.sub.add(onOpenTicket);
     this.ticketStateService.onOpenModalNote.subscribe(res => {
 
-      const modalRef = this.modalService.open(TicketDetailNoteModalComponent, { windowClass: 'xs-modal ticket-note-modal', keyboard: false });
+      const modalRef = this.modalService.open(TicketDetailNoteModalComponent, { windowClass: 'xs-modal ticket-note-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.ticket = this.ticketProfile;
       modalRef.componentInstance.ticketProfileFormUpdate = this.ticketProfileFormUpdates.ticketProfileFormUpdate;
       modalRef.componentInstance.selectNote.setNote(this.ticketProfileFormUpdates.ticketProfileFormUpdate.note);
       this.showFormUpdate = false;
       this.cd.detectChanges();
     })
+    let onCloseModalNote = this.ticketStateService.onCloseModalNote.subscribe(res => {
+      this.showFormUpdate = true;
+      console.log("res", res);
+      this.cd.detectChanges();
+    })
+    this.sub.add(onCloseModalNote);
   }
   removeCustomDevice(ids) {
     forkJoin(

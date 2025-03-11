@@ -1,4 +1,17 @@
-<div class="ticket-updates qt-mr-24 qt-ml-24">
+<div
+    class="ticket-updates-no-data qt-df qt-fd-c qt-ai-c qt-jc-c"
+    *ngIf="ticketProfile.updatesCount == 0"
+>
+    <div class="qt-button qt-button--with-icon --gray qt-jc-c pointer qt-mb-24">
+        <span class="qt-icon icon__writing-pen qt-sz-24 qt-dib qt-button-icon"></span>
+    </div>
+    <span class="qt-color-gray-900 qt-fw-600 qt-fs-16 qt-mb-8">No Conversation happend</span>
+    <span class="qt-color-gray-500 qt-fw-400 qt-fs-14">New conversation will appear here.</span>
+</div>
+<div
+    class="ticket-updates qt-mr-24 qt-ml-24"
+    *ngIf="ticketProfile.updatesCount > 0"
+>
     <div class="ticket-updates__title">
         <div class="ticket-updates__title-line"></div>
         <div class="ticket-updates__title-info">

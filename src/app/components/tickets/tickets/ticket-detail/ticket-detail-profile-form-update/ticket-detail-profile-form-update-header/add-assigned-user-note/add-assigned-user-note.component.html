@@ -159,6 +159,10 @@
         class="btn-expand"
         container="body"
     >
-        <div class="qt-icon icon__expand qt-za-16 qt-sz-16"></div>
+        <div
+            class="qt-icon  qt-za-16 qt-sz-16"
+            [ngClass]="{'icon__expand':!toggleModal,
+    'icon__collapse':toggleModal}"
+        ></div>
     </button>
 </div>

@@ -82,6 +82,7 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
     public permissionsService: PermissionsService,
     public addUsersNotifyStateService: AddUsersNotifyStateService,
     public customerPortalStateService: CustomerPortalStateService,
+    public modalService: NgbModal,
     public ticketsListService: TicketsListService) { }
   onSelectedNote(data) {
     this.elRef.nativeElement.querySelector("#chat").innerHTML = data;
@@ -99,11 +100,11 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
   }
   createRemoteAccess(realSessionId, connectionType) {
     this.realSessionId = realSessionId;
-    /* const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal', backdrop: 'static', keyboard: false });
-     modalRef.componentInstance.remoteSessionId = this.realSessionId;
-     modalRef.componentInstance.companyId = this.companyIdForSupport;
-     modalRef.componentInstance.connectionType = connectionType;
-     modalRef.componentInstance.action = 'CONNECT_SUPPORT_DEVICE';*/
+    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.remoteSessionId = this.realSessionId;
+    modalRef.componentInstance.companyId = this.companyIdForSupport;
+    modalRef.componentInstance.connectionType = connectionType;
+    modalRef.componentInstance.action = 'CONNECT_SUPPORT_DEVICE';
     document.body.click();
     this.cd.detectChanges();
   }
@@ -349,6 +350,7 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
   }
 
   ngOnInit() {
+    if (this.ticketStateService.getTicketProfileFormUpdate()) this.ticketProfileFormUpdate = this.ticketStateService.getTicketProfileFormUpdate();
     this.currentUser = this.usersStateService.getCurrentUser();
     this.ticketProfileFormUpdate.setTechUser(this.currentUser);
     let onGetCurrentUser = this.usersStateService.onGetCurrentUser.subscribe(data => {
@@ -400,6 +402,11 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
     if (this.tab == "NOTE" && !this.customerPortalStateService.isCustomerPortal) this.ticketProfileFormUpdate.setNoteType(this.ticketStateService.getNoteType());
     $("ticket-detail-profile-form-update").css({ left: $(".ticket-detail-page-content__body").offset().left - 64 });
     window.addEventListener('resize', this.resize);
+    let onCloseModalNote = this.ticketStateService.onCloseModalNote.subscribe(res => {
+      console.log("ticketProfileFormUpdate", this.ticketProfileFormUpdate);
+      this.close();
+    })
+    this.sub.add(onCloseModalNote);
   }
   resize = () => {
     $("ticket-detail-profile-form-update").css({ left: $(".ticket-detail-page-content__body").offset().left - 64 });
@@ -426,6 +433,7 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
     })
   }
   close() {
+    this.ticketStateService.resetTicketProfileFormUpdate();
     this.onCloseForm.emit(null);
   }
   ngOnDestroy(): void {

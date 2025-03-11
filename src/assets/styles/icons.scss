@@ -361,6 +361,12 @@ Example:
   &__note-list {
     mask-image: url("/assets/img/icons/canned-responses.svg");
   }
+  &__collapse {
+    mask-image: url("/assets/img/icons/collapse.svg");
+  }
+  &__writing-pen {
+    mask-image: url("/assets/img/icons/writing-pen.svg");
+  }
   &__share {
     mask-image: url("/assets/img/icons/share.svg");
   }

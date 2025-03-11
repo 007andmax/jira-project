@@ -17,6 +17,7 @@ import { Subscription } from 'rxjs';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { TicketProfileFormUpdate } from '../class/ticket-profile-form-update';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,7 @@ export class TicketStateService {
   onSetTabUpdate: EventEmitter<any> = new EventEmitter();
   onSetNoteType: EventEmitter<any> = new EventEmitter();
   onOpenModalNote: EventEmitter<any> = new EventEmitter();
+  onCloseModalNote: EventEmitter<any> = new EventEmitter();
   onEditUpdate: EventEmitter<any> = new EventEmitter();
   onRemoveUpdate: EventEmitter<any> = new EventEmitter();
   onEditUpdateByForm: EventEmitter<any> = new EventEmitter();
@@ -53,6 +55,7 @@ export class TicketStateService {
   onGetDevices: EventEmitter<any> = new EventEmitter();
   onCloseTicket: EventEmitter<any> = new EventEmitter();
   onOpenTicket: EventEmitter<any> = new EventEmitter();
+  ticketProfileFormUpdate: TicketProfileFormUpdate;
   devices: Array<DeviceCompany> = [];
   noteType: string = "PUBLIC";
   sub: Subscription = new Subscription();
@@ -71,6 +74,16 @@ export class TicketStateService {
   }
   public openModalNote() {
     this.onOpenModalNote.emit(null);
+  }
+  public resetTicketProfileFormUpdate() {
+    this.ticketProfileFormUpdate = null;
+  }
+  public getTicketProfileFormUpdate() {
+    return this.ticketProfileFormUpdate;
+  }
+  public closeModalNote(data) {
+    this.ticketProfileFormUpdate = data;
+    this.onCloseModalNote.emit(data);
   }
   public setNoteType(data) {
     this.noteType = data;

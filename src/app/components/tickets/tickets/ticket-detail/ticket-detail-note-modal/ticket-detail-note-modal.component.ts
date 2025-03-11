@@ -45,7 +45,7 @@ export class TicketDetailNoteModalComponent extends TicketDetailProfileFormUpdat
     public ticketsListService: TicketsListService) {
     super(ticketsStateService, cd, usersStateService, ticketsService, elRef, supportService, supportStateService,
       devicesRealTimeService, draftEmailService, ticketStateService, appService, companiesService, permissionsService,
-      addUsersNotifyStateService, customerPortalStateService, ticketsListService
+      addUsersNotifyStateService, customerPortalStateService, modalService, ticketsListService
     )
   }
   close() {

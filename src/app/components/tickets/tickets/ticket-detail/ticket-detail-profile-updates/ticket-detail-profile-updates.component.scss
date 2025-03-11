@@ -250,8 +250,17 @@
 .ticket-updates__ticket {
     overflow: auto;
     position: relative;
+    min-height: 200px;
 }
 .pengind-loading {
     bottom: 20px;
     top: auto;
+}
+.ticket-updates-no-data {
+    height: 320px;
+    background-color: $gray-25;
+}
+.qt-button--with-icon {
+    width: 56px;
+    height: 56px;
 }

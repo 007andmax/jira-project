@@ -1920,13 +1920,16 @@ app-quotes-item {
 .ticket-note-modal {
   .modal-dialog {
     //max-width: 490px;
-    max-width: 1080px;
+    max-width: 1110px;
     width: 100%;
     height: 504px;
     overflow: auto;
     transform: translate(-50%, -50%) !important;
     margin: 0;
     padding: 0 15px;
+  }
+  .cps-block__content {
+    height: 370px;
   }
 }
 .add-user-to-company {

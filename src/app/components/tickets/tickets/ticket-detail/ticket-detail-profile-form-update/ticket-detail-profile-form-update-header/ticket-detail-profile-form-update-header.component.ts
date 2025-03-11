@@ -20,12 +20,13 @@ import { TicketDetailProfileFormUpdateComponent } from '../ticket-detail-profile
 })
 export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   @Input() ticketProfile: TicketProfile = new TicketProfile();
-  @ViewChild('addAssignedUser', { static: false }) addAssignedUser: AddAssignedUserComponent;
+  @ViewChild('addAssignedUser', { static: true }) addAssignedUser: AddAssignedUserNoteComponent;
   @Input() ticketProfileFormUpdate: TicketProfileFormUpdate = new TicketProfileFormUpdate();
   @Input() currentUser: CurrentUser;
   @Input() tab: string;
   @Output() onAddProduct = new EventEmitter();
   @Output() onAddService = new EventEmitter();
+  @Input() toggleModal: boolean = false;
   usersForUpdate: Array<User> = [];
   selectedUsers: Array<CurrentUser> = [];
   listTechUsers: Array<User> = [];
@@ -78,6 +79,9 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  onCloseModal() {
+    this.ticketStateService.closeModalNote(this.ticketProfileFormUpdate);
   }
 
   public onChangeType(data) {

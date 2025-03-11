@@ -67,10 +67,12 @@
     <add-assigned-user-note
         #addAssignedUser
         [container]="'body'"
+        [toggleModal]="toggleModal"
         [compayId]="ticketProfile.company.id"
         [type]="ticketProfileFormUpdate.noteType"
         [userList]="usersForUpdate"
         [selectedUsers]="selectedUsers"
         (onSelected)="onSelectUpdateUser($event)"
+        (onCloseModal)="onCloseModal()"
     ></add-assigned-user-note>
 </div>
