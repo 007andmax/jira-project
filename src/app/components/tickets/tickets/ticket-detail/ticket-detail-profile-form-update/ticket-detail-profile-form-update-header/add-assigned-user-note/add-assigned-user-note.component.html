@@ -1,5 +1,5 @@
 <div class="add-assigned-user-note">
-    <span>Notify to:</span>
+    <span [textContent]="type == 'PUBLIC' ? 'Public note - Notify to:' : 'Private note - Notify to:'"></span>
     <app-mat-form-field
         #formField
         ngbDropdown
@@ -154,7 +154,7 @@
     </app-mat-form-field>
     <button
         placement="top"
-        [ngbTooltip]="'Expand'"
+        [ngbTooltip]="!toggleModal ? 'Expand' : 'Collapse'"
         (click)="onExpand()"
         class="btn-expand"
         container="body"
