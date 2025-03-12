@@ -50,7 +50,6 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
     this.usersForUpdate = this.getUsersForUpdate(this.ticketProfileFormUpdate.noteType);
     this.listTechUsers = this.getUsersForUpdate("PRIVATE");
     if (this.tab == "SERVICE" || this.tab == "PRODUCT") this.ticketProfileFormUpdate.setTechUser(this.currentUser);
-    console.log("this.ticketProfileFormUpdate", this.ticketProfileFormUpdate);
   }
   public setTab(data) {
     this.tab = data;

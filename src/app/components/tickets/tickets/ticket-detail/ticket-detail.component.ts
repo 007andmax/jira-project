@@ -273,7 +273,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     })
     let onCloseModalNote = this.ticketStateService.onCloseModalNote.subscribe(res => {
       this.showFormUpdate = true;
-      console.log("res", res);
       this.cd.detectChanges();
     })
     this.sub.add(onCloseModalNote);

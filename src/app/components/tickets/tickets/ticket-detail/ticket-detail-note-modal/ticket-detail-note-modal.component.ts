@@ -50,7 +50,6 @@ export class TicketDetailNoteModalComponent extends TicketDetailProfileFormUpdat
   }
   close() {
     this.onCloseForm.emit(null);
-    console.log("close");
     this.activeModal.close();
   }
 }

@@ -403,7 +403,6 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
     $("ticket-detail-profile-form-update").css({ left: $(".ticket-detail-page-content__body").offset().left - 64 });
     window.addEventListener('resize', this.resize);
     let onCloseModalNote = this.ticketStateService.onCloseModalNote.subscribe(res => {
-      console.log("ticketProfileFormUpdate", this.ticketProfileFormUpdate);
       this.close();
     })
     this.sub.add(onCloseModalNote);
