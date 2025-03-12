@@ -35,6 +35,7 @@ import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-asi
 import { ContractsAsideUserDeviceBillingComponent } from '../contracts-aside-user-device-billing/contracts-aside-user-device-billing.component';
 import { ContractsAsideComponent } from '../contracts-aside.component';
 import { ServiceAgreement } from '../../class/service-agreement';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -71,7 +72,8 @@ describe('ContractsAsideProductServiceContractsComponent unit test', () => {
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        })],
+        }),
+        NoopAnimationsModule],
       declarations: [
         ContractsAsideSelectTypeComponent,
         ContractsAsideUserDeviceBillingComponent,

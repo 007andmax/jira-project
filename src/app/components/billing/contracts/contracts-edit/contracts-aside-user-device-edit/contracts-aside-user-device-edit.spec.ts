@@ -28,6 +28,7 @@ import { ContractsAsideUserDeviceEditComponent } from './contracts-aside-user-de
 import { SubscriptionServices } from '../../../subscription-services/class/subscription-services';
 import { count } from 'console';
 import { DefaultServicesHourlyContract } from '../../contracts-aside/class/default-service-hourly-contract';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -64,7 +65,8 @@ describe('ContractsAsideUserDeviceEditComponent unit test', () => {
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        })],
+        }),
+        NoopAnimationsModule],
       declarations: [ContractsAsideUserDeviceEditComponent
       ],
     }).compileComponents();

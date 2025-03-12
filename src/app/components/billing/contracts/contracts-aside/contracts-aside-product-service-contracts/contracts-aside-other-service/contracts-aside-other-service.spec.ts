@@ -11,6 +11,7 @@ import { ContractsAsideOtherServiceComponent } from './contracts-aside-other-ser
 import { ContractsOtherService } from '../../class/contracts-other-service';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -31,7 +32,8 @@ describe('ContractsAsideOtherServiceComponent unit test', () => {
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        })],
+        }),
+        NoopAnimationsModule],
       declarations: [ContractsAsideOtherServiceComponent
       ],
     }).compileComponents();

@@ -34,7 +34,7 @@ import { ContractsAsideBlockTimeBillingUsersModule } from './contracts-aside-blo
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { ServiceAgreement } from '../../class/service-agreement';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 describe('ContractsAsideBlockTimeBillingComponent unit test', () => {
@@ -71,7 +71,7 @@ describe('ContractsAsideBlockTimeBillingComponent unit test', () => {
           timeOut: 5000,
           onActivateTick: true
         }),
-        BrowserAnimationsModule],
+        NoopAnimationsModule],
       declarations: [ContractsAsideComponent,
         ContractsAsideSelectTypeComponent,
         ContractsAsideHourlyBillingComponent,

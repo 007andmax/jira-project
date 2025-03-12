@@ -28,7 +28,7 @@ import { ContractsAsideUserDeviceServiceComponent } from './contracts-aside-user
 import { ContractsAsideUserDeviceServiceModule } from './contracts-aside-user-device-service/contracts-aside-user-device-service.module';
 import { ServiceAgreement } from '../../class/service-agreement';
 import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-aside-top.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -67,7 +67,7 @@ describe('ContractsAsideUserDeviceBillingComponent unit test', () => {
           timeOut: 5000,
           onActivateTick: true
         }),
-        BrowserAnimationsModule],
+        NoopAnimationsModule],
       declarations: [
         ContractsAsideUserDeviceBillingComponent,
         ContractsAsideTopComponent

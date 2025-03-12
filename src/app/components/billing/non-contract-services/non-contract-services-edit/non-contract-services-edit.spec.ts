@@ -13,6 +13,7 @@ import { NonContractServices } from '../class/non-contract-service';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NonContractServicesEditComponent } from './non-contract-services-edit.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -36,7 +37,8 @@ describe('NonContractServicesEditComponent unit test', () => {
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        })],
+        }),
+        NoopAnimationsModule],
       declarations: [NonContractServicesEditComponent
       ],
     }).compileComponents();
