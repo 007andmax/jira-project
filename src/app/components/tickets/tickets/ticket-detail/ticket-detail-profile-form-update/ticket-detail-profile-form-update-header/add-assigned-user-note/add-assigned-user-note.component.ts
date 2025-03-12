@@ -8,6 +8,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketStateService } from '../../../../ticket-edit-aside/services/ticket-state.service';
 import { CompanyUserNote } from './class/company-user-note';
 import { UserNoteValidate } from './class/user-note-validate';
+import { TicketProfileFormUpdate } from '../../../../ticket-edit-aside/class/ticket-profile-form-update';
 
 @Component({
   selector: 'add-assigned-user-note',
@@ -28,12 +29,14 @@ export class AddAssignedUserNoteComponent implements OnInit {
   @Input() type: string;
   @Input() container: string;
   @Input() compayId: string;
+  @Input() toggleModal: boolean = false;
   users = [];
   reqUsers = [];
   currentUsers = [];
   sub: Subscription = new Subscription();
   @Output() hidden = new EventEmitter<any>();
   @Output() onSelected = new EventEmitter<any>();
+  @Output() onCloseModal = new EventEmitter<any>();
   @ViewChild('userInput', { static: true }) userInput: ElementRef<HTMLInputElement>;
   @ViewChild('assignedUserDp', { static: true }) assignedUserDp: NgbDropdown;
 
@@ -76,7 +79,13 @@ export class AddAssignedUserNoteComponent implements OnInit {
       }
     }
   }
-
+  onExpand() {
+    if (this.toggleModal) {
+      this.onCloseModal.emit(null);
+    } else {
+      this.ticketStateService.openModalNote();
+    }
+  }
   public resetList(data) {
     this.userList = data;
     this.users = JSON.parse(JSON.stringify(this.userList)).map(item => new CompanyUserNote(item));

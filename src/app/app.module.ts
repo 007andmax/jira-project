@@ -154,6 +154,7 @@ import { UsersDetailsLeftPanelComponent } from './components/users-details/users
 import { SubscriptionServicesComponent } from './components/billing/subscription-services/subscription-services.component';
 import { SubscriptionServicesCheckUseComponent } from './components/billing/subscription-services/subscription-services-check-use/subscription-services-check-use.component';
 import { SubscriptionServicesConfirmComponent } from './components/billing/subscription-services/subscription-services-confirm/subscription-services-confirm.component';
+import { TicketDetailNoteModalModule } from './components/tickets/tickets/ticket-detail/ticket-detail-note-modal/ticket-detail-note-modal.module';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -238,7 +239,8 @@ declare var $: any;
     MatErrorModule,
     MatChipListModule,
     MatChipModule,
-    FileManagementAddFileModule
+    FileManagementAddFileModule,
+    TicketDetailNoteModalModule
   ],
   entryComponents: [
     ConfirmComponent,

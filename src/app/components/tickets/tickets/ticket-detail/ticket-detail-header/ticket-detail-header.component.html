@@ -47,10 +47,18 @@
             >
                 <div
                     class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
-                    (click)="addUpdate('NOTE')"
+                    (click)="setNoteType('PUBLIC');addUpdate('NOTE')"
+                >
+                    <div class="qt-icon icon__reply qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
+                    Reply
+                </div>
+                <div
+                    class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
+                    (click)="setNoteType('PRIVATE');addUpdate('NOTE')"
+                    *ngIf="!customerPortalStateService.isCustomerPortal"
                 >
                     <div class="qt-icon icon__messages qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>
-                    Chat
+                    Private Note
                 </div>
                 <div
                     class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"

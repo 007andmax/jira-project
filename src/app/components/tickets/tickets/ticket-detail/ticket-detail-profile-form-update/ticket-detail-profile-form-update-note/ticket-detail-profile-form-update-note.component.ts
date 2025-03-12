@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { TicketProfileFormUpdate } from '../../../ticket-edit-aside/class/ticket-profile-form-update';
 
@@ -11,12 +11,17 @@ export class TicketDetailProfileFormUpdateNoteComponent implements OnInit {
   files: any[] = [];
   @Input() ticketProfileFormUpdate: TicketProfileFormUpdate = new TicketProfileFormUpdate();
   constructor(public cd: ChangeDetectorRef,
-    private companiesService: CompaniesService,) { }
+    private companiesService: CompaniesService,
+    private elRef: ElementRef) { }
 
   ngOnInit() {
+    if (this.ticketProfileFormUpdate.note) this.elRef.nativeElement.querySelector("#chat").innerHTML = this.ticketProfileFormUpdate.note;
   }
   public fileBrowseHandler(files) {
     this.prepareFilesList(files);
+  }
+  setNote(data) {
+    this.elRef.nativeElement.querySelector("#chat").innerHTML = data;
   }
   prepareFilesList(files: Array<any>) {
     for (const item of files) {

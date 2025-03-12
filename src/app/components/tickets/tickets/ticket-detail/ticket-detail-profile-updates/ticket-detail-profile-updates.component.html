@@ -1,58 +1,80 @@
-<div class="ticket-updates qt-mr-24 qt-ml-24">
+<div
+    class="ticket-updates-no-data qt-df qt-fd-c qt-ai-c qt-jc-c"
+    *ngIf="ticketProfile.updatesCount == 0"
+>
+    <div class="qt-button qt-button--with-icon --gray qt-jc-c qt-mb-24 cursor-default">
+        <span class="qt-icon icon__writing-pen qt-sz-24 qt-dib qt-button-icon"></span>
+    </div>
+    <span class="qt-color-gray-900 qt-fw-600 qt-fs-16 qt-mb-8">No Conversation happend</span>
+    <span class="qt-color-gray-500 qt-fw-400 qt-fs-14">New conversation will appear here.</span>
+</div>
+<div
+    class="ticket-updates qt-mr-24 qt-ml-24"
+    *ngIf="ticketProfile.updatesCount > 0"
+>
     <div class="ticket-updates__title">
         <div class="ticket-updates__title-line"></div>
         <div class="ticket-updates__title-info">
             <span class="qt-icon icon__arrow-narrow-down qt-icon__blue-light-800 qt-dib qt-sz-12 qt-mr-4"></span>
             <span
                 class="ticket-updates__count qt-mr-5"
-                [textContent]="getCountUpdates()"
+                [textContent]="ticketProfile.updatesCount"
             ></span>
             Ticket Updates
         </div>
         <div class="ticket-updates__title-line"></div>
     </div>
-    <div class="ticket-updates__ticket">
-        <ng-template
-            ngFor
-            let-update
-            [ngForOf]="updates"
-            let-i="index"
-            [ngForTrackBy]="trackById"
-        >
-            <ticket-detail-profile-updates-note
-                class="ticket-updates__ticket-item"
-                (onRemove)="removeUpdate()"
-                *ngIf="update.type === 'NOTE' || update.type === 'SALE_QUOTE_REVIEW_NOTE'"
-                [idTicket]="ticketProfile.id"
-                [update]="update"
-                [isBlockChange]="!(ticketsPermissionsService.isActionVisible('update', ticketProfile, null, null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal))"
-            >
-            </ticket-detail-profile-updates-note>
-            <ticket-detail-profile-updates-product
-                class="ticket-updates__ticket-item"
-                *ngIf="update.type === 'PRODUCT'"
-                [update]="update"
-                [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || customerPortalStateService.isCustomerPortal"
-            >
-            </ticket-detail-profile-updates-product>
-            <ticket-detail-profile-updates-service
-                class="ticket-updates__ticket-item"
-                *ngIf="update.type === 'SERVICE'"
-                [update]="update"
-                [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || customerPortalStateService.isCustomerPortal"
-            >
-            </ticket-detail-profile-updates-service>
-        </ng-template>
-    </div>
     <div
-        *ngIf="showLoadMoreUpdates && ticketProfile.unloadedUpdates > 0"
-        class="button-loader"
-        (click)="fetchUpdates()"
+        class="ticket-updates__ticket"
+        [ngStyle]="{'padding-bottom': (showLoadMoreUpdates) ? '65px' : '0px'}"
     >
-        Load More Updates
+        <div
+            infiniteScroll
+            [infiniteScrollContainer]="container"
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            [infiniteScrollDisabled]="infiniteScrollDisabled"
+            (scrolled)="onScroll()"
+        >
+            <ng-template
+                ngFor
+                let-update
+                [ngForOf]="updates"
+                let-i="index"
+                [ngForTrackBy]="trackById"
+            >
+                <ticket-detail-profile-updates-note
+                    class="ticket-updates__ticket-item"
+                    (onRemove)="removeUpdate()"
+                    *ngIf="update.type === 'NOTE' || update.type === 'SALE_QUOTE_REVIEW_NOTE'"
+                    [idTicket]="ticketProfile.id"
+                    [update]="update"
+                    [isBlockChange]="!(ticketsPermissionsService.isActionVisible('update', ticketProfile, null, null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal))"
+                >
+                </ticket-detail-profile-updates-note>
+                <ticket-detail-profile-updates-product
+                    class="ticket-updates__ticket-item"
+                    *ngIf="update.type === 'PRODUCT'"
+                    [update]="update"
+                    [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || customerPortalStateService.isCustomerPortal"
+                >
+                </ticket-detail-profile-updates-product>
+                <ticket-detail-profile-updates-service
+                    class="ticket-updates__ticket-item"
+                    *ngIf="update.type === 'SERVICE'"
+                    [update]="update"
+                    [isBlockChange]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || customerPortalStateService.isCustomerPortal"
+                >
+                </ticket-detail-profile-updates-service>
+            </ng-template>
+        </div>
         <span
             *ngIf="showPreloader"
             class="loading"
         ></span>
+        <div
+            class="loading pengind-loading"
+            *ngIf="showLoadMoreUpdates && page > 0"
+        ></div>
     </div>
 </div>
