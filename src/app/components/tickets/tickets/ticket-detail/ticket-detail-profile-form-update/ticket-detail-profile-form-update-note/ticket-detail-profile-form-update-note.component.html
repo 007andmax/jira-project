@@ -10,7 +10,11 @@
                 <p>Drop to Attach file</p>
             </div>
         </div>
-        <div
+        <angular-editor
+            [(ngModel)]="ticketProfileFormUpdate.note"
+            [config]="editorConfig"
+        ></angular-editor>
+        <!-- <div
             contenteditable="true"
             id="chat"
             name="cps-chat"
@@ -18,7 +22,7 @@
             placeholder="Write ticket conversation here…"
             (input)="onChangeChat($event)"
             (keypress)="onKeyPress($event)"
-        ></div>
+        ></div> -->
     </div>
     <div
         class="files-list "

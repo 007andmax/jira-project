@@ -85,7 +85,7 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
     public modalService: NgbModal,
     public ticketsListService: TicketsListService) { }
   onSelectedNote(data) {
-    this.elRef.nativeElement.querySelector("#chat").innerHTML = data;
+    // this.elRef.nativeElement.querySelector("#chat").innerHTML = data;
     this.ticketProfileFormUpdate.setChatMessage(data.replace(/\n/g, '<br/>'));
   }
   onConnectRemoteAccess(data) {

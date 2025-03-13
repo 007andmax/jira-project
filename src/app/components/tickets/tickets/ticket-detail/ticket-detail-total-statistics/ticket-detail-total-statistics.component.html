@@ -25,7 +25,7 @@
             <span class="qt-fs-13 qt-fw-500 qt-color-gray-500 qt-ml-8">Contract Type</span>
             <span
                 class="qt-fs-14 qt-fw-400 qt-color-gray-900 qt-ml-8"
-                [textContent]="ticketProfile.companyServiceType"
+                [textContent]="ticketProfile.companyServiceType ? ticketProfile.companyServiceType :  'No contract type yet'"
             ></span>
         </div>
     </div>

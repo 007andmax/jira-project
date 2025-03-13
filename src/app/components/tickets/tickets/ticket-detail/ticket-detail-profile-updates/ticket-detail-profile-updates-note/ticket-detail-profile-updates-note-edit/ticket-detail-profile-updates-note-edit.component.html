@@ -1,11 +1,15 @@
 <div class="ticket-updates__message-line">
     <div class="editable-description">
-        <div
+        <angular-editor
+            [(ngModel)]="update.note"
+            [config]="editorConfig"
+        ></angular-editor>
+        <!-- <div
             class="editable-description-note"
             contenteditable="true"
             id="note-description"
             placeholder="Write ticket conversation here…"
-        ></div>
+        ></div> -->
     </div>
     <div class="editable-description__footer">
         <div class="qt-df">
