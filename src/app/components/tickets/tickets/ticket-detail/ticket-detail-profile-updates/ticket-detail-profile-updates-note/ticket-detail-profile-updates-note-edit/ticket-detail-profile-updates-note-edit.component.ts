@@ -69,7 +69,7 @@ export class TicketDetailProfileUpdatesNoteEditComponent implements OnInit {
     this.editUpdate.note = value.replace(/\n/g, '<br/>');
   }
   saveService() {
-    this.ticketsService.updateNote(this.idTicket, this.update.id, this.elRef.nativeElement.querySelector("#note-description").innerHTML).subscribe(res => {
+    this.ticketsService.updateNote(this.idTicket, this.update.id, this.editUpdate.note).subscribe(res => {
       this.ticketStateService.setEditUpdate(res);
       this.onEdit.emit(null);
     })
