@@ -267,7 +267,7 @@
   line-height: 20px;
   color: $gray-900;
     padding: 0px;
-    height: 300px;
+    min-height: 300px;
     max-height: 500px;
     ::ng-deep angular-editor {
         width: 100%;
@@ -277,6 +277,11 @@
         }
         .angular-editor-wrapper {
             height: calc(100% - 43px);
+        }
+        angular-editor-toolbar {
+            position: sticky;
+            bottom: 0px;
+            z-index: 999;
         }
     }
 }
