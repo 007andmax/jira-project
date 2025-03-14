@@ -1938,7 +1938,28 @@ app-quotes-item {
     min-height: 370px;
   }
   .angular-editor {
-    height: 370px;
+    display: flex;
+    flex-direction: column;
+    min-height: 370px;
+    height: auto;
+
+    .angular-editor-wrapper {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .angular-editor-textarea {
+      max-height: calc(100vh - 286px);
+      flex: 1;
+
+      @media only screen and (max-height: 600px) {
+        max-height: calc(100vh - 166px);
+      }
+    }
+  }
+  .editable-description {
+    max-height: unset !important;
   }
 }
 .add-user-to-company {
