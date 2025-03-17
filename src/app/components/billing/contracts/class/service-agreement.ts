@@ -404,7 +404,16 @@ export class ServiceAgreement {
         })
         return sum;
     }
-
+    public calculateSubTotalAmountOtherContract() {
+        let sum = 0;
+        this.productExpenses.forEach(item => {
+            sum += (item.quantity * item.salePrice);
+        })
+        this.serviceExpenses.forEach(item => {
+            sum += (item.quantity * item.rate);
+        })
+        return sum;
+    };
     public calculateTotalDiscount() {
         let sum = 0;
         this.serviceContractServices.forEach(item => {
