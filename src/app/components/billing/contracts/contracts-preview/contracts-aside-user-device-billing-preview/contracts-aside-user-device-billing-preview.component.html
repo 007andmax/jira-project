@@ -398,12 +398,12 @@
                 <div [textContent]="parsedateForTotal(contractsUserDevice.reviewDate)"></div>
             </div>
             <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
-                <div>Total Discount</div>
-                <div [textContent]="contractsUserDevice.calculateTotalDiscount() | currency"></div>
-            </div>
-            <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
                 <div>Sub Total</div>
                 <div [textContent]="contractsUserDevice.calculateSubTotalAmountServiceContract() - contractsUserDevice.calculateServiceDiscount() | currency"></div>
+            </div>
+            <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
+                <div>Total Discount</div>
+                <div [textContent]="contractsUserDevice.calculateTotalDiscount() | currency"></div>
             </div>
             <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
                 <div>Tax</div>

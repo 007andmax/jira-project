@@ -27,7 +27,7 @@ export class ContractsOther extends ContractsUserDevice {
         let totalAmount = 0;
         if (this.productExpenses.length > 0) {
             for (var i = 0; i < this.productExpenses.length; i++) {
-                var productCost = this.productExpenses[i].quantity * this.productExpenses[i].salePrice;
+                var productCost = (this.productExpenses[i].quantity * this.productExpenses[i].salePrice * (Number(this.productExpenses[i].discountAmount) || 0) / 100);;
                 totalAmount = totalAmount + productCost;
             }
         }
@@ -64,6 +64,25 @@ export class ContractsOther extends ContractsUserDevice {
         })
         this.serviceExpenses.forEach(item => {
             sum += item.taxSum;
+        })
+        return sum;
+    }
+    public calculateTotalAmountOtherContract() {
+        let sum = 0;
+        this.productExpenses.forEach(item => {
+            let rate = item.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+            sum += (item.quantity * item.salePrice * (1 - (Number(item.discountAmount) || 0) / 100) * (1 + rate / 100));
+        })
+        this.serviceExpenses.forEach(item => {
+            let rate = item.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+            sum += ((item.quantity * item.rate) * (1 + rate / 100));
+        })
+        return sum;
+    };
+    public calculateServiceDiscount() {
+        let sum = 0;
+        this.productExpenses.forEach(item => {
+            sum += (item.quantity * item.salePrice * (Number(item.discountAmount) || 0) / 100);
         })
         return sum;
     }

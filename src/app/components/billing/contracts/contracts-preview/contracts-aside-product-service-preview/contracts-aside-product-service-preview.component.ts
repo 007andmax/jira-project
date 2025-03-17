@@ -35,6 +35,9 @@ export class ContractsAsideProductServicePreviewComponent implements OnInit {
       this.selectedInterval = (this.contractsOther.customInterval === 30) ? '30 days' : (this.contractsOther.customInterval === 15) ? '15 days' : '7 days';
     }
   }
+  getDiscount(item) {
+    return item.discountAmount && item.discountAmount != undefined ? `${item.discountAmount} %` : 'N/A';
+  }
   parsedateForTotal(date) {
     return moment(date).format('DD MMM YYYY');
   }

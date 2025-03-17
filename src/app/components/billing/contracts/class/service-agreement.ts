@@ -61,7 +61,7 @@ export class ServiceAgreement {
             this.blockRate = (typeof data.blockRate === "number") ? String(data.blockRate) : "";
             this.blockRate_str = parseFloat(this.blockRate).toFixed(2);
             this.rateExceeding_str = parseFloat(this.rateExceeding).toFixed(2);
-            this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice, item.description, item.taxes));
+            this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice, item.description, item.taxes, item.discountAmount, item.discountSum));
             this.serviceExpenses = data.serviceExpenses.map(item => new ServiceAgreementServiceExpenses(item));
             this.productExpenses.forEach(item => this.onCalculateTaxSumForProductExpenses(item));
             this.serviceExpenses.forEach(item => this.onCalculateTaxSumForServiceExpenses(item));
@@ -351,6 +351,18 @@ export class ServiceAgreement {
         })
         return sum;
     };
+    public calculateTotalAmountOtherContract() {
+        let sum = 0;
+        this.productExpenses.forEach(item => {
+            let rate = item.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+            sum += (item.quantity * item.salePrice * (1 - (Number(item.discountAmount) || 0) / 100) * (1 + rate / 100));
+        })
+        this.serviceExpenses.forEach(item => {
+            let rate = item.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+            sum += ((item.quantity * item.rate) * (1 + rate / 100));
+        })
+        return sum;
+    };
     public calculateTotalAmount() {
         let sum = 0;
         if (Number(this.includedHours) && Number(this.blockRate)) {
@@ -385,6 +397,14 @@ export class ServiceAgreement {
         })
         return sum;
     }
+    public calculateServiceOthersDiscount() {
+        let sum = 0;
+        this.productExpenses.forEach(item => {
+            sum += (item.quantity * item.salePrice * (Number(item.discountAmount) || 0) / 100);
+        })
+        return sum;
+    }
+
     public calculateTotalDiscount() {
         let sum = 0;
         this.serviceContractServices.forEach(item => {

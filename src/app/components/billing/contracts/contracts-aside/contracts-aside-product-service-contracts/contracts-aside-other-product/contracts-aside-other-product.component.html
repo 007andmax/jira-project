@@ -25,6 +25,17 @@
             (onChange)="onChangeSalePrice($event)"
         >
     </td>
+    <td class="contract-product-products-table__price --editable">
+        <input
+            type="text"
+            class="qt-input-in-table qt-text-right"
+            decimalNumber
+            placeholder="0.00"
+            [defaultValue]="''"
+            [value]="product.discountAmount ? product.discountAmount : ''"
+            (onChange)="onChangeDiscountAmount($event)"
+        >
+    </td>
     <td
         class="contract-product-products-table__price"
         [textContent]="getSubTotal()"

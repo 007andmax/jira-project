@@ -37,6 +37,9 @@ export class ContractsAsideOtherProductComponent implements OnInit {
       this.product.taxes = [];
     }
   }
+  onChangeDiscountAmount(event) {
+    this.product.discountAmount = event;
+  }
   public onChangeTaxSum() {
     let rate = this.product.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
     this.product.taxSum = this.product.salePrice * this.product.quantity * rate / 100;
