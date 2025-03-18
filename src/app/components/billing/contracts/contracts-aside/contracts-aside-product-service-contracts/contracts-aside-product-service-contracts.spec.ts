@@ -104,6 +104,8 @@ describe('ContractsAsideProductServiceContractsComponent unit test', () => {
       productId: "",
       quantity: 0,
       salePrice: 0,
+      discountAmount: null,
+      discountType: "PERCENT",
     });
   });
   it('check "getMinStartDate"', () => {
