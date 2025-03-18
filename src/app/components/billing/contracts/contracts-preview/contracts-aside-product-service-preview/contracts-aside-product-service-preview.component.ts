@@ -49,7 +49,10 @@ export class ContractsAsideProductServicePreviewComponent implements OnInit {
 
   }
   getSubTotal(item) {
-    return item.quantity * item.salePrice;
+    return ((item.quantity * item.salePrice) - this.calculateDiscount(item)).toFixed(2);
+  }
+  public calculateDiscount(item) {
+    return (item.quantity * item.salePrice * (Number(item.discountAmount) || 0) / 100);
   }
 
 }

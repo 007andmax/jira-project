@@ -238,11 +238,18 @@
                 </div>
                 <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
                     <div>Sub Total</div>
-                    <div [textContent]="(contractsOther.calculateSubTotalAmountOtherContract() - contractsOther.calculateServiceDiscount()) | currency"></div>
+                    <div [textContent]="contractsOther.calculateSubTotalAmountOtherContract() | currency"></div>
                 </div>
                 <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
                     <div>Total Discount</div>
                     <div [textContent]="contractsOther.calculateServiceDiscount() | currency"></div>
+                </div>
+                <div
+                    class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12"
+                    *ngIf="contractsOther.calculateServiceDiscount() > 0"
+                >
+                    <div>Subtotal with discount</div>
+                    <div [textContent]="(contractsOther.calculateSubTotalAmountOtherContract() - contractsOther.calculateServiceDiscount()) | currency"></div>
                 </div>
                 <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
                     <div>Tax</div>
