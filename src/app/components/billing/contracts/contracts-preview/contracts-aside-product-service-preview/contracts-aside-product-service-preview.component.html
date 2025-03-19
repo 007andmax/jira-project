@@ -254,7 +254,7 @@
             </div>
             <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
                 <div>Sub Total</div>
-                <div [textContent]="contractsOther.calculateSubTotalAmountOtherContract() | currency"></div>
+                <div [textContent]="contractsOther.amount + contractsOther.calculateServiceOthersDiscount() | currency"></div>
             </div>
             <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
                 <div>Total Discount</div>
@@ -265,7 +265,7 @@
                 *ngIf="contractsOther.calculateServiceOthersDiscount() > 0"
             >
                 <div>Subtotal with discount</div>
-                <div [textContent]="(contractsOther.calculateSubTotalAmountOtherContract() - contractsOther.calculateServiceOthersDiscount()) | currency"></div>
+                <div [textContent]="(contractsOther.amount) | currency"></div>
             </div>
             <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
                 <div>Tax</div>
@@ -276,7 +276,7 @@
                 <div class="qt-fs-13 qt-fw-b">Total</div>
                 <div
                     class="qt-fs-16 qt-fw-b"
-                    [textContent]="contractsOther.calculateTotalAmountOtherContract() | currency"
+                    [textContent]="contractsOther.amount + contractsOther.taxSum | currency"
                 ></div>
             </div>
         </div>

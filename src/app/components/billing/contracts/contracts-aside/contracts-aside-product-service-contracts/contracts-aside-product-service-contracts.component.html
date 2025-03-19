@@ -260,7 +260,7 @@
                     <div class="qt-fs-13 qt-fw-b">Total</div>
                     <div
                         class="qt-fs-16 qt-fw-b"
-                        [textContent]="contractsOther.calculateTotalAmountOtherContract() | currency"
+                        [textContent]="contractsOther.calculateSubTotalAmountOtherContract() - contractsOther.calculateServiceDiscount() + contractsOther.calculateServiceTaxes() | currency"
                     ></div>
                 </div>
             </div>

@@ -72,15 +72,6 @@ export class ContractsUserDevice {
         if (this.manualCreateBillableItem) return;
         this.enableInvoiceAutoCreate = data;
     }
-    public calculateTotalAmount() {
-        let sum = 0;
-        this.serviceContractServices.forEach(item => {
-            let rate = item.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
-            if (item.discountType == "PERCENT") sum += (item.count * item.rate * (1 - (Number(item.discountAmount) || 0) / 100) * (1 + rate / 100));
-            if (item.discountType == "FIXED") sum += (((item.count * item.rate) - Number(item.discountAmount)) * (1 + rate / 100));
-        })
-        return sum;
-    }
     public calculateTotalDiscount() {
         let sum = 0;
         this.serviceContractServices.forEach(item => {
