@@ -6,7 +6,7 @@ import { ContractsBlockTimeDefaultService } from '../contracts-aside/class/contr
 import { ContractsOtherProduct } from '../contracts-aside/class/contracts-other-product';
 import { ServiceAgreementServiceExpenses } from './service-agreement-service-expenses';
 export class ServiceAgreement {
-    amount: number;
+    subtotalExcludingTax: number;
     billType: string;
     blockRate: string;
     blockTimeServices: Array<ServiceAgreementBlockTimeServices> = [];

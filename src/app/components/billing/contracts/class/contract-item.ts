@@ -1,7 +1,7 @@
 import { ContractItemCompany } from './contract-item-company';
 
 export class ContractItem {
-    amount: number;
+    subtotalExcludingTax: number;
     billType: string;
     companyId: string;
     companyName: string;

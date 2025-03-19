@@ -162,7 +162,7 @@ describe('ContractsAsideBlockTimeBillingComponent unit test', () => {
     const fixture = TestBed.createComponent(ContractsAsideBlockTimeBillingComponent);
     const com = fixture.debugElement.componentInstance;
     let contractForCopy = new ServiceAgreement({
-      amount: 6,
+      subtotalExcludingTax: 6,
       billType: null,
       blockRate: "3",
       blockRate_str: "3.00",
