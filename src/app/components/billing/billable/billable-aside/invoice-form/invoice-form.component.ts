@@ -223,6 +223,9 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   onUpdateSubjectTicket(subject, i) {
     this.invoice.invoiceDataDto.tickets[i].subject = subject;
   }
+  getTotalDiscount() {
+    return (this.invoice.invoiceDataDto.invoiceDiscount ? this.invoice.invoiceDataDto.invoiceDiscount.amount : 0) + (this.invoice.invoiceDataDto.discountSum ? this.invoice.invoiceDataDto.discountSum : 0);
+  }
   delete(i) {
     this.confirmStateService.setConfirmAction(REMOVE_TICKET_INVOICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });

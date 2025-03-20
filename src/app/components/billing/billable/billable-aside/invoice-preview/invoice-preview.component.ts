@@ -51,6 +51,9 @@ export class InvoicePreviewComponent implements OnInit {
   public getDate(date) {
     return moment(new Date(date)).format('DD MMM YYYY');
   }
+  getTotalDiscount() {
+    return (this.invoice.invoiceDataDto.invoiceDiscount ? this.invoice.invoiceDataDto.invoiceDiscount.amount : 0) + (this.invoice.invoiceDataDto.discountSum ? this.invoice.invoiceDataDto.discountSum : 0);
+  }
   public trackByIndex(index, item) {
     return index;
   }
