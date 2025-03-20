@@ -102,4 +102,35 @@ describe('TicketDetailProfileEditUpdatesProductsComponent unit test', () => {
     expect(com.onValidateProducts()).toEqual(false)
     expect(com.addedProductList[0].valdiateSaleCost).toEqual(false)
   });
+  it('check "getSelectedProducts"', () => {
+    const fixture = TestBed.createComponent(TicketDetailProfileEditUpdatesProductsComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.currentProduct.item.versionedId = { id: "test" };
+    com.addProduct();
+    expect(com.getSelectedProducts().length).toEqual(1)
+  });
+  it('check "onChangeCost"', () => {
+    const fixture = TestBed.createComponent(TicketDetailProfileEditUpdatesProductsComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.product.item = { cost: 0, cost_str: "0" };
+    com.onChangeCost(11);
+    expect(com.product.item.cost).toEqual(11)
+    expect(com.product.item.cost_str).toEqual("11.00")
+  });
+  it('check "onValidateSaleCost"', () => {
+    const fixture = TestBed.createComponent(TicketDetailProfileEditUpdatesProductsComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.product.item = { versionedId: "test", sale: 100, cost: 50 };
+    com.product.valdiateSaleCost = false;
+    com.onValidateSaleCost();
+    expect(com.product.valdiateSaleCost).toEqual(true)
+  });
+  it('check "onChangeCost"', () => {
+    const fixture = TestBed.createComponent(TicketDetailProfileEditUpdatesProductsComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.product.item = { versionedId: "test", sale: 100, sale_str: "50" };
+    com.onChangeSale(11);
+    expect(com.product.item.sale).toEqual(11)
+    expect(com.product.item.sale_str).toEqual("11.00")
+  });
 });
