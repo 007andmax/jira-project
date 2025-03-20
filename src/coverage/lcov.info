@@ -66,20 +66,6 @@ FNDA:0,(anonymous_16)
 FNDA:0,(anonymous_17)
 FNDA:0,(anonymous_18)
 FNDA:0,(anonymous_19)
-<<<<<<< HEAD
-FNDA:4,(anonymous_20)
-FNDA:88,(anonymous_21)
-DA:7,1
-DA:9,4
-DA:10,4
-DA:11,4
-DA:12,4
-DA:13,4
-DA:14,4
-DA:15,4
-DA:16,4
-DA:17,4
-=======
 FNDA:10,(anonymous_20)
 FNDA:100,(anonymous_21)
 DA:7,1
@@ -92,7 +78,6 @@ DA:14,10
 DA:15,10
 DA:16,10
 DA:17,10
->>>>>>> QT-1230
 DA:22,1
 DA:23,0
 DA:24,0
@@ -138,13 +123,8 @@ DA:105,0
 DA:107,1
 DA:108,0
 DA:110,1
-<<<<<<< HEAD
-DA:111,4
-DA:113,88
-=======
 DA:111,10
 DA:113,100
->>>>>>> QT-1230
 DA:119,1
 DA:123,1
 DA:127,1
@@ -169,11 +149,7 @@ FN:8,InvoiceFormTicketEditTaxesModule
 FNF:2
 FNH:2
 FNDA:1,(anonymous_0)
-<<<<<<< HEAD
-FNDA:44,InvoiceFormTicketEditTaxesModule
-=======
 FNDA:50,InvoiceFormTicketEditTaxesModule
->>>>>>> QT-1230
 DA:7,1
 DA:10,1
 DA:23,1
@@ -888,7 +864,6 @@ FN:309,(anonymous_83)
 FN:317,(anonymous_84)
 FN:319,(anonymous_85)
 FN:325,(anonymous_86)
-<<<<<<< HEAD
 FN:336,(anonymous_87)
 FN:338,(anonymous_88)
 FN:346,(anonymous_89)
@@ -904,22 +879,6 @@ FN:375,(anonymous_98)
 FN:381,(anonymous_99)
 FN:383,(anonymous_100)
 FNF:101
-=======
-FN:327,(anonymous_87)
-FN:328,(anonymous_88)
-FN:328,(anonymous_89)
-FN:337,(anonymous_90)
-FN:348,(anonymous_91)
-FN:350,(anonymous_92)
-FN:358,(anonymous_93)
-FN:360,(anonymous_94)
-FN:365,(anonymous_95)
-FN:367,(anonymous_96)
-FN:370,(anonymous_97)
-FN:375,(anonymous_98)
-FN:377,(anonymous_99)
-FNF:100
->>>>>>> QT-1230
 FNH:40
 FNDA:1,(anonymous_0)
 FNDA:20,ServiceAgreement
@@ -1036,11 +995,7 @@ DA:19,20
 DA:20,20
 DA:21,20
 DA:22,7
-<<<<<<< HEAD
 DA:23,248
-=======
-DA:23,247
->>>>>>> QT-1230
 DA:25,7
 DA:26,61
 DA:28,115
@@ -1222,7 +1177,6 @@ DA:325,1
 DA:326,0
 DA:327,0
 DA:328,0
-<<<<<<< HEAD
 DA:331,0
 DA:333,0
 DA:336,1
@@ -1243,35 +1197,12 @@ DA:354,0
 DA:355,0
 DA:356,0
 DA:358,0
-=======
-DA:329,0
-DA:330,0
-DA:331,0
-DA:332,0
-DA:334,0
-DA:337,1
-DA:338,0
-DA:339,0
-DA:340,0
-DA:343,0
-DA:345,0
-DA:348,1
-DA:349,0
-DA:350,0
-DA:351,0
-DA:352,0
-DA:353,0
-DA:354,0
-DA:356,0
-DA:358,1
->>>>>>> QT-1230
 DA:359,0
-DA:360,0
 DA:361,0
-DA:363,0
-DA:365,1
+DA:363,1
+DA:364,0
+DA:365,0
 DA:366,0
-<<<<<<< HEAD
 DA:368,0
 DA:370,1
 DA:371,0
@@ -1288,21 +1219,6 @@ DA:386,0
 DA:389,1
 LF:236
 LH:110
-=======
-DA:367,0
-DA:368,0
-DA:370,0
-DA:371,0
-DA:373,0
-DA:375,1
-DA:376,0
-DA:377,0
-DA:378,0
-DA:380,0
-DA:383,1
-LF:233
-LH:109
->>>>>>> QT-1230
 BRDA:11,0,0,13
 BRDA:11,0,1,7
 BRDA:21,1,0,7
@@ -1449,7 +1365,6 @@ BRDA:307,68,0,0
 BRDA:307,68,1,0
 BRDA:307,69,0,0
 BRDA:307,69,1,0
-<<<<<<< HEAD
 BRDA:327,70,0,0
 BRDA:327,70,1,0
 BRDA:327,71,0,0
@@ -1465,27 +1380,6 @@ BRDA:342,75,1,0
 BRDA:366,76,0,0
 BRDA:366,76,1,0
 BRF:160
-=======
-BRDA:329,70,0,0
-BRDA:329,70,1,0
-BRDA:330,71,0,0
-BRDA:330,71,1,0
-BRDA:331,72,0,0
-BRDA:331,72,1,0
-BRDA:339,73,0,0
-BRDA:339,73,1,0
-BRDA:339,74,0,0
-BRDA:339,74,1,0
-BRDA:351,75,0,0
-BRDA:351,75,1,0
-BRDA:352,76,0,0
-BRDA:352,76,1,0
-BRDA:353,77,0,0
-BRDA:353,77,1,0
-BRDA:354,78,0,0
-BRDA:354,78,1,0
-BRF:164
->>>>>>> QT-1230
 BRH:32
 end_of_record
 TN:
@@ -2356,11 +2250,7 @@ TN:
 SF:src\app\components\billing\contracts\contracts-aside\class\contracts-other-product.ts
 FN:2,(anonymous_0)
 FN:3,ContractsOtherProduct
-<<<<<<< HEAD
 FN:20,(anonymous_2)
-=======
-FN:15,(anonymous_2)
->>>>>>> QT-1230
 FNF:3
 FNH:3
 FNDA:1,(anonymous_0)
@@ -2377,7 +2267,6 @@ DA:10,3
 DA:11,3
 DA:12,3
 DA:13,3
-<<<<<<< HEAD
 DA:14,3
 DA:15,3
 DA:16,3
@@ -2396,17 +2285,6 @@ BRDA:6,2,0,3
 BRDA:6,2,1,0
 BRF:6
 BRH:3
-=======
-DA:15,1
-DA:16,2
-DA:22,1
-LF:14
-LH:14
-BRDA:4,0,0,3
-BRDA:4,0,1,0
-BRF:2
-BRH:1
->>>>>>> QT-1230
 end_of_record
 TN:
 SF:src\app\components\billing\contracts\contracts-aside\class\contracts-other-service.ts
@@ -2551,7 +2429,6 @@ FN:6,ContractsOther
 FN:11,(anonymous_2)
 FN:25,(anonymous_3)
 FN:32,(anonymous_4)
-<<<<<<< HEAD
 FN:49,(anonymous_5)
 FN:57,(anonymous_6)
 FN:58,(anonymous_7)
@@ -2564,15 +2441,6 @@ FN:83,(anonymous_13)
 FN:85,(anonymous_14)
 FN:88,(anonymous_15)
 FNF:16
-=======
-FN:48,(anonymous_5)
-FN:56,(anonymous_6)
-FN:57,(anonymous_7)
-FN:65,(anonymous_8)
-FN:67,(anonymous_9)
-FN:70,(anonymous_10)
-FNF:11
->>>>>>> QT-1230
 FNH:3
 FNDA:1,(anonymous_0)
 FNDA:4,ContractsOther
@@ -2585,14 +2453,11 @@ FNDA:0,(anonymous_7)
 FNDA:0,(anonymous_8)
 FNDA:0,(anonymous_9)
 FNDA:0,(anonymous_10)
-<<<<<<< HEAD
 FNDA:0,(anonymous_11)
 FNDA:0,(anonymous_12)
 FNDA:0,(anonymous_13)
 FNDA:0,(anonymous_14)
 FNDA:0,(anonymous_15)
-=======
->>>>>>> QT-1230
 DA:4,1
 DA:5,1
 DA:7,4
@@ -2620,7 +2485,6 @@ DA:33,0
 DA:34,0
 DA:35,0
 DA:36,0
-<<<<<<< HEAD
 DA:38,0
 DA:41,0
 DA:42,0
@@ -2653,28 +2517,6 @@ DA:91,0
 DA:94,1
 LF:57
 LH:27
-=======
-DA:37,0
-DA:40,0
-DA:41,0
-DA:42,0
-DA:43,0
-DA:46,0
-DA:48,1
-DA:49,0
-DA:56,0
-DA:57,0
-DA:65,1
-DA:66,0
-DA:67,0
-DA:68,0
-DA:70,0
-DA:71,0
-DA:73,0
-DA:75,1
-LF:45
-LH:25
->>>>>>> QT-1230
 BRDA:7,0,0,4
 BRDA:7,0,1,4
 BRDA:7,0,2,4
@@ -2688,7 +2530,6 @@ BRDA:28,4,0,1
 BRDA:28,4,1,0
 BRDA:34,5,0,0
 BRDA:34,5,1,0
-<<<<<<< HEAD
 BRDA:36,6,0,0
 BRDA:36,6,1,0
 BRDA:41,7,0,0
@@ -2708,23 +2549,6 @@ BRDA:56,13,1,0
 BRDA:79,14,0,0
 BRDA:79,14,1,0
 BRF:31
-=======
-BRDA:40,6,0,0
-BRDA:40,6,1,0
-BRDA:52,7,0,0
-BRDA:52,7,1,0
-BRDA:52,8,0,0
-BRDA:52,8,1,0
-BRDA:52,9,0,0
-BRDA:52,9,1,0
-BRDA:52,10,0,0
-BRDA:52,10,1,0
-BRDA:55,11,0,0
-BRDA:55,11,1,0
-BRDA:55,12,0,0
-BRDA:55,12,1,0
-BRF:27
->>>>>>> QT-1230
 BRH:5
 end_of_record
 TN:
@@ -2928,7 +2752,6 @@ FN:54,(anonymous_7)
 FN:59,(anonymous_8)
 FN:64,(anonymous_9)
 FN:66,(anonymous_10)
-<<<<<<< HEAD
 FN:71,(anonymous_11)
 FN:73,(anonymous_12)
 FN:81,(anonymous_13)
@@ -2992,75 +2815,6 @@ FN:284,(anonymous_70)
 FN:287,(anonymous_71)
 FN:289,(anonymous_72)
 FNF:73
-=======
-FN:67,(anonymous_11)
-FN:67,(anonymous_12)
-FN:75,(anonymous_13)
-FN:77,(anonymous_14)
-FN:82,(anonymous_15)
-FN:84,(anonymous_16)
-FN:92,(anonymous_17)
-FN:94,(anonymous_18)
-FN:99,(anonymous_19)
-FN:100,(anonymous_20)
-FN:102,(anonymous_21)
-FN:105,(anonymous_22)
-FN:106,(anonymous_23)
-FN:108,(anonymous_24)
-FN:109,(anonymous_25)
-FN:111,(anonymous_26)
-FN:112,(anonymous_27)
-FN:114,(anonymous_28)
-FN:117,(anonymous_29)
-FN:120,(anonymous_30)
-FN:135,(anonymous_31)
-FN:148,(anonymous_32)
-FN:174,(anonymous_33)
-FN:176,(anonymous_34)
-FN:179,(anonymous_35)
-FN:180,(anonymous_36)
-FN:185,(anonymous_37)
-FN:188,(anonymous_38)
-FN:189,(anonymous_39)
-FN:192,(anonymous_40)
-FN:194,(anonymous_41)
-FN:197,(anonymous_42)
-FN:198,(anonymous_43)
-FN:203,(anonymous_44)
-FN:206,(anonymous_45)
-FN:207,(anonymous_46)
-FN:210,(anonymous_47)
-FN:211,(anonymous_48)
-FN:214,(anonymous_49)
-FN:218,(anonymous_50)
-FN:221,(anonymous_51)
-FN:222,(anonymous_52)
-FN:226,(anonymous_53)
-FN:232,(anonymous_54)
-FN:233,(anonymous_55)
-FN:236,(anonymous_56)
-FN:241,(anonymous_57)
-FN:251,(anonymous_58)
-FN:252,(anonymous_59)
-FN:253,(anonymous_60)
-FN:262,(anonymous_61)
-FN:263,(anonymous_62)
-FN:267,(anonymous_63)
-FN:268,(anonymous_64)
-FN:273,(anonymous_65)
-FN:274,(anonymous_66)
-FN:277,(anonymous_67)
-FN:279,(anonymous_68)
-FN:282,(anonymous_69)
-FN:283,(anonymous_70)
-FN:288,(anonymous_71)
-FN:289,(anonymous_72)
-FN:292,(anonymous_73)
-FN:295,(anonymous_74)
-FN:298,(anonymous_75)
-FN:300,(anonymous_76)
-FNF:77
->>>>>>> QT-1230
 FNH:23
 FNDA:1,(anonymous_0)
 FNDA:12,ContractsUserDevice
@@ -3135,13 +2889,6 @@ FNDA:0,(anonymous_69)
 FNDA:0,(anonymous_70)
 FNDA:0,(anonymous_71)
 FNDA:0,(anonymous_72)
-<<<<<<< HEAD
-=======
-FNDA:0,(anonymous_73)
-FNDA:0,(anonymous_74)
-FNDA:0,(anonymous_75)
-FNDA:0,(anonymous_76)
->>>>>>> QT-1230
 DA:6,1
 DA:8,12
 DA:9,12
@@ -3196,19 +2943,14 @@ DA:64,1
 DA:65,0
 DA:66,0
 DA:67,0
-<<<<<<< HEAD
-=======
-DA:68,0
->>>>>>> QT-1230
 DA:69,0
-DA:70,0
-DA:71,0
+DA:71,1
+DA:72,0
 DA:73,0
 DA:74,0
 DA:75,0
 DA:76,0
 DA:77,0
-<<<<<<< HEAD
 DA:79,0
 DA:81,1
 DA:82,0
@@ -3265,69 +3007,10 @@ DA:151,0
 DA:152,0
 DA:153,0
 DA:154,0
-=======
-DA:78,0
-DA:80,0
-DA:82,1
-DA:83,0
-DA:84,0
-DA:85,0
-DA:86,0
-DA:87,0
-DA:88,0
-DA:90,0
-DA:92,1
-DA:93,0
-DA:94,0
-DA:95,0
-DA:97,0
-DA:99,1
-DA:100,5
-DA:102,1
-DA:103,3
-DA:105,1
-DA:106,0
-DA:108,1
-DA:109,0
-DA:111,1
-DA:112,0
-DA:114,1
-DA:115,0
-DA:117,1
-DA:118,0
-DA:120,1
-DA:121,0
-DA:122,0
-DA:123,0
-DA:124,0
-DA:125,0
-DA:126,0
-DA:129,0
-DA:130,0
-DA:131,0
-DA:132,0
-DA:135,1
-DA:136,0
-DA:137,0
-DA:138,0
-DA:139,0
-DA:140,0
-DA:143,0
-DA:144,0
-DA:145,0
-DA:148,1
-DA:149,2
-DA:150,2
-DA:151,2
-DA:152,2
-DA:153,2
-DA:155,0
->>>>>>> QT-1230
 DA:156,0
 DA:157,0
 DA:158,0
 DA:159,0
-<<<<<<< HEAD
 DA:160,0
 DA:163,1
 DA:164,1
@@ -3361,48 +3044,11 @@ DA:201,0
 DA:203,0
 DA:204,0
 DA:205,0
-=======
-DA:161,0
-DA:162,0
-DA:163,0
-DA:164,0
-DA:165,0
-DA:167,0
-DA:168,0
-DA:169,0
-DA:170,0
-DA:171,0
-DA:174,1
-DA:175,1
-DA:176,1
-DA:177,1
-DA:179,1
-DA:180,1
-DA:181,1
-DA:182,0
-DA:185,1
-DA:186,1
-DA:188,1
-DA:189,1
-DA:190,1
-DA:192,1
-DA:193,0
-DA:194,0
-DA:195,0
-DA:197,0
-DA:198,0
-DA:199,0
-DA:200,0
-DA:203,0
-DA:204,0
-DA:206,0
->>>>>>> QT-1230
 DA:207,0
 DA:208,0
 DA:210,1
 DA:211,0
 DA:212,0
-<<<<<<< HEAD
 DA:213,0
 DA:215,0
 DA:216,0
@@ -3410,20 +3056,11 @@ DA:217,0
 DA:218,0
 DA:219,0
 DA:221,0
-=======
-DA:214,0
-DA:215,0
-DA:216,0
-DA:218,0
-DA:219,0
-DA:221,1
->>>>>>> QT-1230
 DA:222,0
 DA:223,0
-DA:224,0
+DA:225,1
 DA:226,0
 DA:227,0
-<<<<<<< HEAD
 DA:230,0
 DA:240,0
 DA:241,0
@@ -3462,55 +3099,6 @@ DA:292,0
 DA:295,1
 LF:208
 LH:94
-=======
-DA:228,0
-DA:229,0
-DA:230,0
-DA:232,0
-DA:233,0
-DA:234,0
-DA:236,1
-DA:237,0
-DA:238,0
-DA:241,0
-DA:251,0
-DA:252,0
-DA:253,0
-DA:262,1
-DA:263,2
-DA:264,1
-DA:266,2
-DA:267,2
-DA:268,2
-DA:269,2
-DA:270,0
-DA:273,2
-DA:274,2
-DA:275,2
-DA:277,1
-DA:278,0
-DA:279,0
-DA:280,0
-DA:282,0
-DA:283,0
-DA:284,0
-DA:285,0
-DA:288,0
-DA:289,0
-DA:290,0
-DA:292,1
-DA:293,0
-DA:295,1
-DA:296,0
-DA:298,1
-DA:299,0
-DA:300,0
-DA:301,0
-DA:303,0
-DA:306,1
-LF:217
-LH:95
->>>>>>> QT-1230
 BRDA:26,0,0,0
 BRDA:26,0,1,1
 BRDA:27,1,0,0
@@ -3540,7 +3128,6 @@ BRDA:56,12,0,0
 BRDA:56,12,1,0
 BRDA:60,13,0,0
 BRDA:60,13,1,0
-<<<<<<< HEAD
 BRDA:74,14,0,0
 BRDA:74,14,1,0
 BRDA:75,15,0,0
@@ -3649,122 +3236,6 @@ BRDA:278,61,1,0
 BRDA:279,62,0,0
 BRDA:279,62,1,0
 BRF:136
-=======
-BRDA:68,14,0,0
-BRDA:68,14,1,0
-BRDA:69,15,0,0
-BRDA:69,15,1,0
-BRDA:70,16,0,0
-BRDA:70,16,1,0
-BRDA:85,17,0,0
-BRDA:85,17,1,0
-BRDA:86,18,0,0
-BRDA:86,18,1,0
-BRDA:87,19,0,0
-BRDA:87,19,1,0
-BRDA:88,20,0,0
-BRDA:88,20,1,0
-BRDA:122,21,0,0
-BRDA:122,21,1,0
-BRDA:122,22,0,0
-BRDA:122,22,1,0
-BRDA:137,23,0,0
-BRDA:137,23,1,0
-BRDA:137,24,0,0
-BRDA:137,24,1,0
-BRDA:137,24,2,0
-BRDA:149,25,0,2
-BRDA:149,25,1,0
-BRDA:149,26,0,2
-BRDA:149,26,1,0
-BRDA:155,27,0,0
-BRDA:155,27,1,0
-BRDA:161,28,0,0
-BRDA:161,28,1,0
-BRDA:167,29,0,0
-BRDA:167,29,1,0
-BRDA:181,30,0,0
-BRDA:181,30,1,1
-BRDA:181,31,0,1
-BRDA:181,31,1,0
-BRDA:181,31,2,0
-BRDA:181,31,3,0
-BRDA:188,32,0,0
-BRDA:188,32,1,1
-BRDA:189,33,0,0
-BRDA:189,33,1,1
-BRDA:190,34,0,1
-BRDA:190,34,1,1
-BRDA:199,35,0,0
-BRDA:199,35,1,0
-BRDA:199,36,0,0
-BRDA:199,36,1,0
-BRDA:199,36,2,0
-BRDA:199,36,3,0
-BRDA:206,37,0,0
-BRDA:206,37,1,0
-BRDA:207,38,0,0
-BRDA:207,38,1,0
-BRDA:208,39,0,0
-BRDA:208,39,1,0
-BRDA:215,40,0,0
-BRDA:215,40,1,0
-BRDA:218,41,0,0
-BRDA:218,41,1,0
-BRDA:227,42,0,0
-BRDA:227,42,1,0
-BRDA:229,43,0,0
-BRDA:229,43,1,0
-BRDA:232,44,0,0
-BRDA:232,44,1,0
-BRDA:233,45,0,0
-BRDA:233,45,1,0
-BRDA:234,46,0,0
-BRDA:234,46,1,0
-BRDA:241,47,0,0
-BRDA:241,47,1,0
-BRDA:244,48,0,0
-BRDA:244,48,1,0
-BRDA:244,49,0,0
-BRDA:244,49,1,0
-BRDA:244,50,0,0
-BRDA:244,50,1,0
-BRDA:244,51,0,0
-BRDA:244,51,1,0
-BRDA:249,52,0,0
-BRDA:249,52,1,0
-BRDA:249,53,0,0
-BRDA:249,53,1,0
-BRDA:252,54,0,0
-BRDA:252,54,1,0
-BRDA:258,55,0,0
-BRDA:258,55,1,0
-BRDA:269,56,0,0
-BRDA:269,56,1,2
-BRDA:269,57,0,2
-BRDA:269,57,1,0
-BRDA:269,57,2,0
-BRDA:269,57,3,0
-BRDA:273,58,0,0
-BRDA:273,58,1,2
-BRDA:274,59,0,0
-BRDA:274,59,1,2
-BRDA:275,60,0,2
-BRDA:275,60,1,2
-BRDA:284,61,0,0
-BRDA:284,61,1,0
-BRDA:284,62,0,0
-BRDA:284,62,1,0
-BRDA:284,62,2,0
-BRDA:284,62,3,0
-BRDA:288,63,0,0
-BRDA:288,63,1,0
-BRDA:289,64,0,0
-BRDA:289,64,1,0
-BRDA:290,65,0,0
-BRDA:290,65,1,0
-BRF:142
->>>>>>> QT-1230
 BRH:25
 end_of_record
 TN:
@@ -5261,7 +4732,6 @@ SF:src\app\components\billing\contracts\contracts-aside\contracts-aside-product-
 FN:5,(anonymous_0)
 FN:6,ContractsAsideOtherProductComponent
 FN:9,(anonymous_2)
-<<<<<<< HEAD
 FN:14,(anonymous_3)
 FN:36,(anonymous_4)
 FN:40,(anonymous_5)
@@ -5273,17 +4743,6 @@ FN:54,(anonymous_10)
 FN:57,(anonymous_11)
 FN:60,(anonymous_12)
 FNF:13
-=======
-FN:13,(anonymous_3)
-FN:35,(anonymous_4)
-FN:36,(anonymous_5)
-FN:36,(anonymous_6)
-FN:39,(anonymous_7)
-FN:44,(anonymous_8)
-FN:49,(anonymous_9)
-FN:52,(anonymous_10)
-FNF:11
->>>>>>> QT-1230
 FNH:6
 FNDA:1,(anonymous_0)
 FNDA:1,ContractsAsideOtherProductComponent
@@ -5296,27 +4755,17 @@ FNDA:3,(anonymous_7)
 FNDA:0,(anonymous_8)
 FNDA:0,(anonymous_9)
 FNDA:0,(anonymous_10)
-<<<<<<< HEAD
 FNDA:0,(anonymous_11)
 FNDA:0,(anonymous_12)
-=======
->>>>>>> QT-1230
 DA:5,1
 DA:7,1
 DA:9,1
 DA:10,0
 DA:11,0
-<<<<<<< HEAD
 DA:12,0
 DA:14,1
 DA:15,2
 DA:16,2
-=======
-DA:13,1
-DA:14,2
-DA:15,2
-DA:16,1
->>>>>>> QT-1230
 DA:17,1
 DA:18,1
 DA:19,1
@@ -5324,18 +4773,13 @@ DA:20,1
 DA:21,1
 DA:22,1
 DA:23,1
-<<<<<<< HEAD
 DA:24,1
-=======
-DA:26,1
->>>>>>> QT-1230
 DA:27,1
 DA:28,1
 DA:29,1
 DA:30,1
 DA:31,1
 DA:32,1
-<<<<<<< HEAD
 DA:33,1
 DA:36,1
 DA:37,0
@@ -5343,22 +4787,12 @@ DA:38,0
 DA:40,1
 DA:41,3
 DA:42,1
-=======
-DA:35,1
-DA:36,3
-DA:37,1
-DA:39,1
-DA:40,0
-DA:41,0
-DA:42,0
->>>>>>> QT-1230
 DA:44,1
 DA:45,0
 DA:46,0
 DA:47,0
 DA:49,1
 DA:50,0
-<<<<<<< HEAD
 DA:51,0
 DA:52,0
 DA:54,1
@@ -5383,22 +4817,6 @@ BRDA:58,3,0,0
 BRDA:58,3,1,0
 BRF:8
 BRH:4
-=======
-DA:52,1
-DA:53,0
-DA:55,1
-DA:59,1
-DA:63,1
-DA:71,1
-LF:42
-LH:32
-BRDA:10,0,0,0
-BRDA:10,0,1,0
-BRDA:15,1,0,1
-BRDA:15,1,1,1
-BRF:4
-BRH:2
->>>>>>> QT-1230
 end_of_record
 TN:
 SF:src\app\components\billing\contracts\contracts-aside\contracts-aside-product-service-contracts\contracts-aside-other-product\contracts-aside-other-product.module.ts
@@ -8959,13 +8377,8 @@ FNDA:0,(anonymous_9)
 FNDA:0,(anonymous_10)
 FNDA:0,(anonymous_11)
 DA:3,1
-<<<<<<< HEAD
-DA:5,1
-DA:6,1
-=======
 DA:5,7
 DA:6,7
->>>>>>> QT-1230
 DA:8,1
 DA:9,0
 DA:10,0
@@ -9020,11 +8433,7 @@ FNDA:1,(anonymous_0)
 FNDA:58,QuoteRealTimeService
 FNDA:0,(anonymous_2)
 DA:6,1
-<<<<<<< HEAD
-DA:11,56
-=======
 DA:11,58
->>>>>>> QT-1230
 DA:17,1
 DA:18,0
 DA:20,1
@@ -9419,7 +8828,7 @@ FNDA:0,(anonymous_18)
 FNDA:0,(anonymous_19)
 FNDA:0,(anonymous_20)
 FNDA:0,(anonymous_21)
-FNDA:1,(anonymous_22)
+FNDA:2,(anonymous_22)
 FNDA:0,(anonymous_23)
 FNDA:4,(anonymous_24)
 DA:13,1
@@ -9495,11 +8904,7 @@ DA:117,0
 DA:118,0
 DA:119,0
 DA:121,1
-<<<<<<< HEAD
-DA:122,1
-=======
 DA:122,2
->>>>>>> QT-1230
 DA:124,1
 DA:126,0
 DA:131,4
@@ -9788,17 +9193,10 @@ FN:3,CompanyFilterTop
 FNF:2
 FNH:2
 FNDA:1,(anonymous_0)
-<<<<<<< HEAD
-FNDA:605,CompanyFilterTop
-DA:2,1
-DA:4,605
-DA:5,605
-=======
 FNDA:720,CompanyFilterTop
 DA:2,1
 DA:4,720
 DA:5,720
->>>>>>> QT-1230
 DA:7,1
 LF:4
 LH:4
@@ -9825,38 +9223,6 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-<<<<<<< HEAD
-SF:src\app\components\company-devices\class\device-company.ts
-FN:6,(anonymous_0)
-FN:8,DeviceCompany
-FN:41,(anonymous_2)
-FN:48,(anonymous_3)
-FN:51,(anonymous_4)
-FN:54,(anonymous_5)
-FN:57,(anonymous_6)
-FN:58,(anonymous_7)
-FN:60,(anonymous_8)
-FN:63,(anonymous_9)
-FN:66,(anonymous_10)
-FN:69,(anonymous_11)
-FN:72,(anonymous_12)
-FN:75,(anonymous_13)
-FN:78,(anonymous_14)
-FN:85,(anonymous_15)
-FN:100,(anonymous_16)
-FN:104,(anonymous_17)
-FN:108,(anonymous_18)
-FN:114,(anonymous_19)
-FN:118,(anonymous_20)
-FN:122,(anonymous_21)
-FN:130,(anonymous_22)
-FN:140,(anonymous_23)
-FN:155,(anonymous_24)
-FN:163,(anonymous_25)
-FN:176,(anonymous_26)
-FNF:27
-FNH:1
-=======
 SF:src\app\components\companies\company-tags\services\company-tags-list.service.ts
 FN:3,(anonymous_0)
 FN:4,CompanyTagsListService
@@ -9864,7 +9230,6 @@ FN:7,(anonymous_2)
 FN:10,(anonymous_3)
 FNF:4
 FNH:2
->>>>>>> QT-1230
 FNDA:1,(anonymous_0)
 FNDA:5,CompanyTagsListService
 FNDA:0,(anonymous_2)
@@ -9942,8 +9307,6 @@ FNDA:0,(anonymous_25)
 FNDA:0,(anonymous_26)
 DA:6,1
 DA:7,1
-<<<<<<< HEAD
-=======
 DA:9,3
 DA:10,3
 DA:11,3
@@ -10122,190 +9485,10 @@ DA:5,0
 DA:6,0
 DA:7,0
 DA:8,0
->>>>>>> QT-1230
 DA:9,0
 DA:10,0
 DA:11,0
 DA:14,0
-<<<<<<< HEAD
-DA:15,0
-DA:16,0
-DA:17,0
-DA:18,0
-DA:20,0
-DA:21,0
-DA:22,0
-DA:23,0
-DA:24,0
-DA:25,0
-DA:26,0
-DA:27,0
-DA:28,0
-DA:29,0
-DA:30,0
-DA:31,0
-DA:32,0
-DA:33,0
-DA:34,0
-DA:35,0
-DA:36,0
-DA:37,0
-DA:38,0
-DA:39,0
-DA:41,1
-DA:42,0
-DA:43,0
-DA:45,0
-DA:46,0
-DA:48,1
-DA:49,0
-DA:51,1
-DA:52,0
-DA:54,1
-DA:55,0
-DA:57,1
-DA:58,0
-DA:60,1
-DA:61,0
-DA:63,1
-DA:64,0
-DA:66,1
-DA:67,0
-DA:69,1
-DA:70,0
-DA:72,1
-DA:73,0
-DA:75,1
-DA:76,0
-DA:78,1
-DA:79,0
-DA:80,0
-DA:81,0
-DA:82,0
-DA:83,0
-DA:85,1
-DA:86,0
-DA:87,0
-DA:88,0
-DA:89,0
-DA:90,0
-DA:91,0
-DA:92,0
-DA:95,0
-DA:96,0
-DA:97,0
-DA:100,1
-DA:101,0
-DA:102,0
-DA:104,1
-DA:105,0
-DA:106,0
-DA:108,1
-DA:109,0
-DA:110,0
-DA:111,0
-DA:112,0
-DA:114,1
-DA:115,0
-DA:116,0
-DA:118,1
-DA:119,0
-DA:120,0
-DA:122,1
-DA:123,0
-DA:130,1
-DA:131,0
-DA:140,1
-DA:141,0
-DA:156,0
-DA:163,1
-DA:165,0
-DA:168,0
-DA:169,0
-DA:170,0
-DA:171,0
-DA:172,0
-DA:173,0
-DA:174,0
-DA:176,1
-DA:177,0
-DA:184,1
-LF:110
-LH:26
-BRDA:9,0,0,0
-BRDA:9,0,1,0
-BRDA:21,1,0,0
-BRDA:21,1,1,0
-BRDA:23,2,0,0
-BRDA:23,2,1,0
-BRDA:25,3,0,0
-BRDA:25,3,1,0
-BRDA:27,4,0,0
-BRDA:27,4,1,0
-BRDA:29,5,0,0
-BRDA:29,5,1,0
-BRDA:29,6,0,0
-BRDA:29,6,1,0
-BRDA:31,7,0,0
-BRDA:31,7,1,0
-BRDA:33,8,0,0
-BRDA:33,8,1,0
-BRDA:35,9,0,0
-BRDA:35,9,1,0
-BRDA:37,10,0,0
-BRDA:37,10,1,0
-BRDA:45,11,0,0
-BRDA:45,11,1,0
-BRDA:79,12,0,0
-BRDA:79,12,1,0
-BRDA:81,13,0,0
-BRDA:81,13,1,0
-BRDA:83,14,0,0
-BRDA:83,14,1,0
-BRDA:89,15,0,0
-BRDA:89,15,1,0
-BRDA:89,16,0,0
-BRDA:89,16,1,0
-BRDA:109,17,0,0
-BRDA:109,17,1,0
-BRDA:110,18,0,0
-BRDA:110,18,1,0
-BRDA:111,19,0,0
-BRDA:111,19,1,0
-BRDA:146,20,0,0
-BRDA:146,20,1,0
-BRDA:148,21,0,0
-BRDA:148,21,1,0
-BRDA:149,22,0,0
-BRDA:149,22,1,0
-BRDA:168,23,0,0
-BRDA:168,23,1,0
-BRDA:170,24,0,0
-BRDA:170,24,1,0
-BRDA:172,25,0,0
-BRDA:172,25,1,0
-BRF:52
-BRH:0
-end_of_record
-TN:
-SF:src\app\components\company-devices\class\device-remote-sessions.ts
-FN:3,(anonymous_0)
-FN:4,DeviceRemoteSessions
-FNF:2
-FNH:1
-FNDA:1,(anonymous_0)
-FNDA:0,DeviceRemoteSessions
-DA:3,1
-DA:5,0
-DA:6,0
-DA:7,0
-DA:8,0
-DA:9,0
-DA:10,0
-DA:11,0
-DA:14,0
-=======
->>>>>>> QT-1230
 DA:16,0
 DA:18,1
 LF:11
@@ -10320,21 +9503,6 @@ SF:src\app\components\company-devices\class\device-timing.ts
 FN:2,(anonymous_0)
 FN:3,DeviceTiming
 FNF:2
-<<<<<<< HEAD
-FNH:1
-FNDA:1,(anonymous_0)
-FNDA:0,DeviceTiming
-DA:2,1
-DA:4,0
-DA:5,0
-DA:6,0
-DA:7,0
-DA:8,0
-DA:9,0
-DA:11,1
-LF:8
-LH:2
-=======
 FNH:2
 FNDA:1,(anonymous_0)
 FNDA:3,DeviceTiming
@@ -10348,7 +9516,6 @@ DA:9,3
 DA:11,1
 LF:8
 LH:8
->>>>>>> QT-1230
 BRF:0
 BRH:0
 end_of_record
@@ -10364,15 +9531,9 @@ FN:32,(anonymous_6)
 FN:35,(anonymous_7)
 FN:40,(anonymous_8)
 FNF:9
-<<<<<<< HEAD
-FNH:1
-FNDA:1,(anonymous_0)
-FNDA:0,Device
-=======
 FNH:2
 FNDA:1,(anonymous_0)
 FNDA:3,Device
->>>>>>> QT-1230
 FNDA:0,(anonymous_2)
 FNDA:0,(anonymous_3)
 FNDA:0,(anonymous_4)
@@ -10381,8 +9542,6 @@ FNDA:0,(anonymous_6)
 FNDA:0,(anonymous_7)
 FNDA:0,(anonymous_8)
 DA:6,1
-<<<<<<< HEAD
-=======
 DA:8,3
 DA:9,3
 DA:10,3
@@ -10724,7 +9883,6 @@ DA:4,0
 DA:5,0
 DA:6,0
 DA:7,0
->>>>>>> QT-1230
 DA:8,0
 DA:9,0
 DA:10,0
@@ -10733,170 +9891,6 @@ DA:12,0
 DA:13,0
 DA:14,0
 DA:15,0
-<<<<<<< HEAD
-DA:17,0
-DA:18,0
-DA:19,0
-DA:20,0
-DA:21,0
-DA:22,0
-DA:24,0
-DA:26,1
-DA:27,0
-DA:29,1
-DA:30,0
-DA:32,1
-DA:33,0
-DA:35,1
-DA:36,0
-DA:37,0
-DA:38,0
-DA:40,1
-DA:41,0
-DA:42,0
-DA:43,0
-DA:44,0
-DA:45,0
-DA:46,0
-DA:47,0
-DA:48,0
-DA:49,0
-DA:50,0
-DA:51,0
-DA:52,0
-DA:53,0
-DA:54,0
-DA:55,0
-DA:56,0
-DA:57,0
-DA:58,0
-DA:59,0
-DA:60,0
-DA:62,1
-LF:48
-LH:7
-BRDA:17,0,0,0
-BRDA:17,0,1,0
-BRDA:18,1,0,0
-BRDA:18,1,1,0
-BRDA:36,2,0,0
-BRDA:36,2,1,0
-BRDA:38,3,0,0
-BRDA:38,3,1,0
-BRF:8
-BRH:0
-end_of_record
-TN:
-SF:src\app\components\company-devices\company-devices-custom-aside\class\manufacture-device.ts
-FN:2,(anonymous_0)
-FN:3,ManufactureDevice
-FN:10,(anonymous_2)
-FN:13,(anonymous_3)
-FN:16,(anonymous_4)
-FNF:5
-FNH:1
-FNDA:1,(anonymous_0)
-FNDA:0,ManufactureDevice
-FNDA:0,(anonymous_2)
-FNDA:0,(anonymous_3)
-FNDA:0,(anonymous_4)
-DA:2,1
-DA:4,0
-DA:5,0
-DA:6,0
-DA:7,0
-DA:8,0
-DA:10,1
-DA:11,0
-DA:13,1
-DA:14,0
-DA:16,1
-DA:17,0
-DA:22,1
-LF:13
-LH:5
-BRF:0
-BRH:0
-end_of_record
-TN:
-SF:src\app\components\company-devices\company-devices-custom-aside\class\model-device.ts
-FN:3,(anonymous_0)
-FN:5,ModelDevice
-FN:10,(anonymous_2)
-FN:13,(anonymous_3)
-FNF:4
-FNH:1
-FNDA:1,(anonymous_0)
-FNDA:0,ModelDevice
-FNDA:0,(anonymous_2)
-FNDA:0,(anonymous_3)
-DA:3,1
-DA:4,1
-DA:6,0
-DA:7,0
-DA:8,0
-DA:10,1
-DA:11,0
-DA:13,1
-DA:14,0
-DA:20,1
-LF:10
-LH:5
-BRDA:6,0,0,0
-BRDA:6,0,1,0
-BRDA:6,0,2,0
-BRF:3
-BRH:0
-end_of_record
-TN:
-SF:src\app\components\documents\class\document.ts
-FN:2,(anonymous_0)
-FN:3,Document
-FN:27,(anonymous_2)
-FN:32,(anonymous_3)
-FN:41,(anonymous_4)
-FN:47,(anonymous_5)
-FN:51,(anonymous_6)
-FN:54,(anonymous_7)
-FN:57,(anonymous_8)
-FN:60,(anonymous_9)
-FN:63,(anonymous_10)
-FN:66,(anonymous_11)
-FN:69,(anonymous_12)
-FN:72,(anonymous_13)
-FN:75,(anonymous_14)
-FNF:15
-FNH:1
-FNDA:1,(anonymous_0)
-FNDA:0,Document
-FNDA:0,(anonymous_2)
-FNDA:0,(anonymous_3)
-FNDA:0,(anonymous_4)
-FNDA:0,(anonymous_5)
-FNDA:0,(anonymous_6)
-FNDA:0,(anonymous_7)
-FNDA:0,(anonymous_8)
-FNDA:0,(anonymous_9)
-FNDA:0,(anonymous_10)
-FNDA:0,(anonymous_11)
-FNDA:0,(anonymous_12)
-FNDA:0,(anonymous_13)
-FNDA:0,(anonymous_14)
-DA:2,1
-DA:4,0
-DA:5,0
-DA:6,0
-DA:7,0
-DA:8,0
-DA:9,0
-DA:10,0
-DA:11,0
-DA:12,0
-DA:13,0
-DA:14,0
-DA:15,0
-=======
->>>>>>> QT-1230
 DA:16,0
 DA:17,0
 DA:18,0
@@ -11882,11 +10876,7 @@ FNDA:0,(anonymous_3)
 FNDA:0,(anonymous_4)
 FNDA:0,(anonymous_5)
 DA:3,1
-<<<<<<< HEAD
-DA:5,7
-=======
 DA:5,18
->>>>>>> QT-1230
 DA:7,1
 DA:8,0
 DA:10,1
@@ -12563,11 +11553,7 @@ FNDA:0,(anonymous_2)
 FNDA:0,(anonymous_3)
 FNDA:0,(anonymous_4)
 FNDA:0,(anonymous_5)
-<<<<<<< HEAD
-FNDA:86,(anonymous_6)
-=======
 FNDA:98,(anonymous_6)
->>>>>>> QT-1230
 DA:4,1
 DA:6,66
 DA:7,66
@@ -12590,11 +11576,7 @@ DA:41,0
 DA:42,0
 DA:43,0
 DA:44,0
-<<<<<<< HEAD
-DA:47,86
-=======
 DA:47,98
->>>>>>> QT-1230
 DA:50,1
 DA:54,1
 DA:58,1
@@ -12618,11 +11600,7 @@ FN:7,DynamicTooltipModule
 FNF:2
 FNH:2
 FNDA:1,(anonymous_0)
-<<<<<<< HEAD
-FNDA:43,DynamicTooltipModule
-=======
 FNDA:49,DynamicTooltipModule
->>>>>>> QT-1230
 DA:6,1
 DA:9,1
 DA:21,1
@@ -12638,103 +11616,6 @@ FN:4,MatChipComponent
 FN:7,(anonymous_2)
 FN:9,(anonymous_3)
 FNF:4
-<<<<<<< HEAD
-FNH:1
-FNDA:1,(anonymous_0)
-FNDA:0,MatChipComponent
-FNDA:0,(anonymous_2)
-FNDA:0,(anonymous_3)
-DA:3,1
-DA:5,0
-DA:7,1
-DA:9,1
-DA:10,0
-DA:12,1
-DA:16,1
-DA:20,1
-DA:24,1
-DA:32,1
-LF:10
-LH:8
-BRF:0
-BRH:0
-end_of_record
-TN:
-SF:src\app\components\shared\mat-chip\mat-chip.module.ts
-FN:5,(anonymous_0)
-FN:6,MatChipModule
-FNF:2
-FNH:2
-FNDA:1,(anonymous_0)
-FNDA:41,MatChipModule
-DA:5,1
-DA:8,1
-DA:19,1
-LF:3
-LH:3
-BRF:0
-BRH:0
-end_of_record
-TN:
-SF:src\app\components\shared\mat-chip-list\mat-chip-list.component.ts
-FN:3,(anonymous_0)
-FN:4,MatChipListComponent
-FN:9,(anonymous_2)
-FN:13,(anonymous_3)
-FN:16,(anonymous_4)
-FNF:5
-FNH:3
-FNDA:1,(anonymous_0)
-FNDA:1,MatChipListComponent
-FNDA:0,(anonymous_2)
-FNDA:0,(anonymous_3)
-FNDA:82,(anonymous_4)
-DA:3,1
-DA:5,1
-DA:6,1
-DA:7,1
-DA:9,1
-DA:10,0
-DA:11,0
-DA:13,1
-DA:14,0
-DA:16,82
-DA:19,1
-DA:23,1
-DA:27,1
-DA:35,1
-LF:14
-LH:11
-BRDA:10,0,0,0
-BRDA:10,0,1,0
-BRF:2
-BRH:0
-end_of_record
-TN:
-SF:src\app\components\shared\mat-chip-list\mat-chip-list.module.ts
-FN:5,(anonymous_0)
-FN:6,MatChipListModule
-FNF:2
-FNH:2
-FNDA:1,(anonymous_0)
-FNDA:41,MatChipListModule
-DA:5,1
-DA:8,1
-DA:19,1
-LF:3
-LH:3
-BRF:0
-BRH:0
-end_of_record
-TN:
-SF:src\app\components\shared\mat-error\mat-error.component.ts
-FN:3,(anonymous_0)
-FN:4,MatErrorComponent
-FN:6,(anonymous_2)
-FNF:3
-FNH:1
-FNDA:1,(anonymous_0)
-=======
 FNH:3
 FNDA:1,(anonymous_0)
 FNDA:1,MatChipComponent
@@ -12830,7 +11711,6 @@ FN:6,(anonymous_2)
 FNF:3
 FNH:1
 FNDA:1,(anonymous_0)
->>>>>>> QT-1230
 FNDA:0,MatErrorComponent
 FNDA:0,(anonymous_2)
 DA:3,1
@@ -12849,9 +11729,6 @@ FN:6,MatErrorModule
 FNF:2
 FNH:2
 FNDA:1,(anonymous_0)
-<<<<<<< HEAD
-FNDA:80,MatErrorModule
-=======
 FNDA:91,MatErrorModule
 DA:5,1
 DA:8,1
@@ -12941,7 +11818,6 @@ FNF:2
 FNH:2
 FNDA:1,(anonymous_0)
 FNDA:11,MatFormFieldModule
->>>>>>> QT-1230
 DA:5,1
 DA:8,1
 DA:19,1
@@ -13119,11 +11995,7 @@ FN:8,PreloaderTicketModule
 FNF:2
 FNH:2
 FNDA:1,(anonymous_0)
-<<<<<<< HEAD
-FNDA:53,PreloaderTicketModule
-=======
 FNDA:59,PreloaderTicketModule
->>>>>>> QT-1230
 DA:7,1
 DA:10,1
 DA:23,1
@@ -13193,11 +12065,7 @@ FN:135,(anonymous_18)
 FN:138,(anonymous_19)
 FN:141,(anonymous_20)
 FNF:21
-<<<<<<< HEAD
-FNH:4
-=======
 FNH:5
->>>>>>> QT-1230
 FNDA:1,(anonymous_0)
 FNDA:7,ProductListComponent
 FNDA:0,(anonymous_2)
@@ -13217,26 +12085,6 @@ FNDA:0,(anonymous_15)
 FNDA:0,(anonymous_16)
 FNDA:7,(anonymous_17)
 FNDA:0,(anonymous_18)
-<<<<<<< HEAD
-FNDA:1,(anonymous_19)
-FNDA:82,(anonymous_20)
-DA:12,1
-DA:18,1
-DA:19,1
-DA:20,1
-DA:21,1
-DA:22,1
-DA:23,1
-DA:24,1
-DA:25,1
-DA:26,1
-DA:27,1
-DA:28,1
-DA:29,1
-DA:30,1
-DA:31,1
-DA:32,1
-=======
 FNDA:7,(anonymous_19)
 FNDA:94,(anonymous_20)
 DA:12,1
@@ -13255,7 +12103,6 @@ DA:29,7
 DA:30,7
 DA:31,7
 DA:32,7
->>>>>>> QT-1230
 DA:37,1
 DA:38,0
 DA:39,0
@@ -13323,17 +12170,6 @@ DA:122,0
 DA:124,1
 DA:125,0
 DA:128,1
-<<<<<<< HEAD
-DA:129,0
-DA:130,0
-DA:131,0
-DA:133,0
-DA:135,1
-DA:136,0
-DA:138,1
-DA:139,1
-DA:141,82
-=======
 DA:129,7
 DA:130,7
 DA:131,7
@@ -13343,7 +12179,6 @@ DA:136,0
 DA:138,1
 DA:139,7
 DA:141,94
->>>>>>> QT-1230
 DA:149,1
 DA:153,1
 DA:157,1
@@ -13353,11 +12188,7 @@ DA:169,1
 DA:173,1
 DA:186,1
 LF:100
-<<<<<<< HEAD
-LH:39
-=======
 LH:43
->>>>>>> QT-1230
 BRDA:39,0,0,0
 BRDA:39,0,1,0
 BRDA:41,1,0,0
@@ -13413,11 +12244,7 @@ FN:10,ProductListModule
 FNF:2
 FNH:2
 FNDA:1,(anonymous_0)
-<<<<<<< HEAD
-FNDA:41,ProductListModule
-=======
 FNDA:47,ProductListModule
->>>>>>> QT-1230
 DA:9,1
 DA:12,1
 DA:26,1
@@ -13873,11 +12700,7 @@ FNDA:1,(anonymous_0)
 FNDA:58,SupportPageCategoriesRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:8,56
-=======
 DA:8,58
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
@@ -14096,11 +12919,7 @@ FNDA:1,(anonymous_0)
 FNDA:58,RecurringTicketsRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:8,56
-=======
 DA:8,58
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
@@ -14385,15 +13204,9 @@ FNDA:0,(anonymous_5)
 FNDA:0,(anonymous_6)
 FNDA:0,(anonymous_7)
 DA:2,1
-<<<<<<< HEAD
-DA:4,0
-DA:5,0
-DA:6,0
-=======
 DA:4,6
 DA:5,6
 DA:6,6
->>>>>>> QT-1230
 DA:7,0
 DA:8,0
 DA:10,0
@@ -14427,19 +13240,11 @@ DA:90,1
 DA:91,0
 DA:93,1
 LF:36
-<<<<<<< HEAD
-LH:8
-BRDA:4,0,0,0
-BRDA:4,0,1,0
-BRDA:6,1,0,0
-BRDA:6,1,1,0
-=======
 LH:11
 BRDA:4,0,0,6
 BRDA:4,0,1,0
 BRDA:6,1,0,0
 BRDA:6,1,1,6
->>>>>>> QT-1230
 BRDA:10,2,0,0
 BRDA:10,2,1,0
 BRDA:11,3,0,0
@@ -14722,19 +13527,6 @@ FNDA:0,(anonymous_21)
 FNDA:0,(anonymous_22)
 FNDA:0,(anonymous_23)
 DA:9,1
-<<<<<<< HEAD
-DA:11,7
-DA:12,7
-DA:13,7
-DA:14,7
-DA:15,7
-DA:16,7
-DA:17,7
-DA:18,7
-DA:19,7
-DA:20,7
-DA:21,7
-=======
 DA:11,18
 DA:12,18
 DA:13,18
@@ -14746,7 +13538,6 @@ DA:18,18
 DA:19,18
 DA:20,18
 DA:21,18
->>>>>>> QT-1230
 DA:22,0
 DA:23,0
 DA:25,0
@@ -14817,17 +13608,10 @@ DA:120,0
 DA:123,1
 LF:80
 LH:24
-<<<<<<< HEAD
-BRDA:11,0,0,7
-BRDA:11,0,1,0
-BRDA:21,1,0,0
-BRDA:21,1,1,7
-=======
 BRDA:11,0,0,18
 BRDA:11,0,1,0
 BRDA:21,1,0,0
 BRDA:21,1,1,18
->>>>>>> QT-1230
 BRDA:25,2,0,0
 BRDA:25,2,1,0
 BRDA:28,3,0,0
@@ -15039,37 +13823,6 @@ FNDA:0,(anonymous_72)
 FNDA:0,(anonymous_73)
 FNDA:0,(anonymous_74)
 DA:3,1
-<<<<<<< HEAD
-DA:5,65
-DA:6,65
-DA:7,65
-DA:8,65
-DA:9,65
-DA:10,65
-DA:11,65
-DA:12,65
-DA:13,65
-DA:14,65
-DA:15,65
-DA:16,65
-DA:17,65
-DA:18,65
-DA:19,65
-DA:20,65
-DA:21,65
-DA:22,65
-DA:23,65
-DA:24,65
-DA:25,65
-DA:26,65
-DA:27,65
-DA:28,65
-DA:35,65
-DA:36,65
-DA:37,65
-DA:38,65
-DA:39,65
-=======
 DA:5,88
 DA:6,88
 DA:7,88
@@ -15099,7 +13852,6 @@ DA:36,88
 DA:37,88
 DA:38,88
 DA:39,88
->>>>>>> QT-1230
 DA:41,1
 DA:42,0
 DA:44,1
@@ -15387,13 +14139,8 @@ DA:471,1
 DA:472,0
 DA:473,0
 DA:475,1
-<<<<<<< HEAD
-DA:476,65
-DA:477,65
-=======
 DA:476,88
 DA:477,88
->>>>>>> QT-1230
 DA:479,1
 DA:480,0
 DA:481,0
@@ -15426,11 +14173,7 @@ DA:694,0
 DA:718,1
 DA:719,0
 DA:743,1
-<<<<<<< HEAD
-DA:744,65
-=======
 DA:744,88
->>>>>>> QT-1230
 DA:754,1
 DA:755,0
 DA:773,1
@@ -15683,21 +14426,12 @@ FNDA:0,(anonymous_16)
 FNDA:0,(anonymous_17)
 FNDA:0,(anonymous_18)
 FNDA:0,(anonymous_19)
-<<<<<<< HEAD
-FNDA:98,(anonymous_20)
-DA:5,1
-DA:7,9
-DA:8,9
-DA:9,9
-DA:10,9
-=======
 FNDA:104,(anonymous_20)
 DA:5,1
 DA:7,12
 DA:8,12
 DA:9,12
 DA:10,12
->>>>>>> QT-1230
 DA:12,1
 DA:13,0
 DA:15,1
@@ -15762,11 +14496,7 @@ DA:98,0
 DA:99,0
 DA:100,0
 DA:101,0
-<<<<<<< HEAD
-DA:103,98
-=======
 DA:103,104
->>>>>>> QT-1230
 DA:106,1
 DA:110,1
 LF:72
@@ -16321,8 +15051,6 @@ DA:79,0
 DA:80,0
 DA:81,0
 DA:82,0
-<<<<<<< HEAD
-=======
 DA:83,0
 DA:84,0
 DA:85,0
@@ -16527,7 +15255,7 @@ FNDA:0,(anonymous_21)
 FNDA:1,(anonymous_22)
 FNDA:0,(anonymous_23)
 FNDA:0,(anonymous_24)
-FNDA:4,(anonymous_25)
+FNDA:5,(anonymous_25)
 FNDA:3,(anonymous_26)
 FNDA:2,(anonymous_27)
 FNDA:0,(anonymous_28)
@@ -16633,7 +15361,7 @@ DA:142,0
 DA:144,1
 DA:145,0
 DA:147,1
-DA:148,4
+DA:148,5
 DA:150,1
 DA:152,3
 DA:153,3
@@ -16836,7 +15564,7 @@ FNDA:1,(anonymous_20)
 FNDA:0,(anonymous_21)
 FNDA:0,(anonymous_22)
 FNDA:0,(anonymous_23)
-FNDA:2,(anonymous_24)
+FNDA:1,(anonymous_24)
 FNDA:4,(anonymous_25)
 DA:16,1
 DA:18,2
@@ -16889,35 +15617,14 @@ DA:77,0
 DA:79,1
 DA:80,0
 DA:82,1
->>>>>>> QT-1230
 DA:83,0
 DA:84,0
 DA:85,0
 DA:86,0
-DA:89,1
+DA:87,0
+DA:88,0
+DA:89,0
 DA:90,0
-<<<<<<< HEAD
-DA:92,8
-DA:100,1
-DA:104,1
-DA:108,1
-DA:122,1
-LF:70
-LH:31
-BRDA:37,0,0,0
-BRDA:37,0,1,0
-BRDA:37,1,0,0
-BRDA:37,1,1,0
-BRDA:37,1,2,0
-BRDA:37,1,3,0
-BRDA:70,2,0,0
-BRDA:70,2,1,0
-BRDA:76,3,0,0
-BRDA:76,3,1,0
-BRDA:81,4,0,0
-BRDA:81,4,1,0
-BRF:12
-=======
 DA:91,0
 DA:94,0
 DA:95,0
@@ -16958,9 +15665,9 @@ DA:149,0
 DA:151,1
 DA:152,0
 DA:154,1
-DA:155,2
+DA:155,1
 DA:156,0
-DA:157,2
+DA:157,1
 DA:159,4
 DA:170,1
 DA:174,1
@@ -17005,7 +15712,7 @@ BRDA:102,13,1,0
 BRDA:143,14,0,0
 BRDA:143,14,1,1
 BRDA:155,15,0,0
-BRDA:155,15,1,2
+BRDA:155,15,1,1
 BRF:33
 BRH:2
 end_of_record
@@ -17211,7 +15918,6 @@ BRDA:18,1,1,0
 BRDA:19,2,0,0
 BRDA:19,2,1,0
 BRF:6
->>>>>>> QT-1230
 BRH:0
 end_of_record
 TN:
@@ -17555,90 +16261,11 @@ BRF:6
 BRH:0
 end_of_record
 TN:
-<<<<<<< HEAD
-SF:src\app\components\tickets\tickets\ticket-edit-aside\services\ticket-state.service.ts
-FN:16,(anonymous_0)
-FN:17,TicketStateService
-FN:58,(anonymous_2)
-FN:62,(anonymous_3)
-FN:65,(anonymous_4)
-FN:68,(anonymous_5)
-FN:71,(anonymous_6)
-FN:75,(anonymous_7)
-FN:79,(anonymous_8)
-FN:82,(anonymous_9)
-FN:85,(anonymous_10)
-FN:88,(anonymous_11)
-FN:93,(anonymous_12)
-FN:96,(anonymous_13)
-FN:99,(anonymous_14)
-FN:102,(anonymous_15)
-FN:105,(anonymous_16)
-FN:107,(anonymous_17)
-FN:108,(anonymous_18)
-FN:109,(anonymous_19)
-FN:114,(anonymous_20)
-FN:116,(anonymous_21)
-FN:118,(anonymous_22)
-FN:119,(anonymous_23)
-FN:122,(anonymous_24)
-FN:123,(anonymous_25)
-FN:123,(anonymous_26)
-FN:126,(anonymous_27)
-FN:133,(anonymous_28)
-FN:134,(anonymous_29)
-FN:135,(anonymous_30)
-FN:135,(anonymous_31)
-FN:138,(anonymous_32)
-FN:139,(anonymous_33)
-FN:169,(anonymous_34)
-FN:170,(anonymous_35)
-FN:185,(anonymous_36)
-FN:186,(anonymous_37)
-FN:189,(anonymous_38)
-FN:192,(anonymous_39)
-FN:195,(anonymous_40)
-FN:199,(anonymous_41)
-FN:202,(anonymous_42)
-FN:205,(anonymous_43)
-FN:208,(anonymous_44)
-FN:211,(anonymous_45)
-FN:214,(anonymous_46)
-FN:217,(anonymous_47)
-FN:220,(anonymous_48)
-FN:223,(anonymous_49)
-FN:226,(anonymous_50)
-FN:229,(anonymous_51)
-FN:232,(anonymous_52)
-FN:235,(anonymous_53)
-FN:239,(anonymous_54)
-FN:240,(anonymous_55)
-FN:241,(anonymous_56)
-FN:248,(anonymous_57)
-FN:251,(anonymous_58)
-FN:254,(anonymous_59)
-FN:257,(anonymous_60)
-FN:260,(anonymous_61)
-FN:263,(anonymous_62)
-FN:266,(anonymous_63)
-FN:269,(anonymous_64)
-FN:272,(anonymous_65)
-FN:275,(anonymous_66)
-FN:278,(anonymous_67)
-FN:281,(anonymous_68)
-FN:284,(anonymous_69)
-FN:287,(anonymous_70)
-FN:290,(anonymous_71)
-FN:293,(anonymous_72)
-FNF:73
-FNH:3
-=======
 SF:src\app\components\tickets\tickets\ticket-edit-aside\class\ticket-profile-form-item-product.ts
 FN:2,(anonymous_0)
 FN:3,TicketProfileFormItemProduct
 FNF:2
 FNH:2
->>>>>>> QT-1230
 FNDA:1,(anonymous_0)
 FNDA:33,TicketProfileFormItemProduct
 DA:2,1
@@ -17653,16 +16280,19 @@ DA:11,33
 DA:12,7
 DA:13,42
 DA:15,7
-DA:16,7
-DA:19,1
-LF:14
+DA:16,0
+DA:17,7
+DA:20,1
+LF:15
 LH:14
 BRDA:4,0,0,26
 BRDA:4,0,1,7
 BRDA:11,1,0,7
 BRDA:11,1,1,26
-BRF:4
-BRH:4
+BRDA:15,2,0,0
+BRDA:15,2,1,7
+BRF:6
+BRH:5
 end_of_record
 TN:
 SF:src\app\components\tickets\tickets\ticket-edit-aside\class\ticket-profile-form-product.ts
@@ -17903,49 +16533,6 @@ FNDA:0,(anonymous_70)
 FNDA:0,(anonymous_71)
 FNDA:1,(anonymous_72)
 DA:16,1
-<<<<<<< HEAD
-DA:18,4
-DA:19,4
-DA:20,4
-DA:21,4
-DA:22,4
-DA:23,4
-DA:24,4
-DA:25,4
-DA:26,4
-DA:27,4
-DA:28,4
-DA:29,4
-DA:30,4
-DA:31,4
-DA:32,4
-DA:33,4
-DA:34,4
-DA:35,4
-DA:36,4
-DA:37,4
-DA:38,4
-DA:39,4
-DA:40,4
-DA:41,4
-DA:42,4
-DA:43,4
-DA:44,4
-DA:45,4
-DA:46,4
-DA:47,4
-DA:48,4
-DA:49,4
-DA:50,4
-DA:51,4
-DA:52,4
-DA:53,4
-DA:54,4
-DA:55,4
-DA:56,4
-DA:57,4
-DA:58,4
-=======
 DA:18,6
 DA:19,6
 DA:20,6
@@ -17987,7 +16574,6 @@ DA:55,6
 DA:56,6
 DA:57,6
 DA:58,6
->>>>>>> QT-1230
 DA:59,0
 DA:62,1
 DA:63,0
@@ -18223,11 +16809,7 @@ FN:118,(anonymous_14)
 FN:121,(anonymous_15)
 FN:144,(anonymous_16)
 FNF:17
-<<<<<<< HEAD
-FNH:3
-=======
 FNH:7
->>>>>>> QT-1230
 FNDA:1,(anonymous_0)
 FNDA:13,TicketsPermissionsService
 FNDA:0,(anonymous_2)
@@ -18243,20 +16825,6 @@ FNDA:0,(anonymous_11)
 FNDA:0,(anonymous_12)
 FNDA:2,(anonymous_13)
 FNDA:0,(anonymous_14)
-<<<<<<< HEAD
-FNDA:0,(anonymous_15)
-FNDA:4,(anonymous_16)
-DA:5,1
-DA:7,2
-DA:8,2
-DA:9,2
-DA:10,2
-DA:16,2
-DA:17,0
-DA:26,2
-DA:27,0
-DA:28,0
-=======
 FNDA:5,(anonymous_15)
 FNDA:26,(anonymous_16)
 DA:5,1
@@ -18269,18 +16837,13 @@ DA:17,0
 DA:26,13
 DA:27,3
 DA:28,3
->>>>>>> QT-1230
 DA:29,0
 DA:30,0
 DA:31,0
 DA:32,0
 DA:33,0
 DA:34,0
-<<<<<<< HEAD
-DA:36,2
-=======
 DA:36,13
->>>>>>> QT-1230
 DA:38,0
 DA:43,0
 DA:44,0
@@ -18299,11 +16862,7 @@ DA:66,0
 DA:70,0
 DA:71,0
 DA:74,0
-<<<<<<< HEAD
-DA:78,0
-=======
 DA:78,2
->>>>>>> QT-1230
 DA:81,0
 DA:82,0
 DA:84,0
@@ -18317,16 +16876,6 @@ DA:94,0
 DA:96,0
 DA:98,0
 DA:110,1
-<<<<<<< HEAD
-DA:111,0
-DA:118,1
-DA:119,0
-DA:121,1
-DA:122,0
-DA:123,0
-DA:124,0
-DA:125,0
-=======
 DA:111,2
 DA:118,1
 DA:119,0
@@ -18335,7 +16884,6 @@ DA:122,5
 DA:123,5
 DA:124,5
 DA:125,5
->>>>>>> QT-1230
 DA:126,0
 DA:127,0
 DA:128,0
@@ -18343,19 +16891,6 @@ DA:129,0
 DA:130,0
 DA:133,0
 DA:134,0
-<<<<<<< HEAD
-DA:137,0
-DA:138,0
-DA:141,0
-DA:144,4
-DA:148,1
-DA:153,1
-LF:70
-LH:14
-BRDA:17,0,0,0
-BRDA:17,0,1,0
-BRDA:27,1,0,0
-=======
 DA:137,5
 DA:138,0
 DA:141,5
@@ -18367,7 +16902,6 @@ LH:24
 BRDA:17,0,0,0
 BRDA:17,0,1,0
 BRDA:27,1,0,3
->>>>>>> QT-1230
 BRDA:27,1,1,0
 BRDA:29,2,0,0
 BRDA:29,2,1,0
@@ -18414,11 +16948,7 @@ BRDA:66,16,0,0
 BRDA:66,16,1,0
 BRDA:70,17,0,0
 BRDA:70,17,1,0
-<<<<<<< HEAD
-BRDA:78,18,0,0
-=======
 BRDA:78,18,0,2
->>>>>>> QT-1230
 BRDA:78,18,1,0
 BRDA:78,18,2,0
 BRDA:81,19,0,0
@@ -18483,15 +17013,6 @@ BRDA:98,31,1,0
 BRDA:98,31,2,0
 BRDA:98,31,3,0
 BRDA:98,31,4,0
-<<<<<<< HEAD
-BRDA:111,32,0,0
-BRDA:111,32,1,0
-BRDA:111,32,2,0
-BRDA:119,33,0,0
-BRDA:119,33,1,0
-BRDA:125,34,0,0
-BRDA:125,34,1,0
-=======
 BRDA:111,32,0,2
 BRDA:111,32,1,2
 BRDA:111,32,2,2
@@ -18499,21 +17020,14 @@ BRDA:119,33,0,0
 BRDA:119,33,1,0
 BRDA:125,34,0,0
 BRDA:125,34,1,5
->>>>>>> QT-1230
 BRDA:128,35,0,0
 BRDA:128,35,1,0
 BRDA:133,36,0,0
 BRDA:133,36,1,0
 BRDA:137,37,0,0
-<<<<<<< HEAD
-BRDA:137,37,1,0
-BRDA:137,38,0,0
-BRDA:137,38,1,0
-=======
 BRDA:137,37,1,5
 BRDA:137,38,0,5
 BRDA:137,38,1,5
->>>>>>> QT-1230
 BRF:129
 BRH:9
 end_of_record
@@ -18993,19 +17507,11 @@ FNDA:252,UserDefaultSubscriptionItem
 FNDA:252,(anonymous_2)
 FNDA:0,(anonymous_3)
 DA:2,1
-<<<<<<< HEAD
-DA:4,183
-DA:5,183
-DA:6,183
-DA:12,1
-DA:13,183
-=======
 DA:4,252
 DA:5,252
 DA:6,252
 DA:12,1
 DA:13,252
->>>>>>> QT-1230
 DA:15,1
 DA:16,0
 DA:18,1
@@ -19027,29 +17533,12 @@ FNDA:84,UserDefaultSubscription
 FNDA:84,(anonymous_2)
 FNDA:0,(anonymous_3)
 DA:3,1
-<<<<<<< HEAD
-DA:5,61
-DA:6,61
-=======
 DA:5,84
 DA:6,84
->>>>>>> QT-1230
 DA:7,0
 DA:8,0
 DA:9,0
 DA:10,0
-<<<<<<< HEAD
-DA:13,61
-DA:14,61
-DA:15,61
-DA:16,61
-DA:17,61
-DA:18,61
-DA:24,1
-DA:25,61
-DA:26,61
-DA:27,61
-=======
 DA:13,84
 DA:14,84
 DA:15,84
@@ -19060,22 +17549,15 @@ DA:24,1
 DA:25,84
 DA:26,84
 DA:27,84
->>>>>>> QT-1230
 DA:33,1
 DA:34,0
 DA:46,1
 LF:20
 LH:15
 BRDA:5,0,0,0
-<<<<<<< HEAD
-BRDA:5,0,1,61
-BRDA:6,1,0,0
-BRDA:6,1,1,61
-=======
 BRDA:5,0,1,84
 BRDA:6,1,0,0
 BRDA:6,1,1,84
->>>>>>> QT-1230
 BRF:4
 BRH:2
 end_of_record
@@ -19143,21 +17625,6 @@ FNDA:0,(anonymous_18)
 FNDA:0,(anonymous_19)
 FNDA:0,(anonymous_20)
 DA:4,1
-<<<<<<< HEAD
-DA:6,61
-DA:9,61
-DA:10,61
-DA:11,61
-DA:12,61
-DA:13,61
-DA:14,61
-DA:15,61
-DA:16,61
-DA:17,61
-DA:18,61
-DA:19,61
-DA:20,61
-=======
 DA:6,84
 DA:9,84
 DA:10,84
@@ -19171,7 +17638,6 @@ DA:17,84
 DA:18,84
 DA:19,84
 DA:20,84
->>>>>>> QT-1230
 DA:22,1
 DA:23,0
 DA:25,1
@@ -19219,17 +17685,10 @@ DA:88,0
 DA:89,0
 DA:90,0
 DA:92,1
-<<<<<<< HEAD
-DA:93,61
-DA:94,61
-DA:95,61
-DA:96,61
-=======
 DA:93,84
 DA:94,84
 DA:95,84
 DA:96,84
->>>>>>> QT-1230
 DA:98,1
 DA:99,0
 DA:101,1
@@ -19794,32 +18253,18 @@ FN:43,(anonymous_6)
 FNF:7
 FNH:5
 FNDA:1,(anonymous_0)
-<<<<<<< HEAD
-FNDA:63,DecimalNumberDirective
-=======
-FNDA:68,DecimalNumberDirective
->>>>>>> QT-1230
+FNDA:69,DecimalNumberDirective
 FNDA:1,(anonymous_2)
 FNDA:1,(anonymous_3)
 FNDA:0,(anonymous_4)
 FNDA:0,(anonymous_5)
-<<<<<<< HEAD
-FNDA:97,(anonymous_6)
-DA:4,1
-DA:6,63
-DA:7,63
-DA:8,63
-DA:9,63
-DA:10,63
-=======
 FNDA:109,(anonymous_6)
 DA:4,1
-DA:6,68
-DA:7,68
-DA:8,68
-DA:9,68
-DA:10,68
->>>>>>> QT-1230
+DA:6,69
+DA:7,69
+DA:8,69
+DA:9,69
+DA:10,69
 DA:12,1
 DA:13,1
 DA:14,1
@@ -19840,11 +18285,7 @@ DA:38,0
 DA:39,0
 DA:40,0
 DA:41,0
-<<<<<<< HEAD
-DA:43,97
-=======
 DA:43,109
->>>>>>> QT-1230
 DA:47,1
 DA:51,1
 DA:55,1
@@ -19880,11 +18321,7 @@ FN:6,DecimalNumberModule
 FNF:2
 FNH:2
 FNDA:1,(anonymous_0)
-<<<<<<< HEAD
-FNDA:49,DecimalNumberModule
-=======
 FNDA:55,DecimalNumberModule
->>>>>>> QT-1230
 DA:5,1
 DA:8,1
 DA:18,1
@@ -19908,19 +18345,11 @@ FNDA:3,DisabledBtnDirective
 FNDA:0,(anonymous_2)
 FNDA:0,(anonymous_3)
 FNDA:0,(anonymous_4)
-<<<<<<< HEAD
-FNDA:108,(anonymous_5)
-DA:3,1
-DA:5,1
-DA:6,1
-DA:7,1
-=======
 FNDA:120,(anonymous_5)
 DA:3,1
 DA:5,3
 DA:6,3
 DA:7,3
->>>>>>> QT-1230
 DA:9,1
 DA:10,0
 DA:12,1
@@ -19928,11 +18357,7 @@ DA:13,0
 DA:15,1
 DA:16,0
 DA:17,0
-<<<<<<< HEAD
-DA:19,108
-=======
 DA:19,120
->>>>>>> QT-1230
 DA:22,1
 DA:26,1
 DA:32,1
@@ -19951,11 +18376,7 @@ FN:8,DisabledBtnModule
 FNF:2
 FNH:2
 FNDA:1,(anonymous_0)
-<<<<<<< HEAD
-FNDA:54,DisabledBtnModule
-=======
 FNDA:60,DisabledBtnModule
->>>>>>> QT-1230
 DA:7,1
 DA:10,1
 DA:23,1
@@ -20140,11 +18561,7 @@ FN:6,FilterModule
 FNF:2
 FNH:2
 FNDA:1,(anonymous_0)
-<<<<<<< HEAD
-FNDA:41,FilterModule
-=======
 FNDA:47,FilterModule
->>>>>>> QT-1230
 DA:5,1
 DA:8,1
 DA:19,1
@@ -20163,11 +18580,7 @@ FN:17,(anonymous_4)
 FNF:5
 FNH:2
 FNDA:1,(anonymous_0)
-<<<<<<< HEAD
-FNDA:1,FilterPipe
-=======
 FNDA:7,FilterPipe
->>>>>>> QT-1230
 FNDA:0,(anonymous_2)
 FNDA:0,(anonymous_3)
 FNDA:0,(anonymous_4)
@@ -20215,11 +18628,7 @@ FN:6,(anonymous_2)
 FNF:3
 FNH:3
 FNDA:1,(anonymous_0)
-<<<<<<< HEAD
-FNDA:72,CommonService
-=======
-FNDA:77,CommonService
->>>>>>> QT-1230
+FNDA:78,CommonService
 FNDA:1,(anonymous_2)
 DA:3,1
 DA:6,1
@@ -20326,21 +18735,12 @@ FNDA:0,(anonymous_37)
 FNDA:0,(anonymous_38)
 FNDA:1,(anonymous_39)
 DA:13,1
-<<<<<<< HEAD
-DA:19,56
-DA:20,56
-DA:21,56
-DA:22,56
-DA:23,56
-DA:24,56
-=======
 DA:19,58
 DA:20,58
 DA:21,58
 DA:22,58
 DA:23,58
 DA:24,58
->>>>>>> QT-1230
 DA:26,1
 DA:27,0
 DA:32,1
@@ -20441,13 +18841,8 @@ FNDA:63,ConstantsService
 FNDA:0,(anonymous_2)
 FNDA:1,(anonymous_3)
 DA:5,1
-<<<<<<< HEAD
-DA:11,56
-DA:12,56
-=======
 DA:11,63
 DA:12,63
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
@@ -20517,17 +18912,10 @@ FNDA:0,(anonymous_24)
 FNDA:0,(anonymous_25)
 FNDA:12,(anonymous_26)
 DA:10,1
-<<<<<<< HEAD
-DA:16,48
-DA:17,48
-DA:18,48
-DA:19,48
-=======
 DA:16,50
 DA:17,50
 DA:18,50
 DA:19,50
->>>>>>> QT-1230
 DA:21,1
 DA:22,1
 DA:23,1
@@ -20714,19 +19102,11 @@ FNDA:0,(anonymous_38)
 FNDA:0,(anonymous_39)
 FNDA:1,(anonymous_40)
 DA:12,1
-<<<<<<< HEAD
-DA:18,56
-DA:19,56
-DA:20,56
-DA:21,56
-DA:22,56
-=======
 DA:18,63
 DA:19,63
 DA:20,63
 DA:21,63
 DA:22,63
->>>>>>> QT-1230
 DA:28,1
 DA:29,0
 DA:31,1
@@ -21243,25 +19623,6 @@ FNDA:0,(anonymous_28)
 FNDA:0,(anonymous_29)
 FNDA:1,(anonymous_30)
 DA:11,1
-<<<<<<< HEAD
-DA:17,56
-DA:18,56
-DA:19,56
-DA:20,56
-DA:21,56
-DA:22,56
-DA:23,56
-DA:24,56
-DA:25,56
-DA:26,56
-DA:27,56
-DA:28,56
-DA:29,56
-DA:30,56
-DA:31,56
-DA:32,56
-DA:33,56
-=======
 DA:17,58
 DA:18,58
 DA:19,58
@@ -21279,7 +19640,6 @@ DA:30,58
 DA:31,58
 DA:32,58
 DA:33,58
->>>>>>> QT-1230
 DA:35,1
 DA:36,0
 DA:38,1
@@ -21460,11 +19820,7 @@ FNDA:30,PermissionsService
 FNDA:0,(anonymous_2)
 FNDA:1,(anonymous_3)
 DA:7,1
-<<<<<<< HEAD
-DA:13,13
-=======
 DA:13,30
->>>>>>> QT-1230
 DA:19,1
 DA:20,0
 DA:21,0
@@ -21564,17 +19920,10 @@ FNDA:0,(anonymous_37)
 FNDA:0,(anonymous_38)
 FNDA:1,(anonymous_39)
 DA:13,1
-<<<<<<< HEAD
-DA:19,1
-DA:20,1
-DA:21,1
-DA:22,1
-=======
 DA:19,7
 DA:20,7
 DA:21,7
 DA:22,7
->>>>>>> QT-1230
 DA:24,1
 DA:25,0
 DA:30,1
@@ -21742,19 +20091,11 @@ FNDA:0,(anonymous_21)
 FNDA:0,(anonymous_22)
 FNDA:1,(anonymous_23)
 DA:11,1
-<<<<<<< HEAD
-DA:13,4
-DA:14,4
-DA:15,4
-DA:16,4
-DA:21,4
-=======
 DA:13,6
 DA:14,6
 DA:15,6
 DA:16,6
 DA:21,6
->>>>>>> QT-1230
 DA:22,0
 DA:24,0
 DA:27,1
@@ -21859,21 +20200,6 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-<<<<<<< HEAD
-SF:src\app\services\taxes\taxes.service.ts
-FN:8,(anonymous_0)
-FN:9,TaxesService
-FN:15,(anonymous_2)
-FN:18,(anonymous_3)
-FN:20,(anonymous_4)
-FN:30,(anonymous_5)
-FN:37,(anonymous_6)
-FN:39,(anonymous_7)
-FN:49,(anonymous_8)
-FN:56,(anonymous_9)
-FN:59,(anonymous_10)
-FNF:11
-=======
 SF:src\app\services\tags\tags.service.ts
 FN:8,(anonymous_0)
 FN:13,TagsService
@@ -21900,7 +20226,6 @@ FN:97,(anonymous_21)
 FN:98,(anonymous_22)
 FN:100,(anonymous_23)
 FNF:24
->>>>>>> QT-1230
 FNH:3
 FNDA:1,(anonymous_0)
 FNDA:5,TagsService
@@ -21912,34 +20237,6 @@ FNDA:0,(anonymous_6)
 FNDA:0,(anonymous_7)
 FNDA:0,(anonymous_8)
 FNDA:0,(anonymous_9)
-<<<<<<< HEAD
-FNDA:1,(anonymous_10)
-DA:8,1
-DA:10,44
-DA:11,44
-DA:12,44
-DA:13,44
-DA:15,1
-DA:16,0
-DA:18,1
-DA:19,0
-DA:20,0
-DA:21,0
-DA:22,0
-DA:23,0
-DA:30,1
-DA:31,0
-DA:37,1
-DA:38,0
-DA:39,0
-DA:40,0
-DA:41,0
-DA:42,0
-DA:49,1
-DA:50,0
-DA:56,1
-DA:57,0
-=======
 FNDA:0,(anonymous_10)
 FNDA:0,(anonymous_11)
 FNDA:0,(anonymous_12)
@@ -22094,7 +20391,6 @@ DA:49,1
 DA:50,0
 DA:56,1
 DA:57,0
->>>>>>> QT-1230
 DA:59,1
 DA:64,1
 DA:72,1
@@ -22278,17 +20574,10 @@ FNDA:0,(anonymous_82)
 FNDA:0,(anonymous_83)
 FNDA:1,(anonymous_84)
 DA:11,1
-<<<<<<< HEAD
-DA:13,61
-DA:14,61
-DA:15,61
-DA:16,61
-=======
 DA:13,84
 DA:14,84
 DA:15,84
 DA:16,84
->>>>>>> QT-1230
 DA:18,1
 DA:19,0
 DA:21,1
@@ -22643,17 +20932,10 @@ FNDA:0,(anonymous_45)
 FNDA:0,(anonymous_46)
 FNDA:1,(anonymous_47)
 DA:12,1
-<<<<<<< HEAD
-DA:19,61
-DA:20,61
-DA:21,61
-DA:22,61
-=======
 DA:19,84
 DA:20,84
 DA:21,84
 DA:22,84
->>>>>>> QT-1230
 DA:27,1
 DA:28,0
 DA:30,1
@@ -23087,50 +21369,6 @@ FNDA:0,(anonymous_156)
 FNDA:0,(anonymous_157)
 FNDA:1,(anonymous_158)
 DA:45,1
-<<<<<<< HEAD
-DA:53,56
-DA:54,56
-DA:55,56
-DA:56,56
-DA:57,56
-DA:58,56
-DA:59,56
-DA:60,56
-DA:61,56
-DA:62,56
-DA:63,56
-DA:64,56
-DA:65,56
-DA:66,56
-DA:67,56
-DA:68,56
-DA:69,56
-DA:70,56
-DA:71,56
-DA:72,56
-DA:73,56
-DA:74,56
-DA:75,56
-DA:76,56
-DA:77,56
-DA:78,56
-DA:79,56
-DA:80,56
-DA:81,56
-DA:82,56
-DA:83,56
-DA:84,56
-DA:85,56
-DA:86,56
-DA:87,56
-DA:88,56
-DA:89,56
-DA:90,56
-DA:91,56
-DA:92,56
-DA:93,56
-DA:94,56
-=======
 DA:53,58
 DA:54,58
 DA:55,58
@@ -23173,7 +21411,6 @@ DA:91,58
 DA:92,58
 DA:93,58
 DA:94,58
->>>>>>> QT-1230
 DA:96,1
 DA:97,0
 DA:98,0
@@ -23699,15 +21936,9 @@ FNDA:5,(anonymous_2)
 FNDA:0,(anonymous_3)
 FNDA:0,(anonymous_4)
 DA:3,1
-<<<<<<< HEAD
-DA:5,93
-DA:6,93
-DA:7,93
-=======
 DA:5,116
 DA:6,116
 DA:7,116
->>>>>>> QT-1230
 DA:9,1
 DA:10,5
 DA:12,1
@@ -23750,17 +21981,10 @@ FNDA:0,(anonymous_7)
 FNDA:0,(anonymous_8)
 FNDA:0,(anonymous_9)
 DA:4,1
-<<<<<<< HEAD
-DA:6,61
-DA:7,61
-DA:8,61
-DA:9,61
-=======
 DA:6,84
 DA:7,84
 DA:8,84
 DA:9,84
->>>>>>> QT-1230
 DA:11,1
 DA:12,0
 DA:13,0
@@ -23876,13 +22100,8 @@ FNDA:58,BillableRealTimeService
 FNDA:0,(anonymous_2)
 FNDA:0,(anonymous_3)
 DA:3,1
-<<<<<<< HEAD
-DA:5,56
-DA:6,56
-=======
 DA:5,58
 DA:6,58
->>>>>>> QT-1230
 DA:8,1
 DA:9,0
 DA:11,1
@@ -23905,11 +22124,7 @@ FNDA:1,(anonymous_0)
 FNDA:58,CompaniesRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:8,56
-=======
 DA:8,58
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
@@ -24309,11 +22524,7 @@ FNDA:0,(anonymous_3)
 FNDA:0,(anonymous_4)
 FNDA:1,(anonymous_5)
 DA:4,1
-<<<<<<< HEAD
-DA:6,56
-=======
 DA:6,63
->>>>>>> QT-1230
 DA:8,1
 DA:9,0
 DA:10,0
@@ -24339,11 +22550,7 @@ FNDA:1,(anonymous_0)
 FNDA:58,ContractsRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:8,56
-=======
 DA:8,58
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
@@ -24545,11 +22752,7 @@ FNDA:1,(anonymous_0)
 FNDA:58,CrmRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:8,56
-=======
 DA:8,58
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
@@ -24598,15 +22801,9 @@ FNDA:0,(anonymous_14)
 FNDA:0,(anonymous_15)
 FNDA:1,(anonymous_16)
 DA:4,1
-<<<<<<< HEAD
-DA:6,61
-DA:7,61
-DA:8,61
-=======
 DA:6,84
 DA:7,84
 DA:8,84
->>>>>>> QT-1230
 DA:10,1
 DA:11,0
 DA:13,1
@@ -24673,11 +22870,7 @@ FNDA:1,(anonymous_0)
 FNDA:58,CustomerRoleRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:5,56
-=======
 DA:5,58
->>>>>>> QT-1230
 DA:7,1
 DA:8,0
 DA:10,1
@@ -24698,11 +22891,7 @@ FNDA:1,(anonymous_0)
 FNDA:58,DeviceTagsRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:8,56
-=======
 DA:8,58
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
@@ -24727,15 +22916,9 @@ FNDA:0,(anonymous_2)
 FNDA:0,(anonymous_3)
 FNDA:0,(anonymous_4)
 DA:3,1
-<<<<<<< HEAD
-DA:8,56
-DA:9,56
-DA:10,56
-=======
 DA:8,63
 DA:9,63
 DA:10,63
->>>>>>> QT-1230
 DA:16,1
 DA:17,0
 DA:19,1
@@ -24852,37 +23035,6 @@ FNDA:0,(anonymous_46)
 FNDA:0,(anonymous_47)
 FNDA:1,(anonymous_48)
 DA:9,1
-<<<<<<< HEAD
-DA:12,56
-DA:13,56
-DA:14,56
-DA:15,56
-DA:16,56
-DA:17,56
-DA:18,56
-DA:19,56
-DA:20,56
-DA:21,56
-DA:22,56
-DA:23,56
-DA:24,56
-DA:25,56
-DA:26,56
-DA:27,56
-DA:28,56
-DA:29,56
-DA:30,56
-DA:31,56
-DA:32,56
-DA:33,56
-DA:34,56
-DA:35,56
-DA:36,56
-DA:37,56
-DA:38,56
-DA:39,56
-DA:40,56
-=======
 DA:12,63
 DA:13,63
 DA:14,63
@@ -24912,7 +23064,6 @@ DA:37,63
 DA:38,63
 DA:39,63
 DA:40,63
->>>>>>> QT-1230
 DA:42,1
 DA:43,0
 DA:44,0
@@ -25165,13 +23316,8 @@ FNDA:58,DocumentsRealTimeService
 FNDA:0,(anonymous_2)
 FNDA:0,(anonymous_3)
 DA:3,1
-<<<<<<< HEAD
-DA:8,56
-DA:9,56
-=======
 DA:8,58
 DA:9,58
->>>>>>> QT-1230
 DA:15,1
 DA:16,0
 DA:18,1
@@ -25194,11 +23340,7 @@ FNDA:1,(anonymous_0)
 FNDA:58,EmailTemplateRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:8,56
-=======
 DA:8,58
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
@@ -25219,19 +23361,13 @@ FNDA:1,(anonymous_0)
 FNDA:58,FileManagementRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:8,56
-=======
 DA:8,58
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
 DA:23,1
 LF:6
 LH:5
-<<<<<<< HEAD
-=======
 BRF:0
 BRH:0
 end_of_record
@@ -25314,7 +23450,6 @@ DA:63,1
 DA:69,1
 LF:41
 LH:27
->>>>>>> QT-1230
 BRF:0
 BRH:0
 end_of_record
@@ -25329,11 +23464,7 @@ FNDA:1,(anonymous_0)
 FNDA:71,GlNumberRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:8,69
-=======
 DA:8,71
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
@@ -25472,13 +23603,8 @@ FNDA:65,InventoryRealTimeService
 FNDA:0,(anonymous_2)
 FNDA:0,(anonymous_3)
 DA:3,1
-<<<<<<< HEAD
-DA:8,57
-DA:9,57
-=======
 DA:8,65
 DA:9,65
->>>>>>> QT-1230
 DA:15,1
 DA:16,0
 DA:22,1
@@ -25589,28 +23715,6 @@ FNDA:0,(anonymous_44)
 FNDA:0,(anonymous_45)
 FNDA:1,(anonymous_46)
 DA:7,1
-<<<<<<< HEAD
-DA:9,1
-DA:10,1
-DA:11,1
-DA:12,1
-DA:13,1
-DA:14,1
-DA:15,1
-DA:16,1
-DA:17,1
-DA:18,1
-DA:19,1
-DA:20,1
-DA:21,1
-DA:22,1
-DA:23,1
-DA:24,1
-DA:25,1
-DA:26,1
-DA:27,1
-DA:28,1
-=======
 DA:9,7
 DA:10,7
 DA:11,7
@@ -25631,7 +23735,6 @@ DA:25,7
 DA:26,7
 DA:27,7
 DA:28,7
->>>>>>> QT-1230
 DA:30,1
 DA:31,0
 DA:32,0
@@ -25802,13 +23905,8 @@ FNDA:58,InvoiceRealTimeService
 FNDA:0,(anonymous_2)
 FNDA:0,(anonymous_3)
 DA:3,1
-<<<<<<< HEAD
-DA:5,56
-DA:6,56
-=======
 DA:5,58
 DA:6,58
->>>>>>> QT-1230
 DA:8,1
 DA:9,0
 DA:11,1
@@ -25831,11 +23929,7 @@ FNDA:1,(anonymous_0)
 FNDA:58,KafkaRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:8,56
-=======
 DA:8,58
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
@@ -25892,24 +23986,6 @@ FNDA:0,(anonymous_18)
 FNDA:0,(anonymous_19)
 FNDA:0,(anonymous_20)
 DA:3,1
-<<<<<<< HEAD
-DA:5,56
-DA:6,56
-DA:7,56
-DA:8,56
-DA:9,56
-DA:10,56
-DA:11,56
-DA:12,56
-DA:13,56
-DA:14,56
-DA:15,56
-DA:16,56
-DA:17,56
-DA:18,56
-DA:19,56
-DA:20,56
-=======
 DA:5,58
 DA:6,58
 DA:7,58
@@ -25926,7 +24002,6 @@ DA:17,58
 DA:18,58
 DA:19,58
 DA:20,58
->>>>>>> QT-1230
 DA:22,1
 DA:23,0
 DA:25,1
@@ -26016,11 +24091,7 @@ FNDA:1,(anonymous_0)
 FNDA:58,MarketingEmailRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:8,56
-=======
 DA:8,58
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
@@ -26041,11 +24112,7 @@ FNDA:1,(anonymous_0)
 FNDA:58,NonContractServicesRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:8,56
-=======
 DA:8,58
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
@@ -26109,11 +24176,7 @@ FNDA:1,(anonymous_0)
 FNDA:59,NoteRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:8,57
-=======
 DA:8,59
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
@@ -26289,18 +24352,6 @@ FNDA:0,(anonymous_16)
 FNDA:0,(anonymous_17)
 FNDA:1,(anonymous_18)
 DA:5,1
-<<<<<<< HEAD
-DA:7,56
-DA:8,56
-DA:9,56
-DA:10,56
-DA:11,56
-DA:12,56
-DA:13,56
-DA:14,56
-DA:15,56
-DA:16,56
-=======
 DA:7,58
 DA:8,58
 DA:9,58
@@ -26311,7 +24362,6 @@ DA:13,58
 DA:14,58
 DA:15,58
 DA:16,58
->>>>>>> QT-1230
 DA:18,1
 DA:19,0
 DA:20,0
@@ -26366,11 +24416,7 @@ FNDA:1,(anonymous_0)
 FNDA:58,PaymentsRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:5,56
-=======
 DA:5,58
->>>>>>> QT-1230
 DA:11,1
 DA:12,0
 DA:14,1
@@ -26451,19 +24497,6 @@ FNDA:0,(anonymous_30)
 FNDA:0,(anonymous_31)
 FNDA:0,(anonymous_32)
 DA:4,1
-<<<<<<< HEAD
-DA:6,1
-DA:7,1
-DA:8,1
-DA:9,1
-DA:10,1
-DA:11,1
-DA:12,1
-DA:13,1
-DA:14,1
-DA:15,1
-DA:16,1
-=======
 DA:6,7
 DA:7,7
 DA:8,7
@@ -26475,7 +24508,6 @@ DA:13,7
 DA:14,7
 DA:15,7
 DA:16,7
->>>>>>> QT-1230
 DA:18,1
 DA:19,0
 DA:21,1
@@ -26565,11 +24597,7 @@ FNDA:1,(anonymous_0)
 FNDA:58,ShellRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:8,56
-=======
 DA:8,58
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
@@ -26590,11 +24618,7 @@ FNDA:1,(anonymous_0)
 FNDA:58,SubscriptionServicesRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:8,56
-=======
 DA:8,58
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
@@ -26675,11 +24699,7 @@ FNDA:1,(anonymous_0)
 FNDA:63,TagsRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:8,56
-=======
 DA:8,63
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
@@ -26786,11 +24806,7 @@ FNDA:1,(anonymous_0)
 FNDA:81,TaxesRealTimeService
 FNDA:0,(anonymous_2)
 DA:3,1
-<<<<<<< HEAD
-DA:8,73
-=======
 DA:8,81
->>>>>>> QT-1230
 DA:14,1
 DA:15,0
 DA:17,1
@@ -26837,15 +24853,6 @@ FNDA:2,(anonymous_13)
 FNDA:1,(anonymous_14)
 FNDA:1,(anonymous_15)
 DA:5,1
-<<<<<<< HEAD
-DA:7,44
-DA:8,44
-DA:9,44
-DA:10,44
-DA:11,44
-DA:12,44
-DA:13,44
-=======
 DA:7,50
 DA:8,50
 DA:9,50
@@ -26853,7 +24860,6 @@ DA:10,50
 DA:11,50
 DA:12,50
 DA:13,50
->>>>>>> QT-1230
 DA:15,1
 DA:16,0
 DA:17,0
@@ -26931,21 +24937,12 @@ FNDA:0,(anonymous_6)
 FNDA:0,(anonymous_7)
 FNDA:0,(anonymous_8)
 DA:3,1
-<<<<<<< HEAD
-DA:8,61
-DA:9,61
-DA:10,61
-DA:11,61
-DA:12,61
-DA:13,61
-=======
 DA:8,84
 DA:9,84
 DA:10,84
 DA:11,84
 DA:12,84
 DA:13,84
->>>>>>> QT-1230
 DA:19,1
 DA:20,0
 DA:22,1
@@ -27137,48 +25134,6 @@ FNDA:0,(anonymous_76)
 FNDA:0,(anonymous_77)
 FNDA:1,(anonymous_78)
 DA:11,1
-<<<<<<< HEAD
-DA:13,61
-DA:14,61
-DA:15,61
-DA:16,61
-DA:17,61
-DA:18,61
-DA:19,61
-DA:20,61
-DA:21,61
-DA:22,61
-DA:23,61
-DA:24,61
-DA:25,61
-DA:26,61
-DA:27,61
-DA:28,61
-DA:29,61
-DA:30,61
-DA:31,61
-DA:32,61
-DA:33,61
-DA:34,61
-DA:35,61
-DA:36,61
-DA:37,61
-DA:38,61
-DA:39,61
-DA:40,61
-DA:41,61
-DA:42,61
-DA:43,61
-DA:44,61
-DA:45,61
-DA:46,61
-DA:47,61
-DA:48,61
-DA:49,61
-DA:50,61
-DA:51,61
-DA:52,61
-=======
 DA:13,84
 DA:14,84
 DA:15,84
@@ -27219,7 +25174,6 @@ DA:49,84
 DA:50,84
 DA:51,84
 DA:52,84
->>>>>>> QT-1230
 DA:54,1
 DA:55,0
 DA:56,0
@@ -27500,17 +25454,10 @@ FNDA:0,(anonymous_3)
 FNDA:0,(anonymous_4)
 FNDA:0,(anonymous_5)
 DA:3,1
-<<<<<<< HEAD
-DA:8,61
-DA:9,61
-DA:10,61
-DA:11,61
-=======
 DA:8,84
 DA:9,84
 DA:10,84
 DA:11,84
->>>>>>> QT-1230
 DA:17,1
 DA:18,0
 DA:20,1
@@ -27673,48 +25620,6 @@ FNDA:3,(anonymous_68)
 FNDA:0,(anonymous_69)
 FNDA:1,(anonymous_70)
 DA:13,1
-<<<<<<< HEAD
-DA:15,61
-DA:16,61
-DA:17,61
-DA:18,61
-DA:19,61
-DA:20,61
-DA:21,61
-DA:22,61
-DA:23,61
-DA:24,61
-DA:25,61
-DA:26,61
-DA:27,61
-DA:28,61
-DA:29,61
-DA:30,61
-DA:31,61
-DA:32,61
-DA:33,61
-DA:34,61
-DA:35,61
-DA:36,61
-DA:37,61
-DA:38,61
-DA:39,61
-DA:40,61
-DA:41,61
-DA:42,61
-DA:43,61
-DA:44,61
-DA:45,61
-DA:46,61
-DA:47,61
-DA:48,61
-DA:49,61
-DA:50,61
-DA:51,61
-DA:52,61
-DA:53,61
-DA:54,61
-=======
 DA:15,84
 DA:16,84
 DA:17,84
@@ -27755,7 +25660,6 @@ DA:51,84
 DA:52,84
 DA:53,84
 DA:54,84
->>>>>>> QT-1230
 DA:56,1
 DA:57,0
 DA:58,0
@@ -28023,13 +25927,8 @@ FNDA:58,WebsocketStateService
 FNDA:0,(anonymous_2)
 FNDA:0,(anonymous_3)
 DA:3,1
-<<<<<<< HEAD
-DA:5,56
-DA:6,56
-=======
 DA:5,58
 DA:6,58
->>>>>>> QT-1230
 DA:8,1
 DA:9,0
 DA:10,0
@@ -28084,11 +25983,7 @@ FN:3,CurrentUserCompany
 FNF:2
 FNH:2
 FNDA:1,(anonymous_0)
-<<<<<<< HEAD
-FNDA:7,CurrentUserCompany
-=======
 FNDA:18,CurrentUserCompany
->>>>>>> QT-1230
 DA:2,1
 DA:5,1
 LF:2
@@ -28109,18 +26004,6 @@ FNDA:1,CurrentUser
 FNDA:0,(anonymous_2)
 FNDA:0,(anonymous_3)
 DA:3,1
-<<<<<<< HEAD
-DA:5,0
-DA:6,0
-DA:7,0
-DA:8,0
-DA:9,0
-DA:10,0
-DA:11,0
-DA:13,0
-DA:14,0
-DA:15,0
-=======
 DA:5,1
 DA:6,1
 DA:7,1
@@ -28131,22 +26014,10 @@ DA:11,1
 DA:13,1
 DA:14,0
 DA:15,1
->>>>>>> QT-1230
 DA:18,1
 DA:19,0
 DA:21,1
 LF:14
-<<<<<<< HEAD
-LH:3
-BRDA:5,0,0,0
-BRDA:5,0,1,0
-BRDA:9,1,0,0
-BRDA:9,1,1,0
-BRDA:13,2,0,0
-BRDA:13,2,1,0
-BRDA:15,3,0,0
-BRDA:15,3,1,0
-=======
 LH:12
 BRDA:5,0,0,0
 BRDA:5,0,1,1
@@ -28156,7 +26027,6 @@ BRDA:13,2,0,0
 BRDA:13,2,1,1
 BRDA:15,3,0,0
 BRDA:15,3,1,1
->>>>>>> QT-1230
 BRF:8
 BRH:4
 end_of_record
@@ -28231,17 +26101,10 @@ FN:3,FilterListTop
 FNF:2
 FNH:2
 FNDA:1,(anonymous_0)
-<<<<<<< HEAD
-FNDA:183,FilterListTop
-DA:2,1
-DA:4,183
-DA:5,183
-=======
 FNDA:252,FilterListTop
 DA:2,1
 DA:4,252
 DA:5,252
->>>>>>> QT-1230
 DA:7,1
 LF:4
 LH:4
