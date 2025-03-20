@@ -52,7 +52,7 @@ export class TicketDetailProfileEditUpdatesProductsComponent implements OnInit, 
   public onChangeCostProduct(val, index) {
     let value = Number(val);
     this.addedProductList[index].item.cost = value;
-    this.addedProductList[index].item.cost.str = value.toFixed(2);
+    this.addedProductList[index].item.cost_str = value.toFixed(2);
   }
 
   public onChangeProduct(item, i, taxesDropDown) {
