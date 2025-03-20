@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
 
@@ -13,9 +13,12 @@ export class TicketDetailProfileUpdatesNoteInfoComponent implements OnInit {
   @Input() update: TicketProfileUpdate;
   @Input() isBlockChange: boolean;
   note: SafeHtml = '';
-  constructor(private sanitized: DomSanitizer) { }
+  constructor(private sanitized: DomSanitizer,
+    private elRef: ElementRef,
+  ) { }
 
   ngOnInit() {
+    this.elRef.nativeElement.querySelector(".ticket-updates__message").insertAdjacentHTML('afterbegin', this.update.note);
     this.note = this.getHtml(this.update.note);
   }
   ngOnChanges() {

@@ -96,6 +96,7 @@ import { TicketDetailTotalStatisticsComponent } from './ticket-detail-total-stat
 import { TicketDetailProfileFormUpdateModule } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.module';
 import { TicketDetailNoteModalComponent } from './ticket-detail-note-modal/ticket-detail-note-modal.component';
 import { TicketDetailNoteModalModule } from './ticket-detail-note-modal/ticket-detail-note-modal.module';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 
@@ -200,7 +201,7 @@ import { TicketDetailNoteModalModule } from './ticket-detail-note-modal/ticket-d
         DecimalNumberModule,
         ToFixedModule,
         TicketDetailProfileFormUpdateModule,
-
+        AngularEditorModule
     ],
 
 
