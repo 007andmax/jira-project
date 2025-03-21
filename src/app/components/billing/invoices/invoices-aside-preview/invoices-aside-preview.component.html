@@ -435,7 +435,7 @@
                             <div class="qt-text-left">Sub Total</div>
                             <div
                                 class="invoice-info-value qt-text-right"
-                                [textContent]="(invoiceProfile.totalSum - invoiceProfile.taxSum  + getTotalDiscount()) |
+                                [textContent]="getSubTotal() |
           currency"
                             ></div>
                         </div>
@@ -454,7 +454,7 @@
                             <div class="qt-text-left">Subtotal with discount</div>
                             <div
                                 class="invoice-info-value qt-text-right"
-                                [textContent]="invoiceProfile.totalSum - invoiceProfile.taxSum |
+                                [textContent]="getSubTotalWithDiscount() |
           currency"
                             ></div>
                         </div>

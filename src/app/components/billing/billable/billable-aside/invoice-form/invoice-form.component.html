@@ -232,7 +232,7 @@
         <div class="invoice-total qt-color-gray-900">
             <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15">
                 <div>Sub Total</div>
-                <div [textContent]="(invoice.invoiceDataDto.productsSum + invoice.invoiceDataDto.servicesSum  - getTotalDiscount()) |
+                <div [textContent]="getSubTotal() |
           currency"></div>
             </div>
             <div
@@ -245,7 +245,7 @@
             </div>
             <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15">
                 <div>Subtotal with discount</div>
-                <div [textContent]="(invoice.invoiceDataDto.productsSum + invoice.invoiceDataDto.servicesSum) |
+                <div [textContent]="getSubTotalWithDiscount() |
           currency"></div>
             </div>
             <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15">
