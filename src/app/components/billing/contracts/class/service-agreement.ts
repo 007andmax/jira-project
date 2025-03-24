@@ -379,7 +379,8 @@ export class ServiceAgreement {
     public calculateServiceOthersDiscount() {
         let sum = 0;
         this.productExpenses.forEach(item => {
-            sum += (item.quantity * item.salePrice * (Number(item.discountAmount) || 0) / 100);
+            if (item.discountType == "PERCENT") sum += (item.quantity * item.salePrice * (Number(item.discountAmount) || 0) / 100);
+            if (item.discountType == "FIXED") sum += (Number(item.discountAmount) || 0);
         })
         return sum;
     }
