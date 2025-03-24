@@ -100,7 +100,7 @@ describe('ContractsAsideUserDeviceEditComponent unit test', () => {
       count: 1,
       versionedId: { id: 1 },
       name: "test",
-      rate: 100,
+      rate: 0,
       taxes: [{ id: '1' }, { id: '2' }, { id: '3' }],
       basedOnDefault: true
     }));
@@ -112,13 +112,13 @@ describe('ContractsAsideUserDeviceEditComponent unit test', () => {
         count: 1,
         id: 1,
         name: "test",
-        rate: 100,
+        rate: 0,
         taxIds: ['1', '2', '3'],
       });
     expect(com.contractsUserDevice.blockTimeServices[0].getDataForUpdateSubscriptionServices()).toEqual(
       {
         "basedOnDefault": true,
-        "rate": 100,
+        "rate": 0,
         billable: undefined,
         taxIds: ['1', '2', '3'],
         count: 1,
@@ -128,7 +128,7 @@ describe('ContractsAsideUserDeviceEditComponent unit test', () => {
   it('check "addServiceContractService"', () => {
     const fixture = TestBed.createComponent(ContractsAsideUserDeviceEditComponent);
     const com = fixture.debugElement.componentInstance;
-    com.addServiceContractService(new SubscriptionServices({ name: "test", rate: 100, taxIds: ['1', '2', '3'], subscriptionService: { id: 1 }, id: 1, glNumberId: "test-123" }));
+    com.addServiceContractService(new SubscriptionServices({ name: "test", rate: 0, taxIds: ['1', '2', '3'], subscriptionService: { id: 1 }, id: 1, glNumberId: "test-123" }));
     expect(com.contractsUserDevice.serviceContractServices[0].getDataForUpdate()).toEqual(
       {
         basedOnDefault: true,
@@ -137,13 +137,13 @@ describe('ContractsAsideUserDeviceEditComponent unit test', () => {
         count: 1,
         id: 1,
         name: "test",
-        rate: 100,
+        rate: 0,
         taxIds: ['1', '2', '3'],
       });
     expect(com.contractsUserDevice.serviceContractServices[0].getDataForUpdateSubscriptionServices()).toEqual(
       {
         "basedOnDefault": true,
-        "rate": 100,
+        "rate": 0,
         billable: undefined,
         taxIds: ['1', '2', '3'],
         count: 1,
@@ -152,7 +152,7 @@ describe('ContractsAsideUserDeviceEditComponent unit test', () => {
     expect(com.contractsUserDevice.serviceContractServices[0].getDataForUpdateContractServices()).toEqual(
       {
         "count": 1,
-        "rate": 100,
+        "rate": 0,
         "taxIds": ['1', '2', '3'],
         "subscriptionService": {
           "id": 1
