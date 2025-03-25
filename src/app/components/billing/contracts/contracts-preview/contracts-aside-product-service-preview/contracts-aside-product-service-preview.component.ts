@@ -36,7 +36,7 @@ export class ContractsAsideProductServicePreviewComponent implements OnInit {
     }
   }
   getDiscount(item) {
-    return item.discountAmount && item.discountAmount != undefined ? `${item.discountAmount} %` : 'N/A';
+    return !item.discountAmount ? 'N/A' : `${item.discountAmount} ${item.discountType == "FIXED" ? "$" : '%'}`
   }
   parsedateForTotal(date) {
     return moment(date).format('DD MMM YYYY');

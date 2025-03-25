@@ -10,7 +10,7 @@ export class ContractsOtherProduct {
     "discountAmount": number;
     "discountType": string = "PERCENT";
     discountSum: number;
-    constructor(productId, quantity, salePrice, description, taxes = [], discountAmount = null, discountSum = 0) {
+    constructor(productId, quantity, salePrice, description, taxes = [], discountAmount = null, discountSum = 0, discountType = "PERCENT") {
         this.productId = productId;
         this.quantity = quantity;
         this.salePrice = salePrice;
@@ -19,6 +19,7 @@ export class ContractsOtherProduct {
         this.taxes = taxes;
         this.discountAmount = discountAmount;
         this.discountSum = discountSum;
+        this.discountType = discountType;
     }
     public getDataForCrate() {
         return {

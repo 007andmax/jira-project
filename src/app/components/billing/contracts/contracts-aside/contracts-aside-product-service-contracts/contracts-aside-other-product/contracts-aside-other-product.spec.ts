@@ -11,6 +11,7 @@ import { ContractsOtherProduct } from '../../class/contracts-other-product';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ContractsAsideDiscountModule } from '../../contracts-aside-discount/contracts-aside-discount.module';
 
 
 
@@ -32,7 +33,8 @@ describe('ContractsAsideOtherProductComponent unit test', () => {
           timeOut: 5000,
           onActivateTick: true
         }),
-        NoopAnimationsModule],
+        NoopAnimationsModule,
+        ContractsAsideDiscountModule],
       declarations: [ContractsAsideOtherProductComponent
       ],
     }).compileComponents();
