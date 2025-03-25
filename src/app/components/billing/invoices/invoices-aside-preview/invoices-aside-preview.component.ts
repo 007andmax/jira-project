@@ -132,7 +132,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     return this.invoiceProfile.productsSum + this.invoiceProfile.servicesSum - (this.invoiceProfile.invoiceDiscount ? this.invoiceProfile.invoiceDiscount.amount : 0);
   }
   getSubTotal() {
-    return this.invoiceProfile.productsSum + this.invoiceProfile.servicesSum + (this.invoiceProfile.discountSum ? this.invoiceProfile.discountSum : 0);
+    return this.invoiceProfile.productsSum + this.invoiceProfile.servicesSum;
   }
   getTotalDiscount() {
     return (this.invoiceProfile.invoiceDiscount ? this.invoiceProfile.invoiceDiscount.amount : 0) + (this.invoiceProfile.discountSum ? this.invoiceProfile.discountSum : 0);
