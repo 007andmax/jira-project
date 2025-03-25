@@ -224,7 +224,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     this.invoice.invoiceDataDto.tickets[i].subject = subject;
   }
   getSubTotalWithDiscount() {
-    return this.invoice.invoiceDataDto.productsSum + this.invoice.invoiceDataDto.servicesSum - (this.invoice.invoiceDataDto.invoiceDiscount ? this.invoice.invoiceDataDto.invoiceDiscount.amount : 0);
+    return this.invoice.invoiceDataDto.productsSum + this.invoice.invoiceDataDto.servicesSum - (this.invoice.invoiceDataDto.invoiceDiscount ? this.invoice.invoiceDataDto.invoiceDiscount.amount : 0) - (this.invoice.invoiceDataDto.discountSum ? this.invoice.invoiceDataDto.discountSum : 0);
   }
   getSubTotal() {
     return this.invoice.invoiceDataDto.productsSum + this.invoice.invoiceDataDto.servicesSum;

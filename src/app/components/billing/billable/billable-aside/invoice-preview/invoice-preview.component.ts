@@ -52,7 +52,7 @@ export class InvoicePreviewComponent implements OnInit {
     return moment(new Date(date)).format('DD MMM YYYY');
   }
   getSubTotalWithDiscount() {
-    return this.invoice.invoiceDataDto.productsSum + this.invoice.invoiceDataDto.servicesSum - (this.invoice.invoiceDataDto.invoiceDiscount ? this.invoice.invoiceDataDto.invoiceDiscount.amount : 0);
+    return this.invoice.invoiceDataDto.productsSum + this.invoice.invoiceDataDto.servicesSum - (this.invoice.invoiceDataDto.invoiceDiscount ? this.invoice.invoiceDataDto.invoiceDiscount.amount : 0) - (this.invoice.invoiceDataDto.discountSum ? this.invoice.invoiceDataDto.discountSum : 0);
   }
   getSubTotal() {
     return this.invoice.invoiceDataDto.productsSum + this.invoice.invoiceDataDto.servicesSum;
