@@ -9,6 +9,7 @@ import { Adapter, System } from '../class/system';
 export class HardwareOperatingSystemComponent implements OnInit {
   @Input() system: System;
   @Input() networkAdapters: Adapter;
+  @Input() WindowsLicenseKey: string;
   constructor() { }
 
   ngOnInit() {

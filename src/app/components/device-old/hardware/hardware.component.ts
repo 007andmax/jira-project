@@ -43,6 +43,7 @@ export class HardwareComponent implements OnInit {
   pdfUrl: string = '';
   _id: string = '';
   type: string = '';
+  WindowsLicenseKey: string;
   DateTimeFormat = CONFIGCONSTANTS.DateTimeFormat;
   @ViewChild('header', { static: true }) header: HardwareHeaderComponent;
   constructor(private hardwareService: HardwareService,
@@ -104,6 +105,7 @@ export class HardwareComponent implements OnInit {
     this.memory = this.hardwareDetail['reports'][0].ram.slots || {};
     this.networkAdapters = this.hardwareDetail['reports'][0].networkAdapters.filter(value => value.ipEnabled === true)[0] || {};
     this.externalIp = this.hardwareDetail['reports'][0].externalIp || {};
+    this.WindowsLicenseKey = this.hardwareDetail['reports'][0].WindowsLicenseKey || {};
 
     this.printSystem = [
       ['Manufacturer', this.system['manufacturer'] || 'N/A'],
@@ -159,7 +161,7 @@ export class HardwareComponent implements OnInit {
       ['IP', this.networkAdapters['ipAddress'] || 'N/A'],
       ['Version', this.system['version'] || 'N/A'],
       ['Service Pack', this.system['servicePack'] || 'N/A'],
-      ['Windows key', this.system['WindowsLicenseKey'] || 'N/A']
+      ['Windows key', this.WindowsLicenseKey || 'N/A']
     ];
   }
 
