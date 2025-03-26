@@ -19,15 +19,15 @@ export class ContractsOtherProduct {
         this.taxes = taxes;
         this.discountAmount = discountAmount;
         this.discountSum = discountSum;
-        this.discountType = discountType;
+        if (discountType) this.discountType = discountType;
     }
     public getDataForCrate() {
         return {
             productId: this.productId,
             quantity: this.quantity,
             salePrice: this.salePrice,
-            discountAmount: this.discountAmount,
-            discountType: this.discountType,
+            discountAmount: this.discountAmount ? this.discountAmount : undefined,
+            discountType: this.discountAmount ? this.discountType : undefined
         }
     }
 }
