@@ -126,7 +126,7 @@ export class HardwareComponent implements OnInit {
       ['Socket & Cache(s)', 'N/A']
     ];
     this.printMemory = [
-      ['Memory', this.memory[0]['capacity'] != undefined ? (this.memory[0]['capacity'] / 1024 / 1024) + ' MB RAM' : 'N/A']
+      ['Memory', this.memory && this.memory[0]['capacity'] != undefined ? (this.memory[0]['capacity'] / 1024 / 1024) + ' MB RAM' : 'N/A']
     ];
     this.printNetwork = [
       ['Model(s)', this.networkAdapters['description'] || 'N/A'],
