@@ -7,6 +7,7 @@ export class System {
     servicePack: string;
     version: string;
     releaseId: string;
+    WindowsLicenseKey: string;
 }
 
 export class Graphics {

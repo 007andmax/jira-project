@@ -158,7 +158,8 @@ export class HardwareComponent implements OnInit {
       ['Name', this.system['caption'] || 'N/A'],
       ['IP', this.networkAdapters['ipAddress'] || 'N/A'],
       ['Version', this.system['version'] || 'N/A'],
-      ['Service Pack', this.system['servicePack'] || 'N/A']
+      ['Service Pack', this.system['servicePack'] || 'N/A'],
+      ['Windows key', this.system['WindowsLicenseKey'] || 'N/A']
     ];
   }
 
