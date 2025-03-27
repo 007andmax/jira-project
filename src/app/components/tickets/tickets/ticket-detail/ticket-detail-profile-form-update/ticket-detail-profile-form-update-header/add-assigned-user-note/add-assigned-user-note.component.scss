@@ -39,13 +39,14 @@
     .mat-chip-list-wrapper {
         min-height: 48px;
         border-radius: unset !important;
-        padding-left: 108px;
+        padding-left: 168px !important;
         border-color: $gray-200;
         background-color: $white;
         border-left: unset !important;
         border-right: unset !important;
         margin-right: 0;
         margin-left: 0;
+        padding-right: 52px;
 
         &:hover {
             border-color: $gray-200 !important;
@@ -165,5 +166,9 @@
     color: $gray-400;
     font-size: 14px;
 }
-
- 
+.btn-expand {
+    position: absolute;
+    top: 8px;
+    right: 19px;
+    padding: 8px !important;
+}

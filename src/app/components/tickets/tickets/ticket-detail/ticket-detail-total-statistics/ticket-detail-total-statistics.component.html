@@ -1,0 +1,32 @@
+<div class="ticket-edit-aside__claimed-info">
+    <div class="qt-df qt-mb-8 qt-pb-8 item-total-statistic">
+        <div class="qt-icon icon__time qt-sz-16 qt-mt-3"></div>
+        <div class="qt-df qt-fd-c">
+            <span class="qt-fs-13 qt-fw-500 qt-color-gray-500 qt-ml-8">Total Time Worked</span>
+            <span
+                class="qt-fs-14 qt-fw-400 qt-color-gray-900 qt-ml-8"
+                [textContent]="getTotalWorked()"
+            ></span>
+        </div>
+    </div>
+    <div class="qt-df qt-mb-8 qt-pb-8 item-total-statistic">
+        <div class="qt-icon icon__taxes qt-sz-16 qt-mt-3"></div>
+        <div class="qt-df qt-fd-c">
+            <span class="qt-fs-13 qt-fw-500 qt-color-gray-500 qt-ml-8">Total Product Price</span>
+            <span
+                class="qt-fs-14 qt-fw-400 qt-color-gray-900 qt-ml-8"
+                [textContent]="ticketProfile.totalProductsPrice  | currency"
+            ></span>
+        </div>
+    </div>
+    <div class="qt-df">
+        <div class="qt-icon icon__terms-conditions qt-sz-16 qt-mt-3"></div>
+        <div class="qt-df qt-fd-c">
+            <span class="qt-fs-13 qt-fw-500 qt-color-gray-500 qt-ml-8">Contract Type</span>
+            <span
+                class="qt-fs-14 qt-fw-400 qt-color-gray-900 qt-ml-8"
+                [textContent]="ticketProfile.companyServiceType ? ticketProfile.companyServiceType :  'No contract type yet'"
+            ></span>
+        </div>
+    </div>
+</div>

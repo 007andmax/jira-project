@@ -126,6 +126,7 @@
                         <th class="contract-product-products-table__name">Product Name</th>
                         <th class="contract-product-products-table__quantity">Quantity</th>
                         <th class="contract-product-products-table__price">Price</th>
+                        <th class="contract-product-products-table__price">Discount</th>
                         <th class="contract-product-products-table__price">Subtotal</th>
                         <th></th>
                     </tr>
@@ -237,7 +238,18 @@
                 </div>
                 <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
                     <div>Sub Total</div>
-                    <div [textContent]="contractsOther.getTotalAmountOther() | currency"></div>
+                    <div [textContent]="contractsOther.calculateSubTotalAmountOtherContract() | currency"></div>
+                </div>
+                <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
+                    <div>Total Discount</div>
+                    <div [textContent]="contractsOther.calculateServiceDiscount() | currency"></div>
+                </div>
+                <div
+                    class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12"
+                    *ngIf="contractsOther.calculateServiceDiscount() > 0"
+                >
+                    <div>Subtotal with discount</div>
+                    <div [textContent]="(contractsOther.calculateSubTotalAmountOtherContract() - contractsOther.calculateServiceDiscount()) | currency"></div>
                 </div>
                 <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
                     <div>Tax</div>
@@ -248,7 +260,7 @@
                     <div class="qt-fs-13 qt-fw-b">Total</div>
                     <div
                         class="qt-fs-16 qt-fw-b"
-                        [textContent]="(contractsOther.getTotalAmountOther() + contractsOther.calculateServiceTaxes()) | currency"
+                        [textContent]="contractsOther.calculateSubTotalAmountOtherContract() - contractsOther.calculateServiceDiscount() + contractsOther.calculateServiceTaxes() | currency"
                     ></div>
                 </div>
             </div>

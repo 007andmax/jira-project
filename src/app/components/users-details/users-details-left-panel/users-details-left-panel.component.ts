@@ -123,6 +123,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
     this.user.primaryEmail = this.modelForm.value.primaryEmail;
 
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
+      this.usersStateService.fastEditUser(data);
       this.submitted = false;
       this.isChange = false;
     }, err => {

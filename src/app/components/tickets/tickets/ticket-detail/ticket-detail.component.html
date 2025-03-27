@@ -171,12 +171,12 @@
                     ></ticket-detail-message>
                     <ticket-detail-profile-updates
                         #ticketProfileUpdates
-                        [hidden]="!ticketProfile.updates || ticketProfile.updates.length === 0"
                         (onFetchUpdates)="onFetchUpdates($event)"
                         [ticketProfile]="ticketProfile"
                         [updates]="ticketProfile.updates"
                     ></ticket-detail-profile-updates>
                     <ticket-detail-profile-form-update
+                        #ticketProfileFormUpdates
                         (onCloseForm)="showFormUpdate = false"
                         *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && showFormUpdate || showFormUpdate && customerPortalStateService.isCustomerPortal"
                         [ticket]="ticketProfile"
@@ -194,6 +194,7 @@
                 *ngIf="!showPreloader"
             >
                 <ticket-detail-claim-info [ticketProfile]="ticketProfile"></ticket-detail-claim-info>
+                <app-ticket-detail-total-statistics [ticketProfile]="ticketProfile"></app-ticket-detail-total-statistics>
                 <ticket-detail-change-status
                     #changeStatus
                     [ticketProfile]="ticketProfile"

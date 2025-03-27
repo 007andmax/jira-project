@@ -43,6 +43,7 @@ export class HardwareComponent implements OnInit {
   pdfUrl: string = '';
   _id: string = '';
   type: string = '';
+  WindowsLicenseKey: string;
   DateTimeFormat = CONFIGCONSTANTS.DateTimeFormat;
   @ViewChild('header', { static: true }) header: HardwareHeaderComponent;
   constructor(private hardwareService: HardwareService,
@@ -104,6 +105,7 @@ export class HardwareComponent implements OnInit {
     this.memory = this.hardwareDetail['reports'][0].ram.slots || {};
     this.networkAdapters = this.hardwareDetail['reports'][0].networkAdapters.filter(value => value.ipEnabled === true)[0] || {};
     this.externalIp = this.hardwareDetail['reports'][0].externalIp || {};
+    this.WindowsLicenseKey = this.hardwareDetail['reports'][0].WindowsLicenseKey || {};
 
     this.printSystem = [
       ['Manufacturer', this.system['manufacturer'] || 'N/A'],
@@ -124,7 +126,7 @@ export class HardwareComponent implements OnInit {
       ['Socket & Cache(s)', 'N/A']
     ];
     this.printMemory = [
-      ['Memory', this.memory[0]['capacity'] != undefined ? (this.memory[0]['capacity'] / 1024 / 1024) + ' MB RAM' : 'N/A']
+      ['Memory', this.memory && this.memory[0] && this.memory[0]['capacity'] != undefined ? (this.memory[0]['capacity'] / 1024 / 1024) + ' MB RAM' : 'N/A']
     ];
     this.printNetwork = [
       ['Model(s)', this.networkAdapters['description'] || 'N/A'],
@@ -158,7 +160,8 @@ export class HardwareComponent implements OnInit {
       ['Name', this.system['caption'] || 'N/A'],
       ['IP', this.networkAdapters['ipAddress'] || 'N/A'],
       ['Version', this.system['version'] || 'N/A'],
-      ['Service Pack', this.system['servicePack'] || 'N/A']
+      ['Service Pack', this.system['servicePack'] || 'N/A'],
+      ['Windows key', this.WindowsLicenseKey || 'N/A']
     ];
   }
 

@@ -60,6 +60,10 @@ export class TicketProfile {
     isCompanyDeleted: boolean = false;
     deviceId: string;
     selectedCustomerCompany: UserCustomerCompaniesInfo;
+    "totalTimeWorked": number;
+    "totalProductsPrice": number;
+    "companyServiceType": string;
+    updatesCount: number;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -87,9 +91,6 @@ export class TicketProfile {
                 }
                 return tag;
             })
-            this.updates = data.updates.map(item => {
-                return new TicketProfileUpdate(item);
-            })
             this.priorityLevel = new TicketsPriority(data.priorityLevel);
         }
     }
@@ -107,16 +108,6 @@ export class TicketProfile {
     }
     public setStatus(data) {
         this.status = data;
-    }
-    public refreshAttachments(attachments) {
-        this.attachments = [];
-        this.updates.forEach(item => {
-            if (item.attachments && item.attachments.length > 0) {
-                item.attachments.forEach(attachment => {
-                    this.attachments.push(new TicketProfileAttachment(attachment));
-                })
-            }
-        })
     }
     public setUserCompanies(data) {
         this.userCompanies = data;

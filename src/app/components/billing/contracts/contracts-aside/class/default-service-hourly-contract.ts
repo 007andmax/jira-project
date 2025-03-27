@@ -15,12 +15,12 @@ export class DefaultServicesHourlyContract extends NonContractServices {
         super(data);
         this.rate_str = this.rate.toFixed(2);
     }
-    public getDataFromBillableService() {
+    public getDataFromBillableService(toggleMaximumAmountHours = true) {
         return {
             count: 1,
             id: this.versionedId.id,
             name: this.name,
-            rate: this.rate,
+            rate: toggleMaximumAmountHours ? this.rate : 0,
             taxIds: this.taxes.map(item => item.id),
             subscriptionService: { id: this.versionedId.id },
             parentDefaultServiceId: this.versionedId.id,

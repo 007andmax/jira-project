@@ -1,0 +1,28 @@
+@import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/dropdown";
+
+.dropup,
+.dropdown {
+  position: relative;
+}
+
+// Prevent the focus on the dropdown toggle when closing dropdowns
+.dropdown-toggle:focus { // TODO 2 include in device page
+  outline: 0;
+}
+
+// The dropdown menu (ul)
+.dropdown-menu {
+  @include dropdown-menu;
+
+  &.pull-right {
+    right: 0;
+    left: auto;
+  }
+}
+
+.pull-right > .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+

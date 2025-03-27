@@ -26,7 +26,6 @@ export class ContractsAsideOtherProductComponent implements OnInit {
       this.product.validate = true;
       this.product.description = data.description;
       this.product.taxes = data.taxes;
-      this.onChangeTaxSum();
     } else {
       this.product.quantity = 0;
       this.product.salePrice = 0;
@@ -37,22 +36,29 @@ export class ContractsAsideOtherProductComponent implements OnInit {
       this.product.taxes = [];
     }
   }
+  ngDoCheck() {
+    this.onChangeTaxSum();
+  }
+
+  onChangeDiscount(data) {
+    this.product.discountType = data.type;
+  }
   public onChangeTaxSum() {
     let rate = this.product.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
-    this.product.taxSum = this.product.salePrice * this.product.quantity * rate / 100;
+    if (this.product.discountType == "PERCENT") this.product.taxSum = (this.product.salePrice * this.product.quantity * (1 - (Number(this.product.discountAmount) || 0) / 100) * rate / 100);
+    if (this.product.discountType == "FIXED") this.product.taxSum = (((this.product.salePrice * this.product.quantity) - Number(this.product.discountAmount)) * rate / 100);
   }
   public onChangeQuantity(val) {
     let value = Number(val);
     this.product.quantity = value;
-    this.onChangeTaxSum();
   }
   public onChangeSalePrice(val) {
     let value = Number(val);
     this.product.salePrice = value;
-    this.onChangeTaxSum();
   }
-  getSubTotal() {
-    return (this.product.quantity * this.product.salePrice).toFixed(2);
+  public getSubTotal() {
+    if (this.product.discountType == "PERCENT") return (this.product.salePrice * this.product.quantity * (1 - (Number(this.product.discountAmount) || 0) / 100));
+    if (this.product.discountType == "FIXED") return (((this.product.salePrice * this.product.quantity) - Number(this.product.discountAmount)));
   }
   remove() {
     this.onRemove.emit(null);

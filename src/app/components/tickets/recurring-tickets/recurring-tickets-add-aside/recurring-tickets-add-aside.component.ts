@@ -291,17 +291,11 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     let value = Number(val);
     product.cost = value;
     product.cost_str = value.toFixed(2);
-    //  product.markup = this.getMarkups(product);
   }
   onChangeSale(val, product) {
     let value = Number(val);
     product.sale = value;
     product.sale_str = value.toFixed(2);
-    //product.markup = this.getMarkups();
-  }
-  public getMarkups(product) {
-    if (product.sale > 0 && product.cost > 0) return Math.round((product.sale - product.cost) / product.cost * 100);
-    return 0;
   }
   /**
  * Subscribe to show ticker

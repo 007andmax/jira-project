@@ -143,6 +143,9 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
   parseDate(data) {
     return (data < 0) ? `0${data}` : data;
   }
+  setNoteType(type) {
+    this.ticketStateService.setNoteType(type);
+  }
   addUpdate(type) {
     this.onAddUpdate.emit(type);
   }

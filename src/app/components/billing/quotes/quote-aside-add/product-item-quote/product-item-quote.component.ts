@@ -37,14 +37,14 @@ export class ProductItemQuoteComponent implements OnInit {
     this.product.markup = this.getMarkups();
   }
   public getMarkups() {
-    if (this.product.item.sale > 0 && this.product.item.cost > 0) return Math.round((this.product.item.sale - this.product.item.cost) / this.product.item.cost * 100);
+    if (this.product.item.sale > 0 && this.product.item.cost > 0) return Number(this.quoteStateService.roundToTwo((this.product.item.sale - this.product.item.cost) / this.product.item.cost * 100));
     return 0;
   }
   changeMarkup(val) {
     let value = Number(val);
     this.product.item.sale = Number(this.quoteStateService.roundToTwo((value * this.product.item.cost / 100 + this.product.item.cost)));
     this.product.item.sale_str = this.product.item.sale.toFixed(2);
-    this.product.markup = this.roundingMarkup(value);
+    this.product.markup = value;
   }
   removeProduct() {
     this.onRemoveProduct.emit(null);
@@ -60,9 +60,7 @@ export class ProductItemQuoteComponent implements OnInit {
       return `${item.name} ${item.rate}%`;
     }).join("<br>");
   }
-  private roundingMarkup(markup) {
-    return (!this.isInteger(markup)) ? Math.ceil(markup * 10) / 10 : markup;
-  }
+
   private isInteger(num): boolean {
     return (num ^ 0) === num;
   }

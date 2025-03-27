@@ -97,6 +97,7 @@ export class UsersDetailsTabCompaniesAddComponent implements OnInit {
     this.addBtn.setDisabled(true);
     this.user.customerCompaniesInfo.push(this.customerCompaniesInfo);
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
+      this.usersStateService.fastEditUser(data);
       this.addBtn.setDisabled(false);
       this.onClose.emit(null);
     }, err => {

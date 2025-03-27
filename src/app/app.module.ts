@@ -155,6 +155,7 @@ import { SubscriptionServicesComponent } from './components/billing/subscription
 import { SubscriptionServicesCheckUseComponent } from './components/billing/subscription-services/subscription-services-check-use/subscription-services-check-use.component';
 import { SubscriptionServicesConfirmComponent } from './components/billing/subscription-services/subscription-services-confirm/subscription-services-confirm.component';
 import { CannedResponsesAsideModule } from './components/setting/ticket-settings-page/canned-responses/canned-responses-aside/canned-responses-aside.module';
+import { TicketDetailNoteModalModule } from './components/tickets/tickets/ticket-detail/ticket-detail-note-modal/ticket-detail-note-modal.module';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -239,7 +240,8 @@ declare var $: any;
     MatChipListModule,
     MatChipModule,
     FileManagementAddFileModule,
-    CannedResponsesAsideModule],
+    CannedResponsesAsideModule,
+    TicketDetailNoteModalModule],
   entryComponents: [
     ConfirmComponent,
     DownloadAgentComponent,

@@ -2,7 +2,7 @@
     <td class="contract-product-products-table__name --editable">
         <app-product-list
             [editItem]="editProduct"
-            class="product-item__prodect-list contract-aside-product-list"
+            class="product-item__prodect-list"
             [validate]="product.validate"
             (selectedProductItem)="onChangeProduct($event)"
         ></app-product-list>
@@ -25,9 +25,16 @@
             (onChange)="onChangeSalePrice($event)"
         >
     </td>
+    <td class="contract-product-products-table__price --editable">
+        <app-contracts-aside-discount
+            [service]="product"
+            class="qt-taxes-multiselect"
+            (onChange)="onChangeDiscount($event)"
+        ></app-contracts-aside-discount>
+    </td>
     <td
         class="contract-product-products-table__price"
-        [textContent]="getSubTotal()"
+        [textContent]="getSubTotal() | currency"
     ></td>
     <td>
         <div

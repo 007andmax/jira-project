@@ -52,6 +52,10 @@ export class UsersStateService {
   globalFilters: Array<UserGlobalFilter> = [];
   globalFilterForRemove: UserGlobalFilter = null;
   onEditUser: EventEmitter<any> = new EventEmitter();
+  onFastAdd: EventEmitter<any> = new EventEmitter();
+  onFastEdit: EventEmitter<any> = new EventEmitter();
+  onFastArchive: EventEmitter<any> = new EventEmitter();
+  onFastDeArchive: EventEmitter<any> = new EventEmitter();
   constructor(private userService: UsersService,
     private appService: AppService,
     private customerPortalStateService: CustomerPortalStateService,
@@ -104,6 +108,18 @@ export class UsersStateService {
 
     })
   }
+  public fastEditUser(data) {
+    this.onFastEdit.emit(data);
+  }
+  public fastAddUser(data) {
+    this.onFastAdd.emit(data);
+  }
+  public fastArchiveUser(data) {
+    this.onFastArchive.emit(data);
+  }
+  public fastDeArchive(data) {
+    this.onFastDeArchive.emit(data);
+  }
   public showAddCustomerCompaniesInfo() {
     this.isShowAddCustomerCompaniesInfo = true;
     this.onShowAddCustomerCompaniesInfo.emit(null)
@@ -117,7 +133,7 @@ export class UsersStateService {
   public setSelectedCustomerCompaniesInfo(data) {
     this.onSelectCustomerCompaniesInfo.emit(data)
   }
-  public fastEditUser(data) {
+  public fastUpdateUser(data) {
     let index = this.allUsers.findIndex(item => item.id == data.id);
     if (index > -1) this.allUsers[index].onUpdate(data);
     this.onEditUser.emit(data);

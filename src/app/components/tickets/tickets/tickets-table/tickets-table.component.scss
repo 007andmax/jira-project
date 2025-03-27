@@ -52,13 +52,6 @@ app-tickets-table-item {
 .qt-page-list__container {
   display: flex;
 }
-::ng-deep .filter-button.--gray:focus {
-  background-color: $white;
-}
-::ng-deep .filter-button.active:focus {
-  background-color: #16a4fa10;
-}
-
 ::ng-deep .aside-filters {
   width: 320px;
   flex-shrink: 0;

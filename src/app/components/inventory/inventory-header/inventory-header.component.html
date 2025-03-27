@@ -42,11 +42,12 @@
                     >
                 </div>
                 <button
-                    class="qt-btn btn-filter qt-df qt-ml-8"
+                    class="qt-button qt-button-filter --gray --md qt-df qt-ml-8"
                     [ngClass]="{'active':!toggleFilter}"
                     (click)="toggleFilter = !toggleFilter"
                 >
-                    Filters
+                    <span class="qt-icon icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                    <span>Filters</span>
                 </button>
                 <button
                     class="qt-button --gray --md qt-ml-8"

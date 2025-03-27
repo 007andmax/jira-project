@@ -171,7 +171,7 @@
     <div class="modal-body">
         <button
             type="button"
-            class="close pull-right"
+            class="qt-aside-modern__header-close qt-icon icon__close"
             aria-label="Close"
             (click)="modal.dismiss('Cross click')"
         >
@@ -193,7 +193,7 @@
                         </p>
                         <a
                             (click)="createConnection('CSS');"
-                            class="btn btn-primary"
+                            class="qt-button"
                         >
                             Launch Quicktech Connect
                         </a>
@@ -207,7 +207,7 @@
                           <h3>Remote Desktop</h3>
                           <p>Launch our app already installed on your device. If not installed, we will attempt the next option after 2 seconds
                             have elapsed.</p>
-                          <a (click)="createConnection('RDP');" class="btn btn-primary">Launch RDP Connect</a>
+                          <a (click)="createConnection('RDP');" class="qt-button">Launch RDP Connect</a>
                       </div>
                   </li> -->
             </ul>
@@ -218,7 +218,7 @@
             </p>
             <a
                 (click)="getViewer();"
-                class="btn btn-dowanload"
+                class="qt-button"
             >
                 Download Viewer
             </a>
@@ -249,14 +249,14 @@
         <div class="modal-footer">
             <button
                 type="button"
-                class="btn btn-danger"
+                class="qt-button --red"
                 (click)="Reboot(asset.ID,TemporaryCommand);"
             >
                 Yes
             </button>
             <button
                 type="button"
-                class="btn btn-secondary"
+                class="qt-button --gray"
                 (click)="decline()"
             >
                 No

@@ -1,10 +1,10 @@
 @import './variable.scss';
 @import './qt-classes.scss';
 
+@import './components/utilities.scss';
 @import './components/app.scss';
 @import './components/headers.scss';
 @import './components/inputs.scss';
-@import './components/btn.scss';
 @import './components/tables.scss';
 @import './components/tags.scss';
 @import './components/aside.scss';
@@ -15,7 +15,18 @@
 @import './components/left-panel.scss';
 @import './components/app-drop-down.scss';
 @import './components/taxes-dropdown.scss';
-@import './components/pagelist';
+@import './components/pagelist.scss';
+@import './components/button-with-loading-indicator.scss';
+@import './components/common.scss';
+@import './components/unlock-screen-wrapper.scss';
+@import './components/normalize.scss';
+@import './components/scaffolding.scss';
+@import './components/type.scss';
+@import './components/forms.scss';
+@import './components/dropdowns.scss';
+@import './components/button-groups.scss';
+@import './components/navs.scss';
+@import './components/progress-bars.scss';
 
 @import './pages/billable.scss';
 @import './pages/invoices.scss';
@@ -33,13 +44,8 @@
 @import './pages/quick-support.scss';
 @import './pages/company-devices.scss';
 @import './pages/documents.scss';
+@import './pages/report.scss';
 
-// Old ng1 styles
-@import './ng1-old/ng1-old-all.scss';
-@import './ng1-old/modal-popup.scss';
-@import './ng1-old/nv.d3.scss';
-@import './ng1-old/report.scss';
-@import './ng1-old/users.scss';
-@import './ng1-old/bootstrap-custom';
-@import './ng1-old/fix-style.scss';
+@import './vendor/nv.d3';
+
 

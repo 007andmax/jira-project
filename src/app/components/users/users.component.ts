@@ -108,23 +108,26 @@ export class UsersComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    let onFastAdd = this.usersStateService.onFastAdd.subscribe(res => {
+      this.onUpdateUser(res);
+    })
+    this.sub.add(onFastAdd);
+    let onFastEdit = this.usersStateService.onFastEdit.subscribe(res => {
+      this.onUpdateUser(res);
+    })
+    this.sub.add(onFastEdit);
+    let onFastArchive = this.usersStateService.onFastArchive.subscribe(res => {
+      this.onFastArchiveUser(res);
+    })
+    this.sub.add(onFastArchive);
+    let onFastDeArchive = this.usersStateService.onFastDeArchive.subscribe(res => {
+      this.onFastDeArchiveUser(res);
+    })
+    this.sub.add(onFastDeArchive);
     let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
-      if ((data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') && data.data.accountType !== "TECH") {
-        const userIndex = this.users.findIndex((item) => item.id === data.data.id);
-        if (userIndex > -1) this.users[userIndex].onUpdate(data.data);
-        if (userIndex === -1) this.users.unshift(new User(data.data));
-        if (!this.filter.isArchive && data.action === 'USER_ARCHIVED') {
-          if (userIndex > -1) this.users.splice(userIndex, 1);
-        }
-      }
-      if (data.action === 'USERS_DEARCHIVED' && data.data.accountType !== "TECH") {
-        data.data.forEach(user => {
-          if (this.filter.isArchive) {
-            const userIndex = this.users.findIndex((item) => item.id === user.id);
-            if (userIndex > -1) this.users.splice(userIndex, 1);
-          }
-        })
-      }
+      if ((data.action === 'USER_SAVED') && data.data.accountType !== "TECH") this.onUpdateUser(data.data);
+      if (data.action === 'USER_ARCHIVED' && data.data.accountType !== "TECH") this.onFastArchiveUser(data.data);
+      if (data.action === 'USERS_DEARCHIVED' && data.data.accountType !== "TECH") this.onFastDeArchiveUser(data.data);
       if (data.action === 'USER_SUBMITTED_TICKET' && data.data.accountType !== "TECH") {
         const Index = this.users.findIndex((item) => item.id === data.data.id);
         var prevValue = this.users[Index].userStatistic.ticketsSubmitted || 0;
@@ -153,6 +156,26 @@ export class UsersComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onGetListCustomSubscription);
   }
+  onUpdateUser(data) {
+    const userIndex = this.users.findIndex((item) => item.id === data.id);
+    if (userIndex > -1) this.users[userIndex].onUpdate(data);
+    if (userIndex === -1) this.users.unshift(new User(data));
+  }
+  onFastArchiveUser(data) {
+    const userIndex = this.users.findIndex((item) => item.id === data.id);
+    if (userIndex > -1) this.users[userIndex].onUpdate(data);
+    if (!this.filter.isArchive) {
+      if (userIndex > -1) this.users.splice(userIndex, 1);
+    }
+  }
+  onFastDeArchiveUser(data) {
+    data.forEach(user => {
+      if (this.filter.isArchive) {
+        const userIndex = this.users.findIndex((item) => item.id === user.id);
+        if (userIndex > -1) this.users.splice(userIndex, 1);
+      }
+    })
+  }
   onCloseFilters() {
     this.header.setToggleFilter(false);
   }
@@ -175,6 +198,9 @@ export class UsersComponent implements OnInit, OnDestroy {
       list.map(item => this.usersService.onArchiveUsers(item.id))
     )
       .subscribe(res => {
+        res.forEach(item => {
+          this.usersStateService.fastArchiveUser(item);
+        })
       });
   }
   onClearAll() {
@@ -243,20 +269,18 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
   private onDeArchiveUser(id) {
     let Dearchiveusers = this.usersService.onDeArchiveUsers(id).subscribe(data => {
-      if (this.filter.isArchive) {
-        let index = this.users.findIndex(item => item.id === id);
-        if (index > -1) this.users.splice(index, 1);
-      }
-
+      this.usersStateService.fastDeArchive([data]);
     }, err => {
       const modalRef = this.modalService.open(UserDeArchiveNotificationComponent, { windowClass: 'xs-modal user-modal', container: "app-users", backdrop: 'static', keyboard: false });
       modalRef.componentInstance.user = this.usersStateService.getUserForDeArchive();
+      modalRef.componentInstance.message = err.error.message;
       this.cd.detectChanges();
     })
     this.userListService.addSubscription(Dearchiveusers);
   }
   private onArchiveUser(id) {
     let archiveUser = this.usersService.onArchiveUsers(id).subscribe(data => {
+      this.usersStateService.fastArchiveUser(data);
       if (!this.filter.isArchive && this.filter.getClientType()) {
         let index = this.users.findIndex(item => item.id === id);
         if (index > -1) this.users.splice(index, 1);

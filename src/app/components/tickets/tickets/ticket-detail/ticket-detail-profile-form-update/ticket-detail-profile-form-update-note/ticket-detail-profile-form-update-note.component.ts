@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { TicketProfileFormUpdate } from '../../../ticket-edit-aside/class/ticket-profile-form-update';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'ticket-detail-profile-form-update-note',
@@ -10,13 +11,57 @@ import { TicketProfileFormUpdate } from '../../../ticket-edit-aside/class/ticket
 export class TicketDetailProfileFormUpdateNoteComponent implements OnInit {
   files: any[] = [];
   @Input() ticketProfileFormUpdate: TicketProfileFormUpdate = new TicketProfileFormUpdate();
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: false,
+    height: '100%',
+    minHeight: '5rem',
+    width: 'auto',
+    minWidth: '0',
+    translate: 'no',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Write ticket conversation here…',
+    defaultParagraphSeparator: '',
+    defaultFontName: '',
+    defaultFontSize: '',
+    toolbarPosition: 'bottom',
+    fonts: [
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'calibri', name: 'Calibri' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' }
+    ],
+    customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    uploadUrl: 'v1/image',
+    sanitize: false,
+  };
   constructor(public cd: ChangeDetectorRef,
-    private companiesService: CompaniesService,) { }
+    private companiesService: CompaniesService,
+    private elRef: ElementRef) { }
 
   ngOnInit() {
+    //  if (this.ticketProfileFormUpdate.note) this.elRef.nativeElement.querySelector("#chat").innerHTML = this.ticketProfileFormUpdate.note;
   }
   public fileBrowseHandler(files) {
     this.prepareFilesList(files);
+  }
+  setNote(data) {
+    // this.elRef.nativeElement.querySelector("#chat").innerHTML = data;
   }
   prepareFilesList(files: Array<any>) {
     for (const item of files) {

@@ -53,7 +53,7 @@
 
     &__content-textarea {
         min-height: 208px;
-        max-height: 300px;
+        max-height: calc(100vh - 262px);
         width: 100%;
         border-radius: 4px;
         border: none;
@@ -72,6 +72,10 @@
         &::placeholder {
             opacity: 1;
             color: $gray-400;
+        }
+
+        @media (max-height: 540px) {
+          max-height: calc(100vh - 164px);
         }
     }
 
@@ -99,8 +103,10 @@
     }
 }
 .editable-chat {
-    max-height: 500px;
     border: unset;
+    display: flex;
+    flex: 1;
+    max-height: 100%;
 }
 .files-list {
   display: flex;
@@ -273,4 +279,25 @@
   margin-left: 2px;
   width: 12px;
   height: 12px;
+}
+.cps-block__chat-block {
+    display:flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+.editable-description {
+    padding: 0px;
+    height: 300px;
+    max-height: calc(100vh - 242px);
+    ::ng-deep angular-editor {
+        width: 100%;
+        height: 100%;
+        .angular-editor-wrapper {
+            height: calc(100% - 43px);
+        }
+    }
+}
+::ng-deep .angular-editor-textarea {
+  max-height: calc(100vh - 305px);
 }

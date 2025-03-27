@@ -125,8 +125,11 @@ export class QuoteAdd {
         this.services.push(new QuoteAddService("", item.discountType, item.discountAmount, item, 0, 1))
     }
     public getMarkups(item) {
-        if (item.sale > 0 && item.cost > 0) return Math.round((item.sale - item.cost) / item.cost * 100);
+        if (item.sale > 0 && item.cost > 0) return Number(this.roundToTwo((item.sale - item.cost) / item.cost * 100));
         return 0;
+    }
+    public roundToTwo(num) {
+        return parseFloat((Math.round(Number(num + 'e+2')) + "e-2")).toFixed(2);
     }
     public setQuoteDate(day, month, year, timeOffset) {
         let current = new Date();

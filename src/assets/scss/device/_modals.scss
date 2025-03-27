@@ -120,13 +120,6 @@
   &:after {
     clear: both;
   }
-  .btn + .btn {
-    margin-bottom: 0;
-    margin-left: 5px;
-  }
-  .btn-group .btn + .btn {
-    margin-left: -1px;
-  }
 }
 
 .modal-scrollbar-measure {

@@ -117,28 +117,26 @@ export class CompanyUserComponent implements OnInit {
       }
     })
     this.sub.add(getConfirm);
+    let onFastAdd = this.usersStateService.onFastAdd.subscribe(res => {
+      this.onUpdateUser(res);
+    })
+    this.sub.add(onFastAdd);
+    let onFastEdit = this.usersStateService.onFastEdit.subscribe(res => {
+      this.onUpdateUser(res);
+    })
+    this.sub.add(onFastEdit);
+    let onFastArchive = this.usersStateService.onFastArchive.subscribe(res => {
+      this.onFastArchiveUser(res);
+    })
+    this.sub.add(onFastArchive);
+    let onFastDeArchive = this.usersStateService.onFastDeArchive.subscribe(res => {
+      this.onFastDeArchiveUser(res);
+    })
+    this.sub.add(onFastDeArchive);
     let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
-      if (data.action === 'USER_SAVED' && data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
-        let index = this.users.findIndex(item => item.id === data.data.id);
-        if (index != -1) {
-          this.users[index].onUpdate(data.data);
-        } else {
-          this.users.unshift(new User(data.data));
-          this.header.count = this.header.count + 1;
-        }
-      }
-      if (data.action === 'USER_ARCHIVED' && data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) {
-        const userIndex = this.users.findIndex((item) => item.id === data.data.id);
-        if (userIndex > -1) this.users.splice(userIndex, 1);
-      }
-      if (data.action === 'USERS_DEARCHIVED') {
-        data.data.forEach(user => {
-          if (this.showArchivedUsers) {
-            const userIndex = this.users.findIndex((item) => item.id === user.id);
-            if (userIndex > -1) this.users.splice(userIndex, 1);
-          }
-        })
-      }
+      if (data.action === 'USER_SAVED' && data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) this.onUpdateUser(data.data);
+      if (data.action === 'USER_ARCHIVED' && data.data.customerCompaniesInfo.some(clientCompany => clientCompany.companyId === id)) this.onFastArchiveUser(data.data);
+      if (data.action === 'USERS_DEARCHIVED') this.onFastDeArchiveUser(data.data);
       this.users = [...this.users.map(item => new User(item))];
       this.header.setUsers(this.users);
       this.cd.detectChanges();
@@ -156,6 +154,29 @@ export class CompanyUserComponent implements OnInit {
     this.sub.add(onGetListCustomSubscription);
     this.onInitSubscribe();
   }
+  onUpdateUser(data) {
+    const userIndex = this.users.findIndex((item) => item.id === data.id);
+    if (userIndex > -1) this.users[userIndex].onUpdate(data);
+    if (userIndex === -1) {
+      this.users.unshift(new User(data));
+      this.header.count = this.header.count + 1;
+    }
+  }
+  onFastArchiveUser(data) {
+    const userIndex = this.users.findIndex((item) => item.id === data.id);
+    if (userIndex > -1) this.users[userIndex].onUpdate(data);
+    if (!this.filter.isArchive) {
+      if (userIndex > -1) this.users.splice(userIndex, 1);
+    }
+  }
+  onFastDeArchiveUser(data) {
+    data.forEach(user => {
+      if (this.showArchivedUsers) {
+        const userIndex = this.users.findIndex((item) => item.id === user.id);
+        if (userIndex > -1) this.users.splice(userIndex, 1);
+      }
+    })
+  }
   private onArchiveUsers(users) {
     let list = users.filter(item => item.customerCompaniesInfo.every(company => !company.isPrimaryContact));
     let listPrimary = users.filter(item => item.customerCompaniesInfo.some(company => company.isPrimaryContact));
@@ -167,6 +188,9 @@ export class CompanyUserComponent implements OnInit {
       list.map(item => this.usersService.onArchiveUsers(item.id))
     )
       .subscribe(res => {
+        res.forEach(item => {
+          this.usersStateService.fastArchiveUser(item);
+        })
       });
   }
   onCloseFilters() {
@@ -257,16 +281,13 @@ export class CompanyUserComponent implements OnInit {
   }
   private onDeArchiveUser(id) {
     let Dearchiveusers = this.usersService.onDeArchiveUsers(id).subscribe(data => {
-      if (this.showArchivedUsers) {
-        let index = this.users.findIndex(item => item.id === id);
-        if (index > -1) this.users.splice(index, 1);
-      }
-
+      this.usersStateService.fastDeArchive([data]);
     })
     this.userListService.addSubscription(Dearchiveusers);
   }
   private onArchiveUser(id) {
     let archiveUser = this.usersService.onArchiveUsers(id).subscribe(data => {
+      this.usersStateService.fastArchiveUser(data);
       if (!this.showArchivedUsers && this.filter.getClientType()) {
         let index = this.users.findIndex(item => item.id === id);
         if (index > -1) this.users.splice(index, 1);

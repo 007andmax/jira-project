@@ -136,7 +136,7 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     let index = this.user.customerCompaniesInfo.findIndex(item => item.companyId === this.companyId);
     this.user.customerCompaniesInfo[index].eligibleForTicket = event.target.checked;
     this.usersService.updateeligibleForTicket(this.user.id, this.companyId, event.target.checked).subscribe(data => {
-      this.usersStateService.fastEditUser(this.user);
+      this.usersStateService.fastUpdateUser(this.user);
     })
   }
   edit() {
@@ -169,6 +169,10 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     });
     this.sub.add(stompClient);
+    let onFastEdit = this.usersStateService.onFastEdit.subscribe(res => {
+      this.cd.detectChanges();
+    })
+    this.sub.add(onFastEdit);
   }
   delete() {
     if (this.user.customerCompaniesInfo.find(item => item.isPrimaryContact)) {

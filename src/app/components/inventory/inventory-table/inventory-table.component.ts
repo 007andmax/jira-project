@@ -261,7 +261,7 @@ export class InventoryTableComponent implements OnInit {
 
   }
   public getMarkups() {
-    if (this.inventory.sale > 0 && this.inventory.cost > 0) return Math.round((this.inventory.sale - this.inventory.cost) / this.inventory.cost * 100);
+    if (this.inventory.sale > 0 && this.inventory.cost > 0) return Number(this.quoteStateService.roundToTwo((this.inventory.sale - this.inventory.cost) / this.inventory.cost * 100));
     return 0;
   }
   onEnterMarkup(event) {
@@ -297,18 +297,12 @@ export class InventoryTableComponent implements OnInit {
   }
   onChangeMarkup(val) {
     let value = Number(val);
-    if (this.inventory.markup != this.roundingMarkup(value)) {
+    if (this.inventory.markup != value) {
       this.inventory.sale = Number(this.quoteStateService.roundToTwo((value * this.inventory.cost / 100 + this.inventory.cost)));
-      this.inventory.markup = this.roundingMarkup(value);
+      this.inventory.markup = value;
       this.inventory.setIsEdit(true);
       this.cd.markForCheck();
     }
-  }
-  private roundingMarkup(markup) {
-    return (!this.isInteger(markup)) ? Math.ceil(markup * 10) / 10 : markup;
-  }
-  private isInteger(num): boolean {
-    return (num ^ 0) === num;
   }
   onEnterCost(event) {
     if (event.keyCode === 13 && this.inventory.isEdit) {

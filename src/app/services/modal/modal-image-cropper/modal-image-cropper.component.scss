@@ -1,17 +1,5 @@
 @import "./src/assets/styles/variable";
 
-.btn-new {
-  border-radius: 6px;
-  font-size: 14px;
-  line-height: 17px;
-  color: $gray-500;
-
-  &.btn-primary {
-    color: $white;
-    margin-left: 12px;
-  }
-}
-
 .image-confirm-modal {
   position: fixed;
   left: 50%;

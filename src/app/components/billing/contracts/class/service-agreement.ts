@@ -6,7 +6,7 @@ import { ContractsBlockTimeDefaultService } from '../contracts-aside/class/contr
 import { ContractsOtherProduct } from '../contracts-aside/class/contracts-other-product';
 import { ServiceAgreementServiceExpenses } from './service-agreement-service-expenses';
 export class ServiceAgreement {
-    amount: number;
+    subtotalExcludingTax: number;
     billType: string;
     blockRate: string;
     blockTimeServices: Array<ServiceAgreementBlockTimeServices> = [];
@@ -61,7 +61,7 @@ export class ServiceAgreement {
             this.blockRate = (typeof data.blockRate === "number") ? String(data.blockRate) : "";
             this.blockRate_str = parseFloat(this.blockRate).toFixed(2);
             this.rateExceeding_str = parseFloat(this.rateExceeding).toFixed(2);
-            this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice, item.description, item.taxes));
+            this.productExpenses = data.productExpenses.map(item => new ContractsOtherProduct(item.productId, item.quantity, item.salePrice, item.description, item.taxes, item.discountAmount, item.discountSum, item.discountType));
             this.serviceExpenses = data.serviceExpenses.map(item => new ServiceAgreementServiceExpenses(item));
             this.productExpenses.forEach(item => this.onCalculateTaxSumForProductExpenses(item));
             this.serviceExpenses.forEach(item => this.onCalculateTaxSumForServiceExpenses(item));
@@ -342,15 +342,6 @@ export class ServiceAgreement {
         })
         return sum;
     };
-    public calculateTotalAmountServiceContract() {
-        let sum = 0;
-        this.serviceContractServices.forEach(item => {
-            let rate = item.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
-            if (item.discountType == "PERCENT") sum += (item.count * item.rate * (1 - (Number(item.discountAmount) || 0) / 100) * (1 + rate / 100));
-            if (item.discountType == "FIXED") sum += (((item.count * item.rate) - Number(item.discountAmount)) * (1 + rate / 100));
-        })
-        return sum;
-    };
     public calculateTotalAmount() {
         let sum = 0;
         if (Number(this.includedHours) && Number(this.blockRate)) {
@@ -385,6 +376,24 @@ export class ServiceAgreement {
         })
         return sum;
     }
+    public calculateServiceOthersDiscount() {
+        let sum = 0;
+        this.productExpenses.forEach(item => {
+            if (item.discountType == "PERCENT") sum += (item.quantity * item.salePrice * (Number(item.discountAmount) || 0) / 100);
+            if (item.discountType == "FIXED") sum += (Number(item.discountAmount) || 0);
+        })
+        return sum;
+    }
+    public calculateSubTotalAmountOtherContract() {
+        let sum = 0;
+        this.productExpenses.forEach(item => {
+            sum += (item.quantity * item.salePrice);
+        })
+        this.serviceExpenses.forEach(item => {
+            sum += (item.quantity * item.rate);
+        })
+        return sum;
+    };
     public calculateTotalDiscount() {
         let sum = 0;
         this.serviceContractServices.forEach(item => {

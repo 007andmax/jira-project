@@ -140,8 +140,8 @@
     margin: 0 16px;
     border-bottom: 1px solid $gray-200;
 
-    .btn,
-    .btn.collapsed {
+    .select-product__item-title,
+    .select-product__item-title {
       font-weight: 500;
       font-size: 14px;
       line-height: 17px;
@@ -152,13 +152,12 @@
       &:active {
         box-shadow: unset;
       }
-    }
-  }
-}
 
-::ng-deep .product-dropdown-new-ng .item-list .card .btn.collapsed {
-  &:hover {
-    background-color: $gray-50;
+      &.collapsed:hover {
+        background-color: $gray-50;
+        color: $blue-light-600;
+      }
+    }
   }
 }
 .loading {

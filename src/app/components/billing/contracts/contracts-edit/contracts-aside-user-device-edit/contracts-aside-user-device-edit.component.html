@@ -400,12 +400,19 @@
                 <div [textContent]="parsedateForTotal(contractsUserDevice.reviewDate)"></div>
             </div>
             <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
+                <div>Sub Total</div>
+                <div [textContent]="contractsUserDevice.calculateSubTotalAmountServiceContract() | currency"></div>
+            </div>
+            <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
                 <div>Total Discount</div>
                 <div [textContent]="contractsUserDevice.calculateServiceDiscount() | currency"></div>
             </div>
-            <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
-                <div>Sub Total</div>
-                <div [textContent]="contractsUserDevice.calculateSubTotalAmountServiceContract() - contractsUserDevice.calculateServiceDiscount() | currency"></div>
+            <div
+                class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12"
+                *ngIf="contractsUserDevice.calculateServiceDiscount() > 0"
+            >
+                <div>Subtotal with discount</div>
+                <div [textContent]="(contractsUserDevice.calculateSubTotalAmountServiceContract() - contractsUserDevice.calculateServiceDiscount()) | currency"></div>
             </div>
             <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
                 <div>Tax</div>
@@ -416,7 +423,7 @@
                 <div class="qt-fs-13 qt-fw-b">Total</div>
                 <div
                     class="qt-fs-16 qt-fw-b"
-                    [textContent]="contractsUserDevice.calculateTotalAmountServiceContract() | currency"
+                    [textContent]="contractsUserDevice.calculateSubTotalAmountServiceContract() - contractsUserDevice.calculateServiceDiscount() + contractsUserDevice.calculateServiceTaxes() | currency"
                 ></div>
             </div>
         </div>

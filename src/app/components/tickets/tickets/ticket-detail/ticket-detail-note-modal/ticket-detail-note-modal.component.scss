@@ -1,0 +1,593 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
+.cps-block {
+    &__header {
+        margin-bottom: 20px;
+    }
+
+    &__photo {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-size: cover !important;
+        background-position: center !important;
+        margin-right: 18px;
+    }
+
+    &__nav {
+        padding: 0;
+        display: flex;
+        list-style: none;
+    }
+
+    &__nav-item {
+        @include body-m__sb;
+        margin-right: 30px;
+        color: $gray-600;
+        cursor: pointer;
+        padding-left: 25px;
+        background-repeat: no-repeat;
+        background-size: 20px;
+        background-position: center left;
+        position: relative;
+
+        &.active {
+            color: $blue-light-600;
+
+            &:before {
+                content: "";
+                position: absolute;
+                bottom: -10px;
+                height: 3px;
+                width: calc(100% + 5px);
+                background: $blue-light-600;
+                left: 0;
+                border-radius: 100px;
+            }
+        }
+    }
+
+    &__content-textarea {
+        min-height: 104px;
+        max-height: 300px;
+        width: 100%;
+        border-radius: 4px;
+        border: none;
+        overflow: auto;
+        outline: none;
+        padding: 16px;
+
+        &:last-child {
+            display: block !important;
+        }
+
+        &::placeholder {
+            opacity: 1;
+            color: $gray-400;
+        }
+    }
+
+    .support-timeline-status__line {
+        width: 140px;
+    }
+
+    &__support-message {
+        width: 100%;
+        font-size: 12px;
+        color: $gray-900;
+        line-height: 1.33;
+        border: 1px solid #fff1d6;
+        height: 24px;
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        border-radius: 4px;
+        background-color: $gray-25;
+        padding: 4px 10px;
+    }
+
+    &__create-connection-btn {
+        width: fit-content;
+    }
+}
+
+.editable-chat {
+    max-height: 500px;
+}
+
+.ticket-edit-aside {
+    &__more-users-title {
+        font-size: 12px;
+        color: $blue-light-600;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+
+    &__attach,
+    &__users {
+        width: 24px;
+        height: 24px;
+        background-repeat: no-repeat;
+        background-size: 24px;
+        background-position: center;
+        cursor: pointer;
+    }
+
+    &__attach {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-mask-size: 16px;
+        mask-size: 16px;
+        background-position: center;
+        z-index: -1;
+        overflow: hidden;
+
+        &-button {
+            position: relative;
+            z-index: 1;
+
+            input[type="file"] {
+                height: 100%;
+                opacity: 0;
+            }
+        }
+    }
+
+    &__users-linked-author,
+    &__users-linked-partner {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-position: center !important;
+        background-size: cover !important;
+        font-size: 10px;
+        text-align: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        color: $white;
+        font-weight: 600;
+        position: relative;
+
+        &::before {
+            position: absolute;
+            content: "";
+            width: 16px;
+            height: 16px;
+            border: 1px solid $gray-300;
+            background: $white;
+            border-radius: 50%;
+            bottom: -7px;
+        }
+
+        &.selected {
+            &::before {
+                background-image: url("/assets/img/icons/status-green.svg");
+                border: none;
+            }
+        }
+    }
+
+    &__users-linked-author {
+        margin-left: 4px;
+    }
+
+    &__users-linked-divider {
+        background: $gray-200;
+        width: 1px;
+        margin: 0 16px;
+    }
+
+    &__users-linked-partner {
+        margin-right: 4px;
+    }
+}
+
+.ticket-edit-aside-bottom-part-users-attack {
+    width: 100%;
+
+    ::ng-deep app-add-assigned-user,
+    ::ng-deep add-assigned-user-note {
+        margin-right: 5px;
+        margin-top: 5px;
+        width: 100%;
+    }
+
+    ::ng-deep .ticket-edit-user-tags {
+        padding: 0;
+    }
+
+    &__chat-block {}
+}
+
+.files-list {
+    margin-top: 16px;
+
+    .single-file {
+        display: flex;
+        padding: 0.5rem;
+        justify-content: space-between;
+        align-items: center;
+        border: dashed 1px #979797;
+        margin-bottom: 1rem;
+        position: relative;
+
+        img.delete {
+            margin-left: 0.5rem;
+            cursor: pointer;
+            align-self: flex-end;
+        }
+
+        display: flex;
+        flex-grow: 1;
+
+        .name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #353f4a;
+            margin: 0;
+        }
+
+        .size {
+            font-size: 12px;
+            font-weight: 500;
+            color: #a4a4a4;
+            margin: 0;
+            margin-bottom: 0.25rem;
+
+            .file-error {
+                color: $red-600;
+            }
+        }
+
+        .info {
+            width: 100%;
+        }
+    }
+}
+
+.fileover {
+    animation: shake 1s;
+    animation-iteration-count: infinite;
+    position: relative;
+    z-index: 999;
+
+    .file-background {
+        display: block;
+    }
+}
+
+.file-background-show {
+    .file-background {
+        display: block;
+    }
+}
+
+.file-background {
+    display: none;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+
+    .file-background-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+
+        p {
+            text-align: center;
+            font-weight: bold;
+        }
+    }
+
+    .file-background-mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        filter: blur(4px);
+        display: block;
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+}
+
+/* Shake animation */
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+[contenteditable="true"]:empty:before {
+    content: attr(placeholder);
+    pointer-events: none;
+    display: block;
+    /* For Firefox */
+    color: $gray-400;
+}
+
+.icn-remove-old {
+    top: 12px !important;
+    position: relative;
+}
+
+::ng-deep .ticket-detail-form-update-note-list {
+    .note-list-container {
+        position: relative;
+        bottom: unset;
+        right: unset;
+    }
+}
+
+.ticket-detail-profile-form-update__footer {
+    padding: 10px 12px;
+    background-color: $white;
+    border-top: 1px solid $gray-200;
+}
+
+::ng-deep .cps-block .ticket-edit-user-tags {
+    position: relative;
+    padding: 0;
+}
+
+::ng-deep .cps-block .ticket-edit-user-tags>span {
+    position: absolute;
+    left: 16px;
+    top: 12px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: $gray-500;
+    z-index: 1;
+}
+
+::ng-deep .cps-block .mat-chip-list-wrapper {
+    min-height: 48px;
+    border-radius: unset !important;
+    padding-left: 168px !important;
+    border-color: $gray-200;
+    background-color: $white;
+    border-left: unset !important;
+    border-right: unset !important;
+    margin-right: 0;
+    margin-left: 0;
+
+    &:hover {
+        border-color: $gray-200 !important;
+        background-color: $gray-50;
+    }
+}
+
+::ng-deep .cps-block .ticket-edit-user-tags .assigne-user-avatar {
+    height: 16px;
+    width: 16px;
+}
+
+::ng-deep .cps-block__header div.ticket-edit-user-tags .selected-tag-user {
+    border: 1px solid $gray-200;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    border-radius: 6px !important;
+    background-color: $white !important;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: $gray-600;
+    padding: 5px 8px;
+}
+
+::ng-deep .mat-standard-chip .mat-chip-remove.mat-icon {
+    width: 14px;
+}
+
+::ng-deep .mat-chip.mat-standard-chip .mat-chip-remove {
+    &::before {
+        top: 3px;
+        right: -1px;
+        width: 12px;
+        height: 12px;
+    }
+}
+
+::ng-deep div.cps-block__visible-user {
+    div.autocomplete-user-tags {
+        width: 240px !important;
+
+        .dropdown-item {
+            height: auto;
+            display: flex;
+            flex-wrap: wrap;
+
+            p {
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 17px;
+                color: $gray-900;
+                margin-bottom: 4px;
+            }
+
+            span {
+                font-weight: 400;
+                font-size: 13px;
+                line-height: 16px;
+                color: $gray-600 !important;
+                padding-left: 32px;
+                flex: 100%;
+            }
+
+            .icon__globe {
+                width: 20px;
+                height: 20px;
+                margin-right: 12px;
+            }
+        }
+    }
+}
+
+::ng-deep div.mat-option.mat-selected:not(.mat-option-multiple):not(.mat-option-disabled) {
+    background: $white;
+}
+
+::ng-deep div.autocomplete-user-tags .mat-option {
+    border-color: transparent;
+    height: 36px;
+    margin-bottom: 4px;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+::ng-deep div.autocomplete-user-tags .mat-option:hover {
+    background-color: $gray-50 !important;
+}
+
+::ng-deep ticket-detail-profile-form-update {
+    .dropdown-menu {
+        padding: 8px;
+        max-height: 174px;
+    }
+}
+
+::ng-deep ticket-detail-profile-form-update .cps-block__visible-user .dropdown-menu {
+    max-height: 212px;
+}
+
+::ng-deep ticket-detail-profile-form-update .cps-block__visible-user .dropdown-item {
+    margin-bottom: 4px;
+}
+
+::ng-deep .ticket-detail-page-content__sidebar-preview .autocomplete-user-tags {
+    max-height: 292px;
+    min-height: 292px;
+}
+
+::ng-deep div.autocomplete-user-tags .mat-option .assigne-user-name {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: $gray-900;
+    margin-right: 4px;
+}
+
+::ng-deep div.autocomplete-user-tags .mat-option .assigne-user-email {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: $gray-500;
+}
+
+::ng-deep div.autocomplete-user-tags .mat-option .assigne-user-avatar {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: 0;
+}
+
+::ng-deep .cps-block__visible-user {
+    .dropdown-menu {
+        width: 537px;
+        border-radius: 6px;
+
+        .cps-block__photo {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 15px;
+        }
+
+        .dropdown-item {
+            height: 36px;
+            padding: 6.5px 8px;
+            border-radius: 6px;
+            align-items: center;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $gray-50;
+            }
+
+            >span:nth-child(2) {
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 17px;
+                color: $gray-900;
+                margin-right: 4px;
+                display: inline-block;
+            }
+
+            >span:nth-child(3) {
+                font-weight: 400;
+                font-size: 13px;
+                color: $gray-500;
+                display: inline-block;
+            }
+        }
+    }
+}
+
+.ticket-edit-aside__attach-button {
+    overflow: hidden;
+    width: 32px;
+    height: 32px;
+}
+
+.qt-button {
+    padding: 10px 12px;
+}

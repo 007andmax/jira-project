@@ -35,6 +35,9 @@ export class ContractsAsideProductServicePreviewComponent implements OnInit {
       this.selectedInterval = (this.contractsOther.customInterval === 30) ? '30 days' : (this.contractsOther.customInterval === 15) ? '15 days' : '7 days';
     }
   }
+  getDiscount(item) {
+    return !item.discountAmount ? 'N/A' : `${item.discountAmount} ${item.discountType == "FIXED" ? "$" : '%'}`
+  }
   parsedateForTotal(date) {
     return moment(date).format('DD MMM YYYY');
   }
@@ -46,7 +49,10 @@ export class ContractsAsideProductServicePreviewComponent implements OnInit {
 
   }
   getSubTotal(item) {
-    return item.quantity * item.salePrice;
+    return ((item.quantity * item.salePrice) - this.calculateDiscount(item)).toFixed(2);
+  }
+  public calculateDiscount(item) {
+    return (item.quantity * item.salePrice * (Number(item.discountAmount) || 0) / 100);
   }
 
 }

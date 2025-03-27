@@ -200,8 +200,8 @@ export class ContractsFilter {
     }
   }
   private onFilterAmount(list) {
-    list.sort((a, b) => (a.amount > b.amount) ?
-      1 : ((b.amount > a.amount) ? -1 : 0));
+    list.sort((a, b) => (a.subtotalExcludingTax > b.subtotalExcludingTax) ?
+      1 : ((b.subtotalExcludingTax > a.subtotalExcludingTax) ? -1 : 0));
   }
   private onFilterReviewDate(list) {
     list.sort((a, b) => (a.reviewDate > b.reviewDate) ?

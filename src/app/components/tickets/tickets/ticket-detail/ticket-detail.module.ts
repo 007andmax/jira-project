@@ -92,6 +92,11 @@ import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat
 import { CompanyUsersDropDownModule } from '../ticket-add-aside/company-users-drop-down/company-users-drop-down.module';
 import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
 import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
+import { TicketDetailTotalStatisticsComponent } from './ticket-detail-total-statistics/ticket-detail-total-statistics.component';
+import { TicketDetailProfileFormUpdateModule } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.module';
+import { TicketDetailNoteModalComponent } from './ticket-detail-note-modal/ticket-detail-note-modal.component';
+import { TicketDetailNoteModalModule } from './ticket-detail-note-modal/ticket-detail-note-modal.module';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 
@@ -115,12 +120,12 @@ import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
         TicketDetailProfileUpdatesServiceHeaderInfoComponent,
         TicketDetailTasksComponent,
         TicketDetailHeaderComponent,
-        TicketDetailProfileFormUpdateComponent,
-        TicketDetailProfileFormUpdateVisibleUsersComponent,
-        TicketDetailProfileFormUpdateNoteComponent,
-        TicketDetailProfileFormUpdateServicesComponent,
-        TicketDetailProfileFormUpdateHeaderComponent,
-        TicketDetailProfileFormUpdateProductsComponent,
+        // TicketDetailProfileFormUpdateComponent,
+        //  TicketDetailProfileFormUpdateVisibleUsersComponent,
+        //  TicketDetailProfileFormUpdateNoteComponent,
+        //   TicketDetailProfileFormUpdateServicesComponent,
+        //  TicketDetailProfileFormUpdateHeaderComponent,
+        //  TicketDetailProfileFormUpdateProductsComponent,
         TicketDetailClaimInfoComponent,
         TicketDetailInfoStatusComponent,
         TicketDetailChangeStatusComponent,
@@ -147,11 +152,12 @@ import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
         TicketDetailPasswordsDetailsComponent,
         TicketDetailDevicesItemComponent,
         TicketDetailDevicesDetailsComponent,
-        TicketDetailProfileFormUpdateSupportComponent,
-        AddAssignedUserNoteComponent,
+        //   TicketDetailProfileFormUpdateSupportComponent,
+        //  AddAssignedUserNoteComponent,
         TicketDetailTicketsDetailsComponent,
         TicketDetailTicketsComponent,
-        TicketDetailTicketsStatusComponent
+        TicketDetailTicketsStatusComponent,
+        TicketDetailTotalStatisticsComponent,
 
     ],
     imports: [
@@ -193,7 +199,9 @@ import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
         MatErrorModule,
         CompanyUsersDropDownModule,
         DecimalNumberModule,
-        ToFixedModule
+        ToFixedModule,
+        TicketDetailProfileFormUpdateModule,
+        AngularEditorModule
     ],
 
 

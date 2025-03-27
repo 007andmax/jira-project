@@ -7,19 +7,27 @@ export class ContractsOtherProduct {
     salePrice_str: string;
     taxSum: number = 0;
     taxes: Array<any> = [];
-    constructor(productId, quantity, salePrice, description, taxes = []) {
+    "discountAmount": number;
+    "discountType": string = "PERCENT";
+    discountSum: number;
+    constructor(productId, quantity, salePrice, description, taxes = [], discountAmount = null, discountSum = 0, discountType = "PERCENT") {
         this.productId = productId;
         this.quantity = quantity;
         this.salePrice = salePrice;
         this.salePrice_str = this.salePrice.toFixed(2);
         this.description = description;
         this.taxes = taxes;
+        this.discountAmount = discountAmount;
+        this.discountSum = discountSum;
+        if (discountType) this.discountType = discountType;
     }
     public getDataForCrate() {
         return {
             productId: this.productId,
             quantity: this.quantity,
             salePrice: this.salePrice,
+            discountAmount: this.discountAmount ? this.discountAmount : undefined,
+            discountType: this.discountAmount ? this.discountType : undefined
         }
     }
 }

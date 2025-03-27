@@ -370,8 +370,8 @@
     }
 }
 .ticket-detail-profile-form-update__footer {
-  padding: 10px 16px;
-  background-color: $gray-50;
+  padding: 10px 12px;
+  background-color: $white;
   border-top: 1px solid $gray-200;
 }
 
@@ -393,7 +393,7 @@
 ::ng-deep .cps-block .mat-chip-list-wrapper {
   min-height: 48px;
   border-radius: unset !important;
-  padding-left: 108px;
+  padding-left: 78px !important;
   border-color: $gray-200;
   background-color: $white;
   border-left: unset !important;
@@ -408,8 +408,8 @@
 }
 
 ::ng-deep .cps-block .ticket-edit-user-tags .assigne-user-avatar {
-  height: 20px;
-  width: 20px;
+  height: 16px;
+  width: 16px;
 }
 ::ng-deep .cps-block__header div.ticket-edit-user-tags .selected-tag-user {
   border: 1px solid $gray-200;
@@ -424,6 +424,14 @@
 }
 ::ng-deep .mat-standard-chip .mat-chip-remove.mat-icon {
   width: 14px;
+}
+::ng-deep .mat-chip.mat-standard-chip .mat-chip-remove {
+  &::before {
+    top: 3px;
+    right: -1px;
+    width: 12px;
+    height: 12px;
+  }
 }
 ::ng-deep div.cps-block__visible-user {
   div.autocomplete-user-tags {
@@ -470,9 +478,11 @@
 ::ng-deep div.autocomplete-user-tags .mat-option:hover {
   background-color: $gray-50 !important;
 }
-::ng-deep ticket-detail-profile-form-update .dropdown-menu {
-  padding: 8px;
-  max-height: 174px;
+::ng-deep ticket-detail-profile-form-update {
+  .dropdown-menu {
+    padding: 8px;
+    max-height: 174px;
+  }
 }
 ::ng-deep ticket-detail-profile-form-update .cps-block__visible-user .dropdown-menu {
   max-height: 212px;
@@ -498,9 +508,9 @@
   color: $gray-500;
 }
 ::ng-deep div.autocomplete-user-tags .mat-option .assigne-user-avatar {
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
 }
 ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
   padding-bottom: 0;
@@ -547,4 +557,9 @@
 }
 .ticket-edit-aside__attach-button {
   overflow: hidden;
+  width: 32px;
+  height: 32px;
+}
+.qt-button {
+  padding: 10px 12px;
 }

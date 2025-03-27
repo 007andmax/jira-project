@@ -241,7 +241,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
   }
   addBlockTimeService(data) {
     this.validate.resetBlockTimeServices();
-    this.contractsUserDevice.blockTimeServices.push(new ServiceAgreementBlockTimeServices(data.getDataFromBillableService(), true));
+    this.contractsUserDevice.blockTimeServices.push(new ServiceAgreementBlockTimeServices(data.getDataFromBillableService(this.toggleMaximumAmountHours), true));
     this.onCheckDuplicatedBlockTimeServices();
   }
   addServiceContractService(data) {
