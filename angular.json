@@ -41,7 +41,14 @@
               "./node_modules/jquery/dist/jquery.min.js"
             ],
             "allowedCommonJsDependencies": [
-              "lodash"
+              "sockjs-client",
+              "file-saver",
+              "crypto-js",
+              "d3",
+              "froala-editor",
+              "nvd3",
+              "util",
+              "ng2-nvd3"
             ]
           },
           "configurations": {
@@ -60,6 +67,7 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
+              "optimization": true,
               "budgets": [
                 {
                   "type": "initial",
