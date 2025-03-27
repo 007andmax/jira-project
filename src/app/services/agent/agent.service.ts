@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { EventEmitter, Injectable } from "@angular/core";
 import { map, tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
-import * as CryptoJS from "crypto-js";
+import CryptoJS from 'crypto-js';
 import { ToastrService } from "ngx-toastr";
 import { AppStateService } from "src/app/states/app/app-state.service";
 
