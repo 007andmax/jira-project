@@ -101,4 +101,14 @@ describe('TicketDetailProfileFormUpdateComponent unit test', () => {
     com.onToggleAddUpdateUser();
     expect(com.showAddUpdateUser).toEqual(true)
   });
+  it('check "formatBytes"', () => {
+    const fixture = TestBed.createComponent(TicketDetailProfileFormUpdateComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.formatBytes(1024)).toEqual("1 KB");
+  });
+  it('check "isShowAddUpdate"', () => {
+    const fixture = TestBed.createComponent(TicketDetailProfileFormUpdateComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.isShowAddUpdate()).toEqual(true);
+  });
 });
