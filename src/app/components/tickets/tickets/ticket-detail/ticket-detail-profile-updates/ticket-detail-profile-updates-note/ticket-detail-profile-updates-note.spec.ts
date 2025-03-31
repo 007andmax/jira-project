@@ -31,7 +31,8 @@ describe('TicketDetailProfileUpdatesNoteComponent unit test', () => {
         CommonModule,
         NgbModule,
         DynamicTooltipModule,
-        AngularEditorModule
+        AngularEditorModule,
+        NoopAnimationsModule
       ],
       declarations: [TicketDetailProfileUpdatesNoteComponent,
         TicketDetailProfileUpdatesHeaderInfoComponent,

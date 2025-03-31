@@ -21,7 +21,8 @@ describe('TicketDetailProfileFormUpdateVisibleUsersComponent unit test', () => {
           timeOut: 5000,
           onActivateTick: true
         }),
-        NgbModule
+        NgbModule,
+        NoopAnimationsModule
       ],
       declarations: [TicketDetailProfileFormUpdateVisibleUsersComponent
       ],

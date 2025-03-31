@@ -4,6 +4,7 @@ import { ContractsService } from './contracts.service';
 import { ToastrModule } from 'ngx-toastr';
 import { ContractItem } from 'src/app/components/billing/contracts/class/contract-item';
 import { ServiceAgreement } from 'src/app/components/billing/contracts/class/service-agreement';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 // Describe the test suite
 describe('ContractsService', () => {
@@ -18,7 +19,8 @@ describe('ContractsService', () => {
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        })
+        }),
+        NoopAnimationsModule
       ],
       providers: [ContractsService]
     });

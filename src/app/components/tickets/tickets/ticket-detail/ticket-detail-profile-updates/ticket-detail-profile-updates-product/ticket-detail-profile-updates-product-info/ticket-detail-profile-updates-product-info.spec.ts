@@ -32,7 +32,8 @@ describe('TicketDetailProfileUpdatesProductInfoComponent unit test', () => {
         DynamicTooltipModule,
         TechUsersModule,
         NgbModule,
-        DatePickerModule
+        DatePickerModule,
+        NoopAnimationsModule
       ],
       declarations: [TicketDetailProfileUpdatesProductInfoComponent
       ],

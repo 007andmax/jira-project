@@ -4,6 +4,7 @@ import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.mo
 import { FormsModule } from '@angular/forms';
 import { ContractsAsideBlockTimeBillingCustomerServiceComponent } from './contracts-aside-block-time-billing-customer-service.component';
 import { ContractsBlockTimeService } from '../../class/contracts-block-time-service';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -15,7 +16,8 @@ describe('ContractsAsideBlockTimeBillingCustomerServiceComponent unit test', () 
     TestBed.configureTestingModule({
       imports: [CommonModule,
         FormsModule,
-        MatErrorModule],
+        MatErrorModule,
+        NoopAnimationsModule],
       declarations: [ContractsAsideBlockTimeBillingCustomerServiceComponent
       ],
     }).compileComponents();

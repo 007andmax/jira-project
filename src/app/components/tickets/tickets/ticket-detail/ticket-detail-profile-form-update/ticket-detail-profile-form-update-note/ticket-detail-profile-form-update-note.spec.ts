@@ -26,7 +26,8 @@ describe('TicketDetailProfileFormUpdateNoteComponent unit test', () => {
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        })
+        }),
+        NoopAnimationsModule
       ],
       declarations: [TicketDetailProfileFormUpdateNoteComponent
       ],

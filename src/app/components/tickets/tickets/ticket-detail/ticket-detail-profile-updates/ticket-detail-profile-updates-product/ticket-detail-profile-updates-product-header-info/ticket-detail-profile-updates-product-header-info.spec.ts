@@ -25,7 +25,8 @@ describe('TicketDetailProfileUpdatesProductHeaderInfoComponent unit test', () =>
           onActivateTick: true
         }),
         CommonModule,
-        NgbModule
+        NgbModule,
+        NoopAnimationsModule
       ],
       declarations: [TicketDetailProfileUpdatesProductHeaderInfoComponent
       ],

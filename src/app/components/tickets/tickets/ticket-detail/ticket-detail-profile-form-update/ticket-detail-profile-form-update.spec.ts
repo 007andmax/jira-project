@@ -68,7 +68,8 @@ describe('TicketDetailProfileFormUpdateComponent unit test', () => {
         DatePickerModule,
         DynamicTooltipModule,
         TicketDetailProfileFormUpdateHeaderModule,
-        TicketDetailProfileFormUpdateNoteModule
+        TicketDetailProfileFormUpdateNoteModule,
+        NoopAnimationsModule
       ],
       declarations: [TicketDetailProfileFormUpdateComponent,
         TicketDetailProfileFormUpdateProductsComponent,

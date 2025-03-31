@@ -5,6 +5,7 @@ import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.mo
 import { FormsModule } from '@angular/forms';
 import { ContractsAsideBlockTimeBillingAddSubscriptionServicesComponent } from './contracts-aside-block-time-billing-add-subscription-services.component';
 import { SubscriptionServices } from 'src/app/components/billing/subscription-services/class/subscription-services';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -17,7 +18,8 @@ describe('ContractsAsideBlockTimeBillingAddSubscriptionServicesComponent unit te
       imports: [CommonModule,
         FormsModule,
         NgbModule,
-        MatErrorModule],
+        MatErrorModule,
+        NoopAnimationsModule],
       declarations: [ContractsAsideBlockTimeBillingAddSubscriptionServicesComponent
       ],
     }).compileComponents();

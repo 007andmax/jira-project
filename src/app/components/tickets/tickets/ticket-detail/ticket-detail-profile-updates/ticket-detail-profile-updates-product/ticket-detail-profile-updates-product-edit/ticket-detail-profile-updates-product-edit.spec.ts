@@ -38,7 +38,8 @@ describe('TicketDetailProfileUpdatesProductEditComponent unit test', () => {
         MatChipListModule,
         MatErrorModule,
         NumberModule,
-        ToFixedModule
+        ToFixedModule,
+        NoopAnimationsModule
       ],
       declarations: [TicketDetailProfileUpdatesProductEditComponent
       ],

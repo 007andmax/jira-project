@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { SubscriptionServices } from '../class/subscription-services';
 import { SubscriptionServicesItemComponent } from './subscription-services-item.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 describe('SubscriptionServicesItemComponent unit test', () => {
@@ -42,7 +43,8 @@ describe('SubscriptionServicesItemComponent unit test', () => {
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        })],
+        }),
+        NoopAnimationsModule],
       declarations: [SubscriptionServicesItemComponent
       ],
       providers: [NgbActiveModal]
