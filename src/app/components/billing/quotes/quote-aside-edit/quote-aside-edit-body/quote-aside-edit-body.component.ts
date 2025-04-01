@@ -188,7 +188,9 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
   getPriceService(service) {
     console.log("service", service);
     let rate = service.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
-    service.sum = (((service.quantity * service.rate) * rate / 100 + (service.quantity * service.rate)) * (1 - (Number(service.discountAmount) || 0) / 100));
+    if (service.discountType == "PERCENT") service.sum = (((service.quantity * service.rate) * rate / 100 + (service.quantity * service.rate)) * (1 - (Number(service.discountAmount) || 0) / 100));
+    if (service.discountType == "FIXED") service.sum = (((service.quantity * service.rate) * rate / 100 + (service.quantity * service.rate)) - Number(service.discountAmount));
+    if (!service.discountType) service.sum = (((service.quantity * service.rate) * rate / 100 + (service.quantity * service.rate)));
     service.taxSum = this.getTaxPrice(service);
     return this.quoteStateService.roundToTwo(((service.quantity * service.rate) * rate / 100 + (service.quantity * service.rate)));
   }
@@ -196,6 +198,7 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     let rate = service.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
     if (service.discountType == "PERCENT") return (service.rate * service.quantity * (1 - (Number(service.discountAmount) || 0) / 100) * rate / 100);
     if (service.discountType == "FIXED") return (((service.rate * service.quantity) - Number(service.discountAmount)) * rate / 100);
+    return (service.rate * service.quantity * rate / 100);
   }
   onEditCustomer() {
     this.companiesService.getCompany(this.quoteCompany.id).subscribe((data: any) => {
