@@ -8,6 +8,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
+import { RouterTestingModule } from '@angular/router/testing';
 import { InvoiceFormTicketEditTaxesModule } from 'src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.module';
 import { NoteTemplate } from 'src/app/components/setting/ticket-settings-page/canned-responses/class/note-template';
 import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
@@ -95,8 +96,12 @@ import { TicketDetailTotalStatisticsComponent } from './ticket-detail-total-stat
 import { Router } from '@angular/router';
 import { TicketsListService } from '../services/tickets-list.service';
 import { TicketsPermissionsService } from '../ticket-edit-aside/services/tickets-permissions.service';
-
-
+declare var jasmine;
+class RouterStub {
+  navigateByUrl(url: string) {
+    return url;
+  }
+}
 describe('TicketDetailComponent unit test', () => {
   let component: TicketDetailComponent;
   let fixture: ComponentFixture<TicketDetailComponent>;
@@ -150,7 +155,8 @@ describe('TicketDetailComponent unit test', () => {
         DecimalNumberModule,
         ToFixedModule,
         TicketDetailProfileFormUpdateModule,
-        AngularEditorModule],
+        AngularEditorModule,
+        RouterTestingModule],
       declarations: [TicketDetailComponent,
         TicketDetailProfileUpdatesComponent,
         TicketDetailProfileUpdatesNoteComponent,
@@ -208,7 +214,7 @@ describe('TicketDetailComponent unit test', () => {
         TicketDetailTicketsStatusComponent,
         TicketDetailTotalStatisticsComponent,
       ],
-      providers: [TicketsListService, TicketsPermissionsService]
+      providers: [TicketsListService, TicketsPermissionsService, { provide: Router, useClass: RouterStub }]
     }).compileComponents();
 
   });
