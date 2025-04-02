@@ -93,15 +93,15 @@ import { TicketDetailTicketsDetailsComponent } from './ticket-detail-tickets/tic
 import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets/ticket-detail-tickets-status/ticket-detail-tickets-status.component';
 import { TicketDetailTicketsComponent } from './ticket-detail-tickets/ticket-detail-tickets.component';
 import { TicketDetailTotalStatisticsComponent } from './ticket-detail-total-statistics/ticket-detail-total-statistics.component';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { TicketsListService } from '../services/tickets-list.service';
 import { TicketsPermissionsService } from '../ticket-edit-aside/services/tickets-permissions.service';
+import { of } from 'rxjs';
 declare var jasmine;
-class RouterStub {
-  navigateByUrl(url: string) {
-    return url;
-  }
-}
+const mockRouter = {
+  navigate: jasmine.createSpy('navigate'),
+  events: of(),
+};
 describe('TicketDetailComponent unit test', () => {
   let component: TicketDetailComponent;
   let fixture: ComponentFixture<TicketDetailComponent>;
@@ -158,63 +158,19 @@ describe('TicketDetailComponent unit test', () => {
         AngularEditorModule,
         RouterTestingModule],
       declarations: [TicketDetailComponent,
-        TicketDetailProfileUpdatesComponent,
-        TicketDetailProfileUpdatesNoteComponent,
-        TicketDetailProfileUpdatesNoteItemComponent,
-        TicketDetailProfileUpdatesNoteInfoComponent,
-        TicketDetailProfileUpdatesNoteEditComponent,
-        TicketDetailProfileUpdatesHeaderInfoComponent,
-        TicketDetailProfileUpdatesProductComponent,
-        TicketDetailProfileUpdatesProductItemComponent,
-        TicketDetailProfileUpdatesProductInfoComponent,
-        TicketDetailProfileUpdatesProductEditComponent,
-        TicketDetailProfileUpdatesProductHeaderInfoComponent,
-        TicketDetailProfileUpdatesServiceComponent,
-        TicketDetailProfileUpdatesServiceItemComponent,
-        TicketDetailProfileUpdatesServiceInfoComponent,
-        TicketDetailProfileUpdatesServiceHeaderInfoComponent,
-        TicketDetailTasksComponent,
         TicketDetailHeaderComponent,
-        // TicketDetailProfileFormUpdateComponent,
-        //  TicketDetailProfileFormUpdateVisibleUsersComponent,
-        //  TicketDetailProfileFormUpdateNoteComponent,
-        //   TicketDetailProfileFormUpdateServicesComponent,
-        //  TicketDetailProfileFormUpdateHeaderComponent,
-        //  TicketDetailProfileFormUpdateProductsComponent,
-        TicketDetailClaimInfoComponent,
         TicketDetailInfoStatusComponent,
+        TicketDetailTasksComponent,
+        TicketDetailMessageComponent,
+        TicketDetailProfileUpdatesComponent,
+        TicketDetailProfileEditUpdatesComponent,
+        TicketDetailClaimInfoComponent,
+        TicketDetailTotalStatisticsComponent,
         TicketDetailChangeStatusComponent,
         TicketDetailChangePriorityComponent,
-        TicketDetailChangeCompanyComponent,
-        TicketDetailAddAssignedUserComponent,
-        TicketDetailEditTagsComponent,
-        TicketDetailAttachmentsComponent,
-        TicketDetailLinkedAgentsComponent,
-        TicketDetailProfileEditUpdatesComponent,
-        TicketDetailProfileEditUpdatesHeaderComponent,
-        TicketDetailProfileEditUpdatesServicesComponent,
-        TicketDetailProfileEditUpdatesProductsComponent,
-        TicketDetailMessageComponent,
-        TicketDetailContactComponent,
-        TicketDetailPasswordsComponent,
-        TicketDetailDevicesComponent,
-        TicketDetailDocumentsComponent,
-        TicketDetailContactDetailsComponent,
-        TicketDetailContactDetailsHistoryComponent,
-        TicketDetailDocumentsPreviewComponent,
-        TicketDetailDocumentsDetailsComponent,
-        TicketDetailPasswordsItemComponent,
-        TicketDetailPasswordsDetailsComponent,
-        TicketDetailDevicesItemComponent,
-        TicketDetailDevicesDetailsComponent,
-        //   TicketDetailProfileFormUpdateSupportComponent,
-        //  AddAssignedUserNoteComponent,
-        TicketDetailTicketsDetailsComponent,
-        TicketDetailTicketsComponent,
-        TicketDetailTicketsStatusComponent,
-        TicketDetailTotalStatisticsComponent,
+        TicketDetailChangeCompanyComponent
       ],
-      providers: [TicketsListService, TicketsPermissionsService, { provide: Router, useClass: RouterStub }]
+      providers: [TicketsListService, TicketsPermissionsService, { provide: Router, useValue: mockRouter }]
     }).compileComponents();
 
   });
