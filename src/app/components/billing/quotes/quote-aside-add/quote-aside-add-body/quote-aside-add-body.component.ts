@@ -153,6 +153,14 @@ export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
   getSubTotal() {
     return this.getSubTotalServices() + this.getSubTotalProducts() + this.getTotalTaxes();
   }
+  public calculateServiceDiscount() {
+    let sum = 0;
+    this.quote.services.forEach(item => {
+      if (item.discountType == "PERCENT") sum += (item.quantity * item.item.rate * (Number(item.discountAmount) || 0) / 100);
+      if (item.discountType == "FIXED") sum += (Number(item.discountAmount) || 0);
+    })
+    return sum;
+  }
   getTotalTaxes() {
     let totalTaxes = 0;
     totalTaxes += this.quote.services.reduce((a, b) => a + b.taxSum, 0);

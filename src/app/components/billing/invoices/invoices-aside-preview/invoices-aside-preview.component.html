@@ -435,18 +435,26 @@
                             <div class="qt-text-left">Sub Total</div>
                             <div
                                 class="invoice-info-value qt-text-right"
-                                [textContent]="(invoiceProfile.totalSum - invoiceProfile.taxSum ) |
+                                [textContent]="getSubTotal() |
           currency"
                             ></div>
                         </div>
                         <div
                             class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12"
-                            *ngIf="invoiceProfile.invoiceDiscount"
+                            *ngIf="invoiceProfile.invoiceDiscount || invoiceProfile.discountSum"
                         >
                             <div class="qt-text-left">Discount</div>
                             <div
                                 class="invoice-info-value qt-text-right"
-                                [textContent]="(-invoiceProfile.invoiceDiscount.amount) |
+                                [textContent]="getTotalDiscount() |
+          currency"
+                            ></div>
+                        </div>
+                        <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12">
+                            <div class="qt-text-left">Subtotal with discount</div>
+                            <div
+                                class="invoice-info-value qt-text-right"
+                                [textContent]="getSubTotalWithDiscount() |
           currency"
                             ></div>
                         </div>
