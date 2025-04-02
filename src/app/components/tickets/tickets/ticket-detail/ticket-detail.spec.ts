@@ -97,11 +97,16 @@ import { Router, RouterModule } from '@angular/router';
 import { TicketsListService } from '../services/tickets-list.service';
 import { TicketsPermissionsService } from '../ticket-edit-aside/services/tickets-permissions.service';
 import { of } from 'rxjs';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 declare var jasmine;
 const mockRouter = {
   navigate: jasmine.createSpy('navigate'),
+  routerState: {
+    root: {}
+  },
   events: of(),
 };
+
 describe('TicketDetailComponent unit test', () => {
   let component: TicketDetailComponent;
   let fixture: ComponentFixture<TicketDetailComponent>;
@@ -168,8 +173,15 @@ describe('TicketDetailComponent unit test', () => {
         TicketDetailTotalStatisticsComponent,
         TicketDetailChangeStatusComponent,
         TicketDetailChangePriorityComponent,
-        TicketDetailChangeCompanyComponent
+        TicketDetailChangeCompanyComponent,
+        TicketDetailAddAssignedUserComponent,
+        TicketDetailLinkedAgentsComponent,
+        TicketDetailEditTagsComponent,
+        TicketDetailAttachmentsComponent,
+        TicketDetailContactDetailsComponent
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      ,
       providers: [TicketsListService, TicketsPermissionsService, { provide: Router, useValue: mockRouter }]
     }).compileComponents();
 
@@ -179,5 +191,46 @@ describe('TicketDetailComponent unit test', () => {
     const fixture = TestBed.createComponent(TicketDetailComponent);
     const com = fixture.debugElement.componentInstance;
     expect(com.isDisabledTicketCreator()).toEqual(false);
+  });
+  it('check "onViewDocument"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onViewDocument("test");
+    expect(com.typeRigthDetailAside).toEqual("DOCUMENT_PREVIEW");
+  });
+  it('check "onShowMore"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onShowMore("test");
+    expect(com.toggleRigthPanel).toEqual(false);
+  });
+  it('check "openDetailRigthPanel"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.openDetailRigthPanel("test");
+    expect(com.toggleRigthPanel).toEqual(false);
+  });
+  it('check "onCloseDetails"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onCloseDetails("test");
+    expect(com.toggleRigthPanel).toEqual(true);
+  });
+  it('check "onToggleRigthPanel"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onToggleRigthPanel("test");
+    expect(com.toggleRigthPanelContainer).toEqual(false);
+  });
+  it('check "onAddUpdate"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onAddUpdate("test");
+    expect(com.showFormUpdate).toEqual(true);
+  });
+  it('check "getNameCreateUser"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.getNameCreateUser()).toEqual('');
   });
 });
