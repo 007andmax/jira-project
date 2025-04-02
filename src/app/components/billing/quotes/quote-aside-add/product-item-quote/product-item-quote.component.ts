@@ -18,8 +18,7 @@ export class ProductItemQuoteComponent implements OnInit {
     this.product.markup = this.getMarkups();
   }
   ngDoCheck() {
-    let rate = this.product.item.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
-    this.product.sum = (this.product.quantity * this.product.item.sale) * rate / 100 + (this.product.quantity * this.product.item.sale)
+    this.product.sum = (this.product.quantity * this.product.item.sale)
     this.product.taxSum = this.getTaxPrice();
   }
   public getTaxPrice() {
