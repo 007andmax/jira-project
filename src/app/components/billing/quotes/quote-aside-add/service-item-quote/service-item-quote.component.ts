@@ -18,7 +18,6 @@ export class ServiceItemQuoteComponent implements OnInit {
   ngOnInit() {
   }
   getPriceService(service) {
-    console.log("service", service);
     let rate = service.item.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
     if (service.discountType == "PERCENT") service.sum = (((service.quantity * service.item.rate) * rate / 100 + (service.quantity * service.item.rate)) * (1 - (Number(service.discountAmount) || 0) / 100));
     if (service.discountType == "FIXED") service.sum = (((service.quantity * service.item.rate) * rate / 100 + (service.quantity * service.item.rate)) - Number(service.discountAmount));
