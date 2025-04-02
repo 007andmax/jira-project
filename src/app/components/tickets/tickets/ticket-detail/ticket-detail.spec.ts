@@ -98,6 +98,7 @@ import { TicketsListService } from '../services/tickets-list.service';
 import { TicketsPermissionsService } from '../ticket-edit-aside/services/tickets-permissions.service';
 import { of } from 'rxjs';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { TicketProfile } from '../class/ticket-profile';
 declare var jasmine;
 const mockRouter = {
   navigate: jasmine.createSpy('navigate'),
@@ -232,5 +233,190 @@ describe('TicketDetailComponent unit test', () => {
     const fixture = TestBed.createComponent(TicketDetailComponent);
     const com = fixture.debugElement.componentInstance;
     expect(com.getNameCreateUser()).toEqual('');
+  });
+  it('check "getAgentName"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.getAgentName()).toEqual('');
+  });
+  it('check "getCompanyName"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.getCompanyName()).toEqual('');
+  });
+  it('check "updateListAssignedUser"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.updateListAssignedUser();
+    expect(com.listAssignedUser.length).toEqual(0);
+  });
+  it('check "updateLisUpdateUser"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.updateLisUpdateUser();
+    expect(com.lisUpdateUser.length).toEqual(0);
+  });
+  it('check "checkAssignedUser"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.checkAssignedUser()).toEqual(true);
+  });
+  it('check "checkArchivedUser"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.checkArchivedUser()).toEqual(false);
+  });
+  it('check "checkExistServicesProducts"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.checkExistServicesProducts()).toEqual(false);
+  });
+  it('check "getCompany"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.getCompany()).toEqual(undefined);
+  });
+  it('check "getClassType"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.getClassType()).toEqual('priority-icon ticket-edit-aside__ticket-subject-flag ');
+  });
+  it('check "getClassType"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.getClassType()).toEqual('priority-icon ticket-edit-aside__ticket-subject-flag ');
+  });
+  it('check "onFetchUpdates"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onFetchUpdates([]);
+    expect(com.ticketProfile.updates.length).toEqual(0);
+  });
+  it('check "ticketProfile"', () => {
+    const fixture = TestBed.createComponent(TicketDetailComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.ticketProfile = new TicketProfile({
+      "id": "09b8b4c1-28fc-4b00-8e34-3fb3fde1c099",
+      "assignedUser": {
+        "id": "3fb0e0c1-8648-4086-ac8a-b359812e39f8",
+        "firstName": "Roman",
+        "lastName": "Testovich",
+        "avatar": {
+          "origin": {
+            "id": "21ab82d5-2a24-4c21-a668-47f40f356c1f",
+            "name": "585e4bc4cb11b227491c3395.png",
+            "size": 137518,
+            "contentType": "image/png"
+          },
+          "updatedAt": 1707300148597
+        },
+        "accountType": "TECH",
+        "email": "iwanikroman@gmail.com",
+        "firstLetterOfName": null,
+        "customerCompanyInfo": []
+      },
+      "multiAssignedUsers": [],
+      "assignPerformer": {
+        "id": "3fb0e0c1-8648-4086-ac8a-b359812e39f8",
+        "firstName": "Roman",
+        "lastName": "Testovich",
+        "avatar": {
+          "origin": {
+            "id": "21ab82d5-2a24-4c21-a668-47f40f356c1f",
+            "name": "585e4bc4cb11b227491c3395.png",
+            "size": 137518,
+            "contentType": "image/png"
+          },
+          "updatedAt": 1707300148597
+        },
+        "accountType": "TECH",
+        "email": "iwanikroman@gmail.com",
+        "firstLetterOfName": null,
+        "customerCompanyInfo": []
+      },
+      "createdUser": {
+        "id": "8056bc06-e00a-4574-bf1d-40caaef4444a",
+        "firstName": "ergergeger",
+        "lastName": "erger",
+        "avatar": null,
+        "accountType": "CLIENT",
+        "email": "gerger8349ghu@example.com",
+        "firstLetterOfName": null,
+        "customerCompanyInfo": []
+      },
+      "number": "15367",
+      "subject": "Sale quote #0642 ",
+      "note": null,
+      "previewNote": null,
+      "status": "COMPLETED",
+      "deviceId": null,
+      "company": {
+        "id": "e3943406-4072-4fa6-af60-e821ab60a27d",
+        "name": "000081 v12 & 25th Dental",
+        "isCompanyDeleted": false
+      },
+      "priorityLevel": {
+        "id": "6701c5c2-23bc-45f9-9fbc-1edb623563aa",
+        "color": 2,
+        "name": "MEDIUM1",
+        "isDefault": true,
+        "isDisplay": false
+      },
+      "createdAt": 1743597555140,
+      "closedAt": 1743597556366,
+      "assignedAt": 1743597556183,
+      "reassignedAt": null,
+      "deletedAt": null,
+      "markedAsSpamAt": null,
+      "reportedAsSpamAt": null,
+      "ticketSource": "FROM_SALE_QUOTE",
+      "sourceName": null,
+      "hashSum": null,
+      "agent": null,
+      "shares": [],
+      "tags": [],
+      "attachments": [],
+      "trash": false,
+      "spamMarker": null,
+      "spamReporter": null,
+      "deletePerformer": null,
+      "closedBy": {
+        "id": "3fb0e0c1-8648-4086-ac8a-b359812e39f8",
+        "firstName": "Roman",
+        "lastName": "Testovich",
+        "avatar": {
+          "origin": {
+            "id": "21ab82d5-2a24-4c21-a668-47f40f356c1f",
+            "name": "585e4bc4cb11b227491c3395.png",
+            "size": 137518,
+            "contentType": "image/png"
+          },
+          "updatedAt": 1707300148597
+        },
+        "accountType": "TECH",
+        "email": "iwanikroman@gmail.com",
+        "firstLetterOfName": null,
+        "customerCompanyInfo": []
+      },
+      "unread": false,
+      "isOrder": false,
+      "saleQuote": false,
+      "hasAttachments": false,
+      "hasInvoice": true,
+      "hasNewUpdates": false,
+      "isBillable": false,
+      "sharedToCurrentUserAt": null,
+      "isSpam": null,
+      "assignedUserId": "3fb0e0c1-8648-4086-ac8a-b359812e39f8",
+      "companyId": "e3943406-4072-4fa6-af60-e821ab60a27d",
+      "createdUserId": "8056bc06-e00a-4574-bf1d-40caaef4444a",
+      "customStatus": null,
+      "totalTimeWorked": 1.0,
+      "totalProductsPrice": 100.00,
+      "companyServiceType": "BLOCK_TIME gg",
+      "updatesCount": 4
+    });
+    com.ticketProfile.update({ "id": "b75f80b1-1dd3-4f3b-8006-8c19cf043211", "assignedUser": { "id": "3fb0e0c1-8648-4086-ac8a-b359812e39f8", "firstName": "Roman", "lastName": "Testovich", "avatar": { "origin": { "id": "21ab82d5-2a24-4c21-a668-47f40f356c1f", "name": "585e4bc4cb11b227491c3395.png", "size": 137518, "contentType": "image/png" }, "updatedAt": 1707300148597 }, "accountType": "TECH", "email": "iwanikroman@gmail.com", "firstLetterOfName": null, "customerCompanyInfo": [] }, "multiAssignedUsers": [], "assignPerformer": { "id": "3fb0e0c1-8648-4086-ac8a-b359812e39f8", "firstName": "Roman", "lastName": "Testovich", "avatar": { "origin": { "id": "21ab82d5-2a24-4c21-a668-47f40f356c1f", "name": "585e4bc4cb11b227491c3395.png", "size": 137518, "contentType": "image/png" }, "updatedAt": 1707300148597 }, "accountType": "TECH", "email": "iwanikroman@gmail.com", "firstLetterOfName": null, "customerCompanyInfo": [] }, "createdUser": { "id": "56664563-66b1-4560-91a8-23aadac306b7", "firstName": "ergegregrege34", "lastName": "", "avatar": null, "accountType": "CLIENT", "email": "waden23o7532@hapincy.com", "firstLetterOfName": null, "customerCompanyInfo": [] }, "number": "15344", "subject": "wefwefwef", "note": "", "previewNote": "", "status": "IN_PROGRESS", "deviceId": null, "priorityLevel": { "id": "6701c5c2-23bc-45f9-9fbc-1edb623563aa", "color": 2, "name": "MEDIUM1", "isDefault": true, "isDisplay": false }, "createdAt": 1742811244519, "closedAt": null, "assignedAt": 1742811275994, "reassignedAt": null, "deletedAt": null, "markedAsSpamAt": null, "reportedAsSpamAt": null, "ticketSource": "FROM_WEB", "sourceName": "website", "hashSum": null, "agent": null, "shares": [{ "user": { "id": "56664563-66b1-4560-91a8-23aadac306b7", "firstName": "ergegregrege34", "lastName": "", "avatar": null, "accountType": "CLIENT", "email": "waden23o7532@hapincy.com", "firstLetterOfName": null, "customerCompanyInfo": [{ "companyId": "a556838c-75ab-45d2-825b-6c19445d8d3a", "isPrimaryContact": true }] } }, { "user": { "id": "56664563-66b1-4560-91a8-23aadac306b7", "firstName": "ergegregrege34", "lastName": "", "avatar": null, "accountType": "CLIENT", "email": "waden23o7532@hapincy.com", "firstLetterOfName": null, "customerCompanyInfo": [{ "companyId": "a556838c-75ab-45d2-825b-6c19445d8d3a", "isPrimaryContact": true }] } }], "tags": [], "attachments": [{ "file": { "id": "f934aeb5-bcaa-439e-a3ec-fed6fb9f9d13", "name": "ÑÑÐ°Ð¼Ð¿-ÐºÑÑÐ³Ð»Ð¾Ð³Ð¾Ð´Ð¸ÑÐ½Ð¾Ð³Ð¾-Ð³ÑÐ°Ð½Ð¶Ð°-ÑÐ¿Ð¾Ð½ÑÐ¾ÑÑÑÐ²Ð°-ÑÐ¿Ð¾Ð½ÑÐ¾ÑÑÑÐ²Ð¾-Ð»ÐµÐ½ÑÑ-163293358.jpg", "size": 62970, "contentType": "image/jpg" } }], "trash": false, "spamMarker": null, "spamReporter": null, "deletePerformer": null, "closedBy": null, "unread": false, "isOrder": false, "saleQuote": false, "hasAttachments": false, "hasInvoice": false, "hasNewUpdates": false, "isBillable": false, "sharedToCurrentUserAt": null, "isSpam": null, "assignedUserId": "3fb0e0c1-8648-4086-ac8a-b359812e39f8", "companyId": "a556838c-75ab-45d2-825b-6c19445d8d3a", "createdUserId": "56664563-66b1-4560-91a8-23aadac306b7", "customStatus": null, "totalTimeWorked": 0.0, "totalProductsPrice": 0.00, "companyServiceType": null, "updatesCount": 1 })
+    expect(com.ticketProfile.attachments.length).toEqual(1);
   });
 });
