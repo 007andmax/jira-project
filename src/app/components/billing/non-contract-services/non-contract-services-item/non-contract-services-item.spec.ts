@@ -36,8 +36,7 @@ describe('NonContractServicesItemComponent unit test', () => {
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
-        }),
-        NoopAnimationsModule],
+        }), NoopAnimationsModule],
       declarations: [NonContractServicesItemComponent
       ],
     }).compileComponents();

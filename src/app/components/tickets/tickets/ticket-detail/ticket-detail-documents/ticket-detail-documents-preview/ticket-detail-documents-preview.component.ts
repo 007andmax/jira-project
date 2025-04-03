@@ -10,7 +10,8 @@ import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-s
 @Component({
   selector: 'ticket-detail-documents-preview',
   templateUrl: './ticket-detail-documents-preview.component.html',
-  styleUrls: ['./ticket-detail-documents-preview.component.scss']
+  styleUrls: ['./ticket-detail-documents-preview.component.scss'],
+  providers: [Router]
 })
 export class TicketDetailDocumentsPreviewComponent implements OnInit, OnDestroy {
   @Input() document: Document;
