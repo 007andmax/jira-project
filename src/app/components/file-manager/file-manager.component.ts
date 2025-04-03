@@ -35,7 +35,7 @@ export class FileManagerComponent implements OnInit, OnDestroy {
   files: Array<FileManagerFile> = [];
   groupedByCreateAt: { [key: string]: FileManagerFile[] } = {};
   sub: Subscription = new Subscription();
-  @ViewChild('fileInfoContainer') fileInfoContainer: FileManagerFileInfoComponent;
+  @ViewChild('fileInfoContainer', { static: true }) fileInfoContainer: FileManagerFileInfoComponent;
   constructor(public fileManagementService: FileManagementService,
     public confirmStateService: ConfirmStateService,
     private modalService: NgbModal,

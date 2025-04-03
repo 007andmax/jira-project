@@ -43,8 +43,8 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   @ViewChild('deviceDP', { static: true }) deviceDP: DropDownComponent;
   @ViewChild('uplaodFile', { static: true }) uplaodFile: UploadAreaComponent;
   @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
-  @ViewChild('techUsersDp') techUsersDp: AssignedTicketUserComponent;
-  @ViewChild('clientUserDP') clientUserDP: UsersDropDownComponent;
+  @ViewChild('techUsersDp', { static: true }) techUsersDp: AssignedTicketUserComponent;
+  @ViewChild('clientUserDP', { static: true }) clientUserDP: UsersDropDownComponent;
   actualNumber: string = '';
   opened = false;
   isAdd = false;

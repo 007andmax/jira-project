@@ -62,10 +62,9 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
   @Input() tab: string = "NOTE";
   currentUser: CurrentUser;
   sub: Subscription = new Subscription();
-
-  @ViewChild('selectNote') selectNote: TicketDetailProfileFormUpdateNoteComponent;
-  @ViewChild('selectServices') selectServices: TicketDetailProfileFormUpdateServicesComponent;
-  @ViewChild('selectProducts') selectProducts: TicketDetailProfileFormUpdateProductsComponent;
+  @ViewChild('selectNote', { static: false }) selectNote: TicketDetailProfileFormUpdateNoteComponent;
+  @ViewChild('selectServices', { static: false }) selectServices: TicketDetailProfileFormUpdateServicesComponent;
+  @ViewChild('selectProducts', { static: false }) selectProducts: TicketDetailProfileFormUpdateProductsComponent;
   @Output() onCloseForm = new EventEmitter();
   constructor(public ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef,

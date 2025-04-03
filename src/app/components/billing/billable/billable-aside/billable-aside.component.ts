@@ -25,10 +25,10 @@ import { AppService } from 'src/app/states/app/app.service';
 })
 export class BillableAsideComponent implements OnInit, OnDestroy {
   @Output() onSetSelectedTickets = new EventEmitter();
-  @ViewChild('saveAndSendBtn') saveAndSendBtn: DisabledBtnDirective;
-  @ViewChild('saveAndPrintBtn') saveAndPrintBtn: DisabledBtnDirective;
-  @ViewChild('saveAndDownloadBtn') saveAndDownloadBtn: DisabledBtnDirective;
-  @ViewChild('formInvoice') formInvoice: InvoiceFormComponent;
+  @ViewChild('saveAndSendBtn', { static: false }) saveAndSendBtn: DisabledBtnDirective;
+  @ViewChild('saveAndPrintBtn', { static: false }) saveAndPrintBtn: DisabledBtnDirective;
+  @ViewChild('saveAndDownloadBtn', { static: false }) saveAndDownloadBtn: DisabledBtnDirective;
+  @ViewChild('formInvoice', { static: false }) formInvoice: InvoiceFormComponent;
   opened: boolean = false;
   invoiceTaxNumber: InvoiceTaxNumber;
   invoiceNotes: Array<InvoiceNote> = [];

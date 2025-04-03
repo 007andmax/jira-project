@@ -18,9 +18,9 @@ import { Subscription } from 'rxjs';
   providers: [TicketsPermissionsService]
 })
 export class TicketDetailMessageComponent implements OnInit, OnDestroy {
-  @ViewChild('claimTicketBtn') claimTicketBtn: DisabledBtnDirective;
-  @ViewChild('markAsOpenBillableBtn') markAsOpenBillableBtn: DisabledBtnDirective;
-  @ViewChild('markAsOpenBtn') markAsOpenBtn: DisabledBtnDirective;
+  @ViewChild('claimTicketBtn', { static: false }) claimTicketBtn: DisabledBtnDirective;
+  @ViewChild('markAsOpenBillableBtn', { static: false }) markAsOpenBillableBtn: DisabledBtnDirective;
+  @ViewChild('markAsOpenBtn', { static: false }) markAsOpenBtn: DisabledBtnDirective;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   @Output() onClaimTicket = new EventEmitter();
   @Output() onOpenTicket = new EventEmitter();

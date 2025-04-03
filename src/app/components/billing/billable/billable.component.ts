@@ -25,7 +25,7 @@ import { fadeInAnimation } from 'src/app/animations';
   providers: [TicketsListService]
 })
 export class BillableComponent implements OnInit, OnDestroy {
-  @ViewChild('saveAndDownloadBtn') saveAndDownloadBtn: DisabledBtnDirective;
+  @ViewChild('saveAndDownloadBtn', { static: false }) saveAndDownloadBtn: DisabledBtnDirective;
   list: Array<BillableProfile> = [];
   reqList: Array<BillableProfile> = [];
   filter: Array<CompanyFilterTop> = [new CompanyFilterTop('name', 'ASC'),

@@ -21,7 +21,7 @@ import { Subscription } from "rxjs";
   styleUrls: ["./report-device-warranty.component.scss"],
 })
 export class ReportDeviceWarrantyComponent implements OnInit, OnDestroy {
-  @ViewChild('dropdownDevice') dropdownDevice: DropDownComponent;
+  @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;
   clientName: string;
   companies = [];
   deviceWarrantyList: any = [];

@@ -58,7 +58,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public zoom: number;
   selectedJobTitle: CrmCompanyJobTitle;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
-  @ViewChild('search')
+  @ViewChild('search', { static: false })
   public searchElementRef: ElementRef;
   sub: Subscription = new Subscription();
   phoneTypes = [new TitleListType("Mobile", "MOBILE"),
