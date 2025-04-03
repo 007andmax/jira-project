@@ -602,7 +602,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   ngOnDestroy(): void {
-    document.body.querySelector(".main-container").classList.remove("main-container__ticket-detail-page");
+    if (document.body.querySelector(".main-container")) document.body.querySelector(".main-container").classList.remove("main-container__ticket-detail-page");
     this.ticketProfile = new TicketProfile();
     this.modeSubject = 'view';
     this.modeDescription = 'view';
