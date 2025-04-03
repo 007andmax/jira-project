@@ -308,6 +308,14 @@
                     <div>Sub Total Products</div>
                     <div [textContent]="getSubTotalProducts() | currency"></div>
                 </div>
+                <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12">
+                    <div>Total discount</div>
+                    <div [textContent]="calculateServiceDiscount() | currency"></div>
+                </div>
+                <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12">
+                    <div>Subtotal with discount</div>
+                    <div [textContent]="getSubTotalServices() + getSubTotalProducts() - calculateServiceDiscount() | currency"></div>
+                </div>
                 <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15">
                     <div>Tax</div>
                     <div [textContent]="getTotalTaxes() | currency"></div>
@@ -316,7 +324,7 @@
                     <div class="qt-fs-13 qt-fw-b">Total</div>
                     <div
                         class="qt-fs-16 qt-fw-b"
-                        [textContent]="getSubTotal() | currency"
+                        [textContent]="getSubTotal() - calculateServiceDiscount() | currency"
                     ></div>
                 </div>
             </div>

@@ -128,6 +128,15 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   public trackByIndex(index, item) {
     return index;
   }
+  getSubTotalWithDiscount() {
+    return this.invoiceProfile.productsSum + this.invoiceProfile.servicesSum - (this.invoiceProfile.invoiceDiscount ? this.invoiceProfile.invoiceDiscount.amount : 0) - (this.invoiceProfile.discountSum ? this.invoiceProfile.discountSum : 0);
+  }
+  getSubTotal() {
+    return this.invoiceProfile.productsSum + this.invoiceProfile.servicesSum;
+  }
+  getTotalDiscount() {
+    return (this.invoiceProfile.invoiceDiscount ? this.invoiceProfile.invoiceDiscount.amount : 0) + (this.invoiceProfile.discountSum ? this.invoiceProfile.discountSum : 0);
+  }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }

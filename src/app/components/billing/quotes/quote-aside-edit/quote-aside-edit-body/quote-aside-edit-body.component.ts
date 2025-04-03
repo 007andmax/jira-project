@@ -141,6 +141,14 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
   getSubTotal() {
     return this.getSubTotalServices() + this.getSubTotalProducts() + this.getTotalTaxes();
   }
+  public calculateServiceDiscount() {
+    let sum = 0;
+    this.quote.services.forEach(item => {
+      if (item.discountType == "PERCENT") sum += (item.quantity * item.rate * (Number(item.discountAmount) || 0) / 100);
+      if (item.discountType == "FIXED") sum += (Number(item.discountAmount) || 0);
+    })
+    return sum;
+  }
   getTotalTaxes() {
     let totalTaxes = 0;
     totalTaxes += this.quote.services.reduce((a, b) => a + b.taxSum, 0);
@@ -178,12 +186,15 @@ export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
     this.quote.products.splice(i, 1);
   }
   getPriceService(service) {
-    service.sum = this.quoteStateService.getPrice(service.rate, service.quantity, service.taxes) + this.getTaxPrice(service);
+    service.sum = service.quantity * service.rate;
     service.taxSum = this.getTaxPrice(service);
-    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(service.rate, service.quantity, service.taxes) + this.getTaxPrice(service));
+    return this.quoteStateService.roundToTwo(service.quantity * service.rate);
   }
   public getTaxPrice(service) {
-    return service.taxes.reduce((a, b) => a + ((b.rate / 100) * service.rate * service.quantity), 0);;
+    let rate = service.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+    if (service.discountType == "PERCENT") return (service.rate * service.quantity * (1 - (Number(service.discountAmount) || 0) / 100) * rate / 100);
+    if (service.discountType == "FIXED") return (((service.rate * service.quantity) - Number(service.discountAmount)) * rate / 100);
+    return (service.rate * service.quantity * rate / 100);
   }
   onEditCustomer() {
     this.companiesService.getCompany(this.quoteCompany.id).subscribe((data: any) => {

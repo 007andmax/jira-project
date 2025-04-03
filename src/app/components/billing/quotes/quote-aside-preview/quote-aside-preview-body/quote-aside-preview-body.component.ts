@@ -39,6 +39,14 @@ export class QuoteAsidePreviewBodyComponent implements OnInit {
       return `${item.name} ${item.rate}%`;
     }).join("<br>");
   }
+  public calculateServiceDiscount() {
+    let sum = 0;
+    this.quote.services.forEach(item => {
+      if (item.discountType == "PERCENT") sum += (item.quantity * item.rate * (Number(item.discountAmount) || 0) / 100);
+      if (item.discountType == "FIXED") sum += (Number(item.discountAmount) || 0);
+    })
+    return sum;
+  }
   public trackById(index, item) {
     return item.versionedId.id;
   }

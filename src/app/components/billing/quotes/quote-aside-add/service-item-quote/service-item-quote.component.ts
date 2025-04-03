@@ -18,12 +18,20 @@ export class ServiceItemQuoteComponent implements OnInit {
   ngOnInit() {
   }
   getPriceService(service) {
-    service.sum = this.quoteStateService.getPrice(service.item.rate, service.quantity, service.item.taxes) + this.getTaxPrice(service);
+    let rate = service.item.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+    /* if (service.discountType == "PERCENT") service.sum = (((service.quantity * service.item.rate) * rate / 100 + (service.quantity * service.item.rate)) * (1 - (Number(service.discountAmount) || 0) / 100));
+     if (service.discountType == "FIXED") service.sum = (((service.quantity * service.item.rate) * rate / 100 + (service.quantity * service.item.rate)) - Number(service.discountAmount));
+     if (!service.discountType) service.sum = (((service.quantity * service.item.rate) * rate / 100 + (service.quantity * service.item.rate)));
+    */
+    service.sum = service.quantity * service.item.rate;
     service.taxSum = this.getTaxPrice(service);
-    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(service.item.rate, service.quantity, service.item.taxes) + this.getTaxPrice(service));
+    return this.quoteStateService.roundToTwo((service.quantity * service.item.rate));
   }
   public getTaxPrice(service) {
-    return service.item.taxes.reduce((a, b) => a + ((b.rate / 100) * service.item.rate * service.quantity), 0);;
+    let rate = service.item.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
+    if (service.discountType == "PERCENT") return (service.item.rate * service.quantity * (1 - (Number(service.discountAmount) || 0) / 100) * rate / 100);
+    if (service.discountType == "FIXED") return (((service.item.rate * service.quantity) - Number(service.discountAmount)) * rate / 100);
+    return (service.item.rate * service.quantity * rate / 100);
   }
   getSelectedTaxes(taxes) {
     return taxes.map(item => {

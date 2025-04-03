@@ -40,10 +40,19 @@ export class QuoteEdit extends QuotePreview {
             shipTo: this.shipTo
         }
     }
+    public calculateServiceDiscount() {
+        let sum = 0;
+        this.services.forEach(item => {
+            if (item.discountType == "PERCENT") sum += (item.quantity * item.rate * (Number(item.discountAmount) || 0) / 100);
+            if (item.discountType == "FIXED") sum += (Number(item.discountAmount) || 0);
+        })
+        return sum;
+    }
     public getDataForPreview(company) {
         let totalAmount = 0;
-        totalAmount += this.services.reduce((a, b) => a + b.sum, 0);
-        totalAmount += this.products.reduce((a, b) => a + b.sum, 0);
+        totalAmount += this.services.reduce((a, b) => a + b.sum + b.taxSum, 0);
+        totalAmount += this.products.reduce((a, b) => a + b.sum + b.taxSum, 0);
+        totalAmount -= this.calculateServiceDiscount();
         return {
             company: this.company,
             date: this.date,
