@@ -101,6 +101,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.invoice.setInvoiceDataDto(data.invoiceDataDto);
       this.billableStateService.setRegulatNote(new InvoiceNote({ content: this.invoice.invoiceDataDto.note }));
       this.isUdpateInvoice = false;
+      this.formInvoice.toggleDiscount = false;
       this.formInvoice.onCancelTickets();
       this.cd.detectChanges();
     }, err => {
