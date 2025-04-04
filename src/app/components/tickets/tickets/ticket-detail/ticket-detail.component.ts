@@ -612,7 +612,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.ticketStateService.onTicketClosed();
     this.ticketProfileUpdates.resetShowLoadMoreUpdates();
     this.ticketStateService.sub.unsubscribe();
-    (<any>document.body.querySelector(".nav-header")).style.display = "flex";
+    if (document.body.querySelector(".nav-header")) (<any>document.body.querySelector(".nav-header")).style.display = "flex";
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }

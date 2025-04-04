@@ -48,7 +48,11 @@
               "froala-editor",
               "nvd3",
               "util",
-              "ng2-nvd3"
+              "ng2-nvd3",
+              "moment",
+              "lodash",
+              "jquery",
+              "md5"
             ]
           },
           "configurations": {
@@ -60,18 +64,18 @@
                 }
               ],
               "outputHashing": "all",
-              "sourceMap": false,
+              "sourceMap": true,
               "extractCss": false,
               "namedChunks": false,
-              "aot": true,
+              "aot": false,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "optimization": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "10mb",
+                  "maximumWarning": "16mb",
                   "maximumError": "20mb"
                 }
               ]
