@@ -78,7 +78,6 @@ export class AppComponent implements OnInit {
    * @param {WebsocketService} websocketService service
    */
   constructor(
-    private upgrade: UpgradeModule,
     private userService: UsersService,
     private usersStateService: UsersStateService,
     private websocketService: WebsocketService,
