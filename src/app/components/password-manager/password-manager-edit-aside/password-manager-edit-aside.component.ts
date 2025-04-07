@@ -323,6 +323,7 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     this.gadgetsList = [];
     this.showSecretCode = false;
     this.isEditSecretKey = false;
+    this.editItem = null;
     if (this.intervalContainer) clearInterval(this.intervalContainer);
   }
   public getPermissions(action) {
