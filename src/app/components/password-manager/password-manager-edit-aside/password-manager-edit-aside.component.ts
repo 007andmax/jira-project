@@ -92,6 +92,7 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     this.sub.add(getOnCompanies);
     let onEditForm = this.passwordManagerService.onEditForm.subscribe((res) => {
       if (this.subSecretCode) this.subSecretCode.unsubscribe();
+      if (this.editItem) this.elRef.nativeElement.querySelector('#record-description').value = JSON.parse(JSON.stringify(res)).description;
       this.editItem = new PasswordRecord(JSON.parse(JSON.stringify(res)));
       this.selectedUserAndDevices = [];
       this.usersList = [];
