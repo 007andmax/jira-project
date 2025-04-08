@@ -46,6 +46,11 @@ export class PasswordManagerTableComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(onChangePassword);
+    let onChangeRealTime = this.passwordManagerStateService.onChangeRealTime.subscribe(newChange => {
+      if (newChange.action === 'PASSWORD_RECORD_UPDATED' && newChange.data.id == this.item.id) this.togglePassword = false;
+      if (!this.cd['destroyed']) this.cd.detectChanges();
+    })
+    this.sub.add(onChangeRealTime);
   }
   selectRecord(event) {
     this.onSelectRecord.emit(this.item);
