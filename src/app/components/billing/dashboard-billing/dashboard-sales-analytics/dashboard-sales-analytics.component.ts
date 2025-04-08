@@ -19,7 +19,7 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
     new CompanySetting('Daily', 'DAILY'),
     new CompanySetting('Weekly', 'WEEKLY'),
     new CompanySetting('Monthly', 'MONTHLY')];
-
+  showPreloader: boolean = true;
   constructor() { }
 
   ngOnInit() {
@@ -91,7 +91,8 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
   }
   public updateDataChart() {
     this.data = this.getDataForChart();
-    if (this.nvd3.char) this.nvd3.chart.update();
+    // if (this.nvd3.char) this.nvd3.chart.update();
+    this.showPreloader = false;
   }
   getDataForChart() {
     let sin = [], sin2 = [];
@@ -118,6 +119,7 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
     ];
   };
   selectType(type) {
+    this.showPreloader = true;
     this.listType.forEach(item => {
       if (item.value === type) {
         item.selected = true;
