@@ -17,7 +17,7 @@ export class CompanyDashTicketComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   lineChartOptions: any;
   lineChartColors: string[] = ["#0747a6", "#00ccff", '#2bc7c6', '#7C77CB'];
-
+  showPreloader: boolean = true;
   public constructor(private companiesService: CompaniesService,
     public activateRoute: ActivatedRoute,
     public cd: ChangeDetectorRef
@@ -85,6 +85,7 @@ export class CompanyDashTicketComponent implements OnInit, OnDestroy {
   }
 
   getTicketGraph(frequency: string) {
+    this.showPreloader = true;
     let getTicket = this.companiesService.getTicketGraph(this._id, frequency.toUpperCase()).subscribe((data: any) => {
       this.ticketFrequency = frequency;
       let countOfCompletedTickets = [];
@@ -104,6 +105,7 @@ export class CompanyDashTicketComponent implements OnInit, OnDestroy {
           values: countOfNewTickets
         }
       ];
+      this.showPreloader = false;
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
