@@ -1,0 +1,95 @@
+<div class="qt-df qt-mt-12 qt-mb-32">
+    <div class="qt-w100 qt-pos-rel qt-ml-32">
+        <a
+            href="javascript:;"
+            class="qt-button --md --gray qt-jc-c pointer qt-ml-auto button-gl-number__add qt-mb-12"
+            (click)="openDeviceType()"
+        >
+            <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
+            Add Type
+        </a>
+        <app-add-device-setting-type
+            *ngIf="addDeviceType"
+            (onClose)="onClosedAddDeviceType()"
+            (onAdded)="addFastDeviceType($event)"
+        ></app-add-device-setting-type>
+        <div class="cmn-area qt-w100">
+            <div
+                class="tab-pane__table"
+                [ngClass]="{'cleat-height-dataTable':!showPreloader}"
+            >
+                <div class="tab-pane__table-header">
+                    <div class="tab-pane__table-row">
+                        <div
+                            class="tab-pane__table-cell crm-settings-company-industry-table__industry-type pointer"
+                            (click)="onFilter('name')"
+                        >
+                            Name
+                            <div class="qt-table-modern__sorting--new"></div>
+                        </div>
+                        <div class="tab-pane__table-cell crm-settings-company-industry-table__action"></div>
+                    </div>
+                </div>
+                <div
+                    class="tab-pane__table-body"
+                    *ngIf="!showPreloader"
+                >
+                    <div
+                        class="text-center qt-df qt-jc-c qt-mb-24 qt-mt-24"
+                        *ngIf="deviceTypes.length == 0"
+                    >
+                        No device to show
+                    </div>
+                    <div
+                        class="tab-pane__table-row"
+                        *ngFor="let device of deviceTypes; let i = index"
+                        appClickOtside
+                        [init]="device.isInitEdit"
+                        [ngClass]="['edit-device-container-' + i,device.selected ? '--selected' : '']"
+                        [class]="'.edit-device-container-' + i"
+                        (onOutSide)="onEditDeviceType(device,$event)"
+                    >
+                        <div
+                            class="tab-pane__table-cell crm-settings-company-industry-table__industry-type"
+                            (click)="select(device)"
+                        >
+                            <input
+                                type="text"
+                                class="form-input  --editable"
+                                placeholder="Enter device Name"
+                                [(ngModel)]="device.name"
+                                maxlength="255"
+                                appKeyUpEnter
+                                (onChange)="onEditDeviceType(device,$event)"
+                                (input)="device.onInitEdit(true)"
+                            >
+                        </div>
+                        <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
+                            <div class="qt-df qt-ai-c">
+                                <app-dynamic-tooltip
+                                    [content]="'Remove'"
+                                    [position]="'top'"
+                                    #removeTooltip
+                                ></app-dynamic-tooltip>
+                                <div
+                                    data-tooltip="Remove"
+                                    class="qt-icon icon__delete qt-sz-20 qt-bg-contain pointer"
+                                    (click)="removeManufacturer(device.id)"
+                                    (mouseenter)="removeTooltip.show($event.target)"
+                                    (mouseleave)="removeTooltip.hide()"
+                                >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div
+    class="loading-container"
+    *ngIf="showPreloader"
+>
+    <div class="loading"></div>
+</div>

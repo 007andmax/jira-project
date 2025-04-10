@@ -21,6 +21,8 @@ import { DeviceSettingModelsAddComponent } from './device-setting-models/device-
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { ManufacturesCheckUseComponent } from './manufactures-check-use/manufactures-check-use.component';
+import { DeviceSettingTypeComponent } from './device-setting-type/device-setting-type.component';
+import { AddDeviceSettingTypeComponent } from './device-setting-type/add-device-setting-type/add-device-setting-type.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +38,9 @@ import { ManufacturesCheckUseComponent } from './manufactures-check-use/manufact
         DeviceSettingManufacturesComponent,
         DeviceSettingManufacturesAddComponent,
         DeviceSettingModelsComponent,
-        DeviceSettingModelsAddComponent
+        DeviceSettingModelsAddComponent,
+        DeviceSettingTypeComponent,
+        AddDeviceSettingTypeComponent
     ],
     imports: [
         CommonModule,

@@ -17,6 +17,7 @@ import { ManufacturesDropDownComponent } from './manufactures-drop-down/manufact
 import { ModelsDropDownComponent } from './models-drop-down/models-drop-down.component';
 import { Subscription } from 'rxjs';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { DeviceType } from '../class/device-type';
 
 @Component({
   selector: 'app-company-devices-custom-aside',
@@ -25,15 +26,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 })
 export class CompanyDevicesCustomAsideComponent implements OnInit, OnDestroy {
   device: CustomDevice = new CustomDevice();
-  assestType: Array<string> = ["Workstation",
-    "Router",
-    "Printer",
-    "Switch",
-    "Server",
-    "Tablet",
-    "Network Device",
-    "Phone",
-    "Generic device"];
+  assestType: Array<DeviceType> = [];
   startDate = new Date().getTime();
   formatDate: string = FORMAT_DATE_2;
   models: Array<ModelDevice> = [];
@@ -75,6 +68,9 @@ export class CompanyDevicesCustomAsideComponent implements OnInit, OnDestroy {
       this.warrantyDateDP.setEditDate(new Date().getTime());
     })
     this.sub.add(onOpenCustomAside);
+    this.devicesService.getDeviceTypes().subscribe((res: any) => {
+      this.assestType = res.deviceTypes.map(item => new DeviceType(item.id, item.name));
+    })
   }
   onSelectTags(data) {
     this.device.setTags(data);

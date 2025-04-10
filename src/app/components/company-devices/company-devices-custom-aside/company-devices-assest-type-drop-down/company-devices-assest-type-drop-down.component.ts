@@ -9,7 +9,5 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
 export class CompanyDevicesAssestTypeDropDownComponent extends DropDownComponent {
 
 
-  public getTypeToLocaleLowerCase(type) {
-    return (type) ? type.toLocaleLowerCase() : '';
-  }
+
 }
