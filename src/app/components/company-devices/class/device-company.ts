@@ -136,7 +136,7 @@ export class DeviceCompany extends Device {
         return {
             "deviceId": this.deviceId,
             "name": this.name,
-            "type": this.type,
+            "typeId": this.type ? this.type.id : null,
             "ipAddress": this.ip,
             "port": this.port ? Number(this.port) : null,
             "macAddress": this.macAddress,

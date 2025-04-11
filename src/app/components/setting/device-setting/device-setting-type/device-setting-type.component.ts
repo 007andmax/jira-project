@@ -11,6 +11,7 @@ import { DeviceSettingFilter } from '../Class/devicesetting-filter';
 import { DeviceSettingModelsComponent } from '../device-setting-models/device-setting-models.component';
 import { ManufacturesCheckUseComponent } from '../manufactures-check-use/manufactures-check-use.component';
 import { DeviceType } from 'src/app/components/company-devices/class/device-type';
+import { DeviceFilterType } from './class/device-filter-type';
 
 @Component({
   selector: 'app-device-setting-type',
@@ -20,7 +21,7 @@ import { DeviceType } from 'src/app/components/company-devices/class/device-type
 export class DeviceSettingTypeComponent implements OnInit {
   showPreloader: boolean = true;
   addDeviceType: boolean = false;
-  filter: DeviceSettingFilter = new DeviceSettingFilter();
+  filter: DeviceFilterType = new DeviceFilterType();
   deviceTypes: Array<DeviceType> = [];
   sub: Subscription = new Subscription();
   @ViewChild("models", { static: true }) models: DeviceSettingModelsComponent;
@@ -53,15 +54,6 @@ export class DeviceSettingTypeComponent implements OnInit {
     this.devicesService.deleteManufactur(id).subscribe(data => {
 
     })
-  }
-  openDeviceType() {
-    this.addDeviceType = true;
-  }
-  onClosedAddDeviceType() {
-    this.addDeviceType = false;
-  }
-  select(data) {
-    this.models.onSelectManufacture(data);
   }
   onEditDeviceType(item, event) {
     if (item.isInitEdit) {

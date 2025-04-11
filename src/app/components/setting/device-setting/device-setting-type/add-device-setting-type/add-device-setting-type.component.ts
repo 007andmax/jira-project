@@ -27,6 +27,9 @@ export class AddDeviceSettingTypeComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
+    if (this.deviceForm.invalid) {
+      return;
+    }
     this.devicesService.addDeviceTypes(this.deviceForm.value)
       .pipe(
         map((res: any) => {
