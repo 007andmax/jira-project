@@ -56,6 +56,12 @@ export class CompanyDevicesCustomAsideComponent implements OnInit, OnDestroy {
       this.manufactures = data;
     })
     this.sub.add(onGetManufactures)
+    if (this.devicesStateService.isGetDeviceType) this.assestType = this.devicesStateService.getDeviceTypes();
+    if (!this.devicesStateService.isGetDeviceType) this.devicesStateService.initGetDeviceType();
+    let onGetDeviceType = this.devicesStateService.onGetDeviceType.subscribe(data => {
+      this.assestType = data;
+    })
+    this.sub.add(onGetDeviceType);
     if (this.deviceTagsStateService.getTags().length > 0) this.tags = this.deviceTagsStateService.getTags();
     let onGetTags = this.deviceTagsStateService.onGetTags.subscribe(data => {
       this.tags = data;
@@ -68,15 +74,12 @@ export class CompanyDevicesCustomAsideComponent implements OnInit, OnDestroy {
       this.warrantyDateDP.setEditDate(new Date().getTime());
     })
     this.sub.add(onOpenCustomAside);
-    this.devicesService.getDeviceTypes().subscribe((res: any) => {
-      this.assestType = res.deviceTypes.map(item => new DeviceType(item.id, item.name));
-    })
   }
   onSelectTags(data) {
     this.device.setTags(data);
   }
   onSelectAssestType(data) {
-    this.device.setType((data) ? data.toLowerCase() : data);
+    this.device.setType(data);
     this.validate.resetType();
   }
   onSelectManufacture(data) {
