@@ -228,6 +228,7 @@ describe('ContractsAsideBlockTimeBillingComponent unit test', () => {
       taxIds: ['8d321592-ffbd-487a-95c5-4789fa9a58c6'],
       type: "BLOCK_TIME"
     });
+    com.companiesStateService.currentCompany = { addresses: [{ timeZone: { timeOffset: 6000 } }] };
     com.сontractsStateService.setContractForCopy(contractForCopy);
     com.onInitCopy()
     expect(com.contractsBlockTime.intervalstring).toEqual(com.selectedInterval);
