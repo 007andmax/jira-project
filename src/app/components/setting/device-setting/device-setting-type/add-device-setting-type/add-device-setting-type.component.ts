@@ -1,8 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
+import { DeviceType } from 'src/app/components/company-devices/class/device-type';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
+import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 
 @Component({
   selector: 'app-add-device-setting-type',
@@ -12,12 +14,16 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 export class AddDeviceSettingTypeComponent implements OnInit {
   deviceForm: FormGroup;
   submitted = false;
+  deviceTypes: Array<DeviceType> = [];
+  disableCreate: boolean = false;
   @Output() onClose = new EventEmitter();
   @Output() onAdded = new EventEmitter();
   constructor(private formBuilder: FormBuilder,
+    private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,) { }
 
   ngOnInit() {
+    this.deviceTypes = this.devicesStateService.getDeviceTypes();
     this.deviceForm = this.formBuilder.group({
       name: [
         "",
@@ -25,7 +31,21 @@ export class AddDeviceSettingTypeComponent implements OnInit {
       ],
     });
   }
+  checkDublicate() {
+    console.log("this.deviceForm.value.name", this.deviceForm.value.name);
+    var duplicateCategory = this.deviceTypes.filter((item) => {
+      return item.name.toLowerCase() == this.deviceForm.value.name.toLowerCase();
+    });
+    console.log("duplicateCategory", duplicateCategory);
+    if (duplicateCategory && duplicateCategory[0]) {
+      this.disableCreate = true;
+    } else {
+      this.disableCreate = false;
+    }
+    console.log(this.disableCreate)
+  };
   onSubmit() {
+    if (this.disableCreate) return;
     this.submitted = true;
     if (this.deviceForm.invalid) {
       return;

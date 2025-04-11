@@ -14,6 +14,8 @@
                         type="text"
                         class="form-input"
                         formControlName="name"
+                        maxlength="255"
+                        (input)="checkDublicate()"
                         placeholder="Enter Device Type Name"
                         [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
                     >
@@ -22,6 +24,12 @@
                         class="invalid-feedback error-text-align"
                     >
                         <div *ngIf="f.name.errors.required">Type is required</div>
+                    </div>
+                    <div
+                        *ngIf="disableCreate"
+                        class="invalid-feedback error-text-align"
+                    >
+                        <div>This type is already occupied</div>
                     </div>
                 </div>
                 <div class="qt-df qt-w100 qt-mt-32">

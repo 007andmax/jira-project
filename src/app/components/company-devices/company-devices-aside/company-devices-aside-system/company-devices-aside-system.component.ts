@@ -14,6 +14,7 @@ import { ModelDevice } from '../../company-devices-custom-aside/class/model-devi
 import { ManufactureDevice } from '../../company-devices-custom-aside/class/manufacture-device';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { Subscription } from 'rxjs';
+import { DeviceType } from '../../class/device-type';
 
 @Component({
   selector: 'app-company-devices-aside-system',
@@ -28,9 +29,11 @@ export class CompanyDevicesAsideSystemComponent implements OnInit, OnDestroy {
   @ViewChild('ipAddressLabel', { static: false }) ipAddressLabel: CompanyDevicesEditLabelComponent;
   @ViewChild('locationLabel', { static: false }) locationLabel: CompanyDevicesEditLabelComponent;
   @ViewChild('manufacturerDd', { static: false }) manufacturerDd: DropDownComponent;
+  @ViewChild('assestTypeDd', { static: false }) assestTypeDd: DropDownComponent;
   @ViewChild('modelDd', { static: false }) modelDd: DropDownComponent;
   @Input() device: DeviceExtended;
   @Input() customDevice: DeviceCompany;
+  assestType: Array<DeviceType> = [];
   models: Array<ModelDevice> = [];
   manufactures: Array<ManufactureDevice> = [];
   formatDate: string = FORMAT_DATE_2;
@@ -57,6 +60,12 @@ export class CompanyDevicesAsideSystemComponent implements OnInit, OnDestroy {
       this.device.report.system.installDate = this.getToDayDate();
     }
     if (this.customDevice && this.customDevice.manufacturer && !this.customerPortalStateService.isCustomerPortal) this.getModels(this.customDevice.manufacturer.id);
+    if (this.devicesStateService.isGetDeviceType) this.assestType = this.devicesStateService.getDeviceTypes();
+    if (!this.devicesStateService.isGetDeviceType) this.devicesStateService.initGetDeviceType();
+    let onGetDeviceType = this.devicesStateService.onGetDeviceType.subscribe(data => {
+      this.assestType = data;
+    })
+    this.sub.add(onGetDeviceType);
   }
   onSelectManufacture(data) {
     this.modelDd.clearWithOutChanges();
@@ -69,6 +78,12 @@ export class CompanyDevicesAsideSystemComponent implements OnInit, OnDestroy {
       this.getModels(data.id);
     }
   }
+  onSelectAssestType(data) {
+    this.customDevice.setType(data);
+    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
+
+    })
+  }
   public setIsInitEditNote(data) {
     this.isInitEditNote = data;
   }
@@ -78,6 +93,7 @@ export class CompanyDevicesAsideSystemComponent implements OnInit, OnDestroy {
     if (this.nameLabel) this.nameLabel.setValue(this.customDevice.name);
     if (this.assetTagLabel) this.assetTagLabel.setValue(this.customDevice.assetTag);
     if (this.manufacturerDd) this.manufacturerDd.selectItemWithOutChanges(this.customDevice.manufacturer);
+    if (this.assestTypeDd) this.assestTypeDd.selectItemWithOutChanges(this.customDevice.type);
     if (this.ipAddressLabel) this.ipAddressLabel.setValue(this.customDevice.ip);
     if (this.modelDd) this.modelDd.selectItemWithOutChanges(this.customDevice.model);
     if (this.datePickerWarranty) this.datePickerWarranty.setEditDate(this.customDevice.warrantyDateInt);

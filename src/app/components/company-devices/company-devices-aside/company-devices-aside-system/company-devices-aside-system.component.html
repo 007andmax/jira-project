@@ -45,15 +45,20 @@
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
                     (onChange)="onChangeHardware(device.getDataForUpdateAssetTag($event),'assetTag',$event)"
                 ></app-company-devices-edit-label>
-                <app-company-devices-edit-label
+                <app-drop-down
+                    #assestTypeDd
                     *ngIf="customDevice"
-                    #assetTagLabel
-                    [field]="customDevice.assetTag"
-                    [placeholder]="'Enter Asset Tag'"
-                    class="company-device-edit-name"
+                    class="qt-editable-dropdown qt-w100 company-devices-aside-system-dp"
+                    [placeholder]="'Select'"
+                    [field]="'name'"
+                    [list]="assestType"
+                    [editItem]="customDevice.type"
+                    [search]="true"
+                    [change]="true"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
-                    (onChange)="onChangeAssetTag($event)"
-                ></app-company-devices-edit-label>
+                    (onSelectedItem)="onSelectAssestType($event)"
+                    heightInput="auto"
+                ></app-drop-down>
             </div>
         </div>
         <div>
