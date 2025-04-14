@@ -9,5 +9,10 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
 export class CompanyDevicesAssestTypeDropDownComponent extends DropDownComponent {
 
 
-
+  public checkDefaultName(name) {
+    if (name == "workstation" || name == "router"
+      || name == "printer" || name == "switch" || name == "server"
+      || name == "tablet" || name == "network device" || name == "phone" || name == "generic device") return true;
+    return false;
+  }
 }

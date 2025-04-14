@@ -1,10 +1,11 @@
 import { FilterListTop } from 'src/class/list/filter-list-top';
+import { DeviceType } from './device-type';
 
 export class CompanyDeviceFilter {
     filterTop: Array<FilterListTop> = [new FilterListTop('name', 'ASC'),
     new FilterListTop('user_name', ''),
     new FilterListTop('up_time', '')];
-    assestType: Array<string> = [];
+    assestType: Array<DeviceType> = [];
     isCustomDevices: boolean = true;
     isAgent: boolean = true;
     constructor() { }

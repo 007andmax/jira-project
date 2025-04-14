@@ -697,7 +697,9 @@ Example:
   &__reports {
     mask-image: url("/assets/img/icons/reports.svg");
   }
-
+ &__custom-device {
+   mask-image: url("/assets/img/icons/custom-device.svg");
+ }
   &.--updated {
     position: relative;
     &::before {

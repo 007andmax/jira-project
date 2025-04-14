@@ -5,6 +5,7 @@ import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { CompanyDeviceFilter } from '../class/device-company-filter';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { CompanyDevicesFilterTypeComponent } from './company-devices-filter-type/company-devices-filter-type.component';
+import { DeviceType } from '../class/device-type';
 
 @Component({
   selector: 'app-company-devices-filter',
@@ -12,15 +13,7 @@ import { CompanyDevicesFilterTypeComponent } from './company-devices-filter-type
   styleUrls: ['./company-devices-filter.component.scss']
 })
 export class CompanyDevicesFilterComponent implements OnInit {
-  assestType: Array<string> = ["Workstation",
-    "Router",
-    "Printer",
-    "Switch",
-    "Server",
-    "Tablet",
-    "Network Device",
-    "Phone",
-    "Generic device"];
+  assestType: Array<DeviceType> = [];
   filter: CompanyDeviceFilter = new CompanyDeviceFilter();
   @ViewChild('typesDp', { static: true }) typesDp: CompanyDevicesFilterTypeComponent;
   @Output() changeCountFilter = new EventEmitter<any>();
@@ -31,7 +24,12 @@ export class CompanyDevicesFilterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    if (this.devicesStateService.isGetDeviceType) this.assestType = this.devicesStateService.getDeviceTypes();
+    if (!this.devicesStateService.isGetDeviceType) this.devicesStateService.initGetDeviceType();
+    let onGetDeviceType = this.devicesStateService.onGetDeviceType.subscribe(data => {
+      this.assestType = data;
+    })
+    this.sub.add(onGetDeviceType);
   }
 
   onChangeCustomDevice(event) {

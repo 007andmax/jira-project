@@ -38,6 +38,7 @@
             'icon__network_device' : device.getFieldForCheckIcon() === 'network device',
             'icon__old-phone' : device.getFieldForCheckIcon() === 'phone',
              'icon__generic_device' : device.getFieldForCheckIcon() === 'generic device',
+               'icon__custom-device' : device.isCustom,
         '--ofline': !device.online }"
                 ngbDropdownToggle
                 *ngIf="!customerPortalStateService.isCustomerPortal"
