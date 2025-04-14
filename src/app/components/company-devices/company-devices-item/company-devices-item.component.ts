@@ -93,6 +93,12 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     if (data == "phone") return "Phone";
     if (data == "generic device") return "Generic device";
   }
+  public checkDefaultName(name) {
+    if (name == "workstation" || name == "router"
+      || name == "printer" || name == "switch" || name == "server"
+      || name == "tablet" || name == "network device" || name == "phone" || name == "generic device") return true;
+    return false;
+  }
   openAside(type) {
     if (this.device.agentId || this.device.isCustom) this.devicesStateService.setOnOpenAside(new DeviceCompanyAsideParams(type, [this.device]));
   }

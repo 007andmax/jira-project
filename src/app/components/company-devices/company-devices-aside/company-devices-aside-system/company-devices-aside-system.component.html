@@ -35,12 +35,12 @@
         </div>
         <div>
             <div class="sidebar-system__info">
-                <div class="sidebar-system__info-title">Asset Tag</div>
+                <div class="sidebar-system__info-title">Asset type</div>
                 <app-company-devices-edit-label
                     *ngIf="device"
                     #assetTagLabel
                     [field]="getSystemField('assetTag') || ''"
-                    [placeholder]="'Enter Asset Tag'"
+                    [placeholder]="'Enter Asset type'"
                     class="company-device-edit-name"
                     [isDisabled]="customerPortalStateService.isCustomerPortal"
                     (onChange)="onChangeHardware(device.getDataForUpdateAssetTag($event),'assetTag',$event)"
