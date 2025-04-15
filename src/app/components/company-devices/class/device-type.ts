@@ -4,6 +4,7 @@ export class DeviceType {
     selected: boolean = false;
     isInitEdit: boolean = false;
     isInitRequest: boolean = false;
+    disableUpdate: boolean = false;
     constructor(id, name) {
         this.id = id;
         this.name = name;
@@ -20,4 +21,14 @@ export class DeviceType {
             name: this.name,
         };
     }
+    public checkDublicate(list) {
+        var duplicate = list.filter((item) => {
+            return item.name.toLowerCase() === this.name.toLowerCase() && item.id !== this.id;
+        });
+        if (duplicate && duplicate[0]) {
+            return this.disableUpdate = true;
+        } else {
+            return this.disableUpdate = false;
+        }
+    };
 }

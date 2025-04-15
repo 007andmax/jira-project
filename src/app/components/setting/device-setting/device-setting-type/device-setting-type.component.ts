@@ -57,7 +57,7 @@ export class DeviceSettingTypeComponent implements OnInit {
   }
   onEditDeviceType(item, event) {
     if (item.isInitEdit) {
-      if (item.name.length === 0 || item.isInitRequest) return;
+      if (item.name.length === 0 || item.disableUpdate || item.isInitRequest) return;
       item.setIsInitRequest(true);
       this.devicesService.editDeviceType(item.getDataForEdit()).pipe(map((res) => res),
         catchError(error => of(undefined))).subscribe(data => {

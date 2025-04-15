@@ -43,7 +43,7 @@
                         maxlength="255"
                         appKeyUpEnter
                         (onChange)="onEditDeviceType(device,$event)"
-                        (input)="device.onInitEdit(true)"
+                        (input)="device.onInitEdit(true);device.checkDublicate(deviceTypes)"
                     >
                 </div>
                 <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
@@ -67,6 +67,7 @@
         </div>
     </div>
 </div>
+
 
 <div
     class="loading-container"
