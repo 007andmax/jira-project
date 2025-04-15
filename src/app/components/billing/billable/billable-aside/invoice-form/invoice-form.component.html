@@ -183,7 +183,7 @@
         >
             <app-invoice-form-ticket-info
                 [ticketsLength]="invoice.invoiceDataDto.tickets.length"
-                (onDelete)="delete(i)"
+                (onDelete)="delete(ticket)"
                 [ticket]="ticket"
             ></app-invoice-form-ticket-info>
         </ng-template>
