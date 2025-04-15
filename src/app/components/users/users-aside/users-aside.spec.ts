@@ -121,7 +121,7 @@ describe('UsersAsideComponent unit test', () => {
     com.onChangeFistname();
     expect(com.validate.firstName).toEqual(true);
   });
-  it('check "addPhoneNumber"', () => {
+  it('check "removePhoneNumber"', () => {
     const fixture = TestBed.createComponent(UsersAsideComponent);
     const com = fixture.debugElement.componentInstance;
     com.addPhoneNumber();
