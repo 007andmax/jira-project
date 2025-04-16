@@ -23,6 +23,7 @@ import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.m
 import { ManufacturesCheckUseComponent } from './manufactures-check-use/manufactures-check-use.component';
 import { DeviceSettingTypeComponent } from './device-setting-type/device-setting-type.component';
 import { AddDeviceSettingTypeComponent } from './device-setting-type/add-device-setting-type/add-device-setting-type.component';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [
@@ -51,7 +52,8 @@ import { AddDeviceSettingTypeComponent } from './device-setting-type/add-device-
         NgbModule,
         DynamicTooltipModule,
         ClickOutsideModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        MatErrorModule
     ],
 })
 export class DeviceSettingModule { }

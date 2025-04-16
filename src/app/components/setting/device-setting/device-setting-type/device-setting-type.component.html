@@ -34,7 +34,10 @@
                 [class]="'.edit-device-container-' + i"
                 (onOutSide)="onEditDeviceType(device,$event)"
             >
-                <div class="tab-pane__table-cell crm-settings-company-industry-table__industry-type">
+                <div
+                    class="tab-pane__table-cell crm-settings-company-industry-table__industry-type"
+                    [ngClass]="{'--input-error' :  device.disableUpdate  }"
+                >
                     <input
                         type="text"
                         class="form-input  --editable"
@@ -45,6 +48,12 @@
                         (onChange)="onEditDeviceType(device,$event)"
                         (input)="device.onInitEdit(true);device.checkDublicate(deviceTypes)"
                     >
+                    <app-mat-error
+                        class="qt-tooltip-error"
+                        *ngIf="device.disableUpdate"
+                    >
+                        This type is already occupied
+                    </app-mat-error>
                 </div>
                 <div class="tab-pane__table-cell crm-settings-company-industry-table__action">
                     <div class="qt-df qt-ai-c">
@@ -67,6 +76,10 @@
         </div>
     </div>
 </div>
+
+
+
+
 
 
 <div
