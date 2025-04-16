@@ -40,3 +40,8 @@
 }
 
 
+::ng-deep.service-reccurring-list {
+  .dropdown-item {
+      max-width: 345px;
+    }
+}
