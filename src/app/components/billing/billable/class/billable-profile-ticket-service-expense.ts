@@ -5,6 +5,7 @@ import { TicketProfileService } from '../../../tickets/tickets/class/ticket-prof
 export class BillableProfileTicketServiceExpense extends TicketProfileService {
     ticketUpdate: any;
     taxes: Array<Tax>;
+    isServiceContractSingleItem: boolean;
     sum: number;
     constructor(data = null) {
         super(data);

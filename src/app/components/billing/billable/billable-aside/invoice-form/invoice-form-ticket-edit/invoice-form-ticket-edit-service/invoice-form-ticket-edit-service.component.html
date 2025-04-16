@@ -4,8 +4,12 @@
         class="invoice-item__col-item"
         [textContent]="service.item.name"
     ></td>
-    <td class="invoice-item__col-desc ">
+    <td
+        class="invoice-item__col-desc "
+        [ngClass]="{ 'no-editable-desc': service.isServiceContractSingleItem }"
+    >
         <textarea
+            [hidden]="service.isServiceContractSingleItem"
             appTextArea
             cols="5"
             rows="1"
@@ -14,17 +18,24 @@
             (input)="onChangeDescription($event)"
             (onPast)="onPastDescription($event)"
         ></textarea>
+        <pre
+            [hidden]="!service.isServiceContractSingleItem"
+            [textContent]="service.description"
+        ></pre>
     </td>
     <td
         class="invoice-item__col-price"
         [textContent]="service.item.rate | currency"
     ></td>
-    <td class="invoice-item__col-quentity">
+    <td
+        class="invoice-item__col-quentity"
+        *ngIf="!service.isServiceContractSingleItem"
+    >
         <app-ticket-profile-updates-service-timepicker
             *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
+            [hidden]="service.isServiceContractSingleItem"
             (onChangeStart)="onChangeStartTimePicker($event)"
             (onChangeEnd)="onChangeEndTimePicker($event)"
-            #editTimePicker
             [quantity]="service.quantity"
             [editMode]="true"
             [start]="durationStart"
@@ -35,15 +46,31 @@
             [hour]="hours"
             [minute]="minutes"
             *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"
+            [hidden]="service.isServiceContractSingleItem"
         ></app-ticket-profile-updates-service-duration>
     </td>
-    <td class="invoice-item__col-tax">
+    <td
+        class="invoice-item__col-quentity no-editable"
+        *ngIf="service.isServiceContractSingleItem"
+        [textContent]="getDuration(service.billableQuantity)"
+    >
+    </td>
+    <td
+        class="invoice-item__col-tax"
+        [hidden]="service.isServiceContractSingleItem"
+    >
         <app-taxes
             #taxes
             [isLabel]="false"
             [isAdd]="false"
             (taxesChange)="onTaxesChange($event)"
         ></app-taxes>
+    </td>
+    <td
+        class="invoice-item__col-tax no-editable"
+        [hidden]="!service.isServiceContractSingleItem"
+        [innerHTML]="getServiceTaxes(service)"
+    >
     </td>
     <td
         class="invoice-item__col-amount"
