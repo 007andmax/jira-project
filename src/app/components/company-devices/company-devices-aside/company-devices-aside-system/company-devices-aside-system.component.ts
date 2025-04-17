@@ -71,8 +71,8 @@ export class CompanyDevicesAsideSystemComponent implements OnInit, OnDestroy {
     this.modelDd.clearWithOutChanges();
     this.customDevice.setModel(null);
     this.customDevice.setManufacturer(data);
-    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
-
+    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(res => {
+      this.devicesStateService.fastEditCustomDevice(res);
     })
     if (data) {
       this.getModels(data.id);
@@ -80,8 +80,8 @@ export class CompanyDevicesAsideSystemComponent implements OnInit, OnDestroy {
   }
   onSelectAssestType(data) {
     this.customDevice.setType(data);
-    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
-
+    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(res => {
+      this.devicesStateService.fastEditCustomDevice(res);
     })
   }
   public setIsInitEditNote(data) {
@@ -108,15 +108,15 @@ export class CompanyDevicesAsideSystemComponent implements OnInit, OnDestroy {
   }
   onSelectModel(data) {
     this.customDevice.setModel(data);
-    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
-
+    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(res => {
+      this.devicesStateService.fastEditCustomDevice(res);
     })
   }
   onChangeName(value) {
     if (this.customDevice) {
       this.customDevice.setName(value);
-      if (value.length > 0) this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
-
+      if (value.length > 0) this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(res => {
+        this.devicesStateService.fastEditCustomDevice(res);
       })
       return;
     }
@@ -151,8 +151,8 @@ export class CompanyDevicesAsideSystemComponent implements OnInit, OnDestroy {
     this.editCustomDevice();
   }
   editCustomDevice() {
-    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
-
+    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(res => {
+      this.devicesStateService.fastEditCustomDevice(res);
     })
   }
   onChangeHardware(data, field, value) {

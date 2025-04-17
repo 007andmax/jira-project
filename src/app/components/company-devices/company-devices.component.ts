@@ -206,6 +206,12 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     });
     this.sub.add(onFastAddCustomDevice);
+    let onFastEditCustomDevice = this.devicesStateService.onFastEditCustomDevice.subscribe((data) => {
+      let index = this.devices.findIndex(item => item.id == data.deviceId);
+      if (index > -1) this.devices[index].update(data);
+      this.cd.detectChanges();
+    });
+    this.sub.add(onFastEditCustomDevice);
   }
   removeCustomDevice(ids) {
     forkJoin(

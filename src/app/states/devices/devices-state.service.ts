@@ -38,6 +38,7 @@ export class DevicesStateService {
   onGetDeviceType: EventEmitter<any> = new EventEmitter();
   onAddModel: EventEmitter<any> = new EventEmitter();
   onFastAddCustomDevice: EventEmitter<any> = new EventEmitter();
+  onFastEditCustomDevice: EventEmitter<any> = new EventEmitter();
   isInitWebSocket: boolean = false;
   preloaderDevices: boolean = true;
   isGetManufactures: boolean = false;
@@ -93,6 +94,9 @@ export class DevicesStateService {
         this.onGetDeviceType.emit(this.deviceTypes);
       }
     })
+  }
+  public fastEditCustomDevice(data) {
+    this.onFastEditCustomDevice.emit(data);
   }
   public fastAddCustomDevice(data) {
     this.onFastAddCustomDevice.emit(data);

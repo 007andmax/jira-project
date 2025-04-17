@@ -57,7 +57,6 @@ export class CompanyDevicesCustomAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onGetManufactures)
     if (this.devicesStateService.isGetDeviceType) this.assestType = this.devicesStateService.getDeviceTypes();
-    if (!this.devicesStateService.isGetDeviceType) this.devicesStateService.initGetDeviceType();
     let onGetDeviceType = this.devicesStateService.onGetDeviceType.subscribe(data => {
       this.assestType = data;
     })
