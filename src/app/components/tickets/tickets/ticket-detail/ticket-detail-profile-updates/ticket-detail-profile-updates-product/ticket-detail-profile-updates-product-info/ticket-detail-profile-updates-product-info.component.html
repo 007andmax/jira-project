@@ -124,6 +124,7 @@
                     [editUsers]="userService"
                     [users]="listTechUsers"
                     [container]="'body'"
+                    [placement]="'top'"
                     (usersChange)="onChangeUser($event)"
                 ></app-tech-users>
                 <app-date-picker
@@ -132,6 +133,7 @@
                     [isDisabled]="isBlockChange"
                     [container]="'body'"
                     [useMinDate]="false"
+                    [placement]="'top'"
                     [type]="'DETAIL_TICKET_UPDATE'"
                     (onChange)="onChangeDatePicker($event)"
                 ></app-date-picker>
