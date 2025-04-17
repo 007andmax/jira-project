@@ -80,6 +80,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     this.sub.add(geLefttFilter);
     let changeDevicesArray = this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'CUSTOM_DEVICE_SAVED') {
+        if (this.devices.find(item => item.id == newChange.data.deviceId)) return;
         this.devices.push(new DeviceCompany({ ...newChange.data, isCustom: true, id: newChange.data.deviceId }, newChange.data.companyId));
       }
       if (newChange.action === 'CUSTOM_DEVICE_REMOVED') {
@@ -199,6 +200,12 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       })
     })
     this.sub.add(getOnSendDeviceStatus);
+    let onFastAddCustomDevice = this.devicesStateService.onFastAddCustomDevice.subscribe((data) => {
+      if (this.devices.find(item => item.id == data.deviceId)) return;
+      this.devices.push(new DeviceCompany({ ...data, isCustom: true, id: data.deviceId }, data.companyId));
+      this.cd.detectChanges();
+    });
+    this.sub.add(onFastAddCustomDevice);
   }
   removeCustomDevice(ids) {
     forkJoin(

@@ -71,7 +71,11 @@ export class DeviceSettingTypeComponent implements OnInit {
   }
   addFastDeviceType(data) {
     let index = this.deviceTypes.findIndex(item => item.id === data.id);
-    if (index == -1) this.deviceTypes.push(data);
+    if (index == -1) {
+      this.deviceTypes.push(data);
+      this.deviceTypes.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);
+
+    }
   }
   removeConfirmDeviceType(manufacturer: any) {
     this.confirmStateService.setConfirmAction(DELETE_DEVICE_TYPE);

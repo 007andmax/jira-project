@@ -119,6 +119,7 @@ export class CompanyDevicesCustomAsideComponent implements OnInit, OnDestroy {
     if (!this.validate.isValidate(this.device)) return;
     this.addBtn.setDisabled(true);
     this.devicesService.addCustomDevice(this.device.getDataForRequest()).subscribe(data => {
+      this.devicesStateService.fastAddCustomDevice(data);
       this.addBtn.setDisabled(false);
       this.closed();
     }, err => {
