@@ -123,13 +123,14 @@
                     [selectedMode]="'SINGLE'"
                     [editUsers]="userService"
                     [users]="listTechUsers"
-                    [placement]="'top-end'"
+                    [container]="'body'"
                     (usersChange)="onChangeUser($event)"
                 ></app-tech-users>
                 <app-date-picker
                     #dpDate
+                    [dropdownClass]="['date-picker']"
                     [isDisabled]="isBlockChange"
-                    [placement]="'bottom-right'"
+                    [container]="'body'"
                     [useMinDate]="false"
                     [type]="'DETAIL_TICKET_UPDATE'"
                     (onChange)="onChangeDatePicker($event)"
