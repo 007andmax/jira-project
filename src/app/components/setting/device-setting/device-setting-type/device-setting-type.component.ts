@@ -12,6 +12,7 @@ import { DeviceSettingModelsComponent } from '../device-setting-models/device-se
 import { ManufacturesCheckUseComponent } from '../manufactures-check-use/manufactures-check-use.component';
 import { DeviceType } from 'src/app/components/company-devices/class/device-type';
 import { DeviceFilterType } from './class/device-filter-type';
+import { DeviceSettingTypeCheckUseComponent } from './device-setting-type-check-use/device-setting-type-check-use.component';
 
 @Component({
   selector: 'app-device-setting-type',
@@ -43,17 +44,11 @@ export class DeviceSettingTypeComponent implements OnInit {
       this.cd.detectChanges();
     })
     this.sub.add(onGetManufactures);
-    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      if (data) {
-        if (this.confirmStateService.getConfirmAction() === DELETE_DEVICE_MANUFACTURE) this.removeManufacturer(this.devicesStateService.getManufacturForRemove().id);
-      }
-    })
-    this.sub.add(getConfirm);
   }
-  removeManufacturer(id) {
-    this.devicesService.deleteManufactur(id).subscribe(data => {
-
-    })
+  removeDeviceType(deviceType) {
+    this.confirmStateService.setConfirmAction(DELETE_DEVICE_TYPE);
+    const modalRef = this.modalService.open(DeviceSettingTypeCheckUseComponent, { windowClass: 'xs-modal user-modal', container: "device-setting", backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.deviceType = deviceType;
   }
   onEditDeviceType(item, event) {
     if (item.isInitEdit) {
@@ -76,12 +71,6 @@ export class DeviceSettingTypeComponent implements OnInit {
       this.deviceTypes.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);
 
     }
-  }
-  removeConfirmDeviceType(manufacturer: any) {
-    this.confirmStateService.setConfirmAction(DELETE_DEVICE_TYPE);
-    const modalRef = this.modalService.open(ManufacturesCheckUseComponent, { windowClass: 'xs-modal user-modal', container: "device-setting", backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.manufacture = manufacturer;
-    this.devicesStateService.setManufacturForRemove(manufacturer);
   }
   public getSelectedCount() {
     return this.deviceTypes.filter(item => item.selected).length;

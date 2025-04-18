@@ -40,6 +40,12 @@ export class DevicesService {
   public getManufactures() {
     return this.http.get(this.apiUrl + `devices/manufactures`);
   }
+  public getAssignDevicesTypes(deviceTyperId, clientCompanyId = null) {
+    return this.http.get(this.apiUrl + `devices/types/assign?id=${deviceTyperId}${clientCompanyId ? `&clientCompanyId=${clientCompanyId}` : ""}`);
+  }
+  public setAssignDevicesTypes(data) {
+    return this.http.put(this.apiUrl + `devices/types/assign`, data);
+  }
   public getDeviceTypes() {
     return this.http.get(this.apiUrl + `devices/types`);
   }

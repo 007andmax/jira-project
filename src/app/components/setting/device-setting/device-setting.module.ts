@@ -24,6 +24,7 @@ import { ManufacturesCheckUseComponent } from './manufactures-check-use/manufact
 import { DeviceSettingTypeComponent } from './device-setting-type/device-setting-type.component';
 import { AddDeviceSettingTypeComponent } from './device-setting-type/add-device-setting-type/add-device-setting-type.component';
 import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+import { DeviceSettingTypeCheckUseComponent } from './device-setting-type/device-setting-type-check-use/device-setting-type-check-use.component';
 
 @NgModule({
     declarations: [
