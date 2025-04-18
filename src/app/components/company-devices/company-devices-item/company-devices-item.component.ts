@@ -175,11 +175,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       minutes: minutes,
     }
   }
-  getLabelForEdit() {
-    if (this.device.isCustom) return this.device.name;
-    if (this.device.label) return this.device.label;
-    return this.device.hostName || this.device.ip;
-  }
+
   setMasterAgent() {
     this.devicesService.markDeviceAsMaster(this.device.companyId, this.device.agentId).subscribe(data => {
     })

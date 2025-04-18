@@ -82,6 +82,8 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       if (newChange.action === 'CUSTOM_DEVICE_SAVED') {
         if (this.devices.find(item => item.id == newChange.data.deviceId)) return;
         this.devices.push(new DeviceCompany({ ...newChange.data, isCustom: true, id: newChange.data.deviceId }, newChange.data.companyId));
+        this.devices.sort((a, b) => (a.getLabelForEdit().toLowerCase() > b.getLabelForEdit().toLowerCase()) ?
+          1 : ((b.getLabelForEdit().toLowerCase() > a.getLabelForEdit().toLowerCase()) ? -1 : 0));
       }
       if (newChange.action === 'CUSTOM_DEVICE_REMOVED') {
         let index = this.devices.findIndex(item => item.id == newChange.data);
@@ -203,6 +205,8 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     let onFastAddCustomDevice = this.devicesStateService.onFastAddCustomDevice.subscribe((data) => {
       if (this.devices.find(item => item.id == data.deviceId)) return;
       this.devices.push(new DeviceCompany({ ...data, isCustom: true, id: data.deviceId }, data.companyId));
+      this.devices.sort((a, b) => (a.getLabelForEdit().toLowerCase() > b.getLabelForEdit().toLowerCase()) ?
+        1 : ((b.getLabelForEdit().toLowerCase() > a.getLabelForEdit().toLowerCase()) ? -1 : 0));
       this.cd.detectChanges();
     });
     this.sub.add(onFastAddCustomDevice);
@@ -226,7 +230,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   }
   getDevice(id) {
     this.devicesService.getCompanyDevices(id).subscribe((data: any) => {
-      if (Object.keys(data).length > 0) {
+      if (data && Object.keys(data).length > 0) {
         this.devices = data[id].map(item => new DeviceCompany(item, this.companyId));
         this.filter.onFilterName(this.devices);
       }
