@@ -1562,6 +1562,11 @@ app-quotes-item {
         background-position: right;
       }
     }
+
+    .qt-table-modern__row {
+      min-height: 66px;
+      height: auto;
+    }
   }
 
   app-companies-table {
