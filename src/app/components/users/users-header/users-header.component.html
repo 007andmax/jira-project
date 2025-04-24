@@ -7,7 +7,7 @@
                     <!-- *ngIf="getSelectedCount() === 0" -->
                     <input
                         type="text"
-                        placeholder="Search user"
+                        placeholder="Search User"
                         [(ngModel)]="searchText"
                         (keyup)="onKeyUp($event)"
                     >
@@ -75,7 +75,7 @@
                     (click)="addUser()"
                     *ngIf="getPermissions('CREATE_USERS')"
                 >
-                    Add user
+                    Add User
                 </button>
             </div>
         </div>

@@ -17,7 +17,7 @@ export class MultiDatepickerComponent implements OnInit {
   toDate: NgbDate;
   @Input() errorMessage: string = null;
   @Input() validate: boolean = true;
-  @Input() placeholder: string = 'Filter by date';
+  @Input() placeholder: string = 'Filter By Date';
   public navigation = 'select';
   public showDatePicker = false;
   public selectedDateModel = '';
