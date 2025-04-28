@@ -12,7 +12,9 @@
 .no-edit-note {
     border: none !important;
 }
-
+ticket-detail-profile-updates {
+  flex: 1;
+}
 .ticket-edit-aside {
     &__body {
         height: 100%;
@@ -866,7 +868,7 @@ app-ticket-change-status {
 }
 
 ticket-detail-profile-form-update {
-  flex: auto;
+  //flex: auto; // TODO check this style
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

@@ -257,8 +257,11 @@
     top: auto;
 }
 .ticket-updates-no-data {
-    height: 320px;
+    height: 100%;
+    min-height: 320px;
     background-color: $gray-25;
+    border-top: 1px solid $gray-200;
+    border-bottom: 1px solid $gray-200;
 }
 .qt-button--with-icon {
     width: 56px;

@@ -3,8 +3,11 @@
 .ticket-notify {
     padding: 0 32px;
     margin-top: 20px;
+    &:empty {
+      display: none;
+    }
 
-    &__item {
+  &__item {
         border-radius: 10px;
         box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
         border: dashed 1px $gray-300;
