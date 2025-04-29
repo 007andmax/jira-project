@@ -186,6 +186,10 @@ app-tickets-table-item {
 .qt-page-list__header-thead__row {
   background-color: $gray-50;
 
+  .ticket-table__check {
+    min-width: 52px;
+  }
+
   & > div {
     padding-top: 15px;
     padding-bottom: 15px;
