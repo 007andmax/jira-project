@@ -22,7 +22,7 @@
     }
 
     &:focus {
-      outline: none;
+      outline: 2px solid rgba($blue-light-600, 0.1);
       border-color: $blue-light-600;
     }
 

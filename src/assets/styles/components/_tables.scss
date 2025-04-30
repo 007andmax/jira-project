@@ -250,6 +250,11 @@ table.qt-table-modern {
       padding: 23px 24px 23px 8px;
     }
   }
+
+  .ticket-table__check,
+  .company-devices-table__check {
+    min-width: 52px;
+  }
 }
 
 .qt-table-modern__sorting {

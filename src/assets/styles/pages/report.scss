@@ -432,8 +432,14 @@ html.no-d3-tooltip .nvtooltip .value {
   }
 }
 
-.reports-all .reports-col {
-  width: 270px;
+.reports-all {
+  .reports-col {
+    width: 270px;
+
+    &:empty {
+      display: none;
+    }
+  }
 }
 
 .reports-all .reports-all__column .report {

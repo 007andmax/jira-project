@@ -3335,6 +3335,7 @@ input.ng-invalid.is-invalid:hover,
 input.--input-error,
 input.--input-error:hover {
   border: solid 1px $red-600;
+  outline: 2px solid rgba($red-600, 0.1);
 }
 
 .--input-error {

@@ -29,6 +29,38 @@
 }
 .qt-aside-modern {
   width: 480px !important;
+
+  &:after {
+    content: "";
+    display: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    outline: 0;
+  }
+
+  .qt-aside-modern__content,
+  .qt-aside-modern__footer {
+    background-color: $white;
+  }
+  &:not(hidden) {
+    z-index: 11;
+    height: calc(100% - 40px);
+    top: 20px;
+    right: 20px;
+
+    &::after {
+      display: block;
+      opacity: 1;
+      transition: none;
+      background-color: rgba(16, 24, 40, 0.5);
+    }
+  }
 }
 .qt-aside {
   &__title {

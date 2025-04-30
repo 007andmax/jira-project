@@ -70,7 +70,7 @@ input.qt-dropdown-input {
   }
 
   &:focus {
-    outline: none;
+    outline: 2px solid rgba($blue-light-600, 0.1);
     border-color: $blue-light-600;
 
     &[aria-expanded="true"] + .app-drop-down__right-icon .report-caret-icon,
@@ -200,8 +200,8 @@ input.qt-dropdown-input {
       border-color: $gray-300;
     }
     &:focus {
-      outline: none;
       border-color: $blue-light-600;
+      outline: 2px solid rgba($blue-light-600, 0.1);
 
       &[aria-expanded="true"] + .app-drop-down__right-icon .report-caret-icon,
       &[aria-expanded="true"] + .report-caret-icon {
@@ -296,7 +296,7 @@ input.qt-dropdown-input {
       border-color: $gray-300;
     }
     &:focus {
-      outline: none;
+      outline: 2px solid rgba($blue-light-600, 0.1);
       border-color: $blue-light-600;
     }
   }
@@ -365,7 +365,7 @@ input.qt-dropdown-input {
   //  }
   //}
   &:focus {
-    outline: none;
+    outline: 2px solid rgba($blue-light-600, 0.1);
     background-color: $blue-light-600;
     color: $white;
   }
@@ -626,6 +626,7 @@ button.qt-button.--gray:focus {
   line-height: 17px;
 
   &:focus {
+    outline: 2px solid rgba($blue-light-600, 0.1);
     border-right: 1px solid $blue-light-600;
   }
 }
