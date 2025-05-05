@@ -84,9 +84,15 @@
             let-i="index"
         >
             <div class="qt-df qt-ai-c qt-pl-8">
-                <div
-                    class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-icon"
-                    [ngClass]="{'icon__devices' : getTypeToLocaleLowerCase(item) === 'workstation',
+                <button
+                    ngbDropdownItem
+                    (click)="onSelect(item)"
+                    [title]="reduceItemName(item)"
+                    [ngClass]="{'--selected':isSelected(item)}"
+                >
+                    <div
+                        class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-mr-12 qt-icon"
+                        [ngClass]="{'icon__devices' : getTypeToLocaleLowerCase(item) === 'workstation',
                'icon__router' : getTypeToLocaleLowerCase(item) === 'router',
             'icon__print' : getTypeToLocaleLowerCase(item) === 'printer',
                 'icon__network-switch' : getTypeToLocaleLowerCase(item) === 'switch',
@@ -95,15 +101,10 @@
             'icon__network_device' : getTypeToLocaleLowerCase(item) === 'network device',
             'icon__old-phone' : getTypeToLocaleLowerCase(item) === 'phone',
              'icon__generic_device' : getTypeToLocaleLowerCase(item) === 'generic device'}"
-                >
-                </div>
-                <button
-                    ngbDropdownItem
-                    [textContent]="reduceItemName(item)"
-                    (click)="onSelect(item)"
-                    [title]="reduceItemName(item)"
-                    [ngClass]="{'--selected':isSelected(item)}"
-                ></button>
+                    >
+                    </div>
+                    {{reduceItemName(item)}}
+                </button>
             </div>
         </ng-template>
     </div>
