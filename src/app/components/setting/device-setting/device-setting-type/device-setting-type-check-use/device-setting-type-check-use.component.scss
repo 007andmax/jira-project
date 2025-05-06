@@ -22,9 +22,8 @@
 }
 
 .contract-container {
-    border-radius: 8px;
     padding: 16px;
-    background-color: $gray-50;
+    border-bottom: 1px solid $gray-200;
     overflow: auto;
 
     &::-webkit-scrollbar {
@@ -52,13 +51,8 @@
             display: flex;
             align-items: center;
             width: 100%;
-            padding: 11px 12px;
-            background-color: $white;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-            border: solid 1px $gray-200;
-            margin-bottom: 8px;
-
+            padding: 6px 0;
+            margin-bottom: 4px;
             &:last-child {
                 margin-bottom: 0;
             }
@@ -74,7 +68,7 @@
 
             span {
                 @include сaption-l;
-                color: $gray-400;
+                color: $gray-900;
                 flex-shrink: 0;
             }
 
@@ -139,4 +133,36 @@
     top: calc(50% - 25px) !important;
     left: calc(50% - 25px) !important;
     right: unset;
+}
+.device-setting-type-check-use-info {
+    border: 1px solid $yellow-300;
+    background-color: $yellow-25;
+    color: $yellow-800;
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: flex-start;
+    .qt-icon {
+        min-width: 20px;
+        min-height: 20px;
+    }
+}
+.device-setting-type-check-use_device-type-companies {
+    border: 1px solid $gray-200;
+    border-radius: 8px;
+}
+.device-setting-type-check-use_device-type-info {
+    padding: 16px;
+    border-bottom: 1px solid $gray-200;
+    .container-icon {
+        background-color: $gray-100;
+        border-radius: 50%;
+
+    }
+}
+.list-elements {
+    margin-bottom: 16px;
+    &:last-child {
+            margin-bottom: 0;
+    }
 }

@@ -36,6 +36,7 @@ export class DevicesStateService {
   onInitWebSocket: EventEmitter<any> = new EventEmitter();
   onGetManufactures: EventEmitter<any> = new EventEmitter();
   onGetDeviceType: EventEmitter<any> = new EventEmitter();
+  onCheckDeviceTypeForRemove: EventEmitter<any> = new EventEmitter();
   onAddModel: EventEmitter<any> = new EventEmitter();
   onFastAddCustomDevice: EventEmitter<any> = new EventEmitter();
   onFastEditCustomDevice: EventEmitter<any> = new EventEmitter();
@@ -48,6 +49,7 @@ export class DevicesStateService {
   manufacturForRemove: ManufactureDevice = null;
   modelForRemove: ModelDevice = null;
   onFilter: EventEmitter<any> = new EventEmitter();
+  deviceTypeForRemove: DeviceType = null;
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService,
     private devicesService: DevicesService,
@@ -94,6 +96,15 @@ export class DevicesStateService {
         this.onGetDeviceType.emit(this.deviceTypes);
       }
     })
+  }
+  public getDeviceTypeForRemove() {
+    return this.deviceTypeForRemove
+  }
+  public setDeviceTypeForRemove(data) {
+    this.deviceTypeForRemove = data;
+  }
+  public checkDeviceTypeForRemove(data) {
+    this.onCheckDeviceTypeForRemove.emit(data);
   }
   public fastEditCustomDevice(data) {
     this.onFastEditCustomDevice.emit(data);

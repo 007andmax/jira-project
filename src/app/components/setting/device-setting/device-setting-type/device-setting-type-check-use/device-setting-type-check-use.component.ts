@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { DeviceType } from 'src/app/components/company-devices/class/device-type';
 import { DevicesService } from 'src/app/services/devices/devices.service';
@@ -8,6 +8,9 @@ import { GlNumberUse } from '../../../accounting/gl-number/gl-number-check-use/c
 import { DeviceTypeCheck } from './class/device-type-check';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { DELETE_DEVICE_TYPE } from 'src/app/const/confirm';
+import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 
 @Component({
   selector: 'app-device-setting-type-check-use',
@@ -16,8 +19,9 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
   providers: [TicketsListService]
 })
 export class DeviceSettingTypeCheckUseComponent implements OnInit {
-
-  @Input() deviceType: DeviceType;
+  @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
+  opened: boolean = false;
+  deviceType: DeviceType;
   assignDeviceType: DeviceType;
   assestType: Array<DeviceType> = [];
   showPreloader: boolean = true;
@@ -25,14 +29,14 @@ export class DeviceSettingTypeCheckUseComponent implements OnInit {
   list: Array<DeviceTypeCheck> = [];
   sub: Subscription = new Subscription();
   constructor(
-    public activeModal: NgbActiveModal,
     private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
   ) { }
 
   ngOnInit() {
-    this.getAssignDevicesTypes();
+
     /* let onRefreshGlNumbersCheck = this.glNumberStateService.onRefreshGlNumbersCheck.subscribe(data => {
        this.showPreloader = true;
        this.glNumberService.validateForRemove(this.glNumber.id).subscribe((data: any) => {
@@ -45,12 +49,31 @@ export class DeviceSettingTypeCheckUseComponent implements OnInit {
       this.assestType = data;
     })
     this.sub.add(onGetDeviceType);
+    let onCheckDeviceTypeForRemove = this.devicesStateService.onCheckDeviceTypeForRemove.subscribe(data => {
+      this.deviceType = data.deviceType;
+      this.list = data.list.companies.map(item => new DeviceTypeCheck(item));
+      this.opened = true;
+    });
+    this.sub.add(onCheckDeviceTypeForRemove);
+  }
+  public checkDefaultName(name) {
+    if (name == "workstation" || name == "router"
+      || name == "printer" || name == "switch" || name == "server"
+      || name == "tablet" || name == "network device" || name == "phone" || name == "generic device") return true;
+    return false;
   }
   getAssignDevicesTypes() {
     this.showPreloader = true;
     this.devicesService.getAssignDevicesTypes(this.deviceType.id).subscribe((data: any) => {
-
-      this.list = data.companies.map(item => new DeviceTypeCheck(item));
+      if (data.companies.length > 0) {
+        this.list = data.companies.map(item => new DeviceTypeCheck(item));
+      } else {
+        this.confirmStateService.setConfirmAction(DELETE_DEVICE_TYPE);
+        const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+        modalRef.componentInstance.message = `Delete Device type`;
+        this.devicesStateService.setDeviceTypeForRemove(this.deviceType);
+        this.closed();
+      }
       this.showPreloader = false;
     })
   }
@@ -58,6 +81,7 @@ export class DeviceSettingTypeCheckUseComponent implements OnInit {
     this.assignDeviceType = item;
   }
   setAssignDeviceType() {
+    this.addBtn.setDisabled(true);
     let list = [];
     this.list.forEach(company => {
       company.devices.forEach(item => {
@@ -68,20 +92,17 @@ export class DeviceSettingTypeCheckUseComponent implements OnInit {
       "deviceTypeId": this.assignDeviceType.id,
       "devices": list,
     }).subscribe((data: any) => {
+      this.addBtn.setDisabled(false);
       this.getAssignDevicesTypes();
     })
   }
 
+  closed() {
+    this.opened = false;
+    this.list = [];
+    this.showPreloader = true;
+  }
 
-  cancelConfirm() {
-    this.activeModal.close();
-    this.confirmStateService.setConfirm(false);
-  };
-
-  approveConfirm() {
-    this.activeModal.close();
-    this.confirmStateService.setConfirm(true);
-  };
   public trackById(index, item) {
     return item.id;
   }

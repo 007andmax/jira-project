@@ -13,6 +13,7 @@ import { ManufacturesCheckUseComponent } from '../manufactures-check-use/manufac
 import { DeviceType } from 'src/app/components/company-devices/class/device-type';
 import { DeviceFilterType } from './class/device-filter-type';
 import { DeviceSettingTypeCheckUseComponent } from './device-setting-type-check-use/device-setting-type-check-use.component';
+import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 
 @Component({
   selector: 'app-device-setting-type',
@@ -22,6 +23,7 @@ import { DeviceSettingTypeCheckUseComponent } from './device-setting-type-check-
 export class DeviceSettingTypeComponent implements OnInit {
   showPreloader: boolean = true;
   addDeviceType: boolean = false;
+
   filter: DeviceFilterType = new DeviceFilterType();
   deviceTypes: Array<DeviceType> = [];
   sub: Subscription = new Subscription();
@@ -44,11 +46,27 @@ export class DeviceSettingTypeComponent implements OnInit {
       this.cd.detectChanges();
     })
     this.sub.add(onGetManufactures);
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_DEVICE_TYPE) this.removeDeviceType(this.devicesStateService.getDeviceTypeForRemove().id);
+      }
+    })
+    this.sub.add(getConfirm);
   }
-  removeDeviceType(deviceType) {
-    this.confirmStateService.setConfirmAction(DELETE_DEVICE_TYPE);
-    const modalRef = this.modalService.open(DeviceSettingTypeCheckUseComponent, { windowClass: 'xs-modal user-modal', container: "device-setting", backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.deviceType = deviceType;
+  removeDeviceType(id) {
+
+  }
+  onRemoveDeviceType(deviceType) {
+    this.devicesService.getAssignDevicesTypes(deviceType.id).subscribe((data: any) => {
+      if (data.companies.length > 0) {
+        this.devicesStateService.checkDeviceTypeForRemove({ deviceType, list: data });
+      } else {
+        this.confirmStateService.setConfirmAction(DELETE_DEVICE_TYPE);
+        const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+        modalRef.componentInstance.message = `Delete Device type`;
+        this.devicesStateService.setDeviceTypeForRemove(deviceType);
+      }
+    })
   }
   onEditDeviceType(item, event) {
     if (item.isInitEdit) {

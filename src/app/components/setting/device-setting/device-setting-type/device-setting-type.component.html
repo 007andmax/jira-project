@@ -65,7 +65,7 @@
                         <div
                             data-tooltip="Remove"
                             class="qt-icon icon__delete qt-sz-20 qt-bg-contain pointer"
-                            (click)="removeDeviceType(device)"
+                            (click)="onRemoveDeviceType(device)"
                             (mouseenter)="removeTooltip.show($event.target)"
                             (mouseleave)="removeTooltip.hide()"
                         >
@@ -83,9 +83,12 @@
 
 
 
+
+
 <div
     class="loading-container"
     *ngIf="showPreloader"
 >
     <div class="loading"></div>
 </div>
+<app-device-setting-type-check-use></app-device-setting-type-check-use>

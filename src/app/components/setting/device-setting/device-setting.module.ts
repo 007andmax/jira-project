@@ -25,6 +25,9 @@ import { DeviceSettingTypeComponent } from './device-setting-type/device-setting
 import { AddDeviceSettingTypeComponent } from './device-setting-type/add-device-setting-type/add-device-setting-type.component';
 import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 import { DeviceSettingTypeCheckUseComponent } from './device-setting-type/device-setting-type-check-use/device-setting-type-check-use.component';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
+import { CompanyDevicesAssestTypeDropDownModule } from '../../company-devices/company-devices-custom-aside/company-devices-assest-type-drop-down/company-devices-assest-type-drop-down.module';
 
 @NgModule({
     declarations: [
@@ -42,7 +45,8 @@ import { DeviceSettingTypeCheckUseComponent } from './device-setting-type/device
         DeviceSettingModelsComponent,
         DeviceSettingModelsAddComponent,
         DeviceSettingTypeComponent,
-        AddDeviceSettingTypeComponent
+        AddDeviceSettingTypeComponent,
+        DeviceSettingTypeCheckUseComponent
     ],
     imports: [
         CommonModule,
@@ -54,7 +58,10 @@ import { DeviceSettingTypeCheckUseComponent } from './device-setting-type/device
         DynamicTooltipModule,
         ClickOutsideModule,
         KeyUpEnterModule,
-        MatErrorModule
+        MatErrorModule,
+        DisabledBtnModule,
+        PreloaderTicketModule,
+        CompanyDevicesAssestTypeDropDownModule
     ],
 })
 export class DeviceSettingModule { }

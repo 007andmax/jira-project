@@ -186,7 +186,6 @@ declare var $: any;
     PreviewFileComponent,
     SubscriptionServicesCheckUseComponent,
     SubscriptionServicesConfirmComponent,
-    DeviceSettingTypeCheckUseComponent
   ],
   imports: [
     BrowserModule,
@@ -263,7 +262,6 @@ declare var $: any;
     ManufacturesCheckUseComponent,
     SubscriptionServicesCheckUseComponent,
     SubscriptionServicesConfirmComponent,
-    DeviceSettingTypeCheckUseComponent
   ],
   providers: [
     {
