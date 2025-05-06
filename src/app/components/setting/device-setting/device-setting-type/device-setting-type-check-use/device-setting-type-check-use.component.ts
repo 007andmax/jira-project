@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { DeviceType } from 'src/app/components/company-devices/class/device-type';
@@ -33,17 +33,10 @@ export class DeviceSettingTypeCheckUseComponent implements OnInit {
     private devicesService: DevicesService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
+    public cd: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
-
-    /* let onRefreshGlNumbersCheck = this.glNumberStateService.onRefreshGlNumbersCheck.subscribe(data => {
-       this.showPreloader = true;
-       this.glNumberService.validateForRemove(this.glNumber.id).subscribe((data: any) => {
-         this.getGlNumber(data);
-       });
-     })
-     this.sub.add(onRefreshGlNumbersCheck);*/
     if (this.devicesStateService.isGetDeviceType) this.assestType = this.devicesStateService.getDeviceTypes();
     let onGetDeviceType = this.devicesStateService.onGetDeviceType.subscribe(data => {
       this.assestType = data;
@@ -53,6 +46,7 @@ export class DeviceSettingTypeCheckUseComponent implements OnInit {
       this.deviceType = data.deviceType;
       this.list = data.list.companies.map(item => new DeviceTypeCheck(item));
       this.opened = true;
+      this.cd.detectChanges();
     });
     this.sub.add(onCheckDeviceTypeForRemove);
   }
@@ -101,6 +95,7 @@ export class DeviceSettingTypeCheckUseComponent implements OnInit {
     this.opened = false;
     this.list = [];
     this.showPreloader = true;
+    this.cd.detectChanges();
   }
 
   public trackById(index, item) {
