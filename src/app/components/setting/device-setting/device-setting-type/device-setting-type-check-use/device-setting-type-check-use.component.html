@@ -17,7 +17,7 @@
     </div>
     <div class="qt-aside-modern__content">
         <div class="qt-mb-16">
-            <div class="device-setting-type-check-use-info">
+            <div class="device-setting-type-check-use-info qt-fs-14">
                 <div class="qt-icon icon__info qt-sz-20 qt-bg-contain qt-icon__yellow-800 qt-mr-8"></div>
                 The device type cannot be removed as it is currently linked to multiple devices. Please reassign a different device type to the associated devices before attempting deletion.
             </div>
@@ -44,6 +44,7 @@
                     [search]="true"
                     [change]="true"
                     [title]="'Device Type'"
+                    [isBlockClear]="true"
                     (onSelectedItem)="onSelectAssestType($event)"
                 ></app-company-devices-assest-type-drop-down>
             </div>
@@ -66,10 +67,10 @@
                     >
                     </div>
                 </div>
-                <span
-                    class="qt-fs-14 qt-fw-400"
-                    [textContent]="'Following Devices associated with Device Type of ' + deviceType.name"
-                ></span>
+                <span class="qt-fs-14 qt-fw-400">
+                    Following Devices associated with Device Type of
+                    <u>{{deviceType.name}}</u>
+                </span>
             </div>
             <ng-template
                 ngFor
@@ -80,7 +81,7 @@
                 <div class="list-elements">
                     <div class="contract-container">
                         <div class="qt-df qt-ai-c">
-                            <div class="icon__menu--submenu qt-icon icon__companies qt-sz-20 qt-icon__gray-300 qt-mr-8"></div>
+                            <div class="icon__menu--submenu qt-icon icon__companies qt-sz-20 qt-icon__gray-500 qt-mr-8"></div>
                             <h3 [textContent]="company.name"></h3>
                         </div>
                         <div class="contract-container-agreements qt-mt-8 qt-pl-24">
@@ -120,7 +121,7 @@
                 Cancel
             </button>
             <button
-                class="qt-button qt-w100 qt-jc-c"
+                class="qt-button --red qt-w100 qt-jc-c"
                 appDisabledBtn
                 #addBtn="disabled"
                 (onClick)="setAssignDeviceType()"
