@@ -44,7 +44,13 @@ export class DevicesService {
     return this.http.get(this.apiUrl + `devices/types/assign?id=${deviceTyperId}${clientCompanyId ? `&clientCompanyId=${clientCompanyId}` : ""}`);
   }
   public setAssignDevicesTypes(data) {
-    return this.http.put(this.apiUrl + `devices/types/assign`, data);
+    return this.http.put(this.apiUrl + `devices/types/assign`, data).pipe(
+      tap(data => {
+        this.appStateService.setServerError(false);
+        this.toastrService.success("The device type has been successfully reassigned");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public getDeviceTypes() {
     return this.http.get(this.apiUrl + `devices/types`);
