@@ -100,11 +100,15 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   public onInitCopy() {
     this.contractsBlockTime.setDataFromCopy(this.сontractsStateService.getContractForCopy());
     this.selectedInterval = this.contractsBlockTime.intervalstring;
-    this.startDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
-    this.startDateDP.minDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
+    let today = new Date();
+    today.setMonth(today.getMonth() + 1);
+    this.contractsBlockTime.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsBlockTime.startDate);
+    //  this.startDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
+    //  this.startDateDP.minDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
     this.reviewDate = this.сontractsStateService.getContractForCopy().getReviewDateByMilliseconds();
     this.reviewDateDP.minDate = this.сontractsStateService.getContractForCopy().getReviewDateByMilliseconds();
-    this.startDateDP.setEditDate(this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds());
+    //   this.startDateDP.setEditDate(this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds());
     this.reviewDateDP.setEditDate(this.сontractsStateService.getContractForCopy().getReviewDateByMilliseconds());
     this.topContract.companiesDP.selectedItem = this.companiesStateService.getCompanies().find(item => item.id === this.contractsBlockTime.companyId);
     this.taxesDP.setEditItems(this.taxes.filter(item => {

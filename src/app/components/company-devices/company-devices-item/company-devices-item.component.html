@@ -172,7 +172,7 @@
                 </span>
                 <span
                     *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes > 0"
-                    [textContent]="returnTimeFormat(device.timing.idle).minutes + ' min'"
+                    [textContent]="' ' + returnTimeFormat(device.timing.idle).minutes + ' min'"
                 >
                 </span>
                 <span *ngIf="device.timing.idle && returnTimeFormat(device.timing.idle).minutes < 1 || !device.timing.idle">0 min</span>
@@ -197,7 +197,7 @@
                 </span>
                 <span
                     *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).minutes > 0 && returnTimeFormatUpTime(device.timing.online).days < 1"
-                    [textContent]="returnTimeFormatUpTime(device.timing.online).minutes + ' min'"
+                    [textContent]="' ' + returnTimeFormatUpTime(device.timing.online).minutes + ' min'"
                 >
                 </span>
                 <span *ngIf="device.online && returnTimeFormatUpTime(device.timing.online).minutes < 1 && returnTimeFormatUpTime(device.timing.online).hours < 1 && returnTimeFormatUpTime(device.timing.online).days < 1">0 min</span>
@@ -217,7 +217,7 @@
                     </span>
                     <span
                         *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).minutes > 0 && returnTimeFormatUpTime(device.timing.offline).days < 1"
-                        [textContent]="returnTimeFormatUpTime(device.timing.offline).minutes + ' min'"
+                        [textContent]="' ' + returnTimeFormatUpTime(device.timing.offline).minutes + ' min'"
                     >
                     </span>
                     <span *ngIf="!device.online && returnTimeFormatUpTime(device.timing.offline).minutes < 1 && returnTimeFormatUpTime(device.timing.offline).hours < 1 && returnTimeFormatUpTime(device.timing.offline).days < 1">0 min</span>

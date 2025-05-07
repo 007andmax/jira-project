@@ -22,7 +22,7 @@
     padding: 12px;
     position: relative;
 
-   
+
 
     .number-ticket {
         font-size: 12px;
@@ -42,6 +42,10 @@
         font-weight: 400;
         color: $gray-500;
         line-height: normal;
+
+        &__name {
+          font-size: 13px;
+        }
     }
 
     .date-ticket {

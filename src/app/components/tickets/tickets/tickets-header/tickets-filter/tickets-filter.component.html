@@ -21,7 +21,7 @@
         #companyDp
         [clientType]="'CLIENT'"
         [title]="'Company'"
-        [placeholder]="'Select company'"
+        [placeholder]="'Select Company'"
         [placement]="'bottom-left'"
         [field]="'name'"
         (filterChange)="onSelectCompany($event)"
@@ -51,14 +51,14 @@
     <tickets-filter-users-drop-down
         #usersDp
         [title]="'User'"
-        [placeholder]="'Select user'"
+        [placeholder]="'Select User'"
         [placement]="'top-left'"
         [list]="users"
         (filterChange)="onSelectUser($event)"
     ></tickets-filter-users-drop-down>
     <tickets-filter-users-drop-down
         #techUsersDp
-        [placeholder]="'Select tech user'"
+        [placeholder]="'Select Tech User'"
         [title]="'Tech User'"
         [placement]="'top-left'"
         [list]="techUsersList"
@@ -67,7 +67,7 @@
     <tickets-filter-drop-down
         #priorityDp
         [title]="'Priority'"
-        [placeholder]="'Select priority'"
+        [placeholder]="'Select Priority'"
         [placement]="'top-left'"
         [field]="'name'"
         [list]="ticketPriorities"
@@ -88,7 +88,7 @@
             class="qt-button --md --gray qt-mr-12 qt-w100 qt-jc-c"
             (click)="saveFilter()"
         >
-            Save filter
+            Save Filter
         </button>
         <button
             class="qt-button --md qt-w100 qt-jc-c"

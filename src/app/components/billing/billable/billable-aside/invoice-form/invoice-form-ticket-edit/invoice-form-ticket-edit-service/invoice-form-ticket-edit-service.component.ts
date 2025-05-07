@@ -87,6 +87,21 @@ export class InvoiceFormTicketEditServiceComponent implements OnInit, OnDestroy 
   public onPastDescription(value) {
     this.service.description = value;
   }
+  getDuration(input) {
+    let timeInMinutes = input * 60,
+      hours = Math.floor(timeInMinutes / 60),
+      minutes = Math.round(timeInMinutes - (hours * 60));
+    return (hours >= 10 ? hours : '0' + hours) + ':' + (minutes >= 10 ? minutes : '0' + minutes) + ' hr(s)';
+  }
+  getServiceTaxes(service) {
+    if (service.taxes.length > 0) return this.getSelectedTaxes(service.taxes);
+    if (service.taxes.length == 0) return this.getSelectedTaxes(service.taxes || []);
+  }
+  getSelectedTaxes(taxes) {
+    return taxes.map(item => {
+      return `${item.name} ${item.rate}%`;
+    }).join("<br>");
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

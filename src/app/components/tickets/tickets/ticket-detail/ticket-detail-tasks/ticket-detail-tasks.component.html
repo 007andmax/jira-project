@@ -9,7 +9,7 @@
         Add Task
     </div>
 </div>
-<div class="tab-pane__table-body qt-mb-16 qt-mr-24 qt-ml-24">
+<div class="tab-pane__table-body qt-mr-24 qt-ml-24">
     <div
         *ngIf="showAdd"
         [ngClass]="[addTask.status == 'COMPLETED' ? '--completed' : '']"
@@ -72,8 +72,8 @@
                 [type]="'TICEKTS'"
                 [selectedMode]="'SINGLE'"
                 [users]="listTechUsers"
+                [container]="'body'"
                 (usersChange)="onChangeUser($event,addTask)"
-                [placement]="'bottom-right'"
             ></app-tech-users>
         </div>
     </div>
@@ -153,8 +153,8 @@
                 [type]="'TICEKTS'"
                 [selectedMode]="'SINGLE'"
                 [users]="listTechUsers"
+                [container]="'body'"
                 (usersChange)="onChangeUser($event,item);onEditTicketTask(item)"
-                [placement]="'bottom-right'"
                 [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
             ></app-tech-users>
             <app-dynamic-tooltip

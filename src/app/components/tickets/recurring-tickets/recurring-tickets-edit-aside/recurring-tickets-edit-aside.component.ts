@@ -18,6 +18,7 @@ import { TechUserItem } from 'src/app/components/shared/tech-users/class/tech-us
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { DevicesRecurringTicketsComponent } from '../devices-recurring-tickets/devices-recurring-tickets.component';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
+import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
@@ -43,6 +44,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public listTechUsers: Array<TechUserItem> = [];
   description: TextAreaDirective;
   areTicketsPresented: boolean = false;
+  formatDate: string = FORMAT_DATE_2;
   @ViewChild(TextAreaDirective, { static: true }) set appTextArea(directive: TextAreaDirective) {
     this.description = directive;
   };
