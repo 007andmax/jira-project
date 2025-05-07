@@ -12,6 +12,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { DELETE_DEVICE_TYPE } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 
+
 @Component({
   selector: 'app-device-setting-type-check-use',
   templateUrl: './device-setting-type-check-use.component.html',
@@ -49,6 +50,9 @@ export class DeviceSettingTypeCheckUseComponent implements OnInit {
       this.cd.detectChanges();
     });
     this.sub.add(onCheckDeviceTypeForRemove);
+  }
+  isDisable() {
+    return (this.assignDeviceType && this.list.some(company => company.devices.some(item => item.selected)))
   }
   public checkDefaultName(name) {
     if (name == "workstation" || name == "router"

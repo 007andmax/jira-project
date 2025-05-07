@@ -92,10 +92,19 @@ export class DevicesService {
       }));
   }
   public deleteDeviceType(id) {
-    return this.http.delete(this.apiUrl + `devices/types`).pipe(
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        id: id
+      },
+    };
+    /* Need change request to default elete method without options */
+    return this.http.delete(this.apiUrl + `devices/types`, options).pipe(
       tap(data => {
         this.appStateService.setCustomeError(false);
-        this.toastrService.success("The Manufacturer has been successfully deleted");
+        this.toastrService.success("The Type has been successfully deleted");
         this.appStateService.changeDetectorRef();
         return data;
       }));

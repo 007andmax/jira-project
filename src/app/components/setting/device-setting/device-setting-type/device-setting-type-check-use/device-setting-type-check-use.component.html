@@ -126,6 +126,7 @@
                 #addBtn="disabled"
                 (onClick)="setAssignDeviceType()"
                 [ngClass]="{'--loading':addBtn.isBlock()}"
+                [disabled]="!isDisable()"
             >
                 <span *ngIf="!addBtn.isBlock()">Confirm</span>
                 <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>

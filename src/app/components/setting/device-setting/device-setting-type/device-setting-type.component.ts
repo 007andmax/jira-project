@@ -54,7 +54,9 @@ export class DeviceSettingTypeComponent implements OnInit {
     this.sub.add(getConfirm);
   }
   removeDeviceType(id) {
+    this.devicesService.deleteDeviceType(id).subscribe((data: any) => {
 
+    });
   }
   onRemoveDeviceType(deviceType) {
     this.devicesService.getAssignDevicesTypes(deviceType.id).subscribe((data: any) => {
