@@ -189,3 +189,8 @@
     cursor: not-allowed;
   }
 }
+.qt-aside-modern {
+  &::after {
+    display: none !important;
+  }
+}
