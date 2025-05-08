@@ -33,20 +33,43 @@
             <div class="ticket-detail-contact-info-line__label">Telephone</div>
             <preview-phone-mask
                 [class]="'company-info-aside__row-info-value ticket-detail-contact-info-line__input'"
+                *ngIf="getNoPrimaryPhone()"
+                [number]="getNoPrimaryPhone()"
+            ></preview-phone-mask>
+        </div>
+        <div class="ticket-detail-contact-info-line">
+            <div class="ticket-detail-contact-info-line__label">Shipping Address</div>
+            <div
+                class="ticket-detail-contact-info-line__text"
+                [textContent]="locationShipping != '' ? locationShipping : 'No information'"
+            ></div>
+            <div
+                *ngIf="company && company.companyInfo.addresses[1].locationLat && company.companyInfo.addresses[1].locationLng"
+                class="qt-button --gray --sm qt-w100 qt-jc-c qt-mt-8"
+                (click)="onShowMap(company.companyInfo.addresses[1])"
+            >
+                <span class="qt-icon icon__map qt-sz-16 qt-dib qt-mr-4"></span>
+                Get Direction
+            </div>
+        </div>
+        <div class="ticket-detail-contact-info-line">
+            <div class="ticket-detail-contact-info-line__label">Telephone</div>
+            <preview-phone-mask
+                [class]="'company-info-aside__row-info-value ticket-detail-contact-info-line__input'"
                 *ngIf="getPrimaryPhone()"
                 [number]="getPrimaryPhone()"
             ></preview-phone-mask>
         </div>
         <div class="ticket-detail-contact-info-line">
-            <div class="ticket-detail-contact-info-line__label">Address</div>
+            <div class="ticket-detail-contact-info-line__label">Billing Address</div>
             <div
                 class="ticket-detail-contact-info-line__text"
-                [textContent]="location != '' ? location : 'No information'"
+                [textContent]="locationBilling != '' ? locationBilling : 'No information'"
             ></div>
             <div
                 *ngIf="company && company.companyInfo.addresses[0].locationLat && company.companyInfo.addresses[0].locationLng"
                 class="qt-button --gray --sm qt-w100 qt-jc-c qt-mt-8"
-                (click)="onShowMap()"
+                (click)="onShowMap(company.companyInfo.addresses[0])"
             >
                 <span class="qt-icon icon__map qt-sz-16 qt-dib qt-mr-4"></span>
                 Get Direction
@@ -136,6 +159,11 @@
             ></ticket-detail-contact-details-history>
         </div>
     </div>
+
+
+
+
+
 
 
 
