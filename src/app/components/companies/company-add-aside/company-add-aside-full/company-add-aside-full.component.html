@@ -119,82 +119,6 @@
         </div>
     </div>
     <div class="qt-inputs-row qt-inputs-row__divider">
-        <div class="qt-input-block">
-            <div class="qt-input-block__subtitle qt-mt-12">Billing Address</div>
-        </div>
-    </div>
-    <div class="qt-inputs-row">
-        <div class="qt-input-block --required">
-            <div class="qt-input-block__label">Billing Location Name</div>
-            <input
-                type="text"
-                [ngClass]="{'--input-error' : !validate.getBillindAddress()}"
-                [(ngModel)]="company.addresses[0].locationName"
-                (input)="onChangeBillingLocationName($event)"
-                placeholder="Enter Location Name"
-            >
-            <app-mat-error
-                class="invalid-feedback"
-                *ngIf="!validate.getBillindAddress()"
-            >
-                Billing Location Name is required
-            </app-mat-error>
-        </div>
-    </div>
-    <div class="qt-inputs-row">
-        <div class="qt-input-block">
-            <div class="qt-input-block__label">Location</div>
-            <input
-                type="text"
-                location-is-init="false"
-                [(ngModel)]="company.addresses[0].address"
-                (focus)="onCheckGoogleAutoComplete($event,0)"
-                placeholder="Enter Location"
-            >
-        </div>
-    </div>
-    <div class="qt-inputs-row">
-        <div class="qt-input-block qt-f33">
-            <div class="qt-input-block__label">Suite No.</div>
-            <input
-                type="text"
-                [(ngModel)]="company.addresses[0].suiteNumber"
-                (input)="onChangeBillingSuiteNo($event)"
-                placeholder="Enter Suite Number"
-            >
-        </div>
-        <div class="qt-input-block qt-f33">
-            <div class="qt-input-block__label">Zip</div>
-            <input
-                type="text"
-                [(ngModel)]="company.addresses[0].postalCode"
-                (input)="onChangeBillingZip($event)"
-                placeholder="Enter Zip"
-            >
-        </div>
-        <div class="qt-input-block qt-f33 --required">
-            <div class="qt-input-block__label">Phone Number</div>
-            <input
-                type="text"
-                (input)="onChangePhoneNumber()"
-                [ngClass]="{'--input-error' : !validate.getPhoneNumber()}"
-                *ngIf="company.addresses[0].phoneNumbers.length > 0"
-                [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
-                placeholder="Enter Phone Number"
-                prefix="+1"
-                mask="(000) 000-0000 Ext: 999999||000-000-0000"
-                [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                [dropSpecialCharacters]="false"
-            >
-            <app-mat-error
-                class="invalid-feedback"
-                *ngIf="!validate.getPhoneNumber()"
-            >
-                Phone number is required
-            </app-mat-error>
-        </div>
-    </div>
-    <div class="qt-inputs-row qt-inputs-row__divider">
         <div class="qt-df qt-ai-c qt-jc-sb">
             <div class="qt-input-block__label">
                 <div class="qt-input-block__subtitle qt-mt-12">Shipping Address</div>
@@ -287,6 +211,82 @@
             <app-mat-error
                 class="invalid-feedback"
                 *ngIf="!validate.getShippingPhoneNumber()"
+            >
+                Phone number is required
+            </app-mat-error>
+        </div>
+    </div>
+    <div class="qt-inputs-row qt-inputs-row__divider">
+        <div class="qt-input-block">
+            <div class="qt-input-block__subtitle qt-mt-12">Billing Address</div>
+        </div>
+    </div>
+    <div class="qt-inputs-row">
+        <div class="qt-input-block --required">
+            <div class="qt-input-block__label">Billing Location Name</div>
+            <input
+                type="text"
+                [ngClass]="{'--input-error' : !validate.getBillindAddress()}"
+                [(ngModel)]="company.addresses[0].locationName"
+                (input)="onChangeBillingLocationName($event)"
+                placeholder="Enter Location Name"
+            >
+            <app-mat-error
+                class="invalid-feedback"
+                *ngIf="!validate.getBillindAddress()"
+            >
+                Billing Location Name is required
+            </app-mat-error>
+        </div>
+    </div>
+    <div class="qt-inputs-row">
+        <div class="qt-input-block">
+            <div class="qt-input-block__label">Location</div>
+            <input
+                type="text"
+                location-is-init="false"
+                [(ngModel)]="company.addresses[0].address"
+                (focus)="onCheckGoogleAutoComplete($event,0)"
+                placeholder="Enter Location"
+            >
+        </div>
+    </div>
+    <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f33">
+            <div class="qt-input-block__label">Suite No.</div>
+            <input
+                type="text"
+                [(ngModel)]="company.addresses[0].suiteNumber"
+                (input)="onChangeBillingSuiteNo($event)"
+                placeholder="Enter Suite Number"
+            >
+        </div>
+        <div class="qt-input-block qt-f33">
+            <div class="qt-input-block__label">Zip</div>
+            <input
+                type="text"
+                [(ngModel)]="company.addresses[0].postalCode"
+                (input)="onChangeBillingZip($event)"
+                placeholder="Enter Zip"
+            >
+        </div>
+        <div class="qt-input-block qt-f33 --required">
+            <div class="qt-input-block__label">Phone Number</div>
+            <input
+                type="text"
+                (input)="onChangePhoneNumber()"
+                [ngClass]="{'--input-error' : !validate.getPhoneNumber()}"
+                *ngIf="company.addresses[0].phoneNumbers.length > 0"
+                [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
+                placeholder="Enter Phone Number"
+                prefix="+1"
+                mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                [dropSpecialCharacters]="false"
+            >
+            <app-mat-error
+                class="invalid-feedback"
+                *ngIf="!validate.getPhoneNumber()"
             >
                 Phone number is required
             </app-mat-error>

@@ -60,6 +60,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     if (this.company) {
       let primaryContact,
         primaryAddress,
+        notPrimaryAddress,
         primaryPhone;
       if (this.company.companyInfo) {
         if (this.company.companyInfo.contacts) {
@@ -70,6 +71,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
         if (this.company.companyInfo.addresses) {
           for (let address of this.company.companyInfo.addresses) {
             if (address.isPrimary) primaryAddress = address;
+            if (!address.isPrimary) notPrimaryAddress = address;
           }
         }
         if (primaryAddress && primaryAddress.phoneNumbers.length) {
@@ -80,8 +82,8 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       this.primaryContact = primaryContact;
       this.primaryAddress = primaryAddress;
       this.primaryPhone = primaryPhone;
-      if (primaryAddress) {
-        this.location = primaryAddress.addressWithSuitNumberAndPostalCode;
+      if (notPrimaryAddress) {
+        this.location = notPrimaryAddress.addressWithSuitNumberAndPostalCode;
       } else {
         this.location = '';
       }
