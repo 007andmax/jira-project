@@ -28,6 +28,7 @@ import { ModalImageCropperStateService } from 'src/app/services/modal/modal-imag
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 declare var google: any;
 @Component({
@@ -79,6 +80,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private modalImageCropperStateService: ModalImageCropperStateService,
     public customerPortalStateService: CustomerPortalStateService,
     private companiesService: CompaniesService,
+    private companiesState: CompaniesStateService,
   ) {
   }
 
@@ -328,7 +330,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .isEmailUnique(
         this.profileForm.get('primaryEmail').value,
         this.currentUser.id,
-        false
+        this.customerPortalStateService.isCustomerPortal ? false : true,
+        this.customerPortalStateService.isCustomerPortal ? this.companiesState.getCurrentCompany().id : null
       )
       .subscribe(
         (res: any) => {
