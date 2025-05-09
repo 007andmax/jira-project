@@ -19,11 +19,11 @@ import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header
 })
 export class AccountComponent implements OnInit, OnDestroy {
   submitted = false;
-  authenticationTypes = [new TitleListType("Password only", "DISABLED"),
-  new TitleListType("Basic two-factor authentication", "BASIC"),
-  new TitleListType("Secure two-factor authentication - by email", "SECURE"),
-  new TitleListType("Secure two-factor authentication - Google authenticator", "GOOGLE_SECURE")];
-  authenticationTypesType = new TitleListType("Basic two-factor authentication", "BASIC");
+  authenticationTypes = [new TitleListType("Password Only", "DISABLED"),
+  new TitleListType("Basic Two-Factor Authentication", "BASIC"),
+  new TitleListType("Secure Two-Factor Authentication - By Email", "SECURE"),
+  new TitleListType("Secure Two-Factor Authentication - Google Authenticator", "GOOGLE_SECURE")];
+  authenticationTypesType = new TitleListType("Basic Two-Factor Authentication", "BASIC");
   oldPwdCorrect = true;
   showCurrentPassword: boolean = false;
   showNewPassword: boolean = false;

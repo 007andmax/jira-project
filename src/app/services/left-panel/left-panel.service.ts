@@ -35,7 +35,7 @@ export class LeftPanelService {
     return (state === 'ticket-detail')
   }
   isUsersPage(state) {
-    return (state === 'new-users')
+    return (state === 'new-users' || state === 'users-detail')
   }
   isMarketingPage(state) {
     return (state === 'marketing')
