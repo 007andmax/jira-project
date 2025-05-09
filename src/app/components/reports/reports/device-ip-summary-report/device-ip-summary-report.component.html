@@ -14,7 +14,7 @@
 >
     <div
         class="qt-df qt-ai-c qt-jc-c no-devices"
-        *ngIf="onInit && !loadingInProgress && !deviceIpSummary.deviceId"
+        *ngIf="onInit && !loadingInProgress && !deviceIpSummary.list"
     >
         No devices yet
     </div>
@@ -24,7 +24,7 @@
     >
         <div
             class="qt-report__body-header"
-            *ngIf="onInit && deviceIpSummary.deviceId"
+            *ngIf="onInit && deviceIpSummary.list"
         >
             <div class="body-m-sb qt-color-gray-900">{{company.name || 'All companies'}}</div>
             <h6 class="qt-fw-600 qt-color-gray-900">Software Summary Report</h6>
@@ -37,7 +37,7 @@
         </div>
         <table
             class="qt-report__body-table-body"
-            *ngIf="onInit && deviceIpSummary.deviceId"
+            *ngIf="onInit && deviceIpSummary.list"
         >
             <thead>
                 <tr>

@@ -14,7 +14,7 @@
 >
     <div
         class="qt-df qt-ai-c qt-jc-c no-devices"
-        *ngIf="onInit && !loadingInProgress && !softwareSummaryReport.deviceId"
+        *ngIf="onInit && !loadingInProgress && !softwareSummaryReport.list"
     >
         No devices yet
     </div>
@@ -24,7 +24,7 @@
     >
         <div
             class="customer-ticket"
-            *ngIf="onInit && softwareSummaryReport.deviceId"
+            *ngIf="onInit && softwareSummaryReport.list"
         >
             <div class="qt-report__body-header">
                 <div
