@@ -13,12 +13,18 @@
     id="product-list-ticket-data"
 >
     <div
+        class="qt-df qt-ai-c qt-jc-c no-devices"
+        *ngIf="onInit && !loadingInProgress && !softwareSummaryReport.deviceId"
+    >
+        No devices yet
+    </div>
+    <div
         class="qt-report__product-list"
         *ngIf="!loadingInProgress"
     >
         <div
             class="customer-ticket"
-            *ngIf="onInit"
+            *ngIf="onInit && softwareSummaryReport.deviceId"
         >
             <div class="qt-report__body-header">
                 <div
