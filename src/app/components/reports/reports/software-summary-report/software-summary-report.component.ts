@@ -19,6 +19,9 @@ export class SoftwareSummaryReportComponent implements OnInit {
   ngOnInit() {
 
   }
+  public onSelectedClient(event) {
+    this.onInit = false;
+  }
   public getReport(data) {
     this.loadingInProgress = true;
     this.softwareSummaryReport = new SoftwareSummaryReport(JSON.parse(JSON.stringify(data)));
