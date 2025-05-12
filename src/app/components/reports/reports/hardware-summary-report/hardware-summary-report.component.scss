@@ -105,17 +105,14 @@
   }
 }
 
-.loading {
-  top: 280px;
-  right: 700px;
-  left: auto;
-  width: 40px;
-  height: 40px;
-}
-
 .tablepadding{
   padding-right: 20px;
   padding-left: 20px
 }
 
 
+.no-devices {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 70px);
+}

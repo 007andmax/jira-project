@@ -19,12 +19,15 @@ export class SoftwareSummaryReportComponent implements OnInit {
   ngOnInit() {
 
   }
+  public onSelectedClient(event) {
+    this.onInit = false;
+  }
   public getReport(data) {
     this.loadingInProgress = true;
     this.softwareSummaryReport = new SoftwareSummaryReport(JSON.parse(JSON.stringify(data)));
     this.company = this.companiesStateService.getCompanies().find(item => item.id == this.softwareSummaryReport.companyId);
     if (this.softwareSummaryReport.deviceId) this.softwareSummaryReport.devices = this.softwareSummaryReport.devices.filter((item) => item.id === this.softwareSummaryReport.deviceId);
-    this.softwareSummaryReport.devices.map((item) => {
+    if (this.softwareSummaryReport.devices) this.softwareSummaryReport.devices.map((item) => {
       if (item.report && item.report && item.report.softList) {
         item.report.softList.map((soft) => {
           return this.softwareSummaryReport.list.push({

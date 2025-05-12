@@ -38,13 +38,13 @@ export class DeviceIpSummary {
             } else {
                 this.list = this.devices;
             }
-            this.list.sort((a, b) => ((a.label || a.hostName).toLowerCase() > (b.label || b.hostName).toLowerCase()) ? 1 : (((b.label || b.hostName).toLowerCase() > (a.label || a.hostName).toLowerCase()) ? -1 : 0));
+            if (this.list) this.list.sort((a, b) => ((a.label || a.hostName).toLowerCase() > (b.label || b.hostName).toLowerCase()) ? 1 : (((b.label || b.hostName).toLowerCase() > (a.label || a.hostName).toLowerCase()) ? -1 : 0));
         }
 
         if (data != null) {
             this.companyId = data.companyId;
             this.deviceName = data.deviceName;
-          }
+        }
     }
 
     public setPreloaderDevices(data) {
@@ -58,8 +58,8 @@ export class DeviceIpSummary {
     }
     public setDeviceId(data) {
         this.deviceId = data;
-    }       
-      public setDeviceName(data) {
+    }
+    public setDeviceName(data) {
         this.deviceName = data;
-      }
+    }
 }

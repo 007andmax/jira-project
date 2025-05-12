@@ -31,7 +31,7 @@ export class HardwareSummaryReport {
             } else {
                 this.list = this.devices;
             }
-            this.list.sort((a, b) => ((a.label || a.hostName).toLowerCase() > (b.label || b.hostName).toLowerCase()) ? 1 : (((b.label || b.hostName).toLowerCase() > (a.label || a.hostName).toLowerCase()) ? -1 : 0));
+            if (this.list) this.list.sort((a, b) => ((a.label || a.hostName).toLowerCase() > (b.label || b.hostName).toLowerCase()) ? 1 : (((b.label || b.hostName).toLowerCase() > (a.label || a.hostName).toLowerCase()) ? -1 : 0));
         }
     }
 

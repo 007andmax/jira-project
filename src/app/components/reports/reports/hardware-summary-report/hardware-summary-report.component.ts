@@ -18,8 +18,12 @@ export class HardwareSummaryReportComponent implements OnInit {
     public companiesStateService: CompaniesStateService) { }
   ngOnInit() {
   }
+  public onSelectedClient(event) {
+    this.onInit = false;
+  }
   public getReport(data) {
     this.loadingInProgress = true;
+    console.log('data', data);
     this.hardwareSummaryReport = new HardwareSummaryReport(JSON.parse(JSON.stringify(data)));
     this.company = this.companiesStateService.getCompanies().find(item => item.id == this.hardwareSummaryReport.companyId);
     //  this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
