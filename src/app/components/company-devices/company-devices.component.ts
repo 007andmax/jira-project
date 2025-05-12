@@ -213,7 +213,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   }
   getDevice(id) {
     this.devicesService.getCompanyDevices(id).subscribe((data: any) => {
-      if (Object.keys(data).length > 0) {
+      if (data && Object.keys(data).length > 0) {
         this.devices = data[id].map(item => new DeviceCompany(item, this.companyId));
         this.filter.onFilterName(this.devices);
       }
