@@ -18,6 +18,9 @@ export class HardwareSummaryReportComponent implements OnInit {
     public companiesStateService: CompaniesStateService) { }
   ngOnInit() {
   }
+  public onSelectedClient(event) {
+    this.onInit = false;
+  }
   public getReport(data) {
     this.loadingInProgress = true;
     console.log('data', data);

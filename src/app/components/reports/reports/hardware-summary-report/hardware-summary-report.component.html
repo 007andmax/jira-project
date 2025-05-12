@@ -2,6 +2,7 @@
     <app-report-menu
         [report]="'hardware-summary'"
         (getReport)="getReport($event)"
+        (onSelectedClient)="onSelectedClient($event)"
     ></app-report-menu>
 </div>
 <div

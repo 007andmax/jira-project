@@ -19,6 +19,9 @@ export class DeviceIpSummaryReportComponent implements OnInit {
     public companiesStateService: CompaniesStateService) { }
   ngOnInit() {
   }
+  public onSelectedClient(event) {
+    this.onInit = false;
+  }
   public getReport(data) {
     this.loadingInProgress = true;
     this.deviceIpSummary = new DeviceIpSummary(JSON.parse(JSON.stringify(data)));
