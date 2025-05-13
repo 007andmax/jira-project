@@ -58,4 +58,25 @@ describe('UsersFilterSubscriptionsComponent unit test', () => {
     com.updateDefault("invoiceSubscription", { id: "test" });
     expect(com.defaultSubscriptions["invoiceSubscription"].enabled).toEqual(false);
   });
+  it('check "updateCustom"', () => {
+    const fixture = TestBed.createComponent(UsersFilterSubscriptionsComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.updateCustom({ id: "test" }, { id: "test" });
+    expect(com.customSubscriptions.length).toEqual(1);
+  });
+  it('check "isSelected"', () => {
+    const fixture = TestBed.createComponent(UsersFilterSubscriptionsComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.isSelected({ id: "test" })).toEqual(undefined);
+  });
+  it('check "isSeletedDefault"', () => {
+    const fixture = TestBed.createComponent(UsersFilterSubscriptionsComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.isSeletedDefault("invoiceSubscription")).toEqual(true);
+  });
+  it('check "isSeletedDefault"', () => {
+    const fixture = TestBed.createComponent(UsersFilterSubscriptionsComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.isSeletedCustom({ id: "test" })).toEqual(undefined);
+  });
 });
