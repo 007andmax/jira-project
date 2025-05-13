@@ -96,7 +96,7 @@ export class DevicesStateService {
         this.onGetDeviceType.emit(this.deviceTypes);
       }
       if (newChange.action === 'DEVICE_TYPE_REMOVED') {
-        let index = this.deviceTypes.findIndex(item => item.id == newChange.data.id);
+        let index = this.deviceTypes.findIndex(item => item.id == newChange.data);
         if (index > -1) this.deviceTypes.splice(index, 1);
         this.onGetDeviceType.emit(this.deviceTypes);
       }
