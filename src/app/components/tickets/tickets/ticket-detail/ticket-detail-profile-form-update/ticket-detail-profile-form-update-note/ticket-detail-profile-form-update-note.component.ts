@@ -50,6 +50,7 @@ export class TicketDetailProfileFormUpdateNoteComponent implements OnInit {
     uploadUrl: 'v1/image',
     sanitize: false,
   };
+  isDragover: boolean = false;
   constructor(public cd: ChangeDetectorRef,
     private companiesService: CompaniesService,
     private elRef: ElementRef) { }
