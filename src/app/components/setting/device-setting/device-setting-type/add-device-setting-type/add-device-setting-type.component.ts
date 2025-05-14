@@ -32,17 +32,14 @@ export class AddDeviceSettingTypeComponent implements OnInit {
     });
   }
   checkDublicate() {
-    console.log("this.deviceForm.value.name", this.deviceForm.value.name);
     var duplicateCategory = this.deviceTypes.filter((item) => {
       return item.name.toLowerCase() == this.deviceForm.value.name.toLowerCase();
     });
-    console.log("duplicateCategory", duplicateCategory);
     if (duplicateCategory && duplicateCategory[0]) {
       this.disableCreate = true;
     } else {
       this.disableCreate = false;
     }
-    console.log(this.disableCreate)
   };
   onSubmit() {
     if (this.disableCreate) return;
