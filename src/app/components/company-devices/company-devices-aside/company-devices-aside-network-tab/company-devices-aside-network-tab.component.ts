@@ -6,6 +6,7 @@ import { CompanyDevicesEditIpComponent } from '../../company-devices-edit-ip/com
 import { CompanyDevicesEditLabelComponent } from '../../company-devices-edit-label/company-devices-edit-label.component';
 import { CompanyDevicesEditMacComponent } from '../../company-devices-edit-mac/company-devices-edit-mac.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 
 @Component({
   selector: 'app-company-devices-aside-network-tab',
@@ -21,6 +22,7 @@ export class CompanyDevicesAsideNetworkTabComponent implements OnInit {
   toggleIpSettings: boolean = false;
   constructor(private devicesService: DevicesService,
     public customerPortalStateService: CustomerPortalStateService,
+    private devicesStateService: DevicesStateService,
     public cd: ChangeDetectorRef
   ) { }
 
@@ -36,20 +38,20 @@ export class CompanyDevicesAsideNetworkTabComponent implements OnInit {
   }
   onChangeIp(data) {
     this.customDevice.setIp(data);
-    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
-
+    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(res => {
+      this.devicesStateService.fastEditCustomDevice(res);
     })
   }
   onChangeMac(data) {
     this.customDevice.setMacAddress(data);
-    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
-
+    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(res => {
+      this.devicesStateService.fastEditCustomDevice(res);
     })
   }
   onChangePort(data) {
     this.customDevice.setPort(data);
-    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(data => {
-
+    this.devicesService.editDevice(this.customDevice.getRequestForEdit()).subscribe(res => {
+      this.devicesStateService.fastEditCustomDevice(res);
     })
   }
   public chackDefaultValue(value) {

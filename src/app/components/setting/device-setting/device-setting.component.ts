@@ -13,6 +13,7 @@ import { FormBuilder } from '@angular/forms';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { fadeInAnimation } from 'src/app/animations';
+import { DeviceSettingTypeComponent } from './device-setting-type/device-setting-type.component';
 
 @Component({
   selector: 'device-setting',
@@ -28,7 +29,7 @@ export class DeviceSettingComponent implements OnInit {
   modelbutton: boolean;
   techCompany: any;
   manufactureId: Number;
-  @ViewChild("deviceType", { static: false }) deviceType: DeviceSettingDeviceTypeComponent;
+  @ViewChild("deviceType", { static: false }) deviceType: DeviceSettingTypeComponent;
   @ViewChild("manufacture", { static: false }) manufacture: DeviceSettingManufactureComponent;
   @ViewChild("model", { static: false }) model: DeviceSettingModelComponent;
   addDeviceType: boolean = false;
@@ -55,6 +56,9 @@ export class DeviceSettingComponent implements OnInit {
     })
     this.sub.add(onCurrentCompany);
   }
+  openDeviceType() {
+    this.addDeviceType = true;
+  }
   onClosedAddManufacture() {
     this.addManufacture = false;
   }
@@ -65,11 +69,14 @@ export class DeviceSettingComponent implements OnInit {
   onAddModel(res) {
     this.model.addModel(res);
   }
+  addFastDeviceType(res) {
+    this.deviceType.addFastDeviceType(res);
+  }
   onClosedAddDeviceType() {
     this.addDeviceType = false;
   }
   onAddDeviceType(res) {
-    this.deviceType.addDeviceType(res);
+    this.deviceType.addFastDeviceType(res);
   }
   onAddManufacture(res) {
     this.manufacture.addManufacture(res);
@@ -105,18 +112,18 @@ export class DeviceSettingComponent implements OnInit {
   }
   removeList() {
     if (this.activeTab == "deviceType") {
-      this.deviceType.showPreloader = true;
-      forkJoin(this.deviceType.getSelectedDeviceType().map(item => this.agentService.deleteHardwareType(item).pipe(map((res) => res),
-        catchError(error => of(undefined)))))
-        .subscribe(
-          () => {
-            this.deviceType.selectedDeviceType = [];
-            this.deviceType.getDeviceTypes(this.techCompany.id);
-          },
-          error => {
-            this.toastrService.error("Something went wrong please try again.");
-          }
-        );
+      /*  this.deviceType.showPreloader = true;
+        forkJoin(this.deviceType.getSelectedDeviceType().map(item => this.agentService.deleteHardwareType(item).pipe(map((res) => res),
+          catchError(error => of(undefined)))))
+          .subscribe(
+            () => {
+              this.deviceType.selectedDeviceType = [];
+              this.deviceType.getDeviceTypes(this.techCompany.id);
+            },
+            error => {
+              this.toastrService.error("Something went wrong please try again.");
+            }
+          );*/
     }
     if (this.activeTab == "manufacture") {
       this.manufacture.showPreloader = true;

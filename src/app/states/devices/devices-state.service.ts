@@ -11,6 +11,7 @@ import { WebsocketService } from '../../services/websocket/websocket.service';
 import { DeviceStatus } from './class/device-status';
 import { ManufactureDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/manufacture-device';
 import { ModelDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/model-device';
+import { DeviceType } from 'src/app/components/company-devices/class/device-type';
 
 @Injectable({
   providedIn: 'root'
@@ -34,14 +35,21 @@ export class DevicesStateService {
   onLaunchRemoteApp: EventEmitter<any> = new EventEmitter();
   onInitWebSocket: EventEmitter<any> = new EventEmitter();
   onGetManufactures: EventEmitter<any> = new EventEmitter();
+  onGetDeviceType: EventEmitter<any> = new EventEmitter();
+  onCheckDeviceTypeForRemove: EventEmitter<any> = new EventEmitter();
   onAddModel: EventEmitter<any> = new EventEmitter();
+  onFastAddCustomDevice: EventEmitter<any> = new EventEmitter();
+  onFastEditCustomDevice: EventEmitter<any> = new EventEmitter();
   isInitWebSocket: boolean = false;
   preloaderDevices: boolean = true;
   isGetManufactures: boolean = false;
+  isGetDeviceType: boolean = false;
+  deviceTypes: Array<DeviceType> = [];
   manufactures: Array<ManufactureDevice> = [];
   manufacturForRemove: ManufactureDevice = null;
   modelForRemove: ModelDevice = null;
   onFilter: EventEmitter<any> = new EventEmitter();
+  deviceTypeForRemove: DeviceType = null;
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService,
     private devicesService: DevicesService,
@@ -74,7 +82,40 @@ export class DevicesStateService {
         this.onGetManufactures.emit(this.manufactures);
       }
       if (newChange.action === 'MANUFACTURE_MODULE_SAVED') this.onAddModel.emit(newChange.data);
+      if (newChange.action === 'DEVICE_TYPE_SAVED') {
+        let index = this.deviceTypes.findIndex(item => item.id == newChange.data.id);
+        if (index == -1) {
+          this.deviceTypes.push(new DeviceType(newChange.data.id, newChange.data.name));
+          this.deviceTypes.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);
+          this.onGetDeviceType.emit(this.deviceTypes);
+        }
+      }
+      if (newChange.action === 'DEVICE_TYPE_EDITED') {
+        let index = this.deviceTypes.findIndex(item => item.id == newChange.data.id);
+        if (index > -1) this.deviceTypes[index] = new DeviceType(newChange.data.id, newChange.data.name);
+        this.onGetDeviceType.emit(this.deviceTypes);
+      }
+      if (newChange.action === 'DEVICE_TYPE_REMOVED') {
+        let index = this.deviceTypes.findIndex(item => item.id == newChange.data);
+        if (index > -1) this.deviceTypes.splice(index, 1);
+        this.onGetDeviceType.emit(this.deviceTypes);
+      }
     })
+  }
+  public getDeviceTypeForRemove() {
+    return this.deviceTypeForRemove
+  }
+  public setDeviceTypeForRemove(data) {
+    this.deviceTypeForRemove = data;
+  }
+  public checkDeviceTypeForRemove(data) {
+    this.onCheckDeviceTypeForRemove.emit(data);
+  }
+  public fastEditCustomDevice(data) {
+    this.onFastEditCustomDevice.emit(data);
+  }
+  public fastAddCustomDevice(data) {
+    this.onFastAddCustomDevice.emit(data);
   }
   public onInitFilter(data) {
     this.onFilter.emit(data);
@@ -99,11 +140,22 @@ export class DevicesStateService {
       this.isGetManufactures = true;
     })
   }
+  public initGetDeviceType() {
+    this.devicesService.getDeviceTypes().subscribe((data: any) => {
+      this.deviceTypes = data.deviceTypes.map(item => new DeviceType(item.id, item.name));
+      this.deviceTypes.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0);
+      this.onGetDeviceType.emit(this.deviceTypes);
+      this.isGetDeviceType = true;
+    })
+  }
   public setManufactures(data) {
     this.manufactures = data;
   }
   public getManufactures() {
     return this.manufactures;
+  }
+  public getDeviceTypes() {
+    return this.deviceTypes;
   }
   public changeDevice(allDevices, newChange) {
     if (newChange.action === 'DEVICE_UNINSTALLED') {

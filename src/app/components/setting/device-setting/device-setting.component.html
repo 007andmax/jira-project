@@ -19,13 +19,26 @@
                 >
                     <div class="qt-icon icon__delete qt-sz-16 qt-bg-contain qt-ic-c qt-button-icon"></div>
                 </a>
+                <a
+                    href="javascript:;"
+                    class="qt-button --md --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
+                    (click)="openDeviceType()"
+                >
+                    <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
+                    <span>Add Type</span>
+                </a>
                 <div class="qt-df qt-pos-rel">
-                    <add-device-type
+                    <!-- <add-device-type
                         *ngIf="addDeviceType"
                         [techCompany]="techCompany"
                         (onClose)="onClosedAddDeviceType()"
                         (onAdded)="onAddDeviceType($event)"
-                    ></add-device-type>
+                    ></add-device-type> -->
+                    <app-add-device-setting-type
+                        *ngIf="addDeviceType"
+                        (onClose)="onClosedAddDeviceType()"
+                        (onAdded)="addFastDeviceType($event)"
+                    ></app-add-device-setting-type>
                     <!-- <add-manufacture
                         *ngIf="addManufacture"
                         [techCompany]="techCompany"
@@ -61,6 +74,14 @@
             >
                 <ng-template ngbTabContent>
                     <app-device-setting-manufactures #manufacture></app-device-setting-manufactures>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab
+                title="Device Type"
+                id="device-type"
+            >
+                <ng-template ngbTabContent>
+                    <app-device-setting-type #deviceType></app-device-setting-type>
                 </ng-template>
             </ngb-tab>
         </ngb-tabset>

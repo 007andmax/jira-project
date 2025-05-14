@@ -4,6 +4,7 @@ import { DeviceRemoteSessions } from './device-remote-sessions';
 import { DeviceSystem } from './device-system';
 import { DeviceTiming } from './device-timing';
 import * as moment from "moment";
+import { DeviceType } from './device-type';
 
 export class Device {
     agentId: string;
@@ -21,7 +22,7 @@ export class Device {
     offlineAt: string;
     online: boolean;
     system: DeviceSystem;
-    type: string;
+    type: any;
     uninstalledAt: string;
     updatedAt: string;
     userName: string;

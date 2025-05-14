@@ -15,6 +15,7 @@ import { CompanyDevicesAssestTypeDropDownComponent } from './company-devices-ass
 import { MatChipModule } from '../../shared/mat-chip/mat-chip.module';
 import { MatFormFieldModule } from '../../shared/mat-form-field/mat-form-field.module';
 import { MatChipListModule } from '../../shared/mat-chip-list/mat-chip-list.module';
+import { CompanyDevicesAssestTypeDropDownModule } from './company-devices-assest-type-drop-down/company-devices-assest-type-drop-down.module';
 
 
 @NgModule({
@@ -22,8 +23,7 @@ import { MatChipListModule } from '../../shared/mat-chip-list/mat-chip-list.modu
         CompanyDevicesCustomAsideComponent,
         CompanyDevicesCustomDropDownComponent,
         ManufacturesDropDownComponent,
-        ModelsDropDownComponent,
-        CompanyDevicesAssestTypeDropDownComponent
+        ModelsDropDownComponent
     ],
     imports: [
         CommonModule,
@@ -36,7 +36,8 @@ import { MatChipListModule } from '../../shared/mat-chip-list/mat-chip-list.modu
         DisabledBtnModule,
         DatePickerModule,
         NgbModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        CompanyDevicesAssestTypeDropDownModule
     ],
     exports: [CompanyDevicesCustomAsideComponent]
 

@@ -93,6 +93,12 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     if (data == "phone") return "Phone";
     if (data == "generic device") return "Generic device";
   }
+  public checkDefaultName(name) {
+    if (name == "workstation" || name == "router"
+      || name == "printer" || name == "switch" || name == "server"
+      || name == "tablet" || name == "network device" || name == "phone" || name == "generic device") return true;
+    return false;
+  }
   openAside(type) {
     if (this.device.agentId || this.device.isCustom) this.devicesStateService.setOnOpenAside(new DeviceCompanyAsideParams(type, [this.device]));
   }
@@ -169,11 +175,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       minutes: minutes,
     }
   }
-  getLabelForEdit() {
-    if (this.device.isCustom) return this.device.name;
-    if (this.device.label) return this.device.label;
-    return this.device.hostName || this.device.ip;
-  }
+
   setMasterAgent() {
     this.devicesService.markDeviceAsMaster(this.device.companyId, this.device.agentId).subscribe(data => {
     })

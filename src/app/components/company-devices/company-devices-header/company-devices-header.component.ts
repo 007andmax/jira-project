@@ -41,14 +41,14 @@ export class CompanyDevicesHeaderComponent implements OnInit {
   getCountDevices() {
     let filtesList = [];
     if (this.filter.isAgent && this.filter.isCustomDevices) {
-      if (this.filter.assestType.length > 0) return this.devices.filter(item => this.filter.assestType.some(filteritem => filteritem.toLocaleLowerCase() == item.type.toLocaleLowerCase())).length;
+      if (this.filter.assestType.length > 0) return this.devices.filter(item => this.filter.assestType.some(filteritem => filteritem.name.toLocaleLowerCase() == ((item.isCustom) ? item.type.name.toLocaleLowerCase() : (item.iconName || item.type).toLocaleLowerCase()))).length;
       return this.devices.length;
     } else if (this.filter.isAgent) {
       filtesList = this.devices.filter(item => !item.isCustom);
     } else if (this.filter.isCustomDevices) {
       filtesList = this.devices.filter(item => item.isCustom);
     }
-    if (this.filter.assestType.length > 0) return filtesList.filter(item => this.filter.assestType.some(filteritem => filteritem.toLocaleLowerCase() == item.type.toLocaleLowerCase())).length;
+    if (this.filter.assestType.length > 0) return filtesList.filter(item => this.filter.assestType.some(filteritem => filteritem.name.toLocaleLowerCase() == ((item.isCustom) ? item.type.name.toLocaleLowerCase() : (item.iconName || item.type).toLocaleLowerCase()))).length;
     return filtesList.length;
   }
   onChangeCountFilter() {

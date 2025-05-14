@@ -38,6 +38,7 @@
             'icon__network_device' : device.getFieldForCheckIcon() === 'network device',
             'icon__old-phone' : device.getFieldForCheckIcon() === 'phone',
              'icon__generic_device' : device.getFieldForCheckIcon() === 'generic device',
+                 'icon__custom-device' : !checkDefaultName(device.getFieldForCheckIcon()),
         '--ofline': !device.online }"
                 ngbDropdownToggle
                 *ngIf="!customerPortalStateService.isCustomerPortal"
@@ -131,7 +132,7 @@
         <div>
             <div class="qt-df qt-fd-c">
                 <div class="company-devices-table-device-name qt-fw-600 qt-df qt-ai-c">
-                    <span [textContent]="getLabelForEdit()"></span>
+                    <span [textContent]="device.getLabelForEdit()"></span>
                 </div>
                 <span
                     class="company-device-desc"

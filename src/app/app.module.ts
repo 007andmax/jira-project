@@ -152,6 +152,8 @@ import { SubscriptionServicesComponent } from './components/billing/subscription
 import { SubscriptionServicesCheckUseComponent } from './components/billing/subscription-services/subscription-services-check-use/subscription-services-check-use.component';
 import { SubscriptionServicesConfirmComponent } from './components/billing/subscription-services/subscription-services-confirm/subscription-services-confirm.component';
 import { TicketDetailNoteModalModule } from './components/tickets/tickets/ticket-detail/ticket-detail-note-modal/ticket-detail-note-modal.module';
+import { DeviceSettingTypeCheckUseComponent } from './components/setting/device-setting/device-setting-type/device-setting-type-check-use/device-setting-type-check-use.component';
+import { CompanyDevicesAssestTypeDropDownModule } from './components/company-devices/company-devices-custom-aside/company-devices-assest-type-drop-down/company-devices-assest-type-drop-down.module';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -183,7 +185,7 @@ declare var $: any;
     UserDeArchiveNotificationComponent,
     PreviewFileComponent,
     SubscriptionServicesCheckUseComponent,
-    SubscriptionServicesConfirmComponent
+    SubscriptionServicesConfirmComponent,
   ],
   imports: [
     BrowserModule,
@@ -236,7 +238,8 @@ declare var $: any;
     MatChipListModule,
     MatChipModule,
     FileManagementAddFileModule,
-    TicketDetailNoteModalModule
+    TicketDetailNoteModalModule,
+    CompanyDevicesAssestTypeDropDownModule
   ],
   entryComponents: [
     ConfirmComponent,
@@ -258,7 +261,7 @@ declare var $: any;
     UsersCheckUseComponent,
     ManufacturesCheckUseComponent,
     SubscriptionServicesCheckUseComponent,
-    SubscriptionServicesConfirmComponent
+    SubscriptionServicesConfirmComponent,
   ],
   providers: [
     {
