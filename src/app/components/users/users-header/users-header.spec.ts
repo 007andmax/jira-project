@@ -16,6 +16,8 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { UsersFilterComponent } from './users-filter/users-filter.component';
 import { UsersHeaderComponent } from './users-header.component';
+import { UsersFilterInfoComponent } from './users-filter-info/users-filter-info.component';
+import { UsersFilterSubscriptionsComponent } from './users-filter/users-filter-subscriptions/users-filter-subscriptions.component';
 
 describe('UsersHeaderComponent unit test', () => {
   let component: UsersHeaderComponent;
@@ -40,7 +42,9 @@ describe('UsersHeaderComponent unit test', () => {
           onActivateTick: true
         }),
         NoopAnimationsModule],
-      declarations: [UsersHeaderComponent
+      declarations: [UsersHeaderComponent,
+        UsersFilterSubscriptionsComponent,
+        UsersFilterInfoComponent,
       ]
     }).compileComponents();
 

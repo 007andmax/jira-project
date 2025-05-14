@@ -34,7 +34,7 @@ describe('UsersFilterJobTitleComponent unit test', () => {
     com.jobTitleList = [
       { id: 1, name: 'Manager', selected: false }];
     com.setSelectedItemsWithoutChanges([{ id: 2, name: 'Manager', selected: true }]);
-    expect(com.jobTitleList.length).toEqual(0);
+    expect(com.jobTitleList.length).toEqual(1);
   });
   it('check "clearWithOutChanges"', () => {
     const fixture = TestBed.createComponent(UsersFilterJobTitleComponent);

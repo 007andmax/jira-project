@@ -4,9 +4,12 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsersFilterSubscriptionsComponent } from './users-filter-subscriptions.component';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
+import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
+import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
 
 describe('UsersFilterSubscriptionsComponent unit test', () => {
   let component: UsersFilterSubscriptionsComponent;
@@ -17,7 +20,12 @@ describe('UsersFilterSubscriptionsComponent unit test', () => {
       imports: [CommonModule,
         FormsModule,
         HttpClientModule,
+        NgbModule,
+        MatFormFieldModule,
         MatErrorModule,
+        MatChipListModule,
+        MatChipModule,
+        ReactiveFormsModule,
         ToastrModule.forRoot({
           closeButton: true,
           timeOut: 5000,

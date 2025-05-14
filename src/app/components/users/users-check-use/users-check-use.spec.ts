@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { UsersCheckUseComponent } from './users-check-use.component';
 
@@ -17,6 +17,7 @@ describe('UsersCheckUseComponent unit test', () => {
       imports: [CommonModule,
         FormsModule,
         HttpClientModule,
+        NgbModule,
         ToastrModule.forRoot({
           closeButton: true,
           timeOut: 5000,
@@ -24,7 +25,8 @@ describe('UsersCheckUseComponent unit test', () => {
         }),
         NoopAnimationsModule],
       declarations: [UsersCheckUseComponent
-      ]
+      ],
+      providers: [NgbActiveModal]
     }).compileComponents();
 
   });

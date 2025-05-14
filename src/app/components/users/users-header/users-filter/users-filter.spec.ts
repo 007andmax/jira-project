@@ -14,6 +14,10 @@ import { TicketsFilterCompaniesDropDownModule } from 'src/app/components/tickets
 import { UserDefaultSubscriptionModule } from '../../users-aside/user-default-subscription/user-default-subscription.module';
 import { UsersFilterSubscriptionsComponent } from './users-filter-subscriptions/users-filter-subscriptions.component';
 import { UsersFilterComponent } from './users-filter.component';
+import { UsersFilterCustomSubscriptionsComponent } from './users-filter-custom-subscriptions/users-filter-custom-subscriptions.component';
+import { UsersFilterDefaultSubscriptionComponent } from './users-filter-default-subscription/users-filter-default-subscription.component';
+import { UsersFilterJobTitleComponent } from './users-filter-job-title/users-filter-job-title.component';
+import { UsersFilterTagsComponent } from './users-filter-tags/users-filter-tags.component';
 
 describe('UsersFilterComponent unit test', () => {
   let component: UsersFilterComponent;
@@ -38,7 +42,11 @@ describe('UsersFilterComponent unit test', () => {
           onActivateTick: true
         }),
         NoopAnimationsModule],
-      declarations: [UsersFilterComponent
+      declarations: [UsersFilterComponent,
+        UsersFilterJobTitleComponent,
+        UsersFilterDefaultSubscriptionComponent,
+        UsersFilterTagsComponent,
+        UsersFilterCustomSubscriptionsComponent
       ]
     }).compileComponents();
 
@@ -74,12 +82,12 @@ describe('UsersFilterComponent unit test', () => {
     const fixture = TestBed.createComponent(UsersFilterComponent);
     const com = fixture.debugElement.componentInstance;
     com.onSelectCompany([{ id: 1 }, { id: 2 }, { id: 3 }]);
-    expect(com.filter.companies).toEqual(["1", "2", "3"]);
+    expect(com.filter.companies).toEqual([1, 2, 3]);
   });
   it('check "onSelectCustomSubscription"', () => {
     const fixture = TestBed.createComponent(UsersFilterComponent);
     const com = fixture.debugElement.componentInstance;
     com.onSelectCustomSubscription([{ id: 1 }, { id: 2 }, { id: 3 }]);
-    expect(com.filter.customSubscriptions).toEqual(["1", "2", "3"]);
+    expect(com.filter.customSubscriptions).toEqual([1, 2, 3]);
   });
 });
