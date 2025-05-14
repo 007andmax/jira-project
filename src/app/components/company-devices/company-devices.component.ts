@@ -90,10 +90,8 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
         if (index > -1) this.devices.splice(index, 1);
       }
       if (newChange.action === 'CUSTOM_DEVICE_EDITED') {
-        if (newChange.data.companyId == this.companyId) {
-          let index = this.devices.findIndex(item => item.deviceId == newChange.data.deviceId);
-          if (index > -1) this.devices[index].update(newChange.data);
-        }
+        let index = this.devices.findIndex(item => item.deviceId == newChange.data.deviceId);
+        if (index > -1) this.devices[index].update(newChange.data);
       }
       this.filter.onCurrentFilter(this.devices);
       this.cd.detectChanges();
@@ -146,7 +144,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
           });
         }
         if (this.confirmStateService.getConfirmAction() === REMOVE_DEVICES) {
-          if (this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).length > 0) this.removeCustomDevice(this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).map(item => item.id));
+          if (this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).length > 0) this.removeCustomDevice(this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).map(item => item.deviceId));
           if (this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).length > 0) this.devicesService.sendUninstallAgentRequest(this.companyId, this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).map(item => item.id)).subscribe(data => {
             let ids = this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).map(item => item.id);
             this.devices = this.devices.filter(item => !ids.includes(item.id));
@@ -224,7 +222,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       [...ids.map(item => this.devicesService.deleteCustomDevice(item))]
     )
       .subscribe(res => {
-        this.devices = this.devices.filter(item => !ids.includes(item.id));
+        this.devices = this.devices.filter(item => !ids.includes(item.deviceId));
       });
   }
   onCloseFilters() {
