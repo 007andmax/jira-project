@@ -80,18 +80,18 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     this.sub.add(geLefttFilter);
     let changeDevicesArray = this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'CUSTOM_DEVICE_SAVED') {
-        if (this.devices.find(item => item.id == newChange.data.deviceId) || this.devices.some(item => item.name == newChange.data.name)) return;
-        this.devices.push(new DeviceCompany({ ...newChange.data, isCustom: true, id: newChange.data.deviceId }, newChange.data.companyId));
+        if (this.devices.find(item => item.deviceId == newChange.data.deviceId) || this.devices.some(item => item.name == newChange.data.name)) return;
+        this.devices.push(new DeviceCompany({ ...newChange.data, isCustom: true, deviceId: newChange.data.deviceId }, newChange.data.companyId));
         this.devices.sort((a, b) => (a.getLabelForEdit().toLowerCase() > b.getLabelForEdit().toLowerCase()) ?
           1 : ((b.getLabelForEdit().toLowerCase() > a.getLabelForEdit().toLowerCase()) ? -1 : 0));
       }
       if (newChange.action === 'CUSTOM_DEVICE_REMOVED') {
-        let index = this.devices.findIndex(item => item.id == newChange.data);
+        let index = this.devices.findIndex(item => item.deviceId == newChange.data);
         if (index > -1) this.devices.splice(index, 1);
       }
       if (newChange.action === 'CUSTOM_DEVICE_EDITED') {
         if (newChange.data.companyId == this.companyId) {
-          let index = this.devices.findIndex(item => item.id == newChange.data.deviceId);
+          let index = this.devices.findIndex(item => item.deviceId == newChange.data.deviceId);
           if (index > -1) this.devices[index].update(newChange.data);
         }
       }
