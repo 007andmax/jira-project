@@ -32,14 +32,14 @@
         </ng-template>
     </ng-template>
     <div
-        [hidden]="!(device.online && device.remoteSessions.length > 0 && device.type !== 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS'))"
+        [hidden]="!(device.online && device.remoteSessions.length > 0 && (device.type && device.type !== 'workstation' || !device.type) && device.online && getPermissions('REMOTE_CONNECTIONS'))"
         placement="top"
         [ngbTooltip]="tipConnected"
         class="qt-ic-c icon__connected-device master-agent-icon qt-sz-24"
         (click)="remoteAccess('PROXY')"
     ></div>
     <div
-        [hidden]="!(device.online && device.remoteSessions.length > 0 && device.type === 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS'))"
+        [hidden]="!(device.online && device.remoteSessions.length > 0 && device.type && device.type === 'workstation' && device.online && getPermissions('REMOTE_CONNECTIONS'))"
         placement="top"
         [ngbTooltip]="tipConnected"
         class="qt-ic-c icon__connected-device master-agent-icon qt-sz-24"
