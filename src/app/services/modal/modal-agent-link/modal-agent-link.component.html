@@ -14,13 +14,14 @@
                 [ngForOf]="devices"
             >
                 <li
-                    (click)="changeLinkedAgent(agent.id)"
-                    *ngIf="!ticketProfile.agent || agent.id !== ticketProfile.agent.deviceId"
+                    (click)="changeLinkedAgent(agent.deviceId)"
+                    *ngIf="!ticketProfile.agent || agent.deviceId !== ticketProfile.agent.deviceId"
                 >
                     {{ agent.hostName || agent.ip }}
                 </li>
             </ng-template>
         </ul>
     </div>
+
 
 </div>

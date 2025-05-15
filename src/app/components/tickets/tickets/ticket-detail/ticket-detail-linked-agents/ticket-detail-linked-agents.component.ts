@@ -2,6 +2,8 @@ import { Input } from '@angular/core';
 import { Component } from '@angular/core';
 import { PasswordManagerLinkedComponent } from 'src/app/components/password-manager/password-manager-add-aside/password-manager-linked/password-manager-linked.component';
 import { TicketProfile } from '../../class/ticket-profile';
+import { Device } from 'src/app/components/company-devices/class/device';
+import { DeviceCompany } from 'src/app/components/company-devices/class/device-company';
 
 @Component({
   selector: 'ticket-detail-linked-agents',
@@ -9,7 +11,7 @@ import { TicketProfile } from '../../class/ticket-profile';
   styleUrls: ['./ticket-detail-linked-agents.component.scss']
 })
 export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComponent {
-  devices = [];
+  devices: Array<DeviceCompany> = [];
   @Input() selectedCompanyId: string;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   selectedDevice;
@@ -41,7 +43,7 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
       let devices = this.devices ? this.devices : [];
       devices.forEach(item => {
         this.devicesList.push(item);
-        if (this.ticketProfile.agent && this.ticketProfile.agent.deviceId == item.id) this.selectedDevice = item;
+        if (this.ticketProfile.agent && this.ticketProfile.agent.deviceId == item.deviceId) this.selectedDevice = item;
       })
       this.devicesList.sort((a, b) => (this.getLabelDevice(a).toLowerCase() > this.getLabelDevice(b).toLowerCase()) ?
         1 : ((this.getLabelDevice(b).toLowerCase() > this.getLabelDevice(a).toLowerCase()) ? -1 : 0));
@@ -55,7 +57,7 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
   }
   public selected(newItem) {
     this.selectedDevice = newItem;
-    this.changeLinkedAgent(newItem.id);
+    this.changeLinkedAgent(newItem.deviceId);
   }
   removeItem() {
     this.changeLinkedAgent('');
@@ -67,13 +69,13 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
     })
   }
   isSeletedDevice(item) {
-    return this.selectedDevice && this.selectedDevice.id === item.id;
+    return this.selectedDevice && this.selectedDevice.deviceId === item.deviceId;
   }
   onCloseDropDown(data) {
     if (!data) {
       this.elRef.nativeElement.querySelector("#search-user").value = "";
-      this.devicesList = this.devices.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
-        1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));
+      this.devicesList = this.devices.sort((a, b) => (`${a.getLabelForEdit()}`.toLowerCase() > `${b.getLabelForEdit()}`.toLowerCase()) ?
+        1 : ((`${b.getLabelForEdit()}`.toLowerCase() > `${a.getLabelForEdit()}`.toLowerCase()) ? -1 : 0));
     }
   }
 }

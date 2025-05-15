@@ -70,7 +70,7 @@ export class PasswordManagerEditLinkedComponent implements OnInit, OnDestroy {
     }
     if (this.type === 'DEVICES') {
       devices.forEach(item => {
-        this.list.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
+        this.list.push(new PasswordDeviceUser(item.deviceId, this.getLabelDevice(item), 'DEVICE'));
       })
     }
     this.list.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?

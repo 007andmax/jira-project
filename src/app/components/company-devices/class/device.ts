@@ -14,7 +14,7 @@ export class Device {
     externalIp: string;
     hostName: string;
     iconName: string;
-    id: string;
+    deviceId: string;
     ip: string = "";
     isRegular: true
     label: string;
@@ -64,7 +64,7 @@ export class Device {
         this.externalIp = data.externalIp;
         this.hostName = data.hostName;
         this.iconName = data.iconName;
-        this.id = data.id;
+        this.deviceId = data.deviceId;
         this.ip = data.ip;
         this.isRegular = data.isRegular;
         this.label = data.label;
