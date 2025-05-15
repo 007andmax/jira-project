@@ -6,7 +6,7 @@
         Remote Access
     </ng-template>
     <div
-        [hidden]="!(device.remoteSessions.length == 0 && device.type !== 'workstation' && device.online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.isCustomerPortal))"
+        [hidden]="!(device.remoteSessions.length == 0 && (device.type && device.type.name !== 'workstation' || !device.type) && device.online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.isCustomerPortal))"
         class="qt-ic-c qt-icon icon__remote-access qt-pointer qt-sz-18"
         placement="top"
         [ngbTooltip]="tipRemoteAccess"
@@ -14,7 +14,7 @@
     >
     </div>
     <div
-        [hidden]="!(device.remoteSessions.length == 0 && device.type === 'workstation' && device.online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.isCustomerPortal))"
+        [hidden]="!(device.remoteSessions.length == 0 && device.type && device.type.name === 'workstation' && device.online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.isCustomerPortal))"
         class="qt-ic-c qt-icon icon__remote-access qt-pointer qt-sz-18"
         placement="top"
         container="body"

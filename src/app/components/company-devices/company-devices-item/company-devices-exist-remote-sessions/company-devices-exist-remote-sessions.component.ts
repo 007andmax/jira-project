@@ -14,6 +14,7 @@ export class CompanyDevicesExistRemoteSessionsComponent implements OnInit {
   constructor(private permissionsService: PermissionsService, private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
+
   }
   public getUserName(userId) {
     let user = this.usersStateService.getAllUsers().find(item => item.id === userId);
@@ -33,6 +34,7 @@ export class CompanyDevicesExistRemoteSessionsComponent implements OnInit {
     return this.permissionsService.isAllowed(action)
   }
   remoteAccess(data) {
+    console.log(this.device);
     this.onRemoteAccess.emit(data);
   }
 }
