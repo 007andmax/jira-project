@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, 
 import { DeviceCompany } from 'src/app/components/company-devices/class/device-company';
 import { TicketProfile } from '../../../class/ticket-profile';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVE_DEVICES } from 'src/app/const/confirm';
 import { DevicesService } from 'src/app/services/devices/devices.service';
@@ -62,6 +62,14 @@ export class TicketDetailDevicesDetailsComponent implements OnInit {
     this.devices = JSON.parse(JSON.stringify(this.devicesReq)).map(item => new DeviceCompany(item, this.ticketProfile.company.id));
     this.elRef.nativeElement.querySelector("#search-devices").value = '';
     this.isSearch = false;
+  }
+  removeCustomDevice(ids) {
+    forkJoin(
+      [...ids.map(item => this.devicesService.deleteCustomDevice(item))]
+    )
+      .subscribe(res => {
+        this.devices = this.devices.filter(item => !ids.includes(item.deviceId));
+      });
   }
   search(event) {
     if (event.target.value.length > 0) {

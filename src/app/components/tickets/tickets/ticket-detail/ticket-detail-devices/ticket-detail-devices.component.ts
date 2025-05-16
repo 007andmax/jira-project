@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { DeviceCompany } from 'src/app/components/company-devices/class/device-company';
 import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
 import { REMOVE_DEVICES } from 'src/app/const/confirm';
@@ -7,6 +7,7 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { DevicesRealTimeService } from 'src/app/states/devices/devices-real-time.service';
+import { TicketProfile } from '../../class/ticket-profile';
 
 @Component({
   selector: 'ticket-detail-devices',
@@ -15,6 +16,7 @@ import { DevicesRealTimeService } from 'src/app/states/devices/devices-real-time
 })
 export class TicketDetailDevicesComponent implements OnInit, OnDestroy {
   @Output() onShowMore = new EventEmitter<any>();
+  @Input() ticketProfile: TicketProfile = new TicketProfile();
   toggleContainer: boolean = true;
   devices: Array<DeviceCompany> = [];
   sub: Subscription = new Subscription();
