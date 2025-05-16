@@ -138,8 +138,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
           });
         }
         if (this.confirmStateService.getConfirmAction() === REMOVE_DEVICES) {
-          if (this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).length > 0) this.removeCustomDevice(this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).map(item => item.id));
-          if (this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).length > 0) this.devicesService.sendUninstallAgentRequest(this.ticketProfile.company.id, this.devicesStateService.getDevicesForRemove().map(item => item.id)).subscribe(data => {
+          if (this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).length > 0) this.removeCustomDevice(this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).map(item => item.deviceId));
+          if (this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).length > 0) this.devicesService.sendUninstallAgentRequest(this.ticketProfile.company.id, this.devicesStateService.getDevicesForRemove().map(item => item.deviceId)).subscribe(data => {
 
           });
         }
@@ -293,7 +293,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     return this.ticketProfile.updates.some(item => item.type == "PRODUCT" || item.type == "SERVICE");
   }
   setAgent(data: TicketChangeField) {
-    let device = this.ticketStateService.getDevices().find(item => item.agentId === data.value || item.id === data.value);
+    let device = this.ticketStateService.getDevices().find(item => item.agentId === data.value || item.deviceId === data.value);
     if (device) this.ticketProfile.agent = new TicketProfileAgent(device);
     if (!device) this.ticketProfile.agent = null;
   }
