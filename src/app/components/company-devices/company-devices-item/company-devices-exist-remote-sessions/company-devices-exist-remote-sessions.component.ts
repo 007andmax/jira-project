@@ -34,7 +34,6 @@ export class CompanyDevicesExistRemoteSessionsComponent implements OnInit {
     return this.permissionsService.isAllowed(action)
   }
   remoteAccess(data) {
-    console.log(this.device);
     this.onRemoteAccess.emit(data);
   }
 }
