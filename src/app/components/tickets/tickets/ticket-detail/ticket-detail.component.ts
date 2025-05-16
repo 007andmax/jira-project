@@ -137,12 +137,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
           this.devicesService.sendPowerAction(this.ticketProfile.company.id, this.devicesStateService.getDevicesForShutDown().map(item => item.agentId), 'shutdown').subscribe(data => {
           });
         }
-        if (this.confirmStateService.getConfirmAction() === REMOVE_DEVICES) {
-          if (this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).length > 0) this.removeCustomDevice(this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).map(item => item.deviceId));
-          if (this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).length > 0) this.devicesService.sendUninstallAgentRequest(this.ticketProfile.company.id, this.devicesStateService.getDevicesForRemove().map(item => item.deviceId)).subscribe(data => {
-
-          });
-        }
       }
     });
     this.sub.add(getConfirm);
@@ -277,14 +271,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onCloseModalNote);
   }
-  removeCustomDevice(ids) {
-    forkJoin(
-      [...ids.map(item => this.devicesService.deleteCustomDevice(item))]
-    )
-      .subscribe(res => {
 
-      });
-  }
   onSelectUser(selectedUser, customerCompany) {
     this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note, customerCompany.companyId == this.ticketProfile.companyId ? null : customerCompany.companyId, selectedUser.id).subscribe(data => {
     })

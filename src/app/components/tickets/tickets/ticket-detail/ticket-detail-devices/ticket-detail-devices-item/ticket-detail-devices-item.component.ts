@@ -30,6 +30,12 @@ export class TicketDetailDevicesItemComponent implements OnInit {
       minutes: minutes,
     }
   }
+  public checkDefaultName(name) {
+    if (name == "workstation" || name == "router"
+      || name == "printer" || name == "switch" || name == "server"
+      || name == "tablet" || name == "network device" || name == "phone" || name == "generic device") return true;
+    return false;
+  }
   getLabelForEdit() {
     if (this.device.isCustom) return this.device.name;
     if (this.device.label) return this.device.label;
