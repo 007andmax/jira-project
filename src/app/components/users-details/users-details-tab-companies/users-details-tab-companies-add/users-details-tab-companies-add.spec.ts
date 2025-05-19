@@ -6,6 +6,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { UsersDetailsTabCompaniesAddComponent } from './users-details-tab-companies-add.component';
 import { UserJobTitle } from 'src/app/components/users/class/user-job-title';
 import { UserRole } from 'src/app/components/users/class/user-role';
+import { UserTableDefaultSubscriptionComponent } from 'src/app/components/users/users-table/user-table-default-subscription/user-table-default-subscription.component';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
+import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
+import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.module';
+import { FormsModule } from '@angular/forms';
 
 describe('UsersDetailsTabCompaniesAddComponent unit test', () => {
   let component: UsersDetailsTabCompaniesAddComponent;
@@ -14,14 +22,22 @@ describe('UsersDetailsTabCompaniesAddComponent unit test', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [CommonModule,
+        DisabledBtnModule,
         HttpClientModule,
+        DropDownModule,
+        NgbModule,
+        FormsModule,
+        PreviewPhoneMaskModule,
+        PreloaderTicketModule,
+        CompanyDropDownModule,
         ToastrModule.forRoot({
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
         }),
         NoopAnimationsModule],
-      declarations: [UsersDetailsTabCompaniesAddComponent
+      declarations: [UsersDetailsTabCompaniesAddComponent,
+        UserTableDefaultSubscriptionComponent
       ]
     }).compileComponents();
 
@@ -50,14 +66,13 @@ describe('UsersDetailsTabCompaniesAddComponent unit test', () => {
   it('check "onChangeDefaultSubscriptions"', () => {
     const fixture = TestBed.createComponent(UsersDetailsTabCompaniesAddComponent);
     const com = fixture.debugElement.componentInstance;
-    com.setDefaultSubscriptions(null);
-    expect(com.customerCompaniesInfo.defaultSubscriptions.invoiceSubscription.enabled).toEqual(true);
-    expect(com.customerCompaniesInfo.defaultSubscriptions.ticketSubscription.enabled).toEqual(true);
+    com.onChangeDefaultSubscriptions(null);
+    expect(com.customerCompaniesInfo.defaultSubscriptions).toEqual(null);
   });
   it('check "onSelectPortalAccessStatus"', () => {
     const fixture = TestBed.createComponent(UsersDetailsTabCompaniesAddComponent);
     const com = fixture.debugElement.componentInstance;
-    com.setUserRole(new UserRole({
+    com.onSelectPortalAccessStatus(new UserRole({
       id: "123",
       name: "Test Company",
     }));

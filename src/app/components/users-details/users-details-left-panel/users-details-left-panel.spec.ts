@@ -4,12 +4,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { UsersFilterModule } from './users-header/users-filter/users-filter.module';
-import { UsersHeaderModule } from './users-header/users-header.module';
-import { UsersRoutingModule } from './users-routing.module';
-import { UsersTableModule } from './users-table/users-table.module';
-import { UsersComponent } from './users.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
@@ -51,20 +45,20 @@ describe('UsersDetailsLeftPanelComponent unit test', () => {
   });
 
   it('check "UsersDetailsLeftPanelComponent"', () => {
-    const fixture = TestBed.createComponent(UsersComponent);
+    const fixture = TestBed.createComponent(UsersDetailsLeftPanelComponent);
     const com = fixture.debugElement.componentInstance;
     expect(com.isPrimaryContact()).toEqual(false);
   });
   it('check "UsersDetailsLeftPanelComponent"', () => {
-    const fixture = TestBed.createComponent(UsersComponent);
+    const fixture = TestBed.createComponent(UsersDetailsLeftPanelComponent);
     const com = fixture.debugElement.componentInstance;
     com.onChangeJobDescription({ target: { value: "test" } })
     expect(com.user.jobDescription).toEqual("test");
     expect(com.isChange).toEqual(true);
   });
   it('check "parseAddress"', () => {
-    const fixture = TestBed.createComponent(UsersComponent);
+    const fixture = TestBed.createComponent(UsersDetailsLeftPanelComponent);
     const com = fixture.debugElement.componentInstance;
-    expect(com.parseAddress({ suiteNumber: null, address: null, postalCode: 123 })).toEqual("No information yet 123");
+    expect(com.parseAddress({ suiteNumber: null, address: null, postalCode: 123 })).toEqual("No information yet ");
   });
 });

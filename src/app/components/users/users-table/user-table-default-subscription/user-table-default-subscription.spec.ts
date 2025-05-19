@@ -38,7 +38,7 @@ describe('UserTableDefaultSubscriptionComponent unit test', () => {
     const com = fixture.debugElement.componentInstance;
     com.defaultSubscriptions = new UserDefaultSubscription();
     com.updateDefault("invoiceSubscription");
-    expect(com.defaultSubscriptions["invoiceSubscription"].enabled).toEqual(false);
+    expect(com.defaultSubscriptions.invoiceSubscription.enabled).toEqual(false);
   });
   it('check "isSeleted"', () => {
     const fixture = TestBed.createComponent(UserTableDefaultSubscriptionComponent);

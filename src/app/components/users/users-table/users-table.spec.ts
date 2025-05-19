@@ -39,7 +39,6 @@ describe('UsersTableComponent unit test', () => {
         NgxMaskModule.forRoot(),
         PreparePhoneModule,
         DynamicTooltipModule,
-        NgbModule,
         PreviewPhoneMaskModule,
         UserTableDefaultSubscriptionModule,
         UserTableCustomSubscriptionModule,
