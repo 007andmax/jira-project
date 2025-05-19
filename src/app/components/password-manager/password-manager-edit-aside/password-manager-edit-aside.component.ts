@@ -271,10 +271,13 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     this.toastrService.success("The value is copied to clipboard");
     this.appStateService.changeDetectorRef();
   }
-  copySecretCode() {
+  openNewTab(url) {
+    window.open(url, '_blank');
+  }
+  copy(value) {
     let textArea: any = document.createElement("textarea");
     textArea.style.opacity = 0;
-    textArea.value = this.editItem.otp;
+    textArea.value = value;
     document.body.appendChild(textArea);
     textArea.select();
     try {
