@@ -67,7 +67,7 @@ describe('TicketAddAsideComponent unit test', () => {
   it('check "onSelectDevice"', () => {
     const fixture = TestBed.createComponent(TicketAddAsideComponent);
     const com = fixture.debugElement.componentInstance;
-    com.onSelectDevice({ id: "test" });
+    com.onSelectDevice({ deviceId: "test" });
     expect(com.ticketAdd.linkedAgentId).toEqual("test");
   });
 
