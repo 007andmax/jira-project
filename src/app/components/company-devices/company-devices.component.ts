@@ -121,7 +121,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     let oneTimeConnectionArray = this.devicesRealTimeService.oneTimeConnectionArray.subscribe(newChange => {
       if (newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
         for (var i = 0; i < this.devices.length; i++) {
-          if (this.devices[i].id === newChange.data.deviceId) {
+          if (this.devices[i].deviceId === newChange.data.deviceId) {
             this.devices[i].remoteSessions.push(new DeviceRemoteSessions({
               startedAt: newChange.data.startedAt,
               id: newChange.data.sessionId,
@@ -145,9 +145,9 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
         }
         if (this.confirmStateService.getConfirmAction() === REMOVE_DEVICES) {
           if (this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).length > 0) this.removeCustomDevice(this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).map(item => item.deviceId));
-          if (this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).length > 0) this.devicesService.sendUninstallAgentRequest(this.companyId, this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).map(item => item.id)).subscribe(data => {
-            let ids = this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).map(item => item.id);
-            this.devices = this.devices.filter(item => !ids.includes(item.id));
+          if (this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).length > 0) this.devicesService.sendUninstallAgentRequest(this.companyId, this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).map(item => item.deviceId)).subscribe(data => {
+            let ids = this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).map(item => item.deviceId);
+            this.devices = this.devices.filter(item => !ids.includes(item.deviceId));
             this.onChangeSelect();
           });
         }
@@ -184,7 +184,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnUpdateAgentActivityStatus);
     let getOnResetDeviceTiming = this.devicesStateService.getOnResetDeviceTiming().subscribe(data => {
-      let findIndex = this.devices.findIndex(item => item.id === data.id);
+      let findIndex = this.devices.findIndex(item => item.deviceId === data.id);
       if (findIndex > -1) {
         this.devices[findIndex].timing.idle = null;
         if (data.online) {
@@ -203,7 +203,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnSendDeviceStatus);
     let onFastAddCustomDevice = this.devicesStateService.onFastAddCustomDevice.subscribe((data) => {
-      if (this.devices.find(item => item.id == data.deviceId) || this.devices.some(item => item.name == data.name)) return;
+      if (this.devices.find(item => item.deviceId == data.deviceId) || this.devices.some(item => item.name == data.name)) return;
       this.devices.push(new DeviceCompany({ ...data, isCustom: true, id: data.deviceId }, data.companyId));
       this.devices.sort((a, b) => (a.getLabelForEdit().toLowerCase() > b.getLabelForEdit().toLowerCase()) ?
         1 : ((b.getLabelForEdit().toLowerCase() > a.getLabelForEdit().toLowerCase()) ? -1 : 0));
@@ -211,7 +211,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     });
     this.sub.add(onFastAddCustomDevice);
     let onFastEditCustomDevice = this.devicesStateService.onFastEditCustomDevice.subscribe((data) => {
-      let index = this.devices.findIndex(item => item.id == data.deviceId);
+      let index = this.devices.findIndex(item => item.deviceId == data.deviceId);
       if (index > -1) this.devices[index].update(data);
       this.cd.detectChanges();
     });
@@ -281,7 +281,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     if (device.label && device.hostName) return device.label !== device.hostName;
   }
   public trackById(index, item) {
-    return item.id;
+    return item.deviceId;
   }
   ngOnDestroy(): void {
     if (this.customerPortalStateService.isCustomerPortal && this.devicesRealTimeService.subsribeToDevicesCustomerUsers) this.devicesRealTimeService.subsribeToDevicesCustomerUsers.unsubscribe();

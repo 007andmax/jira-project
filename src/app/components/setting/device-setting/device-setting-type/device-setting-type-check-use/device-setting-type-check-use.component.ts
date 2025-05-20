@@ -83,7 +83,7 @@ export class DeviceSettingTypeCheckUseComponent implements OnInit {
     let list = [];
     this.list.forEach(company => {
       company.devices.forEach(item => {
-        if (item.selected) list.push(item.id);
+        if (item.selected) list.push(item.deviceId);
       })
     })
     this.devicesService.setAssignDevicesTypes({

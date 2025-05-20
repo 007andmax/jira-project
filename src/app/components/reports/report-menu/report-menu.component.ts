@@ -37,6 +37,7 @@ import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { DetailContractInterval } from '../class/detail-contract-interval';
 import { ContractDetailDropDownComponent } from './contract-detail-drop-down/contract-detail-drop-down.component';
 import { ContractDetailIntervalsDropDownComponent } from './contract-detail-intervals-drop-down/contract-detail-intervals-drop-down.component';
+import { Device } from '../../company-devices/class/device';
 
 
 @Component({
@@ -74,7 +75,7 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
   yearToDate = false;
   validate: ReportValidate = new ReportValidate();
   isDisabledCompany: boolean = false;
-  devices = [];
+  devices: Array<Device> = [];
   sub: Subscription = new Subscription();
   @Input() report = "";
   @Output() getReport = new EventEmitter<any>();
@@ -228,10 +229,10 @@ export class ReportMenuComponent implements OnInit, OnDestroy {
     this.validate.resetMonthlyDetailed();
   }
   public onSelectDevice(data) {
-    this.softwareSummaryReport.setDeviceId((data) ? data.id : null);
-    this.hardwareSummaryReport.setDeviceId((data) ? data.id : null);
-    this.deviceIpSummary.setDeviceId((data) ? data.id : null);
-    this.remoteConnectionReport.setDeviceId((data) ? data.id : null);
+    this.softwareSummaryReport.setDeviceId((data) ? data.deviceId : null);
+    this.hardwareSummaryReport.setDeviceId((data) ? data.deviceId : null);
+    this.deviceIpSummary.setDeviceId((data) ? data.deviceId : null);
+    this.remoteConnectionReport.setDeviceId((data) ? data.deviceId : null);
   }
   public onSelectSoftware(data) {
     this.softwareSummaryReport.setSoftwareSoft(data);

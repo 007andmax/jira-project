@@ -62,7 +62,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     if (this.device.tags) this.deviceTags.setSelectedTag(JSON.parse(JSON.stringify(this.device.tags)).map(item => new DeviceTag(item)));
     let changeTagsrray = this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'BIND_DEVICE_TO_TAG') {
-        let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.id);
+        let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.deviceId);
         if (index > -1) {
           let tags = this.deviceTagsStateService.getTags().filter(item => newChange.data.devices[index].tags.some(tag => tag == item.id));
           this.device.setTags([...this.device.tags, ...tags]);
@@ -70,7 +70,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
         }
       }
       if (newChange.action === 'UNBIND_DEVICE_FROM_TAG') {
-        let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.id);
+        let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.deviceId);
         if (index > -1) {
           newChange.data.devices[index].tags.forEach(item => {
             let index = this.device.tags.findIndex(tag => tag.id == item);

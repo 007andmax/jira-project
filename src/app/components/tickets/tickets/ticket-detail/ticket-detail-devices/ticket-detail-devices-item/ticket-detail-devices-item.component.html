@@ -11,14 +11,16 @@
             <div
                 class="qt-icon qt-za-16 qt-sz-16"
                 [ngClass]="{'icon__devices' : device.getFieldForCheckIcon() === 'workstation' || !device.getFieldForCheckIcon(),
-               'icon__router' : device.getFieldForCheckIcon() === 'router',
-            'icon__print' : device.getFieldForCheckIcon() === 'printer',
-                'icon__network-switch' : device.getFieldForCheckIcon() === 'switch',
-          'icon__server' : device.getFieldForCheckIcon() === 'server',
-            'icon__tablet' : device.getFieldForCheckIcon() === 'tablet',
-            'icon__network_device' : device.getFieldForCheckIcon() === 'network device',
-            'icon__old-phone' : device.getFieldForCheckIcon() === 'phone',
-             'icon__generic_device' : device.getFieldForCheckIcon() === 'generic device'}"
+                'icon__router' : device.getFieldForCheckIcon() === 'router',
+             'icon__print' : device.getFieldForCheckIcon() === 'printer',
+                 'icon__network-switch' : device.getFieldForCheckIcon() === 'switch',
+           'icon__server' : device.getFieldForCheckIcon() === 'server',
+             'icon__tablet' : device.getFieldForCheckIcon() === 'tablet',
+             'icon__network_device' : device.getFieldForCheckIcon() === 'network device',
+             'icon__old-phone' : device.getFieldForCheckIcon() === 'phone',
+              'icon__generic_device' : device.getFieldForCheckIcon() === 'generic device',
+                  'icon__custom-device' : !checkDefaultName(device.getFieldForCheckIcon()),
+         '--ofline': !device.online }"
             >
             </div>
         </div>

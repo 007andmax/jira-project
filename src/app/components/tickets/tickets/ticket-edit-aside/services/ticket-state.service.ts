@@ -174,7 +174,7 @@ export class TicketStateService {
     })
     this.sub.add(getOnUpdateAgentActivityStatus);
     let getOnResetDeviceTiming = this.devicesStateService.getOnResetDeviceTiming().subscribe(data => {
-      let findIndex = this.devices.findIndex(item => item.id === data.id);
+      let findIndex = this.devices.findIndex(item => item.deviceId === data.id);
       if (findIndex > -1) {
         this.devices[findIndex].timing.idle = null;
         if (data.online) {

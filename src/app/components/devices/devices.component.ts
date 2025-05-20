@@ -182,7 +182,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
   advancesearchSoftwareFilterValue: string = "";
   advancesearchOSVersionNameFilterValue: string = "";
   advancesearchPreloader: boolean = false;
-  devices: any[] = [];
+  devices: Device[] = [];
   tempDevices: any[] = [];
   deviceIPAddress: string;
   deviceMacAddress: string;

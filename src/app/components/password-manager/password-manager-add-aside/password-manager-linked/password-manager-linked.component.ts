@@ -69,7 +69,7 @@ export class PasswordManagerLinkedComponent implements OnInit, OnDestroy {
     this.devicesService.getCompanyDevices(this.selectedCompanyId).subscribe((data: any) => {
       let devices = (data[this.selectedCompanyId]) ? JSON.parse(JSON.stringify(data[this.selectedCompanyId])).filter(item => !item.isCustom).map(item => new Device(item)) : [];
       devices.forEach(item => {
-        this.devicesList.push(new PasswordDeviceUser(item.id, this.getLabelDevice(item), 'DEVICE'));
+        this.devicesList.push(new PasswordDeviceUser(item.deviceId, this.getLabelDevice(item), 'DEVICE'));
       })
       this.devicesList.sort((a, b) => (`${a.name}`.toLowerCase() > `${b.name}`.toLowerCase()) ?
         1 : ((`${b.name}`.toLowerCase() > `${a.name}`.toLowerCase()) ? -1 : 0));

@@ -289,6 +289,7 @@
                         (onShowMore)="onShowMore('DOCUMENT')"
                     ></ticket-detail-documents>
                     <ticket-detail-devices
+                        [ticketProfile]="ticketProfile"
                         *ngIf="toggleRigthPanel"
                         (onShowMore)="onShowMore('DEVICES')"
                     ></ticket-detail-devices>
@@ -316,6 +317,7 @@
                         (onClose)="onCloseDetails()"
                     ></ticket-detail-passwords-details>
                     <ticket-detail-devices-details
+                        [ticketProfile]="ticketProfile"
                         *ngIf="typeRigthDetailAside == 'DEVICES'"
                         (onClose)="onCloseDetails()"
                     ></ticket-detail-devices-details>

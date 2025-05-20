@@ -7,7 +7,6 @@ import { DeviceType } from './device-type';
 
 export class DeviceCompany extends Device {
     companyId: string;
-    deviceId: string;
     selected: boolean = false;
     isCustom: boolean;
     name: string;
@@ -126,7 +125,7 @@ export class DeviceCompany extends Device {
         return {
             "devices": [
                 {
-                    "deviceId": this.id,
+                    "deviceId": this.deviceId,
                     "tags": data
                 }
             ]

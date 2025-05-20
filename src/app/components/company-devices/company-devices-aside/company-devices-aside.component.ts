@@ -158,7 +158,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     this.devicesStateService.setDevicesForRemove([this.currentDevice || this.customDevice]);
   }
   removeDevice() {
-    let index = this.devices.findIndex(item => item.id === this.currentDevice.id);
+    let index = this.devices.findIndex(item => item.deviceId === this.currentDevice.deviceId);
     this.devices.splice(index, 1);
     this.currentDevice = this.devices[0];
   }
@@ -172,7 +172,7 @@ export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
     this.devicesStateService.setCloseAside();
   }
   public trackById(index, item) {
-    return item.id;
+    return item.deviceId;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
