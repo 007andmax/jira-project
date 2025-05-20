@@ -273,7 +273,6 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   }
   openNewTab(link) {
     let result = URL.parse(link);
-    console.log("result", result);
     if (!result) link = `https://${link}`;
     window.open(link, '_blank');
   }
