@@ -23,7 +23,7 @@ import { PasswordRecordLink } from '../class/password-record-link';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { Device } from '../../company-devices/class/device';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
-
+declare var URL: any;
 /**
  * Password manager edit aside component
  */
@@ -271,11 +271,11 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     this.toastrService.success("The value is copied to clipboard");
     this.appStateService.changeDetectorRef();
   }
-  openNewTab(url) {
-    let result = URL.parse(url);
+  openNewTab(link) {
+    let result = URL.parse(link);
     console.log("result", result);
-    if (!result) url = `https://${url}`;
-    window.open(url, '_blank');
+    if (!result) link = `https://${link}`;
+    window.open(link, '_blank');
   }
   copy(value) {
     let textArea: any = document.createElement("textarea");
