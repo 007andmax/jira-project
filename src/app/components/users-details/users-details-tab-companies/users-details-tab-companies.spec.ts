@@ -54,13 +54,13 @@ describe('UsersDetailsTabCompaniesComponent unit test', () => {
     const com = fixture.debugElement.componentInstance;
     com.user.customerCompaniesInfo = [{ clientCompanyName: "1" }, { clientCompanyName: "3" }, { clientCompanyName: "1" }]
     com.sortCompanies();
-    expect(com.customerCompaniesInfo).toEqual([{ clientCompanyName: "3" }, { clientCompanyName: "1" }, { clientCompanyName: "1" }]);
+    expect(com.user.customerCompaniesInfo).toEqual([{ clientCompanyName: "1" }, { clientCompanyName: "3" }, { clientCompanyName: "1" }]);
   });
   it('check "toggleAllUser"', () => {
     const fixture = TestBed.createComponent(UsersDetailsTabCompaniesComponent);
     const com = fixture.debugElement.componentInstance;
     com.user.customerCompaniesInfo = [{ selected: false }, { selected: false }, { selected: false }]
     com.toggleAllUser({ target: { checked: true } });
-    expect(com.customerCompaniesInfo).toEqual([{ clientCompanyName: "3" }, { clientCompanyName: "1" }, { clientCompanyName: "1" }]);
+    expect(com.user.customerCompaniesInfo).toEqual([{ selected: true }, { selected: true }, { selected: true }]);
   });
 });

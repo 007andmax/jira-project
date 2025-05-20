@@ -43,6 +43,7 @@ describe('UsersDetailsTabCompaniesItemComponent unit test', () => {
   it('check "onSelectJobTitle"', () => {
     const fixture = TestBed.createComponent(UsersDetailsTabCompaniesItemComponent);
     const com = fixture.debugElement.componentInstance;
+    com.customerCompaniesInfo = new UserCustomerCompaniesInfo(null);
     com.onSelectJobTitle(new UserJobTitle({
       id: "123",
       name: "Test Company",
@@ -67,6 +68,7 @@ describe('UsersDetailsTabCompaniesItemComponent unit test', () => {
   it('check "onSelectPortalAccessStatus"', () => {
     const fixture = TestBed.createComponent(UsersDetailsTabCompaniesItemComponent);
     const com = fixture.debugElement.componentInstance;
+    com.customerCompaniesInfo = new UserCustomerCompaniesInfo(null);
     com.onSelectPortalAccessStatus(new UserRole({
       id: "123",
       name: "Test Company",

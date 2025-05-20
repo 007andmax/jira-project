@@ -32,9 +32,9 @@ export class UserCustomerCompaniesInfo {
     }
     getCountDefaultSubscriptions() {
         let count = 0;
-        if (this.defaultSubscriptions.invoiceSubscription.enabled) count++;
-        if (this.defaultSubscriptions.ticketManagerSubscription.enabled) count++;
-        if (this.defaultSubscriptions.ticketSubscription.enabled) count++;
+        if (this.defaultSubscriptions && this.defaultSubscriptions.invoiceSubscription.enabled) count++;
+        if (this.defaultSubscriptions && this.defaultSubscriptions.ticketManagerSubscription.enabled) count++;
+        if (this.defaultSubscriptions && this.defaultSubscriptions.ticketSubscription.enabled) count++;
         return count;
     }
     public setDefaultSubscriptions(data) {

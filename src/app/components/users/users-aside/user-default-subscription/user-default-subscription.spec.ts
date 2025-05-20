@@ -31,19 +31,19 @@ describe('UserDefaultSubscriptionComponent unit test', () => {
   it('check "showPlaceholder"', () => {
     const fixture = TestBed.createComponent(UserDefaultSubscriptionComponent);
     const com = fixture.debugElement.componentInstance;
-    com.defaultSubscriptions = new UserDefaultSubscription();
+    com.defaultSubscriptions = new UserDefaultSubscription(null);
     expect(com.showPlaceholder()).toEqual(true);
   });
   it('check "isSeleted"', () => {
     const fixture = TestBed.createComponent(UserDefaultSubscriptionComponent);
     const com = fixture.debugElement.componentInstance;
-    com.defaultSubscriptions = new UserDefaultSubscription();
+    com.defaultSubscriptions = new UserDefaultSubscription(null);
     expect(com.isSeleted("invoiceSubscription")).toEqual(true);
   });
   it('check "defaultSubscriptions"', () => {
     const fixture = TestBed.createComponent(UserDefaultSubscriptionComponent);
     const com = fixture.debugElement.componentInstance;
-    com.defaultSubscriptions = new UserDefaultSubscription();
+    com.defaultSubscriptions = new UserDefaultSubscription(null);
     com.defaultSubscriptions.clearEnabledAll();
     expect(com.defaultSubscriptions.getDataForUpdate()).toEqual({
       "invoiceSubscription": {

@@ -6,7 +6,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { UsersDetailsTabCompaniesAddComponent } from './users-details-tab-companies-add.component';
 import { UserJobTitle } from 'src/app/components/users/class/user-job-title';
 import { UserRole } from 'src/app/components/users/class/user-role';
-import { UserTableDefaultSubscriptionComponent } from 'src/app/components/users/users-table/user-table-default-subscription/user-table-default-subscription.component';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -14,6 +13,7 @@ import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-do
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
 import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.module';
 import { FormsModule } from '@angular/forms';
+import { UserTableDefaultSubscriptionModule } from 'src/app/components/users/users-table/user-table-default-subscription/user-table-default-subscription.module';
 
 describe('UsersDetailsTabCompaniesAddComponent unit test', () => {
   let component: UsersDetailsTabCompaniesAddComponent;
@@ -30,14 +30,14 @@ describe('UsersDetailsTabCompaniesAddComponent unit test', () => {
         PreviewPhoneMaskModule,
         PreloaderTicketModule,
         CompanyDropDownModule,
+        UserTableDefaultSubscriptionModule,
         ToastrModule.forRoot({
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
         }),
         NoopAnimationsModule],
-      declarations: [UsersDetailsTabCompaniesAddComponent,
-        UserTableDefaultSubscriptionComponent
+      declarations: [UsersDetailsTabCompaniesAddComponent
       ]
     }).compileComponents();
 
