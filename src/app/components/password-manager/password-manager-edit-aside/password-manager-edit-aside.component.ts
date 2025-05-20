@@ -272,6 +272,9 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     this.appStateService.changeDetectorRef();
   }
   openNewTab(url) {
+    let result = URL.parse(url);
+    console.log("result", result);
+    if (!result) url = `https://${url}`;
     window.open(url, '_blank');
   }
   copy(value) {
