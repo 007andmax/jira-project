@@ -28,6 +28,6 @@ export class UserTableDefaultSubscriptionComponent implements OnInit {
   }
 
   isSeleted(field) {
-    return this.defaultSubscriptions[field].enabled;
+    return this.defaultSubscriptions && this.defaultSubscriptions[field].enabled;
   }
 }
