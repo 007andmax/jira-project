@@ -229,13 +229,13 @@
             href="javascript:;"
             (click)="create = !create"
         >
-          <span class="qt-icon icon__close qt-sz-16 qt-dib"></span>
+            <span class="qt-icon icon__close qt-sz-16 qt-dib"></span>
         </a>
     </div>
     <div class="middle-content">
         <form
             (ngSubmit)="smtpForm.valid && sendTestEmail(smtpForm, testEmailForm, true)"
-            #f="ngForm"
+            [formGroup]="f"
             novalidate
         >
             <div class="f-row">
@@ -246,7 +246,7 @@
                         href="javascript:;"
                         (click)="create = !create"
                     >
-                      <span class="qt-icon icon__close qt-sz-16 qt-dib"></span>
+                        <span class="qt-icon icon__close qt-sz-16 qt-dib"></span>
                     </a>
                     <div
                         class="form-row"

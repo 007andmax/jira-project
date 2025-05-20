@@ -5,7 +5,7 @@
             class="add-btn"
             (click)="openAddModal();"
         >
-           <span class="qt-icon icon__add qt-sz-16 qt-icon__white qt-dib"></span>
+            <span class="qt-icon icon__add qt-sz-16 qt-icon__white qt-dib"></span>
         </a>
         <!-- Modal Add New Command -->
         <div
@@ -18,131 +18,131 @@
                 </div>
             </div>
             <div class="modal-body">
-                <form
-                    novalidate
-                    #commandFrm="ngForm"
-                >
-                  <div class="modal-content__content">
-                    <div class="qt-inputs-row">
-                      <div class="qt-input-block">
-                        <div class="app-drop-down__title">Command Title</div>
-                        <input
-                          type="text"
-                          id="title"
-                          class="form-input"
-                          placeholder="Command Title"
-                          [(ngModel)]="commandModal.title"
-                          name="title"
-                          #Title="ngModel"
-                          required
-                          [class.validation-error]="submitted == true && Title.errors && Title.errors.required"
-                        >
-                      </div>
-                    </div>
-                    <div class="qt-inputs-row">
-                      <div class="qt-input-block">
-                        <div class="qt-df qt-jc-sb">
-                          <div class="qt-input-block__label">Category</div>
-                          <span
-                            class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info pointer"
-                            (click)="manageCategory();"
-                          >
-                                Manage Category
-                            </span>
+                <form novalidate>
+                    <div class="modal-content__content">
+                        <div class="qt-inputs-row">
+                            <div class="qt-input-block">
+                                <div class="app-drop-down__title">Command Title</div>
+                                <input
+                                    type="text"
+                                    id="title"
+                                    class="form-input"
+                                    placeholder="Command Title"
+                                    [(ngModel)]="commandModal.title"
+                                    name="title"
+                                    #Title="ngModel"
+                                    required
+                                    [class.validation-error]="submitted == true && Title.errors && Title.errors.required"
+                                >
+                            </div>
                         </div>
-                        <app-drop-down
-                          #selectCategory
-                          [sort]="false"
-                          [placeholder]="'Select Category'"
-                          [field]="'name'"
-                          [list]="cmdCategoryReadList"
-                          [isBlockClear]="true"
-                          [validate]="validate.getCategory()"
-                          (onSelectedItem)="setCommand($event)"
-                        ></app-drop-down>
-                      </div>
-                      <div class="qt-input-block qt-f33">
-                        <app-drop-down
-                          #scriptType
-                          [sort]="false"
-                          [title]="'Script Type'"
-                          [placeholder]="'Select Script Type'"
-                          [field]="'title'"
-                          [list]="scriptTypes"
-                          [isBlockClear]="true"
-                          [validate]="validate.getType()"
-                          (onSelectedItem)="toggleTerminal($event)"
-                        ></app-drop-down>
-                      </div>
-                    </div>
-                    <div class="">
-                      <div class="nav nav-tabs justify-content-start">
-                        <li class="nav-item">
-                          <a
-                            (click)="showDescription = false"
-                            href="javascript:;"
-                            class="nav-link"
-                            [ngClass]="{'active': showDescription == false}"
-                          >
-                            Command
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a
-                            (click)="showDescription = true"
-                            href="javascript:;"
-                            class="nav-link"
-                            [ngClass]="{'active': showDescription == true}"
-                          >
-                            Description
-                          </a>
-                        </li>
-                      </div>
-                      <div class="form-row">
-                        <div
-                          id="cmd"
-                          class="cmd"
-                          *ngIf="showDescription === false"
-                        >
-                          <ul id="cmd_line" class="cmd_line">
-                            <li *ngFor="let line of lineNumber">{{line}}</li>
-                          </ul>
-                          <textarea
-                            wrap="off"
-                            class="form-input form-input__textarea"
-                            [(ngModel)]="commandModal.command"
-                            name="command"
-                            (keyup)="countLineNumber()"
-                          >
+                        <div class="qt-inputs-row">
+                            <div class="qt-input-block">
+                                <div class="qt-df qt-jc-sb">
+                                    <div class="qt-input-block__label">Category</div>
+                                    <span
+                                        class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info pointer"
+                                        (click)="manageCategory();"
+                                    >
+                                        Manage Category
+                                    </span>
+                                </div>
+                                <app-drop-down
+                                    #selectCategory
+                                    [sort]="false"
+                                    [placeholder]="'Select Category'"
+                                    [field]="'name'"
+                                    [list]="cmdCategoryReadList"
+                                    [isBlockClear]="true"
+                                    [validate]="validate.getCategory()"
+                                    (onSelectedItem)="setCommand($event)"
+                                ></app-drop-down>
+                            </div>
+                            <div class="qt-input-block qt-f33">
+                                <app-drop-down
+                                    #scriptType
+                                    [sort]="false"
+                                    [title]="'Script Type'"
+                                    [placeholder]="'Select Script Type'"
+                                    [field]="'title'"
+                                    [list]="scriptTypes"
+                                    [isBlockClear]="true"
+                                    [validate]="validate.getType()"
+                                    (onSelectedItem)="toggleTerminal($event)"
+                                ></app-drop-down>
+                            </div>
+                        </div>
+                        <div class>
+                            <div class="nav nav-tabs justify-content-start">
+                                <li class="nav-item">
+                                    <a
+                                        (click)="showDescription = false"
+                                        href="javascript:;"
+                                        class="nav-link"
+                                        [ngClass]="{'active': showDescription == false}"
+                                    >
+                                        Command
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a
+                                        (click)="showDescription = true"
+                                        href="javascript:;"
+                                        class="nav-link"
+                                        [ngClass]="{'active': showDescription == true}"
+                                    >
+                                        Description
+                                    </a>
+                                </li>
+                            </div>
+                            <div class="form-row">
+                                <div
+                                    id="cmd"
+                                    class="cmd"
+                                    *ngIf="showDescription === false"
+                                >
+                                    <ul
+                                        id="cmd_line"
+                                        class="cmd_line"
+                                    >
+                                        <li *ngFor="let line of lineNumber">{{line}}</li>
+                                    </ul>
+                                    <textarea
+                                        wrap="off"
+                                        class="form-input form-input__textarea"
+                                        [(ngModel)]="commandModal.command"
+                                        name="command"
+                                        (keyup)="countLineNumber()"
+                                    >
                                     </textarea>
+                                </div>
+                                <textarea
+                                    class="form-input form-input__textarea form-input__description"
+                                    [(ngModel)]="commandModal.description"
+                                    name="description"
+                                    *ngIf="showDescription === true"
+                                ></textarea>
+                            </div>
                         </div>
-                        <textarea
-                          class="form-input form-input__textarea form-input__description"
-                          [(ngModel)]="commandModal.description"
-                          name="description"
-                          *ngIf="showDescription === true"
-                        ></textarea>
-                      </div>
                     </div>
-                  </div>
-                  <div class="qt-df qt-ai-c qt-jc-sb qt-mt-24">
-                    <div class="qt-df">
-                      <input
-                        type="submit"
-                        value="Save"
-                        (click)="createCommand()"
-                        class="qt-button qt-mr-12 ng-star-inserted"
-                      >
-                      <a
-                        href="javascript:;"
-                        class="qt-button --gray"
-                        aria-label="Close"
-                        (click)="resetCmdModal();create = !create"
-                      >
-                        Cancel
-                      </a>
+                    <div class="qt-df qt-ai-c qt-jc-sb qt-mt-24">
+                        <div class="qt-df">
+                            <input
+                                type="submit"
+                                value="Save"
+                                (click)="createCommand()"
+                                class="qt-button qt-mr-12 ng-star-inserted"
+                            >
+                            <a
+                                href="javascript:;"
+                                class="qt-button --gray"
+                                aria-label="Close"
+                                (click)="resetCmdModal();create = !create"
+                            >
+                                Cancel
+                            </a>
+                        </div>
                     </div>
-                  </div>
                 </form>
             </div>
         </div>
@@ -151,7 +151,10 @@
                 <ng-template ngbTabContent>
                     <div class="cmn-tbs-content command">
                         <ul class="list-unstyled cmn-tbs-content__lists">
-                            <li class="cmn-tbs-content__list" *ngFor="let cmd of commandList">
+                            <li
+                                class="cmn-tbs-content__list"
+                                *ngFor="let cmd of commandList"
+                            >
                                 <div class="terminal-cmd-opt">
                                     <div class="cmd-list-left qt-df qt-ai-c">
                                         <span class="qt-icon icon__command-line qt-dib qt-sz-16 qt-mr-4"></span>
@@ -189,16 +192,16 @@
                                                     ngbDropdownItem
                                                     (click)="openEditModal(cmd, 'edit')"
                                                 >
-                                                  <div class="qt-icon icon__edit qt-bg-contain qt-sz-20 qt-mr-8"></div>
-                                                  Edit
+                                                    <div class="qt-icon icon__edit qt-bg-contain qt-sz-20 qt-mr-8"></div>
+                                                    Edit
                                                 </li>
                                                 <li
                                                     role="menuitem"
                                                     ngbDropdownItem
                                                     (click)="openModal(cmd.id, cmd.title, 'deleteCmd')"
                                                 >
-                                                  <span class="qt-icon icon__delete qt-bg-contain qt-sz-20 qt-mr-8"></span>
-                                                  Delete
+                                                    <span class="qt-icon icon__delete qt-bg-contain qt-sz-20 qt-mr-8"></span>
+                                                    Delete
                                                 </li>
                                             </ul>
                                         </div>
@@ -214,7 +217,10 @@
                 <ng-template ngbTabContent>
                     <div class="cmn-tbs-content history-cmd">
                         <ul class="list-unstyled">
-                            <li class="cmn-tbs-content__list" *ngFor="let history of historyList">
+                            <li
+                                class="cmn-tbs-content__list"
+                                *ngFor="let history of historyList"
+                            >
                                 <div class="terminal-cmd-opt">
                                     <div class="cmd-list-left">{{history[1]}}</div>
                                     <div class="cmd-list-right">

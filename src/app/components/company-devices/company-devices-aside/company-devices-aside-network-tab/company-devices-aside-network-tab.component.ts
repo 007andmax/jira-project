@@ -14,9 +14,9 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
   styleUrls: ['./company-devices-aside-network-tab.component.scss']
 })
 export class CompanyDevicesAsideNetworkTabComponent implements OnInit {
-  @ViewChild('ipLabel', { static: false }) ipLabel: CompanyDevicesEditIpComponent;
-  @ViewChild('portLabel', { static: false }) portLabel: CompanyDevicesEditLabelComponent;
-  @ViewChild('macLabel', { static: false }) macLabel: CompanyDevicesEditMacComponent;
+  @ViewChild('ipLabel') ipLabel: CompanyDevicesEditIpComponent;
+  @ViewChild('portLabel') portLabel: CompanyDevicesEditLabelComponent;
+  @ViewChild('macLabel') macLabel: CompanyDevicesEditMacComponent;
   @Input() device: DeviceExtended;
   @Input() customDevice: DeviceCompany;
   toggleIpSettings: boolean = false;

@@ -630,10 +630,7 @@
                     </a>
                 </div>
                 <div class="middle-content">
-                    <form
-                        (ngSubmit)="addAssetNote()"
-                        #assetNotesForm="ngForm"
-                    >
+                    <form (ngSubmit)="addAssetNote()">
                         <div class="f-row">
                             <div class="f-col col-100">
                                 <label>Note Subject</label>
@@ -682,7 +679,7 @@
                         <div class="btn-row">
                             <button
                                 type="submit"
-                                class="qt-button"
+                                class="btn btn-primary"
                                 [disabled]="!assetNotesForm.form.valid"
                             >
                                 Create Note
@@ -697,39 +694,6 @@
                         </div>
                     </form>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <div
                     class="sidebar-popup note"
                     [class.opened]="editNote"
@@ -751,10 +715,7 @@
                         </a>
                     </div>
                     <div class="middle-content">
-                        <form
-                            (ngSubmit)="editAssetNote()"
-                            #editassetNotesForm="ngForm"
-                        >
+                        <form (ngSubmit)="editAssetNote()">
                             <div class="f-row">
                                 <div class="f-col col-100">
                                     <label>Note Subject</label>
@@ -803,7 +764,7 @@
                             <div class="btn-row">
                                 <button
                                     type="submit"
-                                    class="qt-button"
+                                    class="btn btn-primary"
                                     [disabled]="!editassetNotesForm.form.valid"
                                 >
                                     Edit Note
@@ -815,36 +776,6 @@
                                 >
                                     Cancel
                                 </a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                 <button
                                     type="button"
                                     class="qt-button --red pull-right"
@@ -864,37 +795,6 @@
     class="loading"
     *ngIf="loading"
 ></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <ng-template
     #template
     let-modal

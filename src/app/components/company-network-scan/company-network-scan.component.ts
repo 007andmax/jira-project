@@ -33,7 +33,7 @@ import { fadeInAnimation } from 'src/app/animations';
   providers: [CompanyNetworkScanService]
 })
 export class CompanyNetworkScanComponent implements OnInit {
-  @ViewChild('btnInstallAgent', { static: false }) btnInstallAgent: DisabledBtnDirective;
+  @ViewChild('btnInstallAgent') btnInstallAgent: DisabledBtnDirective;
   devices: Array<Device> = [];
   networkScanInstallAgent: NetworkScanInstallAgent = new NetworkScanInstallAgent();
   networkScanDevices: NetworkScanDevices = new NetworkScanDevices();

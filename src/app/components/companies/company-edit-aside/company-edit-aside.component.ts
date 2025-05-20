@@ -69,7 +69,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   @ViewChild('paymentTerm', { static: true }) paymentTerm: DropDownComponent;
   @ViewChild('paymentMethod', { static: true }) paymentMethod: DropDownComponent;
   @ViewChild('serviceType', { static: true }) serviceType: DropDownComponent;
-  @ViewChild('companyAssociate', { static: false }) companyAssociate: CompanyAssociateComponent;
+  @ViewChild('companyAssociate') companyAssociate: CompanyAssociateComponent;
   @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   constructor(public companiesStateService: CompaniesStateService,

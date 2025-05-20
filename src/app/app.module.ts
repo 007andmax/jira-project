@@ -154,6 +154,7 @@ import { SubscriptionServicesConfirmComponent } from './components/billing/subsc
 import { TicketDetailNoteModalModule } from './components/tickets/tickets/ticket-detail/ticket-detail-note-modal/ticket-detail-note-modal.module';
 import { DeviceSettingTypeCheckUseComponent } from './components/setting/device-setting/device-setting-type/device-setting-type-check-use/device-setting-type-check-use.component';
 import { CompanyDevicesAssestTypeDropDownModule } from './components/company-devices/company-devices-custom-aside/company-devices-assest-type-drop-down/company-devices-assest-type-drop-down.module';
+import { CannedResponsesAsideModule } from './components/setting/ticket-settings-page/canned-responses/canned-responses-aside/canned-responses-aside.module';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -180,7 +181,6 @@ declare var $: any;
     UsersCheckUseComponent,
     GoogleAuthenticatorScratchesComponent,
     GlNumberCheckUseComponent,
-    CannedResponsesAsideComponent,
     ManufacturesCheckUseComponent,
     UserDeArchiveNotificationComponent,
     PreviewFileComponent,
@@ -239,7 +239,8 @@ declare var $: any;
     MatChipModule,
     FileManagementAddFileModule,
     TicketDetailNoteModalModule,
-    CompanyDevicesAssestTypeDropDownModule
+    CompanyDevicesAssestTypeDropDownModule,
+    CannedResponsesAsideModule
   ],
   entryComponents: [
     ConfirmComponent,

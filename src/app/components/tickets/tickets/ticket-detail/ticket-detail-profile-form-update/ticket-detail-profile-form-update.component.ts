@@ -62,7 +62,6 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
   @Input() tab: string = "NOTE";
   currentUser: CurrentUser;
   sub: Subscription = new Subscription();
-
   @ViewChild('selectNote', { static: false }) selectNote: TicketDetailProfileFormUpdateNoteComponent;
   @ViewChild('selectServices', { static: false }) selectServices: TicketDetailProfileFormUpdateServicesComponent;
   @ViewChild('selectProducts', { static: false }) selectProducts: TicketDetailProfileFormUpdateProductsComponent;

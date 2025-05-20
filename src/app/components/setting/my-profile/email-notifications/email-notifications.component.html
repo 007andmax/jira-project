@@ -9,16 +9,14 @@
                 <form
                     class="email-note-wrape"
                     (ngSubmit)="onSubmit()"
-                    #emailForm="ngForm"
-                    *ngIf="emailNotifications"
+                    [formGroup]="emailForm"
                 >
                     <label class="qt-checkbox qt-mb-16">
                         <input
                             type="checkbox"
                             id="newDevice"
-                            [(ngModel)]="emailNotifications.newDevice"
+                            formControlName="newDevice"
                             name="newDevice"
-                            #newDevice1="ngModel"
                         >
                         <span></span>
                         <div class="qt-ml-8 qt-color-gray-900">
@@ -29,9 +27,8 @@
                         <input
                             type="checkbox"
                             id="ticketCreated"
-                            [(ngModel)]="emailNotifications.ticketCreated"
+                            formControlName="ticketCreated"
                             name="ticketCreated"
-                            #ticketCreated="ngModel"
                         >
                         <span></span>
                         <div class="qt-ml-8 qt-color-gray-900">When a New Ticket created</div>
@@ -40,9 +37,8 @@
                         <input
                             id="my"
                             type="checkbox"
-                            [(ngModel)]="emailNotifications.myTicketUpdated"
+                            formControlName="myTicketUpdated"
                             name="myTicketUpdated"
-                            #myTicketUpdated="ngModel"
                         >
                         <span></span>
                         <div class="qt-ml-8 qt-color-gray-900">
@@ -53,9 +49,8 @@
                         <input
                             id="ticket"
                             type="checkbox"
-                            [(ngModel)]="emailNotifications.ticketCloseNotifications"
+                            formControlName="ticketCloseNotifications"
                             name="ticketCloseNotifications"
-                            #ticketCloseNotifications="ngModel"
                         >
                         <span></span>
                         <div class="qt-ml-8 qt-color-gray-900">When any ticket is closed</div>

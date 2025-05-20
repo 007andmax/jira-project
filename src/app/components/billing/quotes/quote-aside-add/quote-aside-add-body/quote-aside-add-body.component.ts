@@ -28,9 +28,9 @@ import { InvoiceTicketsService } from 'src/app/services/accounting/accounting-se
   styleUrls: ['./quote-aside-add-body.component.scss']
 })
 export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
-  @ViewChild('companyEdit', { static: false }) companyEdit: InvoiceFormEditCustomerComponent;
-  @ViewChild('servicesList', { static: false }) servicesList: ServiceListQuoteComponent;
-  @ViewChild('expiryDate', { static: false }) expiryDate: DatePickerComponent;
+  @ViewChild('companyEdit') companyEdit: InvoiceFormEditCustomerComponent;
+  @ViewChild('servicesList') servicesList: ServiceListQuoteComponent;
+  @ViewChild('expiryDate') expiryDate: DatePickerComponent;
   @Input() validate: QuoteValdiate = new QuoteValdiate();
   quoteCompany: CompanyItem;
   notes: Array<InvoiceNote>;

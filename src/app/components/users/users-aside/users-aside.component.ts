@@ -29,10 +29,10 @@ import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-
 })
 export class UsersAsideComponent implements OnInit, OnDestroy {
 
-  @ViewChild('userRolesDP', { static: false }) userRolesDP: DropDownComponent;
-  @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
-  @ViewChild('jobTypeDp', { static: false }) jobTypeDp: DropDownComponent;
-  @ViewChild('jobTitleDp', { static: false }) jobTitleDp: DropDownComponent;
+  @ViewChild('userRolesDP') userRolesDP: DropDownComponent;
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('jobTypeDp') jobTypeDp: DropDownComponent;
+  @ViewChild('jobTitleDp') jobTitleDp: DropDownComponent;
   public opened = false;
   user: UserProfile = new UserProfile();
   jobTitleList: Array<CrmCompanyJobTitle> = [];

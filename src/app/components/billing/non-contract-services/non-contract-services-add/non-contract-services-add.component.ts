@@ -23,7 +23,7 @@ export class NonContractServicesAddComponent implements OnInit, OnDestroy {
   validate: NonContractServiceValidate = new NonContractServiceValidate();
   defaultSelectedTax: Array<Tax> = [];
   showAdd: boolean = false;
-  @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   constructor(private glNumberStateService: GlNumberStateService,
     private nonContractServicesService: NonContractServicesService,
     private taxesStateService: TaxesStateService,

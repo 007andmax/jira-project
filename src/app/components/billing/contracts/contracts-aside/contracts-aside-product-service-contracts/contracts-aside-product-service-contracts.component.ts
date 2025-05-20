@@ -28,7 +28,7 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
   @ViewChild('topContract', { static: true }) topContract: ContractsAsideTopComponent;
-  @ViewChild('customDateDP', { static: false }) customDateDP: DatePickerComponent;
+  @ViewChild('customDateDP') customDateDP: DatePickerComponent;
   @Output() onClose = new EventEmitter<any>();
   contractsOther: ContractsOther = new ContractsOther();
   formatDate: string = FORMAT_DATE_2;

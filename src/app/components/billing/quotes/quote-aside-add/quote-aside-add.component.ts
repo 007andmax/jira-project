@@ -22,7 +22,7 @@ export class QuoteAsideAddComponent implements OnInit, OnDestroy {
   @ViewChild('saveAndContinueBtn', { static: true }) saveAndContinueBtn: DisabledBtnDirective;
   @ViewChild('saveAndApproveBtn', { static: true }) saveAndApproveBtn: DisabledBtnDirective;
   @ViewChild('saveAndDownloadBtn', { static: true }) saveAndDownloadBtn: DisabledBtnDirective;
-  @ViewChild('quoteAdd', { static: false }) quoteAdd: QuoteAsideAddBodyComponent;
+  @ViewChild('quoteAdd') quoteAdd: QuoteAsideAddBodyComponent;
   validate: QuoteValdiate = new QuoteValdiate();
   showPreview: boolean = false;
   quotePreview: QuotePreview;

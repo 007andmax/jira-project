@@ -31,7 +31,7 @@ import { InvoiceTicketsService } from 'src/app/services/accounting/accounting-se
 })
 export class InvoiceFormComponent implements OnInit, OnDestroy {
   @ViewChild('companyEdit', { static: true }) companyEdit: InvoiceFormEditCustomerComponent;
-  @ViewChild('editTicketsBtn', { static: false }) editTicketsBtn: DisabledBtnDirective;
+  @ViewChild('editTicketsBtn') editTicketsBtn: DisabledBtnDirective;
   @Output() onUpdateInvoice = new EventEmitter();
   @Input() invoice: InvoiceLock;
   @Input() invoiceNumber: string;

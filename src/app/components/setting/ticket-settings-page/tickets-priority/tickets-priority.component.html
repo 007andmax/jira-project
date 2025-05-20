@@ -57,12 +57,14 @@
                         ngbDropdown
                     >
                         <div id="dropdownBasic1">
-                            <i
-                                class="tag-color pointer"
+                            <div
+                                class="qt-df qt-ai-c qt-jc-c qt-sz-24 tag-color pointer"
                                 ngbDropdownToggle
                                 [ngStyle]="{'background-color':statusColors[addPriority.color].textColor ,
                             'border-color': statusColors[addPriority.color].textColor}"
-                            ></i>
+                            >
+                                <div class="qt-icon icon__color-picker qt-icon__white qt-sz-16 qt-icon__white"></div>
+                            </div>
                         </div>
                         <div
                             ngbDropdownMenu
@@ -76,12 +78,14 @@
                                     (click)="setColor(i)"
                                     ngbDropdownItem
                                 >
-                                    <i
-                                        class="tag-color"
+                                    <div
+                                        class="qt-df qt-ai-c qt-jc-c qt-sz-24 tag-color"
                                         [ngClass]="{'--active':addPriority.color == i}"
                                         [ngStyle]="{'background-color':tagColor.textColor ,
                             'border-color': tagColor.textColor}"
-                                    ></i>
+                                    >
+                                        <div class="qt-icon icon__done qt-icon__white qt-sz-16 qt-icon__white"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -169,7 +173,7 @@
                                 [ngStyle]="{'background-color':statusColors[item.color] && statusColors[item.color].textColor ,
                             'border-color': statusColors[item.color] && statusColors[item.color].textColor}"
                             >
-                              <div class="qt-icon icon__color-picker qt-icon__white qt-sz-16 qt-icon__white"></div>
+                                <div class="qt-icon icon__color-picker qt-icon__white qt-sz-16 qt-icon__white"></div>
                             </div>
                         </div>
                         <div
@@ -190,7 +194,7 @@
                                         [ngStyle]="{'background-color':tagColor.textColor ,
                             'border-color': tagColor.textColor}"
                                     >
-                                      <div class="qt-icon icon__done qt-icon__white qt-sz-16 qt-icon__white"></div>
+                                        <div class="qt-icon icon__done qt-icon__white qt-sz-16 qt-icon__white"></div>
                                     </div>
                                 </div>
                             </div>

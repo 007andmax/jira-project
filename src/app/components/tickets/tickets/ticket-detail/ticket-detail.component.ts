@@ -58,7 +58,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   @ViewChild('ticketMessage', { static: false }) ticketMessage: TicketDetailMessageComponent;
   @ViewChild('ticketProfileUpdates', { static: true }) ticketProfileUpdates: TicketDetailProfileUpdatesComponent;
   @ViewChild('ticketProfileFormUpdates', { static: false }) ticketProfileFormUpdates: TicketDetailProfileFormUpdateComponent;
-
   @ViewChild('ticketTasks', { static: false }) ticketTasks: TicketDetailTasksComponent;
   @ViewChild('detailHeader', { static: false }) detailHeader: TicketDetailHeaderComponent;
   @ViewChild('changeStatus', { static: false }) changeStatus: TicketDetailChangeStatusComponent;

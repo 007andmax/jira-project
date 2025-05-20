@@ -13,8 +13,8 @@ import { TicketDetailProfileEditUpdatesServicesComponent } from './ticket-detail
 })
 export class TicketDetailProfileEditUpdatesComponent implements OnInit {
   @ViewChild('updateBtn', { static: true }) updateBtn: DisabledBtnDirective;
-  @ViewChild('selectServices', { static: false }) selectServices: TicketDetailProfileEditUpdatesServicesComponent;
-  @ViewChild('selectProducts', { static: false }) selectProducts: TicketDetailProfileEditUpdatesProductsComponent;
+  @ViewChild('selectServices') selectServices: TicketDetailProfileEditUpdatesServicesComponent;
+  @ViewChild('selectProducts') selectProducts: TicketDetailProfileEditUpdatesProductsComponent;
 
   @Output() onCloseForm = new EventEmitter();
   update: TicketProfileUpdate;

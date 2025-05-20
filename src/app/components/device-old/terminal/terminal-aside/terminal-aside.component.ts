@@ -44,7 +44,6 @@ export class TerminalAsideComponent implements OnInit {
   @Output() onCopyToTerminal = new EventEmitter();
   @Output() onOpenRunScript = new EventEmitter();
   @Output() onOpenModal = new EventEmitter();
-  @ViewChild('commandFrm', { static: true }) form: any;
   @ViewChild('scriptType', { static: true }) scriptType: DropDownComponent;
   @ViewChild('selectCategory', { static: true }) selectCategory: DropDownComponent;
 

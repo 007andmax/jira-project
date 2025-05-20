@@ -22,9 +22,9 @@ import { fadeInAnimation } from 'src/app/animations';
   styleUrls: ['./dashboard-billing.component.scss']
 })
 export class DashboardBillingComponent implements OnInit {
-  @ViewChild('contractsDb', { static: false }) contractsDb: ContractsDashboardComponent;
-  @ViewChild('dashboardStats', { static: false }) dashboardStats: DashboardSalesAnalyticsComponent;
-  @ViewChild('invoiceRevenue', { static: false }) invoiceRevenue: InvoiceRevenueComponent;
+  @ViewChild('contractsDb') contractsDb: ContractsDashboardComponent;
+  @ViewChild('dashboardStats') dashboardStats: DashboardSalesAnalyticsComponent;
+  @ViewChild('invoiceRevenue') invoiceRevenue: InvoiceRevenueComponent;
   accountingStartDate: number;
   dashboard: Dashboard;
   topDashboard: TopDashboard = new TopDashboard();

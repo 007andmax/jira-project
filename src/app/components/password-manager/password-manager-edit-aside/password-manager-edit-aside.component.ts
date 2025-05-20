@@ -49,12 +49,12 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   intervalContainer: any;
   validate: PasswordRecordValidate = new PasswordRecordValidate();
   selectedUserAndDevices: Array<PasswordDeviceUser> = [];
-  @ViewChild('categoriesSelect', { static: false }) categoriesSelect: DropDownComponent;
+  @ViewChild('categoriesSelect') categoriesSelect: DropDownComponent;
   public devicesList: Array<PasswordDeviceUser> = [];
   public usersList: Array<PasswordDeviceUser> = [];
   public gadgetsList: Array<PasswordDeviceUser> = [];
   sub: Subscription = new Subscription();
-  @ViewChild('saveRecord', { static: false }) saveRecord: DisabledBtnDirective;
+  @ViewChild('saveRecord') saveRecord: DisabledBtnDirective;
   /**
    * Creates an instance of the PasswordManagerEditAsideComponent with the injected services
      * @param {FormBuilder} fb Service to work with form

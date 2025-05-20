@@ -36,7 +36,7 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
   @ViewChild('defaultSubscription', { static: true }) defaultSubscription: UsersFilterDefaultSubscriptionComponent;
   @ViewChild('jobTitleDp', { static: true }) jobTitleDp: UsersFilterJobTitleComponent;
   @ViewChild('companiesDp', { static: true }) companiesDp: TicketsFilterCompaniesDropDownComponent;
-  @ViewChild('customSubscriptionDp', { static: false }) customSubscriptionDp: UsersFilterCustomSubscriptionsComponent;
+  @ViewChild('customSubscriptionDp') customSubscriptionDp: UsersFilterCustomSubscriptionsComponent;
   @ViewChild('subscriptionDp', { static: true }) subscriptionDp: UsersFilterSubscriptionsComponent;
   @ViewChild('tagsDp', { static: true }) tagsDp: UsersFilterTagsComponent;
   @Output() onClearAll = new EventEmitter();
