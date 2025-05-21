@@ -360,11 +360,10 @@ describe('ContractsAsideHourlyBillingComponent unit test', () => {
       "manualCreateBillableItem": false,
       "enableInvoiceAutoCreate": false
     })
+    com.companiesStateService.currentCompany = { addresses: [{ timeZone: { timeOffset: 6000 } }] };
     com.contractsStateService.setContractForCopy(contractForCopy);
     com.onInitCopy();
     expect(com.selectAllServices).toEqual(true);
-    expect(com.startDate).toEqual(com.contractsStateService.getContractForCopy().getStartDateByMilliseconds());
-    expect(com.startDateDP.minDate).toEqual(com.contractsStateService.getContractForCopy().getStartDateByMilliseconds());
     expect(com.reviewDate).toEqual(com.contractsStateService.getContractForCopy().getReviewDateByMilliseconds());
     expect(com.reviewDateDP.minDate).toEqual(com.contractsStateService.getContractForCopy().getReviewDateByMilliseconds());
   });

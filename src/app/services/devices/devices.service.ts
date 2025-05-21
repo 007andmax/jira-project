@@ -40,6 +40,30 @@ export class DevicesService {
   public getManufactures() {
     return this.http.get(this.apiUrl + `devices/manufactures`);
   }
+  public getAssignDevicesTypes(deviceTyperId, clientCompanyId = null) {
+    return this.http.get(this.apiUrl + `devices/types/assign?id=${deviceTyperId}${clientCompanyId ? `&clientCompanyId=${clientCompanyId}` : ""}`);
+  }
+  public setAssignDevicesTypes(data) {
+    return this.http.put(this.apiUrl + `devices/types/assign`, data).pipe(
+      tap(data => {
+        this.appStateService.setServerError(false);
+        this.toastrService.success("The device type has been successfully reassigned");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public getDeviceTypes() {
+    return this.http.get(this.apiUrl + `devices/types`);
+  }
+  public addDeviceTypes(data) {
+    return this.http.post(this.apiUrl + `devices/types`, data).pipe(
+      tap(data => {
+        this.appStateService.setServerError(false);
+        this.toastrService.success("The new Type has been successfully created");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public validateManufacturesAndModelForRemove(manufacture_id, model_id = null) {
     return this.http.get(this.apiUrl + `devices/custom/filter?manufacturerId=${manufacture_id}${model_id ? `&modelId=${model_id}` : ''}`);
   }
@@ -73,6 +97,15 @@ export class DevicesService {
         return data;
       }));
   }
+  public deleteDeviceType(id) {
+    return this.http.delete(this.apiUrl + `devices/types?id=${id}`).pipe(
+      tap(data => {
+        this.appStateService.setCustomeError(false);
+        this.toastrService.success("The Type has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
   public deleteModel(id) {
     return this.http.delete(this.apiUrl + `devices/manufactures/models/${id}`).pipe(
       tap(data => {
@@ -88,6 +121,16 @@ export class DevicesService {
       tap(data => {
         this.appStateService.setServerError(false);
         this.toastrService.success("The Manufacturer has been successfully updated");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  public editDeviceType(data) {
+    this.appStateService.setServerError(true);
+    return this.http.put(this.apiUrl + `devices/types`, data).pipe(
+      tap(data => {
+        this.appStateService.setServerError(false);
+        this.toastrService.success("The Type has been successfully updated");
         this.appStateService.changeDetectorRef();
         return data;
       }));

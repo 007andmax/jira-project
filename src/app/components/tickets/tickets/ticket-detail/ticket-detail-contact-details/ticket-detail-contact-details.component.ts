@@ -24,7 +24,9 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
   primaryContact: any;
   primaryAddress: any;
   primaryPhone: any;
-  location: string;
+  noPrimaryPhone: any;
+  locationShipping: string;
+  locationBilling: string;
   companyOpen: string = 'Close';
   sub: Subscription = new Subscription();
   constructor(public companiesStateService: CompaniesStateService,
@@ -47,6 +49,7 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
     if (this.company) {
       let primaryContact,
         primaryAddress,
+        noPrimaryPhone,
         primaryPhone;
       if (this.company.companyInfo) {
         if (this.company.companyInfo.contacts) {
@@ -55,7 +58,14 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
         }
         if (this.company.companyInfo.addresses) {
           for (let address of this.company.companyInfo.addresses) {
-            if (address.isPrimary) primaryAddress = address;
+            if (address.isPrimary) {
+              primaryAddress = address;
+              this.locationBilling = address.addressWithSuitNumberAndPostalCode;
+            }
+            if (!address.isPrimary) {
+              if (address.phoneNumbers.length) noPrimaryPhone = address.phoneNumbers[0];
+              this.locationShipping = address.addressWithSuitNumberAndPostalCode;
+            }
           }
         }
         if (primaryAddress && primaryAddress.phoneNumbers.length) primaryPhone = primaryAddress.phoneNumbers[0];
@@ -80,11 +90,7 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
       this.primaryContact = primaryContact;
       this.primaryAddress = primaryAddress;
       this.primaryPhone = primaryPhone;
-      if (primaryAddress) {
-        this.location = primaryAddress.addressWithSuitNumberAndPostalCode;
-      } else {
-        this.location = '';
-      }
+      this.noPrimaryPhone = noPrimaryPhone;
       if (this.company && this.ticketProfile.createdUser && this.companyHistory) {
         this.companyHistory.setUser(this.ticketProfile.createdUser);
         this.companyHistory.setCompany(this.company);
@@ -123,11 +129,11 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
   getCompanyUser() {
     return this.companiesStateService.getCompanies().find(item => this.ticketProfile.company.id === item.id);
   }
-  onShowMap() {
+  onShowMap(addresses) {
     this.mapModalStateService.onSohwMap({
-      latitude: this.company.companyInfo.addresses[0].locationLat,
-      longitude: this.company.companyInfo.addresses[0].locationLng,
-      title: this.company.companyInfo.addresses[0].longCity
+      latitude: addresses.locationLat,
+      longitude: addresses.locationLng,
+      title: addresses.longCity
     })
   }
   public trackByIndex(index, item) {
@@ -140,6 +146,9 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
   }
   getPrimaryPhone() {
     return (this.primaryPhone && this.primaryPhone.number) ? this.primaryPhone.number : ''
+  }
+  getNoPrimaryPhone() {
+    return (this.noPrimaryPhone && this.noPrimaryPhone.number) ? this.noPrimaryPhone.number : ''
   }
   checkLogo(company) {
     return (company && company.logo && company.logo.cropped && company.logo.cropped.id || company && company.logo && company.logo.origin && company.logo.origin.id)

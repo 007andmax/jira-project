@@ -661,9 +661,14 @@
                         margin: 0 -8px;
                         width: calc(100% + 16px);
                         .cmp-board-info-col {
-                            width: 50%;
+                            width: 100%;
                             flex-direction: column;
                             padding: 0 8px;
+
+                            &:not(:has(*)) {
+                              width: 0;
+                              padding: 0;
+                            }
                         }
                         .cmn-box {
                             width: 100%;

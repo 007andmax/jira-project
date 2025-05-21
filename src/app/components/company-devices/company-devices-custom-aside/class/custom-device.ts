@@ -1,10 +1,11 @@
 import * as moment from 'moment';
+import { DeviceType } from '../../class/device-type';
 
 export class CustomDevice {
     "deviceId": string;
     "companyId": string;
     "name": string;
-    "type": string;
+    "type": DeviceType;
     "ip_address": string
     "port": number;
     "mac_address": string;
@@ -26,9 +27,6 @@ export class CustomDevice {
     }
     public setPreloaderModels(data) {
         this.preloaderModels = data;
-    }
-    public getTypeToLocaleLowerCase() {
-        return (this.type) ? this.type.toLocaleLowerCase() : '';
     }
     public setType(data) {
         this.type = data;
@@ -76,7 +74,7 @@ export class CustomDevice {
         return {
             "companyId": this.companyId,
             "name": this.name,
-            "type": this.type,
+            "typeId": this.type ? this.type.id : null,
             "ipAddress": this.ip_address,
             "port": Number(this.port),
             "macAddress": this.mac_address,

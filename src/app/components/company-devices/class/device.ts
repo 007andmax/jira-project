@@ -4,6 +4,7 @@ import { DeviceRemoteSessions } from './device-remote-sessions';
 import { DeviceSystem } from './device-system';
 import { DeviceTiming } from './device-timing';
 import * as moment from "moment";
+import { DeviceType } from './device-type';
 
 export class Device {
     agentId: string;
@@ -13,7 +14,7 @@ export class Device {
     externalIp: string;
     hostName: string;
     iconName: string;
-    id: string;
+    deviceId: string;
     ip: string = "";
     isRegular: true
     label: string;
@@ -21,7 +22,7 @@ export class Device {
     offlineAt: string;
     online: boolean;
     system: DeviceSystem;
-    type: string;
+    type: any;
     uninstalledAt: string;
     updatedAt: string;
     userName: string;
@@ -63,7 +64,7 @@ export class Device {
         this.externalIp = data.externalIp;
         this.hostName = data.hostName;
         this.iconName = data.iconName;
-        this.id = data.id;
+        this.deviceId = data.deviceId;
         this.ip = data.ip;
         this.isRegular = data.isRegular;
         this.label = data.label;

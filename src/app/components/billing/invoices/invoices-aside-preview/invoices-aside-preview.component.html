@@ -341,13 +341,19 @@
                                             <td class="invoice-preview__col-amount">
                                                 {{service.sum | currency}}
                                                 <div
-                                                    *ngIf="service.discountType && service.discountAmount && service.discountType == 'FIXED'"
+                                                    *ngIf="service.isServiceContractSingleItem"
+                                                    class="discount-container qt-mt-4"
+                                                >
+                                                    Discount
+                                                </div>
+                                                <div
+                                                    *ngIf="!service.isServiceContractSingleItem  && service.discountType && service.discountAmount && service.discountType == 'FIXED'"
                                                     class="discount-container qt-mt-4"
                                                 >
                                                     Disc: {{service.discountAmount | currency}}
                                                 </div>
                                                 <div
-                                                    *ngIf="service.discountType && service.discountAmount && service.discountType == 'PERCENT'"
+                                                    *ngIf="!service.isServiceContractSingleItem  && service.discountType && service.discountAmount && service.discountType == 'PERCENT'"
                                                     class="discount-container qt-mt-4"
                                                 >
                                                     Disc: {{service.discountAmount}}%
@@ -487,4 +493,5 @@
             </div>
         </div>
     </div>
+    <div class="qt-aside-modern__footer"></div>
 </div>

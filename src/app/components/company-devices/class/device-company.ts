@@ -2,15 +2,15 @@ import { ManufactureDevice } from '../company-devices-custom-aside/class/manufac
 import { ModelDevice } from '../company-devices-custom-aside/class/model-device';
 import { Device } from './device';
 import * as moment from 'moment';
+import { DeviceType } from './device-type';
 
 
 export class DeviceCompany extends Device {
     companyId: string;
-    deviceId: string;
     selected: boolean = false;
     isCustom: boolean;
     name: string;
-    type: string;
+    type: any;
     macAddress: string;
     installDate: string;
     installDateInt: number = 0;
@@ -103,7 +103,7 @@ export class DeviceCompany extends Device {
     }
     public getFieldForCheckIcon() {
         if (!this.isCustom) return this.iconName || this.type;
-        if (this.isCustom) return this.type;
+        if (this.isCustom) return this.type ? this.type.name : null;;
     }
     public resetInstallDate() {
         this.installDate = null;
@@ -125,7 +125,7 @@ export class DeviceCompany extends Device {
         return {
             "devices": [
                 {
-                    "deviceId": this.id,
+                    "deviceId": this.deviceId,
                     "tags": data
                 }
             ]
@@ -135,7 +135,7 @@ export class DeviceCompany extends Device {
         return {
             "deviceId": this.deviceId,
             "name": this.name,
-            "type": this.type,
+            "typeId": this.type ? this.type.id : null,
             "ipAddress": this.ip,
             "port": this.port ? Number(this.port) : null,
             "macAddress": this.macAddress,

@@ -34,7 +34,7 @@ export class CompanyProfileContact {
         this.jobTitleId = null;
     }
     public getDataForRequest(isAdd, isUseSelectedUser) {
-        let phoneNumbers = (!this.phoneNumbers[0].number || this.phoneNumbers[0].number.length === 0) ? [] : this.phoneNumbers;
+        let phoneNumbers = (this.phoneNumbers.length == 0 || !this.phoneNumbers[0].number || this.phoneNumbers[0].number.length === 0) ? [] : this.phoneNumbers;
         if (isAdd && isUseSelectedUser) return {
             id: this.id
         }

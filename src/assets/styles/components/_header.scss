@@ -2,6 +2,7 @@
 
 .nav-header {
   height: $header-height;
+  min-height: 64.1px; // TODO fix scroll overflow
   border-bottom: 1px solid $gray-200;
   background-color: $white;
   transition: width 300ms;

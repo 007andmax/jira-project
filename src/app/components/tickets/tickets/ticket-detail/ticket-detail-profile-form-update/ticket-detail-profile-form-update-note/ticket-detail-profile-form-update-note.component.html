@@ -1,6 +1,9 @@
 <div
     class="cps-block__chat-block"
+    [ngClass]="{'qt-fileupload-file-info': isDragover}"
     appDnd
+    (onDragover)="isDragover = true"
+    (onDragleave)="isDragover = false"
     (fileDropped)="fileBrowseHandler($event)"
 >
     <div class="editable-description editable-chat">

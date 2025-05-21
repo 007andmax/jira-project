@@ -4,7 +4,6 @@
     #techUsersDd="ngbDropdown"
     [container]="container"
     [autoClose]="'outside'"
-    [placement]="placement"
     (openChange)="onCloseDropDown($event)"
 >
     <div
@@ -67,6 +66,7 @@
         id="dropdownTechuser"
         (click)="openDropDown()"
         [ngClass]="{'pointer':!isDisabled}"
+        ngbDropdownAnchor
     >
         <div class="user-tech-dp">
             <div

@@ -56,7 +56,10 @@
             </div>
             <div class="qt-f33 qt-input-block qt-w-md-100">
                 <div class="qt-input-block__label">Date</div>
-                <app-date-picker (onChange)="onChangeDatePicker($event)"></app-date-picker>
+                <app-date-picker
+                    [formatDate]="formatDate"
+                    (onChange)="onChangeDatePicker($event)"
+                ></app-date-picker>
             </div>
             <div class="qt-f33 qt-input-block qt-w-md-100">
                 <div class="qt-input-block__label">Set Interval</div>
@@ -262,6 +265,7 @@
                                 ></span>
                             </div>
                             <app-services-list
+                                class="service-reccurring-list"
                                 [isDisabled]="servicesList.length == 0"
                                 [editItem]="service"
                                 [itemList]="servicesList"

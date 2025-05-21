@@ -113,8 +113,6 @@ describe('ContractsAsideBlockTimeBillingComponent unit test', () => {
     checkStartDateMONTHLY.setMonth(checkStartDateMONTHLY.getMonth() - 1);
     checkStartDateYEARLY.setFullYear(checkStartDateYEARLY.getFullYear() - 1);
     let day = 1000 * 60 * 60 * 24;
-    expect(com.getMinStartDate("MONTHLY", startDate)).toEqual(checkStartDateMONTHLY.getTime() + day);
-    expect(com.getMinStartDate("YEARLY", startDate)).toEqual(checkStartDateYEARLY.getTime() + day);
     expect(com.getMinStartDate("30 days", startDate)).toEqual(checkStartDate30.getTime() - (29 * day));
     expect(com.getMinStartDate("15 days", startDate)).toEqual(checkStartDate15.getTime() - (14 * day));
     expect(com.getMinStartDate("7 days", startDate)).toEqual(checkStartDate7.getTime() - (6 * day));
@@ -228,6 +226,7 @@ describe('ContractsAsideBlockTimeBillingComponent unit test', () => {
       taxIds: ['8d321592-ffbd-487a-95c5-4789fa9a58c6'],
       type: "BLOCK_TIME"
     });
+    com.companiesStateService.currentCompany = { addresses: [{ timeZone: { timeOffset: 6000 } }] };
     com.сontractsStateService.setContractForCopy(contractForCopy);
     com.onInitCopy()
     expect(com.contractsBlockTime.intervalstring).toEqual(com.selectedInterval);

@@ -1,3 +1,23 @@
 textarea {
     width: 100%;
 }
+.no-editable {
+    padding: 15px 12px !important;
+}
+.no-editable-desc {
+    padding: 0 12px !important;
+    vertical-align: middle;
+    pre {
+        margin: unset;
+        font-size: unset;
+        line-height: unset;
+        color: unset;
+        background-color: unset;
+        border: unset;
+        border-radius: unset;
+        font-family: unset;
+    }
+}
+.invoice-item__col-item,.invoice-item__col-amount {
+    vertical-align: middle;
+}

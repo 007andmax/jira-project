@@ -2,6 +2,7 @@
     <app-report-menu
         [report]="'software-summary'"
         (getReport)="getReport($event)"
+        (onSelectedClient)="onSelectedClient($event)"
     ></app-report-menu>
 </div>
 <div
@@ -13,12 +14,18 @@
     id="product-list-ticket-data"
 >
     <div
+        class="qt-df qt-ai-c qt-jc-c no-devices"
+        *ngIf="onInit && !loadingInProgress && softwareSummaryReport.list.length == 0"
+    >
+        No devices yet
+    </div>
+    <div
         class="qt-report__product-list"
         *ngIf="!loadingInProgress"
     >
         <div
             class="customer-ticket"
-            *ngIf="onInit"
+            *ngIf="onInit && softwareSummaryReport.list.length > 0"
         >
             <div class="qt-report__body-header">
                 <div

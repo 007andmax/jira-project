@@ -21,6 +21,7 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
     new CompanySetting('Daily', 'DAILY'),
     new CompanySetting('Weekly', 'WEEKLY'),
     new CompanySetting('Monthly', 'MONTHLY')];
+  showPreloader: boolean = true;
   constructor(private ticketsService: TicketsService,
     public cd: ChangeDetectorRef,) { }
 
@@ -86,7 +87,7 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
   }
   public updateDataChart() {
     this.data = this.getDataForChart();
-    if (this.nvd3.char) this.nvd3.chart.update();
+    //  if (this.nvd3.char) this.nvd3.chart.update();
     this.cd.detectChanges();
     this.isReady = true;
   }
@@ -112,12 +113,15 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
     ];
   };
   getDashboard() {
+    this.showPreloader = true;
     this.ticketsService.getDashboard(this.type).subscribe(data => {
       this.dashboard = data;
       if (this.isReady) this.updateDataChart();
       this.onTicketsAnalyticsReady.emit(null);
+      this.showPreloader = false;
     }, (err) => {
       this.onTicketsAnalyticsReady.emit(null);
+      this.showPreloader = false;
     })
   }
   selectType(type) {

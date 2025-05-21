@@ -305,7 +305,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   }
   onSelectDevice(item) {
     if (item) {
-      this.ticketAdd.linkedAgentId = item.id;
+      this.ticketAdd.linkedAgentId = item.deviceId;
     } else {
       this.ticketAdd.clearDeviceId();
     }

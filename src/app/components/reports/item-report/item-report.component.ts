@@ -30,7 +30,9 @@ export class ItemReportComponent implements OnInit, OnDestroy {
     let id = this.activateRoute.snapshot.params['id'];
     let subscription = this.activateRoute.params.subscribe(params => {
       id = params['id'];
-      if (id && localStorage.report) this.report = localStorage.report;
+      this.report = id;
+      //   if (id && localStorage.report) this.report = localStorage.report;
+
     });
     this.sub.add(subscription);
   }

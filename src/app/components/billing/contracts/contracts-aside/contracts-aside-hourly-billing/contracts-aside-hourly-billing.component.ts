@@ -85,11 +85,14 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
       this.defaultServices.push(service);
     })
     this.selectAllServices = true;
-    this.startDate = this.contractsStateService.getContractForCopy().getStartDateByMilliseconds();
-    this.startDateDP.minDate = this.contractsStateService.getContractForCopy().getStartDateByMilliseconds();
+    let today = new Date();
+    today.setMonth(today.getMonth() + 1);
+    this.contractsHourly.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    //  this.startDate = this.contractsStateService.getContractForCopy().getStartDateByMilliseconds();
+    // this.startDateDP.minDate = this.contractsStateService.getContractForCopy().getStartDateByMilliseconds();
     this.reviewDate = this.contractsStateService.getContractForCopy().getReviewDateByMilliseconds();
     this.reviewDateDP.minDate = this.contractsStateService.getContractForCopy().getReviewDateByMilliseconds();
-    this.startDateDP.setEditDate(this.contractsStateService.getContractForCopy().getStartDateByMilliseconds());
+    //  this.startDateDP.setEditDate(this.contractsStateService.getContractForCopy().getStartDateByMilliseconds());
     this.reviewDateDP.setEditDate(this.contractsStateService.getContractForCopy().getReviewDateByMilliseconds());
     this.topContract.companiesDP.selectedItem = this.companiesStateService.getCompanies().find(item => item.id === this.contractsHourly.companyId);
   }

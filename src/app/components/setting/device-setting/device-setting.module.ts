@@ -21,6 +21,13 @@ import { DeviceSettingModelsAddComponent } from './device-setting-models/device-
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { ManufacturesCheckUseComponent } from './manufactures-check-use/manufactures-check-use.component';
+import { DeviceSettingTypeComponent } from './device-setting-type/device-setting-type.component';
+import { AddDeviceSettingTypeComponent } from './device-setting-type/add-device-setting-type/add-device-setting-type.component';
+import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+import { DeviceSettingTypeCheckUseComponent } from './device-setting-type/device-setting-type-check-use/device-setting-type-check-use.component';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
+import { CompanyDevicesAssestTypeDropDownModule } from '../../company-devices/company-devices-custom-aside/company-devices-assest-type-drop-down/company-devices-assest-type-drop-down.module';
 
 @NgModule({
     declarations: [
@@ -36,7 +43,10 @@ import { ManufacturesCheckUseComponent } from './manufactures-check-use/manufact
         DeviceSettingManufacturesComponent,
         DeviceSettingManufacturesAddComponent,
         DeviceSettingModelsComponent,
-        DeviceSettingModelsAddComponent
+        DeviceSettingModelsAddComponent,
+        DeviceSettingTypeComponent,
+        AddDeviceSettingTypeComponent,
+        DeviceSettingTypeCheckUseComponent
     ],
     imports: [
         CommonModule,
@@ -47,7 +57,11 @@ import { ManufacturesCheckUseComponent } from './manufactures-check-use/manufact
         NgbModule,
         DynamicTooltipModule,
         ClickOutsideModule,
-        KeyUpEnterModule
+        KeyUpEnterModule,
+        MatErrorModule,
+        DisabledBtnModule,
+        PreloaderTicketModule,
+        CompanyDevicesAssestTypeDropDownModule
     ],
 })
 export class DeviceSettingModule { }

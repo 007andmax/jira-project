@@ -246,6 +246,6 @@ describe('TicketDetailContactDetailsComponent unit test', () => {
     expect(com.primaryContact).toEqual(undefined);
     expect(com.primaryAddress.id).toEqual("adfebbfc-18a3-41ed-9072-b137b42b2722");
     expect(com.primaryPhone.number).toEqual("(123) 213-2131 Ext: 23213");
-    expect(com.location).toEqual("");
+    expect(com.locationBilling).toEqual("");
   });
 });

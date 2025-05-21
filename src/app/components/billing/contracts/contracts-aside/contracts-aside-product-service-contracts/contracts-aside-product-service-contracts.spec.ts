@@ -232,6 +232,7 @@ describe('ContractsAsideProductServiceContractsComponent unit test', () => {
       "manualCreateBillableItem": false,
       "enableInvoiceAutoCreate": false
     });
+    com.companiesStateService.currentCompany = { addresses: [{ timeZone: { timeOffset: 6000 } }] };
     com.сontractsStateService.setContractForCopy(contractForCopy);
     com.onInitCopy()
     expect(com.selectedInterval).toEqual(com.contractsOther.intervalstring);

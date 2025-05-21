@@ -62,7 +62,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     if (this.device.tags) this.deviceTags.setSelectedTag(JSON.parse(JSON.stringify(this.device.tags)).map(item => new DeviceTag(item)));
     let changeTagsrray = this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       if (newChange.action === 'BIND_DEVICE_TO_TAG') {
-        let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.id);
+        let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.deviceId);
         if (index > -1) {
           let tags = this.deviceTagsStateService.getTags().filter(item => newChange.data.devices[index].tags.some(tag => tag == item.id));
           this.device.setTags([...this.device.tags, ...tags]);
@@ -70,7 +70,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
         }
       }
       if (newChange.action === 'UNBIND_DEVICE_FROM_TAG') {
-        let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.id);
+        let index = newChange.data.devices.findIndex(item => item.deviceId == this.device.agentId || item.deviceId == this.device.deviceId);
         if (index > -1) {
           newChange.data.devices[index].tags.forEach(item => {
             let index = this.device.tags.findIndex(tag => tag.id == item);
@@ -92,6 +92,12 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
     if (data == "network device") return "Network device";
     if (data == "phone") return "Phone";
     if (data == "generic device") return "Generic device";
+  }
+  public checkDefaultName(name) {
+    if (name == "workstation" || name == "router"
+      || name == "printer" || name == "switch" || name == "server"
+      || name == "tablet" || name == "network device" || name == "phone" || name == "generic device") return true;
+    return false;
   }
   openAside(type) {
     if (this.device.agentId || this.device.isCustom) this.devicesStateService.setOnOpenAside(new DeviceCompanyAsideParams(type, [this.device]));
@@ -169,11 +175,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       minutes: minutes,
     }
   }
-  getLabelForEdit() {
-    if (this.device.isCustom) return this.device.name;
-    if (this.device.label) return this.device.label;
-    return this.device.hostName || this.device.ip;
-  }
+
   setMasterAgent() {
     this.devicesService.markDeviceAsMaster(this.device.companyId, this.device.agentId).subscribe(data => {
     })

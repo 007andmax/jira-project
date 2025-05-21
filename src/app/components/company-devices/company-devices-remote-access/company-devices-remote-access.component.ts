@@ -86,7 +86,7 @@ export class CompanyDevicesRemoteAccessComponent implements OnInit, OnDestroy {
         );
     }
     if (this.action === 'CONNECT_DEVICE') {
-      this.devicesService.createRemoteSession(this.device.id, this.companyId, this.connectionType, null).subscribe((resp: any) => {
+      this.devicesService.createRemoteSession(this.device.deviceId, this.companyId, this.connectionType, null).subscribe((resp: any) => {
         this.sessionId = resp.sessionId;
         let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
           restServerAddress = this.constantsStateService.getConstant('rest.server.address'),

@@ -23,9 +23,9 @@ export class SettingService {
    * Profile Tab
    */
 
-  isEmailUnique(email: string, id: string, isTechUser: boolean) {
+  isEmailUnique(email: string, id: string, isTechUser: boolean, companyId = null) {
     return this.http.get(
-      `${this.apiUrl}users/isEmailUnique?email=${email}&id=${id}&isTechUser=${isTechUser}`
+      `${this.apiUrl}users/isEmailUnique?email=${email}&id=${id}&isTechUser=${isTechUser}${companyId ? '&companyId=' + companyId : ''}`
     );
   }
 

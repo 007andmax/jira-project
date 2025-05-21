@@ -41,7 +41,14 @@
             <div class="qt-icon icon__arrow-down qt-sz-16 qt-fs-0"></div>
         </div>
     </div>
+    <div
+        class="prelaoder-body"
+        *ngIf="showPreloader"
+    >
+        <div class="loading pengind-loading"></div>
+    </div>
     <nvd3
+        *ngIf="!showPreloader"
         [options]="lineChartOptions"
         [data]="lineData"
     ></nvd3>

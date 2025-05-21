@@ -9,7 +9,17 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
 export class CompanyDevicesAssestTypeDropDownComponent extends DropDownComponent {
 
 
-  public getTypeToLocaleLowerCase(type) {
-    return (type) ? type.toLocaleLowerCase() : '';
+  public checkDefaultName(name) {
+    if (name == "workstation" || name == "router"
+      || name == "printer" || name == "switch" || name == "server"
+      || name == "tablet" || name == "network device" || name == "phone" || name == "generic device") return true;
+    return false;
+  }
+  public clearWithOutChanges() {
+    this.elRef.nativeElement.querySelector("#dropdown1").value = "";
+    this.isAdd = false;
+    this.selectedItem = null;
+    this.list = JSON.parse(JSON.stringify(this.reqList));
+    this.ref.markForCheck();
   }
 }

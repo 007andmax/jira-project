@@ -147,39 +147,6 @@
         class="profile-cmp-board other-info qt-df"
         *ngIf="tab === 'dashboard'"
     >
-        <div class="other-info-col qt-df">
-            <div class="small-title">Billing Address</div>
-            <span
-                class="qt-fs-13 qt-fw-600"
-                [textContent]="companyDetailing.billingLocationName"
-            >
-            </span>
-            <a [attr.href]="'tel:' + companyDetailing?.addresses[0]?.phoneNumbers[0]?.number">
-                <preview-phone-mask
-                    *ngIf="companyDetailing?.addresses[0]?.phoneNumbers[0]?.number"
-                    [number]="companyDetailing?.addresses[0]?.phoneNumbers[0]?.number"
-                ></preview-phone-mask>
-            </a>
-            <address>
-                <span
-                    *ngIf="companyDetailing.addresses.length > 0 && companyDetailing.addresses[0].suiteNumber"
-                    [textContent]="companyDetailing.addresses[0].suiteNumber + ', '"
-                ></span>
-                {{companyDetailing.addresses_name}}
-            </address>
-            <span
-                class="qt-fs-13 qt-mb-8 dfn qt-color-gray-900"
-                [textContent]="companyDetailing?.addresses[0]?.postalCode"
-            >
-            </span>
-            <a
-                (click)="openMap(content,companyDetailing.addresses[0])"
-                class="qt-button --outline --sm"
-            >
-                <span class="qt-icon icon__map-pin qt-icon__blue-light-600 qt-sz-16 qt-dib qt-mr-4"></span>
-                Get Direction
-            </a>
-        </div>
         <div
             class="other-info-col qt-df"
             *ngIf="companyDetailing.addresses.length == 2"
@@ -210,6 +177,39 @@
             </span>
             <a
                 (click)="openMap(content,companyDetailing.addresses.length > 1 ? companyDetailing.addresses[1] : null)"
+                class="qt-button --outline --sm"
+            >
+                <span class="qt-icon icon__map-pin qt-icon__blue-light-600 qt-sz-16 qt-dib qt-mr-4"></span>
+                Get Direction
+            </a>
+        </div>
+        <div class="other-info-col qt-df">
+            <div class="small-title">Billing Address</div>
+            <span
+                class="qt-fs-13 qt-fw-600"
+                [textContent]="companyDetailing.billingLocationName"
+            >
+            </span>
+            <a [attr.href]="'tel:' + companyDetailing?.addresses[0]?.phoneNumbers[0]?.number">
+                <preview-phone-mask
+                    *ngIf="companyDetailing?.addresses[0]?.phoneNumbers[0]?.number"
+                    [number]="companyDetailing?.addresses[0]?.phoneNumbers[0]?.number"
+                ></preview-phone-mask>
+            </a>
+            <address>
+                <span
+                    *ngIf="companyDetailing.addresses.length > 0 && companyDetailing.addresses[0].suiteNumber"
+                    [textContent]="companyDetailing.addresses[0].suiteNumber + ', '"
+                ></span>
+                {{companyDetailing.addresses_name}}
+            </address>
+            <span
+                class="qt-fs-13 qt-mb-8 dfn qt-color-gray-900"
+                [textContent]="companyDetailing?.addresses[0]?.postalCode"
+            >
+            </span>
+            <a
+                (click)="openMap(content,companyDetailing.addresses[0])"
                 class="qt-button --outline --sm"
             >
                 <span class="qt-icon icon__map-pin qt-icon__blue-light-600 qt-sz-16 qt-dib qt-mr-4"></span>

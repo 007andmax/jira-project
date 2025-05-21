@@ -1,6 +1,6 @@
 <div
     class="company-device-aside__menu-item qt-pointer"
-    [ngClass]="{'--active': currentDevice && (currentDevice.id === (device && device.id) || currentDevice.id === (customDevice && customDevice.id))}"
+    [ngClass]="{'--active': currentDevice && (currentDevice.deviceId === (device && device.deviceId) || currentDevice.deviceId === (customDevice && customDevice.deviceId))}"
     (click)="select()"
 >
     <ng-template
@@ -22,6 +22,7 @@
             'icon__network_device' : getFieldForCheckIcon() === 'network device',
             'icon__old-phone' : getFieldForCheckIcon() === 'phone',
              'icon__generic_device' : getFieldForCheckIcon() === 'generic device',
+                 'icon__custom-device' : customDevice,
         '--ofline': !(device || customDevice).online }"
     ></div>
 </div>

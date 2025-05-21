@@ -186,7 +186,8 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.recurringState.getCreateTicket().clearAgents();
     this.recurringState.getCreateTicket().setDefaultCron();
     // this.createService.getStateDatePicker().onInitReset();
-
+    let date = new Date();
+    this.recurringState.getCreateTicket().setStartDate(date.getDate(), date.getMonth() + 1, date.getFullYear(), this.recurringState.getTechCompany().addresses[0].timeZone.timeOffset);
     this.cd.detectChanges();
   }
 

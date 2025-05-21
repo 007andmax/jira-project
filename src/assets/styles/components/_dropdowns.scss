@@ -8,7 +8,7 @@
 
 // Prevent the focus on the dropdown toggle when closing dropdowns
 .dropdown-toggle:focus { // TODO 2 include in device page
-  outline: 0;
+  outline: 2px solid rgba($blue-light-600, 0.1);
 }
 
 // The dropdown menu (ul)

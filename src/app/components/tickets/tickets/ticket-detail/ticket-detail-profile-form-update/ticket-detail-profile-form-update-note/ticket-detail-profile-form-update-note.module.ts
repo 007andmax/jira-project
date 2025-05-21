@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UploadAreaProgressModule } from 'src/app/components/shared/upload-area/upload-area-progress/upload-area-progress.module';
 import { TicketDetailProfileFormUpdateNoteComponent } from './ticket-detail-profile-form-update-note.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { DndModule } from 'src/app/directives/dnd/dnd.module';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
         NgbModule,
         FormsModule,
         UploadAreaProgressModule,
-        AngularEditorModule
+        AngularEditorModule,
+        DndModule
     ],
     exports: [TicketDetailProfileFormUpdateNoteComponent],
 

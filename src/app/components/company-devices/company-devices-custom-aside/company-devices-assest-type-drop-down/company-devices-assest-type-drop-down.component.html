@@ -13,15 +13,15 @@
         ></div>
         <div
             class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-mb-8 qt-ml-8 qt-icon"
-            [ngClass]="{'icon__devices' : getTypeToLocaleLowerCase(selectedItem) === 'workstation',
-               'icon__router' : getTypeToLocaleLowerCase(selectedItem) === 'router',
-            'icon__print' : getTypeToLocaleLowerCase(selectedItem) === 'printer',
-                'qt-icon icon__network-switch' : getTypeToLocaleLowerCase(selectedItem) === 'switch',
-          'icon__server' : getTypeToLocaleLowerCase(selectedItem) === 'server',
-            'icon__tablet' : getTypeToLocaleLowerCase(selectedItem) === 'tablet',
-            'icon__network_device' : getTypeToLocaleLowerCase(selectedItem) === 'network device',
-            'icon__old-phone' : getTypeToLocaleLowerCase(selectedItem) === 'phone',
-             'icon__generic_device' : getTypeToLocaleLowerCase(selectedItem) === 'generic device'}"
+            [ngClass]="{'icon__devices' : selectedItem && selectedItem.name === 'workstation',
+               'icon__router' : selectedItem && selectedItem.name === 'router',
+            'icon__print' : selectedItem && selectedItem.name === 'printer',
+                'qt-icon icon__network-switch' : selectedItem && selectedItem.name === 'switch',
+          'icon__server' : selectedItem && selectedItem.name === 'server',
+            'icon__tablet' : selectedItem && selectedItem.name === 'tablet',
+            'icon__network_device' : selectedItem && selectedItem.name === 'network device',
+            'icon__old-phone' : selectedItem && selectedItem.name === 'phone',
+             'icon__generic_device' : selectedItem && selectedItem.name === 'generic device'}"
         >
         </div>
     </div>
@@ -86,15 +86,16 @@
             <div class="qt-df qt-ai-c qt-pl-8">
                 <div
                     class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-icon"
-                    [ngClass]="{'icon__devices' : getTypeToLocaleLowerCase(item) === 'workstation',
-               'icon__router' : getTypeToLocaleLowerCase(item) === 'router',
-            'icon__print' : getTypeToLocaleLowerCase(item) === 'printer',
-                'icon__network-switch' : getTypeToLocaleLowerCase(item) === 'switch',
-          'icon__server' : getTypeToLocaleLowerCase(item) === 'server',
-            'icon__tablet' : getTypeToLocaleLowerCase(item) === 'tablet',
-            'icon__network_device' : getTypeToLocaleLowerCase(item) === 'network device',
-            'icon__old-phone' : getTypeToLocaleLowerCase(item) === 'phone',
-             'icon__generic_device' : getTypeToLocaleLowerCase(item) === 'generic device'}"
+                    [ngClass]="{'icon__devices' : item.name === 'workstation',
+               'icon__router' : item.name === 'router',
+            'icon__print' : item.name === 'printer',
+                'icon__network-switch' : item.name === 'switch',
+          'icon__server' : item.name === 'server',
+            'icon__tablet' : item.name === 'tablet',
+            'icon__network_device' : item.name === 'network device',
+            'icon__old-phone' : item.name === 'phone',
+             'icon__generic_device' : item.name === 'generic device',
+            'icon__custom-device' : !checkDefaultName(item.name)}"
                 >
                 </div>
                 <button
