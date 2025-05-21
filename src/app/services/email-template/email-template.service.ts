@@ -31,16 +31,6 @@ export class EmailTempleteService {
       showPreview: true,
       isActive: false
     },
-    TICKET_OPENED: {
-      title: "Ticket is re-opened",
-      recipient: "Tech / Customer Users",
-      description:
-        "This message will be sent when a person is added to the Ticket Update.",
-      requiredKeywords: ["$Ticket_Number"],
-      requiredKeywordsRegExp: /\$Ticket_Number/,
-      showPreview: true,
-      isActive: false
-    },
     TU_ADDED: {
       title: "Ticket Update is added",
       recipient: "All persons added to Ticket Update",
