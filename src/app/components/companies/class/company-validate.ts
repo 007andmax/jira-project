@@ -1,4 +1,6 @@
+import { Directive } from '@angular/core';
 import { CompanyProfile } from './company-profile';
+
 
 export class CompanyValdiate {
     name: boolean = true;

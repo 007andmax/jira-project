@@ -1,5 +1,7 @@
 import { CompanyValdiate } from 'src/app/components/companies/class/company-validate';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
+import { Directive } from '@angular/core';
+
 
 export class CompanyInvoiceValdiate extends CompanyValdiate {
     lastName: boolean = true;

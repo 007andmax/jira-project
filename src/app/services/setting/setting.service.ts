@@ -5,8 +5,7 @@ import { environment } from "../../../environments/environment";
 import { tap } from "rxjs/operators";
 import { ToastrService } from "ngx-toastr";
 import { AppStateService } from "src/app/states/app/app-state.service";
-
-var md5 = require('md5');
+import * as md5 from 'md5';
 
 @Injectable({
   providedIn: "root"
@@ -42,7 +41,13 @@ export class SettingService {
   }
 
   public setAuthCode(user_id, code_value_from_authenticator) {
-    return this.http.get(`${this.apiUrl}google/code/confirm?userId=${user_id}&code=${code_value_from_authenticator}`)
+    return this.http.get(`${this.apiUrl}google/code/confirm?userId=${user_id}&code=${code_value_from_authenticator}`).pipe(
+      tap((res: any) => {
+        if (res.confirmed) this.toastrService.success("Authentication type has been successfully changed");
+        if (!res.confirmed) this.toastrService.error("The verification code is not valid");
+        this.appStateService.changeDetectorRef();
+        return res;
+      }));
   }
 
 

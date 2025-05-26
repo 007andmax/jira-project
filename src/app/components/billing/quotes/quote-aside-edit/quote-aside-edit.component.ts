@@ -17,10 +17,10 @@ import { QuoteAsideEditBodyComponent } from './quote-aside-edit-body/quote-aside
   styleUrls: ['./quote-aside-edit.component.scss']
 })
 export class QuoteAsideEditComponent implements OnInit, OnDestroy {
-  @ViewChild('saveAndSendBtn') saveAndSendBtn: DisabledBtnDirective;
-  @ViewChild('saveAndContinueBtn') saveAndContinueBtn: DisabledBtnDirective;
-  @ViewChild('saveAndApproveBtn') saveAndApproveBtn: DisabledBtnDirective;
-  @ViewChild('saveAndDownloadBtn') saveAndDownloadBtn: DisabledBtnDirective;
+  @ViewChild('saveAndSendBtn', { static: false }) saveAndSendBtn: DisabledBtnDirective;
+  @ViewChild('saveAndContinueBtn', { static: false }) saveAndContinueBtn: DisabledBtnDirective;
+  @ViewChild('saveAndApproveBtn', { static: false }) saveAndApproveBtn: DisabledBtnDirective;
+  @ViewChild('saveAndDownloadBtn', { static: false }) saveAndDownloadBtn: DisabledBtnDirective;
   @ViewChild('quoteEdit', { static: true }) quoteEdit: QuoteAsideEditBodyComponent;
   validate: QuoteValdiateEdit = new QuoteValdiateEdit();
   showPreloader: boolean = true;

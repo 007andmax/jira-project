@@ -39,6 +39,20 @@
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "sockjs-client",
+              "file-saver",
+              "crypto-js",
+              "d3",
+              "froala-editor",
+              "nvd3",
+              "util",
+              "ng2-nvd3",
+              "moment",
+              "lodash",
+              "jquery",
+              "md5"
             ]
           },
           "configurations": {
@@ -50,18 +64,18 @@
                 }
               ],
               "outputHashing": "all",
-              "sourceMap": false,
+              "sourceMap": true,
               "extractCss": false,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "optimization": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "3mb",
-                  "maximumError": "6mb"
+                  "maximumWarning": "16mb",
+                  "maximumError": "20mb"
                 }
               ]
             },

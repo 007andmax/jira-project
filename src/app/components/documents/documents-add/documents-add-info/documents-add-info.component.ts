@@ -39,10 +39,10 @@ export class DocumentsAddInfoComponent implements OnInit, OnDestroy {
   @Input() companyId: string;
   @Input() templateId: string;
   @Input() documentValidate: DocumentValidate = new DocumentValidate();
-  @ViewChild('companyTypeDp') companyTypeDp: DropDownComponent;
-  @ViewChild('categoriesDp') categoriesDp: DropDownComponent;
-  @ViewChild('linked') linked: DocumentsLinkedComponent;
-  @ViewChild('reviewDp') reviewDp: DatePickerComponent;
+  @ViewChild('companyTypeDp', { static: false }) companyTypeDp: DropDownComponent;
+  @ViewChild('categoriesDp', { static: true }) categoriesDp: DropDownComponent;
+  @ViewChild('linked', { static: true }) linked: DocumentsLinkedComponent;
+  @ViewChild('reviewDp', { static: false }) reviewDp: DatePickerComponent;
   @Output() onToggleAside = new EventEmitter<any>();
   constructor(public documentsStateService: DocumentsStateService,
     public leftPanelStateService: LeftPanelStateService,

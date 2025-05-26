@@ -39,7 +39,7 @@ export class FileManagerCategoryComponent implements OnInit, OnDestroy {
   files: Array<FileManagerFile> = [];
   groupedByCreateAt: { [key: string]: FileManagerFile[] } = {};
   sub: Subscription = new Subscription();
-  @ViewChild('fileInfoContainer') fileInfoContainer: FileManagerFileInfoComponent;
+  @ViewChild('fileInfoContainer', { static: false }) fileInfoContainer: FileManagerFileInfoComponent;
   constructor(public fileManagementService: FileManagementService,
     public activateRoute: ActivatedRoute,
     public leftPanelStateService: LeftPanelStateService,

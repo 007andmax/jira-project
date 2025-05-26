@@ -18,7 +18,7 @@ export class CompanyAddAsideComponent implements OnInit, OnDestroy {
   validate: CompanyValdiate = new CompanyValdiate();
   company: CompanyProfile = new CompanyProfile();
   sub: Subscription = new Subscription();
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
+  @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
   constructor(private companiesStateService: CompaniesStateService,
     private companiesService: CompaniesService,
     public appService: AppService,

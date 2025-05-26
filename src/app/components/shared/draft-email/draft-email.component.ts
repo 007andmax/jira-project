@@ -71,8 +71,8 @@ export class DraftEmailComponent implements OnInit, OnDestroy {
   filesInfo: FilesInfo = new FilesInfo();
   usersSelected: Array<User> = [];
   companiesSelected: Array<Company> = [];
-  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
-  @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
+  @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
+  @ViewChild('uplaodFile', { static: false }) uplaodFile: UploadAreaComponent;
   constructor(public draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
     public draftEmailService: DraftEmailService, public cd: ChangeDetectorRef,
     public reportsStateService: ReportsStateService,

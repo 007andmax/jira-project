@@ -30,7 +30,7 @@ export class UsersDetailsComponent implements OnInit {
   user: UserProfile = new UserProfile();
   showPreloader: boolean = true;
   sub: Subscription = new Subscription();
-  @ViewChild('leftPanel') leftPanel: UsersDetailsLeftPanelComponent;
+  @ViewChild('leftPanel', { static: false }) leftPanel: UsersDetailsLeftPanelComponent;
   constructor(public usersStateService: UsersStateService,
     public activateRoute: ActivatedRoute,
     private draftEmailStateService: DraftEmailStateService,

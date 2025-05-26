@@ -27,7 +27,7 @@ import { DocumentsRealTimeService } from 'src/app/states/documents/documents-rea
 import { KafkaRealTimeService } from 'src/app/states/kafka/kafka-real-time.service';
 import { Stomp } from '@stomp/stompjs';
 import { environment } from 'src/environments/environment';
-import * as SockJS from 'sockjs-client';
+import SockJS from 'sockjs-client/dist/sockjs';
 import { ConstantsService } from '../constants/constants.service';
 import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
 import { MarketingEmailRealTimeService } from 'src/app/states/marketing-email/marketing-email-real-time.service';

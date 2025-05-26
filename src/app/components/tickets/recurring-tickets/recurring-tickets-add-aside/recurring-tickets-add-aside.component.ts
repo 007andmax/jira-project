@@ -43,7 +43,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   formatDate: string = FORMAT_DATE_2;
   @ViewChild('deviceDp', { static: false }) deviceDp: DevicesRecurringTicketsComponent;
   sub: Subscription = new Subscription();
-  @ViewChild('techUsersDp') techUsersDp: AssignedTicketUserComponent;
+  @ViewChild('techUsersDp', { static: false }) techUsersDp: AssignedTicketUserComponent;
   /**
    * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
    * @param {ProductService} productService Service to work with products

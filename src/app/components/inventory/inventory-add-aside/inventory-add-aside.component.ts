@@ -14,7 +14,7 @@ import { InventoryAddBodyComponent } from './inventory-add-body/inventory-add-bo
   styleUrls: ['./inventory-add-aside.component.scss']
 })
 export class InventoryAddAsideComponent implements OnInit, OnDestroy {
-  @ViewChild('body') body: InventoryAddBodyComponent;
+  @ViewChild('body', { static: false }) body: InventoryAddBodyComponent;
   opened: boolean = false;
   sub: Subscription = new Subscription();
 

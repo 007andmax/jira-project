@@ -40,7 +40,6 @@ describe('ContractsAsideBlockTimeBillingDefaultServiceComponent unit test', () =
           onActivateTick: true
         }),
         NoopAnimationsModule],
-
       declarations: [ContractsAsideBlockTimeBillingDefaultServiceComponent
       ]
     }).compileComponents();
@@ -83,7 +82,7 @@ describe('ContractsAsideBlockTimeBillingDefaultServiceComponent integration test
           onActivateTick: true
         }),
         NoopAnimationsModule],
-      providers: [{ provide: CommonService }],
+      providers: [{ provide: CommonService, useValue: undefined }],
       declarations: [ContractsAsideBlockTimeBillingDefaultServiceComponent
       ],
     })

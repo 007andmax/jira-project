@@ -19,7 +19,7 @@ export class CustomerPermissionsRemoveRoleComponent implements OnInit, OnDestroy
   @Input() users: Array<CustomerPermissionsRemoveRole> = [];
   @Input() userRoleForRemove: UserRole;
   @Output() onClose = new EventEmitter<any>();
-  @ViewChild('userRolesDP') userRolesDP: DropDownComponent;
+  @ViewChild('userRolesDP', { static: false }) userRolesDP: DropDownComponent;
   userRoles: Array<UserRole> = [];
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,

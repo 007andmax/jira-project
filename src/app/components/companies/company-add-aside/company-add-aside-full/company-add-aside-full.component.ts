@@ -37,11 +37,10 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   new CompanySetting('Credit Card', 'CREDIT_CARD'),
   new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
   serviceTypes: Array<CrmCompanyServiceType> = [];
-  @ViewChild('addresstext') addresstext: any;
-  @ViewChild('paymentTerm') paymentTerm: DropDownComponent;
-  @ViewChild('paymentMethod') paymentMethod: DropDownComponent;
-  @ViewChild('companyTypeDp') companyTypeDp: DropDownComponent;
-  @ViewChild('userDp') userDp: CompanyUsersDropDownComponent;
+  @ViewChild('paymentTerm', { static: true }) paymentTerm: DropDownComponent;
+  @ViewChild('paymentMethod', { static: true }) paymentMethod: DropDownComponent;
+  @ViewChild('companyTypeDp', { static: true }) companyTypeDp: DropDownComponent;
+  @ViewChild('userDp', { static: true }) userDp: CompanyUsersDropDownComponent;
   selectedTimeZone: TimeZone;
   industries: Array<CrmCompanyIndustry> = [];
   locationIsinit: boolean = false;
