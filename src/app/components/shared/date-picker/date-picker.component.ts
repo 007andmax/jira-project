@@ -70,7 +70,11 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     if (this.useMaxDate) this.maxDateDP = this.sericeDatePicker.getDateStruct(this.maxDate);
 
   }
-
+  toogleDropdown() {
+    if (this.type === 'DETAIL_TICKET_UPDATE' || this.type === 'COMPANY_DEVICE') {
+      this.date_dropDown.open();
+    }
+  }
 
   /**
   * Subscribe to clear date picker

@@ -303,7 +303,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     if (twoFactorAuthType == "DISABLED") return "Password only";
     if (twoFactorAuthType == "BASIC") return "Basic";
     if (twoFactorAuthType == "SECURE") return "Secure by email";
-    if (twoFactorAuthType == "GOOGLE_SECURE") return "Secure by one time password";
+    if (twoFactorAuthType == "GOOGLE_SECURE") return "Secure two-factor authentication - Google Authenticator";
     return '';
   }
 
