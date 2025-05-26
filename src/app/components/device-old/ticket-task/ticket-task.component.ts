@@ -62,7 +62,7 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
           path: 'agent.agentId',
           //values: [this.deviceDetail['agentId']]
           operator: 'EQ',
-          values: [this.deviceDetail['id']]
+          values: [this.deviceDetail['agentId']]
         }]
       }],
       offset: 0
