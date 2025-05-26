@@ -175,7 +175,7 @@ export class MarketingComponent implements OnInit {
     this.filter.page = 0;
     this.selectAll = false;
     this.users.forEach(item => item.selected = false);
-    this.header.setUsers(this.users);
+    if (this.header) this.header.setUsers(this.users);
     this.setDefaultScoll();
   }
   onClearAll() {
