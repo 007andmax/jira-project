@@ -22,6 +22,7 @@ import { ContractsAsideHourlyBillingDefaultServiceComponent } from './contracts-
 })
 export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
   @Output() onInitRequestForAdd = new EventEmitter<any>();
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerComponent;
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
   @ViewChild('topContract', { static: true }) topContract: ContractsAsideTopComponent;
@@ -32,6 +33,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
   contractsHourly: ContractsHourly = new ContractsHourly();
   formatDate: string = FORMAT_DATE_2;
   startDate = new Date().getTime();
+  endDate = new Date().getTime();
   reviewDate = new Date().getTime();
   showAddService: boolean = false;
   selectAllServices: boolean = true;
@@ -53,6 +55,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
     today.setMonth(today.getMonth() + 1);
     this.contractsHourly.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsHourly.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear() + 1, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.endDate = this.contractsHourly.getEndDateByMilliseconds();
 
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
@@ -108,6 +111,9 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
         this.validate.setDate(false);
       }
     })
+  }
+  setTogglePerpetual(data) {
+    this.contractsHourly.isPerpetual = data;
   }
   public searchDuplicatedServiceNames() {
     let servicesName = this.contractsHourly.services.map(item => item.name);
@@ -173,7 +179,12 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
   }
   onChangeStartDate(data) {
     this.contractsHourly.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.endDate = this.contractsHourly.getEndDateByMilliseconds();
+    this.endDateDP.setEditDate(this.contractsHourly.getEndDateByMilliseconds());
     this.validate.resetDate();
+  }
+  onChangeEndDate(data) {
+    this.contractsHourly.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
   }
   onChangeReviewDate(data) {
     this.contractsHourly.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, QueryList, ViewChildren, ViewChild } from '@angular/core';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ServiceAgreement } from '../../class/service-agreement';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
@@ -11,6 +11,7 @@ import { NonContractServicesService } from 'src/app/services/non-contract-servic
 import { ContractsBlockTimeDefaultService } from '../../contracts-aside/class/contracts-block-time-default-service';
 import { ContractsAsideHourlyBillingDefaultServiceComponent } from '../../contracts-aside/contracts-aside-hourly-billing/contracts-aside-hourly-billing-default-service/contracts-aside-hourly-billing-default-service.component';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
+import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 @Component({
   selector: 'app-contracts-aside-hourly-edit',
   templateUrl: './contracts-aside-hourly-edit.component.html',
@@ -23,6 +24,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   validate: ContractsHourlyValidate = new ContractsHourlyValidate();
   @Input() contractsHourly: ServiceAgreement = new ServiceAgreement();
   @Output() onClose = new EventEmitter<any>();
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerComponent;
   @ViewChildren("serviceItem") serviceItems: QueryList<ContractsAsideHourlyBillingDefaultServiceComponent>;
   formatDate: string = FORMAT_DATE_2;
   showAddService: boolean = false;
@@ -93,10 +95,17 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   }
   onChangeStartDate(data) {
     this.contractsHourly.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.endDateDP.setEditDate(this.contractsHourly.getEndDateByMilliseconds());
     this.validate.resetDate();
+  }
+  onChangeEndDate(data) {
+    this.contractsHourly.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
   }
   onChangeReviewDate(data) {
     this.contractsHourly.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+  }
+  setTogglePerpetual(data) {
+    this.contractsHourly.isPerpetual = data;
   }
   public trackById(index, item) {
     return item.id;
