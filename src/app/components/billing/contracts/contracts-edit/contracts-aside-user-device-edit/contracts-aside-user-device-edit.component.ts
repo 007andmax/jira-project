@@ -16,6 +16,7 @@ import { ContractsAsideUserDeviceServiceComponent } from '../../contracts-aside/
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { SubscriptionServicesStateService } from 'src/app/states/subscription-services/subscription-services-state.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
+import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 
 @Component({
   selector: 'app-contracts-aside-user-device-edit',
@@ -25,6 +26,7 @@ import { ContractsStateService } from 'src/app/states/contracts/contracts-state.
 export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy {
   @ViewChild('taxes', { static: true }) taxesDP: TaxesComponent;
   @ViewChild('taxesServices', { static: true }) taxesServicesDP: TaxesComponent;
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerComponent;
   selectedCompany: any;
   selectedTaxes = [];
   selectedType = new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE_USER', null);
@@ -265,6 +267,13 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
   }
   onChangeStartDate(data) {
     this.contractsUserDevice.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.endDateDP.setEditDate(this.contractsUserDevice.getEndDateByMilliseconds());
+  }
+  onChangeEndDate(data) {
+    this.contractsUserDevice.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+  }
+  setTogglePerpetual(data) {
+    this.contractsUserDevice.isPerpetual = data;
   }
   onChangeReviewDate(data) {
     this.contractsUserDevice.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

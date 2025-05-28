@@ -20,6 +20,7 @@ import { ContractsStateService } from 'src/app/states/contracts/contracts-state.
 export class ContractsAsideProductServiceEditComponent implements OnInit {
   selectedType = new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER');
   selectedCompany: any;
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerComponent;
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
   @Output() onClose = new EventEmitter<any>();
@@ -89,7 +90,14 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
   }
   onChangeStartDate(data) {
     this.contractsOther.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.endDateDP.setEditDate(this.contractsOther.getEndDateByMilliseconds());
     this.contractsOther.calculateEndDate();
+  }
+  onChangeEndDate(data) {
+    this.contractsOther.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+  }
+  setTogglePerpetual(data) {
+    this.contractsOther.isPerpetual = data;
   }
   onChangeReviewDate(data) {
     this.contractsOther.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

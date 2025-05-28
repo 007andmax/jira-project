@@ -62,6 +62,7 @@ export class ContractsUserDevice {
         if (data.manualCreateBillableItem != undefined) this.manualCreateBillableItem = data.manualCreateBillableItem;
         if (data.enableInvoiceAutoCreate != undefined) this.enableInvoiceAutoCreate = data.enableInvoiceAutoCreate;
         this.reviewDate = data.reviewDate;
+        this.isPerpetual = data.isPerpetual;
         this.calculateEndDate();
         this.isCopy = true;
     }
@@ -131,6 +132,19 @@ export class ContractsUserDevice {
             this.calculateEndDate();
         }
 
+    }
+    public setEndDate(day, month, year, timeOffset) {
+        let current = new Date();
+
+        if (day !== current.getDate() || current.getMonth() !== (month - 1) || year !== current.getFullYear()) {
+            let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
+            let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
+            this.endDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
+        } else {
+            let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
+            let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
+            this.endDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
+        }
     }
     public setReviewDate(day, month, year, timeOffset) {
         let current = new Date();
@@ -228,7 +242,7 @@ export class ContractsUserDevice {
         return validate && validateDescription;
     }
     public getDataForCreate(toggleMaximumAmountHours) {
-        return {
+        let data: any = {
             billType: this.billType,
             blockRate: this.blockRate,
             blockTimeServices: (toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForCreate(this.rateExceeding)) : null,
@@ -236,7 +250,6 @@ export class ContractsUserDevice {
             contractWithBlockTime: toggleMaximumAmountHours,
             customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
             description: this.description,
-            endDate: this.endDate,
             invoiceAsSingleItem: this.invoiceAsSingleItem,
             includedHours: this.includedHours,
             interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring : null,
@@ -250,7 +263,10 @@ export class ContractsUserDevice {
             startDate: this.startDate,
             taxIds: (toggleMaximumAmountHours) ? this.taxIds : null,
             type: "SERVICE_CONTRACT",
+            isPerpetual: this.isPerpetual
         }
+        if (!this.isPerpetual) data.endDate = this.endDate;
+        return data;
     }
     public checkDuplicatedBlockTimeAndTrackServices() {
         this.blockTimeServices.forEach(item => {
@@ -292,4 +308,7 @@ export class ContractsUserDevice {
         })
         return sum;
     };
+    public getEndDateByMilliseconds() {
+        return new Date(this.endDate).getTime();
+    }
 }

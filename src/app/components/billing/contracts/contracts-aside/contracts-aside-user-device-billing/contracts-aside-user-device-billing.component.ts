@@ -29,6 +29,7 @@ import { ContractsAsideUserDeviceServiceComponent } from './contracts-aside-user
 })
 export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestroy {
   @Output() onInitRequestForAdd = new EventEmitter<any>();
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerComponent;
   @ViewChild('taxes', { static: true }) taxesDP: TaxesComponent;
   @ViewChild('taxesServices', { static: true }) taxesServicesDP: TaxesComponent;
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
@@ -41,6 +42,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   formatDate: string = FORMAT_DATE_2;
   startDate = new Date().getTime();
   reviewDate = new Date().getTime();
+  endDate = new Date().getTime();
   validate: ContractsUserDeviceValidate = new ContractsUserDeviceValidate();
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';
@@ -67,8 +69,8 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     today.setMonth(today.getMonth() + 1);
     this.contractsUserDevice.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsUserDevice.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear() + 1, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsUserDevice.startDate);
+    this.endDate = this.contractsUserDevice.getEndDateByMilliseconds();
     if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.setDefaultTaxes(data);
@@ -102,6 +104,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     }))
     if (this.contractsUserDevice.services.length > 0) this.toggleContractServices = true;
     if (this.contractsUserDevice.includedHours && this.contractsUserDevice.rateExceeding) this.toggleMaximumAmountHours = true;
+    this.endDate = this.contractsUserDevice.getEndDateByMilliseconds();
   }
   private setDefaultTaxes(lsitTaxes) {
     this.taxes = lsitTaxes;
@@ -277,6 +280,14 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   }
   onChangeStartDate(data) {
     this.contractsUserDevice.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.endDate = this.contractsUserDevice.getEndDateByMilliseconds();
+    this.endDateDP.setEditDate(this.contractsUserDevice.getEndDateByMilliseconds());
+  }
+  onChangeEndDate(data) {
+    this.contractsUserDevice.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+  }
+  setTogglePerpetual(data) {
+    this.contractsUserDevice.isPerpetual = data;
   }
   onChangeReviewDate(data) {
     this.contractsUserDevice.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

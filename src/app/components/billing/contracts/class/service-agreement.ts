@@ -283,8 +283,7 @@ export class ServiceAgreement {
         return data
     }
     public getDataForUpdateServiceContract(toggleMaximumAmountHours) {
-
-        return {
+        let data: any = {
             id: this.id,
             billType: this.billType,
             blockRate: (this.blockRate) ? this.blockRate : undefined,
@@ -293,7 +292,6 @@ export class ServiceAgreement {
             contractWithBlockTime: toggleMaximumAmountHours,
             customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
             description: this.description,
-            endDate: this.endDate,
             invoiceAsSingleItem: this.invoiceAsSingleItem,
             includedHours: (this.includedHours) ? this.includedHours : null,
             interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring : null,
@@ -308,8 +306,11 @@ export class ServiceAgreement {
             taxIds: (toggleMaximumAmountHours) ? this.taxIds : null,
             type: this.type,
             manualCreateBillableItem: this.manualCreateBillableItem,
-            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
-        }
+            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate,
+            isPerpetual: this.isPerpetual
+        };
+        if (!this.isPerpetual) data.endDate = this.endDate;
+        return data;
     }
     public getDataForUpdateBlockTime() {
         let data: any = {
@@ -339,12 +340,11 @@ export class ServiceAgreement {
     }
 
     public getDataForUpdateOtherContract() {
-        return {
+        let data: any = {
             billType: this.billType,
             companyId: this.companyId,
             customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
             description: this.description,
-            endDate: this.endDate,
             id: this.id,
             interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring : null,
             productExpenses: this.productExpenses.map(item => item.getDataForCrate()),
@@ -353,8 +353,11 @@ export class ServiceAgreement {
             startDate: this.startDate,
             type: this.type,
             manualCreateBillableItem: this.manualCreateBillableItem,
-            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
+            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate,
+            isPerpetual: this.isPerpetual
         }
+        if (!this.isPerpetual) data.endDate = this.endDate;
+        return data;
     }
     public calculateSubTotalAmountServiceContract() {
         let sum = 0;
