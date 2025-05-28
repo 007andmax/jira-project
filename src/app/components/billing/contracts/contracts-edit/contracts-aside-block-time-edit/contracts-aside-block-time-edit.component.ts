@@ -28,6 +28,7 @@ import { SubscriptionServicesStateService } from 'src/app/states/subscription-se
   styleUrls: ['./contracts-aside-block-time-edit.component.scss']
 })
 export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerComponent;
   @ViewChild('taxes', { static: true }) taxesDP: TaxesComponent;
   selectedCompany: any;
   selectedTaxes = [];
@@ -100,7 +101,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
   public onEdit() {
     if (!this.contractsBlockTime.checkDuplicatedBlockTimeServices() || !this.contractsBlockTime.checkDuplicatedServices() || !this.validate.isValidate(this.contractsBlockTime)) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
-      moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, this.contractsBlockTime.id, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
+      (!this.contractsBlockTime.isPerpetual) ? moment(this.contractsBlockTime.endDate).format('DD MMM YYYY') : null, this.contractsBlockTime.companyId, this.contractsBlockTime.id, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.onInitRequestForEdit.emit(null);
           this.contractsService.updateContract(this.contractsBlockTime.getDataForUpdateBlockTime()).subscribe(res => {
@@ -166,7 +167,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
   onCheckDuplicatedCustomService() {
     if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices()) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
-      moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, this.contractsBlockTime.id, this.contractsBlockTime.getBlockTimeServicesName()).subscribe(data => {
+      (!this.contractsBlockTime.isPerpetual) ? moment(this.contractsBlockTime.endDate).format('DD MMM YYYY') : null, this.contractsBlockTime.companyId, this.contractsBlockTime.id, this.contractsBlockTime.getBlockTimeServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
           this.contractsBlockTime.blockTimeServices.forEach(item => {
@@ -184,7 +185,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
   onCheckDuplicatedService() {
     if (this.contractsBlockTime.services.length === 0 || !this.contractsBlockTime.checkDuplicatedServices()) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
-      moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, this.contractsBlockTime.id, this.contractsBlockTime.getServicesName()).subscribe(data => {
+      (!this.contractsBlockTime.isPerpetual) ? moment(this.contractsBlockTime.endDate).format('DD MMM YYYY') : null, this.contractsBlockTime.companyId, this.contractsBlockTime.id, this.contractsBlockTime.getServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
           this.contractsBlockTime.services.forEach(item => {
@@ -266,8 +267,15 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
     this.contractsBlockTime.calculateEndDate();
     this.cd.detectChanges();
   }
+  onChangeEndDate(data) {
+    this.contractsBlockTime.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+  }
   onChangeStartDate(data) {
     this.contractsBlockTime.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.endDateDP.setEditDate(this.contractsBlockTime.getEndDateByMilliseconds());
+  }
+  setTogglePerpetual(data) {
+    this.contractsBlockTime.isPerpetual = data;
   }
   onChangeReviewDate(data) {
     this.contractsBlockTime.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

@@ -112,7 +112,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
       return;
     };
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
-      moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getAllServicesName()).subscribe(data => {
+      (!this.contractsUserDevice.isPerpetual) ? moment(this.contractsUserDevice.endDate).format('DD MMM YYYY') : null, this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.onInitRequestForEdit.emit(null);
           this.contractsService.updateContract(this.contractsUserDevice.getDataForUpdateServiceContract(this.toggleMaximumAmountHours)).subscribe(res => {
@@ -164,7 +164,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
   onCheckDuplicatedServices() {
     if (this.contractsUserDevice.services.length === 0 || !this.contractsUserDevice.checkDuplicatedServices()) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
-      moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getServicesName()).subscribe(data => {
+      (!this.contractsUserDevice.isPerpetual) ? moment(this.contractsUserDevice.endDate).format('DD MMM YYYY') : null, this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
           this.contractsUserDevice.services.forEach(item => {
@@ -182,7 +182,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
   onCheckDuplicatedBlockTimeServices() {
     if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices()) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
-      moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getBlockTimeServicesName()).subscribe(data => {
+      (!this.contractsUserDevice.isPerpetual) ? moment(this.contractsUserDevice.endDate).format('DD MMM YYYY') : null, this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getBlockTimeServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
           this.contractsUserDevice.blockTimeServices.forEach(item => {
@@ -200,7 +200,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
   onCheckDuplicatedServiceContractServices() {
     if (this.contractsUserDevice.serviceContractServices.length === 0 || !this.contractsUserDevice.checkDuplicatedServiceContractServices()) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
-      moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getServiceContractServicesName()).subscribe(data => {
+      (!this.contractsUserDevice.isPerpetual) ? moment(this.contractsUserDevice.endDate).format('DD MMM YYYY') : null, this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getServiceContractServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
           this.contractsUserDevice.serviceContractServices.forEach(item => {

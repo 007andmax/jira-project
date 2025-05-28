@@ -33,6 +33,7 @@ export class ContractsUserDevice {
     isCopy: boolean = false;
     manualCreateBillableItem: boolean = false;
     enableInvoiceAutoCreate: boolean = false;
+    isPerpetual: boolean = false;
     constructor() {
 
     }

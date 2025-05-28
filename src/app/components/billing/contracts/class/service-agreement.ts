@@ -269,17 +269,18 @@ export class ServiceAgreement {
         return this.services.map(item => item.name);
     }
     public getDataForUpdateHourly() {
-        return {
+        let data: any = {
             id: this.id,
             companyId: this.companyId,
             description: this.description,
-            endDate: this.endDate,
             services: this.services.filter(item => item.selected).map(item => item.getDataForUpdate()),
             startDate: this.startDate,
             reviewDate: this.reviewDate,
             type: this.type,
             isPerpetual: this.isPerpetual
         }
+        if (!this.isPerpetual) data.endDate = this.endDate;
+        return data
     }
     public getDataForUpdateServiceContract(toggleMaximumAmountHours) {
 
@@ -311,14 +312,13 @@ export class ServiceAgreement {
         }
     }
     public getDataForUpdateBlockTime() {
-        return {
+        let data: any = {
             blockRate: this.blockRate,
             blockTimeServices: this.blockTimeServices.map(item => item.getDataForUpdateSubscriptionServices()),
             companyId: this.companyId,
             customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
             description: this.description,
             enableTimeRollover: (this.maxRolloverHours && this.maxRolloverHours.length > 0) ? true : false,
-            endDate: this.endDate,
             id: this.id,
             includedHours: this.includedHours,
             interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring : null,
@@ -331,8 +331,11 @@ export class ServiceAgreement {
             reviewDate: this.reviewDate,
             type: "BLOCK_TIME",
             manualCreateBillableItem: this.manualCreateBillableItem,
-            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
+            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate,
+            isPerpetual: this.isPerpetual
         }
+        if (!this.isPerpetual) data.endDate = this.endDate;
+        return data
     }
 
     public getDataForUpdateOtherContract() {

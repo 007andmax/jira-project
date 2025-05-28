@@ -30,16 +30,17 @@ export class ContractsHourly {
         this.isPerpetual = data.isPerpetual;
     }
     public getDataForCreate() {
-        return {
+        let data: any = {
             companyId: this.companyId,
             description: this.description,
-            endDate: this.endDate,
             services: this.services.map(item => item.getDataForCreate()),
             startDate: this.startDate,
             reviewDate: this.reviewDate,
             type: this.type,
             isPerpetual: this.isPerpetual
         }
+        if (!this.isPerpetual) data.endDate = this.endDate;
+        return data;
     }
     public onAddServices(defaultServices: Array<DefaultServicesHourlyContract>) {
         this.services = [];

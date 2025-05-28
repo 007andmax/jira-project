@@ -40,7 +40,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   }
   public onEdit() {
     if (this.contractsHourly.services.filter(item => item.selected).length === 0 || !this.validate.isValidate(this.contractsHourly) || !this.validate.isValidateRateServices(this.contractsHourly.services)) return;
-    this.contractsService.validateCrossingDatesHourly(moment(this.contractsHourly.startDate).format('DD MMM YYYY'), moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, this.contractsHourly.id).subscribe((data: any) => {
+    this.contractsService.validateCrossingDatesHourly(moment(this.contractsHourly.startDate).format('DD MMM YYYY'), (!this.contractsHourly.isPerpetual) ? moment(this.contractsHourly.endDate).format('DD MMM YYYY') : null, this.contractsHourly.companyId, this.contractsHourly.id).subscribe((data: any) => {
       if (data.valid) {
         this.validate.resetDate();
         this.searchDuplicatedServiceNames();
@@ -52,7 +52,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   public searchDuplicatedServiceNames() {
     let servicesName = this.contractsHourly.services.filter(item => item.selected).map(item => item.name);
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
-      moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, this.contractsHourly.id, servicesName).subscribe(data => {
+      (!this.contractsHourly.isPerpetual) ? moment(this.contractsHourly.endDate).format('DD MMM YYYY') : null, this.contractsHourly.companyId, this.contractsHourly.id, servicesName).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.contractsService.updateContract(this.contractsHourly.getDataForUpdateHourly()).subscribe(contract => {
             this.contractsStateService.fastEditContract(contract);

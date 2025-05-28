@@ -31,6 +31,7 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
 export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestroy {
   @Output() onClose = new EventEmitter<any>();
   @Output() onInitRequestForAdd = new EventEmitter<any>();
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerComponent;
   @ViewChild('customDateDP', { static: false }) customDateDP: DatePickerComponent;
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
@@ -43,6 +44,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   formatDate: string = FORMAT_DATE_2;
   startDate = new Date().getTime();
   reviewDate = new Date().getTime();
+  endDate = new Date().getTime();
   toggleContractServices: boolean = false;
   toggleTimeRollover: boolean = false;
   toggleNotifyAgentsUser: boolean = false;
@@ -72,7 +74,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     today.setMonth(today.getMonth() + 1);
     this.contractsBlockTime.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsBlockTime.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear() + 1, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-
+    this.endDate = this.contractsBlockTime.getEndDateByMilliseconds();
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsBlockTime.startDate);
     this.getUsers();
     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
@@ -124,6 +126,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       })
       this.toggleNotifyAgentsUser = true;
     }
+    this.endDate = this.contractsBlockTime.getEndDateByMilliseconds();
     this.onChangeTaxSum();
   }
   selectAllUsers() {
@@ -162,7 +165,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       return;
     }
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
-      moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
+      (!this.contractsBlockTime.isPerpetual) ? moment(this.contractsBlockTime.endDate).format('DD MMM YYYY') : null, this.contractsBlockTime.companyId, null, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.onInitRequestForAdd.emit(null);
           this.contractsService.createContract(createBillableItem, this.contractsBlockTime.getDataForCreate()).subscribe(res => {
@@ -197,7 +200,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   onCheckDuplicatedCustomService() {
     if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeAndTrackServices() || !this.contractsBlockTime.companyId) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
-      moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getBlockTimeServicesName()).subscribe(data => {
+      (!this.contractsBlockTime.isPerpetual) ? moment(this.contractsBlockTime.endDate).format('DD MMM YYYY') : null, this.contractsBlockTime.companyId, null, this.contractsBlockTime.getBlockTimeServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
           this.contractsBlockTime.blockTimeServices.forEach(item => {
@@ -215,7 +218,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   onCheckDuplicatedService() {
     if (this.contractsBlockTime.services.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeAndTrackServices() || !this.contractsBlockTime.companyId) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
-      moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getServicesName()).subscribe(data => {
+      (!this.contractsBlockTime.isPerpetual) ? moment(this.contractsBlockTime.endDate).format('DD MMM YYYY') : null, this.contractsBlockTime.companyId, null, this.contractsBlockTime.getServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
           this.contractsBlockTime.services.forEach(item => {
@@ -301,6 +304,14 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   }
   onChangeStartDate(data) {
     this.contractsBlockTime.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.endDate = this.contractsBlockTime.getEndDateByMilliseconds();
+    this.endDateDP.setEditDate(this.contractsBlockTime.getEndDateByMilliseconds());
+  }
+  onChangeEndDate(data) {
+    this.contractsBlockTime.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+  }
+  setTogglePerpetual(data) {
+    this.contractsBlockTime.isPerpetual = data;
   }
   onChangeReviewDate(data) {
     this.contractsBlockTime.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
