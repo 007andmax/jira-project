@@ -15,15 +15,24 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
   markDisabled = (date: NgbDate, current: { month: number, year: number }) => {
     let endDate = new Date();
     let dates = [];
-    while (endDate.getTime() < new Date().getTime() + 60000 * 60 * 24 * 365) {
-      dates.push(new Date(JSON.parse(JSON.stringify(endDate.getTime()))));
-      if (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') endDate.setMonth(endDate.getMonth() + 1);
-      if (this.intervalstring === '30 days') endDate.setDate(endDate.getDate() + 29 * 12 - 1);
-      if (this.intervalstring === '15 days') endDate.setDate(endDate.getDate() + 28 * 12 - 1);
-      if (this.intervalstring === '7 days') endDate.setDate(endDate.getDate() + 7);
+    if (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') {
+      for (let i = 1; i <= 12; i++) {
+        let newDate = new Date((endDate.getMonth() + i) >= 12 ? endDate.getFullYear() + 1 : endDate.getFullYear(), (endDate.getMonth() + i) >= 12 ? endDate.getMonth() + i - 12 : endDate.getMonth() + i, endDate.getDate());
+        dates.push(newDate);
+      }
+    } else {
+      while (endDate.getTime() < new Date().getTime() + 60000 * 60 * 24 * 365) {
+        dates.push(new Date(JSON.parse(JSON.stringify(endDate.getTime()))));
+        if (this.intervalstring === '30 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 28);
+        if (this.intervalstring === '15 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 27);
+        if (this.intervalstring === '7 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 7);
+      }
     }
-    console.log("dates", dates.length);
-    return dates.some(item => (date.day !== item.getDate() && current.month === item.getMonth() + 1));
+
+
+    console.log("dates", dates);
+    console.log("date", date);
+    return !dates.some(item => date.day === item.getDate() && date.month === item.getMonth() + 1 && date.year == item.getFullYear());
     /*
     if (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') {
       let startDate = new Date();
