@@ -15,7 +15,10 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
   markDisabled = (date: NgbDate, current: { month: number, year: number }) => {
     let endDate = new Date(this.editDate);
     let dates = [];
-    if (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') {
+    if (this.intervalstring === 'YEARLY') {
+      let newDate = new Date(endDate.getFullYear() + 1, endDate.getMonth(), endDate.getDate() - 1);
+      dates.push(newDate);
+    } else if (this.intervalstring === 'MONTHLY') {
       for (let i = 1; i <= 12; i++) {
         let newDate = new Date((endDate.getMonth() + i) >= 12 ? endDate.getFullYear() + 1 : endDate.getFullYear(), (endDate.getMonth() + i) >= 12 ? endDate.getMonth() + i - 12 : endDate.getMonth() + i, endDate.getDate() - 1);
         dates.push(newDate);
