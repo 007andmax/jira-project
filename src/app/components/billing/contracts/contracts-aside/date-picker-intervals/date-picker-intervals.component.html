@@ -1,0 +1,152 @@
+<div
+    class="input-group date-picker"
+    ngbDropdown
+    [autoClose]="'outside'"
+    #date="ngbDropdown"
+    [placement]="placement"
+    [container]="container"
+>
+    <div
+        *ngIf="type === 'DETAIL_TICKET_UPDATE' || type === 'COMPANY_DEVICE'"
+        ngbDropdownAnchor
+    >
+        <i
+            class="icn-16 qt-icon icon__calendar pointer"
+            *ngIf="!selectedDateModel || type !== 'COMPANY_DEVICE'"
+            ngbDropdownToggle
+        ></i>
+        <input
+            [disabled]="isDisabled"
+            type="text"
+            class="pointer qt-input-block__input"
+            placeholder="Select Date"
+            ngbDropdownToggle
+            id="dropdownDate"
+            [value]="geTextDate()"
+            readonly
+        >
+        <i
+            *ngIf="selectedDateModel && type == 'COMPANY_DEVICE'"
+            class="icn-remove-old qt-icon icon__close qt-icon__gray-400 qt-sz-20"
+            (click)="clear()"
+        ></i>
+    </div>
+    <div
+        class="detail-ticket-date-picker"
+        *ngIf="type === 'DETAIL_TICKET'"
+    >
+        <app-dynamic-tooltip
+            [content]="'Add a due date'"
+            [position]="'top'"
+            #dateTooltip
+        ></app-dynamic-tooltip>
+        <span
+            class="detail-ticket-txt"
+            [textContent]="geTextDate()"
+        ></span>
+        <i
+            class="icn-16 qt-icon icon__calendar pointer"
+            ngbDropdownToggle
+            (mouseenter)="dateTooltip.show($event.target)"
+            (mouseleave)="dateTooltip.hide()"
+        ></i>
+        <input
+            [disabled]="isDisabled"
+            type="text"
+            class="pointer qt-input-block__input"
+            placeholder="Select Date"
+            ngbDropdownToggle
+            id="dropdownDate"
+            [value]="geTextDate()"
+            readonly
+        >
+    </div>
+    <input
+        *ngIf="type === 'INPUT'"
+        [disabled]="isDisabled"
+        type="text"
+        class="pointer qt-input-block__input"
+        placeholder="Select Date"
+        ngbDropdownToggle
+        id="dropdownDate"
+        [value]="geTextDate()"
+        readonly
+    >
+    <app-dynamic-tooltip
+        [content]="'Date'"
+        [position]="'top'"
+        #dateTooltip
+    ></app-dynamic-tooltip>
+    <button
+        *ngIf="type === 'ICON'"
+        (mouseenter)="dateTooltip.show($event.target)"
+        (mouseleave)="dateTooltip.hide()"
+        class="ticket-updates__date-icon qt-icon icon__calendar qt-icon__blue-light-600 btn-icon-date-picker"
+        ngbDropdownToggle
+        [disabled]="isDisabled"
+        id="dropdownDate"
+    >
+    </button>
+    <div
+        *ngIf="type === 'NO_ICON'"
+        placement="top"
+        ngbTooltip="Date"
+        class="ticket-updates__date-icon qt-icon icon__calendar qt-icon__blue-light-600 hidden-icon"
+        ngbDropdownToggle
+        id="dropdownDate"
+    >
+    </div>
+    <i
+        *ngIf="type === 'INPUT'"
+        class="icn-16 qt-icon icon__calendar pointer"
+    ></i>
+    <div
+        ngbDropdownMenu
+        aria-labelledby="dropdownDate"
+        class="date-picker-container"
+        [ngClass]="dropdownClass"
+    >
+        <ngb-datepicker
+            [navigation]="'select'"
+            [(ngModel)]="datepicker"
+            (select)="selectDate($event)"
+            (navigate)="navigateDate($event)"
+            [startDate]="datepicker"
+            [ngModelOptions]="{standalone: true}"
+            [minDate]="minDateDP"
+            [maxDate]="maxDateDP"
+            [markDisabled]="markDisabled"
+            style="border: none"
+        ></ngb-datepicker>
+        <div class="date-picker-actions clearfix">
+            <div class="qt-df qt-mb-5">
+                <button
+                    class="qt-button --md --gray qt-fs-0"
+                    (click)="selectToday();"
+                >
+                    Start Now
+                </button>
+                <button
+                    class="qt-button --md --gray qt-fs-0"
+                    (click)="selectTomorrow();"
+                >
+                    Tomorrow
+                </button>
+            </div>
+            <div class="qt-df">
+                <button
+                    class="qt-button --md --gray qt-fs-0"
+                    (click)="selectStartMonth();"
+                >
+                    Start of Month
+                </button>
+                <button
+                    class="qt-button --md --gray qt-fs-0"
+                    (click)="selectEndMonth();"
+                >
+                    End of Month
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

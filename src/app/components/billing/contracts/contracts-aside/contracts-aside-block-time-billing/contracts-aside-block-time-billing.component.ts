@@ -21,6 +21,7 @@ import { Tax } from 'src/class/taxes/tax';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { ContractsListService } from '../../services/contracts-list.service';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
+import { DatePickerIntervalsComponent } from '../date-picker-intervals/date-picker-intervals.component';
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing',
@@ -31,7 +32,7 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
 export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestroy {
   @Output() onClose = new EventEmitter<any>();
   @Output() onInitRequestForAdd = new EventEmitter<any>();
-  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerComponent;
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerIntervalsComponent;
   @ViewChild('customDateDP', { static: false }) customDateDP: DatePickerComponent;
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;

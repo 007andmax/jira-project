@@ -32,6 +32,8 @@ import { ContractsAsideBlockTimeBillingAddSubscriptionServicesModule } from './c
 import { ContractsAsideDiscountComponent } from './contracts-aside-discount/contracts-aside-discount.component';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
+import { DatePickerIntervalsComponent } from './date-picker-intervals/date-picker-intervals.component';
+import { DatePickerIntervalsModule } from './date-picker-intervals/date-picker-intervals.module';
 
 
 @NgModule({
@@ -43,7 +45,6 @@ import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticke
         ContractsAsideProductServiceContractsComponent,
         ContractsAsideTopComponent,
         ContractsAsideHourlyBillingDefaultServiceComponent
-
     ],
     imports: [
         CommonModule,
@@ -67,7 +68,8 @@ import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticke
         MatErrorModule,
         ContractsAsideBlockTimeBillingAddSubscriptionServicesModule,
         DisabledBtnModule,
-        PreloaderTicketModule
+        PreloaderTicketModule,
+        DatePickerIntervalsModule
 
     ],
     exports: [ContractsAsideComponent]

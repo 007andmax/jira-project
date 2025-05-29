@@ -71,7 +71,6 @@ export class DatePickerComponent implements OnInit, OnDestroy {
 
   }
 
-
   /**
   * Subscribe to clear date picker
   */
