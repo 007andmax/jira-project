@@ -69,17 +69,19 @@
         <div class="qt-input-block qt-f50">
             <div class="qt-input-block qt-f100 qt-mb-16">
                 <div class="qt-input-block__label">End Date</div>
-                <app-date-picker
+                <app-date-picker-intervals
                     #endDateDP
                     [dropdownClass]="['date-picker']"
                     [formatDate]="formatDate"
                     [editMode]="true"
                     [useMinDate]="false"
                     [container]="'body'"
+                    [intervalstring]="selectedInterval"
+                    [fromDate]="contractsBlockTime.getStartDateByMilliseconds()"
                     [editDate]="contractsBlockTime.getEndDateByMilliseconds()"
                     [isDisabled]="contractsBlockTime.isPerpetual"
                     (onChange)="onChangeEndDate($event)"
-                ></app-date-picker>
+                ></app-date-picker-intervals>
             </div>
             <div class="qt-input-block qt-f100">
                 <div class="qt-input-block__label">Perpetual</div>

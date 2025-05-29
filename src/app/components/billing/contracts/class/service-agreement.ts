@@ -187,26 +187,25 @@ export class ServiceAgreement {
     public calculateEndDate() {
         if (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') {
             let endDate = new Date(this.startDate);
-            endDate.setFullYear(endDate.getFullYear() + 50);
-            endDate.setDate(endDate.getDate() - 1);
+            endDate.setFullYear(endDate.getFullYear() + 1);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
         } else if (this.intervalstring === '30 days') {
             let endDate = new Date(this.startDate);
-            endDate.setDate(endDate.getDate() + 29 * 12 * 50);
-            endDate.setDate(endDate.getDate() - 1);
+            endDate.setDate(endDate.getDate() + 30 * 12 * 1);
+            //   endDate.setDate(endDate.getDate() - 1);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
         } else if (this.intervalstring === '15 days') {
             let endDate = new Date(this.startDate);
-            endDate.setDate(endDate.getDate() + 28 * 12 * 50);
-            endDate.setDate(endDate.getDate() - 1);
+            endDate.setDate(endDate.getDate() + 15 * 12 * 1);
+            // endDate.setDate(endDate.getDate() - 1);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
         } else if (this.intervalstring === '7 days') {
             let endDate = new Date(this.startDate);
-            endDate.setFullYear(endDate.getFullYear() + 50);
-            endDate.setDate(endDate.getDate() - 7);
+            endDate.setFullYear(endDate.getFullYear() + 1);
+            endDate.setDate(endDate.getDate() - 8);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
         }

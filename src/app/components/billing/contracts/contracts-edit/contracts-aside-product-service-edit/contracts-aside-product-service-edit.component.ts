@@ -11,6 +11,7 @@ import * as moment from "moment";
 import { ServiceAgreementServiceExpenses } from '../../class/service-agreement-service-expenses';
 import { ContractsOtherProduct } from '../../contracts-aside/class/contracts-other-product';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
+import { DatePickerIntervalsComponent } from '../../contracts-aside/date-picker-intervals/date-picker-intervals.component';
 
 @Component({
   selector: 'app-contracts-aside-product-service-edit',
@@ -20,7 +21,7 @@ import { ContractsStateService } from 'src/app/states/contracts/contracts-state.
 export class ContractsAsideProductServiceEditComponent implements OnInit {
   selectedType = new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER');
   selectedCompany: any;
-  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerComponent;
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerIntervalsComponent;
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
   @Output() onClose = new EventEmitter<any>();

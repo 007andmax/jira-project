@@ -20,6 +20,7 @@ import { Subscription } from 'rxjs';
 import { ContractsListService } from '../../services/contracts-list.service';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 import { ContractsAsideUserDeviceServiceComponent } from './contracts-aside-user-device-service/contracts-aside-user-device-service.component';
+import { DatePickerIntervalsComponent } from '../date-picker-intervals/date-picker-intervals.component';
 
 @Component({
   selector: 'app-contracts-aside-user-device-billing',
@@ -29,7 +30,7 @@ import { ContractsAsideUserDeviceServiceComponent } from './contracts-aside-user
 })
 export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestroy {
   @Output() onInitRequestForAdd = new EventEmitter<any>();
-  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerComponent;
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerIntervalsComponent;
   @ViewChild('taxes', { static: true }) taxesDP: TaxesComponent;
   @ViewChild('taxesServices', { static: true }) taxesServicesDP: TaxesComponent;
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;

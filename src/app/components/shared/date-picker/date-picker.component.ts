@@ -20,6 +20,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   @Input() type: string = TYPE_INPUT;
   @Input() formatDate: string = FORMAT_DATE_1;
   @Input() editMode: boolean = false;
+  @Input() fromDate: number = 0;
   @Input() editDate: number = 0;
   @Input() useMinDate: boolean = true;
   @Input() useMaxDate: boolean = false;

@@ -17,6 +17,7 @@ import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { SubscriptionServicesStateService } from 'src/app/states/subscription-services/subscription-services-state.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { DatePickerIntervalsComponent } from '../../contracts-aside/date-picker-intervals/date-picker-intervals.component';
 
 @Component({
   selector: 'app-contracts-aside-user-device-edit',
@@ -26,7 +27,7 @@ import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-
 export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy {
   @ViewChild('taxes', { static: true }) taxesDP: TaxesComponent;
   @ViewChild('taxesServices', { static: true }) taxesServicesDP: TaxesComponent;
-  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerComponent;
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerIntervalsComponent;
   selectedCompany: any;
   selectedTaxes = [];
   selectedType = new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE_USER', null);

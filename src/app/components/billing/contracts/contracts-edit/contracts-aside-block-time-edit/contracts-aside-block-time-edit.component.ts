@@ -20,6 +20,7 @@ import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 import { SubscriptionServicesStateService } from 'src/app/states/subscription-services/subscription-services-state.service';
+import { DatePickerIntervalsComponent } from '../../contracts-aside/date-picker-intervals/date-picker-intervals.component';
 
 
 @Component({
@@ -28,7 +29,7 @@ import { SubscriptionServicesStateService } from 'src/app/states/subscription-se
   styleUrls: ['./contracts-aside-block-time-edit.component.scss']
 })
 export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
-  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerComponent;
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerIntervalsComponent;
   @ViewChild('taxes', { static: true }) taxesDP: TaxesComponent;
   selectedCompany: any;
   selectedTaxes = [];

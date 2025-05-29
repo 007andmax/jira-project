@@ -15,6 +15,7 @@ import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-asi
 import { ContractsOtherValidate } from '../class/contracts-other-validate';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
 import { ContractsListService } from '../../services/contracts-list.service';
+import { DatePickerIntervalsComponent } from '../date-picker-intervals/date-picker-intervals.component';
 
 @Component({
   selector: 'app-contracts-aside-product-service-contracts',
@@ -25,7 +26,7 @@ import { ContractsListService } from '../../services/contracts-list.service';
 export class ContractsAsideProductServiceContractsComponent implements OnInit, OnDestroy {
   selectedType = new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER');
   @Output() onInitRequestForAdd = new EventEmitter<any>();
-  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerComponent;
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerIntervalsComponent;
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
   @ViewChild('topContract', { static: true }) topContract: ContractsAsideTopComponent;

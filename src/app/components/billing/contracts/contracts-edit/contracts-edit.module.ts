@@ -29,6 +29,7 @@ import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users
 import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 import { ContractsAsideBlockTimeBillingAddSubscriptionServicesModule } from '../contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-subscription-services/contracts-aside-block-time-billing-add-subscription-services.module';
+import { DatePickerIntervalsModule } from '../contracts-aside/date-picker-intervals/date-picker-intervals.module';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { ContractsAsideBlockTimeBillingAddSubscriptionServicesModule } from '../
         NumberModule,
         ContractsAsideEditHourlyAddDefaultServiceModule,
         MatErrorModule,
-        ContractsAsideBlockTimeBillingAddSubscriptionServicesModule
+        ContractsAsideBlockTimeBillingAddSubscriptionServicesModule,
+        DatePickerIntervalsModule
     ],
     exports: [ContractsEditComponent,
     ]
