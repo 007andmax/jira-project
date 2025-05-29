@@ -13,18 +13,18 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
   @Input() intervalstring: string = "";
 
   markDisabled = (date: NgbDate, current: { month: number, year: number }) => {
-    let endDate = new Date();
+    let endDate = new Date(this.editDate);
     let dates = [];
     if (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') {
       for (let i = 1; i <= 12; i++) {
-        let newDate = new Date((endDate.getMonth() + i) >= 12 ? endDate.getFullYear() + 1 : endDate.getFullYear(), (endDate.getMonth() + i) >= 12 ? endDate.getMonth() + i - 12 : endDate.getMonth() + i, endDate.getDate());
+        let newDate = new Date((endDate.getMonth() + i) >= 12 ? endDate.getFullYear() + 1 : endDate.getFullYear(), (endDate.getMonth() + i) >= 12 ? endDate.getMonth() + i - 12 : endDate.getMonth() + i, endDate.getDate() - 1);
         dates.push(newDate);
       }
     } else {
       while (endDate.getTime() < new Date().getTime() + 60000 * 60 * 24 * 365) {
         dates.push(new Date(JSON.parse(JSON.stringify(endDate.getTime()))));
-        if (this.intervalstring === '30 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 28);
-        if (this.intervalstring === '15 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 27);
+        if (this.intervalstring === '30 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29);
+        if (this.intervalstring === '15 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 14);
         if (this.intervalstring === '7 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 7);
       }
     }

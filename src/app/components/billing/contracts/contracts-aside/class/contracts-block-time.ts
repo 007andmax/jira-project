@@ -187,7 +187,7 @@ export class ContractsBlockTime {
     public calculateEndDate() {
         if (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') {
             let endDate = new Date(this.startDate);
-            endDate.setFullYear(endDate.getFullYear() + 1);
+            //  endDate.setFullYear(endDate.getFullYear() + 1);
             endDate.setDate(endDate.getDate() - 1);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
