@@ -39,12 +39,3 @@
         border-color: #D0D5DD !important;
     }
 }
-::ng-deep.intervals-date-picker {
-    .date-picker .ngb-dp-day {
-            &:not(.disabled) {
-                div {
-                    font-weight: 900;
-                }
-            }
-        }
-}
