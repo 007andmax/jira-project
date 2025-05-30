@@ -9,6 +9,7 @@
     max-height: initial;
     box-shadow: 0 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03);
     border: 1px solid $gray-200;
+    
 }
 
 .icon__calendar {
@@ -37,4 +38,13 @@
     .qt-input-block__input {
         border-color: #D0D5DD !important;
     }
+}
+::ng-deep.intervals-date-picker {
+    .date-picker .ngb-dp-day {
+            &:not(.disabled) {
+                div {
+                    font-weight: 900;
+                }
+            }
+        }
 }

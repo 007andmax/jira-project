@@ -168,10 +168,13 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       (!this.contractsBlockTime.isPerpetual) ? moment(this.contractsBlockTime.endDate).format('DD MMM YYYY') : null, this.contractsBlockTime.companyId, null, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
-          this.onInitRequestForAdd.emit(null);
+          this.onInitRequestForAdd.emit(true);
           this.contractsService.createContract(createBillableItem, this.contractsBlockTime.getDataForCreate()).subscribe(res => {
             this.сontractsStateService.fastAddContract(res);
             this.onClose.emit(null);
+          }, err => {
+            console.log("err", err);
+            this.onInitRequestForAdd.emit(false);
           })
         } else {
           let names = Object.keys(data);
@@ -301,6 +304,8 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.minStartDate = this.getMinStartDate(data, this.contractsBlockTime.startDate);
     this.contractsBlockTime.setInterval(data);
     this.contractsBlockTime.calculateEndDate();
+    this.endDate = this.contractsBlockTime.getEndDateByMilliseconds();
+    this.endDateDP.setEditDate(this.contractsBlockTime.getEndDateByMilliseconds());
     this.cd.detectChanges();
   }
   onChangeStartDate(data) {

@@ -117,11 +117,13 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       (!this.contractsUserDevice.isPerpetual) ? moment(this.contractsUserDevice.endDate).format('DD MMM YYYY') : null, this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
-          this.onInitRequestForEdit.emit(null);
+          this.onInitRequestForEdit.emit(true);
           this.contractsService.updateContract(this.contractsUserDevice.getDataForUpdateServiceContract(this.toggleMaximumAmountHours)).subscribe(res => {
             this.subscriptionServicesStateService.refreshServicesAgreements();
             this.contractsStateService.fastEditContract(res);
             this.onClose.emit(null);
+          }, err => {
+            this.onInitRequestForEdit.emit(false);
           })
         } else {
           let names = Object.keys(data);

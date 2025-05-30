@@ -57,10 +57,12 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
       this.cd.detectChanges();
       return;
     }
-    this.onInitRequestForEdit.emit(null);
+    this.onInitRequestForEdit.emit(true);
     this.contractsService.updateContract(this.contractsOther.getDataForUpdateOtherContract()).subscribe(res => {
       this.contractsStateService.fastEditContract(res);
       this.onClose.emit(null);
+    }, err => {
+      this.onInitRequestForEdit.emit(false);
     })
   }
   addService() {
@@ -108,6 +110,7 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
     this.minStartDate = this.getMinStartDate(data, this.contractsOther.startDate);
     this.contractsOther.setIntervalString(data);
     this.contractsOther.calculateEndDate();
+    this.endDateDP.setEditDate(this.contractsOther.getEndDateByMilliseconds());
     this.cd.detectChanges();
   }
   getMinStartDate(interval, startDate) {

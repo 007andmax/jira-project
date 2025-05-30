@@ -18,10 +18,12 @@
             <div class="app-drop-down__title">Start Date</div>
             <app-date-picker
                 #startDateDP
+                [dropdownClass]="['date-picker']"
                 [formatDate]="formatDate"
                 [editMode]="true"
                 [editDate]="startDate"
                 [minDate]="minStartDate"
+                [container]="'body'"
                 (onChange)="onChangeStartDate($event)"
             ></app-date-picker>
         </div>
@@ -60,6 +62,7 @@
                     [editDate]="endDate"
                     [useMinDate]="false"
                     [container]="'body'"
+                    [placement]="'bottom-right'"
                     [intervalstring]="selectedInterval"
                     [isDisabled]="contractsBlockTime.isPerpetual"
                     (onChange)="onChangeEndDate($event)"

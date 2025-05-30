@@ -86,10 +86,12 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
 
   }
   onCheckServicesForAdd(createBillableItem) {
-    this.onInitRequestForAdd.emit(null);
+    this.onInitRequestForAdd.emit(true);
     this.contractsService.createContract(createBillableItem, this.contractsOther.getDataForCreateOther()).subscribe(res => {
       this.сontractsStateService.fastAddContract(res);
       this.onClose.emit(null);
+    }, err => {
+      this.onInitRequestForAdd.emit(false);
     })
   }
   addService() {
@@ -129,6 +131,8 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
     this.minStartDate = this.getMinStartDate(data, this.contractsOther.startDate);
     this.contractsOther.setInterval(data);
     this.contractsOther.calculateEndDate();
+    this.endDate = this.contractsOther.getEndDateByMilliseconds();
+    this.endDateDP.setEditDate(this.contractsOther.getEndDateByMilliseconds());
     this.cd.detectChanges();
   }
   getMinStartDate(interval, startDate) {

@@ -104,11 +104,13 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       (!this.contractsBlockTime.isPerpetual) ? moment(this.contractsBlockTime.endDate).format('DD MMM YYYY') : null, this.contractsBlockTime.companyId, this.contractsBlockTime.id, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
-          this.onInitRequestForEdit.emit(null);
+          this.onInitRequestForEdit.emit(true);
           this.contractsService.updateContract(this.contractsBlockTime.getDataForUpdateBlockTime()).subscribe(res => {
             this.subscriptionServicesStateService.refreshServicesAgreements();
             this.contractsStateService.fastEditContract(res);
             this.onClose.emit(null);
+          }, err => {
+            this.onInitRequestForEdit.emit(false);
           })
         } else {
           let names = Object.keys(data);
@@ -266,6 +268,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
     this.minStartDate = this.getMinStartDate(data, this.contractsBlockTime.startDate);
     this.contractsBlockTime.setIntervalString(data);
     this.contractsBlockTime.calculateEndDate();
+    this.endDateDP.setEditDate(this.contractsBlockTime.getEndDateByMilliseconds());
     this.cd.detectChanges();
   }
   onChangeEndDate(data) {

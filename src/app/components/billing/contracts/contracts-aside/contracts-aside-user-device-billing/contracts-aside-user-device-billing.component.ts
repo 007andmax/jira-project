@@ -130,10 +130,12 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       (!this.contractsUserDevice.isPerpetual) ? moment(this.contractsUserDevice.endDate).format('DD MMM YYYY') : null, this.contractsUserDevice.companyId, null, this.contractsUserDevice.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
-          this.onInitRequestForAdd.emit(null);
+          this.onInitRequestForAdd.emit(true);
           this.contractsService.createContract(createBillableItem, this.contractsUserDevice.getDataForCreate(this.toggleMaximumAmountHours)).subscribe(res => {
             this.сontractsStateService.fastAddContract(res);
             this.onClose.emit(null);
+          }, err => {
+            this.onInitRequestForAdd.emit(false);
           })
         } else {
           let names = Object.keys(data);
