@@ -17,26 +17,26 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
     console.log("endDate", endDate);
     let dates = [];
     if (this.intervalstring === 'YEARLY') {
-      let newDate = new Date(endDate.getFullYear() + 1, endDate.getMonth(), endDate.getDate());
+      let newDate = new Date(endDate.getFullYear() + 1, endDate.getMonth(), endDate.getDate() - 1);
       dates.push(newDate);
     } else if (this.intervalstring === 'MONTHLY') {
       for (let i = 1; i <= 12; i++) {
-        let newDate = new Date((endDate.getMonth() + i) >= 12 ? endDate.getFullYear() + 1 : endDate.getFullYear(), (endDate.getMonth() + i) >= 12 ? endDate.getMonth() + i - 12 : endDate.getMonth() + i, endDate.getDate());
+        let newDate = new Date((endDate.getMonth() + i) >= 12 ? endDate.getFullYear() + 1 : endDate.getFullYear(), (endDate.getMonth() + i) >= 12 ? endDate.getMonth() + i - 12 : endDate.getMonth() + i, endDate.getDate() - 1);
         dates.push(newDate);
       }
     } else {
       while (endDate.getTime() < new Date().getTime() + 60000 * 60 * 24 * 365) {
         dates.push(new Date(JSON.parse(JSON.stringify(endDate.getTime()))));
-        if (this.intervalstring === '30 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 30);
-        if (this.intervalstring === '15 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 15);
-        if (this.intervalstring === '7 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 8);
+        if (this.intervalstring === '30 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29);
+        if (this.intervalstring === '15 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 14);
+        if (this.intervalstring === '7 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 7);
       }
     }
 
 
     console.log("dates", dates);
     console.log("date", date);
-    return !dates.some(item => date.day === item.getDate() && date.month === item.getMonth() + 1 && date.year == item.getFullYear());
+    return !dates.some(item => date.day === item.getDate() && date.month === item.getMonth() + 1);
     /*
     if (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') {
       let startDate = new Date();

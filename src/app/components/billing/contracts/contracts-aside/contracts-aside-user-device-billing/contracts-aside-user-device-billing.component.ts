@@ -285,6 +285,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.endDateDP.setEditDate(this.contractsUserDevice.getEndDateByMilliseconds());
   }
   onChangeEndDate(data) {
+    console.log("data", data);
     this.contractsUserDevice.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
   }
   setTogglePerpetual(data) {
@@ -322,6 +323,8 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.minStartDate = this.getMinStartDate(data, this.contractsUserDevice.startDate);
     this.contractsUserDevice.setInterval(data);
     this.contractsUserDevice.calculateEndDate();
+    this.endDate = this.contractsUserDevice.getEndDateByMilliseconds();
+    this.endDateDP.setEditDate(this.contractsUserDevice.getEndDateByMilliseconds());
     this.cd.detectChanges();
   }
   public onCreate() {

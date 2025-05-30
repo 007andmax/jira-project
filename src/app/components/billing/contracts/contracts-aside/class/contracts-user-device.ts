@@ -135,7 +135,7 @@ export class ContractsUserDevice {
     }
     public setEndDate(day, month, year, timeOffset) {
         let current = new Date();
-
+        console.log("current.getMonth()", current.getMonth());
         if (day !== current.getDate() || current.getMonth() !== (month - 1) || year !== current.getFullYear()) {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
@@ -163,24 +163,22 @@ export class ContractsUserDevice {
         if (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') {
             let endDate = new Date(this.startDate);
             endDate.setFullYear(endDate.getFullYear() + 1);
+            endDate.setDate(endDate.getDate() - 1);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
         } else if (this.intervalstring === '30 days') {
             let endDate = new Date(this.startDate);
-            endDate.setDate(endDate.getDate() + 30 * 12 * 1);
-            //   endDate.setDate(endDate.getDate() - 1);
+            endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
         } else if (this.intervalstring === '15 days') {
             let endDate = new Date(this.startDate);
-            endDate.setDate(endDate.getDate() + 15 * 12 * 1);
-            // endDate.setDate(endDate.getDate() - 1);
+            endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 14);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
         } else if (this.intervalstring === '7 days') {
             let endDate = new Date(this.startDate);
-            endDate.setFullYear(endDate.getFullYear() + 1);
-            endDate.setDate(endDate.getDate() - 8);
+            endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 7);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
         }

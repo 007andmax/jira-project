@@ -308,6 +308,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     this.minStartDate = this.getMinStartDate(data, this.contractsUserDevice.startDate);
     this.contractsUserDevice.setIntervalString(data);
     this.contractsUserDevice.calculateEndDate();
+    this.endDateDP.setEditDate(this.contractsUserDevice.getEndDateByMilliseconds());
     this.cd.detectChanges();
   }
 

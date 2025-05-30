@@ -36,10 +36,12 @@
             <div class="qt-input-block__label">Start Date</div>
             <app-date-picker
                 #startDateDP
+                [dropdownClass]="['date-picker']"
                 [formatDate]="formatDate"
                 [editMode]="true"
                 [editDate]="contractsUserDevice.getStartDateByMilliseconds()"
                 [minDate]="minStartDate"
+                [container]="'body'"
                 (onChange)="onChangeStartDate($event)"
             ></app-date-picker>
         </div>
@@ -72,10 +74,12 @@
                 <app-date-picker-intervals
                     #endDateDP
                     [dropdownClass]="['date-picker']"
+                    [formatDate]="formatDate"
                     [fromDate]="contractsUserDevice.getStartDateByMilliseconds()"
                     [editMode]="true"
                     [useMinDate]="false"
                     [container]="'body'"
+                    [placement]="'bottom-right'"
                     [intervalstring]="selectedInterval"
                     [editDate]="contractsUserDevice.getEndDateByMilliseconds()"
                     [isDisabled]="contractsUserDevice.isPerpetual"
