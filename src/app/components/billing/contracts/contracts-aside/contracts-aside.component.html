@@ -13,25 +13,25 @@
     <app-contracts-aside-hourly-billing
         #hourlyContract
         *ngIf="step === 2 && type === 'HOURLY'"
-        (onInitRequestForAdd)="disabledBtnForAdd()"
+        (onInitRequestForAdd)="disabledBtnForAdd($event)"
         (onClose)="closed()"
     ></app-contracts-aside-hourly-billing>
     <app-contracts-aside-block-time-billing
         #blockTimeContract
         *ngIf="step === 2 && type === 'BLOCK_TIME'"
-        (onInitRequestForAdd)="disabledBtnForAdd()"
+        (onInitRequestForAdd)="disabledBtnForAdd($event)"
         (onClose)="closed()"
     ></app-contracts-aside-block-time-billing>
     <app-contracts-aside-user-device-billing
         #deviceUserContract
         *ngIf="step === 2 && (type === 'SERVICE_CONTRACT_DEVICE' || type === 'SERVICE_CONTRACT_USER')"
-        (onInitRequestForAdd)="disabledBtnForAdd()"
+        (onInitRequestForAdd)="disabledBtnForAdd($event)"
         (onClose)="closed()"
     ></app-contracts-aside-user-device-billing>
     <app-contracts-aside-product-service-contracts
         #otherContract
         *ngIf="step === 2 && type === 'SERVICE_CONTRACT_OTHER'"
-        (onInitRequestForAdd)="disabledBtnForAdd()"
+        (onInitRequestForAdd)="disabledBtnForAdd($event)"
         (onClose)="closed()"
     ></app-contracts-aside-product-service-contracts>
     <div class="qt-aside-modern__footer">
