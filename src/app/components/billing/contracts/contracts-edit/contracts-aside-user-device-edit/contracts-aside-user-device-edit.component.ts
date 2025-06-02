@@ -28,6 +28,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
   @ViewChild('taxes', { static: true }) taxesDP: TaxesComponent;
   @ViewChild('taxesServices', { static: true }) taxesServicesDP: TaxesComponent;
   @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerIntervalsComponent;
+  @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
   selectedCompany: any;
   selectedTaxes = [];
   selectedType = new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE_USER', null);
@@ -271,9 +272,13 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
   onChangeStartDate(data) {
     this.contractsUserDevice.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.endDateDP.setEditDate(this.contractsUserDevice.getEndDateByMilliseconds());
+    this.contractsUserDevice.calculateReviewDate();
+    this.reviewDateDP.setEditDate(this.contractsUserDevice.getReviewDateByMilliseconds());
   }
   onChangeEndDate(data) {
     this.contractsUserDevice.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsUserDevice.calculateReviewDate();
+    this.reviewDateDP.setEditDate(this.contractsUserDevice.getReviewDateByMilliseconds());
   }
   setTogglePerpetual(data) {
     this.contractsUserDevice.isPerpetual = data;
@@ -311,6 +316,8 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     this.contractsUserDevice.setIntervalString(data);
     this.contractsUserDevice.calculateEndDate();
     this.endDateDP.setEditDate(this.contractsUserDevice.getEndDateByMilliseconds());
+    this.contractsUserDevice.calculateReviewDate();
+    this.reviewDateDP.setEditDate(this.contractsUserDevice.getReviewDateByMilliseconds());
     this.cd.detectChanges();
   }
 

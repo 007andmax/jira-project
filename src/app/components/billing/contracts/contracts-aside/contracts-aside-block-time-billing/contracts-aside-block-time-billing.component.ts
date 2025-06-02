@@ -69,13 +69,12 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
 
   ngOnInit() {
     let today = new Date();
-    let reviewDate = new Date();
-    reviewDate.setFullYear(reviewDate.getFullYear() + 1);
-    this.reviewDate = reviewDate.getTime();
     today.setMonth(today.getMonth() + 1);
     this.contractsBlockTime.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsBlockTime.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear() + 1, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.endDate = this.contractsBlockTime.getEndDateByMilliseconds();
+    this.contractsBlockTime.calculateReviewDate();
+    this.reviewDate = this.contractsBlockTime.getReviewDateByMilliseconds();
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsBlockTime.startDate);
     this.getUsers();
     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
@@ -306,15 +305,24 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.contractsBlockTime.calculateEndDate();
     this.endDate = this.contractsBlockTime.getEndDateByMilliseconds();
     this.endDateDP.setEditDate(this.contractsBlockTime.getEndDateByMilliseconds());
+    this.contractsBlockTime.calculateReviewDate();
+    this.reviewDate = this.contractsBlockTime.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsBlockTime.getReviewDateByMilliseconds());
     this.cd.detectChanges();
   }
   onChangeStartDate(data) {
     this.contractsBlockTime.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.endDate = this.contractsBlockTime.getEndDateByMilliseconds();
     this.endDateDP.setEditDate(this.contractsBlockTime.getEndDateByMilliseconds());
+    this.contractsBlockTime.calculateReviewDate();
+    this.reviewDate = this.contractsBlockTime.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsBlockTime.getReviewDateByMilliseconds());
   }
   onChangeEndDate(data) {
     this.contractsBlockTime.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsBlockTime.calculateReviewDate();
+    this.reviewDate = this.contractsBlockTime.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsBlockTime.getReviewDateByMilliseconds());
   }
   setTogglePerpetual(data) {
     this.contractsBlockTime.isPerpetual = data;

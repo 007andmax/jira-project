@@ -67,6 +67,11 @@
         (click)="preview()"
     ></div>
     <div
+        class="contracts-table__review-date"
+        [textContent]="getDate(contract.endDate)"
+        (click)="preview()"
+    ></div>
+    <div
         class="contracts-table__amount"
         [textContent]="(contract.subtotalExcludingTax + contract.taxSum) | currency"
         (click)="preview()"

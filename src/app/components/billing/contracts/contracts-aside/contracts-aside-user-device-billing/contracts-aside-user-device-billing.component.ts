@@ -64,14 +64,14 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
 
   ngOnInit() {
     let today = new Date();
-    let reviewDate = new Date();
-    reviewDate.setFullYear(reviewDate.getFullYear() + 1);
-    this.reviewDate = reviewDate.getTime();
     today.setMonth(today.getMonth() + 1);
     this.contractsUserDevice.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsUserDevice.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear() + 1, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsUserDevice.startDate);
     this.endDate = this.contractsUserDevice.getEndDateByMilliseconds();
+    this.contractsUserDevice.calculateReviewDate();
+    this.reviewDate = this.contractsUserDevice.getReviewDateByMilliseconds();
+
     if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.setDefaultTaxes(data);
@@ -285,10 +285,16 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.contractsUserDevice.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.endDate = this.contractsUserDevice.getEndDateByMilliseconds();
     this.endDateDP.setEditDate(this.contractsUserDevice.getEndDateByMilliseconds());
+    this.contractsUserDevice.calculateReviewDate();
+    this.reviewDate = this.contractsUserDevice.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsUserDevice.getReviewDateByMilliseconds());
   }
   onChangeEndDate(data) {
     console.log("data", data);
     this.contractsUserDevice.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsUserDevice.calculateReviewDate();
+    this.reviewDate = this.contractsUserDevice.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsUserDevice.getReviewDateByMilliseconds());
   }
   setTogglePerpetual(data) {
     this.contractsUserDevice.isPerpetual = data;
@@ -327,6 +333,9 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.contractsUserDevice.calculateEndDate();
     this.endDate = this.contractsUserDevice.getEndDateByMilliseconds();
     this.endDateDP.setEditDate(this.contractsUserDevice.getEndDateByMilliseconds());
+    this.contractsUserDevice.calculateReviewDate();
+    this.reviewDate = this.contractsUserDevice.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsUserDevice.getReviewDateByMilliseconds());
     this.cd.detectChanges();
   }
   public onCreate() {

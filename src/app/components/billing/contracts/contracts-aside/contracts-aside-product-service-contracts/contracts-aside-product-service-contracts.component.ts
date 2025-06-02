@@ -54,14 +54,13 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
 
   ngOnInit() {
     let today = new Date();
-    let reviewDate = new Date();
-    reviewDate.setFullYear(reviewDate.getFullYear() + 1);
-    this.reviewDate = reviewDate.getTime();
     today.setMonth(today.getMonth() + 1);
     this.contractsOther.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsOther.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear() + 1, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsOther.startDate);
     this.endDate = this.contractsOther.getEndDateByMilliseconds();
+    this.contractsOther.calculateReviewDate();
+    this.reviewDate = this.contractsOther.getReviewDateByMilliseconds();
     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
       this.onCheckServicesForAdd(data);
     })
@@ -116,9 +115,15 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
     this.contractsOther.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.endDate = this.contractsOther.getEndDateByMilliseconds();
     this.endDateDP.setEditDate(this.contractsOther.getEndDateByMilliseconds());
+    this.contractsOther.calculateReviewDate();
+    this.reviewDate = this.contractsOther.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsOther.getReviewDateByMilliseconds());
   }
   onChangeEndDate(data) {
     this.contractsOther.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsOther.calculateReviewDate();
+    this.reviewDate = this.contractsOther.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsOther.getReviewDateByMilliseconds());
   }
   setTogglePerpetual(data) {
     this.contractsOther.isPerpetual = data;
@@ -133,6 +138,9 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
     this.contractsOther.calculateEndDate();
     this.endDate = this.contractsOther.getEndDateByMilliseconds();
     this.endDateDP.setEditDate(this.contractsOther.getEndDateByMilliseconds());
+    this.contractsOther.calculateReviewDate();
+    this.reviewDate = this.contractsOther.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsOther.getReviewDateByMilliseconds());
     this.cd.detectChanges();
   }
   getMinStartDate(interval, startDate) {

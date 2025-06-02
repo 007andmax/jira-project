@@ -49,14 +49,12 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let today = new Date();
-    let reviewDate = new Date();
-    reviewDate.setFullYear(reviewDate.getFullYear() + 1);
-    this.reviewDate = reviewDate.getTime();
     today.setMonth(today.getMonth() + 1);
     this.contractsHourly.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsHourly.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear() + 1, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.endDate = this.contractsHourly.getEndDateByMilliseconds();
-
+    this.contractsHourly.calculateReviewDate();
+    this.reviewDate = this.contractsHourly.getReviewDateByMilliseconds();
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.taxes = data;
@@ -182,9 +180,15 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
     this.endDate = this.contractsHourly.getEndDateByMilliseconds();
     this.endDateDP.setEditDate(this.contractsHourly.getEndDateByMilliseconds());
     this.validate.resetDate();
+    this.contractsHourly.calculateReviewDate();
+    this.reviewDate = this.contractsHourly.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsHourly.getReviewDateByMilliseconds());
   }
   onChangeEndDate(data) {
     this.contractsHourly.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsHourly.calculateReviewDate();
+    this.reviewDate = this.contractsHourly.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsHourly.getReviewDateByMilliseconds());
   }
   onChangeReviewDate(data) {
     this.contractsHourly.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

@@ -96,6 +96,14 @@ export class ContractsHourly {
             this.endDate = moment(endDate).format('YYYY/MM/DD');
         }
     }
+    public calculateReviewDate() {
+        let endDate = new Date(this.endDate);
+        endDate.setMonth(endDate.getMonth() - 2);
+        this.reviewDate = moment(endDate).format('YYYY/MM/DD');
+    }
+    public getReviewDateByMilliseconds() {
+        return new Date(this.reviewDate).getTime();
+    }
     public getEndDateByMilliseconds() {
         return new Date(this.endDate).getTime();
     }

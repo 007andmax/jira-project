@@ -41,6 +41,7 @@
                 <div class="qt-input-block qt-f50 --required">
                     <div class="qt-input-block__label">Review Date</div>
                     <app-date-picker
+                        #reviewDateDP
                         [formatDate]="formatDate"
                         [editMode]="true"
                         [editDate]="contractsHourly.getReviewDateByMilliseconds()"

@@ -168,6 +168,11 @@ export class ServiceAgreement {
             this.endDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
         }
     }
+    public calculateReviewDate() {
+        let endDate = new Date(this.endDate);
+        endDate.setMonth(endDate.getMonth() - 2);
+        this.reviewDate = moment(endDate).format('YYYY/MM/DD');
+    }
     public setStartDate(day, month, year, timeOffset) {
         let current = new Date();
 

@@ -24,6 +24,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   validate: ContractsHourlyValidate = new ContractsHourlyValidate();
   @Input() contractsHourly: ServiceAgreement = new ServiceAgreement();
   @Output() onClose = new EventEmitter<any>();
+  @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
   @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerComponent;
   @ViewChildren("serviceItem") serviceItems: QueryList<ContractsAsideHourlyBillingDefaultServiceComponent>;
   formatDate: string = FORMAT_DATE_2;
@@ -97,9 +98,11 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
     this.contractsHourly.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.endDateDP.setEditDate(this.contractsHourly.getEndDateByMilliseconds());
     this.validate.resetDate();
+    this.reviewDateDP.setEditDate(this.contractsHourly.getReviewDateByMilliseconds());
   }
   onChangeEndDate(data) {
     this.contractsHourly.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.reviewDateDP.setEditDate(this.contractsHourly.getReviewDateByMilliseconds());
   }
   onChangeReviewDate(data) {
     this.contractsHourly.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

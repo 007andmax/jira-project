@@ -31,6 +31,7 @@ import { DatePickerIntervalsComponent } from '../../contracts-aside/date-picker-
 export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
   @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerIntervalsComponent;
   @ViewChild('taxes', { static: true }) taxesDP: TaxesComponent;
+  @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
   selectedCompany: any;
   selectedTaxes = [];
   selectedType = new ContractsFilterType('Block Time', 'BLOCK_TIME', null);
@@ -269,14 +270,20 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
     this.contractsBlockTime.setIntervalString(data);
     this.contractsBlockTime.calculateEndDate();
     this.endDateDP.setEditDate(this.contractsBlockTime.getEndDateByMilliseconds());
+    this.contractsBlockTime.calculateReviewDate();
+    this.reviewDateDP.setEditDate(this.contractsBlockTime.getReviewDateByMilliseconds());
     this.cd.detectChanges();
   }
   onChangeEndDate(data) {
     this.contractsBlockTime.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsBlockTime.calculateReviewDate();
+    this.reviewDateDP.setEditDate(this.contractsBlockTime.getReviewDateByMilliseconds());
   }
   onChangeStartDate(data) {
     this.contractsBlockTime.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.endDateDP.setEditDate(this.contractsBlockTime.getEndDateByMilliseconds());
+    this.contractsBlockTime.calculateReviewDate();
+    this.reviewDateDP.setEditDate(this.contractsBlockTime.getReviewDateByMilliseconds());
   }
   setTogglePerpetual(data) {
     this.contractsBlockTime.isPerpetual = data;

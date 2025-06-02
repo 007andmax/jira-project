@@ -208,6 +208,11 @@ export class ContractsBlockTime {
 
         }
     }
+    public calculateReviewDate() {
+        let endDate = new Date(this.endDate);
+        endDate.setMonth(endDate.getMonth() - 2);
+        this.reviewDate = moment(endDate).format('YYYY/MM/DD');
+    }
     public setReviewDate(day, month, year, timeOffset) {
         let current = new Date();
 
@@ -236,6 +241,9 @@ export class ContractsBlockTime {
     }
     public getEndDateByMilliseconds() {
         return new Date(this.endDate).getTime();
+    }
+    public getReviewDateByMilliseconds() {
+        return new Date(this.reviewDate).getTime();
     }
     public getStartDateByMilliseconds() {
         return new Date(this.startDate).getTime();
