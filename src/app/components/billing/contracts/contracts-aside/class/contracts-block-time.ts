@@ -248,4 +248,9 @@ export class ContractsBlockTime {
     public getStartDateByMilliseconds() {
         return new Date(this.startDate).getTime();
     }
+    public getMaxEndDateByMilliseconds() {
+        let endDate = new Date(this.endDate);
+        let out = new Date(2080, endDate.getMonth(), endDate.getDate());
+        return out.getTime();
+    }
 }

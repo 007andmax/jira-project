@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
+import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { DatePickerStateService } from 'src/app/components/shared/date-picker/services/date-picker-state.service';
 import { DatePickerService } from 'src/app/components/shared/date-picker/services/date-picker.service';
+declare var $: any;
 
 @Component({
   selector: 'app-date-picker-intervals',
@@ -14,7 +16,7 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
 
   markDisabled = (date: NgbDate, current: { month: number, year: number }) => {
     let endDate = new Date(this.fromDate);
-    console.log("endDate", endDate);
+    //  console.log("endDate", endDate);
     let dates = [];
     if (this.intervalstring === 'YEARLY') {
       let newDate = new Date(endDate.getFullYear() + 1, endDate.getMonth(), endDate.getDate() - 1);
@@ -34,8 +36,8 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
     }
 
 
-    console.log("dates", dates);
-    console.log("date", date);
+    //console.log("dates", dates);
+    // console.log("date", date);
     return !dates.some(item => date.day === item.getDate() && date.month === item.getMonth() + 1);
     /*
     if (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') {
