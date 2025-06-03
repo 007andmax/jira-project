@@ -98,10 +98,12 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
     this.contractsHourly.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.endDateDP.setEditDate(this.contractsHourly.getEndDateByMilliseconds());
     this.validate.resetDate();
+    this.contractsHourly.calculateReviewDate();
     this.reviewDateDP.setEditDate(this.contractsHourly.getReviewDateByMilliseconds());
   }
   onChangeEndDate(data) {
     this.contractsHourly.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsHourly.calculateReviewDate();
     this.reviewDateDP.setEditDate(this.contractsHourly.getReviewDateByMilliseconds());
   }
   onChangeReviewDate(data) {

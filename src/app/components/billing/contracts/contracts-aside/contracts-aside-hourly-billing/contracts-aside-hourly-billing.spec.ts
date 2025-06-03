@@ -33,6 +33,7 @@ import { ContractsAsideOtherProductModule } from '../contracts-aside-product-ser
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePickerIntervalsModule } from '../date-picker-intervals/date-picker-intervals.module';
 
 
 
@@ -64,6 +65,7 @@ describe('ContractsAsideHourlyBillingComponent unit test', () => {
         ContractsAsideOtherProductModule,
         DisabledBtnModule,
         PreloaderTicketModule,
+        DatePickerIntervalsModule,
         HttpClientModule,
         ToastrModule.forRoot({
           closeButton: true,

@@ -73,10 +73,14 @@
                 <div class="qt-input-block__label">End Date</div>
                 <app-date-picker-intervals
                     #endDateDP
+                    [formatDate]="formatDate"
                     [dropdownClass]="['date-picker']"
                     [fromDate]="contractsOther.getStartDateByMilliseconds()"
                     [editMode]="true"
-                    [useMinDate]="false"
+                    [useMinDate]="true"
+                    [useMaxDate]="true"
+                    [minDate]="contractsOther.getStartDateByMilliseconds()"
+                    [maxDate]="contractsOther.getMaxEndDateByMilliseconds()"
                     [container]="'body'"
                     [placement]="'bottom-right'"
                     [intervalstring]="selectedInterval"

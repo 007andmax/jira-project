@@ -54,8 +54,10 @@ export class ContractsService {
     return this.http.get(this.apiUrl + `serviceAgreements/${agreementId}`).pipe(map((data: any) => new ServiceAgreement(data)));
   }
   public createContract(createBillableItem, data) {
+    this.appStateService.setServerError(true);
     return this.http.post(this.apiUrl + `serviceAgreements?createBillableItem=${createBillableItem}`, data).pipe(
       tap(data => {
+        this.appStateService.setServerError(false);
         this.toastrService.success("The new contract has been successfully created");
         this.appStateService.changeDetectorRef();
         return data;
@@ -65,8 +67,10 @@ export class ContractsService {
     return this.http.get(this.apiUrl + `reports/serviceAgreements/intervals/${id}`);
   }
   public updateContract(data) {
+    this.appStateService.setServerError(true);
     return this.http.put(this.apiUrl + `serviceAgreements`, data).pipe(
       tap(data => {
+        this.appStateService.setServerError(false);
         this.toastrService.success("The new contract has been successfully updated");
         this.appStateService.changeDetectorRef();
         return data;

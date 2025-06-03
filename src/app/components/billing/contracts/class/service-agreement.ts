@@ -127,6 +127,11 @@ export class ServiceAgreement {
     public getEndDateByMilliseconds() {
         return new Date(this.endDate).getTime();
     }
+    public getMaxEndDateByMilliseconds() {
+        let endDate = new Date(this.endDate);
+        endDate.setFullYear(endDate.getFullYear() + 10);
+        return new Date(endDate).getTime();
+    }
     public getReviewDateByMilliseconds() {
         return new Date(this.reviewDate).getTime();
     }
