@@ -18,7 +18,7 @@ describe('InvoiceChangeAddressComponent unit test', () => {
       imports: [CommonModule,
         FormsModule,
         NgbModule,
-        PreviewPhoneMaskModule
+        PreviewPhoneMaskModule,
         HttpClientModule,
         ToastrModule.forRoot({
           closeButton: true,
@@ -35,16 +35,14 @@ describe('InvoiceChangeAddressComponent unit test', () => {
   it('check "checkShippingAddress"', () => {
     const fixture = TestBed.createComponent(InvoiceChangeAddressComponent);
     const com = fixture.debugElement.componentInstance;
-    com.quoteCompany = {
-      id: '1',
-      companyName: 'Test Company',
+    com.company = {
       companyInfo: {
         addresses: [
           { locationName: 'Main Office', addressWithSuitNumberAndPostalCode: '123 Main St, Suite 100, 12345' },
           { locationName: 'Branch Office', addressWithSuitNumberAndPostalCode: '456 Branch St, Suite 200, 67890' }
         ]
       }
-    };
+    }
     expect(com.checkShippingAddress()).toEqual(true);
   });
 

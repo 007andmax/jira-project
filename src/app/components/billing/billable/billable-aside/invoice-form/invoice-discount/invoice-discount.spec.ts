@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InvoiceDiscountComponent } from './invoice-discount.component';
+import { NumberModule } from 'src/app/directives/number/number.module';
+import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 
 
 describe('InvoiceDiscountComponent unit test', () => {
@@ -16,6 +18,8 @@ describe('InvoiceDiscountComponent unit test', () => {
       imports: [CommonModule,
         FormsModule,
         HttpClientModule,
+        NumberModule,
+        ToFixedModule,
         ToastrModule.forRoot({
           closeButton: true,
           timeOut: 5000,

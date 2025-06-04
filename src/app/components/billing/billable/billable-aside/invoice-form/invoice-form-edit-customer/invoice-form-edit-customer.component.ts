@@ -6,6 +6,7 @@ import { CompanyInvoiceValdiate } from './class/company-invoice-validate';
 import { Subscription } from 'rxjs';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
+declare const google: any;
 
 @Component({
   selector: 'app-invoice-form-edit-customer',

@@ -122,7 +122,7 @@ describe('InvoiceFormEditCustomerComponent unit test', () => {
       ]
     };
     com.onChangePrimaryEmail();
-    expect(com.validate.primaryEmail).toEqual(false);
+    expect(com.validate.primaryContactEmail).toEqual(false);
   });
   it('check "onChangePhoneNumber"', () => {
     const fixture = TestBed.createComponent(InvoiceFormEditCustomerComponent);
