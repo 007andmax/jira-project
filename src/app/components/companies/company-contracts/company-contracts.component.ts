@@ -21,6 +21,10 @@ export class CompanyContractsComponent extends ContractsComponent implements OnI
       this.companyContracts = this.companiesStateService.getCompanies().find(item => item.id === id);
     });
     this.sub.add(subscription);
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe(res => {
+      this.companyContracts = res.find(item => item.id === id);
+    })
+    this.sub.add(getOnCompanies);
     let getOnShowNotificationReview = this.contractsStateService.getOnShowNotificationReview().subscribe(data => {
       this.showNotificationReview = true;
     })

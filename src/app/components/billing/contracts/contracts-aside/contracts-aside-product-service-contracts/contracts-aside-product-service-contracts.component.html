@@ -18,11 +18,13 @@
             <div class="app-drop-down__title">Start Date</div>
             <app-date-picker
                 #startDateDP
+                [dropdownClass]="['date-picker']"
                 [formatDate]="formatDate"
                 [placement]="'bottom-right'"
                 [editMode]="true"
                 [editDate]="startDate"
                 [minDate]="minStartDate"
+                [container]="'body'"
                 (onChange)="onChangeStartDate($event)"
             ></app-date-picker>
         </div>
@@ -48,6 +50,38 @@
                 [useMinDate]="false"
                 (onChange)="onChangeReviewDate($event)"
             ></app-date-picker>
+        </div>
+        <div class="qt-input-block qt-f50">
+            <div class="qt-input-block qt-f100 qt-mb-16">
+                <div class="qt-input-block__label">End Date</div>
+                <app-date-picker-intervals
+                    #endDateDP
+                    [dropdownClass]="['date-picker']"
+                    [formatDate]="formatDate"
+                    [editMode]="true"
+                    [fromDate]="contractsOther.getStartDateByMilliseconds()"
+                    [editDate]="endDate"
+                    [useMinDate]="true"
+                    [useMaxDate]="true"
+                    [minDate]="contractsOther.getStartDateByMilliseconds()"
+                    [maxDate]="contractsOther.getMaxEndDateByMilliseconds()"
+                    [container]="'body'"
+                    [placement]="'bottom-right'"
+                    [intervalstring]="selectedInterval"
+                    [isDisabled]="contractsOther.isPerpetual"
+                    (onChange)="onChangeEndDate($event)"
+                ></app-date-picker-intervals>
+            </div>
+            <div class="qt-df qt-ai-c qt-f100">
+                <div class="qt-input-block__label">Perpetual</div>
+                <div
+                    class="qt-toggle  qt-mb-8 qt-ml-8"
+                    [ngClass]="{'--on':contractsOther.isPerpetual}"
+                    (click)="setTogglePerpetual(!contractsOther.isPerpetual)"
+                >
+                    <div class="qt-toggle__circle"></div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="qt-inputs-row">

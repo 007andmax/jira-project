@@ -35,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { ServiceAgreement } from '../../class/service-agreement';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePickerIntervalsModule } from '../date-picker-intervals/date-picker-intervals.module';
 
 
 describe('ContractsAsideBlockTimeBillingComponent unit test', () => {
@@ -65,6 +66,7 @@ describe('ContractsAsideBlockTimeBillingComponent unit test', () => {
         ContractsAsideBlockTimeBillingAddSubscriptionServicesModule,
         DisabledBtnModule,
         PreloaderTicketModule,
+        DatePickerIntervalsModule,
         HttpClientModule,
         ToastrModule.forRoot({
           closeButton: true,

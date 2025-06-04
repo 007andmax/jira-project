@@ -15,6 +15,7 @@ import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-asi
 import { ContractsOtherValidate } from '../class/contracts-other-validate';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
 import { ContractsListService } from '../../services/contracts-list.service';
+import { DatePickerIntervalsComponent } from '../date-picker-intervals/date-picker-intervals.component';
 
 @Component({
   selector: 'app-contracts-aside-product-service-contracts',
@@ -25,12 +26,14 @@ import { ContractsListService } from '../../services/contracts-list.service';
 export class ContractsAsideProductServiceContractsComponent implements OnInit, OnDestroy {
   selectedType = new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER');
   @Output() onInitRequestForAdd = new EventEmitter<any>();
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerIntervalsComponent;
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
   @ViewChild('topContract', { static: true }) topContract: ContractsAsideTopComponent;
   @Output() onClose = new EventEmitter<any>();
   contractsOther: ContractsOther = new ContractsOther();
   formatDate: string = FORMAT_DATE_2;
+  endDate = new Date().getTime();
   startDate = new Date().getTime();
   reviewDate = new Date().getTime();
   validate: ContractsOtherValidate = new ContractsOtherValidate();
@@ -51,13 +54,13 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
 
   ngOnInit() {
     let today = new Date();
-    let reviewDate = new Date();
-    reviewDate.setFullYear(reviewDate.getFullYear() + 1);
-    this.reviewDate = reviewDate.getTime();
     today.setMonth(today.getMonth() + 1);
     this.contractsOther.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsOther.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear() + 1, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsOther.startDate);
+    this.endDate = this.contractsOther.getEndDateByMilliseconds();
+    this.contractsOther.calculateReviewDate();
+    this.reviewDate = this.contractsOther.getReviewDateByMilliseconds();
     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
       this.onCheckServicesForAdd(data);
     })
@@ -78,12 +81,16 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
     //  this.startDateDP.setEditDate(this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds());
     this.reviewDateDP.setEditDate(this.сontractsStateService.getContractForCopy().getReviewDateByMilliseconds());
     this.topContract.companiesDP.selectedItem = this.companiesStateService.getCompanies().find(item => item.id === this.contractsOther.companyId);
+    this.endDate = this.contractsOther.getEndDateByMilliseconds();
+
   }
   onCheckServicesForAdd(createBillableItem) {
-    this.onInitRequestForAdd.emit(null);
+    this.onInitRequestForAdd.emit(true);
     this.contractsService.createContract(createBillableItem, this.contractsOther.getDataForCreateOther()).subscribe(res => {
       this.сontractsStateService.fastAddContract(res);
       this.onClose.emit(null);
+    }, err => {
+      this.onInitRequestForAdd.emit(false);
     })
   }
   addService() {
@@ -106,6 +113,20 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
   }
   onChangeStartDate(data) {
     this.contractsOther.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.endDate = this.contractsOther.getEndDateByMilliseconds();
+    this.endDateDP.setEditDate(this.contractsOther.getEndDateByMilliseconds());
+    this.contractsOther.calculateReviewDate();
+    this.reviewDate = this.contractsOther.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsOther.getReviewDateByMilliseconds());
+  }
+  onChangeEndDate(data) {
+    this.contractsOther.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsOther.calculateReviewDate();
+    this.reviewDate = this.contractsOther.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsOther.getReviewDateByMilliseconds());
+  }
+  setTogglePerpetual(data) {
+    this.contractsOther.isPerpetual = data;
   }
   onChangeReviewDate(data) {
     this.contractsOther.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
@@ -115,6 +136,11 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit, O
     this.minStartDate = this.getMinStartDate(data, this.contractsOther.startDate);
     this.contractsOther.setInterval(data);
     this.contractsOther.calculateEndDate();
+    this.endDate = this.contractsOther.getEndDateByMilliseconds();
+    this.endDateDP.setEditDate(this.contractsOther.getEndDateByMilliseconds());
+    this.contractsOther.calculateReviewDate();
+    this.reviewDate = this.contractsOther.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsOther.getReviewDateByMilliseconds());
     this.cd.detectChanges();
   }
   getMinStartDate(interval, startDate) {

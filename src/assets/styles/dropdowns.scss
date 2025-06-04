@@ -518,3 +518,11 @@ app-modal-quote {
       }
     }
 }
+.intervals-date-picker {
+ .ngb-dp-day {
+  &:not(.disabled)
+    div {
+      font-weight: 900 !important;
+    }
+  }
+}

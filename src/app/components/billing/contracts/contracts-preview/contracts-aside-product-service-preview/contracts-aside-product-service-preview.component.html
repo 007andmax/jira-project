@@ -61,6 +61,26 @@
                 [editDate]="contractsOther.reviewDate"
             ></app-date-picker>
         </div>
+        <div class="qt-input-block qt-f50">
+            <div class="qt-input-block qt-f100 qt-mb-16">
+                <div class="qt-input-block__label">End Date</div>
+                <app-date-picker
+                    [formatDate]="formatDate"
+                    [isDisabled]="true"
+                    [editMode]="true"
+                    [editDate]="contractsOther.endDate"
+                ></app-date-picker>
+            </div>
+            <div class="qt-df qt-ai-c qt-f100">
+                <div class="qt-input-block__label">Perpetual</div>
+                <div
+                    class="qt-toggle  qt-mb-8 qt-ml-8"
+                    [ngClass]="{'--on':contractsOther.isPerpetual}"
+                >
+                    <div class="qt-toggle__circle"></div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="qt-inputs-row">
         <div class="qt-input-block --required">

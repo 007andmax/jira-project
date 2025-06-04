@@ -40,13 +40,11 @@ export class ContractsOther extends ContractsUserDevice {
         return totalAmount;
     }
     public getDataForCreateOther() {
-
-        return {
+        let data: any = {
             billType: "OTHER",
             companyId: this.companyId,
             customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
             description: this.description,
-            endDate: this.endDate,
             interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring : null,
             productExpenses: this.productExpenses.map(item => item.getDataForCrate()),
             serviceExpenses: this.serviceExpenses.map(item => item.getDataForCrate()),
@@ -54,8 +52,11 @@ export class ContractsOther extends ContractsUserDevice {
             reviewDate: this.reviewDate,
             type: "SERVICE_CONTRACT",
             manualCreateBillableItem: this.manualCreateBillableItem,
-            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
-        }
+            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate,
+            isPerpetual: this.isPerpetual
+        };
+        if (!this.isPerpetual) data.endDate = this.endDate;
+        return data;
     }
     public calculateServiceTaxes() {
         let sum = 0;

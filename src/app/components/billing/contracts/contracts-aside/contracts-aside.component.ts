@@ -60,8 +60,8 @@ export class ContractsAsideComponent implements OnInit, OnDestroy {
     this.contractsStateService.setContractForCopy(null);
     if (this.addContract) this.addContract.setDisabled(false);
   }
-  public disabledBtnForAdd() {
-    this.addContract.setDisabled(true);
+  public disabledBtnForAdd(data) {
+    this.addContract.setDisabled(data);
   }
   onSelectType(data) {
     this.type = data;

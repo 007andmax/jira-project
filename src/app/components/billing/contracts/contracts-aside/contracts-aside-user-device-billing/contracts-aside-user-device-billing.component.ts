@@ -20,6 +20,7 @@ import { Subscription } from 'rxjs';
 import { ContractsListService } from '../../services/contracts-list.service';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 import { ContractsAsideUserDeviceServiceComponent } from './contracts-aside-user-device-service/contracts-aside-user-device-service.component';
+import { DatePickerIntervalsComponent } from '../date-picker-intervals/date-picker-intervals.component';
 
 @Component({
   selector: 'app-contracts-aside-user-device-billing',
@@ -29,6 +30,7 @@ import { ContractsAsideUserDeviceServiceComponent } from './contracts-aside-user
 })
 export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestroy {
   @Output() onInitRequestForAdd = new EventEmitter<any>();
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerIntervalsComponent;
   @ViewChild('taxes', { static: true }) taxesDP: TaxesComponent;
   @ViewChild('taxesServices', { static: true }) taxesServicesDP: TaxesComponent;
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
@@ -41,6 +43,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   formatDate: string = FORMAT_DATE_2;
   startDate = new Date().getTime();
   reviewDate = new Date().getTime();
+  endDate = new Date().getTime();
   validate: ContractsUserDeviceValidate = new ContractsUserDeviceValidate();
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';
@@ -61,14 +64,14 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
 
   ngOnInit() {
     let today = new Date();
-    let reviewDate = new Date();
-    reviewDate.setFullYear(reviewDate.getFullYear() + 1);
-    this.reviewDate = reviewDate.getTime();
     today.setMonth(today.getMonth() + 1);
     this.contractsUserDevice.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsUserDevice.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear() + 1, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsUserDevice.startDate);
+    this.endDate = this.contractsUserDevice.getEndDateByMilliseconds();
+    this.contractsUserDevice.calculateReviewDate();
+    this.reviewDate = this.contractsUserDevice.getReviewDateByMilliseconds();
+
     if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.setDefaultTaxes(data);
@@ -102,6 +105,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     }))
     if (this.contractsUserDevice.services.length > 0) this.toggleContractServices = true;
     if (this.contractsUserDevice.includedHours && this.contractsUserDevice.rateExceeding) this.toggleMaximumAmountHours = true;
+    this.endDate = this.contractsUserDevice.getEndDateByMilliseconds();
   }
   private setDefaultTaxes(lsitTaxes) {
     this.taxes = lsitTaxes;
@@ -124,12 +128,14 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
       return;
     };
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
-      moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, null, this.contractsUserDevice.getAllServicesName()).subscribe(data => {
+      (!this.contractsUserDevice.isPerpetual) ? moment(this.contractsUserDevice.endDate).format('DD MMM YYYY') : null, this.contractsUserDevice.companyId, null, this.contractsUserDevice.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
-          this.onInitRequestForAdd.emit(null);
+          this.onInitRequestForAdd.emit(true);
           this.contractsService.createContract(createBillableItem, this.contractsUserDevice.getDataForCreate(this.toggleMaximumAmountHours)).subscribe(res => {
             this.сontractsStateService.fastAddContract(res);
             this.onClose.emit(null);
+          }, err => {
+            this.onInitRequestForAdd.emit(false);
           })
         } else {
           let names = Object.keys(data);
@@ -162,7 +168,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   onCheckDuplicatedServices() {
     if (this.contractsUserDevice.services.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeAndTrackServices() || !this.contractsUserDevice.companyId) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
-      moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, null, this.contractsUserDevice.getServicesName()).subscribe(data => {
+      (!this.contractsUserDevice.isPerpetual) ? moment(this.contractsUserDevice.endDate).format('DD MMM YYYY') : null, this.contractsUserDevice.companyId, null, this.contractsUserDevice.getServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
           this.contractsUserDevice.services.forEach(item => {
@@ -180,7 +186,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   onCheckDuplicatedBlockTimeServices() {
     if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeAndTrackServices() || !this.contractsUserDevice.companyId) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
-      moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, null, this.contractsUserDevice.getBlockTimeServicesName()).subscribe(data => {
+      (!this.contractsUserDevice.isPerpetual) ? moment(this.contractsUserDevice.endDate).format('DD MMM YYYY') : null, this.contractsUserDevice.companyId, null, this.contractsUserDevice.getBlockTimeServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
           this.contractsUserDevice.blockTimeServices.forEach(item => {
@@ -198,7 +204,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   onCheckDuplicatedServiceContractServices() {
     if (this.contractsUserDevice.serviceContractServices.length === 0 || !this.contractsUserDevice.checkDuplicatedServiceContractServices() || !this.contractsUserDevice.companyId) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
-      moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, null, this.contractsUserDevice.getServiceContractServicesName()).subscribe(data => {
+      (!this.contractsUserDevice.isPerpetual) ? moment(this.contractsUserDevice.endDate).format('DD MMM YYYY') : null, this.contractsUserDevice.companyId, null, this.contractsUserDevice.getServiceContractServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
           let names = Object.keys(data);
           this.contractsUserDevice.serviceContractServices.forEach(item => {
@@ -277,6 +283,20 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   }
   onChangeStartDate(data) {
     this.contractsUserDevice.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.endDate = this.contractsUserDevice.getEndDateByMilliseconds();
+    this.endDateDP.setEditDate(this.contractsUserDevice.getEndDateByMilliseconds());
+    this.contractsUserDevice.calculateReviewDate();
+    this.reviewDate = this.contractsUserDevice.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsUserDevice.getReviewDateByMilliseconds());
+  }
+  onChangeEndDate(data) {
+    this.contractsUserDevice.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsUserDevice.calculateReviewDate();
+    this.reviewDate = this.contractsUserDevice.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsUserDevice.getReviewDateByMilliseconds());
+  }
+  setTogglePerpetual(data) {
+    this.contractsUserDevice.isPerpetual = data;
   }
   onChangeReviewDate(data) {
     this.contractsUserDevice.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
@@ -310,6 +330,11 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.minStartDate = this.getMinStartDate(data, this.contractsUserDevice.startDate);
     this.contractsUserDevice.setInterval(data);
     this.contractsUserDevice.calculateEndDate();
+    this.endDate = this.contractsUserDevice.getEndDateByMilliseconds();
+    this.endDateDP.setEditDate(this.contractsUserDevice.getEndDateByMilliseconds());
+    this.contractsUserDevice.calculateReviewDate();
+    this.reviewDate = this.contractsUserDevice.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsUserDevice.getReviewDateByMilliseconds());
     this.cd.detectChanges();
   }
   public onCreate() {

@@ -22,6 +22,7 @@ import { ContractsAsideHourlyBillingDefaultServiceComponent } from './contracts-
 })
 export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
   @Output() onInitRequestForAdd = new EventEmitter<any>();
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerComponent;
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
   @ViewChild('topContract', { static: true }) topContract: ContractsAsideTopComponent;
@@ -32,6 +33,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
   contractsHourly: ContractsHourly = new ContractsHourly();
   formatDate: string = FORMAT_DATE_2;
   startDate = new Date().getTime();
+  endDate = new Date().getTime();
   reviewDate = new Date().getTime();
   showAddService: boolean = false;
   selectAllServices: boolean = true;
@@ -47,13 +49,12 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let today = new Date();
-    let reviewDate = new Date();
-    reviewDate.setFullYear(reviewDate.getFullYear() + 1);
-    this.reviewDate = reviewDate.getTime();
     today.setMonth(today.getMonth() + 1);
     this.contractsHourly.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsHourly.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear() + 1, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-
+    this.endDate = this.contractsHourly.getEndDateByMilliseconds();
+    this.contractsHourly.calculateReviewDate();
+    this.reviewDate = this.contractsHourly.getReviewDateByMilliseconds();
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.taxes = data;
@@ -99,7 +100,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
   public onCreate() {
     this.contractsHourly.onAddServices(this.defaultServices);
     if (this.contractsHourly.services.length === 0 || !this.validate.isValidate(this.contractsHourly) || !this.validate.isValidateRateServices(this.defaultServices)) return;
-    this.contractsService.validateCrossingDatesHourly(moment(this.contractsHourly.startDate).format('DD MMM YYYY'), moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, null).subscribe((data: any) => {
+    this.contractsService.validateCrossingDatesHourly(moment(this.contractsHourly.startDate).format('DD MMM YYYY'), (!this.contractsHourly.isPerpetual) ? moment(this.contractsHourly.endDate).format('DD MMM YYYY') : null, this.contractsHourly.companyId, null).subscribe((data: any) => {
       if (data.valid) {
         this.validate.resetDate();
         this.searchDuplicatedServiceNames();
@@ -109,10 +110,13 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
       }
     })
   }
+  setTogglePerpetual(data) {
+    this.contractsHourly.isPerpetual = data;
+  }
   public searchDuplicatedServiceNames() {
     let servicesName = this.contractsHourly.services.map(item => item.name);
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
-      moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, null, servicesName).subscribe(data => {
+      (!this.contractsHourly.isPerpetual) ? moment(this.contractsHourly.endDate).format('DD MMM YYYY') : null, this.contractsHourly.companyId, null, servicesName).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.onInitRequestForAdd.emit(null);
           this.contractsService.createContract(false, this.contractsHourly.getDataForCreate()).subscribe(contract => {
@@ -173,7 +177,18 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
   }
   onChangeStartDate(data) {
     this.contractsHourly.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.endDate = this.contractsHourly.getEndDateByMilliseconds();
+    this.endDateDP.setEditDate(this.contractsHourly.getEndDateByMilliseconds());
     this.validate.resetDate();
+    this.contractsHourly.calculateReviewDate();
+    this.reviewDate = this.contractsHourly.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsHourly.getReviewDateByMilliseconds());
+  }
+  onChangeEndDate(data) {
+    this.contractsHourly.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsHourly.calculateReviewDate();
+    this.reviewDate = this.contractsHourly.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsHourly.getReviewDateByMilliseconds());
   }
   onChangeReviewDate(data) {
     this.contractsHourly.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

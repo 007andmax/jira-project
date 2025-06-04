@@ -27,6 +27,7 @@ export class ContractsBlockTime {
     enableInvoiceAutoCreate: boolean = false;
     taxSum: number = 0;
     taxes: Array<any> = [];
+    isPerpetual: boolean = false;
     constructor() { }
     public setDataFromCopy(data: ServiceAgreement) {
         this.billType = data.billType;
@@ -52,6 +53,7 @@ export class ContractsBlockTime {
         if (data.manualCreateBillableItem != undefined) this.manualCreateBillableItem = data.manualCreateBillableItem;
         if (data.enableInvoiceAutoCreate != undefined) this.enableInvoiceAutoCreate = data.enableInvoiceAutoCreate;
         this.reviewDate = data.reviewDate;
+        this.isPerpetual = data.isPerpetual;
         this.calculateEndDate();
     }
     public setManualCreateBillableItem(data) {
@@ -84,15 +86,13 @@ export class ContractsBlockTime {
         return sum;
     };
     public getDataForCreate() {
-
-        return {
+        let data: any = {
             blockRate: Number(this.blockRate),
             blockTimeServices: this.blockTimeServices.map(item => item.getDataForCreate(this.rateExceeding)),
             companyId: this.companyId,
             customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
             description: this.description,
             enableTimeRollover: (this.maxRolloverHours && this.maxRolloverHours.length > 0) ? true : false,
-            endDate: this.endDate,
             maxRolloverHours: this.maxRolloverHours,
             includedHours: this.includedHours,
             interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring : null,
@@ -104,8 +104,11 @@ export class ContractsBlockTime {
             taxIds: this.taxIds,
             type: this.type,
             manualCreateBillableItem: this.manualCreateBillableItem,
-            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate
-        }
+            enableInvoiceAutoCreate: this.enableInvoiceAutoCreate,
+            isPerpetual: this.isPerpetual
+        };
+        if (!this.isPerpetual) data.endDate = this.endDate;
+        return data
     }
     public setCompanyId(data) {
         this.companyId = data;
@@ -184,29 +187,31 @@ export class ContractsBlockTime {
     public calculateEndDate() {
         if (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') {
             let endDate = new Date(this.startDate);
-            endDate.setFullYear(endDate.getFullYear() + 50);
+            endDate.setFullYear(endDate.getFullYear() + 1);
             endDate.setDate(endDate.getDate() - 1);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
         } else if (this.intervalstring === '30 days') {
             let endDate = new Date(this.startDate);
-            endDate.setDate(endDate.getDate() + 29 * 12 * 50);
-            endDate.setDate(endDate.getDate() - 1);
+            endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
         } else if (this.intervalstring === '15 days') {
             let endDate = new Date(this.startDate);
-            endDate.setDate(endDate.getDate() + 28 * 12 * 50);
-            endDate.setDate(endDate.getDate() - 1);
+            endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 14);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
         } else if (this.intervalstring === '7 days') {
             let endDate = new Date(this.startDate);
-            endDate.setFullYear(endDate.getFullYear() + 50);
-            endDate.setDate(endDate.getDate() - 7);
+            endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 7);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
         }
+    }
+    public calculateReviewDate() {
+        let endDate = new Date(this.endDate);
+        endDate.setMonth(endDate.getMonth() - 2);
+        this.reviewDate = moment(endDate).format('YYYY/MM/DD');
     }
     public setReviewDate(day, month, year, timeOffset) {
         let current = new Date();
@@ -220,5 +225,32 @@ export class ContractsBlockTime {
             let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
             this.reviewDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
         }
+    }
+    public setEndDate(day, month, year, timeOffset) {
+        let current = new Date();
+
+        if (day !== current.getDate() || current.getMonth() !== (month - 1) || year !== current.getFullYear()) {
+            let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
+            let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
+            this.endDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
+        } else {
+            let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
+            let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
+            this.endDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
+        }
+    }
+    public getEndDateByMilliseconds() {
+        return new Date(this.endDate).getTime();
+    }
+    public getReviewDateByMilliseconds() {
+        return new Date(this.reviewDate).getTime();
+    }
+    public getStartDateByMilliseconds() {
+        return new Date(this.startDate).getTime();
+    }
+    public getMaxEndDateByMilliseconds() {
+        let endDate = new Date(this.endDate);
+        let out = new Date(2080, endDate.getMonth(), endDate.getDate());
+        return out.getTime();
     }
 }

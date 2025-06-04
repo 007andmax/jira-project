@@ -11,6 +11,7 @@ import * as moment from "moment";
 import { ServiceAgreementServiceExpenses } from '../../class/service-agreement-service-expenses';
 import { ContractsOtherProduct } from '../../contracts-aside/class/contracts-other-product';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
+import { DatePickerIntervalsComponent } from '../../contracts-aside/date-picker-intervals/date-picker-intervals.component';
 
 @Component({
   selector: 'app-contracts-aside-product-service-edit',
@@ -20,6 +21,7 @@ import { ContractsStateService } from 'src/app/states/contracts/contracts-state.
 export class ContractsAsideProductServiceEditComponent implements OnInit {
   selectedType = new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER');
   selectedCompany: any;
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerIntervalsComponent;
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
   @Output() onClose = new EventEmitter<any>();
@@ -55,10 +57,12 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
       this.cd.detectChanges();
       return;
     }
-    this.onInitRequestForEdit.emit(null);
+    this.onInitRequestForEdit.emit(true);
     this.contractsService.updateContract(this.contractsOther.getDataForUpdateOtherContract()).subscribe(res => {
       this.contractsStateService.fastEditContract(res);
       this.onClose.emit(null);
+    }, err => {
+      this.onInitRequestForEdit.emit(false);
     })
   }
   addService() {
@@ -89,7 +93,20 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
   }
   onChangeStartDate(data) {
     this.contractsOther.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.endDateDP.setEditDate(this.contractsOther.getEndDateByMilliseconds());
     this.contractsOther.calculateEndDate();
+    this.contractsOther.calculateReviewDate();
+    this.reviewDate = this.contractsOther.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsOther.getReviewDateByMilliseconds());
+  }
+  onChangeEndDate(data) {
+    this.contractsOther.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsOther.calculateReviewDate();
+    this.reviewDate = this.contractsOther.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsOther.getReviewDateByMilliseconds());
+  }
+  setTogglePerpetual(data) {
+    this.contractsOther.isPerpetual = data;
   }
   onChangeReviewDate(data) {
     this.contractsOther.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
@@ -99,6 +116,10 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
     this.minStartDate = this.getMinStartDate(data, this.contractsOther.startDate);
     this.contractsOther.setIntervalString(data);
     this.contractsOther.calculateEndDate();
+    this.endDateDP.setEditDate(this.contractsOther.getEndDateByMilliseconds());
+    this.contractsOther.calculateReviewDate();
+    this.reviewDate = this.contractsOther.getReviewDateByMilliseconds();
+    this.reviewDateDP.setEditDate(this.contractsOther.getReviewDateByMilliseconds());
     this.cd.detectChanges();
   }
   getMinStartDate(interval, startDate) {
