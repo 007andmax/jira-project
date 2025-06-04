@@ -16,7 +16,6 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
 
   markDisabled = (date: NgbDate, current: { month: number, year: number }) => {
     let endDate = new Date(this.fromDate);
-    //  console.log("endDate", endDate);
     let dates = [];
     if (this.intervalstring === 'YEARLY') {
       let newDate = new Date(endDate.getFullYear() + 1, endDate.getMonth(), endDate.getDate() - 1);
@@ -28,17 +27,12 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
       }
     } else {
       while (endDate.getTime() < new Date().getTime() + 60000 * 60 * 24 * 365) {
-        // let changeDate = new Date(endDate.getTime() + 60000 * 60 * 24 * 29);
         if (this.intervalstring === '30 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29);
         if (this.intervalstring === '15 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 14);
         if (this.intervalstring === '7 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 7);
         dates.push(new Date(JSON.parse(JSON.stringify(endDate.getTime()))));
       }
     }
-
-
-    //console.log("dates", dates);
-    // console.log("date", date);
     return !dates.some(item => date.day === item.getDate() && date.month === item.getMonth() + 1 && date.year === item.getFullYear());
   }
 }

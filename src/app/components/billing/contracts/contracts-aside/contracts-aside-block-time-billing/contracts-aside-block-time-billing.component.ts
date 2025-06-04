@@ -172,7 +172,6 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
             this.сontractsStateService.fastAddContract(res);
             this.onClose.emit(null);
           }, err => {
-            console.log("err", err);
             this.onInitRequestForAdd.emit(false);
           })
         } else {

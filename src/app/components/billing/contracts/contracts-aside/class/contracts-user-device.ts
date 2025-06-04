@@ -135,7 +135,6 @@ export class ContractsUserDevice {
     }
     public setEndDate(day, month, year, timeOffset) {
         let current = new Date();
-        console.log("current.getMonth()", current.getMonth());
         if (day !== current.getDate() || current.getMonth() !== (month - 1) || year !== current.getFullYear()) {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);

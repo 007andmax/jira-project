@@ -19,12 +19,10 @@ export class CompanyContractsComponent extends ContractsComponent implements OnI
       id = params['id'];
       if (id) this.companiesStateService.setCompanyRoutingId(id);
       this.companyContracts = this.companiesStateService.getCompanies().find(item => item.id === id);
-      console.log("this.companyContracts", this.companyContracts)
     });
     this.sub.add(subscription);
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe(res => {
       this.companyContracts = res.find(item => item.id === id);
-      console.log("this.companyContracts", this.companyContracts)
     })
     this.sub.add(getOnCompanies);
     let getOnShowNotificationReview = this.contractsStateService.getOnShowNotificationReview().subscribe(data => {

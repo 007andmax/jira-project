@@ -290,7 +290,6 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.reviewDateDP.setEditDate(this.contractsUserDevice.getReviewDateByMilliseconds());
   }
   onChangeEndDate(data) {
-    console.log("data", data);
     this.contractsUserDevice.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsUserDevice.calculateReviewDate();
     this.reviewDate = this.contractsUserDevice.getReviewDateByMilliseconds();
