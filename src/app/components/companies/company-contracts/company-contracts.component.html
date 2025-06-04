@@ -2,8 +2,14 @@
     <div class="qt-df qt-fd-c qt-jc-sb contracts-page__list-container">
         <div class="qt-w100">
             <contracts-review></contracts-review>
-            <app-contracts-header [companyContracts]="companyContracts"></app-contracts-header>
-            <app-contracts-table [companyContracts]="companyContracts"></app-contracts-table>
+            <app-contracts-header
+                *ngIf="companyContracts"
+                [companyContracts]="companyContracts"
+            ></app-contracts-header>
+            <app-contracts-table
+                *ngIf="companyContracts"
+                [companyContracts]="companyContracts"
+            ></app-contracts-table>
         </div>
     </div>
 </div>

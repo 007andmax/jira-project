@@ -16,21 +16,21 @@
         *ngIf="serviceAgreement.type === 'BLOCK_TIME'"
         #blockTimeContract
         [contractsBlockTime]="serviceAgreement"
-        (onInitRequestForEdit)="disabledBtnForEdit()"
+        (onInitRequestForEdit)="disabledBtnForEdit($event)"
         (onClose)="closed()"
     ></app-contracts-aside-block-time-edit>
     <app-contracts-aside-user-device-edit
         *ngIf="serviceAgreement.type === 'SERVICE_CONTRACT' && serviceAgreement.billType !== 'OTHER'"
         #serviceContract
         [contractsUserDevice]="serviceAgreement"
-        (onInitRequestForEdit)="disabledBtnForEdit()"
+        (onInitRequestForEdit)="disabledBtnForEdit($event)"
         (onClose)="closed()"
     ></app-contracts-aside-user-device-edit>
     <app-contracts-aside-product-service-edit
         *ngIf="serviceAgreement.type === 'SERVICE_CONTRACT' && serviceAgreement.billType === 'OTHER'"
         #otherContract
         [contractsOther]="serviceAgreement"
-        (onInitRequestForEdit)="disabledBtnForEdit()"
+        (onInitRequestForEdit)="disabledBtnForEdit($event)"
         (onClose)="closed()"
     ></app-contracts-aside-product-service-edit>
     <div class="qt-aside-modern__footer">

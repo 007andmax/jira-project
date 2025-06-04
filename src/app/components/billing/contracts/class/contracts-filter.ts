@@ -10,6 +10,7 @@ export class ContractsFilter {
   new CompanyFilterTop('status', ''),
   new CompanyFilterTop('start_date', ''),
   new CompanyFilterTop('review_date', ''),
+  new CompanyFilterTop('end_date', ''),
   new CompanyFilterTop('amount', '')];
   selectedCompany: Company = null;
   selectedType: ContractsFilterType = null;
@@ -134,6 +135,16 @@ export class ContractsFilter {
           list.reverse();
         }
       }
+      if (field === 'end_date') {
+        if (sort === '') this.clearFilter();
+        if (sort === '' || sort === 'DESC') {
+          this.filter[index].filter = 'ASC';
+          this.onFilterEndDate(list);
+        } else {
+          this.filter[index].filter = 'DESC';
+          list.reverse();
+        }
+      }
       if (field === 'amount') {
         if (sort === '') this.clearFilter();
         if (sort === '' || sort === 'DESC') {
@@ -191,6 +202,13 @@ export class ContractsFilter {
         reqList.reverse();
       }
     }
+    if (filter.field === 'end_date') {
+      if (sort === 'ASC') {
+        this.onFilterEndDate(reqList);
+      } else {
+        reqList.reverse();
+      }
+    }
     if (filter.field === 'amount') {
       if (sort === 'ASC') {
         this.onFilterAmount(reqList);
@@ -206,6 +224,10 @@ export class ContractsFilter {
   private onFilterReviewDate(list) {
     list.sort((a, b) => (a.reviewDate > b.reviewDate) ?
       1 : ((b.reviewDate > a.reviewDate) ? -1 : 0));
+  }
+  private onFilterEndDate(list) {
+    list.sort((a, b) => (a.endDate > b.endDate) ?
+      1 : ((b.endDate > a.endDate) ? -1 : 0));
   }
   private onFilterStartDate(list) {
     list.sort((a, b) => (a.startDate > b.startDate) ?

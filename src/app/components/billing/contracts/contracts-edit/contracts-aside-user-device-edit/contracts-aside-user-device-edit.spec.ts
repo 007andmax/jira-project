@@ -29,6 +29,7 @@ import { SubscriptionServices } from '../../../subscription-services/class/subsc
 import { count } from 'console';
 import { DefaultServicesHourlyContract } from '../../contracts-aside/class/default-service-hourly-contract';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePickerIntervalsModule } from '../../contracts-aside/date-picker-intervals/date-picker-intervals.module';
 
 
 
@@ -61,6 +62,7 @@ describe('ContractsAsideUserDeviceEditComponent unit test', () => {
         MatErrorModule,
         ContractsAsideBlockTimeBillingAddSubscriptionServicesModule,
         HttpClientModule,
+        DatePickerIntervalsModule,
         ToastrModule.forRoot({
           closeButton: true,
           timeOut: 5000,

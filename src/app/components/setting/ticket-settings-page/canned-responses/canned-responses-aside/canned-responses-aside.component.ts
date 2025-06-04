@@ -99,14 +99,12 @@ export class CannedResponsesAsideComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   save() {
-    console.log("this.noteTemplate", this.noteTemplate);
     if (!this.noteTemplateValidate.isValidate(this.noteTemplate)) return;
     this.noteService.editNoteTemplate(this.noteTemplate.id, this.noteTemplate.getDataForRequest()).subscribe(data => {
       this.closed();
     })
   }
   add() {
-    console.log("this.noteTemplate", this.noteTemplate);
     if (!this.noteTemplateValidate.isValidate(this.noteTemplate)) return;
     this.noteService.addNoteTemplate(this.noteTemplate.getDataForRequest()).subscribe(data => {
       this.closed();

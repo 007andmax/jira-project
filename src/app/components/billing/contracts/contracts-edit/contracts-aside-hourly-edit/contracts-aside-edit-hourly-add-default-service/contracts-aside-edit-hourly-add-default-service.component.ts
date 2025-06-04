@@ -86,7 +86,7 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
     this.validate.resetValidate();
     if (!this.validate.isValidate(this.service) || !this.checkDuplicatedContractServiceByName()) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
-      moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, this.contractsHourly.id, [this.service.name]).subscribe(data => {
+      (!this.contractsHourly.isPerpetual) ? moment(this.contractsHourly.endDate).format('DD MMM YYYY') : null, this.contractsHourly.companyId, this.contractsHourly.id, [this.service.name]).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.add();
         } else {

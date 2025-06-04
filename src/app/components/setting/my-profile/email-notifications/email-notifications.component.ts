@@ -45,7 +45,6 @@ export class EmailNotificationsComponent implements OnInit {
             ticketCloseNotifications: this.emailNotifications.ticketCloseNotifications,
             ticketCreated: this.emailNotifications.ticketCreated
           });
-          console.log("this.emailForm", this.emailForm);
         })
       )
       .subscribe();

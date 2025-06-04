@@ -7,6 +7,9 @@
             ></h6>
         </div>
 
+
+
+
         <div class="qt-page-list__header-title-line--rigth">
             <div class="qt-df qt-ai-c">
                 <button
@@ -32,6 +35,9 @@
         </div>
     </div>
 
+
+
+
     <div class="qt-page-list__header-filters">
         <app-contracts-filter
             class="qt-w100"
@@ -41,6 +47,9 @@
             [hidden]="toggleFilter"
         ></app-contracts-filter>
     </div>
+
+
+
 
     <div class="qt-page-list__header-thead-container">
         <div class="qt-table-modern qt-page-list__header-thead contracts-table">
@@ -87,6 +96,13 @@
                         (click)="setSort('review_date')"
                     >
                         Review Date
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
+                    <div
+                        class="contracts-table__review-date pointer"
+                        (click)="setSort('end_date')"
+                    >
+                        End Date
                         <span class="qt-table-modern__sorting"></span>
                     </div>
                     <div

@@ -26,6 +26,7 @@ import { ContractsAsideUserDeviceServiceModule } from '../../contracts-aside/con
 import { ContractsAsideEditHourlyAddDefaultServiceModule } from '../contracts-aside-hourly-edit/contracts-aside-edit-hourly-add-default-service/contracts-aside-edit-hourly-add-default-service.module';
 import { ContractsAsideProductServiceEditComponent } from './contracts-aside-product-service-edit.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePickerIntervalsModule } from '../../contracts-aside/date-picker-intervals/date-picker-intervals.module';
 
 
 
@@ -57,6 +58,7 @@ describe('ContractsAsideProductServiceEditComponent unit test', () => {
         ContractsAsideEditHourlyAddDefaultServiceModule,
         MatErrorModule,
         ContractsAsideBlockTimeBillingAddSubscriptionServicesModule,
+        DatePickerIntervalsModule,
         HttpClientModule,
         ToastrModule.forRoot({
           closeButton: true,

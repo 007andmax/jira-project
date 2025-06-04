@@ -29,6 +29,7 @@ import { ContractsAsideUserDeviceServiceModule } from './contracts-aside-user-de
 import { ServiceAgreement } from '../../class/service-agreement';
 import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-aside-top.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePickerIntervalsModule } from '../date-picker-intervals/date-picker-intervals.module';
 
 
 
@@ -61,6 +62,7 @@ describe('ContractsAsideUserDeviceBillingComponent unit test', () => {
         ContractsAsideBlockTimeBillingAddSubscriptionServicesModule,
         DisabledBtnModule,
         PreloaderTicketModule,
+        DatePickerIntervalsModule,
         HttpClientModule,
         ToastrModule.forRoot({
           closeButton: true,

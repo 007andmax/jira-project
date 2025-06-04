@@ -41,8 +41,8 @@ export class ContractsEditComponent implements OnInit {
     if (this.serviceContract) this.serviceContract.onEdit();
     if (this.otherContract) this.otherContract.onEdit();
   }
-  public disabledBtnForEdit() {
-    this.editContract.setDisabled(true);
+  public disabledBtnForEdit(data) {
+    this.editContract.setDisabled(data);
   }
   closed() {
     this.contractsStateService.toggleEdit(false);

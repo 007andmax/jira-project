@@ -1,10 +1,11 @@
 <div
-    class="input-group date-picker"
+    class="input-group date-picker pointer"
     ngbDropdown
     [autoClose]="'outside'"
     #date="ngbDropdown"
     [placement]="placement"
     [container]="container"
+    (click)="toogleDropdown()"
 >
     <div
         *ngIf="type === 'DETAIL_TICKET_UPDATE' || type === 'COMPANY_DEVICE'"
@@ -13,14 +14,12 @@
         <i
             class="icn-16 qt-icon icon__calendar pointer"
             *ngIf="!selectedDateModel || type !== 'COMPANY_DEVICE'"
-            ngbDropdownToggle
         ></i>
         <input
             [disabled]="isDisabled"
             type="text"
             class="pointer qt-input-block__input"
             placeholder="Select Date"
-            ngbDropdownToggle
             id="dropdownDate"
             [value]="geTextDate()"
             readonly

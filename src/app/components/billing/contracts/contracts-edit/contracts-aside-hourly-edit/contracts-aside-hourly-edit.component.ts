@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, QueryList, ViewChildren, ViewChild } from '@angular/core';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ServiceAgreement } from '../../class/service-agreement';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
@@ -11,6 +11,7 @@ import { NonContractServicesService } from 'src/app/services/non-contract-servic
 import { ContractsBlockTimeDefaultService } from '../../contracts-aside/class/contracts-block-time-default-service';
 import { ContractsAsideHourlyBillingDefaultServiceComponent } from '../../contracts-aside/contracts-aside-hourly-billing/contracts-aside-hourly-billing-default-service/contracts-aside-hourly-billing-default-service.component';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
+import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 @Component({
   selector: 'app-contracts-aside-hourly-edit',
   templateUrl: './contracts-aside-hourly-edit.component.html',
@@ -23,6 +24,8 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   validate: ContractsHourlyValidate = new ContractsHourlyValidate();
   @Input() contractsHourly: ServiceAgreement = new ServiceAgreement();
   @Output() onClose = new EventEmitter<any>();
+  @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
+  @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerComponent;
   @ViewChildren("serviceItem") serviceItems: QueryList<ContractsAsideHourlyBillingDefaultServiceComponent>;
   formatDate: string = FORMAT_DATE_2;
   showAddService: boolean = false;
@@ -38,7 +41,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   }
   public onEdit() {
     if (this.contractsHourly.services.filter(item => item.selected).length === 0 || !this.validate.isValidate(this.contractsHourly) || !this.validate.isValidateRateServices(this.contractsHourly.services)) return;
-    this.contractsService.validateCrossingDatesHourly(moment(this.contractsHourly.startDate).format('DD MMM YYYY'), moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, this.contractsHourly.id).subscribe((data: any) => {
+    this.contractsService.validateCrossingDatesHourly(moment(this.contractsHourly.startDate).format('DD MMM YYYY'), (!this.contractsHourly.isPerpetual) ? moment(this.contractsHourly.endDate).format('DD MMM YYYY') : null, this.contractsHourly.companyId, this.contractsHourly.id).subscribe((data: any) => {
       if (data.valid) {
         this.validate.resetDate();
         this.searchDuplicatedServiceNames();
@@ -50,7 +53,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   public searchDuplicatedServiceNames() {
     let servicesName = this.contractsHourly.services.filter(item => item.selected).map(item => item.name);
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
-      moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, this.contractsHourly.id, servicesName).subscribe(data => {
+      (!this.contractsHourly.isPerpetual) ? moment(this.contractsHourly.endDate).format('DD MMM YYYY') : null, this.contractsHourly.companyId, this.contractsHourly.id, servicesName).subscribe(data => {
         if (Object.keys(data).length === 0) {
           this.contractsService.updateContract(this.contractsHourly.getDataForUpdateHourly()).subscribe(contract => {
             this.contractsStateService.fastEditContract(contract);
@@ -93,10 +96,21 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   }
   onChangeStartDate(data) {
     this.contractsHourly.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.endDateDP.setEditDate(this.contractsHourly.getEndDateByMilliseconds());
     this.validate.resetDate();
+    this.contractsHourly.calculateReviewDate();
+    this.reviewDateDP.setEditDate(this.contractsHourly.getReviewDateByMilliseconds());
+  }
+  onChangeEndDate(data) {
+    this.contractsHourly.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsHourly.calculateReviewDate();
+    this.reviewDateDP.setEditDate(this.contractsHourly.getReviewDateByMilliseconds());
   }
   onChangeReviewDate(data) {
     this.contractsHourly.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+  }
+  setTogglePerpetual(data) {
+    this.contractsHourly.isPerpetual = data;
   }
   public trackById(index, item) {
     return item.id;

@@ -39,6 +39,7 @@
 
 
 
+
                             <div class="contract-item-info">
                                 <h3 [textContent]="agreement.companyName"></h3>
                                 <span [textContent]="agreement.description"></span>
@@ -67,13 +68,13 @@
     >
         <div class="qt-df qt-jc-fe">
             <button
-                class="btn-new disabled qt-w100 qt-jc-c"
+                class="qt-button --gray qt-w100"
                 (click)=cancelConfirm()
             >
                 Cancel
             </button>
             <button
-                class="btn-new btn-primary qt-w100 qt-jc-c"
+                class="qt-button --red qt-w100"
                 (click)=approveConfirm()
             >
                 Yes, I am sure

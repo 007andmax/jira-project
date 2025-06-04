@@ -26,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { DefaultServicesHourlyContract } from '../../contracts-aside/class/default-service-hourly-contract';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePickerIntervalsModule } from '../../contracts-aside/date-picker-intervals/date-picker-intervals.module';
 
 
 
@@ -57,6 +58,7 @@ describe('ContractsAsideBlockTimeEditComponent unit test', () => {
         MatErrorModule,
         ContractsAsideBlockTimeBillingAddSubscriptionServicesModule,
         HttpClientModule,
+        DatePickerIntervalsModule,
         ToastrModule.forRoot({
           closeButton: true,
           timeOut: 5000,

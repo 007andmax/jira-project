@@ -11,9 +11,13 @@ export class ContractsHourly {
     type: string = "HOURLY";
     reviewDate: string;
     validate: boolean = true;
+    isPerpetual: boolean = false;
     constructor() {
 
 
+    }
+    public setPerpetual(perpetual: boolean) {
+        this.isPerpetual = perpetual;
     }
     public setDataFromCopy(data: ServiceAgreement) {
         this.companyId = data.companyId;
@@ -23,17 +27,20 @@ export class ContractsHourly {
         this.startDate = data.startDate;
         this.type = data.type;
         this.reviewDate = data.reviewDate;
+        this.isPerpetual = data.isPerpetual;
     }
     public getDataForCreate() {
-        return {
+        let data: any = {
             companyId: this.companyId,
             description: this.description,
-            endDate: this.endDate,
             services: this.services.map(item => item.getDataForCreate()),
             startDate: this.startDate,
             reviewDate: this.reviewDate,
-            type: this.type
+            type: this.type,
+            isPerpetual: this.isPerpetual
         }
+        if (!this.isPerpetual) data.endDate = this.endDate;
+        return data;
     }
     public onAddServices(defaultServices: Array<DefaultServicesHourlyContract>) {
         this.services = [];
@@ -57,6 +64,19 @@ export class ContractsHourly {
             this.reviewDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
         }
     }
+    public setEndDate(day, month, year, timeOffset) {
+        let current = new Date();
+
+        if (day !== current.getDate() || current.getMonth() !== (month - 1) || year !== current.getFullYear()) {
+            let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
+            let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
+            this.endDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
+        } else {
+            let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
+            let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
+            this.endDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
+        }
+    }
     public setStartDate(day, month, year, timeOffset) {
         let current = new Date();
 
@@ -75,5 +95,24 @@ export class ContractsHourly {
             endDate.setFullYear(endDate.getFullYear() + 10);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
         }
+    }
+    public calculateReviewDate() {
+        let endDate = new Date(this.endDate);
+        endDate.setMonth(endDate.getMonth() - 2);
+        this.reviewDate = moment(endDate).format('YYYY/MM/DD');
+    }
+    public getReviewDateByMilliseconds() {
+        return new Date(this.reviewDate).getTime();
+    }
+    public getEndDateByMilliseconds() {
+        return new Date(this.endDate).getTime();
+    }
+    public getStartDateByMilliseconds() {
+        return new Date(this.startDate).getTime();
+    }
+    public getMaxEndDateByMilliseconds() {
+        let endDate = new Date(this.endDate);
+        let out = new Date(2080, endDate.getMonth(), endDate.getDate());
+        return out.getTime();
     }
 }

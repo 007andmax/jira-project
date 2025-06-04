@@ -20,6 +20,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   @Input() type: string = TYPE_INPUT;
   @Input() formatDate: string = FORMAT_DATE_1;
   @Input() editMode: boolean = false;
+  @Input() fromDate: number = 0;
   @Input() editDate: number = 0;
   @Input() useMinDate: boolean = true;
   @Input() useMaxDate: boolean = false;
@@ -43,10 +44,10 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   * @param {DatePickerStateService} stateDatePicker to work date picker state
   * @param {DatePickerService} sericeDatePicker Service to work with date picker
   */
-  constructor(private calendar: NgbCalendar,
+  constructor(public calendar: NgbCalendar,
     public cd: ChangeDetectorRef,
-    private stateDatePicker: DatePickerStateService,
-    private sericeDatePicker: DatePickerService) { }
+    public stateDatePicker: DatePickerStateService,
+    public sericeDatePicker: DatePickerService) { }
 
 
   /**
@@ -70,12 +71,16 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     if (this.useMaxDate) this.maxDateDP = this.sericeDatePicker.getDateStruct(this.maxDate);
 
   }
-
+  toogleDropdown() {
+    if (this.type === 'DETAIL_TICKET_UPDATE' || this.type === 'COMPANY_DEVICE') {
+      this.date_dropDown.open();
+    }
+  }
 
   /**
   * Subscribe to clear date picker
   */
-  private oninitClear() {
+  public oninitClear() {
     let clear = this.stateDatePicker.getOnClear().subscribe((data) => {
       this.reset();
     });
@@ -97,7 +102,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   /**
   * Subscribe to edit mode
   */
-  private onInitEditMode() {
+  public onInitEditMode() {
     let edit = this.stateDatePicker.getOnEditMode().subscribe((data: number) => {
       this.setEditDate(data);
     })
@@ -121,7 +126,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   /**
   * Subscribe to reset data
   */
-  private oninitreset() {
+  public oninitreset() {
     let reset = this.stateDatePicker.getOnReset().subscribe((data) => {
       if (this.editMode) this.setEditDate(this.editDate);
     })
