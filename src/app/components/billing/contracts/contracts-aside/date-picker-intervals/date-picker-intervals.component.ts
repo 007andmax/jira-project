@@ -16,13 +16,29 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
 
   markDisabled = (date: NgbDate, current: { month: number, year: number }) => {
     let endDate = new Date(this.fromDate);
+    let last_day = new Date(endDate.getFullYear(), endDate.getMonth() + 1, 0);
+    console.log("endDate.getDate()", endDate.getDate());
+    console.log("last_day", last_day.getDate());
     let dates = [];
     if (this.intervalstring === 'YEARLY') {
       let newDate = new Date(endDate.getFullYear() + 1, endDate.getMonth(), endDate.getDate() - 1);
       dates.push(newDate);
     } else if (this.intervalstring === 'MONTHLY') {
       for (let i = 1; i <= 12; i++) {
-        let newDate = new Date((endDate.getMonth() + i) >= 12 ? endDate.getFullYear() + 1 : endDate.getFullYear(), (endDate.getMonth() + i) >= 12 ? endDate.getMonth() + i - 12 : endDate.getMonth() + i, endDate.getDate() - 1);
+        let newDate;
+        if (endDate.getDate() == 30 && last_day.getDate() == 31) {
+          newDate = new Date((endDate.getMonth() + i) >= 12 ? endDate.getFullYear() + 1 : endDate.getFullYear(), (endDate.getMonth() + i) >= 12 ? endDate.getMonth() + i - 12 : endDate.getMonth() + i, 1);
+          let last_day_newDate = new Date(newDate.getFullYear(), newDate.getMonth() + 1, 0);
+          if (last_day_newDate.getDate() < 30) { newDate.setDate(last_day_newDate.getDate()) } else {
+            newDate.setDate(30);
+          }
+        } else if (endDate.getDate() == last_day.getDate()) {
+          newDate = new Date((endDate.getMonth() + i) >= 12 ? endDate.getFullYear() + 1 : endDate.getFullYear(), (endDate.getMonth() + i) >= 12 ? endDate.getMonth() + i - 12 : endDate.getMonth() + i, 1);
+          let last_day_newDate = new Date(newDate.getFullYear(), newDate.getMonth() + 1, 0);
+          newDate.setDate(last_day_newDate.getDate())
+        } else {
+          newDate = new Date((endDate.getMonth() + i) >= 12 ? endDate.getFullYear() + 1 : endDate.getFullYear(), (endDate.getMonth() + i) >= 12 ? endDate.getMonth() + i - 12 : endDate.getMonth() + i, endDate.getDate() - 1);
+        }
         dates.push(newDate);
       }
     } else {
@@ -33,6 +49,7 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
         dates.push(new Date(JSON.parse(JSON.stringify(endDate.getTime()))));
       }
     }
+    //  console.log("dates", dates);
     return !dates.some(item => date.day === item.getDate() && date.month === item.getMonth() + 1 && date.year === item.getFullYear());
   }
 }
