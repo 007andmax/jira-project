@@ -10,7 +10,7 @@ import { NumberModule } from 'src/app/directives/number/number.module';
 import { DefaultServicesHourlyContract } from '../../../contracts-aside/class/default-service-hourly-contract';
 import { ContractsAsideBlockTimeBillingAddDefaultServiceComponent } from '../../../contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-default-service/contracts-aside-block-time-billing-add-default-service.component';
 import { ContractsAsideEditHourlyAddDefaultServiceComponent } from './contracts-aside-edit-hourly-add-default-service.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 

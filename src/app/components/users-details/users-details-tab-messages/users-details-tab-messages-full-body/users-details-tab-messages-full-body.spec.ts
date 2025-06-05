@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { UsersDetailsTabMessagesFullBodyComponent } from './users-details-tab-messages-full-body.component';
 import { FormsModule } from '@angular/forms';

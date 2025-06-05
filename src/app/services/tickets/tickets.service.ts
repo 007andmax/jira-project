@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common';
 import { Ticket } from '../../components/tickets/class/ticket';
 import { catchError, map, tap } from 'rxjs/operators';
 import { TicketProfile } from '../../components/tickets/tickets/class/ticket-profile';

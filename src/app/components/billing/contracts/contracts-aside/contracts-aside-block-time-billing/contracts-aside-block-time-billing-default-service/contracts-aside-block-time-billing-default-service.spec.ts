@@ -9,7 +9,7 @@ import { NumberModule } from 'src/app/directives/number/number.module';
 import { ContractsAsideDiscountModule } from '../../contracts-aside-discount/contracts-aside-discount.module';
 import { ContractsAsideBlockTimeBillingDefaultServiceComponent } from './contracts-aside-block-time-billing-default-service.component';
 import { ContractsBlockTimeDefaultService } from '../../class/contracts-block-time-default-service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { By } from '@angular/platform-browser';
 import { DecimalNumberDirective } from 'src/app/directives/decimal-number/decimal-number.directive';

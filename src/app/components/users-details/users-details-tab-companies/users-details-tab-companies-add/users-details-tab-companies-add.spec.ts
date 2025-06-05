@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { UsersDetailsTabCompaniesAddComponent } from './users-details-tab-companies-add.component';
 import { UserJobTitle } from 'src/app/components/users/class/user-job-title';

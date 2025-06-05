@@ -8,7 +8,7 @@ import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 import { ContractsAsideOtherProductComponent } from './contracts-aside-other-product.component';
 import { InventoryItem } from 'src/app/components/inventory/class/inventory-item';
 import { ContractsOtherProduct } from '../../class/contracts-other-product';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ContractsAsideDiscountModule } from '../../contracts-aside-discount/contracts-aside-discount.module';

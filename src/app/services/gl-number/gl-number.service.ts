@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common';
 import { map } from 'rxjs/operators';
 import { CategoryProductitem } from 'src/class/category-product-item';
 import { GlNumber } from 'src/class/gl-number/gl-number';

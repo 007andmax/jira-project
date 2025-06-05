@@ -6,7 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
 import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
 import { DatePickerModule } from 'src/app/components/shared/date-picker/date-picker.module';

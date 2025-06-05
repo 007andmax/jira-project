@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { TicketDetailProfileUpdatesProductEditComponent } from '../ticket-detail-profile-updates-product-edit/ticket-detail-profile-updates-product-edit.component';
 import { TicketDetailProfileUpdatesProductInfoComponent } from './ticket-detail-profile-updates-product-info.component';

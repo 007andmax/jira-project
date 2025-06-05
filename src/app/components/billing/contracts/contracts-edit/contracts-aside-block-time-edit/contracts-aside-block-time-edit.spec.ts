@@ -22,7 +22,7 @@ import { ContractsAsideUserDeviceServiceModule } from '../../contracts-aside/con
 import { ContractsAsideEditHourlyAddDefaultServiceModule } from '../contracts-aside-hourly-edit/contracts-aside-edit-hourly-add-default-service/contracts-aside-edit-hourly-add-default-service.module';
 import { ContractsAsideBlockTimeEditComponent } from './contracts-aside-block-time-edit.component';
 import { ServiceAgreement } from '../../class/service-agreement';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { DefaultServicesHourlyContract } from '../../contracts-aside/class/default-service-hourly-contract';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';

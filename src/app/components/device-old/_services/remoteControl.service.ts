@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common';
 import { map } from 'rxjs/operators';
 import { CONFIG } from '../config/app-config';
 import { saveAs } from 'file-saver';

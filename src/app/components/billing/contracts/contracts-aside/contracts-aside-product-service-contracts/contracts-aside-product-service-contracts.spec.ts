@@ -6,7 +6,7 @@ import { DatePickerModule } from 'src/app/components/shared/date-picker/date-pic
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 import { TicketProfileUpdatesServiceDurationModule } from 'src/app/components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';

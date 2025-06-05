@@ -12,7 +12,7 @@ import { NumberModule } from 'src/app/directives/number/number.module';
 import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 import { ContractsEditModule } from '../../contracts/contracts-edit/contracts-edit.module';
 import { SubscriptionServicesRoutingModule } from '../subscription-services-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { SubscriptionServicesCheckUseComponent } from './subscription-services-check-use.component';
 import { SubscriptionServices } from '../class/subscription-services';

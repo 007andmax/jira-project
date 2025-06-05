@@ -11,7 +11,7 @@ import { DatePickerModule } from 'src/app/components/shared/date-picker/date-pic
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
 import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
 import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { ContractsAsideHourlyEditComponent } from './contracts-aside-hourly-edit.component';
 import { DefaultServicesHourlyContract } from '../../contracts-aside/class/default-service-hourly-contract';

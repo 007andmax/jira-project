@@ -24,7 +24,7 @@ import { ContractsAsideEditHourlyAddDefaultServiceComponent } from '../contracts
 import { ContractsAsideEditHourlyAddDefaultServiceModule } from '../contracts-aside-edit-hourly-add-default-service/contracts-aside-edit-hourly-add-default-service.module';
 import { ContractsAsideHourlyBillingEditDefaultServiceComponent } from './contracts-aside-hourly-billing-edit-default-service.component';
 import { ContractsHourlyService } from '../../../contracts-aside/class/contracts-hourly-service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 

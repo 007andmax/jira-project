@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common';
 import { NonContractServices } from '../../components/billing/non-contract-services/class/non-contract-service';
 import { map, tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';

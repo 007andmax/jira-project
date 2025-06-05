@@ -43,7 +43,7 @@ export class InventoryComponent implements OnInit {
   showEdit = false;
   serviceAgreement: ServiceAgreement;
   container = document.body.querySelector(".main-container");
-  @ViewChildren('inventoryItem') inventoryItem: QueryList<InventoryTableComponent>;
+  @ViewChildren('inventoryItem', { emitDistinctChangesOnly: false }) inventoryItem: QueryList<InventoryTableComponent>;
   @ViewChild('header', { static: true }) header: InventoryHeaderComponent;
   constructor(private productService: ProductService,
     private inventoryListService: InventoryListService,

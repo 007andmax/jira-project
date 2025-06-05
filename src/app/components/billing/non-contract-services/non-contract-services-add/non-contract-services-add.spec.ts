@@ -11,7 +11,7 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { NonContractServices } from '../class/non-contract-service';
 import { NonContractServicesAddComponent } from './non-contract-services-add.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { NonContractServicesGlNumber } from '../class/non-contract-service-gl-number';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';

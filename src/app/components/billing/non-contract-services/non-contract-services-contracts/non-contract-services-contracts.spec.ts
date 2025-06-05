@@ -10,7 +10,7 @@ import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { NonContractServices } from '../class/non-contract-service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { NonContractServicesContractsComponent } from './non-contract-services-contracts.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';

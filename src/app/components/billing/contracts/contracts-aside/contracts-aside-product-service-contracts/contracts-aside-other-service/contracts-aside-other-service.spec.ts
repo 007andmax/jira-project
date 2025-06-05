@@ -9,7 +9,7 @@ import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.mo
 import { TicketProfileUpdatesServiceDurationModule } from 'src/app/components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.module';
 import { ContractsAsideOtherServiceComponent } from './contracts-aside-other-service.component';
 import { ContractsOtherService } from '../../class/contracts-other-service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 

@@ -5,7 +5,7 @@ import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.mo
 import { MultiDatepickerModule } from 'src/app/components/shared/multi-datepicker/multi-datepicker.module';
 import { ContractsFilterComponent } from '../contracts-filter/contracts-filter.component';
 import { ContractsHeaderComponent } from './contracts-header.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
