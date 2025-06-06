@@ -123,6 +123,7 @@ export class ContractsAsideProductServiceEditComponent implements OnInit {
     this.cd.detectChanges();
   }
   getMinStartDate(interval, startDate) {
+    return new Date().getTime();
     let newMinStartDate;
     let now = new Date(startDate);
     let n = new Date(now);

@@ -21,16 +21,28 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
     console.log("last_day", last_day.getDate());
     let dates = [];
     if (this.intervalstring === 'YEARLY') {
-      let newDate = new Date(endDate.getFullYear() + 1, endDate.getMonth(), endDate.getDate() - 1);
-      dates.push(newDate);
+      const target = new Date(date.year, date.month - 1, date.day);
+      while (endDate <= target) {
+        const intervalDate = new Date(endDate);
+        intervalDate.setFullYear(intervalDate.getFullYear() + 1);
+        intervalDate.setDate(intervalDate.getDate() - 1); // Apply -1 day
+        if (
+          intervalDate.getFullYear() === target.getFullYear() &&
+          intervalDate.getMonth() === target.getMonth() &&
+          intervalDate.getDate() === target.getDate()
+        ) {
+          return false;
+        }
+        endDate.setFullYear(endDate.getFullYear() + 1);
+      }
+      return true;
+
     } else if (this.intervalstring === 'MONTHLY') {
       const target = new Date(date.year, date.month - 1, date.day);
 
       while (endDate <= target) {
         const intervalDate = new Date(endDate);
         intervalDate.setMonth(intervalDate.getMonth() + 1);
-
-
         if (endDate.getDate() == 30 && last_day.getDate() == 31) {
           let last_day_target = new Date(target.getFullYear(), target.getMonth() + 1, 0);
           if (target.getDate() == 30 && last_day_target.getDate() == 31 || target.getDate() == 30 && last_day_target.getDate() == 30 || (target.getDate() == 28 || target.getDate() == 29) && last_day_target.getDate() == target.getDate()) { return false; } else {

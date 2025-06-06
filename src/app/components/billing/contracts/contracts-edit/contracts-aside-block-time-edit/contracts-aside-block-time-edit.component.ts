@@ -144,6 +144,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
   }
 
   getMinStartDate(interval, startDate) {
+    return new Date().getTime();
     let newMinStartDate;
     let now = new Date(startDate);
     let n = new Date(now);
