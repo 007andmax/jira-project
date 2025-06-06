@@ -24,6 +24,32 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
       let newDate = new Date(endDate.getFullYear() + 1, endDate.getMonth(), endDate.getDate() - 1);
       dates.push(newDate);
     } else if (this.intervalstring === 'MONTHLY') {
+      const target = new Date(date.year, date.month - 1, date.day);
+
+      while (endDate <= target) {
+        const intervalDate = new Date(endDate);
+        intervalDate.setMonth(intervalDate.getMonth() + 1);
+        intervalDate.setDate(intervalDate.getDate() - 1); // Apply -1 day
+
+        // Check if the interval date matches the selected date
+        if (
+          intervalDate.getFullYear() === target.getFullYear() &&
+          intervalDate.getMonth() === target.getMonth() &&
+          intervalDate.getDate() === target.getDate()
+        ) {
+          return false;
+        }
+
+        // Move to next interval start: +1 month from current start date
+        endDate.setMonth(endDate.getMonth() + 1);
+      }
+
+      return true;
+
+
+
+
+
       for (let i = 1; i <= 12; i++) {
         let newDate;
         if (endDate.getDate() == 30 && last_day.getDate() == 31) {
