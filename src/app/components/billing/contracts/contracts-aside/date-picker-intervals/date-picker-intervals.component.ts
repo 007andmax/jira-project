@@ -29,16 +29,32 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
       while (endDate <= target) {
         const intervalDate = new Date(endDate);
         intervalDate.setMonth(intervalDate.getMonth() + 1);
-        intervalDate.setDate(intervalDate.getDate() - 1); // Apply -1 day
 
-        // Check if the interval date matches the selected date
-        if (
-          intervalDate.getFullYear() === target.getFullYear() &&
-          intervalDate.getMonth() === target.getMonth() &&
-          intervalDate.getDate() === target.getDate()
-        ) {
-          return false;
+
+        if (endDate.getDate() == 30 && last_day.getDate() == 31) {
+          let last_day_target = new Date(target.getFullYear(), target.getMonth() + 1, 0);
+          if (target.getDate() == 30 && last_day_target.getDate() == 31 || target.getDate() == 30 && last_day_target.getDate() == 30 || (target.getDate() == 28 || target.getDate() == 29) && last_day_target.getDate() == target.getDate()) { return false; } else {
+            return true;
+          }
+        } else if (endDate.getDate() == last_day.getDate()) {
+          let last_day_target = new Date(target.getFullYear(), target.getMonth() + 1, 0);
+          if (target.getDate() == last_day_target.getDate()) {
+            return false;
+          } else {
+            return true;
+          }
+        } else {
+          intervalDate.setDate(intervalDate.getDate() - 1); // Apply -1 day
+          if (
+            intervalDate.getFullYear() === target.getFullYear() &&
+            intervalDate.getMonth() === target.getMonth() &&
+            intervalDate.getDate() === target.getDate()
+          ) {
+            return false;
+          }
         }
+        // Check if the interval date matches the selected date
+
 
         // Move to next interval start: +1 month from current start date
         endDate.setMonth(endDate.getMonth() + 1);
