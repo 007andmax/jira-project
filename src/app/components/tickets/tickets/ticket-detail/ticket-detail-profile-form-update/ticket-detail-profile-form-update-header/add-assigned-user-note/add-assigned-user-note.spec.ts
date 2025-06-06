@@ -8,7 +8,7 @@ import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.modul
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
 import { AddAssignedUserNoteComponent } from './add-assigned-user-note.component';
-import { HttpClientModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 
 describe('AddAssignedUserNoteComponent unit test', () => {

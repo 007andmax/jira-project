@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Payment } from '../../components/billing/payments/class/payment';
 import { map, tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';

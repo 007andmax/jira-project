@@ -31,7 +31,7 @@ import { ContractsAsideBlockTimeBillingAddSubscriptionServicesModule } from './c
 import { ContractsAsideBlockTimeBillingCustomerServiceModule } from './contracts-aside-block-time-billing-customer-service/contracts-aside-block-time-billing-customer-service.module';
 import { ContractsAsideBlockTimeBillingDefaultServiceModule } from './contracts-aside-block-time-billing-default-service/contracts-aside-block-time-billing-default-service.module';
 import { ContractsAsideBlockTimeBillingUsersModule } from './contracts-aside-block-time-billing-users/contracts-aside-block-time-billing-users.module';
-import { HttpClientModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { ServiceAgreement } from '../../class/service-agreement';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';

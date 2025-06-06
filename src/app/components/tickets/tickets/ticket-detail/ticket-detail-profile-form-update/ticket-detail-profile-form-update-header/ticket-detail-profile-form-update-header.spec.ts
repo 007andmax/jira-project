@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { AddAssignedUserNoteModule } from './add-assigned-user-note/add-assigned-user-note.module';
 import { TicketDetailProfileFormUpdateHeaderComponent } from './ticket-detail-profile-form-update-header.component';

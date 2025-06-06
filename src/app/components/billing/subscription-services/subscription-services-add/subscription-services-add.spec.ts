@@ -13,7 +13,7 @@ import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 import { ContractsEditModule } from '../../contracts/contracts-edit/contracts-edit.module';
 import { SubscriptionServicesRoutingModule } from '../subscription-services-routing.module';
 import { SubscriptionServicesAddComponent } from './subscription-services-add.component';
-import { HttpClientModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 

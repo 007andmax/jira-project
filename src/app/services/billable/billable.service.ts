@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { ConstantsStateService } from '../../states/constants/constants-state.service';
 import { map, tap } from 'rxjs/operators';
 import { InvoiceNote } from '../../components/billing/billable/class/invoice-note';

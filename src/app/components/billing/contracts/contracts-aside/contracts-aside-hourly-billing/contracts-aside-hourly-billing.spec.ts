@@ -30,7 +30,7 @@ import { ContractsAsideHourlyBillingDefaultServiceComponent } from './contracts-
 import { ContractsAsideEditHourlyAddDefaultServiceModule } from '../../contracts-edit/contracts-aside-hourly-edit/contracts-aside-edit-hourly-add-default-service/contracts-aside-edit-hourly-add-default-service.module';
 import { ContractsAsideOtherServiceModule } from '../contracts-aside-product-service-contracts/contracts-aside-other-service/contracts-aside-other-service.module';
 import { ContractsAsideOtherProductModule } from '../contracts-aside-product-service-contracts/contracts-aside-other-product/contracts-aside-other-product.module';
-import { HttpClientModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePickerIntervalsModule } from '../date-picker-intervals/date-picker-intervals.module';

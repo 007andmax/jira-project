@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common";
+import { HttpClient } from "@angular/common/http";
 import { environment } from '../../../environments/environment';
 import { Subject } from "rxjs";
 import { map, tap } from 'rxjs/operators';

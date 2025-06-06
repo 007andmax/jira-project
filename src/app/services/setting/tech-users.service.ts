@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common";
+import { HttpClient } from "@angular/common/http";;
 import { environment } from "src/environments/environment";
 import { ToastrService } from "ngx-toastr";
 import { AppStateService } from "src/app/states/app/app-state.service";

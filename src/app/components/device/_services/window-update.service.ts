@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { CONFIG } from '../config/app-config';
 
@@ -8,12 +8,12 @@ import { CONFIG } from '../config/app-config';
 })
 
 export class WindowUpdateService {
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
-    getAllWindowUpdateList () {
+    getAllWindowUpdateList() {
         return this.http.get<any>(CONFIG.getAllWindowUpdateListURL)
-        .pipe(map(data => {
-            return data;
-        }))
+            .pipe(map(data => {
+                return data;
+            }))
     }
 }

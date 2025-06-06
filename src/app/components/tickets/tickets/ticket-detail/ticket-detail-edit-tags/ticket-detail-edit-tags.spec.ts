@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { DeviceCompany } from 'src/app/components/company-devices/class/device-company';
 import { TicketDetailDevicesItemComponent } from '../ticket-detail-devices/ticket-detail-devices-item/ticket-detail-devices-item.component';

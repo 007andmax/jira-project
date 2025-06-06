@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'd3';
 import { ToastrService } from 'ngx-toastr';

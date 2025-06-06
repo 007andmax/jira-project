@@ -12,7 +12,7 @@ import { ContractsAsideDiscountModule } from '../../contracts-aside-discount/con
 import { ContractsAsideProductServiceContractsComponent } from '../../contracts-aside-product-service-contracts/contracts-aside-product-service-contracts.component';
 import { ContractsAsideUserDeviceServiceComponent } from './contracts-aside-user-device-service.component';
 import { ContractsUserDeviceService } from '../../class/contracts-user-device-service';
-import { HttpClientModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 

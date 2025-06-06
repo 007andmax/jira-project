@@ -11,7 +11,7 @@ import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-n
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { ContractsAsideHourlyBillingDefaultServiceComponent } from './contracts-aside-hourly-billing-default-service.component';
-import { HttpClientModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 

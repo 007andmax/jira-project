@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { CONFIG } from '../config/app-config';
 
 @Injectable({
@@ -8,12 +8,12 @@ import { CONFIG } from '../config/app-config';
 })
 
 export class startupService {
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
-    getAllStartupList () {
+    getAllStartupList() {
         return this.http.get<any>(CONFIG.getALlStartupListURL)
-        .pipe(map(data => {
-            return data;
-        }))
+            .pipe(map(data => {
+                return data;
+            }))
     }
 }

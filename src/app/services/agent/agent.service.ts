@@ -1,5 +1,5 @@
 import { WebsocketService } from "src/app/services/websocket/websocket.service";
-import { HttpClient, HttpHeaders } from "@angular/common";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { EventEmitter, Injectable } from "@angular/core";
 import { map, tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
