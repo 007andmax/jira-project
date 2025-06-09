@@ -19,10 +19,6 @@ import { fadeInAnimation } from 'src/app/animations';
   host: { '[@fadeInAnimation]': '' },
   encapsulation: ViewEncapsulation.None
 })
-
-@NgModule({
-  imports: [NgbDropdownToggle, NgbModal]
-})
 export class CompanyDashboardComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
   company: Company;

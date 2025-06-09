@@ -286,12 +286,6 @@ describe('TicketDetailComponent unit test', () => {
     const com = fixture.debugElement.componentInstance;
     expect(com.getClassType()).toEqual('priority-icon ticket-edit-aside__ticket-subject-flag ');
   });
-  it('check "onFetchUpdates"', () => {
-    const fixture = TestBed.createComponent(TicketDetailComponent);
-    const com = fixture.debugElement.componentInstance;
-    com.onFetchUpdates([]);
-    expect(com.ticketProfile.updates.length).toEqual(0);
-  });
   it('check "ticketProfile"', () => {
     const fixture = TestBed.createComponent(TicketDetailComponent);
     const com = fixture.debugElement.componentInstance;

@@ -11,7 +11,7 @@ import { CompanyDashContractComponent } from './company-dash-contract/company-da
 import { CompanyDashAssociateInfoComponent } from './company-dash-associate-info/company-dash-associate-info.component';
 import { CompanyTagsModule } from '../companies/company-tags/company-tags.module';
 import { NgxMaskModule } from 'ngx-mask';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownToggle, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CompanyEditAsideModule } from '../companies/company-edit-aside/company-edit-aside.module';
 import { CompanyAssociateModule } from './company-dash-associate/company-associate/company-associate.module';
@@ -53,7 +53,9 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
         PhoneModule,
         PreparePhoneModule,
         PreviewPhoneMaskModule,
-        TextAreaModule
+        TextAreaModule,
+        NgbDropdownToggle,
+        NgbModal
 
     ],
 
