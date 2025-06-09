@@ -17,8 +17,8 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
   markDisabled = (date: NgbDate, current: { month: number, year: number }) => {
     let endDate = new Date(this.fromDate);
     let last_day = new Date(endDate.getFullYear(), endDate.getMonth() + 1, 0);
-    console.log("endDate.getDate()", endDate.getDate());
-    console.log("last_day", last_day.getDate());
+    //  console.log("endDate.getDate()", endDate.getDate());
+    // console.log("last_day", last_day.getDate());
     let dates = [];
     if (this.intervalstring === 'YEARLY') {
       const target = new Date(date.year, date.month - 1, date.day);
@@ -66,41 +66,18 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
           }
         }
         // Check if the interval date matches the selected date
-
-
         // Move to next interval start: +1 month from current start date
         endDate.setMonth(endDate.getMonth() + 1);
       }
-
       return true;
-
-
-
-
-
-      for (let i = 1; i <= 12; i++) {
-        let newDate;
-        if (endDate.getDate() == 30 && last_day.getDate() == 31) {
-          newDate = new Date((endDate.getMonth() + i) >= 12 ? endDate.getFullYear() + 1 : endDate.getFullYear(), (endDate.getMonth() + i) >= 12 ? endDate.getMonth() + i - 12 : endDate.getMonth() + i, 1);
-          let last_day_newDate = new Date(newDate.getFullYear(), newDate.getMonth() + 1, 0);
-          if (last_day_newDate.getDate() < 30) { newDate.setDate(last_day_newDate.getDate()) } else {
-            newDate.setDate(30);
-          }
-        } else if (endDate.getDate() == last_day.getDate()) {
-          newDate = new Date((endDate.getMonth() + i) >= 12 ? endDate.getFullYear() + 1 : endDate.getFullYear(), (endDate.getMonth() + i) >= 12 ? endDate.getMonth() + i - 12 : endDate.getMonth() + i, 1);
-          let last_day_newDate = new Date(newDate.getFullYear(), newDate.getMonth() + 1, 0);
-          newDate.setDate(last_day_newDate.getDate())
-        } else {
-          newDate = new Date((endDate.getMonth() + i) >= 12 ? endDate.getFullYear() + 1 : endDate.getFullYear(), (endDate.getMonth() + i) >= 12 ? endDate.getMonth() + i - 12 : endDate.getMonth() + i, endDate.getDate() - 1);
-        }
-        dates.push(newDate);
-      }
     } else {
+      let n = 0;
       while (endDate.getTime() < new Date().getTime() + 60000 * 60 * 24 * 365) {
-        if (this.intervalstring === '30 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29);
-        if (this.intervalstring === '15 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 14);
+        if (this.intervalstring === '30 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29 + 60000 * 60 * 24 * n);
+        if (this.intervalstring === '15 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 14 + 60000 * 60 * 24 * n);
         if (this.intervalstring === '7 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 7);
         dates.push(new Date(JSON.parse(JSON.stringify(endDate.getTime()))));
+        n = 1;
       }
     }
     //  console.log("dates", dates);
