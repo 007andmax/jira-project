@@ -71,6 +71,7 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
       }
       return true;
     } else if (this.intervalstring === '30 days') {
+      console.log("30 days interval", date);
       const target = new Date(date.year, date.month - 1, date.day);
 
       let n = 0;
