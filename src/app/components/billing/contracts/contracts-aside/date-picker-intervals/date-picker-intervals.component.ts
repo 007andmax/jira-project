@@ -97,12 +97,12 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
           console.log("intervalDate", intervalDate);
           console.log("target", target.getDate());
         }
-        endDate.setMonth(endDate.getMonth() + 1);
+        //  endDate.setMonth(endDate.getMonth() + 1);
 
         // Subtract 2 days after moving 1 month forward
-        endDate.setDate(endDate.getDate() - ((n == 0) ? 2 : 1));
+        //  endDate.setDate(endDate.getDate() - ((n == 0) ? 2 : 1));
 
-        //endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29 + 60000 * 60 * 24 * n);
+        endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29 + 60000 * 60 * 24 * n);
         n = 1;
         console.log("n", n);
       }
