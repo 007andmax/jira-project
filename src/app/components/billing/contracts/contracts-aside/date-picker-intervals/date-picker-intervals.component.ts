@@ -92,6 +92,7 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
           intervalDate.getMonth() === target.getMonth()
         ) {
           console.log("intervalDate", intervalDate);
+          console.log("target", target.getDate());
         }
 
 
