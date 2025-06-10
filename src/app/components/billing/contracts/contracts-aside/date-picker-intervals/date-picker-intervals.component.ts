@@ -16,6 +16,7 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
 
   markDisabled = (date: NgbDate, current: { month: number, year: number }) => {
     let endDate = new Date(this.fromDate);
+    console.log("endDate ------------------------------->", endDate);
     let last_day = new Date(endDate.getFullYear(), endDate.getMonth() + 1, 0);
     //  console.log("endDate.getDate()", endDate.getDate());
     // console.log("last_day", last_day.getDate());
@@ -83,6 +84,7 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
           intervalDate.getMonth() === target.getMonth() &&
           intervalDate.getDate() === target.getDate()
         ) {
+          console.log("finD --------------------------------");
           return false;
         }
         //  endDate.setMonth(endDate.getMonth() + 1); 
