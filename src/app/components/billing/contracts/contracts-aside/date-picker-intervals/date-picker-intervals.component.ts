@@ -84,6 +84,9 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
         ) {
           console.log("intervalDate", intervalDate);
           return false;
+        } else {
+          console.log("1", intervalDate);
+          console.log("2", target);
         }
         //  endDate.setMonth(endDate.getMonth() + 1);
 
