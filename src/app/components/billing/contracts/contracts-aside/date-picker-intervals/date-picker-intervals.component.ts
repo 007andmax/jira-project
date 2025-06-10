@@ -82,6 +82,7 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
           intervalDate.getMonth() === target.getMonth() &&
           intervalDate.getDate() === target.getDate()
         ) {
+          console.log("intervalDate", intervalDate);
           return false;
         }
         //  endDate.setMonth(endDate.getMonth() + 1);
@@ -102,11 +103,13 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
           intervalDate.getMonth() === target.getMonth() &&
           intervalDate.getDate() === target.getDate()
         ) {
+          console.log("intervalDate", intervalDate);
           return false;
         }
         //  endDate.setMonth(endDate.getMonth() + 1);
 
         endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 14 + 60000 * 60 * 24 * n);
+
         n = 1;
       }
       return true;
