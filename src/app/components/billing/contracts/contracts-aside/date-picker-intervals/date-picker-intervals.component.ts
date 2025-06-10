@@ -71,13 +71,53 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
       }
       return true;
     } else {
-      let n = 0;
+      if (this.intervalstring === '30 days') {
+        const target = new Date(date.year, date.month - 1, date.day);
+
+        let n = 0;
+        while (endDate <= target) {
+          const intervalDate = new Date(endDate);
+
+          if (
+            intervalDate.getFullYear() === target.getFullYear() &&
+            intervalDate.getMonth() === target.getMonth() &&
+            intervalDate.getDate() === target.getDate()
+          ) {
+            return false;
+          }
+          //  endDate.setMonth(endDate.getMonth() + 1);
+
+          endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29 + 60000 * 60 * 24 * n);
+          n = 1;
+        }
+        return true;
+      }
+      if (this.intervalstring === '15 days') {
+        const target = new Date(date.year, date.month - 1, date.day);
+
+        let n = 0;
+        while (endDate <= target) {
+          const intervalDate = new Date(endDate);
+
+          if (
+            intervalDate.getFullYear() === target.getFullYear() &&
+            intervalDate.getMonth() === target.getMonth() &&
+            intervalDate.getDate() === target.getDate()
+          ) {
+            return false;
+          }
+          //  endDate.setMonth(endDate.getMonth() + 1);
+
+          endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 14 + 60000 * 60 * 24 * n);
+          n = 1;
+        }
+        return true;
+      }
+
       while (endDate.getTime() < new Date().getTime() + 60000 * 60 * 24 * 365) {
-        if (this.intervalstring === '30 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29 + 60000 * 60 * 24 * n);
-        if (this.intervalstring === '15 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 14 + 60000 * 60 * 24 * n);
         if (this.intervalstring === '7 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 7);
         dates.push(new Date(JSON.parse(JSON.stringify(endDate.getTime()))));
-        n = 1;
+
       }
     }
     //  console.log("dates", dates);
