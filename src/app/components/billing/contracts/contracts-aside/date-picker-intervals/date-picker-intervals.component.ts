@@ -89,6 +89,7 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
 
         endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29 + 60000 * 60 * 24 * n);
         n = 1;
+        console.log("n", n);
       }
       return true;
     } else if (this.intervalstring === '15 days') {
