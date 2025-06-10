@@ -72,10 +72,10 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
       return true;
     } else if (this.intervalstring === '30 days') {
       const target = new Date(date.year, date.month - 1, date.day);
-      const intervalDate = new Date(endDate);
+
       let n = 0;
       while (endDate <= target) {
-
+        const intervalDate = new Date(endDate);
 
         if (
           intervalDate.getFullYear() === target.getFullYear() &&
@@ -121,7 +121,7 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
 
       }
     }
-    //  console.log("dates", dates);
+    console.log("dates", dates);
     return !dates.some(item => date.day === item.getDate() && date.month === item.getMonth() + 1 && date.year === item.getFullYear());
   }
 }
