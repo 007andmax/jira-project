@@ -19,7 +19,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 export class AddUserToCompanyComponent implements OnInit, OnDestroy {
   @Input() company: Company;
   @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
-  container = document.body.querySelector(".user-company-list");
+  container = document.body.querySelector(".user-company-content");
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   companies: Array<Company> = [];
@@ -37,7 +37,7 @@ export class AddUserToCompanyComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.container = document.body.querySelector(".user-company-list");
+    this.container = document.body.querySelector(".user-company-content");
     document.body.querySelector(".user-company-list").scrollTo(0, 0);
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
