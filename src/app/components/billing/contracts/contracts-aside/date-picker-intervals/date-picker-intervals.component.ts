@@ -102,7 +102,8 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
         // Subtract 2 days after moving 1 month forward
         //  endDate.setDate(endDate.getDate() - ((n == 0) ? 2 : 1));
 
-        endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29 + 60000 * 60 * 24 * n);
+        endDate.setDate(endDate.getDate() + ((n == 0) ? 29 : 30));
+        //endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29 + 60000 * 60 * 24 * n);
         n = 1;
         console.log("n", n);
       }
@@ -124,9 +125,11 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
         }
         //  endDate.setMonth(endDate.getMonth() + 1);
 
-        endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 14 + 60000 * 60 * 24 * n);
-
+        endDate.setDate(endDate.getDate() + 14);
+        //endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29 + 60000 * 60 * 24 * n);
         n = 1;
+
+
       }
       return true;
     } else {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { ContractItem } from '../../components/billing/contracts/class/contract-item';
 import { ServiceAgreement } from '../../components/billing/contracts/class/service-agreement';
 import { ToastrService } from 'ngx-toastr';
@@ -54,8 +54,18 @@ export class ContractsService {
     return this.http.get(this.apiUrl + `serviceAgreements/${agreementId}`).pipe(map((data: any) => new ServiceAgreement(data)));
   }
   public createContract(createBillableItem, data) {
-    this.appStateService.setServerError(true);
+    this.appStateService.setCustomeError(true);
     return this.http.post(this.apiUrl + `serviceAgreements?createBillableItem=${createBillableItem}`, data).pipe(
+      catchError((err) => {
+        if (err.error && err.error.validationResults && err.error.validationResults.serviceAgreementDto) {
+          this.toastrService.error(err.error.validationResults.serviceAgreementDto, err.error.message);
+        } else {
+          this.toastrService.error(err.error.message ? err.error.message : err.error.error.message, "Server error");
+        }
+        this.appStateService.setServerError(false);
+        this.appStateService.changeDetectorRef();
+        throw err;
+      }),
       tap(data => {
         this.appStateService.setServerError(false);
         this.toastrService.success("The new contract has been successfully created");
@@ -67,8 +77,18 @@ export class ContractsService {
     return this.http.get(this.apiUrl + `reports/serviceAgreements/intervals/${id}`);
   }
   public updateContract(data) {
-    this.appStateService.setServerError(true);
+    this.appStateService.setCustomeError(true);
     return this.http.put(this.apiUrl + `serviceAgreements`, data).pipe(
+      catchError((err) => {
+        if (err.error && err.error.validationResults && err.error.validationResults.serviceAgreementDto) {
+          this.toastrService.error(err.error.validationResults.serviceAgreementDto, err.error.message);
+        } else {
+          this.toastrService.error(err.error.message ? err.error.message : err.error.error.message, "Server error");
+        }
+        this.appStateService.setServerError(false);
+        this.appStateService.changeDetectorRef();
+        throw err;
+      }),
       tap(data => {
         this.appStateService.setServerError(false);
         this.toastrService.success("The new contract has been successfully updated");
