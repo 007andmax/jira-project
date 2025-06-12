@@ -57,6 +57,9 @@ export class PaymentsHeaderComponent implements OnInit {
       })
     }
   }
+  getTextCountFilters() {
+    return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
+  }
   sendEmail() {
     this.draftEmailStateService.toogleAsideSendReportPayment();
   }

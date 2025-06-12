@@ -51,6 +51,9 @@ export class CompanyDevicesHeaderComponent implements OnInit {
     if (this.filter.assestType.length > 0) return filtesList.filter(item => this.filter.assestType.some(filteritem => filteritem.name.toLocaleLowerCase() == ((item.isCustom) ? (item.type && item.type.name ? item.type.name.toLocaleLowerCase() : '') : item.iconName.toLocaleLowerCase()))).length;
     return filtesList.length;
   }
+  getTextCountFilters() {
+    return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
+  }
   onChangeCountFilter() {
     this.countFilter = 0;
     if (this.filter.assestType.length > 0) this.countFilter++;

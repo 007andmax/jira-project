@@ -132,7 +132,9 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     this.marketingEmailStateService.onOpenAsige(this.users.filter(item => item.selected));
     this.ref.markForCheck();
   }
-
+  getTextCountFilters() {
+    return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
+  }
   getSelectedCount() {
     return this.users.filter(item => item.selected).length;
   }

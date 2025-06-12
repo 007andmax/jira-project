@@ -56,6 +56,9 @@ export class DocumentsHeaderComponent implements OnInit {
   back() {
     this.leftPanelStateService.goToState('new-documents');
   }
+  getTextCountFilters() {
+    return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
+  }
   toggleAll(data) {
     this.selectAll = true;
     this.onSelectAll.emit(data);
