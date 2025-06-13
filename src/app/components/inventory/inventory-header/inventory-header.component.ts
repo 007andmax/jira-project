@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryChangeProductTypeComponent } from '../inventory-change-product-type/inventory-change-product-type.component';
 import { ProductService } from 'src/app/services/product/product.service';
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
+import { InventoryFilterComponent } from './inventory-filter/inventory-filter.component';
 
 @Component({
   selector: 'inventory-header',
@@ -18,6 +19,8 @@ export class InventoryHeaderComponent implements OnInit {
   productSearchName: string = '';
   reqInventoryList: Array<InventoryItem> = [];
   selectAll: boolean = false;
+  countFilter: number = 0;
+  @ViewChild('filtes', { static: true }) filtes: InventoryFilterComponent;
   @Output() onSearch: EventEmitter<any> = new EventEmitter();
   @Output() onFilter: EventEmitter<any> = new EventEmitter();
   @Output() onSelectAllIventory: EventEmitter<any> = new EventEmitter();
@@ -56,6 +59,20 @@ export class InventoryHeaderComponent implements OnInit {
   resetSelected() {
     this.selectAll = false;
     this.onSelectAllIventory.emit(false);
+    this.onChangeCountFilter();
+  }
+  clearAll() {
+    console.log("clearAll");
+    this.filtes.onClearAll();
+    this.countFilter = 0;
+  }
+  onChangeCountFilter() {
+    this.countFilter = 0;
+    if (this.filtes.filter.sortType) this.countFilter++;
+    if (this.filtes.filter.sortCategoty) this.countFilter++;
+  }
+  getTextCountFilters() {
+    return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
   }
   filter(data) {
     this.onFilter.emit(data);

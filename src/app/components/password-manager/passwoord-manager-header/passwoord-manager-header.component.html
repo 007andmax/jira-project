@@ -31,6 +31,13 @@
                     ></span>
                 </div>
                 <button
+                    class="qt-button --gray --md qt-ml-8"
+                    (click)="clearAll()"
+                    *ngIf="countFilter > 0"
+                >
+                    Clear All
+                </button>
+                <button
                     class="qt-button qt-button-filter --gray --md qt-ml-8 qt-df"
                     [ngClass]="{'active':toggleFilter,
                  'is-exist-filters':isExistFilters()}"

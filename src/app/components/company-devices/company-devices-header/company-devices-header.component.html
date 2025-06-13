@@ -44,6 +44,13 @@
             </div>
         </div>
         <button
+            class="qt-button --gray --md qt-ml-8"
+            (click)="clearAll()"
+            *ngIf="filter.assestType.length > 0"
+        >
+            Clear All
+        </button>
+        <button
             class="qt-button --gray --md qt-button-filter qt-ml-8 qt-df"
             [ngClass]="{'active':toggleFilter}"
             (click)="setToggleFilter(!toggleFilter)"

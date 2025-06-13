@@ -30,6 +30,10 @@ export class CompanyDevicesFilterComponent implements OnInit {
       this.assestType = data;
     })
     this.sub.add(onGetDeviceType);
+    let onClearFilter = this.devicesStateService.onClearFilter.subscribe(() => {
+      this.onClearAll();
+    });
+    this.sub.add(onClearFilter);
   }
 
   onChangeCustomDevice(event) {

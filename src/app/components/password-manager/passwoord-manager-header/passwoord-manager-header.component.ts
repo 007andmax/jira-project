@@ -60,6 +60,9 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
     this.selectAll = true;
     this.onSelectAll.emit(data);
   }
+  clearAll() {
+    this.filters.onClearAll()
+  }
   getTextCountFilters() {
     return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
   }
