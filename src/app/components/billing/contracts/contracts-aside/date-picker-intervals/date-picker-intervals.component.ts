@@ -134,13 +134,24 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
       return true;
     } else {
 
-      while (endDate.getTime() < new Date().getTime() + 60000 * 60 * 24 * 365) {
-        if (this.intervalstring === '7 days') endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 7);
-        dates.push(new Date(JSON.parse(JSON.stringify(endDate.getTime()))));
+      const target = new Date(date.year, date.month - 1, date.day);
 
+      let n = 0;
+      while (endDate <= target) {
+        const intervalDate = new Date(endDate);
+
+        if (
+          intervalDate.getFullYear() === target.getFullYear() &&
+          intervalDate.getMonth() === target.getMonth() &&
+          intervalDate.getDate() === target.getDate()
+        ) {
+          console.log("intervalDate", intervalDate);
+          return false;
+        }
+        endDate.setDate(endDate.getDate() + 6 + n);
+        n = 1;
       }
+      return true;
     }
-    console.log("dates", dates);
-    return !dates.some(item => date.day === item.getDate() && date.month === item.getMonth() + 1 && date.year === item.getFullYear());
   }
 }
