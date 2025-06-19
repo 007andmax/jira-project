@@ -28,11 +28,15 @@ export class CompanyDevicesHeaderComponent implements OnInit {
   ngOnInit() {
     let geLefttFilter = this.devicesStateService.onFilter.subscribe((data) => {
       this.filter.setFilter(JSON.parse(JSON.stringify(data)));
+      console.log('onFilter', this.filter);
       this.onChangeCountFilter();
       this.cd.detectChanges();
     });
     this.sub.add(geLefttFilter);
     this.onChangeCountFilter();
+  }
+  clearAll() {
+    this.devicesStateService.clearFilter();
   }
   public setToggleFilter(data) {
     this.toggleFilter = data;
@@ -50,6 +54,9 @@ export class CompanyDevicesHeaderComponent implements OnInit {
     }
     if (this.filter.assestType.length > 0) return filtesList.filter(item => this.filter.assestType.some(filteritem => filteritem.name.toLocaleLowerCase() == ((item.isCustom) ? (item.type && item.type.name ? item.type.name.toLocaleLowerCase() : '') : item.iconName.toLocaleLowerCase()))).length;
     return filtesList.length;
+  }
+  getTextCountFilters() {
+    return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
   }
   onChangeCountFilter() {
     this.countFilter = 0;

@@ -42,12 +42,19 @@
                     >
                 </div>
                 <button
+                    class="qt-button --gray --md qt-ml-8"
+                    (click)="clearAll()"
+                    *ngIf="countFilter > 0"
+                >
+                    Clear All
+                </button>
+                <button
                     class="qt-button qt-button-filter --gray --md qt-df qt-ml-8"
                     [ngClass]="{'active':!toggleFilter}"
                     (click)="toggleFilter = !toggleFilter"
                 >
                     <span class="qt-icon icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
-                    <span>Filters</span>
+                    <span [textContent]="getTextCountFilters()"></span>
                 </button>
                 <button
                     class="qt-button --gray --md qt-ml-8"
@@ -60,6 +67,7 @@
         </div>
     </div>
     <inventory-filter
+        #filtes
         [hidden]="toggleFilter"
         (onResetSelected)="resetSelected()"
     ></inventory-filter>

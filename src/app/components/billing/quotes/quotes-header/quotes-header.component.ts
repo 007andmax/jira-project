@@ -44,6 +44,9 @@ export class QuotesHeaderComponent implements OnInit {
     modalRef.componentInstance.message = `Do you want to archive a quote?`;
     this.quoteStateService.setQuotesForArchive(this.quotes.filter(item => item.selected));
   }
+  getTextCountFilters() {
+    return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
+  }
   sortBy(data) {
     this.onSortBy.emit(data);
   }

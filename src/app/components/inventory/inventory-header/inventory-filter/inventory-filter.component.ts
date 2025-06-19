@@ -5,6 +5,7 @@ import { InventoryStateService } from 'src/app/states/inventory/inventory-state.
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 import { TitleListType } from '../../../tickets/tickets/tickets-header/class/title-list-type';
 import { ProductType } from 'src/app/components/setting/products-settings/class/product-type';
+import { InventoryFilter } from '../../class/inventory-filter';
 @Component({
   selector: 'inventory-filter',
   templateUrl: './inventory-filter.component.html',
@@ -18,7 +19,9 @@ export class InventoryFilterComponent implements OnInit {
   listActive: Array<TitleListType> = [new TitleListType('Active products', 'ACTIVE'), new TitleListType('Inactive products', 'NO_ACTIVE')];
   selectedActive = new TitleListType('Active products', 'ACTIVE');
   listTypes: Array<ProductType> = [];
+  filter: InventoryFilter = new InventoryFilter();
   @ViewChild('categoriesSelect', { static: true }) categoriesSelect: DropDownComponent;
+  @ViewChild('productTypeSelect', { static: true }) productTypeSelect: DropDownComponent;
   @Output() onResetSelected: EventEmitter<any> = new EventEmitter();
   constructor(private inventoryStateService: InventoryStateService,
     public cd: ChangeDetectorRef,) { }
@@ -50,18 +53,29 @@ export class InventoryFilterComponent implements OnInit {
     this.sub.add(getOnSortCategory);
   }
   onSelectProuctType(data) {
+    this.filter.setSortType(data);
     this.inventoryStateService.setSortType(data);
     this.onResetSelected.emit(null);
   }
   selectActive(data) {
     this.selectedActive = data;
+    this.filter.setActive(data.type === 'ACTIVE');
     this.inventoryStateService.setSortActive(data.type === 'ACTIVE');
     this.onResetSelected.emit(null);
     this.cd.detectChanges();
   }
   onSelectCategory(category) {
+    this.filter.setSortCategoty(category);
     this.inventoryStateService.setSortCategory(category);
     this.onResetSelected.emit(null);
     this.cd.detectChanges();
+  }
+  public onClearAll() {
+    console.log("onClearAll");
+    this.filter = new InventoryFilter();
+    this.categoriesSelect.clearWithOutChanges();
+    this.productTypeSelect.clearWithOutChanges();
+    this.inventoryStateService.resetSortCategoty();
+    this.inventoryStateService.clearFilters();
   }
 }

@@ -14,7 +14,7 @@
             ></invoice-export>
             <div class="qt-df qt-ai-c">
                 <button
-                    class="qt-button --transparent --md"
+                    class="qt-button --gray --md qt-ml-8"
                     (click)="clearAll()"
                     *ngIf="countFilter > 0"
                 >
@@ -25,12 +25,8 @@
                     [ngClass]="{'active':!toggleFilter}"
                     (click)="toggleFilter  = !toggleFilter"
                 >
-                    <span
-                        class="filter-counter qt-circle qt-sz-18 qt-fw-600 qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
-                        *ngIf="countFilter > 0"
-                        [textContent]="countFilter"
-                    ></span>
-                    Filters
+                    <span class="qt-icon icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                    <span [textContent]="getTextCountFilters()"></span>
                 </button>
                 <button
                     class="qt-button --gray --md qt-ml-8"

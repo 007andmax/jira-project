@@ -6,7 +6,7 @@
                 *ngIf="activePage === 'new-category-documents'"
                 (click)="back()"
             >
-              <div class="qt-icon icon__arrow-left button-icon qt-sz-16"></div>
+                <div class="qt-icon icon__arrow-left button-icon qt-sz-16"></div>
             </div>
             <h3
                 class="qt-page-list__header-title"
@@ -29,7 +29,7 @@
                     ></span>
                 </div> -->
                 <button
-                    class="qt-button --transparent --md"
+                    class="qt-button --gray --md qt-ml-8"
                     (click)="clearAll()"
                     *ngIf="countFilter > 0"
                 >
@@ -41,12 +41,7 @@
                     (click)="toggleFilter  = !toggleFilter"
                 >
                     <span class="qt-icon icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
-                    <span
-                        class="filter-counter qt-circle qt-sz-18 qt-ff-sb qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c"
-                        *ngIf="countFilter > 0"
-                        [textContent]="countFilter"
-                    ></span>
-                    Filters
+                    <span [textContent]="getTextCountFilters()"></span>
                 </button>
                 <div class="qt-df">
                     <div
@@ -100,44 +95,44 @@
     </div>
     <div class="qt-page-list__header-thead-container">
         <div class="qt-table-modern qt-page-list__header-thead">
-          <div class="qt-page-list__header-thead__row">
-            <div
-              class="documents-table__title pointer"
-              (click)="onFilter('title')"
-            >
-              Title
-              <span class="qt-table-modern__sorting"></span>
+            <div class="qt-page-list__header-thead__row">
+                <div
+                    class="documents-table__title pointer"
+                    (click)="onFilter('title')"
+                >
+                    Title
+                    <span class="qt-table-modern__sorting"></span>
+                </div>
+                <div
+                    class="documents-table__create-by pointer"
+                    (click)="onFilter('createBy')"
+                >
+                    Created By
+                    <span class="qt-table-modern__sorting"></span>
+                </div>
+                <div
+                    class="documents-table__created-date pointer"
+                    (click)="onFilter('createdDate')"
+                >
+                    Created Date
+                    <span class="qt-table-modern__sorting"></span>
+                </div>
+                <div
+                    class="documents-table__review-date pointer"
+                    (click)="onFilter('reviewDate')"
+                >
+                    Review Date
+                    <span class="qt-table-modern__sorting"></span>
+                </div>
+                <div class="documents-table__company">Company</div>
+                <div
+                    class="documents-table__assigned-companies pointer"
+                    *ngIf="showAssignedCompanies"
+                >
+                    assigned to companies
+                </div>
+                <div class="documents-table__menu pointer"></div>
             </div>
-            <div
-              class="documents-table__create-by pointer"
-              (click)="onFilter('createBy')"
-            >
-              Created By
-              <span class="qt-table-modern__sorting"></span>
-            </div>
-            <div
-              class="documents-table__created-date pointer"
-              (click)="onFilter('createdDate')"
-            >
-              Created Date
-              <span class="qt-table-modern__sorting"></span>
-            </div>
-            <div
-              class="documents-table__review-date pointer"
-              (click)="onFilter('reviewDate')"
-            >
-              Review Date
-              <span class="qt-table-modern__sorting"></span>
-            </div>
-            <div class="documents-table__company">Company</div>
-            <div
-              class="documents-table__assigned-companies pointer"
-              *ngIf="showAssignedCompanies"
-            >
-              assigned to companies
-            </div>
-            <div class="documents-table__menu pointer"></div>
-          </div>
         </div>
     </div>
 </div>

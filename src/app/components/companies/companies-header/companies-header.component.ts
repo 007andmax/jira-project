@@ -81,6 +81,9 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     this.draftEmailStateService.toggleAsideForAdd();
     this.cd.detectChanges();
   }
+  getTextCountFilters() {
+    return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
+  }
   archive() {
     this.confirmStateService.setConfirmAction(ARCHIVE_COMPANY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
