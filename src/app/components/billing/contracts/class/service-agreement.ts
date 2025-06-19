@@ -234,7 +234,7 @@ export class ServiceAgreement {
 
         } else if (this.intervalstring === '7 days') {
             let endDate = new Date(this.startDate);
-            endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 7);
+            endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 6);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
         }
