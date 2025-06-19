@@ -12,6 +12,7 @@
 /documentation
 /coverage
 /src/coverage
+/.angular
 
 # profiling files
 chrome-profiler-events.json
