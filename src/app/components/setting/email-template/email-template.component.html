@@ -10,12 +10,13 @@
         >
             <div class="loading"></div>
         </div>
-        <ngb-tabset>
-            <ngb-tab
-                title="Ticket Templates"
-                id="tab1"
-            >
-                <ng-template ngbTabContent>
+        <ul
+            ngbNav
+            class="nav-tabs"
+        >
+            <li [ngbNavItem]="'tab1'">
+                <a ngbNavLink>Ticket Templates</a>
+                <ng-template ngbNavContent>
                     <div
                         class="cmn-area"
                         [hidden]="loading"
@@ -35,10 +36,10 @@
                                 <div
                                     class="tab-pane__table-row"
                                     *ngFor="
-                                        let template of ticketTemplates | keysValue:false;
-                                        let i = index;
-                                        trackBy: trackByIndex
-                                      "
+                                    let template of ticketTemplates | keysValue:false;
+                                    let i = index;
+                                    trackBy: trackByIndex
+                                  "
                                 >
                                     <div class="tab-pane__table-cell email-templates-table__template-name">{{ ticketTemplates[template].title }}</div>
                                     <div class="tab-pane__table-cell email-templates-table__status email-templates-table__status-item">
@@ -75,10 +76,10 @@
                                             ></app-dynamic-tooltip>
                                             <div
                                                 *ngIf="
-                                  emailPages &&
-                                  emailPages.activeAndNotDefault[template]
-                                    .isNotDefault
-                                "
+                              emailPages &&
+                              emailPages.activeAndNotDefault[template]
+                                .isNotDefault
+                            "
                                                 (mouseenter)="resetTooltip.show($event.target)"
                                                 (mouseleave)="resetTooltip.hide()"
                                                 (click)="restoreDefault(template)"
@@ -92,9 +93,10 @@
                         </div>
                     </div>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab title="Agent Templates">
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'tab2'">
+                <a ngbNavLink>Agent Templates</a>
+                <ng-template ngbNavContent>
                     <div
                         class="cmn-area"
                         [hidden]="loading"
@@ -168,9 +170,10 @@
                         </div>
                     </div>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab title="Invoice Templates">
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'tab3'">
+                <a ngbNavLink>Invoice Templates</a>
+                <ng-template ngbNavContent>
                     <div
                         class="cmn-area"
                         [hidden]="loading"
@@ -244,9 +247,10 @@
                         </div>
                     </div>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab title="User Templates">
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'tab4'">
+                <a ngbNavLink>User Templates</a>
+                <ng-template ngbNavContent>
                     <div
                         class="cmn-area"
                         [hidden]="loading"
@@ -320,8 +324,8 @@
                         </div>
                     </div>
                 </ng-template>
-            </ngb-tab>
-        </ngb-tabset>
+            </li>
+        </ul>
     </div>
 </div>
 <div

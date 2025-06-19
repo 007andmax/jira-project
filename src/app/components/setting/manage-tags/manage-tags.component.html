@@ -29,16 +29,15 @@
         >
             <div class="loading"></div>
         </div>
-        <ngb-tabset
+        <ul
+            ngbNav
             (tabChange)="setTab($event)"
-            #tabset="ngbTabset"
-            [destroyOnHide]="false"
+            class="nav-tabs"
+            [(activeId)]="setActiveTab"
         >
-            <ngb-tab
-                title="Companies"
-                id="tab1"
-            >
-                <ng-template ngbTabContent>
+            <li [ngbNavItem]="'tab1'">
+                <a ngbNavLink>Companies</a>
+                <ng-template ngbNavContent>
                     <div
                         class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16"
                         [hidden]="loading"
@@ -199,13 +198,10 @@
                         </div>
                     </div>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                #tickets
-                title="Tickets"
-                id="tab2"
-            >
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'tab2'">
+                <a ngbNavLink>Tickets</a>
+                <ng-template ngbNavContent>
                     <div
                         class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16"
                         [hidden]="loading"
@@ -358,25 +354,19 @@
                         </div>
                     </div>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                #devices
-                title="Devices"
-                id="tab3"
-            >
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'tab3'">
+                <a ngbNavLink>Devices</a>
+                <ng-template ngbNavContent>
                     <app-manage-tags-devices
                         #devicesTags
                         *ngIf="setActiveTab == 'device'"
                     ></app-manage-tags-devices>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                #devices
-                title="Files"
-                id="tab4"
-            >
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'tab4'">
+                <a ngbNavLink>Files</a>
+                <ng-template ngbNavContent>
                     <app-manage-tags-files
                         #filesTags
                         *ngIf="setActiveTab == 'file'"
@@ -384,7 +374,7 @@
                         (onPreloader)="onPreloader($event)"
                     ></app-manage-tags-files>
                 </ng-template>
-            </ngb-tab>
-        </ngb-tabset>
+            </li>
+        </ul>
     </div>
 </div>

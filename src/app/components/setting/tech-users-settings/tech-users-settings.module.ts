@@ -15,6 +15,7 @@ import { TechUsersReassignComponent } from './tech-users-reassign/tech-users-rea
 
 
 
+
 @NgModule({
     declarations: [TechUsersSettingsComponent,
         PermissionManageComponent,
@@ -31,8 +32,6 @@ import { TechUsersReassignComponent } from './tech-users-reassign/tech-users-rea
         NgbModule,
         DynamicTooltipModule,
         DropDownModule
-
-    ],
-    entryComponents: [TechUsersReassignComponent]
+    ]
 })
 export class TechUsersSettingsModule { }

@@ -8,10 +8,10 @@ import { RecurringTicketWidgetComponent } from './recurring-ticket-widget/recurr
 import { TimeOnTicketsWidgetComponent } from './time-on-tickets-widget/time-on-tickets-widget.component';
 import { TicketsBillableHoursWidgetComponent } from './tickets-billable-hours-widget/tickets-billable-hours-widget.component';
 import { TechTicketsWidgetComponent } from './tech-tickets-widget/tech-tickets-widget.component';
-import { NvD3Module } from 'ng2-nvd3';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { TicketsDashboardRoutingModule } from './tickets-dashboard-routing.module';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -29,10 +29,10 @@ import { TicketsDashboardRoutingModule } from './tickets-dashboard-routing.modul
     imports: [
         CommonModule,
         DashboardStatsModule,
-        NvD3Module,
         NgbModule,
         FormsModule,
-        TicketsDashboardRoutingModule
+        TicketsDashboardRoutingModule,
+        NgxChartsModule
     ],
 
 

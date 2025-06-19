@@ -14,63 +14,72 @@
         *ngIf="activeTab == 'history'"
     ></div>
 </div>
-<ngb-tabset (tabChange)="setTab($event)">
+<ul
+    ngbNav
+    (tabChange)="setTab($event)"
+    class="nav-tabs"
+    [(activeId)]="activeTab"
+>
     <!-- Profile -->
-    <ngb-tab
-        title="Profile"
-        id="profile"
-    >
-        <ng-template ngbTabContent>
+    <li [ngbNavItem]="'profile'">
+        <a ngbNavLink>Profile</a>
+        <ng-template ngbNavContent>
             <app-profile #profile></app-profile>
         </ng-template>
-    </ngb-tab>
-    <!-- Account -->
-    <ngb-tab
-        title="Account"
-        id="account"
-    >
-        <ng-template ngbTabContent>
+    </li>
+
+
+
+
+
+
+
+
+    <li [ngbNavItem]="'account'">
+        <a ngbNavLink>Account</a>
+        <ng-template ngbNavContent>
             <app-account #account></app-account>
         </ng-template>
-    </ngb-tab>
-    <!-- Email -->
-    <ngb-tab
-        title="Email Notifications"
-        id="notifications"
+    </li>
+    <!-- Account -->
+    <li
+        [ngbNavItem]="'notifications'"
         *ngIf="!customerPortalStateService.isCustomerPortal"
     >
-        <ng-template ngbTabContent>
+        <a ngbNavLink>Email Notifications</a>
+        <ng-template ngbNavContent>
             <app-email-notifications #emailNotifications></app-email-notifications>
         </ng-template>
-    </ngb-tab>
-    <!-- Activity History -->
-    <ngb-tab
-        title="Activity History"
+    </li>
+    <!-- Email -->
+    <li
+        [ngbNavItem]="'history'"
         class="history"
-        id="history"
     >
-        <ng-template ngbTabContent>
+        <a ngbNavLink>Activity History</a>
+        <ng-template ngbNavContent>
             <app-activity-history #activityHistory></app-activity-history>
         </ng-template>
-    </ngb-tab>
-    <ngb-tab
-        title="Signature"
+    </li>
+    <!-- Activity History -->
+    <li
+        [ngbNavItem]="'signature'"
         class="history"
-        id="signature"
         *ngIf="!customerPortalStateService.isCustomerPortal"
     >
-        <ng-template ngbTabContent>
+        <a ngbNavLink>Signature</a>
+        <ng-template ngbNavContent>
             <signature #signature></signature>
         </ng-template>
-    </ngb-tab>
-    <ngb-tab
-        title="Tickets"
+    </li>
+    <li
+        [ngbNavItem]="'tickets'"
         class="history"
-        id="tickets"
         *ngIf="!customerPortalStateService.isCustomerPortal"
     >
-        <ng-template ngbTabContent>
+        <a ngbNavLink>Tickets</a>
+        <ng-template ngbNavContent>
             <tickets-my-profile #tickets></tickets-my-profile>
         </ng-template>
-    </ngb-tab>
-</ngb-tabset>
+    </li>
+</ul>

@@ -10,35 +10,33 @@
                 Save Changes
             </a>
         </div>
-        <ngb-tabset (tabChange)="setTab($event)">
-            <ngb-tab
-                title="Profile"
-                id="tab1"
-            >
-                <ng-template ngbTabContent>
+        <ul
+            ngbNav
+            (tabChange)="setTab($event)"
+            class="nav-tabs"
+            [(activeId)]="tabSet"
+        >
+            <li [ngbNavItem]="'tab1'">
+                <a ngbNavLink>Profile</a>
+                <ng-template ngbNavContent>
                     <app-company-profile-profile
                         #profile
                         (onGetCurrentCompany)="getCompanyProfile()"
                     ></app-company-profile-profile>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                title="Workspace"
-                id="workspace"
-            >
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'workspace'">
+                <a ngbNavLink>Workspace</a>
+                <ng-template ngbNavContent>
                     <app-company-profile-workspace #workspace></app-company-profile-workspace>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                title="Operational Hours"
-                class="123213"
-                id="operationalhours"
-            >
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'operationalhours'">
+                <a ngbNavLink>Operational Hours</a>
+                <ng-template ngbNavContent>
                     <app-company-profile-operational-hours #operationalhours></app-company-profile-operational-hours>
                 </ng-template>
-            </ngb-tab>
-        </ngb-tabset>
+            </li>
+        </ul>
     </div>
 </div>

@@ -20,7 +20,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [FileManagerAddFileComponent, FileManagementAddFileDragDropComponent, FileManagerAddFileTagsComponent
-
     ],
     imports: [
         CommonModule,
@@ -40,7 +39,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         TextAreaModule,
         MatErrorModule
     ],
-    entryComponents: [FileManagerAddFileComponent],
     exports: [FileManagerAddFileComponent]
 })
 export class FileManagementAddFileModule { }

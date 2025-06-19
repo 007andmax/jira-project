@@ -13,7 +13,6 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 
 @NgModule({
     declarations: [TerminalComponent, TerminalAsideComponent, TerminalManageCategoryComponent, TerminalRunScriptComponent, TerminalScriptDetailComponent,
-
     ],
     imports: [
         CommonModule,
@@ -22,7 +21,6 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
         TerminalRoutingOldModule,
         NgbModule,
         DropDownModule
-    ],
-    entryComponents: [TerminalManageCategoryComponent]
+    ]
 })
 export class TerminalOldModule { }

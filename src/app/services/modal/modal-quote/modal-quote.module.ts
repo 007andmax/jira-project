@@ -24,11 +24,7 @@ import { MatOptionModule } from 'src/app/components/shared/mat-option/mat-option
         MatFormFieldModule,
         MatChipListModule,
         MatOptionModule
-
     ],
-    entryComponents: [ModalQuoteComponent],
     exports: [ModalQuoteComponent]
-
-
 })
 export class ModalQuoteModule { }

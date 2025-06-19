@@ -21,7 +21,6 @@ import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat
         FormsModule,
         MatErrorModule
     ],
-    entryComponents: [SupportPageAddCategoryComponent],
     exports: [SupportPageAddCategoryComponent]
 })
 export class SupportPageAddCategoryModule { }

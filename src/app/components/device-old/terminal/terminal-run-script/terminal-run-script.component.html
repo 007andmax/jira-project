@@ -10,37 +10,50 @@
             >
             </a>
         </div>
-        <ngb-tabset>
-            <ngb-tab [title]="'My Scripts (' + myScriptList.length + ')'">
-                <ng-template ngbTabContent>
+        <ul
+            ngbNav
+            class="nav-tabs"
+        >
+            <li [ngbNavItem]="'tab1'">
+                <a
+                    ngbNavLink
+                    [textContent]="'My Scripts (' + myScriptList.length + ')'"
+                >
+                </a>
+                <ng-template ngbNavContent>
                     <div class="cmn-tbs-content myScript">
                         <form method="POST">
                             <div class="qt-inputs-row">
-                              <div class="qt-input-block qt-f50">
-                                <app-drop-down
-                                  #selectCategory
-                                  [sort]="false"
-                                  [title]="'Category'"
-                                  [placeholder]="'Select Category'"
-                                  [field]="'name'"
-                                  [list]="cmdCategoryReadList"
-                                  (onSelectedItem)="filterMyScript($event)"
-                                ></app-drop-down>
-                              </div>
-                              <div class="qt-input-block qt-f50">
-                                <label class="qt-input-block__label" for="command">Search Scripts</label>
-                                <div class="qt-input-search">
-                                  <input
-                                    type="text"
-                                    placeholder="Search Scripts"
-                                    class="form-input script-search"
-                                    [(ngModel)]="myScriptModal.search"
-                                    (keyup)="filterMyScript(undefined)"
-                                    id="my_search"
-                                    name="my_search"
-                                  >
+                                <div class="qt-input-block qt-f50">
+                                    <app-drop-down
+                                        #selectCategory
+                                        [sort]="false"
+                                        [title]="'Category'"
+                                        [placeholder]="'Select Category'"
+                                        [field]="'name'"
+                                        [list]="cmdCategoryReadList"
+                                        (onSelectedItem)="filterMyScript($event)"
+                                    ></app-drop-down>
                                 </div>
-                              </div>
+                                <div class="qt-input-block qt-f50">
+                                    <label
+                                        class="qt-input-block__label"
+                                        for="command"
+                                    >
+                                        Search Scripts
+                                    </label>
+                                    <div class="qt-input-search">
+                                        <input
+                                            type="text"
+                                            placeholder="Search Scripts"
+                                            class="form-input script-search"
+                                            [(ngModel)]="myScriptModal.search"
+                                            (keyup)="filterMyScript(undefined)"
+                                            id="my_search"
+                                            name="my_search"
+                                        >
+                                    </div>
+                                </div>
                             </div>
                         </form>
                         <ul
@@ -55,55 +68,59 @@
                                 </div>
                                 <div class="script-right">
                                     <div
-                                      class="qt-button --square-md --gray pointer qt-mr-8 device-tooltip"
-                                      data-tooltip="Run Script"
-                                      (click)="copyToTerminal(script.command, script.type, true)"
+                                        class="qt-button --square-md --gray pointer qt-mr-8 device-tooltip"
+                                        data-tooltip="Run Script"
+                                        (click)="copyToTerminal(script.command, script.type, true)"
                                     >
-                                      <div class="qt-icon icon__category-closed qt-sz-12"></div>
+                                        <div class="qt-icon icon__category-closed qt-sz-12"></div>
                                     </div>
                                     <div
-                                      class="qt-button --square-md --gray pointer qt-bg-contain device-tooltip"
-                                      data-tooltip="View Script"
-                                      (click)="viewScriptDetail(script);"
+                                        class="qt-button --square-md --gray pointer qt-bg-contain device-tooltip"
+                                        data-tooltip="View Script"
+                                        (click)="viewScriptDetail(script);"
                                     >
-                                      <div class="qt-icon icon__show qt-sz-16 qt-bg-contain"></div>
+                                        <div class="qt-icon icon__show qt-sz-16 qt-bg-contain"></div>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab [title]="'Shared Script Library (' + sharedScriptList.length + ')'">
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'tab2'">
+                <a
+                    ngbNavLink
+                    [textContent]="'Shared Script Library (' + sharedScriptList.length + ')'"
+                ></a>
+                <ng-template ngbNavContent>
                     <div class="cmn-tbs-content script-library">
                         <form method="POST">
                             <div class="qt-inputs-row">
-                              <div class="qt-input-block qt-f50">
-                                <div class="qt-input-block__label">Category</div>
-                                <app-drop-down
-                                  #selectCategory
-                                  [sort]="false"
-                                  [placeholder]="'Select Category'"
-                                  [field]="'name'"
-                                  [list]="cmdCategoryReadList"
-                                  (onSelectedItem)="filterSharedScript($event)"
-                                ></app-drop-down>
-                              </div>
-                              <div class="qt-input-block qt-f50">
-                                <label class="qt-input-block__label">Search Scripts</label>
-                                <div class="qt-input-search">
-                                  <input
-                                    type="text"
-                                    placeholder="Search description or filename"
-                                    class="form-input script-search"
-                                    (keyup)="filterSharedScript(undefined)"
-                                    id="shared_search"
-                                    name="shared_search"
-                                    [(ngModel)]="sharedScriptModal.search"
-                                  >
+                                <div class="qt-input-block qt-f50">
+                                    <div class="qt-input-block__label">Category</div>
+                                    <app-drop-down
+                                        #selectCategory
+                                        [sort]="false"
+                                        [placeholder]="'Select Category'"
+                                        [field]="'name'"
+                                        [list]="cmdCategoryReadList"
+                                        (onSelectedItem)="filterSharedScript($event)"
+                                    ></app-drop-down>
                                 </div>
-                              </div>
+                                <div class="qt-input-block qt-f50">
+                                    <label class="qt-input-block__label">Search Scripts</label>
+                                    <div class="qt-input-search">
+                                        <input
+                                            type="text"
+                                            placeholder="Search description or filename"
+                                            class="form-input script-search"
+                                            (keyup)="filterSharedScript(undefined)"
+                                            id="shared_search"
+                                            name="shared_search"
+                                            [(ngModel)]="sharedScriptModal.search"
+                                        >
+                                    </div>
+                                </div>
                             </div>
                         </form>
                         <ul
@@ -118,25 +135,25 @@
                                 </div>
                                 <div class="script-right">
                                     <div
-                                      class="qt-button --square-md --gray pointer qt-mr-8 device-tooltip"
-                                      data-tooltip="Clone Script"
-                                      (click)="cloneScript(shared.id)"
+                                        class="qt-button --square-md --gray pointer qt-mr-8 device-tooltip"
+                                        data-tooltip="Clone Script"
+                                        (click)="cloneScript(shared.id)"
                                     >
-                                      <div class="qt-icon icon__copy qt-sz-16 qt-bg-contain"></div>
+                                        <div class="qt-icon icon__copy qt-sz-16 qt-bg-contain"></div>
                                     </div>
                                     <div
-                                      class="qt-button --square-md --gray pointer device-tooltip"
-                                      data-tooltip="View Script"
-                                      (click)="viewScriptDetail(shared);"
+                                        class="qt-button --square-md --gray pointer device-tooltip"
+                                        data-tooltip="View Script"
+                                        (click)="viewScriptDetail(shared);"
                                     >
-                                      <div class="qt-icon icon__show qt-sz-16 qt-bg-contain"></div>
+                                        <div class="qt-icon icon__show qt-sz-16 qt-bg-contain"></div>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </ng-template>
-            </ngb-tab>
-        </ngb-tabset>
+            </li>
+        </ul>
     </div>
 </aside>

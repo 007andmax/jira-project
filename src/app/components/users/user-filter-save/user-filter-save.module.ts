@@ -9,7 +9,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 
 @NgModule({
     declarations: [UserFilterSaveComponent,
-
     ],
     imports: [
         CommonModule,
@@ -19,9 +18,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         DynamicTooltipModule,
         MatErrorModule
     ],
-    exports: [UserFilterSaveComponent],
-    entryComponents: [UserFilterSaveComponent]
-
-
+    exports: [UserFilterSaveComponent]
 })
 export class UserFilterSaveModule { }

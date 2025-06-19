@@ -146,9 +146,13 @@
                 </form>
             </div>
         </div>
-        <ngb-tabset>
-            <ngb-tab title="Command">
-                <ng-template ngbTabContent>
+        <ul
+            ngbNav
+            class="nav-tabs"
+        >
+            <li [ngbNavItem]="'tab1'">
+                <a ngbNavLink>Command</a>
+                <ng-template ngbNavContent>
                     <div class="cmn-tbs-content command">
                         <ul class="list-unstyled cmn-tbs-content__lists">
                             <li
@@ -212,9 +216,10 @@
                         </ul>
                     </div>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab title="History">
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'tab2'">
+                <a ngbNavLink>History</a>
+                <ng-template ngbNavContent>
                     <div class="cmn-tbs-content history-cmd">
                         <ul class="list-unstyled">
                             <li
@@ -240,8 +245,8 @@
                         </ul>
                     </div>
                 </ng-template>
-            </ngb-tab>
-        </ngb-tabset>
+            </li>
+        </ul>
         <div
             href="javascript:;"
             (click)="openRunScript();"

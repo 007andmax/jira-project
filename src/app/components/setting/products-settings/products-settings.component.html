@@ -31,30 +31,29 @@
         >
             <div class="loading"></div>
         </div>
-        <ngb-tabset
-            #tabset="ngbTabset"
-            [destroyOnHide]="false"
+
+
+        <ul
+            ngbNav
             (tabChange)="setTab($event)"
+            class="nav-tabs"
+            [(activeId)]="activeTab"
         >
-            <ngb-tab
-                title="Product Category"
-                id="productCategories"
-            >
-                <ng-template ngbTabContent>
+            <li [ngbNavItem]="'productCategories'">
+                <a ngbNavLink>Product Category</a>
+                <ng-template ngbNavContent>
                     <app-products-settings-category
                         #categories
                         (onPreloader)="setPreloader($event)"
                     ></app-products-settings-category>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                title="Product Type"
-                id="productType"
-            >
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'productType'">
+                <a ngbNavLink>Product Type</a>
+                <ng-template ngbNavContent>
                     <app-products-settings-type #productType></app-products-settings-type>
                 </ng-template>
-            </ngb-tab>
-        </ngb-tabset>
+            </li>
+        </ul>
     </div>
 </div>

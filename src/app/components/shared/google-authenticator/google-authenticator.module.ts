@@ -14,7 +14,6 @@ import { MatErrorModule } from '../mat-error/mat-error.module';
         NgxMaskModule.forRoot(),
         MatErrorModule
     ],
-    entryComponents: [GoogleAuthenticatorComponent],
-    exports: [GoogleAuthenticatorComponent],
+    exports: [GoogleAuthenticatorComponent]
 })
 export class GoogleAuthenticatorModule { }

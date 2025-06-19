@@ -20,7 +20,6 @@ import { TechServiceReportComponent } from '../reports/tech-service-report/tech-
 import { AccountingReportComponent } from '../reports/accounting-report/accounting-report.component';
 import { ReportMenuModule } from '../report-menu/report-menu.module';
 import { ReportAdditionalActionsModule } from '../report-additional-actions/report-additional-actions.module';
-import { NvD3Module } from 'ng2-nvd3';
 import { OverviewReportComponent } from '../overview-report/overview-report.component';
 import { ItemReportRoutingModule } from './item-report-routing.module';
 import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
@@ -42,6 +41,7 @@ import { ReportSendEmailModule } from '../report-additional-actions/report-send-
 import { HardwareSummaryDeviceReportComponent } from '../reports/hardware-summary-device-report/hardware-summary-device-report.component';
 import { DeviceIpSummaryDeviceReportComponent } from '../reports/device-ip-summary-device-report/device-ip-summary-device-report.component';
 import { DetailedContractReportComponent } from '../reports/detailed-contract-report/detailed-contract-report.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
     declarations: [ItemReportComponent,
@@ -82,13 +82,13 @@ import { DetailedContractReportComponent } from '../reports/detailed-contract-re
         CommonModule,
         ReportMenuModule,
         //ReportAdditionalActionsModule,
-        NvD3Module,
         ToFixedModule,
         ItemReportRoutingModule,
         ToFixedPipeModule,
         ReportDeviceSummaryModule,
         DropDownModule,
-        ReportSendEmailModule
+        ReportSendEmailModule,
+        NgxChartsModule
     ],
 })
 export class ItemReportModule { }

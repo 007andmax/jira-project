@@ -28,7 +28,6 @@ import { TicketDetailProfileFormUpdateNoteModule } from '../ticket-detail-profil
 @NgModule({
     declarations: [
         TicketDetailNoteModalComponent,
-
     ],
     imports: [
         CommonModule,
@@ -56,7 +55,6 @@ import { TicketDetailProfileFormUpdateNoteModule } from '../ticket-detail-profil
         TicketDetailProfileFormUpdateHeaderModule,
         TicketDetailProfileFormUpdateNoteModule
     ],
-    exports: [TicketDetailNoteModalComponent],
-    entryComponents: [TicketDetailNoteModalComponent]
+    exports: [TicketDetailNoteModalComponent]
 })
 export class TicketDetailNoteModalModule { }

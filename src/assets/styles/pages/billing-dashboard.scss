@@ -397,8 +397,31 @@
     svg.nvd3-svg {
       overflow: visible;
     }
-    .nv-legend {
-      transform: translate(calc(-50% + 120px), -21px);
+    .chart-legend {
+      transform: translate(calc(50% - 110px), -339px);
+    }
+    .chart-legend .legend-title {
+      display: none;
+    }
+    .chart-legend .legend-labels {
+      background: none;
+      .legend-label-text {
+        font-size: 12px;
+        color: $gray-600;
+        font-weight: 400;
+      }
+    }
+    .chart-legend .legend-label-color {
+      border-radius: 50%;
+    }
+    .line-chart .x .gridline-path-vertical {
+      display: none ;
+    }
+    .line-chart .y .gridline-path-horizontal {
+      stroke: $gray-100;
+    }
+    .ngx-charts .tooltip-anchor {
+      fill: transparent
     }
   }
 }

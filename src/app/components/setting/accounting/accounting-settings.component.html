@@ -54,62 +54,68 @@
                 </div>
             </div>
         </div>
-        <ngb-tabset
+        <ul
+            ngbNav
             (tabChange)="setTab($event)"
-            [destroyOnHide]="true"
+            class="nav-tabs"
+            [(activeId)]="activeTab"
             [ngClass]="{'clear-padding':activeTab === 'gLNumbers'}"
         >
-            <!-- Invoice Settings -->
-            <ngb-tab
-                title="Invoice Settings"
-                id="invoiceSettings"
+            <li
+                [ngbNavItem]="'invoiceSettings'"
+                [destroyOnHide]="true"
             >
-                <ng-template ngbTabContent>
+                <a ngbNavLink>Invoice Settings</a>
+                <ng-template ngbNavContent>
                     <app-invoice-settings #invoiceSettings></app-invoice-settings>
                 </ng-template>
-            </ngb-tab>
-            <!-- Quotes Settings -->
-            <ngb-tab
-                title="Quote settings"
-                id="quoteSettings"
+            </li>
+            <li
+                [ngbNavItem]="'quoteSettings'"
+                [destroyOnHide]="true"
             >
-                <ng-template ngbTabContent>
+                <a ngbNavLink>Quote settings</a>
+                <ng-template ngbNavContent>
                     <app-quotes-settings #quotesSettings></app-quotes-settings>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                title="GL Numbers"
-                id="gLNumbers"
+            </li>
+            <li
+                [ngbNavItem]="'gLNumbers'"
+                [destroyOnHide]="true"
             >
-                <ng-template ngbTabContent>
+                <a ngbNavLink>GL Numbers</a>
+                <ng-template ngbNavContent>
                     <app-gl-number-settings #glNumber></app-gl-number-settings>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                title="Accounting Year"
-                id="accountingYear"
+            </li>
+            <li
+                [ngbNavItem]="'accountingYear'"
+                [destroyOnHide]="true"
             >
-                <ng-template ngbTabContent>
+                <a ngbNavLink>Accounting Year</a>
+                <ng-template ngbNavContent>
                     <accounting-year #accountingYear></accounting-year>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                title="Taxes"
-                id="taxes"
+            </li>
+            <li
+                [ngbNavItem]="'taxes'"
+                [destroyOnHide]="true"
                 *ngIf="getPermissions('VIEW_TAXES_SETTINGS')"
             >
-                <ng-template ngbTabContent>
+                <a ngbNavLink>Taxes</a>
+                <ng-template ngbNavContent>
                     <app-taxes-settings #taxesSettings></app-taxes-settings>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                title="Custom notes"
-                id="notes"
+            </li>
+            <li
+                [ngbNavItem]="'notes'"
+                [destroyOnHide]="true"
             >
-                <ng-template ngbTabContent>
+                <a ngbNavLink>Custom notes</a>
+                <ng-template ngbNavContent>
                     <custom-notes-settings #customNotes></custom-notes-settings>
                 </ng-template>
-            </ngb-tab>
-        </ngb-tabset>
+            </li>
+        </ul>
     </div>
 </div>

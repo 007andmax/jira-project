@@ -42,12 +42,29 @@
         <div class="loading pengind-loading"></div>
     </div>
     <div class="contract-dashboard-chart-card__chart-content">
-        <nvd3
+        <ngx-charts-line-chart
+            #nvd3
+            [legend]="true"
+            [legendPosition]="'below'"
+            [view]="[1168,308]"
+            *ngIf="!showPreloader"
+            class="sales-analytic"
+            [scheme]="chartColors"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            [xAxisTickFormatting]="xAxisTickFormatting"
+            [trimXAxisTicks]="false"
+            [xAxis]="true"
+            [yAxis]="true"
+            [results]="data"
+        >
+        </ngx-charts-line-chart>
+        <!-- <nvd3
             #nvd3
             *ngIf="!showPreloader"
             class="sales-analytic"
             [options]="options"
             [data]="data"
-        ></nvd3>
+        ></nvd3> -->
     </div>
 </div>

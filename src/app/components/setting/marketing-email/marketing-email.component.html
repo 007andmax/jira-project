@@ -27,22 +27,25 @@
                 </a>
             </div>
         </div>
-        <ngb-tabset
-            #tabset="ngbTabset"
-            [destroyOnHide]="true"
+        <ul
+            ngbNav
+            (tabChange)="setTab($event)"
+            class="nav-tabs"
+            [(activeId)]="activeTab"
         >
-            <ngb-tab
-                title="Subscription Type"
-                id="subscriptionType"
+            <li
+                [ngbNavItem]="'subscriptionType'"
+                [destroyOnHide]="true"
             >
-                <ng-template ngbTabContent>
+                <a ngbNavLink>Subscription Type</a>
+                <ng-template ngbNavContent>
                     <marketing-subscription-type
                         #subscriptionType
                         (onSelect)="onSelect($event)"
                     ></marketing-subscription-type>
                 </ng-template>
-            </ngb-tab>
-        </ngb-tabset>
+            </li>
+        </ul>
     </div>
 </div>
 <marketing-email-users></marketing-email-users>

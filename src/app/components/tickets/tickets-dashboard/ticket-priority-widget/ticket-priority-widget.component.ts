@@ -17,7 +17,7 @@ export class TicketPriorityWidgetComponent implements OnInit {
   toggleAllPriorities: boolean = false;
   statusColors: Array<StatusColor> = [];
   chartOptions: any;
-  chartColors = ["#0646a4", "#00ccff", '#2bc7c6'];
+  chartColors = { domain: ["#0646a4", "#00ccff", '#2bc7c6'] };
   data: any;
   constructor(private ticketsStateService: TicketsStateService,
     private leftPanelService: LeftPanelService) { }
@@ -56,6 +56,12 @@ export class TicketPriorityWidgetComponent implements OnInit {
       }
     }
   }
+  customColors = (d: any, i: any) => {
+    console.log("d", d);
+    console.log("i", i);
+    let priority = this.ticketsPriorities.find(item => item.name == d);
+    return priority ? this.statusColors[priority.color].textColor : '#0646a4';
+  }
   getColors() {
     if (this.ticketsStateService.getListStatusColor().length === 0) {
       this.leftPanelService.getColors().subscribe((data: any) => {
@@ -73,14 +79,14 @@ export class TicketPriorityWidgetComponent implements OnInit {
     this.data = [];
     this.ticketsPriorities.forEach(item => {
       this.data.push({
-        "label": item.name,
+        "name": item.name,
         "value": this.dashboardTicketsStats.counts[item.getNameForCounts()]
       })
     })
   }
   public updateDataChart() {
     this.setDataForChart();
-    if (this.nvd3.char) this.nvd3.chart.update();
+    //  if (this.nvd3.char) this.nvd3.chart.update();
   }
   public trackById(index, item) {
     return item.id;

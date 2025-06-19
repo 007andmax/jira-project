@@ -65,7 +65,6 @@ import { TicketDetailProfileFormUpdateNoteModule } from './ticket-detail-profile
         TicketDetailProfileFormUpdateHeaderModule,
         TicketDetailProfileFormUpdateNoteModule
     ],
-    exports: [TicketDetailProfileFormUpdateComponent],
-    entryComponents: [TicketDetailProfileFormUpdateComponent]
+    exports: [TicketDetailProfileFormUpdateComponent]
 })
 export class TicketDetailProfileFormUpdateModule { }
