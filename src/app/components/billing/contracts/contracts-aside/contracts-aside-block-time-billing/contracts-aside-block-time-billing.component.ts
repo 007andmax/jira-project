@@ -310,9 +310,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.cd.detectChanges();
   }
   onChangeStartDate(data) {
-    console.log("data", data);
     this.contractsBlockTime.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    console.log("this.contractsBlockTime", this.contractsBlockTime.startDate)
     this.endDate = this.contractsBlockTime.getEndDateByMilliseconds();
     this.endDateDP.setEditDate(this.contractsBlockTime.getEndDateByMilliseconds());
     this.contractsBlockTime.calculateReviewDate();

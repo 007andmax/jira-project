@@ -16,11 +16,7 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
 
   markDisabled = (date: NgbDate, current: { month: number, year: number }) => {
     let endDate = new Date(this.fromDate);
-    console.log("endDate ------------------------------->", endDate);
     let last_day = new Date(endDate.getFullYear(), endDate.getMonth() + 1, 0);
-    //  console.log("endDate.getDate()", endDate.getDate());
-    // console.log("last_day", last_day.getDate());
-    let dates = [];
     if (this.intervalstring === 'YEARLY') {
       const target = new Date(date.year, date.month - 1, date.day);
       while (endDate <= target) {
@@ -37,10 +33,8 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
         endDate.setFullYear(endDate.getFullYear() + 1);
       }
       return true;
-
     } else if (this.intervalstring === 'MONTHLY') {
       const target = new Date(date.year, date.month - 1, date.day);
-
       while (endDate <= target) {
         const intervalDate = new Date(endDate);
         intervalDate.setMonth(intervalDate.getMonth() + 1);
@@ -66,86 +60,51 @@ export class DatePickerIntervalsComponent extends DatePickerComponent {
             return false;
           }
         }
-        // Check if the interval date matches the selected date
-        // Move to next interval start: +1 month from current start date
         endDate.setMonth(endDate.getMonth() + 1);
       }
       return true;
     } else if (this.intervalstring === '30 days') {
-      console.log("30 days interval", date);
       const target = new Date(date.year, date.month - 1, date.day);
-
       let n = 0;
       while (endDate <= target) {
         const intervalDate = new Date(endDate);
-
         if (
           intervalDate.getFullYear() === target.getFullYear() &&
           intervalDate.getMonth() === target.getMonth() &&
           intervalDate.getDate() === target.getDate()
         ) {
-          console.log("finD --------------------------------");
           return false;
         }
-        //  endDate.setMonth(endDate.getMonth() + 1); 
-
-
-        if (
-          intervalDate.getFullYear() === target.getFullYear() &&
-          intervalDate.getMonth() === target.getMonth()
-        ) {
-          console.log("intervalDate", intervalDate);
-          console.log("target", target.getDate());
-        }
-        //  endDate.setMonth(endDate.getMonth() + 1);
-
-        // Subtract 2 days after moving 1 month forward
-        //  endDate.setDate(endDate.getDate() - ((n == 0) ? 2 : 1));
-
         endDate.setDate(endDate.getDate() + ((n == 0) ? 29 : 30));
-        //endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29 + 60000 * 60 * 24 * n);
         n = 1;
-        console.log("n", n);
       }
       return true;
     } else if (this.intervalstring === '15 days') {
       const target = new Date(date.year, date.month - 1, date.day);
-
       let n = 0;
       while (endDate <= target) {
         const intervalDate = new Date(endDate);
-
         if (
           intervalDate.getFullYear() === target.getFullYear() &&
           intervalDate.getMonth() === target.getMonth() &&
           intervalDate.getDate() === target.getDate()
         ) {
-          console.log("intervalDate", intervalDate);
           return false;
         }
-        //  endDate.setMonth(endDate.getMonth() + 1);
-
         endDate.setDate(endDate.getDate() + 14);
-        //endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29 + 60000 * 60 * 24 * n);
         n = 1;
-
-
       }
       return true;
     } else {
-
       const target = new Date(date.year, date.month - 1, date.day);
-
       let n = 0;
       while (endDate <= target) {
         const intervalDate = new Date(endDate);
-
         if (
           intervalDate.getFullYear() === target.getFullYear() &&
           intervalDate.getMonth() === target.getMonth() &&
           intervalDate.getDate() === target.getDate()
         ) {
-          console.log("intervalDate", intervalDate);
           return false;
         }
         endDate.setDate(endDate.getDate() + 6 + n);
