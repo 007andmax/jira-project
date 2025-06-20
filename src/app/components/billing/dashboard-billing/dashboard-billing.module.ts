@@ -14,6 +14,7 @@ import { MultiDatepickerDashboardComponent } from './multi-datepicker-dashboard/
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardBillingRoutingModule } from './dashboard-billing-routing.module';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -34,7 +35,8 @@ import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside
         DashboardStatsModule,
         NgbModule,
         DashboardBillingRoutingModule,
-        ClickOutsideModule
+        ClickOutsideModule,
+        NgxChartsModule
 
     ],
 

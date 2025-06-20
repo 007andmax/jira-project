@@ -14,7 +14,6 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
   isReady: boolean = false;
   type: string = "WEEKLY";
   @ViewChild('nvd3', { static: true }) nvd3: any;
-  options;
   data;
   dashboard: DashboardTickets;
   listType: Array<CompanySetting> = [
@@ -28,66 +27,11 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
 
   ngOnInit() {
     this.listType[1].selected = true;
-    let currentDate = new Date();
-    this.options = {
-      chart: {
-        type: 'lineChart',
-        height: 300,
-        duration: 1000,
-        margin: {
-          top: 20,
-          right: 20,
-          bottom: 40,
-          left: 55
-        },
-        x: (d) => d.x,
-        y: (d) => d.y,
-        useInteractiveGuideline: true,
-        showXAxis: true,
-        xAxis: {
-          axisLabel: '',
-          tickFormat: (d) => {
-            if (d >= this.dashboard.chartData.length) return "";
-            if (this.type === "MONTHLY") {
-              if (currentDate.getFullYear() === new Date(this.dashboard.chartData[d].date).getFullYear()) {
-                return moment(this.dashboard.chartData[d].date).format('MMM');
-              } else {
-                return moment(this.dashboard.chartData[d].date).format('MMM YYYY');
-              }
-            }
-            if (this.type === "WEEKLY" || this.type === "DAILY") return moment(this.dashboard.chartData[d].date).format('DD MMM');
-          },
-          showMaxMin: false,
-          staggerLabels: false,
-          axisLabelDistance: 0,
-          ticks: 10,
-        },
-        yAxis: {
-          axisLabel: '',
-          axisLabelDistance: -10
-        }
-      },
-      legend: {
-        css: {
-          'text-align': 'left',
-          'margin': '10px 13px 0px 7px',
-          className: "test-class-tamara"
-        }
-      },
-      title: {
-        enable: false,
-      },
-      subtitle: {
-        enable: false,
-      },
-      caption: {
-        enable: false,
-      }
-    };
     this.getDashboard();
   }
   public updateDataChart() {
     this.data = this.getDataForChart();
+    console.log("data", this.data);
     //  if (this.nvd3.char) this.nvd3.chart.update();
     this.cd.detectChanges();
     this.isReady = true;

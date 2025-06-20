@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-declare var d3;
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-company-dash-ticket',
@@ -15,8 +15,7 @@ export class CompanyDashTicketComponent implements OnInit, OnDestroy {
   ticketFrequency: string = 'Monthly';
   lineData: any;
   sub: Subscription = new Subscription();
-  lineChartOptions: any;
-  lineChartColors: string[] = ["#0747a6", "#00ccff", '#2bc7c6', '#7C77CB'];
+  chartColors = { domain: ["#0747a6", "#00ccff", '#2bc7c6', '#7C77CB'] };
   showPreloader: boolean = true;
   public constructor(private companiesService: CompaniesService,
     public activateRoute: ActivatedRoute,
@@ -31,57 +30,11 @@ export class CompanyDashTicketComponent implements OnInit, OnDestroy {
       this.getTicketGraph(this.ticketFrequency);
     });
     this.sub.add(subscription);
-    this.lineChartOptions = {
-      chart: {
-        type: 'lineChart',
-        height: 250,
-        margin: {
-          top: 20,
-          right: 20,
-          bottom: 40,
-          left: 55
-        },
-        x: function (d) { return d[0]; },
-        y: function (d) { return d[1]; },
-
-        duration: 1000,
-        useInteractiveGuideline: true,
-        clipVoronoi: false,
-        color: (d: any, i: any) => {
-          return this.lineChartColors[i]
-        },
-        xAxis: {
-          axisLabel: '',
-          tickFormat: function (d) {
-            return d3.time.format('%e %b')(new Date(d))
-          },
-          showMaxMin: false,
-          staggerLabels: false,
-          axisLabelDistance: 0,
-          ticks: 10,
-        },
-
-        yAxis: {
-          axisLabel: '',
-          tickFormat: function (d) {
-            return d3.format(',.1')(d);
-          },
-          showMaxMin: false,
-          axisLabelDistance: -10
-        },
-        showLegend: true,
-        legend: {
-          margin: {
-            top: 5,
-            right: 60,
-            bottom: 10,
-            left: 0
-          }
-        },
-        interpolate: 'cardinal'
-      }
-    }
     this.lineData = [];
+  }
+  xAxisTickFormatting = (d) => {
+    console.log("d", d);
+    return moment(d).format('DD MMM');
   }
 
   getTicketGraph(frequency: string) {
@@ -92,19 +45,20 @@ export class CompanyDashTicketComponent implements OnInit, OnDestroy {
       let countOfNewTickets = [];
       let filter_list = (data.length > 30) ? data.splice(data.length - 30, data.length) : data;
       filter_list.forEach(element => {
-        countOfCompletedTickets.push([new Date(element.date), element.countOfCompletedTickets === undefined ? 0 : element.countOfCompletedTickets]);
-        countOfNewTickets.push([new Date(element.date), element.countOfNewTickets === undefined ? 0 : element.countOfNewTickets]);
+        countOfCompletedTickets.push({ name: element.date, value: element.countOfCompletedTickets === undefined ? 0 : element.countOfCompletedTickets });
+        countOfNewTickets.push({ name: element.date, value: element.countOfNewTickets === undefined ? 0 : element.countOfNewTickets });
       });
       this.lineData = [
         {
-          key: "Completed",
-          values: countOfCompletedTickets
+          name: "Completed",
+          series: countOfCompletedTickets
         },
         {
-          key: "Created Tickets",
-          values: countOfNewTickets
+          name: "Created Tickets",
+          series: countOfNewTickets
         }
       ];
+      console.log("lineData", this.lineData);
       this.showPreloader = false;
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();

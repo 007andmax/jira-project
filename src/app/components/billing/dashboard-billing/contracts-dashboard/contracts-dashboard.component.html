@@ -4,8 +4,20 @@
     </div>
 
 
+
     <div class="contract-dashboard-chart-card__chart-content">
-        <!-- <nvd3 [options]="chartOptions" [data]="data" #nvd3></nvd3> -->
+        <ngx-charts-pie-chart
+            #nvd3
+            [view]="[210,210]"
+            [scheme]="chartColors"
+            [results]="data"
+            [legend]="false"
+            [labels]="false"
+            [doughnut]="true"
+            [arcWidth]="0.2"
+        >
+        </ngx-charts-pie-chart>
+
 
 
         <div class="contract-dashboard-chart-card__chart-info">
@@ -18,7 +30,9 @@
     </div>
 
 
+
     <div class="contract-dashboard-chart-card__footer">
+
 
 
         <div class="contract-dashboard-chart-card__footer-item">
@@ -36,8 +50,10 @@
                 </div>
 
 
+
             </div>
         </div>
+
 
 
         <div class="contract-dashboard-chart-card__footer-item">
@@ -57,6 +73,7 @@
         </div>
 
 
+
         <div class="contract-dashboard-chart-card__footer-item">
             <div class="contract-dashboard-chart-card__footer-item-title-block">
                 <div
@@ -74,6 +91,7 @@
         </div>
 
 
+
         <div class="contract-dashboard-chart-card__footer-item">
             <div class="contract-dashboard-chart-card__footer-item-title-block">
                 <div
@@ -89,6 +107,7 @@
                 </div>
             </div>
         </div>
+
 
 
     </div>

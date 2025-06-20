@@ -43,7 +43,7 @@
                         class="body-m__sb qt-color-gray-900"
                         *ngIf="onInit"
                     >
-                        {{ currentCompany.name }}
+                        {{ currentCompany ? currentCompany.name : '' }}
                     </div>
                 </div>
                 <div
@@ -53,10 +53,16 @@
                     <div class="commissions__header clearfix">
                         <div class="commissions__header--item canvas-chart">
                             <div class="customer-ticket__report--summary-title">Sales by customer</div>
-                            <!-- <nvd3
-                                [options]="chartOptions"
-                                [data]="byCustomerChartData"
-                            ></nvd3> -->
+                            <ngx-charts-pie-chart
+                                [view]="[222,222]"
+                                [scheme]="chartColors"
+                                [results]="byCustomerChartData"
+                                [legend]="false"
+                                [labels]="false"
+                                [doughnut]="true"
+                                [arcWidth]="0.5"
+                            >
+                            </ngx-charts-pie-chart>
                         </div>
                         <div class="commissions__header--item commissions__header--item-sales-by-cutomer">
                             <ng-template
@@ -68,16 +74,22 @@
                             >
                                 <p [ngClass]="'service-color-' + i">
                                     {{ time.name }}
-                                    <span>${{ time.time  }}</span>
+                                    <span>${{ time.value  }}</span>
                                 </p>
                             </ng-template>
                         </div>
                         <div class="commissions__header--item canvas-chart no-value">
                             <div class="customer-ticket__report--summary-title">Top Sales Category</div>
-                            <!-- <nvd3
-                                [options]="chartOptionsToggler"
-                                [data]="byCategoriesChartData"
-                            ></nvd3> -->
+                            <ngx-charts-pie-chart
+                                [view]="[222,222]"
+                                [scheme]="chartColors"
+                                [results]="byCategoriesChartData"
+                                [legend]="false"
+                                [labels]="false"
+                                [doughnut]="true"
+                                [arcWidth]="0.5"
+                            >
+                            </ngx-charts-pie-chart>
                         </div>
                         <div class="commissions__header--item">
                             <ng-template
@@ -92,7 +104,7 @@
                                     *ngIf="showCategoriesData"
                                 >
                                     {{ time.name }}
-                                    <span>${{ time.time | toFixed : 2 }}</span>
+                                    <span>${{ time.value | toFixed : 2 }}</span>
                                 </p>
                             </ng-template>
                         </div>

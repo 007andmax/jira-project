@@ -9,9 +9,6 @@ import * as moment from "moment";
   styleUrls: ['./common-commissions-report.component.css']
 })
 export class CommonCommissionsReportComponent implements OnInit {
-  chartOptions;
-  chartNoDataAvailable;
-  chartOptionsToggler;
   byCustomerChartData;
   byCategoriesChartData;
   loadingInProgress: boolean = false;
@@ -19,49 +16,16 @@ export class CommonCommissionsReportComponent implements OnInit {
   showCategoriesData = true;
   currentCompany;
   selectedCompany;
-  chartColors = ["#16a4fa", "#ffb937", "#ff6e61", "#2ec866", "#f9f916", "#ff1ed2", "#1bf4fc", "#7d1a9e", '#7f1313'];
+  chartColors = {
+    domain: ["#16a4fa", "#ffb937", "#ff6e61", "#2ec866", "#f9f916", "#ff1ed2", "#1bf4fc", "#7d1a9e", '#7f1313']
+  };
   commonCommissionsReport: CommonCommissionsReport = new CommonCommissionsReport();
   constructor(public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
-    this.chartOptions = {
-      chart: {
-        type: 'pieChart',
-        height: 350,
-        donut: true,
-        x: (d) => { return d.name; },
-        y: (d) => { return d.time; },
-        showLabels: false,
-        color: (d, i) => {
-          return this.chartColors[i]
-        },
-        pie: {
-          startAngle: (d) => { return d.startAngle },
-          endAngle: (d) => { return d.endAngle }
-        },
-        showLegend: false,
-        duration: 500,
-        legend: {
-          margin: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
-          }
-        }
-      }
-    }
-    this.chartNoDataAvailable = {
-      chart: Object.assign({}, this.chartOptions.chart)
-    };
 
-    this.chartNoDataAvailable.chart.tooltip = {
-      contentGenerator: function () {
-        return '<table><tr><td>No data available</td></tr></table>';
-      },
-    };
   }
   public getReport(data) {
     this.showCategoriesData = true;
@@ -70,23 +34,18 @@ export class CommonCommissionsReportComponent implements OnInit {
     let categories = this.commonCommissionsReport.categorySalesValue;
     if (!categories || !Object.keys(categories).length) {
       categories = { 'No data available': '1' };
-
       this.showCategoriesData = false;
-      this.chartOptionsToggler = this.chartNoDataAvailable;
-    } else {
-      this.chartOptionsToggler = this.chartOptions;
-
     }
     this.byCategoriesChartData = Object.keys(categories)
       .map((key, i) => {
         return {
           name: key,
-          time: categories[key],
+          value: categories[key],
           color: this.chartColors[i],
         };
       })
       .sort((a, b) => {
-        return +b.time - +a.time;
+        return +b.value - +a.value;
       })
       .slice(0, 4);
     this.byCustomerChartData = this.commonCommissionsReport.lines
@@ -97,10 +56,12 @@ export class CommonCommissionsReportComponent implements OnInit {
       .map((el, i) => {
         return {
           name: el.companyName,
-          time: el.totalSum,
+          value: el.totalSum,
           color: this.chartColors[i],
         };
       });
+    console.log("this.byCustomerChartData", this.byCustomerChartData);
+    console.log("this.byCategoriesChartData", this.byCategoriesChartData);
     //  this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
     this.onInit = true;
   }

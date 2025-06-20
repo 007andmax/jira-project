@@ -218,6 +218,6 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sericeDatePicker.clearSubscriptions();
+    if (this.sericeDatePicker) this.sericeDatePicker.clearSubscriptions();
   }
 }

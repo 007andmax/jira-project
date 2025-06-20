@@ -22,6 +22,7 @@ import { PreparePhoneModule } from 'src/app/pipe/prepare-phone/prepare-phone.mod
 import { CompanyDashboardRoutingModule } from './company-dashboard-routing.module';
 import { PreviewPhoneMaskModule } from '../shared/preview-phone-mask/preview-phone-mask.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -52,7 +53,8 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
         PhoneModule,
         PreparePhoneModule,
         PreviewPhoneMaskModule,
-        TextAreaModule
+        TextAreaModule,
+        NgxChartsModule
     ],
 
 

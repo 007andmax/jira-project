@@ -47,9 +47,20 @@
     >
         <div class="loading pengind-loading"></div>
     </div>
-    <!-- <nvd3
+    <ngx-charts-line-chart
+        #nvd3
+        [legend]="true"
+        [legendPosition]="'below'"
+        [view]="[710,250]"
         *ngIf="!showPreloader"
-        [options]="lineChartOptions"
-        [data]="lineData"
-    ></nvd3> -->
+        [scheme]="chartColors"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisTickFormatting]="xAxisTickFormatting"
+        [trimXAxisTicks]="false"
+        [xAxis]="true"
+        [yAxis]="true"
+        [results]="lineData"
+    >
+    </ngx-charts-line-chart>
 </div>

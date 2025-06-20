@@ -287,8 +287,8 @@ export class UsersAsideEditComponent implements OnInit, OnDestroy {
     this.validate = new UserValidate();
     this.selectedUserTitle = null;
     this.selectedUserType = null;
-    this.jobTitleDp.clearWithOutChanges();
-    this.jobTypeDp.clearWithOutChanges();
+    if (this.jobTitleDp) this.jobTitleDp.clearWithOutChanges();
+    if (this.jobTypeDp) this.jobTypeDp.clearWithOutChanges();
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
