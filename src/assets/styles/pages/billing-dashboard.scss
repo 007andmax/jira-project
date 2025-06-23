@@ -398,7 +398,8 @@
       overflow: visible;
     }
     .chart-legend {
-      transform: translate(calc(50% - 110px), -339px);
+      transform: none !important;
+      position: absolute;
     }
     .chart-legend .legend-title {
       display: none;
@@ -424,6 +425,24 @@
       fill: transparent
     }
   }
+}
+app-dashboard-sales-analytics {
+  .chart-legend {
+    top: -41px;
+      left: calc(50% - 80px);
+    >div {
+      width: 160px !important;
+    }
+  }
+}
+app-tickets-analytics-widget {
+  .chart-legend {
+      top: -35px !important;
+      left: calc(50% - 140px) !important;
+      > div {
+        width: 280px !important;
+      }
+    }
 }
 
 @include media-breakpoint-down($md) {
