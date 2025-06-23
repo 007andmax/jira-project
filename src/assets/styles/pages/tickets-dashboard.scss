@@ -176,6 +176,8 @@
     min-width: 80px;
     display: flex;
     justify-content: flex-end;
+    position: relative;
+    z-index: 999;
   }
 
   .tech-tickets {
