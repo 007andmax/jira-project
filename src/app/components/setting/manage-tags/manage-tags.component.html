@@ -101,7 +101,7 @@
                                             appClickOtside
                                             [init]="company.isInitEdit"
                                             [ngClass]="['edit-tag-container-' + i,company.selected ? '--selected' : '']"
-                                            [class]="'.edit-tag-container-' + i"
+                                            [classParent]="'.edit-tag-container-' + i"
                                             (onOutSide)="onEditTag(company)"
                                         >
                                             <div class="tab-pane__table-cell manage-tags-table__custom-tags">
@@ -258,7 +258,7 @@
                                     appClickOtside
                                     [init]="ticket.isInitEdit"
                                     [ngClass]="['edit-tag-container-' + i,ticket.selected ? '--selected' : '']"
-                                    [class]="'.edit-tag-container-' + i"
+                                    [classParent]="'.edit-tag-container-' + i"
                                     (onOutSide)="onEditTag(ticket)"
                                 >
                                     <div class="tab-pane__table-cell manage-tags-table__custom-tags">

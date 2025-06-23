@@ -31,7 +31,7 @@
                 appClickOtside
                 [init]="device.isInitEdit"
                 [ngClass]="['edit-device-container-' + i,device.selected ? '--selected' : '']"
-                [class]="'.edit-device-container-' + i"
+                [classParent]="'.edit-device-container-' + i"
                 (onOutSide)="onEditDeviceType(device,$event)"
             >
                 <div
@@ -76,6 +76,7 @@
         </div>
     </div>
 </div>
+
 
 
 

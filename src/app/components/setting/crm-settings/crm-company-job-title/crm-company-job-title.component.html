@@ -39,7 +39,7 @@
                 appClickOtside
                 [init]="item.isInitEdit"
                 [ngClass]="'edit-crm-container-' + i"
-                [class]="'.edit-crm-container-' + i"
+                [classParent]="'.edit-crm-container-' + i"
                 (onOutSide)="onEditJobTitle(item,$event)"
             >
                 <div class="tab-pane__table-cell tab-pane__table-checkboxes">

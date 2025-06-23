@@ -24,7 +24,7 @@
                 appClickOtside
                 #addPriorityBtn="click"
                 [init]="true"
-                [class]="'.add-priority-container'"
+                [classParent]="'.add-priority-container'"
                 (onOutSide)="onAddTicketPriority()"
             >
                 <div class="tab-pane__table-cell tab-pane__table-checkboxes">
@@ -126,7 +126,7 @@
                 appClickOtside
                 [init]="item.isInitEdit"
                 [ngClass]="['edit-priority-container-' + i,item.selected ? '--selected' : '']"
-                [class]="'.edit-priority-container-' + i"
+                [classParent]="'.edit-priority-container-' + i"
                 (onOutSide)="onEditTicketPriority(item)"
             >
                 <div class="tab-pane__table-cell tab-pane__table-checkboxes">

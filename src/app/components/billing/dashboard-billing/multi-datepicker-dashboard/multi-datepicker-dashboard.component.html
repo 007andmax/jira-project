@@ -26,7 +26,7 @@
     >
         <ngb-datepicker
             #dp
-            (select)="onDateSelection($event)"
+            (dateSelect)="onDateSelection($event)"
             [displayMonths]="2"
             [dayTemplate]="t"
             [outsideDays]="outsideDays"
@@ -75,6 +75,7 @@
                     year to date
                 </button>
             </div>
+
 
 
 

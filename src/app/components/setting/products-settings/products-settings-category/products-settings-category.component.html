@@ -51,7 +51,7 @@
                     appClickOtside
                     [init]="item.isInitEdit"
                     [ngClass]="'edit-category-container-' + i"
-                    [class]="'.edit-category-container-' + i"
+                    [classParent]="'.edit-category-container-' + i"
                     (onOutSide)="onEditCategory(item)"
                 >
                     <div

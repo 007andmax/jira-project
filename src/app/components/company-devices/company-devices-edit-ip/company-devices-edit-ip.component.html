@@ -3,7 +3,7 @@
     [ngClass]="{'qt-mb-12' : !validate.getIpAdress()}"
     [init]="isInitEdit"
     appClickOtside
-    [class]="'.edit-ip-container'"
+    [classParent]="'.edit-ip-container'"
     (onOutSide)="onCheckValue()"
 >
     <input

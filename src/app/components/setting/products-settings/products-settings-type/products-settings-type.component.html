@@ -30,7 +30,7 @@
                 appClickOtside
                 [init]="item.isInitEdit"
                 [ngClass]="'edit-crm-container-' + i"
-                [class]="'.edit-crm-container-' + i"
+                [classParent]="'.edit-crm-container-' + i"
                 (onOutSide)="onEditType(item,$event)"
             >
                 <div

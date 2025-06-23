@@ -1,7 +1,7 @@
 <div
-    class="date-picker"
+    class="date-picker multi-datepicker-container"
     appClickOtside
-    [class]="'.date-picker'"
+    [classParent]="'.multi-datepicker-container'"
     [init]="true"
     (onOutSide)="hideDatePicker()"
 >
@@ -30,12 +30,12 @@
         class="icn-16 qt-icon icon__calendar pointer"
     ></i>
     <div
-        class="dropdown-menu show"
-        *ngIf="showDatePicker"
+        class="dropdown-menu"
+        [ngClass]="{'show': showDatePicker}"
     >
         <ngb-datepicker
             #dp
-            (select)="onDateSelection($event)"
+            (dateSelect)="onDateSelection($event)"
             [displayMonths]="2"
             [dayTemplate]="t"
             [outsideDays]="outsideDays"

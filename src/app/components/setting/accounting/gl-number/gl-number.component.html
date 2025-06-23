@@ -20,7 +20,7 @@
                     appClickOtside
                     [init]="gl.isInitEdit"
                     [ngClass]="['edit-gl-container-' + i]"
-                    [class]="'.edit-gl-container-' + i"
+                    [classParent]="'.edit-gl-container-' + i"
                     (onOutSide)="onEditGl(gl)"
                 >
                     <div

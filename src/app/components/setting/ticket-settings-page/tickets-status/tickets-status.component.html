@@ -37,7 +37,7 @@
                 appClickOtside
                 #addStatusBtn="click"
                 [init]="true"
-                [class]="'.add-ticket-container'"
+                [classParent]="'.add-ticket-container'"
                 (onOutSide)="onAddTicketStatus()"
             >
                 <div class="tab-pane__table-cell tab-pane__table-checkboxes">
@@ -137,7 +137,7 @@
                 appClickOtside
                 [init]="item.isInitEdit"
                 [ngClass]="['edit-ticket-container-' + i,item.selected ? '--selected' : '']"
-                [class]="'.edit-ticket-container-' + i"
+                [classParent]="'.edit-ticket-container-' + i"
                 (onOutSide)="onEditTicketStatus(item)"
             >
                 <div

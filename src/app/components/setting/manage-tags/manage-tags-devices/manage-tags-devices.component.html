@@ -39,7 +39,7 @@
                 appClickOtside
                 [init]="tag.isInitEdit"
                 [ngClass]="['edit-tag-container-' + i,tag.selected ? '--selected' : '']"
-                [class]="'.edit-tag-container-' + i"
+                [classParent]="'.edit-tag-container-' + i"
                 (onOutSide)="onEditTag(tag)"
             >
                 <div class="tab-pane__table-cell manage-tags-table__custom-tags">
