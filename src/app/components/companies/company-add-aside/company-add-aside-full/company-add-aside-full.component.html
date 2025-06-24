@@ -553,6 +553,50 @@
             </app-drop-down>
         </div>
     </div>
+    <ng-template
+        ngFor
+        let-item
+        let-i="index"
+        [ngForOf]="company.thirdPartyApps"
+    >
+        <div class="qt-inputs-row">
+            <div class="qt-input-block qt-f50">
+                <div class="qt-df qt-jc-sb">
+                    <div class="qt-input-block__label">Third-party app</div>
+                    <span
+                        class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info"
+                        (click)="addThirdParty()"
+                        *ngIf="i == 0"
+                    >
+                        + Add third party app
+                    </span>
+                    <span
+                        class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info"
+                        (click)="removeThirdParty(i)"
+                        *ngIf="i > 0"
+                    >
+                        Delete
+                    </span>
+                </div>
+                <input
+                    type="text"
+                    [(ngModel)]="item.appName"
+                    placeholder="Enter label"
+                    maxlength="100"
+                >
+            </div>
+            <div class="qt-input-block qt-f50">
+                <div class="qt-df qt-jc-sb">
+                    <div class="qt-input-block__label">Application ID</div>
+                </div>
+                <input
+                    type="text"
+                    [(ngModel)]="item.appId"
+                    placeholder="Enter id"
+                >
+            </div>
+        </div>
+    </ng-template>
     <div class="qt-inputs-row">
         <div class="qt-inputs-block">
             <div class="qt-input-block__label">Tags</div>
