@@ -59,7 +59,7 @@ export class TicketSettingsComponent implements OnInit, OnDestroy {
           Validators.maxLength(7)
         ])
       ],
-      outliersTime: ['', Validators.compose([Validators.required])],
+      outliersTime: ['', Validators.compose([Validators.required, Validators.min(1)])],
       timepickerType: ['DURATION_PICKER'],
       interval: ['FIVE_MINUTES'],
     });

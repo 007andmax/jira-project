@@ -9,30 +9,30 @@ import { saveAs } from 'file-saver';
 })
 
 export class RemoteControlService {
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     getViewer() {
         return this.http.get<any>(CONFIG.getViewerURL, {
-          responseType: 'blob' as 'json', observe: 'response', reportProgress: true
+            responseType: 'blob' as 'json', observe: 'response', reportProgress: true
         })
-        .pipe(map(data => {
-            const blob = new Blob([data.body], { type: 'application/octet-stream' });
-            const head = data.headers.get('content-disposition').split('=');
-            saveAs(blob, head[1]);
-        }))
+            .pipe(map(data => {
+                const blob = new Blob([data.body], { type: 'application/octet-stream' });
+                const head = data.headers.get('content-disposition').split('=');
+                saveAs(blob, head[1]);
+            }))
     }
 
     createConnection(data: any) {
         return this.http.get<any>(CONFIG.createConnectionURL + 'deviceId=' + data.deviceId + '&connectionType=' + data.type + '&companyId=' + data.companyId)
-        .pipe(map(data => {
-            return data;
-        }))
+            .pipe(map(data => {
+                return data;
+            }))
     }
 
     getConstant() {
         return this.http.get<any>(CONFIG.getConstant)
-        .pipe(map(data => {
-            return data;
-        }))
+            .pipe(map(data => {
+                return data;
+            }))
     }
 }

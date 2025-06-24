@@ -33,7 +33,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
   selectedTaxes = [];
   selectedType = new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE_USER', null);
   validate: ContractsUserDeviceValidate = new ContractsUserDeviceValidate();
-  @ViewChildren("deviceService") deviceServices: QueryList<ContractsAsideUserDeviceServiceComponent>;
+  @ViewChildren("deviceService", { emitDistinctChangesOnly: false }) deviceServices: QueryList<ContractsAsideUserDeviceServiceComponent>;
   @Input() contractsUserDevice: ServiceAgreement = new ServiceAgreement();
   @Output() onClose = new EventEmitter<any>();
   @Output() onInitRequestForEdit = new EventEmitter<any>();

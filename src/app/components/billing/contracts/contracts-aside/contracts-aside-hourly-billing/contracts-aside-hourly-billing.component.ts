@@ -26,7 +26,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
   @ViewChild('topContract', { static: true }) topContract: ContractsAsideTopComponent;
-  @ViewChildren("serviceItem") serviceItems: QueryList<ContractsAsideHourlyBillingDefaultServiceComponent>;
+  @ViewChildren("serviceItem", { emitDistinctChangesOnly: false }) serviceItems: QueryList<ContractsAsideHourlyBillingDefaultServiceComponent>;
   validate: ContractsHourlyValidate = new ContractsHourlyValidate();
   defaultServices: Array<DefaultServicesHourlyContract> = [];
   selectedType = new ContractsFilterType('Hourly', 'HOURLY', null);

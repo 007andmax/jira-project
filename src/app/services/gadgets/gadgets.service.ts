@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { environment } from "../../../environments/environment";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";;
 
 /**
  * Gadgets service to work with api
@@ -24,7 +24,7 @@ export class GadgetsService {
   /**
    * Get devices from company
    */
-  public getCompanyDevices(){
+  public getCompanyDevices() {
     return this.http.get(this.apiUrl + `gadgets`);
   }
 

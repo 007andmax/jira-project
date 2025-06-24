@@ -8,12 +8,12 @@ import { CONFIG } from '../config/app-config';
 })
 
 export class DeviceServices {
-    constructor (private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
-    getAllServicesList () {
+    getAllServicesList() {
         return this.http.get<any>(CONFIG.getAllServicesListURL)
-        .pipe(map(data => {
-            return data;
-        }))
+            .pipe(map(data => {
+                return data;
+            }))
     }
 }

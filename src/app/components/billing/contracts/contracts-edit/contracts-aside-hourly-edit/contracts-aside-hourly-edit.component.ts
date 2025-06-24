@@ -26,7 +26,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   @Output() onClose = new EventEmitter<any>();
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
   @ViewChild('endDateDP', { static: true }) endDateDP: DatePickerComponent;
-  @ViewChildren("serviceItem") serviceItems: QueryList<ContractsAsideHourlyBillingDefaultServiceComponent>;
+  @ViewChildren("serviceItem", { emitDistinctChangesOnly: false }) serviceItems: QueryList<ContractsAsideHourlyBillingDefaultServiceComponent>;
   formatDate: string = FORMAT_DATE_2;
   showAddService: boolean = false;
   selectAllServices: boolean = true;

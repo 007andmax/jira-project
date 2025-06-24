@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ContractsService } from './contracts.service';
 import { ToastrModule } from 'ngx-toastr';
 import { ContractItem } from 'src/app/components/billing/contracts/class/contract-item';
 import { ServiceAgreement } from 'src/app/components/billing/contracts/class/service-agreement';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 // Describe the test suite
 describe('ContractsService', () => {

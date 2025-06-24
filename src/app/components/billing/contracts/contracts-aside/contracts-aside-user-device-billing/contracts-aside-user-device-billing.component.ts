@@ -36,7 +36,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
   @ViewChild('startDateDP', { static: true }) startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP', { static: true }) reviewDateDP: DatePickerComponent;
   @ViewChild('topContract', { static: true }) topContract: ContractsAsideTopComponent;
-  @ViewChildren("deviceService") deviceServices: QueryList<ContractsAsideUserDeviceServiceComponent>;
+  @ViewChildren("deviceService", { emitDistinctChangesOnly: false }) deviceServices: QueryList<ContractsAsideUserDeviceServiceComponent>;
   @Output() onClose = new EventEmitter<any>();
   selectedType = new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE_USER', null);
   contractsUserDevice: ContractsUserDevice = new ContractsUserDevice();
