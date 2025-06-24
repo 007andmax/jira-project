@@ -56,7 +56,8 @@
         </div>
         <ul
             ngbNav
-            (tabChange)="setTab($event)"
+            #nav="ngbNav"
+            (navChange)="setTab($event)"
             class="nav-tabs"
             [(activeId)]="activeTab"
             [ngClass]="{'clear-padding':activeTab === 'gLNumbers'}"
@@ -117,5 +118,11 @@
                 </ng-template>
             </li>
         </ul>
+        <div
+            [ngbNavOutlet]="nav"
+            class="mt-2"
+        ></div>
+
+
     </div>
 </div>

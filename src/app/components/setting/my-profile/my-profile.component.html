@@ -16,9 +16,10 @@
 </div>
 <ul
     ngbNav
-    (tabChange)="setTab($event)"
-    class="nav-tabs"
+    #nav="ngbNav"
     [(activeId)]="activeTab"
+    class="nav-tabs"
+    (navChange)="setTab($event)"
 >
     <!-- Profile -->
     <li [ngbNavItem]="'profile'">
@@ -27,14 +28,6 @@
             <app-profile #profile></app-profile>
         </ng-template>
     </li>
-
-
-
-
-
-
-
-
     <li [ngbNavItem]="'account'">
         <a ngbNavLink>Account</a>
         <ng-template ngbNavContent>
@@ -83,3 +76,7 @@
         </ng-template>
     </li>
 </ul>
+<div
+    [ngbNavOutlet]="nav"
+    class="mt-2"
+></div>
