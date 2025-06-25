@@ -28,43 +28,53 @@
                 </a>
             </div>
         </div>
-        <ngb-tabset
-            #tabset="ngbTabset"
+        <ul
+            ngbNav
+            #nav="ngbNav"
             (tabChange)="setTab($event)"
-            [destroyOnHide]="true"
+            class="nav-tabs"
+            [(activeId)]="activeTab"
         >
-            <ngb-tab
-                title="Company Industry"
-                id="companyIndustry"
+            <li
+                [ngbNavItem]="'companyIndustry'"
+                [destroyOnHide]="true"
             >
-                <ng-template ngbTabContent>
+                <a ngbNavLink>Company Industry</a>
+                <ng-template ngbNavContent>
                     <crm-company-industry #industry></crm-company-industry>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                title="Company Service Type"
-                id="serviceType"
+            </li>
+            <li
+                [ngbNavItem]="'serviceType'"
+                [destroyOnHide]="true"
             >
-                <ng-template ngbTabContent>
+                <a ngbNavLink>Company Service Type</a>
+                <ng-template ngbNavContent>
                     <crm-company-service-type #serviceType></crm-company-service-type>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                title="User Job Title"
-                id="userJobTitle"
+            </li>
+            <li
+                [ngbNavItem]="'userJobTitle'"
+                [destroyOnHide]="true"
             >
-                <ng-template ngbTabContent>
+                <a ngbNavLink>User Job Title</a>
+                <ng-template ngbNavContent>
                     <crm-company-job-title #jobTitle></crm-company-job-title>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                title="User Job Type"
-                id="jobType"
+            </li>
+            <li
+                [ngbNavItem]="'jobType'"
+                [destroyOnHide]="true"
             >
-                <ng-template ngbTabContent>
+                <a ngbNavLink>User Job Type</a>
+                <ng-template ngbNavContent>
                     <crm-company-job-type #jobType></crm-company-job-type>
                 </ng-template>
-            </ngb-tab>
-        </ngb-tabset>
+            </li>
+        </ul>
+        <div
+            [ngbNavOutlet]="nav"
+            class="mt-2"
+        ></div>
     </div>
 </div>

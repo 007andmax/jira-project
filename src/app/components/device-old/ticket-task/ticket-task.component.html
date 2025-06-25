@@ -6,7 +6,7 @@
             class="panel-bar"
             (click)="toggleTicket();"
         >
-          <span class="qt-icon icon__panel-open qt-sz-16 panel-bar__image"></span>
+            <span class="qt-icon icon__panel-open qt-sz-16 panel-bar__image"></span>
         </a>
         <div>
             <a
@@ -14,11 +14,16 @@
                 class="add-btn"
                 (click)="onAddTicket();"
             >
-              <span class="qt-icon icon__add qt-sz-16 qt-icon__white qt-dib"></span>
+                <span class="qt-icon icon__add qt-sz-16 qt-icon__white qt-dib"></span>
             </a>
-            <ngb-tabset #t="ngbTabset">
-                <ngb-tab title="Ticket">
-                    <ng-template ngbTabContent>
+            <ul
+                ngbNav
+                #nav="ngbNav"
+                class="nav-tabs"
+            >
+                <li [ngbNavItem]="'tab1'">
+                    <a ngbNavLink>Ticket</a>
+                    <ng-template ngbNavContent>
                         <div class="cmn-tbs-content device-tickets">
                             <ul class="list-unstyled">
                                 <li
@@ -58,8 +63,12 @@
                             </ul>
                         </div>
                     </ng-template>
-                </ngb-tab>
-            </ngb-tabset>
+                </li>
+            </ul>
+            <div
+                [ngbNavOutlet]="nav"
+                class="mt-2"
+            ></div>
         </div>
     </aside>
 </div>

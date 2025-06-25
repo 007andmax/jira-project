@@ -1,3 +1,4 @@
+import '@angular/localize/init'; // Import Angular localization support
 /**
  * This file includes polyfills needed by Angular and is loaded before the ng1.
  * You can add your own extra polyfills to this file.

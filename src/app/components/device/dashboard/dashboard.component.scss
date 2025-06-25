@@ -927,7 +927,7 @@
     width: 130px;
 }
 
-ngb-tabset {
+.nav-tabs {
     position: absolute !important;
 }
 
@@ -958,7 +958,7 @@ ngb-tabset {
     height: 450px;
 }
 
-::ng-deep ngb-tabset .tab-content {
+::ng-deep .nav-tabs .tab-content {
     padding: 0px !important;
 }
 

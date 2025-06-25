@@ -47,7 +47,7 @@
                 appClickOtside
                 [init]="model.isInitEdit"
                 [ngClass]="['edit-model-container-' + i,model.selected ? '--selected' : '']"
-                [class]="'.edit-model-container-' + i"
+                [classParent]="'.edit-model-container-' + i"
                 (onOutSide)="onEditModel(model,$event)"
             >
                 <div class="tab-pane__table-cell crm-settings-company-industry-table__count">

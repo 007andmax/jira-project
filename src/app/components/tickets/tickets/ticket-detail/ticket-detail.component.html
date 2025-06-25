@@ -47,7 +47,7 @@
                             [hidden]="modeSubject === 'view'"
                             appClickOtside
                             [init]="modeSubject === 'edit' && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
-                            [class]="'.ticket-detail-page-title'"
+                            [classParent]="'.ticket-detail-page-title'"
                             (onOutSide)="toggleSubject()"
                         >
                             <input
@@ -140,7 +140,7 @@
                                     class="ticket-detail-page__edit"
                                     appClickOtside
                                     [init]="modeDescription === 'edit' && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
-                                    [class]="'.ticket-detail-page__edit-wrap'"
+                                    [classParent]="'.ticket-detail-page__edit-wrap'"
                                     (onOutSide)="toggleNote()"
                                 >
                                     <div

@@ -45,7 +45,7 @@
                         appClickOtside
                         [init]="manufacture.isInitEdit"
                         [ngClass]="['edit-manufacture-container-' + i,manufacture.selected ? '--selected' : '']"
-                        [class]="'.edit-manufacture-container-' + i"
+                        [classParent]="'.edit-manufacture-container-' + i"
                         (onOutSide)="onEditManufactur(manufacture,$event)"
                     >
                         <div

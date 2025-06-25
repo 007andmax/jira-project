@@ -48,6 +48,10 @@
 
 
 
+
+
+
+
                             <!-- <textarea>C:\Users\Sam\Desktop></textarea> -->
                         </div>
                         <div class="terminal-btn-row">
@@ -241,6 +245,10 @@
 
 
 
+
+
+
+
                                             </textarea>
                                         </div>
                                         <textarea
@@ -273,9 +281,14 @@
                         </form>
                     </div>
                 </div>
-                <ngb-tabset>
-                    <ngb-tab title="Command">
-                        <ng-template ngbTabContent>
+                <ul
+                    ngbNav
+                    #nav="ngbNav"
+                    class="nav-tabs"
+                >
+                    <li [ngbNavItem]="'tab1'">
+                        <a ngbNavLink>Command</a>
+                        <ng-template ngbNavContent>
                             <div class="cmn-tbs-content command">
                                 <ul class="list-unstyled">
                                     <li *ngFor="let cmd of commandList;let i = index">
@@ -362,9 +375,10 @@
                                 </ul>
                             </div>
                         </ng-template>
-                    </ngb-tab>
-                    <ngb-tab title="History">
-                        <ng-template ngbTabContent>
+                    </li>
+                    <li [ngbNavItem]="'tab2'">
+                        <a ngbNavLink>History</a>
+                        <ng-template ngbNavContent>
                             <div class="cmn-tbs-content history-cmd">
                                 <ul class="list-unstyled">
                                     <li *ngFor="let history of historyList">
@@ -384,8 +398,8 @@
                                         >
                                             <!-- <h5>ipconfig / all</h5> -->
                                             <!-- <span
-                      >Window IP Configuration Ethernet adapter Local Area
-                      Connection 2:</span -->
+                  >Window IP Configuration Ethernet adapter Local Area
+                  Connection 2:</span -->
                                             <span>{{sub}}</span>
                                             >
                                         </div>
@@ -393,8 +407,12 @@
                                 </ul>
                             </div>
                         </ng-template>
-                    </ngb-tab>
-                </ngb-tabset>
+                    </li>
+                </ul>
+                <div
+                    [ngbNavOutlet]="nav"
+                    class="mt-2"
+                ></div>
                 <a
                     href="javascript:;"
                     (click)="openRunScript();"
@@ -427,9 +445,18 @@
                         >
                     </a>
                 </div>
-                <ngb-tabset>
-                    <ngb-tab [title]="'My Scripts (' + myScriptList.length + ')'">
-                        <ng-template ngbTabContent>
+                <ul
+                    ngbNav
+                    #nav2="ngbNav"
+                    class="nav-tabs"
+                >
+                    <li [ngbNavItem]="'tab1'">
+                        <a
+                            ngbNavLink
+                            [textContent]="'My Scripts (' + myScriptList.length + ')'"
+                        >
+                        </a>
+                        <ng-template ngbNavContent>
                             <div class="cmn-tbs-content myScript">
                                 <form method="POST">
                                     <div class="f-row">
@@ -529,9 +556,14 @@
                                 </ul>
                             </div>
                         </ng-template>
-                    </ngb-tab>
-                    <ngb-tab [title]="'Shared Script Library (' + sharedScriptList.length + ')'">
-                        <ng-template ngbTabContent>
+                    </li>
+                    <li [ngbNavItem]="'tab2'">
+                        <a
+                            ngbNavLink
+                            [textContent]="'Shared Script Library (' + sharedScriptList.length + ')'"
+                        >
+                        </a>
+                        <ng-template ngbNavContent>
                             <div class="cmn-tbs-content script-library">
                                 <form method="POST">
                                     <div class="f-row">
@@ -626,47 +658,51 @@
                                     </li>
                                 </ul>
                                 <!-- <ul class="list-unstyled pagination" *ngIf="sharedScriptListFilter.length > 0">
-                <li class="next">
-                  <a href="javascript:;">
-                    <img
-                      src="/html/assets/img/device/prev-pag.svg"
-                      alt="prev"
-                      title="prev"
-                    />
-                  </a>
-                </li>
-                <li>
-                  <a href="javascript:;">1</a>
-                </li>
-                <li>
-                  <a href="javascript:;">2</a>
-                </li>
-                <li class="current">
-                  <a href="javascript:;">3</a>
-                </li>
-                <li>
-                  <a href="javascript:;">4</a>
-                </li>
-                <li>
-                  <a href="javascript:;">…</a>
-                </li>
-                <li>
-                  <a href="javascript:;">17</a>
-                </li>
-                <li class="prev">
-                  <a href="javascript:;">
-                    <img
-                      src="/html/assets/img/device/next-pag.svg"
-                      alt="next-pag"
-                      title="next-pag"
-                    />
-                  </a>
-                </li>
-              </ul> -->
+            <li class="next">
+              <a href="javascript:;">
+                <img
+                  src="/html/assets/img/device/prev-pag.svg"
+                  alt="prev"
+                  title="prev"
+                />
+              </a>
+            </li>
+            <li>
+              <a href="javascript:;">1</a>
+            </li>
+            <li>
+              <a href="javascript:;">2</a>
+            </li>
+            <li class="current">
+              <a href="javascript:;">3</a>
+            </li>
+            <li>
+              <a href="javascript:;">4</a>
+            </li>
+            <li>
+              <a href="javascript:;">…</a>
+            </li>
+            <li>
+              <a href="javascript:;">17</a>
+            </li>
+            <li class="prev">
+              <a href="javascript:;">
+                <img
+                  src="/html/assets/img/device/next-pag.svg"
+                  alt="next-pag"
+                  title="next-pag"
+                />
+              </a>
+            </li>
+          </ul> -->
                             </div>
                         </ng-template>
-                    </ngb-tab>
-                </ngb-tabset>
+                    </li>
+                </ul>
+                <div
+                    [ngbNavOutlet]="nav2"
+                    class="mt-2"
+                ></div>
             </div>
         </aside>
         <!-- Script Details Sidebar -->
@@ -852,6 +888,10 @@
 
 
 
+
+
+
+
                                         </textarea>
                                     </div>
                                     <textarea
@@ -904,6 +944,10 @@
                 </div>
             </div>
         </aside>
+
+
+
+
 
 
 
@@ -1044,7 +1088,15 @@
 
 
 
+
+
+
+
                 <div class="confirm-btn">
+
+
+
+
 
 
 
