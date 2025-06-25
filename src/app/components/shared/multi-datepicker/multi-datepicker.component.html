@@ -1,7 +1,7 @@
 <div
     class="date-picker"
     appClickOtside
-    [class]="'.date-picker'"
+    [classParent]="'.date-picker'"
     [init]="true"
     (onOutSide)="hideDatePicker()"
 >
@@ -35,7 +35,7 @@
     >
         <ngb-datepicker
             #dp
-            (select)="onDateSelection($event)"
+            (dateSelect)="onDateSelection($event)"
             [displayMonths]="2"
             [dayTemplate]="t"
             [outsideDays]="outsideDays"

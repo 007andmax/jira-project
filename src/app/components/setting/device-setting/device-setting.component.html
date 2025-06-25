@@ -54,37 +54,36 @@
                 </div>
             </div>
         </div>
-        <ngb-tabset
+        <ul
+            ngbNav
+            #nav="ngbNav"
             (tabChange)="toggle($event)"
-            [destroyOnHide]="true"
+            class="nav-tabs"
+            [(activeId)]="activeTab"
         >
-            <!-- Device Type -->
-            <!-- <ngb-tab
-                title="Device Type"
-                id="deviceType"
+            <li
+                [ngbNavItem]="'manufacture'"
+                [destroyOnHide]="true"
             >
-                <ng-template ngbTabContent>
-                    <device-setting-device-type #deviceType></device-setting-device-type>
-                </ng-template>
-            </ngb-tab> -->
-            <!-- Manufacture -->
-            <ngb-tab
-                title="Manufacturer / Model"
-                id="manufacture"
-            >
-                <ng-template ngbTabContent>
+                <a ngbNavLink>Manufacturer / Model</a>
+                <ng-template ngbNavContent>
                     <app-device-setting-manufactures #manufacture></app-device-setting-manufactures>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                title="Device Type"
-                id="device-type"
+            </li>
+            <li
+                [ngbNavItem]="'device-type'"
+                [destroyOnHide]="true"
             >
-                <ng-template ngbTabContent>
+                <a ngbNavLink>Device Type</a>
+                <ng-template ngbNavContent>
                     <app-device-setting-type #deviceType></app-device-setting-type>
                 </ng-template>
-            </ngb-tab>
-        </ngb-tabset>
+            </li>
+        </ul>
+        <div
+            [ngbNavOutlet]="nav"
+            class="mt-2"
+        ></div>
     </div>
 </div>
 <device-setting-aside></device-setting-aside>

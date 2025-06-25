@@ -10,13 +10,14 @@
                 Save Changes
             </a>
         </div>
-        <ngb-tabset>
-
-            <ngb-tab
-                title="Incoming Email"
-                id="tab1"
-            >
-                <ng-template ngbTabContent>
+        <ul
+            ngbNav
+            #nav="ngbNav"
+            class="nav-tabs"
+        >
+            <li [ngbNavItem]="'tab1'">
+                <a ngbNavLink>Incoming Email</a>
+                <ng-template ngbNavContent>
                     <app-incoming-email
                         #incomingEmail
                         [smtpSettingsInput]="smtpSettings"
@@ -24,10 +25,10 @@
                         *ngIf="showIn == true"
                     ></app-incoming-email>
                 </ng-template>
-            </ngb-tab>
-
-            <ngb-tab title="Outgoing Email">
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'tab2'">
+                <a ngbNavLink>Outgoing Email</a>
+                <ng-template ngbNavContent>
                     <app-outgoing-email
                         #outgoingEmail
                         [smtpInput]="smtp"
@@ -39,7 +40,11 @@
                         *ngIf="showIn == true"
                     ></app-outgoing-email>
                 </ng-template>
-            </ngb-tab>
-        </ngb-tabset>
+            </li>
+        </ul>
+        <div
+            [ngbNavOutlet]="nav"
+            class="mt-2"
+        ></div>
     </div>
 </div>

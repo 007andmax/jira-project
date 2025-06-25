@@ -62,39 +62,41 @@
                 </div>
             </div>
         </div>
-        <ngb-tabset (tabChange)="setTab($event)">
-            <ngb-tab
-                title="Ticket Settings"
-                id="ticketSettings"
-            >
-                <ng-template ngbTabContent>
+        <ul
+            ngbNav
+            #nav="ngbNav"
+            (tabChange)="setTab($event)"
+            class="nav-tabs"
+            [(activeId)]="activeTab"
+        >
+            <li [ngbNavItem]="'ticketSettings'">
+                <a ngbNavLink>Ticket Settings</a>
+                <ng-template ngbNavContent>
                     <app-ticket-settings #ticketSettings></app-ticket-settings>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                title="Ticket Status"
-                id="ticketStatus"
-            >
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'ticketStatus'">
+                <a ngbNavLink>Ticket Status</a>
+                <ng-template ngbNavContent>
                     <tickets-status #ticketsStatus></tickets-status>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                title="Ticket Priority"
-                id="ticketPriority"
-            >
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'ticketPriority'">
+                <a ngbNavLink>Ticket Priority</a>
+                <ng-template ngbNavContent>
                     <app-tickets-priority #ticketPriority></app-tickets-priority>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                title="Canned Responses"
-                id="cannedResponses"
-            >
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'cannedResponses'">
+                <a ngbNavLink>Canned Responses</a>
+                <ng-template ngbNavContent>
                     <canned-responses #cannedResponses></canned-responses>
                 </ng-template>
-            </ngb-tab>
-        </ngb-tabset>
+            </li>
+        </ul>
+        <div
+            [ngbNavOutlet]="nav"
+            class="mt-2"
+        ></div>
     </div>
 </div>

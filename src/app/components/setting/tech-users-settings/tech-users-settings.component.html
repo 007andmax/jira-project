@@ -30,17 +30,20 @@
             >
                 <div class="loading"></div>
             </div>
-            <ngb-tabset
-                #tabset="ngbTabset"
-                [destroyOnHide]="true"
+            <ul
+                ngbNav
+                #nav="ngbNav"
                 (tabChange)="setTab($event)"
+                class="nav-tabs"
+                [(activeId)]="activeTab"
             >
                 <!-- Profile -->
-                <ngb-tab
-                    title="Active Users"
-                    id="activeUsers"
+                <li
+                    [ngbNavItem]="'activeUsers'"
+                    [destroyOnHide]="true"
                 >
-                    <ng-template ngbTabContent>
+                    <a ngbNavLink>Active Users</a>
+                    <ng-template ngbNavContent>
                         <div
                             class="cmn-area"
                             [hidden]="loading"
@@ -220,12 +223,13 @@
                             </div>
                         </div>
                     </ng-template>
-                </ngb-tab>
-                <ngb-tab
-                    title="Archived Users"
-                    id="archivedUsers"
+                </li>
+                <li
+                    [ngbNavItem]="'archivedUsers'"
+                    [destroyOnHide]="true"
                 >
-                    <ng-template ngbTabContent>
+                    <a ngbNavLink>Archived Users</a>
+                    <ng-template ngbNavContent>
                         <div
                             class="cmn-area"
                             [hidden]="loading"
@@ -342,16 +346,21 @@
                             </div>
                         </div>
                     </ng-template>
-                </ngb-tab>
-                <ngb-tab
-                    title="User Permissions"
-                    id="userPermissions"
+                </li>
+                <li
+                    [ngbNavItem]="'userPermissions'"
+                    [destroyOnHide]="true"
                 >
-                    <ng-template ngbTabContent>
+                    <a ngbNavLink>User Permissions</a>
+                    <ng-template ngbNavContent>
                         <app-permission-manage #userPermissions></app-permission-manage>
                     </ng-template>
-                </ngb-tab>
-            </ngb-tabset>
+                </li>
+            </ul>
+            <div
+                [ngbNavOutlet]="nav"
+                class="mt-2"
+            ></div>
         </div>
     </div>
 </div>

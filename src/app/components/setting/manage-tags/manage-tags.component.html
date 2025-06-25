@@ -29,16 +29,16 @@
         >
             <div class="loading"></div>
         </div>
-        <ngb-tabset
+        <ul
+            ngbNav
+            #nav="ngbNav"
             (tabChange)="setTab($event)"
-            #tabset="ngbTabset"
-            [destroyOnHide]="false"
+            class="nav-tabs"
+            [(activeId)]="setActiveTab"
         >
-            <ngb-tab
-                title="Companies"
-                id="tab1"
-            >
-                <ng-template ngbTabContent>
+            <li [ngbNavItem]="'company'">
+                <a ngbNavLink>Companies</a>
+                <ng-template ngbNavContent>
                     <div
                         class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16"
                         [hidden]="loading"
@@ -102,7 +102,7 @@
                                             appClickOtside
                                             [init]="company.isInitEdit"
                                             [ngClass]="['edit-tag-container-' + i,company.selected ? '--selected' : '']"
-                                            [class]="'.edit-tag-container-' + i"
+                                            [classParent]="'.edit-tag-container-' + i"
                                             (onOutSide)="onEditTag(company)"
                                         >
                                             <div class="tab-pane__table-cell manage-tags-table__custom-tags">
@@ -199,13 +199,10 @@
                         </div>
                     </div>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                #tickets
-                title="Tickets"
-                id="tab2"
-            >
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'ticket'">
+                <a ngbNavLink>Tickets</a>
+                <ng-template ngbNavContent>
                     <div
                         class="tab-pane-input__row company-info-block qt-ml-32 qt-mr-32 qt-mt-16"
                         [hidden]="loading"
@@ -262,7 +259,7 @@
                                     appClickOtside
                                     [init]="ticket.isInitEdit"
                                     [ngClass]="['edit-tag-container-' + i,ticket.selected ? '--selected' : '']"
-                                    [class]="'.edit-tag-container-' + i"
+                                    [classParent]="'.edit-tag-container-' + i"
                                     (onOutSide)="onEditTag(ticket)"
                                 >
                                     <div class="tab-pane__table-cell manage-tags-table__custom-tags">
@@ -358,25 +355,19 @@
                         </div>
                     </div>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                #devices
-                title="Devices"
-                id="tab3"
-            >
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'device'">
+                <a ngbNavLink>Devices</a>
+                <ng-template ngbNavContent>
                     <app-manage-tags-devices
                         #devicesTags
                         *ngIf="setActiveTab == 'device'"
                     ></app-manage-tags-devices>
                 </ng-template>
-            </ngb-tab>
-            <ngb-tab
-                #devices
-                title="Files"
-                id="tab4"
-            >
-                <ng-template ngbTabContent>
+            </li>
+            <li [ngbNavItem]="'file'">
+                <a ngbNavLink>Files</a>
+                <ng-template ngbNavContent>
                     <app-manage-tags-files
                         #filesTags
                         *ngIf="setActiveTab == 'file'"
@@ -384,7 +375,11 @@
                         (onPreloader)="onPreloader($event)"
                     ></app-manage-tags-files>
                 </ng-template>
-            </ngb-tab>
-        </ngb-tabset>
+            </li>
+        </ul>
+        <div
+            [ngbNavOutlet]="nav"
+            class="mt-2"
+        ></div>
     </div>
 </div>

@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, OnDestroy, ViewContainerRef } from '@angu
 import { TicketService } from './../_services/ticket.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
-import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { CommonServices } from '../_services/common.service';
 import { CONFIGCONSTANTS } from '../config/app-constants';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
@@ -17,10 +16,6 @@ declare var $: any;
   styleUrls: ['./ticket-task.component.scss']
 })
 export class TicketTaskComponent implements OnInit, OnDestroy {
-  private tabSet: ViewContainerRef;
-  @ViewChild(NgbTabset, { static: true }) set content(content: ViewContainerRef) {
-    this.tabSet = content;
-  };
   DateFormat = CONFIGCONSTANTS.DateFormat;
   deviceDetail = {};
   allUsersList = [];
