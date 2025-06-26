@@ -171,7 +171,7 @@ export class CompanyProfile {
             id: this.id,
             tags: this.tags,
             reputation: this.reputation,
-            thirdPartyApps: this.thirdPartyApps,
+            thirdPartyApps: this.thirdPartyApps.filter(item => item.appId.length > 0 || item.appName.length > 0)
         }
     }
     public getDataForAdd() {
@@ -205,7 +205,7 @@ export class CompanyProfile {
             workingDays: this.workingDays,
             techLeadId: this.techLeadId,
             tags: this.tags,
-            thirdPartyApps: this.thirdPartyApps
+            thirdPartyApps: this.thirdPartyApps.filter(item => item.appId.length > 0 || item.appName.length > 0)
         }
 
     }

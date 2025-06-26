@@ -1,0 +1,17 @@
+@import './src/assets/styles/variable';
+
+.commissions-product {
+    &__company-name {
+        flex: 1 1 322px;
+        padding: 0 8px;
+    }
+
+    &__rate {
+        flex: 1 1 110px;
+        padding: 0 8px;
+    }
+
+    &__action {
+        flex: 0 0 56px;
+    }
+}

@@ -6,8 +6,18 @@
                 href="javascript:;"
                 class="qt-button qt-ml-24 --md"
                 (click)="onSubmit()"
+                *ngIf="tabSet !== 'api-keys'"
             >
                 Save Changes
+            </a>
+            <a
+                href="javascript:;"
+                (click)="addAPIKey()"
+                class="qt-button --md --gray qt-jc-c pointer qt-ml-12"
+                *ngIf="tabSet === 'api-keys'"
+            >
+                <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-button-icon"></span>
+                Add API Key
             </a>
         </div>
         <ul
@@ -38,6 +48,12 @@
                     <app-company-profile-operational-hours #operationalhours></app-company-profile-operational-hours>
                 </ng-template>
             </li>
+            <li [ngbNavItem]="'api-keys'">
+                <a ngbNavLink>API Keys</a>
+                <ng-template ngbNavContent>
+                    <app-company-profile-api-keys #apiKeys></app-company-profile-api-keys>
+                </ng-template>
+            </li>
         </ul>
         <div
             [ngbNavOutlet]="nav"
@@ -45,3 +61,4 @@
         ></div>
     </div>
 </div>
+<app-company-profile-api-keys-add-aside></app-company-profile-api-keys-add-aside>
