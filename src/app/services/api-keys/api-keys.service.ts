@@ -29,5 +29,12 @@ export class ApiKeysService {
         return data;
       }));
   }
-
+  public edit(id, data) {
+    return this.http.put(this.apiUrl + `api/keys/${id}`, data).pipe(
+      tap(data => {
+        this.toastrService.success("The new key has been successfully edited");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
 }

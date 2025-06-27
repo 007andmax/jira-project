@@ -9,6 +9,7 @@ import { CommissionService } from 'src/app/services/commission/commission.servic
 import { ProductsCategoryFilter } from '../../products-settings/class/products-category-filter';
 import { ApiKeysService } from 'src/app/services/api-keys/api-keys.service';
 import { ApiKeys } from './class/api-keys';
+import { ApiKeysStateService } from 'src/app/states/api-keys/api-keys-state.service';
 
 @Component({
   selector: 'app-company-profile-api-keys',
@@ -31,7 +32,8 @@ export class CompanyProfileApiKeysComponent implements OnInit {
     private apiKeysService: ApiKeysService,
     private toastrService: ToastrService,
     private confirmStateService: ConfirmStateService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private apiKeysStateService: ApiKeysStateService,
   ) { }
 
 
@@ -77,7 +79,9 @@ export class CompanyProfileApiKeysComponent implements OnInit {
       }
     );
   }
-
+  editApiKey(item) {
+    this.apiKeysStateService.openEditAside(item);
+  }
 
 
   confirmDelete(data: any) {
