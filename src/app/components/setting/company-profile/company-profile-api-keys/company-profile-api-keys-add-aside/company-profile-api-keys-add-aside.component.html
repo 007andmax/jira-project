@@ -38,56 +38,12 @@
                         class="invalid-feedback"
                         *ngIf="submitted && f2.title.errors"
                     >
-                        Ticket Subject is required
+                        API Key Title is required
                     </app-mat-error>
                 </div>
             </div>
-            <div class="qt-inputs-row --required">
-                <div class="qt-input-block">
-                    <label
-                        for="add-ticket-subject"
-                        class="qt-input-block__label"
-                    >
-                        API Key
-                    </label>
-                    <input
-                        [ngClass]="{'--input-error':submitted && f2.key.errors}"
-                        id="add-ticket-subject"
-                        class="qt-input-block__input"
-                        formControlName="key"
-                        type="text"
-                        minlength="1"
-                        maxlength="100"
-                        placeholder="Write Ticket Subject"
-                    >
-                    <app-mat-error
-                        class="invalid-feedback"
-                        *ngIf="submitted && f2.key.errors"
-                    >
-                        Ticket Subject is required
-                    </app-mat-error>
-                </div>
-            </div>
-
             <div class="cmn-area pr-area">
                 <div class="tab-pane__table dataTable">
-                    <div
-                        class="tab-pane__table-header"
-                        *ngIf="roles"
-                    >
-                        <div class="tab-pane__table-row">
-                            <div class="tab-pane__table-cell user-permissions-table__permissions">Permissions</div>
-                            <div
-                                class="tab-pane__table-cell user-permissions-table__role qt-pos-rel"
-                                *ngFor="let role of roles; let i = index"
-                            >
-                                <div class="qt-df qt-jc-c">
-                                    <div class="qt-mr-16">{{ role.name }}</div>
-                                </div>
-                                <!-- Modal create Tags -->
-                            </div>
-                        </div>
-                    </div>
                     <div class="tab-pane__table-body">
                         <ng-container *ngFor="let section of sections | keyvalue">
                             <div class="tab-pane__table-row tab-pane__table-row--sm tab-pane__table-row__permissions-subheader">

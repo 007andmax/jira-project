@@ -10,6 +10,7 @@ import { ProductsCategoryFilter } from '../../products-settings/class/products-c
 import { ApiKeysService } from 'src/app/services/api-keys/api-keys.service';
 import { ApiKeys } from './class/api-keys';
 import { ApiKeysStateService } from 'src/app/states/api-keys/api-keys-state.service';
+import { CompanyProfileApiKeysFilter } from './class/company-profile-api-keys-filter';
 
 @Component({
   selector: 'app-company-profile-api-keys',
@@ -18,7 +19,7 @@ import { ApiKeysStateService } from 'src/app/states/api-keys/api-keys-state.serv
 })
 export class CompanyProfileApiKeysComponent implements OnInit {
 
-  filter: ProductsCategoryFilter = new ProductsCategoryFilter();
+  filter: CompanyProfileApiKeysFilter = new CompanyProfileApiKeysFilter();
   loading = true;
   list: Array<ApiKeys> = [];
   edit = false;
@@ -62,7 +63,7 @@ export class CompanyProfileApiKeysComponent implements OnInit {
   }
 
   onFilter(field) {
-    //this.filter.onFilter(field, this.categories);
+    this.filter.onFilter(field, this.list);
   }
 
   /**

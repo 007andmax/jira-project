@@ -29,10 +29,6 @@ export class CompanyProfileApiKeysAddAsideComponent implements OnInit {
         "",
         [Validators.required, Validators.minLength(1), Validators.maxLength(100)]
       ],
-      key: [
-        "",
-        [Validators.required, Validators.minLength(1), Validators.maxLength(100)]
-      ],
       permissions: [
         []
       ],
