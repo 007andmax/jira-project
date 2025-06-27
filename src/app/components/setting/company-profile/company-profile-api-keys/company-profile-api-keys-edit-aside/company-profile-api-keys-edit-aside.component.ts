@@ -31,6 +31,10 @@ export class CompanyProfileApiKeysEditAsideComponent implements OnInit {
         "",
         [Validators.required, Validators.minLength(1), Validators.maxLength(100)]
       ],
+      key: [
+        "",
+        [Validators.required, Validators.minLength(1), Validators.maxLength(100)]
+      ],
       permissions: [
         []
       ],
@@ -40,6 +44,7 @@ export class CompanyProfileApiKeysEditAsideComponent implements OnInit {
       this.modelForm.patchValue({
         id: data.id,
         title: data.title,
+        key: data.key,
         permissions: data.permissions
       });
       console.log("this.modelForm.value", this.modelForm.value);
@@ -85,9 +90,11 @@ export class CompanyProfileApiKeysEditAsideComponent implements OnInit {
     this.addBtn.setDisabled(true);
     let res = {
       "title": this.modelForm.value.title,
-      "permissions": this.modelForm.value.permissions
+      "permissions": this.modelForm.value.permissions,
+      key: this.modelForm.value.key
     }
     this.apiKeysService.edit(this.modelForm.value.id, res).subscribe(data => {
+      this.apiKeysStateService.fastEdit(data);
       this.addBtn.setDisabled(false);
       this.closed();
     }, err => {

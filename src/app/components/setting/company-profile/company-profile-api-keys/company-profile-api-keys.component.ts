@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
-import { DELETE_COMMISSION_PRODUCT, CHANGE_COMMISSION_PRODUCT } from 'src/app/const/confirm';
+import { DELETE_COMMISSION_PRODUCT, CHANGE_COMMISSION_PRODUCT, DELETE_API_KEY } from 'src/app/const/confirm';
 import { CommissionService } from 'src/app/services/commission/commission.service';
 import { ProductsCategoryFilter } from '../../products-settings/class/products-category-filter';
 import { ApiKeysService } from 'src/app/services/api-keys/api-keys.service';
@@ -22,12 +22,6 @@ export class CompanyProfileApiKeysComponent implements OnInit {
   filter: CompanyProfileApiKeysFilter = new CompanyProfileApiKeysFilter();
   loading = true;
   list: Array<ApiKeys> = [];
-  edit = false;
-  selectedIdx = -1;
-  rate: any;
-  id: string;
-  category: any;
-  factItem = false;
   sub: Subscription = new Subscription();
   constructor(
     private apiKeysService: ApiKeysService,
@@ -40,24 +34,34 @@ export class CompanyProfileApiKeysComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
-    /* let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-       if (data != null) {
-         if (this.confirmStateService.getConfirmAction() === DELETE_COMMISSION_PRODUCT) {
-           if (data) this.removeProduct()
-         }
-         if (this.confirmStateService.getConfirmAction() === CHANGE_COMMISSION_PRODUCT) {
-           if (data) {
-             this.factItem = true; this.setCategoryRate();
-           }
-           if (!data) {
-             this.factItem = false; this.setCategoryRate();
-           }
-         }
-       }
-     })
-     this.sub.add(getConfirm);*/
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data != null) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_API_KEY) {
+          if (data) this.removeApiKey(this.apiKeysStateService.getApiKeyForRemove().id);
+        }
+      }
+    })
+    this.sub.add(getConfirm);
+    let onFastAdd = this.apiKeysStateService.onFastAdd.subscribe(data => {
+      this.updateAPiKey(data);
+    })
+    this.sub.add(onFastAdd);
+    let onFastEdit = this.apiKeysStateService.onFastEdit.subscribe(data => {
+      this.updateAPiKey(data);
+    })
+    this.sub.add(onFastEdit);
   }
+  removeApiKey(id) {
 
+  }
+  updateAPiKey(data) {
+    let findIndex = this.list.findIndex(item => item.id === data.id);
+    if (findIndex > -1) {
+      this.list[findIndex] = new ApiKeys(data);
+    } else {
+      this.list.push(new ApiKeys(data));
+    }
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
@@ -73,6 +77,8 @@ export class CompanyProfileApiKeysComponent implements OnInit {
     this.apiKeysService.getKyes().subscribe(
       (res: any) => {
         this.list = res.map(item => new ApiKeys(item));
+        this.list.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+          1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
         this.loading = false;
       },
       error => {
@@ -86,10 +92,10 @@ export class CompanyProfileApiKeysComponent implements OnInit {
 
 
   confirmDelete(data: any) {
-    this.category = data;
-    this.confirmStateService.setConfirmAction(DELETE_COMMISSION_PRODUCT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Are you sure you want ${this.category.name} commission rate to zero?`;
+    this.apiKeysStateService.setApiKeyForRemove(data);
+    this.confirmStateService.setConfirmAction(DELETE_API_KEY);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal app-company-profile-api-keys', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `Are you sure you want ${data.title} commission rate to zero?`;
   }
   public trackById(index, item) {
     return item.id;

@@ -75,6 +75,7 @@ export class CompanyProfileApiKeysAddAsideComponent implements OnInit {
     }
     this.addBtn.setDisabled(true);
     this.apiKeysService.add(this.modelForm.value).subscribe(data => {
+      this.apiKeysStateService.fastAdd(data);
       this.addBtn.setDisabled(false);
       this.closed();
     }, err => {

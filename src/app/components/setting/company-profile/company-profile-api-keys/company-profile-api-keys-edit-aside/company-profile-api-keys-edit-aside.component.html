@@ -5,7 +5,7 @@
     <form [formGroup]="modelForm">
         <div class="qt-aside-modern__header">
             <div class="qt-aside-modern__header-info qt-df qt-ai-c">
-                <div class="qt-aside__title">Create New Ticket</div>
+                <div class="qt-aside__title">Edit API Key</div>
             </div>
             <div>
                 <div
@@ -42,6 +42,33 @@
                     </app-mat-error>
                 </div>
             </div>
+            <div class="qt-inputs-row --required">
+                <div class="qt-input-block">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        API Key
+                    </label>
+                    <input
+                        [ngClass]="{'--input-error':submitted && f2.key.errors}"
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="key"
+                        type="text"
+                        minlength="1"
+                        maxlength="100"
+                        placeholder="Write Ticket Subject"
+                    >
+                    <app-mat-error
+                        class="invalid-feedback"
+                        *ngIf="submitted && f2.key.errors"
+                    >
+                        API Key is required
+                    </app-mat-error>
+                </div>
+            </div>
+
             <div class="cmn-area pr-area">
                 <div class="tab-pane__table dataTable">
                     <div class="tab-pane__table-body">
