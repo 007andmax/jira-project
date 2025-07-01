@@ -30,4 +30,5 @@ export class ApiKeysStateService {
   public fastEdit(data) {
     this.onFastEdit.emit(data);
   }
+
 }

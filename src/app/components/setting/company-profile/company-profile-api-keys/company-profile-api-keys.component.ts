@@ -11,6 +11,7 @@ import { ApiKeysService } from 'src/app/services/api-keys/api-keys.service';
 import { ApiKeys } from './class/api-keys';
 import { ApiKeysStateService } from 'src/app/states/api-keys/api-keys-state.service';
 import { CompanyProfileApiKeysFilter } from './class/company-profile-api-keys-filter';
+import { ApiKeysRealTimeService } from 'src/app/states/api-keys/api-keys-real-time.service';
 
 @Component({
   selector: 'app-company-profile-api-keys',
@@ -29,6 +30,7 @@ export class CompanyProfileApiKeysComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     private apiKeysStateService: ApiKeysStateService,
+    private apiKeysRealTimeService: ApiKeysRealTimeService
   ) { }
 
 
@@ -50,9 +52,26 @@ export class CompanyProfileApiKeysComponent implements OnInit {
       this.updateAPiKey(data);
     })
     this.sub.add(onFastEdit);
+    let changeApiKeysArray = this.apiKeysRealTimeService.changeApiKeysArray.subscribe(newChange => {
+      if (newChange.action === 'API_KEY_SAVED') {
+        const Index = this.list.findIndex((item) => item.id === newChange.data.id);
+        if (Index > -1) this.list[Index] = new ApiKeys(newChange.data);
+        if (Index === -1) this.list.push(new ApiKeys(newChange.data));
+      }
+
+      if (newChange.action === 'API_KEY_REMOVED') {
+        const Index = this.list.findIndex((item) => item.id === newChange.data);
+        if (Index > -1) this.list.splice(Index, 1);
+      }
+    })
+    this.sub.add(changeApiKeysArray);
   }
   removeApiKey(id) {
-
+    this.apiKeysService.remove(id).subscribe(
+      (res: any) => {
+        const Index = this.list.findIndex((item) => item.id === id);
+        if (Index > -1) this.list.splice(Index, 1);
+      });
   }
   updateAPiKey(data) {
     let findIndex = this.list.findIndex(item => item.id === data.id);
