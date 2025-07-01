@@ -62,12 +62,14 @@
                                     <label
                                         class="qt-checkbox"
                                         for="{{ permission }}_0"
+                                        [ngClass]="{'--disabled':isPermissionDisabled(permission)}"
                                     >
                                         <input
                                             type="checkbox"
                                             id="{{ permission }}_0"
                                             [checked]="f2.permissions.value.indexOf(permission) > -1 ? true : false"
                                             (click)="togglePermission( permission)"
+                                            [disabled]="isPermissionDisabled(permission)"
                                         >
                                         <span></span>
                                     </label>

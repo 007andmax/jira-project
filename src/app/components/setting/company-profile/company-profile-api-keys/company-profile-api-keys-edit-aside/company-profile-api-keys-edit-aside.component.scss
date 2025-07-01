@@ -261,3 +261,7 @@
 form {
     height: 100%;
 }
+.qt-input-afterfix {
+    border-radius: 6px !important;
+    border-left: solid 1px $gray-200;
+}

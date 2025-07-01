@@ -64,17 +64,10 @@
                         >
                         <div
                             (click)="copy(f2.key.value)"
-                            class="qt-input-afterfix pointer"
-                            (mouseenter)="passwordTooltip.show($event.target)"
-                            (mouseleave)="passwordTooltip.hide()"
+                            class="qt-input-afterfix pointer qt-ml-8"
                         >
                             <div class="qt-sz-16 qt-bg-contain qt-icon icon__copy "></div>
                         </div>
-                        <app-dynamic-tooltip
-                            [content]="(showPassword) ? 'Hide' : 'Show'"
-                            [position]="'top'"
-                            #passwordTooltip
-                        ></app-dynamic-tooltip>
                     </div>
                     <app-mat-error
                         class="invalid-feedback"
@@ -105,12 +98,14 @@
                                     <label
                                         class="qt-checkbox"
                                         for="{{ permission }}_1"
+                                        [ngClass]="{'--disabled':isPermissionDisabled(permission)}"
                                     >
                                         <input
                                             type="checkbox"
                                             id="{{ permission }}_1"
                                             [checked]="f2.permissions.value.indexOf(permission) > -1 ? true : false"
                                             (click)="togglePermission( permission)"
+                                            [disabled]="isPermissionDisabled(permission)"
                                         >
                                         <span></span>
                                     </label>

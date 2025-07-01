@@ -17,6 +17,16 @@ export class CompanyProfileApiKeysAddAsideComponent implements OnInit {
   opened: boolean = false;
   sections = {};
   @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
+  companiesRelatedPermissions = [];
+  agreementRelatedPermissions = [];
+  userRelatedPermissions = [];
+  ticketRelatedPermissions = [];
+  accountingRelatedPermissions = [];
+  productsRelatedPermissions = [];
+  passwordsRelatedPermissions = [];
+  viewPasswordsRelatedPermissions = [];
+  viewDocumentsRelatedPermissions = [];
+  editCategoryDocumentsRelatedPermissions = [];
   constructor(public cd: ChangeDetectorRef,
     public formBuilder: FormBuilder,
     private permissionManageService: PermissionManageService,
@@ -34,6 +44,16 @@ export class CompanyProfileApiKeysAddAsideComponent implements OnInit {
       ],
     })
     this.sections = this.permissionManageService.getsections();
+    this.companiesRelatedPermissions = this.permissionManageService.getCompaniesRelatedPermissions();
+    this.agreementRelatedPermissions = this.permissionManageService.getAgreementRelatedPermissions();
+    this.userRelatedPermissions = this.permissionManageService.getUserRelatedPermissions();
+    this.ticketRelatedPermissions = this.permissionManageService.getTicketRelatedPermissions();
+    this.accountingRelatedPermissions = this.permissionManageService.getAccountingRelatedPermissions();
+    this.productsRelatedPermissions = this.permissionManageService.getProductsRelatedPermissions();
+    this.passwordsRelatedPermissions = this.permissionManageService.getPasswordsRelatedPermissions();
+    this.viewPasswordsRelatedPermissions = this.permissionManageService.getViewPasswordsRelatedPermissions();
+    this.viewDocumentsRelatedPermissions = this.permissionManageService.getViewDocumentsRelatedPermissions();
+    this.editCategoryDocumentsRelatedPermissions = this.permissionManageService.getEditCategoryDocumentsRelatedPermissions();
     this.apiKeysStateService.onAdd.subscribe((data) => {
       this.opened = true;
       this.cd.detectChanges();
@@ -81,6 +101,62 @@ export class CompanyProfileApiKeysAddAsideComponent implements OnInit {
     }, err => {
       this.addBtn.setDisabled(false);
     })
+  }
+  isPermissionDisabled(permission) {
+    if (
+      this.modelForm.controls["permissions"].value.indexOf('VIEW_COMPANIES') === -1 &&
+      this.companiesRelatedPermissions.indexOf(permission) > -1
+    ) {
+      return true;
+    } else if (
+      this.modelForm.controls["permissions"].value.indexOf('VIEW_USERS') === -1 &&
+      this.userRelatedPermissions.indexOf(permission) > -1
+    ) {
+      return true;
+    } else if (
+      this.modelForm.controls["permissions"].value.indexOf('VIEW_ACCOUNTING') === -1 &&
+      this.accountingRelatedPermissions.indexOf(permission) > -1
+    ) {
+      return true;
+    } else if (
+      this.modelForm.controls["permissions"].value.indexOf('VIEW_PRODUCT_COST') === -1 &&
+      this.productsRelatedPermissions.indexOf(permission) > -1
+    ) {
+      return true;
+    } else if (
+      this.modelForm.controls["permissions"].value.indexOf('VIEW_PASSWORD_SECTION') === -1 &&
+      this.passwordsRelatedPermissions.indexOf(permission) > -1
+    ) {
+      return true;
+    } else if (
+      this.modelForm.controls["permissions"].value.indexOf('VIEW_PASSWORD') === -1 &&
+      this.viewPasswordsRelatedPermissions.indexOf(permission) > -1
+    ) {
+      return true;
+    } else if (
+      this.modelForm.controls["permissions"].value.indexOf('VIEW_DOCUMENT') === -1 &&
+      this.viewDocumentsRelatedPermissions.indexOf(permission) > -1
+    ) {
+      return true;
+    } else if (
+      this.modelForm.controls["permissions"].value.indexOf('EDIT_CATEGORY') === -1 &&
+      this.editCategoryDocumentsRelatedPermissions.indexOf(permission) > -1
+    ) {
+      return true;
+    } else if (
+      this.modelForm.controls["permissions"].value.indexOf('EDIT_TICKETS') === -1 &&
+      this.ticketRelatedPermissions.indexOf(permission) > -1
+    ) {
+      return true;
+    } else if (
+      this.modelForm.controls["permissions"].value.indexOf('VIEW_SERVICE_AGREEMENTS') === -1 &&
+      this.agreementRelatedPermissions.indexOf(permission) > -1
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+
   }
   get f2() {
     return this.modelForm.controls;

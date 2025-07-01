@@ -58,7 +58,7 @@ export class CompanyProfileApiKeysComponent implements OnInit {
         if (Index > -1) this.list[Index] = new ApiKeys(newChange.data);
         if (Index === -1) {
           this.list.push(new ApiKeys(newChange.data));
-          this.filter.onFilter('title', this.list);
+          this.filter.onFilterByField('title', this.list);
         }
       }
 
@@ -82,7 +82,7 @@ export class CompanyProfileApiKeysComponent implements OnInit {
       this.list[findIndex] = new ApiKeys(data);
     } else {
       this.list.push(new ApiKeys(data));
-      this.filter.onFilter('title', this.list);
+      this.filter.onFilterByField('title', this.list);
     }
   }
   ngOnDestroy(): void {
