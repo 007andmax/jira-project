@@ -22,6 +22,17 @@ export class CompanyProfileApiKeysFilter {
             }
         }
     }
+    onFilterByField(field, list) {
+        let index = this.filter.findIndex(item => item.field === field);
+        if (index > -1) {
+            if (this.filter[index].filter = 'ASC') {
+                this.onFilterTitle(list);
+            } else {
+                list.reverse();
+            }
+        }
+    }
+
     public clearFilter() {
         this.filter.forEach(item => item.filter = '');
     }

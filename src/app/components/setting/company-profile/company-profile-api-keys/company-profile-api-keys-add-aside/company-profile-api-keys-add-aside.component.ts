@@ -27,7 +27,7 @@ export class CompanyProfileApiKeysAddAsideComponent implements OnInit {
     this.modelForm = this.formBuilder.group({
       title: [
         "",
-        [Validators.required, Validators.minLength(1), Validators.maxLength(100)]
+        [Validators.required, Validators.minLength(1), Validators.maxLength(255)]
       ],
       permissions: [
         []

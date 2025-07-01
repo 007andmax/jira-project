@@ -56,7 +56,10 @@ export class CompanyProfileApiKeysComponent implements OnInit {
       if (newChange.action === 'API_KEY_SAVED') {
         const Index = this.list.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.list[Index] = new ApiKeys(newChange.data);
-        if (Index === -1) this.list.push(new ApiKeys(newChange.data));
+        if (Index === -1) {
+          this.list.push(new ApiKeys(newChange.data));
+          this.filter.onFilter('title', this.list);
+        }
       }
 
       if (newChange.action === 'API_KEY_REMOVED') {
@@ -79,6 +82,7 @@ export class CompanyProfileApiKeysComponent implements OnInit {
       this.list[findIndex] = new ApiKeys(data);
     } else {
       this.list.push(new ApiKeys(data));
+      this.filter.onFilter('title', this.list);
     }
   }
   ngOnDestroy(): void {

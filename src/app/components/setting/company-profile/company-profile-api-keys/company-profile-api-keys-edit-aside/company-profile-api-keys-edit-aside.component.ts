@@ -1,9 +1,11 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { ApiKeysService } from 'src/app/services/api-keys/api-keys.service';
 import { PermissionManageService } from 'src/app/services/permission-manage/permission-manage.service';
 import { ApiKeysStateService } from 'src/app/states/api-keys/api-keys-state.service';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'app-company-profile-api-keys-edit-aside',
@@ -20,6 +22,8 @@ export class CompanyProfileApiKeysEditAsideComponent implements OnInit {
     public formBuilder: FormBuilder,
     private permissionManageService: PermissionManageService,
     private apiKeysStateService: ApiKeysStateService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     private apiKeysService: ApiKeysService) { }
 
   ngOnInit(): void {
@@ -29,11 +33,10 @@ export class CompanyProfileApiKeysEditAsideComponent implements OnInit {
       ],
       title: [
         "",
-        [Validators.required, Validators.minLength(1), Validators.maxLength(100)]
+        [Validators.required, Validators.minLength(1), Validators.maxLength(255)]
       ],
       key: [
-        "",
-        [Validators.required, Validators.minLength(1), Validators.maxLength(100)]
+        ""
       ],
       permissions: [
         []
@@ -100,6 +103,21 @@ export class CompanyProfileApiKeysEditAsideComponent implements OnInit {
     }, err => {
       this.addBtn.setDisabled(false);
     })
+  }
+  copy(value) {
+    let textArea: any = document.createElement("textarea");
+    textArea.style.opacity = 0;
+    textArea.value = value
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      let successful = document.execCommand('copy');
+    } catch (err) {
+      //  UserNotificationService.show('Copy failed', true);
+    }
+    document.body.removeChild(textArea);
+    this.toastrService.success("The value is copied to clipboard");
+    this.appStateService.changeDetectorRef();
   }
   get f2() {
     return this.modelForm.controls;
