@@ -13,8 +13,6 @@ export class ClickOutsideDirective {
   @HostListener('document:click', ['$event'])
   clickout(event) {
     if (!this.init) return;
-    console.log("this.classParent", this.classParent);
-    console.log($(event.target).parents(this.classParent))
     if ($(event.target).parents(this.classParent).length != 0) return;
     this.onOutSide.emit(event);
   }

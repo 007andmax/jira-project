@@ -84,6 +84,9 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     this.users = data;
     this.ref.markForCheck();
   }
+  clearAll() {
+    this.usersStateService.clearFilters();
+  }
   onKeyUp(event) {
     if (event.keyCode === 13) this.onSearch.emit(event.target.value);
   }
@@ -132,7 +135,9 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     this.marketingEmailStateService.onOpenAsige(this.users.filter(item => item.selected));
     this.ref.markForCheck();
   }
-
+  getTextCountFilters() {
+    return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
+  }
   getSelectedCount() {
     return this.users.filter(item => item.selected).length;
   }

@@ -49,6 +49,7 @@ export class DevicesStateService {
   manufacturForRemove: ManufactureDevice = null;
   modelForRemove: ModelDevice = null;
   onFilter: EventEmitter<any> = new EventEmitter();
+  onClearFilter: EventEmitter<any> = new EventEmitter();
   deviceTypeForRemove: DeviceType = null;
   // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService,
@@ -101,6 +102,9 @@ export class DevicesStateService {
         this.onGetDeviceType.emit(this.deviceTypes);
       }
     })
+  }
+  public clearFilter() {
+    this.onClearFilter.emit(null);
   }
   public getDeviceTypeForRemove() {
     return this.deviceTypeForRemove

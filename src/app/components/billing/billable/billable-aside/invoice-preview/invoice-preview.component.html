@@ -173,7 +173,7 @@
                                     <td class="invoice-preview__col-amount">
                                         {{service.sum | currency}}
                                         <div
-                                            *ngIf="service.isServiceContractSingleItem"
+                                            *ngIf="service.isServiceContractSingleItem && service.discountAmount > 0"
                                             class="discount-container qt-mt-4"
                                         >
                                             Discount

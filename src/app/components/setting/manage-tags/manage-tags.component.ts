@@ -254,24 +254,21 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     }
     this.searchTag = "";
     this.compnayForm.patchValue({ word: "" });
-    if (data['nextId'] === 'tab1') {
+    this.setActiveTab = data['nextId'];
+    if (data['nextId'] === 'company') {
       this.loading = true;
-      this.setActiveTab = "company";
       this.searchTag = "";
       this.companyTags = [];
       this.reqcompanyTags = [];
       this.setDefaultScoll();
       this.onScroll();
-    } else if (data['nextId'] === 'tab2') {
+    } else if (data['nextId'] === 'ticket') {
       this.infiniteScrollDisabled = true;
-      this.setActiveTab = "ticket";
-    } else if (data['nextId'] === 'tab3') {
+    } else if (data['nextId'] === 'device') {
       this.infiniteScrollDisabled = true;
-      this.setActiveTab = "device";
-    } else if (data['nextId'] === 'tab4') {
+    } else if (data['nextId'] === 'file') {
       this.infiniteScrollDisabled = true;
-      this.setActiveTab = "file";
-    }
+      }
   }
 
   // convenience getter for easy access to form fields

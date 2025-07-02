@@ -34,6 +34,9 @@ export class DocumentsTemplatesHeaderComponent implements OnInit {
     this.searchText = "";
     this.onSearch.emit("");
   }
+  getTextCountFilters() {
+    return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
+  }
   search(event) {
     this.searchText = event.target.value;
     this.onSearch.emit(event.target.value);

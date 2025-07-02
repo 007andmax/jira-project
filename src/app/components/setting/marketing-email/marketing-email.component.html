@@ -29,6 +29,7 @@
         </div>
         <ul
             ngbNav
+            #nav="ngbNav"
             (tabChange)="setTab($event)"
             class="nav-tabs"
             [(activeId)]="activeTab"
@@ -46,6 +47,10 @@
                 </ng-template>
             </li>
         </ul>
+        <div
+            [ngbNavOutlet]="nav"
+            class="mt-2"
+        ></div>
     </div>
 </div>
 <marketing-email-users></marketing-email-users>

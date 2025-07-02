@@ -1,6 +1,5 @@
 import { NgModule, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { NgbDropdownToggle, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';

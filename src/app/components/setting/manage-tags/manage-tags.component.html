@@ -31,11 +31,12 @@
         </div>
         <ul
             ngbNav
+            #nav="ngbNav"
             (tabChange)="setTab($event)"
             class="nav-tabs"
             [(activeId)]="setActiveTab"
         >
-            <li [ngbNavItem]="'tab1'">
+            <li [ngbNavItem]="'company'">
                 <a ngbNavLink>Companies</a>
                 <ng-template ngbNavContent>
                     <div
@@ -199,7 +200,7 @@
                     </div>
                 </ng-template>
             </li>
-            <li [ngbNavItem]="'tab2'">
+            <li [ngbNavItem]="'ticket'">
                 <a ngbNavLink>Tickets</a>
                 <ng-template ngbNavContent>
                     <div
@@ -355,7 +356,7 @@
                     </div>
                 </ng-template>
             </li>
-            <li [ngbNavItem]="'tab3'">
+            <li [ngbNavItem]="'device'">
                 <a ngbNavLink>Devices</a>
                 <ng-template ngbNavContent>
                     <app-manage-tags-devices
@@ -364,7 +365,7 @@
                     ></app-manage-tags-devices>
                 </ng-template>
             </li>
-            <li [ngbNavItem]="'tab4'">
+            <li [ngbNavItem]="'file'">
                 <a ngbNavLink>Files</a>
                 <ng-template ngbNavContent>
                     <app-manage-tags-files
@@ -376,5 +377,9 @@
                 </ng-template>
             </li>
         </ul>
+        <div
+            [ngbNavOutlet]="nav"
+            class="mt-2"
+        ></div>
     </div>
 </div>

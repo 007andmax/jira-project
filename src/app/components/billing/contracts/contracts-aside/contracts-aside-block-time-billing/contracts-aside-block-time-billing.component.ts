@@ -318,6 +318,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.reviewDateDP.setEditDate(this.contractsBlockTime.getReviewDateByMilliseconds());
   }
   onChangeEndDate(data) {
+
     this.contractsBlockTime.setEndDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsBlockTime.calculateReviewDate();
     this.reviewDate = this.contractsBlockTime.getReviewDateByMilliseconds();

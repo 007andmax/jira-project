@@ -344,7 +344,7 @@ export class CompanyUserComponent implements OnInit {
     this.selectAll = false;
     this.users = [];
     this.header.setUsers(this.users);
-    this.usersStateService.clearFilter();
+    this.usersStateService.clearFilterWithoutChange();
     this.draftEmailStateService.resetSelectedUsers();
     this.usersStateService.clearGlobalFilter();
     this.companiesStateService.setCompanyRoutingId(null);

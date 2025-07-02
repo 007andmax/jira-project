@@ -287,6 +287,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     this.contractsUserDevice.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
   }
   getMinStartDate(interval, startDate) {
+    return new Date().getTime();
     let newMinStartDate;
     let now = new Date(startDate);
     let n = new Date(now);

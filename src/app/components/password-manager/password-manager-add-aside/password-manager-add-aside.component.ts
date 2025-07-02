@@ -131,13 +131,13 @@ export class PasswordManagerAddAsideComponent implements OnInit {
   }
   close() {
     this.opened = false;
+    this.companiesDb.clearClient();
     this.passwordRecordAdd = new PasswordRecordAdd();
     this.validate = new PasswordRecordValidate();
     this.selectedUserAndDevices = [];
     this.linked.onClosed();
     this.showAddCategory = false;
     this.selectedCompany = null;
-    this.companiesDb.clearWithOutChanges();
     this.categoriesSelect.clearWithOutChanges();
     this.datePicker.reset();
     this.elRef.nativeElement.querySelector("#description-create-password").value = "";

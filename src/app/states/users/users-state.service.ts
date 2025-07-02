@@ -56,6 +56,7 @@ export class UsersStateService {
   onFastEdit: EventEmitter<any> = new EventEmitter();
   onFastArchive: EventEmitter<any> = new EventEmitter();
   onFastDeArchive: EventEmitter<any> = new EventEmitter();
+  onClearFilters: EventEmitter<any> = new EventEmitter();
   constructor(private userService: UsersService,
     private appService: AppService,
     private customerPortalStateService: CustomerPortalStateService,
@@ -268,9 +269,8 @@ export class UsersStateService {
   public clearFilterWithoutChange() {
     this.filter = new UserFilters();
   }
-  public clearFilter() {
-    this.filter = new UserFilters();
-    this.onFilter.emit(this.filter);
+  public clearFilters() {
+    this.onClearFilters.emit(null);
   }
   public onInitLeftPanelMarketingFilter(data) {
     this.onLeftPanelMarketingFilter.emit(data);

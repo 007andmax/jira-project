@@ -197,10 +197,24 @@ export class ServiceAgreement {
     public calculateEndDate() {
         if (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') {
             let endDate = new Date(this.startDate);
+            let last_day = new Date(endDate.getFullYear(), endDate.getMonth() + 1, 0);
             endDate.setFullYear(endDate.getFullYear() + 1);
-            endDate.setDate(endDate.getDate() - 1);
+            if (this.intervalstring === 'MONTHLY') {
+                if (endDate.getDate() == 30 && last_day.getDate() == 31) {
+                    let last_day_newDate = new Date(endDate);
+                    if (last_day_newDate.getDate() < 30) { endDate.setDate(last_day_newDate.getDate()) } else {
+                        endDate.setDate(30);
+                    }
+                } else if (endDate.getDate() == last_day.getDate()) {
+                    let last_day_newDate = new Date(endDate);
+                    endDate.setDate(last_day_newDate.getDate())
+                } else {
+                    endDate.setDate(endDate.getDate() - 1);
+                }
+            } else {
+                endDate.setDate(endDate.getDate() - 1);
+            }
             this.endDate = moment(endDate).format('YYYY/MM/DD');
-
         } else if (this.intervalstring === '30 days') {
             let endDate = new Date(this.startDate);
             endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 29);
@@ -213,9 +227,8 @@ export class ServiceAgreement {
 
         } else if (this.intervalstring === '7 days') {
             let endDate = new Date(this.startDate);
-            endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 7);
+            endDate.setTime(endDate.getTime() + 60000 * 60 * 24 * 6);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
-
         }
     }
     public checkDuplicatedBlockTimeServices() {
