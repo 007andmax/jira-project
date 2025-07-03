@@ -49,6 +49,11 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
     }
     if (this.type === "WEEKLY" || this.type === "DAILY") return moment(this.dashboard.chartData[d].date).format('DD MMM');
   }
+  xAxisTickFormattingChart = (d) => {
+    console.log("d", d);
+    if (d >= this.dashboard.chartData.length) return "";
+    return moment(this.dashboard.chartData[d].date).format('DD MMM YYYY');
+  }
   getDataForChart() {
     let sin = [], sin2 = [];
     this.dashboard.chartData = JSON.parse(JSON.stringify(this.dashboard.chartData.splice(this.dashboard.chartData.length - 30, this.dashboard.chartData.length)));

@@ -40,6 +40,11 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
     if (this.type === "WEEKLY" || this.type === "DAILY") return moment(this.chartData[d].date).format('DD MMM');
 
   }
+  xAxisTickFormattingChart = (d) => {
+    let currentDate = new Date();
+    if (d >= this.chartData.length) return "";
+    return moment(this.chartData[d].date).format('DD MMM YYYY');
+  }
   public updateDataChart() {
     this.data = this.getDataForChart();
     // if (this.nvd3.char) this.nvd3.chart.update();

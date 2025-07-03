@@ -244,7 +244,7 @@
     transform: rotate(180deg);
   }
   .right .ngb-dp-navigation-chevron {
-    transform: unset;
+    transform: unset !important;
   }
 }
 

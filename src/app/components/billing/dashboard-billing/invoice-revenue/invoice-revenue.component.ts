@@ -25,20 +25,6 @@ export class InvoiceRevenueComponent implements OnInit {
     private dashboardBillingService: DashboardBillingService) { }
 
   ngOnInit() {
-    this.data = [
-      {
-        "name": "Invoiced",
-        "value": 8
-      },
-      {
-        "name": "Collected",
-        "value": 32
-      },
-      {
-        "name": "Outstanding",
-        "value": 60
-      }
-    ];
     this.invoiceRevenue.companyId = this.companiesStateService.getCurrentCompany().id;
     this.updateStartDate();
     this.invoiceRevenue.endDate = moment(new Date()).format('YYYY-MM-DD');
@@ -54,9 +40,21 @@ export class InvoiceRevenueComponent implements OnInit {
   public getInvoiceRevenue() {
     this.dashboardBillingService.getInvoiceRevenue(this.invoiceRevenue.getDataForRequest()).subscribe(data => {
       this.invoiceRevenue.setData(data);
-      this.data[0].value = this.invoiceRevenue.invoicedSum;
-      this.data[1].value = this.invoiceRevenue.collectedSum;
-      this.data[2].value = this.invoiceRevenue.outstandingSum;
+      this.data = [
+        {
+          "name": "Invoiced",
+          "value": this.invoiceRevenue.invoicedSum.toFixed(2)
+        },
+        {
+          "name": "Collected",
+          "value": this.invoiceRevenue.collectedSum.toFixed(2)
+        },
+        {
+          "name": "Outstanding",
+          "value": this.invoiceRevenue.outstandingSum.toFixed(2)
+        }
+      ];
+      console.log("this.data", this.data);
       // this.nvd3.chart.update();
       this.cd.detectChanges();
     })

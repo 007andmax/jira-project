@@ -36,7 +36,10 @@ export class CompanyDashTicketComponent implements OnInit, OnDestroy {
     console.log("d", d);
     return moment(d).format('DD MMM');
   }
-
+  xAxisTickFormattingChart = (d) => {
+    console.log("d", d);
+    return moment(d).format('DD MMM YYYY');
+  }
   getTicketGraph(frequency: string) {
     this.showPreloader = true;
     let getTicket = this.companiesService.getTicketGraph(this._id, frequency.toUpperCase()).subscribe((data: any) => {
