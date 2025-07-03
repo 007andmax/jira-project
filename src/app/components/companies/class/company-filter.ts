@@ -15,6 +15,7 @@ export class CompanyFilter {
     showArchivedCompanies: boolean = false;
     filter: Array<CompanyFilterTop> = [
         new CompanyFilterTop('name', 'ASC'),
+        new CompanyFilterTop('type', ''),
         new CompanyFilterTop('address', ''),
         new CompanyFilterTop('primary_contact', ''),
         new CompanyFilterTop('email', ''),
@@ -90,6 +91,16 @@ export class CompanyFilter {
                 if (sort === '' || sort === 'DESC') {
                     this.filter[index].filter = 'ASC';
                     this.onFilterName(list);
+                } else {
+                    this.filter[index].filter = 'DESC';
+                    list.reverse();
+                }
+            }
+            if (field === 'type') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filter[index].filter = 'ASC';
+                    this.onFilterClientType(list);
                 } else {
                     this.filter[index].filter = 'DESC';
                     list.reverse();
@@ -172,7 +183,10 @@ export class CompanyFilter {
         list.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
             1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     }
-
+    private onFilterClientType(list) {
+        list.sort((a, b) => (a.clientType.toLowerCase() > b.clientType.toLowerCase()) ?
+            1 : ((b.clientType.toLowerCase() > a.clientType.toLowerCase()) ? -1 : 0));
+    }
     private onFilterAdress(list) {
         list.sort((a, b) => (this.getPrimaryAddress(a) > this.getPrimaryAddress(b)) ?
             1 : ((this.getPrimaryAddress(b) > this.getPrimaryAddress(a)) ? -1 : 0));

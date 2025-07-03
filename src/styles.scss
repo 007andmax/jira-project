@@ -1513,7 +1513,7 @@ app-quotes-item {
       }
     }
     &__email-address {
-      flex: 1 1 180px;
+      flex: 1 1 100px;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
@@ -1528,6 +1528,25 @@ app-quotes-item {
 
       @include media-breakpoint-up($xl) {
         flex: 1 0 340px;
+      }
+    }
+      &__client-type {
+      flex: 1 1 80px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      text-transform: capitalize;
+
+      @include media-breakpoint-down($md) {
+        flex: 1 1 130px;
+      }
+
+      @include media-breakpoint-up($lg) {
+        flex: 1 0 150px;
+      }
+
+      @include media-breakpoint-up($xl) {
+        flex: 1 0 240px;
       }
     }
     &__tickets {

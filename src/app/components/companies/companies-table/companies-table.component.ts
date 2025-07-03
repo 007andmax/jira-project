@@ -90,6 +90,9 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       this.devicesCounts
     }
   }
+  parseClientType(clientType) {
+    return clientType.toLowerCase();
+  }
   getDeviceCount() {
     return this.devicesCounts.find(item => item.companyId === this.company.id) ? this.devicesCounts.find(item => item.companyId === this.company.id).count : 0;
   }

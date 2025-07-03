@@ -132,6 +132,13 @@
                     Name
                 </div>
                 <div
+                    class="companies-table__client-type pointer"
+                    (click)="onFilter('type')"
+                >
+                    Type
+                    <div class="qt-table-modern__sorting"></div>
+                </div>
+                <div
                     class="companies-table__address pointer"
                     (click)="onFilter('address')"
                 >

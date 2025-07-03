@@ -48,6 +48,20 @@
         </a>
     </div>
     <div
+        (click)="goToDashboard()"
+        class="companies-table__client-type pointer"
+    >
+        <a
+            href
+            class="link-style"
+            [link]="getCompanyDashboardLink()"
+            target="_blank"
+            appRightClickBlank
+            [textContent]="parseClientType(company.clientType)"
+        >
+        </a>
+    </div>
+    <div
         class="companies-table__address pointer"
         (click)="goToDashboard()"
     >
