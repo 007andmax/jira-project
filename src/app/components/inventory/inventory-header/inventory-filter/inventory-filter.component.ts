@@ -71,7 +71,6 @@ export class InventoryFilterComponent implements OnInit {
     this.cd.detectChanges();
   }
   public onClearAll() {
-    console.log("onClearAll");
     this.filter = new InventoryFilter();
     this.categoriesSelect.clearWithOutChanges();
     this.productTypeSelect.clearWithOutChanges();

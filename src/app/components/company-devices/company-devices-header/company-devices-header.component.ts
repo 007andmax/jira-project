@@ -28,7 +28,6 @@ export class CompanyDevicesHeaderComponent implements OnInit {
   ngOnInit() {
     let geLefttFilter = this.devicesStateService.onFilter.subscribe((data) => {
       this.filter.setFilter(JSON.parse(JSON.stringify(data)));
-      console.log('onFilter', this.filter);
       this.onChangeCountFilter();
       this.cd.detectChanges();
     });

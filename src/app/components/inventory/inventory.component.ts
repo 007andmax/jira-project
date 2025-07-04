@@ -160,7 +160,6 @@ export class InventoryComponent implements OnInit {
     this.sub.add(getOnToggleEdit);
 
     let onClearFilters = this.inventoryStateService.onClearFilters.subscribe(() => {
-      console.log("onClearFilters");
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.filter = new InventoryFilter();
       this.inventoryListService.setBlockList(false);
@@ -227,7 +226,6 @@ export class InventoryComponent implements OnInit {
       this.infiniteScrollDisabled = false;
       return;
     }
-    console.log("getProducts", this.reqInventoryList);
     this.page_number += 1;
     let listFilter = this.filter.getFilterList(this.reqInventoryList);
     this.filter.onFilter(listFilter, this.companies, this.glNumbers);
