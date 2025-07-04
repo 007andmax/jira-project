@@ -4,7 +4,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InvoiceFormTicketEditProductComponent } from './invoice-form-ticket-edit-product.component';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
