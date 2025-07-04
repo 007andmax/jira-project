@@ -1230,7 +1230,9 @@ button.qt-button.--gray:focus {
 .qt-text-upper {
   text-transform: uppercase;
 }
-
+.qt-text-capitalize {
+  text-transform: capitalize;
+}
 .qt-fw-400 {
   font-weight: 400;
 }
