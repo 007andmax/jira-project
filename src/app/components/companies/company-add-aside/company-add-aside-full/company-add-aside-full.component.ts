@@ -324,7 +324,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     this.validate.checkValidFirstname(this.company.contacts[0].firstName);
   }
   onSelectJobTitle(data) {
-    this.company.contacts[0].jobTitleId = (data) ? data.id : null;
+    this.company.contacts[0].customerCompaniesInfo[0].setJobTitleDto(data);
   }
   public onChangePrimaryEmail() {
     this.validate.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail);

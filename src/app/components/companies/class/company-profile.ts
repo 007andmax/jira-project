@@ -223,7 +223,6 @@ export class CompanyProfile {
 
     }
     public fullVersion() {
-        this.contacts[0].fullVersion();
         this.addresses[0].fullVersion();
         this.addresses[0].locationName = JSON.parse(JSON.stringify(this.name));
         this.initShippingAdress();

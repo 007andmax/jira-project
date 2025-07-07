@@ -137,7 +137,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     return null;
   }
   onSelectJobTitle(data) {
-    this.company.contacts[0].jobTitleId = (data) ? data.id : null;
+    this.company.contacts[0].customerCompaniesInfo[0].setJobTitleDto(data);
     this.selectedJobTitle = data;
   }
   private getPlaceAutocomplete(event, index) {
@@ -231,7 +231,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       if (indexPersone > -1) this.selectedTechLead = this.listPersons[indexPersone];
       let indexType = this.companyTypes.findIndex(item => item.value === this.company.clientType);
       if (indexType > -1) this.onSelectCompanyTypes(this.companyTypes[indexType]);
-      this.selectedJobTitle = this.jobTitleList.find(item => item.id === this.company.contacts[0].jobTitleId);
+      if (this.company.contacts[0].customerCompaniesInfo[0].jobTitleDto) this.selectedJobTitle = this.jobTitleList.find(item => item.id === this.company.contacts[0].customerCompaniesInfo[0].jobTitleDto.id);
       this.companyTags.setSelectedTag(this.company.tags);
       this.elRef.nativeElement.querySelector("#company-description").value = this.company.description;
       this.opened = true;
@@ -241,6 +241,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
         this.serviceTypes = this.crmStateService.getServiceTypeList();
         this.setSelectServiceTypes();
       }
+      console.log("this.selectedJobTitle", this.selectedJobTitle);
       this.cd.detectChanges();
     })
     this.sub.add(getCompanyFromEdit);

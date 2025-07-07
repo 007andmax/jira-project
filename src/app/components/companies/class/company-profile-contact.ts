@@ -6,7 +6,6 @@ export class CompanyProfileContact {
     lastName: string;
     primaryEmail: string;
     customerCompaniesInfo: Array<UserCustomerCompaniesInfo> = [];
-    jobTitleId: string;
     avatar: string;
     id: string;
     companyId: string;
@@ -30,9 +29,6 @@ export class CompanyProfileContact {
     public setId(data) {
         this.id = data;
     }
-    public fullVersion() {
-        this.jobTitleId = null;
-    }
     public getDataForRequest(isAdd, isUseSelectedUser) {
         let phoneNumbers = (this.phoneNumbers.length == 0 || !this.phoneNumbers[0].number || this.phoneNumbers[0].number.length === 0) ? [] : this.phoneNumbers;
         if (isAdd && isUseSelectedUser) return {
@@ -44,7 +40,6 @@ export class CompanyProfileContact {
             lastName: this.lastName,
             primaryEmail: this.primaryEmail,
             customerCompaniesInfo: this.customerCompaniesInfo.map(item => ((isAdd) ? item.getDataForAddRequest() : item.getDataForUpdateRequest())),
-            jobTitleId: this.jobTitleId,
             avatar: this.avatar,
             id: this.id,
             companyId: this.companyId

@@ -55,7 +55,8 @@ export class UserCustomerCompaniesInfo {
     public getDataForAddRequest() {
         return {
             defaultSubscriptions: this.defaultSubscriptions.getDataForUpdate(),
-            isPrimaryContact: this.isPrimaryContact
+            isPrimaryContact: this.isPrimaryContact,
+            "jobTitleDto": this.jobTitleDto,
         }
     }
     /**
