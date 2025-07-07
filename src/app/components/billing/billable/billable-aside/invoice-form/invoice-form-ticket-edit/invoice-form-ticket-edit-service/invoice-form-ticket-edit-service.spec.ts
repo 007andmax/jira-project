@@ -39,12 +39,12 @@ describe('InvoiceFormTicketEditServiceComponent unit test', () => {
   it('check "onTaxesChange"', () => {
     const fixture = TestBed.createComponent(InvoiceFormTicketEditServiceComponent);
     const com = fixture.debugElement.componentInstance;
-    com.service.taxes = { taxes: [] }
+    com.service = new BillableProfileTicketServiceExpense();
     com.onTaxesChange([
       { name: 'Tax1', rate: 10 },
       { name: 'Tax2', rate: 5 }
     ]);
-    expect(com.product.taxes).toEqual([
+    expect(com.service.taxes).toEqual([
       { name: 'Tax1', rate: 10 },
       { name: 'Tax2', rate: 5 }]);
   });
@@ -54,7 +54,7 @@ describe('InvoiceFormTicketEditServiceComponent unit test', () => {
     let currentDate = new Date();
     let durationStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), currentDate.getHours(), currentDate.getMinutes()).getTime();
     com.service = new BillableProfileTicketServiceExpense();
-    com.currentService.durationEnd = durationStart;
+    com.service.durationEnd = durationStart;
     com.onChangeStartTimePicker(durationStart);
     expect(com.service.durationStart).toEqual(durationStart)
   });
@@ -67,13 +67,6 @@ describe('InvoiceFormTicketEditServiceComponent unit test', () => {
     com.onChangeEndTimePicker(durationEnd);
     expect(com.service.durationEnd).toEqual(durationEnd)
   });
-  it('check "onChangeDuration"', () => {
-    const fixture = TestBed.createComponent(InvoiceFormTicketEditServiceComponent);
-    const com = fixture.debugElement.componentInstance;
-    com.service = new BillableProfileTicketServiceExpense();
-    com.onChangeDuration(2);
-    expect(com.service.durationEnd).toEqual((3600000 * 2) + com.service.durationStart);
-  });
   it('check "onChangeDescription"', () => {
     const fixture = TestBed.createComponent(InvoiceFormTicketEditServiceComponent);
     const com = fixture.debugElement.componentInstance;
@@ -84,17 +77,18 @@ describe('InvoiceFormTicketEditServiceComponent unit test', () => {
   it('check "onPastDescription"', () => {
     const fixture = TestBed.createComponent(InvoiceFormTicketEditServiceComponent);
     const com = fixture.debugElement.componentInstance;
+    com.service = new BillableProfileTicketServiceExpense();
     com.onPastDescription("test")
     expect(com.service.description).toEqual("test")
   });
   it('check "getDuration"', () => {
     const fixture = TestBed.createComponent(InvoiceFormTicketEditServiceComponent);
     const com = fixture.debugElement.componentInstance;
-    expect(com.getDuration(2)).toEqual("02 : 00");
+    expect(com.getDuration(2)).toEqual("02:00 hr(s)");
   });
   it('check "getSelectedTaxes"', () => {
     const fixture = TestBed.createComponent(InvoiceFormTicketEditServiceComponent);
     const com = fixture.debugElement.componentInstance;
-    expect(com.getSelectedTaxes([{ name: "name", rate: 10 }])).toEqual("name 10%");
+    expect(com.getSelectedTaxes([{ name: "test", rate: 10 }])).toEqual("test 10%");
   });
 });

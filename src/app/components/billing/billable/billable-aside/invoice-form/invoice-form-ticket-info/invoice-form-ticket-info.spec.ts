@@ -34,7 +34,7 @@ describe('InvoiceFormTicketInfoComponent unit test', () => {
   it('check "getDuration"', () => {
     const fixture = TestBed.createComponent(InvoiceFormTicketInfoComponent);
     const com = fixture.debugElement.componentInstance;
-    expect(com.getDuration(2)).toEqual("02 : 00");
+    expect(com.getDuration(2)).toEqual("02:00 hr(s)");
   });
   it('check "getSelectedTaxes"', () => {
     const fixture = TestBed.createComponent(InvoiceFormTicketInfoComponent);
