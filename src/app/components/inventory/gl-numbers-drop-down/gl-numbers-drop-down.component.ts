@@ -9,7 +9,7 @@ import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 export class GlNumbersDropDownComponent extends DropDownComponent {
 
   onCheckAdd(event) {
-    if (this.search) this.list = this.reqList.filter(item => item["glNumber"].toLowerCase().includes(event.target.value.toLowerCase()) || item["description"].toLowerCase().includes(event.target.value.toLowerCase()))
+    if (this.search) this.list = this.reqList.filter(item => item["glNumber"].toLowerCase().includes(event.target.value.toLowerCase()) || item["description"] && item["description"].toLowerCase().includes(event.target.value.toLowerCase()))
     let index = this.list.findIndex(item => (this.field) ? item[this.field] === event.target.value : item === event.target.value);
     if (index === -1 && this.add) {
       this.isAdd = true;

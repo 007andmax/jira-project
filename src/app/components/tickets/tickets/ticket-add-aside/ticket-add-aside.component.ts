@@ -40,7 +40,7 @@ import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-c
 export class TicketAddAsideComponent implements OnInit, OnDestroy {
   @ViewChild('userDP', { static: false }) userDP: CompanyUsersDropDownComponent;
   @ViewChild('techUserDP', { static: false }) techUserDP: DropDownComponent;
-  @ViewChild('deviceDP', { static: true }) deviceDP: DropDownComponent;
+  @ViewChild('deviceDP', { static: false }) deviceDP: DropDownComponent;
   @ViewChild('uplaodFile', { static: true }) uplaodFile: UploadAreaComponent;
   @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
   @ViewChild('techUsersDp', { static: true }) techUsersDp: AssignedTicketUserComponent;
@@ -164,7 +164,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     this.ticketValidate = new TicketValidate();
     this.shareUsersList = [];
     this.elRef.nativeElement.querySelector('#add-ticket-describe-issue').innerHTML = '';
-    if (this.deviceDP) this.deviceDP.clearClient();
+    if (this.deviceDP) this.deviceDP.clearWithOutChanges();
     if (this.userDP) this.userDP.clearClient();
     if (this.clientUserDP) this.clientUserDP.clearWithOutChanges();
     if (this.techUserDP) this.techUserDP.clearClient();

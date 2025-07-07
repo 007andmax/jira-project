@@ -42,6 +42,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { DeviceTagsRealTimeService } from 'src/app/states/device-tags/device-tags-real-time.service';
 import { FileManagementRealTimeService } from 'src/app/states/file-management/file-management-real-time.service';
 import { SubscriptionServicesRealTimeService } from 'src/app/states/subscription-services/subscription-services-real-time.service';
+import { ApiKeysRealTimeService } from 'src/app/states/api-keys/api-keys-real-time.service';
 
 
 /**
@@ -104,7 +105,8 @@ export class WebsocketService {
     private customerPortalStateService: CustomerPortalStateService,
     private deviceTagsRealTimeService: DeviceTagsRealTimeService,
     private fileManagementRealTimeService: FileManagementRealTimeService,
-    private subscriptionServicesRealTimeService: SubscriptionServicesRealTimeService
+    private subscriptionServicesRealTimeService: SubscriptionServicesRealTimeService,
+    private apiKeysRealTimeService: ApiKeysRealTimeService
 
   ) {
   }
@@ -155,6 +157,7 @@ export class WebsocketService {
       that.subsribeToCustomerRole();
       that.subsribeToSubscriptionService();
       if (data.command === "CONNECTED") this.websocketStateService.initConnection();
+      that.subsribeToApiKeys();
       that.onInit.emit(true);
       that.isInit = true;
     }
@@ -234,6 +237,17 @@ export class WebsocketService {
       this.stompClient.subscribe("/user/watch/user", (message) => {
         var newChange = JSON.parse(message.body);
         this.usersRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+        }
+      });
+    }, 3000);
+  }
+  private subsribeToApiKeys() {
+
+    setTimeout(() => {
+      this.stompClient.subscribe("/user/watch/apiKey", (message) => {
+        var newChange = JSON.parse(message.body);
+        this.apiKeysRealTimeService.handleRealTimeChanges(newChange);
         if (message.body) {
         }
       });

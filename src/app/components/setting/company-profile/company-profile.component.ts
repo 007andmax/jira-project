@@ -12,6 +12,8 @@ import { CompanyProfileProfileComponent } from './company-profile-profile/compan
 import { CompanyProfileWorkspaceComponent } from './company-profile-workspace/company-profile-workspace.component';
 import { CompanyProfileOperationalHoursComponent } from './company-profile-operational-hours/company-profile-operational-hours.component';
 import { fadeInAnimation } from 'src/app/animations';
+import { CompanyProfileApiKeysComponent } from './company-profile-api-keys/company-profile-api-keys.component';
+import { ApiKeysStateService } from 'src/app/states/api-keys/api-keys-state.service';
 declare var $: any;
 @Component({
   selector: 'app-company-profile',
@@ -27,11 +29,14 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   @ViewChild('workspace', { static: false }) workspace: CompanyProfileWorkspaceComponent;
   @ViewChild('profile', { static: false }) profile: CompanyProfileProfileComponent;
   @ViewChild('operationalhours', { static: false }) operationalhours: CompanyProfileOperationalHoursComponent;
+  @ViewChild('apiKeys', { static: false }) apiKeys: CompanyProfileApiKeysComponent;
+
   sub: Subscription = new Subscription();
   constructor(
     private companyProfileService: CompanyProfileService,
     private settingStateService: SettingStateService,
     private companiesStateService: CompaniesStateService,
+    private apiKeysStateService: ApiKeysStateService
   ) { }
 
   /**
@@ -72,6 +77,9 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     if (this.tabSet == "tab1") this.profile.submitCompanyProfile();
     if (this.tabSet == "workspace") this.workspace.checkDomain();
     if (this.tabSet == "operationalhours") this.operationalhours.onWorkSubmit();
+  }
+  addAPIKey() {
+    this.apiKeysStateService.openAddAside();
   }
   ngOnDestroy() {
     this.sub.unsubscribe();

@@ -21,6 +21,7 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { CompanyUsersDropDownComponent } from 'src/app/components/tickets/tickets/ticket-add-aside/company-users-drop-down/company-users-drop-down.component';
 import { TimeZone } from '../../company-time-zone/class/time-zone';
 import { CompanyTimeZoneStateService } from '../../company-time-zone/services/company-time-zone-state.service';
+import { ThirdPartyApp } from '../../class/company-third-party-apps';
 
 @Component({
   selector: 'company-add-aside-full',
@@ -166,6 +167,15 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   onChangeBillingZip(data) {
     if (this.company.addresses[1].sameAsBilling) this.company.addresses[1].postalCode = JSON.parse(JSON.stringify(this.company.addresses[0].postalCode));
 
+  }
+  addThirdParty() {
+    this.company.thirdPartyApps.push(new ThirdPartyApp({
+      appId: '',
+      appName: ''
+    }));
+  }
+  removeThirdParty(i) {
+    this.company.thirdPartyApps.splice(i, 1);
   }
   onSameAsBilling(event) {
     if (event.target.checked) {

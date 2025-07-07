@@ -10,6 +10,7 @@ import { CompanyConditions } from './company-conditions';
 import { CompanyAssociated } from './company-associated';
 import { CompanyAssigned } from './company-assigned';
 import { CompanyAndressContact } from 'src/app/interfaces/company/company-address-contact';
+import { ThirdPartyApp } from './company-third-party-apps';
 
 export class CompanyProfile {
     accountNumber: any;
@@ -40,6 +41,7 @@ export class CompanyProfile {
     reputation?: number = 0;
     primaryContact: CompanyAndressContact;
     isUseSelectedUser: boolean = false;
+    thirdPartyApps: Array<ThirdPartyApp> = []
     constructor() {
         this.logo = null;
         let contact: CompanyProfileContact = new CompanyProfileContact();
@@ -132,6 +134,13 @@ export class CompanyProfile {
         this.reputation = company.reputation;
         if (company.companyTicketStatistic) this.companyTicketStatistic = company.companyTicketStatistic;
         this.associatedCompanies = company.associatedCompanies.map(item => new CompanyAssociated(item));
+        this.thirdPartyApps = company.thirdPartyApps;
+        if (this.thirdPartyApps.length === 0) {
+            this.thirdPartyApps.push(new ThirdPartyApp({
+                appId: '',
+                appName: ''
+            }));
+        }
     }
     public getDataForUpdate() {
         let contacts = JSON.parse(JSON.stringify(this.contacts.map(item => (item.getDataForRequest(false, false)))));
@@ -161,7 +170,8 @@ export class CompanyProfile {
             techLeadId: this.techLeadId,
             id: this.id,
             tags: this.tags,
-            reputation: this.reputation
+            reputation: this.reputation,
+            thirdPartyApps: this.thirdPartyApps.filter(item => item.appId.length > 0 || item.appName.length > 0)
         }
     }
     public getDataForAdd() {
@@ -195,6 +205,7 @@ export class CompanyProfile {
             workingDays: this.workingDays,
             techLeadId: this.techLeadId,
             tags: this.tags,
+            thirdPartyApps: this.thirdPartyApps.filter(item => item.appId.length > 0 || item.appName.length > 0)
         }
 
     }
@@ -226,7 +237,11 @@ export class CompanyProfile {
         this.paymentTerms = null;
         this.serviceType = null;
         this.techLeadId = null;
-        this.workingDays = Weeks.map((item) => new WorkDay(item.toUpperCase(), 0, 0))
+        this.workingDays = Weeks.map((item) => new WorkDay(item.toUpperCase(), 0, 0));
+        this.thirdPartyApps = [new ThirdPartyApp({
+            appId: '',
+            appName: ''
+        })];
     }
 
     public onCheckFullVersion() {
