@@ -68,25 +68,19 @@ export class CompanyProfileApiKeysAddAsideComponent implements OnInit {
       .join(' ');
   }
   togglePermission(permission) {
-    console.log("permission", permission);
     let list = this.modelForm.controls["permissions"].value;
-    console.log("list.indexOf(permission)", list.indexOf(permission));
     if (list.indexOf(permission) > -1) {
-      console.log("1");
       list.splice(list.indexOf(permission), 1);
     } else {
-      console.log("2");
       list.push(permission);
     }
     this.modelForm.controls["permissions"].setValue(list);
-    console.log(this.modelForm.controls["permissions"]);
   }
   closed() {
     this.submitted = false;
     this.opened = false;
     this.modelForm.reset();
     this.modelForm.controls["permissions"].setValue([]);
-    console.log("this.modelForm.value", this.modelForm.value);
   }
   add() {
     this.submitted = true;
