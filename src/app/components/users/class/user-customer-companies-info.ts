@@ -56,7 +56,7 @@ export class UserCustomerCompaniesInfo {
         return {
             defaultSubscriptions: this.defaultSubscriptions.getDataForUpdate(),
             isPrimaryContact: this.isPrimaryContact,
-            "jobTitleDto": this.jobTitleDto,
+            "jobTitleDto": this.jobTitleDto ? this.jobTitleDto.getDataForUpdate() : null,
         }
     }
     /**
@@ -67,7 +67,7 @@ export class UserCustomerCompaniesInfo {
         return {
             clientCompanyName: this.clientCompanyName,
             "companyId": this.companyId,
-            "jobTitleDto": this.jobTitleDto,
+            "jobTitleDto": this.jobTitleDto ? this.jobTitleDto.getDataForUpdate() : null,
             "customerUserRole": this.customerUserRole,
             defaultSubscriptions: this.defaultSubscriptions.getDataForUpdate(),
             "hasAccess": this.hasAccess,
@@ -87,7 +87,7 @@ export class UserCustomerCompaniesInfo {
 * @param {UserJobTitle} data - Object Job Title Dto
 */
     public setJobTitleDto(data) {
-        this.jobTitleDto = data;
+        this.jobTitleDto = new UserJobTitle(data);
     }
     /**
 * @description Set Customer User Role

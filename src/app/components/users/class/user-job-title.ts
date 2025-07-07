@@ -8,4 +8,7 @@ export class UserJobTitle {
         }
 
     }
+    public getDataForUpdate() {
+        return { id: this.id }
+    }
 }

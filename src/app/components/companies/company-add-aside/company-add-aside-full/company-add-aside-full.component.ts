@@ -206,6 +206,10 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
           this.validate.resetName();
           this.validate.resetNameIsExist();
           this.company.addresses[0].locationName = JSON.parse(JSON.stringify(this.company.name));
+          if (this.company.addresses[1].sameAsBilling) {
+            this.company.addresses[1].locationName = JSON.parse(JSON.stringify(this.company.name));
+            this.validate.resetShippingAddress();
+          }
           this.validate.resetBillindAddress();
         } else {
           this.validate.setNameIsExist();
