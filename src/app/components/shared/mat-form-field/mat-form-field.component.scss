@@ -1,6 +1,8 @@
+@import './src/assets/styles/variable';
+
 .mat-form-field {
     width: 100%;
-    background: #ffffff;
+    background: $white;
     border-radius: 6px;
     display: inline-block;
     position: relative;
@@ -22,7 +24,7 @@
     width: 100%;
 }
 .mat-form-field-infix {
-    border: 1px solid #EAECF0;
+    border: 1px solid $gray-200;
     border-radius: 6px;
     position: relative;
     min-height: 40px;
@@ -52,7 +54,7 @@
     line-height: 20px;
     font-weight: 400;
     letter-spacing: 0;
-    color: #98A2B3;
+    color: $gray-400;
     position: absolute;
     left: 0;
     font: inherit;

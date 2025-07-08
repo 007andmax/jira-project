@@ -1,12 +1,8 @@
 .table__details-content {
   background-color: transparent;
   text-transform: none;
-  /*font-size: 13px;*/
-  /*font-weight: 400;*/
   margin: 0 60px;
   width: unset;
-  /*padding: 20px 0;*/
-  /*border-bottom: 1px solid #edf2f6;*/
 }
 .table__details-content tr td {
   padding: 20px 0;

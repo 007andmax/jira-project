@@ -208,34 +208,3 @@
       color: $green-700;
     }
 }
-
-::ng-deep app-ticket-profile-updates-product-item {
-    .ticket-updates__ticket-info-container {
-        @media (max-width: 767px) {
-            position: relative;
-            margin: 0;
-        }
-    }
-
-    .ticket-updates__ticket-info-container {
-        .dropdown {
-            &:nth-child(2) {
-                @media (max-width: 767px) {
-                    top: -30px !important;
-                }
-            }
-        }
-    }
-
-    &:nth-child(2) {
-        .ticket-updates__ticket-info-container {
-            .dropdown {
-                &:nth-child(2) {
-                    @media (max-width: 767px) {
-                        top: -41px !important;
-                    }
-                }
-            }
-        }
-    }
-}

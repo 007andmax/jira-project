@@ -24,7 +24,7 @@
   &.--selected {
     background-color: $gray-50;
     ::ng-deep .detail-ticket-txt {
-      color: #98A2B3 !important;
+      color: $gray-400 !important;
     }
 
     .ticket-status-table__status {

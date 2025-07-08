@@ -1,5 +1,7 @@
+@import './src/assets/styles/variable';
+
 .modal-content {
-    background-color: #ffffff;
+    background-color: $white;
     box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
     padding: 32px;
     width: 504px;

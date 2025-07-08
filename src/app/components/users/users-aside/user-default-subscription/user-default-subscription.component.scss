@@ -35,7 +35,7 @@
 .filter-tags-body {
   .qt-checkbox {
     .text-content {
-      padding: 3px 0 0px;
+      padding: 3px 0 0;
       flex: 1;
     }
     .name,
@@ -93,8 +93,8 @@
   }
 }
 .user-subscription {
-  background-color: #fff;
+  background-color: $white;
   &.--disabled {
-    background-color: #F9FAFB !important;
+    background-color: $gray-50 !important;
   }
 }

@@ -168,7 +168,7 @@ input.qt-dropdown-input {
   mat-error,app-mat-error {
     &.qt-tooltip-error {
       position: absolute;
-      color: #D92D20;
+      color: $red-600;
       font-weight: 400;
       font-size: 12px;
       line-height: 15px;
