@@ -32,8 +32,7 @@ import { LeftPanelFileManagerComponent } from './left-panel-file-manager/left-pa
 @Component({
   selector: 'app-left-panel',
   templateUrl: './left-panel.component.html',
-  styleUrls: ['./left-panel.component.scss'],
-  encapsulation: ViewEncapsulation.ShadowDom
+  styleUrls: ['./left-panel.component.scss']
 })
 export class LeftPanelComponent implements OnInit, OnDestroy {
   currentCompany: Company;

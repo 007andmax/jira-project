@@ -13,9 +13,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 @Component({
   selector: 'app-left-panel-billing',
   templateUrl: './left-panel-billing.component.html',
-  styleUrls: ['./left-panel-billing.component.scss'],
-  encapsulation: ViewEncapsulation.ShadowDom
-
+  styleUrls: ['./left-panel-billing.component.scss']
 })
 export class LeftPanelBillingComponent implements OnInit, OnDestroy {
   open: boolean = false;
