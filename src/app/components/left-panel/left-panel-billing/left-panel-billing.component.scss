@@ -13,3 +13,24 @@
         color: $blue-light-600;
     }
 }
+.app-left-panel__menu {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    cursor: default;
+}
+.app-left-panel__menu-title {
+    font-weight: 500;
+    font-stretch: normal;
+    color: #fff;
+    white-space: nowrap;
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 16px;
+    margin-left: 8px;
+}
+.app-left-panel__menu-expand {
+    list-style: none;
+    margin-bottom: 0;
+    padding: 0;
+}

@@ -1,0 +1,23 @@
+.app-left-panel {
+    display: block;
+    height: 100%;
+    width: auto;
+    z-index: 1050;
+    top: 0;
+    left: 0;
+    background-color: #1d2939;
+    color: #fff;
+}
+.app-left-panel__body {
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    display: flex;
+    align-items: flex-start;
+    height: 100%;
+}
+.app-left-panel__body-menu {
+    height: calc(100% - 50px);
+    width: 100%;
+    overflow-x: clip;
+    margin: 24px 16px 0 8px;
+}
