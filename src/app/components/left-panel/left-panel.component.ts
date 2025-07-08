@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NavigationEnd, Router } from "@angular/router";
 import { Company } from 'src/app/interfaces/company/company';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
@@ -32,7 +32,8 @@ import { LeftPanelFileManagerComponent } from './left-panel-file-manager/left-pa
 @Component({
   selector: 'app-left-panel',
   templateUrl: './left-panel.component.html',
-  styleUrls: ['./left-panel.component.scss']
+  styleUrls: ['./left-panel.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LeftPanelComponent implements OnInit, OnDestroy {
   currentCompany: Company;
