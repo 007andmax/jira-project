@@ -1513,7 +1513,7 @@ app-quotes-item {
       }
     }
     &__email-address {
-      flex: 1 1 180px;
+      flex: 1 1 100px;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
@@ -1529,6 +1529,12 @@ app-quotes-item {
       @include media-breakpoint-up($xl) {
         flex: 1 0 340px;
       }
+    }
+      &__client-type {
+      flex: 0 0 80px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
     &__tickets {
       flex: 0 0 80px;

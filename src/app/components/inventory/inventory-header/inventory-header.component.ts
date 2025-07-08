@@ -62,7 +62,6 @@ export class InventoryHeaderComponent implements OnInit {
     this.onChangeCountFilter();
   }
   clearAll() {
-    console.log("clearAll");
     this.filtes.onClearAll();
     this.countFilter = 0;
   }

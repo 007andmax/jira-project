@@ -1,0 +1,143 @@
+<div
+    [hidden]="!opened"
+    class="qt-aside-modern"
+>
+    <form [formGroup]="modelForm">
+        <div class="qt-aside-modern__header">
+            <div class="qt-aside-modern__header-info qt-df qt-ai-c">
+                <div class="qt-aside__title">Edit API Key</div>
+            </div>
+            <div>
+                <div
+                    class="qt-aside__close-modal"
+                    (click)="closed()"
+                >
+                    <div class="qt-icon icon__close qt-sz-20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="qt-aside-modern__content">
+            <div class="qt-inputs-row --required">
+                <div class="qt-input-block">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        API Key Title
+                    </label>
+                    <input
+                        [ngClass]="{'--input-error':submitted && f2.title.errors}"
+                        class="qt-input-block__input"
+                        formControlName="title"
+                        type="text"
+                        minlength="1"
+                        maxlength="255"
+                        placeholder="Write Ticket Subject"
+                    >
+                    <app-mat-error
+                        class="invalid-feedback"
+                        *ngIf="submitted && f2.title.errors"
+                    >
+                        API Key Title is required
+                    </app-mat-error>
+                </div>
+            </div>
+            <div class="qt-inputs-row --required">
+                <div class="qt-input-block">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        API Key
+                    </label>
+                    <div class="qt-df">
+                        <input
+                            [ngClass]="{'--input-error':submitted && f2.key.errors}"
+                            id="add-ticket-subject"
+                            class="qt-input-block__input"
+                            formControlName="key"
+                            type="text"
+                            minlength="1"
+                            maxlength="100"
+                            placeholder="Write Ticket Subject"
+                            disabled
+                        >
+                        <div
+                            (click)="copy(f2.key.value)"
+                            class="qt-input-afterfix pointer qt-ml-8"
+                            placement="top"
+                            ngbTooltip="Copy"
+                        >
+                            <div class="qt-sz-16 qt-bg-contain qt-icon icon__copy "></div>
+                        </div>
+                    </div>
+                    <app-mat-error
+                        class="invalid-feedback"
+                        *ngIf="submitted && f2.key.errors"
+                    >
+                        API Key is required
+                    </app-mat-error>
+                </div>
+            </div>
+
+            <div class="cmn-area pr-area">
+                <div class="tab-pane__table dataTable">
+                    <div class="tab-pane__table-body">
+                        <ng-container *ngFor="let section of sections | keyvalue">
+                            <div class="tab-pane__table-row tab-pane__table-row--sm tab-pane__table-row__permissions-subheader">
+                                <div class="tab-pane__table-cell user-permissions-table__permissions">
+                                    <div class="user-permissions-table__permissions-text">{{ section.key }}</div>
+                                </div>
+                            </div>
+                            <div
+                                class="tab-pane__table-row"
+                                *ngFor="let permission of section.value"
+                            >
+                                <div class="tab-pane__table-cell user-permissions-table__permissions">
+                                    <div class="user-permissions-table__permissions-text">{{ userReadable(permission) }}</div>
+                                </div>
+                                <div class="tab-pane__table-cell user-permissions-table__role">
+                                    <label
+                                        class="qt-checkbox"
+                                        for="{{ permission }}_1"
+                                        [ngClass]="{'--disabled':isPermissionDisabled(permission)}"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            id="{{ permission }}_1"
+                                            [checked]="f2.permissions.value.indexOf(permission) > -1 ? true : false"
+                                            (click)="togglePermission( permission)"
+                                            [disabled]="isPermissionDisabled(permission)"
+                                        >
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="qt-aside-modern__footer">
+            <div class="qt-df qt-w100">
+                <button
+                    class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+                    (click)="closed()"
+                >
+                    Cancel
+                </button>
+                <button
+                    class="qt-button qt-w100 qt-jc-c"
+                    appDisabledBtn
+                    #addBtn="disabled"
+                    (onClick)="add()"
+                    [ngClass]="{'--loading':addBtn.isBlock()}"
+                >
+                    <span *ngIf="!addBtn.isBlock()">Create Ticket</span>
+                    <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

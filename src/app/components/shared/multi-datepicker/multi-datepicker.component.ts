@@ -89,7 +89,6 @@ export class MultiDatepickerComponent implements OnInit {
   public toggleDatePicker() {
     if (this.isDisabled) return;
     this.showDatePicker = !this.showDatePicker;
-    console.log('showDatePicker', this.showDatePicker);
   }
 
   /**
@@ -97,7 +96,6 @@ export class MultiDatepickerComponent implements OnInit {
    */
   public hideDatePicker() {
     this.showDatePicker = false;
-    console.log('hideDatePicker', this.showDatePicker);
   }
 
   /**

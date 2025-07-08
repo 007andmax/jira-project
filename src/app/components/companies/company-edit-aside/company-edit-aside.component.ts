@@ -29,6 +29,7 @@ import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-t
 import { MODE_EDIT_SUBSCRIPTION, MODE_EDIT_USER_SUBSCRIPTION } from 'src/app/const/users';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { TimeZone } from '../company-time-zone/class/time-zone';
+import { ThirdPartyApp } from '../class/company-third-party-apps';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -244,6 +245,9 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getCompanyFromEdit);
   }
+  removeThirdParty(i) {
+    this.company.thirdPartyApps.splice(i, 1);
+  }
   setSelectServiceTypes() {
     let indexServiceType = this.serviceTypes.findIndex(item => item.name === this.company.serviceType);
     if (indexServiceType > -1) this.onSelectServiceTypes(this.serviceTypes[indexServiceType]);
@@ -321,6 +325,12 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
         this.cd.detectChanges();
       })
     }
+  }
+  addThirdParty() {
+    this.company.thirdPartyApps.push(new ThirdPartyApp({
+      appId: '',
+      appName: ''
+    }));
   }
   public onChangeName() {
     if (this.company.name && this.company.name.length > 0) {

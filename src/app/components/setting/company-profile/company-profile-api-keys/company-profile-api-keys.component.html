@@ -1,0 +1,70 @@
+<div
+    class="cmn-area products-area"
+    [hidden]="loading"
+>
+    <div class="tab-pane__table dataTable">
+        <div class="tab-pane__table-header">
+            <div class="tab-pane__table-row">
+                <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                    <label class="qt-checkbox">
+                        <input type="checkbox">
+                        <span></span>
+                    </label>
+                </div>
+                <div
+                    class="tab-pane__table-cell commissions-product__company-name pointer"
+                    (click)="onFilter('title')"
+                >
+                    Title
+                    <div class="qt-table-modern__sorting--new"></div>
+                </div>
+                <div class="tab-pane__table-cell commissions-product__action"></div>
+            </div>
+        </div>
+        <div
+            class="tab-pane__table-body"
+            *ngIf="list"
+        >
+            <ng-template
+                ngFor
+                let-item
+                [ngForOf]="list"
+                [ngForTrackBy]="trackById"
+            >
+                <div class="tab-pane__table-row">
+                    <div class="tab-pane__table-cell tab-pane__table-checkboxes">
+                        <label class="qt-checkbox">
+                            <input type="checkbox">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="tab-pane__table-cell commissions-product__company-name">{{ item.title }}</div>
+                    <div class="tab-pane__table-cell commissions-product__action qt-pos-rel">
+                        <div class="qt-df">
+                            <div
+                                placement="top"
+                                ngbTooltip="Edit"
+                                class="qt-icon icon__edit qt-icon__gray-400 qt-sz-20 qt-bg-contain qt-mr-16 pointer"
+                                (click)="editApiKey(item)"
+                            >
+                            </div>
+                            <div
+                                placement="top"
+                                ngbTooltip="Remove"
+                                class="qt-icon icon__delete qt-sz-20 qt-bg-contain pointer"
+                                (click)="confirmDelete(item)"
+                            >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
+<div
+    class="loading-container"
+    *ngIf="loading"
+>
+    <div class="loading"></div>
+</div>
