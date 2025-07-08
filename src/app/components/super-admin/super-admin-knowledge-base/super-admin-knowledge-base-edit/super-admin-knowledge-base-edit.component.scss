@@ -75,46 +75,9 @@
 
 
     // Start
-    .search-users,
-    .search-tech-users,
-    .search-status,
-    .search-company,
-    .light-dropdown.dropdown {
-
-        &::before {
-            color: $gray-900;
-            font-weight: 600;
-            line-height: 20px;
-        }
-    }
-
     .qt-dropdown,
     .light-dropdown {
         padding-top: 8px;
-    }
-
-    .search-company {
-        &::before {
-            content: "Company";
-        }
-    }
-
-    .search-users {
-        &::before {
-            content: "User";
-        }
-    }
-
-    .search-tech-users {
-        &::before {
-            content: "Tech Team";
-        }
-    }
-
-    .search-status {
-        &::before {
-            content: "Status";
-        }
     }
 }
 
@@ -124,20 +87,6 @@
 
         &:last-child {
             margin-right: 0;
-        }
-    }
-
-    .search-users,
-    .search-tech-users,
-    .search-status,
-    .search-company,
-    .search-priority,
-    .light-dropdown.dropdown,
-    app-tickets-filter-tags {
-        &::before {
-            color: $gray-500;
-            font-size: 13px;
-            font-weight: 500;
         }
     }
 
@@ -154,7 +103,7 @@
     }
 }
 
- 
+
 ::ng-deep #froala-editor {
     .fr-btn-grp {
         display: flex;

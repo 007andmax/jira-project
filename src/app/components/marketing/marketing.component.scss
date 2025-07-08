@@ -90,47 +90,11 @@
     .search-company,
     .light-dropdown.dropdown {
         margin-bottom: 16px;
-
-        &::before {
-            color: $gray-900;
-            font-weight: 600;
-            line-height: 20px;
-        }
     }
 
     .qt-dropdown,
     .light-dropdown {
         padding-top: 8px;
-    }
-
-    .search-company {
-        &::before {
-            content: "Company";
-        }
-    }
-
-    .search-users {
-        &::before {
-            content: "User";
-        }
-    }
-
-    .search-tech-users {
-        &::before {
-            content: "Tech Team";
-        }
-    }
-
-    .search-status {
-        &::before {
-            content: "Status";
-        }
-    }
-
-    app-users-filter-tags {
-        &::before {
-            content: "Tags";
-        }
     }
 }
 

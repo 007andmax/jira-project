@@ -1598,14 +1598,6 @@ app-company-dash-tags {
     .mat-form-field-wrapper {
         margin: 0;
         padding-bottom: 0 !important;
-        &::before {
-            position: absolute;
-            content: "Tags";
-            font-weight: 600;
-            font-size: 13px;
-            left: 0;
-            top: -28px;
-        }
     }
     .mat-form-field-flex {
         display: inline-flex;

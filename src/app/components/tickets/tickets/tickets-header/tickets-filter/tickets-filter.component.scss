@@ -8,20 +8,6 @@
     }
   }
 
-  .search-users,
-  .search-tech-users,
-  .search-status,
-  .search-company,
-  .search-priority,
-  .light-dropdown.dropdown,
-  app-tickets-filter-tags {
-    &::before {
-      color: $gray-500;
-      font-size: 13px;
-      font-weight: 500;
-    }
-  }
-
   ::ng-deep tickets-filter-drop-down .mat-form-field {
     width: 100%;
   }

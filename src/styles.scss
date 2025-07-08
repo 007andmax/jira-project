@@ -1388,7 +1388,7 @@ app-quotes-item {
         border: none;
         &::before {
           left: 12px;
-          top: 10px;
+          top: 6px;
           position: absolute;
           content: "";
           width: 20px;
@@ -2120,7 +2120,7 @@ app-quotes-item {
     .mat-form-field-flex {
       .mat-form-field-infix {
         &::before {
-          top: 12px;
+          top: 9px;
         }
       }
     }

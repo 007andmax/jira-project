@@ -67,7 +67,7 @@ app-tickets-table-item {
   }
 }
 
-@include media-breakpoint-up($lg) { 
+@include media-breakpoint-up($lg) {
 ::ng-deep .company-tickets-table {
     &__requested-by {
       max-width: 300px;
@@ -190,47 +190,11 @@ app-tickets-table-item {
   .search-company,
   .light-dropdown.dropdown {
     margin-bottom: 16px;
-
-    &::before {
-      color: $gray-900;
-      font-weight: 600;
-      line-height: 20px;
-    }
   }
 
   .qt-dropdown,
   .light-dropdown {
     padding-top: 8px;
-  }
-
-  .search-company {
-    &::before {
-      content: "Company";
-    }
-  }
-
-  .search-users {
-    &::before {
-      content: "User";
-    }
-  }
-
-  .search-tech-users {
-    &::before {
-      content: "Tech Team";
-    }
-  }
-
-  .search-status {
-    &::before {
-      content: "Status";
-    }
-  }
-
-  app-tickets-filter-tags {
-    &::before {
-      content: "Tags";
-    }
   }
 }
 
@@ -339,7 +303,7 @@ app-tickets-table-item {
         transform: unset;
         width: calc(412px - 16px);
         flex: 1;
-    
+
         @include media-breakpoint-down($md) {
           max-width: calc(345px - 16px);
         }

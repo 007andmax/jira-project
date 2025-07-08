@@ -9,20 +9,6 @@
         }
     }
 
-    .search-users,
-    .search-tech-users,
-    .search-status,
-    .search-company,
-    .search-priority,
-    .light-dropdown.dropdown,
-    app-users-filter-tags {
-        &::before {
-            color: $gray-500;
-            font-size: 13px;
-            font-weight: 500;
-        }
-    }
-
     ::ng-deep app-users-filter-custom-subscriptions .mat-form-field {
         width: 100%;
     }
@@ -49,7 +35,7 @@
     color: $gray-900;
 }
 .default-subscription {
-    margin-bottom: 0px !important;
+    margin-bottom: 0 !important;
 }
 .title-filter {
     color: $gray-500;
