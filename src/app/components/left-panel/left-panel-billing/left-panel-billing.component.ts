@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
@@ -13,7 +13,9 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 @Component({
   selector: 'app-left-panel-billing',
   templateUrl: './left-panel-billing.component.html',
-  styleUrls: ['./left-panel-billing.component.scss']
+  styleUrls: ['./left-panel-billing.component.scss'],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class LeftPanelBillingComponent implements OnInit, OnDestroy {
   open: boolean = false;
