@@ -342,5 +342,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.draftEmailStateService.resetSelectedUsers();
     this.usersStateService.clearGlobalFilter();
     this.websocketService.unSubsribeUsersFilters();
+    this.usersStateService.setShowArchivedCompanies(false);
   }
 }
