@@ -50,7 +50,12 @@
               "lodash",
               "jquery",
               "md5"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/assets/styles"
+              ]
+            }
           },
           "configurations": {
             "production": {
