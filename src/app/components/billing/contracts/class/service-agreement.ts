@@ -69,6 +69,9 @@ export class ServiceAgreement {
             this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));
         }
     }
+    public setBillType(data) {
+        this.billType = data;
+    }
     public onCalculateTaxSumForServiceExpenses(service) {
         let rate = service.taxes.map(item => item.rate).reduce((a, b) => a + b, 0);
         service.taxSum = service.rate * service.quantity * rate / 100;

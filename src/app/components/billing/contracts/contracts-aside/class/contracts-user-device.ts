@@ -37,7 +37,9 @@ export class ContractsUserDevice {
     constructor() {
 
     }
-
+    public setBillType(data) {
+        this.billType = data;
+    }
     public setDataFromCopy(data: ServiceAgreement) {
         this.billType = data.billType;
         this.blockRate = (data.blockRate.length > 0) ? Number(data.blockRate) : undefined;
