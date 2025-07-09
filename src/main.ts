@@ -10,6 +10,6 @@ if (environment.production) {
 
 
 platformBrowserDynamic().bootstrapModule(AppModule).then(() => {
-  document.body.classList.remove('loading-body');
+  document.body.classList.add('ready');
 })
   .catch(err => console.error(err));
