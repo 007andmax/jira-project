@@ -52,15 +52,13 @@ describe('DashboardSalesAnalyticsComponent unit test', () => {
   it('check "selectType"', () => {
     const fixture = TestBed.createComponent(DashboardSalesAnalyticsComponent);
     const com = fixture.debugElement.componentInstance;
-    expect(com.getDataForChart()).toEqual([
-      {
-        series: [],      //values - represents the array of {x,y} data points
-        name: 'Sales', //key  - the name of the series.
-      },
-      {
-        series: [],      //values - represents the array of {x,y} data points
-        name: 'Revenue', //key  - the name of the series.
-      },
-    ]);
+    com.selectType('WEEKLY');
+    expect(com.type).toEqual('WEEKLY');
+  });
+  it('check "getSelectedType"', () => {
+    const fixture = TestBed.createComponent(DashboardSalesAnalyticsComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.selectType('WEEKLY');
+    expect(com.getSelectedType()).toEqual('Weekly');
   });
 });

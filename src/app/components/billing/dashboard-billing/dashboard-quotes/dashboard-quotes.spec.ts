@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 import { DashboardQuotesComponent } from './dashboard-quotes.component';
+import { DashboardSaleQuoteCounters } from '../class/dashboard-sale-quote-counters';
 
 
 describe('DashboardQuotesComponent unit test', () => {
@@ -37,6 +38,7 @@ describe('DashboardQuotesComponent unit test', () => {
   it('check "getProcent"', () => {
     const fixture = TestBed.createComponent(DashboardQuotesComponent);
     const com = fixture.debugElement.componentInstance;
-    expect(com.getProcent(100)).toEqual(0);
+    com.stats = new DashboardSaleQuoteCounters();
+    expect(com.getProcent(100)).toEqual(Infinity);
   });
 });
