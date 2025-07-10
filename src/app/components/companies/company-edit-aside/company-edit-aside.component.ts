@@ -242,7 +242,6 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
         this.serviceTypes = this.crmStateService.getServiceTypeList();
         this.setSelectServiceTypes();
       }
-      console.log("this.selectedJobTitle", this.selectedJobTitle);
       this.cd.detectChanges();
     })
     this.sub.add(getCompanyFromEdit);

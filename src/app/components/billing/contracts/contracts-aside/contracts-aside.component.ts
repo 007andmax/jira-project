@@ -36,7 +36,6 @@ export class ContractsAsideComponent implements OnInit, OnDestroy {
     }
     let getOnChangeType = this.contractsStateService.getOnChangeType().subscribe(data => {
       this.type = `${data.type}${(data.billType) ? "_" + data.billType : ""}`;
-      console.log('getOnChangeType', data);
       if (data.type == "SERVICE_CONTRACT_DEVICE") this.сontractsStateService.getContractForCopy().setBillType("DEVICE");
       if (data.type == "SERVICE_CONTRACT") this.сontractsStateService.getContractForCopy().setBillType("OTHER");
     })
