@@ -61,9 +61,6 @@ export class ProductItemQuoteComponent implements OnInit {
     }).join("<br>");
   }
 
-  private isInteger(num): boolean {
-    return (num ^ 0) === num;
-  }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
