@@ -21,6 +21,10 @@ export class TicketSettingsComponent implements OnInit, OnDestroy {
   new CompanySetting('15 minutes', 'FIFTEEN_MINUTES')];
   timepickerTypes = [new CompanySetting('Start-End time picker', 'TIME_PICKER'),
   new CompanySetting('Duration picker', 'DURATION_PICKER')];
+  sorting = [new CompanySetting('Sort by creation date - Newest at the top', 'CREATED_DATE_DESC'),
+  new CompanySetting('Sort by creation date - Oldest at the top', 'CREATED_DATE_ASC'),
+  new CompanySetting('Sort by last update date - Newest at the top', 'LAST_UPDATED_DATE_DESC'),
+  new CompanySetting('Sort by last update date - Oldest at the top', 'LAST_UPDATED_DATE_ASC')];
   @ViewChild('intervalsDp', { static: false }) intervalsDp: DropDownComponent;
   loading = true;
   submitted = false;
@@ -62,6 +66,7 @@ export class TicketSettingsComponent implements OnInit, OnDestroy {
       outliersTime: ['', Validators.compose([Validators.required, Validators.min(1)])],
       timepickerType: ['DURATION_PICKER'],
       interval: ['FIVE_MINUTES'],
+      defaultTicketSortOrder: ['']
     });
     if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
     let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe(res => {
@@ -94,8 +99,11 @@ export class TicketSettingsComponent implements OnInit, OnDestroy {
         ? res.outliersSeconds / 3600
         : null,
       timepickerType: timepickerType,
-      interval: serviceExpenseDurationPickerInterval
+      interval: serviceExpenseDurationPickerInterval,
+      defaultTicketSortOrder: res.defaulTticketSortOrder
     });
+    console.log("res", res);
+    console.log("this.ticketForm", this.ticketForm.value);
     this.resetListIntervals(timepickerType);
   }
 
@@ -144,8 +152,16 @@ export class TicketSettingsComponent implements OnInit, OnDestroy {
       interval: data.value
     });
   }
+  onChangeTicketSortOrder(data) {
+    this.ticketForm.patchValue({
+      defaultTicketSortOrder: data.value
+    });
+  }
   getSelectedInterval() {
     return this.intervals.find(item => item.value === this.ticketForm.value.interval);
+  }
+  getSelectedTicketSorting() {
+    return this.sorting.find(item => item.value === this.ticketForm.value.defaultTicketSortOrder);
   }
   getSelectedTimepickerType() {
     return this.timepickerTypes.find(item => item.value === this.ticketForm.value.timepickerType);
@@ -174,7 +190,8 @@ export class TicketSettingsComponent implements OnInit, OnDestroy {
         outliersSeconds: this.ticketForm.value.outliersTime
           ? this.ticketForm.value.outliersTime * 3600
           : null
-      }
+      },
+      "defaultTicketSortOrder": this.ticketForm.value.defaultTicketSortOrder
     };
     this.invoiceTicketsService.updateTicketsetting(objTicket).subscribe(
       (res: any) => {

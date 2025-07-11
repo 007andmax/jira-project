@@ -186,4 +186,9 @@
         class="ticket-table__created-date"
         [textContent]="getCreateAt()"
     ></div>
+    <div
+        (click)="selectForDetail()"
+        class="ticket-table__created-date"
+        [textContent]="ticket.lastUpdatedAt_text"
+    ></div>
 </div>

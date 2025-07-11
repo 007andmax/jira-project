@@ -1,6 +1,7 @@
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { TicketsPriority } from '../../setting/ticket-settings-page/tickets-priority/class/tickets-priority';
 import { MultiAssignedUsers } from './multi-assigned-users';
+import * as moment from 'moment';
 
 export class Ticket {
     assignedUserId: string;
@@ -34,6 +35,8 @@ export class Ticket {
     "totalProductsPrice": number;
     "companyServiceType": string;
     updatesCount: number;
+    lastUpdatedAt: number;
+    lastUpdatedAt_text: string;
     constructor(data) {
         this.assignedUserId = data.assignedUserId;
         this.attachmentsCount = data.attachmentsCount;
@@ -67,6 +70,8 @@ export class Ticket {
         this.totalProductsPrice = data.totalProductsPrice;
         this.companyServiceType = data.companyServiceType;
         this.updatesCount = data.updatesCount;
+        this.lastUpdatedAt = data.lastUpdatedAt;
+        this.lastUpdatedAt_text = new Date().getTime() - data.lastUpdatedAt < 3600000 ? moment(new Date().getTime() - data.lastUpdatedAt).format('mm') + " minutes" : new Date().getTime() - data.lastUpdatedAt < 3600000 * 24 ? moment(new Date().getTime() - data.lastUpdatedAt).format('HH') + " hours" : moment(new Date().getTime() - data.lastUpdatedAt).format('DD') + " day";
     }
     public setAssignedUserId(id) {
         this.assignedUserId = id;
