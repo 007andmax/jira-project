@@ -71,7 +71,8 @@ export class Ticket {
         this.companyServiceType = data.companyServiceType;
         this.updatesCount = data.updatesCount;
         this.lastUpdatedAt = data.lastUpdatedAt;
-        this.lastUpdatedAt_text = new Date().getTime() - data.lastUpdatedAt < 3600000 ? moment(new Date().getTime() - data.lastUpdatedAt).format('mm') + " minutes" : new Date().getTime() - data.lastUpdatedAt < 3600000 * 24 ? moment(new Date().getTime() - data.lastUpdatedAt).format('HH') + " hours" : moment(new Date().getTime() - data.lastUpdatedAt).format('DD') + " day";
+        if (data.lastUpdatedAt) this.lastUpdatedAt_text = new Date().getTime() - data.lastUpdatedAt < 3600000 ? moment(new Date().getTime() - data.lastUpdatedAt).format('m') + " mins ago" : new Date().getTime() - data.lastUpdatedAt < 3600000 * 24 ? moment(new Date().getTime() - data.lastUpdatedAt).format('H') + "h " + moment(new Date().getTime() - data.lastUpdatedAt).format('m') + " mins ago" : moment(new Date().getTime() - data.lastUpdatedAt).format('D') + " days ago";
+        if (!data.lastUpdatedAt) this.lastUpdatedAt_text = "N/A";
     }
     public setAssignedUserId(id) {
         this.assignedUserId = id;
