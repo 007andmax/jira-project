@@ -17,7 +17,6 @@
         (changeTypeFilter)="setTypeSearchFilterWithoutChange($event)"
     ></tickets-filter-search>
     <tickets-filter-companies-drop-down
-        class="qt-mb-16"
         #companyDp
         [clientType]="'CLIENT'"
         [title]="'Company'"
@@ -34,7 +33,6 @@
     ></app-tickets-filter-tags>
     <tickets-filter-created-drop-down
         #datesDp
-        class="qt-pt-16"
         [title]="'Created'"
         [change]="true"
         [search]="true"
