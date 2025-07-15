@@ -397,10 +397,52 @@
     svg.nvd3-svg {
       overflow: visible;
     }
-    .nv-legend {
-      transform: translate(calc(-50% + 120px), -21px);
+    .chart-legend {
+      transform: none !important;
+      position: absolute;
+    }
+    .chart-legend .legend-title {
+      display: none;
+    }
+    .chart-legend .legend-labels {
+      background: none;
+      .legend-label-text {
+        font-size: 12px;
+        color: $gray-600;
+        font-weight: 400;
+      }
+    }
+    .chart-legend .legend-label-color {
+      border-radius: 50%;
+    }
+    .line-chart .x .gridline-path-vertical {
+      display: none ;
+    }
+    .line-chart .y .gridline-path-horizontal {
+      stroke: $gray-100;
+    }
+    .ngx-charts .tooltip-anchor {
+      fill: transparent
     }
   }
+}
+app-dashboard-sales-analytics {
+  .chart-legend {
+    top: -41px;
+      left: calc(50% - 80px);
+    >div {
+      width: 160px !important;
+    }
+  }
+}
+app-tickets-analytics-widget {
+  .chart-legend {
+      top: -35px !important;
+      left: calc(50% - 140px) !important;
+      > div {
+        width: 280px !important;
+      }
+    }
 }
 
 @include media-breakpoint-down($md) {

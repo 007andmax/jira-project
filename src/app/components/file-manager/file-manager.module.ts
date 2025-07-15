@@ -31,7 +31,6 @@ import { MatFormFieldModule } from '../shared/mat-form-field/mat-form-field.modu
 
 @NgModule({
     declarations: [FileManagerComponent, FileManagerCategoryRenameComponent,
-
     ],
     imports: [
         CommonModule,
@@ -50,9 +49,6 @@ import { MatFormFieldModule } from '../shared/mat-form-field/mat-form-field.modu
         TextAreaModule,
         KeyUpEnterModule,
         FileManagementFileInfoModule
-    ],
-    entryComponents: [
-        FileManagerCategoryRenameComponent
     ]
 })
 export class FileManagementModule { }

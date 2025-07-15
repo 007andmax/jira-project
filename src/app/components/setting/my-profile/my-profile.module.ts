@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MyProfileComponent } from './my-profile.component';
 import { ProfileComponent } from './profile/profile.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { AccountComponent } from './account/account.component';
 import { EmailNotificationsComponent } from './email-notifications/email-notifications.component';
 import { ActivityHistoryComponent } from './activity-history/activity-history.component';
@@ -43,7 +43,8 @@ import { TicketsMyProfileComponent } from './tickets-my-profile/tickets-my-profi
             apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
         }),
         MyProfileRoutingModule,
-        DropDownModule
+        DropDownModule,
+        NgbNavModule
     ],
 
 

@@ -15,7 +15,6 @@ import { FormsModule } from '@angular/forms';
         DropDownModule,
         NgbModule,
     ],
-    entryComponents: [ProductTypeCheckUseComponent],
     exports: [ProductTypeCheckUseComponent]
 })
 export class ProductTypeCheckUseModule { }

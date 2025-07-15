@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NavigationEnd, Router } from "@angular/router";
 import { Company } from 'src/app/interfaces/company/company';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';

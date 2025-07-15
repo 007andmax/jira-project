@@ -9,5 +9,7 @@ if (environment.production) {
 }
 
 
-platformBrowserDynamic().bootstrapModule(AppModule)
+platformBrowserDynamic().bootstrapModule(AppModule).then(() => {
+  document.body.classList.add('ready');
+})
   .catch(err => console.error(err));

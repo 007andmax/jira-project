@@ -3,11 +3,17 @@
         <div class="contract-dashboard-chart-card__header-title">Open Ticket Priority</div>
     </div>
     <div class="contract-dashboard-chart-card__chart-content">
-        <nvd3
-            [options]="chartOptions"
-            [data]="data"
+        <ngx-charts-pie-chart
             #nvd3
-        ></nvd3>
+            [view]="[210,210]"
+            [customColors]="customColors"
+            [results]="data"
+            [legend]="false"
+            [labels]="false"
+            [doughnut]="true"
+            [arcWidth]="0.2"
+        >
+        </ngx-charts-pie-chart>
         <div class="contract-dashboard-chart-card__chart-info">
             <div
                 class="contract-dashboard-chart-card__title"
@@ -17,11 +23,14 @@
         </div>
     </div>
     <div
-      *ngIf="ticketsPriorities.length > 0"
-      class="button-loader qt-df qt-jc-fe qt-mt-4 qt-mb-10"
-      (click)="toggleAllPriorities = !toggleAllPriorities"
+        *ngIf="ticketsPriorities.length > 0"
+        class="button-loader qt-df qt-jc-fe qt-mt-4 qt-mb-10"
+        (click)="toggleAllPriorities = !toggleAllPriorities"
     >
-      <span class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info qt-pointer qt-pr-20" [textContent]="toggleAllPriorities ? '- hide' : '+ show more'"></span>
+        <span
+            class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info qt-pointer qt-pr-20"
+            [textContent]="toggleAllPriorities ? '- hide' : '+ show more'"
+        ></span>
     </div>
     <div class="contract-dashboard-chart-card__footer">
         <ng-template
@@ -54,6 +63,10 @@
                 </div>
             </div>
         </ng-template>
+
+
+
+
 
 
 

@@ -47,10 +47,16 @@
                     <div class="customer-ticket__header">
                         <div class="customer-ticket__header--item canvas-chart no-value">
                             <div class="customer-ticket__report--summary-title">Resolved Services</div>
-                            <nvd3
-                                [options]="chartOptions"
-                                [data]="chartData"
-                            ></nvd3>
+                            <ngx-charts-pie-chart
+                                [view]="[252,252]"
+                                [scheme]="chartColors"
+                                [results]="chartData"
+                                [legend]="false"
+                                [labels]="false"
+                                [doughnut]="true"
+                                [arcWidth]="0.5"
+                            >
+                            </ngx-charts-pie-chart>
                         </div>
                         <div class="customer-ticket__header--item">
                             <ng-template

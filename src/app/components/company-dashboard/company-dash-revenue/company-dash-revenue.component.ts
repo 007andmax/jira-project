@@ -19,9 +19,7 @@ export class CompanyDashRevenueComponent implements OnInit, OnDestroy {
   outstandingSum: number = 0;
   data: any;
   sub: Subscription = new Subscription();
-  chartOptions: any;
-  chartColors: string[] = ["#0747a6", "#00ccff", '#cdecff'];
-
+  chartColors = { domain: ["#0747a6", "#00ccff", '#cdecff'] };
   public constructor(private companiesService: CompaniesService,
     public activateRoute: ActivatedRoute,
     public cd: ChangeDetectorRef) { }
@@ -34,30 +32,6 @@ export class CompanyDashRevenueComponent implements OnInit, OnDestroy {
       this.getInvoiceRevenue('12');
     });
     this.sub.add(subscription);
-    this.chartOptions = {
-      chart: {
-        type: 'pieChart',
-        height: 200,
-        donut: true,
-        x: (d: any) => { return d.label; },
-        y: (d: any) => { return d.value; },
-        showLabels: false,
-        color: (d: any, i: any) => {
-          return this.chartColors[i]
-        },
-        showLegend: false,
-        duration: 500,
-        legend: {
-          margin: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
-          }
-        },
-        donutRatio: '0.68'
-      }
-    }
     this.data = [];
   }
 
@@ -77,15 +51,15 @@ export class CompanyDashRevenueComponent implements OnInit, OnDestroy {
       this.month = month;
       this.data = [
         {
-          "label": "Invoiced Sum",
+          "name": "Invoiced Sum",
           "value": data.invoicedSum.toFixed(2)
         },
         {
-          "label": "Collected Sum",
+          "name": "Collected Sum",
           "value": data.collectedSum.toFixed(2)
         },
         {
-          "label": "Outstanding Sum",
+          "name": "Outstanding Sum",
           "value": data.outstandingSum.toFixed(2)
         }
       ]

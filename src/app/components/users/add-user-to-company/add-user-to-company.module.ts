@@ -22,11 +22,7 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
         NgbModule,
         DisabledBtnModule,
         PreloaderTicketModule
-
     ],
-    entryComponents: [AddUserToCompanyComponent],
     exports: [AddUserToCompanyComponent]
-
-
 })
 export class AddUserToCompanyModule { }

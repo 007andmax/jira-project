@@ -42,12 +42,60 @@
         <div class="loading pengind-loading"></div>
     </div>
     <div class="contract-dashboard-chart-card__chart-content">
-        <nvd3
+        <ngx-charts-line-chart
             #nvd3
+            [legend]="true"
+            [legendPosition]="'below'"
+            [view]="[1168,308]"
             *ngIf="!showPreloader"
             class="sales-analytic"
-            [options]="options"
-            [data]="data"
-        ></nvd3>
+            [scheme]="chartColors"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            [xAxisTickFormatting]="xAxisTickFormatting"
+            [trimXAxisTicks]="false"
+            [xAxis]="true"
+            [yAxis]="true"
+            [results]="data"
+        >
+            <ng-template
+                #seriesTooltipTemplate
+                let-model="model"
+            >
+                <div>
+                    <span
+                        class="position-right tooltip-caret"
+                        style="top: 44.9844px; left: -7px;display: none;"
+                    ></span>
+                    <div class="tooltip-content">
+                        <span>
+                            {{xAxisTickFormattingChart(model[0].name)}}
+                            <div class="area-tooltip-container">
+                                <ng-template
+                                    ngFor
+                                    let-item
+                                    [ngForOf]="model"
+                                >
+                                    <div
+                                        class="tooltip-item"
+                                        style="width: max-content;"
+                                    >
+                                        <span
+                                            class="tooltip-item-color"
+                                            [ngStyle]="{'background-color':item.color}"
+                                        ></span>
+                                        {{item.series}}: {{item.value}}
+                                    </div>
+                                </ng-template>
+                                <!--  -->
+                            </div>
+                            <!--  -->
+                        </span>
+                        <!--  -->
+                        <!--  -->
+                    </div>
+                </div>
+            </ng-template>
+        </ngx-charts-line-chart>
     </div>
 </div>

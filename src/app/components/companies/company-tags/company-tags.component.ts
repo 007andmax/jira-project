@@ -89,12 +89,14 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
       let find = this.tags.find(tag => tag.id === item);
       if (find) this.selectedTag.push(find);
     })
-    let getTagsFromEdit = this.tagsState.getTagsFromEdit().subscribe((data) => {
-      this.selectedTag = data;
-      this.cd.markForCheck();
-    });
-    this.sub.add(getTagsFromEdit);
-    this.cd.markForCheck();
+    if (this.tagsState) {
+      let getTagsFromEdit = this.tagsState.getTagsFromEdit().subscribe((data) => {
+        this.selectedTag = data;
+        this.cd.markForCheck();
+      });
+      this.sub.add(getTagsFromEdit);
+    }
+    if (this.cd) this.cd.markForCheck();
   }
   public setEditItems(data) {
     this.editItems = data;
@@ -123,8 +125,10 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   * Subscribe for clear data
   */
   onInitClearState() {
-    let getClearState = this.tagsState.getClearState().subscribe(() => this.close());
-    this.sub.add(getClearState);
+    if (this.tagsState) {
+      let getClearState = this.tagsState.getClearState().subscribe(() => this.close());
+      this.sub.add(getClearState);
+    }
   }
   public setDefaultScoll() {
     this.page = 0;

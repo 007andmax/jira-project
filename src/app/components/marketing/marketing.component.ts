@@ -50,7 +50,6 @@ export class MarketingComponent implements OnInit {
   container = document.body.querySelector(".main-container");
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
-    private companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,
     private usersService: UsersService,
     public cd: ChangeDetectorRef,

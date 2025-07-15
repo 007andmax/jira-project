@@ -17,9 +17,6 @@ import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.mo
         PreloaderTicketModule,
         MatErrorModule
     ],
-    exports: [TicketsFilterSaveComponent],
-    entryComponents: [TicketsFilterSaveComponent]
-
-
+    exports: [TicketsFilterSaveComponent]
 })
 export class TicketsFilterSaveModule { }

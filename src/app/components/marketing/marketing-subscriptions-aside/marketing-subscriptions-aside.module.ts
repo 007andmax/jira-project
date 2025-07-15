@@ -24,7 +24,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         NgbModule,
         MatErrorModule
     ],
-    entryComponents: [MarketingSubscriptionsAddComponent],
     exports: [MarketingSubscriptionsAsideComponent]
 })
 export class MarketingSubscriptionsAsideModule { }

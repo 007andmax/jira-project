@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';

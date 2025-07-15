@@ -10,11 +10,11 @@ import { DashboardQuotesComponent } from './dashboard-quotes/dashboard-quotes.co
 import { ContractsDashboardComponent } from './contracts-dashboard/contracts-dashboard.component';
 import { TopDashboardComponent } from './top-dashboard/top-dashboard.component';
 import { TopProductDashboardComponent } from './top-product-dashboard/top-product-dashboard.component';
-import { NvD3Module } from 'ng2-nvd3';
 import { MultiDatepickerDashboardComponent } from './multi-datepicker-dashboard/multi-datepicker-dashboard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardBillingRoutingModule } from './dashboard-billing-routing.module';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -33,10 +33,10 @@ import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside
         CommonModule,
         DatePickerModule,
         DashboardStatsModule,
-        NvD3Module,
         NgbModule,
         DashboardBillingRoutingModule,
-        ClickOutsideModule
+        ClickOutsideModule,
+        NgxChartsModule
 
     ],
 

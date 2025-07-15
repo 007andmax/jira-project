@@ -1,4 +1,5 @@
 import { Directive, HostListener, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+declare var $: any;
 
 @Directive({
   selector: '[appClickOtside]',

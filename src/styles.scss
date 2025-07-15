@@ -3679,3 +3679,10 @@ textarea {
     border-radius: 8px;
   }
 }
+body {
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+body.ready {
+  opacity: 1;
+}

@@ -16,8 +16,7 @@ export class InvoiceRevenueComponent implements OnInit {
   @Input() accountingStartDate: string;
   @ViewChild('datesDp', { static: true }) datesDp: MultiDatepickerDashboardComponent;
   @ViewChild('nvd3', { static: true }) nvd3: any;
-  chartOptions: any;
-  chartColors = ["#0747a6", "#00ccff", "#cdecff"];
+  chartColors = { domain: ["#0747a6", "#00ccff", '#cdecff'] };
   data: any;
 
   constructor(private companiesStateService: CompaniesStateService,
@@ -26,44 +25,6 @@ export class InvoiceRevenueComponent implements OnInit {
     private dashboardBillingService: DashboardBillingService) { }
 
   ngOnInit() {
-    this.chartOptions = {
-      chart: {
-        type: 'pieChart',
-        height: 180,
-        width: 180,
-        margin: {
-          top: -5,
-          right: -5,
-          bottom: -5,
-          left: -5
-        },
-        donut: true,
-        x: (d: any) => { return d.label; },
-        y: (d: any) => { return d.value; },
-        showLabels: false,
-        color: (d: any, i: any) => {
-          return this.chartColors[i]
-        },
-        showLegend: false,
-        duration: 500,
-
-        donutRatio: '0.68'
-      }
-    }
-    this.data = [
-      {
-        "label": "Invoiced",
-        "value": 8
-      },
-      {
-        "label": "Collected",
-        "value": 32
-      },
-      {
-        "label": "Outstanding",
-        "value": 60
-      }
-    ];
     this.invoiceRevenue.companyId = this.companiesStateService.getCurrentCompany().id;
     this.updateStartDate();
     this.invoiceRevenue.endDate = moment(new Date()).format('YYYY-MM-DD');
@@ -71,6 +32,7 @@ export class InvoiceRevenueComponent implements OnInit {
     if (this.getPermissions('VIEW_ACCOUNTING')) this.getInvoiceRevenue();
 
   }
+
   public updateStartDate() {
     this.invoiceRevenue.startDate = moment(this.accountingStartDate).format('YYYY-MM-DD');
     this.datesDp.setStartDate(new Date(this.accountingStartDate));
@@ -78,10 +40,22 @@ export class InvoiceRevenueComponent implements OnInit {
   public getInvoiceRevenue() {
     this.dashboardBillingService.getInvoiceRevenue(this.invoiceRevenue.getDataForRequest()).subscribe(data => {
       this.invoiceRevenue.setData(data);
-      this.data[0].value = this.invoiceRevenue.invoicedSum;
-      this.data[1].value = this.invoiceRevenue.collectedSum;
-      this.data[2].value = this.invoiceRevenue.outstandingSum;
-      this.nvd3.chart.update();
+      this.data = [
+        {
+          "name": "Invoiced",
+          "value": this.invoiceRevenue.invoicedSum.toFixed(2)
+        },
+        {
+          "name": "Collected",
+          "value": this.invoiceRevenue.collectedSum.toFixed(2)
+        },
+        {
+          "name": "Outstanding",
+          "value": this.invoiceRevenue.outstandingSum.toFixed(2)
+        }
+      ];
+      console.log("this.data", this.data);
+      // this.nvd3.chart.update();
       this.cd.detectChanges();
     })
   }

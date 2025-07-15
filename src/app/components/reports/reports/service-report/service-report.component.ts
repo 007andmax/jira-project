@@ -16,19 +16,14 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./service-report.component.scss']
 })
 export class ServiceReportComponent implements OnInit, OnDestroy {
-
-  chartOptions;
   chartData;
-  chartColors = ["#16a4fa", "#ffb937", "#ff6e61", "#2ec866", "#f9f916", "#ff1ed2", "#1bf4fc", "#7d1a9e", '#7f1313'];
+  chartColors = { domain: ["#16a4fa", "#ffb937", "#ff6e61", "#2ec866", "#f9f916", "#ff1ed2", "#1bf4fc", "#7d1a9e", '#7f1313'] };
   serviceReport: ServiceReports = new ServiceReports();
-  customerTicketWithTimeSpent = true;
   overallServiceTime = [];
   selectedClient = null;
   loadingInProgress: boolean = false;
   onInit = false;
   showHeader = true;
-  showServices = true;
-  showProducts = true;
   currentCompany: Company;
   timeSpent: any;
   sub: Subscription = new Subscription();
@@ -41,34 +36,6 @@ export class ServiceReportComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
-    this.chartOptions = {
-      chart: {
-        type: 'pieChart',
-        height: 350,
-        donut: true,
-        x: (d) => { return d.name; },
-        y: (d) => { return d.time; },
-        showLabels: false,
-        color: (d, i) => {
-          return this.chartColors[i]
-        },
-
-        pie: {
-          startAngle: (d) => { return d.startAngle },
-          endAngle: (d) => { return d.endAngle }
-        },
-        showLegend: false,
-        duration: 500,
-        legend: {
-          margin: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
-          }
-        }
-      }
-    }
     let getOnShowDashboard = this.ticketReportStateService.getOnShowDashboard().subscribe(data => {
       this.showHeader = data;
     })
@@ -179,8 +146,10 @@ export class ServiceReportComponent implements OnInit, OnDestroy {
     document.documentElement.classList.remove('no-d3-tooltip');
     this.chartData = data.map((el, i) => {
       el.color = this.chartColors[i];
+      el.value = el.time;
       return el;
     });
+    console.log("this.chartData", this.chartData)
   }
 
   getDurationFilter(quanity) {

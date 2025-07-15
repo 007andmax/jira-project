@@ -13,81 +13,37 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
   @Input() chartData: Array<DashboardChartData> = [];
   type: string = "WEEKLY";
   @ViewChild('nvd3', { static: true }) nvd3: any;
-  options;
   data;
   listType: Array<CompanySetting> = [
     new CompanySetting('Daily', 'DAILY'),
     new CompanySetting('Weekly', 'WEEKLY'),
     new CompanySetting('Monthly', 'MONTHLY')];
   showPreloader: boolean = true;
+  chartColors = { domain: ["#0747a6", "#00ccff"] };
   constructor() { }
 
   ngOnInit() {
     this.listType[1].selected = true;
-    let currentDate = new Date();
-    this.options = {
-      chart: {
-        type: 'lineChart',
-        height: 300,
-        duration: 1000,
-        margin: {
-          top: 20,
-          right: 20,
-          bottom: 40,
-          left: 55
-        },
-        x: (d) => d.x,
-        y: (d) => d.y,
-        useInteractiveGuideline: true,
-        showXAxis: true,
-        xAxis: {
-          axisLabel: '',
-          tickFormat: (d) => {
-            if (d >= this.chartData.length) return "";
-            if (this.type === "MONTHLY") {
-              if (currentDate.getFullYear() === new Date(this.chartData[d].date).getFullYear()) {
-                return moment(this.chartData[d].date).format('MMM');
-              } else {
-                return moment(this.chartData[d].date).format('MMM YYYY');
-              }
-
-            }
-            if (this.type === "WEEKLY" || this.type === "DAILY") return moment(this.chartData[d].date).format('DD MMM');
-
-
-          },
-          showMaxMin: false,
-          staggerLabels: false,
-          axisLabelDistance: 0,
-          ticks: 10,
-        },
-        yAxis: {
-          axisLabel: '',
-
-          axisLabelDistance: -10
-        }
-      },
-      legend: {
-        css: {
-          'text-align': 'left',
-          'margin': '10px 13px 0px 7px',
-          className: "test-class-tamara"
-        }
-      },
-      title: {
-        enable: false,
-
-      },
-      subtitle: {
-        enable: false,
-
-      },
-      caption: {
-        enable: false,
-
-      }
-    };
     this.updateDataChart();
+  }
+  xAxisTickFormatting = (d) => {
+    let currentDate = new Date();
+    if (d >= this.chartData.length) return "";
+    if (this.type === "MONTHLY") {
+      if (currentDate.getFullYear() === new Date(this.chartData[d].date).getFullYear()) {
+        return moment(this.chartData[d].date).format('MMM');
+      } else {
+        return moment(this.chartData[d].date).format('MMM YYYY');
+      }
+
+    }
+    if (this.type === "WEEKLY" || this.type === "DAILY") return moment(this.chartData[d].date).format('DD MMM');
+
+  }
+  xAxisTickFormattingChart = (d) => {
+    let currentDate = new Date();
+    if (d >= this.chartData.length) return "";
+    return moment(this.chartData[d].date).format('DD MMM YYYY');
   }
   public updateDataChart() {
     this.data = this.getDataForChart();
@@ -100,21 +56,19 @@ export class DashboardSalesAnalyticsComponent implements OnInit {
     for (let i = 1; i < 30; i++) {
       if (i >= this.chartData.length) {
       } else {
-        sin.push({ x: i, y: this.chartData[i].totalSales });
-        sin2.push({ x: i, y: this.chartData[i].totalIncomeAmount });
+        sin.push({ name: i, value: this.chartData[i].totalSales });
+        sin2.push({ name: i, value: this.chartData[i].totalIncomeAmount });
       }
     }
     //Line chart data should be sent as an array of series objects.
     return [
       {
-        values: sin,      //values - represents the array of {x,y} data points
-        key: 'Sales', //key  - the name of the series.
-        color: '#0747a6'  //color - optional: choose your own line color.
+        series: sin,      //values - represents the array of {x,y} data points
+        name: 'Sales', //key  - the name of the series.
       },
       {
-        values: sin2,      //values - represents the array of {x,y} data points
-        key: 'Revenue', //key  - the name of the series.
-        color: '#00ccff'  //color - optional: choose your own line color.
+        series: sin2,      //values - represents the array of {x,y} data points
+        name: 'Revenue', //key  - the name of the series.
       },
     ];
   };

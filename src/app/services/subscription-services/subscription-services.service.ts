@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'd3';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
 import { NonContractServices } from 'src/app/components/billing/non-contract-services/class/non-contract-service';

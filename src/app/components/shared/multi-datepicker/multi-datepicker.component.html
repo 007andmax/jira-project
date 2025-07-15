@@ -1,5 +1,5 @@
 <div
-    class="date-picker"
+    class="date-picker multi-datepicker-container"
     appClickOtside
     [classParent]="'.date-picker'"
     [init]="true"
@@ -30,8 +30,8 @@
         class="icn-16 qt-icon icon__calendar pointer"
     ></i>
     <div
-        class="dropdown-menu show"
-        *ngIf="showDatePicker"
+        class="dropdown-menu"
+        [ngClass]="{'show': showDatePicker}"
     >
         <ngb-datepicker
             #dp

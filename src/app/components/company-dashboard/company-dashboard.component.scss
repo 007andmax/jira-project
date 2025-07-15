@@ -555,6 +555,8 @@
                                 gap: 4px;
                                 width: 90px;
                                 min-height: 16px;
+                                position: relative;
+                                z-index: 999;
                                 .dropdown-toggle {
                                     margin-top: 2px;
                                 }

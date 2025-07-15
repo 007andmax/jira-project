@@ -11,11 +11,10 @@ import { CompanyDashContractComponent } from './company-dash-contract/company-da
 import { CompanyDashAssociateInfoComponent } from './company-dash-associate-info/company-dash-associate-info.component';
 import { CompanyTagsModule } from '../companies/company-tags/company-tags.module';
 import { NgxMaskModule } from 'ngx-mask';
-import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CompanyEditAsideModule } from '../companies/company-edit-aside/company-edit-aside.module';
 import { CompanyAssociateModule } from './company-dash-associate/company-associate/company-associate.module';
-import { NvD3Module } from 'ng2-nvd3';
 import { ContractsPreviewModule } from '../billing/contracts/contracts-preview/contracts-preview.module';
 import { ContractsEditModule } from '../billing/contracts/contracts-edit/contracts-edit.module';
 import { PhoneModule } from 'src/app/pipe/phone/phone.module';
@@ -23,6 +22,7 @@ import { PreparePhoneModule } from 'src/app/pipe/prepare-phone/prepare-phone.mod
 import { CompanyDashboardRoutingModule } from './company-dashboard-routing.module';
 import { PreviewPhoneMaskModule } from '../shared/preview-phone-mask/preview-phone-mask.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -47,13 +47,14 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
         FormsModule,
         CompanyEditAsideModule,
         CompanyAssociateModule,
-        NvD3Module,
+
         ContractsPreviewModule,
         ContractsEditModule,
         PhoneModule,
         PreparePhoneModule,
         PreviewPhoneMaskModule,
         TextAreaModule,
+        NgxChartsModule
     ],
 
 

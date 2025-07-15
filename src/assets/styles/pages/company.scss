@@ -40,3 +40,55 @@ company-associate {
     }
   }
 }
+.cmp-dashboard-body {
+  app-company-dash-ticket {
+      .contract-dashboard-chart-card__chart-content {
+        padding-top: 0;
+      }
+  
+      .contract-dashboard-chart-card__header {
+        padding: 16px 22px 0 24px;
+      }
+  
+      svg.nvd3-svg {
+        overflow: visible;
+      }
+  
+      .chart-legend {
+        transform: translate(calc(50% - 110px), -296px);
+      }
+  
+      .chart-legend .legend-title {
+        display: none;
+      }
+  
+      .chart-legend .legend-labels {
+        background: none;
+        ::before {
+          display: none;
+          content: '';
+        }
+        .legend-label-text {
+          font-size: 12px;
+          color: $gray-600;
+          font-weight: 400;
+        }
+      }
+  
+      .chart-legend .legend-label-color {
+        border-radius: 50%;
+      }
+  
+      .line-chart .x .gridline-path-vertical {
+        display: none;
+      }
+  
+      .line-chart .y .gridline-path-horizontal {
+        stroke: $gray-100;
+      }
+  
+      .ngx-charts .tooltip-anchor {
+        fill: transparent
+      }
+    }
+}

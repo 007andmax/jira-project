@@ -15,7 +15,6 @@ import { InventoryChangeProductTypeComponent } from './inventory-change-product-
         DropDownModule,
         NgbModule,
     ],
-    entryComponents: [InventoryChangeProductTypeComponent],
     exports: [InventoryChangeProductTypeComponent]
 })
 export class InventoryChangeProductTypeModule { }
