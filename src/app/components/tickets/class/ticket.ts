@@ -71,7 +71,15 @@ export class Ticket {
         this.companyServiceType = data.companyServiceType;
         this.updatesCount = data.updatesCount;
         this.lastUpdatedAt = data.lastUpdatedAt;
-        if (data.lastUpdatedAt) this.lastUpdatedAt_text = new Date().getTime() - data.lastUpdatedAt < 3600000 ? moment(new Date().getTime() - data.lastUpdatedAt).format('m') + " mins ago" : new Date().getTime() - data.lastUpdatedAt < 3600000 * 24 ? moment(new Date().getTime() - data.lastUpdatedAt).format('H') + "h " + moment(new Date().getTime() - data.lastUpdatedAt).format('m') + " mins ago" : moment(new Date().getTime() - data.lastUpdatedAt).format('D') + " days ago";
+        if (data.lastUpdatedAt) {
+            if (new Date().getTime() - data.lastUpdatedAt < 3600000) {
+                this.lastUpdatedAt_text = moment(new Date().getTime() - data.lastUpdatedAt).format('m') + " mins ago";
+            } else if (new Date().getTime() - data.lastUpdatedAt < 3600000 * 24) {
+                this.lastUpdatedAt_text = moment(new Date().getTime() - data.lastUpdatedAt).format('H') + "h " + moment(new Date().getTime() - data.lastUpdatedAt).format('m') + " mins ago"
+            } else {
+                this.lastUpdatedAt_text = Math.floor((new Date().getTime() - data.lastUpdatedAt) / (3600000 * 24)) + " days ago";
+            }
+        } //this.lastUpdatedAt_text = new Date().getTime() - data.lastUpdatedAt < 3600000 ? moment(new Date().getTime() - data.lastUpdatedAt).format('m') + " mins ago" : new Date().getTime() - data.lastUpdatedAt < 3600000 * 24 ? moment(new Date().getTime() - data.lastUpdatedAt).format('H') + "h " + moment(new Date().getTime() - data.lastUpdatedAt).format('m') + " mins ago" : moment(new Date().getTime() - data.lastUpdatedAt).format('D') + " days ago";
         if (!data.lastUpdatedAt) this.lastUpdatedAt_text = "N/A";
     }
     public setAssignedUserId(id) {
