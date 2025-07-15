@@ -72,16 +72,25 @@ export class Ticket {
         this.updatesCount = data.updatesCount;
         this.lastUpdatedAt = data.lastUpdatedAt;
         if (data.lastUpdatedAt) {
-            if (new Date().getTime() - data.lastUpdatedAt < 3600000) {
-                this.lastUpdatedAt_text = moment(new Date().getTime() - data.lastUpdatedAt).format('m') + " mins ago";
-            } else if (new Date().getTime() - data.lastUpdatedAt < 3600000 * 24) {
-                this.lastUpdatedAt_text = moment(new Date().getTime() - data.lastUpdatedAt).format('H') + "h " + moment(new Date().getTime() - data.lastUpdatedAt).format('m') + " mins ago"
+            if (this.calculateLastUpdatedAt() < 3600000) {
+                this.lastUpdatedAt_text = Math.floor(Math.abs(this.calculateLastUpdatedAt() / 60000)) + " mins ago";
+            } else if (this.calculateLastUpdatedAt() < 3600000 * 24) {
+
+                let hours = Math.floor(this.calculateLastUpdatedAt() / 3600000);
+                let minutes = Math.round((this.calculateLastUpdatedAt() - (hours * 3600000)) / 60000);
+
+                this.lastUpdatedAt_text = hours + "h " + minutes + " mins ago"
             } else {
-                this.lastUpdatedAt_text = Math.floor((new Date().getTime() - data.lastUpdatedAt) / (3600000 * 24)) + " days ago";
+                this.lastUpdatedAt_text = Math.floor(Math.abs(this.calculateLastUpdatedAt() / (3600000 * 24))) + " days ago";
             }
         } //this.lastUpdatedAt_text = new Date().getTime() - data.lastUpdatedAt < 3600000 ? moment(new Date().getTime() - data.lastUpdatedAt).format('m') + " mins ago" : new Date().getTime() - data.lastUpdatedAt < 3600000 * 24 ? moment(new Date().getTime() - data.lastUpdatedAt).format('H') + "h " + moment(new Date().getTime() - data.lastUpdatedAt).format('m') + " mins ago" : moment(new Date().getTime() - data.lastUpdatedAt).format('D') + " days ago";
         if (!data.lastUpdatedAt) this.lastUpdatedAt_text = "N/A";
     }
+    public calculateLastUpdatedAt() {
+        var today = Date.now();
+        var lastUpdatedAt = new Date(this.lastUpdatedAt).getTime();
+        return (today - lastUpdatedAt);
+    };
     public setAssignedUserId(id) {
         this.assignedUserId = id;
     }

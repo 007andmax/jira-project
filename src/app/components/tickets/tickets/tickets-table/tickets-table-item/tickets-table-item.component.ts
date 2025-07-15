@@ -35,7 +35,7 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(public usersStateService: UsersStateService,
     public ticketsListService: TicketsListService,
-    private companiesStateService: CompaniesStateService,
+    public companiesStateService: CompaniesStateService,
     public ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef,) { }
 
