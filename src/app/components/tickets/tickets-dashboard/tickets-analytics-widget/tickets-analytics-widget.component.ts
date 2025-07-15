@@ -31,13 +31,11 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
   }
   public updateDataChart() {
     this.data = this.getDataForChart();
-    console.log("data", this.data);
     //  if (this.nvd3.char) this.nvd3.chart.update();
     this.cd.detectChanges();
     this.isReady = true;
   }
   xAxisTickFormatting = (d) => {
-    console.log("d", d);
     let currentDate = new Date();
     if (d >= this.dashboard.chartData.length) return "";
     if (this.type === "MONTHLY") {
@@ -50,7 +48,6 @@ export class TicketsAnalyticsWidgetComponent implements OnInit {
     if (this.type === "WEEKLY" || this.type === "DAILY") return moment(this.dashboard.chartData[d].date).format('DD MMM');
   }
   xAxisTickFormattingChart = (d) => {
-    console.log("d", d);
     if (d >= this.dashboard.chartData.length) return "";
     return moment(this.dashboard.chartData[d].date).format('DD MMM YYYY');
   }

@@ -60,8 +60,6 @@ export class CommonCommissionsReportComponent implements OnInit {
           color: this.chartColors[i],
         };
       });
-    console.log("this.byCustomerChartData", this.byCustomerChartData);
-    console.log("this.byCategoriesChartData", this.byCategoriesChartData);
     //  this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
     this.onInit = true;
   }

@@ -57,8 +57,6 @@ export class TicketPriorityWidgetComponent implements OnInit {
     }
   }
   customColors = (d: any, i: any) => {
-    console.log("d", d);
-    console.log("i", i);
     let priority = this.ticketsPriorities.find(item => item.name == d);
     return priority ? this.statusColors[priority.color].textColor : '#0646a4';
   }

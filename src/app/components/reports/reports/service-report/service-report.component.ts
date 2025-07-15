@@ -149,7 +149,6 @@ export class ServiceReportComponent implements OnInit, OnDestroy {
       el.value = el.time;
       return el;
     });
-    console.log("this.chartData", this.chartData)
   }
 
   getDurationFilter(quanity) {

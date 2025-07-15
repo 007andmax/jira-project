@@ -80,7 +80,6 @@ export class DashboardBillingComponent implements OnInit {
     })
   }
   public onChangeDatePicker(data) {
-    console.log(data);
     let date = new Date(data.year, data.month - 1, data.day);
     this.reportsService.setAccountingStartDate(JSON.stringify(moment(date).format('YYYY-MM-DD'))).subscribe(res => {
       this.accountingStartDate = date.getTime();

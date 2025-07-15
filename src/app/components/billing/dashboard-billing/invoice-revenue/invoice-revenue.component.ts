@@ -54,7 +54,6 @@ export class InvoiceRevenueComponent implements OnInit {
           "value": this.invoiceRevenue.outstandingSum.toFixed(2)
         }
       ];
-      console.log("this.data", this.data);
       // this.nvd3.chart.update();
       this.cd.detectChanges();
     })

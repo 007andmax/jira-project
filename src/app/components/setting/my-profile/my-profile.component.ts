@@ -40,7 +40,6 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   }
   setTab(data) {
     this.activeTab = data['nextId'];
-    console.log("Active Tab: ", data);
   }
   onSubmit() {
     if (this.profile) this.profile.onSubmit();

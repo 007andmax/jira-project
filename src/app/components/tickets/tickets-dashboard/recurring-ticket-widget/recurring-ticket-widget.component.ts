@@ -29,7 +29,6 @@ export class RecurringTicketWidgetComponent implements OnInit {
   }
   public updateDataChart() {
     this.setDataForChart();
-    console.log("this.nvd3", this.nvd3);
     // if (this.nvd3.char) this.nvd3.chart.update();
   }
   getTotal() {

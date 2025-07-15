@@ -33,11 +33,9 @@ export class CompanyDashTicketComponent implements OnInit, OnDestroy {
     this.lineData = [];
   }
   xAxisTickFormatting = (d) => {
-    console.log("d", d);
     return moment(d).format('DD MMM');
   }
   xAxisTickFormattingChart = (d) => {
-    console.log("d", d);
     return moment(d).format('DD MMM YYYY');
   }
   getTicketGraph(frequency: string) {
@@ -61,7 +59,6 @@ export class CompanyDashTicketComponent implements OnInit, OnDestroy {
           series: countOfNewTickets
         }
       ];
-      console.log("lineData", this.lineData);
       this.showPreloader = false;
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
