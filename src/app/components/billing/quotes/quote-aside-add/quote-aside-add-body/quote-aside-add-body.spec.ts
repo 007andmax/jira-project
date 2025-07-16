@@ -90,4 +90,53 @@ describe('QuoteAsideAddBodyComponent unit test', () => {
     });
     expect(com.quote.note).toEqual("12345");
   });
+  it('check "selectProduct"', () => {
+    const fixture = TestBed.createComponent(QuoteAsideAddBodyComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.selectProduct({
+      id: "12345",
+      name: "Test Product",
+      sale: 100,
+      taxSum: 10,
+      sum: 110
+    });
+    expect(com.quote.products[0].discountType).toEqual("PERCENT");
+  });
+  it('check "onAddService"', () => {
+    const fixture = TestBed.createComponent(QuoteAsideAddBodyComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onAddService({
+      discountType: "PERCENT",
+      discountAmount: 10,
+    });
+    expect(com.quote.services[0].discountAmount).toEqual(10);
+  });
+  it('check "removeService"', () => {
+    const fixture = TestBed.createComponent(QuoteAsideAddBodyComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onAddService({
+      discountType: "PERCENT",
+      discountAmount: 10,
+    });
+    com.removeService(0);
+    expect(com.quote.services.length).toEqual(0);
+  });
+  it('check "removeProduct"', () => {
+    const fixture = TestBed.createComponent(QuoteAsideAddBodyComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.selectProduct({
+      id: "12345",
+      name: "Test Product",
+      sale: 100,
+      taxSum: 10,
+      sum: 110
+    });
+    com.removeProduct(0);
+    expect(com.quote.products.length).toEqual(0);
+  });
+  it('check "getSelectedTaxes"', () => {
+    const fixture = TestBed.createComponent(QuoteAsideAddBodyComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.getSelectedTaxes([{ name: "test", rate: 10 }])).toEqual("test 10%");
+  });
 });
