@@ -124,6 +124,27 @@
                         </label>
                     </div>
                 </div>
+                <div
+                    class="tab-pane__row"
+                    *ngIf="!loading"
+                >
+                    <div class="tab-pane__subtitle">Default Ticket Sorting</div>
+                    <div class="tab-pane-input__row">
+                        <label class="qt-input-block">
+                            <app-drop-down
+                                [class]="['qt-select-input-40']"
+                                [placeholder]="'Select Ticket Sorting'"
+                                [editItem]="getSelectedTicketSorting()"
+                                [isBlockClear]="true"
+                                [sort]="false"
+                                [field]="'title'"
+                                [list]="sorting"
+                                (onSelectedItem)="onChangeTicketSortOrder($event)"
+                            >
+                            </app-drop-down>
+                        </label>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
