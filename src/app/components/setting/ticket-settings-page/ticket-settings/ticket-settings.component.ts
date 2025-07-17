@@ -102,8 +102,6 @@ export class TicketSettingsComponent implements OnInit, OnDestroy {
       interval: serviceExpenseDurationPickerInterval,
       defaultTicketSortOrder: res.defaulTticketSortOrder
     });
-    console.log("res", res);
-    console.log("this.ticketForm", this.ticketForm.value);
     this.resetListIntervals(timepickerType);
   }
 
