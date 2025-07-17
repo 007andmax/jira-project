@@ -821,37 +821,21 @@ p {
   font-weight: 400;
 }
 
-.recurring-tickets-content__modal .new-link,
-.new-companies-content__modal .new-link,
-.new-users-content__modal .new-link {
-  width: 100%;
-  margin-top: 10px !important;
-  padding: 0 15px !important;
-  display: inline-block;
-}
-
 .new-users-content__modal .new-link,
 .new-companies-content__modal .new-link {
   margin: 40px 0 20px 0 !important;
 }
 
-.new-companies-content__modal .new-link,
-.recurring-tickets-content__modal .new-link,
-.new-users-content__modal .new-link {
-  margin: 0 !important;
-  padding: 12px 0 6px !important;
-}
-
 .new-link {
   font-weight: 400;
   font-size: 12px;
-  color: $blue-light-600 !important;
+  color: $blue-light-600;
   text-decoration: none;
   cursor: pointer;
   font-style: normal;
-  background: transparent !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  background: transparent;
+  margin: 0;
+  padding: 0;
   border: none;
   outline: none;
 }

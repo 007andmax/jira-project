@@ -139,17 +139,10 @@ app-tickets-table-item {
     &__main {
       display: flex;
       flex-direction: column;
+      gap: 16px;
       padding: 12px 16px;
       height: calc(100% - 57px);
       overflow: auto;
-
-      .qt-input-block__label {
-        font-size: 14px;
-        font-weight: 500;
-        color: $gray-700;
-        margin-top: 3px;
-        margin-bottom: 20px;
-      }
 
       .content-filters-checkbox {
         color: $gray-700;
@@ -181,20 +174,6 @@ app-tickets-table-item {
 
   app-tickets-filter-tags .mat-form-field {
     width: 100%;
-  }
-
-  // Start
-  .search-users,
-  .search-tech-users,
-  .search-status,
-  .search-company,
-  .light-dropdown.dropdown {
-    margin-bottom: 16px;
-  }
-
-  .qt-dropdown,
-  .light-dropdown {
-    padding-top: 8px;
   }
 }
 

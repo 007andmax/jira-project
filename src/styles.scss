@@ -2025,10 +2025,6 @@ app-quotes-item {
         font-weight: 400;
       }
     }
-    .new-link {
-      margin: 0 !important;
-      padding: 12px 0 6px !important;
-    }
   }
   .logo-upload {
     img {
@@ -2301,8 +2297,8 @@ app-quotes-item {
     }
   }
   .new-link {
-    margin: 0 !important;
-    padding: 0 !important;
+    margin-block: 12px;
+    padding: 0;
   }
 }
 // LEFT PANEL

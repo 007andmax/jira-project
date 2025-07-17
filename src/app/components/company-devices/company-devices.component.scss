@@ -184,17 +184,10 @@ app-company-devices-item {
     &__main {
       display: flex;
       flex-direction: column;
+      gap: 16px;
       padding: 12px 16px;
       height: calc(100% - 57px);
       overflow: auto;
-
-      .qt-input-block__label {
-        font-size: 14px;
-        font-weight: 500;
-        color: $gray-700;
-        margin-top: 3px;
-        margin-bottom: 20px;
-      }
 
       .content-filters-checkbox {
         color: $gray-700;
@@ -226,12 +219,6 @@ app-company-devices-item {
 
   app-company-devices-filter-type .mat-form-field {
     width: 100%;
-  }
-
-  // Start
-  .qt-dropdown,
-  .light-dropdown {
-    padding-top: 8px;
   }
 }
 
