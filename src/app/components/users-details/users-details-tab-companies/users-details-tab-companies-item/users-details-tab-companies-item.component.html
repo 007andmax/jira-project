@@ -3,14 +3,22 @@
     [ngClass]="{'--selected': customerCompaniesInfo.selected}"
 >
     <div class="users-table__check">
-        <div class="qt-df">
+        <div
+            class="qt-df"
+            placement="top"
+            ngbTooltip="This company is linked to the primary user and cannot be deleted."
+            container="body"
+            [disableTooltip]="!isPrimaryContact()"
+        >
             <label
                 class="qt-checkbox"
                 [attr.for]="'customerCompaniesInfo-' + customerCompaniesInfo.companyId"
+                [ngClass]="{'--disabled':isPrimaryContact()}"
             >
                 <input
                     [attr.id]="'customerCompaniesInfo-' + customerCompaniesInfo.companyId"
                     [(ngModel)]="customerCompaniesInfo.selected"
+                    [disabled]="isPrimaryContact()"
                     type="checkbox"
                     (change)="selectCustomerCompaniesInfo($event)"
                 >
@@ -29,6 +37,17 @@
             class="ellipsis"
             [textContent]="customerCompaniesInfo.clientCompanyName"
         ></div>
+        <div
+            class="qt-icon icon__permission-role qt-sz-20 qt-ml-12"
+            *ngIf="isPrimaryContact()"
+            (mouseenter)="addTooltip.show($event.target)"
+            (mouseleave)="addTooltip.hide()"
+        ></div>
+        <app-dynamic-tooltip
+            [content]="'Primary Contact'"
+            [position]="'top'"
+            #addTooltip
+        ></app-dynamic-tooltip>
     </div>
     <div class="users-table__industry qt-fd-c qt-ai-fs qt-jc-c">
         <app-drop-down

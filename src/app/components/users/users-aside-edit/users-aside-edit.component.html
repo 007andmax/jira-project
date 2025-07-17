@@ -297,9 +297,14 @@
                             + Add Company
                         </span>
                         <span
-                            class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info qt-ml-8 pointer"
+                            class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-ml-8 pointer"
                             *ngIf="user.customerCompaniesInfo.length > 1"
                             (click)="removeCompnay(i)"
+                            [ngClass]="{'--disabled': companyInfo.isPrimaryContact,'qt-color-info':!companyInfo.isPrimaryContact}"
+                            placement="top"
+                            ngbTooltip="This company is linked to the primary user and cannot be deleted."
+                            container="body"
+                            [disableTooltip]="!companyInfo.isPrimaryContact"
                         >
                             Remove Company
                         </span>

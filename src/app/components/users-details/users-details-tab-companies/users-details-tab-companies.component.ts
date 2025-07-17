@@ -57,7 +57,7 @@ export class UsersDetailsTabCompaniesComponent implements OnInit, OnDestroy {
   toggleAllUser(event) {
     this.selectAll = event.target.checked;
     this.user.customerCompaniesInfo.forEach(item => {
-      item.selected = event.target.checked;
+      if (!item.isPrimaryContact) item.selected = event.target.checked;
     })
     this.onSelectCustomerCompaniesInfo();
     this.cd.detectChanges();

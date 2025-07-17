@@ -12,6 +12,7 @@ import { CompanyAndressContact } from 'src/app/interfaces/company/company-addres
 import { UsersService } from 'src/app/services/users/users.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -42,6 +43,7 @@ export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy 
     public cd: ChangeDetectorRef,
     public customerRoleStateService: CustomerRoleStateService,
     public usersStateService: UsersStateService,
+    public customerPortalStateService: CustomerPortalStateService,
   ) { }
 
 
@@ -133,6 +135,10 @@ export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy 
   getCpmpany() {
     return this.companiesStateService.getCompanies().find(item => item.id == this.customerCompaniesInfo.companyId);
   }
+  isPrimaryContact() {
+    return this.user.customerCompaniesInfo.find(item => item.companyId === this.customerCompaniesInfo.companyId).isPrimaryContact;
+  }
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
