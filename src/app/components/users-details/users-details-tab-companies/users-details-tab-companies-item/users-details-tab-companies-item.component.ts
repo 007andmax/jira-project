@@ -136,7 +136,7 @@ export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy 
     return this.companiesStateService.getCompanies().find(item => item.id == this.customerCompaniesInfo.companyId);
   }
   isPrimaryContact() {
-    return this.user.customerCompaniesInfo.find(item => item.companyId === this.customerCompaniesInfo.companyId).isPrimaryContact;
+    return this.customerCompaniesInfo && this.user.customerCompaniesInfo.find(item => item.companyId === this.customerCompaniesInfo.companyId) ? this.user.customerCompaniesInfo.find(item => item.companyId === this.customerCompaniesInfo.companyId).isPrimaryContact : false;
   }
 
   ngOnDestroy(): void {

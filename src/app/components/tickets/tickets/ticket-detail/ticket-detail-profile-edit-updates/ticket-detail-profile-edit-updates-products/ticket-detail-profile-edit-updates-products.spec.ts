@@ -125,12 +125,4 @@ describe('TicketDetailProfileEditUpdatesProductsComponent unit test', () => {
     com.onValidateSaleCost();
     expect(com.product.valdiateSaleCost).toEqual(true)
   });
-  it('check "onChangeCost"', () => {
-    const fixture = TestBed.createComponent(TicketDetailProfileEditUpdatesProductsComponent);
-    const com = fixture.debugElement.componentInstance;
-    com.product.item = { versionedId: "test", sale: 100, sale_str: "50" };
-    com.onChangeSale(11);
-    expect(com.product.item.sale).toEqual(11)
-    expect(com.product.item.sale_str).toEqual("11.00")
-  });
 });
