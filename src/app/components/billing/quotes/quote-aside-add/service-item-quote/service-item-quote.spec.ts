@@ -12,7 +12,6 @@ import { NumberModule } from 'src/app/directives/number/number.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { QuoteAsideAddBodyComponent } from './quote-aside-add-body.component';
 import { ServiceItemQuoteComponent } from './service-item-quote.component';
 
 

@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { QuoteEdit } from '../../class/quote-edit';
-import { QuoteAsideEditBodyComponent } from './quote-aside-edit-body.component';
 import { QuoteAsidePreviewBodyComponent } from './quote-aside-preview-body.component';
 
 
@@ -60,7 +59,7 @@ describe('QuoteAsidePreviewBodyComponent unit test', () => {
   it('check "calculateServiceDiscount"', () => {
     const fixture = TestBed.createComponent(QuoteAsidePreviewBodyComponent);
     const com = fixture.debugElement.componentInstance;
-    com.quote.services = [{ discountType: "PERCENT", quantity: 2, item: { rate: 10 } }, { discountType: "FIXED", discountAmount: 100 }];
+    com.quote = { services: [{ discountType: "PERCENT", quantity: 2, item: { rate: 10 } }, { discountType: "FIXED", discountAmount: 100 }] };
     expect(com.calculateServiceDiscount()).toEqual(120);
   });
 });
