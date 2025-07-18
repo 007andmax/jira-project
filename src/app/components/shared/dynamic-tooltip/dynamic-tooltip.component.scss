@@ -60,7 +60,6 @@
   }
   &.bs-tooltip-left .arrow,
   &.bs-tooltip-rigth .arrow {
-    top: 100%;
     left: 100%;
     top: calc(50% - 0.4rem);
     &::before {
@@ -69,4 +68,12 @@
       border-left-color: $gray-900;
     }
   }
+     &.bs-tooltip-rigth .arrow {
+       right: 100%;
+       &::before {
+         top: 0;
+          border-width: 0.4rem 0.4rem 0.4rem 0.4rem;
+          border-left-color: $gray-900;
+       }
+     }
 }

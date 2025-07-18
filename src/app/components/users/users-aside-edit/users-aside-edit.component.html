@@ -297,14 +297,21 @@
                             + Add Company
                         </span>
                         <span
-                            class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-color-info qt-ml-8 pointer"
+                            class="qt-fw-600 qt-fs-12 qt-pb-10 qt-lh-133 qt-ml-8"
                             *ngIf="user.customerCompaniesInfo.length > 1"
-                            (click)="removeCompnay(i)"
+                            (click)="!companyInfo.isPrimaryContact ?  removeCompnay(i) : null"
+                            [ngClass]="{'--disabled': companyInfo.isPrimaryContact,'qt-color-info pointer':!companyInfo.isPrimaryContact}"
                         >
                             Remove Company
                         </span>
                     </div>
-                    <div class="qt-input-block">
+                    <div
+                        class="qt-input-block"
+                        placement="top"
+                        ngbTooltip="This company is linked to the primary user and cannot be deleted."
+                        container="body"
+                        [disableTooltip]="!companyInfo.isPrimaryContact"
+                    >
                         <company-drop-down
                             [placeholder]="'Company'"
                             [validate]="validate.getCompany(i)"
@@ -315,6 +322,7 @@
                             [change]="true"
                             [isBlockClear]="true"
                             [editItem]="getCompany(companyInfo)"
+                            [isDisabled]="companyInfo.isPrimaryContact"
                             (onSelectedItem)="onSelectCompany($event,i)"
                         >
                         </company-drop-down>

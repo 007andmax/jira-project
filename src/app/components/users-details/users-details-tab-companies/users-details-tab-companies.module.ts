@@ -12,6 +12,7 @@ import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
     ClickOutsideModule,
     NgbModule,
     DisabledBtnModule,
-    PreloaderTicketModule
+    PreloaderTicketModule,
+    DynamicTooltipModule
   ],
   exports: [UsersDetailsTabCompaniesComponent]
 })
