@@ -9,7 +9,6 @@
     position: relative;
     display: flex;
     min-width: 35px;
-    margin: 2px;
     font-size: 12px;
     line-height: 16px;
     font-weight: 400;
@@ -21,11 +20,11 @@
     float: left;
     cursor: inherit;
     overflow: hidden;
+    margin: 4px 3px;
 }
 
 .mat-standard-chip {
-    padding: 4px 6px 3px 8px;
-    margin: 4px;
+    padding: 6px 6px 4px 8px;
     transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
     align-items: center;
 
