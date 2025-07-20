@@ -139,10 +139,6 @@ app-company-devices-item {
     flex: 1 0 260px;
     app-company-devices-tags {
       width: 100%;
-
-      > .qt-temporary-col-fix .mat-form-field {
-        width: 100% !important;
-      }
     }
   }
 }

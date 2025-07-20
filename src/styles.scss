@@ -487,85 +487,6 @@ app-company-dash-detail {
 }
 
 .new-companies-content__modal--content {
-  app-draft-email-recipients,
-  draft-email-user-recipients {
-    >.qt-temporary-col-fix {
-      // TODO change this temporary class (this class create for remove bootstrap col class)
-      margin-top: 12px;
-
-      .mat-form-field {
-        width: 100%;
-      }
-
-      .mat-form-field-infix {
-        border: none;
-      }
-
-      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-        padding: 0;
-        position: relative;
-      }
-
-      .mat-form-field-appearance-legacy .mat-form-field-label {
-        padding: 12px 10px 10px 36px;
-        font-size: 13px;
-        font-weight: 400;
-        color: $gray-400;
-      }
-
-      .mat-form-field-infix {
-        border: 1px solid $gray-200;
-        box-shadow: inset 0 1px 2px rgba(16, 24, 40, .05);
-        border-radius: 6px;
-        padding: 0px !important;
-        position: relative;
-
-        &:hover {
-          border-color: $gray-300;
-        }
-
-        &:before {
-          left: 12px;
-          top: 10px;
-          position: absolute;
-          content: "";
-          width: 20px;
-          height: 20px;
-           background: url("/assets/img/icons/tags.svg");
-        }
-
-        input {
-          height: 38px !important;
-          padding: 11px 14px;
-          margin: 0;
-          min-width: 100px;
-        }
-      }
-    }
-
-    >.qt-temporary-col-fix {
-
-      .qt-input-block__input,
-      // Fix input style
-      .qt-input-block input {
-        border-color: transparent;
-        box-shadow: unset;
-      }
-
-      margin-top: 0; // Fix style for no-column, delete after remove bootstrap col class
-
-      .mat-form-field {
-        margin-top: 0;
-      }
-
-      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-        &:before {
-          display: none;
-        }
-      }
-    }
-  }
-
   draft-email-user-recipients,
   app-draft-email-recipients {
     .hide-all-user {
@@ -580,37 +501,6 @@ app-company-dash-detail {
 .recurring-tickets-content__modal {
   .app-drop-down__right-icon {
     bottom: 20px;
-  }
-
-  .qt-temporary-col-fix {
-    .mat-form-field-wrapper {
-      .mat-form-field-flex {
-        .mat-form-field-infix {
-          height: 40px;
-          min-height: 40px;
-        }
-        .mat-form-field-infix {
-          &:before {
-            top: 11px;
-          }
-          input {
-            height: 34px;
-          }
-        }
-        .mat-chip-list-wrapper .mat-standard-chip,
-        .mat-chip-list-wrapper input.mat-input-element {
-          margin: 2px;
-        }
-        .mat-chip-list-wrapper {
-          margin: -2px;
-        }
-        .mat-form-field-label {
-          top: calc(50% + 4px);
-          transform: translateY(-50%);
-          height: 43px;
-        }
-      }
-    }
   }
 }
 .billing-dashboard-page__content {
@@ -3228,80 +3118,6 @@ app-non-contract-services-edit,app-inventory-edit-aside {
   top: 50%;
   transform: translate(-50%, -50%);
 }
-app-company-devices-tags {
-    >.qt-temporary-col-fix {
-      // TODO change this temporary class (this class create for remove bootstrap col class)
-      margin-top: 12px;
-
-      .mat-form-field {
-        width: 100%;
-      }
-
-      .mat-form-field-infix {
-        border: none;
-      }
-
-
-
-      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-        padding: 0;
-        position: relative;
-      }
-
-      .mat-form-field-appearance-legacy .mat-form-field-label {
-        padding: 12px 10px 10px 36px;
-        font-size: 13px;
-        font-weight: 400;
-        color: $gray-400;
-      }
-
-      .mat-form-field-infix {
-        border: none !important;
-        box-shadow: none;
-        border-radius: 6px;
-        padding-left: 4px !important;
-        position: relative;
-        min-height: 40px;
-
-        &:hover {
-          border-color: $gray-300;
-        }
-
-        &::before {
-          display: none;
-        }
-
-        input {
-          height: 42px;
-          margin: 0;
-          min-width: 100px;
-        }
-      }
-    }
-
-    >.qt-temporary-col-fix {
-
-      .qt-input-block__input,
-      // Fix input style
-      .qt-input-block input {
-        border-color: transparent;
-        box-shadow: unset;
-      }
-
-      margin-top: 0; // Fix style for no-column, delete after remove bootstrap col class
-
-      .mat-form-field {
-        margin-top: 0;
-        width: 275px !important;
-      }
-
-      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-        &:before {
-          display: none;
-        }
-      }
-    }
-  }
 app-company-devices-edit-ip,app-company-devices-edit-mac {
   display: contents;
 }

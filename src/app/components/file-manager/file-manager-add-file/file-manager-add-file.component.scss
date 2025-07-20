@@ -189,68 +189,6 @@
         transform: translate(1px, -2px) rotate(-1deg);
     }
 }
-::ng-deep app-file-manager-add-file-tags {
-    .qt-temporary-col-fix {
-        margin-top: 40px;
-
-        .mat-form-field {
-            width: 100%;
-        }
-
-        .mat-form-field-infix {
-            border: 1px solid $gray-200;
-            &:hover {
-                border-color: $gray-300;
-            }
-
-            input {
-                border: unset;
-            }
-        }
-
-        .mat-chip-list-wrapper {
-            margin: 0;
-
-            .mat-standard-chip {
-                margin: 2px;
-            }
-        }
-
-        .mat-form-field-appearance-legacy .mat-form-field-underline,
-        .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-            display: none;
-        }
-
-        .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-            padding: 0;
-            position: relative;
-        }
-
-        .mat-form-field-appearance-legacy .mat-form-field-label {
-            padding: 10px 10px 10px 16px;
-            font-size: 14px;
-            font-weight: 400;
-            color: $gray-400;
-            top: 10px;
-        }
-
-        .mat-form-field-infix {
-            border: 1px solid $gray-200;
-            border-radius: 6px;
-            padding: 0 !important;
-            position: relative;
-            min-height: 36px;
-
-            &:hover {
-                border-color: $gray-300;
-            }
-            input {
-                height: 38px !important;
-                margin: 0;
-            }
-        }
-    }
-}
 .--upload {
     background-color: $blue-light-600;
     color: $white;
