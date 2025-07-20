@@ -180,7 +180,7 @@ input.qt-dropdown-input {
     }
   }
   &__input:not(.qt-editable-input),
-  input:not(.qt-editable-input) {
+  input:not(.qt-editable-input):not(.mat-chip-input) {
     height: 40px;
     width: 100%;
     padding: 11px 14px;

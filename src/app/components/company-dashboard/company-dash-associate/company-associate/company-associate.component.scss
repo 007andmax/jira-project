@@ -8,14 +8,6 @@
     }
 }
 .filter-tags-body {
-    padding: 0;
-    margin-top: 0 !important;
-    input {
-        &:disabled {
-            color: $white;
-            background-color: $white;
-        }
-    }
     .select-wrapper {
         width: 100%;
         .company-tag-item {
