@@ -28,12 +28,12 @@ export class Quote {
             for (const key in data) {
                 this[key] = data[key];
             }
-            let billing = (this.company.addresses.find(item => item.isPrimary)) ? JSON.parse(JSON.stringify(this.company.addresses.find(item => item.isPrimary))) : null;
-            let shipping = (this.company.addresses.find(item => !item.isPrimary)) ? JSON.parse(JSON.stringify(this.company.addresses.find(item => !item.isPrimary))) : null;
-            this.company.addresses = [];
-            if (billing) this.company.addresses = [billing];
-            if (shipping) this.company.addresses.push(shipping);
-            this.reviewNotes = data.reviewNotes.map(item => new QuoteReviewNotes(item));
+            let billing = (this.company && this.company.addresses.find(item => item.isPrimary)) ? JSON.parse(JSON.stringify(this.company.addresses.find(item => item.isPrimary))) : null;
+            let shipping = (this.company && this.company.addresses.find(item => !item.isPrimary)) ? JSON.parse(JSON.stringify(this.company.addresses.find(item => !item.isPrimary))) : null;
+            if (this.company) this.company.addresses = [];
+            if (billing && this.company) this.company.addresses = [billing];
+            if (shipping && this.company) this.company.addresses.push(shipping);
+            if (data.reviewNotes) this.reviewNotes = data.reviewNotes.map(item => new QuoteReviewNotes(item));
         }
     }
     public parseRecipients() {
