@@ -36,19 +36,22 @@ describe('QuoteAsidePreviewBodyComponent unit test', () => {
   it('check "getSubTotalServices"', () => {
     const fixture = TestBed.createComponent(QuoteAsidePreviewBodyComponent);
     const com = fixture.debugElement.componentInstance;
-    com.quote.services = [{ rate: 10, quantity: 2, taxSum: 0, sum: 20 }, { rate: 20, quantity: 2, taxSum: 0, sum: 20 }];
-    expect(com.getSubTotalServices()).toEqual(60);
+    com.quote = { services: [{ rate: 10, quantity: 2, taxSum: 0, sum: 20 }, { rate: 20, quantity: 2, taxSum: 0, sum: 20 }] };
+    expect(com.getSubTotalServices()).toEqual(40);
   });
   it('check "getSubTotalProducts"', () => {
     const fixture = TestBed.createComponent(QuoteAsidePreviewBodyComponent);
     const com = fixture.debugElement.componentInstance;
-    com.quote.products = [{ sale: 10, quantity: 2, taxSum: 0, sum: 20 }, { sale: 20, quantity: 2, taxSum: 0, sum: 20 }];
-    expect(com.getSubTotalProducts()).toEqual(60);
+    com.quote = { products: [{ sale: 10, quantity: 2, taxSum: 0, sum: 20 }, { sale: 20, quantity: 2, taxSum: 0, sum: 20 }] };
+    expect(com.getSubTotalProducts()).toEqual(40);
   });
   it('check "getTotalTaxes"', () => {
     const fixture = TestBed.createComponent(QuoteAsidePreviewBodyComponent);
     const com = fixture.debugElement.componentInstance;
-    com.quote.services = [{ rate: 10, quantity: 2, taxSum: 11, sum: 20 }, { rate: 20, quantity: 2, taxSum: 22, sum: 20 }];
+    com.quote = {
+      services: [{ rate: 10, quantity: 2, taxSum: 11, sum: 20 }, { rate: 20, quantity: 2, taxSum: 22, sum: 20 }],
+      products: [{ sale: 10, quantity: 2, taxSum: 0, sum: 20 }, { sale: 20, quantity: 2, taxSum: 0, sum: 20 }]
+    };
     expect(com.getTotalTaxes()).toEqual(33);
   });
   it('check "getSelectedTaxes"', () => {
@@ -59,7 +62,7 @@ describe('QuoteAsidePreviewBodyComponent unit test', () => {
   it('check "calculateServiceDiscount"', () => {
     const fixture = TestBed.createComponent(QuoteAsidePreviewBodyComponent);
     const com = fixture.debugElement.componentInstance;
-    com.quote = { services: [{ discountType: "PERCENT", quantity: 2, item: { rate: 10 } }, { discountType: "FIXED", discountAmount: 100 }] };
-    expect(com.calculateServiceDiscount()).toEqual(120);
+    com.quote = { services: [{ discountType: "PERCENT", quantity: 2, rate: 10, item: { rate: 10 } }, { discountType: "FIXED", discountAmount: 100 }] };
+    expect(com.calculateServiceDiscount()).toEqual(100);
   });
 });

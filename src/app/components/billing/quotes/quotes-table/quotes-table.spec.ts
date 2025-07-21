@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { QuotesTableComponent } from './quotes-table.component';
+import { Quote } from '../class/quote';
 
 
 describe('QuotesTableComponent unit test', () => {
@@ -35,7 +36,7 @@ describe('QuotesTableComponent unit test', () => {
   it('check "onSelectAllQuotes"', () => {
     const fixture = TestBed.createComponent(QuotesTableComponent);
     const com = fixture.debugElement.componentInstance;
-    com.quotes = [{ selected: true, isOrder: true, status: 'UNREAD' }, { selected: true, isOrder: false, status: 'SAVED' }];
+    com.quotes = [new Quote({ selected: true, isOrder: true, status: 'UNREAD' }), new Quote({ selected: true, isOrder: false, status: 'SAVED' })];
     com.onSelectAllQuotes({ target: { checked: true } });
     expect(com.selectAll).toEqual(true);
     expect(com.quotes.some(item => item.selected == false)).toEqual(false);

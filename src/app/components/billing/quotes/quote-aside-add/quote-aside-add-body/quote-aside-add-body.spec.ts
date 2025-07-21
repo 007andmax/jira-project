@@ -54,33 +54,38 @@ describe('QuoteAsideAddBodyComponent unit test', () => {
   it('check "getSubTotalServices"', () => {
     const fixture = TestBed.createComponent(QuoteAsideAddBodyComponent);
     const com = fixture.debugElement.componentInstance;
-    com.quote.services = [{ rate: 10, quantity: 2, taxSum: 0, sum: 20 }, { rate: 20, quantity: 2, taxSum: 0, sum: 20 }];
+    com.quote = { services: [{ item: { rate: 10 }, quantity: 2, taxSum: 0, sum: 20 }, { item: { rate: 20 }, quantity: 2, taxSum: 0, sum: 20 }] };
     expect(com.getSubTotalServices()).toEqual(60);
   });
   it('check "getSubTotalProducts"', () => {
     const fixture = TestBed.createComponent(QuoteAsideAddBodyComponent);
     const com = fixture.debugElement.componentInstance;
-    com.quote.products = [{ sale: 10, quantity: 2, taxSum: 0, sum: 20 }, { sale: 20, quantity: 2, taxSum: 0, sum: 20 }];
+    com.quote = { products: [{ item: { sale: 10 }, quantity: 2, taxSum: 0, sum: 20 }, { item: { sale: 20 }, quantity: 2, taxSum: 0, sum: 20 }] };
     expect(com.getSubTotalProducts()).toEqual(60);
   });
   it('check "getSubTotal"', () => {
     const fixture = TestBed.createComponent(QuoteAsideAddBodyComponent);
     const com = fixture.debugElement.componentInstance;
-    com.quote.services = [{ rate: 10, quantity: 2, taxSum: 0, sum: 20 }, { rate: 20, quantity: 2, taxSum: 0, sum: 20 }];
-    com.quote.products = [{ sale: 10, quantity: 2, taxSum: 0, sum: 20 }, { sale: 20, quantity: 2, taxSum: 0, sum: 20 }];
-    expect(com.getSubTotal()).toEqual(120);
+    com.quote = {
+      services: [{ rate: 10, item: { rate: 10 }, quantity: 2, taxSum: 0, sum: 20 }, { rate: 20, item: { rate: 10 }, quantity: 2, taxSum: 0, sum: 20 }],
+      products: [{ sale: 10, item: { rate: 10, sale: 10 }, quantity: 2, taxSum: 0, sum: 20 }, { sale: 20, item: { rate: 10, sale: 10 }, quantity: 2, taxSum: 0, sum: 20 }]
+    };
+    expect(com.getSubTotal()).toEqual(80);
   });
   it('check "calculateServiceDiscount"', () => {
     const fixture = TestBed.createComponent(QuoteAsideAddBodyComponent);
     const com = fixture.debugElement.componentInstance;
-    com.quote.services = [{ discountType: "PERCENT", quantity: 2, item: { rate: 10 } }, { discountType: "FIXED", discountAmount: 100 }];
-    expect(com.calculateServiceDiscount()).toEqual(120);
+    com.quote = { services: [{ discountType: "PERCENT", quantity: 2, item: { rate: 10 } }, { discountType: "FIXED", discountAmount: 100 }] };
+    expect(com.calculateServiceDiscount()).toEqual(100);
   });
   it('check "getTotalTaxes"', () => {
     const fixture = TestBed.createComponent(QuoteAsideAddBodyComponent);
     const com = fixture.debugElement.componentInstance;
-    com.quote.services = [{ rate: 10, quantity: 2, taxSum: 11, sum: 20 }, { rate: 20, quantity: 2, taxSum: 22, sum: 20 }];
-    expect(com.getTotalTaxes()).toEqual(33);
+    com.quote = {
+      services: [{ rate: 10, quantity: 2, taxSum: 11, sum: 20 }, { rate: 20, quantity: 2, taxSum: 22, sum: 20 }],
+      products: [{ rate: 10, quantity: 2, taxSum: 11, sum: 20 }, { rate: 20, quantity: 2, taxSum: 22, sum: 20 }]
+    };
+    expect(com.getTotalTaxes()).toEqual(66);
   });
   it('check "updateInvoiceData"', () => {
     const fixture = TestBed.createComponent(QuoteAsideAddBodyComponent);

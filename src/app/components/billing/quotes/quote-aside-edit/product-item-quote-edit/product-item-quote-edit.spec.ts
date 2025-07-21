@@ -40,38 +40,38 @@ describe('ProductItemQuoteEditComponent unit test', () => {
   it('check "getTaxPrice"', () => {
     const fixture = TestBed.createComponent(ProductItemQuoteEditComponent);
     const com = fixture.debugElement.componentInstance;
-    com.product = { item: { sale: 100, quantity: 2, taxes: [{ rate: 10, name: 'Tax1' }] } } as any;
+    com.product = { sale: 100, quantity: 2, taxes: [{ rate: 10, name: 'Tax1' }] } as any;
     expect(com.getTaxPrice()).toEqual(10 / 100 * 100 * 2);
   });
   it('check "changeSales"', () => {
     const fixture = TestBed.createComponent(ProductItemQuoteEditComponent);
     const com = fixture.debugElement.componentInstance;
-    com.product = { item: { sale: 100, quantity: 1, cost: 100 } } as any;
+    com.product = { sale: 100, quantity: 1, cost: 100 } as any;
     com.changeSales({ target: { value: 200 } });
-    expect(com.product.item.sale).toEqual(200);
-    expect(com.product.item.sale_str).toEqual("200.00");
+    expect(com.product.sale).toEqual(200);
+    expect(com.product.sale_str).toEqual("200.00");
   });
   it('check "changeCost"', () => {
     const fixture = TestBed.createComponent(ProductItemQuoteEditComponent);
     const com = fixture.debugElement.componentInstance;
-    com.product = { item: { sale: 100, quantity: 1, cost: 100 } } as any;
+    com.product = { sale: 100, quantity: 1, cost: 100 } as any;
     com.changeCost({ target: { value: 200 } });
-    expect(com.product.item.cost).toEqual(200);
-    expect(com.product.item.cost_str).toEqual("200.00");
+    expect(com.product.cost).toEqual(200);
+    expect(com.product.cost_str).toEqual("200.00");
   });
   it('check "getMarkups"', () => {
     const fixture = TestBed.createComponent(ProductItemQuoteEditComponent);
     const com = fixture.debugElement.componentInstance;
-    com.product = { item: { sale: 200, quantity: 1, cost: 100 } } as any;
-    expect(com.getMarkups()).toEqual(0.01);
+    com.product = { sale: 200, quantity: 1, cost: 100 } as any;
+    expect(com.getMarkups()).toEqual(100);
   });
   it('check "changeMarkup"', () => {
     const fixture = TestBed.createComponent(ProductItemQuoteEditComponent);
     const com = fixture.debugElement.componentInstance;
-    com.product = { item: { sale: 100, quantity: 1, cost: 100 } } as any;
+    com.product = { sale: 100, quantity: 1, cost: 100 } as any;
     com.changeMarkup(200);
-    expect(com.product.item.sale).toEqual(300);
-    expect(com.product.item.sale_str).toEqual("300.00");
+    expect(com.product.sale).toEqual(300);
+    expect(com.product.sale_str).toEqual("300.00");
   });
   it('check "getSelectedTaxes"', () => {
     const fixture = TestBed.createComponent(ProductItemQuoteEditComponent);

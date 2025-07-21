@@ -41,7 +41,7 @@ describe('ProductItemQuoteComponent unit test', () => {
   it('check "getTaxPrice"', () => {
     const fixture = TestBed.createComponent(ProductItemQuoteComponent);
     const com = fixture.debugElement.componentInstance;
-    com.product = { item: { sale: 100, quantity: 2, taxes: [{ rate: 10, name: 'Tax1' }] } } as any;
+    com.product = { quantity: 2, item: { sale: 100, taxes: [{ rate: 10, name: 'Tax1' }] } } as any;
     expect(com.getTaxPrice()).toEqual(10 / 100 * 100 * 2);
   });
   it('check "changeSales"', () => {
@@ -64,7 +64,7 @@ describe('ProductItemQuoteComponent unit test', () => {
     const fixture = TestBed.createComponent(ProductItemQuoteComponent);
     const com = fixture.debugElement.componentInstance;
     com.product = { item: { sale: 200, quantity: 1, cost: 100 } } as any;
-    expect(com.getMarkups()).toEqual(0.01);
+    expect(com.getMarkups()).toEqual(100);
   });
   it('check "changeMarkup"', () => {
     const fixture = TestBed.createComponent(ProductItemQuoteComponent);

@@ -41,13 +41,13 @@ describe('ServiceItemQuoteComponent unit test', () => {
   it('check "getPriceService"', () => {
     const fixture = TestBed.createComponent(ServiceItemQuoteComponent);
     const com = fixture.debugElement.componentInstance;
-    expect(com.getPriceService({ quantity: 100, item: { rate: 50 } })).toEqual("5000.00");
+    expect(com.getPriceService({ quantity: 100, item: { rate: 50, taxes: [{ rate: 0, name: 'Tax1' }] } })).toEqual("5000.00");
   });
   it('check "getTaxPrice"', () => {
     const fixture = TestBed.createComponent(ServiceItemQuoteComponent);
     const com = fixture.debugElement.componentInstance;
-    com.product = { item: { sale: 100, quantity: 2, taxes: [{ rate: 10, name: 'Tax1' }] } } as any;
-    expect(com.getTaxPrice()).toEqual(10 / 100 * 100 * 2);
+    com.product = { discountType: "PERCENT", quantity: 2, discountAmount: 100, item: { sale: 100, quantity: 2, rate: 10, taxes: [{ rate: 10, name: 'Tax1' }] } } as any;
+    expect(com.getTaxPrice(com.product)).toEqual(0);
   });
   it('check "getSelectedTaxes"', () => {
     const fixture = TestBed.createComponent(ServiceItemQuoteComponent);
