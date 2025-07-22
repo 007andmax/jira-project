@@ -9,7 +9,7 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { USERS } from 'src/app/const/emails';
 import { UsersService } from 'src/app/services/users/users.service';
 import { TagsService } from 'src/app/services/tags/tags.service';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { PhoneNumber } from 'src/class/phone-number';
 import { UserCustomerCompaniesInfo } from '../../users/class/user-customer-companies-info';
 import { TechUsersService } from 'src/app/services/setting/tech-users.service';
@@ -30,7 +30,7 @@ import { CurrentUser } from 'src/class/current-user/current-user';
 })
 export class UsersDetailsLeftPanelComponent implements OnInit {
   companyId: string;
-  modelForm: FormGroup;
+  modelForm: UntypedFormGroup;
   submitted: boolean = false;
   reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
   isChange: boolean = false;
@@ -48,7 +48,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
     private draftEmailStateService: DraftEmailStateService,
     private confirmStateService: ConfirmStateService,
     private tagsService: TagsService,
-    public formBuilder: FormBuilder,
+    public formBuilder: UntypedFormBuilder,
     private techUsersService: TechUsersService,
     private usersTableService: UsersTableService,
     private modalService: NgbModal,
@@ -100,8 +100,8 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
     };
   }
   // Getter to access the FormArray
-  get phones(): FormArray {
-    return this.modelForm.get('phones') as FormArray;
+  get phones(): UntypedFormArray {
+    return this.modelForm.get('phones') as UntypedFormArray;
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

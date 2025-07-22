@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../../../../services/accounting/accounting-settings.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { ToastrService } from 'ngx-toastr';
@@ -29,13 +29,13 @@ export class TicketSettingsComponent implements OnInit, OnDestroy {
   loading = true;
   submitted = false;
   used = false;
-  ticketForm: FormGroup;
+  ticketForm: UntypedFormGroup;
   nextValid: '';
   public currentUser: any;
   currentCompany: any;
   sub: Subscription = new Subscription();
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
     private toastr: ToastrService,
     private companiesStateService: CompaniesStateService,

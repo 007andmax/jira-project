@@ -9,7 +9,7 @@ import { TicketDetailProfileEditUpdatesProductsComponent } from './ticket-detail
 import { TicketProfileFormProduct } from '../../../ticket-edit-aside/class/ticket-profile-form-product';
 import { ProductListModule } from 'src/app/components/shared/product-list/product-list.module';
 import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
-import { FormBuilder, FormsModule } from '@angular/forms';
+import { UntypedFormBuilder, FormsModule } from '@angular/forms';
 import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
 import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
@@ -41,7 +41,7 @@ describe('TicketDetailProfileEditUpdatesProductsComponent unit test', () => {
         InvoiceFormTicketEditTaxesModule],
       declarations: [TicketDetailProfileEditUpdatesProductsComponent
       ],
-      providers: [FormBuilder]
+      providers: [UntypedFormBuilder]
     }).compileComponents();
 
   });

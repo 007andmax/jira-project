@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from "@angular/forms";
 import { map } from "rxjs/operators";
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { ConfirmStateService } from "../../../shared/confirm/services/confirm-state.service";
@@ -24,14 +24,14 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
   taxes: any[] = [];
   eTax: any;
   submitted = false;
-  taxForm: FormGroup;
+  taxForm: UntypedFormGroup;
   tax: any;
   sub: Subscription = new Subscription();
   constructor(
     private taxesService: TaxesService,
     private taxesStateService: TaxesStateService,
     private toastrService: ToastrService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private settingStateService: SettingStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,

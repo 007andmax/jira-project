@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { SubscriptionServices } from '../class/subscription-services';
 import { SubscriptionServicesStateService } from 'src/app/states/subscription-services/subscription-services-state.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
@@ -21,7 +21,7 @@ import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
 })
 export class SubscriptionServicesAddComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
-  modelForm: FormGroup;
+  modelForm: UntypedFormGroup;
   submitted: boolean = false;
   defaultSelectedTax: Array<Tax> = [];
   showAdd: boolean = false;
@@ -32,7 +32,7 @@ export class SubscriptionServicesAddComponent implements OnInit, OnDestroy {
     private taxesStateService: TaxesStateService,
     private subscriptionServicesStateService: SubscriptionServicesStateService,
     public cd: ChangeDetectorRef,
-    public formBuilder: FormBuilder,
+    public formBuilder: UntypedFormBuilder,
     private glNumberStateService: GlNumberStateService,
     private glNumberService: GlNumberService
   ) { }

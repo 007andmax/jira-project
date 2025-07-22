@@ -10,7 +10,7 @@ import {
 
 import { forkJoin, Observable, of, Subject, Subscription } from "rxjs";
 import { catchError, map } from "rxjs/operators";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
@@ -46,7 +46,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   showAdd: boolean = false;
   serviceCreateCustomTags: Observable<any>;
   allowCreateTags: any;
-  compnayForm: FormGroup;
+  compnayForm: UntypedFormGroup;
   submitted = false;
   edit = false;
   create = false;
@@ -68,7 +68,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   sub: Subscription = new Subscription();
   constructor(
     private tagsService: TagsService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private toaster: ToastrService,
     private settingStateService: SettingStateService,
     private companiesStateService: CompaniesStateService,

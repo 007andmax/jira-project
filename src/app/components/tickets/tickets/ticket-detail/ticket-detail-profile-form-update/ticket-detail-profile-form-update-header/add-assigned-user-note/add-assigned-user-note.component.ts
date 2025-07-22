@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { TicketsListService } from '../../../../services/tickets-list.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -21,7 +21,7 @@ export class AddAssignedUserNoteComponent implements OnInit {
   removable = true;
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  userCtrl = new FormControl();
+  userCtrl = new UntypedFormControl();
   validate: UserNoteValidate = new UserNoteValidate();
   @Input() selectedUsers = [];
   @Input() userList = [];

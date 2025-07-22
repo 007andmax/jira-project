@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 
 @Component({
@@ -9,9 +9,9 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 })
 export class DeviceSettingManufacturesAddComponent implements OnInit {
   @Output() onClose = new EventEmitter();
-  manufactureForm: FormGroup;
+  manufactureForm: UntypedFormGroup;
   submitted: boolean = false;
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     private devicesService: DevicesService) { }
 
   ngOnInit() {

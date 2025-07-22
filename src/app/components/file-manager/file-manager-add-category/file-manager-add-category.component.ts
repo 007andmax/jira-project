@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
 
@@ -11,12 +11,12 @@ import { FileManagementStateService } from 'src/app/states/file-management/file-
 export class FileManagerAddCategoryComponent implements OnInit {
   @Input() categoryId: string;
   @Input() companyId: string;
-  categoryForm: FormGroup;
+  categoryForm: UntypedFormGroup;
   submitted = false;
   @Output() onClose = new EventEmitter();
   constructor(private fileManagementService: FileManagementService,
     private fileManagementStateService: FileManagementStateService,
-    private formBuilder: FormBuilder,) { }
+    private formBuilder: UntypedFormBuilder,) { }
 
   ngOnInit() {
     this.categoryForm = this.formBuilder.group({

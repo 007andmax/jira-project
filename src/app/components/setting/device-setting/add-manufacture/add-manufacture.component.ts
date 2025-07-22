@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { AgentService } from 'src/app/services/agent/agent.service';
 
@@ -12,9 +12,9 @@ export class AddManufactureComponent implements OnInit {
   @Input() techCompany: any;
   @Output() onClose = new EventEmitter();
   @Output() onAdded = new EventEmitter();
-  manufactureForm: FormGroup;
+  manufactureForm: UntypedFormGroup;
   submitted: boolean = false;
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     private agentService: AgentService,) { }
 
   ngOnInit() {

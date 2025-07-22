@@ -1,6 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -19,7 +19,7 @@ export class CompanyAssociateComponent implements OnInit, OnDestroy {
   removable = true;
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  tagCtrl = new FormControl();
+  tagCtrl = new UntypedFormControl();
   @Input() selectedCompanies: Array<CompanyAssociateItem> = [];
   companies: Array<CompanyAssociateItem> = [];
   reqCompanies: Array<CompanyAssociateItem> = [];

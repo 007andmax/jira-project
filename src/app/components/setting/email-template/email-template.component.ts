@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy, TemplateRef } from "@angular/core";
 import { EmailTempleteService } from "../../../services/email-template/email-template.service";
 import { map, catchError } from "rxjs/operators";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from "@angular/forms";
 import { of, Subscription } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { DomSanitizer } from '@angular/platform-browser';
@@ -36,7 +36,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   type = '';
   emailPages: any;
   elEditor: any = "";
-  templeteForm: FormGroup;
+  templeteForm: UntypedFormGroup;
   openEmailTemplate: string;
   public show = false;
   public buttonName: any = "Show Description";
@@ -47,7 +47,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   constructor(
     private modalService: NgbModal,
     private emailService: EmailTempleteService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private toastr: ToastrService,
     private settingStateService: SettingStateService,
     private emailTemplateStateService: EmailTemplateStateService,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../../../../services/accounting/accounting-settings.service';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
@@ -11,7 +11,7 @@ import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header
   styleUrls: ['./quotes-settings.component.scss']
 })
 export class QuotesSettingsComponent implements OnInit {
-  quotesForm: FormGroup;
+  quotesForm: UntypedFormGroup;
   submitted = false;
   loading = true;
   expirationDate;
@@ -21,7 +21,7 @@ export class QuotesSettingsComponent implements OnInit {
   new TitleListType("30 days", "30"),
   new TitleListType("45 days", "45")];
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
     private toastr: ToastrService,
     private appStateService: AppStateService

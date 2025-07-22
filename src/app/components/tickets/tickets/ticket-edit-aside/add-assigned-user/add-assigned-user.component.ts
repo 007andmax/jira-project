@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, HostListener, Output, EventEmitter } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
@@ -21,7 +21,7 @@ export class AddAssignedUserComponent implements OnInit {
   @Input() removable = true;
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  userCtrl = new FormControl();
+  userCtrl = new UntypedFormControl();
   @Input() selectedUsers = [];
   @Input() userList = [];
   @Input() placement = 'top-left';

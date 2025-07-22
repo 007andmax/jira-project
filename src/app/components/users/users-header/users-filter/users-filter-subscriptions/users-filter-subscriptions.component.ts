@@ -1,6 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MarketingSubscriptionType } from 'src/app/components/setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { USER_SUBSCRIPTION_TYPE_CUSTOM, USER_SUBSCRIPTION_TYPE_DEFAULT } from 'src/app/const/user-subscription';
@@ -29,7 +29,7 @@ export class UsersFilterSubscriptionsComponent implements OnInit {
   removable = true;
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  tagCtrl = new FormControl();
+  tagCtrl = new UntypedFormControl();
   @ViewChild('userInput', { static: true }) userInput: ElementRef<HTMLInputElement>;
   @ViewChild('dp', { static: true }) dp: any;
   @Output() tagsChange = new EventEmitter();

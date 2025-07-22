@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Observable, Observer, Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { TechUsersService } from 'src/app/services/setting/tech-users.service';
@@ -49,7 +49,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   techUserIdList: any[] = [];
   techRoles: any;
   selectedTechUser: any;
-  techUserForm: FormGroup;
+  techUserForm: UntypedFormGroup;
   imageBase64 = '';
   imageChangedEvent: any;
   croppedImage: any;
@@ -72,7 +72,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   sub: Subscription = new Subscription();
   constructor(
     private techUsersService: TechUsersService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private toastr: ToastrService,
     private settingService: SettingService,
     private settingStateService: SettingStateService,

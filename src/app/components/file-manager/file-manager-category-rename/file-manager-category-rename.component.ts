@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { FileManagerCategory } from '../class/file-manager-category';
 import { map } from 'rxjs/operators';
@@ -12,11 +12,11 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class FileManagerCategoryRenameComponent implements OnInit {
   @Input() item: FileManagerCategory;
-  categoryForm: FormGroup;
+  categoryForm: UntypedFormGroup;
   submitted = false;
   @Output() onClose = new EventEmitter();
   constructor(private fileManagementService: FileManagementService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     public activeModal: NgbActiveModal,) { }
 
   ngOnInit() {

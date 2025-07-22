@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { SubscriptionServices } from '../class/subscription-services';
 import { Subscription } from 'rxjs';
 import { SubscriptionServicesService } from 'src/app/services/subscription-services/subscription-services.service';
@@ -20,7 +20,7 @@ import { SubscriptionServicesConfirmComponent } from '../subscription-services-c
 })
 export class SubscriptionServicesEditComponent implements OnInit, OnDestroy {
   open: boolean = false;
-  modelForm: FormGroup;
+  modelForm: UntypedFormGroup;
   submitted: boolean = false;
   service: SubscriptionServices;
   selectedTaxes: Array<Tax> = [];
@@ -37,7 +37,7 @@ export class SubscriptionServicesEditComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private modalService: NgbModal,
     private glNumberService: GlNumberService,
-    public formBuilder: FormBuilder,) { }
+    public formBuilder: UntypedFormBuilder,) { }
 
   ngOnInit() {
     let getShowAsideForEdit = this.subscriptionServicesStateService.showAsideForEdit.subscribe(data => {

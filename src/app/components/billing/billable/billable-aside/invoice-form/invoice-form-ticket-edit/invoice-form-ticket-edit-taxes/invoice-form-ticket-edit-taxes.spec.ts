@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { InvoiceFormTicketEditTaxesComponent } from './invoice-form-ticket-edit-taxes.component';
@@ -27,7 +27,7 @@ describe('InvoiceFormTicketEditTaxesComponent unit test', () => {
         NoopAnimationsModule],
       declarations: [InvoiceFormTicketEditTaxesComponent
       ],
-      providers: [FormBuilder]
+      providers: [UntypedFormBuilder]
     }).compileComponents();
 
   });

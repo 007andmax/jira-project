@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { SettingService } from "src/app/services/setting/setting.service";
 import { map } from "rxjs/operators";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
 
 @Component({
   selector: "app-email-notifications",
@@ -10,10 +10,10 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 })
 export class EmailNotificationsComponent implements OnInit {
   emailNotifications: any;
-  emailForm: FormGroup;
+  emailForm: UntypedFormGroup;
   constructor(
     private settingService: SettingService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
   ) { }
 
   /**

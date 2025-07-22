@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { TaxesService } from 'src/app/services/taxes/taxes.service';
 
@@ -10,12 +10,12 @@ import { TaxesService } from 'src/app/services/taxes/taxes.service';
   styleUrls: ['./taxes-add.component.scss']
 })
 export class TaxesAddComponent implements OnInit {
-  taxForm: FormGroup;
+  taxForm: UntypedFormGroup;
   unique = true;
   submitted = false;
   @Output() onClose = new EventEmitter();
   constructor(private taxesService: TaxesService,
-    private formBuilder: FormBuilder,) { }
+    private formBuilder: UntypedFormBuilder,) { }
 
   ngOnInit() {
     this.taxForm = this.formBuilder.group({

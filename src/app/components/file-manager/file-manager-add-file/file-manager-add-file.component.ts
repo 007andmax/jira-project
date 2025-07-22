@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
@@ -17,7 +17,7 @@ export class FileManagerAddFileComponent implements OnInit {
   @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;
   @Input() categoryId: string;
   @Input() companyId: string;
-  addForm: FormGroup;
+  addForm: UntypedFormGroup;
   submitted = false;
   files: any[] = [];
   constructor(public cd: ChangeDetectorRef,
@@ -25,7 +25,7 @@ export class FileManagerAddFileComponent implements OnInit {
     private fileManagementStateService: FileManagementStateService,
     private confirmStateService: ConfirmStateService,
     public activeModal: NgbActiveModal,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private documentsService: DocumentsService,
   ) { }
 
