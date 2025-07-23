@@ -1618,7 +1618,8 @@ app-company-dash-tags {
             content: "";
             width: 20px;
             height: 20px;
-            background: url("/assets/img/icons/tags.svg");
+            mask-image: url('/assets/img/icons/tags.svg');
+            background-color: $gray-400;
         }
         input {
             margin: 0;

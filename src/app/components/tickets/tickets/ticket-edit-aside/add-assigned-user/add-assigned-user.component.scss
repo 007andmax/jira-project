@@ -29,7 +29,6 @@
   }
 
   .mat-form-field-infix {
-    padding: 0;
     border: none;
   }
   .mat-form-field-underline {
@@ -49,8 +48,8 @@
   }
 
   .assigne-user-avatar {
-    height: 24px;
-    width: 24px;
+    height: 16px;
+    width: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -104,9 +103,10 @@
       .mat-standard-chip {
           width: 100%;
           border: none;
-          background-color: transparent;
-          padding: 0px;
-          margin: 0px;
+          background-color: transparent !important;
+          border: none !important;
+          box-shadow: none !important;
+          margin: 0;
       }
       .assigne-user-avatar {
           width: 20px;

@@ -3,10 +3,12 @@
 .mat-chip {
     padding: 9px 15px 9px 5px;
     border-radius: 6px;
+    height: 24px;
     color: $gray-600;
     text-transform: none;
     position: relative;
     display: flex;
+    gap: 4px;
     min-width: 35px;
     font-size: 13px;
     line-height: 16px;
@@ -23,12 +25,14 @@
 }
 
 .mat-standard-chip {
-    padding: 6px 6px 4px 8px;
+    padding: 4px 4px 4px 6px;
     transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
     align-items: center;
 
     &:has(.assigne-user-avatar) {
-      padding: 5px 6px 3px 8px;
+      background-color: $white;
+      border: 1px solid $gray-200;
+      box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
     }
 
     &:focus {
@@ -49,35 +53,19 @@
 .mat-chip-remove {
     font-size: 0;
     position: relative;
-    margin: 0;
-    color: rgba(0, 0, 0, .87);
-    width: 14px !important;
-    height: 18px !important;
+    width: 16px;
+    height: 16px;
+    mask-image: url('/assets/img/icons/close.svg');
+    background-color: $gray-400;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
     cursor: pointer;
-
-    &::before {
-        content: "";
-        position: absolute;
-        top: 2px;
-        right: -3px;
-        width: 14px;
-        height: 14px;
-        -webkit-mask-image: url(/assets/img/icons/close.svg);
-        mask-image: url(/assets/img/icons/close.svg);
-        background-color: $gray-400;
-        -webkit-mask-position: center;
-        mask-position: center;
-        -webkit-mask-repeat: no-repeat;
-        mask-repeat: no-repeat;
-        -webkit-mask-size: contain;
-        mask-size: contain;
-    }
 }
 
 .mat-icon {
-    width: 18px;
-    height: 18px;
-    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
     display: inline-block;
     fill: currentColor;
 }

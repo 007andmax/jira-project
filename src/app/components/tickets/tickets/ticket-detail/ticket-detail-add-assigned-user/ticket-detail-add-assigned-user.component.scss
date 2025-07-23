@@ -11,17 +11,15 @@
     }
 
     .mat-chip-list-wrapper {
-      gap: 8px;
-      margin: 0;
+      gap: 4px;
       border: unset;
     }
 
     .selected-tag-user {
       margin: 0;
+
       .mat-standard-chip {
-        margin: 0px;
-        background-color: $white;
-        border-radius: 6px !important;
+        height: 32px;
       }
     }
     .assigne-user-avatar {
@@ -33,19 +31,6 @@
       line-height: 12px;
       background-size: cover !important;
       background-position: center !important;
-    }
-
-    .mat-chip.mat-standard-chip .mat-chip-remove {
-      width: 12px !important;
-      height: 12px !important;
-      margin-left: 4px;
-
-      &:before {
-        width: 12px;
-        height: 12px;
-        top: 1px;
-        right: 0;
-      }
     }
 
     input.mat-chip-input {

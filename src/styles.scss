@@ -368,11 +368,12 @@ html {
   > div {
     display: flex;
     align-items: center;
+    gap: 2px;
     font-size: 13px;
-    padding: 7px 6px 5px 8px;
+    padding: 4px 4px 4px 6px;
     background: $gray-25;
     border: 1px solid $background;
-    border-radius: 3px;
+    border-radius: 6px;
     margin: 4px 3px;
   }
 }
@@ -3182,7 +3183,8 @@ textarea {
       content: "";
       width: 20px;
       height: 20px;
-      background: url('/assets/img/icons/tags.svg');
+      mask-image: url('/assets/img/icons/tags.svg');
+      background-color: $gray-400;
     }
   }
 }

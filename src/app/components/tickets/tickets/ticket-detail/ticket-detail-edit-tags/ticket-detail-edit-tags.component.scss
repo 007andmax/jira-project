@@ -34,51 +34,8 @@
         display: none;
     }
 
-    .selected-tag-ticket {
-        background-color: $gray-100;
-        border-radius: 6px !important;
-        border: unset;
-        padding: 0px !important;
-        font-weight: 500;
-        font-size: 13px;
-        line-height: 16px;
-        color: $gray-600;
-        margin: 0;
-        .mat-standard-chip {
-          margin: 0px;
-          padding: 3px 6px;
-          background-color: $gray-100;
-          color: $gray-600;
-          border-radius: 6px !important;
-          font-weight: 500;
-        }
-    }
-
     .tag-icon {
       display: none;
-    }
-    .mat-chip.mat-standard-chip .mat-chip-remove {
-      width: 12px !important;
-      height: 12px !important;
-      margin-left: 4px;
-
-      &:before {
-        top: 0px;
-        right: 0;
-        width: 12px;
-        height: 12px;
-      }
-    }
-
-    .mat-chip-remove {
-        opacity: 1;
-    }
-
-    .mat-chip-remove:before {
-        filter: brightness(0.8)
-    }
-    .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-      padding: 0;
     }
 
     .mat-standard-chip:focus {
@@ -86,10 +43,6 @@
     }
     .mat-form-field-label-wrapper {
       display: none;
-    }
-    .mat-chip-list-wrapper {
-      margin: 0;
-      gap: 8px;
     }
     input.mat-chip-input {
       height: 24px;
