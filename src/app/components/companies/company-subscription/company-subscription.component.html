@@ -4,7 +4,7 @@
          id="dropdownServices"
          ngbDropdownToggle>
          <ng-template ngFor let-item [ngForOf]="subscriptions" let-i="index"  >
-            <div *ngIf="item.selected" [textContent]="item.title">
+            <div class="user-subscription__item" *ngIf="item.selected" [textContent]="item.title">
                  <!--(click)="remove(i)"-->
             </div>
           </ng-template>

@@ -41,14 +41,6 @@
 .left-panel-container {
     width: 360px;
     border-right: 1px solid $gray-200;
-
-    ::ng-deep .user-subscription {
-      min-height: 32px;
-      margin-bottom: -6px;
-    }
-    ::ng-deep .placeholder-subscription:after {
-      top: 3px;
-    }
 }
 .user-detail__row-info-value {
   .terms-n-conditions__textarea {

@@ -612,3 +612,27 @@ app-users-details {
     }
   }
 }
+
+.left-panel-container {
+  .user-subscription {
+    min-height: 40px;
+    margin-bottom: -6px;
+    padding: 0 30px 0 0;
+    border: unset;
+  }
+
+  .mat-chip-list-wrapper {
+    padding: 0;
+  }
+  .app-mat-tags .mat-form-field-infix {
+    padding: 0;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .placeholder-subscription:after {
+    left: 0;
+  }
+}

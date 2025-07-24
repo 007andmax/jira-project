@@ -17,7 +17,7 @@
             let-i="index"
             [ngForTrackBy]="trackById"
         >
-            <div [ngClass]="{'active':custom.activated && custom.isExist,
+            <div class="user-subscription__item" [ngClass]="{'active':custom.activated && custom.isExist,
             'no-active':!custom.activated && custom.isExist}">
                 {{custom.name}}
                 <i

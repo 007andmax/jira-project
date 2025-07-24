@@ -13,6 +13,7 @@
 '--disabled':isDisabled}"
     >
         <div
+            class="user-subscription__item"
             *ngIf="defaultSubscriptions.invoiceSubscription.enabled"
             [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated && defaultSubscriptions.invoiceSubscription.isExist,
             'no-active':!defaultSubscriptions.invoiceSubscription.activated && defaultSubscriptions.invoiceSubscription.isExist}"
