@@ -26,7 +26,6 @@ export class AccountsReceivableComponent implements OnInit {
   public getReport(data) {
     this.accountsReceivable.clearLines();
     this.accountsReceivable.setData(data);
-    console.log("this.accountsReceivable", this.accountsReceivable);
     this.headers = [];
     this.headers.push("Company Name");
     if (this.accountsReceivable.type == "DETAILED") this.headers.push("Invoice Date");
