@@ -20,7 +20,7 @@ export class DecimalNumberDirective {
     this.element.nativeElement.addEventListener("blur", (event) => {
       if (event.target.value && event.target.value !== "NaN") {
         if (this.useFixed) {
-          if (parseFloat(event.target.value) !== NaN) event.target.value = parseFloat(event.target.value).toFixed(2);
+          if (!Number.isNaN(parseFloat(event.target.value))) event.target.value = parseFloat(event.target.value).toFixed(2);
         }
       } else {
         if (this.defaultValue != null) {

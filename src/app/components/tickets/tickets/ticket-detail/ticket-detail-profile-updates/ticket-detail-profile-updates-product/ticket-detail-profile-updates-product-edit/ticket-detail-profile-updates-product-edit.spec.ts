@@ -75,6 +75,7 @@ describe('TicketDetailProfileUpdatesProductEditComponent unit test', () => {
     const fixture = TestBed.createComponent(TicketDetailProfileUpdatesProductEditComponent);
     const com = fixture.debugElement.componentInstance;
     com.editProduct = new TicketProfileProduct();
+    com.editProduct.item = { versionedId: "test", sale: 100, cost: 50 };
     com.onChangeProduct({ versionedId: "test", sale: 100, cost: 50 });
     expect(com.valdiateSaleCost).toEqual(true)
   });
