@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../../../../services/accounting/accounting-settings.service';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin, of } from 'rxjs';
@@ -15,7 +15,7 @@ import { CompanySetting } from 'src/app/components/companies/class/company-setti
   styleUrls: ['./invoice-settings.component.scss']
 })
 export class InvoiceSettingsComponent implements OnInit {
-  invoiceForm: FormGroup;
+  invoiceForm: UntypedFormGroup;
   submitted = false;
   isAddPhone = false;
   loading = false;
@@ -44,7 +44,7 @@ export class InvoiceSettingsComponent implements OnInit {
   @Input() conditionInput: any;
   invoiceSettings: InvoiceSettings;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
     private toaster: ToastrService,
     private elRef: ElementRef,

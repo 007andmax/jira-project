@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TicketSettingsComponent } from './ticket-settings.component';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 
@@ -25,7 +25,7 @@ describe('TicketSettingsComponent unit test', () => {
         NoopAnimationsModule],
       declarations: [TicketSettingsComponent
       ],
-      providers: [FormBuilder]
+      providers: [UntypedFormBuilder]
     }).compileComponents();
 
   });

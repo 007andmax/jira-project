@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { AgentService } from 'src/app/services/agent/agent.service';
 
@@ -10,11 +10,11 @@ import { AgentService } from 'src/app/services/agent/agent.service';
 })
 export class AddDeviceTypeComponent implements OnInit {
   @Input() techCompany: any;
-  deviceForm: FormGroup;
+  deviceForm: UntypedFormGroup;
   submitted = false;
   @Output() onClose = new EventEmitter();
   @Output() onAdded = new EventEmitter();
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     private agentService: AgentService,) { }
 
   ngOnInit() {

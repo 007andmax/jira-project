@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { DeviceType } from 'src/app/components/company-devices/class/device-type';
 import { AgentService } from 'src/app/services/agent/agent.service';
@@ -12,13 +12,13 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
   styleUrls: ['./add-device-setting-type.component.scss']
 })
 export class AddDeviceSettingTypeComponent implements OnInit {
-  deviceForm: FormGroup;
+  deviceForm: UntypedFormGroup;
   submitted = false;
   deviceTypes: Array<DeviceType> = [];
   disableCreate: boolean = false;
   @Output() onClose = new EventEmitter();
   @Output() onAdded = new EventEmitter();
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,) { }
 

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { TicketDetailProfileUpdatesHeaderInfoComponent } from './ticket-detail-profile-updates-header-info.component';
@@ -28,7 +28,7 @@ describe('TicketDetailProfileUpdatesHeaderInfoComponent unit test', () => {
       ],
       declarations: [TicketDetailProfileUpdatesHeaderInfoComponent
       ],
-      providers: [FormBuilder, TicketsListService]
+      providers: [UntypedFormBuilder, TicketsListService]
     }).compileComponents();
 
   });

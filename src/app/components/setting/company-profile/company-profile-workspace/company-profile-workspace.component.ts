@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { CompanyProfileService } from 'src/app/services/setting/company-profile.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
@@ -10,7 +10,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 })
 export class CompanyProfileWorkspaceComponent implements OnInit {
   public loading = true;
-  cProfileForm: FormGroup;
+  cProfileForm: UntypedFormGroup;
   cProfile = {
     address: [],
     logo: {},
@@ -26,20 +26,20 @@ export class CompanyProfileWorkspaceComponent implements OnInit {
     this.getCompanyProfile(this.companiesStateService.getCompanyProfile());
   }
   createCProfileForm() {
-    this.cProfileForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      url: new FormControl(''),
-      timeZone: new FormControl(''),
-      primaryId: new FormControl(''),
-      primaryPhone: new FormControl('', [Validators.minLength(14)]),
-      primaryPhoneType: new FormControl(''),
-      secondaryPhone: new FormControl(''),
-      secondaryPhoneType: new FormControl(''),
-      suiteNumber: new FormControl(''),
-      address: new FormControl(''),
-      postalCode: new FormControl(''),
-      locale: new FormControl('', Validators.required),
-      secondaryId: new FormControl(''),
+    this.cProfileForm = new UntypedFormGroup({
+      name: new UntypedFormControl('', Validators.required),
+      url: new UntypedFormControl(''),
+      timeZone: new UntypedFormControl(''),
+      primaryId: new UntypedFormControl(''),
+      primaryPhone: new UntypedFormControl('', [Validators.minLength(14)]),
+      primaryPhoneType: new UntypedFormControl(''),
+      secondaryPhone: new UntypedFormControl(''),
+      secondaryPhoneType: new UntypedFormControl(''),
+      suiteNumber: new UntypedFormControl(''),
+      address: new UntypedFormControl(''),
+      postalCode: new UntypedFormControl(''),
+      locale: new UntypedFormControl('', Validators.required),
+      secondaryId: new UntypedFormControl(''),
     });
   }
   checkDomain() {

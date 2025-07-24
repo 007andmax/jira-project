@@ -1,6 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, ViewChild, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { Subscription } from 'rxjs';
@@ -21,7 +21,7 @@ export class TagsComponent implements OnInit, OnDestroy {
   focus = false;
   isResend = false;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  tagCtrl = new FormControl();
+  tagCtrl = new UntypedFormControl();
   selectedTag = [];
   tags: Array<Tag> = [];
   sub = new Subscription();

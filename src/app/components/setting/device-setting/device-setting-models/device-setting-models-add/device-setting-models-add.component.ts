@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ManufactureDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/manufacture-device';
 import { ModelDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/model-device';
@@ -13,14 +13,14 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
 })
 export class DeviceSettingModelsAddComponent implements OnInit, OnDestroy {
   @Input() manufactureId: string;
-  modelForm: FormGroup;
+  modelForm: UntypedFormGroup;
   submitted: boolean = false;
   manufactures: Array<ManufactureDevice> = [];
   models: Array<ModelDevice> = [];
   @Output() onClose = new EventEmitter();
   sub: Subscription = new Subscription();
   constructor(private devicesStateService: DevicesStateService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private devicesService: DevicesService,) { }
 
   ngOnInit() {

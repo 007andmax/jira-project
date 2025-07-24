@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { AgentService } from 'src/app/services/agent/agent.service';
 
@@ -10,13 +10,13 @@ import { AgentService } from 'src/app/services/agent/agent.service';
 })
 export class AddModelComponent implements OnInit {
   manufactureId: string;
-  modelForm: FormGroup;
+  modelForm: UntypedFormGroup;
   submitted: boolean = false;
   manufactureIsActiveList: any[] = [];
   @Input() techCompany: any;
   @Output() onClose = new EventEmitter();
   @Output() onAdded = new EventEmitter();
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     private agentService: AgentService) { }
 
   ngOnInit() {

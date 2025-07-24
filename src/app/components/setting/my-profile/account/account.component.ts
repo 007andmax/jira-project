@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
@@ -27,11 +27,11 @@ export class AccountComponent implements OnInit, OnDestroy {
   oldPwdCorrect = true;
   showCurrentPassword: boolean = false;
   showNewPassword: boolean = false;
-  public passwordForm: FormGroup;
+  public passwordForm: UntypedFormGroup;
   show = false;
   sub: Subscription = new Subscription();
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private settingService: SettingService,
     private toastr: ToastrService,
     private modalService: NgbModal,

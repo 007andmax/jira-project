@@ -1,6 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, Input, OnInit, ViewChild, HostListener, OnDestroy } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { NgbActiveModal, NgbModalConfig, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { USER } from "../../../const/users";
 import { Subject, Subscription } from "rxjs";
@@ -36,7 +36,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   @Input() subject: string;
   focus = false;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  userCtrl = new FormControl();
+  userCtrl = new UntypedFormControl();
   selectedUsers = [];
   showError = false;
   usersEmails = [];

@@ -7,10 +7,10 @@ import {
   OnDestroy
 } from '@angular/core';
 import {
-  FormGroup,
+  UntypedFormGroup,
   Validators,
-  FormBuilder,
-  FormControl
+  UntypedFormBuilder,
+  UntypedFormControl
 } from '@angular/forms';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -51,11 +51,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
   imageBase64 = '';
   imageSrc = '';
   public currentUser: any;
-  public profileForm: FormGroup;
+  public profileForm: UntypedFormGroup;
   idUploadFile: string;
   public latitude: number;
   public longitude: number;
-  public searchControl: FormControl;
+  public searchControl: UntypedFormControl;
   public zoom: number;
   selectedJobTitle: CrmCompanyJobTitle;
   jobTitleList: Array<CrmCompanyJobTitle> = [];
@@ -68,7 +68,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   secondaryPhoneType;
   primaryPhoneType;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private settingService: SettingService,
     private userService: UsersService,
     private toastr: ToastrService,

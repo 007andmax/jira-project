@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, ChangeDetectorRef, Input } from '@angular/core';
 import { Tax } from 'src/app/interfaces/service/tax';
 import { Subscription } from 'rxjs';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { TaxesService } from 'src/app/services/taxes/taxes.service';
 
@@ -16,7 +16,7 @@ export class InvoiceFormTicketEditTaxesComponent implements OnInit, OnDestroy {
   sub = new Subscription();
   editItem: any;
   newTax: Tax = null;
-  taxForm: FormGroup;
+  taxForm: UntypedFormGroup;
   @Input() placeholder: string;
   @ViewChild('taxesDropDown', { static: true }) taxesDropDown;
   @Output() taxesChange = new EventEmitter();
@@ -25,7 +25,7 @@ export class InvoiceFormTicketEditTaxesComponent implements OnInit, OnDestroy {
   public constructor(
     private taxesStateService: TaxesStateService,
     private taxesService: TaxesService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     public cd: ChangeDetectorRef,
   ) { }
 

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { ApiKeysService } from 'src/app/services/api-keys/api-keys.service';
@@ -13,7 +13,7 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
   styleUrls: ['./company-profile-api-keys-edit-aside.component.scss']
 })
 export class CompanyProfileApiKeysEditAsideComponent implements OnInit {
-  modelForm: FormGroup;
+  modelForm: UntypedFormGroup;
   submitted: boolean = false;
   opened: boolean = false;
   sections = {};
@@ -29,7 +29,7 @@ export class CompanyProfileApiKeysEditAsideComponent implements OnInit {
   viewDocumentsRelatedPermissions = [];
   editCategoryDocumentsRelatedPermissions = [];
   constructor(public cd: ChangeDetectorRef,
-    public formBuilder: FormBuilder,
+    public formBuilder: UntypedFormBuilder,
     private permissionManageService: PermissionManageService,
     private apiKeysStateService: ApiKeysStateService,
     private toastrService: ToastrService,

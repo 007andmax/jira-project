@@ -4,7 +4,7 @@ import { FileManagerFile } from '../class/file-manager-file';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { Subscription } from 'rxjs';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { PreviewFileStateService } from 'src/app/states/file-management/preview-file-state.service';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
 import { FileManagementRealTimeService } from 'src/app/states/file-management/file-management-real-time.service';
@@ -23,12 +23,12 @@ export class FileManagerFileInfoComponent implements OnInit, OnDestroy {
   @Input() isEdit: boolean = false;
   @Input() file: FileManagerFile;
   @Input() category: FileManagerCategory;
-  modelForm: FormGroup;
+  modelForm: UntypedFormGroup;
   submitted: boolean = false;
   sub: Subscription = new Subscription();
   constructor(private fileManagementService: FileManagementService,
     private tagsState: TagsStateService,
-    public formBuilder: FormBuilder,
+    public formBuilder: UntypedFormBuilder,
     public previewFileStateService: PreviewFileStateService,
     public fileManagementStateService: FileManagementStateService,
     public fileManagementRealTimeService: FileManagementRealTimeService,

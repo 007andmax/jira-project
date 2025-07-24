@@ -1,6 +1,6 @@
 import { MapsAPILoader } from '@agm/core';
 import { Component, ElementRef, EventEmitter, NgZone, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { TimeZone } from 'src/app/components/companies/company-time-zone/class/time-zone';
@@ -23,7 +23,7 @@ declare var $: any;
 })
 export class CompanyProfileProfileComponent implements OnInit, OnDestroy {
   public loading = true;
-  cProfileForm: FormGroup;
+  cProfileForm: UntypedFormGroup;
   submitted = false;
   isCompanyNameUnique = true;
   imageSrc = '';
@@ -209,20 +209,20 @@ export class CompanyProfileProfileComponent implements OnInit, OnDestroy {
     });
   }
   createCProfileForm() {
-    this.cProfileForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      url: new FormControl(''),
-      timeZone: new FormControl(''),
-      primaryId: new FormControl(''),
-      primaryPhone: new FormControl('', [Validators.minLength(14)]),
-      primaryPhoneType: new FormControl(''),
-      secondaryPhone: new FormControl(''),
-      secondaryPhoneType: new FormControl(''),
-      suiteNumber: new FormControl(''),
-      address: new FormControl(''),
-      postalCode: new FormControl(''),
-      locale: new FormControl('', Validators.required),
-      secondaryId: new FormControl(''),
+    this.cProfileForm = new UntypedFormGroup({
+      name: new UntypedFormControl('', Validators.required),
+      url: new UntypedFormControl(''),
+      timeZone: new UntypedFormControl(''),
+      primaryId: new UntypedFormControl(''),
+      primaryPhone: new UntypedFormControl('', [Validators.minLength(14)]),
+      primaryPhoneType: new UntypedFormControl(''),
+      secondaryPhone: new UntypedFormControl(''),
+      secondaryPhoneType: new UntypedFormControl(''),
+      suiteNumber: new UntypedFormControl(''),
+      address: new UntypedFormControl(''),
+      postalCode: new UntypedFormControl(''),
+      locale: new UntypedFormControl('', Validators.required),
+      secondaryId: new UntypedFormControl(''),
     });
   }
   /**

@@ -3,8 +3,8 @@ import { EmailSettingService } from "../../../../services/email-settings/email-s
 import { SettingService } from "src/app/services/setting/setting.service";
 import { ToastrService } from "ngx-toastr";
 import {
-  FormGroup,
-  FormBuilder,
+  UntypedFormGroup,
+  UntypedFormBuilder,
   Validators
 } from "@angular/forms";
 import { DisabledBtnDirective } from "src/app/directives/disabled-btn/disabled-btn.directive";
@@ -21,8 +21,8 @@ export class OutgoingEmailComponent implements OnInit {
   smtp: any;
   supportMailBox: any;
   targetEmail = "";
-  smtpForm: FormGroup;
-  testEmailForm: FormGroup;
+  smtpForm: UntypedFormGroup;
+  testEmailForm: UntypedFormGroup;
   submitted = false;
   loading = true;
   isSMTPLoginUnique = true;
@@ -94,7 +94,7 @@ export class OutgoingEmailComponent implements OnInit {
     private emailSettingService: EmailSettingService,
     private settingService: SettingService,
     private toastr: ToastrService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private appStateService: AppStateService
   ) { }
 

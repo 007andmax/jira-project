@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { Company } from 'src/app/interfaces/company/company';
@@ -22,7 +22,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
   focus = false;
   isResend = false;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  companyCtrl = new FormControl();
+  companyCtrl = new UntypedFormControl();
   selectedCompanies = [];
   showError = false;
   showErrorClient = false;

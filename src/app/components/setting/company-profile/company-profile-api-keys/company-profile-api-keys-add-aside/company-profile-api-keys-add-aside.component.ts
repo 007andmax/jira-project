@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ApiKeys } from '../class/api-keys';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { PermissionManageService } from 'src/app/services/permission-manage/permission-manage.service';
 import { ApiKeysStateService } from 'src/app/states/api-keys/api-keys-state.service';
 import { ApiKeysService } from 'src/app/services/api-keys/api-keys.service';
@@ -12,7 +12,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
   styleUrls: ['./company-profile-api-keys-add-aside.component.scss']
 })
 export class CompanyProfileApiKeysAddAsideComponent implements OnInit {
-  modelForm: FormGroup;
+  modelForm: UntypedFormGroup;
   submitted: boolean = false;
   opened: boolean = false;
   sections = {};
@@ -28,7 +28,7 @@ export class CompanyProfileApiKeysAddAsideComponent implements OnInit {
   viewDocumentsRelatedPermissions = [];
   editCategoryDocumentsRelatedPermissions = [];
   constructor(public cd: ChangeDetectorRef,
-    public formBuilder: FormBuilder,
+    public formBuilder: UntypedFormBuilder,
     private permissionManageService: PermissionManageService,
     private apiKeysStateService: ApiKeysStateService,
     private apiKeysService: ApiKeysService) { }

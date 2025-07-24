@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, Validators, UntypedFormBuilder } from '@angular/forms';
 import { Tax } from 'src/app/interfaces/service/tax';
 import { Subscription } from 'rxjs';
 import { TaxesService } from 'src/app/services/taxes/taxes.service';
@@ -17,7 +17,7 @@ export class TaxesComponent implements OnInit, OnDestroy {
   sub = new Subscription();
   editItem: any;
   newTax: Tax = null;
-  taxForm: FormGroup;
+  taxForm: UntypedFormGroup;
   @Input() isDisabled: boolean = false;
   @Input() isLabel: boolean = true;
   @Input() isAdd: boolean = true;
@@ -30,7 +30,7 @@ export class TaxesComponent implements OnInit, OnDestroy {
   public constructor(
     private taxesStateService: TaxesStateService,
     private taxesService: TaxesService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     public cd: ChangeDetectorRef,
   ) { }
 

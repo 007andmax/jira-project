@@ -1,6 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -19,7 +19,7 @@ export class DocumentsLinkedComponent implements OnInit, OnDestroy {
   removable = true;
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  linkedCtrl = new FormControl();
+  linkedCtrl = new UntypedFormControl();
   public selectedUserAndCompanies: Array<DocumentCompanyUser> = [];
   @Input() editItems: DocumentLinked;
   @Input() isDisabled: boolean = false;
