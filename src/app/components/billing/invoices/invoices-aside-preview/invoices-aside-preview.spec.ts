@@ -39,7 +39,7 @@ describe('InvoicesAsidePreviewComponent unit test', () => {
   it('check "getServiceTaxes"', () => {
     const fixture = TestBed.createComponent(InvoicesAsidePreviewComponent);
     const com = fixture.debugElement.componentInstance;
-    expect(com.getServiceTaxes({ taxes: [[{ name: "test", rate: 10 }]] })).toEqual("test 10%");
+    expect(com.getServiceTaxes({ taxes: [{ name: "test", rate: 10 }] })).toEqual("test 10%");
   });
   it('check "getSelectedTaxes"', () => {
     const fixture = TestBed.createComponent(InvoicesAsidePreviewComponent);
