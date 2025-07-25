@@ -63,24 +63,6 @@
     height: 28px;
     min-width: 28px;
 }
-::ng-deep .left-panel-tags {
-    app-company-tags {
-        .mat-form-field-infix {
-            border: none;
-        }
-        .no-remove {
-            background: none;
-        }
-        .mat-chip {
-            padding: 2px 4px !important;
-            background-color: $gray-100;
-            border: 1px solid $gray-100;
-            color: $gray-600;
-            border-radius: 6px !important;
-            font-weight: 500;
-        }
-    }
-}
 .type-phone,.company-details-field,.company-details-value {
     line-height: 17px;
 }

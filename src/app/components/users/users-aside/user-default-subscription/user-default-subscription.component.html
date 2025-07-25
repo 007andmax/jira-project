@@ -1,11 +1,11 @@
 <div
-    class="grey-dropdown filter-tags-body"
+    class="grey-dropdown custom-app-tags filter-tags-body"
     ngbDropdown
     [container]="(isDisabled) ? null : 'body'"
 >
     <i class="icn-sm qt-icon icon__arrow-down report-caret-icon"></i>
     <div
-        class="user-subscription"
+        class="user-subscription custom-app-tags__row"
         id="dropdownServices"
         ngbDropdownToggle
         [ngClass]="{'placeholder-subscription': !showPlaceholder(),
@@ -13,7 +13,7 @@
 '--disabled':isDisabled}"
     >
         <div
-            class="user-subscription__item"
+            class="custom-app-tags__item"
             *ngIf="defaultSubscriptions.invoiceSubscription.enabled"
             [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated && defaultSubscriptions.invoiceSubscription.isExist,
             'no-active':!defaultSubscriptions.invoiceSubscription.activated && defaultSubscriptions.invoiceSubscription.isExist}"
@@ -31,6 +31,7 @@
             ></i>
         </div>
         <div
+            class="custom-app-tags__item"
             *ngIf="defaultSubscriptions.ticketSubscription.enabled"
             [ngClass]="{'active':defaultSubscriptions.ticketSubscription.activated && defaultSubscriptions.ticketSubscription.isExist,
             'no-active':!defaultSubscriptions.ticketSubscription.activated && defaultSubscriptions.ticketSubscription.isExist}"
@@ -48,6 +49,7 @@
             ></i>
         </div>
         <div
+            class="custom-app-tags__item"
             *ngIf="defaultSubscriptions.ticketManagerSubscription.enabled"
             [ngClass]="{'active':defaultSubscriptions.ticketManagerSubscription.activated && defaultSubscriptions.ticketManagerSubscription.isExist,
             'no-active':!defaultSubscriptions.ticketManagerSubscription.activated && defaultSubscriptions.ticketManagerSubscription.isExist}"

@@ -348,21 +348,23 @@ html {
     }
   }
 }
-.user-subscription {
-  display: flex;
-  flex-wrap: wrap;
-  min-height: 40px;
-  padding: 0 30px 0 3px;
-  color: $gray-900;
-  font-size: 14px;
-  font-weight: 400;
-  border: 1px solid $gray-200;
-  border-radius: 6px;
-  align-items: center;
-  cursor: pointer;
+.custom-app-tags {
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 40px;
+    padding: 0 30px 0 3px;
+    color: $gray-900;
+    font-size: 14px;
+    font-weight: 400;
+    border: 1px solid $gray-200;
+    border-radius: 6px;
+    align-items: center;
+    cursor: pointer;
 
-  &:hover {
-    border-color: $gray-300;
+    &:hover {
+      border-color: $gray-300;
+    }
   }
 
   &__item {
@@ -414,22 +416,6 @@ app-file-manager-add-file-tags {
 }
 app-company-devices-tags .mat-form-field-infix {
   border: 1px solid transparent !important;
-}
-
-documents-filter,
-.companies-page .qt-page-list__header-filters {
-  .mat-form-field-infix {
-    min-height: 35px !important;
-  }
-  .mat-chip-list .mat-input-element {
-    height: 35px !important;
-  }
-  .mat-standard-chip {
-    padding: 4px 6px 2px 8px !important;
-  }
-  .app-mat-tags .mat-form-field-infix::after {
-    top: 8px !important;
-  }
 }
 .new-companies-content__modal--content,
 .new-users-content__modal--content,
@@ -3174,6 +3160,24 @@ textarea {
   }
 }
 
+// For Mat-tag with height 36px
+documents-filter,
+.companies-page .qt-page-list__header-filters,
+.accounts-receivable-multi-company-drop-down {
+  .mat-form-field-infix {
+    min-height: 35px !important;
+  }
+  .mat-chip-list .mat-input-element {
+    height: 35px !important;
+  }
+  .mat-standard-chip {
+    padding: 4px 6px 2px 8px !important;
+  }
+  .app-mat-tags .mat-form-field-infix::after {
+    top: 8px !important;
+  }
+}
+
 .app-mat-tags {
   .mat-form-field-infix {
     padding: 0 0 0 36px;
@@ -3193,6 +3197,10 @@ textarea {
 }
 
 .app-mat-tags-without-border {
+  .mat-form-field-infix {
+    border: 0 !important;
+  }
+
   &__wrap {
     display: flex;
     flex-flow: row wrap;
@@ -3205,7 +3213,8 @@ textarea {
     width: 100%;
   }
 
-  &__tag  {
+  &__tag,
+  &__tag-with-avatar {
     display: flex;
     align-items: center;
     gap: 4px;
@@ -3222,14 +3231,53 @@ textarea {
     margin: 4px 4px;
   }
 
+  &__tag-with-avatar {
+    &:has(.mat-standard-chip) {
+      padding: 0 !important;
+    }
+
+    .mat-standard-chip {
+      padding: 8px !important;
+      background-color: transparent !important;
+    }
+  }
+
   &__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 16px;
     height: 16px;
+    border-radius: 50%;
     margin-right: 4px;
     font-weight: 500;
     font-size: 10px;
     line-height: 12px;
+    color: $white;
     background-size: cover !important;
     background-position: center !important;
+  }
+
+  &__placeholder {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    color: $gray-400;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  &__input {
+    padding-left: 0 !important;
+  }
+
+  .selected-tag-ticket+input.mat-chip-input::placeholder {
+    color: transparent !important;
+  }
+
+  .no-remove {
+    &:has(.mat-standard-chip) {
+      background-color: transparent;
+    }
   }
 }

@@ -1,5 +1,5 @@
 <div
-    class="qt-input-block"
+    class="qt-input-block app-mat-tags-without-border"
     ngbDropdown
     #tagsDp="ngbDropdown"
     (openChange)="onChangeDropDown($event)"
@@ -34,7 +34,7 @@
                     ngbDropdownToggle
                     #userInput
                     placeholder="Type characters and hit tab"
-                    class="pointer"
+                    class="pointer app-mat-tags-without-border__input"
                     autocomplete="new-password"
                     [formControl]="tagCtrl"
                     (input)="onSearch($event)"
