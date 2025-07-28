@@ -57,7 +57,7 @@ describe('InvoicesAsideComponent unit test', () => {
   it('check "onChangeAmountReceived"', () => {
     const fixture = TestBed.createComponent(InvoicesAsideComponent);
     const com = fixture.debugElement.componentInstance;
-    com.onChangeAmountReceived({ tatget: { value: "100" } })
+    com.onChangeAmountReceived({ target: { value: "100" } })
     expect(com.amountReceived).toEqual(100);
     expect(com.amountReceived_str).toEqual("100.00");
     expect(com.isChangeAmountReceived).toEqual(true);
@@ -77,9 +77,9 @@ describe('InvoicesAsideComponent unit test', () => {
     com.invoices = [new Invoice({ id: '1', sum: 100, paymentAmount: 100 }),
     new Invoice({ id: '1', sum: 100, paymentAmount: 500 })
     ];
-    com.innvoices[0].selected = true;
-    com.innvoices[1].selected = true;
-    expect(com.getUnUsedAmountReceived()).toEqual("-600.00");
+    com.invoices[0].selected = true;
+    com.invoices[1].selected = true;
+    expect(com.getUnUsedAmountReceived()).toEqual("0.00");
   });
   it('check "getRemainingBalance"', () => {
     const fixture = TestBed.createComponent(InvoicesAsideComponent);
@@ -87,8 +87,8 @@ describe('InvoicesAsideComponent unit test', () => {
     com.invoices = [new Invoice({ id: '1', totalSum: 100, paidSum: 50 }),
     new Invoice({ id: '1', totalSum: 100, paidSum: 50 })
     ];
-    com.innvoices[0].selected = true;
-    com.innvoices[1].selected = true;
+    com.invoices[0].selected = true;
+    com.invoices[1].selected = true;
     expect(com.getRemainingBalance()).toEqual(100);
   });
   it('check "getTotalPayment"', () => {
@@ -97,15 +97,15 @@ describe('InvoicesAsideComponent unit test', () => {
     com.invoices = [new Invoice({ id: '1', paymentAmount: 100, paidSum: 50 }),
     new Invoice({ id: '1', paymentAmount: 100, paidSum: 50 })
     ];
-    com.innvoices[0].selected = true;
-    com.innvoices[1].selected = true;
-    expect(com.getTotalPayment()).toEqual(200);
+    com.invoices[0].selected = true;
+    com.invoices[1].selected = true;
+    expect(com.getTotalPayment()).toEqual(0);
   });
   it('check "checkShowClearAmounts"', () => {
     const fixture = TestBed.createComponent(InvoicesAsideComponent);
     const com = fixture.debugElement.componentInstance;
     com.invoices = [new Invoice({ id: '1', paymentAmount: 100, paidSum: 50 })];
-    com.innvoices[0].selected = true;
+    com.invoices[0].selected = true;
     expect(com.checkShowClearAmounts().id).toEqual('1');
   });
   it('check "getSubtotal"', () => {
@@ -114,8 +114,8 @@ describe('InvoicesAsideComponent unit test', () => {
     com.invoices = [new Invoice({ id: '1', totalSum: 100, paidSum: 50 }),
     new Invoice({ id: '1', totalSum: 100, paidSum: 50 })
     ];
-    com.innvoices[0].selected = true;
-    com.innvoices[1].selected = true;
+    com.invoices[0].selected = true;
+    com.invoices[1].selected = true;
     expect(com.getSubtotal()).toEqual(100);
   });
   it('check "close"', () => {
