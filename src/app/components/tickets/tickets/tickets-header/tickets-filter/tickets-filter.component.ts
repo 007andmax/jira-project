@@ -106,6 +106,11 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
       this.onGetUsers();
     })
     this.sub.add(getOnUsers);
+    if (this.companiesState.isInitLightClientsCompanies && this.users.length == 0) this.onGetUsers();
+    let onLightClientsCompanies = this.companiesState.onLightClientsCompanies.subscribe((data) => {
+      if (this.users.length == 0) this.onGetUsers();
+    })
+    this.sub.add(onLightClientsCompanies);
     let getOnUpdateCounts = this.ticketsStateService.getOnUpdateCounts().subscribe(data => {
       this.ticketsCounts = new TicketsCounts(data);
       this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);

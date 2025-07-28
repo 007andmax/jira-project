@@ -6,6 +6,7 @@ export class AccountsReceivableReportLineReport {
     "olderSum": number;
     "totalSum": number;
     "invoiceNumber": string;
+    invoiceCreationDate: string;
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];
