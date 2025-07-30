@@ -350,6 +350,7 @@ html {
 }
 .custom-app-tags {
   &__row {
+    height: 24px;
     display: flex;
     flex-wrap: wrap;
     min-height: 40px;
@@ -357,7 +358,6 @@ html {
     color: $gray-900;
     font-size: 14px;
     font-weight: 400;
-    border: 1px solid $gray-200;
     border-radius: 6px;
     align-items: center;
     cursor: pointer;
@@ -3201,6 +3201,11 @@ documents-filter,
     border: 0 !important;
   }
 
+  .mat-standard-chip:has(.assigne-user-avatar) {
+    height: 32px !important;
+    padding: 8px !important;
+  }
+
   &__wrap {
     display: flex;
     flex-flow: row wrap;
@@ -3215,7 +3220,7 @@ documents-filter,
 
   &__tag,
   &__tag-with-avatar {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 4px;
     height: 32px;
