@@ -74,6 +74,15 @@
         display: none;
     }
 
+    .selected-tag-user {
+        .assigne-user-avatar {
+            height: 16px;
+            width: 16px;
+            margin-right: 4px;
+            font-size: 13px;
+        }
+    }
+
     .mat-standard-chip:focus {
         box-shadow: none;
     }
