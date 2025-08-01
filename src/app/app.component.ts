@@ -246,6 +246,8 @@ export class AppComponent implements OnInit {
         this.contentSessionScreenModal.message = data;
         this.contentSessionScreenModal.showModal();
         this.showSessionScreen = true;
+        this.websocketService.getClient().forceDisconnect();
+        this.websocketService.getClient().deactivate();
         this.cd.detectChanges();
       }
     })
