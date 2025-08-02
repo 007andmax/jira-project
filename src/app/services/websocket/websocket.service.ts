@@ -57,6 +57,7 @@ export class WebsocketService {
   private stompClient;
   private netScanSub;
   private userFilters;
+  onWebSocketCloseTimeOut;
   public IsKafkaConnected: boolean = false;
   onInit: EventEmitter<any> = new EventEmitter();
   isInit: boolean = false;
@@ -168,11 +169,11 @@ export class WebsocketService {
     }
     this.stompClient.onWebSocketClose = (data) => {
       console.log("data", data);
-      if (!this.blockWebSocket) setTimeout(() => {
+      if (!this.blockWebSocket) this.onWebSocketCloseTimeOut = setTimeout(() => {
         this.onInitConnect();
       }, 20000);
     };
-    this.appService.onLockScreen.subscribe(data => {
+    this.appService.onSessionScreen.subscribe(data => {
       this.blockWebSocket = data;
     })
   }
