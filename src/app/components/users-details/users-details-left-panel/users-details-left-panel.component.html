@@ -281,6 +281,7 @@
     <div class="left-panel-marketing qt-pl-16 qt-pr-16 qt-pt-16 qt-pb-16">
         <div class="user-detail__row-info-label qt-fs-14 qt-fw-600 qt-mb-12 qt-color-gray-900">Marketing Subscription</div>
         <user-custom-subscription
+            class="app-mat-tags-without-border"
             [isDisabled]="!(!user.isArchive() && (getPermissions('EDIT_USERS') || customerPortalStateService.checkEditUser(usersStateService.getCurrentUser(),user)))"
             [classDropDown]="'user-aside-detail-custom-subscription'"
             [customSubscriptions]="user.customSubscriptions"

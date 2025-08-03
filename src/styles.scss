@@ -3217,50 +3217,50 @@ documents-filter,
     width: 100%;
   }
 
-  &__tag,
-  &__tag-with-avatar {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    height: 32px;
-    padding: 8px;
-    font-size: 13px;
-    line-height: 16px;
-    font-weight: 500;
-    color: $gray-600;
-    background-color: $white;
-    border: 1px solid $gray-200;
-    box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
-    border-radius: 6px;
-    margin: 4px 4px;
-  }
+  //&__tag,
+  //&__tag-with-avatar {
+  //  display: inline-flex;
+  //  align-items: center;
+  //  gap: 4px;
+  //  height: 32px;
+  //  padding: 8px;
+  //  font-size: 13px;
+  //  line-height: 16px;
+  //  font-weight: 500;
+  //  color: $gray-600;
+  //  background-color: $white;
+  //  border: 1px solid $gray-200;
+  //  box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+  //  border-radius: 6px;
+  //  margin: 4px 4px;
+  //}
+  //
+  //&__tag-with-avatar {
+  //  &:has(.mat-standard-chip) {
+  //    padding: 0 !important;
+  //  }
+  //
+  //  .mat-standard-chip {
+  //    padding: 8px !important;
+  //    background-color: transparent !important;
+  //  }
+  //}
 
-  &__tag-with-avatar {
-    &:has(.mat-standard-chip) {
-      padding: 0 !important;
-    }
-
-    .mat-standard-chip {
-      padding: 8px !important;
-      background-color: transparent !important;
-    }
-  }
-
-  &__avatar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    margin-right: 4px;
-    font-weight: 500;
-    font-size: 10px;
-    line-height: 12px;
-    color: $white;
-    background-size: cover !important;
-    background-position: center !important;
-  }
+  //&__avatar {
+  //  display: flex;
+  //  align-items: center;
+  //  justify-content: center;
+  //  width: 16px;
+  //  height: 16px;
+  //  border-radius: 50%;
+  //  margin-right: 4px;
+  //  font-weight: 500;
+  //  font-size: 10px;
+  //  line-height: 12px;
+  //  color: $white;
+  //  background-size: cover !important;
+  //  background-position: center !important;
+  //}
 
   &__placeholder {
     display: flex;

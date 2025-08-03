@@ -17,7 +17,7 @@
             (onChangeItems)="formField.checkSelectedItems(selectedUsers)"
         >
             <app-mat-chip
-                class="selected-tag-user app-mat-tags-without-border__tag-with-avatar"
+                class="selected-tag-user app-mat-tags-with-avatar app-mat-tags-with-avatar--lg"
                 *ngFor="let user of selectedUsers; let i = index"
                 [isRemove]="removable"
                 (onClose)="remove(i)"

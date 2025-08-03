@@ -21,17 +21,6 @@
   background-color: $red-50;
   color: $red-600;
 }
-.placeholder-subscription {
-  position: relative;
-  &:after {
-    content: "Select default subscription";
-    position: absolute;
-    top: 11px;
-    left: 14px;
-    color: $gray-400;
-    font-size: 14px;
-  }
-}
 .filter-tags-body {
   .qt-checkbox {
     .text-content {
