@@ -1,6 +1,7 @@
-<div class="ticket-edit-user-tags app-mat-tags-without-border">
+<div class="ticket-edit-user-tags">
     <span *ngIf="type == 'DETAIL-TICKET'">Notify to All:</span>
     <app-mat-form-field
+        class="app-mat-tags-without-border"
         #formField
         ngbDropdown
         [autoClose]="'outside'"
@@ -24,7 +25,7 @@
             >
                 <div class="qt-df qt-ai-c">
                     <div
-                        class="app-mat-tags-without-border__avatar"
+                        class="app-mat-tags-with-avatar__avatar"
                         [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
                         [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
                     ></div>

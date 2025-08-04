@@ -115,3 +115,60 @@
         }
     }
 }
+
+:host(.app-mat-tags-without-border) {
+  ::ng-deep .app-mat-tags-without-border {
+    &__placeholder {
+      display: flex;
+      align-items: center;
+      min-height: 40px;
+      color: $gray-400;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    &__input {
+      padding-left: 0 !important;
+    }
+  }
+
+  ::ng-deep .mat-form-field-infix {
+    border: 0 !important;
+  }
+
+  ::ng-deep .selected-tag-ticket+input.mat-chip-input::placeholder {
+    color: transparent !important;
+  }
+}
+
+:host(.app-mat-form-field--with-label) {
+  ::ng-deep .mat-form-field-infix {
+    padding: 0 0 0 36px;
+    position: relative;
+
+    &::after {
+      left: 12px;
+      top: 10px;
+      position: absolute;
+      content: "";
+      width: 20px;
+      height: 20px;
+      mask-image: url('/assets/img/icons/tags.svg');
+      background-color: $gray-400;
+    }
+  }
+}
+
+:host-context(.app-mat-tags-wrapper--sm) {
+  .mat-form-field-infix {
+    min-height: 35px;
+
+    &::after {
+      top: 8px;
+    }
+  }
+
+  ::ng-deep .mat-input-element {
+    height: 34.5px;
+  }
+}

@@ -1,5 +1,5 @@
 <div
-    class="qt-input-block app-mat-tags-without-border"
+    class="qt-input-block"
     ngbDropdown
     #tagsDp="ngbDropdown"
     (openChange)="onChangeDropDown($event)"
@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="light-dropdown ticket-edit-tags">
-        <app-mat-form-field ngbDropdownAnchor>
+        <app-mat-form-field ngbDropdownAnchor class="app-mat-tags-without-border">
             <app-mat-chip-list #chipList>
                 <span class="tag-icon"></span>
                 <app-mat-chip
