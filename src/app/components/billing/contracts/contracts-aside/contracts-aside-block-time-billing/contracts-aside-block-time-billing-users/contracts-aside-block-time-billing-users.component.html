@@ -1,19 +1,18 @@
 <div class="ticket-edit-user-tags contract-time-users app-mat-tags-without-border">
     <app-mat-chip-list class="example-chip">
         <app-mat-chip
-            class="selected-tag-user"
+            class="app-mat-tags-with-avatar app-mat-tags-with-avatar--lg"
             *ngFor="let user of selectedUsers; let i = index"
             [isRemove]="true"
             (onClose)="remove(i)"
         >
-            <div class="assigne-user-item">
+            <div class="qt-df qt-ai-c">
                 <div
-                    class="assigne-user-avatar"
+                    class="app-mat-tags-with-avatar__avatar"
                     [textContent]="getAssignedUserNameForAvatar(user)"
                     [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'contain'}"
                 ></div>
                 <div
-                    class="assigne-user-name"
                     [textContent]="getUserName(user)"
                 ></div>
             </div>

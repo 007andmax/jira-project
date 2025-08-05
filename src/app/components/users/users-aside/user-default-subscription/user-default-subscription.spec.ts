@@ -12,7 +12,7 @@ describe('UserDefaultSubscriptionComponent unit test', () => {
   let fixture: ComponentFixture<UserDefaultSubscriptionComponent>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
+    TestBed.configureTestingModuleе({
       imports: [CommonModule,
         NgbModule,
         HttpClientModule,

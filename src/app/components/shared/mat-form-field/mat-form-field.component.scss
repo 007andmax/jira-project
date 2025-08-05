@@ -37,14 +37,11 @@
 .mat-form-field-label-wrapper {
     position: absolute;
     top: 0;
-    //left: 0;
     box-sizing: content-box;
     width: 100%;
     height: 100%;
     overflow: hidden;
     pointer-events: none;
-    //top: -.84375em;
-    //padding-top: .84375em;
 }
 .mat-form-field-label {
     transform: none !important;
@@ -116,7 +113,8 @@
     }
 }
 
-:host(.app-mat-tags-without-border) {
+:host(.app-mat-tags-without-border),
+:host-context(.app-mat-tags-wrapper-without-border) {
   ::ng-deep .app-mat-tags-without-border {
     &__placeholder {
       display: flex;
@@ -155,6 +153,16 @@
       height: 20px;
       mask-image: url('/assets/img/icons/tags.svg');
       background-color: $gray-400;
+    }
+  }
+}
+
+:host-context(.app-mat-tags-wrapper-without-border) {
+  ::ng-deep .mat-form-field-infix {
+    padding: 0;
+
+    &::after {
+      display: none;
     }
   }
 }

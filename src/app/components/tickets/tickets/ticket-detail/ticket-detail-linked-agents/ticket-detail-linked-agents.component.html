@@ -1,77 +1,67 @@
 <div
-    class="qt-input-block --required app-mat-tags-without-border"
-    ngbDropdown
-    container="body"
-    (openChange)="onCloseDropDown($event)"
+  class="qt-input-block --required app-mat-tags-without-border"
+  ngbDropdown
+  container="body"
+  (openChange)="onCloseDropDown($event)"
 >
-    <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
-        <span class="qt-input-block__label">Linked Agents</span>
-        <div
-            class="qt-button qt-button--with-icon --sm --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
-            ngbDropdownToggle
-            *ngIf="!customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
-        >
-            <span class="qt-icon icon__links qt-sz-16 qt-dib qt-mr-4 qt-button-icon"></span>
-            Link
-        </div>
-    </div>
+  <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
+    <span class="qt-input-block__label">Linked Agents</span>
     <div
-        class=""
-        [ngClass]="{'has-placeholder': !selectedDevice}"
+      class="qt-button qt-button--with-icon --sm --gray qt-jc-c pointer qt-ml-12 button-gl-number__add"
+      ngbDropdownToggle
+      *ngIf="!customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
     >
-        <span
-            class="placeholder-detail-ticket app-mat-tags-without-border__placeholder"
-            *ngIf="!selectedDevice"
-        >
-            Select device
-        </span>
+      <span class="qt-icon icon__links qt-sz-16 qt-dib qt-mr-4 qt-button-icon"></span>
+      Link
+    </div>
+  </div>
+
+  <mat-chip-list *ngIf="selectedDevice; else placeholderTpl" class="selected-user app-mat-tags-without-border__tag-with-avatar">
+    <mat-chip
+      removable="true"
+      (removed)="removeItem()"
+      class="qt-dib qt-sz-16 qt-bg-contain qt-mr-4"
+    >
+      <mat-icon>monitor</mat-icon>
+      {{ getLabelDevice(selectedDevice) }}
+      <mat-icon matChipRemove class="qt-icon__gray-400 qt-ml-4 pointer">close</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+
+  <ng-template #placeholderTpl>
+    <span class="placeholder-detail-ticket app-mat-tags-without-border__placeholder">
+      Select device
+    </span>
+  </ng-template>
+
+  <div class="select-wrapper" ngbDropdownMenu>
+    <div class="qt-input-search">
+      <input
+        type="text"
+        id="search-user"
+        autocomplete="off"
+        class="qt-dropdown-input"
+        placeholder="Search Agents"
+        (input)="onSearch($event)"
+      >
+    </div>
+    <div class="content">
+      <div>
         <div
-            class="selected-user app-mat-tags-without-border__tag-with-avatar"
-            *ngIf="selectedDevice"
+          class="dropdown-item"
+          *ngFor="let item of devicesList; let i = index"
+          (click)="selected(item)"
+          ngbDropdownItem
         >
-            <i class="qt-icon icon__monitor qt-dib qt-sz-16 qt-bg-contain qt-mr-4"></i>
-            {{getLabelDevice(selectedDevice)}}
+          <label class="qt-checkbox pointer">
+            <div class="name" [textContent]="getLabelDevice(item)"></div>
             <i
-                class="qt-sz-16 qt-icon icon__close qt-dib qt-icon__gray-400 qt-ml-4 pointer"
-                *ngIf="!customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
-                (click)="removeItem()"
+              *ngIf="isSeletedDevice(item)"
+              class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
             ></i>
+          </label>
         </div>
+      </div>
     </div>
-    <div
-        class="select-wrapper"
-        ngbDropdownMenu
-    >
-        <div class="qt-input-search">
-            <input
-                type="text"
-                id="search-user"
-                autocomplete="off"
-                class="qt-dropdown-input"
-                placeholder="Search Agents"
-                (input)="onSearch($event)"
-            >
-        </div>
-        <div class="content">
-            <div>
-                <div
-                    class="dropdown-item"
-                    *ngFor="let item of devicesList; let i = index"
-                    (click)="selected(item)"
-                    ngbDropdownItem
-                >
-                    <label class="qt-checkbox pointer">
-                        <div
-                            class="name"
-                            [textContent]="getLabelDevice(item)"
-                        ></div>
-                        <i
-                            *ngIf="isSeletedDevice(item)"
-                            class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
-                        ></i>
-                    </label>
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>

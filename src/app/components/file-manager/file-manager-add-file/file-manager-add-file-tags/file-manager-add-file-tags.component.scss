@@ -13,15 +13,6 @@
     }
 }
 
-.filter-tags-body {
-    padding: 0;
-    margin-top: 0 !important;
-
-    ::ng-deep.mat-form-field-label {
-        top: 8px;
-    }
-}
-
 .device-user {
     outline: none;
     min-height: 40px;

@@ -96,7 +96,9 @@
     }
 }
 .no-remove {
-  background: $gray-100;
-  color: $gray-600;
-  cursor: not-allowed;
+  ::ng-deep .mat-chip {
+    background: $gray-100;
+    color: $gray-600;
+    cursor: not-allowed;
+  }
 }
