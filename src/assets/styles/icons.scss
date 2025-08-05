@@ -703,6 +703,9 @@ Example:
   &__transfer {
     mask-image: url("/assets/img/icons/transfer.svg");
   }
+  &__notification {
+  mask-image: url("/assets/img/icons/notification.svg");
+  }
   &.--updated {
     position: relative;
     &::before {
