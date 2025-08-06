@@ -9,6 +9,7 @@
     <app-mat-chip-list
       [items]="customSubscriptions"
       (onChangeItems)="formField.checkSelectedItems(customSubscriptions)"
+      [ngClass]="{'placeholder-subscription': !showPlaceholder(), 'no-pointer':isDisabled}"
     >
       <app-mat-chip
         *ngFor="let custom of customSubscriptions; let i = index"
@@ -22,12 +23,6 @@
       >
         {{ custom.name }}
       </app-mat-chip>
-      <span
-        class="placeholder"
-        *ngIf="!customSubscriptions.length"
-        [ngClass]="{'placeholder-subscription': !showPlaceholder(), 'no-pointer': isDisabled}"
-      >{{ placeholder }}</span
-      >
       <input
         ngbDropdownToggle
         class="pointer mat-chip-input mat-input-element"

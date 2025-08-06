@@ -165,6 +165,10 @@
       display: none;
     }
   }
+
+  ::ng-deep .mat-input-element {
+    padding-left: 0;
+  }
 }
 
 :host-context(.app-mat-tags-wrapper--sm) {
