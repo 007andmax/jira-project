@@ -4,7 +4,7 @@
 >
     <div class="qt-aside-modern__header">
         <div class="qt-aside-modern__header-info qt-df qt-ai-c">
-            <div class="qt-aside__title">Create New Ticket</div>
+            <div class="qt-aside__title">Notifications</div>
         </div>
         <div>
             <div
@@ -29,29 +29,76 @@
             [ngForOf]="list"
             [ngForTrackBy]="trackById"
         >
-            <div class="notification-item">
+            <div class="notification-item pointer">
+                <div class="notification-item__title qt-fs-14 qt-fw-600 qt-df qt-ai-fs qt-mb-8">
+                    <div class="qt-icon icon__notification qt-bg-contain  qt-mr-8"></div>
+                    {{item.title}}
+                </div>
                 <div
-                    class="notification-item__title"
-                    [textContent]="item.title"
+                    class="notification-item__subject qt-df qt-ai-c qt-mb-8"
+                    *ngIf="item.type === 'TICKET_ASSIGNED' || item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED' || item.type ===  'NOTE_CREATED'"
+                >
+                    <div class="qt-icon icon__notes qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    Subject: {{item.ticket.subject}}
+                </div>
+                <div
+                    class="notification-item__number qt-mb-8"
+                    *ngIf="item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED' || item.type ===  'NOTE_CREATED'"
+                    [textContent]="item.ticket.number"
                 ></div>
                 <div
-                    class="notification-item__subject"
-                    *ngIf="item.type === 'TICKET_ASSIGNED'"
-                    [textContent]="item.ticket.subject"
-                ></div>
+                    class="notification-item__description qt-mb-8 qt-df qt-ai-c"
+                    *ngIf="item.type === 'NOTE_CREATED'"
+                >
+                    <div class="qt-icon icon__messages  qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    {{item.note}}
+                </div>
                 <div
-                    class="notification-item__company"
-                    *ngIf="item.type === 'TICKET_ASSIGNED'"
-                    [textContent]="item.ticket.companyName"
-                ></div>
+                    class="notification-item__number qt-mb-8 qt-df qt-ai-c"
+                    *ngIf="item.type === 'SERVICE_UPDATED'"
+                >
+                    <div class="qt-icon icon__service  qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    {{item.service.name}}
+                </div>
                 <div
-                    class="notification-item__date"
-                    *ngIf="item.type === 'TICKET_ASSIGNED'"
-                    [textContent]="parsedate(item.ticket.createdAt)"
-                ></div>
+                    class="notification-item__description qt-mb-8 qt-df qt-ai-c"
+                    *ngIf="item.type === 'PRODUCT_UPDATED'"
+                >
+                    <div class="qt-icon icon__products qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    {{item.product.description}}
+                </div>
                 <div
-                    class="notification-item__link"
+                    class="notification-item__date qt-df qt-ai-c qt-mb-8"
+                    *ngIf="item.type === 'SERVICE_UPDATED'"
+                >
+                    <div class="qt-icon icon__time  qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    {{parsedate(item.service.createdAt)}}
+                </div>
+                <div
+                    class="notification-item__date qt-df qt-ai-c qt-mb-8"
+                    *ngIf="item.type === 'PRODUCT_UPDATED'"
+                >
+                    <div class="qt-icon icon__time  qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    {{parsedate(item.product.createdAt)}}
+                </div>
+                <div
+                    class="notification-item__company qt-df qt-ai-c qt-mb-8"
                     *ngIf="item.type === 'TICKET_ASSIGNED'"
+                >
+                    <div class="qt-icon icon__companies qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    Company: {{item.ticket.companyName}}
+                </div>
+                <div
+                    class="notification-item__date qt-df qt-ai-c qt-mb-8"
+                    *ngIf="item.type === 'TICKET_ASSIGNED'"
+                >
+                    <div class="qt-icon icon__time  qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    {{parsedate(item.ticket.createdAt)}}
+                </div>
+                <div
+                    class="notification-item__link qt-color-info qt-fs-14 qt-fw-600"
+                    *ngIf="item.type === 'TICKET_ASSIGNED' || item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED'"
+                    (click)="editTicket(item.ticket.id)"
                 >
                     View Ticket
                 </div>
@@ -59,13 +106,6 @@
         </ng-template>
     </div>
     <div class="qt-aside-modern__footer">
-        <div class="qt-df qt-w100">
-            <button
-                class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
-                (click)="closed()"
-            >
-                Cancel
-            </button>
-        </div>
+        <div class="qt-df qt-w100"></div>
     </div>
 </div>

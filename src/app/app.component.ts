@@ -43,6 +43,7 @@ import { QuoteStateService } from './states/quote/quote-state.service';
 import { PaymentsFilter } from './components/billing/payments/class/payments-filter';
 import { PaymentsStateService } from './states/payments/payments-state.service';
 import { DeviceTagsStateService } from './states/device-tags/device-tags-state.service';
+import { NotificationsStateService } from './states/notifications/notifications-state.service';
 
 
 /**
@@ -109,7 +110,8 @@ export class AppComponent implements OnInit {
     public invoiceStateService: InvoiceStateService,
     private quoteStateService: QuoteStateService,
     private paymentsStateService: PaymentsStateService,
-    private deviceTagsStateService: DeviceTagsStateService
+    private deviceTagsStateService: DeviceTagsStateService,
+    private notificationsStateService: NotificationsStateService,
 
   ) { }
 
@@ -146,6 +148,7 @@ export class AppComponent implements OnInit {
         if (this.state === 'help-center') this.supportPageCategoriesStateService.onInit();
         this.websocketService.initializeWebSocketConnection();
         this.deviceTagsStateService.onInit();
+        this.notificationsStateService.onInit();
       } else {
         this.supportPageCategoriesStateService.onInit();
         this.websocketService.initializeWebSocketConnection();

@@ -13,10 +13,14 @@
             >
                 <div class="qt-icon icon__add qt-icon__white qt-sz-16"></div>
             </div>
-            <div
-                class="qt-icon icon__notification qt-bg-contain qt-sz-18 pointer qt-mr-24"
-                (click)="showNotifications()"
-            ></div>
+            <div class="notifications qt-mr-24">
+                <div
+                    class="qt-icon icon__notification qt-bg-contain qt-sz-18 pointer"
+                    (click)="showNotifications()"
+                >
+                </div>
+                <span [textContent]="getNotificationCounter()"></span>
+            </div>
             <div
                 *ngIf="!customerPortalStateService.isCustomerPortal"
                 class="qt-icon icon__help qt-bg-contain qt-sz-18 pointer qt-mr-24"

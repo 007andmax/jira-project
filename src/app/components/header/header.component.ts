@@ -50,6 +50,9 @@ export class HeaderComponent implements OnInit {
   private getCurrentUser(data) {
     this.currentUser = data;
   }
+  getNotificationCounter() {
+    return this.notificationsStateService.getUnreadCount();
+  }
   showNotifications() {
     this.notificationsStateService.showNotifications();
   }

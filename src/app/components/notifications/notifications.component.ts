@@ -5,6 +5,8 @@ import { NotificationsStateService } from 'src/app/states/notifications/notifica
 import { Notification } from './class/notification';
 import { TicketsListService } from '../tickets/tickets/services/tickets-list.service';
 import * as moment from "moment";
+import { TicketStateService } from '../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-notifications',
@@ -26,6 +28,8 @@ export class NotificationsComponent {
     private notificationsStateService: NotificationsStateService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
+    private ticketStateService: TicketStateService,
+    private companiesStateService: CompaniesStateService,
   ) { }
   ngOnInit() {
 
@@ -37,6 +41,11 @@ export class NotificationsComponent {
   }
   parsedate(date) {
     return moment(date).format('DD MMM YYYY');
+  }
+  editTicket(id) {
+    this.ticketStateService.setTicketRoutingId(id);
+    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${id}`;
+    window.open(url, '_blank');
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;
