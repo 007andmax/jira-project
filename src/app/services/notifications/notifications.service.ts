@@ -28,4 +28,7 @@ export class NotificationsService {
   public getCount() {
     return this.http.get(`${this.apiUrl}users/notifications/count/unread`);
   }
+  public markAsRead(id) {
+    return this.http.put(`${this.apiUrl}users/notifications/${id}/read`, {});
+  }
 }

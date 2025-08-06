@@ -39,6 +39,11 @@ export class NotificationsComponent {
     })
     this.sub.add(getToggleAddTicket);
   }
+  markAsRead(item) {
+    this.notificationsService.markAsRead(item.id).subscribe(res => {
+
+    })
+  }
   parsedate(date) {
     return moment(date).format('DD MMM YYYY');
   }
