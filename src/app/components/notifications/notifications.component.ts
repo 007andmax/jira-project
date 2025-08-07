@@ -52,7 +52,7 @@ export class NotificationsComponent {
   }
   markAsRead(item) {
     this.notificationsService.markAsRead(item.id).subscribe(res => {
-
+      item.read = true;
     })
   }
   remove(item) {
@@ -65,7 +65,7 @@ export class NotificationsComponent {
   }
   markAsReadAll() {
     this.notificationsService.markAsReadAll().subscribe(res => {
-
+      this.list.forEach(item => item.read = true);
     })
   }
   parsedate(date) {
@@ -97,6 +97,7 @@ export class NotificationsComponent {
   }
   closed() {
     this.opened = false;
+    this.showPreloader = false;
     this.page = 0;
     this.list = [];
   }

@@ -41,12 +41,14 @@
                         *ngIf="!item.read"
                         placement="top"
                         ngbTooltip="Mark as read"
+                        container="body"
                         (click)="markAsRead(item)"
                     ></div>
                     <div
                         class="qt-icon icon__delete qt-icon__red-600 qt-bg-contain qt-sz-20 "
                         placement="top"
                         ngbTooltip="Delete"
+                        container="body"
                         (click)="remove(item)"
                     ></div>
                 </div>
@@ -125,4 +127,8 @@
             </div>
         </ng-template>
     </div>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
 </div>
