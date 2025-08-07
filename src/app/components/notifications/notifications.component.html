@@ -64,10 +64,12 @@
                     Subject: {{item.ticket.subject}}
                 </div>
                 <div
-                    class="notification-item__number qt-mb-8"
+                    class="notification-item__number qt-mb-8 qt-df qt-ai-c"
                     *ngIf="item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED' || item.type ===  'NOTE_CREATED' || item.type === 'SERVICE_COMPLETED' || item.type === 'PRODUCT_COMPLETED'"
-                    [textContent]="item.ticket.number"
-                ></div>
+                >
+                    <div class="qt-icon icon__info qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    Ticket number: {{item.ticket.number}}
+                </div>
                 <div
                     class="notification-item__description qt-mb-8 qt-df qt-ai-c"
                     *ngIf="item.type === 'NOTE_CREATED'"
@@ -118,7 +120,7 @@
                     {{parsedate(item.ticket.createdAt)}}
                 </div>
                 <div
-                    class="notification-item__link qt-color-info qt-fs-14 qt-fw-600 pointer"
+                    class="notification-item__link qt-color-info qt-fs-13 qt-fw-600 pointer qt-w100"
                     *ngIf="item.type === 'TICKET_ASSIGNED' || item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED' || item.type === 'SERVICE_COMPLETED' || item.type === 'PRODUCT_COMPLETED'"
                     (click)="editTicket(item.ticket.id)"
                 >
