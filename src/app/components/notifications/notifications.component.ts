@@ -7,6 +7,7 @@ import { TicketsListService } from '../tickets/tickets/services/tickets-list.ser
 import * as moment from "moment";
 import { TicketStateService } from '../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { NotificationsRealTimeService } from 'src/app/states/notifications/notifications-real-time.service';
 
 @Component({
   selector: 'app-notifications',
@@ -30,6 +31,7 @@ export class NotificationsComponent {
     public cd: ChangeDetectorRef,
     private ticketStateService: TicketStateService,
     private companiesStateService: CompaniesStateService,
+    private notificationsRealTimeService: NotificationsRealTimeService
   ) { }
   ngOnInit() {
 
@@ -38,9 +40,31 @@ export class NotificationsComponent {
       this.getNotifications();
     })
     this.sub.add(getToggleAddTicket);
+    this.notificationsRealTimeService.changeArray.subscribe(data => {
+      if (data.action == "USER_NOTIFICATION_DELETED") {
+        let index = this.list.findIndex(item => item.id == data.data);
+        if (index > -1) this.list.splice(index, 1);
+      }
+      if (data.action == "USER_NOTIFICATION_CREATED" && this.opened) {
+        this.list.unshift(new Notification(data.data));
+      }
+    })
   }
   markAsRead(item) {
     this.notificationsService.markAsRead(item.id).subscribe(res => {
+
+    })
+  }
+  remove(item) {
+    this.notificationsService.remove(item.id).subscribe(res => {
+
+    })
+  }
+  checkMarkAsReadAll() {
+    return this.list.some(item => !item.read);
+  }
+  markAsReadAll() {
+    this.notificationsService.markAsReadAll().subscribe(res => {
 
     })
   }

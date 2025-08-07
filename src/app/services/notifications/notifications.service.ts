@@ -31,4 +31,10 @@ export class NotificationsService {
   public markAsRead(id) {
     return this.http.put(`${this.apiUrl}users/notifications/${id}/read`, {});
   }
+  public remove(id) {
+    return this.http.delete(`${this.apiUrl}users/notifications/${id}`);
+  }
+  public markAsReadAll() {
+    return this.http.put(`${this.apiUrl}users/notifications/read-all`, {});
+  }
 }

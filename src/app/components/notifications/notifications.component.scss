@@ -4,9 +4,13 @@
  
 .qt-aside-modern {
     width: 480px !important;
+    border-radius: 0 0 12px 12px;
     &::after {
             display: none !important;
     }
+}
+.qt-aside-modern__content {
+    height: calc(100% - 64px);
 }
 
 .qt-aside {
