@@ -168,9 +168,11 @@ export class WebsocketService {
     }
     this.stompClient.onWebSocketClose = (data) => {
       console.log("data", data);
-      if (!this.blockWebSocket) setTimeout(() => {
-        this.onInitConnect();
-      }, 20000);
+      this.usersService.getCurrentUser().subscribe(res => {
+        setTimeout(() => {
+          this.onInitConnect();
+        }, 20000);
+      })
     };
     this.appService.onSessionScreen.subscribe(data => {
       this.blockWebSocket = data;
