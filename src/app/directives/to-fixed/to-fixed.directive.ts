@@ -26,6 +26,6 @@ export class ToFixedDirective {
   }
   parseValue() {
     let value = this.element.nativeElement.value;
-    if (parseFloat(value) != NaN) this.element.nativeElement.value = parseFloat(value).toFixed(this.count);
+    if (!Number.isNaN(parseFloat(value))) this.element.nativeElement.value = parseFloat(value).toFixed(this.count);
   }
 }

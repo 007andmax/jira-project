@@ -8,7 +8,7 @@ export class EditPayment {
     date: string;
     reference: string;
     paymentMethod: string;
-    constructor(data: Payment) {
+    constructor(data: any) {
         this.note = data.note;
         this.paymentData = data.paymentData;
         this.paymentId = data.id;

@@ -12,11 +12,10 @@ import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.mo
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 import { MultiCompanyDropDownModule } from 'src/app/components/shared/multi-company-drop-down/multi-company-drop-down.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
-import { InvoicesAsideComponent } from './invoices-aside.component';
 import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
-import { Invoice } from '../class/invoice';
 import { EditPaymentComponent } from './edit-payment.component';
+import { EditPayment } from '../class/edit-payment';
 
 
 
@@ -61,21 +60,25 @@ describe('EditPaymentComponent unit test', () => {
   it('check "getUnUsedAmountReceived"', () => {
     const fixture = TestBed.createComponent(EditPaymentComponent);
     const com = fixture.debugElement.componentInstance;
-    com.editPayment.paymentData = [{ paidAmount: 10 },
-    { paidAmount: 20 }
-    ];
+    com.editPayment = {
+      paymentData: [{ paidAmount: 10 },
+      { paidAmount: 20 }
+      ]
+    };
     com.amountReceived = 30;
     expect(com.getUnUsedAmountReceived()).toEqual("0.00");
   });
   it('check "onSelectPaymentModes"', () => {
     const fixture = TestBed.createComponent(EditPaymentComponent);
     const com = fixture.debugElement.componentInstance;
+    com.editPayment = new EditPayment({ note: "", paymentData: [], id: "", reference: "", paymentMethod: "" })
     com.onSelectPaymentModes(new CompanySetting('Credit Card', 'CREDIT_CARD'));
     expect(com.editPayment.paymentMethod).toEqual("CREDIT_CARD");
   });
   it('check "clearAmounts"', () => {
     const fixture = TestBed.createComponent(EditPaymentComponent);
     const com = fixture.debugElement.componentInstance;
+    com.editPayment = { paymentData: [{ paidAmount: 0 }] }
     com.clearAmounts();
     expect(com.amountReceived).toEqual(0);
     expect(com.amountReceived_str).toEqual("0.00");
@@ -83,19 +86,19 @@ describe('EditPaymentComponent unit test', () => {
   it('check "getSubtotal"', () => {
     const fixture = TestBed.createComponent(EditPaymentComponent);
     const com = fixture.debugElement.componentInstance;
-    com.payment.paymentData = [{ invoicePaidDue: 10 }, { invoicePaidDue: 20 }];
+    com.payment = { paymentData: [{ invoicePaidDue: 10 }, { invoicePaidDue: 20 }] };
     expect(com.getSubtotal()).toEqual(30);
   });
   it('check "checkShowClearAmounts"', () => {
     const fixture = TestBed.createComponent(EditPaymentComponent);
     const com = fixture.debugElement.componentInstance;
-    com.payment.paymentData = [{ paidAmount: 10 }];
+    com.editPayment = { paymentData: [{ paidAmount: 10 }] };
     expect(com.checkShowClearAmounts()).toEqual({ paidAmount: 10 });
   });
   it('check "getTotalPayment"', () => {
     const fixture = TestBed.createComponent(EditPaymentComponent);
     const com = fixture.debugElement.componentInstance;
-    com.payment.paymentData = [{ paidAmount: 10 }];
+    com.editPayment = { paymentData: [{ paidAmount: 10 }] };
     expect(com.getTotalPayment()).toEqual(10);
   });
 });
