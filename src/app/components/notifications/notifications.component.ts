@@ -77,6 +77,7 @@ export class NotificationsComponent {
     window.open(url, '_blank');
   }
   public onScroll() {
+    console.log("onScroll");
     this.infiniteScrollDisabled = true;
     this.getNotifications();
   }
@@ -88,7 +89,7 @@ export class NotificationsComponent {
     this.notificationsService.getList(this.page).subscribe((data: any) => {
       this.list = [...this.list, ...data.userNotifications.map(item => new Notification(item))];
       this.infiniteScrollDisabled = false;
-      if (data.length < this.offset) this.ticketsListService.setBlockList(true);
+      if (data.userNotifications.length < this.offset) this.ticketsListService.setBlockList(true);
       this.page += 1;
       this.showPreloader = false;
       this.showPendingPreloader = false;

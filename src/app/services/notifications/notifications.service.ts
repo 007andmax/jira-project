@@ -23,7 +23,7 @@ export class NotificationsService {
    * @param data - note data for updated note
    */
   public getList(page) {
-    return this.http.get(`${this.apiUrl}users/notifications?page=${page}&size=10&sort=date,desc`);
+    return this.http.get(`${this.apiUrl}users/notifications?page=${page}&size=20&sort=date,desc`);
   }
   public getCount() {
     return this.http.get(`${this.apiUrl}users/notifications/count/unread`);

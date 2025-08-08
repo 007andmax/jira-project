@@ -21,10 +21,12 @@
         </div>
     </div>
     <div
+        #content
         class="qt-aside-modern__content"
         infiniteScroll
+        [infiniteScrollContainer]="content"
         [infiniteScrollDistance]="2"
-        [infiniteScrollThrottle]="30"
+        [infiniteScrollThrottle]="50"
         [infiniteScrollDisabled]="infiniteScrollDisabled"
         (scrolled)="onScroll()"
     >
@@ -60,7 +62,7 @@
                     class="notification-item__subject qt-df qt-ai-c qt-mb-8"
                     *ngIf="item.type === 'TICKET_ASSIGNED' || item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED' || item.type ===  'NOTE_CREATED' || item.type === 'SERVICE_COMPLETED' || item.type === 'PRODUCT_COMPLETED'"
                 >
-                    <div class="qt-icon icon__tickets qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    <div class="qt-icon icon__tickets qt-bg-contain  qt-mr-8"></div>
                     Subject: {{item.ticket.subject}}
                 </div>
                 <div
@@ -78,17 +80,17 @@
                     {{item.note}}
                 </div>
                 <div
-                    class="notification-item__number qt-mb-8 qt-df qt-ai-c"
+                    class="notification-item__service-name qt-mb-8 qt-df qt-ai-c"
                     *ngIf="item.type === 'SERVICE_UPDATED' || item.type === 'SERVICE_COMPLETED'"
                 >
-                    <div class="qt-icon icon__service  qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    <div class="qt-icon icon__service  qt-bg-contain  qt-mr-8"></div>
                     {{item.service.name}}
                 </div>
                 <div
-                    class="notification-item__description qt-mb-8 qt-df qt-ai-c"
+                    class="notification-item__product-name qt-mb-8 qt-df qt-ai-c"
                     *ngIf="item.type === 'PRODUCT_UPDATED' || item.type === 'PRODUCT_COMPLETED'"
                 >
-                    <div class="qt-icon icon__products qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    <div class="qt-icon icon__products qt-bg-contain qt-mr-8"></div>
                     {{item.product.description}}
                 </div>
                 <div
@@ -120,7 +122,7 @@
                     {{parsedate(item.ticket.createdAt)}}
                 </div>
                 <div
-                    class="notification-item__link qt-color-info qt-fs-13 qt-fw-600 pointer qt-w100"
+                    class="notification-item__link qt-color-info qt-fs-13 qt-fw-600 pointer"
                     *ngIf="item.type === 'TICKET_ASSIGNED' || item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED' || item.type === 'SERVICE_COMPLETED' || item.type === 'PRODUCT_COMPLETED'"
                     (click)="editTicket(item.ticket.id)"
                 >

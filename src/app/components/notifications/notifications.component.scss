@@ -200,10 +200,31 @@
             min-width: 18px;
         }
     }
+    &__product-name {
+        .icon__products {
+            min-height: 18px;
+            min-width: 18px;
+        }
+    }
+    &__service-name {
+        .icon__service {
+            min-height: 18px;
+            min-width: 18px;
+        }
+    }
+    &__subject {
+        .icon__tickets {
+            min-height: 18px;
+            min-width: 18px;
+        }
+    }
     &__mark-read {
         position: absolute;
         top: 6px;
         right: 6px;
         
+    }
+    &__link {
+        max-width: fit-content;
     }
 }
