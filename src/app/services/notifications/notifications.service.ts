@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { tap } from 'rxjs/operators';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -14,7 +17,9 @@ export class NotificationsService {
    * @param {HttpClient} http Service to work with request
    */
   public constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService
   ) { }
 
   /**
@@ -32,7 +37,12 @@ export class NotificationsService {
     return this.http.put(`${this.apiUrl}users/notifications/${id}/read`, {});
   }
   public remove(id) {
-    return this.http.delete(`${this.apiUrl}users/notifications/${id}`);
+    return this.http.delete(`${this.apiUrl}users/notifications/${id}`).pipe(
+      tap(data => {
+        this.toastrService.success("The notifications has been successfully deleted");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public markAsReadAll() {
     return this.http.put(`${this.apiUrl}users/notifications/read-all`, {});
