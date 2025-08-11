@@ -1,0 +1,51 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
+import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
+import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
+import { MultiDatepickerModule } from 'src/app/components/shared/multi-datepicker/multi-datepicker.module';
+import { HttpClientModule } from '@angular/common/http';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { ContractsAsideProductServicePreviewComponent } from './contracts-aside-product-service-preview.component';
+
+
+describe('ContractsAsideProductServicePreviewComponent unit test', () => {
+  let component: ContractsAsideProductServicePreviewComponent;
+  let fixture: ComponentFixture<ContractsAsideProductServicePreviewComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [CommonModule,
+        DropDownModule,
+        MultiDatepickerModule,
+        CompanyDropDownModule,
+        HttpClientModule,
+        ToastrModule.forRoot({
+          closeButton: true,
+          timeOut: 5000,
+          onActivateTick: true
+        }),
+        NoopAnimationsModule],
+      declarations: [ContractsAsideProductServicePreviewComponent
+      ],
+    }).compileComponents();
+
+  });
+
+  it('check "getSelectedInterval"', () => {
+    const fixture = TestBed.createComponent(ContractsAsideProductServicePreviewComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.getSelectedInterval();
+    expect(com.selectedInterval).toEqual(`7 days`);
+  });
+  it('check "getDiscount"', () => {
+    const fixture = TestBed.createComponent(ContractsAsideProductServicePreviewComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.getDiscount({ discountAmount: 300, discountType: "FIXED" })).toEqual(`300 $`);
+  });
+  it('check "getDiscount"', () => {
+    const fixture = TestBed.createComponent(ContractsAsideProductServicePreviewComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.getDiscount({ discountAmount: 300, discountType: "FIXED" })).toEqual(`300 $`);
+  });
+});
