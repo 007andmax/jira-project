@@ -168,10 +168,12 @@ export class WebsocketService {
     }
     this.stompClient.onWebSocketClose = (data) => {
       console.log("data", data);
-      this.usersService.getCurrentUser().subscribe(res => {
+      this.usersService.isAuthorized().subscribe(res => {
         setTimeout(() => {
           this.onInitConnect();
         }, 20000);
+      }, err => {
+        console.log("err", err);
       })
     };
     this.appService.onSessionScreen.subscribe(data => {
