@@ -117,7 +117,6 @@ export class WebsocketService {
     if (this.usersState.getCurrentUser().role === "SUPER_ADMIN") this.onInitSuperAdminConnect();
   }
   onInitConnect() {
-    console.log("onInitConnect");
     this.ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(this.ws);
     this.stompClient.logRawCommunication = true;
@@ -167,13 +166,10 @@ export class WebsocketService {
       console.log("debug", data);
     }
     this.stompClient.onWebSocketClose = (data) => {
-      console.log("data", data);
       this.usersService.isAuthorized().subscribe(res => {
         setTimeout(() => {
           this.onInitConnect();
         }, 20000);
-      }, err => {
-        console.log("err", err);
       })
     };
     this.appService.onSessionScreen.subscribe(data => {
