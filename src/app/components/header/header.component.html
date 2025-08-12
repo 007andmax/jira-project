@@ -11,7 +11,20 @@
                 placement="left"
                 ngbTooltip="Quick Create"
             >
-              <div class="qt-icon icon__add qt-icon__white qt-sz-16"></div>
+                <div class="qt-icon icon__add qt-icon__white qt-sz-16"></div>
+            </div>
+            <div class="notifications qt-mr-24">
+                <div
+                    class="qt-icon icon__notification qt-bg-contain qt-sz-18 pointer"
+                    (click)="showNotifications()"
+                    placement="left"
+                    ngbTooltip="Notifications"
+                >
+                </div>
+                <span
+                    *ngIf="getNotificationCounter() > 0"
+                    [textContent]="getNotificationCounter()"
+                ></span>
             </div>
             <div
                 *ngIf="!customerPortalStateService.isCustomerPortal"

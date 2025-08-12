@@ -12,6 +12,7 @@ import { UsersStateService } from '../../states/users/users-state.service';
 import { User } from '../users/class/user';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { Subscription } from 'rxjs';
+import { NotificationsStateService } from 'src/app/states/notifications/notifications-state.service';
 
 @Component({
   selector: 'app-header',
@@ -31,6 +32,7 @@ export class HeaderComponent implements OnInit {
     private superAdminPublicStateService: SuperAdminPublicStateService,
     private permissionsService: PermissionsService,
     public customerPortalStateService: CustomerPortalStateService,
+    private notificationsStateService: NotificationsStateService,
     public companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
@@ -47,6 +49,12 @@ export class HeaderComponent implements OnInit {
   }
   private getCurrentUser(data) {
     this.currentUser = data;
+  }
+  getNotificationCounter() {
+    return this.notificationsStateService.getUnreadCount();
+  }
+  showNotifications() {
+    this.notificationsStateService.showNotifications();
   }
   goToSettings() {
     this.leftPanelStateService.goToState('myprofile-component');

@@ -153,6 +153,8 @@ import { TicketDetailNoteModalModule } from './components/tickets/tickets/ticket
 import { DeviceSettingTypeCheckUseComponent } from './components/setting/device-setting/device-setting-type/device-setting-type-check-use/device-setting-type-check-use.component';
 import { CompanyDevicesAssestTypeDropDownModule } from './components/company-devices/company-devices-custom-aside/company-devices-assest-type-drop-down/company-devices-assest-type-drop-down.module';
 import { CannedResponsesAsideModule } from './components/setting/ticket-settings-page/canned-responses/canned-responses-aside/canned-responses-aside.module';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { NotificationsModule } from './components/notifications/notifications.module';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -183,7 +185,7 @@ declare var $: any;
         UserDeArchiveNotificationComponent,
         PreviewFileComponent,
         SubscriptionServicesCheckUseComponent,
-        SubscriptionServicesConfirmComponent,
+        SubscriptionServicesConfirmComponent
     ],
     imports: [
         BrowserModule,
@@ -238,7 +240,8 @@ declare var $: any;
         FileManagementAddFileModule,
         TicketDetailNoteModalModule,
         CompanyDevicesAssestTypeDropDownModule,
-        CannedResponsesAsideModule
+        CannedResponsesAsideModule,
+        NotificationsModule
     ],
     providers: [
         {

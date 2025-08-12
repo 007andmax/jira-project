@@ -1,0 +1,138 @@
+<div
+    [hidden]="!opened"
+    class="qt-aside-modern"
+>
+    <div class="qt-aside-modern__header">
+        <div class="qt-aside-modern__header-info qt-df qt-ai-c">
+            <div class="qt-aside__title">Notifications</div>
+        </div>
+        <div class="qt-df qt-ai-c">
+            <div
+                *ngIf="checkMarkAsReadAll()"
+                class="qt-color-info qt-fs-14 qt-fw-600 pointer qt-mr-16"
+                (click)="markAsReadAll()"
+            >
+                Mark all as read
+            </div>
+            <div
+                class="qt-aside__close-modal qt-icon icon__close"
+                (click)="closed()"
+            ></div>
+        </div>
+    </div>
+    <div
+        #content
+        class="qt-aside-modern__content"
+        infiniteScroll
+        [infiniteScrollContainer]="content"
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        [infiniteScrollDisabled]="infiniteScrollDisabled"
+        (scrolled)="onScroll()"
+    >
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="list"
+            [ngForTrackBy]="trackById"
+        >
+            <div class="notification-item ">
+                <div class="notification-item__mark-read pointer">
+                    <div
+                        class="qt-icon icon__mark-as-read qt-sz-20 qt-bg-contain qt-mb-8"
+                        *ngIf="!item.read"
+                        placement="top"
+                        ngbTooltip="Mark as read"
+                        container="body"
+                        (click)="markAsRead(item)"
+                    ></div>
+                    <div
+                        class="qt-icon icon__delete qt-icon__red-600 qt-bg-contain qt-sz-20 "
+                        placement="top"
+                        ngbTooltip="Delete"
+                        container="body"
+                        (click)="remove(item)"
+                    ></div>
+                </div>
+                <div class="notification-item__title qt-fs-14 qt-fw-600 qt-df qt-ai-fs qt-mb-8">
+                    <div class="qt-icon icon__notification qt-bg-contain  qt-mr-8"></div>
+                    {{item.title}}
+                </div>
+                <div
+                    class="notification-item__subject qt-df qt-ai-c qt-mb-8"
+                    *ngIf="item.type === 'TICKET_ASSIGNED' || item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED' || item.type ===  'NOTE_CREATED' || item.type === 'SERVICE_COMPLETED' || item.type === 'PRODUCT_COMPLETED'"
+                >
+                    <div class="qt-icon icon__tickets qt-bg-contain  qt-mr-8"></div>
+                    Subject: {{item.ticket.subject}}
+                </div>
+                <div
+                    class="notification-item__number qt-mb-8 qt-df qt-ai-c"
+                    *ngIf="item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED' || item.type ===  'NOTE_CREATED' || item.type === 'SERVICE_COMPLETED' || item.type === 'PRODUCT_COMPLETED'"
+                >
+                    <div class="qt-icon icon__info qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    Ticket number: {{item.ticket.number}}
+                </div>
+                <div
+                    class="notification-item__description qt-mb-8 qt-df qt-ai-c"
+                    *ngIf="item.type === 'NOTE_CREATED'"
+                >
+                    <div class="qt-icon icon__messages  qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    {{item.note}}
+                </div>
+                <div
+                    class="notification-item__service-name qt-mb-8 qt-df qt-ai-c"
+                    *ngIf="item.type === 'SERVICE_UPDATED' || item.type === 'SERVICE_COMPLETED'"
+                >
+                    <div class="qt-icon icon__service  qt-bg-contain  qt-mr-8"></div>
+                    {{item.service.name}}
+                </div>
+                <div
+                    class="notification-item__product-name qt-mb-8 qt-df qt-ai-c"
+                    *ngIf="item.type === 'PRODUCT_UPDATED' || item.type === 'PRODUCT_COMPLETED'"
+                >
+                    <div class="qt-icon icon__products qt-bg-contain qt-mr-8"></div>
+                    {{item.product.description}}
+                </div>
+                <div
+                    class="notification-item__date qt-df qt-ai-c qt-mb-8"
+                    *ngIf="item.type === 'SERVICE_UPDATED'"
+                >
+                    <div class="qt-icon icon__time  qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    {{parsedate(item.service.createdAt)}}
+                </div>
+                <div
+                    class="notification-item__date qt-df qt-ai-c qt-mb-8"
+                    *ngIf="item.type === 'PRODUCT_UPDATED'"
+                >
+                    <div class="qt-icon icon__time  qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    {{parsedate(item.product.createdAt)}}
+                </div>
+                <div
+                    class="notification-item__company qt-df qt-ai-c qt-mb-8"
+                    *ngIf="item.type === 'TICKET_ASSIGNED'"
+                >
+                    <div class="qt-icon icon__companies qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    Company: {{item.ticket.companyName}}
+                </div>
+                <div
+                    class="notification-item__date qt-df qt-ai-c qt-mb-8"
+                    *ngIf="item.type === 'TICKET_ASSIGNED'"
+                >
+                    <div class="qt-icon icon__time  qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    {{parsedate(item.ticket.createdAt)}}
+                </div>
+                <div
+                    class="notification-item__link qt-color-info qt-fs-13 qt-fw-600 pointer"
+                    *ngIf="item.type === 'TICKET_ASSIGNED' || item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED' || item.type === 'SERVICE_COMPLETED' || item.type === 'PRODUCT_COMPLETED'"
+                    (click)="editTicket(item.ticket.id)"
+                >
+                    View Ticket
+                </div>
+            </div>
+        </ng-template>
+    </div>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
+</div>
