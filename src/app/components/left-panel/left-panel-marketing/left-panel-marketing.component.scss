@@ -35,12 +35,14 @@
     font-weight: 600;
 
     .loading {
-        width: 20px;
-        height: 20px;
         right: -28px;
         left: unset;
         top: calc(50% - 10px);
-        border: .25rem solid rgba(208, 213, 221, .2);
-        border-top-color: $gray-300;
+
+        &::before {
+          width: 20px;
+          height: 20px;
+          border-width: 2px;
+        }
     }
 }

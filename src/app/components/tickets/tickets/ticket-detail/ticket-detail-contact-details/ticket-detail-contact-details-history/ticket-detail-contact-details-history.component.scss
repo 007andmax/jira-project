@@ -40,9 +40,13 @@
     }
 
     .loading {
-      width: 25px;
-      height: 25px;
       left: calc(50% - 12px);
+
+      &::before {
+        width: 32px;
+        height: 32px;
+				border-width: 3px;
+      }
     }
   }
 

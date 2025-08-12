@@ -8,8 +8,10 @@
     height: 325px;
 }
 .pengind-loading {
-    width: 25px !important;
-    height: 25px !important;
-    min-height: auto !important;
+    &::before {
+      width: 32px !important;
+      height: 32px !important;
+      border-width: 3px;
+      min-height: auto !important;
+    }
 }
- 

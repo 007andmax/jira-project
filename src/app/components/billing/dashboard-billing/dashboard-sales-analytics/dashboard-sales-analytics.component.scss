@@ -16,7 +16,10 @@
     z-index: 999;
 }
 .pengind-loading {
-    width: 25px !important;
-    height: 25px !important;
+  &::before {
+    width: 32px !important;
+    height: 32px !important;
+    border-width: 3px;
     min-height: auto !important;
+  }
 }

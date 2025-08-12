@@ -206,13 +206,18 @@
     width: fit-content;
     text-decoration: underline;
     cursor: pointer;
-    margin: 20px auto 0px auto;
+    margin: 20px auto 0 auto;
     font-weight: 600;
+
     .loading {
-        width: 20px;
-        height: 20px;
         right: -28px;
-        left: unset;
         top: calc(50% - 10px);
+
+        &::before {
+          width: 20px;
+          height: 20px;
+          border-width: 2px;
+          left: unset;
+        }
     }
 }
