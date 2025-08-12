@@ -37,6 +37,7 @@ export class NotificationsComponent {
 
     let getToggleAddTicket = this.notificationsStateService.onShowNotifications.subscribe(data => {
       this.opened = true;
+      this.showPreloader = true;
       this.getNotifications();
     })
     this.sub.add(getToggleAddTicket);
@@ -99,6 +100,8 @@ export class NotificationsComponent {
   closed() {
     this.opened = false;
     this.showPreloader = false;
+    this.infiniteScrollDisabled = true;
+    this.ticketsListService.setBlockList(false)
     this.page = 0;
     this.list = [];
   }
