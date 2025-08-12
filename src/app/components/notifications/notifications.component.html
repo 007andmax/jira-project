@@ -124,7 +124,7 @@
                 <div
                     class="notification-item__link qt-color-info qt-fs-13 qt-fw-600 pointer"
                     *ngIf="item.type === 'TICKET_ASSIGNED' || item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED' || item.type === 'SERVICE_COMPLETED' || item.type === 'PRODUCT_COMPLETED'"
-                    (click)="markAsRead(item);editTicket(item.ticket.id)"
+                    (click)="editTicket(item)"
                 >
                     View Ticket
                 </div>

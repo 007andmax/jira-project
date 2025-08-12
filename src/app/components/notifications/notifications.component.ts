@@ -72,9 +72,10 @@ export class NotificationsComponent {
   parsedate(date) {
     return moment(date).format('DD MMM YYYY');
   }
-  editTicket(id) {
-    this.ticketStateService.setTicketRoutingId(id);
-    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${id}`;
+  editTicket(item) {
+    if (!item.read) this.markAsRead(item)
+    this.ticketStateService.setTicketRoutingId(item.ticket.id);
+    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${item.ticket.id}`;
     window.open(url, '_blank');
   }
   public onScroll() {
