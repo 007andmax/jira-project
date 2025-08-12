@@ -18,6 +18,7 @@ import { NotificationsRealTimeService } from 'src/app/states/notifications/notif
 export class NotificationsComponent {
   opened = false;
   page: number = 0;
+  onlyUnread: boolean = true;
   offset: number = 20;
   infiniteScrollDisabled = true;
   showPendingPreloader: boolean = false;
@@ -83,12 +84,23 @@ export class NotificationsComponent {
     this.infiniteScrollDisabled = true;
     this.getNotifications();
   }
+  public setOnlyUnread(data) {
+    this.onlyUnread = data;
+  }
+  public setDefaultScoll() {
+    this.page = 0;
+    this.list = [];
+    this.infiniteScrollDisabled = true;
+    this.showPreloader = true;
+    this.ticketsListService.setBlockList(false);
+    this.onScroll();
+  }
   getNotifications() {
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
     }
-    this.notificationsService.getList(this.page).subscribe((data: any) => {
+    this.notificationsService.getList(this.page, this.onlyUnread).subscribe((data: any) => {
       this.list = [...this.list, ...data.userNotifications.map(item => new Notification(item))];
       this.infiniteScrollDisabled = false;
       if (data.userNotifications.length < this.offset) this.ticketsListService.setBlockList(true);
@@ -97,6 +109,9 @@ export class NotificationsComponent {
       this.showPendingPreloader = false;
       this.cd.detectChanges();
     })
+  }
+  countUnread() {
+    return this.list.filter(item => !item.read).length;
   }
   closed() {
     this.opened = false;

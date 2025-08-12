@@ -8,16 +8,33 @@
         </div>
         <div class="qt-df qt-ai-c">
             <div
-                *ngIf="checkMarkAsReadAll()"
-                class="qt-color-info qt-fs-14 qt-fw-600 pointer qt-mr-16"
-                (click)="markAsReadAll()"
-            >
-                Mark all as read
-            </div>
-            <div
                 class="qt-aside__close-modal qt-icon icon__close"
                 (click)="closed()"
             ></div>
+        </div>
+    </div>
+    <div class="qt-df qt-ai-c qt-jc-sb qt-mb-8 qt-mt-8 qt-pl-24 qt-fs-14 qt-fw-600">
+        <div class="qt-df qt-ai-c">
+            <div
+                class="pointer qt-mr-8"
+                [ngClass]="{'qt-color-info':!onlyUnread}"
+                (click)="setOnlyUnread(false); setDefaultScoll()"
+            >
+                All
+            </div>
+            <div
+                class="pointer"
+                [ngClass]="{'qt-color-info':onlyUnread}"
+                [textContent]="'Unread ('+ countUnread() + ')'"
+                (click)="setOnlyUnread(true); setDefaultScoll()"
+            ></div>
+        </div>
+        <div
+            *ngIf="checkMarkAsReadAll()"
+            class="qt-color-info pointer"
+            (click)="markAsReadAll()"
+        >
+            Mark all as read
         </div>
     </div>
     <div
