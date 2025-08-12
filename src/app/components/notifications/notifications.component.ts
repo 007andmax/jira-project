@@ -77,7 +77,6 @@ export class NotificationsComponent {
     window.open(url, '_blank');
   }
   public onScroll() {
-    console.log("onScroll");
     this.infiniteScrollDisabled = true;
     this.getNotifications();
   }
