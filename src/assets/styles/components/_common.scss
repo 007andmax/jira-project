@@ -90,8 +90,9 @@ body .left-panel-full {
 // _loading-indicator
 .loading {
   position: absolute;
-  top: calc(50% - 25px);
-  left: calc(50% - 25px);
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -108,26 +109,36 @@ body .left-panel-full {
     animation: spin 1s infinite linear;
   }
 
-  &:not(.xs)::after {
+  &:not(.xs):not(.sm):not(.loading--without-text)::after {
     content: "Just a moment, we're pulling up the list.";
     font-weight: 500;
     color: $gray-700;
     white-space: nowrap;
     text-align: center;
   }
-}
 
-.loading.xs {
-  top: 10px;
-  right: 10px;
-  left: auto;
+  &.xs {
+    top: 50%;
+    translate: 0 -50%;
+    right: 10px;
+    left: auto;
 
-  &::before {
-    width: 20px;
-    height: 20px;
-    border-width: 2px;
+    &::before {
+      width: 20px;
+      height: 20px;
+      border-width: 2px;
+    }
+  }
+
+  &.sm {
+    &::before {
+      width: 32px;
+      height: 32px;
+      border-width: 3px;
+    }
   }
 }
+
 .recurring-tickets-content__modal--content .loading.xs {
   top: -3px;
 }

@@ -38,16 +38,6 @@
         left: 0;
       }
     }
-
-    .loading {
-      left: calc(50% - 12px);
-
-      &::before {
-        width: 32px;
-        height: 32px;
-				border-width: 3px;
-      }
-    }
   }
 
   &__history-block-title {

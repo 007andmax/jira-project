@@ -210,14 +210,7 @@
     font-weight: 600;
 
     .loading {
-        right: -28px;
-        top: calc(50% - 10px);
-
-        &::before {
-          width: 20px;
-          height: 20px;
-          border-width: 2px;
-          left: unset;
-        }
+      right: -10px;
+      translate: 100% -50%;
     }
 }

@@ -111,14 +111,7 @@
   font-weight: 600;
 
   .loading {
-    right: -28px;
-    left: unset;
-    top: calc(50% - 10px);
-
-    &::before {
-      width: 20px;
-      height: 20px;
-      border-width: 2px;
-    }
+    right: -10px;
+    translate: 100% -50%;
   }
 }
