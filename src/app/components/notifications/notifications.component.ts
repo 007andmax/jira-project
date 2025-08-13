@@ -58,6 +58,10 @@ export class NotificationsComponent {
   markAsRead(item) {
     this.notificationsService.markAsRead(item.id).subscribe(res => {
       item.read = true;
+      if (this.onlyUnread) {
+        let index = this.list.findIndex(i => i.id === item.id);
+        if (index > -1) this.list.splice(index, 1);
+      }
     })
   }
   remove(item) {
