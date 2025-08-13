@@ -110,8 +110,8 @@ export class NotificationsComponent {
       this.cd.detectChanges();
     })
   }
-  countUnread() {
-    return this.list.filter(item => !item.read).length;
+  getNotificationCounter() {
+    return this.notificationsStateService.getUnreadCount();
   }
   closed() {
     this.opened = false;

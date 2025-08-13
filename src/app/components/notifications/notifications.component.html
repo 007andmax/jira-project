@@ -13,21 +13,21 @@
             ></div>
         </div>
     </div>
-    <div class="qt-df qt-ai-c qt-jc-sb qt-mb-8 qt-mt-8 qt-pl-24 qt-fs-14 qt-fw-600">
+    <div class="qt-df qt-ai-c qt-jc-sb qt-mt-8 qt-pl-24 qt-pr-24 qt-fs-14 qt-fw-600">
         <div class="qt-df qt-ai-c">
             <div
-                class="pointer qt-mr-8"
+                class="pointer"
+                [ngClass]="{'qt-color-info':onlyUnread}"
+                [textContent]="'Unread ('+ getNotificationCounter() + ')'"
+                (click)="setOnlyUnread(true); setDefaultScoll()"
+            ></div>
+            <div
+                class="pointer qt-ml-8"
                 [ngClass]="{'qt-color-info':!onlyUnread}"
                 (click)="setOnlyUnread(false); setDefaultScoll()"
             >
                 All
             </div>
-            <div
-                class="pointer"
-                [ngClass]="{'qt-color-info':onlyUnread}"
-                [textContent]="'Unread ('+ countUnread() + ')'"
-                (click)="setOnlyUnread(true); setDefaultScoll()"
-            ></div>
         </div>
         <div
             *ngIf="checkMarkAsReadAll()"
@@ -90,11 +90,22 @@
                     Ticket number: {{item.ticket.number}}
                 </div>
                 <div
-                    class="notification-item__description qt-mb-8 qt-df qt-ai-c"
+                    class="notification-item__note qt-mb-8 qt-df qt-ai-fs"
                     *ngIf="item.type === 'NOTE_CREATED'"
                 >
                     <div class="qt-icon icon__messages  qt-bg-contain qt-sz-18  qt-mr-8"></div>
-                    <div [innerHTML]="item.note"></div>
+                    <div class="qt-w100">
+                        <div class="qt-df qt-ai-c qt-jc-sb qt-w100">
+                            <div>Note:</div>
+                            <span
+                                class="qt-color-info qt-fs-13 qt-fw-600 pointer"
+                                *ngIf="item.shortNote"
+                                (click)="item.showMoreNote = !item.showMoreNote"
+                                [textContent]="item.showMoreNote ? 'Show less' : 'Show more'"
+                            ></span>
+                        </div>
+                        <div [innerHTML]="!item.showMoreNote ? item.shortNote : item.note"></div>
+                    </div>
                 </div>
                 <div
                     class="notification-item__service-name qt-mb-8 qt-df qt-ai-c"
@@ -140,7 +151,7 @@
                 </div>
                 <div
                     class="notification-item__link qt-color-info qt-fs-13 qt-fw-600 pointer"
-                    *ngIf="item.type === 'TICKET_ASSIGNED' || item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED' || item.type === 'SERVICE_COMPLETED' || item.type === 'PRODUCT_COMPLETED'"
+                    *ngIf="item.type === 'TICKET_ASSIGNED' || item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED' || item.type === 'SERVICE_COMPLETED' || item.type === 'PRODUCT_COMPLETED' || item.type === 'NOTE_CREATED'"
                     (click)="editTicket(item)"
                 >
                     View Ticket
