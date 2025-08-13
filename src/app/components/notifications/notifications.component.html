@@ -20,7 +20,7 @@
             ></div>
         </div>
     </div>
-    <div class="qt-df qt-ai-c qt-jc-sb qt-mt-8 qt-pl-24 qt-pr-24 qt-fs-14 qt-fw-600">
+    <div class="qt-df qt-ai-c qt-jc-sb qt-mt-8 qt-pl-24 qt-pr-24 qt-pb-8 qt-fs-14 qt-fw-600">
         <div class="qt-df qt-ai-c">
             <div
                 class="pointer"
@@ -143,6 +143,20 @@
                     Company: {{item.ticket.companyName}}
                 </div>
                 <div
+                    class="notification-item__company qt-df qt-ai-c qt-mb-8"
+                    *ngIf="item.type === 'QUOTE_STATUS_UPDATED'"
+                >
+                    <div class="qt-icon icon__companies qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    Company: {{item.saleQuote.companyName}}
+                </div>
+                <div
+                    class="notification-item__company qt-df qt-ai-c qt-mb-8"
+                    *ngIf="item.type === 'QUOTE_STATUS_UPDATED'"
+                >
+                    <div class="qt-icon icon__companies qt-bg-contain qt-sz-18  qt-mr-8"></div>
+                    Status: {{item.saleQuote.status}}
+                </div>
+                <div
                     class="notification-item__date qt-df qt-ai-c qt-mb-8"
                     *ngIf="item.type === 'TICKET_ASSIGNED'"
                 >
@@ -155,6 +169,13 @@
                     (click)="editTicket(item)"
                 >
                     View Ticket
+                </div>
+                <div
+                    class="notification-item__link qt-color-info qt-fs-13 qt-fw-600 pointer"
+                    *ngIf="item.type === 'QUOTE_STATUS_UPDATED'"
+                    (click)="editQuote(item)"
+                >
+                    View Quote
                 </div>
             </div>
         </ng-template>

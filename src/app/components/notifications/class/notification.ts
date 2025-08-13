@@ -1,4 +1,5 @@
 import { NotificationProduct } from "./notification-product";
+import { NotificationQuote } from "./notification-quote";
 import { NotificationService } from "./notification-service";
 import { NotificationTicket } from "./notification-ticket";
 
@@ -12,6 +13,7 @@ export class Notification {
     "ticket": NotificationTicket;
     "service": NotificationService;
     "product": NotificationProduct;
+    saleQuote: NotificationQuote;
     shortNote: string;
     showMoreNote: boolean = false;
     constructor(data) {
@@ -22,6 +24,7 @@ export class Notification {
         this.service = new NotificationService(data.service);
         this.product = new NotificationProduct(data.product);
         this.shortNote = this.note && this.note.length > 200 ? this.note.substring(0, 200) + '...' : null;
+        this.saleQuote = new NotificationQuote(data.saleQuote);
         if (!this.shortNote) this.showMoreNote = true;
 
     }

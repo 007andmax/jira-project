@@ -8,6 +8,8 @@ import * as moment from "moment";
 import { TicketStateService } from '../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { NotificationsRealTimeService } from 'src/app/states/notifications/notifications-real-time.service';
+import { id } from '@swimlane/ngx-charts';
+import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 
 @Component({
   selector: 'app-notifications',
@@ -32,7 +34,8 @@ export class NotificationsComponent {
     public cd: ChangeDetectorRef,
     private ticketStateService: TicketStateService,
     private companiesStateService: CompaniesStateService,
-    private notificationsRealTimeService: NotificationsRealTimeService
+    private notificationsRealTimeService: NotificationsRealTimeService,
+    private quoteStateService: QuoteStateService,
   ) { }
   ngOnInit() {
 
@@ -78,6 +81,9 @@ export class NotificationsComponent {
     this.ticketStateService.setTicketRoutingId(item.ticket.id);
     const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${item.ticket.id}`;
     window.open(url, '_blank');
+  }
+  editQuote(item) {
+    this.quoteStateService.setPreview({ id: item.saleQuote.id });
   }
   public onScroll() {
     console.log("onScroll");
