@@ -8,6 +8,13 @@
         </div>
         <div class="qt-df qt-ai-c">
             <div
+                *ngIf="checkMarkAsReadAll()"
+                class="qt-color-info pointer qt-mr-8 qt-fs-14 qt-fw-600"
+                (click)="markAsReadAll()"
+            >
+                Mark all as read
+            </div>
+            <div
                 class="qt-aside__close-modal qt-icon icon__close"
                 (click)="closed()"
             ></div>
@@ -28,13 +35,6 @@
             >
                 All
             </div>
-        </div>
-        <div
-            *ngIf="checkMarkAsReadAll()"
-            class="qt-color-info pointer"
-            (click)="markAsReadAll()"
-        >
-            Mark all as read
         </div>
     </div>
     <div
