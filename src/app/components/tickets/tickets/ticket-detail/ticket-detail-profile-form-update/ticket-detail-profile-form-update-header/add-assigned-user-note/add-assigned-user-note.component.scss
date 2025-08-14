@@ -33,84 +33,23 @@
         color: $gray-500;
         z-index: 1;
     }
-    .mat-form-field {
-        width: 100%;
-    }
     .mat-chip-list-wrapper {
         min-height: 48px;
-        border-radius: unset !important;
-        padding-left: 168px !important;
-        border-color: $gray-200;
-        background-color: $white;
-        border-left: unset !important;
-        border-right: unset !important;
-        margin-right: 0;
-        margin-left: 0;
+        padding-left: 168px;
         padding-right: 52px;
 
         &:hover {
-            border-color: $gray-200 !important;
+            border-color: $gray-200;
             background-color: $gray-50;
         }
     }
 
     input.mat-chip-input {
-        width: 20px;
-        margin: 0;
-        flex: 1 0 20px;
-        height: 34px;
-    }
-
-    .mat-form-field {
-        width: 100%;
-    }
-
-    .mat-form-field-infix {
-        padding: 0;
-        border: none;
+        flex: 1 0 60px;
     }
 
     .mat-form-field-underline {
         display: none;
-    }
-
-    .selected-tag-user {    
-        font-weight: 500;
-        margin: 4px;
-        padding: 0px;
-        align-items: center;
-        .assigne-user-avatar {
-            height: 20px;
-            width: 20px;
-            margin-right: 6px;
-            font-size: 13px;
-        }
-        .mat-standard-chip {
-            padding: 5px 8px;
-            margin: 0px;
-            border-radius: 6px !important;
-            background-color: $white;
-        }
-    }
-
-    .mat-standard-chip:focus {
-        box-shadow: none;
-    }
-
-    .assigne-user-item {
-        align-items: center;
-        font-weight: 500;
-        font-size: 13px;
-        line-height: 16px;
-        color: $gray-600;
-    }
-
-    .mat-chip-remove {
-        opacity: 1;
-    }
-
-    .mat-chip-remove:before {
-        filter: brightness(0.8)
     }
 }
 ::ng-deep .add-assigned-user-note-db {

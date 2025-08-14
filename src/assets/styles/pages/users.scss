@@ -38,7 +38,7 @@
         color: $gray-500;
       }
       &.--invite-sent {
-        border-color: $blue-light-60;
+        border-color: $blue-light-200;
         background-color: $blue-light-25;
         color: $blue-light-700;
       }
@@ -269,64 +269,8 @@
       opacity: 0;
     }
   }
-
-  app-company-tags {
-    .qt-temporary-col-fix {
-      margin-top: 40px;
-      .mat-form-field {
-        width: 100%;
-      }
-      .mat-form-field-infix {
-        border: none;
-      }
-      .mat-chip-list-wrapper {
-        margin: 0;
-
-        .mat-standard-chip {
-          margin: 2px;
-        }
-      }
-      .mat-form-field-appearance-legacy .mat-form-field-underline {
-        display: none;
-      }
-      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-        padding: 0;
-        position: relative;
-      }
-      .mat-form-field-appearance-legacy .mat-form-field-label {
-        padding: 10px 10px 10px 36px;
-        font-size: 13px;
-        font-weight: 400;
-        color: $gray-900;
-        top: 10px;
-      }
-      .mat-form-field-infix {
-        border: 1px solid $gray-200;
-        border-radius: 6px;
-        padding: 0px 0px 0px 36px !important;
-        position: relative;
-        min-height: 36px;
-        &:hover {
-          border-color: $gray-300;
-        }
-        &:before {
-          left: 12px;
-          top: 10px;
-          position: absolute;
-          content: "";
-          width: 20px;
-          height: 20px;
-           background: url("/assets/img/icons/tags.svg");
-        }
-        input {
-          height: 38px !important;
-          margin: 0;
-        }
-      }
-    }
-  }
   .light-dropdown {
-    padding: 0px;
+    padding: 0;
   }
   .qt-input-search {
     &::before {
@@ -418,7 +362,7 @@ app-users-table {
 
     .mat-form-field-infix,
     .mat-input-element {
-      min-height: 40px !important;
+      min-height: 38px !important;
     }
 
     .mat-form-field-infix::before {
@@ -523,40 +467,6 @@ app-users-table {
       }
     }
   }
-
-  .mat-form-field-wrapper {
-    .mat-form-field-infix {
-      padding: 0 !important;
-      min-height: 40px !important;
-
-      &::before {
-        display: none;
-      }
-    }
-
-    .mat-form-field-label {
-      padding-left: 14px !important;
-    }
-
-    .mat-chip-input {
-      text-indent: 10px;
-    }
-
-    .mat-input-element {
-      min-height: 35px !important;
-      height: 40px !important;
-    }
-
-    .mat-chip-list-wrapper {
-      margin: 0;
-
-      input.mat-input-element {
-        padding: 2px 3px;
-        border-color: transparent;
-        box-shadow: unset;
-      }
-    }
-  }
 }
 
 .remove-user-dialog {
@@ -588,17 +498,6 @@ app-users-table {
     position: absolute;
     top: 16px;
     right: 16px;
-  }
-}
-
-draft-email-user-recipients .mat-form-field-appearance-legacy {
-  .mat-form-field-infix {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-  }
-
-  .mat-chip-list-wrapper {
-    margin: 0 !important;
   }
 }
 users-aside-detail {
@@ -711,5 +610,29 @@ app-users-details {
         }
       }
     }
+  }
+}
+
+.left-panel-container {
+  .user-subscription {
+    min-height: 40px;
+    margin-bottom: -6px;
+    padding: 0 30px 0 0;
+    border: unset;
+  }
+
+  .mat-chip-list-wrapper {
+    padding: 0;
+  }
+  .app-mat-tags .mat-form-field-infix {
+    padding: 0;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .placeholder-subscription:after {
+    left: 0;
   }
 }

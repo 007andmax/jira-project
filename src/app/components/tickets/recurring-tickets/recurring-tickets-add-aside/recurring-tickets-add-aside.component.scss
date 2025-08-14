@@ -45,3 +45,10 @@
       max-width: 345px;
     }
 }
+
+.product-tab-content,
+.service-tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

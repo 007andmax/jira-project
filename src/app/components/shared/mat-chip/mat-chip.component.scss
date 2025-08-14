@@ -2,32 +2,38 @@
 
 .mat-chip {
     padding: 9px 15px 9px 5px;
-    border-radius: 3px !important;
-    border: 1px solid $background;
-    color: $gray-900;
+    border-radius: 6px;
+    height: 24px;
+    color: $gray-600;
     text-transform: none;
     position: relative;
     display: flex;
+    gap: 4px;
     min-width: 35px;
-    margin: 2px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 16px;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: 0;
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
-    background-color: $gray-25;
+    background-color: $gray-100;
     float: left;
     cursor: inherit;
     overflow: hidden;
+    margin: 4px 4px;
 }
 
 .mat-standard-chip {
-    padding: 4px 6px 3px 8px;
-    margin: 4px;
+    padding: 4px 4px 4px 4px;
     transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
     align-items: center;
+
+    &:has(.assigne-user-avatar) {
+      background-color: $white;
+      border: 1px solid $gray-200;
+      box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+    }
 
     &:focus {
         box-shadow: 0 3px 3px -2px rgba(0, 0, 0, .2),
@@ -47,35 +53,19 @@
 .mat-chip-remove {
     font-size: 0;
     position: relative;
-    margin: 0;
-    color: rgba(0, 0, 0, .87);
-    width: 14px !important;
-    height: 18px !important;
+    width: 16px;
+    height: 16px;
+    mask-image: url('/assets/img/icons/close.svg');
+    background-color: $gray-400;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
     cursor: pointer;
-
-    &::before {
-        content: "";
-        position: absolute;
-        top: 2px;
-        right: -3px;
-        width: 14px;
-        height: 14px;
-        -webkit-mask-image: url(/assets/img/icons/close.svg);
-        mask-image: url(/assets/img/icons/close.svg);
-        background-color: #98A2B3;
-        -webkit-mask-position: center;
-        mask-position: center;
-        -webkit-mask-repeat: no-repeat;
-        mask-repeat: no-repeat;
-        -webkit-mask-size: contain;
-        mask-size: contain;
-    }
 }
 
 .mat-icon {
-    width: 18px;
-    height: 18px;
-    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
     display: inline-block;
     fill: currentColor;
 }
@@ -92,4 +82,38 @@
     direction: ltr;
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
+}
+:host(.app-mat-tags-with-avatar) {
+  .mat-chip {
+    display: inline-flex;
+    align-items: center;
+    grid-gap: 4px;
+    gap: 4px;
+    color: $gray-600;
+    background-color: $white;
+    border: 1px solid $gray-200;
+    box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+  }
+
+  ::ng-deep .app-mat-tags-with-avatar__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin-right: 4px;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+    color: $white;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+}
+:host(.app-mat-tags-with-avatar--lg) {
+  .mat-chip {
+    height: 32px;
+    padding: 8px;
+  }
 }

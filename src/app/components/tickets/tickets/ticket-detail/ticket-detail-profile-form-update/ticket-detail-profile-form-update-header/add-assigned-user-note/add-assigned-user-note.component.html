@@ -1,6 +1,7 @@
 <div class="add-assigned-user-note">
     <span [textContent]="type == 'PUBLIC' ? 'Public note - Notify to:' : 'Private note - Notify to:'"></span>
     <app-mat-form-field
+        class="app-mat-tags-without-border"
         #formField
         ngbDropdown
         [autoClose]="'outside'"
@@ -16,20 +17,20 @@
             (onChangeItems)="formField.checkSelectedItems(selectedUsers)"
         >
             <app-mat-chip
-                class="selected-tag-user"
+                class="app-mat-tags-with-avatar app-mat-tags-with-avatar--lg"
                 *ngFor="let user of selectedUsers; let i = index"
                 [isRemove]="removable"
                 (onClose)="remove(i)"
             >
-                <div class="assigne-user-item">
+                <div class="qt-df qt-ai-c">
                     <div
-                        class="assigne-user-avatar"
+                        class="app-mat-tags-with-avatar__avatar"
                         *ngIf="!user.isCustomEmail"
                         [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
                         [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
                     ></div>
                     <div
-                        class="assigne-user-avatar"
+                        class="app-mat-tags-with-avatar__avatar"
                         *ngIf="user.isCustomEmail"
                         [textContent]="user.recipient[0]"
                         [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"

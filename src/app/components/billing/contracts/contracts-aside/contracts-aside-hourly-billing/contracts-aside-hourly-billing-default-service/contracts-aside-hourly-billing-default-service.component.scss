@@ -1,18 +1,20 @@
+@import './src/assets/styles/variable';
+
 .qt-tooltip-error {
-    left: 0px;
+    left: 0;
 }
 .service-table__name,.service-table__rate {
     position: relative;
 }
 .service-disabled {
     td {
-        background-color: #F9FAFB;
+        background-color: $gray-50;
         input {
-            background-color: #F9FAFB;
+            background-color: $gray-50;
         }
         ::ng-deep app-taxes {
             input {
-                background-color: #F9FAFB !important;
+                background-color: $gray-50 !important;
             }
         }
     }
@@ -20,7 +22,7 @@
 .service-table__rate {
     .qt-tooltip-error {
         left: unset;
-        right: 0px;
+        right: 0;
         width: 290px !important;
         max-width: 290px !important;
         &::before {

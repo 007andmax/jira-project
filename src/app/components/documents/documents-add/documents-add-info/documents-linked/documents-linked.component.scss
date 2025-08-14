@@ -128,39 +128,7 @@
     cursor: pointer;
 }
 ::ng-deep.documents-linkeds-body {
-    .mat-form-field-wrapper,
-    mat-form-field {
-        margin-top: 0px !important;
-    }
-
-    .mat-form-field-infix {
-        min-height: 40px !important;
-        padding: 0 !important;
-
-        &::before {
-            top: 11px;
-            display: none !important;
-        }
-
-        input {
-            height: 38px !important;
-            text-indent: 15px;
-            box-shadow: unset;
-            border-color: transparent;
-            margin: 0px;
-        }
-    }
-    .mat-chip-list-wrapper {
-        margin: 0;
-    }
-    .mat-standard-chip.mat-chip-with-trailing-icon {
-        z-index: 1;
-    }
-    .mat-standard-chip {
-        margin: 2px;
-    }
-    .mat-form-field-label {
-        top: 12px;
-        padding: 8px 10px 9px 10px !important;
-    }
+  .mat-form-field-label {
+    padding: 13px 14px;
+  }
 }

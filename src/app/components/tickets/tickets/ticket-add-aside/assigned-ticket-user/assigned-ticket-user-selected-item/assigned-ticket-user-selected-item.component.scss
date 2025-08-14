@@ -1,13 +1,14 @@
 @import "./src/assets/styles/variable";
- .assigned-ticket-user__item {
+
+.assigned-ticket-user__item {
      padding: 6px 8px;
      border-radius: 6px;
-     border: 1px solid #EAECF0;
+     border: 1px solid $gray-200;
      display: flex;
      align-items: center;
      position: relative;
      cursor: pointer;
-     margin: 0px 8px 8px 0px;
+     margin: 0 8px 8px 0;
 
      .assigned-ticket-user__checkmark {
          width: 100%;
@@ -21,8 +22,8 @@
          &:before {
              position: absolute;
              content: "";
-             width: 20px;
-             height: 20px;
+             width: 16px;
+             height: 16px;
              border: 1px solid $gray-200;
              background: $white;
              border-radius: 50%;
@@ -55,8 +56,8 @@
      font-weight: 400;
  }
 .default-user-avatar {
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 16px;
     color: $white;
     background-size: cover !important;
     background-position: center !important;

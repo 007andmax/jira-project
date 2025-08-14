@@ -73,12 +73,6 @@
     }
   }
 
-  .documents-filter-tags {
-    .mat-form-field-label {
-      top: 10px;
-    }
-  }
-
   .documents-table__title-menu {
     display: flex;
     align-items: center;
@@ -302,45 +296,6 @@ document-preview,
     &.fr-fir {
       margin-right: 0;
       text-align: right;
-    }
-  }
-
-  .documents-filter-tags {
-    .icn-remove-old {
-      transform: translateY(0px);
-    }
-  }
-}
-.documents-create {
-  .documents-filter-tags {
-    .mat-form-field-infix {
-      min-height: 40px;
-      padding: 0px 0px 0px 36px !important;
-      position: relative;
-      &:before {
-        left: 12px;
-        top: 9px;
-        position: absolute;
-        content: "";
-        width: 20px;
-        height: 20px;
-         background: url("/assets/img/icons/tags.svg");
-      }
-      .mat-form-field-label {
-        left: 25px;
-      }
-    }
-    .mat-chip-list-wrapper {
-      margin: 0;
-    }
-    .mat-standard-chip.mat-chip-with-trailing-icon {
-      z-index: 1;
-    }
-    .mat-standard-chip {
-      margin: 2px;
-    }
-    .mat-form-field-label {
-      top: 12px;
     }
   }
 }

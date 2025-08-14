@@ -622,10 +622,8 @@ app-company-devices-custom-drop-down {
         content: "";
         width: 20px;
         height: 20px;
-        background: url("/assets/img/icons/tags.svg");
+        mask-image: url('/assets/img/icons/tags.svg');
+        background-color: $gray-400;
       }
-}
-  .mat-form-field-label {
-  padding: 12px 10px 10px 36px !important;
   }
 }

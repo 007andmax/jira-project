@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="light-dropdown ticket-edit-tags">
-        <app-mat-form-field ngbDropdownAnchor>
+        <app-mat-form-field ngbDropdownAnchor class="app-mat-tags-without-border">
             <app-mat-chip-list #chipList>
                 <span class="tag-icon"></span>
                 <app-mat-chip
@@ -34,7 +34,7 @@
                     ngbDropdownToggle
                     #userInput
                     placeholder="Type characters and hit tab"
-                    class="pointer"
+                    class="pointer app-mat-tags-without-border__input"
                     autocomplete="new-password"
                     [formControl]="tagCtrl"
                     (input)="onSearch($event)"
