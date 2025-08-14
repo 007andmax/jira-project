@@ -43,9 +43,19 @@ describe('ContractsAsideProductServicePreviewComponent unit test', () => {
     const com = fixture.debugElement.componentInstance;
     expect(com.getDiscount({ discountAmount: 300, discountType: "FIXED" })).toEqual(`300 $`);
   });
-  it('check "getDiscount"', () => {
+  it('check "getDuration"', () => {
     const fixture = TestBed.createComponent(ContractsAsideProductServicePreviewComponent);
     const com = fixture.debugElement.componentInstance;
-    expect(com.getDiscount({ discountAmount: 300, discountType: "FIXED" })).toEqual(`300 $`);
+    expect(com.getDuration(2)).toEqual("02:00 hr(s)");
+  });
+  it('check "getSubTotal"', () => {
+    const fixture = TestBed.createComponent(ContractsAsideProductServicePreviewComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.getSubTotal({ quantity: 1, salePrice: 100, discountAmount: 100 })).toEqual("0.00");
+  });
+  it('check "calculateDiscount"', () => {
+    const fixture = TestBed.createComponent(ContractsAsideProductServicePreviewComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.calculateDiscount({ quantity: 1, salePrice: 100, discountAmount: 100 })).toEqual(100);
   });
 });
