@@ -597,10 +597,12 @@ ngb-typeahead-window {
   top: 10px;
   right: 10px;
   left: auto;
-  width: 20px;
-  height: 20px;
-  border: 0.1rem solid $gray-600;
-  border-top-color: $gray-400;
+
+  &::before {
+    width: 20px;
+    height: 20px;
+    border-width: 2px;
+  }
 }
 .left-panel-closed {
   .quotes__header {
@@ -2212,10 +2214,12 @@ ngb-typeahead-window {
   top: 10px;
   right: 10px;
   left: auto;
-  width: 20px;
-  height: 20px;
-  border: 0.1rem solid $gray-600;
-  border-top-color: $gray-400;
+
+  &::before {
+    width: 20px;
+    height: 20px;
+    border-width: 2px;
+  }
 }
 
 .invalid-feedback {
