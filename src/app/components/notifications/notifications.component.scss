@@ -3,7 +3,7 @@
 
  
 .qt-aside-modern {
-    width: 480px !important;
+    width: 400px !important;
     border-radius: 0 0 12px 12px;
     z-index: 10;
     &::after {
@@ -25,6 +25,8 @@
             font-weight: 500;
             font-size: 12px;
             color: $gray-700;
+            min-width: 24px;
+            height: 20px;
         }
         .--active {
             color: $gray-900;
@@ -45,7 +47,7 @@
 }
 .qt-aside-modern__content {
     height: calc(100% - 64px);
-    padding: 0px 24px 24px 24px;
+    padding: 0px;
     &-empty {
         height: 100%;
         &-icon {
@@ -231,12 +233,30 @@
     z-index: 999;
 }
 .notification-item {
-    border: 1px solid $gray-200;
-    box-shadow: 0 1px 2px #1018280d;
-    border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 16px;
-    position: relative;
+    padding: 16px;
+     position: relative;
+     &:hover {
+        background-color: $gray-50;
+     }
+     &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 16px;
+        right: 16px;
+        height: 1px;
+        background-color: $gray-200;
+     }
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        min-width: 40px;
+        background-color: $gray-100;
+        border-radius: 50%;
+        position: relative;
+    }
     &__title {
         .icon__notification {
             min-height: 18px;
@@ -263,8 +283,12 @@
     }
     &__mark-read {
         position: absolute;
-        top: 6px;
-        right: 6px;
+        top: 0px;
+        right: 0px;
+        width: 8px;
+        height: 8px;
+        background-color: $red-600;
+        border-radius: 50%;
         
     }
     &__link {

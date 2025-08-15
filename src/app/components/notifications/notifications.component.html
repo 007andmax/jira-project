@@ -7,10 +7,12 @@
             <div class="qt-aside__title">Notifications</div>
         </div>
         <div class="qt-df qt-ai-c">
-            <div class="qt-df qt-ai-c">
-                <div class="qt-icon icon__mark-read qt-bg-contain qt-sz-20  qt-mr-8"></div>
+            <div
+                class="qt-df qt-ai-c"
+                *ngIf="checkMarkAsReadAll()"
+            >
+                <div class="qt-icon qt-icon__blue-light-600 icon__mark-read qt-bg-contain qt-sz-20  qt-mr-8"></div>
                 <div
-                    *ngIf="checkMarkAsReadAll()"
                     class="qt-color-info pointer qt-mr-8 qt-fs-14 qt-fw-500"
                     (click)="markAsReadAll()"
                 >
@@ -73,8 +75,12 @@
             [ngForOf]="list"
             [ngForTrackBy]="trackById"
         >
-            <div class="notification-item ">
-                <div class="notification-item__mark-read pointer">
+            <div
+                class="notification-item qt-df qt-ai-c"
+                [ngClass]="{'pointer':item.type === 'TICKET_ASSIGNED' || item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED' || item.type === 'SERVICE_COMPLETED' || item.type === 'PRODUCT_COMPLETED' || item.type === 'NOTE_CREATED' || item.type === 'QUOTE_STATUS_UPDATED'}"
+                (click)="showDetails(item)"
+            >
+                <!-- <div class="notification-item__mark-read pointer">
                     <div
                         class="qt-icon icon__mark-as-read qt-sz-20 qt-bg-contain qt-mb-8"
                         *ngIf="!item.read"
@@ -90,12 +96,28 @@
                         container="body"
                         (click)="remove(item)"
                     ></div>
-                </div>
-                <div class="notification-item__title qt-fs-14 qt-fw-600 qt-df qt-ai-fs qt-mb-8">
-                    <div class="qt-icon icon__notification qt-bg-contain  qt-mr-8"></div>
-                    {{item.title}}
+                </div> -->
+                <div class="notification-item__icon qt-mr-12">
+                    <div
+                        [ngClass]="{'icon__tickets':item.type === 'TICKET_ASSIGNED',
+                        'icon__products':item.type === 'PRODUCT_ASSIGNED' || item.type === 'PRODUCT_UPDATED',
+                        'icon__service':item.type === 'SERVICE_ASSIGNED' || item.type === 'SERVICE_UPDATED',
+                         'icon__done':item.type === 'PRODUCT_COMPLETED' || item.type === 'SERVICE_COMPLETED',
+                          'icon__edit':item.type === 'NOTE_CREATED',
+                           'icon__quotes':item.type === 'QUOTE_STATUS_UPDATED',
+                    }"
+                        class="qt-icon qt-bg-contain qt-sz-18"
+                    ></div>
+                    <div
+                        class="notification-item__mark-read"
+                        *ngIf="!item.read"
+                    ></div>
                 </div>
                 <div
+                    class="notification-item__title qt-fs-14 qt-fw-600"
+                    [textContent]="item.title"
+                ></div>
+                <!-- <div
                     class="notification-item__subject qt-df qt-ai-c qt-mb-8"
                     *ngIf="item.type === 'TICKET_ASSIGNED' || item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED' || item.type ===  'NOTE_CREATED' || item.type === 'SERVICE_COMPLETED' || item.type === 'PRODUCT_COMPLETED'"
                 >
@@ -196,7 +218,7 @@
                     (click)="editQuote(item)"
                 >
                     View Quote
-                </div>
+                </div> -->
             </div>
         </ng-template>
     </div>
