@@ -7,35 +7,43 @@
             <div class="qt-aside__title">Notifications</div>
         </div>
         <div class="qt-df qt-ai-c">
-            <div
-                *ngIf="checkMarkAsReadAll()"
-                class="qt-color-info pointer qt-mr-8 qt-fs-14 qt-fw-600"
-                (click)="markAsReadAll()"
-            >
-                Mark all as read
+            <div class="qt-df qt-ai-c">
+                <div class="qt-icon icon__mark-read qt-bg-contain qt-sz-20  qt-mr-8"></div>
+                <div
+                    *ngIf="checkMarkAsReadAll()"
+                    class="qt-color-info pointer qt-mr-8 qt-fs-14 qt-fw-500"
+                    (click)="markAsReadAll()"
+                >
+                    Mark all as read
+                </div>
             </div>
             <div
-                class="qt-aside__close-modal qt-icon icon__close"
+                class="qt-button --square-md --gray pointer"
                 (click)="closed()"
-            ></div>
+            >
+                <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+            </div>
         </div>
     </div>
-    <div class="qt-df qt-ai-c qt-jc-sb qt-mt-8 qt-pl-24 qt-pr-24 qt-pb-8 qt-fs-14 qt-fw-600">
-        <div class="qt-df qt-ai-c">
-            <div
-                class="pointer"
-                [ngClass]="{'qt-color-info':onlyUnread}"
-                [textContent]="'Unread ('+ getNotificationCounter() + ')'"
-                (click)="setOnlyUnread(true); setDefaultScoll()"
-            ></div>
-            <div
-                class="pointer qt-ml-8"
-                [ngClass]="{'qt-color-info':!onlyUnread}"
-                (click)="setOnlyUnread(false); setDefaultScoll()"
-            >
-                All
-            </div>
+    <div class="qt-df qt-ai-c qt-pl-24 qt-pr-24 qt-fs-14 qt-fw-500 qt-aside-modern__tabs">
+        <div
+            class="qt-aside-modern__tabs-item pointer qt-mr-24"
+            [ngClass]="{'--active':!onlyUnread}"
+            (click)="setOnlyUnread(false); setDefaultScoll()"
+        >
+            All
         </div>
+        <div
+            class="qt-aside-modern__tabs-item pointer qt-mr-6"
+            [ngClass]="{'--active':onlyUnread}"
+            (click)="setOnlyUnread(true); setDefaultScoll()"
+        >
+            Unread
+        </div>
+        <div
+            class="count"
+            [textContent]="getNotificationCounter()"
+        ></div>
     </div>
     <div
         #content
@@ -47,6 +55,18 @@
         [infiniteScrollDisabled]="infiniteScrollDisabled"
         (scrolled)="onScroll()"
     >
+        <div
+            class="qt-aside-modern__content-empty qt-df qt-ai-c qt-jc-c qt-fd-c"
+            *ngIf="!list || list.length === 0 && !showPreloader"
+        >
+            <div class="qt-aside-modern__content-empty-icon qt-mb-16">
+                <div class="qt-icon icon__notification qt-bg-contain qt-sz-24 pointer"></div>
+            </div>
+            <div class="qt-fs-14 qt-fw-600 qt-color-gray-900 qt-mb-4">You’re up to date</div>
+            <div class="qt-fs-14 qt-fw-400 qt-color-gray-500">
+                We’ll keep you updated on any future notifications
+            </div>
+        </div>
         <ng-template
             ngFor
             let-item
