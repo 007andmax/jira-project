@@ -61,31 +61,29 @@
                 (click)="selected(user)"
                 [ngClass]="{'--selected':isSelected(user.primaryEmail)}"
             >
-                <div class="qt-df">
+                <div class="qt-df qt-ai-c qt-w100">
                     <div
-                        class="assigne-user-avatar qt-mr-12"
+                        class="assigne-user-avatar qt-mr-8 qt-fs-0"
                         [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
                         [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
                     ></div>
-                    <div>
-                        <div class="user-name qt-mb-2">{{getFirstLastName(user)}}</div>
-                        <div class="user-description qt-mb-2">{{user.primaryEmail}}</div>
-                        <div
-                            class="qt-df qt-ai-c"
-                            *ngIf="selectedClient && getJobTitleDto(user)"
-                        >
-                            <div class="qt-icon icon__permission-role qt-sz-16 qt-mr-4"></div>
-                            <span
-                                class="user-description"
-                                [textContent]="getJobTitleDto(user).name"
-                            ></span>
-                        </div>
-                    </div>
-                </div>
-                <i
+                  <div class="user-name ellipsis">{{getFirstLastName(user)}}</div>
+                  <div class="user-description qt-mr-4 ellipsis">{{user.primaryEmail}}</div>
+                  <div
+                    class="qt-df qt-ai-c"
+                    *ngIf="selectedClient && getJobTitleDto(user)"
+                  >
+                    <div class="qt-icon icon__permission-role qt-sz-16 qt-mr-4"></div>
+                    <span
+                      class="user-description"
+                      [textContent]="getJobTitleDto(user).name"
+                    ></span>
+                  </div>
+                  <i
                     *ngIf="isSelected(user.primaryEmail)"
-                    class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
-                ></i>
+                    class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto qt-fs-0"
+                  ></i>
+                </div>
             </div>
         </ng-template>
         <ng-template
@@ -100,20 +98,18 @@
                 (click)="selected(user)"
                 [ngClass]="{'--selected':isSelected(user.primaryEmail)}"
             >
-                <div class="qt-df">
+                <div class="qt-df qt-ai-c qt-w100">
                     <div
-                        class="assigne-user-avatar qt-mr-12"
+                        class="assigne-user-avatar qt-mr-8 qt-fs-0"
                         [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
                         [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
                     ></div>
-                    <div>
-                        <div class="user-name qt-mb-2">{{getFirstLastName(user)}}</div>
-                        <div class="user-description qt-mb-2">{{user.primaryEmail}}</div>
-                    </div>
+                  <div class="user-name">{{getFirstLastName(user)}}</div>
+                  <div class="user-description qt-mr-4">{{user.primaryEmail}}</div>
                 </div>
                 <i
                     *ngIf="isSelected(user.primaryEmail)"
-                    class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                    class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto qt-fs-0"
                 ></i>
             </div>
         </ng-template>
