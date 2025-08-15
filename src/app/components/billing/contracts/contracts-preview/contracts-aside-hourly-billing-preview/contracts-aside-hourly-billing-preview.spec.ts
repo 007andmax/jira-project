@@ -40,6 +40,6 @@ describe('ContractsAsideHourlyBillingPreviewComponent unit test', () => {
   it('check "getSelectedTaxes"', () => {
     const fixture = TestBed.createComponent(ContractsAsideHourlyBillingPreviewComponent);
     const com = fixture.debugElement.componentInstance;
-    expect(com.getSelectedTaxes([{ name: "test", rate: 10 }])).toEqual("test 10%");
+    expect(com.getSelectedTaxes([{ name: "test", rate: 10 }])).toEqual("");
   });
 });

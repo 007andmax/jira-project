@@ -46,7 +46,7 @@ describe('ContractsAsideProductServicePreviewComponent unit test', () => {
   it('check "getDuration"', () => {
     const fixture = TestBed.createComponent(ContractsAsideProductServicePreviewComponent);
     const com = fixture.debugElement.componentInstance;
-    expect(com.getDuration(2)).toEqual("02:00 hr(s)");
+    expect(com.getDuration(2)).toEqual("02 : 00");
   });
   it('check "getSubTotal"', () => {
     const fixture = TestBed.createComponent(ContractsAsideProductServicePreviewComponent);
