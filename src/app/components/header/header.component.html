@@ -3,34 +3,35 @@
 </div>
 <div class="nav-header__rigth-side">
     <div ngbDropdown>
-        <div class="actions-body">
+        <div class="actions-body qt-mr-20 qt-pr-20">
             <div
                 id="dropdownCreate"
                 ngbDropdownToggle
-                class="nav-header__add-btn tooltip-max--content qt-df qt-ai-c qt-jc-c"
+                class="nav-header__add-btn tooltip-max--content qt-df qt-ai-c qt-jc-c qt-mr-8"
                 placement="left"
                 ngbTooltip="Quick Create"
             >
                 <div class="qt-icon icon__add qt-icon__white qt-sz-16"></div>
             </div>
-            <div class="notifications qt-mr-24">
+            <div class="notifications qt-mr-8 pointer">
                 <div
-                    class="qt-icon icon__notification qt-bg-contain qt-sz-24 pointer"
+                    class="qt-icon icon__notification qt-bg-contain qt-sz-20 "
                     (click)="showNotifications()"
                     placement="left"
                     ngbTooltip="Notifications"
                 >
                 </div>
-                <span
-                    *ngIf="getNotificationCounter() > 0"
-                    [textContent]="getNotificationCounter()"
-                ></span>
+                <span *ngIf="getNotificationCounter() > 0"></span>
             </div>
             <div
+                class="help pointer"
                 *ngIf="!customerPortalStateService.isCustomerPortal"
-                class="qt-icon icon__help qt-bg-contain qt-sz-24 pointer qt-mr-24"
-                (click)="showHelpCanterAside()"
-            ></div>
+            >
+                <div
+                    class="qt-icon icon__help qt-bg-contain qt-sz-20 "
+                    (click)="showHelpCanterAside()"
+                ></div>
+            </div>
         </div>
         <ul
             class="qt-dropdown-menu"

@@ -128,6 +128,7 @@ export class NotificationsComponent {
     return this.notificationsStateService.getUnreadCount();
   }
   closed() {
+    this.onlyUnread = true;
     this.opened = false;
     this.showPreloader = false;
     this.infiniteScrollDisabled = true;

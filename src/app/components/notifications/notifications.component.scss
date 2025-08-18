@@ -4,15 +4,15 @@
  
 .qt-aside-modern {
     width: 400px !important;
-    border-radius: 0 0 12px 12px;
+    border-radius:  12px;
     z-index: 10;
-    &::after {
-            display: none !important;
-    }
+    height: calc(100% - 28px);
+    overflow: hidden;
     &__header {
        background-color: $white;
     }
     &__tabs {
+        background-color: $white;
         border-bottom: 1px solid $gray-200;
         &-item {
             padding: 14px 0px;
@@ -46,7 +46,7 @@
     }
 }
 .qt-aside-modern__content {
-    height: calc(100% - 64px);
+    height: calc(100% - 102px);
     padding: 0px;
     &-empty {
         height: 100%;
@@ -237,6 +237,9 @@
      position: relative;
      &:hover {
         background-color: $gray-50;
+        &__delete {
+            display: block;
+        }
      }
      &::after {
         content: "";
@@ -296,5 +299,13 @@
     }
     &__note {
         position: relative;
+    }
+    &__delete {
+        display: none;
+        position: absolute;
+        right: 16px;
+        top:calc(50% - 12px);
+        width: 24px;
+        height: 24px;
     }
 }
