@@ -80,6 +80,10 @@ export class UsersService {
     return this.http.get(this.apiUrl + 'users/current');
   }
 
+  public isAuthorized() {
+    return this.http.get(this.apiUrl + 'users/isAuthorized');
+  }
+
   public getFilters(page, marketing) {
     return this.http.get(this.apiUrl + `filters/user/all?&size=30&page=${page}&marketing=${marketing}`);
   }

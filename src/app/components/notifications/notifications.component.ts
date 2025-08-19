@@ -92,7 +92,6 @@ export class NotificationsComponent {
     this.quoteStateService.setPreview({ id: item.saleQuote.id });
   }
   public onScroll() {
-    console.log("onScroll");
     this.infiniteScrollDisabled = true;
     this.getNotifications();
   }

@@ -4,17 +4,6 @@
     margin-top: 6px;
     width: 100%;
 }
-
-.title-filter {
-    color: $gray-500;
-    font-size: 13px;
-    font-weight: 500;
-}
-
-.light-dropdown {
-    padding-top: 16px !important;
-}
-
 .clip-text {
     max-width: 230px;
     text-overflow: ellipsis;
@@ -23,8 +12,8 @@
 }
 .assigne-user-avatar {
   flex-shrink: 0;
-    height: 20px;
-    width: 20px;
+    height: 16px;
+    width: 16px;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -1,5 +1,5 @@
 <div
-    class="qt-input-block --required"
+    class="qt-input-block --required app-mat-tags-without-border"
     ngbDropdown
     container="body"
     (openChange)="onCloseDropDown($event)"
@@ -16,23 +16,23 @@
         </div>
     </div>
     <div
-        class="device-user"
+        class=""
         [ngClass]="{'has-placeholder': !selectedDevice}"
     >
         <span
-            class="placeholder-detail-ticket"
+            class="placeholder-detail-ticket app-mat-tags-without-border__placeholder"
             *ngIf="!selectedDevice"
         >
             Select device
         </span>
         <div
-            class="selected-user"
+            class="selected-user app-mat-tags-without-border__tag-with-avatar"
             *ngIf="selectedDevice"
         >
-            <i class="qt-icon icon__monitor qt-sz-16 qt-bg-contain qt-mr-4"></i>
+            <i class="qt-icon icon__monitor qt-dib qt-sz-16 qt-bg-contain qt-mr-4"></i>
             {{getLabelDevice(selectedDevice)}}
             <i
-                class="icn-sm qt-icon icon__close qt-icon__gray-400 qt-ml-4 pointer"
+                class="qt-sz-16 qt-icon icon__close qt-dib qt-icon__gray-400 qt-ml-4 pointer"
                 *ngIf="!customerPortalStateService.isCustomerPortal && ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
                 (click)="removeItem()"
             ></i>

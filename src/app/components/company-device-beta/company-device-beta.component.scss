@@ -224,8 +224,8 @@ input.mat-chip-input {
 
 .opt-icon.Asset.Tag,
 .opt-icon.Tag {
-  background-image: url("/assets/img/icons/tags.svg");
-  background-repeat: no-repeat;
+  mask-image: url('/assets/img/icons/tags.svg');
+  background-color: $gray-400;
 }
 
 .opt-icon.Manufacturer {

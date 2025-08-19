@@ -145,8 +145,8 @@ input.qt-dropdown-input {
   }
 
   &__label {
-    font-size: 13px;
-    line-height: 16px;
+    font-size: 14px;
+    line-height: 17px;
     font-weight: 500;
     color: $gray-900;
     margin-bottom: 8px;
@@ -168,7 +168,7 @@ input.qt-dropdown-input {
   mat-error,app-mat-error {
     &.qt-tooltip-error {
       position: absolute;
-      color: #D92D20;
+      color: $red-600;
       font-weight: 400;
       font-size: 12px;
       line-height: 15px;
@@ -180,7 +180,7 @@ input.qt-dropdown-input {
     }
   }
   &__input:not(.qt-editable-input),
-  input:not(.qt-editable-input) {
+  input:not(.qt-editable-input):not(.mat-chip-input) {
     height: 40px;
     width: 100%;
     padding: 11px 14px;
@@ -359,11 +359,6 @@ input.qt-dropdown-input {
       left: calc(50% - 9px);
     }
   }
-  //&:not(.--gray):not(.--outline):not(.--transparent):not(.qt-button-filter --gray) { // TODO check
-  //  &:hover {
-  //    color: $white;
-  //  }
-  //}
   &:focus {
     outline: 2px solid rgba($blue-light-600, 0.1);
     background-color: $blue-light-600;

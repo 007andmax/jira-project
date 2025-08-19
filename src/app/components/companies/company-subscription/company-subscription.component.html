@@ -1,10 +1,10 @@
-  <div class="grey-dropdown" ngbDropdown container="body">
+  <div class="grey-dropdown custom-app-tags" ngbDropdown container="body">
     <i class="icn-sm qt-icon icon__arrow-down report-caret-icon"></i>
-    <div class="user-subscription"
+    <div class="user-subscription custom-app-tags__row"
          id="dropdownServices"
          ngbDropdownToggle>
          <ng-template ngFor let-item [ngForOf]="subscriptions" let-i="index"  >
-            <div *ngIf="item.selected" [textContent]="item.title">
+            <div class="custom-app-tags__item" *ngIf="item.selected" [textContent]="item.title">
                  <!--(click)="remove(i)"-->
             </div>
           </ng-template>

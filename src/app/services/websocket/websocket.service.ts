@@ -63,6 +63,7 @@ export class WebsocketService {
   isInit: boolean = false;
   isResetWebSocket: boolean = false;
   ws;
+  blockWebSocket: boolean = false;
   /**
    * Users api service constructor
    * @param {UsersService} usersService Service to work users
@@ -168,10 +169,15 @@ export class WebsocketService {
       console.log("debug", data);
     }
     this.stompClient.onWebSocketClose = (data) => {
-      setTimeout(() => {
-        this.onInitConnect();
-      }, 20000);
-    }
+      this.usersService.isAuthorized().subscribe(res => {
+        setTimeout(() => {
+          this.onInitConnect();
+        }, 20000);
+      })
+    };
+    this.appService.onSessionScreen.subscribe(data => {
+      this.blockWebSocket = data;
+    })
   }
   onInitSuperAdminConnect() {
     this.ws = new SockJS(this.serverUrl);
@@ -195,7 +201,6 @@ export class WebsocketService {
   }
   connect() {
     this.stompClient.connect({}, () => {
-
     });
     this.stompClient.activate();
   }

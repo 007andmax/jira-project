@@ -36,13 +36,6 @@ describe('MarketingComponent unit test', () => {
     }).compileComponents();
 
   });
-
-  it('check "onCloseFilters"', () => {
-    const fixture = TestBed.createComponent(MarketingComponent);
-    const com = fixture.debugElement.componentInstance;
-    com.onCloseFilters();
-    expect(com.header.toggleFilter).toEqual(false);
-  });
   it('check "setFilters"', () => {
     const fixture = TestBed.createComponent(MarketingComponent);
     const com = fixture.debugElement.componentInstance;

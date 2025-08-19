@@ -211,17 +211,16 @@
         >
             <app-mat-chip-list class="example-chip">
                 <app-mat-chip
-                    class="selected-tag-user"
+                    class="app-mat-tags-with-avatar app-mat-tags-with-avatar--lg"
                     *ngFor="let user of contractsBlockTime.shares; let i = index"
                 >
-                    <div class="assigne-user-item">
+                    <div class="qt-df qt-ai-c">
                         <div
-                            class="assigne-user-avatar"
+                            class="app-mat-tags-with-avatar__avatar"
                             [textContent]="getAssignedUserNameForAvatar(getUser(user.userId))"
                             [ngStyle]="{'background': getStyleAvatar(getUser(user.userId)),'background-size': 'contain'}"
                         ></div>
                         <div
-                            class="assigne-user-name"
                             [textContent]="getUserName(getUser(user.userId))"
                         ></div>
                     </div>

@@ -1,11 +1,12 @@
 <div
-    class="qt-temporary-col-fix --required filter-tags-body"
+    class="app-mat-tags --required filter-tags-body"
     ngbDropdown
     (openChange)="openChange($event)"
     #dp="ngbDropdown"
     ngbDropdownAnchor
 >
     <app-mat-form-field
+        class="app-mat-form-field--with-label"
         [ngClass]="{'hidde-label' :!showLabel}"
         #formField
         [placeholder]="'Search By Tags'"

@@ -17,38 +17,6 @@ companies-filter {
     border-radius: 10px;
   }
 }
-.list-filters {
-  display: none;
-  margin: -8px -8px 8px -8px;
-  ::ng-deep.mat-form-field-infix {
-    overflow: auto;
-    border: none;
-    border-radius: 0;
-  }
-  ::ng-deep .mat-form-field {
-    width: 100%;
-    background: $white;
-  }
-  ::ng-deep .mat-form-field-flex {
-    padding-left: 8px;
-  }
-  ::ng-deep .mat-form-field-underline,
-  .mat-form-field-subscript-wrapper {
-    display: none;
-  }
-  ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 0;
-  }
-  ::ng-deep.mat-chip-list-wrapper {
-    width: fit-content;
-    margin: 0;
-    flex-wrap: unset;
-    .mat-standard-chip {
-      margin: 0 8px 0 0;
-      padding: 4px 6px 3px 8px;
-    }
-  }
-}
 .search-clear {
   width: 12px;
   height: 12px;

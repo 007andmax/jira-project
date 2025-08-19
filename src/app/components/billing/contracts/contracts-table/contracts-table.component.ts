@@ -59,7 +59,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
     let onFastAdd = this.contractsStateService.onFastAdd.subscribe(data => {
-      this.addContract(data);
+      if (this.companyContracts && this.companyContracts.id == data.companyId || !this.companyContracts) this.addContract(data);
     })
     this.sub.add(onFastAdd);
     let onFastEdit = this.contractsStateService.onFastEdit.subscribe(data => {
@@ -68,7 +68,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     this.sub.add(onFastEdit);
     let changeContractsArray = this.contractsRealTimeService.changeContractsArray.subscribe(data => {
       if (data.action === 'SERVICE_AGREEMENT_SAVED') {
-        this.addContract(data.data);
+        if (this.companyContracts && this.companyContracts.id == data.data.companyId || !this.companyContracts) this.addContract(data.data);
       } else if (data.action === 'SERVICE_AGREEMENT_DELETED') {
         this.removeContract(data.data.id);
       }
