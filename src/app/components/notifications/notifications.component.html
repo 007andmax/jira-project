@@ -121,10 +121,13 @@
                         *ngIf="!item.read"
                     ></div>
                 </div>
-                <div
-                    class="notification-item__title qt-fs-14"
-                    [innerHTML]="item.title"
-                ></div>
+                <div class="notification-item__title qt-fs-14">
+                    <span [innerHTML]="item.title"></span>
+                    <span
+                        class="qt-ml-16 notification-item__date"
+                        [textContent]="item.date_text"
+                    ></span>
+                </div>
                 <!-- <div
                     class="notification-item__subject qt-df qt-ai-c qt-mb-8"
                     *ngIf="item.type === 'TICKET_ASSIGNED' || item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED' || item.type ===  'NOTE_CREATED' || item.type === 'SERVICE_COMPLETED' || item.type === 'PRODUCT_COMPLETED'"

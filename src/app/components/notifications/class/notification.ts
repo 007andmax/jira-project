@@ -1,31 +1,29 @@
-import { NotificationProduct } from "./notification-product";
-import { NotificationQuote } from "./notification-quote";
-import { NotificationService } from "./notification-service";
-import { NotificationTicket } from "./notification-ticket";
-
 export class Notification {
     "id": string;
     "date": number;
     "title": string;
-    "note": string;
     "type": string;
     "read": boolean;
-    "ticket": NotificationTicket;
-    "service": NotificationService;
-    "product": NotificationProduct;
-    saleQuote: NotificationQuote;
-    shortNote: string;
-    showMoreNote: boolean = false;
+    ticketId: string;
+    saleQuoteId: string;
+    date_text: string;
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];
         }
-        this.ticket = new NotificationTicket(data.ticket);
-        this.service = new NotificationService(data.service);
-        this.product = new NotificationProduct(data.product);
-        this.shortNote = this.note && this.note.length > 200 ? this.note.substring(0, 200) + '...' : null;
-        this.saleQuote = new NotificationQuote(data.saleQuote);
-        if (!this.shortNote) this.showMoreNote = true;
-
+        if (this.calculateLastUpdatedAt() < 3600000) {
+            this.date_text = Math.floor(Math.abs(this.calculateLastUpdatedAt() / 60000)) + " mins ago";
+        } else if (this.calculateLastUpdatedAt() < 3600000 * 24) {
+            let hours = Math.floor(this.calculateLastUpdatedAt() / 3600000);
+            let minutes = Math.round((this.calculateLastUpdatedAt() - (hours * 3600000)) / 60000);
+            this.date_text = hours + "h " + minutes + " mins ago"
+        } else {
+            this.date_text = Math.floor(Math.abs(this.calculateLastUpdatedAt() / (3600000 * 24))) + " days ago";
+        }
     }
+    public calculateLastUpdatedAt() {
+        var today = Date.now();
+        var lastUpdatedAt = new Date(this.date).getTime();
+        return (today - lastUpdatedAt);
+    };
 }

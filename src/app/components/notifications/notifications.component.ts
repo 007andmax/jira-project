@@ -80,16 +80,18 @@ export class NotificationsComponent {
     })
   }
   parsedate(date) {
+
     return moment(date).format('DD MMM YYYY');
   }
   editTicket(item) {
     if (!item.read) this.markAsRead(item)
-    this.ticketStateService.setTicketRoutingId(item.ticket.id);
-    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${item.ticket.id}`;
+    this.ticketStateService.setTicketRoutingId(item.ticketId);
+    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${item.ticketId}`;
     window.open(url, '_blank');
   }
   editQuote(item) {
-    this.quoteStateService.setPreview({ id: item.saleQuote.id });
+    console.log("editQuote");
+    this.quoteStateService.setPreview({ id: item.saleQuoteId });
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;
@@ -122,8 +124,9 @@ export class NotificationsComponent {
     })
   }
   showDetails(item) {
-    if (item.type !== 'QUOTE_STATUS_UPDATED') this.editTicket(item);
-    if (item.type === 'QUOTE_STATUS_UPDATED') this.editQuote(item);
+    console.log(item.type);
+    if (item.type != 'QUOTE_STATUS_UPDATED') this.editTicket(item);
+    if (item.type == 'QUOTE_STATUS_UPDATED') this.editQuote(item);
   }
   getNotificationCounter() {
     return this.notificationsStateService.getUnreadCount();

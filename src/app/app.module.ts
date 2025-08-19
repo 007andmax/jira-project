@@ -155,6 +155,7 @@ import { CompanyDevicesAssestTypeDropDownModule } from './components/company-dev
 import { CannedResponsesAsideModule } from './components/setting/ticket-settings-page/canned-responses/canned-responses-aside/canned-responses-aside.module';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { NotificationsModule } from './components/notifications/notifications.module';
+import { QuoteAsidePreviewModule } from './components/billing/quotes/quote-aside-preview/quote-aside-preview.module';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -241,7 +242,8 @@ declare var $: any;
         TicketDetailNoteModalModule,
         CompanyDevicesAssestTypeDropDownModule,
         CannedResponsesAsideModule,
-        NotificationsModule
+        NotificationsModule,
+        QuoteAsidePreviewModule
     ],
     providers: [
         {

@@ -232,7 +232,7 @@
     right: 0px;
     z-index: 999;
 }
-.notification-item {
+::ng-deep.notification-item {
     padding: 16px;
      position: relative;
      &:hover {
@@ -261,9 +261,14 @@
         position: relative;
     }
     &__title {
+        color: $gray-500;
         .icon__notification {
             min-height: 18px;
             min-width: 18px;
+        }
+        b {
+            color: $gray-900;
+            font-weight: 600;
         }
     }
     &__product-name {
@@ -309,5 +314,18 @@
         height: 24px;
         align-items: center;
         justify-content: center;
+    }
+    &__date {
+        position: relative;
+        &::after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background-color: $gray-500;
+            top: calc(50% - 1px);
+            left: -8px;
+        }
     }
 }
