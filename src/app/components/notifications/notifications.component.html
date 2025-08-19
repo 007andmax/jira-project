@@ -76,8 +76,7 @@
             [ngForTrackBy]="trackById"
         >
             <div
-                class="notification-item qt-df qt-ai-c"
-                [ngClass]="{'pointer':item.type === 'TICKET_ASSIGNED' || item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED' || item.type === 'SERVICE_COMPLETED' || item.type === 'PRODUCT_COMPLETED' || item.type === 'NOTE_CREATED' || item.type === 'QUOTE_STATUS_UPDATED'}"
+                class="notification-item qt-df qt-ai-c pointer"
                 (click)="showDetails(item)"
             >
                 <div

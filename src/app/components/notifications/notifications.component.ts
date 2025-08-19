@@ -121,7 +121,7 @@ export class NotificationsComponent {
     })
   }
   showDetails(item) {
-    if (item.type === 'TICKET_ASSIGNED' || item.type === 'PRODUCT_UPDATED' || item.type === 'SERVICE_UPDATED' || item.type === 'SERVICE_COMPLETED' || item.type === 'PRODUCT_COMPLETED' || item.type === 'NOTE_CREATED') this.editTicket(item);
+    if (item.type !== 'QUOTE_STATUS_UPDATED') this.editTicket(item);
     if (item.type === 'QUOTE_STATUS_UPDATED') this.editQuote(item);
   }
   getNotificationCounter() {

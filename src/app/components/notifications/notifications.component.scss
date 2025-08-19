@@ -237,8 +237,8 @@
      position: relative;
      &:hover {
         background-color: $gray-50;
-        &__delete {
-            display: block;
+        .notification-item__delete {
+            display: flex;
         }
      }
      &::after {
@@ -307,5 +307,7 @@
         top:calc(50% - 12px);
         width: 24px;
         height: 24px;
+        align-items: center;
+        justify-content: center;
     }
 }

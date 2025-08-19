@@ -13,14 +13,13 @@
             >
                 <div class="qt-icon icon__add qt-icon__white qt-sz-16"></div>
             </div>
-            <div class="notifications qt-mr-8 pointer">
-                <div
-                    class="qt-icon icon__notification qt-bg-contain qt-sz-20 "
-                    (click)="showNotifications()"
-                    placement="left"
-                    ngbTooltip="Notifications"
-                >
-                </div>
+            <div
+                class="notifications qt-mr-8 pointer"
+                (click)="showNotifications()"
+                placement="left"
+                ngbTooltip="Notifications"
+            >
+                <div class="qt-icon icon__notification qt-bg-contain qt-sz-20 "></div>
                 <span *ngIf="getNotificationCounter() > 0"></span>
             </div>
             <div
