@@ -64,7 +64,9 @@ export class NotificationsComponent {
       }
     })
   }
-  remove(item) {
+  remove(event, item) {
+    event.stopPropagation();
+    event.preventDefault();
     this.notificationsService.remove(item.id).subscribe(res => {
 
     })
