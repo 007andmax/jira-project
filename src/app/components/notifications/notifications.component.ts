@@ -122,10 +122,7 @@ export class NotificationsComponent {
     })
   }
   showDetails(item) {
-<<<<<<< HEAD
-=======
     if (!item.read) this.markAsRead(item)
->>>>>>> QT-1328
     if (item.type != 'QUOTE_STATUS_UPDATED') this.editTicket(item);
     if (item.type == 'QUOTE_STATUS_UPDATED') this.editQuote(item);
   }
