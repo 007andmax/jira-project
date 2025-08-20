@@ -84,7 +84,6 @@ export class NotificationsComponent {
     return moment(date).format('DD MMM YYYY');
   }
   editTicket(item) {
-    if (!item.read) this.markAsRead(item)
     this.ticketStateService.setTicketRoutingId(item.ticketId);
     const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${item.ticketId}`;
     window.open(url, '_blank');
@@ -124,7 +123,7 @@ export class NotificationsComponent {
     })
   }
   showDetails(item) {
-    console.log(item.type);
+    if (!item.read) this.markAsRead(item)
     if (item.type != 'QUOTE_STATUS_UPDATED') this.editTicket(item);
     if (item.type == 'QUOTE_STATUS_UPDATED') this.editQuote(item);
   }
