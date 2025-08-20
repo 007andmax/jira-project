@@ -87,4 +87,48 @@ describe('CompanyAddAsideFullComponent unit test', () => {
     com.onSelectJobTitle({ id: 1, name: 'Test Job' });
     expect(com.company.contacts[0].customerCompaniesInfo[0].jobTitleDto.id).toEqual(1);
   });
+  it('check "onChangePrimaryEmail"', () => {
+    const fixture = TestBed.createComponent(CompanyAddAsideFullComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.company.contacts = [{ primaryEmail: '' }];
+    com.onChangePrimaryEmail();
+    expect(com.validate.primaryContactEmail).toEqual(false);
+  });
+  it('check "onSelectPaymentTerms"', () => {
+    const fixture = TestBed.createComponent(CompanyAddAsideFullComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onSelectPaymentTerms({ value: 'Net 30' });
+    expect(com.company.paymentTerms).toEqual('Net 30');
+  });
+  it('check "onChangeTimeZone"', () => {
+    const fixture = TestBed.createComponent(CompanyAddAsideFullComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.company.addresses = [{ locale: 'UTC' }];
+    com.onChangeTimeZone(null);
+    expect(com.company.addresses[0].locale).toEqual('');
+  });
+  it('check "onSelectPaymentMethod"', () => {
+    const fixture = TestBed.createComponent(CompanyAddAsideFullComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onSelectPaymentMethod({ value: 'Credit Card' });
+    expect(com.company.defaultPaymentMethod).toEqual('Credit Card');
+  });
+  it('check "onSelectServiceTypes"', () => {
+    const fixture = TestBed.createComponent(CompanyAddAsideFullComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onSelectServiceTypes({ name: 'Test Service' });
+    expect(com.company.serviceType).toEqual('Test Service');
+  });
+  it('check "onSelectTechLead"', () => {
+    const fixture = TestBed.createComponent(CompanyAddAsideFullComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onSelectTechLead({ id: 1, firstName: 'John', lastName: 'Doe' });
+    expect(com.company.techLeadId).toEqual(1);
+  });
+  it('check "onChangeTags"', () => {
+    const fixture = TestBed.createComponent(CompanyAddAsideFullComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onChangeTags(['Tag1', 'Tag2']);
+    expect(com.company.tags).toEqual(['Tag1', 'Tag2']);
+  });
 });
