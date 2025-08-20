@@ -90,7 +90,6 @@ export class NotificationsComponent {
     window.open(url, '_blank');
   }
   editQuote(item) {
-    console.log("editQuote");
     this.quoteStateService.setPreview({ id: item.saleQuoteId });
   }
   public onScroll() {
@@ -124,7 +123,6 @@ export class NotificationsComponent {
     })
   }
   showDetails(item) {
-    console.log(item.type);
     if (item.type != 'QUOTE_STATUS_UPDATED') this.editTicket(item);
     if (item.type == 'QUOTE_STATUS_UPDATED') this.editQuote(item);
   }
