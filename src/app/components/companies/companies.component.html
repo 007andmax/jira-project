@@ -5,48 +5,151 @@
         (onSelectAllCompanies)="onSelectAllCompanies($event)"
         (onSearch)="onSearch($event)"
     ></app-companies-header>
+  <div class="qt-page-list__container">
     <div class="qt-page-list__body">
-        <div class="qt-page-list__body-table-container">
-            <div
-                class="qt-page-list__body-tbody qt-table-modern companies-table"
-                [ngClass]="{'--selected':isSelectedConpanies()}"
-            >
-                <div
-                    class
-                    infiniteScroll
-                    [infiniteScrollContainer]="container"
-                    [infiniteScrollDistance]="2"
-                    [infiniteScrollThrottle]="50"
-                    [infiniteScrollDisabled]="infiniteScrollDisabled"
-                    (scrolled)="onScroll()"
-                >
-                    <ng-template
-                        ngFor
-                        let-company
-                        [ngForOf]="CompaniesList"
-                        [ngForTrackBy]="trackById"
+      <div class="qt-page-list__body-table-container">
+        <!-- Table Header -->
+        <div class="qt-page-list__header-thead-container">
+          <div class="qt-table-modern qt-page-list__header-thead">
+            <div class="qt-page-list__header-thead__row">
+              <div class="companies-table__check">
+                <div class="qt-df qt-jc-fe">
+                  <label class="qt-checkbox">
+                    <!--                        <input-->
+                    <!--                          type="checkbox"-->
+                    <!--                          class="ng-untouched ng-pristine ng-valid"-->
+                    <!--                          [(ngModel)]="selectAll"-->
+                    <!--                          (change)="toggleAllCompanies($event)"-->
+                    <!--                        >-->
+                    <input
+                      type="checkbox"
+                      class="ng-untouched ng-pristine ng-valid"
                     >
-                        <app-companies-table
-                            [showArchivedCompanies]="showArchivedCompanies"
-                            [company]="company"
-                            [devicesCounts]="devicesCounts"
-                            (onSelectCompany)="onSelectCompany($event)"
-                        ></app-companies-table>
-                    </ng-template>
-                    <div
-                        class="loading"
-                        *ngIf="showPreloader"
-                    ></div>
-                    <div
-                        class="no-exist-elements"
-                        *ngIf="!showPreloader && CompaniesList.length == 0"
-                    >
-                        We couldn't find any results
-                    </div>
+                    <span></span>
+                  </label>
                 </div>
+              </div>
+              <div
+                class="companies-table__name pointer"
+                (click)="onFilter('name')"
+              >
+                Name
+              </div>
+              <div
+                class="companies-table__client-type pointer"
+                (click)="onFilter('type')"
+              >
+                TYPE
+                <div class="qt-table-modern__sorting"></div>
+              </div>
+              <div
+                class="companies-table__address pointer"
+                (click)="onFilter('address')"
+              >
+                Shipping Address
+                <div class="qt-table-modern__sorting"></div>
+              </div>
+              <div
+                class="companies-table__primary-contact pointer"
+                (click)="onFilter('primary_contact')"
+              >
+                Primary Contact
+                <div class="qt-table-modern__sorting"></div>
+              </div>
+              <div
+                class="companies-table__email-address pointer"
+                (click)="onFilter('email')"
+              >
+                Email Address
+                <div class="qt-table-modern__sorting"></div>
+              </div>
+              <div
+                class="companies-table__tickets pointer"
+                (click)="onFilter('tickets')"
+              >
+                Tickets
+                <div class="qt-table-modern__sorting"></div>
+              </div>
+              <div
+                class="companies-table__devices pointer"
+                (click)="onFilter('devices')"
+              >
+                Devices
+                <div class="qt-table-modern__sorting"></div>
+              </div>
+              <div
+                class="companies-table__users pointer"
+                (click)="onFilter('users')"
+              >
+                Users
+                <div class="qt-table-modern__sorting"></div>
+              </div>
+              <div class="companies-table__download-btn  pointer"></div>
+              <div class="companies-table__menu pointer"></div>
             </div>
+          </div>
         </div>
+        <!-- END Table Header -->
+
+        <!-- Start Table Body -->
+        <div
+          class="qt-page-list__body-tbody qt-table-modern companies-table"
+          [ngClass]="{'--selected':isSelectedConpanies()}"
+        >
+          <div
+            class
+            infiniteScroll
+            [infiniteScrollContainer]="container"
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            [infiniteScrollDisabled]="infiniteScrollDisabled"
+            (scrolled)="onScroll()"
+          >
+            <ng-template
+              ngFor
+              let-company
+              [ngForOf]="CompaniesList"
+              [ngForTrackBy]="trackById"
+            >
+              <app-companies-table
+                [showArchivedCompanies]="showArchivedCompanies"
+                [company]="company"
+                [devicesCounts]="devicesCounts"
+                (onSelectCompany)="onSelectCompany($event)"
+              ></app-companies-table>
+            </ng-template>
+            <div
+              class="loading"
+              *ngIf="showPreloader"
+            ></div>
+            <div
+              class="no-exist-elements"
+              *ngIf="!showPreloader && CompaniesList.length == 0"
+            >
+              We couldn't find any results
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- Start Filter Aside -->
+    <div
+      class="aside-filters"
+    >
+      <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
+        <div class="aside-filters-header__title">Filters</div>
+        <div
+          class="qt-button --square-md --gray pointer"
+        >
+          <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+        </div>
+      </div>
+      <div class="aside-filters-content">
+        <!-- Filter -->
+      </div>
+    </div>
+  </div>
     <div
         *ngIf="getPermissions('CREATE_COMPANIES')"
         class="mobile-action-btn qt-df qt-ai-c qt-jc-c"
