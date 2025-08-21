@@ -48,7 +48,7 @@
  .app-drop-down__dropdown {
      width: 100%;
      top: 20px !important;
-     max-height: 357px !important;
+     max-height: 372px !important;
  }
 
  .--selected {
@@ -56,16 +56,12 @@
      border-radius: 6px;
  }
 
- .icon__done {
-     top: calc(50% - 10px);
-     position: absolute;
-     right: 8px;
- }
  .assigne-user-avatar {
-     width: 36px;
-     height: 36px;
+     width: 20px;
+     height: 20px;
      font-weight: 500;
-     font-size: 16px;
+     font-size: 12px;
+     line-height: 15px;
      background-size: cover !important;
      background-position: center !important;
      border-radius: 50%;
@@ -77,26 +73,24 @@
 
  .user-name {
      font-size: 14px;
-     font-weight: 600;
+     line-height: 20px;
+     font-weight: 500;
      color: $gray-900;
-     line-height: normal;
-     margin-bottom: 2px;
-
  }
 
  .user-description {
      font-size: 13px;
      font-weight: 400;
      color: $gray-500;
-     line-height: normal;
-     margin-bottom: 2px;
+     line-height: 20px;
  }
 
  .user-container {
      align-items: self-start !important;
-     padding: 6px 8px !important;
+     padding: 8px !important;
      position: relative !important;
      height: auto !important;
+     margin-block: 4px;
 
      &:hover {
          background: $gray-50 !important;
