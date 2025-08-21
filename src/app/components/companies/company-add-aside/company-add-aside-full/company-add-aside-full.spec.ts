@@ -131,4 +131,10 @@ describe('CompanyAddAsideFullComponent unit test', () => {
     com.onChangeTags(['Tag1', 'Tag2']);
     expect(com.company.tags).toEqual(['Tag1', 'Tag2']);
   });
+  it('check "onChangeDescription"', () => {
+    const fixture = TestBed.createComponent(CompanyAddAsideFullComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onChangeDescription({ target: { value: 'Test Description' } });
+    expect(com.company.description).toEqual('Test Description');
+  });
 });
