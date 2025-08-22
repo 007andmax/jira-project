@@ -64,7 +64,7 @@
                 >
                     Clear All
                 </button>
-                <button
+                <!-- <button
                     class="qt-button qt-button-filter --gray --md qt-mr-8 qt-ml-8 qt-df"
                     [ngClass]="{'active':toggleFilter,
                  'is-exist-filters':isExistFilters()}"
@@ -72,7 +72,7 @@
                 >
                     <span class="qt-icon icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                     <span [textContent]="getTextCountFilters()"></span>
-                </button>
+                </button> -->
                 <button
                     class="qt-button --gray --md qt-mr-8"
                     uib-tooltip="Draft email"
@@ -100,7 +100,7 @@
             </div>
         </div>
     </div>
-    <div class="qt-page-list__header-filters">
+    <!-- add-custom-notes-settings class="qt-page-list__header-filters">
         <companies-filter
             class="qt-w100"
             #filter
@@ -108,5 +108,5 @@
             (onClose)="onToggleFilter(false)"
             [hidden]="!toggleFilter"
         ></companies-filter>
-    </div>
+    </div> -->
 </div>

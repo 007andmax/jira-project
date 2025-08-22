@@ -1,10 +1,3 @@
-<div class="content-filters-header">
-    <div
-        class="qt-icon icon__close qt-icon__white qt-sz-20 qt-bg-contain"
-        (click)="close()"
-    ></div>
-    <div class="content-filters-header__title pointer">Filters</div>
-</div>
 <app-drop-down
     #typesDp
     class="filter-category type qt-mr-8 dropdown"
@@ -15,7 +8,6 @@
     [change]="true"
     [sort]="false"
     [heightInput]="'36px'"
-    [widthInput]="'22%'"
     (onSelectedItem)="onSelectType($event)"
 ></app-drop-down>
 <app-drop-down
@@ -27,7 +19,6 @@
     [search]="true"
     [change]="true"
     [heightInput]="'36px'"
-    [widthInput]="'22%'"
     (onSelectedItem)="onSelectTechLead($event)"
 ></app-drop-down>
 <app-drop-down
@@ -39,7 +30,6 @@
     [search]="true"
     [change]="true"
     [heightInput]="'36px'"
-    [widthInput]="'22%'"
     (onSelectedItem)="onSelectClientIndustry($event)"
 ></app-drop-down>
 <app-company-tags

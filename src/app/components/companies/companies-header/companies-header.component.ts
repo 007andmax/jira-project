@@ -14,6 +14,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompanyItem } from '../class/company-item';
+import { CompanyFilter } from '../class/company-filter';
 
 @Component({
   selector: 'app-companies-header',
@@ -23,10 +24,10 @@ import { CompanyItem } from '../class/company-item';
 })
 export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   reqCompaniesList: Array<CompanyItem> = [];
-  toggleFilter: boolean = true;
+
   countFilter: number = 0;
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
-  @ViewChild('filter', { static: true }) filter: CompaniesFilterComponent;
+  companyFilter: CompanyFilter = new CompanyFilter();
   @Input() selectAll: boolean = false;
   @Output() onChangeFilterField = new EventEmitter<any>();
   @Output() onSelectAllCompanies = new EventEmitter<any>();
@@ -40,12 +41,11 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     private confirmStateService: ConfirmStateService,
     private usersStateService: UsersStateService,
-    public cd: ChangeDetectorRef,
-    private companiesState: CompaniesStateService) { }
+    public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.calculateCount = this.companiesState.getCalculateCount();
-    let getOnCalculateCount = this.companiesState.getOnCalculateCount().subscribe((data) => {
+    this.calculateCount = this.companiesStateService.getCalculateCount();
+    let getOnCalculateCount = this.companiesStateService.getOnCalculateCount().subscribe((data) => {
       this.calculateCount = data;
       this.cd.markForCheck();
     })
@@ -92,30 +92,24 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   isExistFilters() {
-    return this.filter.companyFilter.clientType ||
-      this.filter.companyFilter.clientIndustry ||
-      this.filter.companyFilter.tags.length > 0 ||
-      this.filter.companyFilter.techUser
+    return this.companyFilter.clientType ||
+      this.companyFilter.clientIndustry ||
+      this.companyFilter.tags.length > 0 ||
+      this.companyFilter.techUser
   }
-  onToggleFilter(data) {
-    this.toggleFilter = data;
-    this.cd.markForCheck();
-  }
+
   getClientType(clientType) {
     return clientType.toLowerCase();
   }
   clearAll() {
-    this.filter.onClearAll();
+    // this.filter.onClearAll();
     this.cd.detectChanges();
   }
-  onChangeCountFilter(data) {
-    this.countFilter = data;
-    this.cd.markForCheck();
-  }
-  refreshFilters() {
-    this.filter.applyFilters();
-    this.cd.detectChanges();
-  }
+
+  /*  refreshFilters() {
+      this.filter.applyFilters();
+      this.cd.detectChanges();
+    }*/
   getUserName(id) {
     let user = this.usersStateService.getAllUsers().find(item => item.id == id);
     return `${user.firstName} ${user.lastName}`;

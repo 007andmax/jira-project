@@ -31,6 +31,7 @@ import { fadeInAnimation } from 'src/app/animations';
 })
 export class CompaniesComponent implements OnInit, OnDestroy {
   @ViewChild('header', { static: true }) header: CompaniesHeaderComponent;
+  toggleFilter: boolean = true;
   CompaniesList: Array<CompanyItem> = [];
   reqCompaniesList: Array<CompanyItem> = [];
   showPreloader: boolean = true;
@@ -269,6 +270,14 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+  onChangeCountFilter(data) {
+    // this.countFilter = data;
+    this.cd.markForCheck();
+  }
+  onToggleFilter(data) {
+    this.toggleFilter = data;
+    this.cd.markForCheck();
   }
   ngOnDestroy(): void {
     this.reqCompaniesList.forEach(item => item.selected = false);
