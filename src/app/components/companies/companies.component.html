@@ -39,7 +39,7 @@
                                 class="companies-table__client-type pointer"
                                 (click)="onFilter('type')"
                             >
-                                TYPE
+                                Type
                                 <div class="qt-table-modern__sorting"></div>
                             </div>
                             <div
@@ -148,7 +148,6 @@
             </div>
             <div class="aside-filters-content">
                 <companies-filter
-                    class="qt-w100"
                     #filter
                     (changeCountFilter)="onChangeCountFilter($event)"
                     (onClose)="onToggleFilter(false)"

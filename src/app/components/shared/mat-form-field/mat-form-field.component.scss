@@ -154,6 +154,10 @@
       mask-image: url('/assets/img/icons/tags.svg');
       background-color: $gray-400;
     }
+
+    .mat-form-field-label-wrapper {
+      width: calc(100% - 34px);
+    }
   }
 }
 
