@@ -32,9 +32,13 @@
     z-index: 999;
 }
 .password-table__menu {
-    flex: 0 0 42px !important;
+    flex: 0 0 50px !important;
 }
-.qt-page-list__header-thead__row {
-  border-left: 1px solid transparent;
-  border-right: 1px solid transparent;
+
+.qt-page-list__header.--sticky {
+  margin: 0;
+  padding: 10px 32px;
+  min-height: 57.1px; // Fix Bug With Overflow with Scroll Table
+  background-color: $gray-50;
+  border-bottom: 1px solid $gray-200;
 }
