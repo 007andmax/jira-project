@@ -80,25 +80,7 @@
     margin: 0 5px 0 0;
   }
 }
-.device-user.has-placeholder:before {
-  content: "Search By Tags";
-}
-.pengind-loading {
-  left: calc(50% - 12px) !important;
 
-  &::before {
-    width: 32px !important;
-    height: 32px !important;
-    border-width: 3px;
-    min-height: auto !important;
-  }
-}
-.company-tag-input {
-  &::placeholder {
-      opacity: 0 !important;
-      color: $gray-400;
-    }
-}
 .no-remove {
   ::ng-deep .mat-chip {
     background: $gray-100;

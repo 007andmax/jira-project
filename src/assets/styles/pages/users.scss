@@ -230,6 +230,14 @@
   }
 }
 
+.companies-page {
+  .aside-filters-content__footer {
+    .qt-button {
+      max-width: unset;
+    }
+  }
+}
+
 .users-page__aside {
   .upload-photo {
     display: flex;

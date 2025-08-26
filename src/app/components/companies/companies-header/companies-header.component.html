@@ -23,7 +23,7 @@
                 ></span>
             </div>
             <div
-                class="new-companies-content__header-buttons"
+                class="new-companies-content__header-buttons qt-ml-8"
                 *ngIf="getCountSelected() > 0"
             >
                 <div class="new-companies-content__header-buttons-top">
@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <button
-                    class="qt-button qt-button-filter --gray --md qt-mr-8 qt-ml-8 qt-df"
+                    class="qt-button qt-button-filter --gray --md qt-ml-8 qt-df"
                     [ngClass]="{'active':toggleFilter,
                  'is-exist-filters':isExistFilters()}"
                     (click)="onToggleFilter(!toggleFilter)"
@@ -67,7 +67,7 @@
                     <span [textContent]="getTextCountFilters()"></span>
                 </button>
                 <button
-                    class="qt-button --gray --md qt-mr-8 qt-ml-8"
+                    class="qt-button --gray --md qt-ml-8"
                     uib-tooltip="Draft email"
                     tooltip-placement="top"
                     (click)="showAsideForDraftEmail()"
@@ -85,7 +85,7 @@
                 </button>
                 <button
                     *ngIf="getPermissions('CREATE_COMPANIES')"
-                    class="qt-button --md --gray qt-fs-0"
+                    class="qt-button --md --gray qt-ml-8 qt-fs-0"
                     (click)="showAsideForAdd()"
                 >
                     Add Company
