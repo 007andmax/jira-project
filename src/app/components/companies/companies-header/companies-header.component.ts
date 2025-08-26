@@ -112,11 +112,6 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   getClientType(clientType) {
     return clientType.toLowerCase();
   }
-  clearAll() {
-    this.companiesStateService.clearFilter();
-    // this.filter.onClearAll();
-    this.cd.detectChanges();
-  }
 
   /*  refreshFilters() {
       this.filter.applyFilters();

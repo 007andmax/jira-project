@@ -9,7 +9,7 @@
         class="app-mat-form-field--with-label"
         [ngClass]="{'hidde-label' :!showLabel}"
         #formField
-        [placeholder]="'Search By Tags'"
+        [placeholder]="placeholder"
     >
         <app-mat-chip-list
             [items]="selectedTag"
@@ -31,7 +31,7 @@
             <input
                 id="dropdownServices"
                 ngbDropdownToggle
-                placeholder="Search By Tags"
+                [placeholder]="placeholder"
                 #userInput
                 class="company-tag-input pointer"
                 (input)="onSearch($event)"

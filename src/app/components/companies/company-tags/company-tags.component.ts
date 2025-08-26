@@ -36,6 +36,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   @Input() companyId: string;
   @Input() editItems: Array<string>;
   @Input() placement: string;
+  @Input() placeholder: string = 'Search By Tags';
   @Input() showLabel: boolean = true;
   @Input() filter: boolean = false;
   @Input() blockCreateTag: boolean = false;
