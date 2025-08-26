@@ -2,7 +2,6 @@
     <app-companies-header
         #header
         (onChangeFilterField)="onFilter($event)"
-        (onSelectAllCompanies)="onSelectAllCompanies($event)"
         (onSearch)="onSearch($event)"
     ></app-companies-header>
     <div class="qt-page-list__container">
@@ -15,12 +14,12 @@
                             <div class="companies-table__check">
                                 <div class="qt-df qt-jc-fe">
                                     <label class="qt-checkbox">
-                                        <!-- <input -->
-                                        <!-- type="checkbox" -->
-                                        <!-- class="ng-untouched ng-pristine ng-valid" -->
-                                        <!-- [(ngModel)]="selectAll" -->
-                                        <!-- (change)="toggleAllCompanies($event)" -->
-                                        <!-- > -->
+                                        <input
+                                            type="checkbox"
+                                            class="ng-untouched ng-pristine ng-valid"
+                                            [(ngModel)]="selectAll"
+                                            (change)="toggleAllCompanies($event)"
+                                        >
                                         <input
                                             type="checkbox"
                                             class="ng-untouched ng-pristine ng-valid"
@@ -92,6 +91,10 @@
                 <!-- END Table Header -->
 
 
+
+
+
+
                 <!-- Start Table Body -->
                 <div
                     class="qt-page-list__body-tbody qt-table-modern companies-table"
@@ -133,10 +136,11 @@
                 </div>
             </div>
         </div>
-
-
         <!-- Start Filter Aside -->
-        <div class="aside-filters">
+        <div
+            class="aside-filters"
+            [hidden]="!toggleFilter"
+        >
             <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
                 <div class="aside-filters-header__title">Filters</div>
                 <div
@@ -151,7 +155,6 @@
                     #filter
                     (changeCountFilter)="onChangeCountFilter($event)"
                     (onClose)="onToggleFilter(false)"
-                    [hidden]="!toggleFilter"
                 ></companies-filter>
             </div>
         </div>

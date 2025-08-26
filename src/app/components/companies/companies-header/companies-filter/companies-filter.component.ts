@@ -63,6 +63,14 @@ export class CompaniesFilterComponent implements OnInit, OnDestroy {
       this.typesDp.onSelect(this.companyTypes.find(item => item.value === data));
     })
     this.sub.add(onChangeFilter);
+    let onClearFilter = this.companiesStateService.onClearFilter.subscribe(res => {
+      this.companyFilter = new CompanyFilter();
+      this.companiesStateService.onInitFilter(this.companyFilter);
+      // this.onChangeCounterFilter();
+      // this.close();
+      this.cd.detectChanges();
+    })
+    this.sub.add(onClearFilter);
   }
   private getTechusers(list) {
     list.forEach((item) => {
@@ -86,7 +94,7 @@ export class CompaniesFilterComponent implements OnInit, OnDestroy {
     this.companyFilter.setTechUser(null);
     this.companyFilter.setTags([]);
     this.companiesStateService.onInitFilter(this.companyFilter);
-    this.onChangeCounterFilter();
+    // this.onChangeCounterFilter();
     this.cd.detectChanges();
   }
   close() {
@@ -95,32 +103,32 @@ export class CompaniesFilterComponent implements OnInit, OnDestroy {
   }
   applyFilters() {
     this.companiesStateService.onInitFilter(this.companyFilter);
-    this.onChangeCounterFilter();
-    this.close();
+    //  this.onChangeCounterFilter();
+    // this.close();
     this.cd.detectChanges();
   }
   public onSelectTechLead(data) {
     this.companyFilter.setTechUser((data) ? data.id : null);
-    this.companiesStateService.onInitFilter(this.companyFilter);
-    this.onChangeCounterFilter();
+    //  this.companiesStateService.onInitFilter(this.companyFilter);
+    //   this.onChangeCounterFilter();
     this.cd.markForCheck();
   }
   public onSelectType(data) {
     this.companyFilter.setClientType((data) ? data.value : null);
-    this.companiesStateService.onInitFilter(this.companyFilter);
-    this.onChangeCounterFilter();
+    //    this.companiesStateService.onInitFilter(this.companyFilter);
+    // this.onChangeCounterFilter();
     this.cd.markForCheck();
   }
   public onSelectClientIndustry(data) {
     this.companyFilter.setClientIndustry((data) ? data : null);
-    this.companiesStateService.onInitFilter(this.companyFilter);
-    this.onChangeCounterFilter();
+    //  this.companiesStateService.onInitFilter(this.companyFilter);
+    //    this.onChangeCounterFilter();
     this.cd.markForCheck();
   }
   public onChangeTags(data) {
     this.companyFilter.setTags(data);
-    this.companiesStateService.onInitFilter(this.companyFilter);
-    this.onChangeCounterFilter();
+    //  this.companiesStateService.onInitFilter(this.companyFilter);
+    //  this.onChangeCounterFilter();
     this.cd.markForCheck();
   }
   public onChangeCounterFilter() {
