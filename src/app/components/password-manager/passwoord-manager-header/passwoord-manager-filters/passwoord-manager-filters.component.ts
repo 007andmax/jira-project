@@ -109,12 +109,15 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
   getDevices() {
     this.filter.setPreloaderDevices(true);
     this.devicesService.getCompanyDevices(this.selectedCompany.id).subscribe((data: any) => {
-      let devices = (data[this.selectedCompany.id]) ? JSON.parse(JSON.stringify(data[this.selectedCompany.id])).filter(item => !item.isCustom).map(item => new Device(item)) : [];
+      this.filter.setPreloaderDevices(false);
+      this.disabledDevicesUsers = false;
+      let devices = (data && data[this.selectedCompany.id]) ? JSON.parse(JSON.stringify(data[this.selectedCompany.id])).filter(item => !item.isCustom).map(item => new Device(item)) : [];
       devices.forEach(item => {
         this.devicesUsers.push(new PasswordDeviceUser(item.deviceId, this.getLabelDevice(item), 'DEVICE'));
       })
-      this.disabledDevicesUsers = false;
+    }, err => {
       this.filter.setPreloaderDevices(false);
+      this.disabledDevicesUsers = false;
     });
   }
   selectDate(data) {

@@ -5,18 +5,18 @@
         [placeholder]="'Select by Category'"
         [list]="categories"
         [field]="'title'"
+        [title]="'Category'"
         [search]="true"
         [change]="true"
         (onSelectedItem)="onSelectCategory($event)"
     ></app-drop-down>
-
-
     <company-drop-down
         #companiesSelect
         class="filter-company qt-w100 qt-mr-8 dropdown"
         [placeholder]="'Select Company'"
         [isDisabled]="disabledCompany"
         [editItem]="selectedCompany"
+        [title]="'Company'"
         [field]="'name'"
         [search]="true"
         [change]="true"
@@ -28,6 +28,7 @@
         [placeholder]="'Select Device or User'"
         [preloader]="filter.getPreloaderDevices()"
         [isDisabled]="disabledDevicesUsers || filter.getPreloaderDevices()"
+        [title]="'Device/User'"
         [list]="devicesUsers"
         [field]="'name'"
         [search]="true"
@@ -39,6 +40,7 @@
         #dateSelect
         class="filter-data-picker dropdown"
         [placeholder]="'Search by Expire Date'"
+        [title]="'Expire date'"
         [list]="listDates"
         [sort]="false"
         [field]="'title'"

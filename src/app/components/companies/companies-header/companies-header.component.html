@@ -76,14 +76,6 @@
                     Send Email
                 </button>
                 <button
-                    class="new-link qt-d-none"
-                    style="font-size: 13px;"
-                    (click)="showAsideForAdd()"
-                    *ngIf="getPermissions('CREATE_COMPANIES')"
-                >
-                    Add Company
-                </button>
-                <button
                     *ngIf="getPermissions('CREATE_COMPANIES')"
                     class="qt-button --md --gray qt-ml-8 qt-fs-0"
                     (click)="showAsideForAdd()"

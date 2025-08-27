@@ -129,6 +129,10 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     this.list_records.find(item => item.id === record.id).selected = record.selected;
     this.selectAll = (this.filter.getFilterList(this.list_records).find(item => !item.selected)) ? false : true;
   }
+  toggleAll(event) {
+    this.selectAll = event.target.checked;
+    this.onSelectAll(event);
+  }
   onSelectAll(event) {
     if (event.target.checked) {
       this.selectAll = true;

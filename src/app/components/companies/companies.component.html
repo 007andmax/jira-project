@@ -5,7 +5,10 @@
         (onSearch)="onSearch($event)"
     ></app-companies-header>
     <div class="qt-page-list__container">
-        <div class="qt-page-list__body">
+        <div
+            class="qt-page-list__body"
+            [ngClass]="{'--open-filters':toggleFilter}"
+        >
             <div class="qt-page-list__body-table-container">
                 <!-- Table Header -->
                 <div class="qt-page-list__header-thead-container">
@@ -89,12 +92,6 @@
                     </div>
                 </div>
                 <!-- END Table Header -->
-
-
-
-
-
-
                 <!-- Start Table Body -->
                 <div
                     class="qt-page-list__body-tbody qt-table-modern companies-table"
