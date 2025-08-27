@@ -20,6 +20,7 @@ import { PasswoordManagerFiltersComponent } from './passwoord-manager-filters/pa
 export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   toggleFilter: boolean = true;
   toggleSearch: boolean = false;
+  showAddCategory: boolean = false;
   countFilter: number = 0;
   @ViewChild('filters', { static: true }) filters: PasswoordManagerFiltersComponent;
   filter: FilterPasswordManager = new FilterPasswordManager();
@@ -49,8 +50,20 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let geLefttFilter = this.passwordManagerStateService.getOnFilter().subscribe((data) => {
       this.filter.setFilter(data);
+      this.onChangeCounterFilter();
     })
     this.sub.add(geLefttFilter);
+    let onToggleFilter = this.passwordManagerStateService.onToggleFilter.subscribe(data => {
+      this.toggleFilter = data;
+    })
+    this.sub.add(onToggleFilter);
+  }
+  public onChangeCounterFilter() {
+    this.countFilter = 0;
+    if (this.filter.selectedCategory) this.countFilter++;
+    if (this.filter.selectedCompany) this.countFilter++;
+    if (this.filter.selectedDate) this.countFilter++;
+    if (this.filter.selectedUserOrDevice) this.countFilter++;
   }
   clearSearch() {
     this.searchText = "";
@@ -59,9 +72,6 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   toggleAll(data) {
     this.selectAll = true;
     this.onSelectAll.emit(data);
-  }
-  clearAll() {
-    this.filters.onClearAll()
   }
   getTextCountFilters() {
     return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
@@ -80,6 +90,7 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   }
   onToggleFilter(data) {
     this.toggleFilter = data;
+    this.passwordManagerStateService.changeToggleFilter(this.toggleFilter);
   }
   getSelectedCount() {
     return this.recordsData.filter(item => item.selected).length;

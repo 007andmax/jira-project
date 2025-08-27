@@ -18,6 +18,7 @@ export class PasswordManagerStateService {
   categories: Array<PasswordRecordCategories> = [];
   public onChangeRealTime: EventEmitter<any> = new EventEmitter();
   onChangePassword: EventEmitter<any> = new EventEmitter();
+  onToggleFilter: EventEmitter<any> = new EventEmitter();
   constructor(private passwordManagerService: PasswordManagerService) { }
 
   public onInit() {
@@ -55,6 +56,9 @@ export class PasswordManagerStateService {
   }
   public setRecordForRemove(data) {
     this.recordForRemove = data;
+  }
+  public changeToggleFilter(data) {
+    this.onToggleFilter.emit(data);
   }
   public getRecordForRemove() {
     return this.recordForRemove;

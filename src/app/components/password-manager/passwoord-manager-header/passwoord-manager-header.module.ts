@@ -16,9 +16,7 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 import { MatFormFieldModule } from '../../shared/mat-form-field/mat-form-field.module';
 
 @NgModule({
-    declarations: [PasswoordManagerHeaderComponent,
-        PasswoordManagerFiltersComponent,
-        PasswoordManagerDevicesUsersComponent
+    declarations: [PasswoordManagerHeaderComponent
     ],
     imports: [
         CommonModule,

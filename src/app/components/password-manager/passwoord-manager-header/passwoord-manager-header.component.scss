@@ -42,3 +42,11 @@
   background-color: $gray-50;
   border-bottom: 1px solid $gray-200;
 }
+.password-add-category {
+    .plus-btn {
+        background-color: $blue-light-600;
+        &:hover {
+            background-color: $blue-light-500;
+        }
+    }
+}

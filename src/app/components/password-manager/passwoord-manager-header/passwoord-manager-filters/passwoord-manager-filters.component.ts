@@ -83,20 +83,18 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
     this.passwordManagerStateService.onInitFilter(this.filter);
     this.disabledDevicesUsers = false;
     this.selectedCompany = null;
-    this.onChangeCounterFilter();
   }
   applyFilters() {
 
     this.passwordManagerStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
-    this.close();
+
   }
   getClientsList(data) {
 
     if (this.disabledCompany) {
       this.selectedCompany = data.find(item => item.id === this.companiesState.getCompanyRoutingId());
       this.filter.setCompany(this.selectedCompany);
-      this.onChangeCounterFilter();
+      // this.onChangeCounterFilter();
       let users = this.usersStateService.getAllUsers().filter(item => {
         let company = data.find(itemCompany => item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === itemCompany.id));
         let isArchived = item.deletedAt || !company;
@@ -121,26 +119,26 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
   }
   selectDate(data) {
     this.filter.setDate(data);
-    this.passwordManagerStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
+    //   this.passwordManagerStateService.onInitFilter(this.filter);
+    //  this.onChangeCounterFilter();
   }
   selectDeviceUser(data) {
     this.filter.setDeviceUser(data);
-    this.passwordManagerStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
+    //  this.passwordManagerStateService.onInitFilter(this.filter);
+    //  this.onChangeCounterFilter();
   }
   onSelectCategory(data) {
     this.filter.setCategory(data);
-    this.passwordManagerStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
+    //    this.passwordManagerStateService.onInitFilter(this.filter);
+    //    this.onChangeCounterFilter();
   }
   selectCompany(data) {
     this.selectedCompany = data;
     this.filter.setDeviceUser(null);
     this.filter.setCompany(data);
     this.deviceUserSelect.clearWithOutChanges();
-    this.passwordManagerStateService.onInitFilter(this.filter);
-    this.onChangeCounterFilter();
+    //  this.passwordManagerStateService.onInitFilter(this.filter);
+    // this.onChangeCounterFilter();
     if (data) {
       let users = this.usersStateService.getAllUsers().filter(item => {
         let company = item.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === data.id);
@@ -163,14 +161,7 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
     if (item.label) return item.label;
     return item.hostName || item.ip;
   }
-  public onChangeCounterFilter() {
-    let count = 0;
-    if (this.filter.selectedCategory) count++;
-    if (this.filter.selectedCompany) count++;
-    if (this.filter.selectedDate) count++;
-    if (this.filter.selectedUserOrDevice) count++;
-    this.onChangeCountFilter.emit(count);
-  }
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
