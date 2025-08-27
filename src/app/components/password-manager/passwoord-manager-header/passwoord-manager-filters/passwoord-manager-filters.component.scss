@@ -21,4 +21,8 @@
 .aside-filters-content__footer {
   padding: 10px 16px;
   border-top: 1px solid $gray-200;
+
+  .qt-button {
+    max-width: unset;
+  }
 }

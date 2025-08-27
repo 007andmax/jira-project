@@ -6,7 +6,8 @@
   gap: 16px;
   padding: 12px 16px;
   height: calc(100% - 57px);
-  overflow: auto;
+  overflow-x: clip;
+  overflow-y: auto;
 }
 
 .aside-filters-content__footer {
