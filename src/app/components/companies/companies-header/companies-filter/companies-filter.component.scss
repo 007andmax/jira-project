@@ -8,6 +8,12 @@
   height: calc(100% - 57px);
   overflow-x: clip;
   overflow-y: auto;
+
+  .filter-category {
+    ::ng-deep .select-wrapper {
+      max-height: 192px;
+    }
+  }
 }
 
 .aside-filters-content__footer {
