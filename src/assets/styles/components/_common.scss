@@ -123,11 +123,6 @@ body .left-panel-full {
     right: 10px;
     left: auto;
 
-    &--bottom {
-      top: unset;
-      bottom: 1px;
-    }
-
     &::before {
       width: 20px;
       height: 20px;
