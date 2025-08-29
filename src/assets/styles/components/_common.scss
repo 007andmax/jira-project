@@ -123,6 +123,11 @@ body .left-panel-full {
     right: 10px;
     left: auto;
 
+    &--bottom {
+      top: unset;
+      bottom: 1px;
+    }
+
     &::before {
       width: 20px;
       height: 20px;
@@ -135,6 +140,17 @@ body .left-panel-full {
       width: 32px;
       height: 32px;
       border-width: 3px;
+    }
+  }
+
+  &--placement-bottom {
+    top: unset;
+    bottom: 1px;
+
+    &.xs,
+    &.sm {
+      top: unset;
+      bottom: 1px;
     }
   }
 }
