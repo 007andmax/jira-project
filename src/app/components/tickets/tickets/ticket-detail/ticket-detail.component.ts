@@ -165,7 +165,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
           if (this.passwordRecordDetail) this.passwordRecordDetail.initDefaultPasswordRecordList();
           if (this.documentsRecordDetail) this.documentsRecordDetail.initDefaultPasswordRecordList();
           if (this.ticketsDetailList) this.ticketsDetailList.initDefaultTicketsList();
-          this.ticketStateService.getServicesList(this.ticketProfile);
+          this.ticketStateService.getServicesList(this.ticketProfile.company.id);
           if (this.ticketProfile.createdUser) {
             let user = this.usersStateService.getAllUsers().find(item => item.id === this.ticketProfile.createdUser.id);
             if (user) this.ticketProfile.setSelectedCustomerCompany(user.customerCompaniesInfo.find(item => item.companyId == this.ticketProfile.companyId));
@@ -351,7 +351,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       this.updateListAssignedUser();
       this.updateLisUpdateUser();
       this.showPreloader = false;
-      this.ticketStateService.getServicesList(this.ticketProfile);
+      this.ticketStateService.getServicesList(this.ticketProfile.company.id);
       if (this.ticketProfile.createdUser && !this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getPasswordsDocuments(this.ticketProfile.createdUser.id);
       if (!this.customerPortalStateService.isCustomerPortal) this.ticketStateService.getDevicesByCompany(this.ticketProfile.company.id);
       if (this.ticketMessage) this.ticketMessage.reset();

@@ -1,0 +1,236 @@
+<div
+    class="qt-aside-modern --large new-companies-content__modal"
+    *ngIf="opened"
+>
+    <form [formGroup]="modelForm">
+        <div class="qt-aside-modern__header">
+            <div class="qt-aside-modern__header-title">Create Task</div>
+            <div
+                class="qt-button qt-ml-12"
+                appDisabledBtn
+                #saveBtn="disabled"
+                (onClick)="save()"
+                [ngClass]="{'--loading':saveBtn.isBlock()}"
+            >
+                <span>Save Task</span>
+                <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
+            </div>
+            <div
+                class="qt-aside-modern__header-close qt-icon icon__close"
+                (click)="close()"
+            ></div>
+        </div>
+        <div class="qt-aside-modern__content new-companies-content__modal--content">
+            <div class="qt-inputs-row --required">
+                <div class="qt-input-block">
+                    <div class="qt-input-block__label">Task Name</div>
+                    <input
+                        [ngClass]="{'--input-error' : submitted && f2.title.errors}"
+                        type="text"
+                        formControlName="title"
+                        placeholder="Write Company or Search Company"
+                    >
+                    <app-mat-error
+                        class="invalid-feedback"
+                        *ngIf="submitted && f2.title.errors"
+                    >
+                        Service name is required
+                    </app-mat-error>
+                </div>
+            </div>
+            <!-- <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block__label">Priority</div>
+                    <app-drop-down
+                        [class]="['qt-select-input-40']"
+                        [placeholder]="'Select Company Type'"
+                        [field]="'title'"
+                        [list]="listTypes"
+                        [search]="true"
+                        [change]="true"
+                        (onSelectedItem)="onSelectType($event)"
+                    >
+                    </app-drop-down>
+                </div>
+            </div> -->
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block__label">Company</div>
+                    <company-drop-down
+                        [placeholder]="'Company'"
+                        [clientType]="'CLIENT'"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        [isBlockClear]="true"
+                        (onSelectedItem)="onSelectCompany($event)"
+                    >
+                    </company-drop-down>
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f100">
+                    <span class="qt-input-block__label">Assigned To</span>
+                    <app-tasks-add-assigned-users
+                        #techUsersDp
+                        [placeholder]="'Select Tech User'"
+                        [placement]="'top-left'"
+                        [list]="techUsersList"
+                        (filterChange)="onSelectTechUser($event)"
+                    ></app-tasks-add-assigned-users>
+                    <app-mat-error
+                        class="invalid-feedback"
+                        *ngIf="submitted && f2.assignedUsersIds.errors"
+                    >
+                        Service name is required
+                    </app-mat-error>
+                </div>
+            </div>
+            <!-- <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block__label">Associate Ticket</div>
+                    <app-drop-down
+                        [class]="['qt-select-input-40']"
+                        [placeholder]="'Select Company Type'"
+                        [field]="'title'"
+                        [list]="companyTypes"
+                        [search]="true"
+                        [change]="true"
+                        (onSelectedItem)="onSelectCompanyTypes($event)"
+                    >
+                    </app-drop-down>
+                </div>
+            </div> -->
+            <!-- <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block__label">Billable Task</div>
+                    <app-drop-down
+                        [class]="['qt-select-input-40']"
+                        [placeholder]="'Select Company Type'"
+                        [field]="'title'"
+                        [list]="companyTypes"
+                        [search]="true"
+                        [change]="true"
+                        (onSelectedItem)="onSelectCompanyTypes($event)"
+                    >
+                    </app-drop-down>
+                </div>
+            </div> -->
+            <!-- <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block__label">Services</div>
+                    <app-services-list
+                        [type]="'TICKET'"
+                        [itemList]="servicesList"
+                        (selectedServicesItem)="onSelectService($event)"
+                    ></app-services-list>
+                </div>
+            </div> -->
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block__label">Type</div>
+                    <app-drop-down
+                        [class]="['qt-select-input-40']"
+                        [placeholder]="'Select Company Type'"
+                        [field]="'title'"
+                        [list]="listTypes"
+                        [search]="true"
+                        [change]="true"
+                        [errorMessage]="'Not select type'"
+                        [validate]="!(submitted && f2.type.errors)"
+                        (onSelectedItem)="onSelectType($event)"
+                    >
+                    </app-drop-down>
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block__label">Start - End Date</div>
+                    <app-multi-datepicker
+                        #dp
+                        [validate]="!(submitted && f2.startDate.errors)"
+                        [errorMessage]="'Please select the dates'"
+                        (selectedDate)="filterByDate($event)"
+                    ></app-multi-datepicker>
+
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block__label">Due Date</div>
+                    <app-date-picker
+                        #startDateDP
+                        [type]="'DETAIL_TICKET_UPDATE'"
+                        [dropdownClass]="['date-picker']"
+                        [formatDate]="formatDate"
+                        [editMode]="true"
+                        [container]="'body'"
+                        (onChange)="onChangeDueDate($event)"
+                    ></app-date-picker>
+                </div>
+            </div>
+            <!-- <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block__label">Time Estimate</div>
+                    <app-date-picker
+                        #startDateDP
+                        [dropdownClass]="['date-picker']"
+                        [formatDate]="formatDate"
+                        [editMode]="true"
+                        [container]="'body'"
+                        (onChange)="onChangeTimeEstimate($event)"
+                    ></app-date-picker>
+                </div>
+            </div> -->
+            <ul
+                ngbNav
+                #nav="ngbNav"
+                [(activeId)]="activeTab"
+                class="nav-tabs"
+                (navChange)="setTab($event)"
+            >
+                <!-- Profile -->
+                <li [ngbNavItem]="'description'">
+                    <a ngbNavLink>Description</a>
+                    <ng-template ngbNavContent>
+                        <angular-editor
+                            formControlName="description"
+                            [config]="editorConfig"
+                        ></angular-editor>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="'comments'">
+                    <a ngbNavLink>Comments</a>
+                    <ng-template ngbNavContent></ng-template>
+                </li>
+                <!-- Account -->
+                <li [ngbNavItem]="'activity_log'">
+                    <a ngbNavLink>Activity log</a>
+                    <ng-template ngbNavContent></ng-template>
+                </li>
+            </ul>
+            <div
+                [ngbNavOutlet]="nav"
+                class="mt-2"
+            ></div>
+        </div>
+
+        <div class="qt-aside-modern__footer">
+            <!-- <div
+                class="qt-button-square pointer ticket-edit-aside__attach-button"
+                placement="top"
+                ngbTooltip="Add Attachment"
+            >
+                <input
+                    class="qt-pointer"
+                    type="file"
+                    #fileDropRef
+                    id="fileDropRef"
+                    multiple
+                    (change)="selectNote.fileBrowseHandler($event.target.files)"
+                >
+                <div class="ticket-edit-aside__attach qt-icon icon__attachments"></div>
+            </div> -->
+        </div>
+    </form>
+</div>

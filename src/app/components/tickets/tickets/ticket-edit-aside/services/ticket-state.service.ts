@@ -238,10 +238,10 @@ export class TicketStateService {
   public getOnTicketClosed() {
     return this.closedTicket;
   }
-  public getServicesList(ticketProfile) {
+  public getServicesList(company_id) {
     this.servicePreloader = true;
     this.onServicePreloader.emit(this.servicePreloader);
-    this.recurringService.getServiceList(ticketProfile.company.id).subscribe((res: any) => {
+    this.recurringService.getServiceList(company_id).subscribe((res: any) => {
       this.servicesForTicket = res.filter(item => item.canUseInTicket);
       this.servicesForTicket.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));

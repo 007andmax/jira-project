@@ -156,6 +156,7 @@ import { CannedResponsesAsideModule } from './components/setting/ticket-settings
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { NotificationsModule } from './components/notifications/notifications.module';
 import { QuoteAsidePreviewModule } from './components/billing/quotes/quote-aside-preview/quote-aside-preview.module';
+import { TasksComponent } from './components/tasks/tasks.component';
 declare var $: any;
 /**
  * This module represents the main application module

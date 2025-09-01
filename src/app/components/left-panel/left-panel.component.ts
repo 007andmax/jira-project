@@ -96,6 +96,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
       .subscribe((event: any) => {
         if (event.navigationTrigger === "popstate") this.isInitPopStateNaviate = true;
         if (this.state === '' || (event instanceof NavigationEnd && this.isInitPopStateNaviate)) {
+          if (window.location.href.includes(`/tasks`)) this.state = 'my-tasks';
           if (window.location.href.includes(`/companies`)) this.state = 'new-companies';
           if (window.location.href.includes(`/billing-dashboard`)) this.state = 'billing-dashboard';
           if (window.location.href.includes(`/non-contract-services`)) this.state = 'non-contract-services';
@@ -279,6 +280,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
     if (this.leftPanelService.isSettingsPage(data)) this.page = "SETTINGS";
     if (this.leftPanelService.isDevicesPage(data)) this.page = "DEVICES";
     if (this.leftPanelService.isFilePage(data)) this.page = "FILE_MANAGER";
+    if (this.leftPanelService.isTasksPage(data)) this.page = "TASKS";
   }
   public getCompanyInfoPermissions(action) {
     return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole.getPermission(action)));
@@ -320,6 +322,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
   onChangeState(data) {
     if (this.state !== data) {
       this.state = data;
+      if (this.state === 'my-tasks') this.goToLink(`tasks`);
       if (this.state === 'contract-statistics') this.goToLink(`contract-statistics`);
       if (this.state === 'new-companies') this.goToLink(`companies`);
       if (this.state === 'billing-dashboard') this.goToLink('billing-dashboard');
