@@ -1,9 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { Task } from '../class/task';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { TicketStateService } from '../../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { CompanySetting } from '../../companies/class/company-setting';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
@@ -11,6 +11,8 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { TasksService } from 'src/app/services/tasks/tasks.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { TicketProfileFormService } from '../../tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
+import { CompaniesService } from 'src/app/services/company/companies.service';
 
 @Component({
   selector: 'app-tasks-add',
@@ -31,7 +33,7 @@ export class TasksAddComponent {
   @ViewChild('saveBtn', { static: false }) saveBtn: DisabledBtnDirective;
   sub: Subscription = new Subscription();
   activeTab: string = "description";
-  description: string;
+  currentService: TicketProfileFormService = new TicketProfileFormService();
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: false,
@@ -71,12 +73,15 @@ export class TasksAddComponent {
     uploadUrl: 'v1/image',
     sanitize: false,
   };
+  files = [];
   constructor(private tasksStateService: TasksStateService,
     public formBuilder: UntypedFormBuilder,
     private usersStateService: UsersStateService,
     public ticketStateService: TicketStateService,
     private tasksService: TasksService,
     private companiesStateService: CompaniesStateService,
+    public cd: ChangeDetectorRef,
+    private companiesService: CompaniesService,
   ) { }
 
   ngOnInit() {
@@ -108,15 +113,14 @@ export class TasksAddComponent {
         null
       ],
       dueDate: [null],
+      ticketUpdates: [[]],
+      attachFileIds: [[]]
     })
     this.tasksStateService.onOpenAddTasks.subscribe(res => {
+      if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
       this.opened = true;
       // this.getServices();
     })
-    if (this.usersStateService.getAllUsers().length > 0) {
-      this.onGetTechUsers(this.usersStateService.getAllUsers());
-      //  this.onGetUsers();
-    }
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetTechUsers(data);
       // this.onGetUsers();
@@ -160,6 +164,68 @@ export class TasksAddComponent {
     // this.contractsBlockTime.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
 
   }
+  public fileBrowseHandler(files) {
+    this.prepareFilesList(files);
+  }
+  prepareFilesList(files: Array<any>) {
+    for (const item of files) {
+      item.progress = 0;
+      this.files.push(item);
+    }
+    this.uploadFilesSimulator(0);
+  }
+  uploadFilesSimulator(index: number) {
+    if (index === this.files.length) {
+      return;
+    } else {
+      if (this.files[index].size > 15000000) {
+        this.files[index].showError = true;
+        this.files[index].error = "The size is too big. You can upload a file up to 15MB in size."
+        this.uploadFilesSimulator(index + 1);
+        return;
+      }
+      this.uploadFile(this.files[index]).then((data: any) => {
+        let res = JSON.parse(data.response);
+        let listIds = this.modelForm.controls["attachFileIds"].value;
+        console.log("res", res);
+        listIds.push(res.id);
+        this.modelForm.controls["attachFileIds"].setValue(listIds);
+        this.uploadFilesSimulator(index + 1);
+        this.cd.detectChanges();
+      }).catch(() => {
+        this.files[index].showError = true;
+        this.uploadFilesSimulator(index + 1);
+      });
+    }
+  }
+  uploadFile(file) {
+    return new Promise((resolve, reject) => {
+      var fd = new FormData();
+      fd.append("file", file);
+      var xhr = new XMLHttpRequest();
+      xhr.addEventListener("load", (event) => {
+        resolve(xhr);
+      }, false);
+      xhr.upload.onprogress = (event) => {
+        file.progress = Math.round((event.loaded / event.total) * 100);
+      }
+      xhr.addEventListener("error", (error) => {
+        reject(error);
+      }, false);
+      xhr.open("POST", "/file?isAvatar=false");
+      xhr.send(fd);
+    });
+  }
+  formatBytes(bytes, decimals) {
+    if (bytes === 0) {
+      return '0 Bytes';
+    }
+    const k = 1024;
+    const dm = decimals <= 0 ? 0 : decimals || 2;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
   onGetTechUsers(data) {
     this.techUsersList = data.filter(item => {
       if (item.accountType === 'TECH' && !item.deletedAt) {
@@ -169,8 +235,17 @@ export class TasksAddComponent {
       1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
   }
   public onSelectService(item) {
-    // this.addedServiceList[i].setItem(item);
-    // this.addedServiceList[i].setValidate(true);
+    this.currentService.setItem(item);
+    this.currentService.setValidate(true);
+  }
+  deleteFile(index: number) {
+    this.companiesService.removeAttachment(this.modelForm.controls["attachFileIds"].value[index]).subscribe(data => {
+
+    })
+    this.files.splice(index, 1);
+    let list = this.modelForm.controls["attachFileIds"].value;
+    list.splice(index, 1);
+    this.modelForm.controls["attachFileIds"].setValue(list);
   }
   public onSelectTechUser(items) {
     console.log("items", items);
@@ -180,6 +255,15 @@ export class TasksAddComponent {
   get f2() {
     return this.modelForm.controls;
   }
+  public getDataForUpdateService() {
+    return {
+      services: [this.currentService.getDateForRequest(this.usersStateService.getCurrentUser())],
+      type: "SERVICE",
+      shares: [],
+      ticket: {},
+      otherRecipients: []
+    }
+  }
   save() {
     this.submitted = true;
     if (this.modelForm.invalid) {
@@ -187,16 +271,26 @@ export class TasksAddComponent {
     }
     this.saveBtn.setDisabled(true);
     console.log("this.modelForm.value", this.modelForm.value);
-
+    if (this.currentService.item && this.currentService.item.versionedId) this.modelForm.controls["ticketUpdates"].setValue([this.getDataForUpdateService()])
     this.tasksService.addTask(this.modelForm.value).subscribe(res => {
       this.saveBtn.setDisabled(false);
+      this.modelForm.controls["attachFileIds"].setValue([]);
       this.close();
     })
   }
   close() {
+    console.log(this.modelForm.controls["attachFileIds"].value);
+    if (this.modelForm.controls["attachFileIds"].value && this.modelForm.controls["attachFileIds"].value.length > 0) {
+      forkJoin(
+        this.modelForm.controls["attachFileIds"].value.map(item => this.companiesService.removeAttachment(item))
+      ).subscribe(result => {
+
+      });
+    }
     this.opened = false;
     this.submitted = false;
     this.modelForm.reset();
     this.modelForm.patchValue({ taskStatus: "OPEN" });
+    this.files = [];
   }
 }

@@ -20,6 +20,7 @@ import { MatFormFieldModule } from '../shared/mat-form-field/mat-form-field.modu
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../shared/preloader-ticket/preloader-ticket.module';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { UploadAreaProgressModule } from '../shared/upload-area/upload-area-progress/upload-area-progress.module';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
         MatChipModule,
         DisabledBtnModule,
         PreloaderTicketModule,
-        AngularEditorModule
+        AngularEditorModule,
+        UploadAreaProgressModule
     ],
 
 })

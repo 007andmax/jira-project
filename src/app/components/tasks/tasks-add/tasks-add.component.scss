@@ -1,7 +1,203 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
 .qt-aside-modern__content {
-    height: calc(100% - 55px);
+    height: calc(100% - 120px);
 }
 form {
     display: block;
     height: 100%;
+}
+.tasks-add {
+    &__more-users-title {
+        font-size: 12px;
+        color: $blue-light-600;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+
+    &__attach {
+        background-repeat: no-repeat;
+        background-size: 24px;
+        cursor: pointer;
+    }
+
+    &__attach {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-mask-size: 16px;
+        mask-size: 16px;
+        background-position: center;
+        z-index: -1;
+        overflow: hidden;
+
+        &-button {
+            position: relative;
+            z-index: 1;
+
+            input[type="file"] {
+                height: 100%;
+                opacity: 0;
+            }
+        }
+    }
+}
+
+.files-list {
+    margin-top: 16px;
+
+    .single-file {
+        display: flex;
+        padding: 0.5rem;
+        justify-content: space-between;
+        align-items: center;
+        border: dashed 1px #979797;
+        margin-bottom: 1rem;
+        position: relative;
+
+        img.delete {
+            margin-left: 0.5rem;
+            cursor: pointer;
+            align-self: flex-end;
+        }
+
+        display: flex;
+        flex-grow: 1;
+
+        .name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #353f4a;
+            margin: 0;
+        }
+
+        .size {
+            font-size: 12px;
+            font-weight: 500;
+            color: #a4a4a4;
+            margin: 0;
+            margin-bottom: 0.25rem;
+
+            .file-error {
+                color: $red-600;
+            }
+        }
+
+        .info {
+            width: 100%;
+        }
+    }
+}
+
+.fileover {
+    animation: shake 1s;
+    animation-iteration-count: infinite;
+    position: relative;
+    z-index: 999;
+
+    .file-background {
+        display: block;
+    }
+}
+
+.file-background-show {
+    .file-background {
+        display: block;
+    }
+}
+
+.file-background {
+    display: none;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+
+    .file-background-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+
+        p {
+            text-align: center;
+            font-weight: bold;
+        }
+    }
+
+    .file-background-mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        filter: blur(4px);
+        display: block;
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+}
+
+/* Shake animation */
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+[contenteditable="true"]:empty:before {
+    content: attr(placeholder);
+    pointer-events: none;
+    display: block;
+    /* For Firefox */
+    color: $gray-400;
 }
