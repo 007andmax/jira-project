@@ -93,13 +93,13 @@ export class TasksAddComponent {
       startDate: [null,
         [Validators.required]
       ],
-      description: [null,
+      description: [undefined,
         [Validators.minLength(0), Validators.maxLength(65000)]
       ],
       endDate: [null],
       assignedUsersIds: [[], Validators.required, Validators.minLength(1)],
       type: [
-        null,
+        undefined,
         [Validators.required]
       ],
       taskStatus: [
@@ -107,12 +107,12 @@ export class TasksAddComponent {
         [Validators.required]
       ],
       companyId: [
-        null,
+        undefined,
       ],
       associatedTicketId: [
-        null
+        undefined
       ],
-      dueDate: [null],
+      dueDate: [undefined],
       ticketUpdates: [[]],
       attachFileIds: [[]]
     })
@@ -266,16 +266,19 @@ export class TasksAddComponent {
   }
   save() {
     this.submitted = true;
+    console.log("this.modelForm.invalid", this.modelForm);
     if (this.modelForm.invalid) {
       return;
     }
     this.saveBtn.setDisabled(true);
     console.log("this.modelForm.value", this.modelForm.value);
     if (this.currentService.item && this.currentService.item.versionedId) this.modelForm.controls["ticketUpdates"].setValue([this.getDataForUpdateService()])
-    this.tasksService.addTask(this.modelForm.value).subscribe(res => {
+    this.tasksService.addTask(this.task.getDataForAdd(this.modelForm.value)).subscribe(res => {
       this.saveBtn.setDisabled(false);
       this.modelForm.controls["attachFileIds"].setValue([]);
       this.close();
+    }, err => {
+      this.saveBtn.setDisabled(false);
     })
   }
   close() {

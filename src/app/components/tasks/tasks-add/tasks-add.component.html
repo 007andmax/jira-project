@@ -29,12 +29,13 @@
                         type="text"
                         formControlName="title"
                         placeholder="Write Company or Search Company"
+                        maxlength="300"
                     >
                     <app-mat-error
                         class="invalid-feedback"
                         *ngIf="submitted && f2.title.errors"
                     >
-                        Service name is required
+                        Task name is required
                     </app-mat-error>
                 </div>
             </div>
@@ -81,7 +82,7 @@
                         class="invalid-feedback"
                         *ngIf="submitted && f2.assignedUsersIds.errors"
                     >
-                        Service name is required
+                        Assigned user is required
                     </app-mat-error>
                 </div>
             </div>
@@ -135,7 +136,7 @@
                         [list]="listTypes"
                         [search]="true"
                         [change]="true"
-                        [errorMessage]="'Not select type'"
+                        [errorMessage]="'Task type is required'"
                         [validate]="!(submitted && f2.type.errors)"
                         (onSelectedItem)="onSelectType($event)"
                     >
@@ -148,7 +149,7 @@
                     <app-multi-datepicker
                         #dp
                         [validate]="!(submitted && f2.startDate.errors)"
-                        [errorMessage]="'Please select the dates'"
+                        [errorMessage]="'Start date is required'"
                         (selectedDate)="filterByDate($event)"
                     ></app-multi-datepicker>
 

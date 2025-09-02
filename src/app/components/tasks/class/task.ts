@@ -29,4 +29,20 @@ export class Task {
             return finalDate.getTime();
         }
     }
+    public getDataForAdd(data) {
+        return {
+            title: data.title,
+            startDate: data.startDate,
+            description: data.description ? data.description : undefined,
+            endDate: data.endDate,
+            assignedUsersIds: data.assignedUsersIds,
+            type: data.type,
+            taskStatus: data.taskStatus,
+            companyId: data.companyId ? data.companyId : undefined,
+            associatedTicketId: data.associatedTicketId ? data.associatedTicketId : undefined,
+            dueDate: data.dueDate ? data.dueDate : undefined,
+            ticketUpdates: data.ticketUpdates,
+            attachFileIds: data.attachFileIds
+        }
+    }
 }
