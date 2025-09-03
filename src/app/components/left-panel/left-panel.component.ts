@@ -25,6 +25,7 @@ import { LeftPanelUsersComponent } from './left-panel-users/left-panel-users.com
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { Subscription } from 'rxjs';
 import { LeftPanelFileManagerComponent } from './left-panel-file-manager/left-panel-file-manager.component';
+import { LeftPanelTasksComponent } from './left-panel-tasks/left-panel-tasks.component';
 
 /**
  * Left panel component
@@ -54,6 +55,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
   @ViewChild('panelMarketing', { static: false }) panelMarketing: LeftPanelMarketingComponent;
   @ViewChild('panelPasswordManager', { static: false }) panelPasswordManager: LeftPanelPasswordManagerComponent;
   @ViewChild('filesCompanies', { static: true }) filesCompanies: LeftPanelFileManagerComponent;
+  @ViewChild('panelTasks', { static: true }) panelTasks: LeftPanelTasksComponent;
   sub: Subscription = new Subscription();
   /**
    * Creates an instance of the LeftPanelComponent with the injected services
@@ -236,6 +238,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
       if (this.filesCompanies) this.filesCompanies.close();
       if (this.panelCompanies) this.panelCompanies.openPanel();
       if (this.panelCompanies) this.panelCompanies.togglePanel(true);
+      if (this.panelTasks) this.panelTasks.close();
     })
     this.sub.add(onOpenCompanyPage);
     let onChangeStateWithoutNavigate = this.leftPanelStateService.onChangeStateWithoutNavigate.subscribe(data => {
@@ -281,6 +284,8 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
     if (this.leftPanelService.isDevicesPage(data)) this.page = "DEVICES";
     if (this.leftPanelService.isFilePage(data)) this.page = "FILE_MANAGER";
     if (this.leftPanelService.isTasksPage(data)) this.page = "TASKS";
+    console.log("data", data);
+    console.log("this.page", this.page);
   }
   public getCompanyInfoPermissions(action) {
     return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole.getPermission(action)));

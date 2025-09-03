@@ -244,5 +244,12 @@
             [activePage]="state"
             [hidden]="page !== 'SETTINGS'"
         ></app-left-panel-settings>
+        <app-left-panel-tasks
+            #panelTasks
+            (onOpenPanel)="onOpenPanel()"
+            (onChangeState)="onChangeState($event)"
+            [activePage]="state"
+            [hidden]="page !== 'TASKS'"
+        ></app-left-panel-tasks>
     </div>
 </div>

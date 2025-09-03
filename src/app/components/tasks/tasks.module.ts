@@ -21,10 +21,15 @@ import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.
 import { PreloaderTicketModule } from '../shared/preloader-ticket/preloader-ticket.module';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { UploadAreaProgressModule } from '../shared/upload-area/upload-area-progress/upload-area-progress.module';
+import { TasksListComponent } from './tasks-list/tasks-list.component';
+import { TasksTabsComponent } from './tasks-tabs/tasks-tabs.component';
+import { TasksListItemComponent } from './tasks-list/tasks-list-item/tasks-list-item.component';
+import { TechUsersModule } from '../shared/tech-users/tech-users.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
-    declarations: [TasksComponent, TasksHeaderComponent, TasksAddComponent, TasksAddAssignedUsersComponent
+    declarations: [TasksComponent, TasksHeaderComponent, TasksAddComponent, TasksAddAssignedUsersComponent, TasksListComponent, TasksTabsComponent, TasksListItemComponent
     ],
     imports: [
         CommonModule,
@@ -45,7 +50,9 @@ import { UploadAreaProgressModule } from '../shared/upload-area/upload-area-prog
         DisabledBtnModule,
         PreloaderTicketModule,
         AngularEditorModule,
-        UploadAreaProgressModule
+        UploadAreaProgressModule,
+        TechUsersModule,
+        InfiniteScrollModule,
     ],
 
 })

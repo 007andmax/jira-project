@@ -1,0 +1,23 @@
+<div class="qt-df ">
+    <div class="qt-icon icon__check icn-16 qt-mr-6"></div>
+    <div [textContent]="item.title"></div>
+    <div [textContent]="item.type"></div>
+    <div [textContent]="parseStartDate(item.startDate)"></div>
+    <app-date-picker
+        [editMode]="true"
+        [editDate]="item.startDate"
+        [placement]="'bottom-right'"
+        [useMinDate]="false"
+        [type]="'ICON'"
+        (onChange)="onChangeDatePicker($event)"
+    ></app-date-picker>
+    <app-tech-users
+        [editMode]="true"
+        [editUsers]="assignedUsers"
+        [type]="'TICEKTS'"
+        [selectedMode]="'SINGLE'"
+        [users]="listTechUsers"
+        [container]="'body'"
+        (usersChange)="onChangeUser($event)"
+    ></app-tech-users>
+</div>

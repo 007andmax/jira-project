@@ -11,7 +11,13 @@ export class Task {
     "estimatedMinutes": number;
     "taskStatus": string;
     "assignedUsersIds": Array<string> = [];
-    constructor() { }
+    constructor(data = null) {
+        if (data) {
+            for (const key in data) {
+                this[key] = data[key];
+            }
+        }
+    }
 
     public setDueDate(day, month, year, timeOffset) {
         this.dueDate = this.parseDate(day, month, year, timeOffset);
