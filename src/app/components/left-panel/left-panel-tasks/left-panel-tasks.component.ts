@@ -14,6 +14,9 @@ import { UserCount } from '../../users/class/user-count';
 import { UserFilters } from '../../users/class/user-filters';
 import { UserGlobalFilter } from '../../users/class/user-global-filters';
 import { LeftPanelUsersService } from '../left-panel-users/services/left-panel-users.service';
+import { TasksFilters } from '../../tasks/class/tasks-filters';
+import { CompanySetting } from '../../companies/class/company-setting';
+import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 
 @Component({
   selector: 'app-left-panel-tasks',
@@ -23,8 +26,11 @@ import { LeftPanelUsersService } from '../left-panel-users/services/left-panel-u
 })
 export class LeftPanelTasksComponent {
   open: boolean = false;
-  filter: UserFilters = new UserFilters();
+  filter: TasksFilters = new TasksFilters();
   techUsersList = [];
+  quickFilter: Array<CompanySetting> = [
+    new CompanySetting('Upcoming', 'UPCOMING'),
+    new CompanySetting('Overdue', 'OVERDUE')];
   @Input() activePage: string = "";
   sub: Subscription = new Subscription();
   @Output() onChangeState = new EventEmitter();
@@ -40,6 +46,7 @@ export class LeftPanelTasksComponent {
     private modalService: NgbModal,
     public customerPortalStateService: CustomerPortalStateService,
     private permissionsService: PermissionsService,
+    private tasksStateService: TasksStateService
   ) { }
 
   ngOnInit() {
@@ -60,7 +67,18 @@ export class LeftPanelTasksComponent {
     })
     this.sub.add(getOnUsers);
   }
-
+  toggleTechUser(data) {
+    if (this.filter.techUser && this.filter.techUser.id == data.id) {
+      this.filter.setTechUser(null);
+    } else {
+      this.filter.setTechUser(data);
+    }
+    this.tasksStateService.onInitFilter(this.filter);
+  }
+  setStatus(data) {
+    this.filter.setFilter(data ? data.value : null);
+    this.tasksStateService.onInitFilter(this.filter);
+  }
   onGetTechUsers(data) {
     this.techUsersList = data.filter(item => {
       if (item.accountType === 'TECH' && !item.deletedAt) {

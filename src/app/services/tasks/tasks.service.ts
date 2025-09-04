@@ -25,7 +25,7 @@ export class TasksService {
   addTask(data) {
     return this.http.post(`${this.apiUrl}tasks`, data);
   }
-  getTasks(page, techUserId = null) {
-    return this.http.get(`${this.apiUrl}tasks?size=10&page=${page}&${techUserId ? `userId=${techUserId}` : ''}&filter=OVERDUE`);
+  getTasks(page, techUserId = null, filter = null) {
+    return this.http.get(`${this.apiUrl}tasks?size=10&page=${page}&${techUserId ? `userId=${techUserId}` : ''}&${filter ? `filter=${filter}` : ''}`);
   }
 }

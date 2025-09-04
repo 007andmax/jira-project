@@ -2,6 +2,9 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { TasksService } from 'src/app/services/tasks/tasks.service';
 import { Task } from '../class/task';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
+import { TasksFilters } from '../class/tasks-filters';
+import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tasks-list',
@@ -10,6 +13,7 @@ import { TicketsListService } from '../../tickets/tickets/services/tickets-list.
   providers: [TicketsListService]
 })
 export class TasksListComponent {
+  filter: TasksFilters = new TasksFilters();
   list: Array<Task> = [];
   showPreloader: boolean = true;
   showPendingPreloader: boolean = false;
@@ -17,14 +21,24 @@ export class TasksListComponent {
   public page_number: number = 0;
   offset: number = 10;
   container = document.body.querySelector(".main-container");
-
+  sub: Subscription = new Subscription();
   constructor(private tasksService: TasksService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
+    private tasksStateService: TasksStateService
   ) { }
 
   ngOnInit() {
     this.onScroll();
+    let geLefttFilter = this.tasksStateService.onFilter.subscribe((data) => {
+      document.body.querySelector(".main-container").scrollTo(0, 0);
+      this.showPreloader = true;
+      this.filter.setFilterData(data);
+      this.setDefaultScoll();
+      this.onScroll();
+      this.cd.detectChanges();
+    });
+    this.sub.add(geLefttFilter);
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;
@@ -42,7 +56,7 @@ export class TasksListComponent {
     }
 
     if (this.page_number > 0) this.showPendingPreloader = true;
-    this.tasksService.getTasks(this.page_number).subscribe((data: Array<Task>) => {
+    this.tasksService.getTasks(this.page_number, this.filter.techUser ? this.filter.techUser.id : null, this.filter.filter).subscribe((data: Array<Task>) => {
       this.list = [...this.list, ...data.map(item => new Task(item))];
       this.infiniteScrollDisabled = false;
       if (data.length < this.offset) this.ticketsListService.setBlockList(true);
