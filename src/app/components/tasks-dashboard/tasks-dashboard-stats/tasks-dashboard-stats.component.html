@@ -1,0 +1,21 @@
+<div
+    class="qt-df"
+    *ngIf="stats"
+>
+    <div>
+        <div>Tasks Created</div>
+        <div [textContent]="stats.created"></div>
+    </div>
+    <div>
+        <div>Upcoming Tasks</div>
+        <div [textContent]="stats.upcoming"></div>
+    </div>
+    <div>
+        <div>Overdue Tasks</div>
+        <div [textContent]="stats.overdue"></div>
+    </div>
+    <div>
+        <div>Completed Tasks</div>
+        <div [textContent]="stats.completed"></div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { TasksService } from 'src/app/services/tasks/tasks.service';
 import { Task } from '../class/task';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./tasks-list.component.scss'],
   providers: [TicketsListService]
 })
-export class TasksListComponent {
+export class TasksListComponent implements OnInit, OnDestroy {
   filter: TasksFilters = new TasksFilters();
   list: Array<Task> = [];
   showPreloader: boolean = true;
@@ -27,6 +27,7 @@ export class TasksListComponent {
     public cd: ChangeDetectorRef,
     private tasksStateService: TasksStateService
   ) { }
+
 
   ngOnInit() {
     this.onScroll();
@@ -68,5 +69,8 @@ export class TasksListComponent {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

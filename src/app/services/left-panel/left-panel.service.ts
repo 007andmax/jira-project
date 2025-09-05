@@ -47,7 +47,8 @@ export class LeftPanelService {
     )
   }
   isTasksPage(state) {
-    return (state === 'my-tasks'
+    return (state === 'my-tasks' ||
+      state === 'tasks-dashboard'
     )
   }
   public isCompanyPage(state) {

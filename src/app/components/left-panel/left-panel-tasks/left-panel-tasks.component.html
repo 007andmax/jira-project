@@ -11,13 +11,13 @@
 >
     <a
         href
-        [link]="'billing-dashboard'"
+        [link]="'tasks-dashboard'"
         target="_blank"
         appRightClickBlank
     >
         <li
-            [ngClass]="{'--active':activePage === 'billing-dashboard'}"
-            (click)="goToState('billing-dashboard')"
+            [ngClass]="{'--active':activePage === 'tasks-dashboard'}"
+            (click)="goToState('tasks-dashboard')"
         >
             Dashboard
         </li>
@@ -60,6 +60,7 @@
         </li>
     </ng-template>
 </ul>
+
 
 <hr class="app-left-panel__ticket-menu-line">
 <ul

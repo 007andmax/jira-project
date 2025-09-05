@@ -1,0 +1,18 @@
+<div
+    infiniteScroll
+    [infiniteScrollContainer]="container"
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="30"
+    [infiniteScrollDisabled]="infiniteScrollDisabled"
+    (scrolled)="onScroll()"
+    class="tbody"
+>
+    <ng-template
+        ngFor
+        let-item
+        [ngForOf]="list"
+        [ngForTrackBy]="trackById"
+    >
+        <app-tasks-list-item [item]="item"></app-tasks-list-item>
+    </ng-template>
+</div>

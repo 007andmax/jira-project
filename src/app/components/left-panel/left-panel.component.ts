@@ -99,6 +99,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
         if (event.navigationTrigger === "popstate") this.isInitPopStateNaviate = true;
         if (this.state === '' || (event instanceof NavigationEnd && this.isInitPopStateNaviate)) {
           if (window.location.href.includes(`/tasks`)) this.state = 'my-tasks';
+          if (window.location.href.includes(`/tasks-dashboard`)) this.state = 'tasks-dashboard';
           if (window.location.href.includes(`/companies`)) this.state = 'new-companies';
           if (window.location.href.includes(`/billing-dashboard`)) this.state = 'billing-dashboard';
           if (window.location.href.includes(`/non-contract-services`)) this.state = 'non-contract-services';
@@ -327,6 +328,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
   onChangeState(data) {
     if (this.state !== data) {
       this.state = data;
+      if (this.state === 'tasks-dashboard') this.goToLink(`tasks-dashboard`);
       if (this.state === 'my-tasks') this.goToLink(`tasks`);
       if (this.state === 'contract-statistics') this.goToLink(`contract-statistics`);
       if (this.state === 'new-companies') this.goToLink(`companies`);

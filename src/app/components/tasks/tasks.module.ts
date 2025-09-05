@@ -26,10 +26,11 @@ import { TasksTabsComponent } from './tasks-tabs/tasks-tabs.component';
 import { TasksListItemComponent } from './tasks-list/tasks-list-item/tasks-list-item.component';
 import { TechUsersModule } from '../shared/tech-users/tech-users.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { TasksListItemModule } from './tasks-list/tasks-list-item/tasks-list-item.module';
 
 
 @NgModule({
-    declarations: [TasksComponent, TasksHeaderComponent, TasksAddComponent, TasksAddAssignedUsersComponent, TasksListComponent, TasksTabsComponent, TasksListItemComponent
+    declarations: [TasksComponent, TasksHeaderComponent, TasksAddComponent, TasksAddAssignedUsersComponent, TasksListComponent, TasksTabsComponent
     ],
     imports: [
         CommonModule,
@@ -53,6 +54,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
         UploadAreaProgressModule,
         TechUsersModule,
         InfiniteScrollModule,
+        TasksListItemModule
     ],
 
 })

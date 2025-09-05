@@ -28,4 +28,7 @@ export class TasksService {
   getTasks(page, techUserId = null, filter = null) {
     return this.http.get(`${this.apiUrl}tasks?size=10&page=${page}&${techUserId ? `userId=${techUserId}` : ''}&${filter ? `filter=${filter}` : ''}`);
   }
+  getStatistics(userId) {
+    return this.http.get(`${this.apiUrl}tasks/statistics?userId=${userId}`);
+  }
 }

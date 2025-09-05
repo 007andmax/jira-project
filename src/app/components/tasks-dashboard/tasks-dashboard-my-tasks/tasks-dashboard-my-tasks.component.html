@@ -1,0 +1,22 @@
+<div class="qt-page-list page-list-ticket">
+    <div class="qt-page-list__header --sticky">
+        <div class="qt-page-list__header-title-line">
+            <div class="qt-page-list__header-title-line--left">
+                <h6 class="qt-page-list__header-title">My Tasks</h6>
+            </div>
+            <div class="qt-page-list__header-title-line--rigth">
+                <div class="qt-df qt-ai-c">
+                    <button
+                        class="qt-button --md"
+                        (click)="showAsideForAdd()"
+                    >
+                        <span class="qt-icon icon__add qt-sz-16 qt-icon__white qt-dib qt-mr-8"></span>
+                        Add Task
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="qt-page-list__header-filters"></div>
+    </div>
+    <app-tasks-dashboard-my-tasks-list></app-tasks-dashboard-my-tasks-list>
+</div>
