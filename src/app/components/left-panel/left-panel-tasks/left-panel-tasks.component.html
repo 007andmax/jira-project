@@ -39,7 +39,7 @@
 </ul>
 <hr class="app-left-panel__ticket-menu-line">
 <ul
-    class="app-left-panel__menu-expand menu-expand-show"
+    class="app-left-panel__menu-expand menu-expand-show app-left-panel__menu-expand--filter"
     *ngIf="!customerPortalStateService.isCustomerPortal"
 >
     <li class="qt-mt-12 name-custom-filter">
@@ -80,7 +80,7 @@
             class="desktop-version filter-item"
             (click)="toggleTechUser(user)"
         >
-            <div class="qt-df">
+            <div class="qt-df qt-mr-8">
                 <label class="qt-checkbox">
                     <input
                         type="checkbox"

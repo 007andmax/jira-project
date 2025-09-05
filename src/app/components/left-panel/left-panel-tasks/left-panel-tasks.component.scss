@@ -39,3 +39,12 @@
     margin-bottom: 0;
     padding: 0;
 }
+
+.qt-checkbox {
+  span {
+    width: 16px;
+    height: 16px;
+    border-color: $gray-700;
+    background-color: $gray-600;
+  }
+}
