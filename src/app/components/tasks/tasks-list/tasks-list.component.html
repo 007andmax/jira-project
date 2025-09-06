@@ -1,9 +1,12 @@
-<div
-    class="qt-page-list__body-table-container"
-    [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
->
-    <div class="qt-page-list__body-tbody qt-table-modern ticket-table">
-        <div
+<div class="qt-page-list__body">
+    <div class="qt-page-list__table --open-filters">
+      <div class="qt-page-list__header-thead-container"></div>
+      <div
+        class="qt-page-list__body-table-container"
+        [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
+      >
+        <div class="qt-page-list__body-tbody qt-table-modern">
+          <div
             infiniteScroll
             [infiniteScrollContainer]="container"
             [infiniteScrollDistance]="2"
@@ -11,29 +14,45 @@
             [infiniteScrollDisabled]="infiniteScrollDisabled"
             (scrolled)="onScroll()"
             class="tbody"
-        >
+          >
             <ng-template
-                ngFor
-                let-item
-                [ngForOf]="list"
-                [ngForTrackBy]="trackById"
+              ngFor
+              let-item
+              [ngForOf]="list"
+              [ngForTrackBy]="trackById"
             >
-                <app-tasks-list-item [item]="item"></app-tasks-list-item>
+              <app-tasks-list-item [item]="item"></app-tasks-list-item>
             </ng-template>
+          </div>
         </div>
+        <div
+          class="loading pengind-loading"
+          *ngIf="showPendingPreloader"
+        ></div>
+        <div
+          class="loading"
+          *ngIf="showPreloader"
+        ></div>
+        <div
+          class="no-exist-elements"
+          *ngIf="!showPreloader && list.length == 0"
+        >
+          We couldn't find any results
+        </div>
+      </div>
     </div>
-    <div
-        class="loading pengind-loading"
-        *ngIf="showPendingPreloader"
-    ></div>
-    <div
-        class="loading"
-        *ngIf="showPreloader"
-    ></div>
-    <div
-        class="no-exist-elements"
-        *ngIf="!showPreloader && list.length == 0"
-    >
-        We couldn't find any results
+
+    <div class="aside-filters qt-ml-16">
+      <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
+        <div class="aside-filters-header__title ">Filters</div>
+        <div class="qt-button --square-md --gray pointer">
+          <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+        </div>
+      </div>
+
+      <div class="aside-filters-content">
+
+      </div>
     </div>
 </div>
+
