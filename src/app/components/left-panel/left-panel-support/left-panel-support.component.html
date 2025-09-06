@@ -12,12 +12,14 @@
     <li
         [ngClass]="{'--active':type === 'ALL'  && activePage === 'new-quickSupport'}"
         (click)="onFilter('ALL')"
+        class="app-left-panel__menu-expand-link"
     >
         All Sessions
     </li>
     <li
         [ngClass]="{'--active':type === 'MY'  && activePage === 'new-quickSupport'}"
         (click)="onFilter('MY')"
+        class="app-left-panel__menu-expand-link"
     >
         My Sessions
     </li>

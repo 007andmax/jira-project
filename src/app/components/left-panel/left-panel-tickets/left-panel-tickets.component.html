@@ -10,25 +10,25 @@
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
     <li
-        [ngClass]="{'--active': listType === 'DASHBOARD' && activePage === 'new-tickets-dashboard'}"
-        class="desktop-version"
-        (click)="goToBashboard()"
-        *ngIf="!customerPortalStateService.isCustomerPortal"
+      [ngClass]="{'--active': listType === 'DASHBOARD' && activePage === 'new-tickets-dashboard'}"
+      class="app-left-panel__menu-expand-link"
+      (click)="goToBashboard()"
+      *ngIf="!customerPortalStateService.isCustomerPortal"
     >
-        <div>Dashboard</div>
+      <div>Dashboard</div>
     </li>
     <li
-        [ngClass]="{'--active': listType === 'USERS' && activePage === 'new-tickets'}"
-        (click)="setTypeFilter('USERS')"
-        class="qt-jc-sb"
+      [ngClass]="{'--active': listType === 'USERS' && activePage === 'new-tickets'}"
+      (click)="setTypeFilter('USERS')"
+      class="app-left-panel__menu-expand-link"
     >
-        <div>My Tickets</div>
-        <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('USER')}}</div>
+      <div>My Tickets</div>
+      <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('USER')}}</div>
     </li>
     <li
         [ngClass]="{'--active': listType === 'ALL' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('ALL')"
-        class="qt-jc-sb"
+         class="app-left-panel__menu-expand-link"
     >
         <div>All Tickets</div>
         <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('ALL')}}</div>
@@ -36,7 +36,7 @@
     <li
         [ngClass]="{'--active': listType === 'UNASSIGNED' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('UNASSIGNED')"
-        class="qt-jc-sb"
+         class="app-left-panel__menu-expand-link"
     >
         Unassigned
         <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('UNASSIGNED')}}</div>
@@ -44,7 +44,7 @@
     <li
         [ngClass]="{'--active': listType === 'OPEN' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('OPEN')"
-        class="qt-jc-sb"
+         class="app-left-panel__menu-expand-link"
     >
         <div>Open</div>
         <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('OPEN')}}</div>
@@ -52,7 +52,7 @@
     <li
         [ngClass]="{'--active': listType === 'CLOSED' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('CLOSED')"
-        class="qt-jc-sb"
+         class="app-left-panel__menu-expand-link"
     >
         <div>Closed</div>
         <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('CLOSED')}}</div>
@@ -60,7 +60,7 @@
     <li
         [ngClass]="{'--active': listType === 'ON_HOLD' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('ON_HOLD')"
-        class="qt-jc-sb"
+         class="app-left-panel__menu-expand-link"
     >
         <div>On Hold</div>
         <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('ON_HOLD')}}</div>
@@ -68,7 +68,7 @@
     <li
         [ngClass]="{'--active': listType === 'TRASH' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('TRASH')"
-        class="qt-jc-sb"
+         class="app-left-panel__menu-expand-link"
     >
         <div>Trash</div>
         <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('TRASH')}}</div>
@@ -76,7 +76,7 @@
     <li
         [ngClass]="{'--active': listType === 'SPAM' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('SPAM')"
-        class="qt-jc-sb"
+         class="app-left-panel__menu-expand-link"
     >
         <div>Spam</div>
         <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">{{getCountByField('SPAM')}}</div>
@@ -84,7 +84,7 @@
     <li
         [ngClass]="{'--active': listType === 'RECURRING_TICKETS' && activePage === 'recurring-tickets'}"
         (click)="goToRecurringTickets('RECURRING_TICKETS')"
-        class="desktop-version"
+        class="app-left-panel__menu-expand-link"
         *ngIf="!customerPortalStateService.isCustomerPortal"
     >
         <div>Recurring tickets</div>
@@ -92,7 +92,7 @@
     <li
         [ngClass]="{'--active': listType === 'RECURRING_TICKETS_OPEN' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('RECURRING_TICKETS_OPEN')"
-        class="desktop-version qt-jc-sb"
+        class="app-left-panel__menu-expand-link"
     >
         <div>Recurring tickets Open</div>
         <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">
@@ -102,7 +102,7 @@
     <li
         [ngClass]="{'--active': listType === 'RECURRING_TICKETS_CLOSED' && activePage === 'new-tickets'}"
         (click)="setTypeFilter('RECURRING_TICKETS_CLOSED')"
-        class="desktop-version qt-jc-sb"
+        class="app-left-panel__menu-expand-link"
     >
         <div>Recurring tickets Closed</div>
         <div class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count">
@@ -112,11 +112,10 @@
 </ul>
 <hr class="app-left-panel__ticket-menu-line">
 <ul
-    class="app-left-panel__menu-expand menu-expand-show"
+    class="app-left-panel__filter-menu-expand menu-expand-show"
     *ngIf="!customerPortalStateService.isCustomerPortal"
 >
-    <li class="qt-mt-12 name-custom-filter">
-        <span class="qt-icon icon__filter-lines qt-icon__gray-300 qt-sz-16 qt-bg-contain qt-dib qt-mr-4"></span>
+    <li class="app-left-panel__menu-expand-subtitle">
         Custom Filters
     </li>
     <ng-template
@@ -130,7 +129,7 @@
             class="desktop-version filter-item"
             (click)="setGlobalFilter(filter)"
         >
-            <div [textContent]="filter.name"></div>
+            <div class="app-left-panel__filter-menu-expand-link" [textContent]="filter.name"></div>
             <div class="qt-df qt-ai-c">
                 <i
                     class="qt-icon icon__warning qt-icon__yellow-600 qt-sz-16 pointer qt-ml-4 qt-mr-6"

@@ -9,32 +9,36 @@
     class="app-left-panel__menu-expand icon-list"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
-    <a
-        href
-        [link]="'documents'"
-        target="_blank"
-        appRightClickBlank
-    >
-        <li
-            class="app-left-panel__menu-expand-item-icon"
-            [ngClass]="{'--active':  activePage === 'new-documents'}"
-            (click)="goToState('new-documents')"
-        >
-            All Documents
-        </li>
-    </a>
-    <a
-        href
-        [link]="'documents/templates'"
-        target="_blank"
-        appRightClickBlank
-    >
-        <li
-            class="app-left-panel__menu-expand-item-icon"
-            [ngClass]="{'--active':  activePage === 'new-template-documents'}"
-            (click)="goToState('new-template-documents')"
-        >
-            Templates
-        </li>
-    </a>
+   <li>
+     <a
+       href
+       [link]="'documents'"
+       target="_blank"
+       appRightClickBlank
+     >
+       <span
+         class="app-left-panel__menu-expand-link"
+         [ngClass]="{'--active':  activePage === 'new-documents'}"
+         (click)="goToState('new-documents')"
+       >
+         All Documents
+       </span>
+     </a>
+   </li>
+   <li>
+     <a
+       href
+       [link]="'documents/templates'"
+       target="_blank"
+       appRightClickBlank
+     >
+       <span
+         class="app-left-panel__menu-expand-link"
+         [ngClass]="{'--active':  activePage === 'new-template-documents'}"
+         (click)="goToState('new-template-documents')"
+       >
+         Templates
+       </span>
+     </a>
+   </li>
 </ul>

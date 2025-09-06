@@ -41,10 +41,21 @@
 }
 
 .qt-checkbox {
+  padding-block: 2px;
+
   span {
     width: 16px;
     height: 16px;
+    min-width: 16px;
     border-color: $gray-700;
     background-color: $gray-600;
+  }
+
+  &__text {
+    color: $gray-400;
+  }
+
+  input:checked ~ .qt-checkbox__text {
+    color: $white;
   }
 }

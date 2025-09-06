@@ -15,112 +15,126 @@
     *ngIf="toggleTypeCompanies"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
-    <a
+    <li>
+      <a
         href
         [link]="'companies'"
         target="_blank"
         appRightClickBlank
-    >
-        <li
-            [ngClass]="{'--active':activePage === 'new-companies' && !showArchivedCompanies}"
-            (click)="onShowAll();"
+      >
+        <span
+          [ngClass]="{'--active':activePage === 'new-companies' && !showArchivedCompanies}"
+          (click)="onShowAll();"
+          class="app-left-panel__menu-expand-link"
         >
             All Companies
-        </li>
-    </a>
-    <a
+        </span>
+      </a>
+    </li>
+    <li>
+      <a
         href
         [link]="'companies'"
         target="_blank"
         appRightClickBlank
-    >
-        <li
-            [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'CLIENT'}"
-            (click)="onSetFilterClientType('CLIENT');goToState('new-companies');"
-            class="qt-jc-sb"
+      >
+        <span
+          [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'CLIENT'}"
+          (click)="onSetFilterClientType('CLIENT');goToState('new-companies');"
+          class="app-left-panel__menu-expand-link"
         >
             <span *ngIf="activePage === 'new-companies'">Clients</span>
             <span
-                class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count"
-                *ngIf="activePage === 'new-companies'"
-                [textContent]="getCount('CLIENT')"
+              class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count"
+              *ngIf="activePage === 'new-companies'"
+              [textContent]="getCount('CLIENT')"
             ></span>
             <span *ngIf="activePage !== 'new-companies'">Clients</span>
-        </li>
-    </a>
-    <a
+        </span>
+      </a>
+    </li>
+    <li>
+      <a
         href
         [link]="'companies'"
         target="_blank"
         appRightClickBlank
-    >
-        <li
-            [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'LEAD'}"
-            (click)="onSetFilterClientType('LEAD');goToState('new-companies');"
-            class="qt-jc-sb"
+      >
+        <span
+          [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'LEAD'}"
+          (click)="onSetFilterClientType('LEAD');goToState('new-companies');"
+          class="app-left-panel__menu-expand-link"
         >
             <span *ngIf="activePage === 'new-companies'">Leads</span>
             <span
-                class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count"
-                *ngIf="activePage === 'new-companies'"
-                [textContent]="getCount('LEAD')"
+              class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count"
+              *ngIf="activePage === 'new-companies'"
+              [textContent]="getCount('LEAD')"
             ></span>
             <span *ngIf="activePage !== 'new-companies'">Leads</span>
-        </li>
-    </a>
-    <a
+        </span>
+      </a>
+    </li>
+    <li>
+      <a
         href
         [link]="'companies'"
         target="_blank"
         appRightClickBlank
-    >
-        <li
-            [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'VENDOR'}"
-            (click)="onSetFilterClientType('VENDOR');goToState('new-companies');"
-            class="qt-jc-sb"
+      >
+        <span
+          [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'VENDOR'}"
+          (click)="onSetFilterClientType('VENDOR');goToState('new-companies');"
+          class="app-left-panel__menu-expand-link"
         >
             <span *ngIf="activePage === 'new-companies'">Vendors</span>
             <span
-                class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count"
-                *ngIf="activePage === 'new-companies'"
-                [textContent]="getCount('VENDOR')"
+              class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count"
+              *ngIf="activePage === 'new-companies'"
+              [textContent]="getCount('VENDOR')"
             ></span>
             <span *ngIf="activePage !== 'new-companies'">Vendors</span>
-        </li>
-    </a>
-    <a
+        </span>
+      </a>
+    </li>
+    <li>
+      <a
         href
         [link]="'companies'"
         target="_blank"
         appRightClickBlank
-    >
-        <li
-            [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'SUPPLIER'}"
-            (click)="onSetFilterClientType('SUPPLIER');goToState('new-companies');"
-            class="qt-jc-sb"
+      >
+        <span
+          [ngClass]="{'--active':activePage === 'new-companies' && clientType === 'SUPPLIER'}"
+          (click)="onSetFilterClientType('SUPPLIER');goToState('new-companies');"
+          class="app-left-panel__menu-expand-link"
         >
             <span *ngIf="activePage === 'new-companies'">Suppliers</span>
             <span
-                class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count"
-                *ngIf="activePage === 'new-companies'"
-                [textContent]="getCount('SUPPLIER')"
+              class="qt-color-gray-400 qt-ml-6 app-left-panel__menu-expand-count"
+              *ngIf="activePage === 'new-companies'"
+              [textContent]="getCount('SUPPLIER')"
             ></span>
             <span *ngIf="activePage !== 'new-companies'">Suppliers</span>
-        </li>
-    </a>
-    <a
+        </span>
+      </a>
+    </li>
+    <li>
+      <a
         href
         [link]="'companies'"
         target="_blank"
         appRightClickBlank
-    >
-        <li
-            [ngClass]="{'--active':activePage === 'new-companies' && showArchivedCompanies}"
-            (click)="onShowArchived();goToState('new-companies');"
+      >
+        <span
+          [ngClass]="{'--active':activePage === 'new-companies' && showArchivedCompanies}"
+          (click)="onShowArchived();goToState('new-companies');"
+          class="app-left-panel__menu-expand-link"
         >
             Archive
-        </li>
-    </a>
+        </span>
+      </a>
+    </li>
 </ul>
 <app-left-panel-company
     [selectedCompany]="selectedCompany"
