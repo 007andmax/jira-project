@@ -1,8 +1,15 @@
 @import "./src/assets/styles/variable";
 
-.qt-page-list__body {
+.qt-page-list__container {
   display: flex;
-  height: calc(100vh - 160px);
+}
+
+.qt-page-list__header-thead-container {
+  padding: 12px;
+  background: $white;
+  position: sticky;
+  top: 94px;
+  z-index: 1;
 }
 
 .qt-page-list__table {
@@ -19,7 +26,7 @@
   flex-shrink: 0;
   background-color: $white;
   position: sticky;
-  top: 58px;
+  top: 93px;
   height: calc(100vh - 160px);
   transition: .3s ease-in-out width;
   border-left: 1px solid $gray-200;

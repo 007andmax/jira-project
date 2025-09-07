@@ -1,0 +1,78 @@
+@import './src/assets/styles/variable';
+
+.qt-table-modern__row {
+  & > div {
+    border-bottom: 1px solid #EAECF0;
+    border-radius: 0;
+    min-height: 48px;
+
+    &:first-child {
+      padding-left: 8px;
+      border-left: unset;
+    }
+
+    &:last-child {
+      padding-right: 8px;
+      border-right: unset;
+    }
+  }
+}
+
+.my-tasks-table {
+  &__title {
+    flex: 2 1 500px;
+  }
+
+  &__type {
+    flex: 0 0 92px;
+  }
+
+  &__date {
+    flex: 0 0 176px;
+    justify-content: space-around;
+
+    ::ng-deep .date-picker {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      place-content: center;
+      border: 1px solid $gray-200;
+      border-radius: 50%;
+
+      .icon__calendar {
+        position: absolute;
+        left: 50%;
+        translate: -50%;
+        background-color: $gray-500 !important;
+        width: 16px !important;
+        height: 16px !important;
+        margin: 0;
+      }
+    }
+  }
+
+  &__tech-users {
+    flex: 0 0 42px;
+
+    ::ng-deep .ticket-updates__photo-people {
+      width: 28px !important;
+      height: 28px !important;
+      line-height: 27px;
+    }
+
+    ::ng-deep .tab-pane__user-circle {
+      margin-right: 0;
+      width: 28px !important;
+      height: 28px !important;
+
+      .icon__user {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+}
+
+.tag__modern:empty {
+  display: none;
+}
