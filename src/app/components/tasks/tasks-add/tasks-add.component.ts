@@ -81,7 +81,7 @@ export class TasksAddComponent {
     private tasksService: TasksService,
     public companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef,
-    private companiesService: CompaniesService,
+    public companiesService: CompaniesService,
   ) { }
 
   ngOnInit() {
