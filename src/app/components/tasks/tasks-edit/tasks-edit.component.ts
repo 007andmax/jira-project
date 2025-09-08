@@ -1,0 +1,128 @@
+import { Component } from '@angular/core';
+import { TasksAddComponent } from '../tasks-add/tasks-add.component';
+import { Validators } from '@angular/forms';
+import { Company } from 'src/app/interfaces/company/company';
+import { Service } from 'src/app/interfaces/service/service';
+import { CompanySetting } from '../../companies/class/company-setting';
+import { forkJoin } from 'rxjs';
+
+@Component({
+  selector: 'app-tasks-edit',
+  templateUrl: './tasks-edit.component.html',
+  styleUrls: ['./tasks-edit.component.scss']
+})
+export class TasksEditComponent extends TasksAddComponent {
+  selectedCompany: Company;
+  selectedAssignedUsers = [];
+  selectedType: CompanySetting;
+  ngOnInit() {
+    this.modelForm = this.formBuilder.group({
+      title: [
+        "",
+        [Validators.required, Validators.minLength(1), Validators.maxLength(300)]
+      ],
+      startDate: [null,
+        [Validators.required]
+      ],
+      description: [undefined,
+        [Validators.minLength(0), Validators.maxLength(65000)]
+      ],
+      endDate: [null],
+      assignedUsersIds: [[], Validators.required, Validators.minLength(1)],
+      type: [
+        undefined,
+        [Validators.required]
+      ],
+      taskStatus: [
+        "OPEN",
+        [Validators.required]
+      ],
+      companyId: [
+        undefined,
+      ],
+      associatedTicketId: [
+        undefined
+      ],
+      dueDate: [undefined],
+      ticketUpdates: [[]],
+      attachFileIds: [[]]
+    })
+    this.tasksStateService.onOpenEditTasks.subscribe(res => {
+      if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
+
+      this.task = res;
+      console.log("this.task", this.task);
+      console.log("this.modelForm", this.modelForm);
+      this.modelForm.patchValue({
+        title: this.task.title,
+        startDate: this.task.startDate,
+        description: this.task.description,
+        endDate: this.task.endDate,
+        // assignedUsersIds: this.task.assignedUsersIds,
+        type: this.task.type,
+        taskStatus: this.task.taskStatus,
+        companyId: this.task.companyId,
+        associatedTicketId: this.task.associatedTicketId,
+        dueDate: this.task.dueDate,
+        ticketUpdates: this.task.ticketUpdates,
+        attachFileIds: this.task.attachFileIds
+      })
+      this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id == this.task.companyId);
+      this.selectedAssignedUsers = this.usersStateService.getAllUsers().filter(user => this.task.assignedUsersIds.some(item => item == user.id));
+      let service = this.task.ticketUpdates.find(item => item.type == "SERVICE");
+      this.currentService.setItem(service);
+      if (service) this.currentService.setValidate(true);
+      this.selectedType = this.listTypes.find(item => item.value === this.task.type);
+      this.opened = true;
+      // this.getServices();
+    })
+    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
+      this.onGetTechUsers(data);
+      // this.onGetUsers();
+    })
+    this.sub.add(getOnUsers);
+    let getOnGetServicesList = this.ticketStateService.getOnGetServicesList().subscribe(data => {
+      this.getServices();
+    })
+    this.sub.add(getOnGetServicesList);
+  }
+  onSelectCompany(data) {
+    this.modelForm.controls["companyId"].setValue(data ? data.id : null)
+    if (data) this.ticketStateService.getServicesList(data.id);
+    this.selectedCompany = data;
+  }
+  public onSelectTechUser(items) {
+    console.log("items", items);
+    this.modelForm.controls["assignedUsersIds"].setValue(items.map(item => item.id));
+    this.selectedAssignedUsers = items;
+    //  this.globalFilter.setAssignedUsersIds(items.map(item => item.id));
+  }
+  onSelectType(data) {
+    this.modelForm.controls["type"].setValue(data ? data.value : null);
+    this.selectedType = data;
+  }
+  onChangeDueDate(data) {
+    console.log("data", data);
+    let dueDate = this.task.parseDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.modelForm.controls["dueDate"].setValue(dueDate);
+    this.task.dueDate = dueDate;
+  }
+  close() {
+    console.log(this.modelForm.controls["attachFileIds"].value);
+    if (this.modelForm.controls["attachFileIds"].value && this.modelForm.controls["attachFileIds"].value.length > 0) {
+      forkJoin(
+        this.modelForm.controls["attachFileIds"].value.map(item => this.companiesService.removeAttachment(item))
+      ).subscribe(result => {
+
+      });
+    }
+    this.opened = false;
+    this.submitted = false;
+    this.selectedCompany = null;
+    this.selectedAssignedUsers = [];
+    this.selectedType = null;
+    this.modelForm.reset();
+    this.modelForm.patchValue({ taskStatus: "OPEN" });
+    this.files = [];
+  }
+}

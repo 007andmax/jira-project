@@ -3,6 +3,7 @@ import { Task } from '../../class/task';
 import * as moment from "moment";
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
+import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 
 @Component({
   selector: 'app-tasks-list-item',
@@ -14,7 +15,9 @@ export class TasksListItemComponent {
   assignedUsers = [];
   listTechUsers = [];
   sub: Subscription = new Subscription();
-  constructor(private usersStateService: UsersStateService) { }
+  constructor(private usersStateService: UsersStateService,
+    private tasksStateService: TasksStateService
+  ) { }
 
   ngOnInit() {
     if (this.onGetTechUsers().length > 0) this.onSetAssignedUsers();
@@ -49,5 +52,7 @@ export class TasksListItemComponent {
      if (data.length === 1) item.setAssignedUser(data[0]);
      item.onInitEdit(true);*/
   }
-
+  editTask() {
+    this.tasksStateService.openEditAside(this.item);
+  }
 }

@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { Task } from '../class/task';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { forkJoin, Subscription } from 'rxjs';
 import { TicketStateService } from '../../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
@@ -22,7 +22,7 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 export class TasksAddComponent {
   opened: boolean = false;
   task: Task = new Task();
-  modelForm: UntypedFormGroup;
+  modelForm: FormGroup;
   techUsersList = [];
   servicesList = [];
   submitted: boolean = false;
@@ -74,12 +74,12 @@ export class TasksAddComponent {
     sanitize: false,
   };
   files = [];
-  constructor(private tasksStateService: TasksStateService,
-    public formBuilder: UntypedFormBuilder,
-    private usersStateService: UsersStateService,
+  constructor(public tasksStateService: TasksStateService,
+    public formBuilder: FormBuilder,
+    public usersStateService: UsersStateService,
     public ticketStateService: TicketStateService,
     private tasksService: TasksService,
-    private companiesStateService: CompaniesStateService,
+    public companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef,
     private companiesService: CompaniesService,
   ) { }

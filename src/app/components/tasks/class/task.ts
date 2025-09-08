@@ -11,6 +11,8 @@ export class Task {
     "estimatedMinutes": number;
     "taskStatus": string;
     "assignedUsersIds": Array<string> = [];
+    ticketUpdates: Array<any> = [];
+    attachFileIds: Array<string> = [];
     constructor(data = null) {
         if (data) {
             for (const key in data) {

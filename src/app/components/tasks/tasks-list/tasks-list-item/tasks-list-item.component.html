@@ -1,33 +1,42 @@
-<div class="qt-table-modern__row">
+<div
+    class="qt-table-modern__row"
+    (click)="editTask()"
+>
     <div class="my-tasks-table__title">
-      <div class="qt-df">
-        <div class="qt-icon icon__check qt-sz-20 icn-16 qt-mr-8"></div>
-        <div [textContent]="item.title"></div>
-      </div>
+        <div class="qt-df">
+            <div class="qt-icon icon__check qt-sz-20 icn-16 qt-mr-8"></div>
+            <div [textContent]="item.title"></div>
+        </div>
     </div>
     <div class="my-tasks-table__type">
-      <span class="tag__modern" [textContent]="item.type"></span>
+        <span
+            class="tag__modern"
+            [textContent]="item.type"
+        ></span>
     </div>
     <div class="my-tasks-table__date">
-      <div class="qt-mr-4" [textContent]="parseStartDate(item.startDate)"></div>
-      <app-date-picker
-        [editMode]="true"
-        [editDate]="item.startDate"
-        [placement]="'bottom-right'"
-        [useMinDate]="false"
-        [type]="'ICON'"
-        (onChange)="onChangeDatePicker($event)"
-      ></app-date-picker>
+        <div
+            class="qt-mr-4"
+            [textContent]="parseStartDate(item.startDate)"
+        ></div>
+        <app-date-picker
+            [editMode]="true"
+            [editDate]="item.startDate"
+            [placement]="'bottom-right'"
+            [useMinDate]="false"
+            [type]="'ICON'"
+            (onChange)="onChangeDatePicker($event)"
+        ></app-date-picker>
     </div>
     <div class="my-tasks-table__tech-users">
-      <app-tech-users
-        [editMode]="true"
-        [editUsers]="assignedUsers"
-        [type]="'TICEKTS'"
-        [selectedMode]="'SINGLE'"
-        [users]="listTechUsers"
-        [container]="'body'"
-        (usersChange)="onChangeUser($event)"
-      ></app-tech-users>
+        <app-tech-users
+            [editMode]="true"
+            [editUsers]="assignedUsers"
+            [type]="'TICEKTS'"
+            [selectedMode]="'SINGLE'"
+            [users]="listTechUsers"
+            [container]="'body'"
+            (usersChange)="onChangeUser($event)"
+        ></app-tech-users>
     </div>
 </div>

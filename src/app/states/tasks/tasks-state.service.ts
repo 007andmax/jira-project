@@ -5,6 +5,7 @@ import { TasksFilters } from 'src/app/components/tasks/class/tasks-filters';
   providedIn: 'root'
 })
 export class TasksStateService {
+  onOpenEditTasks: EventEmitter<any> = new EventEmitter();
   onOpenAddTasks: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
   filter: TasksFilters = new TasksFilters();
@@ -16,5 +17,8 @@ export class TasksStateService {
   }
   public openAddAside() {
     this.onOpenAddTasks.next(null);
+  }
+  public openEditAside(data) {
+    this.onOpenEditTasks.next(data);
   }
 }
