@@ -1,10 +1,14 @@
 @import './src/assets/styles/variable';
 
 .qt-table-modern__row {
+  min-height: 48px;
+
   & > div {
-    border-bottom: 1px solid #EAECF0;
-    border-radius: 0;
     min-height: 48px;
+    border-bottom: 1px solid $gray-200;
+    margin-bottom: 1px;
+    border-radius: 0;
+    color: $gray-500;
 
     &:first-child {
       padding-left: 8px;
@@ -75,4 +79,9 @@
 
 .tag__modern:empty {
   display: none;
+}
+
+::ng-deep .dropdown-assign-ticket .users-list {
+  max-width: 100%;
+  max-height: 280px;
 }

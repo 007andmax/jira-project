@@ -251,9 +251,9 @@
                 class="app-left-panel__filter-menu-expand-link"
             >
                 <i
-                    class="qt-dib qt-sz-16 qt-bg-contain"
-                    [ngClass]="{'qt-icon icon__folder qt-icon__white':selectedCategoryDocument === assignedDocumentCategory.id,
-                'qt-icon icon__folder':selectedCategoryDocument !== assignedDocumentCategory.id}"
+                    class="qt-dib qt-sz-16 qt-bg-contain qt-icon icon__folder"
+                    [ngClass]="{'qt-icon__white':selectedCategoryDocument === assignedDocumentCategory.id,
+                'qt-icon__gray-400':selectedCategoryDocument !== assignedDocumentCategory.id}"
                 ></i>
                 {{assignedDocumentCategory.name}}
             </li>

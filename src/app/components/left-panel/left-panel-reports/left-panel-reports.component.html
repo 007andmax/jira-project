@@ -29,6 +29,7 @@
         [ngForOf]="list"
         [ngForTrackBy]="trackById"
     >
+        <hr class="app-left-panel__ticket-menu-line">
         <div
             class="report-menu-item"
             *ngIf="report.permissions ? getPermissions(report.permissions) : true"
