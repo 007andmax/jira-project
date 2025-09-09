@@ -50,7 +50,7 @@ export class TasksEditComponent extends TasksAddComponent {
       attachFileIds: [[]],
       taskTicketId: [undefined],
     })
-    this.tasksStateService.onOpenEditTasks.subscribe(res => {
+    let onOpenEditTasks = this.tasksStateService.onOpenEditTasks.subscribe(res => {
       if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
 
       this.task = res;
@@ -77,8 +77,9 @@ export class TasksEditComponent extends TasksAddComponent {
       if (service) this.currentService.setValidate(true);
       this.selectedType = this.listTypes.find(item => item.value === this.task.type);
       this.opened = true;
-      // this.getServices();
+      if (this.selectedCompany) this.ticketStateService.getServicesList(this.selectedCompany.id);
     })
+    this.sub.add(onOpenEditTasks);
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetTechUsers(data);
       // this.onGetUsers();
@@ -97,6 +98,7 @@ export class TasksEditComponent extends TasksAddComponent {
   }
   onDeleteTask() {
     this.tasksService.deleteTask(this.task.id).subscribe(res => {
+      this.modelForm.controls["attachFileIds"].setValue([]);
       this.close();
     });
 

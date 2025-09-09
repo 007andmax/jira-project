@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { Task } from '../class/task';
 import { UntypedFormGroup, UntypedFormBuilder, Validators, FormGroup, FormBuilder } from '@angular/forms';
@@ -21,7 +21,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './tasks-add.component.html',
   styleUrls: ['./tasks-add.component.scss']
 })
-export class TasksAddComponent {
+export class TasksAddComponent implements OnInit, OnDestroy {
   opened: boolean = false;
   task: Task = new Task();
   modelForm: FormGroup;
@@ -120,11 +120,12 @@ export class TasksAddComponent {
       ticketUpdates: [[]],
       attachFileIds: [[]]
     })
-    this.tasksStateService.onOpenAddTasks.subscribe(res => {
+    let onOpenAddTasks = this.tasksStateService.onOpenAddTasks.subscribe(res => {
       if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
       this.opened = true;
       // this.getServices();
     })
+    this.sub.add(onOpenAddTasks)
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetTechUsers(data);
       // this.onGetUsers();
@@ -299,5 +300,8 @@ export class TasksAddComponent {
     this.modelForm.reset();
     this.modelForm.patchValue({ taskStatus: "OPEN" });
     this.files = [];
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

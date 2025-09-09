@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TasksService } from 'src/app/services/tasks/tasks.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -11,7 +11,7 @@ import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
   templateUrl: './tasks-dashboard-stats.component.html',
   styleUrls: ['./tasks-dashboard-stats.component.scss']
 })
-export class TasksDashboardStatsComponent {
+export class TasksDashboardStatsComponent implements OnInit, OnDestroy {
   stats: TasksStats;
   userStatsId: string;
   currentUser: CurrentUser = new CurrentUser();
@@ -39,5 +39,8 @@ export class TasksDashboardStatsComponent {
     this.tasksService.getStatistics(id).subscribe(res => {
       this.stats = new TasksStats(res);
     })
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
