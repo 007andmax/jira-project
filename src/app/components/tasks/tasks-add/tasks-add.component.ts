@@ -13,6 +13,8 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TicketProfileFormService } from '../../tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-tasks-add',
@@ -78,10 +80,12 @@ export class TasksAddComponent {
     public formBuilder: FormBuilder,
     public usersStateService: UsersStateService,
     public ticketStateService: TicketStateService,
-    private tasksService: TasksService,
+    public tasksService: TasksService,
     public companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef,
     public companiesService: CompaniesService,
+    public confirmStateService: ConfirmStateService,
+    public modalService: NgbModal,
   ) { }
 
   ngOnInit() {
@@ -97,9 +101,9 @@ export class TasksAddComponent {
         [Validators.minLength(0), Validators.maxLength(65000)]
       ],
       endDate: [null],
-      assignedUsersIds: [[], Validators.required, Validators.minLength(1)],
+      assignedUsersIds: [null, Validators.required],
       type: [
-        undefined,
+        null,
         [Validators.required]
       ],
       taskStatus: [

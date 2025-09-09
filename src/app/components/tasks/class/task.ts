@@ -1,4 +1,5 @@
 export class Task {
+    id: string;
     "dueDate": number;
     "startDate": number;
     "endDate": number;
@@ -50,7 +51,8 @@ export class Task {
             associatedTicketId: data.associatedTicketId ? data.associatedTicketId : undefined,
             dueDate: data.dueDate ? data.dueDate : undefined,
             ticketUpdates: data.ticketUpdates,
-            attachFileIds: data.attachFileIds
+            attachFileIds: data.attachFileIds ? data.attachFileIds : undefined,
+            taskTicketId: data.taskTicketId ? data.taskTicketId : undefined,
         }
     }
 }

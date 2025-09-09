@@ -64,6 +64,7 @@ export class ConfirmComponent implements OnInit {
       && this.action !== 'DELETE_NEWS'
       && this.action !== 'REMOVE_CATEGORY_FILES'
       && this.action !== 'REMOVE_FILE'
+      && this.action !== 'DELETE_TASK'
       && !this.isSignaturePage()
       && !this.isSettingsPage();
   }

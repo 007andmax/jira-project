@@ -1,4 +1,5 @@
 import { User } from "../../users/class/user";
+import { Task } from "./task";
 
 export class TasksFilters {
     techUser: User;
@@ -14,5 +15,12 @@ export class TasksFilters {
     }
     public setFilter(data) {
         this.filter = data;
+    }
+    checkFilterUse(task: Task) {
+        let selectedTechUser = true;
+        if (this.techUser) {
+            selectedTechUser = (task.assignedUsersIds.some(item => item === this.techUser.id));
+        }
+        return selectedTechUser
     }
 }

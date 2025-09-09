@@ -5,6 +5,8 @@ import { Company } from 'src/app/interfaces/company/company';
 import { Service } from 'src/app/interfaces/service/service';
 import { CompanySetting } from '../../companies/class/company-setting';
 import { forkJoin } from 'rxjs';
+import { DELETE_TASK } from 'src/app/const/confirm';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 
 @Component({
   selector: 'app-tasks-edit',
@@ -28,7 +30,7 @@ export class TasksEditComponent extends TasksAddComponent {
         [Validators.minLength(0), Validators.maxLength(65000)]
       ],
       endDate: [null],
-      assignedUsersIds: [[], Validators.required, Validators.minLength(1)],
+      assignedUsersIds: [null, Validators.required],
       type: [
         undefined,
         [Validators.required]
@@ -45,7 +47,8 @@ export class TasksEditComponent extends TasksAddComponent {
       ],
       dueDate: [undefined],
       ticketUpdates: [[]],
-      attachFileIds: [[]]
+      attachFileIds: [[]],
+      taskTicketId: [undefined],
     })
     this.tasksStateService.onOpenEditTasks.subscribe(res => {
       if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
@@ -58,7 +61,7 @@ export class TasksEditComponent extends TasksAddComponent {
         startDate: this.task.startDate,
         description: this.task.description,
         endDate: this.task.endDate,
-        // assignedUsersIds: this.task.assignedUsersIds,
+        assignedUsersIds: this.task.assignedUsersIds,
         type: this.task.type,
         taskStatus: this.task.taskStatus,
         companyId: this.task.companyId,
@@ -85,6 +88,18 @@ export class TasksEditComponent extends TasksAddComponent {
       this.getServices();
     })
     this.sub.add(getOnGetServicesList);
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_TASK) this.onDeleteTask();
+      }
+    })
+    this.sub.add(getConfirm);
+  }
+  onDeleteTask() {
+    this.tasksService.deleteTask(this.task.id).subscribe(res => {
+      this.close();
+    });
+
   }
   onSelectCompany(data) {
     this.modelForm.controls["companyId"].setValue(data ? data.id : null)
@@ -107,6 +122,29 @@ export class TasksEditComponent extends TasksAddComponent {
     this.modelForm.controls["dueDate"].setValue(dueDate);
     this.task.dueDate = dueDate;
   }
+  deleteTask() {
+    this.confirmStateService.setConfirmAction(DELETE_TASK);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `The Task has been successfully deleted`;
+    this.cd.detectChanges();
+  }
+  save() {
+    this.submitted = true;
+    console.log("this.modelForm.invalid", this.modelForm);
+    if (this.modelForm.invalid) {
+      return;
+    }
+    this.saveBtn.setDisabled(true);
+    console.log("this.modelForm.value", this.modelForm.value);
+    if (this.currentService.item && this.currentService.item.versionedId) this.modelForm.controls["ticketUpdates"].setValue([this.getDataForUpdateService()])
+    this.tasksService.editTask(this.task.id, this.task.getDataForAdd(this.modelForm.value)).subscribe(res => {
+      this.saveBtn.setDisabled(false);
+      this.modelForm.controls["attachFileIds"].setValue([]);
+      this.close();
+    }, err => {
+      this.saveBtn.setDisabled(false);
+    })
+  }
   close() {
     console.log(this.modelForm.controls["attachFileIds"].value);
     if (this.modelForm.controls["attachFileIds"].value && this.modelForm.controls["attachFileIds"].value.length > 0) {
@@ -122,7 +160,6 @@ export class TasksEditComponent extends TasksAddComponent {
     this.selectedAssignedUsers = [];
     this.selectedType = null;
     this.modelForm.reset();
-    this.modelForm.patchValue({ taskStatus: "OPEN" });
     this.files = [];
   }
 }

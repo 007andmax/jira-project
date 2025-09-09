@@ -5,6 +5,7 @@ import { TicketsListService } from '../../tickets/tickets/services/tickets-list.
 import { TasksFilters } from '../class/tasks-filters';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { Subscription } from 'rxjs';
+import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
 
 @Component({
   selector: 'app-tasks-list',
@@ -25,7 +26,8 @@ export class TasksListComponent implements OnInit, OnDestroy {
   constructor(private tasksService: TasksService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
-    private tasksStateService: TasksStateService
+    private tasksStateService: TasksStateService,
+    private tasksRealTimeService: TasksRealTimeService
   ) { }
 
 
@@ -40,6 +42,26 @@ export class TasksListComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     });
     this.sub.add(geLefttFilter);
+    let getChangeCompanies = this.tasksRealTimeService.changeTasksArray.subscribe((data) => {
+      if (!this.filter.checkFilterUse(new Task(data.data))) return
+      if (data.action === 'TASK_SAVED' && this.filter.checkFilterUse(new Task(data.data))) {
+        this.list.unshift(new Task(data.data));
+      }
+      if (data.action === 'TASK_EDITED') {
+        let index = this.list.findIndex(item => item.id == data.data.id);
+        if (index > -1) {
+          this.list[index] = new Task(data.data);
+        }
+      }
+      if (data.action === 'TASK_REMOVED') {
+        let index = this.list.findIndex(item => item.id == data.data);
+        if (index > -1) {
+          this.list.splice(index, 1);
+        }
+      }
+      this.cd.detectChanges();
+    })
+    this.sub.add(getChangeCompanies);
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;
