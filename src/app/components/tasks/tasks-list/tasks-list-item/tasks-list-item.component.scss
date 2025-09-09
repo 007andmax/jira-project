@@ -25,6 +25,8 @@
 .my-tasks-table {
   &__title {
     flex: 2 1 500px;
+    display: grid;
+    grid-template-columns: auto 1fr;
   }
 
   &__type {
@@ -34,6 +36,7 @@
   &__date {
     flex: 0 0 176px;
     justify-content: space-around;
+    font-size: 12px;
 
     ::ng-deep .date-picker {
       width: 28px;
@@ -77,8 +80,15 @@
   }
 }
 
-.tag__modern:empty {
-  display: none;
+.tag__modern {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 6px;
+  text-transform: capitalize;
+
+  &:empty {
+    display: none;
+  }
 }
 
 ::ng-deep .dropdown-assign-ticket .users-list {
