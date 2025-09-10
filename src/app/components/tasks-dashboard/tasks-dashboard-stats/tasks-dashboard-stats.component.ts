@@ -5,6 +5,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { TasksStats } from '../../tasks/class/tasks-stats';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-tasks-dashboard-stats',
@@ -33,6 +34,9 @@ export class TasksDashboardStatsComponent implements OnInit, OnDestroy {
       if (data.techUser && this.userStatsId != data.techUser.id) this.getStatistics(data.techUser.id);
     });
     this.sub.add(geLefttFilter);
+  }
+  parseDate() {
+    return moment(new Date()).format('dddd, MMMM DD');
   }
   getStatistics(id) {
     this.userStatsId = id;

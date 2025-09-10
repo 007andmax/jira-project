@@ -44,9 +44,7 @@
     class="app-left-panel__filter-menu-expand menu-expand-show "
     *ngIf="!customerPortalStateService.isCustomerPortal"
 >
-    <li class="app-left-panel__menu-expand-subtitle">
-        QUICK FILTERS
-    </li>
+    <li class="app-left-panel__menu-expand-subtitle">QUICK FILTERS</li>
     <ng-template
         ngFor
         let-item
@@ -57,10 +55,18 @@
             class="desktop-version filter-item"
             (click)="setStatus(item)"
         >
-            <div class="app-left-panel__filter-menu-expand-link" [textContent]="item.title"></div>
+            <div
+                [ngClass]="{'active': filter.filter === item.value }"
+                class="app-left-panel__filter-menu-expand-link"
+                [textContent]="item.title"
+            ></div>
         </li>
     </ng-template>
 </ul>
+
+
+
+
 
 
 <hr class="app-left-panel__ticket-menu-line">
@@ -68,9 +74,7 @@
     class="app-left-panel__filter-menu-expand menu-expand-show"
     *ngIf="!customerPortalStateService.isCustomerPortal"
 >
-    <li class="app-left-panel__menu-expand-subtitle">
-        Custom Filters
-    </li>
+    <li class="app-left-panel__menu-expand-subtitle">ASSIGNED TO</li>
     <ng-template
         ngFor
         let-user
@@ -81,16 +85,23 @@
             class="desktop-version filter-item qt-df qt-ai-c"
             (click)="toggleTechUser(user)"
         >
-          <label class="qt-checkbox">
-            <input
-              type="checkbox"
-              [checked]="filter.techUser && filter.techUser.id == user.id"
-              disabled
-            >
-            <span></span>
+            <label class="qt-checkbox">
+                <input
+                    type="checkbox"
+                    [checked]="filter.techUser && filter.techUser.id == user.id"
+                    disabled
+                >
+                <span></span>
 
-            <div class="qt-ml-8 qt-checkbox__text" [textContent]="user.firstName + ' ' + user.lastName"></div>
-          </label>
+
+
+
+
+                <div
+                    class="qt-ml-8 qt-checkbox__text"
+                    [textContent]="user.firstName + ' ' + user.lastName"
+                ></div>
+            </label>
         </li>
     </ng-template>
 </ul>
