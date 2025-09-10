@@ -300,6 +300,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     this.modelForm.reset();
     this.modelForm.patchValue({ taskStatus: "OPEN" });
     this.files = [];
+    this.currentService = new TicketProfileFormService();
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

@@ -39,10 +39,13 @@
         </a>
     </li>
 </ul>
-<hr class="app-left-panel__ticket-menu-line">
+<hr
+    class="app-left-panel__ticket-menu-line"
+    *ngIf="activePage === 'my-tasks'"
+>
 <ul
     class="app-left-panel__filter-menu-expand menu-expand-show "
-    *ngIf="!customerPortalStateService.isCustomerPortal"
+    *ngIf="!customerPortalStateService.isCustomerPortal && activePage === 'my-tasks'"
 >
     <li class="app-left-panel__menu-expand-subtitle">QUICK FILTERS</li>
     <ng-template
@@ -63,12 +66,6 @@
         </li>
     </ng-template>
 </ul>
-
-
-
-
-
-
 <hr class="app-left-panel__ticket-menu-line">
 <ul
     class="app-left-panel__filter-menu-expand menu-expand-show"
@@ -92,11 +89,6 @@
                     disabled
                 >
                 <span></span>
-
-
-
-
-
                 <div
                     class="qt-ml-8 qt-checkbox__text"
                     [textContent]="user.firstName + ' ' + user.lastName"

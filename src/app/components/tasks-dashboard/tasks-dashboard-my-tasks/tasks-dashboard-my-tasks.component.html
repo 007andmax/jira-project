@@ -18,5 +18,41 @@
         </div>
         <div class="qt-page-list__header-filters"></div>
     </div>
-    <app-tasks-dashboard-my-tasks-list></app-tasks-dashboard-my-tasks-list>
+    <ul
+        ngbNav
+        #nav="ngbNav"
+        [(activeId)]="activeTab"
+        class="nav-tabs"
+        (navChange)="setTab($event)"
+    >
+        <!-- Profile -->
+        <li [ngbNavItem]="'all'">
+            <a ngbNavLink>All</a>
+            <ng-template ngbNavContent>
+                <app-tasks-dashboard-my-tasks-list></app-tasks-dashboard-my-tasks-list>
+            </ng-template>
+        </li>
+        <li [ngbNavItem]="'upcoming'">
+            <a ngbNavLink>Upcoming</a>
+            <ng-template ngbNavContent>
+                <app-tasks-dashboard-my-tasks-list [filterType]="'UPCOMING'"></app-tasks-dashboard-my-tasks-list>
+            </ng-template>
+        </li>
+        <li [ngbNavItem]="'overdue'">
+            <a ngbNavLink>Overdue</a>
+            <ng-template ngbNavContent>
+                <app-tasks-dashboard-my-tasks-list [filterType]="'OVERDUE'"></app-tasks-dashboard-my-tasks-list>
+            </ng-template>
+        </li>
+        <li [ngbNavItem]="'completed'">
+            <a ngbNavLink>Completed</a>
+            <ng-template ngbNavContent>
+                <app-tasks-dashboard-my-tasks-list [filterType]="'COMPLETED'"></app-tasks-dashboard-my-tasks-list>
+            </ng-template>
+        </li>
+    </ul>
+    <div
+        [ngbNavOutlet]="nav"
+        class="mt-2"
+    ></div>
 </div>

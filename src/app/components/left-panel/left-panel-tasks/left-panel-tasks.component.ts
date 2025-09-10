@@ -59,7 +59,10 @@ export class LeftPanelTasksComponent {
     })
     this.sub.add(onChangeState);
     let onFirstOpen = this.leftPanelStateService.onFirstOpen.subscribe(data => {
-      if (this.leftPanelService.isTasksPage(data)) this.open = true;
+      if (this.leftPanelService.isTasksPage(data)) {
+        if (data === 'tasks-dashboard') this.initFilterForDashboard();
+        this.open = true;
+      }
     })
     this.sub.add(onFirstOpen);
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
@@ -94,8 +97,13 @@ export class LeftPanelTasksComponent {
   openPanel() {
     this.onOpenPanel.emit(null);
   }
-
+  initFilterForDashboard() {
+    this.filter.filter = null;
+    this.filter.techUser = this.usersService.getCurrentUser() as any;
+    console.log("this.filter.techUser", this.filter.techUser);
+  }
   public goToState(data) {
+    if (data === 'tasks-dashboard') this.initFilterForDashboard();
     this.onChangeState.emit(data);
   }
 

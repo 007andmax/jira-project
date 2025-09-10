@@ -7,6 +7,8 @@ import { CompanySetting } from '../../companies/class/company-setting';
 import { forkJoin } from 'rxjs';
 import { DELETE_TASK } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { S } from '@angular/cdk/keycodes';
+import { TicketProfileFormService } from '../../tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
 
 @Component({
   selector: 'app-tasks-edit',
@@ -67,14 +69,17 @@ export class TasksEditComponent extends TasksAddComponent {
         companyId: this.task.companyId,
         associatedTicketId: this.task.associatedTicketId,
         dueDate: this.task.dueDate,
-        ticketUpdates: this.task.ticketUpdates,
+        ticketUpdates: this.task.ticketUpdateList,
         attachFileIds: this.task.attachFileIds
       })
       this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id == this.task.companyId);
       this.selectedAssignedUsers = this.usersStateService.getAllUsers().filter(user => this.task.assignedUsersIds.some(item => item == user.id));
-      let service = this.task.ticketUpdates.find(item => item.type == "SERVICE");
-      this.currentService.setItem(service);
-      if (service) this.currentService.setValidate(true);
+      let service = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
+      console.log("service", service);
+      if (service) {
+        this.currentService.setItem(service.services[0].item);
+        this.currentService.setValidate(true);
+      }
       this.selectedType = this.listTypes.find(item => item.value === this.task.type);
       this.opened = true;
       if (this.selectedCompany) this.ticketStateService.getServicesList(this.selectedCompany.id);
@@ -156,6 +161,7 @@ export class TasksEditComponent extends TasksAddComponent {
 
       });
     }
+    this.currentService = new TicketProfileFormService();
     this.opened = false;
     this.submitted = false;
     this.selectedCompany = null;

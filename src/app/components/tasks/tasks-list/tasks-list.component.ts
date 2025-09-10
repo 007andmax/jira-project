@@ -23,11 +23,11 @@ export class TasksListComponent implements OnInit, OnDestroy {
   offset: number = 10;
   container = document.body.querySelector(".main-container");
   sub: Subscription = new Subscription();
-  constructor(private tasksService: TasksService,
-    private ticketsListService: TicketsListService,
+  constructor(public tasksService: TasksService,
+    public ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
-    private tasksStateService: TasksStateService,
-    private tasksRealTimeService: TasksRealTimeService
+    public tasksStateService: TasksStateService,
+    public tasksRealTimeService: TasksRealTimeService
   ) { }
 
 
@@ -72,7 +72,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
     this.ticketsListService.setBlockList(false);
     this.list = [];
   }
-  private getTickets() {
+  public getTickets() {
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;

@@ -46,7 +46,7 @@ export class ServicesListComponent implements OnInit, OnDestroy {
     let onServicePreloader = this.ticketStateService.onServicePreloader.subscribe(data => {
       this.isDisabled = data;
       this.preloader = data;
-      this.clear();
+      if (!this.editItem) this.clear();
       this.cd.detectChanges();
     })
     this.sub.add(onServicePreloader);
