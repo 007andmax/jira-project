@@ -130,7 +130,8 @@
       }
       &.--active,
       &:hover {
-        background-color: $gray-700;
+        background-color: $gray-800;
+        border: 1px solid $gray-700;
         .app-left-panel__menu-icon {
           background-color: $white;
         }

@@ -1,27 +1,47 @@
-<ul
-    ngbNav
-    #nav="ngbNav"
-    [(activeId)]="activeTab"
-    class="nav-tabs"
-    (navChange)="setTab($event)"
->
-    <!-- Profile -->
-    <li [ngbNavItem]="'list'">
-        <a ngbNavLink>List</a>
-        <ng-template ngbNavContent>
-            <app-tasks-list #profile></app-tasks-list>
-        </ng-template>
-    </li>
-    <li [ngbNavItem]="'board'">
-        <a ngbNavLink>Board</a>
-        <ng-template ngbNavContent></ng-template>
-    </li>
+<div class="qt-page-list__header-tabs-line">
+  <ul
+      ngbNav
+      #nav="ngbNav"
+      [(activeId)]="activeTab"
+      class="qt-page-list__header-tabs"
+      (navChange)="setTab($event)"
+  >
+      <!-- Profile -->
+      <li class="qt-page-list__header-tabs-item" [ngbNavItem]="'list'">
+          <a
+            class="qt-page-list__header-tabs-item-link"
+            ngbNavLink
+          >
+            <i class="icn-16 qt-icon qt-dib icon__unordered-list qt-page-list__header-tabs-item-icon"></i>
+            <span class="qt-page-list__header-tabs-item-text">List</span>
+          </a>
+          <ng-template ngbNavContent>
+              <app-tasks-list #profile></app-tasks-list>
+          </ng-template>
+      </li>
+      <li class="qt-page-list__header-tabs-item" [ngbNavItem]="'board'">
+          <a
+            class="qt-page-list__header-tabs-item-link"
+            ngbNavLink
+          >
+            <i class="icn-16 qt-icon qt-dib icon__square-kanban qt-page-list__header-tabs-item-icon"></i>
+            <span class="qt-page-list__header-tabs-item-text">Board</span>
+          </a>
+          <ng-template ngbNavContent></ng-template>
+      </li>
 
-    <li [ngbNavItem]="'calendar'">
-        <a ngbNavLink>Calendar</a>
-        <ng-template ngbNavContent></ng-template>
-    </li>
-</ul>
+      <li class="qt-page-list__header-tabs-item"  [ngbNavItem]="'calendar'">
+          <a
+            class="qt-page-list__header-tabs-item-link"
+            ngbNavLink
+          >
+            <i class="icn-16 qt-icon qt-dib icon__calendar qt-page-list__header-tabs-item-icon"></i>
+            <span class="qt-page-list__header-tabs-item-text">Calendar</span>
+          </a>
+          <ng-template ngbNavContent></ng-template>
+      </li>
+  </ul>
+</div>
 <div
     [ngbNavOutlet]="nav"
     class="mt-2"

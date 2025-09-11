@@ -8,7 +8,7 @@
   padding: 12px;
   background: $white;
   position: sticky;
-  top: 94px;
+  top: 99px;
   z-index: 1;
 }
 
@@ -26,8 +26,8 @@
   flex-shrink: 0;
   background-color: $white;
   position: sticky;
-  top: 93px;
-  height: calc(100vh - 160px);
+  top: 99px;
+  height: calc(100vh - 165px);
   transition: .3s ease-in-out width;
   border-left: 1px solid $gray-200;
   margin-left: 16px;
