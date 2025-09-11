@@ -17,6 +17,7 @@ export class TasksDashboardMyTasksListComponent extends TasksListComponent {
 
   public onScroll() {
     this.filter.filter = this.filterType;
+    this.filter.techUser = this.tasksStateService.filter.techUser;
     this.infiniteScrollDisabled = true;
     this.getTickets();
   }

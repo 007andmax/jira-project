@@ -8,9 +8,16 @@ export class TasksStateService {
   onOpenEditTasks: EventEmitter<any> = new EventEmitter();
   onOpenAddTasks: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
+  onToggleFilter: EventEmitter<any> = new EventEmitter();
   filter: TasksFilters = new TasksFilters();
   constructor() { }
 
+  public changeToggleFilter(data) {
+    this.onToggleFilter.emit(data);
+  }
+  public setFilter(data) {
+    this.filter = data;
+  }
   public onInitFilter(data) {
     this.filter = data;
     this.onFilter.emit(data);

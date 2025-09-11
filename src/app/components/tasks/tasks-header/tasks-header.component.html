@@ -5,7 +5,12 @@
         </div>
         <div class="qt-page-list__header-title-line--rigth">
             <div class="new-companies-content__header--search">
-                <button class="qt-button --gray --md qt-button-filter qt-ml-8 qt-df">
+                <button
+                    class="qt-button --gray --md qt-button-filter qt-ml-8 qt-df"
+                    [ngClass]="{'active':toggleFilter,
+                  'is-exist-filters':isExistFilters()}"
+                    (click)="onToggleFilter(!toggleFilter)"
+                >
                     <span class="qt-icon icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                     <span>Filters</span>
                 </button>

@@ -22,6 +22,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
   public page_number: number = 0;
   offset: number = 10;
   container = document.body.querySelector(".main-container");
+  toggleFilter: boolean = false;
   sub: Subscription = new Subscription();
   constructor(public tasksService: TasksService,
     public ticketsListService: TicketsListService,
@@ -62,6 +63,13 @@ export class TasksListComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(getChangeCompanies);
+    let onToggleFilter = this.tasksStateService.onToggleFilter.subscribe(data => {
+      this.toggleFilter = data;
+    })
+    this.sub.add(onToggleFilter);
+  }
+  onToggleFilter(data) {
+    this.tasksStateService.changeToggleFilter(data);
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;

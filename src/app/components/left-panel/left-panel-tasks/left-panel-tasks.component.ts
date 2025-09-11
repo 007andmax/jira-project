@@ -17,6 +17,7 @@ import { LeftPanelUsersService } from '../left-panel-users/services/left-panel-u
 import { TasksFilters } from '../../tasks/class/tasks-filters';
 import { CompanySetting } from '../../companies/class/company-setting';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
+import { User } from '../../users/class/user';
 
 @Component({
   selector: 'app-left-panel-tasks',
@@ -59,7 +60,9 @@ export class LeftPanelTasksComponent {
     })
     this.sub.add(onChangeState);
     let onFirstOpen = this.leftPanelStateService.onFirstOpen.subscribe(data => {
+      console.log("data", data);
       if (this.leftPanelService.isTasksPage(data)) {
+        console.log("1");
         if (data === 'tasks-dashboard') this.initFilterForDashboard();
         this.open = true;
       }
@@ -69,6 +72,11 @@ export class LeftPanelTasksComponent {
       this.onGetTechUsers(data);
     })
     this.sub.add(getOnUsers);
+    let getOnGetCurrentuser = this.usersStateService.getOnGetCurrentuser().subscribe((data) => {
+      console.log("getOnGetCurrentuser", this.activePage);
+      if (this.activePage === 'tasks-dashboard' && this.filter.techUser == null) this.initFilterForDashboard();
+    })
+    this.sub.add(getOnGetCurrentuser);
   }
   toggleTechUser(data) {
     if (this.filter.techUser && this.filter.techUser.id == data.id) {
@@ -99,11 +107,19 @@ export class LeftPanelTasksComponent {
   }
   initFilterForDashboard() {
     this.filter.filter = null;
-    this.filter.techUser = this.usersService.getCurrentUser() as any;
+    this.filter.techUser = this.usersStateService.getCurrentUser();
+    this.tasksStateService.setFilter(this.filter);
     console.log("this.filter.techUser", this.filter.techUser);
   }
   public goToState(data) {
-    if (data === 'tasks-dashboard') this.initFilterForDashboard();
+    if (this.activePage !== data) {
+      if (data === 'tasks-dashboard') {
+        this.initFilterForDashboard();
+      } else {
+        this.filter = new TasksFilters();
+        this.tasksStateService.setFilter(this.filter);
+      }
+    }
     this.onChangeState.emit(data);
   }
 

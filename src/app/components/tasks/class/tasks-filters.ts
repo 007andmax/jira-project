@@ -2,7 +2,7 @@ import { User } from "../../users/class/user";
 import { Task } from "./task";
 
 export class TasksFilters {
-    techUser: User;
+    techUser: any;
     filter: string;
     constructor() {
     }
