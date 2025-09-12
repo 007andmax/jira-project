@@ -1,0 +1,39 @@
+<div
+    class="input-group date-picker pointer"
+    ngbDropdown
+    container="body"
+>
+    <span
+        *ngIf="selectedType"
+        [textContent]="selectedType.title"
+        ngbDropdownToggle
+        id="dropdownAddType"
+    ></span>
+    <div
+        *ngIf="!selectedType"
+        class="tab-pane__user-circle qt-df qt-ai-c qt-jc-c pointer qt-fs-0 qt-circle"
+        ngbDropdownToggle
+        id="dropdownAddType"
+    >
+        <div class="qt-icon icon__user qt-sz-20"></div>
+    </div>
+    <div
+        ngbDropdownMenu
+        aria-labelledby="dropdownAddType"
+        class="app-drop-down__dropdown"
+    >
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="listTypes"
+            let-i="index"
+        >
+            <button
+                ngbDropdownItem
+                [textContent]="item.title"
+                (click)="onSelect(item)"
+                [ngClass]="{'--selected':isSelected(item)}"
+            ></button>
+        </ng-template>
+    </div>
+</div>

@@ -76,6 +76,8 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     sanitize: false,
   };
   files = [];
+  selectedAssignedUsers = [];
+  selectedType: CompanySetting;
   constructor(public tasksStateService: TasksStateService,
     public formBuilder: FormBuilder,
     public usersStateService: UsersStateService,
@@ -135,6 +137,22 @@ export class TasksAddComponent implements OnInit, OnDestroy {
       this.getServices();
     })
     this.sub.add(getOnGetServicesList);
+    let onOpenAddTasksFromShortVersion = this.tasksStateService.onOpenAddTasksFromShortVersion.subscribe(res => {
+      if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
+
+      this.modelForm.patchValue({
+        title: res.title,
+        startDate: res.startDate,
+        endDate: res.endDate,
+        assignedUsersIds: res.assignedUsersIds,
+        type: res.type,
+        taskStatus: res.taskStatus,
+      })
+      this.selectedType = this.listTypes.find(item => item.value === res.type);
+      this.selectedAssignedUsers = this.usersStateService.getAllUsers().filter(user => res.assignedUsersIds.some(item => item == user.id));
+      this.opened = true;
+    })
+    this.sub.add(onOpenAddTasksFromShortVersion)
   }
   setTab(data) {
     this.activeTab = data['nextId'];

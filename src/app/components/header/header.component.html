@@ -76,6 +76,13 @@
                 <div class="qt-icon icon__products qt-icon__gray-600 qt-sz-20 qt-mr-12"></div>
                 Product
             </li>
+            <li
+                ngbDropdownItem
+                (click)="onAddTasks()"
+            >
+                <div class="qt-icon icon__products qt-icon__gray-600 qt-sz-20 qt-mr-12"></div>
+                Tasks
+            </li>
         </ul>
     </div>
     <!-- <div class="nav-header__notifications-bell --notifications-exits icon__notifications"></div> -->
@@ -139,6 +146,24 @@
                     Logout
                 </li>
             </ul>
+        </div>
+    </div>
+    <div
+        ngbDropdown
+        #addTask="ngbDropdown"
+    >
+        <div
+            class="actions-body"
+            id="dropdownCreateTask"
+            ngbDropdownToggle
+        >
+        </div>
+        <div
+            class="qt-dropdown-menu"
+            ngbDropdownMenu
+            aria-labelledby="dropdownCreateTask"
+        >
+            <app-task-header-add></app-task-header-add>
         </div>
     </div>
 </div>

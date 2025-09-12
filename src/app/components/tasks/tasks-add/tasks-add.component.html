@@ -75,6 +75,7 @@
                     <app-tasks-add-assigned-users
                         [placeholder]="'Select Tech User'"
                         [placement]="'top-left'"
+                        [selectedTag]="selectedAssignedUsers"
                         [list]="techUsersList"
                         (filterChange)="onSelectTechUser($event)"
                     ></app-tasks-add-assigned-users>
@@ -138,6 +139,7 @@
                         [change]="true"
                         [errorMessage]="'Task type is required'"
                         [validate]="!(submitted && f2.type.errors)"
+                        [editItem]="selectedType"
                         (onSelectedItem)="onSelectType($event)"
                     >
                     </app-drop-down>

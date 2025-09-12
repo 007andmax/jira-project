@@ -4,6 +4,8 @@ import * as moment from "moment";
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { TasksService } from 'src/app/services/tasks/tasks.service';
 
 @Component({
   selector: 'app-tasks-list-item',
@@ -16,7 +18,9 @@ export class TasksListItemComponent {
   listTechUsers = [];
   sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService,
-    private tasksStateService: TasksStateService
+    private tasksStateService: TasksStateService,
+    private companiesStateService: CompaniesStateService,
+    public tasksService: TasksService,
   ) { }
 
   ngOnInit() {
@@ -43,14 +47,18 @@ export class TasksListItemComponent {
     return moment(new Date(date)).format('DD MMM, hh:mm A');
   }
   public onChangeDatePicker(data) {
-    /* let date = new Date(data.year, data.month - 1, data.day);
-     item.setDate(moment(date).format('YYYY/MM/DD'));
-     item.onInitEdit(true);*/
+    this.item.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.save();
   }
   public onChangeUser(data) {
-    /* if (data.length === 0) item.setAssignedUser(null);
-     if (data.length === 1) item.setAssignedUser(data[0]);
-     item.onInitEdit(true);*/
+    if (data.length === 0) this.item.setAssignedUser([]);
+    if (data.length === 1) this.item.setAssignedUser([data[0].id]);
+    this.save();
+  }
+  save() {
+    this.tasksService.editTask(this.item.id, this.item.getDataForAdd({ ...this.item, ticketUpdates: this.item.ticketUpdateList })).subscribe(res => {
+
+    })
   }
   editTask() {
     this.tasksStateService.openEditAside(this.item);

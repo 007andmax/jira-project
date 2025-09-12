@@ -17,8 +17,6 @@ import { TicketProfileFormService } from '../../tickets/tickets/ticket-edit-asid
 })
 export class TasksEditComponent extends TasksAddComponent {
   selectedCompany: Company;
-  selectedAssignedUsers = [];
-  selectedType: CompanySetting;
   ngOnInit() {
     this.modelForm = this.formBuilder.group({
       title: [

@@ -21,9 +21,14 @@ export class Task {
             }
         }
     }
-
+    public setAssignedUser(user) {
+        this.assignedUsersIds = user;
+    }
     public setDueDate(day, month, year, timeOffset) {
         this.dueDate = this.parseDate(day, month, year, timeOffset);
+    }
+    public setStartDate(day, month, year, timeOffset) {
+        this.startDate = this.parseDate(day, month, year, timeOffset);
     }
     parseDate(day, month, year, timeOffset) {
         let current = new Date();

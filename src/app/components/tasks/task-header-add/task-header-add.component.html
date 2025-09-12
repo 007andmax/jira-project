@@ -1,0 +1,60 @@
+<form [formGroup]="modelForm">
+    <div class="qt-df qt-ai-c qt-jc-sb">
+        <h3>Create Task</h3>
+        <div class="qt-df qt-ai-c">
+            <div
+                class="qt-button qt-ml-12"
+                appDisabledBtn
+                #saveBtn="disabled"
+                (onClick)="save()"
+                [ngClass]="{'--loading':saveBtn.isBlock()}"
+            >
+                <span>Save Task</span>
+                <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
+            </div>
+            <div
+                class="qt-button --square-md --gray pointer"
+                (click)="openAside()"
+            >
+                <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+            </div>
+        </div>
+    </div>
+    <div class="qt-table-modern__row">
+        <div class="my-tasks-table__title qt-ai-c">
+            <div class="qt-icon icon__check qt-sz-20 icn-16 qt-mr-8"></div>
+            <input
+                type="text"
+                class="form-input --editable"
+                placeholder="Enter Name Category"
+                formControlName="title"
+            >
+        </div>
+        <div class="my-tasks-table__type">
+            <app-task-header-add-type (onChange)="onSelectType($event)"></app-task-header-add-type>
+        </div>
+        <div class="my-tasks-table__date">
+            <div
+                class="qt-mr-4"
+                *ngIf="modelForm.value.startDate"
+                [textContent]="parseStartDate(modelForm.value.startDate)"
+            ></div>
+            <app-multi-datepicker
+                #dp
+                [validate]="!(submitted && f2.startDate.errors)"
+                [errorMessage]="'Start date is required'"
+                (selectedDate)="filterByDate($event)"
+            ></app-multi-datepicker>
+
+        </div>
+        <div class="my-tasks-table__tech-users">
+            <app-tech-users
+                [editMode]="true"
+                [type]="'TICEKTS'"
+                [users]="techUsersList"
+                [container]="'body'"
+                (usersChange)="onSelectTechUser($event)"
+            ></app-tech-users>
+        </div>
+    </div>
+</form>

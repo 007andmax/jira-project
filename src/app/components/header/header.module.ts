@@ -4,6 +4,7 @@ import { HeaderComponent } from './header.component';
 import { GlobalSearchComponent } from './global-search/global-search.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { TaskHeaderAddModule } from '../tasks/task-header-add/task-header-add.module';
 
 
 
@@ -15,6 +16,7 @@ import { FormsModule } from '@angular/forms';
         CommonModule,
         NgbModule,
         FormsModule,
+        TaskHeaderAddModule
     ],
     exports: [HeaderComponent]
 

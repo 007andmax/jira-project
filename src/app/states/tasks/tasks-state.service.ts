@@ -7,6 +7,7 @@ import { TasksFilters } from 'src/app/components/tasks/class/tasks-filters';
 export class TasksStateService {
   onOpenEditTasks: EventEmitter<any> = new EventEmitter();
   onOpenAddTasks: EventEmitter<any> = new EventEmitter();
+  onOpenAddTasksFromShortVersion: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
   onToggleFilter: EventEmitter<any> = new EventEmitter();
   filter: TasksFilters = new TasksFilters();
@@ -21,6 +22,9 @@ export class TasksStateService {
   public onInitFilter(data) {
     this.filter = data;
     this.onFilter.emit(data);
+  }
+  public openAddAsideFromShortVersion(data) {
+    this.onOpenAddTasksFromShortVersion.next(data);
   }
   public openAddAside() {
     this.onOpenAddTasks.next(null);
