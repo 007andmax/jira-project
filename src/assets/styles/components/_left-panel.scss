@@ -141,58 +141,58 @@
     min-width: 20px;
     height: 20px;
     background-position: center;
-    background-color: $gray-300;
+    background-color: $gray-400;
     mask-size: contain;
     mask-repeat: no-repeat;
     mask-position: center;
 
-    &.--quick-support {
-      -webkit-mask-image: url("/assets/img/icons/quick-support.svg");
-      mask-image: url("/assets/img/icons/quick-support.svg");
+    &.--quick-support-filled {
+      -webkit-mask-image: url("/assets/img/icons/quick-support-filled.svg");
+      mask-image: url("/assets/img/icons/quick-support-filled.svg");
     }
-    &.--tickets {
-      -webkit-mask-image: url("/assets/img/icons/tickets.svg");
-      mask-image: url("/assets/img/icons/tickets.svg");
+    &.--tickets-filled {
+      -webkit-mask-image: url("/assets/img/icons/tickets-filled.svg");
+      mask-image: url("/assets/img/icons/tickets-filled.svg");
     }
-    &.--companies {
-      -webkit-mask-image: url("/assets/img/icons/companies.svg");
-      mask-image: url("/assets/img/icons/companies.svg");
+    &.--companies-filled {
+      -webkit-mask-image: url("/assets/img/icons/companies-filled.svg");
+      mask-image: url("/assets/img/icons/companies-filled.svg");
     }
-    &.--users {
-      -webkit-mask-image: url("/assets/img/icons/users.svg");
-      mask-image: url("/assets/img/icons/users.svg");
+    &.--users-filled {
+      -webkit-mask-image: url("/assets/img/icons/users-filled.svg");
+      mask-image: url("/assets/img/icons/users-filled.svg");
     }
-    &.--marketing {
-      -webkit-mask-image: url("/assets/img/icons/marketing.svg");
-      mask-image: url("/assets/img/icons/marketing.svg");
+    &.--marketing-filled {
+      -webkit-mask-image: url("/assets/img/icons/marketing-filled.svg");
+      mask-image: url("/assets/img/icons/marketing-filled.svg");
     }
-    &.--billing {
-      -webkit-mask-image: url("/assets/img/icons/billing.svg");
-      mask-image: url("/assets/img/icons/billing.svg");
+    &.--billing-filled {
+      -webkit-mask-image: url("/assets/img/icons/billing-filled.svg");
+      mask-image: url("/assets/img/icons/billing-filled.svg");
     }
-    &.--products {
-      -webkit-mask-image: url("/assets/img/icons/products.svg");
-      mask-image: url("/assets/img/icons/products.svg");
+    &.--inventory-filled {
+      -webkit-mask-image: url("/assets/img/icons/inventory-filled.svg");
+      mask-image: url("/assets/img/icons/inventory-filled.svg");
     }
-    &.--password-manager {
-      -webkit-mask-image: url("/assets/img/icons/password.svg");
-      mask-image: url("/assets/img/icons/password.svg");
+    &.--password-manager-filled {
+      -webkit-mask-image: url("/assets/img/icons/password-manager-filled.svg");
+      mask-image: url("/assets/img/icons/password-manager-filled.svg");
     }
-    &.--reports {
-      -webkit-mask-image: url("/assets/img/icons/reports.svg");
-      mask-image: url("/assets/img/icons/reports.svg");
+    &.--reports-filled {
+      -webkit-mask-image: url("/assets/img/icons/reports-filled.svg");
+      mask-image: url("/assets/img/icons/reports-filled.svg");
     }
-    &.--folder-management {
-      -webkit-mask-image: url("/assets/img/icons/folder-management.svg");
-      mask-image: url("/assets/img/icons/folder-management.svg");
+    &.--file-manager-filled {
+      -webkit-mask-image: url("/assets/img/icons/file-manager-filled.svg");
+      mask-image: url("/assets/img/icons/file-manager-filled.svg");
     }
-    &.--settings {
-      -webkit-mask-image: url("/assets/img/icons/settings.svg");
-      mask-image: url("/assets/img/icons/settings.svg");
+    &.--settings-filled {
+      -webkit-mask-image: url("/assets/img/icons/settings-filled.svg");
+      mask-image: url("/assets/img/icons/settings-filled.svg");
     }
-    &.--documents {
-      -webkit-mask-image: url("/assets/img/icons/documents.svg");
-      mask-image: url("/assets/img/icons/documents.svg");
+    &.--documents-filled {
+      -webkit-mask-image: url("/assets/img/icons/documents-filled.svg");
+      mask-image: url("/assets/img/icons/documents-filled.svg");
     }
     &.--devices{
       -webkit-mask-image: url("/assets/img/tool.svg");
@@ -256,10 +256,10 @@
     &-link {
       display: flex;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
       cursor: pointer;
       font-weight: 500;
-      color: $white;
+      color: $gray-400;
       align-items: center;
       position: relative;
       margin-bottom: 2px;

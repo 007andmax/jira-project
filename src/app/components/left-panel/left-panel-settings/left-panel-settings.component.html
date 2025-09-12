@@ -14,7 +14,7 @@
         (click)="goToState('myprofile-component')"
         class="app-left-panel__menu-expand-link app-left-panel__menu-expand-link--jc-fs"
     >
-        <div class="icon__menu--submenu qt-icon icon__my-profile qt-icon__gray-300 qt-sz-20 qt-bg-contain qt-mr-8"></div>
+        <div class="icon__menu--submenu qt-icon icon__profile-settings-filled qt-icon__gray-400 qt-sz-18"></div>
         My Profile Settings
     </li>
     <li
@@ -23,7 +23,7 @@
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_COMPANY_PROFILE_SETTINGS')"
         class="app-left-panel__menu-expand-link app-left-panel__menu-expand-link--jc-fs"
     >
-        <div class="icon__menu--submenu qt-icon icon__companies qt-sz-20 qt-icon__gray-300 qt-mr-8"></div>
+        <div class="icon__menu--submenu qt-icon icon__company-profile-filled qt-sz-18 qt-icon__gray-400"></div>
         Company Profile
     </li>
     <li
@@ -32,7 +32,7 @@
         *ngIf="!customerPortalStateService.isCustomerPortal"
         class="app-left-panel__menu-expand-link app-left-panel__menu-expand-link--jc-fs"
     >
-        <div class="icon__menu--submenu qt-icon icon__commissions qt-icon__gray-300 qt-sz-20 qt-bg-contain qt-mr-8"></div>
+        <div class="icon__menu--submenu qt-icon icon__commissions-filled qt-icon__gray-400 qt-sz-18"></div>
         Commissions
     </li>
     <li
@@ -41,7 +41,7 @@
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_CRM_SETTINGS')"
         class="app-left-panel__menu-expand-link app-left-panel__menu-expand-link--jc-fs"
     >
-        <div class="icon__menu--submenu qt-icon icon__crm qt-sz-20 qt-icon__gray-300 qt-mr-8"></div>
+        <div class="icon__menu--submenu qt-icon icon__crm-settings-filled qt-sz-18 qt-icon__gray-400"></div>
         CRM Settings
     </li>
     <li
@@ -50,7 +50,7 @@
         *ngIf="getPermissions('VIEW_COMPANIES') && getPermissions('CREATE_COMPANIES') && getPermissions('VIEW_USERS') && getPermissions('CREATE_USERS')"
         class="app-left-panel__menu-expand-link app-left-panel__menu-expand-link--jc-fs"
     >
-        <div class="icon__menu--submenu qt-icon icon__users qt-icon__gray-300 qt-sz-20 qt-mr-8"></div>
+        <div class="icon__menu--submenu qt-icon icon__customer-portal-filled qt-icon__gray-400 qt-sz-18"></div>
         Customer Portal
     </li>
     <li
@@ -59,7 +59,7 @@
         *ngIf="!customerPortalStateService.isCustomerPortal"
         class="app-left-panel__menu-expand-link app-left-panel__menu-expand-link--jc-fs"
     >
-        <div class="icon__menu--submenu qt-icon icon__tool qt-icon__gray-300 qt-sz-20 qt-mr-8"></div>
+        <div class="icon__menu--submenu qt-icon icon__device-settings-filled qt-icon__gray-400 qt-sz-18"></div>
         Device Setting
     </li>
     <li
@@ -68,7 +68,7 @@
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_EMAIL_SETTINGS')"
         class="app-left-panel__menu-expand-link app-left-panel__menu-expand-link--jc-fs"
     >
-        <div class="icon__menu--submenu qt-icon icon__email qt-icon__gray-300 qt-sz-20 qt-mr-8"></div>
+        <div class="icon__menu--submenu qt-icon icon__email-settings-filled qt-icon__gray-400 qt-sz-18"></div>
         Email Settings
     </li>
     <li
@@ -77,7 +77,7 @@
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_EMAIL_TEMPLATES_SETTINGS')"
         class="app-left-panel__menu-expand-link app-left-panel__menu-expand-link--jc-fs"
     >
-        <div class="icon__menu--submenu qt-icon icon__template-settings qt-icon__gray-300 qt-sz-20 qt-bg-contain qt-mr-8"></div>
+        <div class="icon__menu--submenu qt-icon icon__email-templates-filled qt-icon__gray-400 qt-sz-18"></div>
         Email Templates
     </li>
     <li
@@ -86,7 +86,7 @@
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_ACCOUNTING_SETTINGS')"
         class="app-left-panel__menu-expand-link app-left-panel__menu-expand-link--jc-fs"
     >
-        <div class="icon__menu--submenu qt-icon icon__crm qt-sz-20 qt-icon__gray-300 qt-mr-8"></div>
+        <div class="icon__menu--submenu qt-icon icon__finance-filled qt-sz-18 qt-icon__gray-400"></div>
         Finance
     </li>
     <li
@@ -95,7 +95,7 @@
         *ngIf="!customerPortalStateService.isCustomerPortal"
         class="app-left-panel__menu-expand-link app-left-panel__menu-expand-link--jc-fs"
     >
-        <div class="icon__menu--submenu qt-icon icon__marketing qt-icon__gray-300 qt-sz-20 qt-bg-contain qt-mr-8"></div>
+        <div class="icon__menu--submenu qt-icon icon__marketing-email-filled qt-icon__gray-400 qt-sz-18"></div>
         Marketing Email
     </li>
     <li
@@ -104,7 +104,7 @@
         (click)="goToState('products-settings')"
         class="app-left-panel__menu-expand-link app-left-panel__menu-expand-link--jc-fs"
     >
-        <div class="icon__menu--submenu qt-icon icon__products qt-sz-20 qt-icon__gray-300 qt-mr-8"></div>
+        <div class="icon__menu--submenu qt-icon icon__products-filled qt-sz-18 qt-icon__gray-400"></div>
         Products
     </li>
     <li
@@ -113,7 +113,7 @@
         (click)="goToState('manage-tags-component')"
         class="app-left-panel__menu-expand-link app-left-panel__menu-expand-link--jc-fs"
     >
-        <div class="icon__menu--submenu qt-icon icon__tags qt-icon__gray-300 qt-sz-20 qt-mr-8"></div>
+        <div class="icon__menu--submenu qt-icon icon__tags-filled qt-icon__gray-400 qt-sz-18"></div>
         Tags
     </li>
     <li
@@ -122,7 +122,7 @@
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TECH_USERS_SETTINGS')"
         class="app-left-panel__menu-expand-link app-left-panel__menu-expand-link--jc-fs"
     >
-        <div class="icon__menu--submenu qt-icon icon__users qt-icon__gray-300 qt-sz-20 qt-mr-8"></div>
+        <div class="icon__menu--submenu qt-icon icon__tech-users-filled qt-icon__gray-400 qt-sz-18"></div>
         Tech Users
     </li>
     <li
@@ -131,7 +131,7 @@
         *ngIf="currentUser && currentUser.isOwner || getPermissions('VIEW_TICKET_SETTINGS')"
         class="app-left-panel__menu-expand-link app-left-panel__menu-expand-link--jc-fs"
     >
-        <div class="icon__menu--submenu qt-icon icon__tickets qt-sz-20 qt-icon__gray-300 qt-mr-8"></div>
+        <div class="icon__menu--submenu qt-icon icon__ticket-settings-filled qt-sz-18 qt-icon__gray-400"></div>
         Ticket Settings
     </li>
 </ul>
