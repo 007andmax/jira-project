@@ -11,6 +11,10 @@
   background-color: $gray-900;
   color: $white;
 
+  &__header-mobile {
+    border-bottom: 1px solid transparent;
+  }
+
   &__header {
     display: flex;
     justify-content: space-between;
@@ -63,7 +67,7 @@
       height: calc(100% - 50px);
       width: 100%;
       overflow-x: clip;
-      margin-top: 22px;
+      margin-top: 23px;
     }
     &::-webkit-scrollbar-thumb {
       background: transparent;
@@ -79,7 +83,7 @@
 
   &__header-resize-btn {
     position: absolute;
-    top: 24px;
+    top: 21px;
     right: 18px;
     width: 20px;
     height: 20px;
@@ -93,7 +97,9 @@
     align-items: center;
     height: 40px;
     cursor: default;
-    margin-right: 24px;
+    padding-inline: 16px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid $gray-800;
   }
 
   &__menu-title {
@@ -103,8 +109,6 @@
     white-space: nowrap;
     font-size: 16px;
     line-height: 19px;
-    margin-bottom: 16px;
-    margin-left: 8px;
   }
 
   &__menu-text {
@@ -380,6 +384,10 @@
 
 .app-left-panel.--mini {
   width: $left-panel-mini-width;
+
+  .app-left-panel__header-mobile {
+    border-color: $gray-800;
+  }
 
   .icon__monogram {
     opacity: 0;
