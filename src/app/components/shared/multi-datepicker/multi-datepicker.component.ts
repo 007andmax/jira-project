@@ -30,7 +30,7 @@ export class MultiDatepickerComponent implements OnInit {
     * @param {DateService} dateService Service to work with date
    */
   constructor(
-    private dateService: DateService
+    public dateService: DateService
   ) { }
 
   ngOnInit() { }

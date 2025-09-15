@@ -36,7 +36,7 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
 
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     $(document).ready(() => {
-      let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval;
+      let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany() ? this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
       if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') this.step = 1;
       if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') this.step = 5;
       if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') this.step = 10;

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription, forkJoin } from 'rxjs';
@@ -28,7 +28,7 @@ export class TaskHeaderAddComponent {
   formatDate: string = FORMAT_DATE_2;
   @ViewChild('saveBtn', { static: false }) saveBtn: DisabledBtnDirective;
   sub: Subscription = new Subscription();
-
+  @Output() onClose = new EventEmitter();
   constructor(public tasksStateService: TasksStateService,
     public formBuilder: FormBuilder,
     public usersStateService: UsersStateService,
@@ -137,6 +137,7 @@ export class TaskHeaderAddComponent {
     this.submitted = false;
     this.modelForm.reset();
     this.modelForm.patchValue({ taskStatus: "OPEN" });
+    this.onClose.emit();
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

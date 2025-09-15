@@ -16,6 +16,12 @@
                 class="qt-button --square-md --gray pointer"
                 (click)="openAside()"
             >
+                <div class="qt-icon icon__expand-diagonal qt-sz-16 pointer"></div>
+            </div>
+            <div
+                class="qt-button --square-md --gray pointer"
+                (click)="close()"
+            >
                 <div class="qt-icon icon__close qt-sz-16 pointer"></div>
             </div>
         </div>
@@ -39,12 +45,12 @@
                 *ngIf="modelForm.value.startDate"
                 [textContent]="parseStartDate(modelForm.value.startDate)"
             ></div>
-            <app-multi-datepicker
-                #dp
+            <app-tasks-date-picker
+                [container]="'body'"
                 [validate]="!(submitted && f2.startDate.errors)"
                 [errorMessage]="'Start date is required'"
                 (selectedDate)="filterByDate($event)"
-            ></app-multi-datepicker>
+            ></app-tasks-date-picker>
 
         </div>
         <div class="my-tasks-table__tech-users">

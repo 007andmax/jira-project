@@ -772,6 +772,9 @@ Example:
   &__mark-read {
     mask-image: url("/assets/img/icons/mark-read.svg");
   }
+ &__expand-diagonal {
+   mask-image: url("/assets/img/icons/expand-diagonal.svg");
+ }
   &.--updated {
     position: relative;
     &::before {

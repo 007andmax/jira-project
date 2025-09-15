@@ -10,6 +10,7 @@ import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datep
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
+import { TasksDatePickerModule } from '../tasks-date-picker/tasks-date-picker.module';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
         NgbModule,
         DisabledBtnModule,
         PreloaderTicketModule,
+        TasksDatePickerModule
     ],
     exports: [TaskHeaderAddComponent]
 })

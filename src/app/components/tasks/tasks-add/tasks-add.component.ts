@@ -149,7 +149,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
         taskStatus: res.taskStatus,
       })
       this.selectedType = this.listTypes.find(item => item.value === res.type);
-      this.selectedAssignedUsers = this.usersStateService.getAllUsers().filter(user => res.assignedUsersIds.some(item => item == user.id));
+      if (res.assignedUsersIds) this.selectedAssignedUsers = this.usersStateService.getAllUsers().filter(user => res.assignedUsersIds.some(item => item == user.id));
       this.opened = true;
     })
     this.sub.add(onOpenAddTasksFromShortVersion)

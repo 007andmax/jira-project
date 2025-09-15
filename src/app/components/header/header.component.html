@@ -150,6 +150,7 @@
     </div>
     <div
         ngbDropdown
+        [autoClose]="false"
         #addTask="ngbDropdown"
     >
         <div
@@ -163,7 +164,7 @@
             ngbDropdownMenu
             aria-labelledby="dropdownCreateTask"
         >
-            <app-task-header-add></app-task-header-add>
+            <app-task-header-add (onClose)="addTask.close()"></app-task-header-add>
         </div>
     </div>
 </div>
