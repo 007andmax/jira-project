@@ -424,6 +424,14 @@ input.qt-dropdown-input {
     }
   }
 
+  &.--circle {
+    border-radius: 50%;
+    padding: 6px;
+    width: 28px;
+    height: 28px;
+    box-shadow: unset;
+  }
+
   &.--transparent {
     position: relative;
     padding-inline: 0;

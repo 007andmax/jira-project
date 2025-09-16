@@ -1,9 +1,9 @@
-<form [formGroup]="modelForm">
-    <div class="qt-df qt-ai-c qt-jc-sb">
-        <h3>Create Task</h3>
+<form [formGroup]="modelForm" class="create-task-popover">
+    <div class="create-task-popover__header qt-df qt-ai-c qt-jc-sb">
+        <h3 class="create-task-popover__title">Create Task</h3>
         <div class="qt-df qt-ai-c">
             <div
-                class="qt-button qt-ml-12"
+                class="qt-button --sm qt-ml-8"
                 appDisabledBtn
                 #saveBtn="disabled"
                 (onClick)="save()"
@@ -13,22 +13,22 @@
                 <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
             </div>
             <div
-                class="qt-button --square-md --gray pointer"
+                class="qt-button --square-sm --gray pointer qt-ml-8"
                 (click)="openAside()"
             >
                 <div class="qt-icon icon__expand-diagonal qt-sz-16 pointer"></div>
             </div>
             <div
-                class="qt-button --square-md --gray pointer"
+                class="qt-button --square-sm --gray pointer qt-ml-8"
                 (click)="close()"
             >
                 <div class="qt-icon icon__close qt-sz-16 pointer"></div>
             </div>
         </div>
     </div>
-    <div class="qt-table-modern__row">
-        <div class="my-tasks-table__title qt-ai-c">
-            <div class="qt-icon icon__check qt-sz-20 icn-16 qt-mr-8"></div>
+    <div class="create-task-popover__body">
+        <div class="qt-df qt-ai-c qt-f-1">
+            <div class="qt-icon icon__check qt-sz-16 icn-16 qt-mr-8"></div>
             <input
                 type="text"
                 class="form-input --editable"
@@ -39,7 +39,7 @@
         <div class="my-tasks-table__type">
             <app-task-header-add-type (onChange)="onSelectType($event)"></app-task-header-add-type>
         </div>
-        <div class="my-tasks-table__date">
+        <div class="my-tasks-table__date qt-ml-8">
             <div
                 class="qt-mr-4"
                 *ngIf="modelForm.value.startDate"
@@ -53,7 +53,7 @@
             ></app-tasks-date-picker>
 
         </div>
-        <div class="my-tasks-table__tech-users">
+        <div class="my-tasks-table__tech-users qt-ml-8">
             <app-tech-users
                 [editMode]="true"
                 [type]="'TICEKTS'"

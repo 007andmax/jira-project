@@ -1,5 +1,5 @@
 <div
-    class="input-group date-picker pointer"
+    class="input-group pointer"
     ngbDropdown
     container="body"
 >
@@ -11,11 +11,11 @@
     ></span>
     <div
         *ngIf="!selectedType"
-        class="tab-pane__user-circle qt-df qt-ai-c qt-jc-c pointer qt-fs-0 qt-circle"
+        class="tab-pane__user-circle qt-button --gray --circle"
         ngbDropdownToggle
         id="dropdownAddType"
     >
-        <div class="qt-icon icon__user qt-sz-20"></div>
+        <div class="qt-icon icon__unordered-list qt-sz-16"></div>
     </div>
     <div
         ngbDropdownMenu
@@ -30,10 +30,11 @@
         >
             <button
                 ngbDropdownItem
-                [textContent]="item.title"
                 (click)="onSelect(item)"
                 [ngClass]="{'--selected':isSelected(item)}"
-            ></button>
+            >
+              <span class="tag__modern" [textContent]="item.title"></span>
+            </button>
         </ng-template>
     </div>
 </div>

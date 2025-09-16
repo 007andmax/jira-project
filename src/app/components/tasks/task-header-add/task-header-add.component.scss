@@ -1,97 +1,54 @@
 @import './src/assets/styles/variable';
 
-.qt-table-modern__row {
+.create-task-popover {
+  width: 558px;
+
+  &__header {
     min-height: 48px;
+    padding: 10px 8px;
 
-    &>div {
-        min-height: 48px;
-        border-bottom: 1px solid $gray-200;
-        margin-bottom: 1px;
-        border-radius: 0;
-        color: $gray-500;
-
-        &:first-child {
-            padding-left: 8px;
-            border-left: unset;
-        }
-
-        &:last-child {
-            padding-right: 8px;
-            border-right: unset;
-        }
+    .qt-button:not(.--square-sm) {
+      padding-inline: 8px;
     }
+  }
+
+  &__title {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 600;
+    color: $gray-900;
+  }
+
+  &__body {
+    min-height: 48px;
+    padding: 10px 8px;
+    border-top: 1px solid $gray-200;
+    display: flex;
+    flex-wrap: nowrap;
+
+    .form-input {
+      &.--editable {
+        color: $gray-900;
+        border-color: transparent;
+        border-radius: 6px;
+        outline: none;
+        width: 100%;
+
+        &::placeholder {
+          color: $gray-400;
+          font-weight: 400;
+        }
+      }
+    }
+  }
 }
 
-.my-tasks-table {
-    &__title {
-        flex: 2 1 500px;
-        display: grid;
-        grid-template-columns: auto 1fr;
-    }
+::ng-deep .tab-pane__user-circle {
+  width: 28px !important;
+  height: 28px !important;
 
-    &__type {
-        flex: 0 0 92px;
-    }
-
-    &__date {
-        flex: 0 0 176px;
-        justify-content: space-around;
-        font-size: 12px;
-
-        ::ng-deep .date-picker {
-            width: 28px;
-            height: 28px;
-            display: flex;
-            place-content: center;
-            border: 1px solid $gray-200;
-            border-radius: 50%;
-
-            .icon__calendar {
-                position: absolute;
-                left: 50%;
-                translate: -50%;
-                background-color: $gray-500 !important;
-                width: 16px !important;
-                height: 16px !important;
-                margin: 0;
-            }
-        }
-    }
-
-    &__tech-users {
-        flex: 0 0 42px;
-
-        ::ng-deep .ticket-updates__photo-people {
-            width: 28px !important;
-            height: 28px !important;
-            line-height: 27px;
-        }
-
-        ::ng-deep .tab-pane__user-circle {
-            margin-right: 0;
-            width: 28px !important;
-            height: 28px !important;
-
-            .icon__user {
-                width: 16px;
-                height: 16px;
-            }
-        }
-    }
-}
-
-.tag__modern {
-    font-size: 12px;
-    font-weight: 500;
-    padding: 4px 6px;
-    text-transform: capitalize;
-
-    &:empty {
-        display: none;
-    }
-}
-
-::ng-deep .dropdown-assign-ticket .users-list {
-    max-width: 100%;
-    max-height: 280px;
+  .qt-icon {
+    width: 16px;
+    height: 16px;
+  }
 }
