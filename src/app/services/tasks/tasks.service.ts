@@ -37,8 +37,14 @@ export class TasksService {
   editTask(taskId, data) {
     return this.http.put(`${this.apiUrl}/tasks/${taskId}`, data);
   }
+  changeStatusTask(taskId, status) {
+    return this.http.put(`${this.apiUrl}/tasks/${taskId}/status?status=${status}`, {});
+  }
   getTasks(page, techUserId = null, filter = null) {
     return this.http.get(`${this.apiUrl}tasks?size=10&page=${page}&${techUserId ? `userId=${techUserId}` : ''}&${filter ? `filter=${filter}` : ''}`);
+  }
+  getTaskDetail(taskId) {
+    return this.http.get(`${this.apiUrl}tasks/${taskId}`);
   }
   getStatistics(userId) {
     return this.http.get(`${this.apiUrl}tasks/statistics?userId=${userId}`);

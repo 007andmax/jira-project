@@ -1,12 +1,20 @@
 <div class="qt-table-modern__row">
     <div class="my-tasks-table__title qt-ai-c">
-        <div class="qt-icon icon__check qt-sz-20 icn-16 qt-mr-8"></div>
+        <div
+            class="qt-icon icon__check qt-sz-20 icn-16 qt-mr-8"
+            [ngClass]="{'qt-icon__green-600':item.taskStatus == 'CLOSED'}"
+            (click)="toggleStatus()"
+        ></div>
         <div
             class="qt-color-gray-900 qt-fw-500 ellipsis"
             [textContent]="item.title"
+            (click)="editTask()"
         ></div>
     </div>
-    <div class="my-tasks-table__type">
+    <div
+        class="my-tasks-table__type"
+        (click)="editTask()"
+    >
         <span
             class="tag__modern"
             [textContent]="item.type"

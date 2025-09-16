@@ -69,7 +69,6 @@ export class TaskHeaderAddComponent {
         undefined
       ],
       dueDate: [undefined],
-      ticketUpdates: [[]],
       attachFileIds: [[]]
     })
 
@@ -79,6 +78,13 @@ export class TaskHeaderAddComponent {
     })
     this.sub.add(getOnUsers);
 
+  }
+  toggleStatus() {
+    if (this.modelForm.value.taskStatus == 'OPEN') {
+      this.modelForm.controls["taskStatus"].setValue('CLOSED');
+    } else {
+      this.modelForm.controls["taskStatus"].setValue('OPEN');
+    }
   }
   openAside() {
     this.tasksStateService.openAddAsideFromShortVersion(this.modelForm.value);

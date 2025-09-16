@@ -9,6 +9,7 @@ import { DELETE_TASK } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { S } from '@angular/cdk/keycodes';
 import { TicketProfileFormService } from '../../tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
+import { Task } from '../class/task';
 
 @Component({
   selector: 'app-tasks-edit',
@@ -52,35 +53,38 @@ export class TasksEditComponent extends TasksAddComponent {
     })
     let onOpenEditTasks = this.tasksStateService.onOpenEditTasks.subscribe(res => {
       if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
+      this.tasksService.getTaskDetail(res.id).subscribe((task: any) => {
+        this.task = new Task(task);
+        console.log("this.task", this.task);
+        console.log("this.modelForm", this.modelForm);
+        this.modelForm.patchValue({
+          title: this.task.title,
+          startDate: this.task.startDate,
+          description: this.task.description,
+          endDate: this.task.endDate,
+          assignedUsersIds: this.task.assignedUsersIds,
+          type: this.task.type,
+          taskStatus: this.task.taskStatus,
+          companyId: this.task.companyId,
+          associatedTicketId: this.task.associatedTicketId,
+          dueDate: this.task.dueDate,
+          ticketUpdates: this.task.ticketUpdateList,
+          attachFileIds: this.task.attachFileIds
+        })
+        this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id == this.task.companyId);
+        this.selectedAssignedUsers = this.usersStateService.getAllUsers().filter(user => this.task.assignedUsersIds.some(item => item == user.id));
+        let service = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
+        console.log("service", service);
+        if (service) {
+          this.currentService.setItem(service.services[0].item);
+          this.currentService.setValidate(true);
+        }
+        this.selectedType = this.listTypes.find(item => item.value === this.task.type);
+        this.opened = true;
+        if (this.selectedCompany) this.ticketStateService.getServicesList(this.selectedCompany.id);
+      });
 
-      this.task = res;
-      console.log("this.task", this.task);
-      console.log("this.modelForm", this.modelForm);
-      this.modelForm.patchValue({
-        title: this.task.title,
-        startDate: this.task.startDate,
-        description: this.task.description,
-        endDate: this.task.endDate,
-        assignedUsersIds: this.task.assignedUsersIds,
-        type: this.task.type,
-        taskStatus: this.task.taskStatus,
-        companyId: this.task.companyId,
-        associatedTicketId: this.task.associatedTicketId,
-        dueDate: this.task.dueDate,
-        ticketUpdates: this.task.ticketUpdateList,
-        attachFileIds: this.task.attachFileIds
-      })
-      this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id == this.task.companyId);
-      this.selectedAssignedUsers = this.usersStateService.getAllUsers().filter(user => this.task.assignedUsersIds.some(item => item == user.id));
-      let service = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
-      console.log("service", service);
-      if (service) {
-        this.currentService.setItem(service.services[0].item);
-        this.currentService.setValidate(true);
-      }
-      this.selectedType = this.listTypes.find(item => item.value === this.task.type);
-      this.opened = true;
-      if (this.selectedCompany) this.ticketStateService.getServicesList(this.selectedCompany.id);
+
     })
     this.sub.add(onOpenEditTasks);
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {

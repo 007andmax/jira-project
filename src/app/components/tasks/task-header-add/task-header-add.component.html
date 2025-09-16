@@ -1,4 +1,7 @@
-<form [formGroup]="modelForm" class="create-task-popover">
+<form
+    [formGroup]="modelForm"
+    class="create-task-popover"
+>
     <div class="create-task-popover__header qt-df qt-ai-c qt-jc-sb">
         <h3 class="create-task-popover__title">Create Task</h3>
         <div class="qt-df qt-ai-c">
@@ -28,7 +31,11 @@
     </div>
     <div class="create-task-popover__body">
         <div class="qt-df qt-ai-c qt-f-1">
-            <div class="qt-icon icon__check qt-sz-16 icn-16 qt-mr-8"></div>
+            <div
+                class="qt-icon icon__check qt-sz-16 icn-16 qt-mr-8 pointer"
+                [ngClass]="{'qt-icon__green-600':f2.taskStatus.value == 'CLOSED'}"
+                (click)="toggleStatus()"
+            ></div>
             <input
                 type="text"
                 class="form-input --editable"
@@ -51,6 +58,12 @@
                 [errorMessage]="'Start date is required'"
                 (selectedDate)="filterByDate($event)"
             ></app-tasks-date-picker>
+
+
+
+
+
+
 
         </div>
         <div class="my-tasks-table__tech-users qt-ml-8">

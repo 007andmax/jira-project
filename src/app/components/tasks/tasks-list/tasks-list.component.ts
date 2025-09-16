@@ -54,7 +54,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
           this.list[index] = new Task(data.data);
         }
       }
-      if (data.action === 'TASK_REMOVED') {
+      if (data.action === 'TASK_DELETED') {
         let index = this.list.findIndex(item => item.id == data.data);
         if (index > -1) {
           this.list.splice(index, 1);

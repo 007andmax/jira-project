@@ -58,7 +58,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
         this.list[index] = new TicketProfileTask(data.data);
       }
       if (data.action == "TASK_SAVED" && !this.list.some(item => item.id == data.data.id)) this.list.push(new TicketProfileTask(data.data));
-      if (data.action == "TASK_REMOVED") {
+      if (data.action == "TASK_DELETED") {
         let index = this.list.findIndex(item => item.id == data.data);
         if (index > -1) this.list.splice(index, 1);
       }

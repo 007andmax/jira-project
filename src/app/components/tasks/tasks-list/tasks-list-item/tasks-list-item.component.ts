@@ -63,4 +63,10 @@ export class TasksListItemComponent {
   editTask() {
     this.tasksStateService.openEditAside(this.item);
   }
+  toggleStatus() {
+    this.item.taskStatus = this.item.taskStatus === 'OPEN' ? 'CLOSED' : 'OPEN';
+    this.tasksService.changeStatusTask(this.item.id, this.item.taskStatus).subscribe(res => {
+
+    });
+  }
 }
