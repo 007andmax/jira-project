@@ -8,12 +8,16 @@
         [textContent]="selectedType.title"
         ngbDropdownToggle
         id="dropdownAddType"
+        placement="top"
+        ngbTooltip="Set Type"
     ></span>
     <div
         *ngIf="!selectedType"
         class="tab-pane__user-circle qt-button --gray --circle"
         ngbDropdownToggle
         id="dropdownAddType"
+        placement="top"
+        ngbTooltip="Set Type"
     >
         <div class="qt-icon icon__unordered-list qt-sz-16"></div>
     </div>
@@ -33,7 +37,10 @@
                 (click)="onSelect(item)"
                 [ngClass]="{'--selected':isSelected(item)}"
             >
-              <span class="tag__modern" [textContent]="item.title"></span>
+                <span
+                    class="tag__modern"
+                    [textContent]="item.title"
+                ></span>
             </button>
         </ng-template>
     </div>

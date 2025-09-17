@@ -14,6 +14,7 @@ import { TicketProfileFormService } from '../../tickets/tickets/ticket-edit-asid
 import { TicketStateService } from '../../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { Task } from '../class/task';
 import * as moment from "moment";
+import { TasksDatePickerComponent } from '../tasks-date-picker/tasks-date-picker.component';
 
 @Component({
   selector: 'app-task-header-add',
@@ -26,6 +27,7 @@ export class TaskHeaderAddComponent {
   techUsersList = [];
   submitted: boolean = false;
   formatDate: string = FORMAT_DATE_2;
+  @ViewChild('datePicker', { static: true }) datePicker: TasksDatePickerComponent;
   @ViewChild('saveBtn', { static: false }) saveBtn: DisabledBtnDirective;
   sub: Subscription = new Subscription();
   @Output() onClose = new EventEmitter();
@@ -41,18 +43,32 @@ export class TaskHeaderAddComponent {
     public modalService: NgbModal,
   ) { }
   ngOnInit() {
+    if (this.companiesStateService.getCurrentCompany()) this.initModelForm();
+    let getOnCurrentCompany = this.companiesStateService.getOnCurrentCompany().subscribe(data => {
+      if (data) this.initModelForm();
+    });
+    this.sub.add(getOnCurrentCompany);
+
+    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
+      this.onGetTechUsers(data);
+      // this.onGetUsers();
+    })
+    this.sub.add(getOnUsers);
+  }
+  initModelForm() {
+    let currentDate = new Date();
     this.modelForm = this.formBuilder.group({
       title: [
         "",
         [Validators.required, Validators.minLength(1), Validators.maxLength(300)]
       ],
-      startDate: [null,
-        [Validators.required]
+      startDate: [this.task.parseDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset),
+      [Validators.required]
       ],
       description: [undefined,
         [Validators.minLength(0), Validators.maxLength(65000)]
       ],
-      endDate: [null],
+      endDate: [this.task.parseDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset)],
       assignedUsersIds: [null, Validators.required],
       type: [
         null,
@@ -71,12 +87,7 @@ export class TaskHeaderAddComponent {
       dueDate: [undefined],
       attachFileIds: [[]]
     })
-
-    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
-      this.onGetTechUsers(data);
-      // this.onGetUsers();
-    })
-    this.sub.add(getOnUsers);
+    this.datePicker.setEditDates(this.modelForm.value.startDate, this.modelForm.value.endDate);
 
   }
   toggleStatus() {
@@ -88,6 +99,7 @@ export class TaskHeaderAddComponent {
   }
   openAside() {
     this.tasksStateService.openAddAsideFromShortVersion(this.modelForm.value);
+    this.close();
   }
   onSelectType(data) {
     this.modelForm.controls["type"].setValue(data ? data.value : null)
@@ -142,7 +154,13 @@ export class TaskHeaderAddComponent {
   close() {
     this.submitted = false;
     this.modelForm.reset();
-    this.modelForm.patchValue({ taskStatus: "OPEN" });
+    let currentDate = new Date();
+    this.modelForm.patchValue({
+      taskStatus: "OPEN",
+      startDate: this.task.parseDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset),
+      endDate: this.task.parseDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset),
+    });
+    this.datePicker.setEditDates(this.modelForm.value.startDate, this.modelForm.value.endDate);
     this.onClose.emit();
   }
   ngOnDestroy(): void {

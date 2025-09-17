@@ -33,10 +33,11 @@
         <div class="qt-df qt-ai-c qt-f-1">
             <div
                 class="qt-icon icon__check qt-sz-16 icn-16 qt-mr-8 pointer"
-                [ngClass]="{'qt-icon__green-600':f2.taskStatus.value == 'CLOSED'}"
+                [ngClass]="{'qt-icon__green-600':modelForm && modelForm.value.taskStatus  == 'CLOSED'}"
                 (click)="toggleStatus()"
             ></div>
             <input
+                *ngIf="modelForm"
                 type="text"
                 class="form-input --editable"
                 placeholder="Enter Name Category"
@@ -49,22 +50,16 @@
         <div class="my-tasks-table__date qt-ml-8">
             <div
                 class="qt-mr-4"
-                *ngIf="modelForm.value.startDate"
+                *ngIf="modelForm && modelForm.value.startDate"
                 [textContent]="parseStartDate(modelForm.value.startDate)"
             ></div>
             <app-tasks-date-picker
+                #datePicker
                 [container]="'body'"
                 [validate]="!(submitted && f2.startDate.errors)"
                 [errorMessage]="'Start date is required'"
                 (selectedDate)="filterByDate($event)"
             ></app-tasks-date-picker>
-
-
-
-
-
-
-
         </div>
         <div class="my-tasks-table__tech-users qt-ml-8">
             <app-tech-users
