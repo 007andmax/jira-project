@@ -4,48 +4,63 @@
     #dp="ngbDropdown"
     [placement]="placement"
 >
-    <app-mat-form-field
-        #formField
-        ngbDropdownAnchor
+    <div
+        class="qt-df qt-ai-c"
+        *ngIf="selectedTag.length == 0"
     >
-        <app-mat-chip-list
-            #chipList
-            [items]="selectedTag"
-            (onChangeItems)="formField.checkSelectedItems(selectedTag)"
+        <input
+            type="text"
+            class="pointer"
+            autocomplete="off"
+            placeholder="Select Assignee"
+            id="dropdown1"
+            readonly
+            ngbDropdownToggle
         >
-            <app-dynamic-tooltip
-                [position]="'top'"
-                #productTooltip
-            ></app-dynamic-tooltip>
-            <app-mat-chip
-                class="app-mat-tags-with-avatar"
-                *ngFor="let tag of selectedTag; let i = index"
-                [isRemove]="removable"
-                (onClose)="remove(i)"
-            >
-                <div class="qt-df qt-ai-c">
-                    <div
-                        class="app-mat-tags-with-avatar__avatar"
-                        [textContent]="ticketsListService.getAssignedUserNameForAvatar(tag)"
-                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(tag)}"
-                    ></div>
-                    <div
-                        class="clip-text"
-                        *ngIf="reduceItemName(tag).length >= 30"
-                        (mouseenter)="productTooltip.setContent(reduceItemName(tag));productTooltip.show($event.target)"
-                        (mouseleave)="productTooltip.hide()"
-                    >
-                        {{reduceItemName(tag)}}
-                    </div>
-                    <div
-                        class="clip-text"
-                        *ngIf="reduceItemName(tag).length < 30"
-                    >
-                        {{reduceItemName(tag)}}
-                    </div>
+        <span class="app-drop-down__right-icon pointer">
+            <i class="icn-sm qt-icon icon__arrow-down report-caret-icon"></i>
+        </span>
+    </div>
+    <div *ngIf="selectedTag.length > 0">
+        <app-dynamic-tooltip
+            [position]="'top'"
+            #productTooltip
+        ></app-dynamic-tooltip>
+        <app-mat-chip
+            class="app-mat-tags-with-avatar"
+            *ngFor="let tag of selectedTag; let i = index"
+            [isRemove]="removable"
+            (onClose)="remove(i)"
+        >
+            <div class="qt-df qt-ai-c">
+                <div
+                    class="app-mat-tags-with-avatar__avatar"
+                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(tag)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(tag)}"
+                ></div>
+                <div
+                    class="clip-text"
+                    *ngIf="reduceItemName(tag).length >= 30"
+                    (mouseenter)="productTooltip.setContent(reduceItemName(tag));productTooltip.show($event.target)"
+                    (mouseleave)="productTooltip.hide()"
+                >
+                    {{reduceItemName(tag)}}
                 </div>
-            </app-mat-chip>
-            <input
+                <div
+                    class="clip-text"
+                    *ngIf="reduceItemName(tag).length < 30"
+                >
+                    {{reduceItemName(tag)}}
+                </div>
+            </div>
+        </app-mat-chip>
+        <div
+            class="qt-button --square-sm --gray pointer qt-ml-8"
+            ngbDropdownToggle
+        >
+            <span class="qt-icon icon__add qt-sz-16 qt-icon__white qt-dib qt-mr-8"></span>
+        </div>
+        <!-- <input
                 id="dropdownServices"
                 ngbDropdownToggle
                 [placeholder]="placeholder"
@@ -53,9 +68,8 @@
                 class="pointer"
                 autocomplete="off"
                 (input)="onSearch($event)"
-            >
-        </app-mat-chip-list>
-    </app-mat-form-field>
+            > -->
+    </div>
     <div
         class="dropdown-menu"
         ngbDropdownMenu

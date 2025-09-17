@@ -33,8 +33,6 @@ export class TasksAddAssignedUsersComponent extends TicketsFilterDropDownCompone
       this.list = JSON.parse(JSON.stringify(this.reqList));
     }
     this.filterChange.emit(this.selectedTag);
-    this.userInput.nativeElement.value = '';
-
     if (this.searchName.length > 0) {
       this.searchName = "";
       this.setDefaultScoll();

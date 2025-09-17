@@ -29,10 +29,11 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TasksListItemModule } from './tasks-list/tasks-list-item/tasks-list-item.module';
 import { TasksEditComponent } from './tasks-edit/tasks-edit.component';
 import { TasksDatePickerModule } from './tasks-date-picker/tasks-date-picker.module';
+import { TasksAddAssignedUsersModule } from './tasks-add/tasks-add-assigned-users/tasks-add-assigned-users.module';
 
 
 @NgModule({
-    declarations: [TasksComponent, TasksHeaderComponent, TasksAddComponent, TasksAddAssignedUsersComponent, TasksListComponent, TasksTabsComponent, TasksEditComponent
+    declarations: [TasksComponent, TasksHeaderComponent, TasksListComponent, TasksTabsComponent, TasksEditComponent
     ],
     imports: [
         CommonModule,
@@ -57,7 +58,8 @@ import { TasksDatePickerModule } from './tasks-date-picker/tasks-date-picker.mod
         TechUsersModule,
         InfiniteScrollModule,
         TasksListItemModule,
-        TasksDatePickerModule
+        TasksDatePickerModule,
+        TasksAddAssignedUsersModule
     ],
 
 })
