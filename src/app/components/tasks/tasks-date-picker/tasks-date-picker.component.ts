@@ -14,7 +14,12 @@ export class TasksDatePickerComponent extends MultiDatepickerComponent {
   durationStart: number = new Date().getTime();
   durationEnd: number = new Date().getTime();
 
+  @Input() editStart: number;
+  @Input() editEnd: number;
 
+  ngOnInit() {
+    if (this.editStart && this.editEnd) this.setEditDates(this.editStart, this.editEnd);
+  }
 
   public setEditDates(editStart, editEnd) {
     if (editStart) this.fromDate = new NgbDate(new Date(editStart).getFullYear(), new Date(editStart).getMonth() + 1, new Date(editStart).getDate());

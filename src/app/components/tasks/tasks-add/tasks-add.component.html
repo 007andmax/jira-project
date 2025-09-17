@@ -148,13 +148,13 @@
             <div class="qt-inputs-row">
                 <div class="qt-input-block qt-f50">
                     <div class="qt-input-block__label">Start - End Date</div>
-                    <app-multi-datepicker
+                    <app-tasks-date-picker
                         #dp
+                        [container]="'body'"
                         [validate]="!(submitted && f2.startDate.errors)"
                         [errorMessage]="'Start date is required'"
                         (selectedDate)="filterByDate($event)"
-                    ></app-multi-datepicker>
-
+                    ></app-tasks-date-picker>
                 </div>
             </div>
             <div class="qt-inputs-row">

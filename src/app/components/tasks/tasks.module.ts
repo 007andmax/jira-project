@@ -28,6 +28,7 @@ import { TechUsersModule } from '../shared/tech-users/tech-users.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TasksListItemModule } from './tasks-list/tasks-list-item/tasks-list-item.module';
 import { TasksEditComponent } from './tasks-edit/tasks-edit.component';
+import { TasksDatePickerModule } from './tasks-date-picker/tasks-date-picker.module';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { TasksEditComponent } from './tasks-edit/tasks-edit.component';
         UploadAreaProgressModule,
         TechUsersModule,
         InfiniteScrollModule,
-        TasksListItemModule
+        TasksListItemModule,
+        TasksDatePickerModule
     ],
 
 })

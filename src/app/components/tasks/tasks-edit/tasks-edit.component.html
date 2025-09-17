@@ -4,7 +4,7 @@
 >
     <form [formGroup]="modelForm">
         <div class="qt-aside-modern__header">
-            <div class="qt-aside-modern__header-title">Create Task</div>
+            <div class="qt-aside-modern__header-title">Edit Task</div>
             <div
                 class="qt-button qt-ml-12"
                 appDisabledBtn
@@ -205,13 +205,15 @@
             <div class="qt-inputs-row">
                 <div class="qt-input-block qt-f50">
                     <div class="qt-input-block__label">Start - End Date</div>
-                    <app-multi-datepicker
+                    <app-tasks-date-picker
                         #dp
+                        [container]="'body'"
+                        [editStart]="modelForm?.value.startDate"
+                        [editEnd]="modelForm?.value.endDate"
                         [validate]="!(submitted && f2.startDate.errors)"
                         [errorMessage]="'Start date is required'"
                         (selectedDate)="filterByDate($event)"
-                    ></app-multi-datepicker>
-
+                    ></app-tasks-date-picker>
                 </div>
             </div>
             <div class="qt-inputs-row">
