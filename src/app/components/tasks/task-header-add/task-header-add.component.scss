@@ -43,6 +43,11 @@
   }
 }
 
+::ng-deep .dropdown-assign-ticket .users-list {
+  max-width: 100%;
+  max-height: 280px;
+}
+
 ::ng-deep .tab-pane__user-circle {
   width: 28px !important;
   height: 28px !important;
@@ -50,5 +55,11 @@
   .qt-icon {
     width: 16px;
     height: 16px;
+  }
+}
+
+.my-tasks-table__date {
+  &--text {
+    display: none;
   }
 }

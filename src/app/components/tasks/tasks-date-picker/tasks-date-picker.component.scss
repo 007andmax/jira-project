@@ -4,3 +4,145 @@
     background-color: $gray-200;
     cursor: default !important;
 }
+
+::ng-deep .start-end-timer {
+  gap: 8px;
+
+  label {
+    position: relative;
+    margin: 0;
+    width: calc(50% - 4px);
+
+    input {
+      color: $gray-900;
+      margin: 0;
+      padding-right: 32px;
+    }
+
+    .qt-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .start,
+  .end {
+    &.qt-input-block__input {
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+.date-picker {
+  &.dropdown-menu {
+    max-height: initial;
+    width: 300px;
+    padding: 16px;
+  }
+
+  &__row {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__label {
+    position: relative;
+    margin: 0;
+    width: calc(50% - 4px);
+  }
+
+  &__input {
+    color: $gray-900;
+    width: 100%;
+    margin: 0;
+    padding-right: 32px;
+  }
+
+  &__icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+  }
+}
+
+::ng-deep  .date-picker {
+  .ngb-dp-months {
+    padding: 0;
+  }
+
+  .ngb-dp-day,
+  .ngb-dp-week-number,
+  .ngb-dp-weekday {
+    width: 38px;
+    height: 38px;
+  }
+
+  .ngb-dp-header {
+    margin-top: 18px;
+    padding: 12px 0;
+    border-top: 1px solid $gray-200;
+    border-radius: 0;
+  }
+
+  .ngb-dp-navigation-select {
+    order: -1;
+  }
+
+  .ngb-dp-arrow {
+    width: auto;
+    flex: 0 1 auto;
+  }
+
+  .ngb-dp-arrow-btn {
+    padding: 4px;
+    margin: 0;
+    min-width: 0;
+
+    &:focus {
+      outline: unset;
+    }
+  }
+
+  .custom-select {
+    flex: unset;
+    padding: 0;
+    pointer-events: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: none;
+
+    &:first-child {
+      margin-right: 4px;
+    }
+  }
+}
+
+::ng-deep .ui-timepicker-wrapper {
+  width: 146px;
+  padding: 8px;
+}
+::ng-deep ul.ui-timepicker-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  li {
+    padding: 7px 8px;
+    font-size: 14px;
+    line-height: 17px;
+    border-radius: 6px;
+
+    &:hover {
+      background-color: $gray-50;
+    }
+  }
+}

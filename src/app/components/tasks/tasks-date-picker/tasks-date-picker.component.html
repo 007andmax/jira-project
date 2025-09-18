@@ -34,25 +34,28 @@
     <div
         ngbDropdownMenu
         aria-labelledby="dropdownCompany"
+        class="date-picker"
     >
-        <div class="qt-df qt-ai-c qt-jc-sb">
-            <div class="qt-df qt-ai-c">
+        <div class="qt-df qt-ai-c qt-jc-sb date-picker__row qt-mb-8">
+            <div class="qt-df qt-ai-c date-picker__label">
                 <input
+                    class="date-picker__input qt-input-block__input"
                     type="text"
                     (click)="toggleDatePicker()"
                     [value]="parseStartDate()"
                     readonly
                 >
-                <div class="qt-icon icon__calendar qt-sz-20"></div>
+                <div class="qt-icon icon__calendar qt-sz-20 date-picker__icon"></div>
             </div>
-            <div class="qt-df qt-ai-c">
+            <div class="qt-df qt-ai-c date-picker__label">
                 <input
+                    class="date-picker__input qt-input-block__input"
                     type="text"
                     (click)="toggleDatePicker()"
                     [value]="parseEndDate()"
                     readonly
                 >
-                <div class="qt-icon icon__calendar qt-sz-20"></div>
+                <div class="qt-icon icon__calendar qt-sz-20 date-picker__icon"></div>
             </div>
         </div>
         <app-ticket-profile-updates-service-timepicker
