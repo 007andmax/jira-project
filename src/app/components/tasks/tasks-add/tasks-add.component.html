@@ -6,19 +6,65 @@
         <div class="qt-aside-modern__header">
             <div class="qt-aside-modern__header-title">Create Task</div>
             <div
-                class="qt-button qt-ml-12"
-                appDisabledBtn
-                #saveBtn="disabled"
-                (onClick)="save()"
-                [ngClass]="{'--loading':saveBtn.isBlock()}"
+                ngbDropdown
+                placement="bottom-right"
             >
-                <span>Save Task</span>
-                <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
+                <div class="qt-df qt-ai-c">
+                    <div
+                        class="qt-button qt-ml-12"
+                        appDisabledBtn
+                        #saveBtn="disabled"
+                        (onClick)="save()"
+                        [ngClass]="{'--loading':saveBtn.isBlock()}"
+                    >
+                        <span>Save Task</span>
+                        <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
+                    </div>
+                    <div
+                        class="qt-button --square-md --gray pointer qt-mr-8 qt-ml-8"
+                        ngbDropdownToggle
+                    >
+                        <div class="qt-icon icon__more qt-sz-16 qt-bg-contain"></div>
+                    </div>
+                    <div
+                        class="qt-button --square-md --gray pointer"
+                        (click)="close()"
+                    >
+                        <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+                    </div>
+                    <div
+                        ngbDropdownMenu
+                        container="body"
+                        class="dropdown-menu-qt icon__more-dropdown"
+                    >
+                        <ul
+                            role="menu"
+                            class="dropdown-qt"
+                        >
+                            <li>
+                                <a
+                                    tabindex="-1"
+                                    class="dropdown-item"
+                                    href="javascript:void(0)"
+                                >
+                                    <i class="qt-sz-20 qt-icon icon__claim-edit-ticket"></i>
+                                    Copy Link
+                                </a>
+                            </li>
+                            <li class="trash-user-list">
+                                <a
+                                    tabindex="-1"
+                                    class="dropdown-item trash-user"
+                                    href="javascript:void(0)"
+                                >
+                                    <i class="qt-sz-20 qt-bg-contain qt-icon icon__delete"></i>
+                                    Delete Task
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div
-                class="qt-aside-modern__header-close qt-icon icon__close"
-                (click)="close()"
-            ></div>
         </div>
         <div class="qt-aside-modern__content new-companies-content__modal--content">
             <div class="qt-inputs-row --required">
@@ -87,21 +133,15 @@
                     </app-mat-error>
                 </div>
             </div>
-            <!-- <div class="qt-inputs-row">
+            <div class="qt-inputs-row">
                 <div class="qt-input-block qt-f50">
                     <div class="qt-input-block__label">Associate Ticket</div>
-                    <app-drop-down
-                        [class]="['qt-select-input-40']"
-                        [placeholder]="'Select Company Type'"
-                        [field]="'title'"
-                        [list]="companyTypes"
-                        [search]="true"
-                        [change]="true"
-                        (onSelectedItem)="onSelectCompanyTypes($event)"
-                    >
-                    </app-drop-down>
+                    <app-tasks-add-associate-tickets
+                        [isDisabled]="!f2.companyId.value"
+                        (onSelectedItem)="setAssociatedTicketId($event)"
+                    ></app-tasks-add-associate-tickets>
                 </div>
-            </div> -->
+            </div>
             <!-- <div class="qt-inputs-row">
                 <div class="qt-input-block qt-f50">
                     <div class="qt-input-block__label">Billable Task</div>
@@ -201,15 +241,14 @@
                         ></angular-editor>
                     </ng-template>
                 </li>
-                <li [ngbNavItem]="'comments'">
+                <!-- <li [ngbNavItem]="'comments'">
                     <a ngbNavLink>Comments</a>
                     <ng-template ngbNavContent></ng-template>
                 </li>
-                <!-- Account -->
                 <li [ngbNavItem]="'activity_log'">
                     <a ngbNavLink>Activity log</a>
                     <ng-template ngbNavContent></ng-template>
-                </li>
+                </li> -->
             </ul>
             <div
                 [ngbNavOutlet]="nav"

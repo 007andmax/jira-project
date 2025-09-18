@@ -477,6 +477,7 @@
   }
 }
 div.ngb-dp-today {
+  position: relative;
   .custom-day,
   .custom-day.faded,
   .btn-light {
@@ -495,6 +496,17 @@ div.ngb-dp-today {
       background: radial-gradient(circle at center, $blue-light-600 15px, $white 16px);
       color: $white;
     }
+  }
+  &::after {
+    z-index: 999;
+    position: absolute;
+    content: "";
+    bottom: 0px;
+    left: calc(50% - 3px);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $blue-light-600;
   }
 }
 .company-time-zone-drop-down {

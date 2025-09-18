@@ -14,6 +14,8 @@ import { TasksAddComponent } from './tasks-add.component';
 import { UploadAreaProgressModule } from '../../shared/upload-area/upload-area-progress/upload-area-progress.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { TasksAddAssociateTicketsComponent } from './tasks-add-associate-tickets/tasks-add-associate-tickets.component';
+import { TasksAddAssociateTicketsModule } from './tasks-add-associate-tickets/tasks-add-associate-tickets.module';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
         PreloaderTicketModule,
         UploadAreaProgressModule,
         NgbModule,
-        AngularEditorModule
+        AngularEditorModule,
+        TasksAddAssociateTicketsModule
 
     ],
     exports: [TasksAddComponent]

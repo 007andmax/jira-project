@@ -157,6 +157,9 @@ export class TasksAddComponent implements OnInit, OnDestroy {
   setTab(data) {
     this.activeTab = data['nextId'];
   }
+  public setAssociatedTicketId(data) {
+    this.modelForm.controls["associatedTicketId"].setValue(data ? data.id : null)
+  }
   public getServices() {
     this.servicesList = this.ticketStateService.getServicesForTicket();
     console.log("this.servicesList", this.servicesList);

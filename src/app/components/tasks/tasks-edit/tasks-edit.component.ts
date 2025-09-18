@@ -114,11 +114,13 @@ export class TasksEditComponent extends TasksAddComponent {
     this.modelForm.controls["companyId"].setValue(data ? data.id : null)
     if (data) this.ticketStateService.getServicesList(data.id);
     this.selectedCompany = data;
+    this.save();
   }
   public onSelectTechUser(items) {
     console.log("items", items);
     this.modelForm.controls["assignedUsersIds"].setValue(items.map(item => item.id));
     this.selectedAssignedUsers = items;
+    this.save();
     //  this.globalFilter.setAssignedUsersIds(items.map(item => item.id));
   }
   onSelectType(data) {
@@ -137,6 +139,7 @@ export class TasksEditComponent extends TasksAddComponent {
     modalRef.componentInstance.message = `The Task has been successfully deleted`;
     this.cd.detectChanges();
   }
+
   save() {
     this.submitted = true;
     console.log("this.modelForm.invalid", this.modelForm);

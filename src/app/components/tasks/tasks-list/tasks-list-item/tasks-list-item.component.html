@@ -7,6 +7,7 @@
         ></div>
         <div
             class="qt-color-gray-900 qt-fw-500 ellipsis"
+            [ngClass]="{'qt-td-l-t': item.taskStatus == 'CLOSED'}"
             [textContent]="item.title"
             (click)="editTask()"
         ></div>
