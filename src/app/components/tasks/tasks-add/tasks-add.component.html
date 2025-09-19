@@ -67,8 +67,8 @@
             </div>
         </div>
         <div class="qt-aside-modern__content new-companies-content__modal--content">
-            <div class="qt-inputs-row --required">
-                <div class="qt-input-block">
+            <div class="qt-inputs-row --sm --required">
+                <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Task Name</div>
                     <input
                         [ngClass]="{'--input-error' : submitted && f2.title.errors}"
@@ -76,6 +76,7 @@
                         formControlName="title"
                         placeholder="Write Company or Search Company"
                         maxlength="300"
+                        class="--sm"
                     >
                     <app-mat-error
                         class="invalid-feedback"
@@ -100,10 +101,11 @@
                     </app-drop-down>
                 </div>
             </div> -->
-            <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Company</div>
                     <company-drop-down
+                        [class]="['drop-down-sm']"
                         [placeholder]="'Company'"
                         [clientType]="'CLIENT'"
                         [field]="'name'"
@@ -111,14 +113,16 @@
                         [change]="true"
                         [isBlockClear]="true"
                         (onSelectedItem)="onSelectCompany($event)"
+                        [heightInput]="'32px'"
                     >
                     </company-drop-down>
                 </div>
             </div>
-            <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f100">
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
                     <span class="qt-input-block__label">Assigned To</span>
                     <app-tasks-add-assigned-users
+                        [class]="['drop-down-sm']"
                         [placeholder]="'Select Tech User'"
                         [placement]="'top-left'"
                         [selectedTag]="selectedAssignedUsers"
@@ -133,10 +137,11 @@
                     </app-mat-error>
                 </div>
             </div>
-            <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Associate Ticket</div>
                     <app-tasks-add-associate-tickets
+                        [class]="['drop-down-sm']"
                         [isDisabled]="!f2.companyId.value"
                         (onSelectedItem)="setAssociatedTicketId($event)"
                     ></app-tasks-add-associate-tickets>
@@ -157,21 +162,22 @@
                     </app-drop-down>
                 </div>
             </div> -->
-            <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Services</div>
                     <app-services-list
+                        class="drop-down-sm"
                         [type]="'TICKET'"
                         [itemList]="servicesList"
                         (selectedServicesItem)="onSelectService($event)"
                     ></app-services-list>
                 </div>
             </div>
-            <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Type</div>
                     <app-drop-down
-                        [class]="['qt-select-input-40']"
+                        [class]="['drop-down-sm']"
                         [placeholder]="'Select Company Type'"
                         [field]="'title'"
                         [list]="listTypes"
@@ -181,15 +187,17 @@
                         [validate]="!(submitted && f2.type.errors)"
                         [editItem]="selectedType"
                         (onSelectedItem)="onSelectType($event)"
+                        [heightInput]="'32px'"
                     >
                     </app-drop-down>
                 </div>
             </div>
-            <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Start - End Date</div>
                     <app-tasks-date-picker
                         #dp
+                        [class]="['date-picker-invisible', '--sm']"
                         [container]="'body'"
                         [validate]="!(submitted && f2.startDate.errors)"
                         [errorMessage]="'Start date is required'"
@@ -197,12 +205,13 @@
                     ></app-tasks-date-picker>
                 </div>
             </div>
-            <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Due Date</div>
                     <app-date-picker
                         #startDateDP
                         [type]="'DETAIL_TICKET_UPDATE'"
+                        [class]="['date-picker-invisible', '--sm']"
                         [dropdownClass]="['date-picker']"
                         [formatDate]="formatDate"
                         [editMode]="true"

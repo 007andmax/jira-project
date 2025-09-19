@@ -201,3 +201,13 @@ form {
     /* For Firefox */
     color: $gray-400;
 }
+
+.qt-input-block-horizontal {
+  display: flex;
+}
+
+::ng-deep app-tasks-add-associate-tickets {
+  .qt-input-search:before {
+    display: none;
+  }
+}
