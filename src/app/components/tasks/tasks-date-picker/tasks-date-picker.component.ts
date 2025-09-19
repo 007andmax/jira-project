@@ -22,8 +22,10 @@ export class TasksDatePickerComponent extends MultiDatepickerComponent {
   }
 
   public setEditDates(editStart, editEnd) {
+    console.log("editStart, editEnd", editStart, editEnd);
     if (editStart) this.fromDate = new NgbDate(new Date(editStart).getFullYear(), new Date(editStart).getMonth() + 1, new Date(editStart).getDate());
-    if (editEnd) this.toDate = new NgbDate(new Date(editEnd).getFullYear(), new Date(editEnd).getMonth() + 1, new Date(editStart).getDate());
+    if (editEnd) this.toDate = new NgbDate(new Date(editEnd).getFullYear(), new Date(editEnd).getMonth() + 1, new Date(editEnd).getDate());
+    console.log("this.fromDat", this.fromDate);
   }
 
   public onChangeStartTimePickerService(data) {

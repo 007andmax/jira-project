@@ -69,7 +69,8 @@ export class TasksEditComponent extends TasksAddComponent {
           associatedTicketId: this.task.associatedTicketId,
           dueDate: this.task.dueDate,
           ticketUpdates: this.task.ticketUpdateList,
-          attachFileIds: this.task.attachFileIds
+          attachFileIds: this.task.attachFileIds,
+          taskTicketId: this.task.taskTicketId
         })
         this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id == this.task.companyId);
         this.selectedAssignedUsers = this.usersStateService.getAllUsers().filter(user => this.task.assignedUsersIds.some(item => item == user.id));
@@ -139,7 +140,21 @@ export class TasksEditComponent extends TasksAddComponent {
     modalRef.componentInstance.message = `The Task has been successfully deleted`;
     this.cd.detectChanges();
   }
+  public onSelectService(item) {
+    if (this.currentService.item) {
+      this.currentService.setItem(item);
+      this.currentService.setValidate(true);
+      this.ticketsService.updateExpense(this.currentService.getDateForUpdate(this.currentService.getDateForRequest(this.usersStateService.getCurrentUser()), this.modelForm.value.taskTicketId)).subscribe(res => {
 
+      })
+    } else {
+      this.currentService.setItem(item);
+      this.currentService.setValidate(true);
+      this.ticketsService.updateTicket(this.currentService.getDataForAddService(this.usersStateService.getCurrentUser(), this.modelForm.value.taskTicketId)).subscribe(res => {
+
+      })
+    }
+  }
   save() {
     this.submitted = true;
     console.log("this.modelForm.invalid", this.modelForm);

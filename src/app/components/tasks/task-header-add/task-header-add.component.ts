@@ -69,9 +69,9 @@ export class TaskHeaderAddComponent {
         [Validators.minLength(0), Validators.maxLength(65000)]
       ],
       endDate: [this.task.parseDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset)],
-      assignedUsersIds: [null, Validators.required],
+      assignedUsersIds: [null],
       type: [
-        null,
+        "To do",
         [Validators.required]
       ],
       taskStatus: [
@@ -138,11 +138,13 @@ export class TaskHeaderAddComponent {
 
   save() {
     this.submitted = true;
+    console.log("this.modelForm.value", this.modelForm.value.assignedUsersIds);
     console.log("this.modelForm.invalid", this.modelForm);
     if (this.modelForm.invalid) {
       return;
     }
     this.saveBtn.setDisabled(true);
+    if (!this.modelForm.value.assignedUsersIds) this.modelForm.controls["assignedUsersIds"].setValue([this.usersStateService.getCurrentUser().id]);
     console.log("this.modelForm.value", this.modelForm.value);
     this.tasksService.addTask(this.task.getDataForAdd(this.modelForm.value)).subscribe(res => {
       this.saveBtn.setDisabled(false);

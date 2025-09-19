@@ -120,4 +120,19 @@ export class TicketProfileFormService {
             discountAmount: this.item.discountAmount
         }
     }
+    public getDateForUpdate(serviceExpense, ticketUpdateId) {
+        return {
+            serviceExpense: serviceExpense,
+            ticketUpdateId: ticketUpdateId
+        }
+    }
+    public getDataForAddService(techUser, ticketUpdateId) {
+        return {
+            services: [this.getDateForRequest(techUser)],
+            type: "SERVICE",
+            shares: [],
+            ticket: { id: ticketUpdateId },
+            otherRecipients: []
+        }
+    }
 }
