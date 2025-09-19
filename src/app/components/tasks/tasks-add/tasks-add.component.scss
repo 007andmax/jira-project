@@ -4,10 +4,28 @@
 .qt-aside-modern__content {
     height: calc(100% - 120px);
 }
+
+::ng-deep company-drop-down {
+  .dropdown-menu {
+    .dropdown-item {
+      padding: 9.5px 8px;
+      height: 36px;
+      margin-block: 2px;
+
+      &:hover,
+      &.--selected {
+        background-color: $gray-50;
+        color: $gray-900;
+      }
+    }
+  }
+}
+
 form {
     display: block;
     height: 100%;
 }
+
 .tasks-add {
     &__more-users-title {
         font-size: 12px;

@@ -24,7 +24,7 @@
     padding: 10px 8px;
     border-top: 1px solid $gray-200;
     display: flex;
-    flex-wrap: nowrap;
+    align-items: center;
 
     .form-input {
       &.--editable {
@@ -51,9 +51,15 @@
 ::ng-deep .tab-pane__user-circle {
   width: 28px !important;
   height: 28px !important;
+  margin: 0;
 
   .qt-icon {
     width: 16px;
     height: 16px;
   }
+}
+
+::ng-deep .ticket-updates__photo-people {
+  width: 28px !important;
+  height: 28px !important;
 }
