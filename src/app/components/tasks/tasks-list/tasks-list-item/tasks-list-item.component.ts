@@ -51,8 +51,8 @@ export class TasksListItemComponent {
     this.save();
   }
   public onChangeUser(data) {
-    if (data.length === 0) this.item.setAssignedUser([]);
-    if (data.length === 1) this.item.setAssignedUser([data[0].id]);
+    this.item.setAssignedUser(data.map(item => item.id));
+    this.assignedUsers = data;
     this.save();
   }
   save() {

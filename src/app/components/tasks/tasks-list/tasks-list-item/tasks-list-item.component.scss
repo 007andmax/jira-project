@@ -89,6 +89,23 @@
   &:empty {
     display: none;
   }
+  &.--meeting {
+    border-color: $purple-200;
+    background-color: $purple-50;
+    color: $purple-600;
+  }
+
+  &.--phone-call {
+    border-color: $primary-blue-200;
+    background-color: $primary-blue-25;
+    color: $primary-blue-700;
+  }
+
+  &.--to-do {
+    border-color: $gray-300;
+    background-color: $gray-50;
+    color: $gray-500;
+  }
 }
 
 ::ng-deep .dropdown-assign-ticket .users-list {

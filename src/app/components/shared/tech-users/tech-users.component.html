@@ -142,6 +142,64 @@
         (mouseleave)="techUserTooltip.hide()"
     ></button>
     <div
+        class="ticket-table__assignee"
+        *ngIf="type === 'TASKS'"
+        ngbDropdownToggle
+    >
+        <div class="qt-df multi-assign-user-container">
+            <ng-template
+                ngFor
+                let-user
+                let-i="index"
+                [ngForOf]="selectedUsers"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    class="qt-table-modern__circle-avatar multi-assign-user"
+                    *ngIf="i < 5"
+                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user) ,
+                'left': getStyleNetAvatar(i)}"
+                    [ngbTooltip]="user.firstName + ' ' + user.lastName"
+                    [container]="'body'"
+                ></div>
+            </ng-template>
+            <div
+                class="more-users qt-table-modern__circle-avatar"
+                [ngbTooltip]="tipContent"
+                [container]="'body'"
+                *ngIf="selectedUsers.length > 5"
+                [ngStyle]="{'left': getStyleNetAvatar(5)}"
+            >
+                <span [textContent]="'+' + (selectedUsers.length - 5)"></span>
+            </div>
+        </div>
+        <ng-template #tipContent>
+            <ng-template
+                ngFor
+                let-user
+                let-i="index"
+                [ngForOf]="selectedUsers"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    class="qt-df qt-ai-c qt-mb-8"
+                    *ngIf="i >= 5"
+                >
+                    <div
+                        class="tooltip__circle-avatar"
+                        [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                        [ngStyle]="{'background': ticketsListService.getAssignedUserNameForAvatar(user) }"
+                    ></div>
+                    <span
+                        class="qt-ml-8"
+                        [textContent]="user.firstName + ' ' + user.lastName"
+                    ></span>
+                </div>
+            </ng-template>
+        </ng-template>
+    </div>
+    <div
         class="tech-user-body"
         ngbDropdownMenu
         aria-labelledby="dropdownTechuser"

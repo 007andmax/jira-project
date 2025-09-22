@@ -75,6 +75,13 @@ export class TechUsersComponent implements OnInit, OnDestroy {
     })
   }
 
+  getStyleNetAvatar(i) {
+    return `${12 * i}px`;
+  }
+  public trackById(index, item) {
+    return item.id;
+  }
+
   /**
   * Subscribe for edit mode
   */

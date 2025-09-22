@@ -141,10 +141,12 @@ export class TasksEditComponent extends TasksAddComponent {
     this.cd.detectChanges();
   }
   public onSelectService(item) {
+    console.log("item", item);
     if (this.currentService.item) {
+      let update = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
       this.currentService.setItem(item);
       this.currentService.setValidate(true);
-      this.ticketsService.updateExpense(this.currentService.getDateForUpdate(this.currentService.getDateForRequest(this.usersStateService.getCurrentUser()), this.modelForm.value.taskTicketId)).subscribe(res => {
+      this.ticketsService.updateExpense(this.currentService.getDateForUpdate(this.currentService.getDateForRequest(this.usersStateService.getCurrentUser(), update.services[0].id), update.id)).subscribe(res => {
 
       })
     } else {

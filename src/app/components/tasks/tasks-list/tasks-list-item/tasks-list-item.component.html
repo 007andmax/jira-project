@@ -17,6 +17,10 @@
         (click)="editTask()"
     >
         <span
+            [ngClass]="{'--meeting':item.type == 'Meeting',
+                        '--phone-call':item.type == 'Phone call',
+                        '--to-do':item.type == 'To do'
+                    }"
             class="tag__modern"
             [textContent]="item.type"
         ></span>
@@ -39,8 +43,7 @@
         <app-tech-users
             [editMode]="true"
             [editUsers]="assignedUsers"
-            [type]="'TICEKTS'"
-            [selectedMode]="'SINGLE'"
+            [type]="'TASKS'"
             [users]="listTechUsers"
             [container]="'body'"
             (usersChange)="onChangeUser($event)"
