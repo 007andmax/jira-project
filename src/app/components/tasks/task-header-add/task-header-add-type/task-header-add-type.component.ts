@@ -16,7 +16,12 @@ export class TaskHeaderAddTypeComponent {
   ngOnInit() {
     this.selectedType = new CompanySetting('To do', 'To do');
   }
-
+  public initDefaultValue() {
+    this.selectedType = new CompanySetting('To do', 'To do');
+  }
+  public clearWithOutChanges() {
+    this.selectedType = null;
+  }
   onSelect(item) {
     this.selectedType = item;
     this.onChange.emit(this.selectedType);

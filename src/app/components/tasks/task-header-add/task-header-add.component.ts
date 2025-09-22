@@ -15,6 +15,7 @@ import { TicketStateService } from '../../tickets/tickets/ticket-edit-aside/serv
 import { Task } from '../class/task';
 import * as moment from "moment";
 import { TasksDatePickerComponent } from '../tasks-date-picker/tasks-date-picker.component';
+import { TaskHeaderAddTypeComponent } from './task-header-add-type/task-header-add-type.component';
 
 @Component({
   selector: 'app-task-header-add',
@@ -27,6 +28,8 @@ export class TaskHeaderAddComponent {
   techUsersList = [];
   submitted: boolean = false;
   formatDate: string = FORMAT_DATE_2;
+  @ViewChild('type', { static: true }) type: TaskHeaderAddTypeComponent;
+  @ViewChild('tachUser', { static: true }) tachUser: TasksDatePickerComponent;
   @ViewChild('datePicker', { static: true }) datePicker: TasksDatePickerComponent;
   @ViewChild('saveBtn', { static: false }) saveBtn: DisabledBtnDirective;
   sub: Subscription = new Subscription();
@@ -159,10 +162,13 @@ export class TaskHeaderAddComponent {
     let currentDate = new Date();
     this.modelForm.patchValue({
       taskStatus: "OPEN",
+      type: "To do",
       startDate: this.task.parseDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset),
       endDate: this.task.parseDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset),
     });
+    this.type.initDefaultValue();
     this.datePicker.setEditDates(this.modelForm.value.startDate, this.modelForm.value.endDate);
+    this.tachUser.clearWithOutChanges();
     this.onClose.emit();
   }
   ngOnDestroy(): void {

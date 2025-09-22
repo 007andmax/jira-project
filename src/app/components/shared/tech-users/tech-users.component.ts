@@ -178,6 +178,12 @@ export class TechUsersComponent implements OnInit, OnDestroy {
     this.usersList.forEach((item) => item.selected = false);
     this.usersChange.emit(this.selectedUsers);
   }
+  public clearWithOutChanges() {
+
+    this.showSelect = false;
+    this.selectedUsers = [];
+    this.usersList.forEach((item) => item.selected = false);
+  }
 
   public trackByIndex(index, item) {
     return index;

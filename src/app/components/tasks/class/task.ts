@@ -56,7 +56,7 @@ export class Task {
             associatedTicketId: data.associatedTicketId ? data.associatedTicketId : undefined,
             dueDate: data.dueDate ? data.dueDate : undefined,
             ticketUpdates: data.ticketUpdates && data.ticketUpdates.length > 0 ? data.ticketUpdates : undefined,
-            attachFileIds: data.attachFileIds ? data.attachFileIds : undefined,
+            attachFileIds: data.attachFileIds && data.attachFileIds.length > 0 ? data.attachFileIds : undefined,
             taskTicketId: data.taskTicketId ? data.taskTicketId : undefined,
         }
     }

@@ -48,7 +48,10 @@
             >
         </div>
         <div class="my-tasks-table__type">
-            <app-task-header-add-type (onChange)="onSelectType($event)"></app-task-header-add-type>
+            <app-task-header-add-type
+                #type
+                (onChange)="onSelectType($event)"
+            ></app-task-header-add-type>
         </div>
         <div class="my-tasks-table__date qt-df qt-ai-c qt-ml-8">
             <div
@@ -66,6 +69,7 @@
         </div>
         <div class="my-tasks-table__tech-users qt-ml-8">
             <app-tech-users
+                #tachUser
                 [editMode]="true"
                 [type]="'TICEKTS'"
                 [users]="techUsersList"

@@ -39,7 +39,11 @@
                 [ngClass]="{'--selected':isSelected(item)}"
             >
                 <span
-                    class="tag__modern --meeting --phone-call --to-do"
+                    [ngClass]="{'--meeting':item.value == 'Meeting',
+                        '--phone-call':item.value == 'Phone call',
+                        '--to-do':item.value == 'To do'
+                    }"
+                    class="tag__modern"
                     [textContent]="item.title"
                 ></span>
                 <span class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"></span>
