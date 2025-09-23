@@ -33,6 +33,7 @@
             [textContent]="parseStartDate(item.startDate)"
         ></div>
         <app-date-picker
+            #dateDp
             [editMode]="true"
             [editDate]="item.startDate"
             [placement]="'bottom-right'"
@@ -43,6 +44,7 @@
     </div>
     <div class="my-tasks-table__tech-users">
         <app-tech-users
+            #techUsers
             [editMode]="true"
             [editUsers]="assignedUsers"
             [type]="'TASKS'"

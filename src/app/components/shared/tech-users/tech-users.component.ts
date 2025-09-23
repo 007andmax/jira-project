@@ -81,6 +81,18 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   public trackById(index, item) {
     return item.id;
   }
+  public setEditUsers(editUsers) {
+    this.editUsers = editUsers;
+    this.selectedUsers = [];
+    this.usersList.forEach(item => {
+      let index = this.editUsers.findIndex(user => user.id === item.id);
+      if (index > -1) {
+        item.selected = true;
+        this.selectedUsers.push(item);
+      }
+    })
+    this.cd.detectChanges();
+  }
 
   /**
   * Subscribe for edit mode

@@ -70,6 +70,7 @@
                         placeholder="Write Company or Search Company"
                         maxlength="300"
                         (blur)="onChangeTitle()"
+                        (keydown)="onKeyDown($event)"
                     >
                     <app-mat-error
                         class="invalid-feedback"

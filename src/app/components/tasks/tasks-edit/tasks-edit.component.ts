@@ -107,8 +107,15 @@ export class TasksEditComponent extends TasksAddComponent {
     })
     this.sub.add(getConfirm);
   }
+  onKeyDown(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.editTask({ title: this.modelForm.controls["title"].value }, false);
+    }
+  }
   onChangeTitle() {
-    this.editTask({ title: this.modelForm.controls["title"].value });
+    this.editTask({ title: this.modelForm.controls["title"].value }, false);
   }
   onDeleteTask() {
     this.tasksService.deleteTask(this.task.id).subscribe(res => {
@@ -226,7 +233,7 @@ export class TasksEditComponent extends TasksAddComponent {
       })
     }
   }
-  editTask(data) {
+  editTask(data, close = true) {
     this.submitted = true;
     console.log("this.modelForm.invalid", this.modelForm);
     if (this.modelForm.invalid) {
@@ -237,8 +244,10 @@ export class TasksEditComponent extends TasksAddComponent {
     if (this.currentService.item && this.currentService.item.versionedId) this.modelForm.controls["ticketUpdates"].setValue([this.getDataForUpdateService()])
     this.tasksService.editTask(this.task.id, data).subscribe(res => {
       this.saveBtn.setDisabled(false);
-      this.modelForm.controls["attachFileIds"].setValue([]);
-      this.close();
+      if (close) {
+        this.modelForm.controls["attachFileIds"].setValue([]);
+        this.close();
+      }
     }, err => {
       this.saveBtn.setDisabled(false);
     })
