@@ -10,6 +10,7 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { S } from '@angular/cdk/keycodes';
 import { TicketProfileFormService } from '../../tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
 import { Task } from '../class/task';
+import { Ticket } from '../../tickets/class/ticket';
 
 @Component({
   selector: 'app-tasks-edit',
@@ -18,6 +19,7 @@ import { Task } from '../class/task';
 })
 export class TasksEditComponent extends TasksAddComponent {
   selectedCompany: Company;
+  selectedTicket: Ticket = null;
   ngOnInit() {
     this.modelForm = this.formBuilder.group({
       title: [
@@ -71,7 +73,8 @@ export class TasksEditComponent extends TasksAddComponent {
           ticketUpdates: this.task.ticketUpdateList,
           attachFileIds: this.task.attachFileIds,
           taskTicketId: this.task.taskTicketId
-        })
+        });
+        if (this.task.associatedTicketId) this.selectedTicket = new Ticket({ id: this.task.associatedTicketId, number: this.task.associatedTicketNumber });
         this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id == this.task.companyId);
         this.selectedAssignedUsers = this.usersStateService.getAllUsers().filter(user => this.task.assignedUsersIds.some(item => item == user.id));
         let service = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
@@ -104,6 +107,9 @@ export class TasksEditComponent extends TasksAddComponent {
     })
     this.sub.add(getConfirm);
   }
+  onChangeTitle() {
+    this.editTask({ title: this.modelForm.controls["title"].value });
+  }
   onDeleteTask() {
     this.tasksService.deleteTask(this.task.id).subscribe(res => {
       this.modelForm.controls["attachFileIds"].setValue([]);
@@ -111,28 +117,91 @@ export class TasksEditComponent extends TasksAddComponent {
     });
 
   }
+  deleteFile(index: number) {
+    this.companiesService.removeAttachment(this.modelForm.controls["attachFileIds"].value[index]).subscribe(data => {
+
+    })
+    this.files.splice(index, 1);
+    let list = this.modelForm.controls["attachFileIds"].value;
+    list.splice(index, 1);
+    this.modelForm.controls["attachFileIds"].setValue(list);
+    this.editTask({ attachFileIds: this.modelForm.controls["attachFileIds"].value });
+  }
+  uploadFilesSimulator(index: number) {
+    if (index === this.files.length) {
+      this.editTask({ attachFileIds: this.modelForm.controls["attachFileIds"].value });
+      return;
+    } else {
+      if (this.files[index].size > 15000000) {
+        this.files[index].showError = true;
+        this.files[index].error = "The size is too big. You can upload a file up to 15MB in size."
+        this.uploadFilesSimulator(index + 1);
+        return;
+      }
+      this.uploadFile(this.files[index]).then((data: any) => {
+        let res = JSON.parse(data.response);
+        let listIds = this.modelForm.controls["attachFileIds"].value;
+        console.log("res", res);
+        listIds.push(res.id);
+        this.modelForm.controls["attachFileIds"].setValue(listIds);
+        this.uploadFilesSimulator(index + 1);
+        this.cd.detectChanges();
+      }).catch(() => {
+        this.files[index].showError = true;
+        this.uploadFilesSimulator(index + 1);
+      });
+    }
+  }
+  public setAssociatedTicketId(data) {
+    this.modelForm.controls["associatedTicketId"].setValue(data ? data.id : null);
+    this.selectedTicket = data;
+    this.editTask({ associatedTicketId: data ? data.id : "" });
+  }
   onSelectCompany(data) {
     this.modelForm.controls["companyId"].setValue(data ? data.id : null)
     if (data) this.ticketStateService.getServicesList(data.id);
     this.selectedCompany = data;
-    this.save();
+    this.editTask({ companyId: data ? data.id : "" });
   }
   public onSelectTechUser(items) {
     console.log("items", items);
     this.modelForm.controls["assignedUsersIds"].setValue(items.map(item => item.id));
     this.selectedAssignedUsers = items;
-    this.save();
+    this.editTask({ assignedUsersIds: items.map(item => item.id) });
     //  this.globalFilter.setAssignedUsersIds(items.map(item => item.id));
   }
   onSelectType(data) {
     this.modelForm.controls["type"].setValue(data ? data.value : null);
     this.selectedType = data;
+    this.editTask({ type: data.value });
+  }
+  public filterByDate(value) {
+    console.log("value", value);
+    if (value.start !== '' && value.end !== '') {
+      this.modelForm.controls["startDate"].setValue(value.start);
+      this.modelForm.controls["endDate"].setValue(value.end);
+    } else {
+      this.modelForm.controls["startDate"].setValue(null);
+      this.modelForm.controls["endDate"].setValue(null);
+    }
+    this.editTask({
+      startDate: this.modelForm.controls["startDate"].value,
+      endDate: this.modelForm.controls["endDate"].value
+    });
   }
   onChangeDueDate(data) {
     console.log("data", data);
     let dueDate = this.task.parseDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.modelForm.controls["dueDate"].setValue(dueDate);
     this.task.dueDate = dueDate;
+    this.editTask({
+      dueDate: dueDate
+    });
+  }
+  onChangeDescription() {
+    this.editTask({
+      description: this.modelForm.controls["description"].value
+    });
   }
   deleteTask() {
     this.confirmStateService.setConfirmAction(DELETE_TASK);
@@ -157,7 +226,7 @@ export class TasksEditComponent extends TasksAddComponent {
       })
     }
   }
-  save() {
+  editTask(data) {
     this.submitted = true;
     console.log("this.modelForm.invalid", this.modelForm);
     if (this.modelForm.invalid) {
@@ -166,7 +235,7 @@ export class TasksEditComponent extends TasksAddComponent {
     this.saveBtn.setDisabled(true);
     console.log("this.modelForm.value", this.modelForm.value);
     if (this.currentService.item && this.currentService.item.versionedId) this.modelForm.controls["ticketUpdates"].setValue([this.getDataForUpdateService()])
-    this.tasksService.editTask(this.task.id, this.task.getDataForAdd(this.modelForm.value)).subscribe(res => {
+    this.tasksService.editTask(this.task.id, data).subscribe(res => {
       this.saveBtn.setDisabled(false);
       this.modelForm.controls["attachFileIds"].setValue([]);
       this.close();

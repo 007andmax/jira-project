@@ -156,7 +156,7 @@
             >
                 <div
                     class="qt-table-modern__circle-avatar multi-assign-user"
-                    *ngIf="i < 5"
+                    *ngIf="i < 2"
                     [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
                     [ngStyle]="{'background': ticketsListService.getStyleAvatar(user) ,
                 'left': getStyleNetAvatar(i)}"
@@ -168,10 +168,10 @@
                 class="more-users qt-table-modern__circle-avatar"
                 [ngbTooltip]="tipContent"
                 [container]="'body'"
-                *ngIf="selectedUsers.length > 5"
-                [ngStyle]="{'left': getStyleNetAvatar(5)}"
+                *ngIf="selectedUsers.length > 2"
+                [ngStyle]="{'left': getStyleNetAvatar(2)}"
             >
-                <span [textContent]="'+' + (selectedUsers.length - 5)"></span>
+                <span [textContent]="'+' + (selectedUsers.length - 2)"></span>
             </div>
         </div>
         <ng-template #tipContent>
@@ -184,7 +184,7 @@
             >
                 <div
                     class="qt-df qt-ai-c qt-mb-8"
-                    *ngIf="i >= 5"
+                    *ngIf="i >= 2"
                 >
                     <div
                         class="tooltip__circle-avatar"

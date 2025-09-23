@@ -30,6 +30,7 @@ import { TasksListItemModule } from './tasks-list/tasks-list-item/tasks-list-ite
 import { TasksEditComponent } from './tasks-edit/tasks-edit.component';
 import { TasksDatePickerModule } from './tasks-date-picker/tasks-date-picker.module';
 import { TasksAddAssignedUsersModule } from './tasks-add/tasks-add-assigned-users/tasks-add-assigned-users.module';
+import { TasksAddAssociateTicketsModule } from './tasks-add/tasks-add-associate-tickets/tasks-add-associate-tickets.module';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { TasksAddAssignedUsersModule } from './tasks-add/tasks-add-assigned-user
         InfiniteScrollModule,
         TasksListItemModule,
         TasksDatePickerModule,
-        TasksAddAssignedUsersModule
+        TasksAddAssignedUsersModule,
+        TasksAddAssociateTicketsModule
     ],
 
 })

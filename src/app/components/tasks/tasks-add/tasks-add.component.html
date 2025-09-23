@@ -41,16 +41,6 @@
                             role="menu"
                             class="qt-dropdown-menu"
                         >
-                            <li class="dropdown-item">
-                                <a
-                                    class="qt-df qt-ai-c qt-color-gray-900"
-                                    tabindex="-1"
-                                    href="javascript:void(0)"
-                                >
-                                    <i class="qt-dib qt-sz-20 qt-icon icon__copy qt-mr-12"></i>
-                                    Copy Link
-                                </a>
-                            </li>
                             <li class="dropdown-item qt-dropdown-menu__item-red qt-dropdown-menu__top-line pointer">
                                 <a
                                     tabindex="-1"
@@ -203,7 +193,7 @@
                         [validate]="!(submitted && f2.startDate.errors)"
                         [errorMessage]="'Start date is required'"
                         (selectedDate)="filterByDate($event)"
-                        [placeholder] = "'Select start- end date '"
+                        [placeholder]="'Select start- end date '"
                     ></app-tasks-date-picker>
                 </div>
             </div>
@@ -266,6 +256,7 @@
                 class="mt-2"
             ></div>
         </div>
+
 
         <div class="qt-aside-modern__footer">
             <div

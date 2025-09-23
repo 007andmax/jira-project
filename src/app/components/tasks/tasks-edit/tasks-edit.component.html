@@ -41,16 +41,6 @@
                             role="menu"
                             class="dropdown-qt"
                         >
-                            <li>
-                                <a
-                                    tabindex="-1"
-                                    class="dropdown-item"
-                                    href="javascript:void(0)"
-                                >
-                                    <i class="qt-sz-20 qt-icon icon__claim-edit-ticket"></i>
-                                    Copy Link
-                                </a>
-                            </li>
                             <li
                                 class="trash-user-list"
                                 (click)="deleteTask()"
@@ -79,7 +69,7 @@
                         formControlName="title"
                         placeholder="Write Company or Search Company"
                         maxlength="300"
-                        (blur)="save()"
+                        (blur)="onChangeTitle()"
                     >
                     <app-mat-error
                         class="invalid-feedback"
@@ -138,21 +128,17 @@
                     </app-mat-error>
                 </div>
             </div>
-            <!-- <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Associate Ticket</div>
-                    <app-drop-down
-                        [class]="['qt-select-input-40']"
-                        [placeholder]="'Select Company Type'"
-                        [field]="'title'"
-                        [list]="companyTypes"
-                        [search]="true"
-                        [change]="true"
-                        (onSelectedItem)="onSelectCompanyTypes($event)"
-                    >
-                    </app-drop-down>
+                    <app-tasks-add-associate-tickets
+                        [class]="['drop-down-sm']"
+                        [isDisabled]="!f2.companyId.value"
+                        [selectedItem]="selectedTicket"
+                        (onSelectedItem)="setAssociatedTicketId($event)"
+                    ></app-tasks-add-associate-tickets>
                 </div>
-            </div> -->
+            </div>
             <!-- <div class="qt-inputs-row">
                 <div class="qt-input-block qt-f50">
                     <div class="qt-input-block__label">Billable Task</div>
@@ -253,6 +239,7 @@
                         <angular-editor
                             formControlName="description"
                             [config]="editorConfig"
+                            (blur)="onChangeDescription()"
                         ></angular-editor>
                     </ng-template>
                 </li>

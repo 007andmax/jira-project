@@ -48,22 +48,25 @@ export class TasksListItemComponent {
   }
   public onChangeDatePicker(data) {
     this.item.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    this.save();
+    this.save({ startDate: this.item.startDate });
   }
   public onChangeUser(data) {
     this.item.setAssignedUser(data.map(item => item.id));
     this.assignedUsers = data;
-    this.save();
+    this.save({ assignedUsersIds: this.item.assignedUsersIds });
   }
-  save() {
-    this.tasksService.editTask(this.item.id, this.item.getDataForAdd({ ...this.item, ticketUpdates: this.item.ticketUpdateList })).subscribe(res => {
+  save(data) {
+    this.tasksService.editTask(this.item.id, data).subscribe(res => {
 
     })
   }
   editTask() {
+    console.log("editTask");
     this.tasksStateService.openEditAside(this.item);
   }
-  toggleStatus() {
+  toggleStatus(event) {
+    event.preventDefault();
+    event.stopPropagation();
     this.item.taskStatus = this.item.taskStatus === 'OPEN' ? 'CLOSED' : 'OPEN';
     this.tasksService.changeStatusTask(this.item.id, this.item.taskStatus).subscribe(res => {
 

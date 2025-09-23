@@ -8,6 +8,7 @@ export class Task {
     "description": string;
     "companyId": string;
     "associatedTicketId": string;
+    associatedTicketNumber: string;
     "taskTicketId": string;
     "estimatedMinutes": number;
     "taskStatus": string;
