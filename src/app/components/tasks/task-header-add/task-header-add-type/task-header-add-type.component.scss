@@ -74,3 +74,18 @@
     }
   }
 }
+
+::ng-deep app-services-list {
+  .light-dropdown {
+    .dropdown-menu {
+      max-width: 360px;
+      max-height: 240px;
+
+      .dropdown-item {
+        padding: 9.5px 8px;
+        height: 36px;
+        margin-block: 2px;
+      }
+    }
+  }
+}

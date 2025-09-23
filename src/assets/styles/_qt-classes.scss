@@ -210,6 +210,7 @@ input.qt-dropdown-input {
     &.--sm {
       padding: 7.5px 8px;
       height: 32px;
+      font-size: 13px;
     }
 
     &::placeholder {
@@ -247,6 +248,7 @@ input.qt-dropdown-input {
       padding: 7.5px 28px 7.5px 8px;
       height: 32px;
       field-sizing: content;
+      font-size: 13px;
     }
 
     .app-drop-down__right-icon {

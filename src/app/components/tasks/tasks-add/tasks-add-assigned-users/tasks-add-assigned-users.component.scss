@@ -1,8 +1,15 @@
 @import "./src/assets/styles/variable";
 
+.dropdown-menu .dropdown-item {
+  padding: 9.5px 8px;
+  height: 36px;
+  margin-block: 4px;
+}
+
 .dropdown-menu {
+    width: 288px;
+    max-height: 252px;
     margin-top: 6px;
-    width: 100%;
 }
 
 .clip-text {
@@ -14,8 +21,8 @@
 
 .assigne-user-avatar {
     flex-shrink: 0;
-    height: 16px;
-    width: 16px;
+    height: 20px;
+    width: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,6 +53,28 @@
 
 .filter-users-check {
     position: absolute;
-    right: 6px;
-    top: 6px;
+    right: 8px;
+    top: 7px;
+}
+
+.qt-button.--square-md {
+  height: 32px;
+  width: 32px;
+}
+
+.assigned-tags__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+
+  app-dynamic-tooltip {
+    display: none;
+  }
+}
+
+::ng-deep .app-mat-tags-with-avatar {
+  .mat-chip {
+    margin: 0 !important;
+  }
 }

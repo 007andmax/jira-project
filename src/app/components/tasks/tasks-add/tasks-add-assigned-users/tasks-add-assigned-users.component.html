@@ -21,13 +21,13 @@
             <i class="icn-sm qt-icon icon__arrow-down report-caret-icon"></i>
         </span>
     </div>
-    <div *ngIf="selectedTag.length > 0">
+    <div class="assigned-tags__row" *ngIf="selectedTag.length > 0">
         <app-dynamic-tooltip
             [position]="'top'"
             #productTooltip
         ></app-dynamic-tooltip>
         <app-mat-chip
-            class="app-mat-tags-with-avatar"
+            class="app-mat-tags-with-avatar app-mat-tags-with-avatar--lg"
             *ngFor="let tag of selectedTag; let i = index"
             [isRemove]="removable"
             (onClose)="remove(i)"
@@ -55,10 +55,10 @@
             </div>
         </app-mat-chip>
         <div
-            class="qt-button --square-sm --gray pointer qt-ml-8"
+            class="qt-button --square-md --gray pointer"
             ngbDropdownToggle
         >
-            <span class="qt-icon icon__add qt-sz-16 qt-icon__white qt-dib qt-mr-8"></span>
+            <span class="qt-icon icon__add qt-sz-16 qt-dib"></span>
         </div>
         <!-- <input
                 id="dropdownServices"

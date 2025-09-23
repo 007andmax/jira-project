@@ -40,6 +40,10 @@
         }
       }
     }
+
+    ::ng-deep .tooltip {
+      white-space: nowrap;
+    }
   }
 }
 

@@ -13,7 +13,7 @@
                 id="dropdownTickets"
                 type="text"
                 class="global-search__input"
-                placeholder="Search By Tickets"
+                placeholder="Select Ticket"
                 readonly
                 [value]="getSelectedItemText()"
                 (click)="onShowDropDown()"
@@ -57,7 +57,9 @@
                     class="global-search__menu-item"
                     (click)="selectTicket(item)"
                 >
-                    <div class="qt-icon icon__tickets qt-sz-20 qt-mr-12"></div>
+                    <div class="global-search__icon-wrap qt-df qt-ai-c qt-jc-c qt-mr-12">
+                      <div class="qt-icon icon__tickets qt-sz-20"></div>
+                    </div>
                     <div>
                         <div
                             class="global-search__menu-item-title"
