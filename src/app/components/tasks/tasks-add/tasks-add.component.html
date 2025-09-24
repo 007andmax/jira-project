@@ -2,7 +2,7 @@
     class="qt-aside-modern --large new-companies-content__modal"
     *ngIf="opened"
 >
-    <form [formGroup]="modelForm">
+    <form class="qt-aside-modern__form" [formGroup]="modelForm">
         <div class="qt-aside-modern__header">
             <div class="qt-aside-modern__header-title">Create Task</div>
             <div
@@ -259,43 +259,44 @@
 
 
         <div class="qt-aside-modern__footer">
-            <div
-                class="qt-button-square pointer tasks-add__attach-button"
+            <div class="qt-aside-modern__footer-file-wrap">
+              <div
+                class="qt-button-square pointer tasks-add__attach-button qt-overflow-h"
                 placement="top"
                 ngbTooltip="Add Attachment"
-            >
+              >
                 <input
-                    class="qt-pointer"
-                    type="file"
-                    #fileDropRef
-                    id="fileDropRef"
-                    multiple
-                    (change)="fileBrowseHandler($event.target.files)"
+                  class="qt-pointer"
+                  type="file"
+                  #fileDropRef
+                  id="fileDropRef"
+                  multiple
+                  (change)="fileBrowseHandler($event.target.files)"
                 >
                 <div class="tasks-add__attach qt-icon icon__attachments"></div>
-            </div>
-            <div
-                class="files-list "
+              </div>
+              <div
+                class="files-list"
                 *ngIf="files.length > 0"
-            >
-                <div class="files-list__title qt-mr-4">Attachments:</div>
+              >
                 <div
-                    class="single-file"
-                    *ngFor="let file of files; let i = index"
+                  class="single-file"
+                  *ngFor="let file of files; let i = index"
                 >
-                    <div class="info ">
-                        <div class="qt-df qt-ai-c">
-                            <div class="name">{{ file?.name }}</div>
-                            <div class="size">({{ formatBytes(file?.size,2) }})</div>
-                        </div>
-                        <span class="file-error">{{(file.showError) ? file.error : ''}}</span>
-                    </div>
-                    <i
-                        class="icn-remove-old qt-icon icon__close qt-icon__gray-400 qt-sz-20"
+                  <div class="info ">
+                    <div class="qt-df qt-gap-4 qt-ai-c qt-fw-nowrap">
+                      <div class="name qt-fw-500 ellipsis">{{ file?.name }}</div>
+                      <div class="size ellipsis">({{ formatBytes(file?.size,2) }})</div>
+                      <i
+                        class="qt-icon icon__close qt-icon__gray-400 qt-sz-16 qt-ml-auto pointer"
                         (click)="deleteFile(i)"
-                    ></i>
-                    <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
+                      ></i>
+                    </div>
+                    <span class="file-error">{{(file.showError) ? file.error : ''}}</span>
+                  </div>
+                  <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
                 </div>
+              </div>
             </div>
         </div>
     </form>

@@ -2,7 +2,7 @@
     class="qt-aside-modern --large new-companies-content__modal"
     *ngIf="opened"
 >
-    <form [formGroup]="modelForm">
+    <form class="qt-aside-modern__form" [formGroup]="modelForm">
         <div class="qt-aside-modern__header">
             <div class="qt-aside-modern__header-title">Edit Task</div>
             <div
@@ -60,8 +60,8 @@
             </div>
         </div>
         <div class="qt-aside-modern__content new-companies-content__modal--content">
-            <div class="qt-inputs-row --required">
-                <div class="qt-input-block">
+            <div class="qt-inputs-row --sm --required">
+                <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Task Name</div>
                     <input
                         [ngClass]="{'--input-error' : submitted && f2.title.errors}"
@@ -71,6 +71,7 @@
                         maxlength="300"
                         (blur)="onChangeTitle()"
                         (keydown)="onKeyDown($event)"
+                        class="--sm"
                     >
                     <app-mat-error
                         class="invalid-feedback"
@@ -95,10 +96,11 @@
                     </app-drop-down>
                 </div>
             </div> -->
-            <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Company</div>
                     <company-drop-down
+                        [class]="['drop-down-sm']"
                         [placeholder]="'Company'"
                         [clientType]="'CLIENT'"
                         [editItem]="selectedCompany"
@@ -107,14 +109,18 @@
                         [change]="true"
                         [isBlockClear]="true"
                         (onSelectedItem)="onSelectCompany($event)"
+                        [heightInput]="'32px'"
+                        [dropdownHeight]="'240px'"
+                        [dropdownWidth]="'360px'"
                     >
                     </company-drop-down>
                 </div>
             </div>
-            <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f100">
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
                     <span class="qt-input-block__label">Assigned To</span>
                     <app-tasks-add-assigned-users
+                        [class]="['drop-down-sm']"
                         [placeholder]="'Select Tech User'"
                         [placement]="'top-left'"
                         [list]="techUsersList"
@@ -155,10 +161,11 @@
                     </app-drop-down>
                 </div>
             </div> -->
-            <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Services</div>
                     <app-services-list
+                        class="drop-down-sm"
                         [type]="'TICKET'"
                         [itemList]="servicesList"
                         [editItem]="currentService.item"
@@ -166,11 +173,11 @@
                     ></app-services-list>
                 </div>
             </div>
-            <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Type</div>
                     <app-drop-down
-                        [class]="['qt-select-input-40']"
+                        [class]="['drop-down-sm']"
                         [placeholder]="'Select Company Type'"
                         [field]="'title'"
                         [list]="listTypes"
@@ -180,15 +187,17 @@
                         [errorMessage]="'Task type is required'"
                         [validate]="!(submitted && f2.type.errors)"
                         (onSelectedItem)="onSelectType($event)"
+                        [heightInput]="'32px'"
                     >
                     </app-drop-down>
                 </div>
             </div>
-            <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Start - End Date</div>
                     <app-tasks-date-picker
                         #dp
+                        [class]="['date-picker-invisible', '--sm']"
                         [container]="'body'"
                         [editStart]="modelForm?.value.startDate"
                         [editEnd]="modelForm?.value.endDate"
@@ -198,12 +207,13 @@
                     ></app-tasks-date-picker>
                 </div>
             </div>
-            <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Due Date</div>
                     <app-date-picker
                         #startDateDP
                         [type]="'DETAIL_TICKET_UPDATE'"
+                        [class]="['date-picker-invisible', '--sm']"
                         [dropdownClass]="['date-picker']"
                         [formatDate]="formatDate"
                         [editMode]="true"
@@ -260,43 +270,44 @@
         </div>
 
         <div class="qt-aside-modern__footer">
-            <div
+            <div class="qt-aside-modern__footer-file-wrap">
+              <div
                 class="qt-button-square pointer tasks-add__attach-button"
                 placement="top"
                 ngbTooltip="Add Attachment"
-            >
+              >
                 <input
-                    class="qt-pointer"
-                    type="file"
-                    #fileDropRef
-                    id="fileDropRef"
-                    multiple
-                    (change)="fileBrowseHandler($event.target.files)"
+                  class="qt-pointer"
+                  type="file"
+                  #fileDropRef
+                  id="fileDropRef"
+                  multiple
+                  (change)="fileBrowseHandler($event.target.files)"
                 >
                 <div class="tasks-add__attach qt-icon icon__attachments"></div>
-            </div>
-            <div
-                class="files-list "
+              </div>
+              <div
+                class="files-list"
                 *ngIf="files.length > 0"
-            >
-                <div class="files-list__title qt-mr-4">Attachments:</div>
+              >
                 <div
-                    class="single-file"
-                    *ngFor="let file of files; let i = index"
+                  class="single-file"
+                  *ngFor="let file of files; let i = index"
                 >
-                    <div class="info ">
-                        <div class="qt-df qt-ai-c">
-                            <div class="name">{{ file?.name }}</div>
-                            <div class="size">({{ formatBytes(file?.size,2) }})</div>
-                        </div>
-                        <span class="file-error">{{(file.showError) ? file.error : ''}}</span>
+                  <div class="info ">
+                    <div class="qt-df qt-ai-c">
+                      <div class="name">{{ file?.name }}</div>
+                      <div class="size">({{ formatBytes(file?.size,2) }})</div>
                     </div>
-                    <i
-                        class="icn-remove-old qt-icon icon__close qt-icon__gray-400 qt-sz-20"
-                        (click)="deleteFile(i)"
-                    ></i>
-                    <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
+                    <span class="file-error">{{(file.showError) ? file.error : ''}}</span>
+                  </div>
+                  <i
+                    class="icn-remove-old qt-icon icon__close qt-icon__gray-400 qt-sz-20"
+                    (click)="deleteFile(i)"
+                  ></i>
+                  <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
                 </div>
+              </div>
             </div>
         </div>
     </form>

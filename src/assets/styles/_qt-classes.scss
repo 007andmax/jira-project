@@ -768,6 +768,9 @@ button.qt-button.--gray:focus {
 .qt-df {
   display: flex;
 }
+.qt-gap-4 {
+  gap: 4px;
+}
 .qt-db {
   display: block;
 }
@@ -788,6 +791,9 @@ button.qt-button.--gray:focus {
 }
 .qt-fw-wrap {
   flex-wrap: wrap;
+}
+.qt-fw-nowrap {
+  flex-wrap: nowrap;
 }
 
 .qt-ai-c {
@@ -1484,6 +1490,9 @@ button.qt-button.--gray:focus {
 }
 .qt-scroll-auto {
   overflow: auto;
+}
+.qt-overflow-h {
+  overflow: hidden;
 }
 
 .qt-circle {

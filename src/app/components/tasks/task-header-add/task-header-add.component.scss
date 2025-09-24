@@ -4,8 +4,8 @@
   width: 558px;
 
   &__header {
-    min-height: 48px;
-    padding: 10px 8px;
+    min-height: 44px;
+    padding: 6px 8px 10px;
 
     .qt-button:not(.--square-sm) {
       padding-inline: 8px;
@@ -20,8 +20,8 @@
   }
 
   &__body {
-    min-height: 48px;
-    padding: 10px 8px;
+    min-height: 44px;
+    padding: 8px 10px 6px;
     border-top: 1px solid $gray-200;
     display: flex;
     align-items: center;
@@ -33,10 +33,12 @@
         border-radius: 6px;
         outline: none;
         width: 100%;
+        font-size: 14px;
+        font-weight: 500;
 
         &::placeholder {
           color: $gray-400;
-          font-weight: 400;
+          font-weight: 500;
         }
       }
     }
