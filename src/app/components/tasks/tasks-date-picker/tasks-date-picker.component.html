@@ -1,5 +1,5 @@
 <div
-    class="date-picker multi-datepicker-container"
+    class="date-picker multi-datepicker-container date-picker-day-time"
     ngbDropdown
     [container]="container"
     placement="bottom-right"
@@ -28,28 +28,28 @@
     <div
         ngbDropdownMenu
         aria-labelledby="dropdownCompany"
-        class="date-picker"
+        class="date-picker date-picker-dropdown-day-time"
     >
-        <div class="qt-df qt-ai-c qt-jc-sb date-picker__row qt-mb-8">
-            <div class="qt-df qt-ai-c date-picker__label">
+        <div class="qt-df qt-ai-c qt-jc-sb date-picker-dropdown-day-time__row qt-mb-8">
+            <div class="qt-df qt-ai-c date-picker-dropdown-day-time__label">
                 <input
-                    class="date-picker__input qt-input-block__input"
+                    class="date-picker-dropdown-day-time__input qt-input-block__input"
                     type="text"
                     (click)="toggleDatePicker()"
                     [value]="parseStartDate()"
                     readonly
                 >
-                <div class="qt-icon icon__calendar qt-sz-20 date-picker__icon"></div>
+                <div class="qt-icon icon__calendar qt-sz-20 date-picker-dropdown-day-time__icon"></div>
             </div>
-            <div class="qt-df qt-ai-c date-picker__label">
+            <div class="qt-df qt-ai-c date-picker-dropdown-day-time__label">
                 <input
-                    class="date-picker__input qt-input-block__input"
+                    class="date-picker-dropdown-day-time__input qt-input-block__input"
                     type="text"
                     (click)="toggleDatePicker()"
                     [value]="parseEndDate()"
                     readonly
                 >
-                <div class="qt-icon icon__calendar qt-sz-20 date-picker__icon"></div>
+                <div class="qt-icon icon__calendar qt-sz-20 date-picker-dropdown-day-time__icon"></div>
             </div>
         </div>
         <app-ticket-profile-updates-service-timepicker

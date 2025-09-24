@@ -180,10 +180,6 @@
 ::ng-deep company-drop-down {
   .dropdown-menu {
     .dropdown-item {
-      padding: 9.5px 8px;
-      height: 36px;
-      margin-block: 2px;
-
       &:hover,
       &.--selected {
         background-color: $gray-50;

@@ -5,7 +5,7 @@
     cursor: default !important;
 }
 
-::ng-deep .start-end-timer {
+::ng-deep .date-picker-dropdown-day-time .start-end-timer {
   gap: 8px;
 
   label {
@@ -38,13 +38,7 @@
   }
 }
 
-.date-picker {
-  &.dropdown-menu {
-    max-height: initial;
-    width: 300px;
-    padding: 16px;
-  }
-
+::ng-deep .date-picker-dropdown-day-time {
   &__row {
     display: flex;
     gap: 8px;
@@ -56,11 +50,11 @@
     width: calc(50% - 4px);
   }
 
-  &__input {
+  &__input:not(.qt-editable-input) {
     color: $gray-900;
     width: 100%;
     margin: 0;
-    padding-right: 32px;
+    padding: 11px 30px 11px 13px;;
   }
 
   &__icon {
@@ -71,9 +65,13 @@
     width: 20px;
     height: 20px;
   }
-}
 
-::ng-deep  .date-picker {
+  &.dropdown-menu {
+    max-height: initial;
+    width: 300px;
+    padding: 16px;
+  }
+
   .ngb-dp-months {
     padding: 0;
   }
@@ -126,23 +124,24 @@
   }
 }
 
-::ng-deep .ui-timepicker-wrapper {
+::ng-deep .ui-timepicker-with-duration {
   width: 146px;
   padding: 8px;
-}
-::ng-deep ul.ui-timepicker-list {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
 
-  li {
-    padding: 7px 8px;
-    font-size: 14px;
-    line-height: 17px;
-    border-radius: 6px;
+  ul.ui-timepicker-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 
-    &:hover {
-      background-color: $gray-50;
+    li {
+      padding: 7px 8px;
+      font-size: 14px;
+      line-height: 17px;
+      border-radius: 6px;
+
+      &:hover {
+        background-color: $gray-50;
+      }
     }
   }
 }
