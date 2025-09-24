@@ -2,7 +2,10 @@
     class="qt-aside-modern --large new-companies-content__modal"
     *ngIf="opened"
 >
-    <form class="qt-aside-modern__form" [formGroup]="modelForm">
+    <form
+        class="qt-aside-modern__form"
+        [formGroup]="modelForm"
+    >
         <div class="qt-aside-modern__header">
             <div class="qt-aside-modern__header-title">Edit Task</div>
             <div
@@ -14,7 +17,7 @@
                         class="qt-button qt-ml-12"
                         appDisabledBtn
                         #saveBtn="disabled"
-                        (onClick)="save()"
+                        (onClick)="closeTask()"
                         [ngClass]="{'--loading':saveBtn.isBlock()}"
                     >
                         <span>Mark completed</span>
@@ -107,7 +110,6 @@
                         [field]="'name'"
                         [search]="true"
                         [change]="true"
-                        [isBlockClear]="true"
                         (onSelectedItem)="onSelectCompany($event)"
                         [heightInput]="'32px'"
                         [dropdownHeight]="'240px'"
@@ -167,6 +169,7 @@
                     <app-services-list
                         class="drop-down-sm"
                         [type]="'TICKET'"
+                        [isBlockClear]="false"
                         [itemList]="servicesList"
                         [editItem]="currentService.item"
                         (selectedServicesItem)="onSelectService($event)"
@@ -215,6 +218,7 @@
                         [type]="'DETAIL_TICKET_UPDATE'"
                         [class]="['date-picker-invisible', '--sm']"
                         [dropdownClass]="['date-picker']"
+                        [placeholder]="'Select due date'"
                         [formatDate]="formatDate"
                         [editMode]="true"
                         [editDate]="task.dueDate"
@@ -269,45 +273,49 @@
             ></div>
         </div>
 
+
+
+
+
         <div class="qt-aside-modern__footer">
             <div class="qt-aside-modern__footer-file-wrap">
-              <div
-                class="qt-button-square pointer tasks-add__attach-button"
-                placement="top"
-                ngbTooltip="Add Attachment"
-              >
-                <input
-                  class="qt-pointer"
-                  type="file"
-                  #fileDropRef
-                  id="fileDropRef"
-                  multiple
-                  (change)="fileBrowseHandler($event.target.files)"
-                >
-                <div class="tasks-add__attach qt-icon icon__attachments"></div>
-              </div>
-              <div
-                class="files-list"
-                *ngIf="files.length > 0"
-              >
                 <div
-                  class="single-file"
-                  *ngFor="let file of files; let i = index"
+                    class="qt-button-square pointer tasks-add__attach-button"
+                    placement="top"
+                    ngbTooltip="Add Attachment"
                 >
-                  <div class="info ">
-                    <div class="qt-df qt-ai-c">
-                      <div class="name">{{ file?.name }}</div>
-                      <div class="size">({{ formatBytes(file?.size,2) }})</div>
-                    </div>
-                    <span class="file-error">{{(file.showError) ? file.error : ''}}</span>
-                  </div>
-                  <i
-                    class="icn-remove-old qt-icon icon__close qt-icon__gray-400 qt-sz-20"
-                    (click)="deleteFile(i)"
-                  ></i>
-                  <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
+                    <input
+                        class="qt-pointer"
+                        type="file"
+                        #fileDropRef
+                        id="fileDropRef"
+                        multiple
+                        (change)="fileBrowseHandler($event.target.files)"
+                    >
+                    <div class="tasks-add__attach qt-icon icon__attachments"></div>
                 </div>
-              </div>
+                <div
+                    class="files-list"
+                    *ngIf="files.length > 0"
+                >
+                    <div
+                        class="single-file"
+                        *ngFor="let file of files; let i = index"
+                    >
+                        <div class="info ">
+                            <div class="qt-df qt-ai-c">
+                                <div class="name">{{ file?.name }}</div>
+                                <div class="size">({{ formatBytes(file?.size,2) }})</div>
+                            </div>
+                            <span class="file-error">{{(file.showError) ? file.error : ''}}</span>
+                        </div>
+                        <i
+                            class="icn-remove-old qt-icon icon__close qt-icon__gray-400 qt-sz-20"
+                            (click)="deleteFile(i)"
+                        ></i>
+                        <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
+                    </div>
+                </div>
             </div>
         </div>
     </form>

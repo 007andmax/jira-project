@@ -18,7 +18,12 @@
     >
     <i
         class="icn-sm qt-icon icon__arrow-down report-caret-icon"
-        *ngIf="!preloader"
+        *ngIf="!preloader && isBlockClear || !preloader && !isBlockClear && !selectedItem"
+    ></i>
+    <i
+        class="icn-remove-old qt-icon icon__close qt-icon__gray-400 qt-sz-20"
+        *ngIf="!preloader && !isBlockClear && selectedItem"
+        (click)="clearClient()"
     ></i>
     <i
         class="loading xs"

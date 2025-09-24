@@ -111,11 +111,11 @@ export class TasksEditComponent extends TasksAddComponent {
     if (event.keyCode === 13) {
       event.preventDefault();
       event.stopPropagation();
-      this.editTask({ title: this.modelForm.controls["title"].value }, false);
+      this.editTask({ title: this.modelForm.controls["title"].value });
     }
   }
   onChangeTitle() {
-    this.editTask({ title: this.modelForm.controls["title"].value }, false);
+    this.editTask({ title: this.modelForm.controls["title"].value });
   }
   onDeleteTask() {
     this.tasksService.deleteTask(this.task.id).subscribe(res => {
@@ -205,6 +205,13 @@ export class TasksEditComponent extends TasksAddComponent {
       dueDate: dueDate
     });
   }
+  closeTask() {
+    this.saveBtn.setDisabled(true);
+    this.tasksService.changeStatusTask(this.task.id, "CLOSED").subscribe(res => {
+      this.saveBtn.setDisabled(false);
+      this.close();
+    });
+  }
   onChangeDescription() {
     this.editTask({
       description: this.modelForm.controls["description"].value
@@ -220,6 +227,12 @@ export class TasksEditComponent extends TasksAddComponent {
     console.log("item", item);
     if (this.currentService.item) {
       let update = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
+      if (!item) {
+        this.ticketsService.removeService(this.task.taskTicketId, update.id, update.services[0].id).subscribe(res => {
+          this.currentService = new TicketProfileFormService();
+        })
+        return;
+      }
       this.currentService.setItem(item);
       this.currentService.setValidate(true);
       this.ticketsService.updateExpense(this.currentService.getDateForUpdate(this.currentService.getDateForRequest(this.usersStateService.getCurrentUser(), update.services[0].id), update.id)).subscribe(res => {
@@ -233,7 +246,7 @@ export class TasksEditComponent extends TasksAddComponent {
       })
     }
   }
-  editTask(data, close = true) {
+  editTask(data) {
     this.submitted = true;
     console.log("this.modelForm.invalid", this.modelForm);
     if (this.modelForm.invalid) {
@@ -244,23 +257,14 @@ export class TasksEditComponent extends TasksAddComponent {
     if (this.currentService.item && this.currentService.item.versionedId) this.modelForm.controls["ticketUpdates"].setValue([this.getDataForUpdateService()])
     this.tasksService.editTask(this.task.id, data).subscribe(res => {
       this.saveBtn.setDisabled(false);
-      if (close) {
-        this.modelForm.controls["attachFileIds"].setValue([]);
-        this.close();
-      }
+
     }, err => {
       this.saveBtn.setDisabled(false);
     })
   }
   close() {
     console.log(this.modelForm.controls["attachFileIds"].value);
-    if (this.modelForm.controls["attachFileIds"].value && this.modelForm.controls["attachFileIds"].value.length > 0) {
-      forkJoin(
-        this.modelForm.controls["attachFileIds"].value.map(item => this.companiesService.removeAttachment(item))
-      ).subscribe(result => {
 
-      });
-    }
     this.currentService = new TicketProfileFormService();
     this.opened = false;
     this.submitted = false;

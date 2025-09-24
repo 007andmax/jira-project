@@ -5,6 +5,8 @@
     #globalSearch="ngbDropdown"
 >
 
+
+
     <div ngbDropdownAnchor>
         <span class="qt-input-search">
             <input
@@ -19,7 +21,15 @@
                 (click)="onShowDropDown()"
             >
             <span class="app-drop-down__right-icon pointer">
-                <i class="icn-sm qt-icon icon__arrow-down report-caret-icon"></i>
+                <i
+                    *ngIf="!selectedItem"
+                    class="icn-sm qt-icon icon__arrow-down report-caret-icon"
+                ></i>
+                <i
+                    *ngIf="selectedItem"
+                    class="icn-remove-old qt-icon icon__close qt-icon__gray-400 qt-sz-20"
+                    (click)="clearClient()"
+                ></i>
             </span>
         </span>
     </div>
@@ -58,7 +68,7 @@
                     (click)="selectTicket(item)"
                 >
                     <div class="global-search__icon-wrap qt-df qt-ai-c qt-jc-c qt-mr-12">
-                      <div class="qt-icon icon__tickets qt-sz-20"></div>
+                        <div class="qt-icon icon__tickets qt-sz-20"></div>
                     </div>
                     <div>
                         <div

@@ -29,6 +29,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   @Input() placement: string = "bottom";
   @Input() isDisabled: boolean = false;
   @Input() container: string;
+  @Input() placeholder: string = "Select Date";
   @Input() dropdownClass = [];
   @Output() onChange: EventEmitter<ChangeDatePicker> = new EventEmitter();
   public selectedDateModel = null;

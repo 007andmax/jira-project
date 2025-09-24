@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { Ticket } from 'src/app/components/tickets/class/ticket';
 import { TicketsFilter } from 'src/app/components/tickets/tickets/class/tickets-filter';
@@ -28,6 +28,7 @@ export class TasksAddAssociateTicketsComponent {
     public companiesStateService: CompaniesStateService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
+    public elRef: ElementRef,
     private ticketStateService: TicketStateService) { }
 
   ngOnInit() {
@@ -88,6 +89,14 @@ export class TasksAddAssociateTicketsComponent {
     this.globalSearch.open();
     this.setDefaultScoll();
     this.onScroll();
+  }
+
+  clearClient() {
+
+    this.selectedItem = null;
+    this.elRef.nativeElement.querySelector("#dropdownTickets").value = "";
+    this.onSelectedItem.emit(null);
+    this.cd.detectChanges();
   }
 
   /**
