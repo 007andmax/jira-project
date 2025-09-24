@@ -8,10 +8,7 @@
     >
         <div class="qt-aside-modern__header">
             <div class="qt-aside-modern__header-title">Create Task</div>
-            <div
-                ngbDropdown
-                placement="bottom-right"
-            >
+            <div>
                 <div class="qt-df qt-ai-c">
                     <div
                         class="qt-button qt-ml-12"
@@ -24,37 +21,10 @@
                         <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
                     </div>
                     <div
-                        class="qt-button --square-md --gray pointer qt-mr-8 qt-ml-8"
-                        ngbDropdownToggle
-                    >
-                        <div class="qt-icon icon__more qt-sz-16 qt-bg-contain"></div>
-                    </div>
-                    <div
-                        class="qt-button --square-md --gray pointer"
+                        class="qt-button --square-md --gray pointer qt-ml-8"
                         (click)="close()"
                     >
                         <div class="qt-icon icon__close qt-sz-16 pointer"></div>
-                    </div>
-                    <div
-                        ngbDropdownMenu
-                        container="body"
-                        class="dropdown-menu-qt"
-                    >
-                        <ul
-                            role="menu"
-                            class="qt-dropdown-menu"
-                        >
-                            <li class="dropdown-item qt-dropdown-menu__item-red qt-dropdown-menu__top-line pointer">
-                                <a
-                                    tabindex="-1"
-                                    class="qt-df qt-ai-c qt-color-gray-900"
-                                    href="javascript:void(0)"
-                                >
-                                    <i class="qt-dib qt-icon icon__delete qt-icon__red-600 qt-sz-20 qt-mr-12"></i>
-                                    <span class="qt-color-red-600">Delete Task</span>
-                                </a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -261,6 +231,8 @@
                 class="mt-2"
             ></div>
         </div>
+
+
 
 
 

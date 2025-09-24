@@ -213,6 +213,7 @@ export class TasksEditComponent extends TasksAddComponent {
     });
   }
   onChangeDescription() {
+    console.log("onChangeDescription");
     this.editTask({
       description: this.modelForm.controls["description"].value
     });

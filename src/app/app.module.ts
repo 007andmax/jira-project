@@ -159,6 +159,7 @@ import { QuoteAsidePreviewModule } from './components/billing/quotes/quote-aside
 import { TasksComponent } from './components/tasks/tasks.component';
 import { TasksDashboardComponent } from './components/tasks-dashboard/tasks-dashboard.component';
 import { TasksAddModule } from './components/tasks/tasks-add/tasks-add.module';
+import { TasksEditModule } from './components/tasks/tasks-edit/tasks-edit.module';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -247,7 +248,8 @@ declare var $: any;
         CannedResponsesAsideModule,
         NotificationsModule,
         QuoteAsidePreviewModule,
-        TasksAddModule
+        TasksAddModule,
+        TasksEditModule
     ],
     providers: [
         {

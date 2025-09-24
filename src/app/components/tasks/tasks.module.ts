@@ -34,7 +34,7 @@ import { TasksAddAssociateTicketsModule } from './tasks-add/tasks-add-associate-
 
 
 @NgModule({
-    declarations: [TasksComponent, TasksHeaderComponent, TasksListComponent, TasksTabsComponent, TasksEditComponent
+    declarations: [TasksComponent, TasksHeaderComponent, TasksListComponent, TasksTabsComponent
     ],
     imports: [
         CommonModule,
