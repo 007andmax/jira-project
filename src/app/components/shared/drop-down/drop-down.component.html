@@ -5,18 +5,13 @@
     [container]="container"
     [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
 >
-    <div
+    <div class="qt-pos-rel dropdown-wrap">
+      <div
         *ngIf="title"
         class="qt-input-block__label"
         [textContent]="title"
-    ></div>
-    <app-mat-error
-        class="invalid-feedback"
-        *ngIf="!validate"
-        [textContent]="errorMessage"
-    >
-    </app-mat-error>
-    <input
+      ></div>
+      <input
         type="text"
         [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
         [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
@@ -31,51 +26,58 @@
         (focus)="onFocus($event)"
         [readonly]="!change"
         ngbDropdownAnchor
-    >
-    <span
+      >
+      <span
         class="app-drop-down__right-icon pointer"
         *ngIf="list && !isDisabled"
         [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '20px' }"
-    >
+      >
         <i
-            *ngIf="selectedItem && !isAdd && !isBlockClear"
-            class="icn-remove-old qt-icon icon__close qt-icon__gray-400 qt-sz-20"
-            (click)="clearClient()"
+          *ngIf="selectedItem && !isAdd && !isBlockClear"
+          class="icn-remove-old qt-icon icon__close qt-icon__gray-400 qt-sz-20"
+          (click)="clearClient()"
         ></i>
         <i
-            *ngIf="(!selectedItem || isBlockClear) && !isAdd && !preloader"
-            class="icn-sm qt-icon icon__arrow-down report-caret-icon"
-            ngbDropdownToggle
+          *ngIf="(!selectedItem || isBlockClear) && !isAdd && !preloader"
+          class="icn-sm qt-icon icon__arrow-down report-caret-icon"
+          ngbDropdownToggle
         ></i>
         <i
-            *ngIf="isAdd"
-            (click)="addItem()"
-            class="icn-sm icn-product-save qt-icon icon__done qt-icon__blue-light-600"
+          *ngIf="isAdd"
+          (click)="addItem()"
+          class="icn-sm icn-product-save qt-icon icon__done qt-icon__blue-light-600"
         ></i>
     </span>
-    <i
+      <i
         class="loading xs"
         *ngIf="preloader"
-    ></i>
-    <div
+      ></i>
+      <div
         ngbDropdownMenu
         [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'max-height': dropdownHeight ? dropdownHeight : '192px'}"
         aria-labelledby="dropdown1"
         class="app-drop-down__dropdown"
-    >
+      >
         <ng-template
-            ngFor
-            let-item
-            [ngForOf]="list"
-            let-i="index"
+          ngFor
+          let-item
+          [ngForOf]="list"
+          let-i="index"
         >
-            <button
-                ngbDropdownItem
-                [textContent]="reduceItemName(item)"
-                (click)="onSelect(item)"
-                [title]="reduceItemName(item)"
-                [ngClass]="{'--selected':isSelected(item)}"
-            ></button>
+          <button
+            ngbDropdownItem
+            [textContent]="reduceItemName(item)"
+            (click)="onSelect(item)"
+            [title]="reduceItemName(item)"
+            [ngClass]="{'--selected':isSelected(item)}"
+          ></button>
         </ng-template>
+      </div>
     </div>
+    <app-mat-error
+      class="invalid-feedback"
+      *ngIf="!validate"
+      [textContent]="errorMessage"
+    >
+    </app-mat-error>
 </div>

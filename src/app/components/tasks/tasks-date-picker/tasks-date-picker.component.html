@@ -4,82 +4,84 @@
     [container]="container"
     placement="bottom-right"
 >
-    <app-mat-error
-        class="app-drop-down__error invalid-feedback mat-error"
-        *ngIf="!validate"
-        [textContent]="errorMessage"
-    >
-    </app-mat-error>
-    <input
-        type="text"
-        [attr.placeholder]="placeholder"
-        [(ngModel)]="selectedDateModel"
-        [ngClass]="{'disabled': isDisabled,'--input-error' : !validate}"
-        class="pointer"
-        ngbDropdownToggle
-        id="dropdownCompany"
-    >
-    <i
-        class="icn-16 qt-icon icon__calendar pointer"
-        ngbDropdownToggle
-        placement="top"
-        ngbTooltip="Set Date"
-    ></i>
-    <div
-        ngbDropdownMenu
-        aria-labelledby="dropdownCompany"
-        class="date-picker date-picker-dropdown-day-time"
-    >
-        <div class="qt-df qt-ai-c qt-jc-sb date-picker-dropdown-day-time__row qt-mb-8">
-            <div class="qt-df qt-ai-c date-picker-dropdown-day-time__label">
-                <input
-                    class="date-picker-dropdown-day-time__input qt-input-block__input"
-                    type="text"
-                    (click)="toggleDatePicker()"
-                    [value]="parseStartDate()"
-                    readonly
-                >
-                <div class="qt-icon icon__calendar qt-sz-20 date-picker-dropdown-day-time__icon"></div>
-            </div>
-            <div class="qt-df qt-ai-c date-picker-dropdown-day-time__label">
-                <input
-                    class="date-picker-dropdown-day-time__input qt-input-block__input"
-                    type="text"
-                    (click)="toggleDatePicker()"
-                    [value]="parseEndDate()"
-                    readonly
-                >
-                <div class="qt-icon icon__calendar qt-sz-20 date-picker-dropdown-day-time__icon"></div>
-            </div>
-        </div>
-        <app-ticket-profile-updates-service-timepicker
-            (onChangeStart)="onChangeStartTimePickerService($event)"
-            (onChangeEnd)="onChangeEndTimePickerSerice($event)"
-            #editTimePicker
-        ></app-ticket-profile-updates-service-timepicker>
-        <ngb-datepicker
-            #dp
-            (dateSelect)="onDateSelection($event)"
-            [displayMonths]="1"
-            [dayTemplate]="t"
-            [outsideDays]="outsideDays"
-        >
-        </ngb-datepicker>
-        <ng-template
-            #t
-            let-date
-            let-focused="focused"
-        >
+   <div class="qt-pos-rel dropdown-wrap">
+     <input
+       type="text"
+       [attr.placeholder]="placeholder"
+       [(ngModel)]="selectedDateModel"
+       [ngClass]="{'disabled': isDisabled,'--input-error' : !validate}"
+       class="pointer"
+       ngbDropdownToggle
+       id="dropdownCompany"
+     >
+     <i
+       class="icn-16 qt-icon icon__calendar pointer"
+       ngbDropdownToggle
+       placement="top"
+       ngbTooltip="Set Date"
+     ></i>
+     <div
+       ngbDropdownMenu
+       aria-labelledby="dropdownCompany"
+       class="date-picker date-picker-dropdown-day-time"
+     >
+       <div class="qt-df qt-ai-c qt-jc-sb date-picker-dropdown-day-time__row qt-mb-8">
+         <div class="qt-df qt-ai-c date-picker-dropdown-day-time__label">
+           <input
+             class="date-picker-dropdown-day-time__input qt-input-block__input"
+             type="text"
+             (click)="toggleDatePicker()"
+             [value]="parseStartDate()"
+             readonly
+           >
+           <div class="qt-icon icon__calendar qt-sz-20 date-picker-dropdown-day-time__icon"></div>
+         </div>
+         <div class="qt-df qt-ai-c date-picker-dropdown-day-time__label">
+           <input
+             class="date-picker-dropdown-day-time__input qt-input-block__input"
+             type="text"
+             (click)="toggleDatePicker()"
+             [value]="parseEndDate()"
+             readonly
+           >
+           <div class="qt-icon icon__calendar qt-sz-20 date-picker-dropdown-day-time__icon"></div>
+         </div>
+       </div>
+       <app-ticket-profile-updates-service-timepicker
+         (onChangeStart)="onChangeStartTimePickerService($event)"
+         (onChangeEnd)="onChangeEndTimePickerSerice($event)"
+         #editTimePicker
+       ></app-ticket-profile-updates-service-timepicker>
+       <ngb-datepicker
+         #dp
+         (dateSelect)="onDateSelection($event)"
+         [displayMonths]="1"
+         [dayTemplate]="t"
+         [outsideDays]="outsideDays"
+       >
+       </ngb-datepicker>
+       <ng-template
+         #t
+         let-date
+         let-focused="focused"
+       >
             <span
-                class="custom-day"
-                [class.focused]="focused"
-                [class.range]="isRange(date)"
-                [class.faded]="isHovered(date) || isInside(date)"
-                (mouseenter)="hoveredDate = date"
-                (mouseleave)="hoveredDate = null"
+              class="custom-day"
+              [class.focused]="focused"
+              [class.range]="isRange(date)"
+              [class.faded]="isHovered(date) || isInside(date)"
+              (mouseenter)="hoveredDate = date"
+              (mouseleave)="hoveredDate = null"
             >
                 {{ date.day }}
             </span>
-        </ng-template>
-    </div>
+       </ng-template>
+     </div>
+   </div>
+    <app-mat-error
+      class="app-drop-down__error invalid-feedback mat-error"
+      *ngIf="!validate"
+      [textContent]="errorMessage"
+    >
+    </app-mat-error>
 </div>
