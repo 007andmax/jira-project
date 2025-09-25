@@ -124,7 +124,7 @@
                     <app-tasks-add-assigned-users
                         [class]="['drop-down-sm']"
                         [placeholder]="'Select Tech User'"
-                        [placement]="'top-left'"
+                        [placement]="'bottom-right'"
                         [list]="techUsersList"
                         [selectedTag]="selectedAssignedUsers"
                         (filterChange)="onSelectTechUser($event)"
@@ -292,6 +292,8 @@
 
 
 
+
+
         <div class="qt-aside-modern__footer">
             <div class="qt-aside-modern__footer-file-wrap">
                 <div
@@ -315,10 +317,21 @@
                 >
                     <div
                         class="single-file"
+                        [ngClass]="{'error-file':file.showError}"
                         *ngFor="let file of files; let i = index"
                     >
                         <div class="info ">
                             <div class="qt-df qt-gap-4 qt-ai-c qt-fw-nowrap">
+                                <span
+                                    class="file-error"
+                                    *ngIf="file.showError"
+                                >
+                                    <div
+                                        class="qt-icon icon__info qt-sz-16"
+                                        placement="top"
+                                        [ngbTooltip]="file.error"
+                                    ></div>
+                                </span>
                                 <div class="name qt-fw-500 ellipsis">{{ file?.name }}</div>
                                 <div class="size ellipsis">({{ formatBytes(file?.size,2) }})</div>
                                 <i
@@ -326,7 +339,8 @@
                                     (click)="deleteFile(i)"
                                 ></i>
                             </div>
-                            <span class="file-error">{{(file.showError) ? file.error : ''}}</span>
+
+
                         </div>
                         <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
                     </div>
