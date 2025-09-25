@@ -74,7 +74,10 @@ export class TechUsersComponent implements OnInit, OnDestroy {
       }
     })
   }
-
+  public setUsersList(value) {
+    this.users = JSON.parse(JSON.stringify(value));
+    this.usersList = JSON.parse(JSON.stringify(value));
+  }
   getStyleNetAvatar(i) {
     return `${12 * i}px`;
   }

@@ -20,6 +20,7 @@ import { Ticket } from '../../tickets/class/ticket';
 export class TasksEditComponent extends TasksAddComponent {
   selectedCompany: Company;
   selectedTicket: Ticket = null;
+  isInitEditNote: boolean = false;
   ngOnInit() {
     this.modelForm = this.formBuilder.group({
       title: [
@@ -229,7 +230,7 @@ export class TasksEditComponent extends TasksAddComponent {
     if (this.currentService.item) {
       let update = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
       if (!item) {
-        this.ticketsService.removeService(this.task.taskTicketId, update.id, update.services[0].id).subscribe(res => {
+        this.ticketsService.deleteUpdate(this.task.taskTicketId, update.id).subscribe(res => {
           this.currentService = new TicketProfileFormService();
         })
         return;

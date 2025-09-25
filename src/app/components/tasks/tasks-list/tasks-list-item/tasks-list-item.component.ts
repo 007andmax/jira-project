@@ -54,6 +54,8 @@ export class TasksListItemComponent {
   onSetAssignedUsers() {
     this.listTechUsers = this.onGetTechUsers();
     this.assignedUsers = this.onGetTechUsers().filter(user => this.item.assignedUsersIds.some(assignedUser => assignedUser == user.id));
+    console.log("this.assignedUsers", this.assignedUsers);
+    this.techUsers.setUsersList(this.listTechUsers);
     this.techUsers.setEditUsers(this.assignedUsers);
   }
   onGetTechUsers() {

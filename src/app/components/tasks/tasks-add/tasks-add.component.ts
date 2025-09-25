@@ -74,7 +74,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
       },
     ],
     uploadUrl: 'v1/image',
-    sanitize: false,
+    sanitize: false
   };
   files = [];
   selectedAssignedUsers = [];

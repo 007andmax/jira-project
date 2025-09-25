@@ -252,9 +252,14 @@
                     <a ngbNavLink>Description</a>
                     <ng-template ngbNavContent>
                         <angular-editor
+                            class="edit-note-container"
+                            [init]="isInitEditNote"
+                            appClickOtside
+                            [classParent]="'.edit-note-container'"
+                            (onOutSide)="onChangeDescription()"
                             formControlName="description"
                             [config]="editorConfig"
-                            (blur)="onChangeDescription()"
+                            (focus)="isInitEditNote = true"
                         ></angular-editor>
                     </ng-template>
                 </li>
@@ -272,6 +277,16 @@
                 class="mt-2"
             ></div>
         </div>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -307,8 +322,8 @@
                                 <div class="name qt-fw-500 ellipsis">{{ file?.name }}</div>
                                 <div class="size ellipsis">({{ formatBytes(file?.size,2) }})</div>
                                 <i
-                                  class="qt-icon icon__close qt-icon__gray-400 qt-sz-16 qt-ml-auto pointer"
-                                  (click)="deleteFile(i)"
+                                    class="qt-icon icon__close qt-icon__gray-400 qt-sz-16 qt-ml-auto pointer"
+                                    (click)="deleteFile(i)"
                                 ></i>
                             </div>
                             <span class="file-error">{{(file.showError) ? file.error : ''}}</span>

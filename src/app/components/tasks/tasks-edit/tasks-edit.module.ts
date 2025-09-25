@@ -15,6 +15,7 @@ import { UploadAreaProgressModule } from '../../shared/upload-area/upload-area-p
 import { TasksAddAssignedUsersModule } from '../tasks-add/tasks-add-assigned-users/tasks-add-assigned-users.module';
 import { TasksAddAssociateTicketsModule } from '../tasks-add/tasks-add-associate-tickets/tasks-add-associate-tickets.module';
 import { TasksEditComponent } from './tasks-edit.component';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 
 @NgModule({
     declarations: [TasksEditComponent
@@ -36,7 +37,8 @@ import { TasksEditComponent } from './tasks-edit.component';
         UploadAreaProgressModule,
         NgbModule,
         AngularEditorModule,
-        TasksAddAssociateTicketsModule
+        TasksAddAssociateTicketsModule,
+        ClickOutsideModule
 
     ],
     exports: [TasksEditComponent]
