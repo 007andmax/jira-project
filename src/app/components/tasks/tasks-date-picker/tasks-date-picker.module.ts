@@ -17,7 +17,8 @@ import { TicketProfileUpdatesServiceTimepickerModule } from '../../tickets/ticke
         NgbModule,
         MatErrorModule,
         FormsModule,
-        TicketProfileUpdatesServiceTimepickerModule
+        TicketProfileUpdatesServiceTimepickerModule,
+        ClickOutsideModule
     ],
     exports: [TasksDatePickerComponent]
 })

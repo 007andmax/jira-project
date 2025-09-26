@@ -11,7 +11,7 @@ import { TicketsFilterDropDownComponent } from 'src/app/components/tickets/ticke
 })
 export class TasksAddAssignedUsersComponent extends TicketsFilterDropDownComponent {
   @Input() reducerItem: Function = (item) => `${item.firstName} ${item.lastName}`;
-
+  @Input() validate: boolean = true;
 
   /**
 * @description Check if element dropdown added in selectedItems

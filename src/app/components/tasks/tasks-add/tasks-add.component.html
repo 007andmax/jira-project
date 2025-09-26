@@ -92,6 +92,7 @@
                         [placement]="'bottom-right'"
                         [selectedTag]="selectedAssignedUsers"
                         [list]="techUsersList"
+                        [validate]="!(submitted && f2.assignedUsersIds.errors)"
                         (filterChange)="onSelectTechUser($event)"
                     ></app-tasks-add-assigned-users>
                     <app-mat-error
@@ -232,6 +233,8 @@
                 class="mt-2"
             ></div>
         </div>
+
+
 
 
 

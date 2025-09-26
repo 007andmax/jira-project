@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MultiDatepickerComponent } from '../../shared/multi-datepicker/multi-datepicker.component';
 import * as moment from "moment";
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { DateService } from 'src/app/services/date/date.service';
 
 
 @Component({
@@ -13,21 +14,46 @@ export class TasksDatePickerComponent extends MultiDatepickerComponent {
   @Input() container: string = null;
   durationStart: number = new Date().getTime();
   durationEnd: number = new Date().getTime();
-
+  @ViewChild('dp', { static: true }) dp;
+  isInitCloseOutside: boolean = false;
   @Input() editStart: number;
   @Input() editEnd: number;
+  @Output() onCloseDropDown = new EventEmitter<any>();
+  constructor(public dateService: DateService,
+    public cd: ChangeDetectorRef,) {
+    super(dateService);
+  }
 
   ngOnInit() {
     if (this.editStart && this.editEnd) this.setEditDates(this.editStart, this.editEnd);
+    this.dp.autoClose = false;
   }
-
+  openChange(data) {
+    console.log("data", data);
+    setTimeout(() => {
+      this.isInitCloseOutside = data;
+    }, 500);
+    this.onCloseDropDown.emit(!data);
+  }
   public setEditDates(editStart, editEnd) {
     console.log("editStart, editEnd", editStart, editEnd);
     if (editStart) this.fromDate = new NgbDate(new Date(editStart).getFullYear(), new Date(editStart).getMonth() + 1, new Date(editStart).getDate());
     if (editEnd) this.toDate = new NgbDate(new Date(editEnd).getFullYear(), new Date(editEnd).getMonth() + 1, new Date(editEnd).getDate());
     console.log("this.fromDat", this.fromDate);
   }
+  onToggleTimePicker(data) {
+    console.log("onToggleTimePicker", data);
 
+    console.log("this.isInitCloseOutside", this.isInitCloseOutside);
+    if (!data) {
+      setTimeout(() => {
+        this.isInitCloseOutside = true;
+      }, 500);
+    } else {
+      this.isInitCloseOutside = false;
+    }
+    this.cd.detectChanges();
+  }
   public onChangeStartTimePickerService(data) {
     this.durationStart = data;
     this.changeDate();

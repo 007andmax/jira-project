@@ -126,6 +126,7 @@
                         [placeholder]="'Select Tech User'"
                         [placement]="'bottom-right'"
                         [list]="techUsersList"
+                        [validate]="!(submitted && f2.assignedUsersIds.errors)"
                         [selectedTag]="selectedAssignedUsers"
                         (filterChange)="onSelectTechUser($event)"
                     ></app-tasks-add-assigned-users>
@@ -207,6 +208,7 @@
                         [validate]="!(submitted && f2.startDate.errors)"
                         [errorMessage]="'Start date is required'"
                         (selectedDate)="filterByDate($event)"
+                        (onCloseDropDown)="onCloseDatePicker($event)"
                     ></app-tasks-date-picker>
                 </div>
             </div>
@@ -294,6 +296,9 @@
 
 
 
+
+
+
         <div class="qt-aside-modern__footer">
             <div class="qt-aside-modern__footer-file-wrap">
                 <div
@@ -339,6 +344,9 @@
                                     (click)="deleteFile(i)"
                                 ></i>
                             </div>
+
+
+
 
 
                         </div>

@@ -115,6 +115,23 @@ export class TasksEditComponent extends TasksAddComponent {
       this.editTask({ title: this.modelForm.controls["title"].value });
     }
   }
+  onCloseDatePicker(event) {
+    console.log("event", event);
+    console.log("this.currentService", this.currentService);
+    if (event && this.currentService.item) {
+      let update = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
+      this.currentService.setDurationStart(this.modelForm.controls["startDate"].value);
+      this.currentService.setDurationEnd(this.modelForm.controls["endDate"].value);
+      this.ticketsService.updateExpense(this.currentService.getDateForUpdate(this.currentService.getDateForRequest(this.usersStateService.getCurrentUser(), update.services[0].id), update.id)).subscribe(res => {
+      });
+    }
+    if (event && (this.modelForm.controls["startDate"].value != this.task.startDate || this.modelForm.controls["endDate"].value != this.task.endDate)) {
+      this.editTask({
+        startDate: this.modelForm.controls["startDate"].value,
+        endDate: this.modelForm.controls["endDate"].value
+      });
+    }
+  }
   onChangeTitle() {
     this.editTask({ title: this.modelForm.controls["title"].value });
   }
@@ -192,10 +209,7 @@ export class TasksEditComponent extends TasksAddComponent {
       this.modelForm.controls["startDate"].setValue(null);
       this.modelForm.controls["endDate"].setValue(null);
     }
-    this.editTask({
-      startDate: this.modelForm.controls["startDate"].value,
-      endDate: this.modelForm.controls["endDate"].value
-    });
+
   }
   onChangeDueDate(data) {
     console.log("data", data);

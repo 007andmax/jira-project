@@ -20,6 +20,7 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
   @Output() onChangeEnd = new EventEmitter<any>();
   @Output() onSetEnd = new EventEmitter<any>();
   @Output() onChangeStart = new EventEmitter<any>();
+  @Output() onToggleDropDown = new EventEmitter<any>();
   currentCompany = null;
   step: number = 1;
   isShowEnd: boolean = false;
@@ -73,10 +74,12 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
         this.inputTarget = data.currentTarget;
         this.isShowStart = true;
         this.onSetPosition();
+        this.onToggleDropDown.emit(true);
       });
       this.timePickerStart.on('hideTimepicker', (data) => {
         this.isShowStart = false;
         this.inputTarget = null;
+        this.onToggleDropDown.emit(false);
       });
       this.timePickerEnd.on('selectTime', (data) => {
         let endDate = new Date(this.timePickerEnd.timepicker('getTime'));
@@ -93,10 +96,12 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
         $('.ui-timepicker-with-duration').scrollTop(0);
         this.isShowEnd = true;
         this.onSetPosition();
+        this.onToggleDropDown.emit(true);
       });
       this.timePickerEnd.on('hideTimepicker', (data) => {
         this.isShowEnd = false;
         this.inputTarget = null;
+        this.onToggleDropDown.emit(false);
       });
       if (this.editMode) {
         let startDate = new Date(this.start);

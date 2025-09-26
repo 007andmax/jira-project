@@ -1,8 +1,10 @@
 <div
     class="date-picker multi-datepicker-container date-picker-day-time"
     ngbDropdown
+    #dp="ngbDropdown"
     [container]="container"
     placement="bottom-right"
+    (openChange)="openChange($event)"
 >
     <app-mat-error
         class="app-drop-down__error invalid-feedback mat-error"
@@ -29,6 +31,10 @@
         ngbDropdownMenu
         aria-labelledby="dropdownCompany"
         class="date-picker date-picker-dropdown-day-time"
+        [init]="isInitCloseOutside"
+        appClickOtside
+        [classParent]="'.date-picker-dropdown-day-time'"
+        (onOutSide)="dp.close()"
     >
         <div class="qt-df qt-ai-c qt-jc-sb date-picker-dropdown-day-time__row qt-mb-8">
             <div class="qt-df qt-ai-c date-picker-dropdown-day-time__label">
@@ -55,6 +61,7 @@
         <app-ticket-profile-updates-service-timepicker
             (onChangeStart)="onChangeStartTimePickerService($event)"
             (onChangeEnd)="onChangeEndTimePickerSerice($event)"
+            (onToggleDropDown)="onToggleTimePicker($event)"
             #editTimePicker
         ></app-ticket-profile-updates-service-timepicker>
         <ngb-datepicker

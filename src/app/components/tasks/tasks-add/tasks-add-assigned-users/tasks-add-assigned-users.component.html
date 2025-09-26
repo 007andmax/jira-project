@@ -13,6 +13,7 @@
             class="pointer"
             autocomplete="off"
             placeholder="Select Assignee"
+            [ngClass]="{'--input-error' : !validate}"
             id="dropdown1"
             readonly
             ngbDropdownToggle
@@ -21,7 +22,10 @@
             <i class="icn-sm qt-icon icon__arrow-down report-caret-icon"></i>
         </span>
     </div>
-    <div class="assigned-tags__row" *ngIf="selectedTag.length > 0">
+    <div
+        class="assigned-tags__row"
+        *ngIf="selectedTag.length > 0"
+    >
         <app-dynamic-tooltip
             [position]="'top'"
             #productTooltip
