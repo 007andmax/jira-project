@@ -284,6 +284,8 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     return this.modelForm.controls;
   }
   public getDataForUpdateService() {
+    this.currentService.setDurationStart(this.modelForm.controls["startDate"].value);
+    this.currentService.setDurationEnd(this.modelForm.controls["endDate"].value);
     this.currentService.calculateQuantity();
     return {
       services: [this.currentService.getDateForRequest(this.usersStateService.getCurrentUser())],
