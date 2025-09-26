@@ -33,20 +33,22 @@
             <div class="qt-inputs-row --sm --required">
                 <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Task Name</div>
-                    <input
+                    <div>
+                      <input
                         [ngClass]="{'--input-error' : submitted && f2.title.errors}"
                         type="text"
                         formControlName="title"
                         placeholder="Write about task"
                         maxlength="300"
                         class="--sm"
-                    >
-                    <app-mat-error
-                        class="invalid-feedback"
+                      >
+                      <app-mat-error
+                        class="invalid-feedback --pos-static qt-dib qt-mt-8"
                         *ngIf="submitted && f2.title.errors"
-                    >
+                      >
                         Task name is required
-                    </app-mat-error>
+                      </app-mat-error>
+                    </div>
                 </div>
             </div>
             <!-- <div class="qt-inputs-row">
@@ -86,7 +88,8 @@
             <div class="qt-inputs-row --sm">
                 <div class="qt-input-block qt-input-block--horizontal">
                     <span class="qt-input-block__label">Assigned To</span>
-                    <app-tasks-add-assigned-users
+                    <div>
+                      <app-tasks-add-assigned-users
                         [class]="['drop-down-sm']"
                         [placeholder]="'Select Assignee'"
                         [placement]="'bottom-right'"
@@ -94,13 +97,14 @@
                         [list]="techUsersList"
                         [validate]="!(submitted && f2.assignedUsersIds.errors)"
                         (filterChange)="onSelectTechUser($event)"
-                    ></app-tasks-add-assigned-users>
-                    <app-mat-error
-                        class="invalid-feedback"
+                      ></app-tasks-add-assigned-users>
+                      <app-mat-error
+                        class="invalid-feedback --pos-static qt-dib qt-mt-8"
                         *ngIf="submitted && f2.assignedUsersIds.errors"
-                    >
+                      >
                         Assigned user is required
-                    </app-mat-error>
+                      </app-mat-error>
+                    </div>
                 </div>
             </div>
             <div class="qt-inputs-row --sm">

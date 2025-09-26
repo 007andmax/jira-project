@@ -207,6 +207,10 @@ input.qt-dropdown-input {
     font-weight: 400;
     line-height: 17px;
 
+    &.--input-error {
+      border-color: $red-600;
+    }
+
     &.--sm {
       padding: 7.5px 8px;
       height: 32px;
@@ -270,6 +274,7 @@ input.qt-dropdown-input {
       padding-left: 32px;
       box-shadow: unset;
       color: $gray-900;
+      field-sizing: content;
 
       &::placeholder {
         color: $gray-400;
@@ -282,6 +287,10 @@ input.qt-dropdown-input {
         height: 32px;
         font-size: 13px;
         line-height: 20px;
+
+        &.--input-error {
+          border-color: $red-600;
+        }
       }
     }
 

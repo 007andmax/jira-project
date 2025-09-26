@@ -8,7 +8,35 @@
   }
 
   &__content {
+    display: flex;
+    flex-direction: column;
     flex: 1;
+
+    .tab-content {
+      flex: 1;
+    }
+
+    ::ng-deep .tab-pane,
+    ::ng-deep .angular-editor {
+      height: 100%;
+    }
+
+    ::ng-deep .angular-editor-wrapper {
+      height: calc(100% - 14px);
+    }
+  }
+
+  ::ng-deep app-drop-down,
+  ::ng-deep app-tasks-date-picker {
+    .dropdown-wrap {
+      display: inline-block;
+    }
+
+    .invalid-feedback {
+      position: sticky;
+      margin-top: 8px;
+      display: block;
+    }
   }
 
   &__footer {
@@ -21,7 +49,6 @@
       gap: 8px;
       padding: 12px;
       background-color: $gray-50;
-      border-top: 1px solid $gray-200;
       border-radius: 0 0 12px 12px;
     }
   }
