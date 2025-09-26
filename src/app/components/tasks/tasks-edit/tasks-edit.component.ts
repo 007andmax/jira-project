@@ -122,6 +122,7 @@ export class TasksEditComponent extends TasksAddComponent {
       let update = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
       this.currentService.setDurationStart(this.modelForm.controls["startDate"].value);
       this.currentService.setDurationEnd(this.modelForm.controls["endDate"].value);
+      this.currentService.calculateQuantity();
       this.ticketsService.updateExpense(this.currentService.getDateForUpdate(this.currentService.getDateForRequest(this.usersStateService.getCurrentUser(), update.services[0].id), update.id)).subscribe(res => {
       });
     }
