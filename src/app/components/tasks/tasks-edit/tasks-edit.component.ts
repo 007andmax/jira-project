@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { TasksAddComponent } from '../tasks-add/tasks-add.component';
 import { Validators } from '@angular/forms';
 import { Company } from 'src/app/interfaces/company/company';
@@ -11,6 +11,7 @@ import { S } from '@angular/cdk/keycodes';
 import { TicketProfileFormService } from '../../tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
 import { Task } from '../class/task';
 import { Ticket } from '../../tickets/class/ticket';
+import { TasksDatePickerComponent } from '../tasks-date-picker/tasks-date-picker.component';
 
 @Component({
   selector: 'app-tasks-edit',
@@ -21,6 +22,7 @@ export class TasksEditComponent extends TasksAddComponent {
   selectedCompany: Company;
   selectedTicket: Ticket = null;
   isInitEditNote: boolean = false;
+  @ViewChild('datePicker', { static: false }) datePicker: TasksDatePickerComponent;
   ngOnInit() {
     this.modelForm = this.formBuilder.group({
       title: [
@@ -72,8 +74,11 @@ export class TasksEditComponent extends TasksAddComponent {
           associatedTicketId: this.task.associatedTicketId,
           dueDate: this.task.dueDate,
           ticketUpdates: this.task.ticketUpdateList,
-          attachFileIds: this.task.attachFileIds,
+          attachFileIds: task.attachments.map(item => item.file.id),
           taskTicketId: this.task.taskTicketId
+        });
+        this.files = task.attachments.map(item => {
+          return { ...item.file, showError: false }
         });
         if (this.task.associatedTicketId) this.selectedTicket = new Ticket({ id: this.task.associatedTicketId, number: this.task.associatedTicketNumber });
         this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id == this.task.companyId);

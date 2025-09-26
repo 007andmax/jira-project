@@ -67,22 +67,22 @@
                 <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Task Name</div>
                     <div>
-                      <input
-                        [ngClass]="{'--input-error' : submitted && f2.title.errors}"
-                        type="text"
-                        formControlName="title"
-                        placeholder="Write Company or Search Company"
-                        maxlength="300"
-                        (blur)="onChangeTitle()"
-                        (keydown)="onKeyDown($event)"
-                        class="--sm"
-                      >
-                      <app-mat-error
-                        class="invalid-feedback --pos-static qt-dib qt-mt-8"
-                        *ngIf="submitted && f2.title.errors"
-                      >
-                        Task name is required
-                      </app-mat-error>
+                        <input
+                            [ngClass]="{'--input-error' : submitted && f2.title.errors}"
+                            type="text"
+                            formControlName="title"
+                            placeholder="Write Company or Search Company"
+                            maxlength="300"
+                            (blur)="onChangeTitle()"
+                            (keydown)="onKeyDown($event)"
+                            class="--sm"
+                        >
+                        <app-mat-error
+                            class="invalid-feedback --pos-static qt-dib qt-mt-8"
+                            *ngIf="submitted && f2.title.errors"
+                        >
+                            Task name is required
+                        </app-mat-error>
                     </div>
                 </div>
             </div>
@@ -124,21 +124,21 @@
                 <div class="qt-input-block qt-input-block--horizontal">
                     <span class="qt-input-block__label">Assigned To</span>
                     <div>
-                      <app-tasks-add-assigned-users
-                        [class]="['drop-down-sm']"
-                        [placeholder]="'Select Tech User'"
-                        [placement]="'bottom-right'"
-                        [list]="techUsersList"
-                        [validate]="!(submitted && f2.assignedUsersIds.errors)"
-                        [selectedTag]="selectedAssignedUsers"
-                        (filterChange)="onSelectTechUser($event)"
-                      ></app-tasks-add-assigned-users>
-                      <app-mat-error
-                        class="invalid-feedback --pos-static qt-dib qt-mt-8"
-                        *ngIf="submitted && f2.assignedUsersIds.errors"
-                      >
-                        Assigned user is required
-                      </app-mat-error>
+                        <app-tasks-add-assigned-users
+                            [class]="['drop-down-sm']"
+                            [placeholder]="'Select Tech User'"
+                            [placement]="'bottom-right'"
+                            [list]="techUsersList"
+                            [validate]="!(submitted && f2.assignedUsersIds.errors)"
+                            [selectedTag]="selectedAssignedUsers"
+                            (filterChange)="onSelectTechUser($event)"
+                        ></app-tasks-add-assigned-users>
+                        <app-mat-error
+                            class="invalid-feedback --pos-static qt-dib qt-mt-8"
+                            *ngIf="submitted && f2.assignedUsersIds.errors"
+                        >
+                            Assigned user is required
+                        </app-mat-error>
                     </div>
                 </div>
             </div>
@@ -204,7 +204,7 @@
                 <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Start - End Date</div>
                     <app-tasks-date-picker
-                        #dp
+                        #datePicker
                         [class]="['date-picker-invisible', '--sm']"
                         [container]="'body'"
                         [editStart]="modelForm?.value.startDate"
@@ -303,6 +303,9 @@
 
 
 
+
+
+
         <div class="qt-aside-modern__footer">
             <div class="qt-aside-modern__footer-file-wrap">
                 <div
@@ -348,11 +351,6 @@
                                     (click)="deleteFile(i)"
                                 ></i>
                             </div>
-
-
-
-
-
                         </div>
                         <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
                     </div>
