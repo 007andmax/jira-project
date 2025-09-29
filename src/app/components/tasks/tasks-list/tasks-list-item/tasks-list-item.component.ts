@@ -41,7 +41,7 @@ export class TasksListItemComponent {
 
       if (data.data.id == this.item.id && data.action === 'TASK_EDITED') {
         console.log("data.data", data.data);
-        this.assignedUsers = this.onGetTechUsers().filter(user => data.data.assignedUsersIds.some(assignedUser => assignedUser == user.id));
+        this.assignedUsers = this.listTechUsers.filter(user => data.data.assignedUsersIds.some(assignedUser => assignedUser == user.id));
         console.log("this.assignedUsers", this.assignedUsers);
         this.techUsers.setEditUsers(this.assignedUsers);
         this.dateDp.setEditDate(data.data.startDate);
@@ -53,7 +53,7 @@ export class TasksListItemComponent {
   }
   onSetAssignedUsers() {
     this.listTechUsers = this.onGetTechUsers();
-    this.assignedUsers = this.onGetTechUsers().filter(user => this.item.assignedUsersIds.some(assignedUser => assignedUser == user.id));
+    this.assignedUsers = this.listTechUsers.filter(user => this.item.assignedUsersIds.some(assignedUser => assignedUser == user.id));
     console.log("this.assignedUsers", this.assignedUsers);
     this.techUsers.setUsersList(this.listTechUsers);
     this.techUsers.setEditUsers(this.assignedUsers);

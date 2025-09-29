@@ -50,6 +50,7 @@ export class TechUsersComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     if (this.editMode) {
+      this.selectedUsers = [];
       this.usersList.forEach(item => {
         let index = this.editUsers.findIndex(user => user.id === item.id);
         if (index > -1) {
