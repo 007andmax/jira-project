@@ -238,6 +238,7 @@ export class TasksEditComponent extends TasksAddComponent {
     this.editTask({
       description: this.modelForm.controls["description"].value
     });
+    this.isInitEditNote = false;
   }
   deleteTask() {
     this.confirmStateService.setConfirmAction(DELETE_TASK);
@@ -257,12 +258,18 @@ export class TasksEditComponent extends TasksAddComponent {
       }
       this.currentService.setItem(item);
       this.currentService.setValidate(true);
+      this.currentService.setDurationStart(this.modelForm.controls["startDate"].value);
+      this.currentService.setDurationEnd(this.modelForm.controls["endDate"].value);
+      this.currentService.calculateQuantity();
       this.ticketsService.updateExpense(this.currentService.getDateForUpdate(this.currentService.getDateForRequest(this.usersStateService.getCurrentUser(), update.services[0].id), update.id)).subscribe(res => {
 
       })
     } else {
       this.currentService.setItem(item);
       this.currentService.setValidate(true);
+      this.currentService.setDurationStart(this.modelForm.controls["startDate"].value);
+      this.currentService.setDurationEnd(this.modelForm.controls["endDate"].value);
+      this.currentService.calculateQuantity();
       this.ticketsService.updateTicket(this.currentService.getDataForAddService(this.usersStateService.getCurrentUser(), this.modelForm.value.taskTicketId)).subscribe(res => {
 
       })

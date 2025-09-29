@@ -12,7 +12,7 @@
     </label>
     <label class="start-end-timer__label qt-mr-8">
         <input
-            *ngIf="!editMode || editMode && currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
+            *ngIf="!editMode || editMode && currentCompany && currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"
             type="text"
             class="time end qt-input-block__input"
             [ngClass]="{'--input-error':! validate}"
@@ -27,7 +27,7 @@
 >
 </app-mat-error>
 <p
-    *ngIf="editMode && currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"
+    *ngIf="editMode && currentCompany && currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"
     class="start-end-timer"
 >
     <span

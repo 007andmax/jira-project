@@ -3,6 +3,7 @@ import { MultiDatepickerComponent } from '../../shared/multi-datepicker/multi-da
 import * as moment from "moment";
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { DateService } from 'src/app/services/date/date.service';
+import { TicketProfileUpdatesServiceTimepickerComponent } from '../../tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class TasksDatePickerComponent extends MultiDatepickerComponent {
   durationStart: number = new Date().getTime();
   durationEnd: number = new Date().getTime();
   @ViewChild('dp', { static: true }) dp;
+  @ViewChild('editTimePicker', { static: true }) editTimePicker: TicketProfileUpdatesServiceTimepickerComponent;
   isInitCloseOutside: boolean = false;
   @Input() editStart: number;
   @Input() editEnd: number;
@@ -39,6 +41,10 @@ export class TasksDatePickerComponent extends MultiDatepickerComponent {
     console.log("editStart, editEnd", editStart, editEnd);
     if (editStart) this.fromDate = new NgbDate(new Date(editStart).getFullYear(), new Date(editStart).getMonth() + 1, new Date(editStart).getDate());
     if (editEnd) this.toDate = new NgbDate(new Date(editEnd).getFullYear(), new Date(editEnd).getMonth() + 1, new Date(editEnd).getDate());
+    this.editTimePicker.start = editStart;
+    this.editTimePicker.end = editEnd;
+    this.editTimePicker.editMode = true;
+    // this.editTimePicker.setEditItem(editStart, editEnd);
     this.setSelectedDateModel(this.fromDate, this.toDate);
     console.log("this.fromDat", this.fromDate);
   }
