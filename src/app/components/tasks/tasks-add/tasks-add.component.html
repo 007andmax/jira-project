@@ -34,20 +34,20 @@
                 <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Task Name</div>
                     <div>
-                      <input
-                        [ngClass]="{'--input-error' : submitted && f2.title.errors}"
-                        type="text"
-                        formControlName="title"
-                        placeholder="Write about task"
-                        maxlength="300"
-                        class="--sm"
-                      >
-                      <app-mat-error
-                        class="invalid-feedback --pos-static qt-dib qt-mt-8"
-                        *ngIf="submitted && f2.title.errors"
-                      >
-                        Task name is required
-                      </app-mat-error>
+                        <input
+                            [ngClass]="{'--input-error' : submitted && f2.title.errors}"
+                            type="text"
+                            formControlName="title"
+                            placeholder="Write about task"
+                            maxlength="300"
+                            class="--sm"
+                        >
+                        <app-mat-error
+                            class="invalid-feedback --pos-static qt-dib qt-mt-8"
+                            *ngIf="submitted && f2.title.errors"
+                        >
+                            Task name is required
+                        </app-mat-error>
                     </div>
                 </div>
             </div>
@@ -89,21 +89,21 @@
                 <div class="qt-input-block qt-input-block--horizontal">
                     <span class="qt-input-block__label">Assigned To</span>
                     <div>
-                      <app-tasks-add-assigned-users
-                        [class]="['drop-down-sm']"
-                        [placeholder]="'Select Assignee'"
-                        [placement]="'bottom-right'"
-                        [selectedTag]="selectedAssignedUsers"
-                        [list]="techUsersList"
-                        [validate]="!(submitted && f2.assignedUsersIds.errors)"
-                        (filterChange)="onSelectTechUser($event)"
-                      ></app-tasks-add-assigned-users>
-                      <app-mat-error
-                        class="invalid-feedback --pos-static qt-dib qt-mt-8"
-                        *ngIf="submitted && f2.assignedUsersIds.errors"
-                      >
-                        Assigned user is required
-                      </app-mat-error>
+                        <app-tasks-add-assigned-users
+                            [class]="['drop-down-sm']"
+                            [placeholder]="'Select Assignee'"
+                            [placement]="'bottom-right'"
+                            [selectedTag]="selectedAssignedUsers"
+                            [list]="techUsersList"
+                            [validate]="!(submitted && f2.assignedUsersIds.errors)"
+                            (filterChange)="onSelectTechUser($event)"
+                        ></app-tasks-add-assigned-users>
+                        <app-mat-error
+                            class="invalid-feedback --pos-static qt-dib qt-mt-8"
+                            *ngIf="submitted && f2.assignedUsersIds.errors"
+                        >
+                            Assigned user is required
+                        </app-mat-error>
                     </div>
                 </div>
             </div>
@@ -149,7 +149,7 @@
                     <div class="qt-input-block__label">Type</div>
                     <app-drop-down
                         [class]="['drop-down-sm']"
-                        [placeholder]="'Type'"
+                        [placeholder]="'Select'"
                         [field]="'title'"
                         [list]="listTypes"
                         [search]="true"
@@ -237,22 +237,6 @@
                 class="mt-2"
             ></div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="qt-aside-modern__footer">
             <div class="qt-aside-modern__footer-file-wrap">
                 <div
@@ -292,7 +276,7 @@
                                     ></div>
                                 </span>
                                 <div class="name qt-fw-500 ellipsis">{{ file?.name }}</div>
-                                <div class="size ellipsis">({{ formatBytes(file?.size,2) }})</div>
+                                <div class="size ellipsis">{{ formatBytes(file?.size,2) }}</div>
                                 <i
                                     class="qt-icon icon__close qt-icon__gray-400 qt-sz-16 qt-ml-auto pointer"
                                     (click)="deleteFile(i)"

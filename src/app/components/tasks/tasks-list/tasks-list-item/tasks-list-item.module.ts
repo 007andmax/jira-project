@@ -5,6 +5,7 @@ import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.mo
 import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
 import { TasksListItemComponent } from './tasks-list-item.component';
 import { DatePickerModule } from 'src/app/components/shared/date-picker/date-picker.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { DatePickerModule } from 'src/app/components/shared/date-picker/date-pic
         FormsModule,
         DropDownModule,
         TechUsersModule,
-        DatePickerModule
+        DatePickerModule,
+        NgbModule
     ],
     exports: [TasksListItemComponent]
 })

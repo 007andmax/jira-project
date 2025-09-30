@@ -167,6 +167,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     console.log("this.servicesList", this.servicesList);
   }
   onSelectType(data) {
+    this.selectedType = data;
     this.modelForm.controls["type"].setValue(data ? data.value : null)
   }
   onSelectCompany(data) {

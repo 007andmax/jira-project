@@ -15,6 +15,7 @@ export class Task {
     "assignedUsersIds": Array<string> = [];
     ticketUpdateList: Array<any> = [];
     attachFileIds: Array<string> = [];
+    hasInvoice: boolean;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

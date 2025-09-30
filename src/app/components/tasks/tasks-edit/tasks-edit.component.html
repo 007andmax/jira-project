@@ -7,13 +7,25 @@
         [formGroup]="modelForm"
     >
         <div class="qt-aside-modern__header">
-            <div class="qt-aside-modern__header-title">Edit Task</div>
+            <div class="qt-df qt-ai-c">
+                <div class="qt-aside-modern__header-title">Edit Task</div>
+                <div
+                    class="qt-df qt-ai-c qt-ml-8"
+                    *ngIf="task.hasInvoice"
+                >
+                    <span>
+                        The Task is already billed to the client
+                    </span>
+                    <div class="qt-icon icon__password qt-sz-16 qt-ml-8"></div>
+                </div>
+            </div>
             <div
                 ngbDropdown
                 placement="bottom-right"
             >
                 <div class="qt-df qt-ai-c">
                     <div
+                        *ngIf="!task.hasInvoice"
                         class="qt-button qt-ml-12"
                         appDisabledBtn
                         #saveBtn="disabled"
@@ -186,7 +198,7 @@
                     <div class="qt-input-block__label">Type</div>
                     <app-drop-down
                         [class]="['drop-down-sm']"
-                        [placeholder]="'Select Company Type'"
+                        [placeholder]="'Select'"
                         [field]="'title'"
                         [list]="listTypes"
                         [search]="true"
@@ -283,29 +295,6 @@
                 class="mt-2"
             ></div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="qt-aside-modern__footer">
             <div class="qt-aside-modern__footer-file-wrap">
                 <div
@@ -345,7 +334,7 @@
                                     ></div>
                                 </span>
                                 <div class="name qt-fw-500 ellipsis">{{ file?.name }}</div>
-                                <div class="size ellipsis">({{ formatBytes(file?.size,2) }})</div>
+                                <div class="size ellipsis">{{ formatBytes(file?.size,2) }}</div>
                                 <i
                                     class="qt-icon icon__close qt-icon__gray-400 qt-sz-16 qt-ml-auto pointer"
                                     (click)="deleteFile(i)"

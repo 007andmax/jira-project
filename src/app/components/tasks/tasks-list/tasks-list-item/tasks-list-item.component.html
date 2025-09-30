@@ -13,6 +13,13 @@
             [ngClass]="{'qt-td-l-t': item.taskStatus == 'CLOSED'}"
             [textContent]="item.title"
         ></div>
+        <div
+            *ngIf="item.hasInvoice"
+            class="qt-icon icon__password qt-sz-16 qt-ml-8"
+            placement="top"
+            container="body"
+            ngbTooltip="The Task is now closed, and already billed to the client. You cannot re-open it"
+        ></div>
     </div>
     <div
         class="my-tasks-table__type"

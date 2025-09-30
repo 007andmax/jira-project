@@ -25,8 +25,8 @@
 .my-tasks-table {
   &__title {
     flex: 2 1 500px;
-    display: grid;
-    grid-template-columns: auto 1fr;
+   // display: grid;
+   // grid-template-columns: auto 1fr;
   }
 
   &__type {
