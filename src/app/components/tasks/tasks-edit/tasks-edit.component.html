@@ -25,7 +25,7 @@
             >
                 <div class="qt-df qt-ai-c">
                     <div
-                        *ngIf="!task.hasInvoice"
+                        *ngIf="!task.hasInvoice && task.taskStatus == 'OPEN'"
                         class="qt-button qt-ml-12"
                         appDisabledBtn
                         #saveBtn="disabled"
@@ -36,6 +36,18 @@
                         <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
                     </div>
                     <div
+                        *ngIf="!task.hasInvoice && task.taskStatus == 'CLOSED'"
+                        class="qt-button qt-ml-12"
+                        appDisabledBtn
+                        #saveBtn="disabled"
+                        (onClick)="openTask()"
+                        [ngClass]="{'--loading':saveBtn.isBlock()}"
+                    >
+                        <span>Mark is open</span>
+                        <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
+                    </div>
+                    <div
+                        *ngIf="!task.hasInvoice"
                         class="qt-button --square-md --gray pointer qt-mr-8 qt-ml-8"
                         ngbDropdownToggle
                     >
@@ -78,9 +90,11 @@
             <div class="qt-inputs-row --sm --required">
                 <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Task Name</div>
-                    <div>
+                    <div class="qt-w100">
                         <input
-                            [ngClass]="{'--input-error' : submitted && f2.title.errors}"
+                            [ngClass]="{'--input-error' : submitted && f2.title.errors,
+                                '--disabled': task.hasInvoice || task.taskStatus == 'CLOSED'
+                            }"
                             type="text"
                             formControlName="title"
                             placeholder="Write Company or Search Company"
@@ -88,6 +102,7 @@
                             (blur)="onChangeTitle()"
                             (keydown)="onKeyDown($event)"
                             class="--sm"
+                            [disabled]="task.hasInvoice || task.taskStatus == 'CLOSED'"
                         >
                         <app-mat-error
                             class="invalid-feedback --pos-static qt-dib qt-mt-8"
@@ -124,6 +139,7 @@
                         [field]="'name'"
                         [search]="true"
                         [change]="true"
+                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED'"
                         (onSelectedItem)="onSelectCompany($event)"
                         [heightInput]="'32px'"
                         [dropdownHeight]="'228px'"
@@ -141,6 +157,7 @@
                             [placeholder]="'Select Tech User'"
                             [placement]="'bottom-right'"
                             [list]="techUsersList"
+                            [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED'"
                             [validate]="!(submitted && f2.assignedUsersIds.errors)"
                             [selectedTag]="selectedAssignedUsers"
                             (filterChange)="onSelectTechUser($event)"
@@ -159,7 +176,7 @@
                     <div class="qt-input-block__label">Associate Ticket</div>
                     <app-tasks-add-associate-tickets
                         [class]="['drop-down-sm']"
-                        [isDisabled]="!f2.companyId.value"
+                        [isDisabled]="!f2.companyId.value || task.hasInvoice || task.taskStatus == 'CLOSED'"
                         [selectedItem]="selectedTicket"
                         (onSelectedItem)="setAssociatedTicketId($event)"
                     ></app-tasks-add-associate-tickets>
@@ -189,6 +206,7 @@
                         [isBlockClear]="false"
                         [itemList]="servicesList"
                         [editItem]="currentService.item"
+                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED'"
                         (selectedServicesItem)="onSelectService($event)"
                     ></app-services-list>
                 </div>
@@ -204,6 +222,7 @@
                         [search]="true"
                         [change]="true"
                         [editItem]="selectedType"
+                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED'"
                         [errorMessage]="'Task type is required'"
                         [validate]="!(submitted && f2.type.errors)"
                         (onSelectedItem)="onSelectType($event)"
@@ -223,6 +242,7 @@
                         [editEnd]="modelForm?.value.endDate"
                         [validate]="!(submitted && f2.startDate.errors)"
                         [errorMessage]="'Start date is required'"
+                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED'"
                         (selectedDate)="filterByDate($event)"
                         (onCloseDropDown)="onCloseDatePicker($event)"
                     ></app-tasks-date-picker>
@@ -241,6 +261,7 @@
                         [editMode]="true"
                         [editDate]="task.dueDate"
                         [container]="'body'"
+                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED'"
                         (onChange)="onChangeDueDate($event)"
                     ></app-date-picker>
                 </div>
@@ -269,7 +290,13 @@
                 <li [ngbNavItem]="'description'">
                     <a ngbNavLink>Description</a>
                     <ng-template ngbNavContent>
+                        <div
+                            class="qt-pt-8 qt-pb-8"
+                            *ngIf="task.hasInvoice || task.taskStatus == 'CLOSED'"
+                            [innerHTML]="task.description"
+                        ></div>
                         <angular-editor
+                            *ngIf="!task.hasInvoice && task.taskStatus == 'OPEN'"
                             class="edit-note-container"
                             [init]="isInitEditNote"
                             appClickOtside
@@ -301,6 +328,7 @@
                     class="qt-button-square pointer tasks-add__attach-button"
                     placement="top"
                     ngbTooltip="Add Attachment"
+                    *ngIf="!task.hasInvoice && task.taskStatus == 'OPEN'"
                 >
                     <input
                         class="qt-pointer"
@@ -336,6 +364,7 @@
                                 <div class="name qt-fw-500 ellipsis">{{ file?.name }}</div>
                                 <div class="size ellipsis">{{ formatBytes(file?.size,2) }}</div>
                                 <i
+                                    *ngIf="!task.hasInvoice"
                                     class="qt-icon icon__close qt-icon__gray-400 qt-sz-16 qt-ml-auto pointer"
                                     (click)="deleteFile(i)"
                                 ></i>

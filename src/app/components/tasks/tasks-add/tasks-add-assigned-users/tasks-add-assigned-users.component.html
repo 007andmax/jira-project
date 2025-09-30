@@ -13,10 +13,11 @@
             class="pointer"
             autocomplete="off"
             placeholder="Select Assignee"
-            [ngClass]="{'--input-error' : !validate}"
+            [ngClass]="{'--input-error' : !validate,'disabled': isDisabled}"
             id="dropdown1"
             readonly
             ngbDropdownToggle
+            [disabled]="isDisabled"
         >
         <span class="app-drop-down__right-icon pointer">
             <i class="icn-sm qt-icon icon__arrow-down report-caret-icon"></i>
@@ -33,7 +34,7 @@
         <app-mat-chip
             class="app-mat-tags-with-avatar app-mat-tags-with-avatar--lg"
             *ngFor="let tag of selectedTag; let i = index"
-            [isRemove]="removable"
+            [isRemove]="!isDisabled"
             (onClose)="remove(i)"
         >
             <div class="qt-df qt-ai-c">
@@ -61,6 +62,7 @@
         <div
             class="qt-button --square-md --gray pointer"
             ngbDropdownToggle
+            *ngIf="!isDisabled"
         >
             <span class="qt-icon icon__add qt-sz-16 qt-dib"></span>
         </div>

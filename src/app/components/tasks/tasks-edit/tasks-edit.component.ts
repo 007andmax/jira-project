@@ -77,6 +77,7 @@ export class TasksEditComponent extends TasksAddComponent {
           attachFileIds: task.attachments.map(item => item.file.id),
           taskTicketId: this.task.taskTicketId
         });
+        if (this.task.hasInvoice || this.task.taskStatus === 'CLOSED') this.modelForm.get('title')?.disable();
         this.files = task.attachments.map(item => {
           return { ...item.file, showError: false }
         });
@@ -274,6 +275,12 @@ export class TasksEditComponent extends TasksAddComponent {
 
       })
     }
+  }
+  openTask() {
+    this.task.taskStatus = 'OPEN';
+    this.tasksService.changeStatusTask(this.task.id, this.task.taskStatus).subscribe(res => {
+
+    });
   }
   editTask(data) {
     this.submitted = true;

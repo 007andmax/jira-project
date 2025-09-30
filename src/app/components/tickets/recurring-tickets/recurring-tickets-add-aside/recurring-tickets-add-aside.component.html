@@ -267,7 +267,7 @@
                             </div>
                             <app-services-list
                                 class="service-reccurring-list"
-                                [isDisabled]="servicesList.length == 0"
+                                [isBlock]="servicesList.length == 0"
                                 [editItem]="service"
                                 [itemList]="servicesList"
                                 (selectedServicesItem)="setService($event,i)"

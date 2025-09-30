@@ -274,3 +274,10 @@ form {
     display: none;
   }
 }
+.--disabled {
+   background-color: $gray-50;
+
+   &:hover {
+     border-color: $gray-200;
+   }
+ }

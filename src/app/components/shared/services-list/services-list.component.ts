@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
 export class ServicesListComponent implements OnInit, OnDestroy {
   @ViewChild('products', { static: true }) products_dropDown: NgbDropdown;
   @Input() isDisabled: boolean = false;
+  @Input() isBlock: boolean = false;
   preloader: boolean = false;
   @Input() selectedItem: any = null;
   @Input() editItem: any;
@@ -47,7 +48,7 @@ export class ServicesListComponent implements OnInit, OnDestroy {
       this.selectedItem = this.editItem;
     }
     let onServicePreloader = this.ticketStateService.onServicePreloader.subscribe(data => {
-      this.isDisabled = data;
+      this.isBlock = data;
       this.preloader = data;
       if (!this.editItem) this.clear();
       this.cd.detectChanges();

@@ -7,7 +7,7 @@
     <input
         class="pointer qt-input-block__input qt-dropdown-input"
         type="text"
-        [ngClass]="{'no-valid': isFormValid}"
+        [ngClass]="{'no-valid': isFormValid,'disabled': isDisabled}"
         placeholder="Service"
         (input)="onSearch($event)"
         id="dropdownServices"
@@ -22,7 +22,7 @@
     ></i>
     <i
         class="icn-remove-old qt-icon icon__close qt-icon__gray-400 qt-sz-20"
-        *ngIf="!preloader && !isBlockClear && selectedItem"
+        *ngIf="!preloader && !isBlockClear && selectedItem && !isDisabled"
         (click)="clearClient()"
     ></i>
     <i

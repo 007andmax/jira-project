@@ -7,6 +7,7 @@
 
 
 
+
     <div ngbDropdownAnchor>
         <span class="qt-input-search">
             <input
@@ -20,7 +21,10 @@
                 [value]="getSelectedItemText()"
                 (click)="onShowDropDown()"
             >
-            <span class="app-drop-down__right-icon pointer">
+            <span
+                class="app-drop-down__right-icon pointer"
+                *ngIf="!isDisabled"
+            >
                 <i
                     *ngIf="!selectedItem"
                     class="icn-sm qt-icon icon__arrow-down report-caret-icon"

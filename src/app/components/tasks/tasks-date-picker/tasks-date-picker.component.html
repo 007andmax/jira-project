@@ -12,6 +12,7 @@
             [attr.placeholder]="placeholder"
             [(ngModel)]="selectedDateModel"
             [ngClass]="{'disabled': isDisabled,'--input-error' : !validate}"
+            [disabled]="isDisabled"
             class="pointer"
             ngbDropdownToggle
             id="dropdownCompany"

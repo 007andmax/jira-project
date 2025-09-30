@@ -90,6 +90,7 @@ export class TasksListItemComponent {
   toggleStatus(event) {
     event.preventDefault();
     event.stopPropagation();
+    if (this.item.hasInvoice) return;
     this.item.taskStatus = this.item.taskStatus === 'OPEN' ? 'CLOSED' : 'OPEN';
     this.tasksService.changeStatusTask(this.item.id, this.item.taskStatus).subscribe(res => {
 

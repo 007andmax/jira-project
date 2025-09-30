@@ -46,6 +46,7 @@
             [placement]="'bottom-right'"
             [useMinDate]="false"
             [type]="'ICON'"
+            [isDisabled]="item.hasInvoice"
             (onChange)="onChangeDatePicker($event)"
         ></app-date-picker>
     </div>
@@ -57,6 +58,7 @@
             [type]="'TASKS'"
             [users]="listTechUsers"
             [container]="'body'"
+            [isDisabled]="item.hasInvoice"
             (usersChange)="onChangeUser($event)"
         ></app-tech-users>
     </div>

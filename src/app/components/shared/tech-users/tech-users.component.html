@@ -142,6 +142,7 @@
         (mouseleave)="techUserTooltip.hide()"
     ></button>
     <div
+        [ngClass]="{'no-click':isDisabled}"
         class="ticket-table__assignee"
         *ngIf="type === 'TASKS'"
         ngbDropdownToggle

@@ -22,7 +22,7 @@ export class MultiDatepickerComponent implements OnInit {
   public showDatePicker = false;
   public selectedDateModel = '';
   public outsideDays = 'hidden';
-  isDisabled = false;
+  @Input() isDisabled = false;
   @Output() selectedDate = new EventEmitter<any>();
 
   /**
