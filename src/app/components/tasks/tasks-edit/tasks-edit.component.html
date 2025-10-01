@@ -7,10 +7,10 @@
         [formGroup]="modelForm"
     >
         <div class="qt-aside-modern__header">
-            <div class="qt-df qt-ai-c">
+            <div class="qt-df qt-ai-fe">
                 <div class="qt-aside-modern__header-title">Edit Task</div>
                 <div
-                    class="qt-df qt-ai-c qt-ml-8"
+                    class="qt-df qt-ai-fe qt-ml-8"
                     *ngIf="task.hasInvoice"
                 >
                     <span>
@@ -222,6 +222,7 @@
                         [search]="true"
                         [change]="true"
                         [editItem]="selectedType"
+                        [isBlockClear]="true"
                         [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED'"
                         [errorMessage]="'Task type is required'"
                         [validate]="!(submitted && f2.type.errors)"

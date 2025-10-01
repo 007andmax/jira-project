@@ -277,9 +277,10 @@ export class TasksEditComponent extends TasksAddComponent {
     }
   }
   openTask() {
-    this.task.taskStatus = 'OPEN';
-    this.tasksService.changeStatusTask(this.task.id, this.task.taskStatus).subscribe(res => {
 
+    this.tasksService.changeStatusTask(this.task.id, 'OPEN').subscribe(res => {
+      this.task.taskStatus = 'OPEN';
+      this.modelForm.get('title')?.enable();
     });
   }
   editTask(data) {

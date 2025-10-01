@@ -208,6 +208,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
       return;
     } else {
       if (this.files[index].size > 15000000) {
+        console.log("showError", this.files[index].size);
         this.files[index].showError = true;
         this.files[index].error = "The size is too big. You can upload a file up to 15MB in size."
         this.uploadFilesSimulator(index + 1);
@@ -221,7 +222,8 @@ export class TasksAddComponent implements OnInit, OnDestroy {
         this.modelForm.controls["attachFileIds"].setValue(listIds);
         this.uploadFilesSimulator(index + 1);
         this.cd.detectChanges();
-      }).catch(() => {
+      }).catch((e) => {
+        console.log("catch", e)
         this.files[index].showError = true;
         this.uploadFilesSimulator(index + 1);
       });
@@ -325,7 +327,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     this.opened = false;
     this.submitted = false;
     this.modelForm.reset();
-    this.modelForm.patchValue({ taskStatus: "OPEN" });
+    this.modelForm.patchValue({ taskStatus: "OPEN", attachFileIds: [] });
     this.files = [];
     this.selectedAssignedUsers = [];
     this.selectedType = null;
