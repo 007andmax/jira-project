@@ -18,6 +18,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { TicketProfileFormUpdate } from '../class/ticket-profile-form-update';
+import { Task } from 'src/app/components/tasks/class/task';
 
 @Injectable({
   providedIn: 'root'
@@ -43,10 +44,10 @@ export class TicketStateService {
   servicePreloader: boolean = false;
   servicesForTicket = [];
   ticketRoutingId: string;
-  taskForRemove: TicketProfileTask;
+  taskForRemove: Task;
   attachmentForRemove: TicketProfileAttachment;
   updateForEdit: TicketProfileUpdate;
-  listTasks: Array<TicketProfileTask> = [];
+  listTasks: Array<Task> = [];
   documents: Array<Document> = [];
   passwords: Array<PasswordRecord> = [];
   documentForPreview: Document;

@@ -11,10 +11,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { TasksDatePickerModule } from '../tasks-date-picker/tasks-date-picker.module';
+import { TaskHeaderAddTypeModule } from './task-header-add-type/task-header-add-type.module';
 
 
 @NgModule({
-    declarations: [TaskHeaderAddComponent, TaskHeaderAddTypeComponent
+    declarations: [TaskHeaderAddComponent,
     ],
     imports: [
         CommonModule,
@@ -27,7 +28,8 @@ import { TasksDatePickerModule } from '../tasks-date-picker/tasks-date-picker.mo
         NgbModule,
         DisabledBtnModule,
         PreloaderTicketModule,
-        TasksDatePickerModule
+        TasksDatePickerModule,
+        TaskHeaderAddTypeModule
     ],
     exports: [TaskHeaderAddComponent]
 })

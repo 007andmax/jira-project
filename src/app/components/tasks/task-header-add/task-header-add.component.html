@@ -50,6 +50,7 @@
         <div class="my-tasks-table__type">
             <app-task-header-add-type
                 #type
+                [container]="'body'"
                 (onChange)="onSelectType($event)"
             ></app-task-header-add-type>
         </div>

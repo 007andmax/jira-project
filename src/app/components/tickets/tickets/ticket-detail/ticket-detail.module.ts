@@ -97,6 +97,9 @@ import { TicketDetailProfileFormUpdateModule } from './ticket-detail-profile-for
 import { TicketDetailNoteModalComponent } from './ticket-detail-note-modal/ticket-detail-note-modal.component';
 import { TicketDetailNoteModalModule } from './ticket-detail-note-modal/ticket-detail-note-modal.module';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { TicketDetailTasksItemComponent } from './ticket-detail-tasks/ticket-detail-tasks-item/ticket-detail-tasks-item.component';
+import { TaskHeaderAddTypeModule } from 'src/app/components/tasks/task-header-add/task-header-add-type/task-header-add-type.module';
+import { TasksDatePickerModule } from 'src/app/components/tasks/tasks-date-picker/tasks-date-picker.module';
 
 
 
@@ -158,6 +161,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
         TicketDetailTicketsComponent,
         TicketDetailTicketsStatusComponent,
         TicketDetailTotalStatisticsComponent,
+        TicketDetailTasksItemComponent,
 
     ],
     imports: [
@@ -201,7 +205,9 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
         DecimalNumberModule,
         ToFixedModule,
         TicketDetailProfileFormUpdateModule,
-        AngularEditorModule
+        AngularEditorModule,
+        TaskHeaderAddTypeModule,
+        TasksDatePickerModule
     ],
 
 

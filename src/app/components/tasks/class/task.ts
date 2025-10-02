@@ -4,7 +4,7 @@ export class Task {
     "startDate": number;
     "endDate": number;
     "type": string;
-    "title": string;
+    "title": string = "";
     "description": string;
     "companyId": string;
     "associatedTicketId": string;
@@ -23,6 +23,12 @@ export class Task {
             }
         }
     }
+    public setType(data) {
+        this.type = data;
+    }
+    public setTaskStatus(data) {
+        this.taskStatus = data;
+    }
     public setAssignedUser(user) {
         this.assignedUsersIds = user;
     }
@@ -31,6 +37,15 @@ export class Task {
     }
     public setStartDate(day, month, year, timeOffset) {
         this.startDate = this.parseDate(day, month, year, timeOffset);
+    }
+    public setEndDate(day, month, year, timeOffset) {
+        this.endDate = this.parseDate(day, month, year, timeOffset);
+    }
+    public resetStartDate() {
+        this.startDate = null;
+    }
+    public resetEndDate() {
+        this.endDate = null;
     }
     parseDate(day, month, year, timeOffset) {
         let current = new Date();

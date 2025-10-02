@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 
 @Component({
@@ -7,10 +7,11 @@ import { CompanySetting } from 'src/app/components/companies/class/company-setti
   styleUrls: ['./task-header-add-type.component.scss']
 })
 export class TaskHeaderAddTypeComponent {
+  @Input() container: string = null;
   listTypes = [new CompanySetting('Meeting', 'Meeting'),
   new CompanySetting('To do', 'To do'),
   new CompanySetting('Phone call', 'Phone call')];
-  selectedType: CompanySetting;
+  @Input() selectedType: CompanySetting;
   @Output() onChange = new EventEmitter<any>();
 
   ngOnInit() {
