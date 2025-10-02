@@ -118,6 +118,9 @@ export class TaskHeaderAddComponent {
       this.modelForm.controls["endDate"].setValue(null);
     }
   }
+  onKeyUp(event) {
+    if (event.keyCode === 13) this.save();
+  }
   parseStartDate(date) {
     return moment(new Date(date)).format('DD MMM, YYYY');
   }

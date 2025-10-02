@@ -16,6 +16,7 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { PreviewAttachmentStateService } from '../../tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
 
 @Component({
   selector: 'app-tasks-add',
@@ -89,7 +90,8 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     public companiesService: CompaniesService,
     public confirmStateService: ConfirmStateService,
     public modalService: NgbModal,
-    public ticketsService: TicketsService
+    public ticketsService: TicketsService,
+    public previewAttachmentStateService: PreviewAttachmentStateService,
   ) { }
 
   ngOnInit() {

@@ -66,7 +66,7 @@ export class TicketsService {
     return this.http.get(this.apiUrl + `dashboard/ticket/counters?startDate=${startDate}&endDate=${endDate}`);
   }
   public getTicketTasks(id) {
-    return this.http.get(this.apiUrl + `tasks?size=10&page=0&filter=OVERDUE&taskTicketId=${id}`);
+    return this.http.get(this.apiUrl + `tasks?size=10&page=0&taskTicketId=${id}`);
   }
   public removeTicketTask(id) {
     return this.http.delete(this.apiUrl + `v2/tickets/task/${id}`).pipe(

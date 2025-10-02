@@ -1,6 +1,7 @@
 <form
     [formGroup]="modelForm"
     class="create-task-popover"
+    (keydown.enter)="$event.preventDefault()"
 >
     <div class="create-task-popover__header qt-df qt-ai-c qt-jc-sb">
         <h3 class="create-task-popover__title">Create Task</h3>
@@ -45,6 +46,7 @@
                 class="form-input --editable"
                 placeholder="Write a Task Name..."
                 formControlName="title"
+                (keyup)="onKeyUp($event)"
             >
         </div>
         <div class="my-tasks-table__type">

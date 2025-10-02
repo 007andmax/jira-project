@@ -18,6 +18,7 @@ import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tick
 import { Task } from 'src/app/components/tasks/class/task';
 import { TasksService } from 'src/app/services/tasks/tasks.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
 
 @Component({
   selector: 'ticket-detail-tasks',
@@ -40,6 +41,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
     public ticketsPermissionsService: TicketsPermissionsService,
+    public tasksRealTimeService: TasksRealTimeService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
@@ -56,20 +58,26 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
       this.listTechUsers = this.getUsersForAssign();
     })
     this.sub.add(getOnUsers);
-    let changeTicketTasks = this.ticketsRealTimeService.changeTicketTasks.subscribe(data => {
-      if (data.action == "TASK_EDITED") {
-        let index = this.list.findIndex(item => item.id == data.data.id);
-        this.list[index] = new TicketProfileTask(data.data);
+    let getChangeCompanies = this.tasksRealTimeService.changeTasksArray.subscribe((data) => {
+      if (data.action === 'TASK_SAVED' && data.data.associatedTicketId == this.ticketProfile.id && !this.list.some(item => item.id == data.data.id)) {
+        this.list.unshift(new TicketProfileTask(data.data));
       }
-      if (data.action == "TASK_SAVED" && !this.list.some(item => item.id == data.data.id)) this.list.push(new TicketProfileTask(data.data));
-      if (data.action == "TASK_DELETED") {
+      if (data.action === 'TASK_EDITED') {
+        let index = this.list.findIndex(item => item.id == data.data.id);
+        if (index > -1) {
+          this.list[index] = new TicketProfileTask(data.data);
+        }
+      }
+      if (data.action === 'TASK_DELETED') {
         let index = this.list.findIndex(item => item.id == data.data);
-        if (index > -1) this.list.splice(index, 1);
+        if (index > -1) {
+          this.list.splice(index, 1);
+        }
       }
       this.ticketStateService.setListTasks(this.list);
       this.cd.detectChanges();
     })
-    this.sub.add(changeTicketTasks);
+    this.sub.add(getChangeCompanies);
     this.setDefaultValueForAddTask();
   }
   public getTicketTasks(id) {

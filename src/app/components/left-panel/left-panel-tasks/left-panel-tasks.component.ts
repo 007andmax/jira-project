@@ -80,6 +80,10 @@ export class LeftPanelTasksComponent {
       if (this.activePage === 'tasks-dashboard' && this.filter.techUser == null) this.initFilterForDashboard();
     })
     this.sub.add(getOnGetCurrentuser);
+    let onGetCurrentUser = this.usersStateService.onGetCurrentUser.subscribe(res => {
+      if (!this.filter.techUser && this.activePage === 'tasks-dashboard') this.initFilterForDashboard();
+    })
+    this.sub.add(onGetCurrentUser);
   }
   toggleTechUser(data) {
     if (this.filter.techUser && this.filter.techUser.id == data.id) {

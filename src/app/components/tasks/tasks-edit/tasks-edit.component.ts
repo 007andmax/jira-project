@@ -283,6 +283,9 @@ export class TasksEditComponent extends TasksAddComponent {
       this.modelForm.get('title')?.enable();
     });
   }
+  preview(attachmentId, contentType) {
+    if (contentType === "image/jpg" || contentType === "image/png" || contentType === "image/jpeg") this.previewAttachmentStateService.onInitPreview(`/file/${attachmentId}`);
+  }
   editTask(data) {
     this.submitted = true;
     console.log("this.modelForm.invalid", this.modelForm);
