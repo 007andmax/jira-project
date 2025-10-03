@@ -6,6 +6,7 @@ import { TasksFilters } from '../class/tasks-filters';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { Subscription } from 'rxjs';
 import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-tasks-list',
@@ -28,11 +29,13 @@ export class TasksListComponent implements OnInit, OnDestroy {
     public ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
     public tasksStateService: TasksStateService,
-    public tasksRealTimeService: TasksRealTimeService
+    public tasksRealTimeService: TasksRealTimeService,
+    private usersStateService: UsersStateService
   ) { }
 
 
   ngOnInit() {
+    this.filter.techUser = this.usersStateService.getCurrentUser();
     this.onScroll();
     let geLefttFilter = this.tasksStateService.onFilter.subscribe((data) => {
       document.body.querySelector(".main-container").scrollTo(0, 0);
