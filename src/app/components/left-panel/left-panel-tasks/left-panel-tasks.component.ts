@@ -56,9 +56,12 @@ export class LeftPanelTasksComponent {
     })
     this.sub.add(onToggleLeftPanel);
     let onChangeState = this.leftPanelStateService.onChangeState.subscribe(state => {
+      console.log("onChangeState", state);
       if (!this.leftPanelService.isTasksPage(state)) {
         this.open = false;
         this.filter = new TasksFilters();
+      } else {
+        if (state === 'tasks-dashboard') this.initFilterForDashboard();
       }
     })
     this.sub.add(onChangeState);
