@@ -84,12 +84,70 @@
     }
 }
 .btn-open-aside {
-    display: none;
+  opacity: 0;
 }
-.tab-pane__table-cell {
-    &:hover {
-        .btn-open-aside {
-            display: block;
-        }
+
+:host-context(.tab-pane__table-row:hover) .btn-open-aside {
+  opacity: 1;
+}
+
+::ng-deep .multi-assign-user-container {
+  width: 50px;
+  margin-left: 8px;
+}
+
+::ng-deep .tab-pane__table-row:not(.add-task-container) {
+  .tab-pane__table-cell:not(.add-task-container) {
+    .date-picker {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $gray-200;
+      border-radius: 50%;
+
+      input {
+        width: 100%;
+        height: 100%;
+        border: transparent;
+        color: transparent;
+        background-color: transparent;
+      }
+
+      .icon__calendar {
+        position: absolute;
+        left: 50%;
+        translate: -50%;
+        background-color: #667085 !important;
+        width: 16px !important;
+        height: 16px !important;
+        margin: 0;
+      }
     }
+    .tooltip {
+      white-space: nowrap;
+    }
+  }
+}
+
+::ng-deep .add-task-container {
+  .tooltip {
+    white-space: nowrap;
+  }
+
+  .date-picker.date-picker-dropdown-day-time {
+    input {
+      border: 1px solid $gray-200;
+      color: $gray-900;
+    }
+
+    .icon__calendar {
+      left: unset;
+      transform: translate(50%, -50%);
+      width: 20px !important;
+      height: 20px !important;
+    }
+  }
 }

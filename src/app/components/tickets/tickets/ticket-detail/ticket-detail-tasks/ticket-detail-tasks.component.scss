@@ -88,7 +88,7 @@
   transform: translate(50%, -50%);
 }
 
-::ng-deep .tab-pane__table-row .date-picker .qt-input-block__input {
+::ng-deep .tab-pane__table-row > .date-picker .qt-input-block__input {
   width: 28px;
   height: 28px;
   border-radius: 50%;
