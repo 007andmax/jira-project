@@ -61,7 +61,7 @@ export class LeftPanelTasksComponent {
         this.open = false;
         this.filter = new TasksFilters();
       } else {
-        if (state === 'tasks-dashboard') this.initFilterForDashboard();
+        this.initFilterForDashboard();
       }
     })
     this.sub.add(onChangeState);
@@ -69,7 +69,7 @@ export class LeftPanelTasksComponent {
       console.log("data", data);
       if (this.leftPanelService.isTasksPage(data)) {
         console.log("1");
-        if (data === 'tasks-dashboard') this.initFilterForDashboard();
+        this.initFilterForDashboard();
         this.open = true;
       }
     })
@@ -80,11 +80,11 @@ export class LeftPanelTasksComponent {
     this.sub.add(getOnUsers);
     let getOnGetCurrentuser = this.usersStateService.getOnGetCurrentuser().subscribe((data) => {
       console.log("getOnGetCurrentuser", this.activePage);
-      if (this.activePage === 'tasks-dashboard' && this.filter.techUser == null) this.initFilterForDashboard();
+      if (this.leftPanelService.isTasksPage(this.activePage) && this.filter.techUser == null) this.initFilterForDashboard();
     })
     this.sub.add(getOnGetCurrentuser);
     let onGetCurrentUser = this.usersStateService.onGetCurrentUser.subscribe(res => {
-      if (!this.filter.techUser && this.activePage === 'tasks-dashboard') this.initFilterForDashboard();
+      if (!this.filter.techUser && this.leftPanelService.isTasksPage(this.activePage)) this.initFilterForDashboard();
     })
     this.sub.add(onGetCurrentUser);
   }
