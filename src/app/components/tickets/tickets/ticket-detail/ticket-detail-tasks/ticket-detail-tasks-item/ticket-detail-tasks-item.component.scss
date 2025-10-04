@@ -131,23 +131,3 @@
     }
   }
 }
-
-::ng-deep .add-task-container {
-  .tooltip {
-    white-space: nowrap;
-  }
-
-  .date-picker.date-picker-dropdown-day-time {
-    input {
-      border: 1px solid $gray-200;
-      color: $gray-900;
-    }
-
-    .icon__calendar {
-      left: unset;
-      transform: translate(50%, -50%);
-      width: 20px !important;
-      height: 20px !important;
-    }
-  }
-}

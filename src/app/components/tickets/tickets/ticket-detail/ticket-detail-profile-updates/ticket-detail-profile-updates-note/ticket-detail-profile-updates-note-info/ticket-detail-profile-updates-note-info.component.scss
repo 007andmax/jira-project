@@ -230,7 +230,7 @@
     }
 
     ::ng-deep table {
-      width: 787px !important;
+      max-width: 787px !important;
 
       span {
         white-space: break-spaces;

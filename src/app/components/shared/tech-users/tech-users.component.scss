@@ -162,3 +162,21 @@
    font-size: 12px;
    font-weight: 600;
  }
+
+ .tooltip__circle-avatar {
+   width: 24px;
+   height: 24px;
+   min-width: 24px;
+   min-height: 24px;
+   border-radius: 50%;
+   background-position: center;
+   background-color: $blue-light-600;
+   background-size: cover;
+   margin-right: 8px;
+   color: $white;
+   align-items: center;
+   justify-content: center;
+   display: flex;
+   font-size: 10px;
+   font-weight: 700;
+ }

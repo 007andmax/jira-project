@@ -346,7 +346,7 @@
                     *ngIf="files.length > 0"
                 >
                     <div
-                        class="single-file"
+                        class="single-file pointer"
                         [ngClass]="{'error-file':file.showError}"
                         *ngFor="let file of files; let i = index"
                         (click)="preview(file.id,file.contentType)"
