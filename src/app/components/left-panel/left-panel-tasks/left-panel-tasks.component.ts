@@ -56,7 +56,6 @@ export class LeftPanelTasksComponent {
     })
     this.sub.add(onToggleLeftPanel);
     let onChangeState = this.leftPanelStateService.onChangeState.subscribe(state => {
-      console.log("onChangeState", state);
       if (!this.leftPanelService.isTasksPage(state)) {
         this.open = false;
         this.filter = new TasksFilters();
@@ -66,9 +65,7 @@ export class LeftPanelTasksComponent {
     })
     this.sub.add(onChangeState);
     let onFirstOpen = this.leftPanelStateService.onFirstOpen.subscribe(data => {
-      console.log("data", data);
       if (this.leftPanelService.isTasksPage(data)) {
-        console.log("1");
         this.initFilterForDashboard();
         this.open = true;
       }
@@ -79,7 +76,6 @@ export class LeftPanelTasksComponent {
     })
     this.sub.add(getOnUsers);
     let getOnGetCurrentuser = this.usersStateService.getOnGetCurrentuser().subscribe((data) => {
-      console.log("getOnGetCurrentuser", this.activePage);
       if (this.leftPanelService.isTasksPage(this.activePage) && this.filter.techUser == null) this.initFilterForDashboard();
     })
     this.sub.add(getOnGetCurrentuser);
@@ -119,7 +115,6 @@ export class LeftPanelTasksComponent {
     this.filter.filter = null;
     this.filter.techUser = this.usersStateService.getCurrentUser();
     this.tasksStateService.setFilter(this.filter);
-    console.log("this.filter.techUser", this.filter.techUser);
   }
   public goToState(data) {
     if (this.activePage !== data) {

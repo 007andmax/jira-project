@@ -88,7 +88,6 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
     })
   }
   public filterByDate(value) {
-    console.log("value", value);
     if (value.start !== '' && value.end !== '') {
       let startDate = new Date(value.start);
       let endDate = new Date(value.end);

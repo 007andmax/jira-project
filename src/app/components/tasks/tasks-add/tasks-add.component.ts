@@ -166,7 +166,6 @@ export class TasksAddComponent implements OnInit, OnDestroy {
   }
   public getServices() {
     this.servicesList = this.ticketStateService.getServicesForTicket();
-    console.log("this.servicesList", this.servicesList);
   }
   onSelectType(data) {
     this.selectedType = data;
@@ -177,7 +176,6 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     if (data) this.ticketStateService.getServicesList(data.id);
   }
   public filterByDate(value) {
-    console.log("value", value);
     if (value.start !== '' && value.end !== '') {
       this.modelForm.controls["startDate"].setValue(value.start);
       this.modelForm.controls["endDate"].setValue(value.end);
@@ -187,8 +185,6 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     }
   }
   onChangeDueDate(data) {
-    console.log("data", data);
-
     this.modelForm.controls["dueDate"].setValue(this.task.parseDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset));
   }
   onChangeTimeEstimate(data) {
@@ -210,7 +206,6 @@ export class TasksAddComponent implements OnInit, OnDestroy {
       return;
     } else {
       if (this.files[index].size > 15000000) {
-        console.log("showError", this.files[index].size);
         this.files[index].showError = true;
         this.files[index].error = "The size is too big. You can upload a file up to 15MB in size."
         this.uploadFilesSimulator(index + 1);
@@ -219,13 +214,11 @@ export class TasksAddComponent implements OnInit, OnDestroy {
       this.uploadFile(this.files[index]).then((data: any) => {
         let res = JSON.parse(data.response);
         let listIds = this.modelForm.controls["attachFileIds"].value;
-        console.log("res", res);
         listIds.push(res.id);
         this.modelForm.controls["attachFileIds"].setValue(listIds);
         this.uploadFilesSimulator(index + 1);
         this.cd.detectChanges();
       }).catch((e) => {
-        console.log("catch", e)
         this.files[index].showError = true;
         this.uploadFilesSimulator(index + 1);
       });
@@ -281,9 +274,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     this.modelForm.controls["attachFileIds"].setValue(list);
   }
   public onSelectTechUser(items) {
-    console.log("items", items);
     this.modelForm.controls["assignedUsersIds"].setValue(items.map(item => item.id))
-    //  this.globalFilter.setAssignedUsersIds(items.map(item => item.id));
   }
   get f2() {
     return this.modelForm.controls;
@@ -302,12 +293,10 @@ export class TasksAddComponent implements OnInit, OnDestroy {
   }
   save() {
     this.submitted = true;
-    console.log("this.modelForm.invalid", this.modelForm);
     if (this.modelForm.invalid) {
       return;
     }
     this.saveBtn.setDisabled(true);
-    console.log("this.modelForm.value", this.modelForm.value);
     if (this.currentService.item && this.currentService.item.versionedId) this.modelForm.controls["ticketUpdates"].setValue([this.getDataForUpdateService()])
     this.tasksService.addTask(this.task.getDataForAdd(this.modelForm.value)).subscribe(res => {
       this.saveBtn.setDisabled(false);
@@ -318,7 +307,6 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     })
   }
   close() {
-    console.log(this.modelForm.controls["attachFileIds"].value);
     if (this.modelForm.controls["attachFileIds"].value && this.modelForm.controls["attachFileIds"].value.length > 0) {
       forkJoin(
         this.modelForm.controls["attachFileIds"].value.map(item => this.companiesService.removeAttachment(item))

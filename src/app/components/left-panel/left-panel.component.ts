@@ -285,8 +285,6 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
     if (this.leftPanelService.isDevicesPage(data)) this.page = "DEVICES";
     if (this.leftPanelService.isFilePage(data)) this.page = "FILE_MANAGER";
     if (this.leftPanelService.isTasksPage(data)) this.page = "TASKS";
-    console.log("data", data);
-    console.log("this.page", this.page);
   }
   public getCompanyInfoPermissions(action) {
     return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole.getPermission(action)));

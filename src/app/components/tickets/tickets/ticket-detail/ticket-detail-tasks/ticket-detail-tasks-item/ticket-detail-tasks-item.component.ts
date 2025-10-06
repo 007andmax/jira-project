@@ -58,7 +58,6 @@ export class TicketDetailTasksItemComponent {
   ngOnInit() {
     this.selectedType = this.listTypes.find(item => item.value == this.item.type);
     let service = this.item.ticketUpdateList.find(item => item.type == "SERVICE");
-    console.log("service", service);
     if (service) {
       this.currentService.setItem(service.services[0].item);
       this.currentService.setValidate(true);
@@ -67,19 +66,14 @@ export class TicketDetailTasksItemComponent {
     if (this.onGetTechUsers().length > 0) this.onSetAssignedUsers();
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onSetAssignedUsers();
-      // this.onGetUsers();
     })
     this.sub.add(getOnUsers);
     let getChangeCompanies = this.tasksRealTimeService.changeTasksArray.subscribe((data) => {
-
       if (data.data.id == this.item.id && data.action === 'TASK_EDITED') {
-        console.log("data.data", data.data);
         this.assignedUsers = this.listTechUsers.filter(user => data.data.assignedUsersIds.some(assignedUser => assignedUser == user.id));
-        console.log("this.assignedUsers", this.assignedUsers);
         this.techUsers.setEditUsers(this.assignedUsers);
         this.dateDp.setEditDates(data.data.startDate, data.data.endDate);
       }
-
       this.cd.detectChanges();
     })
     this.sub.add(getChangeCompanies);
@@ -87,7 +81,6 @@ export class TicketDetailTasksItemComponent {
   onSetAssignedUsers() {
     this.listTechUsers = this.onGetTechUsers();
     this.assignedUsers = this.listTechUsers.filter(user => this.item.assignedUsersIds.some(assignedUser => assignedUser == user.id));
-    console.log("this.assignedUsers", this.assignedUsers);
     this.techUsers.setUsersList(this.listTechUsers);
     this.techUsers.setEditUsers(this.assignedUsers);
   }
@@ -104,7 +97,6 @@ export class TicketDetailTasksItemComponent {
     this.save({ type: data.value });
   }
   public filterByDate(value) {
-    console.log("value", value);
     if (value.start !== '' && value.end !== '') {
       let start = new Date(value.start);
       let end = new Date(value.end);
@@ -116,8 +108,6 @@ export class TicketDetailTasksItemComponent {
     }
   }
   onCloseDatePicker(event) {
-    console.log("event", event);
-    console.log("this.currentService", this.currentService);
     if (event && this.currentService.item) {
       let update = this.item.ticketUpdateList.find(item => item.type == "SERVICE");
       this.currentService.setDurationStart(this.item.startDate);

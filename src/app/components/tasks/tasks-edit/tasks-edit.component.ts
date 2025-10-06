@@ -60,8 +60,6 @@ export class TasksEditComponent extends TasksAddComponent {
       if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
       this.tasksService.getTaskDetail(res.id).subscribe((task: any) => {
         this.task = new Task(task);
-        console.log("this.task", this.task);
-        console.log("this.modelForm", this.modelForm);
         this.modelForm.patchValue({
           title: this.task.title,
           startDate: this.task.startDate,
@@ -85,7 +83,6 @@ export class TasksEditComponent extends TasksAddComponent {
         this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id == this.task.companyId);
         this.selectedAssignedUsers = this.usersStateService.getAllUsers().filter(user => this.task.assignedUsersIds.some(item => item == user.id));
         let service = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
-        console.log("service", service);
         if (service) {
           this.currentService.setItem(service.services[0].item);
           this.currentService.setValidate(true);
@@ -122,8 +119,6 @@ export class TasksEditComponent extends TasksAddComponent {
     }
   }
   onCloseDatePicker(event) {
-    console.log("event", event);
-    console.log("this.currentService", this.currentService);
     if (event && this.currentService.item) {
       let update = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
       this.currentService.setDurationStart(this.modelForm.controls["startDate"].value);
@@ -173,7 +168,6 @@ export class TasksEditComponent extends TasksAddComponent {
       this.uploadFile(this.files[index]).then((data: any) => {
         let res = JSON.parse(data.response);
         let listIds = this.modelForm.controls["attachFileIds"].value;
-        console.log("res", res);
         listIds.push(res.id);
         this.modelForm.controls["attachFileIds"].setValue(listIds);
         this.uploadFilesSimulator(index + 1);
@@ -196,11 +190,9 @@ export class TasksEditComponent extends TasksAddComponent {
     this.editTask({ companyId: data ? data.id : "" });
   }
   public onSelectTechUser(items) {
-    console.log("items", items);
     this.modelForm.controls["assignedUsersIds"].setValue(items.map(item => item.id));
     this.selectedAssignedUsers = items;
     this.editTask({ assignedUsersIds: items.map(item => item.id) });
-    //  this.globalFilter.setAssignedUsersIds(items.map(item => item.id));
   }
   onSelectType(data) {
     this.modelForm.controls["type"].setValue(data ? data.value : null);
@@ -208,7 +200,6 @@ export class TasksEditComponent extends TasksAddComponent {
     this.editTask({ type: data.value });
   }
   public filterByDate(value) {
-    console.log("value", value);
     if (value.start !== '' && value.end !== '') {
       this.modelForm.controls["startDate"].setValue(value.start);
       this.modelForm.controls["endDate"].setValue(value.end);
@@ -216,10 +207,8 @@ export class TasksEditComponent extends TasksAddComponent {
       this.modelForm.controls["startDate"].setValue(null);
       this.modelForm.controls["endDate"].setValue(null);
     }
-
   }
   onChangeDueDate(data) {
-    console.log("data", data);
     let dueDate = this.task.parseDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.modelForm.controls["dueDate"].setValue(dueDate);
     this.task.dueDate = dueDate;
@@ -235,7 +224,6 @@ export class TasksEditComponent extends TasksAddComponent {
     });
   }
   onChangeDescription() {
-    console.log("onChangeDescription");
     this.editTask({
       description: this.modelForm.controls["description"].value
     });
@@ -248,7 +236,6 @@ export class TasksEditComponent extends TasksAddComponent {
     this.cd.detectChanges();
   }
   public onSelectService(item) {
-    console.log("item", item);
     if (this.currentService.item) {
       let update = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
       if (!item) {
@@ -288,12 +275,10 @@ export class TasksEditComponent extends TasksAddComponent {
   }
   editTask(data) {
     this.submitted = true;
-    console.log("this.modelForm.invalid", this.modelForm);
     if (this.modelForm.invalid) {
       return;
     }
     this.saveBtn.setDisabled(true);
-    console.log("this.modelForm.value", this.modelForm.value);
     if (this.currentService.item && this.currentService.item.versionedId) this.modelForm.controls["ticketUpdates"].setValue([this.getDataForUpdateService()])
     this.tasksService.editTask(this.task.id, data).subscribe(res => {
       this.saveBtn.setDisabled(false);
@@ -303,8 +288,6 @@ export class TasksEditComponent extends TasksAddComponent {
     })
   }
   close() {
-    console.log(this.modelForm.controls["attachFileIds"].value);
-
     this.currentService = new TicketProfileFormService();
     this.opened = false;
     this.submitted = false;

@@ -32,27 +32,20 @@ export class TasksDatePickerComponent extends MultiDatepickerComponent {
     this.dp.autoClose = false;
   }
   openChange(data) {
-    console.log("data", data);
     setTimeout(() => {
       this.isInitCloseOutside = data;
     }, 500);
     this.onCloseDropDown.emit(!data);
   }
   public setEditDates(editStart, editEnd) {
-    console.log("editStart, editEnd", editStart, editEnd);
     if (editStart) this.fromDate = new NgbDate(new Date(editStart).getFullYear(), new Date(editStart).getMonth() + 1, new Date(editStart).getDate());
     if (editEnd) this.toDate = new NgbDate(new Date(editEnd).getFullYear(), new Date(editEnd).getMonth() + 1, new Date(editEnd).getDate());
     if (editStart) this.editTimePicker.start = editStart;
     if (editEnd) this.editTimePicker.end = editEnd;
     this.editTimePicker.editMode = true;
-    // this.editTimePicker.setEditItem(editStart, editEnd);
     this.setSelectedDateModel(this.fromDate, this.toDate);
-    console.log("this.fromDat", this.fromDate);
   }
   onToggleTimePicker(data) {
-    console.log("onToggleTimePicker", data);
-
-    console.log("this.isInitCloseOutside", this.isInitCloseOutside);
     if (!data) {
       setTimeout(() => {
         this.isInitCloseOutside = true;
@@ -99,12 +92,10 @@ export class TasksDatePickerComponent extends MultiDatepickerComponent {
       let end = new Date(this.dateService.getDateFromBootstrap(this.toDate));
       end.setHours(new Date(this.durationEnd).getHours());
       end.setMinutes(new Date(this.durationEnd).getMinutes());
-      console.log("durationStart", this.durationStart);
       this.selectedDate.next({
         start: start.getTime(),
         end: end.getTime(),
       });
-
       this.setSelectedDateModel(this.fromDate, this.toDate);
     }
   }

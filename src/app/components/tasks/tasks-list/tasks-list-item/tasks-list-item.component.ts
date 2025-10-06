@@ -38,15 +38,11 @@ export class TasksListItemComponent {
     })
     this.sub.add(getOnUsers);
     let getChangeCompanies = this.tasksRealTimeService.changeTasksArray.subscribe((data) => {
-
       if (data.data.id == this.item.id && data.action === 'TASK_EDITED') {
-        console.log("data.data", data.data);
         this.assignedUsers = this.listTechUsers.filter(user => data.data.assignedUsersIds.some(assignedUser => assignedUser == user.id));
-        console.log("this.assignedUsers", this.assignedUsers);
         this.techUsers.setEditUsers(this.assignedUsers);
         this.dateDp.setEditDate(data.data.startDate);
       }
-
       this.cd.detectChanges();
     })
     this.sub.add(getChangeCompanies);
@@ -54,7 +50,6 @@ export class TasksListItemComponent {
   onSetAssignedUsers() {
     this.listTechUsers = this.onGetTechUsers();
     this.assignedUsers = this.listTechUsers.filter(user => this.item.assignedUsersIds.some(assignedUser => assignedUser == user.id));
-    console.log("this.assignedUsers", this.assignedUsers);
     this.techUsers.setUsersList(this.listTechUsers);
     this.techUsers.setEditUsers(this.assignedUsers);
   }
@@ -84,7 +79,6 @@ export class TasksListItemComponent {
     })
   }
   editTask() {
-    console.log("editTask");
     this.tasksStateService.openEditAside(this.item);
   }
   toggleStatus(event) {

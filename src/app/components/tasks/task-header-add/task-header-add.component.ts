@@ -109,7 +109,6 @@ export class TaskHeaderAddComponent {
   }
 
   public filterByDate(value) {
-    console.log("value", value);
     if (value.start !== '' && value.end !== '') {
       this.modelForm.controls["startDate"].setValue(value.start);
       this.modelForm.controls["endDate"].setValue(value.end);
@@ -134,7 +133,6 @@ export class TaskHeaderAddComponent {
   }
 
   public onSelectTechUser(items) {
-    console.log("items", items);
     this.modelForm.controls["assignedUsersIds"].setValue(items.map(item => item.id))
     //  this.globalFilter.setAssignedUsersIds(items.map(item => item.id));
   }
@@ -144,14 +142,11 @@ export class TaskHeaderAddComponent {
 
   save() {
     this.submitted = true;
-    console.log("this.modelForm.value", this.modelForm.value.assignedUsersIds);
-    console.log("this.modelForm.invalid", this.modelForm);
     if (this.modelForm.invalid) {
       return;
     }
     this.saveBtn.setDisabled(true);
     if (!this.modelForm.value.assignedUsersIds) this.modelForm.controls["assignedUsersIds"].setValue([this.usersStateService.getCurrentUser().id]);
-    console.log("this.modelForm.value", this.modelForm.value);
     this.tasksService.addTask(this.task.getDataForAdd(this.modelForm.value)).subscribe(res => {
       this.saveBtn.setDisabled(false);
       this.close();
