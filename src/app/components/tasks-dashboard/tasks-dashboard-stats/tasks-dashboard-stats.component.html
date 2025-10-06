@@ -4,9 +4,6 @@
         [textContent]="parseDate()"
     ></div>
     <div class="qt-fs-26 qt-lh-12 qt-fw-500 qt-color-gray-900 qt-mt-6">Good morning, John</div>
-
-
-
     <div
         class="dashboard-stats qt-mt-20"
         *ngIf="stats"
@@ -18,7 +15,7 @@
             <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Tasks Created</div>
             <div
                 class="dashboard-stats-results qt-mt-4"
-                [textContent]="stats.created || 'N/A'"
+                [textContent]="stats.created"
             ></div>
         </div>
         <div class="dashboard-stats__col">
@@ -28,7 +25,7 @@
             <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Upcoming Tasks</div>
             <div
                 class="dashboard-stats-results qt-mt-4"
-                [textContent]="stats.upcoming || 'N/A'"
+                [textContent]="stats.upcoming"
             ></div>
         </div>
         <div class="dashboard-stats__col">
@@ -38,7 +35,7 @@
             <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Overdue Tasks</div>
             <div
                 class="dashboard-stats-results qt-mt-4"
-                [textContent]="stats.overdue || 'N/A'"
+                [textContent]="stats.overdue"
             ></div>
         </div>
         <div class="dashboard-stats__col">
@@ -48,7 +45,7 @@
             <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Completed Tasks</div>
             <div
                 class="dashboard-stats-results qt-mt-4"
-                [textContent]="stats.completed || 'N/A'"
+                [textContent]="stats.completed"
             ></div>
         </div>
         <div class="dashboard-stats__col">
@@ -58,8 +55,9 @@
             <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Billable Hours</div>
             <div
                 class="dashboard-stats-results qt-mt-4"
-                [textContent]="stats.completed || 'N/A'"
+                [textContent]="'N/A'"
             ></div>
+            <!-- stats.completed -->
         </div>
     </div>
 </div>
