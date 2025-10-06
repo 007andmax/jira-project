@@ -20,6 +20,8 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { REMOVE_TASK_TICKET } from 'src/app/const/confirm';
 import { TicketProfileTask } from '../../../class/ticket-profile-task';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
+import { TicketProfileFormService } from '../../../ticket-edit-aside/class/ticket-profile-form-service';
+import { TasksDatePickerComponent } from 'src/app/components/tasks/tasks-date-picker/tasks-date-picker.component';
 
 @Component({
   selector: 'app-ticket-detail-tasks-item',
@@ -35,9 +37,10 @@ export class TicketDetailTasksItemComponent {
   assignedUsers = [];
   listTechUsers = [];
   selectedType: CompanySetting;
+  currentService: TicketProfileFormService = new TicketProfileFormService();
   @Input() parseStartDate: Function;
   @ViewChild('techUsers', { static: true }) techUsers: TechUsersComponent;
-  @ViewChild('dateDp', { static: true }) dateDp: DatePickerComponent;
+  @ViewChild('dateDp', { static: true }) dateDp: TasksDatePickerComponent;
   sub: Subscription = new Subscription();
   constructor(public ticketsPermissionsService: TicketsPermissionsService,
     private usersStateService: UsersStateService,
@@ -54,6 +57,13 @@ export class TicketDetailTasksItemComponent {
 
   ngOnInit() {
     this.selectedType = this.listTypes.find(item => item.value == this.item.type);
+    let service = this.item.ticketUpdateList.find(item => item.type == "SERVICE");
+    console.log("service", service);
+    if (service) {
+      this.currentService.setItem(service.services[0].item);
+      this.currentService.setValidate(true);
+    }
+    this.dateDp.setEditDates(this.item.startDate, this.item.endDate);
     if (this.onGetTechUsers().length > 0) this.onSetAssignedUsers();
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onSetAssignedUsers();
@@ -67,7 +77,7 @@ export class TicketDetailTasksItemComponent {
         this.assignedUsers = this.listTechUsers.filter(user => data.data.assignedUsersIds.some(assignedUser => assignedUser == user.id));
         console.log("this.assignedUsers", this.assignedUsers);
         this.techUsers.setEditUsers(this.assignedUsers);
-        this.dateDp.setEditDate(data.data.startDate);
+        this.dateDp.setEditDates(data.data.startDate, data.data.endDate);
       }
 
       this.cd.detectChanges();
@@ -92,6 +102,34 @@ export class TicketDetailTasksItemComponent {
   onSelectType(data) {
     this.item.setType(data.value);
     this.save({ type: data.value });
+  }
+  public filterByDate(value) {
+    console.log("value", value);
+    if (value.start !== '' && value.end !== '') {
+      let start = new Date(value.start);
+      let end = new Date(value.end);
+      this.item.setStartDate(start.getDate(), start.getMonth() + 1, start.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+      this.item.setEndDate(end.getDate(), end.getMonth() + 1, end.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    } else {
+      this.item.startDate = null;
+      this.item.endDate = null;
+    }
+  }
+  onCloseDatePicker(event) {
+    console.log("event", event);
+    console.log("this.currentService", this.currentService);
+    if (event && this.currentService.item) {
+      let update = this.item.ticketUpdateList.find(item => item.type == "SERVICE");
+      this.currentService.setDurationStart(this.item.startDate);
+      this.currentService.setDurationEnd(this.item.endDate);
+      this.currentService.calculateQuantity();
+      this.ticketsService.updateExpense(this.currentService.getDateForUpdate(this.currentService.getDateForRequest(this.usersStateService.getCurrentUser(), update.services[0].id), update.id)).subscribe(res => {
+      });
+    }
+    if (event) this.save({
+      startDate: this.item.startDate,
+      endDate: this.item.endDate
+    });
   }
   public onChangeDatePicker(data) {
     this.item.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

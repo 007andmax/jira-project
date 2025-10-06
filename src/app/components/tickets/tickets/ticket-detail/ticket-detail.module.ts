@@ -207,7 +207,7 @@ import { TasksDatePickerModule } from 'src/app/components/tasks/tasks-date-picke
         TicketDetailProfileFormUpdateModule,
         AngularEditorModule,
         TaskHeaderAddTypeModule,
-        TasksDatePickerModule
+        TasksDatePickerModule,
     ],
 
 

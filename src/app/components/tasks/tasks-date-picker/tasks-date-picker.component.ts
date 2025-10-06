@@ -12,6 +12,7 @@ import { TicketProfileUpdatesServiceTimepickerComponent } from '../../tickets/ti
   styleUrls: ['./tasks-date-picker.component.scss']
 })
 export class TasksDatePickerComponent extends MultiDatepickerComponent {
+  @Input() type: string = "TASKS";
   @Input() container: string = null;
   durationStart: number = new Date().getTime();
   durationEnd: number = new Date().getTime();

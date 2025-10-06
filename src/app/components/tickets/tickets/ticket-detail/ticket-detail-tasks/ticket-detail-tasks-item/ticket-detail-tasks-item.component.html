@@ -69,16 +69,17 @@
         class="qt-mr-4"
         [textContent]="parseStartDate(item.startDate)"
     ></div>
-    <app-date-picker
+    <app-tasks-date-picker
         #dateDp
-        [editMode]="true"
-        [editDate]="item.startDate"
-        [placement]="'bottom-right'"
-        [useMinDate]="false"
-        [type]="'ICON'"
-        (onChange)="onChangeDatePicker($event)"
+        [class]="['date-picker-invisible', '--sm']"
+        [container]="'body'"
+        [type]="'DETAIL_TICKET'"
+        [editStart]="item.startDate"
+        [editEnd]="item.endDate"
         [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice"
-    ></app-date-picker>
+        (selectedDate)="filterByDate($event)"
+        (onCloseDropDown)="onCloseDatePicker($event)"
+    ></app-tasks-date-picker>
     <app-tech-users
         #techUsers
         [editMode]="true"

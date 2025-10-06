@@ -98,15 +98,15 @@
 
 ::ng-deep .tab-pane__table-row:not(.add-task-container) {
   .tab-pane__table-cell:not(.add-task-container) {
-    .date-picker {
-      position: relative;
-      width: 28px;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid $gray-200;
-      border-radius: 50%;
+    .multi-datepicker-container {
+        position: relative;
+        width: 28px;
+       height: 28px;
+        display: flex;
+        align-items: center;
+       justify-content: center;
+        border: 1px solid $gray-200;
+        border-radius: 50%;
 
       input {
         width: 100%;

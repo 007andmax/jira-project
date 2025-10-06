@@ -6,6 +6,7 @@
     <div class="qt-fs-26 qt-lh-12 qt-fw-500 qt-color-gray-900 qt-mt-6">Good morning, John</div>
 
 
+
     <div
         class="dashboard-stats qt-mt-20"
         *ngIf="stats"
@@ -17,7 +18,7 @@
             <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Tasks Created</div>
             <div
                 class="dashboard-stats-results qt-mt-4"
-                [textContent]="stats.created"
+                [textContent]="stats.created || 'N/A'"
             ></div>
         </div>
         <div class="dashboard-stats__col">
@@ -27,7 +28,7 @@
             <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Upcoming Tasks</div>
             <div
                 class="dashboard-stats-results qt-mt-4"
-                [textContent]="stats.upcoming"
+                [textContent]="stats.upcoming || 'N/A'"
             ></div>
         </div>
         <div class="dashboard-stats__col">
@@ -37,7 +38,7 @@
             <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Overdue Tasks</div>
             <div
                 class="dashboard-stats-results qt-mt-4"
-                [textContent]="stats.overdue"
+                [textContent]="stats.overdue || 'N/A'"
             ></div>
         </div>
         <div class="dashboard-stats__col">
@@ -47,7 +48,7 @@
             <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Completed Tasks</div>
             <div
                 class="dashboard-stats-results qt-mt-4"
-                [textContent]="stats.completed"
+                [textContent]="stats.completed || 'N/A'"
             ></div>
         </div>
         <div class="dashboard-stats__col">
@@ -57,7 +58,7 @@
             <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Billable Hours</div>
             <div
                 class="dashboard-stats-results qt-mt-4"
-                [textContent]="stats.completed"
+                [textContent]="stats.completed || 'N/A'"
             ></div>
         </div>
     </div>
