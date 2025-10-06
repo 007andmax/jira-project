@@ -91,8 +91,8 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
     if (value.start !== '' && value.end !== '') {
       let startDate = new Date(value.start);
       let endDate = new Date(value.end);
-      this.addTask.setStartDate(startDate.getDate(), startDate.getMonth() + 1, startDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-      this.addTask.setEndDate(endDate.getDate(), endDate.getMonth() + 1, endDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+      this.addTask.startDate = value.start;
+      this.addTask.endDate = value.end;
     } else {
       this.addTask.resetStartDate();
       this.addTask.resetEndDate();
@@ -139,7 +139,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
     this.addTask.associatedTicketId = this.ticketProfile.id;
     if (!this.addTask.startDate) {
       let startDate = new Date();
-      this.addTask.setStartDate(startDate.getDate(), startDate.getMonth() + 1, startDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+      this.addTask.startDate = startDate.getTime();
     }
     if (this.addTask.assignedUsersIds.length == 0) this.addTask.setAssignedUser([this.usersStateService.getCurrentUser().id]);
     this.tasksService.addTask(this.addTask.getDataForAdd(this.addTask)).pipe(map((res) => res),

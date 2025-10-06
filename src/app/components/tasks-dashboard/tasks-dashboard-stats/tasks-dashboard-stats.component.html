@@ -3,7 +3,11 @@
         class="qt-fw-500 qt-color-gray-500"
         [textContent]="parseDate()"
     ></div>
-    <div class="qt-fs-26 qt-lh-12 qt-fw-500 qt-color-gray-900 qt-mt-6">Good morning, John</div>
+    <div
+        *ngIf="currentUser"
+        class="qt-fs-26 qt-lh-12 qt-fw-500 qt-color-gray-900 qt-mt-6"
+        [textContent]="'Good morning, ' + currentUser.firstName"
+    ></div>
     <div
         class="dashboard-stats qt-mt-20"
         *ngIf="stats"

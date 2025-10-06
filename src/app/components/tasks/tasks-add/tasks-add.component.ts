@@ -197,6 +197,8 @@ export class TasksAddComponent implements OnInit, OnDestroy {
   prepareFilesList(files: Array<any>) {
     for (const item of files) {
       item.progress = 0;
+      item.contentType = item.type;
+      console.log("ite,", item);
       this.files.push(item);
     }
     this.uploadFilesSimulator(0);
@@ -214,6 +216,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
       this.uploadFile(this.files[index]).then((data: any) => {
         let res = JSON.parse(data.response);
         let listIds = this.modelForm.controls["attachFileIds"].value;
+        this.files[index].id = res.id;
         listIds.push(res.id);
         this.modelForm.controls["attachFileIds"].setValue(listIds);
         this.uploadFilesSimulator(index + 1);
@@ -322,6 +325,9 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     this.selectedAssignedUsers = [];
     this.selectedType = null;
     this.currentService = new TicketProfileFormService();
+  }
+  preview(attachmentId, contentType) {
+    if (contentType === "image/jpg" || contentType === "image/png" || contentType === "image/jpeg") this.previewAttachmentStateService.onInitPreview(`/file/${attachmentId}`);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

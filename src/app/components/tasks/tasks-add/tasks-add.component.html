@@ -262,6 +262,7 @@
                         class="single-file"
                         [ngClass]="{'error-file':file.showError}"
                         *ngFor="let file of files; let i = index"
+                        (click)="preview(file.id,file.contentType)"
                     >
                         <div class="info ">
                             <div class="qt-df qt-gap-4 qt-ai-c qt-fw-nowrap">

@@ -168,6 +168,7 @@ export class TasksEditComponent extends TasksAddComponent {
       this.uploadFile(this.files[index]).then((data: any) => {
         let res = JSON.parse(data.response);
         let listIds = this.modelForm.controls["attachFileIds"].value;
+        this.files[index].id = res.id;
         listIds.push(res.id);
         this.modelForm.controls["attachFileIds"].setValue(listIds);
         this.uploadFilesSimulator(index + 1);
@@ -270,9 +271,7 @@ export class TasksEditComponent extends TasksAddComponent {
       this.modelForm.get('title')?.enable();
     });
   }
-  preview(attachmentId, contentType) {
-    if (contentType === "image/jpg" || contentType === "image/png" || contentType === "image/jpeg") this.previewAttachmentStateService.onInitPreview(`/file/${attachmentId}`);
-  }
+
   editTask(data) {
     this.submitted = true;
     if (this.modelForm.invalid) {

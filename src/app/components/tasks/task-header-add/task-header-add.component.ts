@@ -65,13 +65,13 @@ export class TaskHeaderAddComponent {
         "",
         [Validators.required, Validators.minLength(1), Validators.maxLength(300)]
       ],
-      startDate: [this.task.parseDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset),
+      startDate: [currentDate.getTime(),
       [Validators.required]
       ],
       description: [undefined,
         [Validators.minLength(0), Validators.maxLength(65000)]
       ],
-      endDate: [this.task.parseDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset)],
+      endDate: [currentDate.getTime()],
       assignedUsersIds: [null],
       type: [
         "To do",
@@ -161,8 +161,8 @@ export class TaskHeaderAddComponent {
     this.modelForm.patchValue({
       taskStatus: "OPEN",
       type: "To do",
-      startDate: this.task.parseDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset),
-      endDate: this.task.parseDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset),
+      startDate: currentDate.getTime(),
+      endDate: currentDate.getTime(),
     });
     this.type.initDefaultValue();
     this.datePicker.setEditDates(this.modelForm.value.startDate, this.modelForm.value.endDate);

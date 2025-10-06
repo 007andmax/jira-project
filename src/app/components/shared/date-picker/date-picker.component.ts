@@ -64,7 +64,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     this.onInitEditMode();
     this.oninitClear();
 
-    if (this.editMode) this.setEditDate(this.editDate);
+    if (this.editMode && this.editDate) this.setEditDate(this.editDate);
 
   }
   ngDoCheck() {
@@ -120,7 +120,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   }
 
   public geTextDate() {
-    if ((this.type === 'DETAIL_TICKET_UPDATE' || this.type === 'COMPANY_DEVICE') && this.editDate == 0) return '';
+    if ((this.type === 'DETAIL_TICKET_UPDATE' || this.type === 'COMPANY_DEVICE') && (this.editDate == 0 || !this.editDate)) return '';
     if (this.type === 'DETAIL_TICKET' || this.type === 'DETAIL_TICKET_UPDATE' || this.type === 'COMPANY_DEVICE') return moment(new Date(this.date.getTitle())).format('DD MMM, YYYY');
     return this.date.getTitle();
   }
