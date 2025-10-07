@@ -89,8 +89,6 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
   }
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {
-      let startDate = new Date(value.start);
-      let endDate = new Date(value.end);
       this.addTask.startDate = value.start;
       this.addTask.endDate = value.end;
     } else {
@@ -140,6 +138,13 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
     if (!this.addTask.startDate) {
       let startDate = new Date();
       this.addTask.startDate = startDate.getTime();
+      let step = 1;
+      let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany() ? this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
+      if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') step = 1;
+      if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') step = 5;
+      if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') step = 10;
+      if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') step = 15;
+      this.addTask.endDate = startDate.getTime() + (step * 60 * 1000);
     }
     if (this.addTask.assignedUsersIds.length == 0) this.addTask.setAssignedUser([this.usersStateService.getCurrentUser().id]);
     this.tasksService.addTask(this.addTask.getDataForAdd(this.addTask)).pipe(map((res) => res),

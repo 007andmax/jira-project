@@ -59,6 +59,12 @@ export class TaskHeaderAddComponent {
     this.sub.add(getOnUsers);
   }
   initModelForm() {
+    let step = 1;
+    let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany() ? this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
+    if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') step = 1;
+    if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') step = 5;
+    if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') step = 10;
+    if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') step = 15;
     let currentDate = new Date();
     this.modelForm = this.formBuilder.group({
       title: [
@@ -71,7 +77,7 @@ export class TaskHeaderAddComponent {
       description: [undefined,
         [Validators.minLength(0), Validators.maxLength(65000)]
       ],
-      endDate: [currentDate.getTime()],
+      endDate: [currentDate.getTime() + (step * 60 * 1000)],
       assignedUsersIds: [null],
       type: [
         "To do",
@@ -158,11 +164,17 @@ export class TaskHeaderAddComponent {
     this.submitted = false;
     this.modelForm.reset();
     let currentDate = new Date();
+    let step = 1;
+    let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany() ? this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
+    if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') step = 1;
+    if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') step = 5;
+    if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') step = 10;
+    if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') step = 15;
     this.modelForm.patchValue({
       taskStatus: "OPEN",
       type: "To do",
       startDate: currentDate.getTime(),
-      endDate: currentDate.getTime(),
+      endDate: currentDate.getTime() + (step * 60 * 1000),
     });
     this.type.initDefaultValue();
     this.datePicker.setEditDates(this.modelForm.value.startDate, this.modelForm.value.endDate);

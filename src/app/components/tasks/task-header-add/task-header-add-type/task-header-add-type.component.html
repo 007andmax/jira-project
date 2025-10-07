@@ -4,6 +4,7 @@
     [container]="container"
 >
     <span
+        [ngClass]="{'no-click':isDisabled}"
         *ngIf="selectedType"
         [textContent]="selectedType.title"
         ngbDropdownToggle
@@ -13,6 +14,7 @@
         class="tag__modern --meeting --phone-call --to-do"
     ></span>
     <div
+        [ngClass]="{'no-click':isDisabled}"
         *ngIf="!selectedType"
         class="tab-pane__user-circle qt-button --gray --circle"
         ngbDropdownToggle

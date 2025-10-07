@@ -13,29 +13,29 @@
         #complete
     ></app-dynamic-tooltip>
     <i
-        *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && item.taskStatus == 'OPEN'"
+        *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && item.taskStatus == 'OPEN' && !item.hasInvoice"
         class="qt-icon icon__check icn-20"
         (click)="setStatus( 'CLOSED')"
         (mouseenter)="complete.show($event.target)"
         (mouseleave)="complete.hide()"
     ></i>
     <i
-        *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && item.taskStatus == 'CLOSED'"
+        *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && item.taskStatus == 'CLOSED' && !item.hasInvoice"
         class="qt-icon icon__check qt-icon__green-600 icn-20"
         (click)="setStatus( 'OPEN')"
         (mouseenter)="incomplete.show($event.target)"
         (mouseleave)="incomplete.hide()"
     ></i>
     <i
-        *ngIf="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
-        [ngClass]="{'icon__active':item.taskStatus != 'CLOSED',
-            'icon__task-pending':item.taskStatus != 'OPEN'}"
-        class=" icn-20"
+        *ngIf="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice"
+        [ngClass]="{'qt-icon__green-600':item.taskStatus == 'CLOSED'}"
+        class="qt-icon icon__check icn-20"
     ></i>
 </div>
 <div class="tab-pane__table-cell ticket-status-table__status">
     <div class="qt-df qt-ai-c title-container">
         <input
+            [ngClass]="{'.qt-td-l-t':!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice}"
             type="text"
             class="form-input  --editable"
             placeholder="Enter Name Taks"
@@ -44,7 +44,7 @@
             minlength="1"
             appKeyUpEnter
             (onChange)="editTitle()"
-            [disabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+            [disabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice"
         >
         <div
             class="qt-button --square-sm --gray pointer qt-ml-8 qt-mr-8 btn-open-aside"
@@ -60,6 +60,7 @@
 <div class="tab-pane__table-cell ticket-status-table__preview qt-pr-8">
     <app-task-header-add-type
         #type
+        [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice"
         [selectedType]="selectedType"
         (onChange)="onSelectType($event)"
     ></app-task-header-add-type>
@@ -97,7 +98,7 @@
     ></app-dynamic-tooltip>
     <div
         class="ticket-updates__delete qt-icon icon__delete"
-        *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)"
+        *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && !item.hasInvoice"
         (click)="remove(item)"
         (mouseenter)="dateTooltip.show($event.target)"
         (mouseleave)="dateTooltip.hide()"

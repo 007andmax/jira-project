@@ -7,6 +7,7 @@ import { CompanySetting } from 'src/app/components/companies/class/company-setti
   styleUrls: ['./task-header-add-type.component.scss']
 })
 export class TaskHeaderAddTypeComponent {
+  @Input() isDisabled: boolean = false;
   @Input() container: string = null;
   listTypes = [new CompanySetting('Meeting', 'Meeting'),
   new CompanySetting('To do', 'To do'),
