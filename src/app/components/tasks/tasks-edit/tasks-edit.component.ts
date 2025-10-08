@@ -261,7 +261,7 @@ export class TasksEditComponent extends TasksAddComponent {
       this.currentService.setDurationEnd(this.modelForm.controls["endDate"].value);
       this.currentService.calculateQuantity();
       this.ticketsService.updateTicket(this.currentService.getDataForAddService(this.usersStateService.getCurrentUser(), this.modelForm.value.taskTicketId)).subscribe(res => {
-
+        this.task.ticketUpdateList.push(res);
       })
     }
   }

@@ -46,7 +46,7 @@
             [placement]="'bottom-right'"
             [useMinDate]="false"
             [type]="'ICON'"
-            [isDisabled]="item.hasInvoice"
+            [isDisabled]="item.hasInvoice || item.taskStatus == 'CLOSED'"
             (onChange)="onChangeDatePicker($event)"
         ></app-date-picker>
     </div>
@@ -58,7 +58,7 @@
             [type]="'TASKS'"
             [users]="listTechUsers"
             [container]="'body'"
-            [isDisabled]="item.hasInvoice"
+            [isDisabled]="item.hasInvoice || item.taskStatus == 'CLOSED'"
             (usersChange)="onChangeUser($event)"
         ></app-tech-users>
     </div>

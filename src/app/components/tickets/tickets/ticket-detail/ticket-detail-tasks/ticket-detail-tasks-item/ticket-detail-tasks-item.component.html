@@ -64,7 +64,7 @@
 <div class="tab-pane__table-cell ticket-status-table__preview qt-pr-8">
     <app-task-header-add-type
         #type
-        [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice"
+        [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED'"
         [selectedType]="selectedType"
         (onChange)="onSelectType($event)"
     ></app-task-header-add-type>
@@ -81,7 +81,7 @@
         [type]="'DETAIL_TICKET'"
         [editStart]="item.startDate"
         [editEnd]="item.endDate"
-        [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice"
+        [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED'"
         (selectedDate)="filterByDate($event)"
         (onCloseDropDown)="onCloseDatePicker($event)"
     ></app-tasks-date-picker>
@@ -93,7 +93,7 @@
         [users]="listTechUsers"
         [container]="'body'"
         (usersChange)="onChangeUser($event)"
-        [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice"
+        [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED'"
     ></app-tech-users>
     <app-dynamic-tooltip
         [content]="'Delete task'"

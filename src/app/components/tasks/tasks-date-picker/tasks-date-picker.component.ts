@@ -37,9 +37,26 @@ export class TasksDatePickerComponent extends MultiDatepickerComponent {
     }, 500);
     this.onCloseDropDown.emit(!data);
   }
+  public setSelectedDateModel(start, end) {
+    if (start && end) {
+
+      const startDate = new Date(this.dateService.getDateFromBootstrap(start));
+      const endDate = new Date(this.dateService.getDateFromBootstrap(end));
+
+      this.selectedDateModel = `${moment(startDate).format('DD MMM')} - ${moment(endDate).format('DD MMM YYYY')}, ${moment(this.durationStart).format("hh:mm A")} - ${moment(this.durationEnd).format("hh:mm A")}`;
+    } else {
+      this.selectedDateModel = '';
+    }
+  }
   public setEditDates(editStart, editEnd) {
-    if (editStart) this.fromDate = new NgbDate(new Date(editStart).getFullYear(), new Date(editStart).getMonth() + 1, new Date(editStart).getDate());
-    if (editEnd) this.toDate = new NgbDate(new Date(editEnd).getFullYear(), new Date(editEnd).getMonth() + 1, new Date(editEnd).getDate());
+    if (editStart) {
+      this.fromDate = new NgbDate(new Date(editStart).getFullYear(), new Date(editStart).getMonth() + 1, new Date(editStart).getDate());
+      this.durationStart = editStart;
+    }
+    if (editEnd) {
+      this.toDate = new NgbDate(new Date(editEnd).getFullYear(), new Date(editEnd).getMonth() + 1, new Date(editEnd).getDate());
+      this.durationEnd = editEnd;
+    }
     if (editStart) this.editTimePicker.start = editStart;
     if (editEnd) this.editTimePicker.end = editEnd;
     this.editTimePicker.editMode = true;

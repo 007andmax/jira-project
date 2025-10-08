@@ -47,7 +47,6 @@ export class TasksListComponent implements OnInit, OnDestroy {
     });
     this.sub.add(geLefttFilter);
     let getChangeCompanies = this.tasksRealTimeService.changeTasksArray.subscribe((data) => {
-      if (!this.filter.checkFilterUse(new Task(data.data))) return
       if (data.action === 'TASK_SAVED' && this.filter.checkFilterUse(new Task(data.data))) {
         this.list.unshift(new Task(data.data));
       }
