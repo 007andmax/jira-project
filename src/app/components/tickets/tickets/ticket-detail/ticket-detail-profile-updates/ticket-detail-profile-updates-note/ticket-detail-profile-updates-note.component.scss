@@ -26,7 +26,8 @@
     &__author-line,
     &__message-line {
         margin-bottom: 8px;
-      flex: 1;
+        flex: 1;
+        min-height: 36px;
     }
 
     &__update-info {

@@ -91,7 +91,7 @@
   opacity: 1;
 }
 
-::ng-deep .multi-assign-user-container {
+::ng-deep .multi-assign-user-container:not(:empty) {
   width: 50px;
   margin-left: 8px;
 }
@@ -101,10 +101,8 @@
     .multi-datepicker-container {
         position: relative;
         width: 28px;
-       height: 28px;
-        display: flex;
-        align-items: center;
-       justify-content: center;
+        height: 28px;
+        display: block;
         border: 1px solid $gray-200;
         border-radius: 50%;
 
@@ -119,7 +117,7 @@
       .icon__calendar {
         position: absolute;
         left: 50%;
-        translate: -50%;
+        transform: translate(-50%, 25%);
         background-color: #667085 !important;
         width: 16px !important;
         height: 16px !important;
