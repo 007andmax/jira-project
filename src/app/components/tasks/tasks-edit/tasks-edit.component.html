@@ -206,7 +206,7 @@
                         [isBlockClear]="false"
                         [itemList]="servicesList"
                         [editItem]="currentService.item"
-                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED'"
+                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED' || !selectedCompany"
                         (selectedServicesItem)="onSelectService($event)"
                     ></app-services-list>
                 </div>

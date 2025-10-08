@@ -16,7 +16,7 @@ export class TaskHeaderAddTypeComponent {
   @Output() onChange = new EventEmitter<any>();
 
   ngOnInit() {
-    this.selectedType = new CompanySetting('To do', 'To do');
+    if (!this.selectedType) this.selectedType = new CompanySetting('To do', 'To do');
   }
   public initDefaultValue() {
     this.selectedType = new CompanySetting('To do', 'To do');

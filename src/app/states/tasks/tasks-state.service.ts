@@ -10,9 +10,12 @@ export class TasksStateService {
   onOpenAddTasksFromShortVersion: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
   onToggleFilter: EventEmitter<any> = new EventEmitter();
+  onFastRemove: EventEmitter<any> = new EventEmitter();
   filter: TasksFilters = new TasksFilters();
   constructor() { }
-
+  public fastRemoveTask(data) {
+    this.onFastRemove.emit(data);
+  }
   public changeToggleFilter(data) {
     this.onToggleFilter.emit(data);
   }

@@ -35,7 +35,6 @@
 <div class="tab-pane__table-cell ticket-status-table__status">
     <div class="qt-df qt-ai-c title-container">
         <input
-            [ngClass]="{'.qt-td-l-t':!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice}"
             type="text"
             class="form-input  --editable"
             placeholder="Enter Name Taks"
@@ -44,8 +43,13 @@
             minlength="1"
             appKeyUpEnter
             (onChange)="editTitle()"
-            [disabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice"
+            *ngIf="!(!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED')"
         >
+        <span
+            *ngIf="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED'"
+            class="form-input  --editable qt-td-l-t qt-w100"
+            [textContent]="item.title"
+        ></span>
         <div
             class="qt-button --square-sm --gray pointer qt-ml-8 qt-mr-8 btn-open-aside"
             (click)="openAside()"

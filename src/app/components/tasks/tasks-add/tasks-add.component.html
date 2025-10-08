@@ -139,6 +139,7 @@
                         class="drop-down-sm"
                         [type]="'TICKET'"
                         [isBlockClear]="false"
+                        [isDisabled]="!f2.companyId.value"
                         [itemList]="servicesList"
                         (selectedServicesItem)="onSelectService($event)"
                     ></app-services-list>

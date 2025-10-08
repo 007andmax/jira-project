@@ -70,6 +70,13 @@ export class TasksListComponent implements OnInit, OnDestroy {
       this.toggleFilter = data;
     })
     this.sub.add(onToggleFilter);
+    let onFastRemove = this.tasksStateService.onFastRemove.subscribe(res => {
+      let index = this.list.findIndex(item => item.id == res);
+      if (index > -1) {
+        this.list.splice(index, 1);
+      }
+    })
+    this.sub.add(onFastRemove);
   }
   onToggleFilter(data) {
     this.tasksStateService.changeToggleFilter(data);

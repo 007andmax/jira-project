@@ -140,6 +140,7 @@ export class TasksEditComponent extends TasksAddComponent {
   onDeleteTask() {
     this.tasksService.deleteTask(this.task.id).subscribe(res => {
       this.modelForm.controls["attachFileIds"].setValue([]);
+      this.tasksStateService.fastRemoveTask(this.task.id);
       this.close();
     });
 
