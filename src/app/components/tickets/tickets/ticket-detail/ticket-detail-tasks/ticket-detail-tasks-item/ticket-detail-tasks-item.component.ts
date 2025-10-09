@@ -74,7 +74,6 @@ export class TicketDetailTasksItemComponent {
         this.techUsers.setEditUsers(this.assignedUsers);
         this.dateDp.setEditDates(data.data.startDate, data.data.endDate);
         this.selectedType = this.listTypes.find(item => item.value == data.data.type);
-        console.log("this.selectedType", this.selectedType);
       }
       this.cd.detectChanges();
     })

@@ -198,8 +198,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     for (const item of files) {
       item.progress = 0;
       item.contentType = item.type;
-      console.log("ite,", item);
-      this.files.push(item);
+       this.files.push(item);
     }
     this.uploadFilesSimulator(0);
   }
