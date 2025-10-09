@@ -4,14 +4,16 @@
     [container]="container"
 >
     <span
-        [ngClass]="{'no-click':isDisabled}"
+        [ngClass]="{'no-click':isDisabled,'--meeting':selectedType.value == 'Meeting',
+                        '--phone-call':selectedType.value == 'Phone call',
+                        '--to-do':selectedType.value == 'To do'}"
         *ngIf="selectedType"
         [textContent]="selectedType.title"
         ngbDropdownToggle
         id="dropdownAddType"
         placement="top"
         ngbTooltip="Set Type"
-        class="tag__modern --meeting --phone-call --to-do"
+        class="tag__modern"
     ></span>
     <div
         [ngClass]="{'no-click':isDisabled}"
