@@ -59,6 +59,7 @@ export class TaskHeaderAddComponent {
     this.sub.add(getOnUsers);
   }
   initModelForm() {
+    console.log("initModelForm");
     let step = 1;
     let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany() ? this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
     if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') step = 1;

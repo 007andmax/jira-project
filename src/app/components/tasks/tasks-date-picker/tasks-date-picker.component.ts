@@ -32,6 +32,7 @@ export class TasksDatePickerComponent extends MultiDatepickerComponent {
     this.dp.autoClose = false;
   }
   openChange(data) {
+    if (data) this.editTimePicker.setEditItem(this.durationStart, this.durationEnd);
     setTimeout(() => {
       this.isInitCloseOutside = data;
     }, 500);
@@ -60,6 +61,7 @@ export class TasksDatePickerComponent extends MultiDatepickerComponent {
     if (editStart) this.editTimePicker.start = editStart;
     if (editEnd) this.editTimePicker.end = editEnd;
     this.editTimePicker.editMode = true;
+    this.editTimePicker.setEditItem(this.durationStart, this.durationEnd);
     this.setSelectedDateModel(this.fromDate, this.toDate);
   }
   onToggleTimePicker(data) {

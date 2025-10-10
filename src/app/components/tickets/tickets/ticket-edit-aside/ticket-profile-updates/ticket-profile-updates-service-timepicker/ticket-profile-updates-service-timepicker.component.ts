@@ -1,16 +1,17 @@
-import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectorRef, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectorRef, ElementRef, OnDestroy } from '@angular/core';
 import * as moment from "moment";
 var $ = require("jquery");
 import "timepicker";
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { AppService } from 'src/app/states/app/app.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-ticket-profile-updates-service-timepicker',
   templateUrl: './ticket-profile-updates-service-timepicker.component.html',
   styleUrls: ['./ticket-profile-updates-service-timepicker.component.scss']
 })
-export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
+export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit, OnDestroy {
   @Input() start: number = 0;
   @Input() end: number = 0;
   @Input() quantity: number = 0;
@@ -21,6 +22,7 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
   @Output() onSetEnd = new EventEmitter<any>();
   @Output() onChangeStart = new EventEmitter<any>();
   @Output() onToggleDropDown = new EventEmitter<any>();
+  sub: Subscription = new Subscription();
   currentCompany = null;
   step: number = 1;
   isShowEnd: boolean = false;
@@ -33,12 +35,18 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private elRef: ElementRef,) { }
 
+
   ngOnInit() {
 
     this.currentCompany = this.companiesStateService.getCurrentCompany();
-    if (document.readyState === "complete") this.onReady();
+    let getOnCurrentCompany = this.companiesStateService.getOnCurrentCompany().subscribe(res => {
+      this.currentCompany = this.companiesStateService.getCurrentCompany();
+      if (document.readyState === "complete") this.onReady();
+    })
+    this.sub.add(getOnCurrentCompany);
+    if (document.readyState === "complete" && this.currentCompany) this.onReady();
     $(document).ready(() => {
-      this.onReady();
+      if (this.currentCompany) this.onReady();
     });
   }
   private onReady() {
@@ -47,6 +55,7 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
     if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') this.step = 5;
     if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') this.step = 10;
     if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') this.step = 15;
+    console.log("this.step", this.step)
     this.timePickerStart = $(this.elRef.nativeElement).find('#datepairExample .start');
     this.timePickerEnd = $(this.elRef.nativeElement).find('#datepairExample .end');
     console.log("ready", serviceExpenseDurationPickerInterval);
@@ -133,8 +142,8 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
     this.end = end;
     let startDate = new Date(this.start);
     let endDate = new Date(this.end);
-    this.timePickerStart.timepicker('setTime', startDate);
-    this.timePickerEnd.timepicker('setTime', endDate);
+    if (this.timePickerStart) this.timePickerStart.timepicker('setTime', startDate);
+    if (this.timePickerEnd) this.timePickerEnd.timepicker('setTime', endDate);
   }
   private onSetPosition() {
     let topInput = $(this.inputTarget).offset().top;
@@ -167,5 +176,8 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
       this.onSetEnd.emit(endDate.getTime());
     }
     this.timePickerEnd.timepicker('option', 'minTime', this.timePickerStart.val());
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

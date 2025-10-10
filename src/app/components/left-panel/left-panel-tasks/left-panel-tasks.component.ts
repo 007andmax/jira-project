@@ -85,12 +85,9 @@ export class LeftPanelTasksComponent {
     this.sub.add(onGetCurrentUser);
   }
   toggleTechUser(data) {
-    if (this.filter.techUser && this.filter.techUser.id == data.id) {
-      this.filter.setTechUser(null);
-    } else {
-      this.filter.setTechUser(data);
-    }
+    this.filter.setTechUser(data);
     this.tasksStateService.onInitFilter(this.filter);
+    this.cd.detectChanges();
   }
   setStatus(data) {
     this.filter.setFilter(data ? data.value : null);
