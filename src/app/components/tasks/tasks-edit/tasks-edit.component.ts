@@ -243,6 +243,8 @@ export class TasksEditComponent extends TasksAddComponent {
       if (!item) {
         this.ticketsService.deleteUpdate(this.task.taskTicketId, update.id).subscribe(res => {
           this.currentService = new TicketProfileFormService();
+          let index = this.task.ticketUpdateList.findIndex(item => item.type == "SERVICE");
+          this.task.ticketUpdateList.splice(index, 1);
         })
         return;
       }

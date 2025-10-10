@@ -116,7 +116,7 @@
     ></app-dynamic-tooltip>
     <div
         class="tab-pane__user-circle qt-df qt-ai-c qt-jc-c pointer qt-fs-0 qt-mr-8 qt-circle"
-        *ngIf="type === 'TICEKTS' && selectedUsers.length === 0 || type === 'CONTRACT'"
+        *ngIf="type === 'TICEKTS' && selectedUsers.length === 0 || type === 'CONTRACT' || type === 'TASKS' && selectedUsers.length === 0"
         id="dropdownTechuser"
         (mouseenter)="selectUserTooltip.show($event.target)"
         (mouseleave)="selectUserTooltip.hide()"
@@ -143,7 +143,7 @@
     ></button>
     <div
         class="ticket-table__assignee"
-        *ngIf="type === 'TASKS'"
+        *ngIf="type === 'TASKS' && selectedUsers.length > 0"
         ngbDropdownToggle
     >
         <div class="qt-df multi-assign-user-container">
