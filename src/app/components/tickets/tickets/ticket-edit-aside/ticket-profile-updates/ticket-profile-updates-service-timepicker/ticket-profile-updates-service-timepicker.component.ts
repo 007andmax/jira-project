@@ -55,10 +55,8 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit, O
     if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') this.step = 5;
     if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') this.step = 10;
     if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') this.step = 15;
-    console.log("this.step", this.step)
     this.timePickerStart = $(this.elRef.nativeElement).find('#datepairExample .start');
     this.timePickerEnd = $(this.elRef.nativeElement).find('#datepairExample .end');
-    console.log("ready", serviceExpenseDurationPickerInterval);
     this.timePickerStart.timepicker({
       'showDuration': false,
       'minTime': '12:00am',
