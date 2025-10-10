@@ -198,7 +198,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     for (const item of files) {
       item.progress = 0;
       item.contentType = item.type;
-       this.files.push(item);
+      this.files.push(item);
     }
     this.uploadFilesSimulator(0);
   }
@@ -224,6 +224,12 @@ export class TasksAddComponent implements OnInit, OnDestroy {
         this.files[index].showError = true;
         this.uploadFilesSimulator(index + 1);
       });
+    }
+  }
+  onKeyDown(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      event.stopPropagation();
     }
   }
   uploadFile(file) {

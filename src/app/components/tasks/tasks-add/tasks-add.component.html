@@ -41,6 +41,7 @@
                             placeholder="Write about task"
                             maxlength="300"
                             class="--sm"
+                            (keydown)="onKeyDown($event)"
                         >
                         <app-mat-error
                             class="invalid-feedback --pos-static qt-dib qt-mt-8"

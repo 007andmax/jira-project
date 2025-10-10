@@ -14,6 +14,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { Subscription } from 'rxjs';
 import { NotificationsStateService } from 'src/app/states/notifications/notifications-state.service';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { TaskHeaderAddComponent } from '../tasks/task-header-add/task-header-add.component';
 
 @Component({
   selector: 'app-header',
@@ -22,6 +23,7 @@ import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 })
 export class HeaderComponent implements OnInit {
   @ViewChild('addTask', { static: true }) addTask: NgbDropdown;
+  @ViewChild('addTaskComponent', { static: true }) addTaskComponent: TaskHeaderAddComponent;
   currentCompany: Company;
   currentUser: User;
   sub: Subscription = new Subscription();
@@ -100,5 +102,6 @@ export class HeaderComponent implements OnInit {
   }
   onAddTasks() {
     this.addTask.open();
+    this.addTaskComponent.initModelForm();
   }
 }

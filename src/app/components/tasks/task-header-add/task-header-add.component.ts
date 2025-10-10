@@ -46,11 +46,11 @@ export class TaskHeaderAddComponent {
     public modalService: NgbModal,
   ) { }
   ngOnInit() {
-    if (this.companiesStateService.getCurrentCompany()) this.initModelForm();
-    let getOnCurrentCompany = this.companiesStateService.getOnCurrentCompany().subscribe(data => {
-      if (data) this.initModelForm();
-    });
-    this.sub.add(getOnCurrentCompany);
+    /*  if (this.companiesStateService.getCurrentCompany()) this.initModelForm();
+      let getOnCurrentCompany = this.companiesStateService.getOnCurrentCompany().subscribe(data => {
+        if (data) this.initModelForm();
+      });
+      this.sub.add(getOnCurrentCompany);*/
 
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetTechUsers(data);

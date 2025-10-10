@@ -16,3 +16,17 @@
         <app-tasks-list-item [item]="item"></app-tasks-list-item>
     </ng-template>
 </div>
+<div
+    class="loading pengind-loading"
+    *ngIf="showPendingPreloader"
+></div>
+<div
+    class="loading"
+    *ngIf="showPreloader"
+></div>
+<div
+    class="no-exist-elements"
+    *ngIf="!showPreloader && list.length == 0"
+>
+    We couldn't find any results
+</div>

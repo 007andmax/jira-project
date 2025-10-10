@@ -36,92 +36,97 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
   ngOnInit() {
 
     this.currentCompany = this.companiesStateService.getCurrentCompany();
+    if (document.readyState === "complete") this.onReady();
     $(document).ready(() => {
-      let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany() ? this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
-      if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') this.step = 1;
-      if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') this.step = 5;
-      if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') this.step = 10;
-      if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') this.step = 15;
-      this.timePickerStart = $(this.elRef.nativeElement).find('#datepairExample .start');
-      this.timePickerEnd = $(this.elRef.nativeElement).find('#datepairExample .end');
-      this.timePickerStart.timepicker({
-        'showDuration': false,
-        'minTime': '12:00am',
-        'timeFormat': 'g:ia',
-        'step': this.step,
-        'orientation': 'l'
-
-      });
-      this.timePickerEnd.timepicker({
-        'showDuration': true,
-        'minTime': '12:00am',
-        'timeFormat': 'g:ia',
-        'step': this.step,
-        'orientation': 'l'
-      });
-      this.timePickerStart.on('selectTime', (data) => {
-        this.changeStart();
-        let startDate = new Date(this.timePickerStart.timepicker('getTime'));
-        if (this.editMode) {
-          let editStartDate = new Date(this.start);
-          startDate.setFullYear(editStartDate.getFullYear());
-          startDate.setMonth(editStartDate.getMonth());
-          startDate.setDate(editStartDate.getDate());
-        }
-        this.onChangeStart.emit(startDate.getTime());
-      });
-      this.timePickerStart.on('showTimepicker', (data) => {
-        this.inputTarget = data.currentTarget;
-        this.isShowStart = true;
-        this.onSetPosition();
-        this.onToggleDropDown.emit(true);
-      });
-      this.timePickerStart.on('hideTimepicker', (data) => {
-        this.isShowStart = false;
-        this.inputTarget = null;
-        this.onToggleDropDown.emit(false);
-      });
-      this.timePickerEnd.on('selectTime', (data) => {
-        let endDate = new Date(this.timePickerEnd.timepicker('getTime'));
-        if (this.editMode) {
-          let editEdnDate = new Date(this.end);
-          endDate.setFullYear(editEdnDate.getFullYear());
-          endDate.setMonth(editEdnDate.getMonth());
-          endDate.setDate(editEdnDate.getDate());
-        }
-        this.onChangeEnd.emit(endDate.getTime());
-      });
-      this.timePickerEnd.on('showTimepicker', (data) => {
-        this.inputTarget = data.currentTarget;
-        $('.ui-timepicker-with-duration').scrollTop(0);
-        this.isShowEnd = true;
-        this.onSetPosition();
-        this.onToggleDropDown.emit(true);
-      });
-      this.timePickerEnd.on('hideTimepicker', (data) => {
-        this.isShowEnd = false;
-        this.inputTarget = null;
-        this.onToggleDropDown.emit(false);
-      });
-      if (this.editMode) {
-        let startDate = new Date(this.start);
-        let endDate = new Date(this.end);
-        this.timePickerStart.timepicker('setTime', startDate);
-        this.timePickerEnd.timepicker('setTime', endDate);
-      } else {
-        this.timePickerStart.timepicker('setTime', new Date());
-        this.timePickerEnd.timepicker('setTime', new Date());
-      }
-      this.timePickerEnd.timepicker('option', 'minTime', this.timePickerStart.val());
-      $(".ticket-edit-aside__body").scroll(() => {
-        if (!this.inputTarget) return;
-        this.onSetPosition();
-      })
-      $(window).scroll(() => {
-        if (!this.inputTarget) return;
-        this.onSetPosition();
-      })
+      this.onReady();
     });
+  }
+  private onReady() {
+    let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany() ? this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
+    if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') this.step = 1;
+    if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') this.step = 5;
+    if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') this.step = 10;
+    if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') this.step = 15;
+    this.timePickerStart = $(this.elRef.nativeElement).find('#datepairExample .start');
+    this.timePickerEnd = $(this.elRef.nativeElement).find('#datepairExample .end');
+    console.log("ready", serviceExpenseDurationPickerInterval);
+    this.timePickerStart.timepicker({
+      'showDuration': false,
+      'minTime': '12:00am',
+      'timeFormat': 'g:ia',
+      'step': this.step,
+      'orientation': 'l'
+
+    });
+    this.timePickerEnd.timepicker({
+      'showDuration': true,
+      'minTime': '12:00am',
+      'timeFormat': 'g:ia',
+      'step': this.step,
+      'orientation': 'l'
+    });
+    this.timePickerStart.on('selectTime', (data) => {
+      this.changeStart();
+      let startDate = new Date(this.timePickerStart.timepicker('getTime'));
+      if (this.editMode) {
+        let editStartDate = new Date(this.start);
+        startDate.setFullYear(editStartDate.getFullYear());
+        startDate.setMonth(editStartDate.getMonth());
+        startDate.setDate(editStartDate.getDate());
+      }
+      this.onChangeStart.emit(startDate.getTime());
+    });
+    this.timePickerStart.on('showTimepicker', (data) => {
+      this.inputTarget = data.currentTarget;
+      this.isShowStart = true;
+      this.onSetPosition();
+      this.onToggleDropDown.emit(true);
+    });
+    this.timePickerStart.on('hideTimepicker', (data) => {
+      this.isShowStart = false;
+      this.inputTarget = null;
+      this.onToggleDropDown.emit(false);
+    });
+    this.timePickerEnd.on('selectTime', (data) => {
+      let endDate = new Date(this.timePickerEnd.timepicker('getTime'));
+      if (this.editMode) {
+        let editEdnDate = new Date(this.end);
+        endDate.setFullYear(editEdnDate.getFullYear());
+        endDate.setMonth(editEdnDate.getMonth());
+        endDate.setDate(editEdnDate.getDate());
+      }
+      this.onChangeEnd.emit(endDate.getTime());
+    });
+    this.timePickerEnd.on('showTimepicker', (data) => {
+      this.inputTarget = data.currentTarget;
+      $('.ui-timepicker-with-duration').scrollTop(0);
+      this.isShowEnd = true;
+      this.onSetPosition();
+      this.onToggleDropDown.emit(true);
+    });
+    this.timePickerEnd.on('hideTimepicker', (data) => {
+      this.isShowEnd = false;
+      this.inputTarget = null;
+      this.onToggleDropDown.emit(false);
+    });
+    if (this.editMode) {
+      let startDate = new Date(this.start);
+      let endDate = new Date(this.end);
+      this.timePickerStart.timepicker('setTime', startDate);
+      this.timePickerEnd.timepicker('setTime', endDate);
+    } else {
+      this.timePickerStart.timepicker('setTime', new Date());
+      this.timePickerEnd.timepicker('setTime', new Date());
+    }
+    this.timePickerEnd.timepicker('option', 'minTime', this.timePickerStart.val());
+    $(".ticket-edit-aside__body").scroll(() => {
+      if (!this.inputTarget) return;
+      this.onSetPosition();
+    })
+    $(window).scroll(() => {
+      if (!this.inputTarget) return;
+      this.onSetPosition();
+    })
   }
   public setEditItem(start, end) {
     this.start = start;

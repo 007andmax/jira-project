@@ -165,7 +165,10 @@
             ngbDropdownMenu
             aria-labelledby="dropdownCreateTask"
         >
-            <app-task-header-add (onClose)="addTask.close()"></app-task-header-add>
+            <app-task-header-add
+                #addTaskComponent
+                (onClose)="addTask.close()"
+            ></app-task-header-add>
         </div>
     </div>
 </div>

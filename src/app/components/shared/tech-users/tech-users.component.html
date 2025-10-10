@@ -142,7 +142,6 @@
         (mouseleave)="techUserTooltip.hide()"
     ></button>
     <div
-        [ngClass]="{'no-click':isDisabled}"
         class="ticket-table__assignee"
         *ngIf="type === 'TASKS'"
         ngbDropdownToggle
@@ -193,7 +192,7 @@
                         [ngStyle]="{'background': ticketsListService.getAssignedUserNameForAvatar(user) }"
                     ></div>
                     <span
-                        class=""
+                        class
                         [textContent]="user.firstName + ' ' + user.lastName"
                     ></span>
                 </div>
