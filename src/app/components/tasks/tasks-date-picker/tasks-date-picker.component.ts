@@ -28,7 +28,11 @@ export class TasksDatePickerComponent extends MultiDatepickerComponent {
   }
 
   ngOnInit() {
-    if (this.editStart && this.editEnd) this.setEditDates(this.editStart, this.editEnd);
+    if (this.editStart && this.editEnd) {
+      this.setEditDates(this.editStart, this.editEnd);
+    } else {
+      this.setEditDates(this.durationStart, this.durationEnd);
+    }
     this.dp.autoClose = false;
   }
   openChange(data) {
