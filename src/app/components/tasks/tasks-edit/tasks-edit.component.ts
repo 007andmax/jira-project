@@ -190,6 +190,14 @@ export class TasksEditComponent extends TasksAddComponent {
     if (data) this.ticketStateService.getServicesList(data.id);
     this.selectedCompany = data;
     this.editTask({ companyId: data ? data.id : "" });
+    if (this.currentService.item) {
+      let update = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
+      this.ticketsService.deleteUpdate(this.task.taskTicketId, update.id).subscribe(res => {
+        this.currentService = new TicketProfileFormService();
+        let index = this.task.ticketUpdateList.findIndex(item => item.type == "SERVICE");
+        this.task.ticketUpdateList.splice(index, 1);
+      })
+    }
   }
   public onSelectTechUser(items) {
     this.modelForm.controls["assignedUsersIds"].setValue(items.map(item => item.id));
