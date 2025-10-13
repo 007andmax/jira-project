@@ -30,6 +30,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
   list: Array<TicketProfileTask> = [];
   addTask: TicketProfileTask = new TicketProfileTask();
   listTechUsers = [];
+  initAddTask: boolean = true;
   sub: Subscription = new Subscription();
   @ViewChild('addTaskBtn', { static: false }) addTaskBtn: ClickOutsideDirective;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
@@ -86,6 +87,14 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
       this.ticketStateService.setListTasks(this.list);
       this.cd.detectChanges();
     })
+  }
+  onCloseDatePicker(event) {
+    console.log("onCloseDatePicker");
+    setTimeout(() => {
+      this.initAddTask = event;
+      console.log("this.initAddTask", this.initAddTask);
+    }, 500);
+
   }
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {

@@ -101,8 +101,8 @@ export class TicketDetailTasksItemComponent {
     if (value.start !== '' && value.end !== '') {
       let start = new Date(value.start);
       let end = new Date(value.end);
-      this.item.setStartDate(start.getDate(), start.getMonth() + 1, start.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-      this.item.setEndDate(end.getDate(), end.getMonth() + 1, end.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+      this.item.startDate = value.start;
+      this.item.endDate = value.end;
     } else {
       this.item.startDate = null;
       this.item.endDate = null;

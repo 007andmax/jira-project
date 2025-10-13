@@ -54,7 +54,6 @@ export class TechUsersComponent implements OnInit, OnDestroy {
       this.usersList.forEach(item => {
         let index = this.editUsers.findIndex(user => user.id === item.id);
         if (index > -1) {
-          item.selected = true;
           this.selectedUsers.push(item);
         }
       })
@@ -70,7 +69,6 @@ export class TechUsersComponent implements OnInit, OnDestroy {
     this.usersList.forEach(item => {
       let index = this.editUsers.findIndex(user => user.id === item.id);
       if (index > -1) {
-        item.selected = true;
         this.selectedUsers.push(item);
       }
     })
@@ -91,7 +89,6 @@ export class TechUsersComponent implements OnInit, OnDestroy {
     this.usersList.forEach(item => {
       let index = this.editUsers.findIndex(user => user.id === item.id);
       if (index > -1) {
-        item.selected = true;
         this.selectedUsers.push(item);
       }
     })
@@ -103,10 +100,10 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   */
   public checUsersForEdit() {
     let getUsersFromEdit = this.techState.getUsersFromEdit().subscribe((data: Array<RecurringTicketUser>) => {
-
+      this.selectedUsers = [];
       data.forEach((item) => {
         let index = this.usersList.findIndex(user => user.id === item.id);
-        if (index > (-1)) this.usersList[index].selected = true;
+        if (index > (-1)) this.selectedUsers.push(this.usersList[index]);
 
       })
     })
@@ -173,13 +170,16 @@ export class TechUsersComponent implements OnInit, OnDestroy {
      * @param index index
      */
   public selectUser(index) {
-    this.usersList[index].selected = !this.usersList[index].selected;
     if (this.selectedMode === SINGLE_SELECT) {
-      this.usersList.forEach((item, i) => {
-        if (i !== index) item.selected = false;
-      });
+      this.selectedUsers = [this.usersList[index]];
+    } else {
+      let findIndex = this.selectedUsers.findIndex(item => item.id === this.usersList[index].id);
+      if (findIndex > -1) {
+        this.selectedUsers.splice(findIndex, 1);
+      } else {
+        this.selectedUsers.push(this.usersList[index]);
+      }
     }
-    this.selectedUsers = this.usersList.filter(item => item.selected);
     this.usersChange.emit(this.selectedUsers);
   }
 
@@ -198,14 +198,12 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   private clear() {
     this.showSelect = false;
     this.selectedUsers = [];
-    this.usersList.forEach((item) => item.selected = false);
     this.usersChange.emit(this.selectedUsers);
   }
   public clearWithOutChanges() {
 
     this.showSelect = false;
     this.selectedUsers = [];
-    this.usersList.forEach((item) => item.selected = false);
   }
 
   public trackByIndex(index, item) {

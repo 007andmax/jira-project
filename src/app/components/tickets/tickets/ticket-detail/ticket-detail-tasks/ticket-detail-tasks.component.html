@@ -16,7 +16,7 @@
         class="add-task-container tab-pane__table-row --selected"
         appClickOtside
         #addTaskBtn="click"
-        [init]="true"
+        [init]="initAddTask"
         [classParent]="'.add-task-container'"
         (onOutSide)="onAddTicketTask()"
     >
@@ -60,12 +60,13 @@
                 <app-tasks-date-picker
                     #datePicker
                     (selectedDate)="filterByDate($event)"
+                    (onCloseDropDown)="onCloseDatePicker($event)"
                 ></app-tasks-date-picker>
             </div>
             <app-tech-users
                 #tachUser
                 [editMode]="true"
-                [type]="'TICEKTS'"
+                [type]="'TASKS'"
                 [users]="listTechUsers"
                 [container]="'body'"
                 (usersChange)="onSelectTechUser($event)"

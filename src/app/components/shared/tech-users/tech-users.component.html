@@ -245,7 +245,7 @@
                                             class="user-item-detail pointer"
                                             data-index="1"
                                             (click)="selectUser(i)"
-                                            [ngClass]="(user.selected) ? 'active' : ''"
+                                            [ngClass]="isSelected(user) ? 'active' : ''"
                                         >
                                             <div
                                                 class="user-item-user-avatar"
@@ -313,7 +313,7 @@
                                         class="user-item"
                                         data-index="1"
                                         (click)="selectUser(i)"
-                                        [ngClass]="(user.selected) ? 'active' : ''"
+                                        [ngClass]="isSelected(user) ? 'active' : ''"
                                     >
                                         <a
                                             href="javascript:void(0)"
