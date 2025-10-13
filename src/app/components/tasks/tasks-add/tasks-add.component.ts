@@ -17,6 +17,7 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { PreviewAttachmentStateService } from '../../tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
+import { ServicesListComponent } from '../../shared/services-list/services-list.component';
 
 @Component({
   selector: 'app-tasks-add',
@@ -35,6 +36,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
   new CompanySetting('Phone call', 'Phone call')];
   formatDate: string = FORMAT_DATE_2;
   @ViewChild('saveBtn', { static: false }) saveBtn: DisabledBtnDirective;
+  @ViewChild('servicedp', { static: false }) servicedp: ServicesListComponent;
   sub: Subscription = new Subscription();
   activeTab: string = "description";
   currentService: TicketProfileFormService = new TicketProfileFormService();
@@ -174,6 +176,9 @@ export class TasksAddComponent implements OnInit, OnDestroy {
   onSelectCompany(data) {
     this.modelForm.controls["companyId"].setValue(data ? data.id : null)
     if (data) this.ticketStateService.getServicesList(data.id);
+    this.servicedp.clearClient();
+    this.currentService.setItem(null);
+    this.currentService.setValidate(false);
   }
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {
