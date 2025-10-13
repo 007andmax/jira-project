@@ -116,6 +116,11 @@ export class TasksDatePickerComponent extends MultiDatepickerComponent {
         end: end.getTime(),
       });
       this.setSelectedDateModel(this.fromDate, this.toDate);
+    } else {
+      this.selectedDate.next({
+        start: this.durationStart,
+        end: this.durationEnd,
+      });
     }
   }
 }

@@ -6,7 +6,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
-import { TaskHeaderAddTypeComponent } from './task-header-add-type.component';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
@@ -15,6 +14,7 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
 import { TechUsersModule } from '../../shared/tech-users/tech-users.module';
 import { TasksDatePickerModule } from '../tasks-date-picker/tasks-date-picker.module';
 import { TaskHeaderAddTypeModule } from './task-header-add-type/task-header-add-type.module';
+import { TaskHeaderAddTypeComponent } from './task-header-add-type/task-header-add-type.component';
 
 
 describe('TaskHeaderAddTypeComponent unit test', () => {
