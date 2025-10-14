@@ -48,10 +48,13 @@
     }
   }
 
+  ::ng-deep .multi-assign-user-container:not(:empty) {
+    width: auto;
+  }
   ::ng-deep .qt-table-modern__circle-avatar {
     position: static;
-
     margin: 0;
+
     &:not(:first-child) {
       margin-left: -12px;
     }
