@@ -196,6 +196,8 @@ export class TasksEditComponent extends TasksAddComponent {
         this.currentService = new TicketProfileFormService();
         let index = this.task.ticketUpdateList.findIndex(item => item.type == "SERVICE");
         this.task.ticketUpdateList.splice(index, 1);
+        this.servicedp.clearClient();
+        this.currentService.setValidate(false);
       })
     }
   }

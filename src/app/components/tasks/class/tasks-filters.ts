@@ -18,9 +18,14 @@ export class TasksFilters {
     }
     checkFilterUse(task: Task) {
         let selectedTechUser = true;
+        let selectedFilter = true;
         if (this.techUser) {
             selectedTechUser = (task.assignedUsersIds.some(item => item === this.techUser.id));
         }
-        return selectedTechUser
+        if (this.filter) {
+            if (this.filter == 'UPCOMING' || this.filter == 'OVERDUE') selectedFilter = (task.taskStatus == 'OPEN');
+            if (this.filter == 'COMPLETED') selectedFilter = (task.taskStatus == 'CLOSED');
+        }
+        return selectedTechUser && selectedFilter;
     }
 }
