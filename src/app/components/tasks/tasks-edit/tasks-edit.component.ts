@@ -189,7 +189,6 @@ export class TasksEditComponent extends TasksAddComponent {
     this.modelForm.controls["companyId"].setValue(data ? data.id : null)
     if (data) this.ticketStateService.getServicesList(data.id);
     this.selectedCompany = data;
-    this.editTask({ companyId: data ? data.id : "" });
     if (this.currentService.item) {
       let update = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
       this.ticketsService.deleteUpdate(this.task.taskTicketId, update.id).subscribe(res => {
@@ -198,7 +197,10 @@ export class TasksEditComponent extends TasksAddComponent {
         this.task.ticketUpdateList.splice(index, 1);
         this.servicedp.clearClient();
         this.currentService.setValidate(false);
+        this.editTask({ companyId: data ? data.id : "" });
       })
+    } else {
+      this.editTask({ companyId: data ? data.id : "" });
     }
   }
   public onSelectTechUser(items) {
