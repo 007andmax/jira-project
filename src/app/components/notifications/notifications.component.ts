@@ -10,6 +10,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { NotificationsRealTimeService } from 'src/app/states/notifications/notifications-real-time.service';
 import { id } from '@swimlane/ngx-charts';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
+import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 
 @Component({
   selector: 'app-notifications',
@@ -36,6 +37,7 @@ export class NotificationsComponent {
     private companiesStateService: CompaniesStateService,
     private notificationsRealTimeService: NotificationsRealTimeService,
     private quoteStateService: QuoteStateService,
+    private tasksStateService: TasksStateService,
   ) { }
   ngOnInit() {
 
@@ -91,6 +93,9 @@ export class NotificationsComponent {
   editQuote(item) {
     this.quoteStateService.setPreview({ id: item.saleQuoteId });
   }
+  editTask(item) {
+    this.tasksStateService.openEditAside({ id: item.taskId });
+  }
   public onScroll() {
     this.infiniteScrollDisabled = true;
     this.getNotifications();
@@ -123,8 +128,9 @@ export class NotificationsComponent {
   }
   showDetails(item) {
     if (!item.read) this.markAsRead(item)
-    if (item.type != 'QUOTE_STATUS_UPDATED') this.editTicket(item);
+    if (item.type != 'QUOTE_STATUS_UPDATED' && item.type != 'TASK_ASSIGNED' && item.type != 'TASK_OVERDUE') this.editTicket(item);
     if (item.type == 'QUOTE_STATUS_UPDATED') this.editQuote(item);
+    if (item.type == 'TASK_ASSIGNED' || item.type == 'TASK_OVERDUE') this.editTask(item);
   }
   getNotificationCounter() {
     return this.notificationsStateService.getUnreadCount();
