@@ -156,6 +156,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
       this.addTask.endDate = startDate.getTime() + (step * 60 * 1000);
     }
     if (this.addTask.assignedUsersIds.length == 0) this.addTask.setAssignedUser([this.usersStateService.getCurrentUser().id]);
+    this.addTask.companyId = this.ticketProfile.companyId;
     this.tasksService.addTask(this.addTask.getDataForAdd(this.addTask)).pipe(map((res) => res),
       catchError(error => of(undefined))).subscribe(data => {
         this.showAdd = false;

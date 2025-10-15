@@ -22,6 +22,7 @@ export class TasksEditComponent extends TasksAddComponent {
   selectedCompany: Company;
   selectedTicket: Ticket = null;
   isInitEditNote: boolean = false;
+  isInitTitle: boolean = false;
   @ViewChild('datePicker', { static: false }) datePicker: TasksDatePickerComponent;
   ngOnInit() {
     this.modelForm = this.formBuilder.group({
@@ -75,7 +76,11 @@ export class TasksEditComponent extends TasksAddComponent {
           attachFileIds: task.attachments.map(item => item.file.id),
           taskTicketId: this.task.taskTicketId
         });
-        if (this.task.hasInvoice || this.task.taskStatus === 'CLOSED') this.modelForm.get('title')?.disable();
+        if (this.task.hasInvoice || this.task.taskStatus === 'CLOSED') {
+          this.modelForm.get('title')?.disable();
+        } else {
+          this.modelForm.get('title')?.enable();
+        }
         this.files = task.attachments.map(item => {
           return { ...item.file, showError: false }
         });
@@ -112,6 +117,7 @@ export class TasksEditComponent extends TasksAddComponent {
     this.sub.add(getConfirm);
   }
   onKeyDown(event) {
+    this.isInitTitle = true;
     if (event.keyCode === 13) {
       event.preventDefault();
       event.stopPropagation();
@@ -232,7 +238,7 @@ export class TasksEditComponent extends TasksAddComponent {
   }
   closeTask() {
     this.saveBtn.setDisabled(true);
-    this.tasksService.changeStatusTask(this.task.id, "CLOSED").subscribe(res => {
+    if (!this.isInitEditNote) this.tasksService.changeStatusTask(this.task.id, "CLOSED").subscribe(res => {
       this.saveBtn.setDisabled(false);
       this.close();
     });
@@ -241,7 +247,7 @@ export class TasksEditComponent extends TasksAddComponent {
     this.editTask({
       description: this.modelForm.controls["description"].value
     });
-    this.isInitEditNote = false;
+    // this.isInitEditNote = false;
   }
   deleteTask() {
     this.confirmStateService.setConfirmAction(DELETE_TASK);
@@ -292,11 +298,18 @@ export class TasksEditComponent extends TasksAddComponent {
     if (this.modelForm.invalid) {
       return;
     }
-    this.saveBtn.setDisabled(true);
+    //   this.saveBtn.setDisabled(true);
     if (this.currentService.item && this.currentService.item.versionedId) this.modelForm.controls["ticketUpdates"].setValue([this.getDataForUpdateService()])
     this.tasksService.editTask(this.task.id, data).subscribe(res => {
-      this.saveBtn.setDisabled(false);
-
+      if (this.isInitEditNote && this.saveBtn.isBlock()) {
+        this.isInitEditNote = false;
+        this.isInitTitle = false;
+        this.closeTask();
+      } else {
+        this.saveBtn.setDisabled(false);
+        this.isInitTitle = false;
+        this.isInitEditNote = false;
+      }
     }, err => {
       this.saveBtn.setDisabled(false);
     })
