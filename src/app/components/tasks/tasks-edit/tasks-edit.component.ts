@@ -95,6 +95,7 @@ export class TasksEditComponent extends TasksAddComponent {
         this.selectedType = this.listTypes.find(item => item.value === this.task.type);
         this.opened = true;
         if (this.selectedCompany) this.ticketStateService.getServicesList(this.selectedCompany.id);
+        this.cd.detectChanges();
       });
 
 

@@ -43,6 +43,7 @@
             minlength="1"
             appKeyUpEnter
             (onChange)="editTitle()"
+            (blur)="editTitle()"
             *ngIf="!(!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED')"
         >
         <span
