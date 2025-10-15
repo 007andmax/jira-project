@@ -238,7 +238,7 @@ export class TasksEditComponent extends TasksAddComponent {
   }
   closeTask() {
     this.saveBtn.setDisabled(true);
-    if (!this.isInitEditNote) this.tasksService.changeStatusTask(this.task.id, "CLOSED").subscribe(res => {
+    if (!this.isInitEditNote && !this.isInitTitle) this.tasksService.changeStatusTask(this.task.id, "CLOSED").subscribe(res => {
       this.saveBtn.setDisabled(false);
       this.close();
     });
@@ -301,7 +301,7 @@ export class TasksEditComponent extends TasksAddComponent {
     //   this.saveBtn.setDisabled(true);
     if (this.currentService.item && this.currentService.item.versionedId) this.modelForm.controls["ticketUpdates"].setValue([this.getDataForUpdateService()])
     this.tasksService.editTask(this.task.id, data).subscribe(res => {
-      if (this.isInitEditNote && this.saveBtn.isBlock()) {
+      if ((this.isInitTitle || this.isInitEditNote) && this.saveBtn.isBlock()) {
         this.isInitEditNote = false;
         this.isInitTitle = false;
         this.closeTask();
