@@ -130,6 +130,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     })
     let onOpenAddTasks = this.tasksStateService.onOpenAddTasks.subscribe(res => {
       if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
+      this.onInitStartEndDate();
       this.opened = true;
       // this.getServices();
     })
@@ -159,6 +160,19 @@ export class TasksAddComponent implements OnInit, OnDestroy {
       this.opened = true;
     })
     this.sub.add(onOpenAddTasksFromShortVersion)
+  }
+  onInitStartEndDate() {
+    let step = 1;
+    let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany() ? this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
+    if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') step = 1;
+    if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') step = 5;
+    if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') step = 10;
+    if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') step = 15;
+    let startDate = new Date();
+    startDate.setMinutes(Math.ceil(startDate.getMinutes() / step) * step);
+    let endDate = new Date(startDate.getTime() + step * 60000);
+    this.modelForm.controls["startDate"].setValue(startDate.getTime());
+    this.modelForm.controls["endDate"].setValue(endDate.getTime());
   }
   setTab(data) {
     this.activeTab = data['nextId'];
@@ -331,6 +345,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     this.submitted = false;
     this.modelForm.reset();
     this.modelForm.patchValue({ taskStatus: "OPEN", attachFileIds: [] });
+    this.onInitStartEndDate();
     this.files = [];
     this.selectedAssignedUsers = [];
     this.selectedType = null;

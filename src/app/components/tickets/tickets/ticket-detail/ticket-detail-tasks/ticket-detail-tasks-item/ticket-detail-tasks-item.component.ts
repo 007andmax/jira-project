@@ -131,6 +131,10 @@ export class TicketDetailTasksItemComponent {
     this.assignedUsers = data;
     this.save({ assignedUsersIds: this.item.assignedUsersIds });
   }
+  onKeyEnter(event?) {
+    console.log("event", event);
+    event.blur();
+  }
   editTitle() {
     this.save({ title: this.item.title });
   }

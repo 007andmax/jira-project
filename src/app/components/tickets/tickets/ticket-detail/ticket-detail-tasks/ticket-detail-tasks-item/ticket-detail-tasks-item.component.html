@@ -42,7 +42,7 @@
             maxlength="500"
             minlength="1"
             appKeyUpEnter
-            (onChange)="editTitle()"
+            (onChange)="onKeyEnter($event)"
             (blur)="editTitle()"
             *ngIf="!(!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED')"
         >
