@@ -59,7 +59,7 @@ export class TaskHeaderAddComponent {
     if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') step = 10;
     if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') step = 15;
     let startDate = new Date();
-    startDate.setMinutes(Math.ceil(startDate.getMinutes() / step) * step);
+    //startDate.setMinutes(Math.ceil(startDate.getMinutes() / step) * step);
     let endDate = new Date(startDate.getTime() + step * 60000);
 
     this.modelForm = this.formBuilder.group({
@@ -166,7 +166,7 @@ export class TaskHeaderAddComponent {
     if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') step = 10;
     if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') step = 15;
     let startDate = new Date();
-    startDate.setMinutes(Math.ceil(startDate.getMinutes() / step) * step);
+    //  startDate.setMinutes(Math.ceil(startDate.getMinutes() / step) * step);
     let endDate = new Date(startDate.getTime() + step * 60000);
 
     this.modelForm.patchValue({

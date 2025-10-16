@@ -169,7 +169,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') step = 10;
     if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') step = 15;
     let startDate = new Date();
-    startDate.setMinutes(Math.ceil(startDate.getMinutes() / step) * step);
+    // startDate.setMinutes(Math.ceil(startDate.getMinutes() / step) * step);
     let endDate = new Date(startDate.getTime() + step * 60000);
     this.modelForm.controls["startDate"].setValue(startDate.getTime());
     this.modelForm.controls["endDate"].setValue(endDate.getTime());
