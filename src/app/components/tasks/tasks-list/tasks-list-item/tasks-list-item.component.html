@@ -46,7 +46,7 @@
             [type]="'DETAIL_TICKET'"
             [editStart]="item.startDate"
             [editEnd]="item.endDate"
-            [isDisabled]="item.hasInvoice || item.taskStatus == 'CLOSED'"
+            [isDisabled]="item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null"
             (selectedDate)="filterByDate($event)"
             (onCloseDropDown)="onCloseDatePicker($event)"
         ></app-tasks-date-picker>
@@ -59,7 +59,7 @@
             [type]="'TASKS'"
             [users]="listTechUsers"
             [container]="'body'"
-            [isDisabled]="item.hasInvoice || item.taskStatus == 'CLOSED'"
+            [isDisabled]="item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null"
             (usersChange)="onChangeUser($event)"
         ></app-tech-users>
     </div>

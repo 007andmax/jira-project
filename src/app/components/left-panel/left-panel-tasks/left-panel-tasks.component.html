@@ -59,7 +59,7 @@
             (click)="setStatus(item)"
         >
             <div
-                [ngClass]="{'active': filter.filter === item.value }"
+                [ngClass]="{'active': filter.filter === item.value || (item.value === 'ARCHIVED' && filter.archived)}"
                 class="app-left-panel__filter-menu-expand-link"
                 [textContent]="item.title"
             ></div>

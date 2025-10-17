@@ -65,6 +65,8 @@
             <app-tasks-date-picker
                 #datePicker
                 [container]="'body'"
+                [editStart]="modelForm?.value.startDate"
+                [editEnd]="modelForm?.value.endDate"
                 [validate]="!(submitted && f2.startDate.errors)"
                 [errorMessage]="'Start date is required'"
                 (selectedDate)="filterByDate($event)"

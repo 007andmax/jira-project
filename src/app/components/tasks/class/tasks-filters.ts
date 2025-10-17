@@ -4,11 +4,13 @@ import { Task } from "./task";
 export class TasksFilters {
     techUser: any;
     filter: string;
+    archived: boolean = false;
     constructor() {
     }
     public setFilterData(data) {
         this.techUser = data.techUser;
         this.filter = data.filter;
+        this.archived = data.archived;
     }
     public setTechUser(data) {
         this.techUser = data;
@@ -16,9 +18,13 @@ export class TasksFilters {
     public setFilter(data) {
         this.filter = data;
     }
+    public setArchived(data: boolean) {
+        this.archived = data;
+    }
     checkFilterUse(task: Task) {
         let selectedTechUser = true;
         let selectedFilter = true;
+        let selectedIsArchive = true;
         if (this.techUser) {
             selectedTechUser = (task.assignedUsersIds.some(item => item === this.techUser.id));
         }
@@ -26,6 +32,9 @@ export class TasksFilters {
             if (this.filter == 'UPCOMING' || this.filter == 'OVERDUE') selectedFilter = (task.taskStatus == 'OPEN');
             if (this.filter == 'COMPLETED') selectedFilter = (task.taskStatus == 'CLOSED');
         }
-        return selectedTechUser && selectedFilter;
+        if (this.archived) {
+            selectedIsArchive = (task.archivedAt != null);
+        }
+        return selectedTechUser && selectedFilter && selectedIsArchive;
     }
 }

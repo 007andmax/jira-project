@@ -76,7 +76,7 @@ export class TasksEditComponent extends TasksAddComponent {
           attachFileIds: task.attachments.map(item => item.file.id),
           taskTicketId: this.task.taskTicketId
         });
-        if (this.task.hasInvoice || this.task.taskStatus === 'CLOSED') {
+        if (this.task.hasInvoice || this.task.taskStatus === 'CLOSED' || this.task.archivedAt !== null) {
           this.modelForm.get('title')?.disable();
         } else {
           this.modelForm.get('title')?.enable();
@@ -140,6 +140,10 @@ export class TasksEditComponent extends TasksAddComponent {
         endDate: this.modelForm.controls["endDate"].value
       });
     }
+  }
+
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   onChangeTitle() {
     this.editTask({ title: this.modelForm.controls["title"].value });
@@ -209,6 +213,19 @@ export class TasksEditComponent extends TasksAddComponent {
     } else {
       this.editTask({ companyId: data ? data.id : "" });
     }
+  }
+  archiveTask() {
+    if (this.currentService.item) return;
+    this.tasksService.archiveTask(this.task.id).subscribe(res => {
+      this.task.archivedAt = new Date().getTime();
+      this.cd.detectChanges();
+    });
+  }
+  deArchiveTask() {
+    this.tasksService.deArchiveTask(this.task.id).subscribe(res => {
+      this.task.archivedAt = null;
+      this.cd.detectChanges();
+    });
   }
   public onSelectTechUser(items) {
     this.modelForm.controls["assignedUsersIds"].setValue(items.map(item => item.id));

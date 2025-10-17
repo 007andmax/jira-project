@@ -25,7 +25,7 @@
             >
                 <div class="qt-df qt-ai-c">
                     <div
-                        *ngIf="!task.hasInvoice && task.taskStatus == 'OPEN'"
+                        *ngIf="!task.hasInvoice && task.taskStatus == 'OPEN' && task.archivedAt == null"
                         class="qt-button qt-ml-12"
                         appDisabledBtn
                         #saveBtn="disabled"
@@ -36,7 +36,7 @@
                         <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
                     </div>
                     <div
-                        *ngIf="!task.hasInvoice && task.taskStatus == 'CLOSED'"
+                        *ngIf="!task.hasInvoice && task.taskStatus == 'CLOSED' && task.archivedAt == null"
                         class="qt-button qt-ml-12"
                         appDisabledBtn
                         #saveBtn="disabled"
@@ -47,7 +47,7 @@
                         <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
                     </div>
                     <div
-                        *ngIf="!task.hasInvoice"
+                        *ngIf="!task.hasInvoice && getPermissions('DELETE_TASK')"
                         class="qt-button --square-md --gray pointer qt-mr-8 qt-ml-8"
                         ngbDropdownToggle
                     >
@@ -70,6 +70,37 @@
                         >
                             <li
                                 class="trash-user-list qt-dropdown-menu__top-line"
+                                (click)="archiveTask()"
+                                *ngIf="task.archivedAt === null && task.taskStatus == 'OPEN'"
+                                placement="top"
+                                ngbTooltip="The task cannot be archived. You have to remove the service."
+                                [disableTooltip]="!currentService.item"
+                            >
+                                <a
+                                    tabindex="-1"
+                                    class="dropdown-item trash-user qt-df qt-ai-c"
+                                    href="javascript:void(0)"
+                                >
+                                    <i class="qt-dib qt-icon icon__archive-tasks qt-icon__red-600 qt-bg-contain qt-sz-20 qt-mr-12"></i>
+                                    <span class="qt-color-red-600 qt-lh-1">Archive Task</span>
+                                </a>
+                            </li>
+                            <li
+                                class="trash-user-list qt-dropdown-menu__top-line"
+                                (click)="deArchiveTask()"
+                                *ngIf="task.archivedAt !== null"
+                            >
+                                <a
+                                    tabindex="-1"
+                                    class="dropdown-item trash-user qt-df qt-ai-c"
+                                    href="javascript:void(0)"
+                                >
+                                    <i class="qt-dib qt-icon icon__updates qt-icon__red-600 qt-bg-contain qt-sz-20 qt-mr-12"></i>
+                                    <span class="qt-color-red-600 qt-lh-1">Restore Task</span>
+                                </a>
+                            </li>
+                            <li
+                                class="trash-user-list qt-dropdown-menu__top-line"
                                 (click)="deleteTask()"
                             >
                                 <a
@@ -87,13 +118,39 @@
             </div>
         </div>
         <div class="qt-aside-modern__content new-companies-content__modal--content">
+            <div
+                class="qt-inputs-row --sm --required"
+                *ngIf="task.archivedAt"
+            >
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Archived by</div>
+                    <div
+                        class="qt-w100 qt-df qt-ai-c"
+                        [textContent]="task.archivedByUser"
+                    >
+                    </div>
+                </div>
+            </div>
+            <div
+                class="qt-inputs-row --sm --required"
+                *ngIf="task.archivedAt"
+            >
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Archived at</div>
+                    <div
+                        class="qt-w100 qt-df qt-ai-c"
+                        [textContent]="task.parseArchivedAt()"
+                    >
+                    </div>
+                </div>
+            </div>
             <div class="qt-inputs-row --sm --required">
                 <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Task Name</div>
                     <div class="qt-w100">
                         <input
                             [ngClass]="{'--input-error' : submitted && f2.title.errors,
-                                '--disabled': task.hasInvoice || task.taskStatus == 'CLOSED'
+                                '--disabled': task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt !== null
                             }"
                             type="text"
                             formControlName="title"
@@ -102,7 +159,7 @@
                             (blur)="onChangeTitle()"
                             (keydown)="onKeyDown($event)"
                             class="--sm"
-                            [disabled]="task.hasInvoice || task.taskStatus == 'CLOSED'"
+                            [disabled]="task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt !== null"
                         >
                         <app-mat-error
                             class="invalid-feedback --pos-static qt-dib qt-mt-8"
@@ -139,7 +196,7 @@
                         [field]="'name'"
                         [search]="true"
                         [change]="true"
-                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED'"
+                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt !== null"
                         (onSelectedItem)="onSelectCompany($event)"
                         [heightInput]="'32px'"
                         [dropdownHeight]="'228px'"
@@ -157,7 +214,7 @@
                             [placeholder]="'Select Tech User'"
                             [placement]="'bottom-right'"
                             [list]="techUsersList"
-                            [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED'"
+                            [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt !== null"
                             [validate]="!(submitted && f2.assignedUsersIds.errors)"
                             [selectedTag]="selectedAssignedUsers"
                             (filterChange)="onSelectTechUser($event)"
@@ -176,7 +233,7 @@
                     <div class="qt-input-block__label">Associate Ticket</div>
                     <app-tasks-add-associate-tickets
                         [class]="['drop-down-sm']"
-                        [isDisabled]="!f2.companyId.value || task.hasInvoice || task.taskStatus == 'CLOSED'"
+                        [isDisabled]="!f2.companyId.value || task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt !== null"
                         [selectedItem]="selectedTicket"
                         (onSelectedItem)="setAssociatedTicketId($event)"
                     ></app-tasks-add-associate-tickets>
@@ -207,7 +264,7 @@
                         [isBlockClear]="false"
                         [itemList]="servicesList"
                         [editItem]="currentService.item"
-                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED' || !selectedCompany"
+                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED' || !selectedCompany || task.archivedAt !== null"
                         (selectedServicesItem)="onSelectService($event)"
                     ></app-services-list>
                 </div>
@@ -224,7 +281,7 @@
                         [change]="true"
                         [editItem]="selectedType"
                         [isBlockClear]="true"
-                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED'"
+                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt !== null"
                         [errorMessage]="'Task type is required'"
                         [validate]="!(submitted && f2.type.errors)"
                         (onSelectedItem)="onSelectType($event)"
@@ -244,7 +301,7 @@
                         [editEnd]="modelForm?.value.endDate"
                         [validate]="!(submitted && f2.startDate.errors)"
                         [errorMessage]="'Start date is required'"
-                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED'"
+                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt !== null"
                         (selectedDate)="filterByDate($event)"
                         (onCloseDropDown)="onCloseDatePicker($event)"
                     ></app-tasks-date-picker>
@@ -262,7 +319,7 @@
                         [editMode]="true"
                         [editDate]="task.dueDate"
                         [container]="'body'"
-                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED'"
+                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt !== null"
                         (onChange)="onChangeDueDate($event)"
                     ></app-date-picker>
                 </div>

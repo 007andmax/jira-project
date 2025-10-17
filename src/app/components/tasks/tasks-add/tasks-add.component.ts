@@ -18,6 +18,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { PreviewAttachmentStateService } from '../../tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
 import { ServicesListComponent } from '../../shared/services-list/services-list.component';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-tasks-add',
@@ -94,6 +95,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     public modalService: NgbModal,
     public ticketsService: TicketsService,
     public previewAttachmentStateService: PreviewAttachmentStateService,
+    public permissionsService: PermissionsService,
   ) { }
 
   ngOnInit() {
