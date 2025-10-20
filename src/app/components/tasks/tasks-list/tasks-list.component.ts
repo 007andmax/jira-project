@@ -62,6 +62,12 @@ export class TasksListComponent implements OnInit, OnDestroy {
           this.list.splice(index, 1);
         }
       }
+      if (data.action === 'TASK_ARCHIVED') {
+        let index = this.list.findIndex(item => item.id == data.data);
+        if (index > -1 && !this.filter.archived && this.filter.filter) {
+          this.list.splice(index, 1);
+        }
+      }
       this.cd.detectChanges();
     })
     this.sub.add(getChangeCompanies);
