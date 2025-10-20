@@ -268,6 +268,7 @@ export class TasksEditComponent extends TasksAddComponent {
     // this.isInitEditNote = false;
   }
   deleteTask() {
+    if (this.currentService.item || this.task.taskStatus == 'OPEN') return;
     this.confirmStateService.setConfirmAction(DELETE_TASK);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `The Task has been successfully deleted`;

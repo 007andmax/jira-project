@@ -47,7 +47,7 @@
                         <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
                     </div>
                     <div
-                        *ngIf="!task.hasInvoice && getPermissions('DELETE_TASK')"
+                        *ngIf="!task.hasInvoice"
                         class="qt-button --square-md --gray pointer qt-mr-8 qt-ml-8"
                         ngbDropdownToggle
                     >
@@ -69,6 +69,7 @@
                             class="dropdown-qt"
                         >
                             <li
+                                [ngClass]="{'disabled-archive-task': currentService.item}"
                                 class="trash-user-list qt-dropdown-menu__top-line"
                                 (click)="archiveTask()"
                                 *ngIf="task.archivedAt === null && task.taskStatus == 'OPEN'"
@@ -81,8 +82,20 @@
                                     class="dropdown-item trash-user qt-df qt-ai-c"
                                     href="javascript:void(0)"
                                 >
-                                    <i class="qt-dib qt-icon icon__archive-tasks qt-icon__red-600 qt-bg-contain qt-sz-20 qt-mr-12"></i>
-                                    <span class="qt-color-red-600 qt-lh-1">Archive Task</span>
+                                    <i
+                                        [ngClass]="{'qt-icon__red-600':!currentService.item,
+                                            'qt-icon__gray-400':currentService.item
+                                        }"
+                                        class="qt-dib qt-icon icon__archive-tasks  qt-bg-contain qt-sz-20 qt-mr-12"
+                                    ></i>
+                                    <span
+                                        [ngClass]="{'qt-color-red-600':!currentService.item,
+                                            'qt-color-gray-400':currentService.item
+                                        }"
+                                        class="qt-lh-1"
+                                    >
+                                        Archive Task
+                                    </span>
                                 </a>
                             </li>
                             <li
@@ -100,16 +113,33 @@
                                 </a>
                             </li>
                             <li
+                                [ngClass]="{'disabled-archive-task': currentService.item}"
+                                *ngIf="getPermissions('DELETE_TASK') && task.taskStatus == 'OPEN'"
                                 class="trash-user-list qt-dropdown-menu__top-line"
                                 (click)="deleteTask()"
+                                placement="top"
+                                ngbTooltip="The task cannon be deleted. You have to remove the service"
+                                [disableTooltip]="!currentService.item"
                             >
                                 <a
                                     tabindex="-1"
                                     class="dropdown-item trash-user qt-df qt-ai-c"
                                     href="javascript:void(0)"
                                 >
-                                    <i class="qt-dib qt-icon icon__delete qt-icon__red-600 qt-bg-contain qt-sz-20 qt-mr-12"></i>
-                                    <span class="qt-color-red-600 qt-lh-1">Delete Task</span>
+                                    <i
+                                        [ngClass]="{'qt-icon__red-600':!currentService.item,
+                                            'qt-icon__gray-400':currentService.item
+                                        }"
+                                        class="qt-dib qt-icon icon__delete qt-bg-contain qt-sz-20 qt-mr-12"
+                                    ></i>
+                                    <span
+                                        [ngClass]="{'qt-color-red-600':!currentService.item,
+                                            'qt-color-gray-400':currentService.item
+                                        }"
+                                        class="qt-lh-1"
+                                    >
+                                        Delete Task
+                                    </span>
                                 </a>
                             </li>
                         </ul>

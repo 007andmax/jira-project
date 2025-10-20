@@ -43,7 +43,7 @@ describe('TaskHeaderAddComponent unit test', () => {
           onActivateTick: true
         }),
         NoopAnimationsModule],
-      declarations: [TaskHeaderAddTypeComponent
+      declarations: [TaskHeaderAddComponent
       ]
     }).compileComponents();
 
@@ -67,7 +67,7 @@ describe('TaskHeaderAddComponent unit test', () => {
     const fixture = TestBed.createComponent(TaskHeaderAddComponent);
     const com = fixture.debugElement.componentInstance;
     com.initModelForm();
-    com.filterByDate({ startDate: 1, endDate: 2 });
+    com.filterByDate({ start: 1, end: 2 });
     expect(com.modelForm.controls["startDate"].value).toEqual(1);
     expect(com.modelForm.controls["endDate"].value).toEqual(2);
   });
