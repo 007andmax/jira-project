@@ -22,6 +22,7 @@ import { TicketProfileTask } from '../../../class/ticket-profile-task';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 import { TicketProfileFormService } from '../../../ticket-edit-aside/class/ticket-profile-form-service';
 import { TasksDatePickerComponent } from 'src/app/components/tasks/tasks-date-picker/tasks-date-picker.component';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-ticket-detail-tasks-item',
@@ -37,7 +38,6 @@ export class TicketDetailTasksItemComponent {
   assignedUsers = [];
   listTechUsers = [];
   selectedType: CompanySetting;
-  currentService: TicketProfileFormService = new TicketProfileFormService();
   @Input() parseStartDate: Function;
   @ViewChild('techUsers', { static: true }) techUsers: TechUsersComponent;
   @ViewChild('dateDp', { static: true }) dateDp: TasksDatePickerComponent;
@@ -53,15 +53,11 @@ export class TicketDetailTasksItemComponent {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     public cd: ChangeDetectorRef,
+    public permissionsService: PermissionsService,
   ) { }
 
   ngOnInit() {
     this.selectedType = this.listTypes.find(item => item.value == this.item.type);
-    let service = this.item.ticketUpdateList.find(item => item.type == "SERVICE");
-    if (service) {
-      this.currentService.setItem(service.services[0].item);
-      this.currentService.setValidate(true);
-    }
     this.dateDp.setEditDates(this.item.startDate, this.item.endDate);
     if (this.onGetTechUsers().length > 0) this.onSetAssignedUsers();
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
@@ -109,14 +105,6 @@ export class TicketDetailTasksItemComponent {
     }
   }
   onCloseDatePicker(event) {
-    if (event && this.currentService.item) {
-      let update = this.item.ticketUpdateList.find(item => item.type == "SERVICE");
-      this.currentService.setDurationStart(this.item.startDate);
-      this.currentService.setDurationEnd(this.item.endDate);
-      this.currentService.calculateQuantity();
-      this.ticketsService.updateExpense(this.currentService.getDateForUpdate(this.currentService.getDateForRequest(this.usersStateService.getCurrentUser(), update.services[0].id), update.id)).subscribe(res => {
-      });
-    }
     if (event) this.save({
       startDate: this.item.startDate,
       endDate: this.item.endDate
@@ -142,14 +130,18 @@ export class TicketDetailTasksItemComponent {
     this.item.onInitEdit(false);
     this.tasksStateService.openEditAside(this.item);
   }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
   remove(item) {
+    if (this.item.taskStatus == 'CLOSED') return;
     this.ticketStateService.setTaskForRemove(item);
     this.confirmStateService.setConfirmAction(REMOVE_TASK_TICKET);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `Are you sure you want to delete this task?`;
   }
   setStatus(taskStatus) {
-    if (this.item.hasInvoice) return;
+    if (this.item.hasInvoice || this.item.archivedAt) return;
     this.tasksService.changeStatusTask(this.item.id, taskStatus).subscribe(res => {
       this.item.taskStatus = taskStatus;
     });

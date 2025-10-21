@@ -47,14 +47,14 @@
                         <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
                     </div>
                     <div
-                        *ngIf="!task.hasInvoice"
-                        class="qt-button --square-md --gray pointer qt-mr-8 qt-ml-8"
+                        *ngIf="!task.hasInvoice && task.taskStatus == 'OPEN'"
+                        class="qt-button --square-md --gray pointer qt-ml-8"
                         ngbDropdownToggle
                     >
                         <div class="qt-icon icon__more qt-sz-16 qt-bg-contain"></div>
                     </div>
                     <div
-                        class="qt-button --square-md --gray pointer"
+                        class="qt-button --square-md --gray pointer qt-ml-8"
                         (click)="close()"
                     >
                         <div class="qt-icon icon__close qt-sz-16 pointer"></div>
@@ -118,7 +118,7 @@
                                 class="trash-user-list qt-dropdown-menu__top-line"
                                 (click)="deleteTask()"
                                 placement="top"
-                                ngbTooltip="The task cannon be deleted. You have to remove the service"
+                                ngbTooltip="The task cannot be deleted. You have to remove the service"
                                 [disableTooltip]="!currentService.item"
                             >
                                 <a
@@ -380,11 +380,11 @@
                     <ng-template ngbNavContent>
                         <div
                             class="qt-pt-8 qt-pb-8"
-                            *ngIf="task.hasInvoice || task.taskStatus == 'CLOSED'"
+                            *ngIf="task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt"
                             [innerHTML]="task.description"
                         ></div>
                         <angular-editor
-                            *ngIf="!task.hasInvoice && task.taskStatus == 'OPEN'"
+                            *ngIf="!task.hasInvoice && task.taskStatus == 'OPEN' && task.archivedAt === null"
                             class="edit-note-container"
                             [init]="isInitEditNote"
                             appClickOtside
@@ -416,7 +416,7 @@
                     class="qt-button-square pointer tasks-add__attach-button"
                     placement="top"
                     ngbTooltip="Add Attachment"
-                    *ngIf="!task.hasInvoice && task.taskStatus == 'OPEN'"
+                    *ngIf="!task.hasInvoice && task.taskStatus == 'OPEN' && task.archivedAt === null"
                 >
                     <input
                         class="qt-pointer"

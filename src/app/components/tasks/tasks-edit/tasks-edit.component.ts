@@ -5,7 +5,7 @@ import { Company } from 'src/app/interfaces/company/company';
 import { Service } from 'src/app/interfaces/service/service';
 import { CompanySetting } from '../../companies/class/company-setting';
 import { forkJoin } from 'rxjs';
-import { DELETE_TASK } from 'src/app/const/confirm';
+import { ARCHIVE_TASK, DELETE_TASK } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { S } from '@angular/cdk/keycodes';
 import { TicketProfileFormService } from '../../tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
@@ -113,6 +113,7 @@ export class TasksEditComponent extends TasksAddComponent {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_TASK) this.onDeleteTask();
+        if (this.confirmStateService.getConfirmAction() === ARCHIVE_TASK) this.onArchiveTask();
       }
     })
     this.sub.add(getConfirm);
@@ -216,8 +217,15 @@ export class TasksEditComponent extends TasksAddComponent {
   }
   archiveTask() {
     if (this.currentService.item) return;
+    this.confirmStateService.setConfirmAction(ARCHIVE_TASK);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `The Task has been successfully archived`;
+    this.cd.detectChanges();
+  }
+  onArchiveTask() {
     this.tasksService.archiveTask(this.task.id).subscribe(res => {
       this.task.archivedAt = new Date().getTime();
+      this.close();
       this.cd.detectChanges();
     });
   }

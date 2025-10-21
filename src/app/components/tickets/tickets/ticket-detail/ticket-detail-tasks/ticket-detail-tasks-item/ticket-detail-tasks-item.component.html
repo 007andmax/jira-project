@@ -97,11 +97,14 @@
         [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null"
     ></app-tech-users>
     <app-dynamic-tooltip
-        [content]="'Delete task'"
+        [content]="item.taskStatus == 'CLOSED' ? 'You cannot delete the closed task' : 'Delete task'"
         [position]="'top'"
         #dateTooltip
     ></app-dynamic-tooltip>
     <div
+        [ngClass]="{'qt-icon__gray-400':item.taskStatus == 'CLOSED',
+                                            'qt-icon__gray-600':item.taskStatus == 'OPEN'
+                                        }"
         class="ticket-updates__delete qt-icon icon__delete"
         *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && !item.hasInvoice"
         (click)="remove(item)"

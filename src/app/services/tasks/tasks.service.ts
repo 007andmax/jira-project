@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { environment } from 'src/environments/environment';
 
@@ -27,8 +27,15 @@ export class TasksService {
     return this.http.post(`${this.apiUrl}tasks`, data);
   }
   deleteTask(taskId) {
+    this.appStateService.setServerError(true);
     return this.http.delete(`${this.apiUrl}tasks/${taskId}`).pipe(
+      catchError((err) => {
+        this.appStateService.setServerError(false);
+        this.appStateService.changeDetectorRef();
+        throw err;
+      }),
       tap(data => {
+        this.appStateService.setServerError(false);
         this.toastrService.success("The Task has been successfully deleted");
         this.appStateService.changeDetectorRef();
         return data;
