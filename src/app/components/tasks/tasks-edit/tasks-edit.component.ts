@@ -276,7 +276,7 @@ export class TasksEditComponent extends TasksAddComponent {
     // this.isInitEditNote = false;
   }
   deleteTask() {
-    if (this.currentService.item || this.task.taskStatus == 'OPEN') return;
+    if (this.currentService.item) return;
     this.confirmStateService.setConfirmAction(DELETE_TASK);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `The Task has been successfully deleted`;
@@ -328,12 +328,12 @@ export class TasksEditComponent extends TasksAddComponent {
     //   this.saveBtn.setDisabled(true);
     if (this.currentService.item && this.currentService.item.versionedId) this.modelForm.controls["ticketUpdates"].setValue([this.getDataForUpdateService()])
     this.tasksService.editTask(this.task.id, data).subscribe(res => {
-      if ((this.isInitTitle || this.isInitEditNote) && this.saveBtn.isBlock()) {
+      if ((this.isInitTitle || this.isInitEditNote) && this.saveBtn && this.saveBtn.isBlock()) {
         this.isInitEditNote = false;
         this.isInitTitle = false;
         this.closeTask();
       } else {
-        this.saveBtn.setDisabled(false);
+        if (this.saveBtn) this.saveBtn.setDisabled(false);
         this.isInitTitle = false;
         this.isInitEditNote = false;
       }
@@ -342,6 +342,7 @@ export class TasksEditComponent extends TasksAddComponent {
     })
   }
   close() {
+    if (this.isInitEditNote) this.onChangeDescription();
     this.currentService = new TicketProfileFormService();
     this.opened = false;
     this.submitted = false;

@@ -57,7 +57,12 @@ export class TasksService {
     return this.http.get(`${this.apiUrl}tasks/statistics?userId=${userId}`);
   }
   archiveTask(id) {
-    return this.http.put(`${this.apiUrl}tasks/archive/${id}`, {});
+    return this.http.put(`${this.apiUrl}tasks/archive/${id}`, {}).pipe(
+      tap(data => {
+        this.toastrService.success("The task has been successfully archived");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   deArchiveTask(id) {
     return this.http.put(`${this.apiUrl}tasks/dearchive/${id}`, {});
