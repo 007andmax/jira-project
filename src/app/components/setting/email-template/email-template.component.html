@@ -232,7 +232,7 @@
                                             <div
                                                 *ngIf="
                               emailPages &&
-                              emailPages.activeAndNotDefault[template]
+                             emailPages.activeAndNotDefault[template] && emailPages.activeAndNotDefault[template]
                                 .isNotDefault
                             "
                                                 (click)="restoreDefault(template)"
