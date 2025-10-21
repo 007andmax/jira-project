@@ -51,7 +51,7 @@
                                         ></app-dynamic-tooltip>
                                         <i
                                             class="qt-icon icon__check qt-icon__green-600 qt-sz-20 qt-dib"
-                                            *ngIf="emailPages && emailPages.activeAndNotDefault[template].isActive"
+                                            *ngIf="emailPages && emailPages.activeAndNotDefault[template] && emailPages.activeAndNotDefault[template].isActive"
                                             (mouseenter)="activeTooltip.show($event.target)"
                                             (mouseleave)="activeTooltip.hide()"
                                         ></i>
@@ -78,7 +78,7 @@
                                             <div
                                                 *ngIf="
                           emailPages &&
-                          emailPages.activeAndNotDefault[template]
+                         emailPages.activeAndNotDefault[template] && emailPages.activeAndNotDefault[template]
                             .isNotDefault
                         "
                                                 (mouseenter)="resetTooltip.show($event.target)"
@@ -128,7 +128,7 @@
                                         ></app-dynamic-tooltip>
                                         <i
                                             class="qt-icon icon__check qt-icon__green-600 qt-sz-20 qt-dib"
-                                            *ngIf="emailPages && emailPages.activeAndNotDefault[template].isActive"
+                                            *ngIf="emailPages && emailPages.activeAndNotDefault[template] && emailPages.activeAndNotDefault[template].isActive"
                                             (mouseenter)="activeTooltip.show($event.target)"
                                             (mouseleave)="activeTooltip.hide()"
                                         ></i>
@@ -155,7 +155,7 @@
                                             <div
                                                 *ngIf="
                               emailPages &&
-                              emailPages.activeAndNotDefault[template]
+                             emailPages.activeAndNotDefault[template] && emailPages.activeAndNotDefault[template]
                                 .isNotDefault
                             "
                                                 (click)="restoreDefault(template)"
@@ -282,7 +282,7 @@
                                         ></app-dynamic-tooltip>
                                         <i
                                             class="qt-icon icon__check qt-icon__green-600 qt-sz-20 qt-dib"
-                                            *ngIf="emailPages && emailPages.activeAndNotDefault[template].isActive"
+                                            *ngIf="emailPages && emailPages.activeAndNotDefault[template] && emailPages.activeAndNotDefault[template].isActive"
                                             (mouseenter)="activeTooltip.show($event.target)"
                                             (mouseleave)="activeTooltip.hide()"
                                         ></i>
@@ -309,7 +309,7 @@
                                             <div
                                                 *ngIf="
                               emailPages &&
-                              emailPages.activeAndNotDefault[template]
+                             emailPages.activeAndNotDefault[template] && emailPages.activeAndNotDefault[template]
                                 .isNotDefault
                             "
                                                 (click)="restoreDefault(template)"
