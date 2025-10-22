@@ -173,9 +173,10 @@
                                 [textContent]="'Contract'"
                             ></div>
                             <div
-                                class="billable-item-table__ticket no-edit-ticket"
+                                class="billable-item-table__ticket pointer is-exist-ticket-number"
                                 *ngIf="item.isForTask"
                                 [textContent]="item.type"
+                                (click)="editTask(item.taskId)"
                             ></div>
                             <div
                                 class="billable-item-table__subject"

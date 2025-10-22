@@ -128,6 +128,15 @@
                         class="qt-ml-16 notification-item__date"
                         [textContent]="item.date_text"
                     ></span>
+                    <div
+                        class="qt-mt-8"
+                        *ngIf="item.relatedEntityDeleted"
+                    >
+                        <span class="tag__modern deleted-entity">
+                            <div class="qt-icon icon__info qt-sz-16 qt-bg-contain qt-mr-4 qt-icon__red-600"></div>
+                            {{item.relatedEntityDeletedText}}
+                        </span>
+                    </div>
                 </div>
                 <!-- <div
                     class="notification-item__subject qt-df qt-ai-c qt-mb-8"

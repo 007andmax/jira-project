@@ -18,6 +18,7 @@ export class BillableProfileTicket {
     ticketNumber: string;
     selected: boolean = false;
     isForTask: boolean = false;
+    taskId: string = '';
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];

@@ -75,6 +75,12 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
           this.list.splice(index, 1);
         }
       }
+      if (data.action === 'TASK_ARCHIVED') {
+        let index = this.list.findIndex(item => item.id == data.data);
+        if (index > -1) {
+          this.list.splice(index, 1);
+        }
+      }
       this.ticketStateService.setListTasks(this.list);
       this.cd.detectChanges();
     })

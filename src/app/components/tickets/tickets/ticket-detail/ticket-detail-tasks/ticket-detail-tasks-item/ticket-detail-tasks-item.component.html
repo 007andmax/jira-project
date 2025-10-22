@@ -108,7 +108,8 @@
         class="ticket-updates__delete qt-icon icon__delete"
         *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && !item.hasInvoice"
         (click)="remove(item)"
-        (mouseenter)="dateTooltip.show($event.target)"
-        (mouseleave)="dateTooltip.hide()"
+        placement="top"
+        container="body"
+        [ngbTooltip]="item.taskStatus == 'CLOSED' ? 'You cannot delete the closed task' : 'Delete task'"
     ></div>
 </div>

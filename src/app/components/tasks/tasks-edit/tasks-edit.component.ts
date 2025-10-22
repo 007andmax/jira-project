@@ -270,6 +270,7 @@ export class TasksEditComponent extends TasksAddComponent {
     });
   }
   onChangeDescription() {
+    console.log("onChangeDescription");
     this.editTask({
       description: this.modelForm.controls["description"].value
     });
@@ -319,7 +320,10 @@ export class TasksEditComponent extends TasksAddComponent {
       this.modelForm.get('title')?.enable();
     });
   }
-
+  onFocusDescription() {
+    console.log("onFocusDescription");
+    this.isInitEditNote = true;
+  }
   editTask(data) {
     this.submitted = true;
     if (this.modelForm.invalid) {
