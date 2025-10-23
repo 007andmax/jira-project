@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { environment } from 'src/environments/environment';
 
@@ -27,8 +27,15 @@ export class TasksService {
     return this.http.post(`${this.apiUrl}tasks`, data);
   }
   deleteTask(taskId) {
+    this.appStateService.setServerError(true);
     return this.http.delete(`${this.apiUrl}tasks/${taskId}`).pipe(
+      catchError((err) => {
+        this.appStateService.setServerError(false);
+        this.appStateService.changeDetectorRef();
+        throw err;
+      }),
       tap(data => {
+        this.appStateService.setServerError(false);
         this.toastrService.success("The Task has been successfully deleted");
         this.appStateService.changeDetectorRef();
         return data;
@@ -40,13 +47,24 @@ export class TasksService {
   changeStatusTask(taskId, status) {
     return this.http.put(`${this.apiUrl}/tasks/${taskId}/status?status=${status}`, {});
   }
-  getTasks(page, techUserId = null, filter = null) {
-    return this.http.get(`${this.apiUrl}tasks?size=10&page=${page}${techUserId ? `&userId=${techUserId}` : ''}${filter ? `&filter=${filter}` : ''}`);
+  getTasks(page, techUserId = null, filter = null, isArchived = false) {
+    return this.http.get(`${this.apiUrl}tasks?size=10&page=${page}${techUserId ? `&userId=${techUserId}` : ''}${filter ? `&filter=${filter}` : ''}${isArchived ? `&archived=true` : ''}`);
   }
   getTaskDetail(taskId) {
     return this.http.get(`${this.apiUrl}tasks/${taskId}`);
   }
   getStatistics(userId) {
     return this.http.get(`${this.apiUrl}tasks/statistics?userId=${userId}`);
+  }
+  archiveTask(id) {
+    return this.http.put(`${this.apiUrl}tasks/archive/${id}`, {}).pipe(
+      tap(data => {
+        this.toastrService.success("The task has been successfully archived");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
+  deArchiveTask(id) {
+    return this.http.put(`${this.apiUrl}tasks/dearchive/${id}`, {});
   }
 }

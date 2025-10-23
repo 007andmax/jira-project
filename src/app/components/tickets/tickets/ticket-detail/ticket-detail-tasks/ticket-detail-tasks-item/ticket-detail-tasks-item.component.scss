@@ -129,3 +129,19 @@
     }
   }
 }
+
+::ng-deep .tab-pane__table-row.add-task-container {
+  .multi-assign-user-container:not(:empty) {
+    width: auto;
+    margin-left: 0;
+  }
+
+  .qt-table-modern__circle-avatar {
+    position: static;
+    margin: 0;
+
+    &:not(:first-child) {
+      margin-left: -12px;
+    }
+  }
+}

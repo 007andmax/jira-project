@@ -15,11 +15,12 @@ import { TechUsersModule } from '../../shared/tech-users/tech-users.module';
 import { TasksDatePickerModule } from '../tasks-date-picker/tasks-date-picker.module';
 import { TaskHeaderAddTypeModule } from './task-header-add-type/task-header-add-type.module';
 import { TaskHeaderAddTypeComponent } from './task-header-add-type/task-header-add-type.component';
+import { TaskHeaderAddComponent } from './task-header-add.component';
 
 
-describe('TaskHeaderAddTypeComponent unit test', () => {
-  let component: TaskHeaderAddTypeComponent;
-  let fixture: ComponentFixture<TaskHeaderAddTypeComponent>;
+describe('TaskHeaderAddComponent unit test', () => {
+  let component: TaskHeaderAddComponent;
+  let fixture: ComponentFixture<TaskHeaderAddComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -42,25 +43,39 @@ describe('TaskHeaderAddTypeComponent unit test', () => {
           onActivateTick: true
         }),
         NoopAnimationsModule],
-      declarations: [TaskHeaderAddTypeComponent
+      declarations: [TaskHeaderAddComponent
       ]
     }).compileComponents();
 
   });
 
   it('check "toggleStatus"', () => {
-    const fixture = TestBed.createComponent(TaskHeaderAddTypeComponent);
+    const fixture = TestBed.createComponent(TaskHeaderAddComponent);
     const com = fixture.debugElement.componentInstance;
     com.initModelForm();
     com.toggleStatus();
     expect(com.modelForm.controls["taskStatus"].value).toEqual("CLOSED");
   });
   it('check "onSelectType"', () => {
-    const fixture = TestBed.createComponent(TaskHeaderAddTypeComponent);
+    const fixture = TestBed.createComponent(TaskHeaderAddComponent);
     const com = fixture.debugElement.componentInstance;
     com.initModelForm();
     com.onSelectType(null);
     expect(com.modelForm.controls["type"].value).toEqual(null);
   });
-
+  it('check "filterByDate"', () => {
+    const fixture = TestBed.createComponent(TaskHeaderAddComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.initModelForm();
+    com.filterByDate({ start: 1, end: 2 });
+    expect(com.modelForm.controls["startDate"].value).toEqual(1);
+    expect(com.modelForm.controls["endDate"].value).toEqual(2);
+  });
+  it('check "onSelectTechUser"', () => {
+    const fixture = TestBed.createComponent(TaskHeaderAddComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.initModelForm();
+    com.onSelectTechUser([{ id: 1 }]);
+    expect(com.modelForm.controls["assignedUsersIds"].value).toEqual([1]);
+  });
 });

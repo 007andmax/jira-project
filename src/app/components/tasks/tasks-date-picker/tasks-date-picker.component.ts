@@ -105,6 +105,14 @@ export class TasksDatePickerComponent extends MultiDatepickerComponent {
       this.toDate = null;
       this.fromDate = date;
     }
+    if (this.fromDate && this.toDate) {
+      if (this.toDate.before(this.fromDate)) {
+        let toDate = this.toDate;
+        let fromDate = this.fromDate;
+        this.fromDate = toDate;
+        this.toDate = fromDate;
+      }
+    }
     this.changeDate();
   }
   changeDate() {

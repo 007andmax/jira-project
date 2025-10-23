@@ -17,6 +17,8 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { PreviewAttachmentStateService } from '../../tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
+import { ServicesListComponent } from '../../shared/services-list/services-list.component';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-tasks-add',
@@ -35,6 +37,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
   new CompanySetting('Phone call', 'Phone call')];
   formatDate: string = FORMAT_DATE_2;
   @ViewChild('saveBtn', { static: false }) saveBtn: DisabledBtnDirective;
+  @ViewChild('servicedp', { static: false }) servicedp: ServicesListComponent;
   sub: Subscription = new Subscription();
   activeTab: string = "description";
   currentService: TicketProfileFormService = new TicketProfileFormService();
@@ -92,6 +95,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     public modalService: NgbModal,
     public ticketsService: TicketsService,
     public previewAttachmentStateService: PreviewAttachmentStateService,
+    public permissionsService: PermissionsService,
   ) { }
 
   ngOnInit() {
@@ -128,6 +132,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     })
     let onOpenAddTasks = this.tasksStateService.onOpenAddTasks.subscribe(res => {
       if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
+      this.onInitStartEndDate();
       this.opened = true;
       // this.getServices();
     })
@@ -158,6 +163,19 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onOpenAddTasksFromShortVersion)
   }
+  onInitStartEndDate() {
+    let step = 1;
+    let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany() ? this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
+    if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') step = 1;
+    if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') step = 5;
+    if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') step = 10;
+    if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') step = 15;
+    let startDate = new Date();
+    // startDate.setMinutes(Math.ceil(startDate.getMinutes() / step) * step);
+    let endDate = new Date(startDate.getTime() + step * 60000);
+    this.modelForm.controls["startDate"].setValue(startDate.getTime());
+    this.modelForm.controls["endDate"].setValue(endDate.getTime());
+  }
   setTab(data) {
     this.activeTab = data['nextId'];
   }
@@ -174,6 +192,9 @@ export class TasksAddComponent implements OnInit, OnDestroy {
   onSelectCompany(data) {
     this.modelForm.controls["companyId"].setValue(data ? data.id : null)
     if (data) this.ticketStateService.getServicesList(data.id);
+    this.servicedp.clearClient();
+    this.currentService.setItem(null);
+    this.currentService.setValidate(false);
   }
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {
@@ -326,6 +347,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     this.submitted = false;
     this.modelForm.reset();
     this.modelForm.patchValue({ taskStatus: "OPEN", attachFileIds: [] });
+    this.onInitStartEndDate();
     this.files = [];
     this.selectedAssignedUsers = [];
     this.selectedType = null;

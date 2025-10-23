@@ -1,3 +1,5 @@
+import * as moment from "moment";
+
 export class Task {
     id: string;
     "dueDate": number;
@@ -16,6 +18,8 @@ export class Task {
     ticketUpdateList: Array<any> = [];
     attachFileIds: Array<string> = [];
     hasInvoice: boolean;
+    archivedAt: number;
+    archivedByUser: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -76,5 +80,8 @@ export class Task {
             attachFileIds: data.attachFileIds && data.attachFileIds.length > 0 ? data.attachFileIds : undefined,
             taskTicketId: data.taskTicketId ? data.taskTicketId : undefined,
         }
+    }
+    public parseArchivedAt() {
+        return moment(this.archivedAt).format('DD MMM YYYY');
     }
 }

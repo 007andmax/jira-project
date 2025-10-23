@@ -42,11 +42,12 @@
             maxlength="500"
             minlength="1"
             appKeyUpEnter
-            (onChange)="editTitle()"
-            *ngIf="!(!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED')"
+            (onChange)="onKeyEnter($event)"
+            (blur)="editTitle()"
+            *ngIf="!(!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null)"
         >
         <span
-            *ngIf="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED'"
+            *ngIf="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null"
             class="form-input  --editable qt-td-l-t qt-w100"
             [textContent]="item.title"
         ></span>
@@ -64,7 +65,7 @@
 <div class="tab-pane__table-cell ticket-status-table__preview qt-pr-8">
     <app-task-header-add-type
         #type
-        [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED'"
+        [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null"
         [selectedType]="selectedType"
         (onChange)="onSelectType($event)"
     ></app-task-header-add-type>
@@ -81,7 +82,7 @@
         [type]="'DETAIL_TICKET'"
         [editStart]="item.startDate"
         [editEnd]="item.endDate"
-        [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED'"
+        [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null"
         (selectedDate)="filterByDate($event)"
         (onCloseDropDown)="onCloseDatePicker($event)"
     ></app-tasks-date-picker>
@@ -93,18 +94,22 @@
         [users]="listTechUsers"
         [container]="'body'"
         (usersChange)="onChangeUser($event)"
-        [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED'"
+        [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null"
     ></app-tech-users>
     <app-dynamic-tooltip
-        [content]="'Delete task'"
+        [content]="item.taskStatus == 'CLOSED' ? 'You cannot delete the closed task' : 'Delete task'"
         [position]="'top'"
         #dateTooltip
     ></app-dynamic-tooltip>
     <div
+        [ngClass]="{'qt-icon__gray-400':item.taskStatus == 'CLOSED',
+                                            'qt-icon__gray-600':item.taskStatus == 'OPEN'
+                                        }"
         class="ticket-updates__delete qt-icon icon__delete"
         *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && !item.hasInvoice"
         (click)="remove(item)"
-        (mouseenter)="dateTooltip.show($event.target)"
-        (mouseleave)="dateTooltip.hide()"
+        placement="top"
+        container="body"
+        [ngbTooltip]="item.taskStatus == 'CLOSED' ? 'You cannot delete the closed task' : 'Delete task'"
     ></div>
 </div>

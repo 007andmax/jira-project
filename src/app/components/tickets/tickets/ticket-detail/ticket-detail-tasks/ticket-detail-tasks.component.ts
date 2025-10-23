@@ -75,6 +75,12 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
           this.list.splice(index, 1);
         }
       }
+      if (data.action === 'TASK_ARCHIVED') {
+        let index = this.list.findIndex(item => item.id == data.data);
+        if (index > -1) {
+          this.list.splice(index, 1);
+        }
+      }
       this.ticketStateService.setListTasks(this.list);
       this.cd.detectChanges();
     })
@@ -153,6 +159,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
       this.addTask.endDate = startDate.getTime() + (step * 60 * 1000);
     }
     if (this.addTask.assignedUsersIds.length == 0) this.addTask.setAssignedUser([this.usersStateService.getCurrentUser().id]);
+    this.addTask.companyId = this.ticketProfile.companyId;
     this.tasksService.addTask(this.addTask.getDataForAdd(this.addTask)).pipe(map((res) => res),
       catchError(error => of(undefined))).subscribe(data => {
         this.showAdd = false;

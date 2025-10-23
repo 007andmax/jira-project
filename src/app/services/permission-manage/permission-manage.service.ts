@@ -109,6 +109,9 @@ export class PermissionManageService {
       'CREATE_TEMPLATE',
       'EDIT_TEMPLATE',
       'DELETE_TEMPLATE'
+    ],
+    "Tasks Area": [
+      'DELETE_TASK'
     ]
   };
 

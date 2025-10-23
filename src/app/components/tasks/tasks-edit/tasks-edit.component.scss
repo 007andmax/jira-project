@@ -282,3 +282,9 @@ form {
      border-color: $gray-200;
    }
  }
+ .disabled-archive-task {
+   cursor: default;
+   a {
+      cursor: default;
+   }
+ }

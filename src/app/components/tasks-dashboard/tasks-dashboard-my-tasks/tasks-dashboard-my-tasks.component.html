@@ -25,28 +25,74 @@
         (navChange)="setTab($event)"
     >
         <!-- Profile -->
-        <li class="dashboard-tabs__item" [ngbNavItem]="'all'">
-            <a class="dashboard-tabs__item-link" ngbNavLink>All</a>
+        <li
+            class="dashboard-tabs__item"
+            [ngbNavItem]="'all'"
+        >
+            <a
+                class="dashboard-tabs__item-link"
+                ngbNavLink
+            >
+                All
+            </a>
             <ng-template ngbNavContent>
                 <app-tasks-dashboard-my-tasks-list></app-tasks-dashboard-my-tasks-list>
             </ng-template>
         </li>
-        <li class="dashboard-tabs__item" [ngbNavItem]="'upcoming'">
-            <a class="dashboard-tabs__item-link" ngbNavLink>Upcoming</a>
+        <li
+            class="dashboard-tabs__item"
+            [ngbNavItem]="'upcoming'"
+        >
+            <a
+                class="dashboard-tabs__item-link"
+                ngbNavLink
+            >
+                Upcoming
+            </a>
             <ng-template ngbNavContent>
                 <app-tasks-dashboard-my-tasks-list [filterType]="'UPCOMING'"></app-tasks-dashboard-my-tasks-list>
             </ng-template>
         </li>
-        <li class="dashboard-tabs__item" [ngbNavItem]="'overdue'">
-          <a class="dashboard-tabs__item-link" ngbNavLink>Overdue</a>
+        <li
+            class="dashboard-tabs__item"
+            [ngbNavItem]="'overdue'"
+        >
+            <a
+                class="dashboard-tabs__item-link"
+                ngbNavLink
+            >
+                Overdue
+            </a>
             <ng-template ngbNavContent>
                 <app-tasks-dashboard-my-tasks-list [filterType]="'OVERDUE'"></app-tasks-dashboard-my-tasks-list>
             </ng-template>
         </li>
-        <li class="dashboard-tabs__item" [ngbNavItem]="'completed'">
-            <a class="dashboard-tabs__item-link" ngbNavLink>Completed</a>
+        <li
+            class="dashboard-tabs__item"
+            [ngbNavItem]="'completed'"
+        >
+            <a
+                class="dashboard-tabs__item-link"
+                ngbNavLink
+            >
+                Completed
+            </a>
             <ng-template ngbNavContent>
                 <app-tasks-dashboard-my-tasks-list [filterType]="'COMPLETED'"></app-tasks-dashboard-my-tasks-list>
+            </ng-template>
+        </li>
+        <li
+            class="dashboard-tabs__item"
+            [ngbNavItem]="'archived'"
+        >
+            <a
+                class="dashboard-tabs__item-link"
+                ngbNavLink
+            >
+                Archived
+            </a>
+            <ng-template ngbNavContent>
+                <app-tasks-dashboard-my-tasks-list [filterType]="'ARCHIVED'"></app-tasks-dashboard-my-tasks-list>
             </ng-template>
         </li>
     </ul>

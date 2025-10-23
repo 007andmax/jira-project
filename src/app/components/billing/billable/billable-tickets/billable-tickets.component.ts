@@ -18,6 +18,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 
 @Component({
   selector: 'billable-tickets',
@@ -50,6 +51,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     private ticketStateService: TicketStateService,
     private toastrProgressStateService: ToastrProgressStateService,
+    private tasksStateService: TasksStateService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -119,6 +121,9 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
   moToBillable() {
     this.leftPanelStateService.goToState('new-billable');
 
+  }
+  editTask(taskId) {
+    this.tasksStateService.openEditAside({ id: taskId });
   }
   goToSettings() {
     this.leftPanelStateService.goToState('company-profile-component');

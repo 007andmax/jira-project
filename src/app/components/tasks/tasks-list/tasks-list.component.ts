@@ -62,6 +62,12 @@ export class TasksListComponent implements OnInit, OnDestroy {
           this.list.splice(index, 1);
         }
       }
+      if (data.action === 'TASK_ARCHIVED') {
+        let index = this.list.findIndex(item => item.id == data.data);
+        if (index > -1 && !this.filter.archived) {
+          this.list.splice(index, 1);
+        }
+      }
       this.cd.detectChanges();
     })
     this.sub.add(getChangeCompanies);
@@ -96,7 +102,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
     }
 
     if (this.page_number > 0) this.showPendingPreloader = true;
-    this.tasksService.getTasks(this.page_number, this.filter.techUser ? this.filter.techUser.id : null, this.filter.filter).subscribe((data: Array<Task>) => {
+    this.tasksService.getTasks(this.page_number, this.filter.techUser ? this.filter.techUser.id : null, this.filter.filter, this.filter.archived).subscribe((data: Array<Task>) => {
       this.list = [...this.list, ...data.map(item => new Task(item))];
       this.infiniteScrollDisabled = false;
       if (data.length < this.offset) this.ticketsListService.setBlockList(true);

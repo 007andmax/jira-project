@@ -5,7 +5,7 @@ import { Company } from 'src/app/interfaces/company/company';
 import { Service } from 'src/app/interfaces/service/service';
 import { CompanySetting } from '../../companies/class/company-setting';
 import { forkJoin } from 'rxjs';
-import { DELETE_TASK } from 'src/app/const/confirm';
+import { ARCHIVE_TASK, DELETE_TASK } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { S } from '@angular/cdk/keycodes';
 import { TicketProfileFormService } from '../../tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
@@ -22,6 +22,7 @@ export class TasksEditComponent extends TasksAddComponent {
   selectedCompany: Company;
   selectedTicket: Ticket = null;
   isInitEditNote: boolean = false;
+  isInitTitle: boolean = false;
   @ViewChild('datePicker', { static: false }) datePicker: TasksDatePickerComponent;
   ngOnInit() {
     this.modelForm = this.formBuilder.group({
@@ -75,7 +76,11 @@ export class TasksEditComponent extends TasksAddComponent {
           attachFileIds: task.attachments.map(item => item.file.id),
           taskTicketId: this.task.taskTicketId
         });
-        if (this.task.hasInvoice || this.task.taskStatus === 'CLOSED') this.modelForm.get('title')?.disable();
+        if (this.task.hasInvoice || this.task.taskStatus === 'CLOSED' || this.task.archivedAt !== null) {
+          this.modelForm.get('title')?.disable();
+        } else {
+          this.modelForm.get('title')?.enable();
+        }
         this.files = task.attachments.map(item => {
           return { ...item.file, showError: false }
         });
@@ -90,6 +95,7 @@ export class TasksEditComponent extends TasksAddComponent {
         this.selectedType = this.listTypes.find(item => item.value === this.task.type);
         this.opened = true;
         if (this.selectedCompany) this.ticketStateService.getServicesList(this.selectedCompany.id);
+        this.cd.detectChanges();
       });
 
 
@@ -107,11 +113,16 @@ export class TasksEditComponent extends TasksAddComponent {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_TASK) this.onDeleteTask();
+        if (this.confirmStateService.getConfirmAction() === ARCHIVE_TASK) this.onArchiveTask();
       }
     })
     this.sub.add(getConfirm);
+    this.modelForm.get('description')?.valueChanges.subscribe(value => {
+      if (this.task.description != value) this.onFocusDescription();
+    });
   }
   onKeyDown(event) {
+    this.isInitTitle = true;
     if (event.keyCode === 13) {
       event.preventDefault();
       event.stopPropagation();
@@ -133,6 +144,10 @@ export class TasksEditComponent extends TasksAddComponent {
         endDate: this.modelForm.controls["endDate"].value
       });
     }
+  }
+
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   onChangeTitle() {
     this.editTask({ title: this.modelForm.controls["title"].value });
@@ -189,7 +204,39 @@ export class TasksEditComponent extends TasksAddComponent {
     this.modelForm.controls["companyId"].setValue(data ? data.id : null)
     if (data) this.ticketStateService.getServicesList(data.id);
     this.selectedCompany = data;
-    this.editTask({ companyId: data ? data.id : "" });
+    if (this.currentService.item) {
+      let update = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
+      this.ticketsService.deleteUpdate(this.task.taskTicketId, update.id).subscribe(res => {
+        this.currentService = new TicketProfileFormService();
+        let index = this.task.ticketUpdateList.findIndex(item => item.type == "SERVICE");
+        this.task.ticketUpdateList.splice(index, 1);
+        this.servicedp.clearClient();
+        this.currentService.setValidate(false);
+        this.editTask({ companyId: data ? data.id : "" });
+      })
+    } else {
+      this.editTask({ companyId: data ? data.id : "" });
+    }
+  }
+  archiveTask() {
+    if (this.currentService.item) return;
+    this.confirmStateService.setConfirmAction(ARCHIVE_TASK);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `The Task has been successfully archived`;
+    this.cd.detectChanges();
+  }
+  onArchiveTask() {
+    this.tasksService.archiveTask(this.task.id).subscribe(res => {
+      this.task.archivedAt = new Date().getTime();
+      this.close();
+      this.cd.detectChanges();
+    });
+  }
+  deArchiveTask() {
+    this.tasksService.deArchiveTask(this.task.id).subscribe(res => {
+      this.task.archivedAt = null;
+      this.cd.detectChanges();
+    });
   }
   public onSelectTechUser(items) {
     this.modelForm.controls["assignedUsersIds"].setValue(items.map(item => item.id));
@@ -220,7 +267,7 @@ export class TasksEditComponent extends TasksAddComponent {
   }
   closeTask() {
     this.saveBtn.setDisabled(true);
-    this.tasksService.changeStatusTask(this.task.id, "CLOSED").subscribe(res => {
+    if (!this.isInitEditNote && !this.isInitTitle) this.tasksService.changeStatusTask(this.task.id, "CLOSED").subscribe(res => {
       this.saveBtn.setDisabled(false);
       this.close();
     });
@@ -229,9 +276,9 @@ export class TasksEditComponent extends TasksAddComponent {
     this.editTask({
       description: this.modelForm.controls["description"].value
     });
-    this.isInitEditNote = false;
-  }
+    }
   deleteTask() {
+    if (this.currentService.item) return;
     this.confirmStateService.setConfirmAction(DELETE_TASK);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.message = `The Task has been successfully deleted`;
@@ -274,22 +321,33 @@ export class TasksEditComponent extends TasksAddComponent {
       this.modelForm.get('title')?.enable();
     });
   }
-
+  onFocusDescription() {
+     this.isInitEditNote = true;
+  }
   editTask(data) {
     this.submitted = true;
     if (this.modelForm.invalid) {
       return;
     }
-    this.saveBtn.setDisabled(true);
+    //   this.saveBtn.setDisabled(true);
     if (this.currentService.item && this.currentService.item.versionedId) this.modelForm.controls["ticketUpdates"].setValue([this.getDataForUpdateService()])
     this.tasksService.editTask(this.task.id, data).subscribe(res => {
-      this.saveBtn.setDisabled(false);
-
+      if ((this.isInitTitle || this.isInitEditNote) && this.saveBtn && this.saveBtn.isBlock()) {
+        this.isInitEditNote = false;
+        this.isInitTitle = false;
+        this.closeTask();
+      } else {
+        if (this.saveBtn) this.saveBtn.setDisabled(false);
+        this.isInitTitle = false;
+        this.isInitEditNote = false;
+        this.submitted = false;
+      }
     }, err => {
       this.saveBtn.setDisabled(false);
     })
   }
   close() {
+    if (this.isInitEditNote) this.onChangeDescription();
     this.currentService = new TicketProfileFormService();
     this.opened = false;
     this.submitted = false;

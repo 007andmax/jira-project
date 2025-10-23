@@ -7,6 +7,8 @@ export class Notification {
     ticketId: string;
     saleQuoteId: string;
     date_text: string;
+    relatedEntityDeleted: boolean;
+    relatedEntityDeletedText: string;
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];

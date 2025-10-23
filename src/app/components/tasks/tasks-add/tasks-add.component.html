@@ -137,6 +137,7 @@
                 <div class="qt-input-block qt-input-block--horizontal">
                     <div class="qt-input-block__label">Services</div>
                     <app-services-list
+                        #servicedp
                         class="drop-down-sm"
                         [type]="'TICKET'"
                         [isBlockClear]="false"
@@ -172,6 +173,8 @@
                         #dp
                         [class]="['date-picker-invisible', '--sm']"
                         [container]="'body'"
+                        [editStart]="modelForm?.value.startDate"
+                        [editEnd]="modelForm?.value.endDate"
                         [validate]="!(submitted && f2.startDate.errors)"
                         [errorMessage]="'Start date is required'"
                         (selectedDate)="filterByDate($event)"

@@ -58,19 +58,22 @@ export class TaskHeaderAddComponent {
     if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') step = 5;
     if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') step = 10;
     if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') step = 15;
-    let currentDate = new Date();
+    let startDate = new Date();
+    //startDate.setMinutes(Math.ceil(startDate.getMinutes() / step) * step);
+    let endDate = new Date(startDate.getTime() + step * 60000);
+
     this.modelForm = this.formBuilder.group({
       title: [
         "",
         [Validators.required, Validators.minLength(1), Validators.maxLength(300)]
       ],
-      startDate: [currentDate.getTime(),
+      startDate: [startDate.getTime(),
       [Validators.required]
       ],
       description: [undefined,
         [Validators.minLength(0), Validators.maxLength(65000)]
       ],
-      endDate: [currentDate.getTime() + (step * 60 * 1000)],
+      endDate: [endDate.getTime()],
       assignedUsersIds: [null],
       type: [
         "To do",
@@ -156,18 +159,21 @@ export class TaskHeaderAddComponent {
   close() {
     this.submitted = false;
     this.modelForm.reset();
-    let currentDate = new Date();
     let step = 1;
     let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany() ? this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
     if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') step = 1;
     if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') step = 5;
     if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') step = 10;
     if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') step = 15;
+    let startDate = new Date();
+    //  startDate.setMinutes(Math.ceil(startDate.getMinutes() / step) * step);
+    let endDate = new Date(startDate.getTime() + step * 60000);
+
     this.modelForm.patchValue({
       taskStatus: "OPEN",
       type: "To do",
-      startDate: currentDate.getTime(),
-      endDate: currentDate.getTime() + (step * 60 * 1000),
+      startDate: startDate.getTime(),
+      endDate: endDate.getTime(),
     });
     this.type.initDefaultValue();
     this.datePicker.setEditDates(this.modelForm.value.startDate, this.modelForm.value.endDate);

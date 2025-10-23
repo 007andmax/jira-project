@@ -31,7 +31,8 @@ export class LeftPanelTasksComponent {
   techUsersList = [];
   quickFilter: Array<CompanySetting> = [
     new CompanySetting('Upcoming', 'UPCOMING'),
-    new CompanySetting('Overdue', 'OVERDUE')];
+    new CompanySetting('Overdue', 'OVERDUE'),
+    new CompanySetting('Archived', 'ARCHIVED')];
   @Input() activePage: string = "";
   sub: Subscription = new Subscription();
   @Output() onChangeState = new EventEmitter();
@@ -89,8 +90,15 @@ export class LeftPanelTasksComponent {
     this.tasksStateService.onInitFilter(this.filter);
     this.cd.detectChanges();
   }
+
   setStatus(data) {
-    this.filter.setFilter(data ? data.value : null);
+    if (data && data.value === 'ARCHIVED') {
+      this.filter.setArchived(true);
+      this.filter.setFilter(null);
+    } else {
+      this.filter.setArchived(false);
+      this.filter.setFilter(data ? data.value : null);
+    }
     this.tasksStateService.onInitFilter(this.filter);
   }
   onGetTechUsers(data) {

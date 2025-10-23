@@ -43,6 +43,7 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
   viewPasswordsRelatedPermissions = [];
   viewDocumentsRelatedPermissions = [];
   editCategoryDocumentsRelatedPermissions = [];
+  // tasksRelatedPermissions = [];
   sections = {};
   sub: Subscription = new Subscription();
   showDeleteRole = false;
