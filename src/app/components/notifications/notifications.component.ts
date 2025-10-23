@@ -94,7 +94,7 @@ export class NotificationsComponent {
     this.quoteStateService.setPreview({ id: item.saleQuoteId });
   }
   editTask(item) {
-    this.tasksStateService.openEditAside({ id: item.taskId });
+    if (!item.relatedEntityDeleted) this.tasksStateService.openEditAside({ id: item.taskId });
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;

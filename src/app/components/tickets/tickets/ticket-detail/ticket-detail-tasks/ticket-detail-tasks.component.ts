@@ -29,6 +29,7 @@ import { TicketsListService } from '../../services/tickets-list.service';
 })
 export class TicketDetailTasksComponent implements OnInit, OnDestroy {
   showAdd: boolean = false;
+  showPendingPreloader: boolean = false;
   list: Array<TicketProfileTask> = [];
   addTask: TicketProfileTask = new TicketProfileTask();
   listTechUsers = [];
@@ -97,6 +98,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
       this.infiniteScrollDisabled = false;
       return;
     }
+    if (this.page_number > 0) this.showPendingPreloader = true;
     this.ticketsService.getTicketTasks(id, this.page_number).subscribe((data: any) => {
       this.list = [...this.list, ...data.map(item => new TicketProfileTask(item))];
       this.ticketStateService.setListTasks(this.list);
@@ -104,7 +106,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
       if (data.length < 10) this.ticketsListService.setBlockList(true);
       this.page_number += 1;
       // this.showPreloader = false;
-      // this.showPendingPreloader = false;
+      this.showPendingPreloader = false;
       this.cd.detectChanges();
     })
   }

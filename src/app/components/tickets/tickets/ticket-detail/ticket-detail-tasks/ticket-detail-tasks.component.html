@@ -10,88 +10,96 @@
     </div>
 </div>
 <div
+    class="tasks-list-container"
+    [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
     #content
-    class="tab-pane__table-body qt-mr-24 qt-ml-24"
-    infiniteScroll
-    [infiniteScrollContainer]="content"
-    [infiniteScrollDistance]="2"
-    [infiniteScrollThrottle]="30"
-    [infiniteScrollDisabled]="infiniteScrollDisabled"
-    [fromRoot]="true"
-    (scrolled)="onScroll()"
 >
     <div
-        *ngIf="showAdd"
-        [ngClass]="[addTask.taskStatus == 'CLOSED' ? '--completed' : '']"
-        class="add-task-container tab-pane__table-row --selected"
-        appClickOtside
-        #addTaskBtn="click"
-        [init]="initAddTask"
-        [classParent]="'.add-task-container'"
-        (onOutSide)="onAddTicketTask()"
+        class="tab-pane__table-body qt-mr-24 qt-ml-24"
+        infiniteScroll
+        [infiniteScrollContainer]="content"
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="30"
+        [infiniteScrollDisabled]="infiniteScrollDisabled"
+        (scrolled)="onScroll()"
     >
-        <div class="tab-pane__table-cell tab-pane__table-checkboxes qt-ml-8 pointer">
-            <i
-                *ngIf="addTask.taskStatus == 'OPEN'"
-                class="qt-icon icon__check icn-20"
-                (click)="setStatus(addTask,'CLOSED')"
-            ></i>
-            <i
-                *ngIf="addTask.taskStatus == 'CLOSED'"
-                class="qt-icon icon__check qt-icon__green-600 icn-20"
-                (click)="setStatus(addTask,'OPEN')"
-            ></i>
-        </div>
-        <div class="tab-pane__table-cell ticket-status-table__status">
-            <input
-                type="text"
-                class="form-input --editable"
-                placeholder="Enter Name Task"
-                [(ngModel)]="addTask.title"
-                (keyup)="onKeyUp($event)"
-                maxlength="500"
-                minlength="1"
-            >
-        </div>
-        <div class="tab-pane__table-cell"></div>
-        <div class="tab-pane__table-cell ticket-status-table__preview">
-            <app-task-header-add-type
-                #type
-                (onChange)="onSelectType($event)"
-            ></app-task-header-add-type>
-        </div>
-        <div class="tab-pane__table-cell ticket-status-table__action">
-            <div class="my-tasks-table__date qt-df qt-ai-c qt-ml-8">
-                <div
-                    class="qt-mr-4 my-tasks-table__date--text"
-                    *ngIf="addTask.startDate"
-                    [textContent]="parseStartDate(addTask.startDate)"
-                ></div>
-                <app-tasks-date-picker
-                    #datePicker
-                    (selectedDate)="filterByDate($event)"
-                    (onCloseDropDown)="onCloseDatePicker($event)"
-                ></app-tasks-date-picker>
+        <div
+            *ngIf="showAdd"
+            [ngClass]="[addTask.taskStatus == 'CLOSED' ? '--completed' : '']"
+            class="add-task-container tab-pane__table-row --selected"
+            appClickOtside
+            #addTaskBtn="click"
+            [init]="initAddTask"
+            [classParent]="'.add-task-container'"
+            (onOutSide)="onAddTicketTask()"
+        >
+            <div class="tab-pane__table-cell tab-pane__table-checkboxes qt-ml-8 pointer">
+                <i
+                    *ngIf="addTask.taskStatus == 'OPEN'"
+                    class="qt-icon icon__check icn-20"
+                    (click)="setStatus(addTask,'CLOSED')"
+                ></i>
+                <i
+                    *ngIf="addTask.taskStatus == 'CLOSED'"
+                    class="qt-icon icon__check qt-icon__green-600 icn-20"
+                    (click)="setStatus(addTask,'OPEN')"
+                ></i>
             </div>
-            <app-tech-users
-                #tachUser
-                [editMode]="true"
-                [type]="'TASKS'"
-                [users]="listTechUsers"
-                [container]="'body'"
-                (usersChange)="onSelectTechUser($event)"
-            ></app-tech-users>
+            <div class="tab-pane__table-cell ticket-status-table__status">
+                <input
+                    type="text"
+                    class="form-input --editable"
+                    placeholder="Enter Name Task"
+                    [(ngModel)]="addTask.title"
+                    (keyup)="onKeyUp($event)"
+                    maxlength="500"
+                    minlength="1"
+                >
+            </div>
+            <div class="tab-pane__table-cell"></div>
+            <div class="tab-pane__table-cell ticket-status-table__preview">
+                <app-task-header-add-type
+                    #type
+                    (onChange)="onSelectType($event)"
+                ></app-task-header-add-type>
+            </div>
+            <div class="tab-pane__table-cell ticket-status-table__action">
+                <div class="my-tasks-table__date qt-df qt-ai-c qt-ml-8">
+                    <div
+                        class="qt-mr-4 my-tasks-table__date--text"
+                        *ngIf="addTask.startDate"
+                        [textContent]="parseStartDate(addTask.startDate)"
+                    ></div>
+                    <app-tasks-date-picker
+                        #datePicker
+                        (selectedDate)="filterByDate($event)"
+                        (onCloseDropDown)="onCloseDatePicker($event)"
+                    ></app-tasks-date-picker>
+                </div>
+                <app-tech-users
+                    #tachUser
+                    [editMode]="true"
+                    [type]="'TASKS'"
+                    [users]="listTechUsers"
+                    [container]="'body'"
+                    (usersChange)="onSelectTechUser($event)"
+                ></app-tech-users>
+            </div>
+        </div>
+        <div
+            class="tab-pane__table-row"
+            *ngFor="let item of list; let i = index"
+            [ngClass]="[item.taskStatus == 'CLOSED' ? '--completed' : '']"
+        >
+            <app-ticket-detail-tasks-item
+                [item]="item"
+                [ticketProfile]="ticketProfile"
+                [parseStartDate]="parseStartDate"
+            ></app-ticket-detail-tasks-item>
         </div>
     </div>
     <div
-        class="tab-pane__table-row"
-        *ngFor="let item of list; let i = index"
-        [ngClass]="[item.taskStatus == 'CLOSED' ? '--completed' : '']"
-    >
-        <app-ticket-detail-tasks-item
-            [item]="item"
-            [ticketProfile]="ticketProfile"
-            [parseStartDate]="parseStartDate"
-        ></app-ticket-detail-tasks-item>
-    </div>
+        class="loading pengind-loading loading--without-text"
+        *ngIf="showPendingPreloader"
+    ></div>
 </div>
