@@ -117,6 +117,11 @@ export class TasksEditComponent extends TasksAddComponent {
       }
     })
     this.sub.add(getConfirm);
+    this.modelForm.get('description')?.valueChanges.subscribe(value => {
+      console.log('Name changed:', value);
+      if (this.task.description != value) this.onFocusDescription();
+      // You can trigger any logic here
+    });
   }
   onKeyDown(event) {
     this.isInitTitle = true;
@@ -340,6 +345,7 @@ export class TasksEditComponent extends TasksAddComponent {
         if (this.saveBtn) this.saveBtn.setDisabled(false);
         this.isInitTitle = false;
         this.isInitEditNote = false;
+        this.submitted = false;
       }
     }, err => {
       this.saveBtn.setDisabled(false);
