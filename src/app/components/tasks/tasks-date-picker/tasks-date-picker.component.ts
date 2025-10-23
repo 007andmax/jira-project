@@ -97,7 +97,6 @@ export class TasksDatePickerComponent extends MultiDatepickerComponent {
     * @param date - date for select
     */
   onDateSelection(date: NgbDate) {
-    console.log("date", date);
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
     } else if (this.fromDate && !this.toDate) {

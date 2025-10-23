@@ -95,12 +95,9 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
     })
   }
   onCloseDatePicker(event) {
-    console.log("onCloseDatePicker");
     setTimeout(() => {
       this.initAddTask = event;
-      console.log("this.initAddTask", this.initAddTask);
     }, 500);
-
   }
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {

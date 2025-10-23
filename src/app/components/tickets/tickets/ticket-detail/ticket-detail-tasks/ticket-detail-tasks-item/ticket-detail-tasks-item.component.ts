@@ -120,7 +120,6 @@ export class TicketDetailTasksItemComponent {
     this.save({ assignedUsersIds: this.item.assignedUsersIds });
   }
   onKeyEnter(event?) {
-    console.log("event", event);
     event.blur();
   }
   editTitle() {

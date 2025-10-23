@@ -118,9 +118,7 @@ export class TasksEditComponent extends TasksAddComponent {
     })
     this.sub.add(getConfirm);
     this.modelForm.get('description')?.valueChanges.subscribe(value => {
-      console.log('Name changed:', value);
       if (this.task.description != value) this.onFocusDescription();
-      // You can trigger any logic here
     });
   }
   onKeyDown(event) {
@@ -275,12 +273,10 @@ export class TasksEditComponent extends TasksAddComponent {
     });
   }
   onChangeDescription() {
-    console.log("onChangeDescription");
     this.editTask({
       description: this.modelForm.controls["description"].value
     });
-    // this.isInitEditNote = false;
-  }
+    }
   deleteTask() {
     if (this.currentService.item) return;
     this.confirmStateService.setConfirmAction(DELETE_TASK);
@@ -326,8 +322,7 @@ export class TasksEditComponent extends TasksAddComponent {
     });
   }
   onFocusDescription() {
-    console.log("onFocusDescription");
-    this.isInitEditNote = true;
+     this.isInitEditNote = true;
   }
   editTask(data) {
     this.submitted = true;
