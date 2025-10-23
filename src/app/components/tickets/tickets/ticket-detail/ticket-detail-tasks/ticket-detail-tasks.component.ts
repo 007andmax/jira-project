@@ -19,11 +19,13 @@ import { Task } from 'src/app/components/tasks/class/task';
 import { TasksService } from 'src/app/services/tasks/tasks.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
+import { TicketsListService } from '../../services/tickets-list.service';
 
 @Component({
   selector: 'ticket-detail-tasks',
   templateUrl: './ticket-detail-tasks.component.html',
-  styleUrls: ['./ticket-detail-tasks.component.scss']
+  styleUrls: ['./ticket-detail-tasks.component.scss'],
+  providers: [TicketsListService]
 })
 export class TicketDetailTasksComponent implements OnInit, OnDestroy {
   showAdd: boolean = false;
@@ -34,6 +36,8 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   @ViewChild('addTaskBtn', { static: false }) addTaskBtn: ClickOutsideDirective;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
+  public infiniteScrollDisabled = true;
+  public page_number: number = 0;
   constructor(private ticketsService: TicketsService,
     private ticketStateService: TicketStateService,
     private confirmStateService: ConfirmStateService,
@@ -43,6 +47,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService,
     public ticketsPermissionsService: TicketsPermissionsService,
     public tasksRealTimeService: TasksRealTimeService,
+    private ticketsListService: TicketsListService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
@@ -88,11 +93,24 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
     this.setDefaultValueForAddTask();
   }
   public getTicketTasks(id) {
-    this.ticketsService.getTicketTasks(id).subscribe((data: any) => {
-      this.list = data.map(item => new TicketProfileTask(item))
+    if (this.ticketsListService.getBlockList()) {
+      this.infiniteScrollDisabled = false;
+      return;
+    }
+    this.ticketsService.getTicketTasks(id, this.page_number).subscribe((data: any) => {
+      this.list = [...this.list, ...data.map(item => new TicketProfileTask(item))];
       this.ticketStateService.setListTasks(this.list);
+      this.infiniteScrollDisabled = false;
+      if (data.length < 10) this.ticketsListService.setBlockList(true);
+      this.page_number += 1;
+      // this.showPreloader = false;
+      // this.showPendingPreloader = false;
       this.cd.detectChanges();
     })
+  }
+  public onScroll() {
+    this.infiniteScrollDisabled = true;
+    this.getTicketTasks(this.ticketProfile.id);
   }
   onCloseDatePicker(event) {
     setTimeout(() => {

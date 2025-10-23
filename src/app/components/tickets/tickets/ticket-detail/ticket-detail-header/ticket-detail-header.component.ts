@@ -88,17 +88,13 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
   checkClose() {
     let completeServices = true;
     let completeProducts = true;
-    let completeTasks = true;
     this.ticketProfile.updates.forEach(update => {
       if (update.type !== 'MIXED') {
         if (completeServices) completeServices = (update.services.find(item => !item.completed) ? false : true);
         if (completeProducts) completeProducts = (update.products.find(item => !item.completed) ? false : true);
       }
     });
-    this.ticketStateService.getListTasks().forEach(item => {
-      if (item.taskStatus != "CLOSED") completeTasks = false;
-    })
-    return completeServices && completeProducts && completeTasks;
+    return completeServices && completeProducts;
   }
   close() {
     if (!this.checkClose()) return;

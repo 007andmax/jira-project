@@ -172,3 +172,7 @@
     }
   }
 }
+.tab-pane__table-body {
+  max-height: 210px;
+  overflow: auto;
+}

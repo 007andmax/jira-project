@@ -65,8 +65,8 @@ export class TicketsService {
   public getDashboardByTech(startDate, endDate) {
     return this.http.get(this.apiUrl + `dashboard/ticket/counters?startDate=${startDate}&endDate=${endDate}`);
   }
-  public getTicketTasks(id) {
-    return this.http.get(this.apiUrl + `tasks?size=10&page=0&taskTicketId=${id}`);
+  public getTicketTasks(id, page) {
+    return this.http.get(this.apiUrl + `tasks?size=10&page=${page}&taskTicketId=${id}`);
   }
   public removeTicketTask(id) {
     return this.http.delete(this.apiUrl + `v2/tickets/task/${id}`).pipe(

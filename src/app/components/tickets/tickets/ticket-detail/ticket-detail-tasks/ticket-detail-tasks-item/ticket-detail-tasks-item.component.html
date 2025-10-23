@@ -48,8 +48,9 @@
         >
         <span
             *ngIf="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null"
-            class="form-input  --editable qt-td-l-t qt-w100"
+            class="form-input  --editable qt-w100"
             [textContent]="item.title"
+            [ngClass]="{'qt-td-l-t':item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null}"
         ></span>
         <div
             class="qt-button --square-sm --gray pointer qt-ml-8 qt-mr-8 btn-open-aside"

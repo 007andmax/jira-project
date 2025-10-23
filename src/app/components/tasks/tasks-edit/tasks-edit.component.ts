@@ -276,7 +276,7 @@ export class TasksEditComponent extends TasksAddComponent {
     this.editTask({
       description: this.modelForm.controls["description"].value
     });
-    }
+  }
   deleteTask() {
     if (this.currentService.item) return;
     this.confirmStateService.setConfirmAction(DELETE_TASK);
@@ -322,7 +322,7 @@ export class TasksEditComponent extends TasksAddComponent {
     });
   }
   onFocusDescription() {
-     this.isInitEditNote = true;
+    this.isInitEditNote = true;
   }
   editTask(data) {
     this.submitted = true;
@@ -354,6 +354,7 @@ export class TasksEditComponent extends TasksAddComponent {
     this.selectedCompany = null;
     this.selectedAssignedUsers = [];
     this.selectedType = null;
+    this.selectedTicket = null;
     this.modelForm.reset();
     this.files = [];
   }

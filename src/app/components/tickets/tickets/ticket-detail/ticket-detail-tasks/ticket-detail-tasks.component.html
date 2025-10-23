@@ -9,7 +9,17 @@
         Add Task
     </div>
 </div>
-<div class="tab-pane__table-body qt-mr-24 qt-ml-24">
+<div
+    #content
+    class="tab-pane__table-body qt-mr-24 qt-ml-24"
+    infiniteScroll
+    [infiniteScrollContainer]="content"
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="30"
+    [infiniteScrollDisabled]="infiniteScrollDisabled"
+    [fromRoot]="true"
+    (scrolled)="onScroll()"
+>
     <div
         *ngIf="showAdd"
         [ngClass]="[addTask.taskStatus == 'CLOSED' ? '--completed' : '']"
