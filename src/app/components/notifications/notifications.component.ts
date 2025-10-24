@@ -86,9 +86,11 @@ export class NotificationsComponent {
     return moment(date).format('DD MMM YYYY');
   }
   editTicket(item) {
-    this.ticketStateService.setTicketRoutingId(item.ticketId);
-    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${item.ticketId}`;
-    window.open(url, '_blank');
+    if (!item.relatedEntityDeleted) {
+      this.ticketStateService.setTicketRoutingId(item.ticketId);
+      const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${item.ticketId}`;
+      window.open(url, '_blank');
+    }
   }
   editQuote(item) {
     this.quoteStateService.setPreview({ id: item.saleQuoteId });

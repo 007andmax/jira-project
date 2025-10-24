@@ -145,6 +145,7 @@
         class="ticket-table__assignee"
         *ngIf="type === 'TASKS' && selectedUsers.length > 0"
         ngbDropdownToggle
+        [ngClass]="{'no-click':isDisabled}"
     >
         <div class="qt-df multi-assign-user-container">
             <ng-template
