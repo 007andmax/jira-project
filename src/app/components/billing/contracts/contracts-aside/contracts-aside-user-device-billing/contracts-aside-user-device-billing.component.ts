@@ -166,7 +166,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
       })
   }
   onCheckDuplicatedServices() {
-    if (this.contractsUserDevice.services.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeAndTrackServices() || !this.contractsUserDevice.companyId) return;
+    if (this.contractsUserDevice.services.length === 0 || !this.contractsUserDevice.checkDuplicatedServices() || !this.contractsUserDevice.checkDuplicatedBlockTimeAndTrackServices() || !this.contractsUserDevice.companyId) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       (!this.contractsUserDevice.isPerpetual) ? moment(this.contractsUserDevice.endDate).format('DD MMM YYYY') : null, this.contractsUserDevice.companyId, null, this.contractsUserDevice.getServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
@@ -338,6 +338,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestr
     this.cd.detectChanges();
   }
   public onCreate() {
+    if (!this.contractsUserDevice.checkDuplicatedBlockTimeAndTrackServices() || !this.contractsUserDevice.checkDuplicatedServices()) return;
     if (!this.validate.isValidate(this.contractsUserDevice)) return;
     if (this.contractsListService.compareDateNowWithDate(this.contractsUserDevice.startDate)) {
       const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });

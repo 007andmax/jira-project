@@ -160,10 +160,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     return newMinStartDate;
   }
   onCheckServicesForAdd(createBillableItem) {
-    if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices() || !this.contractsBlockTime.checkDuplicatedServices()) {
-      this.cd.detectChanges();
-      return;
-    }
+
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       (!this.contractsBlockTime.isPerpetual) ? moment(this.contractsBlockTime.endDate).format('DD MMM YYYY') : null, this.contractsBlockTime.companyId, null, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
@@ -200,7 +197,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.onCheckDuplicatedService();
   }
   onCheckDuplicatedCustomService() {
-    if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeAndTrackServices() || !this.contractsBlockTime.companyId) return;
+    if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices() || !this.contractsBlockTime.checkDuplicatedBlockTimeAndTrackServices() || !this.contractsBlockTime.companyId) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       (!this.contractsBlockTime.isPerpetual) ? moment(this.contractsBlockTime.endDate).format('DD MMM YYYY') : null, this.contractsBlockTime.companyId, null, this.contractsBlockTime.getBlockTimeServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
@@ -331,7 +328,10 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.contractsBlockTime.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
   }
   public onCreate() {
-    if (!this.validate.isValidate(this.contractsBlockTime)) return;
+    if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices() || !this.contractsBlockTime.checkDuplicatedServices() || !this.contractsBlockTime.checkDuplicatedBlockTimeAndTrackServices() || !this.validate.isValidate(this.contractsBlockTime)) {
+      this.cd.detectChanges();
+      return;
+    }
     if (this.contractsListService.compareDateNowWithDate(this.contractsBlockTime.startDate)) {
       const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
       modalRef.componentInstance.message = `Do we need to create the billable item now?`;
