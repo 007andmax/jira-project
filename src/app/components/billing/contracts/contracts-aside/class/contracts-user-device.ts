@@ -292,6 +292,7 @@ export class ContractsUserDevice {
         let validate = (list.find(item => !item.validate)) ? false : true;
         return validateDuplicated && validate;
     }
+    
     public checkDuplicatedServices() {
         this.services.forEach(item => {
             item.validateDuplicated = true;

@@ -111,7 +111,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
   }
   public onEdit() {
     if (!this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.checkDuplicatedServiceContractServices()
-      || !this.contractsUserDevice.checkDuplicatedServices() || !this.validate.isValidate(this.contractsUserDevice)) {
+      || !this.contractsUserDevice.checkDuplicatedServices() || !this.contractsUserDevice.checkDuplicatedBlockTimeAndTrackServices() || !this.validate.isValidate(this.contractsUserDevice)) {
       this.cd.detectChanges();
       return;
     };
@@ -168,7 +168,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
     })
   }
   onCheckDuplicatedServices() {
-    if (this.contractsUserDevice.services.length === 0 || !this.contractsUserDevice.checkDuplicatedServices()) return;
+    if (this.contractsUserDevice.services.length === 0 || !this.contractsUserDevice.checkDuplicatedServices() || !this.contractsUserDevice.checkDuplicatedBlockTimeAndTrackServices()) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       (!this.contractsUserDevice.isPerpetual) ? moment(this.contractsUserDevice.endDate).format('DD MMM YYYY') : null, this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
@@ -186,7 +186,7 @@ export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy 
       })
   }
   onCheckDuplicatedBlockTimeServices() {
-    if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices()) return;
+    if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.checkDuplicatedBlockTimeAndTrackServices()) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       (!this.contractsUserDevice.isPerpetual) ? moment(this.contractsUserDevice.endDate).format('DD MMM YYYY') : null, this.contractsUserDevice.companyId, this.contractsUserDevice.id, this.contractsUserDevice.getBlockTimeServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {
