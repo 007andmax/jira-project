@@ -101,6 +101,7 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
     if (this.page_number > 0) this.showPendingPreloader = true;
     this.ticketsService.getTicketTasks(id, this.page_number).subscribe((data: any) => {
       this.list = [...this.list, ...data.map(item => new TicketProfileTask(item))];
+      console.log("this.list", this.list);
       this.ticketStateService.setListTasks(this.list);
       this.infiniteScrollDisabled = false;
       if (data.length < 10) this.ticketsListService.setBlockList(true);

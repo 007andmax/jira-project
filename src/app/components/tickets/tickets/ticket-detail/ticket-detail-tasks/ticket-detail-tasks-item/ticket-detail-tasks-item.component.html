@@ -46,12 +46,21 @@
             (blur)="editTitle()"
             *ngIf="!(!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null)"
         >
-        <span
-            *ngIf="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null"
-            class="form-input  --editable qt-w100"
-            [textContent]="item.title"
-            [ngClass]="{'qt-td-l-t':item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null}"
-        ></span>
+        <div class="qt-df qt-ai-c qt-w100">
+            <span
+                *ngIf="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null"
+                class="form-input  --editable"
+                [textContent]="item.title"
+                [ngClass]="{'qt-td-l-t':item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null}"
+            ></span>
+            <div
+                *ngIf="item.hasInvoice"
+                class="qt-icon icon__password qt-sz-16 qt-ml-8"
+                placement="top"
+                container="body"
+                ngbTooltip="The Task is now closed, and already billed to the client. You cannot re-open it"
+            ></div>
+        </div>
         <div
             class="qt-button --square-sm --gray pointer qt-ml-8 qt-mr-8 btn-open-aside"
             (click)="openAside()"
