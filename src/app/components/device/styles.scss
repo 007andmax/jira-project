@@ -38,13 +38,13 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(92,105,119);
+  background: $gray-200;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(92,105,119);
+  background: $gray-200;
 }
 }
 

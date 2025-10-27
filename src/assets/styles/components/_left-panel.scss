@@ -149,63 +149,6 @@
     mask-size: contain;
     mask-repeat: no-repeat;
     mask-position: center;
-
-    &.--quick-support-filled {
-      -webkit-mask-image: url("/assets/img/icons/quick-support-filled.svg");
-      mask-image: url("/assets/img/icons/quick-support-filled.svg");
-    }
-    &.--tickets-filled {
-      -webkit-mask-image: url("/assets/img/icons/tickets-filled.svg");
-      mask-image: url("/assets/img/icons/tickets-filled.svg");
-    }
-    &.--companies-filled {
-      -webkit-mask-image: url("/assets/img/icons/companies-filled.svg");
-      mask-image: url("/assets/img/icons/companies-filled.svg");
-    }
-    &.--users-filled {
-      -webkit-mask-image: url("/assets/img/icons/users-filled.svg");
-      mask-image: url("/assets/img/icons/users-filled.svg");
-    }
-    &.--marketing-filled {
-      -webkit-mask-image: url("/assets/img/icons/marketing-filled.svg");
-      mask-image: url("/assets/img/icons/marketing-filled.svg");
-    }
-    &.--billing-filled {
-      -webkit-mask-image: url("/assets/img/icons/billing-filled.svg");
-      mask-image: url("/assets/img/icons/billing-filled.svg");
-    }
-    &.--inventory-filled {
-      -webkit-mask-image: url("/assets/img/icons/inventory-filled.svg");
-      mask-image: url("/assets/img/icons/inventory-filled.svg");
-    }
-    &.--password-manager-filled {
-      -webkit-mask-image: url("/assets/img/icons/password-manager-filled.svg");
-      mask-image: url("/assets/img/icons/password-manager-filled.svg");
-    }
-    &.--reports-filled {
-      -webkit-mask-image: url("/assets/img/icons/reports-filled.svg");
-      mask-image: url("/assets/img/icons/reports-filled.svg");
-    }
-    &.--file-manager-filled {
-      -webkit-mask-image: url("/assets/img/icons/file-manager-filled.svg");
-      mask-image: url("/assets/img/icons/file-manager-filled.svg");
-    }
-    &.--settings-filled {
-      -webkit-mask-image: url("/assets/img/icons/settings-filled.svg");
-      mask-image: url("/assets/img/icons/settings-filled.svg");
-    }
-    &.--documents-filled {
-      -webkit-mask-image: url("/assets/img/icons/documents-filled.svg");
-      mask-image: url("/assets/img/icons/documents-filled.svg");
-    }
-    &.--devices{
-      -webkit-mask-image: url("/assets/img/tool.svg");
-      mask-image: url("/assets/img/tool.svg");
-    }
-    &.--logout {
-      -webkit-mask-image: url("/assets/img/icons/logout.svg");
-      mask-image: url("/assets/img/icons/logout.svg");
-    }
   }
 
   &__submenu-icon {

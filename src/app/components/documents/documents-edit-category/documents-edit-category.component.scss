@@ -5,7 +5,7 @@
     overflow: auto;
     max-height: calc(100% - 170px);
     &::-webkit-scrollbar-thumb {
-      background: #929eac;
+      background: $gray-200;
     }
     &::-webkit-scrollbar {
       width: 4px;

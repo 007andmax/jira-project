@@ -25,10 +25,10 @@
             <div
                 class="help pointer"
                 *ngIf="!customerPortalStateService.isCustomerPortal"
+                (click)="showHelpCanterAside()"
             >
                 <div
                     class="qt-icon icon__help qt-bg-contain qt-sz-20 "
-                    (click)="showHelpCanterAside()"
                 ></div>
             </div>
         </div>

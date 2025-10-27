@@ -1,7 +1,7 @@
 @import "./src/assets/styles/variable";
 @import "./src/assets/styles/fonts";
 
- 
+
 .qt-aside-modern {
     width: 400px !important;
     border-radius:  12px;
@@ -17,7 +17,7 @@
         &-item {
             padding: 14px 0px;
             color: $gray-500;
-        }   
+        }
         .count {
             background-color: $gray-100;
             padding: 2px 8px;
@@ -59,7 +59,7 @@
 }
 
 .qt-aside {
-    
+
     &__title {
         margin-right: 8px;
     }
@@ -228,8 +228,8 @@
 
 .company-actions {
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
     z-index: 999;
 }
 ::ng-deep.notification-item {
@@ -239,6 +239,7 @@
         background-color: $gray-50;
         .notification-item__delete {
             display: flex;
+            z-index: 1;
         }
      }
      &::after {
@@ -298,7 +299,7 @@
         height: 8px;
         background-color: $red-600;
         border-radius: 50%;
-        
+
     }
     &__link {
         max-width: fit-content;
@@ -306,11 +307,14 @@
     &__note {
         position: relative;
     }
-    &__delete {
+    &__delete.qt-button {
         display: none;
         position: absolute;
         right: 16px;
-        top:calc(50% - 12px);
+        top: 50%;
+        translate: 0 -50%;
+        padding: 2px;
+        border-radius: 6px;
         width: 24px;
         height: 24px;
         align-items: center;
