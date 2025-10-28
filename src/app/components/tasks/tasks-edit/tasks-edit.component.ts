@@ -34,7 +34,7 @@ export class TasksEditComponent extends TasksAddComponent {
         [Validators.required]
       ],
       description: [undefined,
-        [Validators.minLength(0), Validators.maxLength(50000)]
+        [Validators.minLength(0), Validators.maxLength(65000)]
       ],
       endDate: [null],
       assignedUsersIds: [null, Validators.required],

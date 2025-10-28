@@ -108,7 +108,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
         [Validators.required]
       ],
       description: [undefined,
-        [Validators.minLength(0), Validators.maxLength(50000)]
+        [Validators.minLength(0), Validators.maxLength(65000)]
       ],
       endDate: [null],
       assignedUsersIds: [null, Validators.required],
