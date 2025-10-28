@@ -288,8 +288,10 @@ form {
       cursor: default;
    }
  }
- .description-error {
-   position: absolute;
-   top: 175px;
-   left: 120px;
- }
+.description-error {
+  position: absolute;
+  top: 2px;
+  left: 100px;
+  margin-top: 0px;
+  width: max-content;
+}
