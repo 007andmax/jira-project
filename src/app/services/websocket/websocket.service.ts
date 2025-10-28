@@ -165,6 +165,7 @@ export class WebsocketService {
       that.subsribeToApiKeys();
       that.subsribeToNotifications();
       that.subsribeToTasks();
+      that.subsribeToQuotesNumber();
       that.onInit.emit(true);
       that.isInit = true;
     }
@@ -364,6 +365,17 @@ export class WebsocketService {
       this.stompClient.subscribe(`/user/watch/saleQuotes/${id}`, (message) => {
         var newChange = JSON.parse(message.body);
         this.quoteRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+
+        }
+      });
+    }, 3000);
+  }
+  public subsribeToQuotesNumber() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/number/SALE_QUOTE`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.quoteRealTimeService.handleRealTimeNumber(newChange);
         if (message.body) {
 
         }
