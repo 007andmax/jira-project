@@ -110,6 +110,9 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     }
     this.company.addresses[1].sameAsBilling = true;
     this.company.addresses[1].isPrimary = false;
+    this.company.addresses[1].phoneNumbers[0].number = JSON.parse(JSON.stringify(this.company.addresses[0].phoneNumbers[0].number));
+    this.company.addresses[1].locationName = JSON.parse(JSON.stringify(this.company.name));
+    this.validate.resetShippingAddress();
     this.onCroppImage();
     if (this.companyTimeZoneState.getTimeZone().length > 0) this.setTimeZone(this.companyTimeZoneState.getTimeZone());
     if (this.companyTimeZoneState.getTimeZone().length == 0) this.companyTimeZoneState.onGetTimeZone();
