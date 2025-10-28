@@ -393,6 +393,12 @@
                             formControlName="description"
                             [config]="editorConfig"
                         ></angular-editor>
+                        <app-mat-error
+                            class="invalid-feedback --pos-static qt-dib qt-mt-8 description-error"
+                            *ngIf="submitted && f2.description.errors"
+                        >
+                            The maximum number of characters - 50000
+                        </app-mat-error>
                     </ng-template>
                 </li>
                 <!-- <li [ngbNavItem]="'comments'">
