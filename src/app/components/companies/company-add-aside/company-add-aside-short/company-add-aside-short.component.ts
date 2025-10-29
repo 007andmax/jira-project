@@ -34,6 +34,10 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
       this.onGetUsers(this.usersStateService.getAllUsers());
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.onGetUsers(this.usersStateService.getAllUsers());
+    })
+    this.sub.add(onChangeUsers);
   }
   public onChangeName() {
     if (this.company.name && this.company.name.length > 0) {
@@ -42,10 +46,6 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
           this.validate.resetName();
           this.validate.resetNameIsExist();
           this.company.addresses[0].locationName = JSON.parse(JSON.stringify(this.company.name));
-          if (this.company.addresses[1].sameAsBilling) {
-            this.company.addresses[1].locationName = JSON.parse(JSON.stringify(this.company.name));
-            this.validate.resetShippingAddress();
-          }
         } else {
           this.validate.setNameIsExist();
         }

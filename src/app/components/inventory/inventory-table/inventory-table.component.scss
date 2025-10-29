@@ -18,7 +18,7 @@ pre {
     outline: none;
     overflow: auto;
     &::-webkit-scrollbar-thumb {
-        background: rgba(54, 70, 86, 0.8);
+        background: $gray-200;
         border-radius: 4px;
     }
     &::-webkit-scrollbar {

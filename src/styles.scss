@@ -2223,6 +2223,7 @@ ngb-typeahead-window {
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
+  left: 0;
   bottom: -23px;
 }
 .invalid-feedback.--pos-static {
@@ -3155,4 +3156,10 @@ body {
 }
 body.ready {
   opacity: 1;
+}
+.no-click {
+  pointer-events: none
+}
+app-ticket-detail-tasks-item {
+  display: contents;
 }

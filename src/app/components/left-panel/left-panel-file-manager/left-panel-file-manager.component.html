@@ -9,32 +9,37 @@
     class="app-left-panel__menu-expand"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
-    <a
+    <li>
+      <a
         href
         [link]="'companies'"
         target="_blank"
         appRightClickBlank
-    >
-        <li
-            [ngClass]="{'--active':activePage === 'file-manager'}"
-            (click)="goToState('file-manager');"
+      >
+        <span
+          [ngClass]="{'--active':activePage === 'file-manager'}"
+          (click)="goToState('file-manager');"
+          class="app-left-panel__menu-expand-link"
         >
             All Folder
-        </li>
-    </a>
-    <a
-        *ngIf="false"
-        href
-        [link]="'companies'"
-        target="_blank"
-        appRightClickBlank
-    >
-        <li
-            [ngClass]="{'--active':activePage === 'new-companies'}"
-            (click)="goToState('new-companies');"
-            class="qt-jc-sb"
-        >
-            Share Folder
-        </li>
-    </a>
+        </span>
+      </a>
+    </li>
+   <li>
+     <a
+       *ngIf="false"
+       href
+       [link]="'companies'"
+       target="_blank"
+       appRightClickBlank
+     >
+       <span
+         [ngClass]="{'--active':activePage === 'new-companies'}"
+         (click)="goToState('new-companies');"
+         class="app-left-panel__menu-expand-link"
+       >
+         Share Folder
+       </span>
+     </a>
+   </li>
 </ul>

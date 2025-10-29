@@ -34,6 +34,11 @@ export class TicketDetailAddAssignedUserComponent implements OnInit, OnDestroy {
       this.assignedUser.resetList(this.userList);
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.userList = this.getUsersForAssign();
+      this.assignedUser.resetList(this.userList);
+    })
+    this.sub.add(onChangeUsers);
   }
   openAssignedUser() {
     this.assignedUser.assignedUserDp.open();

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { SuperAdminPublicStateService } from 'src/app/states/super-admin-public/super-admin-public-state.service';
@@ -13,6 +13,8 @@ import { User } from '../users/class/user';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { Subscription } from 'rxjs';
 import { NotificationsStateService } from 'src/app/states/notifications/notifications-state.service';
+import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { TaskHeaderAddComponent } from '../tasks/task-header-add/task-header-add.component';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +22,8 @@ import { NotificationsStateService } from 'src/app/states/notifications/notifica
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  @ViewChild('addTask', { static: true }) addTask: NgbDropdown;
+  @ViewChild('addTaskComponent', { static: true }) addTaskComponent: TaskHeaderAddComponent;
   currentCompany: Company;
   currentUser: User;
   sub: Subscription = new Subscription();
@@ -95,5 +99,9 @@ export class HeaderComponent implements OnInit {
   }
   showHelpCanterAside() {
     this.superAdminPublicStateService.showAside();
+  }
+  onAddTasks() {
+    this.addTask.open();
+    this.addTaskComponent.initModelForm();
   }
 }

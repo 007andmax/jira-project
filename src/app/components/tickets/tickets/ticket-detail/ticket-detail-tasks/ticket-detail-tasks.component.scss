@@ -88,7 +88,7 @@
   transform: translate(50%, -50%);
 }
 
-::ng-deep .tab-pane__table-row .date-picker .qt-input-block__input {
+::ng-deep .tab-pane__table-row > .date-picker .qt-input-block__input {
   width: 28px;
   height: 28px;
   border-radius: 50%;
@@ -151,4 +151,32 @@
   align-items: center;
   justify-content: center;
   margin-right: 8px;
+}
+
+::ng-deep .add-task-container {
+  .tooltip {
+    white-space: nowrap;
+  }
+
+  .date-picker.date-picker-dropdown-day-time {
+    input {
+      border: 1px solid $gray-200;
+      color: $gray-900;
+    }
+
+    .icon__calendar {
+      left: unset;
+      transform: translate(50%, -50%);
+      width: 20px !important;
+      height: 20px !important;
+    }
+  }
+}
+.tasks-list-container {
+  max-height: 210px;
+  overflow: auto;
+  position: relative;
+}
+.pengind-loading {
+  top: unset;
 }

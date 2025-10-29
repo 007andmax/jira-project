@@ -37,6 +37,7 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+import { QuoteAsidePreviewBodyModule } from './quote-aside-preview/quote-aside-preview-body/quote-aside-preview-body.module';
 
 
 
@@ -44,12 +45,10 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 @NgModule({
     declarations: [QuotesComponent,
         QuotesTableComponent,
-        QuoteAsidePreviewComponent,
         QuoteAsideAddComponent,
         QuoteAsideEditComponent,
         QuotesHeaderComponent,
         QuotesItemComponent,
-        QuoteAsidePreviewBodyComponent,
         QuoteAsideAddBodyComponent,
         QuoteAsideEditBodyComponent,
         QuotesFilterComponent,
@@ -82,10 +81,9 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
         CompanyDropDownModule,
         NumberModule,
         MatErrorModule,
-        TextAreaModule
+        TextAreaModule,
+        QuoteAsidePreviewBodyModule
     ],
-
-
 
 })
 export class QuotesModule { }

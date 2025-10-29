@@ -1,0 +1,99 @@
+<div
+    class="app-left-panel__menu"
+    [ngClass]="{'--active': open}"
+    (click)="open = !open;openPanel()"
+>
+    <div class="app-left-panel__menu-title">Tasks</div>
+</div>
+<ul
+    class="app-left-panel__menu-expand"
+    [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
+>
+    <li
+        href
+        [link]="'tasks-dashboard'"
+        target="_blank"
+        appRightClickBlank
+    >
+        <a
+            [ngClass]="{'--active':activePage === 'tasks-dashboard'}"
+            (click)="goToState('tasks-dashboard')"
+            class="app-left-panel__menu-expand-link"
+        >
+            Dashboard
+        </a>
+    </li>
+    <li
+        href
+        [link]="'my-tasks'"
+        target="_blank"
+        appRightClickBlank
+        *ngIf="!customerPortalStateService.isCustomerPortal"
+    >
+        <a
+            [ngClass]="{'--active':activePage === 'my-tasks'}"
+            (click)="goToState('my-tasks')"
+            class="app-left-panel__menu-expand-link"
+        >
+            My Tasks
+        </a>
+    </li>
+</ul>
+<hr
+    class="app-left-panel__ticket-menu-line"
+    *ngIf="activePage === 'my-tasks'"
+>
+<ul
+    class="app-left-panel__filter-menu-expand menu-expand-show "
+    *ngIf="!customerPortalStateService.isCustomerPortal && activePage === 'my-tasks'"
+>
+    <li class="app-left-panel__menu-expand-subtitle">QUICK FILTERS</li>
+    <ng-template
+        ngFor
+        let-item
+        [ngForOf]="quickFilter"
+        [ngForTrackBy]="trackById"
+    >
+        <li
+            class="desktop-version filter-item"
+            (click)="setStatus(item)"
+        >
+            <div
+                [ngClass]="{'active': filter.filter === item.value || (item.value === 'ARCHIVED' && filter.archived)}"
+                class="app-left-panel__filter-menu-expand-link"
+                [textContent]="item.title"
+            ></div>
+        </li>
+    </ng-template>
+</ul>
+<hr class="app-left-panel__ticket-menu-line">
+<ul
+    class="app-left-panel__filter-menu-expand menu-expand-show"
+    *ngIf="!customerPortalStateService.isCustomerPortal"
+>
+    <li class="app-left-panel__menu-expand-subtitle">ASSIGNED TO</li>
+    <ng-template
+        ngFor
+        let-user
+        [ngForOf]="techUsersList"
+        [ngForTrackBy]="trackById"
+    >
+        <li
+            class="desktop-version filter-item qt-df qt-ai-c"
+            (click)="toggleTechUser(user)"
+        >
+            <label class="qt-checkbox">
+                <input
+                    type="checkbox"
+                    [checked]="filter.techUser && filter.techUser.id == user.id"
+                    disabled
+                >
+                <span></span>
+                <div
+                    class="qt-ml-8 qt-checkbox__text"
+                    [textContent]="user.firstName + ' ' + user.lastName"
+                ></div>
+            </label>
+        </li>
+    </ng-template>
+</ul>

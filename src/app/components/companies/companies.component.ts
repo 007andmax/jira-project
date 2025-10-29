@@ -92,9 +92,12 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     if (this.usersStateService.getAllUsers().length > 0) this.companyFilter.setUsers(this.usersStateService.getAllUsers());
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.companyFilter.setUsers(data);
-
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.companyFilter.setUsers(this.usersStateService.getAllUsers());
+    })
+    this.sub.add(onChangeUsers);
     let filter = this.companiesStateService.filter.subscribe(data => {
       this.showPreloader = true;
       console.log("this.companyFilter", this.companyFilter);

@@ -65,6 +65,9 @@ Example:
   &__ticket-status {
     background: url("/assets/img/icons/ticket-status.svg");
   }
+  &__ticket-settings-filled {
+    mask-image: url("/assets/img/icons/ticket-settings-filled.svg");
+  }
   &__firefox {
     background-image: url("/assets/img/icons/firefox.svg");
   }
@@ -94,6 +97,9 @@ Example:
   }
   &__claim-ticket {
     background-image: url("/assets/img/icons/claim-ticket.svg");
+  }
+  &__tech-users-filled {
+    mask-image: url("/assets/img/icons/tech-users-filled.svg");
   }
   &__rating-filled {
     mask-image: url("/assets/img/icons/rating-filled.svg");
@@ -265,6 +271,9 @@ Example:
   &__my-profile {
     mask-image: url("/assets/img/icons/my-profile.svg");
   }
+  &__profile-settings-filled {
+    mask-image: url("/assets/img/icons/profile-settings-filled.svg");
+  }
   &__close {
     mask-image: url("/assets/img/icons/close.svg");
   }
@@ -295,8 +304,14 @@ Example:
   &__crm {
     mask-image: url("/assets/img/icons/crm.svg");
   }
+  &__crm-settings-filled {
+    mask-image: url("/assets/img/icons/crm-settings-filled.svg");
+  }
   &__marketing {
     mask-image: url("/assets/img/icons/marketing.svg");
+  }
+  &__marketing-email-filled {
+    mask-image: url("/assets/img/icons/marketing-email-filled.svg");
   }
   &__tool {
     mask-image: url("/assets/img/icons/tool.svg");
@@ -325,6 +340,9 @@ Example:
   &__delete {
     mask-image: url("/assets/img/icons/delete.svg");
   }
+  &__archive-tasks {
+    mask-image: url("/assets/img/icons/archive-tasks.svg");
+  }
   &__attachments {
     mask-image: url("/assets/img/icons/attachements.svg");
   }
@@ -333,6 +351,9 @@ Example:
   }
   &__products {
     mask-image: url("/assets/img/icons/products.svg");
+  }
+  &__products-filled {
+    mask-image: url("/assets/img/icons/products-filled.svg");
   }
   &__service {
     mask-image: url("/assets/img/icons/service.svg");
@@ -355,6 +376,9 @@ Example:
   &__custom-category {
     mask-image: url("/assets/img/icons/custom-category.svg");
   }
+  &__customer-portal-filled {
+    mask-image: url("/assets/img/icons/customer-portal-filled.svg");
+  }
   &__panel-open {
     mask-image: url("/assets/img/icons/panel-open.svg");
   }
@@ -372,6 +396,12 @@ Example:
   }
   &__email-send {
     mask-image: url("/assets/img/icons/email-send.svg");
+  }
+  &__email-settings-filled {
+    mask-image: url("/assets/img/icons/email-settings-filled.svg");
+  }
+  &__email-templates-filled {
+    mask-image: url("/assets/img/icons/email-templates-filled.svg");
   }
   &__add {
     mask-image: url("/assets/img/icons/add-grey.svg");
@@ -418,6 +448,9 @@ Example:
   &__show {
     mask-image: url("/assets/img/icons/show.svg");
   }
+  &__company-profile-filled {
+    mask-image: url("/assets/img/icons/company-profile-filled.svg");
+  }
   &__hide {
     mask-image: url("/assets/img/icons/hide.svg")
   }
@@ -441,6 +474,9 @@ Example:
   }
   &__tickets {
     mask-image: url("/assets/img/icons/tickets.svg");
+  }
+  &__tickets-filled {
+    mask-image: url("/assets/img/icons/tickets-filled.svg");
   }
   &__billing {
     mask-image: url("/assets/img/icons/billing.svg");
@@ -499,11 +535,17 @@ Example:
   &__filter {
     mask-image: url("/assets/img/icons/filter.svg");
   }
+  &__finance-filled {
+    mask-image: url("/assets/img/icons/finance-filled.svg");
+  }
   &__merge {
     mask-image: url("/assets/img/icons/merge.svg");
   }
   &__commissions {
     mask-image: url("/assets/img/icons/commissions.svg");
+  }
+  &__commissions-filled {
+    mask-image: url("/assets/img/icons/commissions-filled.svg");
   }
   &__inactive {
     mask-image: url("/assets/img/icons/inactive.svg");
@@ -577,6 +619,15 @@ Example:
   &__message-response {
     mask-image: url("/assets/img/icons/message-response.svg");
   }
+  &__list-view {
+    mask-image: url("/assets/img/icons/list-view.svg");
+  }
+  &__task-type {
+    mask-image: url("/assets/img/icons/task-type.svg");
+  }
+  &__square-kanban {
+    mask-image: url("/assets/img/icons/square-kanban.svg");
+  }
   &__search {
     mask-image: url("/assets/img/icons/search.svg");
   }
@@ -621,6 +672,9 @@ Example:
   }
   &__tags {
     mask-image: url("/assets/img/icons/tags.svg");
+  }
+  &__tags-filled {
+    mask-image: url("/assets/img/icons/tags-filled.svg");
   }
   &__arrow-down {
     mask-image: url("/assets/img/icons/arrow-down.svg");
@@ -688,11 +742,23 @@ Example:
   &__device-connected {
     mask-image: url("/assets/img/icons/device-connected.svg");
   }
+  &__device-settings-filled {
+    mask-image: url("/assets/img/icons/device-settings-filled.svg");
+  }
   &__resend-receipt {
     mask-image: url("/assets/img/icons/resend-receipt.svg");
   }
   &__quick-support {
     mask-image: url("/assets/img/icons/quick-support.svg");
+  }
+  &__quick-support-filled {
+    mask-image: url("/assets/img/icons/quick-support-filled.svg");
+  }
+  &__dashboard-filled {
+    mask-image: url("/assets/img/icons/dashboard-filled.svg");
+  }
+  &__tasks {
+    mask-image: url("/assets/img/icons/tasks.svg");
   }
   &__reports {
     mask-image: url("/assets/img/icons/reports.svg");
@@ -709,6 +775,12 @@ Example:
   &__mark-as-read {
     mask-image: url("/assets/img/icons/mark-as-read.svg");
   }
+  &__mark-read {
+    mask-image: url("/assets/img/icons/mark-read.svg");
+  }
+ &__expand-diagonal {
+   mask-image: url("/assets/img/icons/expand-diagonal.svg");
+ }
   &.--updated {
     position: relative;
     &::before {

@@ -1,0 +1,113 @@
+<div
+    class="light-dropdown"
+    ngbDropdown
+    #dp="ngbDropdown"
+    [placement]="placement"
+>
+    <div
+        class="qt-df qt-ai-c"
+        *ngIf="selectedTag.length == 0"
+    >
+        <input
+            type="text"
+            class="pointer"
+            autocomplete="off"
+            placeholder="Select Assignee"
+            [ngClass]="{'--input-error' : !validate,'disabled': isDisabled}"
+            id="dropdown1"
+            readonly
+            ngbDropdownToggle
+            [disabled]="isDisabled"
+        >
+        <span class="app-drop-down__right-icon pointer">
+            <i class="icn-sm qt-icon icon__arrow-down report-caret-icon"></i>
+        </span>
+    </div>
+    <div
+        class="assigned-tags__row"
+        *ngIf="selectedTag.length > 0"
+    >
+        <app-dynamic-tooltip
+            [position]="'top'"
+            #productTooltip
+        ></app-dynamic-tooltip>
+        <app-mat-chip
+            class="app-mat-tags-with-avatar app-mat-tags-with-avatar--lg"
+            *ngFor="let tag of selectedTag; let i = index"
+            [isRemove]="!isDisabled"
+            (onClose)="remove(i)"
+        >
+            <div class="qt-df qt-ai-c">
+                <div
+                    class="app-mat-tags-with-avatar__avatar"
+                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(tag)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(tag)}"
+                ></div>
+                <div
+                    class="clip-text"
+                    *ngIf="reduceItemName(tag).length >= 30"
+                    (mouseenter)="productTooltip.setContent(reduceItemName(tag));productTooltip.show($event.target)"
+                    (mouseleave)="productTooltip.hide()"
+                >
+                    {{reduceItemName(tag)}}
+                </div>
+                <div
+                    class="clip-text"
+                    *ngIf="reduceItemName(tag).length < 30"
+                >
+                    {{reduceItemName(tag)}}
+                </div>
+            </div>
+        </app-mat-chip>
+        <div
+            class="qt-button --square-md --gray pointer"
+            ngbDropdownToggle
+            *ngIf="!isDisabled"
+        >
+            <span class="qt-icon icon__add qt-sz-16 qt-dib"></span>
+        </div>
+        <!-- <input
+                id="dropdownServices"
+                ngbDropdownToggle
+                [placeholder]="placeholder"
+                #userInput
+                class="pointer"
+                autocomplete="off"
+                (input)="onSearch($event)"
+            > -->
+    </div>
+    <div
+        class="dropdown-menu"
+        ngbDropdownMenu
+        placement="bottom-right"
+        aria-labelledby="dropdownServices"
+    >
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="list"
+            [ngForTrackBy]="trackById"
+        >
+            <div
+                ngbDropdownItem
+                class="assigne-user-item"
+                [ngClass]="{'--selected':isSelected(item)}"
+                (click)="toggleItem(item)"
+            >
+                <div
+                    class="assigne-user-avatar"
+                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(item)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(item)}"
+                ></div>
+                <div
+                    class="assigne-user-name"
+                    [textContent]="reduceItemName(item)"
+                ></div>
+                <div
+                    *ngIf="isSelected(item)"
+                    class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain filter-users-check"
+                ></div>
+            </div>
+        </ng-template>
+    </div>
+</div>

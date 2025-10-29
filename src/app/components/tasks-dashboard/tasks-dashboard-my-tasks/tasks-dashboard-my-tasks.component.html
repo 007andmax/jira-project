@@ -1,0 +1,103 @@
+<div class="qt-page-list page-my-tasks">
+    <div class="qt-page-list__header --sticky">
+        <div class="qt-page-list__header-title-line qt-mb-4">
+            <div class="qt-page-list__header-title-line--left">
+                <h6 class="qt-page-list__header-title">My Tasks</h6>
+            </div>
+            <div class="qt-page-list__header-title-line--rigth">
+                <div class="qt-df qt-ai-c">
+                    <button
+                        class="qt-button --md"
+                        (click)="showAsideForAdd()"
+                    >
+                        <span class="qt-icon icon__add qt-sz-16 qt-icon__white qt-dib qt-mr-8"></span>
+                        Add Task
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul
+        ngbNav
+        #nav="ngbNav"
+        [(activeId)]="activeTab"
+        class="nav-tabs dashboard-tabs"
+        (navChange)="setTab($event)"
+    >
+        <!-- Profile -->
+        <li
+            class="dashboard-tabs__item"
+            [ngbNavItem]="'all'"
+        >
+            <a
+                class="dashboard-tabs__item-link"
+                ngbNavLink
+            >
+                All
+            </a>
+            <ng-template ngbNavContent>
+                <app-tasks-dashboard-my-tasks-list></app-tasks-dashboard-my-tasks-list>
+            </ng-template>
+        </li>
+        <li
+            class="dashboard-tabs__item"
+            [ngbNavItem]="'upcoming'"
+        >
+            <a
+                class="dashboard-tabs__item-link"
+                ngbNavLink
+            >
+                Upcoming
+            </a>
+            <ng-template ngbNavContent>
+                <app-tasks-dashboard-my-tasks-list [filterType]="'UPCOMING'"></app-tasks-dashboard-my-tasks-list>
+            </ng-template>
+        </li>
+        <li
+            class="dashboard-tabs__item"
+            [ngbNavItem]="'overdue'"
+        >
+            <a
+                class="dashboard-tabs__item-link"
+                ngbNavLink
+            >
+                Overdue
+            </a>
+            <ng-template ngbNavContent>
+                <app-tasks-dashboard-my-tasks-list [filterType]="'OVERDUE'"></app-tasks-dashboard-my-tasks-list>
+            </ng-template>
+        </li>
+        <li
+            class="dashboard-tabs__item"
+            [ngbNavItem]="'completed'"
+        >
+            <a
+                class="dashboard-tabs__item-link"
+                ngbNavLink
+            >
+                Completed
+            </a>
+            <ng-template ngbNavContent>
+                <app-tasks-dashboard-my-tasks-list [filterType]="'COMPLETED'"></app-tasks-dashboard-my-tasks-list>
+            </ng-template>
+        </li>
+        <li
+            class="dashboard-tabs__item"
+            [ngbNavItem]="'archived'"
+        >
+            <a
+                class="dashboard-tabs__item-link"
+                ngbNavLink
+            >
+                Archived
+            </a>
+            <ng-template ngbNavContent>
+                <app-tasks-dashboard-my-tasks-list [filterType]="'ARCHIVED'"></app-tasks-dashboard-my-tasks-list>
+            </ng-template>
+        </li>
+    </ul>
+    <div
+        [ngbNavOutlet]="nav"
+        class="mt-2"
+    ></div>
+</div>

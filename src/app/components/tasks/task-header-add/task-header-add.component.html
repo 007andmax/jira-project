@@ -1,0 +1,86 @@
+<form
+    [formGroup]="modelForm"
+    class="create-task-popover"
+    (keydown.enter)="$event.preventDefault()"
+>
+    <div class="create-task-popover__header qt-df qt-ai-c qt-jc-sb">
+        <h3 class="create-task-popover__title">Create Task</h3>
+        <div class="qt-df qt-ai-c">
+            <div
+                class="qt-button --sm qt-ml-8"
+                appDisabledBtn
+                #saveBtn="disabled"
+                (onClick)="save()"
+                [ngClass]="{'--loading':saveBtn.isBlock()}"
+            >
+                <span>Save Task</span>
+                <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
+            </div>
+            <div
+                class="qt-button --square-sm --gray pointer qt-ml-8"
+                (click)="openAside()"
+                placement="top"
+                ngbTooltip="Expand"
+                container="body"
+            >
+                <div class="qt-icon icon__expand-diagonal qt-sz-16 pointer"></div>
+            </div>
+            <div
+                class="qt-button --square-sm --gray pointer qt-ml-8"
+                (click)="close()"
+            >
+                <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+            </div>
+        </div>
+    </div>
+    <div class="create-task-popover__body">
+        <div class="qt-df qt-ai-c qt-f-1">
+            <div
+                class="qt-icon icon__check qt-sz-20 qt-mr-8 pointer"
+                [ngClass]="{'qt-icon__green-600':modelForm && modelForm.value.taskStatus  == 'CLOSED'}"
+                (click)="toggleStatus()"
+            ></div>
+            <input
+                *ngIf="modelForm"
+                type="text"
+                class="form-input --editable"
+                placeholder="Write a Task Name..."
+                formControlName="title"
+                (keyup)="onKeyUp($event)"
+            >
+        </div>
+        <div class="my-tasks-table__type">
+            <app-task-header-add-type
+                #type
+                [container]="'body'"
+                (onChange)="onSelectType($event)"
+            ></app-task-header-add-type>
+        </div>
+        <div class="my-tasks-table__date qt-df qt-ai-c qt-ml-8">
+            <div
+                class="qt-mr-4 my-tasks-table__date--text"
+                *ngIf="modelForm && modelForm.value.startDate"
+                [textContent]="parseStartDate(modelForm.value.startDate)"
+            ></div>
+            <app-tasks-date-picker
+                #datePicker
+                [container]="'body'"
+                [editStart]="modelForm?.value.startDate"
+                [editEnd]="modelForm?.value.endDate"
+                [validate]="!(submitted && f2.startDate.errors)"
+                [errorMessage]="'Start date is required'"
+                (selectedDate)="filterByDate($event)"
+            ></app-tasks-date-picker>
+        </div>
+        <div class="my-tasks-table__tech-users qt-ml-8">
+            <app-tech-users
+                #tachUser
+                [editMode]="true"
+                [type]="'TASKS'"
+                [users]="techUsersList"
+                [container]="'body'"
+                (usersChange)="onSelectTechUser($event)"
+            ></app-tech-users>
+        </div>
+    </div>
+</form>

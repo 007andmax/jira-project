@@ -16,8 +16,11 @@ import { Subscription } from 'rxjs';
 export class ServicesListComponent implements OnInit, OnDestroy {
   @ViewChild('products', { static: true }) products_dropDown: NgbDropdown;
   @Input() isDisabled: boolean = false;
+  @Input() isBlock: boolean = false;
   preloader: boolean = false;
+  @Input() selectedItem: any = null;
   @Input() editItem: any;
+  @Input() isBlockClear: boolean = true;
   @Input() itemList: any;
   @Output() serviceList: any;
   @Output() selectedServicesItem = new EventEmitter<any>();
@@ -40,13 +43,14 @@ export class ServicesListComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
 
-    if (this.editItem && this.editItem.duration) this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
-    if (this.editItem && this.type === TYPE_QUOTE) this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
-    if (this.editItem && this.type === TYPE_TICKET) this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
+    if (this.editItem && this.editItem.duration || this.editItem && this.type === TYPE_QUOTE || this.editItem && this.type === TYPE_TICKET) {
+      this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
+      this.selectedItem = this.editItem;
+    }
     let onServicePreloader = this.ticketStateService.onServicePreloader.subscribe(data => {
-      this.isDisabled = data;
+      this.isBlock = data;
       this.preloader = data;
-      this.clear();
+      if (!this.editItem) this.clear();
       this.cd.detectChanges();
     })
     this.sub.add(onServicePreloader);
@@ -60,6 +64,7 @@ export class ServicesListComponent implements OnInit, OnDestroy {
 
   public setEditItem(data) {
     this.editItem = data;
+    this.selectedItem = data;
     this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
     this.cd.detectChanges();
   }
@@ -79,7 +84,7 @@ export class ServicesListComponent implements OnInit, OnDestroy {
    * @param item - selected services item
    */
   public selectServicesItem(item) {
-
+    this.selectedItem = item;
     this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(item);
 
     this.products_dropDown.close();
@@ -89,8 +94,15 @@ export class ServicesListComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     }
   }
+  clearClient() {
+
+    this.selectedItem = null;
+    this.elRef.nativeElement.querySelector("#dropdownServices").value = "";
+    this.selectedServicesItem.emit(null);
+    this.cd.detectChanges();
+  }
   public isSelected(id) {
-    return this.editItem && this.editItem.name && this.editItem.versionedId.id == id;
+    return this.selectedItem && this.selectedItem.name && this.selectedItem.versionedId.id == id;
   }
 
   public clear() {

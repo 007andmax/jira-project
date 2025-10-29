@@ -5,19 +5,22 @@
     <div class="app-left-panel__menu-title">Reports</div>
 </div>
 <ul class="app-left-panel__menu-expand menu-expand-hide">
-    <a
+    <li>
+      <a
         href
         [link]="'reports'"
         target="_blank"
         appRightClickBlank
-    >
-        <li
-            [ngClass]="{'--active':  activePage === 'new-reports'}"
-            (click)="goToState('new-reports')"
+      >
+        <span
+          [ngClass]="{'--active':  activePage === 'new-reports'}"
+          (click)="goToState('new-reports')"
+          class="app-left-panel__menu-expand-link"
         >
-            All Reports
-        </li>
-    </a>
+          All Reports
+        </span>
+      </a>
+    </li>
 </ul>
 <div class="qt-aside-modern__content advanced">
     <ng-template
@@ -26,6 +29,7 @@
         [ngForOf]="list"
         [ngForTrackBy]="trackById"
     >
+        <hr class="app-left-panel__ticket-menu-line">
         <div
             class="report-menu-item"
             *ngIf="report.permissions ? getPermissions(report.permissions) : true"
@@ -43,8 +47,8 @@
                 [ngForTrackBy]="trackById"
             >
                 <span
-                    class="pointer"
-                    [ngClass]="{'active':isActive(subcategory.route)}"
+                    class="app-left-panel__menu-expand-link"
+                    [ngClass]="{'--active':isActive(subcategory.route)}"
                     [textContent]="subcategory.name"
                     (click)="goToState(subcategory.route)"
                 ></span>

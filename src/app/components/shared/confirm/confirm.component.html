@@ -305,6 +305,60 @@
     </div>
 </div>
 <div
+    class="archive-modal"
+    *ngIf="action === 'DELETE_TASK'"
+>
+    <div class="archive-modal__body">
+        <h3>Delete Task</h3>
+        <p>
+            Are you sure you want to delete this task?
+        </p>
+    </div>
+    <div class="archive-modal__footer">
+        <div class="qt-df qt-jc-fe">
+            <button
+                class="qt-button --gray qt-w100"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button --red qt-w100"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
+            </button>
+        </div>
+    </div>
+</div>
+<div
+    class="archive-modal"
+    *ngIf="action === 'ARCHIVE_TASK'"
+>
+    <div class="archive-modal__body">
+        <h3>Archive Task</h3>
+        <p>
+            Are you sure you want to archive this task?
+        </p>
+    </div>
+    <div class="archive-modal__footer">
+        <div class="qt-df qt-jc-fe">
+            <button
+                class="qt-button --gray qt-w100"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button --red qt-w100"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
+            </button>
+        </div>
+    </div>
+</div>
+<div
     class="archive-modal de-archive"
     *ngIf="action === 'DEARCHIVE_COMPANY'"
 >

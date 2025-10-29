@@ -8,6 +8,9 @@ import * as moment from "moment";
 import { TicketStateService } from '../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { NotificationsRealTimeService } from 'src/app/states/notifications/notifications-real-time.service';
+import { id } from '@swimlane/ngx-charts';
+import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
+import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 
 @Component({
   selector: 'app-notifications',
@@ -18,6 +21,7 @@ import { NotificationsRealTimeService } from 'src/app/states/notifications/notif
 export class NotificationsComponent {
   opened = false;
   page: number = 0;
+  onlyUnread: boolean = true;
   offset: number = 20;
   infiniteScrollDisabled = true;
   showPendingPreloader: boolean = false;
@@ -31,7 +35,9 @@ export class NotificationsComponent {
     public cd: ChangeDetectorRef,
     private ticketStateService: TicketStateService,
     private companiesStateService: CompaniesStateService,
-    private notificationsRealTimeService: NotificationsRealTimeService
+    private notificationsRealTimeService: NotificationsRealTimeService,
+    private quoteStateService: QuoteStateService,
+    private tasksStateService: TasksStateService,
   ) { }
   ngOnInit() {
 
@@ -54,9 +60,15 @@ export class NotificationsComponent {
   markAsRead(item) {
     this.notificationsService.markAsRead(item.id).subscribe(res => {
       item.read = true;
+      if (this.onlyUnread) {
+        let index = this.list.findIndex(i => i.id === item.id);
+        if (index > -1) this.list.splice(index, 1);
+      }
     })
   }
-  remove(item) {
+  remove(event, item) {
+    event.stopPropagation();
+    event.preventDefault();
     this.notificationsService.remove(item.id).subscribe(res => {
 
     })
@@ -70,24 +82,43 @@ export class NotificationsComponent {
     })
   }
   parsedate(date) {
+
     return moment(date).format('DD MMM YYYY');
   }
   editTicket(item) {
-    if (!item.read) this.markAsRead(item)
-    this.ticketStateService.setTicketRoutingId(item.ticket.id);
-    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${item.ticket.id}`;
-    window.open(url, '_blank');
+    if (!item.relatedEntityDeleted) {
+      this.ticketStateService.setTicketRoutingId(item.ticketId);
+      const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${item.ticketId}`;
+      window.open(url, '_blank');
+    }
+  }
+  editQuote(item) {
+    this.quoteStateService.setPreview({ id: item.saleQuoteId });
+  }
+  editTask(item) {
+    if (!item.relatedEntityDeleted) this.tasksStateService.openEditAside({ id: item.taskId });
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;
     this.getNotifications();
+  }
+  public setOnlyUnread(data) {
+    this.onlyUnread = data;
+  }
+  public setDefaultScoll() {
+    this.page = 0;
+    this.list = [];
+    this.infiniteScrollDisabled = true;
+    this.showPreloader = true;
+    this.ticketsListService.setBlockList(false);
+    this.onScroll();
   }
   getNotifications() {
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
     }
-    this.notificationsService.getList(this.page).subscribe((data: any) => {
+    this.notificationsService.getList(this.page, this.onlyUnread).subscribe((data: any) => {
       this.list = [...this.list, ...data.userNotifications.map(item => new Notification(item))];
       this.infiniteScrollDisabled = false;
       if (data.userNotifications.length < this.offset) this.ticketsListService.setBlockList(true);
@@ -97,7 +128,17 @@ export class NotificationsComponent {
       this.cd.detectChanges();
     })
   }
+  showDetails(item) {
+    if (!item.read) this.markAsRead(item)
+    if (item.type != 'QUOTE_STATUS_UPDATED' && item.type != 'TASK_ASSIGNED' && item.type != 'TASK_OVERDUE') this.editTicket(item);
+    if (item.type == 'QUOTE_STATUS_UPDATED') this.editQuote(item);
+    if (item.type == 'TASK_ASSIGNED' || item.type == 'TASK_OVERDUE') this.editTask(item);
+  }
+  getNotificationCounter() {
+    return this.notificationsStateService.getUnreadCount();
+  }
   closed() {
+    this.onlyUnread = true;
     this.opened = false;
     this.showPreloader = false;
     this.infiniteScrollDisabled = true;

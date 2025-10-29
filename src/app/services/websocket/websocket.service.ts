@@ -44,6 +44,7 @@ import { FileManagementRealTimeService } from 'src/app/states/file-management/fi
 import { SubscriptionServicesRealTimeService } from 'src/app/states/subscription-services/subscription-services-real-time.service';
 import { ApiKeysRealTimeService } from 'src/app/states/api-keys/api-keys-real-time.service';
 import { NotificationsRealTimeService } from 'src/app/states/notifications/notifications-real-time.service';
+import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
 
 
 /**
@@ -109,7 +110,8 @@ export class WebsocketService {
     private fileManagementRealTimeService: FileManagementRealTimeService,
     private subscriptionServicesRealTimeService: SubscriptionServicesRealTimeService,
     private apiKeysRealTimeService: ApiKeysRealTimeService,
-    private notificationsRealTimeService: NotificationsRealTimeService
+    private notificationsRealTimeService: NotificationsRealTimeService,
+    private tasksRealTimeService: TasksRealTimeService
 
   ) {
   }
@@ -161,7 +163,9 @@ export class WebsocketService {
       that.subsribeToSubscriptionService();
       if (data.command === "CONNECTED") this.websocketStateService.initConnection();
       that.subsribeToApiKeys();
-      this.subsribeToNotifications();
+      that.subsribeToNotifications();
+      that.subsribeToTasks();
+      that.subsribeToQuotesNumber();
       that.onInit.emit(true);
       that.isInit = true;
     }
@@ -306,6 +310,17 @@ export class WebsocketService {
       });
     }, 3000);
   }
+  private subsribeToTasks() {
+
+    setTimeout(() => {
+      this.stompClient.subscribe("/user/watch/tasks", (message) => {
+        var newChange = JSON.parse(message.body);
+        this.tasksRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+        }
+      });
+    }, 3000);
+  }
   /**
    * subscribe to quote permissions realtime
    */
@@ -350,6 +365,17 @@ export class WebsocketService {
       this.stompClient.subscribe(`/user/watch/saleQuotes/${id}`, (message) => {
         var newChange = JSON.parse(message.body);
         this.quoteRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+
+        }
+      });
+    }, 3000);
+  }
+  public subsribeToQuotesNumber() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/number/SALE_QUOTE`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.quoteRealTimeService.handleRealTimeNumber(newChange);
         if (message.body) {
 
         }

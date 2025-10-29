@@ -389,6 +389,20 @@ export class ServiceAgreement {
         })
         return sum;
     };
+    public checkDuplicatedBlockTimeAndTrackServices() {
+        this.blockTimeServices.forEach(item => {
+            item.validateDuplicated = true;
+        });
+        let list = [...this.blockTimeServices, ...this.services];
+        list.forEach((item1, i) => {
+            list.forEach((item2, u) => {
+                if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated) item2.validateDuplicated = false;
+            })
+        })
+        let validateDuplicated = (list.find(item => !item.validateDuplicated)) ? false : true;
+        let validate = (list.find(item => !item.validate)) ? false : true;
+        return validateDuplicated && validate;
+    }
     public calculateTotalAmount() {
         let sum = 0;
         if (Number(this.includedHours) && Number(this.blockRate)) {

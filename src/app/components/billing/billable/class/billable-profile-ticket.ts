@@ -16,7 +16,9 @@ export class BillableProfileTicket {
     sum: number;
     taxSum: number;
     ticketNumber: string;
-    selected:boolean = false;
+    selected: boolean = false;
+    isForTask: boolean = false;
+    taskId: string = '';
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];

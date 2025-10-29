@@ -1,7 +1,16 @@
 <div class="app-left-panel__body">
     <div class="app-left-panel__body-icon">
         <div class="qt-df qt-jc-sb qt-ai-c app-left-panel__header-mobile qt-df qt-jc-fs">
-            <div class="icon__monogram qt-sz-40 qt-bg-contain qt-ml-auto qt-mr-auto qt-mt-16 qt-mb-16"></div>
+            <div class="icon__monogram qt-sz-40 qt-bg-contain qt-ml-auto qt-mr-auto qt-mt-12 qt-mb-12"></div>
+        </div>
+        <div
+            class="app-left-panel__menu-icon-wrap pointer"
+            (click)="changePage('TASKS');onOpenPanel();onChangeState('tasks-dashboard')"
+            [ngClass]="{'--active':page === 'TASKS' }"
+            placement="right"
+            ngbTooltip="Tasks"
+        >
+            <div class="app-left-panel__menu-icon qt-icon icon__tasks qt-icon__gray-400 --tasks"></div>
         </div>
         <div
             *ngIf="getPermissions('ALLOW_QUICK_CONNECT')"
@@ -11,7 +20,7 @@
             placement="right"
             ngbTooltip="Support"
         >
-            <div class="app-left-panel__menu-icon qt-icon icon__quick-support qt-icon__gray-300 --quick-support"></div>
+            <div class="app-left-panel__menu-icon qt-icon icon__quick-support qt-icon__gray-400 --quick-support-filled"></div>
         </div>
         <div
             class="app-left-panel__menu-icon-wrap pointer"
@@ -20,7 +29,7 @@
             placement="right"
             ngbTooltip="Tickets"
         >
-            <div class="app-left-panel__menu-icon qt-icon icon__tickets qt-icon__gray-300 --tickets"></div>
+            <div class="app-left-panel__menu-icon qt-icon icon__tickets qt-icon__gray-400 --tickets-filled"></div>
         </div>
         <div
             *ngIf="getPermissions('VIEW_USERS') || customerPortalStateService.isCustomerPortal"
@@ -30,7 +39,7 @@
             placement="right"
             ngbTooltip="Users"
         >
-            <div class="app-left-panel__menu-icon qt-icon icon__users qt-icon__gray-300 --users"></div>
+            <div class="app-left-panel__menu-icon qt-icon icon__users qt-icon__gray-400 --users-filled"></div>
         </div>
         <div
             *ngIf="getPermissions('VIEW_USERS')"
@@ -40,7 +49,7 @@
             placement="right"
             ngbTooltip="Marketing"
         >
-            <div class="app-left-panel__menu-icon qt-icon icon__marketing qt-icon__gray-300 --marketing"></div>
+            <div class="app-left-panel__menu-icon qt-icon icon__marketing qt-icon__gray-400 --marketing-filled"></div>
         </div>
         <div
             *ngIf="getPermissions('VIEW_COMPANIES') || customerPortalStateService.isCustomerPortal"
@@ -50,7 +59,7 @@
             placement="right"
             ngbTooltip="Companies"
         >
-            <div class="app-left-panel__menu-icon qt-icon icon__companies qt-icon__gray-300 --companies"></div>
+            <div class="app-left-panel__menu-icon qt-icon icon__companies qt-icon__gray-400 --companies-filled"></div>
         </div>
         <div
             *ngIf="customerPortalStateService.isCustomerPortal && (getCompanyInfoPermissions('VIEW_ALL_QUOTES') || getCompanyInfoPermissions('VIEW_ALL_INVOICES') || getCompanyInfoPermissions('VIEW_ALL_PAYMENTS')) || !customerPortalStateService.isCustomerPortal"
@@ -60,7 +69,7 @@
             placement="right"
             ngbTooltip="Billing"
         >
-            <div class="app-left-panel__menu-icon qt-icon icon__billing qt-icon__white --billing"></div>
+            <div class="app-left-panel__menu-icon qt-icon icon__billing qt-icon__white --billing-filled"></div>
         </div>
         <div
             *ngIf="!customerPortalStateService.isCustomerPortal"
@@ -70,7 +79,7 @@
             placement="right"
             ngbTooltip="Inventory"
         >
-            <div class="app-left-panel__menu-icon qt-icon icon__products qt-icon__gray-300 --products"></div>
+            <div class="app-left-panel__menu-icon qt-icon icon__products qt-icon__gray-400 --inventory-filled"></div>
         </div>
         <div
             *ngIf="getPermissions('VIEW_PASSWORD_SECTION')"
@@ -80,7 +89,7 @@
             placement="right"
             ngbTooltip="Password Manager"
         >
-            <div class="app-left-panel__menu-icon qt-icon icon__password qt-icon__gray-300 --password-manager"></div>
+            <div class="app-left-panel__menu-icon qt-icon icon__password qt-icon__gray-400 --password-manager-filled"></div>
         </div>
         <div
             *ngIf="!customerPortalStateService.isCustomerPortal"
@@ -90,7 +99,7 @@
             placement="right"
             ngbTooltip="Documents"
         >
-            <div class="app-left-panel__menu-icon qt-icon icon__documents qt-icon__gray-300 --documents"></div>
+            <div class="app-left-panel__menu-icon qt-icon icon__documents qt-icon__gray-400 --documents-filled"></div>
         </div>
         <!-- <div
             class="app-left-panel__menu-icon-wrap pointer"
@@ -100,7 +109,7 @@
             ngbTooltip="Devices"
             *ngIf="currentCompany && (currentCompany.id === '73221c72-f87c-4519-8235-c4b57ad1cc19' || currentCompany.id === '72381bff-127c-4a63-9d2e-6e952350dcbd')"
         >
-            <div class="app-left-panel__menu-icon qt-icon icon__tool qt-icon__gray-300 --devices"></div>
+            <div class="app-left-panel__menu-icon qt-icon icon__tool qt-icon__gray-400 --devices"></div>
         </div> -->
         <div
             *ngIf="getAccessReports()"
@@ -110,7 +119,7 @@
             placement="right"
             ngbTooltip="Reports"
         >
-            <div class="app-left-panel__menu-icon qt-icon icon__reports qt-icon__gray-300 --reports"></div>
+            <div class="app-left-panel__menu-icon qt-icon icon__reports qt-icon__gray-400 --reports-filled"></div>
         </div>
         <div
             *ngIf="!customerPortalStateService.isCustomerPortal"
@@ -120,7 +129,7 @@
             placement="right"
             ngbTooltip="File Manager"
         >
-            <div class="app-left-panel__menu-icon qt-icon icon__folder qt-icon__gray-300 --folder-management"></div>
+            <div class="app-left-panel__menu-icon qt-icon icon__folder qt-icon__gray-400 --file-manager-filled"></div>
         </div>
         <div
             class="app-left-panel__menu-icon-wrap app-left-panel__menu-icon-wrap-settings pointer"
@@ -129,7 +138,7 @@
             placement="right"
             ngbTooltip="Settings"
         >
-            <div class="app-left-panel__menu-icon qt-icon icon__settings qt-icon__gray-300 --settings"></div>
+            <div class="app-left-panel__menu-icon qt-icon icon__settings qt-icon__gray-400 --settings-filled"></div>
         </div>
     </div>
     <div
@@ -137,7 +146,7 @@
         [ngClass]="{'--open':showMobTab}"
     >
         <div
-            class="app-left-panel__header-resize-btn qt-icon icon__panel-open qt-sz-20"
+            class="app-left-panel__header-resize-btn qt-icon qt-icon__gray-400 icon__panel-open qt-sz-20"
             (click)="onToggleLeftPanel()"
         ></div>
         <app-left-panel-support
@@ -235,5 +244,12 @@
             [activePage]="state"
             [hidden]="page !== 'SETTINGS'"
         ></app-left-panel-settings>
+        <app-left-panel-tasks
+            #panelTasks
+            (onOpenPanel)="onOpenPanel()"
+            (onChangeState)="onChangeState($event)"
+            [activePage]="state"
+            [hidden]="page !== 'TASKS'"
+        ></app-left-panel-tasks>
     </div>
 </div>

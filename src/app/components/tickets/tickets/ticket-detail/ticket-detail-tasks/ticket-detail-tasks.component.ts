@@ -15,27 +15,40 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketsRealTimeService } from 'src/app/states/tickets/tickets-real-time.service';
 import { OnDestroy } from '@angular/core';
 import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
+import { Task } from 'src/app/components/tasks/class/task';
+import { TasksService } from 'src/app/services/tasks/tasks.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
+import { TicketsListService } from '../../services/tickets-list.service';
 
 @Component({
   selector: 'ticket-detail-tasks',
   templateUrl: './ticket-detail-tasks.component.html',
-  styleUrls: ['./ticket-detail-tasks.component.scss']
+  styleUrls: ['./ticket-detail-tasks.component.scss'],
+  providers: [TicketsListService]
 })
 export class TicketDetailTasksComponent implements OnInit, OnDestroy {
   showAdd: boolean = false;
+  showPendingPreloader: boolean = false;
   list: Array<TicketProfileTask> = [];
   addTask: TicketProfileTask = new TicketProfileTask();
   listTechUsers = [];
+  initAddTask: boolean = true;
   sub: Subscription = new Subscription();
   @ViewChild('addTaskBtn', { static: false }) addTaskBtn: ClickOutsideDirective;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
+  public infiniteScrollDisabled = true;
+  public page_number: number = 0;
   constructor(private ticketsService: TicketsService,
     private ticketStateService: TicketStateService,
     private confirmStateService: ConfirmStateService,
-    private modalService: NgbModal,
+    private tasksService: TasksService,
     private ticketsRealTimeService: TicketsRealTimeService,
     public cd: ChangeDetectorRef,
+    private companiesStateService: CompaniesStateService,
     public ticketsPermissionsService: TicketsPermissionsService,
+    public tasksRealTimeService: TasksRealTimeService,
+    private ticketsListService: TicketsListService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
@@ -52,31 +65,76 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
       this.listTechUsers = this.getUsersForAssign();
     })
     this.sub.add(getOnUsers);
-    let changeTicketTasks = this.ticketsRealTimeService.changeTicketTasks.subscribe(data => {
-      if (data.action == "TASK_EDITED") {
-        let index = this.list.findIndex(item => item.id == data.data.id);
-        this.list[index] = new TicketProfileTask(data.data);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.listTechUsers = this.getUsersForAssign();
+    })
+    this.sub.add(onChangeUsers);
+    let getChangeCompanies = this.tasksRealTimeService.changeTasksArray.subscribe((data) => {
+      if (data.action === 'TASK_SAVED' && data.data.associatedTicketId == this.ticketProfile.id && !this.list.some(item => item.id == data.data.id)) {
+        this.list.unshift(new TicketProfileTask(data.data));
       }
-      if (data.action == "TASK_SAVED" && !this.list.some(item => item.id == data.data.id)) this.list.push(new TicketProfileTask(data.data));
-      if (data.action == "TASK_REMOVED") {
+      if (data.action === 'TASK_EDITED') {
+        let index = this.list.findIndex(item => item.id == data.data.id);
+        if (index > -1) {
+          this.list[index] = new TicketProfileTask(data.data);
+        }
+      }
+      if (data.action === 'TASK_DELETED') {
         let index = this.list.findIndex(item => item.id == data.data);
-        if (index > -1) this.list.splice(index, 1);
+        if (index > -1) {
+          this.list.splice(index, 1);
+        }
+      }
+      if (data.action === 'TASK_ARCHIVED') {
+        let index = this.list.findIndex(item => item.id == data.data);
+        if (index > -1) {
+          this.list.splice(index, 1);
+        }
       }
       this.ticketStateService.setListTasks(this.list);
       this.cd.detectChanges();
     })
-    this.sub.add(changeTicketTasks);
-
+    this.sub.add(getChangeCompanies);
+    this.setDefaultValueForAddTask();
   }
   public getTicketTasks(id) {
-    this.ticketsService.getTicketTasks(id).subscribe((data: any) => {
-      this.list = data.map(item => new TicketProfileTask(item))
+    if (this.ticketsListService.getBlockList()) {
+      this.infiniteScrollDisabled = false;
+      return;
+    }
+    if (this.page_number > 0) this.showPendingPreloader = true;
+    this.ticketsService.getTicketTasks(id, this.page_number).subscribe((data: any) => {
+      this.list = [...this.list, ...data.map(item => new TicketProfileTask(item))];
+      console.log("this.list", this.list);
       this.ticketStateService.setListTasks(this.list);
+      this.infiniteScrollDisabled = false;
+      if (data.length < 10) this.ticketsListService.setBlockList(true);
+      this.page_number += 1;
+      // this.showPreloader = false;
+      this.showPendingPreloader = false;
       this.cd.detectChanges();
     })
   }
+  public onScroll() {
+    this.infiniteScrollDisabled = true;
+    this.getTicketTasks(this.ticketProfile.id);
+  }
+  onCloseDatePicker(event) {
+    setTimeout(() => {
+      this.initAddTask = event;
+    }, 500);
+  }
+  public filterByDate(value) {
+    if (value.start !== '' && value.end !== '') {
+      this.addTask.startDate = value.start;
+      this.addTask.endDate = value.end;
+    } else {
+      this.addTask.resetStartDate();
+      this.addTask.resetEndDate();
+    }
+  }
   setStatus(item, status) {
-    item.setStatus(status);
+    item.setTaskStatus(status);
     item.onInitEdit(true);
   }
   getUsersForAssign() {
@@ -94,48 +152,55 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
     if (data.length === 1) item.setAssignedUser(data[0]);
     item.onInitEdit(true);
   }
+  onSelectTechUser(items) {
+    this.addTask.setAssignedUser(items.map(item => item.id));
+  }
   onKeyUp(event) {
     if (event.keyCode === 13) this.onAddTicketTask();
   }
-  remove(item) {
-    this.ticketStateService.setTaskForRemove(item);
-    this.confirmStateService.setConfirmAction(REMOVE_TASK_TICKET);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Are you sure you want to delete this task?`;
+  onSelectType(data) {
+    this.addTask.setType(data.value);
   }
   onDelete() {
     let id = JSON.parse(JSON.stringify(this.ticketStateService.getTaskForRemove().id));
-    this.ticketsService.removeTicketTask(id).subscribe(data => {
+    this.tasksService.deleteTask(id).subscribe(data => {
       let index = this.list.findIndex(item => item.id == id);
       if (index > -1) this.list.splice(index, 1);
     })
   }
   onAddTicketTask() {
-    if (this.addTask.subject.length === 0 || !this.addTaskBtn.getInit()) return;
+    if (this.addTask.title.length === 0 || !this.addTaskBtn.getInit()) return;
     this.addTaskBtn.setInit(false);
-    this.ticketsService.addTicketTasks(this.addTask.getDataForAdd(this.ticketProfile.id)).pipe(map((res) => res),
+    this.addTask.associatedTicketId = this.ticketProfile.id;
+    if (!this.addTask.startDate) {
+      let startDate = new Date();
+      this.addTask.startDate = startDate.getTime();
+      let step = 1;
+      let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany() ? this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
+      if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') step = 1;
+      if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') step = 5;
+      if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') step = 10;
+      if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') step = 15;
+      this.addTask.endDate = startDate.getTime() + (step * 60 * 1000);
+    }
+    if (this.addTask.assignedUsersIds.length == 0) this.addTask.setAssignedUser([this.usersStateService.getCurrentUser().id]);
+    this.addTask.companyId = this.ticketProfile.companyId;
+    this.tasksService.addTask(this.addTask.getDataForAdd(this.addTask)).pipe(map((res) => res),
       catchError(error => of(undefined))).subscribe(data => {
         this.showAdd = false;
         this.addTask = new TicketProfileTask();
+        this.setDefaultValueForAddTask();
         if (!this.list.some(item => item.id == data.id)) this.list.push(new TicketProfileTask(data));
       }, err => {
         setTimeout(() => this.addTaskBtn.setInit(true), 2000);
       })
   }
-  onEditTicketTask(item) {
-    if (item.isInitEdit) {
-      if (item.subject.length === 0 || item.isInitRequest) return;
-      item.setIsInitRequest(true);
-      this.ticketsService.editTicketTask(item.getDataForUpdate()).pipe(map((res) => res),
-        catchError(error => of(undefined))).subscribe(data => {
-          item.onInitEdit(false);
-          let index = this.list.findIndex(item => item.id == data.id);
-          this.list[index] = new TicketProfileTask(data);
-          item.setIsInitRequest(false);
-        }, err => {
-          item.setIsInitRequest(false);
-        })
-    }
+  setDefaultValueForAddTask() {
+    this.addTask.setType("To do");
+    this.addTask.setTaskStatus("OPEN");
+  }
+  parseStartDate(date) {
+    return moment(new Date(date)).format('DD MMM, hh:mm A');
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

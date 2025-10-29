@@ -44,12 +44,13 @@ export class ContractsBlockTimeValidate {
         return this.rateExceeding;
     }
     public isValidate(contractsBlockTime) {
+        console.log("contractsBlockTime.services", contractsBlockTime.services);
         if (!contractsBlockTime.companyId) this.company = false;
         if (contractsBlockTime.description === "") this.description = false;
         if (contractsBlockTime.includedHours === "") this.includedHours = false;
         if (contractsBlockTime.blockRate === "") this.blockRate = false;
         if (contractsBlockTime.rateExceeding === "") this.rateExceeding = false;
         if (contractsBlockTime.blockTimeServices.length == 0) this.blockTimeServices = false;
-        return this.company && this.description && this.includedHours && this.blockRate && this.rateExceeding && this.blockTimeServices;
+        return this.company && this.description && this.includedHours && this.blockRate && this.rateExceeding && this.blockTimeServices && contractsBlockTime.services.every(item => item.validateDuplicated == true);
     }
 }

@@ -9,130 +9,139 @@
     class="app-left-panel__menu-expand"
     [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
 >
-    <a
+    <li
         href
         [link]="'billing-dashboard'"
         target="_blank"
         appRightClickBlank
     >
-        <li
+        <a
             *ngIf="getPermissions('VIEW_ACCOUNTING_DASHBOARD')"
             [ngClass]="{'--active':activePage === 'billing-dashboard'}"
             (click)="goToState('billing-dashboard')"
+            class="app-left-panel__menu-expand-link"
         >
             Dashboard
-        </li>
-    </a>
-    <a
+        </a>
+    </li>
+    <li
         href
         [link]="'non-contract-services'"
         target="_blank"
         appRightClickBlank
         *ngIf="!customerPortalStateService.isCustomerPortal"
     >
-        <li
+        <a
             [ngClass]="{'--active':activePage === 'non-contract-services'}"
             (click)="goToState('non-contract-services')"
+            class="app-left-panel__menu-expand-link"
         >
             Non-contract Services
-        </li>
-    </a>
-    <a
+        </a>
+    </li>
+    <li
         href
         [link]="'subscription-services'"
         target="_blank"
         appRightClickBlank
         *ngIf="!customerPortalStateService.isCustomerPortal"
     >
-        <li
+        <a
             [ngClass]="{'--active':activePage === 'subscription-services'}"
             (click)="goToState('subscription-services')"
+            class="app-left-panel__menu-expand-link"
         >
             Subscription Services
-        </li>
-    </a>
-    <a
+        </a>
+    </li>
+    <li
         href
         [link]="'billable'"
         target="_blank"
         appRightClickBlank
     >
-        <li
+        <a
             [ngClass]="{'--active':activePage === 'new-billable' || activePage === 'new-billable-tickets'}"
             (click)="goToState('new-billable')"
             *ngIf="getPermissions('VIEW_ACCOUNTING')"
+            class="app-left-panel__menu-expand-link"
         >
             Billable Items
-        </li>
-    </a>
-    <a
+        </a>
+    </li>
+    <li
         href
         [link]="'invoices'"
         target="_blank"
         appRightClickBlank
     >
-        <li
+        <a
             *ngIf="getPermissions('VIEW_ACCOUNTING') || getCompanyInfoPermissions('VIEW_ALL_INVOICES')"
             [ngClass]="{'--active':activePage === 'new-billable-invoices'}"
             (click)="goToState('new-billable-invoices')"
+            class="app-left-panel__menu-expand-link"
         >
             Invoices
-        </li>
-    </a>
-    <a
+        </a>
+    </li>
+    <li
         href
         [link]="'quotes'"
         target="_blank"
         appRightClickBlank
         *ngIf="customerPortalStateService.isCustomerPortal && getCompanyInfoPermissions('VIEW_ALL_QUOTES') || !customerPortalStateService.isCustomerPortal"
     >
-        <li
+        <a
             [ngClass]="{'--active':activePage === 'quotes-component'}"
             (click)="goToState('quotes-component')"
+            class="app-left-panel__menu-expand-link"
         >
             Quotes
-        </li>
-    </a>
-    <a
+        </a>
+    </li>
+    <li
         href
         [link]="'payments'"
         target="_blank"
         appRightClickBlank
         *ngIf="customerPortalStateService.isCustomerPortal && getCompanyInfoPermissions('VIEW_ALL_PAYMENTS') || !customerPortalStateService.isCustomerPortal"
     >
-        <li
+        <a
             [ngClass]="{'--active':activePage === 'new-payments-ng2'}"
             (click)="goToState('new-payments-ng2')"
+            class="app-left-panel__menu-expand-link"
         >
             Payments
-        </li>
-    </a>
-    <a
+        </a>
+    </li>
+    <li
         href
         [link]="'contracts'"
         target="_blank"
         appRightClickBlank
     >
-        <li
+        <a
             [ngClass]="{'--active':activePage === 'new-contracts'}"
             (click)="goToState('new-contracts')"
             *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS')"
+            class="app-left-panel__menu-expand-link"
         >
             Contracts
-        </li>
-    </a>
-    <a
+        </a>
+    </li>
+    <li
         href
         [link]="'contract-statistics'"
         target="_blank"
         appRightClickBlank
     >
-        <li
+        <a
             [ngClass]="{'--active':activePage === 'contract-statistics'}"
             (click)="goToState('contract-statistics')"
             *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS')"
+            class="app-left-panel__menu-expand-link"
         >
             Contract Statistics
-        </li>
-    </a>
+        </a>
+    </li>
 </ul>

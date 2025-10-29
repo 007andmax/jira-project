@@ -1,0 +1,147 @@
+@import "./src/assets/styles/variable";
+
+.tasks {
+    &__header {
+        padding: 12px 0;
+        border-top: 1px solid $gray-200;
+        font-size: 13px;
+        font-weight: 500;
+        color: $gray-700;
+    }
+
+    .qt-button {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}
+
+.tab-pane__table-row {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid $gray-200;
+    padding: 6px 0;
+
+    &.--selected {
+        background-color: $gray-50;
+
+        ::ng-deep .detail-ticket-txt {
+            color: $gray-400 !important;
+        }
+
+        .ticket-status-table__status {
+            input {
+                background-color: $gray-50;
+
+                &::placeholder {
+                    font-weight: 400;
+                    color: $gray-400;
+                }
+            }
+        }
+    }
+
+    &.--completed {
+        .ticket-status-table__status:not(.--parse-status) input {
+            color: $gray-400;
+        }
+
+        ::ng-deep .detail-ticket-txt {
+            color: $gray-400;
+        }
+    }
+
+    ::ng-deep .detail-ticket-txt {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $gray-500;
+    }
+}
+.ticket-status-table {
+    &__status:not(.--parse-status) {
+        flex: 1;
+        margin-left: 6px;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 500;
+        color: $gray-900;
+
+        input {
+            width: 100%;
+            border-color: transparent;
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+
+    &__action {
+        display: flex;
+        align-items: center;
+    }
+}
+.btn-open-aside {
+  opacity: 0;
+}
+
+:host-context(.tab-pane__table-row:hover) .btn-open-aside {
+  opacity: 1;
+}
+
+::ng-deep .multi-assign-user-container:not(:empty) {
+  width: 50px;
+  margin-left: 8px;
+}
+
+::ng-deep .tab-pane__table-row:not(.add-task-container) {
+  .tab-pane__table-cell:not(.add-task-container) {
+    .multi-datepicker-container {
+        position: relative;
+        width: 28px;
+        height: 28px;
+        display: block;
+        border: 1px solid $gray-200;
+        border-radius: 50%;
+
+      input {
+        width: 100%;
+        height: 100%;
+        border: transparent;
+        color: transparent;
+        background-color: transparent;
+      }
+
+      .icon__calendar {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 25%);
+        background-color: #667085 !important;
+        width: 16px !important;
+        height: 16px !important;
+        margin: 0;
+      }
+    }
+    .tooltip {
+      white-space: nowrap;
+    }
+  }
+}
+
+::ng-deep .tab-pane__table-row.add-task-container {
+  .multi-assign-user-container:not(:empty) {
+    width: auto;
+    margin-left: 0;
+  }
+
+  .qt-table-modern__circle-avatar {
+    position: static;
+    margin: 0;
+
+    &:not(:first-child) {
+      margin-left: -12px;
+    }
+  }
+}

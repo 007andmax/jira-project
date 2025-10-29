@@ -46,6 +46,11 @@ export class LeftPanelService {
       || state === 'file-manager-all-customer'
     )
   }
+  isTasksPage(state) {
+    return (state === 'my-tasks' ||
+      state === 'tasks-dashboard'
+    )
+  }
   public isCompanyPage(state) {
     return (state == 'new-companies'
       || state == 'company-dashboard'
