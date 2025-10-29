@@ -1,0 +1,306 @@
+<div
+    class="qt-aside-modern --large new-companies-content__modal"
+    *ngIf="opened"
+>
+    <form
+        class="qt-aside-modern__form"
+        [formGroup]="modelForm"
+    >
+        <div class="qt-aside-modern__header">
+            <div class="qt-aside-modern__header-title">Create Task</div>
+            <div>
+                <div class="qt-df qt-ai-c">
+                    <div
+                        class="qt-button qt-ml-12"
+                        appDisabledBtn
+                        #saveBtn="disabled"
+                        (onClick)="save()"
+                        [ngClass]="{'--loading':saveBtn.isBlock()}"
+                    >
+                        <span>Save Task</span>
+                        <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
+                    </div>
+                    <div
+                        class="qt-button --square-md --gray pointer qt-ml-8"
+                        (click)="close()"
+                    >
+                        <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="qt-aside-modern__content new-companies-content__modal--content">
+            <div class="qt-inputs-row --sm --required">
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Task Name</div>
+                    <div class="qt-w100">
+                        <input
+                            [ngClass]="{'--input-error' : submitted && f2.title.errors}"
+                            type="text"
+                            formControlName="title"
+                            placeholder="Write about task"
+                            maxlength="300"
+                            class="--sm"
+                            (keydown)="onKeyDown($event)"
+                        >
+                        <app-mat-error
+                            class="invalid-feedback --pos-static qt-dib qt-mt-8"
+                            *ngIf="submitted && f2.title.errors"
+                        >
+                            Task name is required
+                        </app-mat-error>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block__label">Priority</div>
+                    <app-drop-down
+                        [class]="['qt-select-input-40']"
+                        [placeholder]="'Select Company Type'"
+                        [field]="'title'"
+                        [list]="listTypes"
+                        [search]="true"
+                        [change]="true"
+                        (onSelectedItem)="onSelectType($event)"
+                    >
+                    </app-drop-down>
+                </div>
+            </div> -->
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Company</div>
+                    <company-drop-down
+                        [class]="['drop-down-sm']"
+                        [placeholder]="'Select Company'"
+                        [clientType]="'CLIENT'"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        [isBlockClear]="true"
+                        (onSelectedItem)="onSelectCompany($event)"
+                        [heightInput]="'32px'"
+                        [dropdownHeight]="'228px'"
+                        [dropdownWidth]="'360px'"
+                    >
+                    </company-drop-down>
+                </div>
+            </div>
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <span class="qt-input-block__label">Assigned To</span>
+                    <div>
+                        <app-tasks-add-assigned-users
+                            [class]="['drop-down-sm']"
+                            [placeholder]="'Select Assignee'"
+                            [placement]="'bottom-right'"
+                            [selectedTag]="selectedAssignedUsers"
+                            [list]="techUsersList"
+                            [validate]="!(submitted && f2.assignedUsersIds.errors)"
+                            (filterChange)="onSelectTechUser($event)"
+                        ></app-tasks-add-assigned-users>
+                        <app-mat-error
+                            class="invalid-feedback --pos-static qt-dib qt-mt-8"
+                            *ngIf="submitted && f2.assignedUsersIds.errors"
+                        >
+                            Assigned user is required
+                        </app-mat-error>
+                    </div>
+                </div>
+            </div>
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Associate Ticket</div>
+                    <app-tasks-add-associate-tickets
+                        [class]="['drop-down-sm']"
+                        [isDisabled]="!f2.companyId.value"
+                        (onSelectedItem)="setAssociatedTicketId($event)"
+                    ></app-tasks-add-associate-tickets>
+                </div>
+            </div>
+            <!-- <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block__label">Billable Task</div>
+                    <app-drop-down
+                        [class]="['qt-select-input-40']"
+                        [placeholder]="'Select Company Type'"
+                        [field]="'title'"
+                        [list]="companyTypes"
+                        [search]="true"
+                        [change]="true"
+                        (onSelectedItem)="onSelectCompanyTypes($event)"
+                    >
+                    </app-drop-down>
+                </div>
+            </div> -->
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Services</div>
+                    <app-services-list
+                        #servicedp
+                        class="drop-down-sm"
+                        [type]="'TICKET'"
+                        [isBlockClear]="false"
+                        [isDisabled]="!f2.companyId.value"
+                        [itemList]="servicesList"
+                        (selectedServicesItem)="onSelectService($event)"
+                    ></app-services-list>
+                </div>
+            </div>
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Type</div>
+                    <app-drop-down
+                        [class]="['drop-down-sm']"
+                        [placeholder]="'Select'"
+                        [field]="'title'"
+                        [list]="listTypes"
+                        [search]="true"
+                        [change]="true"
+                        [errorMessage]="'Task type is required'"
+                        [validate]="!(submitted && f2.type.errors)"
+                        [editItem]="selectedType"
+                        (onSelectedItem)="onSelectType($event)"
+                        [heightInput]="'32px'"
+                    >
+                    </app-drop-down>
+                </div>
+            </div>
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Start - End Date</div>
+                    <app-tasks-date-picker
+                        #dp
+                        [class]="['date-picker-invisible', '--sm']"
+                        [container]="'body'"
+                        [editStart]="modelForm?.value.startDate"
+                        [editEnd]="modelForm?.value.endDate"
+                        [validate]="!(submitted && f2.startDate.errors)"
+                        [errorMessage]="'Start date is required'"
+                        (selectedDate)="filterByDate($event)"
+                        [placeholder]="'Select start- end date '"
+                    ></app-tasks-date-picker>
+                </div>
+            </div>
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Due Date</div>
+                    <app-date-picker
+                        #startDateDP
+                        [type]="'DETAIL_TICKET_UPDATE'"
+                        [class]="['date-picker-invisible', '--sm']"
+                        [dropdownClass]="['date-picker']"
+                        [formatDate]="formatDate"
+                        [placeholder]="'Select due date'"
+                        [editMode]="true"
+                        [container]="'body'"
+                        (onChange)="onChangeDueDate($event)"
+                    ></app-date-picker>
+                </div>
+            </div>
+            <!-- <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block__label">Time Estimate</div>
+                    <app-date-picker
+                        #startDateDP
+                        [dropdownClass]="['date-picker']"
+                        [formatDate]="formatDate"
+                        [editMode]="true"
+                        [container]="'body'"
+                        (onChange)="onChangeTimeEstimate($event)"
+                    ></app-date-picker>
+                </div>
+            </div> -->
+            <ul
+                ngbNav
+                #nav="ngbNav"
+                [(activeId)]="activeTab"
+                class="nav-tabs"
+                (navChange)="setTab($event)"
+            >
+                <!-- Profile -->
+                <li [ngbNavItem]="'description'">
+                    <a ngbNavLink>
+                        Description
+                        <app-mat-error
+                            class="invalid-feedback --pos-static qt-dib qt-mt-8 description-error"
+                            *ngIf="submitted && f2.description.errors"
+                        >
+                            The maximum number of characters - 65000
+                        </app-mat-error>
+                    </a>
+                    <ng-template ngbNavContent>
+                        <angular-editor
+                            formControlName="description"
+                            [config]="editorConfig"
+                        ></angular-editor>
+                    </ng-template>
+                </li>
+                <!-- <li [ngbNavItem]="'comments'">
+                    <a ngbNavLink>Comments</a>
+                    <ng-template ngbNavContent></ng-template>
+                </li>
+                <li [ngbNavItem]="'activity_log'">
+                    <a ngbNavLink>Activity log</a>
+                    <ng-template ngbNavContent></ng-template>
+                </li> -->
+            </ul>
+            <div
+                [ngbNavOutlet]="nav"
+                class="mt-2"
+            ></div>
+        </div>
+        <div class="qt-aside-modern__footer">
+            <div class="qt-aside-modern__footer-file-wrap">
+                <div
+                    class="qt-button-square pointer tasks-add__attach-button qt-overflow-h"
+                    placement="top"
+                    ngbTooltip="Add Attachment"
+                >
+                    <input
+                        class="qt-pointer"
+                        type="file"
+                        #fileDropRef
+                        id="fileDropRef"
+                        multiple
+                        (change)="fileBrowseHandler($event.target.files)"
+                    >
+                    <div class="tasks-add__attach qt-icon icon__attachments"></div>
+                </div>
+                <div
+                    class="files-list pointer"
+                    *ngIf="files.length > 0"
+                >
+                    <div
+                        class="single-file"
+                        [ngClass]="{'error-file':file.showError}"
+                        *ngFor="let file of files; let i = index"
+                        (click)="preview(file.id,file.contentType)"
+                    >
+                        <div class="info ">
+                            <div class="qt-df qt-gap-4 qt-ai-c qt-fw-nowrap">
+                                <span
+                                    class="file-error"
+                                    *ngIf="file.showError"
+                                >
+                                    <div
+                                        class="qt-icon icon__info qt-sz-16"
+                                        placement="top"
+                                        [ngbTooltip]="file.error"
+                                    ></div>
+                                </span>
+                                <div class="name qt-fw-500 ellipsis">{{ file?.name }}</div>
+                                <div class="size ellipsis">{{ formatBytes(file?.size,2) }}</div>
+                                <i
+                                    class="qt-icon icon__close qt-icon__gray-400 qt-sz-16 qt-ml-auto pointer"
+                                    (click)="deleteFile(i)"
+                                ></i>
+                            </div>
+                        </div>
+                        <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

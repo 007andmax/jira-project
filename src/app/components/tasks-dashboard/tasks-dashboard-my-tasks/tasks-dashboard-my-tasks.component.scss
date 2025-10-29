@@ -1,0 +1,51 @@
+@import "./src/assets/styles/variable";
+
+.page-my-tasks {
+  min-height: calc(100vh - 354px);
+  background-color: $white;
+  border: 1px solid $gray-200;
+  border-radius: 8px;
+  margin: 24px;
+}
+
+.qt-page-list__header {
+  background-color: $white;
+}
+
+.dashboard-tabs {
+  display: flex;
+  gap: 24px;
+
+  &::before {
+    content: unset;
+  }
+
+  &__item {
+    &-link {
+      border: unset;
+      border-bottom: 2px solid transparent;
+      font-weight: 500;
+      color: $gray-500;
+      padding: 14px 0;
+
+      &:hover {
+        color: $gray-500;
+        border: unset;
+        background-color: transparent;
+      }
+
+      &.active {
+        color: $gray-900;
+        font-weight: 600;
+        background-color: transparent;
+        border: unset;
+        border-bottom: 2px solid $blue-light-600;
+      }
+    }
+  }
+}
+app-tasks-dashboard-my-tasks-list {
+    display: block;
+    min-height: calc(100vh - 465px);
+    position: relative;
+}

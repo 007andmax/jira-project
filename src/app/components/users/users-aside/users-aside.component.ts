@@ -138,6 +138,7 @@ export class UsersAsideComponent implements OnInit, OnDestroy {
   }
   addCompnay() {
     this.user.addCustomerCompaniesInfo();
+    this.user.customerCompaniesInfo[0].eligibleForTicket = true;
     this.validate.addCompany();
   }
   onSelectUserRole(data, index) {

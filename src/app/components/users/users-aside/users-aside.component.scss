@@ -9,7 +9,7 @@
     cursor: pointer;
     .remove-link {
         width: auto;
-        margin: 0px 0px 0px 20px !important;
+        margin: 0 0 0 20px !important;
     }
 }
 .upload-photo__input {
@@ -23,8 +23,8 @@
 }
 .company-actions {
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
     z-index: 999;
 }
 .access-customer-portal {
@@ -32,12 +32,4 @@
 }
 .first-name-invalid {
     bottom: -30px !important;
-}
-::ng-deep.custom-subscription-user-aside {
- .user-subscription {
-    border: 1px solid $gray-200 !important;
-    &::after {
-        left: 14px !important;
-    }
- }
 }

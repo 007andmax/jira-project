@@ -12,6 +12,7 @@
     <li
         [ngClass]="{'--active':  activePage === 'marketing'}"
         (click)="goToAll()"
+        class="app-left-panel__menu-expand-link"
     >
         All Users
     </li>
@@ -34,11 +35,10 @@
 </ul>
 <hr class="app-left-panel__ticket-menu-line">
 <ul
-    class="app-left-panel__menu-expand menu-expand-show"
+    class="app-left-panel__filter-menu-expand menu-expand-show"
     *ngIf="!customerPortalStateService.isCustomerPortal"
 >
-    <li class="qt-mt-12 name-custom-filter">
-        <span class="qt-icon icon__filter-lines qt-icon__gray-300 qt-sz-16 qt-bg-contain qt-dib qt-mr-4"></span>
+    <li class="app-left-panel__menu-expand-subtitle">
         Custom Filters
     </li>
     <ng-template
@@ -52,7 +52,7 @@
             class="desktop-version filter-item"
             (click)="setGlobalFilter(filter)"
         >
-            <div [textContent]="filter.name"></div>
+            <div class="app-left-panel__filter-menu-expand-link" [textContent]="filter.name"></div>
             <div class="qt-df qt-ai-c">
                 <i
                     class="qt-icon icon__warning qt-icon__yellow-600 qt-sz-16 pointer qt-ml-4 qt-mr-6"

@@ -1,0 +1,72 @@
+<div class="qt-page-list__container">
+    <div
+        class="qt-page-list__table "
+        [ngClass]="{'--open-filters':toggleFilter}"
+    >
+        <div class="qt-page-list__header-thead-container"></div>
+        <div
+            class="qt-page-list__body-table-container"
+            [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
+        >
+            <div class="qt-page-list__body-tbody qt-table-modern my-tasks-table">
+                <div class="tbody">
+                    <div
+                        infiniteScroll
+                        [infiniteScrollContainer]="container"
+                        [infiniteScrollDistance]="2"
+                        [infiniteScrollThrottle]="30"
+                        [infiniteScrollDisabled]="infiniteScrollDisabled"
+                        (scrolled)="onScroll()"
+                        class="tbody"
+                    >
+                        <ng-template
+                            ngFor
+                            let-item
+                            [ngForOf]="list"
+                            [ngForTrackBy]="trackById"
+                        >
+                            <app-tasks-list-item [item]="item"></app-tasks-list-item>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="loading pengind-loading"
+                *ngIf="showPendingPreloader"
+            ></div>
+            <div
+                class="loading"
+                *ngIf="showPreloader"
+            ></div>
+            <div
+                class="no-exist-elements"
+                *ngIf="!showPreloader && list.length == 0"
+            >
+                We couldn't find any results
+            </div>
+        </div>
+    </div>
+
+
+
+    <div
+        class="aside-filters qt-ml-16"
+        [hidden]="!toggleFilter"
+    >
+        <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
+            <div class="aside-filters-header__title ">Filters</div>
+            <div
+                class="qt-button --square-md --gray pointer"
+                (click)="onToggleFilter(false)"
+            >
+                <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+            </div>
+        </div>
+
+
+
+        <div class="aside-filters-content">
+            <!-- Add Content -->
+        </div>
+    </div>
+</div>

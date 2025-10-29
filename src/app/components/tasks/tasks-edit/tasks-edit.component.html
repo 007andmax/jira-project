@@ -1,0 +1,475 @@
+<div
+    class="qt-aside-modern --large new-companies-content__modal"
+    *ngIf="opened"
+>
+    <form
+        class="qt-aside-modern__form"
+        [formGroup]="modelForm"
+    >
+        <div class="qt-aside-modern__header">
+            <div class="qt-df qt-ai-fe">
+                <div class="qt-aside-modern__header-title">Edit Task</div>
+                <div
+                    class="qt-df qt-ai-fe qt-ml-8"
+                    *ngIf="task.hasInvoice"
+                >
+                    <span>
+                        The Task is already billed to the client
+                    </span>
+                    <div class="qt-icon icon__password qt-sz-16 qt-ml-8"></div>
+                </div>
+            </div>
+            <div
+                ngbDropdown
+                placement="bottom-right"
+            >
+                <div class="qt-df qt-ai-c">
+                    <div
+                        *ngIf="!task.hasInvoice && task.taskStatus == 'OPEN' && task.archivedAt == null"
+                        class="qt-button qt-ml-12"
+                        appDisabledBtn
+                        #saveBtn="disabled"
+                        (onClick)="closeTask()"
+                        [ngClass]="{'--loading':saveBtn.isBlock()}"
+                    >
+                        <span>Mark completed</span>
+                        <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
+                    </div>
+                    <div
+                        *ngIf="!task.hasInvoice && task.taskStatus == 'CLOSED' && task.archivedAt == null"
+                        class="qt-button qt-ml-12"
+                        appDisabledBtn
+                        #saveBtn="disabled"
+                        (onClick)="openTask()"
+                        [ngClass]="{'--loading':saveBtn.isBlock()}"
+                    >
+                        <span>Mark is open</span>
+                        <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
+                    </div>
+                    <div
+                        *ngIf="!task.hasInvoice && task.taskStatus == 'OPEN'"
+                        class="qt-button --square-md --gray pointer qt-ml-8"
+                        ngbDropdownToggle
+                    >
+                        <div class="qt-icon icon__more qt-sz-16 qt-bg-contain"></div>
+                    </div>
+                    <div
+                        class="qt-button --square-md --gray pointer qt-ml-8"
+                        (click)="close()"
+                    >
+                        <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+                    </div>
+                    <div
+                        ngbDropdownMenu
+                        container="body"
+                        class="dropdown-menu-qt icon__more-dropdown"
+                    >
+                        <ul
+                            role="menu"
+                            class="dropdown-qt"
+                        >
+                            <li
+                                [ngClass]="{'disabled-archive-task': currentService.item}"
+                                class="trash-user-list qt-dropdown-menu__top-line"
+                                (click)="archiveTask()"
+                                *ngIf="task.archivedAt === null && task.taskStatus == 'OPEN'"
+                                placement="top"
+                                ngbTooltip="The task cannot be archived. You have to remove the service."
+                                [disableTooltip]="!currentService.item"
+                            >
+                                <a
+                                    tabindex="-1"
+                                    class="dropdown-item trash-user qt-df qt-ai-c"
+                                    href="javascript:void(0)"
+                                >
+                                    <i
+                                        [ngClass]="{'qt-icon__red-600':!currentService.item,
+                                            'qt-icon__gray-400':currentService.item
+                                        }"
+                                        class="qt-dib qt-icon icon__archive-tasks  qt-bg-contain qt-sz-20 qt-mr-12"
+                                    ></i>
+                                    <span
+                                        [ngClass]="{'qt-color-red-600':!currentService.item,
+                                            'qt-color-gray-400':currentService.item
+                                        }"
+                                        class="qt-lh-1"
+                                    >
+                                        Archive Task
+                                    </span>
+                                </a>
+                            </li>
+                            <li
+                                class="trash-user-list qt-dropdown-menu__top-line"
+                                (click)="deArchiveTask()"
+                                *ngIf="task.archivedAt !== null"
+                            >
+                                <a
+                                    tabindex="-1"
+                                    class="dropdown-item trash-user qt-df qt-ai-c"
+                                    href="javascript:void(0)"
+                                >
+                                    <i class="qt-dib qt-icon icon__updates qt-icon__red-600 qt-bg-contain qt-sz-20 qt-mr-12"></i>
+                                    <span class="qt-color-red-600 qt-lh-1">Restore Task</span>
+                                </a>
+                            </li>
+                            <li
+                                [ngClass]="{'disabled-archive-task': currentService.item}"
+                                *ngIf="getPermissions('DELETE_TASK') && task.taskStatus == 'OPEN'"
+                                class="trash-user-list qt-dropdown-menu__top-line"
+                                (click)="deleteTask()"
+                                placement="top"
+                                ngbTooltip="The task cannot be deleted. You have to remove the service"
+                                [disableTooltip]="!currentService.item"
+                            >
+                                <a
+                                    tabindex="-1"
+                                    class="dropdown-item trash-user qt-df qt-ai-c"
+                                    href="javascript:void(0)"
+                                >
+                                    <i
+                                        [ngClass]="{'qt-icon__red-600':!currentService.item,
+                                            'qt-icon__gray-400':currentService.item
+                                        }"
+                                        class="qt-dib qt-icon icon__delete qt-bg-contain qt-sz-20 qt-mr-12"
+                                    ></i>
+                                    <span
+                                        [ngClass]="{'qt-color-red-600':!currentService.item,
+                                            'qt-color-gray-400':currentService.item
+                                        }"
+                                        class="qt-lh-1"
+                                    >
+                                        Delete Task
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="qt-aside-modern__content new-companies-content__modal--content">
+            <div
+                class="qt-inputs-row --sm --required"
+                *ngIf="task.archivedAt"
+            >
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Archived by</div>
+                    <div
+                        class="qt-w100 qt-df qt-ai-c"
+                        [textContent]="task.archivedByUser"
+                    >
+                    </div>
+                </div>
+            </div>
+            <div
+                class="qt-inputs-row --sm --required"
+                *ngIf="task.archivedAt"
+            >
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Archived at</div>
+                    <div
+                        class="qt-w100 qt-df qt-ai-c"
+                        [textContent]="task.parseArchivedAt()"
+                    >
+                    </div>
+                </div>
+            </div>
+            <div class="qt-inputs-row --sm --required">
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Task Name</div>
+                    <div class="qt-w100">
+                        <input
+                            [ngClass]="{'--input-error' : submitted && f2.title.errors,
+                                '--disabled': task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt !== null
+                            }"
+                            type="text"
+                            formControlName="title"
+                            placeholder="Write Company or Search Company"
+                            maxlength="300"
+                            (blur)="onChangeTitle()"
+                            (keydown)="onKeyDown($event)"
+                            class="--sm"
+                            [disabled]="task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt !== null"
+                        >
+                        <app-mat-error
+                            class="invalid-feedback --pos-static qt-dib qt-mt-8"
+                            *ngIf="submitted && f2.title.errors"
+                        >
+                            Task name is required
+                        </app-mat-error>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block__label">Priority</div>
+                    <app-drop-down
+                        [class]="['qt-select-input-40']"
+                        [placeholder]="'Select Company Type'"
+                        [field]="'title'"
+                        [list]="listTypes"
+                        [search]="true"
+                        [change]="true"
+                        (onSelectedItem)="onSelectType($event)"
+                    >
+                    </app-drop-down>
+                </div>
+            </div> -->
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Company</div>
+                    <company-drop-down
+                        [class]="['drop-down-sm']"
+                        [placeholder]="'Company'"
+                        [clientType]="'CLIENT'"
+                        [editItem]="selectedCompany"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt !== null"
+                        (onSelectedItem)="onSelectCompany($event)"
+                        [heightInput]="'32px'"
+                        [dropdownHeight]="'228px'"
+                        [dropdownWidth]="'360px'"
+                    >
+                    </company-drop-down>
+                </div>
+            </div>
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <span class="qt-input-block__label">Assigned To</span>
+                    <div>
+                        <app-tasks-add-assigned-users
+                            [class]="['drop-down-sm']"
+                            [placeholder]="'Select Tech User'"
+                            [placement]="'bottom-right'"
+                            [list]="techUsersList"
+                            [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt !== null"
+                            [validate]="!(submitted && f2.assignedUsersIds.errors)"
+                            [selectedTag]="selectedAssignedUsers"
+                            (filterChange)="onSelectTechUser($event)"
+                        ></app-tasks-add-assigned-users>
+                        <app-mat-error
+                            class="invalid-feedback --pos-static qt-dib qt-mt-8"
+                            *ngIf="submitted && f2.assignedUsersIds.errors"
+                        >
+                            Assigned user is required
+                        </app-mat-error>
+                    </div>
+                </div>
+            </div>
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Associate Ticket</div>
+                    <app-tasks-add-associate-tickets
+                        [class]="['drop-down-sm']"
+                        [isDisabled]="!f2.companyId.value || task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt !== null"
+                        [selectedItem]="selectedTicket"
+                        (onSelectedItem)="setAssociatedTicketId($event)"
+                    ></app-tasks-add-associate-tickets>
+                </div>
+            </div>
+            <!-- <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block__label">Billable Task</div>
+                    <app-drop-down
+                        [class]="['qt-select-input-40']"
+                        [placeholder]="'Select Company Type'"
+                        [field]="'title'"
+                        [list]="companyTypes"
+                        [search]="true"
+                        [change]="true"
+                        (onSelectedItem)="onSelectCompanyTypes($event)"
+                    >
+                    </app-drop-down>
+                </div>
+            </div> -->
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Services</div>
+                    <app-services-list
+                        #servicedp
+                        class="drop-down-sm"
+                        [type]="'TICKET'"
+                        [isBlockClear]="false"
+                        [itemList]="servicesList"
+                        [editItem]="currentService.item"
+                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED' || !selectedCompany || task.archivedAt !== null"
+                        (selectedServicesItem)="onSelectService($event)"
+                    ></app-services-list>
+                </div>
+            </div>
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Type</div>
+                    <app-drop-down
+                        [class]="['drop-down-sm']"
+                        [placeholder]="'Select'"
+                        [field]="'title'"
+                        [list]="listTypes"
+                        [search]="true"
+                        [change]="true"
+                        [editItem]="selectedType"
+                        [isBlockClear]="true"
+                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt !== null"
+                        [errorMessage]="'Task type is required'"
+                        [validate]="!(submitted && f2.type.errors)"
+                        (onSelectedItem)="onSelectType($event)"
+                        [heightInput]="'32px'"
+                    >
+                    </app-drop-down>
+                </div>
+            </div>
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Start - End Date</div>
+                    <app-tasks-date-picker
+                        #datePicker
+                        [class]="['date-picker-invisible', '--sm']"
+                        [container]="'body'"
+                        [editStart]="modelForm?.value.startDate"
+                        [editEnd]="modelForm?.value.endDate"
+                        [validate]="!(submitted && f2.startDate.errors)"
+                        [errorMessage]="'Start date is required'"
+                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt !== null"
+                        (selectedDate)="filterByDate($event)"
+                        (onCloseDropDown)="onCloseDatePicker($event)"
+                    ></app-tasks-date-picker>
+                </div>
+            </div>
+            <div class="qt-inputs-row --sm">
+                <div class="qt-input-block qt-input-block--horizontal">
+                    <div class="qt-input-block__label">Due Date</div>
+                    <app-date-picker
+                        [type]="'DETAIL_TICKET_UPDATE'"
+                        [class]="['date-picker-invisible', '--sm']"
+                        [dropdownClass]="['date-picker']"
+                        [placeholder]="'Select due date'"
+                        [formatDate]="formatDate"
+                        [editMode]="true"
+                        [editDate]="task.dueDate"
+                        [container]="'body'"
+                        [isDisabled]="task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt !== null"
+                        (onChange)="onChangeDueDate($event)"
+                    ></app-date-picker>
+                </div>
+            </div>
+            <!-- <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block__label">Time Estimate</div>
+                    <app-date-picker
+                        #startDateDP
+                        [dropdownClass]="['date-picker']"
+                        [formatDate]="formatDate"
+                        [editMode]="true"
+                        [container]="'body'"
+                        (onChange)="onChangeTimeEstimate($event)"
+                    ></app-date-picker>
+                </div>
+            </div> -->
+            <ul
+                ngbNav
+                #nav="ngbNav"
+                [(activeId)]="activeTab"
+                class="nav-tabs"
+                (navChange)="setTab($event)"
+            >
+                <!-- Profile -->
+                <li [ngbNavItem]="'description'">
+                    <a ngbNavLink>
+                        Description
+                        <app-mat-error
+                            class="invalid-feedback --pos-static qt-dib qt-mt-8 description-error"
+                            *ngIf="submitted && f2.description.errors"
+                        >
+                            The maximum number of characters - 65000
+                        </app-mat-error>
+                    </a>
+                    <ng-template ngbNavContent>
+                        <div
+                            class="qt-pt-8 qt-pb-8"
+                            *ngIf="task.hasInvoice || task.taskStatus == 'CLOSED' || task.archivedAt"
+                            [innerHTML]="task.description"
+                        ></div>
+                        <angular-editor
+                            *ngIf="!task.hasInvoice && task.taskStatus == 'OPEN' && task.archivedAt === null"
+                            class="edit-note-container"
+                            [init]="isInitEditNote"
+                            appClickOtside
+                            [classParent]="'.edit-note-container'"
+                            (onOutSide)="onChangeDescription()"
+                            formControlName="description"
+                            [config]="editorConfig"
+                        ></angular-editor>
+                    </ng-template>
+                </li>
+                <!-- <li [ngbNavItem]="'comments'">
+                    <a ngbNavLink>Comments</a>
+                    <ng-template ngbNavContent></ng-template>
+                </li>
+                <li [ngbNavItem]="'activity_log'">
+                    <a ngbNavLink>Activity log</a>
+                    <ng-template ngbNavContent></ng-template>
+                </li> -->
+            </ul>
+            <div
+                [ngbNavOutlet]="nav"
+                class="mt-2"
+            ></div>
+        </div>
+        <div class="qt-aside-modern__footer">
+            <div class="qt-aside-modern__footer-file-wrap">
+                <div
+                    class="qt-button-square pointer tasks-add__attach-button"
+                    placement="top"
+                    ngbTooltip="Add Attachment"
+                    *ngIf="!task.hasInvoice && task.taskStatus == 'OPEN' && task.archivedAt === null"
+                >
+                    <input
+                        class="qt-pointer"
+                        type="file"
+                        #fileDropRef
+                        id="fileDropRef"
+                        multiple
+                        (change)="fileBrowseHandler($event.target.files)"
+                    >
+                    <div class="tasks-add__attach qt-icon icon__attachments"></div>
+                </div>
+                <div
+                    class="files-list"
+                    *ngIf="files.length > 0"
+                >
+                    <div
+                        class="single-file pointer"
+                        [ngClass]="{'error-file':file.showError}"
+                        *ngFor="let file of files; let i = index"
+                        (click)="preview(file.id,file.contentType)"
+                    >
+                        <div class="info ">
+                            <div class="qt-df qt-gap-4 qt-ai-c qt-fw-nowrap">
+                                <span
+                                    class="file-error"
+                                    *ngIf="file.showError"
+                                >
+                                    <div
+                                        class="qt-icon icon__info qt-sz-16"
+                                        placement="top"
+                                        [ngbTooltip]="file.error"
+                                    ></div>
+                                </span>
+                                <div class="name qt-fw-500 ellipsis">{{ file?.name }}</div>
+                                <div class="size ellipsis">{{ formatBytes(file?.size,2) }}</div>
+                                <i
+                                    *ngIf="!task.hasInvoice"
+                                    class="qt-icon icon__close qt-icon__gray-400 qt-sz-16 qt-ml-auto pointer"
+                                    (click)="deleteFile(i)"
+                                ></i>
+                            </div>
+                        </div>
+                        <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

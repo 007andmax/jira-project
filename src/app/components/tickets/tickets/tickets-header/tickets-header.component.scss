@@ -4,24 +4,6 @@
 .tickets-list-search {
   margin-right: 8px;
 }
-
-.list-filters {
-  display: none;
-  margin: -8px -8px 8px -8px;
-  ::ng-deep.mat-form-field-infix {
-    overflow: auto;
-    border: none;
-    border-radius: 0;
-  }
-  ::ng-deep.mat-chip-list-wrapper {
-    width: fit-content;
-    margin: 0;
-    flex-wrap: unset;
-    .mat-standard-chip {
-      margin: 0 8px 0 0;
-    }
-  }
-}
 .status {
   text-transform: capitalize;
 }
@@ -50,4 +32,8 @@
 
 .qt-page-list__header-filters {
     display: none;
+}
+
+.list-filters {
+  display: none;
 }

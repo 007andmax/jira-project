@@ -134,6 +134,7 @@ aside {
   height: calc(100vh - 64px);
   overflow-y: auto;
   overflow-x: clip;
+
   @media (hover:none) and (min-width: 767px), (pointer:coarse) and (min-width: 767px) {
     height: calc(100% - 64px);
   }

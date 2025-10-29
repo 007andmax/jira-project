@@ -421,6 +421,16 @@ const routes: Routes = [
     loadChildren: () => import('./components/billing/subscription-services/subscription-services.module').then(m => m.SubscriptionServicesModule),
     canActivate: [PermissionNoSuperAdminService]
   },
+  {
+    path: ':domain/tasks',
+    loadChildren: () => import('./components/tasks/tasks.module').then(m => m.TasksModule),
+    canActivate: [PermissionNoSuperAdminService]
+  },
+  {
+    path: ':domain/tasks-dashboard',
+    loadChildren: () => import('./components/tasks-dashboard/tasks-dashboard.module').then(m => m.TasksDashboardModule),
+    canActivate: [PermissionNoSuperAdminService]
+  },
 ];
 
 /**

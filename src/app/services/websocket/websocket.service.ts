@@ -43,6 +43,8 @@ import { DeviceTagsRealTimeService } from 'src/app/states/device-tags/device-tag
 import { FileManagementRealTimeService } from 'src/app/states/file-management/file-management-real-time.service';
 import { SubscriptionServicesRealTimeService } from 'src/app/states/subscription-services/subscription-services-real-time.service';
 import { ApiKeysRealTimeService } from 'src/app/states/api-keys/api-keys-real-time.service';
+import { NotificationsRealTimeService } from 'src/app/states/notifications/notifications-real-time.service';
+import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
 
 
 /**
@@ -62,6 +64,7 @@ export class WebsocketService {
   isInit: boolean = false;
   isResetWebSocket: boolean = false;
   ws;
+  blockWebSocket: boolean = false;
   /**
    * Users api service constructor
    * @param {UsersService} usersService Service to work users
@@ -106,7 +109,9 @@ export class WebsocketService {
     private deviceTagsRealTimeService: DeviceTagsRealTimeService,
     private fileManagementRealTimeService: FileManagementRealTimeService,
     private subscriptionServicesRealTimeService: SubscriptionServicesRealTimeService,
-    private apiKeysRealTimeService: ApiKeysRealTimeService
+    private apiKeysRealTimeService: ApiKeysRealTimeService,
+    private notificationsRealTimeService: NotificationsRealTimeService,
+    private tasksRealTimeService: TasksRealTimeService
 
   ) {
   }
@@ -158,6 +163,9 @@ export class WebsocketService {
       that.subsribeToSubscriptionService();
       if (data.command === "CONNECTED") this.websocketStateService.initConnection();
       that.subsribeToApiKeys();
+      that.subsribeToNotifications();
+      that.subsribeToTasks();
+      that.subsribeToQuotesNumber();
       that.onInit.emit(true);
       that.isInit = true;
     }
@@ -165,10 +173,15 @@ export class WebsocketService {
       console.log("debug", data);
     }
     this.stompClient.onWebSocketClose = (data) => {
-      setTimeout(() => {
-        this.onInitConnect();
-      }, 20000);
-    }
+      this.usersService.isAuthorized().subscribe(res => {
+        setTimeout(() => {
+          this.onInitConnect();
+        }, 20000);
+      })
+    };
+    this.appService.onSessionScreen.subscribe(data => {
+      this.blockWebSocket = data;
+    })
   }
   onInitSuperAdminConnect() {
     this.ws = new SockJS(this.serverUrl);
@@ -192,7 +205,6 @@ export class WebsocketService {
   }
   connect() {
     this.stompClient.connect({}, () => {
-
     });
     this.stompClient.activate();
   }
@@ -275,6 +287,17 @@ export class WebsocketService {
       });
     }, 3000);
   }
+  private subsribeToNotifications() {
+
+    setTimeout(() => {
+      this.stompClient.subscribe("/user/watch/userNotification", (message) => {
+        var newChange = JSON.parse(message.body);
+        this.notificationsRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+        }
+      });
+    }, 3000);
+  }
 
   private subsribeToCustomerRole() {
 
@@ -282,6 +305,17 @@ export class WebsocketService {
       this.stompClient.subscribe("/user/watch/customerRole", (message) => {
         var newChange = JSON.parse(message.body);
         this.customerRoleRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+        }
+      });
+    }, 3000);
+  }
+  private subsribeToTasks() {
+
+    setTimeout(() => {
+      this.stompClient.subscribe("/user/watch/tasks", (message) => {
+        var newChange = JSON.parse(message.body);
+        this.tasksRealTimeService.handleRealTimeChanges(newChange);
         if (message.body) {
         }
       });
@@ -331,6 +365,17 @@ export class WebsocketService {
       this.stompClient.subscribe(`/user/watch/saleQuotes/${id}`, (message) => {
         var newChange = JSON.parse(message.body);
         this.quoteRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+
+        }
+      });
+    }, 3000);
+  }
+  public subsribeToQuotesNumber() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/number/SALE_QUOTE`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.quoteRealTimeService.handleRealTimeNumber(newChange);
         if (message.body) {
 
         }

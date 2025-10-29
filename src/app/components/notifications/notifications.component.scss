@@ -1,0 +1,349 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
+
+.qt-aside-modern {
+    width: 400px !important;
+    border-radius:  12px;
+    z-index: 10;
+    height: calc(100% - 28px);
+    overflow: hidden;
+    &__header {
+       background-color: $white;
+    }
+    &__tabs {
+        background-color: $white;
+        border-bottom: 1px solid $gray-200;
+        &-item {
+            padding: 14px 0px;
+            color: $gray-500;
+        }
+        .count {
+            background-color: $gray-100;
+            padding: 2px 8px;
+            border-radius: 24px;
+            font-weight: 500;
+            font-size: 12px;
+            color: $gray-700;
+            min-width: 24px;
+            height: 20px;
+        }
+        .--active {
+            color: $gray-900;
+            font-weight: 600;
+            position: relative;
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background-color: $blue-light-600;
+            }
+        }
+    }
+}
+.qt-aside-modern__content {
+    height: calc(100% - 102px);
+    padding: 0px;
+    &-empty {
+        height: 100%;
+        &-icon {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid $gray-200;
+        }
+    }
+}
+
+.qt-aside {
+
+    &__title {
+        margin-right: 8px;
+    }
+
+    &__ticket-name {
+        @include body-r__m;
+        color: $gray-700;
+        padding: 2px 12px 2px 12px;
+        background-color: $gray-100;
+        border-radius: 24px;
+
+        span {
+            position: relative;
+
+            &:after {
+                content: " ";
+                position: absolute;
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background-color: $gray-400;
+                top: calc(50% - 2px);
+                left: -6px;
+            }
+        }
+    }
+
+    .create-ticket-btn {
+        margin-right: 16px;
+        width: 140px;
+    }
+}
+
+.users-to-notify {
+    margin-top: 35px;
+
+    &__title {
+        @include сaption-l__sb;
+        color: $gray-900;
+        margin-bottom: 14px;
+    }
+
+    .save-template {
+        display: flex;
+    }
+
+    ::ng-deep #dropdownTechuser {
+        max-height: 24px;
+        max-width: 24px;
+        border-radius: 50%;
+        margin-right: 4px;
+        overflow: hidden;
+        color: transparent;
+        background-image: url("/assets/img/icons/users.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    &__add_users {
+        width: 32px;
+        height: 32px;
+        background-size: contain;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    ::ng-deep .select-wrapper.dropdown-assign-ticket {
+        right: unset;
+        bottom: 45px;
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
+    }
+}
+
+.assigned-users-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    .default-user-avatar {
+        width: 24px;
+        height: 24px;
+    }
+
+    .assigned-ticket-user__item {
+        width: 24px;
+        height: 24px;
+        margin-right: 2px;
+        position: relative;
+        font-size: 10px;
+        cursor: pointer;
+
+        .assigned-ticket-user__checkmark {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+
+            &:before {
+                position: absolute;
+                content: "";
+                width: 16px;
+                height: 16px;
+                border: 1px solid $gray-300;
+                background: $white;
+                border-radius: 50%;
+                bottom: -7px;
+            }
+        }
+
+        input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+
+            &:checked~.assigned-ticket-user__checkmark {
+                &:before {
+                    background-image: url("/assets/img/icons/status-green.svg");
+                    border: none;
+                }
+            }
+        }
+    }
+}
+
+.assigned-users-type {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 2px;
+}
+
+#add-ticket-describe-issue {
+    height: auto;
+    min-height: 64px;
+}
+
+[contenteditable="true"]:empty:before {
+    content: attr(placeholder);
+    pointer-events: none;
+    display: block;
+    /* For Firefox */
+    color: $gray-400;
+}
+
+.device-user {
+    width: 24px;
+    height: 24px;
+}
+
+.qt-input-block__label {
+    &::after {
+        display: none;
+    }
+}
+
+.qt-aside-modern__footer {
+     padding: 6px;
+}
+
+.company-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 999;
+}
+::ng-deep.notification-item {
+    padding: 16px;
+     position: relative;
+     &:hover {
+        background-color: $gray-50;
+        .notification-item__delete {
+            display: flex;
+            z-index: 1;
+        }
+     }
+     &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 16px;
+        right: 16px;
+        height: 1px;
+        background-color: $gray-200;
+     }
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        min-width: 40px;
+        background-color: $gray-100;
+        border-radius: 50%;
+        position: relative;
+    }
+    &__title {
+        color: $gray-500;
+        line-height: 20px;
+        .icon__notification {
+            min-height: 18px;
+            min-width: 18px;
+        }
+        b {
+            color: $gray-900;
+            font-weight: 600;
+        }
+    }
+    &__product-name {
+        .icon__products {
+            min-height: 18px;
+            min-width: 18px;
+        }
+    }
+    &__service-name {
+        .icon__service {
+            min-height: 18px;
+            min-width: 18px;
+        }
+    }
+    &__subject {
+        .icon__tickets {
+            min-height: 18px;
+            min-width: 18px;
+        }
+    }
+    &__mark-read {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 8px;
+        height: 8px;
+        background-color: $red-600;
+        border-radius: 50%;
+
+    }
+    &__link {
+        max-width: fit-content;
+    }
+    &__note {
+        position: relative;
+    }
+    &__delete.qt-button {
+        display: none;
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        translate: 0 -50%;
+        padding: 2px;
+        border-radius: 6px;
+        width: 24px;
+        height: 24px;
+        align-items: center;
+        justify-content: center;
+    }
+    &__date {
+        position: relative;
+        &::after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background-color: $gray-500;
+            top: calc(50% - 1px);
+            left: -8px;
+        }
+    }
+}
+.deleted-entity {
+    border-color: $red-200 !important;
+    background-color: $red-25;
+    color: $red-600;
+    text-transform: none;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    width: max-content;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 500;
+}

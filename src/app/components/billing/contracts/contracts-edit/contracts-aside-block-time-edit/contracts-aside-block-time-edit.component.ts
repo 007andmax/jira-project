@@ -101,7 +101,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
     this.taxes = taxes;
   }
   public onEdit() {
-    if (!this.contractsBlockTime.checkDuplicatedBlockTimeServices() || !this.contractsBlockTime.checkDuplicatedServices() || !this.validate.isValidate(this.contractsBlockTime)) return;
+    if (!this.contractsBlockTime.checkDuplicatedBlockTimeServices() || !this.contractsBlockTime.checkDuplicatedServices() || !this.contractsBlockTime.checkDuplicatedBlockTimeAndTrackServices() || !this.validate.isValidate(this.contractsBlockTime)) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       (!this.contractsBlockTime.isPerpetual) ? moment(this.contractsBlockTime.endDate).format('DD MMM YYYY') : null, this.contractsBlockTime.companyId, this.contractsBlockTime.id, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
         if (Object.keys(data).length === 0) {
@@ -188,7 +188,7 @@ export class ContractsAsideBlockTimeEditComponent implements OnInit, OnDestroy {
       })
   }
   onCheckDuplicatedService() {
-    if (this.contractsBlockTime.services.length === 0 || !this.contractsBlockTime.checkDuplicatedServices()) return;
+    if (this.contractsBlockTime.services.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeAndTrackServices()) return;
     this.nonContractServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       (!this.contractsBlockTime.isPerpetual) ? moment(this.contractsBlockTime.endDate).format('DD MMM YYYY') : null, this.contractsBlockTime.companyId, this.contractsBlockTime.id, this.contractsBlockTime.getServicesName()).subscribe(data => {
         if (Object.keys(data).length > 0) {

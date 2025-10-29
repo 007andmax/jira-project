@@ -88,17 +88,10 @@ app-tickets-table-item {
     &__main {
       display: flex;
       flex-direction: column;
+      gap: 16px;
       padding: 12px 16px;
       height: calc(100% - 57px);
       overflow: auto;
-
-      .qt-input-block__label {
-        font-size: 14px;
-        font-weight: 500;
-        color: $gray-700;
-        margin-top: 3px;
-        margin-bottom: 20px;
-      }
 
       .content-filters-checkbox {
         color: $gray-700;
@@ -125,57 +118,6 @@ app-tickets-table-item {
 
   .content-filters-header {
     display: none;
-  }
-
-  app-tickets-filter-tags .mat-form-field {
-    width: 100%;
-  }
-
-  // Start
-  .search-users,
-  .search-tech-users,
-  .search-status,
-  .search-company,
-  .light-dropdown.dropdown {
-
-    &::before {
-      color: $gray-900;
-      font-weight: 600;
-      line-height: 20px;
-    }
-  }
-  .qt-dropdown,
-  .light-dropdown {
-    padding-top: 8px;
-  }
-  .search-company {
-    &::before {
-      content: "Company";
-    }
-  }
-
-  .search-users {
-    &::before {
-      content: "User";
-    }
-  }
-
-  .search-tech-users {
-    &::before {
-      content: "Tech Team";
-    }
-  }
-
-  .search-status {
-    &::before {
-      content: "Status";
-    }
-  }
-
-  app-tickets-filter-tags {
-    &::before {
-      content: "Tags";
-    }
   }
 }
 

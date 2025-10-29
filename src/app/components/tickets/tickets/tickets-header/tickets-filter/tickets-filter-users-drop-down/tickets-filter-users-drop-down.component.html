@@ -5,7 +5,7 @@
     [placement]="placement"
 >
     <p
-        class="title-filter qt-mb-8"
+        class="qt-input-block__label"
         [textContent]="title"
     ></p>
     <app-mat-form-field
@@ -22,13 +22,14 @@
                 #productTooltip
             ></app-dynamic-tooltip>
             <app-mat-chip
+                class="app-mat-tags-with-avatar"
                 *ngFor="let tag of selectedTag; let i = index"
                 [isRemove]="removable"
                 (onClose)="remove(i)"
             >
-                <div class="assigne-user-item">
+                <div class="qt-df qt-ai-c">
                     <div
-                        class="assigne-user-avatar"
+                        class="app-mat-tags-with-avatar__avatar"
                         [textContent]="ticketsListService.getAssignedUserNameForAvatar(tag)"
                         [ngStyle]="{'background': ticketsListService.getStyleAvatar(tag)}"
                     ></div>

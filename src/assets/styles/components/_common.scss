@@ -89,26 +89,56 @@ body .left-panel-full {
 
 // _loading-indicator
 .loading {
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
   position: absolute;
-  top: calc(50% - 25px);
-  left: calc(50% - 25px);
-  border: 0.35rem solid rgba(0, 0, 0, 0.2);
-  border-top-color: $gray-900;
-  animation: spin 1s infinite linear;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  &::before {
+    content: '';
+    width: 48px;
+    height: 48px;
+    display: block;
+    border-radius: 50%;
+    border: 6px solid $gray-200;
+    border-top-color: $blue-light-600;
+    animation: spin 1s infinite linear;
+  }
+
+  &:not(.xs):not(.sm):not(.loading--without-text)::after {
+    content: "Just a moment, we're pulling up the list.";
+    font-weight: 500;
+    color: $gray-700;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  &.xs {
+    top: 50%;
+    translate: 0 -50%;
+    right: 10px;
+    left: auto;
+
+    &::before {
+      width: 20px;
+      height: 20px;
+      border-width: 2px;
+    }
+  }
+
+  &.sm {
+    &::before {
+      width: 32px;
+      height: 32px;
+      border-width: 3px;
+    }
+  }
 }
 
-.loading.xs {
-  top: 10px;
-  right: 10px;
-  left: auto;
-  width: 20px;
-  height: 20px;
-  border: 0.1rem solid $gray-600;
-  border-top-color: $gray-400;
-}
 .recurring-tickets-content__modal--content .loading.xs {
   top: -3px;
 }
@@ -421,7 +451,7 @@ body .left-panel-full {
   bottom: 0;
   left: 0;
   z-index: 1040;
-  background-color: #000;
+  background-color: $gray-900;
   &.fade {
     opacity: 0;
   }
@@ -431,7 +461,7 @@ body .left-panel-full {
 }
 .modal-header {
   padding: 15px;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid $gray-200;
   &:before,
   &:after {
     content: " ";
@@ -455,7 +485,7 @@ body .left-panel-full {
 .modal-footer {
   padding: 15px;
   text-align: right;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid $gray-200;
 
   &:before,
   &:after {
@@ -521,7 +551,7 @@ body .left-panel-full {
   padding: 3px 8px;
   color: $white;
   text-align: center;
-  background-color: #000;
+  background-color: $gray-900;
   border-radius: 4px;
 }
 // Arrows
@@ -538,56 +568,56 @@ body .left-panel-full {
     left: 50%;
     margin-left: -5px;
     border-width: 5px 5px 0;
-    border-top-color: #000;
+    border-top-color: $gray-900;
   }
   &.top-left .tooltip-arrow {
     bottom: 0;
     right: 5px;
     margin-bottom: -5px;
     border-width: 5px 5px 0;
-    border-top-color: #000;
+    border-top-color: $gray-900;
   }
   &.top-right .tooltip-arrow {
     bottom: 0;
     left: 5px;
     margin-bottom: -5px;
     border-width: 5px 5px 0;
-    border-top-color: #000;
+    border-top-color: $gray-900;
   }
   &.right .tooltip-arrow {
     top: 50%;
     left: 0;
     margin-top: -5px;
     border-width: 5px 5px 5px 0;
-    border-right-color: #000;
+    border-right-color: $gray-900;
   }
   &.left .tooltip-arrow {
     top: 50%;
     right: 0;
     margin-top: -5px;
     border-width: 5px 0 5px 5px;
-    border-left-color: #000;
+    border-left-color: $gray-900;
   }
   &.bottom .tooltip-arrow {
     top: 0;
     left: 50%;
     margin-left: -5px;
     border-width: 0 5px 5px;
-    border-bottom-color: #000;
+    border-bottom-color: $gray-900;
   }
   &.bottom-left .tooltip-arrow {
     top: 0;
     right: 5px;
     margin-top: -5px;
     border-width: 0 5px 5px;
-    border-bottom-color: #000;
+    border-bottom-color: $gray-900;
   }
   &.bottom-right .tooltip-arrow {
     top: 0;
     left: 5px;
     margin-top: -5px;
     border-width: 0 5px 5px;
-    border-bottom-color: #000;
+    border-bottom-color: $gray-900;
   }
 }
 
@@ -764,14 +794,14 @@ html::-webkit-scrollbar {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(54, 70, 86, 0.8);
+  background: $gray-200;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:window-inactive {
-  background: rgba(54, 70, 86, 0.4);
+  background: $gray-200;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -783,13 +813,13 @@ html::-webkit-scrollbar {
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
-  background-color: #d2dae4;
+  background-color: $gray-200;;
   border: 3px solid $white;
   border-radius: 10px;
 }
 
 .custom-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: $gray-300;
+  background-color: $gray-200;
 }
 
 .dropdown-assign-ticket .users-list::-webkit-scrollbar-thumb {
@@ -821,37 +851,21 @@ p {
   font-weight: 400;
 }
 
-.recurring-tickets-content__modal .new-link,
-.new-companies-content__modal .new-link,
-.new-users-content__modal .new-link {
-  width: 100%;
-  margin-top: 10px !important;
-  padding: 0 15px !important;
-  display: inline-block;
-}
-
 .new-users-content__modal .new-link,
 .new-companies-content__modal .new-link {
   margin: 40px 0 20px 0 !important;
 }
 
-.new-companies-content__modal .new-link,
-.recurring-tickets-content__modal .new-link,
-.new-users-content__modal .new-link {
-  margin: 0 !important;
-  padding: 12px 0 6px !important;
-}
-
 .new-link {
   font-weight: 400;
   font-size: 12px;
-  color: $blue-light-600 !important;
+  color: $blue-light-600;
   text-decoration: none;
   cursor: pointer;
   font-style: normal;
-  background: transparent !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  background: transparent;
+  margin: 0;
+  padding: 0;
   border: none;
   outline: none;
 }
@@ -965,11 +979,6 @@ textarea {
       border-right: 1px solid $gray-300;
       border-left: none;
     }
-  }
-
-  .mat-chip-list-wrapper .mat-standard-chip,
-  .mat-chip-list-wrapper input.mat-input-element {
-    margin: 2px;
   }
 }
 

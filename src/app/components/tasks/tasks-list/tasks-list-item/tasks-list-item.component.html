@@ -1,0 +1,66 @@
+<div class="qt-table-modern__row">
+    <div
+        class="my-tasks-table__title qt-ai-c"
+        (click)="editTask()"
+    >
+        <div
+            class="qt-icon icon__check qt-sz-20 icn-16 qt-mr-8"
+            [ngClass]="{'qt-icon__green-600':item.taskStatus == 'CLOSED'}"
+            (click)="toggleStatus($event)"
+        ></div>
+        <div
+            class="qt-color-gray-900 qt-fw-500 ellipsis"
+            [ngClass]="{'qt-td-l-t': item.taskStatus == 'CLOSED'}"
+            [textContent]="item.title"
+        ></div>
+        <div
+            *ngIf="item.hasInvoice"
+            class="qt-icon icon__password qt-sz-16 qt-ml-8"
+            placement="top"
+            container="body"
+            ngbTooltip="The Task is now closed, and already billed to the client. You cannot re-open it"
+        ></div>
+    </div>
+    <div
+        class="my-tasks-table__type"
+        (click)="editTask()"
+    >
+        <span
+            [ngClass]="{'--meeting':item.type == 'Meeting',
+                        '--phone-call':item.type == 'Phone call',
+                        '--to-do':item.type == 'To do'
+                    }"
+            class="tag__modern"
+            [textContent]="item.type"
+        ></span>
+    </div>
+    <div class="my-tasks-table__date">
+        <div
+            class="qt-mr-4"
+            [textContent]="parseStartDate(item.startDate)"
+        ></div>
+        <app-tasks-date-picker
+            #dateDp
+            [class]="['date-picker-invisible', '--sm']"
+            [container]="'body'"
+            [type]="'DETAIL_TICKET'"
+            [editStart]="item.startDate"
+            [editEnd]="item.endDate"
+            [isDisabled]="item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null"
+            (selectedDate)="filterByDate($event)"
+            (onCloseDropDown)="onCloseDatePicker($event)"
+        ></app-tasks-date-picker>
+    </div>
+    <div class="my-tasks-table__tech-users">
+        <app-tech-users
+            #techUsers
+            [editMode]="true"
+            [editUsers]="assignedUsers"
+            [type]="'TASKS'"
+            [users]="listTechUsers"
+            [container]="'body'"
+            [isDisabled]="item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null"
+            (usersChange)="onChangeUser($event)"
+        ></app-tech-users>
+    </div>
+</div>

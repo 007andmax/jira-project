@@ -1,0 +1,83 @@
+@import './src/assets/styles/variable';
+
+.create-task-popover {
+  width: 558px;
+
+  &__header {
+    min-height: 44px;
+    padding: 6px 8px 10px;
+
+    .qt-button:not(.--square-sm) {
+      padding-inline: 8px;
+    }
+  }
+
+  &__title {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 600;
+    color: $gray-900;
+  }
+
+  &__body {
+    min-height: 44px;
+    padding: 8px 10px 6px;
+    border-top: 1px solid $gray-200;
+    display: flex;
+    align-items: center;
+
+    .form-input {
+      &.--editable {
+        color: $gray-900;
+        border-color: transparent;
+        border-radius: 6px;
+        outline: none;
+        width: 100%;
+        font-size: 14px;
+        font-weight: 500;
+
+        &::placeholder {
+          color: $gray-400;
+          font-weight: 500;
+        }
+      }
+    }
+
+    ::ng-deep .tooltip {
+      white-space: nowrap;
+    }
+  }
+
+  ::ng-deep .multi-assign-user-container:not(:empty) {
+    width: auto;
+  }
+  ::ng-deep .qt-table-modern__circle-avatar {
+    position: static;
+    margin: 0;
+
+    &:not(:first-child) {
+      margin-left: -12px;
+    }
+  }
+}
+
+::ng-deep .dropdown-assign-ticket .users-list {
+  max-width: 100%;
+  max-height: 280px;
+}
+
+::ng-deep .tab-pane__user-circle {
+  width: 28px !important;
+  height: 28px !important;
+  margin: 0;
+
+  .qt-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+::ng-deep .ticket-updates__photo-people {
+  width: 28px !important;
+  height: 28px !important;
+}

@@ -1,0 +1,289 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/fonts";
+
+.qt-aside-modern {
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    .tab-content {
+      flex: 1;
+    }
+
+    ::ng-deep .tab-pane,
+    ::ng-deep .angular-editor {
+      height: 100%;
+    }
+
+    ::ng-deep .angular-editor-wrapper {
+      height: calc(100% - 14px);
+    }
+
+    ::ng-deep app-drop-down,
+    ::ng-deep app-tasks-date-picker {
+      .dropdown-wrap {
+        display: inline-block;
+      }
+
+      .invalid-feedback {
+        position: sticky;
+        margin-top: 8px;
+        display: block;
+      }
+    }
+  }
+
+  &__footer {
+    padding: 0;
+
+    &-file-wrap {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px;
+      background-color: $gray-50;
+      border-radius: 0 0 12px 12px;
+    }
+  }
+
+  .single-file {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    padding: 6px 6px 6px 8px;
+    background-color: $white;
+    border: 1px solid $gray-200;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    color: $gray-600;
+    border-radius: 6px;
+      .size {
+          font-size: 12px;
+          font-weight: 400;
+          color: $gray-500;
+          padding: 2px 6px;
+          border-radius: 24px;
+          background-color: $gray-100;
+        }
+  }
+
+  app-upload-area-progress {
+    display: none;
+  }
+
+  .name {
+    max-width: 200px;
+  }
+
+  .qt-button-square {
+    width: 32px;
+    height: 32px;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+  }
+
+  .files-list {
+    display: contents;
+  }
+
+  .nav-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    border: unset;
+    margin-top: 24px;
+
+    &::before {
+      display: none;
+    }
+
+    .nav-link {
+      font-size: 14px;
+      color: $gray-500;
+      font-weight: 500;
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+      padding: 0 0 16px;
+
+      &.active {
+        color: $gray-900;
+        font-weight: 600;
+        border-bottom-color: $blue-light-600;
+      }
+    }
+  }
+
+  ::ng-deep .angular-editor {
+    .angular-editor-wrapper {
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        width: calc(100% + 48px);
+        left: -24px;
+        height: 1px;
+        background-color: $gray-200;
+      }
+
+      &::before {
+        top: 0;
+      }
+
+      &::after {
+        bottom: 0;
+      }
+
+      .angular-editor-textarea {
+        position: relative;
+        padding: 24px 0 !important;
+        border: unset !important;
+        box-shadow: unset !important;
+        margin: 0;
+        font-size: 14px;
+        line-height: 20px;
+        color: $gray-900;
+        z-index: 1;
+
+        &:focus {
+          outline: unset;
+        }
+      }
+
+      .angular-editor-placeholder {
+        color: $gray-400 !important;
+        padding: 26px 0 0 !important;
+        font-size: 14px;
+      }
+    }
+
+    .angular-editor-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      position: relative;
+      padding: 4px 0 !important;
+      background-color: transparent;
+      border-radius: 0;
+      border: unset;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: calc(100% + 48px);
+        left: -24px;
+        height: 1px;
+        background-color: $gray-200;
+        bottom: 0;
+      }
+
+      .angular-editor-toolbar-set {
+        display: inline-flex !important;
+
+        &:nth-child(1),
+        &:nth-child(4),
+        &:nth-child(6),
+        &:nth-child(9),
+        &:nth-child(10),
+        &:nth-child(11),
+        &:nth-child(13) {
+          display: none !important;
+        }
+
+
+        &:not(:nth-last-child(2)) {
+          margin-right: 5px;
+          padding-right: 6px;
+          border-right: 1px solid $gray-200;
+        }
+
+        .angular-editor-button {
+          border: unset !important;
+
+          .fa {
+            color: $gray-500;
+          }
+        }
+      }
+    }
+  }
+}
+
+::ng-deep company-drop-down {
+  .dropdown-menu {
+    .dropdown-item {
+      &:hover,
+      &.--selected {
+        background-color: $gray-50;
+        color: $gray-900;
+      }
+    }
+  }
+}
+
+form {
+    display: block;
+    height: 100%;
+}
+
+.tasks-add {
+    &__more-users-title {
+        font-size: 12px;
+        color: $blue-light-600;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+
+    &__attach {
+        background-repeat: no-repeat;
+        background-size: 24px;
+        cursor: pointer;
+    }
+
+    &__attach {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-mask-size: 16px;
+        mask-size: 16px;
+        background-position: center;
+        z-index: -1;
+        overflow: hidden;
+
+        &-button {
+            position: relative;
+            z-index: 1;
+
+            input[type="file"] {
+                height: 100%;
+                opacity: 0;
+            }
+        }
+    }
+}
+
+.qt-input-block-horizontal {
+  display: flex;
+}
+
+::ng-deep app-tasks-add-associate-tickets {
+  .qt-input-search:before {
+    display: none;
+  }
+}
+.error-file {
+  border: 1px solid $red-600 !important;
+  .icon__info {
+    background-color: $red-600;
+  }
+}
+.description-error {
+    position: absolute;
+    top: 2px;
+    left: 100px;
+    margin-top: 0px;
+    width: max-content;
+}

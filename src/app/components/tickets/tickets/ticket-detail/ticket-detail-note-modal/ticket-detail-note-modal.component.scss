@@ -395,53 +395,6 @@
     z-index: 1;
 }
 
-::ng-deep .cps-block .mat-chip-list-wrapper {
-    min-height: 48px;
-    border-radius: unset !important;
-    padding-left: 168px !important;
-    border-color: $gray-200;
-    background-color: $white;
-    border-left: unset !important;
-    border-right: unset !important;
-    margin-right: 0;
-    margin-left: 0;
-
-    &:hover {
-        border-color: $gray-200 !important;
-        background-color: $gray-50;
-    }
-}
-
-::ng-deep .cps-block .ticket-edit-user-tags .assigne-user-avatar {
-    height: 16px;
-    width: 16px;
-}
-
-::ng-deep .cps-block__header div.ticket-edit-user-tags .selected-tag-user {
-    border: 1px solid $gray-200;
-    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
-    border-radius: 6px !important;
-    background-color: $white !important;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 16px;
-    color: $gray-600;
-    padding: 5px 8px;
-}
-
-::ng-deep .mat-standard-chip .mat-chip-remove.mat-icon {
-    width: 14px;
-}
-
-::ng-deep .mat-chip.mat-standard-chip .mat-chip-remove {
-    &::before {
-        top: 3px;
-        right: -1px;
-        width: 12px;
-        height: 12px;
-    }
-}
-
 ::ng-deep div.cps-block__visible-user {
     div.autocomplete-user-tags {
         width: 240px !important;

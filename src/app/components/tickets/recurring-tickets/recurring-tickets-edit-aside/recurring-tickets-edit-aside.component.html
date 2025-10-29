@@ -94,7 +94,7 @@
         </div>
         <!-- IF TAB IS 'PRODUCT'----------------------------------------------- -->
         <div
-            class="product-tab-content"
+            class="product-tab-content qt-inputs-row"
             *ngIf="type === 'products'"
         >
             <!-- <div class="error-products" *ngIf="errors.products.show"><p [textContent]="errors.products.text"></p></div> -->
@@ -216,7 +216,7 @@
         <!-- ------------------------------------------------------------------ -->
         <!-- IF TAB IS 'SERVICE'----------------------------------------------- -->
         <div
-            class="service-tab-content"
+            class="service-tab-content product-tab-content"
             *ngIf="type === 'services'"
         >
             <ng-template
@@ -266,7 +266,7 @@
                             </div>
                             <app-services-list
                                 class="service-reccurring-list"
-                                [isDisabled]="servicesList.length == 0"
+                                [isBlock]="servicesList.length == 0"
                                 [editItem]="service"
                                 [itemList]="servicesList"
                                 (selectedServicesItem)="setService($event,i)"

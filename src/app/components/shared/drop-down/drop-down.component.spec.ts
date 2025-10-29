@@ -131,7 +131,7 @@ describe('DropDownComponent integration test', () => {
     const bannerElement: HTMLElement = fixture.nativeElement;
     component.title = "test";
     fixture.detectChanges();
-    expect(bannerElement.querySelector(".app-drop-down__title").textContent).toContain('test');
+    expect(bannerElement.querySelector(".qt-input-block__label").textContent).toContain('test');
   });
   it('should contain "widthInput" property', () => {
     const bannerElement: any = fixture.nativeElement;

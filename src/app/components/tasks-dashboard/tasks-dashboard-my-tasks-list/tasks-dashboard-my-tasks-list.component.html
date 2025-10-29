@@ -1,0 +1,34 @@
+<div [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}">
+    <div
+        infiniteScroll
+        [infiniteScrollContainer]="container"
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="30"
+        [infiniteScrollDisabled]="infiniteScrollDisabled"
+        (scrolled)="onScroll()"
+        class="tbody"
+    >
+        <ng-template
+            ngFor
+            let-item
+            [ngForOf]="list"
+            [ngForTrackBy]="trackById"
+        >
+            <app-tasks-list-item [item]="item"></app-tasks-list-item>
+        </ng-template>
+    </div>
+    <div
+        class="loading pengind-loading"
+        *ngIf="showPendingPreloader"
+    ></div>
+    <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>
+    <div
+        class="no-exist-elements"
+        *ngIf="!showPreloader && list.length == 0"
+    >
+        We couldn't find any results
+    </div>
+</div>

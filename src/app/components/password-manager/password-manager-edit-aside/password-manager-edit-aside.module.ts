@@ -15,6 +15,11 @@ import { UploadAreaProgressModule } from '../../shared/upload-area/upload-area-p
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
+import { MatOptionModule } from 'src/app/components/shared/mat-option/mat-option.module';
+
 
 
 @NgModule({
@@ -34,7 +39,12 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         UploadAreaProgressModule,
         CompanyDropDownModule,
         ClickOutsideModule,
-        MatErrorModule
+        MatErrorModule,
+        NgbModule,
+        MatChipModule,
+        MatChipListModule,
+        MatOptionModule,
+        MatFormFieldModule
     ],
     exports: [PasswordManagerEditAsideComponent]
 

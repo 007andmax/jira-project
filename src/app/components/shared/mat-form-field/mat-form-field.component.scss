@@ -1,6 +1,8 @@
+@import './src/assets/styles/variable';
+
 .mat-form-field {
     width: 100%;
-    background: #ffffff;
+    background: $white;
     border-radius: 6px;
     display: inline-block;
     position: relative;
@@ -14,6 +16,7 @@
 .mat-form-field-wrapper {
     padding: 0;
     position: relative;
+    line-height: 1;
 }
 .mat-form-field-flex {
     display: inline-flex;
@@ -22,11 +25,10 @@
     width: 100%;
 }
 .mat-form-field-infix {
-    border: 1px solid #EAECF0;
+    border: 1px solid $gray-200;
     border-radius: 6px;
     position: relative;
     min-height: 40px;
-    padding-left: 6px;
     display: block;
     flex: auto;
     min-width: 0;
@@ -34,28 +36,25 @@
 }
 .mat-form-field-label-wrapper {
     position: absolute;
-    left: 0;
+    top: 0;
     box-sizing: content-box;
     width: 100%;
     height: 100%;
     overflow: hidden;
     pointer-events: none;
-    top: -.84375em;
-    padding-top: .84375em;
 }
 .mat-form-field-label {
     transform: none !important;
     width: 133.33333%;
-    top: 9px;
-    padding: 12px 10px 10px 12px;
-    font-size: 14px !important;
-    line-height: 20px;
+    top: 0;
+    padding: 12px 10px 10px 2px;
+    font-size: 14px;
+    line-height: 1;
     font-weight: 400;
     letter-spacing: 0;
-    color: #98A2B3;
+    color: $gray-400;
     position: absolute;
     left: 0;
-    font: inherit;
     pointer-events: none;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -113,8 +112,75 @@
         }
     }
 }
-.mat-form-field-appearance-legacy {
-    .mat-form-field-infix {
-        padding: .4375em 0;
+
+:host(.app-mat-tags-without-border),
+:host-context(.app-mat-tags-wrapper-without-border) {
+  ::ng-deep .app-mat-tags-without-border {
+    &__placeholder {
+      display: flex;
+      align-items: center;
+      min-height: 40px;
+      color: $gray-400;
+      font-size: 14px;
+      font-weight: 400;
     }
+
+    &__input {
+      padding-left: 0 !important;
+    }
+  }
+
+  ::ng-deep .mat-form-field-infix {
+    border: 0 !important;
+  }
+
+  ::ng-deep .selected-tag-ticket+input.mat-chip-input::placeholder {
+    color: transparent !important;
+  }
+}
+
+:host(.app-mat-form-field--with-label) {
+  ::ng-deep .mat-form-field-infix {
+    padding: 0 0 0 36px;
+    position: relative;
+
+    &::after {
+      left: 12px;
+      top: 10px;
+      position: absolute;
+      content: "";
+      width: 20px;
+      height: 20px;
+      mask-image: url('/assets/img/icons/tags.svg');
+      background-color: $gray-400;
+    }
+  }
+}
+
+:host-context(.app-mat-tags-wrapper-without-border) {
+  ::ng-deep .mat-form-field-infix {
+    padding: 0;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  ::ng-deep .mat-input-element {
+    padding-left: 0;
+  }
+}
+
+:host-context(.app-mat-tags-wrapper--sm) {
+  .mat-form-field-infix {
+    min-height: 35px;
+
+    &::after {
+      top: 8px;
+    }
+  }
+
+  ::ng-deep .mat-input-element {
+    height: 34.5px;
+  }
 }

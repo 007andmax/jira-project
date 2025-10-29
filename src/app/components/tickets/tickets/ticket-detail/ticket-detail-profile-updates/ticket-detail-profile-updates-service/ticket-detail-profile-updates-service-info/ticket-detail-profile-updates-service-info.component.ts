@@ -49,6 +49,10 @@ export class TicketDetailProfileUpdatesServiceInfoComponent implements OnInit, O
       this.listTechUsers = this.getUsersForAssign();
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.listTechUsers = this.getUsersForAssign();
+    })
+    this.sub.add(onChangeUsers);
     if (this.service.date) this.setDateWithTimeOffset();
   }
 

@@ -5,20 +5,23 @@
     <div class="app-left-panel__menu-title">Products</div>
 </div>
 <ul class="app-left-panel__menu-expand menu-expand-hide">
-    <a
+    <li>
+      <a
         href
         [link]="'inventory/products'"
         target="_blank"
         appRightClickBlank
-    >
+      >
         <li
-            [ngClass]="{'--active':  activePage === 'inventory'}"
-            (click)="goToAll()"
+          [ngClass]="{'--active':  activePage === 'inventory'}"
+          (click)="goToAll()"
+          class="app-left-panel__menu-expand-link"
         >
-            All products
+          All products
         </li>
-    </a>
-    <div class="list-container">
+      </a>
+    </li>
+    <ul class="list-container app-left-panel__filter-menu-expand qt-mt-6">
         <ng-template
             ngFor
             let-inventory
@@ -29,9 +32,9 @@
                 [ngClass]="{'--active': sortCategoty && sortCategoty.id === inventory.id && activePage === 'inventory'}"
                 (click)="goToState();selectCategory(inventory)"
                 [textContent]="inventory.name"
-                class="qt-jc-sb"
+                class="app-left-panel__filter-menu-expand-link"
             >
             </li>
         </ng-template>
-    </div>
+    </ul>
 </ul>

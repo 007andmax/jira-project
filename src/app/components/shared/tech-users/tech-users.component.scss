@@ -59,6 +59,7 @@
 }
 .tech-users-container {
   max-height: 586px !important;
+  cursor: pointer;
 }
 .icon__user-avatar {
   width: 32px;
@@ -123,3 +124,60 @@
   border: 1px solid $gray-200;
   background-color: $white;
 }
+.multi-assign-user-container {
+  position: relative;
+}
+.multi-assign-user {
+  position: absolute;
+  top: -12px;
+}
+
+.ticket-table__assignee {
+  overflow: unset;
+
+  .ellipsis {
+    max-width: 120px;
+  }
+}
+ .qt-table-modern__circle-avatar {
+   width: 24px;
+   height: 24px;
+   min-width: 24px;
+   min-height: 24px;
+   border-radius: 50%;
+   background-position: center !important;
+   background-size: cover !important;
+   margin-right: 8px;
+   color: $white;
+   align-items: center;
+   justify-content: center;
+   display: flex;
+   font-size: 10px;
+   font-weight: 700;
+ }
+ .more-users {
+   position: absolute;
+   top: -12px;
+   background: $gray-100;
+   color: $gray-600;
+   font-size: 12px;
+   font-weight: 600;
+ }
+
+ .tooltip__circle-avatar {
+   width: 24px;
+   height: 24px;
+   min-width: 24px;
+   min-height: 24px;
+   border-radius: 50%;
+   background-position: center;
+   background-color: $blue-light-600;
+   background-size: cover;
+   margin-right: 8px;
+   color: $white;
+   align-items: center;
+   justify-content: center;
+   display: flex;
+   font-size: 10px;
+   font-weight: 700;
+ }

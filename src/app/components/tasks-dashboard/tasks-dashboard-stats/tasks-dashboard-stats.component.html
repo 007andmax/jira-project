@@ -1,0 +1,67 @@
+<div class="dashboard-stats-group">
+    <div
+        class="qt-fw-500 qt-color-gray-500"
+        [textContent]="parseDate()"
+    ></div>
+    <div
+        *ngIf="currentUser"
+        class="qt-fs-26 qt-lh-12 qt-fw-500 qt-color-gray-900 qt-mt-6"
+        [textContent]="'Good morning, ' + currentUser.firstName"
+    ></div>
+    <div
+        class="dashboard-stats qt-mt-20"
+        *ngIf="stats"
+    >
+        <div class="dashboard-stats__col">
+            <div class="dashboard-stats-icon">
+                <div class="qt-icon icon__tasks qt-sz-18 qt-mr-18"></div>
+            </div>
+            <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Tasks Created</div>
+            <div
+                class="dashboard-stats-results qt-mt-4"
+                [textContent]="stats.created"
+            ></div>
+        </div>
+        <div class="dashboard-stats__col">
+            <div class="dashboard-stats-icon">
+                <div class="qt-icon icon__time qt-sz-18 qt-mr-18"></div>
+            </div>
+            <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Upcoming Tasks</div>
+            <div
+                class="dashboard-stats-results qt-mt-4"
+                [textContent]="stats.upcoming"
+            ></div>
+        </div>
+        <div class="dashboard-stats__col">
+            <div class="dashboard-stats-icon">
+                <div class="qt-icon icon__spam qt-sz-18 qt-mr-18"></div>
+            </div>
+            <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Overdue Tasks</div>
+            <div
+                class="dashboard-stats-results qt-mt-4"
+                [textContent]="stats.overdue"
+            ></div>
+        </div>
+        <div class="dashboard-stats__col">
+            <div class="dashboard-stats-icon">
+                <div class="qt-icon icon__check qt-sz-18 qt-mr-18"></div>
+            </div>
+            <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Completed Tasks</div>
+            <div
+                class="dashboard-stats-results qt-mt-4"
+                [textContent]="stats.completed"
+            ></div>
+        </div>
+        <div class="dashboard-stats__col">
+            <div class="dashboard-stats-icon">
+                <div class="qt-icon icon__taxes qt-sz-18 qt-mr-18"></div>
+            </div>
+            <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Billable Hours</div>
+            <div
+                class="dashboard-stats-results qt-mt-4"
+                [textContent]="'N/A'"
+            ></div>
+            <!-- stats.completed -->
+        </div>
+    </div>
+</div>

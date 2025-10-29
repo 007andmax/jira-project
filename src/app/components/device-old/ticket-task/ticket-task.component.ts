@@ -44,6 +44,10 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
       this.getAllUsers(data);
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.getAllUsers(this.usersStateService.getAllUsers());
+    })
+    this.sub.add(onChangeUsers);
   }
 
 

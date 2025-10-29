@@ -199,9 +199,6 @@ html {
     }
   }
 }
-.main-container:nth-child(2) {
- // display: none;
-}
 .ng-sidebar {
   position: fixed !important;
   background: $white;
@@ -252,10 +249,6 @@ html {
       padding: 0 !important;
     }
   }
-}
-.mat-form-field {
-  font-family: "Inter", sans-serif;
-  @include body-m;
 }
 
 .editor-container {
@@ -352,33 +345,33 @@ html {
     }
   }
 }
-.user-subscription {
-  display: flex;
-  flex-wrap: wrap;
-  min-height: 40px;
-  padding: 0 30px 0 3px;
-  color: $gray-900;
-  font-size: 14px;
-  font-weight: 400;
-  border: 1px solid $gray-200;
-  border-radius: 6px;
-  align-items: center;
-  cursor: pointer;
+.custom-app-tags {
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 40px;
+    padding: 0 30px 0 3px;
+    color: $gray-900;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 6px;
+    align-items: center;
+    cursor: pointer;
 
-  &:hover {
-    border-color: $gray-300;
+    &:hover {
+      border-color: $gray-300;
+    }
   }
 
-  > div {
+  &__item {
     display: flex;
     align-items: center;
+    gap: 2px;
     font-size: 13px;
-    padding: 4px 6px;
+    padding: 4px 4px 4px 6px;
     background: $gray-25;
-    border: 1px solid $background;
-    border-radius: 3px;
-    margin: 2px 4px 2px 0;
-    font-weight: 500;
+    border-radius: 6px;
+    margin: 4px 3px;
   }
 }
 .user-detail-info {
@@ -408,15 +401,6 @@ app-company-tags,
 app-company-devices-tags,
 company-associate,
 app-file-manager-add-file-tags {
-  .dropdown-toggle .mat-form-field-wrapper .mat-form-field-infix {
-    input {
-      top: 0;
-      flex: 1;
-      height: 30px;
-      border-color: transparent;
-      box-shadow: unset;
-    }
-  }
   .hidde-label {
     .mat-form-field-wrapper {
       &::before {
@@ -425,49 +409,8 @@ app-file-manager-add-file-tags {
     }
   }
 }
-documents-filter {
-  app-company-tags {
-    .mat-form-field-wrapper {
-      &::before {
-        content: "" !important;
-      }
-    }
-    .mat-form-field {
-      margin-top: 0 !important;
-      height: 100%;
-    }
-    .mat-form-field-infix {
-      min-height: 36px !important;
-      &::before {
-        top: 9px !important;
-      }
-    }
-    .mat-form-field-appearance-legacy .mat-form-field-infix {
-      padding: 0;
-      background-color: $white;
-      z-index: 1;
-    }
-    .dropdown-toggle {
-      .mat-form-field-wrapper {
-        height: 100%;
-      }
-    }
-    .mat-chip-list-wrapper {
-      margin: 0;
-    }
-    .mat-chip-list-wrapper .mat-standard-chip,
-    .mat-chip-list-wrapper input.mat-input-element {
-      margin: 2px;
-    }
-    .mat-standard-chip.mat-chip-with-trailing-icon {
-      position: relative;
-      z-index: 1;
-      padding-top: 5px;
-      padding-bottom: 5px;
-      color: $gray-900;
-      @include сaption-l;
-    }
-  }
+app-company-devices-tags .mat-form-field-infix {
+  border: 1px solid transparent !important;
 }
 .new-companies-content__modal--content,
 .new-users-content__modal--content,
@@ -492,96 +435,6 @@ app-company-dash-detail {
         border-color: $blue-light-600;
         color: $blue-light-600;
       }
-    }
-  }
-  app-tags,
-  app-company-tags,
-  company-associate,
-  app-taxes,
-  documents-linked,
-  app-file-manager-add-file-tags {
-    > .qt-temporary-col-fix { // TODO change this temporary class (this class create for remove bootstrap col class)
-      margin-top: 12px;
-      .mat-form-field {
-        width: 100%;
-      }
-      .mat-form-field-infix {
-        border: none;
-      }
-      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-        padding: 0;
-        position: relative;
-      }
-      .mat-form-field-appearance-legacy .mat-form-field-label {
-        padding: 12px 10px 10px 36px;
-        font-size: 13px;
-        font-weight: 400;
-        color: $gray-400;
-      }
-      .mat-form-field-infix {
-        border: 1px solid $gray-200;
-        box-shadow: inset 0 1px 2px rgba(16, 24, 40, .05);
-        border-radius: 6px;
-        padding: 0px 0px 0px 36px !important;
-        position: relative;
-        &:hover {
-          border-color: $gray-300;
-        }
-        &:before {
-          left: 12px;
-          top: 10px;
-          position: absolute;
-          content: "";
-          width: 20px;
-          height: 20px;
-         background: url("/assets/img/icons/tags.svg");
-        }
-        input {
-          height: 38px !important;
-          padding: 11px 14px;
-          margin: 0;
-          min-width: 100px;
-        }
-      }
-    }
-
-    > .qt-temporary-col-fix {
-      .qt-input-block__input, // Fix input style
-      .qt-input-block input {
-        border-color: transparent;
-        box-shadow: unset;
-      }
-      margin-top: 0; // Fix style for no-column, delete after remove bootstrap col class
-      .mat-form-field {
-        margin-top: 0;
-      }
-      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-        &:before {
-          display: none;
-        }
-      }
-    }
-  }
-  app-tags {
-    > .qt-temporary-col-fix .mat-form-field-infix input {
-      border-color: transparent;
-      box-shadow: unset;
-    }
-  }
-  company-associate {
-    .mat-form-field-wrapper {
-      &:before {
-        display: none;
-      }
-    }
-    .mat-form-field-infix {
-      &:before {
-        display: none;
-      }
-      padding-left: 0px !important;
-    }
-    .mat-form-field-label {
-      padding: 12px 10px 10px 0px;
     }
   }
   documents-linked {
@@ -619,85 +472,6 @@ app-company-dash-detail {
 }
 
 .new-companies-content__modal--content {
-  app-draft-email-recipients,
-  draft-email-user-recipients {
-    >.qt-temporary-col-fix {
-      // TODO change this temporary class (this class create for remove bootstrap col class)
-      margin-top: 12px;
-
-      .mat-form-field {
-        width: 100%;
-      }
-
-      .mat-form-field-infix {
-        border: none;
-      }
-
-      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-        padding: 0;
-        position: relative;
-      }
-
-      .mat-form-field-appearance-legacy .mat-form-field-label {
-        padding: 12px 10px 10px 36px;
-        font-size: 13px;
-        font-weight: 400;
-        color: $gray-400;
-      }
-
-      .mat-form-field-infix {
-        border: 1px solid $gray-200;
-        box-shadow: inset 0 1px 2px rgba(16, 24, 40, .05);
-        border-radius: 6px;
-        padding: 0px !important;
-        position: relative;
-
-        &:hover {
-          border-color: $gray-300;
-        }
-
-        &:before {
-          left: 12px;
-          top: 10px;
-          position: absolute;
-          content: "";
-          width: 20px;
-          height: 20px;
-           background: url("/assets/img/icons/tags.svg");
-        }
-
-        input {
-          height: 38px !important;
-          padding: 11px 14px;
-          margin: 0;
-          min-width: 100px;
-        }
-      }
-    }
-
-    >.qt-temporary-col-fix {
-
-      .qt-input-block__input,
-      // Fix input style
-      .qt-input-block input {
-        border-color: transparent;
-        box-shadow: unset;
-      }
-
-      margin-top: 0; // Fix style for no-column, delete after remove bootstrap col class
-
-      .mat-form-field {
-        margin-top: 0;
-      }
-
-      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-        &:before {
-          display: none;
-        }
-      }
-    }
-  }
-
   draft-email-user-recipients,
   app-draft-email-recipients {
     .hide-all-user {
@@ -712,37 +486,6 @@ app-company-dash-detail {
 .recurring-tickets-content__modal {
   .app-drop-down__right-icon {
     bottom: 20px;
-  }
-
-  .qt-temporary-col-fix {
-    .mat-form-field-wrapper {
-      .mat-form-field-flex {
-        .mat-form-field-infix {
-          height: 40px;
-          min-height: 40px;
-        }
-        .mat-form-field-infix {
-          &:before {
-            top: 11px;
-          }
-          input {
-            height: 34px;
-          }
-        }
-        .mat-chip-list-wrapper .mat-standard-chip,
-        .mat-chip-list-wrapper input.mat-input-element {
-          margin: 2px;
-        }
-        .mat-chip-list-wrapper {
-          margin: -2px;
-        }
-        .mat-form-field-label {
-          top: calc(50% + 4px);
-          transform: translateY(-50%);
-          height: 43px;
-        }
-      }
-    }
   }
 }
 .billing-dashboard-page__content {
@@ -821,44 +564,6 @@ app-company-dash-detail {
     }
   }
 }
-.mat-chip.mat-standard-chip {
-  padding: 9px 15px 9px 5px;
-  border-radius: 3px !important;
-  border: 1px solid $background;
-  color: $gray-900;
-  text-transform: none;
-  position: relative;
-  display: flex;
-  min-width: 35px;
-  margin: 2px;
-  @include сaption-l;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  background-color: $gray-25;
-  float: left;
-  cursor: inherit;
-  .mat-chip-remove {
-    font-size: 0;
-    position: relative;
-    width: 0;
-    height: 0;
-    margin: 0;
-    &:before {
-      content: "";
-      position: absolute;
-      top: 2px;
-      right: -3px;
-      width: 16px;
-      height: 16px;
-      mask-image: url("/assets/img/icons/close.svg");
-      background-color: $gray-400;
-      mask-position: center;
-      mask-repeat: no-repeat;
-      mask-size: contain;
-    }
-  }
-}
 ngb-typeahead-window {
   .dropdown-menu {
     width: 100%;
@@ -892,10 +597,12 @@ ngb-typeahead-window {
   top: 10px;
   right: 10px;
   left: auto;
-  width: 20px;
-  height: 20px;
-  border: 0.1rem solid $gray-600;
-  border-top-color: $gray-400;
+
+  &::before {
+    width: 20px;
+    height: 20px;
+    border-width: 2px;
+  }
 }
 .left-panel-closed {
   .quotes__header {
@@ -1355,79 +1062,6 @@ app-quotes-item {
       display: none;
       font-size: 12px;
       line-height: 16px;
-    }
-  }
-
-  .qt-page-list__header-filters {
-    .companies-filter-tags {
-      .mat-form-field {
-        max-width: 100%;
-        width: 100%;
-      }
-
-      .filter-tags-body {
-        min-height: 36px;
-      }
-
-      .mat-chip-list-wrapper input.mat-input-element {
-        margin: 0;
-      }
-
-      .mat-form-field-appearance-legacy .mat-form-field-underline {
-        display: none;
-      }
-
-      .mat-form-field-appearance-legacy .mat-form-field-label {
-        @include body-m;
-        color: $gray-400;
-        padding: 9px 10px 9px 36px;
-        top: 10px;
-      }
-      .mat-form-field-infix {
-        min-height: 36px !important;
-        border: none;
-        &::before {
-          left: 12px;
-          top: 10px;
-          position: absolute;
-          content: "";
-          width: 20px;
-          height: 20px;
-          background: url("/assets/img/icons/tags.svg");
-        }
-      }
-      .mat-form-field-appearance-legacy .mat-form-field-infix {
-        padding: 0;
-        background-color: $white;
-        z-index: 1;
-        border: 1px solid $gray-200;
-        border-radius: 4px;
-        padding-left: 36px;
-
-        &:hover {
-          border-color: $gray-300;
-        }
-      }
-      .dropdown-toggle {
-        .mat-form-field-wrapper {
-          height: 100%;
-        }
-      }
-      .mat-chip-list-wrapper {
-        margin: 0;
-      }
-      .mat-chip-list-wrapper .mat-standard-chip,
-      .mat-chip-list-wrapper input.mat-input-element {
-        margin: 2px;
-      }
-      .mat-standard-chip.mat-chip-with-trailing-icon {
-        position: relative;
-        z-index: 1;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        color: $gray-900;
-        @include сaption-l;
-      }
     }
   }
 
@@ -2025,10 +1659,6 @@ app-quotes-item {
         font-weight: 400;
       }
     }
-    .new-link {
-      margin: 0 !important;
-      padding: 12px 0 6px !important;
-    }
   }
   .logo-upload {
     img {
@@ -2120,37 +1750,9 @@ app-quotes-item {
     .mat-form-field-flex {
       .mat-form-field-infix {
         &::before {
-          top: 12px;
+          top: 9px;
         }
       }
-    }
-    .mat-form-field-infix {
-      min-height: 40px !important;
-      padding: 0;
-
-      input {
-        border: none;
-      }
-    }
-    .mat-form-field-infix {
-      input {
-        margin: 0;
-        }
-    }
-
-    .mat-standard-chip {
-      margin: 2px;
-
-      &.mat-chip-with-trailing-icon {
-        z-index: 1;
-      }
-    }
-    .mat-chip-list-wrapper {
-      margin: 0;
-    }
-
-    .mat-form-field-label {
-      top: 10px;
     }
   }
   company-associate {
@@ -2301,8 +1903,8 @@ app-quotes-item {
     }
   }
   .new-link {
-    margin: 0 !important;
-    padding: 0 !important;
+    margin-block: 12px;
+    padding: 0;
   }
 }
 // LEFT PANEL
@@ -2612,10 +2214,12 @@ ngb-typeahead-window {
   top: 10px;
   right: 10px;
   left: auto;
-  width: 20px;
-  height: 20px;
-  border: 0.1rem solid $gray-600;
-  border-top-color: $gray-400;
+
+  &::before {
+    width: 20px;
+    height: 20px;
+    border-width: 2px;
+  }
 }
 
 .invalid-feedback {
@@ -2624,6 +2228,7 @@ ngb-typeahead-window {
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
+  left: 0;
   bottom: -23px;
 }
 .invalid-feedback.--pos-static {
@@ -2695,12 +2300,8 @@ app-ticket-profile-updates-note {
       margin-right: 8px;
     }
     a {
-      //color: $gray-600;
       color: inherit;
     }
-    //&:hover {
-    //  background-color: $background;
-    //}
   }
   &__item-icon {
     width: 16px;
@@ -3409,47 +3010,6 @@ input.--input-error:hover {
   }
 }
 
-.page-list-ticket,.users-page,.company-devices-page,app-multi-company-drop-down {
-  .light-dropdown {
-    padding: 0;
-  }
-  .mat-form-field {
-    background: $white;
-    border-radius: 6px;
-  }
-  .mat-form-field-wrapper {
-    padding: 0;
-    position: relative;
-  }
-  .mat-form-field-underline {
-    display: none;
-  }
-
-  .mat-form-field-label-wrapper {
-    position: absolute;
-    left: 0;
-    box-sizing: content-box;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  .mat-form-field-label {
-    top: 8.5px;
-    padding: 12px 10px 10px 12px;
-    font-size: 13px;
-    @include body-m;
-    color: $gray-400;
-  }
-  .mat-chip-list-wrapper {
-    .mat-standard-chip {
-      padding: 4px 6px 3px 8px;
-    }
-  }
-  .icon__search-white {
-    display: none;
-  }
-}
 app-multi-company-drop-down {
   &:before {
     display: none;
@@ -3544,90 +3104,6 @@ app-non-contract-services-edit,app-inventory-edit-aside {
   top: 50%;
   transform: translate(-50%, -50%);
 }
-app-company-devices-tags {
-    >.qt-temporary-col-fix {
-      // TODO change this temporary class (this class create for remove bootstrap col class)
-      margin-top: 12px;
-
-      .mat-form-field {
-        width: 100%;
-      }
-
-      .mat-form-field-infix {
-        border: none;
-      }
-
-
-
-      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-        padding: 0;
-        position: relative;
-      }
-
-      .mat-form-field-appearance-legacy .mat-form-field-label {
-        padding: 12px 10px 10px 36px;
-        font-size: 13px;
-        font-weight: 400;
-        color: $gray-400;
-      }
-
-      .mat-form-field-infix {
-        border: none !important;
-        box-shadow: none;
-        border-radius: 6px;
-        padding-left: 4px !important;
-        position: relative;
-        min-height: 40px;
-
-        &:hover {
-          border-color: $gray-300;
-        }
-
-        &::before {
-          display: none;
-        }
-
-        input {
-          height: 42px;
-          margin: 0;
-          min-width: 100px;
-        }
-      }
-    }
-
-    >.qt-temporary-col-fix {
-
-      .qt-input-block__input,
-      // Fix input style
-      .qt-input-block input {
-        border-color: transparent;
-        box-shadow: unset;
-      }
-
-      margin-top: 0; // Fix style for no-column, delete after remove bootstrap col class
-
-      .mat-form-field {
-        margin-top: 0;
-        width: 275px !important;
-      }
-
-      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-        &:before {
-          display: none;
-        }
-      }
-    }
-    .mat-chip.mat-standard-chip {
-        padding: 4px 8px 5px 8px;
-        height: 24px;
-        border-radius: 6px;
-        font-weight: 500;
-        font-size: 12px;
-        margin: 0 4px 0 0;
-        background-color: $gray-100;
-        color: $gray-500;
-    }
-  }
 app-company-devices-edit-ip,app-company-devices-edit-mac {
   display: contents;
 }
@@ -3685,4 +3161,10 @@ body {
 }
 body.ready {
   opacity: 1;
+}
+.no-click {
+  pointer-events: none
+}
+app-ticket-detail-tasks-item {
+  display: contents;
 }

@@ -153,6 +153,13 @@ import { TicketDetailNoteModalModule } from './components/tickets/tickets/ticket
 import { DeviceSettingTypeCheckUseComponent } from './components/setting/device-setting/device-setting-type/device-setting-type-check-use/device-setting-type-check-use.component';
 import { CompanyDevicesAssestTypeDropDownModule } from './components/company-devices/company-devices-custom-aside/company-devices-assest-type-drop-down/company-devices-assest-type-drop-down.module';
 import { CannedResponsesAsideModule } from './components/setting/ticket-settings-page/canned-responses/canned-responses-aside/canned-responses-aside.module';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { NotificationsModule } from './components/notifications/notifications.module';
+import { QuoteAsidePreviewModule } from './components/billing/quotes/quote-aside-preview/quote-aside-preview.module';
+import { TasksComponent } from './components/tasks/tasks.component';
+import { TasksDashboardComponent } from './components/tasks-dashboard/tasks-dashboard.component';
+import { TasksAddModule } from './components/tasks/tasks-add/tasks-add.module';
+import { TasksEditModule } from './components/tasks/tasks-edit/tasks-edit.module';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -183,7 +190,7 @@ declare var $: any;
         UserDeArchiveNotificationComponent,
         PreviewFileComponent,
         SubscriptionServicesCheckUseComponent,
-        SubscriptionServicesConfirmComponent,
+        SubscriptionServicesConfirmComponent
     ],
     imports: [
         BrowserModule,
@@ -238,7 +245,11 @@ declare var $: any;
         FileManagementAddFileModule,
         TicketDetailNoteModalModule,
         CompanyDevicesAssestTypeDropDownModule,
-        CannedResponsesAsideModule
+        CannedResponsesAsideModule,
+        NotificationsModule,
+        QuoteAsidePreviewModule,
+        TasksAddModule,
+        TasksEditModule
     ],
     providers: [
         {

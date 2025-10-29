@@ -1,14 +1,16 @@
+@import './src/assets/styles/variable';
+
 .run-report-content {
     border-bottom: none !important;
-    margin-top: 0px !important;
+    margin-top: 0 !important;
     padding-left: 24px !important;
     display: flex;
     justify-content: center;
-    background-color: white;
+    background-color: $white;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
     height: 60px;
     padding-top: 11px;
-    border-left: 1px solid #edf0f2;
+    border-left: 1px solid $gray-200;
 }
 
 .report-menu {
@@ -30,7 +32,7 @@
 }
 
 .summaryprint {
-    right: 0px !important;
+    right: 0 !important;
     top: 9px !important;
 }
 
@@ -46,7 +48,7 @@
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
-    margin: 7px 0px 0px 0px;
+    margin: 7px 0 0 0;
 }
 
 .device-header {
@@ -70,60 +72,60 @@
         .device {
             width: 16% !important;
             padding: 0 18px 0 18px;
-            background-color: white;
+            background-color: $white;
             height: 40px;
         }
 
         .network {
             width: 10% !important;
-            padding: 0px;
+            padding: 0;
         }
 
         .linkspeed {
             width: 10% !important;
-            padding: 0px;
+            padding: 0;
         }
 
         .dhcp {
             width: 8% !important;
-            padding: 0px;
+            padding: 0;
         }
 
         .ipaddress {
             width: 8% !important;
-            padding: 0px;
+            padding: 0;
         }
 
         .subnet {
             width: 12% !important;
-            padding: 0px;
+            padding: 0;
         }
 
         .gateway {
             width: 10% !important;
-            padding: 0px;
+            padding: 0;
         }
 
         .dns {
             width: 11% !important;
-            padding: 0px;
+            padding: 0;
         }
 
         .wanip {
             width: 15% !important;
-            padding: 0px;
+            padding: 0;
         }
 
         thead {
             th {
-                background-color: #f4f6f8 !important;
+                background-color: $gray-200 !important;
             }
         }
     }
 }
 
 .report-device-ip-summary-table {
-    background-color: #f4f6f8 !important;
+    background-color: $gray-200 !important;
 }
 
 .tablepadding {

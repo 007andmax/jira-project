@@ -22,62 +22,74 @@
     </div>
 </div>
 <ul class="app-left-panel__menu-expand">
-    <a
+    <li>
+      <a
         href
         [link]="getLinkSection('dashboard')"
         target="_blank"
         appRightClickBlank
         *ngIf="!customerPortalStateService.isCustomerPortal"
-    >
-        <li
-            [ngClass]="{'--active':activePage === 'company-dashboard'}"
-            (click)="goToCompanySection('dashboard')"
+      >
+        <span
+          [ngClass]="{'--active':activePage === 'company-dashboard'}"
+          (click)="goToCompanySection('dashboard')"
+          class="app-left-panel__menu-expand-link"
         >
-            Dashboard
-        </li>
-    </a>
-    <a
+          Dashboard
+        </span>
+      </a>
+    </li>
+    <li>
+      <a
         href
         [link]="getLinkSection('tickets')"
         target="_blank"
         appRightClickBlank
-    >
-        <li
-            [ngClass]="{'--active':activePage === 'company-tickets'}"
-            (click)="goToCompanySection('tickets')"
+      >
+        <span
+          [ngClass]="{'--active':activePage === 'company-tickets'}"
+          (click)="goToCompanySection('tickets')"
+          class="app-left-panel__menu-expand-link"
         >
             Tickets
-        </li>
-    </a>
-    <a
+        </span>
+      </a>
+    </li>
+    <li>
+      <a
         href
         [link]="getLinkSection('user')"
         target="_blank"
         appRightClickBlank
         *ngIf="getPermissions('VIEW_USERS') || customerPortalStateService.isCustomerPortal"
-    >
-        <li
-            *ngIf="getPermissions('VIEW_USERS')"
-            [ngClass]="{'--active':activePage === 'company-user' || activePage === 'company-user-details'}"
-            (click)="goToCompanySection('user')"
+      >
+        <span
+          *ngIf="getPermissions('VIEW_USERS')"
+          [ngClass]="{'--active':activePage === 'company-user' || activePage === 'company-user-details'}"
+          (click)="goToCompanySection('user')"
+          class="app-left-panel__menu-expand-link"
         >
             Users
-        </li>
-    </a>
-    <a
+        </span>
+      </a>
+    </li>
+    <li>
+      <a
         href
         [link]="getLinkSection('devices')"
         target="_blank"
         appRightClickBlank
         *ngIf="customerPortalStateService.isCustomerPortal && getCompanyInfoPermissions('VIEW_ALL_DEVICES') || !customerPortalStateService.isCustomerPortal"
-    >
-        <li
-            [ngClass]="{'--active':activePage === 'company-devices'}"
-            (click)="goToCompanySection('devices')"
+      >
+        <span
+          [ngClass]="{'--active':activePage === 'company-devices'}"
+          (click)="goToCompanySection('devices')"
+          class="app-left-panel__menu-expand-link"
         >
             Devices
-        </li>
-    </a>
+        </span>
+      </a>
+    </li>
     <!-- <a
         href
         [link]="getLinkSection('devices-beta')"
@@ -106,107 +118,125 @@
             Network scan beta
         </li>
     </a> -->
-    <a
+    <li>
+      <a
         href
         [link]="getLinkSection('network-scan')"
         target="_blank"
         appRightClickBlank
         *ngIf="!customerPortalStateService.isCustomerPortal"
-    >
-        <li
-            [ngClass]="{'--active':activePage === 'company-network-scan'}"
-            (click)="goToCompanySection('network-scan')"
+      >
+        <span
+          [ngClass]="{'--active':activePage === 'company-network-scan'}"
+          (click)="goToCompanySection('network-scan')"
+          class="app-left-panel__menu-expand-link"
         >
             Network Scan
-        </li>
-    </a>
-    <a
+        </span>
+      </a>
+    </li>
+    <li>
+      <a
         href
         [link]="getLinkSection('password-manager')"
         target="_blank"
         appRightClickBlank
         *ngIf="getPermissions('VIEW_PASSWORD_SECTION') || !customerPortalStateService.isCustomerPortal"
-    >
-        <li
-            [ngClass]="{'--active':activePage === 'company-password-manager'}"
-            (click)="goToCompanySection('password-manager')"
+      >
+        <span
+          [ngClass]="{'--active':activePage === 'company-password-manager'}"
+          (click)="goToCompanySection('password-manager')"
+          class="app-left-panel__menu-expand-link"
         >
             Password Manager
-        </li>
-    </a>
-    <a
+        </span>
+      </a>
+    </li>
+    <li>
+      <a
         href
         [link]="getLinkSection('products')"
         target="_blank"
         appRightClickBlank
-    >
-        <li
-            *ngIf="getPermissions('VIEW_SALES_REPORT')"
-            [ngClass]="{'--active':activePage === 'company-products'}"
-            (click)="goToCompanySection('products')"
+      >
+        <span
+          *ngIf="getPermissions('VIEW_SALES_REPORT')"
+          [ngClass]="{'--active':activePage === 'company-products'}"
+          (click)="goToCompanySection('products')"
+          class="app-left-panel__menu-expand-link"
         >
             Products
-        </li>
+        </span>
     </a>
-    <a
+    </li>
+    <li>
+      <a
         href
         [link]="getLinkSection('contracts')"
         target="_blank"
         appRightClickBlank
         *ngIf="!customerPortalStateService.isCustomerPortal"
-    >
-        <li
-            *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS') && selectedCompany &&  selectedCompany.clientType !== 'LEAD' && selectedCompany.clientType !== 'VENDOR'"
-            [ngClass]="{'--active':activePage === 'company-contracts'}"
-            (click)="goToCompanySection('contracts')"
+      >
+        <span
+          *ngIf="getPermissions('VIEW_SERVICE_AGREEMENTS') && selectedCompany &&  selectedCompany.clientType !== 'LEAD' && selectedCompany.clientType !== 'VENDOR'"
+          [ngClass]="{'--active':activePage === 'company-contracts'}"
+          (click)="goToCompanySection('contracts')"
+          class="app-left-panel__menu-expand-link"
         >
             Contracts
-        </li>
-    </a>
-    <a
+        </span>
+      </a>
+    </li>
+    <li>
+      <a
         class="clear-link-style"
         href
         [link]="getLinkSection('file-manager')"
         target="_blank"
         appRightClickBlank
         *ngIf="!customerPortalStateService.isCustomerPortal"
-    >
-        <li
-            [ngClass]="{'--active':activePage === 'company-file-manager'}"
-            (click)="goToCompanySection('file-manager')"
+      >
+        <span
+          [ngClass]="{'--active':activePage === 'company-file-manager'}"
+          (click)="goToCompanySection('file-manager')"
+          class="app-left-panel__menu-expand-link"
         >
             File Manager
-        </li>
-    </a>
-    <a
-        class="clear-link-style"
+        </span>
+      </a>
+    </li>
+    <li>
+      <a
+        class=""
         href
         [link]="getLinkSection('documents')"
         target="_blank"
         appRightClickBlank
         *ngIf="!customerPortalStateService.isCustomerPortal"
-    >
-        <li [ngClass]="{'--active':activePage === 'company-documents'}">
+      >
+        <span
+          [ngClass]="{'--active':activePage === 'company-documents'}"
+          class="app-left-panel__menu-expand-link"
+        >
             <span
-                class="documents-name-link"
-                (click)="goToCompanySection('documents')"
+              (click)="goToCompanySection('documents')"
             >
                 Documents
             </span>
-            <div
-                class="qt-ml-auto qt-sz-20"
-                (click)="toogleCategoriesDocuments = !toogleCategoriesDocuments"
-                *ngIf="assignedDocumentCategories.length > 0"
+            <span
+              (click)="toogleCategoriesDocuments = !toogleCategoriesDocuments"
+              *ngIf="assignedDocumentCategories.length > 0"
             >
                 <i
-                    class="icn-sm qt-icon icon__arrow-down report-caret-icon"
-                    [ngClass]="{'show-categories-documents':toogleCategoriesDocuments}"
+                  class="icn-sm qt-icon icon__arrow-down report-caret-icon"
+                  [ngClass]="{'show-categories-documents':toogleCategoriesDocuments}"
                 ></i>
-            </div>
-        </li>
-    </a>
+            </span>
+        </span>
+      </a>
+    </li>
     <ul
-        class="categories"
+        class="categories app-left-panel__filter-menu-expand qt-mt-6"
         *ngIf="toogleCategoriesDocuments && !customerPortalStateService.isCustomerPortal"
     >
         <ng-template
@@ -218,11 +248,12 @@
             <li
                 [ngClass]="{'--active-category-document':selectedCategoryDocument === assignedDocumentCategory.id}"
                 (click)="goToCompanyDocumentsCategory(assignedDocumentCategory.id)"
+                class="app-left-panel__filter-menu-expand-link"
             >
                 <i
-                    class="qt-sz-16 qt-bg-contain qt-mr-8"
-                    [ngClass]="{'qt-icon icon__folder qt-icon__white':selectedCategoryDocument === assignedDocumentCategory.id,
-                'qt-icon icon__folder':selectedCategoryDocument !== assignedDocumentCategory.id}"
+                    class="qt-dib qt-sz-16 qt-bg-contain qt-icon icon__folder"
+                    [ngClass]="{'qt-icon__white':selectedCategoryDocument === assignedDocumentCategory.id,
+                'qt-icon__gray-400':selectedCategoryDocument !== assignedDocumentCategory.id}"
                 ></i>
                 {{assignedDocumentCategory.name}}
             </li>

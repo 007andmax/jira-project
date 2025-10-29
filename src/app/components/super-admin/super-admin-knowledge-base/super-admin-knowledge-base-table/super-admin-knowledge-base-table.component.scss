@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
 
 ::ng-deep .ticket-table {
     th {
@@ -136,8 +137,8 @@ app-tickets-table-item {
             width: calc(412px - 16px);
             flex: 1;
 
-            @media (max-width: 1600px) {
-                max-width: calc(345px - 16px);
+            @include media-breakpoint-down($md) {
+              max-width: calc(345px - 16px);
             }
         }
     }

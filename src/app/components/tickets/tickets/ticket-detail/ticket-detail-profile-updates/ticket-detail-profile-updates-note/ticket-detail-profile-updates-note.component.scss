@@ -26,7 +26,12 @@
     &__author-line,
     &__message-line {
         margin-bottom: 8px;
-      flex: 1;
+        flex: 1;
+        min-height: 36px;
+
+        ::ng-deep .multi-assign-user-container:not(:empty) {
+          width: auto;
+        }
     }
 
     &__update-info {

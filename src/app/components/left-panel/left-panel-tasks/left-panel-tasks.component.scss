@@ -1,0 +1,49 @@
+@import './src/assets/styles/variable';
+
+.active {
+    background: $gray-700;
+    color: $white;
+}
+
+.category-name {
+    color: $white;
+}
+
+.category-item {
+    &:hover {
+        color: $blue-light-600;
+    }
+}
+
+.app-left-panel__menu {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    cursor: default;
+}
+
+.app-left-panel__menu-expand {
+    list-style: none;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.qt-checkbox {
+  padding-block: 2px;
+
+  span {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    border-color: $gray-700;
+    background-color: $gray-600;
+  }
+
+  &__text {
+    color: $gray-400;
+  }
+
+  input:checked ~ .qt-checkbox__text {
+    color: $white;
+  }
+}

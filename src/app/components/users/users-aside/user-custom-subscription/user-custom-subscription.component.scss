@@ -14,23 +14,16 @@
     cursor: default;
 }
 .active {
+  ::ng-deep .mat-chip {
     background-color: $green-25;
     color: $green-700;
+  }
 }
 .no-active {
+  ::ng-deep .mat-chip {
     background-color: $red-50;
     color: $red-600;
-}
-.placeholder-subscription {
-    position: relative;
-    &:after {
-        content: "No subscription selected, Click to select";
-        position: absolute;
-        top: 7px;
-        left: 0;
-        color: $gray-500;
-        font-size: 14px;
-    }
+  }
 }
 .select-wrapper {
   @include dropdown-menu;
@@ -42,15 +35,4 @@
       margin: 0;
     }
   }
-}
-.user-subscription {
-    border: none;
-    > div {
-        height: 24px;
-        font-size: 13px;
-        font-weight: 500;
-        padding: 4px 4px 4px 6px;
-        margin: 0 8px 8px 0;
-        border-radius: 6px;
-    }
 }

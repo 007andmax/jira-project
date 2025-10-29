@@ -130,6 +130,12 @@
     pointer-events: none;
     border-bottom: none;
   }
+  .ngb-dp-week:not(:has(.ngb-dp-day:not(.hidden))) {
+    display: none;
+  }
+  .ngb-dp-weekdays:not(:has(.ngb-dp-day:not(.hidden))) {
+    display: flex;
+  }
   .ngb-dp-month-name {
     font-size: 16px;
     margin-bottom: 6px;
@@ -477,6 +483,7 @@
   }
 }
 div.ngb-dp-today {
+  position: relative;
   .custom-day,
   .custom-day.faded,
   .btn-light {
@@ -496,6 +503,17 @@ div.ngb-dp-today {
       color: $white;
     }
   }
+  &::after {
+    z-index: 999;
+    position: absolute;
+    content: "";
+    bottom: 0px;
+    left: calc(50% - 3px);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $blue-light-600;
+  }
 }
 .company-time-zone-drop-down {
   .app-drop-down__dropdown {
@@ -509,6 +527,7 @@ app-company-time-zone {
 }
 app-mat-form-field {
   display: block;
+  line-height: 1;
 }
 app-modal-quote {
   .quote-email-dropdown-container {

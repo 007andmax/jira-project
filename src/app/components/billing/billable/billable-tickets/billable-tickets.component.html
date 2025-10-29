@@ -163,14 +163,20 @@
                             ></div>
                             <div
                                 class="billable-item-table__ticket pointer is-exist-ticket-number"
-                                *ngIf="!item.isOrder"
+                                *ngIf="!item.isOrder && !item.isForTask"
                                 [textContent]="item.ticketNumber"
                                 (click)="editTicket(item.id)"
                             ></div>
                             <div
                                 class="billable-item-table__ticket no-edit-ticket"
-                                *ngIf="item.isOrder"
+                                *ngIf="item.isOrder && !item.isForTask"
                                 [textContent]="'Contract'"
+                            ></div>
+                            <div
+                                class="billable-item-table__ticket pointer is-exist-ticket-number"
+                                *ngIf="item.isForTask"
+                                [textContent]="item.type"
+                                (click)="editTask(item.taskId)"
                             ></div>
                             <div
                                 class="billable-item-table__subject"
