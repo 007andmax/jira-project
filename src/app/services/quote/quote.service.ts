@@ -38,8 +38,10 @@ export class QuoteService {
    * @param notification - quote notification info
    */
   public createQuote(data, notification) {
+    this.appStateService.setServerError(true);
     return this.http.post(`${this.apiUrl}saleQuotes`, data).pipe(
       tap(data => {
+        this.appStateService.setServerError(false);
         this.toastrService.success("The new quote has been successfully saved");
         this.appStateService.changeDetectorRef();
         return data;

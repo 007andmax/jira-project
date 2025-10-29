@@ -21,6 +21,7 @@ import { ServiceListQuoteComponent } from '../service-list-quote/service-list-qu
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { InvoiceTicketsService } from 'src/app/services/accounting/accounting-settings.service';
+import { QuoteRealTimeService } from '../../quote-realtime/quote-realtime.service';
 
 @Component({
   selector: 'app-quote-aside-add-body',
@@ -52,6 +53,7 @@ export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     public customerPortalStateService: CustomerPortalStateService,
     private contractsService: ContractsService,
+    private quoteRealTimeService: QuoteRealTimeService,
     private quoteServices: QuoteService,) { }
 
 
@@ -85,6 +87,10 @@ export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
     if (!this.customerPortalStateService.isCustomerPortal) this.getInvoiceNote();
     if (!isNaN(this.companiesState.getCurrentCompany().quoteExpirationDate)) this.quote.setValidUntilFromSettings(this.companiesState.getCurrentCompany().quoteExpirationDate);
     this.sub.add(getChangeCompanies);
+    let changeQuotesNumberArray = this.quoteRealTimeService.changeQuotesNumberArray.subscribe(res => {
+      if (res.action == "NUMBER_CHANGED") this.quote.number = res.data.numPart;
+    })
+    this.sub.add(changeQuotesNumberArray);
   }
   onInitCopy() {
     this.quote.setCopyData(this.quoteStateService.getQuoteForCopy());
