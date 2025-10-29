@@ -48,6 +48,11 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
       this.requestedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.createdUserId);
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.assignedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.assignedUserId);
+      this.requestedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.createdUserId);
+    })
+    this.sub.add(onChangeUsers);
     let onSelectAll = this.ticketsStateService.onSelectAll.subscribe(data => {
       this.ticket.selected = data;
       this.cd.markForCheck();

@@ -63,6 +63,11 @@ export class CompanyDashStatsComponent implements OnInit, OnDestroy {
       this.onGetUsersCount(data);
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.showArchivedCompanies = false;
+      this.onGetUsersCount(this.usersStateService.getAllUsers());
+    })
+    this.sub.add(onChangeUsers);
     let onChangeDeviceCount = this.devicesState.onChangeDeviceCount.subscribe(data => {
       if (this._id == data.data.companyId) this.countDevices = data.data.count;
     });

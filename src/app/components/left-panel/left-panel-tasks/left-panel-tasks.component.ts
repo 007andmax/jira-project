@@ -76,6 +76,10 @@ export class LeftPanelTasksComponent {
       this.onGetTechUsers(data);
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.onGetTechUsers(this.usersStateService.getAllUsers());
+    })
+    this.sub.add(onChangeUsers);
     let getOnGetCurrentuser = this.usersStateService.getOnGetCurrentuser().subscribe((data) => {
       if (this.leftPanelService.isTasksPage(this.activePage) && this.filter.techUser == null) this.initFilterForDashboard();
     })

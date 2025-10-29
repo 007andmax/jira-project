@@ -55,6 +55,12 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       this.cd.markForCheck();
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.showArchivedCompanies = false;
+      this.onGetUsersCount(this.usersStateService.getAllUsers());
+      this.cd.markForCheck();
+    })
+    this.sub.add(onChangeUsers);
   }
   ngDoCheck() {
     if (this.company) {

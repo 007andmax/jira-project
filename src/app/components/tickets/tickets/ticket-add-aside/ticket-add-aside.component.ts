@@ -90,6 +90,10 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.onGetTechUsers(data);
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.onGetTechUsers(this.usersStateService.getAllUsers());
+    })
+    this.sub.add(onChangeUsers);
     let getToggleAddTicket = this.ticketsStateService.getToggleAddTicket().subscribe(data => {
       this.opened = !this.opened;
       if (this.opened) {
