@@ -34,6 +34,10 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
       this.onGetUsers(this.usersStateService.getAllUsers());
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.onGetUsers(this.usersStateService.getAllUsers());
+    })
+    this.sub.add(onChangeUsers);
   }
   public onChangeName() {
     if (this.company.name && this.company.name.length > 0) {

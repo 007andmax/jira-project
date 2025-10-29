@@ -106,6 +106,10 @@ export class TasksEditComponent extends TasksAddComponent {
       // this.onGetUsers();
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.onGetTechUsers(this.usersStateService.getAllUsers());
+    })
+    this.sub.add(onChangeUsers);
     let getOnGetServicesList = this.ticketStateService.getOnGetServicesList().subscribe(data => {
       this.getServices();
     })

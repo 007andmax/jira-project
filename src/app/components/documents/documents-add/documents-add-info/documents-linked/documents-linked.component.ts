@@ -46,6 +46,10 @@ export class DocumentsLinkedComponent implements OnInit, OnDestroy {
       this.onGetUsers(data);
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.onGetUsers(this.usersStateService.getAllUsers());
+    })
+    this.sub.add(onChangeUsers);
   }
 
   onSearch(event) {

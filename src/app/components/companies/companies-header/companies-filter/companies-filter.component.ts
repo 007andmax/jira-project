@@ -56,9 +56,12 @@ export class CompaniesFilterComponent implements OnInit, OnDestroy {
     }
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.getTechusers(data);
-
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.getTechusers(this.usersStateService.getAllUsers());
+    })
+    this.sub.add(onChangeUsers);
     let onChangeFilter = this.leftPanelStateService.onChangeFilter.subscribe(data => {
       this.typesDp.onSelect(this.companyTypes.find(item => item.value === data));
     })

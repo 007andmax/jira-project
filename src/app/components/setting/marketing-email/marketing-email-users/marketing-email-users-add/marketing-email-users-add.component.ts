@@ -41,6 +41,10 @@ export class MarketingEmailUsersAddComponent implements OnInit, OnDestroy {
       this.getUsersList(data);
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.getUsersList(this.usersStateService.getAllUsers());
+    })
+    this.sub.add(onChangeUsers);
   }
   onSearch() {
     this.userListService.setBlockList(false);

@@ -115,6 +115,10 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.getTechusers(data);
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.getTechusers(this.usersStateService.getAllUsers());
+    })
+    this.sub.add(onChangeUsers);
     this.onCroppImage();
     this.onEditCompany();
   }

@@ -65,6 +65,10 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
       this.listTechUsers = this.getUsersForAssign();
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.listTechUsers = this.getUsersForAssign();
+    })
+    this.sub.add(onChangeUsers);
     let getChangeCompanies = this.tasksRealTimeService.changeTasksArray.subscribe((data) => {
       if (data.action === 'TASK_SAVED' && data.data.associatedTicketId == this.ticketProfile.id && !this.list.some(item => item.id == data.data.id)) {
         this.list.unshift(new TicketProfileTask(data.data));

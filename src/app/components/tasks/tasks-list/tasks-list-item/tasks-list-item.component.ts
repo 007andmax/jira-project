@@ -47,6 +47,10 @@ export class TasksListItemComponent {
       // this.onGetUsers();
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.onSetAssignedUsers();
+    })
+    this.sub.add(onChangeUsers);
     let getChangeCompanies = this.tasksRealTimeService.changeTasksArray.subscribe((data) => {
       if (data.data.id == this.item.id && data.action === 'TASK_EDITED') {
         this.assignedUsers = this.listTechUsers.filter(user => data.data.assignedUsersIds.some(assignedUser => assignedUser == user.id));

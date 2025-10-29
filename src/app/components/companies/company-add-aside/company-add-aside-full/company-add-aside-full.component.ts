@@ -96,6 +96,11 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       this.onGetUsers(this.usersStateService.getAllUsers());
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.getTechusers(this.usersStateService.getAllUsers());
+      this.onGetUsers(this.usersStateService.getAllUsers());
+    })
+    this.sub.add(onChangeUsers);
     if (this.company.clientType) this.companyTypeDp.selectItemWithOutChanges(this.companyTypes.find(item => item.value == this.company.clientType));
     if (this.company.contacts[0].id) {
       let user = this.users.find(item => item.id == this.company.contacts[0].id);

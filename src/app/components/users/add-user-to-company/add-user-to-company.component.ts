@@ -49,6 +49,10 @@ export class AddUserToCompanyComponent implements OnInit, OnDestroy {
       this.getUsersList(JSON.parse(JSON.stringify(data)).map(item => new User(item)));
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.getUsersList(JSON.parse(JSON.stringify(this.usersStateService.getAllUsers())).map(item => new User(item)));
+    })
+    this.sub.add(onChangeUsers);
   }
   clearSearch() {
     this.searchText = "";

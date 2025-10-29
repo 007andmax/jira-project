@@ -37,6 +37,10 @@ export class TechUsersListReportComponent extends DropDownComponent {
       this.setUsers(data);
     })
     this.sub.add(getOnUsers);
+    let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
+      this.setUsers(this.usersStateService.getAllUsers());
+    })
+    this.sub.add(onChangeUsers);
   }
   ngDoCheck() {
     if (this.reqList.length === 0) this.reqList = JSON.parse(JSON.stringify(this.list));
