@@ -1078,7 +1078,7 @@ app-quotes-item {
 
   .companies-table {
     &__check {
-      flex: 0 0 48px;
+      flex: 0 0 52px;
     }
     &__name {
       flex: 2 1 290px;
@@ -1102,7 +1102,7 @@ app-quotes-item {
       flex: 1 1 210px;
       line-height: 20px;
 
-      @include media-breakpoint-down($md) {
+      @include media-breakpoint-up($md) {
         flex: 1 1 260px;
       }
 
@@ -1147,7 +1147,7 @@ app-quotes-item {
       white-space: nowrap;
       overflow: hidden;
 
-      @include media-breakpoint-down($md) {
+      @include media-breakpoint-up($md) {
         flex: 1 1 230px;
       }
 
