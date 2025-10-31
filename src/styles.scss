@@ -1083,6 +1083,13 @@ app-quotes-item {
     &__name {
       flex: 2 1 290px;
 
+      @include media-breakpoint-up($md) {
+        flex: 0 0 250px;
+      }
+      @include media-breakpoint-up($lg) {
+        flex: 2 1 290px;
+      }
+
       .circle-avatar {
         background-color: $purple-500;
         color: $white;
@@ -1102,7 +1109,7 @@ app-quotes-item {
       flex: 1 1 210px;
       line-height: 20px;
 
-      @include media-breakpoint-up($md) {
+      @include media-breakpoint-up($lg) {
         flex: 1 1 260px;
       }
 
