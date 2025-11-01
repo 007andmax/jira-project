@@ -39,8 +39,6 @@
     justify-content: flex-start;
     align-content: stretch;
     align-items: stretch;
-    //overflow: auto;
-    //overflow-x: auto;
     overflow: hidden;
     height: 100vh;
     @media (hover:none) and (min-width: 541px), (pointer:coarse) and (min-width: 541px) {
@@ -76,11 +74,6 @@
         flex: 1 1 auto;
         align-self: auto;
     }
-
-    //.content-container {
-    //  overflow-x: auto;
-    //  height: calc(100vh - 64px);
-    //}
 
   &.--help-center,
   &.--super-admin {
