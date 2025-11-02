@@ -56,6 +56,10 @@
     &-menu {
       overflow: auto;
       height: 100%;
+
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
     }
     &-icon {
       display: flex;

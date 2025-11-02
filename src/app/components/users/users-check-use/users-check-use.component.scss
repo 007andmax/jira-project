@@ -22,7 +22,7 @@
     overflow: auto;
 
     &::-webkit-scrollbar {
-        width: 5px;
+        width: 8px;
     }
 
     h3 {
@@ -40,7 +40,7 @@
         max-height: 330px;
 
         &::-webkit-scrollbar {
-            width: 5px;
+            width: 8px;
         }
 
         .contract-item {
