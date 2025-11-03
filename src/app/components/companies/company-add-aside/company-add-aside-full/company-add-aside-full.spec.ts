@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CompanyAddAsideFullComponent } from './company-add-aside-full.component';
+import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-customer-companies-info';
 
 
 describe('CompanyAddAsideFullComponent unit test', () => {
@@ -63,7 +64,7 @@ describe('CompanyAddAsideFullComponent unit test', () => {
     const fixture = TestBed.createComponent(CompanyAddAsideFullComponent);
     const com = fixture.debugElement.componentInstance;
     com.company.clientIndustry.name = 'Test Type';
-    com.onSelectClientIndustry({ value: 'Test Industry' });
+    com.onSelectClientIndustry({ name: 'Test Industry' });
     expect(com.company.clientIndustry.name).toEqual('Test Industry');
   });
   it('check "onChangeShippingPhoneNumber"', () => {
@@ -83,7 +84,7 @@ describe('CompanyAddAsideFullComponent unit test', () => {
   it('check "onSelectJobTitle"', () => {
     const fixture = TestBed.createComponent(CompanyAddAsideFullComponent);
     const com = fixture.debugElement.componentInstance;
-    com.company.contacts = [{ customerCompaniesInfo: [{ jobTitleDto: { id: 1, name: 'Test Job' } }] }];
+    com.company.contacts = [{ customerCompaniesInfo: [new UserCustomerCompaniesInfo({ jobTitleDto: { id: 1, name: 'Test Job' } })] }];
     com.onSelectJobTitle({ id: 1, name: 'Test Job' });
     expect(com.company.contacts[0].customerCompaniesInfo[0].jobTitleDto.id).toEqual(1);
   });

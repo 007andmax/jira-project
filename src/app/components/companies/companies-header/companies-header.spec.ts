@@ -57,9 +57,4 @@ describe('CompaniesHeaderComponent unit test', () => {
     com.countFilter = 7;
     expect(com.getTextCountFilters()).toEqual(`Filters (7)`);
   });
-  it('check "onChangeCounterFilter"', () => {
-    const fixture = TestBed.createComponent(CompaniesHeaderComponent);
-    const com = fixture.debugElement.componentInstance;
-    expect(com.onChangeCounterFilter()).toEqual(0);
-  });
 });

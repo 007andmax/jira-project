@@ -92,10 +92,10 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   isExistFilters() {
-    return this.filter.companyFilter.clientType ||
+    return (this.filter.companyFilter && (this.filter.companyFilter.clientType ||
       this.filter.companyFilter.clientIndustry ||
       this.filter.companyFilter.tags.length > 0 ||
-      this.filter.companyFilter.techUser
+      this.filter.companyFilter.techUser))
   }
   onToggleFilter(data) {
     this.toggleFilter = data;

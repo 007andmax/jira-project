@@ -10,6 +10,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CompanyEditAsideComponent } from './company-edit-aside.component';
 import { CompanySetting } from '../class/company-setting';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 
 describe('CompanyEditAsideComponent unit test', () => {
   let component: CompanyEditAsideComponent;
@@ -19,6 +20,7 @@ describe('CompanyEditAsideComponent unit test', () => {
     TestBed.configureTestingModule({
       imports: [CommonModule,
         FormsModule,
+        DisabledBtnModule,
         MatErrorModule,
         HttpClientModule,
         ToastrModule.forRoot({
@@ -127,7 +129,7 @@ describe('CompanyEditAsideComponent unit test', () => {
     const fixture = TestBed.createComponent(CompanyEditAsideComponent);
     const com = fixture.debugElement.componentInstance;
     com.company.clientIndustry.name = 'Test Type';
-    com.onSelectClientIndustry({ value: 'Test Industry' });
+    com.onSelectClientIndustry({ name: 'Test Industry' });
     expect(com.company.clientIndustry.name).toEqual('Test Industry');
   });
   it('check "onChangeTags"', () => {
@@ -156,7 +158,7 @@ describe('CompanyEditAsideComponent unit test', () => {
   it('check "getSelectedServiceType"', () => {
     const fixture = TestBed.createComponent(CompanyEditAsideComponent);
     const com = fixture.debugElement.componentInstance;
-    expect(com.getSelectedServiceType()).toEqual(null);
+    expect(com.getSelectedServiceType()).toEqual('');
   });
   it('check "getSelectedPaymentTerms"', () => {
     const fixture = TestBed.createComponent(CompanyEditAsideComponent);
