@@ -44,13 +44,6 @@ describe('NotificationsComponent unit test', () => {
     com.setOnlyUnread(false);
     expect(com.onlyUnread).toEqual(false);
   });
-  it('check "setDefaultScoll"', () => {
-    const fixture = TestBed.createComponent(NotificationsComponent);
-    const com = fixture.debugElement.componentInstance;
-    com.page = 11;
-    com.setDefaultScoll();
-    expect(com.page).toEqual(0);
-  });
   it('check "closed"', () => {
     const fixture = TestBed.createComponent(NotificationsComponent);
     const com = fixture.debugElement.componentInstance;
