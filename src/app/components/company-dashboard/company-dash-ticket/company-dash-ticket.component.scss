@@ -5,7 +5,7 @@
 }
 .cmp-board-tickets {
     position: relative;
-    height: 325px;
+    min-height: 325px;
 }
 .pengind-loading {
     &::before {
