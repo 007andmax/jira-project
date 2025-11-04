@@ -112,7 +112,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     this.selectedTag = [];
     this.tags = this.reqTags;
     this.userInput.nativeElement.blur();
-    this.dp.close();
+    if (this.dp) this.dp.close();
     this.cd.detectChanges();
   }
   public checkRemoveTag(index) {

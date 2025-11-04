@@ -15,6 +15,7 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { DELETE_GLOBAL_USERS_FILTER } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 
 @Component({
   selector: 'left-panel-marketing',
@@ -48,6 +49,7 @@ export class LeftPanelMarketingComponent implements OnInit {
     private modalService: NgbModal,
     private usersService: UsersService,
     private permissionsService: PermissionsService,
+    private usersRealTimeService: UsersRealTimeService
   ) { }
 
   ngOnInit() {
@@ -84,6 +86,26 @@ export class LeftPanelMarketingComponent implements OnInit {
     });
     this.sub.add(onInitGlobalFilter);
     if (this.leftPanelService.isMarketingPage(this.leftPanelStateService.activePage) && !this.isGetGlobalFilters && !this.customerPortalStateService.isCustomerPortal && this.usersStateService.getCurrentUser()) this.getGLobalFilters();
+    let changeUsersFilters = this.usersRealTimeService.changeUsersFilters.subscribe(newChange => {
+      if (newChange.action === 'USER_FILTER_SAVED' && newChange.data.forMarketing == true) {
+        let index = this.globalFilters.findIndex(item => item.id === newChange.data.id);
+        if (index == -1) this.globalFilters.unshift(new UserGlobalFilter(newChange.data))
+      }
+      if (newChange.action === 'USER_FILTER_EDITED') {
+        let index = this.globalFilters.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.globalFilters[index] = new UserGlobalFilter(newChange.data);
+      }
+      if (newChange.action === 'USER_FILTER_REMOVED') {
+        let index = this.globalFilters.findIndex(item => item.id === newChange.data);
+        this.globalFilters.splice(index, 1);
+      }
+    })
+    this.sub.add(changeUsersFilters);
+    let onFastAddGlobalFilter = this.usersStateService.onFastAddGlobalFilter.subscribe(res => {
+      let index = this.globalFilters.findIndex(item => item.id === res.id);
+      if (index == -1 && res.forMarketing == true) this.globalFilters.unshift(new UserGlobalFilter(res))
+    })
+    this.sub.add(onFastAddGlobalFilter);
   }
   onDeleteGlobalFilter(filter) {
     this.usersService.deleteGlobalFilter(filter.id).subscribe(data => {
@@ -110,7 +132,7 @@ export class LeftPanelMarketingComponent implements OnInit {
     this.usersService.getFilters(this.page, true).subscribe((data: any) => {
       this.globalFilters = [...this.globalFilters, ...data.userFilterDtos.map(item => new UserGlobalFilter(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0))];
-      this.usersStateService.setGlobalFilters(this.globalFilters);
+      // this.usersStateService.setGlobalFilters(this.globalFilters);
       this.page++;
       this.showPreloaderGlobalFilters = false;
       if (data.totalElements > this.globalFilters.length) {

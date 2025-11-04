@@ -84,9 +84,6 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
     this.users = data;
     this.ref.markForCheck();
   }
-  clearAll() {
-    this.usersStateService.clearFilters();
-  }
   onKeyUp(event) {
     if (event.keyCode === 13) this.onSearch.emit(event.target.value);
   }

@@ -36,7 +36,6 @@ export class UsersStateService {
   onChangeUserPermissions: EventEmitter<any> = new EventEmitter();
   onInitGlobalFilter: EventEmitter<any> = new EventEmitter();
   onToggleFilter: EventEmitter<any> = new EventEmitter();
-  onGetGlobalFilters: EventEmitter<any> = new EventEmitter();
   onSelectCustomerCompanyInfo: EventEmitter<any> = new EventEmitter();
   onSelectCustomerCompaniesInfo: EventEmitter<any> = new EventEmitter();
   onShowAddCustomerCompaniesInfo: EventEmitter<any> = new EventEmitter();
@@ -49,14 +48,13 @@ export class UsersStateService {
   showArchivedCompanies: boolean = false;
   isGetAllUsers: boolean = false;
   userRoleForRemove: UserRole;
-  globalFilters: Array<UserGlobalFilter> = [];
   globalFilterForRemove: UserGlobalFilter = null;
   onEditUser: EventEmitter<any> = new EventEmitter();
   onFastAdd: EventEmitter<any> = new EventEmitter();
   onFastEdit: EventEmitter<any> = new EventEmitter();
   onFastArchive: EventEmitter<any> = new EventEmitter();
   onFastDeArchive: EventEmitter<any> = new EventEmitter();
-  onClearFilters: EventEmitter<any> = new EventEmitter();
+  onFastAddGlobalFilter: EventEmitter<any> = new EventEmitter();
   constructor(private userService: UsersService,
     private appService: AppService,
     private customerPortalStateService: CustomerPortalStateService,
@@ -91,23 +89,6 @@ export class UsersStateService {
     this.usersRealTimeService.changePermissionsUsers.subscribe(newChange => {
       if (newChange.action == "PERMISSIONS_UPDATE") this.onChangeUserPermissions.emit(newChange.data);
     });
-    this.usersRealTimeService.changeUsersFilters.subscribe(newChange => {
-      if (newChange.action === 'USER_FILTER_SAVED') {
-        this.globalFilters.unshift(new UserGlobalFilter(newChange.data))
-        this.onGetGlobalFilters.emit(this.globalFilters);
-      }
-      if (newChange.action === 'USER_FILTER_EDITED') {
-        let index = this.globalFilters.findIndex(item => item.id === newChange.data.id);
-        if (index > -1) this.globalFilters[index] = new UserGlobalFilter(newChange.data);
-        this.onGetGlobalFilters.emit(this.globalFilters);
-      }
-      if (newChange.action === 'USER_FILTER_REMOVED') {
-        let index = this.globalFilters.findIndex(item => item.id === newChange.data);
-        this.globalFilters.splice(index, 1);
-        this.onGetGlobalFilters.emit(this.globalFilters);
-      }
-
-    })
   }
   public fastEditUser(data) {
     this.onFastEdit.emit(data);
@@ -170,10 +151,7 @@ export class UsersStateService {
   public setGlobalFilterForRemove(data) {
     this.globalFilterForRemove = data;
   }
-  public setGlobalFilters(data) {
-    this.globalFilters = data;
-    this.onGetGlobalFilters.emit(this.globalFilters);
-  }
+
   public initSelectAllusers(data) {
     this.onSelectAll.emit(data);
   }
@@ -268,9 +246,6 @@ export class UsersStateService {
   }
   public clearFilterWithoutChange() {
     this.filter = new UserFilters();
-  }
-  public clearFilters() {
-    this.onClearFilters.emit(null);
   }
   public onInitLeftPanelMarketingFilter(data) {
     this.onLeftPanelMarketingFilter.emit(data);

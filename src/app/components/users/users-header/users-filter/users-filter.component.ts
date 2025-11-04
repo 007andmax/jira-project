@@ -124,11 +124,6 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
       this.usersStateService.onInitFilter(this.filter);
     })
     this.sub.add(onInitGlobalFilter);
-    let onClearFilters = this.usersStateService.onClearFilters.subscribe(() => {
-      this.clearAll();
-      this.ref.markForCheck();
-    });
-    this.sub.add(onClearFilters);
   }
   applyFilters() {
     this.usersStateService.onInitFilter(this.filter);
