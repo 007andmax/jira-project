@@ -67,6 +67,10 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
 
     })
   }
+  onToggleAllUsers(data) {
+    this.toggleAllUsers = data;
+    this.cd.detectChanges();
+  }
   getFirstLastName(user) {
     return `${user.firstName} ${user.lastName}`;
   }

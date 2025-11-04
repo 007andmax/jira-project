@@ -138,6 +138,10 @@ export class DraftEmailRecipientsComponent implements OnInit {
       this.companyList = JSON.parse(JSON.stringify(this.reqCompanyList));
     }
   }
+  onToggleAllUsers(data) {
+    this.toggleAllUsers = data;
+    this.cd.detectChanges();
+  }
   public onAdd(event) {
     const input = event.target.input;
     const value = event.target.value;
