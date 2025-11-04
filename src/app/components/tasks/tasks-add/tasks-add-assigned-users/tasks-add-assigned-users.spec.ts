@@ -20,9 +20,7 @@ describe('TasksAddAssignedUsersComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
-        CommonModule,
-        FormsModule,
+      imports: [FormsModule,
         DropDownModule,
         MatFormFieldModule,
         MatChipListModule,
@@ -36,17 +34,22 @@ describe('TasksAddAssignedUsersComponent unit test', () => {
           onActivateTick: true
         }),
         NoopAnimationsModule],
-      declarations: [TaskHeaderAddTypeComponent
+      declarations: [TasksAddAssignedUsersComponent
       ]
     }).compileComponents();
 
   });
 
-  /* it('check "toggleItem"', () => {
-     const fixture = TestBed.createComponent(TaskHeaderAddTypeComponent);
-     const com = fixture.debugElement.componentInstance;
-     com.toggleItem({ id: 1 });
-     expect(com.selectedTag).toEqual([{ id: 1 }]);
-   });*/
-
+  it('check "isSelected"', () => {
+    const fixture = TestBed.createComponent(TasksAddAssignedUsersComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.isSelected({ id: 1 })).toEqual(undefined);
+  });
+  it('check "toggleItem"', () => {
+    const fixture = TestBed.createComponent(TasksAddAssignedUsersComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.selectedTag = [{ id: "1" }];
+    com.toggleItem({ id: "2" })
+    expect(com.selectedTag).toEqual([{ id: "1" }, { id: "2" }]);
+  });
 });
