@@ -97,7 +97,7 @@ export class LeftPanelMarketingComponent implements OnInit {
       }
       if (newChange.action === 'USER_FILTER_REMOVED') {
         let index = this.globalFilters.findIndex(item => item.id === newChange.data);
-        this.globalFilters.splice(index, 1);
+        if (index > -1) this.globalFilters.splice(index, 1);
       }
     })
     this.sub.add(changeUsersFilters);
