@@ -5,6 +5,45 @@
 @import "./src/assets/styles/mixin/breakpoint";
 
 .cmp-dashboard-body {
+   .chart-legend {
+     position: absolute;
+     top: 12px;
+     left: 50%;
+     translate: -50% 0;
+
+     .legend-title-text {
+       display: none;
+     }
+
+     .legend-label-color {
+       border-radius: 50%;
+     }
+
+     .legend-label-text {
+       color: $gray-600;
+     }
+
+     .legend-labels {
+       display: flex;
+       gap: 20px;
+       background-color: transparent;
+       overflow: unset;
+     }
+
+     .legend-label {
+       padding: 0;
+       margin: 0;
+
+       &::before {
+         display: none;
+       }
+     }
+
+     & > div {
+       width: auto !important;
+     }
+   }
+
     @include body-font;
     @include flexbox;
     flex-direction: column;
