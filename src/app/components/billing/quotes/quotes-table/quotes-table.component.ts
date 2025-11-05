@@ -70,7 +70,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
         return this.quotes.unshift(new Quote(newChange.data));
       } else {
         const elemIndex = this.quotes.findIndex((item) => item.id === newChange.data.id);
-        if (!this.filter.isExistFilters() && (newChange.data.status === 'ARCHIVED' || newChange.data.status === 'TICKETED' || newChange.data.status === 'INVOICED' || newChange.data.status === 'BILLED')) {
+        if (!this.filter.isExistFilters() && (newChange.data.status === 'ARCHIVED')) {
           this.quotes.splice(elemIndex, 1);
         } else {
           this.quotes[elemIndex] = new Quote(newChange.data);
