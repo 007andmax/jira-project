@@ -14,6 +14,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompanyItem } from '../class/company-item';
+import { CompanyFilter } from '../class/company-filter';
 
 @Component({
   selector: 'app-companies-header',
@@ -23,13 +24,11 @@ import { CompanyItem } from '../class/company-item';
 })
 export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   reqCompaniesList: Array<CompanyItem> = [];
-  toggleFilter: boolean = true;
+  toggleFilter: boolean = false;
   countFilter: number = 0;
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
-  @ViewChild('filter', { static: true }) filter: CompaniesFilterComponent;
-  @Input() selectAll: boolean = false;
+  companyFilter: CompanyFilter = new CompanyFilter();
   @Output() onChangeFilterField = new EventEmitter<any>();
-  @Output() onSelectAllCompanies = new EventEmitter<any>();
   @Output() onSearch = new EventEmitter<any>();
   searchText: string = "";
   sub: Subscription = new Subscription();
@@ -40,17 +39,39 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     private confirmStateService: ConfirmStateService,
     private usersStateService: UsersStateService,
-    public cd: ChangeDetectorRef,
-    private companiesState: CompaniesStateService) { }
+    public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.calculateCount = this.companiesState.getCalculateCount();
-    let getOnCalculateCount = this.companiesState.getOnCalculateCount().subscribe((data) => {
+    this.calculateCount = this.companiesStateService.getCalculateCount();
+    let getOnCalculateCount = this.companiesStateService.getOnCalculateCount().subscribe((data) => {
       this.calculateCount = data;
       this.cd.markForCheck();
     })
     this.sub.add(getOnCalculateCount);
     this.cd.markForCheck();
+    let filter = this.companiesStateService.filter.subscribe((res) => {
+      this.companyFilter = res;
+      this.onChangeCounterFilter();
+    })
+    this.sub.add(filter);
+    let onToggleFilter = this.companiesStateService.onToggleFilter.subscribe(data => {
+      this.toggleFilter = data;
+    })
+    this.sub.add(onToggleFilter);
+  }
+  onToggleFilter(data) {
+    this.toggleFilter = data;
+    this.companiesStateService.changeToggleFilter(this.toggleFilter);
+  }
+  public onChangeCounterFilter() {
+    this.countFilter = 0;
+    if (this.companyFilter.clientType) this.countFilter++;
+    if (this.companyFilter.clientIndustry) this.countFilter++;
+    if (this.companyFilter.tags.length > 0) this.countFilter++;
+    if (this.companyFilter.techUser) this.countFilter++;
+
+    // this.changeCountFilter.emit(count);
+    this.cd.detectChanges();
   }
   clearSearch() {
     this.searchText = "";
@@ -62,16 +83,6 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
   public setReqCompaniesList(data) {
     this.reqCompaniesList = data;
     this.cd.markForCheck();
-  }
-  toggleAllCompanies(event) {
-    this.selectAll = event.target.checked;
-    this.onSelectAllCompanies.emit(event.target.checked);
-    this.cd.detectChanges();
-  }
-  clearAllSelectedCompanies() {
-    this.selectAll = false;
-    this.onSelectAllCompanies.emit(false);
-    this.cd.detectChanges();
   }
   public getCountSelected() {
     return this.reqCompaniesList.filter(item => item.selected).length;
@@ -92,30 +103,20 @@ export class CompaniesHeaderComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   isExistFilters() {
-    return (this.filter.companyFilter && (this.filter.companyFilter.clientType ||
-      this.filter.companyFilter.clientIndustry ||
-      this.filter.companyFilter.tags.length > 0 ||
-      this.filter.companyFilter.techUser))
+    return this.companyFilter.clientType ||
+      this.companyFilter.clientIndustry ||
+      this.companyFilter.tags.length > 0 ||
+      this.companyFilter.techUser
   }
-  onToggleFilter(data) {
-    this.toggleFilter = data;
-    this.cd.markForCheck();
-  }
+
   getClientType(clientType) {
     return clientType.toLowerCase();
   }
-  clearAll() {
-    this.filter.onClearAll();
-    this.cd.detectChanges();
-  }
-  onChangeCountFilter(data) {
-    this.countFilter = data;
-    this.cd.markForCheck();
-  }
-  refreshFilters() {
-    this.filter.applyFilters();
-    this.cd.detectChanges();
-  }
+
+  /*  refreshFilters() {
+      this.filter.applyFilters();
+      this.cd.detectChanges();
+    }*/
   getUserName(id) {
     let user = this.usersStateService.getAllUsers().find(item => item.id == id);
     return `${user.firstName} ${user.lastName}`;

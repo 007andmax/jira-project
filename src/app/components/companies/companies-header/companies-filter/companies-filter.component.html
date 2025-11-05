@@ -1,66 +1,64 @@
-<div class="content-filters-header">
-    <div
-        class="qt-icon icon__close qt-icon__white qt-sz-20 qt-bg-contain"
-        (click)="close()"
-    ></div>
-    <div class="content-filters-header__title pointer">Filters</div>
+<div class="aside-filters-content__main">
+    <app-drop-down
+        #typesDp
+        class="filter-category type dropdown"
+        [placeholder]="'Select Type'"
+        [list]="companyTypes"
+        [field]="'title'"
+        [title]="'Types'"
+        [search]="true"
+        [change]="true"
+        [sort]="false"
+        (onSelectedItem)="onSelectType($event)"
+    ></app-drop-down>
+    <app-drop-down
+        #personsDp
+        class="filter-category sales-person dropdown"
+        [placeholder]="'Select Sales person'"
+        [list]="listPersons"
+        [field]="'name'"
+        [title]="'Sales Person'"
+        [search]="true"
+        [change]="true"
+        (onSelectedItem)="onSelectTechLead($event)"
+    ></app-drop-down>
+    <app-drop-down
+        #industriesDp
+        class="filter-category industry dropdown"
+        [placeholder]="'Select Industry'"
+        [field]="'name'"
+        [title]="'Industry'"
+        [list]="industries"
+        [search]="true"
+        [change]="true"
+        (onSelectedItem)="onSelectClientIndustry($event)"
+    ></app-drop-down>
+    <div class="qt-inputs-row">
+        <div class="qt-inputs-block">
+            <div class="qt-input-block__label">Tags</div>
+            <app-company-tags
+                #tagsDp
+                [filter]="true"
+                [placeholder]="'Select Tag'"
+                class="filter-category tags dropdown companies-filter-tags"
+                (tagsChange)="onChangeTags($event)"
+            ></app-company-tags>
+        </div>
+    </div>
 </div>
-<app-drop-down
-    #typesDp
-    class="filter-category type qt-mr-8 dropdown"
-    [placeholder]="'By Types'"
-    [list]="companyTypes"
-    [field]="'title'"
-    [search]="true"
-    [change]="true"
-    [sort]="false"
-    [heightInput]="'36px'"
-    [widthInput]="'22%'"
-    (onSelectedItem)="onSelectType($event)"
-></app-drop-down>
-<app-drop-down
-    #personsDp
-    class="filter-category sales-person qt-mr-8 dropdown"
-    [placeholder]="'Search By Sales Person'"
-    [list]="listPersons"
-    [field]="'name'"
-    [search]="true"
-    [change]="true"
-    [heightInput]="'36px'"
-    [widthInput]="'22%'"
-    (onSelectedItem)="onSelectTechLead($event)"
-></app-drop-down>
-<app-drop-down
-    #industriesDp
-    class="filter-category industry qt-mr-8 dropdown"
-    [placeholder]="'Search By Industry'"
-    [field]="'name'"
-    [list]="industries"
-    [search]="true"
-    [change]="true"
-    [heightInput]="'36px'"
-    [widthInput]="'22%'"
-    (onSelectedItem)="onSelectClientIndustry($event)"
-></app-drop-down>
-<app-company-tags
-    #tagsDp
-    [filter]="true"
-    class="filter-category tags dropdown companies-filter-tags app-mat-tags-wrapper--sm"
-    (tagsChange)="onChangeTags($event)"
-></app-company-tags>
-<div class="qt-aside-modern__footer">
+<div class="aside-filters-content__footer">
     <div class="qt-df qt-w100">
         <button
-            class="qt-button --gray qt-mr-12"
+            class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
             (click)="onClearAll()"
         >
             Clear All
         </button>
         <button
-            class="qt-button"
+            class="qt-button qt-w100 qt-jc-c"
             (click)="applyFilters()"
         >
-            Apply Filters
+            Apply
         </button>
     </div>
 </div>

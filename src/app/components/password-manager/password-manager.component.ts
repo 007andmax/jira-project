@@ -32,6 +32,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
   public infiniteScrollDisabled = true;
   public filter: FilterPasswordManager = new FilterPasswordManager();
   public selectAll: boolean = false;
+  toggleFilter: boolean = false;
   public showPendingPreloader: boolean = false;
   public sub: Subscription = new Subscription();
   container = document.body.querySelector(".main-container");
@@ -82,6 +83,10 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onChangeRealTime);
     if (this.passwordManagerStateService.getCategories().length === 0) this.passwordManagerStateService.onInit();
+    let onToggleFilter = this.passwordManagerStateService.onToggleFilter.subscribe(data => {
+      this.toggleFilter = data;
+    })
+    this.sub.add(onToggleFilter);
   }
   onSearch(value) {
     document.body.querySelector(".main-container").scrollTo(0, 0);
@@ -124,6 +129,10 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     this.list_records.find(item => item.id === record.id).selected = record.selected;
     this.selectAll = (this.filter.getFilterList(this.list_records).find(item => !item.selected)) ? false : true;
   }
+  toggleAll(event) {
+    this.selectAll = event.target.checked;
+    this.onSelectAll(event);
+  }
   onSelectAll(event) {
     if (event.target.checked) {
       this.selectAll = true;
@@ -154,6 +163,11 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+  onToggleFilter(data) {
+    this.toggleFilter = data;
+    this.passwordManagerStateService.changeToggleFilter(this.toggleFilter);
+    this.cd.markForCheck();
   }
   ngOnDestroy() {
     this.sub.unsubscribe();

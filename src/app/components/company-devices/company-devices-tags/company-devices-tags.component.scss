@@ -102,28 +102,6 @@
     }
 }
 
-.device-user.has-placeholder:before {
-    content: "Search By Tags";
-}
-
-.pengind-loading {
-    left: calc(50% - 12px) !important;
-
-    &::before {
-      width: 32px !important;
-      height: 32px !important;
-      border-width: 3px;
-      min-height: auto !important;
-    }
-}
-
-.company-tag-input {
-    &::placeholder {
-        opacity: 0 !important;
-        color: $gray-400;
-    }
-}
-
 .no-remove {
     background: $gray-100;
     color: $gray-600;

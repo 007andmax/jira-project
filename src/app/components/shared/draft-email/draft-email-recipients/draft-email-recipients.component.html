@@ -61,35 +61,33 @@
                 (click)="selected(company)"
                 [ngClass]="{'--selected':isSelected(company.companyInfo.contacts[0].primaryEmail)}"
             >
-                <div class="qt-df">
+                <div class="qt-df qt-ai-c qt-w100">
                     <div
-                        class="assigne-user-avatar qt-mr-12"
+                        class="assigne-user-avatar qt-mr-8 qt-fs-0"
                         [textContent]="ticketsListService.getAssignedUserNameForAvatar(company.companyInfo.contacts[0])"
                         [ngStyle]="{'background': ticketsListService.getStyleAvatar(company.companyInfo.contacts[0])}"
                     ></div>
-                    <div>
-                        <div class="user-name qt-mb-2">
-                            {{getFirstLastName(company.companyInfo.contacts[0])}}
-                        </div>
-                        <div class="user-description qt-mb-2">
-                            {{company.companyInfo.contacts[0].primaryEmail}}
-                        </div>
-                        <div
-                            class="qt-df qt-ai-c"
-                            *ngIf="getJobTitleDto(company.companyInfo.contacts[0],company)"
-                        >
-                            <div class="qt-icon icon__permission-role qt-sz-16 qt-mr-4"></div>
-                            <span
-                                class="user-description"
-                                [textContent]="getJobTitleDto(company.companyInfo.contacts[0],company).name"
-                            ></span>
-                        </div>
-                    </div>
-                </div>
-                <i
+                  <div class="user-name ellipsis">
+                    {{getFirstLastName(company.companyInfo.contacts[0])}}
+                  </div>
+                  <div class="user-description qt-ml-4 ellipsis">
+                    {{company.companyInfo.contacts[0].primaryEmail}}
+                  </div>
+                  <div
+                    class="qt-df qt-ai-c qt-ml-4 ellipsis"
+                    *ngIf="getJobTitleDto(company.companyInfo.contacts[0],company)"
+                  >
+                    <div class="qt-icon icon__permission-role qt-sz-16 qt-ml-4 qt-mr-2 qt-fs-0"></div>
+                    <span
+                      class="user-description ellipsis"
+                      [textContent]="getJobTitleDto(company.companyInfo.contacts[0],company).name"
+                    ></span>
+                  </div>
+                  <i
                     *ngIf="isSelected(company.companyInfo.contacts[0].primaryEmail)"
-                    class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
-                ></i>
+                    class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto qt-fs-0"
+                  ></i>
+                </div>
             </div>
         </ng-template>
     </div>

@@ -1,13 +1,187 @@
+<!-- <div class="qt-page-list__header &#45;&#45;sticky"> -->
+<!-- <div class="qt-page-list__header-title-line qt-mb-16"> -->
+<!-- <div class="qt-page-list__header-title-line&#45;&#45;left"> -->
+<!-- <h6 -->
+<!-- class="qt-page-list__header-title" -->
+<!-- [textContent]="'Password Manager'" -->
+<!-- ></h6> -->
+<!-- </div> -->
+<!-- <div class="qt-page-list__header-title-line&#45;&#45;rigth"> -->
+<!-- <div class="qt-df qt-ai-c"> -->
+<!-- <div -->
+<!-- class="qt-icon icon__close qt-icon__white qt-sz-20 qt-bg-contain closed-search" -->
+<!-- *ngIf="toggleSearch" -->
+<!-- (click)="toggleSearch = false" -->
+<!-- ></div> -->
+<!-- <div -->
+<!-- class="qt-input-search qt-ml-8" -->
+<!-- [ngClass]="{'&#45;&#45;open':toggleSearch}" -->
+<!-- > -->
+<!-- &lt;!&ndash; *ngIf="getSelectedCount() === 0" &ndash;&gt; -->
+<!-- <input -->
+<!-- type="text" -->
+<!-- placeholder="Search Password" -->
+<!-- [(ngModel)]="searchText" -->
+<!-- (keyup)="onKeyUp($event)" -->
+<!-- > -->
+<!-- <span -->
+<!-- class="search-clear qt-icon icon__close-round qt-icon__gray-400" -->
+<!-- *ngIf="searchText.length > 0" -->
+<!-- (click)="clearSearch()" -->
+<!-- ></span> -->
+<!-- </div> -->
+<!-- <button -->
+<!-- class="qt-button &#45;&#45;gray &#45;&#45;md qt-ml-8" -->
+<!-- (click)="clearAll()" -->
+<!-- *ngIf="countFilter > 0" -->
+<!-- > -->
+<!-- Clear All -->
+<!-- </button> -->
+<!-- <button -->
+<!-- class="qt-button qt-button-filter &#45;&#45;gray &#45;&#45;md qt-ml-8 qt-df" -->
+<!-- [ngClass]="{'active':toggleFilter, -->
+<!-- 'is-exist-filters':isExistFilters()}" -->
+<!-- (click)="onToggleFilter(true)" -->
+<!-- > -->
+<!-- <span class="qt-icon icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span> -->
+<!-- <span [textContent]="getTextCountFilters()"></span> -->
+<!-- </button> -->
+<!-- <button -->
+<!-- class="qt-button &#45;&#45;gray &#45;&#45;md qt-ml-8" -->
+<!-- *ngIf="getPermissions('CREATE_PASSWORD')" -->
+<!-- (click)="addRecord()" -->
+<!-- > -->
+<!-- Create Password -->
+<!-- </button> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- <app-passwoord-manager-filters -->
+<!-- #filters -->
+<!-- [hidden]="!toggleFilter" -->
+<!-- [disabledCompany]="disabledCompany" -->
+<!-- (onChangeCountFilter)="onChangeCountFilter($event)" -->
+<!-- (onClose)="onToggleFilter(false)" -->
+<!-- ></app-passwoord-manager-filters> -->
+<!-- <div class="qt-page-list__header-thead-container"> -->
+<!-- <div class="qt-table-modern qt-page-list__header-thead"> -->
+<!-- <div class="qt-page-list__header-thead__row"> -->
+<!-- <div class="password-table__check"> -->
+<!-- <div class="qt-df"> -->
+<!-- <label class="qt-checkbox"> -->
+<!-- <input -->
+<!-- type="checkbox" -->
+<!-- [(ngModel)]="selectAll" -->
+<!-- (change)="toggleAll($event)" -->
+<!-- > -->
+<!-- <span></span> -->
+<!-- </label> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- <div -->
+<!-- class="password-table__account pointer" -->
+<!-- (click)="onFilter('CATEGORY')" -->
+<!-- > -->
+<!-- Account Type -->
+<!-- <span class="qt-table-modern__sorting"></span> -->
+<!-- </div> -->
+<!-- <div -->
+<!-- class="password-table__company-name pointer" -->
+<!-- (click)="onFilter('COMPANY_NAME')" -->
+<!-- > -->
+<!-- Company name -->
+<!-- <span class="qt-table-modern__sorting"></span> -->
+<!-- </div> -->
+<!-- <div -->
+<!-- class="password-table__description pointer" -->
+<!-- (click)="onFilter('DESCRIPTION')" -->
+<!-- > -->
+<!-- Description -->
+<!-- <span class="qt-table-modern__sorting"></span> -->
+<!-- </div> -->
+<!-- <div -->
+<!-- class="password-table__user-password pointer" -->
+<!-- (click)="onFilter('USERNAME')" -->
+<!-- > -->
+<!-- User & Password -->
+<!-- <span class="qt-table-modern__sorting"></span> -->
+<!-- </div> -->
+<!-- <div class="password-table__status">Status</div> -->
+<!-- <div class="password-table__otp">OTP</div> -->
+<!-- <div class="password-table__menu"></div> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- <div -->
+<!-- class="list-filters" -->
+<!-- *ngIf="filter.selectedCompany || -->
+<!-- filter.selectedDate || -->
+<!-- filter.selectedUserOrDevice || -->
+<!-- filter.selectedCategory" -->
+<!-- &gt; -->
+<!-- <app-mat-form-field #formField> -->
+<!-- <app-mat-chip-list aria-label="Fruit selection"> -->
+<!-- <app-mat-chip -->
+<!-- *ngIf="filter.selectedCompany" -->
+<!-- (onClose)="filters.companiesSelect.clearClient();refreshFilters()" -->
+<!-- [isRemove]="true" -->
+<!-- > -->
+<!-- {{filter.selectedCompany.name}} -->
+<!-- </app-mat-chip> -->
+<!-- <app-mat-chip -->
+<!-- *ngIf="filter.selectedDate" -->
+<!-- (onClose)="filters.dateSelect.clearClient();refreshFilters()" -->
+<!-- [isRemove]="true" -->
+<!-- > -->
+<!-- {{filter.selectedDate.title}} -->
+<!-- </app-mat-chip> -->
+<!-- <app-mat-chip -->
+<!-- *ngIf="filter.selectedUserOrDevice" -->
+<!-- (onClose)="filters.deviceUserSelect.clearClient();refreshFilters()" -->
+<!-- [isRemove]="true" -->
+<!-- > -->
+<!-- {{filter.selectedUserOrDevice.name}} -->
+<!-- </app-mat-chip> -->
+<!-- <app-mat-chip -->
+<!-- *ngIf="filter.selectedCategory" -->
+<!-- (onClose)="filters.categoriesSelect.clearClient();refreshFilters()" -->
+<!-- class="status" -->
+<!-- [isRemove]="true" -->
+<!-- > -->
+<!-- {{filter.selectedCategory.title}} -->
+<!-- </app-mat-chip> -->
+<!-- </app-mat-chip-list> -->
+<!-- </app-mat-form-field> -->
+<!-- </div> -->
+
+
+
+
+
+
 <div class="qt-page-list__header --sticky">
-    <div class="qt-page-list__header-title-line qt-mb-16">
+    <div class="qt-page-list__header-title-line">
         <div class="qt-page-list__header-title-line--left">
             <h6
                 class="qt-page-list__header-title"
                 [textContent]="'Password Manager'"
             ></h6>
         </div>
-        <div class="qt-page-list__header-title-line--rigth">
+        <div class="qt-page-list__header-title-line--right">
             <div class="qt-df qt-ai-c">
+                <div class="password-add-category qt-pos-rel">
+                    <button
+                        class="plus-btn qt-mr-8"
+                        (click)="showAddCategory = true"
+                    >
+                        +
+                    </button>
+                    <app-password-manager-add-category
+                        *ngIf="showAddCategory"
+                        (onClose)="showAddCategory = false"
+                    ></app-password-manager-add-category>
+                </div>
                 <div
                     class="qt-icon icon__close qt-icon__white qt-sz-20 qt-bg-contain closed-search"
                     *ngIf="toggleSearch"
@@ -31,17 +205,10 @@
                     ></span>
                 </div>
                 <button
-                    class="qt-button --gray --md qt-ml-8"
-                    (click)="clearAll()"
-                    *ngIf="countFilter > 0"
-                >
-                    Clear All
-                </button>
-                <button
                     class="qt-button qt-button-filter --gray --md qt-ml-8 qt-df"
                     [ngClass]="{'active':toggleFilter,
                  'is-exist-filters':isExistFilters()}"
-                    (click)="onToggleFilter(true)"
+                    (click)="onToggleFilter(!toggleFilter)"
                 >
                     <span class="qt-icon icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                     <span [textContent]="getTextCountFilters()"></span>
@@ -56,101 +223,4 @@
             </div>
         </div>
     </div>
-    <app-passwoord-manager-filters
-        #filters
-        [hidden]="!toggleFilter"
-        [disabledCompany]="disabledCompany"
-        (onChangeCountFilter)="onChangeCountFilter($event)"
-        (onClose)="onToggleFilter(false)"
-    ></app-passwoord-manager-filters>
-    <div class="qt-page-list__header-thead-container">
-        <div class="qt-table-modern qt-page-list__header-thead">
-            <div class="qt-page-list__header-thead__row">
-                <div class="password-table__check">
-                    <div class="qt-df">
-                        <label class="qt-checkbox">
-                            <input
-                                type="checkbox"
-                                [(ngModel)]="selectAll"
-                                (change)="toggleAll($event)"
-                            >
-                            <span></span>
-                        </label>
-                    </div>
-                </div>
-                <div
-                    class="password-table__account pointer"
-                    (click)="onFilter('CATEGORY')"
-                >
-                    Account Type
-                    <span class="qt-table-modern__sorting"></span>
-                </div>
-                <div
-                    class="password-table__company-name pointer"
-                    (click)="onFilter('COMPANY_NAME')"
-                >
-                    Company name
-                    <span class="qt-table-modern__sorting"></span>
-                </div>
-                <div
-                    class="password-table__description pointer"
-                    (click)="onFilter('DESCRIPTION')"
-                >
-                    Description
-                    <span class="qt-table-modern__sorting"></span>
-                </div>
-                <div
-                    class="password-table__user-password pointer"
-                    (click)="onFilter('USERNAME')"
-                >
-                    User & Password
-                    <span class="qt-table-modern__sorting"></span>
-                </div>
-                <div class="password-table__status">Status</div>
-                <div class="password-table__otp">OTP</div>
-                <div class="password-table__menu"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<div
-    class="list-filters"
-    *ngIf="filter.selectedCompany ||
-    filter.selectedDate ||
-    filter.selectedUserOrDevice ||
-    filter.selectedCategory"
->
-    <app-mat-form-field #formField>
-        <app-mat-chip-list aria-label="Fruit selection">
-            <app-mat-chip
-                *ngIf="filter.selectedCompany"
-                (onClose)="filters.companiesSelect.clearClient();refreshFilters()"
-                [isRemove]="true"
-            >
-                {{filter.selectedCompany.name}}
-            </app-mat-chip>
-            <app-mat-chip
-                *ngIf="filter.selectedDate"
-                (onClose)="filters.dateSelect.clearClient();refreshFilters()"
-                [isRemove]="true"
-            >
-                {{filter.selectedDate.title}}
-            </app-mat-chip>
-            <app-mat-chip
-                *ngIf="filter.selectedUserOrDevice"
-                (onClose)="filters.deviceUserSelect.clearClient();refreshFilters()"
-                [isRemove]="true"
-            >
-                {{filter.selectedUserOrDevice.name}}
-            </app-mat-chip>
-            <app-mat-chip
-                *ngIf="filter.selectedCategory"
-                (onClose)="filters.categoriesSelect.clearClient();refreshFilters()"
-                class="status"
-                [isRemove]="true"
-            >
-                {{filter.selectedCategory.title}}
-            </app-mat-chip>
-        </app-mat-chip-list>
-    </app-mat-form-field>
 </div>

@@ -11,7 +11,7 @@
     cursor: pointer;
     position: absolute;
     top: -42px;
-    right: 0px;
+    right: 0;
 
     span {
         line-height: normal;
@@ -23,12 +23,12 @@
 ::ng-deep.dropdown-recipients-body .mat-chip {
     cursor: default;
 }
- 
+
 .dropdown-item {
     display: flex !important;
     width: 100% !important;
 }
- 
+
 .--input-error {
     position: relative;
     input {
@@ -36,13 +36,14 @@
     }
 }
 .invalid-feedback {
-    bottom: 0px !important;
+    bottom: 0 !important;
 }
 .assigne-user-avatar {
-    width: 36px;
-    height: 36px;
+    width: 20px;
+    height: 20px;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 12px;
+    line-height: 15px;
     background-size: cover !important;
     background-position: center !important;
     border-radius: 50%;
@@ -54,25 +55,28 @@
 
 .user-name {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     color: $gray-900;
-    line-height: normal;
-    margin-bottom: 2px;
+    line-height: 20px;
 
+    & + .user-description {
+      margin-left: 4px;
+    }
 }
 
 .user-description {
     font-size: 13px;
     font-weight: 400;
     color: $gray-500;
-    line-height: normal;
-    margin-bottom: 2px;
+    line-height: 20px;
+
 }
  .user-container {
      align-items: self-start !important;
-     padding: 6px 8px !important;
+     padding: 8px !important;
      position: relative !important;
      height: auto !important;
+     margin-block: 4px;
 
      &:hover {
          background: $gray-50 !important;
@@ -82,15 +86,9 @@
  .app-drop-down__dropdown {
     width: 100%;
     top: 20px !important;
-    max-height: 357px !important;
+    max-height: 372px !important;
  }
  .--selected {
      background: $gray-50;
      border-radius: 6px;
- }
-
- .icon__done {
-     top: calc(50% - 10px);
-     position: absolute;
-     right: 8px;
  }

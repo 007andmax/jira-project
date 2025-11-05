@@ -1074,11 +1074,6 @@ app-quotes-item {
     display: contents;
   }
 
-  .companies-filter-tags {
-    flex: 1;
-    min-width: 320px;
-  }
-
   .qt-table-modern th {
     padding: 8px;
     @include сaption-m__sb;
@@ -1088,10 +1083,17 @@ app-quotes-item {
 
   .companies-table {
     &__check {
-      flex: 0 0 48px;
+      flex: 0 0 52px;
     }
     &__name {
       flex: 2 1 290px;
+
+      @include media-breakpoint-up($md) {
+        flex: 0 0 250px;
+      }
+      @include media-breakpoint-up($lg) {
+        flex: 2 1 290px;
+      }
 
       .circle-avatar {
         background-color: $purple-500;
@@ -1112,7 +1114,7 @@ app-quotes-item {
       flex: 1 1 210px;
       line-height: 20px;
 
-      @include media-breakpoint-down($md) {
+      @include media-breakpoint-up($lg) {
         flex: 1 1 260px;
       }
 
@@ -1157,7 +1159,7 @@ app-quotes-item {
       white-space: nowrap;
       overflow: hidden;
 
-      @include media-breakpoint-down($md) {
+      @include media-breakpoint-up($md) {
         flex: 1 1 230px;
       }
 
@@ -1200,8 +1202,8 @@ app-quotes-item {
       }
     }
     &__menu {
-      flex: 0 0 33px;
-      padding: 23px 16px 23px 0px;
+      flex: 0 0 50px;
+      padding: 23px 16px 23px 0;
 
       i {
         background-position: right;

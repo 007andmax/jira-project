@@ -1,88 +1,65 @@
-<div class="qt-page-list__header-filters">
-    <div class="content-filters-header">
-        <div
-            class="qt-icon icon__close qt-icon__white qt-sz-20 qt-bg-contain"
-            (click)="close()"
-        ></div>
-        <div class="content-filters-header__title pointer">Filters</div>
-    </div>
+<div class="aside-filters-content__main">
     <app-drop-down
         #categoriesSelect
-        class="filter-category qt-mr-8 dropdown"
+        class="filter-category dropdown"
         [placeholder]="'Select by Category'"
         [list]="categories"
         [field]="'title'"
+        [title]="'Category'"
         [search]="true"
         [change]="true"
         (onSelectedItem)="onSelectCategory($event)"
-        heightInput="36px"
-        widthInput="20%"
     ></app-drop-down>
-    <div class="password-add-category qt-pos-rel">
-        <button
-            class="plus-btn qt-mr-8"
-            (click)="showAddCategory = true"
-        >
-            +
-        </button>
-        <app-password-manager-add-category
-            *ngIf="showAddCategory"
-            (onClose)="showAddCategory = false"
-        ></app-password-manager-add-category>
-    </div>
     <company-drop-down
         #companiesSelect
-        class="filter-company qt-w100 qt-mr-8 dropdown"
+        class="filter-company qt-w100 dropdown"
         [placeholder]="'Select Company'"
         [isDisabled]="disabledCompany"
         [editItem]="selectedCompany"
+        [title]="'Company'"
         [field]="'name'"
         [search]="true"
         [change]="true"
         (onSelectedItem)="selectCompany($event)"
-        heightInput="36px"
-        widthInput="30%"
     ></company-drop-down>
     <app-passwoord-manager-devices-users
         #deviceUserSelect
-        class="filter-device qt-mr-8 dropdown dropdown-devices-users"
+        class="filter-device dropdown dropdown-devices-users"
         [placeholder]="'Select Device or User'"
         [preloader]="filter.getPreloaderDevices()"
         [isDisabled]="disabledDevicesUsers || filter.getPreloaderDevices()"
+        [title]="'Device/User'"
         [list]="devicesUsers"
         [field]="'name'"
         [search]="true"
         [change]="true"
         [sort]="true"
         (onSelectedItem)="selectDeviceUser($event)"
-        heightInput="36px"
-        widthInput="25%"
     ></app-passwoord-manager-devices-users>
     <app-drop-down
         #dateSelect
         class="filter-data-picker dropdown"
         [placeholder]="'Search by Expire Date'"
+        [title]="'Expire date'"
         [list]="listDates"
         [sort]="false"
         [field]="'title'"
         (onSelectedItem)="selectDate($event)"
-        heightInput="36px"
-        widthInput="20%"
     ></app-drop-down>
-    <div class="qt-aside-modern__footer">
-        <div class="qt-df qt-w100">
-            <button
-                class="qt-button --gray qt-mr-12"
-                (click)="onClearAll()"
-            >
-                Clear All
-            </button>
-            <button
-                class="qt-button"
-                (click)="applyFilters()"
-            >
-                Apply Filters
-            </button>
-        </div>
+</div>
+<div class="aside-filters-content__footer">
+    <div class="qt-df qt-w100">
+        <button
+            class="qt-button --gray qt-w100 qt-jc-c qt-mr-12"
+            (click)="onClearAll()"
+        >
+            Clear All
+        </button>
+        <button
+            class="qt-button qt-w100 qt-jc-c"
+            (click)="applyFilters()"
+        >
+            Apply
+        </button>
     </div>
 </div>

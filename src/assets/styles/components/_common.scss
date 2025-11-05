@@ -137,6 +137,17 @@ body .left-panel-full {
       border-width: 3px;
     }
   }
+
+  &--placement-bottom {
+    top: unset;
+    bottom: 1px;
+
+    &.xs,
+    &.sm {
+      top: unset;
+      bottom: 1px;
+    }
+  }
 }
 
 .recurring-tickets-content__modal--content .loading.xs {

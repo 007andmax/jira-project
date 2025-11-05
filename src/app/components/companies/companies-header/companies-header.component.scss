@@ -25,3 +25,11 @@ companies-filter {
   top: calc(50% - 6px);
   cursor: pointer;
 }
+
+.qt-page-list__header.--sticky {
+  margin: 0;
+  padding: 10px 32px;
+  min-height: 57.1px; // Fix Bug With Overflow with Scroll Table
+  background-color: $gray-50;
+  border-bottom: 1px solid $gray-200;
+}

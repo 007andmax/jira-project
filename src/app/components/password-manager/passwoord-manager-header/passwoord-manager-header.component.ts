@@ -18,15 +18,14 @@ import { PasswoordManagerFiltersComponent } from './passwoord-manager-filters/pa
   styleUrls: ['./passwoord-manager-header.component.scss']
 })
 export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
-  toggleFilter: boolean = true;
+  toggleFilter: boolean = false;
   toggleSearch: boolean = false;
+  showAddCategory: boolean = false;
   countFilter: number = 0;
   @ViewChild('filters', { static: true }) filters: PasswoordManagerFiltersComponent;
   filter: FilterPasswordManager = new FilterPasswordManager();
   @Output() onChangeFilterField = new EventEmitter<any>();
-  @Output() onSelectAll = new EventEmitter<any>();
   @Output() onSearch = new EventEmitter<any>();
-  @Input() selectAll: boolean = false;
   @Input() recordsData: Array<PasswordRecord> = [];
   @Input() disabledCompany: boolean = false;
   sub: Subscription = new Subscription();
@@ -49,20 +48,26 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let geLefttFilter = this.passwordManagerStateService.getOnFilter().subscribe((data) => {
       this.filter.setFilter(data);
+      this.onChangeCounterFilter();
     })
     this.sub.add(geLefttFilter);
+    let onToggleFilter = this.passwordManagerStateService.onToggleFilter.subscribe(data => {
+      this.toggleFilter = data;
+    })
+    this.sub.add(onToggleFilter);
+  }
+  public onChangeCounterFilter() {
+    this.countFilter = 0;
+    if (this.filter.selectedCategory) this.countFilter++;
+    if (this.filter.selectedCompany) this.countFilter++;
+    if (this.filter.selectedDate) this.countFilter++;
+    if (this.filter.selectedUserOrDevice) this.countFilter++;
   }
   clearSearch() {
     this.searchText = "";
     this.onSearch.emit("");
   }
-  toggleAll(data) {
-    this.selectAll = true;
-    this.onSelectAll.emit(data);
-  }
-  clearAll() {
-    this.filters.onClearAll()
-  }
+
   getTextCountFilters() {
     return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
   }
@@ -80,6 +85,7 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   }
   onToggleFilter(data) {
     this.toggleFilter = data;
+    this.passwordManagerStateService.changeToggleFilter(this.toggleFilter);
   }
   getSelectedCount() {
     return this.recordsData.filter(item => item.selected).length;
@@ -99,5 +105,4 @@ export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
 }

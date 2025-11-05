@@ -40,6 +40,8 @@ export class CompaniesStateService {
   currentCompany: any = null;
   onCurrentCompany: EventEmitter<any> = new EventEmitter();
   filter: EventEmitter<any> = new EventEmitter();
+  onClearFilter: EventEmitter<any> = new EventEmitter();
+  onToggleFilter: EventEmitter<any> = new EventEmitter();
   showArchivedCompanies: boolean = false;
   isInitSubscriptions: boolean = false;
   companyRoutingId: string;
@@ -109,6 +111,9 @@ export class CompaniesStateService {
       this.onChangeDevicesCount.emit(this.devicesCounts);
     })
   }
+  public clearFilter() {
+    this.onClearFilter.next(null);
+  }
   public setCompanyProfile(data) {
     this.companyProfile = data;
   }
@@ -128,6 +133,9 @@ export class CompaniesStateService {
   }
   public getCompanyIdForassignedDocumentCategory() {
     return this.companyIdForassignedDocumentCategory;
+  }
+  public changeToggleFilter(data) {
+    this.onToggleFilter.emit(data);
   }
   public getCategoriesDocuments(id) {
     this.companyIdForassignedDocumentCategory = id;

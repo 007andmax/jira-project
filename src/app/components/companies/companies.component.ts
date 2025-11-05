@@ -31,6 +31,8 @@ import { fadeInAnimation } from 'src/app/animations';
 })
 export class CompaniesComponent implements OnInit, OnDestroy {
   @ViewChild('header', { static: true }) header: CompaniesHeaderComponent;
+  selectAll: boolean = false;
+  toggleFilter: boolean = false;
   CompaniesList: Array<CompanyItem> = [];
   reqCompaniesList: Array<CompanyItem> = [];
   showPreloader: boolean = true;
@@ -98,6 +100,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.sub.add(onChangeUsers);
     let filter = this.companiesStateService.filter.subscribe(data => {
       this.showPreloader = true;
+      console.log("this.companyFilter", this.companyFilter);
       this.companyFilter.setFilters(data);
       document.body.querySelector(".main-container").scrollTo(0, 0);
       (<any>document.body.querySelector(".qt-page-list__header-thead-container .qt-checkbox input")).checked = false;
@@ -138,6 +141,10 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(onChangeDevicesCount);
+    let onToggleFilter = this.companiesStateService.onToggleFilter.subscribe(data => {
+      this.toggleFilter = data;
+    })
+    this.sub.add(onToggleFilter);
   }
   onSearch(value) {
     document.body.querySelector(".main-container").scrollTo(0, 0);
@@ -154,8 +161,14 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
   onSelectCompany(company) {
     this.reqCompaniesList.find(item => item.id === company.id).selected = company.selected;
-    this.header.selectAll = (this.reqCompaniesList.find(item => !item.selected)) ? false : true;
+    this.selectAll = (this.reqCompaniesList.find(item => !item.selected)) ? false : true;
     this.header.setReqCompaniesList(this.reqCompaniesList);
+    this.cd.detectChanges();
+  }
+  toggleAllCompanies(event) {
+    this.selectAll = event.target.checked;
+    console.log("this.selectAll", this.selectAll);
+    this.onSelectAllCompanies(this.selectAll);
     this.cd.detectChanges();
   }
   onFilter(data) {
@@ -173,10 +186,15 @@ export class CompaniesComponent implements OnInit, OnDestroy {
         item.selected = true;
         this.draftEmailStateService.addSelectedCompany(item);
       });
+      this.CompaniesList.forEach(item => {
+        item.selected = true;
+      });
     } else {
       this.draftEmailStateService.resetSelectedCompanies();
-
       this.reqCompaniesList.forEach(item => {
+        item.selected = false;
+      });
+      this.CompaniesList.forEach(item => {
         item.selected = false;
       });
     }
@@ -272,6 +290,15 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+  onChangeCountFilter(data) {
+    // this.countFilter = data;
+    this.cd.markForCheck();
+  }
+  onToggleFilter(data) {
+    this.toggleFilter = data;
+    this.companiesStateService.changeToggleFilter(this.toggleFilter);
+    this.cd.markForCheck();
   }
   ngOnDestroy(): void {
     this.reqCompaniesList.forEach(item => item.selected = false);

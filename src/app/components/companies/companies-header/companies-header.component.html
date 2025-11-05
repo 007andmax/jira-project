@@ -1,13 +1,13 @@
 <div class="qt-page-list__header --sticky">
-    <div class="qt-page-list__header-title-line qt-mb-16">
+    <div class="qt-page-list__header-title-line">
         <div class="qt-page-list__header-title-line--left">
             <h6
-                class="qt-page-list__header-title"
+                class="qt-page-list__header-title qt-fs-0"
                 [textContent]="'All Companies (' + calculateCount.getCurrent() + ')'"
             >
             </h6>
         </div>
-        <div class="qt-page-list__header-title-line--rigth">
+        <div class="qt-page-list__header-title-line--right">
             <div class="qt-input-search qt-ml-8">
                 <!-- *ngIf="getSelectedCount() === 0" -->
                 <input
@@ -23,7 +23,7 @@
                 ></span>
             </div>
             <div
-                class="new-companies-content__header-buttons"
+                class="new-companies-content__header-buttons qt-ml-8"
                 *ngIf="getCountSelected() > 0"
             >
                 <div class="new-companies-content__header-buttons-top">
@@ -58,14 +58,7 @@
                     </div>
                 </div>
                 <button
-                    class="qt-button --gray --md qt-ml-8"
-                    (click)="clearAll()"
-                    *ngIf="countFilter > 0"
-                >
-                    Clear All
-                </button>
-                <button
-                    class="qt-button qt-button-filter --gray --md qt-mr-8 qt-ml-8 qt-df"
+                    class="qt-button qt-button-filter --gray --md qt-ml-8 qt-df"
                     [ngClass]="{'active':toggleFilter,
                  'is-exist-filters':isExistFilters()}"
                     (click)="onToggleFilter(!toggleFilter)"
@@ -74,7 +67,7 @@
                     <span [textContent]="getTextCountFilters()"></span>
                 </button>
                 <button
-                    class="qt-button --gray --md qt-mr-8"
+                    class="qt-button --gray --md qt-ml-8"
                     uib-tooltip="Draft email"
                     tooltip-placement="top"
                     (click)="showAsideForDraftEmail()"
@@ -83,105 +76,12 @@
                     Send Email
                 </button>
                 <button
-                    class="new-link qt-d-none"
-                    style="font-size: 13px;"
-                    (click)="showAsideForAdd()"
                     *ngIf="getPermissions('CREATE_COMPANIES')"
-                >
-                    Add Company
-                </button>
-                <button
-                    *ngIf="getPermissions('CREATE_COMPANIES')"
-                    class="qt-button --md --gray qt-fs-0"
+                    class="qt-button --md --gray qt-ml-8 qt-fs-0"
                     (click)="showAsideForAdd()"
                 >
                     Add Company
                 </button>
-            </div>
-        </div>
-    </div>
-    <div class="qt-page-list__header-filters">
-        <companies-filter
-            class="qt-w100"
-            #filter
-            (changeCountFilter)="onChangeCountFilter($event)"
-            (onClose)="onToggleFilter(false)"
-            [hidden]="!toggleFilter"
-        ></companies-filter>
-    </div>
-    <div class="qt-page-list__header-thead-container">
-        <div class="qt-table-modern qt-page-list__header-thead">
-            <div class="qt-page-list__header-thead__row">
-                <div class="companies-table__check">
-                    <div class="qt-df qt-jc-fe">
-                        <label class="qt-checkbox">
-                            <input
-                                type="checkbox"
-                                class="ng-untouched ng-pristine ng-valid"
-                                [(ngModel)]="selectAll"
-                                (change)="toggleAllCompanies($event)"
-                            >
-                            <span></span>
-                        </label>
-                    </div>
-                </div>
-                <div
-                    class="companies-table__name pointer"
-                    (click)="onFilter('name')"
-                >
-                    Name
-                </div>
-                <div
-                    class="companies-table__client-type pointer"
-                    (click)="onFilter('type')"
-                >
-                    TYPE
-                    <div class="qt-table-modern__sorting"></div>
-                </div>
-                <div
-                    class="companies-table__address pointer"
-                    (click)="onFilter('address')"
-                >
-                    Shipping Address
-                    <div class="qt-table-modern__sorting"></div>
-                </div>
-                <div
-                    class="companies-table__primary-contact pointer"
-                    (click)="onFilter('primary_contact')"
-                >
-                    Primary Contact
-                    <div class="qt-table-modern__sorting"></div>
-                </div>
-                <div
-                    class="companies-table__email-address pointer"
-                    (click)="onFilter('email')"
-                >
-                    Email Address
-                    <div class="qt-table-modern__sorting"></div>
-                </div>
-                <div
-                    class="companies-table__tickets pointer"
-                    (click)="onFilter('tickets')"
-                >
-                    Tickets
-                    <div class="qt-table-modern__sorting"></div>
-                </div>
-                <div
-                    class="companies-table__devices pointer"
-                    (click)="onFilter('devices')"
-                >
-                    Devices
-                    <div class="qt-table-modern__sorting"></div>
-                </div>
-                <div
-                    class="companies-table__users pointer"
-                    (click)="onFilter('users')"
-                >
-                    Users
-                    <div class="qt-table-modern__sorting"></div>
-                </div>
-                <div class="companies-table__download-btn  pointer"></div>
-                <div class="companies-table__menu pointer"></div>
             </div>
         </div>
     </div>
