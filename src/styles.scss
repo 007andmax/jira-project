@@ -470,12 +470,6 @@ app-company-dash-detail {
     }
   }
 }
- draft-email-user-recipients,
- app-draft-email-recipients {
-  .mat-form-field-infix {
-      min-height: unset !important;
-    }
- }
 .new-companies-content__modal--content {
   draft-email-user-recipients,
   app-draft-email-recipients {
@@ -3175,3 +3169,9 @@ body.ready {
 app-ticket-detail-tasks-item {
   display: contents;
 }
+ draft-email-user-recipients,
+ app-draft-email-recipients {
+   .mat-form-field-infix {
+     min-height: unset !important;
+   }
+ }

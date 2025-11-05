@@ -1,5 +1,5 @@
 <div
-    class=""
+    class
     ngbDropdown
     #products="ngbDropdown"
     [ngClass]="{'hide-all-user':!toggleAllUsers}"
@@ -117,7 +117,7 @@
     <div
         class="toggle-all-users qt-df qt-ai-c"
         *ngIf="!toggleAllUsers"
-        (click)="toggleAllUsers = true"
+        (click)="onToggleAllUsers(true)"
     >
         <div class="qt-icon icon__show qt-za-16 qt-sz-16 qt-bg-contain qt-mr-4 pointer"></div>
         <span [textContent]="'Show All Emails (' + selectedUsers.length +')'"></span>
@@ -125,7 +125,7 @@
     <div
         class="toggle-all-users qt-df qt-ai-c"
         *ngIf="toggleAllUsers"
-        (click)="toggleAllUsers = false"
+        (click)="onToggleAllUsers(false)"
     >
         <div class="qt-icon icon__hide qt-za-16 qt-sz-16 qt-bg-contain qt-mr-4 pointer"></div>
         <span [textContent]="'Hide Multiple Emails'"></span>
