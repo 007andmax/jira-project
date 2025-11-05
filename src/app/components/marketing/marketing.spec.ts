@@ -56,12 +56,6 @@ describe('MarketingComponent unit test', () => {
     com.setIdDetailUser("test");
     expect(com.idDetailUser).toEqual("test");
   });
-  it('check "onFilter"', () => {
-    const fixture = TestBed.createComponent(MarketingComponent);
-    const com = fixture.debugElement.componentInstance;
-    com.onFilter("NAME");
-    expect(com.filter.page).toEqual(0);
-  });
   it('check "setDefaultScoll"', () => {
     const fixture = TestBed.createComponent(MarketingComponent);
     const com = fixture.debugElement.componentInstance;

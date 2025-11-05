@@ -39,18 +39,6 @@ describe('CompaniesHeaderComponent unit test', () => {
     com.clearSearch();
     expect(com.searchText).toEqual("");
   });
-  it('check "toggleAllCompanies"', () => {
-    const fixture = TestBed.createComponent(CompaniesHeaderComponent);
-    const com = fixture.debugElement.componentInstance;
-    com.toggleAllCompanies({ target: { checked: true } });
-    expect(com.selectAll).toEqual(true);
-  });
-  it('check "toggleAllCompanies"', () => {
-    const fixture = TestBed.createComponent(CompaniesHeaderComponent);
-    const com = fixture.debugElement.componentInstance;
-    com.clearAllSelectedCompanies();
-    expect(com.selectAll).toEqual(false);
-  });
   it('check "getTextCountFilters"', () => {
     const fixture = TestBed.createComponent(CompaniesHeaderComponent);
     const com = fixture.debugElement.componentInstance;

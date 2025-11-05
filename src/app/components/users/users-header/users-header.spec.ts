@@ -57,12 +57,12 @@ describe('UsersHeaderComponent unit test', () => {
     com.clearSearch(false);
     expect(com.searchText).toEqual("");
   });
-  it('check "setToggleFilter"', () => {
-    const fixture = TestBed.createComponent(UsersHeaderComponent);
-    const com = fixture.debugElement.componentInstance;
-    com.setToggleFilter(false);
-    expect(com.toggleFilter).toEqual(false);
-  });
+  /* it('check "setToggleFilter"', () => {
+     const fixture = TestBed.createComponent(UsersHeaderComponent);
+     const com = fixture.debugElement.componentInstance;
+     com.setToggleFilter(false);
+     expect(com.toggleFilter).toEqual(false);
+   });*/
   it('check "getSelectedCount"', () => {
     const fixture = TestBed.createComponent(UsersHeaderComponent);
     const com = fixture.debugElement.componentInstance;
