@@ -20,6 +20,7 @@ import { TasksAddAssociateTicketsModule } from '../tasks-add/tasks-add-associate
 import { TasksDatePickerComponent } from '../tasks-date-picker/tasks-date-picker.component';
 import { TasksDatePickerModule } from '../tasks-date-picker/tasks-date-picker.module';
 import { TasksEditComponent } from './tasks-edit.component';
+import { CompanySetting } from '../../companies/class/company-setting';
 
 
 describe('TasksEditComponent unit test', () => {
@@ -73,4 +74,34 @@ describe('TasksEditComponent unit test', () => {
     com.setAssociatedTicketId({ id: "test" })
     expect(com.modelForm.controls["associatedTicketId"].value).toEqual("test");
   });
+  it('check "onSelectTechUser"', () => {
+    const fixture = TestBed.createComponent(TasksEditComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.ngOnInit();
+    com.onSelectTechUser([{ id: "test" }])
+    expect(com.selectedAssignedUsers).toEqual([{ id: "test" }]);
+  });
+  it('check "onSelectType"', () => {
+    const fixture = TestBed.createComponent(TasksEditComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.ngOnInit();
+    com.onSelectType(new CompanySetting('Meeting', 'Meeting'))
+    expect(com.modelForm.controls["type"].value).toEqual("Meeting");
+  });
+  it('check "filterByDate"', () => {
+    const fixture = TestBed.createComponent(TasksEditComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.ngOnInit();
+    com.filterByDate({ start: 1, end: 2 });
+    expect(com.modelForm.controls["startDate"].value).toEqual(1);
+    expect(com.modelForm.controls["endDate"].value).toEqual(2);
+  });
+  it('check "onFocusDescription"', () => {
+    const fixture = TestBed.createComponent(TasksEditComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onFocusDescription();
+    expect(com.isInitEditNote).toEqual(true);
+  });
+
+
 });
