@@ -29,6 +29,57 @@
   }
 }
 
+@mixin dropdown-scrollbar-mask {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent; // <-- цвет убран
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  -webkit-mask-image: linear-gradient(to top, transparent, black),
+  linear-gradient(to left, transparent 8px, black 8px);
+  -webkit-mask-size: 100% 20000px;
+  -webkit-mask-position: left bottom;
+  mask-image: linear-gradient(to top, transparent, black),
+  linear-gradient(to left, transparent 8px, black 8px);
+  mask-size: 100% 20000px;
+  mask-position: left bottom;
+  transition: mask-position 0.3s ease, -webkit-mask-position 0.3s ease;
+
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: $gray-400;
+  }
+
+  &:hover {
+    -webkit-mask-position: left top;
+    mask-position: left top;
+  }
+
+  &:not(:has(> :nth-child(2))) {
+    -webkit-mask: none;
+    mask: none;
+  }
+}
+
+@mixin dropdown-scrollbar-adaptive {
+  @media (hover: hover) and (pointer: fine) {
+    @include dropdown-scrollbar-mask;
+  }
+
+  @media (hover: none), (pointer: coarse) {
+    @include dropdown-scrollbar;
+  }
+}
+
+
 // Dropdown
 @mixin dropdown-menu {
   position: absolute;

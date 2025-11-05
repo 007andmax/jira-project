@@ -145,6 +145,8 @@ aside {
   }
 
   &__ticket-detail-page {
-    height: 100vh;
+    max-height: 100dvh;
+    overflow-y: hidden;
+    height: 100%;
   }
 }
