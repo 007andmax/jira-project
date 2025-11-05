@@ -20,7 +20,7 @@
     max-height: 384px;
     overflow: auto;
     &::-webkit-scrollbar {
-      width: 5px;
+      width: 8px;
     }
   h3 {
         @include body-r__m;
@@ -34,7 +34,7 @@
         overflow: auto;
         max-height: 330px;
         &::-webkit-scrollbar {
-            width: 5px;
+            width: 8px;
         }
         .contract-item {
             display: flex;

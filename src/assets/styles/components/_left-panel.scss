@@ -56,6 +56,10 @@
     &-menu {
       overflow: auto;
       height: 100%;
+
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
     }
     &-icon {
       display: flex;
@@ -441,6 +445,7 @@
 .content-wrapper {
   position: relative;
   height: 100%;
+  min-width: 1084px;
 }
 .right-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
   right: 0;

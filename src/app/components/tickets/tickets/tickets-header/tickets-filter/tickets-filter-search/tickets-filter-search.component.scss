@@ -54,11 +54,11 @@
         max-height: 330px !important;
         height: 330px;
         &::-webkit-scrollbar {
-            width: 4px;
+            width: 8px;
         }
 
         &::-webkit-scrollbar-thumb {
-            background-color: $gray-200;
+            background-color: $gray-400;
         }
     }
 

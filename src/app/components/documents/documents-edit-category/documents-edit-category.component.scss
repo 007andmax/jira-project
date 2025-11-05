@@ -5,10 +5,10 @@
     overflow: auto;
     max-height: calc(100% - 170px);
     &::-webkit-scrollbar-thumb {
-      background: $gray-200;
+      background: $gray-400;
     }
     &::-webkit-scrollbar {
-      width: 4px;
+      width: 8px;
     }
 }
 .item-type-company {

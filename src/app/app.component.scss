@@ -40,7 +40,6 @@
     align-content: stretch;
     align-items: stretch;
     overflow: hidden;
-    overflow-x: auto;
     height: 100vh;
     @media (hover:none) and (min-width: 541px), (pointer:coarse) and (min-width: 541px) {
       position: fixed;
@@ -64,11 +63,13 @@
         z-index: 10;
 
         &::-webkit-scrollbar {
-            width: 5px;
+            width: 8px;
         }
     }
 
     &>main {
+        overflow-y: auto;
+        overflow-x: clip;
         order: 0;
         flex: 1 1 auto;
         align-self: auto;
@@ -133,7 +134,11 @@ aside {
   background-color: $white;
   height: calc(100vh - 64px);
   overflow-y: auto;
-  overflow-x: clip;
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
 
   @media (hover:none) and (min-width: 767px), (pointer:coarse) and (min-width: 767px) {
     height: calc(100% - 64px);
