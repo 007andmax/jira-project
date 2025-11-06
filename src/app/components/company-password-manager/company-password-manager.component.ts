@@ -60,6 +60,10 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
     })
     this.sub.add(onChangeRealTime);
     if (this.passwordManagerStateService.getCategories().length === 0) this.passwordManagerStateService.onInit();
+    let onToggleFilter = this.passwordManagerStateService.onToggleFilter.subscribe(data => {
+      this.toggleFilter = data;
+    })
+    this.sub.add(onToggleFilter);
   }
   public ngOnDestroy() {
     this.sub.unsubscribe();

@@ -7,6 +7,8 @@ import { PasswordManagerTableModule } from '../password-manager/password-manager
 import { PasswordManagerEditAsideModule } from '../password-manager/password-manager-edit-aside/password-manager-edit-aside.module';
 import { PasswordManagerAddAsideModule } from '../password-manager/password-manager-add-aside/password-manager-add-aside.module';
 import { CompanyPasswordManagerRoutingModule } from './company-password-manager-routing.module';
+import { PasswoordManagerFiltersComponent } from '../password-manager/passwoord-manager-header/passwoord-manager-filters/passwoord-manager-filters.component';
+import { PasswoordManagerFiltersModule } from '../password-manager/passwoord-manager-header/passwoord-manager-filters/passwoord-manager-filters.module';
 
 
 @NgModule({
@@ -19,10 +21,9 @@ import { CompanyPasswordManagerRoutingModule } from './company-password-manager-
         PasswordManagerTableModule,
         PasswordManagerEditAsideModule,
         PasswordManagerAddAsideModule,
-        CompanyPasswordManagerRoutingModule
+        CompanyPasswordManagerRoutingModule,
+        PasswoordManagerFiltersModule
     ],
-
-
 
 })
 export class CompanyPasswordManagerModule { }

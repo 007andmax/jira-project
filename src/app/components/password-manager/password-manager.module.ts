@@ -27,11 +27,10 @@ import { PasswordManagerAddAsideModule } from './password-manager-add-aside/pass
 import { CompanyDropDownModule } from '../shared/company-drop-down/company-drop-down.module';
 import { PasswordManagerAddCategoryModule } from './password-manager-add-category/password-manager-add-category.module';
 import { MatErrorModule } from '../shared/mat-error/mat-error.module';
+import { PasswoordManagerFiltersModule } from './passwoord-manager-header/passwoord-manager-filters/passwoord-manager-filters.module';
 
 @NgModule({
     declarations: [PasswordManagerComponent,
-        PasswoordManagerFiltersComponent,
-        PasswoordManagerDevicesUsersComponent
         // PasswordManagerAddCategoryComponent,
         //  PasswoordManagerDevicesUsersComponent,
         //  PasswoordManagerFiltersComponent,
@@ -59,7 +58,8 @@ import { MatErrorModule } from '../shared/mat-error/mat-error.module';
         PasswordManagerAddAsideModule,
         CompanyDropDownModule,
         PasswordManagerAddCategoryModule,
-        MatErrorModule
+        MatErrorModule,
+        PasswoordManagerFiltersModule
     ],
     exports: [//PasswordManagerAddCategoryComponent,
         //   PasswoordManagerDevicesUsersComponent,
