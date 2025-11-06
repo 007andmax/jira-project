@@ -361,5 +361,6 @@ export class TasksEditComponent extends TasksAddComponent {
     this.selectedTicket = null;
     this.modelForm.reset();
     this.files = [];
+    this.cd.detectChanges();
   }
 }

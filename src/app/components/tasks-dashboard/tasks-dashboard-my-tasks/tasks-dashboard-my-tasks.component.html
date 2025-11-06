@@ -69,6 +69,20 @@
         </li>
         <li
             class="dashboard-tabs__item"
+            [ngbNavItem]="'open'"
+        >
+            <a
+                class="dashboard-tabs__item-link"
+                ngbNavLink
+            >
+                Open
+            </a>
+            <ng-template ngbNavContent>
+                <app-tasks-dashboard-my-tasks-list [filterType]="'OPEN'"></app-tasks-dashboard-my-tasks-list>
+            </ng-template>
+        </li>
+        <li
+            class="dashboard-tabs__item"
             [ngbNavItem]="'completed'"
         >
             <a
