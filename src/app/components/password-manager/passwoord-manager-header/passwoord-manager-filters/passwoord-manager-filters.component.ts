@@ -74,16 +74,16 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
   }
   public onClearAll() {
     this.filter.setCategory(null);
-    this.filter.setCompany(null);
+    if (!this.disabledCompany) this.filter.setCompany(null);
     this.filter.setDeviceUser(null);
     this.filter.setDate(null);
     this.categoriesSelect.clearWithOutChanges();
-    this.companiesSelect.clearWithOutChanges();
+    if (!this.disabledCompany) this.companiesSelect.clearWithOutChanges();
     this.deviceUserSelect.clearWithOutChanges();
     this.dateSelect.clearWithOutChanges();
     this.passwordManagerStateService.onInitFilter(this.filter);
     this.disabledDevicesUsers = false;
-    this.selectedCompany = null;
+    if (!this.disabledCompany) this.selectedCompany = null;
   }
   applyFilters() {
 
