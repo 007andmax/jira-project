@@ -1,11 +1,11 @@
 @import "./src/assets/styles/variable";
 
 .disabled {
-    background: $gray-200;
-    color: $gray-600;
+    background: $gray-50;
+    color: $gray-400;
 
     &::placeholder {
-        color: $gray-600;
+        color: $gray-400;
     }
 }
 

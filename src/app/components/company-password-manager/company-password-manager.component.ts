@@ -75,7 +75,7 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
   setCompany(list) {
     let find = list.find(item => item.id == this.companyId);
     this.filters.selectedCompany = find;
-    this.filters.companiesSelect.isDisabled = true;
+    this.filters.disabledCompany = true;
   }
   public ngOnDestroy() {
     this.sub.unsubscribe();
