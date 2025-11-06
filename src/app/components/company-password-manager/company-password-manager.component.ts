@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { PasswordManagerComponent } from '../password-manager/password-manager.component';
 import { PasswordRecord } from '../password-manager/class/password-record';
 import { PasswordManagerListService } from '../password-manager/services/password-manager-list.service';
 import { REMOVE_RECORD } from '../../const/confirm';
 import { fadeInAnimation } from 'src/app/animations';
+import { PasswoordManagerFiltersComponent } from '../password-manager/passwoord-manager-header/passwoord-manager-filters/passwoord-manager-filters.component';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { fadeInAnimation } from 'src/app/animations';
   providers: [PasswordManagerListService]
 })
 export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
+  @ViewChild('filters', { static: true }) filters: PasswoordManagerFiltersComponent;
   container = document.body.querySelector(".main-container");
   companyId: string;
   ngOnInit() {
@@ -64,6 +66,16 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
       this.toggleFilter = data;
     })
     this.sub.add(onToggleFilter);
+    if (this.companiesStateService.getCompanies().length > 0) this.setCompany(this.companiesStateService.getCompanies());
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.setCompany(data);
+    })
+    this.sub.add(getOnCompanies);
+  }
+  setCompany(list) {
+    let find = list.find(item => item.id == this.companyId);
+    this.filters.selectedCompany = find;
+    this.filters.companiesSelect.isDisabled = true;
   }
   public ngOnDestroy() {
     this.sub.unsubscribe();
