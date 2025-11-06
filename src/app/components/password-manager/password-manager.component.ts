@@ -170,6 +170,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     this.cd.markForCheck();
   }
   ngOnDestroy() {
+    this.passwordManagerStateService.setFilterByCategory(null);
     this.sub.unsubscribe();
   }
 }
