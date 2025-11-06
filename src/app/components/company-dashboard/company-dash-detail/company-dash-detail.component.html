@@ -47,7 +47,7 @@
                 <span
                     class="user-info-pt qt-df"
                     *ngIf="companyDetailing?.clientType"
-                    [textContent]="companyDetailing.clientType"
+                    [textContent]="isArchive() ? 'Archive' :companyDetailing.clientType"
                 >
                 </span>
                 <span

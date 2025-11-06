@@ -135,7 +135,9 @@ export class CompanyDashDetailComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onGetJobTitle);
   }
-
+  public isArchive() {
+    return this.companiesStateService.allCompanies.some(item => item.id == this.companyDetail.id) ? this.companiesStateService.allCompanies.find(item => item.id == this.companyDetail.id).deletedAt : false;
+  }
   public onChangeStartTimePicker(data) {
     this.currentService.setDurationStart(data);
   }

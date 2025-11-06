@@ -97,6 +97,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     }
   }
   parseClientType(clientType) {
+    if (this.showArchivedCompanies) return 'Archive';
     return clientType.toLowerCase();
   }
   getDeviceCount() {

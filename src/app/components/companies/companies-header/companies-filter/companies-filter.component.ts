@@ -64,6 +64,7 @@ export class CompaniesFilterComponent implements OnInit, OnDestroy {
     this.sub.add(onChangeUsers);
     let onChangeFilter = this.leftPanelStateService.onChangeFilter.subscribe(data => {
       this.typesDp.onSelect(this.companyTypes.find(item => item.value === data));
+      this.applyFilters();
     })
     this.sub.add(onChangeFilter);
     let onClearFilter = this.companiesStateService.onClearFilter.subscribe(res => {
