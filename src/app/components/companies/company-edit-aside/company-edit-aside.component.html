@@ -132,105 +132,6 @@
             </div>
         </div>
         <div class="qt-inputs-row qt-inputs-row__divider">
-            <div class="qt-df qt-ai-c qt-jc-sb">
-                <div class="qt-input-block__label">
-                    <div class="qt-input-block__subtitle qt-mt-12">Shipping Address</div>
-                </div>
-                <div class="same-as-billing">
-                    <div class="qt-df qt-ai-c">
-                        <label
-                            class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
-                            for="email-payment"
-                        >
-                            <input
-                                id="email-payment"
-                                type="checkbox"
-                                (change)="onSameAsBilling($event)"
-                                [(ngModel)]="company.addresses[1].sameAsBilling"
-                            >
-                            <span></span>
-                        </label>
-                        <span class="qt-fs-12 qt-fw-600 qt-ml-8 same-as-billing-txt">Same as Billing Address</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="qt-inputs-row">
-            <div class="qt-input-block">
-                <div class="qt-input-block__label">Shipping Location Name</div>
-                <input
-                    type="text"
-                    [(ngModel)]="company.addresses[1].locationName"
-                    placeholder="Enter Location Name"
-                    [disabled]="company.addresses[1].sameAsBilling"
-                    [ngClass]="{'--input-error' : !validate.getShippingAddress()}"
-                    (input)="validate.resetShippingAddress()"
-                >
-                <app-mat-error
-                    class="invalid-feedback"
-                    *ngIf="!validate.getShippingAddress()"
-                >
-                    Shipping Location Name is required
-                </app-mat-error>
-            </div>
-        </div>
-        <div class="qt-inputs-row">
-            <div class="qt-input-block">
-                <div class="qt-input-block__label">Location</div>
-                <input
-                    type="text"
-                    [(ngModel)]="company.addresses[1].address"
-                    (blur)="onCheckShippingAddress()"
-                    location-is-init="false"
-                    (focus)="onCheckGoogleAutoComplete($event,1)"
-                    placeholder="Enter Location"
-                    [disabled]="company.addresses[1].sameAsBilling"
-                >
-            </div>
-        </div>
-        <div class="qt-inputs-row">
-            <div class="qt-input-block qt-f33">
-                <div class="qt-input-block__label">Suite No.</div>
-                <input
-                    type="text"
-                    [(ngModel)]="company.addresses[1].suiteNumber"
-                    placeholder="Enter Suite Number"
-                    [disabled]="company.addresses[1].sameAsBilling"
-                >
-            </div>
-            <div class="qt-input-block qt-f33">
-                <div class="qt-input-block__label">Zip</div>
-                <input
-                    type="text"
-                    [(ngModel)]="company.addresses[1].postalCode"
-                    placeholder="Enter Zip"
-                    [disabled]="company.addresses[1].sameAsBilling"
-                >
-            </div>
-            <div class="qt-input-block qt-f33 --required">
-                <div class="qt-input-block__label">Phone Number</div>
-                <input
-                    type="text"
-                    (input)="onChangeShippingPhoneNumber()"
-                    [ngClass]="{'--input-error' : !validate.getShippingPhoneNumber()}"
-                    *ngIf="company.addresses[1].phoneNumbers.length > 0"
-                    [(ngModel)]="company.addresses[1].phoneNumbers[0].number"
-                    placeholder="Enter Phone Number"
-                    [disabled]="company.addresses[1].sameAsBilling"
-                    prefix="+1"
-                    mask="(000) 000-0000 Ext: 999999||000-000-0000"
-                    [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                    [dropSpecialCharacters]="false"
-                >
-                <app-mat-error
-                    class="invalid-feedback"
-                    *ngIf="!validate.getShippingPhoneNumber()"
-                >
-                    Phone number is required
-                </app-mat-error>
-            </div>
-        </div>
-        <div class="qt-inputs-row qt-inputs-row__divider">
             <div class="qt-input-block">
                 <div class="qt-input-block__subtitle qt-mt-12">Billing Address</div>
             </div>
@@ -306,6 +207,124 @@
                 </app-mat-error>
             </div>
         </div>
+        <div class="qt-inputs-row qt-inputs-row__divider">
+            <div class="qt-df qt-ai-c qt-jc-sb">
+                <div class="qt-input-block__label">
+                    <div class="qt-input-block__subtitle qt-mt-12">Shipping Address</div>
+                </div>
+                <div class="same-as-billing">
+                    <div class="qt-df qt-ai-c">
+                        <label
+                            class="qt-checkbox receive-full-amount-check qt-mb-0 pointer"
+                            for="email-payment"
+                        >
+                            <input
+                                id="email-payment"
+                                type="checkbox"
+                                (change)="onSameAsBilling($event)"
+                                [(ngModel)]="company.addresses[1].sameAsBilling"
+                            >
+                            <span></span>
+                        </label>
+                        <span class="qt-fs-12 qt-fw-600 qt-ml-8 same-as-billing-txt">Same as Billing Address</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="qt-inputs-row"
+            *ngIf="!company.addresses[1].sameAsBilling"
+        >
+            <div class="qt-input-block">
+                <div class="qt-input-block__label">Shipping Location Name</div>
+                <input
+                    type="text"
+                    [(ngModel)]="company.addresses[1].locationName"
+                    placeholder="Enter Location Name"
+                    [disabled]="company.addresses[1].sameAsBilling"
+                    [ngClass]="{'--input-error' : !validate.getShippingAddress()}"
+                    (input)="validate.resetShippingAddress()"
+                >
+                <app-mat-error
+                    class="invalid-feedback"
+                    *ngIf="!validate.getShippingAddress()"
+                >
+                    Shipping Location Name is required
+                </app-mat-error>
+            </div>
+        </div>
+        <div
+            class="qt-inputs-row"
+            *ngIf="!company.addresses[1].sameAsBilling"
+        >
+            <div class="qt-input-block">
+                <div class="qt-input-block__label">Location</div>
+                <input
+                    type="text"
+                    [(ngModel)]="company.addresses[1].address"
+                    (blur)="onCheckShippingAddress()"
+                    location-is-init="false"
+                    (focus)="onCheckGoogleAutoComplete($event,1)"
+                    placeholder="Enter Location"
+                    [disabled]="company.addresses[1].sameAsBilling"
+                >
+            </div>
+        </div>
+        <div
+            class="qt-inputs-row"
+            *ngIf="!company.addresses[1].sameAsBilling"
+        >
+            <div class="qt-input-block qt-f33">
+                <div class="qt-input-block__label">Suite No.</div>
+                <input
+                    type="text"
+                    [(ngModel)]="company.addresses[1].suiteNumber"
+                    placeholder="Enter Suite Number"
+                    [disabled]="company.addresses[1].sameAsBilling"
+                >
+            </div>
+            <div
+                class="qt-input-block qt-f33"
+                *ngIf="!company.addresses[1].sameAsBilling"
+            >
+                <div class="qt-input-block__label">Zip</div>
+                <input
+                    type="text"
+                    [(ngModel)]="company.addresses[1].postalCode"
+                    placeholder="Enter Zip"
+                    [disabled]="company.addresses[1].sameAsBilling"
+                >
+            </div>
+            <div
+                class="qt-input-block qt-f33 --required"
+                *ngIf="!company.addresses[1].sameAsBilling"
+            >
+                <div class="qt-input-block__label">Phone Number</div>
+                <input
+                    type="text"
+                    (input)="onChangeShippingPhoneNumber()"
+                    [ngClass]="{'--input-error' : !validate.getShippingPhoneNumber()}"
+                    *ngIf="company.addresses[1].phoneNumbers.length > 0"
+                    [(ngModel)]="company.addresses[1].phoneNumbers[0].number"
+                    placeholder="Enter Phone Number"
+                    [disabled]="company.addresses[1].sameAsBilling"
+                    prefix="+1"
+                    mask="(000) 000-0000 Ext: 999999||000-000-0000"
+                    [specialCharacters]="['(',')',' ','-','E','x','t',':']"
+                    [dropSpecialCharacters]="false"
+                >
+                <app-mat-error
+                    class="invalid-feedback"
+                    *ngIf="!validate.getShippingPhoneNumber()"
+                >
+                    Phone number is required
+                </app-mat-error>
+            </div>
+        </div>
+
+
+
+
         <div class="qt-inputs-row-background">
             <div class="qt-inputs-row">
                 <div class="qt-input-block">
