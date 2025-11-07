@@ -48,6 +48,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   jobTitleList: Array<CrmCompanyJobTitle> = [];
   listPersons: Array<ItemFilterPerson> = [];
   idUploadFile: string;
+  selectedJobTitle: CrmCompanyJobTitle;
   users = [];
   usersList = [];
   MODE_HIDE_ACTIVE = MODE_HIDE_ACTIVE;
@@ -117,6 +118,8 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     this.company.addresses[1].isPrimary = false;
     this.company.addresses[1].phoneNumbers[0].number = JSON.parse(JSON.stringify(this.company.addresses[0].phoneNumbers[0].number));
     this.company.addresses[1].locationName = JSON.parse(JSON.stringify(this.company.name));
+    if (this.company.contacts[0].customerCompaniesInfo[0].jobTitleDto) this.selectedJobTitle = this.jobTitleList.find(item => item.id === this.company.contacts[0].customerCompaniesInfo[0].jobTitleDto.id);
+
     this.validate.resetShippingAddress();
     this.onCroppImage();
     if (this.companyTimeZoneState.getTimeZone().length > 0) this.setTimeZone(this.companyTimeZoneState.getTimeZone());
@@ -336,6 +339,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     this.validate.checkValidFirstname(this.company.contacts[0].firstName);
   }
   onSelectJobTitle(data) {
+    this.selectedJobTitle = data;
     this.company.contacts[0].customerCompaniesInfo[0].setJobTitleDto(data);
   }
   public onChangePrimaryEmail() {
