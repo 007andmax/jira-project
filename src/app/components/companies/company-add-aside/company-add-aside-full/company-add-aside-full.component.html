@@ -218,7 +218,10 @@
             </div>
         </div>
     </div>
-    <div class="qt-inputs-row shipping-background">
+    <div
+        class="qt-inputs-row shipping-background"
+        *ngIf="!company.addresses[1].sameAsBilling"
+    >
         <div class="qt-input-block">
             <div class="qt-input-block__label">Shipping Location Name</div>
             <input
@@ -237,7 +240,10 @@
             </app-mat-error>
         </div>
     </div>
-    <div class="qt-inputs-row">
+    <div
+        class="qt-inputs-row"
+        *ngIf="!company.addresses[1].sameAsBilling"
+    >
         <div class="qt-input-block">
             <div class="qt-input-block__label">Location</div>
             <input
@@ -250,7 +256,10 @@
             >
         </div>
     </div>
-    <div class="qt-inputs-row">
+    <div
+        class="qt-inputs-row"
+        *ngIf="!company.addresses[1].sameAsBilling"
+    >
         <div class="qt-input-block qt-f50">
             <div class="qt-input-block__label">Suite No.</div>
             <input
@@ -260,7 +269,10 @@
                 [disabled]="company.addresses[1].sameAsBilling"
             >
         </div>
-        <div class="qt-input-block qt-f50">
+        <div
+            class="qt-input-block qt-f50"
+            *ngIf="!company.addresses[1].sameAsBilling"
+        >
             <div class="qt-input-block__label">Zip</div>
             <input
                 type="text"
@@ -269,7 +281,10 @@
                 [disabled]="company.addresses[1].sameAsBilling"
             >
         </div>
-        <div class="qt-input-block qt-f50 --required">
+        <div
+            class="qt-input-block qt-f50 --required"
+            *ngIf="!company.addresses[1].sameAsBilling"
+        >
             <div class="qt-input-block__label">Phone Number</div>
             <input
                 type="text"
@@ -292,8 +307,6 @@
             </app-mat-error>
         </div>
     </div>
-
-
     <div
         class="qt-inputs-row-background"
         [hidden]="!company.isUseSelectedUser"
