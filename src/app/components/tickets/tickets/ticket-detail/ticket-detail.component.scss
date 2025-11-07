@@ -717,7 +717,8 @@ app-ticket-change-status {
       border-left: 1px solid $gray-200;
       border-right: 1px solid $gray-200;
       background-color: $white;
-      @include dropdown-scrollbar;
+
+     @include dropdown-scrollbar-adaptive;
 
       &-inner {
         height: 100%;
@@ -770,7 +771,7 @@ app-ticket-change-status {
       height: 100%;
       border-right: 1px solid $gray-200;
 
-      @include dropdown-scrollbar;
+      @include dropdown-scrollbar-adaptive;
     }
     &__sidebar-info {
       position: relative;
@@ -782,7 +783,8 @@ app-ticket-change-status {
         background-color: $gray-50;
         overflow: auto;
         height: 100%;
-        @include dropdown-scrollbar;
+
+        @include dropdown-scrollbar-adaptive;
       }
     }
     &__sidebar-menu {
