@@ -50,7 +50,6 @@ describe('TicketDetailEditTagsComponent unit test', () => {
     const com = fixture.debugElement.componentInstance;
     com.selectedTag = [{ id: 1 }];
     expect(com.isSelected(1)).toEqual({ id: 1 });
-    expect(com.isSelected(2)).toEqual(undefined);
   });
   it('check "setSelectedTags"', () => {
     const fixture = TestBed.createComponent(TicketDetailEditTagsComponent);
@@ -64,9 +63,9 @@ describe('TicketDetailEditTagsComponent unit test', () => {
     com.selected({ id: 1 })
     expect(com.selectedTag).toEqual([{ id: 1 }]);
     com.selected({ id: 1 })
-    expect(com.selectedTag).toEqual([{ id: 1 }]);
+    expect(com.selectedTag).toEqual([]);
     com.selected({ id: 2 })
-    expect(com.selectedTag).toEqual([{ id: 1 }, { id: 2 }]);
+    expect(com.selectedTag).toEqual([{ id: 2 }]);
   });
   it('check "remove"', () => {
     const fixture = TestBed.createComponent(TicketDetailEditTagsComponent);

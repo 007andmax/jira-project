@@ -96,8 +96,11 @@ export class AddAssignedUserComponent implements OnInit {
     let find = this.selectedUsers.find(item => item.id === data.id);
     if (!find) {
       this.selectedUsers.push(data);
-      this.onSelected.emit(this.selectedUsers);
+    } else if (this.type == 'DETAIL_TICKET_ASSIGNED_USER' && this.selectedUsers.length > 1 || this.type != 'DETAIL_TICKET_ASSIGNED_USER') {
+      let index = this.selectedUsers.find(item => item.id === data.id);
+      this.selectedUsers.splice(index, 1);
     }
+    this.onSelected.emit(this.selectedUsers);
     this.userInput.nativeElement.blur();
     this.userCtrl.setValue(null);
     this.userInput.nativeElement.value = '';

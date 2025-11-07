@@ -163,10 +163,12 @@ export class TicketDetailEditTagsComponent implements OnInit, OnDestroy {
     if (!find) {
       this.selectedTag.push(tag);
       this.isChangeInput = false;
-      this.tagsChange.emit(this.selectedTag);
     } else {
+      let index = this.selectedTag.findIndex(item => item.id === tag.id);
+      this.selectedTag.splice(index, 1);
       this.isChangeInput = false;
     }
+    this.tagsChange.emit(this.selectedTag);
   }
   @HostListener('document:click', ['$event'])
   clickout(event) {

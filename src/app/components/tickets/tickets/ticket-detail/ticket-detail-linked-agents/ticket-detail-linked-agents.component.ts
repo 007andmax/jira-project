@@ -56,6 +56,10 @@ export class TicketDetailLinkedAgentsComponent extends PasswordManagerLinkedComp
     this.cd.detectChanges();
   }
   public selected(newItem) {
+    if (this.selectedDevice && this.selectedDevice.id === newItem.id) {
+      this.removeItem();
+      return;
+    }
     this.selectedDevice = newItem;
     this.changeLinkedAgent(newItem.deviceId);
   }
