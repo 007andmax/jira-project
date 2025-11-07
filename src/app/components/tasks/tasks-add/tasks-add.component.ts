@@ -133,6 +133,11 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     let onOpenAddTasks = this.tasksStateService.onOpenAddTasks.subscribe(res => {
       if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
       this.onInitStartEndDate();
+      this.modelForm.patchValue({
+        assignedUsersIds: [this.usersStateService.getCurrentUser().id],
+      })
+      this.selectedAssignedUsers = this.usersStateService.getAllUsers().filter(user => this.usersStateService.getCurrentUser().id == user.id);
+
       this.opened = true;
       // this.getServices();
     })

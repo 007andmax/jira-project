@@ -37,11 +37,15 @@ describe('TasksAddAssociateTicketsComponent unit test', () => {
 
   });
 
-  /* it('check "toggleItem"', () => {
-     const fixture = TestBed.createComponent(TasksAddAssociateTicketsComponent);
-     const com = fixture.debugElement.componentInstance;
-     com.toggleItem({ id: 1 });
-     expect(com.selectedTag).toEqual([{ id: 1 }]);
-   });*/
-
+  it('check "getSelectedItemText"', () => {
+    const fixture = TestBed.createComponent(TasksAddAssociateTicketsComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.getSelectedItemText()).toEqual('');
+  });
+  it('check "setDefaultScoll"', () => {
+    const fixture = TestBed.createComponent(TasksAddAssociateTicketsComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.page_number).toEqual(0);
+    expect(com.list).toEqual([]);
+  });
 });
