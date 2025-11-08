@@ -712,13 +712,14 @@ app-ticket-change-status {
 
     &__body {
       width: 900px;
-      overflow: auto;
       height: 100%;
       border-left: 1px solid $gray-200;
       border-right: 1px solid $gray-200;
       background-color: $white;
+      overflow: auto;
+      overflow-x: hidden;
 
-     @include dropdown-scrollbar-adaptive;
+      @include dropdown-scrollbar-adaptive;
 
       &-inner {
         height: 100%;

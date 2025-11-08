@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/dropdown";
 
 .tasks {
   &__header {
@@ -176,6 +177,8 @@
   max-height: 210px;
   overflow: auto;
   position: relative;
+
+  @include dropdown-scrollbar-adaptive;
 }
 .pengind-loading {
   top: unset;
