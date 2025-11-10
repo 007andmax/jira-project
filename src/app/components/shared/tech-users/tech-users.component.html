@@ -109,17 +109,13 @@
             ></div>
         </div>
     </div>
-    <app-dynamic-tooltip
-        [content]="'Set User'"
-        [position]="'top'"
-        #selectUserTooltip
-    ></app-dynamic-tooltip>
     <div
         class="tab-pane__user-circle qt-df qt-ai-c qt-jc-c pointer qt-fs-0 qt-mr-8 qt-circle"
         *ngIf="type === 'TICEKTS' && selectedUsers.length === 0 || type === 'CONTRACT' || type === 'TASKS' && selectedUsers.length === 0"
         id="dropdownTechuser"
-        (mouseenter)="selectUserTooltip.show($event.target)"
-        (mouseleave)="selectUserTooltip.hide()"
+        placement="top"
+        ngbTooltip="Set User"
+        container="body"
         ngbDropdownToggle
         [ngClass]="{'pointer':!isDisabled}"
     >

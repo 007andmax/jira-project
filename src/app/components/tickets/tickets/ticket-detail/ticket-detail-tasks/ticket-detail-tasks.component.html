@@ -60,6 +60,7 @@
             <div class="tab-pane__table-cell ticket-status-table__preview">
                 <app-task-header-add-type
                     #type
+                    [container]="'body'"
                     (onChange)="onSelectType($event)"
                 ></app-task-header-add-type>
             </div>
@@ -72,6 +73,7 @@
                     ></div>
                     <app-tasks-date-picker
                         #datePicker
+                        [container]="'body'"
                         (selectedDate)="filterByDate($event)"
                         (onCloseDropDown)="onCloseDatePicker($event)"
                     ></app-tasks-date-picker>

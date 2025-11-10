@@ -46,7 +46,10 @@
             (blur)="editTitle()"
             *ngIf="!(!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null)"
         >
-        <div class="qt-df qt-ai-c qt-w100">
+        <div
+            class="qt-df qt-ai-c qt-w100"
+            *ngIf="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null"
+        >
             <span
                 *ngIf="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || item.hasInvoice || item.taskStatus == 'CLOSED' || item.archivedAt !== null"
                 class="form-input  --editable"
