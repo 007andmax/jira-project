@@ -177,11 +177,12 @@
   max-height: 210px;
   height: 100%;
   position: relative;
+  overflow-x: hidden;
+
 
   .tab-pane__table-body {
     height: 100%;
-    overflow: auto;
-    overflow-x: hidden;
+    overflow-y: scroll;
 
     @include dropdown-scrollbar-adaptive;
   }
