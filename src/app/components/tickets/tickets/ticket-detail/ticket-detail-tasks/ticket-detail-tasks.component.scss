@@ -175,10 +175,16 @@
 }
 .tasks-list-container {
   max-height: 210px;
-  overflow: auto;
+  height: 100%;
   position: relative;
 
-  @include dropdown-scrollbar-adaptive;
+  .tab-pane__table-body {
+    height: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+
+    @include dropdown-scrollbar-adaptive;
+  }
 }
 .pengind-loading {
   top: unset;
