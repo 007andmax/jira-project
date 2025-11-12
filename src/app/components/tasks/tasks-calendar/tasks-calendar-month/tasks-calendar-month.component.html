@@ -1,0 +1,43 @@
+<div class="calendar-header">
+    <ng-template
+        ngFor
+        let-item
+        [ngForOf]="daysInWeek"
+    >
+        <div
+            class="calendar-header__item"
+            [textContent]="item"
+        ></div>
+    </ng-template>
+</div>
+<div class="weeks">
+    <div
+        *ngFor="let week of weeks"
+        class="week"
+    >
+        <div
+            *ngFor="let day of week"
+            class="day"
+            [class.empty]="!day.date"
+        >
+            <div
+                *ngIf="day.date"
+                class="date"
+            >
+                {{ day.date.getDate() }}
+            </div>
+            <div class="tasks">
+                <div
+                    *ngFor="let ev of day.tasks"
+                    class="task"
+                    [ngClass]="{'--meeting':ev.type == 'Meeting',
+                                            '--phone-call':ev.type == 'Phone call',
+                                            '--to-do':ev.type == 'To do'
+                                        }"
+                    [textContent]="ev.title"
+                >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

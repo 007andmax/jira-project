@@ -53,6 +53,9 @@ export class TasksService {
   getTaskDetail(taskId) {
     return this.http.get(`${this.apiUrl}tasks/${taskId}`);
   }
+  getTasksCalendar(start, interval) {
+    return this.http.get(`${this.apiUrl}tasks/calendar?start=${start}&interval=${interval}`);
+  }
   getStatistics(userId) {
     return this.http.get(`${this.apiUrl}tasks/statistics?userId=${userId}`);
   }

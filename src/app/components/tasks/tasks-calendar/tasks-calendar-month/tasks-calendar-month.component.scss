@@ -1,0 +1,104 @@
+@import "./src/assets/styles/variable";
+
+.weekdays,
+.week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.weekdays div {
+    text-align: center;
+    font-weight: bold;
+    padding: 8px 0;
+    background: #f9fafc;
+    border-bottom: 1px solid #eee;
+}
+
+.day {
+    height: 100px;
+    border: 1px solid #eee;
+    padding: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.day.empty {
+    background: #fafafa;
+}
+
+.date {
+    font-size: 12px;
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    color: #555;
+}
+
+.tasks {
+    margin-top: 20px;
+}
+
+.task {
+    border: 1px solid $gray-200;
+    font-weight: 500;
+    color: $gray-900;
+    height: 28px;
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 4px 4px 4px 12px;
+    margin-bottom: 4px;
+    position: relative;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 4px;
+        height: 20px;
+        border-radius: 4px;
+    }
+
+    &.--meeting {
+        &::after {
+            background-color: $purple-600;
+        }
+    }
+
+    &.--phone-call {
+        &::after {
+            background-color: $primary-blue-700;
+        }
+    }
+
+    &.--to-do {
+        &::after {
+            background-color: $gray-500;
+        }
+    }
+}
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #E8E8E8;
+    border-top: 1px solid #E8E8E8;
+    border-left: 1px solid #E8E8E8;
+
+    &__item {
+        background-color: $gray-50;
+        height: 44px;
+        color: $gray-500;
+        font-weight: 600;
+        padding-left: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        border-right: 1px solid #E8E8E8;
+    }
+}

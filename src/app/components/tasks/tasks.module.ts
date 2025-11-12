@@ -31,10 +31,13 @@ import { TasksEditComponent } from './tasks-edit/tasks-edit.component';
 import { TasksDatePickerModule } from './tasks-date-picker/tasks-date-picker.module';
 import { TasksAddAssignedUsersModule } from './tasks-add/tasks-add-assigned-users/tasks-add-assigned-users.module';
 import { TasksAddAssociateTicketsModule } from './tasks-add/tasks-add-associate-tickets/tasks-add-associate-tickets.module';
+import { TasksCalendarComponent } from './tasks-calendar/tasks-calendar.component';
+import { TasksCalendarMonthComponent } from './tasks-calendar/tasks-calendar-month/tasks-calendar-month.component';
+import { TasksCalendarWeekComponent } from './tasks-calendar/tasks-calendar-week/tasks-calendar-week.component';
 
 
 @NgModule({
-    declarations: [TasksComponent, TasksHeaderComponent, TasksListComponent, TasksTabsComponent
+    declarations: [TasksComponent, TasksHeaderComponent, TasksListComponent, TasksTabsComponent, TasksCalendarComponent, TasksCalendarMonthComponent, TasksCalendarWeekComponent
     ],
     imports: [
         CommonModule,
