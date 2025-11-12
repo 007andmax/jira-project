@@ -764,16 +764,20 @@ app-ticket-change-status {
     }
 
     &__sidebar-preview {
-      background-color: $white;
       width: 310px;
       min-width: 310px;
-      padding: 16px;
-      overflow-x: hidden;
-      overflow-y: auto;
       height: 100%;
+      background-color: $white;
       border-right: 1px solid $gray-200;
 
-      @include dropdown-scrollbar-adaptive;
+      &-inner {
+        padding: 16px;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        @include dropdown-scrollbar-adaptive;
+      }
     }
     &__sidebar-info {
       position: relative;

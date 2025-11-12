@@ -193,71 +193,73 @@
                 class="ticket-detail-page-content__sidebar-preview"
                 *ngIf="!showPreloader"
             >
-                <ticket-detail-claim-info [ticketProfile]="ticketProfile"></ticket-detail-claim-info>
-                <app-ticket-detail-total-statistics [ticketProfile]="ticketProfile"></app-ticket-detail-total-statistics>
-                <ticket-detail-change-status
+                <div class="ticket-detail-page-content__sidebar-preview-inner">
+                  <ticket-detail-claim-info [ticketProfile]="ticketProfile"></ticket-detail-claim-info>
+                  <app-ticket-detail-total-statistics [ticketProfile]="ticketProfile"></app-ticket-detail-total-statistics>
+                  <ticket-detail-change-status
                     #changeStatus
                     [ticketProfile]="ticketProfile"
-                ></ticket-detail-change-status>
-                <ticket-detail-change-priority [ticketProfile]="ticketProfile"></ticket-detail-change-priority>
-                <ticket-detail-change-company
+                  ></ticket-detail-change-status>
+                  <ticket-detail-change-priority [ticketProfile]="ticketProfile"></ticket-detail-change-priority>
+                  <ticket-detail-change-company
                     #changeCompany
                     [ticketProfile]="ticketProfile"
-                ></ticket-detail-change-company>
-                <div class="qt-inputs-row">
+                  ></ticket-detail-change-company>
+                  <div class="qt-inputs-row">
                     <div class="qt-input-block qt-f100">
-                        <company-users-drop-down
-                            #userDP
-                            [title]="' Ticket creator'"
-                            [class]="['qt-dropdown']"
-                            [placeholder]="'Select'"
-                            [field]="'name'"
-                            [dropdownHeight]="'345px'"
-                            [search]="true"
-                            [change]="true"
-                            [sort]="false"
-                            [isBlockClear]="true"
-                            [selectedItem]="ticketProfile.createdUser"
-                            [tooltipMessage]="'You can set a new company for the ticket unless the ticket contains at least one product/service update.'"
-                            [selectedCustomerCompany]="ticketProfile.selectedCustomerCompany"
-                            [isShowTooltip]="true"
-                            [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || getCompany(ticketProfile.company.id) && getCompany(ticketProfile.company.id).isUnknown || customerPortalStateService.isCustomerPortal"
-                            (onSelectedItem)="onSelectUser($event.user,$event.customerCompany)"
-                        ></company-users-drop-down>
+                      <company-users-drop-down
+                        #userDP
+                        [title]="' Ticket creator'"
+                        [class]="['qt-dropdown']"
+                        [placeholder]="'Select'"
+                        [field]="'name'"
+                        [dropdownHeight]="'345px'"
+                        [search]="true"
+                        [change]="true"
+                        [sort]="false"
+                        [isBlockClear]="true"
+                        [selectedItem]="ticketProfile.createdUser"
+                        [tooltipMessage]="'You can set a new company for the ticket unless the ticket contains at least one product/service update.'"
+                        [selectedCustomerCompany]="ticketProfile.selectedCustomerCompany"
+                        [isShowTooltip]="true"
+                        [isDisabled]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) || getCompany(ticketProfile.company.id) && getCompany(ticketProfile.company.id).isUnknown || customerPortalStateService.isCustomerPortal"
+                        (onSelectedItem)="onSelectUser($event.user,$event.customerCompany)"
+                      ></company-users-drop-down>
                     </div>
-                </div>
-                <ticket-detail-add-assigned-user
+                  </div>
+                  <ticket-detail-add-assigned-user
                     [ticketProfile]="ticketProfile"
                     [listAssignedUser]="listAssignedUser"
                     (onSelectAssignedUser)="onSelectAssignedUser($event)"
-                ></ticket-detail-add-assigned-user>
-                <ticket-detail-linked-agents
+                  ></ticket-detail-add-assigned-user>
+                  <ticket-detail-linked-agents
                     [ticketProfile]="ticketProfile"
                     [selectedCompanyId]="ticketProfile.company.id"
-                ></ticket-detail-linked-agents>
-                <ticket-detail-edit-tags
+                  ></ticket-detail-linked-agents>
+                  <ticket-detail-edit-tags
                     #ticketTags
                     [ticketProfile]="ticketProfile"
                     [selectedTag]="ticketProfile.tags"
                     (tagsChange)="onChangeTags($event,false)"
                     (tagsRemove)="onChangeTags($event,true)"
-                ></ticket-detail-edit-tags>
-                <ticket-detail-attachments
+                  ></ticket-detail-edit-tags>
+                  <ticket-detail-attachments
                     [ticketProfile]="ticketProfile"
                     [attachments]="ticketProfile.attachments"
-                ></ticket-detail-attachments>
-                <!-- <div class="qt-input-block">
-                    <span class="qt-input-block__label">Priority Level</span>
-                    <app-drop-down
-                        [class]="['qt-dropdown']"
-                        [field]="'title'"
-                        [isBlockClear]="true"
-                        [editItem]="selectedTicketPriorities"
-                        [list]="ticketPriorities"
-                        (onSelectedItem)="setPriorityLevel($event)"
-                        [placeholder]="'Low'"
-                    ></app-drop-down>
-                </div> -->
+                  ></ticket-detail-attachments>
+                  <!-- <div class="qt-input-block">
+                      <span class="qt-input-block__label">Priority Level</span>
+                      <app-drop-down
+                          [class]="['qt-dropdown']"
+                          [field]="'title'"
+                          [isBlockClear]="true"
+                          [editItem]="selectedTicketPriorities"
+                          [list]="ticketPriorities"
+                          (onSelectedItem)="setPriorityLevel($event)"
+                          [placeholder]="'Low'"
+                      ></app-drop-down>
+                  </div> -->
+                </div>
             </div>
             <div
                 class="ticket-detail-page-content__sidebar-info"
