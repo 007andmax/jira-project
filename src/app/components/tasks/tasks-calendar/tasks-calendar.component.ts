@@ -5,6 +5,7 @@ import * as moment from "moment";
 import { Task } from '../class/task';
 import { CalendarWeek } from '../class/calenadar-week';
 import { TasksCalendarMonthComponent } from './tasks-calendar-month/tasks-calendar-month.component';
+import { TasksCalendarWeekComponent } from './tasks-calendar-week/tasks-calendar-week.component';
 
 @Component({
   selector: 'app-tasks-calendar',
@@ -14,6 +15,7 @@ import { TasksCalendarMonthComponent } from './tasks-calendar-month/tasks-calend
 export class TasksCalendarComponent {
   toggleFilter: boolean = false;
   @ViewChild('monthly', { static: false }) monthly: TasksCalendarMonthComponent;
+  @ViewChild('weekly', { static: false }) weekly: TasksCalendarWeekComponent;
   currentDate = new Date();
 
 
@@ -41,16 +43,16 @@ export class TasksCalendarComponent {
     if (this.interval === 'MONTH') {
       this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, 1);
     }
-    if (this.monthly) this.getTasksCalendar();
-    this.getTasksCalendar();
+    if (this.monthly) this.monthly.prev()
+    if (this.weekly) this.weekly.prev()
   }
 
   next() {
     if (this.interval === 'MONTH') {
       this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 1);
     }
-    if (this.monthly) this.getTasksCalendar();
-    this.getTasksCalendar();
+    if (this.monthly) this.monthly.next()
+    if (this.weekly) this.weekly.next()
   }
 
 

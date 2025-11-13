@@ -12,12 +12,20 @@ import { TasksService } from 'src/app/services/tasks/tasks.service';
 export class TasksCalendarMonthComponent {
   daysInWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   weeks: CalendarMonth[][] = [];
-  @Input() currentDate = new Date();
+  currentDate = new Date();
 
   constructor(public tasksService: TasksService,
     public cd: ChangeDetectorRef,
   ) { }
   ngOnInit() {
+    this.getTasksCalendar();
+  }
+  prev() {
+    this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, 1);
+    this.getTasksCalendar();
+  }
+  next() {
+    this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 1);
     this.getTasksCalendar();
   }
   public getTasksCalendar() {

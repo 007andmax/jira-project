@@ -34,10 +34,12 @@ import { TasksAddAssociateTicketsModule } from './tasks-add/tasks-add-associate-
 import { TasksCalendarComponent } from './tasks-calendar/tasks-calendar.component';
 import { TasksCalendarMonthComponent } from './tasks-calendar/tasks-calendar-month/tasks-calendar-month.component';
 import { TasksCalendarWeekComponent } from './tasks-calendar/tasks-calendar-week/tasks-calendar-week.component';
+import { TasksCalendarMonthItemWeekComponent } from './tasks-calendar/tasks-calendar-month/tasks-calendar-month-item-week/tasks-calendar-month-item-week.component';
+import { TasksCalendarWeekItemHourComponent } from './tasks-calendar/tasks-calendar-week/tasks-calendar-week-item-hour/tasks-calendar-week-item-hour.component';
 
 
 @NgModule({
-    declarations: [TasksComponent, TasksHeaderComponent, TasksListComponent, TasksTabsComponent, TasksCalendarComponent, TasksCalendarMonthComponent, TasksCalendarWeekComponent
+    declarations: [TasksComponent, TasksHeaderComponent, TasksListComponent, TasksTabsComponent, TasksCalendarComponent, TasksCalendarMonthComponent, TasksCalendarWeekComponent, TasksCalendarMonthItemWeekComponent, TasksCalendarWeekItemHourComponent
     ],
     imports: [
         CommonModule,

@@ -62,9 +62,11 @@
                     <app-tasks-calendar-month
                         #monthly
                         *ngIf="interval == 'MONTH'"
-                        [currentDate]="currentDate"
                     ></app-tasks-calendar-month>
-                    <app-tasks-calendar-week *ngIf="interval == 'WEEK'"></app-tasks-calendar-week>
+                    <app-tasks-calendar-week
+                        #weekly
+                        *ngIf="interval == 'WEEK'"
+                    ></app-tasks-calendar-week>
                 </div>
             </div>
 

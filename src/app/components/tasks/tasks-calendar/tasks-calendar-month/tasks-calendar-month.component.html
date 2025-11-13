@@ -20,24 +20,7 @@
             class="day"
             [class.empty]="!day.date"
         >
-            <div
-                *ngIf="day.date"
-                class="date"
-            >
-                {{ day.date.getDate() }}
-            </div>
-            <div class="tasks">
-                <div
-                    *ngFor="let ev of day.tasks"
-                    class="task"
-                    [ngClass]="{'--meeting':ev.type == 'Meeting',
-                                            '--phone-call':ev.type == 'Phone call',
-                                            '--to-do':ev.type == 'To do'
-                                        }"
-                    [textContent]="ev.title"
-                >
-                </div>
-            </div>
+            <app-tasks-calendar-month-item-week [day]="day"></app-tasks-calendar-month-item-week>
         </div>
     </div>
 </div>

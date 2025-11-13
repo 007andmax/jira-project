@@ -3175,3 +3175,8 @@ app-ticket-detail-tasks-item {
      min-height: unset !important;
    }
  }
+.tasks-more-popup {
+  border-radius: 6px;
+  padding: 8px;
+  background-color: $white;
+}

@@ -6,8 +6,8 @@
         [ngForOf]="days"
     >
         <div class="calendar-header__item">
-            <div>{{ day | date: 'EEE' }}</div>
-            <div>{{ day | date: 'd' }}</div>
+            <div>{{ day.date | date: 'EEE' }}</div>
+            <div>{{ day.date | date: 'd' }}</div>
         </div>
     </ng-template>
 </div>
@@ -26,21 +26,10 @@
                 class="hour-cell"
                 *ngFor="let h of hours"
             >
-                <ng-template
-                    ngFor
-                    let-task
-                    [ngForOf]="day.tasks"
-                >
-                    <div
-                        class="task"
-                        [ngClass]="{'--meeting':task.type == 'Meeting',
-                                            '--phone-call':task.type == 'Phone call',
-                                            '--to-do':task.type == 'To do'
-                                        }"
-                        [textContent]="task.title"
-                    >
-                    </div>
-                </ng-template>
+                <app-tasks-calendar-week-item-hour
+                    [day]="day"
+                    [h]="h"
+                ></app-tasks-calendar-week-item-hour>
             </div>
 
         </div>

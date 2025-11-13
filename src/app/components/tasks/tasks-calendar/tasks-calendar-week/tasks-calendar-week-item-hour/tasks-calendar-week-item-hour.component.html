@@ -1,0 +1,57 @@
+<ng-template
+    ngFor
+    let-task
+    let-index="index"
+    [ngForOf]="getListStartOfHour()"
+>
+    <div
+        *ngIf="index == 0"
+        class="task"
+        [ngClass]="{'--meeting':task.type == 'Meeting',
+                                            '--phone-call':task.type == 'Phone call',
+                                            '--to-do':task.type == 'To do'
+                                        }"
+        [textContent]="task.title"
+        (click)="editTask(task)"
+    >
+    </div>
+</ng-template>
+<div
+    *ngIf="getListStartOfHour().length > 1"
+    class="more-tasks"
+    [textContent]="'+' + (getListStartOfHour().length - 1) + ' more'"
+    [ngbPopover]="popContent"
+    [autoClose]="false"
+    triggers="manual"
+    #p="ngbPopover"
+    (click)="p.open()"
+    container="body"
+></div>
+<ng-template #popContent>
+    <div class="tasks-more-popup">
+        <div
+            class="qt-button --square-md --gray pointer qt-ml-8"
+            (click)="p.close()"
+        >
+            <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+        </div>
+        <ng-template
+            ngFor
+            let-ev
+            let-index="index"
+            [ngForOf]="day.tasks"
+        >
+            <div
+                *ngIf="index >= 2"
+                class="task"
+                [ngClass]="{'--meeting':ev.type == 'Meeting',
+                                            '--phone-call':ev.type == 'Phone call',
+                                            '--to-do':ev.type == 'To do'
+                                        }"
+                [textContent]="ev.title"
+                (click)="editTask(ev)"
+            >
+            </div>
+        </ng-template>
+    </div>
+</ng-template>

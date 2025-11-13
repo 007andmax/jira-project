@@ -34,53 +34,7 @@
     color: #555;
 }
 
-.tasks {
-    margin-top: 20px;
-}
 
-.task {
-    border: 1px solid $gray-200;
-    font-weight: 500;
-    color: $gray-900;
-    height: 28px;
-    font-size: 14px;
-    border-radius: 4px;
-    padding: 4px 4px 4px 12px;
-    margin-bottom: 4px;
-    position: relative;
-    cursor: pointer;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    &::after {
-        content: '';
-        position: absolute;
-        top: 4px;
-        left: 4px;
-        width: 4px;
-        height: 20px;
-        border-radius: 4px;
-    }
-
-    &.--meeting {
-        &::after {
-            background-color: $purple-600;
-        }
-    }
-
-    &.--phone-call {
-        &::after {
-            background-color: $primary-blue-700;
-        }
-    }
-
-    &.--to-do {
-        &::after {
-            background-color: $gray-500;
-        }
-    }
-}
 
 .calendar-header {
     display: flex;

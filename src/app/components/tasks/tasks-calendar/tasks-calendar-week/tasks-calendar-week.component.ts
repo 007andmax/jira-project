@@ -12,12 +12,27 @@ export class TasksCalendarWeekComponent {
   days: CalendarWeek[] = [];
   weekStart!: Date;
   hours: number[] = Array.from({ length: 24 }, (_, i) => i);
-  @Input() currentDate = new Date();
   constructor(public tasksService: TasksService,
     public cd: ChangeDetectorRef,
   ) { }
   ngOnInit() {
     console.log("hours", this.hours);
+    let currentDate = new Date();
+    const dayOfWeek = currentDate.getDay(); // 0 = Sun
+    this.weekStart = new Date(currentDate);
+    this.weekStart.setDate(currentDate.getDate() - dayOfWeek);
+    this.getTasksCalendar();
+  }
+  prev() {
+    const d = new Date(this.weekStart);
+    d.setDate(this.weekStart.getDate() - 7);
+    this.weekStart = d;
+    this.getTasksCalendar();
+  }
+  next() {
+    const d = new Date(this.weekStart);
+    d.setDate(this.weekStart.getDate() + 7);
+    this.weekStart = d;
     this.getTasksCalendar();
   }
   generateWeek() {
@@ -28,10 +43,8 @@ export class TasksCalendarWeekComponent {
       this.days.push(new CalendarWeek(d));
     }
   }
+
   public getTasksCalendar() {
-    const dayOfWeek = this.currentDate.getDay(); // 0 = Sun
-    this.weekStart = new Date(this.currentDate);
-    this.weekStart.setDate(this.currentDate.getDate() - dayOfWeek);
     this.generateWeek();
 
     this.tasksService.getTasksCalendar(moment(this.days[0].date).format('YYYY-MM-DD'), 'WEEK').subscribe((data: any) => {
