@@ -41,7 +41,6 @@
                                     ngbButton
                                     type="radio"
                                     [value]="'WEEK'"
-                                    (change)="onChangeInterval()"
                                 >
                                 Week
                             </label>
@@ -53,7 +52,6 @@
                                     ngbButton
                                     type="radio"
                                     [value]="'MONTH'"
-                                    (change)="onChangeInterval()"
                                 >
                                 Month
                             </label>
@@ -62,10 +60,12 @@
                     <app-tasks-calendar-month
                         #monthly
                         *ngIf="interval == 'MONTH'"
+                        [filter]="filter"
                     ></app-tasks-calendar-month>
                     <app-tasks-calendar-week
                         #weekly
                         *ngIf="interval == 'WEEK'"
+                        [filter]="filter"
                     ></app-tasks-calendar-week>
                 </div>
             </div>

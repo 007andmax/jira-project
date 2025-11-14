@@ -1,4 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { TaskAddCalendar } from 'src/app/components/tasks/class/task-add-calendar';
 import { TasksFilters } from 'src/app/components/tasks/class/tasks-filters';
 
 @Injectable({
@@ -11,8 +12,13 @@ export class TasksStateService {
   onFilter: EventEmitter<any> = new EventEmitter();
   onToggleFilter: EventEmitter<any> = new EventEmitter();
   onFastRemove: EventEmitter<any> = new EventEmitter();
+  taskAddCalendar: TaskAddCalendar;
   filter: TasksFilters = new TasksFilters();
   constructor() { }
+
+  public setTaskAddCalendar(data) {
+    this.taskAddCalendar = data;
+  }
   public fastRemoveTask(data) {
     this.onFastRemove.emit(data);
   }

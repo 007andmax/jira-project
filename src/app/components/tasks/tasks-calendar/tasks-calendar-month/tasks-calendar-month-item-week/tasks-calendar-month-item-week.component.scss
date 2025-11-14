@@ -47,3 +47,18 @@
         }
     }
 }
+.date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    font-size: 14px;
+    font-weight: 500;
+    color: $gray-900;
+}
+.--current-day {
+    background-color: $blue-light-600;
+    color: $white;
+    padding: 6px;
+    border-radius: 50%;
+}

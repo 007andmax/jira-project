@@ -53,8 +53,8 @@ export class TasksService {
   getTaskDetail(taskId) {
     return this.http.get(`${this.apiUrl}tasks/${taskId}`);
   }
-  getTasksCalendar(start, interval) {
-    return this.http.get(`${this.apiUrl}tasks/calendar?start=${start}&interval=${interval}`);
+  getTasksCalendar(start, interval, techUserId = null, filter = null, isArchived = false) {
+    return this.http.get(`${this.apiUrl}tasks/calendar?start=${start}&interval=${interval}${techUserId ? `&userId=${techUserId}` : ''}${filter ? `&filter=${filter}` : ''}${isArchived ? `&archived=true` : ''}`);
   }
   getStatistics(userId) {
     return this.http.get(`${this.apiUrl}tasks/statistics?userId=${userId}`);

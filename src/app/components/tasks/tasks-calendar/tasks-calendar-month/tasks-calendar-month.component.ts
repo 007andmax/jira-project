@@ -3,6 +3,10 @@ import * as moment from "moment";
 import { CalendarMonth } from '../../class/calenadar-month';
 import { Task } from '../../class/task';
 import { TasksService } from 'src/app/services/tasks/tasks.service';
+import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { TaskAddCalendar } from '../../class/task-add-calendar';
+import { TasksFilters } from '../../class/tasks-filters';
 
 @Component({
   selector: 'app-tasks-calendar-month',
@@ -10,11 +14,14 @@ import { TasksService } from 'src/app/services/tasks/tasks.service';
   styleUrls: ['./tasks-calendar-month.component.scss']
 })
 export class TasksCalendarMonthComponent {
+  @Input() filter: TasksFilters = new TasksFilters();
   daysInWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   weeks: CalendarMonth[][] = [];
   currentDate = new Date();
 
   constructor(public tasksService: TasksService,
+    public tasksStateService: TasksStateService,
+    public usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,
   ) { }
   ngOnInit() {
@@ -28,9 +35,15 @@ export class TasksCalendarMonthComponent {
     this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 1);
     this.getTasksCalendar();
   }
+  onAddTask(data) {
+    this.tasksStateService.setTaskAddCalendar(new TaskAddCalendar({
+      startDate: data.startDate,
+      assignedUser: this.usersStateService.getCurrentUser()
+    }));
+  }
   public getTasksCalendar() {
     this.generateCalendar(this.currentDate);
-    this.tasksService.getTasksCalendar(moment(this.weeks[0][0].date).format('YYYY-MM-DD'), 'MONTH').subscribe((data: any) => {
+    this.tasksService.getTasksCalendar(moment(this.weeks[0][0].date).format('YYYY-MM-DD'), 'MONTH', this.filter.techUser ? this.filter.techUser.id : null, this.filter.filter, this.filter.archived).subscribe((data: any) => {
       // this.populateTasksToDays(data.tasks);
       this.weeks.forEach(week => {
         week.forEach(day => {

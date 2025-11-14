@@ -36,6 +36,7 @@ import { TasksCalendarMonthComponent } from './tasks-calendar/tasks-calendar-mon
 import { TasksCalendarWeekComponent } from './tasks-calendar/tasks-calendar-week/tasks-calendar-week.component';
 import { TasksCalendarMonthItemWeekComponent } from './tasks-calendar/tasks-calendar-month/tasks-calendar-month-item-week/tasks-calendar-month-item-week.component';
 import { TasksCalendarWeekItemHourComponent } from './tasks-calendar/tasks-calendar-week/tasks-calendar-week-item-hour/tasks-calendar-week-item-hour.component';
+import { TaskHeaderAddModule } from './task-header-add/task-header-add.module';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { TasksCalendarWeekItemHourComponent } from './tasks-calendar/tasks-calen
         TasksListItemModule,
         TasksDatePickerModule,
         TasksAddAssignedUsersModule,
-        TasksAddAssociateTicketsModule
+        TasksAddAssociateTicketsModule,
+        TaskHeaderAddModule
     ],
 
 })

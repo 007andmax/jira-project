@@ -6,6 +6,9 @@ import { Task } from '../class/task';
 import { CalendarWeek } from '../class/calenadar-week';
 import { TasksCalendarMonthComponent } from './tasks-calendar-month/tasks-calendar-month.component';
 import { TasksCalendarWeekComponent } from './tasks-calendar-week/tasks-calendar-week.component';
+import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
+import { TasksFilters } from '../class/tasks-filters';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tasks-calendar',
@@ -17,27 +20,38 @@ export class TasksCalendarComponent {
   @ViewChild('monthly', { static: false }) monthly: TasksCalendarMonthComponent;
   @ViewChild('weekly', { static: false }) weekly: TasksCalendarWeekComponent;
   currentDate = new Date();
-
-
+  filter: TasksFilters = new TasksFilters();
+  sub: Subscription = new Subscription();
 
   interval: string = 'MONTH';
   constructor(public tasksService: TasksService,
+    public tasksStateService: TasksStateService,
     public cd: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
-    this.getTasksCalendar();
+    console.log("this.tasksStateService", this.tasksStateService.filter)
+    this.filter = this.tasksStateService.filter;
+    let geLefttFilter = this.tasksStateService.onFilter.subscribe((data) => {
+      document.body.querySelector(".main-container").scrollTo(0, 0);
+      this.filter.setFilterData(data);
+      if (this.monthly) {
+        this.monthly.filter = this.filter;
+        this.monthly.getTasksCalendar();
+      }
+      if (this.weekly) {
+        this.weekly.filter = this.filter;
+        this.weekly.getTasksCalendar();
+      }
+      this.cd.detectChanges();
+    });
+    this.sub.add(geLefttFilter);
   }
-  getTasksCalendar() {
 
-  }
 
 
   parseCurrentDate() {
     return moment(this.currentDate).format('MMMM YYYY');
-  }
-  onChangeInterval() {
-    this.getTasksCalendar();
   }
   prev() {
     if (this.interval === 'MONTH') {
@@ -66,5 +80,8 @@ export class TasksCalendarComponent {
    }*/
   onToggleFilter(data) {
     this.toggleFilter = data;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

@@ -3,16 +3,23 @@ import * as moment from "moment";
 import { TasksService } from 'src/app/services/tasks/tasks.service';
 import { CalendarWeek } from '../../class/calenadar-week';
 import { Task } from '../../class/task';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
+import { TaskAddCalendar } from '../../class/task-add-calendar';
+import { TasksFilters } from '../../class/tasks-filters';
 @Component({
   selector: 'app-tasks-calendar-week',
   templateUrl: './tasks-calendar-week.component.html',
   styleUrls: ['./tasks-calendar-week.component.scss']
 })
 export class TasksCalendarWeekComponent {
+  @Input() filter: TasksFilters = new TasksFilters();
   days: CalendarWeek[] = [];
   weekStart!: Date;
   hours: number[] = Array.from({ length: 24 }, (_, i) => i);
   constructor(public tasksService: TasksService,
+    public usersStateService: UsersStateService,
+    public tasksStateService: TasksStateService,
     public cd: ChangeDetectorRef,
   ) { }
   ngOnInit() {
@@ -43,11 +50,22 @@ export class TasksCalendarWeekComponent {
       this.days.push(new CalendarWeek(d));
     }
   }
-
+  onAddTask(data) {
+    this.tasksStateService.setTaskAddCalendar(new TaskAddCalendar({
+      startDate: data.startDate,
+      assignedUser: this.usersStateService.getCurrentUser()
+    }));
+  }
+  isCurrentDay(date): boolean {
+    const today = new Date();
+    return today.getFullYear() === date.getFullYear() &&
+      today.getMonth() === date.getMonth() &&
+      today.getDate() === date.getDate();
+  }
   public getTasksCalendar() {
     this.generateWeek();
 
-    this.tasksService.getTasksCalendar(moment(this.days[0].date).format('YYYY-MM-DD'), 'WEEK').subscribe((data: any) => {
+    this.tasksService.getTasksCalendar(moment(this.days[0].date).format('YYYY-MM-DD'), 'WEEK', this.filter.techUser ? this.filter.techUser.id : null, this.filter.filter, this.filter.archived).subscribe((data: any) => {
       // this.populateTasksToDays(data.tasks);
       this.days.forEach(day => {
         let find = data.days.find(d => {

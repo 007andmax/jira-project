@@ -1,7 +1,8 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { CalendarWeek } from '../../../class/calenadar-week';
 import { Task } from '../../../class/task';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-tasks-calendar-week-item-hour',
@@ -12,7 +13,10 @@ export class TasksCalendarWeekItemHourComponent {
   @Input() day: CalendarWeek;
   @Input() h: Number;
   @ViewChild('p', { static: false }) p: any;
-  constructor(private tasksStateService: TasksStateService) { }
+  @Output() onAddTask = new EventEmitter();
+  constructor(private tasksStateService: TasksStateService,
+    public usersStateService: UsersStateService,
+  ) { }
 
   isStartOfHour(date, hour): boolean {
     return new Date(date).getHours() === hour;
@@ -22,5 +26,11 @@ export class TasksCalendarWeekItemHourComponent {
   }
   editTask(task) {
     this.tasksStateService.openEditAside(task);
+  }
+  addTask() {
+    this.onAddTask.emit({
+      startDate: new Date(this.day.date.getFullYear(), this.day.date.getMonth(), this.day.date.getDate(), Number(this.h), 0, 0),
+      assignedUsersIds: [this.usersStateService.getCurrentUser().id]
+    });
   }
 }

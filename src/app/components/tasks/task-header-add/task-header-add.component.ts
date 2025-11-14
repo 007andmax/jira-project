@@ -16,6 +16,7 @@ import { Task } from '../class/task';
 import * as moment from "moment";
 import { TasksDatePickerComponent } from '../tasks-date-picker/tasks-date-picker.component';
 import { TaskHeaderAddTypeComponent } from './task-header-add-type/task-header-add-type.component';
+import { TechUsersComponent } from '../../shared/tech-users/tech-users.component';
 
 @Component({
   selector: 'app-task-header-add',
@@ -29,7 +30,7 @@ export class TaskHeaderAddComponent {
   submitted: boolean = false;
   formatDate: string = FORMAT_DATE_2;
   @ViewChild('type', { static: true }) type: TaskHeaderAddTypeComponent;
-  @ViewChild('tachUser', { static: true }) tachUser: TasksDatePickerComponent;
+  @ViewChild('tachUser', { static: true }) tachUser: TechUsersComponent;
   @ViewChild('datePicker', { static: true }) datePicker: TasksDatePickerComponent;
   @ViewChild('saveBtn', { static: false }) saveBtn: DisabledBtnDirective;
   sub: Subscription = new Subscription();
@@ -46,6 +47,7 @@ export class TaskHeaderAddComponent {
     public modalService: NgbModal,
   ) { }
   ngOnInit() {
+    if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetTechUsers(data);
     })
@@ -54,6 +56,17 @@ export class TaskHeaderAddComponent {
       this.onGetTechUsers(this.usersStateService.getAllUsers());
     })
     this.sub.add(onChangeUsers);
+    if (this.tasksStateService.taskAddCalendar) {
+      this.initModelForm();
+      this.modelForm.patchValue({
+        startDate: this.tasksStateService.taskAddCalendar.startDate,
+        endDate: this.tasksStateService.taskAddCalendar.startDate,
+        assignedUsersIds: [this.tasksStateService.taskAddCalendar.assignedUser.id],
+      });
+      this.tachUser.setEditUsers([this.tasksStateService.taskAddCalendar.assignedUser]);
+      this.datePicker.setEditDates(this.tasksStateService.taskAddCalendar.startDate, this.tasksStateService.taskAddCalendar.startDate);
+      this.tasksStateService.setTaskAddCalendar(null);
+    }
   }
   initModelForm() {
     let step = 1;

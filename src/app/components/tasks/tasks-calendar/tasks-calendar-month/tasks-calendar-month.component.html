@@ -19,8 +19,32 @@
             *ngFor="let day of week"
             class="day"
             [class.empty]="!day.date"
+            ngbDropdown
+            [autoClose]="false"
+            #addTask="ngbDropdown"
+            placement="bottom-right"
+            container="body"
         >
-            <app-tasks-calendar-month-item-week [day]="day"></app-tasks-calendar-month-item-week>
+            <app-tasks-calendar-month-item-week
+                [day]="day"
+                (onAddTask)="onAddTask($event);addTask.open();"
+            ></app-tasks-calendar-month-item-week>
+            <div
+                class="create-tasks-toogle"
+                id="dropdownCreateTask"
+                ngbDropdownToggle
+            >
+            </div>
+            <div
+                class="qt-dropdown-menu"
+                ngbDropdownMenu
+                aria-labelledby="dropdownCreateTask"
+            >
+                <app-task-header-add
+                    *ngIf="addTask.isOpen()"
+                    (onClose)="addTask.close()"
+                ></app-task-header-add>
+            </div>
         </div>
     </div>
 </div>

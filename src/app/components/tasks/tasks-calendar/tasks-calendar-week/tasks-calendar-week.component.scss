@@ -26,14 +26,6 @@
     background: #fafafa;
 }
 
-.date {
-    font-size: 12px;
-    position: absolute;
-    top: 4px;
-    right: 6px;
-    color: #555;
-}
-
 .tasks {
     margin-top: 20px;
 }
@@ -112,4 +104,20 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+.date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    font-size: 14px;
+    font-weight: 500;
+    color: $gray-900;
+}
+
+.--current-day {
+    background-color: $blue-light-600;
+    color: $white;
+    padding: 6px;
+    border-radius: 50%;
 }
