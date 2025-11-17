@@ -81,9 +81,14 @@
     height: calc(60px * 24);
 }
 
-.hour-cell {
+::ng-deep.hour-cell {
     height: 60px;
     border-bottom: 1px solid #f1f1f1;
+    &:hover {
+        .add-tasks {
+            display:block;
+        }
+    }
 }
 
 .event {

@@ -14,12 +14,17 @@
     border-bottom: 1px solid #eee;
 }
 
-.day {
+::ng-deep.day {
     height: 100px;
     border: 1px solid #eee;
     padding: 4px;
     position: relative;
     overflow: hidden;
+    &:hover {
+        .add-tasks {
+            display:block;
+        }
+    }
 }
 
 .day.empty {

@@ -51,6 +51,8 @@ export class TasksCalendarComponent {
 
 
   parseCurrentDate() {
+    if (this.monthly) return moment(this.monthly.currentDate).format('MMMM YYYY');
+    if (this.weekly) return moment(this.weekly.weekStart).format('DD MMMM YYYY') + ' - ' + moment(this.weekly.weekEnd).format('DD MMMM YYYY');
     return moment(this.currentDate).format('MMMM YYYY');
   }
   prev() {

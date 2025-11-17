@@ -18,6 +18,7 @@ export class TasksCalendarWeekComponent implements OnInit, OnDestroy {
   @Input() filter: TasksFilters = new TasksFilters();
   days: CalendarWeek[] = [];
   weekStart!: Date;
+  weekEnd!: Date;
   hours: number[] = Array.from({ length: 24 }, (_, i) => i);
   timeLinePosition = 0;
   private timer!: any;
@@ -115,6 +116,10 @@ export class TasksCalendarWeekComponent implements OnInit, OnDestroy {
         });
         if (find) day.tasks = find.tasks.map(t => new Task(t));
       });
+      const weekEnd = new Date(this.weekStart);
+      weekEnd.setDate(this.weekStart.getDate() + 6);
+      this.weekEnd = new Date(data.end);
+      console.log("this.weekEnd", this.weekEnd);
       console.log("data", data);
       console.log("this.days", this.days);
       this.cd.detectChanges();
