@@ -57,6 +57,7 @@
     width: 80px;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .time-column div {
@@ -121,3 +122,12 @@
     padding: 6px;
     border-radius: 50%;
 }
+.current-time-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px !important;
+    background: red;
+    z-index: 5;
+}
+ 

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, NgZone, OnDestroy, OnInit } from '@angular/core';
 import * as moment from "moment";
 import { TasksService } from 'src/app/services/tasks/tasks.service';
 import { CalendarWeek } from '../../class/calenadar-week';
@@ -7,20 +7,28 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { TaskAddCalendar } from '../../class/task-add-calendar';
 import { TasksFilters } from '../../class/tasks-filters';
+import { Subscription } from 'rxjs';
+import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
 @Component({
   selector: 'app-tasks-calendar-week',
   templateUrl: './tasks-calendar-week.component.html',
   styleUrls: ['./tasks-calendar-week.component.scss']
 })
-export class TasksCalendarWeekComponent {
+export class TasksCalendarWeekComponent implements OnInit, OnDestroy {
   @Input() filter: TasksFilters = new TasksFilters();
   days: CalendarWeek[] = [];
   weekStart!: Date;
   hours: number[] = Array.from({ length: 24 }, (_, i) => i);
+  timeLinePosition = 0;
+  private timer!: any;
+  currentTime = new Date();
+  sub: Subscription = new Subscription();
   constructor(public tasksService: TasksService,
     public usersStateService: UsersStateService,
     public tasksStateService: TasksStateService,
+    private zone: NgZone,
     public cd: ChangeDetectorRef,
+    public tasksRealTimeService: TasksRealTimeService,
   ) { }
   ngOnInit() {
     console.log("hours", this.hours);
@@ -29,6 +37,37 @@ export class TasksCalendarWeekComponent {
     this.weekStart = new Date(currentDate);
     this.weekStart.setDate(currentDate.getDate() - dayOfWeek);
     this.getTasksCalendar();
+    this.startTimelineUpdater();
+    let getChangeCompanies = this.tasksRealTimeService.changeTasksArray.subscribe((data) => {
+      this.days.forEach(day => {
+        const taskDate = new Date(data.data.startDate);
+        if (day.date.getFullYear() === taskDate.getFullYear() &&
+          day.date.getMonth() === taskDate.getMonth() &&
+          day.date.getDate() === taskDate.getDate()) {
+          if (data.action === 'TASK_SAVED' && this.filter.checkFilterUse(new Task(data.data))) day.tasks.push(new Task(data.data));
+          if (data.action === 'TASK_EDITED') {
+            let index = day.tasks.findIndex(item => item.id == data.data.id);
+            if (index > -1) {
+              day.tasks[index] = new Task(data.data);
+            }
+          }
+          if (data.action === 'TASK_DELETED') {
+            let index = day.tasks.findIndex(item => item.id == data.data);
+            if (index > -1) {
+              day.tasks.splice(index, 1);
+            }
+          }
+          if (data.action === 'TASK_ARCHIVED') {
+            let index = day.tasks.findIndex(item => item.id == data.data);
+            if (index > -1 && !this.filter.archived) {
+              day.tasks.splice(index, 1);
+            }
+          }
+        }
+      });
+      this.cd.detectChanges();
+    })
+    this.sub.add(getChangeCompanies);
   }
   prev() {
     const d = new Date(this.weekStart);
@@ -80,5 +119,31 @@ export class TasksCalendarWeekComponent {
       console.log("this.days", this.days);
       this.cd.detectChanges();
     });
+  }
+  isToday(day: Date): boolean {
+    const now = new Date();
+    return (
+      day.getFullYear() === now.getFullYear() &&
+      day.getMonth() === now.getMonth() &&
+      day.getDate() === now.getDate()
+    );
+  }
+  startTimelineUpdater() {
+    this.zone.runOutsideAngular(() => {
+      this.timer = setInterval(() => {
+        this.zone.run(() => {
+          this.currentTime = new Date();
+          const hours = this.currentTime.getHours() + this.currentTime.getMinutes() / 60;
+          this.timeLinePosition = hours * 60; // 1 hour = 60px
+        });
+      }, 60000); // update every minute
+    });
+    // initial position
+    const hours = this.currentTime.getHours() + this.currentTime.getMinutes() / 60;
+    this.timeLinePosition = hours * 60;
+  }
+  ngOnDestroy() {
+    clearInterval(this.timer);
+    this.sub.unsubscribe();
   }
 }

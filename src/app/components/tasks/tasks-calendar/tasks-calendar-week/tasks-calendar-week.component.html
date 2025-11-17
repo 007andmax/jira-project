@@ -21,6 +21,10 @@
         <div *ngFor="let h of hours">
             {{ h === 0 ? '12am' : (h < 12 ? h + 'am' : (h === 12 ? '12pm' : (h - 12) + 'pm')) }}
         </div>
+        <div
+            class="current-time-line"
+            [ngStyle]="{ top: timeLinePosition + 'px' }"
+        ></div>
     </div>
     <div class="days-grid">
         <div
@@ -58,7 +62,10 @@
                     ></app-task-header-add>
                 </div>
             </div>
-
+            <div
+                class="current-time-line"
+                [ngStyle]="{ top: timeLinePosition + 'px' }"
+            ></div>
         </div>
     </div>
 </div>

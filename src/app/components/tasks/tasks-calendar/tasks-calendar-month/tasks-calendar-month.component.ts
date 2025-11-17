@@ -7,6 +7,8 @@ import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TaskAddCalendar } from '../../class/task-add-calendar';
 import { TasksFilters } from '../../class/tasks-filters';
+import { Subscription } from 'rxjs';
+import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
 
 @Component({
   selector: 'app-tasks-calendar-month',
@@ -18,14 +20,47 @@ export class TasksCalendarMonthComponent {
   daysInWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   weeks: CalendarMonth[][] = [];
   currentDate = new Date();
-
+  sub: Subscription = new Subscription();
   constructor(public tasksService: TasksService,
     public tasksStateService: TasksStateService,
     public usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,
+    public tasksRealTimeService: TasksRealTimeService,
   ) { }
   ngOnInit() {
     this.getTasksCalendar();
+    let getChangeCompanies = this.tasksRealTimeService.changeTasksArray.subscribe((data) => {
+      this.weeks.forEach(week => {
+        week.forEach(day => {
+          const taskDate = new Date(data.data.startDate);
+          if (day.date.getFullYear() === taskDate.getFullYear() &&
+            day.date.getMonth() === taskDate.getMonth() &&
+            day.date.getDate() === taskDate.getDate()) {
+            if (data.action === 'TASK_SAVED' && this.filter.checkFilterUse(new Task(data.data))) day.tasks.push(new Task(data.data));
+            if (data.action === 'TASK_EDITED') {
+              let index = day.tasks.findIndex(item => item.id == data.data.id);
+              if (index > -1) {
+                day.tasks[index] = new Task(data.data);
+              }
+            }
+            if (data.action === 'TASK_DELETED') {
+              let index = day.tasks.findIndex(item => item.id == data.data);
+              if (index > -1) {
+                day.tasks.splice(index, 1);
+              }
+            }
+            if (data.action === 'TASK_ARCHIVED') {
+              let index = day.tasks.findIndex(item => item.id == data.data);
+              if (index > -1 && !this.filter.archived) {
+                day.tasks.splice(index, 1);
+              }
+            }
+          }
+        });
+      });
+      this.cd.detectChanges();
+    })
+    this.sub.add(getChangeCompanies);
   }
   prev() {
     this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, 1);
@@ -105,5 +140,8 @@ export class TasksCalendarMonthComponent {
     for (let i = 0; i < days.length; i += 7) {
       this.weeks.push(days.slice(i, i + 7));
     }
+  }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }
