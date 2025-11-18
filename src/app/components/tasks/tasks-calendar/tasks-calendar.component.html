@@ -3,59 +3,60 @@
         class="qt-page-list__table "
         [ngClass]="{'--open-filters':toggleFilter}"
     >
-        <div class="qt-page-list__header-thead-container"></div>
         <div class="qt-page-list__body-table-container">
             <div class="qt-page-list__body-tbody qt-table-modern my-tasks-table">
                 <div class="tbody">
-                    <div class="calendar-filter qt-df qt-ai-c qt-jc-sb">
+                    <div class="calendar-filter">
+                      <div class="calendar-filter__inner qt-df qt-ai-c qt-jc-sb">
                         <div class="qt-df qt-ai-c">
-                            <button class="qt-button --md --gray qt-mr-16 qt-jc-c">Today</button>
-                            <button
-                                class="qt-button --md --gray qt-mr-8 qt-jc-c calendar-filter__arrow-left"
-                                (click)="prev()"
-                            >
-                                <div class="qt-icon icon__arrow-left  qt-sz-20"></div>
-                            </button>
-                            <button
-                                class="qt-button --md --gray qt-mr-6 qt-jc-c calendar-filter__arrow-right"
-                                (click)="next()"
-                            >
-                                <div class="qt-icon icon__arrow-right  qt-sz-20"></div>
-                            </button>
-                            <div
-                                class="qt-ml-16 qt-fw-500 qt-fs-16 qt-color-gray-900"
-                                [textContent]="parseCurrentDate()"
-                            ></div>
+                          <button class="qt-button --md --gray qt-mr-16 qt-jc-c">Today</button>
+                          <button
+                            class="qt-button --md --gray qt-mr-8 qt-jc-c calendar-filter__arrow-left"
+                            (click)="prev()"
+                          >
+                            <div class="qt-icon icon__arrow-left  qt-sz-20"></div>
+                          </button>
+                          <button
+                            class="qt-button --md --gray qt-mr-6 qt-jc-c calendar-filter__arrow-right"
+                            (click)="next()"
+                          >
+                            <div class="qt-icon icon__arrow-right  qt-sz-20"></div>
+                          </button>
+                          <div
+                            class="qt-ml-16 qt-fw-500 qt-fs-16 qt-color-gray-900"
+                            [textContent]="parseCurrentDate()"
+                          ></div>
                         </div>
                         <div
-                            class="btn-group btn-group-toggle tech-tickets__toggle-menu"
-                            ngbRadioGroup
-                            name="radioBasic"
-                            [(ngModel)]="interval"
+                          class="btn-group btn-group-toggle tech-tickets__toggle-menu"
+                          ngbRadioGroup
+                          name="radioBasic"
+                          [(ngModel)]="interval"
                         >
-                            <label
-                                ngbButtonLabel
-                                class="tech-tickets__toggle-menu-button pointer"
+                          <label
+                            ngbButtonLabel
+                            class="tech-tickets__toggle-menu-button pointer"
+                          >
+                            <input
+                              ngbButton
+                              type="radio"
+                              [value]="'WEEK'"
                             >
-                                <input
-                                    ngbButton
-                                    type="radio"
-                                    [value]="'WEEK'"
-                                >
-                                Week
-                            </label>
-                            <label
-                                ngbButtonLabel
-                                class="tech-tickets__toggle-menu-button pointer"
+                            Week
+                          </label>
+                          <label
+                            ngbButtonLabel
+                            class="tech-tickets__toggle-menu-button pointer"
+                          >
+                            <input
+                              ngbButton
+                              type="radio"
+                              [value]="'MONTH'"
                             >
-                                <input
-                                    ngbButton
-                                    type="radio"
-                                    [value]="'MONTH'"
-                                >
-                                Month
-                            </label>
+                            Month
+                          </label>
                         </div>
+                      </div>
                     </div>
                     <app-tasks-calendar-month
                         #monthly
