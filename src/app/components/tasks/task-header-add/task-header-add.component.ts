@@ -58,13 +58,21 @@ export class TaskHeaderAddComponent {
     this.sub.add(onChangeUsers);
     if (this.tasksStateService.taskAddCalendar) {
       this.initModelForm();
+      let step = 1;
+      let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany() ? this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
+      if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') step = 1;
+      if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') step = 5;
+      if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') step = 10;
+      if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') step = 15;
+      let startDate = new Date(this.tasksStateService.taskAddCalendar.startDate);
+      let endDate = new Date(startDate.getTime() + step * 60000);
       this.modelForm.patchValue({
-        startDate: this.tasksStateService.taskAddCalendar.startDate,
-        endDate: this.tasksStateService.taskAddCalendar.startDate,
+        startDate: startDate,
+        endDate: endDate,
         assignedUsersIds: [this.tasksStateService.taskAddCalendar.assignedUser.id],
       });
       this.tachUser.setEditUsers([this.tasksStateService.taskAddCalendar.assignedUser]);
-      this.datePicker.setEditDates(this.tasksStateService.taskAddCalendar.startDate, this.tasksStateService.taskAddCalendar.startDate);
+      this.datePicker.setEditDates(startDate, endDate);
       this.tasksStateService.setTaskAddCalendar(null);
     }
   }

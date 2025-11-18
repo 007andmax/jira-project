@@ -104,7 +104,9 @@ export class TasksCalendarWeekComponent implements OnInit, OnDestroy {
   }
   public getTasksCalendar() {
     this.generateWeek();
-
+    const weekEnd = new Date(this.weekStart);
+    weekEnd.setDate(this.weekStart.getDate() + 6);
+    this.weekEnd = weekEnd;
     this.tasksService.getTasksCalendar(moment(this.days[0].date).format('YYYY-MM-DD'), 'WEEK', this.filter.techUser ? this.filter.techUser.id : null, this.filter.filter, this.filter.archived).subscribe((data: any) => {
       // this.populateTasksToDays(data.tasks);
       this.days.forEach(day => {
@@ -116,9 +118,7 @@ export class TasksCalendarWeekComponent implements OnInit, OnDestroy {
         });
         if (find) day.tasks = find.tasks.map(t => new Task(t));
       });
-      const weekEnd = new Date(this.weekStart);
-      weekEnd.setDate(this.weekStart.getDate() + 6);
-      this.weekEnd = new Date(data.end);
+
       console.log("this.weekEnd", this.weekEnd);
       console.log("data", data);
       console.log("this.days", this.days);
@@ -139,13 +139,13 @@ export class TasksCalendarWeekComponent implements OnInit, OnDestroy {
         this.zone.run(() => {
           this.currentTime = new Date();
           const hours = this.currentTime.getHours() + this.currentTime.getMinutes() / 60;
-          this.timeLinePosition = hours * 60; // 1 hour = 60px
+          this.timeLinePosition = hours * 48; // 1 hour = 60px
         });
       }, 60000); // update every minute
     });
     // initial position
     const hours = this.currentTime.getHours() + this.currentTime.getMinutes() / 60;
-    this.timeLinePosition = hours * 60;
+    this.timeLinePosition = hours * 48;
   }
   ngOnDestroy() {
     clearInterval(this.timer);
