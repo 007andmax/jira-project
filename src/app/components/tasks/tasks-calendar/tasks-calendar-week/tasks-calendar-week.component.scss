@@ -14,18 +14,6 @@
     border-bottom: 1px solid #eee;
 }
 
-.day {
-    height: 100px;
-    border: 1px solid #eee;
-    padding: 4px;
-    position: relative;
-    overflow: hidden;
-}
-
-.day.empty {
-    background: #fafafa;
-}
-
 .tasks {
     margin-top: 20px;
 }
@@ -38,13 +26,11 @@
   position: sticky;
   top: 93px;
   z-index: 6;
-  border-top: 1px solid $gray-200;
-  border-bottom: 1px solid $gray-200;
-  border-left: 1px solid $gray-200;
 
   &__item {
     text-transform: uppercase;
     height: 44px;
+    min-width: 168px;
     padding: 14.5px 16px;
     display: flex;
     align-items: center;
@@ -54,54 +40,21 @@
     font-size: 12px;
     font-weight: 600;
     color: $gray-500;
-    border-right: 1px solid $gray-200;
+    border-top: 1px solid $gray-200;
+    border-left: 1px solid $gray-200;
+    border-bottom: 1px solid $gray-200;
     background-color: $gray-50;
+
+    &:last-child {
+      border-right: 1px solid $gray-200;
+    }
 
     &:empty {
       width: 96px;
+      min-width: 96px;
       flex-shrink: 0;
     }
   }
-}
-
-.time-column {
-  width: 96px;
-  height: 48px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  text-align: center;
-
-  div {
-    font-size: 12px;
-    padding: 12px 10px 20px;
-    font-weight: 500;
-    color: $gray-500;
-    border-left: 1px solid $gray-200;
-  }
-}
-
-.days-grid {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    position: relative;
-}
-
-.day-column {
-    border-left: 1px solid #eee;
-    position: relative;
-    height: calc(60px * 24);
-}
-
-::ng-deep.hour-cell {
-    height: 48px;
-    border-bottom: 1px solid $gray-200;
-    &:hover {
-        .add-tasks {
-            display:block;
-        }
-    }
 }
 
 .event {
@@ -110,13 +63,13 @@
     right: 6px;
     border-radius: 6px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    color: #000;
+    color: $gray-900;
     background: #4a90e2;
     overflow: hidden;
 }
 
 .event-content {
-    background: #fff;
+    background: $white;
     border-radius: 6px;
     padding: 4px 6px;
     height: 100%;
@@ -148,4 +101,68 @@
     height: 1px !important;
     background: red;
     z-index: 5;
+}
+
+.calendar-body {
+  &__time-column {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 96px;
+    flex-shrink: 0;
+    align-self: baseline;
+
+    &-item {
+      height: 48px;
+      font-size: 12px;
+      padding: 12px 10px 20px;
+      font-weight: 500;
+      color: $gray-500;
+      border-left: 1px solid $gray-200;
+
+      &:nth-last-child(2) {
+        border-radius: 0 0 0 8px;
+        border-bottom: 1px solid $gray-200;
+      }
+    }
+  }
+
+  &__days-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    position: relative;
+  }
+
+  &__day-column {
+    position: relative;
+    height: calc(60px * 24);
+
+    &:last-child {
+      .calendar-body__hour-cell {
+        border-right: 1px solid $gray-200;
+
+        &:nth-last-child(2) {
+          border-radius: 0 0 8px 0;
+        }
+      }
+    }
+  }
+
+  &__hour-cell {
+    height: 48px;
+    min-width: 168px;
+    padding: 10px 8px;
+    border-left: 1px solid $gray-200;
+    border-bottom: 1px solid $gray-200;
+  }
+}
+
+::ng-deep.calendar-body__hour-cell {
+  &:hover {
+    .add-tasks {
+      display: flex;
+    }
+  }
 }

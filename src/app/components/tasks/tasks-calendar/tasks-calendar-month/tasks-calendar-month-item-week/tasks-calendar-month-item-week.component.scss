@@ -1,7 +1,7 @@
 @import "./src/assets/styles/variable";
 
 .tasks {
-    margin-top: 20px;
+    margin-top: 8px;
 }
 
 .task {
@@ -10,6 +10,7 @@
     color: $gray-900;
     height: 28px;
     font-size: 14px;
+    line-height: 20px;
     border-radius: 4px;
     padding: 4px 4px 4px 12px;
     margin-bottom: 4px;
@@ -18,12 +19,14 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 
     &::after {
         content: '';
         position: absolute;
-        top: 4px;
+        top: 50%;
         left: 4px;
+        translate: 0 -50%;
         width: 4px;
         height: 20px;
         border-radius: 4px;
@@ -47,21 +50,27 @@
         }
     }
 }
-.date {
-    display: flex;
+
+.add-tasks {
+    display: none;
+}
+
+.calendar-body {
+  &__date {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: max-content;
+    width: 21px;
+    height: 21px;
     font-size: 14px;
     font-weight: 500;
     color: $gray-900;
-}
-.--current-day {
-    background-color: $blue-light-600;
-    color: $white;
-    padding: 6px;
     border-radius: 50%;
+
+    &.--current-day {
+      background-color: $blue-light-600;
+      color: $white;
+    }
+  }
 }
-.add-tasks {
-    display:none;
-}
+

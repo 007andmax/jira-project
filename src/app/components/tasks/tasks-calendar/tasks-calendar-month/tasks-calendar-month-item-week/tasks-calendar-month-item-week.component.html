@@ -1,6 +1,6 @@
 <div
     *ngIf="day.date"
-    class="date"
+    class="calendar-body__date"
     [ngClass]="{'--current-day': isCurrentDay() }"
 >
     {{ day.date.getDate() }}
@@ -28,7 +28,7 @@
 </div>
 <div
     *ngIf="day.tasks.length > 2"
-    class="more-tasks"
+    class="more-tasks qt-mt-4"
     [textContent]="'+' + (day.tasks.length - 2) + ' more'"
     [ngbPopover]="popContent"
     [autoClose]="false"
@@ -38,10 +38,10 @@
     container="body"
 ></div>
 <div
-    class="add-tasks"
+    class="add-tasks qt-df qt-ai-c"
     (click)="addTask()"
 >
-    <span class="qt-icon icon__add qt-sz-16 qt-icon__white qt-dib qt-mr-8"></span>
+    <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8"></span>
     Add Task
 </div>
 <ng-template #popContent>

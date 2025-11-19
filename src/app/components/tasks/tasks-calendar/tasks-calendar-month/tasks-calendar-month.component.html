@@ -10,14 +10,14 @@
         ></div>
     </ng-template>
 </div>
-<div class="weeks">
+<div class="calendar-body calendar-body--weeks">
     <div
         *ngFor="let week of weeks"
-        class="week"
+        class="calendar-body__row week"
     >
         <div
             *ngFor="let day of week"
-            class="day"
+            class="calendar-body__day"
             [class.empty]="!day.date"
             ngbDropdown
             [autoClose]="false"

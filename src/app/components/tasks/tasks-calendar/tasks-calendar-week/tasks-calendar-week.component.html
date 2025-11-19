@@ -16,23 +16,23 @@
         </div>
     </ng-template>
 </div>
-<div class="qt-df">
-    <div class="time-column">
-        <div *ngFor="let h of hours">
+<div class="calendar-body qt-df">
+    <div class="calendar-body__time-column">
+        <div class="calendar-body__time-column-item" *ngFor="let h of hours">
             {{ h === 0 ? '12am' : (h < 12 ? h + 'am' : (h === 12 ? '12pm' : (h - 12) + 'pm')) }}
         </div>
         <div
-            class="current-time-line"
+            class="calendar-body__current-time-line"
             [ngStyle]="{ top: timeLinePosition + 'px' }"
         ></div>
     </div>
-    <div class="days-grid">
+    <div class="calendar-body__days-grid">
         <div
-            class="day-column"
+            class="calendar-body__day-column"
             *ngFor="let day of days"
         >
             <div
-                class="hour-cell"
+                class="calendar-body__hour-cell"
                 *ngFor="let h of hours"
                 ngbDropdown
                 [autoClose]="false"
