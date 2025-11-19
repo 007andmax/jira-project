@@ -1,0 +1,59 @@
+<div class="qt-page-list page-my-tasks">
+    <div class="qt-page-list__header --sticky">
+        <div class="qt-page-list__header-title-line qt-mb-4">
+            <div class="qt-page-list__header-title-line--left">
+                <h6 class="qt-page-list__header-title">Today</h6>
+                <span
+                    class="qt-text--muted qt-ml-8"
+                    [textContent]="parseCurrentDate()"
+                ></span>
+            </div>
+            <div class="qt-page-list__header-title-line--rigth">
+                <div class="qt-df qt-ai-c">
+                    <button
+                        class="qt-button --md --gray qt-mr-8 qt-jc-c calendar-filter__arrow-left"
+                        (click)="prev()"
+                    >
+                        <div class="qt-icon icon__arrow-left  qt-sz-20"></div>
+                    </button>
+                    <button
+                        class="qt-button --md --gray qt-mr-6 qt-jc-c calendar-filter__arrow-right"
+                        (click)="next()"
+                    >
+                        <div class="qt-icon icon__arrow-right  qt-sz-20"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="calendar-body qt-df">
+        <div class="calendar-body__time-column">
+            <div
+                class="calendar-body__time-column-item"
+                *ngFor="let h of hours"
+            >
+                {{ h === 0 ? '12am' : (h < 12 ? h + 'am' : (h === 12 ? '12pm' : (h - 12) + 'pm')) }}
+            </div>
+            <div
+                class="calendar-body__current-time-line"
+                [ngStyle]="{ top: timeLinePosition + 'px' }"
+            ></div>
+        </div>
+        <div class="calendar-body__days">
+            <div
+                class="calendar-body__hour-cell"
+                *ngFor="let h of hours"
+            >
+                <app-tasks-dashboard-my-calendar-item
+                    [day]="dayTasks"
+                    [h]="h"
+                ></app-tasks-dashboard-my-calendar-item>
+                <div
+                    class="current-time-line"
+                    [ngStyle]="{ top: timeLinePosition + 'px' }"
+                ></div>
+            </div>
+        </div>
+    </div>
+
+</div>
