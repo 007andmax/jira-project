@@ -150,9 +150,8 @@
     }
 
     &__hour-cell {
-        height: 48px;
-        min-width: 168px;
-        padding: 10px 8px;
+        height: 68px;
+        width: 100%;
         border-left: 1px solid $gray-200;
         border-bottom: 1px solid $gray-200;
     }

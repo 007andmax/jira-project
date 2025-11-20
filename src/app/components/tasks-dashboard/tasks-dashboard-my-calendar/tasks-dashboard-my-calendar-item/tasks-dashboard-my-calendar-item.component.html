@@ -11,9 +11,10 @@
                                             '--phone-call':task.type == 'Phone call',
                                             '--to-do':task.type == 'To do'
                                         }"
-        [textContent]="task.title"
         (click)="editTask(task)"
     >
+        <span [textContent]="task.title"></span>
+        <span [textContent]="parseDate(task)"></span>
     </div>
 </ng-template>
 <div
