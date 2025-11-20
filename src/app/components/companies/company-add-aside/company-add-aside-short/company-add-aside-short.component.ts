@@ -7,6 +7,8 @@ import { CompanyValdiate } from '../../class/company-validate';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { CrmStateService } from 'src/app/states/crm/crm-state.service';
+import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 var $ = require("jquery");
 
 @Component({
@@ -19,6 +21,8 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
   @Input() validate: CompanyValdiate = new CompanyValdiate();
   @Input() company: CompanyProfile = new CompanyProfile();
   @Output() onInitFullVersion = new EventEmitter();
+  jobTitleList: Array<CrmCompanyJobTitle> = [];
+  phoneTypes = ['Office', 'Mobile', 'Fax'];
   usersList = [];
   users = [];
   sub: Subscription = new Subscription();
@@ -26,6 +30,7 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
     private usersStateService: UsersStateService,
     private usersService: UsersService,
     private companiesStateService: CompaniesStateService,
+    private crmStateService: CrmStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -38,6 +43,14 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
       this.onGetUsers(this.usersStateService.getAllUsers());
     })
     this.sub.add(onChangeUsers);
+    this.jobTitleList = this.crmStateService.getJobTitleList();
+    let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
+      this.jobTitleList = data;
+    })
+    this.sub.add(onGetJobTitle);
+  }
+  onSelectJobTitle(data) {
+    this.company.contacts[0].customerCompaniesInfo[0].setJobTitleDto(data);
   }
   public onChangeName() {
     if (this.company.name && this.company.name.length > 0) {
