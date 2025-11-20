@@ -22,7 +22,7 @@ export class TasksCalendarWeekItemHourComponent {
     return new Date(date).getHours() === hour;
   }
   getListStartOfHour() {
-    return this.day.tasks.filter(item => this.isStartOfHour(item.startDate, this.h));
+    return this.day ? this.day.tasks.filter(item => this.isStartOfHour(item.startDate, this.h)) : [];
   }
   editTask(task) {
     this.tasksStateService.openEditAside(task);
