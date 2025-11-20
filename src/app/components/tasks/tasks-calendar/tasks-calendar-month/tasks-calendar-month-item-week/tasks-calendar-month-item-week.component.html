@@ -28,17 +28,19 @@
 </div>
 <div
     *ngIf="day.tasks.length > 2"
-    class="more-tasks qt-mt-4"
-    [textContent]="'+' + (day.tasks.length - 2) + ' more'"
+    class="more-tasks qt-mt-2 qt-df qt-ai-c"
     [ngbPopover]="popContent"
     [autoClose]="false"
     triggers="manual"
     #p="ngbPopover"
     (click)="p.open()"
     container="body"
-></div>
+>
+  <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8"></span>
+  <span [textContent]="(day.tasks.length - 2) + ' more'"></span>
+</div>
 <div
-    class="add-tasks qt-df qt-ai-c"
+    class="add-tasks qt-df qt-ai-c qt-mt-4"
     (click)="addTask()"
 >
     <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8"></span>

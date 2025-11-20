@@ -52,7 +52,19 @@
 }
 
 .add-tasks {
+    padding: 2px;
+    cursor: pointer;
+    border-radius: 4px;
     display: none;
+
+    &:hover {
+      background-color: $blue-light-600;
+      color: $white;
+
+      .qt-icon {
+        background-color: $white;
+      }
+    }
 }
 
 .calendar-body {
@@ -74,3 +86,21 @@
   }
 }
 
+.more-tasks {
+  padding: 2px;
+  cursor: pointer;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: $blue-light-600;
+    color: $white;
+
+    .qt-icon {
+      background-color: $white;
+    }
+  }
+
+  & + .add-tasks {
+    margin-top: 1px;
+  }
+}
