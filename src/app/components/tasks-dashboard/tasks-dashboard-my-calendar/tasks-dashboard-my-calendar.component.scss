@@ -164,3 +164,47 @@
         }
     }
 }
+
+.my-task-dashboard {
+  &__item {
+    padding: 0 24px 24px;
+    border: 1px solid $gray-200;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+    background-color: $white;
+    min-height: calc(100vh - 364px);
+    height: calc(100vh - 364px);
+    overflow: auto;
+  }
+}
+
+.qt-page-list__header {
+  margin-top: 0;
+  padding-bottom: 24px;
+  background-color: $white;
+  z-index: 6;
+  overflow-x: unset;
+
+  &-title-line--left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+
+    .qt-text--muted {
+      color: $gray-500;
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -24px;
+    height: 1px;
+    width: calc(100% + 48px);
+    background-color: $gray-200;
+  }
+}
+.calendar-body__days {
+  width: 100%;
+}

@@ -1,0 +1,14 @@
+@import "./src/assets/styles/variable";
+
+.my-task-dashboard {
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    background-color: $white;
+    padding-top: 0;
+    min-height: calc(100vh - 340px);
+    height: calc(100vh - 340px);
+    overflow: hidden;
+  }
+}
