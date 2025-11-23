@@ -13,8 +13,8 @@
                                         }"
         (click)="editTask(task)"
     >
-        <span [textContent]="task.title"></span>
-        <span [textContent]="parseDate(task)"></span>
+        <span class="calendar-body__hour-cell-title" [textContent]="task.title"></span>
+        <span class="calendar-body__hour-cell-text qt-mt-4" [textContent]="parseDate(task)"></span>
     </div>
 </ng-template>
 <div

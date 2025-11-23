@@ -8,16 +8,16 @@
                     [textContent]="parseCurrentDate()"
                 ></span>
             </div>
-            <div class="qt-page-list__header-title-line--rigth">
+            <div class="qt-page-list__header-title-line--right">
                 <div class="qt-df qt-ai-c">
                     <button
-                        class="qt-button --md --gray qt-mr-8 qt-jc-c calendar-filter__arrow-left"
+                        class="calendar-filter__arrow calendar-filter__arrow-left qt-mr-12"
                         (click)="prev()"
                     >
-                        <div class="qt-icon icon__arrow-left  qt-sz-20"></div>
+                        <div class="qt-icon icon__arrow-left qt-sz-20"></div>
                     </button>
                     <button
-                        class="qt-button --md --gray qt-mr-6 qt-jc-c calendar-filter__arrow-right"
+                        class="calendar-filter__arrow calendar-filter__arrow-right"
                         (click)="next()"
                     >
                         <div class="qt-icon icon__arrow-right  qt-sz-20"></div>
@@ -32,7 +32,7 @@
                 class="calendar-body__time-column-item"
                 *ngFor="let h of hours"
             >
-                {{ h === 0 ? '12am' : (h < 12 ? h + 'am' : (h === 12 ? '12pm' : (h - 12) + 'pm')) }}
+                {{ h === 0 ? '12 am' : (h < 12 ? h + ' am' : (h === 12 ? '12 pm' : (h - 12) + ' pm')) }}
             </div>
             <div
                 class="calendar-body__current-time-line"
@@ -44,14 +44,16 @@
                 class="calendar-body__hour-cell"
                 *ngFor="let h of hours"
             >
-                <app-tasks-dashboard-my-calendar-item
+                <div class="calendar-body__hour-cell-inner">
+                  <app-tasks-dashboard-my-calendar-item
                     [day]="dayTasks"
                     [h]="h"
-                ></app-tasks-dashboard-my-calendar-item>
-                <div
+                  ></app-tasks-dashboard-my-calendar-item>
+                  <div
                     class="current-time-line"
                     [ngStyle]="{ top: timeLinePosition + 'px' }"
-                ></div>
+                  ></div>
+                </div>
             </div>
         </div>
     </div>
