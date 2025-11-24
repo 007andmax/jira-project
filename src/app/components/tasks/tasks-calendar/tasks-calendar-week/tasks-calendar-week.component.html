@@ -18,7 +18,10 @@
 </div>
 <div class="calendar-body qt-df">
     <div class="calendar-body__time-column">
-        <div class="calendar-body__time-column-item" *ngFor="let h of hours">
+        <div
+            class="calendar-body__time-column-item"
+            *ngFor="let h of hours"
+        >
             {{ h === 0 ? '12am' : (h < 12 ? h + 'am' : (h === 12 ? '12pm' : (h - 12) + 'pm')) }}
         </div>
         <div
@@ -37,7 +40,6 @@
                 ngbDropdown
                 [autoClose]="false"
                 #addTask="ngbDropdown"
-                placement="bottom-right"
                 container="body"
             >
                 <app-tasks-calendar-week-item-hour

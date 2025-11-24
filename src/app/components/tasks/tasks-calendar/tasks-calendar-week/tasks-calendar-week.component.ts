@@ -46,25 +46,26 @@ export class TasksCalendarWeekComponent implements OnInit, OnDestroy {
           day.date.getMonth() === taskDate.getMonth() &&
           day.date.getDate() === taskDate.getDate()) {
           if (data.action === 'TASK_SAVED' && this.filter.checkFilterUse(new Task(data.data))) day.tasks.push(new Task(data.data));
-          if (data.action === 'TASK_EDITED') {
-            let index = day.tasks.findIndex(item => item.id == data.data.id);
-            if (index > -1) {
-              day.tasks[index] = new Task(data.data);
-            }
-          }
-          if (data.action === 'TASK_DELETED') {
-            let index = day.tasks.findIndex(item => item.id == data.data);
-            if (index > -1) {
-              day.tasks.splice(index, 1);
-            }
-          }
-          if (data.action === 'TASK_ARCHIVED') {
-            let index = day.tasks.findIndex(item => item.id == data.data);
-            if (index > -1 && !this.filter.archived) {
-              day.tasks.splice(index, 1);
-            }
+        }
+        if (data.action === 'TASK_EDITED') {
+          let index = day.tasks.findIndex(item => item.id == data.data.id);
+          if (index > -1) {
+            day.tasks[index] = new Task(data.data);
           }
         }
+        if (data.action === 'TASK_DELETED') {
+          let index = day.tasks.findIndex(item => item.id == data.data);
+          if (index > -1) {
+            day.tasks.splice(index, 1);
+          }
+        }
+        if (data.action === 'TASK_ARCHIVED') {
+          let index = day.tasks.findIndex(item => item.id == data.data);
+          if (index > -1 && !this.filter.archived) {
+            day.tasks.splice(index, 1);
+          }
+        }
+
       });
       this.cd.detectChanges();
     })

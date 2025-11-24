@@ -102,6 +102,22 @@ export class TasksDashboardMyCalendarComponent {
       this.cd.detectChanges();
     });
   }
+  getDayLabel(date: Date): string {
+    const today = new Date();
+    const d1 = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const d2 = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+    const diffMs = d2.getTime() - d1.getTime();
+    const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 0) return 'Today';
+    if (diffDays > 0) {
+      return diffDays === 1 ? 'In 1 day' : `In ${diffDays} days`;
+    } else {
+      const abs = Math.abs(diffDays);
+      return abs === 1 ? '1 day ago' : `${abs} days ago`;
+    }
+  }
   startTimelineUpdater() {
     this.zone.runOutsideAngular(() => {
       this.timer = setInterval(() => {

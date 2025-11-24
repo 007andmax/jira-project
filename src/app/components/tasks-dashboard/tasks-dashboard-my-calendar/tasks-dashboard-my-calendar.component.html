@@ -2,7 +2,10 @@
     <div class="qt-page-list__header --sticky">
         <div class="qt-page-list__header-title-line qt-mb-4">
             <div class="qt-page-list__header-title-line--left">
-                <h6 class="qt-page-list__header-title">Today</h6>
+                <h6
+                    class="qt-page-list__header-title"
+                    [textContent]="getDayLabel(currentDate)"
+                ></h6>
                 <span
                     class="qt-text--muted"
                     [textContent]="parseCurrentDate()"
@@ -45,17 +48,18 @@
                 *ngFor="let h of hours"
             >
                 <div class="calendar-body__hour-cell-inner">
-                  <app-tasks-dashboard-my-calendar-item
-                    [day]="dayTasks"
-                    [h]="h"
-                  ></app-tasks-dashboard-my-calendar-item>
-                  <div
-                    class="current-time-line"
-                    [ngStyle]="{ top: timeLinePosition + 'px' }"
-                  ></div>
+                    <app-tasks-dashboard-my-calendar-item
+                        [day]="dayTasks"
+                        [h]="h"
+                    ></app-tasks-dashboard-my-calendar-item>
+                    <div
+                        class="current-time-line"
+                        [ngStyle]="{ top: timeLinePosition + 'px' }"
+                    ></div>
                 </div>
             </div>
         </div>
     </div>
+
 
 </div>
