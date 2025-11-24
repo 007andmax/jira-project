@@ -3166,7 +3166,9 @@ body.ready {
 .no-click {
   pointer-events: none
 }
-app-ticket-detail-tasks-item {
+app-ticket-detail-tasks-item,
+app-tasks-dashboard-my-tasks,
+app-tasks-dashboard-my-calendar {
   display: contents;
 }
  draft-email-user-recipients,
