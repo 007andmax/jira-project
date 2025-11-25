@@ -5,7 +5,12 @@
     [ngForOf]="getListStartOfHour()"
 >
     <div
-        *ngIf="index == 0"
+        [ngStyle]="{
+        top: parseStyle(task,index).top + 'px',
+        height: parseStyle(task,index).height + 'px',
+        left: parseStyle(task,index).left + '%',
+        width: parseStyle(task,index).width + '%'
+     }"
         class="task"
         [ngClass]="{'--meeting':task.type == 'Meeting',
                                             '--phone-call':task.type == 'Phone call',
@@ -13,20 +18,12 @@
                                         }"
         [textContent]="task.title"
         (click)="editTask(task)"
+        placement="top"
+        [ngbTooltip]="task.title"
+        container="body"
     >
     </div>
 </ng-template>
-<div
-    *ngIf="getListStartOfHour().length > 1"
-    class="more-tasks"
-    [textContent]="'+' + (getListStartOfHour().length - 1) + ' more'"
-    [ngbPopover]="popContent"
-    [autoClose]="false"
-    triggers="manual"
-    #p="ngbPopover"
-    (click)="p.open()"
-    container="body"
-></div>
 <div
     class="add-tasks qt-df qt-ai-c"
     (click)="addTask()"
@@ -34,31 +31,3 @@
     <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8"></span>
     Add Task
 </div>
-<ng-template #popContent>
-    <div class="tasks-more-popup">
-        <div
-            class="qt-button --square-md --gray pointer qt-ml-auto qt-mb-6"
-            (click)="p.close()"
-        >
-            <div class="qt-icon icon__close qt-sz-16 pointer"></div>
-        </div>
-        <ng-template
-            ngFor
-            let-ev
-            let-index="index"
-            [ngForOf]="day.tasks"
-        >
-            <div
-                *ngIf="index >= 2"
-                class="task"
-                [ngClass]="{'--meeting':ev.type == 'Meeting',
-                                            '--phone-call':ev.type == 'Phone call',
-                                            '--to-do':ev.type == 'To do'
-                                        }"
-                [textContent]="ev.title"
-                (click)="editTask(ev)"
-            >
-            </div>
-        </ng-template>
-    </div>
-</ng-template>

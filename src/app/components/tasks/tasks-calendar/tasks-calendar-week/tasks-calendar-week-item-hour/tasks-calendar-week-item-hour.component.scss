@@ -1,6 +1,12 @@
 @import "./src/assets/styles/variable";
+.tasks-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* ★ allows wrapping to next row */
+    gap: 2px;
+}
 .task {
-    position: relative;
+    position: absolute;
     z-index: 1;
     border: 1px solid $gray-200;
     font-weight: 500;
@@ -11,19 +17,22 @@
     border-radius: 4px;
     padding: 4px 4px 4px 12px;
     margin-bottom: 4px;
-    position: relative;
     cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
+    background-color: $white;
+    &:hover {
+        z-index: 999;
+        box-shadow: -8px 0 8px #0000000d;
+    }
     &::after {
         content: '';
         position: absolute;
         top: 4px;
         left: 4px;
         width: 4px;
-        height: 20px;
+        bottom: 4px;
         border-radius: 4px;
     }
 
