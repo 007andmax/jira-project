@@ -52,10 +52,10 @@
 }
 
 .add-tasks {
-    padding: 2px;
+    padding: 2px 4px;
     cursor: pointer;
     border-radius: 4px;
-    display: none;
+    opacity: 0;
 
     &:hover {
       background-color: $blue-light-600;

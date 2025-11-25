@@ -88,7 +88,6 @@
       border: 1px solid $gray-200;
       border-bottom: none;
       border-radius: 8px 8px 0 0;
-      min-width: 1275px;
     }
 
     &__arrow-left,&__arrow-right {
@@ -140,5 +139,4 @@
 
 .qt-page-list__container {
   height: calc(100vh - 164px);
-  overflow-y: auto;
 }

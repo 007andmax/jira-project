@@ -69,10 +69,14 @@
   }
 }
 
-::ng-deep .calendar-body__day {
+::ng-deep  .calendar-body__day {
+  cursor: pointer;
+
   &:hover {
+    background-color: $gray-50;
+
     .add-tasks {
-      display: flex;
+      opacity: 1;
     }
   }
 }

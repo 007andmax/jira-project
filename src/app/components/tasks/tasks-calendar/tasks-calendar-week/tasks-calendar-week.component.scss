@@ -94,13 +94,33 @@
     padding: 2px 6px;
     border-radius: 24px;
 }
-.current-time-line {
+.current-time-line,
+.calendar-body__current-time-line {
     position: absolute;
     left: 0;
     right: 0;
-    height: 1px !important;
-    background: red;
+    height: 2px;
+    background: $red-700;
     z-index: 5;
+}
+.calendar-body__current-time-line {
+  width: 61%;
+  left: 39%;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    translate: 0 -50%;
+    width: 6px;
+    height: 10px;
+    mask-image: url('/assets/img/icons/arrow-right-fill.svg');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    background: $red-700;
+  }
 }
 
 .calendar-body {
