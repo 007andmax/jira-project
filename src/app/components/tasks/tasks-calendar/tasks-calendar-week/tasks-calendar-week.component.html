@@ -18,6 +18,22 @@
 </div>
 <div class="calendar-body qt-df">
     <div class="calendar-body__time-column">
+        <div class="calendar-body__time-column-item">All Day</div>
+    </div>
+    <div class="calendar-body__days-grid">
+        <div
+            class="calendar-body__day-column"
+            *ngFor="let day of days"
+        >
+            <div class="calendar-body__hour-cell">
+                <app-tasks-calendar-week-item-hour
+                    [day]="day"
+                    [h]="h"
+                ></app-tasks-calendar-week-item-hour>
+            </div>
+        </div>
+    </div>
+    <div class="calendar-body__time-column">
         <div
             class="calendar-body__time-column-item"
             *ngFor="let h of hours"

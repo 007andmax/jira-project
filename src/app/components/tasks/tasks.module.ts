@@ -37,10 +37,11 @@ import { TasksCalendarWeekComponent } from './tasks-calendar/tasks-calendar-week
 import { TasksCalendarMonthItemWeekComponent } from './tasks-calendar/tasks-calendar-month/tasks-calendar-month-item-week/tasks-calendar-month-item-week.component';
 import { TasksCalendarWeekItemHourComponent } from './tasks-calendar/tasks-calendar-week/tasks-calendar-week-item-hour/tasks-calendar-week-item-hour.component';
 import { TaskHeaderAddModule } from './task-header-add/task-header-add.module';
+import { TasksCalendarWeekItemAllDayComponent } from './tasks-calendar/tasks-calendar-week/tasks-calendar-week-item-all-day/tasks-calendar-week-item-all-day.component';
 
 
 @NgModule({
-    declarations: [TasksComponent, TasksHeaderComponent, TasksListComponent, TasksTabsComponent, TasksCalendarComponent, TasksCalendarMonthComponent, TasksCalendarWeekComponent, TasksCalendarMonthItemWeekComponent, TasksCalendarWeekItemHourComponent
+    declarations: [TasksComponent, TasksHeaderComponent, TasksListComponent, TasksTabsComponent, TasksCalendarComponent, TasksCalendarMonthComponent, TasksCalendarWeekComponent, TasksCalendarMonthItemWeekComponent, TasksCalendarWeekItemHourComponent, TasksCalendarWeekItemAllDayComponent
     ],
     imports: [
         CommonModule,
