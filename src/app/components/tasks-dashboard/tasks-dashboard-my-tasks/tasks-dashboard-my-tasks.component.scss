@@ -57,7 +57,8 @@ app-tasks-dashboard-my-tasks-list {
     border-radius: 8px;
     box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
     height: calc(100vh - 364px);
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 

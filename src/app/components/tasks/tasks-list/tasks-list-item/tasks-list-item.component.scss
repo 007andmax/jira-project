@@ -25,6 +25,7 @@
 .my-tasks-table {
   &__title {
     flex: 2 1 500px;
+    overflow: hidden;
   }
 
   &__type {
