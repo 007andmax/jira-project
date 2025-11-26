@@ -202,7 +202,8 @@
     background-color: $white;
     min-height: calc(100vh - 364px);
     height: calc(100vh - 364px);
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 

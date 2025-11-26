@@ -58,12 +58,7 @@
     opacity: 0;
 
     &:hover {
-      background-color: $blue-light-600;
-      color: $white;
-
-      .qt-icon {
-        background-color: $white;
-      }
+      background-color: $gray-100;
     }
 }
 
@@ -92,12 +87,7 @@
   border-radius: 4px;
 
   &:hover {
-    background-color: $blue-light-600;
-    color: $white;
-
-    .qt-icon {
-      background-color: $white;
-    }
+    background-color: $gray-100;
   }
 
   & + .add-tasks {

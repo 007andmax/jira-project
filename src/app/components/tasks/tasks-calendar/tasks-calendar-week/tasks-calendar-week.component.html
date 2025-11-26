@@ -42,27 +42,29 @@
                 #addTask="ngbDropdown"
                 container="body"
             >
-                <app-tasks-calendar-week-item-hour
-                    [day]="day"
-                    [h]="h"
-                    (onAddTask)="onAddTask($event);addTask.open();"
-                ></app-tasks-calendar-week-item-hour>
-                <div
-                    class="create-tasks-toogle"
-                    id="dropdownCreateTask"
-                    ngbDropdownToggle
-                >
-                </div>
-                <div
-                    class="qt-dropdown-menu"
-                    ngbDropdownMenu
-                    aria-labelledby="dropdownCreateTask"
-                >
-                    <app-task-header-add
-                        *ngIf="addTask.isOpen()"
-                        (onClose)="addTask.close()"
-                    ></app-task-header-add>
-                </div>
+               <div class="qt-pos-rel">
+                 <app-tasks-calendar-week-item-hour
+                   [day]="day"
+                   [h]="h"
+                   (onAddTask)="onAddTask($event);addTask.open();"
+                 ></app-tasks-calendar-week-item-hour>
+                 <div
+                   class="create-tasks-toogle"
+                   id="dropdownCreateTask"
+                   ngbDropdownToggle
+                 >
+                 </div>
+                 <div
+                   class="qt-dropdown-menu"
+                   ngbDropdownMenu
+                   aria-labelledby="dropdownCreateTask"
+                 >
+                   <app-task-header-add
+                     *ngIf="addTask.isOpen()"
+                     (onClose)="addTask.close()"
+                   ></app-task-header-add>
+                 </div>
+               </div>
             </div>
             <div
                 class="current-time-line"
