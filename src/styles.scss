@@ -3186,6 +3186,10 @@ app-tasks-dashboard-my-calendar {
   box-shadow: 0 12px 16px -4px #10182814, 0 4px 6px -2px #10182808;
   border: 1px solid $gray-200;
 
+  &:hover {
+    border-color: $gray-400;
+  }
+
   &__header {
     display: flex;
     align-items: center;

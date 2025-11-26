@@ -80,7 +80,7 @@
     position: sticky;
     top: 0;
     background-color: $white;
-    z-index: 6;
+    z-index: 1071;
     padding-top: 24px;
 
     &__inner {
@@ -138,5 +138,7 @@
 }
 
 .qt-page-list__container {
-  height: calc(100vh - 164px);
+  height: calc(100vh - 170px);
+  overflow-y: auto;
+  overflow-x: clip;
 }

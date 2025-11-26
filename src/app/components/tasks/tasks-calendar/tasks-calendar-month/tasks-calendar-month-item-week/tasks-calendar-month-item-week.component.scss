@@ -56,10 +56,6 @@
     cursor: pointer;
     border-radius: 4px;
     opacity: 0;
-
-    &:hover {
-      background-color: $gray-100;
-    }
 }
 
 .calendar-body {
@@ -85,10 +81,6 @@
   padding: 2px;
   cursor: pointer;
   border-radius: 4px;
-
-  &:hover {
-    background-color: $gray-100;
-  }
 
   & + .add-tasks {
     margin-top: 1px;

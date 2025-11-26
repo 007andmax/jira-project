@@ -124,6 +124,8 @@
 }
 
 .calendar-body {
+  overflow: hidden;
+
   &__time-column {
     position: relative;
     display: flex;
@@ -192,5 +194,12 @@
   }
   .calendar-body__time-column,.calendar-body__hour-cell {
     height: 130px;
+  }
+
+  .calendar-body__time-column {
+    padding: 12px 10px 20px;
+    font-weight: 500;
+    color: $gray-500;
+    border-left: 1px solid $gray-200;
   }
 }
