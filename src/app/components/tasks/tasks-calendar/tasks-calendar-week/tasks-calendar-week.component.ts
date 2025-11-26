@@ -23,6 +23,7 @@ export class TasksCalendarWeekComponent implements OnInit, OnDestroy {
   timeLinePosition = 0;
   private timer!: any;
   currentTime = new Date();
+  showMore: boolean = false;
   sub: Subscription = new Subscription();
   constructor(public tasksService: TasksService,
     public usersStateService: UsersStateService,
@@ -147,6 +148,57 @@ export class TasksCalendarWeekComponent implements OnInit, OnDestroy {
     // initial position
     const hours = this.currentTime.getHours() + this.currentTime.getMinutes() / 60;
     this.timeLinePosition = hours * 48;
+  }
+  getAllDayEvents(): any[] {
+    return this.days.filter(d => {
+      return d.tasks.filter(ev => {
+        // const isAllDay = ev.allDay === true;
+
+        const multiDay = new Date(ev.endDate).getTime() - new Date(ev.startDate).getTime() >= 24 * 60 * 60 * 1000;
+
+        return multiDay;
+      }).length > 0;
+    }).map(d => d.tasks);
+
+  }
+
+  getAllDayPositionedTasks(): any[] {
+    let allDay = [];
+    this.getAllDayEvents().forEach(arr => {
+      allDay = allDay.concat(arr);
+    })
+    //  console.log("allDay", allDay);
+    const positions: any[] = [];
+
+    for (const ev of allDay) {
+      // Clamp inside the week range
+      const start = new Date(Math.max(new Date(ev.startDate).getTime(), this.weekStart.getTime()));
+      const end = new Date(Math.min(new Date(ev.endDate).getTime(), this.addDays(this.weekStart, 7).getTime()));
+
+      const startIndex = this.days.findIndex(
+        d => d.date.toDateString() === start.toDateString()
+      );
+
+      const endIndex = this.days.findIndex(
+        d => d.date.toDateString() === end.toDateString()
+      );
+
+      const colStart = startIndex >= 0 ? startIndex : 0;
+      const colEnd = endIndex >= 0 ? endIndex : 7;
+      positions.push({
+        task: ev,
+        left: colStart * (100 / 7),
+        width: (colEnd - colStart + 1) * (100 / 7)
+      });
+    }
+
+    return positions;
+  }
+
+  addDays(date: Date, days: number) {
+    const d = new Date(date);
+    d.setDate(d.getDate() + days);
+    return d;
   }
   ngOnDestroy() {
     clearInterval(this.timer);

@@ -186,3 +186,11 @@
     }
   }
 }
+.all-day-row {
+  .calendar-body__day-column {
+    position: unset !important;
+  }
+  .calendar-body__time-column,.calendar-body__hour-cell {
+    height: 130px;
+  }
+}

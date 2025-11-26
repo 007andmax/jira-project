@@ -16,76 +16,86 @@
         </div>
     </ng-template>
 </div>
-<div class="calendar-body qt-df">
-    <div class="calendar-body__time-column">
-        <div class="calendar-body__time-column-item">All Day</div>
-    </div>
-    <div class="calendar-body__days-grid">
+<div class="calendar-body">
+    <div class="qt-df all-day-row">
         <div
-            class="calendar-body__day-column"
-            *ngFor="let day of days"
+            class="calendar-body__time-column"
+            [ngStyle]="{'height': showMore ? (getAllDayPositionedTasks().length * 32) + 'px' : '130px'}"
         >
-            <div class="calendar-body__hour-cell">
-                <app-tasks-calendar-week-item-hour
-                    [day]="day"
-                    [h]="h"
-                ></app-tasks-calendar-week-item-hour>
-            </div>
+            <div class="calendar-body__time-column-item">All Day</div>
         </div>
-    </div>
-    <div class="calendar-body__time-column">
-        <div
-            class="calendar-body__time-column-item"
-            *ngFor="let h of hours"
-        >
-            {{ h === 0 ? '12am' : (h < 12 ? h + 'am' : (h === 12 ? '12pm' : (h - 12) + 'pm')) }}
-        </div>
-        <div
-            class="calendar-body__current-time-line"
-            [ngStyle]="{ top: timeLinePosition + 'px' }"
-        ></div>
-    </div>
-    <div class="calendar-body__days-grid">
-        <div
-            class="calendar-body__day-column"
-            *ngFor="let day of days"
-        >
+        <div class="calendar-body__days-grid">
             <div
-                class="calendar-body__hour-cell"
-                *ngFor="let h of hours"
-                ngbDropdown
-                [autoClose]="false"
-                #addTask="ngbDropdown"
-                container="body"
+                class="calendar-body__day-column"
+                *ngFor="let day of days; let dayIndex = index"
             >
-               <div class="qt-pos-rel">
-                 <app-tasks-calendar-week-item-hour
-                   [day]="day"
-                   [h]="h"
-                   (onAddTask)="onAddTask($event);addTask.open();"
-                 ></app-tasks-calendar-week-item-hour>
-                 <div
-                   class="create-tasks-toogle"
-                   id="dropdownCreateTask"
-                   ngbDropdownToggle
-                 >
-                 </div>
-                 <div
-                   class="qt-dropdown-menu"
-                   ngbDropdownMenu
-                   aria-labelledby="dropdownCreateTask"
-                 >
-                   <app-task-header-add
-                     *ngIf="addTask.isOpen()"
-                     (onClose)="addTask.close()"
-                   ></app-task-header-add>
-                 </div>
-               </div>
+                <app-tasks-calendar-week-item-all-day
+                    *ngIf="dayIndex == 0"
+                    (onShowMore)="showMore = $event"
+                    [list]="getAllDayPositionedTasks()"
+                ></app-tasks-calendar-week-item-all-day>
+                <div
+                    class="calendar-body__hour-cell"
+                    [ngStyle]="{'height': showMore ? (getAllDayPositionedTasks().length * 32) + 'px' : '130px'}"
+                ></div>
+            </div>
+        </div>
+    </div>
+    <div class="qt-df">
+        <div class="calendar-body__time-column">
+            <div
+                class="calendar-body__time-column-item"
+                *ngFor="let h of hours"
+            >
+                {{ h === 0 ? '12am' : (h < 12 ? h + 'am' : (h === 12 ? '12pm' : (h - 12) + 'pm')) }}
             </div>
             <div
-                class="current-time-line"
+                class="calendar-body__current-time-line"
                 [ngStyle]="{ top: timeLinePosition + 'px' }"
             ></div>
+        </div>
+        <div class="calendar-body__days-grid">
+            <div
+                class="calendar-body__day-column"
+                *ngFor="let day of days"
+            >
+                <div
+                    class="calendar-body__hour-cell"
+                    *ngFor="let h of hours"
+                    ngbDropdown
+                    [autoClose]="false"
+                    #addTask="ngbDropdown"
+                    container="body"
+                >
+                    <div class="qt-pos-rel">
+                        <app-tasks-calendar-week-item-hour
+                            [day]="day"
+                            [h]="h"
+                            (onAddTask)="onAddTask($event);addTask.open();"
+                        ></app-tasks-calendar-week-item-hour>
+                        <div
+                            class="create-tasks-toogle"
+                            id="dropdownCreateTask"
+                            ngbDropdownToggle
+                        >
+                        </div>
+                        <div
+                            class="qt-dropdown-menu"
+                            ngbDropdownMenu
+                            aria-labelledby="dropdownCreateTask"
+                        >
+                            <app-task-header-add
+                                *ngIf="addTask.isOpen()"
+                                (onClose)="addTask.close()"
+                            ></app-task-header-add>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="current-time-line"
+                    [ngStyle]="{ top: timeLinePosition + 'px' }"
+                ></div>
+            </div>
         </div>
     </div>
 </div>

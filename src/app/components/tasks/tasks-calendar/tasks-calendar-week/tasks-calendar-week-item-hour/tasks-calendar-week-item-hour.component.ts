@@ -18,11 +18,15 @@ export class TasksCalendarWeekItemHourComponent {
     public usersStateService: UsersStateService,
   ) { }
 
+  isShoWTask(task) {
+    return new Date(task.endDate).getTime() - new Date(task.startDate).getTime() < 24 * 60 * 60 * 1000;
+
+  }
   isStartOfHour(date, hour): boolean {
     return new Date(date).getHours() === hour;
   }
   getListStartOfHour() {
-    return this.day ? this.day.tasks.filter(item => this.isStartOfHour(item.startDate, this.h)) : [];
+    return this.day ? this.day.tasks.filter(item => this.isStartOfHour(item.startDate, this.h) && this.isShoWTask(item)) : [];
   }
   editTask(task) {
     this.tasksStateService.openEditAside(task);

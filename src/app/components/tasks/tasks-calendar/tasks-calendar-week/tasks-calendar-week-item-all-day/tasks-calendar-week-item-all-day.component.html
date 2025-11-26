@@ -1,33 +1,31 @@
 <ng-template
     ngFor
-    let-task
+    let-p
     let-index="index"
-    [ngForOf]="getListStartOfHour()"
+    [ngForOf]="list"
 >
     <div
+        *ngIf="index < 3 || showMore"
         [ngStyle]="{
-        top: parseStyle(task,index).top + 'px',
-        height: parseStyle(task,index).height + 'px',
-        left: parseStyle(task,index).left + '%',
-        width: parseStyle(task,index).width + '%'
+            top: (32 * index) + 'px',
+          left: p.left + '%',
+        width: p.width + '%',
      }"
+        (click)="editTask(p.task)"
         class="task"
-        [ngClass]="{'--meeting':task.type == 'Meeting',
-                                            '--phone-call':task.type == 'Phone call',
-                                            '--to-do':task.type == 'To do'
+        [ngClass]="{'--meeting':p.task.type == 'Meeting',
+                                            '--phone-call':p.task.type == 'Phone call',
+                                            '--to-do':p.task.type == 'To do'
                                         }"
-        [textContent]="task.title"
-        (click)="editTask(task)"
-        placement="top"
-        [ngbTooltip]="task.title"
-        container="body"
+        [textContent]="p.task.title"
     >
     </div>
 </ng-template>
 <div
-    class="add-tasks qt-df qt-ai-c"
-    (click)="addTask()"
+    *ngIf="list.length > 4 && showMore == false"
+    class="more-tasks qt-mt-2 qt-df qt-ai-c"
+    (click)="setShowMore(true)"
 >
     <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8"></span>
-    Add Task
+    <span [textContent]="(list.length - 4) + ' more'"></span>
 </div>
