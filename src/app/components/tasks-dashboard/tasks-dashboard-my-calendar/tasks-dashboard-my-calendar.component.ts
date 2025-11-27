@@ -65,6 +65,12 @@ export class TasksDashboardMyCalendarComponent {
       this.cd.detectChanges();
     })
     this.sub.add(getChangeCompanies);
+    let geLefttFilter = this.tasksStateService.onFilter.subscribe((data) => {
+      this.filter.setFilterData(data);
+      this.getTasksCalendar();
+      this.cd.detectChanges();
+    });
+    this.sub.add(geLefttFilter);
   }
   prev() {
     this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate() - 1);

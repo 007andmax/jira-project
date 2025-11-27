@@ -48,6 +48,7 @@
   &__row {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    position: relative;
   }
 
   &__day {
@@ -56,7 +57,7 @@
     border-bottom: 1px solid $gray-200;
     border-left: 1px solid $gray-200;
     padding: 16px 10px 0;
-    position: relative;
+    position: unset;
     overflow: hidden;
 
     &:last-child {

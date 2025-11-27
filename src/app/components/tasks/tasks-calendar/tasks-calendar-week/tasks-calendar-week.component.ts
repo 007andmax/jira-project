@@ -173,8 +173,11 @@ export class TasksCalendarWeekComponent implements OnInit, OnDestroy {
     for (const ev of allDay) {
       // Clamp inside the week range
       const start = new Date(Math.max(new Date(ev.startDate).getTime(), this.weekStart.getTime()));
-      const end = new Date(Math.min(new Date(ev.endDate).getTime(), this.addDays(this.weekStart, 7).getTime()));
+      let end = new Date(Math.min(new Date(ev.endDate).getTime(), this.addDays(this.weekStart, 7).getTime()));
 
+      if (this.weekEnd.getTime() < end.getTime()) {
+        end = this.weekEnd;
+      }
       const startIndex = this.days.findIndex(
         d => d.date.toDateString() === start.toDateString()
       );

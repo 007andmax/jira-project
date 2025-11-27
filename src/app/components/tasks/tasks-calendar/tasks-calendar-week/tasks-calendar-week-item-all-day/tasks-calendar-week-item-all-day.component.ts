@@ -28,5 +28,7 @@ export class TasksCalendarWeekItemAllDayComponent {
     this.onShowMore.emit(data);
     this.cd.detectChanges();
   }
-
+  public trackById(index, item) {
+    return item.id;
+  }
 }

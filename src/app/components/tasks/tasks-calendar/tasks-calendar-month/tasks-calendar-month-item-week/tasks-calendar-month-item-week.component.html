@@ -1,39 +1,44 @@
 <div class="qt-df qt-ai-c qt-jc-sb">
-  <div
-    *ngIf="day.date"
-    class="calendar-body__date"
-    [ngClass]="{'--current-day': isCurrentDay() }"
-  >
-    {{ day.date.getDate() }}
-  </div>
-  <div
-    class="add-tasks qt-dif qt-ai-c qt-mt-4"
-    (click)="addTask()"
-  >
-    <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8"></span>
-    Add Task
-  </div>
+    <div
+        *ngIf="day.date"
+        class="calendar-body__date"
+        [ngClass]="{'--current-day': isCurrentDay() }"
+    >
+        {{ day.date.getDate() }}
+    </div>
+    <div
+        class="add-tasks qt-dif qt-ai-c qt-mt-4"
+        (click)="addTask()"
+    >
+        <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8"></span>
+        Add Task
+    </div>
 </div>
 <div class="tasks">
     <ng-template
         ngFor
         let-ev
         let-index="index"
-        [ngForOf]="day.tasks"
+        [ngForOf]="getAllDayPositionedTasks()"
+        [ngForTrackBy]="trackById"
     >
         <div
             *ngIf="index < 2"
             class="task"
-            [ngClass]="{'--meeting':ev.type == 'Meeting',
-                                            '--phone-call':ev.type == 'Phone call',
-                                            '--to-do':ev.type == 'To do'
+            [ngStyle]="{
+             top: (32 * index) + 'px',
+          left: ev.left + '%',
+        width: ev.width + '%',
+     }"
+            [ngClass]="{'--meeting':ev.task.type == 'Meeting',
+                                            '--phone-call':ev.task.type == 'Phone call',
+                                            '--to-do':ev.task.type == 'To do'
                                         }"
-            [textContent]="ev.title"
-            (click)="editTask(ev)"
+            [textContent]="ev.task.title"
+            (click)="editTask(ev.task)"
         >
         </div>
     </ng-template>
-
 </div>
 <div
     *ngIf="day.tasks.length > 2"
@@ -46,38 +51,38 @@
     (click)="p.open()"
     container="body"
 >
-  <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8"></span>
-  <span [textContent]="(day.tasks.length - 2) + ' more'"></span>
+    <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8"></span>
+    <span [textContent]="(day.tasks.length - 2) + ' more'"></span>
 </div>
 <ng-template #popContent>
     <div class="tasks-more-popup">
-       <div class="tasks-more-popup__header">
-         <div class="tasks-more-popup__title">Tasks</div>
-         <div
-           class="qt-icon icon__close qt-sz-20 pointer"
-           (click)="p.close()"
-         >
-         </div>
-       </div>
-       <div class="tasks-more-popup__body">
-         <ng-template
-           ngFor
-           let-ev
-           let-index="index"
-           [ngForOf]="day.tasks"
-         >
-           <div
-             *ngIf="index >= 2"
-             class="task"
-             [ngClass]="{'--meeting':ev.type == 'Meeting',
+        <div class="tasks-more-popup__header">
+            <div class="tasks-more-popup__title">Tasks</div>
+            <div
+                class="qt-icon icon__close qt-sz-20 pointer"
+                (click)="p.close()"
+            >
+            </div>
+        </div>
+        <div class="tasks-more-popup__body">
+            <ng-template
+                ngFor
+                let-ev
+                let-index="index"
+                [ngForOf]="day.tasks"
+            >
+                <div
+                    *ngIf="index >= 2"
+                    class="task"
+                    [ngClass]="{'--meeting':ev.type == 'Meeting',
                                             '--phone-call':ev.type == 'Phone call',
                                             '--to-do':ev.type == 'To do'
                                         }"
-             [textContent]="ev.title"
-             (click)="editTask(ev)"
-           >
-           </div>
-         </ng-template>
-       </div>
+                    [textContent]="ev.title"
+                    (click)="editTask(ev)"
+                >
+                </div>
+            </ng-template>
+        </div>
     </div>
 </ng-template>

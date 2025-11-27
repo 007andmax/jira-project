@@ -22,22 +22,22 @@
             class="calendar-body__time-column"
             [ngStyle]="{'height': showMore ? (getAllDayPositionedTasks().length * 32) + 'px' : '130px'}"
         >
-            <div class="">All Day</div>
+            <div class>All Day</div>
         </div>
         <div class="calendar-body__days-grid">
             <div
                 class="calendar-body__day-column"
                 *ngFor="let day of days; let dayIndex = index"
             >
+                <div
+                    class="calendar-body__hour-cell"
+                    [ngStyle]="{'height': showMore ? (getAllDayPositionedTasks().length * 32) + 'px' : '130px'}"
+                ></div>
                 <app-tasks-calendar-week-item-all-day
                     *ngIf="dayIndex == 0"
                     (onShowMore)="showMore = $event"
                     [list]="getAllDayPositionedTasks()"
                 ></app-tasks-calendar-week-item-all-day>
-                <div
-                    class="calendar-body__hour-cell"
-                    [ngStyle]="{'height': showMore ? (getAllDayPositionedTasks().length * 32) + 'px' : '130px'}"
-                ></div>
             </div>
         </div>
     </div>

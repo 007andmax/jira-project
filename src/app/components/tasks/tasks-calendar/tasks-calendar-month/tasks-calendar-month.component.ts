@@ -143,6 +143,7 @@ export class TasksCalendarMonthComponent {
       this.weeks.push(days.slice(i, i + 7));
     }
   }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

@@ -3,6 +3,7 @@
     let-p
     let-index="index"
     [ngForOf]="list"
+    [ngForTrackBy]="trackById"
 >
     <div
         *ngIf="index < 3 || showMore"
@@ -11,13 +12,13 @@
           left: p.left + '%',
         width: p.width + '%',
      }"
-        (click)="editTask(p.task)"
         class="task"
         [ngClass]="{'--meeting':p.task.type == 'Meeting',
                                             '--phone-call':p.task.type == 'Phone call',
                                             '--to-do':p.task.type == 'To do'
                                         }"
         [textContent]="p.task.title"
+        (click)="editTask(p.task)"
     >
     </div>
 </ng-template>
