@@ -1,4 +1,8 @@
-<div [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}">
+<div
+    calss="qt-pos-rel"
+    [ngClass]="{'exist-preloader':showPreloader}"
+    [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
+>
     <div
         infiniteScroll
         [infiniteScrollContainer]="container"
