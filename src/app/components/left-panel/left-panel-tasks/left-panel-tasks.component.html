@@ -38,14 +38,29 @@
             My Tasks
         </a>
     </li>
+    <li
+        href
+        [link]="'my-tasks'"
+        target="_blank"
+        appRightClickBlank
+        *ngIf="!customerPortalStateService.isCustomerPortal"
+    >
+        <a
+            [ngClass]="{'--active':activePage === 'my-tasks-calendar'}"
+            (click)="goToState('my-tasks-calendar')"
+            class="app-left-panel__menu-expand-link"
+        >
+            Calendar
+        </a>
+    </li>
 </ul>
 <hr
     class="app-left-panel__ticket-menu-line"
-    *ngIf="activePage === 'my-tasks'"
+    *ngIf="activePage === 'my-tasks' || activePage === 'my-tasks-calendar'"
 >
 <ul
     class="app-left-panel__filter-menu-expand menu-expand-show "
-    *ngIf="!customerPortalStateService.isCustomerPortal && activePage === 'my-tasks'"
+    *ngIf="!customerPortalStateService.isCustomerPortal && (activePage === 'my-tasks' || activePage === 'my-tasks-calendar')"
 >
     <li class="app-left-panel__menu-expand-subtitle">QUICK FILTERS</li>
     <ng-template

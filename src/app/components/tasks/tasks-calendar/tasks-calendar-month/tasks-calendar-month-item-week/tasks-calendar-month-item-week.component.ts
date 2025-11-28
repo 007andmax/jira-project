@@ -69,10 +69,11 @@ export class TasksCalendarMonthItemWeekComponent {
 
       const colStart = startIndex >= 0 ? startIndex : 0;
       const colEnd = endIndex >= 0 ? endIndex : 7;
+      const pxToPercent = (8 / document.body.querySelector(".calendar-body__day").clientWidth) * (100 / 7);
       positions.push({
         task: task,
-        left: colStart * (100 / 7),
-        width: (colEnd - colStart + 1) * (100 / 7)
+        left: colStart * (100 / 7) + pxToPercent,
+        width: (colEnd - colStart + 1) * (100 / 7) - pxToPercent * 2
       });
     }
 

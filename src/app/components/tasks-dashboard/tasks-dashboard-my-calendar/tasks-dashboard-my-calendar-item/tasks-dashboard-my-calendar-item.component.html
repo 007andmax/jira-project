@@ -5,16 +5,27 @@
     [ngForOf]="getListStartOfHour()"
 >
     <div
-        *ngIf="index == 0"
         class="task"
+        [ngStyle]="{
+        top: parseStyle(task,index).top + 'px',
+        height: parseStyle(task,index).height + 'px',
+        left: parseStyle(task,index).left + '%',
+        width: parseStyle(task,index).width + '%'
+     }"
         [ngClass]="{'--meeting':task.type == 'Meeting',
                                             '--phone-call':task.type == 'Phone call',
                                             '--to-do':task.type == 'To do'
                                         }"
         (click)="editTask(task)"
     >
-        <span class="calendar-body__hour-cell-title" [textContent]="task.title"></span>
-        <span class="calendar-body__hour-cell-text qt-mt-4" [textContent]="parseDate(task)"></span>
+        <span
+            class="calendar-body__hour-cell-title"
+            [textContent]="task.title"
+        ></span>
+        <span
+            class="calendar-body__hour-cell-text qt-mt-4"
+            [textContent]="parseDate(task)"
+        ></span>
     </div>
 </ng-template>
 <div
@@ -31,31 +42,32 @@
 <ng-template #popContent>
     <div class="tasks-more-popup">
         <div class="tasks-more-popup__header">
-          <div class="tasks-more-popup__title">Tasks</div>
-          <div
-            class="qt-icon icon__close qt-sz-20 pointer"
-            (click)="p.close()">
-          </div>
+            <div class="tasks-more-popup__title">Tasks</div>
+            <div
+                class="qt-icon icon__close qt-sz-20 pointer"
+                (click)="p.close()"
+            >
+            </div>
         </div>
         <div class="tasks-more-popup__body">
-          <ng-template
-            ngFor
-            let-ev
-            let-index="index"
-            [ngForOf]="day.tasks"
-          >
-            <div
-              *ngIf="index >= 2"
-              class="task"
-              [ngClass]="{'--meeting':ev.type == 'Meeting',
+            <ng-template
+                ngFor
+                let-ev
+                let-index="index"
+                [ngForOf]="day.tasks"
+            >
+                <div
+                    *ngIf="index >= 2"
+                    class="task"
+                    [ngClass]="{'--meeting':ev.type == 'Meeting',
                                             '--phone-call':ev.type == 'Phone call',
                                             '--to-do':ev.type == 'To do'
                                         }"
-              [textContent]="ev.title"
-              (click)="editTask(ev)"
-            >
-            </div>
-          </ng-template>
+                    [textContent]="ev.title"
+                    (click)="editTask(ev)"
+                >
+                </div>
+            </ng-template>
         </div>
     </div>
 </ng-template>
