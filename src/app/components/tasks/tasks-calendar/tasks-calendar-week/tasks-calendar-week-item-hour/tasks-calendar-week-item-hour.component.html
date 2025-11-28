@@ -20,6 +20,7 @@
         (click)="editTask(task)"
         placement="top"
         [ngbTooltip]="task.title"
+        [tooltipClass]="'my-tasks__week-hour-tooltip'"
         container="body"
     >
     </div>
@@ -28,6 +29,6 @@
     class="add-tasks qt-df qt-ai-c"
     (click)="addTask()"
 >
-    <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8"></span>
+    <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-4"></span>
     Add Task
 </div>

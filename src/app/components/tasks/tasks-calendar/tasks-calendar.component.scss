@@ -75,12 +75,11 @@
     }
 }
 
-
 .calendar-filter {
     position: sticky;
     top: 0;
     background-color: $white;
-    z-index: 1071;
+    z-index: 6;
     padding-top: 24px;
 
     &__inner {
@@ -90,7 +89,8 @@
       border-radius: 8px 8px 0 0;
     }
 
-    &__arrow-left,&__arrow-right {
+    &__arrow-left,
+    &__arrow-right {
         width: 36px;
         height: 36px;
         padding: 8px;

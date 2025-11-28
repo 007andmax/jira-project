@@ -60,6 +60,12 @@
     position: unset;
     overflow: hidden;
 
+    &:has(.task) {
+      ::ng-deep .more-tasks {
+        margin-top: 62px;
+      }
+    }
+
     &:last-child {
       border-right: 1px solid $gray-200;
     }

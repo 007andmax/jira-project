@@ -3186,10 +3186,6 @@ app-tasks-dashboard-my-calendar {
   box-shadow: 0 12px 16px -4px #10182814, 0 4px 6px -2px #10182808;
   border: 1px solid $gray-200;
 
-  &:hover {
-    border-color: $gray-400;
-  }
-
   &__header {
     display: flex;
     align-items: center;
@@ -3201,9 +3197,21 @@ app-tasks-dashboard-my-calendar {
   }
 
   &__body {
-    max-height: 327px;
+    max-height: 388px;
     overflow: auto;
-    padding: 8px 10px;
+    padding: 2px 10px;
+  }
+
+  div.task {
+    position: relative;
+    height: 32px;
+    border-radius: 6px;
+    margin: 6px 0;
+    line-height: 22px;
+
+    &:hover {
+      background-color: $gray-50;
+    }
   }
 
   &__title {

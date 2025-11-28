@@ -24,9 +24,9 @@
 </ng-template>
 <div
     *ngIf="list.length > 4 && showMore == false"
-    class="more-tasks qt-mt-2 qt-df qt-ai-c"
+    class="more-tasks qt-mt-2 qt-dif qt-ai-c"
     (click)="setShowMore(true)"
 >
-    <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8"></span>
+    <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-4"></span>
     <span [textContent]="(list.length - 4) + ' more'"></span>
 </div>

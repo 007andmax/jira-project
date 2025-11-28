@@ -10,7 +10,7 @@
         class="add-tasks qt-dif qt-ai-c qt-mt-4"
         (click)="addTask()"
     >
-        <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8"></span>
+        <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-4"></span>
         Add Task
     </div>
 </div>
@@ -26,7 +26,7 @@
             *ngIf="index < 2"
             class="task"
             [ngStyle]="{
-             top: (32 * index) + 'px',
+             top: 46 + (32 * index) + 'px',
           left: ev.left + '%',
         width: ev.width + '%',
      }"
@@ -42,7 +42,7 @@
 </div>
 <div
     *ngIf="day.tasks.length > 2"
-    class="more-tasks qt-mt-2 qt-df qt-ai-c"
+    class="more-tasks qt-mt-2 qt-dif qt-ai-c"
     [ngbPopover]="popContent"
     popoverClass="popover__tasks-more-popup"
     [autoClose]="false"
@@ -51,7 +51,7 @@
     (click)="p.open()"
     container="body"
 >
-    <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8"></span>
+    <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-4"></span>
     <span [textContent]="(day.tasks.length - 2) + ' more'"></span>
 </div>
 <ng-template #popContent>
