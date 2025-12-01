@@ -13,7 +13,6 @@ export class TasksCalendarWeekItemHourComponent {
   @Input() day: CalendarWeek;
   @Input() h: Number;
   @ViewChild('p', { static: false }) p: any;
-  @Output() onAddTask = new EventEmitter();
   constructor(private tasksStateService: TasksStateService,
     public usersStateService: UsersStateService,
   ) { }
@@ -31,18 +30,13 @@ export class TasksCalendarWeekItemHourComponent {
   editTask(task) {
     this.tasksStateService.openEditAside(task);
   }
-  addTask() {
-    this.onAddTask.emit({
-      startDate: new Date(this.day.date.getFullYear(), this.day.date.getMonth(), this.day.date.getDate(), Number(this.h), 0, 0),
-      assignedUsersIds: [this.usersStateService.getCurrentUser().id]
-    });
-  }
+
   parseStyle(item: Task, colIndex: number) {
     const startHour = new Date(item.startDate).getHours() + new Date(item.startDate).getMinutes() / 60;
     const endHour = new Date(item.endDate).getHours() + new Date(item.endDate).getMinutes() / 60;
     return {
-      top: startHour * 47,
-      height: (endHour - startHour) * 47 < 20 ? 20 : (endHour - startHour) * 47,
+      top: startHour * 48,
+      height: (endHour - startHour) * 48 < 20 ? 20 : (endHour - startHour) * 48,
       left: (colIndex / this.getListStartOfHour().length) * 100,
       width: (1 / this.getListStartOfHour().length) * 100
     }

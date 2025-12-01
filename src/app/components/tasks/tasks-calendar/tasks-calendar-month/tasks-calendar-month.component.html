@@ -23,12 +23,12 @@
             [autoClose]="false"
             #addTask="ngbDropdown"
             container="body"
+            (click)="onAddTask(day);addTask.open()"
         >
             <app-tasks-calendar-month-item-week
                 [weekStart]="week[0]?.date"
                 [weekEnd]="week[week.length - 1]?.date"
                 [day]="day"
-                (onAddTask)="onAddTask($event);addTask.open();"
             ></app-tasks-calendar-month-item-week>
             <div
                 class="create-tasks-toogle"

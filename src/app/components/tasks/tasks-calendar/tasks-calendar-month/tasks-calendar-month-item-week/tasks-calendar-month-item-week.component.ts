@@ -13,7 +13,6 @@ export class TasksCalendarMonthItemWeekComponent {
   @Input() day: CalendarMonth;
   @Input() weekStart: Date;
   @Input() weekEnd: Date;
-  @Output() onAddTask = new EventEmitter();
   daysOfWeek: Date[] = [];
   constructor(private tasksStateService: TasksStateService,
     public usersStateService: UsersStateService,
@@ -23,14 +22,13 @@ export class TasksCalendarMonthItemWeekComponent {
     this.generateWeek();
 
   }
-  editTask(task) {
+  editTask(event, task) {
+    this.stopPropagation(event);
     this.tasksStateService.openEditAside(task);
   }
-  addTask() {
-    this.onAddTask.emit({
-      startDate: new Date(this.day.date.getFullYear(), this.day.date.getMonth(), this.day.date.getDate(), 0, 0, 0),
-      assignedUsersIds: [this.usersStateService.getCurrentUser().id]
-    });
+  stopPropagation(event) {
+    event.preventDefault();
+    event.stopPropagation();
   }
   generateWeek() {
     this.daysOfWeek = [];

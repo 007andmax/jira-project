@@ -30,3 +30,11 @@
     <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-4"></span>
     <span [textContent]="(list.length - 4) + ' more'"></span>
 </div>
+<div
+    *ngIf="showMore"
+    class="more-tasks qt-mt-2 qt-dif qt-ai-c"
+    (click)="setShowMore(false)"
+>
+    <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-4"></span>
+    <span>Show less</span>
+</div>

@@ -185,6 +185,7 @@
   &:hover {
     .add-tasks {
       display: flex;
+      opacity: 1;
     }
   }
 }
@@ -202,4 +203,13 @@
     color: $gray-500;
     border-left: 1px solid $gray-200;
   }
+}
+.add-tasks {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
 }

@@ -62,17 +62,25 @@
                 <div
                     class="calendar-body__hour-cell"
                     *ngFor="let h of hours"
-                    ngbDropdown
-                    [autoClose]="false"
-                    #addTask="ngbDropdown"
-                    container="body"
                 >
-                    <div class="qt-pos-rel">
-                        <app-tasks-calendar-week-item-hour
-                            [day]="day"
-                            [h]="h"
-                            (onAddTask)="onAddTask($event);addTask.open();"
-                        ></app-tasks-calendar-week-item-hour>
+                    <app-tasks-calendar-week-item-hour
+                        [day]="day"
+                        [h]="h"
+                    ></app-tasks-calendar-week-item-hour>
+                    <div
+                        class="qt-pos-rel"
+                        ngbDropdown
+                        [autoClose]="false"
+                        #addTask="ngbDropdown"
+                        container="body"
+                    >
+                        <div
+                            class="add-tasks qt-df qt-ai-c"
+                            (click)="onAddTask(day,h);addTask.open();"
+                        >
+                            <span class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-4"></span>
+                            Add Task
+                        </div>
                         <div
                             class="create-tasks-toogle"
                             id="dropdownCreateTask"

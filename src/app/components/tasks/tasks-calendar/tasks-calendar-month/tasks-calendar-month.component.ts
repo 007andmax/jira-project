@@ -72,12 +72,6 @@ export class TasksCalendarMonthComponent {
     this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 1);
     this.getTasksCalendar();
   }
-  onAddTask(data) {
-    this.tasksStateService.setTaskAddCalendar(new TaskAddCalendar({
-      startDate: data.startDate,
-      assignedUser: this.usersStateService.getCurrentUser()
-    }));
-  }
   public getTasksCalendar() {
     this.generateCalendar(this.currentDate);
     this.tasksService.getTasksCalendar(moment(this.weeks[0][0].date).format('YYYY-MM-DD'), 'MONTH', this.filter.techUser ? this.filter.techUser.id : null, this.filter.filter, this.filter.archived).subscribe((data: any) => {
@@ -97,6 +91,12 @@ export class TasksCalendarMonthComponent {
       console.log("this.weeks", this.weeks)
       this.cd.detectChanges();
     });
+  }
+  onAddTask(day) {
+    this.tasksStateService.setTaskAddCalendar(new TaskAddCalendar({
+      startDate: new Date(day.date.getFullYear(), day.date.getMonth(), day.date.getDate(), 0, 0, 0),
+      assignedUser: this.filter.techUser
+    }));
   }
   generateCalendar(baseDate: Date) {
     const year = baseDate.getFullYear();

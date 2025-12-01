@@ -13,7 +13,9 @@ export class TasksDashboardMyCalendarItemComponent extends TasksCalendarWeekItem
 
 
   parseDate(item) {
-    return moment(item.startDate).format('hh:mm A') + " - " + moment(item.endDate).format('DD MMM YYYY');
+    const multiDay = new Date(item.endDate).getTime() - new Date(item.startDate).getTime() >= 24 * 60 * 60 * 1000;
+    if (multiDay) return moment(item.startDate).format('hh:mm A') + " - " + moment(item.endDate).format('DD MMM YYYY hh:mm A');
+    return moment(item.startDate).format('hh:mm A') + " - " + moment(item.endDate).format('hh:mm A');
   }
   getListStartOfHour() {
     return this.day ? this.day.tasks.filter(item => this.isStartOfHour(item.startDate, this.h)) : [];

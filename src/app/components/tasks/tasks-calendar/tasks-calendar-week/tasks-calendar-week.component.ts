@@ -92,10 +92,10 @@ export class TasksCalendarWeekComponent implements OnInit, OnDestroy {
       this.days.push(new CalendarWeek(d));
     }
   }
-  onAddTask(data) {
+  onAddTask(day, h) {
     this.tasksStateService.setTaskAddCalendar(new TaskAddCalendar({
-      startDate: data.startDate,
-      assignedUser: this.usersStateService.getCurrentUser()
+      startDate: new Date(day.date.getFullYear(), day.date.getMonth(), day.date.getDate(), Number(h), 0, 0),
+      assignedUser: this.filter.techUser
     }));
   }
   isCurrentDay(date): boolean {

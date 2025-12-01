@@ -18,6 +18,11 @@
     text-overflow: ellipsis;
     display:flex;
     flex-direction: column;
+    &:hover {
+        z-index: 999;
+        box-shadow: -8px 0 8px #0000000d;
+        border-color: $gray-400;
+    }
     &::after {
         content: '';
         position: absolute;

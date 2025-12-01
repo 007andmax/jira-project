@@ -183,7 +183,7 @@ export class TaskHeaderAddComponent {
   }
   close() {
     this.submitted = false;
-    this.modelForm.reset();
+    if (this.modelForm)  this.modelForm.reset();
     let step = 1;
     let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany() ? this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
     if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') step = 1;
