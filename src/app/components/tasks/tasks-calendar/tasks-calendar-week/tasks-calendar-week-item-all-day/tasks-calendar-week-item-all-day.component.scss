@@ -62,4 +62,22 @@
 .more-tasks {
     position: absolute;
     bottom: 10px;
+    left: 10px;
+}
+.more-tasks {
+    padding: 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    color: $gray-700;
+    font-weight: 500;
+    border: 1px solid transparent;
+
+    &:hover {
+        border-color: $gray-200;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    &+.add-tasks {
+        margin-top: 1px;
+    }
 }
