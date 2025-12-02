@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, NgZone } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, NgZone } from '@angular/core';
 import * as moment from "moment";
 import { TasksService } from 'src/app/services/tasks/tasks.service';
 import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
@@ -21,12 +21,14 @@ export class TasksDashboardMyCalendarComponent {
   timeLinePosition = 0;
   private timer!: any;
   currentTime = new Date();
+  isScroll: boolean = false;
   sub: Subscription = new Subscription();
   constructor(public tasksService: TasksService,
     public usersStateService: UsersStateService,
     public tasksStateService: TasksStateService,
     private zone: NgZone,
     public cd: ChangeDetectorRef,
+    private elRef: ElementRef,
     public tasksRealTimeService: TasksRealTimeService,
   ) { }
   ngOnInit() {
@@ -105,6 +107,9 @@ export class TasksDashboardMyCalendarComponent {
         console.log("this.weekEnd", this.weekEnd);
         console.log("data", data);
         console.log("this.days", this.days);*/
+      console.log(this.elRef.nativeElement.querySelector(".page-my-tasks").clientHeight);
+      if (!this.isScroll) this.elRef.nativeElement.querySelector(".page-my-tasks").scrollTo(0, this.timeLinePosition - ((this.elRef.nativeElement.querySelector(".page-my-tasks").clientHeight - 100) / 2));
+      this.isScroll = true;
       this.cd.detectChanges();
     });
   }
@@ -130,13 +135,15 @@ export class TasksDashboardMyCalendarComponent {
         this.zone.run(() => {
           this.currentTime = new Date();
           const hours = this.currentTime.getHours() + this.currentTime.getMinutes() / 60;
-          this.timeLinePosition = hours * 68; // 1 hour = 60px
+          this.timeLinePosition = hours * (67 + 12); // 1 hour = 60px
         });
       }, 60000); // update every minute
     });
     // initial position
     const hours = this.currentTime.getHours() + this.currentTime.getMinutes() / 60;
-    this.timeLinePosition = hours * 68;
+    this.timeLinePosition = hours * (67 + 12);
+
+
   }
   ngOnDestroy() {
     clearInterval(this.timer);

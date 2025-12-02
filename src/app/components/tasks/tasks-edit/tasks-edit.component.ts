@@ -22,6 +22,7 @@ export class TasksEditComponent extends TasksAddComponent {
   selectedCompany: Company;
   selectedTicket: Ticket = null;
   isInitEditNote: boolean = false;
+  isInitEditDate: boolean = false;
   isInitTitle: boolean = false;
   @ViewChild('datePicker', { static: false }) datePicker: TasksDatePickerComponent;
   ngOnInit() {
@@ -134,6 +135,8 @@ export class TasksEditComponent extends TasksAddComponent {
     }
   }
   onCloseDatePicker(event) {
+    console.log("onCloseDatePicker", event)
+    if (!event) this.isInitEditDate = true;
     if (event && this.currentService.item) {
       let update = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
       this.currentService.setDurationStart(this.modelForm.controls["startDate"].value);
@@ -271,7 +274,7 @@ export class TasksEditComponent extends TasksAddComponent {
   }
   closeTask() {
     this.saveBtn.setDisabled(true);
-    if (!this.isInitEditNote && !this.isInitTitle) this.tasksService.changeStatusTask(this.task.id, "CLOSED").subscribe(res => {
+    if (!this.isInitEditNote && !this.isInitTitle && !this.isInitEditDate) this.tasksService.changeStatusTask(this.task.id, "CLOSED").subscribe(res => {
       this.saveBtn.setDisabled(false);
       this.close();
     });
@@ -336,9 +339,10 @@ export class TasksEditComponent extends TasksAddComponent {
     //   this.saveBtn.setDisabled(true);
     if (this.currentService.item && this.currentService.item.versionedId) this.modelForm.controls["ticketUpdates"].setValue([this.getDataForUpdateService()])
     this.tasksService.editTask(this.task.id, data).subscribe(res => {
-      if ((this.isInitTitle || this.isInitEditNote) && this.saveBtn && this.saveBtn.isBlock()) {
+      if ((this.isInitTitle || this.isInitEditNote || this.isInitEditDate) && this.saveBtn && this.saveBtn.isBlock()) {
         this.isInitEditNote = false;
         this.isInitTitle = false;
+        this.isInitEditDate = false;
         this.closeTask();
       } else {
         if (this.saveBtn) this.saveBtn.setDisabled(false);

@@ -25,7 +25,6 @@ export class TasksDashboardMyCalendarItemComponent extends TasksCalendarWeekItem
     const endHour = new Date(item.endDate).getHours() + new Date(item.endDate).getMinutes() / 60;
     const multiDay = new Date(item.endDate).getTime() - new Date(item.startDate).getTime() >= 24 * 60 * 60 * 1000;
     let height = 0;
-    console.log("multiDay", multiDay);
     if (multiDay) height = (24 - startHour) * (67 + 12);
     if (!multiDay) height = (endHour - startHour) * (67 + 12) < 20 ? 20 : (endHour - startHour) * (67 + 12)
     return {
