@@ -17,7 +17,10 @@
     </ng-template>
 </div>
 <div class="calendar-body">
-    <div class="qt-df all-day-row">
+    <div
+        class="qt-df all-day-row"
+        *ngIf="getAllDayPositionedTasks().length > 0"
+    >
         <div
             class="calendar-body__time-column"
             [ngStyle]="{'height': showMore ? (getAllDayPositionedTasks().length * 32) + 'px' : '130px'}"
