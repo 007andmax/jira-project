@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 import { NotificationsStateService } from 'src/app/states/notifications/notifications-state.service';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { TaskHeaderAddComponent } from '../tasks/task-header-add/task-header-add.component';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 @Component({
   selector: 'app-header',
@@ -37,6 +38,7 @@ export class HeaderComponent implements OnInit {
     private permissionsService: PermissionsService,
     public customerPortalStateService: CustomerPortalStateService,
     private notificationsStateService: NotificationsStateService,
+    private websocketService: WebsocketService,
     public companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
@@ -87,6 +89,7 @@ export class HeaderComponent implements OnInit {
     //this.quoteStateService.goToState(state);
   }
   public logOut() {
+    this.websocketService.isLogOut = true;
     window.location.href = '/logout';
     window.location.hash = '';
   }

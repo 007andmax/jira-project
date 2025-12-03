@@ -65,6 +65,7 @@ export class WebsocketService {
   isResetWebSocket: boolean = false;
   ws;
   blockWebSocket: boolean = false;
+  isLogOut: boolean = false;
   /**
    * Users api service constructor
    * @param {UsersService} usersService Service to work users
@@ -173,7 +174,7 @@ export class WebsocketService {
       console.log("debug", data);
     }
     this.stompClient.onWebSocketClose = (data) => {
-      this.usersService.isAuthorized().subscribe(res => {
+      if (!this.isLogOut) this.usersService.isAuthorized().subscribe(res => {
         setTimeout(() => {
           this.onInitConnect();
         }, 20000);
