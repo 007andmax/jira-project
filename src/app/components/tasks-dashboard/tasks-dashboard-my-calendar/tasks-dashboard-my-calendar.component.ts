@@ -41,8 +41,6 @@ export class TasksDashboardMyCalendarComponent {
       if (this.currentDate.getFullYear() === taskDate.getFullYear() &&
         this.currentDate.getMonth() === taskDate.getMonth() &&
         this.currentDate.getDate() === taskDate.getDate()) {
-        console.log("data realtime", data);
-        console.log("this.filter", this.filter);
         if (data.action === 'TASK_SAVED' && this.filter.checkFilterUse(new Task(data.data))) this.dayTasks.tasks.push(new Task(data.data));
         if (data.action === 'TASK_EDITED') {
           let index = this.dayTasks.tasks.findIndex(item => item.id == data.data.id);
@@ -89,25 +87,8 @@ export class TasksDashboardMyCalendarComponent {
   public getTasksCalendar() {
 
     this.tasksService.getTasksCalendar(moment(this.currentDate).format('YYYY-MM-DD'), 'DAY', this.filter.techUser ? this.filter.techUser.id : null, null, false).subscribe((data: any) => {
-      // this.populateTasksToDays(data.tasks);
-      console.log("data", data);
       this.dayTasks = new CalendarWeek(new Date(data.days[0].date));
       this.dayTasks.tasks = data.days[0].tasks;
-      //   this.tasksStateService.setTasksCalendarDays(data.days);
-      /*  this.days.forEach(day => {
-          let find = data.days.find(d => {
-            const dDate = new Date(d.date);
-            return dDate.getFullYear() === day.date.getFullYear() &&
-              dDate.getMonth() === day.date.getMonth() &&
-              dDate.getDate() === day.date.getDate();
-          });
-          if (find) day.tasks = find.tasks.map(t => new Task(t));
-        });
-  
-        console.log("this.weekEnd", this.weekEnd);
-        console.log("data", data);
-        console.log("this.days", this.days);*/
-      console.log(this.elRef.nativeElement.querySelector(".page-my-tasks").clientHeight);
       if (!this.isScroll) this.elRef.nativeElement.querySelector(".page-my-tasks").scrollTo(0, this.timeLinePosition - ((this.elRef.nativeElement.querySelector(".page-my-tasks").clientHeight - 100) / 2));
       this.isScroll = true;
       this.cd.detectChanges();

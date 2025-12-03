@@ -30,7 +30,6 @@ export class TasksCalendarComponent {
   ) { }
 
   ngOnInit() {
-    console.log("this.tasksStateService", this.tasksStateService.filter)
     this.filter = this.tasksStateService.filter;
     let geLefttFilter = this.tasksStateService.onFilter.subscribe((data) => {
       document.body.querySelector(".main-container").scrollTo(0, 0);

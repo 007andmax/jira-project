@@ -183,14 +183,12 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
                 Validators.required
               ]);
             }
-            console.log("res", res);
-            this.templeteForm.patchValue({
+             this.templeteForm.patchValue({
               subject: this.templatesData.subject,
               body: this.templatesData.body,
               isActive: (this.emailPages.activeAndNotDefault[key]) ? this.emailPages.activeAndNotDefault[key].isActive : false
             });
-            console.log("this.templeteForm", this.templeteForm);
-          }
+             }
           this.openEmailTemplate = key;
         })
       )

@@ -44,7 +44,6 @@ export class ContractsBlockTimeValidate {
         return this.rateExceeding;
     }
     public isValidate(contractsBlockTime) {
-        console.log("contractsBlockTime.services", contractsBlockTime.services);
         if (!contractsBlockTime.companyId) this.company = false;
         if (contractsBlockTime.description === "") this.description = false;
         if (contractsBlockTime.includedHours === "") this.includedHours = false;

@@ -33,7 +33,6 @@ export class TasksCalendarWeekComponent implements OnInit, OnDestroy {
     public tasksRealTimeService: TasksRealTimeService,
   ) { }
   ngOnInit() {
-    console.log("hours", this.hours);
     let currentDate = new Date();
     const dayOfWeek = currentDate.getDay(); // 0 = Sun
     this.weekStart = new Date(currentDate);
@@ -120,10 +119,6 @@ export class TasksCalendarWeekComponent implements OnInit, OnDestroy {
         });
         if (find) day.tasks = find.tasks.map(t => new Task(t));
       });
-
-      console.log("this.weekEnd", this.weekEnd);
-      console.log("data", data);
-      console.log("this.days", this.days);
       this.cd.detectChanges();
     });
   }
@@ -167,7 +162,6 @@ export class TasksCalendarWeekComponent implements OnInit, OnDestroy {
     this.getAllDayEvents().forEach(arr => {
       allDay = allDay.concat(arr);
     })
-    //  console.log("allDay", allDay);
     const positions: any[] = [];
 
     for (const ev of allDay) {

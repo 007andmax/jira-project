@@ -45,10 +45,7 @@ export class TasksCalendarMonthItemWeekComponent {
       today.getDate() === this.day.date.getDate();
   }
   getAllDayPositionedTasks(): any[] {
-
-    //  console.log("allDay", allDay);
     const positions: any[] = [];
-    //  console.log("this.day.tasks", this.day.tasks);
     for (const task of this.day.tasks) {
       // Clamp inside the week range
       const start = new Date(Math.max(new Date(task.startDate).getTime(), this.weekStart.getTime()));

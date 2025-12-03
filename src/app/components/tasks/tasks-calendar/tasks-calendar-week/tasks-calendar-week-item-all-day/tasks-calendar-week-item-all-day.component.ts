@@ -20,7 +20,6 @@ export class TasksCalendarWeekItemAllDayComponent {
 
   }
   editTask(task) {
-    console.log("editTask", task);
     this.tasksStateService.openEditAside(task);
   }
   setShowMore(data) {

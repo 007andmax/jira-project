@@ -45,7 +45,6 @@ export class TasksCalendarMonthComponent {
             }
           }
           if (data.action === 'TASK_DELETED') {
-            console.log("2");
             let index = day.tasks.findIndex(item => item.id == data.data);
             if (index > -1) {
               day.tasks.splice(index, 1);
@@ -87,8 +86,6 @@ export class TasksCalendarMonthComponent {
           if (find) day.tasks = find.tasks.map(t => new Task(t));
         });
       });
-      console.log("data", data);
-      console.log("this.weeks", this.weeks)
       this.cd.detectChanges();
     });
   }

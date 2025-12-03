@@ -100,7 +100,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.sub.add(onChangeUsers);
     let filter = this.companiesStateService.filter.subscribe(data => {
       this.showPreloader = true;
-      console.log("this.companyFilter", this.companyFilter);
       this.companyFilter.setFilters(data);
       document.body.querySelector(".main-container").scrollTo(0, 0);
       (<any>document.body.querySelector(".qt-page-list__header-thead-container .qt-checkbox input")).checked = false;
@@ -167,7 +166,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
   toggleAllCompanies(event) {
     this.selectAll = event.target.checked;
-    console.log("this.selectAll", this.selectAll);
     this.onSelectAllCompanies(this.selectAll);
     this.cd.detectChanges();
   }

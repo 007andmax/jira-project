@@ -135,8 +135,7 @@ export class TasksEditComponent extends TasksAddComponent {
     }
   }
   onCloseDatePicker(event) {
-    console.log("onCloseDatePicker", event)
-    if (!event) this.isInitEditDate = true;
+      if (!event) this.isInitEditDate = true;
     if (event && this.currentService.item) {
       let update = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
       this.currentService.setDurationStart(this.modelForm.controls["startDate"].value);
