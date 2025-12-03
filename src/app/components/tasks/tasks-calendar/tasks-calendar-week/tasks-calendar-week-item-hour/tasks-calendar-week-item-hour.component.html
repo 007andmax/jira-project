@@ -1,0 +1,27 @@
+<ng-template
+    ngFor
+    let-task
+    let-index="index"
+    [ngForOf]="getListStartOfHour()"
+>
+    <div
+        [ngStyle]="{
+        top: parseStyle(task,index).top + 'px',
+        height: parseStyle(task,index).height + 'px',
+        left: parseStyle(task,index).left + '%',
+        width: parseStyle(task,index).width + '%'
+     }"
+        class="task"
+        [ngClass]="{'--meeting':task.type == 'Meeting',
+                                            '--phone-call':task.type == 'Phone call',
+                                            '--to-do':task.type == 'To do'
+                                        }"
+        [textContent]="task.title"
+        (click)="editTask(task)"
+        placement="top"
+        [ngbTooltip]="task.title"
+        [tooltipClass]="'my-tasks__week-hour-tooltip'"
+        container="body"
+    >
+    </div>
+</ng-template>

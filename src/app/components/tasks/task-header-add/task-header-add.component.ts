@@ -16,6 +16,7 @@ import { Task } from '../class/task';
 import * as moment from "moment";
 import { TasksDatePickerComponent } from '../tasks-date-picker/tasks-date-picker.component';
 import { TaskHeaderAddTypeComponent } from './task-header-add-type/task-header-add-type.component';
+import { TechUsersComponent } from '../../shared/tech-users/tech-users.component';
 
 @Component({
   selector: 'app-task-header-add',
@@ -29,7 +30,7 @@ export class TaskHeaderAddComponent {
   submitted: boolean = false;
   formatDate: string = FORMAT_DATE_2;
   @ViewChild('type', { static: true }) type: TaskHeaderAddTypeComponent;
-  @ViewChild('tachUser', { static: true }) tachUser: TasksDatePickerComponent;
+  @ViewChild('tachUser', { static: true }) tachUser: TechUsersComponent;
   @ViewChild('datePicker', { static: true }) datePicker: TasksDatePickerComponent;
   @ViewChild('saveBtn', { static: false }) saveBtn: DisabledBtnDirective;
   sub: Subscription = new Subscription();
@@ -46,6 +47,7 @@ export class TaskHeaderAddComponent {
     public modalService: NgbModal,
   ) { }
   ngOnInit() {
+    if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetTechUsers(data);
     })
@@ -54,6 +56,25 @@ export class TaskHeaderAddComponent {
       this.onGetTechUsers(this.usersStateService.getAllUsers());
     })
     this.sub.add(onChangeUsers);
+    if (this.tasksStateService.taskAddCalendar) {
+      this.initModelForm();
+      let step = 1;
+      let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany() ? this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
+      if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') step = 1;
+      if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') step = 5;
+      if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') step = 10;
+      if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') step = 15;
+      let startDate = new Date(this.tasksStateService.taskAddCalendar.startDate);
+      let endDate = new Date(startDate.getTime() + step * 60000);
+      this.modelForm.patchValue({
+        startDate: startDate,
+        endDate: endDate,
+        assignedUsersIds: [this.tasksStateService.taskAddCalendar.assignedUser.id],
+      });
+      this.tachUser.setEditUsers([this.tasksStateService.taskAddCalendar.assignedUser]);
+      this.datePicker.setEditDates(startDate, endDate);
+      this.tasksStateService.setTaskAddCalendar(null);
+    }
   }
   initModelForm() {
     let step = 1;
@@ -162,7 +183,7 @@ export class TaskHeaderAddComponent {
   }
   close() {
     this.submitted = false;
-    this.modelForm.reset();
+    if (this.modelForm)  this.modelForm.reset();
     let step = 1;
     let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany() ? this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
     if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') step = 1;

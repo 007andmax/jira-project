@@ -1,0 +1,61 @@
+@import "./src/assets/styles/variable";
+.tasks-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* ★ allows wrapping to next row */
+    gap: 2px;
+}
+.task {
+    position: absolute;
+    z-index: 1;
+    border: 1px solid $gray-200;
+    font-weight: 500;
+    color: $gray-900;
+    height: 28px;
+    font-size: 14px;
+    line-height: 20px;
+    border-radius: 4px;
+    padding: 4px 4px 4px 12px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: $white;
+    &:hover {
+        z-index: 999;
+        box-shadow: -8px 0 8px #0000000d;
+        border-color: $gray-400;
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 4px;
+        bottom: 4px;
+        border-radius: 4px;
+    }
+
+    &.--meeting {
+        &::after {
+            background-color: $purple-600;
+        }
+    }
+
+    &.--phone-call {
+        &::after {
+            background-color: $primary-blue-700;
+        }
+    }
+
+    &.--to-do {
+        &::after {
+            background-color: $gray-500;
+        }
+    }
+}
+
+::ng-deep .my-tasks__week-hour-tooltip {
+  z-index: 5;
+}

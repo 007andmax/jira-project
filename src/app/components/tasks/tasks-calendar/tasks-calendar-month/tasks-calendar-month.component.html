@@ -1,0 +1,51 @@
+<div class="calendar-header">
+    <ng-template
+        ngFor
+        let-item
+        [ngForOf]="daysInWeek"
+    >
+        <div
+            class="calendar-header__item"
+            [textContent]="item"
+        ></div>
+    </ng-template>
+</div>
+<div class="calendar-body calendar-body--weeks">
+    <div
+        *ngFor="let week of weeks"
+        class="calendar-body__row week"
+    >
+        <div
+            *ngFor="let day of week"
+            class="calendar-body__day"
+            [class.empty]="!day.date"
+            ngbDropdown
+            [autoClose]="false"
+            #addTask="ngbDropdown"
+            container="body"
+            (click)="onAddTask(day);addTask.open()"
+        >
+            <app-tasks-calendar-month-item-week
+                [weekStart]="week[0]?.date"
+                [weekEnd]="week[week.length - 1]?.date"
+                [day]="day"
+            ></app-tasks-calendar-month-item-week>
+            <div
+                class="create-tasks-toogle"
+                id="dropdownCreateTask"
+                ngbDropdownToggle
+            >
+            </div>
+            <div
+                class="qt-dropdown-menu"
+                ngbDropdownMenu
+                aria-labelledby="dropdownCreateTask"
+            >
+                <app-task-header-add
+                    *ngIf="addTask.isOpen()"
+                    (onClose)="addTask.close()"
+                ></app-task-header-add>
+            </div>
+        </div>
+    </div>
+</div>

@@ -12,7 +12,7 @@ import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
   providers: [TicketsListService]
 })
 export class TasksDashboardMyTasksListComponent extends TasksListComponent {
-
+  container = document.body.querySelector(".my-task-dashboard__my-task");
   @Input() filterType: string;
 
   public onScroll() {

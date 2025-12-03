@@ -4,14 +4,10 @@
         [textContent]="parseDate()"
     ></div>
     <div
-        *ngIf="currentUser"
         class="qt-fs-26 qt-lh-12 qt-fw-500 qt-color-gray-900 qt-mt-6"
-        [textContent]="'Good morning, ' + currentUser.firstName"
+        [textContent]="'Good morning, ' + (currentUser.firstName || '')"
     ></div>
-    <div
-        class="dashboard-stats qt-mt-20"
-        *ngIf="stats"
-    >
+    <div class="dashboard-stats qt-mt-20">
         <div class="dashboard-stats__col">
             <div class="dashboard-stats-icon">
                 <div class="qt-icon icon__tasks qt-sz-18 qt-mr-18"></div>
@@ -19,7 +15,7 @@
             <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Tasks Created</div>
             <div
                 class="dashboard-stats-results qt-mt-4"
-                [textContent]="stats.created"
+                [textContent]="stats ?  stats.created || 'N/A' :'N/A'"
             ></div>
         </div>
         <div class="dashboard-stats__col">
@@ -29,7 +25,7 @@
             <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Upcoming Tasks</div>
             <div
                 class="dashboard-stats-results qt-mt-4"
-                [textContent]="stats.upcoming"
+                [textContent]="stats ? stats.upcoming || 'N/A' : 'N/A'"
             ></div>
         </div>
         <div class="dashboard-stats__col">
@@ -39,7 +35,7 @@
             <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Overdue Tasks</div>
             <div
                 class="dashboard-stats-results qt-mt-4"
-                [textContent]="stats.overdue"
+                [textContent]="stats ? stats.overdue || 'N/A' : 'N/A'"
             ></div>
         </div>
         <div class="dashboard-stats__col">
@@ -49,7 +45,7 @@
             <div class="dashboard-stats-title qt-fw-500 qt-color-gray-500 qt-mt-12">Completed Tasks</div>
             <div
                 class="dashboard-stats-results qt-mt-4"
-                [textContent]="stats.completed"
+                [textContent]="stats ? stats.completed || 'N/A' : 'N/A'"
             ></div>
         </div>
         <div class="dashboard-stats__col">

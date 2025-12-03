@@ -327,7 +327,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
     if (this.state !== data) {
       this.state = data;
       if (this.state === 'tasks-dashboard') this.goToLink(`tasks-dashboard`);
-      if (this.state === 'my-tasks') this.goToLink(`tasks`);
+      if (this.state === 'my-tasks' || this.state === 'my-tasks-calendar') this.goToLink(`tasks`);
       if (this.state === 'contract-statistics') this.goToLink(`contract-statistics`);
       if (this.state === 'new-companies') this.goToLink(`companies`);
       if (this.state === 'billing-dashboard') this.goToLink('billing-dashboard');

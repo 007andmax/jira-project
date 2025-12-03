@@ -31,10 +31,17 @@ import { TasksEditComponent } from './tasks-edit/tasks-edit.component';
 import { TasksDatePickerModule } from './tasks-date-picker/tasks-date-picker.module';
 import { TasksAddAssignedUsersModule } from './tasks-add/tasks-add-assigned-users/tasks-add-assigned-users.module';
 import { TasksAddAssociateTicketsModule } from './tasks-add/tasks-add-associate-tickets/tasks-add-associate-tickets.module';
+import { TasksCalendarComponent } from './tasks-calendar/tasks-calendar.component';
+import { TasksCalendarMonthComponent } from './tasks-calendar/tasks-calendar-month/tasks-calendar-month.component';
+import { TasksCalendarWeekComponent } from './tasks-calendar/tasks-calendar-week/tasks-calendar-week.component';
+import { TasksCalendarMonthItemWeekComponent } from './tasks-calendar/tasks-calendar-month/tasks-calendar-month-item-week/tasks-calendar-month-item-week.component';
+import { TasksCalendarWeekItemHourComponent } from './tasks-calendar/tasks-calendar-week/tasks-calendar-week-item-hour/tasks-calendar-week-item-hour.component';
+import { TaskHeaderAddModule } from './task-header-add/task-header-add.module';
+import { TasksCalendarWeekItemAllDayComponent } from './tasks-calendar/tasks-calendar-week/tasks-calendar-week-item-all-day/tasks-calendar-week-item-all-day.component';
 
 
 @NgModule({
-    declarations: [TasksComponent, TasksHeaderComponent, TasksListComponent, TasksTabsComponent
+    declarations: [TasksComponent, TasksHeaderComponent, TasksListComponent, TasksTabsComponent, TasksCalendarComponent, TasksCalendarMonthComponent, TasksCalendarWeekComponent, TasksCalendarMonthItemWeekComponent, TasksCalendarWeekItemHourComponent, TasksCalendarWeekItemAllDayComponent
     ],
     imports: [
         CommonModule,
@@ -61,7 +68,8 @@ import { TasksAddAssociateTicketsModule } from './tasks-add/tasks-add-associate-
         TasksListItemModule,
         TasksDatePickerModule,
         TasksAddAssignedUsersModule,
-        TasksAddAssociateTicketsModule
+        TasksAddAssociateTicketsModule,
+        TaskHeaderAddModule
     ],
 
 })

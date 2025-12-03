@@ -1,0 +1,215 @@
+@import "./src/assets/styles/variable";
+
+.weekdays,
+.week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.weekdays div {
+    text-align: center;
+    font-weight: bold;
+    padding: 8px 0;
+    background: #f9fafc;
+    border-bottom: 1px solid #eee;
+}
+
+.tasks {
+    margin-top: 20px;
+}
+
+
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 93px;
+  z-index: 6;
+
+  &__item {
+    text-transform: uppercase;
+    height: 44px;
+    min-width: 168px;
+    padding: 14.5px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+    font-size: 12px;
+    font-weight: 600;
+    color: $gray-500;
+    border-top: 1px solid $gray-200;
+    border-left: 1px solid $gray-200;
+    border-bottom: 1px solid $gray-200;
+    background-color: $gray-50;
+
+    &:last-child {
+      border-right: 1px solid $gray-200;
+    }
+
+    &:empty {
+      width: 96px;
+      min-width: 96px;
+      flex-shrink: 0;
+    }
+  }
+}
+
+.event {
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    color: $gray-900;
+    background: #4a90e2;
+    overflow: hidden;
+}
+
+.event-content {
+    background: $white;
+    border-radius: 6px;
+    padding: 4px 6px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 500;
+    color: $gray-900;
+}
+
+.--current-day {
+    background-color: $blue-light-600;
+    color: $white;
+    padding: 2px 6px;
+    border-radius: 24px;
+}
+.current-time-line,
+.calendar-body__current-time-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: $red-700;
+    z-index: 5;
+}
+.calendar-body__current-time-line {
+  width: 61%;
+  left: 39%;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    translate: 0 -50%;
+    width: 6px;
+    height: 10px;
+    mask-image: url('/assets/img/icons/filled/arrow-right.svg');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    background: $red-700;
+  }
+}
+
+.calendar-body {
+  overflow: hidden;
+
+  &__time-column {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 96px;
+    flex-shrink: 0;
+    align-self: baseline;
+
+    &-item {
+      height: 48px;
+      font-size: 12px;
+      padding: 12px 10px 20px;
+      font-weight: 500;
+      color: $gray-500;
+      border-left: 1px solid $gray-200;
+
+      &:nth-last-child(2) {
+        border-radius: 0 0 0 8px;
+        border-bottom: 1px solid $gray-200;
+      }
+    }
+  }
+
+  &__days-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    position: relative;
+  }
+
+  &__day-column {
+    position: relative;
+  // height: calc(60px * 24);
+
+    &:last-child {
+      .calendar-body__hour-cell {
+        border-right: 1px solid $gray-200;
+
+        &:nth-last-child(2) {
+          border-radius: 0 0 8px 0;
+        }
+      }
+    }
+  }
+
+  &__hour-cell {
+    height: 48px;
+    min-width: 168px;
+    padding: 0 8px;
+    border-left: 1px solid $gray-200;
+    border-bottom: 1px solid $gray-200;
+  }
+}
+
+::ng-deep.calendar-body__hour-cell {
+  &:hover {
+    .add-tasks {
+      display: flex;
+      opacity: 1;
+    }
+  }
+}
+.all-day-row {
+  .calendar-body__day-column {
+    position: unset !important;
+  }
+  .calendar-body__time-column,.calendar-body__hour-cell {
+    height: 130px;
+  }
+
+  .calendar-body__time-column {
+    padding: 12px 10px 20px;
+    font-weight: 500;
+    color: $gray-500;
+    border-left: 1px solid $gray-200;
+  }
+}
+.add-tasks {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}

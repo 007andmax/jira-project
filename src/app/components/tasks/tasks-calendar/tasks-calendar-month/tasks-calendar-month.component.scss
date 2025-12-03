@@ -1,0 +1,89 @@
+@import "./src/assets/styles/variable";
+
+.weekdays,
+.week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.weekdays div {
+    text-align: center;
+    font-weight: bold;
+    padding: 8px 0;
+    background: #f9fafc;
+    border-bottom: 1px solid $gray-200;
+}
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 93px;
+    z-index: 6;
+
+    &__item {
+      text-transform: uppercase;
+      height: 44px;
+      min-width: 182px;
+      padding: 14.5px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      font-size: 12px;
+      font-weight: 600;
+      color: $gray-500;
+      border-top: 1px solid $gray-200;
+      border-left: 1px solid $gray-200;
+      border-bottom: 1px solid $gray-200;
+      background-color: $gray-50;
+
+      &:last-child {
+        border-right: 1px solid $gray-200;
+      }
+    }
+}
+
+.calendar-body {
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    position: relative;
+  }
+
+  &__day {
+    min-height: 152px;
+    min-width: 182px;
+    border-bottom: 1px solid $gray-200;
+    border-left: 1px solid $gray-200;
+    padding: 16px 10px 0;
+    position: unset;
+    overflow: hidden;
+
+    &:has(.task) {
+      ::ng-deep .more-tasks {
+        margin-top: 62px;
+      }
+    }
+
+    &:last-child {
+      border-right: 1px solid $gray-200;
+    }
+
+    &.empty {
+      background: $gray-50;
+    }
+  }
+}
+
+::ng-deep  .calendar-body__day {
+  cursor: pointer;
+
+  &:hover {
+    background-color: $gray-50;
+
+    .add-tasks {
+      opacity: 1;
+    }
+  }
+}
