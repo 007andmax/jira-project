@@ -62,7 +62,7 @@
                 </div>
                 <div
                     class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
-                    (click)="addUpdate('PRODUCT')"
+                    (click)="setNoteType('PUBLIC');addUpdate('PRODUCT')"
                     *ngIf="!customerPortalStateService.isCustomerPortal"
                 >
                     <div class="qt-icon icon__products qt-sz-16 qt-button-icon qt-mr-6"></div>
@@ -70,7 +70,7 @@
                 </div>
                 <div
                     class="qt-button qt-button--with-icon --gray --md pointer qt-mr-8"
-                    (click)="addUpdate('SERVICE')"
+                    (click)="setNoteType('PUBLIC');addUpdate('SERVICE')"
                     *ngIf="!customerPortalStateService.isCustomerPortal"
                 >
                     <div class="qt-icon icon__service qt-sz-16 qt-bg-contain qt-button-icon qt-mr-6"></div>

@@ -31,7 +31,7 @@ export class HttpInterceptorService implements HttpInterceptor {
             let unlockExpiredHeader = err.headers.get('SESSION_UNLOCK_EXPIRED');
             let isUnauthorized = (err.error) ? err.error.errorMessage === 'unauthorized' || err.error.authMessage === 'unauthorized' : false;
             if (unlockExpiredHeader && unlockExpiredHeader.toLocaleLowerCase() === 'true' || isUnauthorized) {
-              this.appService.showSessionScreen('You have been away for more than 3 hours. You have been logged off. Please login again.');
+              this.appService.showSessionScreen('You have been away for more than 24 hours. You have been logged off. Please login again.');
               return;
             }
             if (err.status == 423) {
