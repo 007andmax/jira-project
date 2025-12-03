@@ -1,4 +1,5 @@
 @import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/dropdown";
 
 .tasks {
   &__header {
@@ -174,8 +175,17 @@
 }
 .tasks-list-container {
   max-height: 210px;
-  overflow: auto;
+  height: 100%;
   position: relative;
+  overflow-x: hidden;
+
+
+  .tab-pane__table-body {
+    height: 100%;
+    overflow-y: scroll;
+
+    @include dropdown-scrollbar-adaptive;
+  }
 }
 .pengind-loading {
   top: unset;
