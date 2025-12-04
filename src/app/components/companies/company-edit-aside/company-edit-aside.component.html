@@ -51,6 +51,7 @@
                     [ngClass]="{'--input-error':!validate.getName() || validate.getNameIsExist() }"
                     [(ngModel)]="company.name"
                     (blur)="onChangeName()"
+                    (input)="validate.isChangingName = true"
                     placeholder="Write Company or Search Company"
                 >
                 <app-mat-error
@@ -321,6 +322,7 @@
                 </app-mat-error>
             </div>
         </div>
+
 
 
 

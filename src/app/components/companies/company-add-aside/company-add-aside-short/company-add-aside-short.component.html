@@ -7,6 +7,7 @@
                 type="text"
                 [(ngModel)]="company.name"
                 placeholder="Write Company or Search Company"
+                (input)="validate.isChangingName = true"
                 (blur)="onChangeName()"
             >
             <app-mat-error

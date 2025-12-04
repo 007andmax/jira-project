@@ -75,6 +75,10 @@ export class TaskHeaderAddComponent {
       this.datePicker.setEditDates(startDate, endDate);
       this.tasksStateService.setTaskAddCalendar(null);
     }
+    let onCloseCalendarAddTask = this.tasksStateService.onCloseCalendarAddTask.subscribe(res => {
+      if (this.modelForm && this.modelForm.controls["title"].value == "") this.close();
+    })
+    this.sub.add(onCloseCalendarAddTask);
   }
   initModelForm() {
     let step = 1;
@@ -183,7 +187,7 @@ export class TaskHeaderAddComponent {
   }
   close() {
     this.submitted = false;
-    if (this.modelForm)  this.modelForm.reset();
+    if (this.modelForm) this.modelForm.reset();
     let step = 1;
     let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany() ? this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
     if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') step = 1;

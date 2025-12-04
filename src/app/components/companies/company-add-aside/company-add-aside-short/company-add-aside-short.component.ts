@@ -53,8 +53,10 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
     this.company.contacts[0].customerCompaniesInfo[0].setJobTitleDto(data);
   }
   public onChangeName() {
+    console.log("onChangeName");
     if (this.company.name && this.company.name.length > 0) {
       let checkCompanyName = this.companiesService.checkCompanyName("", this.company.name).subscribe((data: any) => {
+        this.validate.isChangingName = false;
         if (data.value) {
           this.validate.resetName();
           this.validate.resetNameIsExist();

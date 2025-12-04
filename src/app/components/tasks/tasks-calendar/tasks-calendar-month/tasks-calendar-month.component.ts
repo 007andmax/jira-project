@@ -90,6 +90,7 @@ export class TasksCalendarMonthComponent {
     });
   }
   onAddTask(day) {
+    this.tasksStateService.closeAllCalendarAddTask();
     this.tasksStateService.setTaskAddCalendar(new TaskAddCalendar({
       startDate: new Date(day.date.getFullYear(), day.date.getMonth(), day.date.getDate(), 0, 0, 0),
       assignedUser: this.filter.techUser

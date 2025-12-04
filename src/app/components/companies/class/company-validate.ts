@@ -22,6 +22,7 @@ export class CompanyValdiate {
     domainIsExist: boolean = false;
     existPrimaryContactEmail: boolean = true;
     isCheckingEmail: boolean = false;
+    isChangingName: boolean = false;
     constructor() { }
     public setIsCheckingEmail(data) {
         this.isCheckingEmail = data;
@@ -199,7 +200,7 @@ export class CompanyValdiate {
         if (company.domain && !company.domain.match(this.reDomain)) this.domainValid = false;
         if (company.addresses.length > 0 && company.addresses[0].locationName != undefined && company.addresses[0].locationName.length == 0) this.billindAddress = false;
         if (company.addresses.length > 1 && company.addresses[1].locationName != undefined && company.addresses[1].locationName.length == 0) this.shippingAddress = false;
-        return this.name && this.type && this.primaryPhoneNumber && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && this.domainValid && !this.domainIsExist && this.shippingPhoneNumber && this.billindAddress && this.user && this.existPrimaryContactEmail && !this.isCheckingEmail && this.shippingAddress && !this.nameIsExist;
+        return this.name && this.type && this.primaryPhoneNumber && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && this.domainValid && !this.domainIsExist && this.shippingPhoneNumber && this.billindAddress && this.user && this.existPrimaryContactEmail && !this.isCheckingEmail && this.shippingAddress && !this.nameIsExist && !this.isChangingName;
     }
 
 

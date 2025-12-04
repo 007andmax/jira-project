@@ -1,6 +1,6 @@
 <div
     calss="qt-pos-rel"
-    [ngClass]="{'exist-preloader':showPreloader}"
+    [ngClass]="{'exist-preloader':showPreloader || !showPreloader && list.length == 0}"
     [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
 >
     <div

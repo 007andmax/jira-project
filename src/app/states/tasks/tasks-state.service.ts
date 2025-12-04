@@ -12,10 +12,14 @@ export class TasksStateService {
   onFilter: EventEmitter<any> = new EventEmitter();
   onToggleFilter: EventEmitter<any> = new EventEmitter();
   onFastRemove: EventEmitter<any> = new EventEmitter();
+  onCloseCalendarAddTask: EventEmitter<any> = new EventEmitter();
   taskAddCalendar: TaskAddCalendar;
   filter: TasksFilters = new TasksFilters();
   constructor() { }
 
+  public closeAllCalendarAddTask() {
+    this.onCloseCalendarAddTask.next(null);
+  }
   public setTaskAddCalendar(data) {
     this.taskAddCalendar = data;
   }

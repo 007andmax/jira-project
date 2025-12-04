@@ -340,6 +340,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   public onChangeName() {
     if (this.company.name && this.company.name.length > 0) {
       let checkCompanyName = this.companiesService.checkCompanyName(this.company.id, this.company.name).subscribe((data: any) => {
+        this.validate.isChangingName = false;
         if (data.value) {
           this.validate.resetName();
           this.validate.resetNameIsExist();
