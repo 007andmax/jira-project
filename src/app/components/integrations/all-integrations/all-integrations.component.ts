@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./all-integrations.component.scss']
 })
 export class AllIntegrationsComponent {
+  activeTab: string = "overview";
 
+
+  setTab(data) {
+    this.activeTab = data['nextId'];
+  }
 }

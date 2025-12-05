@@ -1,1 +1,32 @@
-<p>all-integrations works!</p>
+<div class="qt-page-list__body tasks-table__body">
+    <div class="qt-page-list__header-tabs-line">
+        <ul
+            ngbNav
+            #nav="ngbNav"
+            [(activeId)]="activeTab"
+            class="qt-page-list__header-tabs"
+            (navChange)="setTab($event)"
+        >
+            <!-- Profile -->
+            <li
+                class="qt-page-list__header-tabs-item"
+                [ngbNavItem]="'overview'"
+            >
+                <a
+                    class="qt-page-list__header-tabs-item-link"
+                    ngbNavLink
+                >
+                    <i class="icn-16 qt-icon qt-dib icon__list-view qt-page-list__header-tabs-item-icon"></i>
+                    <span class="qt-page-list__header-tabs-item-text">Overview</span>
+                </a>
+                <ng-template ngbNavContent>
+                    <app-all-integrations-overview></app-all-integrations-overview>
+                </ng-template>
+            </li>
+        </ul>
+    </div>
+    <div
+        [ngbNavOutlet]="nav"
+        class="mt-2"
+    ></div>
+</div>
