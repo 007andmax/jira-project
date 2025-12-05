@@ -52,6 +52,9 @@ export class LeftPanelService {
       state === 'tasks-dashboard'
     )
   }
+  isIntegrationsPage(state) {
+    return (state === 'all-integrations')
+  }
   public isCompanyPage(state) {
     return (state == 'new-companies'
       || state == 'company-dashboard'

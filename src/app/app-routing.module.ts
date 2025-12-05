@@ -431,6 +431,11 @@ const routes: Routes = [
     loadChildren: () => import('./components/tasks-dashboard/tasks-dashboard.module').then(m => m.TasksDashboardModule),
     canActivate: [PermissionNoSuperAdminService]
   },
+  {
+    path: ':domain/integrations',
+    loadChildren: () => import('./components/integrations/integrations.module').then(m => m.IntegrationsModule),
+    canActivate: [PermissionNoSuperAdminService]
+  },
 ];
 
 /**

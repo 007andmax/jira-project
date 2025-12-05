@@ -1,0 +1,27 @@
+<div
+    class="app-left-panel__menu"
+    [ngClass]="{'--active': open}"
+    (click)="open = !open;openPanel()"
+>
+    <div class="app-left-panel__menu-title">Integrations</div>
+</div>
+<ul
+    class="app-left-panel__menu-expand"
+    [ngClass]="{'menu-expand-show': open, 'menu-expand-hide': !open}"
+>
+    <li
+        href
+        [link]="'all-integrations'"
+        target="_blank"
+        appRightClickBlank
+    >
+        <a
+            [ngClass]="{'--active':activePage === 'all-integrations'}"
+            (click)="goToState('all-integrations')"
+            class="app-left-panel__menu-expand-link"
+        >
+            All integrations
+        </a>
+    </li>
+
+</ul>
