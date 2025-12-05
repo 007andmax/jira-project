@@ -214,7 +214,6 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   }
 
   setTab(data) {
-    console.log("data", data);
     if (data['nextId'] === "activeUsers") this.getUsers(false);
     if (data['nextId'] === "archivedUsers") this.getUsers(true);
     this.activeTab = data['nextId'];
