@@ -24,7 +24,10 @@ export class IntegrationsService {
   ) { }
 
   public getSettings() {
-    return this.http.get(`${this.apiUrl}moneris/settings`).pipe(
+    return this.http.get(`${this.apiUrl}moneris/settings`)
+  }
+  public setSettings(data) {
+    return this.http.post(`${this.apiUrl}moneris/settings`, data).pipe(
       tap((data: any) => {
         if (data.connected == true) this.toastrService.success("The connection has been established successfully");
         if (data.connected == false) this.toastrService.error("The connection cannot be established");
@@ -32,7 +35,13 @@ export class IntegrationsService {
         return data;
       }));
   }
-  public setSettings(data) {
-    return this.http.post(`${this.apiUrl}moneris/settings`, data);
+  public editSettings(data) {
+    return this.http.put(`${this.apiUrl}moneris/settings`, data).pipe(
+      tap((data: any) => {
+        if (data.connected == true) this.toastrService.success("The connection has been established successfully");
+        if (data.connected == false) this.toastrService.error("The connection cannot be established");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
 }

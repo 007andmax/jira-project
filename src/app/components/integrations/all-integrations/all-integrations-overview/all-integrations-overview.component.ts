@@ -13,6 +13,7 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 export class AllIntegrationsOverviewComponent {
   modelForm: UntypedFormGroup;
   submitted: boolean = false;
+  isEdit: boolean = false;
   @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
   constructor(
 
@@ -27,11 +28,11 @@ export class AllIntegrationsOverviewComponent {
     this.modelForm = this.formBuilder.group({
       storeId: [
         "",
-        [Validators.required,]
+        [Validators.required, Validators.maxLength(10)]
       ],
       apiToken: [
         "",
-        [Validators.required]
+        [Validators.required, Validators.maxLength(20)]
       ],
       cryptType: [
         "7",
@@ -39,6 +40,7 @@ export class AllIntegrationsOverviewComponent {
       ],
     })
     this.integrationsService.getSettings().subscribe((res: any) => {
+      this.isEdit = true;
       this.modelForm.patchValue({
         storeId: res.storeId,
         apiToken: res.apiToken,
@@ -53,7 +55,7 @@ export class AllIntegrationsOverviewComponent {
       return;
     }
     this.addBtn.setDisabled(true);
-    this.integrationsService.setSettings(this.modelForm.value).subscribe(data => {
+    ((this.isEdit) ? this.integrationsService.editSettings(this.modelForm.value) : this.integrationsService.setSettings(this.modelForm.value)).subscribe(data => {
       this.addBtn.setDisabled(false);
     }, err => {
       this.addBtn.setDisabled(false);
