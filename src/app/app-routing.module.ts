@@ -28,6 +28,7 @@ import { PermissionCompanyDevicesService } from './components/company-devices/pe
 import { PermissionNoSuperAdminService } from './services/users/permission-no-super-admin.service';
 import { PermissionClientUserService } from './services/users/permission-client-user.service';
 import { PermissionMyProfileService } from './components/setting/my-profile/permission-my-profile.service';
+import { PermissionIntegrationsService } from './components/integrations/integrations.service';
 
 const routes: Routes = [
 
@@ -434,7 +435,7 @@ const routes: Routes = [
   {
     path: ':domain/integrations',
     loadChildren: () => import('./components/integrations/integrations.module').then(m => m.IntegrationsModule),
-    canActivate: [PermissionNoSuperAdminService]
+    canActivate: [PermissionNoSuperAdminService, PermissionIntegrationsService]
   },
 ];
 

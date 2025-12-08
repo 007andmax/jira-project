@@ -36,9 +36,10 @@ export class AllIntegrationsOverviewComponent {
       ],
       cryptType: [
         "7",
-        [Validators.required]
+        [Validators.required,]
       ],
     })
+    this.modelForm.get('cryptType')?.disable();
     this.integrationsService.getSettings().subscribe((res: any) => {
       this.isEdit = true;
       this.modelForm.patchValue({

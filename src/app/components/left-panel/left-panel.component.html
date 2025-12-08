@@ -132,9 +132,9 @@
             <div class="app-left-panel__menu-icon qt-icon icon__folder qt-icon__gray-400 --file-manager-filled"></div>
         </div>
         <div
-            *ngIf="!customerPortalStateService.isCustomerPortal"
+            *ngIf="!customerPortalStateService.isCustomerPortal && getPermissions('MANAGE_INTEGRATIONS')"
             class="app-left-panel__menu-icon-wrap pointer"
-            (click)="changePage('FILE_MANAGER');onChangeState('all-integrations')"
+            (click)="changePage('INTEGRATIONS');onChangeState('all-integrations')"
             [ngClass]="{'--active':page === 'INTEGRATIONS' }"
             placement="right"
             ngbTooltip="Integrations"

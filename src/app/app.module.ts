@@ -161,6 +161,7 @@ import { TasksDashboardComponent } from './components/tasks-dashboard/tasks-dash
 import { TasksAddModule } from './components/tasks/tasks-add/tasks-add.module';
 import { TasksEditModule } from './components/tasks/tasks-edit/tasks-edit.module';
 import { IntegrationsComponent } from './components/integrations/integrations.component';
+import { PermissionIntegrationsService } from './components/integrations/integrations.service';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -285,7 +286,8 @@ declare var $: any;
         PermissionNoSuperAdminService,
         PermissionClientUserService,
         PermissionMyProfileService,
-        SuperAdminKnowledgeBaseService
+        SuperAdminKnowledgeBaseService,
+        PermissionIntegrationsService
     ],
     bootstrap: [AppComponent]
 })

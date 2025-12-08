@@ -17,6 +17,8 @@
                         Please enter a valid phone number
                     </app-mat-error>
 
+
+
                 </div>
             </div>
         </div>
@@ -39,6 +41,8 @@
                         Please enter a valid phone number
                     </app-mat-error>
 
+
+
                 </div>
             </div>
         </div>
@@ -53,7 +57,6 @@
                         type="text"
                         formControlName="cryptType"
                         placeholder="Enter Primary Number"
-                        disabled
                     >
                     <app-mat-error
                         class="invalid-feedback"
@@ -61,6 +64,8 @@
                     >
                         Please enter a valid phone number
                     </app-mat-error>
+
+
 
                 </div>
             </div>
@@ -72,7 +77,7 @@
         #addBtn="disabled"
         (onClick)="add()"
     >
-        <span *ngIf="!addBtn.isBlock()">Test Connection</span>
+        <span *ngIf="!addBtn.isBlock()">Save</span>
         <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
     </button>
 </form>
