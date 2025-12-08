@@ -38,7 +38,7 @@ export class TicketDetailProfileUpdatesComponent implements OnInit, OnDestroy {
     public ticketsPermissionsService: TicketsPermissionsService,) { }
 
   ngOnInit() {
-    this.container = document.body.querySelector(".ticket-detail-page-content__body");
+    this.container = document.body.querySelector(".ticket-detail-page-content__body-inner");
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_UPDATE_TICKET_DETAIL) {
@@ -74,6 +74,7 @@ export class TicketDetailProfileUpdatesComponent implements OnInit, OnDestroy {
     })
   }
   getUpdates(id) {
+    console.log("getUpdates");
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
