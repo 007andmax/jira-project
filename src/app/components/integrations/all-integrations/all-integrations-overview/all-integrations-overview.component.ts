@@ -39,14 +39,16 @@ export class AllIntegrationsOverviewComponent {
         [Validators.required,]
       ],
     })
-    this.modelForm.get('cryptType')?.disable();
+    //  this.modelForm.get('cryptType')?.disable();
     this.integrationsService.getSettings().subscribe((res: any) => {
       this.isEdit = true;
+      console.log("res", res);
       this.modelForm.patchValue({
         storeId: res.storeId,
         apiToken: res.apiToken,
-        cryptType: res.cryptType || 7
+        cryptType: res.cryptType
       })
+      console.log("this.modelForm.value", this.modelForm.value)
     })
 
   }
@@ -56,6 +58,7 @@ export class AllIntegrationsOverviewComponent {
       return;
     }
     this.addBtn.setDisabled(true);
+    console.log("this.modelForm.value", this.modelForm.value);
     ((this.isEdit) ? this.integrationsService.editSettings(this.modelForm.value) : this.integrationsService.setSettings(this.modelForm.value)).subscribe(data => {
       this.addBtn.setDisabled(false);
     }, err => {
