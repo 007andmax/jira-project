@@ -114,7 +114,7 @@ export class PermissionManageService {
       'DELETE_TASK'
     ],
     "Integrations": [
-      'DELETE_TASK'
+      'MANAGE_INTEGRATIONS'
     ]
   };
 
@@ -135,7 +135,7 @@ export class PermissionManageService {
       'VIEW_ALL_QUOTES'
     ],
     'Payments': [
-      'MANAGE_INTEGRATIONS'
+      'VIEW_ALL_PAYMENTS'
     ]
   };
 
