@@ -18,7 +18,7 @@
             <div class="qt-dif qt-ai-c">
                 <button
                     *ngIf="overview && overview.status == 'DISCONNECTED'"
-                    class="qt-button --md qt-fs-0 qt-ml-8"
+                    class="qt-button --gray --md qt-button-filter qt-ml-8 qt-df qt-fs-0 qt-ml-8"
                     appDisabledBtn
                     #saveBtn="disabled"
                     (onClick)="save()"
@@ -28,7 +28,7 @@
                 </button>
                 <button
                     *ngIf="overview && overview.status == 'CONNECTED'"
-                    class="qt-button --md qt-fs-0 qt-ml-8"
+                    class="qt-button --gray --md qt-button-filter qt-ml-8 qt-df qt-fs-0 qt-ml-8"
                     appDisabledBtn
                     #updateBtn="disabled"
                     (onClick)="save()"
@@ -38,11 +38,12 @@
                 </button>
                 <button
                     *ngIf="overview && overview.status == 'CONNECTED'"
-                    class="qt-button --md qt-fs-0 qt-ml-8"
+                    class="qt-button --gray --md qt-button-filter qt-ml-8 qt-df qt-fs-0 qt-ml-8"
                     appDisabledBtn
                     #disconnectBtn="disabled"
                     (onClick)="disconnect()"
                 >
+                    <span class="qt-icon icon__links qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                     <span *ngIf="!disconnectBtn.isBlock()">Disconnect</span>
                     <app-preloader-ticket *ngIf="disconnectBtn.isBlock()"></app-preloader-ticket>
                 </button>

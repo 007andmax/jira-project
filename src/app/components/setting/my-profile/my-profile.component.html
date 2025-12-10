@@ -1,14 +1,14 @@
 <!-- Message -->
 <div class="heading qt-df qt-ai-fs qt-jc-sb">
     <h5 class="qt-fw-600">My Profile Settings</h5>
-    <a
+    <button
         href="javascript:;"
         class="qt-button qt-ml-24 --md"
         (click)="onSubmit()"
         *ngIf="activeTab !== 'history' && activeTab !== 'signature'"
     >
         Save Changes
-    </a>
+    </button>
     <div
         class="qt-df qt-h36"
         *ngIf="activeTab == 'history'"

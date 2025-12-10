@@ -89,6 +89,12 @@
     border-color: $green-200;
     background-color: $green-25;
   }
+
+  &.--error {
+    color: $red-700;
+    border-color: $red-200;
+    background-color: $red-25;
+  }
 }
 
 .qt-page-list__header-tabs-item-link {
