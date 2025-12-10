@@ -1,0 +1,19 @@
+@import "./src/assets/styles/variable";
+
+.qt-page-list {
+  &__container {
+    background-color: $white;
+  }
+
+  &__header-tabs-line {
+    position: sticky;
+    top: 62px;
+    z-index: 2;
+  }
+
+  &__table {
+    width: 100%;
+    padding-top: 28px;
+    margin-inline: 24px;
+  }
+}
