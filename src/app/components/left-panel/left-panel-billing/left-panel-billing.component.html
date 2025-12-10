@@ -144,4 +144,18 @@
             Contract Statistics
         </a>
     </li>
+    <li
+        href
+        [link]="'manage-cards'"
+        target="_blank"
+        appRightClickBlank
+    >
+        <a
+            [ngClass]="{'--active':activePage === 'manage-cards'}"
+            (click)="goToState('manage-cards')"
+            class="app-left-panel__menu-expand-link"
+        >
+            Manage Card
+        </a>
+    </li>
 </ul>

@@ -1,0 +1,59 @@
+@import "./src/assets/styles/variable";
+
+.search-clear {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: 12px;
+    top: calc(50% - 6px);
+    cursor: pointer;
+}
+
+.search-container {
+    position: relative;
+}
+
+.is-exist-filters {
+    position: relative;
+
+    &::before {
+        display: none;
+        content: " ";
+        position: absolute;
+        top: 1px;
+        right: 0;
+        width: 8px;
+        height: 8px;
+        background-color: $red-600;
+        border-radius: 10px;
+    }
+}
+
+.closed-search {
+    position: fixed;
+    top: 18px;
+    left: 10px;
+    z-index: 999;
+}
+
+.password-table__menu {
+    flex: 0 0 50px !important;
+}
+
+.qt-page-list__header.--sticky {
+    margin: 0;
+    padding: 10px 32px;
+    min-height: 57.1px; // Fix Bug With Overflow with Scroll Table
+    background-color: $gray-50;
+    border-bottom: 1px solid $gray-200;
+}
+
+.password-add-category {
+    .plus-btn {
+        background-color: $blue-light-600;
+
+        &:hover {
+            background-color: $blue-light-500;
+        }
+    }
+}

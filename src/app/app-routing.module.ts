@@ -437,6 +437,11 @@ const routes: Routes = [
     loadChildren: () => import('./components/integrations/integrations.module').then(m => m.IntegrationsModule),
     canActivate: [PermissionNoSuperAdminService, PermissionIntegrationsService]
   },
+  {
+    path: ':domain/manage-cards',
+    loadChildren: () => import('./components/billing/manage-cards/manage-cards.module').then(m => m.ManageCardsModule),
+    canActivate: [PermissionBillableService, PermissionNoSuperAdminService]
+  },
 ];
 
 /**

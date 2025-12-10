@@ -1,79 +1,79 @@
 <div class="qt-page-list__container">
-  <div class="qt-page-list__table">
-    <form [formGroup]="modelForm">
-      <div class="qt-inputs-row">
-        <div class="qt-input-block qt-f50">
-          <div class="qt-input-block">
-            <div class="qt-input-block__label">Store Id</div>
-            <div class="qt-with-number-types">
-              <input
-                class="qt-with-number-types__input"
-                type="text"
-                formControlName="storeId"
-                placeholder="Enter Primary Number"
-              >
-              <app-mat-error
-                class="invalid-feedback"
-                *ngIf="submitted && f2.storeId.errors"
-              >
-                Please enter a valid phone number
-              </app-mat-error>
+    <div class="qt-page-list__table">
+        <form [formGroup]="modelForm">
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block">
+                        <div class="qt-input-block__label">Store Id</div>
+                        <div class="qt-with-number-types">
+                            <input
+                                class="qt-with-number-types__input"
+                                type="text"
+                                formControlName="storeId"
+                                placeholder="Enter Primary Number"
+                            >
+                            <app-mat-error
+                                class="invalid-feedback"
+                                *ngIf="submitted && f2.storeId.errors"
+                            >
+                                The maximum number of characters - 10
+                            </app-mat-error>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="qt-inputs-row">
-        <div class="qt-input-block qt-f50">
-          <div class="qt-input-block">
-            <div class="qt-input-block__label">API Token</div>
-            <div class="qt-with-number-types">
-              <input
-                class="qt-with-number-types__input"
-                type="text"
-                formControlName="apiToken"
-                placeholder="Enter Primary Number"
-              >
-              <app-mat-error
-                class="invalid-feedback"
-                *ngIf="submitted && f2.apiToken.errors"
-              >
-                Please enter a valid phone number
-              </app-mat-error>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block">
+                        <div class="qt-input-block__label">API Token</div>
+                        <div class="qt-with-number-types">
+                            <input
+                                class="qt-with-number-types__input"
+                                type="text"
+                                formControlName="apiToken"
+                                placeholder="Enter Primary Number"
+                            >
+                            <app-mat-error
+                                class="invalid-feedback"
+                                *ngIf="submitted && f2.apiToken.errors"
+                            >
+                                The maximum number of characters - 20
+                            </app-mat-error>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="qt-inputs-row">
-        <div class="qt-input-block qt-f50">
-          <div class="qt-input-block">
-            <div class="qt-input-block__label">Crypt Type</div>
-            <div class="qt-with-number-types">
-              <input
-                class="qt-with-number-types__input"
-                type="text"
-                value="7"
-                placeholder="Enter Primary Number"
-                disabled
-              >
-              <app-mat-error
-                class="invalid-feedback"
-                *ngIf="submitted && f2.cryptType.errors"
-              >
-                Please enter a valid phone number
-              </app-mat-error>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <div class="qt-input-block">
+                        <div class="qt-input-block__label">Crypt Type</div>
+                        <div class="qt-with-number-types">
+                            <input
+                                class="qt-with-number-types__input"
+                                type="text"
+                                value="7"
+                                placeholder="Enter Primary Number"
+                                disabled
+                            >
+                            <app-mat-error
+                                class="invalid-feedback"
+                                *ngIf="submitted && f2.cryptType.errors"
+                            >
+                                Please enter a valid phone number
+                            </app-mat-error>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <button
-        class="qt-button qt-jc-c"
-        appDisabledBtn
-        #addBtn="disabled"
-        (onClick)="add()"
-      >
-        <span *ngIf="!addBtn.isBlock()">Save</span>
-        <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
-      </button>
-    </form>
-  </div>
+            <!-- <button
+                class="qt-button qt-jc-c"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="add()"
+            >
+                <span *ngIf="!addBtn.isBlock()">Save</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+            </button> -->
+        </form>
+    </div>
 </div>

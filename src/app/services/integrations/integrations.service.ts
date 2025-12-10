@@ -44,4 +44,12 @@ export class IntegrationsService {
         return data;
       }));
   }
+  public disconnect() {
+    return this.http.delete(`${this.apiUrl}moneris/settings`).pipe(
+      tap((data: any) => {
+        this.toastrService.success("The connection has been disconnected");
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
+  }
 }

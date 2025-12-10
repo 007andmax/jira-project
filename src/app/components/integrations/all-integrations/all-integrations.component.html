@@ -1,24 +1,54 @@
 <div class="qt-page-list__body integrations-table__body">
     <div class="qt-page-list__header --sticky">
-      <div class="qt-page-list__header-title-line">
-        <div class="integrations-table__body-head qt-dif qt-gap-16">
-          <div class="integrations-table__moneris-logo icon__moneris qt-bg-contain qt-fs-0"></div>
-
-          <div>
-            <div class="integrations-table__moneris-title qt-fw-500 qt-color-gray-900">Github</div>
-            <div class="tag__modern --success qt-mt-8">Connected</div>
-          </div>
+        <div class="qt-page-list__header-title-line">
+            <div class="integrations-table__body-head qt-dif qt-gap-16">
+                <div class="integrations-table__moneris-logo icon__moneris qt-bg-contain qt-fs-0"></div>
+                <div>
+                    <div class="integrations-table__moneris-title qt-fw-500 qt-color-gray-900">Github</div>
+                    <div
+                        class="tag__modern qt-mt-8"
+                        [ngClass]="{'--success':overview && overview.isConnected,
+                            '--error':overview && !overview.isConnected
+                        }"
+                        [textContent]="overview && overview.isConnected ? 'Connected' : 'Disconnected'"
+                    >
+                    </div>
+                </div>
+            </div>
+            <div class="qt-dif qt-ai-c">
+                <button
+                    *ngIf="overview && overview.status == 'DISCONNECTED'"
+                    class="qt-button --md qt-fs-0 qt-ml-8"
+                    appDisabledBtn
+                    #saveBtn="disabled"
+                    (onClick)="save()"
+                >
+                    <span *ngIf="!saveBtn.isBlock()">Save</span>
+                    <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
+                </button>
+                <button
+                    *ngIf="overview && overview.status == 'CONNECTED'"
+                    class="qt-button --md qt-fs-0 qt-ml-8"
+                    appDisabledBtn
+                    #updateBtn="disabled"
+                    (onClick)="save()"
+                >
+                    <span *ngIf="!updateBtn.isBlock()">Update</span>
+                    <app-preloader-ticket *ngIf="updateBtn.isBlock()"></app-preloader-ticket>
+                </button>
+                <button
+                    *ngIf="overview && overview.status == 'CONNECTED'"
+                    class="qt-button --md qt-fs-0 qt-ml-8"
+                    appDisabledBtn
+                    #disconnectBtn="disabled"
+                    (onClick)="disconnect()"
+                >
+                    <span *ngIf="!disconnectBtn.isBlock()">Disconnect</span>
+                    <app-preloader-ticket *ngIf="disconnectBtn.isBlock()"></app-preloader-ticket>
+                </button>
+            </div>
         </div>
-
-        <div>
-          <button class="qt-button --md qt-fs-0 qt-ml-8">
-            Save
-          </button>
-        </div>
-      </div>
-
     </div>
-
     <div class="qt-page-list__header-tabs-line">
         <ul
             ngbNav
@@ -38,7 +68,10 @@
                     <span class="qt-page-list__header-tabs-item-text">Overview</span>
                 </a>
                 <ng-template ngbNavContent>
-                    <app-all-integrations-overview></app-all-integrations-overview>
+                    <app-all-integrations-overview
+                        #overview
+                        (onInitRequest)="onInitRequest($event)"
+                    ></app-all-integrations-overview>
                 </ng-template>
             </li>
         </ul>

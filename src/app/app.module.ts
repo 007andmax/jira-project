@@ -162,6 +162,7 @@ import { TasksAddModule } from './components/tasks/tasks-add/tasks-add.module';
 import { TasksEditModule } from './components/tasks/tasks-edit/tasks-edit.module';
 import { IntegrationsComponent } from './components/integrations/integrations.component';
 import { PermissionIntegrationsService } from './components/integrations/integrations.service';
+import { ManageCardsComponent } from './components/billing/manage-cards/manage-cards.component';
 declare var $: any;
 /**
  * This module represents the main application module

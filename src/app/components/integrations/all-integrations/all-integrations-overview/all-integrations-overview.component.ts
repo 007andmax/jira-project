@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
@@ -13,8 +13,11 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 export class AllIntegrationsOverviewComponent {
   modelForm: UntypedFormGroup;
   submitted: boolean = false;
+  isConnected: boolean = false;
   isEdit: boolean = false;
-  @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
+  status = 'DISCONNECTED';
+  @Output() onInitRequest = new EventEmitter<any>();
+
   constructor(
 
     public cd: ChangeDetectorRef,
@@ -42,27 +45,55 @@ export class AllIntegrationsOverviewComponent {
     //  this.modelForm.get('cryptType')?.disable();
     this.integrationsService.getSettings().subscribe((res: any) => {
       this.isEdit = true;
+      this.isConnected = res.connected;
       console.log("res", res);
       this.modelForm.patchValue({
         storeId: res.storeId,
         apiToken: res.apiToken,
         cryptType: res.cryptType
       })
+      this.status = 'CONNECTED';
       console.log("this.modelForm.value", this.modelForm.value)
     })
 
   }
-  add() {
+  disconnect() {
+
+    this.onInitRequest.emit(true);
+    //  this.addBtn.setDisabled(true);
+    this.integrationsService.disconnect().subscribe(data => {
+      //  this.addBtn.setDisabled(false);
+      this.submitted = false;
+      this.isEdit = false;
+      this.isConnected = false;
+      this.status = 'DISCONNECTED';
+      this.onInitRequest.emit(false);
+      this.modelForm.reset();
+      this.modelForm.patchValue({
+        cryptType: "7"
+      })
+    }, err => {
+      //  this.addBtn.setDisabled(false);
+      this.onInitRequest.emit(false);
+    })
+  }
+  save() {
     this.submitted = true;
     if (this.modelForm.invalid) {
       return;
     }
-    this.addBtn.setDisabled(true);
+    this.onInitRequest.emit(true);
+    //  this.addBtn.setDisabled(true);
     console.log("this.modelForm.value", this.modelForm.value);
     ((this.isEdit) ? this.integrationsService.editSettings(this.modelForm.value) : this.integrationsService.setSettings(this.modelForm.value)).subscribe(data => {
-      this.addBtn.setDisabled(false);
+      //  this.addBtn.setDisabled(false);
+      this.status = 'CONNECTED';
+      this.isEdit = true;
+      this.isConnected = data.connected;
+      this.onInitRequest.emit(false);
     }, err => {
-      this.addBtn.setDisabled(false);
+      //  this.addBtn.setDisabled(false);
+      this.onInitRequest.emit(false);
     })
   }
   get f2() {
