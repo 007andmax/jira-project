@@ -43,7 +43,7 @@
                     #disconnectBtn="disabled"
                     (onClick)="disconnect()"
                 >
-                    <span class="qt-icon icon__links qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                    <span class="qt-icon icon__link-broken qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                     <span *ngIf="!disconnectBtn.isBlock()">Disconnect</span>
                     <app-preloader-ticket *ngIf="disconnectBtn.isBlock()"></app-preloader-ticket>
                 </button>

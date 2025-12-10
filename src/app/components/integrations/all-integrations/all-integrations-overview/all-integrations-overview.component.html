@@ -5,12 +5,15 @@
                 <div class="qt-input-block qt-f50">
                     <div class="qt-input-block">
                         <div class="qt-input-block__label">Store Id</div>
-                        <input
-                          class=""
-                          type="text"
-                          formControlName="storeId"
-                          placeholder="Enter Primary Number"
-                        >
+                        <div class="qt-input-block__input-row qt-pos-rel">
+                          <input
+                            class=""
+                            type="text"
+                            formControlName="storeId"
+                            placeholder="Enter Primary Number"
+                          >
+                          <div class="qt-sz-20 qt-icon icon__copy show-password pointer"></div>
+                        </div>
                         <app-mat-error
                           class="invalid-feedback"
                           *ngIf="submitted && f2.storeId.errors"

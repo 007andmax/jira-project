@@ -649,6 +649,9 @@ Example:
   &__links {
     mask-image: url("/assets/img/icons/links.svg");
   }
+  &__link-broken {
+    mask-image: url("/assets/img/icons/link-broken.svg");
+  }
   &__network-switch {
     mask-image: url("/assets/img/icons/network-switch.svg");
   }
