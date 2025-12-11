@@ -23,7 +23,8 @@ export class AllIntegrationsOverviewComponent {
     public cd: ChangeDetectorRef,
     public formBuilder: UntypedFormBuilder,
     private integrationsService: IntegrationsService,
-
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
 
   ) { }
 
@@ -76,6 +77,21 @@ export class AllIntegrationsOverviewComponent {
       //  this.addBtn.setDisabled(false);
       this.onInitRequest.emit(false);
     })
+  }
+  copy(data) {
+    let textArea: any = document.createElement("textarea");
+    textArea.style.opacity = 0;
+    textArea.value = data;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      let successful = document.execCommand('copy');
+    } catch (err) {
+      //  UserNotificationService.show('Copy failed', true);
+    }
+    document.body.removeChild(textArea);
+    this.toastrService.success("The value is copied to clipboard");
+    this.appStateService.changeDetectorRef();
   }
   save() {
     this.submitted = true;

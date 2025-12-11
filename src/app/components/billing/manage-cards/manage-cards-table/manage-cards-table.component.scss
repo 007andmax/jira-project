@@ -1,0 +1,87 @@
+@import "./src/assets/styles/variable";
+
+.grey-dropdown {
+    .dropdown-menu {
+        .dropdown-item {
+            padding: 5px 20px 5px 50px;
+            position: relative;
+
+            &:before {
+                position: absolute;
+                content: "";
+                left: 20px;
+                top: 11px;
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+}
+
+.--selected {
+    td {
+        background: $gray-50;
+        border-color: $blue-light-600;
+    }
+}
+
+tr:hover {
+    td {
+        background-color: $gray-25;
+    }
+}
+
+.password-table__user-password {
+
+    .user-password,
+    .user-email {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.password-table__menu {
+    flex: 0 0 50px !important;
+    padding: 23px 16px 23px 8px;
+}
+
+.icon__show,
+.icon__hide,
+.icon__copy {
+    min-width: 16px;
+    min-height: 16px;
+}
+
+.qt-table-modern__row {
+    position: relative;
+    min-height: 56px;
+    border: unset;
+    margin-bottom: 0;
+
+    &>div {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid $gray-200;
+        font-size: 14px;
+
+        &:first-child {
+            padding-left: 25px;
+            border-left: 1px solid $gray-200;
+            border-radius: 0;
+        }
+
+        &:last-child {
+            padding-right: 25px;
+            border-right: 1px solid $gray-200;
+            border-radius: 0;
+        }
+    }
+
+    &:hover {
+        border: unset;
+
+        &>div {
+            background-color: $blue-dark-25;
+        }
+    }
+}

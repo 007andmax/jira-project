@@ -23,7 +23,7 @@
                     #saveBtn="disabled"
                     (onClick)="save()"
                 >
-                    <span *ngIf="!saveBtn.isBlock()">Save</span>
+                    <span *ngIf="!saveBtn.isBlock()">Connect</span>
                     <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
                 </button>
                 <button

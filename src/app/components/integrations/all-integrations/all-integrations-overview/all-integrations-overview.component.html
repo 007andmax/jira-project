@@ -6,19 +6,24 @@
                     <div class="qt-input-block">
                         <div class="qt-input-block__label">Store Id</div>
                         <div class="qt-input-block__input-row qt-pos-rel">
-                          <input
-                            class=""
-                            type="text"
-                            formControlName="storeId"
-                            placeholder="Enter Primary Number"
-                          >
-                          <div class="qt-sz-20 qt-icon icon__copy show-password pointer"></div>
+                            <input
+                                class
+                                type="text"
+                                formControlName="storeId"
+                                placeholder="Enter Store Id"
+                            >
+                            <div
+                                placement="top"
+                                ngbTooltip="Copy"
+                                class="qt-sz-20 qt-icon icon__copy show-password pointer"
+                                (click)="copy(f2.storeId.value)"
+                            ></div>
                         </div>
                         <app-mat-error
-                          class="invalid-feedback"
-                          *ngIf="submitted && f2.storeId.errors"
+                            class="invalid-feedback"
+                            *ngIf="submitted && f2.storeId.errors"
                         >
-                          The maximum number of characters - 10
+                            The maximum number of characters - 10
                         </app-mat-error>
                     </div>
                 </div>
@@ -26,19 +31,19 @@
             <div class="qt-inputs-row">
                 <div class="qt-input-block qt-f50">
                     <div class="qt-input-block">
-                      <div class="qt-input-block__label">API Token</div>
-                      <input
-                        class=""
-                        type="text"
-                        formControlName="apiToken"
-                        placeholder="Enter Primary Number"
-                      >
-                      <app-mat-error
-                        class="invalid-feedback"
-                        *ngIf="submitted && f2.apiToken.errors"
-                      >
-                        The maximum number of characters - 20
-                      </app-mat-error>
+                        <div class="qt-input-block__label">API Token</div>
+                        <input
+                            class
+                            type="text"
+                            formControlName="apiToken"
+                            placeholder="Enter API Token"
+                        >
+                        <app-mat-error
+                            class="invalid-feedback"
+                            *ngIf="submitted && f2.apiToken.errors"
+                        >
+                            The maximum number of characters - 20
+                        </app-mat-error>
                     </div>
                 </div>
             </div>
@@ -46,19 +51,19 @@
                 <div class="qt-input-block qt-f50">
                     <div class="qt-input-block">
                         <div class="qt-input-block__label">Crypt Type</div>
-                      <input
-                        class=""
-                        type="text"
-                        value="7"
-                        placeholder="Enter Primary Number"
-                        disabled
-                      >
-                      <app-mat-error
-                        class="invalid-feedback"
-                        *ngIf="submitted && f2.cryptType.errors"
-                      >
-                        Please enter a valid phone number
-                      </app-mat-error>
+                        <input
+                            class
+                            type="text"
+                            value="7"
+                            placeholder="Enter Crypt Type"
+                            disabled
+                        >
+                        <app-mat-error
+                            class="invalid-feedback"
+                            *ngIf="submitted && f2.cryptType.errors"
+                        >
+                            Please enter a valid phone number
+                        </app-mat-error>
                     </div>
                 </div>
             </div>

@@ -23,5 +23,8 @@ export class ManageCardsService {
   public addCard(data) {
     return this.http.post(this.apiUrl + 'moneris/cards', data);
   }
+  public getCards(page) {
+    return this.http.get(this.apiUrl + `moneris/cards?page=${page}&size=20`);
+  }
 
 }

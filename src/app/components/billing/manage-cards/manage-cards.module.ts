@@ -11,12 +11,16 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
+import { ManageCardsTableComponent } from './manage-cards-table/manage-cards-table.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ManageCardsEditComponent } from './manage-cards-edit/manage-cards-edit.component';
 
 
 
 
 @NgModule({
-    declarations: [ManageCardsComponent, ManageCardsHeaderComponent, ManageCardsAddComponent
+    declarations: [ManageCardsComponent, ManageCardsHeaderComponent, ManageCardsAddComponent, ManageCardsTableComponent, ManageCardsEditComponent
 
     ],
     imports: [
@@ -28,7 +32,9 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
         PreloaderTicketModule,
         MatErrorModule,
         ReactiveFormsModule,
-        CompanyDropDownModule
+        CompanyDropDownModule,
+        InfiniteScrollModule,
+        NgbModule
     ],
 
 })

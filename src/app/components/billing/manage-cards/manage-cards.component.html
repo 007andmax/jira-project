@@ -16,32 +16,23 @@
                             class="password-table__account pointer"
                             (click)="onFilter('CATEGORY')"
                         >
-                            Account Type
+                            Company
                             <span class="qt-table-modern__sorting"></span>
                         </div>
                         <div
                             class="password-table__company-name pointer"
                             (click)="onFilter('COMPANY_NAME')"
                         >
-                            Company name
-                            <span class="qt-table-modern__sorting"></span>
+                            Card Number
                         </div>
-                        <div
-                            class="password-table__description pointer"
-                            (click)="onFilter('DESCRIPTION')"
-                        >
-                            Description
-                            <span class="qt-table-modern__sorting"></span>
-                        </div>
+
                         <div
                             class="password-table__user-password pointer"
                             (click)="onFilter('USERNAME')"
                         >
-                            User & Password
-                            <span class="qt-table-modern__sorting"></span>
+                            Expiry Date
                         </div>
                         <div class="password-table__status">Status</div>
-                        <div class="password-table__otp">OTP</div>
                         <div class="password-table__menu"></div>
                     </div>
                 </div>
@@ -52,7 +43,7 @@
                 [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
             >
                 <div class="qt-page-list__body-tbody qt-table-modern password-table">
-                    <!-- <div
+                    <div
                         infiniteScroll
                         [infiniteScrollContainer]="container"
                         [infiniteScrollDistance]="2"
@@ -66,12 +57,9 @@
                             [ngForOf]="list"
                             [ngForTrackBy]="trackById"
                         >
-                            <app-password-manager-table
-                                [item]="item"
-                                (onSelectRecord)="onSelectRecord($event)"
-                            ></app-password-manager-table>
+                            <app-manage-cards-table [item]="item"></app-manage-cards-table>
                         </ng-template>
-                    </div> -->
+                    </div>
                 </div>
                 <div
                     class="no-exist-elements"

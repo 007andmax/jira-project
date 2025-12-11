@@ -24,7 +24,13 @@ export class IntegrationsService {
   ) { }
 
   public getSettings() {
-    return this.http.get(`${this.apiUrl}moneris/settings`)
+    this.appStateService.setServerError(true);
+    return this.http.get(`${this.apiUrl}moneris/settings`).pipe(
+      tap((data: any) => {
+        this.appStateService.setServerError(false);
+        this.appStateService.changeDetectorRef();
+        return data;
+      }));
   }
   public setSettings(data) {
     return this.http.post(`${this.apiUrl}moneris/settings`, data).pipe(
