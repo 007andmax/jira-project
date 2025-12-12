@@ -431,7 +431,6 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
     this.onCloseForm.emit(null);
   }
   ngOnDestroy(): void {
-    window.removeEventListener('resize', this.resize);
     this.sub.unsubscribe();
   }
 }
