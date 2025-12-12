@@ -33,8 +33,10 @@ export class IntegrationsService {
       }));
   }
   public setSettings(data) {
+    this.appStateService.setServerError(true);
     return this.http.post(`${this.apiUrl}moneris/settings`, data).pipe(
       tap((data: any) => {
+        this.appStateService.setServerError(false);
         if (data.connected == true) this.toastrService.success("The connection has been established successfully");
         if (data.connected == false) this.toastrService.error("The connection cannot be established");
         this.appStateService.changeDetectorRef();
@@ -42,8 +44,10 @@ export class IntegrationsService {
       }));
   }
   public editSettings(data) {
+    this.appStateService.setServerError(true);
     return this.http.put(`${this.apiUrl}moneris/settings`, data).pipe(
       tap((data: any) => {
+        this.appStateService.setServerError(false);
         if (data.connected == true) this.toastrService.success("The connection has been established successfully");
         if (data.connected == false) this.toastrService.error("The connection cannot be established");
         this.appStateService.changeDetectorRef();
@@ -51,8 +55,10 @@ export class IntegrationsService {
       }));
   }
   public disconnect() {
+    this.appStateService.setServerError(true);
     return this.http.delete(`${this.apiUrl}moneris/settings`).pipe(
       tap((data: any) => {
+        this.appStateService.setServerError(false);
         this.toastrService.success("The connection has been disconnected");
         this.appStateService.changeDetectorRef();
         return data;

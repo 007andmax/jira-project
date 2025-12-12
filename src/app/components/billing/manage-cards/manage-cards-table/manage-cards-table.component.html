@@ -2,6 +2,8 @@
     <div class="password-table__account pointer">
         <div class="qt-df qt-ai-c qt-lh-1">
 
+
+
             <span [textContent]="item.companyName"></span>
         </div>
     </div>
@@ -10,6 +12,8 @@
         [textContent]="item.maskedCardNumber"
     >
     </div>
+
+
 
     <div class="password-table__user-password ellipsis">
         <div class="ellipsis">
@@ -24,6 +28,8 @@
         class="password-table__status pointer"
         [textContent]="parseExpiredDate()"
     ></div>
+
+
 
     <div class="password-table__menu">
         <!-- <div class="qt-ic-c qt-icon icon__more  qt-pointer qt-sz-16 qt-bg-contain"></div> -->
@@ -62,8 +68,8 @@
                     (click)="delete()"
                     ngbDropdownItem
                 >
-                    <div class="qt-icon icon__delete qt-sz-16 qt-bg-contain qt-mr-8"></div>
-                    Remove
+                    <div class="qt-icon icon__delete qt-icon__red-600 qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                    Delete
                 </li>
             </ul>
         </div>

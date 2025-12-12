@@ -39,22 +39,16 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
     this.modelForm = this.formBuilder.group({
       cardNumber: [
         "",
-        [Validators.required]
       ],
       expiryDate: ["",
-        [Validators.required]
       ],
       cvd: ["",
-        [Validators.required]
       ],
       streetnumber: ["",
-        [Validators.required]
       ],
       streetname: ["",
-        [Validators.required]
       ],
       zipcode: ["",
-        [Validators.required]
       ],
       address: ["",
 
@@ -75,7 +69,6 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
 
       ],
       companyId: ["",
-        [Validators.required]
       ],
 
     })

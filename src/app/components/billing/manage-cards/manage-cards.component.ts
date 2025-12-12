@@ -7,6 +7,7 @@ import { ManageCardsStateService } from 'src/app/states/manage-cards/manage-card
 import { Subscription } from 'rxjs';
 import { REMOVE_CARD } from 'src/app/const/confirm';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { ManageCardsRealTimeService } from 'src/app/states/manage-cards/manage-cards-real-time.service';
 
 @Component({
   selector: 'app-manage-cards',
@@ -28,6 +29,7 @@ export class ManageCardsComponent {
     private manageCardsService: ManageCardsService,
     private manageCardsStateService: ManageCardsStateService,
     public confirmStateService: ConfirmStateService,
+    private manageCardsRealTimeService: ManageCardsRealTimeService,
     public cd: ChangeDetectorRef,
   ) { }
   ngOnInit() {
@@ -38,6 +40,20 @@ export class ManageCardsComponent {
       }
     })
     this.sub.add(getConfirm);
+    let changeCardsArray = this.manageCardsRealTimeService.changeCardsArray.subscribe((newChange: any) => {
+      if (newChange.action === 'PAYMENT_CARD_SAVED') {
+        let index = this.list.findIndex(item => item.id == newChange.data.id);
+        if (index == -1) this.list.push(new Card(newChange.data));
+      } else if (newChange.action === 'PAYMENT_CARD_EDITED') {
+        let index = this.list.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.list[index] = new Card(newChange.data);
+      } else if (newChange.action === 'PAYMENT_CARD_REMOVED') {
+        let indexList = this.list.findIndex(item => item.id === newChange.data);
+        if (indexList > -1) this.list.splice(indexList, 1);
+      }
+      if (!this.cd['destroyed']) this.cd.detectChanges();
+    });
+    this.sub.add(changeCardsArray);
   }
   onRemoveCard(cardId) {
     this.manageCardsService.deleteCard(cardId).subscribe(res => {

@@ -45,6 +45,7 @@ import { SubscriptionServicesRealTimeService } from 'src/app/states/subscription
 import { ApiKeysRealTimeService } from 'src/app/states/api-keys/api-keys-real-time.service';
 import { NotificationsRealTimeService } from 'src/app/states/notifications/notifications-real-time.service';
 import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
+import { ManageCardsRealTimeService } from 'src/app/states/manage-cards/manage-cards-real-time.service';
 
 
 /**
@@ -111,7 +112,8 @@ export class WebsocketService {
     private subscriptionServicesRealTimeService: SubscriptionServicesRealTimeService,
     private apiKeysRealTimeService: ApiKeysRealTimeService,
     private notificationsRealTimeService: NotificationsRealTimeService,
-    private tasksRealTimeService: TasksRealTimeService
+    private tasksRealTimeService: TasksRealTimeService,
+    private manageCardsRealTimeService: ManageCardsRealTimeService,
 
   ) {
   }
@@ -166,6 +168,7 @@ export class WebsocketService {
       that.subsribeToNotifications();
       that.subsribeToTasks();
       that.subsribeToQuotesNumber();
+      that.subsribeToPaymentCard();
       that.onInit.emit(true);
       that.isInit = true;
     }
@@ -316,6 +319,17 @@ export class WebsocketService {
       this.stompClient.subscribe("/user/watch/tasks", (message) => {
         var newChange = JSON.parse(message.body);
         this.tasksRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+        }
+      });
+    }, 3000);
+  }
+  private subsribeToPaymentCard() {
+
+    setTimeout(() => {
+      this.stompClient.subscribe("/user/watch/paymentCard", (message) => {
+        var newChange = JSON.parse(message.body);
+        this.manageCardsRealTimeService.handleRealTimeChanges(newChange);
         if (message.body) {
         }
       });
