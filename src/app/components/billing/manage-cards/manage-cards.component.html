@@ -13,27 +13,27 @@
                 <div class="qt-table-modern qt-page-list__header-thead">
                     <div class="qt-page-list__header-thead__row">
                         <div
-                            class="password-table__account pointer"
+                            class="manage-cards__company pointer"
                             (click)="onFilter('CATEGORY')"
                         >
                             Company
-                            <span class="qt-table-modern__sorting"></span>
+                            <span class="qt-icon icon__arrow-narrow-down qt-sz-16 qt-ml-8"></span>
                         </div>
                         <div
-                            class="password-table__company-name pointer"
+                            class="manage-cards__card-number pointer"
                             (click)="onFilter('COMPANY_NAME')"
                         >
                             Card Number
                         </div>
 
                         <div
-                            class="password-table__user-password pointer"
+                            class="manage-cards__expire-date pointer"
                             (click)="onFilter('USERNAME')"
                         >
                             Expiry Date
                         </div>
-                        <div class="password-table__status">Status</div>
-                        <div class="password-table__menu"></div>
+                        <div class="manage-cards__status">Status</div>
+                        <div class="manage-cards__menu"></div>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 class="qt-page-list__body-table-container"
                 [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
             >
-                <div class="qt-page-list__body-tbody qt-table-modern password-table">
+                <div class="qt-page-list__body-tbody qt-table-modern manage-cards">
                     <div
                         infiniteScroll
                         [infiniteScrollContainer]="container"

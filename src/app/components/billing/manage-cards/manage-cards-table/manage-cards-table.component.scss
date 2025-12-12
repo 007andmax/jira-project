@@ -31,20 +31,6 @@ tr:hover {
     }
 }
 
-.password-table__user-password {
-
-    .user-password,
-    .user-email {
-        display: flex;
-        align-items: center;
-    }
-}
-
-.password-table__menu {
-    flex: 0 0 50px !important;
-    padding: 23px 16px 23px 8px;
-}
-
 .icon__show,
 .icon__hide,
 .icon__copy {
@@ -84,4 +70,26 @@ tr:hover {
             background-color: $blue-dark-25;
         }
     }
+}
+
+.manage-cards {
+  &__company {
+    flex: 2 1 400px;
+  }
+
+  &__card-number {
+    flex: 2 1 388px;
+  }
+
+  &__expire-date {
+    flex: 0 0 133px;
+  }
+
+  &__status {
+    flex: 0 0 127px;
+  }
+
+  &__menu {
+    flex: 0 0 66px;
+  }
 }
