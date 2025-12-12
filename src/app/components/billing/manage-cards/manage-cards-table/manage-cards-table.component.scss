@@ -44,11 +44,12 @@ tr:hover {
     border: unset;
     margin-bottom: 0;
 
-    &>div {
+    & > div {
         padding-top: 15px;
         padding-bottom: 15px;
         border-bottom: 1px solid $gray-200;
         font-size: 14px;
+        color: $gray-900;
 
         &:first-child {
             padding-left: 25px;
@@ -91,5 +92,28 @@ tr:hover {
 
   &__menu {
     flex: 0 0 66px;
+  }
+}
+
+.manage-cards__status {
+  .tag__modern {
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 6px;
+    text-transform: unset;
+
+    &.--active {
+      border: 1px solid $green-200;
+      background-color: $green-25;
+      color: $green-700;
+    }
+
+    &.--expired {
+      border: 1px solid $red-200;
+      background-color: $red-25;
+      color: $red-600;
+    }
   }
 }

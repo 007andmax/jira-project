@@ -1,7 +1,7 @@
-<div class="qt-table-modern__row qt-table-modern__row--lg">
+<div class="qt-table-modern__row">
     <div class="manage-cards__company pointer">
         <div class="qt-df qt-ai-c qt-lh-1">
-            <span [textContent]="item.companyName"></span>
+            <span class="qt-fw-500" [textContent]="item.companyName"></span>
         </div>
     </div>
     <div
@@ -18,12 +18,14 @@
             </div>
         </div>
     </div>
-    <div
-        class="manage-cards__status pointer"
+    <div class="manage-cards__status pointer">
+      <div
         [textContent]="parseExpiredDate()"
-    ></div>
+        class="tag__modern --active"
+      >
+      </div>
+    </div>
     <div class="manage-cards__menu">
-        <!-- <div class="qt-ic-c qt-icon icon__more  qt-pointer qt-sz-16 qt-bg-contain"></div> -->
         <div
             ngbDropdown
             [container]="'body'"
