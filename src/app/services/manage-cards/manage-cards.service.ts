@@ -19,9 +19,17 @@ export class ManageCardsService {
     private http: HttpClient,
 
   ) { }
-
+  public editCard(data) {
+    return this.http.put(this.apiUrl + 'moneris/cards', data);
+  }
+  public deleteCard(cardId) {
+    return this.http.delete(this.apiUrl + `moneris/cards/${cardId}`);
+  }
   public addCard(data) {
     return this.http.post(this.apiUrl + 'moneris/cards', data);
+  }
+  public getCard(card_id) {
+    return this.http.get(this.apiUrl + `moneris/cards/${card_id}`);
   }
   public getCards(page) {
     return this.http.get(this.apiUrl + `moneris/cards?page=${page}&size=20`);

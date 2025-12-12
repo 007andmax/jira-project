@@ -4,9 +4,10 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
-import { REMOVE_RECORD } from 'src/app/const/confirm';
+import { REMOVE_CARD, REMOVE_RECORD } from 'src/app/const/confirm';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { Card } from '../class/card';
+import { ManageCardsStateService } from 'src/app/states/manage-cards/manage-cards-state.service';
 
 @Component({
   selector: 'app-manage-cards-table',
@@ -19,6 +20,7 @@ export class ManageCardsTableComponent implements OnInit, OnDestroy {
   togglePassword: boolean = false;
   sub: Subscription = new Subscription();
   constructor(
+    private manageCardsStateService: ManageCardsStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     public cd: ChangeDetectorRef,
@@ -29,7 +31,7 @@ export class ManageCardsTableComponent implements OnInit, OnDestroy {
 
   }
   edit() {
-
+    this.manageCardsStateService.openAsideForEdit(this.item);
   }
   sendNotification() {
 
@@ -41,10 +43,10 @@ export class ManageCardsTableComponent implements OnInit, OnDestroy {
     return 'Expired';
   }
   delete() {
-    this.confirmStateService.setConfirmAction(REMOVE_RECORD);
+    this.confirmStateService.setConfirmAction(REMOVE_CARD);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Are you sure you want to delete the password record?`;
-    // this.passwordManagerStateService.setRecordForRemove(this.item);
+    modalRef.componentInstance.message = `Are you sure you want to remove this card?`;
+    this.manageCardsStateService.setCardForRemove(this.item);
   }
 
   ngOnDestroy(): void {

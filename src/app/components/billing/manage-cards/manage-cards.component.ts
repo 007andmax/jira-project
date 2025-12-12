@@ -3,6 +3,10 @@ import { PasswordRecord } from '../../password-manager/class/password-record';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { ManageCardsService } from 'src/app/services/manage-cards/manage-cards.service';
 import { Card } from './class/card';
+import { ManageCardsStateService } from 'src/app/states/manage-cards/manage-cards-state.service';
+import { Subscription } from 'rxjs';
+import { REMOVE_CARD } from 'src/app/const/confirm';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 
 @Component({
   selector: 'app-manage-cards',
@@ -18,13 +22,28 @@ export class ManageCardsComponent {
   toggleFilter: boolean = false;
   public infiniteScrollDisabled = true;
   container = document.body.querySelector(".main-container");
+  sub: Subscription = new Subscription();
   //public filter: FilterPasswordManager = new FilterPasswordManager();
   constructor(private ticketsListService: TicketsListService,
     private manageCardsService: ManageCardsService,
+    private manageCardsStateService: ManageCardsStateService,
+    public confirmStateService: ConfirmStateService,
     public cd: ChangeDetectorRef,
   ) { }
   ngOnInit() {
     this.onScroll();
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === REMOVE_CARD) this.onRemoveCard(this.manageCardsStateService.getCardForRemove().id);
+      }
+    })
+    this.sub.add(getConfirm);
+  }
+  onRemoveCard(cardId) {
+    this.manageCardsService.deleteCard(cardId).subscribe(res => {
+
+      this.cd.detectChanges();
+    });
   }
   public onFilter(field) {
     document.body.querySelector(".main-container").scrollTo(0, 0);
@@ -73,5 +92,8 @@ export class ManageCardsComponent {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

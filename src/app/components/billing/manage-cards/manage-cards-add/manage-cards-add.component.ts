@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { Company } from 'src/app/interfaces/company/company';
 import { ManageCardsService } from 'src/app/services/manage-cards/manage-cards.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ManageCardsStateService } from 'src/app/states/manage-cards/manage-cards-state.service';
@@ -13,17 +14,18 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
   styleUrls: ['./manage-cards-add.component.scss']
 })
 export class ManageCardsAddComponent {
+  selectedCompany: Company;
   sub: Subscription = new Subscription();
   modelForm: UntypedFormGroup;
   submitted: boolean = false;
   showAdd: boolean = false;
   @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
   constructor(
-    private manageCardsStateService: ManageCardsStateService,
+    public manageCardsStateService: ManageCardsStateService,
     public cd: ChangeDetectorRef,
     public formBuilder: UntypedFormBuilder,
-    private manageCardsService: ManageCardsService,
-    private companiesStateService: CompaniesStateService,
+    public manageCardsService: ManageCardsService,
+    public companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService
 
 
@@ -75,6 +77,7 @@ export class ManageCardsAddComponent {
 
   }
   onSelectCompany(data) {
+    this.selectedCompany = data;
     this.modelForm.controls['companyId'].setValue(data.id);
   }
   add() {
@@ -97,6 +100,7 @@ export class ManageCardsAddComponent {
     })
   }
   closed() {
+    this.selectedCompany = null;
     this.submitted = false;
     this.showAdd = false;
     this.modelForm.reset();

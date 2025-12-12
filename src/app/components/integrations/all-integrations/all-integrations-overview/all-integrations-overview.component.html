@@ -1,6 +1,9 @@
 <div class="qt-page-list__container">
     <div class="qt-page-list__table">
-        <form class="integrations-table__form" [formGroup]="modelForm">
+        <form
+            class="integrations-table__form"
+            [formGroup]="modelForm"
+        >
             <div class="qt-inputs-row">
                 <div class="qt-input-block">
                     <div class="qt-input-block">
@@ -34,19 +37,20 @@
                         <div class="qt-input-block__label">API Token</div>
                         <div class="qt-input-block__input-row qt-pos-rel">
                             <input
-                              class
-                              type="text"
-                              formControlName="apiToken"
-                              placeholder="Enter API Token"
+                                class
+                                type="text"
+                                formControlName="apiToken"
+                                placeholder="Enter API Token"
                             >
                             <div
-                              class="qt-sz-20 qt-icon icon__copy show-password pointer"
+                                class="qt-sz-20 qt-icon icon__copy show-password pointer"
+                                (click)="copy(f2.apiToken.value)"
                             ></div>
                             <app-mat-error
-                              class="invalid-feedback"
-                              *ngIf="submitted && f2.apiToken.errors"
+                                class="invalid-feedback"
+                                *ngIf="submitted && f2.apiToken.errors"
                             >
-                              The maximum number of characters - 20
+                                The maximum number of characters - 20
                             </app-mat-error>
                         </div>
                     </div>

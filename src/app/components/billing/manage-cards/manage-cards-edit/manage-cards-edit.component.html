@@ -1,1 +1,286 @@
-<p>manage-cards-edit works!</p>
+<div
+    [hidden]="!showAdd"
+    class="qt-aside-modern"
+>
+    <form [formGroup]="modelForm">
+        <div class="qt-aside-modern__header">
+            <div class="qt-aside-modern__header-info qt-df qt-ai-c">
+                <div class="qt-aside__title">Add Card</div>
+
+            </div>
+            <div>
+                <div
+                    class="qt-aside__close-modal"
+                    (click)="closed()"
+                >
+                    <div class="qt-icon icon__close qt-sz-20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="qt-aside-modern__content">
+            <div class="qt-inputs-row --required">
+                <div class="qt-input-block">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Card Number
+                    </label>
+                    <input
+                        [ngClass]="{'--input-error' : submitted && f2.cardNumber.errors}"
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="cardNumber"
+                    >
+                    <app-mat-error
+                        class="invalid-feedback"
+                        *ngIf="submitted && f2.cardNumber.errors"
+                    >
+                        Ticket Subject is required
+                    </app-mat-error>
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Expiration Date
+                    </label>
+                    <input
+                        [ngClass]="{'--input-error' : submitted && f2.expiryDate.errors}"
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="expiryDate"
+                    >
+                    <app-mat-error
+                        class="invalid-feedback"
+                        *ngIf="submitted && f2.expiryDate.errors"
+                    >
+                        Ticket Subject is required
+                    </app-mat-error>
+                </div>
+                <div class="qt-input-block qt-f50">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Security Code
+                    </label>
+                    <input
+                        [ngClass]="{'--input-error' : submitted && f2.cvd.errors}"
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="cvd"
+                    >
+                    <app-mat-error
+                        class="invalid-feedback"
+                        *ngIf="submitted && f2.cvd.errors"
+                    >
+                        Ticket Subject is required
+                    </app-mat-error>
+                </div>
+            </div>
+            <div class="qt-inputs-row --required">
+                <div class="qt-input-block">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Card Holder Name
+                    </label>
+                    <input
+                        [ngClass]="{'--input-error' : submitted && f2.cvd.errors}"
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="cvd"
+                    >
+                    <app-mat-error
+                        class="invalid-feedback"
+                        *ngIf="submitted && f2.cvd.errors"
+                    >
+                        Ticket Subject is required
+                    </app-mat-error>
+                </div>
+            </div>
+            <div class="qt-inputs-row --required">
+                <div class="qt-input-block">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Address
+                    </label>
+                    <input
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="address"
+                    >
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        streetnumber
+                    </label>
+                    <input
+                        [ngClass]="{'--input-error' : submitted && f2.streetnumber.errors}"
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="streetnumber"
+                    >
+                    <app-mat-error
+                        class="invalid-feedback"
+                        *ngIf="submitted && f2.streetnumber.errors"
+                    >
+                        Ticket Subject is required
+                    </app-mat-error>
+                </div>
+                <div class="qt-input-block qt-f50">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        streetname
+                    </label>
+                    <input
+                        [ngClass]="{'--input-error' : submitted && f2.streetname.errors}"
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="streetname"
+                    >
+                    <app-mat-error
+                        class="invalid-feedback"
+                        *ngIf="submitted && f2.streetname.errors"
+                    >
+                        Ticket Subject is required
+                    </app-mat-error>
+                </div>
+            </div>
+            <div class="qt-inputs-row --required">
+                <div class="qt-input-block">
+                    <company-drop-down
+                        [placeholder]="'Company Name'"
+                        [validate]="!(submitted && f2.companyId.errors)"
+                        [editItem]="selectedCompany"
+                        [errorMessage]="'The company name is required'"
+                        [title]="'Company'"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        [isBlockClear]="true"
+                        (onSelectedItem)="onSelectCompany($event)"
+                    >
+                    </company-drop-down>
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Country or region
+                    </label>
+                    <app-drop-down
+                        #techUserDP
+                        [class]="['qt-dropdown']"
+                        [list]="[]"
+                        [search]="true"
+                        [change]="true"
+                        [placeholder]="'Select'"
+                    ></app-drop-down>
+                </div>
+                <div class="qt-input-block qt-f50">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Province/State
+                    </label>
+                    <app-drop-down
+                        #techUserDP
+                        [class]="['qt-dropdown']"
+                        [list]="[]"
+                        [search]="true"
+                        [change]="true"
+                        [placeholder]="'Select'"
+                    ></app-drop-down>
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        City
+                    </label>
+                    <input
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="city"
+                    >
+
+                </div>
+                <div class="qt-input-block qt-f50">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Postal Code
+                    </label>
+                    <input
+                        [ngClass]="{'--input-error' : submitted && f2.zipcode.errors}"
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="zipcode"
+                    >
+                    <app-mat-error
+                        class="invalid-feedback"
+                        *ngIf="submitted && f2.zipcode.errors"
+                    >
+                        Ticket Subject is required
+                    </app-mat-error>
+                </div>
+            </div>
+            <!-- <div class="qt-inputs-row">
+                <label
+                    class="qt-checkbox"
+                    for="email-payment"
+                >
+                    <input
+                        id="email-payment"
+                        type="checkbox"
+                    >
+                    <span></span>
+                    <div class="qt-ml-8 qt-fw-400 qt-lh-1">Set as Primary card</div>
+                </label>
+            </div> -->
+        </div>
+        <div class="qt-aside-modern__footer">
+            <div class="qt-df qt-w100">
+                <button
+                    class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+                    (click)="closed()"
+                >
+                    Cancel
+                </button>
+                <button
+                    class="qt-button qt-w100 qt-jc-c"
+                    appDisabledBtn
+                    #addBtn="disabled"
+                    (onClick)="save()"
+                    [ngClass]="{'--loading':addBtn.isBlock()}"
+                >
+                    <span *ngIf="!addBtn.isBlock()">Save</span>
+                    <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
