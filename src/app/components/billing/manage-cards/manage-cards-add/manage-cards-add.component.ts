@@ -79,6 +79,8 @@ export class ManageCardsAddComponent {
   onSelectCompany(data) {
     this.selectedCompany = data;
     this.modelForm.controls['companyId'].setValue(data.id);
+    console.log("selectedCompany", data);
+
   }
   add() {
     this.submitted = true;

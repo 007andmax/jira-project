@@ -14,6 +14,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
     let getShowAsideForAdd = this.manageCardsStateService.showAsideForEdit.subscribe(data => {
       this.manageCardsService.getCard(data.id).subscribe((res: any) => {
         this.modelForm.patchValue({
+          id: res.id,
           cardType: res.cardType,
           // cardNumber: res.maskedCardNumber,
           expiryDate: res.expiryDate,
@@ -70,6 +71,9 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
       cardType: ["",
 
       ],
+      id: ["",
+
+      ],
       companyId: ["",
         [Validators.required]
       ],
@@ -89,6 +93,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
         req[key] = this.modelForm.value[key];
       }
     });
+    console.log("req", req);
     this.manageCardsService.editCard(req).subscribe(data => {
       this.addBtn.setDisabled(false);
       this.closed();

@@ -20,7 +20,7 @@ export class ManageCardsService {
 
   ) { }
   public editCard(data) {
-    return this.http.put(this.apiUrl + 'moneris/cards', data);
+    return this.http.put(this.apiUrl + `moneris/cards/${data.id}`, data);
   }
   public deleteCard(cardId) {
     return this.http.delete(this.apiUrl + `moneris/cards/${cardId}`);
