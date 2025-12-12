@@ -399,16 +399,12 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
     this.ticketProfileFormUpdate.setType(this.tab);
     if (this.tab == "NOTE" && this.customerPortalStateService.isCustomerPortal) this.ticketProfileFormUpdate.setNoteType("PUBLIC");
     if (this.tab == "NOTE" && !this.customerPortalStateService.isCustomerPortal) this.ticketProfileFormUpdate.setNoteType(this.ticketStateService.getNoteType());
-    $("ticket-detail-profile-form-update").css({ left: $(".ticket-detail-page-content__body").offset().left - 64 });
-    window.addEventListener('resize', this.resize);
     let onCloseModalNote = this.ticketStateService.onCloseModalNote.subscribe(res => {
       this.close();
     })
     this.sub.add(onCloseModalNote);
   }
-  resize = () => {
-    $("ticket-detail-profile-form-update").css({ left: $(".ticket-detail-page-content__body").offset().left - 64 });
-  }
+
 
   public isShowAddUpdate() {
     if (this.tab !== 'QUICK_SUPPORT') {
