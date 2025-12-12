@@ -1,8 +1,8 @@
 <div class="qt-page-list__container">
     <div class="qt-page-list__table">
-        <form [formGroup]="modelForm">
+        <form class="integrations-table__form" [formGroup]="modelForm">
             <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
+                <div class="qt-input-block">
                     <div class="qt-input-block">
                         <div class="qt-input-block__label">Store Id</div>
                         <div class="qt-input-block__input-row qt-pos-rel">
@@ -29,26 +29,31 @@
                 </div>
             </div>
             <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
+                <div class="qt-input-block">
                     <div class="qt-input-block">
                         <div class="qt-input-block__label">API Token</div>
-                        <input
-                            class
-                            type="text"
-                            formControlName="apiToken"
-                            placeholder="Enter API Token"
-                        >
-                        <app-mat-error
-                            class="invalid-feedback"
-                            *ngIf="submitted && f2.apiToken.errors"
-                        >
-                            The maximum number of characters - 20
-                        </app-mat-error>
+                        <div class="qt-input-block__input-row qt-pos-rel">
+                            <input
+                              class
+                              type="text"
+                              formControlName="apiToken"
+                              placeholder="Enter API Token"
+                            >
+                            <div
+                              class="qt-sz-20 qt-icon icon__copy show-password pointer"
+                            ></div>
+                            <app-mat-error
+                              class="invalid-feedback"
+                              *ngIf="submitted && f2.apiToken.errors"
+                            >
+                              The maximum number of characters - 20
+                            </app-mat-error>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
+                <div class="qt-input-block">
                     <div class="qt-input-block">
                         <div class="qt-input-block__label">Crypt Type</div>
                         <input

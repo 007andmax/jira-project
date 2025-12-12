@@ -2,9 +2,9 @@
     <div class="qt-page-list__header --sticky">
         <div class="qt-page-list__header-title-line">
             <div class="integrations-table__body-head qt-dif qt-gap-16">
-                <div class="integrations-table__moneris-logo icon__moneris qt-bg-contain qt-fs-0"></div>
+                <div class="qt-sz-48 icon__moneris qt-bg-contain qt-fs-0"></div>
                 <div>
-                    <div class="integrations-table__moneris-title qt-fw-500 qt-color-gray-900">Github</div>
+                    <div class="integrations-table__moneris-title qt-fw-500 qt-color-gray-900">Moneris</div>
                     <div
                         class="tag__modern qt-mt-8"
                         [ngClass]="{'--success':overview && overview.isConnected,
@@ -23,6 +23,7 @@
                     #saveBtn="disabled"
                     (onClick)="save()"
                 >
+                  <span class="qt-icon icon__links qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                     <span *ngIf="!saveBtn.isBlock()">Connect</span>
                     <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
                 </button>
