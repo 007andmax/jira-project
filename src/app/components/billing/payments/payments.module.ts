@@ -22,6 +22,7 @@ import { InvoiceExportModule } from '../invoices/invoices-header/invoice-export/
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+import { PaymentsCardsComponent } from './payments-cards/payments-cards.component';
 
 
 
@@ -35,7 +36,6 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         PaymentsAsideComponent,
         EditPaymentComponent,
         PaymentsFilterComponent,
-
 
     ],
     imports: [

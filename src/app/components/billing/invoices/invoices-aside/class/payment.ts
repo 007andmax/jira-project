@@ -8,8 +8,12 @@ export class Payment {
     partialPayments: Array<PartialPayments> = [];
     paymentMethod: string = "CHEQUE";
     reference: string;
+    cardId: string;
     constructor() {
 
+    }
+    public setCardId(id: string) {
+        this.cardId = id;
     }
     public resetInvoiceIds() {
         this.invoiceIds = [];

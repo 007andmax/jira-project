@@ -65,6 +65,7 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
   }
   onSelectPaymentModes(data) {
     this.selectedPaymentMode = data;
+    if (data.value != 'CREDIT_CARD' && data.value != 'DEBIT_CARD') this.payment.setCardId(null);
     this.payment.setPaymentMethod(data.value);
   }
   onChangeAmountReceived(event) {
@@ -112,6 +113,9 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
     invoice.setPaymentAmount(parseFloat((((value) * 100) / 100).toFixed(2)));
     this.validate.setValidPayment(true);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
+  }
+  onSelectCard(card) {
+    this.payment.setCardId(card.id);
   }
   create() {
     if (this.selectedCompanies.length == 0 || this.invoices.filter(item => item.selected).length == 0 || !this.validate.isValidate(this.amountReceived, this.invoices)) return;

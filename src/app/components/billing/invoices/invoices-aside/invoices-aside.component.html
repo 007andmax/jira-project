@@ -209,6 +209,18 @@
         </div>
         <div class="summary-info qt-df qt-pl-30 qt-pr-30 qt-pb-24 qt-jc-sb">
             <div>
+                <app-payments-cards 
+                *ngIf="selectedPaymentMode?.value === 'CREDIT_CARD' || selectedPaymentMode?.value === 'DEBIT_CARD'"
+                   class="search-company"
+                    [placeholder]="'Select Card'"
+                    [change]="false"
+                    [sort]="false"
+                    [class]="['qt-dropdown']"
+                    [isBlockClear]="true"
+                    [field]="'maskedCardNumber'"
+                    [title]="'Credit Card'"
+                      [selectedCompanies]="selectedCompanies"
+                    (onSelectedItem)="onSelectCard($event)"></app-payments-cards>
                 <div class="summary-info__notes qt-pt-16">
                     <div class="qt-fs-13 qt-lh-154 qt-pb-12">
                         <span class="qt-fw-600">Notes</span>
