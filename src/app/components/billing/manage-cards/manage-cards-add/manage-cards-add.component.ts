@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { Company } from 'src/app/interfaces/company/company';
 import { ManageCardsService } from 'src/app/services/manage-cards/manage-cards.service';
@@ -20,6 +21,7 @@ export class ManageCardsAddComponent {
   submitted: boolean = false;
   showAdd: boolean = false;
   @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
+  @ViewChild('companyDP', { static: true }) companyDP: CompanyDropDownComponent;
   constructor(
     public manageCardsStateService: ManageCardsStateService,
     public cd: ChangeDetectorRef,
@@ -102,6 +104,7 @@ export class ManageCardsAddComponent {
     })
   }
   closed() {
+    this.companyDP.clearWithOutChanges();
     this.selectedCompany = null;
     this.submitted = false;
     this.showAdd = false;

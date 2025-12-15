@@ -88,6 +88,8 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
     });
     console.log("req", req);
     this.manageCardsService.editCard(req).subscribe(data => {
+      console.log("edit card response", data);
+      this.manageCardsStateService.fastEditCard(data);
       this.addBtn.setDisabled(false);
       this.closed();
     }, err => {

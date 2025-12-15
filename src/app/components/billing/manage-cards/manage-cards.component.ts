@@ -54,10 +54,20 @@ export class ManageCardsComponent {
       if (!this.cd['destroyed']) this.cd.detectChanges();
     });
     this.sub.add(changeCardsArray);
+    let onFastRemove = this.manageCardsStateService.onFastRemove.subscribe((cardId) => {
+      let indexList = this.list.findIndex(item => item.id === cardId);
+      if (indexList > -1) this.list.splice(indexList, 1);
+    });
+    this.sub.add(onFastRemove);
+    let onFastEdit = this.manageCardsStateService.onFastEdit.subscribe((data) => {
+      let index = this.list.findIndex(item => item.id === data.id);
+      if (index > -1) this.list[index] = new Card(data);
+    });
+    this.sub.add(onFastEdit);
   }
   onRemoveCard(cardId) {
     this.manageCardsService.deleteCard(cardId).subscribe(res => {
-
+      this.manageCardsStateService.fastRemoveCard(cardId);
       this.cd.detectChanges();
     });
   }
