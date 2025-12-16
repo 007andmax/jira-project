@@ -118,7 +118,7 @@ export class PaymentsCardsComponent extends DropDownComponent {
     if (this.page > 0) { this.showPendingPreloader = true; } else {
       this.showPreloader = true;
     }
-    this.manageCardsService.getCards(this.page, { companyIds: this.selectedCompanies.map(item => item.id) }).subscribe((res: any) => {
+    this.manageCardsService.getCards(this.page, { companyIds: this.selectedCompanies.map(item => item.id) }, 10).subscribe((res: any) => {
       this.list = [...this.list, ...res.cards.map(item => new Card(item))];
       this.showPreloader = false;
       this.showPendingPreloader = false;

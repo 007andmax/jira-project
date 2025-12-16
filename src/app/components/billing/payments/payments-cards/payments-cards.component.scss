@@ -22,3 +22,9 @@
     height: 180px;
     overflow: auto;
 }
+.card-item {
+    &__icon {
+        width: 34px;
+        height: 24px;
+    }
+}

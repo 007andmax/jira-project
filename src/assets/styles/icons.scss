@@ -253,6 +253,12 @@ Example:
   &__primary-unchecked {
     background-image: url("/assets/img/icons/primary-unchecked.svg");
   }
+  &__payment-method-master-card {
+    background-image: url("/assets/img/icons/payment-method-master-card.svg");
+  }
+  &__payment-method-visa {
+    background-image: url("/assets/img/icons/payment-method-visa.svg");
+  }
   // END Color Icon
 
   // Start Monochrome image
@@ -790,6 +796,7 @@ Example:
  &__expand-diagonal {
    mask-image: url("/assets/img/icons/expand-diagonal.svg");
  }
+
   &.--updated {
     position: relative;
     &::before {

@@ -40,6 +40,7 @@ export class ManageCardsTableComponent implements OnInit, OnDestroy {
     let current = new Date().getTime();
     let expired = new Date(Number(`20${this.item.expiryDate.substring(0, 2)}`), Number(`${this.item.expiryDate.substring(2, 4)}`) - 1, 1).getTime();
     if (expired > current) return 'Active';
+    if (expired - current < 1000 * 60 * 60 * 24 * 30 && expired - current > 0) return 'Expiring soon';
     return 'Expired';
   }
   delete() {

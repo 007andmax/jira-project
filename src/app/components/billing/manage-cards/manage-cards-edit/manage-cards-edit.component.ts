@@ -74,6 +74,14 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
     })
 
   }
+  checkExpiryLabel() {
+    if (this.modelForm.controls["expiryDate"].value == null) return null;
+    let current = new Date().getTime();
+    let expired = new Date(Number(`20${this.modelForm.controls["expiryDate"].value.substring(0, 2)}`), Number(`${this.modelForm.controls["expiryDate"].value.substring(2, 4)}`) - 1, 1).getTime();
+    if (expired > current) return null;
+    if (expired - current < 1000 * 60 * 60 * 24 * 30 && expired - current > 0) return 'EXPIRING_SOON';
+    return 'EXPIRED';
+  }
   save() {
     this.submitted = true;
     if (this.modelForm.invalid) {

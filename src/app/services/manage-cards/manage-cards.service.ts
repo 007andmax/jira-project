@@ -54,8 +54,8 @@ export class ManageCardsService {
   public getCard(card_id) {
     return this.http.get(this.apiUrl + `moneris/cards/${card_id}`);
   }
-  public getCards(page, data = {}) {
-    return this.http.post(this.apiUrl + `moneris/cards/view?page=${page}&size=20`, data);
+  public getCards(page, data = {}, size = 20) {
+    return this.http.post(this.apiUrl + `moneris/cards/view?page=${page}&size=${size}`, data);
   }
 
 }

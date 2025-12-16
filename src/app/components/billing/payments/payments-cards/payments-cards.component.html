@@ -90,6 +90,11 @@
           let-i="index"
         >
         <div calss="card-item qt-df qt-ai-c" >
+           <div
+            [ngClass]="{'icon__payment-method-master-card':item.cardType == 'MASTERCARD',
+    'icon__payment-method-visa':item.cardType == 'VISA'}"
+            class="qt-icon qt-icon__background-unset card-item__icon"
+        ></div>
 <div class="card-item__number" [textContent]="item.maskedCardNumber"  (click)="onSelect(item)"></div>
  <div
             class="grey-dropdown right with-icons"
