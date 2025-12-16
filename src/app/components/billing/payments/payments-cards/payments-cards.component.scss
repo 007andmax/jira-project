@@ -18,3 +18,7 @@
 .--input-error {
     border: solid 1px $red-600 !important;
 }
+.cards-container {
+    height: 180px;
+    overflow: auto;
+}

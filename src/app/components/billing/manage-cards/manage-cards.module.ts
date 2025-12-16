@@ -15,12 +15,13 @@ import { ManageCardsTableComponent } from './manage-cards-table/manage-cards-tab
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ManageCardsEditComponent } from './manage-cards-edit/manage-cards-edit.component';
+import { ManageCardsAddModule } from './manage-cards-add/manage-cards-add.module';
 
 
 
 
 @NgModule({
-    declarations: [ManageCardsComponent, ManageCardsHeaderComponent, ManageCardsAddComponent, ManageCardsTableComponent, ManageCardsEditComponent
+    declarations: [ManageCardsComponent, ManageCardsHeaderComponent, ManageCardsTableComponent
 
     ],
     imports: [
@@ -34,7 +35,7 @@ import { ManageCardsEditComponent } from './manage-cards-edit/manage-cards-edit.
         ReactiveFormsModule,
         CompanyDropDownModule,
         InfiniteScrollModule,
-        NgbModule
+        NgbModule,
     ],
 
 })

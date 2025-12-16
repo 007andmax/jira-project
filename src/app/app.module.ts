@@ -163,6 +163,8 @@ import { TasksEditModule } from './components/tasks/tasks-edit/tasks-edit.module
 import { IntegrationsComponent } from './components/integrations/integrations.component';
 import { PermissionIntegrationsService } from './components/integrations/integrations.service';
 import { ManageCardsComponent } from './components/billing/manage-cards/manage-cards.component';
+import { ManageCardsAddModule } from './components/billing/manage-cards/manage-cards-add/manage-cards-add.module';
+import { ManageCardsEditModule } from './components/billing/manage-cards/manage-cards-edit/manage-cards-edit.module';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -252,7 +254,9 @@ declare var $: any;
         NotificationsModule,
         QuoteAsidePreviewModule,
         TasksAddModule,
-        TasksEditModule
+        TasksEditModule,
+        ManageCardsAddModule,
+        ManageCardsEditModule
     ],
     providers: [
         {

@@ -8,6 +8,12 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { ManageCardsService } from 'src/app/services/manage-cards/manage-cards.service';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
+import { ManageCardsStateService } from 'src/app/states/manage-cards/manage-cards-state.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { REMOVE_CARD } from 'src/app/const/confirm';
+import { ManageCardsRealTimeService } from 'src/app/states/manage-cards/manage-cards-real-time.service';
 
 @Component({
   selector: 'app-payments-cards',
@@ -29,7 +35,11 @@ export class PaymentsCardsComponent extends DropDownComponent {
     public companiesService: CompaniesService,
     public devicesService: DevicesService,
     private ticketsListService: TicketsListService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
     public ref: ChangeDetectorRef,
+    private manageCardsRealTimeService: ManageCardsRealTimeService,
+    private manageCardsStateService: ManageCardsStateService,
     private manageCardsService: ManageCardsService,) {
     super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService, devicesService, ref);
   }
@@ -38,6 +48,44 @@ export class PaymentsCardsComponent extends DropDownComponent {
     if (this.class.length > 0) this.class = this.class;
     if (this.uiType) this.class.push(this.uiType);
     this.ref.markForCheck();
+    let changeCardsArray = this.manageCardsRealTimeService.changeCardsArray.subscribe((newChange: any) => {
+      if (newChange.action === 'PAYMENT_CARD_SAVED') {
+        let index = this.list.findIndex(item => item.id == newChange.data.id);
+        if (index == -1) this.list.push(new Card(newChange.data));
+      } else if (newChange.action === 'PAYMENT_CARD_EDITED') {
+        let index = this.list.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.list[index] = new Card(newChange.data);
+      } else if (newChange.action === 'PAYMENT_CARD_REMOVED') {
+        let indexList = this.list.findIndex(item => item.id === newChange.data);
+        if (indexList > -1) this.list.splice(indexList, 1);
+      }
+      if (!this.ref['destroyed']) this.ref.detectChanges();
+    });
+    this.sub.add(changeCardsArray);
+    let onFastRemove = this.manageCardsStateService.onFastRemove.subscribe((cardId) => {
+      let indexList = this.list.findIndex(item => item.id === cardId);
+      if (indexList > -1) this.list.splice(indexList, 1);
+    });
+    this.sub.add(onFastRemove);
+    let onFastEdit = this.manageCardsStateService.onFastEdit.subscribe((data) => {
+      let index = this.list.findIndex(item => item.id === data.id);
+      if (index > -1) this.list[index] = new Card(data);
+    });
+    this.sub.add(onFastEdit);
+  }
+  addCard() {
+    this.dp.close();
+    this.manageCardsStateService.openAsideForAdd();
+  }
+  edit(item) {
+    this.dp.close();
+    this.manageCardsStateService.openAsideForEdit(item);
+  }
+  delete(item) {
+    this.confirmStateService.setConfirmAction(REMOVE_CARD);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `Are you sure you want to remove this card?`;
+    this.manageCardsStateService.setCardForRemove(item);
   }
   onOpenChange(event) {
     if (event) {

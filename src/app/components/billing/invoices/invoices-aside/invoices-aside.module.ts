@@ -12,6 +12,8 @@ import { MultiCompanyDropDownModule } from 'src/app/components/shared/multi-comp
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 import { PaymentsCardsComponent } from '../../payments/payments-cards/payments-cards.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ManageCardsAddModule } from '../../manage-cards/manage-cards-add/manage-cards-add.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
                 DropDownModule,
                 MultiCompanyDropDownModule,
                 MatErrorModule,
-                NgbModule
+                NgbModule,
+                InfiniteScrollModule
         ],
         exports: [InvoicesAsideComponent]
 
