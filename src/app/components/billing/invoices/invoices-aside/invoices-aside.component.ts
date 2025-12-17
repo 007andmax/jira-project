@@ -41,7 +41,7 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
   @ViewChild('recordPayment', { static: false }) recordPayment: DisabledBtnDirective;
   selectedInvoices: Array<Invoice> = [];
   @Output() onClose = new EventEmitter<any>();
-  constructor(private companiesState: CompaniesStateService,
+  constructor(public companiesState: CompaniesStateService,
     private invoiceStateService: InvoiceStateService,
     private invoicesService: InvoicesService) { }
 
@@ -111,7 +111,6 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
   public onChangePayment(val, invoice) {
     let value = Number(val.target.value);
     invoice.setPaymentAmount(parseFloat((((value) * 100) / 100).toFixed(2)));
-    this.validate.setValidPayment(true);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
   onSelectCard(card) {
@@ -132,7 +131,6 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
       this.payment.resetPartialPayments();
       this.close();
     }, err => {
-      this.validate.setValidPayment(false);
       this.recordPayment.setDisabled(false);
       this.payment.resetInvoiceIds();
       this.payment.resetPartialPayments();

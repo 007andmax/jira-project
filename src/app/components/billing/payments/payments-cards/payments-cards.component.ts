@@ -73,6 +73,11 @@ export class PaymentsCardsComponent extends DropDownComponent {
     });
     this.sub.add(onFastEdit);
   }
+  goToIntegrationsPage() {
+    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/integrations/all-integrations`;
+    window.open(url, '_blank');
+    this.ref.detectChanges();
+  }
   addCard() {
     this.dp.close();
     this.manageCardsStateService.openAsideForAdd();

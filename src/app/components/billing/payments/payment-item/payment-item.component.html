@@ -70,8 +70,8 @@
     >
         <span
             class="tag__modern"
-            [ngClass]="payment.refundMethod ? '--error' : '--success'"
-            [textContent]="payment.refundMethod ? 'Refund' : 'Paid'"
+            [ngClass]="payment.paymentStatus ? '--error' : '--success'"
+            [textContent]="payment.paymentStatus ? 'Refund' : 'Paid'"
         >
         </span>
     </div>
@@ -94,7 +94,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="showEditPayment()"
-                *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal"
+                *ngIf="!payment.paymentStatus && !customerPortalStateService.isCustomerPortal"
             >
                 <div class="qt-icon icon__edit qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Edit payment
@@ -103,7 +103,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="showRefundPayment()"
-                *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
+                *ngIf="!payment.paymentStatus && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
             >
                 <div class="qt-icon icon__return-money qt-sz-20 qt-mr-12"></div>
                 Refund payment

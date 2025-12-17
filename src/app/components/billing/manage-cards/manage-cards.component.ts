@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { REMOVE_CARD } from 'src/app/const/confirm';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { ManageCardsRealTimeService } from 'src/app/states/manage-cards/manage-cards-real-time.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-manage-cards',
@@ -16,7 +17,7 @@ import { ManageCardsRealTimeService } from 'src/app/states/manage-cards/manage-c
   providers: [TicketsListService]
 })
 export class ManageCardsComponent {
-  showPreloader: boolean = true;
+  showPreloader: boolean = false;
   showPendingPreloader: boolean = false;
   list = [];
   page: number = 0;
@@ -29,11 +30,22 @@ export class ManageCardsComponent {
     private manageCardsService: ManageCardsService,
     private manageCardsStateService: ManageCardsStateService,
     public confirmStateService: ConfirmStateService,
+    public companiesStateService: CompaniesStateService,
     private manageCardsRealTimeService: ManageCardsRealTimeService,
     public cd: ChangeDetectorRef,
   ) { }
   ngOnInit() {
-    this.onScroll();
+    if (this.companiesStateService.currentCompany && this.companiesStateService.currentCompany.isMonerisConnected) {
+      this.setDefaultScoll();
+      this.onScroll();
+    }
+    let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe(() => {
+      if (this.companiesStateService.currentCompany && this.companiesStateService.currentCompany.isMonerisConnected) {
+        this.setDefaultScoll();
+        this.onScroll();
+      }
+    });
+    this.sub.add(onCurrentCompany);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_CARD) this.onRemoveCard(this.manageCardsStateService.getCardForRemove().id);

@@ -42,34 +42,34 @@ export class ManageCardsAddComponent {
     this.modelForm = this.formBuilder.group({
       cardNumber: [
         "",
-        [Validators.required]
+        [Validators.required, Validators.maxLength(20)]
       ],
       expiryDate: ["",
-        [Validators.required]
+        [Validators.required, Validators.maxLength(4)]
       ],
       cvd: ["",
         [Validators.required]
       ],
       streetnumber: ["",
-        [Validators.required]
+        [Validators.required, Validators.maxLength(19)]
       ],
       streetname: ["",
-        [Validators.required]
+        [Validators.required, Validators.maxLength(19)]
       ],
       zipcode: ["",
-        [Validators.required]
+        [Validators.required, Validators.maxLength(9)]
       ],
       address: ["",
-
+        Validators.maxLength(50)
       ],
       city: ["",
-
+        Validators.maxLength(50)
       ],
       state: ["",
-
+        Validators.maxLength(50)
       ],
       country: ["",
-
+        Validators.maxLength(50)
       ],
       companyId: ["",
         [Validators.required]

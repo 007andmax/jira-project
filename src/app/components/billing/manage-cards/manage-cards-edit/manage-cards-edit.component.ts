@@ -39,28 +39,33 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
     this.modelForm = this.formBuilder.group({
       cardNumber: [
         "",
+        [Validators.maxLength(20)]
       ],
       expiryDate: ["",
+        [Validators.maxLength(4)]
       ],
       cvd: ["",
       ],
       streetnumber: ["",
+        [Validators.maxLength(19)]
       ],
       streetname: ["",
+        [Validators.maxLength(19)]
       ],
       zipcode: ["",
+        [Validators.maxLength(9)]
       ],
       address: ["",
-
+        Validators.maxLength(50)
       ],
       city: ["",
-
+        Validators.maxLength(50)
       ],
       state: ["",
-
+        Validators.maxLength(50)
       ],
       country: ["",
-
+        Validators.maxLength(50)
       ],
       cardType: ["",
 

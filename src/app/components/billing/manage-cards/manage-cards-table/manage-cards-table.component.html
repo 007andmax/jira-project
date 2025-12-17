@@ -23,8 +23,9 @@
     </div>
     <div class="manage-cards__status pointer">
         <div
+        [ngClass]="{'--active':getExpiredStatus() === 'ACTIVE', '--expiring-soon':getExpiredStatus() === 'EXPIRING_SOON', '--expired':getExpiredStatus() === 'EXPIRED'}"
             [textContent]="parseExpiredDate()"
-            class="tag__modern --active"
+            class="tag__modern"
         >
         </div>
     </div>

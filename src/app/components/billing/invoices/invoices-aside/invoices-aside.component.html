@@ -182,7 +182,7 @@
                             ></td>
                             <td
                                 class="unpaid-table__payment qt-text-right"
-                                [ngClass]="{'--checked':'invoice.selected', '--input-error':!validate.getPayment() && invoice.selected}"
+                                [ngClass]="{'--checked':invoice.selected}"
                             >
                                 <input
                                     class="payment-input"
@@ -198,14 +198,6 @@
                     </ng-template>
                 </tbody>
             </table>
-            <div
-                class="error-payments --input-error"
-                *ngIf="!validate.getPayment()"
-            >
-                <app-mat-error class="qt-tooltip-error">
-                    The payment amount is more than the Amount Due of invoices
-                </app-mat-error>
-            </div>
         </div>
         <div class="summary-info qt-df qt-pl-30 qt-pr-30 qt-pb-24 qt-jc-sb">
             <div>
@@ -285,6 +277,7 @@
                 Cancel
             </button>
             <button
+                [disabled]="companiesState.currentCompany && !companiesState.currentCompany.isMonerisConnected"
                 class="qt-button "
                 appDisabledBtn
                 #recordPayment="disabled"

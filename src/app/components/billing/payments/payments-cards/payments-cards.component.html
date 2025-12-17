@@ -12,10 +12,18 @@
         class="qt-input-block__label"
         [textContent]="title"
       ></div>
+      <div class="qt-color-red-600"  *ngIf="companiesStateService.currentCompany && !companiesStateService.currentCompany.isMonerisConnected">Set up the 3rd party connection on the <a (click)="goToIntegrationsPage()">Integration page</a></div>
+       <div
+       *ngIf="selectedItem"
+                [ngClass]="{'icon__payment-method-master-card':selectedItem && selectedItem.cardType == 'MASTERCARD',
+        'icon__payment-method-visa':selectedItem && selectedItem.cardType == 'VISA'}"
+                class="qt-icon qt-icon__background-unset card-item__icon icon-dropdown"
+            ></div>
       <input
+        [hidden]="companiesStateService.currentCompany && !companiesStateService.currentCompany.isMonerisConnected"
         type="text"
         [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
-        [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
+        [ngClass]="{'disabled': isDisabled, '--input-error' : !validate,'width-icon': selectedItem}"
         [disabled]="isDisabled"
         [value]="getSelectedItemText()"
         autocomplete="off"
@@ -30,7 +38,7 @@
       >
       <span
         class="app-drop-down__right-icon pointer"
-        *ngIf="list && !isDisabled"
+        *ngIf="list && !isDisabled && companiesStateService.currentCompany && companiesStateService.currentCompany.isMonerisConnected"
         [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '20px' }"
       >
         <i
@@ -95,7 +103,7 @@
         'icon__payment-method-visa':item.cardType == 'VISA'}"
                 class="qt-icon qt-icon__background-unset card-item__icon"
             ></div>
-    <div class="card-item__number" [textContent]="item.maskedCardNumber"  (click)="onSelect(item)"></div>
+    <div class="card-item__number qt-w100" [textContent]="item.maskedCardNumber"  (click)="onSelect(item)"></div>
      <div
                 class="grey-dropdown right with-icons"
                 ngbDropdown
