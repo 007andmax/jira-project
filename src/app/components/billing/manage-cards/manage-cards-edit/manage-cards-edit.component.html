@@ -21,8 +21,10 @@
         </div>
         <div class="qt-aside-modern__content">
              <div class="qt-inputs-row" *ngIf="checkExpiryLabel()">
-                <div class="qt-input-block" [textContent]="checkExpiryLabel() == 'EXPIRING_SOON' ? 'This card is expiring soon.' : 'This card has expired'" > 
-                   
+                <div class="qt-aside-modern__notification">
+                  <div class="qt-icon icon__triangle-warning qt-icon__yellow-700 qt-sz-20"></div>
+<!--                  <div class="qt-icon icon__alert qt-icon__red-600 qt-sz-20"></div>-->
+                  <span class="qt-fw-500 qt-fw-500 qt-color-gray-900 qt-sz-14 qt-w100" [textContent]="checkExpiryLabel() == 'EXPIRING_SOON' ? 'This card is expiring soon.' : 'This card has expired'"></span>
                 </div>
             </div>
             <div class="qt-inputs-row --required">

@@ -262,6 +262,9 @@ Example:
   // END Color Icon
 
   // Start Monochrome image
+  &__alert {
+    mask-image: url("/assets/img/icons/alert.svg");
+  }
   &__warning {
     mask-image: url("/assets/img/icons/warning.svg");
   }
@@ -784,6 +787,9 @@ Example:
   &__transfer {
     mask-image: url("/assets/img/icons/transfer.svg");
   }
+  &__triangle-warning {
+    mask-image: url("/assets/img/icons/triangle-warning.svg");
+  }
   &__notification {
   mask-image: url("/assets/img/icons/notification.svg");
   }
@@ -903,6 +909,9 @@ Example:
   }
   &__yellow-600 {
     background-color: $yellow-600;
+  }
+  &__yellow-700 {
+    background-color: $yellow-700;
   }
   &__yellow-800 {
     background-color: $yellow-800;
