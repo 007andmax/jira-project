@@ -563,3 +563,28 @@
         </div>
     </div>
 </div>
+<div
+    class="archive-modal delete-marketing-subscribes"
+    *ngIf="action === 'REMOVE_CARD'"
+>
+    <div class="archive-modal__body">
+        <h3>Delete Card</h3>
+        <p [textContent]="message"></p>
+    </div>
+    <div class="archive-modal__footer">
+        <div class="qt-df qt-jc-fe">
+            <button
+                class="qt-button --gray qt-w100"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+            <button
+                class="qt-button --red qt-w100"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
+            </button>
+        </div>
+    </div>
+</div>

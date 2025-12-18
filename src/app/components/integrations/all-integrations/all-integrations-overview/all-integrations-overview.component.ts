@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { IntegrationsService } from 'src/app/services/integrations/integrations.service';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-all-integrations-overview',
@@ -25,6 +26,7 @@ export class AllIntegrationsOverviewComponent {
     private integrationsService: IntegrationsService,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
+    public companiesStateService: CompaniesStateService,
 
   ) { }
 
@@ -73,6 +75,7 @@ export class AllIntegrationsOverviewComponent {
       this.modelForm.patchValue({
         cryptType: "7"
       })
+      this.companiesStateService.currentCompany.isMonerisConnected = false;
     }, err => {
       //  this.addBtn.setDisabled(false);
       this.onInitRequest.emit(false);
@@ -106,6 +109,7 @@ export class AllIntegrationsOverviewComponent {
       this.status = 'CONNECTED';
       this.isEdit = true;
       this.isConnected = data.connected;
+      this.companiesStateService.currentCompany.isMonerisConnected = data.connected;
       this.onInitRequest.emit(false);
     }, err => {
       //  this.addBtn.setDisabled(false);
