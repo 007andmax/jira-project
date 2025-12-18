@@ -17,7 +17,7 @@
        *ngIf="selectedItem"
                 [ngClass]="{'icon__payment-method-master-card':selectedItem && selectedItem.cardType == 'MASTERCARD',
         'icon__payment-method-visa':selectedItem && selectedItem.cardType == 'VISA'}"
-                class="qt-icon qt-icon__background-unset card-item__icon icon-dropdown"
+                class="qt-icon__background-unset qt-bg-contain card-item__icon icon-dropdown"
             ></div>
       <input
         [hidden]="companiesStateService.currentCompany && !companiesStateService.currentCompany.isMonerisConnected"
@@ -67,15 +67,19 @@
         aria-labelledby="dropdown1"
         class="app-drop-down__dropdown"
       >
-      <div class="no-exist-cards"   *ngIf="!showPreloader && (!list || list.length === 0)">
+      <div class="no-exist-cards" *ngIf="!showPreloader && (!list || list.length === 0)">
         <div
           class="no-exist-cards__text"
-
         >
-          <h3>No Cards saved</h3>
-          <span>Add a cards here to prefilled for quicker checkout</span>
+          <div
+            class="no-exist-cards__icon-wrap qt-button --square-md --gray"
+          >
+            <div class="qt-icon icon__credit-cards qt-sz-24"></div>
+          </div>
+          <div class="no-exist-cards__title qt-mt-16">No Cards saved</div>
+          <div class="no-exist-cards__text qt-mt-8">Add a cards here to prefilled for quicker checkout</div>
            <button
-                class="qt-button --gray --md qt-ml-8"
+                class="qt-button --gray --md qt-ml-8 qt-mt-16"
                 (click)="addCard()"
             >
                + Add Card
@@ -101,7 +105,7 @@
                <div
                 [ngClass]="{'icon__payment-method-master-card':item.cardType == 'MASTERCARD',
         'icon__payment-method-visa':item.cardType == 'VISA'}"
-                class="qt-icon qt-icon__background-unset card-item__icon"
+                class="qt-icon__background-unset card-item__icon qt-bg-contain qt-fs-0"
             ></div>
     <div class="card-item__number qt-w100" [textContent]="item.maskedCardNumber"  (click)="onSelect(item)"></div>
      <div
@@ -126,7 +130,8 @@
                         Edit
                     </li>
                     <li
-                        ngbDropdownItem
+                      class="qt-dropdown-menu__item-red qt-dropdown-menu__top-line qt-mt-2"
+                      ngbDropdownItem
                       (click)="delete(item)"
                     >
                         <i class="qt-sz-20 qt-mr-12 qt-icon icon__delete qt-icon__red-600"></i>
@@ -137,14 +142,16 @@
             </div>
             </ng-template>
           </div>
-         <div class="card-footer">
-           <button
-             class="qt-button --gray --md qt-ml-8"
-             (click)="addCard()"
-           >
-             + Add Card
-           </button>
-         </div>
+           <div
+             *ngIf="!showPreloader && list.length > 0"
+             class="card-footer">
+             <button
+               class="qt-button --gray --md qt-ml-8"
+               (click)="addCard()"
+             >
+               + Add Card
+             </button>
+           </div>
       </div>
     </div>
     <app-mat-error
