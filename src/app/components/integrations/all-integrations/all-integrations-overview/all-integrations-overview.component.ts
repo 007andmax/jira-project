@@ -1,6 +1,11 @@
 import { ChangeDetectorRef, Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
+import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { DISCONNECT_CONNECTION, REMOVE_CARD } from 'src/app/const/confirm';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { IntegrationsService } from 'src/app/services/integrations/integrations.service';
 import { AppStateService } from 'src/app/states/app/app-state.service';
@@ -17,6 +22,7 @@ export class AllIntegrationsOverviewComponent {
   isConnected: boolean = false;
   isEdit: boolean = false;
   status = 'DISCONNECTED';
+  sub: Subscription = new Subscription();
   @Output() onInitRequest = new EventEmitter<any>();
 
   constructor(
@@ -27,6 +33,9 @@ export class AllIntegrationsOverviewComponent {
     private toastrService: ToastrService,
     private appStateService: AppStateService,
     public companiesStateService: CompaniesStateService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
+
 
   ) { }
 
@@ -58,10 +67,14 @@ export class AllIntegrationsOverviewComponent {
       this.status = 'CONNECTED';
       console.log("this.modelForm.value", this.modelForm.value)
     })
-
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DISCONNECT_CONNECTION) this.onDisconnect();
+      }
+    })
+    this.sub.add(getConfirm);
   }
-  disconnect() {
-
+  onDisconnect() {
     this.onInitRequest.emit(true);
     //  this.addBtn.setDisabled(true);
     this.integrationsService.disconnect().subscribe(data => {
@@ -80,6 +93,12 @@ export class AllIntegrationsOverviewComponent {
       //  this.addBtn.setDisabled(false);
       this.onInitRequest.emit(false);
     })
+  }
+  disconnect() {
+    this.confirmStateService.setConfirmAction(DISCONNECT_CONNECTION);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.message = `If you disconnect Moneris, all saved credit cards for this company will be permanently deleted and cannot be recovered.
+    <br/>You will no longer be able to process credit card payments or add new cards using Moneris for this company.`;
   }
   copy(data) {
     let textArea: any = document.createElement("textarea");
