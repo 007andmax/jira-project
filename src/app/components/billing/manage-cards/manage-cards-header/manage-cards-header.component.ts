@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { PasswordManagerService } from 'src/app/services/password-manager/password-manager.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ManageCardsStateService } from 'src/app/states/manage-cards/manage-cards-state.service';
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
 
@@ -31,6 +32,7 @@ export class ManageCardsHeaderComponent {
 
     private permissionsService: PermissionsService,
     private manageCardsStateService: ManageCardsStateService,
+    public companiesStateService: CompaniesStateService,
     public appService: AppService,
   ) { }
 

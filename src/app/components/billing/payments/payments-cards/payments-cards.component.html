@@ -12,7 +12,7 @@
         class="qt-input-block__label"
         [textContent]="title"
       ></div>
-      <div class="qt-color-red-600"  *ngIf="companiesStateService.currentCompany && !companiesStateService.currentCompany.isMonerisConnected">Set up the 3rd party connection on the <a (click)="goToIntegrationsPage()">Integration page</a></div>
+      <div class="qt-color-red-600"  *ngIf="companiesStateService.currentCompany && !companiesStateService.currentCompany.isMonerisConnected">Set up the 3rd party connection on the <span class="qt-color-info qt-pointer" (click)="goToIntegrationsPage()">Integration page</span></div>
        <div
        *ngIf="selectedItem"
                 [ngClass]="{'icon__payment-method-master-card':selectedItem && selectedItem.cardType == 'MASTERCARD',

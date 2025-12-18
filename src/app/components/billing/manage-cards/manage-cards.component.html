@@ -68,11 +68,11 @@
                     We couldn't find any results
                 </div>
                  <div
-                    class="no-exist-elements"
+                    class="no-exist-elements qt-text-center"
                     *ngIf="companiesStateService.currentCompany && !companiesStateService.currentCompany.isMonerisConnected"
                 >
                     You cannot get the list of credit cards. <br>
-Set up the 3rd party connection on the Integration page
+Set up the 3rd party connection on the <span class="qt-color-info qt-pointer" (click)="goToIntegrationsPage()">Integration page</span>
                 </div>
                 <div
                     class="loading pengind-loading"

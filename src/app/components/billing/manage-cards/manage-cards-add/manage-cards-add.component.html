@@ -171,36 +171,34 @@
             </div>
             <div class="qt-inputs-row">
                 <div class="qt-input-block qt-f50">
-                    <label
+                     <label
                         for="add-ticket-subject"
                         class="qt-input-block__label"
                     >
                         Country or region
                     </label>
-                    <app-drop-down
-                        #techUserDP
-                        [class]="['qt-dropdown']"
-                        [list]="[]"
-                        [search]="true"
-                        [change]="true"
-                        [placeholder]="'Select'"
-                    ></app-drop-down>
+                    <input
+                         id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="country"
+                        placeholder="Enter Country or region"
+                        maxlength="50"
+                    >
                 </div>
                 <div class="qt-input-block qt-f50">
-                    <label
+                     <label
                         for="add-ticket-subject"
                         class="qt-input-block__label"
                     >
                         Province/State
                     </label>
-                    <app-drop-down
-                        #techUserDP
-                        [class]="['qt-dropdown']"
-                        [list]="[]"
-                        [search]="true"
-                        [change]="true"
-                        [placeholder]="'Select'"
-                    ></app-drop-down>
+                    <input
+                         id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="state"
+                        placeholder="Enter Province/State"
+                        maxlength="50"
+                    >
                 </div>
             </div>
             <div class="qt-inputs-row">

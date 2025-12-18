@@ -77,6 +77,11 @@ export class ManageCardsComponent {
     });
     this.sub.add(onFastEdit);
   }
+  goToIntegrationsPage() {
+    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/integrations/all-integrations`;
+    window.open(url, '_self');
+    this.cd.detectChanges();
+  }
   onRemoveCard(cardId) {
     this.manageCardsService.deleteCard(cardId).subscribe(res => {
       this.manageCardsStateService.fastRemoveCard(cardId);

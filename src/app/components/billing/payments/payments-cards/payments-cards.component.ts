@@ -73,9 +73,14 @@ export class PaymentsCardsComponent extends DropDownComponent {
     });
     this.sub.add(onFastEdit);
   }
+  checkCardForRemove() {
+    if (this.selectedItem && !this.selectedCompanies.find(item => item.id === this.selectedItem.companyId)) {
+      this.selectedItem = null;
+    }
+  }
   goToIntegrationsPage() {
     const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/integrations/all-integrations`;
-    window.open(url, '_blank');
+    window.open(url, '_self');
     this.ref.detectChanges();
   }
   addCard() {

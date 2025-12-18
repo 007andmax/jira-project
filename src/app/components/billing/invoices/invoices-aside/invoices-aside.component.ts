@@ -11,6 +11,7 @@ import { Payment } from './class/payment';
 import { PaymentInvoice } from './class/payment-invoice';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
+import { PaymentsCardsComponent } from '../../payments/payments-cards/payments-cards.component';
 
 
 @Component({
@@ -39,6 +40,7 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
   selectedPaymentMode = new CompanySetting('Cheque', 'CHEQUE');
   sub: Subscription = new Subscription();
   @ViewChild('recordPayment', { static: false }) recordPayment: DisabledBtnDirective;
+  @ViewChild('paymentsCards', { static: false }) paymentsCards: PaymentsCardsComponent;
   selectedInvoices: Array<Invoice> = [];
   @Output() onClose = new EventEmitter<any>();
   constructor(public companiesState: CompaniesStateService,
@@ -187,6 +189,10 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
   }
   onSelectCompany(items) {
     this.selectedCompanies = items;
+    if (this.paymentsCards) {
+      this.paymentsCards.selectedCompanies = items;
+      this.paymentsCards.checkCardForRemove();
+    }
     if (items.length > 0) {
       this.invoicesFilter.setLimit(10000);
       this.invoicesFilter.setStatus("UNPAID");
