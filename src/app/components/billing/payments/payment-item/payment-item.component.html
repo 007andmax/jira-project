@@ -70,8 +70,8 @@
     >
         <span
             class="tag__modern"
-            [ngClass]="payment.paymentStatus ? '--error' : '--success'"
-            [textContent]="payment.paymentStatus ? 'Refund' : 'Paid'"
+            [ngClass]="payment.paymentStatus == 'PAYMENT_FAILED' ? '--error' : '--success'"
+            [textContent]="parseStatus()"
         >
         </span>
     </div>

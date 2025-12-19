@@ -21,7 +21,12 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   paymentsFilter: PaymentsFilter = new PaymentsFilter();
   @Output() changeCountFilter = new EventEmitter<any>();
-  statusTypes = [new CompanySetting('Paid', 'PAID'), new CompanySetting('Refund', 'REFUND')];
+  statusTypes = [new CompanySetting('Payment Completed', 'PAYMENT_COMPLETED'), new CompanySetting('Refund Failed', 'REFUND_FAILED'),
+  new CompanySetting('Refund Requested', 'PAYMENT_REQUESTED'),
+  new CompanySetting('Payment Failed', 'PAYMENT_FAILED'),
+  new CompanySetting('Refund Requested', 'REFUND_REQUESTED'),
+  new CompanySetting('Refund Payment', 'REFUND_PAYMENT')
+  ];
   constructor(private companiesState: CompaniesStateService,
     private elRef: ElementRef,
     private customerPortalStateService: CustomerPortalStateService,
@@ -31,7 +36,7 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
 
   }
   onSelectStatus(status) {
-    this.paymentsFilter.setStatus((status) ? status.value : null);
+    this.paymentsFilter.setPaymentStatus((status) ? status.value : null);
     this.paymentsStateService.onInitFilter(this.paymentsFilter);
     this.onChangeCounterFilter();
   }
@@ -81,7 +86,7 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
     if (this.paymentsFilter.companyId) count++;
     if (this.paymentsFilter.endDate && this.paymentsFilter.startDate) count++;
     if (this.paymentsFilter.invoiceNumber) count++;
-    if (this.paymentsFilter.status) count++;
+    if (this.paymentsFilter.paymentStatus) count++;
     if (this.paymentsFilter.amount) count++;
     this.changeCountFilter.emit(count);
   }

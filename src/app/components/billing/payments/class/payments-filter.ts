@@ -4,8 +4,11 @@ import { Payment } from './payment';
 
 export class PaymentsFilter extends InvoicesFilter {
     companyId: string;
+    paymentStatus: string;
 
-
+    public setPaymentStatus(data) {
+        this.paymentStatus = data;
+    }
     public setCompanyId(data) {
         this.companyId = data;
     }
@@ -18,7 +21,7 @@ export class PaymentsFilter extends InvoicesFilter {
             limit: this.limit,
             offset: (this.initLeftOffset) ? (this.offset - this.leftOffset) : this.offset,
             sortBy: this.sortBy,
-            status: this.status,
+            paymentStatus: this.paymentStatus,
             excludeDeleted: this.excludeDeleted
         };
         if (this.amount) data.amount = this.amount;
@@ -30,7 +33,7 @@ export class PaymentsFilter extends InvoicesFilter {
         let createdAt = new Date(payment.createdAt).getTime();
         let companyFilter = ((this.companyId) ? payment.clientCompanyId == this.companyId : true);
         let invoiceFilter = ((this.invoiceNumber) ? payment.invoiceNumbers.includes(this.invoiceNumber) : true);
-        let statusFilter = ((this.status) ? this.status == 'REFUND' && payment.paymentStatus || this.status == 'PAID' && !payment.paymentStatus : true);
+        let statusFilter = ((this.paymentStatus) ? this.paymentStatus == payment.paymentStatus : true);
         let dateFilter = ((this.startDate) ? createdAt <= this.endDate && createdAt >= this.startDate : true);
         return companyFilter && invoiceFilter && statusFilter && dateFilter;
     }

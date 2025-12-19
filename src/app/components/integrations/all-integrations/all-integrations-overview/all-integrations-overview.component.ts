@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -16,7 +16,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
   templateUrl: './all-integrations-overview.component.html',
   styleUrls: ['./all-integrations-overview.component.scss']
 })
-export class AllIntegrationsOverviewComponent {
+export class AllIntegrationsOverviewComponent implements OnDestroy {
   modelForm: UntypedFormGroup;
   submitted: boolean = false;
   isConnected: boolean = false;
@@ -137,5 +137,8 @@ export class AllIntegrationsOverviewComponent {
   }
   get f2() {
     return this.modelForm.controls;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
