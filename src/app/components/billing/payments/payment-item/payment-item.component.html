@@ -94,7 +94,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="showEditPayment()"
-                *ngIf="!payment.paymentStatus && !customerPortalStateService.isCustomerPortal"
+                *ngIf="payment.paymentStatus && payment.paymentStatus == 'PAYMENT_COMPLETED' && !customerPortalStateService.isCustomerPortal"
             >
                 <div class="qt-icon icon__edit qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Edit payment
@@ -103,7 +103,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="showRefundPayment()"
-                *ngIf="!payment.paymentStatus && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
+                *ngIf="payment.paymentMethod != 'DEBIT_CARD' && payment.paymentMethod != 'CREDIT_CARD' && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
             >
                 <div class="qt-icon icon__return-money qt-sz-20 qt-mr-12"></div>
                 Refund payment

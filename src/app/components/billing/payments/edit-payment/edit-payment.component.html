@@ -35,6 +35,7 @@
                     [useMaxDate]="true"
                     [container]="'body'"
                     [dropdownClass]="['date-picker']"
+                    [isDisabled]="selectedPaymentMode.value == 'DEBIT_CARD' || selectedPaymentMode.value == 'CREDIT_CARD'"
                     (onChange)="onChangeDate($event)"
                 ></app-date-picker>
             </div>
@@ -52,6 +53,7 @@
                         [ngModel]="amountReceived_str"
                         (change)="onChangeAmountReceived($event)"
                         appToFixed
+                        [disabled]="selectedPaymentMode.value == 'DEBIT_CARD' || selectedPaymentMode.value == 'CREDIT_CARD'"
                     >
                     <app-mat-error
                         class="invalid-feedback amount-received-invalid-feedback"
@@ -72,6 +74,7 @@
                     [isBlockClear]="true"
                     [field]="'title'"
                     [list]="paymentModes"
+                    [isDisabled]="true"
                     (onSelectedItem)="onSelectPaymentModes($event)"
                 ></app-drop-down>
             </div>
@@ -144,6 +147,7 @@
                                     [money]="true"
                                     [ngModel]="invoice.paidAmount_str"
                                     (change)="onChangePayment($event,invoice)"
+                                     [disabled]="selectedPaymentMode.value == 'DEBIT_CARD' || selectedPaymentMode.value == 'CREDIT_CARD'"
                                     appToFixed
                                 >
                             </td>
