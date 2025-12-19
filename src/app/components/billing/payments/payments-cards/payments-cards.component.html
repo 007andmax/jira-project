@@ -101,16 +101,17 @@
               [ngForOf]="list"
               let-i="index"
             >
-            <div class="card-item">
+            <div class="card-item" (click)="onSelect(item)">
                <div
                 [ngClass]="{'icon__payment-method-master-card':item.cardType == 'MASTERCARD',
         'icon__payment-method-visa':item.cardType == 'VISA'}"
                 class="qt-icon__background-unset card-item__icon qt-bg-contain qt-fs-0"
             ></div>
-    <div class="card-item__number qt-w100" [textContent]="item.maskedCardNumber"  (click)="onSelect(item)"></div>
+    <div class="card-item__number qt-w100" [textContent]="item.maskedCardNumber" ></div>
      <div
                 class="grey-dropdown right with-icons"
                 ngbDropdown
+                (click)="$event.stopPropagation()"
             >
                 <i
                     class="icn-16 qt-bg-contain qt-icon icon__more pointer"

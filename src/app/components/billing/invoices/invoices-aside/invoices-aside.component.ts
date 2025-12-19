@@ -117,9 +117,10 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
   }
   onSelectCard(card) {
     this.payment.setCardId(card.id);
+    this.validate.setCardId(true);
   }
   create() {
-    if (this.selectedCompanies.length == 0 || this.invoices.filter(item => item.selected).length == 0 || !this.validate.isValidate(this.amountReceived, this.invoices)) return;
+    if (this.selectedCompanies.length == 0 || this.invoices.filter(item => item.selected).length == 0 || !this.validate.isValidate(this.amountReceived, this.invoices, this.payment)) return;
     this.invoices.forEach(item => {
       if (item.selected) {
         this.payment.addInvoiceId(item.id);

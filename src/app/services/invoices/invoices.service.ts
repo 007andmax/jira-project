@@ -25,8 +25,10 @@ export class InvoicesService {
 
   ) { }
   public createPayment(data) {
+    this.appStateService.setServerError(true);
     return this.http.post(`${this.apiUrl}receivable/receivePayment`, data).pipe(
       tap(data => {
+        this.appStateService.setServerError(false);
         this.toastrService.success("The payment has been successfully created");
         this.appStateService.changeDetectorRef();
         return data;

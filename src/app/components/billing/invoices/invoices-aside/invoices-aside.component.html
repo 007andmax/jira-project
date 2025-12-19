@@ -214,6 +214,8 @@
                     [isBlockClear]="true"
                     [field]="'maskedCardNumber'"
                     [title]="'Credit Card'"
+                    [errorMessage]="'The credit card is required'"
+                    [validate]="validate.getCardId()"
                       [selectedCompanies]="selectedCompanies"
                     (onSelectedItem)="onSelectCard($event)"></app-payments-cards>
                 <div class="summary-info__notes qt-pt-16">
