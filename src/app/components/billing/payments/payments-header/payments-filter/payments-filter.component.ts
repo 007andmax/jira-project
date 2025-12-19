@@ -22,7 +22,7 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
   paymentsFilter: PaymentsFilter = new PaymentsFilter();
   @Output() changeCountFilter = new EventEmitter<any>();
   statusTypes = [new CompanySetting('Payment Completed', 'PAYMENT_COMPLETED'), new CompanySetting('Refund Failed', 'REFUND_FAILED'),
-  new CompanySetting('Refund Requested', 'PAYMENT_REQUESTED'),
+  new CompanySetting('Payment Requested', 'PAYMENT_REQUESTED'),
   new CompanySetting('Payment Failed', 'PAYMENT_FAILED'),
   new CompanySetting('Refund Requested', 'REFUND_REQUESTED'),
   new CompanySetting('Refund Payment', 'REFUND_PAYMENT')
