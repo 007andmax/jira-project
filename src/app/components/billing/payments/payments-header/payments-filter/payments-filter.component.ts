@@ -25,7 +25,7 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
   new CompanySetting('Payment Requested', 'PAYMENT_REQUESTED'),
   new CompanySetting('Payment Failed', 'PAYMENT_FAILED'),
   new CompanySetting('Refund Requested', 'REFUND_REQUESTED'),
-  new CompanySetting('Refund Payment', 'REFUND_PAYMENT')
+  new CompanySetting('Refund Completed', 'REFUND_COMPLETED')
   ];
   constructor(private companiesState: CompaniesStateService,
     private elRef: ElementRef,
