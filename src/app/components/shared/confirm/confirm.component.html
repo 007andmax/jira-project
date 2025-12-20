@@ -567,9 +567,12 @@
     class="archive-modal delete-marketing-subscribes"
     *ngIf="action === 'REMOVE_CARD'"
 >
-    <div class="archive-modal__body">
-        <h3>Delete Card</h3>
-        <p [textContent]="message"></p>
+    <div class="archive-modal__body qt-text-center">
+        <div class="qt-dif qt-ai-c qt-jc-c qt-sz-80 qt-bg-red-100 qt-circle">
+          <div class="qt-icon icon__alert-triangle qt-icon__red-600 qt-sz-48"></div>
+        </div>
+        <div class="archive-modal__body-title qt-mt-24 qt-fw-600 qt-color-gray-900">Delete Card</div>
+        <div class="archive-modal__body-text qt-mt-8 qt-color-gray-500" [textContent]="message"></div>
     </div>
     <div class="archive-modal__footer">
         <div class="qt-df qt-jc-fe">
