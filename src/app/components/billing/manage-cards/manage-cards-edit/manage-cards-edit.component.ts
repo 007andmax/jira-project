@@ -17,6 +17,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
         this.modelForm.patchValue({
           id: res.id,
           cardType: res.cardType,
+          cardholderName: res.cardholderName,
           // cardNumber: res.maskedCardNumber,
           expiryDate: res.expiryDate,
           //  cvd: res.cvd,
@@ -76,7 +77,8 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
       ],
       companyId: ["",
       ],
-
+      cardholderName: ["",
+      ],
     })
 
   }

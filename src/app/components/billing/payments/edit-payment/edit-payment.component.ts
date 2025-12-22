@@ -38,6 +38,7 @@ export class EditPaymentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.editPayment = new EditPayment(JSON.parse(JSON.stringify(this.payment)));
+    this.selectedPaymentMode = this.paymentModes.find(item => item.value === this.editPayment.paymentMethod);
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
       this.getClientsList(data);

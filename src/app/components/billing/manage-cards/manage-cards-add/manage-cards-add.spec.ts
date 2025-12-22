@@ -9,6 +9,7 @@ import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.mo
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { Company } from 'src/app/interfaces/company/company';
 import { ManageCardsAddComponent } from './manage-cards-add.component';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 
 
 describe('ManageCardsAddComponent unit test', () => {
@@ -23,6 +24,8 @@ describe('ManageCardsAddComponent unit test', () => {
         FormsModule,
         MatErrorModule,
         HttpClientModule,
+        DisabledBtnModule,
+        ReactiveFormsModule,
         ToastrModule.forRoot({
           closeButton: true,
           timeOut: 5000,

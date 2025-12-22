@@ -51,13 +51,13 @@ export class ManageCardsAddComponent {
         [Validators.required]
       ],
       streetnumber: ["",
-        [Validators.required, Validators.maxLength(19)]
+        [Validators.maxLength(19)]
       ],
       streetname: ["",
-        [Validators.required, Validators.maxLength(19)]
+        [Validators.maxLength(19)]
       ],
       zipcode: ["",
-        [Validators.required, Validators.maxLength(9)]
+        [Validators.maxLength(9)]
       ],
       address: ["",
         Validators.maxLength(50)
@@ -74,7 +74,8 @@ export class ManageCardsAddComponent {
       companyId: ["",
         [Validators.required]
       ],
-
+      cardholderName: ["",
+      ],
     })
 
   }

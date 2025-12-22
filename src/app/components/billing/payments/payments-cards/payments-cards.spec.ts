@@ -8,6 +8,7 @@ import { DatePickerModule } from 'src/app/components/shared/date-picker/date-pic
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { PaymentsCardsComponent } from './payments-cards.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 describe('PaymentsCardsComponent unit test', () => {
@@ -20,6 +21,7 @@ describe('PaymentsCardsComponent unit test', () => {
         DatePickerModule,
         NumberModule,
         FormsModule,
+        NgbModule,
         MatErrorModule,
         HttpClientModule,
         ToastrModule.forRoot({

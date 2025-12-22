@@ -66,6 +66,7 @@
                 <input
                     type="text"
                     [(ngModel)]="editPayment.reference"
+                    [disabled]="selectedPaymentMode?.value === 'CREDIT_CARD' || selectedPaymentMode?.value === 'DEBIT_CARD'"
                 >
             </div>
         </div>
