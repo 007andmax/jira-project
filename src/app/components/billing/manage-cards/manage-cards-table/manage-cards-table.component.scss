@@ -110,11 +110,16 @@ tr:hover {
       color: $green-700;
     }
 
-    &.--expired,
-    &.--expiring-soon {
+    &.--expired {
       border: 1px solid $red-200;
       background-color: $red-25;
       color: $red-600;
+    }
+
+    &.--expiring-soon {
+      border: 1px solid $yellow-200;
+      background-color: $yellow-25;
+      color: $yellow-700;
     }
   }
 }
