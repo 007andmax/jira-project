@@ -1,29 +1,28 @@
 @import './src/assets/styles/variable';
 
 .modal-body {
-    padding: 0px;
+    padding: 0;
 
 }
-::ng-deep.archive-modal {
-    max-width: 504px;
+.archive-modal {
+    max-width: 488px;
     width: 100%;
-    padding: 32px;
+    padding: 24px;
+
     .archive-modal__body {
-        margin-bottom: 32px;
-        h3 {
+        margin-bottom: 24px;
+
+        &-title {
             font-size: 18px;
+            line-height: 22px;
             color: $gray-900;
+            margin-inline: auto;
         }
-        p {
+
+        &-text {
             font-size: 14px;
+            line-height: 20px;
             color: $gray-500;
         }
     }
-}
-.delete-marketing-subscribes {
-
-}
-.icon-alert-modal {
-    width: 80px;
-    height: 80px;
 }
