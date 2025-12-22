@@ -8,11 +8,12 @@ import { Validators } from '@angular/forms';
   styleUrls: ['./manage-cards-edit.component.scss']
 })
 export class ManageCardsEditComponent extends ManageCardsAddComponent {
-
+  maskedCardNumber: string
 
   ngOnInit() {
     let getShowAsideForAdd = this.manageCardsStateService.showAsideForEdit.subscribe(data => {
       this.manageCardsService.getCard(data.id).subscribe((res: any) => {
+        this.maskedCardNumber = res.maskedCardNumber;
         this.modelForm.patchValue({
           id: res.id,
           cardType: res.cardType,

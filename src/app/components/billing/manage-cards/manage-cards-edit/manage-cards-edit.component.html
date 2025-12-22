@@ -39,8 +39,8 @@
                         id="add-ticket-subject"
                         class="qt-input-block__input"
                         formControlName="cardNumber"
-                        placeholder="1234 1234 1234 1234"
-                           maxlength="20"
+                        [attr.placeholder]="!maskedCardNumber ? '1234 1234 1234 1234' : maskedCardNumber"
+                        maxlength="20"
                     >
                 </div>
             </div>
@@ -56,7 +56,7 @@
                         id="add-ticket-subject"
                         class="qt-input-block__input"
                         formControlName="expiryDate"
-                        placeholder="YY/MM"
+                        placeholder="YYMM"
                         maxlength="4"
                     >
                 </div>

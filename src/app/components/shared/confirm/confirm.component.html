@@ -567,8 +567,11 @@
     class="archive-modal delete-marketing-subscribes"
     *ngIf="action === 'REMOVE_CARD'"
 >
-    <div class="archive-modal__body">
-        <h3>Delete Card</h3>
+    <div class="archive-modal__body qt-df qt-ai-c qt-fd-c">
+         <div
+                class="qt-icon__background-unset qt-bg-contain icon__alert-modal icon-alert-modal"
+            ></div>
+        <h3 class="qt-text-center qt-mr-0">Delete Card</h3>
         <p [textContent]="message"></p>
     </div>
     <div class="archive-modal__footer">
@@ -592,8 +595,11 @@
     class="archive-modal delete-marketing-subscribes"
     *ngIf="action === 'DISCONNECT_CONNECTION'"
 >
-    <div class="archive-modal__body">
-        <h3 class="qt-text-center">Disconnect connection</h3>
+    <div class="archive-modal__body qt-df qt-ai-c qt-fd-c">
+         <div
+                class="qt-icon__background-unset qt-bg-contain icon__alert-modal icon-alert-modal"
+            ></div>
+        <h3 class="qt-text-center qt-mr-0">Disconnect connection</h3>
         <p class="qt-text-center" [innerHTML]="message"></p>
     </div>
     <div class="archive-modal__footer">

@@ -95,6 +95,7 @@
                 <input
                     type="text"
                     [(ngModel)]="payment.reference"
+                    [disabled]="selectedPaymentMode?.value === 'CREDIT_CARD' || selectedPaymentMode?.value === 'DEBIT_CARD'"
                 >
             </div>
         </div>
