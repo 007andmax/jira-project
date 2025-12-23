@@ -89,6 +89,40 @@
                     </app-mat-error>
                 </div>
             </div>
+             <div class="qt-inputs-row --required">
+                <div class="qt-input-block">
+                    <company-drop-down
+                        #companyDP
+                        [placeholder]="'Enter Company Name'"
+                        [validate]="!(submitted && f2.companyId.errors)"
+                        [errorMessage]="'The company name is required'"
+                        [title]="'Company'"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        [isBlockClear]="true"
+                        (onSelectedItem)="onSelectCompany($event)"
+                    >
+                    </company-drop-down>
+                </div>
+            </div>
+                <div class="qt-inputs-row --required">
+                <div class="qt-input-block">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Card Holder Name
+                    </label>
+                    <input
+                         id="add-ticket-subject"
+                        placeholder="First name and Last name"
+                        class="qt-input-block__input"
+                        formControlName="cardholderName"
+                        maxlength="100"
+                    >
+                </div>
+            </div>
             <div class="qt-inputs-row --required">
                 <div class="qt-input-block">
                     <label
@@ -103,23 +137,6 @@
                         formControlName="address"
                         placeholder="Enter address"
                         maxlength="50"
-                    >
-                </div>
-            </div>
-             <div class="qt-inputs-row --required">
-                <div class="qt-input-block">
-                    <label
-                        for="add-ticket-subject"
-                        class="qt-input-block__label"
-                    >
-                        Card Holder Name
-                    </label>
-                    <input
-                         id="add-ticket-subject"
-                        placeholder="First name and Last name"
-                        class="qt-input-block__input"
-                        formControlName="cardholderName"
-                        maxlength="100"
                     >
                 </div>
             </div>
@@ -167,23 +184,6 @@
                     >
                         Street Name is required
                     </app-mat-error>
-                </div>
-            </div>
-            <div class="qt-inputs-row --required">
-                <div class="qt-input-block">
-                    <company-drop-down
-                        #companyDP
-                        [placeholder]="'Enter Company Name'"
-                        [validate]="!(submitted && f2.companyId.errors)"
-                        [errorMessage]="'The company name is required'"
-                        [title]="'Company'"
-                        [field]="'name'"
-                        [search]="true"
-                        [change]="true"
-                        [isBlockClear]="true"
-                        (onSelectedItem)="onSelectCompany($event)"
-                    >
-                    </company-drop-down>
                 </div>
             </div>
             <div class="qt-inputs-row">

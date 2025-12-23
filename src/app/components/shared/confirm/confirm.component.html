@@ -612,9 +612,12 @@
             </button>
             <button
                 class="qt-button --red qt-w100"
-                (click)=approveConfirm()
-            >
-                Yes, I am sure
+                appDisabledBtn
+                #approveBtn="disabled"
+                (onClick)="approveConfirmByRequest()"
+                [ngClass]="{'--loading':approveBtn.isBlock()}"
+        >       <span *ngIf="!approveBtn.isBlock()"> Yes, I am sure</span>
+                <app-preloader-ticket *ngIf="approveBtn.isBlock()"></app-preloader-ticket>
             </button>
         </div>
     </div>

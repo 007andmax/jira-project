@@ -165,6 +165,8 @@ import { PermissionIntegrationsService } from './components/integrations/integra
 import { ManageCardsComponent } from './components/billing/manage-cards/manage-cards.component';
 import { ManageCardsAddModule } from './components/billing/manage-cards/manage-cards-add/manage-cards-add.module';
 import { ManageCardsEditModule } from './components/billing/manage-cards/manage-cards-edit/manage-cards-edit.module';
+import { PreloaderTicketModule } from './components/shared/preloader-ticket/preloader-ticket.module';
+import { DisabledBtnModule } from './directives/disabled-btn/disabled-btn.module';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -256,7 +258,9 @@ declare var $: any;
         TasksAddModule,
         TasksEditModule,
         ManageCardsAddModule,
-        ManageCardsEditModule
+        ManageCardsEditModule,
+        PreloaderTicketModule,
+        DisabledBtnModule
     ],
     providers: [
         {

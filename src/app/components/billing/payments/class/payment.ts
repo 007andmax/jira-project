@@ -17,6 +17,7 @@ export class Payment {
     paymentStatus: string;
     totalSum: number;
     multipleCompanies: Array<any> = [];
+    transactionId: string;
     constructor(data) {
         this.clientCompanyId = data.clientCompanyId;
         this.clientCompanyName = data.clientCompanyName;
@@ -35,6 +36,7 @@ export class Payment {
         this.paymentStatus = data.paymentStatus;
         this.totalSum = data.totalSum;
         this.multipleCompanies = data.multipleCompanies;
+        this.transactionId = data.transactionId;
     }
     public getDataForExportPDF() {
         return {

@@ -130,6 +130,13 @@
                                 [textContent]="payment.reference"
                             ></div>
                         </div>
+                         <div class="qt-df" *ngIf="payment.transactionId">
+                            <div class="payment-info-lines__title">Transaction Id</div>
+                            <div
+                                class="payment-info-lines__value"
+                                [textContent]="payment.transactionId"
+                            ></div>
+                        </div>
                         <div class="qt-df">
                             <div class="payment-info-lines__title">Payment Mode</div>
                             <div

@@ -83,6 +83,7 @@ export class AllIntegrationsOverviewComponent implements OnDestroy {
     //  this.addBtn.setDisabled(true);
     this.integrationsService.disconnect().subscribe(data => {
       //  this.addBtn.setDisabled(false);
+      this.confirmStateService.initRequest(false);
       this.submitted = false;
       this.isEdit = false;
       this.isConnected = false;
@@ -95,6 +96,7 @@ export class AllIntegrationsOverviewComponent implements OnDestroy {
       this.companiesStateService.currentCompany.isMonerisConnected = false;
     }, err => {
       //  this.addBtn.setDisabled(false);
+      this.confirmStateService.initRequest(false);
       this.onInitRequest.emit(false);
     })
   }

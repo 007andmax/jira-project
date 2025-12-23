@@ -3,6 +3,7 @@
 .qt-page-list {
   &__container {
     background-color: $white;
+    min-height: 280px;
   }
 
   &__header-tabs-line {
