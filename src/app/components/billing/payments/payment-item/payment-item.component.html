@@ -120,7 +120,7 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="deletePayment()"
-                *ngIf="!customerPortalStateService.isCustomerPortal"
+                *ngIf="payment.paymentMethod != 'DEBIT_CARD' && payment.paymentMethod != 'CREDIT_CARD' && !customerPortalStateService.isCustomerPortal" 
             >
                 <div class="qt-icon icon__delete qt-bg-contain qt-sz-20 qt-mr-12"></div>
                 Delete payment

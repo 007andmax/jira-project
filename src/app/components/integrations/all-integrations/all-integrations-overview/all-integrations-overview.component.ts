@@ -17,6 +17,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
   styleUrls: ['./all-integrations-overview.component.scss']
 })
 export class AllIntegrationsOverviewComponent implements OnDestroy {
+  showPreloader: boolean = true;
   modelForm: UntypedFormGroup;
   submitted: boolean = false;
   isConnected: boolean = false;
@@ -56,6 +57,7 @@ export class AllIntegrationsOverviewComponent implements OnDestroy {
     })
     //  this.modelForm.get('cryptType')?.disable();
     this.integrationsService.getSettings().subscribe((res: any) => {
+      this.showPreloader = false;
       this.isEdit = true;
       this.isConnected = res.connected;
       console.log("res", res);
@@ -66,6 +68,8 @@ export class AllIntegrationsOverviewComponent implements OnDestroy {
       })
       this.status = 'CONNECTED';
       console.log("this.modelForm.value", this.modelForm.value)
+    }, err => {
+      this.showPreloader = false;
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {

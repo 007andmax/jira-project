@@ -31,7 +31,7 @@
             <div
                 class="qt-circle qt-bg-white qt-mr-16 header-circle-icon qt-sz-32 qt-df qt-ai-c qt-jc-c pointer"
                 (click)="deletePayment()"
-                *ngIf="!customerPortalStateService.isCustomerPortal"
+                *ngIf="payment.paymentMethod != 'DEBIT_CARD' && payment.paymentMethod != 'CREDIT_CARD' && !customerPortalStateService.isCustomerPortal"
                 placement="top"
                 ngbTooltip="Delete payment"
             >

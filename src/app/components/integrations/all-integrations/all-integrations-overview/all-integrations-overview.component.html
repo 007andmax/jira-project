@@ -1,4 +1,4 @@
-<div class="qt-page-list__container">
+<div class="qt-page-list__container relative">
     <div class="qt-page-list__table">
         <form
             class="integrations-table__form"
@@ -89,4 +89,8 @@
             </button> -->
         </form>
     </div>
+      <div
+    class="loading"
+    *ngIf="showPreloader"
+></div>
 </div>

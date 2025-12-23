@@ -78,6 +78,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
       companyId: ["",
       ],
       cardholderName: ["",
+        Validators.maxLength(100)
       ],
     })
 

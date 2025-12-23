@@ -28,6 +28,7 @@ export class ManageCardsService {
     this.appStateService.setServerError(true);
     return this.http.put(this.apiUrl + `moneris/cards/${data.id}`, data).pipe(
       tap((data: any) => {
+        this.toastrService.success("The card has been successfully updated");
         this.appStateService.setServerError(false);
         this.appStateService.changeDetectorRef();
         return data;
@@ -37,6 +38,7 @@ export class ManageCardsService {
     this.appStateService.setServerError(true);
     return this.http.delete(this.apiUrl + `moneris/cards/${cardId}`).pipe(
       tap((data: any) => {
+        this.toastrService.success("The card has been successfully deleted");
         this.appStateService.setServerError(false);
         this.appStateService.changeDetectorRef();
         return data;
@@ -46,6 +48,7 @@ export class ManageCardsService {
     this.appStateService.setServerError(true);
     return this.http.post(this.apiUrl + 'moneris/cards', data).pipe(
       tap((data: any) => {
+        this.toastrService.success("The new card has been successfully added");
         this.appStateService.setServerError(false);
         this.appStateService.changeDetectorRef();
         return data;

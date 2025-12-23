@@ -1,5 +1,5 @@
 <div class="qt-table-modern__row">
-    <div class="manage-cards__company pointer">
+    <div class="manage-cards__company">
         <div class="qt-df qt-ai-c qt-lh-1">
             <span
                 class="qt-fw-500"
@@ -8,7 +8,7 @@
         </div>
     </div>
     <div
-        class="manage-cards__card-number pointer"
+        class="manage-cards__card-number"
         [textContent]="item.maskedCardNumber"
     >
     </div>
@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-    <div class="manage-cards__status pointer">
+    <div class="manage-cards__status">
         <div
         [ngClass]="{'--active':getExpiredStatus() === 'ACTIVE', '--expiring-soon':getExpiredStatus() === 'EXPIRING_SOON', '--expired':getExpiredStatus() === 'EXPIRED'}"
             [textContent]="parseExpiredDate()"

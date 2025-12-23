@@ -75,6 +75,7 @@ export class ManageCardsAddComponent {
         [Validators.required]
       ],
       cardholderName: ["",
+        Validators.maxLength(100)
       ],
     })
 
