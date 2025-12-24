@@ -160,6 +160,13 @@ import { TasksComponent } from './components/tasks/tasks.component';
 import { TasksDashboardComponent } from './components/tasks-dashboard/tasks-dashboard.component';
 import { TasksAddModule } from './components/tasks/tasks-add/tasks-add.module';
 import { TasksEditModule } from './components/tasks/tasks-edit/tasks-edit.module';
+import { IntegrationsComponent } from './components/integrations/integrations.component';
+import { PermissionIntegrationsService } from './components/integrations/integrations.service';
+import { ManageCardsComponent } from './components/billing/manage-cards/manage-cards.component';
+import { ManageCardsAddModule } from './components/billing/manage-cards/manage-cards-add/manage-cards-add.module';
+import { ManageCardsEditModule } from './components/billing/manage-cards/manage-cards-edit/manage-cards-edit.module';
+import { PreloaderTicketModule } from './components/shared/preloader-ticket/preloader-ticket.module';
+import { DisabledBtnModule } from './directives/disabled-btn/disabled-btn.module';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -190,7 +197,7 @@ declare var $: any;
         UserDeArchiveNotificationComponent,
         PreviewFileComponent,
         SubscriptionServicesCheckUseComponent,
-        SubscriptionServicesConfirmComponent
+        SubscriptionServicesConfirmComponent,
     ],
     imports: [
         BrowserModule,
@@ -249,7 +256,11 @@ declare var $: any;
         NotificationsModule,
         QuoteAsidePreviewModule,
         TasksAddModule,
-        TasksEditModule
+        TasksEditModule,
+        ManageCardsAddModule,
+        ManageCardsEditModule,
+        PreloaderTicketModule,
+        DisabledBtnModule
     ],
     providers: [
         {
@@ -284,7 +295,8 @@ declare var $: any;
         PermissionNoSuperAdminService,
         PermissionClientUserService,
         PermissionMyProfileService,
-        SuperAdminKnowledgeBaseService
+        SuperAdminKnowledgeBaseService,
+        PermissionIntegrationsService
     ],
     bootstrap: [AppComponent]
 })

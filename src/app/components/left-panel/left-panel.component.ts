@@ -26,6 +26,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { Subscription } from 'rxjs';
 import { LeftPanelFileManagerComponent } from './left-panel-file-manager/left-panel-file-manager.component';
 import { LeftPanelTasksComponent } from './left-panel-tasks/left-panel-tasks.component';
+import { LeftPanelIntegrationsComponent } from './left-panel-integrations/left-panel-integrations.component';
 
 /**
  * Left panel component
@@ -56,6 +57,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
   @ViewChild('panelPasswordManager', { static: false }) panelPasswordManager: LeftPanelPasswordManagerComponent;
   @ViewChild('filesCompanies', { static: true }) filesCompanies: LeftPanelFileManagerComponent;
   @ViewChild('panelTasks', { static: true }) panelTasks: LeftPanelTasksComponent;
+  @ViewChild('panelIntegrations', { static: true }) panelIntegrations: LeftPanelIntegrationsComponent;
   sub: Subscription = new Subscription();
   /**
    * Creates an instance of the LeftPanelComponent with the injected services
@@ -98,6 +100,8 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
       .subscribe((event: any) => {
         if (event.navigationTrigger === "popstate") this.isInitPopStateNaviate = true;
         if (this.state === '' || (event instanceof NavigationEnd && this.isInitPopStateNaviate)) {
+          if (window.location.href.includes(`/manage-cards`)) this.state = 'manage-cards';
+          if (window.location.href.includes(`/integrations/all-integrations`)) this.state = 'all-integrations';
           if (window.location.href.includes(`/tasks`)) this.state = 'my-tasks';
           if (window.location.href.includes(`/tasks-dashboard`)) this.state = 'tasks-dashboard';
           if (window.location.href.includes(`/companies`)) this.state = 'new-companies';
@@ -240,6 +244,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
       if (this.panelCompanies) this.panelCompanies.openPanel();
       if (this.panelCompanies) this.panelCompanies.togglePanel(true);
       if (this.panelTasks) this.panelTasks.close();
+      if (this.panelIntegrations) this.panelIntegrations.close();
     })
     this.sub.add(onOpenCompanyPage);
     let onChangeStateWithoutNavigate = this.leftPanelStateService.onChangeStateWithoutNavigate.subscribe(data => {
@@ -285,6 +290,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
     if (this.leftPanelService.isDevicesPage(data)) this.page = "DEVICES";
     if (this.leftPanelService.isFilePage(data)) this.page = "FILE_MANAGER";
     if (this.leftPanelService.isTasksPage(data)) this.page = "TASKS";
+    if (this.leftPanelService.isIntegrationsPage(data)) this.page = "INTEGRATIONS";
   }
   public getCompanyInfoPermissions(action) {
     return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole.getPermission(action)));
@@ -326,6 +332,8 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
   onChangeState(data) {
     if (this.state !== data) {
       this.state = data;
+      if (this.state === 'manage-cards') this.goToLink(`manage-cards`);
+      if (this.state === 'all-integrations') this.goToLink(`integrations/all-integrations`);
       if (this.state === 'tasks-dashboard') this.goToLink(`tasks-dashboard`);
       if (this.state === 'my-tasks' || this.state === 'my-tasks-calendar') this.goToLink(`tasks`);
       if (this.state === 'contract-statistics') this.goToLink(`contract-statistics`);

@@ -1,0 +1,51 @@
+<div class="qt-page-list__header --sticky">
+    <div class="qt-page-list__header-title-line">
+        <div class="qt-page-list__header-title-line--left">
+            <h6
+                class="qt-page-list__header-title"
+                [textContent]="'Manager Cards'"
+            ></h6>
+        </div>
+        <div class="qt-page-list__header-title-line--right">
+            <div class="qt-df qt-ai-c">
+               <!-- <div
+                    class="qt-icon icon__close qt-icon__white qt-sz-20 qt-bg-contain closed-search"
+                    *ngIf="toggleSearch"
+                    (click)="toggleSearch = false"
+                ></div>
+                <div
+                    class="qt-input-search qt-ml-8"
+                    [ngClass]="{'--open':toggleSearch}"
+                >
+                    <input
+                        type="text"
+                        placeholder="Search Password"
+                        [(ngModel)]="searchText"
+                        (keyup)="onKeyUp($event)"
+                    >
+                    <span
+                        class="search-clear qt-icon icon__close-round qt-icon__gray-400"
+                        *ngIf="searchText.length > 0"
+                        (click)="clearSearch()"
+                    ></span>
+                </div>
+                 <button
+                    class="qt-button qt-button-filter --gray --md qt-ml-8 qt-df"
+                    [ngClass]="{'active':toggleFilter,
+                 'is-exist-filters':isExistFilters()}"
+                    (click)="onToggleFilter(!toggleFilter)"
+                >
+                    <span class="qt-icon icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
+                    <span [textContent]="getTextCountFilters()"></span>
+                </button> -->
+                <button
+                    *ngIf="companiesStateService.currentCompany && companiesStateService.currentCompany.isMonerisConnected"
+                    class="qt-button --gray --md qt-ml-8"
+                    (click)="addCard()"
+                >
+                    Create Card
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

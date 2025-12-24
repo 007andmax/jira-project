@@ -18,6 +18,7 @@ import { LeftPanelDevicesComponent } from './left-panel-devices/left-panel-devic
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LeftPanelFileManagerComponent } from './left-panel-file-manager/left-panel-file-manager.component';
 import { LeftPanelTasksComponent } from './left-panel-tasks/left-panel-tasks.component';
+import { LeftPanelIntegrationsComponent } from './left-panel-integrations/left-panel-integrations.component';
 
 @NgModule({
     declarations: [LeftPanelComponent,
@@ -35,7 +36,8 @@ import { LeftPanelTasksComponent } from './left-panel-tasks/left-panel-tasks.com
         LeftPanelMarketingComponent,
         LeftPanelDevicesComponent,
         LeftPanelFileManagerComponent,
-        LeftPanelTasksComponent
+        LeftPanelTasksComponent,
+        LeftPanelIntegrationsComponent
 
     ],
     imports: [

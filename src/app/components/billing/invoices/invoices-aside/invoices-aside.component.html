@@ -95,6 +95,7 @@
                 <input
                     type="text"
                     [(ngModel)]="payment.reference"
+                    [disabled]="selectedPaymentMode?.value === 'CREDIT_CARD' || selectedPaymentMode?.value === 'DEBIT_CARD'"
                 >
             </div>
         </div>
@@ -182,7 +183,7 @@
                             ></td>
                             <td
                                 class="unpaid-table__payment qt-text-right"
-                                [ngClass]="{'--checked':'invoice.selected', '--input-error':!validate.getPayment() && invoice.selected}"
+                                [ngClass]="{'--checked':invoice.selected}"
                             >
                                 <input
                                     class="payment-input"
@@ -198,17 +199,26 @@
                     </ng-template>
                 </tbody>
             </table>
-            <div
-                class="error-payments --input-error"
-                *ngIf="!validate.getPayment()"
-            >
-                <app-mat-error class="qt-tooltip-error">
-                    The payment amount is more than the Amount Due of invoices
-                </app-mat-error>
-            </div>
         </div>
         <div class="summary-info qt-df qt-pl-30 qt-pr-30 qt-pb-24 qt-jc-sb">
             <div>
+                <app-payments-cards
+                #paymentsCards
+                    *ngIf="selectedPaymentMode?.value === 'CREDIT_CARD' || selectedPaymentMode?.value === 'DEBIT_CARD'"
+                   class="search-company qt-input-block"
+                    [placeholder]="'Select Card'"
+                    [change]="false"
+                    [sort]="false"
+                    [class]="['qt-dropdown']"
+                    [heightInput]="'36px'"
+                    [dropdownHeight]="'300px'"
+                    [isBlockClear]="true"
+                    [field]="'maskedCardNumber'"
+                    [title]="'Credit Card'"
+                    [errorMessage]="'The credit card is required'"
+                    [validate]="validate.getCardId()"
+                      [selectedCompanies]="selectedCompanies"
+                    (onSelectedItem)="onSelectCard($event)"></app-payments-cards>
                 <div class="summary-info__notes qt-pt-16">
                     <div class="qt-fs-13 qt-lh-154 qt-pb-12">
                         <span class="qt-fw-600">Notes</span>
@@ -271,6 +281,7 @@
                 Cancel
             </button>
             <button
+                [disabled]="companiesState.currentCompany && !companiesState.currentCompany.isMonerisConnected"
                 class="qt-button "
                 appDisabledBtn
                 #recordPayment="disabled"

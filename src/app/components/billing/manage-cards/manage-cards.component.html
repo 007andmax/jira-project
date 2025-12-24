@@ -1,0 +1,111 @@
+<div class="qt-page-list password-page">
+    <app-manage-cards-header
+        (onChangeFilterField)="onFilter($event)"
+        (onSearch)="onSearch($event)"
+    ></app-manage-cards-header>
+    <div
+        class="qt-page-list__body"
+        [ngClass]="{'--open-filters':toggleFilter}"
+    >
+        <div class="qt-page-list__table">
+            <!-- Start Header Table -->
+            <div class="qt-page-list__header-thead-container">
+                <div class="qt-table-modern qt-page-list__header-thead">
+                    <div class="qt-page-list__header-thead__row">
+                        <div
+                            class="manage-cards__company pointer"
+                            (click)="onFilter('CATEGORY')"
+                        >
+                            Company
+                            <span class="qt-icon icon__arrow-narrow-down qt-sz-16 qt-ml-8"></span>
+                        </div>
+                        <div
+                            class="manage-cards__card-number pointer"
+                            (click)="onFilter('COMPANY_NAME')"
+                        >
+                            Card Number
+                        </div>
+
+                        <div
+                            class="manage-cards__expire-date pointer"
+                            (click)="onFilter('USERNAME')"
+                        >
+                            Expiry Date
+                        </div>
+                        <div class="manage-cards__status">Status</div>
+                        <div class="manage-cards__menu"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Header Table -->
+            <div
+                class="qt-page-list__body-table-container"
+                [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
+            >
+                <div class="qt-page-list__body-tbody qt-table-modern manage-cards">
+                    <div
+                        infiniteScroll
+                        [infiniteScrollContainer]="container"
+                        [infiniteScrollDistance]="2"
+                        [infiniteScrollThrottle]="50"
+                        [infiniteScrollDisabled]="infiniteScrollDisabled"
+                        (scrolled)="onScroll()"
+                    >
+                        <ng-template
+                            ngFor
+                            let-item
+                            [ngForOf]="list"
+                            [ngForTrackBy]="trackById"
+                        >
+                            <app-manage-cards-table [item]="item"></app-manage-cards-table>
+                        </ng-template>
+                    </div>
+                </div>
+                <div
+                    class="no-exist-elements"
+                    *ngIf="!showPreloader && list.length == 0 && companiesStateService.currentCompany && companiesStateService.currentCompany.isMonerisConnected"
+                >
+                    We couldn't find any results
+                </div>
+                 <div
+                    class="no-exist-elements qt-text-center"
+                    *ngIf="companiesStateService.currentCompany && !companiesStateService.currentCompany.isMonerisConnected"
+                >
+                    You cannot get the list of credit cards. <br>
+Set up the 3rd party connection on the <span class="qt-color-info qt-pointer" (click)="goToIntegrationsPage()">Integration page</span>
+                </div>
+                <div
+                    class="loading pengind-loading"
+                    *ngIf="showPendingPreloader"
+                ></div>
+                <div
+                    class="loading"
+                    *ngIf="showPreloader"
+                ></div>
+            </div>
+        </div>
+        <!-- Start Filter Aside -->
+        <!-- <div
+            class="aside-filters"
+            [hidden]="!toggleFilter"
+        >
+            <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
+                <div class="aside-filters-header__title">Filters</div>
+                <div
+                    class="qt-button --square-md --gray pointer"
+                    (click)="onToggleFilter(false)"
+                >
+                    <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+                </div>
+            </div>
+            <div class="aside-filters-content">
+
+                <app-passwoord-manager-filters
+                    #filters
+                    (onClose)="onToggleFilter(false)"
+                ></app-passwoord-manager-filters>
+            </div>
+        </div> -->
+        <!-- End Filter Aside -->
+    </div>
+</div>

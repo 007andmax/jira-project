@@ -127,6 +127,25 @@
       display: none;
     }
   }
+
+  &__notification {
+    --border-color: #{$yellow-700};
+    --background-color: #{$yellow-25};
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border: 1.5px solid var(--border-color);
+    background-color: var(--background-color);
+
+    border-radius: 8px;
+
+    &--error {
+      --border-color: #{$red-600};
+      --background-color: #{$red-25};
+    }
+  }
 }
 
 .qt-aside {

@@ -1,0 +1,76 @@
+<div class="qt-table-modern__row">
+    <div class="manage-cards__company">
+        <div class="qt-df qt-ai-c qt-lh-1">
+            <span
+                class="qt-fw-500"
+                [textContent]="item.companyName"
+            ></span>
+        </div>
+    </div>
+    <div
+        class="manage-cards__card-number"
+        [textContent]="item.maskedCardNumber"
+    >
+    </div>
+    <div class="manage-cards__expire-date ellipsis">
+        <div class="ellipsis">
+            <div
+                class="user-email ellipsis"
+                [textContent]="item.expiryDate"
+            >
+            </div>
+        </div>
+    </div>
+    <div class="manage-cards__status">
+        <div
+        [ngClass]="{'--active':getExpiredStatus() === 'ACTIVE', '--expiring-soon':getExpiredStatus() === 'EXPIRING_SOON', '--expired':getExpiredStatus() === 'EXPIRED'}"
+            [textContent]="parseExpiredDate()"
+            class="tag__modern"
+        >
+        </div>
+    </div>
+    <div class="manage-cards__menu">
+        <div
+            ngbDropdown
+            [container]="'body'"
+        >
+            <div
+                id="dropdownBasic1"
+                ngbDropdownToggle
+                class="dropdown-toggle qt-button-square  pointer"
+            >
+                <div class="qt-ic-c qt-icon icon__more  qt-pointer qt-sz-16 qt-bg-contain"></div>
+            </div>
+            <ul
+                class="qt-dropdown-menu"
+                ngbDropdownMenu
+                aria-labelledby="dropdownBasic1"
+            >
+                <li
+                    class="pointer"
+                    (click)="edit()"
+                    ngbDropdownItem
+                >
+                    <div class="qt-icon icon__edit qt-sz-20 qt-mr-8"></div>
+                    Edit
+                </li>
+                <!-- <li
+                    class="pointer"
+                    (click)="sendNotification()"
+                    ngbDropdownItem
+                >
+                    <span class="qt-icon icon__email qt-sz-20 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                    Send Notification
+                </li> -->
+                <li
+                    class="qt-dropdown-menu__top-line pointer"
+                    (click)="delete()"
+                    ngbDropdownItem
+                >
+                    <div class="qt-icon icon__delete qt-icon__red-600 qt-bg-contain qt-sz-20 qt-mr-8"></div>
+                    <div class="qt-color-red-600">Delete</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

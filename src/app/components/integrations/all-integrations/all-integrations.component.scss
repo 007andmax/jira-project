@@ -1,0 +1,106 @@
+@import "./src/assets/styles/variable";
+
+.tasks-table__body {
+    min-width: 1480px;
+}
+
+.qt-page-list__header-tabs {
+    display: flex;
+    align-self: flex-start;
+    gap: 24px;
+    background-color: $gray-50;
+    border-bottom: 1px solid $gray-200;
+
+    &-item {
+        &-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0 0 14px;
+            border-bottom: 2px solid transparent;
+
+            &:hover {
+                border-color: transparent;
+                background-color: transparent;
+
+                .qt-page-list__header-tabs-text {
+                    color: $gray-500;
+                }
+            }
+
+            &.active {
+                background-color: transparent;
+                border-bottom: 2px solid $blue-light-600;
+
+                .qt-page-list__header-tabs-item-text {
+                    font-size: 14px;
+                    color: $gray-900;
+                    font-weight: 600;
+                }
+
+                .qt-page-list__header-tabs-item-icon {
+                    background-color: $blue-light-600;
+                }
+            }
+        }
+
+        &-text {
+            font-weight: 500;
+            color: $gray-500;
+            line-height: 20px;
+        }
+    }
+}
+
+.qt-page-list__header.--sticky {
+  padding-inline: 24px;
+  margin-bottom: 26px;
+  background-color: $gray-50;
+  margin-top: 0;
+}
+
+.integrations-table {
+  &__body {
+    background-color: $gray-50;
+    overflow-x: hidden;
+  }
+
+  &__moneris {
+    &-logo {
+      height: 58px;
+      max-width: 100%;
+      width: 100%;
+    }
+
+    &-title {
+      font-size: 18px;
+    }
+  }
+}
+
+.tag__modern {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 6px;
+  text-transform: capitalize;
+  border-radius: 6px;
+
+  &.--success {
+    color: $green-700;
+    border-color: $green-200;
+    background-color: $green-25;
+  }
+
+  &.--error {
+    color: $red-700;
+    border-color: $red-200;
+    background-color: $red-25;
+  }
+}
+
+.qt-page-list__header-tabs-item-link {
+  .active {
+    background-color: transparent;
+    border-bottom: 3px solid $blue-light-600;
+  }
+}

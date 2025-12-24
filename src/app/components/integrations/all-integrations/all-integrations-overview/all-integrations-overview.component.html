@@ -1,0 +1,96 @@
+<div class="qt-page-list__container relative">
+    <div class="qt-page-list__table" [hidden]="showPreloader">
+        <form
+            class="integrations-table__form"
+            [formGroup]="modelForm"
+        >
+            <div class="qt-inputs-row">
+                <div class="qt-input-block">
+                    <div class="qt-input-block">
+                        <div class="qt-input-block__label">Store Id</div>
+                        <div class="qt-input-block__input-row qt-pos-rel">
+                            <input
+                                class
+                                type="text"
+                                formControlName="storeId"
+                                placeholder="Enter Store Id"
+                            >
+                            <div
+                                placement="top"
+                                ngbTooltip="Copy"
+                                class="qt-sz-20 qt-icon icon__copy show-password pointer"
+                                (click)="copy(f2.storeId.value)"
+                            ></div>
+                        </div>
+                        <app-mat-error
+                            class="invalid-feedback"
+                            *ngIf="submitted && f2.storeId.errors"
+                        >
+                            The maximum number of characters - 10
+                        </app-mat-error>
+                    </div>
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block">
+                    <div class="qt-input-block">
+                        <div class="qt-input-block__label">API Token</div>
+                        <div class="qt-input-block__input-row qt-pos-rel">
+                            <input
+                                class
+                                type="text"
+                                formControlName="apiToken"
+                                placeholder="Enter API Token"
+                            >
+                            <div
+                                placement="top"
+                                ngbTooltip="Copy"
+                                class="qt-sz-20 qt-icon icon__copy show-password pointer"
+                                (click)="copy(f2.apiToken.value)"
+                            ></div>
+                            <app-mat-error
+                                class="invalid-feedback"
+                                *ngIf="submitted && f2.apiToken.errors"
+                            >
+                                The maximum number of characters - 20
+                            </app-mat-error>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block">
+                    <div class="qt-input-block">
+                        <div class="qt-input-block__label">Crypt Type</div>
+                        <input
+                            class
+                            type="text"
+                            value="7"
+                            placeholder="Enter Crypt Type"
+                            disabled
+                        >
+                        <app-mat-error
+                            class="invalid-feedback"
+                            *ngIf="submitted && f2.cryptType.errors"
+                        >
+                            Please enter a valid phone number
+                        </app-mat-error>
+                    </div>
+                </div>
+            </div>
+            <!-- <button
+                class="qt-button qt-jc-c"
+                appDisabledBtn
+                #addBtn="disabled"
+                (onClick)="add()"
+            >
+                <span *ngIf="!addBtn.isBlock()">Save</span>
+                <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+            </button> -->
+        </form>
+    </div>
+      <div
+    class="loading"
+    *ngIf="showPreloader"
+></div>
+</div>

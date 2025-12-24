@@ -6,7 +6,7 @@ export class PaymentsReportPayment {
     partialPaidInvoices: Array<string> = [];
     paymentMethod: string;
     reference: string;
-    refundMethod: string;
+    paymentStatus: string;
     constructor(data) {
         this.clientCompanyName = data.clientCompanyName;
         this.createdAt = data.createdAt;
@@ -15,6 +15,6 @@ export class PaymentsReportPayment {
         this.partialPaidInvoices = data.partialPaidInvoices;
         this.paymentMethod = data.paymentMethod;
         this.reference = data.reference;
-        this.refundMethod = data.refundMethod;
+        this.paymentStatus = data.paymentStatus;
     }
 }

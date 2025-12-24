@@ -7,7 +7,12 @@ import { ConfrmData } from '../class/confirm-data';
 export class ConfirmStateService {
   action: string;
   onConfirm: EventEmitter<any> = new EventEmitter();
+  onInitRequest: EventEmitter<any> = new EventEmitter();
   constructor() { }
+
+  public initRequest(data) {
+    this.onInitRequest.emit(data);
+  }
   public setConfirmAction(action) {
     this.action = action;
   }

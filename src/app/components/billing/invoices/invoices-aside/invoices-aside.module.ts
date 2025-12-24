@@ -10,10 +10,15 @@ import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-do
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
 import { MultiCompanyDropDownModule } from 'src/app/components/shared/multi-company-drop-down/multi-company-drop-down.module';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
+import { PaymentsCardsComponent } from '../../payments/payments-cards/payments-cards.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ManageCardsAddModule } from '../../manage-cards/manage-cards-add/manage-cards-add.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
-        declarations: [InvoicesAsideComponent
+        declarations: [InvoicesAsideComponent,
+                PaymentsCardsComponent
 
         ],
         imports: [
@@ -26,7 +31,9 @@ import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.mo
                 CompanyDropDownModule,
                 DropDownModule,
                 MultiCompanyDropDownModule,
-                MatErrorModule
+                MatErrorModule,
+                NgbModule,
+                InfiniteScrollModule
         ],
         exports: [InvoicesAsideComponent]
 

@@ -74,6 +74,9 @@ Example:
   &__google-chrome {
     background-image: url("/assets/img/icons/google-chrome.svg");
   }
+  &__moneris {
+    background-image: url("/assets/img/icons/moneris.svg");
+  }
   &__opera {
     background-image: url("/assets/img/icons/opera.svg");
   }
@@ -250,9 +253,21 @@ Example:
   &__primary-unchecked {
     background-image: url("/assets/img/icons/primary-unchecked.svg");
   }
+  &__payment-method-master-card {
+    background-image: url("/assets/img/icons/payment-method-master-card.svg");
+  }
+  &__payment-method-visa {
+    background-image: url("/assets/img/icons/payment-method-visa.svg");
+  }
   // END Color Icon
 
   // Start Monochrome image
+  &__alert {
+    mask-image: url("/assets/img/icons/alert.svg");
+  }
+  &__alert-triangle {
+    mask-image: url("/assets/img/icons/alert-triangle.svg");
+  }
   &__warning {
     mask-image: url("/assets/img/icons/warning.svg");
   }
@@ -298,11 +313,17 @@ Example:
   &__folder {
     mask-image: url("/assets/img/icons/folder.svg");
   }
+  &__integrations {
+    mask-image: url("/assets/img/icons/integrations.svg");
+  }
   &__template-settings {
     mask-image: url("/assets/img/icons/template-settings.svg");
   }
   &__crm {
     mask-image: url("/assets/img/icons/crm.svg");
+  }
+  &__credit-cards {
+    mask-image: url("/assets/img/icons/credit-cards.svg");
   }
   &__crm-settings-filled {
     mask-image: url("/assets/img/icons/crm-settings-filled.svg");
@@ -643,6 +664,9 @@ Example:
   &__links {
     mask-image: url("/assets/img/icons/links.svg");
   }
+  &__link-broken {
+    mask-image: url("/assets/img/icons/link-broken.svg");
+  }
   &__network-switch {
     mask-image: url("/assets/img/icons/network-switch.svg");
   }
@@ -769,6 +793,9 @@ Example:
   &__transfer {
     mask-image: url("/assets/img/icons/transfer.svg");
   }
+  &__triangle-warning {
+    mask-image: url("/assets/img/icons/triangle-warning.svg");
+  }
   &__notification {
   mask-image: url("/assets/img/icons/notification.svg");
   }
@@ -781,6 +808,7 @@ Example:
  &__expand-diagonal {
    mask-image: url("/assets/img/icons/expand-diagonal.svg");
  }
+
   &.--updated {
     position: relative;
     &::before {
@@ -887,6 +915,9 @@ Example:
   }
   &__yellow-600 {
     background-color: $yellow-600;
+  }
+  &__yellow-700 {
+    background-color: $yellow-700;
   }
   &__yellow-800 {
     background-color: $yellow-800;

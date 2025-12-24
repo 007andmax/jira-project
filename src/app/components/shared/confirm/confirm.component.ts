@@ -1,25 +1,37 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { ConfirmStateService } from './services/confirm-state.service';
 import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ConfrmData } from './class/confirm-data';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-confirm',
   templateUrl: './confirm.component.html',
   styleUrls: ['./confirm.component.scss']
 })
-export class ConfirmComponent implements OnInit {
+export class ConfirmComponent implements OnInit, OnDestroy {
   @Input() public message = '';
   action: string = null;
   btnCancel: string = 'no';
   buttonConfirm: string = 'yes';
+  sub: Subscription = new Subscription();
+  @ViewChild('approveBtn', { static: false }) approveBtn: DisabledBtnDirective;
   constructor(private confirmStateService: ConfirmStateService,
     public activeModal: NgbActiveModal, private eRef: ElementRef,) {
 
   }
 
+
   ngOnInit() {
     this.action = this.confirmStateService.getConfirmAction();
+    let onInitRequest = this.confirmStateService.onInitRequest.subscribe(res => {
+      if (!res) {
+        this.approveBtn.setDisabled(false);
+        this.cancelConfirm();
+      }
+    })
+    this.sub.add(onInitRequest);
   }
   closeModal() {
     this.activeModal.close();
@@ -37,12 +49,14 @@ export class ConfirmComponent implements OnInit {
       $uibModalInstance.dismiss();*/
   };
 
+  approveConfirmByRequest() {
+    this.approveBtn.setDisabled(true);
+    this.confirmStateService.initRequest(true);
+    this.confirmStateService.setConfirm(true);
+  }
   approveConfirm() {
     this.activeModal.close();
     this.confirmStateService.setConfirm(true);
-
-    /*    approveFn()
-        $uibModalInstance.close(result);*/
   };
   public isDefault() {
     return this.action !== 'ARCHIVE_USER'
@@ -66,6 +80,8 @@ export class ConfirmComponent implements OnInit {
       && this.action !== 'REMOVE_FILE'
       && this.action !== 'DELETE_TASK'
       && this.action !== 'ARCHIVE_TASK'
+      && this.action !== 'REMOVE_CARD'
+      && this.action !== 'DISCONNECT_CONNECTION'
       && !this.isSignaturePage()
       && !this.isSettingsPage();
   }
@@ -96,5 +112,8 @@ export class ConfirmComponent implements OnInit {
       this.action === 'DELETE_USER_ROLE' ||
       this.action == 'DELETE_NOTE' ||
       this.action == 'DELETE_API_KEY'
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

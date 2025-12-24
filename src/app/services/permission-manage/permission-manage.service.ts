@@ -112,6 +112,9 @@ export class PermissionManageService {
     ],
     "Tasks Area": [
       'DELETE_TASK'
+    ],
+    "Integrations": [
+      'MANAGE_INTEGRATIONS'
     ]
   };
 

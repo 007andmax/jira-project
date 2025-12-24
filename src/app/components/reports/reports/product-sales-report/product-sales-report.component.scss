@@ -1,7 +1,21 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/scss/mixin";
+@import "./src/assets/styles/mixin/breakpoint";
+
 ::ng-deep.product-sales-report-table {
     .qt-report__body-row {
         td {
             white-space: break-spaces;
         }
     }
+}
+
+::ng-deep .select-product__dropdown {
+  @include media-breakpoint-up($sm) {
+    min-width: 570px;
+  }
+
+  @include media-breakpoint-up($lg) {
+    min-width: 670px;
+  }
 }

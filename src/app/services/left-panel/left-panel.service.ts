@@ -52,6 +52,9 @@ export class LeftPanelService {
       state === 'tasks-dashboard'
     )
   }
+  isIntegrationsPage(state) {
+    return (state === 'all-integrations')
+  }
   public isCompanyPage(state) {
     return (state == 'new-companies'
       || state == 'company-dashboard'
@@ -80,7 +83,8 @@ export class LeftPanelService {
       || state === 'quotes-component'
       || state === 'new-payments-ng2'
       || state == 'contract-statistics'
-      || state === 'new-contracts')
+      || state === 'new-contracts'
+      || state === 'manage-cards')
   }
   isInventoryState(state) {
     return (state === 'inventory')

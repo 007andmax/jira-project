@@ -4,17 +4,17 @@ import { PaymentData } from '../../../payments/class/payment-Data';
 
 export class PaymentInvoice {
     amountReceived: boolean = true;
-    payment: boolean = true;
+    cardId: boolean = true;
     constructor() { }
 
+    public getCardId() {
+        return this.cardId;
+    }
+    public setCardId(cardId) {
+        this.cardId = cardId;
+    }
     public getAmountReceived() {
         return this.amountReceived;
-    }
-    public getPayment() {
-        return this.payment;
-    }
-    public setValidPayment(data) {
-        this.payment = data;
     }
     public checkAmountReceived(amountReceived: number, invoices: Array<Invoice>) {
         let sumAmountReceived = 0;
@@ -32,14 +32,15 @@ export class PaymentInvoice {
         sumAmountReceived = parseFloat((sumAmountReceived).toFixed(2));
         this.amountReceived = (sumAmountReceived === amountReceived);
     }
-    public isValidate(amountReceived: number, invoices: Array<Invoice>) {
+    public isValidate(amountReceived: number, invoices: Array<Invoice>, payment: Payment) {
         let sumAmountReceived = 0;
         invoices.forEach(item => {
             if (item.selected) sumAmountReceived += item.paymentAmount;
         })
         sumAmountReceived = parseFloat((sumAmountReceived).toFixed(2));
         this.amountReceived = (sumAmountReceived === parseFloat((amountReceived).toFixed(2)));
-        return this.amountReceived;
+        this.cardId = (payment.paymentMethod == 'CREDIT_CARD' || payment.paymentMethod == 'DEBIT_CARD' ? payment.cardId != null : true);
+        return this.amountReceived && this.cardId;
     }
     public isValidateEditAside(amountReceived: number, paymentData: Array<PaymentData>) {
         let sumAmountReceived = 0;

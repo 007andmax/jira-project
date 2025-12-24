@@ -28,6 +28,7 @@ import { PermissionCompanyDevicesService } from './components/company-devices/pe
 import { PermissionNoSuperAdminService } from './services/users/permission-no-super-admin.service';
 import { PermissionClientUserService } from './services/users/permission-client-user.service';
 import { PermissionMyProfileService } from './components/setting/my-profile/permission-my-profile.service';
+import { PermissionIntegrationsService } from './components/integrations/integrations.service';
 
 const routes: Routes = [
 
@@ -430,6 +431,16 @@ const routes: Routes = [
     path: ':domain/tasks-dashboard',
     loadChildren: () => import('./components/tasks-dashboard/tasks-dashboard.module').then(m => m.TasksDashboardModule),
     canActivate: [PermissionNoSuperAdminService]
+  },
+  {
+    path: ':domain/integrations',
+    loadChildren: () => import('./components/integrations/integrations.module').then(m => m.IntegrationsModule),
+    canActivate: [PermissionNoSuperAdminService, PermissionIntegrationsService]
+  },
+  {
+    path: ':domain/manage-cards',
+    loadChildren: () => import('./components/billing/manage-cards/manage-cards.module').then(m => m.ManageCardsModule),
+    canActivate: [PermissionBillableService, PermissionNoSuperAdminService]
   },
 ];
 

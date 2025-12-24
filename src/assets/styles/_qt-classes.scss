@@ -395,7 +395,7 @@ input.qt-dropdown-input {
   border-radius: 8px;
   background-color: $blue-light-600;
   color: $white;
-  padding: 10px 20px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -780,6 +780,12 @@ button.qt-button.--gray:focus {
 }
 .qt-gap-4 {
   gap: 4px;
+}
+.qt-gap-8 {
+  gap: 8px;
+}
+.qt-gap-16 {
+  gap: 16px;
 }
 .qt-db {
   display: block;
@@ -1397,6 +1403,11 @@ button.qt-button.--gray:focus {
   width: 80px;
   height: 80px;
 }
+
+.qt-h100 {
+  height: 100%;
+}
+
 .qt-h40 {
   height: 40px;
 }
@@ -1484,6 +1495,9 @@ button.qt-button.--gray:focus {
 }
 .qt-bg-white {
   background-color: $white;
+}
+.qt-bg-red-100 {
+  background-color: $red-100;
 }
 .qt-color-white {
   color: $white;

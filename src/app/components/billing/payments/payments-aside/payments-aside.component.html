@@ -4,7 +4,7 @@
         <div class="qt-df qt-ai-c">
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
-                *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal"
+                *ngIf="payment.paymentStatus && payment.paymentStatus == 'PAYMENT_COMPLETED' && !customerPortalStateService.isCustomerPortal"
                 (click)="showEdit()"
                 placement="top"
                 ngbTooltip="Edit payment"
@@ -13,7 +13,7 @@
             </div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
-                *ngIf="!payment.refundMethod && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
+                *ngIf="payment.paymentMethod != 'DEBIT_CARD' && payment.paymentMethod != 'CREDIT_CARD' && payment.paymentStatus && payment.paymentStatus == 'PAYMENT_COMPLETED' && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
                 (click)="showRefund()"
                 placement="top"
                 ngbTooltip="Refund payment"
@@ -31,7 +31,7 @@
             <div
                 class="qt-circle qt-bg-white qt-mr-16 header-circle-icon qt-sz-32 qt-df qt-ai-c qt-jc-c pointer"
                 (click)="deletePayment()"
-                *ngIf="!customerPortalStateService.isCustomerPortal"
+                *ngIf="payment.paymentMethod != 'DEBIT_CARD' && payment.paymentMethod != 'CREDIT_CARD' && !customerPortalStateService.isCustomerPortal"
                 placement="top"
                 ngbTooltip="Delete payment"
             >
@@ -77,8 +77,10 @@
                 <div class="payments-page__payment-info qt-pr-15">
                     <div>
                         <div class="qt-fw-600 qt-fs-16 qt-lh-133 qt-mb-4 qt-color-gray-900 qt-df qt-ai-c">
-                            <div class="icon__status-green qt-mr-5 qt-ic-c qt-sz-24"></div>
-                            Amount Received
+                            <div [ngClass]="{'icon__unsubscribe' : payment.paymentStatus == 'PAYMENT_FAILED',
+                                'icon__status-green' : payment.paymentStatus != 'PAYMENT_FAILED'
+                            }" class="qt-mr-5 qt-ic-c qt-sz-24"></div>
+                            {{payment.paymentStatus == 'PAYMENT_FAILED' ? 'Payment Failed' : 'Amount Received'}}
                         </div>
                         <div
                             class="qt-fs-40 qt-fw-600 qt-lh-12 qt-color-gray-900"
@@ -128,6 +130,13 @@
                             <div
                                 class="payment-info-lines__value"
                                 [textContent]="payment.reference"
+                            ></div>
+                        </div>
+                         <div class="qt-df" *ngIf="payment.transactionId">
+                            <div class="payment-info-lines__title">Transaction Id</div>
+                            <div
+                                class="payment-info-lines__value"
+                                [textContent]="payment.transactionId"
                             ></div>
                         </div>
                         <div class="qt-df">

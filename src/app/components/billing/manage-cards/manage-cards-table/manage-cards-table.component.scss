@@ -1,0 +1,125 @@
+@import "./src/assets/styles/variable";
+
+.grey-dropdown {
+    .dropdown-menu {
+        .dropdown-item {
+            padding: 5px 20px 5px 50px;
+            position: relative;
+
+            &:before {
+                position: absolute;
+                content: "";
+                left: 20px;
+                top: 11px;
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+}
+
+.--selected {
+    td {
+        background: $gray-50;
+        border-color: $blue-light-600;
+    }
+}
+
+tr:hover {
+    td {
+        background-color: $gray-25;
+    }
+}
+
+.icon__show,
+.icon__hide,
+.icon__copy {
+    min-width: 16px;
+    min-height: 16px;
+}
+
+.qt-table-modern__row {
+    position: relative;
+    min-height: 56px;
+    border: unset;
+    margin-bottom: 0;
+
+    & > div {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid $gray-200;
+        font-size: 14px;
+        color: $gray-900;
+        cursor: default;
+        &:first-child {
+            padding-left: 25px;
+            border-left: 1px solid $gray-200;
+            border-radius: 0;
+        }
+
+        &:last-child {
+            padding-right: 25px;
+            border-right: 1px solid $gray-200;
+            border-radius: 0;
+        }
+    }
+
+    &:hover {
+        border: unset;
+
+        &>div {
+            background-color: $blue-dark-25;
+        }
+    }
+}
+
+.manage-cards {
+  &__company {
+    flex: 2 1 400px;
+  }
+
+  &__card-number {
+    flex: 2 1 388px;
+  }
+
+  &__expire-date {
+    flex: 0 0 133px;
+  }
+
+  &__status {
+    flex: 0 0 127px;
+  }
+
+  &__menu {
+    flex: 0 0 66px;
+  }
+}
+
+.manage-cards__status {
+  .tag__modern {
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 6px;
+    text-transform: unset;
+
+    &.--active {
+      border: 1px solid $green-200;
+      background-color: $green-25;
+      color: $green-700;
+    }
+
+    &.--expired {
+      border: 1px solid $red-200;
+      background-color: $red-25;
+      color: $red-600;
+    }
+
+    &.--expiring-soon {
+      border: 1px solid $yellow-200;
+      background-color: $yellow-25;
+      color: $yellow-700;
+    }
+  }
+}

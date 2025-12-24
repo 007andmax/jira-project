@@ -132,6 +132,16 @@
             <div class="app-left-panel__menu-icon qt-icon icon__folder qt-icon__gray-400 --file-manager-filled"></div>
         </div>
         <div
+            *ngIf="!customerPortalStateService.isCustomerPortal && getPermissions('MANAGE_INTEGRATIONS')"
+            class="app-left-panel__menu-icon-wrap pointer"
+            (click)="changePage('INTEGRATIONS');onChangeState('all-integrations')"
+            [ngClass]="{'--active':page === 'INTEGRATIONS' }"
+            placement="right"
+            ngbTooltip="Integrations"
+        >
+            <div class="app-left-panel__menu-icon qt-icon icon__integrations qt-icon__gray-400 --file-manager-filled"></div>
+        </div>
+        <div
             class="app-left-panel__menu-icon-wrap app-left-panel__menu-icon-wrap-settings pointer"
             (click)="changePage('SETTINGS');onOpenPanel();onChangeState('myprofile-component')"
             [ngClass]="{'--active':page === 'SETTINGS' }"
@@ -251,5 +261,12 @@
             [activePage]="state"
             [hidden]="page !== 'TASKS'"
         ></app-left-panel-tasks>
+        <app-left-panel-integrations
+            #panelIntegrations
+            (onOpenPanel)="onOpenPanel()"
+            (onChangeState)="onChangeState($event)"
+            [activePage]="state"
+            [hidden]="page !== 'INTEGRATIONS'"
+        ></app-left-panel-integrations>
     </div>
 </div>

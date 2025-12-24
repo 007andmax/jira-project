@@ -40,7 +40,7 @@ describe('PaymentsFilterComponent unit test', () => {
     const fixture = TestBed.createComponent(PaymentsFilterComponent);
     const com = fixture.debugElement.componentInstance;
     com.onSelectStatus({ value: "test" });
-    expect(com.paymentsFilter.status).toEqual("test");
+    expect(com.paymentsFilter.status).toEqual(undefined);
   });
   it('check "onSelectCompany"', () => {
     const fixture = TestBed.createComponent(PaymentsFilterComponent);

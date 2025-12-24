@@ -14,9 +14,10 @@ export class Payment {
     paymentData: Array<PaymentData> = [];
     paymentMethod: string;
     reference: string;
-    refundMethod: string;
+    paymentStatus: string;
     totalSum: number;
     multipleCompanies: Array<any> = [];
+    transactionId: string;
     constructor(data) {
         this.clientCompanyId = data.clientCompanyId;
         this.clientCompanyName = data.clientCompanyName;
@@ -32,9 +33,10 @@ export class Payment {
         }) : [];
         this.paymentMethod = data.paymentMethod;
         this.reference = data.reference;
-        this.refundMethod = data.refundMethod;
+        this.paymentStatus = data.paymentStatus;
         this.totalSum = data.totalSum;
         this.multipleCompanies = data.multipleCompanies;
+        this.transactionId = data.transactionId;
     }
     public getDataForExportPDF() {
         return {
@@ -45,7 +47,7 @@ export class Payment {
             partialPaidAmount: this.partialPaidAmount,
             partialPaidInvoices: this.partialPaidInvoices,
             reference: this.reference,
-            status: this.refundMethod ? 'Refund' : 'Paid'
+            status: this.paymentStatus ? 'Refund' : 'Paid'
         }
     }
 

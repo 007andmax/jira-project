@@ -1,0 +1,260 @@
+<div
+    [hidden]="!showAdd"
+    class="qt-aside-modern"
+>
+    <form
+        class="qt-h100"
+        [formGroup]="modelForm"
+    >
+        <div class="qt-aside-modern__header">
+            <div class="qt-aside-modern__header-info qt-df qt-ai-c">
+                <div class="qt-aside__title">Edit Card</div>
+            </div>
+            <div>
+                <div
+                    class="qt-aside__close-modal"
+                    (click)="closed()"
+                >
+                    <div class="qt-icon icon__close qt-sz-20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="qt-aside-modern__content">
+             <div class="qt-inputs-row" *ngIf="checkExpiryLabel()">
+                <div class="qt-aside-modern__notification" [ngClass]="{'qt-aside-modern__notification--error': checkExpiryLabel() == 'EXPIRED'}">
+                  <div *ngIf="checkExpiryLabel() == 'EXPIRING_SOON'" class="qt-icon icon__triangle-warning qt-icon__yellow-700 qt-sz-20"></div>
+                  <div *ngIf="checkExpiryLabel() == 'EXPIRED'" class="qt-icon icon__alert qt-icon__red-600 qt-sz-20"></div> 
+                  <span class="qt-fw-500 qt-fw-500 qt-color-gray-900 qt-sz-14 qt-w100" [textContent]="checkExpiryLabel() == 'EXPIRING_SOON' ? 'This card is expiring soon.' : 'This card has expired'"></span>
+                </div>
+            </div>
+            <div class="qt-inputs-row --required">
+                <div class="qt-input-block">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Card Number
+                    </label>
+                    <input
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="cardNumber"
+                        [attr.placeholder]="!maskedCardNumber ? '1234 1234 1234 1234' : maskedCardNumber"
+                        maxlength="20"
+                    >
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Expiration Date
+                    </label>
+                    <input
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="expiryDate"
+                        placeholder="YYMM"
+                        maxlength="4"
+                    >
+                </div>
+                <div class="qt-input-block qt-f50">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Security Code
+                    </label>
+                    <input
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="cvd"
+                        placeholder="CVC"
+                    >
+                </div>
+            </div>
+               <div class="qt-inputs-row --required">
+                <div class="qt-input-block">
+                    <company-drop-down
+                        #companyDP
+                        [placeholder]="'Enter Company Name'"
+                        [editItem]="selectedCompany"
+                        [errorMessage]="'The company name is required'"
+                        [title]="'Company'"
+                        [field]="'name'"
+                        [search]="true"
+                        [change]="true"
+                        [isBlockClear]="true"
+                        (onSelectedItem)="onSelectCompany($event)"
+                    >
+                    </company-drop-down>
+                </div>
+            </div>
+             <div class="qt-inputs-row --required">
+                <div class="qt-input-block">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Card Holder Name
+                    </label>
+                    <input
+                         id="add-ticket-subject"
+                        placeholder="First name and Last name"
+                        class="qt-input-block__input"
+                        formControlName="cardholderName"
+                        maxlength="100"
+                    >
+                </div>
+            </div>
+            <div class="qt-inputs-row --required">
+                <div class="qt-input-block">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Address
+                    </label>
+                    <input
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="address"
+                        placeholder="Enter address"
+                        maxlength="50"
+                    >
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Street Number
+                    </label>
+                    <input
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="streetnumber"
+                        placeholder="Enter Street Number"
+                        maxlength="19"
+                    >
+                </div>
+                <div class="qt-input-block qt-f50">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Street Name
+                    </label>
+                    <input
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="streetname"
+                        placeholder="Enter Street Name"
+                        maxlength="19"
+                    >
+                </div>
+            </div>
+             <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                     <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Country or region
+                    </label>
+                    <input
+                         id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="country"
+                        placeholder="Enter Country or region"
+                        maxlength="50"
+                    >
+                </div>
+                <div class="qt-input-block qt-f50">
+                     <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Province/State
+                    </label>
+                    <input
+                         id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="state"
+                        placeholder="Enter Province/State"
+                        maxlength="50"
+                    >
+                </div>
+            </div>
+            <div class="qt-inputs-row">
+                <div class="qt-input-block qt-f50">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        City
+                    </label>
+                    <input
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="city"
+                        placeholder="City Name"
+                        maxlength="50"
+                    >
+                </div>
+                <div class="qt-input-block qt-f50">
+                    <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
+                    >
+                        Postal Code
+                    </label>
+                    <input
+                        id="add-ticket-subject"
+                        class="qt-input-block__input"
+                        formControlName="zipcode"
+                        placeholder="Postal Code"
+                        maxlength="9"
+                    >
+                </div>
+            </div>
+            <!-- <div class="qt-inputs-row">
+                <label
+                    class="qt-checkbox"
+                    for="email-payment"
+                >
+                    <input
+                        id="email-payment"
+                        type="checkbox"
+                    >
+                    <span></span>
+                    <div class="qt-ml-8 qt-fw-400 qt-lh-1">Set as Primary card</div>
+                </label>
+            </div> -->
+        </div>
+        <div class="qt-aside-modern__footer">
+            <div class="qt-df qt-w100">
+                <button
+                    class="qt-button --gray qt-mr-12 qt-w100 qt-jc-c"
+                    (click)="closed()"
+                >
+                    Cancel
+                </button>
+                <button
+                    class="qt-button qt-w100 qt-jc-c"
+                    appDisabledBtn
+                    #addBtn="disabled"
+                    (onClick)="save()"
+                    [ngClass]="{'--loading':addBtn.isBlock()}"
+                >
+                    <span *ngIf="!addBtn.isBlock()">Save</span>
+                    <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

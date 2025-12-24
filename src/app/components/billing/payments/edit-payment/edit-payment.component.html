@@ -7,23 +7,6 @@
         ></div>
     </div>
     <div class="qt-aside-modern__content --no-padding">
-        <div class="qt-df qt-pos-rel address-block">
-            <div class="qt-w50 qt-pt-16 qt-pr-24 qt-pl-32 qt-pb-24">
-                <div class="qt-input-block">
-                    <div class="qt-input-block__label">Customer Name</div>
-                    <app-drop-down
-                        class="search-company invoices-company-filter"
-                        [placeholder]="'Select Company'"
-                        [change]="false"
-                        [isDisabled]="true"
-                        [class]="['qt-dropdown']"
-                        [field]="'name'"
-                        [editItem]="selectedCompany"
-                        [list]="companies"
-                    ></app-drop-down>
-                </div>
-            </div>
-        </div>
         <div class="qt-df qt-pt-16 qt-pl-30 qt-pr-30 qt-mb-16">
             <div class="qt-input-block qt-mr-16 qt-w100">
                 <div class="qt-input-block__label">Payment Date</div>
@@ -35,6 +18,7 @@
                     [useMaxDate]="true"
                     [container]="'body'"
                     [dropdownClass]="['date-picker']"
+                    [isDisabled]="selectedPaymentMode.value == 'DEBIT_CARD' || selectedPaymentMode.value == 'CREDIT_CARD'"
                     (onChange)="onChangeDate($event)"
                 ></app-date-picker>
             </div>
@@ -52,6 +36,7 @@
                         [ngModel]="amountReceived_str"
                         (change)="onChangeAmountReceived($event)"
                         appToFixed
+                        [disabled]="selectedPaymentMode.value == 'DEBIT_CARD' || selectedPaymentMode.value == 'CREDIT_CARD'"
                     >
                     <app-mat-error
                         class="invalid-feedback amount-received-invalid-feedback"
@@ -72,6 +57,7 @@
                     [isBlockClear]="true"
                     [field]="'title'"
                     [list]="paymentModes"
+                    [isDisabled]="true"
                     (onSelectedItem)="onSelectPaymentModes($event)"
                 ></app-drop-down>
             </div>
@@ -80,6 +66,7 @@
                 <input
                     type="text"
                     [(ngModel)]="editPayment.reference"
+                    [disabled]="selectedPaymentMode?.value === 'CREDIT_CARD' || selectedPaymentMode?.value === 'DEBIT_CARD'"
                 >
             </div>
         </div>
@@ -144,6 +131,7 @@
                                     [money]="true"
                                     [ngModel]="invoice.paidAmount_str"
                                     (change)="onChangePayment($event,invoice)"
+                                     [disabled]="selectedPaymentMode.value == 'DEBIT_CARD' || selectedPaymentMode.value == 'CREDIT_CARD'"
                                     appToFixed
                                 >
                             </td>

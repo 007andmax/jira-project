@@ -11,6 +11,7 @@ import { Payment } from './class/payment';
 import { PaymentInvoice } from './class/payment-invoice';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
+import { PaymentsCardsComponent } from '../../payments/payments-cards/payments-cards.component';
 
 
 @Component({
@@ -39,9 +40,10 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
   selectedPaymentMode = new CompanySetting('Cheque', 'CHEQUE');
   sub: Subscription = new Subscription();
   @ViewChild('recordPayment', { static: false }) recordPayment: DisabledBtnDirective;
+  @ViewChild('paymentsCards', { static: false }) paymentsCards: PaymentsCardsComponent;
   selectedInvoices: Array<Invoice> = [];
   @Output() onClose = new EventEmitter<any>();
-  constructor(private companiesState: CompaniesStateService,
+  constructor(public companiesState: CompaniesStateService,
     private invoiceStateService: InvoiceStateService,
     private invoicesService: InvoicesService) { }
 
@@ -65,6 +67,7 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
   }
   onSelectPaymentModes(data) {
     this.selectedPaymentMode = data;
+    if (data.value != 'CREDIT_CARD' && data.value != 'DEBIT_CARD') this.payment.setCardId(null);
     this.payment.setPaymentMethod(data.value);
   }
   onChangeAmountReceived(event) {
@@ -110,11 +113,14 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
   public onChangePayment(val, invoice) {
     let value = Number(val.target.value);
     invoice.setPaymentAmount(parseFloat((((value) * 100) / 100).toFixed(2)));
-    this.validate.setValidPayment(true);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
+  onSelectCard(card) {
+    this.payment.setCardId(card.id);
+    this.validate.setCardId(true);
+  }
   create() {
-    if (this.selectedCompanies.length == 0 || this.invoices.filter(item => item.selected).length == 0 || !this.validate.isValidate(this.amountReceived, this.invoices)) return;
+    if (this.selectedCompanies.length == 0 || this.invoices.filter(item => item.selected).length == 0 || !this.validate.isValidate(this.amountReceived, this.invoices, this.payment)) return;
     this.invoices.forEach(item => {
       if (item.selected) {
         this.payment.addInvoiceId(item.id);
@@ -128,7 +134,6 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
       this.payment.resetPartialPayments();
       this.close();
     }, err => {
-      this.validate.setValidPayment(false);
       this.recordPayment.setDisabled(false);
       this.payment.resetInvoiceIds();
       this.payment.resetPartialPayments();
@@ -185,6 +190,10 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
   }
   onSelectCompany(items) {
     this.selectedCompanies = items;
+    if (this.paymentsCards) {
+      this.paymentsCards.selectedCompanies = items;
+      this.paymentsCards.checkCardForRemove();
+    }
     if (items.length > 0) {
       this.invoicesFilter.setLimit(10000);
       this.invoicesFilter.setStatus("UNPAID");

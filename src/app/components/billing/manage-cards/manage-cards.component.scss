@@ -1,0 +1,88 @@
+@import './src/assets/styles/variable';
+
+.qt-page-list {
+  padding: 0;
+  background-color: $white;
+}
+
+.qt-page-list__header-title {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: $gray-900;
+}
+
+.qt-page-list__header.--sticky {
+  margin: 0;
+  padding: 15px 32px;
+  background-color: $gray-50;
+  border-bottom: 1px solid $gray-200;
+}
+
+.qt-page-list__table {
+  padding-inline: 32px;
+  width: 100%;
+}
+
+.qt-page-list__header-thead {
+  background-color: $gray-50;
+  border: 1px solid $gray-200;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+
+  &-container {
+    position: sticky;
+    top: 57px;
+    z-index: 1;
+    background-color: $white;
+    padding-top: 32px;
+  }
+
+  &__row {
+    background-color: $gray-50;
+
+    & > div {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      font-weight: 500;
+      font-size: 14px;
+      text-transform: unset;
+      color: $gray-500;
+
+      &:first-child {
+        padding-left: 25px;
+      }
+
+      &:last-child {
+        padding-right: 25px;
+      }
+    }
+  }
+}
+
+.manage-cards {
+  &__company {
+    flex: 2 1 400px;
+  }
+
+  &__card-number {
+    flex: 2 1 388px;
+  }
+
+  &__expire-date {
+    flex: 0 0 133px;
+  }
+
+  &__status {
+    flex: 0 0 127px;
+  }
+
+  &__menu {
+    flex: 0 0 66px;
+  }
+}
+
+.pengind-loading {
+  bottom: 20px;
+  top: auto;
+}

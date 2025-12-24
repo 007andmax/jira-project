@@ -511,7 +511,7 @@ app-company-dash-detail {
   background-color: $white;
   padding: 32px;
   position: relative;
-  border-radius: 6px;
+  border-radius: 8px;
   &.confirm-user-modal {
     h3 {
       font-weight: 400;
@@ -539,7 +539,6 @@ app-company-dash-detail {
       line-height: 1.4;
       color: $gray-900;
       position: relative;
-      margin-right: 26px;
     }
     p {
       font-weight: 400;
@@ -1138,13 +1137,13 @@ app-quotes-item {
 
       .name {
         position: relative;
-        @include body-m__m;
-        color: $gray-900;
+        @include body-r__m;
+        margin-bottom: 6px;
       }
 
       .phone {
-        @include body-m;
-        color: $gray-400;
+        @include сaption-l;
+        color: $gray-500;
       }
     }
     &__email-address {
@@ -2363,11 +2362,12 @@ app-ticket-profile-updates-note {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   background-color: $white;
   border-radius: 6px;
   border: 1px solid $gray-200;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 
   &__prepend {
     border-radius: 6px 0 0 6px;
