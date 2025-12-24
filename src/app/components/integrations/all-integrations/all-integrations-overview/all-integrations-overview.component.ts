@@ -55,19 +55,16 @@ export class AllIntegrationsOverviewComponent implements OnDestroy {
         [Validators.required,]
       ],
     })
-    //  this.modelForm.get('cryptType')?.disable();
     this.integrationsService.getSettings().subscribe((res: any) => {
       this.showPreloader = false;
       this.isEdit = true;
       this.isConnected = res.connected;
-      console.log("res", res);
       this.modelForm.patchValue({
         storeId: res.storeId,
         apiToken: res.apiToken,
         cryptType: res.cryptType
       })
       this.status = 'CONNECTED';
-      console.log("this.modelForm.value", this.modelForm.value)
     }, err => {
       this.showPreloader = false;
     })
@@ -80,9 +77,7 @@ export class AllIntegrationsOverviewComponent implements OnDestroy {
   }
   onDisconnect() {
     this.onInitRequest.emit(true);
-    //  this.addBtn.setDisabled(true);
     this.integrationsService.disconnect().subscribe(data => {
-      //  this.addBtn.setDisabled(false);
       this.confirmStateService.initRequest(false);
       this.submitted = false;
       this.isEdit = false;
@@ -95,7 +90,6 @@ export class AllIntegrationsOverviewComponent implements OnDestroy {
       })
       this.companiesStateService.currentCompany.isMonerisConnected = false;
     }, err => {
-      //  this.addBtn.setDisabled(false);
       this.confirmStateService.initRequest(false);
       this.onInitRequest.emit(false);
     })
@@ -127,17 +121,13 @@ export class AllIntegrationsOverviewComponent implements OnDestroy {
       return;
     }
     this.onInitRequest.emit(true);
-    //  this.addBtn.setDisabled(true);
-    console.log("this.modelForm.value", this.modelForm.value);
     ((this.isEdit) ? this.integrationsService.editSettings(this.modelForm.value) : this.integrationsService.setSettings(this.modelForm.value)).subscribe(data => {
-      //  this.addBtn.setDisabled(false);
       this.status = 'CONNECTED';
       this.isEdit = true;
       this.isConnected = data.connected;
       this.companiesStateService.currentCompany.isMonerisConnected = data.connected;
       this.onInitRequest.emit(false);
     }, err => {
-      //  this.addBtn.setDisabled(false);
       this.onInitRequest.emit(false);
     })
   }

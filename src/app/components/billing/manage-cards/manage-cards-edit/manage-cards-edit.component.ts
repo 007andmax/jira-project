@@ -18,9 +18,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
           id: res.id,
           cardType: res.cardType,
           cardholderName: res.cardholderName,
-          // cardNumber: res.maskedCardNumber,
           expiryDate: res.expiryDate,
-          //  cvd: res.cvd,
           streetnumber: res.streetnumber,
           streetname: res.streetname,
           zipcode: res.zipcode,
@@ -103,9 +101,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
         req[key] = this.modelForm.value[key];
       }
     });
-    console.log("req", req);
     this.manageCardsService.editCard(req).subscribe(data => {
-      console.log("edit card response", data);
       this.manageCardsStateService.fastEditCard(data);
       this.addBtn.setDisabled(false);
       this.closed();
