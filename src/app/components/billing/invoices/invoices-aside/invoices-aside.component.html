@@ -281,7 +281,7 @@
                 Cancel
             </button>
             <button
-                [disabled]="companiesState.currentCompany && !companiesState.currentCompany.isMonerisConnected"
+                [disabled]="(selectedPaymentMode?.value === 'CREDIT_CARD' || selectedPaymentMode?.value === 'DEBIT_CARD') ? companiesState.currentCompany && !companiesState.currentCompany.isMonerisConnected : false"
                 class="qt-button "
                 appDisabledBtn
                 #recordPayment="disabled"
