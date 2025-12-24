@@ -107,7 +107,9 @@
         'icon__payment-method-visa':item.cardType == 'VISA'}"
                 class="qt-icon__background-unset card-item__icon qt-bg-contain qt-fs-0"
             ></div>
-    <div class="card-item__number qt-w100" [textContent]="item.maskedCardNumber" ></div>
+       <div [ngClass]="{'qt-w100' : item.cardholderName == 'N/A'}" class="card-item__number qt-fs-13 qt-fw-400 qt-color-gray-500" [textContent]="item.maskedCardNumber" ></div>
+        <div *ngIf="item.cardholderName != 'N/A'" class="card-item__cardholder_name qt-ml-4 qt-fs-14 qt-fw-500 qt-color-gray-900 qt-w100" [textContent]="item.cardholderName" ></div>
+   
      <div
                 class="grey-dropdown right with-icons"
                 ngbDropdown

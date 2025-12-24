@@ -3,7 +3,7 @@ export class PaymentsReportTotal {
     CHEQUE: number;
     CREDIT_CARD: number;
     DEBIT_CARD: number;
-    REFUND_PAYMENT: number;
+    REFUND_COMPLETED: number;
     TOTAL: number;
     WIRE_TRANSFER: number;
     constructor(data) {
@@ -11,7 +11,7 @@ export class PaymentsReportTotal {
         this.CHEQUE = data.CHEQUE;
         this.CREDIT_CARD = data.CREDIT_CARD;
         this.DEBIT_CARD = data.DEBIT_CARD;
-        this.REFUND_PAYMENT = data.REFUND_PAYMENT;
+        this.REFUND_COMPLETED = data.REFUND_COMPLETED;
         this.TOTAL = data.TOTAL;
         this.WIRE_TRANSFER = data.WIRE_TRANSFER;
     }

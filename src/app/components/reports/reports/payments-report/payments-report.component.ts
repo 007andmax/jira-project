@@ -23,7 +23,7 @@ export class PaymentsReportComponent implements OnInit {
   new TitleListType('Credit Card', 'CREDIT_CARD'),
   new TitleListType('Debit', 'DEBIT_CARD'),
   new TitleListType('Wire Transfer', 'WIRE_TRANSFER'),
-  new TitleListType('Refunds', 'REFUND_PAYMENT')];
+  new TitleListType('Refunds', 'REFUND_COMPLETED')];
   constructor(public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
   ) { }

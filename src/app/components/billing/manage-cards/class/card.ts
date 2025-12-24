@@ -11,6 +11,7 @@ export class Card {
     "address": string;
     "companyName": string;
     "cardType": string;
+    cardholderName: string;
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];

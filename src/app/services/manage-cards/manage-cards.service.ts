@@ -58,7 +58,13 @@ export class ManageCardsService {
     return this.http.get(this.apiUrl + `moneris/cards/${card_id}`);
   }
   public getCards(page, data = {}, size = 20) {
-    return this.http.post(this.apiUrl + `moneris/cards/view?page=${page}&size=${size}`, data);
+    this.appStateService.setServerError(true);
+    return this.http.post(this.apiUrl + `moneris/cards/view?page=${page}&size=${size}`, data).pipe(
+      tap((res: any) => {
+        this.appStateService.setServerError(false);
+        this.appStateService.changeDetectorRef();
+        return res;
+      }));
   }
 
 }

@@ -77,8 +77,10 @@
                 <div class="payments-page__payment-info qt-pr-15">
                     <div>
                         <div class="qt-fw-600 qt-fs-16 qt-lh-133 qt-mb-4 qt-color-gray-900 qt-df qt-ai-c">
-                            <div class="icon__status-green qt-mr-5 qt-ic-c qt-sz-24"></div>
-                            Amount Received
+                            <div [ngClass]="{'icon__unsubscribe' : payment.paymentStatus == 'PAYMENT_FAILED',
+                                'icon__status-green' : payment.paymentStatus != 'PAYMENT_FAILED'
+                            }" class="qt-mr-5 qt-ic-c qt-sz-24"></div>
+                            {{payment.paymentStatus == 'PAYMENT_FAILED' ? 'Payment Failed' : 'Amount Received'}}
                         </div>
                         <div
                             class="qt-fs-40 qt-fw-600 qt-lh-12 qt-color-gray-900"

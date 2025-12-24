@@ -76,7 +76,7 @@
                     <span>Refunds</span>
                     <span
                         class="qt-fw-600 payments-total-item__price"
-                        [textContent]="paymentsReport.totalSumsPerPaymentMethod.REFUND_PAYMENT | currency"
+                        [textContent]="paymentsReport.totalSumsPerPaymentMethod.REFUND_COMPLETED | currency"
                     ></span>
                 </div>
                 <div class="line"></div>
@@ -134,7 +134,7 @@
                                 ></td>
                                 <td
                                     class="payments-report__col-invoice"
-                                    [textContent]="perseInvoices(item.partialPaidInvoices)"
+                                    [textContent]="perseInvoices(item.partialPaidInvoices || [])"
                                 >
                                 </td>
                                 <td
