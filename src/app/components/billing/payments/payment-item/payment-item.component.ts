@@ -9,6 +9,7 @@ import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
   selector: 'app-payment-item',
@@ -27,6 +28,7 @@ export class PaymentItemComponent implements OnInit {
   paymentSum: number;
   allPaymentsSum: number = 0;
   constructor(
+    private appService: AppService,
     private modalService: NgbModal,
     private paymentsStateService: PaymentsStateService,
     public customerPortalStateService: CustomerPortalStateService,
@@ -36,6 +38,9 @@ export class PaymentItemComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+  downloadPDF() {
+    this.appService.download(`/payments/pdf/${this.payment.id}`, `${this.payment.clientCompanyName}.pdf`);
   }
   public getDate() {
     return moment(this.payment.createdAt).format('DD MMM YYYY');
