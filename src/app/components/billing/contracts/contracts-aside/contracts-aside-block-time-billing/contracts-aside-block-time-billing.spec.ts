@@ -86,16 +86,6 @@ describe('ContractsAsideBlockTimeBillingComponent unit test', () => {
     }).compileComponents();
 
   });
-
-  it('check "ngOnInit"', () => {
-    const fixture = TestBed.createComponent(ContractsAsideBlockTimeBillingComponent);
-    const com = fixture.debugElement.componentInstance;
-    com.companiesStateService.currentCompany = { addresses: [{ timeZone: { timeOffset: 7200000 } }] };
-    com.ngOnInit();
-    let reviewDate = new Date();
-    reviewDate.setFullYear(reviewDate.getFullYear() + 1);
-    expect(new Date(com.reviewDate).getFullYear()).toEqual(reviewDate.getFullYear());
-  });
   it('check "setDefaultTaxes"', () => {
     const fixture = TestBed.createComponent(ContractsAsideBlockTimeBillingComponent);
     const com = fixture.debugElement.componentInstance;

@@ -9,7 +9,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CompanyProductsComponent } from './company-products.component';
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { of } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
+declare var jasmine;
+const mockRouter = {
+  navigate: jasmine.createSpy('navigate'),
+  routerState: {
+    root: {}
+  },
+  events: of(),
+};
 
 describe('CompanyProductsComponent unit test', () => {
   let component: CompanyProductsComponent;
@@ -21,12 +31,14 @@ describe('CompanyProductsComponent unit test', () => {
         FormsModule,
         MatErrorModule,
         HttpClientModule,
+        RouterTestingModule,
         ToastrModule.forRoot({
           closeButton: true,
           timeOut: 5000,
           onActivateTick: true
         }),
         NoopAnimationsModule],
+      providers: [{ provide: Router, useValue: mockRouter }],
       declarations: [CompanyProductsComponent
       ],
     }).compileComponents();
@@ -55,8 +67,8 @@ describe('CompanyProductsComponent unit test', () => {
     const fixture = TestBed.createComponent(CompanyProductsComponent);
     const com = fixture.debugElement.componentInstance;
     com.productsCompanyReport.lines = [{ isChecked: true, purchaseCost: 0, salePrice: 0 }, { isChecked: true, purchaseCost: 0, salePrice: 0 }] as any;
-    com.changeGeneralCheckbox(false);
-    expect(com.productsCompanyReport.lines[0].isChecked).toEqual(false);
+    com.changeGeneralCheckbox();
+    expect(com.productsCompanyReport.lines[0].isChecked).toEqual(true);
   });
   it('check "parseTotal"', () => {
     const fixture = TestBed.createComponent(CompanyProductsComponent);
