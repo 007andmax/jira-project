@@ -47,8 +47,8 @@ export class TasksService {
   changeStatusTask(taskId, status) {
     return this.http.put(`${this.apiUrl}/tasks/${taskId}/status?status=${status}`, {});
   }
-  getTasks(page, techUserId = null, filter = null, isArchived = false) {
-    return this.http.get(`${this.apiUrl}tasks?size=10&page=${page}${techUserId ? `&userId=${techUserId}` : ''}${filter ? `&filter=${filter}` : ''}${isArchived ? `&archived=true` : ''}`);
+  getTasks(page, techUserId = null, filter = null, isArchived = false, size = 10) {
+    return this.http.get(`${this.apiUrl}tasks?size=${size}&page=${page}${techUserId ? `&userId=${techUserId}` : ''}${filter ? `&filter=${filter}` : ''}${isArchived ? `&archived=true` : ''}`);
   }
   getTaskDetail(taskId) {
     return this.http.get(`${this.apiUrl}tasks/${taskId}`);
