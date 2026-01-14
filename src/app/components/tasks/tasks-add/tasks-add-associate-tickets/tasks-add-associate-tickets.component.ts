@@ -90,7 +90,11 @@ export class TasksAddAssociateTicketsComponent {
     this.setDefaultScoll();
     this.onScroll();
   }
-
+  openNewTab() {
+    this.ticketStateService.setTicketRoutingId(this.selectedItem.id);
+    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${this.selectedItem.id}`;
+    window.open(url, '_blank');
+  }
   clearClient() {
 
     this.selectedItem = null;

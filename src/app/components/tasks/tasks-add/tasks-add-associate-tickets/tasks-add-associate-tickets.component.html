@@ -4,11 +4,7 @@
     [autoClose]="'outside'"
     #globalSearch="ngbDropdown"
 >
-
-
-
-
-    <div ngbDropdownAnchor>
+    <div class="qt-df qt-ai-c" ngbDropdownAnchor>
         <span class="qt-input-search">
             <input
                 [ngClass]="{'disabled': isDisabled}"
@@ -36,7 +32,9 @@
                 ></i>
             </span>
         </span>
+         <span *ngIf="selectedItem" class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info qt-pointer qt-ml-12" (click)="openNewTab()">Open in new tab</span>
     </div>
+   
     <div
         ngbDropdownMenu
         aria-labelledby="dropdownTickets"
