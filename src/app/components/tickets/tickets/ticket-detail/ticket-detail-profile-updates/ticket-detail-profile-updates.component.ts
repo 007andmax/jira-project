@@ -74,7 +74,6 @@ export class TicketDetailProfileUpdatesComponent implements OnInit, OnDestroy {
     })
   }
   getUpdates(id) {
-    console.log("getUpdates");
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
