@@ -15,6 +15,10 @@
 .dashboard-tabs {
   display: flex;
   gap: 24px;
+  position: sticky;
+  top: 88px;
+  z-index: 1;
+  background: $white;
 
   &::before {
     content: unset;
