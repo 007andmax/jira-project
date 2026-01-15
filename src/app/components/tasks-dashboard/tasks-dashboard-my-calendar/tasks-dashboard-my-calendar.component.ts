@@ -32,9 +32,10 @@ export class TasksDashboardMyCalendarComponent {
     public tasksRealTimeService: TasksRealTimeService,
   ) { }
   ngOnInit() {
-    this.getTasksCalendar();
-    this.startTimelineUpdater();
     this.filter.techUser = this.usersStateService.currentUser;
+    if (this.filter.techUser) this.getTasksCalendar();
+    this.startTimelineUpdater();
+
     let getChangeCompanies = this.tasksRealTimeService.changeTasksArray.subscribe((data) => {
 
       const taskDate = new Date(data.data.startDate);
