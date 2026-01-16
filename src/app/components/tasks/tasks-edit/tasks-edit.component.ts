@@ -135,7 +135,7 @@ export class TasksEditComponent extends TasksAddComponent {
     }
   }
   onCloseDatePicker(event) {
-      if (!event) this.isInitEditDate = true;
+    if (!event) this.isInitEditDate = true;
     if (event && this.currentService.item) {
       let update = this.task.ticketUpdateList.find(item => item.type == "SERVICE");
       this.currentService.setDurationStart(this.modelForm.controls["startDate"].value);
@@ -228,7 +228,8 @@ export class TasksEditComponent extends TasksAddComponent {
     if (this.currentService.item) return;
     this.confirmStateService.setConfirmAction(ARCHIVE_TASK);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `The Task has been successfully archived`;
+    modalRef.componentInstance.header = `Archive Task`;
+    modalRef.componentInstance.message = `Are you sure you want to archive this task?`;
     this.cd.detectChanges();
   }
   onArchiveTask() {
@@ -287,7 +288,8 @@ export class TasksEditComponent extends TasksAddComponent {
     if (this.currentService.item) return;
     this.confirmStateService.setConfirmAction(DELETE_TASK);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `The Task has been successfully deleted`;
+    modalRef.componentInstance.header = `Delete Task`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this task?`;
     this.cd.detectChanges();
   }
   public onSelectService(item) {

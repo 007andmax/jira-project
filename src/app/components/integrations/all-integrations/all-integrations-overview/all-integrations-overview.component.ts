@@ -97,6 +97,7 @@ export class AllIntegrationsOverviewComponent implements OnDestroy {
   disconnect() {
     this.confirmStateService.setConfirmAction(DISCONNECT_CONNECTION);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = 'Disconnect connection';
     modalRef.componentInstance.message = `If you disconnect Moneris, all saved credit cards for this company will be permanently deleted and cannot be recovered.
     <br/>You will no longer be able to process credit card payments or add new cards using Moneris for this company.`;
   }

@@ -96,7 +96,8 @@ export class ManageTagsDevicesComponent implements OnInit, OnDestroy {
     this.deviceTagsStateService.setTagForDelete(tag);
     this.confirmStateService.setConfirmAction(DELETE_DEVICE_TAG);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = tag.name;
+    modalRef.componentInstance.header = `Delete Tag`;
+    modalRef.componentInstance.message = `Are you sure want to delete “${tag.name}” Tag?`;
   }
   public trackById(index, item) {
     return item.id;

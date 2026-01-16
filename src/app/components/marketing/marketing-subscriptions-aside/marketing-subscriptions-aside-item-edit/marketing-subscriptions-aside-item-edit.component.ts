@@ -41,7 +41,8 @@ export class MarketingSubscriptionsAsideItemEditComponent implements OnInit {
   remove() {
     this.confirmStateService.setConfirmAction(DELETE_SUBSCRIPTION_TYPE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Subscription`;
+    modalRef.componentInstance.header = `Remove Subscription`;
+    modalRef.componentInstance.message = `Are you sure want to remove this subscription?`;
     this.marketingEmailStateService.setSubscriptionTypeForRemove(this.subscription);
   }
 }

@@ -163,8 +163,8 @@ export class ProductComponent implements OnInit, OnDestroy {
     if (this.category.commissionRate === null) {
       this.confirmStateService.setConfirmAction(CHANGE_COMMISSION_PRODUCT);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-      modalRef.componentInstance.message = `Do you want this commission to fact old items?`;
-
+      modalRef.componentInstance.header = `Apply Commission`;
+      modalRef.componentInstance.message = `Do you want the commission to be applied old items?`;
     } else {
       this.factItem = false;
       this.setCategoryRate();

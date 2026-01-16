@@ -136,7 +136,9 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   remove() {
     this.confirmStateService.setConfirmAction(ARCHIVE_COMPANY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to archive ${this.company.name}? All related users and service agreements will be archived and all agents will be uninstalled.`;
+    modalRef.componentInstance.header = `Archive Company`;
+    modalRef.componentInstance.message = `All related users and service agreements will be archived and all
+      agents will be uninstalled`;
     this.companiesStateService.setCompnayForArchive(this.company);
     this.cd.detectChanges();
   }
@@ -163,6 +165,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   onRestore() {
     this.confirmStateService.setConfirmAction(DEARCHIVE_COMPANY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = `Restore Company`;
     modalRef.componentInstance.message = `Do you want to restore ${this.company.name}?`;
     this.companiesStateService.setCompnayForDeArchive(this.company);
     this.cd.detectChanges();

@@ -172,6 +172,7 @@ export class TerminalComponent implements OnInit, OnDestroy {
     }
     this.confirmStateService.setConfirmAction(DELETE_COMMAND);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = `Delete Script`;
     modalRef.componentInstance.message = `Are you sure you want to delete ${title} script?`;
   }
   openRunScript() {

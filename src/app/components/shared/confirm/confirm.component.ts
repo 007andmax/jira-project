@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./confirm.component.scss']
 })
 export class ConfirmComponent implements OnInit, OnDestroy {
+  @Input() public header = '';
   @Input() public message = '';
   action: string = null;
   btnCancel: string = 'no';
@@ -82,11 +83,7 @@ export class ConfirmComponent implements OnInit, OnDestroy {
       && this.action !== 'ARCHIVE_TASK'
       && this.action !== 'REMOVE_CARD'
       && this.action !== 'DISCONNECT_CONNECTION'
-      && !this.isSignaturePage()
       && !this.isSettingsPage();
-  }
-  public isSignaturePage() {
-    return this.action === 'DELETE_SIGNATURE';
   }
   public isSettingsPage() {
     return this.action === 'DELETE_GL_NUMBER' ||

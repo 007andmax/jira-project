@@ -60,6 +60,7 @@ export class TicketDetailChangeCompanyComponent implements OnInit, OnDestroy {
     this.selectedCompany = data;
     this.confirmStateService.setConfirmAction(CHANGE_COMPANY_TICKET);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = `Reassign Company`;
     modalRef.componentInstance.message = `Do you want to assign the following company to the ticket - ${data.name}`;
   }
   ngOnDestroy(): void {

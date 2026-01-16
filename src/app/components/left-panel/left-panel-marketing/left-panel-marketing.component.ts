@@ -125,6 +125,9 @@ export class LeftPanelMarketingComponent implements OnInit {
     this.confirmStateService.setConfirmAction(DELETE_GLOBAL_USERS_FILTER);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     this.usersStateService.setGlobalFilterForRemove(filter);
+    modalRef.componentInstance.header = 'Delete saved filter';
+    modalRef.componentInstance.message = `Are you sure you want to delete this saved filter?`;
+
   }
   public getGLobalFilters() {
     this.isGetGlobalFilters = true;

@@ -209,12 +209,14 @@ export class FileManagerComponent implements OnInit, OnDestroy {
   onRemoveFile(data) {
     this.confirmStateService.setConfirmAction(REMOVE_FILE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = `Delete File`;
     modalRef.componentInstance.message = `Are you sure you want to delete this folder?`;
     this.fileManagementStateService.setFileForRemove(data);
   }
   onRemoveCategory(data) {
     this.confirmStateService.setConfirmAction(REMOVE_CATEGORY_FILES);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = `Delete Folder`;
     modalRef.componentInstance.message = `Are you sure you want to delete this folder?`;
     this.fileManagementStateService.setCategoryForRemove(data);
   }

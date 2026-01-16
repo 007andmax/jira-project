@@ -51,6 +51,7 @@ export class TicketDetailAttachmentsComponent extends TicketProfileAttachmentsCo
     this.ticketStateService.setAttachmentForRemove(this.attachments.find(item => item.file.id == id));
     this.confirmStateService.setConfirmAction(REMOVE_ATTACHMENT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = `Delete Attachment`;
     modalRef.componentInstance.message = `Are you sure you want to delete this attachment?`;
   }
 }
