@@ -33,7 +33,9 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
     private paymentsStateService: PaymentsStateService) { }
 
   ngOnInit() {
-
+    this.paymentsFilter.setPaymentStatus('PAYMENT_COMPLETED');
+    this.statusDp.selectItemWithOutChanges(new CompanySetting('Payment Completed', 'PAYMENT_COMPLETED'));
+    this.onChangeCounterFilter();
   }
   onSelectStatus(status) {
     this.paymentsFilter.setPaymentStatus((status) ? status.value : null);
