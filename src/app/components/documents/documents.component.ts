@@ -129,12 +129,18 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   }
   removeCategory(item) {
     this.documentsService.removeCategories(item.categoryId).subscribe(data => {
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   removeDocument(item) {
     this.documentsService.removeDocument(item.id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.toastrService.success("The document has been successfully removed");
       this.appStateService.changeDetectorRef();
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   getNameDocument(item: Document) {

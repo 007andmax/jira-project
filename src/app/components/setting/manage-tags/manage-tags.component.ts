@@ -322,9 +322,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   removeCompanyTag() {
     this.tagsService.removeCompanyTag(this.tagId, this.setActiveTab).subscribe(
       res => {
+        this.confirmStateService.initRequest(false);
         this.tagId = null;
       },
       error => {
+        this.confirmStateService.initRequest(false);
       }
     );
   }

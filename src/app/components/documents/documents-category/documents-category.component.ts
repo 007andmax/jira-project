@@ -100,7 +100,9 @@ export class DocumentsCategoryComponent implements OnInit, OnDestroy {
 
   removeDocument(item) {
     this.documentsService.removeDocument(item.id).subscribe(data => {
-
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   onRemoveDocument(data) {

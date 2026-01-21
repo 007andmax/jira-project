@@ -198,12 +198,18 @@ export class FileManagerComponent implements OnInit, OnDestroy {
   }
   removeCategory(item) {
     this.fileManagementService.removeCategory(item.id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.fileManagementStateService.removeCategory(item.id);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   removeFile(item) {
     this.fileManagementService.removeFile(item.id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.fileManagementStateService.removeFile(item.id);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   onRemoveFile(data) {

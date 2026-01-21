@@ -59,35 +59,8 @@ export class ConfirmComponent implements OnInit, OnDestroy {
     this.activeModal.close();
     this.confirmStateService.setConfirm(true);
   };
-  public isDefault() {
-    return this.action !== 'ARCHIVE_USER'
-      && this.action !== 'ARCHIVE_COMPANY'
-      && this.action !== 'DEARCHIVE_COMPANY'
-      && this.action !== 'DELETE_MANAGE_TAG'
-      && this.action !== 'DELETE_DEVICE_TAG'
-      && this.action !== 'CHANGE_COMMISSION_PRODUCT'
-      && this.action !== 'CHANGE_COMMISSION_SERVICE'
-      && this.action !== 'RESTORE_USER'
-      && this.action !== 'REMOVE_TASK_TICKET'
-      && this.action !== 'REMOVE_ATTACHMENT'
-      && this.action !== 'DELETE_COMMAND'
-      && this.action !== 'DELETE_SUBSCRIPTION_TYPE'
-      && this.action !== 'CHANGE_COMPANY_TICKET'
-      && this.action !== 'DELETE_GLOBAL_FILTER'
-      && this.action !== 'DELETE_GLOBAL_USERS_FILTER'
-      && this.action !== 'ROLLBACK_INVOICE'
-      && this.action !== 'DELETE_NEWS'
-      && this.action !== 'REMOVE_CATEGORY_FILES'
-      && this.action !== 'REMOVE_FILE'
-      && this.action !== 'DELETE_TASK'
-      && this.action !== 'ARCHIVE_TASK'
-      && this.action !== 'REMOVE_CARD'
-      && this.action !== 'DISCONNECT_CONNECTION'
-      && !this.isSettingsPage();
-  }
   public isSettingsPage() {
-    return this.action === 'DELETE_GL_NUMBER' ||
-      this.action === 'DELETE_LIST_GL_NUMBERS' ||
+    return this.action === 'DELETE_LIST_GL_NUMBERS' ||
       this.action === 'DELETE_CRM_INDUSTRY' ||
       this.action === 'DELETE_CRM_INDUSTRIES' ||
       this.action === 'DELETE_CRM_SERVICE_TYPE' ||

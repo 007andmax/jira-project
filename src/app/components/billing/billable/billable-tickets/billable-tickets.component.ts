@@ -71,15 +71,18 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_TICKET_BILLABLE) {
           this.ticketsService.deleteTicket([this.ticketForRemove.id]).subscribe(data => {
-
+            this.confirmStateService.initRequest(false);
             let index = this.billableProfile.tickets.findIndex(item => item.id === this.ticketForRemove.id);
             this.billableProfile.tickets.splice(index, 1);
+          }, err => {
+            this.confirmStateService.initRequest(false);
           })
         }
         if (this.confirmStateService.getConfirmAction() === REMOVE_TICKETS_BILLABLE) {
           this.isInitMultyRemove = true;
           this.toastrProgressStateService.onInit(this.ticketsForRemove[0].id);
           this.ticketsService.deleteTicket(this.ticketsForRemove.map(item => item.id)).subscribe(data => {
+            this.confirmStateService.initRequest(false);
             this.toastrProgressStateService.clear(this.ticketsForRemove[0].id);
             this.ticketsForRemove.forEach(ticket => {
               let index = this.billableProfile.tickets.findIndex(item => item.id === ticket.id);
@@ -87,6 +90,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
               this.isInitMultyRemove = false;
             })
           }, err => {
+            this.confirmStateService.initRequest(false);
             this.toastrProgressStateService.clear(this.ticketsForRemove[0].id);
             this.isInitMultyRemove = false;
           })

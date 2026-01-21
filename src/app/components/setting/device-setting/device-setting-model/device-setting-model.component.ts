@@ -92,8 +92,11 @@ export class DeviceSettingModelComponent implements OnInit, OnDestroy {
     this.agentService
       .deleteModel(this.model)
       .subscribe((resp) => {
+        this.confirmStateService.initRequest(false);
         this.getModels(this.techCompany.id)
 
+      }, err => {
+        this.confirmStateService.initRequest(false);
       });
   }
   getModels(TechCompanyGuid: any) {

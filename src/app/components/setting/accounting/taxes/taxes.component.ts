@@ -156,7 +156,11 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
           this.toastrService.success(`${this.tax.name} is Deleted Successfully.`);
         })
       )
-      .subscribe();
+      .subscribe(res => {
+        this.confirmStateService.initRequest(false);
+      }, err => {
+        this.confirmStateService.initRequest(false);
+      });
   }
 
   /**

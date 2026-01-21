@@ -80,8 +80,11 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
   }
   removeDocument(item) {
     this.documentsService.removeDocument(item.id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.toastrService.success("The template has been successfully removed");
       this.appStateService.changeDetectorRef();
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   public goToDocumentsList() {

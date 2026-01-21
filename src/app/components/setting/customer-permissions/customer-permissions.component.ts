@@ -119,8 +119,9 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
   }
   removeRole(id) {
     this.usersService.removeRole(id).subscribe(data => {
-
+      this.confirmStateService.initRequest(false);
     }, err => {
+      this.confirmStateService.initRequest(false);
       if (err.status == 406) {
         this.userRoleForRemove = this.userRoles.find(item => item.id == id);
         this.usersForChangeRole = err.error.map(item => new CustomerPermissionsRemoveRole(item));

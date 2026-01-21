@@ -130,10 +130,16 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         }
         if (this.confirmStateService.getConfirmAction() === REBOOT_DEVICE) {
           this.devicesService.sendPowerAction(this.ticketProfile.company.id, this.devicesStateService.getDevicesForReboot().map(item => item.agentId), 'reboot').subscribe(data => {
+            this.confirmStateService.initRequest(false);
+          }, err => {
+            this.confirmStateService.initRequest(false);
           });
         }
         if (this.confirmStateService.getConfirmAction() === SHUTDOWN_DEVICE) {
           this.devicesService.sendPowerAction(this.ticketProfile.company.id, this.devicesStateService.getDevicesForShutDown().map(item => item.agentId), 'shutdown').subscribe(data => {
+            this.confirmStateService.initRequest(false);
+          }, err => {
+            this.confirmStateService.initRequest(false);
           });
         }
       }

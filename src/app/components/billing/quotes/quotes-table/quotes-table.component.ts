@@ -195,11 +195,17 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   onArchiveQuotes() {
     let quotes = this.quoteStateService.getQuotesForArchive();
     this.quoteServices.archiveQuote(quotes.map(item => item.id)).subscribe((res) => {
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     });
   }
   onArchiveQuote() {
     let quote = this.quoteStateService.getQuoteForArchive();
     this.quoteServices.archiveQuote([quote.id]).subscribe((res) => {
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     });
   }
   archiveQuote(item) {

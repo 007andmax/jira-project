@@ -164,8 +164,10 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   onRollbackInvoice(invoice) {
     this.toastrProgressStateService.onInit(invoice.id);
     this.invoicesService.rollback(invoice.id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.toastrProgressStateService.clear(invoice.id);
     }, err => {
+      this.confirmStateService.initRequest(false);
       this.toastrProgressStateService.clear(invoice.id);
     })
   }

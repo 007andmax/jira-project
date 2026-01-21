@@ -102,7 +102,10 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
   }
   onRemoveRecord(id) {
     this.passwordManagerService.deleteRecord(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.passwordManagerStateService.onChangeRealTime.next({ action: "PASSWORD_RECORD_DELETED", data: { id: id } });
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   public onScroll() {

@@ -98,7 +98,11 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
           this.toastrService.success(`${this.gl.glNumber} is Deleted Successfully.`);
         })
       )
-      .subscribe();
+      .subscribe(res => {
+        this.confirmStateService.initRequest(false);
+      }, err => {
+        this.confirmStateService.initRequest(false);
+      });
   }
 
   onSelect(event, item) {

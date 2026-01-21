@@ -95,7 +95,10 @@ export class MarketingSubscriptionsAsideComponent implements OnInit, OnDestroy {
   }
   onRemoveSubscription(id) {
     this.marketingEmailService.removeSubscriptionType(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   public trackById(index, item) {

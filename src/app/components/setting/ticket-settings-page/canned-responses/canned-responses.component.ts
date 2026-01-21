@@ -82,7 +82,9 @@ export class CannedResponsesComponent implements OnInit {
   }
   onRemoveNoteTemplate(id) {
     this.noteService.removeNoteTemplate(id).subscribe(data => {
-
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   copyNote(data) {

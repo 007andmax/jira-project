@@ -117,7 +117,10 @@ export class DeviceSettingManufactureComponent implements OnInit, OnDestroy {
     this.agentService
       .deleteManufacturer(this.manufacturer)
       .subscribe((resp) => {
+        this.confirmStateService.initRequest(false);
         this.getManufacturers(this.techCompany.id)
+      }, err => {
+        this.confirmStateService.initRequest(false);
       });
   }
   ngOnDestroy(): void {

@@ -60,6 +60,9 @@ export class ManageTagsDevicesComponent implements OnInit, OnDestroy {
   }
   onRemoveTag() {
     this.deviceTagsService.deleteTags(this.deviceTagsStateService.getTagForDelete().id).subscribe(res => {
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   onFilter(field) {

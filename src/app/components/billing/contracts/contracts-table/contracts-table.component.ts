@@ -125,7 +125,10 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
   }
   onDelete(data) {
     this.contractsService.delete(data.id).subscribe(res => {
+      this.confirmStateService.initRequest(false);
       this.removeContract(data.id);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   onTerminate(data) {

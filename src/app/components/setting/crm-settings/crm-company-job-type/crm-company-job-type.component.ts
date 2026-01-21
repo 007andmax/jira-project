@@ -91,17 +91,22 @@ export class CrmCompanyJobTypeComponent implements OnInit {
       catchError(error => of(undefined)))))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
           this.crmStateService.setListJobTypeForRemove([]);
           this.cd.detectChanges();
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       );
   }
   onRemoveJobType(id) {
     this.crmService.removeJobType(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.crmStateService.setListJobTypeForRemove([]);
       this.cd.detectChanges();
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   onSelect(event, item) {

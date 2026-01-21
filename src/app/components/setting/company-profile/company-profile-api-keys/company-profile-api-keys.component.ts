@@ -72,8 +72,11 @@ export class CompanyProfileApiKeysComponent implements OnInit {
   removeApiKey(id) {
     this.apiKeysService.remove(id).subscribe(
       (res: any) => {
+        this.confirmStateService.initRequest(false);
         const Index = this.list.findIndex((item) => item.id === id);
         if (Index > -1) this.list.splice(Index, 1);
+      }, err => {
+        this.confirmStateService.initRequest(false);
       });
   }
   updateAPiKey(data) {

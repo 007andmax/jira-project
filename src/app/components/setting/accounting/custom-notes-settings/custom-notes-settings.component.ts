@@ -45,8 +45,11 @@ export class CustomNotesSettingsComponent implements OnInit, OnDestroy {
   }
   onRemoveNote() {
     this.billableService.deleteNote(this.billableStateService.getNoteForRemove().id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       let index = this.invoiceNotes.findIndex(item => item.id == this.billableStateService.getNoteForRemove().id);
       this.invoiceNotes.splice(index, 1);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   addNote(data) {

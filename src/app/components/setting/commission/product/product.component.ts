@@ -93,10 +93,12 @@ export class ProductComponent implements OnInit, OnDestroy {
         .setCategoryRate(this.category.id, '0', false)
         .subscribe(
           res => {
+            this.confirmStateService.initRequest(false);
             this.selectedIdx = -1;
             this.category.commissionRate = null;
           },
           error => {
+            this.confirmStateService.initRequest(false);
             this.toastrService.error('Bad Request')
           }
         );
@@ -134,11 +136,13 @@ export class ProductComponent implements OnInit, OnDestroy {
         .setCategoryRate(this.id, data.rate, data.setForOldExpenses)
         .subscribe(
           (res: any) => {
+            this.confirmStateService.initRequest(false);
             this.category.commissionRate = res.commissionRate.toFixed(2);
             this.selectedIdx = -1;
             this.factItem = false;
           },
           error => {
+            this.confirmStateService.initRequest(false);
             this.selectedIdx = -1;
             this.toastrService.error('Bad Request');
             this.factItem = false;

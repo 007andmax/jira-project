@@ -134,7 +134,9 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   }
   public onDeleteGlobalFilter(filter) {
     this.ticketsService.deleteGlobalFilter(filter.id).subscribe(data => {
-
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   public close() {

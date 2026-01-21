@@ -175,10 +175,16 @@ export class InventoryComponent implements OnInit {
   }
   onRemoveProduct(id) {
     this.productService.removeProduct(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   onRemoveCategory(id) {
     this.productService.removeCategory(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   onSelectAllIventory(data) {

@@ -83,7 +83,9 @@ export class DeviceSettingModelsComponent implements OnInit, OnDestroy {
   }
   removeModel(id) {
     this.devicesService.deleteModel(id).subscribe(data => {
-
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   onEditModel(item, event) {

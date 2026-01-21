@@ -155,11 +155,13 @@ export class TerminalComponent implements OnInit, OnDestroy {
     this.terminalService.deleteCommand(this.deleteId)
       .pipe(first())
       .subscribe(resp => {
+        this.confirmStateService.initRequest(false);
         this.loading = false;
         this.getCommandList();
         this.toastr.success('Command Deleted Successfully');
       },
         error => {
+          this.confirmStateService.initRequest(false);
           this.loading = false;
         });
   }

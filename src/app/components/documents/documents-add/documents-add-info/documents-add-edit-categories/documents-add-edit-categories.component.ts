@@ -48,6 +48,9 @@ export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
   }
   removeCategory(item) {
     this.documentsService.removeCategories(item.id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   onSelectCategory(event, item) {
@@ -69,9 +72,11 @@ export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
     forkJoin(this.documentsStateService.getCategoriesForRemove().map(item => this.documentsService.removeCategories(item.id)))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
           this.selectedCategories = [];
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       );
   }

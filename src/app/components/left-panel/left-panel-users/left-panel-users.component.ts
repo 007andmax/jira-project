@@ -111,7 +111,9 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   }
   onDeleteGlobalFilter(filter) {
     this.usersService.deleteGlobalFilter(filter.id).subscribe(data => {
-
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   getUsersCount() {

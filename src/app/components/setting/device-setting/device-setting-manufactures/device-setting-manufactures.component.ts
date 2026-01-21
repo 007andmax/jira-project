@@ -50,7 +50,9 @@ export class DeviceSettingManufacturesComponent implements OnInit, OnDestroy {
   }
   removeManufacturer(id) {
     this.devicesService.deleteManufactur(id).subscribe(data => {
-
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   openModelManufacture() {

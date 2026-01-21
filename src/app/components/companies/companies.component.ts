@@ -257,22 +257,31 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
   public onDeArchiveCompany(id) {
     let deArchive = this.companiesService.deArchive(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       let index = this.CompaniesList.findIndex(item => item.id === id);
       if (index > -1) this.CompaniesList.splice(index, 1);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
     this.sub.add(deArchive);
   }
   public onArchiveCompany(id) {
     let archiveCompany = this.companiesService.archiveCompany(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       let index = this.CompaniesList.findIndex(item => item.id === id);
       if (index > -1) this.CompaniesList.splice(index, 1);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
     this.sub.add(archiveCompany);
   }
   public onArchiveExampleCompany(id) {
     let archiveCompany = this.companiesService.archiveExampleCompany().subscribe(data => {
+      this.confirmStateService.initRequest(false);
       let index = this.CompaniesList.findIndex(item => item.id === id);
       if (index > -1) this.CompaniesList.splice(index, 1);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
     this.sub.add(archiveCompany);
   }

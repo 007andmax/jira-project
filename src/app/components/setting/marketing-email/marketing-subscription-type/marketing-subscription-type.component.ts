@@ -115,17 +115,22 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
       catchError(error => of(undefined)))))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
           this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
           this.toastrService.success("The subscription has been successfully removed");
           this.appStateService.changeDetectorRef();
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       );
   }
   onRemoveSubscription(id) {
     this.marketingEmailService.removeSubscriptionType(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   openAside(item, subscribed) {

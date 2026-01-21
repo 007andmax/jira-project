@@ -91,17 +91,22 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
       catchError(error => of(undefined)))))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
           this.crmStateService.setListServiceTypeForRemove([]);
           this.cd.detectChanges();
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       );
   }
   removeServiceType(id) {
     this.crmService.removeServiceType(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.crmStateService.setListServiceTypeForRemove([]);
       this.cd.detectChanges();
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   onSelect(event, item) {
@@ -118,7 +123,8 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
   remove(item) {
     this.confirmStateService.setConfirmAction(DELETE_CRM_SERVICE_TYPE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Service Type`;
+    modalRef.componentInstance.header = `Delete Service Type`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this service type?`;
     this.crmStateService.setServiceTypeForRemove(item);
   }
   ngOnDestroy(): void {
