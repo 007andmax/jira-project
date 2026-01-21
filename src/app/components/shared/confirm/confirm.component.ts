@@ -59,30 +59,6 @@ export class ConfirmComponent implements OnInit, OnDestroy {
     this.activeModal.close();
     this.confirmStateService.setConfirm(true);
   };
-  public isSettingsPage() {
-    return this.action === 'DELETE_LIST_GL_NUMBERS' ||
-      this.action === 'DELETE_CRM_INDUSTRY' ||
-      this.action === 'DELETE_CRM_INDUSTRIES' ||
-      this.action === 'DELETE_CRM_SERVICE_TYPE' ||
-      this.action === 'DELETE_CRM_SERVICE_TYPIES' ||
-      this.action === 'DELETE_CRM_JOB_TITLE' ||
-      this.action === 'DELETE_CRM_JOB_TITLIES' ||
-      this.action === 'DELETE_CRM_JOB_TYPE' ||
-      this.action === 'DELETE_CRM_JOB_TYPIES' ||
-      this.action === 'DELETE_TICKET_STATUS' ||
-      this.action === 'DELETE_LIST_TICKET_STATUS' ||
-      this.action === 'DELETE_CATEGORIES_PRODUCT' ||
-      this.action === 'DELETE_CATEGORY_PRODUCT' ||
-      this.action === 'DELETE_SUBSCRIPTION_TYPIES' ||
-      this.action === 'DELETE_SUBSCRIPTION_USER' ||
-      this.action === 'DELETE_DEVICE_TYPE' ||
-      this.action === 'DELETE_DEVICE_MANUFACTURE' ||
-      this.action === 'DELETE_DEVICE_MODEL' ||
-      this.action === 'CLOSE_SESSION' ||
-      this.action === 'DELETE_USER_ROLE' ||
-      this.action == 'DELETE_NOTE' ||
-      this.action == 'DELETE_API_KEY'
-  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

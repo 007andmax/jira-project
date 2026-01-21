@@ -132,7 +132,8 @@ export class CustomerPermissionsComponent implements OnInit, OnDestroy {
   onDeleteRole(data) {
     this.confirmStateService.setConfirmAction(DELETE_USER_ROLE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove role`;
+    modalRef.componentInstance.header = `Delete Tech User Role`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this role?`;
     this.usersStateService.setUserRoleForRemove(data);
 
   }

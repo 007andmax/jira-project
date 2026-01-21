@@ -67,7 +67,8 @@ export class CustomNotesSettingsComponent implements OnInit, OnDestroy {
   deleteNote(item) {
     this.confirmStateService.setConfirmAction(DELETE_NOTE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Custom note`;
+    modalRef.componentInstance.header = `Delete Custom Note`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this custom note?`;
     this.billableStateService.setNoteForRemove(item);
   }
   ngOnDestroy(): void {

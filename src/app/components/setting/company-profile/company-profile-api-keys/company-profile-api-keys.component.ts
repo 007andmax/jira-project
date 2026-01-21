@@ -121,7 +121,8 @@ export class CompanyProfileApiKeysComponent implements OnInit {
     this.apiKeysStateService.setApiKeyForRemove(data);
     this.confirmStateService.setConfirmAction(DELETE_API_KEY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove API Key`;
+    modalRef.componentInstance.header = `Delete API Key`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this API key?`;
   }
   public trackById(index, item) {
     return item.id;

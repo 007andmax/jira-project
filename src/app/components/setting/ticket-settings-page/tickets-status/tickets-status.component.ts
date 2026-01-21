@@ -142,7 +142,8 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
   removeTicketStatus(data) {
     this.confirmStateService.setConfirmAction(DELETE_TICKET_STATUS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Ticket Status`;
+    modalRef.componentInstance.header = `Delete Ticket Status`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this ticket status?`;
     this.ticketsStateService.setTicketStatusForRemove(data);
   }
   getColors() {

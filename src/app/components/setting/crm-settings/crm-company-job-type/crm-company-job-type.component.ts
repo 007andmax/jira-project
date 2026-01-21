@@ -123,7 +123,8 @@ export class CrmCompanyJobTypeComponent implements OnInit {
   remove(item) {
     this.confirmStateService.setConfirmAction(DELETE_CRM_JOB_TYPE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Job Type`;
+    modalRef.componentInstance.header = `Delete Job Type`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this job type?`;
     this.crmStateService.setJobTypeForRemove(item);
   }
   ngOnDestroy(): void {

@@ -103,7 +103,8 @@ export class CannedResponsesComponent implements OnInit {
   removeNote(item) {
     this.confirmStateService.setConfirmAction(DELETE_NOTE_TEMPLATE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Canned Response`;
+    modalRef.componentInstance.header = `Delete Canned Response`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this canned response?`;
     this.noteStateService.setNoteTemplateForRemove(item);
   }
   ngOnDestroy(): void {
