@@ -165,8 +165,10 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
       catchError(error => of(undefined)))))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       );
   }

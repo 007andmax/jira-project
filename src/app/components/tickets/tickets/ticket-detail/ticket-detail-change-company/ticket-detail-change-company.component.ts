@@ -36,6 +36,9 @@ export class TicketDetailChangeCompanyComponent implements OnInit, OnDestroy {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === CHANGE_COMPANY_TICKET) this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note, this.selectedCompany.id).subscribe(data => {
+          this.confirmStateService.initRequest(false);
+        }, err => {
+          this.confirmStateService.initRequest(false);
         })
 
       }

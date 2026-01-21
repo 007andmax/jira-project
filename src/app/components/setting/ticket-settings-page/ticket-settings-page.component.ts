@@ -90,10 +90,12 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
     forkJoin(this.ticketsStateService.getListTicketStatusForRemove().map(item => this.ticketsService.removeTicketStatus(item.id)))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
           this.ticketsStateService.setListTicketStatusForRemove([]);
           this.cd.detectChanges();
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       );
   }
@@ -101,10 +103,12 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
     forkJoin(this.ticketsStateService.getListTicketsPrioritiesForRemove().map(item => this.ticketsService.removeTicketPriority(item.id)))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
           this.ticketsStateService.setListTicketsPrioritiesForRemove([]);
           this.cd.detectChanges();
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       );
   }

@@ -97,7 +97,9 @@ export class LeftPanelSuperAdminCategoriesComponent implements OnInit, OnDestroy
   }
   onRemoveCategory(id) {
     this.supportPageCategoriesService.removeCategory(id).subscribe(data => {
-
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
 

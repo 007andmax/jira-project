@@ -198,9 +198,12 @@ export class UsersComponent implements OnInit, OnDestroy {
       list.map(item => this.usersService.onArchiveUsers(item.id))
     )
       .subscribe(res => {
+        this.confirmStateService.initRequest(false);
         res.forEach(item => {
           this.usersStateService.fastArchiveUser(item);
         })
+      }, err => {
+        this.confirmStateService.initRequest(false);
       });
   }
   onClearAll() {
@@ -269,8 +272,10 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
   private onDeArchiveUser(id) {
     let Dearchiveusers = this.usersService.onDeArchiveUsers(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.usersStateService.fastDeArchive([data]);
     }, err => {
+      this.confirmStateService.initRequest(false);
       const modalRef = this.modalService.open(UserDeArchiveNotificationComponent, { windowClass: 'xs-modal user-modal', container: "app-users", backdrop: 'static', keyboard: false });
       modalRef.componentInstance.user = this.usersStateService.getUserForDeArchive();
       modalRef.componentInstance.message = err.error.message;
@@ -280,12 +285,14 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
   private onArchiveUser(id) {
     let archiveUser = this.usersService.onArchiveUsers(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.usersStateService.fastArchiveUser(data);
       if (!this.filter.isArchive && this.filter.getClientType()) {
         let index = this.users.findIndex(item => item.id === id);
         if (index > -1) this.users.splice(index, 1);
       }
-
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
     this.userListService.addSubscription(archiveUser);
   }

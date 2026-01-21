@@ -60,7 +60,10 @@ export class TicketsPriorityComponent implements OnInit {
   }
   onRemoveTicketPriority(id) {
     this.ticketsService.removeTicketPriority(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.cd.detectChanges();
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
 

@@ -97,10 +97,12 @@ export class ProductsSettingsCategoryComponent implements OnInit, OnDestroy {
       catchError(error => of(undefined)))))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
           this.inventoryStateService.setListCategoriesForRemove([]);
           this.cd.detectChanges();
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       );
   }
@@ -109,10 +111,12 @@ export class ProductsSettingsCategoryComponent implements OnInit, OnDestroy {
       catchError(error => of(undefined)))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
           this.inventoryStateService.setListCategoriesForRemove([]);
           this.cd.detectChanges();
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       )
   }

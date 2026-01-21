@@ -65,7 +65,10 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
   }
   onRemoveTicketStatus(id) {
     this.ticketsService.removeTicketStatus(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.cd.detectChanges();
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   parseStatus(name) {

@@ -110,6 +110,9 @@ export class SupportPageInfoTagsComponent implements OnInit {
   }
   onRemoveTag(id) {
     this.supportPageCategoriesService.removeTag(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   editTag(id, event) {

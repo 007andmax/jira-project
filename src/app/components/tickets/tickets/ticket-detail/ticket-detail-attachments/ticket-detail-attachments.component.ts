@@ -24,7 +24,9 @@ export class TicketDetailAttachmentsComponent extends TicketProfileAttachmentsCo
   }
   onDelete() {
     this.ticketsService.deleteFile(this.ticketStateService.getAttachmentForRemove().file.id).subscribe(data => {
-
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   downloadAll() {

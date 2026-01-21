@@ -81,7 +81,11 @@ export class AccountComponent implements OnInit, OnDestroy {
           }
         })
       )
-      .subscribe();
+      .subscribe(res => {
+        this.confirmStateService.initRequest(false);
+      }, err => {
+        this.confirmStateService.initRequest(false);
+      });
   }
 
   // convenience getter for easy access to form fields

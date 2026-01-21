@@ -60,17 +60,26 @@ export class TicketDetailProfileUpdatesComponent implements OnInit, OnDestroy {
   }
   removeService() {
     this.ticketsService.removeService(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id, this.ticketStateService.getServiceForRemove().id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.ticketStateService.removeUpdate(this.ticketStateService.getUpdateForRemove());
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   removeProduct() {
     this.ticketsService.removeProduct(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id, this.ticketStateService.getProductForRemove().id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.ticketStateService.removeUpdate(this.ticketStateService.getUpdateForRemove());
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   removeUpdate() {
     this.ticketsService.deleteUpdate(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.ticketStateService.removeUpdate(this.ticketStateService.getUpdateForRemove());
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   getUpdates(id) {

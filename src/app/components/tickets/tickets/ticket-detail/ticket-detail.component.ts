@@ -313,6 +313,9 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   }
   onMoveToTrash(data) {
     this.ticketsService.trashTicket(this.ticketProfile.id, data).subscribe(res => {
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   restoreFromSpam() {
@@ -401,18 +404,27 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   }
   onDeleteForever() {
     this.ticketsService.deleteTicket([this.ticketProfile.id]).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.ticketsStateService.onChangeTypeFilter(this.usersStateService.getCurrentUser().startPage == "MY_TICKETS" ? "USERS" : this.usersStateService.getCurrentUser().startPage);
       this.ticketsStateService.onChangeLeftPanelFilter(this.usersStateService.getCurrentUser().startPage == "MY_TICKETS" ? "USERS" : this.usersStateService.getCurrentUser().startPage);
       this.leftPanelStateService.goToState('new-tickets');
       this.leftPanelStateService.toggleLeftPanel(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   onMoveIntoSpam() {
     if (this.usersStateService.getCurrentUser().isOwner) {
       this.ticketsService.markAsSpamTicket(this.ticketProfile.id, false).subscribe(data => {
+        this.confirmStateService.initRequest(false);
+      }, err => {
+        this.confirmStateService.initRequest(false);
       });
     } else {
       this.ticketsService.reportAsSpamTicket(this.ticketProfile.id, false).subscribe(data => {
+        this.confirmStateService.initRequest(false);
+      }, err => {
+        this.confirmStateService.initRequest(false);
       });
     }
   }

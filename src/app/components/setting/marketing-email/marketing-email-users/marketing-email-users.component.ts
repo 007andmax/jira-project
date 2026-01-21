@@ -80,7 +80,9 @@ export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
   }
   onRemove(id) {
     this.marketingEmailService.removeUser(id, this.marketingSubscription.id).subscribe(data => {
-
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   remove(user) {

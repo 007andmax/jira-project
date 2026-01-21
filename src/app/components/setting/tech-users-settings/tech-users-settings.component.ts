@@ -257,7 +257,10 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.techUsersService.restoreUser(this.userId)
       .subscribe(
         response => {
+          this.confirmStateService.initRequest(false);
           //  this.getUsers();
+        }, err => {
+          this.confirmStateService.initRequest(false);
         });
   }
   onAuthTypeChange(data) {

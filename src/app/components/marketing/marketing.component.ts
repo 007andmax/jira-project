@@ -191,9 +191,12 @@ export class MarketingComponent implements OnInit {
       ids.map(item => this.usersService.onArchiveUsers(item))
     )
       .subscribe(res => {
+        this.confirmStateService.initRequest(false);
         res.forEach(item => {
           this.usersStateService.fastArchiveUser(item);
         })
+      }, err => {
+        this.confirmStateService.initRequest(false);
       });
   }
   setIdDetailUser(data) {
@@ -253,18 +256,24 @@ export class MarketingComponent implements OnInit {
   }
   private onDeArchiveUser(id) {
     let Dearchiveusers = this.usersService.onDeArchiveUsers(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.usersStateService.fastDeArchive([data]);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
     this.userListService.addSubscription(Dearchiveusers);
   }
   private onArchiveUser(id) {
     let archiveUser = this.usersService.onArchiveUsers(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.usersStateService.fastArchiveUser(data);
       if (this.filter.getClientType()) {
         let index = this.users.findIndex(item => item.id === id);
         if (index > -1) this.users.splice(index, 1);
         this.cd.markForCheck();
       }
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
     this.userListService.addSubscription(archiveUser);
   }

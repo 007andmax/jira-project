@@ -160,9 +160,12 @@ export class TasksEditComponent extends TasksAddComponent {
   }
   onDeleteTask() {
     this.tasksService.deleteTask(this.task.id).subscribe(res => {
+      this.confirmStateService.initRequest(false);
       this.modelForm.controls["attachFileIds"].setValue([]);
       this.tasksStateService.fastRemoveTask(this.task.id);
       this.close();
+    }, err => {
+      this.confirmStateService.initRequest(false);
     });
 
   }
@@ -234,9 +237,12 @@ export class TasksEditComponent extends TasksAddComponent {
   }
   onArchiveTask() {
     this.tasksService.archiveTask(this.task.id).subscribe(res => {
+      this.confirmStateService.initRequest(false);
       this.task.archivedAt = new Date().getTime();
       this.close();
       this.cd.detectChanges();
+    }, err => {
+      this.confirmStateService.initRequest(false);
     });
   }
   deArchiveTask() {

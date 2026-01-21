@@ -163,8 +163,11 @@ export class TicketDetailTasksComponent implements OnInit, OnDestroy {
   onDelete() {
     let id = JSON.parse(JSON.stringify(this.ticketStateService.getTaskForRemove().id));
     this.tasksService.deleteTask(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       let index = this.list.findIndex(item => item.id == id);
       if (index > -1) this.list.splice(index, 1);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   onAddTicketTask() {

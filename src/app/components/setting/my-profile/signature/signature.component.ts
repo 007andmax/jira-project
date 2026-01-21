@@ -54,9 +54,11 @@ export class SignatureComponent implements OnInit, OnDestroy {
   }
   onRemove() {
     this.signatureService.removeSignature().subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.content = null;
       this.elRef.nativeElement.querySelector(".content-html").innerHTML = '';
-
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   remove() {
