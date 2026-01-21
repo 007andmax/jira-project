@@ -27,6 +27,9 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
   new CompanySetting('Refund Requested', 'REFUND_REQUESTED'),
   new CompanySetting('Refund Completed', 'REFUND_COMPLETED')
   ];
+  paymentModes = [new CompanySetting('Manual credit card', 'MANUAL_CREDIT_CARD'), new CompanySetting('Cash', 'CASH'), new CompanySetting('Cheque', 'CHEQUE'), new CompanySetting('Debit Card', 'DEBIT_CARD'),
+  new CompanySetting('Credit Card', 'CREDIT_CARD'),
+  new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
   constructor(private companiesState: CompaniesStateService,
     private elRef: ElementRef,
     private customerPortalStateService: CustomerPortalStateService,
@@ -39,6 +42,11 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
   }
   onSelectStatus(status) {
     this.paymentsFilter.setPaymentStatus((status) ? status.value : null);
+    this.paymentsStateService.onInitFilter(this.paymentsFilter);
+    this.onChangeCounterFilter();
+  }
+  onSelectPaymentMode(mode) {
+    this.paymentsFilter.setPaymentMethod((mode) ? mode.value : null);
     this.paymentsStateService.onInitFilter(this.paymentsFilter);
     this.onChangeCounterFilter();
   }
@@ -90,6 +98,7 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
     if (this.paymentsFilter.endDate && this.paymentsFilter.startDate) count++;
     if (this.paymentsFilter.invoiceNumber) count++;
     if (this.paymentsFilter.paymentStatus) count++;
+    if (this.paymentsFilter.paymentMethod) count++;
     if (this.paymentsFilter.amount) count++;
     this.changeCountFilter.emit(count);
   }

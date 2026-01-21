@@ -30,7 +30,7 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
   today = new Date().getTime();
   invoices: Array<Invoice> = [];
   invoicesFilter: InvoicesFilter = new InvoicesFilter();
-  paymentModes = [new CompanySetting('Cash', 'CASH'), new CompanySetting('Cheque', 'CHEQUE'), new CompanySetting('Debit Card', 'DEBIT_CARD'),
+  paymentModes = [new CompanySetting('Manual credit card', 'MANUAL_CREDIT_CARD'), new CompanySetting('Cash', 'CASH'), new CompanySetting('Cheque', 'CHEQUE'), new CompanySetting('Debit Card', 'DEBIT_CARD'),
   new CompanySetting('Credit Card', 'CREDIT_CARD'),
   new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
   selectedCompanies = [];
