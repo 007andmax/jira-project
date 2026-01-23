@@ -30,18 +30,18 @@
     <div class="archive-modal__footer">
         <div class="qt-df qt-jc-fe">
             <button
+                class="qt-button --gray qt-w100"
+                (click)=cancelConfirm()
+            >
+                Cancel
+            </button>
+              <button
                 class="qt-button --red qt-w100"
                 (click)=approveConfirm()
                 [disabled]="!selectedUser"
                 [ngClass]="{'disabled-reassign':!selectedUser}"
             >
                 Yes, I am sure
-            </button>
-            <button
-                class="qt-button --gray qt-w100"
-                (click)=cancelConfirm()
-            >
-                Cancel
             </button>
         </div>
     </div>

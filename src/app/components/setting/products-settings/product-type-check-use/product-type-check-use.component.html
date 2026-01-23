@@ -74,16 +74,16 @@
     >
         <div class="qt-df qt-jc-fe">
             <button
-                class="qt-button --red qt-w100"
-                (click)=approveConfirm()
-            >
-                Yes, I am sure
-            </button>
-            <button
                 class="qt-button --gray qt-w100"
                 (click)=cancelConfirm()
             >
                 Cancel
+            </button>
+             <button
+                   class="qt-button --red qt-w100"
+                (click)=approveConfirm()
+            >
+                Yes, I am sure
             </button>
         </div>
     </div>
@@ -99,7 +99,7 @@
                 Cancel
             </button>
             <button
-                class="qt-button qt-w100 qt-jc-c"
+              class="qt-button --red qt-w100"
                 (click)=changeProductType()
             >
                 Save
