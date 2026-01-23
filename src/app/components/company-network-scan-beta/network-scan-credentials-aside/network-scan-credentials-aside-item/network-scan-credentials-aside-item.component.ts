@@ -45,6 +45,7 @@ export class NetworkScanCredentialsAsideItemComponent implements OnInit {
   remove() {
     this.confirmStateService.setConfirmAction(REMOVE_CREDENTIAL);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = `Delete Password Record`;
     modalRef.componentInstance.message = `Are you sure you want to delete this password?`;
     this.networkScanStateService.setCredentialForRemove(this.item);
   }

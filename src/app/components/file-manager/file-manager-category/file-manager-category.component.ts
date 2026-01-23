@@ -235,7 +235,7 @@ export class FileManagerCategoryComponent implements OnInit, OnDestroy {
     this.confirmStateService.setConfirmAction(REMOVE_FILE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.header = `Delete File`;
-    modalRef.componentInstance.message = `Are you sure you want to delete this folder?`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this file?`;
     this.fileManagementStateService.setFileForRemove(data);
   }
   onRemoveCategory(data) {

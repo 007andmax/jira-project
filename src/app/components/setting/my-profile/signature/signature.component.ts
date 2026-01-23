@@ -65,7 +65,7 @@ export class SignatureComponent implements OnInit, OnDestroy {
     this.confirmStateService.setConfirmAction(DELETE_SIGNATURE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.header = `Delete Signature`;
-    modalRef.componentInstance.message = `Are you sure that you want to delete the signature?`;
+    modalRef.componentInstance.message = `Are you sure you want to delete the signature?`;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

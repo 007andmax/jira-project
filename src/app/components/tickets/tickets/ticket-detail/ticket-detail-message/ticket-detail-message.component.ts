@@ -67,6 +67,7 @@ export class TicketDetailMessageComponent implements OnInit, OnDestroy {
   deleteForever() {
     this.confirmStateService.setConfirmAction(DELETE_FOREVER);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = `Delete Ticket`;
     modalRef.componentInstance.message = `The ticket will become inaccessible. Continue with permanent deletion?`;
   }
   restoreFromSpam() {
@@ -84,7 +85,8 @@ export class TicketDetailMessageComponent implements OnInit, OnDestroy {
   moveIntoSpam() {
     this.confirmStateService.setConfirmAction(MOVE_TO_SPAM_OR_REPORT_TICKET);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to ${this.currentUser.isOwner ? 'mark' : 'report'} the ticket as spam?`;
+    modalRef.componentInstance.header = `Move to spam`;
+    modalRef.componentInstance.message = `Are you sure you want to ${this.currentUser.isOwner ? 'mark' : 'report'} the ticket as spam?`;
   };
   getSpamMessages(userId, option) {
     var isCanMarkAsSpam = this.currentUser.isOwner && !this.ticketProfile.spamMarker;

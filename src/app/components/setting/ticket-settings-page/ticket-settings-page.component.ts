@@ -121,7 +121,8 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   removeTicketsPriority() {
     this.confirmStateService.setConfirmAction(DELETE_LIST_TICKET_PRIORITY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Ticket Priority`;
+    modalRef.componentInstance.header = `Delete Ticket Priority`;
+    modalRef.componentInstance.message = `Are you sure you want to delete the ticket priority?`;
   }
 }
 

@@ -138,7 +138,8 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
     this.tax = tax;
     this.confirmStateService.setConfirmAction(DELETE_TAX);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Are you sure you want to delete?`;
+    modalRef.componentInstance.header = `Delete Tax`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this task?`;
   }
 
   /**

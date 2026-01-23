@@ -44,7 +44,7 @@ export class SuperAdminKnowledgeBaseTableItemComponent implements OnInit {
     this.confirmStateService.setConfirmAction(DELETE_NEWS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.header = `Delete Announcement`;
-    modalRef.componentInstance.message = `Do you want to delete announcement?`;
+    modalRef.componentInstance.message = `Are you sure you want to delete announcement?`;
     this.knowledgeBaseStateService.setNewsForDelete(this.news);
     this.cd.markForCheck();
   }

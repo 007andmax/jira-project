@@ -85,7 +85,7 @@ export class InvoicesItemComponent implements OnInit {
     this.confirmStateService.setConfirmAction(ROLLBACK_INVOICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.header = 'Rollback invoice';
-    modalRef.componentInstance.message = `<h3>Do you want to rollback invoice #${this.invoice.number}?</h3> 
+    modalRef.componentInstance.message = `<h3>Are you sure you want to rollback invoice #${this.invoice.number}?</h3> 
     <p>${(this.invoice.ticketNumbers && this.invoice.ticketNumbers.length ? (this.invoice.ticketNumbers.length > 1 ? 'Tickets #' : 'Ticket #') +
         this.invoice.ticketNumbers.join(', #') + ' will be restored.' : '')}</p>`;
     this.invoiceStateService.setInvoiceForRollback(this.invoice);
@@ -94,7 +94,8 @@ export class InvoicesItemComponent implements OnInit {
     if (this.toastrProgressStateService.check(this.invoice.id)) return;
     this.confirmStateService.setConfirmAction(REFUND_PAYMENTS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Invoice will be marked as not paid.`;
+    modalRef.componentInstance.header = 'Refund Payment';
+    modalRef.componentInstance.message = `Are you sure you want to refund the payment?`;
     this.invoiceStateService.setInvoiceForRefund(this.invoice);
   }
   exportAsPDF() {

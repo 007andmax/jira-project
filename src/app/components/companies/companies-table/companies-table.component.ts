@@ -166,7 +166,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     this.confirmStateService.setConfirmAction(DEARCHIVE_COMPANY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.header = `Restore Company`;
-    modalRef.componentInstance.message = `Do you want to restore ${this.company.name}?`;
+    modalRef.componentInstance.message = `Are you sure you want to restore ${this.company.name}?`;
     this.companiesStateService.setCompnayForDeArchive(this.company);
     this.cd.detectChanges();
   }

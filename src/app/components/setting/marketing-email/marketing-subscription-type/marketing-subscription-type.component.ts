@@ -143,8 +143,8 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   removeSubscription(item) {
     this.confirmStateService.setConfirmAction(DELETE_SUBSCRIPTION_TYPE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.header = `Remove Subscription`;
-    modalRef.componentInstance.message = `Are you sure want to remove this subscription?`;
+    modalRef.componentInstance.header = `Delete Subscription`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this subscription?`;
     this.marketingEmailStateService.setSubscriptionTypeForRemove(item);
   }
   ngOnDestroy(): void {

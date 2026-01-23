@@ -60,7 +60,8 @@ export class SupportPageHeaderComponent implements OnInit {
   removeCategory() {
     this.confirmStateService.setConfirmAction(REMOVED_SUPPORT_CATEGORY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to delete the category?`;
+    modalRef.componentInstance.header = `Delete Category`;
+    modalRef.componentInstance.message = `Are you sure you want to delete the category?`;
     this.supportPageCategoriesStateService.setCategoryForRemove(this.selectedCategory);
     this.cd.detectChanges();
   }

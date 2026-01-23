@@ -235,7 +235,8 @@ export class ContractComponent implements OnInit, OnDestroy {
     // this.deletePopup = true;
     this.confirmStateService.setConfirmAction(DELETE_COMMISSION_CONTRACT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want this commission to fact old items?`;
+    modalRef.componentInstance.header = `Reset rate`;
+    modalRef.componentInstance.message = `Are you sure you want the commission rate to be applied to old items?`;
 
   }
 
@@ -246,7 +247,8 @@ export class ContractComponent implements OnInit, OnDestroy {
     ) {
       this.confirmStateService.setConfirmAction(CHANGE_COMMISSION_CONTRACT);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-      modalRef.componentInstance.message = `Do you want this commission to fact old items?`;
+      modalRef.componentInstance.header = `Change rate`;
+      modalRef.componentInstance.message = `Are you sure you want the commission rate to be applied to old items?`;
 
     } else {
       this.confirmPopup = false;

@@ -139,7 +139,8 @@ export class AccountComponent implements OnInit, OnDestroy {
   logOutSessions() {
     this.confirmStateService.setConfirmAction(LOG_OUT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Are you sure to log out other sessions?`;
+    modalRef.componentInstance.header = `Log out`;
+    modalRef.componentInstance.message = `Are you sure you want to log out other sessions?`;
   }
 
   /**

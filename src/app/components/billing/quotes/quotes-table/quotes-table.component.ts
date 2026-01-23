@@ -211,7 +211,8 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   archiveQuote(item) {
     this.confirmStateService.setConfirmAction(ARCHIVE_QUOTE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to archive a quote?`;
+    modalRef.componentInstance.header = 'Archive Quote';
+    modalRef.componentInstance.message = `Are you sure you want to archive a quote?`;
     this.quoteStateService.setQuoteForArchive(item);
   }
   cancelQuote(item) {

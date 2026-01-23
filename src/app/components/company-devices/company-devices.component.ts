@@ -261,19 +261,22 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     let len = this.devices.filter(item => item.selected).length;
     this.confirmStateService.setConfirmAction(REMOVE_DEVICES);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to remove ${(len === 1) ? "1 device" : len + " devices"}?`;
+    modalRef.componentInstance.header = `Delete Device`;
+    modalRef.componentInstance.message = `Are you sure you want to remove ${(len === 1) ? "1 device" : len + " devices"}?`;
     this.devicesStateService.setDevicesForRemove(this.devices.filter(item => item.selected));
   }
   onTurnOff(action) {
     if (action === 'reboot') {
       this.confirmStateService.setConfirmAction(REBOOT_DEVICE);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.header = `Reboot Device`;
       modalRef.componentInstance.message = `Are you sure you want to reboot chosen device?`;
       this.devicesStateService.setDevicesForReboot(this.devices.filter(item => item.selected));
     }
     if (action === 'shutdown') {
       this.confirmStateService.setConfirmAction(SHUTDOWN_DEVICE);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.header = `Shutdown Device`;
       modalRef.componentInstance.message = `Are you sure you want to shutdown chosen device?`;
       this.devicesStateService.setDevicesForShutDown(this.devices.filter(item => item.selected));
     }

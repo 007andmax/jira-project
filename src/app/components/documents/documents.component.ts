@@ -151,13 +151,15 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   onRemoveCategory(data) {
     this.confirmStateService.setConfirmAction(REMOVE_CATEGORY_DOCUMENT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to delete this category?`;
+    modalRef.componentInstance.header = `Delete Category`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this category?`;
     this.documentsStateService.setCategoryForRemove(data);
   }
   onRemoveDocument(data) {
     this.confirmStateService.setConfirmAction(REMOVE_DOCUMENT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to delete this document?`;
+    modalRef.componentInstance.header = `Delete Document`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this document?`;
     this.documentsStateService.setDocumentForRemove(data);
   }
   public trackById(index, item) {

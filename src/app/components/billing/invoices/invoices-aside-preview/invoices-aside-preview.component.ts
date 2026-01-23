@@ -70,7 +70,8 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   refundPayments() {
     this.confirmStateService.setConfirmAction(REFUND_PAYMENTS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Invoice will be marked as not paid.`;
+    modalRef.componentInstance.header = 'Refund Payment';
+    modalRef.componentInstance.message = `Are you sure you want to refund the payment?`;
     this.invoiceStateService.setInvoiceForRefund(this.invoiceProfile);
   }
   rollbackInvoice() {
@@ -78,7 +79,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     let ticketsNumbers = this.invoiceProfile.tickets.map(item => item.number);
     modalRef.componentInstance.header = 'Rollback invoice';
-    modalRef.componentInstance.message = `Do you want to rollback invoice #${this.invoiceProfile.number}? 
+    modalRef.componentInstance.message = `Are you sure you want to rollback invoice #${this.invoiceProfile.number}? 
     ${(ticketsNumbers && ticketsNumbers.length ? (ticketsNumbers.length > 1 ? 'Tickets #' : 'Ticket #') +
         ticketsNumbers.join(', #') + ' will be restored.' : '')}`;
     this.invoiceStateService.setInvoiceForRollback(this.invoiceProfile);

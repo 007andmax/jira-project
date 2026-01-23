@@ -87,7 +87,8 @@ export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
     if (this.selectedCategories.length === 0) return;
     this.confirmStateService.setConfirmAction(REMOVE_ALL_CATEGORIES);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to delete selected categories?`;
+    modalRef.componentInstance.header = `Delete Category`;
+    modalRef.componentInstance.message = `Are you sure you want to delete selected categories?`;
     this.documentsStateService.setCategoriesForRemove(this.selectedCategories);
   }
   onCheckNameCategory() {
@@ -114,7 +115,8 @@ export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
   onRemoveCategory(data) {
     this.confirmStateService.setConfirmAction(REMOVE_CATEGORY_DOCUMENT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to delete this category?`;
+    modalRef.componentInstance.header = `Delete Category`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this category?`;
     this.documentsStateService.setCategoryForRemove(data);
   }
   onAddCategory() {
