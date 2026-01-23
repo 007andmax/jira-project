@@ -94,7 +94,10 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
        }
      }*/
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      if (data) this.close();
+      if (data) {
+        this.confirmStateService.initRequest(false);
+        this.close();
+      }
       this.showConfirm = false;
     })
     this.sub.add(getConfirm);
