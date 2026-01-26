@@ -103,8 +103,8 @@
                 class="pointer"
                 ngbDropdownItem
                 (click)="showRefundPayment()"
-                *ngIf="payment.paymentMethod != 'DEBIT_CARD' && payment.paymentMethod != 'CREDIT_CARD' && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
-            >
+               *ngIf="payment.paymentMethod != 'DEBIT_CARD' && payment.paymentMethod != 'CREDIT_CARD' && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')" >
+            <!-- *ngIf="!customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"-->
                 <div class="qt-icon icon__return-money qt-sz-20 qt-mr-12"></div>
                 Refund payment
             </li>
@@ -115,6 +115,14 @@
             >
                 <div class="qt-icon icon__resend-receipt qt-sz-20 qt-mr-12"></div>
                 Resend payment receipt
+            </li>
+             <li
+                class="pointer"
+                ngbDropdownItem
+                (click)="downloadPDF()"
+            >
+               <div class="qt-icon icon__download qt-bg-contain qt-sz-20 qt-mr-12"></div>
+                Export as PDF
             </li>
             <li
                 class="pointer"

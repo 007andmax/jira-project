@@ -51,6 +51,9 @@ export class PaymentsReportComponent implements OnInit {
   public getTotal(data) {
     return data.reduce((partialSum, a) => partialSum + a.partialPaidAmount, 0).toFixed(2);
   }
+  parseStatus(item) {
+    return item.paymentStatus ? item.paymentStatus.split('_').map((el) => el[0].toUpperCase() + el.slice(1).toLowerCase()).join(' ') : '';
+  }
   perseInvoices(items) {
     return items.join(', ');
   }
