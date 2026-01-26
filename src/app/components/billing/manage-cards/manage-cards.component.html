@@ -63,13 +63,13 @@
                 </div>
                 <div
                     class="no-exist-elements"
-                    *ngIf="!showPreloader && list.length == 0 && companiesStateService.currentCompany && companiesStateService.currentCompany.isMonerisConnected"
+                    *ngIf="!showPreloader && list.length == 0 && companiesStateService.currentCompany && integrationsStateService.connected"
                 >
                     We couldn't find any results
                 </div>
                  <div
                     class="no-exist-elements qt-text-center"
-                    *ngIf="companiesStateService.currentCompany && !companiesStateService.currentCompany.isMonerisConnected"
+                    *ngIf="companiesStateService.currentCompany && !integrationsStateService.connected"
                 >
                     You cannot get the list of credit cards. <br>
 Set up the 3rd party connection on the <span class="qt-color-info qt-pointer" (click)="goToIntegrationsPage()">Integration page</span>

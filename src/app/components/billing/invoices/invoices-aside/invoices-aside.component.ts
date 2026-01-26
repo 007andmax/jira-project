@@ -12,6 +12,7 @@ import { PaymentInvoice } from './class/payment-invoice';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { PaymentsCardsComponent } from '../../payments/payments-cards/payments-cards.component';
+import { IntegrationsStateService } from 'src/app/states/integrations/integrations-state.service';
 
 
 @Component({
@@ -45,6 +46,7 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
   @Output() onClose = new EventEmitter<any>();
   constructor(public companiesState: CompaniesStateService,
     private invoiceStateService: InvoiceStateService,
+    public integrationsStateService: IntegrationsStateService,
     private invoicesService: InvoicesService) { }
 
   ngOnInit() {

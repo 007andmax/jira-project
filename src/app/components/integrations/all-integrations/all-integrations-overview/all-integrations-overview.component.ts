@@ -10,6 +10,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { IntegrationsService } from 'src/app/services/integrations/integrations.service';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { IntegrationsStateService } from 'src/app/states/integrations/integrations-state.service';
 
 @Component({
   selector: 'app-all-integrations-overview',
@@ -36,6 +37,7 @@ export class AllIntegrationsOverviewComponent implements OnDestroy {
     public companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
+    public integrationsStateService: IntegrationsStateService,
 
 
   ) { }
@@ -88,7 +90,7 @@ export class AllIntegrationsOverviewComponent implements OnDestroy {
       this.modelForm.patchValue({
         cryptType: "7"
       })
-      this.companiesStateService.currentCompany.isMonerisConnected = false;
+      this.integrationsStateService.connected = false;
     }, err => {
       this.confirmStateService.initRequest(false);
       this.onInitRequest.emit(false);
@@ -125,7 +127,7 @@ export class AllIntegrationsOverviewComponent implements OnDestroy {
       this.status = 'CONNECTED';
       this.isEdit = true;
       this.isConnected = data.connected;
-      this.companiesStateService.currentCompany.isMonerisConnected = data.connected;
+      this.integrationsStateService.connected = data.connected;
       this.onInitRequest.emit(false);
     }, err => {
       this.onInitRequest.emit(false);

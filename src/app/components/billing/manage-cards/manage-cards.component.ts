@@ -9,6 +9,7 @@ import { REMOVE_CARD } from 'src/app/const/confirm';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { ManageCardsRealTimeService } from 'src/app/states/manage-cards/manage-cards-real-time.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { IntegrationsStateService } from 'src/app/states/integrations/integrations-state.service';
 
 @Component({
   selector: 'app-manage-cards',
@@ -32,15 +33,16 @@ export class ManageCardsComponent {
     public confirmStateService: ConfirmStateService,
     public companiesStateService: CompaniesStateService,
     private manageCardsRealTimeService: ManageCardsRealTimeService,
+    public integrationsStateService: IntegrationsStateService,
     public cd: ChangeDetectorRef,
   ) { }
   ngOnInit() {
-    if (this.companiesStateService.currentCompany && this.companiesStateService.currentCompany.isMonerisConnected) {
+    if (this.companiesStateService.currentCompany && this.integrationsStateService.connected) {
       this.setDefaultScoll();
       this.onScroll();
     }
     let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe(() => {
-      if (this.companiesStateService.currentCompany && this.companiesStateService.currentCompany.isMonerisConnected) {
+      if (this.companiesStateService.currentCompany && this.integrationsStateService.connected) {
         this.setDefaultScoll();
         this.onScroll();
       }
