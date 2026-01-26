@@ -98,4 +98,62 @@ describe('CompanyDashboardComponent unit test', () => {
     const com = fixture.debugElement.componentInstance;
     expect(com.chackDefaultValue("")).toEqual("N/A");
   });
+  it('check "getLinkSpeed"', () => {
+    const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.getLinkSpeed(undefined)).toEqual(0);
+  });
+  it('check "formatMacAddress"', () => {
+    const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.formatMacAddress(undefined)).toEqual('N/A');
+  });
+  it('check "serviceClass"', () => {
+    const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.serviceClass(true, true)).toEqual({ updated: true, alert: true });
+  });
+  it('check "getDeviceName"', () => {
+    const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.getDeviceName("Device 1");
+    expect(com.deviceTypId).toEqual("Device 1");
+  });
+  it('check "onSelectTag"', () => {
+    const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.asset = { ID: 1, Name: "Device 1" };
+    com.onSelectTag({ ID: 1, Name: "Device 1" });
+    expect(com.selectId).toEqual([{ ID: 1, AssetID: 1, Name: "Device 1" }]);
+  });
+  it('check "onSelectCompanyName"', () => {
+    const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onSelectCompanyName(null);
+    expect(com.companyDeviceSelect).toEqual(null);
+  });
+  it('check "onLinkDeviceSelectTag"', () => {
+    const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onLinkDeviceSelectTag({ ID: 1, Name: "Device 1" });
+    expect(com.linkDevicesFilterValue).toEqual("");
+  });
+  it('check "getclear"', () => {
+    const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.getclear();
+    expect(com.deviceName).toEqual("");
+    expect(com.assetTagName).toEqual("");
+  });
+  it('check "onSelectSecurityDevice"', () => {
+    const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onSelectSecurityDevice();
+    expect(com.selectAllSecurityDevices).toEqual(false);
+  });
+  it('check "getSecurityCountSelected"', () => {
+    const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.getSecurityCountSelected()).toEqual(0);
+  });
 });
