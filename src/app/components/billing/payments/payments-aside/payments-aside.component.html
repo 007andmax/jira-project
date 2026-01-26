@@ -13,13 +13,11 @@
             </div>
             <div
                 class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon qt-df qt-ai-c qt-jc-c"
-                *ngIf="payment.paymentMethod != 'DEBIT_CARD' && payment.paymentMethod != 'CREDIT_CARD' && payment.paymentStatus && payment.paymentStatus == 'PAYMENT_COMPLETED' && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
+               ngIf="payment.paymentStatus && payment.paymentStatus == 'PAYMENT_COMPLETED' && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
                  (click)="showRefund()"
                 placement="top"
                 ngbTooltip="Refund payment"
             >
-            <!--*ngIf="payment.paymentStatus && payment.paymentStatus == 'PAYMENT_COMPLETED' && !customerPortalStateService.isCustomerPortal && getPermissions('ROLLBACK_INVOICE')"
-              -->
                 <div class="qt-icon icon__return-money qt-sz-20"></div>
             </div>
             <div
