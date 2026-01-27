@@ -12,6 +12,7 @@ import { PaymentInvoice } from './class/payment-invoice';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { PaymentsCardsComponent } from '../../payments/payments-cards/payments-cards.component';
+import { IntegrationsStateService } from 'src/app/states/integrations/integrations-state.service';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
   today = new Date().getTime();
   invoices: Array<Invoice> = [];
   invoicesFilter: InvoicesFilter = new InvoicesFilter();
-  paymentModes = [new CompanySetting('Cash', 'CASH'), new CompanySetting('Cheque', 'CHEQUE'), new CompanySetting('Debit Card', 'DEBIT_CARD'),
+  paymentModes = [new CompanySetting('Manual credit card', 'MANUAL_CREDIT_CARD'), new CompanySetting('Cash', 'CASH'), new CompanySetting('Cheque', 'CHEQUE'), new CompanySetting('Debit Card', 'DEBIT_CARD'),
   new CompanySetting('Credit Card', 'CREDIT_CARD'),
   new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
   selectedCompanies = [];
@@ -45,6 +46,7 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
   @Output() onClose = new EventEmitter<any>();
   constructor(public companiesState: CompaniesStateService,
     private invoiceStateService: InvoiceStateService,
+    public integrationsStateService: IntegrationsStateService,
     private invoicesService: InvoicesService) { }
 
   ngOnInit() {

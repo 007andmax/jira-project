@@ -60,6 +60,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.leftPanelStateService.setBillingPage('new-payments-ng2');
     document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.paymentsFilter.setPaymentStatus('PAYMENT_COMPLETED');
     if (this.companiesStateService.getCompanies().length > 0) this.onScroll();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.onScroll();

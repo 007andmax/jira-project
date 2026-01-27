@@ -44,6 +44,7 @@ import { PaymentsFilter } from './components/billing/payments/class/payments-fil
 import { PaymentsStateService } from './states/payments/payments-state.service';
 import { DeviceTagsStateService } from './states/device-tags/device-tags-state.service';
 import { NotificationsStateService } from './states/notifications/notifications-state.service';
+import { IntegrationsStateService } from './states/integrations/integrations-state.service';
 
 
 /**
@@ -112,6 +113,7 @@ export class AppComponent implements OnInit {
     private paymentsStateService: PaymentsStateService,
     private deviceTagsStateService: DeviceTagsStateService,
     private notificationsStateService: NotificationsStateService,
+    private integrationsStateService: IntegrationsStateService
 
   ) { }
 
@@ -149,6 +151,7 @@ export class AppComponent implements OnInit {
         this.websocketService.initializeWebSocketConnection();
         this.deviceTagsStateService.onInit();
         this.notificationsStateService.onInit();
+        this.integrationsStateService.onInit();
       } else {
         this.supportPageCategoriesStateService.onInit();
         this.websocketService.initializeWebSocketConnection();

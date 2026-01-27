@@ -10,6 +10,7 @@ import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { PaymentsService } from 'src/app/services/payments/payments.service';
+import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
   selector: 'app-payments-aside',
@@ -30,6 +31,7 @@ export class PaymentsAsideComponent implements OnInit {
     public customerPortalStateService: CustomerPortalStateService,
     private permissionsService: PermissionsService,
     private paymentsService: PaymentsService,
+    private appService: AppService,
     private confirmStateService: ConfirmStateService) { }
 
   ngOnInit() {
@@ -39,6 +41,9 @@ export class PaymentsAsideComponent implements OnInit {
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.payment.clientCompanyId);
     this.isExistMultipleCompanies = this.payment.multipleCompanies.length > 0;
 
+  }
+  downloadPDF() {
+    this.appService.download(`/payments/pdf/${this.payment.id}`, `${this.payment.clientCompanyName}.pdf`);
   }
   showRefund() {
     this.close();

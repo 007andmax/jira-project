@@ -19,6 +19,16 @@
         [list]="statusTypes"
         (onSelectedItem)="onSelectStatus($event)"
     ></app-drop-down>
+     <app-drop-down
+        class="search-company invoices-status-filter"
+        #statusDp
+        [placeholder]="'Select Payment Mode'"
+        [change]="false"
+        [class]="['qt-dropdown']"
+        [field]="'title'"
+        [list]="paymentModes"
+        (onSelectedItem)="onSelectPaymentMode($event)"
+    ></app-drop-down>
     <input
         type="text"
         appKeyUpEnter

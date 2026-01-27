@@ -14,6 +14,7 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVE_CARD } from 'src/app/const/confirm';
 import { ManageCardsRealTimeService } from 'src/app/states/manage-cards/manage-cards-real-time.service';
+import { IntegrationsStateService } from 'src/app/states/integrations/integrations-state.service';
 
 @Component({
   selector: 'app-payments-cards',
@@ -38,6 +39,7 @@ export class PaymentsCardsComponent extends DropDownComponent {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     public ref: ChangeDetectorRef,
+    public integrationsStateService: IntegrationsStateService,
     private manageCardsRealTimeService: ManageCardsRealTimeService,
     private manageCardsStateService: ManageCardsStateService,
     private manageCardsService: ManageCardsService,) {

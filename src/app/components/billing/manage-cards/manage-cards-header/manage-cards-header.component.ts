@@ -4,6 +4,7 @@ import { PasswordManagerService } from 'src/app/services/password-manager/passwo
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { IntegrationsStateService } from 'src/app/states/integrations/integrations-state.service';
 import { ManageCardsStateService } from 'src/app/states/manage-cards/manage-cards-state.service';
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
 
@@ -29,7 +30,7 @@ export class ManageCardsHeaderComponent {
    * @param {permissionsService} permissionsService to work with permissions service
    */
   constructor(
-
+    public integrationsStateService: IntegrationsStateService,
     private permissionsService: PermissionsService,
     private manageCardsStateService: ManageCardsStateService,
     public companiesStateService: CompaniesStateService,

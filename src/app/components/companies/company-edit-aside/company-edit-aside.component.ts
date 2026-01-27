@@ -288,7 +288,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     }
   }
   public onSelectPaymentMethod(item) {
-    this.company.defaultPaymentMethod = item.value;
+    this.company.defaultPaymentMethod = item ? item.value : null;
   }
   public onSelectPaymentTerms(item) {
     this.company.paymentTerms = item.value;

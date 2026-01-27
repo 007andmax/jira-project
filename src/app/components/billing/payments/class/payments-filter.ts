@@ -5,7 +5,12 @@ import { Payment } from './payment';
 export class PaymentsFilter extends InvoicesFilter {
     companyId: string;
     paymentStatus: string;
+    paymentMethod: string;
 
+
+    public setPaymentMethod(data) {
+        this.paymentMethod = data;
+    }
     public setPaymentStatus(data) {
         this.paymentStatus = data;
     }
@@ -22,7 +27,8 @@ export class PaymentsFilter extends InvoicesFilter {
             offset: (this.initLeftOffset) ? (this.offset - this.leftOffset) : this.offset,
             sortBy: this.sortBy,
             paymentStatus: this.paymentStatus,
-            excludeDeleted: this.excludeDeleted
+            excludeDeleted: this.excludeDeleted,
+            paymentMethod: this.paymentMethod
         };
         if (this.amount) data.amount = this.amount;
         if (this.endDate) data.endDate = moment(endDate).format('YYYY-MM-DD');
@@ -34,7 +40,8 @@ export class PaymentsFilter extends InvoicesFilter {
         let companyFilter = ((this.companyId) ? payment.clientCompanyId == this.companyId : true);
         let invoiceFilter = ((this.invoiceNumber) ? payment.invoiceNumbers.includes(this.invoiceNumber) : true);
         let statusFilter = ((this.paymentStatus) ? this.paymentStatus == payment.paymentStatus : true);
+        let paymentMethodFilter = ((this.paymentMethod) ? this.paymentMethod == payment.paymentMethod : true);
         let dateFilter = ((this.startDate) ? createdAt <= this.endDate && createdAt >= this.startDate : true);
-        return companyFilter && invoiceFilter && statusFilter && dateFilter;
+        return companyFilter && invoiceFilter && statusFilter && paymentMethodFilter && dateFilter;
     }
 }
