@@ -39,7 +39,7 @@
                     <span [textContent]="getTextCountFilters()"></span>
                 </button> -->
                 <button
-                    *ngIf="companiesStateService.currentCompany && companiesStateService.currentCompany.isMonerisConnected"
+                    *ngIf="companiesStateService.currentCompany && integrationsStateService.connected"
                     class="qt-button --gray --md qt-ml-8"
                     (click)="addCard()"
                 >

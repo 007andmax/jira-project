@@ -12,7 +12,7 @@
         class="qt-input-block__label"
         [textContent]="title"
       ></div>
-      <div class="qt-color-red-600"  *ngIf="companiesStateService.currentCompany && !companiesStateService.currentCompany.isMonerisConnected">Set up the 3rd party connection on the <span class="qt-color-info qt-pointer" (click)="goToIntegrationsPage()">Integration page</span></div>
+      <div class="qt-color-red-600"  *ngIf="companiesStateService.currentCompany && !integrationsStateService.connected">Set up the 3rd party connection on the <span class="qt-color-info qt-pointer" (click)="goToIntegrationsPage()">Integration page</span></div>
        <div
        *ngIf="selectedItem"
                 [ngClass]="{'icon__payment-method-master-card':selectedItem && selectedItem.cardType == 'MASTERCARD',
@@ -20,7 +20,7 @@
                 class="qt-icon__background-unset qt-bg-contain card-item__icon icon-dropdown"
             ></div>
       <input
-        [hidden]="companiesStateService.currentCompany && !companiesStateService.currentCompany.isMonerisConnected"
+        [hidden]="companiesStateService.currentCompany && !integrationsStateService.connected"
         type="text"
         [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
         [ngClass]="{'disabled': isDisabled, '--input-error' : !validate,'width-icon': selectedItem}"
@@ -38,7 +38,7 @@
       >
       <span
         class="app-drop-down__right-icon pointer"
-        *ngIf="list && !isDisabled && companiesStateService.currentCompany && companiesStateService.currentCompany.isMonerisConnected"
+        *ngIf="list && !isDisabled && companiesStateService.currentCompany && integrationsStateService.connected"
         [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '20px' }"
       >
         <i
