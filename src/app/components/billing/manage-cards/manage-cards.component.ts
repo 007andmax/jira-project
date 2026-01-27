@@ -18,7 +18,7 @@ import { IntegrationsStateService } from 'src/app/states/integrations/integratio
   providers: [TicketsListService]
 })
 export class ManageCardsComponent {
-  showPreloader: boolean = false;
+  showPreloader: boolean = true;
   showPendingPreloader: boolean = false;
   list = [];
   page: number = 0;
@@ -48,6 +48,13 @@ export class ManageCardsComponent {
       }
     });
     this.sub.add(onCurrentCompany);
+    let onGetConnected = this.integrationsStateService.onGetConnected.subscribe((connected) => {
+      if (this.companiesStateService.currentCompany && this.integrationsStateService.connected) {
+        this.setDefaultScoll();
+        this.onScroll();
+      }
+    });
+    this.sub.add(onGetConnected);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_CARD) this.onRemoveCard(this.manageCardsStateService.getCardForRemove().id);

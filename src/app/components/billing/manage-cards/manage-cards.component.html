@@ -69,7 +69,7 @@
                 </div>
                  <div
                     class="no-exist-elements qt-text-center"
-                    *ngIf="companiesStateService.currentCompany && !integrationsStateService.connected"
+                    *ngIf="!showPreloader && companiesStateService.currentCompany && !integrationsStateService.connected"
                 >
                     You cannot get the list of credit cards. <br>
 Set up the 3rd party connection on the <span class="qt-color-info qt-pointer" (click)="goToIntegrationsPage()">Integration page</span>
