@@ -145,7 +145,7 @@ export class EmailTempleteService {
    */
   getHtmlForPreview(type: string, data) {
     return this.http.post(`${this.apiUrl}settings/emailPages/preview/${type}`, {
-      subject: data.subject, body: data.body
+      subject: data.subject, body: data.body, header: data.header
     }, { responseType: 'text' });
   }
 
