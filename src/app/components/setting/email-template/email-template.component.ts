@@ -40,7 +40,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   openEmailTemplate: string;
   public show = false;
   public buttonName: any = "Show Description";
-  templatesData = { subject: {}, body: {}, isActive: false };
+  templatesData = { subject: {}, body: {}, isActive: false, header: {} };
   @ViewChild("body", { static: false }) body: ElementRef;
   @ViewChild("subject", { static: false }) subject: ElementRef;
   sub: Subscription = new Subscription();
@@ -65,6 +65,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     this.keywords = [];
     this.templeteForm = this.formBuilder.group({
       subject: ["", Validators.required],
+      header: [""],
       body: [""],
       isActive: [false]
     });
@@ -166,6 +167,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
             this.hideButtonTextEditor();
             this.templatesData.body = res.body;
             this.templatesData.subject = res.subject;
+            this.templatesData.header = res.header;
             this.keywords = res.keywords;
             this.type = res.type
 
@@ -183,12 +185,13 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
                 Validators.required
               ]);
             }
-             this.templeteForm.patchValue({
+            this.templeteForm.patchValue({
               subject: this.templatesData.subject,
+              header: this.templatesData.header,
               body: this.templatesData.body,
               isActive: (this.emailPages.activeAndNotDefault[key]) ? this.emailPages.activeAndNotDefault[key].isActive : false
             });
-             }
+          }
           this.openEmailTemplate = key;
         })
       )
@@ -317,7 +320,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     }
     this.templeteForm.patchValue({
       body: (document.getElementById("myEditor")['value'].length == 0) ? null : document.getElementById("myEditor")['value'],
-      subject: this.templeteForm.value.subject
+      subject: this.templeteForm.value.subject,
+      header: this.templeteForm.value.header,
     });
     this.emailService
       .saveEmailTemplate(this.templeteForm.value, this.openEmailTemplate)
@@ -352,7 +356,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
           if (defaultTemplate) {
             this.templeteForm.patchValue({
               subject: defaultTemplate.subject,
-              body: defaultTemplate.body
+              body: defaultTemplate.body,
+              header: defaultTemplate.header,
             });
           }
         })
