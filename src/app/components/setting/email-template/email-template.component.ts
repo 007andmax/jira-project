@@ -45,7 +45,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   @ViewChild("body", { static: false }) body: ElementRef;
   @ViewChild("subject", { static: false }) subject: ElementRef;
   sub: Subscription = new Subscription();
-  messageContent: string = '';
+  @ViewChild('editorWrap', { static: false }) editorWrap!: ElementRef<HTMLElement>;
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: false,
@@ -209,7 +209,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
             this.templatesData.body = res.body;
             this.templatesData.subject = res.subject;
             this.templatesData.header = res.header;
-            this.messageContent = res.body;
             this.keywords = res.keywords;
             this.type = res.type
 
@@ -273,8 +272,55 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       this.subject.nativeElement.focus();
       $("#elem").selectRange(3);
     } else {
-      this.insertAt(document.getElementById("myEditor"), text);
+      const wrap = this.editorWrap.nativeElement;
+      const editable = wrap.querySelector('.angular-editor-textarea') as HTMLElement | null;
+      if (!editable) return;
+
+      // 1) insert at caret
+      this.insertTextIntoAngularEditor(editable, text);
+
+      // 2) make angular-editor notice changes
+      editable.dispatchEvent(new InputEvent('input', { bubbles: true }));
+      editable.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));
+
+      // 3) ensure reactive form definitely gets updated
+      const htmlNow = editable.innerHTML;
+      const ctrl = this.templeteForm.get('body');
+      ctrl?.setValue(htmlNow, { emitEvent: true });
+      ctrl?.markAsDirty();
+      ctrl?.updateValueAndValidity();
     }
+  }
+
+
+  insertTextIntoAngularEditor(editorHost: HTMLElement, text: string) {
+    // editorHost should be the contenteditable element (.angular-editor-textarea)
+    editorHost.focus();
+
+    const sel = window.getSelection();
+    if (!sel) return;
+
+    // If selection is outside editor, move caret to end
+    if (sel.rangeCount === 0 || !editorHost.contains(sel.anchorNode)) {
+      const r = document.createRange();
+      r.selectNodeContents(editorHost);
+      r.collapse(false);
+      sel.removeAllRanges();
+      sel.addRange(r);
+    }
+
+    const range = sel.getRangeAt(0);
+
+    // Replace current selection (if any) with text, leaving caret after inserted text
+    range.deleteContents();
+    const node = document.createTextNode(text);
+    range.insertNode(node);
+
+    // Move caret to after inserted text node
+    range.setStartAfter(node);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
   }
 
   /**
@@ -299,6 +345,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   }
 
   insertAt(element, text) {
+    console.log("element", element);
     if (document['selection']) {
       element.focus();
       var sel = document['selection'].createRange();
