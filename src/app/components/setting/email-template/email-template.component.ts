@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { EmailTemplateStateService } from "src/app/states/email-template/email-template-state.service";
 import { fadeInAnimation } from "src/app/animations";
+import { AngularEditorConfig } from "@kolkov/angular-editor";
 
 declare var $: any;
 
@@ -44,6 +45,46 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   @ViewChild("body", { static: false }) body: ElementRef;
   @ViewChild("subject", { static: false }) subject: ElementRef;
   sub: Subscription = new Subscription();
+  messageContent: string = '';
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: false,
+    height: '100%',
+    minHeight: '5rem',
+    width: 'auto',
+    minWidth: '0',
+    translate: 'no',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Write your draft for companies',
+    defaultParagraphSeparator: '',
+    defaultFontName: '',
+    defaultFontSize: '',
+    toolbarPosition: 'bottom',
+    fonts: [
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'calibri', name: 'Calibri' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' }
+    ],
+    customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    uploadUrl: 'v1/image',
+    sanitize: false,
+  };
   constructor(
     private modalService: NgbModal,
     private emailService: EmailTempleteService,
@@ -168,6 +209,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
             this.templatesData.body = res.body;
             this.templatesData.subject = res.subject;
             this.templatesData.header = res.header;
+            this.messageContent = res.body;
             this.keywords = res.keywords;
             this.type = res.type
 
@@ -319,7 +361,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       }
     }
     this.templeteForm.patchValue({
-      body: (document.getElementById("myEditor")['value'].length == 0) ? null : document.getElementById("myEditor")['value'],
+      body: (this.templeteForm.value.body.length == 0) ? null : this.templeteForm.value.body,
       subject: this.templeteForm.value.subject,
       header: this.templeteForm.value.header,
     });

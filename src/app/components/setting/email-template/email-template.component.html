@@ -430,7 +430,7 @@
                 >
             </div>
             <div class="qt-input-block qt-input-line">
-                <label
+                <!--<label
                     class="qt-input-block__label"
                     for="myEditor"
                 >
@@ -443,7 +443,11 @@
                     row="8"
                     name="body"
                     formControlName="body"
-                ></textarea>
+                ></textarea>-->
+                  <angular-editor
+                  formControlName="body" 
+                        [config]="editorConfig"
+                    ></angular-editor>
             </div>
             <div class="f-row">
                 <div class="f-col col-100">
