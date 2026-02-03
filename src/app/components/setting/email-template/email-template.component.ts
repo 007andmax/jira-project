@@ -44,6 +44,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   templatesData = { subject: {}, body: {}, isActive: false, header: {} };
   @ViewChild("body", { static: false }) body: ElementRef;
   @ViewChild("subject", { static: false }) subject: ElementRef;
+  @ViewChild("header", { static: false }) header: ElementRef;
   sub: Subscription = new Subscription();
   @ViewChild('editorWrap', { static: false }) editorWrap!: ElementRef<HTMLElement>;
   editorConfig: AngularEditorConfig = {
@@ -249,7 +250,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
    */
   insertAtCaret(text) {
     var el = document.activeElement;
-
+    console.log("el", el);
     if (el.id === "subject") {
       var startPos = this.subject.nativeElement.selectionStart;
 
@@ -270,6 +271,27 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
 
       this.subject.nativeElement.selectionStart = startPos;
       this.subject.nativeElement.focus();
+      $("#elem").selectRange(3);
+    } if (el.id === "header") {
+      var startPos = this.header.nativeElement.selectionStart;
+
+      this.header.nativeElement.value =
+        this.header.nativeElement.value.substr(
+          0,
+          this.header.nativeElement.selectionStart
+        ) +
+        text +
+        this.header.nativeElement.value.substr(
+          this.header.nativeElement.selectionStart,
+          this.header.nativeElement.value.length
+        );
+
+      this.templeteForm.patchValue({
+        header: this.header.nativeElement.value
+      });
+
+      this.header.nativeElement.selectionStart = startPos;
+      this.header.nativeElement.focus();
       $("#elem").selectRange(3);
     } else {
       const wrap = this.editorWrap.nativeElement;
