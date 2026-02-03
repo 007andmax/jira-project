@@ -269,9 +269,9 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
         subject: this.subject.nativeElement.value
       });
 
-      this.subject.nativeElement.selectionStart = startPos;
+      // this.subject.nativeElement.selectionStart = startPos;
       this.subject.nativeElement.focus();
-      $("#elem").selectRange(3);
+      //  $("#elem").selectRange(3);
     } if (el.id === "header") {
       var startPos = this.header.nativeElement.selectionStart;
 
@@ -290,9 +290,9 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
         header: this.header.nativeElement.value
       });
 
-      this.header.nativeElement.selectionStart = startPos;
+      //  this.header.nativeElement.selectionStart = startPos;
       this.header.nativeElement.focus();
-      $("#elem").selectRange(3);
+      // $("#elem").selectRange(3);
     } else {
       const wrap = this.editorWrap.nativeElement;
       const editable = wrap.querySelector('.angular-editor-textarea') as HTMLElement | null;
