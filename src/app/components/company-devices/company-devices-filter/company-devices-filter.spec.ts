@@ -38,5 +38,16 @@ describe('CompanyDevicesFilterComponent unit test', () => {
     com.onChangeCustomDevice({ target: { checked: true } });
     expect(com.filter.isCustomDevices).toEqual(true);
   });
-
+  it('check "onChangeAgent"', () => {
+    const fixture = TestBed.createComponent(CompanyDevicesFilterComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onChangeAgent({ target: { checked: true } });
+    expect(com.filter.isAgent).toEqual(true);
+  });
+  it('check "onSelectType"', () => {
+    const fixture = TestBed.createComponent(CompanyDevicesFilterComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onSelectType([]);
+    expect(com.filter.assestType).toEqual([]);
+  });
 });
