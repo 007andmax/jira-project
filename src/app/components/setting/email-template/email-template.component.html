@@ -345,7 +345,7 @@
                 *ngIf="emailPages && emailPages.activeAndNotDefault[templeteInfo.key] && emailPages.activeAndNotDefault[templeteInfo.key].isNotDefault"
                 href="javascript:;"
                 class="qt-button --square-md --gray pointer"
-                placement="top"
+                 placement="left"
                 ngbTooltip="Reset Default"
                 container="body"
                 (click)="restoreDefault(templeteInfo.key)"
@@ -357,7 +357,7 @@
                 class="qt-button --square-md --gray qt-ml-8 pointer"
                 (click)="emailPreview(template)"
                 *ngIf="templeteInfo.showPreview"
-                placement="top"
+                placement="left"
                 ngbTooltip="Show Preview"
                 container="body"
             >
