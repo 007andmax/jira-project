@@ -479,6 +479,7 @@
                             class="tags pointer"
                             *ngFor="let key of keywords"
                             (mousedown)="insertAtCaret(key.keyName)"
+                            (mouseup)="restoreFocus()"
                         >
                             {{ key.keyName }}
                         </span>
@@ -491,6 +492,7 @@
                             class="key-area__text"
                             *ngFor="let key of keywords"
                             (mousedown)="insertAtCaret(key.keyName)"
+                            (mouseup)="restoreFocus()"
                         >
                             <strong class="key-area__text-strong">{{ key.keyName }} -</strong>
                             {{ key.description }}

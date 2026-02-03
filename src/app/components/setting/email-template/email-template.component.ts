@@ -42,6 +42,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   public show = false;
   public buttonName: any = "Show Description";
   templatesData = { subject: {}, body: {}, isActive: false, header: {} };
+  selectedInput: string;
   @ViewChild("body", { static: false }) body: ElementRef;
   @ViewChild("subject", { static: false }) subject: ElementRef;
   @ViewChild("header", { static: false }) header: ElementRef;
@@ -94,6 +95,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     private settingStateService: SettingStateService,
     private emailTemplateStateService: EmailTemplateStateService,
     private sanitized: DomSanitizer,
+    private elRef: ElementRef
   ) {
     this.ticketTemplates = this.emailService.getTicketTemplates();
     this.agentTemplates = this.emailService.getAgentTemplates();
@@ -251,6 +253,9 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   insertAtCaret(text) {
     var el = document.activeElement;
     console.log("el", el);
+    this.selectedInput = el.id;
+    console.log("this.selectedInput", this.selectedInput);
+    if (el.classList.contains("angular-editor-textarea")) this.selectedInput = "textarea";
     if (el.id === "subject") {
       var startPos = this.subject.nativeElement.selectionStart;
 
@@ -270,7 +275,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       });
 
       // this.subject.nativeElement.selectionStart = startPos;
-      this.subject.nativeElement.focus();
+      // this.subject.nativeElement.focus();
+      //   queueMicrotask(() => this.restoreFocus(this.subject.nativeElement));
       //  $("#elem").selectRange(3);
     } if (el.id === "header") {
       var startPos = this.header.nativeElement.selectionStart;
@@ -291,7 +297,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       });
 
       //  this.header.nativeElement.selectionStart = startPos;
-      this.header.nativeElement.focus();
+      //   this.header.nativeElement.focus();
       // $("#elem").selectRange(3);
     } else {
       const wrap = this.editorWrap.nativeElement;
@@ -313,7 +319,15 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       ctrl?.updateValueAndValidity();
     }
   }
-
+  restoreFocus(
+  ) {
+    console.log("restoreFocus", this.selectedInput)
+    if (!this.selectedInput) return;
+    let el = this.selectedInput == "subject" ? this.subject.nativeElement : this.selectedInput == "textarea" ? this.elRef.nativeElement.querySelector(".angular-editor-textarea") : this.header.nativeElement;
+    // restore focus
+    console.log("restoreFocus", el);
+    (el as HTMLElement).focus({ preventScroll: true });
+  }
 
   insertTextIntoAngularEditor(editorHost: HTMLElement, text: string) {
     // editorHost should be the contenteditable element (.angular-editor-textarea)
