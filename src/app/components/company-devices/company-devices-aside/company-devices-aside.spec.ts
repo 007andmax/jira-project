@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.module';
-import { CompanyDevicesAsideUpdatesComponent } from './company-devices-aside-updates.component';
 import { CompanyDevicesAsideComponent } from './company-devices-aside.component';
 
 
@@ -42,7 +41,7 @@ describe('CompanyDevicesAsideComponent unit test', () => {
     const fixture = TestBed.createComponent(CompanyDevicesAsideComponent);
     const com = fixture.debugElement.componentInstance;
     com.setCustomDevice({ hostName: 'test' });
-    expect(com.currentDevice.hostName).toEqual('test');
+    expect(com.customDevice.hostName).toEqual('test');
     expect(com.tab).toEqual('SYSTEM');
   });
   it('check "getFieldForCheckIcon"', () => {

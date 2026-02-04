@@ -50,7 +50,7 @@ describe('CompanyDevicesItemComponent unit test', () => {
   it('check "isLabel"', () => {
     const fixture = TestBed.createComponent(CompanyDevicesItemComponent);
     const com = fixture.debugElement.componentInstance;
-    com.currentDevice = {
+    com.device = {
       label: 'test',
       hostName: 'host',
     } as any;

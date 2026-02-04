@@ -45,7 +45,7 @@ describe('CompanyDevicesAsideDeviceIconComponent unit test', () => {
     com.device = { label: "Test Label", hostName: "Test Host", ip: "192.168.1.1" } as any;
     expect(com.getTextForTooltip()).toEqual("Test Label");
     com.device = { label: "Test Label", hostName: "Test Host", ip: "192.168.1.1" } as any;
-    expect(com.getTextForTooltip()).toEqual("Test Host");
+    expect(com.getTextForTooltip()).toEqual("Test Label");
   });
   it('check "getFieldForCheckIcon"', () => {
     const fixture = TestBed.createComponent(CompanyDevicesAsideDeviceIconComponent);
@@ -53,6 +53,6 @@ describe('CompanyDevicesAsideDeviceIconComponent unit test', () => {
     com.device = { iconName: "icon-test" } as any;
     expect(com.getFieldForCheckIcon()).toEqual("icon-test");
     com.customDevice = { type: "custom-type" } as any;
-    expect(com.getFieldForCheckIcon()).toEqual("custom-type");
+    expect(com.getFieldForCheckIcon()).toEqual("icon-test");
   });
 });

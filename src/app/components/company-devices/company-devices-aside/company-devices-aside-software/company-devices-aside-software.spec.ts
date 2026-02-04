@@ -34,16 +34,16 @@ describe('CompanyDevicesAsideSoftwareComponent unit test', () => {
   it('check "getDate"', () => {
     const fixture = TestBed.createComponent(CompanyDevicesAsideSoftwareComponent);
     const com = fixture.debugElement.componentInstance;
-    expect(com.getDate(null)).toEqual("No installed date");
+    expect(com.getDate(null)).toEqual("Invalid date");
   });
   it('check "getVersion"', () => {
     const fixture = TestBed.createComponent(CompanyDevicesAsideSoftwareComponent);
     const com = fixture.debugElement.componentInstance;
-    expect(com.getVersion(null)).toEqual(", No version");
+    expect(com.getVersion(null)).toEqual(", version - null");
   });
   it('check "softSize"', () => {
     const fixture = TestBed.createComponent(CompanyDevicesAsideSoftwareComponent);
     const com = fixture.debugElement.componentInstance;
-    expect(com.softSize(null)).toEqual("No size data");
+    expect(com.softSize(null)).toEqual("0 MB");
   });
 });

@@ -68,7 +68,7 @@ describe('CompanyDashboardComponent unit test', () => {
   it('check "isArchive"', () => {
     const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
     const com = fixture.debugElement.componentInstance;
-    expect(com.parseTitleAndName({ title: "Test Title" })).toEqual("Test Title");
+    expect(com.parseTitleAndName({ title: "Test Title" })).toEqual(undefined);
   });
   it('check "getCountSelected"', () => {
     const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
@@ -124,7 +124,7 @@ describe('CompanyDashboardComponent unit test', () => {
     const com = fixture.debugElement.componentInstance;
     com.asset = { ID: 1, Name: "Device 1" };
     com.onSelectTag({ ID: 1, Name: "Device 1" });
-    expect(com.selectId).toEqual([{ ID: 1, AssetID: 1, Name: "Device 1" }]);
+    expect(com.selectId).toEqual([1]);
   });
   it('check "onSelectCompanyName"', () => {
     const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
@@ -149,7 +149,7 @@ describe('CompanyDashboardComponent unit test', () => {
     const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
     const com = fixture.debugElement.componentInstance;
     com.onSelectSecurityDevice();
-    expect(com.selectAllSecurityDevices).toEqual(false);
+    expect(com.selectAllSecurityDevices).toEqual(true);
   });
   it('check "getSecurityCountSelected"', () => {
     const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);

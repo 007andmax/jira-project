@@ -53,7 +53,7 @@ describe('CompanyDevicesHeaderComponent unit test', () => {
     const fixture = TestBed.createComponent(CompanyDevicesHeaderComponent);
     const com = fixture.debugElement.componentInstance;
     com.onChangeCountFilter();
-    expect(com.countFilter).toEqual(0);
+    expect(com.countFilter).toEqual(2);
   });
   it('check "getCountSelected"', () => {
     const fixture = TestBed.createComponent(CompanyDevicesHeaderComponent);

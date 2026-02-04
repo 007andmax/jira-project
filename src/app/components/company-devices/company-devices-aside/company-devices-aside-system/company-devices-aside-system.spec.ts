@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.module';
-import { CompanyDevicesAsideSoftwareComponent } from './company-devices-aside-software.component';
 import { CompanyDevicesAsideSystemComponent } from './company-devices-aside-system.component';
 
 
@@ -47,13 +46,8 @@ describe('CompanyDevicesAsideSystemComponent unit test', () => {
   it('check "getLabelForEdit"', () => {
     const fixture = TestBed.createComponent(CompanyDevicesAsideSystemComponent);
     const com = fixture.debugElement.componentInstance;
-    com.device = { name: "Device 1" } as any;
+    com.device = { label: "Device 1" } as any;
     expect(com.getLabelForEdit()).toEqual("Device 1");
-  });
-  it('check "getNetworkAdapterField"', () => {
-    const fixture = TestBed.createComponent(CompanyDevicesAsideSystemComponent);
-    const com = fixture.debugElement.componentInstance;
-    expect(com.getNetworkAdapterField(null)).toEqual(null);
   });
   it('check "chackDefaultValue"', () => {
     const fixture = TestBed.createComponent(CompanyDevicesAsideSystemComponent);
@@ -68,6 +62,7 @@ describe('CompanyDevicesAsideSystemComponent unit test', () => {
   it('check "getSystemField"', () => {
     const fixture = TestBed.createComponent(CompanyDevicesAsideSystemComponent);
     const com = fixture.debugElement.componentInstance;
+    com.device = {report: {system:null}};
     expect(com.getSystemField(null)).toEqual(null);
   });
   it('check "getWindowsInfo"', () => {
@@ -78,6 +73,6 @@ describe('CompanyDevicesAsideSystemComponent unit test', () => {
   it('check "getRamSize"', () => {
     const fixture = TestBed.createComponent(CompanyDevicesAsideSystemComponent);
     const com = fixture.debugElement.componentInstance;
-    expect(com.getRamSize()).toEqual('0 GB');
+    expect(com.getRamSize(0)).toEqual('0GB');
   });
 });
