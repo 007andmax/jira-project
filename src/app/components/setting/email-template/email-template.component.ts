@@ -10,6 +10,9 @@ import { SettingStateService } from "src/app/states/setting/setting-state.servic
 import { EmailTemplateStateService } from "src/app/states/email-template/email-template-state.service";
 import { fadeInAnimation } from "src/app/animations";
 import { AngularEditorConfig } from "@kolkov/angular-editor";
+import { ConfirmStateService } from "../../shared/confirm/services/confirm-state.service";
+import { RESTORE_DEFAULT } from "src/app/const/confirm";
+import { ConfirmComponent } from "../../shared/confirm/confirm.component";
 
 declare var $: any;
 
@@ -48,6 +51,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   @ViewChild("header", { static: false }) header: ElementRef;
   sub: Subscription = new Subscription();
   @ViewChild('editorWrap', { static: false }) editorWrap!: ElementRef<HTMLElement>;
+  templeteKey:any;
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: false,
@@ -95,7 +99,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     private settingStateService: SettingStateService,
     private emailTemplateStateService: EmailTemplateStateService,
     private sanitized: DomSanitizer,
-    private elRef: ElementRef
+    private elRef: ElementRef,
+    private confirmStateService: ConfirmStateService,
   ) {
     this.ticketTemplates = this.emailService.getTicketTemplates();
     this.agentTemplates = this.emailService.getAgentTemplates();
@@ -144,6 +149,13 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(onChangeEmailTemplates);
+
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+        if (data) {
+          if (this.confirmStateService.getConfirmAction() === RESTORE_DEFAULT) this.onRestoreDefault();
+        }
+      })
+      this.sub.add(getConfirm);
   }
 
   ngOnDestroy() {
@@ -474,8 +486,16 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     if (!templeteKey) {
       return;
     }
-    this.emailService
-      .setToDefaultTemplete(templeteKey)
+    this.templeteKey = templeteKey;
+     this.confirmStateService.setConfirmAction(RESTORE_DEFAULT);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+   modalRef.componentInstance.header = "Restore Default Template";
+    modalRef.componentInstance.message = `Are you sure you want to restore the template to the default? The current template will not be recoverable.`;
+   
+  }
+onRestoreDefault() {
+ this.emailService
+      .setToDefaultTemplete(this.templeteKey)
       .pipe(
         map((defaultTemplate: any) => {
           if (defaultTemplate) {
@@ -495,8 +515,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
           this.toastr.error(`Error Occured ${error}`);
         }
       );
-  }
-
+}
   toggle() {
     this.show = !this.show;
 
