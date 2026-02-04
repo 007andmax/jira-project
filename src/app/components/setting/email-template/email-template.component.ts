@@ -159,6 +159,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.sub.unsubscribe();
     $('body').removeClass('page-settings');
   }
 
