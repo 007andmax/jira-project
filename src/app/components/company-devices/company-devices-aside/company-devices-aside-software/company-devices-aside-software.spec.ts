@@ -34,16 +34,28 @@ describe('CompanyDevicesAsideSoftwareComponent unit test', () => {
   it('check "getDate"', () => {
     const fixture = TestBed.createComponent(CompanyDevicesAsideSoftwareComponent);
     const com = fixture.debugElement.componentInstance;
+<<<<<<< HEAD
     expect(com.getDate(null)).toEqual("Invalid date");
+=======
+    expect(com.getDate(null)).toEqual("No installed date");
+>>>>>>> QT-1398
   });
   it('check "getVersion"', () => {
     const fixture = TestBed.createComponent(CompanyDevicesAsideSoftwareComponent);
     const com = fixture.debugElement.componentInstance;
+<<<<<<< HEAD
     expect(com.getVersion(null)).toEqual(", version - null");
+=======
+    expect(com.getVersion(null)).toEqual(", No version");
+>>>>>>> QT-1398
   });
   it('check "softSize"', () => {
     const fixture = TestBed.createComponent(CompanyDevicesAsideSoftwareComponent);
     const com = fixture.debugElement.componentInstance;
+<<<<<<< HEAD
     expect(com.softSize(null)).toEqual("0 MB");
+=======
+    expect(com.softSize(null)).toEqual("No size data");
+>>>>>>> QT-1398
   });
 });

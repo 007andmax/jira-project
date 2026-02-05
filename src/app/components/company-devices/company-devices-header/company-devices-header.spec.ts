@@ -53,7 +53,11 @@ describe('CompanyDevicesHeaderComponent unit test', () => {
     const fixture = TestBed.createComponent(CompanyDevicesHeaderComponent);
     const com = fixture.debugElement.componentInstance;
     com.onChangeCountFilter();
+<<<<<<< HEAD
     expect(com.countFilter).toEqual(2);
+=======
+    expect(com.countFilter).toEqual(0);
+>>>>>>> QT-1398
   });
   it('check "getCountSelected"', () => {
     const fixture = TestBed.createComponent(CompanyDevicesHeaderComponent);

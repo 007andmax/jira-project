@@ -34,7 +34,10 @@ describe('CompanyDevicesAsideUpdatesComponent unit test', () => {
   it('check "getAntivirusFiled"', () => {
     const fixture = TestBed.createComponent(CompanyDevicesAsideUpdatesComponent);
     const com = fixture.debugElement.componentInstance;
+<<<<<<< HEAD
     com.device = {report:{antivirus:[]}};
+=======
+>>>>>>> QT-1398
     expect(com.getAntivirusFiled(null)).toEqual(null);
   });
 

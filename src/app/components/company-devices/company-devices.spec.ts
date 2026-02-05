@@ -7,6 +7,10 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ClickOutsideModule } from 'ng4-click-outside';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+<<<<<<< HEAD
+=======
+import { CompanyDevicesItemComponent } from './company-devices-item.component';
+>>>>>>> QT-1398
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
@@ -37,7 +41,10 @@ import { CompanyDevicesRoutingModule } from './company-devices-routing.module';
 import { CompanyDevicesTagsModule } from './company-devices-tags/company-devices-tags.module';
 import { CompanyDevicesComponent } from './company-devices.component';
 import { FilterDevicesPipe } from './pipe/filter-devices.pipe';
+<<<<<<< HEAD
 import { CompanyDevicesItemComponent } from './company-devices-item/company-devices-item.component';
+=======
+>>>>>>> QT-1398
  declare var jasmine;
  const mockRouter = {
    navigate: jasmine.createSpy('navigate'),
@@ -103,7 +110,11 @@ describe('CompanyDevicesComponent unit test', () => {
     const fixture = TestBed.createComponent(CompanyDevicesComponent);
     const com = fixture.debugElement.componentInstance;
     com.onChangeSelect();
+<<<<<<< HEAD
      expect(com.selectAllDevices).toEqual(true);
+=======
+     expect(com.selectAllDevices).toEqual(false);
+>>>>>>> QT-1398
   });
      it('check "toogleDevices"', () => {
     const fixture = TestBed.createComponent(CompanyDevicesComponent);
@@ -114,9 +125,17 @@ describe('CompanyDevicesComponent unit test', () => {
   it('check "isLabel"', () => {
     const fixture = TestBed.createComponent(CompanyDevicesComponent);
     const com = fixture.debugElement.componentInstance;
+<<<<<<< HEAD
     expect(com.isLabel({
       label: 'test',
       hostName: 'host',
     })).toEqual(true);
+=======
+    com.currentDevice = {
+      label: 'test',
+      hostName: 'host',
+    } as any;
+    expect(com.isLabel()).toEqual(true);
+>>>>>>> QT-1398
   });
 });
