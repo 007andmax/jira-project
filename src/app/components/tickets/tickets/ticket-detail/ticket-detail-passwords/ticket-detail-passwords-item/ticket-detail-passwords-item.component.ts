@@ -26,6 +26,11 @@ export class TicketDetailPasswordsItemComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+
+  }
+  onToggleBodyPassword(data) {
+    this.toggleBodyPassword = data;
+    this.toggleSecretCode();
   }
   toggleSecretCode() {
     this.showSecretCode = !this.showSecretCode;
@@ -73,6 +78,17 @@ export class TicketDetailPasswordsItemComponent implements OnInit, OnDestroy {
     document.body.removeChild(textArea);
     this.toastrService.success("The value is copied to clipboard");
     this.appStateService.changeDetectorRef();
+  }
+  copyPassword(value) {
+    if (!value) {
+      this.passwordManagerService.setOpenRecord(this.password.id).subscribe((data: any) => {
+        this.password.setPassword(data.password);
+        this.copy(data.password)
+      })
+    } else {
+      this.copy(value)
+    }
+
   }
   getCodeProgress() {
     return (this.timeCount / 30) * 100;
