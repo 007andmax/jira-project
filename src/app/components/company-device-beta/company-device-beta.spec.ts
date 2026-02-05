@@ -68,11 +68,7 @@ describe('CompanyDashboardComponent unit test', () => {
   it('check "isArchive"', () => {
     const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
     const com = fixture.debugElement.componentInstance;
-<<<<<<< HEAD
     expect(com.parseTitleAndName({ title: "Test Title" })).toEqual(undefined);
-=======
-    expect(com.parseTitleAndName({ title: "Test Title" })).toEqual("Test Title");
->>>>>>> QT-1398
   });
   it('check "getCountSelected"', () => {
     const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
@@ -128,11 +124,7 @@ describe('CompanyDashboardComponent unit test', () => {
     const com = fixture.debugElement.componentInstance;
     com.asset = { ID: 1, Name: "Device 1" };
     com.onSelectTag({ ID: 1, Name: "Device 1" });
-<<<<<<< HEAD
     expect(com.selectId).toEqual([1]);
-=======
-    expect(com.selectId).toEqual([{ ID: 1, AssetID: 1, Name: "Device 1" }]);
->>>>>>> QT-1398
   });
   it('check "onSelectCompanyName"', () => {
     const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
@@ -157,11 +149,7 @@ describe('CompanyDashboardComponent unit test', () => {
     const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
     const com = fixture.debugElement.componentInstance;
     com.onSelectSecurityDevice();
-<<<<<<< HEAD
     expect(com.selectAllSecurityDevices).toEqual(true);
-=======
-    expect(com.selectAllSecurityDevices).toEqual(false);
->>>>>>> QT-1398
   });
   it('check "getSecurityCountSelected"', () => {
     const fixture = TestBed.createComponent(CompanyDeviceBetaComponent);
