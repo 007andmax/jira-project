@@ -510,9 +510,10 @@ onRestoreDefault() {
       )
       .subscribe(
         () => {
-
+          this.confirmStateService.initRequest(false);
         },
         error => {
+          this.confirmStateService.initRequest(false);
           this.toastr.error(`Error Occured ${error}`);
         }
       );
