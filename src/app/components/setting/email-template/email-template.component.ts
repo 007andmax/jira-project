@@ -44,7 +44,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   openEmailTemplate: string;
   public show = false;
   public buttonName: any = "Show Description";
-  templatesData = { subject: {}, body: {}, isActive: false, header: {} };
+  templatesData = { subject: {}, body: {}, isActive: false, header: {},isHeaderEnabled:false };
   selectedInput: string;
   @ViewChild("body", { static: false }) body: ElementRef;
   @ViewChild("subject", { static: false }) subject: ElementRef;
@@ -116,7 +116,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       subject: ["", Validators.required],
       header: [""],
       body: [""],
-      isActive: [false]
+      isActive: [false],
+      isHeaderEnabled:[false]
     });
     this.getEmailPages();
     this.settingStateService.setComponentName('EmailTempleteComponent');
@@ -225,6 +226,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
             this.templatesData.body = res.body;
             this.templatesData.subject = res.subject;
             this.templatesData.header = res.header;
+            this.templatesData.isHeaderEnabled = res.isHeaderEnabled;
             this.keywords = res.keywords;
             this.type = res.type
 
@@ -246,7 +248,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
               subject: this.templatesData.subject,
               header: this.templatesData.header,
               body: this.templatesData.body,
-              isActive: (this.emailPages.activeAndNotDefault[key]) ? this.emailPages.activeAndNotDefault[key].isActive : false
+              isActive: (this.emailPages.activeAndNotDefault[key]) ? this.emailPages.activeAndNotDefault[key].isActive : false,
+              isHeaderEnabled: this.templatesData.isHeaderEnabled
             });
           }
           this.openEmailTemplate = key;
