@@ -56,7 +56,7 @@ export class CompanyDevicesCustomDropDownComponent extends CompanyTagsComponent 
 * @param {String} id - selected id element
 */
   isSelected(id) {
-    return this.selectedTag.find(item => item.id == id);
+    return this.selectedTag.some(item => item.id == id);
   }
 
   onKeyUp(event) {

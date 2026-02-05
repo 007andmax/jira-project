@@ -88,17 +88,22 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
       catchError(error => of(undefined)))))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
           this.crmStateService.setListIndustriesForRemove([]);
           this.cd.detectChanges();
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       );
   }
   onRemoveIndustry(id) {
     this.crmService.removeIndustry(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.crmStateService.setListIndustriesForRemove([]);
       this.cd.detectChanges();
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   onSelect(event, item) {
@@ -115,7 +120,8 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
   removeIndustry(item) {
     this.confirmStateService.setConfirmAction(DELETE_CRM_INDUSTRY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Industry`;
+    modalRef.componentInstance.header = `Delete Industry`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this industry?`;
     this.crmStateService.setIndustryForRemove(item);
   }
   ngOnDestroy(): void {

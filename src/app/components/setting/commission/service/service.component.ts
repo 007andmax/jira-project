@@ -164,6 +164,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
         .setServiceRate(this.id, data.rate, data.setForOldExpenses)
         .subscribe(
           (res: any) => {
+            this.confirmStateService.initRequest(false);
             this.service.commissionRate =
               res && res.commissionRate
                 ? res.commissionRate.toFixed(2)
@@ -173,6 +174,7 @@ export class ServiceComponent implements OnInit, OnDestroy {
               : (this.selectedIdx = -1);
           },
           error => {
+            this.confirmStateService.initRequest(false);
             this.toastrService.error(`Error Occurred, ${error}`);
           }
         );
@@ -192,12 +194,14 @@ export class ServiceComponent implements OnInit, OnDestroy {
       const id = !this.isSpecialService ? this.service.versionedId.id : this.service.id;
       this.commissionService.setServiceRate(id, '0', false).subscribe(
         res => {
+          this.confirmStateService.initRequest(false);
           this.service.commissionRate = null;
           this.isSpecialService
             ? (this.selectedSpecIdx = -1)
             : (this.selectedIdx = -1);
         },
         error => {
+          this.confirmStateService.initRequest(false);
           this.toastrService.error(`Error Occurred, ${error}`);
         }
       );
@@ -210,7 +214,8 @@ export class ServiceComponent implements OnInit, OnDestroy {
       this.deleteServicePopup = true;
       this.confirmStateService.setConfirmAction(DELETE_COMMISSION_SERVICE);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-      modalRef.componentInstance.message = `Are you sure you want ${this.service.name} commission rate to zero?`;
+      modalRef.componentInstance.header = `Reset rate`;
+      modalRef.componentInstance.message = `Are you sure you want to set the commission rate for ${this.service.name} commission rate to zero?`;
 
     }
   }
@@ -223,7 +228,8 @@ export class ServiceComponent implements OnInit, OnDestroy {
     if (this.service.commissionRate === null) {
       this.confirmStateService.setConfirmAction(CHANGE_COMMISSION_SERVICE);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-      modalRef.componentInstance.message = `Do you want this commission to fact old items?`;
+      modalRef.componentInstance.header = `Apply Commission`;
+      modalRef.componentInstance.message = `Are you sure you want the commission rate to be applied to old items?`;
 
     } else {
       this.setServiceRate();

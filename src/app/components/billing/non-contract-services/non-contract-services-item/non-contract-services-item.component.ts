@@ -79,7 +79,8 @@ export class NonContractServicesItemComponent implements OnInit, OnDestroy {
   delete() {
     this.confirmStateService.setConfirmAction(REMOVE_DEFAULT_SERVICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to delete ${this.service.name}?`;
+    modalRef.componentInstance.header = 'Delete Service';
+    modalRef.componentInstance.message = `Are you sure you want to delete ${this.service.name}?`;
     this.nonContractServicesStateService.setServiceForRemove(this.service);
   }
   private sortGlNumbers(data) {

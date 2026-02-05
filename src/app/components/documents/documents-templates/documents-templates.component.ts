@@ -80,8 +80,11 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
   }
   removeDocument(item) {
     this.documentsService.removeDocument(item.id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.toastrService.success("The template has been successfully removed");
       this.appStateService.changeDetectorRef();
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   public goToDocumentsList() {
@@ -120,7 +123,8 @@ export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
   onRemoveDocument(data) {
     this.confirmStateService.setConfirmAction(REMOVE_DOCUMENT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to delete this template?`;
+    modalRef.componentInstance.header = `Delete Document`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this template?`;
     this.documentsStateService.setDocumentForRemove(data);
   }
   onChangeTemplate(data) {

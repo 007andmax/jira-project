@@ -42,8 +42,11 @@ export class TicketDetailDevicesDetailsComponent implements OnInit {
         if (this.confirmStateService.getConfirmAction() === REMOVE_DEVICES) {
           if (this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).length > 0) this.removeCustomDevice(this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).map(item => item.deviceId));
           if (this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).length > 0) this.devicesService.sendUninstallAgentRequest(this.ticketProfile.company.id, this.devicesStateService.getDevicesForRemove().map(item => item.deviceId)).subscribe(data => {
+            this.confirmStateService.initRequest(false);
             let ids = this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).map(item => item.deviceId);
             this.devices = this.devices.filter(item => !ids.includes(item.deviceId));
+          }, err => {
+            this.confirmStateService.initRequest(false);
           });
         }
       }
@@ -68,7 +71,10 @@ export class TicketDetailDevicesDetailsComponent implements OnInit {
       [...ids.map(item => this.devicesService.deleteCustomDevice(item))]
     )
       .subscribe(res => {
+        this.confirmStateService.initRequest(false);
         this.devices = this.devices.filter(item => !ids.includes(item.deviceId));
+      }, err => {
+        this.confirmStateService.initRequest(false);
       });
   }
   search(event) {

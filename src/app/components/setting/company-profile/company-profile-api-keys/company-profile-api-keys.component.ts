@@ -72,8 +72,11 @@ export class CompanyProfileApiKeysComponent implements OnInit {
   removeApiKey(id) {
     this.apiKeysService.remove(id).subscribe(
       (res: any) => {
+        this.confirmStateService.initRequest(false);
         const Index = this.list.findIndex((item) => item.id === id);
         if (Index > -1) this.list.splice(Index, 1);
+      }, err => {
+        this.confirmStateService.initRequest(false);
       });
   }
   updateAPiKey(data) {
@@ -118,7 +121,8 @@ export class CompanyProfileApiKeysComponent implements OnInit {
     this.apiKeysStateService.setApiKeyForRemove(data);
     this.confirmStateService.setConfirmAction(DELETE_API_KEY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove API Key`;
+    modalRef.componentInstance.header = `Delete API Key`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this API key?`;
   }
   public trackById(index, item) {
     return item.id;

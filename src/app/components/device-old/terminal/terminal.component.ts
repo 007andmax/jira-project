@@ -155,11 +155,13 @@ export class TerminalComponent implements OnInit, OnDestroy {
     this.terminalService.deleteCommand(this.deleteId)
       .pipe(first())
       .subscribe(resp => {
+        this.confirmStateService.initRequest(false);
         this.loading = false;
         this.getCommandList();
         this.toastr.success('Command Deleted Successfully');
       },
         error => {
+          this.confirmStateService.initRequest(false);
           this.loading = false;
         });
   }
@@ -172,6 +174,7 @@ export class TerminalComponent implements OnInit, OnDestroy {
     }
     this.confirmStateService.setConfirmAction(DELETE_COMMAND);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = `Delete Script`;
     modalRef.componentInstance.message = `Are you sure you want to delete ${title} script?`;
   }
   openRunScript() {

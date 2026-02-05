@@ -246,6 +246,9 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.userId = id;
     this.confirmStateService.setConfirmAction(RESTORE_USER);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = `Restore User`;
+    modalRef.componentInstance.message = `Are you sure you want to restore user?`;
+    this.cd.detectChanges();
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
@@ -254,7 +257,10 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
     this.techUsersService.restoreUser(this.userId)
       .subscribe(
         response => {
+          this.confirmStateService.initRequest(false);
           //  this.getUsers();
+        }, err => {
+          this.confirmStateService.initRequest(false);
         });
   }
   onAuthTypeChange(data) {

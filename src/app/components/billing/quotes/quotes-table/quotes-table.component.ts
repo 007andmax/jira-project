@@ -195,17 +195,24 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   onArchiveQuotes() {
     let quotes = this.quoteStateService.getQuotesForArchive();
     this.quoteServices.archiveQuote(quotes.map(item => item.id)).subscribe((res) => {
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     });
   }
   onArchiveQuote() {
     let quote = this.quoteStateService.getQuoteForArchive();
     this.quoteServices.archiveQuote([quote.id]).subscribe((res) => {
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     });
   }
   archiveQuote(item) {
     this.confirmStateService.setConfirmAction(ARCHIVE_QUOTE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to archive a quote?`;
+    modalRef.componentInstance.header = 'Archive Quote';
+    modalRef.componentInstance.message = `Are you sure you want to archive a quote?`;
     this.quoteStateService.setQuoteForArchive(item);
   }
   cancelQuote(item) {

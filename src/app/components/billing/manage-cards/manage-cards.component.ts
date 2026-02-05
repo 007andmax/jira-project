@@ -93,8 +93,11 @@ export class ManageCardsComponent {
   }
   onRemoveCard(cardId) {
     this.manageCardsService.deleteCard(cardId).subscribe(res => {
+      this.confirmStateService.initRequest(false);
       this.manageCardsStateService.fastRemoveCard(cardId);
       this.cd.detectChanges();
+    }, err => {
+      this.confirmStateService.initRequest(false);
     });
   }
   public onFilter(field) {

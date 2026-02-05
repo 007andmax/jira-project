@@ -11,7 +11,8 @@ import { GlNumber } from 'src/class/gl-number/gl-number';
 import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SubscriptionServicesConfirmComponent } from '../subscription-services-confirm/subscription-services-confirm.component';
+import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 
 @Component({
   selector: 'app-subscription-services-edit',
@@ -37,6 +38,7 @@ export class SubscriptionServicesEditComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private modalService: NgbModal,
     private glNumberService: GlNumberService,
+    private confirmStateService: ConfirmStateService,
     public formBuilder: UntypedFormBuilder,) { }
 
   ngOnInit() {
@@ -67,10 +69,10 @@ export class SubscriptionServicesEditComponent implements OnInit, OnDestroy {
       this.glNumbers = this.sortGlNumbers(data);
     })
     this.sub.add(getOnGlNumbers);
-    let onConfirm = this.subscriptionServicesStateService.onConfirm.subscribe(res => {
-      if (res) this.save();
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) this.save();
     })
-    this.sub.add(onConfirm);
+    this.sub.add(getConfirm);
   }
   onChangeUpdateServicePricesInContracts(event) {
     this.modelForm.controls["updateServicePricesInContracts"].setValue(event.target.checked);
@@ -102,8 +104,9 @@ export class SubscriptionServicesEditComponent implements OnInit, OnDestroy {
       return;
     }
     if (this.modelForm.value.updateServicePricesInContracts) {
-      const modalRef = this.modalService.open(SubscriptionServicesConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-      modalRef.componentInstance.message = `Do you want to apply a new service price to all contracts where the service is used?`;
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.header = 'Change Rate';
+      modalRef.componentInstance.message = `Are you sure you want to apply a new service price to all contracts where the service is used?`;
     } else {
       this.save();
     }
@@ -111,8 +114,11 @@ export class SubscriptionServicesEditComponent implements OnInit, OnDestroy {
   save() {
     this.editService.setDisabled(true);
     this.subscriptionServicesService.editService(this.service.id, this.modelForm.value).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.subscriptionServicesStateService.fastEditService(data);
       this.close();
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   close() {

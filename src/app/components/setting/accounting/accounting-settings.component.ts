@@ -79,10 +79,12 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
       catchError(error => of(undefined)))))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
           this.glNumberStateService.setListGlNumbersForRemove([]);
           this.cd.detectChanges();
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       );
   }
@@ -101,7 +103,8 @@ export class AccountingSettingsComponent implements OnInit, OnDestroy {
   removeGls() {
     this.confirmStateService.setConfirmAction(DELETE_LIST_GL_NUMBERS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Income Account Number`;
+    modalRef.componentInstance.header = `Delete Income Account Number`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this Income account number?`;
   }
   getSelectedCount() {
     return this.glNumberStateService.getListGlNumbersForRemove().length;

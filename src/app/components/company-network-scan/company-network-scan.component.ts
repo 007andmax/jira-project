@@ -136,6 +136,9 @@ export class CompanyNetworkScanComponent implements OnInit {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === NETWORK_REMOVE_DEVICE) {
           this.devicesService.sendUninstallAgentRequest(this.companyId, [this.networkScanStateService.getDeviceForRemove().deviceId]).subscribe(data => {
+            this.confirmStateService.initRequest(false);
+          }, err => {
+            this.confirmStateService.initRequest(false);
           })
         }
       }

@@ -137,18 +137,27 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REBOOT_DEVICE) {
           this.devicesService.sendPowerAction(this.companyId, this.devicesStateService.getDevicesForReboot().map(item => item.agentId), 'reboot').subscribe(data => {
+            this.confirmStateService.initRequest(false);
+          }, err => {
+            this.confirmStateService.initRequest(false);
           });
         }
         if (this.confirmStateService.getConfirmAction() === SHUTDOWN_DEVICE) {
           this.devicesService.sendPowerAction(this.companyId, this.devicesStateService.getDevicesForShutDown().map(item => item.agentId), 'shutdown').subscribe(data => {
+            this.confirmStateService.initRequest(false);
+          }, err => {
+            this.confirmStateService.initRequest(false);
           });
         }
         if (this.confirmStateService.getConfirmAction() === REMOVE_DEVICES) {
           if (this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).length > 0) this.removeCustomDevice(this.devicesStateService.getDevicesForRemove().filter(item => item.isCustom).map(item => item.deviceId));
           if (this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).length > 0) this.devicesService.sendUninstallAgentRequest(this.companyId, this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).map(item => item.deviceId)).subscribe(data => {
+            this.confirmStateService.initRequest(false);
             let ids = this.devicesStateService.getDevicesForRemove().filter(item => !item.isCustom).map(item => item.deviceId);
             this.devices = this.devices.filter(item => !ids.includes(item.deviceId));
             this.onChangeSelect();
+          }, err => {
+            this.confirmStateService.initRequest(false);
           });
         }
       }
@@ -222,7 +231,10 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
       [...ids.map(item => this.devicesService.deleteCustomDevice(item))]
     )
       .subscribe(res => {
+        this.confirmStateService.initRequest(false);
         this.devices = this.devices.filter(item => !ids.includes(item.deviceId));
+      }, err => {
+        this.confirmStateService.initRequest(false);
       });
   }
   onCloseFilters() {
@@ -249,19 +261,22 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     let len = this.devices.filter(item => item.selected).length;
     this.confirmStateService.setConfirmAction(REMOVE_DEVICES);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to remove ${(len === 1) ? "1 device" : len + " devices"}?`;
+    modalRef.componentInstance.header = `Delete Device`;
+    modalRef.componentInstance.message = `Are you sure you want to remove ${(len === 1) ? "1 device" : len + " devices"}?`;
     this.devicesStateService.setDevicesForRemove(this.devices.filter(item => item.selected));
   }
   onTurnOff(action) {
     if (action === 'reboot') {
       this.confirmStateService.setConfirmAction(REBOOT_DEVICE);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.header = `Reboot Device`;
       modalRef.componentInstance.message = `Are you sure you want to reboot chosen device?`;
       this.devicesStateService.setDevicesForReboot(this.devices.filter(item => item.selected));
     }
     if (action === 'shutdown') {
       this.confirmStateService.setConfirmAction(SHUTDOWN_DEVICE);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.header = `Shutdown Device`;
       modalRef.componentInstance.message = `Are you sure you want to shutdown chosen device?`;
       this.devicesStateService.setDevicesForShutDown(this.devices.filter(item => item.selected));
     }

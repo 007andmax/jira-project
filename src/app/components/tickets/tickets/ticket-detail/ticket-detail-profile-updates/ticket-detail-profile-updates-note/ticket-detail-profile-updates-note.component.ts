@@ -37,6 +37,7 @@ export class TicketDetailProfileUpdatesNoteComponent implements OnInit {
     this.ticketStateService.setUpdateForRemove(this.update);
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET_DETAIL);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = `Delete Ticket`;
     modalRef.componentInstance.message = `The ticket update containing a note will become inaccessible. Continue with permanent deletion?`;
   }
   formatBytes(bytes, decimals) {

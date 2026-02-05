@@ -134,7 +134,9 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   }
   public onDeleteGlobalFilter(filter) {
     this.ticketsService.deleteGlobalFilter(filter.id).subscribe(data => {
-
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   public close() {
@@ -206,6 +208,8 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     this.confirmStateService.setConfirmAction(DELETE_GLOBAL_FILTER);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     this.ticketsStateService.setGlobalFilterForRemove(filter);
+    modalRef.componentInstance.header = 'Delete saved filter';
+    modalRef.componentInstance.message = `Are you sure you want to delete this saved filter?`;
   }
   ngOnDestroy(): void {
     /* CAUSTOM LOGIC FOR COUNTS TICKETS - We will need to remove this logic once we will completely remove the angularJS framework. */

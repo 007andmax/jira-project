@@ -45,6 +45,7 @@ export class TicketDetailProfileUpdatesProductComponent implements OnInit {
     this.ticketStateService.setUpdateForRemove(this.update);
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET_DETAIL);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = `Delete Ticket`;
     modalRef.componentInstance.message = `The ticket update containing a service will become inaccessible. Continue with permanent deletion?`;
   }
   removeProduct() {
@@ -52,7 +53,8 @@ export class TicketDetailProfileUpdatesProductComponent implements OnInit {
     this.ticketStateService.setProductForRemove(this.update.products[0]);
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET_DETAIL_PRODUCT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to remove the item?`;
+    modalRef.componentInstance.header = `Delete Ticket`;
+    modalRef.componentInstance.message = `Are you sure you want to remove the item?`;
 
   }
   edit() {

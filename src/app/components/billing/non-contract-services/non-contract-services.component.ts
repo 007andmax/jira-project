@@ -67,7 +67,9 @@ export class NonContractServicesComponent implements OnInit, OnDestroy {
   }
   public removeService(service) {
     this.nonContractServicesService.deleteService(service.versionedId.id).subscribe(data => {
-
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   onShowAddAside() {

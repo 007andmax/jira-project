@@ -94,7 +94,10 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
        }
      }*/
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      if (data) this.close();
+      if (data) {
+        this.confirmStateService.initRequest(false);
+        this.close();
+      }
       this.showConfirm = false;
     })
     this.sub.add(getConfirm);
@@ -123,8 +126,8 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
       this.showConfirm = true;
       this.confirmStateService.setConfirmAction(SAVE_AND_SEND);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-
-      modalRef.componentInstance.message = 'Do you want to close this window? All entered information will be lost.';
+      modalRef.componentInstance.header = `Close Quote`;
+      modalRef.componentInstance.message = 'Are you sure you want to close this window? All entered information will be lost.';
     }
   }
 

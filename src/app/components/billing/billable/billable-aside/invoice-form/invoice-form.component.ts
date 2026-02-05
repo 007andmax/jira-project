@@ -235,7 +235,8 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   delete(ticket) {
     this.confirmStateService.setConfirmAction(REMOVE_TICKET_INVOICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to remove the ticket?`;
+    modalRef.componentInstance.header = 'Remove ticket';
+    modalRef.componentInstance.message = `Are you sure you want to remove the ticket?`;
     this.billableStateService.setLockedTicketForRemove(ticket.id);
   }
   public trackByIndex(index, item) {

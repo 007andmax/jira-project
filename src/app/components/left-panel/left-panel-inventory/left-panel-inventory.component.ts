@@ -64,7 +64,8 @@ export class LeftPanelInventoryComponent implements OnInit {
   deleteCategory(category) {
     this.confirmStateService.setConfirmAction(DELETE_COMPANY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to delete category?`;
+    modalRef.componentInstance.header = 'Delete Category';
+    modalRef.componentInstance.message = `Are you sure you want to delete category?`;
     this.inventoryStateService.setCategoryForDelete(category);
   }
   public trackById(index, item) {

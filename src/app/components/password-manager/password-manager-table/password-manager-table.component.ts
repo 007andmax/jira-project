@@ -94,6 +94,7 @@ export class PasswordManagerTableComponent implements OnInit, OnDestroy {
   deleteRecord() {
     this.confirmStateService.setConfirmAction(REMOVE_RECORD);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = `Delete Password Record`;
     modalRef.componentInstance.message = `Are you sure you want to delete the password record?`;
     this.passwordManagerStateService.setRecordForRemove(this.item);
   }

@@ -97,10 +97,12 @@ export class ProductsSettingsCategoryComponent implements OnInit, OnDestroy {
       catchError(error => of(undefined)))))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
           this.inventoryStateService.setListCategoriesForRemove([]);
           this.cd.detectChanges();
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       );
   }
@@ -109,10 +111,12 @@ export class ProductsSettingsCategoryComponent implements OnInit, OnDestroy {
       catchError(error => of(undefined)))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
           this.inventoryStateService.setListCategoriesForRemove([]);
           this.cd.detectChanges();
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       )
   }
@@ -142,7 +146,8 @@ export class ProductsSettingsCategoryComponent implements OnInit, OnDestroy {
   removeCategoryProduct(data) {
     this.confirmStateService.setConfirmAction(DELETE_CATEGORY_PRODUCT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Product Category`;
+    modalRef.componentInstance.header = `Delete Product Category`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this product category?`;
     this.inventoryStateService.setCategoryForDelete(data);
   }
   onFilter(field) {

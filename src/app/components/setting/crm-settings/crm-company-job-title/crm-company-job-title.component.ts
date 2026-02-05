@@ -87,17 +87,22 @@ export class CrmCompanyJobTitleComponent implements OnInit {
       catchError(error => of(undefined)))))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
           this.crmStateService.setListJobTitleForRemove([]);
           this.cd.detectChanges();
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       );
   }
   onRemoveJobTitle(id) {
     this.crmService.removeJobTitle(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.crmStateService.setListJobTitleForRemove([]);
       this.cd.detectChanges();
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   onSelect(event, item) {
@@ -114,7 +119,8 @@ export class CrmCompanyJobTitleComponent implements OnInit {
   removeJobTitle(item) {
     this.confirmStateService.setConfirmAction(DELETE_CRM_JOB_TITLE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Job Title`;
+    modalRef.componentInstance.header = `Delete Job Title`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this job title?`;
     this.crmStateService.setJobTitleForRemove(item);
   }
   ngOnDestroy(): void {

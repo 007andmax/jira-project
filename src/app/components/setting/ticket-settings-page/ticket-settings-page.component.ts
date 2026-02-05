@@ -90,10 +90,12 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
     forkJoin(this.ticketsStateService.getListTicketStatusForRemove().map(item => this.ticketsService.removeTicketStatus(item.id)))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
           this.ticketsStateService.setListTicketStatusForRemove([]);
           this.cd.detectChanges();
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       );
   }
@@ -101,22 +103,26 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
     forkJoin(this.ticketsStateService.getListTicketsPrioritiesForRemove().map(item => this.ticketsService.removeTicketPriority(item.id)))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
           this.ticketsStateService.setListTicketsPrioritiesForRemove([]);
           this.cd.detectChanges();
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       );
   }
   removeTicketsStatus() {
     this.confirmStateService.setConfirmAction(DELETE_LIST_TICKET_STATUS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Ticket Status`;
+    modalRef.componentInstance.header = `Delete Ticket Status`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this ticket status?`;
   }
   removeTicketsPriority() {
     this.confirmStateService.setConfirmAction(DELETE_LIST_TICKET_PRIORITY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Ticket Priority`;
+    modalRef.componentInstance.header = `Delete Ticket Priority`;
+    modalRef.componentInstance.message = `Are you sure you want to delete the ticket priority?`;
   }
 }
 

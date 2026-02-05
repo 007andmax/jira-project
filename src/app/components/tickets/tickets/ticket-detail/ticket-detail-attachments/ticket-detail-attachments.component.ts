@@ -24,7 +24,9 @@ export class TicketDetailAttachmentsComponent extends TicketProfileAttachmentsCo
   }
   onDelete() {
     this.ticketsService.deleteFile(this.ticketStateService.getAttachmentForRemove().file.id).subscribe(data => {
-
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   downloadAll() {
@@ -51,6 +53,7 @@ export class TicketDetailAttachmentsComponent extends TicketProfileAttachmentsCo
     this.ticketStateService.setAttachmentForRemove(this.attachments.find(item => item.file.id == id));
     this.confirmStateService.setConfirmAction(REMOVE_ATTACHMENT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = `Delete Attachment`;
     modalRef.componentInstance.message = `Are you sure you want to delete this attachment?`;
   }
 }

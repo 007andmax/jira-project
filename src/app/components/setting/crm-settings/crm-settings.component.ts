@@ -62,25 +62,28 @@ export class CrmSettingsComponent implements OnInit, OnDestroy {
     if (this.activeTab === "companyIndustry") {
       this.confirmStateService.setConfirmAction(DELETE_CRM_INDUSTRIES);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-      modalRef.componentInstance.message = `Remove Industry`;
-
+      modalRef.componentInstance.header = `Delete Industry`;
+      modalRef.componentInstance.message = `Are you sure you want to delete this industry?`;
     }
     if (this.activeTab === "userJobTitle") {
       this.confirmStateService.setConfirmAction(DELETE_CRM_JOB_TITLIES);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-      modalRef.componentInstance.message = `Remove Job Title`;
+      modalRef.componentInstance.header = `Delete Job Title`;
+      modalRef.componentInstance.message = `Are you sure you want to delete this job title?`;
 
     }
     if (this.activeTab === "serviceType") {
       this.confirmStateService.setConfirmAction(DELETE_CRM_SERVICE_TYPIES);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-      modalRef.componentInstance.message = `Remove Service Type`;
+      modalRef.componentInstance.header = `Delete Service Type`;
+      modalRef.componentInstance.message = `Are you sure you want to delete this service type?`;
 
     }
     if (this.activeTab === "jobType") {
       this.confirmStateService.setConfirmAction(DELETE_CRM_JOB_TYPIES);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-      modalRef.componentInstance.message = `Remove Job Type`;
+      modalRef.componentInstance.header = `Delete Job Type`;
+      modalRef.componentInstance.message = `Are you sure you want to delete this job type?`;
 
     }
   }

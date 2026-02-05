@@ -48,6 +48,9 @@ export class NetworkScanCredentialsAsideComponent implements OnInit, OnDestroy {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_CREDENTIAL) {
           this.passwordManagerService.deleteRecord(this.networkScanStateService.getCredentialForRemove().id).subscribe(res => {
+            this.confirmStateService.initRequest(false);
+          }, err => {
+            this.confirmStateService.initRequest(false);
           })
         }
       }

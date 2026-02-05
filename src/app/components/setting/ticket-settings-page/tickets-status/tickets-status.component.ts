@@ -65,7 +65,10 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
   }
   onRemoveTicketStatus(id) {
     this.ticketsService.removeTicketStatus(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.cd.detectChanges();
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   parseStatus(name) {
@@ -139,7 +142,8 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
   removeTicketStatus(data) {
     this.confirmStateService.setConfirmAction(DELETE_TICKET_STATUS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Ticket Status`;
+    modalRef.componentInstance.header = `Delete Ticket Status`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this ticket status?`;
     this.ticketsStateService.setTicketStatusForRemove(data);
   }
   getColors() {

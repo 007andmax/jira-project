@@ -90,7 +90,10 @@ export class DeviceSettingDeviceTypeComponent implements OnInit, OnDestroy {
     this.agentService
       .deleteHardwareType(this.deviceType)
       .subscribe((resp) => {
+        this.confirmStateService.initRequest(false);
         this.getDeviceTypes(this.techCompany.id);
+      }, err => {
+        this.confirmStateService.initRequest(false);
       });
   }
   onFilter(field) {
@@ -120,10 +123,10 @@ export class DeviceSettingDeviceTypeComponent implements OnInit, OnDestroy {
   }
   removeConfirm(deviceType: any) {
     this.deviceType = deviceType;
-
     this.confirmStateService.setConfirmAction(DELETE_DEVICE_TYPE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Delete DeviceType`;
+    modalRef.componentInstance.header = `Delete Device Type`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this device type?`;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

@@ -141,6 +141,7 @@ export class TicketDetailTasksItemComponent {
     this.ticketStateService.setTaskForRemove(item);
     this.confirmStateService.setConfirmAction(REMOVE_TASK_TICKET);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = `Delete Task`;
     modalRef.componentInstance.message = `Are you sure you want to delete this task?`;
   }
   setStatus(taskStatus) {

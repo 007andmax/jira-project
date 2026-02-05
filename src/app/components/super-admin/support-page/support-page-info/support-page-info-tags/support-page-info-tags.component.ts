@@ -110,6 +110,9 @@ export class SupportPageInfoTagsComponent implements OnInit {
   }
   onRemoveTag(id) {
     this.supportPageCategoriesService.removeTag(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   editTag(id, event) {
@@ -122,6 +125,7 @@ export class SupportPageInfoTagsComponent implements OnInit {
   removeTag(tag) {
     this.confirmStateService.setConfirmAction(REMOVED_SUPPORT_TAG);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = `Delete Tags`;
     modalRef.componentInstance.message = `Are you sure you want to delete?`;
     this.supportPageCategoriesStateService.setTagForRemove(tag);
     this.cd.detectChanges();

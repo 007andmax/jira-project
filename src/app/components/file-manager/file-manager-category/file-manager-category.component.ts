@@ -218,22 +218,30 @@ export class FileManagerCategoryComponent implements OnInit, OnDestroy {
   }
   removeCategory(item) {
     this.fileManagementService.removeCategory(item.id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   removeFile(item) {
     this.fileManagementService.removeFile(item.id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.fileManagementStateService.removeFile(item.id);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   onRemoveFile(data) {
     this.confirmStateService.setConfirmAction(REMOVE_FILE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Are you sure you want to delete this folder?`;
+    modalRef.componentInstance.header = `Delete File`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this file?`;
     this.fileManagementStateService.setFileForRemove(data);
   }
   onRemoveCategory(data) {
     this.confirmStateService.setConfirmAction(REMOVE_CATEGORY_FILES);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = `Delete Folder`;
     modalRef.componentInstance.message = `Are you sure you want to delete this folder?`;
     this.fileManagementStateService.setCategoryForRemove(data);
   }

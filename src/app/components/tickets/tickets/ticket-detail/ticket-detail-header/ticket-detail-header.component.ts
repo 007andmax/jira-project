@@ -124,13 +124,15 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
   moveIntoSpam() {
     this.confirmStateService.setConfirmAction(MOVE_TO_SPAM_TICKET_DETAIL);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to mark the ticket as spam?`;
+    modalRef.componentInstance.header = `Mark as spam`;
+    modalRef.componentInstance.message = `Are you sure you want to mark the ticket as spam?`;
   }
   moveToTrash(movedWay) {
     this.movedWay = movedWay;
     this.confirmStateService.setConfirmAction(MOVE_TO_TRASH_TICKET_DETAIL);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to move the ticket to Trash?`;
+    modalRef.componentInstance.header = `Move to trash`;
+    modalRef.componentInstance.message = `Are you sure you want to move the ticket to Trash?`;
   };
 
   claimTicket() {

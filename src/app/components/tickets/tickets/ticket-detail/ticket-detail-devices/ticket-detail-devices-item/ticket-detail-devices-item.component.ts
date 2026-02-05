@@ -52,12 +52,14 @@ export class TicketDetailDevicesItemComponent implements OnInit {
     if (action === 'reboot') {
       this.confirmStateService.setConfirmAction(REBOOT_DEVICE);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.header = `Reboot Device`;
       modalRef.componentInstance.message = `Are you sure you want to reboot chosen device?`;
       this.devicesStateService.setDevicesForReboot([this.device]);
     }
     if (action === 'shutdown') {
       this.confirmStateService.setConfirmAction(SHUTDOWN_DEVICE);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+      modalRef.componentInstance.header = `Shutdown Device`;
       modalRef.componentInstance.message = `Are you sure you want to shutdown chosen device?`;
       this.devicesStateService.setDevicesForShutDown([this.device]);
     }
@@ -65,7 +67,8 @@ export class TicketDetailDevicesItemComponent implements OnInit {
   removeDevice() {
     this.confirmStateService.setConfirmAction(REMOVE_DEVICES);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to remove 1 device?`;
+    modalRef.componentInstance.header = `Delete Device`;
+    modalRef.componentInstance.message = `Are you sure you want to remove 1 device?`;
     this.devicesStateService.setDevicesForRemove([this.device]);
   }
   getTimeStatus(data) {

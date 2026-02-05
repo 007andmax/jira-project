@@ -142,20 +142,24 @@ export class ContractComponent implements OnInit, OnDestroy {
         data[this.flag] = true;
         this.commissionService.setAgreementRates(data, true, 'Successfully Changed').subscribe(
           res => {
+            this.confirmStateService.initRequest(false);
             this.oldAgreementsCommissions[this.rate] = data[this.rate];
             this.isModelDisplayModel = false;
           },
           error => {
+            this.confirmStateService.initRequest(false);
             this.toastrService.error('Bad Request')
           }
         );
       } else {
         this.commissionService.setAgreementRates(data, false, 'Changed Successfully').subscribe(
           res => {
+            this.confirmStateService.initRequest(false);
             this.oldAgreementsCommissions[this.rate] = data[this.rate];
             this.isModelDisplayModel = false;
           },
           error => {
+            this.confirmStateService.initRequest(false);
             this.toastrService.error('Bad Request')
           }
         );
@@ -163,6 +167,7 @@ export class ContractComponent implements OnInit, OnDestroy {
     } else {
       this.commissionService.setAgreementRates(data, false, 'Saved Successfully').subscribe(
         res => {
+          this.confirmStateService.initRequest(false);
           this.isModelDisplayModel = false;
           this.agreementsCommissions = res || {};
           this.oldAgreementsCommissions = Object.assign(
@@ -171,6 +176,7 @@ export class ContractComponent implements OnInit, OnDestroy {
           );
         },
         error => {
+          this.confirmStateService.initRequest(false);
           this.toastrService.error('Bad Request')
         }
       );
@@ -208,6 +214,7 @@ export class ContractComponent implements OnInit, OnDestroy {
 
     this.commissionService.setAgreementRates(data, false, 'Changed Successfully').subscribe(
       res => {
+        this.confirmStateService.initRequest(false);
         this.isModelDisplayModel = false;
         this.agreementsCommissions = res || {};
         this.oldAgreementsCommissions = Object.assign(
@@ -216,6 +223,7 @@ export class ContractComponent implements OnInit, OnDestroy {
         );
       },
       error => {
+        this.confirmStateService.initRequest(false);
         this.toastrService.error('Bad Request')
       }
     );
@@ -227,7 +235,8 @@ export class ContractComponent implements OnInit, OnDestroy {
     // this.deletePopup = true;
     this.confirmStateService.setConfirmAction(DELETE_COMMISSION_CONTRACT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want this commission to fact old items?`;
+    modalRef.componentInstance.header = `Reset rate`;
+    modalRef.componentInstance.message = `Are you sure you want the commission rate to be applied to old items?`;
 
   }
 
@@ -238,7 +247,8 @@ export class ContractComponent implements OnInit, OnDestroy {
     ) {
       this.confirmStateService.setConfirmAction(CHANGE_COMMISSION_CONTRACT);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-      modalRef.componentInstance.message = `Do you want this commission to fact old items?`;
+      modalRef.componentInstance.header = `Change rate`;
+      modalRef.componentInstance.message = `Are you sure you want the commission rate to be applied to old items?`;
 
     } else {
       this.confirmPopup = false;

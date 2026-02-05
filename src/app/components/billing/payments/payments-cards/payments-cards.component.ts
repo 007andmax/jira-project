@@ -96,6 +96,7 @@ export class PaymentsCardsComponent extends DropDownComponent {
   delete(item) {
     this.confirmStateService.setConfirmAction(REMOVE_CARD);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.header = 'Delete Card';
     modalRef.componentInstance.message = `Are you sure you want to remove this card?`;
     this.manageCardsStateService.setCardForRemove(item);
   }

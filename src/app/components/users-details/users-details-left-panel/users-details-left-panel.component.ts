@@ -179,7 +179,8 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
     }
     this.confirmStateService.setConfirmAction(ARCHIVE_USER);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to archive ${this.user.firstName + ' ' + this.user.lastName}`;
+    modalRef.componentInstance.header = `Archive User`;
+    modalRef.componentInstance.message = `Are you sure you want to archive ${this.user.firstName + ' ' + this.user.lastName}`;
     this.usersStateService.setUserForArchive(this.user);
     this.cd.markForCheck();
   }

@@ -61,8 +61,11 @@ export class SuperAdminKnowledgeBaseTableComponent implements OnInit, OnDestroy 
   }
   onDeleteNews(id) {
     this.superAdminKnowledgeBaseService.deleteNews(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       let index = this.list.findIndex(item => item.id == id);
       if (index > -1) this.list.splice(index, 1);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   private getNews() {

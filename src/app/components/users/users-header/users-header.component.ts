@@ -111,12 +111,12 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
 
     this.confirmStateService.setConfirmAction(ARCHIVE_USERS);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-
+    modalRef.componentInstance.header = `Archive User`;
     if (this.users.filter(item => item.selected).length === 1) {
       let user = this.users.filter(item => item.selected)[0];
-      modalRef.componentInstance.message = `Do you want to archive ${user.firstName + ' ' + user.lastName}`;
+      modalRef.componentInstance.message = `Are you sure you want to archive ${user.firstName + ' ' + user.lastName}`;
     } else {
-      modalRef.componentInstance.message = `Do you want to archive users?`;
+      modalRef.componentInstance.message = `Are you sure you want to archive users?`;
     }
     this.usersStateService.setUsersForArchive(this.users.filter(item => item.selected));
     this.ref.markForCheck();
@@ -156,7 +156,8 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
   removeUsersFromSubscription() {
     this.confirmStateService.setConfirmAction(MULTI_DELETE_USER_FROM_SUBSCRIPTION);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove subscription`;
+    modalRef.componentInstance.header = `Remove Subscription`;
+    modalRef.componentInstance.message = `Are you sure you want to remove the subscription from user?`;
     this.ref.markForCheck();
   }
   onRemoveUsersFromSubscription() {
@@ -165,8 +166,10 @@ export class UsersHeaderComponent implements OnInit, OnDestroy {
       catchError(error => of(undefined)))))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       );
   }

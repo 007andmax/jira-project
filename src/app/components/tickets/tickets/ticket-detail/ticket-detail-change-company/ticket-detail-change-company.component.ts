@@ -36,6 +36,9 @@ export class TicketDetailChangeCompanyComponent implements OnInit, OnDestroy {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === CHANGE_COMPANY_TICKET) this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note, this.selectedCompany.id).subscribe(data => {
+          this.confirmStateService.initRequest(false);
+        }, err => {
+          this.confirmStateService.initRequest(false);
         })
 
       }
@@ -60,7 +63,8 @@ export class TicketDetailChangeCompanyComponent implements OnInit, OnDestroy {
     this.selectedCompany = data;
     this.confirmStateService.setConfirmAction(CHANGE_COMPANY_TICKET);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to assign the following company to the ticket - ${data.name}`;
+    modalRef.componentInstance.header = `Reassign Company`;
+    modalRef.componentInstance.message = `Are you sure you want to assign the following company to the ticket - ${data.name}`;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

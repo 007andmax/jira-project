@@ -100,7 +100,10 @@ export class SubscriptionServicesComponent implements OnInit, OnDestroy {
   }
   public removeService(service) {
     this.subscriptionServicesService.deleteService(service.id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.subscriptionServicesStateService.fastRemoveService(service.id);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   public onFilter(field) {

@@ -115,17 +115,22 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
       catchError(error => of(undefined)))))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
           this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
           this.toastrService.success("The subscription has been successfully removed");
           this.appStateService.changeDetectorRef();
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       );
   }
   onRemoveSubscription(id) {
     this.marketingEmailService.removeSubscriptionType(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.marketingEmailStateService.setListSubscriptionTypeForRemove([]);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   openAside(item, subscribed) {
@@ -138,7 +143,8 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   removeSubscription(item) {
     this.confirmStateService.setConfirmAction(DELETE_SUBSCRIPTION_TYPE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Subscription`;
+    modalRef.componentInstance.header = `Delete Subscription`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this subscription?`;
     this.marketingEmailStateService.setSubscriptionTypeForRemove(item);
   }
   ngOnDestroy(): void {

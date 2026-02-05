@@ -71,15 +71,18 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_TICKET_BILLABLE) {
           this.ticketsService.deleteTicket([this.ticketForRemove.id]).subscribe(data => {
-
+            this.confirmStateService.initRequest(false);
             let index = this.billableProfile.tickets.findIndex(item => item.id === this.ticketForRemove.id);
             this.billableProfile.tickets.splice(index, 1);
+          }, err => {
+            this.confirmStateService.initRequest(false);
           })
         }
         if (this.confirmStateService.getConfirmAction() === REMOVE_TICKETS_BILLABLE) {
           this.isInitMultyRemove = true;
           this.toastrProgressStateService.onInit(this.ticketsForRemove[0].id);
           this.ticketsService.deleteTicket(this.ticketsForRemove.map(item => item.id)).subscribe(data => {
+            this.confirmStateService.initRequest(false);
             this.toastrProgressStateService.clear(this.ticketsForRemove[0].id);
             this.ticketsForRemove.forEach(ticket => {
               let index = this.billableProfile.tickets.findIndex(item => item.id === ticket.id);
@@ -87,6 +90,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
               this.isInitMultyRemove = false;
             })
           }, err => {
+            this.confirmStateService.initRequest(false);
             this.toastrProgressStateService.clear(this.ticketsForRemove[0].id);
             this.isInitMultyRemove = false;
           })
@@ -151,7 +155,8 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
   deleteSelectedTickets() {
     this.confirmStateService.setConfirmAction(REMOVE_TICKETS_BILLABLE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to delete selected tickets?`;
+    modalRef.componentInstance.header = 'Delete ticket';
+    modalRef.componentInstance.message = `Are you sure you want to delete selected tickets?`;
     this.ticketsForRemove = this.billableProfile.tickets.filter(item => item.selected);
   }
   onCreateInvoice() {
@@ -167,7 +172,8 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
   deleteTicket(ticket) {
     this.confirmStateService.setConfirmAction(REMOVE_TICKET_BILLABLE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Do you want to remove the billable item?`;
+    modalRef.componentInstance.header = 'Delete Billable Item';
+    modalRef.componentInstance.message = `Are you sure you want to remove the billable item?`;
     this.ticketForRemove = ticket;
   }
   onToggleAll(event) {

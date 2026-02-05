@@ -91,17 +91,22 @@ export class CrmCompanyJobTypeComponent implements OnInit {
       catchError(error => of(undefined)))))
       .subscribe(
         () => {
+          this.confirmStateService.initRequest(false);
           this.crmStateService.setListJobTypeForRemove([]);
           this.cd.detectChanges();
         },
         error => {
+          this.confirmStateService.initRequest(false);
         }
       );
   }
   onRemoveJobType(id) {
     this.crmService.removeJobType(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
       this.crmStateService.setListJobTypeForRemove([]);
       this.cd.detectChanges();
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   onSelect(event, item) {
@@ -118,7 +123,8 @@ export class CrmCompanyJobTypeComponent implements OnInit {
   remove(item) {
     this.confirmStateService.setConfirmAction(DELETE_CRM_JOB_TYPE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Job Type`;
+    modalRef.componentInstance.header = `Delete Job Type`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this job type?`;
     this.crmStateService.setJobTypeForRemove(item);
   }
   ngOnDestroy(): void {

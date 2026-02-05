@@ -93,10 +93,12 @@ export class ProductComponent implements OnInit, OnDestroy {
         .setCategoryRate(this.category.id, '0', false)
         .subscribe(
           res => {
+            this.confirmStateService.initRequest(false);
             this.selectedIdx = -1;
             this.category.commissionRate = null;
           },
           error => {
+            this.confirmStateService.initRequest(false);
             this.toastrService.error('Bad Request')
           }
         );
@@ -134,11 +136,13 @@ export class ProductComponent implements OnInit, OnDestroy {
         .setCategoryRate(this.id, data.rate, data.setForOldExpenses)
         .subscribe(
           (res: any) => {
+            this.confirmStateService.initRequest(false);
             this.category.commissionRate = res.commissionRate.toFixed(2);
             this.selectedIdx = -1;
             this.factItem = false;
           },
           error => {
+            this.confirmStateService.initRequest(false);
             this.selectedIdx = -1;
             this.toastrService.error('Bad Request');
             this.factItem = false;
@@ -153,7 +157,8 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.category = data;
     this.confirmStateService.setConfirmAction(DELETE_COMMISSION_PRODUCT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Are you sure you want ${this.category.name} commission rate to zero?`;
+    modalRef.componentInstance.header = `Reset rate`;
+    modalRef.componentInstance.message = `Are you sure you want to set the commission rate for ${this.category.name} commission rate to zero?`;
   }
 
   confirmEdit(rate, id: string, category: any) {
@@ -163,8 +168,8 @@ export class ProductComponent implements OnInit, OnDestroy {
     if (this.category.commissionRate === null) {
       this.confirmStateService.setConfirmAction(CHANGE_COMMISSION_PRODUCT);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-      modalRef.componentInstance.message = `Do you want this commission to fact old items?`;
-
+      modalRef.componentInstance.header = `Apply Commission`;
+      modalRef.componentInstance.message = `Are you sure you want the commission rate to be applied to old items?`;
     } else {
       this.factItem = false;
       this.setCategoryRate();

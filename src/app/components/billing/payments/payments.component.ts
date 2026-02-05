@@ -131,6 +131,9 @@ export class PaymentsComponent implements OnInit, OnDestroy {
   }
   onRemovePayment(payment) {
     this.paymentsService.deletePayment(payment).subscribe(data => {
+      this.confirmStateService.initRequest(false);
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
     this.showDetailsPayment = false;
     this.cd.detectChanges();

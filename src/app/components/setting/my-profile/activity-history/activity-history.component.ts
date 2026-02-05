@@ -77,7 +77,10 @@ export class ActivityHistoryComponent implements OnInit, OnDestroy {
       this.settingService
         .closeSessions(idsForDelete)
         .subscribe((data) => {
+          this.confirmStateService.initRequest(false);
           this.activityHistory.splice(this.activityHistory.findIndex(item => item.id == device.id), 1);
+        }, err => {
+          this.confirmStateService.initRequest(false);
         });
     }
   }
@@ -89,7 +92,8 @@ export class ActivityHistoryComponent implements OnInit, OnDestroy {
   closeSession(device: any) {
     this.confirmStateService.setConfirmAction(CLOSE_SESSION);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.message = `Remove Location`;
+    modalRef.componentInstance.header = `Delete Location`;
+    modalRef.componentInstance.message = `Are you sure you want to delete this location?`;
     this.settingStateService.setSessionForRemove(device);
   }
 
