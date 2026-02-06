@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ManageCardsAddComponent } from '../manage-cards-add/manage-cards-add.component';
 import { Validators } from '@angular/forms';
+import { Card } from '../class/card';
 
 @Component({
   selector: 'app-manage-cards-edit',
@@ -9,10 +10,11 @@ import { Validators } from '@angular/forms';
 })
 export class ManageCardsEditComponent extends ManageCardsAddComponent {
   maskedCardNumber: string
-
+  olderValue: Card;
   ngOnInit() {
     let getShowAsideForAdd = this.manageCardsStateService.showAsideForEdit.subscribe(data => {
       this.manageCardsService.getCard(data.id).subscribe((res: any) => {
+        this.olderValue = new Card(res);
         this.maskedCardNumber = res.maskedCardNumber;
         this.modelForm.patchValue({
           id: res.id,
@@ -99,10 +101,16 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
     this.addBtn.setDisabled(true);
     let req = {};
     Object.keys(this.modelForm.value).forEach(key => {
-      if (this.modelForm.value[key] != null && this.modelForm.value[key] != "") {
+      if (this.modelForm.value[key] != null && this.modelForm.value[key] != "" && this.olderValue[key] != this.modelForm.value[key]) {
         req[key] = this.modelForm.value[key];
       }
     });
+    if (Object.keys(req).length == 0) {
+      this.addBtn.setDisabled(false);
+      this.closed();
+      return;
+    }
+    req["id"] = this.modelForm.value["id"];
     this.manageCardsService.editCard(req).subscribe(data => {
       this.manageCardsStateService.fastEditCard(data);
       this.addBtn.setDisabled(false);

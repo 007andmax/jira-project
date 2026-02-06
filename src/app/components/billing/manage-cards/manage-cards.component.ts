@@ -37,10 +37,11 @@ export class ManageCardsComponent {
     public cd: ChangeDetectorRef,
   ) { }
   ngOnInit() {
-    if (this.companiesStateService.currentCompany && this.integrationsStateService.connected) {
+    if (this.companiesStateService.currentCompany && this.integrationsStateService.isInit && this.integrationsStateService.connected) {
       this.setDefaultScoll();
       this.onScroll();
     }
+    if (this.companiesStateService.currentCompany && this.integrationsStateService.isInit && !this.integrationsStateService.connected) this.showPreloader = false;
     let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe(() => {
       if (this.companiesStateService.currentCompany && this.integrationsStateService.connected) {
         this.setDefaultScoll();
@@ -53,6 +54,7 @@ export class ManageCardsComponent {
         this.setDefaultScoll();
         this.onScroll();
       }
+      if (!this.integrationsStateService.connected) this.showPreloader = false;
     });
     this.sub.add(onGetConnected);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
