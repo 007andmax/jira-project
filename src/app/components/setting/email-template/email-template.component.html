@@ -345,7 +345,7 @@
                 *ngIf="emailPages && emailPages.activeAndNotDefault[templeteInfo.key] && emailPages.activeAndNotDefault[templeteInfo.key].isNotDefault"
                 href="javascript:;"
                 class="qt-button --square-md --gray pointer"
-                placement="top"
+                 placement="left"
                 ngbTooltip="Reset Default"
                 container="body"
                 (click)="restoreDefault(templeteInfo.key)"
@@ -357,7 +357,7 @@
                 class="qt-button --square-md --gray qt-ml-8 pointer"
                 (click)="emailPreview(template)"
                 *ngIf="templeteInfo.showPreview"
-                placement="top"
+                placement="left"
                 ngbTooltip="Show Preview"
                 container="body"
             >
@@ -412,21 +412,57 @@
                     </div>
                 </div>
             </div>
-            <div class="qt-input-block qt-input-line">
+             <div class="qt-inputs-row qt-mt-24">
+                <label
+                    class="qt-checkbox"
+                    for="isHeaderEnabled"
+                >
+                    <input
+                        id="isHeaderEnabled"
+                        type="checkbox"
+                        name="isHeaderEnabled"
+                        formControlName="isHeaderEnabled"
+                    >
+                    <span></span>
+                    <div class="qt-ml-8 qt-fw-400 qt-lh-1">Show the "Tech Company Info" section</div>
+                </label>
+            </div>
+             <div class="qt-input-block qt-input-line">
+                <label
+                    class="qt-input-block__label"
+                    for="header"
+                >
+                    Email template header
+                </label>
+                <input
+                    type="text"
+                    formControlName="header"
+                    #header
+                    name="header"
+                    id="header"
+                    class="qt-input-block__input"
+                    placeholder="Thanks for Support"
+                >
+            </div>
+            <div class="qt-input-block qt-input-line" #editorWrap>
                 <label
                     class="qt-input-block__label"
                     for="myEditor"
                 >
                     Email template body
-                </label>
-                <textarea
+               </label>
+               <!--  <textarea
                     id="myEditor"
                     #body
                     class="qt-input-block__textarea"
                     row="8"
                     name="body"
                     formControlName="body"
-                ></textarea>
+                ></textarea>-->
+                  <angular-editor
+                  formControlName="body" 
+                        [config]="editorConfig"
+                    ></angular-editor>
             </div>
             <div class="f-row">
                 <div class="f-col col-100">
@@ -458,6 +494,7 @@
                             class="tags pointer"
                             *ngFor="let key of keywords"
                             (mousedown)="insertAtCaret(key.keyName)"
+                            (mouseup)="restoreFocus()"
                         >
                             {{ key.keyName }}
                         </span>
@@ -470,6 +507,7 @@
                             class="key-area__text"
                             *ngFor="let key of keywords"
                             (mousedown)="insertAtCaret(key.keyName)"
+                            (mouseup)="restoreFocus()"
                         >
                             <strong class="key-area__text-strong">{{ key.keyName }} -</strong>
                             {{ key.description }}

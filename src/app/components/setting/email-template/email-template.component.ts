@@ -9,6 +9,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { EmailTemplateStateService } from "src/app/states/email-template/email-template-state.service";
 import { fadeInAnimation } from "src/app/animations";
+import { AngularEditorConfig } from "@kolkov/angular-editor";
+import { ConfirmStateService } from "../../shared/confirm/services/confirm-state.service";
+import { RESTORE_DEFAULT } from "src/app/const/confirm";
+import { ConfirmComponent } from "../../shared/confirm/confirm.component";
 
 declare var $: any;
 
@@ -40,10 +44,53 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   openEmailTemplate: string;
   public show = false;
   public buttonName: any = "Show Description";
-  templatesData = { subject: {}, body: {}, isActive: false };
+  templatesData = { subject: {}, body: {}, isActive: false, header: {},isHeaderEnabled:false };
+  selectedInput: string;
   @ViewChild("body", { static: false }) body: ElementRef;
   @ViewChild("subject", { static: false }) subject: ElementRef;
+  @ViewChild("header", { static: false }) header: ElementRef;
   sub: Subscription = new Subscription();
+  @ViewChild('editorWrap', { static: false }) editorWrap!: ElementRef<HTMLElement>;
+  templeteKey:any;
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: false,
+    height: '100%',
+    minHeight: '5rem',
+    width: 'auto',
+    minWidth: '0',
+    translate: 'no',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Write your draft for companies',
+    defaultParagraphSeparator: '',
+    defaultFontName: '',
+    defaultFontSize: '',
+    toolbarPosition: 'bottom',
+    fonts: [
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'calibri', name: 'Calibri' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' }
+    ],
+    customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    uploadUrl: 'v1/image',
+    sanitize: false,
+  };
   constructor(
     private modalService: NgbModal,
     private emailService: EmailTempleteService,
@@ -52,6 +99,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     private settingStateService: SettingStateService,
     private emailTemplateStateService: EmailTemplateStateService,
     private sanitized: DomSanitizer,
+    private elRef: ElementRef,
+    private confirmStateService: ConfirmStateService,
   ) {
     this.ticketTemplates = this.emailService.getTicketTemplates();
     this.agentTemplates = this.emailService.getAgentTemplates();
@@ -65,8 +114,10 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     this.keywords = [];
     this.templeteForm = this.formBuilder.group({
       subject: ["", Validators.required],
+      header: [""],
       body: [""],
-      isActive: [false]
+      isActive: [false],
+      isHeaderEnabled:[false]
     });
     this.getEmailPages();
     this.settingStateService.setComponentName('EmailTempleteComponent');
@@ -99,9 +150,17 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(onChangeEmailTemplates);
+
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+        if (data) {
+          if (this.confirmStateService.getConfirmAction() === RESTORE_DEFAULT) this.onRestoreDefault();
+        }
+      })
+      this.sub.add(getConfirm);
   }
 
   ngOnDestroy() {
+    this.sub.unsubscribe();
     $('body').removeClass('page-settings');
   }
 
@@ -166,6 +225,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
             this.hideButtonTextEditor();
             this.templatesData.body = res.body;
             this.templatesData.subject = res.subject;
+            this.templatesData.header = res.header;
+            this.templatesData.isHeaderEnabled = res.isHeaderEnabled;
             this.keywords = res.keywords;
             this.type = res.type
 
@@ -183,12 +244,14 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
                 Validators.required
               ]);
             }
-             this.templeteForm.patchValue({
+            this.templeteForm.patchValue({
               subject: this.templatesData.subject,
+              header: this.templatesData.header,
               body: this.templatesData.body,
-              isActive: (this.emailPages.activeAndNotDefault[key]) ? this.emailPages.activeAndNotDefault[key].isActive : false
+              isActive: (this.emailPages.activeAndNotDefault[key]) ? this.emailPages.activeAndNotDefault[key].isActive : false,
+              isHeaderEnabled: this.templatesData.isHeaderEnabled
             });
-             }
+          }
           this.openEmailTemplate = key;
         })
       )
@@ -205,7 +268,10 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
    */
   insertAtCaret(text) {
     var el = document.activeElement;
-
+    console.log("el", el);
+    this.selectedInput = el.id;
+    console.log("this.selectedInput", this.selectedInput);
+    if (el.classList.contains("angular-editor-textarea")) this.selectedInput = "textarea";
     if (el.id === "subject") {
       var startPos = this.subject.nativeElement.selectionStart;
 
@@ -224,12 +290,89 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
         subject: this.subject.nativeElement.value
       });
 
-      this.subject.nativeElement.selectionStart = startPos;
-      this.subject.nativeElement.focus();
-      $("#elem").selectRange(3);
+      // this.subject.nativeElement.selectionStart = startPos;
+      // this.subject.nativeElement.focus();
+      //   queueMicrotask(() => this.restoreFocus(this.subject.nativeElement));
+      //  $("#elem").selectRange(3);
+    } if (el.id === "header") {
+      var startPos = this.header.nativeElement.selectionStart;
+
+      this.header.nativeElement.value =
+        this.header.nativeElement.value.substr(
+          0,
+          this.header.nativeElement.selectionStart
+        ) +
+        text +
+        this.header.nativeElement.value.substr(
+          this.header.nativeElement.selectionStart,
+          this.header.nativeElement.value.length
+        );
+
+      this.templeteForm.patchValue({
+        header: this.header.nativeElement.value
+      });
+
+      //  this.header.nativeElement.selectionStart = startPos;
+      //   this.header.nativeElement.focus();
+      // $("#elem").selectRange(3);
     } else {
-      this.insertAt(document.getElementById("myEditor"), text);
+      const wrap = this.editorWrap.nativeElement;
+      const editable = wrap.querySelector('.angular-editor-textarea') as HTMLElement | null;
+      if (!editable) return;
+
+      // 1) insert at caret
+      this.insertTextIntoAngularEditor(editable, text);
+
+      // 2) make angular-editor notice changes
+      editable.dispatchEvent(new InputEvent('input', { bubbles: true }));
+      editable.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));
+
+      // 3) ensure reactive form definitely gets updated
+      const htmlNow = editable.innerHTML;
+      const ctrl = this.templeteForm.get('body');
+      ctrl?.setValue(htmlNow, { emitEvent: true });
+      ctrl?.markAsDirty();
+      ctrl?.updateValueAndValidity();
     }
+  }
+  restoreFocus(
+  ) {
+    console.log("restoreFocus", this.selectedInput)
+    if (!this.selectedInput) return;
+    let el = this.selectedInput == "subject" ? this.subject.nativeElement : this.selectedInput == "textarea" ? this.elRef.nativeElement.querySelector(".angular-editor-textarea") : this.header.nativeElement;
+    // restore focus
+    console.log("restoreFocus", el);
+    (el as HTMLElement).focus({ preventScroll: true });
+  }
+
+  insertTextIntoAngularEditor(editorHost: HTMLElement, text: string) {
+    // editorHost should be the contenteditable element (.angular-editor-textarea)
+    editorHost.focus();
+
+    const sel = window.getSelection();
+    if (!sel) return;
+
+    // If selection is outside editor, move caret to end
+    if (sel.rangeCount === 0 || !editorHost.contains(sel.anchorNode)) {
+      const r = document.createRange();
+      r.selectNodeContents(editorHost);
+      r.collapse(false);
+      sel.removeAllRanges();
+      sel.addRange(r);
+    }
+
+    const range = sel.getRangeAt(0);
+
+    // Replace current selection (if any) with text, leaving caret after inserted text
+    range.deleteContents();
+    const node = document.createTextNode(text);
+    range.insertNode(node);
+
+    // Move caret to after inserted text node
+    range.setStartAfter(node);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
   }
 
   /**
@@ -254,6 +397,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   }
 
   insertAt(element, text) {
+    console.log("element", element);
     if (document['selection']) {
       element.focus();
       var sel = document['selection'].createRange();
@@ -316,8 +460,9 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       }
     }
     this.templeteForm.patchValue({
-      body: (document.getElementById("myEditor")['value'].length == 0) ? null : document.getElementById("myEditor")['value'],
-      subject: this.templeteForm.value.subject
+      body: (this.templeteForm.value.body.length == 0) ? null : this.templeteForm.value.body,
+      subject: this.templeteForm.value.subject,
+      header: this.templeteForm.value.header,
     });
     this.emailService
       .saveEmailTemplate(this.templeteForm.value, this.openEmailTemplate)
@@ -345,28 +490,37 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     if (!templeteKey) {
       return;
     }
-    this.emailService
-      .setToDefaultTemplete(templeteKey)
+    this.templeteKey = templeteKey;
+     this.confirmStateService.setConfirmAction(RESTORE_DEFAULT);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
+   modalRef.componentInstance.header = "Restore Default Template";
+    modalRef.componentInstance.message = `Are you sure you want to restore the template to the default? The current template will not be recoverable.`;
+   
+  }
+onRestoreDefault() {
+ this.emailService
+      .setToDefaultTemplete(this.templeteKey)
       .pipe(
         map((defaultTemplate: any) => {
           if (defaultTemplate) {
             this.templeteForm.patchValue({
               subject: defaultTemplate.subject,
-              body: defaultTemplate.body
+              body: defaultTemplate.body,
+              header: defaultTemplate.header,
             });
           }
         })
       )
       .subscribe(
         () => {
-
+          this.confirmStateService.initRequest(false);
         },
         error => {
+          this.confirmStateService.initRequest(false);
           this.toastr.error(`Error Occured ${error}`);
         }
       );
-  }
-
+}
   toggle() {
     this.show = !this.show;
 
