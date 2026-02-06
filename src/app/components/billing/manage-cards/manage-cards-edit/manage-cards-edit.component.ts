@@ -31,6 +31,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
         this.selectedCompany = this.companiesStateService.allCompanies.find(company => company.id === res.companyId);
         this.showAdd = true;
         this.cd.detectChanges();
+        console.log("this.modelForm",this.modelForm);
       });
 
     });
@@ -55,8 +56,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
       zipcode: ["",
         [Validators.maxLength(9)]
       ],
-      address: ["",
-        Validators.maxLength(50)
+      address: [""
       ],
       city: ["",
         Validators.maxLength(50)
@@ -79,6 +79,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
         Validators.maxLength(100)
       ],
     })
+    this.modelForm.controls['address'].disable();
 
   }
   checkExpiryLabel() {
@@ -91,6 +92,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
   }
   save() {
     this.submitted = true;
+    console.log("this.modelForm",this.modelForm)
     if (this.modelForm.invalid) {
       return;
     }
