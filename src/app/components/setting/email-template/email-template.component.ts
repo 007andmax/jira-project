@@ -268,10 +268,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
    */
   insertAtCaret(text) {
     var el = document.activeElement;
-    console.log("el", el);
     this.selectedInput = el.id;
-    console.log("this.selectedInput", this.selectedInput);
-    if (el.classList.contains("angular-editor-textarea")) this.selectedInput = "textarea";
+     if (el.classList.contains("angular-editor-textarea")) this.selectedInput = "textarea";
     if (el.id === "subject") {
       var startPos = this.subject.nativeElement.selectionStart;
 
@@ -337,12 +335,10 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   }
   restoreFocus(
   ) {
-    console.log("restoreFocus", this.selectedInput)
-    if (!this.selectedInput) return;
+     if (!this.selectedInput) return;
     let el = this.selectedInput == "subject" ? this.subject.nativeElement : this.selectedInput == "textarea" ? this.elRef.nativeElement.querySelector(".angular-editor-textarea") : this.header.nativeElement;
     // restore focus
-    console.log("restoreFocus", el);
-    (el as HTMLElement).focus({ preventScroll: true });
+     (el as HTMLElement).focus({ preventScroll: true });
   }
 
   insertTextIntoAngularEditor(editorHost: HTMLElement, text: string) {
@@ -397,8 +393,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   }
 
   insertAt(element, text) {
-    console.log("element", element);
-    if (document['selection']) {
+     if (document['selection']) {
       element.focus();
       var sel = document['selection'].createRange();
       sel.text = text;
