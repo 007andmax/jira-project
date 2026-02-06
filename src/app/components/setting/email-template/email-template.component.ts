@@ -417,9 +417,9 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   emailPreview(template: TemplateRef<any>) {
     this.emailPreviewHtml = '';
     this.gettingEmailTemplatePreview = true;
-
+console.log("this.templeteForm.value",this.templeteForm.value);
     this.emailService
-      .getHtmlForPreview(this.type, this.templatesData)
+      .getHtmlForPreview(this.type, this.templeteForm.value)
       .pipe(
         map(resp => {
           this.emailPreviewHtml = resp;
@@ -489,7 +489,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
      this.confirmStateService.setConfirmAction(RESTORE_DEFAULT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
    modalRef.componentInstance.header = "Restore Default Template";
-    modalRef.componentInstance.message = `Are you sure you want to restore the template to the default? The current template will not be recoverable.`;
+    modalRef.componentInstance.message = `Are you sure you want to restore the template to the default? <br>The current template will not be recoverable.`;
    
   }
 onRestoreDefault() {
