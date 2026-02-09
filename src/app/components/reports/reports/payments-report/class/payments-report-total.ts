@@ -6,6 +6,7 @@ export class PaymentsReportTotal {
     REFUND_COMPLETED: number;
     TOTAL: number;
     WIRE_TRANSFER: number;
+    MANUAL_CREDIT_CARD: number;
     constructor(data) {
         this.CASH = data.CASH;
         this.CHEQUE = data.CHEQUE;
@@ -14,5 +15,6 @@ export class PaymentsReportTotal {
         this.REFUND_COMPLETED = data.REFUND_COMPLETED;
         this.TOTAL = data.TOTAL;
         this.WIRE_TRANSFER = data.WIRE_TRANSFER;
+        this.MANUAL_CREDIT_CARD = data.MANUAL_CREDIT_CARD;
     }
 }

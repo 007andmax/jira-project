@@ -59,9 +59,6 @@ export class ManageCardsAddComponent {
       zipcode: ["",
         [Validators.maxLength(9)]
       ],
-      address: ["",
-        Validators.maxLength(50)
-      ],
       city: ["",
         Validators.maxLength(50)
       ],

@@ -18,8 +18,7 @@
                     [useMaxDate]="true"
                     [container]="'body'"
                     [dropdownClass]="['date-picker']"
-                    [isDisabled]="selectedPaymentMode.value == 'DEBIT_CARD' || selectedPaymentMode.value == 'CREDIT_CARD'"
-                    (onChange)="onChangeDate($event)"
+                     (onChange)="onChangeDate($event)"
                 ></app-date-picker>
             </div>
             <div class="qt-input-block qt-mr-16 qt-w100">

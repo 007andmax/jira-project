@@ -7,6 +7,7 @@ export class PaymentsReportPayments {
     DEBIT_CARD: Array<PaymentsReportPayment> = [];
     WIRE_TRANSFER: Array<PaymentsReportPayment> = [];
     REFUND_COMPLETED: Array<PaymentsReportPayment> = [];
+    MANUAL_CREDIT_CARD: Array<PaymentsReportPayment> = [];
     constructor(data) {
         this.CASH = data.CASH.map(item => new PaymentsReportPayment(item));
         this.CHEQUE = data.CHEQUE.map(item => new PaymentsReportPayment(item));
@@ -14,5 +15,6 @@ export class PaymentsReportPayments {
         this.DEBIT_CARD = data.DEBIT_CARD.map(item => new PaymentsReportPayment(item));
         this.WIRE_TRANSFER = data.WIRE_TRANSFER.map(item => new PaymentsReportPayment(item));
         this.REFUND_COMPLETED = data.REFUND_COMPLETED.map(item => new PaymentsReportPayment(item));
+        this.MANUAL_CREDIT_CARD = data.MANUAL_CREDIT_CARD.map(item => new PaymentsReportPayment(item));
     }
 }

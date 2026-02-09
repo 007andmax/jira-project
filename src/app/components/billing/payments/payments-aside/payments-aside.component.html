@@ -57,7 +57,7 @@
     <div class="qt-aside-modern__content --no-footer">
         <div class="payment-preview qt-pt-40 qt-pl-40 qt-pr-40 qt-pb-40">
             <div
-                class="qt-df company-info"
+                class="qt-df qt-jc-sb company-info"
                 *ngIf="currentCompany"
             >
                 <div class="qt-lh-154">
@@ -80,6 +80,10 @@
                         <preview-phone-mask [number]="currentCompany.addresses[0].phoneNumbers[0].number"></preview-phone-mask>
                     </div>
                 </div>
+                  <div
+                        class="qt-color-gray-900 qt-lh-131 qt-fs-26 qt-text-upper qt-fw-600"
+                    >Receipt
+                    </div>
             </div>
             <hr class="qt-divider qt-mt-24 qt-mb-40">
             <div class="qt-df">

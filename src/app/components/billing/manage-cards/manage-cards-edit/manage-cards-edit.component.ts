@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ManageCardsAddComponent } from '../manage-cards-add/manage-cards-add.component';
 import { Validators } from '@angular/forms';
+import { Card } from '../class/card';
 
 @Component({
   selector: 'app-manage-cards-edit',
@@ -9,7 +10,6 @@ import { Validators } from '@angular/forms';
 })
 export class ManageCardsEditComponent extends ManageCardsAddComponent {
   maskedCardNumber: string
-
   ngOnInit() {
     let getShowAsideForAdd = this.manageCardsStateService.showAsideForEdit.subscribe(data => {
       this.manageCardsService.getCard(data.id).subscribe((res: any) => {
@@ -31,6 +31,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
         this.selectedCompany = this.companiesStateService.allCompanies.find(company => company.id === res.companyId);
         this.showAdd = true;
         this.cd.detectChanges();
+        console.log("this.modelForm",this.modelForm);
       });
 
     });
@@ -55,8 +56,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
       zipcode: ["",
         [Validators.maxLength(9)]
       ],
-      address: ["",
-        Validators.maxLength(50)
+      address: [""
       ],
       city: ["",
         Validators.maxLength(50)
@@ -79,6 +79,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
         Validators.maxLength(100)
       ],
     })
+    this.modelForm.controls['address'].disable();
 
   }
   checkExpiryLabel() {
@@ -91,6 +92,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
   }
   save() {
     this.submitted = true;
+    console.log("this.modelForm",this.modelForm)
     if (this.modelForm.invalid) {
       return;
     }
@@ -101,6 +103,12 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
         req[key] = this.modelForm.value[key];
       }
     });
+    if (Object.keys(req).length == 0) {
+      this.addBtn.setDisabled(false);
+      this.closed();
+      return;
+    }
+    req["id"] = this.modelForm.value["id"];
     this.manageCardsService.editCard(req).subscribe(data => {
       this.manageCardsStateService.fastEditCard(data);
       this.addBtn.setDisabled(false);
