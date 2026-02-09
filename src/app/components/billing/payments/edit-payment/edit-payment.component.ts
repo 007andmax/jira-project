@@ -23,6 +23,7 @@ export class EditPaymentComponent implements OnInit, OnDestroy {
   amountReceived_str: string = "0.00";
   paymentModes = [new CompanySetting('Cash', 'CASH'), new CompanySetting('Cheque', 'CHEQUE'), new CompanySetting('Debit Card', 'DEBIT_CARD'),
   new CompanySetting('Credit Card', 'CREDIT_CARD'),
+  new CompanySetting('Manual Credit Card', 'MANUAL_CREDIT_CARD'),
   new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
   isChangeAmountReceived: boolean = false;
   selectedPaymentMode = new CompanySetting('Cheque', 'CHEQUE');

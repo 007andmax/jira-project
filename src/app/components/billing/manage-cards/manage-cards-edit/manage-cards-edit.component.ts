@@ -10,11 +10,9 @@ import { Card } from '../class/card';
 })
 export class ManageCardsEditComponent extends ManageCardsAddComponent {
   maskedCardNumber: string
-  olderValue: Card;
   ngOnInit() {
     let getShowAsideForAdd = this.manageCardsStateService.showAsideForEdit.subscribe(data => {
       this.manageCardsService.getCard(data.id).subscribe((res: any) => {
-        this.olderValue = new Card(res);
         this.maskedCardNumber = res.maskedCardNumber;
         this.modelForm.patchValue({
           id: res.id,
@@ -101,7 +99,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
     this.addBtn.setDisabled(true);
     let req = {};
     Object.keys(this.modelForm.value).forEach(key => {
-      if (this.modelForm.value[key] != null && this.modelForm.value[key] != "" && this.olderValue[key] != this.modelForm.value[key]) {
+      if (this.modelForm.value[key] != null && this.modelForm.value[key] != "") {
         req[key] = this.modelForm.value[key];
       }
     });

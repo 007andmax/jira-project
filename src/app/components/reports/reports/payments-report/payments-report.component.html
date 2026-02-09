@@ -65,6 +65,13 @@
                         [textContent]="paymentsReport.totalSumsPerPaymentMethod.DEBIT_CARD | currency"
                     ></span>
                 </div>
+                  <div class="payments-total-item">
+                    <span>Manual Credit Card</span>
+                    <span
+                        class="qt-fw-600 payments-total-item__price"
+                        [textContent]="paymentsReport.totalSumsPerPaymentMethod.MANUAL_CREDIT_CARD | currency"
+                    ></span>
+                </div>
                 <div class="payments-total-item">
                     <span>Wire Transfer</span>
                     <span
