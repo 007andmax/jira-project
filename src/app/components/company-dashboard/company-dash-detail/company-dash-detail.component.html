@@ -121,8 +121,8 @@
                                             ></div>
                                         </div>
                                         <div class="users-table__contract-no--number">
-                                            <a [attr.href]="'tel:' + phone.number" [textContent]="'+1 ' + phone.number">
-                                            </a>
+                                            <p [textContent]="'+1 ' + phone.number">
+                                            </p>
                                         </div>
                                     </div>
                                 </ng-template>
@@ -153,8 +153,8 @@
                 [textContent]="companyDetailing.shippingLocationName"
             >
             </span>
-            <a [attr.href]="'tel:' + companyDetailing?.addresses[1]?.phoneNumbers[0]?.number" [textContent]="'+1 ' + companyDetailing?.addresses[1]?.phoneNumbers[0]?.number">
-            </a>
+            <p [textContent]="'+1 ' + companyDetailing?.addresses[1]?.phoneNumbers[0]?.number">
+            </p>
             <address>
                 <span
                     *ngIf="companyDetailing.addresses.length > 1 && companyDetailing.addresses[1].suiteNumber"
@@ -182,8 +182,8 @@
                 [textContent]="companyDetailing.billingLocationName"
             >
             </span>
-            <a [attr.href]="'tel:' + companyDetailing?.addresses[0]?.phoneNumbers[0]?.number" [textContent]="'+1 ' + companyDetailing?.addresses[0]?.phoneNumbers[0]?.number">
-            </a>
+            <p  [textContent]="'+1 ' + companyDetailing?.addresses[0]?.phoneNumbers[0]?.number">
+            </p>
             <address>
                 <span
                     *ngIf="companyDetailing.addresses.length > 0 && companyDetailing.addresses[0].suiteNumber"
@@ -315,12 +315,11 @@
                     [textContent]="companyDetailing?.primaryContact.email"
                 >
                 </a>
-                <a
+                <p
                     *ngIf="companyDetailing?.primaryContact.phoneNumber !== ''"
-                    [attr.href]="'tel:' + companyDetailing?.primaryContact.phoneNumber"
                     [textContent]="'+1 ' + companyDetailing?.primaryContact.phoneNumber"
                 >
-                </a>
+            </p>
             </div>
         </div>
     </div>
