@@ -140,7 +140,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     this.selectedCompany = null;
     this.categoriesSelect.clearWithOutChanges();
     this.datePicker.reset();
-    this.elRef.nativeElement.querySelector("#description-create-password").value = "";
+   // this.elRef.nativeElement.querySelector("#description-create-password").value = "";
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
