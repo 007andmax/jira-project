@@ -303,10 +303,10 @@
                             }
                             p {
                                 margin: 0;
-                                font-size: 12px;
+                                font-size: 13px;
                                 line-height: 1.33;
                                 letter-spacing: normal;
-                                color: $gray-600;
+                                color: $gray-900;
                             }
                             &:last-child {
                                 margin-bottom: 0;
@@ -357,6 +357,10 @@
                                     font-size: 12px;
                                     line-height: 16px;
                                     margin: 1px 0;
+                                }
+                                p {
+                                    color: $gray-900;
+                                    font-size: 13px;
                                 }
                             }
                         }
