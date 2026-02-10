@@ -121,11 +121,7 @@
                                             ></div>
                                         </div>
                                         <div class="users-table__contract-no--number">
-                                            <a [attr.href]="'tel:' + phone.number">
-                                                <preview-phone-mask
-                                                    *ngIf="phone.number"
-                                                    [number]="phone.number"
-                                                ></preview-phone-mask>
+                                            <a [attr.href]="'tel:' + phone.number" [textContent]="'+1 ' + phone.number">
                                             </a>
                                         </div>
                                     </div>
@@ -157,11 +153,7 @@
                 [textContent]="companyDetailing.shippingLocationName"
             >
             </span>
-            <a [attr.href]="'tel:' + companyDetailing?.addresses[1]?.phoneNumbers[0]?.number">
-                <preview-phone-mask
-                    *ngIf="companyDetailing?.addresses[1]?.phoneNumbers[0]?.number"
-                    [number]="companyDetailing?.addresses[1]?.phoneNumbers[0]?.number"
-                ></preview-phone-mask>
+            <a [attr.href]="'tel:' + companyDetailing?.addresses[1]?.phoneNumbers[0]?.number" [textContent]="'+1 ' + companyDetailing?.addresses[1]?.phoneNumbers[0]?.number">
             </a>
             <address>
                 <span
@@ -190,11 +182,7 @@
                 [textContent]="companyDetailing.billingLocationName"
             >
             </span>
-            <a [attr.href]="'tel:' + companyDetailing?.addresses[0]?.phoneNumbers[0]?.number">
-                <preview-phone-mask
-                    *ngIf="companyDetailing?.addresses[0]?.phoneNumbers[0]?.number"
-                    [number]="companyDetailing?.addresses[0]?.phoneNumbers[0]?.number"
-                ></preview-phone-mask>
+            <a [attr.href]="'tel:' + companyDetailing?.addresses[0]?.phoneNumbers[0]?.number" [textContent]="'+1 ' + companyDetailing?.addresses[0]?.phoneNumbers[0]?.number">
             </a>
             <address>
                 <span
@@ -330,11 +318,8 @@
                 <a
                     *ngIf="companyDetailing?.primaryContact.phoneNumber !== ''"
                     [attr.href]="'tel:' + companyDetailing?.primaryContact.phoneNumber"
+                    [textContent]="'+1 ' + companyDetailing?.primaryContact.phoneNumber"
                 >
-                    <preview-phone-mask
-                        *ngIf="companyDetailing?.primaryContact.phoneNumber"
-                        [number]="companyDetailing?.primaryContact.phoneNumber"
-                    ></preview-phone-mask>
                 </a>
             </div>
         </div>
