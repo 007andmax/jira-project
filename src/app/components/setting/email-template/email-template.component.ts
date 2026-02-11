@@ -417,8 +417,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   emailPreview(template: TemplateRef<any>) {
     this.emailPreviewHtml = '';
     this.gettingEmailTemplatePreview = true;
-console.log("this.templeteForm.value",this.templeteForm.value);
-    this.emailService
+     this.emailService
       .getHtmlForPreview(this.type, this.templeteForm.value)
       .pipe(
         map(resp => {

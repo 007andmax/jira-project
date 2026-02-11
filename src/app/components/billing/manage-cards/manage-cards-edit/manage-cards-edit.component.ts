@@ -31,9 +31,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
         this.selectedCompany = this.companiesStateService.allCompanies.find(company => company.id === res.companyId);
         this.showAdd = true;
         this.cd.detectChanges();
-        console.log("this.modelForm",this.modelForm);
-      });
-
+        });
     });
     this.sub.add(getShowAsideForAdd);
 
@@ -92,8 +90,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
   }
   save() {
     this.submitted = true;
-    console.log("this.modelForm",this.modelForm)
-    if (this.modelForm.invalid) {
+      if (this.modelForm.invalid) {
       return;
     }
     this.addBtn.setDisabled(true);
