@@ -186,7 +186,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit, OnDestroy {
   }
   delete() {
     if (this.user.customerCompaniesInfo.find(item => item.isPrimaryContact)) {
-      const modalRef = this.modalService.open(UsersCheckUseComponent, { windowClass: 'xs-modal user-modal', container: (this.companyId) ? "company-user" : "app-users", backdrop: 'static', keyboard: false });
+      const modalRef = this.modalService.open(UsersCheckUseComponent, { windowClass: 'xs-modal user-modal', container: "app-users-details", backdrop: 'static', keyboard: false });
       modalRef.componentInstance.user = this.user;
       this.cd.markForCheck();
       return;
