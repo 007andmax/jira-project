@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { UserProfile } from '../../users/class/user-profile';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -21,6 +21,8 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { ARCHIVE_USER } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { CurrentUser } from 'src/class/current-user/current-user';
+import { Subscription } from 'rxjs';
+import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 @Component({
   selector: 'app-users-details-left-panel',
@@ -28,7 +30,7 @@ import { CurrentUser } from 'src/class/current-user/current-user';
   styleUrls: ['./users-details-left-panel.component.scss'],
   providers: [TicketsListService, UsersTableService]
 })
-export class UsersDetailsLeftPanelComponent implements OnInit {
+export class UsersDetailsLeftPanelComponent implements OnInit, OnDestroy {
   companyId: string;
   modelForm: UntypedFormGroup;
   submitted: boolean = false;
@@ -39,6 +41,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
   @Input() user: UserProfile = new UserProfile();
   @Output() onEdit = new EventEmitter<any>();
   @Output() onDraftEmail = new EventEmitter<any>();
+  sub:Subscription = new Subscription();
   constructor(public customerPortalStateService: CustomerPortalStateService,
     private companiesStateService: CompaniesStateService,
     private permissionsService: PermissionsService,
@@ -51,6 +54,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
     public formBuilder: UntypedFormBuilder,
     private techUsersService: TechUsersService,
     private usersTableService: UsersTableService,
+    private leftPanelStateService: LeftPanelStateService,
     private modalService: NgbModal,
     public cd: ChangeDetectorRef,) { }
 
@@ -69,6 +73,22 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
     })
     this.usersStateService.onSelectCustomerCompanyInfo.subscribe(data => {
       this.seelectedCustomerCompaniesInfo = data;
+    })
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === ARCHIVE_USER) {
+          this.onArchiveUser(this.user.id);
+        }
+      }
+    })
+    this.sub.add(getConfirm);
+  }
+  private onArchiveUser(id) {
+   this.usersService.onArchiveUsers(id).subscribe(data => {
+      this.confirmStateService.initRequest(false);
+      this.leftPanelStateService.goToState('new-users');
+    }, err => {
+      this.confirmStateService.initRequest(false);
     })
   }
   updateForm() {
@@ -239,4 +259,8 @@ export class UsersDetailsLeftPanelComponent implements OnInit {
   public trackById(index, item) {
     return item.id;
   }
+    ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

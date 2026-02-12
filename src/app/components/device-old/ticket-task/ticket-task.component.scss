@@ -16,3 +16,12 @@ li.icon__assign-user {
     cursor: pointer;
 }
 
+.nav-tabs {
+    height: auto !important;
+}
+.tab-content {
+    padding: 24px;
+    overflow: auto;
+    height: auto;
+    max-height: calc(100% - 42px);
+}
