@@ -398,7 +398,7 @@ export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy
     if (this.tab === 'NOTE' && this.noteList) this.noteList.onGetNoteList();
     this.ticketProfileFormUpdate.setType(this.tab);
     if (this.tab == "NOTE" && this.customerPortalStateService.isCustomerPortal) this.ticketProfileFormUpdate.setNoteType("PUBLIC");
-    if (this.tab == "NOTE" && !this.customerPortalStateService.isCustomerPortal) this.ticketProfileFormUpdate.setNoteType(this.ticketStateService.getNoteType());
+    if (!this.customerPortalStateService.isCustomerPortal) this.ticketProfileFormUpdate.setNoteType(this.ticketStateService.getNoteType());
     let onCloseModalNote = this.ticketStateService.onCloseModalNote.subscribe(res => {
       this.close();
     })
