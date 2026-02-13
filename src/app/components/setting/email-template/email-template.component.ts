@@ -231,8 +231,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
             this.type = res.type
 
             this.templeteForm.controls["subject"].clearValidators();
-console.log("this.templeteInfo",this.templeteInfo);
-
             if (this.templeteInfo.requiredKeywordsRegExp) {
               const pattern = this.templeteInfo.requiredKeywordsRegExp;
               this.templeteForm.controls["subject"].setValidators([
@@ -245,7 +243,7 @@ console.log("this.templeteInfo",this.templeteInfo);
                 Validators.required
               ]);
             }
-
+            this.templeteForm.controls["body"].clearValidators();
              if (this.templeteInfo.requiredBodyKeywordsRegExp) {
               const pattern = this.templeteInfo.requiredBodyKeywordsRegExp;
               this.templeteForm.controls["body"].setValidators([
