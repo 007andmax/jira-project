@@ -38,6 +38,7 @@ export class EmailTempleteService {
         "This message will be sent when a person is added to the Ticket Update.",
       requiredKeywords: ["$Ticket_Number"],
       requiredKeywordsRegExp: /\$Ticket_Number/,
+      requiredBodyKeywordsRegExp: /\$Ticket_Note/,
       showPreview: true,
       isActive: false
     },

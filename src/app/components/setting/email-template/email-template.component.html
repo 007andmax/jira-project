@@ -460,9 +460,19 @@
                     formControlName="body"
                 ></textarea>-->
                   <angular-editor
+                    [ngClass]="{ 'is-invalid-body': submitted && f.body.errors }"
                   formControlName="body" 
                         [config]="editorConfig"
                     ></angular-editor>
+                     <div
+                    *ngIf="submitted && f.body.errors"
+                    class="invalid-feedback"
+                >
+                    <div *ngIf="f.body.errors.required">Body is required</div>
+                    <div *ngIf="f.body.errors.pattern && templeteInfo">
+                       $Ticket_Note variable is required
+                    </div>
+                </div>
             </div>
             <div class="f-row">
                 <div class="f-col col-100">

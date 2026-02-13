@@ -231,6 +231,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
             this.type = res.type
 
             this.templeteForm.controls["subject"].clearValidators();
+console.log("this.templeteInfo",this.templeteInfo);
 
             if (this.templeteInfo.requiredKeywordsRegExp) {
               const pattern = this.templeteInfo.requiredKeywordsRegExp;
@@ -241,6 +242,19 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
               this.templeteForm.controls["subject"].updateValueAndValidity();
             } else {
               this.templeteForm.controls["subject"].setValidators([
+                Validators.required
+              ]);
+            }
+
+             if (this.templeteInfo.requiredBodyKeywordsRegExp) {
+              const pattern = this.templeteInfo.requiredBodyKeywordsRegExp;
+              this.templeteForm.controls["body"].setValidators([
+                Validators.required,
+                Validators.pattern(pattern)
+              ]);
+              this.templeteForm.controls["body"].updateValueAndValidity();
+            } else {
+                 this.templeteForm.controls["body"].setValidators([
                 Validators.required
               ]);
             }
@@ -453,6 +467,13 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       if (matches === null) {
       }
     }
+     if (this.templeteInfo.requiredBodyKeywordsRegExp) {
+      const matches = this.templeteForm.value.body.match(
+        this.templeteInfo.requiredBodyKeywordsRegExp
+      );
+      if (matches === null) {
+      }
+    }
     this.templeteForm.patchValue({
       body: (this.templeteForm.value.body.length == 0) ? null : this.templeteForm.value.body,
       subject: this.templeteForm.value.subject,
@@ -463,9 +484,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       .subscribe(
         () => {
           this.closeTemplete();
-        },
-        error => {
-          this.toastr.error(`Error Occured  ${error}`);
         }
       );
   }
