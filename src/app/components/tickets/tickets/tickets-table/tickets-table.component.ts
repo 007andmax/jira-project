@@ -37,6 +37,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   ticketsStatus: Array<TicketStatus> = [];
   toggleFilter: boolean = false;
   container = document.body.querySelector(".main-container");
+  sortBy: string;
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     private ticketStateService: TicketStateService,
@@ -133,6 +134,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.ticketsStateService.changeToggleFilter(data);
   }
   onFilter(data) {
+    this.sortBy = data;
     this.ticketsStateService.changeFilterField(data);
   }
   editTicket(id) {
