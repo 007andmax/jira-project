@@ -125,6 +125,14 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.tickets.forEach(item => item.selected = false);
     })
     this.sub.add(onResetlistTicketsPrioritiesForRemove);
+    if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
+    let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe(res => {
+      this.getCurrentCompany(res);
+    })
+    this.sub.add(onCurrentCompany);
+  }
+  getCurrentCompany(res) {
+    this.sortBy = res.defaulTticketSortOrder.replace('_DESC', '').replace('_ASC', '').toLowerCase();
   }
   onSelectTicket(ticket) {
     this.tickets.find(item => item.id === ticket.id).selected = ticket.selected;
