@@ -36,6 +36,11 @@
                                 (click)="onFilter('name')"
                             >
                                 Name
+                                <div class="qt-table-modern__sorting"></div>
+                                <div *ngIf="sortBy.sortBy == 'name'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'desc', 'icon__arrow_narrow_up': sortBy.sortDirection === 'asc'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                             </div>
                             <div
                                 class="companies-table__client-type pointer"
@@ -43,6 +48,10 @@
                             >
                                 Type
                                 <div class="qt-table-modern__sorting"></div>
+                                 <div *ngIf="sortBy.sortBy == 'type'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'desc', 'icon__arrow_narrow_up': sortBy.sortDirection === 'asc'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                             </div>
                             <div
                                 class="companies-table__address pointer"
@@ -50,6 +59,10 @@
                             >
                                 Shipping Address
                                 <div class="qt-table-modern__sorting"></div>
+                                 <div *ngIf="sortBy.sortBy == 'address'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'desc', 'icon__arrow_narrow_up': sortBy.sortDirection === 'asc'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                             </div>
                             <div
                                 class="companies-table__primary-contact pointer"
@@ -57,6 +70,10 @@
                             >
                                 Primary Contact
                                 <div class="qt-table-modern__sorting"></div>
+                                 <div *ngIf="sortBy.sortBy == 'primary_contact'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'desc', 'icon__arrow_narrow_up': sortBy.sortDirection === 'asc'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                             </div>
                             <div
                                 class="companies-table__email-address pointer"
@@ -64,6 +81,10 @@
                             >
                                 Email Address
                                 <div class="qt-table-modern__sorting"></div>
+                                 <div *ngIf="sortBy.sortBy == 'email'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'desc', 'icon__arrow_narrow_up': sortBy.sortDirection === 'asc'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                             </div>
                             <div
                                 class="companies-table__tickets pointer"
@@ -71,6 +92,10 @@
                             >
                                 Tickets
                                 <div class="qt-table-modern__sorting"></div>
+                                 <div *ngIf="sortBy.sortBy == 'tickets'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'desc', 'icon__arrow_narrow_up': sortBy.sortDirection === 'asc'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                             </div>
                             <div
                                 class="companies-table__devices pointer"
@@ -78,6 +103,10 @@
                             >
                                 Devices
                                 <div class="qt-table-modern__sorting"></div>
+                                 <div *ngIf="sortBy.sortBy == 'devices'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'desc', 'icon__arrow_narrow_up': sortBy.sortDirection === 'asc'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                             </div>
                             <div
                                 class="companies-table__users pointer"
@@ -85,6 +114,10 @@
                             >
                                 Users
                                 <div class="qt-table-modern__sorting"></div>
+                                 <div *ngIf="sortBy.sortBy == 'users'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'desc', 'icon__arrow_narrow_up': sortBy.sortDirection === 'asc'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                             </div>
                             <div class="companies-table__download-btn  pointer"></div>
                             <div class="companies-table__menu pointer"></div>

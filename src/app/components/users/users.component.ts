@@ -27,6 +27,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserDeArchiveNotificationComponent } from './user-de-archive-notification/user-de-archive-notification.component';
 import { fadeInAnimation } from 'src/app/animations';
 import { ToastrService } from 'ngx-toastr';
+import { TicketSortBy } from '../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-users',
@@ -52,6 +53,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   toggleFilter: boolean = false;
   showPendingPreloader: boolean = false;
   container = document.body.querySelector(".main-container");
+  sortBy: TicketSortBy = new TicketSortBy('NAME', 'asc');
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private confirmStateService: ConfirmStateService,
@@ -301,6 +303,12 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.getUsers();
   }
   public onFilter(field) {
+    this.sortBy.sortBy = field;
+    if (this.sortBy.sortDirection === 'desc') {
+      this.sortBy.sortDirection = 'asc';
+    } else {
+      this.sortBy.sortDirection = 'desc';
+    }
     this.filter.setSortBy(field);
     this.filter.page = 0;
     this.userListService.setBlockList(false);

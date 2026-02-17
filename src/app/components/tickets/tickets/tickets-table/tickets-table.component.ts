@@ -14,6 +14,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { TicketsRealTimeService } from 'src/app/states/tickets/tickets-real-time.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
+import { TicketSortBy } from '../class/ticket-sort-by';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   ticketsStatus: Array<TicketStatus> = [];
   toggleFilter: boolean = false;
   container = document.body.querySelector(".main-container");
-  sortBy: string;
+  sortBy: TicketSortBy = new TicketSortBy('created', 'desc');
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     private ticketStateService: TicketStateService,
@@ -132,7 +133,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.sub.add(onCurrentCompany);
   }
   getCurrentCompany(res) {
-    this.sortBy = res.defaulTticketSortOrder.replace('_DESC', '').replace('_ASC', '').toLowerCase();
+    this.sortBy = new TicketSortBy(res.defaulTticketSortOrder.replace('_DESC', '').replace('_ASC', '').toLowerCase(), res.defaulTticketSortOrder.includes('_DESC') ? 'desc' : 'asc');
   }
   onSelectTicket(ticket) {
     this.tickets.find(item => item.id === ticket.id).selected = ticket.selected;
@@ -142,7 +143,13 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.ticketsStateService.changeToggleFilter(data);
   }
   onFilter(data) {
-    this.sortBy = data;
+    this.sortBy.sortBy = data;
+    if (this.sortBy.sortDirection === 'desc') {
+      this.sortBy.sortDirection = 'asc';
+    } else {
+      this.sortBy.sortDirection = 'desc';
+    }
+    console.log("this.sortBy", this.sortBy);
     this.ticketsStateService.changeFilterField(data);
   }
   editTicket(id) {

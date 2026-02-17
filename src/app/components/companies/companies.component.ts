@@ -19,6 +19,7 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CompanyDeviceCount } from './class/company-device-count';
 import { CompaniesHeaderComponent } from './companies-header/companies-header.component';
 import { fadeInAnimation } from 'src/app/animations';
+import { TicketSortBy } from '../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-companies',
@@ -45,6 +46,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   devicesCounts: Array<CompanyDeviceCount> = [];
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   container = document.body.querySelector(".main-container");
+  sortBy: TicketSortBy = new TicketSortBy('name', 'asc');
   constructor(private companiesService: CompaniesService,
     private companiesList: CompaniesListService,
     private companiesStateService: CompaniesStateService,
@@ -170,6 +172,12 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   onFilter(data) {
+    this.sortBy.sortBy = data;
+    if (this.sortBy.sortDirection === 'desc') {
+      this.sortBy.sortDirection = 'asc';
+    } else {
+      this.sortBy.sortDirection = 'desc';
+    }
     this.companyFilter.onFilter(data, this.reqCompaniesList);
     this.page_number = 0;
     this.companiesList.setBlockList(false);

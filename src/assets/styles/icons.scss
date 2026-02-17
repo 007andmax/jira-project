@@ -259,8 +259,12 @@ Example:
   &__payment-method-visa {
     background-image: url("/assets/img/icons/payment-method-visa.svg");
   }
+  &__arrow_narrow_up {
+    background-image: url("/assets/img/icons/arrow_narrow_up.svg");
+  }
   &__arrow_narrow_down {
-    background-image: url("/assets/img/icons/arrow_narrow_down.svg");
+    background-image: url("/assets/img/icons/arrow_narrow_up.svg");
+    transform: rotate(180deg);
   }
   // END Color Icon
 

@@ -23,6 +23,7 @@ import { UsersHeaderComponent } from '../users/users-header/users-header.compone
 import { UserFilters } from '../users/class/user-filters';
 import { fadeInAnimation } from 'src/app/animations';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { TicketSortBy } from '../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'marketing',
@@ -48,6 +49,7 @@ export class MarketingComponent implements OnInit {
   toggleFilter: boolean = false;
   showPendingPreloader: boolean = false;
   container = document.body.querySelector(".main-container");
+  sortBy: TicketSortBy = new TicketSortBy('NAME', 'asc');
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private confirmStateService: ConfirmStateService,
@@ -283,6 +285,12 @@ export class MarketingComponent implements OnInit {
     this.getUsers();
   }
   public onFilter(field) {
+    this.sortBy.sortBy = field;
+    if (this.sortBy.sortDirection === 'desc') {
+      this.sortBy.sortDirection = 'asc';
+    } else {
+      this.sortBy.sortDirection = 'desc';
+    }
     this.filter.setSortBy(field);
     this.filter.page = 0;
     this.userListService.setBlockList(false);
