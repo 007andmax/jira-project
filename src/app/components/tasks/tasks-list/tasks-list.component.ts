@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { TasksService } from 'src/app/services/tasks/tasks.service';
 import { Task } from '../class/task';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
@@ -25,6 +25,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
   container = document.body.querySelector(".main-container");
   toggleFilter: boolean = false;
   sub: Subscription = new Subscription();
+  @ViewChildren('itemRef') itemRefs!: QueryList<ElementRef>;
   constructor(public tasksService: TasksService,
     public ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
@@ -82,6 +83,23 @@ export class TasksListComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(onFastRemove);
+
+  }
+
+  ngAfterViewInit() {
+    this.itemRefs.changes.subscribe(() => {
+      requestAnimationFrame(() => {
+        this.checkScrollbar();
+      });
+    });
+  }
+  checkScrollbar() {
+    let isExistScroll = this.checkExistScroll(this.container);
+    console.log("isExistScroll", isExistScroll);
+    if (!this.showPreloader && !isExistScroll) this.onScroll();
+  }
+  checkExistScroll(div): boolean {
+    return div ? div.scrollHeight > div.clientHeight : false;
   }
   onToggleFilter(data) {
     this.tasksStateService.changeToggleFilter(data);
@@ -102,7 +120,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
     }
 
     if (this.page_number > 0) this.showPendingPreloader = true;
-    this.tasksService.getTasks(this.page_number, this.filter.techUser ? this.filter.techUser.id : null, this.filter.filter, this.filter.archived).subscribe((data: Array<Task>) => {
+    this.tasksService.getTasks(this.page_number, this.filter.techUser ? this.filter.techUser.id : null, this.filter.filter, this.filter.archived, 20).subscribe((data: Array<Task>) => {
       this.list = [...this.list, ...data.map(item => new Task(item))];
       this.infiniteScrollDisabled = false;
       if (data.length < this.offset) this.ticketsListService.setBlockList(true);
