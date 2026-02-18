@@ -95,7 +95,6 @@ export class TasksListComponent implements OnInit, OnDestroy {
   }
   checkScrollbar() {
     let isExistScroll = this.checkExistScroll(this.container);
-    console.log("isExistScroll", isExistScroll);
     if (!this.showPreloader && !isExistScroll) this.onScroll();
   }
   checkExistScroll(div): boolean {
