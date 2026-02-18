@@ -21,7 +21,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
   showPendingPreloader: boolean = false;
   public infiniteScrollDisabled = true;
   public page_number: number = 0;
-  offset: number = 10;
+  offset: number = 20;
   container = document.body.querySelector(".main-container");
   toggleFilter: boolean = false;
   sub: Subscription = new Subscription();
