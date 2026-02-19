@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
 import { PermissionsService } from "src/app/services/permissions/permissions.service";
 import { UsersStateService } from "src/app/states/users/users-state.service";
 
 @Injectable()
-export class PermissionMyProfileService implements CanActivate {
+export class PermissionMyProfileService  {
     constructor(private permissionsService: PermissionsService, private usersStateService: UsersStateService) { }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
         if (this.usersStateService.getCurrentUser()) return this.usersStateService.getCurrentUser().accountType == "TECH" || this.usersStateService.getCurrentUser().accountType == "CLIENT";

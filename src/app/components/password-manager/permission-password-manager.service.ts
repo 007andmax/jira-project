@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 
 @Injectable()
-export class PermissionPasswordManagerService implements CanActivate {
+export class PermissionPasswordManagerService  {
     constructor(private permissionsService: PermissionsService, private usersStateService: UsersStateService) { }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
         if (this.usersStateService.getCurrentUser()) return this.getPermissions('VIEW_PASSWORD_SECTION');

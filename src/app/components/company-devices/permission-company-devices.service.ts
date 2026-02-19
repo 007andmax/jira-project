@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -7,7 +7,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 
 @Injectable()
-export class PermissionCompanyDevicesService implements CanActivate {
+export class PermissionCompanyDevicesService  {
     constructor(private permissionsService: PermissionsService, private usersStateService: UsersStateService, private companiesStateService: CompaniesStateService) { }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
         if (this.usersStateService.getCurrentUser()) return this.getPermissions('VIEW_COMPANIES') || this.getCompanyInfoPermissions('VIEW_ALL_DEVICES');

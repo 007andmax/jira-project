@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -7,7 +7,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 @Injectable({
   providedIn: 'root',
 })
-export class PermissionManageTagsService implements CanActivate {
+export class PermissionManageTagsService  {
   constructor(private permissionsService: PermissionsService, private usersStateService: UsersStateService) { }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
     if (this.usersStateService.getCurrentUser()) return this.getPermissions('VIEW_TAGS_SETTINGS');

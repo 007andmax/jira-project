@@ -6,8 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./preview-phone-mask.component.scss']
 })
 export class PreviewPhoneMaskComponent implements OnInit {
-  @Input() number;
-  @Input() class;
+  @Input() number!: string;
+  @Input() class!: string;
   constructor() { }
 
   ngOnInit() {
