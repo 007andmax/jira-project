@@ -176,7 +176,7 @@ table.qt-table-modern {
     }
 
     &__subject {
-      flex: 2 1 345px;
+      flex: 2 1 260px;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -209,7 +209,9 @@ table.qt-table-modern {
     &__status {
       flex: 0 0 162px;
     }
-
+    &__number {
+      flex: 0 0 85px;
+    }
     &__created-date {
       flex: 0 0 135px;
     }
