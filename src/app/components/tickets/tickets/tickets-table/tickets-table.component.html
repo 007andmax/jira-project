@@ -11,6 +11,13 @@
                         Requested By
                         <span class="qt-table-modern__sorting"></span>
                     </div>
+                       <div
+                        class="ticket-table__status pointer"
+                        (click)="onFilter('number')"
+                    >
+                        Ticket #
+                        <span class="qt-table-modern__sorting"></span>
+                    </div>
                     <div
                         class="ticket-table__subject pointer"
                         (click)="onFilter('subject')"
