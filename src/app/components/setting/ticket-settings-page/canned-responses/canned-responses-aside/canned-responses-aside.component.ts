@@ -68,11 +68,13 @@ export class CannedResponsesAsideComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let onOpenAddAside = this.noteStateService.onOpenAddAside.subscribe(data => {
+      this.keywords = this.noteStateService.keywords;
       this.opened = true;
       this.cd.detectChanges();
     })
     this.sub.add(onOpenAddAside);
     let onEditNote = this.noteStateService.onEditNote.subscribe(data => {
+      this.keywords = this.noteStateService.keywords;
       this.noteTemplate = new NoteTemplate(data);
       this.noteTemplate.setEditMode(true);
       this.opened = true;
@@ -81,15 +83,13 @@ export class CannedResponsesAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onEditNote);
     let onCopyNote = this.noteStateService.onCopyNote.subscribe(data => {
+      this.keywords = this.noteStateService.keywords;
       this.noteTemplate = new NoteTemplate(data);
       this.noteTemplateValidate.setTitleIsExist(true);
       this.opened = true;
       this.cd.detectChanges();
     })
     this.sub.add(onCopyNote);
-    this.noteService.getKeywords().subscribe((data: any) => {
-      this.keywords = data;
-    });
   }
   restoreFocus(
   ) {

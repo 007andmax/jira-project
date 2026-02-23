@@ -40,8 +40,8 @@ export class NoteService {
   public editNoteTemplate(id, data) {
     return this.http.put(`${this.apiUrl}noteTemplates/${id}`, data);
   }
-  public getNoteTemplate(id) {
-    return this.http.get(`${this.apiUrl}noteTemplates/${id}`);
+  public getNoteTemplate(id, ticketId = null) {
+    return this.http.get(`${this.apiUrl}noteTemplates/${id}${ticketId ? `?ticketId=${ticketId}` : ''}`);
   }
 
   public getNotesTemplates(sort) {

@@ -62,6 +62,9 @@ export class CannedResponsesComponent implements OnInit {
       this.cd.detectChanges();
     })
     this.sub.add(changeNoteArray);
+    this.noteService.getKeywords().subscribe((data: any) => {
+      this.noteStateService.setKeywords(data);
+    });
   }
   getNoteList() {
     this.showPreloader = true;
