@@ -31,6 +31,9 @@ export class NoteService {
   public removeNoteTemplate(id) {
     return this.http.delete(`${this.apiUrl}noteTemplates/${id}`);
   }
+  public getKeywords() {
+    return this.http.get(`${this.apiUrl}noteTemplates/keywords`);
+  }
   public addNoteTemplate(data) {
     return this.http.post(`${this.apiUrl}noteTemplates`, data);
   }
