@@ -19,9 +19,9 @@
 <div class="ticket-detail-profile-form-update__footer qt-df jc-sb qt-ai-c">
     <div class="qt-df ticket-edit-aside-bottom-part-users-attack">
         <ticket-profile-form-update-note-list
-            #noteList
+            *ngIf="!customerPortalStateService.isCustomerPortal"
             [placement]="'top-left'"
-             [ticketProfile]="ticketProfile"
+            [ticketProfile]="ticketProfile"
             class="ticket-detail-form-update-note-list"
             (onSelected)="onSelectedNote($event)"
         ></ticket-profile-form-update-note-list>
