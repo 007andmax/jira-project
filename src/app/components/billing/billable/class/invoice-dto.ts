@@ -43,6 +43,7 @@ export class InvoiceDto {
     totalSum: number;
     invoiceDiscount: InvoiceDiscount;
     status: string;
+    paidSum: number;
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];
