@@ -30,6 +30,14 @@ For more info see: https://angular.io/guide/build#configuring-commonjs-dependenc
 
 
 
+./src/app/components/setting/company-profile/company-profile.module.ts:24:26-44 - Error: export 'ImageCropperModule' (imported as 'ImageCropperModule') was not found in 'ngx-image-cropper' (possible exports: CropService, ImageCropperComponent, LoadImageService, base64ToFile, resizeCanvas)
+
+./src/app/components/setting/my-profile/my-profile.module.ts:24:58-76 - Error: export 'ImageCropperModule' (imported as 'ImageCropperModule') was not found in 'ngx-image-cropper' (possible exports: CropService, ImageCropperComponent, LoadImageService, base64ToFile, resizeCanvas)
+
+./src/app/components/setting/tech-users-settings/tech-users-settings.module.ts:18:60-78 - Error: export 'ImageCropperModule' (imported as 'ImageCropperModule') was not found in 'ngx-image-cropper' (possible exports: CropService, ImageCropperComponent, LoadImageService, base64ToFile, resizeCanvas)
+
+./src/app/services/modal/modal-image-cropper/modal-image-cropper.module.ts:9:26-44 - Error: export 'ImageCropperModule' (imported as 'ImageCropperModule') was not found in 'ngx-image-cropper' (possible exports: CropService, ImageCropperComponent, LoadImageService, base64ToFile, resizeCanvas)
+
 Error: src/app/app.component.html:2:3 - error NG8001: 'router-outlet' is not a known element:
 1. If 'router-outlet' is an Angular component, then verify that it is part of this module.
 2. If 'router-outlet' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
@@ -946,50 +954,6 @@ Error: src/app/components/billing/invoices/invoices-aside-preview/invoices-aside
     Is it missing an @NgModule annotation?
 
 
-Error: src/app/components/billing/invoices/invoices-aside/invoices-aside.module.ts:36:17 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-36                 InfiniteScrollModule
-                   ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/billing/invoices/invoices.module.ts:30:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-30         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/billing/manage-cards/manage-cards.module.ts:37:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-37         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/billing/payments/payments.module.ts:43:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-43         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
 Error: src/app/components/billing/payments/payments.module.ts:52:9 - error NG6002: 'PreviewPhoneMaskModule' does not appear to be an NgModule class.
 
 52         PreviewPhoneMaskModule,
@@ -1027,17 +991,6 @@ Error: src/app/components/billing/quotes/quote-aside-preview/quote-aside-preview
 
 20         QuoteAsidePreviewBodyModule
            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/billing/quotes/quotes.module.ts:65:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-65         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
 
 
 Error: src/app/components/billing/quotes/quotes.module.ts:70:9 - error NG6002: 'InvoiceFormEditCustomerModule' does not appear to be an NgModule class.
@@ -1658,24 +1611,6 @@ Error: src/app/components/companies/companies-users-details/companies-users-deta
 
 25         UsersDetailsTabCompaniesModule,
            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/companies/companies-users-details/companies-users-details.module.ts:27:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-27         UsersDetailsTabMessagesModule,
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/companies/companies-users-details/companies-users-details.module.ts:28:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-28         UsersDetailsTabPasswordsModule,
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/companies/companies-users-details/companies-users-details.module.ts:29:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-29         UsersDetailsTabTicketsModule
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/companies/companies.component.html:2:5 - error NG8001: 'app-companies-header' is not a known element:
@@ -4349,12 +4284,6 @@ Error: src/app/components/companies/company-add-aside/company-add-aside.componen
     Error occurs in the template of component CompanyAddAsideComponent.
 
 
-Error: src/app/components/companies/company-documents/company-documents.module.ts:16:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-16         DocumentsHeaderModule,
-           ~~~~~~~~~~~~~~~~~~~~~
-
-
 Error: src/app/components/companies/company-edit-aside/company-edit-aside.component.html:51:21 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'input'.
 
 51                     [ngClass]="{'--input-error':!validate.getName() || validate.getNameIsExist() }"
@@ -5981,33 +5910,10 @@ Error: src/app/components/companies/company-edit-aside/company-edit-aside.compon
     Error occurs in the template of component CompanyEditAsideComponent.
 
 
-Error: src/app/components/companies/company-file-manager/company-file-manager-category/company-file-manager-category.module.ts:30:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-30         FileManagementFileInfoModule
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/companies/company-file-manager/company-file-manager.module.ts:38:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-38         FileManagementFileInfoModule,
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
 Error: src/app/components/companies/company-products/company-products.module.ts:17:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
 
 17         ReportMenuModule,
            ~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/companies/company-tags/company-tags.module.ts:24:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-24         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
 
 
 Error: src/app/components/company-dashboard/company-dash-associate-info/company-dash-associate-info.component.html:15:25 - error NG8001: 'preview-phone-mask' is not a known element:
@@ -6939,91 +6845,6 @@ Error: src/app/components/company-dashboard/company-dashboard.component.html:58:
     Error occurs in the template of component CompanyDashboardComponent.
 
 
-Error: src/app/components/company-devices/company-devices-tags/company-devices-tags.module.ts:21:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-21         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/company-devices/company-devices.module.ts:69:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-69         CompanyDevicesTagsModule,
-           ~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/company-network-scan-beta/network-scan-credentials-aside/network-scan-credentials-aside.module.ts:20:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-20         InfiniteScrollModule
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/company-network-scan/company-network-scan.module.ts:28:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-28         NetworkScanCredentialsAsideModule
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/company-password-manager/company-password-manager.module.ts:20:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-20         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/company-tickets/company-tickets.module.ts:21:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-21         TicketsHeaderModule,
-           ~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/company-tickets/company-tickets.module.ts:22:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-22         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/company-tickets/company-tickets.module.ts:25:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-25         TicketsFilterModule,
-           ~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/company-user/company-user.module.ts:20:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-20         UsersHeaderModule,
-           ~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/company-user/company-user.module.ts:21:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-21         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
 Error: src/app/components/company-user/company-user.module.ts:22:9 - error NG6002: 'UsersTableModule' does not appear to be an NgModule class.
 
 22         UsersTableModule,
@@ -7033,12 +6854,6 @@ Error: src/app/components/company-user/company-user.module.ts:22:9 - error NG600
     39 export class UsersTableModule { }
                     ~~~~~~~~~~~~~~~~
     Is it missing an @NgModule annotation?
-
-
-Error: src/app/components/company-user/company-user.module.ts:24:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-24         UsersFilterModule
-           ~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/device-old/dashboard/dashboard.module.ts:22:9 - error NG6002: 'NgxUploaderModule' does not appear to be an NgModule class.
@@ -7147,18 +6962,6 @@ Error: src/app/components/documents/documents-add/documents-add.module.ts:28:9 -
     Is it missing an @NgModule annotation?
 
 
-Error: src/app/components/documents/documents-add/documents-add.module.ts:34:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-34         CompanyTagsModule,
-           ~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/documents/documents-category/documents-category.module.ts:17:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-17         DocumentsHeaderModule,
-           ~~~~~~~~~~~~~~~~~~~~~
-
-
 Error: src/app/components/documents/documents-edit/documents-edit.module.ts:30:9 - error NG6002: 'DocumentsAddBodyModule' does not appear to be an NgModule class.
 
 30         DocumentsAddBodyModule,
@@ -7168,76 +6971,6 @@ Error: src/app/components/documents/documents-edit/documents-edit.module.ts:30:9
     22 export class DocumentsAddBodyModule { }
                     ~~~~~~~~~~~~~~~~~~~~~~
     Is it missing an @NgModule annotation?
-
-
-Error: src/app/components/documents/documents-edit/documents-edit.module.ts:36:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-36         CompanyTagsModule,
-           ~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/documents/documents-header/documents-header.module.ts:19:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-19         CompanyTagsModule,
-           ~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/documents/documents.module.ts:24:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-24         DocumentsHeaderModule,
-           ~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/file-manager/file-manager-add-file/file-manager-add-file.module.ts:35:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-35         CompanyTagsModule,
-           ~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/file-manager/file-manager-add-file/file-manager-add-file.module.ts:36:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-36         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/file-manager/file-manager-all-customer-company/file-manager-all-customer-company.module.ts:38:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-38         FileManagementFileInfoModule,
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/file-manager/file-manager-all-customer/file-manager-all-customer.module.ts:37:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-37         FileManagementFileInfoModule
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/file-manager/file-manager-category/file-manager-category.module.ts:28:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-28         FileManagementFileInfoModule
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/file-manager/file-manager-file-info/file-manager-file-info.module.ts:25:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-25         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/file-manager/file-manager.module.ts:51:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-51         FileManagementFileInfoModule
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/inventory/inventory-check-use/inventory-check-use.component.html:44:33 - error NG8002: Can't bind to 'ngStyle' since it isn't a known property of 'div'.
@@ -7251,34 +6984,6 @@ Error: src/app/components/inventory/inventory-check-use/inventory-check-use.comp
     Error occurs in the template of component InventoryCheckUseComponent.
 
 
-Error: src/app/components/inventory/inventory.module.ts:33:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-33         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/marketing/marketing.module.ts:20:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-20         UsersHeaderModule,
-           ~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/marketing/marketing.module.ts:21:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-21         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
 Error: src/app/components/marketing/marketing.module.ts:22:9 - error NG6002: 'UsersTableModule' does not appear to be an NgModule class.
 
 22         UsersTableModule,
@@ -7288,34 +6993,6 @@ Error: src/app/components/marketing/marketing.module.ts:22:9 - error NG6002: 'Us
     39 export class UsersTableModule { }
                     ~~~~~~~~~~~~~~~~
     Is it missing an @NgModule annotation?
-
-
-Error: src/app/components/marketing/marketing.module.ts:24:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-24         UsersFilterModule,
-           ~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/notifications/notifications.module.ts:15:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-15         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/password-manager/password-manager.module.ts:47:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-47         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
 
 
 Error: src/app/components/reports/item-report/item-report.module.ts:83:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
@@ -10148,6 +9825,12 @@ Error: src/app/components/setting/company-profile/company-profile.component.html
     Error occurs in the template of component CompanyProfileComponent.
 
 
+Error: src/app/components/setting/company-profile/company-profile.module.ts:4:10 - error TS2305: Module '"ngx-image-cropper"' has no exported member 'ImageCropperModule'.
+
+4 import { ImageCropperModule } from 'ngx-image-cropper';
+           ~~~~~~~~~~~~~~~~~~
+
+
 Error: src/app/components/setting/device-setting/manufactures-check-use/manufactures-check-use.component.html:42:33 - error NG8002: Can't bind to 'ngStyle' since it isn't a known property of 'div'.
 
 42                                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(null,listColorNoAvatar[item.indexColor]) }"
@@ -10168,28 +9851,6 @@ Error: src/app/components/setting/email-template/email-template.module.ts:24:9 -
     1 export declare class AngularEditorModule {
                            ~~~~~~~~~~~~~~~~~~~
     This likely means that the library (@kolkov/angular-editor) which declares AngularEditorModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/setting/manage-tags/manage-tags.module.ts:35:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-35         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/setting/marketing-email/marketing-email.module.ts:37:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-37         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
 
 
 Error: src/app/components/setting/my-profile/account/account.component.html:10:21 - error NG8002: Can't bind to 'formGroup' since it isn't a known property of 'form'.
@@ -10613,6 +10274,12 @@ Error: src/app/components/setting/my-profile/my-profile.component.html:80:5 - er
     14   templateUrl: "./my-profile.component.html",
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component MyProfileComponent.
+
+
+Error: src/app/components/setting/my-profile/my-profile.module.ts:9:10 - error TS2305: Module '"ngx-image-cropper"' has no exported member 'ImageCropperModule'.
+
+9 import { ImageCropperModule } from 'ngx-image-cropper';
+           ~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/setting/my-profile/profile/profile.component.html:9:15 - error NG8002: Can't bind to 'formGroup' since it isn't a known property of 'form'.
@@ -11292,16 +10959,1145 @@ Error: src/app/components/setting/my-profile/tickets-my-profile/tickets-my-profi
     Error occurs in the template of component TicketsMyProfileComponent.
 
 
-Error: src/app/components/setting/tech-users-settings/tech-users-settings.module.ts:28:9 - error NG6002: 'ImageCropperModule' does not appear to be an NgModule class.
+Error: src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.html:26:33 - error NG8001: 'app-dynamic-tooltip' is not a known element:
+1. If 'app-dynamic-tooltip' is an Angular component, then verify that it is part of this module.
+2. If 'app-dynamic-tooltip' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
 
-28         ImageCropperModule,
+ 26                                 <app-dynamic-tooltip
+                                    ~~~~~~~~~~~~~~~~~~~~
+ 27                                     [content]="'Edit'"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+... 
+ 29                                     #editTooltip
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 30                                 ></app-dynamic-tooltip>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts:14:16
+    14   templateUrl: './permission-manage.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component PermissionManageComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.html:27:37 - error NG8002: Can't bind to 'content' since it isn't a known property of 'app-dynamic-tooltip'.
+1. If 'app-dynamic-tooltip' is an Angular component and it has 'content' input, then verify that it is part of this module.
+2. If 'app-dynamic-tooltip' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+27                                     [content]="'Edit'"
+                                       ~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts:14:16
+    14   templateUrl: './permission-manage.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component PermissionManageComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.html:28:37 - error NG8002: Can't bind to 'position' since it isn't a known property of 'app-dynamic-tooltip'.
+1. If 'app-dynamic-tooltip' is an Angular component and it has 'position' input, then verify that it is part of this module.
+2. If 'app-dynamic-tooltip' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+28                                     [position]="'top'"
+                                       ~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts:14:16
+    14   templateUrl: './permission-manage.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component PermissionManageComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.html:39:33 - error NG8001: 'app-dynamic-tooltip' is not a known element:
+1. If 'app-dynamic-tooltip' is an Angular component, then verify that it is part of this module.
+2. If 'app-dynamic-tooltip' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+ 39                                 <app-dynamic-tooltip
+                                    ~~~~~~~~~~~~~~~~~~~~
+ 40                                     [content]="'Remove'"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+... 
+ 42                                     #removeTooltip
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 43                                 ></app-dynamic-tooltip>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts:14:16
+    14   templateUrl: './permission-manage.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component PermissionManageComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.html:40:37 - error NG8002: Can't bind to 'content' since it isn't a known property of 'app-dynamic-tooltip'.
+1. If 'app-dynamic-tooltip' is an Angular component and it has 'content' input, then verify that it is part of this module.
+2. If 'app-dynamic-tooltip' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+40                                     [content]="'Remove'"
+                                       ~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts:14:16
+    14   templateUrl: './permission-manage.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component PermissionManageComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.html:41:37 - error NG8002: Can't bind to 'position' since it isn't a known property of 'app-dynamic-tooltip'.
+1. If 'app-dynamic-tooltip' is an Angular component and it has 'position' input, then verify that it is part of this module.
+2. If 'app-dynamic-tooltip' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+41                                     [position]="'top'"
+                                       ~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts:14:16
+    14   templateUrl: './permission-manage.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component PermissionManageComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.html:56:33 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'div'.
+
+56                                 [ngClass]="{ opened: selectedRoleIndex === i }"
+                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts:14:16
+    14   templateUrl: './permission-manage.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component PermissionManageComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.html:69:53 - error NG8002: Can't bind to 'ngModel' since it isn't a known property of 'input'.
+
+69                                                     [(ngModel)]="editData.name"
+                                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts:14:16
+    14   templateUrl: './permission-manage.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component PermissionManageComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.html:70:53 - error NG8002: Can't bind to 'ngModelOptions' since it isn't a known property of 'input'.
+
+70                                                     [ngModelOptions]="{ standalone: true }"
+                                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts:14:16
+    14   templateUrl: './permission-manage.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component PermissionManageComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.html:118:37 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'label'.
+
+118                                     [ngClass]="{'--disabled':isPermissionDisabled(permission, role)}"
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts:14:16
+    14   templateUrl: './permission-manage.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component PermissionManageComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.html:196:25 - error NG8001: 'app-drop-down' is not a known element:
+1. If 'app-drop-down' is an Angular component, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+196                         <app-drop-down
+                            ~~~~~~~~~~~~~~
+197                             [class]="['qt-select-input-40']"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+... 
+203                             (onSelectedItem)="changeUsersRole(user, $event)"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+204                         >
+    ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts:14:16
+    14   templateUrl: './permission-manage.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component PermissionManageComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.html:198:29 - error NG8002: Can't bind to 'list' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'list' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+198                             [list]="allTechRoles"
+                                ~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts:14:16
+    14   templateUrl: './permission-manage.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component PermissionManageComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.html:199:29 - error NG8002: Can't bind to 'editItem' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'editItem' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+199                             [editItem]="user.techRole"
+                                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts:14:16
+    14   templateUrl: './permission-manage.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component PermissionManageComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.html:200:29 - error NG8002: Can't bind to 'placeholder' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'placeholder' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+200                             [placeholder]="'Select'"
+                                ~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts:14:16
+    14   templateUrl: './permission-manage.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component PermissionManageComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.html:201:29 - error NG8002: Can't bind to 'sort' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'sort' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+201                             [sort]="false"
+                                ~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts:14:16
+    14   templateUrl: './permission-manage.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component PermissionManageComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.html:202:29 - error NG8002: Can't bind to 'isBlockClear' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'isBlockClear' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+202                             [isBlockClear]="true"
+                                ~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts:14:16
+    14   templateUrl: './permission-manage.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component PermissionManageComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-reassign/tech-users-reassign.component.html:16:17 - error NG8001: 'app-drop-down' is not a known element:
+1. If 'app-drop-down' is an Angular component, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+ 16                 <app-drop-down
+                    ~~~~~~~~~~~~~~
+ 17                     #techUserDP
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+... 
+ 25                     [placeholder]="'Select User To Assign'"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 26                 ></app-drop-down>
+    ~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-reassign/tech-users-reassign.component.ts:10:16
+    10   templateUrl: './tech-users-reassign.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersReassignComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-reassign/tech-users-reassign.component.html:19:21 - error NG8002: Can't bind to 'dropdownWidth' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'dropdownWidth' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+19                     [dropdownWidth]="'440px'"
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-reassign/tech-users-reassign.component.ts:10:16
+    10   templateUrl: './tech-users-reassign.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersReassignComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-reassign/tech-users-reassign.component.html:20:21 - error NG8002: Can't bind to 'list' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'list' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+20                     [list]="namesTechUsersList"
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-reassign/tech-users-reassign.component.ts:10:16
+    10   templateUrl: './tech-users-reassign.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersReassignComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-reassign/tech-users-reassign.component.html:21:21 - error NG8002: Can't bind to 'search' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'search' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+21                     [search]="true"
+                       ~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-reassign/tech-users-reassign.component.ts:10:16
+    10   templateUrl: './tech-users-reassign.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersReassignComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-reassign/tech-users-reassign.component.html:22:21 - error NG8002: Can't bind to 'change' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'change' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+22                     [change]="true"
+                       ~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-reassign/tech-users-reassign.component.ts:10:16
+    10   templateUrl: './tech-users-reassign.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersReassignComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-reassign/tech-users-reassign.component.html:23:21 - error NG8002: Can't bind to 'container' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'container' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+23                     [container]="'body'"
+                       ~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-reassign/tech-users-reassign.component.ts:10:16
+    10   templateUrl: './tech-users-reassign.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersReassignComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-reassign/tech-users-reassign.component.html:25:21 - error NG8002: Can't bind to 'placeholder' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'placeholder' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+25                     [placeholder]="'Select User To Assign'"
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-reassign/tech-users-reassign.component.ts:10:16
+    10   templateUrl: './tech-users-reassign.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersReassignComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-reassign/tech-users-reassign.component.html:42:17 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'button'.
+
+42                 [ngClass]="{'disabled-reassign':!selectedUser}"
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-reassign/tech-users-reassign.component.ts:10:16
+    10   templateUrl: './tech-users-reassign.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersReassignComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:35:23 - error NG8003: No directive found with exportAs 'ngbNav'.
+
+35                 #nav="ngbNav"
+                         ~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:38:17 - error NG8002: Can't bind to 'activeId' since it isn't a known property of 'ul'.
+
+38                 [(activeId)]="activeTab"
+                   ~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:42:21 - error NG8002: Can't bind to 'ngbNavItem' since it isn't a known property of 'li'.
+
+42                     [ngbNavItem]="'activeUsers'"
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:43:21 - error NG8002: Can't bind to 'destroyOnHide' since it isn't a known property of 'li'.
+
+43                     [destroyOnHide]="true"
+                       ~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:93:53 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'span'.
+
+93                                                     [ngClass]="{'offline':techUser.online == false,
+                                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+94                                                         'online':techUser.online == true && techUser.lockScreen == false,
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+95                                                     'away':techUser.online == true && techUser.lockScreen == true}"
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:111:53 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'span'.
+
+111                                                     [ngClass]="{'offline':techUser.online == false,
+                                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+112                                                         'online':techUser.online == true && techUser.lockScreen == false,
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+113                                                     'away':techUser.online == true && techUser.lockScreen == true}"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:158:53 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
+
+158                                                     [ngbTooltip]="techUser.getTooltipsListUserEmailForTechusers()[u]"
+                                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:168:49 - error NG8001: 'app-dynamic-tooltip' is not a known element:
+1. If 'app-dynamic-tooltip' is an Angular component, then verify that it is part of this module.
+2. If 'app-dynamic-tooltip' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+168                                                 <app-dynamic-tooltip
+                                                    ~~~~~~~~~~~~~~~~~~~~
+169                                                     [content]="'Edit'"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+... 
+171                                                     #removeTooltip
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+172                                                 ></app-dynamic-tooltip>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:169:53 - error NG8002: Can't bind to 'content' since it isn't a known property of 'app-dynamic-tooltip'.
+1. If 'app-dynamic-tooltip' is an Angular component and it has 'content' input, then verify that it is part of this module.
+2. If 'app-dynamic-tooltip' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+169                                                     [content]="'Edit'"
+                                                        ~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:170:53 - error NG8002: Can't bind to 'position' since it isn't a known property of 'app-dynamic-tooltip'.
+1. If 'app-dynamic-tooltip' is an Angular component and it has 'position' input, then verify that it is part of this module.
+2. If 'app-dynamic-tooltip' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+170                                                     [position]="'top'"
+                                                        ~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:228:21 - error NG8002: Can't bind to 'ngbNavItem' since it isn't a known property of 'li'.
+
+228                     [ngbNavItem]="'archivedUsers'"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:229:21 - error NG8002: Can't bind to 'destroyOnHide' since it isn't a known property of 'li'.
+
+229                     [destroyOnHide]="true"
+                        ~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:331:45 - error NG8001: 'app-dynamic-tooltip' is not a known element:
+1. If 'app-dynamic-tooltip' is an Angular component, then verify that it is part of this module.
+2. If 'app-dynamic-tooltip' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+331                                             <app-dynamic-tooltip
+                                                ~~~~~~~~~~~~~~~~~~~~
+332                                                 [content]="'Restore User'"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+... 
+334                                                 #restoreUser
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+335                                             ></app-dynamic-tooltip>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:332:49 - error NG8002: Can't bind to 'content' since it isn't a known property of 'app-dynamic-tooltip'.
+1. If 'app-dynamic-tooltip' is an Angular component and it has 'content' input, then verify that it is part of this module.
+2. If 'app-dynamic-tooltip' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+332                                                 [content]="'Restore User'"
+                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:333:49 - error NG8002: Can't bind to 'position' since it isn't a known property of 'app-dynamic-tooltip'.
+1. If 'app-dynamic-tooltip' is an Angular component and it has 'position' input, then verify that it is part of this module.
+2. If 'app-dynamic-tooltip' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+333                                                 [position]="'top'"
+                                                    ~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:351:21 - error NG8002: Can't bind to 'ngbNavItem' since it isn't a known property of 'li'.
+
+351                     [ngbNavItem]="'userPermissions'"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:352:21 - error NG8002: Can't bind to 'destroyOnHide' since it isn't a known property of 'li'.
+
+352                     [destroyOnHide]="true"
+                        ~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:356:25 - error NG8001: 'app-permission-manage' is not a known element:
+1. If 'app-permission-manage' is an Angular component, then verify that it is part of this module.
+2. If 'app-permission-manage' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+356                         <app-permission-manage #userPermissions></app-permission-manage>
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:361:17 - error NG8002: Can't bind to 'ngbNavOutlet' since it isn't a known property of 'div'.
+
+361                 [ngbNavOutlet]="nav"
+                    ~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:420:15 - error NG8002: Can't bind to 'formGroup' since it isn't a known property of 'form'.
+
+420         <form [formGroup]="techUserForm">
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:427:21 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'input'.
+
+427                     [ngClass]="{'--input-error' : submitted && f.firstName.errors}"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:446:21 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'input'.
+
+446                     [ngClass]="{'--input-error' : submitted && f.lastName.errors}"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:465:21 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'input'.
+
+465                     [ngClass]="{'--input-error' : submitted && f.primaryEmail.errors}"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:483:17 - error NG8001: 'app-drop-down' is not a known element:
+1. If 'app-drop-down' is an Angular component, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+483                 <app-drop-down
+                    ~~~~~~~~~~~~~~
+484                     [class]="['qt-select-input-40']"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+... 
+491                     (onSelectedItem)="onChangeRole($event)"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+492                 >
+    ~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:485:21 - error NG8002: Can't bind to 'list' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'list' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+485                     [list]="techRoles"
+                        ~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:486:21 - error NG8002: Can't bind to 'placeholder' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'placeholder' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+486                     [placeholder]="'Select'"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:487:21 - error NG8002: Can't bind to 'sort' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'sort' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+487                     [sort]="false"
+                        ~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:488:21 - error NG8002: Can't bind to 'isBlockClear' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'isBlockClear' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+488                     [isBlockClear]="true"
+                        ~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:489:21 - error NG8002: Can't bind to 'validate' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'validate' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+489                     [validate]="submitted && f.techRole.status == 'VALID' || !submitted"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:490:21 - error NG8002: Can't bind to 'errorMessage' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'errorMessage' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+490                     [errorMessage]="'Set tech user role'"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:497:17 - error NG8001: 'app-drop-down' is not a known element:
+1. If 'app-drop-down' is an Angular component, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+497                 <app-drop-down
+                    ~~~~~~~~~~~~~~
+498                     [class]="['qt-select-input-40']"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+... 
+504                     (onSelectedItem)="onAuthTypeChange($event.type)"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+505                 >
+    ~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:499:21 - error NG8002: Can't bind to 'list' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'list' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+499                     [list]="authenticationTypes"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:500:21 - error NG8002: Can't bind to 'editItem' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'editItem' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+500                     [editItem]="authenticationTypesType"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:501:21 - error NG8002: Can't bind to 'field' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'field' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+501                     [field]="'title'"
+                        ~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:502:21 - error NG8002: Can't bind to 'sort' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'sort' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+502                     [sort]="false"
+                        ~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:503:21 - error NG8002: Can't bind to 'isBlockClear' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'isBlockClear' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+503                     [isBlockClear]="true"
+                        ~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:587:26 - error NG8003: No directive found with exportAs 'disabled'.
+
+587                 #addBtn="disabled"
+                             ~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:590:17 - error NG8001: 'app-preloader-ticket' is not a known element:
+1. If 'app-preloader-ticket' is an Angular component, then verify that it is part of this module.
+2. If 'app-preloader-ticket' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+590                 <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket>
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:720:15 - error NG8002: Can't bind to 'formGroup' since it isn't a known property of 'form'.
+
+720         <form [formGroup]="techUserForm">
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:727:21 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'input'.
+
+727                     [ngClass]="{'--input-error' : submitted && f.firstName.errors}"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:744:21 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'input'.
+
+744                     [ngClass]="{'--input-error' : submitted && f.lastName.errors}"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:764:21 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'input'.
+
+764                     [ngClass]="{'--input-error' : submitted && f.primaryEmail.errors}"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:782:17 - error NG8001: 'app-drop-down' is not a known element:
+1. If 'app-drop-down' is an Angular component, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+782                 <app-drop-down
+                    ~~~~~~~~~~~~~~
+783                     [class]="['qt-select-input-40']"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+... 
+791                     (onSelectedItem)="onChangeRole($event)"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+792                 >
+    ~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:784:21 - error NG8002: Can't bind to 'list' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'list' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+784                     [list]="techRoles"
+                        ~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:785:21 - error NG8002: Can't bind to 'editItem' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'editItem' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+785                     [editItem]="techUserForm.value.techRole"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:786:21 - error NG8002: Can't bind to 'placeholder' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'placeholder' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+786                     [placeholder]="'Select'"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:787:21 - error NG8002: Can't bind to 'sort' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'sort' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+787                     [sort]="false"
+                        ~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:788:21 - error NG8002: Can't bind to 'isBlockClear' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'isBlockClear' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+788                     [isBlockClear]="true"
+                        ~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:789:21 - error NG8002: Can't bind to 'validate' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'validate' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+789                     [validate]="submitted && f.techRole.status == 'VALID' || !submitted"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:790:21 - error NG8002: Can't bind to 'errorMessage' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'errorMessage' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+790                     [errorMessage]="'Set tech user role'"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:797:17 - error NG8001: 'app-drop-down' is not a known element:
+1. If 'app-drop-down' is an Angular component, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+797                 <app-drop-down
+                    ~~~~~~~~~~~~~~
+798                     [class]="['qt-select-input-40']"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+... 
+804                     (onSelectedItem)="onAuthTypeChange($event.type)"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+805                 >
+    ~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:799:21 - error NG8002: Can't bind to 'list' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'list' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+799                     [list]="authenticationTypes"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:800:21 - error NG8002: Can't bind to 'editItem' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'editItem' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+800                     [editItem]="authenticationTypesType"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:801:21 - error NG8002: Can't bind to 'field' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'field' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+801                     [field]="'title'"
+                        ~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:802:21 - error NG8002: Can't bind to 'sort' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'sort' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+802                     [sort]="false"
+                        ~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:803:21 - error NG8002: Can't bind to 'isBlockClear' since it isn't a known property of 'app-drop-down'.
+1. If 'app-drop-down' is an Angular component and it has 'isBlockClear' input, then verify that it is part of this module.
+2. If 'app-drop-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+803                     [isBlockClear]="true"
+                        ~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:886:27 - error NG8003: No directive found with exportAs 'disabled'.
+
+886                 #editBtn="disabled"
+                              ~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:890:17 - error NG8001: 'app-preloader-ticket' is not a known element:
+1. If 'app-preloader-ticket' is an Angular component, then verify that it is part of this module.
+2. If 'app-preloader-ticket' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+890                 <app-preloader-ticket *ngIf="editBtn.isBlock()"></app-preloader-ticket>
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:33:16
+    33   templateUrl: './tech-users-settings.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component TechUsersSettingsComponent.
+
+
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.module.ts:4:10 - error TS2305: Module '"ngx-image-cropper"' has no exported member 'ImageCropperModule'.
+
+4 import { ImageCropperModule } from 'ngx-image-cropper';
            ~~~~~~~~~~~~~~~~~~
 
-  node_modules/ngx-image-cropper/lib/image-cropper.module.d.ts:1:22
-    1 export declare class ImageCropperModule {
-                           ~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-image-cropper) which declares ImageCropperModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
 
+Error: src/app/components/setting/tech-users-settings/tech-users-settings.module.ts:24:14 - error NG1010: Value
 
 Error: src/app/components/setting/ticket-settings-page/canned-responses/canned-responses-aside/canned-responses-aside.module.ts:19:9 - error NG6002: 'AngularEditorModule' does not appear to be an NgModule class.
 
@@ -11656,51 +12452,6 @@ Error: src/app/components/super-admin-public/help-center-info-aside/help-center-
     8   templateUrl: './help-center-info-aside.component.html',
                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component HelpCenterInfoAsideComponent.
-
-
-Error: src/app/components/super-admin-public/super-admin-public-category/super-admin-public-category.module.ts:17:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-17         SuperAdminPublicHeaderModule
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/super-admin-public/super-admin-public-header/super-admin-public-header.module.ts:17:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-17         InfiniteScrollModule
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/super-admin-public/super-admin-public-list/super-admin-public-list.module.ts:16:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-16         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/super-admin-public/super-admin-public.module.ts:27:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-27         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/super-admin-public/super-admin-public.module.ts:28:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-28         SuperAdminPublicHeaderModule,
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/super-admin/left-panel-super-admin-categories/left-panel-super-admin-categories-actions/left-panel-super-admin-categories-actions.component.html:6:5 - error NG8001: 'app-dynamic-tooltip' is not a known element:
@@ -12216,17 +12967,6 @@ Error: src/app/components/super-admin/left-panel-super-admin-categories/left-pan
     15   templateUrl: './left-panel-super-admin-categories.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component LeftPanelSuperAdminCategoriesComponent.
-
-
-Error: src/app/components/super-admin/super-admin-companies/super-admin-companies.module.ts:24:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-24         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
 
 
 Error: src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-add/super-admin-knowledge-base-add.component.html:20:33 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'input'.
@@ -13654,28 +14394,6 @@ Error: src/app/components/super-admin/support-page/support-page.component.html:1
     Error occurs in the template of component SupportPageComponent.
 
 
-Error: src/app/components/tasks-dashboard/tasks-dashboard.module.ts:24:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-24         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/tasks/tasks-add/tasks-add-associate-tickets/tasks-add-associate-tickets.module.ts:18:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-18         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
 Error: src/app/components/tasks/tasks-add/tasks-add.module.ts:40:9 - error NG6002: 'AngularEditorModule' does not appear to be an NgModule class.
 
 40         AngularEditorModule,
@@ -13685,12 +14403,6 @@ Error: src/app/components/tasks/tasks-add/tasks-add.module.ts:40:9 - error NG600
     1 export declare class AngularEditorModule {
                            ~~~~~~~~~~~~~~~~~~~
     This likely means that the library (@kolkov/angular-editor) which declares AngularEditorModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/tasks/tasks-add/tasks-add.module.ts:41:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-41         TasksAddAssociateTicketsModule
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/tasks/tasks-edit/tasks-edit.module.ts:39:9 - error NG6002: 'AngularEditorModule' does not appear to be an NgModule class.
@@ -13704,12 +14416,6 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.module.ts:39:9 - error NG6
     This likely means that the library (@kolkov/angular-editor) which declares AngularEditorModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
 
 
-Error: src/app/components/tasks/tasks-edit/tasks-edit.module.ts:40:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-40         TasksAddAssociateTicketsModule,
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
 Error: src/app/components/tasks/tasks.module.ts:64:9 - error NG6002: 'AngularEditorModule' does not appear to be an NgModule class.
 
 64         AngularEditorModule,
@@ -13719,34 +14425,6 @@ Error: src/app/components/tasks/tasks.module.ts:64:9 - error NG6002: 'AngularEdi
     1 export declare class AngularEditorModule {
                            ~~~~~~~~~~~~~~~~~~~
     This likely means that the library (@kolkov/angular-editor) which declares AngularEditorModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/tasks/tasks.module.ts:67:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-67         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/tasks/tasks.module.ts:71:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-71         TasksAddAssociateTicketsModule,
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/tickets/recurring-tickets/recurring-tickets.module.ts:53:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-53         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
 
 
 Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-add-assigned-user/ticket-detail-add-assigned-user.component.html:13:5 - error NG8001: 'app-add-assigned-user' is not a known element:
@@ -20768,46 +21446,6 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail.component.
     Error occurs in the template of component TicketDetailComponent.
 
 
-Error: src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter.module.ts:40:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-40         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/tickets/tickets/tickets-header/tickets-header.module.ts:26:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-26         TicketsFilterModule,
-           ~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/tickets/tickets/tickets.module.ts:26:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-26         TicketsHeaderModule,
-           ~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/tickets/tickets/tickets.module.ts:28:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-28         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/tickets/tickets/tickets.module.ts:32:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-32         TicketsFilterModule,
-           ~~~~~~~~~~~~~~~~~~~
-
-
 Error: src/app/components/users-details/users-details-left-panel/users-details-left-panel.component.html:6:13 - error NG8002: Can't bind to 'ngStyle' since it isn't a known property of 'div'.
 
 6             [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
@@ -21225,39 +21863,6 @@ Error: src/app/components/users-details/users-details-tab-companies/users-detail
     Is it missing an @NgModule annotation?
 
 
-Error: src/app/components/users-details/users-details-tab-messages/users-details-tab-messages.module.ts:17:5 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-17     InfiniteScrollModule,
-       ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/users-details/users-details-tab-passwords/users-details-tab-passwords.module.ts:16:5 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-16     InfiniteScrollModule
-       ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/users-details/users-details-tab-tickets/users-details-tab-tickets.module.ts:18:5 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-18     InfiniteScrollModule,
-       ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
 Error: src/app/components/users-details/users-details.module.ts:23:9 - error NG6002: 'UsersDetailsLeftPanelModule' does not appear to be an NgModule class.
 
 23         UsersDetailsLeftPanelModule,
@@ -21273,35 +21878,6 @@ Error: src/app/components/users-details/users-details.module.ts:24:9 - error NG6
 
 24         UsersDetailsTabCompaniesModule,
            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/users-details/users-details.module.ts:26:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-26         UsersDetailsTabMessagesModule,
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/users-details/users-details.module.ts:27:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-27         UsersDetailsTabPasswordsModule,
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/users-details/users-details.module.ts:28:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-28         UsersDetailsTabTicketsModule
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/users/add-user-to-company/add-user-to-company.module.ts:21:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-21         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
 
 
 Error: src/app/components/users/users-aside-edit/users-aside-edit.component.html:3:5 - error NG8002: Can't bind to 'ngStyle' since it isn't a known property of 'div'.
@@ -23308,23 +23884,6 @@ Error: src/app/components/users/users-aside/users-aside.component.html:486:17 - 
     Error occurs in the template of component UsersAsideComponent.
 
 
-Error: src/app/components/users/users-header/users-filter/users-filter.module.ts:34:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-34         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
-Error: src/app/components/users/users-header/users-header.module.ts:32:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-32         CompanyTagsModule,
-           ~~~~~~~~~~~~~~~~~
-
-
 Error: src/app/components/users/users-table/user-table-subscription/user-table-subscription.component.html:13:17 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'div'.
 
 13                 [ngClass]="{'active':defaultSubscriptions.invoiceSubscription.activated}"
@@ -23758,23 +24317,6 @@ Error: src/app/components/users/users-table/users-table.component.html:224:17 - 
     Error occurs in the template of component UsersTableComponent.
 
 
-Error: src/app/components/users/users.module.ts:23:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-23         UsersHeaderModule,
-           ~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/users/users.module.ts:24:9 - error NG6002: 'InfiniteScrollModule' does not appear to be an NgModule class.
-
-24         InfiniteScrollModule,
-           ~~~~~~~~~~~~~~~~~~~~
-
-  node_modules/ngx-infinite-scroll/src/modules/ngx-infinite-scroll.module.d.ts:1:22
-    1 export declare class InfiniteScrollModule {
-                           ~~~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-infinite-scroll) which declares InfiniteScrollModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
-
-
 Error: src/app/components/users/users.module.ts:25:9 - error NG6002: 'UsersTableModule' does not appear to be an NgModule class.
 
 25         UsersTableModule,
@@ -23784,12 +24326,6 @@ Error: src/app/components/users/users.module.ts:25:9 - error NG6002: 'UsersTable
     39 export class UsersTableModule { }
                     ~~~~~~~~~~~~~~~~
     Is it missing an @NgModule annotation?
-
-
-Error: src/app/components/users/users.module.ts:27:9 - error NG6002: This import contains errors, which may affect components that depend on this NgModule.
-
-27         UsersFilterModule,
-           ~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/services/modal/modal-add-users-notify/modal-add-users-notify.component.html:28:25 - error NG8002: Can't bind to 'ngStyle' since it isn't a known property of 'div'.
@@ -23814,81 +24350,99 @@ Error: src/app/services/modal/modal-edit-category-product/modal-edit-category-pr
     Error occurs in the template of component ModalEditCategoryProductComponent.
 
 
-Error: src/app/services/modal/modal-image-cropper/modal-image-cropper.module.ts:13:9 - error NG6002: 'ImageCropperModule' does not appear to be an NgModule class.
+Error: src/app/services/modal/modal-image-cropper/modal-image-cropper.component.html:14:9 - error NG8001: 'image-cropper' is not a known element:
+1. If 'image-cropper' is an Angular component, then verify that it is part of this module.
+2. If 'image-cropper' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
 
-13         ImageCropperModule
+ 14         <image-cropper
+            ~~~~~~~~~~~~~~
+ 15             #imageCroper
+    ~~~~~~~~~~~~~~~~~~~~~~~~
+... 
+ 22             (imageCropped)="imageCropped($event)"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 23         ></image-cropper>
+    ~~~~~~~~~
+
+  src/app/services/modal/modal-image-cropper/modal-image-cropper.component.ts:11:16
+    11   templateUrl: './modal-image-cropper.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ModalImageCropperComponent.
+
+
+Error: src/app/services/modal/modal-image-cropper/modal-image-cropper.component.html:16:13 - error NG8002: Can't bind to 'imageBase64' since it isn't a known property of 'image-cropper'.
+1. If 'image-cropper' is an Angular component and it has 'imageBase64' input, then verify that it is part of this module.
+2. If 'image-cropper' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+16             [imageBase64]="imageBase64"
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/services/modal/modal-image-cropper/modal-image-cropper.component.ts:11:16
+    11   templateUrl: './modal-image-cropper.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ModalImageCropperComponent.
+
+
+Error: src/app/services/modal/modal-image-cropper/modal-image-cropper.component.html:17:13 - error NG8002: Can't bind to 'maintainAspectRatio' since it isn't a known property of 'image-cropper'.
+1. If 'image-cropper' is an Angular component and it has 'maintainAspectRatio' input, then verify that it is part of this module.
+2. If 'image-cropper' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+17             [maintainAspectRatio]="true"
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/services/modal/modal-image-cropper/modal-image-cropper.component.ts:11:16
+    11   templateUrl: './modal-image-cropper.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ModalImageCropperComponent.
+
+
+Error: src/app/services/modal/modal-image-cropper/modal-image-cropper.component.html:18:13 - error NG8002: Can't bind to 'aspectRatio' since it isn't a known property of 'image-cropper'.
+1. If 'image-cropper' is an Angular component and it has 'aspectRatio' input, then verify that it is part of this module.
+2. If 'image-cropper' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+18             [aspectRatio]="4 / 3"
+               ~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/services/modal/modal-image-cropper/modal-image-cropper.component.ts:11:16
+    11   templateUrl: './modal-image-cropper.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ModalImageCropperComponent.
+
+
+Error: src/app/services/modal/modal-image-cropper/modal-image-cropper.component.html:19:13 - error NG8002: Can't bind to 'resizeToWidth' since it isn't a known property of 'image-cropper'.
+1. If 'image-cropper' is an Angular component and it has 'resizeToWidth' input, then verify that it is part of this module.
+2. If 'image-cropper' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@NgModule.schemas' of this component.
+
+19             [resizeToWidth]="128"
+               ~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/services/modal/modal-image-cropper/modal-image-cropper.component.ts:11:16
+    11   templateUrl: './modal-image-cropper.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ModalImageCropperComponent.
+
+
+Error: src/app/services/modal/modal-image-cropper/modal-image-cropper.component.html:48:5 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'div'.
+
+48     [ngClass]="{'--open':show}"
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/services/modal/modal-image-cropper/modal-image-cropper.component.ts:11:16
+    11   templateUrl: './modal-image-cropper.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Error occurs in the template of component ModalImageCropperComponent.
+
+
+Error: src/app/services/modal/modal-image-cropper/modal-image-cropper.module.ts:4:10 - error TS2305: Module '"ngx-image-cropper"' has no exported member 'ImageCropperModule'.
+
+4 import { ImageCropperModule } from 'ngx-image-cropper';
            ~~~~~~~~~~~~~~~~~~
 
-  node_modules/ngx-image-cropper/lib/image-cropper.module.d.ts:1:22
-    1 export declare class ImageCropperModule {
-                           ~~~~~~~~~~~~~~~~~~
-    This likely means that the library (ngx-image-cropper) which declares ImageCropperModule is not compatible with Angular Ivy. Check if a newer version of the library is available, and update if so. Also consider checking with the library's authors to see if the library is expected to be compatible with Ivy.
 
-
-Error: src/app/services/modal/modal-lock-screen/modal-lock-screen.component.html:28:25 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'div'.
-
-28                         [ngClass]="{'has-error': !validate.getValidate() || !validate.getWrongCode()}"
-                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/services/modal/modal-lock-screen/modal-lock-screen.component.ts:10:16
-    10   templateUrl: './modal-lock-screen.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ModalLockScreenComponent.
-
-
-Error: src/app/services/modal/modal-lock-screen/modal-lock-screen.component.html:52:25 - error NG8001: 'app-mat-error' is not a known element:
-1. If 'app-mat-error' is an Angular component, then verify that it is part of this module.
-2. If 'app-mat-error' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
-
- 52                         <app-mat-error
-                            ~~~~~~~~~~~~~~
- 53                             class="qt-tooltip-error"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-... 
- 55                             [textContent]="'It is wrong password ' + (currentUser && isEnableTwoFactorAuth() && lockScreen.isCodeSent() ? ' or code' : '' )"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 56                         >
-    ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/services/modal/modal-lock-screen/modal-lock-screen.component.ts:10:16
-    10   templateUrl: './modal-lock-screen.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ModalLockScreenComponent.
-
-
-Error: src/app/services/modal/modal-lock-screen/modal-lock-screen.component.html:64:29 - error NG8002: Can't bind to 'ngModel' since it isn't a known property of 'input'.
-
-64                             [(ngModel)]="lockScreen.code"
-                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/services/modal/modal-lock-screen/modal-lock-screen.component.ts:10:16
-    10   templateUrl: './modal-lock-screen.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ModalLockScreenComponent.
-
-
-Error: src/app/services/modal/modal-lock-screen/modal-lock-screen.component.html:65:29 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'input'.
-
-65                             [ngClass]="{'--input-error':!validate.getWrongCode()}"
-                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/services/modal/modal-lock-screen/modal-lock-screen.component.ts:10:16
-    10   templateUrl: './modal-lock-screen.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ModalLockScreenComponent.
-
-
-Error: src/app/services/modal/modal-lock-screen/modal-lock-screen.component.html:77:33 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'i'.
-
-77                                 [ngClass]="{'unlock-hide-icn': codeShowed,
-                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-78               'unlock-show-icn' : !codeShowed}"
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/services/modal/modal-lock-screen/modal-lock-screen.component.ts:10:16
-    10   templateUrl: './modal-lock-screen.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ModalLockScreenComponent.
-
+Error: src/app/services/modal/modal-image-cropper/modal-image-cropper.module.ts:11:14 - error NG1010: Value
 
 

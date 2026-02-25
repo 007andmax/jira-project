@@ -4,9 +4,14 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { LockScreenService } from '../../lock-screen/lock-screen.service';
 import { LockScreen } from './class/lock-screen';
 import { ModalLockValidate } from './class/modal-lock-validate';
+import { CommonModule } from '@angular/common';
+import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
+import { FormsModule } from '@angular/forms';
 
 @Component({
+  standalone: true,
   selector: 'modal-lock-screen',
+  imports: [CommonModule, CommonModule, MatErrorModule, FormsModule],
   templateUrl: './modal-lock-screen.component.html',
   styleUrls: ['./modal-lock-screen.component.css'],
 
