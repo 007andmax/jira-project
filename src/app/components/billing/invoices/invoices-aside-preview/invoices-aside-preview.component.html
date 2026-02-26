@@ -478,7 +478,7 @@
                                 [textContent]="invoiceProfile.totalSum | currency"
                             ></div>
                         </div>
-                          <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12 qt-pb-10" *ngIf="invoiceProfile.paidSum && invoiceProfile.paidSum > 0">
+                          <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12 qt-pb-10" *ngIf="invoiceProfile.paidSum && invoiceProfile.paidSum > 0 && !invoiceProfile.paidOn">
                             <div class=" qt-text-left">Other Payments</div>
                             <div
                                 class="invoice-info-value  qt-text-right"
