@@ -478,6 +478,20 @@
                                 [textContent]="invoiceProfile.totalSum | currency"
                             ></div>
                         </div>
+                          <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12 qt-pb-10" *ngIf="invoiceProfile.paidSum && invoiceProfile.paidSum > 0 && !invoiceProfile.paidOn">
+                            <div class=" qt-text-left">Other Payments</div>
+                            <div
+                                class="invoice-info-value  qt-text-right"
+                                [textContent]="'-' + (invoiceProfile.paidSum | currency)"
+                            ></div>
+                        </div>
+                           <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12 qt-pb-10" *ngIf="invoiceProfile.paySum && invoiceProfile.paySum > 0">
+                            <div class=" qt-text-left">Outstanding amount</div>
+                            <div
+                                class="invoice-info-value  qt-text-right"
+                                [textContent]="invoiceProfile.paySum | currency"
+                            ></div>
+                        </div>
                     </div>
                 </div>
                 <div>
