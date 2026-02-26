@@ -174,7 +174,7 @@
                         <th class="payment-table__number">Invoice Number</th>
                         <th class="payment-table__company">Company Name</th>
                         <th class="payment-table__date">Invoice Date</th>
-                          <th class="payment-table__date">Payment</th>
+                          <th class="payment-table__inv-amount">Payment</th>
                         <th class="payment-table__inv-amount">Invoice Amount</th>
                         <th class="payment-table__pay-amount">Payment Amount</th>
                     </tr>
@@ -200,7 +200,7 @@
                                 [textContent]="getDate(item.invoiceDate)"
                             ></td>
                               <td
-                                class="payment-table__date"
+                                class="payment-table__inv-amount"
                               [textContent]="(item.invoiceAmount - item.invoicePaidDue) | currency"
                             ></td>
                             <td

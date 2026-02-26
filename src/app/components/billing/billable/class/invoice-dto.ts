@@ -44,6 +44,7 @@ export class InvoiceDto {
     invoiceDiscount: InvoiceDiscount;
     status: string;
     paidSum: number;
+    paySum: number;
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];
