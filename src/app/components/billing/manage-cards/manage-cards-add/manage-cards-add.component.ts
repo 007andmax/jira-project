@@ -102,8 +102,7 @@ export class ManageCardsAddComponent {
   }
   add() {
     this.submitted = true;
-    console.log(this.modelForm.value);
-    if (this.modelForm.invalid) {
+     if (this.modelForm.invalid) {
       return;
     }
     this.addBtn.setDisabled(true);

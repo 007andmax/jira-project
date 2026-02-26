@@ -35,8 +35,6 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
           country: res.country,
           companyId: res.companyId,
         });
-        console.log("res.expiryDate.substring(0, 2)", res.expiryDate.substring(0, 2));
-        console.log("res.expiryDate.substring(2, 4)", res.expiryDate.substring(2, 4));
         this.selectedMonth = this.months.find(month => month.type == res.expiryDate.substring(2, 4));
         this.selectedYear = this.years.find(year => year.type == res.expiryDate.substring(0, 2));
         this.selectedCompany = this.companiesStateService.allCompanies.find(company => company.id === res.companyId);
