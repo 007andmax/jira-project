@@ -25,7 +25,7 @@ import { ManageCardsAddComponent } from './manage-cards-add.component';
         CompanyDropDownModule,
         DropDownModule,
         MatErrorModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ],
     exports: [ManageCardsAddComponent]
 

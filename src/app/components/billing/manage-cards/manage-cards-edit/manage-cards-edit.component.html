@@ -45,20 +45,49 @@
                 </div>
             </div>
             <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
+                  <div class="qt-input-block qt-f50 splite-icon">
+                      <div class="qt-inputs-row">
+                   <div class="qt-input-block qt-f50">
                     <label
                         for="add-ticket-subject"
                         class="qt-input-block__label"
                     >
-                        Expiration Date
+                        Month
                     </label>
-                    <input
-                        id="add-ticket-subject"
-                        class="qt-input-block__input"
-                        formControlName="expiryDate"
-                        placeholder="YYMM"
-                        maxlength="4"
+                      <app-drop-down
+                    class="search-company"
+                    [placeholder]="'MM'"
+                    [change]="false"
+                    [class]="['qt-dropdown']"
+                    [editItem]="selectedMonth"
+                    [isBlockClear]="true"
+                    [field]="'title'"
+                    [list]="months"
+                    (onSelectedItem)="onSelectMonth($event)"
+                ></app-drop-down>
+                </div>
+
+                 <div class="qt-input-block qt-f50">
+                      <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
                     >
+                        Year
+                    </label>
+                     <app-drop-down
+                    class="search-company"
+                    [placeholder]="'YYYY'"
+                    [change]="false"
+                    [class]="['qt-dropdown']"
+                     [editItem]="selectedYear"
+                    [isBlockClear]="true"
+                    [field]="'title'"
+                    [list]="years"
+                    (onSelectedItem)="onSelectYear($event)"
+                ></app-drop-down>
+                </div>
+                </div>
+
                 </div>
                 <div class="qt-input-block qt-f50">
                     <label

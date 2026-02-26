@@ -45,27 +45,47 @@
                 </div>
             </div>
             <div class="qt-inputs-row">
-                <div class="qt-input-block qt-f50">
+                <div class="qt-input-block qt-f50 splite-icon">
+                      <div class="qt-inputs-row">
+                   <div class="qt-input-block qt-f50">
                     <label
                         for="add-ticket-subject"
                         class="qt-input-block__label"
                     >
-                        Expiration Date
+                        Month
                     </label>
-                    <input
-                        [ngClass]="{'--input-error' : submitted && f2.expiryDate.errors}"
-                        id="add-ticket-subject"
-                        class="qt-input-block__input"
-                        formControlName="expiryDate"
-                        placeholder="YYMM"
-                        maxlength="4"
+                      <app-drop-down
+                    class="search-company"
+                    [placeholder]="'MM'"
+                    [change]="false"
+                    [class]="['qt-dropdown']"
+                    [isBlockClear]="true"
+                    [field]="'title'"
+                    [list]="months"
+                    (onSelectedItem)="onSelectMonth($event)"
+                ></app-drop-down>
+                </div>
+
+                 <div class="qt-input-block qt-f50">
+                      <label
+                        for="add-ticket-subject"
+                        class="qt-input-block__label"
                     >
-                    <app-mat-error
-                        class="invalid-feedback"
-                        *ngIf="submitted && f2.expiryDate.errors"
-                    >
-                        Expiration Date is required
-                    </app-mat-error>
+                        Year
+                    </label>
+                     <app-drop-down
+                    class="search-company"
+                    [placeholder]="'YYYY'"
+                    [change]="false"
+                    [class]="['qt-dropdown']"
+                    [isBlockClear]="true"
+                    [field]="'title'"
+                    [list]="years"
+                    (onSelectedItem)="onSelectYear($event)"
+                ></app-drop-down>
+                </div>
+                </div>
+
                 </div>
                 <div class="qt-input-block qt-f50">
                     <label
