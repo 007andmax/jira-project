@@ -24,7 +24,7 @@ export class InvoiceSettingsComponent implements OnInit {
   invoiceTerm: any;
   paymentMethod: any;
   primaryPhoneType;
-  secondaryPhoneType = new TitleListType("Office", "OFFICE");
+  secondaryPhoneType = new TitleListType("Mobile", "MOBILE");
   phoneTypes = [new TitleListType("Mobile", "MOBILE"),
   new TitleListType("Office", "OFFICE"),
   new TitleListType("Fax", "FAX")];
@@ -223,8 +223,9 @@ export class InvoiceSettingsComponent implements OnInit {
   onAddPhone() {
     this.isAddPhone = !this.isAddPhone;
     if (this.isAddPhone) {
+      this.secondaryPhoneType = new TitleListType("Mobile", "MOBILE")
       this.invoiceForm.patchValue({
-        secondaryPhoneType: 'OFFICE'
+        secondaryPhoneType: 'MOBILE'
       });
     } else {
       this.invoiceForm.patchValue({
@@ -254,19 +255,16 @@ export class InvoiceSettingsComponent implements OnInit {
         this.invoiceForm.controls[controlName][state](); // disables/enables each form control based on 'this.formDisabled'
       }
     });
-    this.primaryPhoneTypeDd.clearWithOutChanges();
     this.invoiceForm.patchValue({
       firstName: '',
       lastName: '',
       email: '',
       designation: '',
-      primaryPhoneType: '',
       primaryPhone: '',
       secondaryPhone: '',
       secondaryPhoneType: '',
       secondaryId: ''
     });
-    this.primaryPhoneType = null;
     this.secondaryPhoneType = null;
     this.isAddPhone = false;
 
