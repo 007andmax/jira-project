@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../../../../services/accounting/accounting-settings.service';
 import { ToastrService } from 'ngx-toastr';
@@ -8,6 +8,7 @@ import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { InvoiceSettings } from './class/invoice-settings';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-invoice-settings',
@@ -43,6 +44,7 @@ export class InvoiceSettingsComponent implements OnInit {
   @Input() termInput: any;
   @Input() conditionInput: any;
   invoiceSettings: InvoiceSettings;
+  @ViewChild('primaryPhoneTypeDd', { static: true }) primaryPhoneTypeDd: DropDownComponent;
   constructor(
     private formBuilder: UntypedFormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
@@ -252,6 +254,22 @@ export class InvoiceSettingsComponent implements OnInit {
         this.invoiceForm.controls[controlName][state](); // disables/enables each form control based on 'this.formDisabled'
       }
     });
+    this.primaryPhoneTypeDd.clearWithOutChanges();
+    this.invoiceForm.patchValue({
+      firstName: '',
+      lastName: '',
+      email: '',
+      designation: '',
+      primaryPhoneType: '',
+      primaryPhone: '',
+      secondaryPhone: '',
+      secondaryPhoneType: '',
+      secondaryId: ''
+    });
+    this.primaryPhoneType = null;
+    this.secondaryPhoneType = null;
+    this.isAddPhone = false;
+
   }
   onEnableOwnerSending(data) {
     this.invoiceForm.patchValue({
