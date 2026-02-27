@@ -63,7 +63,7 @@
                     [isBlockClear]="true"
                     [field]="'title'"
                     [list]="months"
-                   
+                      [dropdownWidth]="'93px'"
                     (onSelectedItem)="onSelectMonth($event)"
                     [validate]="submitted && selectedMonth || !submitted"
                 ></app-drop-down>
@@ -85,7 +85,7 @@
                     [isBlockClear]="true"
                     [field]="'title'"
                     [list]="years"
-                    
+                    [dropdownWidth]="'93px'"
                     (onSelectedItem)="onSelectYear($event)"
                         [validate]="submitted && selectedYear || !submitted"
                 ></app-drop-down>
