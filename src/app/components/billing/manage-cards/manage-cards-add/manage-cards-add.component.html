@@ -55,6 +55,7 @@
                         Month
                     </label>
                       <app-drop-down
+                      #monthDP
                     class="search-company"
                     [placeholder]="'MM'"
                     [change]="false"
@@ -62,7 +63,9 @@
                     [isBlockClear]="true"
                     [field]="'title'"
                     [list]="months"
+                   
                     (onSelectedItem)="onSelectMonth($event)"
+                    [validate]="submitted && selectedMonth || !submitted"
                 ></app-drop-down>
                 </div>
 
@@ -74,6 +77,7 @@
                         Year
                     </label>
                      <app-drop-down
+                     #yearDP
                     class="search-company"
                     [placeholder]="'YYYY'"
                     [change]="false"
@@ -81,11 +85,19 @@
                     [isBlockClear]="true"
                     [field]="'title'"
                     [list]="years"
+                    
                     (onSelectedItem)="onSelectYear($event)"
+                        [validate]="submitted && selectedYear || !submitted"
                 ></app-drop-down>
                 </div>
+                  <app-mat-error
+                        class="invalid-feedback"
+                        *ngIf="submitted && (selectedYear == null || selectedMonth == null)"
+                    >
+                        Expiration Date is required
+                    </app-mat-error>
                 </div>
-
+  
                 </div>
                 <div class="qt-input-block qt-f50">
                     <label
