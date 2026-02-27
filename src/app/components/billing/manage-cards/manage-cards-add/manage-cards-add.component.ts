@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { Company } from 'src/app/interfaces/company/company';
@@ -23,6 +24,8 @@ export class ManageCardsAddComponent {
   showAdd: boolean = false;
   @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
   @ViewChild('companyDP', { static: true }) companyDP: CompanyDropDownComponent;
+  @ViewChild('monthDP', { static: true }) monthDP: DropDownComponent;
+  @ViewChild('yearDP', { static: true }) yearDP: DropDownComponent;
   months = [];
   years = [];
   selectedMonth: TitleListType;
@@ -125,6 +128,10 @@ export class ManageCardsAddComponent {
     this.submitted = false;
     this.showAdd = false;
     this.modelForm.reset();
+    this.monthDP.clearWithOutChanges();
+    this.yearDP.clearWithOutChanges();
+    this.selectedMonth = null;
+    this.selectedYear = null;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
