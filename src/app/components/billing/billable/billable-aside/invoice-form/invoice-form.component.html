@@ -243,7 +243,7 @@
                 <div [textContent]="getTotalDiscount() |
           currency"></div>
             </div>
-            <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15">
+            <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15" *ngIf="getSubTotalWithDiscount() > 0">
                 <div>Subtotal with discount</div>
                 <div [textContent]="getSubTotalWithDiscount() |
           currency"></div>
