@@ -1,0 +1,124 @@
+<div
+           ngbDropdown
+        [autoClose]="'outside'"
+        [placement]="'bottom-left'"
+        #assignedUserDp="ngbDropdown"
+        [container]="'body'"
+        (openChange)="onCloseDropDown($event,userInput)"
+    >
+        <div class="qt-df" ngbDropdownToggle    *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers"
+      >
+            <div
+                class="qt-table-modern__circle-avatar"
+                [textContent]="getAssignedUserNameForAvatar(assignedUser)"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(assignedUser,listColorNoAvatar[indexNoAvatar])}"
+            ></div>
+            <div
+                class="ellipsis"
+                [textContent]="getUserName(assignedUser)"
+            ></div>
+        </div>
+          <span
+           *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || !ticket.assignedUserId && !ticket.multiAssignedUsers"
+            class="placeholder-detail-ticket app-mat-tags-without-border__placeholder"
+         ngbDropdownToggle
+           >
+            Select user to assign
+        </span>
+         <div class="qt-df multi-assign-user-container" ngbDropdownToggle  *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0" >
+            <ng-template
+                ngFor
+                let-user
+                let-i="index"
+                [ngForOf]="ticket.multiAssignedUsers"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    class="qt-table-modern__circle-avatar multi-assign-user"
+                    *ngIf="i < 5"
+                    [textContent]="getAssignedUserNameForAvatar(user)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) ,
+                'left': getStyleNetAvatar(i)}"
+                    [ngbTooltip]="user.firstName + ' ' + user.lastName"
+                    [container]="'body'"
+                ></div>
+            </ng-template>
+            <div
+                class="more-users qt-table-modern__circle-avatar"
+                [ngbTooltip]="tipContent"
+                [container]="'body'"
+                *ngIf="ticket.multiAssignedUsers.length > 5"
+                [ngStyle]="{'left': getStyleNetAvatar(5)}"
+            >
+                <span [textContent]="'+' + (ticket.multiAssignedUsers.length - 5)"></span>
+            </div>
+        </div>
+        <ng-template #tipContent>
+            <ng-template
+                ngFor
+                let-user
+                let-i="index"
+                [ngForOf]="ticket.multiAssignedUsers"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    class="qt-df qt-ai-c qt-mb-8"
+                    *ngIf="i >= 5"
+                >
+                    <div
+                        class="tooltip__circle-avatar"
+                        [textContent]="getAssignedUserNameForAvatar(user)"
+                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) }"
+                    ></div>
+                    <span
+                        class="qt-ml-8"
+                        [textContent]="user.firstName + ' ' + user.lastName"
+                    ></span>
+                </div>
+            </ng-template>
+        </ng-template>
+  <div
+            class="autocomplete-user-tags"
+            ngbDropdownMenu
+            aria-labelledby="dropdown"
+        >
+            <div
+                class="qt-input-search"
+            >
+                <input
+                    #userInput
+                    id="search-user"
+                    class="pointer"
+                    (input)="onSearchUser($event)"
+                    placeholder="Search Users"
+                >
+            </div>
+            <div class="autocomplete-container">
+                <app-mat-chip
+                    class="qt-ai-c pointer"
+                    *ngFor="let user of users"
+                    (click)="selectAssignedUser(user,userInput)"
+                >
+                    <div class="assigne-user-item">
+                        <div
+                            class="assigne-user-avatar"
+                            [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                            [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                        ></div>
+                        <div
+                            class="assigne-user-name"
+                            [textContent]="getUserName(user)"
+                        ></div>
+                        <span
+                            class="assigne-user-email"
+                            [textContent]="user.primaryEmail"
+                        ></span>
+                        <i
+                            *ngIf="isSelected(user)"
+                            class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                        ></i>
+                    </div>
+                </app-mat-chip>
+            </div>
+        </div>
+    </div> 

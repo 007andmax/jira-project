@@ -4,14 +4,19 @@ import { CommonModule } from '@angular/common';
 import { TicketsTableItemComponent } from './tickets-table-item.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { AddAssignedUserModule } from '../../ticket-edit-aside/add-assigned-user/add-assigned-user.module';
+import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
+import { TicketsTableItemAssignedUserComponent } from './tickets-table-item-assigned-user/tickets-table-item-assigned-user.component';
 
 @NgModule({
-    declarations: [TicketsTableItemComponent
+    declarations: [TicketsTableItemComponent, TicketsTableItemAssignedUserComponent
     ],
     imports: [
         CommonModule,
         NgbModule,
-        FormsModule
+        FormsModule,
+        AddAssignedUserModule,
+        MatChipModule
     ],
     exports: [TicketsTableItemComponent]
 

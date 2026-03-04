@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Ticket } from '../../../class/ticket';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { User } from 'src/app/components/users/class/user';
@@ -9,12 +9,17 @@ import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/ti
 import { StatusColor } from '../../../class/status-color';
 import { Subscription } from 'rxjs';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
+import { AddAssignedUserComponent } from '../../ticket-edit-aside/add-assigned-user/add-assigned-user.component';
+import { CurrentUser } from 'src/class/current-user/current-user';
+import { TicketsService } from 'src/app/services/tickets/tickets.service';
 
 @Component({
   selector: 'app-tickets-table-item',
   templateUrl: './tickets-table-item.component.html',
   styleUrls: ['./tickets-table-item.component.scss'],
-  providers: [TicketsListService]
+  providers: [TicketsListService, TicketsPermissionsService]
 })
 export class TicketsTableItemComponent implements OnInit, OnDestroy {
   ticket: Ticket;
@@ -28,15 +33,21 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
   @Input() ticketsStatus: Array<TicketStatus> = [];
   @Output() onSelectTicket = new EventEmitter<any>();
   @Output() onSelectForDetail = new EventEmitter<any>();
+  @ViewChild("assignedUserDp", { static: false }) assignedUserDp: AddAssignedUserComponent;
   assignedUser: User;
   requestedUser: User;
   indexNoAvatar: number = 0;
   listColorNoAvatar = [];
+  users: Array<User> = [];
+  userList: Array<User> = [];
+  listAssignedUser: Array<CurrentUser> = [];
   sub: Subscription = new Subscription();
   constructor(public usersStateService: UsersStateService,
     public ticketsListService: TicketsListService,
     public companiesStateService: CompaniesStateService,
     public ticketsStateService: TicketsStateService,
+    public customerPortalStateService: CustomerPortalStateService,
+    public ticketsPermissionsService: TicketsPermissionsService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -46,11 +57,17 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
     let getOnUsers = this.usersStateService.getOnUsers().subscribe(data => {
       this.assignedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.assignedUserId);
       this.requestedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.createdUserId);
+      this.userList = this.getUsersForAssign();
+      this.users = JSON.parse(JSON.stringify(this.userList));
+      if (this.assignedUserDp) this.assignedUserDp.resetList(this.userList);
+      this.updateListAssignedUser();
     })
     this.sub.add(getOnUsers);
     let onChangeUsers = this.usersStateService.onChangeUsers.subscribe((data) => {
       this.assignedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.assignedUserId);
       this.requestedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.createdUserId);
+      this.userList = this.getUsersForAssign();
+      if (this.assignedUserDp) this.assignedUserDp.resetList(this.userList);
     })
     this.sub.add(onChangeUsers);
     let onSelectAll = this.ticketsStateService.onSelectAll.subscribe(data => {
@@ -58,6 +75,32 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
       this.cd.markForCheck();
     })
     this.sub.add(onSelectAll);
+    if (this.usersStateService.getAllUsers().length > 0) {
+      this.userList = this.getUsersForAssign();
+      this.users = JSON.parse(JSON.stringify(this.userList));
+      if (this.assignedUserDp) this.assignedUserDp.resetList(this.userList);
+      this.updateListAssignedUser();
+    }
+
+  }
+
+
+
+
+  onCloseDropDown(data, input) {
+    input.value = "";
+    //  this.users = JSON.parse(JSON.stringify(this.reqUsers));
+  }
+
+  private updateListAssignedUser() {
+    this.listAssignedUser = [];
+    if (this.ticket.assignedUserId) this.listAssignedUser.push(new CurrentUser(this.usersStateService.getAllUsers().find(item => item.id == this.ticket.assignedUserId)));
+    if (this.ticket.multiAssignedUsers) this.listAssignedUser = [...this.listAssignedUser, ...this.usersStateService.getAllUsers().filter(item => this.ticket.multiAssignedUsers.some(user => user.id == item.id)).map(item => new CurrentUser(item))];
+  }
+  getUsersForAssign() {
+    let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
+      1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
+    return userList.filter((item) => item.accountType === "TECH" && !item.deletedAt)
   }
   public getUserName(user) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';

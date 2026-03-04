@@ -56,6 +56,7 @@ export class TicketsStateService {
   listTicketsPrioritiesForRemove: Array<TicketsPriority> = [];
   ticketsForMerge: Array<Ticket> = [];
   onMegeTickets: EventEmitter<any> = new EventEmitter();
+  onClaimTickets: EventEmitter<any> = new EventEmitter();
   actualNumber: string;
   constructor(private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsService: TicketsService) { }
@@ -139,6 +140,9 @@ export class TicketsStateService {
   }
   public mergeTicket() {
     this.onMegeTickets.emit(null);
+  }
+  public claimTickets() {
+    this.onClaimTickets.emit(null);
   }
   public addTicketForMerge(data) {
     this.ticketsForMerge.push(data);

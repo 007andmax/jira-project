@@ -1,18 +1,22 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, Input, ViewChild } from '@angular/core';
 import { TitleListType } from './class/title-list-type';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { TicketsFilterComponent } from './tickets-filter/tickets-filter.component';
 import { AppService } from 'src/app/states/app/app.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { TicketsFilter } from '../class/tickets-filter';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { Ticket } from '../../class/ticket';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { TicketsPermissionsService } from '../ticket-edit-aside/services/tickets-permissions.service';
 
 @Component({
   selector: 'app-tickets-header',
   templateUrl: './tickets-header.component.html',
-  styleUrls: ['./tickets-header.component.scss']
+  styleUrls: ['./tickets-header.component.scss'],
+  providers: [TicketsPermissionsService]
 })
 export class TicketsHeaderComponent implements OnInit, OnDestroy {
   @ViewChild('filter', { static: true }) filter: TicketsFilterComponent;
@@ -37,6 +41,9 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   constructor(public ticketsStateService: TicketsStateService,
     public appService: AppService,
     public customerPortalStateService: CustomerPortalStateService,
+    private ticketsService: TicketsService,
+    private usersStateService: UsersStateService,
+    public ticketsPermissionsService: TicketsPermissionsService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -164,6 +171,20 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   mergeTicket() {
     if (this.ticketsStateService.getTicketsForMerge().length > 1) this.ticketsStateService.mergeTicket();
   }
+  claimTicket() {
+    let currentUser = this.usersStateService.getCurrentUser();
+    forkJoin(
+      this.ticketsStateService.getTicketsForMerge().filter(item => this.ticketsPermissionsService.isActionVisible('claim_ticket', item, null, null)).map(item => this.ticketsService.assignUserToTicket(item.id, currentUser.id))
+    )
+      .subscribe(result => {
+        this.ticketsStateService.getTicketsForMerge().filter(item => this.ticketsPermissionsService.isActionVisible('claim_ticket', item, null, null)).forEach(item => {
+          const index = this.ticketsStateService.getTicketsForMerge().findIndex(tikcet => tikcet.id == item.id);
+          if (index > -1) this.ticketsStateService.removeSelectedTicketForMerge(index);
+        })
+        this.cd.detectChanges();
+      });
+  }
+
 
   /**
 * @description Track list by "id" field, retrun field "id"

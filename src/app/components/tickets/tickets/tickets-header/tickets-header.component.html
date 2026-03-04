@@ -24,6 +24,13 @@
                 <!-- > -->
                 <!-- <span [textContent]="getTextCountFilters()"></span> -->
                 <!-- </button> -->
+                  <button
+                  *ngIf="ticketsStateService.getTicketsForMerge().length > 0"
+                    class="qt-button --gray --md qt-button-filter qt-mr-8 qt-df"
+                    (click)="claimTicket()"
+                >
+                    <span>Claim Ticket</span>
+                </button>
                 <button
                     class="qt-button --gray --md qt-button-filter qt-mr-8 qt-df"
                     [ngClass]="{'--disabled':ticketsStateService.getTicketsForMerge().length < 2}"
