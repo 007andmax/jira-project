@@ -1,4 +1,5 @@
 <div
+class="qt-w100"
            ngbDropdown
         [autoClose]="'outside'"
         [placement]="'bottom-left'"
@@ -18,13 +19,12 @@
                 [textContent]="getUserName(assignedUser)"
             ></div>
         </div>
-          <span
+          <div
            *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || !ticket.assignedUserId && !ticket.multiAssignedUsers"
             class="placeholder-detail-ticket app-mat-tags-without-border__placeholder"
          ngbDropdownToggle
            >
-            Select user to assign
-        </span>
+        </div>
          <div class="qt-df multi-assign-user-container" ngbDropdownToggle  *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0" >
             <ng-template
                 ngFor
