@@ -31,6 +31,7 @@ export class TicketsFilter {
     filter: Array<CompanyFilterTop> = [
         new CompanyFilterTop('company', ''),
         new CompanyFilterTop('created', ''),
+        new CompanyFilterTop('number', ''),
         new CompanyFilterTop('subject', ''),
         new CompanyFilterTop('status', ''),
         new CompanyFilterTop('created_date', ''),
@@ -162,6 +163,17 @@ export class TicketsFilter {
                 } else {
                     this.filter[index].filter = 'DESC';
                     this.sortBy = 'LAST_UPDATED_DATE_DESC';
+                }
+            }
+            if (field === 'number') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filter[index].filter = 'ASC';
+                    this.sortBy = 'NUMBER_ASC';
+
+                } else {
+                    this.filter[index].filter = 'DESC';
+                    this.sortBy = 'NUMBER_DESC';
                 }
             }
         }
