@@ -6,7 +6,7 @@
         <div class="qt-df">
             <label
                 class="qt-checkbox"
-                [ngClass]="{'--disabled':ticket.checkDisableSelect(ticketsStateService.getTicketsForMerge())}"
+               
                 [attr.for]="'ticket-' + ticket.id"
             >
                 <input
@@ -14,7 +14,7 @@
                     [(ngModel)]="ticket.selected"
                     type="checkbox"
                     (change)="selectTicket($event)"
-                    [disabled]="ticket.checkDisableSelect(ticketsStateService.getTicketsForMerge())"
+                   
                 >
                 <span></span>
             </label>

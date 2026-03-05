@@ -11,6 +11,7 @@ import { Ticket } from '../../class/ticket';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketsPermissionsService } from '../ticket-edit-aside/services/tickets-permissions.service';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-tickets-header',
@@ -20,6 +21,7 @@ import { TicketsPermissionsService } from '../ticket-edit-aside/services/tickets
 })
 export class TicketsHeaderComponent implements OnInit, OnDestroy {
   @ViewChild('filter', { static: true }) filter: TicketsFilterComponent;
+  @ViewChild('claimTicketsBtn', { static: false }) claimTicketsBtn: DisabledBtnDirective;
   ticketsFilter: TicketsFilter = new TicketsFilter();
   titleListTypes: Array<TitleListType> = [new TitleListType('All Tickets', 'ALL'),
   new TitleListType('Unassigned', 'UNASSIGNED'),
@@ -169,22 +171,39 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     this.ticketsStateService.onToggleAddTicket();
   }
   mergeTicket() {
-    if (this.ticketsStateService.getTicketsForMerge().length > 1) this.ticketsStateService.mergeTicket();
+    if (this.ticketsStateService.getTicketsForMerge().length > 1 && this.checkDisableSelect().length == 0) this.ticketsStateService.mergeTicket();
   }
   claimTicket() {
+    this.claimTicketsBtn.setDisabled(true);
     let currentUser = this.usersStateService.getCurrentUser();
     forkJoin(
       this.ticketsStateService.getTicketsForMerge().filter(item => this.ticketsPermissionsService.isActionVisible('claim_ticket', item, null, null)).map(item => this.ticketsService.assignUserToTicket(item.id, currentUser.id))
     )
       .subscribe(result => {
+        this.claimTicketsBtn.setDisabled(false);
         this.ticketsStateService.getTicketsForMerge().filter(item => this.ticketsPermissionsService.isActionVisible('claim_ticket', item, null, null)).forEach(item => {
           const index = this.ticketsStateService.getTicketsForMerge().findIndex(tikcet => tikcet.id == item.id);
           if (index > -1) this.ticketsStateService.removeSelectedTicketForMerge(index);
         })
         this.cd.detectChanges();
+      }, err => {
+        this.claimTicketsBtn.setDisabled(false);
       });
   }
-
+  public checkClaimTickets() {
+    return this.ticketsStateService.getTicketsForMerge().some(item => {
+      return (item.status == null)
+    });
+  }
+  public checkDisableSelect() {
+    return this.ticketsStateService.getTicketsForMerge().filter((item, i, list) => {
+      if (item.status == 'IN_PROGRESS' || item.status == 'ON_HOLD' || item.status == null || item.customStatus != null) {
+        return (list.length > 0 ? list[0].companyId != item.companyId : false);
+      } else {
+        return true;
+      }
+    })
+  }
 
   /**
 * @description Track list by "id" field, retrun field "id"
