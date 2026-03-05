@@ -26,7 +26,7 @@
                 <!-- </button> -->
                   <button
                   *ngIf="ticketsStateService.getTicketsForMerge().length > 0 && checkClaimTickets()"
-                    class="qt-button --gray --md qt-button-filter qt-mr-8 qt-df"
+                    class="qt-button --gray --md qt-button-filter qt-mr-8 qt-df claim-tickets-btn"
                      appDisabledBtn
                 #claimTicketsBtn="disabled"
                 (onClick)="claimTicket()"

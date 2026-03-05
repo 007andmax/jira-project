@@ -5,11 +5,14 @@ import { TicketsListService } from '../../../services/tickets-list.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { TicketsPermissionsService } from '../../../ticket-edit-aside/services/tickets-permissions.service';
 
 @Component({
   selector: 'app-tickets-table-item-assigned-user',
   templateUrl: './tickets-table-item-assigned-user.component.html',
-  styleUrls: ['./tickets-table-item-assigned-user.component.scss']
+  styleUrls: ['./tickets-table-item-assigned-user.component.scss'],
+  providers: [TicketsPermissionsService]
+
 })
 export class TicketsTableItemAssignedUserComponent {
   @Input() ticket: Ticket;
@@ -22,6 +25,7 @@ export class TicketsTableItemAssignedUserComponent {
   constructor(public ticketsListService: TicketsListService,
     public usersStateService: UsersStateService,
     private ticketsService: TicketsService,
+    public ticketsPermissionsService: TicketsPermissionsService
   ) { }
 
   ngOnInit() {
@@ -52,7 +56,7 @@ export class TicketsTableItemAssignedUserComponent {
     let find = this.listAssignedUser.find(item => item.id === data.id);
     if (!find) {
       this.listAssignedUser.push(data);
-    } else {
+    } else if (this.listAssignedUser.length > 1) {
       let index = this.listAssignedUser.findIndex(item => item.id === data.id);
       this.listAssignedUser.splice(index, 1);
     }

@@ -81,7 +81,14 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
       if (this.assignedUserDp) this.assignedUserDp.resetList(this.userList);
       this.updateListAssignedUser();
     }
-
+    let getOnUpdateTicket = this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
+      let ticket = new Ticket(data);
+      if (data.assignedUser) ticket.setAssignedUserId(data.assignedUser.id);
+      if (this.ticket.id == ticket.id) this.ticket = ticket;
+      this.updateListAssignedUser();
+      this.cd.detectChanges();
+    })
+    this.sub.add(getOnUpdateTicket);
   }
 
 

@@ -7,7 +7,7 @@ class="qt-w100"
         [container]="'body'"
         (openChange)="onCloseDropDown($event,userInput)"
     >
-        <div class="qt-df" ngbDropdownToggle    *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers"
+        <div class="qt-df" [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null),'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}" ngbDropdownToggle    *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers"
       >
             <div
                 class="qt-table-modern__circle-avatar"
@@ -21,11 +21,11 @@ class="qt-w100"
         </div>
           <div
            *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || !ticket.assignedUserId && !ticket.multiAssignedUsers"
-            class="placeholder-detail-ticket app-mat-tags-without-border__placeholder"
+            class="placeholder-detail-ticket app-mat-tags-without-border__placeholder" [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null),'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
          ngbDropdownToggle
            >
         </div>
-         <div class="qt-df multi-assign-user-container" ngbDropdownToggle  *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0" >
+         <div class="qt-df multi-assign-user-container" [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null),'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}" ngbDropdownToggle  *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0" >
             <ng-template
                 ngFor
                 let-user

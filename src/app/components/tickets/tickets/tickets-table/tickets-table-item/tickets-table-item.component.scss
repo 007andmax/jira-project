@@ -32,6 +32,7 @@ tr {
 }
 .ticket-table__assignee {
   overflow: unset;
+  cursor: default;
   .ellipsis {
     max-width: 120px;
   }
