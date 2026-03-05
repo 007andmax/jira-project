@@ -37,17 +37,23 @@
             ></div>
         </div>
     </div>
+     <div
+        class="ticket-table__number"
+    >
+        <div class="ellipsis">
+            {{'Tkt# ' + ticket.number}}
+        </div>
+    </div>
     <div
         class="--strong ticket-table__subject"
         (click)="selectForDetail()"
     >
         <div class="ellipsis">
-            {{'Tkt# ' + ticket.number + ' - ' + ticket.subject}}
+            {{ticket.subject}}
             <span
                 *ngIf="ticket.priorityLevel && ticket.priorityLevel.isDisplay"
                 class="priority-icon"
-                [ngStyle]="{'background-color':  listColors[ticket.priorityLevel.color] && listColors[ticket.priorityLevel.color].textColor ,
-                            'border-color':  listColors[ticket.priorityLevel.color] && listColors[ticket.priorityLevel.color].textColor}"
+                [ngStyle]="{'background-color':  listColors[ticket.priorityLevel.color] && listColors[ticket.priorityLevel.color].textColor,'border-color':  listColors[ticket.priorityLevel.color] && listColors[ticket.priorityLevel.color].textColor}"
             ></span>
         </div>
     </div>
