@@ -81,8 +81,9 @@ export class TicketsTableItemStatusComponent {
   changeTicketStatus(item) {
     this.selectedTicketStatus = item;
     this.ticketsService.changeStatus(this.ticket.id, item.type).subscribe((data: any) => {
-      if (item.type == 'ON_HOLD') {
+      if (item.type == 'ON_HOLD' || item.type == 'IN_PROGRESS') {
         this.ticket.status = item.type;
+        this.ticket.customStatus = null;
       } else {
         this.ticket.status = 'IN_PROGRESS';
         this.ticket.customStatus = item.type
