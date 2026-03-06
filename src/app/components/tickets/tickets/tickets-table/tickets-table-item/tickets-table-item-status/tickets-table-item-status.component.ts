@@ -81,6 +81,12 @@ export class TicketsTableItemStatusComponent {
   changeTicketStatus(item) {
     this.selectedTicketStatus = item;
     this.ticketsService.changeStatus(this.ticket.id, item.type).subscribe((data: any) => {
+      if (item.type == 'ON_HOLD') {
+        this.ticket.status = item.type;
+      } else {
+        this.ticket.status = 'IN_PROGRESS';
+        this.ticket.customStatus = item.type
+      }
       this.toastrService.success(`The tickets “${this.ticket.number}” status has been changed`);
       this.appStateService.changeDetectorRef();
     })

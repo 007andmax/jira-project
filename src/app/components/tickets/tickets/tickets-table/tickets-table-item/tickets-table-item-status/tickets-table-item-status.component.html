@@ -10,7 +10,7 @@
             class="tag__modern"
             [ngStyle]="getStyleStatus((ticket.customStatus) ? ticket.customStatus : ticket.status)"
             *ngIf="ticket.status === 'IN_PROGRESS'"
-            [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
+            [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null),'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
         >
             {{(!ticket.customStatus) ? 'In Progress' : ticket.customStatus}}
         </span>
@@ -19,13 +19,13 @@
             class="tag__modern"
             [ngStyle]="getStyleStatus(ticket.status)"
             *ngIf="ticket.status === 'COMPLETED'"
-             [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
+             [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null),'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
         >
             Completed
         </span>
         <span
          
-            class="tag__modern"
+            class="tag__modern qt-pointer"
             [ngStyle]="getStyleStatus('UNASSIGNED')"
             *ngIf="ticket.status === null"
             (click)="claimTicket()"
@@ -37,7 +37,7 @@
             class="tag__modern"
             [ngStyle]="getStyleStatus(ticket.status)"
             *ngIf="ticket.status === 'ON_HOLD'"
-             [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
+             [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null),'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
         >
             On Hold
         </span>
