@@ -7,9 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { AddAssignedUserModule } from '../../ticket-edit-aside/add-assigned-user/add-assigned-user.module';
 import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
 import { TicketsTableItemAssignedUserComponent } from './tickets-table-item-assigned-user/tickets-table-item-assigned-user.component';
+import { TicketsTableItemStatusComponent } from './tickets-table-item-status/tickets-table-item-status.component';
 
 @NgModule({
-    declarations: [TicketsTableItemComponent, TicketsTableItemAssignedUserComponent
+    declarations: [TicketsTableItemComponent, TicketsTableItemAssignedUserComponent, TicketsTableItemStatusComponent
     ],
     imports: [
         CommonModule,
