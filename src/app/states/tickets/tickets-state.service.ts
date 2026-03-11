@@ -36,6 +36,7 @@ export class TicketsStateService {
   colorStatus: EventEmitter<any> = new EventEmitter();
   count: EventEmitter<number> = new EventEmitter();
   toggleAddTicket: EventEmitter<any> = new EventEmitter();
+  addTicketWithSelectedUser: EventEmitter<any> = new EventEmitter();
   typeFilter: EventEmitter<any> = new EventEmitter();
   tagsFilter: EventEmitter<any> = new EventEmitter();
   onGetTicketsStatus: EventEmitter<any> = new EventEmitter();

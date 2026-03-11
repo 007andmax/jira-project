@@ -1,0 +1,135 @@
+<div class="qt-df header-container">
+<div
+    class="qt-table-modern__circle-avatar"
+    [ngClass]="!usersStateService.getNameForAvatar(requestedUser).length ? 'transparent-text' : ''"
+    [textContent]="usersStateService.getNameForAvatar(requestedUser)"
+    [ngStyle]="{'background': ticketsListService.getStyleAvatar(requestedUser,listColorNoAvatar[indexNoAvatar]) }"
+></div>
+<div>
+<div
+    [textContent]="getUserName(requestedUser)"
+    class="ellipsis qt-fw-500 qt-fs-20 qt-color-gray-900 qt-mb-4"
+></div>
+<div
+*ngIf="requestedUser"
+    [textContent]="requestedUser.primaryEmail"
+    class="ellipsis qt-fw-400 qt-fs-14 qt-color-gray-500 qt-mb-12"
+></div>
+<div class="qt-df qt-ai-c"   
+    ngbDropdown
+    container="body"
+    #dp="ngbDropdown"
+    ngbDropdownAnchor>
+    <a *ngIf="requestedUser" [attr.href]="'tel:+1' + getPrimaryPhoneNumber()"> 
+  <div
+    class="qt-button-square pointer qt-mr-4 draft-email-btn"  
+      placement="top"
+    ngbTooltip="Make Call"
+>
+    <div class="qt-icon icon__phone qt-sz-16 pointer qt-bg-contain"></div>
+</div>
+</a>
+<a *ngIf="requestedUser" [attr.href]="'mailto:' + requestedUser.primaryEmail">
+  <div
+    class="qt-button-square pointer qt-mr-4 draft-email-btn"
+     placement="top"
+    ngbTooltip="Open Email App"
+>
+    <div class="qt-icon icon__email qt-sz-16 pointer qt-bg-contain"></div>
+</div></a>
+  <div
+    class="qt-button-square pointer qt-mr-4 draft-email-btn"
+       placement="top"
+    ngbTooltip="Create Ticket"
+    
+    (click)="createTicket()"
+>
+    <div class="qt-icon icon__tickets qt-sz-16 pointer qt-bg-contain"></div>
+</div>
+ <div
+    class="qt-button-square pointer qt-mr-4 draft-email-btn"
+    (click)="sendEmail()"
+      placement="top"
+    ngbTooltip="QT Email User"
+>
+    <div class="qt-icon icon__email qt-sz-16 pointer qt-bg-contain"></div>
+</div>
+  <div
+    class="qt-button-square pointer qt-mr-4 draft-email-btn"
+     (click)="createTask('Meeting')"
+      placement="top"
+    ngbTooltip="Create Task Meeting"
+>
+    <div class="qt-icon icon__tasks  qt-sz-16 pointer qt-bg-contain"></div>
+</div>
+  <div
+    class="qt-button-square pointer draft-email-btn"
+     (click)="createTask('To do')"
+      placement="top"
+    ngbTooltip="Create Task To Do"
+>
+    <div class="qt-icon icon__external-link  qt-sz-16 pointer qt-bg-contain"></div>
+</div>
+  <div
+        ngbDropdownMenu
+        [ngStyle]="{'width': '100%','min-width': '160px','max-height':'192px'}"
+        aria-labelledby="dropdown1"
+        class="app-drop-down__dropdown"
+      >
+        <ng-template
+          ngFor
+          let-item
+          [ngForOf]="requestedUser.customerCompaniesInfo"
+          let-i="index"
+        >
+          <button
+            ngbDropdownItem
+            [textContent]="item.clientCompanyName"
+            (click)="onSelectCompanyInfo(item)"
+            [title]="item.clientCompanyName"
+          ></button>
+        </ng-template>
+      </div>
+</div>
+</div>
+</div>
+
+ <div  >
+<div
+    *ngFor="let item of requestedUser.phoneNumbers; let i = index"
+>
+    <div class="qt-df qt-ai-c qt-jc-sb qt-mb-2 relative">
+        <div class="left-panel-contact__details-title qt-df qt-ai-c">
+            <span
+                class="qt-color-gray-500 qt-fw-500 qt-fs-13"
+                [textContent]="item.typeNumber == 'OFFICE' ? 'Phone' : item.typeNumber == 'MOBILE' ? 'Mobile' : item.typeNumber == 'FAX' ? 'Fax' : ''"
+            ></span>
+        </div>
+        <div class="qt-df qt-ai-c">
+          <div class="qt-color-gray-900 qt-fw-400 qt-fs-14">{{item.number | mask: '(000) 000-0000 Ext: 999999||000-000-0000'}}</div>
+                    <div
+    class="qt-button-square pointer qt-ml-4 draft-email-btn"  
+      placement="top"
+    ngbTooltip="Copy"
+>
+    <div class="qt-icon icon__copy  qt-sz-16 pointer qt-bg-contain"></div>
+</div>
+        </div>
+    </div>
+</div>
+</div>
+ <div class="qt-df qt-ai-c qt-jc-sb relative" *ngIf="requestedUser">
+<div class="left-panel-contact__details-title">
+    <span   class="qt-color-gray-500 qt-fw-500 qt-fs-13">Email</span>
+</div>
+<div class="left-panel-contact__details-input-wrap qt-pos-rel qt-df qt-ai-c" >
+  <span   class="qt-color-gray-900 qt-fw-400 qt-fs-14" [textContent]="requestedUser.primaryEmail"></span>
+    <div
+    class="qt-button-square pointer qt-ml-4 draft-email-btn"  
+      placement="top"
+    ngbTooltip="Copy"
+>
+    <div class="qt-icon icon__copy  qt-sz-16 pointer qt-bg-contain"></div>
+</div>
+</div>
+</div>

@@ -8,16 +8,19 @@ import { AddAssignedUserModule } from '../../ticket-edit-aside/add-assigned-user
 import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
 import { TicketsTableItemAssignedUserComponent } from './tickets-table-item-assigned-user/tickets-table-item-assigned-user.component';
 import { TicketsTableItemStatusComponent } from './tickets-table-item-status/tickets-table-item-status.component';
+import { TicketsTableItemRequestedByComponent } from './tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
-    declarations: [TicketsTableItemComponent, TicketsTableItemAssignedUserComponent, TicketsTableItemStatusComponent
+    declarations: [TicketsTableItemComponent, TicketsTableItemAssignedUserComponent, TicketsTableItemStatusComponent, TicketsTableItemRequestedByComponent
     ],
     imports: [
         CommonModule,
         NgbModule,
         FormsModule,
         AddAssignedUserModule,
-        MatChipModule
+        MatChipModule,
+        NgxMaskModule.forRoot(),
     ],
     exports: [TicketsTableItemComponent]
 

@@ -24,7 +24,21 @@
         class="ticket-table__requested-by"
         (click)="selectForDetail()"
     >
-        <div class="qt-df qt-ai-c ticket-table__requested-by-inner">
+    <ng-template #popContent let-greeting="greeting"
+	>
+    <app-tickets-table-item-requested-by 
+    [requestedUser]="requestedUser"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    ></app-tickets-table-item-requested-by>
+    </ng-template
+>
+        <div class="qt-df qt-ai-c ticket-table__requested-by-inner" 
+        	[ngbPopover]="popContent"
+            [popoverClass]="'requested-by-popover'"
+          [autoClose]="'outside'"
+        [container]="'body'"
+		triggers="mouseenter">
             <div
                 class="qt-table-modern__circle-avatar"
                 [ngClass]="!usersStateService.getNameForAvatar(requestedUser).length ? 'transparent-text' : ''"

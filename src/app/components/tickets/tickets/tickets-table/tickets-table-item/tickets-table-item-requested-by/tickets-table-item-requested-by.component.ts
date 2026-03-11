@@ -1,0 +1,92 @@
+import { ChangeDetectorRef, Component, Input, ViewChild } from '@angular/core';
+import { User } from 'src/app/components/users/class/user';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { TicketsListService } from '../../../services/tickets-list.service';
+import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
+import { USERS } from 'src/app/const/emails';
+import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
+
+@Component({
+  selector: 'app-tickets-table-item-requested-by',
+  templateUrl: './tickets-table-item-requested-by.component.html',
+  styleUrls: ['./tickets-table-item-requested-by.component.scss'],
+  providers: [TicketsListService]
+})
+export class TicketsTableItemRequestedByComponent {
+  @Input() requestedUser: User;
+  @Input() indexNoAvatar: number = 0;
+  @Input() listColorNoAvatar = [];
+  taskType: string;
+  @ViewChild('dp', { static: true }) dp: NgbDropdown;
+  constructor(public usersStateService: UsersStateService,
+    public ticketsListService: TicketsListService,
+    private ticketsStateService: TicketsStateService,
+    private companiesState: CompaniesStateService,
+    private draftEmailStateService: DraftEmailStateService,
+    public tasksStateService: TasksStateService,
+    public cd: ChangeDetectorRef,
+  ) { }
+
+  public getUserName(user) {
+    return (user) ? `${user.firstName} ${user.lastName}` : '';
+  }
+  getPrimaryPhoneNumber() {
+    return this.requestedUser.phoneNumbers ? this.requestedUser.phoneNumbers.find(item => item.priority == 0).number : null;
+  }
+  onSelectCompanyInfo(item) {
+    this.dp.close();
+    this.ticketsStateService.addTicketWithSelectedUser.next({
+      company: this.companiesState.getCompanies().find(item => item.id == item.companyId),
+      customerCompaniesInfo: item,
+      user: this.requestedUser
+    })
+  }
+  sendEmail() {
+    this.draftEmailStateService.setAction(USERS);
+    this.draftEmailStateService.resetSelectedUsers();
+    this.draftEmailStateService.addSelectedUser(this.requestedUser);
+    this.draftEmailStateService.toggleAsideForAdd();
+    this.cd.markForCheck();
+  }
+  createTask(taskType) {
+    this.taskType = taskType;
+    if (this.requestedUser.customerCompaniesInfo.length > 1) this.dp.open();
+    if (this.requestedUser.customerCompaniesInfo.length == 1) this.onSelectCompanyInfoForCreateTask(this.requestedUser.customerCompaniesInfo[0]);
+  }
+  onSelectCompanyInfoForCreateTask(item) {
+    this.dp.close();
+    let step = 1;
+    console.log("item", item);
+    let serviceExpenseDurationPickerInterval = this.companiesState.getCurrentCompany() ? this.companiesState.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
+    if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') step = 1;
+    if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') step = 5;
+    if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') step = 10;
+    if (serviceExpenseDurationPickerInterval === 'FIFTEEN_MINUTES') step = 15;
+    let startDate = new Date();
+    //startDate.setMinutes(Math.ceil(startDate.getMinutes() / step) * step);
+    let endDate = new Date(startDate.getTime() + step * 60000);
+
+    this.tasksStateService.openAddAsideFromShortVersion({
+      title: `Metting - ${this.requestedUser.firstName} ${this.requestedUser.lastName}`,
+      startDate: startDate.getTime(),
+      description: `${this.requestedUser.firstName} ${this.requestedUser.lastName} <br>
+      ${this.requestedUser.primaryEmail} <br>
+      ${this.getPrimaryPhoneNumber()}`,
+      endDate: endDate.getTime(),
+      assignedUsersIds: [this.usersStateService.getCurrentUser().id],
+      type: this.taskType,
+      taskStatus: "OPEN",
+      companyId: item.companyId,
+      associatedTicketId: undefined,
+      dueDate: undefined,
+      attachFileIds: []
+    });
+  }
+  createTicket() {
+    if (this.requestedUser.customerCompaniesInfo.length > 1) this.dp.open();
+    if (this.requestedUser.customerCompaniesInfo.length == 1) this.onSelectCompanyInfo(this.requestedUser.customerCompaniesInfo[0]);
+  }
+}
