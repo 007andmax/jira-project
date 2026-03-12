@@ -34,17 +34,22 @@
     </ng-template
 >
         <div class="qt-df qt-ai-c ticket-table__requested-by-inner" 
-        	[ngbPopover]="popContent"
-            [popoverClass]="'requested-by-popover'"
-          [autoClose]="'outside'"
-        [container]="'body'"
-		triggers="mouseenter">
+        >
             <div
                 class="qt-table-modern__circle-avatar"
                 [ngClass]="!usersStateService.getNameForAvatar(requestedUser).length ? 'transparent-text' : ''"
                 [textContent]="usersStateService.getNameForAvatar(requestedUser)"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(requestedUser,listColorNoAvatar[indexNoAvatar]) }"
-            ></div>
+                [ngbPopover]="popContent"
+                [popoverClass]="'requested-by-popover'"
+                 [autoClose]="'outside'"
+                 [container]="'body'"
+                #p="ngbPopover"
+                triggers="manual"
+                (mouseenter)="openPopover(p)"
+                (mouseleave)="startCloseTimer(p)"
+                [disablePopover]="!requestedUser"
+                ></div>
             <div
                 [textContent]="getUserName(requestedUser)"
                 class="ellipsis"

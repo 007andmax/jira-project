@@ -8,6 +8,8 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { USERS } from 'src/app/const/emails';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'app-tickets-table-item-requested-by',
@@ -27,6 +29,8 @@ export class TicketsTableItemRequestedByComponent {
     private companiesState: CompaniesStateService,
     private draftEmailStateService: DraftEmailStateService,
     public tasksStateService: TasksStateService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     public cd: ChangeDetectorRef,
   ) { }
 
@@ -43,6 +47,21 @@ export class TicketsTableItemRequestedByComponent {
       customerCompaniesInfo: item,
       user: this.requestedUser
     })
+  }
+  copy(value) {
+    let textArea: any = document.createElement("textarea");
+    textArea.style.opacity = 0;
+    textArea.value = value
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      let successful = document.execCommand('copy');
+    } catch (err) {
+      //  UserNotificationService.show('Copy failed', true);
+    }
+    document.body.removeChild(textArea);
+    this.toastrService.success("The value is copied to clipboard");
+    this.appStateService.changeDetectorRef();
   }
   sendEmail() {
     this.draftEmailStateService.setAction(USERS);

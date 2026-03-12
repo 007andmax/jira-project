@@ -1,4 +1,7 @@
-<div class="qt-df header-container">
+<div ngbDropdown
+    [container]="'body'"
+    #dp="ngbDropdown">
+<div class="qt-df header-container"   >
 <div
     class="qt-table-modern__circle-avatar"
     [ngClass]="!usersStateService.getNameForAvatar(requestedUser).length ? 'transparent-text' : ''"
@@ -15,11 +18,8 @@
     [textContent]="requestedUser.primaryEmail"
     class="ellipsis qt-fw-400 qt-fs-14 qt-color-gray-500 qt-mb-12"
 ></div>
-<div class="qt-df qt-ai-c"   
-    ngbDropdown
-    container="body"
-    #dp="ngbDropdown"
-    ngbDropdownAnchor>
+<div class="qt-df qt-ai-c"   ngbDropdownAnchor
+  >
     <a *ngIf="requestedUser" [attr.href]="'tel:+1' + getPrimaryPhoneNumber()"> 
   <div
     class="qt-button-square pointer qt-mr-4 draft-email-btn"  
@@ -111,6 +111,7 @@
     class="qt-button-square pointer qt-ml-4 draft-email-btn"  
       placement="top"
     ngbTooltip="Copy"
+     (click)="copy(item.number)"
 >
     <div class="qt-icon icon__copy  qt-sz-16 pointer qt-bg-contain"></div>
 </div>
@@ -128,8 +129,10 @@
     class="qt-button-square pointer qt-ml-4 draft-email-btn"  
       placement="top"
     ngbTooltip="Copy"
+    (click)="copy(requestedUser.primaryEmail)"
 >
     <div class="qt-icon icon__copy  qt-sz-16 pointer qt-bg-contain"></div>
+</div>
 </div>
 </div>
 </div>

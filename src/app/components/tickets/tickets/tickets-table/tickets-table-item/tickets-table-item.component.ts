@@ -14,6 +14,8 @@ import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tick
 import { AddAssignedUserComponent } from '../../ticket-edit-aside/add-assigned-user/add-assigned-user.component';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { AppStateService } from 'src/app/states/app/app-state.service';
+import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-tickets-table-item',
@@ -42,12 +44,15 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
   userList: Array<User> = [];
   listAssignedUser: Array<CurrentUser> = [];
   sub: Subscription = new Subscription();
+  private closeTimer: any;
+
   constructor(public usersStateService: UsersStateService,
     public ticketsListService: TicketsListService,
     public companiesStateService: CompaniesStateService,
     public ticketsStateService: TicketsStateService,
     public customerPortalStateService: CustomerPortalStateService,
     public ticketsPermissionsService: TicketsPermissionsService,
+    private appStateService: AppStateService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -95,7 +100,12 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
     this.sub.add(getOnUpdateTicket);
   }
 
-
+  shownPopover() {
+    console.log("shownPopover");
+    setTimeout(() => {
+      this.appStateService.changeDetectorRef();
+    }, 501);
+  }
 
 
   onCloseDropDown(data, input) {
@@ -162,7 +172,49 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
   getClassType() {
     return `priority-icon ${(this.ticket.priorityLevel && this.ticket.priorityLevel.name === "MEDIUM") ? '--' + this.ticket.priorityLevel.name.toLowerCase() : ''}`;
   }
+  openPopover(popover: NgbPopover): void {
+    if (!this.requestedUser) return;
+    clearTimeout(this.closeTimer);
+
+    if (!popover.isOpen()) {
+      popover.open();
+    }
+
+    // Wait until popover is added to <body>
+    setTimeout(() => {
+      const popoverEl = document.querySelector('.requested-by-popover');
+
+      if (!popoverEl) {
+        return;
+      }
+
+      popoverEl.addEventListener('mouseenter', this.onPopoverMouseEnter);
+      popoverEl.addEventListener('mouseleave', () => {
+        popover.close();
+      });
+    });
+  }
+
+  startCloseTimer(popover: NgbPopover): void {
+    if (!this.requestedUser) return;
+    clearTimeout(this.closeTimer);
+
+    this.closeTimer = setTimeout(() => {
+      const popoverEl = document.querySelector('.requested-by-popover:hover');
+
+      // close only if mouse is not over popover body
+      if (!popoverEl) {
+        popover.close();
+      }
+    }, 150);
+  }
+
+  onPopoverMouseEnter = (): void => {
+    clearTimeout(this.closeTimer);
+  };
+
   ngOnDestroy(): void {
+    clearTimeout(this.closeTimer);
     this.sub.unsubscribe();
   }
   public trackById(index, item) {
