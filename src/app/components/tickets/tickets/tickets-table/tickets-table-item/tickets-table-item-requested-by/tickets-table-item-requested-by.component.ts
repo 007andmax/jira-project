@@ -34,6 +34,9 @@ export class TicketsTableItemRequestedByComponent {
     public cd: ChangeDetectorRef,
   ) { }
 
+  onToggleDroPDown(data) {
+    this.usersStateService.isOpenDropDownRequestedBy = data;
+  }
   public getUserName(user) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
   }

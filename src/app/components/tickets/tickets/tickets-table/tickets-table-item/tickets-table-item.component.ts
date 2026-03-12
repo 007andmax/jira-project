@@ -16,6 +16,7 @@ import { CurrentUser } from 'src/class/current-user/current-user';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import { TicketsTableItemRequestedByComponent } from './tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
   selector: 'app-tickets-table-item',
@@ -45,7 +46,7 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
   listAssignedUser: Array<CurrentUser> = [];
   sub: Subscription = new Subscription();
   private closeTimer: any;
-
+  private openTimer: any;
   constructor(public usersStateService: UsersStateService,
     public ticketsListService: TicketsListService,
     public companiesStateService: CompaniesStateService,
@@ -177,28 +178,30 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
     clearTimeout(this.closeTimer);
 
     if (!popover.isOpen()) {
-      popover.open();
+      this.openTimer = setTimeout(() => {
+        popover.open();
+        this.appStateService.changeDetectorRef();
+        // Wait until popover is added to <body>
+        setTimeout(() => {
+          const popoverEl = document.querySelector('.requested-by-popover');
+
+          if (!popoverEl) {
+            return;
+          }
+
+          popoverEl.addEventListener('mouseenter', this.onPopoverMouseEnter);
+          popoverEl.addEventListener('mouseleave', () => {
+            if (!this.usersStateService.isOpenDropDownRequestedBy) popover.close();
+          });
+        });
+      }, 500);
     }
-
-    // Wait until popover is added to <body>
-    setTimeout(() => {
-      const popoverEl = document.querySelector('.requested-by-popover');
-
-      if (!popoverEl) {
-        return;
-      }
-
-      popoverEl.addEventListener('mouseenter', this.onPopoverMouseEnter);
-      popoverEl.addEventListener('mouseleave', () => {
-        popover.close();
-      });
-    });
   }
 
   startCloseTimer(popover: NgbPopover): void {
-    if (!this.requestedUser) return;
+    if (!this.requestedUser || this.usersStateService.isOpenDropDownRequestedBy) return;
     clearTimeout(this.closeTimer);
-
+    clearTimeout(this.openTimer);
     this.closeTimer = setTimeout(() => {
       const popoverEl = document.querySelector('.requested-by-popover:hover');
 

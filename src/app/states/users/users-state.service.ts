@@ -55,6 +55,7 @@ export class UsersStateService {
   onFastArchive: EventEmitter<any> = new EventEmitter();
   onFastDeArchive: EventEmitter<any> = new EventEmitter();
   onFastAddGlobalFilter: EventEmitter<any> = new EventEmitter();
+  isOpenDropDownRequestedBy: boolean = false;
   constructor(private userService: UsersService,
     private appService: AppService,
     private customerPortalStateService: CustomerPortalStateService,
