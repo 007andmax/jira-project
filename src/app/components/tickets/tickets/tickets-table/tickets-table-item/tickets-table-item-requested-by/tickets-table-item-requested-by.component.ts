@@ -94,7 +94,7 @@ export class TicketsTableItemRequestedByComponent {
     let endDate = new Date(startDate.getTime() + step * 60000);
 
     this.tasksStateService.openAddAsideFromShortVersion({
-      title: `Metting - ${this.requestedUser.firstName} ${this.requestedUser.lastName}`,
+      title: `${this.taskType == 'To do' ? 'To do - ' : 'Meeting - '}${this.requestedUser.firstName} ${this.requestedUser.lastName}`,
       startDate: startDate.getTime(),
       description: `${this.requestedUser.firstName} ${this.requestedUser.lastName} <br>
       ${this.requestedUser.primaryEmail} <br>
@@ -111,6 +111,7 @@ export class TicketsTableItemRequestedByComponent {
   }
   createTicket() {
     this.typeDropDown = "TICKET";
+    console.log("this.requestedUser.customerCompaniesInfo", this.requestedUser.customerCompaniesInfo);
     if (this.requestedUser.customerCompaniesInfo.length > 1) this.dp.open();
     if (this.requestedUser.customerCompaniesInfo.length == 1) this.onSelectCompanyInfo(this.requestedUser.customerCompaniesInfo[0]);
   }

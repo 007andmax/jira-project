@@ -62,7 +62,7 @@
            placement="top"
                     ngbTooltip="Time Added to the ticket"
                     container="body"
-                class="qt-icon icon__time qt-sz-20 qt-ic-c"
+                class="qt-icon icon__time qt-sz-20 qt-ic-c qt-mr-4"
                
             ></div>
              <div
@@ -70,12 +70,13 @@
                 placement="top"
                     ngbTooltip="Product Added to the Ticket"
                     container="body"
-                class="qt-icon icon__taxes qt-sz-20 qt-ic-c qt-ml-4"
+                class="qt-icon icon__taxes qt-sz-20 qt-ic-c"
                
             ></div>
     </div>
      <div
         class="ticket-table__number"
+            (click)="selectForDetail()"
     >
         <div class="ellipsis">
             {{'Tkt# ' + ticket.number}}

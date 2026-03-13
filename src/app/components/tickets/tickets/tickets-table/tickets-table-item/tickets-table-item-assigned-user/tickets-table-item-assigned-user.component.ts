@@ -8,6 +8,7 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketsPermissionsService } from '../../../ticket-edit-aside/services/tickets-permissions.service';
 import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-tickets-table-item-assigned-user',
@@ -33,6 +34,7 @@ export class TicketsTableItemAssignedUserComponent {
     private ticketsService: TicketsService,
     public ticketsPermissionsService: TicketsPermissionsService,
     private appStateService: AppStateService,
+    private toastrService: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -72,7 +74,8 @@ export class TicketsTableItemAssignedUserComponent {
         return item.id;
       })
       this.ticketsService.addAssignUsers(this.ticket.id, ids).subscribe(data => {
-
+        this.toastrService.success("The tech user has been added");
+        this.appStateService.changeDetectorRef();
       })
     }
 

@@ -37,7 +37,7 @@ export class TicketsTableItemStatusComponent {
     this.ticketsStatus = this.ticketsStateService.getTicketsStatus();
     this.setList();
     let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
-      this.ticketsStatus = data;
+      this.ticketsStatus = data
       this.setList();
     })
     this.sub.add(onGetTicketsStatus);
@@ -55,6 +55,8 @@ export class TicketsTableItemStatusComponent {
     this.selectedTicketStatus = this.list.find(item => item.type == (this.ticket.customStatus ? this.ticket.customStatus : this.ticket.status));
     if (this.ticket.status === null) this.selectedTicketStatus = new TitleListType(this.parseStatus("UNASSIGNED"), "UNASSIGNED");
     if (this.ticket.status === "COMPLETED") this.selectedTicketStatus = new TitleListType(this.parseStatus("COMPLETED"), "COMPLETED");
+    this.list.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
+      1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
   }
   claimTicket() {
     this.ticketsService.addAssignUsers(this.ticket.id, [this.usersStateService.getCurrentUser().id]).subscribe(data => {
