@@ -56,6 +56,24 @@
             ></div>
         </div>
     </div>
+    <div class="ticket-table__update">
+         <div
+            *ngIf="ticket.hasServiceUpdate"
+           placement="top"
+                    ngbTooltip="Time Added to the ticket"
+                    container="body"
+                class="qt-icon icon__time qt-sz-20 qt-ic-c"
+               
+            ></div>
+             <div
+           *ngIf="ticket.hasProductUpdate"
+                placement="top"
+                    ngbTooltip="Product Added to the Ticket"
+                    container="body"
+                class="qt-icon icon__taxes qt-sz-20 qt-ic-c qt-ml-4"
+               
+            ></div>
+    </div>
      <div
         class="ticket-table__number"
     >
