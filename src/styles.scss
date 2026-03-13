@@ -3232,4 +3232,8 @@ app-tasks-dashboard-my-calendar {
   padding: 16px;
   z-index: 999;
   border: 1px solid $gray-200;
+  width: 360px;
+  .primary-email {
+    max-width: 230px;
+  }
 }

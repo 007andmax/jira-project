@@ -21,6 +21,7 @@ export class TicketsTableItemRequestedByComponent {
   @Input() requestedUser: User;
   @Input() indexNoAvatar: number = 0;
   @Input() listColorNoAvatar = [];
+  typeDropDown: string;
   taskType: string;
   @ViewChild('dp', { static: true }) dp: NgbDropdown;
   constructor(public usersStateService: UsersStateService,
@@ -74,6 +75,7 @@ export class TicketsTableItemRequestedByComponent {
     this.cd.markForCheck();
   }
   createTask(taskType) {
+    this.typeDropDown = "TASK";
     this.taskType = taskType;
     if (this.requestedUser.customerCompaniesInfo.length > 1) this.dp.open();
     if (this.requestedUser.customerCompaniesInfo.length == 1) this.onSelectCompanyInfoForCreateTask(this.requestedUser.customerCompaniesInfo[0]);
@@ -108,6 +110,7 @@ export class TicketsTableItemRequestedByComponent {
     });
   }
   createTicket() {
+    this.typeDropDown = "TICKET";
     if (this.requestedUser.customerCompaniesInfo.length > 1) this.dp.open();
     if (this.requestedUser.customerCompaniesInfo.length == 1) this.onSelectCompanyInfo(this.requestedUser.customerCompaniesInfo[0]);
   }

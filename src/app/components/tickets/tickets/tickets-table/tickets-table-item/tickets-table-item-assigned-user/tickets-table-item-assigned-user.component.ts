@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, QueryList, ViewChildren } from '@angular/core';
 import { Ticket } from 'src/app/components/tickets/class/ticket';
 import { User } from 'src/app/components/users/class/user';
 import { TicketsListService } from '../../../services/tickets-list.service';
@@ -6,6 +6,8 @@ import { CurrentUser } from 'src/class/current-user/current-user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketsPermissionsService } from '../../../ticket-edit-aside/services/tickets-permissions.service';
+import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'app-tickets-table-item-assigned-user',
@@ -22,10 +24,15 @@ export class TicketsTableItemAssignedUserComponent {
   @Input() listColorNoAvatar = [];
   @Input() indexNoAvatar: number = 0;
   @Input() listAssignedUser: Array<CurrentUser> = [];
+  @ViewChildren("pM", { emitDistinctChangesOnly: false }) pM: QueryList<NgbPopover>;
+
+  private closeTimer: any;
+  private openTimer: any;
   constructor(public ticketsListService: TicketsListService,
     public usersStateService: UsersStateService,
     private ticketsService: TicketsService,
-    public ticketsPermissionsService: TicketsPermissionsService
+    public ticketsPermissionsService: TicketsPermissionsService,
+    private appStateService: AppStateService,
   ) { }
 
   ngOnInit() {
@@ -86,6 +93,59 @@ export class TicketsTableItemAssignedUserComponent {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  getUserById(id) {
+    return this.usersStateService.getAllUsers().find(item => item.id == id);
+  }
+  openPopover(popover: any, user): void {
+    console.log("this.popContentM", this.pM);
+    this.pM.toArray().forEach((item: any) => {
+      if (item.__ngContext__ != popover.__ngContext__) item.close();
+    });
+    if (!user) return;
+    console.log("user", user);
+    clearTimeout(this.closeTimer);
+    console.log("popover.isOpen()", popover.__ngContext__);
+    if (!popover.isOpen()) {
+      this.openTimer = setTimeout(() => {
+        popover.open();
+        this.appStateService.changeDetectorRef();
+        // Wait until popover is added to <body>
+        setTimeout(() => {
+          const popoverEl = document.querySelector('.requested-by-popover');
+
+          if (!popoverEl) {
+            return;
+          }
+
+          popoverEl.addEventListener('mouseenter', this.onPopoverMouseEnter);
+          popoverEl.addEventListener('mouseleave', () => {
+            if (!this.usersStateService.isOpenDropDownRequestedBy) popover.close();
+          });
+        });
+      }, 500);
+    }
+  }
+
+  startCloseTimer(popover: NgbPopover, user): void {
+    if (!user || this.usersStateService.isOpenDropDownRequestedBy) return;
+    clearTimeout(this.closeTimer);
+    clearTimeout(this.openTimer);
+    this.closeTimer = setTimeout(() => {
+      const popoverEl = document.querySelector('.requested-by-popover:hover');
+
+      // close only if mouse is not over popover body
+      if (!popoverEl) {
+        popover.close();
+      }
+    }, 150);
+  }
+
+  onPopoverMouseEnter = (): void => {
+    clearTimeout(this.closeTimer);
+  };
+  ngOnDestroy(): void {
+    clearTimeout(this.closeTimer);
   }
   getStyleNetAvatar(i) {
     return `${12 * i}px`;

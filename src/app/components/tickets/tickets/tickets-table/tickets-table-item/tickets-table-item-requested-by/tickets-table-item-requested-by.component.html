@@ -12,12 +12,12 @@
 <div>
 <div
     [textContent]="getUserName(requestedUser)"
-    class="ellipsis qt-fw-500 qt-fs-20 qt-color-gray-900 qt-mb-4"
+    class="ellipsis qt-fw-500 qt-fs-20 qt-color-gray-900 qt-mb-8"
 ></div>
 <div
 *ngIf="requestedUser"
     [textContent]="requestedUser.primaryEmail"
-    class="ellipsis qt-fw-400 qt-fs-14 qt-color-gray-500 qt-mb-12"
+    class="ellipsis qt-fw-400 qt-fs-14 qt-color-gray-500 qt-mb-12 primary-email"
 ></div>
 <div class="qt-df qt-ai-c"   ngbDropdownAnchor
   >
@@ -86,7 +86,7 @@
           <button
             ngbDropdownItem
             [textContent]="item.clientCompanyName"
-            (click)="onSelectCompanyInfo(item)"
+            (click)="typeDropDown == 'TICKET' ? onSelectCompanyInfo(item) : onSelectCompanyInfoForCreateTask(item)"
             [title]="item.clientCompanyName"
           ></button>
         </ng-template>
@@ -99,7 +99,7 @@
 <div
     *ngFor="let item of requestedUser.phoneNumbers; let i = index"
 >
-    <div class="qt-df qt-ai-c qt-jc-sb qt-mb-2 relative">
+    <div class="qt-df qt-ai-c qt-jc-sb qt-mb-8 relative">
         <div class="left-panel-contact__details-title qt-df qt-ai-c">
             <span
                 class="qt-color-gray-500 qt-fw-500 qt-fs-13"
@@ -124,10 +124,10 @@
 <div class="left-panel-contact__details-title">
     <span   class="qt-color-gray-500 qt-fw-500 qt-fs-13">Email</span>
 </div>
-<div class="left-panel-contact__details-input-wrap qt-pos-rel qt-df qt-ai-c" >
-  <span   class="qt-color-gray-900 qt-fw-400 qt-fs-14" [textContent]="requestedUser.primaryEmail"></span>
+<div class="left-panel-contact__details-input-wrap qt-pos-rel qt-df qt-ai-c qt-jc-fe" >
+  <span   class="qt-color-gray-900 qt-fw-400 qt-fs-14 ellipsis primary-email" [textContent]="requestedUser.primaryEmail"></span>
     <div
-    class="qt-button-square pointer qt-ml-4 draft-email-btn"  
+    class="qt-button-square pointer qt-ml-4 draft-email-btn "  
       placement="top"
     ngbTooltip="Copy"
     (click)="copy(requestedUser.primaryEmail)"

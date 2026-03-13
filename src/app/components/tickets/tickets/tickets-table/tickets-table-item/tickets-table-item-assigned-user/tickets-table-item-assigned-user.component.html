@@ -7,13 +7,31 @@ class="qt-w100"
         [container]="'body'"
         (openChange)="onCloseDropDown($event,userInput)"
     >
+       <ng-template #popContent let-greeting="greeting"
+	>
+    <app-tickets-table-item-requested-by  
+    [requestedUser]="assignedUser"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    ></app-tickets-table-item-requested-by>
+    </ng-template
+>
         <div class="qt-df" [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null),'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}" ngbDropdownToggle    *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers"
       >
             <div
                 class="qt-table-modern__circle-avatar"
                 [textContent]="getAssignedUserNameForAvatar(assignedUser)"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(assignedUser,listColorNoAvatar[indexNoAvatar])}"
-            ></div>
+            [ngbPopover]="popContent"
+                [popoverClass]="'requested-by-popover'"
+                 [autoClose]="'outside'"
+                 [container]="'body'"
+                #p="ngbPopover"
+                triggers="manual"
+                (mouseenter)="openPopover(p,assignedUser)"
+                (mouseleave)="startCloseTimer(p,assignedUser)"
+                [disablePopover]="!assignedUser"
+                ></div>
             <div
                 class="ellipsis"
                 [textContent]="getUserName(assignedUser)"
@@ -33,14 +51,30 @@ class="qt-w100"
                 [ngForOf]="ticket.multiAssignedUsers"
                 [ngForTrackBy]="trackById"
             >
+                 <ng-template #popContentM 
+	>
+    <app-tickets-table-item-requested-by  
+    [requestedUser]="getUserById(user.id)"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    ></app-tickets-table-item-requested-by>
+    </ng-template
+>
                 <div
                     class="qt-table-modern__circle-avatar multi-assign-user"
                     *ngIf="i < 5"
                     [textContent]="getAssignedUserNameForAvatar(user)"
                     [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) ,
                 'left': getStyleNetAvatar(i)}"
-                    [ngbTooltip]="user.firstName + ' ' + user.lastName"
-                    [container]="'body'"
+                     [ngbPopover]="popContentM"
+                [popoverClass]="'requested-by-popover'"
+                 [autoClose]="'outside'"
+                 [container]="'body'"
+                #pM="ngbPopover"
+                triggers="manual"
+                (mouseenter)="openPopover(pM,getUserById(user.id))"
+                (mouseleave)="startCloseTimer(pM,getUserById(user.id))"
+                [disablePopover]="!getUserById(user.id)"
                 ></div>
             </ng-template>
             <div
