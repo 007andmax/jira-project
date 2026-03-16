@@ -116,7 +116,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.getTicketPriority();
       this.getColors();
       this.onSelectTechUser(this.getNameSelectedTechUser());
-      this.onSelectUser(this.selectedUser, this.selectedCustomerCompany);
+      if (this.selectedUser && this.selectedCustomerCompany) this.onSelectUser(this.selectedUser, this.selectedCustomerCompany);
     })
     this.sub.add(addTicketWithSelectedUser);
     let onChangeAssignedUser = this.addUsersNotifyStateService.onChangeAssignedUser.subscribe(data => {

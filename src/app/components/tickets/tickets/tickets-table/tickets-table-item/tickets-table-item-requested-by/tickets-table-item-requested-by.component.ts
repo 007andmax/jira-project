@@ -46,12 +46,12 @@ export class TicketsTableItemRequestedByComponent {
   getPrimaryPhoneNumber() {
     return this.requestedUser.phoneNumbers ? this.requestedUser.phoneNumbers.find(item => item.priority == 0).number : null;
   }
-  onSelectCompanyInfo(item) {
+  onSelectCompanyInfo(companyInfo) {
     this.dp.close();
     this.ticketsStateService.addTicketWithSelectedUser.next({
-      company: this.companiesState.getCompanies().find(item => item.id == item.companyId),
-      customerCompaniesInfo: item,
-      user: this.requestedUser
+      company: this.companiesState.getCompanies().find(item => item.id == companyInfo.companyId),
+      customerCompaniesInfo: companyInfo,
+      user: this.requestedUser.accountType == "TECH" ? null : this.requestedUser
     })
   }
   copy(value) {
@@ -119,7 +119,7 @@ export class TicketsTableItemRequestedByComponent {
     console.log("this.requestedUser.customerCompaniesInfo", this.requestedUser.customerCompaniesInfo);
     if (this.requestedUser.customerCompaniesInfo.length > 1) this.dp.open();
     if (this.requestedUser.customerCompaniesInfo.length == 1) this.onSelectCompanyInfo(this.requestedUser.customerCompaniesInfo[0]);
-    //  if (this.requestedUser.customerCompaniesInfo.length == 0 && this.requestedUser.accountType == "TECH") this.onSelectCompanyInfo({ companyId: this.ticket.companyId, clientCompanyName: this.companiesState.getCompanies().find(item => item.id == this.ticket.companyId).name });
+    if (this.requestedUser.customerCompaniesInfo.length == 0 && this.requestedUser.accountType == "TECH") this.onSelectCompanyInfo({ companyId: this.ticket.companyId, clientCompanyName: this.companiesState.getCompanies().find(item => item.id == this.ticket.companyId).name });
 
   }
 }
