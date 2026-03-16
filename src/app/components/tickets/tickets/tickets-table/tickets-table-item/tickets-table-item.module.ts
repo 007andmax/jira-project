@@ -4,14 +4,23 @@ import { CommonModule } from '@angular/common';
 import { TicketsTableItemComponent } from './tickets-table-item.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { AddAssignedUserModule } from '../../ticket-edit-aside/add-assigned-user/add-assigned-user.module';
+import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
+import { TicketsTableItemAssignedUserComponent } from './tickets-table-item-assigned-user/tickets-table-item-assigned-user.component';
+import { TicketsTableItemStatusComponent } from './tickets-table-item-status/tickets-table-item-status.component';
+import { TicketsTableItemRequestedByComponent } from './tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
-    declarations: [TicketsTableItemComponent
+    declarations: [TicketsTableItemComponent, TicketsTableItemAssignedUserComponent, TicketsTableItemStatusComponent, TicketsTableItemRequestedByComponent
     ],
     imports: [
         CommonModule,
         NgbModule,
-        FormsModule
+        FormsModule,
+        AddAssignedUserModule,
+        MatChipModule,
+        NgxMaskModule.forRoot(),
     ],
     exports: [TicketsTableItemComponent]
 

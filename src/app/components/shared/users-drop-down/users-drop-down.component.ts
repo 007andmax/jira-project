@@ -57,6 +57,6 @@ export class UsersDropDownComponent extends CompanyUsersDropDownComponent {
     });
   }
   getJobTitleDto(user) {
-    return user.customerCompaniesInfo.find(item => item.companyId == this.selectedCustomerCompany.companyId).jobTitleDto;
+    return user.customerCompaniesInfo.find(item => item.companyId == this.selectedCustomerCompany.companyId) ? user.customerCompaniesInfo.find(item => item.companyId == this.selectedCustomerCompany.companyId).jobTitleDto : null;
   }
 }

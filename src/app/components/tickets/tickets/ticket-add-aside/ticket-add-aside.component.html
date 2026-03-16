@@ -106,6 +106,8 @@
                     [search]="true"
                     [change]="true"
                     [sort]="false"
+                    [selectedCustomerCompany]="selectedCustomerCompany"
+                    [selectedItem]="selectedUser"
                     (onSelectedItem)="onSelectUser($event.user,$event.customerCompany)"
                 ></company-users-drop-down>
             </div>
@@ -164,6 +166,7 @@
                     [list]="namesTechUsersList"
                     [search]="true"
                     [change]="true"
+                    [editItem]="getNameSelectedTechUser()"
                     (onSelectedItem)="onSelectTechUser($event)"
                     [placeholder]="'Select'"
                 ></app-drop-down>

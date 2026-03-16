@@ -32,7 +32,14 @@ tr {
 }
 .ticket-table__assignee {
   overflow: unset;
+  cursor: default;
   .ellipsis {
     max-width: 120px;
   }
+}
+app-tickets-table-item-assigned-user {
+  display: contents;
+}
+.ticket-table__status {
+  cursor: default;
 }

@@ -19,6 +19,8 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { PreviewAttachmentStateService } from '../../tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
 import { ServicesListComponent } from '../../shared/services-list/services-list.component';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { Company } from 'src/app/interfaces/company/company';
+import { Ticket } from '../../tickets/class/ticket';
 
 @Component({
   selector: 'app-tasks-add',
@@ -81,6 +83,8 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     sanitize: false
   };
   files = [];
+  selectedAssociateTicket: Ticket;
+  selectedCompany: Company;
   selectedAssignedUsers = [];
   selectedType: CompanySetting;
   constructor(public tasksStateService: TasksStateService,
@@ -165,7 +169,12 @@ export class TasksAddComponent implements OnInit, OnDestroy {
         assignedUsersIds: res.assignedUsersIds,
         type: res.type,
         taskStatus: res.taskStatus,
+        companyId: res.companyId,
+        description: res.description,
+        associatedTicketId: res.ticket ? res.ticket.id : undefined
       })
+      if (res.ticket) this.selectedAssociateTicket = res.ticket;
+      if (res.companyId) this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id == res.companyId);
       this.selectedType = this.listTypes.find(item => item.value === res.type);
       if (res.assignedUsersIds) this.selectedAssignedUsers = this.usersStateService.getAllUsers().filter(user => res.assignedUsersIds.some(item => item == user.id));
       this.opened = true;
@@ -189,6 +198,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     this.activeTab = data['nextId'];
   }
   public setAssociatedTicketId(data) {
+    this.selectedAssociateTicket = data;
     this.modelForm.controls["associatedTicketId"].setValue(data ? data.id : null)
   }
   public getServices() {
@@ -199,6 +209,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     this.modelForm.controls["type"].setValue(data ? data.value : null)
   }
   onSelectCompany(data) {
+    this.selectedCompany = data;
     this.modelForm.controls["companyId"].setValue(data ? data.id : null)
     if (data) this.ticketStateService.getServicesList(data.id);
     this.servicedp.clearClient();
@@ -352,6 +363,8 @@ export class TasksAddComponent implements OnInit, OnDestroy {
 
       });
     }
+    this.selectedAssociateTicket = null;
+    this.selectedCompany = null;
     this.opened = false;
     this.submitted = false;
     this.modelForm.reset();
