@@ -102,7 +102,7 @@ export class TicketsTableItemRequestedByComponent {
       startDate: startDate.getTime(),
       description: this.requestedUser.accountType == "TECH" ? '' : `${this.requestedUser.firstName} ${this.requestedUser.lastName} <br>
       ${this.requestedUser.primaryEmail} <br>
-      ${this.getPrimaryPhoneNumber()}`,
+      ${this.getPrimaryPhoneNumber() ? this.getPrimaryPhoneNumber() : ''}`,
       endDate: endDate.getTime(),
       assignedUsersIds: [this.usersStateService.getCurrentUser().id],
       type: this.taskType,

@@ -363,6 +363,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
 
       });
     }
+    this.selectedAssociateTicket = null;
     this.selectedCompany = null;
     this.opened = false;
     this.submitted = false;
