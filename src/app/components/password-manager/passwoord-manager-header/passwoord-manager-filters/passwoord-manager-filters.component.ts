@@ -122,7 +122,6 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
           t.name === value.name && t.type === value.type
         ))
       )
-      console.log("this.devicesUsers", this.devicesUsers);
     }, err => {
       this.filter.setPreloaderDevices(false);
       this.disabledDevicesUsers = false;

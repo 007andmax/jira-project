@@ -77,7 +77,6 @@ export class TicketsTableItemRequestedByComponent {
     this.cd.markForCheck();
   }
   createTask(taskType) {
-    console.log('this.requestedUser', this.requestedUser);
     this.typeDropDown = "TASK";
     this.taskType = taskType;
     if (this.requestedUser.customerCompaniesInfo.length > 1) this.dp.open();
@@ -87,7 +86,6 @@ export class TicketsTableItemRequestedByComponent {
   onSelectCompanyInfoForCreateTask(item) {
     this.dp.close();
     let step = 1;
-    console.log("item", item);
     let serviceExpenseDurationPickerInterval = this.companiesState.getCurrentCompany() ? this.companiesState.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
     if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') step = 1;
     if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') step = 5;
@@ -116,7 +114,6 @@ export class TicketsTableItemRequestedByComponent {
   }
   createTicket() {
     this.typeDropDown = "TICKET";
-    console.log("this.requestedUser.customerCompaniesInfo", this.requestedUser.customerCompaniesInfo);
     if (this.requestedUser.customerCompaniesInfo.length > 1) this.dp.open();
     if (this.requestedUser.customerCompaniesInfo.length == 1) this.onSelectCompanyInfo(this.requestedUser.customerCompaniesInfo[0]);
     //  if (this.requestedUser.customerCompaniesInfo.length == 0 && this.requestedUser.accountType == "TECH") this.onSelectCompanyInfo({ companyId: this.ticket.companyId, clientCompanyName: this.companiesState.getCompanies().find(item => item.id == this.ticket.companyId).name });

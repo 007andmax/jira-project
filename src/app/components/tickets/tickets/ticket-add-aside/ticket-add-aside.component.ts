@@ -107,7 +107,6 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getToggleAddTicket);
     let addTicketWithSelectedUser = this.ticketsStateService.addTicketWithSelectedUser.subscribe(data => {
-      console.log("data", data);
       this.selectedCompany = data.company;
       this.selectedCustomerCompany = data.customerCompaniesInfo;
       this.selectedUser = data.user;

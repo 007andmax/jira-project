@@ -60,8 +60,6 @@ export class TicketsTableItemAssignedUserComponent {
     }
   }
   selectAssignedUser(data, input) {
-    console.log("data", data);
-
     let find = this.listAssignedUser.find(item => item.id === data.id);
     if (!find) {
       this.listAssignedUser.push(data);
@@ -101,14 +99,11 @@ export class TicketsTableItemAssignedUserComponent {
     return this.usersStateService.getAllUsers().find(item => item.id == id);
   }
   openPopover(popover: any, user): void {
-    console.log("this.popContentM", this.pM);
     this.pM.toArray().forEach((item: any) => {
       if (item.__ngContext__ != popover.__ngContext__) item.close();
     });
     if (!user) return;
-    console.log("user", user);
     clearTimeout(this.closeTimer);
-    console.log("popover.isOpen()", popover.__ngContext__);
     if (!popover.isOpen()) {
       this.openTimer = setTimeout(() => {
         popover.open();

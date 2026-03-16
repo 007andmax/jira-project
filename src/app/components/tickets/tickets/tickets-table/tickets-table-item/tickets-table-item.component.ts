@@ -63,7 +63,6 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
     let getOnUsers = this.usersStateService.getOnUsers().subscribe(data => {
       this.assignedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.assignedUserId);
       this.requestedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.createdUserId);
-      console.log("this.requestedUser", this.requestedUser);
       this.userList = this.getUsersForAssign();
       this.users = JSON.parse(JSON.stringify(this.userList));
       if (this.assignedUserDp) this.assignedUserDp.resetList(this.userList);
@@ -85,7 +84,6 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
     if (this.usersStateService.getAllUsers().length > 0) {
       this.assignedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.assignedUserId);
       this.requestedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.createdUserId);
-      console.log("this.requestedUser", this.requestedUser);
       this.userList = this.getUsersForAssign();
       this.users = JSON.parse(JSON.stringify(this.userList));
       if (this.assignedUserDp) this.assignedUserDp.resetList(this.userList);
@@ -102,7 +100,6 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
   }
 
   shownPopover() {
-    console.log("shownPopover");
     setTimeout(() => {
       this.appStateService.changeDetectorRef();
     }, 501);
