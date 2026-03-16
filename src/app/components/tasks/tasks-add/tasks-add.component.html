@@ -115,6 +115,7 @@
                     <app-tasks-add-associate-tickets
                         [class]="['drop-down-sm']"
                         [isDisabled]="!f2.companyId.value"
+                        [selectedItem]="selectedAssociateTicket"
                         (onSelectedItem)="setAssociatedTicketId($event)"
                     ></app-tasks-add-associate-tickets>
                 </div>

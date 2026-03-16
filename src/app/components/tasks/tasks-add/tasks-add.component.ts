@@ -20,6 +20,7 @@ import { PreviewAttachmentStateService } from '../../tickets/tickets/ticket-edit
 import { ServicesListComponent } from '../../shared/services-list/services-list.component';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { Company } from 'src/app/interfaces/company/company';
+import { Ticket } from '../../tickets/class/ticket';
 
 @Component({
   selector: 'app-tasks-add',
@@ -82,6 +83,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     sanitize: false
   };
   files = [];
+  selectedAssociateTicket: Ticket;
   selectedCompany: Company;
   selectedAssignedUsers = [];
   selectedType: CompanySetting;
@@ -168,9 +170,10 @@ export class TasksAddComponent implements OnInit, OnDestroy {
         type: res.type,
         taskStatus: res.taskStatus,
         companyId: res.companyId,
-        description: res.description
+        description: res.description,
+        associatedTicketId: res.ticket ? res.ticket.id : undefined
       })
-
+      if (res.ticket) this.selectedAssociateTicket = res.ticket;
       if (res.companyId) this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id == res.companyId);
       this.selectedType = this.listTypes.find(item => item.value === res.type);
       if (res.assignedUsersIds) this.selectedAssignedUsers = this.usersStateService.getAllUsers().filter(user => res.assignedUsersIds.some(item => item == user.id));
@@ -195,6 +198,7 @@ export class TasksAddComponent implements OnInit, OnDestroy {
     this.activeTab = data['nextId'];
   }
   public setAssociatedTicketId(data) {
+    this.selectedAssociateTicket = data;
     this.modelForm.controls["associatedTicketId"].setValue(data ? data.id : null)
   }
   public getServices() {

@@ -10,6 +10,7 @@ import { USERS } from 'src/app/const/emails';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { Ticket } from 'src/app/components/tickets/class/ticket';
 
 @Component({
   selector: 'app-tickets-table-item-requested-by',
@@ -18,6 +19,7 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
   providers: [TicketsListService]
 })
 export class TicketsTableItemRequestedByComponent {
+  @Input() ticket: Ticket;
   @Input() requestedUser: User;
   @Input() indexNoAvatar: number = 0;
   @Input() listColorNoAvatar = [];
@@ -75,10 +77,12 @@ export class TicketsTableItemRequestedByComponent {
     this.cd.markForCheck();
   }
   createTask(taskType) {
+    console.log('this.requestedUser', this.requestedUser);
     this.typeDropDown = "TASK";
     this.taskType = taskType;
     if (this.requestedUser.customerCompaniesInfo.length > 1) this.dp.open();
     if (this.requestedUser.customerCompaniesInfo.length == 1) this.onSelectCompanyInfoForCreateTask(this.requestedUser.customerCompaniesInfo[0]);
+    if (this.requestedUser.customerCompaniesInfo.length == 0 && this.requestedUser.accountType == "TECH") this.onSelectCompanyInfoForCreateTask({ companyId: this.ticket.companyId });
   }
   onSelectCompanyInfoForCreateTask(item) {
     this.dp.close();
@@ -94,9 +98,9 @@ export class TicketsTableItemRequestedByComponent {
     let endDate = new Date(startDate.getTime() + step * 60000);
 
     this.tasksStateService.openAddAsideFromShortVersion({
-      title: `${this.taskType == 'To do' ? 'To do - ' : 'Meeting - '}${this.requestedUser.firstName} ${this.requestedUser.lastName}`,
+      title: this.requestedUser.accountType == "TECH" ? `Ticket #${this.ticket.number} - ${this.ticket.subject}` : `${this.taskType == 'To do' ? 'To do - ' : 'Meeting - '}${this.requestedUser.firstName} ${this.requestedUser.lastName}`,
       startDate: startDate.getTime(),
-      description: `${this.requestedUser.firstName} ${this.requestedUser.lastName} <br>
+      description: this.requestedUser.accountType == "TECH" ? '' : `${this.requestedUser.firstName} ${this.requestedUser.lastName} <br>
       ${this.requestedUser.primaryEmail} <br>
       ${this.getPrimaryPhoneNumber()}`,
       endDate: endDate.getTime(),
@@ -106,7 +110,8 @@ export class TicketsTableItemRequestedByComponent {
       companyId: item.companyId,
       associatedTicketId: undefined,
       dueDate: undefined,
-      attachFileIds: []
+      attachFileIds: [],
+      ticket: this.ticket
     });
   }
   createTicket() {
@@ -114,5 +119,7 @@ export class TicketsTableItemRequestedByComponent {
     console.log("this.requestedUser.customerCompaniesInfo", this.requestedUser.customerCompaniesInfo);
     if (this.requestedUser.customerCompaniesInfo.length > 1) this.dp.open();
     if (this.requestedUser.customerCompaniesInfo.length == 1) this.onSelectCompanyInfo(this.requestedUser.customerCompaniesInfo[0]);
+    //  if (this.requestedUser.customerCompaniesInfo.length == 0 && this.requestedUser.accountType == "TECH") this.onSelectCompanyInfo({ companyId: this.ticket.companyId, clientCompanyName: this.companiesState.getCompanies().find(item => item.id == this.ticket.companyId).name });
+
   }
 }
