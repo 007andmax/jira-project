@@ -74,11 +74,11 @@ export class InvoiceSettingsComponent implements OnInit {
       enableContactSending: [false],
       firstName: [
         { value: '', disabled: this.isDisable },
-        [Validators.required, Validators.minLength(2), Validators.maxLength(15)]
+        [Validators.required, Validators.minLength(2), Validators.maxLength(100)]
       ],
       lastName: [
         '',
-        [Validators.maxLength(15)]
+        [Validators.maxLength(100)]
       ],
       taxId: [
         '',
