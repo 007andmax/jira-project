@@ -12,6 +12,8 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketsPermissionsService } from '../ticket-edit-aside/services/tickets-permissions.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { AppStateService } from 'src/app/states/app/app-state.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-tickets-header',
@@ -46,6 +48,8 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     private ticketsService: TicketsService,
     private usersStateService: UsersStateService,
     public ticketsPermissionsService: TicketsPermissionsService,
+    private appStateService: AppStateService,
+    private toastrService: ToastrService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -180,6 +184,8 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
       this.ticketsStateService.getTicketsForMerge().filter(item => this.ticketsPermissionsService.isActionVisible('claim_ticket', item, null, null)).map(item => this.ticketsService.assignUserToTicket(item.id, currentUser.id))
     )
       .subscribe(result => {
+        this.toastrService.success("The ticket has been claimed");
+        this.appStateService.changeDetectorRef();
         this.claimTicketsBtn.setDisabled(false);
         this.ticketsStateService.getTicketsForMerge().filter(item => this.ticketsPermissionsService.isActionVisible('claim_ticket', item, null, null)).forEach(item => {
           const index = this.ticketsStateService.getTicketsForMerge().findIndex(tikcet => tikcet.id == item.id);
