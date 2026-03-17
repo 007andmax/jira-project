@@ -51,7 +51,8 @@ export class TicketsTableItemRequestedByComponent {
     this.ticketsStateService.addTicketWithSelectedUser.next({
       company: this.companiesState.getCompanies().find(item => item.id == companyInfo.companyId),
       customerCompaniesInfo: companyInfo,
-      user: this.requestedUser.accountType == "TECH" ? null : this.requestedUser
+      user: this.requestedUser.accountType == "TECH" ? null : this.requestedUser,
+      techUser: this.requestedUser.accountType == "TECH" ? this.requestedUser : this.usersStateService.getCurrentUser()
     })
   }
   copy(value) {
@@ -104,7 +105,7 @@ export class TicketsTableItemRequestedByComponent {
       ${this.requestedUser.primaryEmail} <br>
       ${this.getPrimaryPhoneNumber() ? this.getPrimaryPhoneNumber() : ''}`,
       endDate: endDate.getTime(),
-      assignedUsersIds: [this.usersStateService.getCurrentUser().id],
+      assignedUsersIds: [this.requestedUser.accountType == "TECH" ? this.requestedUser.id : this.usersStateService.getCurrentUser().id],
       type: this.taskType,
       taskStatus: "OPEN",
       companyId: item.companyId,

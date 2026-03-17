@@ -111,7 +111,7 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.selectedCompany = data.company;
       this.selectedCustomerCompany = data.customerCompaniesInfo;
       this.selectedUser = data.user;
-      this.selectedTechUser = this.usersStateService.getCurrentUser();
+      this.selectedTechUser = data.techUser;
       this.opened = true;
       this.getTicketPriority();
       this.getColors();

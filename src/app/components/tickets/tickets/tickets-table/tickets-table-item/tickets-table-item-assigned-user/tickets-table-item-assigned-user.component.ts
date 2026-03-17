@@ -74,7 +74,7 @@ export class TicketsTableItemAssignedUserComponent {
         return item.id;
       })
       this.ticketsService.addAssignUsers(this.ticket.id, ids).subscribe(data => {
-        this.toastrService.success("The tech user has been added");
+        this.toastrService.success("The assignee list has been changed");
         this.appStateService.changeDetectorRef();
       })
     }
