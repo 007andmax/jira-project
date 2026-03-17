@@ -17,7 +17,7 @@ class="qt-w100"
     ></app-tickets-table-item-requested-by>
     </ng-template
 >
-        <div class="qt-df" [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null),'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}" ngbDropdownToggle    *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers"
+        <div class="qt-df" [ngClass]="{'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"      *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers"
       >
             <div
                 class="qt-table-modern__circle-avatar"
@@ -32,6 +32,8 @@ class="qt-w100"
                 (mouseenter)="openPopover(p,assignedUser)"
                 (mouseleave)="startCloseTimer(p,assignedUser)"
                 [disablePopover]="!assignedUser"
+                ngbDropdownAnchor
+                (click)="showDropDown()"
                 ></div>
             <div
                 class="ellipsis"
@@ -44,7 +46,7 @@ class="qt-w100"
          ngbDropdownToggle
            >
         </div>
-         <div class="qt-df multi-assign-user-container" [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null),'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}" ngbDropdownToggle  *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0" >
+         <div class="qt-df multi-assign-user-container" [ngClass]="{'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}" ngbDropdownAnchor *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0" >
             <ng-template
                 ngFor
                 let-user
@@ -77,6 +79,7 @@ class="qt-w100"
                 (mouseenter)="openPopover(pM,getUserById(user.id))"
                 (mouseleave)="startCloseTimer(pM,getUserById(user.id))"
                 [disablePopover]="!getUserById(user.id)"
+                  (click)="showDropDown()"
                 ></div>
             </ng-template>
             <div

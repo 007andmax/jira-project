@@ -1,4 +1,4 @@
-import { Component, Input, QueryList, ViewChildren } from '@angular/core';
+import { Component, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Ticket } from 'src/app/components/tickets/class/ticket';
 import { User } from 'src/app/components/users/class/user';
 import { TicketsListService } from '../../../services/tickets-list.service';
@@ -6,7 +6,7 @@ import { CurrentUser } from 'src/class/current-user/current-user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketsPermissionsService } from '../../../ticket-edit-aside/services/tickets-permissions.service';
-import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -26,7 +26,7 @@ export class TicketsTableItemAssignedUserComponent {
   @Input() indexNoAvatar: number = 0;
   @Input() listAssignedUser: Array<CurrentUser> = [];
   @ViewChildren("pM", { emitDistinctChangesOnly: false }) pM: QueryList<NgbPopover>;
-
+  @ViewChild("assignedUserDp", { static: false }) assignedUserDp: NgbDropdown;
   private closeTimer: any;
   private openTimer: any;
   constructor(public ticketsListService: TicketsListService,
@@ -99,6 +99,9 @@ export class TicketsTableItemAssignedUserComponent {
   }
   getUserById(id) {
     return this.usersStateService.getAllUsers().find(item => item.id == id);
+  }
+  showDropDown() {
+    if (this.ticketsPermissionsService.isActionVisible('update', this.ticket, null, null)) this.assignedUserDp.open();
   }
   openPopover(popover: any, user): void {
     console.log("this.popContentM", this.pM);
