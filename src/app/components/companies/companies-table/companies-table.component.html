@@ -18,15 +18,16 @@
     >
         <a
             href
-            class="link-style"
+             class="link-style"
             [link]="getCompanyDashboardLink()"
             target="_blank"
             appRightClickBlank
         >
             <div class="qt-df qt-ai-c">
                 <div
-                    class="circle-avatar qt-mr-10"
+                    class="circle-avatar qt-mr-8"
                     [ngClass]="{'with-logo': checkLogo()}"
+                     [ngStyle]="{'background': ticketsListService.getStyleAvatar(primaryContact,listColorNoAvatar[indexNoAvatar]) }"
                 >
                     <img
                         [src]="companiesStateService.getCompanyLogoUrl(company)"
@@ -34,18 +35,29 @@
                         *ngIf="checkLogo()"
                     >
                     <span
+                    class="qt-fs-13 qt-fw-500"
                         *ngIf="!checkLogo()"
                         [textContent]="company.name[0].toUpperCase()"
                     ></span>
                 </div>
                 <div class="mob-styles">
-                    <p
-                        class="qt-fw-500"
+                    <div
+                        placement="top"
+                        [ngbTooltip]="company.name"
+                        class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 qt-mb-4"
                         [textContent]="company.name"
-                    ></p>
+                    ></div>
+                       <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="primaryAddress.phoneNumbers"
+                        [ngForTrackBy]="trackById"
+                    >
+                       <div class="qt-fs-12 qt-fw-400 qt-color-gray-500" [textContent]="item.number"></div>
+                    </ng-template>
                 </div>
             </div>
-        </a>
+                </a>
     </div>
     <div
         (click)="goToDashboard()"
@@ -62,20 +74,6 @@
         </a>
     </div>
     <div
-        class="companies-table__address pointer"
-        (click)="goToDashboard()"
-    >
-        <a
-            href
-            class="link-style"
-            [link]="getCompanyDashboardLink()"
-            target="_blank"
-            appRightClickBlank
-            [textContent]="location"
-        >
-        </a>
-    </div>
-    <div
         class="companies-table__primary-contact pointer"
         (click)="goToDashboard()"
     >
@@ -86,7 +84,36 @@
             target="_blank"
             appRightClickBlank
         >
-            <div class="mobile__primary-contact">
+        <div class="qt-df qt-ai-c">
+                <div
+                    class="qt-table-modern__circle-avatar"
+                    [ngClass]="!usersStateService.getNameForAvatar(primaryContact).length ? 'transparent-text' : ''"
+                    [textContent]="usersStateService.getNameForAvatar(primaryContact)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(primaryContact,listColorNoAvatar[indexNoAvatar]) }"
+                ></div>
+                <div class="mob-styles">
+                      <app-dynamic-tooltip
+                        [content]="getUserName()"
+                        [position]="'top'"
+                        #primaryContactNameTooltip
+                    ></app-dynamic-tooltip>
+                   <div
+                    (mouseenter)="primaryContactNameTooltip.show($event.target)"
+                    (mouseleave)="primaryContactNameTooltip.hide()"
+                    [textContent]="getUserName()"
+                    class="ellipsis qt-fw-500 qt-fs-14 qt-color-gray-900 qt-mb-8"
+                ></div>
+                  <app-dynamic-tooltip
+                                                [content]="(primaryContact) ? primaryContact.primaryEmail : ''"
+                                                [position]="'top'"
+                                                #primaryContactTooltip
+                                            ></app-dynamic-tooltip>
+                       <div     (mouseenter)="primaryContactTooltip.show($event.target)"
+                                                (mouseleave)="primaryContactTooltip.hide()"
+                                                 class="ellipsis qt-fs-12 qt-fw-400 qt-color-gray-500" [textContent]="(primaryContact) ? primaryContact.primaryEmail : ''"></div>
+                </div>
+            </div>
+          <!--  <div class="mobile__primary-contact">
                 <p
                     class="name"
                     [textContent]="getUserName()"
@@ -95,21 +122,7 @@
                     *ngIf="primaryPhone && primaryPhone.number"
                     [number]="primaryPhone.number"
                 ></preview-phone-mask>
-            </div>
-        </a>
-    </div>
-    <div
-        (click)="goToDashboard()"
-        class="companies-table__email-address pointer"
-    >
-        <a
-            href
-            class="link-style"
-            [link]="getCompanyDashboardLink()"
-            target="_blank"
-            appRightClickBlank
-            [textContent]="(primaryContact) ? primaryContact.primaryEmail : ''"
-        >
+            </div>-->
         </a>
     </div>
     <div

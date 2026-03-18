@@ -1079,10 +1079,10 @@ app-quotes-item {
       flex: 0 0 52px;
     }
     &__name {
-      flex: 2 1 290px;
+      flex: 2 1 416px;
 
       @include media-breakpoint-up($md) {
-        flex: 0 0 250px;
+        flex: 0 0 416px;
       }
       @include media-breakpoint-up($lg) {
         flex: 2 1 290px;
@@ -1120,7 +1120,7 @@ app-quotes-item {
       }
     }
     &__primary-contact {
-      flex: 1 1 160px;
+      flex: 1 0 248px;
 
       @include media-breakpoint-up($lg) {
         flex: 1 0 230px;
@@ -1165,7 +1165,7 @@ app-quotes-item {
       }
     }
       &__client-type {
-      flex: 0 0 80px;
+      flex: 0 0 153px;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;

@@ -43,7 +43,7 @@ import { PreviewPhoneMaskModule } from '../shared/preview-phone-mask/preview-pho
         DropDownModule,
         CompanyTagsModule,
         RightClickBlankModule,
-        PreviewPhoneMaskModule
+        PreviewPhoneMaskModule,
     ],
 
 

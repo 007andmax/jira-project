@@ -17,18 +17,22 @@ import { CompanyItem } from '../class/company-item';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompanyDeviceCount } from '../class/company-device-count';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 
 @Component({
   selector: 'app-companies-table',
   templateUrl: './companies-table.component.html',
   styleUrls: ['./companies-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [TicketsListService]
 })
 export class CompaniesTableComponent implements OnInit, OnDestroy {
   @Input() company: CompanyItem;
   @Input() public showArchivedCompanies: boolean = false;
   @Input() devicesCounts: Array<CompanyDeviceCount> = [];
   @Output() onSelectCompany = new EventEmitter<any>();
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   public primaryContact: CompanyAndressContact;
   public primaryAddress: CompanyAndress;
   public primaryPhone: any;
@@ -36,7 +40,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   public countUsers: number = 0;
   public countDevices: number = 0;
   sub: Subscription = new Subscription();
-  constructor(private usersStateService: UsersStateService,
+  constructor(public usersStateService: UsersStateService,
     public companiesStateService: CompaniesStateService,
     private modalService: NgbModal,
     private confirmStateService: ConfirmStateService,
@@ -45,9 +49,12 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private draftEmailStateService: DraftEmailStateService,
     public customerPortalStateService: CustomerPortalStateService,
+    public ticketsListService: TicketsListService,
     private permissionsService: PermissionsService) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     if (this.usersStateService.getAllUsers().length > 0) this.onGetUsersCount(this.usersStateService.getAllUsers());
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.showArchivedCompanies = false;
@@ -172,6 +179,9 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+  public trackById(index, item) {
+    return item.id;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
