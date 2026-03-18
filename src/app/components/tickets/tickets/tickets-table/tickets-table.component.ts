@@ -149,7 +149,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     } else {
       this.sortBy.sortDirection = 'desc';
     }
-    console.log("this.sortBy", this.sortBy);
     this.ticketsStateService.changeFilterField(data);
   }
   editTicket(id) {
