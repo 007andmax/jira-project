@@ -90,6 +90,9 @@ export class CannedResponsesAsideComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(onCopyNote);
+    this.noteService.getKeywords().subscribe((data: any) => {
+      this.noteStateService.setKeywords(data);
+    });
   }
   restoreFocus(
   ) {
