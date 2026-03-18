@@ -35,7 +35,7 @@ export class TicketsFilter {
         new CompanyFilterTop('subject', ''),
         new CompanyFilterTop('status', ''),
         new CompanyFilterTop('created_date', ''),
-        new CompanyFilterTop('last_updated', '')];
+        new CompanyFilterTop('last_updated_date', '')];
     searchText = "";
     customDateRange: string = null;
     startDate: string = null;
@@ -154,7 +154,7 @@ export class TicketsFilter {
                     this.sortBy = 'CREATED_DATE_DESC';
                 }
             }
-            if (field === 'last_updated') {
+            if (field === 'last_updated_date') {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
                     this.filter[index].filter = 'ASC';

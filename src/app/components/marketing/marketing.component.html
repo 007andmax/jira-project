@@ -41,6 +41,10 @@
                         >
                             Name
                             <span class="qt-table-modern__sorting"></span>
+                            <div *ngIf="sortBy.sortBy == 'NAME'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'desc', 'icon__arrow_narrow_up': sortBy.sortDirection === 'asc'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                         </div>
                         <div class="users-table__company">Company</div>
                         <div class="users-table__industry">Job Title</div>
