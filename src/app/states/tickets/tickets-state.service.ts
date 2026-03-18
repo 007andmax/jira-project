@@ -36,6 +36,7 @@ export class TicketsStateService {
   colorStatus: EventEmitter<any> = new EventEmitter();
   count: EventEmitter<number> = new EventEmitter();
   toggleAddTicket: EventEmitter<any> = new EventEmitter();
+  addTicketWithSelectedUser: EventEmitter<any> = new EventEmitter();
   typeFilter: EventEmitter<any> = new EventEmitter();
   tagsFilter: EventEmitter<any> = new EventEmitter();
   onGetTicketsStatus: EventEmitter<any> = new EventEmitter();
@@ -56,6 +57,7 @@ export class TicketsStateService {
   listTicketsPrioritiesForRemove: Array<TicketsPriority> = [];
   ticketsForMerge: Array<Ticket> = [];
   onMegeTickets: EventEmitter<any> = new EventEmitter();
+  onClaimTickets: EventEmitter<any> = new EventEmitter();
   actualNumber: string;
   constructor(private ticketsRealTimeService: TicketsRealTimeService,
     private ticketsService: TicketsService) { }
@@ -139,6 +141,9 @@ export class TicketsStateService {
   }
   public mergeTicket() {
     this.onMegeTickets.emit(null);
+  }
+  public claimTickets() {
+    this.onClaimTickets.emit(null);
   }
   public addTicketForMerge(data) {
     this.ticketsForMerge.push(data);

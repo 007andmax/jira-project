@@ -1,0 +1,164 @@
+<div
+class="qt-w100"
+           ngbDropdown
+        [autoClose]="'outside'"
+        [placement]="'bottom-left'"
+        #assignedUserDp="ngbDropdown"
+        [container]="'body'"
+        (openChange)="onCloseDropDown($event,userInput)"
+    >
+       <ng-template #popContent let-greeting="greeting"
+	>
+    <app-tickets-table-item-requested-by  
+    [requestedUser]="assignedUser"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    [ticket]="ticket"
+    ></app-tickets-table-item-requested-by>
+    </ng-template
+>
+        <div class="qt-df" [ngClass]="{'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"      *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers"
+      >
+            <div
+                class="qt-table-modern__circle-avatar"
+                [textContent]="getAssignedUserNameForAvatar(assignedUser)"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(assignedUser,listColorNoAvatar[indexNoAvatar])}"
+            [ngbPopover]="popContent"
+                [popoverClass]="'requested-by-popover'"
+                 [autoClose]="'outside'"
+                 [container]="'body'"
+                #p="ngbPopover"
+                triggers="manual"
+                (mouseenter)="openPopover(p,assignedUser)"
+                (mouseleave)="startCloseTimer(p,assignedUser)"
+                [disablePopover]="!assignedUser"
+                ngbDropdownAnchor
+                (click)="showDropDown()"
+                ></div>
+            <div
+                class="ellipsis"
+                [textContent]="getUserName(assignedUser)"
+                  (click)="showDropDown()"
+            ></div>
+        </div>
+          <div
+           *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || !ticket.assignedUserId && !ticket.multiAssignedUsers"
+            class="placeholder-detail-ticket app-mat-tags-without-border__placeholder" [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null),'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
+         ngbDropdownToggle
+           >
+        </div>
+         <div class="qt-df multi-assign-user-container" [ngClass]="{'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}" ngbDropdownAnchor *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0" >
+            <ng-template
+                ngFor
+                let-user
+                let-i="index"
+                [ngForOf]="ticket.multiAssignedUsers"
+                [ngForTrackBy]="trackById"
+            >
+                 <ng-template #popContentM 
+	>
+    <app-tickets-table-item-requested-by  
+    [requestedUser]="getUserById(user.id)"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    [ticket]="ticket"
+    ></app-tickets-table-item-requested-by>
+    </ng-template
+>
+                <div
+                    class="qt-table-modern__circle-avatar multi-assign-user"
+                    *ngIf="i < 5"
+                    [textContent]="getAssignedUserNameForAvatar(user)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) ,
+                'left': getStyleNetAvatar(i)}"
+                     [ngbPopover]="popContentM"
+                [popoverClass]="'requested-by-popover'"
+                 [autoClose]="'outside'"
+                 [container]="'body'"
+                #pM="ngbPopover"
+                triggers="manual"
+                (mouseenter)="openPopover(pM,getUserById(user.id))"
+                (mouseleave)="startCloseTimer(pM,getUserById(user.id))"
+                [disablePopover]="!getUserById(user.id)"
+                  (click)="showDropDown()"
+                ></div>
+            </ng-template>
+            <div
+                class="more-users qt-table-modern__circle-avatar"
+                [ngbTooltip]="tipContent"
+                [container]="'body'"
+                *ngIf="ticket.multiAssignedUsers.length > 5"
+                [ngStyle]="{'left': getStyleNetAvatar(5)}"
+            >
+                <span [textContent]="'+' + (ticket.multiAssignedUsers.length - 5)"></span>
+            </div>
+        </div>
+        <ng-template #tipContent>
+            <ng-template
+                ngFor
+                let-user
+                let-i="index"
+                [ngForOf]="ticket.multiAssignedUsers"
+                [ngForTrackBy]="trackById"
+            >
+                <div
+                    class="qt-df qt-ai-c qt-mb-8"
+                    *ngIf="i >= 5"
+                >
+                    <div
+                        class="tooltip__circle-avatar"
+                        [textContent]="getAssignedUserNameForAvatar(user)"
+                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) }"
+                    ></div>
+                    <span
+                        class="qt-ml-8"
+                        [textContent]="user.firstName + ' ' + user.lastName"
+                    ></span>
+                </div>
+            </ng-template>
+        </ng-template>
+  <div
+            class="autocomplete-user-tags"
+            ngbDropdownMenu
+            aria-labelledby="dropdown"
+        >
+            <div
+                class="qt-input-search"
+            >
+                <input
+                    #userInput
+                    id="search-user"
+                    class="pointer"
+                    (input)="onSearchUser($event)"
+                    placeholder="Search Users"
+                >
+            </div>
+            <div class="autocomplete-container">
+                <app-mat-chip
+                    class="qt-ai-c pointer"
+                    *ngFor="let user of users"
+                    (click)="selectAssignedUser(user,userInput)"
+                >
+                    <div class="assigne-user-item">
+                        <div
+                            class="assigne-user-avatar"
+                            [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                            [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                        ></div>
+                        <div
+                            class="assigne-user-name"
+                            [textContent]="getUserName(user)"
+                        ></div>
+                        <span
+                            class="assigne-user-email"
+                            [textContent]="user.primaryEmail"
+                        ></span>
+                        <i
+                            *ngIf="isSelected(user)"
+                            class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain qt-ml-auto"
+                        ></i>
+                    </div>
+                </app-mat-chip>
+            </div>
+        </div>
+    </div> 

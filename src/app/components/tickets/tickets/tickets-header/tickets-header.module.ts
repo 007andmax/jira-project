@@ -10,6 +10,8 @@ import { TicketsFilterInfoComponent } from './tickets-filter-info/tickets-filter
 import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
 import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
 import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
 
 @NgModule({
     declarations: [
@@ -27,6 +29,8 @@ import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat
         MatChipModule,
         MatFormFieldModule,
         MatChipListModule,
+        DisabledBtnModule,
+        PreloaderTicketModule
     ],
     exports: [TicketsHeaderComponent]
 

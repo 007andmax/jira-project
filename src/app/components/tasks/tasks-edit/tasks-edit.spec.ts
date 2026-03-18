@@ -21,6 +21,7 @@ import { TasksDatePickerComponent } from '../tasks-date-picker/tasks-date-picker
 import { TasksDatePickerModule } from '../tasks-date-picker/tasks-date-picker.module';
 import { TasksEditComponent } from './tasks-edit.component';
 import { CompanySetting } from '../../companies/class/company-setting';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 
 describe('TasksEditComponent unit test', () => {
@@ -49,6 +50,7 @@ describe('TasksEditComponent unit test', () => {
         ClickOutsideModule,
         ClickOutsideModule,
         HttpClientModule,
+        HttpClientTestingModule,
         ToastrModule.forRoot({
           closeButton: true,
           timeOut: 5000,

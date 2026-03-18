@@ -45,7 +45,7 @@
     ></div>
     <div
         class="billable-payment-table__reference pointer"
-        [textContent]="payment.reference"
+        [textContent]="(payment.paymentMethod == 'DEBIT_CARD' || payment.paymentMethod == 'CREDIT_CARD') ? payment.transactionId : payment.reference"
         (click)="showDetailsPayment()"
     ></div>
     <div class="billable-payment-table__payment">

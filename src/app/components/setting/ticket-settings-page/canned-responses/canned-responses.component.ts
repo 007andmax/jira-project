@@ -58,10 +58,16 @@ export class CannedResponsesComponent implements OnInit {
         let index = this.noteTemplate.findIndex(item => item.id === data.data);
         if (index > -1) this.noteTemplate.splice(index, 1);
       }
+      this.noteTemplate.sort((a, b) => this.sort === 'DESC' ?
+        (a.title.toLowerCase() < b.title.toLowerCase()) ? 1 : ((b.title.toLowerCase() < a.title.toLowerCase()) ? -1 : 0) :
+        (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
       this.noteStateService.setNoteTemplate(this.noteTemplate);
       this.cd.detectChanges();
     })
     this.sub.add(changeNoteArray);
+    this.noteService.getKeywords().subscribe((data: any) => {
+      this.noteStateService.setKeywords(data);
+    });
   }
   getNoteList() {
     this.showPreloader = true;

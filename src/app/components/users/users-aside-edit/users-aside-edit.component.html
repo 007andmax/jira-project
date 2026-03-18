@@ -56,7 +56,7 @@
                     <input
                         type="text"
                         minlength="2"
-                        maxlength="30"
+                        maxlength="100"
                         (blur)="onChangeFistname()"
                         [(ngModel)]="user.firstName"
                         placeholder="Enter First Name"
@@ -76,6 +76,7 @@
                         type="text"
                         [(ngModel)]="user.lastName"
                         placeholder="Enter Last Name"
+                        maxlength="100"
                     >
                 </div>
             </div>

@@ -31,14 +31,17 @@ export class NoteService {
   public removeNoteTemplate(id) {
     return this.http.delete(`${this.apiUrl}noteTemplates/${id}`);
   }
+  public getKeywords() {
+    return this.http.get(`${this.apiUrl}noteTemplates/keywords`);
+  }
   public addNoteTemplate(data) {
     return this.http.post(`${this.apiUrl}noteTemplates`, data);
   }
   public editNoteTemplate(id, data) {
     return this.http.put(`${this.apiUrl}noteTemplates/${id}`, data);
   }
-  public getNoteTemplate(id) {
-    return this.http.get(`${this.apiUrl}noteTemplates/${id}`);
+  public getNoteTemplate(id, ticketId = null) {
+    return this.http.get(`${this.apiUrl}noteTemplates/${id}${ticketId ? `?ticketId=${ticketId}` : ''}`);
   }
 
   public getNotesTemplates(sort) {

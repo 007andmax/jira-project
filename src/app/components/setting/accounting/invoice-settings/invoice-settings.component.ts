@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../../../../services/accounting/accounting-settings.service';
 import { ToastrService } from 'ngx-toastr';
@@ -8,6 +8,7 @@ import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { InvoiceSettings } from './class/invoice-settings';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-invoice-settings',
@@ -23,7 +24,7 @@ export class InvoiceSettingsComponent implements OnInit {
   invoiceTerm: any;
   paymentMethod: any;
   primaryPhoneType;
-  secondaryPhoneType = new TitleListType("Office", "OFFICE");
+  secondaryPhoneType = new TitleListType("Mobile", "MOBILE");
   phoneTypes = [new TitleListType("Mobile", "MOBILE"),
   new TitleListType("Office", "OFFICE"),
   new TitleListType("Fax", "FAX")];
@@ -43,6 +44,7 @@ export class InvoiceSettingsComponent implements OnInit {
   @Input() termInput: any;
   @Input() conditionInput: any;
   invoiceSettings: InvoiceSettings;
+  @ViewChild('primaryPhoneTypeDd', { static: true }) primaryPhoneTypeDd: DropDownComponent;
   constructor(
     private formBuilder: UntypedFormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
@@ -72,11 +74,11 @@ export class InvoiceSettingsComponent implements OnInit {
       enableContactSending: [false],
       firstName: [
         { value: '', disabled: this.isDisable },
-        [Validators.required, Validators.minLength(2), Validators.maxLength(15)]
+        [Validators.required, Validators.minLength(2), Validators.maxLength(100)]
       ],
       lastName: [
         '',
-        [Validators.maxLength(15)]
+        [Validators.maxLength(100)]
       ],
       taxId: [
         '',
@@ -221,8 +223,9 @@ export class InvoiceSettingsComponent implements OnInit {
   onAddPhone() {
     this.isAddPhone = !this.isAddPhone;
     if (this.isAddPhone) {
+      this.secondaryPhoneType = new TitleListType("Mobile", "MOBILE")
       this.invoiceForm.patchValue({
-        secondaryPhoneType: 'OFFICE'
+        secondaryPhoneType: 'MOBILE'
       });
     } else {
       this.invoiceForm.patchValue({
@@ -252,6 +255,19 @@ export class InvoiceSettingsComponent implements OnInit {
         this.invoiceForm.controls[controlName][state](); // disables/enables each form control based on 'this.formDisabled'
       }
     });
+    this.invoiceForm.patchValue({
+      firstName: '',
+      lastName: '',
+      email: '',
+      designation: '',
+      primaryPhone: '',
+      secondaryPhone: '',
+      secondaryPhoneType: '',
+      secondaryId: ''
+    });
+    this.secondaryPhoneType = null;
+    this.isAddPhone = false;
+
   }
   onEnableOwnerSending(data) {
     this.invoiceForm.patchValue({

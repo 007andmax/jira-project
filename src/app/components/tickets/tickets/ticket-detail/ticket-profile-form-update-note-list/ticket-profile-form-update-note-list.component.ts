@@ -4,6 +4,7 @@ import { NoteTemplate } from 'src/app/components/setting/ticket-settings-page/ca
 import { NoteService } from 'src/app/services/note/note.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { NoteStateService } from 'src/app/states/note/note-state.service';
+import { TicketProfile } from '../../class/ticket-profile';
 
 @Component({
   selector: 'ticket-profile-form-update-note-list',
@@ -11,6 +12,7 @@ import { NoteStateService } from 'src/app/states/note/note-state.service';
   styleUrls: ['./ticket-profile-form-update-note-list.component.scss']
 })
 export class TicketProfileFormUpdateNoteListComponent implements OnInit, OnDestroy {
+  @Input() ticketProfile: TicketProfile = new TicketProfile();
   noteTemplate: Array<NoteTemplate> = [];
   @Output() onSelected = new EventEmitter();
   sub: Subscription = new Subscription();
@@ -43,7 +45,7 @@ export class TicketProfileFormUpdateNoteListComponent implements OnInit, OnDestr
     }
   }
   onSelect(item) {
-    this.noteService.getNoteTemplate(item.id).subscribe((data: any) => {
+    this.noteService.getNoteTemplate(item.id, this.ticketProfile.id).subscribe((data: any) => {
       this.onSelected.emit(data.note);
     })
 

@@ -5,7 +5,7 @@
     >
         <div class="qt-page-list__header-thead-container"></div>
         <div
-            class="qt-page-list__body-table-container"
+            class="qt-page-list__body-table-container qt-pos-rel"
             [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}"
         >
             <div class="qt-page-list__body-tbody qt-table-modern my-tasks-table">
@@ -25,7 +25,7 @@
                             [ngForOf]="list"
                             [ngForTrackBy]="trackById"
                         >
-                            <app-tasks-list-item [item]="item"></app-tasks-list-item>
+                            <app-tasks-list-item #itemRef [item]="item"></app-tasks-list-item>
                         </ng-template>
                     </div>
                 </div>

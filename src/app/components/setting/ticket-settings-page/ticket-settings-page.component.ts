@@ -15,6 +15,7 @@ import { TicketSettingsComponent } from './ticket-settings/ticket-settings.compo
 import { TicketsStatusComponent } from './tickets-status/tickets-status.component';
 import { TicketsPriorityComponent } from './tickets-priority/tickets-priority.component';
 import { fadeInAnimation } from 'src/app/animations';
+import { NoteService } from 'src/app/services/note/note.service';
 declare var $: any;
 @Component({
   selector: 'ticket-settings-page',
@@ -39,6 +40,7 @@ export class TicketSettingsPageComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     private noteStateService: NoteStateService,
     private ticketsStateService: TicketsStateService,
+    private noteService: NoteService,
     private settingStateService: SettingStateService) { }
 
   ngOnInit() {

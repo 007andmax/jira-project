@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NoteService } from 'src/app/services/note/note.service';
 import { NoteStateService } from 'src/app/states/note/note-state.service';
@@ -56,19 +56,25 @@ export class CannedResponsesAsideComponent implements OnInit, OnDestroy {
 
   };
   opened: boolean = false;
+  showKeywords: boolean = false;
+  keywords = [];
+  @ViewChild('editorWrap', { static: false }) editorWrap!: ElementRef<HTMLElement>;
   sub: Subscription = new Subscription();
   constructor(private noteStateService: NoteStateService,
     public cd: ChangeDetectorRef,
+    private elRef: ElementRef,
     private noteService: NoteService) { }
 
 
   ngOnInit() {
     let onOpenAddAside = this.noteStateService.onOpenAddAside.subscribe(data => {
+      this.keywords = this.noteStateService.keywords;
       this.opened = true;
       this.cd.detectChanges();
     })
     this.sub.add(onOpenAddAside);
     let onEditNote = this.noteStateService.onEditNote.subscribe(data => {
+      this.keywords = this.noteStateService.keywords;
       this.noteTemplate = new NoteTemplate(data);
       this.noteTemplate.setEditMode(true);
       this.opened = true;
@@ -77,12 +83,73 @@ export class CannedResponsesAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(onEditNote);
     let onCopyNote = this.noteStateService.onCopyNote.subscribe(data => {
+      this.keywords = this.noteStateService.keywords;
       this.noteTemplate = new NoteTemplate(data);
       this.noteTemplateValidate.setTitleIsExist(true);
       this.opened = true;
       this.cd.detectChanges();
     })
     this.sub.add(onCopyNote);
+  }
+  restoreFocus(
+  ) {
+    let el = this.elRef.nativeElement.querySelector(".angular-editor-textarea");
+    // restore focus
+    (el as HTMLElement).focus({ preventScroll: true });
+  }
+  insertAtCaret(text) {
+    var el = document.activeElement;
+    const wrap = this.editorWrap.nativeElement;
+    const editable = wrap.querySelector('.angular-editor-textarea') as HTMLElement | null;
+    if (!editable) return;
+
+    // 1) insert at caret
+    this.insertTextIntoAngularEditor(editable, text);
+
+    // 2) make angular-editor notice changes
+    editable.dispatchEvent(new InputEvent('input', { bubbles: true }));
+    editable.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));
+
+    // 3) ensure reactive form definitely gets updated
+    const htmlNow = editable.innerHTML;
+    this.noteTemplate.note = JSON.parse(JSON.stringify(this.noteTemplate.note));
+    /* const ctrl = this.templeteForm.get('body'); 
+     ctrl?.setValue(htmlNow, { emitEvent: true });
+     ctrl?.markAsDirty();
+     ctrl?.updateValueAndValidity();*/
+
+  }
+  insertTextIntoAngularEditor(editorHost: HTMLElement, text: string) {
+    // editorHost should be the contenteditable element (.angular-editor-textarea)
+    editorHost.focus();
+
+    const sel = window.getSelection();
+    if (!sel) return;
+
+    // If selection is outside editor, move caret to end
+    if (sel.rangeCount === 0 || !editorHost.contains(sel.anchorNode)) {
+      const r = document.createRange();
+      r.selectNodeContents(editorHost);
+      r.collapse(false);
+      sel.removeAllRanges();
+      sel.addRange(r);
+    }
+
+    const range = sel.getRangeAt(0);
+
+    // Replace current selection (if any) with text, leaving caret after inserted text
+    range.deleteContents();
+    const node = document.createTextNode(text);
+    range.insertNode(node);
+
+    // Move caret to after inserted text node
+    range.setStartAfter(node);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+  toggle() {
+    this.showKeywords = !this.showKeywords;
   }
   checkTitle() {
     this.noteTemplateValidate.resetTitle();
