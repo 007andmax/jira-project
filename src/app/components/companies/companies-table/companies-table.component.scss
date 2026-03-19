@@ -1,5 +1,5 @@
 @import "./src/assets/styles/variable";
-
+@import "./src/assets/styles/mixin/breakpoint";
 .company-email {
   word-break: break-all;
 }
@@ -58,6 +58,37 @@
   font-size: 13px;
   font-weight: 500;
 }
-.ellipsis {
-    max-width: 250px;
+.ellipsis-name {
+    max-width: 340px;
 }
+.ellipsis-primary-contact {
+   position: static;
+    transform: unset;
+    width: 560px;
+    flex: 1;
+}
+@include media-breakpoint-down($lg) {
+ .ellipsis-primary-contact {
+   position: static;
+    transform: unset;
+    width: 206px;
+    flex: 1;
+}
+}
+@include media-breakpoint-down($md) {
+ .ellipsis-primary-contact {
+    position : static;
+    transform: unset;
+    width: 205px;
+    flex: 1;
+}
+}
+@include media-breakpoint-down($sm) {
+ .ellipsis-primary-contact {
+    position : static;
+    transform: unset;
+    width: 205px;
+    flex: 1;
+}
+}
+

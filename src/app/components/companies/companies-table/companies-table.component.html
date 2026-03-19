@@ -43,8 +43,9 @@
                 <div class="mob-styles">
                     <div
                         placement="top"
+                        [disableTooltip]="company.name.length < 50"
                         [ngbTooltip]="company.name"
-                        class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 qt-mb-4"
+                        class="ellipsis ellipsis-name qt-fs-14 qt-fw-500 qt-color-gray-900 qt-mb-4"
                         [textContent]="company.name"
                     ></div>
                        <ng-template
@@ -85,44 +86,38 @@
             appRightClickBlank
         >
         <div class="qt-df qt-ai-c">
+               <ng-template #popContent let-greeting="greeting"
+	>
+    <app-tickets-table-item-requested-by  
+    [requestedUser]="primaryContact"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    ></app-tickets-table-item-requested-by>
+    </ng-template
+>
                 <div
                     class="qt-table-modern__circle-avatar"
                     [ngClass]="!usersStateService.getNameForAvatar(primaryContact).length ? 'transparent-text' : ''"
                     [textContent]="usersStateService.getNameForAvatar(primaryContact)"
                     [ngStyle]="{'background': ticketsListService.getStyleAvatar(primaryContact,listColorNoAvatar[indexNoAvatar]) }"
-                ></div>
+                 [ngbPopover]="popContent"
+                [popoverClass]="'requested-by-popover'"
+                 [autoClose]="'outside'"
+                 [container]="'body'"
+                #p="ngbPopover"
+                triggers="manual"
+                (mouseenter)="openPopover(p)"
+                (mouseleave)="startCloseTimer(p)"
+                [disablePopover]="!primaryContact"
+                    ></div>
                 <div class="mob-styles">
-                      <app-dynamic-tooltip
-                        [content]="getUserName()"
-                        [position]="'top'"
-                        #primaryContactNameTooltip
-                    ></app-dynamic-tooltip>
                    <div
-                    (mouseenter)="primaryContactNameTooltip.show($event.target)"
-                    (mouseleave)="primaryContactNameTooltip.hide()"
                     [textContent]="getUserName()"
-                    class="ellipsis qt-fw-500 qt-fs-14 qt-color-gray-900 qt-mb-8"
+                    class="ellipsis ellipsis-primary-contact qt-fw-500 qt-fs-14 qt-color-gray-900 qt-mb-8"
                 ></div>
-                  <app-dynamic-tooltip
-                                                [content]="(primaryContact) ? primaryContact.primaryEmail : ''"
-                                                [position]="'top'"
-                                                #primaryContactTooltip
-                                            ></app-dynamic-tooltip>
-                       <div     (mouseenter)="primaryContactTooltip.show($event.target)"
-                                                (mouseleave)="primaryContactTooltip.hide()"
-                                                 class="ellipsis qt-fs-12 qt-fw-400 qt-color-gray-500" [textContent]="(primaryContact) ? primaryContact.primaryEmail : ''"></div>
+                <div  class="ellipsis ellipsis-primary-contact qt-fs-12 qt-fw-400 qt-color-gray-500" [textContent]="(primaryContact) ? primaryContact.primaryEmail : ''"></div>
                 </div>
             </div>
-          <!--  <div class="mobile__primary-contact">
-                <p
-                    class="name"
-                    [textContent]="getUserName()"
-                ></p>
-                <preview-phone-mask
-                    *ngIf="primaryPhone && primaryPhone.number"
-                    [number]="primaryPhone.number"
-                ></preview-phone-mask>
-            </div>-->
         </a>
     </div>
     <div

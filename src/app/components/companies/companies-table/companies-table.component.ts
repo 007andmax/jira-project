@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ElementRef, 
 import { CompanyAndressContact } from 'src/app/interfaces/company/company-address-contact';
 import { CompanyAndress } from 'src/app/interfaces/company/company-address';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
@@ -18,6 +18,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { CompanyDeviceCount } from '../class/company-device-count';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'app-companies-table',
@@ -40,6 +41,8 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   public countUsers: number = 0;
   public countDevices: number = 0;
   sub: Subscription = new Subscription();
+  private closeTimer: any;
+  private openTimer: any;
   constructor(public usersStateService: UsersStateService,
     public companiesStateService: CompaniesStateService,
     private modalService: NgbModal,
@@ -50,6 +53,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     private draftEmailStateService: DraftEmailStateService,
     public customerPortalStateService: CustomerPortalStateService,
     public ticketsListService: TicketsListService,
+    private appStateService: AppStateService,
     private permissionsService: PermissionsService) { }
 
   ngOnInit() {
@@ -183,7 +187,50 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   public trackById(index, item) {
     return item.id;
   }
+  openPopover(popover: NgbPopover): void {
+    if (!this.primaryContact) return;
+    clearTimeout(this.closeTimer);
+
+    if (!popover.isOpen()) {
+      this.openTimer = setTimeout(() => {
+        popover.open();
+        this.appStateService.changeDetectorRef();
+        // Wait until popover is added to <body>
+        setTimeout(() => {
+          const popoverEl = document.querySelector('.requested-by-popover');
+
+          if (!popoverEl) {
+            return;
+          }
+
+          popoverEl.addEventListener('mouseenter', this.onPopoverMouseEnter);
+          popoverEl.addEventListener('mouseleave', () => {
+            if (!this.usersStateService.isOpenDropDownRequestedBy) popover.close();
+          });
+        });
+      }, 500);
+    }
+  }
+
+  startCloseTimer(popover: NgbPopover): void {
+    if (!this.primaryContact || this.usersStateService.isOpenDropDownRequestedBy) return;
+    clearTimeout(this.closeTimer);
+    clearTimeout(this.openTimer);
+    this.closeTimer = setTimeout(() => {
+      const popoverEl = document.querySelector('.requested-by-popover:hover');
+
+      // close only if mouse is not over popover body
+      if (!popoverEl) {
+        popover.close();
+      }
+    }, 150);
+  }
+
+  onPopoverMouseEnter = (): void => {
+    clearTimeout(this.closeTimer);
+  };
   ngOnDestroy(): void {
+    clearTimeout(this.closeTimer);
     this.sub.unsubscribe();
   }
 
