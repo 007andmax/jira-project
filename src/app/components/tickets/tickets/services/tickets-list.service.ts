@@ -81,6 +81,7 @@ export class TicketsListService {
       return (color) ? color : '#16a4fa';
     }
   };
+
   randomInteger(min, max) {
     // случайное число от min до (max+1)
     let rand = min + Math.random() * (max + 1 - min);

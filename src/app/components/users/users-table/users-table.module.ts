@@ -13,6 +13,7 @@ import { UserTableCustomSubscriptionComponent } from './user-table-custom-subscr
 import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-phone-mask.module';
 import { UserTableDefaultSubscriptionModule } from './user-table-default-subscription/user-table-default-subscription.module';
 import { UserTableCustomSubscriptionModule } from './user-table-custom-subscription/user-table-custom-subscription.module';
+import { TicketsTableItemRequestedByModule } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
 
 
 
@@ -32,7 +33,8 @@ import { UserTableCustomSubscriptionModule } from './user-table-custom-subscript
         NgbModule,
         PreviewPhoneMaskModule,
         UserTableDefaultSubscriptionModule,
-        UserTableCustomSubscriptionModule
+        UserTableCustomSubscriptionModule,
+        TicketsTableItemRequestedByModule
     ],
     exports: [UsersTableComponent]
 })
