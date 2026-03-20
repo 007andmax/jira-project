@@ -22,19 +22,19 @@
   border: unset;
   margin-bottom: 0;
   & > div {
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-bottom: 1px solid $gray-200;
     font-size: 14px;
 
     &:first-child {
-      padding-left: 25px;
+      padding-left: 16px;
       border-left: 1px solid $gray-200;
       border-radius: 0;
     }
 
     &:last-child {
-      padding-right: 25px;
+      padding-right: 16px;
       border-right: 1px solid $gray-200;
       border-radius: 0;
     }
@@ -61,34 +61,3 @@
 .ellipsis-name {
     max-width: 340px;
 }
-.ellipsis-primary-contact {
-   position: static;
-    transform: unset;
-    width: 560px;
-    flex: 1;
-}
-@include media-breakpoint-down($lg) {
- .ellipsis-primary-contact {
-   position: static;
-    transform: unset;
-    width: 206px;
-    flex: 1;
-}
-}
-@include media-breakpoint-down($md) {
- .ellipsis-primary-contact {
-    position : static;
-    transform: unset;
-    width: 205px;
-    flex: 1;
-}
-}
-@include media-breakpoint-down($sm) {
- .ellipsis-primary-contact {
-    position : static;
-    transform: unset;
-    width: 205px;
-    flex: 1;
-}
-}
-
