@@ -34,7 +34,7 @@
         <div class="qt-df qt-ai-c">
             <div
                 class="users-table__name--avatar"
-                [ngStyle]="{'background':  usersStateService.getUserAvatarUrl(user)}"
+                [ngStyle]="{'background':  ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar])}"
                 [textContent]="usersStateService.getNameForAvatar(user)"
                   [ngbPopover]="popContent"
                 [popoverClass]="'requested-by-popover'"
@@ -121,8 +121,8 @@ class="qt-w100"
             <div class="ellipsis qt-fs-14 qt-fw-400 qt-color-gray-900 qt-ml-32" *ngIf="user.customerCompaniesInfo.length == 1" [textContent]="user.customerCompaniesInfo[0].clientCompanyName"></div>
             <div
                 class="more-users qt-table-modern__circle-avatar"
+                 [tooltipClass]="'users-tooltip'"
                 [ngbTooltip]="tipContent"
-                [container]="'body'"
                 *ngIf="user.customerCompaniesInfo.length > 3"
                 [ngStyle]="{'left': getStyleNetAvatar(3)}"
             >

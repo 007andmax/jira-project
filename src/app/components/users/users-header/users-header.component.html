@@ -27,14 +27,6 @@
                     ></div>
                     <div
                         class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer qt-fs-0"
-                        *ngIf="!isExistArchiveUser()"
-                        (click)="showAsideForDraftEmail()"
-                    >
-                        <div class="qt-icon icon__email qt-icon__blue-light-600 qt-sz-16 qt-ic-c qt-mr-6"></div>
-                        <div class="qt-lh-1">Send Email</div>
-                    </div>
-                    <div
-                        class="qt-ml-20 qt-fw-500 qt-df qt-ai-c qt-color-info qt-ai-c qt-pointer qt-fs-0"
                         *ngIf="!isExistArchiveUser() && (type === TYPE_LIST_MARKETING_USERS || type === TYPE_LIST_COMPANY_USERS)"
                         (click)="showAddToSubscription()"
                     >
@@ -58,6 +50,16 @@
                         <div class="qt-lh-1 qt-color-red-600">Archive User</div>
                     </div>
                 </div>
+                  <button
+                    class="qt-button --gray --md qt-ml-8"
+                    uib-tooltip="Draft email"
+                    tooltip-placement="top"
+                    (click)="showAsideForDraftEmail()"
+                    *ngIf="!isExistArchiveUser()"
+                >
+                    <span class="qt-icon icon__email qt-sz-16 qt-bg-contain qt-dib qt-mr-8 qt-button-icon"></span>
+                    Send Email
+                </button>
                 <button
                     class="qt-button --gray --md qt-button-filter qt-ml-8 qt-df"
                     [ngClass]="{'active':toggleFilter}"

@@ -3128,6 +3128,15 @@ app-company-devices-edit-ip,app-company-devices-edit-mac {
     min-width: 420px;
   }
 }
+.users-tooltip {
+   .tooltip-inner {
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+  }
+}
 .dshboard-billable-tooltip {
   .tooltip-inner {
     width: 270px;
