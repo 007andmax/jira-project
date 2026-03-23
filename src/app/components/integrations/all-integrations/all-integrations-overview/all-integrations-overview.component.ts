@@ -64,7 +64,7 @@ export class AllIntegrationsOverviewComponent implements OnDestroy {
       this.modelForm.patchValue({
         storeId: res.storeId,
         apiToken: res.apiToken,
-        cryptType: res.cryptType
+        cryptType: res.cryptType ? res.cryptType : "7"
       })
       if (res.connected) this.status = 'CONNECTED';
     }, err => {
