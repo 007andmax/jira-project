@@ -17,7 +17,7 @@ class="qt-w100"
     ></app-tickets-table-item-requested-by>
     </ng-template
 >
-        <div class="qt-df" [ngClass]="{'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"   ngbDropdownAnchor   *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers"
+        <div class="qt-df qt-ai-c" [ngClass]="{'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"   ngbDropdownAnchor   *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers"
       >
             <div
                 class="qt-table-modern__circle-avatar"
