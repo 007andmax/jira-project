@@ -66,7 +66,7 @@ export class AllIntegrationsOverviewComponent implements OnDestroy {
         apiToken: res.apiToken,
         cryptType: res.cryptType
       })
-      this.status = 'CONNECTED';
+      if (res.connected) this.status = 'CONNECTED';
     }, err => {
       this.showPreloader = false;
     })
