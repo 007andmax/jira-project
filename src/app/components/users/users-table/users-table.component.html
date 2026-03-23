@@ -111,11 +111,13 @@ class="qt-w100"
                 <div
                     [ngbTooltip]="companyContent"
                     [container]="'body'"
+                    [tooltipClass]="'users-tooltip'"
                     class="qt-table-modern__circle-avatar multi-assign-user"
                     *ngIf="i < 3"
                     [textContent]="checkLogo(getCompany(company)) ? '' : company.clientCompanyName[0].toUpperCase()"
                     [ngStyle]="{'background': getStyleAvatarCompany(getCompany(company),listColorNoAvatar[indexNoAvatar]) ,
                 'left': getStyleNetAvatar(i)}"
+                 [disableTooltip]="user.customerCompaniesInfo.length == 1"
                 ></div>
             </ng-template>
             <div class="ellipsis qt-fs-14 qt-fw-400 qt-color-gray-900 qt-ml-32" *ngIf="user.customerCompaniesInfo.length == 1" [textContent]="user.customerCompaniesInfo[0].clientCompanyName"></div>
@@ -125,6 +127,11 @@ class="qt-w100"
                 [ngbTooltip]="tipContent"
                 *ngIf="user.customerCompaniesInfo.length > 3"
                 [ngStyle]="{'left': getStyleNetAvatar(3)}"
+                   [autoClose]="'outside'"
+                #moreTooltip="ngbTooltip"
+                triggers="manual"
+                (mouseenter)="openTooltip(moreTooltip)"
+                (mouseleave)="startCloseTooltipTimer(moreTooltip)"
             >
                 <span [textContent]="'+' + (user.customerCompaniesInfo.length - 3)"></span>
             </div>

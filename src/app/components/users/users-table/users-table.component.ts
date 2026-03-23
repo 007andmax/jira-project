@@ -8,7 +8,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { ARCHIVE_USER, DEARCHIVE_USER } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
-import { NgbModal, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbPopover, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { UsersTableService } from './services/users-table.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
@@ -290,6 +290,43 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     clearTimeout(this.openTimer);
     this.closeTimer = setTimeout(() => {
       const popoverEl = document.querySelector('.requested-by-popover:hover');
+
+      // close only if mouse is not over popover body
+      if (!popoverEl) {
+        popover.close();
+      }
+    }, 150);
+  }
+
+
+  openTooltip(popover: NgbTooltip): void {
+    clearTimeout(this.closeTimer);
+
+    if (!popover.isOpen()) {
+      popover.open();
+      this.appStateService.changeDetectorRef();
+      // Wait until popover is added to <body>
+      setTimeout(() => {
+        const popoverEl = document.querySelector('.users-tooltip');
+
+        if (!popoverEl) {
+          return;
+        }
+
+        popoverEl.addEventListener('mouseenter', this.onPopoverMouseEnter);
+        popoverEl.addEventListener('mouseleave', () => {
+          if (!this.usersStateService.isOpenDropDownRequestedBy) popover.close();
+        });
+      });
+    }
+  }
+
+  startCloseTooltipTimer(popover: NgbTooltip): void {
+    if (!this.user || this.usersStateService.isOpenDropDownRequestedBy) return;
+    clearTimeout(this.closeTimer);
+    clearTimeout(this.openTimer);
+    this.closeTimer = setTimeout(() => {
+      const popoverEl = document.querySelector('.users-tooltip:hover');
 
       // close only if mouse is not over popover body
       if (!popoverEl) {
