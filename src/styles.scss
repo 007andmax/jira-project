@@ -1034,6 +1034,7 @@ app-quotes-item {
 }
 .companies-page {
   background: $background;
+  min-width: 1128px;
 
   .new-companies-content__header--search .btn-new {
     height: 36px;
@@ -1079,13 +1080,15 @@ app-quotes-item {
       flex: 0 0 52px;
     }
     &__name {
-      flex: 2 1 416px;
+      flex: 1 1 240px;
+      min-width: 0;
 
-      @include media-breakpoint-up($md) {
-        flex: 0 0 416px;
+      &-row {
+        max-width: 100%;
       }
-      @include media-breakpoint-up($lg) {
-        flex: 2 1 290px;
+
+      .mob-styles {
+        min-width: 0;
       }
 
       .circle-avatar {
@@ -1145,7 +1148,6 @@ app-quotes-item {
 
       .mob-styles {
         min-width: 0;
-        flex: 1;
       }
 
       .name {
