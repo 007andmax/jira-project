@@ -51,7 +51,7 @@
                        <ng-template
                         ngFor
                         let-item
-                        [ngForOf]="primaryAddress.phoneNumbers"
+                        [ngForOf]="primaryAddress ? primaryAddress.phoneNumbers : []"
                         [ngForTrackBy]="trackById"
                     >
                        <div class="qt-fs-12 qt-fw-400 qt-color-gray-500" [textContent]="item.number"></div>
