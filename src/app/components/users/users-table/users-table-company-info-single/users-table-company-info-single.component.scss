@@ -1,0 +1,7 @@
+@import "./src/assets/styles/variable";
+@import "./src/assets/styles/mixin/breakpoint";
+
+.qt-table-modern__circle-avatar {
+  position: absolute;
+  border: 1px solid $white;
+}
