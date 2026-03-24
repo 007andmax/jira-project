@@ -54,34 +54,12 @@
             ></div>
                             </div>
                             <div
-                                class="companies-table__address pointer"
-                                (click)="onFilter('address')"
-                            >
-                                Shipping Address
-                                <div class="qt-table-modern__sorting"></div>
-                                 <div *ngIf="sortBy.sortBy == 'address'"
-                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'desc', 'icon__arrow_narrow_up': sortBy.sortDirection === 'asc'}"
-                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
-            ></div>
-                            </div>
-                            <div
                                 class="companies-table__primary-contact pointer"
                                 (click)="onFilter('primary_contact')"
                             >
                                 Primary Contact
                                 <div class="qt-table-modern__sorting"></div>
                                  <div *ngIf="sortBy.sortBy == 'primary_contact'"
-                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'desc', 'icon__arrow_narrow_up': sortBy.sortDirection === 'asc'}"
-                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
-            ></div>
-                            </div>
-                            <div
-                                class="companies-table__email-address pointer"
-                                (click)="onFilter('email')"
-                            >
-                                Email Address
-                                <div class="qt-table-modern__sorting"></div>
-                                 <div *ngIf="sortBy.sortBy == 'email'"
                   [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'desc', 'icon__arrow_narrow_up': sortBy.sortDirection === 'asc'}"
                 class="qt-icon__background-unset qt-bg-contain qt-sz-20"
             ></div>
@@ -119,8 +97,7 @@
                 class="qt-icon__background-unset qt-bg-contain qt-sz-20"
             ></div>
                             </div>
-                            <div class="companies-table__download-btn  pointer"></div>
-                            <div class="companies-table__menu pointer"></div>
+                            <div class="companies-table__menu"></div>
                         </div>
                     </div>
                 </div>

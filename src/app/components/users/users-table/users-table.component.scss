@@ -40,6 +40,9 @@ tr {
   background-color: transparent;
   border: none;
   width: 190px;
+  font-size: 14px;
+  font-weight: 400;
+  color: $gray-900;
 }
 .users-table__company-full {
   flex: 2 0 220px;
@@ -67,3 +70,36 @@ tr {
 .job-title-item {
   min-height: 24px;
 }
+.users-table__name--avatar,.tooltip__circle-avatar {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-right: 4px;
+}
+.tooltip__circle-avatar {
+  margin-right: 8px;
+}
+.more-users {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    background-color: $gray-100;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 500;
+    color: $gray-600;
+    position: absolute;
+    border: 1px solid $white;
+}
+.qt-table-modern__circle-avatar {
+  position: absolute;
+  border: 1px solid $white;
+}
+.multi-assign-user-container {
+  position: relative;
+}
+ 

@@ -120,8 +120,8 @@ export class TicketsPermissionsService {
   isUpdateModeAllowed = (ticket) => {
     if (!ticket.status) return false;
     if (this.usersStateService.getCurrentUser() && (this.usersStateService.getCurrentUser().isOwner || this.usersStateService.getCurrentUser().accountType === "CLIENT") && this.isTicketOpen(ticket)) return true;
-    if ((this.permissionsService.isAllowed('EDIT_TICKETS') && (ticket.assignedUser && ticket.assignedUser.id == this.usersStateService.getCurrentUser().id || ticket.multiAssignedUsers && ticket.multiAssignedUsers.some(item => item.id == this.usersStateService.getCurrentUser().id)) ||
-      this.permissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ((ticket.assignedUser && ticket.assignedUser.id != this.usersStateService.getCurrentUser().id || !ticket.assignedUser) && (ticket.multiAssignedUsers && !ticket.multiAssignedUsers.some(item => item.id == this.usersStateService.getCurrentUser().id) || ticket.multiAssignedUsers.length == 0))) && this.isTicketOpen(ticket)) return true;
+    if ((this.permissionsService.isAllowed('EDIT_TICKETS') && (ticket.assignedUserId && ticket.assignedUserId == this.usersStateService.getCurrentUser().id || ticket.multiAssignedUsers && ticket.multiAssignedUsers.some(item => item.id == this.usersStateService.getCurrentUser().id)) ||
+      this.permissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ((ticket.assignedUserId && ticket.assignedUserId != this.usersStateService.getCurrentUser().id || !ticket.assignedUserId) && (ticket.multiAssignedUsers && !ticket.multiAssignedUsers.some(item => item.id == this.usersStateService.getCurrentUser().id) || ticket.multiAssignedUsers.length == 0))) && this.isTicketOpen(ticket)) return true;
     return false;
   }
 

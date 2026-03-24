@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ElementRef, 
 import { CompanyAndressContact } from 'src/app/interfaces/company/company-address-contact';
 import { CompanyAndress } from 'src/app/interfaces/company/company-address';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
@@ -17,18 +17,23 @@ import { CompanyItem } from '../class/company-item';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompanyDeviceCount } from '../class/company-device-count';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'app-companies-table',
   templateUrl: './companies-table.component.html',
   styleUrls: ['./companies-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [TicketsListService]
 })
 export class CompaniesTableComponent implements OnInit, OnDestroy {
   @Input() company: CompanyItem;
   @Input() public showArchivedCompanies: boolean = false;
   @Input() devicesCounts: Array<CompanyDeviceCount> = [];
   @Output() onSelectCompany = new EventEmitter<any>();
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   public primaryContact: CompanyAndressContact;
   public primaryAddress: CompanyAndress;
   public primaryPhone: any;
@@ -36,7 +41,9 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   public countUsers: number = 0;
   public countDevices: number = 0;
   sub: Subscription = new Subscription();
-  constructor(private usersStateService: UsersStateService,
+  private closeTimer: any;
+  private openTimer: any;
+  constructor(public usersStateService: UsersStateService,
     public companiesStateService: CompaniesStateService,
     private modalService: NgbModal,
     private confirmStateService: ConfirmStateService,
@@ -45,9 +52,13 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private draftEmailStateService: DraftEmailStateService,
     public customerPortalStateService: CustomerPortalStateService,
+    public ticketsListService: TicketsListService,
+    private appStateService: AppStateService,
     private permissionsService: PermissionsService) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     if (this.usersStateService.getAllUsers().length > 0) this.onGetUsersCount(this.usersStateService.getAllUsers());
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.showArchivedCompanies = false;
@@ -173,7 +184,53 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
+  public trackById(index, item) {
+    return item.id;
+  }
+  openPopover(popover: NgbPopover): void {
+    if (!this.primaryContact) return;
+    clearTimeout(this.closeTimer);
+
+    if (!popover.isOpen()) {
+      this.openTimer = setTimeout(() => {
+        popover.open();
+        this.appStateService.changeDetectorRef();
+        // Wait until popover is added to <body>
+        setTimeout(() => {
+          const popoverEl = document.querySelector('.requested-by-popover');
+
+          if (!popoverEl) {
+            return;
+          }
+
+          popoverEl.addEventListener('mouseenter', this.onPopoverMouseEnter);
+          popoverEl.addEventListener('mouseleave', () => {
+            if (!this.usersStateService.isOpenDropDownRequestedBy) popover.close();
+          });
+        });
+      }, 500);
+    }
+  }
+
+  startCloseTimer(popover: NgbPopover): void {
+    if (!this.primaryContact || this.usersStateService.isOpenDropDownRequestedBy) return;
+    clearTimeout(this.closeTimer);
+    clearTimeout(this.openTimer);
+    this.closeTimer = setTimeout(() => {
+      const popoverEl = document.querySelector('.requested-by-popover:hover');
+
+      // close only if mouse is not over popover body
+      if (!popoverEl) {
+        popover.close();
+      }
+    }, 150);
+  }
+
+  onPopoverMouseEnter = (): void => {
+    clearTimeout(this.closeTimer);
+  };
   ngOnDestroy(): void {
+    clearTimeout(this.closeTimer);
     this.sub.unsubscribe();
   }
 

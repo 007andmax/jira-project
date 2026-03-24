@@ -1034,6 +1034,7 @@ app-quotes-item {
 }
 .companies-page {
   background: $background;
+  min-width: 1128px;
 
   .new-companies-content__header--search .btn-new {
     height: 36px;
@@ -1079,13 +1080,15 @@ app-quotes-item {
       flex: 0 0 52px;
     }
     &__name {
-      flex: 2 1 290px;
+      flex: 1 1 240px;
+      min-width: 0;
 
-      @include media-breakpoint-up($md) {
-        flex: 0 0 250px;
+      &-row {
+        max-width: 100%;
       }
-      @include media-breakpoint-up($lg) {
-        flex: 2 1 290px;
+
+      .mob-styles {
+        min-width: 0;
       }
 
       .circle-avatar {
@@ -1095,6 +1098,8 @@ app-quotes-item {
 
         &.with-logo img {
           border: none;
+          height: 32px;
+          min-width: 32px;
         }
       }
 
@@ -1120,7 +1125,8 @@ app-quotes-item {
       }
     }
     &__primary-contact {
-      flex: 1 1 160px;
+      flex: 1 1 210px;
+      min-width: 0;
 
       @include media-breakpoint-up($lg) {
         flex: 1 0 230px;
@@ -1130,9 +1136,20 @@ app-quotes-item {
         flex: 1 0 300px;
       }
 
+      @media (min-width: 1440px) {
+        flex: 1 0 270px;
+      }
+
       @include media-breakpoint-down($md) {
-        flex: 1 1 210px;
         max-width: 100%;
+      }
+
+      &__row {
+        max-width: 100%;
+      }
+
+      .mob-styles {
+        min-width: 0;
       }
 
       .name {
@@ -1165,46 +1182,44 @@ app-quotes-item {
       }
     }
       &__client-type {
-      flex: 0 0 80px;
+      flex: 0 0 153px;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
     }
     &__tickets {
-      flex: 0 0 80px;
+      flex: 0 0 105px;
     }
     &__devices {
-      flex: 0 0 80px;
+      flex: 0 0 110px;
     }
     &__users {
-      flex: 0 0 65px;
+      flex: 0 0 95px;
     }
     &__tickets,
     &__devices,
     &__users {
-      @include media-breakpoint-down($md) {
+      @media (max-width: 1439px) {
         display: none;
       }
     }
-    &__download-btn {
-      flex: 0 0 44px;
+    &__menu {
+      flex: 0 0 84px;
+      padding: 23px 16px 23px 0;
+
+      i {
+        background-position: right;
+      }
 
       button {
         background: none;
         border: none;
       }
     }
-    &__menu {
-      flex: 0 0 50px;
-      padding: 23px 16px 23px 0;
-
-      i {
-        background-position: right;
-      }
-    }
 
     .qt-table-modern__row {
-      min-height: 66px;
+      max-height: 60px;
+      min-height: 60px;
       height: auto;
     }
   }
@@ -3112,6 +3127,17 @@ app-company-devices-edit-ip,app-company-devices-edit-mac {
   .tooltip-inner {
     width: 420px;
     min-width: 420px;
+  }
+}
+.users-tooltip {
+   .tooltip-inner {
+    width: 300px;
+     max-width: 300px;
+    max-height: 358px;
+    overflow-y: auto;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
   }
 }
 .dshboard-billable-tooltip {

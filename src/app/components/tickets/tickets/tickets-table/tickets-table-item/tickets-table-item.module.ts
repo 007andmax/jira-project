@@ -10,9 +10,10 @@ import { TicketsTableItemAssignedUserComponent } from './tickets-table-item-assi
 import { TicketsTableItemStatusComponent } from './tickets-table-item-status/tickets-table-item-status.component';
 import { TicketsTableItemRequestedByComponent } from './tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { TicketsTableItemRequestedByModule } from './tickets-table-item-requested-by/tickets-table-item-requested-by.module';
 
 @NgModule({
-    declarations: [TicketsTableItemComponent, TicketsTableItemAssignedUserComponent, TicketsTableItemStatusComponent, TicketsTableItemRequestedByComponent
+    declarations: [TicketsTableItemComponent, TicketsTableItemAssignedUserComponent, TicketsTableItemStatusComponent
     ],
     imports: [
         CommonModule,
@@ -21,6 +22,7 @@ import { NgxMaskModule } from 'ngx-mask';
         AddAssignedUserModule,
         MatChipModule,
         NgxMaskModule.forRoot(),
+        TicketsTableItemRequestedByModule
     ],
     exports: [TicketsTableItemComponent]
 

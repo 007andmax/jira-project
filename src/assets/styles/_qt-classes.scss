@@ -1463,6 +1463,12 @@ button.qt-button.--gray:focus {
 .qt-w70{
   width: 70%
 }
+.qt-maw-100 {
+  max-width: 100%;
+}
+.qt-miw-0 {
+  min-width: 0;
+}
 .qt-color-gray-900 {
   color: $gray-900;
 }

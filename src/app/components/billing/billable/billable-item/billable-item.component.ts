@@ -9,6 +9,8 @@ import { BillableStateService } from 'src/app/states/billable/billable-state.ser
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   selector: 'app-billable-item',
@@ -24,12 +26,15 @@ export class BillableItemComponent implements OnInit {
   totalSum: number = 0;
   indexNoAvatar: number = 0;
   listColorNoAvatar = [];
+  private closeTimer: any;
+  private openTimer: any;
   constructor(private companiesStateService: CompaniesStateService,
     public ticketsListService: TicketsListService,
     private billableStateService: BillableStateService,
     private leftPanelStateService: LeftPanelStateService,
     private billableService: BillableService,
     private permissionsService: PermissionsService,
+    private appStateService: AppStateService,
     private usersStateService: UsersStateService) { }
 
   ngOnInit() {
@@ -71,5 +76,49 @@ export class BillableItemComponent implements OnInit {
   moToBillableTickets() {
     this.billableStateService.setBillableProfile(this.item);
     this.leftPanelStateService.goToState('new-billable-tickets');
+  }
+  openPopover(popover: NgbPopover): void {
+    if (!this.salesPerson) return;
+    clearTimeout(this.closeTimer);
+
+    if (!popover.isOpen()) {
+      this.openTimer = setTimeout(() => {
+        popover.open();
+        this.appStateService.changeDetectorRef();
+        // Wait until popover is added to <body>
+        setTimeout(() => {
+          const popoverEl = document.querySelector('.requested-by-popover');
+
+          if (!popoverEl) {
+            return;
+          }
+
+          popoverEl.addEventListener('mouseenter', this.onPopoverMouseEnter);
+          popoverEl.addEventListener('mouseleave', () => {
+            if (!this.usersStateService.isOpenDropDownRequestedBy) popover.close();
+          });
+        });
+      }, 500);
+    }
+  }
+
+  startCloseTimer(popover: NgbPopover): void {
+    if (!this.salesPerson || this.usersStateService.isOpenDropDownRequestedBy) return;
+    clearTimeout(this.closeTimer);
+    clearTimeout(this.openTimer);
+    this.closeTimer = setTimeout(() => {
+      const popoverEl = document.querySelector('.requested-by-popover:hover');
+
+      // close only if mouse is not over popover body
+      if (!popoverEl) {
+        popover.close();
+      }
+    }, 150);
+  }
+  onPopoverMouseEnter = (): void => {
+    clearTimeout(this.closeTimer);
+  };
+  ngOnDestroy(): void {
+    clearTimeout(this.closeTimer);
   }
 }

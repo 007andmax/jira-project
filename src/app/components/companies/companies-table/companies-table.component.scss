@@ -1,5 +1,5 @@
 @import "./src/assets/styles/variable";
-
+@import "./src/assets/styles/mixin/breakpoint";
 .company-email {
   word-break: break-all;
 }
@@ -22,19 +22,19 @@
   border: unset;
   margin-bottom: 0;
   & > div {
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-bottom: 1px solid $gray-200;
     font-size: 14px;
 
     &:first-child {
-      padding-left: 25px;
+      padding-left: 16px;
       border-left: 1px solid $gray-200;
       border-radius: 0;
     }
 
     &:last-child {
-      padding-right: 25px;
+      padding-right: 16px;
       border-right: 1px solid $gray-200;
       border-radius: 0;
     }
@@ -47,4 +47,14 @@
       background-color: $blue-dark-25;
     }
   }
+}
+.circle-avatar,.qt-table-modern__circle-avatar {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+}
+.qt-table-modern__circle-avatar {
+  font-size: 13px;
+  font-weight: 500;
 }
