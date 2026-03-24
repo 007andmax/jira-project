@@ -8,6 +8,7 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InvoiceChangeAddressComponent } from './billable-aside/invoice-form/invoice-change-address/invoice-change-address.component';
+import { TicketsTableItemRequestedByModule } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { InvoiceChangeAddressComponent } from './billable-aside/invoice-form/inv
         PreloaderTicketModule,
         FormsModule,
         NgbModule,
+        TicketsTableItemRequestedByModule
     ],
 
 

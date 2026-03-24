@@ -31,10 +31,28 @@
             class="qt-df billable-table__user"
             *ngIf="salesPerson"
         >
+         <ng-template #popContent let-greeting="greeting"
+	>
+    <app-tickets-table-item-requested-by  
+    [requestedUser]="salesPerson"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    ></app-tickets-table-item-requested-by>
+    </ng-template
+>
             <div
                 class="qt-table-modern__circle-avatar"
                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(salesPerson)"
                 [ngStyle]="{'background': getStyleAvatar(salesPerson)}"
+                   [ngbPopover]="popContent"
+                [popoverClass]="'requested-by-popover'"
+                 [autoClose]="'outside'"
+                 [container]="'body'"
+                #p="ngbPopover"
+                triggers="manual"
+                (mouseenter)="openPopover(p)"
+                (mouseleave)="startCloseTimer(p)"
+                [disablePopover]="!salesPerson"
             >
             </div>
             <div [textContent]="ticketsListService.getUserName(salesPerson)"></div>
