@@ -1098,6 +1098,8 @@ app-quotes-item {
 
         &.with-logo img {
           border: none;
+          height: 32px;
+          min-width: 32px;
         }
       }
 
@@ -1186,13 +1188,13 @@ app-quotes-item {
       overflow: hidden;
     }
     &__tickets {
-      flex: 0 0 80px;
+      flex: 0 0 105px;
     }
     &__devices {
-      flex: 0 0 80px;
+      flex: 0 0 110px;
     }
     &__users {
-      flex: 0 0 65px;
+      flex: 0 0 95px;
     }
     &__tickets,
     &__devices,
@@ -1201,20 +1203,17 @@ app-quotes-item {
         display: none;
       }
     }
-    &__download-btn {
-      flex: 0 0 44px;
-
-      button {
-        background: none;
-        border: none;
-      }
-    }
     &__menu {
-      flex: 0 0 50px;
+      flex: 0 0 84px;
       padding: 23px 16px 23px 0;
 
       i {
         background-position: right;
+      }
+
+      button {
+        background: none;
+        border: none;
       }
     }
 
@@ -3133,7 +3132,8 @@ app-company-devices-edit-ip,app-company-devices-edit-mac {
 .users-tooltip {
    .tooltip-inner {
     width: 300px;
-    max-height: 400px;
+     max-width: 300px;
+    max-height: 358px;
     overflow-y: auto;
     white-space: nowrap;
     overflow-x: hidden;
