@@ -20,7 +20,7 @@
     </div>
     <div
         class="users-table__name qt-miw-0"
-
+  (click)="showDetailUser()"
     >
       <ng-template #popContent let-greeting="greeting"
 	>
@@ -168,6 +168,15 @@
             </ng-template>
         </ng-template>
     </div>
+    </div>
+     <div
+        class="users-table__industry qt-fd-c qt-ai-fs qt-jc-c"
+        (click)="showDetailUser()"
+        *ngIf="type == TYPE_LIST_COMPANY_USERS"
+    >
+        <div class="qt-df qt-ai-c job-title-item">
+            <div [textContent]="getJobTitleCompany() ? getJobTitleCompany().name : ''"></div>
+        </div>
     </div>
     <div
         class="users-table__contract-no qt-fd-c qt-ai-fs qt-jc-c"
