@@ -19,19 +19,19 @@
         </div>
     </div>
     <div
-        class="users-table__name"
-       
+        class="users-table__name qt-miw-0"
+
     >
       <ng-template #popContent let-greeting="greeting"
 	>
-    <app-tickets-table-item-requested-by  
+    <app-tickets-table-item-requested-by
     [requestedUser]="user"
     [indexNoAvatar]="indexNoAvatar"
     [listColorNoAvatar]="listColorNoAvatar"
     ></app-tickets-table-item-requested-by>
     </ng-template
 >
-        <div class="qt-df qt-ai-c">
+        <div class="qt-df qt-ai-c qt-w100">
             <div
                 class="users-table__name--avatar"
                 [ngStyle]="{'background':  ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar])}"
@@ -46,13 +46,13 @@
                 (mouseleave)="startCloseTimer(p)"
                 [disablePopover]="!user"
             ></div>
-            <div>
+            <div class="ellipsis">
                 <div
-                    class="ellipsis qt-fs-14 qt-fw-500 qt-color-gray-900 qt-mb-4"
+                    class="qt-fs-14 qt-fw-500 qt-color-gray-900 qt-mb-4 ellipsis"
                     [textContent]="getUserName()"
                 ></div>
                 <div
-                    class="qt-fs-12 qt-fw-400 qt-color-gray-500"
+                    class="qt-fs-12 qt-fw-400 qt-color-gray-500 ellipsis"
                     [textContent]="user.primaryEmail"
                 ></div>
             </div>
@@ -75,10 +75,8 @@
         *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_MARKETING_USERS"
         (click)="showDetailUser()"
     >
-        <div
-class="qt-w100"
-    >
-         <div class="qt-df multi-assign-user-container qt-ai-c"  >
+        <div class="qt-w100">
+         <div class="qt-df multi-assign-user-container qt-ai-c">
             <ng-template
                 ngFor
                 let-company
@@ -169,7 +167,7 @@ class="qt-w100"
                 </div>
             </ng-template>
         </ng-template>
-    </div> 
+    </div>
     </div>
     <div
         class="users-table__contract-no qt-fd-c qt-ai-fs qt-jc-c"
