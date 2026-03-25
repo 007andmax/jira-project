@@ -307,12 +307,12 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       this.appStateService.changeDetectorRef();
       // Wait until popover is added to <body>
       setTimeout(() => {
-        const popoverEl = document.querySelector('.users-tooltip');
+        const popoverEl: any = document.querySelector('.users-tooltip');
 
         if (!popoverEl) {
           return;
         }
-
+        popoverEl.style.opacity = "1";
         popoverEl.addEventListener('mouseenter', this.onPopoverMouseEnter);
         popoverEl.addEventListener('mouseleave', () => {
           if (!this.usersStateService.isOpenDropDownRequestedBy) popover.close();

@@ -11,6 +11,7 @@ import { TicketsTableItemStatusComponent } from './tickets-table-item-status/tic
 import { TicketsTableItemRequestedByComponent } from './tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { TicketsTableItemRequestedByModule } from './tickets-table-item-requested-by/tickets-table-item-requested-by.module';
+import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
 
 @NgModule({
     declarations: [TicketsTableItemComponent, TicketsTableItemAssignedUserComponent, TicketsTableItemStatusComponent
@@ -22,7 +23,8 @@ import { TicketsTableItemRequestedByModule } from './tickets-table-item-requeste
         AddAssignedUserModule,
         MatChipModule,
         NgxMaskModule.forRoot(),
-        TicketsTableItemRequestedByModule
+        TicketsTableItemRequestedByModule,
+        UserLogoPopoverModule
     ],
     exports: [TicketsTableItemComponent]
 
