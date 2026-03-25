@@ -1,0 +1,10 @@
+<div
+    [ngbTooltip]="companyContent"
+    [tooltipClass]="'users-tooltip'"
+    [disableTooltip]="disableTooltip"
+    class="qt-table-modern__circle-avatar multi-assign-user"
+    *ngIf="i < 3"
+    [textContent]="company.clientCompanyName[0].toUpperCase()"
+    [ngStyle]="{'background': listColorNoAvatar[indexNoAvatar] ,
+'left': getStyleNetAvatar(i)}"
+></div>

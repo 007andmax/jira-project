@@ -3138,6 +3138,7 @@ app-company-devices-edit-ip,app-company-devices-edit-mac {
     white-space: nowrap;
     overflow-x: hidden;
     text-overflow: ellipsis;
+    padding: 8px;
   }
 }
 .dshboard-billable-tooltip {
@@ -3194,7 +3195,8 @@ body.ready {
 }
 app-ticket-detail-tasks-item,
 app-tasks-dashboard-my-tasks,
-app-tasks-dashboard-my-calendar {
+app-tasks-dashboard-my-calendar,
+app-users-table-company-info-single {
   display: contents;
 }
  draft-email-user-recipients,
@@ -3259,6 +3261,7 @@ app-tasks-dashboard-my-calendar {
   z-index: 999;
   border: 1px solid $gray-200;
   width: 360px;
+  opacity: 0;
   .primary-email {
     max-width: 230px;
   }

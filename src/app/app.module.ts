@@ -166,6 +166,7 @@ import { ManageCardsAddModule } from './components/billing/manage-cards/manage-c
 import { ManageCardsEditModule } from './components/billing/manage-cards/manage-cards-edit/manage-cards-edit.module';
 import { PreloaderTicketModule } from './components/shared/preloader-ticket/preloader-ticket.module';
 import { DisabledBtnModule } from './directives/disabled-btn/disabled-btn.module';
+import { UserLogoPopoverDirective } from './directives/user-logo-popover/user-logo-popover.directive';
 declare var $: any;
 /**
  * This module represents the main application module

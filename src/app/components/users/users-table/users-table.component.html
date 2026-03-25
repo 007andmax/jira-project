@@ -42,8 +42,10 @@
                  [container]="'body'"
                 #p="ngbPopover"
                 triggers="manual"
-                (mouseenter)="openPopover(p)"
-                (mouseleave)="startCloseTimer(p)"
+                appUserLogoPopover
+                [user]="user"
+                [popover]="p"
+                [disabled]="!user"
                 [disablePopover]="!user"
             ></div>
             <div class="ellipsis">
@@ -70,7 +72,7 @@
         </div>
     </div>
     <div
-        class="users-table__company qt-fd-c qt-ai-fs qt-jc-c"
+        class="users-table__company qt-fd-c qt-ai-fs qt-jc-c qt-miw-0"
         [ngClass]="{'users-table__company-full': type === TYPE_LIST_ALL_USERS}"
         *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_MARKETING_USERS"
         (click)="showDetailUser()"
@@ -85,42 +87,30 @@
                 [ngForTrackBy]="trackById"
             >
              <ng-template #companyContent>
-                <div
-                    class="qt-df qt-ai-c qt-mb-8"
-                >
-                    <div
-                        class="tooltip__circle-avatar"
-                        [textContent]="checkLogo(getCompany(company)) ? '' : company.clientCompanyName[0].toUpperCase()"
-                        [ngStyle]="{'background': getStyleAvatarCompany(getCompany(company),listColorNoAvatar[indexNoAvatar]) }"
-                    ></div>
-                    <div >
-                    <div
-                       class="ellipsis qt-fs-14 qt-fw-500 qt-color-white qt-mb-4"
-                        [textContent]="company.clientCompanyName"
-                    ></div>
-                     <div
-                     *ngIf="company.jobTitleDto"
-                       class="ellipsis qt-fs-12 qt-fw-400 qt-color-gray-400"
-                        [textContent]="company.jobTitleDto.name"
-                    ></div>
-                    </div>
-                </div>
+                <app-users-table-company-info-item
+                [company]="company"
+                [getCompany]="getCompany"
+                [checkLogo]="checkLogo"
+                [getStyleAvatarCompany]="getStyleAvatarCompany"
+
+                ></app-users-table-company-info-item>
         </ng-template>
-                <div
-                    [ngbTooltip]="companyContent"
-                    [container]="'body'"
-                    [tooltipClass]="'users-tooltip'"
-                    class="qt-table-modern__circle-avatar multi-assign-user"
-                    *ngIf="i < 3"
-                    [textContent]="checkLogo(getCompany(company)) ? '' : company.clientCompanyName[0].toUpperCase()"
-                    [ngStyle]="{'background': getStyleAvatarCompany(getCompany(company),listColorNoAvatar[indexNoAvatar]) ,
-                'left': getStyleNetAvatar(i)}"
-                 [disableTooltip]="user.customerCompaniesInfo.length == 1"
-                ></div>
+
+<app-users-table-company-info-single
+ [companyContent]="companyContent"
+[company]="company"
+[disableTooltip]="user.customerCompaniesInfo.length == 1"
+                [getCompany]="getCompany"
+                [checkLogo]="checkLogo"
+                [getStyleAvatarCompany]="getStyleAvatarCompany"
+                [getStyleNetAvatar]="getStyleNetAvatar"
+                [i]="i"
+
+></app-users-table-company-info-single>
             </ng-template>
-            <div class="ellipsis qt-fs-14 qt-fw-400 qt-color-gray-900 qt-ml-32" *ngIf="user.customerCompaniesInfo.length == 1" [textContent]="user.customerCompaniesInfo[0].clientCompanyName"></div>
+            <div class="ellipsis qt-fs-14 qt-fw-400 qt-color-gray-900 qt-ml-40" *ngIf="user.customerCompaniesInfo.length == 1" [textContent]="user.customerCompaniesInfo[0].clientCompanyName"></div>
             <div
-                class="more-users qt-table-modern__circle-avatar"
+                class="more-users qt-table-modern__circle-avatar qt-fs-0"
                  [tooltipClass]="'users-tooltip'"
                 [ngbTooltip]="tipContent"
                 *ngIf="user.customerCompaniesInfo.length > 3"
@@ -142,29 +132,14 @@
                 [ngForOf]="user.customerCompaniesInfo"
                 [ngForTrackBy]="trackById"
             >
-                <div
-                    class="qt-df qt-ai-c qt-mb-8"
-                    *ngIf="i >= 3"
-                >
-                    <div
-                        class="tooltip__circle-avatar"
-                        [textContent]="checkLogo(getCompany(company)) ? '' : company.clientCompanyName[0].toUpperCase()"
-                        [ngStyle]="{'background': getStyleAvatarCompany(getCompany(company),listColorNoAvatar[indexNoAvatar]) }"
-                    ></div>
-                    <div>
-                     <div >
-                    <div
-                       class="ellipsis qt-fs-14 qt-fw-500 qt-color-white qt-mb-4"
-                        [textContent]="company.clientCompanyName"
-                    ></div>
-                     <div
-                     *ngIf="company.jobTitleDto"
-                       class="ellipsis qt-fs-12 qt-fw-400 qt-color-gray-400"
-                        [textContent]="company.jobTitleDto.name"
-                    ></div>
-                    </div>
-                    </div>
-                </div>
+             <app-users-table-company-info-item
+              *ngIf="i >= 3"
+                [company]="company"
+                [getCompany]="getCompany"
+                [checkLogo]="checkLogo"
+                [getStyleAvatarCompany]="getStyleAvatarCompany"
+
+                ></app-users-table-company-info-item>
             </ng-template>
         </ng-template>
     </div>

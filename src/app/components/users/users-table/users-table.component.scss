@@ -70,18 +70,6 @@ tr {
 .job-title-item {
   min-height: 24px;
 }
-.users-table__name--avatar,.tooltip__circle-avatar {
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
-  min-height: 32px;
-  font-size: 13px;
-  font-weight: 500;
-  margin-right: 4px;
-}
-.tooltip__circle-avatar {
-  margin-right: 8px;
-}
 .more-users {
     width: 32px;
     height: 32px;
@@ -102,4 +90,9 @@ tr {
 .multi-assign-user-container {
   position: relative;
 }
- 
+.users-table__name--avatar {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+}
