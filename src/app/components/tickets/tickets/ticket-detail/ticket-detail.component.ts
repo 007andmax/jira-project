@@ -456,6 +456,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     })
   }
   getCreatedUser() {
+    if (!this.ticketProfile.createdUser) return null;
     return this.usersStateService.getAllUsers().find(item => item.id == this.ticketProfile.createdUser.id);
   }
   getNameCreateUser() {

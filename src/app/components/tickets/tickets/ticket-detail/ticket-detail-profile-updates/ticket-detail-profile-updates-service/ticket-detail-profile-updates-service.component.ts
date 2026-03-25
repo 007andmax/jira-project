@@ -7,6 +7,7 @@ import { TicketsListService } from '../../../services/tickets-list.service';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'ticket-detail-profile-updates-service',
@@ -16,14 +17,22 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class TicketDetailProfileUpdatesServiceComponent implements OnInit {
   @Input() update: TicketProfileUpdate;
   @Input() isBlockChange: boolean;
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
+  classActions: string = '';
   constructor(public ticketsListService: TicketsListService,
     public confirmStateService: ConfirmStateService,
     public ticketStateService: TicketStateService,
+    public usersStateService: UsersStateService,
     public modalService: NgbModal) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
   }
-  classActions: string = '';
+  getUserById(id) {
+    return this.usersStateService.getAllUsers().find(item => item.id == id);
+  }
   isIOSDevice() {
     return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
   }

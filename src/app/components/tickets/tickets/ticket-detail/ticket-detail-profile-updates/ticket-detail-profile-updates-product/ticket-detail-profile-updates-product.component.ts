@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { TicketsListService } from '../../../services/tickets-list.service';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'ticket-detail-profile-updates-product',
@@ -18,12 +19,20 @@ export class TicketDetailProfileUpdatesProductComponent implements OnInit {
   classActions: string = '';
   @Input() update: TicketProfileUpdate;
   @Input() isBlockChange: boolean;
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   constructor(public ticketsListService: TicketsListService,
     public confirmStateService: ConfirmStateService,
     public ticketStateService: TicketStateService,
+    public usersStateService: UsersStateService,
     public modalService: NgbModal) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
+  }
+  getUserById(id) {
+    return this.usersStateService.getAllUsers().find(item => item.id == id);
   }
   public getTotal(price, quantity) {
     return price * quantity;

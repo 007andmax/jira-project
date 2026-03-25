@@ -21,6 +21,8 @@ export class TicketDetailProfileUpdatesNoteComponent implements OnInit {
   @Output() onRemove = new EventEmitter();
   @Input() idTicket: string;
   @Input() isBlockChange: boolean;
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   constructor(public ticketsListService: TicketsListService,
     public confirmStateService: ConfirmStateService,
     public ticketStateService: TicketStateService,
@@ -29,6 +31,11 @@ export class TicketDetailProfileUpdatesNoteComponent implements OnInit {
     public modalService: NgbModal,) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
+  }
+  getUserById(id) {
+    return this.usersStateService.getAllUsers().find(item => item.id == id);
   }
   public isIOSDevice() {
     return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
