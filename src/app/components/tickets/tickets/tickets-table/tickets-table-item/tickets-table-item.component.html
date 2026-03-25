@@ -47,8 +47,10 @@
                  [container]="'body'"
                 #p="ngbPopover"
                 triggers="manual"
-                (mouseenter)="openPopover(p)"
-                (mouseleave)="startCloseTimer(p)"
+                 appUserLogoPopover
+                [user]="requestedUser"
+                [popover]="p"
+                [disabled]="!requestedUser"
                 [disablePopover]="!requestedUser"
                 ></div>
             <div

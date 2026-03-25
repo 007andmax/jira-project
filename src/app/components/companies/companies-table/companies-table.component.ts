@@ -197,12 +197,12 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
         this.appStateService.changeDetectorRef();
         // Wait until popover is added to <body>
         setTimeout(() => {
-          const popoverEl = document.querySelector('.requested-by-popover');
+          const popoverEl: any = document.querySelector('.requested-by-popover');
 
           if (!popoverEl) {
             return;
           }
-
+          popoverEl.style.opacity = "1";
           popoverEl.addEventListener('mouseenter', this.onPopoverMouseEnter);
           popoverEl.addEventListener('mouseleave', () => {
             if (!this.usersStateService.isOpenDropDownRequestedBy) popover.close();
