@@ -42,8 +42,10 @@
                  [container]="'body'"
                 #p="ngbPopover"
                 triggers="manual"
-                (mouseenter)="openPopover(p)"
-                (mouseleave)="startCloseTimer(p)"
+                appUserLogoPopover
+                [user]="user"
+                [popover]="p"
+                [disabled]="!user"
                 [disablePopover]="!user"
             ></div>
             <div class="ellipsis">
@@ -105,18 +107,6 @@
                 [i]="i"
 
 ></app-users-table-company-info-single>
-       
-               <!-- <div
-                    [ngbTooltip]="companyContent"
-                    [container]="'body'"
-                    [tooltipClass]="'users-tooltip'"
-                    class="qt-table-modern__circle-avatar multi-assign-user"
-                    *ngIf="i < 3"
-                    [textContent]="checkLogo(getCompany(company)) ? '' : company.clientCompanyName[0].toUpperCase()"
-                    [ngStyle]="{'background': getStyleAvatarCompany(getCompany(company),listColorNoAvatar[indexNoAvatar]) ,
-                'left': getStyleNetAvatar(i)}"
-                 [disableTooltip]="user.customerCompaniesInfo.length == 1"
-                ></div>-->
             </ng-template>
             <div class="ellipsis qt-fs-14 qt-fw-400 qt-color-gray-900 qt-ml-32" *ngIf="user.customerCompaniesInfo.length == 1" [textContent]="user.customerCompaniesInfo[0].clientCompanyName"></div>
             <div

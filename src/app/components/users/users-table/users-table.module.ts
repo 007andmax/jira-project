@@ -16,6 +16,7 @@ import { UserTableCustomSubscriptionModule } from './user-table-custom-subscript
 import { TicketsTableItemRequestedByModule } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
 import { UsersTableCompanyInfoItemComponent } from './users-table-company-info-item/users-table-company-info-item.component';
 import { UsersTableCompanyInfoSingleComponent } from './users-table-company-info-single/users-table-company-info-single.component';
+import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
 
 
 
@@ -38,7 +39,8 @@ import { UsersTableCompanyInfoSingleComponent } from './users-table-company-info
         PreviewPhoneMaskModule,
         UserTableDefaultSubscriptionModule,
         UserTableCustomSubscriptionModule,
-        TicketsTableItemRequestedByModule
+        TicketsTableItemRequestedByModule,
+        UserLogoPopoverModule
     ],
     exports: [UsersTableComponent]
 })

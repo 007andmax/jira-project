@@ -1,23 +1,21 @@
- <div
-                    class="qt-df qt-ai-c qt-mb-8"
-                   
-                >
-                    <div
-                        class="tooltip__circle-avatar"
-                        [textContent]="checkLogo(getCompany(company)) ? '' : company.clientCompanyName[0].toUpperCase()"
-                        [ngStyle]="{'background': getStyleAvatarCompany(getCompany(company),listColorNoAvatar[indexNoAvatar]) }"
-                    ></div>
-                    <div>
-                     <div >
-                    <div
-                       class="ellipsis qt-fs-14 qt-fw-500 qt-color-white qt-mb-4"
-                        [textContent]="company.clientCompanyName"
-                    ></div>
-                     <div
-                     *ngIf="company.jobTitleDto"
-                       class="ellipsis qt-fs-12 qt-fw-400 qt-color-gray-400"
-                        [textContent]="company.jobTitleDto.name"
-                    ></div>
-                    </div>
-                    </div>
-                </div>
+ <div class="qt-df qt-ai-c qt-mb-8"
+>
+    <div
+        class="tooltip__circle-avatar"
+        [textContent]="company.clientCompanyName[0].toUpperCase()"
+        [ngStyle]="{'background': listColorNoAvatar[indexNoAvatar] }"
+    ></div>
+    <div>
+        <div >
+    <div
+        class="ellipsis qt-fs-14 qt-fw-500 qt-color-white qt-mb-4"
+        [textContent]="company.clientCompanyName"
+    ></div>
+        <div
+        *ngIf="company.jobTitleDto"
+        class="ellipsis qt-fs-12 qt-fw-400 qt-color-gray-400"
+        [textContent]="company.jobTitleDto.name"
+    ></div>
+    </div>
+    </div>
+</div>
