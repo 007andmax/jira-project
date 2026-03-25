@@ -9,6 +9,7 @@ import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-s
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TicketProfile } from '../../../class/ticket-profile';
 
 @Component({
   selector: 'ticket-detail-profile-updates-note',
@@ -17,6 +18,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class TicketDetailProfileUpdatesNoteComponent implements OnInit {
   @ViewChild("updatesNoteItem", { static: true }) updatesNoteItem: TicketDetailProfileUpdatesNoteItemComponent;
+  @Input() ticketProfile: TicketProfile = new TicketProfile();
   @Input() update: TicketProfileUpdate;
   @Output() onRemove = new EventEmitter();
   @Input() idTicket: string;

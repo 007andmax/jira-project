@@ -8,6 +8,7 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { TicketProfile } from '../../../class/ticket-profile';
 
 @Component({
   selector: 'ticket-detail-profile-updates-service',
@@ -15,6 +16,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
   styleUrls: ['./ticket-detail-profile-updates-service.component.scss']
 })
 export class TicketDetailProfileUpdatesServiceComponent implements OnInit {
+  @Input() ticketProfile: TicketProfile = new TicketProfile();
   @Input() update: TicketProfileUpdate;
   @Input() isBlockChange: boolean;
   indexNoAvatar: number = 0;

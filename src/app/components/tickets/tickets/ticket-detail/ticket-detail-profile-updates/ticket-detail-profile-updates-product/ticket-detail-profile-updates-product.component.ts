@@ -9,6 +9,7 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { TicketsListService } from '../../../services/tickets-list.service';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { TicketProfile } from '../../../class/ticket-profile';
 
 @Component({
   selector: 'ticket-detail-profile-updates-product',
@@ -17,6 +18,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 })
 export class TicketDetailProfileUpdatesProductComponent implements OnInit {
   classActions: string = '';
+  @Input() ticketProfile: TicketProfile = new TicketProfile();
   @Input() update: TicketProfileUpdate;
   @Input() isBlockChange: boolean;
   indexNoAvatar: number = 0;
