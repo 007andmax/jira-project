@@ -240,6 +240,7 @@ table.qt-table-modern {
 
 .qt-page-list__header-thead__row {
   display: flex;
+  min-height: 40px;
 
   & > div {
     display: flex;
@@ -249,11 +250,11 @@ table.qt-table-modern {
     text-transform: uppercase;
 
     &:first-child {
-      padding: 12px 8px 12px 24px;
+      padding: 10px 8px 10px 24px;
     }
 
     &:last-child {
-      padding: 23px 24px 23px 8px;
+      padding: 20px 24px 20px 8px;
     }
   }
 

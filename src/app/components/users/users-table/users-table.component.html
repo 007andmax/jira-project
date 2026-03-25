@@ -72,7 +72,7 @@
         </div>
     </div>
     <div
-        class="users-table__company qt-fd-c qt-ai-fs qt-jc-c"
+        class="users-table__company qt-fd-c qt-ai-fs qt-jc-c qt-miw-0"
         [ngClass]="{'users-table__company-full': type === TYPE_LIST_ALL_USERS}"
         *ngIf="type === TYPE_LIST_ALL_USERS || type === TYPE_LIST_MARKETING_USERS"
         (click)="showDetailUser()"
@@ -92,7 +92,7 @@
                 [getCompany]="getCompany"
                 [checkLogo]="checkLogo"
                 [getStyleAvatarCompany]="getStyleAvatarCompany"
-                
+
                 ></app-users-table-company-info-item>
         </ng-template>
 
@@ -110,7 +110,7 @@
             </ng-template>
             <div class="ellipsis qt-fs-14 qt-fw-400 qt-color-gray-900 qt-ml-32" *ngIf="user.customerCompaniesInfo.length == 1" [textContent]="user.customerCompaniesInfo[0].clientCompanyName"></div>
             <div
-                class="more-users qt-table-modern__circle-avatar"
+                class="more-users qt-table-modern__circle-avatar qt-fs-0"
                  [tooltipClass]="'users-tooltip'"
                 [ngbTooltip]="tipContent"
                 *ngIf="user.customerCompaniesInfo.length > 3"
@@ -138,7 +138,7 @@
                 [getCompany]="getCompany"
                 [checkLogo]="checkLogo"
                 [getStyleAvatarCompany]="getStyleAvatarCompany"
-                
+
                 ></app-users-table-company-info-item>
             </ng-template>
         </ng-template>
