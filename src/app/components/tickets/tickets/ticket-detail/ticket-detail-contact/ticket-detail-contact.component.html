@@ -11,10 +11,30 @@
         *ngIf="toggleContainer"
     >
         <div class="qt-df qt-ai-c qt-mb-10">
+             <ng-template #popContent let-greeting="greeting"
+	>
+            <app-tickets-table-item-requested-by
+            [requestedUser]="checkExistUser()"
+            [indexNoAvatar]="indexNoAvatar"
+            [listColorNoAvatar]="listColorNoAvatar"
+            ></app-tickets-table-item-requested-by>
+            </ng-template
+        >
             <div
-                class="ticket-detail-contact__avatar qt-mr-8"
+                class="ticket-detail-contact__avatar qt-mr-8 qt-pointer"
                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfile.createdUser)"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser)}"
+                  [ngbPopover]="popContent"
+                [popoverClass]="'requested-by-popover'"
+                 [autoClose]="'outside'"
+                 [container]="'body'"
+                #p="ngbPopover"
+                triggers="manual"
+                appUserLogoPopover
+                [user]="checkExistUser()"
+                [popover]="p"
+                [disabled]="!checkExistUser()"
+                [disablePopover]="!checkExistUser()"
             ></div>
             <span
                 *ngIf="checkExistUser()"

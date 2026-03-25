@@ -36,10 +36,30 @@
 <div class="ticket-detail-page__panel">
     <div class="ticket-detail-page__panel-container">
         <div class="qt-df qt-ai-c">
+               <ng-template #popContent let-greeting="greeting"
+	>
+            <app-tickets-table-item-requested-by
+            [requestedUser]="currentUser"
+            [indexNoAvatar]="indexNoAvatar"
+            [listColorNoAvatar]="listColorNoAvatar"
+            ></app-tickets-table-item-requested-by>
+            </ng-template
+        >
             <div
-                class="qt-sz-36 qt-img-cover qt-circle qt-mr-16 header-avatar"
+                class="qt-sz-36 qt-img-cover qt-circle qt-mr-16 header-avatar qt-pointer"
                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(currentUser)"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(currentUser)}"
+                   [ngbPopover]="popContent"
+                [popoverClass]="'requested-by-popover'"
+                 [autoClose]="'outside'"
+                 [container]="'body'"
+                #p="ngbPopover"
+                triggers="manual"
+                appUserLogoPopover
+                [user]="currentUser"
+                [popover]="p"
+                [disabled]="!currentUser"
+                [disablePopover]="!currentUser"
             ></div>
             <div
                 class="qt-df qt-ai-c"
