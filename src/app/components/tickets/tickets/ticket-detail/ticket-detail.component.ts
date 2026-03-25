@@ -85,6 +85,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   listAssignedUser: Array<CurrentUser> = [];
   lisUpdateUser: Array<CurrentUser> = [];
   sub: Subscription = new Subscription();
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   constructor(private leftPanelStateService: LeftPanelStateService,
     private ticketsStateService: TicketsStateService,
     private confirmStateService: ConfirmStateService,
@@ -112,6 +114,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     (<any>document.body.querySelector(".nav-header")).style.display = "none";
     document.body.querySelector(".main-container").classList.add("main-container__ticket-detail-page");
     if (this.activateRoute.snapshot.params['id'] && !this.isInit) this.getTicket(this.activateRoute.snapshot.params['id']);
@@ -450,6 +454,10 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   onChangeSubjectNote() {
     this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note).subscribe(data => {
     })
+  }
+  getCreatedUser() {
+    if (!this.ticketProfile.createdUser) return null;
+    return this.usersStateService.getAllUsers().find(item => item.id == this.ticketProfile.createdUser.id);
   }
   getNameCreateUser() {
     if (!this.ticketProfile.createdUser) return '';

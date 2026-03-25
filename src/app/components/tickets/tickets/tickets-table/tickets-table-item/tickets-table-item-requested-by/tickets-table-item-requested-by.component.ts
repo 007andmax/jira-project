@@ -19,7 +19,7 @@ import { Ticket } from 'src/app/components/tickets/class/ticket';
   providers: [TicketsListService]
 })
 export class TicketsTableItemRequestedByComponent {
-  @Input() ticket: Ticket;
+  @Input() ticket: any;
   @Input() requestedUser: User;
   @Input() indexNoAvatar: number = 0;
   @Input() listColorNoAvatar = [];

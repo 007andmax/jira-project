@@ -37,6 +37,8 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
   second: number = 0;
   movedWay: boolean = false;
   sub = new Subscription();
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   constructor(private usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,
     public ticketsPermissionsService: TicketsPermissionsService,
@@ -49,6 +51,8 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     if (this.usersStateService.getCurrentUser()) this.currentUser = this.usersStateService.getCurrentUser();
     let getOnGetCurrentuser = this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
@@ -81,6 +85,9 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+  }
+  getUserById(id) {
+    return this.usersStateService.getAllUsers().find(item => item.id == id);
   }
   isAddNoteForCustomerUser() {
     return this.customerPortalStateService.checkEditTicket(this.usersStateService.getCurrentUser(), this.ticketProfile.createdUserId, this.ticketProfile.companyId);

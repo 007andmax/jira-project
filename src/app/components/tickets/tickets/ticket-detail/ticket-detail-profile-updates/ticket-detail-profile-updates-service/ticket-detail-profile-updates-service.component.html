@@ -1,9 +1,30 @@
 <div class="ticket-updates__update-block qt-mb-16">
     <div class="qt-df qt-ai-c qt-mb-16 ticket-updates__update-block__inner">
+         <ng-template #popContent let-greeting="greeting"
+	>
+            <app-tickets-table-item-requested-by
+            [requestedUser]="getUserById(update.user.id)"
+            [indexNoAvatar]="indexNoAvatar"
+            [listColorNoAvatar]="listColorNoAvatar"
+            [ticket]="ticketProfile"
+            ></app-tickets-table-item-requested-by>
+            </ng-template
+        >
         <div
-            class="ticket-updates__ticket-photo"
+            class="ticket-updates__ticket-photo qt-pointer"
             [textContent]="ticketsListService.getAssignedUserNameForAvatar(update.user)"
             [ngStyle]="{'background': ticketsListService.getStyleAvatar(update.user)}"
+              [ngbPopover]="popContent"
+                [popoverClass]="'requested-by-popover'"
+                 [autoClose]="'outside'"
+                 [container]="'body'"
+                #p="ngbPopover"
+                triggers="manual"
+                appUserLogoPopover
+                [user]="getUserById(update.user.id)"
+                [popover]="p"
+                [disabled]="!update.user"
+                [disablePopover]="!update.user"
         ></div>
         <div class="qt-f-1">
             <div class="qt-mb-4">

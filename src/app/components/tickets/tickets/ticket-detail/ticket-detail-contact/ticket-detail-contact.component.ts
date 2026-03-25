@@ -16,12 +16,15 @@ export class TicketDetailContactComponent implements OnInit, OnDestroy {
   @Output() onShowMore = new EventEmitter<any>();
   toggleContainer: boolean = true;
   sub: Subscription = new Subscription();
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   constructor(public ticketsListService: TicketsListService,
     private companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,) { }
 
   ngOnInit() {
-
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
   }
   checkExistUser() {
     return (this.ticketProfile.createdUser) ? this.usersStateService.getAllUsers().find(user => user.id === this.ticketProfile.createdUser.id) : null;

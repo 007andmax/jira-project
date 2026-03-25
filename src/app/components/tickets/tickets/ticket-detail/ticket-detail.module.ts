@@ -100,6 +100,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { TicketDetailTasksItemComponent } from './ticket-detail-tasks/ticket-detail-tasks-item/ticket-detail-tasks-item.component';
 import { TaskHeaderAddTypeModule } from 'src/app/components/tasks/task-header-add/task-header-add-type/task-header-add-type.module';
 import { TasksDatePickerModule } from 'src/app/components/tasks/tasks-date-picker/tasks-date-picker.module';
+import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
+import { TicketsTableItemRequestedByModule } from '../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
 
 
 
@@ -208,6 +210,8 @@ import { TasksDatePickerModule } from 'src/app/components/tasks/tasks-date-picke
         AngularEditorModule,
         TaskHeaderAddTypeModule,
         TasksDatePickerModule,
+        UserLogoPopoverModule,
+        TicketsTableItemRequestedByModule,
     ],
 
 
