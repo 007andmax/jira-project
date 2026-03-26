@@ -3141,10 +3141,23 @@ app-company-devices-edit-ip,app-company-devices-edit-mac {
     padding: 8px;
   }
 
-  app-users-table-company-info-item:last-child {
-    .qt-mb-8 {
-      margin-bottom: 0;
+  div {
+    margin-top: 0;
+  }
+
+  app-users-table-company-info-item {
+    &:last-child {
+      .qt-mb-8 {
+        margin-bottom: 0;
+      }
     }
+  }
+
+  .app-users-table-company-info-item__name {
+    line-height: 20px;
+  }
+  .app-users-table-company-info-item__position {
+    line-height: 16px;
   }
 }
 .dshboard-billable-tooltip {
