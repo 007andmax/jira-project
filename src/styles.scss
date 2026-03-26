@@ -3140,6 +3140,12 @@ app-company-devices-edit-ip,app-company-devices-edit-mac {
     text-overflow: ellipsis;
     padding: 8px;
   }
+
+  app-users-table-company-info-item:last-child {
+    .qt-mb-8 {
+      margin-bottom: 0;
+    }
+  }
 }
 .dshboard-billable-tooltip {
   .tooltip-inner {
