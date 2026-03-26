@@ -13,7 +13,11 @@ import { SINGLE_SELECT } from 'src/app/const/users';
 export class CompanyTechUsersComponent extends TechUsersComponent {
   @ViewChild('dp', { static: true }) dp: NgbDropdown;
   outSelectedUsers = [];
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     if (this.editMode) {
       this.usersList.forEach(item => {
         let index = this.editUsers.findIndex(user => user.id === item.id);

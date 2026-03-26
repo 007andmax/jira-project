@@ -4,10 +4,12 @@ import { Document } from '../../class/document';
 import { DocumentHistory } from '../../class/document-history';
 import * as moment from "moment";
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 @Component({
   selector: 'documents-edit-history',
   templateUrl: './documents-edit-history.component.html',
-  styleUrls: ['./documents-edit-history.component.scss']
+  styleUrls: ['./documents-edit-history.component.scss'],
+  providers: [TicketsListService]
 })
 export class DocumentsEditHistoryComponent implements OnInit {
   @Input() documentEdit: Document;
@@ -16,10 +18,15 @@ export class DocumentsEditHistoryComponent implements OnInit {
   showMiniPreloader: boolean = false;
   list: Array<DocumentHistory> = []
   page: number = 0;
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   constructor(private documentsService: DocumentsService,
+    public ticketsListService: TicketsListService,
     public usersStateService: UsersStateService,) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     this.getHistory();
   }
   getHistory() {

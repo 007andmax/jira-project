@@ -6,10 +6,29 @@
         [ngForTrackBy]="trackById"
     >
         <div class="documents-create__document-history-item">
+             <ng-template #popContent let-greeting="greeting"
+                >
+                <app-tickets-table-item-requested-by
+                [requestedUser]="getUserById(item.userId)"
+                [indexNoAvatar]="indexNoAvatar"
+                [listColorNoAvatar]="listColorNoAvatar"
+                ></app-tickets-table-item-requested-by>
+                </ng-template>
             <div
-                class="documents-create__document-history-avatar"
+                class="documents-create__document-history-avatar qt-pointer"
                 [ngStyle]="{'background':  getUserAvatarUrl(getUserById(item.userId))}"
                 [textContent]="usersStateService.getNameForAvatar(getUserById(item.userId))"
+                  [ngbPopover]="popContent"
+                [popoverClass]="'requested-by-popover'"
+                [autoClose]="'outside'"
+                [container]="'body'"
+                #p="ngbPopover"
+                triggers="manual"
+                appUserLogoPopover
+                [user]="getUserById(item.userId)"
+                [popover]="p"
+                [disabled]="!getUserById(item.userId)"
+                [disablePopover]="!getUserById(item.userId)"
             ></div>
             <div class="history-user-info">
                 <p

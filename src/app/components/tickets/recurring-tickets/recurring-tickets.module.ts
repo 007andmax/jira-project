@@ -30,6 +30,8 @@ import { MatFormFieldModule } from '../../shared/mat-form-field/mat-form-field.m
 import { MatOptionModule } from '../../shared/mat-option/mat-option.module';
 import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
 import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
+import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
+import { TicketsTableItemRequestedByModule } from '../tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
 
 
 
@@ -69,7 +71,9 @@ import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
         MatChipListModule,
         MatOptionModule,
         DecimalNumberModule,
-        ToFixedModule
+        ToFixedModule,
+        TicketsTableItemRequestedByModule,
+        UserLogoPopoverModule,
     ],
 
 
