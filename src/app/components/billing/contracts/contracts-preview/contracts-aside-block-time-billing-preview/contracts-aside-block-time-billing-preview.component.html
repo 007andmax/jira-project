@@ -215,10 +215,30 @@
                     *ngFor="let user of contractsBlockTime.shares; let i = index"
                 >
                     <div class="qt-df qt-ai-c">
+                         <ng-template #popContent let-greeting="greeting"
+                        >
+                                <app-tickets-table-item-requested-by
+                                [requestedUser]="getUser(user.userId)"
+                                [indexNoAvatar]="indexNoAvatar"
+                                [listColorNoAvatar]="listColorNoAvatar"
+                                ></app-tickets-table-item-requested-by>
+                                </ng-template
+                            >
                         <div
-                            class="app-mat-tags-with-avatar__avatar"
+                            class="app-mat-tags-with-avatar__avatar qt-pointer"
                             [textContent]="getAssignedUserNameForAvatar(getUser(user.userId))"
                             [ngStyle]="{'background': getStyleAvatar(getUser(user.userId)),'background-size': 'contain'}"
+                              [ngbPopover]="popContent"
+                                [popoverClass]="'requested-by-popover'"
+                                [autoClose]="'outside'"
+                                [container]="'body'"
+                                #p="ngbPopover"
+                                triggers="manual"
+                                appUserLogoPopover
+                                [user]="getUser(user.userId)"
+                                [popover]="p"
+                                [disabled]="!getUser(user.userId)"
+                                [disablePopover]="!getUser(user.userId)"
                         ></div>
                         <div
                             [textContent]="getUserName(getUser(user.userId))"

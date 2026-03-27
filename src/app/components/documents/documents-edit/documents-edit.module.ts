@@ -16,6 +16,8 @@ import { DocumentsAddEditCategoriesModule } from '../documents-add/documents-add
 import { DocumentsEditRoutingModule } from './documents-edit-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
+import { TicketsTableItemRequestedByModule } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         DocumentsAddEditCategoriesModule,
         DocumentsEditRoutingModule,
         NgbModule,
-        MatErrorModule
+        MatErrorModule,
+        TicketsTableItemRequestedByModule,
+        UserLogoPopoverModule,
     ],
 
 

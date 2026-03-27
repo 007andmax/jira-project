@@ -10,6 +10,8 @@ import { CommissionRoutingModule } from './commission-routing.module';
 import { TechUsersModule } from '../../shared/tech-users/tech-users.module';
 import { CompanyTechUsersComponent } from './company/company-tech-users/company-tech-users.component';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
+import { TicketsTableItemRequestedByModule } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
         NgbModule,
         TechUsersModule,
         CommissionRoutingModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        TicketsTableItemRequestedByModule,
+        UserLogoPopoverModule,
     ],
 
 

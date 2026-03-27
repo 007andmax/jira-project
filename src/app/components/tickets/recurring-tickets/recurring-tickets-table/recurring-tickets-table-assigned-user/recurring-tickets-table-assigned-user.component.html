@@ -1,7 +1,26 @@
+ <div>
+ <ng-template #popContent let-greeting="greeting"
+                >
+                <app-tickets-table-item-requested-by
+                [requestedUser]="getUserById(user.id)"
+                [indexNoAvatar]="indexNoAvatar"
+                [listColorNoAvatar]="listColorNoAvatar"
+                ></app-tickets-table-item-requested-by>
+                </ng-template>
 <div
     class="qt-table-modern__circle-avatar"
     [textContent]="getAssignedUserNameForAvatar(user)"
     [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar])}"
-    [ngbTooltip]="user.firstName + ' ' + user.lastName"
+     [ngbPopover]="popContent"
+    [popoverClass]="'requested-by-popover'"
+    [autoClose]="'outside'"
     [container]="'body'"
+    #p="ngbPopover"
+    triggers="manual"
+    appUserLogoPopover
+    [user]="getUserById(user.id)"
+    [popover]="p"
+    [disabled]="!getUserById(user.id)"
+    [disablePopover]="!getUserById(user.id)"
 ></div>
+</div>

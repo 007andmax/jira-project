@@ -32,6 +32,8 @@ export class QuotesItemComponent implements OnInit {
   @Output() onCopy = new EventEmitter<any>();
   @Output() onTicket = new EventEmitter<any>();
   @Output() onInvoice = new EventEmitter<any>();
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   constructor(public usersStateService: UsersStateService,
     private permissionsService: PermissionsService,
     public ticketsListService: TicketsListService,
@@ -39,6 +41,8 @@ export class QuotesItemComponent implements OnInit {
     private toastrProgressStateService: ToastrProgressStateService) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     this.createdUser = this.usersStateService.getAllUsers().find(item => item.id === this.quote.createdBy);
   }
   openInvoiceTikcet() {

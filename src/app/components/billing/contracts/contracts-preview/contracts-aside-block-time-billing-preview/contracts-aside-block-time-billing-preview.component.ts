@@ -8,11 +8,13 @@ import { ServiceAgreement } from '../../class/service-agreement';
 import * as moment from "moment";
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
+import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing-preview',
   templateUrl: './contracts-aside-block-time-billing-preview.component.html',
-  styleUrls: ['./contracts-aside-block-time-billing-preview.component.scss']
+  styleUrls: ['./contracts-aside-block-time-billing-preview.component.scss'],
+  providers: [TicketsListService]
 })
 export class ContractsAsideBlockTimeBillingPreviewComponent implements OnInit, OnDestroy {
 
@@ -26,13 +28,17 @@ export class ContractsAsideBlockTimeBillingPreviewComponent implements OnInit, O
   formatDate: string = FORMAT_DATE_2;
   toggleTimeRollover: boolean = false;
   sub: Subscription = new Subscription();
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   constructor(private companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,
     private taxesStateService: TaxesStateService,
+    public ticketsListService: TicketsListService,
   ) { }
 
   ngOnInit() {
-
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
 
   }
   ngDoCheck() {

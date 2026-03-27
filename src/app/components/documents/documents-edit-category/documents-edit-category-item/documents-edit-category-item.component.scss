@@ -15,9 +15,9 @@
 }
 .square-avatar {
     width: 20px;
-    height: 20px;
+    height: 16px;
     min-width: 20px;
-    min-height: 20px;
+    min-height: 16px;
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -25,5 +25,6 @@
     line-height: 1;
     &__text {
         color: $white;
+         font-size: 12px;
     }
 }
