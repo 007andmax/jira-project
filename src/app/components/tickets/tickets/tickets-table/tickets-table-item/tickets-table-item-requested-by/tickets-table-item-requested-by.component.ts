@@ -80,11 +80,13 @@ export class TicketsTableItemRequestedByComponent {
   createTask(taskType) {
     this.typeDropDown = "TASK";
     this.taskType = taskType;
-    if (this.requestedUser.customerCompaniesInfo.length > 1) this.dp.open();
-    if (this.requestedUser.customerCompaniesInfo.length == 1) this.onSelectCompanyInfoForCreateTask(this.requestedUser.customerCompaniesInfo[0]);
-    if (this.requestedUser.customerCompaniesInfo.length == 0 && this.requestedUser.accountType == "TECH") this.onSelectCompanyInfoForCreateTask({ companyId: this.ticket ? this.ticket.companyId : null });
+    console.log("this.requestedUser", this.requestedUser);
+    if (this.requestedUser.accountType == "CLIENT" && this.requestedUser.customerCompaniesInfo.length > 1) this.dp.open();
+    if (this.requestedUser.accountType == "CLIENT" && this.requestedUser.customerCompaniesInfo.length == 1) this.onSelectCompanyInfoForCreateTask(this.requestedUser.customerCompaniesInfo[0]);
+    if (this.requestedUser.accountType == "TECH") this.onSelectCompanyInfoForCreateTask({ companyId: this.ticket ? this.ticket.companyId : null });
   }
   onSelectCompanyInfoForCreateTask(item) {
+    console.log("item", item);
     this.dp.close();
     let step = 1;
     let serviceExpenseDurationPickerInterval = this.companiesState.getCurrentCompany() ? this.companiesState.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
