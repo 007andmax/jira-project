@@ -4,18 +4,50 @@
         class="cps-block__visible-user qt-df qt-ai-c qt-pt-10 qt-pb-10 qt-pl-16 qt-pr-16 qt-mb-4"
     >
         <div ngbDropdown>
+             <ng-template #popContent let-greeting="greeting"
+	>
+            <app-tickets-table-item-requested-by
+            [requestedUser]="getUserById(ticketProfileFormUpdate.getTechUser().id)"
+            [indexNoAvatar]="indexNoAvatar"
+            [listColorNoAvatar]="listColorNoAvatar"
+            [ticket]="ticketProfile"
+            ></app-tickets-table-item-requested-by>
+            </ng-template
+        >
             <div
-                class="cps-block__photo"
+                class="cps-block__photo qt-pointer"
                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfileFormUpdate.getTechUser())"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfileFormUpdate.getTechUser())}"
                 *ngIf="tab === 'NOTE'"
+                  [ngbPopover]="popContent"
+                [popoverClass]="'requested-by-popover'"
+                 [autoClose]="'outside'"
+                 [container]="'body'"
+                #p="ngbPopover"
+                triggers="manual"
+                appUserLogoPopover
+                [user]="getUserById(ticketProfileFormUpdate.getTechUser().id)"
+                [popover]="p"
+                [disabled]="!ticketProfileFormUpdate.getTechUser()"
+                [disablePopover]="!ticketProfileFormUpdate.getTechUser()"
             ></div>
             <div
-                class="cps-block__photo"
+                class="cps-block__photo qt-pointer"
                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfileFormUpdate.getTechUser())"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfileFormUpdate.getTechUser())}"
                 ngbDropdownToggle
                 *ngIf="tab === 'SERVICE' || tab === 'PRODUCT'"
+                  [ngbPopover]="popContent"
+                [popoverClass]="'requested-by-popover'"
+                 [autoClose]="'outside'"
+                 [container]="'body'"
+                #p="ngbPopover"
+                triggers="manual"
+                appUserLogoPopover
+                [user]="getUserById(ticketProfileFormUpdate.getTechUser().id)"
+                [popover]="p"
+                [disabled]="!ticketProfileFormUpdate.getTechUser()"
+                [disablePopover]="!ticketProfileFormUpdate.getTechUser()"
             ></div>
             <div ngbDropdownMenu>
                 <ng-template

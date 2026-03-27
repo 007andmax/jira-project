@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TicketProfileShare } from '../../../class/ticket-profile-share';
 import { TicketsListService } from '../../../services/tickets-list.service';
 import * as moment from "moment";
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { TicketProfile } from '../../../class/ticket-profile';
 
 @Component({
   selector: 'ticket-detail-profile-updates-header-info',
@@ -9,13 +11,19 @@ import * as moment from "moment";
   styleUrls: ['./ticket-detail-profile-updates-header-info.component.scss']
 })
 export class TicketDetailProfileUpdatesHeaderInfoComponent implements OnInit {
-
+  @Input() ticketProfile: TicketProfile = new TicketProfile();
   @Input() otherRecipients: Array<string> = [];
   @Input() shares: Array<TicketProfileShare> = [];
   @Input() date: number = 0;
-  constructor(public ticketsListService: TicketsListService) { }
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
+  constructor(public ticketsListService: TicketsListService,
+    public usersStateService: UsersStateService,
+  ) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
   }
   getStyleNetAvatar(i) {
     return `${12 * i}px`;
@@ -25,6 +33,9 @@ export class TicketDetailProfileUpdatesHeaderInfoComponent implements OnInit {
   }
   public getDate() {
     return `${moment(new Date(this.date)).format('DD MMM YYYY')} at ${moment(new Date(this.date)).format('hh:mm A')}`;
+  }
+  getUserById(id) {
+    return this.usersStateService.getAllUsers().find(item => item.id == id);
   }
   public trackByIndex(index, item) {
     return index;
