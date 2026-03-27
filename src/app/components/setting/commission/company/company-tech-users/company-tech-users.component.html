@@ -42,7 +42,7 @@
               <ng-template #popContent let-greeting="greeting"
                 >
                 <app-tickets-table-item-requested-by
-                [requestedUser]="selectedUsers[0]"
+                [requestedUser]="getUserById(selectedUsers[0].id)"
                 [indexNoAvatar]="indexNoAvatar"
                 [listColorNoAvatar]="listColorNoAvatar"
                 ></app-tickets-table-item-requested-by>
@@ -58,7 +58,7 @@
                 #p="ngbPopover"
                 triggers="manual"
                 appUserLogoPopover
-                [user]="selectedUsers[0]"
+                [user]="getUserById(selectedUsers[0].id)"
                 [popover]="p"
             >
             </div>

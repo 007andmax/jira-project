@@ -6,6 +6,7 @@ import { TechUserItem } from './class/tech-user-item';
 import { SINGLE_SELECT, MULTIPLE_SELECT, RECURRING_TICEKTS } from 'src/app/const/users';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-tech-users',
@@ -42,6 +43,7 @@ export class TechUsersComponent implements OnInit, OnDestroy {
     private techState: TechUsersStateService,
     public cd: ChangeDetectorRef,
     public ticketsListService: TicketsListService,
+    public usersStateService: UsersStateService,
     private elRef: ElementRef,
   ) { }
 

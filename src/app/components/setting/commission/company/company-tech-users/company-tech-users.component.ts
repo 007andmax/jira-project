@@ -31,6 +31,9 @@ export class CompanyTechUsersComponent extends TechUsersComponent {
     this.onInitClearState();
     this.checUsersForEdit();
   }
+  getUserById(userId) {
+    return this.usersStateService.getAllUsers().find(item => item.id === userId);
+  }
   public resetEditMode() {
     this.selectedUsers = [];
     this.usersList.forEach(item => {
