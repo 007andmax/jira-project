@@ -6,6 +6,8 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketProfileProduct } from '../../../../class/ticket-profile-product';
 import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
 import { TicketsListService } from '../../../../services/tickets-list.service';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { TicketProfile } from '../../../../class/ticket-profile';
 
 @Component({
   selector: 'ticket-detail-profile-updates-product-edit',
@@ -13,17 +15,23 @@ import { TicketsListService } from '../../../../services/tickets-list.service';
   styleUrls: ['./ticket-detail-profile-updates-product-edit.component.scss']
 })
 export class TicketDetailProfileUpdatesProductEditComponent implements OnInit {
+  @Input() ticketProfile: TicketProfile = new TicketProfile();
   @Input() product: TicketProfileProduct;
   @Input() update: TicketProfileUpdate;
   @Output() onEdit = new EventEmitter();
   editProduct: TicketProfileProduct;
   valdiateSaleCost: boolean = true;
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   constructor(private productService: ProductService,
     private ticketsService: TicketsService,
     private permissionsService: PermissionsService,
+    public usersStateService: UsersStateService,
     public ticketsListService: TicketsListService) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     this.editProduct = new TicketProfileProduct(this.product);
   }
   public getTotal(price, quantity) {
@@ -37,6 +45,9 @@ export class TicketDetailProfileUpdatesProductEditComponent implements OnInit {
     this.editProduct.item.sale = value;
     this.editProduct.item.sale_str = value.toFixed(2);
 
+  }
+  getUserById(id) {
+    return this.usersStateService.getAllUsers().find(item => item.id == id);
   }
   onValidateSaleCost() {
     if (this.editProduct.item.sale > this.editProduct.item.cost) this.valdiateSaleCost = true;
