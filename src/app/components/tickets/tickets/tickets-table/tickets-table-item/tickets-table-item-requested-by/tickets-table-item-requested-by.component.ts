@@ -80,11 +80,13 @@ export class TicketsTableItemRequestedByComponent {
   createTask(taskType) {
     this.typeDropDown = "TASK";
     this.taskType = taskType;
-    if (this.requestedUser.customerCompaniesInfo.length > 1) this.dp.open();
-    if (this.requestedUser.customerCompaniesInfo.length == 1) this.onSelectCompanyInfoForCreateTask(this.requestedUser.customerCompaniesInfo[0]);
-    if (this.requestedUser.customerCompaniesInfo.length == 0 && this.requestedUser.accountType == "TECH") this.onSelectCompanyInfoForCreateTask({ companyId: this.ticket.companyId });
+    console.log("this.requestedUser", this.requestedUser);
+    if (this.requestedUser.accountType == "CLIENT" && this.requestedUser.customerCompaniesInfo.length > 1) this.dp.open();
+    if (this.requestedUser.accountType == "CLIENT" && this.requestedUser.customerCompaniesInfo.length == 1) this.onSelectCompanyInfoForCreateTask(this.requestedUser.customerCompaniesInfo[0]);
+    if (this.requestedUser.accountType == "TECH") this.onSelectCompanyInfoForCreateTask({ companyId: this.ticket ? this.ticket.companyId : null });
   }
   onSelectCompanyInfoForCreateTask(item) {
+    console.log("item", item);
     this.dp.close();
     let step = 1;
     let serviceExpenseDurationPickerInterval = this.companiesState.getCurrentCompany() ? this.companiesState.getCurrentCompany().serviceExpenseDurationPickerInterval : '';
@@ -97,7 +99,7 @@ export class TicketsTableItemRequestedByComponent {
     let endDate = new Date(startDate.getTime() + step * 60000);
 
     this.tasksStateService.openAddAsideFromShortVersion({
-      title: this.requestedUser.accountType == "TECH" ? `Ticket #${this.ticket.number} - ${this.ticket.subject}` : `${this.taskType == 'To do' ? 'To do - ' : 'Meeting - '}${this.requestedUser.firstName} ${this.requestedUser.lastName}`,
+      title: this.requestedUser.accountType == "TECH" ? (this.ticket ? `Ticket #${this.ticket.number} - ${this.ticket.subject}` : '') : `${this.taskType == 'To do' ? 'To do - ' : 'Meeting - '}${this.requestedUser.firstName} ${this.requestedUser.lastName}`,
       startDate: startDate.getTime(),
       description: this.requestedUser.accountType == "TECH" ? '' : `${this.requestedUser.firstName} ${this.requestedUser.lastName} <br>
       ${this.requestedUser.primaryEmail} <br>
@@ -117,7 +119,7 @@ export class TicketsTableItemRequestedByComponent {
     this.typeDropDown = "TICKET";
     if (this.requestedUser.customerCompaniesInfo.length > 1) this.dp.open();
     if (this.requestedUser.customerCompaniesInfo.length == 1) this.onSelectCompanyInfo(this.requestedUser.customerCompaniesInfo[0]);
-    if (this.requestedUser.customerCompaniesInfo.length == 0 && this.requestedUser.accountType == "TECH") this.onSelectCompanyInfo({ companyId: this.ticket.companyId, clientCompanyName: this.companiesState.getCompanies().find(item => item.id == this.ticket.companyId).name });
+    if (this.requestedUser.customerCompaniesInfo.length == 0 && this.requestedUser.accountType == "TECH") this.onSelectCompanyInfo({ companyId: this.ticket ? this.ticket.companyId : null, clientCompanyName: this.ticket ? this.companiesState.getCompanies().find(item => item.id == this.ticket.companyId).name : null });
 
   }
 }
