@@ -44,14 +44,16 @@
                 class="qt-table-modern__circle-avatar"
                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(salesPerson)"
                 [ngStyle]="{'background': getStyleAvatar(salesPerson)}"
-                   [ngbPopover]="popContent"
+                [ngbPopover]="popContent"
                 [popoverClass]="'requested-by-popover'"
                  [autoClose]="'outside'"
                  [container]="'body'"
                 #p="ngbPopover"
                 triggers="manual"
-                (mouseenter)="openPopover(p)"
-                (mouseleave)="startCloseTimer(p)"
+                 appUserLogoPopover
+                [user]="salesPerson"
+                [popover]="p"
+                [disabled]="!salesPerson"
                 [disablePopover]="!salesPerson"
             >
             </div>

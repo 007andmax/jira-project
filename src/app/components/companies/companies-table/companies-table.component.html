@@ -106,8 +106,10 @@
                  [container]="'body'"
                 #p="ngbPopover"
                 triggers="manual"
-                (mouseenter)="openPopover(p)"
-                (mouseleave)="startCloseTimer(p)"
+                 appUserLogoPopover
+                [user]="primaryContact"
+                [popover]="p"
+                [disabled]="!primaryContact"
                 [disablePopover]="!primaryContact"
                     ></div>
                 <div class="mob-styles">

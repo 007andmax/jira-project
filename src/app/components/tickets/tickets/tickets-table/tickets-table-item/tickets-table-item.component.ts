@@ -45,8 +45,6 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
   userList: Array<User> = [];
   listAssignedUser: Array<CurrentUser> = [];
   sub: Subscription = new Subscription();
-  private closeTimer: any;
-  private openTimer: any;
   constructor(public usersStateService: UsersStateService,
     public ticketsListService: TicketsListService,
     public companiesStateService: CompaniesStateService,
@@ -170,51 +168,8 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
   getClassType() {
     return `priority-icon ${(this.ticket.priorityLevel && this.ticket.priorityLevel.name === "MEDIUM") ? '--' + this.ticket.priorityLevel.name.toLowerCase() : ''}`;
   }
-  openPopover(popover: NgbPopover): void {
-    if (!this.requestedUser) return;
-    clearTimeout(this.closeTimer);
-
-    if (!popover.isOpen()) {
-      this.openTimer = setTimeout(() => {
-        popover.open();
-        this.appStateService.changeDetectorRef();
-        // Wait until popover is added to <body>
-        setTimeout(() => {
-          const popoverEl: any = document.querySelector('.requested-by-popover');
-
-          if (!popoverEl) {
-            return;
-          }
-          popoverEl.style.opacity = "1";
-          popoverEl.addEventListener('mouseenter', this.onPopoverMouseEnter);
-          popoverEl.addEventListener('mouseleave', () => {
-            if (!this.usersStateService.isOpenDropDownRequestedBy) popover.close();
-          });
-        });
-      }, 500);
-    }
-  }
-
-  startCloseTimer(popover: NgbPopover): void {
-    if (!this.requestedUser || this.usersStateService.isOpenDropDownRequestedBy) return;
-    clearTimeout(this.closeTimer);
-    clearTimeout(this.openTimer);
-    this.closeTimer = setTimeout(() => {
-      const popoverEl = document.querySelector('.requested-by-popover:hover');
-
-      // close only if mouse is not over popover body
-      if (!popoverEl) {
-        popover.close();
-      }
-    }, 150);
-  }
-
-  onPopoverMouseEnter = (): void => {
-    clearTimeout(this.closeTimer);
-  };
 
   ngOnDestroy(): void {
-    clearTimeout(this.closeTimer);
     this.sub.unsubscribe();
   }
   public trackById(index, item) {

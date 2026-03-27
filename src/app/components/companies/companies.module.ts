@@ -22,6 +22,7 @@ import { CompanyTagsModule } from './company-tags/company-tags.module';
 import { RightClickBlankModule } from 'src/app/directives/right-click-blank/right-click-blank.module';
 import { PreviewPhoneMaskModule } from '../shared/preview-phone-mask/preview-phone-mask.module';
 import { TicketsTableItemRequestedByModule } from '../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
+import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
 
 @NgModule({
     declarations: [CompaniesComponent,
@@ -45,7 +46,8 @@ import { TicketsTableItemRequestedByModule } from '../tickets/tickets/tickets-ta
         CompanyTagsModule,
         RightClickBlankModule,
         PreviewPhoneMaskModule,
-        TicketsTableItemRequestedByModule
+        TicketsTableItemRequestedByModule,
+        UserLogoPopoverModule
     ],
 
 
