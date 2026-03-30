@@ -22,14 +22,6 @@ tr {
 .multi-assign-user-container {
   position: relative;
 }
-.more-users {
-  position: absolute;
-  top: -12px;
-  background: $gray-100;
-  color: $gray-600;
-  font-size: 12px;
-  font-weight: 600;
-}
 .ticket-table__assignee {
   overflow: unset;
   cursor: default;

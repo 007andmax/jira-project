@@ -40,7 +40,7 @@ export class TicketsTableItemAssignedUserComponent {
   }
   getAssignedUserNameForAvatar(user) {
     if (!user) return '';
-    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
+    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}`;
     return '';
   }
   onCloseDropDown(data, input) {
@@ -104,6 +104,6 @@ export class TicketsTableItemAssignedUserComponent {
 
   }
   getStyleNetAvatar(i) {
-    return `${12 * i}px`;
+    return `${18 * i}px`;
   }
 }
