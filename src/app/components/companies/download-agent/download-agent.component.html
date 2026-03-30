@@ -26,11 +26,65 @@
     </button>
     <p class="qt-color-gray-400 qt-fs-12 qt-lh-1">OR</p>
     <button
-        class="qt-button --outline qt-w100 primary-default ng-isolate-scope"
+        class="qt-button --outline qt-w100 primary-default ng-isolate-scope qt-mb-12"
         (click)="getDonwloadLink()"
         custom-disabled="false"
         ng-disabled="false"
     >
         Copy a installer link to clipboard
     </button>
+     <button
+        class="qt-button --outline qt-w100 primary-default ng-isolate-scope"
+        (click)="showWingetCommand()"
+    >
+        Winget installer Command
+    </button>
+    <div class="qt-mt-16" *ngIf="toggleWingetCommand">
+         <div class="qt-inputs-row">
+            <div
+                class="qt-input-block qt-w100"
+               
+            >
+                <div class="qt-input-block__label">Add Quicktech Winget repository</div>
+                <div class="qt-df qt-ai-c">
+                <input
+                    type="text"
+                    [value]="getWingetRepositoryLink()"
+                    disabled
+                >
+                    <div
+    class="qt-button-square pointer qt-ml-4 draft-email-btn "  
+      placement="top"
+    ngbTooltip="Copy"
+    (click)="copyWingetRepositoryLink()"
+>
+    <div class="qt-icon icon__copy  qt-sz-16 pointer qt-bg-contain"></div>
+</div>
+</div>
+            </div>
+        </div>
+         <div class="qt-inputs-row">
+            <div
+                class="qt-input-block qt-w100"
+               
+            >
+                <div class="qt-input-block__label">Install Quicktech Win-Get command</div>
+                  <div class="qt-df qt-ai-c">
+                <input
+                    type="text"
+                    [value]="getWinGetCommand()"
+                    disabled
+                >
+                    <div
+    class="qt-button-square pointer qt-ml-4 draft-email-btn "  
+      placement="top"
+    ngbTooltip="Copy"
+    (click)="copyWinGetCommand()"
+>
+    <div class="qt-icon icon__copy  qt-sz-16 pointer qt-bg-contain"></div>
+</div>
+</div>
+            </div>
+        </div>
+    </div>
 </div>
