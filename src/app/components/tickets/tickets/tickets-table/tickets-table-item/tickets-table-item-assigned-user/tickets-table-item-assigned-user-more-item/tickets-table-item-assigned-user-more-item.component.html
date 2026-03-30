@@ -1,0 +1,14 @@
+  <div
+    class="qt-df qt-ai-c qt-mb-8"
+    
+>
+    <div
+        class="tooltip__circle-avatar"
+        [textContent]="getAssignedUserNameForAvatar(user)"
+        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) }"
+    ></div>
+    <span
+        class="qt-ml-8"
+        [textContent]="user.firstName + ' ' + user.lastName"
+    ></span>
+</div>

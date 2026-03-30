@@ -57,36 +57,16 @@ class="qt-w100"
                 [ngForOf]="ticket.multiAssignedUsers"
                 [ngForTrackBy]="trackById"
             >
-                 <ng-template #popContentM 
-	>
-    <app-tickets-table-item-requested-by  
-    [requestedUser]="getUserById(user.id)"
-    [indexNoAvatar]="indexNoAvatar"
-    [listColorNoAvatar]="listColorNoAvatar"
-    [ticket]="ticket"
-    ></app-tickets-table-item-requested-by>
-    </ng-template
->
-                <div
-                    class="qt-table-modern__circle-avatar multi-assign-user"
-                    *ngIf="i < 5"
-                    [ngClass]="{'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
-                    [textContent]="getAssignedUserNameForAvatar(user)"
-                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) ,
-                'left': getStyleNetAvatar(i)}"
-                     [ngbPopover]="popContentM"
-                [popoverClass]="'requested-by-popover'"
-                 [autoClose]="'outside'"
-                 [container]="'body'"
-                #pM="ngbPopover"
-                triggers="manual"
-                appUserLogoPopover
-                [user]="getUserById(user.id)"
-                [popover]="pM"
-                [disabled]="!getUserById(user.id)"
-                [disablePopover]="!getUserById(user.id)"
+                 <app-tickets-table-item-assigned-user-item
+                 [user]="user"
+                 [ticket]="ticket"
+                 [i]="i"
+                 [getAssignedUserNameForAvatar]="getAssignedUserNameForAvatar"
+                 [getStyleNetAvatar]="getStyleNetAvatar"
+                 [getUserById]="getUserById"
                   (click)="showDropDown()"
-                ></div>
+
+                 ></app-tickets-table-item-assigned-user-item>
             </ng-template>
             <div
                 class="more-users qt-table-modern__circle-avatar"
@@ -107,20 +87,11 @@ class="qt-w100"
                 [ngForOf]="ticket.multiAssignedUsers"
                 [ngForTrackBy]="trackById"
             >
-                <div
-                    class="qt-df qt-ai-c qt-mb-8"
-                    *ngIf="i >= 5"
-                >
-                    <div
-                        class="tooltip__circle-avatar"
-                        [textContent]="getAssignedUserNameForAvatar(user)"
-                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) }"
-                    ></div>
-                    <span
-                        class="qt-ml-8"
-                        [textContent]="user.firstName + ' ' + user.lastName"
-                    ></span>
-                </div>
+            <app-tickets-table-item-assigned-user-more-item
+              *ngIf="i >= 5"    
+                    [user]="user"
+                    [getAssignedUserNameForAvatar]="getAssignedUserNameForAvatar"
+            ></app-tickets-table-item-assigned-user-more-item>
             </ng-template>
         </ng-template>
   <div

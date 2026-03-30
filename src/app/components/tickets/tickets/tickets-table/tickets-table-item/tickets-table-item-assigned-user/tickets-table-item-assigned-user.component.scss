@@ -97,15 +97,12 @@
   width: 100%;
   height: 56px;
 }
-.multi-assign-user {
-  position: absolute;
-  border: 1px solid $white;
-}
+
 .more-users {
   position: absolute;
   background: $gray-100;
   color: $gray-600;
-  font-size: 12px;
+  font-size: 12px !important;
   font-weight: 500;
   top: -12px;
 }

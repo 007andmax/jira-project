@@ -12,9 +12,11 @@ import { TicketsTableItemRequestedByComponent } from './tickets-table-item-reque
 import { NgxMaskModule } from 'ngx-mask';
 import { TicketsTableItemRequestedByModule } from './tickets-table-item-requested-by/tickets-table-item-requested-by.module';
 import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
+import { TicketsTableItemAssignedUserItemComponent } from './tickets-table-item-assigned-user/tickets-table-item-assigned-user-item/tickets-table-item-assigned-user-item.component';
+import { TicketsTableItemAssignedUserMoreItemComponent } from './tickets-table-item-assigned-user/tickets-table-item-assigned-user-more-item/tickets-table-item-assigned-user-more-item.component';
 
 @NgModule({
-    declarations: [TicketsTableItemComponent, TicketsTableItemAssignedUserComponent, TicketsTableItemStatusComponent
+    declarations: [TicketsTableItemComponent, TicketsTableItemAssignedUserComponent, TicketsTableItemStatusComponent, TicketsTableItemAssignedUserItemComponent, TicketsTableItemAssignedUserMoreItemComponent
     ],
     imports: [
         CommonModule,
