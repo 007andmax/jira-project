@@ -33,7 +33,8 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   users: Array<TechUserItem> = [];
   sub = new Subscription();
   @Output() usersChange = new EventEmitter();
-
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   /**
   * Creates an instance of the TechUsersComponent with the injected services
   * @param {techService} TechUsersService Service to work with tech users
@@ -51,6 +52,8 @@ export class TechUsersComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     if (this.editMode) {
       this.selectedUsers = [];
       this.usersList.forEach(item => {

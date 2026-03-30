@@ -23,6 +23,7 @@ import { PasswordRecordLink } from '../class/password-record-link';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { Device } from '../../company-devices/class/device';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
+import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 declare var URL: any;
 /**
  * Password manager edit aside component
@@ -31,6 +32,7 @@ declare var URL: any;
   selector: 'app-password-manager-edit-aside',
   templateUrl: './password-manager-edit-aside.component.html',
   styleUrls: ['./password-manager-edit-aside.component.scss'],
+  providers: [TicketsListService]
 
 })
 export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
@@ -55,6 +57,8 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   public gadgetsList: Array<PasswordDeviceUser> = [];
   sub: Subscription = new Subscription();
   @ViewChild('saveRecord', { static: false }) saveRecord: DisabledBtnDirective;
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   /**
    * Creates an instance of the PasswordManagerEditAsideComponent with the injected services
      * @param {FormBuilder} fb Service to work with form
@@ -79,12 +83,15 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     public devicesService: DevicesService,
     private appStateService: AppStateService,
     public devicesStateService: DevicesStateService,
+    public ticketsListService: TicketsListService,
   ) { }
 
   /**
    * Initializes Password manager edit aside. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     if (this.companiesState.isInitLightAllCompanies && this.editItem) this.selectedClient = this.companiesState.getLightCompanies().find(item => item.id === this.editItem.companyId);
     let getOnCompanies = this.companiesState.onLightCompanies.subscribe((data) => {
       if (this.editItem) this.selectedClient = data.find(item => item.id === this.editItem.companyId);

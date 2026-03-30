@@ -19,6 +19,8 @@ import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-c
 import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
 import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
 import { MatOptionModule } from 'src/app/components/shared/mat-option/mat-option.module';
+import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
+import { TicketsTableItemRequestedByModule } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
 
 
 
@@ -44,7 +46,9 @@ import { MatOptionModule } from 'src/app/components/shared/mat-option/mat-option
         MatChipModule,
         MatChipListModule,
         MatOptionModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        TicketsTableItemRequestedByModule,
+        UserLogoPopoverModule
     ],
     exports: [PasswordManagerEditAsideComponent]
 
