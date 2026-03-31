@@ -15,6 +15,7 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
     declarations: [
@@ -34,7 +35,8 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         DynamicTooltipModule,
         CompanyDropDownModule,
         ClickOutsideModule,
-        MatErrorModule
+        MatErrorModule,
+        NgxMaskModule.forRoot(),
 
     ],
     exports: [PasswordManagerAddAsideComponent],
