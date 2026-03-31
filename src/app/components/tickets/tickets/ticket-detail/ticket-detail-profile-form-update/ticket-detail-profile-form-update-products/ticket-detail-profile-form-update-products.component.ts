@@ -87,9 +87,15 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
     this.currentProduct.setTexes(item);
   }
   public addProduct() {
-     this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.currentProduct))));
+    this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.currentProduct))));
     this.initCurrentProduct();
     this.productDP.clear();
+  }
+  duplicateCurrentProduct() {
+    this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.currentProduct))));
+  }
+  duplicateProduct(i) {
+    this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.addedProductList[i]))));
   }
   public removeProduct(i) {
     this.addedProductList.splice(i, 1);
