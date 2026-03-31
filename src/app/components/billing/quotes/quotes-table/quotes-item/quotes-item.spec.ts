@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { QuotesItemComponent } from './quotes-item.component';
+import { TicketsTableItemRequestedByModule } from 'src/app/components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
+import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
 
 
 describe('QuotesItemComponent unit test', () => {
@@ -26,7 +28,10 @@ describe('QuotesItemComponent unit test', () => {
           timeOut: 5000,
           onActivateTick: true
         }),
-        NoopAnimationsModule],
+        NoopAnimationsModule,
+        TicketsTableItemRequestedByModule,
+        UserLogoPopoverModule,
+        NgbModule],
       declarations: [QuotesItemComponent
       ],
     }).compileComponents();

@@ -8,6 +8,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { Company } from 'src/app/interfaces/company/company';
 import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { TicketsTableItemRequestedByModule } from '../../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
+import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 describe('TicketDetailContactDetailsComponent unit test', () => {
@@ -25,7 +28,10 @@ describe('TicketDetailContactDetailsComponent unit test', () => {
         }),
         NoopAnimationsModule,
         PreviewPhoneMaskModule,
-        InfiniteScrollModule],
+        InfiniteScrollModule,
+        TicketsTableItemRequestedByModule,
+        UserLogoPopoverModule,
+        NgbModule],
       declarations: [TicketDetailContactDetailsComponent,
         TicketDetailContactDetailsHistoryComponent
       ],

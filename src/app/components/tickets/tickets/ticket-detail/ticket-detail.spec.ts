@@ -99,6 +99,8 @@ import { TicketsPermissionsService } from '../ticket-edit-aside/services/tickets
 import { of } from 'rxjs';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TicketProfile } from '../class/ticket-profile';
+import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
+import { TicketsTableItemRequestedByModule } from '../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
 declare var jasmine;
 const mockRouter = {
   navigate: jasmine.createSpy('navigate'),
@@ -162,7 +164,9 @@ describe('TicketDetailComponent unit test', () => {
         ToFixedModule,
         TicketDetailProfileFormUpdateModule,
         AngularEditorModule,
-        RouterTestingModule],
+        RouterTestingModule,
+        TicketsTableItemRequestedByModule,
+        UserLogoPopoverModule],
       declarations: [TicketDetailComponent,
         TicketDetailHeaderComponent,
         TicketDetailInfoStatusComponent,

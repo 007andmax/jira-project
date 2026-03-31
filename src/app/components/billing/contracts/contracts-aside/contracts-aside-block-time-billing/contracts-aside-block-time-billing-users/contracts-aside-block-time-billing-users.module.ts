@@ -19,7 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         MatChipListModule,
         TicketsTableItemRequestedByModule,
         UserLogoPopoverModule,
-        NgbModule
+        NgbModule,
 
     ],
     exports: [ContractsAsideBlockTimeBillingUsersComponent]
