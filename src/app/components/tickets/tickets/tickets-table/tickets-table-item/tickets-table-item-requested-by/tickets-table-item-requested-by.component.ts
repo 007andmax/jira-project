@@ -71,6 +71,7 @@ export class TicketsTableItemRequestedByComponent {
     this.appStateService.changeDetectorRef();
   }
   sendEmail() {
+    if (!this.requestedUser.primaryEmail) return;
     this.draftEmailStateService.setAction(USERS);
     this.draftEmailStateService.resetSelectedUsers();
     this.draftEmailStateService.addSelectedUser(this.requestedUser);

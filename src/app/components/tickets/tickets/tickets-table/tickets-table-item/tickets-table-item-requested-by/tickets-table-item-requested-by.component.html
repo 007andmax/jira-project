@@ -21,20 +21,22 @@
 ></div>
 <div class="qt-df qt-ai-c"   ngbDropdownAnchor
   >
-    <a *ngIf="requestedUser" [attr.href]="'tel:+1' + getPrimaryPhoneNumber()"> 
+    <a *ngIf="requestedUser" [attr.href]="getPrimaryPhoneNumber() ?'tel:+1' + getPrimaryPhoneNumber() : null"> 
   <div
+  [ngClass]="{'disabled-action': !getPrimaryPhoneNumber()}"
     class="qt-button-square pointer qt-mr-4 draft-email-btn"  
       placement="top"
-    ngbTooltip="Make Call"
+    [ngbTooltip]="getPrimaryPhoneNumber() ? 'Make Call' : 'No Phone Numbers'"
 >
     <div class="qt-icon icon__phone qt-sz-16 pointer qt-bg-contain"></div>
 </div>
 </a>
-<a *ngIf="requestedUser" [attr.href]="'mailto:' + requestedUser.primaryEmail">
+<a *ngIf="requestedUser" [attr.href]="requestedUser.primaryEmail ? 'mailto:' + requestedUser.primaryEmail : null">
   <div
+  [ngClass]="{'disabled-action': !requestedUser.primaryEmail}"
     class="qt-button-square pointer qt-mr-4 draft-email-btn"
      placement="top"
-    ngbTooltip="Open Email App"
+       [ngbTooltip]="requestedUser.primaryEmail ? 'Open Email App' : 'No Email Address'"
 >
     <div class="qt-icon icon__email qt-sz-16 pointer qt-bg-contain"></div>
 </div></a>
@@ -48,10 +50,11 @@
     <div class="qt-icon icon__tickets qt-sz-16 pointer qt-bg-contain"></div>
 </div>
  <div
+  [ngClass]="{'disabled-action': !requestedUser.primaryEmail}"
     class="qt-button-square pointer qt-mr-4 draft-email-btn"
     (click)="sendEmail()"
       placement="top"
-    ngbTooltip="QT Email User"
+        [ngbTooltip]="requestedUser.primaryEmail ? 'QT Email User' : 'No Email Address'"
 >
     <div class="qt-icon icon__email qt-sz-16 pointer qt-bg-contain"></div>
 </div>
@@ -120,7 +123,7 @@
     </div>
 </div>
 </div>
- <div class="qt-df qt-ai-c qt-jc-sb relative" *ngIf="requestedUser">
+ <div class="qt-df qt-ai-c qt-jc-sb relative" *ngIf="requestedUser && requestedUser.primaryEmail">
 <div class="left-panel-contact__details-title">
     <span   class="qt-color-gray-500 qt-fw-500 qt-fs-13">Email</span>
 </div>
