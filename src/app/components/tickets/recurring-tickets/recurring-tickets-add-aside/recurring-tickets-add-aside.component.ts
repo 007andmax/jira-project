@@ -322,8 +322,10 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   */
   public selectProduct(item, index) {
     item = (item) ? { ...item, ...{ quantity: 1, discount: 1 } } : null;
+    console.log("item", item);
     this.products[index] = new ForCreateProduct(item);
     this.products[index].setDiscount(0);
+    console.log("this.products[index]", this.products);
     this.cd.detectChanges();
   }
 
@@ -426,6 +428,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
           if (index > (-1)) {
 
             if (this.products[index].manufacture !== prod.manufacture || Number(this.products[index].sale) !== prod.sale || Number(this.products[index].cost) !== prod.cost) {
+              console.log("this.products[index]", this.products[index]);
               this.recurringState.addEditProduct(category, this.products[index]);
 
             }

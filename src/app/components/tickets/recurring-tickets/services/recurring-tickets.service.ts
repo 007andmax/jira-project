@@ -342,7 +342,7 @@ export class RecurringTicketsService {
     } else {
       if (products[0].versionedId) change = true;
     }
-
+    if (products.length != ticketForEdit.products.length) change = true;
     return change;
   }
 }

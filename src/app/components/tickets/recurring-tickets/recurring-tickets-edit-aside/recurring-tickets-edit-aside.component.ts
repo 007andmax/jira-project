@@ -367,7 +367,9 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
    */
   public onInitCheckProduct() {
     this.recurringState.clearEditProducts();
+    console.log("this.createService.checkProducts(this.products)", this.createService.checkProducts(this.products));
     if (this.createService.checkProducts(this.products)) {
+      console.log("this.productList", this.products);
       this.productList.forEach((category, catIndex) => {
         category.products.forEach((prod, prodIndex) => {
           let index = this.products.findIndex(item => item.versionedId.id === prod.versionedId.id);

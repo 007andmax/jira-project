@@ -16,6 +16,9 @@ export class ForCreateProduct {
     discount: number;
     noValid: boolean = false;
     errors: Array<String>;
+    active: boolean = true;
+    company: any;
+    productType: any;
     constructor(data = null) {
         if (!data) return;
         this.cost = data.cost;
@@ -29,6 +32,9 @@ export class ForCreateProduct {
         this.versionedId = data.versionedId;
         this.quantity = data.quantity;
         this.discount = data.discount;
+        this.active = data.active;
+        this.company = data.company;
+        this.productType = data.productType;
     }
     public setDiscount(data) {
         this.discount = data;
@@ -44,6 +50,7 @@ export class ForCreateProduct {
         this.sale = data.product.sale;
         this.taxes = data.product.taxes;
         this.versionedId = data.product.versionedId;
+        this.active = data.product.active;
     }
     public setErros(errors) {
         this.noValid = true;

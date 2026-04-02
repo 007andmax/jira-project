@@ -35,6 +35,7 @@ export class QuoteProduct implements Product {
     totalSum: number;
     validateSaleCost: boolean = true;
     markup: number = 0;
+    active: boolean;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -66,7 +67,8 @@ export class QuoteProduct implements Product {
             description: this.description,
             billable: this.billable,
             oldVersion: this.oldVersion,
-            taxes: undefined
+            taxes: undefined,
+            active: this.active,
         }
         return {
             discountType: this.discountType,

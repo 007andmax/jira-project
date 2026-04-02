@@ -19,6 +19,7 @@ export class TicketProfileFormItemProduct implements Product {
     taxes: import("../../../../../interfaces/service/tax").Tax[] = [];
     oldVersion: boolean;
     quantity: number = 1;
+    active: boolean;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

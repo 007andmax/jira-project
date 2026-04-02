@@ -36,6 +36,7 @@ export class CategoryProductitem implements CategoryProduct {
                 category: null,
                 billable: null,
                 oldVersion: null,
+                active: item.active
             }
             return product;
         });
