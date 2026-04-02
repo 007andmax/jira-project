@@ -293,7 +293,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
     if (this.leftPanelService.isIntegrationsPage(data)) this.page = "INTEGRATIONS";
   }
   public getCompanyInfoPermissions(action) {
-    return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole.getPermission(action)));
+    return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole && compnayInfo.customerUserRole.getPermission(action)));
   }
   setDefaultTypeFilter() {
     this.panelTickets.setTypeFilter(this.currentUser.startPage == "MY_TICKETS" || this.currentUser.accountType == "CLIENT" ? "USERS" : this.currentUser.startPage)

@@ -64,7 +64,7 @@ export class PaymentItemComponent implements OnInit {
     this.onPreviewInvoice.emit(this.payment.paymentData[index].invoiceId);
   }
   public getCompanyInfoPermissions(action) {
-    return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole.getPermission(action)));
+    return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole && compnayInfo.customerUserRole.getPermission(action)));
   }
   parseStatus() {
     return this.payment.paymentStatus ? this.payment.paymentStatus.split('_').map((el) => el[0].toUpperCase() + el.slice(1).toLowerCase()).join(' ') : '';
