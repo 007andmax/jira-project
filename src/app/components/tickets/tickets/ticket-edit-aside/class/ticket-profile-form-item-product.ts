@@ -20,6 +20,8 @@ export class TicketProfileFormItemProduct implements Product {
     oldVersion: boolean;
     quantity: number = 1;
     active: boolean;
+    productType: any;
+    companyId: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -29,4 +31,5 @@ export class TicketProfileFormItemProduct implements Product {
             this.sale_str = this.sale.toFixed(2);
         }
     }
+
 }

@@ -21,4 +21,6 @@ export interface Product {
     taxes: Array<Tax>;
     oldVersion: boolean;
     active: boolean;
+    productType: any;
+    companyId: string;
 }

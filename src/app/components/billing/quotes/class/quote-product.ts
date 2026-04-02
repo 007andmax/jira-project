@@ -36,6 +36,8 @@ export class QuoteProduct implements Product {
     validateSaleCost: boolean = true;
     markup: number = 0;
     active: boolean;
+    productType: any;
+    companyId: string;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -69,6 +71,9 @@ export class QuoteProduct implements Product {
             oldVersion: this.oldVersion,
             taxes: undefined,
             active: this.active,
+            productType: this.productType,
+            companyId: this.companyId,
+
         }
         return {
             discountType: this.discountType,
