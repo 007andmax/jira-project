@@ -19,6 +19,7 @@ import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { DevicesRecurringTicketsComponent } from '../devices-recurring-tickets/devices-recurring-tickets.component';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
@@ -49,6 +50,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.description = directive;
   };
   @ViewChild('deviceDp', { static: true }) deviceDp: DevicesRecurringTicketsComponent;
+  @ViewChild('saveBtn', { static: false }) saveBtn: DisabledBtnDirective;
   sub: Subscription = new Subscription();
   /**
    * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
@@ -427,10 +429,12 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
       this.recurringState.getCreateTicket().checkForEdit(this.ticketForEdit);
       this.recurringService.editTicket(this.ticketForEdit, this.recurringState.getCreateTicket()).subscribe((res) => {
+        this.saveBtn.setDisabled(false);
         this.close();
       })
     } else {
       this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {
+        this.saveBtn.setDisabled(false);
         this.close();
       })
     }
@@ -442,6 +446,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public save() {
     this.validate.checkValidat(this.recurringState.getCreateTicket());
     if (!this.validate.getCompany() || !this.validate.getInterval()) return;
+    this.saveBtn.setDisabled(true);
     this.onInitCheckProduct();
   }
 
