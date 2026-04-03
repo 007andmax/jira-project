@@ -5,7 +5,7 @@
         let-product
         [ngForOf]="addedProductList"
         let-i="index"
-        [ngForTrackBy]="trackByIndex"
+        [ngForTrackBy]="trackById"
     >
         <div class="product-item">
             <div class="product-item__first-line qt-df">
@@ -102,13 +102,22 @@
                     ></app-invoice-form-ticket-edit-taxes>
                 </div>
             </div>
+            <div class="qt-df qt-jc-sb qt-mt-8">
+             <button
+                class="product-item__btn-del qt-button --gray --md qt-jc-c qt-w100"
+                (click)="duplicateProduct(i)"
+            >
+            <div class="qt-icon icon__copy qt-sz-16 qt-dib qt-mr-4 qt-button-icon"></div>
+                <span class="qt-color-gray-900 qt-fw-500">Duplicate</span>
+            </button>
             <button
-                class="product-item__btn-del qt-button --gray --md qt-jc-c qt-w100 qt-mt-8"
+                class="product-item__btn-del qt-button --gray --md qt-jc-c qt-w100 qt-ml-8"
                 (click)="removeProduct(i)"
             >
                 <span class="qt-icon icon__delete qt-icon__red-600 qt-ic-c qt-sz-16 qt-mr-4"></span>
                 <span class="qt-color-red-600 qt-fw-500">Remove</span>
             </button>
+            </div>
         </div>
     </ng-template>
     <div class="product-item">
@@ -203,14 +212,24 @@
                     (taxesChange)="onTaxesChange($event)"
                 ></app-invoice-form-ticket-edit-taxes>
             </div>
+            
         </div>
-        <button
-            class="product-item__btn-del qt-button --gray --md qt-jc-c qt-w100 qt-mt-8"
+         <div class="qt-df qt-jc-sb qt-mt-8">
+             <button
+                class="product-item__btn-del qt-button --gray --md qt-jc-c qt-w100"
+                (click)="duplicateCurrentProduct()"
+            >
+             <div class="qt-icon icon__copy qt-sz-16 qt-dib qt-mr-4 qt-button-icon"></div>
+                <span class="qt-color-gray-900 qt-fw-500">Duplicate</span>
+            </button>
+          <button
+            class="product-item__btn-del qt-button --gray --md qt-jc-c qt-w100 qt-ml-8"
             (click)="clearForm(taxesDropDown)"
             *ngIf="addedProductList.length > 0"
         >
             <span class="qt-icon icon__delete qt-icon__red-600 qt-ic-c qt-sz-16 qt-mr-4"></span>
             <span class="qt-color-red-600 qt-fw-500">Remove</span>
         </button>
+            </div>
     </div>
 </div>
