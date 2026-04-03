@@ -5,6 +5,7 @@ import { NoteStateService } from 'src/app/states/note/note-state.service';
 import { NoteTemplate } from '../class/note-template';
 import { NoteTemplateValidate } from '../class/note-template-validate';
 import { Subscription } from 'rxjs';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'canned-responses-aside',
@@ -63,6 +64,7 @@ export class CannedResponsesAsideComponent implements OnInit, OnDestroy {
   constructor(private noteStateService: NoteStateService,
     public cd: ChangeDetectorRef,
     private elRef: ElementRef,
+    public customerPortalStateService: CustomerPortalStateService,
     private noteService: NoteService) { }
 
 
@@ -90,7 +92,7 @@ export class CannedResponsesAsideComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(onCopyNote);
-    this.noteService.getKeywords().subscribe((data: any) => {
+    if (!this.customerPortalStateService.isCustomerPortal) this.noteService.getKeywords().subscribe((data: any) => {
       this.noteStateService.setKeywords(data);
     });
   }
