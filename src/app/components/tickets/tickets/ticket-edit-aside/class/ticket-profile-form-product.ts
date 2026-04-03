@@ -14,6 +14,7 @@ export class TicketProfileFormProduct {
     taxes: Array<Tax> = [];
     user: any;
     date: number = new Date().getTime();
+    uuId: string;
     constructor(data = null) {
         if (data) {
             this.item = new TicketProfileFormItemProduct(data.item);

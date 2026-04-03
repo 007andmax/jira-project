@@ -5,7 +5,7 @@
         let-product
         [ngForOf]="addedProductList"
         let-i="index"
-        [ngForTrackBy]="trackByIndex"
+        [ngForTrackBy]="trackById"
     >
         <div class="product-item">
             <div class="product-item__first-line qt-df">
@@ -107,6 +107,7 @@
                 class="product-item__btn-del qt-button --gray --md qt-jc-c qt-w100"
                 (click)="duplicateProduct(i)"
             >
+            <div class="qt-icon icon__copy qt-sz-16 qt-dib qt-mr-4 qt-button-icon"></div>
                 <span class="qt-color-gray-900 qt-fw-500">Duplicate</span>
             </button>
             <button
@@ -218,6 +219,7 @@
                 class="product-item__btn-del qt-button --gray --md qt-jc-c qt-w100"
                 (click)="duplicateCurrentProduct()"
             >
+             <div class="qt-icon icon__copy qt-sz-16 qt-dib qt-mr-4 qt-button-icon"></div>
                 <span class="qt-color-gray-900 qt-fw-500">Duplicate</span>
             </button>
           <button
