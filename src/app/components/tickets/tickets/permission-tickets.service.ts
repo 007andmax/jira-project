@@ -21,7 +21,7 @@ export class PermissionTicketsService implements CanActivate {
     }
     public getCompanyInfoPermissions(action) {
         if (this.usersStateService.getCurrentUser().accountType == "TECH") return true;
-        return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole.getPermission(action)));
+        return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole && compnayInfo.customerUserRole.getPermission(action)));
     }
     public getPermissions(action) {
         return this.permissionsService.isAllowed(action)
