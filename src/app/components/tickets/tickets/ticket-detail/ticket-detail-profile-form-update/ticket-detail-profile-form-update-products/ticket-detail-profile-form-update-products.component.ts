@@ -6,6 +6,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'ticket-detail-profile-form-update-products',
@@ -16,6 +17,7 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
   isUpdate: boolean = false;
   @ViewChild('productDP', { static: true }) productDP: ProductListComponent;
   addedProductList = [];
+
   currentProduct: TicketProfileFormProduct = new TicketProfileFormProduct();
   sub: Subscription = new Subscription();
   constructor(public cd: ChangeDetectorRef,
@@ -37,6 +39,7 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
     this.currentProduct = new TicketProfileFormProduct();
     let currentDate = new Date();
     this.currentProduct.setDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.currentProduct.uuId = uuidv4();
   }
   initUpdateMobile() {
     this.isUpdate = true;
@@ -88,14 +91,18 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
   }
   public addProduct() {
     this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.currentProduct))));
+    this.addedProductList[this.addedProductList.length - 1].uuId = uuidv4();
     this.initCurrentProduct();
     this.productDP.clear();
   }
   duplicateCurrentProduct() {
+    // arr.splice(2, 0, 99);
     this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.currentProduct))));
   }
   duplicateProduct(i) {
-    this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.addedProductList[i]))));
+    let product = new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.addedProductList[i])));
+    product.uuId = uuidv4();
+    this.addedProductList.splice(i + 1, 0, product);
   }
   public removeProduct(i) {
     this.addedProductList.splice(i, 1);
@@ -116,8 +123,8 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
   public getItemOrger() {
     return (this.addedProductList.length - 1) >= 0 ? this.addedProductList.length - 1 : 0;
   }
-  public trackByIndex(index, item) {
-    return index;
+  public trackById(index, item) {
+    return item.uuId;
   }
   public onValidateProducts() {
     this.addedProductList.forEach((item, index) => {
