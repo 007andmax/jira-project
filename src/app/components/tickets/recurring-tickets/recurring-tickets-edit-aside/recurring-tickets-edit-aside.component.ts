@@ -122,6 +122,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.selectClient(data.company);
     this.createService.getStateDatePicker().onInitEditMode(data.startDate);
     this.products = (data.products.length > 0) ? this.createService.getProductsForEdit(data.products) : [new ForCreateProduct()];
+    console.log("this.products", this.products);
+    console.log("data", data);
     this.services = (data.services.length > 0) ? this.createService.getServicesForEdit(data.services, data.serviceErrors) : [new ForCreateService()];
     this.createService.setTagsForEdit(data.tags);
     this.createService.setCreateTask(data.createTask);
@@ -384,7 +386,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
         })
       })
     }
-
+    console.log("this.recurringState.getEditProducts()", this.recurringState.getEditProducts());
     if (this.recurringState.getEditProducts().length > 0) {
       this.recurringService.onInitEditProducts(this.recurringState.getEditProducts()).subscribe(responseList => {
 

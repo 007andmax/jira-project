@@ -51,6 +51,8 @@ export class ForCreateProduct {
         this.taxes = data.product.taxes;
         this.versionedId = data.product.versionedId;
         this.active = data.product.active;
+        this.companyId = data.product.companyId;
+        this.productType = data.product.productType;
     }
     public setErros(errors) {
         this.noValid = true;
