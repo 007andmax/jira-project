@@ -46,6 +46,7 @@ import { TicketDetailEditTagsComponent } from './ticket-detail-edit-tags/ticket-
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketDetailProfileFormUpdateComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.component';
 import { TicketDetailNoteModalComponent } from './ticket-detail-note-modal/ticket-detail-note-modal.component';
+import { CompanyDevicesRemoteAccessComponent } from 'src/app/components/company-devices/company-devices-remote-access/company-devices-remote-access.component';
 
 @Component({
   selector: 'ticket-detail',
@@ -80,7 +81,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   modeDescription = 'view';
   showAddAssignedUser = false;
   showPreloader: boolean = true;
-  typeRigthDetailAside: string;
+  typeRigthDetailAside: string = 'TICKETS';
   listColors: Array<StatusColor> = [];
   listAssignedUser: Array<CurrentUser> = [];
   lisUpdateUser: Array<CurrentUser> = [];
@@ -379,6 +380,16 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         this.cd.detectChanges();
       }
     })
+  }
+  getAgent() {
+    return this.ticketStateService.getDevices().find(item => item.deviceId === this.ticketProfile.agent.deviceId);
+  }
+  remoteAccess(connectionType: string) {
+    const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.connectionType = connectionType;
+    modalRef.componentInstance.device = this.getAgent();
+    modalRef.componentInstance.companyId = this.getAgent()?.companyId;
+    modalRef.componentInstance.action = 'CONNECT_DEVICE';
   }
   onSelectAssignedUser(data) {
     this.listAssignedUser = data;
