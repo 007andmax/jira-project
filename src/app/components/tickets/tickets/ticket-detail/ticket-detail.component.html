@@ -325,7 +325,7 @@
                     <!--  *ngIf="toggleRigthPanel"-->
                     <ticket-detail-contact
                         #contact
-                        *ngIf="typeRigthDetailAside != 'CONTACT'"
+                        *ngIf="typeRigthDetailAside == 'TICKETS'"
                         [ticketProfile]="ticketProfile"
                         (onShowMore)="onShowMore('CONTACT')"
                     ></ticket-detail-contact>

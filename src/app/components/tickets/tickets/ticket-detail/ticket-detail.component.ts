@@ -333,7 +333,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.toggleRigthPanel = false;
   }
   onCloseDetails() {
-    this.typeRigthDetailAside = null;
+    this.typeRigthDetailAside = 'TICKETS';
     this.toggleRigthPanel = true;
   }
   onToggleRigthPanel(data) {
