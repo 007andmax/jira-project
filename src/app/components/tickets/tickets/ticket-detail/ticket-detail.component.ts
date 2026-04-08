@@ -81,7 +81,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   modeDescription = 'view';
   showAddAssignedUser = false;
   showPreloader: boolean = true;
-  typeRigthDetailAside: string = 'TICKETS';
+  typeRigthDetailAside: string;
   listColors: Array<StatusColor> = [];
   listAssignedUser: Array<CurrentUser> = [];
   lisUpdateUser: Array<CurrentUser> = [];
@@ -333,7 +333,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.toggleRigthPanel = false;
   }
   onCloseDetails() {
-    this.typeRigthDetailAside = 'TICKETS';
+    this.typeRigthDetailAside = null;
     this.toggleRigthPanel = true;
   }
   onToggleRigthPanel(data) {

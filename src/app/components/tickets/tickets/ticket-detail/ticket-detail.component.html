@@ -325,7 +325,7 @@
                     <!--  *ngIf="toggleRigthPanel"-->
                     <ticket-detail-contact
                         #contact
-                        *ngIf="typeRigthDetailAside == 'TICKETS'"
+                        *ngIf="!typeRigthDetailAside"
                         [ticketProfile]="ticketProfile"
                         (onShowMore)="onShowMore('CONTACT')"
                     ></ticket-detail-contact>
@@ -343,12 +343,12 @@
                         *ngIf="toggleRigthPanel"
                         (onShowMore)="onShowMore('DEVICES')"
                     ></ticket-detail-devices>-->
-                   <!-- <ticket-detail-tickets
+                     <ticket-detail-tickets
                         #ticketsDetail
-                        *ngIf="toggleRigthPanel"
+                        *ngIf="!typeRigthDetailAside"
                         [ticketProfile]="ticketProfile"
                         (onShowMore)="onShowMore('TICKETS')"
-                    ></ticket-detail-tickets>-->
+                    ></ticket-detail-tickets>
                     <ticket-detail-documents-preview
                         [document]="ticketStateService.getDocumentForPreview()"
                         *ngIf="ticketStateService.getDocumentForPreview()"

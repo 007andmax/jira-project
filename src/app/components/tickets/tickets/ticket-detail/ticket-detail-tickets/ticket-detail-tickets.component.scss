@@ -6,12 +6,13 @@
     background-color: $white;
     box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
     border-radius: 8px;
+    height: 100%;
 
     &__title {
         font-weight: 600;
-        font-size: 13px;
-        line-height: 16px;
-        color: $gray-700;
+        font-size: 18px;
+        line-height: 22px;
+        color: $gray-900;
     }
 
     &__subtitle {
@@ -34,58 +35,25 @@
     }
 
     &__body {
-        padding: 16px;
-        max-height: calc(100% - 65px);
+        padding: 0 16px 16px;
         overflow: auto;
+        height: calc(100% - 124px);
         @include dropdown-scrollbar;
     }
-
-    &__avatar {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        color: $white;
-        background-size: cover !important;
-        background-position: center !important;
-        font-weight: 600;
-
-        &-title {
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 17px;
-            color: $gray-900;
-        }
+    &__divider {
+        margin: 16px 0;
+        border-color: $gray-200;
     }
 
-    &__avatar {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        color: $white;
-        background-size: cover !important;
-        background-position: center !important;
-        font-weight: 600;
-
-        &-title {
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 17px;
-            color: $gray-900;
-        }
+    &__primary-contacts-title {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: $gray-500;
+        margin-bottom: 12px
     }
 
     &__history {
-        max-height: 655px;
-        overflow-y: auto;
-        position: relative;
-        @include dropdown-scrollbar;
-
         &-block {
             position: relative;
             box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
@@ -106,16 +74,7 @@
                 left: 0;
             }
         }
-
-        .loading {
-            left: calc(50% - 12px);
-
-            &::before {
-              width: 32px;
-              height: 32px;
-              border-width: 3px;
-            }
-        }
+ 
     }
 
     &__history-block-title {
@@ -142,72 +101,41 @@
         background-color: $gray-100;
         border-radius: 8px;
     }
-
-    .qt-button.--square-md {
-        width: 32px;
-        height: 32px;
-    }
-
-    &-info-line {
-        margin: 16px 0;
-
-        &__label {
-            font-weight: 400;
-            font-size: 13px;
-            line-height: 16px;
-            color: $gray-500;
-        }
-
-        &__text {
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 17px;
-            color: $gray-900;
-
-            &:not(:empty) {
-                margin-top: 4px;
-            }
-        }
-    }
-
-    &__divider {
-        border-color: $gray-200;
-        margin: 16px 0;
-    }
-
-    &__primary-contacts-title {
-        font-weight: 500;
+}
+.pengind-loading {
+    bottom: 30px;
+    top: auto;
+}
+.search-clear {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: 12px;
+    top: calc(50% - 6px);
+    cursor: pointer;
+}
+.no-find-tickets-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid $gray-200;
+    margin: 0px auto;
+}
+.no-find-tickets {
+    margin: 16px 0px 0px 0px;
+    text-align: center;
+    h4 {
         font-size: 14px;
-        line-height: 17px;
-        color: $gray-500;
-        margin-bottom: 12px;
+        font-weight: 600;
+        color: $gray-900;
+        line-height: 20px;
     }
-}
-
-::ng-deep .ticket-detail-tickets-info-line__input {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    color: $gray-900;
-}
-
-.square-avatar {
-    background-color: #7c77bc;
-    color: $white;
-    border: none;
-    font-weight: 400;
-    font-size: 26px;
-    line-height: 31px;
-}
-
-::ng-deep preview-phone-mask {
-    line-height: 16px;
-
-    .ticket-detail-tickets-info-line__label {
+    span {
+        font-size: 14px;
         font-weight: 400;
-        font-size: 13px;
-        line-height: 16px;
         color: $gray-500;
-        padding: 0;
     }
 }
