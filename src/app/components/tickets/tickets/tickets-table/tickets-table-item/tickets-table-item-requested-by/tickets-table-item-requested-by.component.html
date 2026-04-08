@@ -26,7 +26,7 @@
   [ngClass]="{'disabled-action': !getPrimaryPhoneNumber()}"
     class="qt-button-square pointer qt-mr-4 draft-email-btn"  
       placement="top"
-    [ngbTooltip]="getPrimaryPhoneNumber() ? 'Make Call' : 'No Phone Numbers'"
+    [ngbTooltip]="getPrimaryPhoneNumber() ? 'Call +1' + getPrimaryPhoneNumber() : 'No Phone Numbers'"
 >
     <div class="qt-icon icon__phone qt-sz-16 pointer qt-bg-contain"></div>
 </div>
@@ -110,7 +110,11 @@
             ></span>
         </div>
         <div class="qt-df qt-ai-c">
-          <div class="qt-color-gray-900 qt-fw-400 qt-fs-14">+1 {{item.number | mask: '(000) 000-0000 Ext: 999999||000-000-0000'}}</div>
+          <div class="qt-color-gray-900 qt-fw-400 qt-fs-14">
+             <preview-phone-mask
+                    [class]="'users-table__contract-no--number'"
+                    [number]="item.number"
+                ></preview-phone-mask></div>
                     <div
     class="qt-button-square pointer qt-ml-4 draft-email-btn"  
       placement="top"
@@ -119,6 +123,15 @@
 >
     <div class="qt-icon icon__copy  qt-sz-16 pointer qt-bg-contain"></div>
 </div>
+ <a *ngIf="requestedUser" [attr.href]="'tel:+1' + item.number"> 
+  <div
+    class="qt-button-square pointer qt-ml-4 draft-email-btn"  
+      placement="top"
+    [ngbTooltip]="'Call +1' + item.number"
+>
+    <div class="qt-icon icon__phone qt-sz-16 pointer qt-bg-contain"></div>
+</div>
+</a>
         </div>
     </div>
 </div>
