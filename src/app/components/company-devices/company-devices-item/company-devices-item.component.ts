@@ -53,6 +53,7 @@ export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
       this.device.remoteSessions.forEach(item => {
         item.agentConnectedAt += 1000;
       });
+      console.log("this.device.online", this.device.online);
       if (this.device.online) this.device.timing.online += 1000;
       if (!this.device.online) this.device.timing.offline += 1000;
       if (this.device.timing.idle) this.device.timing.idle += 1000;

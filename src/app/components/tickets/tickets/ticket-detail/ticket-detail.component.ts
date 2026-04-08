@@ -384,7 +384,10 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   getAgent() {
     return this.ticketStateService.getDevices().find(item => item.deviceId === this.ticketProfile.agent.deviceId);
   }
-  remoteAccess(connectionType: string) {
+  remoteAccess() {
+    let connectionType = '';
+    if (this.getAgent()?.type && this.getAgent()?.type.name === 'workstation') connectionType = 'CSS';
+    if (this.getAgent()?.type && this.getAgent()?.type.name !== 'workstation' || !this.getAgent()?.type) connectionType = 'PROXY';
     const modalRef = this.modalService.open(CompanyDevicesRemoteAccessComponent, { windowClass: 'device-send-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.connectionType = connectionType;
     modalRef.componentInstance.device = this.getAgent();

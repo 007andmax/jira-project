@@ -32,6 +32,7 @@ export class TicketDetailDevicesDetailsComponent implements OnInit {
   ngOnInit() {
     this.devices = this.ticketStateService.getDevices();
     this.devicesReq = this.ticketStateService.getDevices();
+    if (this.devices.filter(item => !item.isCustom).length > 0 && this.devicesStateService.getIsInitWebSocket()) this.ticketStateService.sendDeviceStatusRequest(this.ticketProfile.company.id, this.devices.filter(item => item.agentId).map(item => item.agentId));
     let onGetDevices = this.ticketStateService.onGetDevices.subscribe(data => {
       this.devices = data;
       this.devicesReq = data;

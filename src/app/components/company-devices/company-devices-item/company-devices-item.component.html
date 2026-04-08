@@ -26,12 +26,13 @@
               'icon__tablet' : device.iconName === 'device',
             'icon__print' : device.iconName === 'printer',
           'icon__server' : device.iconName === 'server',
-        '--ofline': !device.online }"
+       '--ofline': !device.online }"
                 *ngIf="customerPortalStateService.isCustomerPortal"
             ></div>
             <div
                 class="qt-ic-c qt-pointer device-type-icon qt-sz-24 qt-icon"
-                [ngClass]="{'icon__devices' : device.getFieldForCheckIcon() === 'workstation' || !device.getFieldForCheckIcon(),
+                [ngClass]="{ '--ofline': !device.online,
+                'icon__devices' : device.getFieldForCheckIcon() === 'workstation' || !device.getFieldForCheckIcon(),
                'icon__router' : device.getFieldForCheckIcon() === 'router',
             'icon__print' : device.getFieldForCheckIcon() === 'printer',
                 'icon__network-switch' : device.getFieldForCheckIcon() === 'switch',
@@ -40,8 +41,7 @@
             'icon__network_device' : device.getFieldForCheckIcon() === 'network device',
             'icon__old-phone' : device.getFieldForCheckIcon() === 'phone',
              'icon__generic_device' : device.getFieldForCheckIcon() === 'generic device',
-                 'icon__custom-device' : !checkDefaultName(device.getFieldForCheckIcon()),
-        '--ofline': !device.online }"
+                 'icon__custom-device' : !checkDefaultName(device.getFieldForCheckIcon())}"
                 ngbDropdownToggle
                 placement="top"
                 [ngbTooltip]="getTextForTooltip(device.getFieldForCheckIcon())"
