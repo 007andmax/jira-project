@@ -233,7 +233,7 @@ export class ContractsUserDevice {
             item.validate = true;
         });
         this.productExpenses.forEach((item) => {
-            if (item.productId.length === 0) item.validate = false;
+            if (!item.versionedId) item.validate = false;
         })
         let validate = (this.productExpenses.find(item => !item.validate)) ? false : true;
         return validate;
@@ -292,7 +292,7 @@ export class ContractsUserDevice {
         let validate = (list.find(item => !item.validate)) ? false : true;
         return validateDuplicated && validate;
     }
-    
+
     public checkDuplicatedServices() {
         this.services.forEach(item => {
             item.validateDuplicated = true;

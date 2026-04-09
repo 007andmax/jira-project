@@ -1,6 +1,6 @@
 export class ContractsOtherProduct {
     description: string;
-    productId: string;
+    versionedId: any;
     quantity: number;
     salePrice: number;
     validate: boolean = true;
@@ -10,8 +10,8 @@ export class ContractsOtherProduct {
     "discountAmount": number;
     "discountType": string = "PERCENT";
     discountSum: number;
-    constructor(productId, quantity, salePrice, description, taxes = [], discountAmount = null, discountSum = 0, discountType = "PERCENT") {
-        this.productId = productId;
+    constructor(versionedId, quantity, salePrice, description, taxes = [], discountAmount = null, discountSum = 0, discountType = "PERCENT") {
+        this.versionedId = versionedId;
         this.quantity = quantity;
         this.salePrice = salePrice;
         this.salePrice_str = this.salePrice.toFixed(2);
@@ -23,7 +23,7 @@ export class ContractsOtherProduct {
     }
     public getDataForCrate() {
         return {
-            productId: this.productId,
+            versionedId: this.versionedId,
             quantity: this.quantity,
             salePrice: this.salePrice,
             discountAmount: this.discountAmount ? this.discountAmount : undefined,
