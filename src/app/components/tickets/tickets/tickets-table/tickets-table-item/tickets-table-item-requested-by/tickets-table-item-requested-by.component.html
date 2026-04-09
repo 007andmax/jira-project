@@ -63,6 +63,7 @@
      (click)="createTask('Meeting')"
       placement="top"
     ngbTooltip="Create Task Meeting"
+      *ngIf="!customerPortalStateService.isCustomerPortal"
 >
     <div class="qt-icon icon__tasks  qt-sz-16 pointer qt-bg-contain"></div>
 </div>
@@ -71,6 +72,7 @@
      (click)="createTask('To do')"
       placement="top"
     ngbTooltip="Create Task To Do"
+      *ngIf="!customerPortalStateService.isCustomerPortal"
 >
     <div class="qt-icon icon__external-link  qt-sz-16 pointer qt-bg-contain"></div>
 </div>
