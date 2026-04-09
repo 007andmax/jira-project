@@ -10,7 +10,7 @@
             class="tag__modern"
             [ngStyle]="getStyleStatus((ticket.customStatus) ? ticket.customStatus : ticket.status)"
             *ngIf="ticket.status === 'IN_PROGRESS'"
-            [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null),'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
+            [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal,'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
         >
             {{(!ticket.customStatus) ? 'In Progress' : ticket.customStatus}}
         </span>
@@ -19,12 +19,12 @@
             class="tag__modern"
             [ngStyle]="getStyleStatus(ticket.status)"
             *ngIf="ticket.status === 'COMPLETED'"
-             [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null),'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
+             [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal,'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
         >
             Completed
         </span>
         <span
-         
+           [ngClass]="{'no-click':customerPortalStateService.isCustomerPortal}"
             class="tag__modern qt-pointer"
             [ngStyle]="getStyleStatus('UNASSIGNED')"
             *ngIf="ticket.status === null"
@@ -37,7 +37,7 @@
             class="tag__modern"
             [ngStyle]="getStyleStatus(ticket.status)"
             *ngIf="ticket.status === 'ON_HOLD'"
-             [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null),'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
+             [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal,'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
         >
             On Hold
         </span>

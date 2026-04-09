@@ -9,6 +9,7 @@ import { TicketsPermissionsService } from '../../../ticket-edit-aside/services/t
 import { NgbDropdown, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { ToastrService } from 'ngx-toastr';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-tickets-table-item-assigned-user',
@@ -33,6 +34,7 @@ export class TicketsTableItemAssignedUserComponent {
     public ticketsPermissionsService: TicketsPermissionsService,
     private appStateService: AppStateService,
     private toastrService: ToastrService,
+    public customerPortalStateService: CustomerPortalStateService,
   ) { }
 
   ngOnInit() {
@@ -97,7 +99,7 @@ export class TicketsTableItemAssignedUserComponent {
     return this.usersStateService.getAllUsers().find(item => item.id == id);
   }
   showDropDown() {
-    if (this.ticketsPermissionsService.isActionVisible('update', this.ticket, null, null)) this.assignedUserDp.open();
+    if (this.ticketsPermissionsService.isActionVisible('update', this.ticket, null, null) && !this.customerPortalStateService.isCustomerPortal) this.assignedUserDp.open();
   }
 
   ngOnDestroy(): void {
