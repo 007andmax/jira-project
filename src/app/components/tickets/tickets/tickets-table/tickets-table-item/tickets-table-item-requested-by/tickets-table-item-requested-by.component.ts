@@ -46,7 +46,7 @@ export class TicketsTableItemRequestedByComponent {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
   }
   getPrimaryPhoneNumber() {
-    return this.requestedUser.phoneNumbers ? this.requestedUser.phoneNumbers.find(item => item.priority == 0).number : null;
+    return this.requestedUser.phoneNumbers && this.requestedUser.phoneNumbers.find(item => item.priority == 0) ? this.requestedUser.phoneNumbers.find(item => item.priority == 0).number : null;
   }
   onSelectCompanyInfo(companyInfo) {
     this.dp.close();
