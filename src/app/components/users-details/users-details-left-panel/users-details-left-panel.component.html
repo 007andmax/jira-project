@@ -124,7 +124,7 @@
                                 <input
                                     type="text"
                                     class="qt-editable-input qt-fw-400"
-                                    [value]="item.value.value"
+                                    formControlName="value"
                                     appKeyUpEnter
                                     (onChange)="updateUser()"
                                     (input)="changePhoneNumber(item,$event)"

@@ -83,7 +83,7 @@ export class TicketDetailTicketsDetailsComponent implements OnInit {
       this.infiniteScrollDisabled = false;
       return;
     }
-    this.ticketsFilter.setListType("ALL");
+    this.ticketsFilter.setListType("OPEN");
     this.ticketsFilter.setOffset(this.page_number * this.offset);
     this.ticketsFilter.setCompanies([this.ticketProfile.company]);
     if (this.page_number > 0) this.showPendingPreloader = true;

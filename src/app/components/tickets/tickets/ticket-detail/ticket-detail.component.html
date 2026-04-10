@@ -89,12 +89,15 @@
                                 <div class="qt-df qt-ai-c">
                                     <div
                                         class
-                                        ngbDropdown
-                                        (openChange)="onOpenCompaniesDropDown()"
-                                        placement="bottom-left"
+                                    >
+                                     <div
+                                          ngbDropdown
+                                            container="body"
+                                            placement="bottom-right"
                                     >
                                         <!-- <span [textContent]="parseTicketSource() + getAgentName()"></span> -->
-                                        <div class="ticket-detail-page-content__body-header-info qt-mb-6">
+                                        <div class="ticket-detail-page-content__body-header-info qt-mb-6" 
+                                        >
                                             <span
                                                 class="pointer"
                                                 [textContent]="getNameCreateUser()"
@@ -110,8 +113,15 @@
                                                 class="ticket-detail-page-content__body-header-info-email"
                                                 [textContent]="'sent ' + parseTicketSource() + getAgentName()"
                                             ></span>
+                                            <i *ngIf="getAgentName() !== '' && getAgent() && (getAgent().remoteSessions.length == 0 && getAgent().online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.isCustomerPortal))"  placement="top"
+                                              (click)="remoteAccess()"
+        ngbTooltip="Remote Access" class="qt-icon icon__remote-access qt-sz-16 qt-ml-6 qt-fs-0 qt-dib qt-pointer"  ></i>
                                         </div>
-                                        <div class="ticket-detail-page-content__body-header-data">
+                                          </div>
+                                        <div class="ticket-detail-page-content__body-header-data"   
+                                        ngbDropdown
+                                        (openChange)="onOpenCompaniesDropDown()"
+                                        placement="bottom-left">
                                             <span [textContent]="getCreatAt()"></span>
                                             <div class="ticket-detail-page-content__body-header-data-divider"></div>
                                             <span class="qt-icon icon__companies qt-sz-16 qt-dib qt-mr-8"></span>
@@ -296,13 +306,14 @@
                         [ticketProfile]="ticketProfile"
                         (onClose)="onCloseDetails()"
                     ></ticket-detail-contact-details>
+                    <!--  *ngIf="toggleRigthPanel"-->
                     <ticket-detail-contact
                         #contact
-                        *ngIf="toggleRigthPanel"
+                        *ngIf="!typeRigthDetailAside"
                         [ticketProfile]="ticketProfile"
                         (onShowMore)="onShowMore('CONTACT')"
                     ></ticket-detail-contact>
-                    <ticket-detail-passwords
+                   <!-- <ticket-detail-passwords
                         *ngIf="toggleRigthPanel"
                         (onShowMore)="onShowMore('PASSWORD')"
                     ></ticket-detail-passwords>
@@ -315,10 +326,10 @@
                         [ticketProfile]="ticketProfile"
                         *ngIf="toggleRigthPanel"
                         (onShowMore)="onShowMore('DEVICES')"
-                    ></ticket-detail-devices>
-                    <ticket-detail-tickets
+                    ></ticket-detail-devices>-->
+                     <ticket-detail-tickets
                         #ticketsDetail
-                        *ngIf="toggleRigthPanel"
+                        *ngIf="!typeRigthDetailAside"
                         [ticketProfile]="ticketProfile"
                         (onShowMore)="onShowMore('TICKETS')"
                     ></ticket-detail-tickets>
@@ -359,30 +370,40 @@
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('CONTACT')"
+                    placement="top"
+                    ngbTooltip="Contact Details"
                 >
                     <div class="qt-icon icon__info qt-sz-20 qt-bg-contain"></div>
                 </div>
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('PASSWORD')"
+                        placement="top"
+                    ngbTooltip="Passwords"
                 >
                     <div class="qt-icon icon__password qt-sz-20 qt-bg-contain"></div>
                 </div>
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('DEVICES')"
+                        placement="top"
+                    ngbTooltip="Devices"
                 >
                     <div class="qt-icon icon__devices qt-sz-20"></div>
                 </div>
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('DOCUMENT')"
+                       placement="top"
+                    ngbTooltip="Documents"
                 >
                     <div class="qt-icon icon__documents qt-sz-20 qt-bg-contain"></div>
                 </div>
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('TICKETS')"
+                       placement="top"
+                    ngbTooltip="Open Tickets"
                 >
                     <div class="qt-icon icon__tickets qt-sz-20"></div>
                 </div>

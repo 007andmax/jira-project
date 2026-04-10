@@ -33,6 +33,7 @@ export class TicketDetailDevicesComponent implements OnInit, OnDestroy {
     this.devices = this.ticketStateService.getDevices();
     this.ticketStateService.onGetDevices.subscribe(data => {
       this.devices = data;
+      console.log("this.devices", this.devices);
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
