@@ -50,6 +50,7 @@
     <div class="qt-icon icon__tickets qt-sz-16 pointer qt-bg-contain"></div>
 </div>
  <div
+ *ngIf="requestedUser"
   [ngClass]="{'disabled-action': !requestedUser.primaryEmail}"
     class="qt-button-square pointer qt-mr-4 draft-email-btn"
     (click)="sendEmail()"
@@ -63,6 +64,7 @@
      (click)="createTask('Meeting')"
       placement="top"
     ngbTooltip="Create Task Meeting"
+      *ngIf="!customerPortalStateService.isCustomerPortal"
 >
     <div class="qt-icon icon__tasks  qt-sz-16 pointer qt-bg-contain"></div>
 </div>
@@ -71,6 +73,7 @@
      (click)="createTask('To do')"
       placement="top"
     ngbTooltip="Create Task To Do"
+      *ngIf="!customerPortalStateService.isCustomerPortal"
 >
     <div class="qt-icon icon__external-link  qt-sz-16 pointer qt-bg-contain"></div>
 </div>
@@ -83,7 +86,7 @@
         <ng-template
           ngFor
           let-item
-          [ngForOf]="requestedUser.customerCompaniesInfo"
+          [ngForOf]="requestedUser ? requestedUser.customerCompaniesInfo : []"
           let-i="index"
         >
           <button
@@ -98,7 +101,7 @@
 </div>
 </div>
 
- <div  >
+ <div  *ngIf="requestedUser">
 <div
     *ngFor="let item of requestedUser.phoneNumbers; let i = index"
 >

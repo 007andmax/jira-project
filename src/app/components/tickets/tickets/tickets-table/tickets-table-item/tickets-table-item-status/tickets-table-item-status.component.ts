@@ -10,6 +10,7 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { Subscription } from 'rxjs';
 import { TicketsPermissionsService } from '../../../ticket-edit-aside/services/tickets-permissions.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-tickets-table-item-status',
@@ -30,6 +31,7 @@ export class TicketsTableItemStatusComponent {
     public appStateService: AppStateService,
     public ticketsStateService: TicketsStateService,
     public ticketsPermissionsService: TicketsPermissionsService,
+    public customerPortalStateService: CustomerPortalStateService,
     public cd: ChangeDetectorRef,
     public usersStateService: UsersStateService,
   ) { }

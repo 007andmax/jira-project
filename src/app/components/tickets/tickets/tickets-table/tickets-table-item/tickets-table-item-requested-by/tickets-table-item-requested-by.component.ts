@@ -11,6 +11,7 @@ import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { Ticket } from 'src/app/components/tickets/class/ticket';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
   selector: 'app-tickets-table-item-requested-by',
@@ -34,6 +35,7 @@ export class TicketsTableItemRequestedByComponent {
     public tasksStateService: TasksStateService,
     private toastrService: ToastrService,
     private appStateService: AppStateService,
+    public customerPortalStateService: CustomerPortalStateService,
     public cd: ChangeDetectorRef,
   ) { }
 
@@ -44,7 +46,7 @@ export class TicketsTableItemRequestedByComponent {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
   }
   getPrimaryPhoneNumber() {
-    return this.requestedUser.phoneNumbers ? this.requestedUser.phoneNumbers.find(item => item.priority == 0).number : null;
+    return this.requestedUser.phoneNumbers && this.requestedUser.phoneNumbers.find(item => item.priority == 0) ? this.requestedUser.phoneNumbers.find(item => item.priority == 0).number : null;
   }
   onSelectCompanyInfo(companyInfo) {
     this.dp.close();

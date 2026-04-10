@@ -22,7 +22,7 @@
                 #p="ngbPopover"
                 triggers="manual"
                 appUserLogoPopover
-                [user]="update.user"
+                [user]="getUserById(update.user.id)"
                 [popover]="p"
                 [disabled]="!update.user"
                 [disablePopover]="!update.user"
