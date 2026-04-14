@@ -94,7 +94,7 @@
         </div>
         <!-- IF TAB IS 'PRODUCT'----------------------------------------------- -->
         <div
-            class="product-tab-content qt-inputs-row"
+            class="product-tab-content"
             *ngIf="type === 'products'"
         >
             <!-- <div class="error-products" *ngIf="errors.products.show"><p [textContent]="errors.products.text"></p></div> -->
@@ -371,15 +371,20 @@
             <div class="qt-df">
                 <button
                     class="qt-button qt-mr-12"
-                    (click)="copyAndCreate()"
+                  (click)="copyAndCreate()"
                 >
-                    Clone
+                     Clone
                 </button>
                 <button
-                    class="qt-button qt-mr-12"
-                    (click)="save()"
+                    class="qt-button qt-mr-12 save-btn"
+                       appDisabledBtn
+                    #saveBtn="disabled"
+                    (onClick)="save()"
+                    [ngClass]="{'--loading':saveBtn.isBlock()}"
                 >
-                    Save
+                    
+                      <span *ngIf="!saveBtn.isBlock()">Save</span>
+                <app-preloader-ticket *ngIf="saveBtn.isBlock()"></app-preloader-ticket>
                 </button>
                 <button
                     class="qt-button --gray"

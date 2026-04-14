@@ -10,4 +10,7 @@ export interface EditProduct {
     sale: number;
     taxIds: any;
     versionedId: VersionedId;
+    active: boolean;
+    companyId: string;
+    productType: any;
 }

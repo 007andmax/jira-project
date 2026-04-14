@@ -78,15 +78,18 @@ export class RecurringTicketsStateService {
 */
   public addEditProduct(category, prod) {
     this.editProducts.push({
+      companyId: prod.companyId,
       categoryId: category.id,
       cost: Number(prod.cost),
       description: prod.description,
-      glNumber: null,
-      ilc: null,
+      glNumber: prod.glNumber,
+      ilc: prod.ilc,
       manufacture: prod.manufacture,
       sale: Number(prod.sale),
-      taxIds: [],
-      versionedId: prod.versionedId
+      taxIds: prod.taxes?.map(tax => tax.id),
+      versionedId: prod.versionedId,
+      active: true,
+      productType: prod.productType
     })
   }
 
