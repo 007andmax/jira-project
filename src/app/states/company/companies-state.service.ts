@@ -49,6 +49,7 @@ export class CompaniesStateService {
   assignedDocumentCategories: Array<CompanyAssigned> = [];
   onGetAssignedDocumentCategories: EventEmitter<any> = new EventEmitter();
   companyProfile: any;
+  isOpenDropDownRequestedBy: boolean = false;
   constructor(private companiesService: CompaniesService,
     private companiesRealTimeService: CompaniesRealTimeService,
     private usersStateService: UsersStateService,

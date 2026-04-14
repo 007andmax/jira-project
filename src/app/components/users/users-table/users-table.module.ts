@@ -17,6 +17,9 @@ import { TicketsTableItemRequestedByModule } from '../../tickets/tickets/tickets
 import { UsersTableCompanyInfoItemComponent } from './users-table-company-info-item/users-table-company-info-item.component';
 import { UsersTableCompanyInfoSingleComponent } from './users-table-company-info-single/users-table-company-info-single.component';
 import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
+import { UsersTableCompanyByComponent } from './users-table-company-by/users-table-company-by.component';
+import { CompanyLogoPopoverModule } from 'src/app/directives/company-logo-popover/company-logo-popover.module';
+import { UsersTableCompanyByModule } from './users-table-company-by/users-table-company-by.module';
 
 
 
@@ -26,7 +29,7 @@ import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user
         UsersTableComponent,
         UserTableSubscriptionComponent,
         UsersTableCompanyInfoItemComponent,
-        UsersTableCompanyInfoSingleComponent
+        UsersTableCompanyInfoSingleComponent,
     ],
     imports: [
         CommonModule,
@@ -40,7 +43,9 @@ import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user
         UserTableDefaultSubscriptionModule,
         UserTableCustomSubscriptionModule,
         TicketsTableItemRequestedByModule,
-        UserLogoPopoverModule
+        UserLogoPopoverModule,
+        CompanyLogoPopoverModule,
+        UsersTableCompanyByModule
     ],
     exports: [UsersTableComponent]
 })

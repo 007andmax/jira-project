@@ -9,7 +9,7 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
   providers: [TicketsListService]
 })
 export class UsersTableCompanyInfoSingleComponent extends UsersTableCompanyInfoItemComponent {
-  @Input() i: number;
+  @Input() i: number = 0;
   @Input() getStyleNetAvatar: Function;
   @Input() companyContent: any;
   @Input() disableTooltip: boolean;
