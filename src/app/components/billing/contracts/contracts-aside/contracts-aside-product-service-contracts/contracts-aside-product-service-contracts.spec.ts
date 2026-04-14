@@ -103,7 +103,7 @@ describe('ContractsAsideProductServiceContractsComponent unit test', () => {
     const com = fixture.debugElement.componentInstance;
     com.addProduct();
     expect(com.contractsOther.productExpenses[0].getDataForCrate()).toEqual({
-      productId: "",
+      versionedId: "",
       quantity: 0,
       salePrice: 0,
       discountAmount: undefined,

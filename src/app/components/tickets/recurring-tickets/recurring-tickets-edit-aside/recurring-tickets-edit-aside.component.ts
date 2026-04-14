@@ -124,8 +124,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.selectClient(data.company);
     this.createService.getStateDatePicker().onInitEditMode(data.startDate);
     this.products = (data.products.length > 0) ? this.createService.getProductsForEdit(data.products) : [new ForCreateProduct()];
-    console.log("this.products", this.products);
-    console.log("data", data);
     this.services = (data.services.length > 0) ? this.createService.getServicesForEdit(data.services, data.serviceErrors) : [new ForCreateService()];
     this.createService.setTagsForEdit(data.tags);
     this.createService.setCreateTask(data.createTask);
@@ -290,7 +288,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   */
   public selectProduct(item, index) {
     item = (item) ? { ...item, ...{ quantity: 1, discount: 1 } } : null;
-    console.log("item", item);
     this.products[index] = new ForCreateProduct(item);
     this.products[index].setDiscount(0);
     this.cd.detectChanges();
@@ -372,9 +369,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
    */
   public onInitCheckProduct() {
     this.recurringState.clearEditProducts();
-    console.log("this.createService.checkProducts(this.products)", this.createService.checkProducts(this.products));
     if (this.createService.checkProducts(this.products)) {
-      console.log("this.productList", this.products);
       this.productList.forEach((category, catIndex) => {
         category.products.forEach((prod, prodIndex) => {
           let index = this.products.findIndex(item => item.versionedId.id === prod.versionedId.id);
@@ -388,10 +383,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
         })
       })
     }
-    console.log("this.recurringState.getEditProducts()", this.recurringState.getEditProducts());
     if (this.recurringState.getEditProducts().length > 0) {
       this.recurringService.onInitEditProducts(this.recurringState.getEditProducts()).subscribe(responseList => {
-
         responseList.forEach((item, index) => {
           this.products[index].versionedId.id = item.id;
           this.products[index].versionedId.version = item.version;
