@@ -52,8 +52,8 @@
     <div class="qt-icon icon__devices qt-sz-16 pointer qt-bg-contain"></div>
 </div>
   <div
-   
-    class="qt-button-square pointer qt-mr-4 draft-email-btn"
+   [ngClass]="{'disabled-action': !(getPrimaryShippingAddress()?.locationLat && getPrimaryShippingAddress()?.locationLng)}"
+     class="qt-button-square pointer qt-mr-4 draft-email-btn"
      placement="top"
     ngbTooltip="Get Direction"
     (click)="openMap()"
@@ -63,24 +63,14 @@
 </div>
 </div>
 </div>
-<div class="qt-df header-container"   >
-<div
-    class="qt-table-modern__circle-avatar"
-    [ngClass]="!usersStateService.getNameForAvatar(getContact()).length ? 'transparent-text' : ''"
-    [textContent]="usersStateService.getNameForAvatar(getContact())"
-    [ngStyle]="{'background': ticketsListService.getStyleAvatar(getContact(),listColorNoAvatar[indexNoAvatar]) }"
-></div>
-<div>
+<div class="qt-df qt-fd-c"   >
+ <div
+    class="ellipsis qt-fw-500 qt-fs-20 qt-color-gray-900 qt-mb-8"
+>Primary Contact</div>
 <div
     [textContent]="getUserName(getContact())"
     class="ellipsis qt-fw-500 qt-fs-20 qt-color-gray-900 qt-mb-8"
 ></div>
-<div
-*ngIf="getContact() && getContact().primaryEmail"
-    [textContent]="getContact().primaryEmail"
-    class="ellipsis qt-fw-400 qt-fs-14 qt-color-gray-500 qt-mb-12 primary-email"
-></div>
-</div>
 </div>
  <div  *ngIf="getContact()">
 <div

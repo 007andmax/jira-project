@@ -61,6 +61,7 @@ export class UsersTableCompanyByComponent {
       [`${this.companiesState.getCurrentCompany().techDomain}/company/`, this.company.id, section]);
   }
   openMap() {
+    if (!(this.getPrimaryShippingAddress()?.locationLat && this.getPrimaryShippingAddress()?.locationLng)) return;
     const modalRef = this.modalService.open(GetDirectionComponent, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal map', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.mapSrc = "https://maps.google.com/maps/embed/v1/place?key=AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s&q=" + this.getPrimaryShippingAddress()?.locationLat + "," + this.getPrimaryShippingAddress()?.locationLng + "";
   }
