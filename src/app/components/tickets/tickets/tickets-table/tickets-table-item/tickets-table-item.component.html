@@ -102,6 +102,31 @@
         class="ticket-table__company"
         (click)="selectForDetail()"
     >
+     <ng-template #popCompanyContent let-greeting="greeting"
+	>
+    <app-users-table-company-by
+    [company]="getCompanyById()"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    ></app-users-table-company-by>
+    </ng-template
+>
+        <div
+            class="tooltip__circle-avatar"
+            [textContent]="getCompanyById().name[0].toUpperCase()"
+            [ngStyle]="{'background': parseLogo() }"
+             [ngbPopover]="popCompanyContent"
+            [popoverClass]="'requested-by-popover'"
+                [autoClose]="'outside'"
+                [container]="'body'"
+            #pCompany="ngbPopover"
+            triggers="manual"
+            appCompanyLogoPopover
+            [company]="getCompanyById()"
+            [popover]="pCompany"
+            [disabled]="!getCompanyById()"
+            [disablePopover]="!getCompanyById()"
+        ></div>
         <div
             class="ellipsis"
             [ngClass]="{'qt-color-red-600':ticket.isCompanyDeleted}"

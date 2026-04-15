@@ -4,7 +4,7 @@
     class="qt-table-modern__circle-avatar"
     [ngClass]="checkLogo() ? 'transparent-text' : ''"
     [textContent]="!checkLogo() ? company.name[0].toUpperCase() : ''"
-    [ngStyle]="{'background':checkLogo() ? companiesState.getCompanyLogoUrl(company) : ticketsListService.getStyleAvatar(null,listColorNoAvatar[indexNoAvatar]) }"
+    [ngStyle]="{'background':parseLogo()}"
 ></div>
 <div>
 <div
@@ -27,7 +27,7 @@
   <div
     class="qt-button-square pointer qt-mr-4 draft-email-btn"
        placement="top"
-    ngbTooltip="Create Ticket"
+    ngbTooltip="Tickets page"
     
     (click)="goToCompanySection('tickets')"
 >
@@ -36,7 +36,7 @@
  <div
     class="qt-button-square pointer qt-mr-4 draft-email-btn"
        placement="top"
-    ngbTooltip="Create Ticket"
+    ngbTooltip="Users page"
     
     (click)="goToCompanySection('user')"
 >
@@ -45,7 +45,7 @@
  <div
     class="qt-button-square pointer qt-mr-4 draft-email-btn"
        placement="top"
-    ngbTooltip="Create Ticket"
+    ngbTooltip="Devices page"
     
     (click)="goToCompanySection('devices')"
 >
@@ -65,11 +65,11 @@
 </div>
 <div class="qt-df qt-fd-c"   >
  <div
-    class="ellipsis qt-fw-500 qt-fs-20 qt-color-gray-900 qt-mb-8"
+    class="ellipsis qt-fw-500 qt-fs-14 qt-color-gray-900 qt-mb-8"
 >Primary Contact</div>
 <div
     [textContent]="getUserName(getContact())"
-    class="ellipsis qt-fw-500 qt-fs-20 qt-color-gray-900 qt-mb-8"
+    class="ellipsis qt-fw-500 qt-fs-14 qt-color-gray-900 qt-mb-8"
 ></div>
 </div>
  <div  *ngIf="getContact()">

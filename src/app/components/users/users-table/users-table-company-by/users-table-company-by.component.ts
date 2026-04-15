@@ -41,6 +41,14 @@ export class UsersTableCompanyByComponent {
   checkLogo() {
     return (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id || this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id)
   }
+  parseLogo() {
+    if (this.checkLogo()) {
+      return `url(${this.companiesState.getCompanyLogoUrl(this.company)}) center / cover no-repeat`;
+    } else {
+      return this.ticketsListService.getStyleAvatar(null, this.listColorNoAvatar[this.indexNoAvatar]);
+    }
+  }
+
   onToggleDroPDown(data) {
     this.companiesState.isOpenDropDownRequestedBy = data;
   }
@@ -57,8 +65,8 @@ export class UsersTableCompanyByComponent {
     return this.company.companyInfo.contacts[0];
   }
   goToCompanySection(section) {
-    this.router.navigate(
-      [`${this.companiesState.getCurrentCompany().techDomain}/company/`, this.company.id, section]);
+    const url = `/#/${this.companiesState.getCurrentCompany().techDomain}/company/${this.company.id}/${section}`;
+    window.open(url, '_blank');
   }
   openMap() {
     if (!(this.getPrimaryShippingAddress()?.locationLat && this.getPrimaryShippingAddress()?.locationLng)) return;
