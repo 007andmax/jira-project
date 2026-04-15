@@ -4,6 +4,8 @@ import { PasswordManagerTableComponent } from './password-manager-table.componen
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { CompanyLogoPopoverModule } from 'src/app/directives/company-logo-popover/company-logo-popover.module';
+import { UsersTableCompanyByModule } from '../../users/users-table/users-table-company-by/users-table-company-by.module';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
         CommonModule,
         FormsModule,
         NgbModule,
-        DynamicTooltipModule
+        DynamicTooltipModule,
+        CompanyLogoPopoverModule,
+        UsersTableCompanyByModule
     ],
     exports: [PasswordManagerTableComponent]
 

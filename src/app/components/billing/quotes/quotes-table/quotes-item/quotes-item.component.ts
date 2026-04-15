@@ -7,6 +7,7 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-quotes-item',
@@ -38,12 +39,23 @@ export class QuotesItemComponent implements OnInit {
     private permissionsService: PermissionsService,
     public ticketsListService: TicketsListService,
     public customerPortalStateService: CustomerPortalStateService,
+    private companiesStateService: CompaniesStateService,
     private toastrProgressStateService: ToastrProgressStateService) { }
 
   ngOnInit() {
     this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
     this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     this.createdUser = this.usersStateService.getAllUsers().find(item => item.id === this.quote.createdBy);
+  }
+  checkLogo() {
+    return (this.quote.company && this.quote.company.logo && this.quote.company.logo.cropped && this.quote.company.logo.cropped.id || this.quote.company && this.quote.company.logo && this.quote.company.logo.origin && this.quote.company.logo.origin.id)
+  }
+  parseLogo() {
+    if (this.checkLogo()) {
+      return `url(${this.companiesStateService.getCompanyLogoUrl(this.quote.company)}) center / cover no-repeat`;
+    } else {
+      return this.ticketsListService.getStyleAvatar(null, this.listColorNoAvatar[this.indexNoAvatar]);
+    }
   }
   openInvoiceTikcet() {
     if (this.quote.status === "TICKETED" && !this.customerPortalStateService.isCustomerPortal) this.onTicket.emit(this.quote.ticketId);

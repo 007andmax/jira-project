@@ -15,6 +15,8 @@ import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-toolt
 import { InvoiceExportModule } from './invoices-header/invoice-export/invoice-export.module';
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
+import { CompanyLogoPopoverModule } from 'src/app/directives/company-logo-popover/company-logo-popover.module';
+import { UsersTableCompanyByModule } from '../../users/users-table/users-table-company-by/users-table-company-by.module';
 
 
 
@@ -36,7 +38,9 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
         DynamicTooltipModule,
         InvoiceExportModule,
         CompanyDropDownModule,
-        DropDownModule
+        DropDownModule,
+        CompanyLogoPopoverModule,
+        UsersTableCompanyByModule
     ],
 
 

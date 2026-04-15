@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ContractsTableComponent } from './contracts-table.component';
 import { ContractsTableItemComponent } from './contracts-table-item/contracts-table-item.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CompanyLogoPopoverModule } from 'src/app/directives/company-logo-popover/company-logo-popover.module';
+import { UsersTableCompanyByModule } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.module';
 
 
 @NgModule({
@@ -12,7 +14,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ],
     imports: [
         CommonModule,
-        NgbModule
+        NgbModule,
+        CompanyLogoPopoverModule,
+        UsersTableCompanyByModule
 
     ],
     exports: [ContractsTableComponent]

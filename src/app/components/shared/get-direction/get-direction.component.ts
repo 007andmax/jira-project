@@ -9,10 +9,14 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class GetDirectionComponent {
   @Input() mapSrc: string = '';
+  src;
   constructor(
     public activeModal: NgbActiveModal, private eRef: ElementRef,
     private sanitizer: DomSanitizer,) {
 
+  }
+  ngAfterViewInit() {
+    this.src = this.mapUrl();
   }
   mapUrl() {
     return this.sanitizer.bypassSecurityTrustResourceUrl(this.mapSrc);

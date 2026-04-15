@@ -1590,43 +1590,6 @@
                 z-index: 1;
             }
         }
-        &.map {
-            .modal-dialog {
-                width: 744px;
-                height: 392px;
-                left: 0;
-                right: 0;
-                margin-left: auto;
-                margin-right: auto;
-                .modal-content {
-                    height: 100%;
-                    overflow: hidden;
-                    padding: 0;
-                    h4 {
-                        padding: 10px 32px;
-                    }
-                    .close {
-                        right: 16px;
-                        top: 13px;
-                    }
-                    .modal-body {
-                        height: 100%;
-                        padding: 0;
-                        .h1 {
-                            font-size: 20px;
-                            padding: 10px 32px;
-                            font-weight: 600;
-                            line-height: 1.4;
-                            letter-spacing: 0;
-                        }
-                        iframe {
-                            width: 100%;
-                            height: 100%;
-                        }
-                    }
-                }
-            }
-        }
     }
 }
 

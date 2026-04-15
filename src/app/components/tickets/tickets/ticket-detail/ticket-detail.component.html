@@ -125,12 +125,32 @@
                                             <span [textContent]="getCreatAt()"></span>
                                             <div class="ticket-detail-page-content__body-header-data-divider"></div>
                                             <span class="qt-icon icon__companies qt-sz-16 qt-dib qt-mr-8"></span>
+                                             <ng-template #popCompanyContent let-greeting="greeting"
+                                                >
+                                                <app-users-table-company-by
+                                                [company]="getCompany(ticketProfile.company.id)"
+                                                [indexNoAvatar]="indexNoAvatar"
+                                                [listColorNoAvatar]="listColorNoAvatar"
+                                                ></app-users-table-company-by>
+                                                </ng-template
+                                            >
                                             <span
                                                 class="pointer"
                                                 [textContent]="getCompanyName()"
                                                 (click)="goToCompanyDashboard()"
                                                 id="dropdownCompany"
                                                 ngbDropdownToggle
+                                            [ngbPopover]="popCompanyContent"
+                                        [popoverClass]="'requested-by-popover'"
+                                            [autoClose]="'outside'"
+                                            [container]="'body'"
+                                        #pCompany="ngbPopover"
+                                        triggers="manual"
+                                        appCompanyLogoPopover
+                                        [company]="getCompany(ticketProfile.company.id)"
+                                        [popover]="pCompany"
+                                        [disabled]="!getCompany(ticketProfile.company.id)"
+                                        [disablePopover]="!getCompany(ticketProfile.company.id)"
                                             ></span>
                                             <span
                                                 class="qt-color-red-600"
