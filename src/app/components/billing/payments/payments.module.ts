@@ -24,6 +24,8 @@ import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 import { PaymentsCardsComponent } from './payments-cards/payments-cards.component';
 import { PaymentItemCompanyComponent } from './payment-item/payment-item-company/payment-item-company.component';
+import { CompanyLogoPopoverModule } from 'src/app/directives/company-logo-popover/company-logo-popover.module';
+import { UsersTableCompanyByModule } from '../../users/users-table/users-table-company-by/users-table-company-by.module';
 
 
 
@@ -56,7 +58,9 @@ import { PaymentItemCompanyComponent } from './payment-item/payment-item-company
         InvoiceExportModule,
         CompanyDropDownModule,
         DropDownModule,
-        MatErrorModule
+        MatErrorModule,
+        CompanyLogoPopoverModule,
+        UsersTableCompanyByModule
     ],
 
 

@@ -62,7 +62,7 @@ export class UsersTableCompanyByComponent {
     return this.company.companyInfo.addresses.find(item => item.isPrimary);
   }
   getContact() {
-    return this.company.companyInfo.contacts[0];
+    return this.company.companyInfo.contacts && this.company.companyInfo.contacts.length > 0 ? this.company.companyInfo.contacts[0] : null;
   }
   goToCompanySection(section) {
     const url = `/#/${this.companiesState.getCurrentCompany().techDomain}/company/${this.company.id}/${section}`;

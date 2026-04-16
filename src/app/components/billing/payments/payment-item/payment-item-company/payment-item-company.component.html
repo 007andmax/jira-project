@@ -1,8 +1,28 @@
 <div class="qt-df qt-ai-c qt-mb-8">
+     <ng-template #popContent let-greeting="greeting"
+	>
+    <app-users-table-company-by
+    [company]="getCompany()"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    ></app-users-table-company-by>
+    </ng-template
+>
 <div
     class="qt-table-modern__circle-avatar multi-assign-user"
     [textContent]="getCompany().name[0].toUpperCase()"
     [ngStyle]="{'background': parseLogo()}"
+      [ngbPopover]="popContent"
+    [popoverClass]="'requested-by-popover'"
+        [autoClose]="'outside'"
+        [container]="'body'"
+    #p="ngbPopover"
+    triggers="manual"
+    appCompanyLogoPopover
+    [company]="getCompany()"
+    [popover]="p"
+    [disabled]="!getCompany()"
+    [disablePopover]="!getCompany()"
 ></div>
  <div class="ellipsis qt-fs-14 qt-fw-400 qt-color-gray-900" [textContent]="getCompany().name"></div>
  </div>
