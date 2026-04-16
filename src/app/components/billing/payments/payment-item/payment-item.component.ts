@@ -18,7 +18,6 @@ import { AppService } from 'src/app/states/app/app.service';
 })
 export class PaymentItemComponent implements OnInit {
   @Input() payment: Payment;
-  company: any;
   @Output() onDetailsPayment = new EventEmitter<any>();
   @Output() onRefundPayment = new EventEmitter<any>();
   @Output() onPreviewInvoice = new EventEmitter<any>();

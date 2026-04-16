@@ -23,6 +23,7 @@ import { CompanyDropDownModule } from '../../shared/company-drop-down/company-dr
 import { DropDownModule } from '../../shared/drop-down/drop-down.module';
 import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
 import { PaymentsCardsComponent } from './payments-cards/payments-cards.component';
+import { PaymentItemCompanyComponent } from './payment-item/payment-item-company/payment-item-company.component';
 
 
 
@@ -36,6 +37,7 @@ import { PaymentsCardsComponent } from './payments-cards/payments-cards.componen
         PaymentsAsideComponent,
         EditPaymentComponent,
         PaymentsFilterComponent,
+        PaymentItemCompanyComponent,
 
     ],
     imports: [

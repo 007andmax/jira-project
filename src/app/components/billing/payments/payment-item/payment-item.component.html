@@ -24,7 +24,7 @@
         *ngIf="payment.multipleCompanies.length == 0"
     ></div>
     <div
-        class="billable-payment-table__company pointer qt-df qt-fd-c qt-ai-fs"
+        class="billable-payment-table__company pointer qt-df qt-fd-c qt-ai-fs qt-jc-c"
         (click)="showDetailsPayment()"
         *ngIf="payment.multipleCompanies.length > 0"
     >
@@ -35,7 +35,7 @@
             [ngForTrackBy]="trackById"
             let-i="index"
         >
-            <span [textContent]="company.name"></span>
+            <app-payment-item-company [company]="company" [i]="i"></app-payment-item-company>
         </ng-template>
     </div>
     <div
