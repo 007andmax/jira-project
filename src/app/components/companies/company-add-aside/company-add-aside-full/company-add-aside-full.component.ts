@@ -36,7 +36,8 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   new CompanySetting('Cheque', 'CHEQUE'),
   new CompanySetting('Debit Card', 'DEBIT_CARD'),
   new CompanySetting('Credit Card', 'CREDIT_CARD'),
-  new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
+  new CompanySetting('Wire Transfer', 'WIRE_TRANSFER'),
+  new CompanySetting('Manual credit card', 'MANUAL_CREDIT_CARD')];
   serviceTypes: Array<CrmCompanyServiceType> = [];
   @ViewChild('paymentTerm', { static: true }) paymentTerm: DropDownComponent;
   @ViewChild('paymentMethod', { static: true }) paymentMethod: DropDownComponent;

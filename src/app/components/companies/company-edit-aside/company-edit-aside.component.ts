@@ -49,7 +49,8 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
   new CompanySetting('Cheque', 'CHEQUE'),
   new CompanySetting('Debit Card', 'DEBIT_CARD'),
   new CompanySetting('Credit Card', 'CREDIT_CARD'),
-  new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
+  new CompanySetting('Wire Transfer', 'WIRE_TRANSFER'),
+  new CompanySetting('Manual credit card', 'MANUAL_CREDIT_CARD')];
   listPersons: Array<ItemFilterPerson> = [];
   subscriptions: Array<CompanySubscription> = [new CompanySubscription('Ticket Updates', 'ticket'),
   new CompanySubscription('Ticket Manager', 'ticketManager'),
