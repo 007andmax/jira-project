@@ -35,7 +35,7 @@
             [ngForTrackBy]="trackById"
             let-i="index"
         >
-            <app-payment-item-company [company]="company" [i]="i"></app-payment-item-company>
+            <app-payment-item-company [company]="getCompany(company)" [i]="i"></app-payment-item-company>
         </ng-template>
     </div>
     <div

@@ -48,11 +48,14 @@ export class QuotesItemComponent implements OnInit {
     this.createdUser = this.usersStateService.getAllUsers().find(item => item.id === this.quote.createdBy);
   }
   checkLogo() {
-    return (this.quote.company && this.quote.company.logo && this.quote.company.logo.cropped && this.quote.company.logo.cropped.id || this.quote.company && this.quote.company.logo && this.quote.company.logo.origin && this.quote.company.logo.origin.id)
+    return (this.getCompany(this.quote.company) && this.getCompany(this.quote.company).logo && this.getCompany(this.quote.company).logo.cropped && this.getCompany(this.quote.company).logo.cropped.id || this.getCompany(this.quote.company) && this.getCompany(this.quote.company).logo && this.getCompany(this.quote.company).logo.origin && this.getCompany(this.quote.company).logo.origin.id)
+  }
+  getCompany(company) {
+    return this.companiesStateService.getCompanies().find(item => item.id == company.id);
   }
   parseLogo() {
     if (this.checkLogo()) {
-      return `url(${this.companiesStateService.getCompanyLogoUrl(this.quote.company)}) center / cover no-repeat`;
+      return `url(${this.companiesStateService.getCompanyLogoUrl(this.getCompany(this.quote.company))}) center / cover no-repeat`;
     } else {
       return this.ticketsListService.getStyleAvatar(null, this.listColorNoAvatar[this.indexNoAvatar]);
     }

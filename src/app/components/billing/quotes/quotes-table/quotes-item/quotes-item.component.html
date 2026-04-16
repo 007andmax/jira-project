@@ -34,7 +34,7 @@
   <ng-template #popCompanyContent let-greeting="greeting"
 	>
     <app-users-table-company-by
-    [company]="quote.company"
+    [company]="getCompany(quote.company)"
     [indexNoAvatar]="indexNoAvatar"
     [listColorNoAvatar]="listColorNoAvatar"
     ></app-users-table-company-by>
@@ -51,10 +51,10 @@
             #pCompany="ngbPopover"
             triggers="manual"
             appCompanyLogoPopover
-            [company]="quote.company"
+            [company]="getCompany(quote.company)"
             [popover]="pCompany"
-            [disabled]="!quote.company"
-            [disablePopover]="!quote.company"
+            [disabled]="!getCompany(quote.company)"
+            [disablePopover]="!getCompany(quote.company)"
         ></div>
         <div
             class="ellipsis"
