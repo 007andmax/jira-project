@@ -107,7 +107,7 @@ export class InvoiceFormEditCustomerComponent implements OnInit, OnDestroy {
     this.validate.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail);
   }
   public onChangePhoneNumber() {
-    this.validate.checkValidPhoneNumber(this.company.contacts[0].phoneNumbers[0].number);
+    this.validate.checkValidShippingPhoneNumber(this.company.contacts[0].phoneNumbers[0].number);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

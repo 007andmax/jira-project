@@ -45,7 +45,7 @@
             <input
                 type="text"
                 *ngIf="company.addresses[0].phoneNumbers.length > 0"
-                [ngClass]="{'--input-error' : !validate.getPhoneNumber()}"
+                [ngClass]="{'--input-error' : !validate.getShippingPhoneNumber()}"
                 [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
                 placeholder="Enter Phone Number"
                 (input)="onChangePhoneNumber()"
@@ -56,7 +56,7 @@
             >
             <app-mat-error
                 class="invalid-feedback"
-                *ngIf="!validate.getPhoneNumber()"
+                *ngIf="!validate.getShippingPhoneNumber()"
             >
                 Phone number is required
             </app-mat-error>

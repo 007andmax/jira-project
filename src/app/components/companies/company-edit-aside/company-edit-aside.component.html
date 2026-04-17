@@ -134,24 +134,24 @@
         </div>
         <div class="qt-inputs-row qt-inputs-row__divider">
             <div class="qt-input-block">
-                <div class="qt-input-block__subtitle qt-mt-12">Billing Address</div>
+                <div class="qt-input-block__subtitle qt-mt-12">Shipping Address</div>
             </div>
         </div>
         <div class="qt-inputs-row --required">
             <div class="qt-input-block">
-                <div class="qt-input-block__label">Billing Location Name</div>
+                <div class="qt-input-block__label">Shipping Location Name</div>
                 <input
                     type="text"
-                    [ngClass]="{'--input-error' : !validate.getBillindAddress()}"
+                    [ngClass]="{'--input-error' : !validate.getShippingAddress()}"
                     [(ngModel)]="company.addresses[0].locationName"
                     placeholder="Enter Location Name"
-                    (input)="onChangeBillingLocationName($event)"
+                    (input)="onChangeShippingLocationName($event)"
                 >
                 <app-mat-error
                     class="invalid-feedback"
-                    *ngIf="!validate.getBillindAddress()"
+                    *ngIf="!validate.getShippingAddress()"
                 >
-                    Billing Location Name is required
+                    Shipping Location Name is required
                 </app-mat-error>
             </div>
         </div>
@@ -173,7 +173,7 @@
                 <input
                     type="text"
                     [(ngModel)]="company.addresses[0].suiteNumber"
-                    (input)="onChangeBillingSuiteNo($event)"
+                    (input)="onChangeShippingSuiteNo($event)"
                     placeholder="Enter Suite Number"
                 >
             </div>
@@ -182,7 +182,7 @@
                 <input
                     type="text"
                     [(ngModel)]="company.addresses[0].postalCode"
-                    (input)="onChangeBillingZip($event)"
+                    (input)="onChangeShippingZip($event)"
                     placeholder="Enter Zip"
                 >
             </div>
@@ -190,9 +190,9 @@
                 <div class="qt-input-block__label">Phone Number</div>
                 <input
                     type="text"
-                    [ngClass]="{'--input-error' : !validate.getPhoneNumber()}"
+                    [ngClass]="{'--input-error' : !validate.getShippingPhoneNumber()}"
                     *ngIf="company.addresses[0].phoneNumbers.length > 0 && opened"
-                    (input)="onChangePhoneNumber()"
+                    (input)="onChangeShippingPhoneNumber()"
                     [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
                     placeholder="Enter Phone Number"
                     prefix="+1"
@@ -202,7 +202,7 @@
                 >
                 <app-mat-error
                     class="invalid-feedback"
-                    *ngIf="!validate.getPhoneNumber()"
+                    *ngIf="!validate.getShippingPhoneNumber()"
                 >
                     Phone number is required
                 </app-mat-error>
@@ -211,7 +211,7 @@
         <div class="qt-inputs-row qt-inputs-row__divider">
             <div class="qt-df qt-ai-c qt-jc-sb">
                 <div class="qt-input-block__label">
-                    <div class="qt-input-block__subtitle qt-mt-12">Shipping Address</div>
+                    <div class="qt-input-block__subtitle qt-mt-12"> Billing Address</div>
                 </div>
                 <div class="same-as-billing">
                     <div class="qt-df qt-ai-c">
@@ -222,12 +222,12 @@
                             <input
                                 id="email-payment"
                                 type="checkbox"
-                                (change)="onSameAsBilling($event)"
+                                (change)="onSameAsShipping($event)"
                                 [(ngModel)]="company.addresses[1].sameAsBilling"
                             >
                             <span></span>
                         </label>
-                        <span class="qt-fs-12 qt-fw-600 qt-ml-8 same-as-billing-txt">Same as Billing Address</span>
+                        <span class="qt-fs-12 qt-fw-600 qt-ml-8 same-as-billing-txt">Same as Shipping Address</span>
                     </div>
                 </div>
             </div>
@@ -237,20 +237,20 @@
             *ngIf="!company.addresses[1].sameAsBilling"
         >
             <div class="qt-input-block">
-                <div class="qt-input-block__label">Shipping Location Name</div>
+                <div class="qt-input-block__label"> Billing Location Name</div>
                 <input
                     type="text"
                     [(ngModel)]="company.addresses[1].locationName"
                     placeholder="Enter Location Name"
                     [disabled]="company.addresses[1].sameAsBilling"
-                    [ngClass]="{'--input-error' : !validate.getShippingAddress()}"
-                    (input)="validate.resetShippingAddress()"
+                    [ngClass]="{'--input-error' : !validate.getBillindAddress()}"
+                    (input)="validate.resetBillindAddress()"
                 >
                 <app-mat-error
                     class="invalid-feedback"
-                    *ngIf="!validate.getShippingAddress()"
+                    *ngIf="!validate.getBillindAddress()"
                 >
-                    Shipping Location Name is required
+                     Billing Location Name is required
                 </app-mat-error>
             </div>
         </div>
@@ -263,7 +263,7 @@
                 <input
                     type="text"
                     [(ngModel)]="company.addresses[1].address"
-                    (blur)="onCheckShippingAddress()"
+                    (blur)="onCheckBillingAddress()"
                     location-is-init="false"
                     (focus)="onCheckGoogleAutoComplete($event,1)"
                     placeholder="Enter Location"
@@ -303,8 +303,7 @@
                 <div class="qt-input-block__label">Phone Number</div>
                 <input
                     type="text"
-                    (input)="onChangeShippingPhoneNumber()"
-                    [ngClass]="{'--input-error' : !validate.getShippingPhoneNumber()}"
+                    [ngClass]="{'--input-error' : !validate.getBillingPhoneNumber()}"
                     *ngIf="company.addresses[1].phoneNumbers.length > 0"
                     [(ngModel)]="company.addresses[1].phoneNumbers[0].number"
                     placeholder="Enter Phone Number"
@@ -316,7 +315,7 @@
                 >
                 <app-mat-error
                     class="invalid-feedback"
-                    *ngIf="!validate.getShippingPhoneNumber()"
+                    *ngIf="!validate.getBillingPhoneNumber()"
                 >
                     Phone number is required
                 </app-mat-error>
