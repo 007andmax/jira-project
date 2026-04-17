@@ -40,11 +40,15 @@ export class TicketsFilter {
     customDateRange: string = null;
     startDate: string = null;
     endDate: string = null;
+    isCompanyFilter: boolean = false;
     constructor() {
         this.onInitUser();
     }
     public checkUse() {
         return this.selectedCompanies.length > 0 || (this.customDateRange || this.startDate && this.endDate) || this.selectedTechUsers.length > 0 || this.selectedUsers.length > 0 || this.selectedStatus.length > 0 || this.selectedPriorityLevels.length > 0 || this.tags.length > 0;
+    }
+    public setIsCompanyFilter(data: boolean) {
+        this.isCompanyFilter = data;
     }
     public clearDates() {
         this.startDate = null;
@@ -407,6 +411,7 @@ export class TicketsFilter {
             payload.startDate = this.startDate;
             payload.endDate = this.endDate;
         }
+        if (this.isCompanyFilter) payload.isCompanyFilter = this.isCompanyFilter;
         return payload;
     }
 
