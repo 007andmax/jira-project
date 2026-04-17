@@ -168,7 +168,7 @@
             >
             </span>
             <a
-                (click)="openMap(content,companyDetailing.addresses.length > 1 ? companyDetailing.addresses[1] : null)"
+                (click)="openMap(companyDetailing.addresses.length > 1 ? companyDetailing.addresses[1] : null)"
                 class="qt-button --outline --sm"
             >
                 <span class="qt-icon icon__map-pin qt-icon__blue-light-600 qt-sz-16 qt-dib qt-mr-4"></span>
@@ -197,7 +197,7 @@
             >
             </span>
             <a
-                (click)="openMap(content,companyDetailing.addresses[0])"
+                (click)="openMap(companyDetailing.addresses[0])"
                 class="qt-button --outline --sm"
             >
                 <span class="qt-icon icon__map-pin qt-icon__blue-light-600 qt-sz-16 qt-dib qt-mr-4"></span>
@@ -491,31 +491,5 @@
                 Save Changes
             </button>
         </div>
-    </div>
-</ng-template>
-<!-- MAP -->
-<ng-template
-    #content
-    let-modal
-    class="map-modal"
->
-    <button
-        type="button"
-        class="qt-icon icon__close qt-sz-20 close"
-        aria-label="Close"
-        (click)="modal.dismiss('Cross click')"
-    >
-        close
-    </button>
-    <div class="modal-body qt-df">
-        <div class="h1">Get Direction</div>
-        <iframe
-            frameborder="0"
-            scrolling="no"
-            marginheight="0"
-            marginwidth="0"
-            [src]="mapUrl()"
-        >
-        </iframe>
     </div>
 </ng-template>

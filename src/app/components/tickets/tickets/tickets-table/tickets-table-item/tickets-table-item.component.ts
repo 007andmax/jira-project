@@ -151,9 +151,22 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
     if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
     return '';
   }
+  checkLogo() {
+    return (this.getCompanyById() && this.getCompanyById().logo && this.getCompanyById().logo.cropped && this.getCompanyById().logo.cropped.id || this.getCompanyById() && this.getCompanyById().logo && this.getCompanyById().logo.origin && this.getCompanyById().logo.origin.id)
+  }
+  parseLogo() {
+    if (this.checkLogo()) {
+      return `url(${this.companiesStateService.getCompanyLogoUrl(this.getCompanyById())}) center / cover no-repeat`;
+    } else {
+      return this.ticketsListService.getStyleAvatar(null, this.listColorNoAvatar[this.indexNoAvatar]);
+    }
+  }
+  getCompanyById() {
+    return this.companiesStateService.getCompanies().find(item => item.id === this.ticket.companyId);
+  }
   getCompanyName() {
-    let company = this.companiesStateService.getCompanies().find(item => item.id === this.ticket.companyId);
-    return (company) ? company.name : '';
+    let company = this.getCompanyById();
+    return (company) ? company?.name : '';
   }
   getStyleStatus(name) {
     let find = this.ticketsStatus.find(item => item.name == name);

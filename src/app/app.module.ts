@@ -167,6 +167,8 @@ import { ManageCardsEditModule } from './components/billing/manage-cards/manage-
 import { PreloaderTicketModule } from './components/shared/preloader-ticket/preloader-ticket.module';
 import { DisabledBtnModule } from './directives/disabled-btn/disabled-btn.module';
 import { UserLogoPopoverDirective } from './directives/user-logo-popover/user-logo-popover.directive';
+import { GetDirectionComponent } from './components/shared/get-direction/get-direction.component';
+import { CompanyLogoPopoverDirective } from './directives/company-logo-popover/company-logo-popover.directive';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -196,7 +198,8 @@ declare var $: any;
         ManufacturesCheckUseComponent,
         UserDeArchiveNotificationComponent,
         PreviewFileComponent,
-        SubscriptionServicesCheckUseComponent
+        SubscriptionServicesCheckUseComponent,
+        GetDirectionComponent
     ],
     imports: [
         BrowserModule,

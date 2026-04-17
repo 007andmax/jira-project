@@ -34,10 +34,36 @@
         (click)="onShowPreviewInvoice()"
     ></div>
     <div class="invoce-table__company ellipsis no-pointer">
-        <span
+        <ng-template #popCompanyContent let-greeting="greeting"
+	>
+    <app-users-table-company-by
+    [company]="company"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    ></app-users-table-company-by>
+    </ng-template
+>
+        <div
+            class="tooltip__circle-avatar"
+            [textContent]="company.name[0].toUpperCase()"
+            [ngStyle]="{'background': parseLogo() }"
+             [ngbPopover]="popCompanyContent"
+            [popoverClass]="'requested-by-popover'"
+                [autoClose]="'outside'"
+                [container]="'body'"
+            #pCompany="ngbPopover"
+            triggers="manual"
+            appCompanyLogoPopover
+            [company]="company"
+            [popover]="pCompany"
+            [disabled]="!company"
+            [disablePopover]="!company"
+        ></div>
+        <div
             class="ellipsis"
-            [textContent]="(company) ? company.name : ''"
-        ></span>
+            [textContent]="company.name"
+        >
+        </div>
     </div>
     <div class="invoce-table__status no-pointer">
         <span

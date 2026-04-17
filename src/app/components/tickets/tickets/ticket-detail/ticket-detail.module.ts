@@ -102,6 +102,8 @@ import { TaskHeaderAddTypeModule } from 'src/app/components/tasks/task-header-ad
 import { TasksDatePickerModule } from 'src/app/components/tasks/tasks-date-picker/tasks-date-picker.module';
 import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
 import { TicketsTableItemRequestedByModule } from '../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
+import { CompanyLogoPopoverModule } from 'src/app/directives/company-logo-popover/company-logo-popover.module';
+import { UsersTableCompanyByModule } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.module';
 
 
 
@@ -212,6 +214,8 @@ import { TicketsTableItemRequestedByModule } from '../tickets-table/tickets-tabl
         TasksDatePickerModule,
         UserLogoPopoverModule,
         TicketsTableItemRequestedByModule,
+        CompanyLogoPopoverModule,
+        UsersTableCompanyByModule
     ],
 
 

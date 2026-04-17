@@ -10,6 +10,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-payment-item',
@@ -18,7 +19,6 @@ import { AppService } from 'src/app/states/app/app.service';
 })
 export class PaymentItemComponent implements OnInit {
   @Input() payment: Payment;
-  company: any;
   @Output() onDetailsPayment = new EventEmitter<any>();
   @Output() onRefundPayment = new EventEmitter<any>();
   @Output() onPreviewInvoice = new EventEmitter<any>();
@@ -34,10 +34,14 @@ export class PaymentItemComponent implements OnInit {
     public customerPortalStateService: CustomerPortalStateService,
     private usersStateService: UsersStateService,
     private permissionsService: PermissionsService,
+    private companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,) { }
 
   ngOnInit() {
 
+  }
+  getCompany(company) {
+    return this.companiesStateService.getCompanies().find(item => item.id == company.id);
   }
   downloadPDF() {
     this.appService.download(`/payments/pdf/${this.payment.id}`, `${this.payment.clientCompanyName}.pdf`);

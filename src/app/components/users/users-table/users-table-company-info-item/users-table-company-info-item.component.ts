@@ -25,4 +25,6 @@ export class UsersTableCompanyInfoItemComponent implements OnInit {
     this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
   }
 
+
+
 }

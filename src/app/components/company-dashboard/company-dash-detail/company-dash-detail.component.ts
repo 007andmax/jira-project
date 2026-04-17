@@ -24,6 +24,7 @@ import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-t
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { WORK_HOURS } from 'src/app/const/time';
+import { GetDirectionComponent } from '../../shared/get-direction/get-direction.component';
 
 @Component({
   selector: 'app-company-dash-detail',
@@ -382,9 +383,11 @@ export class CompanyDashDetailComponent implements OnInit, OnDestroy {
   openTag(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal', backdrop: 'static', keyboard: false });
   }
-  openMap(content: any, addresses) {
+  openMap(addresses) {
     if (addresses) this.mapSrc = "https://maps.google.com/maps/embed/v1/place?key=AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s&q=" + addresses.locationLat + "," + addresses.locationLng + "";
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal map', backdrop: 'static', keyboard: false });
+    const modalRef = this.modalService.open(GetDirectionComponent, { ariaLabelledBy: 'modal-basic-title', centered: true, windowClass: 'cmp-comapny-modal map', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.mapSrc = this.mapSrc;
+
   }
 
 
@@ -395,11 +398,6 @@ export class CompanyDashDetailComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getCompany);
 
-  }
-
-
-  mapUrl() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.mapSrc);
   }
 
   startTimeChange(workingday: any, startTime: any) {

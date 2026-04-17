@@ -29,9 +29,39 @@
         (click)="preview()"
     ></div>
     <div
-        class="quotes-table__company cursor-default"
-        [textContent]="quote.company.name"
-    ></div>
+        class="quotes-table__company cursor-default ellipsis"
+    >
+  <ng-template #popCompanyContent let-greeting="greeting"
+	>
+    <app-users-table-company-by
+    [company]="getCompany(quote.company)"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    ></app-users-table-company-by>
+    </ng-template
+>
+        <div
+            class="tooltip__circle-avatar"
+            [textContent]="quote.company.name[0].toUpperCase()"
+            [ngStyle]="{'background': parseLogo() }"
+             [ngbPopover]="popCompanyContent"
+            [popoverClass]="'requested-by-popover'"
+                [autoClose]="'outside'"
+                [container]="'body'"
+            #pCompany="ngbPopover"
+            triggers="manual"
+            appCompanyLogoPopover
+            [company]="getCompany(quote.company)"
+            [popover]="pCompany"
+            [disabled]="!getCompany(quote.company)"
+            [disablePopover]="!getCompany(quote.company)"
+        ></div>
+        <div
+            class="ellipsis"
+            [textContent]="quote.company.name"
+        >
+        </div>
+</div>
     <div
         class="quotes-table__description cursor-default"
         [textContent]="quote.description"

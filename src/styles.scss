@@ -3291,3 +3291,64 @@ app-users-table-company-info-single {
     min-width: 250px;
   }
 }
+.map {
+    .modal-dialog {
+        width: 744px !important;
+        height: 392px;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        .modal-header {
+            padding: 14px 32px;
+            border-bottom: 1px solid $gray-200;
+            h1 {
+                font-size: 20px;
+                font-weight: 600;
+                font-style: normal;
+                line-height: 1;
+                letter-spacing: -0.5px;
+                color: $gray-900;
+                margin: 0;
+            }
+        }
+         .close {
+                height: 20px;
+                width: 20px;
+                position: absolute;
+                right: 16px;
+                top: 16px;
+                font-size: 0;
+                padding: 0;
+                cursor: pointer;
+                outline: none;
+                border: none;
+                @include opacity(1);
+                z-index: 1;
+            }
+        .modal-content {
+            height: 100%;
+            overflow: hidden;
+            padding: 0;
+            h4 {
+                padding: 10px 32px;
+            }
+            .modal-body {
+                height: 100%;
+                padding: 0 !important;
+                flex-direction: column;
+                .h1 {
+                    font-size: 20px;
+                    padding: 10px 32px;
+                    font-weight: 600;
+                    line-height: 1.4;
+                    letter-spacing: 0;
+                }
+                iframe {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+}
