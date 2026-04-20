@@ -24,11 +24,32 @@
             appRightClickBlank
         >
             <div class="companies-table__name-row qt-df qt-ai-c">
+                 <ng-template #popContent let-greeting="greeting"
+	>
+    <app-users-table-company-by
+    [company]="company"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    ></app-users-table-company-by>
+    </ng-template
+>
+
                 <div
                     class="circle-avatar qt-mr-8"
                     [ngClass]="{'with-logo': checkLogo()}"
                      [ngStyle]="{'background': ticketsListService.getStyleAvatar(primaryContact,listColorNoAvatar[indexNoAvatar]) }"
-                >
+                   [ngbPopover]="popContent"
+                    [popoverClass]="'requested-by-popover'"
+                        [autoClose]="'outside'"
+                        [container]="'body'"
+                    #p="ngbPopover"
+                    triggers="manual"
+                    appCompanyLogoPopover
+                    [company]="company"
+                    [popover]="p"
+                    [disabled]="!company"
+                    [disablePopover]="!company"
+                     >
                     <img
                         [src]="companiesStateService.getCompanyLogoUrl(company)"
                         alt
