@@ -115,7 +115,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       this.paymentMethod.selectItemWithOutChanges(this.paymentMethods.find(item => item.value == this.companiesStateService.getCurrentCompany().defaultPaymentMethod));
       this.company.defaultPaymentMethod = JSON.parse(JSON.stringify(this.companiesStateService.getCurrentCompany().defaultPaymentMethod));
     }
-    this.company.addresses[1].sameAsBilling = true;
+    this.company.addresses[1].sameAsShipping = true;
     this.company.addresses[1].isPrimary = false;
     this.company.addresses[1].phoneNumbers[0].number = JSON.parse(JSON.stringify(this.company.addresses[0].phoneNumbers[0].number));
     this.company.addresses[1].locationName = JSON.parse(JSON.stringify(this.company.name));
@@ -166,7 +166,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     })
   }
   onChangeShippingLocationName(data) {
-    if (this.company.addresses[1].sameAsBilling) {
+    if (this.company.addresses[1].sameAsShipping) {
       this.company.addresses[1].locationName = JSON.parse(JSON.stringify(this.company.addresses[0].locationName));
       this.validate.resetBillindAddress();
 
@@ -175,10 +175,10 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   }
 
   onChangeShippingSuiteNo(data) {
-    if (this.company.addresses[1].sameAsBilling) this.company.addresses[1].suiteNumber = JSON.parse(JSON.stringify(this.company.addresses[0].suiteNumber));
+    if (this.company.addresses[1].sameAsShipping) this.company.addresses[1].suiteNumber = JSON.parse(JSON.stringify(this.company.addresses[0].suiteNumber));
   }
   onChangeShippingZip(data) {
-    if (this.company.addresses[1].sameAsBilling) this.company.addresses[1].postalCode = JSON.parse(JSON.stringify(this.company.addresses[0].postalCode));
+    if (this.company.addresses[1].sameAsShipping) this.company.addresses[1].postalCode = JSON.parse(JSON.stringify(this.company.addresses[0].postalCode));
 
   }
   addThirdParty() {
@@ -193,7 +193,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   onSameAsShipping(event) {
     if (event.target.checked) {
       this.company.addresses[1] = new CompanyProfileAddress(JSON.parse(JSON.stringify(this.company.addresses[0])));
-      this.company.addresses[1].sameAsBilling = true;
+      this.company.addresses[1].sameAsShipping = true;
       this.company.addresses[1].isPrimary = false;
       this.validate.resetBillindAddress();
       this.onChangeBillingPhoneNumber();
@@ -220,7 +220,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
           this.validate.resetName();
           this.validate.resetNameIsExist();
           this.company.addresses[0].locationName = JSON.parse(JSON.stringify(this.company.name));
-          if (this.company.addresses[1].sameAsBilling) {
+          if (this.company.addresses[1].sameAsShipping) {
             this.company.addresses[1].locationName = JSON.parse(JSON.stringify(this.company.name));
             this.validate.resetBillindAddress();
           }
@@ -312,7 +312,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       }
       this.cd.detectChanges();
     })
-    if (this.company.addresses[1].sameAsBilling && index == 0) {
+    if (this.company.addresses[1].sameAsShipping && index == 0) {
       this.company.addresses[1].locationLat = JSON.parse(JSON.stringify(place.geometry.location.lat()));
       this.company.addresses[1].locationLng = JSON.parse(JSON.stringify(place.geometry.location.lng()));
       this.company.addresses[1].address = JSON.parse(JSON.stringify(event.target.value));
@@ -329,7 +329,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
     })
   }
   public onChangeShippingPhoneNumber() {
-    if (this.company.addresses[1].sameAsBilling) {
+    if (this.company.addresses[1].sameAsShipping) {
       this.company.addresses[1].phoneNumbers[0].number = JSON.parse(JSON.stringify(this.company.addresses[0].phoneNumbers[0].number));
       this.onChangeBillingPhoneNumber();
     }

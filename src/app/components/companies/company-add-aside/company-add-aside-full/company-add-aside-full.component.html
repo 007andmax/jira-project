@@ -210,7 +210,7 @@
                             id="email-payment"
                             type="checkbox"
                             (change)="onSameAsShipping($event)"
-                            [(ngModel)]="company.addresses[1].sameAsBilling"
+                            [(ngModel)]="company.addresses[1].sameAsShipping"
                         >
                         <span></span>
                         <div class="qt-fs-12 qt-fw-600 qt-ml-8">Same as Shipping Address</div>
@@ -221,7 +221,7 @@
     </div>
     <div
         class="qt-inputs-row shipping-background"
-        *ngIf="!company.addresses[1].sameAsBilling"
+        *ngIf="!company.addresses[1].sameAsShipping"
     >
         <div class="qt-input-block">
             <div class="qt-input-block__label"> Billing Location Name</div>
@@ -229,7 +229,7 @@
                 type="text"
                 [(ngModel)]="company.addresses[1].locationName"
                 placeholder="Enter Location Name"
-                [disabled]="company.addresses[1].sameAsBilling"
+                [disabled]="company.addresses[1].sameAsShipping"
                 [ngClass]="{'--input-error' : !validate.getBillindAddress()}"
                 (input)="validate.resetBillindAddress()"
             >
@@ -243,7 +243,7 @@
     </div>
     <div
         class="qt-inputs-row"
-        *ngIf="!company.addresses[1].sameAsBilling"
+        *ngIf="!company.addresses[1].sameAsShipping"
     >
         <div class="qt-input-block">
             <div class="qt-input-block__label">Location</div>
@@ -253,13 +253,13 @@
                 location-is-init="false"
                 (focus)="onCheckGoogleAutoComplete($event,1)"
                 placeholder="Enter Location"
-                [disabled]="company.addresses[1].sameAsBilling"
+                [disabled]="company.addresses[1].sameAsShipping"
             >
         </div>
     </div>
     <div
         class="qt-inputs-row"
-        *ngIf="!company.addresses[1].sameAsBilling"
+        *ngIf="!company.addresses[1].sameAsShipping"
     >
         <div class="qt-input-block qt-f50">
             <div class="qt-input-block__label">Suite No.</div>
@@ -267,24 +267,24 @@
                 type="text"
                 [(ngModel)]="company.addresses[1].suiteNumber"
                 placeholder="Enter Suite Number"
-                [disabled]="company.addresses[1].sameAsBilling"
+                [disabled]="company.addresses[1].sameAsShipping"
             >
         </div>
         <div
             class="qt-input-block qt-f50"
-            *ngIf="!company.addresses[1].sameAsBilling"
+            *ngIf="!company.addresses[1].sameAsShipping"
         >
             <div class="qt-input-block__label">Zip</div>
             <input
                 type="text"
                 [(ngModel)]="company.addresses[1].postalCode"
                 placeholder="Enter Zip"
-                [disabled]="company.addresses[1].sameAsBilling"
+                [disabled]="company.addresses[1].sameAsShipping"
             >
         </div>
         <div
             class="qt-input-block qt-f50 --required"
-            *ngIf="!company.addresses[1].sameAsBilling"
+            *ngIf="!company.addresses[1].sameAsShipping"
         >
             <div class="qt-input-block__label">Phone Number</div>
             <input
@@ -293,7 +293,7 @@
                 *ngIf="company.addresses[1].phoneNumbers.length > 0"
                 [(ngModel)]="company.addresses[1].phoneNumbers[0].number"
                 placeholder="Enter Phone Number"
-                [disabled]="company.addresses[1].sameAsBilling"
+                [disabled]="company.addresses[1].sameAsShipping"
                 prefix="+1"
                 mask="(000) 000-0000 Ext: 999999||000-000-0000"
                 [specialCharacters]="['(',')',' ','-','E','x','t',':']"
