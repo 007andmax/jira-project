@@ -14,13 +14,19 @@ import { DELETE_COMMAND } from 'src/app/const/confirm';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { TerminalAsideComponent } from './terminal-aside/terminal-aside.component';
+import { TerminalScriptDetailComponent } from './terminal-script-detail/terminal-script-detail.component';
+import { TerminalRunScriptComponent } from './terminal-run-script/terminal-run-script.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgStyle, NgFor, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-terminal',
-  templateUrl: './terminal.component.html',
-  styleUrls: ['./terminal.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  providers: [UserListService]
+    selector: 'app-terminal',
+    templateUrl: './terminal.component.html',
+    styleUrls: ['./terminal.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [UserListService],
+    standalone: true,
+    imports: [NgClass, NgStyle, NgFor, FormsModule, TerminalAsideComponent, NgIf, TerminalRunScriptComponent, TerminalScriptDetailComponent]
 })
 export class TerminalComponent implements OnInit, OnDestroy {
   submitted = false;

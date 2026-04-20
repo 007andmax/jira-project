@@ -8,9 +8,10 @@ import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 
 
 @Component({
-  selector: 'app-tags',
-  templateUrl: './tags.component.html',
-  styleUrls: ['./tags.component.scss']
+    selector: 'app-tags',
+    templateUrl: './tags.component.html',
+    styleUrls: ['./tags.component.scss'],
+    standalone: true
 })
 export class TagsComponent implements OnInit, OnDestroy {
 

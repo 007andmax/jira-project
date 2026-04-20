@@ -3,11 +3,15 @@ import { Subscription } from 'rxjs';
 import { CompanySubscription } from '../class/company-subscription';
 import { CompanySubscriptionStateService } from './class/company-subscription-state.service';
 import { UserCustomerCompaniesInfo } from '../../users/class/user-customer-companies-info';
+import { NgFor, NgIf } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-company-subscription',
-  templateUrl: './company-subscription.component.html',
-  styleUrls: ['./company-subscription.component.scss']
+    selector: 'app-company-subscription',
+    templateUrl: './company-subscription.component.html',
+    styleUrls: ['./company-subscription.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, NgFor, NgIf]
 })
 export class CompanySubscriptionComponent implements OnInit, OnDestroy {
   sub = new Subscription();

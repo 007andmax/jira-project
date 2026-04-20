@@ -1,11 +1,25 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { DropDownComponent } from '../drop-down/drop-down.component';
+import { FormsModule } from '@angular/forms';
+import { MatErrorComponent } from '../mat-error/mat-error.component';
+import { NgClass, NgStyle, NgIf, NgFor } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'company-drop-down',
-  templateUrl: './company-drop-down.component.html',
-  styleUrls: ['./company-drop-down.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'company-drop-down',
+    templateUrl: './company-drop-down.component.html',
+    styleUrls: ['./company-drop-down.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgbDropdownModule,
+        NgClass,
+        NgStyle,
+        NgIf,
+        MatErrorComponent,
+        FormsModule,
+        NgFor,
+    ],
 })
 export class CompanyDropDownComponent extends DropDownComponent {
   @Input() clientType: string;

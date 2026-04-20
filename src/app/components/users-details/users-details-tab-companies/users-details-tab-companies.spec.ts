@@ -24,7 +24,7 @@ describe('UsersDetailsTabCompaniesComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         DropDownModule,
         CompanyDropDownModule,
@@ -36,16 +36,14 @@ describe('UsersDetailsTabCompaniesComponent unit test', () => {
         PreloaderTicketModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [UsersDetailsTabCompaniesComponent,
+        NoopAnimationsModule, UsersDetailsTabCompaniesComponent,
         UsersDetailsTabCompaniesAddComponent,
-        UsersDetailsTabCompaniesItemComponent
-      ]
-    }).compileComponents();
+        UsersDetailsTabCompaniesItemComponent]
+}).compileComponents();
 
   });
 

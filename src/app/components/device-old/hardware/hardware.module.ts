@@ -18,12 +18,11 @@ import { HardwareHeaderComponent } from './hardware-header/hardware-header.compo
 
 
 @NgModule({
-    declarations: [HardwareComponent, HardwareComputerComponent, HardwareMotherboardComponent, HardwareProcessorComponent, HardwareMemoryComponent, HardwareNetworkCardComponent, HardwareGraphicsCardComponent, HardwareDisplayComponent, HardwareHardDiskComponent, HardwareOperatingSystemComponent, HardwareHeaderComponent
-    ],
     imports: [
         CommonModule,
         FormsModule,
         HardwareRoutingOldModule,
+        HardwareComponent, HardwareComputerComponent, HardwareMotherboardComponent, HardwareProcessorComponent, HardwareMemoryComponent, HardwareNetworkCardComponent, HardwareGraphicsCardComponent, HardwareDisplayComponent, HardwareHardDiskComponent, HardwareOperatingSystemComponent, HardwareHeaderComponent,
     ],
 })
 export class HardwareOldModule { }

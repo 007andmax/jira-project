@@ -2,11 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { DeviceSettingStateService } from 'src/app/states/device-setting/device-setting-state.service';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'device-setting-aside',
-  templateUrl: './device-setting-aside.component.html',
-  styleUrls: ['./device-setting-aside.component.scss']
+    selector: 'device-setting-aside',
+    templateUrl: './device-setting-aside.component.html',
+    styleUrls: ['./device-setting-aside.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgFor]
 })
 export class DeviceSettingAsideComponent implements OnInit, OnDestroy {
   name: string;

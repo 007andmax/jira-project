@@ -4,11 +4,15 @@ import { ToastrService } from 'ngx-toastr';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
+import { NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-incoming-email',
-  templateUrl: './incoming-email.component.html',
-  styleUrls: ['./incoming-email.component.scss']
+    selector: 'app-incoming-email',
+    templateUrl: './incoming-email.component.html',
+    styleUrls: ['./incoming-email.component.scss'],
+    standalone: true,
+    imports: [FormsModule, NgIf]
 })
 export class IncomingEmailComponent implements OnInit, OnDestroy {
   smtpSettings: {};

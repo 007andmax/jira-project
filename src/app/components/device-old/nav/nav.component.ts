@@ -8,9 +8,10 @@ import { Company } from 'src/app/interfaces/company/company';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'nav-old',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+    selector: 'nav-old',
+    templateUrl: './nav.component.html',
+    styleUrls: ['./nav.component.scss'],
+    standalone: true
 })
 export class NavOldComponent implements OnInit, OnDestroy {
 

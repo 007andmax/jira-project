@@ -42,7 +42,7 @@ describe('FileManagerComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FileManagementRoutingModule,
         FormsModule,
         DisabledBtnModule,
@@ -61,15 +61,13 @@ describe('FileManagerComponent unit test', () => {
         HttpClientModule,
         RouterTestingModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      providers: [{ provide: Router, useValue: mockRouter }],
-      declarations: [FileManagerComponent, FileManagerCategoryRenameComponent,
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, FileManagerComponent, FileManagerCategoryRenameComponent],
+    providers: [{ provide: Router, useValue: mockRouter }],
+}).compileComponents();
 
   });
   it('check "onCategoryInfo"', () => {

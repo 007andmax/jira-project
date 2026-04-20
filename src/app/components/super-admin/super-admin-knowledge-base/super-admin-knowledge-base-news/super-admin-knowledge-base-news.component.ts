@@ -3,11 +3,15 @@ import { News } from '../super-admin-knowledge-base-table/class/news';
 import * as moment from "moment";
 import { KnowledgeBaseStateService } from '../../state/knowledge-base/knowledge-base-state.service';
 import { PreviewAttachmentStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-super-admin-knowledge-base-news',
-  templateUrl: './super-admin-knowledge-base-news.component.html',
-  styleUrls: ['./super-admin-knowledge-base-news.component.scss']
+    selector: 'app-super-admin-knowledge-base-news',
+    templateUrl: './super-admin-knowledge-base-news.component.html',
+    styleUrls: ['./super-admin-knowledge-base-news.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, NgbDropdownModule]
 })
 export class SuperAdminKnowledgeBaseNewsComponent implements OnInit {
   @Input() news: News;

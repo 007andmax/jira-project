@@ -4,11 +4,18 @@ import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ServiceAgreement } from '../../class/service-agreement';
 import * as moment from "moment";
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf, NgFor, CurrencyPipe } from '@angular/common';
+import { DatePickerComponent } from '../../../../shared/date-picker/date-picker.component';
+import { DropDownComponent } from '../../../../shared/drop-down/drop-down.component';
 
 @Component({
-  selector: 'app-contracts-aside-product-service-preview',
-  templateUrl: './contracts-aside-product-service-preview.component.html',
-  styleUrls: ['./contracts-aside-product-service-preview.component.scss']
+    selector: 'app-contracts-aside-product-service-preview',
+    templateUrl: './contracts-aside-product-service-preview.component.html',
+    styleUrls: ['./contracts-aside-product-service-preview.component.scss'],
+    standalone: true,
+    imports: [DropDownComponent, DatePickerComponent, NgClass, FormsModule, NgIf, NgFor, NgbTooltipModule, CurrencyPipe]
 })
 export class ContractsAsideProductServicePreviewComponent implements OnInit {
   selectedCompany: any;

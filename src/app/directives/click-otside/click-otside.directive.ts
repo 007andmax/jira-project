@@ -2,8 +2,9 @@ import { Directive, HostListener, ElementRef, Input, Output, EventEmitter } from
 declare var $: any;
 
 @Directive({
-  selector: '[appClickOtside]',
-  exportAs: 'click'
+    selector: '[appClickOtside]',
+    exportAs: 'click',
+    standalone: true
 })
 export class ClickOutsideDirective {
   @Input() init: boolean = false;

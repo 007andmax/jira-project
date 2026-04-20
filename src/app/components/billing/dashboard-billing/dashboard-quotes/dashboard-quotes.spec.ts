@@ -17,20 +17,18 @@ describe('DashboardQuotesComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         NgbModule,
         FormsModule,
         MatErrorModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [DashboardQuotesComponent
-      ]
-    }).compileComponents();
+        NoopAnimationsModule, DashboardQuotesComponent]
+}).compileComponents();
 
   });
 

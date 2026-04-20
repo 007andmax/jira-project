@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 @Component({
-  selector: 'app-tasks-tabs',
-  templateUrl: './tasks-tabs.component.html',
-  styleUrls: ['./tasks-tabs.component.scss']
+    selector: 'app-tasks-tabs',
+    templateUrl: './tasks-tabs.component.html',
+    styleUrls: ['./tasks-tabs.component.scss'],
+    standalone: true
 })
 export class TasksTabsComponent {
   activeTab: string = "list";

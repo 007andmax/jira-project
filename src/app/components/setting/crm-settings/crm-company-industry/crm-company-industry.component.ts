@@ -9,11 +9,20 @@ import { CrmService } from 'src/app/services/crm/crm.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyIndustry } from './class/crm-company-industry';
 import { CrmCompanyIndustryFilter } from './class/crm-company-industry-filter';
+import { DynamicTooltipComponent } from '../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { KeyUpEnterDirective } from '../../../../directives/key-up-enter/key-up-enter.directive';
+import { FormsModule } from '@angular/forms';
+import { ClickOutsideDirective } from '../../../../directives/click-otside/click-otside.directive';
+import { AddCrmCompanyIndustryComponent } from './add-crm-company-industry/add-crm-company-industry.component';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'crm-company-industry',
-  templateUrl: './crm-company-industry.component.html',
-  styleUrls: ['./crm-company-industry.component.scss']
+    selector: 'crm-company-industry',
+    templateUrl: './crm-company-industry.component.html',
+    styleUrls: ['./crm-company-industry.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, AddCrmCompanyIndustryComponent, NgFor, ClickOutsideDirective, FormsModule, KeyUpEnterDirective, MatErrorComponent, DynamicTooltipComponent]
 })
 export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
   industryList: Array<CrmCompanyIndustry> = [];

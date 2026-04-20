@@ -13,9 +13,10 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { User } from '../../class/user';
 
 @Component({
-  selector: 'app-add-user-to-company-item',
-  templateUrl: './add-user-to-company-item.component.html',
-  styleUrls: ['./add-user-to-company-item.component.scss']
+    selector: 'app-add-user-to-company-item',
+    templateUrl: './add-user-to-company-item.component.html',
+    styleUrls: ['./add-user-to-company-item.component.scss'],
+    standalone: true
 })
 export class AddUserToCompanyItemComponent implements OnInit {
   @Input() selected: boolean = false;

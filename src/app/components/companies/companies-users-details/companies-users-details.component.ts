@@ -4,9 +4,10 @@ import { UserCustomerCompaniesInfo } from '../../users/class/user-customer-compa
 import { UserCustomSubscription } from '../../users/class/user-custom-subscription';
 
 @Component({
-  selector: 'app-companies-users-details',
-  templateUrl: './companies-users-details.component.html',
-  styleUrls: ['./companies-users-details.component.scss']
+    selector: 'app-companies-users-details',
+    templateUrl: './companies-users-details.component.html',
+    styleUrls: ['./companies-users-details.component.scss'],
+    standalone: true
 })
 export class CompaniesUsersDetailsComponent extends UsersDetailsComponent {
   companyId: string;

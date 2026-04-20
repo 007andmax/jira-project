@@ -4,11 +4,19 @@ import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/class/taxes/tax';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 import { Subscription } from 'rxjs';
+import { MatErrorComponent } from '../../../../../shared/mat-error/mat-error.component';
+import { numberDirective } from '../../../../../../directives/number/number.directive';
+import { TaxesComponent as TaxesComponent_1 } from '../../../../../shared/taxes/taxes.component';
+import { DecimalNumberDirective } from '../../../../../../directives/decimal-number/decimal-number.directive';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-contracts-aside-hourly-billing-edit-default-service',
-  templateUrl: './contracts-aside-hourly-billing-edit-default-service.component.html',
-  styleUrls: ['./contracts-aside-hourly-billing-edit-default-service.component.scss']
+    selector: 'app-contracts-aside-hourly-billing-edit-default-service',
+    templateUrl: './contracts-aside-hourly-billing-edit-default-service.component.html',
+    styleUrls: ['./contracts-aside-hourly-billing-edit-default-service.component.scss'],
+    standalone: true,
+    imports: [NgClass, FormsModule, DecimalNumberDirective, TaxesComponent_1, numberDirective, NgIf, MatErrorComponent]
 })
 export class ContractsAsideHourlyBillingEditDefaultServiceComponent implements OnInit, OnDestroy {
   taxes: Array<Tax> = [];

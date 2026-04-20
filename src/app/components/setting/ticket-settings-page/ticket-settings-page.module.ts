@@ -6,36 +6,29 @@ import { TicketSettingsPageRoutingModule } from './ticket-settings-page-routing.
 import { TicketSettingsComponent } from './ticket-settings/ticket-settings.component';
 import { TicketsStatusComponent } from './tickets-status/tickets-status.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DropDownModule } from '../../shared/drop-down/drop-down.module';
-import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
+
+
 import { Onlynumber } from 'src/app/helpers/Onlynumber';
 import { CannedResponsesComponent } from './canned-responses/canned-responses.component';
-import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
-import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+
+
 import { TicketsPriorityComponent } from './tickets-priority/tickets-priority.component';
-import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+
 
 
 @NgModule({
-    declarations: [
-        TicketSettingsPageComponent,
-        TicketSettingsComponent,
-        TicketsStatusComponent,
-        Onlynumber,
-        CannedResponsesComponent,
-        TicketsPriorityComponent
-    ],
     imports: [
-        CommonModule,
-        NgbModule,
-        FormsModule,
-        ReactiveFormsModule,
-        DropDownModule,
-        ClickOutsideModule,
-        TicketSettingsPageRoutingModule,
-        DynamicTooltipModule,
-        KeyUpEnterModule,
-        MatErrorModule
-    ],
+    CommonModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TicketSettingsPageRoutingModule,
+    TicketSettingsPageComponent,
+    TicketSettingsComponent,
+    TicketsStatusComponent,
+    Onlynumber,
+    CannedResponsesComponent,
+    TicketsPriorityComponent
+],
 })
 export class TicketSettingsPageModule { }

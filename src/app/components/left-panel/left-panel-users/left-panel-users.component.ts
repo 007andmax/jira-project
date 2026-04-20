@@ -8,7 +8,7 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { UserCount } from '../../users/class/user-count';
 import { UserGlobalFilter } from '../../users/class/user-global-filters';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_GLOBAL_USERS_FILTER } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
@@ -16,12 +16,16 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { Subscription } from 'rxjs';
 import { TicketsRealTimeService } from 'src/app/states/tickets/tickets-real-time.service';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
+import { RightClickBlankDirective } from '../../../directives/right-click-blank/right-click-blank.directive';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-left-panel-users',
-  templateUrl: './left-panel-users.component.html',
-  styleUrls: ['./left-panel-users.component.scss'],
-  providers: [LeftPanelUsersService]
+    selector: 'app-left-panel-users',
+    templateUrl: './left-panel-users.component.html',
+    styleUrls: ['./left-panel-users.component.scss'],
+    providers: [LeftPanelUsersService],
+    standalone: true,
+    imports: [NgClass, RightClickBlankDirective, NgIf, NgFor, NgbTooltipModule, NgbDropdownModule]
 })
 export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   open: boolean = false;

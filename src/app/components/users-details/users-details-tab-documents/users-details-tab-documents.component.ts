@@ -3,11 +3,16 @@ import { DocumentsComponent } from '../../documents/documents.component';
 import { User } from '../../users/class/user';
 import { Document } from 'src/app/components/documents/class/document';
 import { REMOVE_CATEGORY_DOCUMENT, REMOVE_DOCUMENT } from 'src/app/const/confirm';
+import { DocumentsTemplatesInfoComponent } from '../../documents/documents-templates/documents-templates-info/documents-templates-info.component';
+import { UsersDetailsTabDocumentsItemComponent } from './users-details-tab-documents-item/users-details-tab-documents-item.component';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-users-details-tab-documents',
-  templateUrl: './users-details-tab-documents.component.html',
-  styleUrls: ['./users-details-tab-documents.component.scss']
+    selector: 'app-users-details-tab-documents',
+    templateUrl: './users-details-tab-documents.component.html',
+    styleUrls: ['./users-details-tab-documents.component.scss'],
+    standalone: true,
+    imports: [NgFor, UsersDetailsTabDocumentsItemComponent, NgIf, DocumentsTemplatesInfoComponent]
 })
 export class UsersDetailsTabDocumentsComponent extends DocumentsComponent {
   @Input() user: User;

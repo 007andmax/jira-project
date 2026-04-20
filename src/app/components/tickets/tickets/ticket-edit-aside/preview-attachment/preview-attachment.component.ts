@@ -1,11 +1,14 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { PreviewAttachmentStateService } from './services/preview-attachment-state.service';
 import { Subscription } from 'rxjs';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-preview-attachment',
-  templateUrl: './preview-attachment.component.html',
-  styleUrls: ['./preview-attachment.component.scss']
+    selector: 'app-preview-attachment',
+    templateUrl: './preview-attachment.component.html',
+    styleUrls: ['./preview-attachment.component.scss'],
+    standalone: true,
+    imports: [NgIf]
 })
 export class PreviewAttachmentComponent implements OnInit, OnDestroy {
   src = "";

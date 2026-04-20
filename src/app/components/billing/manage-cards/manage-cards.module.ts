@@ -6,37 +6,29 @@ import { ManageCardsComponent } from './manage-cards.component';
 import { ManageCardsHeaderComponent } from './manage-cards-header/manage-cards-header.component';
 import { ManageCardsAddComponent } from './manage-cards-add/manage-cards-add.component';
 import { R } from '@angular/cdk/keycodes';
-import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
-import { DropDownModule } from '../../shared/drop-down/drop-down.module';
-import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
-import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
-import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
+
+
+
+
+
 import { ManageCardsTableComponent } from './manage-cards-table/manage-cards-table.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ManageCardsEditComponent } from './manage-cards-edit/manage-cards-edit.component';
-import { ManageCardsAddModule } from './manage-cards-add/manage-cards-add.module';
+
 
 
 
 
 @NgModule({
-    declarations: [ManageCardsComponent, ManageCardsHeaderComponent, ManageCardsTableComponent
-
-    ],
     imports: [
-        CommonModule,
-        FormsModule,
-        ManageCardsRoutingModule,
-        DropDownModule,
-        DisabledBtnModule,
-        PreloaderTicketModule,
-        MatErrorModule,
-        ReactiveFormsModule,
-        CompanyDropDownModule,
-        InfiniteScrollModule,
-        NgbModule,
-    ],
-
+    CommonModule,
+    FormsModule,
+    ManageCardsRoutingModule,
+    ReactiveFormsModule,
+    InfiniteScrollModule,
+    NgbModule,
+    ManageCardsComponent, ManageCardsHeaderComponent, ManageCardsTableComponent,
+],
 })
 export class ManageCardsModule { }

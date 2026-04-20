@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Output, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription, forkJoin } from 'rxjs';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
@@ -17,11 +17,16 @@ import * as moment from "moment";
 import { TasksDatePickerComponent } from '../tasks-date-picker/tasks-date-picker.component';
 import { TaskHeaderAddTypeComponent } from './task-header-add-type/task-header-add-type.component';
 import { TechUsersComponent } from '../../shared/tech-users/tech-users.component';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
+import { NgClass, NgIf } from '@angular/common';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../directives/disabled-btn/disabled-btn.directive';
 
 @Component({
-  selector: 'app-task-header-add',
-  templateUrl: './task-header-add.component.html',
-  styleUrls: ['./task-header-add.component.scss']
+    selector: 'app-task-header-add',
+    templateUrl: './task-header-add.component.html',
+    styleUrls: ['./task-header-add.component.scss'],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, DisabledBtnDirective_1, NgClass, NgIf, PreloaderTicketComponent, NgbTooltipModule, TaskHeaderAddTypeComponent, TasksDatePickerComponent, TechUsersComponent]
 })
 export class TaskHeaderAddComponent {
   task: Task = new Task();

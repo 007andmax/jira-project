@@ -10,9 +10,10 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { Ticket } from '../../class/ticket';
 
 @Component({
-  selector: 'app-tickets-header',
-  templateUrl: './tickets-header.component.html',
-  styleUrls: ['./tickets-header.component.scss']
+    selector: 'app-tickets-header',
+    templateUrl: './tickets-header.component.html',
+    styleUrls: ['./tickets-header.component.scss'],
+    standalone: true
 })
 export class TicketsHeaderComponent implements OnInit, OnDestroy {
   @ViewChild('filter', { static: true }) filter: TicketsFilterComponent;

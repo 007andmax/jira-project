@@ -8,9 +8,10 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 
 @Component({
-  selector: 'app-invoice-form-ticket-edit-product',
-  templateUrl: './invoice-form-ticket-edit-product.component.html',
-  styleUrls: ['./invoice-form-ticket-edit-product.component.scss']
+    selector: 'app-invoice-form-ticket-edit-product',
+    templateUrl: './invoice-form-ticket-edit-product.component.html',
+    styleUrls: ['./invoice-form-ticket-edit-product.component.scss'],
+    standalone: true
 })
 export class InvoiceFormTicketEditProductComponent implements OnInit, OnDestroy {
   @Input() product: BillableProfileTicketProductExpense;

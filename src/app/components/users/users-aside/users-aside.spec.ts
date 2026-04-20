@@ -30,7 +30,7 @@ describe('UsersAsideComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         DropDownModule,
         CompanySubscriptionModule,
@@ -47,14 +47,13 @@ describe('UsersAsideComponent unit test', () => {
         MatErrorModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NoopAnimationsModule],
-      declarations: [UsersAsideComponent
-      ]
-    }).compileComponents();
+    declarations: [UsersAsideComponent]
+}).compileComponents();
 
   });
 

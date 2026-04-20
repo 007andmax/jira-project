@@ -4,11 +4,15 @@ import { NoteTemplate } from 'src/app/components/setting/ticket-settings-page/ca
 import { NoteService } from 'src/app/services/note/note.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { NoteStateService } from 'src/app/states/note/note-state.service';
+import { NgIf, NgFor } from '@angular/common';
+import { NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'ticket-profile-form-update-note-list',
-  templateUrl: './ticket-profile-form-update-note-list.component.html',
-  styleUrls: ['./ticket-profile-form-update-note-list.component.scss']
+    selector: 'ticket-profile-form-update-note-list',
+    templateUrl: './ticket-profile-form-update-note-list.component.html',
+    styleUrls: ['./ticket-profile-form-update-note-list.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, NgbTooltipModule, NgIf, NgFor]
 })
 export class TicketProfileFormUpdateNoteListComponent implements OnInit, OnDestroy {
   noteTemplate: Array<NoteTemplate> = [];

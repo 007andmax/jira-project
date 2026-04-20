@@ -1,8 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'serv',
-  pure: false
+    name: 'serv',
+    pure: false,
+    standalone: true
 })
 export class DeviceServicePipe implements PipeTransform {
 

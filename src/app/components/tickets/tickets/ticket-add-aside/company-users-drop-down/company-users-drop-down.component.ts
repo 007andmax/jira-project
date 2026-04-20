@@ -9,12 +9,27 @@ import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-c
 import { CompanyUser } from './class/company-user';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { MatErrorComponent } from '../../../../shared/mat-error/mat-error.component';
+import { NgClass, NgStyle, NgIf, NgFor } from '@angular/common';
+import { NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'company-users-drop-down',
-  templateUrl: './company-users-drop-down.component.html',
-  styleUrls: ['./company-users-drop-down.component.scss'],
-  providers: [TicketsListService],
+    selector: 'company-users-drop-down',
+    templateUrl: './company-users-drop-down.component.html',
+    styleUrls: ['./company-users-drop-down.component.scss'],
+    providers: [TicketsListService],
+    standalone: true,
+    imports: [
+        NgbDropdownModule,
+        NgClass,
+        NgStyle,
+        NgIf,
+        NgbTooltipModule,
+        MatErrorComponent,
+        FormsModule,
+        NgFor,
+    ],
 })
 export class CompanyUsersDropDownComponent extends DropDownComponent {
   @Input() isShowTooltip: boolean = false;

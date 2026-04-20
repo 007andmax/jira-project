@@ -9,13 +9,13 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
  * Password quotes component
  */
 @Component({
-  selector: 'app-quotes',
-  templateUrl: './quotes.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./quotes.component.scss'],
-
+    selector: 'app-quotes',
+    templateUrl: './quotes.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./quotes.component.scss'],
+    standalone: true,
 })
 export class QuotesComponent implements OnInit, OnDestroy {
   invoiceId: string;

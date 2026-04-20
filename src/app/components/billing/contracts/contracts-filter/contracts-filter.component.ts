@@ -10,11 +10,14 @@ import { DropDownComponent } from '../../../shared/drop-down/drop-down.component
 import { Company } from 'src/app/interfaces/company/company';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { CompanyDropDownComponent as CompanyDropDownComponent_1 } from '../../../shared/company-drop-down/company-drop-down.component';
 
 @Component({
-  selector: 'app-contracts-filter',
-  templateUrl: './contracts-filter.component.html',
-  styleUrls: ['./contracts-filter.component.scss']
+    selector: 'app-contracts-filter',
+    templateUrl: './contracts-filter.component.html',
+    styleUrls: ['./contracts-filter.component.scss'],
+    standalone: true,
+    imports: [CompanyDropDownComponent_1, DropDownComponent, MultiDatepickerComponent]
 })
 export class ContractsFilterComponent implements OnInit, OnDestroy {
   @Input() companyContracts: Company = null;

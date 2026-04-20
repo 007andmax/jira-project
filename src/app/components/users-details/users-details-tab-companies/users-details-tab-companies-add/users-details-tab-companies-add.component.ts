@@ -15,9 +15,10 @@ import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
-  selector: 'app-users-details-tab-companies-add',
-  templateUrl: './users-details-tab-companies-add.component.html',
-  styleUrls: ['./users-details-tab-companies-add.component.scss']
+    selector: 'app-users-details-tab-companies-add',
+    templateUrl: './users-details-tab-companies-add.component.html',
+    styleUrls: ['./users-details-tab-companies-add.component.scss'],
+    standalone: true
 })
 export class UsersDetailsTabCompaniesAddComponent implements OnInit {
   customerCompaniesInfo: UserCustomerCompaniesInfo = new UserCustomerCompaniesInfo();

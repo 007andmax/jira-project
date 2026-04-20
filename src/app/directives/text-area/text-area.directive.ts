@@ -2,7 +2,8 @@ import { Directive, OnInit, ElementRef, Injectable, Input, ChangeDetectorRef, On
 import { AppStateService } from 'src/app/states/app/app-state.service';
 var $ = require("jquery");
 @Directive({
-  selector: '[appTextArea]'
+    selector: '[appTextArea]',
+    standalone: true
 })
 export class TextAreaDirective implements OnInit {
   @Input() height = 'auto';

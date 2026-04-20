@@ -5,9 +5,10 @@ import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
-  selector: 'app-tasks-calendar-week-item-hour',
-  templateUrl: './tasks-calendar-week-item-hour.component.html',
-  styleUrls: ['./tasks-calendar-week-item-hour.component.scss']
+    selector: 'app-tasks-calendar-week-item-hour',
+    templateUrl: './tasks-calendar-week-item-hour.component.html',
+    styleUrls: ['./tasks-calendar-week-item-hour.component.scss'],
+    standalone: true
 })
 export class TasksCalendarWeekItemHourComponent {
   @Input() day: CalendarWeek;

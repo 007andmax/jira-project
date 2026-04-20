@@ -16,13 +16,14 @@ import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
-  selector: 'app-invoices',
-  templateUrl: './invoices.component.html',
-  styleUrls: ['./invoices.component.scss'],
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  providers: [InvoicesListService]
+    selector: 'app-invoices',
+    templateUrl: './invoices.component.html',
+    styleUrls: ['./invoices.component.scss'],
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    providers: [InvoicesListService],
+    standalone: true
 })
 export class InvoicesComponent implements OnInit, OnDestroy {
   invoicesFilter: InvoicesFilter = new InvoicesFilter();

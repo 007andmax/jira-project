@@ -10,11 +10,20 @@ import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyJobTitle } from './class/crm-company-job-title';
 import { CrmCompanyJobTitleFilter } from './class/crm-company-job-title-filter';
+import { DynamicTooltipComponent } from '../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { KeyUpEnterDirective } from '../../../../directives/key-up-enter/key-up-enter.directive';
+import { FormsModule } from '@angular/forms';
+import { ClickOutsideDirective } from '../../../../directives/click-otside/click-otside.directive';
+import { AddCrmCompanyJobTitleComponent } from './add-crm-company-job-title/add-crm-company-job-title.component';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'crm-company-job-title',
-  templateUrl: './crm-company-job-title.component.html',
-  styleUrls: ['./crm-company-job-title.component.scss']
+    selector: 'crm-company-job-title',
+    templateUrl: './crm-company-job-title.component.html',
+    styleUrls: ['./crm-company-job-title.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, AddCrmCompanyJobTitleComponent, NgFor, ClickOutsideDirective, FormsModule, KeyUpEnterDirective, MatErrorComponent, DynamicTooltipComponent]
 })
 export class CrmCompanyJobTitleComponent implements OnInit {
   jobTitleList: Array<CrmCompanyJobTitle> = [];

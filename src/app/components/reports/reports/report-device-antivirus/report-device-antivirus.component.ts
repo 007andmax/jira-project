@@ -16,9 +16,10 @@ import { DeviceAntivirusReportFilter } from "./Class/device-antivirus-report";
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "report-device-antivirus",
-  templateUrl: "./report-device-antivirus.component.html",
-  styleUrls: ["./report-device-antivirus.component.scss"],
+    selector: "report-device-antivirus",
+    templateUrl: "./report-device-antivirus.component.html",
+    styleUrls: ["./report-device-antivirus.component.scss"],
+    standalone: true,
 })
 export class ReportDeviceAntivirusComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;

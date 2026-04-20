@@ -11,9 +11,10 @@ import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
-  selector: 'documents-filter',
-  templateUrl: './documents-filter.component.html',
-  styleUrls: ['./documents-filter.component.scss']
+    selector: 'documents-filter',
+    templateUrl: './documents-filter.component.html',
+    styleUrls: ['./documents-filter.component.scss'],
+    standalone: true
 })
 export class DocumentsFilterComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;

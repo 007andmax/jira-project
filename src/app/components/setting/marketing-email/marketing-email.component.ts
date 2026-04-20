@@ -9,12 +9,13 @@ import { MarketingSubscriptionTypeComponent } from './marketing-subscription-typ
 import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
-  selector: 'marketing-email',
-  templateUrl: './marketing-email.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./marketing-email.component.scss']
+    selector: 'marketing-email',
+    templateUrl: './marketing-email.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./marketing-email.component.scss'],
+    standalone: true
 })
 export class MarketingEmailComponent implements OnInit, OnDestroy {
 

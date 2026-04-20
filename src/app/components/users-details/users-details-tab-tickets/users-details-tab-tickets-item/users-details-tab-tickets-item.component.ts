@@ -6,10 +6,11 @@ import { StatusColor } from 'src/app/components/tickets/class/status-color';
 import { Ticket } from 'src/app/components/tickets/class/ticket';
 
 @Component({
-  selector: 'app-users-details-tab-tickets-item',
-  templateUrl: './users-details-tab-tickets-item.component.html',
-  styleUrls: ['./users-details-tab-tickets-item.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-users-details-tab-tickets-item',
+    templateUrl: './users-details-tab-tickets-item.component.html',
+    styleUrls: ['./users-details-tab-tickets-item.component.scss'],
+    providers: [TicketsListService],
+    standalone: true
 })
 export class UsersDetailsTabTicketsItemComponent implements OnInit {
   @Input() ticket: Ticket;

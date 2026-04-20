@@ -4,9 +4,10 @@ import { RemoteConnectionReport } from '../../class/remote-connection-report';
 import * as moment from "moment";
 
 @Component({
-  selector: 'remote-connection-report',
-  templateUrl: './remote-connection-report.component.html',
-  styleUrls: ['./remote-connection-report.component.css']
+    selector: 'remote-connection-report',
+    templateUrl: './remote-connection-report.component.html',
+    styleUrls: ['./remote-connection-report.component.css'],
+    standalone: true
 })
 export class RemoteConnectionReportComponent implements OnInit {
 

@@ -1,12 +1,18 @@
 import { Component } from '@angular/core';
 import { ManageCardsAddComponent } from '../manage-cards-add/manage-cards-add.component';
-import { Validators } from '@angular/forms';
+import { Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Card } from '../class/card';
+import { PreloaderTicketComponent } from '../../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective } from '../../../../directives/disabled-btn/disabled-btn.directive';
+import { CompanyDropDownComponent } from '../../../shared/company-drop-down/company-drop-down.component';
+import { NgIf, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-manage-cards-edit',
-  templateUrl: './manage-cards-edit.component.html',
-  styleUrls: ['./manage-cards-edit.component.scss']
+    selector: 'app-manage-cards-edit',
+    templateUrl: './manage-cards-edit.component.html',
+    styleUrls: ['./manage-cards-edit.component.scss'],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, NgIf, NgClass, CompanyDropDownComponent, DisabledBtnDirective, PreloaderTicketComponent]
 })
 export class ManageCardsEditComponent extends ManageCardsAddComponent {
   maskedCardNumber: string

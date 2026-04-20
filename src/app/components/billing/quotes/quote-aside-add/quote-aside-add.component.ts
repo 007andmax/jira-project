@@ -13,9 +13,10 @@ import { QuoteValdiate } from '../class/quote-vildate';
 import { QuoteAsideAddBodyComponent } from './quote-aside-add-body/quote-aside-add-body.component';
 
 @Component({
-  selector: 'app-quote-aside-add',
-  templateUrl: './quote-aside-add.component.html',
-  styleUrls: ['./quote-aside-add.component.scss']
+    selector: 'app-quote-aside-add',
+    templateUrl: './quote-aside-add.component.html',
+    styleUrls: ['./quote-aside-add.component.scss'],
+    standalone: true
 })
 export class QuoteAsideAddComponent implements OnInit, OnDestroy {
   @ViewChild('saveAndSendBtn', { static: true }) saveAndSendBtn: DisabledBtnDirective;

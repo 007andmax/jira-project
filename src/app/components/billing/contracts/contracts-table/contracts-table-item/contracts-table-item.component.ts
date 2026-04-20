@@ -5,16 +5,19 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVE_CONTRACT } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { ContractsListService } from '../../services/contracts-list.service';
+import { NgClass, NgIf, CurrencyPipe } from '@angular/common';
 
 
 @Component({
-  selector: 'app-contracts-table-item',
-  templateUrl: './contracts-table-item.component.html',
-  styleUrls: ['./contracts-table-item.component.scss'],
-  providers: [ContractsListService]
+    selector: 'app-contracts-table-item',
+    templateUrl: './contracts-table-item.component.html',
+    styleUrls: ['./contracts-table-item.component.scss'],
+    providers: [ContractsListService],
+    standalone: true,
+    imports: [NgClass, NgIf, NgbTooltipModule, NgbDropdownModule, CurrencyPipe]
 })
 export class ContractsTableItemComponent implements OnInit {
   @Input() contract: ContractItem;

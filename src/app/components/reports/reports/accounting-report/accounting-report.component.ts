@@ -3,9 +3,10 @@ import { AccountingReport } from '../../class/accounting-report';
 import * as moment from 'moment';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 @Component({
-  selector: 'app-accounting-report',
-  templateUrl: './accounting-report.component.html',
-  styleUrls: ['./accounting-report.component.scss']
+    selector: 'app-accounting-report',
+    templateUrl: './accounting-report.component.html',
+    styleUrls: ['./accounting-report.component.scss'],
+    standalone: true
 })
 export class AccountingReportComponent implements OnInit {
   loadingInProgress: boolean = false;

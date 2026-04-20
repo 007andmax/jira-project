@@ -10,10 +10,11 @@ import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toast
 import { InventoryFilterComponent } from './inventory-filter/inventory-filter.component';
 
 @Component({
-  selector: 'inventory-header',
-  templateUrl: './inventory-header.component.html',
-  styleUrls: ['./inventory-header.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'inventory-header',
+    templateUrl: './inventory-header.component.html',
+    styleUrls: ['./inventory-header.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
 })
 export class InventoryHeaderComponent implements OnInit {
   productSearchName: string = '';

@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { REMOVE_SUBSCRIBE_SERVICE } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { SubscriptionServicesStateService } from 'src/app/states/subscription-services/subscription-services-state.service';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
@@ -13,11 +13,15 @@ import { GlNumber } from 'src/class/gl-number/gl-number';
 import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
 import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
 import { SubscriptionServicesService } from 'src/app/services/subscription-services/subscription-services.service';
+import { NgIf, CurrencyPipe } from '@angular/common';
+import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 
 @Component({
-  selector: 'app-subscription-services-item',
-  templateUrl: './subscription-services-item.component.html',
-  styleUrls: ['./subscription-services-item.component.scss']
+    selector: 'app-subscription-services-item',
+    templateUrl: './subscription-services-item.component.html',
+    styleUrls: ['./subscription-services-item.component.scss'],
+    standalone: true,
+    imports: [DropDownComponent, NgIf, NgbDropdownModule, CurrencyPipe]
 })
 export class SubscriptionServicesItemComponent implements OnInit, OnDestroy {
   @Input() service: SubscriptionServices;

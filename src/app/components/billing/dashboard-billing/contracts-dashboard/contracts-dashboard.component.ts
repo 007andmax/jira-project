@@ -1,10 +1,13 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ContractsDashboard } from '../class/contracts-dashboard';
+import { PieChartModule } from '@swimlane/ngx-charts';
 
 @Component({
-  selector: 'app-contracts-dashboard',
-  templateUrl: './contracts-dashboard.component.html',
-  styleUrls: ['./contracts-dashboard.component.scss']
+    selector: 'app-contracts-dashboard',
+    templateUrl: './contracts-dashboard.component.html',
+    styleUrls: ['./contracts-dashboard.component.scss'],
+    standalone: true,
+    imports: [PieChartModule]
 })
 export class ContractsDashboardComponent implements OnInit {
   @Input() contractsDashboard: ContractsDashboard = new ContractsDashboard();

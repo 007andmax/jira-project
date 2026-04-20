@@ -27,14 +27,19 @@ import { Subscription } from 'rxjs';
 import { LeftPanelFileManagerComponent } from './left-panel-file-manager/left-panel-file-manager.component';
 import { LeftPanelTasksComponent } from './left-panel-tasks/left-panel-tasks.component';
 import { LeftPanelIntegrationsComponent } from './left-panel-integrations/left-panel-integrations.component';
+import { LeftPanelReportsComponent } from './left-panel-reports/left-panel-reports.component';
+import { NgClass, NgIf } from '@angular/common';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 /**
  * Left panel component
  */
 @Component({
-  selector: 'app-left-panel',
-  templateUrl: './left-panel.component.html',
-  styleUrls: ['./left-panel.component.scss']
+    selector: 'app-left-panel',
+    templateUrl: './left-panel.component.html',
+    styleUrls: ['./left-panel.component.scss'],
+    standalone: true,
+    imports: [NgbTooltipModule, NgClass, NgIf, LeftPanelSupportComponent, LeftPanelTicketsComponent, LeftPanelUsersComponent, LeftPanelMarketingComponent, LeftPanelCompaniesComponent, LeftPanelFileManagerComponent, LeftPanelBillingComponent, LeftPanelInventoryComponent, LeftPanelPasswordManagerComponent, LeftPanelDocumentsComponent, LeftPanelDevicesComponent, LeftPanelReportsComponent, LeftPanelSettingsComponent, LeftPanelTasksComponent, LeftPanelIntegrationsComponent]
 })
 export class LeftPanelComponent implements OnInit, OnDestroy {
   currentCompany: Company;

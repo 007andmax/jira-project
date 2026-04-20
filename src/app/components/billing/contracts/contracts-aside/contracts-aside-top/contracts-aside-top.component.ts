@@ -4,11 +4,15 @@ import { ContractsStateService } from 'src/app/states/contracts/contracts-state.
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
+import { DropDownComponent } from '../../../../shared/drop-down/drop-down.component';
+import { CompanyDropDownComponent as CompanyDropDownComponent_1 } from '../../../../shared/company-drop-down/company-drop-down.component';
 
 @Component({
-  selector: 'app-contracts-aside-top',
-  templateUrl: './contracts-aside-top.component.html',
-  styleUrls: ['./contracts-aside-top.component.scss']
+    selector: 'app-contracts-aside-top',
+    templateUrl: './contracts-aside-top.component.html',
+    styleUrls: ['./contracts-aside-top.component.scss'],
+    standalone: true,
+    imports: [CompanyDropDownComponent_1, DropDownComponent]
 })
 export class ContractsAsideTopComponent implements OnInit, OnDestroy {
   listsTypes = [new ContractsFilterType('Hourly', 'HOURLY', null),

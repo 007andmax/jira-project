@@ -6,11 +6,18 @@ import { ProductService } from 'src/app/services/product/product.service';
 import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { GlNumber } from 'src/class/gl-number/gl-number';
+import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
+import { ClickOutsideDirective } from '../../../../directives/click-otside/click-otside.directive';
 
 @Component({
-  selector: 'add-category-product',
-  templateUrl: './add-category-product.component.html',
-  styleUrls: ['./add-category-product.component.scss']
+    selector: 'add-category-product',
+    templateUrl: './add-category-product.component.html',
+    styleUrls: ['./add-category-product.component.scss'],
+    standalone: true,
+    imports: [ClickOutsideDirective, NgClass, FormsModule, NgIf, MatErrorComponent, DropDownComponent]
 })
 export class AddCategoryProductComponent implements OnInit {
   isInitRequest: boolean = false;

@@ -11,9 +11,10 @@ import { Subscription } from 'rxjs';
 import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
 
 @Component({
-  selector: 'app-tasks-calendar-month',
-  templateUrl: './tasks-calendar-month.component.html',
-  styleUrls: ['./tasks-calendar-month.component.scss']
+    selector: 'app-tasks-calendar-month',
+    templateUrl: './tasks-calendar-month.component.html',
+    styleUrls: ['./tasks-calendar-month.component.scss'],
+    standalone: true
 })
 export class TasksCalendarMonthComponent {
   @Input() filter: TasksFilters = new TasksFilters();

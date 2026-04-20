@@ -12,12 +12,21 @@ import { AgentService } from "src/app/services/agent/agent.service";
 import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
 import { Subscription } from "rxjs";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
+import { RouterOutlet } from "@angular/router";
+import { NavComponent } from "./nav/nav.component";
+import { NgIf } from "@angular/common";
 
 declare var $: any;
 @Component({
-  selector: "app-device-root",
-  templateUrl: "./device.component.html",
-  styleUrls: ["./device.component.scss"],
+    selector: "app-device-root",
+    templateUrl: "./device.component.html",
+    styleUrls: ["./device.component.scss"],
+    standalone: true,
+    imports: [
+        NgIf,
+        NavComponent,
+        RouterOutlet,
+    ],
 })
 export class DeviceComponent implements OnInit, OnDestroy {
   @ViewChild("templatePowersell", { static: true }) template;

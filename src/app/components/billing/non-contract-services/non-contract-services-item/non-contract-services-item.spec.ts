@@ -22,7 +22,7 @@ describe('NonContractServicesItemComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         NumberModule,
         TaxesModule,
@@ -33,13 +33,11 @@ describe('NonContractServicesItemComponent unit test', () => {
         MatErrorModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
-        }), NoopAnimationsModule],
-      declarations: [NonContractServicesItemComponent
-      ],
-    }).compileComponents();
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
+        }), NoopAnimationsModule, NonContractServicesItemComponent],
+}).compileComponents();
 
   });
 

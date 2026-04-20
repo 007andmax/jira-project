@@ -10,11 +10,17 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { DocumentCategoryAdd } from '../../class/document-category-add';
 import { DocumentCategoryEdit } from '../../class/document-category-edit';
+import { MatErrorComponent } from '../../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { DynamicTooltipComponent } from '../../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { NgFor, NgIf, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'documents-add-edit-categories',
-  templateUrl: './documents-add-edit-categories.component.html',
-  styleUrls: ['./documents-add-edit-categories.component.scss']
+    selector: 'documents-add-edit-categories',
+    templateUrl: './documents-add-edit-categories.component.html',
+    styleUrls: ['./documents-add-edit-categories.component.scss'],
+    standalone: true,
+    imports: [NgFor, DynamicTooltipComponent, NgIf, NgClass, FormsModule, MatErrorComponent]
 })
 export class DocumentsAddEditCategoriesComponent implements OnInit, OnDestroy {
   @Output() onClosed = new EventEmitter();

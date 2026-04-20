@@ -28,13 +28,13 @@ describe('TicketDetailProfileFormUpdateServicesComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NgbModule,
         ProductListModule,
@@ -48,12 +48,9 @@ describe('TicketDetailProfileFormUpdateServicesComponent unit test', () => {
         ServicesListModule,
         TicketProfileUpdatesServiceTimepickerModule,
         TicketProfileUpdatesServiceDurationModule,
-        DatePickerModule
-      ],
-      declarations: [TicketDetailProfileFormUpdateServicesComponent
-      ],
-      providers: [UntypedFormBuilder]
-    }).compileComponents();
+        DatePickerModule, TicketDetailProfileFormUpdateServicesComponent],
+    providers: [UntypedFormBuilder]
+}).compileComponents();
 
   });
 

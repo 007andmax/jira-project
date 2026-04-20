@@ -17,7 +17,7 @@ describe('InvoiceFormTicketEditServiceComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         HttpClientModule,
         NumberModule,
@@ -25,14 +25,12 @@ describe('InvoiceFormTicketEditServiceComponent unit test', () => {
         MatErrorModule,
         TaxesModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [InvoiceFormTicketEditServiceComponent
-      ]
-    }).compileComponents();
+        NoopAnimationsModule, InvoiceFormTicketEditServiceComponent]
+}).compileComponents();
 
   });
 

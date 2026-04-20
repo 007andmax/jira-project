@@ -20,28 +20,27 @@ describe('TicketDetailProfileUpdatesNoteComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         CommonModule,
         NgbModule,
         DynamicTooltipModule,
         AngularEditorModule,
         NoopAnimationsModule
-      ],
-      declarations: [TicketDetailProfileUpdatesNoteComponent,
+    ],
+    declarations: [TicketDetailProfileUpdatesNoteComponent,
         TicketDetailProfileUpdatesHeaderInfoComponent,
         TicketDetailProfileUpdatesNoteItemComponent,
         TicketDetailProfileUpdatesNoteInfoComponent,
-        TicketDetailProfileUpdatesNoteEditComponent
-      ],
-      providers: [UntypedFormBuilder, TicketsListService]
-    }).compileComponents();
+        TicketDetailProfileUpdatesNoteEditComponent],
+    providers: [UntypedFormBuilder, TicketsListService]
+}).compileComponents();
 
   });
 

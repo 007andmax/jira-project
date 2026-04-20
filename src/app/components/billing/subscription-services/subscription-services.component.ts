@@ -13,14 +13,22 @@ import { SubscriptionServicesFilter } from './class/subscription-services-filter
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { ServiceAgreement } from '../contracts/class/service-agreement';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
+import { ContractsEditComponent } from '../contracts/contracts-edit/contracts-edit.component';
+import { SubscriptionServicesEditComponent } from './subscription-services-edit/subscription-services-edit.component';
+import { SubscriptionServicesAddComponent } from './subscription-services-add/subscription-services-add.component';
+import { SubscriptionServicesItemComponent } from './subscription-services-item/subscription-services-item.component';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-subscription-services',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  templateUrl: './subscription-services.component.html',
-  styleUrls: ['./subscription-services.component.scss']
+    selector: 'app-subscription-services',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    templateUrl: './subscription-services.component.html',
+    styleUrls: ['./subscription-services.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgbTooltipModule, NgFor, SubscriptionServicesItemComponent, SubscriptionServicesAddComponent, SubscriptionServicesEditComponent, ContractsEditComponent]
 })
 export class SubscriptionServicesComponent implements OnInit, OnDestroy {
   serviceAgreement: ServiceAgreement;

@@ -10,14 +10,22 @@ import { TicketPriorityWidgetComponent } from './ticket-priority-widget/ticket-p
 import { TicketsAnalyticsWidgetComponent } from './tickets-analytics-widget/tickets-analytics-widget.component';
 import { TicketsPriority } from '../../setting/ticket-settings-page/tickets-priority/class/tickets-priority';
 import { fadeInAnimation } from 'src/app/animations';
+import { TechTicketsWidgetComponent } from './tech-tickets-widget/tech-tickets-widget.component';
+import { TicketsBillableHoursWidgetComponent } from './tickets-billable-hours-widget/tickets-billable-hours-widget.component';
+import { TimeOnTicketsWidgetComponent } from './time-on-tickets-widget/time-on-tickets-widget.component';
+import { DashboardStatsComponent } from '../../billing/dashboard-billing/dashboard-stats/dashboard-stats.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'tickets-dashboard',
-  templateUrl: './tickets-dashboard.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./tickets-dashboard.component.scss']
+    selector: 'tickets-dashboard',
+    templateUrl: './tickets-dashboard.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./tickets-dashboard.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgbDropdownModule, NgFor, DashboardStatsComponent, TicketsAnalyticsWidgetComponent, TicketPriorityWidgetComponent, RecurringTicketWidgetComponent, TimeOnTicketsWidgetComponent, TicketsBillableHoursWidgetComponent, TechTicketsWidgetComponent]
 })
 export class TicketsDashboardComponent implements OnInit {
   @ViewChild('ticketPriority', { static: true }) ticketPriority: TicketPriorityWidgetComponent;

@@ -6,12 +6,13 @@ import { DocumentsComponent } from '../../documents/documents.component';
 import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
-  selector: 'company-documents',
-  templateUrl: './company-documents.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./company-documents.component.scss']
+    selector: 'company-documents',
+    templateUrl: './company-documents.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./company-documents.component.scss'],
+    standalone: true
 })
 export class CompanyDocumentsComponent extends DocumentsComponent {
   companyId: string;

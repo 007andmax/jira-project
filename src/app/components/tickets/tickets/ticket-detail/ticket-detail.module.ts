@@ -6,25 +6,25 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxMaskModule } from 'ngx-mask';
-import { InvoiceFormTicketEditTaxesModule } from 'src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.module';
-import { DatePickerModule } from 'src/app/components/shared/date-picker/date-picker.module';
-import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.module';
-import { PreloaderTicketModule } from 'src/app/components/shared/preloader-ticket/preloader-ticket.module';
+
+
+
+
 import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.module';
-import { ProductListModule } from 'src/app/components/shared/product-list/product-list.module';
-import { ServicesListModule } from 'src/app/components/shared/services-list/services-list.module';
-import { TechUsersModule } from 'src/app/components/shared/tech-users/tech-users.module';
-import { UploadAreaProgressModule } from 'src/app/components/shared/upload-area/upload-area-progress/upload-area-progress.module';
-import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
-import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
-import { NumberModule } from 'src/app/directives/number/number.module';
-import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
-import { PhoneModule } from 'src/app/pipe/phone/phone.module';
-import { PreparePhoneModule } from 'src/app/pipe/prepare-phone/prepare-phone.module';
-import { TicketProfileAttachmentsModule } from '../ticket-edit-aside/ticket-profile-attachments/ticket-profile-attachments.module';
-import { TicketProfileUpdatesServiceDurationModule } from '../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.module';
-import { TicketProfileUpdatesServiceTimepickerModule } from '../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.module';
-import { TicketChangeStatusModule } from '../ticket-edit-aside/ticket-change-status/ticket-change-status.module';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { TicketDetailProfileUpdatesComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates.component';
 import { TicketDetailProfileUpdatesNoteComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-note/ticket-detail-profile-updates-note.component';
 import { TicketDetailProfileUpdatesNoteItemComponent } from './ticket-detail-profile-updates/ticket-detail-profile-updates-note/ticket-detail-profile-updates-note-item/ticket-detail-profile-updates-note-item.component';
@@ -43,21 +43,21 @@ import { TicketDetailProfileUpdatesServiceHeaderInfoComponent } from './ticket-d
 import { TicketDetailTasksComponent } from './ticket-detail-tasks/ticket-detail-tasks.component';
 import { TicketDetailHeaderComponent } from './ticket-detail-header/ticket-detail-header.component';
 import { TicketDetailProfileFormUpdateComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.component';
-import { AddAssignedUserModule } from '../ticket-edit-aside/add-assigned-user/add-assigned-user.module';
+
 import { TicketDetailProfileFormUpdateVisibleUsersComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-visible-users/ticket-detail-profile-form-update-visible-users.component';
-import { TicketProfileFormUpdateNoteListModule } from './ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.module';
+
 import { TicketDetailProfileFormUpdateNoteComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-note/ticket-detail-profile-form-update-note.component';
 import { TicketDetailProfileFormUpdateServicesComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component';
 import { TicketDetailProfileFormUpdateHeaderComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-header/ticket-detail-profile-form-update-header.component';
 import { TicketDetailProfileFormUpdateProductsComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-products/ticket-detail-profile-form-update-products.component';
-import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+
 import { TicketDetailClaimInfoComponent } from './ticket-detail-claim-info/ticket-detail-claim-info.component';
 import { TicketDetailInfoStatusComponent } from './ticket-detail-info-status/ticket-detail-info-status.component';
 import { TicketDetailChangeStatusComponent } from './ticket-detail-change-status/ticket-detail-change-status.component';
-import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
+
 import { TicketDetailChangePriorityComponent } from './ticket-detail-change-priority/ticket-detail-change-priority.component';
 import { TicketDetailChangeCompanyComponent } from './ticket-detail-change-company/ticket-detail-change-company.component';
-import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
+
 import { TicketDetailAddAssignedUserComponent } from './ticket-detail-add-assigned-user/ticket-detail-add-assigned-user.component';
 import { TicketDetailEditTagsComponent } from './ticket-detail-edit-tags/ticket-detail-edit-tags.component';
 import { TicketDetailAttachmentsComponent } from './ticket-detail-attachments/ticket-detail-attachments.component';
@@ -80,26 +80,26 @@ import { TicketDetailPasswordsDetailsComponent } from './ticket-detail-passwords
 import { TicketDetailDevicesItemComponent } from './ticket-detail-devices/ticket-detail-devices-item/ticket-detail-devices-item.component';
 import { TicketDetailDevicesDetailsComponent } from './ticket-detail-devices/ticket-detail-devices-details/ticket-detail-devices-details.component';
 import { TicketDetailProfileFormUpdateSupportComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-support/ticket-detail-profile-form-update-support.component';
-import { DndModule } from 'src/app/directives/dnd/dnd.module';
+
 import { AddAssignedUserNoteComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update-header/add-assigned-user-note/add-assigned-user-note.component';
 import { TicketDetailTicketsDetailsComponent } from './ticket-detail-tickets/ticket-detail-tickets-details/ticket-detail-tickets-details.component';
 import { TicketDetailTicketsComponent } from './ticket-detail-tickets/ticket-detail-tickets.component';
 import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets/ticket-detail-tickets-status/ticket-detail-tickets-status.component';
-import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-chip-list.module';
-import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
-import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
-import { MatFormFieldModule } from 'src/app/components/shared/mat-form-field/mat-form-field.module';
-import { CompanyUsersDropDownModule } from '../ticket-add-aside/company-users-drop-down/company-users-drop-down.module';
-import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
-import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
+
+
+
+
+
+
+
 import { TicketDetailTotalStatisticsComponent } from './ticket-detail-total-statistics/ticket-detail-total-statistics.component';
-import { TicketDetailProfileFormUpdateModule } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.module';
+
 import { TicketDetailNoteModalComponent } from './ticket-detail-note-modal/ticket-detail-note-modal.component';
-import { TicketDetailNoteModalModule } from './ticket-detail-note-modal/ticket-detail-note-modal.module';
+
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { TicketDetailTasksItemComponent } from './ticket-detail-tasks/ticket-detail-tasks-item/ticket-detail-tasks-item.component';
-import { TaskHeaderAddTypeModule } from 'src/app/components/tasks/task-header-add/task-header-add-type/task-header-add-type.module';
-import { TasksDatePickerModule } from 'src/app/components/tasks/tasks-date-picker/tasks-date-picker.module';
+
+
 
 
 
@@ -165,50 +165,16 @@ import { TasksDatePickerModule } from 'src/app/components/tasks/tasks-date-picke
 
     ],
     imports: [
-        CommonModule,
-        TicketDetailRoutingModule,
-        DynamicTooltipModule,
-        NgbModule,
-        ReactiveFormsModule,
-        DisabledBtnModule,
-        PreloaderTicketModule,
-        TextAreaModule,
-        ProductListModule,
-        FormsModule,
-        NumberModule,
-        ServicesListModule,
-        TicketProfileUpdatesServiceTimepickerModule,
-        TicketProfileUpdatesServiceDurationModule,
-        DatePickerModule,
-        NgxMaskModule.forRoot(),
-        PreparePhoneModule,
-        PhoneModule,
-        InfiniteScrollModule,
-        TechUsersModule,
-        UploadAreaProgressModule,
-        ClickOutsideModule,
-        TicketProfileAttachmentsModule,
-        PreviewPhoneMaskModule,
-        InvoiceFormTicketEditTaxesModule,
-        TicketChangeStatusModule,
-        AddAssignedUserModule,
-        TicketProfileFormUpdateNoteListModule,
-        KeyUpEnterModule,
-        DropDownModule,
-        CompanyDropDownModule,
-        DndModule,
-        MatChipModule,
-        MatFormFieldModule,
-        MatChipListModule,
-        MatErrorModule,
-        CompanyUsersDropDownModule,
-        DecimalNumberModule,
-        ToFixedModule,
-        TicketDetailProfileFormUpdateModule,
-        AngularEditorModule,
-        TaskHeaderAddTypeModule,
-        TasksDatePickerModule,
-    ],
+    CommonModule,
+    TicketDetailRoutingModule,
+    NgbModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgxMaskModule.forRoot(),
+    InfiniteScrollModule,
+    PreviewPhoneMaskModule,
+    AngularEditorModule,
+],
 
 
 

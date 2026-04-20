@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { MarketingSubscriptionType } from 'src/app/components/setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
@@ -8,11 +8,16 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { DELETE_SUBSCRIPTION_TYPE } from 'src/app/const/confirm';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
+import { KeyUpEnterDirective } from '../../../../directives/key-up-enter/key-up-enter.directive';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-marketing-subscriptions-aside-item-edit',
-  templateUrl: './marketing-subscriptions-aside-item-edit.component.html',
-  styleUrls: ['./marketing-subscriptions-aside-item-edit.component.scss']
+    selector: 'app-marketing-subscriptions-aside-item-edit',
+    templateUrl: './marketing-subscriptions-aside-item-edit.component.html',
+    styleUrls: ['./marketing-subscriptions-aside-item-edit.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, FormsModule, KeyUpEnterDirective, NgbTooltipModule]
 })
 export class MarketingSubscriptionsAsideItemEditComponent implements OnInit {
   @Input() subscription: MarketingSubscriptionType;

@@ -2,7 +2,8 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
 
 @Directive({
-  selector: '[appRightClickBlank]'
+    selector: '[appRightClickBlank]',
+    standalone: true
 })
 export class RightClickBlankDirective {
 

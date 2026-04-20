@@ -4,11 +4,17 @@ import { catchError, map } from 'rxjs/operators';
 import { MODE_ADD_BY_MODAL } from 'src/app/const/user-subscription';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
 import { MarketingSubscriptionType } from '../class/marketing-subscription-type';
+import { MatErrorComponent } from '../../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgIf, NgClass } from '@angular/common';
+import { ClickOutsideDirective } from '../../../../../directives/click-otside/click-otside.directive';
 
 @Component({
-  selector: 'add-marketing-subscription-type',
-  templateUrl: './add-marketing-subscription-type.component.html',
-  styleUrls: ['./add-marketing-subscription-type.component.scss']
+    selector: 'add-marketing-subscription-type',
+    templateUrl: './add-marketing-subscription-type.component.html',
+    styleUrls: ['./add-marketing-subscription-type.component.scss'],
+    standalone: true,
+    imports: [ClickOutsideDirective, NgIf, NgClass, FormsModule, MatErrorComponent]
 })
 export class AddMarketingSubscriptionTypeComponent implements OnInit {
   MODE_ADD_BY_MODAL = MODE_ADD_BY_MODAL;

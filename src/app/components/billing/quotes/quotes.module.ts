@@ -11,79 +11,63 @@ import { QuotesItemComponent } from './quotes-table/quotes-item/quotes-item.comp
 import { QuoteAsidePreviewBodyComponent } from './quote-aside-preview/quote-aside-preview-body/quote-aside-preview-body.component';
 import { QuoteAsideAddBodyComponent } from './quote-aside-add/quote-aside-add-body/quote-aside-add-body.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
-import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
+
+
 import { QuoteAsideEditBodyComponent } from './quote-aside-edit/quote-aside-edit-body/quote-aside-edit-body.component';
 import { QuotesFilterComponent } from './quotes-header/quotes-filter/quotes-filter.component';
-import { DropDownModule } from '../../shared/drop-down/drop-down.module';
+
 import { InvoiceFormEditCustomerModule } from '../billable/billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.module';
 import { FormsModule } from '@angular/forms';
-import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
+
 import { ServiceItemQuoteComponent } from './quote-aside-add/service-item-quote/service-item-quote.component';
 import { ProductItemQuoteComponent } from './quote-aside-add/product-item-quote/product-item-quote.component';
 import { ProductListQuoteComponent } from './quote-aside-add/product-list-quote/product-list-quote.component';
 import { ServiceListQuoteComponent } from './quote-aside-add/service-list-quote/service-list-quote.component';
-import { InvoiceRegularNoteModule } from '../billable/billable-aside/invoice-form/invoice-regular-note/invoice-regular-note.module';
+
 import { ProductItemQuoteEditComponent } from './quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component';
-import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datepicker.module';
-import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
-import { FilterModule } from 'src/app/pipe/filter/filter.module';
+
+
+
 import { QuotesRoutingModule } from './quotes-routing.module';
 import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-phone-mask.module';
-import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+
 import { InvoiceChangeAddressModule } from '../billable/billable-aside/invoice-form/invoice-change-address/invoice-change-address.module';
 import { QuoteAsideAddChangeAddressComponent } from './quote-aside-add/quote-aside-add-change-address/quote-aside-add-change-address.component';
-import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
-import { NumberModule } from 'src/app/directives/number/number.module';
-import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
-import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+
+
+
+
 import { QuoteAsidePreviewBodyModule } from './quote-aside-preview/quote-aside-preview-body/quote-aside-preview-body.module';
 
 
 
 
 @NgModule({
-    declarations: [QuotesComponent,
-        QuotesTableComponent,
-        QuoteAsideAddComponent,
-        QuoteAsideEditComponent,
-        QuotesHeaderComponent,
-        QuotesItemComponent,
-        QuoteAsideAddBodyComponent,
-        QuoteAsideEditBodyComponent,
-        QuotesFilterComponent,
-        ServiceItemQuoteComponent,
-        ProductItemQuoteComponent,
-        ProductListQuoteComponent,
-        ServiceListQuoteComponent,
-        ProductItemQuoteEditComponent,
-        QuoteAsideAddChangeAddressComponent
-
-    ],
     imports: [
-        CommonModule,
-        InfiniteScrollModule,
-        NgbModule,
-        DisabledBtnModule,
-        PreloaderTicketModule,
-        DropDownModule,
-        InvoiceFormEditCustomerModule,
-        FormsModule,
-        DatePickerModule,
-        InvoiceRegularNoteModule,
-        MultiDatepickerModule,
-        DecimalNumberModule,
-        FilterModule,
-        QuotesRoutingModule,
-        PreviewPhoneMaskModule,
-        KeyUpEnterModule,
-        InvoiceChangeAddressModule,
-        CompanyDropDownModule,
-        NumberModule,
-        MatErrorModule,
-        TextAreaModule,
-        QuoteAsidePreviewBodyModule
-    ],
-
+    CommonModule,
+    InfiniteScrollModule,
+    NgbModule,
+    InvoiceFormEditCustomerModule,
+    FormsModule,
+    QuotesRoutingModule,
+    PreviewPhoneMaskModule,
+    InvoiceChangeAddressModule,
+    QuoteAsidePreviewBodyModule,
+    QuotesComponent,
+    QuotesTableComponent,
+    QuoteAsideAddComponent,
+    QuoteAsideEditComponent,
+    QuotesHeaderComponent,
+    QuotesItemComponent,
+    QuoteAsideAddBodyComponent,
+    QuoteAsideEditBodyComponent,
+    QuotesFilterComponent,
+    ServiceItemQuoteComponent,
+    ProductItemQuoteComponent,
+    ProductListQuoteComponent,
+    ServiceListQuoteComponent,
+    ProductItemQuoteEditComponent,
+    QuoteAsideAddChangeAddressComponent
+],
 })
 export class QuotesModule { }

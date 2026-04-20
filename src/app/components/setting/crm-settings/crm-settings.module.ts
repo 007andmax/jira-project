@@ -8,41 +8,32 @@ import { CrmCompanyServiceTypeComponent } from './crm-company-service-type/crm-c
 import { CrmCompanyJobTitleComponent } from './crm-company-job-title/crm-company-job-title.component';
 import { CrmCompanyJobTypeComponent } from './crm-company-job-type/crm-company-job-type.component';
 import { AddCrmCompanyIndustryComponent } from './crm-company-industry/add-crm-company-industry/add-crm-company-industry.component';
-import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
+
 import { FormsModule } from '@angular/forms';
 import { AddCrmCompanyServiceTypeComponent } from './crm-company-service-type/add-crm-company-service-type/add-crm-company-service-type.component';
 import { AddCrmCompanyJobTitleComponent } from './crm-company-job-title/add-crm-company-job-title/add-crm-company-job-title.component';
 import { AddCrmCompanyJobTypeComponent } from './crm-company-job-type/add-crm-company-job-type/add-crm-company-job-type.component';
-import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
-import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
-import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+
+
+
 
 
 
 @NgModule({
-    declarations: [
-        CrmSettingsComponent,
-        CrmCompanyIndustryComponent,
-        CrmCompanyServiceTypeComponent,
-        CrmCompanyJobTitleComponent,
-        CrmCompanyJobTypeComponent,
-        AddCrmCompanyIndustryComponent,
-        AddCrmCompanyServiceTypeComponent,
-        AddCrmCompanyJobTitleComponent,
-        AddCrmCompanyJobTypeComponent
-    ],
     imports: [
-        CommonModule,
-        NgbModule,
-        CrmSettingsRoutingModule,
-        ClickOutsideModule,
-        FormsModule,
-        DynamicTooltipModule,
-        KeyUpEnterModule,
-        MatErrorModule
-    ],
-
-
-
+    CommonModule,
+    NgbModule,
+    CrmSettingsRoutingModule,
+    FormsModule,
+    CrmSettingsComponent,
+    CrmCompanyIndustryComponent,
+    CrmCompanyServiceTypeComponent,
+    CrmCompanyJobTitleComponent,
+    CrmCompanyJobTypeComponent,
+    AddCrmCompanyIndustryComponent,
+    AddCrmCompanyServiceTypeComponent,
+    AddCrmCompanyJobTitleComponent,
+    AddCrmCompanyJobTypeComponent
+],
 })
 export class CrmSettingsModule { }

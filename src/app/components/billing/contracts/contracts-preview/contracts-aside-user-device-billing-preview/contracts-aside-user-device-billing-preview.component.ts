@@ -8,11 +8,18 @@ import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ServiceAgreement } from '../../class/service-agreement';
 import * as moment from "moment";
 import { Subscription } from 'rxjs';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf, NgFor, DecimalPipe, CurrencyPipe } from '@angular/common';
+import { DatePickerComponent } from '../../../../shared/date-picker/date-picker.component';
+import { DropDownComponent } from '../../../../shared/drop-down/drop-down.component';
 
 @Component({
-  selector: 'app-contracts-aside-user-device-billing-preview',
-  templateUrl: './contracts-aside-user-device-billing-preview.component.html',
-  styleUrls: ['./contracts-aside-user-device-billing-preview.component.scss']
+    selector: 'app-contracts-aside-user-device-billing-preview',
+    templateUrl: './contracts-aside-user-device-billing-preview.component.html',
+    styleUrls: ['./contracts-aside-user-device-billing-preview.component.scss'],
+    standalone: true,
+    imports: [DropDownComponent, DatePickerComponent, NgClass, FormsModule, NgIf, NgFor, NgbTooltipModule, DecimalPipe, CurrencyPipe]
 })
 export class ContractsAsideUserDeviceBillingPreviewComponent implements OnInit, OnDestroy {
   selectedCompany: any;

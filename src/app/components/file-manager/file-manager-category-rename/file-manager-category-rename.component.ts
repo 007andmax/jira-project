@@ -6,9 +6,10 @@ import { map } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-file-manager-category-rename',
-  templateUrl: './file-manager-category-rename.component.html',
-  styleUrls: ['./file-manager-category-rename.component.scss']
+    selector: 'app-file-manager-category-rename',
+    templateUrl: './file-manager-category-rename.component.html',
+    styleUrls: ['./file-manager-category-rename.component.scss'],
+    standalone: true
 })
 export class FileManagerCategoryRenameComponent implements OnInit {
   @Input() item: FileManagerCategory;

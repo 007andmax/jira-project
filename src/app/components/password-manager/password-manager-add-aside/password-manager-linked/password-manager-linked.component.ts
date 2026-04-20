@@ -14,12 +14,18 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 import { Device } from 'src/app/components/company-devices/class/device';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { TicketsPermissionsService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/tickets-permissions.service';
+import { FormsModule } from '@angular/forms';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { ClickOutsideDirective } from '../../../../directives/click-otside/click-otside.directive';
+import { NgIf, NgClass, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'password-manager-linked',
-  templateUrl: './password-manager-linked.component.html',
-  styleUrls: ['./password-manager-linked.component.scss'],
-  providers: [TicketsPermissionsService]
+    selector: 'password-manager-linked',
+    templateUrl: './password-manager-linked.component.html',
+    styleUrls: ['./password-manager-linked.component.scss'],
+    providers: [TicketsPermissionsService],
+    standalone: true,
+    imports: [NgIf, ClickOutsideDirective, NgClass, NgFor, MatErrorComponent, FormsModule]
 })
 export class PasswordManagerLinkedComponent implements OnInit, OnDestroy {
   @Input() passwordRecordAdd: PasswordRecordAdd;

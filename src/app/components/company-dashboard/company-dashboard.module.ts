@@ -9,19 +9,19 @@ import { CompanyDashRevenueComponent } from './company-dash-revenue/company-dash
 import { CompanyDashInvoiceComponent } from './company-dash-invoice/company-dash-invoice.component';
 import { CompanyDashContractComponent } from './company-dash-contract/company-dash-contract.component';
 import { CompanyDashAssociateInfoComponent } from './company-dash-associate-info/company-dash-associate-info.component';
-import { CompanyTagsModule } from '../companies/company-tags/company-tags.module';
+
 import { NgxMaskModule } from 'ngx-mask';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CompanyEditAsideModule } from '../companies/company-edit-aside/company-edit-aside.module';
-import { CompanyAssociateModule } from './company-dash-associate/company-associate/company-associate.module';
-import { ContractsPreviewModule } from '../billing/contracts/contracts-preview/contracts-preview.module';
-import { ContractsEditModule } from '../billing/contracts/contracts-edit/contracts-edit.module';
-import { PhoneModule } from 'src/app/pipe/phone/phone.module';
-import { PreparePhoneModule } from 'src/app/pipe/prepare-phone/prepare-phone.module';
+
+
+
+
+
 import { CompanyDashboardRoutingModule } from './company-dashboard-routing.module';
 import { PreviewPhoneMaskModule } from '../shared/preview-phone-mask/preview-phone-mask.module';
-import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
@@ -39,23 +39,15 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
         CompanyDashAssociateInfoComponent
     ],
     imports: [
-        CommonModule,
-        CompanyDashboardRoutingModule,
-        CompanyTagsModule,
-        NgxMaskModule.forRoot(),
-        NgbModule,
-        FormsModule,
-        CompanyEditAsideModule,
-        CompanyAssociateModule,
-
-        ContractsPreviewModule,
-        ContractsEditModule,
-        PhoneModule,
-        PreparePhoneModule,
-        PreviewPhoneMaskModule,
-        TextAreaModule,
-        NgxChartsModule
-    ],
+    CommonModule,
+    CompanyDashboardRoutingModule,
+    NgxMaskModule.forRoot(),
+    NgbModule,
+    FormsModule,
+    CompanyEditAsideModule,
+    PreviewPhoneMaskModule,
+    NgxChartsModule
+],
 
 
 

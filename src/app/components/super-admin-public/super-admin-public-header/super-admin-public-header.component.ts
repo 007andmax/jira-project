@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
-  selector: 'super-admin-public-header',
-  templateUrl: './super-admin-public-header.component.html',
-  styleUrls: ['./super-admin-public-header.component.scss']
+    selector: 'super-admin-public-header',
+    templateUrl: './super-admin-public-header.component.html',
+    styleUrls: ['./super-admin-public-header.component.scss'],
+    standalone: true
 })
 export class SuperAdminPublicHeaderComponent implements OnInit {
   @Input() isShowHelpCenter: boolean;

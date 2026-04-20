@@ -23,15 +23,43 @@ import { PasswordRecordLink } from '../class/password-record-link';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { Device } from '../../company-devices/class/device';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../directives/disabled-btn/disabled-btn.directive';
+import { PasswordManagerEditLinkedComponent } from './password-manager-edit-linked/password-manager-edit-linked.component';
+import { UploadAreaProgressComponent } from '../../shared/upload-area/upload-area-progress/upload-area-progress.component';
+import { DatePickerComponent } from '../../shared/date-picker/date-picker.component';
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { FormsModule } from '@angular/forms';
+import { AfterViewInitDirective } from '../../../directives/after-view-init.directive';
+import { CompanyDropDownComponent } from '../../shared/company-drop-down/company-drop-down.component';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
+import { NgIf, NgClass, NgFor, NgStyle } from '@angular/common';
 declare var URL: any;
 /**
  * Password manager edit aside component
  */
 @Component({
-  selector: 'app-password-manager-edit-aside',
-  templateUrl: './password-manager-edit-aside.component.html',
-  styleUrls: ['./password-manager-edit-aside.component.scss'],
-
+    selector: 'app-password-manager-edit-aside',
+    templateUrl: './password-manager-edit-aside.component.html',
+    styleUrls: ['./password-manager-edit-aside.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        NgClass,
+        MatErrorComponent,
+        CompanyDropDownComponent,
+        AfterViewInitDirective,
+        DropDownComponent,
+        FormsModule,
+        DynamicTooltipComponent,
+        DatePickerComponent,
+        UploadAreaProgressComponent,
+        PasswordManagerEditLinkedComponent,
+        NgFor,
+        NgStyle,
+        DisabledBtnDirective_1,
+        PreloaderTicketComponent,
+    ],
 })
 export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   public selectedClient: any;

@@ -1,9 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { KeyUpEnterDirective } from '../../../directives/key-up-enter/key-up-enter.directive';
+import { FormsModule } from '@angular/forms';
+import { NgClass } from '@angular/common';
+import { ClickOutsideDirective } from '../../../directives/click-otside/click-otside.directive';
 
 @Component({
-  selector: 'app-company-devices-edit-label',
-  templateUrl: './company-devices-edit-label.component.html',
-  styleUrls: ['./company-devices-edit-label.component.scss']
+    selector: 'app-company-devices-edit-label',
+    templateUrl: './company-devices-edit-label.component.html',
+    styleUrls: ['./company-devices-edit-label.component.scss'],
+    standalone: true,
+    imports: [ClickOutsideDirective, NgClass, FormsModule, KeyUpEnterDirective]
 })
 export class CompanyDevicesEditLabelComponent implements OnInit {
   value: string;

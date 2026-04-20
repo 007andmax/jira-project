@@ -1,6 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -8,11 +8,18 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DocumentLinked } from '../../../class/document-linked';
 import { DocumentCompanyUser } from '../../class/document-company-user';
 import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
+import { MatChipComponent } from '../../../../shared/mat-chip/mat-chip.component';
+import { MatChipListComponent } from '../../../../shared/mat-chip-list/mat-chip-list.component';
+import { MatFormFieldComponent as MatFormFieldComponent_1 } from '../../../../shared/mat-form-field/mat-form-field.component';
+import { NgClass, NgFor, NgIf } from '@angular/common';
+import { NgbTooltipModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'documents-linked',
-  templateUrl: './documents-linked.component.html',
-  styleUrls: ['./documents-linked.component.scss']
+    selector: 'documents-linked',
+    templateUrl: './documents-linked.component.html',
+    styleUrls: ['./documents-linked.component.scss'],
+    standalone: true,
+    imports: [NgbTooltipModule, NgbDropdownModule, NgClass, MatFormFieldComponent_1, MatChipListComponent, NgFor, NgIf, MatChipComponent, FormsModule, ReactiveFormsModule]
 })
 export class DocumentsLinkedComponent implements OnInit, OnDestroy {
   selectable = true;

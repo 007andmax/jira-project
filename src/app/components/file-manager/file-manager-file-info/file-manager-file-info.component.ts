@@ -13,10 +13,10 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-file-manager-file-info',
-  templateUrl: './file-manager-file-info.component.html',
-  styleUrls: ['./file-manager-file-info.component.scss'],
-
+    selector: 'app-file-manager-file-info',
+    templateUrl: './file-manager-file-info.component.html',
+    styleUrls: ['./file-manager-file-info.component.scss'],
+    standalone: true,
 })
 export class FileManagerFileInfoComponent implements OnInit, OnDestroy {
   selectedTags: Array<any> = [];

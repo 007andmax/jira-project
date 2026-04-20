@@ -10,10 +10,11 @@ import { UserDefaultSubscription } from '../../../class/user-default-subscriptio
 import { UsersFilterSubscriptionsItem } from './class/users-filter-subscriptions-item';
 
 @Component({
-  selector: 'users-filter-subscriptions',
-  templateUrl: './users-filter-subscriptions.component.html',
-  styleUrls: ['./users-filter-subscriptions.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'users-filter-subscriptions',
+    templateUrl: './users-filter-subscriptions.component.html',
+    styleUrls: ['./users-filter-subscriptions.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
 })
 export class UsersFilterSubscriptionsComponent implements OnInit {
   defaultSubscriptions: UserDefaultSubscription = new UserDefaultSubscription();

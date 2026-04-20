@@ -3,9 +3,10 @@ import { CompanyDevicesEditIpValidate } from './class/company-devices-edit-ip-va
 import { CompanyDevicesEditLabelComponent } from '../company-devices-edit-label/company-devices-edit-label.component';
 
 @Component({
-  selector: 'app-company-devices-edit-ip',
-  templateUrl: './company-devices-edit-ip.component.html',
-  styleUrls: ['./company-devices-edit-ip.component.scss']
+    selector: 'app-company-devices-edit-ip',
+    templateUrl: './company-devices-edit-ip.component.html',
+    styleUrls: ['./company-devices-edit-ip.component.scss'],
+    standalone: true
 })
 export class CompanyDevicesEditIpComponent extends CompanyDevicesEditLabelComponent {
 

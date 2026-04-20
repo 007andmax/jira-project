@@ -5,9 +5,10 @@ import { PaymentsService } from 'src/app/services/payments/payments.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
-  selector: 'app-refund-payment',
-  templateUrl: './refund-payment.component.html',
-  styleUrls: ['./refund-payment.component.scss']
+    selector: 'app-refund-payment',
+    templateUrl: './refund-payment.component.html',
+    styleUrls: ['./refund-payment.component.scss'],
+    standalone: true
 })
 export class RefundPaymentComponent implements OnInit {
   @Input() payment: Payment;

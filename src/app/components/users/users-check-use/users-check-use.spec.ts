@@ -14,20 +14,19 @@ describe('UsersCheckUseComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         HttpClientModule,
         NgbModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NoopAnimationsModule],
-      declarations: [UsersCheckUseComponent
-      ],
-      providers: [NgbActiveModal]
-    }).compileComponents();
+    declarations: [UsersCheckUseComponent],
+    providers: [NgbActiveModal]
+}).compileComponents();
 
   });
 

@@ -16,21 +16,19 @@ describe('TasksCalendarMonthComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule,
+    imports: [FormsModule,
         CommonModule,
         NgbModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [TasksCalendarMonthComponent,
+        NoopAnimationsModule, TasksCalendarMonthComponent,
         TasksCalendarMonthItemWeekComponent,
-        TaskHeaderAddComponent
-      ]
-    }).compileComponents();
+        TaskHeaderAddComponent]
+}).compileComponents();
 
   });
 

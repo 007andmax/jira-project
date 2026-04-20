@@ -4,11 +4,15 @@ import { Subscription } from 'rxjs';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { TaxesService } from 'src/app/services/taxes/taxes.service';
+import { NgFor, NgIf } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-invoice-form-ticket-edit-taxes',
-  templateUrl: './invoice-form-ticket-edit-taxes.component.html',
-  styleUrls: ['./invoice-form-ticket-edit-taxes.component.scss']
+    selector: 'app-invoice-form-ticket-edit-taxes',
+    templateUrl: './invoice-form-ticket-edit-taxes.component.html',
+    styleUrls: ['./invoice-form-ticket-edit-taxes.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, NgFor, NgIf]
 })
 export class InvoiceFormTicketEditTaxesComponent implements OnInit, OnDestroy {
   @Input() selectedTax = [];

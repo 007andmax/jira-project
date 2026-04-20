@@ -13,9 +13,10 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 @Component({
-  selector: 'app-invoices-item',
-  templateUrl: './invoices-item.component.html',
-  styleUrls: ['./invoices-item.component.scss']
+    selector: 'app-invoices-item',
+    templateUrl: './invoices-item.component.html',
+    styleUrls: ['./invoices-item.component.scss'],
+    standalone: true
 })
 export class InvoicesItemComponent implements OnInit {
   @Input() invoice: Invoice;

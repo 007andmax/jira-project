@@ -10,14 +10,20 @@ import { NonContractServicesRealTimeService } from 'src/app/states/non-contract-
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { NonContractServicesContractsComponent } from './non-contract-services-contracts/non-contract-services-contracts.component';
+import { NonContractServicesItemComponent } from './non-contract-services-item/non-contract-services-item.component';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'non-contract-services',
-  templateUrl: './non-contract-services.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./non-contract-services.component.scss']
+    selector: 'non-contract-services',
+    templateUrl: './non-contract-services.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./non-contract-services.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgbTooltipModule, NgFor, NonContractServicesItemComponent, NonContractServicesContractsComponent]
 })
 export class NonContractServicesComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;

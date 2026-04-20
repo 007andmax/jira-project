@@ -10,11 +10,20 @@ import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyJobType } from './class/crm-company-job-type';
 import { CrmCompanyJobTypeFilter } from './class/crm-company-job-type-filter';
+import { DynamicTooltipComponent } from '../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { KeyUpEnterDirective } from '../../../../directives/key-up-enter/key-up-enter.directive';
+import { FormsModule } from '@angular/forms';
+import { ClickOutsideDirective } from '../../../../directives/click-otside/click-otside.directive';
+import { AddCrmCompanyJobTypeComponent } from './add-crm-company-job-type/add-crm-company-job-type.component';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'crm-company-job-type',
-  templateUrl: './crm-company-job-type.component.html',
-  styleUrls: ['./crm-company-job-type.component.scss']
+    selector: 'crm-company-job-type',
+    templateUrl: './crm-company-job-type.component.html',
+    styleUrls: ['./crm-company-job-type.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, AddCrmCompanyJobTypeComponent, NgFor, ClickOutsideDirective, FormsModule, KeyUpEnterDirective, MatErrorComponent, DynamicTooltipComponent]
 })
 export class CrmCompanyJobTypeComponent implements OnInit {
   jobTypeList: Array<CrmCompanyJobType> = [];

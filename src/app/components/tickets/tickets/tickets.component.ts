@@ -5,12 +5,13 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
-  selector: 'app-tickets',
-  templateUrl: './tickets.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./tickets.component.scss']
+    selector: 'app-tickets',
+    templateUrl: './tickets.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./tickets.component.scss'],
+    standalone: true
 })
 export class TicketsComponent implements OnInit, OnDestroy {
   listType: string = "USERS";

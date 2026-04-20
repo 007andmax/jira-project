@@ -21,7 +21,7 @@ describe('ContractsAsideEditHourlyAddDefaultServiceComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         DropDownModule,
         MatErrorModule,
         FormsModule,
@@ -30,14 +30,12 @@ describe('ContractsAsideEditHourlyAddDefaultServiceComponent unit test', () => {
         DisabledBtnModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [ContractsAsideEditHourlyAddDefaultServiceComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, ContractsAsideEditHourlyAddDefaultServiceComponent],
+}).compileComponents();
 
   });
 

@@ -1,14 +1,19 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, ElementRef } from '@angular/core';
 import { merge, Observable, Subject, Subscription } from "rxjs";
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
-import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
+import { NgbTypeahead, NgbTypeaheadModule } from "@ng-bootstrap/ng-bootstrap";
+import { MatErrorComponent } from '../../../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
 var $ = require("jquery");
 
 
 @Component({
-  selector: 'app-invoice-select-note',
-  templateUrl: './invoice-select-note.component.html',
-  styleUrls: ['./invoice-select-note.component.scss']
+    selector: 'app-invoice-select-note',
+    templateUrl: './invoice-select-note.component.html',
+    styleUrls: ['./invoice-select-note.component.scss'],
+    standalone: true,
+    imports: [NgClass, FormsModule, NgbTypeaheadModule, NgIf, MatErrorComponent]
 })
 export class InvoiceSelectNoteComponent implements OnInit, OnDestroy {
 

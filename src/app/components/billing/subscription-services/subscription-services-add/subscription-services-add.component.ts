@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { SubscriptionServices } from '../class/subscription-services';
 import { SubscriptionServicesStateService } from 'src/app/states/subscription-services/subscription-services-state.service';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
@@ -13,11 +13,21 @@ import { SubscriptionServicesService } from 'src/app/services/subscription-servi
 import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
 import { GlNumber } from 'src/class/gl-number/gl-number';
 import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
+import { PreloaderTicketComponent } from '../../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../../directives/disabled-btn/disabled-btn.directive';
+import { GlNumbersDropDownComponent } from '../../../inventory/gl-numbers-drop-down/gl-numbers-drop-down.component';
+import { TaxesComponent } from '../../../shared/taxes/taxes.component';
+import { ToFixedDirective } from '../../../../directives/to-fixed/to-fixed.directive';
+import { numberDirective } from '../../../../directives/number/number.directive';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { NgIf, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-subscription-services-add',
-  templateUrl: './subscription-services-add.component.html',
-  styleUrls: ['./subscription-services-add.component.scss']
+    selector: 'app-subscription-services-add',
+    templateUrl: './subscription-services-add.component.html',
+    styleUrls: ['./subscription-services-add.component.scss'],
+    standalone: true,
+    imports: [NgIf, FormsModule, ReactiveFormsModule, NgClass, MatErrorComponent, numberDirective, ToFixedDirective, TaxesComponent, GlNumbersDropDownComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class SubscriptionServicesAddComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();

@@ -40,7 +40,7 @@ describe('ContractsAsideUserDeviceEditComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         PreloaderTicketModule,
         DisabledBtnModule,
         DatePickerModule,
@@ -64,14 +64,12 @@ describe('ContractsAsideUserDeviceEditComponent unit test', () => {
         HttpClientModule,
         DatePickerIntervalsModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [ContractsAsideUserDeviceEditComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, ContractsAsideUserDeviceEditComponent],
+}).compileComponents();
 
   });
 

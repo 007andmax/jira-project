@@ -17,10 +17,11 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { ProductType } from '../../setting/products-settings/class/product-type';
 
 @Component({
-  selector: 'app-inventory-table',
-  templateUrl: './inventory-table.component.html',
-  styleUrls: ['./inventory-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-inventory-table',
+    templateUrl: './inventory-table.component.html',
+    styleUrls: ['./inventory-table.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
 })
 export class InventoryTableComponent implements OnInit {
   inventory: InventoryItem;

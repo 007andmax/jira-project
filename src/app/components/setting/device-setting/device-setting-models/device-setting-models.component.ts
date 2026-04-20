@@ -11,11 +11,19 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_DEVICE_MODEL } from 'src/app/const/confirm';
 import { ManufacturesCheckUseComponent } from '../manufactures-check-use/manufactures-check-use.component';
+import { DynamicTooltipComponent } from '../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { KeyUpEnterDirective } from '../../../../directives/key-up-enter/key-up-enter.directive';
+import { FormsModule } from '@angular/forms';
+import { ClickOutsideDirective } from '../../../../directives/click-otside/click-otside.directive';
+import { DeviceSettingModelsAddComponent } from './device-setting-models-add/device-setting-models-add.component';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-device-setting-models',
-  templateUrl: './device-setting-models.component.html',
-  styleUrls: ['./device-setting-models.component.scss']
+    selector: 'app-device-setting-models',
+    templateUrl: './device-setting-models.component.html',
+    styleUrls: ['./device-setting-models.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, DeviceSettingModelsAddComponent, NgFor, ClickOutsideDirective, FormsModule, KeyUpEnterDirective, DynamicTooltipComponent]
 })
 export class DeviceSettingModelsComponent implements OnInit, OnDestroy {
   selectedManufacture: ManufactureDevice;

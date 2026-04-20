@@ -14,22 +14,21 @@ describe('TicketDetailProfileUpdatesHeaderInfoComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         CommonModule,
         NgbModule,
         NoopAnimationsModule
-      ],
-      declarations: [TicketDetailProfileUpdatesHeaderInfoComponent
-      ],
-      providers: [UntypedFormBuilder, TicketsListService]
-    }).compileComponents();
+    ],
+    declarations: [TicketDetailProfileUpdatesHeaderInfoComponent],
+    providers: [UntypedFormBuilder, TicketsListService]
+}).compileComponents();
 
   });
 

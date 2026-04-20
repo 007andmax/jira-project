@@ -6,12 +6,20 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
+import { AssignedTicketUserItemComponent } from './assigned-ticket-user-item/assigned-ticket-user-item.component';
+import { FormsModule } from '@angular/forms';
+import { AssignedTicketUserSelectedItemComponent } from './assigned-ticket-user-selected-item/assigned-ticket-user-selected-item.component';
+import { MatErrorComponent } from '../../../../shared/mat-error/mat-error.component';
+import { NgClass, NgStyle, NgIf, NgFor } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-assigned-ticket-user',
-  templateUrl: './assigned-ticket-user.component.html',
-  styleUrls: ['./assigned-ticket-user.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-assigned-ticket-user',
+    templateUrl: './assigned-ticket-user.component.html',
+    styleUrls: ['./assigned-ticket-user.component.scss'],
+    providers: [TicketsListService],
+    standalone: true,
+    imports: [NgbDropdownModule, NgClass, NgStyle, NgIf, MatErrorComponent, NgFor, AssignedTicketUserSelectedItemComponent, FormsModule, AssignedTicketUserItemComponent]
 })
 export class AssignedTicketUserComponent extends DropDownComponent {
   searchText: string = '';

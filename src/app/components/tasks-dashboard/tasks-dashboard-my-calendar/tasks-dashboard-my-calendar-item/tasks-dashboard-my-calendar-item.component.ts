@@ -5,9 +5,10 @@ import { Task } from 'src/app/components/tasks/class/task';
 
 
 @Component({
-  selector: 'app-tasks-dashboard-my-calendar-item',
-  templateUrl: './tasks-dashboard-my-calendar-item.component.html',
-  styleUrls: ['./tasks-dashboard-my-calendar-item.component.scss']
+    selector: 'app-tasks-dashboard-my-calendar-item',
+    templateUrl: './tasks-dashboard-my-calendar-item.component.html',
+    styleUrls: ['./tasks-dashboard-my-calendar-item.component.scss'],
+    standalone: true
 })
 export class TasksDashboardMyCalendarItemComponent extends TasksCalendarWeekItemHourComponent {
 

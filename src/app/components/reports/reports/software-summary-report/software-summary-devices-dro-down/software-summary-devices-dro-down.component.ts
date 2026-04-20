@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
-  selector: 'software-summary-devices-dro-down',
-  templateUrl: './software-summary-devices-dro-down.component.html',
-  styleUrls: ['./software-summary-devices-dro-down.component.scss']
+    selector: 'software-summary-devices-dro-down',
+    templateUrl: './software-summary-devices-dro-down.component.html',
+    styleUrls: ['./software-summary-devices-dro-down.component.scss'],
+    standalone: true
 })
 export class SoftwareSummaryDevicesDroDownComponent extends DropDownComponent {
 

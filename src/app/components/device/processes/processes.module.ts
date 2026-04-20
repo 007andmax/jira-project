@@ -6,16 +6,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProcessesPipe } from 'src/app/pipe/processes.pipe';
 
 @NgModule({
-    declarations: [ProcessesComponent,
-        ProcessesPipe
-    ],
     imports: [
         CommonModule,
         ProcessesRoutingModule,
         FormsModule,
         ReactiveFormsModule,
+        ProcessesComponent,
+        ProcessesPipe,
     ],
-
-
 })
 export class ProcessesModule { }

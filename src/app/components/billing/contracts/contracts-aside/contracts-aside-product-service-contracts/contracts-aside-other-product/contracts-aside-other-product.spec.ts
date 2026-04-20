@@ -21,7 +21,7 @@ describe('ContractsAsideOtherProductComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         ProductListModule,
         NumberModule,
         FormsModule,
@@ -29,15 +29,13 @@ describe('ContractsAsideOtherProductComponent unit test', () => {
         ToFixedModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NoopAnimationsModule,
-        ContractsAsideDiscountModule],
-      declarations: [ContractsAsideOtherProductComponent
-      ],
-    }).compileComponents();
+        ContractsAsideDiscountModule, ContractsAsideOtherProductComponent],
+}).compileComponents();
 
   });
 

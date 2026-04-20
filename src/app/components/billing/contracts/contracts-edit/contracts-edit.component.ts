@@ -8,11 +8,16 @@ import { ContractsAsideUserDeviceEditComponent } from './contracts-aside-user-de
 import { ContractsAsideProductServiceEditComponent } from './contracts-aside-product-service-edit/contracts-aside-product-service-edit.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { SubscriptionServicesService } from 'src/app/services/subscription-services/subscription-services.service';
+import { PreloaderTicketComponent } from '../../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../../directives/disabled-btn/disabled-btn.directive';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-contracts-edit',
-  templateUrl: './contracts-edit.component.html',
-  styleUrls: ['./contracts-edit.component.scss']
+    selector: 'app-contracts-edit',
+    templateUrl: './contracts-edit.component.html',
+    styleUrls: ['./contracts-edit.component.scss'],
+    standalone: true,
+    imports: [NgIf, ContractsAsideHourlyEditComponent, ContractsAsideBlockTimeEditComponent, ContractsAsideUserDeviceEditComponent, ContractsAsideProductServiceEditComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class ContractsEditComponent implements OnInit {
   @ViewChild('hourlyContract', { static: false }) hourlyContract: ContractsAsideHourlyEditComponent;

@@ -18,23 +18,22 @@ describe('TicketDetailProfileUpdatesServiceInfoComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         CommonModule,
         DynamicTooltipModule,
         TechUsersModule,
         DatePickerModule,
         NoopAnimationsModule],
-      declarations: [TicketDetailProfileUpdatesServiceInfoComponent
-      ],
-      providers: [TicketsListService]
-    }).compileComponents();
+    declarations: [TicketDetailProfileUpdatesServiceInfoComponent],
+    providers: [TicketsListService]
+}).compileComponents();
 
   });
 

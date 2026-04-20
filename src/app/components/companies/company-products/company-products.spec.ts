@@ -27,21 +27,19 @@ describe('CompanyProductsComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         MatErrorModule,
         HttpClientModule,
         RouterTestingModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      providers: [{ provide: Router, useValue: mockRouter }],
-      declarations: [CompanyProductsComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, CompanyProductsComponent],
+    providers: [{ provide: Router, useValue: mockRouter }],
+}).compileComponents();
 
   });
   it('check "calculateSumPrices"', () => {

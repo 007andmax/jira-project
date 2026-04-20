@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TicketStatusFilter } from '../../class/ticket-status-filter';
 
 @Component({
-  selector: 'tickets-filter-status',
-  templateUrl: './tickets-filter-status.component.html',
-  styleUrls: ['./tickets-filter-status.component.scss']
+    selector: 'tickets-filter-status',
+    templateUrl: './tickets-filter-status.component.html',
+    styleUrls: ['./tickets-filter-status.component.scss'],
+    standalone: true
 })
 export class TicketsFilterStatusComponent implements OnInit {
   @Input() ticketsStatus: Array<TicketStatusFilter> = [];

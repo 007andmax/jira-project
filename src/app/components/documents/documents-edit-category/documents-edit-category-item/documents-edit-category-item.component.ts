@@ -4,10 +4,11 @@ import { Company } from 'src/app/interfaces/company/company';
 import { DocumentEditCategory } from '../class/document-edit-category';
 
 @Component({
-  selector: 'documents-edit-category-item',
-  templateUrl: './documents-edit-category-item.component.html',
-  styleUrls: ['./documents-edit-category-item.component.scss'],
-  providers: [TicketsListService],
+    selector: 'documents-edit-category-item',
+    templateUrl: './documents-edit-category-item.component.html',
+    styleUrls: ['./documents-edit-category-item.component.scss'],
+    providers: [TicketsListService],
+    standalone: true,
 })
 export class DocumentsEditCategoryItemComponent implements OnInit {
   @Input() company: Company;

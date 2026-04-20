@@ -18,9 +18,10 @@ import { CompanyDevicesAsideSystemComponent } from './company-devices-aside-syst
 import { CompanyDevicesAsideNetworkTabComponent } from './company-devices-aside-network-tab/company-devices-aside-network-tab.component';
 
 @Component({
-  selector: 'app-company-devices-aside',
-  templateUrl: './company-devices-aside.component.html',
-  styleUrls: ['./company-devices-aside.component.scss']
+    selector: 'app-company-devices-aside',
+    templateUrl: './company-devices-aside.component.html',
+    styleUrls: ['./company-devices-aside.component.scss'],
+    standalone: true
 })
 export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
   @Input() companyId: string;

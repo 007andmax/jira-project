@@ -14,9 +14,10 @@ import { QuoteRealTimeService } from '../quote-realtime/quote-realtime.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
-  selector: 'app-quote-aside-preview',
-  templateUrl: './quote-aside-preview.component.html',
-  styleUrls: ['./quote-aside-preview.component.scss']
+    selector: 'app-quote-aside-preview',
+    templateUrl: './quote-aside-preview.component.html',
+    styleUrls: ['./quote-aside-preview.component.scss'],
+    standalone: true
 })
 export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
   quote: QuotePreview;

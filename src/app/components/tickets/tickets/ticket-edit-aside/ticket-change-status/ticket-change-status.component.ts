@@ -11,12 +11,16 @@ import { StatusColor } from '../../../class/status-color';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { TicketsPermissionsService } from '../services/tickets-permissions.service';
+import { NgIf, NgStyle, NgFor } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-ticket-change-status',
-  templateUrl: './ticket-change-status.component.html',
-  styleUrls: ['./ticket-change-status.component.scss'],
-  providers: [TicketsPermissionsService]
+    selector: 'app-ticket-change-status',
+    templateUrl: './ticket-change-status.component.html',
+    styleUrls: ['./ticket-change-status.component.scss'],
+    providers: [TicketsPermissionsService],
+    standalone: true,
+    imports: [NgbDropdownModule, NgIf, NgStyle, NgFor]
 })
 export class TicketChangeStatusComponent implements OnInit, OnDestroy {
   @Input() ticketProfile: TicketProfile = new TicketProfile();

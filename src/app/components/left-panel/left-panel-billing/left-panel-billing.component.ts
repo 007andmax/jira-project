@@ -6,14 +6,18 @@ import { ContractsStateService } from 'src/app/states/contracts/contracts-state.
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { RightClickBlankDirective } from '../../../directives/right-click-blank/right-click-blank.directive';
+import { NgClass, NgIf } from '@angular/common';
 
 /**
  * Left panel billing component
  */
 @Component({
-  selector: 'app-left-panel-billing',
-  templateUrl: './left-panel-billing.component.html',
-  styleUrls: ['./left-panel-billing.component.scss']
+    selector: 'app-left-panel-billing',
+    templateUrl: './left-panel-billing.component.html',
+    styleUrls: ['./left-panel-billing.component.scss'],
+    standalone: true,
+    imports: [NgClass, RightClickBlankDirective, NgIf]
 })
 export class LeftPanelBillingComponent implements OnInit, OnDestroy {
   open: boolean = false;

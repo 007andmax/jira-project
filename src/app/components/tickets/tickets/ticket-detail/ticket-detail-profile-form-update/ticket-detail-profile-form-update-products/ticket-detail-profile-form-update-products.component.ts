@@ -8,9 +8,10 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
-  selector: 'ticket-detail-profile-form-update-products',
-  templateUrl: './ticket-detail-profile-form-update-products.component.html',
-  styleUrls: ['./ticket-detail-profile-form-update-products.component.scss']
+    selector: 'ticket-detail-profile-form-update-products',
+    templateUrl: './ticket-detail-profile-form-update-products.component.html',
+    styleUrls: ['./ticket-detail-profile-form-update-products.component.scss'],
+    standalone: true
 })
 export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, OnDestroy {
   isUpdate: boolean = false;

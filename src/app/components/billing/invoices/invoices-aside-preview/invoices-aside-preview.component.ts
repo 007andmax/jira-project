@@ -13,9 +13,10 @@ import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 @Component({
-  selector: 'app-invoices-aside-preview',
-  templateUrl: './invoices-aside-preview.component.html',
-  styleUrls: ['./invoices-aside-preview.component.scss']
+    selector: 'app-invoices-aside-preview',
+    templateUrl: './invoices-aside-preview.component.html',
+    styleUrls: ['./invoices-aside-preview.component.scss'],
+    standalone: true
 })
 export class InvoicesAsidePreviewComponent implements OnInit {
   open: boolean = false;

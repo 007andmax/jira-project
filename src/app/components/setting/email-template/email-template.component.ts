@@ -17,12 +17,13 @@ import { ConfirmComponent } from "../../shared/confirm/confirm.component";
 declare var $: any;
 
 @Component({
-  selector: "app-email-template",
-  templateUrl: "./email-template.component.html",
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ["./email-template.component.scss"]
+    selector: "app-email-template",
+    templateUrl: "./email-template.component.html",
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ["./email-template.component.scss"],
+    standalone: true
 })
 export class EmailTempleteComponent implements OnInit, OnDestroy {
   loading = true;

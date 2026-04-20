@@ -7,11 +7,15 @@ import { DocumentsStateService } from 'src/app/states/documents/documents-state.
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DocumentCategoryAdd } from '../../documents/documents-add/class/document-category-add';
 import { CategoryDocument } from './class/category-document';
+import { RightClickBlankDirective } from '../../../directives/right-click-blank/right-click-blank.directive';
+import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-left-panel-documents',
-  templateUrl: './left-panel-documents.component.html',
-  styleUrls: ['./left-panel-documents.component.scss']
+    selector: 'app-left-panel-documents',
+    templateUrl: './left-panel-documents.component.html',
+    styleUrls: ['./left-panel-documents.component.scss'],
+    standalone: true,
+    imports: [NgClass, RightClickBlankDirective]
 })
 export class LeftPanelDocumentsComponent implements OnInit, OnDestroy {
   open: boolean = false;

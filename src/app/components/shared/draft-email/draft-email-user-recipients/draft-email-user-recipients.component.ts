@@ -1,17 +1,25 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { UntypedFormControl } from '@angular/forms';
+import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { User } from '../../../users/class/user';
 import { USER } from 'src/app/const/users';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
+import { MatErrorComponent } from '../../mat-error/mat-error.component';
+import { MatChipComponent } from '../../mat-chip/mat-chip.component';
+import { MatChipListComponent } from '../../mat-chip-list/mat-chip-list.component';
+import { MatFormFieldComponent } from '../../mat-form-field/mat-form-field.component';
+import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'draft-email-user-recipients',
-  templateUrl: './draft-email-user-recipients.component.html',
-  styleUrls: ['./draft-email-user-recipients.component.scss'],
-  providers: [TicketsListService]
+    selector: 'draft-email-user-recipients',
+    templateUrl: './draft-email-user-recipients.component.html',
+    styleUrls: ['./draft-email-user-recipients.component.scss'],
+    providers: [TicketsListService],
+    standalone: true,
+    imports: [NgbDropdownModule, NgClass, MatFormFieldComponent, MatChipListComponent, NgFor, MatChipComponent, FormsModule, ReactiveFormsModule, NgIf, MatErrorComponent, NgStyle]
 })
 export class DraftEmailUserRecipientsComponent implements OnInit {
   reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;

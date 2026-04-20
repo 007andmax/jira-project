@@ -1,19 +1,25 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbDropdownModule, NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { Subscription } from 'rxjs';
 import { CategoryProductitem } from 'src/class/category-product-item';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { ProductService } from 'src/app/services/product/product.service';
+import { FilterPipe } from '../../../pipe/filter/filter.pipe';
+import { DynamicTooltipComponent } from '../dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from '../mat-error/mat-error.component';
+import { NgIf, NgClass, NgFor, CurrencyPipe } from '@angular/common';
 
 /**
  * Product list component
  */
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss']
+    selector: 'app-product-list',
+    templateUrl: './product-list.component.html',
+    styleUrls: ['./product-list.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, NgIf, MatErrorComponent, NgClass, NgbAccordionModule, NgFor, DynamicTooltipComponent, CurrencyPipe, FilterPipe]
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   @ViewChild('products', { static: true }) products_dropDown: NgbDropdown;

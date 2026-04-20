@@ -5,12 +5,16 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import * as moment from "moment";
 import { PreviewFileStateService } from 'src/app/states/file-management/preview-file-state.service';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgClass, NgIf } from '@angular/common';
+import { DblclickDirective } from '../../../directives/dblclick/dblclick.directive';
 
 @Component({
-  selector: 'app-file-manager-item-file',
-  templateUrl: './file-manager-item-file.component.html',
-  styleUrls: ['./file-manager-item-file.component.scss']
+    selector: 'app-file-manager-item-file',
+    templateUrl: './file-manager-item-file.component.html',
+    styleUrls: ['./file-manager-item-file.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, DblclickDirective, NgClass, NgIf]
 })
 export class FileManagerItemFileComponent implements OnInit {
   @ViewChild('db', { static: true }) db: NgbDropdown;

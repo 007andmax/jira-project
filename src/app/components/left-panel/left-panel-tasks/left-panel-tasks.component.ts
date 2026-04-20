@@ -18,12 +18,16 @@ import { TasksFilters } from '../../tasks/class/tasks-filters';
 import { CompanySetting } from '../../companies/class/company-setting';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { User } from '../../users/class/user';
+import { RightClickBlankDirective } from '../../../directives/right-click-blank/right-click-blank.directive';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-left-panel-tasks',
-  templateUrl: './left-panel-tasks.component.html',
-  styleUrls: ['./left-panel-tasks.component.scss'],
-  providers: [LeftPanelUsersService]
+    selector: 'app-left-panel-tasks',
+    templateUrl: './left-panel-tasks.component.html',
+    styleUrls: ['./left-panel-tasks.component.scss'],
+    providers: [LeftPanelUsersService],
+    standalone: true,
+    imports: [NgClass, RightClickBlankDirective, NgIf, NgFor]
 })
 export class LeftPanelTasksComponent {
   open: boolean = false;

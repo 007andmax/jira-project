@@ -1,10 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-report-list-item',
-  templateUrl: './report-list-item.component.html',
-  styleUrls: ['./report-list-item.component.scss']
+    selector: 'app-report-list-item',
+    templateUrl: './report-list-item.component.html',
+    styleUrls: ['./report-list-item.component.scss'],
+    standalone: true,
+    imports: [NgFor]
 })
 export class ReportListItemComponent implements OnInit {
   @Input() title: string;

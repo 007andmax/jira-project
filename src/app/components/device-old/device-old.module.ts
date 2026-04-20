@@ -5,18 +5,15 @@ import { DeviceOldRoutingModule } from './device-old-routing.module';
 import { NavOldComponent } from './nav/nav.component';
 import { RouterModule } from '@angular/router';
 import { TicketTaskComponent } from './ticket-task/ticket-task.component';
-import { TicketTaskModule } from './ticket-task/ticket-task.module';
+
 
 @NgModule({
-    declarations: [
-        DeviceOldComponent,
-        NavOldComponent
-    ],
     imports: [
-        CommonModule,
-        RouterModule,
-        DeviceOldRoutingModule,
-        TicketTaskModule
-    ],
+    CommonModule,
+    RouterModule,
+    DeviceOldRoutingModule,
+    DeviceOldComponent,
+    NavOldComponent
+],
 })
 export class DevicesOldModule { }

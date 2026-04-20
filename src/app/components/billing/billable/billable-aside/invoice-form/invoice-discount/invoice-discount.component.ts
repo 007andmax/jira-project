@@ -3,9 +3,10 @@ import { InvoiceDiscount } from './class/invoice-discount';
 import { BillableService } from 'src/app/services/billable/billable.service';
 
 @Component({
-  selector: 'app-invoice-discount',
-  templateUrl: './invoice-discount.component.html',
-  styleUrls: ['./invoice-discount.component.scss']
+    selector: 'app-invoice-discount',
+    templateUrl: './invoice-discount.component.html',
+    styleUrls: ['./invoice-discount.component.scss'],
+    standalone: true
 })
 export class InvoiceDiscountComponent implements OnInit {
   @Input() lockId: string;

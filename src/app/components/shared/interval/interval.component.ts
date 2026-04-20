@@ -8,10 +8,11 @@ import { Subscription } from 'rxjs';
 
 
 @Component({
-  selector: 'app-interval',
-  templateUrl: './interval.component.html',
-  styleUrls: ['./interval.component.scss'],
-  providers: [IntervalService]
+    selector: 'app-interval',
+    templateUrl: './interval.component.html',
+    styleUrls: ['./interval.component.scss'],
+    providers: [IntervalService],
+    standalone: true
 })
 export class IntervalComponent implements OnInit, OnDestroy {
 

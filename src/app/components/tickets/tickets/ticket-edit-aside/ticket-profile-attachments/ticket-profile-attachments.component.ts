@@ -9,12 +9,15 @@ import { OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { TicketsPermissionsService } from '../services/tickets-permissions.service';
+import { NgFor, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-ticket-profile-attachments',
-  templateUrl: './ticket-profile-attachments.component.html',
-  styleUrls: ['./ticket-profile-attachments.component.scss'],
-  providers: [TicketsPermissionsService]
+    selector: 'app-ticket-profile-attachments',
+    templateUrl: './ticket-profile-attachments.component.html',
+    styleUrls: ['./ticket-profile-attachments.component.scss'],
+    providers: [TicketsPermissionsService],
+    standalone: true,
+    imports: [NgFor, NgClass]
 })
 export class TicketProfileAttachmentsComponent implements OnInit, OnDestroy {
   @Input() attachments: Array<TicketProfileAttachment> = [];

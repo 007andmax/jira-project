@@ -4,11 +4,16 @@ import { TerminalService } from '../../_services/terminal.service';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
+import { NgClass, NgIf, NgFor } from '@angular/common';
+import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'terminal-script-detail',
-  templateUrl: './terminal-script-detail.component.html',
-  styleUrls: ['./terminal-script-detail.component.scss']
+    selector: 'terminal-script-detail',
+    templateUrl: './terminal-script-detail.component.html',
+    styleUrls: ['./terminal-script-detail.component.scss'],
+    standalone: true,
+    imports: [FormsModule, DropDownComponent, NgClass, NgIf, NgFor]
 })
 export class TerminalScriptDetailComponent implements OnInit {
   @Input() scriptDetailModal: script = {

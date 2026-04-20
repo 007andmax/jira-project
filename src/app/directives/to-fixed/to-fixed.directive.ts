@@ -1,7 +1,8 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
-  selector: '[appToFixed]'
+    selector: '[appToFixed]',
+    standalone: true
 })
 export class ToFixedDirective {
   @Input("count") count: number = 2;

@@ -4,11 +4,17 @@ import { Ticket } from '../../../class/ticket';
 import * as moment from 'moment';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { StatusColor } from '../../../class/status-color';
+import { TextAreaDirective } from '../../../../../directives/text-area/text-area.directive';
+import { FormsModule } from '@angular/forms';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgClass, NgIf, NgStyle } from '@angular/common';
 
 @Component({
-  selector: 'app-merge-tickets-edit-item',
-  templateUrl: './merge-tickets-edit-item.component.html',
-  styleUrls: ['./merge-tickets-edit-item.component.scss']
+    selector: 'app-merge-tickets-edit-item',
+    templateUrl: './merge-tickets-edit-item.component.html',
+    styleUrls: ['./merge-tickets-edit-item.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, NgbDropdownModule, FormsModule, TextAreaDirective, NgStyle]
 })
 export class MergeTicketsEditItemComponent implements OnInit {
   @Input() mergeTicket: MergeTickets;

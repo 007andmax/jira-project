@@ -1,11 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Company } from 'src/app/interfaces/company/company';
 import { ContractsComponent } from '../../billing/contracts/contracts.component';
+import { ContractsEditComponent } from '../../billing/contracts/contracts-edit/contracts-edit.component';
+import { ContractsAsideComponent } from '../../billing/contracts/contracts-aside/contracts-aside.component';
+import { ContractsPreviewComponent } from '../../billing/contracts/contracts-preview/contracts-preview.component';
+import { ContractsTableComponent } from '../../billing/contracts/contracts-table/contracts-table.component';
+import { ContractsHeaderComponent } from '../../billing/contracts/contracts-header/contracts-header.component';
+import { NgIf } from '@angular/common';
+import { ContractsReviewComponent } from '../../billing/contracts/contracts-review/contracts-review.component';
 
 @Component({
-  selector: 'app-company-contracts',
-  templateUrl: './company-contracts.component.html',
-  styleUrls: ['./company-contracts.component.scss']
+    selector: 'app-company-contracts',
+    templateUrl: './company-contracts.component.html',
+    styleUrls: ['./company-contracts.component.scss'],
+    standalone: true,
+    imports: [ContractsReviewComponent, NgIf, ContractsHeaderComponent, ContractsTableComponent, ContractsPreviewComponent, ContractsAsideComponent, ContractsEditComponent]
 })
 export class CompanyContractsComponent extends ContractsComponent implements OnInit {
   companyContracts: Company = null;

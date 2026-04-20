@@ -10,11 +10,19 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ManufacturesCheckUseComponent } from '../manufactures-check-use/manufactures-check-use.component';
 import { DeviceSettingModelsComponent } from '../device-setting-models/device-setting-models.component';
+import { DynamicTooltipComponent } from '../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { KeyUpEnterDirective } from '../../../../directives/key-up-enter/key-up-enter.directive';
+import { FormsModule } from '@angular/forms';
+import { ClickOutsideDirective } from '../../../../directives/click-otside/click-otside.directive';
+import { DeviceSettingManufacturesAddComponent } from './device-setting-manufactures-add/device-setting-manufactures-add.component';
+import { NgIf, NgClass, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-device-setting-manufactures',
-  templateUrl: './device-setting-manufactures.component.html',
-  styleUrls: ['./device-setting-manufactures.component.scss']
+    selector: 'app-device-setting-manufactures',
+    templateUrl: './device-setting-manufactures.component.html',
+    styleUrls: ['./device-setting-manufactures.component.scss'],
+    standalone: true,
+    imports: [NgIf, DeviceSettingManufacturesAddComponent, NgClass, NgFor, ClickOutsideDirective, FormsModule, KeyUpEnterDirective, DynamicTooltipComponent, DeviceSettingModelsComponent]
 })
 export class DeviceSettingManufacturesComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;

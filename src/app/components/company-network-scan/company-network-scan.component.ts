@@ -24,13 +24,14 @@ import { ConfirmStateService } from '../shared/confirm/services/confirm-state.se
 import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
-  selector: 'company-network-scan',
-  templateUrl: './company-network-scan.component.html',
-  styleUrls: ['./company-network-scan.component.scss'],
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  providers: [CompanyNetworkScanService]
+    selector: 'company-network-scan',
+    templateUrl: './company-network-scan.component.html',
+    styleUrls: ['./company-network-scan.component.scss'],
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    providers: [CompanyNetworkScanService],
+    standalone: true
 })
 export class CompanyNetworkScanComponent implements OnInit {
   @ViewChild('btnInstallAgent', { static: false }) btnInstallAgent: DisabledBtnDirective;

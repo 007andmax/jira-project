@@ -1,10 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserDefaultSubscription } from '../../class/user-default-subscription';
+import { NgClass, NgIf } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'user-default-subscription',
-  templateUrl: './user-default-subscription.component.html',
-  styleUrls: ['./user-default-subscription.component.scss']
+    selector: 'user-default-subscription',
+    templateUrl: './user-default-subscription.component.html',
+    styleUrls: ['./user-default-subscription.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, NgClass, NgIf]
 })
 export class UserDefaultSubscriptionComponent implements OnInit {
   @Input() defaultSubscriptions: UserDefaultSubscription;

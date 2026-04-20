@@ -21,10 +21,11 @@ import { InventoryStateService } from 'src/app/states/inventory/inventory-state.
 import { AssignedTicketUserComponent } from '../../tickets/ticket-add-aside/assigned-ticket-user/assigned-ticket-user.component';
 
 @Component({
-  selector: 'app-recurring-tickets-add-aside',
-  templateUrl: './recurring-tickets-add-aside.component.html',
-  styleUrls: ['./recurring-tickets-add-aside.component.scss'],
-  providers: [RecurringTicketsService]
+    selector: 'app-recurring-tickets-add-aside',
+    templateUrl: './recurring-tickets-add-aside.component.html',
+    styleUrls: ['./recurring-tickets-add-aside.component.scss'],
+    providers: [RecurringTicketsService],
+    standalone: true
 })
 export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
 

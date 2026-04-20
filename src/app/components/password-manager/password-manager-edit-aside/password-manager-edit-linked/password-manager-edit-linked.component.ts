@@ -8,11 +8,19 @@ import { PasswordDeviceUser } from '../../class/password-device-user';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
 import { Subscription } from 'rxjs';
+import { MatChipComponent } from '../../../shared/mat-chip/mat-chip.component';
+import { NgFor, NgIf } from '@angular/common';
+import { MatChipListComponent } from '../../../shared/mat-chip-list/mat-chip-list.component';
+import { MatFormFieldComponent } from '../../../shared/mat-form-field/mat-form-field.component';
+import { ClickOutsideDirective } from '../../../../directives/click-otside/click-otside.directive';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-password-manager-edit-linked',
-  templateUrl: './password-manager-edit-linked.component.html',
-  styleUrls: ['./password-manager-edit-linked.component.scss']
+    selector: 'app-password-manager-edit-linked',
+    templateUrl: './password-manager-edit-linked.component.html',
+    styleUrls: ['./password-manager-edit-linked.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, ClickOutsideDirective, MatFormFieldComponent, MatChipListComponent, NgFor, MatChipComponent, NgIf]
 })
 export class PasswordManagerEditLinkedComponent implements OnInit, OnDestroy {
   @Input() selectedUserAndDevices: Array<PasswordDeviceUser> = [];

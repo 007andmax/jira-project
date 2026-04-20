@@ -18,10 +18,11 @@ import { TicketStateService } from '../../ticket-edit-aside/services/ticket-stat
 import { TicketDetailProfileFormUpdateNoteComponent } from '../ticket-detail-profile-form-update/ticket-detail-profile-form-update-note/ticket-detail-profile-form-update-note.component';
 
 @Component({
-  selector: 'app-ticket-detail-note-modal',
-  templateUrl: './ticket-detail-note-modal.component.html',
-  styleUrls: ['./ticket-detail-note-modal.component.scss'],
-  providers: [TicketsListService, NgbModalConfig, NgbModal]
+    selector: 'app-ticket-detail-note-modal',
+    templateUrl: './ticket-detail-note-modal.component.html',
+    styleUrls: ['./ticket-detail-note-modal.component.scss'],
+    providers: [TicketsListService, NgbModalConfig, NgbModal],
+    standalone: true
 })
 export class TicketDetailNoteModalComponent extends TicketDetailProfileFormUpdateComponent {
   @ViewChild('selectNote', { static: true }) selectNote: TicketDetailProfileFormUpdateNoteComponent;

@@ -21,9 +21,10 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { UserChange } from '../users/class/user-change';
 
 @Component({
-  selector: 'app-users-details',
-  templateUrl: './users-details.component.html',
-  styleUrls: ['./users-details.component.scss']
+    selector: 'app-users-details',
+    templateUrl: './users-details.component.html',
+    styleUrls: ['./users-details.component.scss'],
+    standalone: true
 })
 export class UsersDetailsComponent implements OnInit {
   tab: string = 'companies';

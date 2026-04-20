@@ -4,11 +4,16 @@ import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { MarketingSubscriptionType } from 'src/app/components/setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-marketing-subscriptions-add',
-  templateUrl: './marketing-subscriptions-add.component.html',
-  styleUrls: ['./marketing-subscriptions-add.component.scss']
+    selector: 'app-marketing-subscriptions-add',
+    templateUrl: './marketing-subscriptions-add.component.html',
+    styleUrls: ['./marketing-subscriptions-add.component.scss'],
+    standalone: true,
+    imports: [NgClass, FormsModule, NgIf, MatErrorComponent]
 })
 export class MarketingSubscriptionsAddComponent implements OnInit {
   name: string = "";

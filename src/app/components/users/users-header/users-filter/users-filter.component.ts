@@ -27,10 +27,11 @@ import { UsersFilterCustomSubscriptionsComponent } from './users-filter-custom-s
 import { UsersFilterDefaultSubscriptionComponent } from './users-filter-default-subscription/users-filter-default-subscription.component';
 
 @Component({
-  selector: 'app-users-filter',
-  templateUrl: './users-filter.component.html',
-  styleUrls: ['./users-filter.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-users-filter',
+    templateUrl: './users-filter.component.html',
+    styleUrls: ['./users-filter.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
 })
 export class UsersFilterComponent implements OnInit, OnDestroy {
   @ViewChild('defaultSubscription', { static: true }) defaultSubscription: UsersFilterDefaultSubscriptionComponent;

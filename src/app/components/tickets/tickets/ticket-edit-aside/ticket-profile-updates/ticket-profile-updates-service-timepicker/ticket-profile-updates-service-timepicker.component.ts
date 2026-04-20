@@ -5,11 +5,15 @@ import "timepicker";
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { Subscription } from 'rxjs';
+import { MatErrorComponent } from '../../../../../shared/mat-error/mat-error.component';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-ticket-profile-updates-service-timepicker',
-  templateUrl: './ticket-profile-updates-service-timepicker.component.html',
-  styleUrls: ['./ticket-profile-updates-service-timepicker.component.scss']
+    selector: 'app-ticket-profile-updates-service-timepicker',
+    templateUrl: './ticket-profile-updates-service-timepicker.component.html',
+    styleUrls: ['./ticket-profile-updates-service-timepicker.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, MatErrorComponent]
 })
 export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit, OnDestroy {
   @Input() start: number = 0;

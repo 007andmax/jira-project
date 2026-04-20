@@ -18,24 +18,22 @@ describe('CompanyDevicesTagsComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
-              ReactiveFormsModule,
-              FormsModule,
-              NgbModule,
-              InfiniteScrollModule,
-              MatChipModule,
-              MatFormFieldModule,
-              MatChipListModule,
+    imports: [CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        NgbModule,
+        InfiniteScrollModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [CompanyDevicesTagsComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, CompanyDevicesTagsComponent],
+}).compileComponents();
 
   });
   it('check "setSelectedTag"', () => {

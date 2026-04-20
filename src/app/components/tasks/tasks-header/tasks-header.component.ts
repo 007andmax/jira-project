@@ -4,9 +4,10 @@ import { TasksFilters } from '../class/tasks-filters';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-tasks-header',
-  templateUrl: './tasks-header.component.html',
-  styleUrls: ['./tasks-header.component.scss']
+    selector: 'app-tasks-header',
+    templateUrl: './tasks-header.component.html',
+    styleUrls: ['./tasks-header.component.scss'],
+    standalone: true
 })
 export class TasksHeaderComponent {
   toggleFilter: boolean = false;

@@ -9,9 +9,10 @@ import { ManageCardsStateService } from 'src/app/states/manage-cards/manage-card
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
 
 @Component({
-  selector: 'app-manage-cards-header',
-  templateUrl: './manage-cards-header.component.html',
-  styleUrls: ['./manage-cards-header.component.scss']
+    selector: 'app-manage-cards-header',
+    templateUrl: './manage-cards-header.component.html',
+    styleUrls: ['./manage-cards-header.component.scss'],
+    standalone: true
 })
 export class ManageCardsHeaderComponent {
   toggleFilter: boolean = false;

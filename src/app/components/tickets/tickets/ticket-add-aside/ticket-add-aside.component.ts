@@ -29,13 +29,23 @@ import { AssignedTicketUserComponent } from './assigned-ticket-user/assigned-tic
 import { Company } from 'src/app/interfaces/company/company';
 import { UsersDropDownComponent } from 'src/app/components/shared/users-drop-down/users-drop-down.component';
 import { UserCustomerCompaniesInfo } from 'src/app/components/users/class/user-customer-companies-info';
+import { PreloaderTicketComponent } from '../../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../../directives/disabled-btn/disabled-btn.directive';
+import { UsersDropDownComponent as UsersDropDownComponent_1 } from '../../../shared/users-drop-down/users-drop-down.component';
+import { CompanyDropDownComponent } from '../../../shared/company-drop-down/company-drop-down.component';
+import { PriorityLevelDropDownComponent } from './priority-level-drop-down/priority-level-drop-down.component';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { NgClass, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 
 
 @Component({
-  selector: 'app-ticket-add-aside',
-  templateUrl: './ticket-add-aside.component.html',
-  styleUrls: ['./ticket-add-aside.component.scss']
+    selector: 'app-ticket-add-aside',
+    templateUrl: './ticket-add-aside.component.html',
+    styleUrls: ['./ticket-add-aside.component.scss'],
+    standalone: true,
+    imports: [FormsModule, NgClass, NgIf, MatErrorComponent, PriorityLevelDropDownComponent, CompanyUsersDropDownComponent, CompanyDropDownComponent, UsersDropDownComponent_1, DropDownComponent, UploadAreaComponent, AssignedTicketUserComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class TicketAddAsideComponent implements OnInit, OnDestroy {
   @ViewChild('userDP', { static: false }) userDP: CompanyUsersDropDownComponent;

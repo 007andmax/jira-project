@@ -6,11 +6,22 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { NgClass, NgIf, NgFor } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-tech-users-list-report',
-  templateUrl: './tech-users-list-report.component.html',
-  styleUrls: ['./tech-users-list-report.component.scss'],
+    selector: 'app-tech-users-list-report',
+    templateUrl: './tech-users-list-report.component.html',
+    styleUrls: ['./tech-users-list-report.component.scss'],
+    standalone: true,
+    imports: [
+        NgbDropdownModule,
+        NgClass,
+        NgIf,
+        MatErrorComponent,
+        NgFor,
+    ],
 })
 export class TechUsersListReportComponent extends DropDownComponent {
   sub: Subscription = new Subscription();

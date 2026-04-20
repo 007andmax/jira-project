@@ -25,9 +25,10 @@ import { CompanyProfileAddress } from 'src/app/components/companies/class/compan
 import { InvoiceTicketsService } from 'src/app/services/accounting/accounting-settings.service';
 
 @Component({
-  selector: 'app-invoice-form',
-  templateUrl: './invoice-form.component.html',
-  styleUrls: ['./invoice-form.component.scss']
+    selector: 'app-invoice-form',
+    templateUrl: './invoice-form.component.html',
+    styleUrls: ['./invoice-form.component.scss'],
+    standalone: true
 })
 export class InvoiceFormComponent implements OnInit, OnDestroy {
   @ViewChild('companyEdit', { static: true }) companyEdit: InvoiceFormEditCustomerComponent;

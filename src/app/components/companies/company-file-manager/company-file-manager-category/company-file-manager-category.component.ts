@@ -8,9 +8,10 @@ import { FileManagerHeaderComponent } from 'src/app/components/file-manager/file
 import { REMOVE_CATEGORY_FILES, REMOVE_FILE } from 'src/app/const/confirm';
 
 @Component({
-  selector: 'app-company-file-manager-category',
-  templateUrl: './company-file-manager-category.component.html',
-  styleUrls: ['./company-file-manager-category.component.scss']
+    selector: 'app-company-file-manager-category',
+    templateUrl: './company-file-manager-category.component.html',
+    styleUrls: ['./company-file-manager-category.component.scss'],
+    standalone: true
 })
 export class CompanyFileManagerCategoryComponent extends FileManagerCategoryComponent {
   ngOnInit() {

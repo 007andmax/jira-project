@@ -3,11 +3,14 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { DocumentTemplateFilter } from '../../../class/document-template-filter';
 import { Subscription } from 'rxjs';
+import { DropDownComponent as DropDownComponent_1 } from '../../../../shared/drop-down/drop-down.component';
 
 @Component({
-  selector: 'documents-templates-filter',
-  templateUrl: './documents-templates-filter.component.html',
-  styleUrls: ['./documents-templates-filter.component.scss']
+    selector: 'documents-templates-filter',
+    templateUrl: './documents-templates-filter.component.html',
+    styleUrls: ['./documents-templates-filter.component.scss'],
+    standalone: true,
+    imports: [DropDownComponent_1]
 })
 export class DocumentsTemplatesFilterComponent implements OnInit, OnDestroy {
   categories: Array<any> = [];

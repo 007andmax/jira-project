@@ -4,11 +4,18 @@ import { PasswordManagerService } from 'src/app/services/password-manager/passwo
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
 import { PasswordRecordCategories } from '../class/password-record-categories';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../directives/disabled-btn/disabled-btn.directive';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-password-manager-add-category',
-  templateUrl: './password-manager-add-category.component.html',
-  styleUrls: ['./password-manager-add-category.component.scss']
+    selector: 'app-password-manager-add-category',
+    templateUrl: './password-manager-add-category.component.html',
+    styleUrls: ['./password-manager-add-category.component.scss'],
+    standalone: true,
+    imports: [NgClass, FormsModule, NgIf, MatErrorComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class PasswordManagerAddCategoryComponent implements OnInit, OnDestroy {
   @Output() onClose: EventEmitter<any> = new EventEmitter();

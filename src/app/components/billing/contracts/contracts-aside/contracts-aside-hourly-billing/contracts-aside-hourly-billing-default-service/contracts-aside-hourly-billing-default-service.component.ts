@@ -1,11 +1,19 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 import { DefaultServicesHourlyContract } from '../../class/default-service-hourly-contract';
+import { numberDirective } from '../../../../../../directives/number/number.directive';
+import { TaxesComponent as TaxesComponent_1 } from '../../../../../shared/taxes/taxes.component';
+import { DecimalNumberDirective } from '../../../../../../directives/decimal-number/decimal-number.directive';
+import { MatErrorComponent } from '../../../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-contracts-aside-hourly-billing-default-service',
-  templateUrl: './contracts-aside-hourly-billing-default-service.component.html',
-  styleUrls: ['./contracts-aside-hourly-billing-default-service.component.scss']
+    selector: 'app-contracts-aside-hourly-billing-default-service',
+    templateUrl: './contracts-aside-hourly-billing-default-service.component.html',
+    styleUrls: ['./contracts-aside-hourly-billing-default-service.component.scss'],
+    standalone: true,
+    imports: [NgClass, FormsModule, NgIf, MatErrorComponent, DecimalNumberDirective, TaxesComponent_1, numberDirective]
 })
 export class ContractsAsideHourlyBillingDefaultServiceComponent implements OnInit {
   @Input() defaultService: DefaultServicesHourlyContract;

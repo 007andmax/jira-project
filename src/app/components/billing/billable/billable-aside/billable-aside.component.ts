@@ -19,9 +19,10 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
-  selector: 'app-billable-aside',
-  templateUrl: './billable-aside.component.html',
-  styleUrls: ['./billable-aside.component.scss']
+    selector: 'app-billable-aside',
+    templateUrl: './billable-aside.component.html',
+    styleUrls: ['./billable-aside.component.scss'],
+    standalone: true
 })
 export class BillableAsideComponent implements OnInit, OnDestroy {
   @Output() onSetSelectedTickets = new EventEmitter();

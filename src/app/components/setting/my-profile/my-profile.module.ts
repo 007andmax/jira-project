@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { AgmCoreModule } from '@agm/core';
 import { MyProfileRoutingModule } from './my-profile-routing.module';
-import { DropDownModule } from '../../shared/drop-down/drop-down.module';
+
 import { SignatureComponent } from './signature/signature.component';
 import { AddSignatureComponent } from './signature/add-signature/add-signature.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -32,20 +32,19 @@ import { TicketsMyProfileComponent } from './tickets-my-profile/tickets-my-profi
         TicketsMyProfileComponent
     ],
     imports: [
-        CommonModule,
-        NgbModule,
-        AngularEditorModule,
-        ImageCropperModule,
-        ReactiveFormsModule,
-        NgxMaskModule.forRoot(),
-        FormsModule,
-        AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
-        }),
-        MyProfileRoutingModule,
-        DropDownModule,
-        NgbNavModule
-    ],
+    CommonModule,
+    NgbModule,
+    AngularEditorModule,
+    ImageCropperModule,
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(),
+    FormsModule,
+    AgmCoreModule.forRoot({
+        apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
+    }),
+    MyProfileRoutingModule,
+    NgbNavModule
+],
 
 
 

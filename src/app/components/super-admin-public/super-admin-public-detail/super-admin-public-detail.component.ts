@@ -9,9 +9,10 @@ import { SupportPageCategoriesStateService } from '../../super-admin/state/suppo
 import { SupportPageCategoryContent } from '../../super-admin/support-page/class/support-page-category-content';
 
 @Component({
-  selector: 'super-admin-public-detail',
-  templateUrl: './super-admin-public-detail.component.html',
-  styleUrls: ['./super-admin-public-detail.component.scss']
+    selector: 'super-admin-public-detail',
+    templateUrl: './super-admin-public-detail.component.html',
+    styleUrls: ['./super-admin-public-detail.component.scss'],
+    standalone: true
 })
 export class SuperAdminPublicDetailComponent implements OnInit, OnDestroy {
   _id: string = '';

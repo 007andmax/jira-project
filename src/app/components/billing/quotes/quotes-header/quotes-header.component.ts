@@ -10,9 +10,10 @@ import { ARCHIVE_QUOTES } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 
 @Component({
-  selector: 'app-quotes-header',
-  templateUrl: './quotes-header.component.html',
-  styleUrls: ['./quotes-header.component.scss']
+    selector: 'app-quotes-header',
+    templateUrl: './quotes-header.component.html',
+    styleUrls: ['./quotes-header.component.scss'],
+    standalone: true
 })
 export class QuotesHeaderComponent implements OnInit {
   @ViewChild('filter', { static: true }) filter: QuotesFilterComponent;

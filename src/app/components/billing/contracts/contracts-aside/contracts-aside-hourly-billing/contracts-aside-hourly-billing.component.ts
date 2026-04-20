@@ -15,10 +15,18 @@ import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-
 import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-aside-top.component';
 import { Subscription } from 'rxjs';
 import { ContractsAsideHourlyBillingDefaultServiceComponent } from './contracts-aside-hourly-billing-default-service/contracts-aside-hourly-billing-default-service.component';
+import { ContractsAsideEditHourlyAddDefaultServiceComponent } from '../../contracts-edit/contracts-aside-hourly-edit/contracts-aside-edit-hourly-add-default-service/contracts-aside-edit-hourly-add-default-service.component';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatErrorComponent } from '../../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf, NgFor } from '@angular/common';
+import { DatePickerComponent as DatePickerComponent_1 } from '../../../../shared/date-picker/date-picker.component';
 @Component({
-  selector: 'app-contracts-aside-hourly-billing',
-  templateUrl: './contracts-aside-hourly-billing.component.html',
-  styleUrls: ['./contracts-aside-hourly-billing.component.scss']
+    selector: 'app-contracts-aside-hourly-billing',
+    templateUrl: './contracts-aside-hourly-billing.component.html',
+    styleUrls: ['./contracts-aside-hourly-billing.component.scss'],
+    standalone: true,
+    imports: [ContractsAsideTopComponent, DatePickerComponent_1, NgClass, FormsModule, NgIf, MatErrorComponent, NgbTooltipModule, NgFor, ContractsAsideHourlyBillingDefaultServiceComponent, ContractsAsideEditHourlyAddDefaultServiceComponent]
 })
 export class ContractsAsideHourlyBillingComponent implements OnInit, OnDestroy {
   @Output() onInitRequestForAdd = new EventEmitter<any>();

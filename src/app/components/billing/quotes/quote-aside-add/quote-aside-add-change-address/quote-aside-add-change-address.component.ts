@@ -4,9 +4,10 @@ import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
-  selector: 'quote-aside-add-change-address',
-  templateUrl: './quote-aside-add-change-address.component.html',
-  styleUrls: ['./quote-aside-add-change-address.component.scss']
+    selector: 'quote-aside-add-change-address',
+    templateUrl: './quote-aside-add-change-address.component.html',
+    styleUrls: ['./quote-aside-add-change-address.component.scss'],
+    standalone: true
 })
 export class QuoteAsideAddChangeAddressComponent implements OnInit {
 

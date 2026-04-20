@@ -13,9 +13,10 @@ import { PaymentsService } from 'src/app/services/payments/payments.service';
 import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
-  selector: 'app-payments-aside',
-  templateUrl: './payments-aside.component.html',
-  styleUrls: ['./payments-aside.component.scss']
+    selector: 'app-payments-aside',
+    templateUrl: './payments-aside.component.html',
+    styleUrls: ['./payments-aside.component.scss'],
+    standalone: true
 })
 export class PaymentsAsideComponent implements OnInit {
   @Input() payment: Payment;

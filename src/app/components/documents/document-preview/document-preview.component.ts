@@ -10,14 +10,18 @@ import * as moment from "moment";
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { PreviewAttachmentStateService } from '../../tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'document-preview',
-  templateUrl: './document-preview.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./document-preview.component.scss']
+    selector: 'document-preview',
+    templateUrl: './document-preview.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./document-preview.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgbTooltipModule]
 })
 export class DocumentPreviewComponent implements OnInit {
   showPreloader: boolean = true;

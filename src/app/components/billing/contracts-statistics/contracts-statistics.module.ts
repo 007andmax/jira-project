@@ -5,19 +5,17 @@ import { ContractsStatisticsRoutingModule } from './contracts-statistics-routing
 import { ContractsStatisticsTableComponent } from './contracts-statistics-table/contracts-statistics-table.component';
 import { ContractsStatisticsTableItemComponent } from './contracts-statistics-table/contracts-statistics-table-item/contracts-statistics-table-item.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+
 
 
 @NgModule({
-    declarations: [ContractsStatisticsComponent,
-        ContractsStatisticsTableComponent,
-        ContractsStatisticsTableItemComponent
-    ],
     imports: [
-        CommonModule,
-        ContractsStatisticsRoutingModule,
-        NgbModule,
-        DynamicTooltipModule
-    ],
+    CommonModule,
+    ContractsStatisticsRoutingModule,
+    NgbModule,
+    ContractsStatisticsComponent,
+    ContractsStatisticsTableComponent,
+    ContractsStatisticsTableItemComponent
+],
 })
 export class ContractsStatisticsModule { }

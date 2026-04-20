@@ -2,11 +2,14 @@ import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angu
 import { TimeZone } from './class/time-zone';
 import { CompanyTimeZoneStateService } from './services/company-time-zone-state.service';
 import { Subscription } from 'rxjs';
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 
 @Component({
-  selector: 'app-company-time-zone',
-  templateUrl: './company-time-zone.component.html',
-  styleUrls: ['./company-time-zone.component.scss']
+    selector: 'app-company-time-zone',
+    templateUrl: './company-time-zone.component.html',
+    styleUrls: ['./company-time-zone.component.scss'],
+    standalone: true,
+    imports: [DropDownComponent]
 })
 export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
   @Output() selectedOffsetItem = new EventEmitter<any>();

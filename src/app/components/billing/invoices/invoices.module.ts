@@ -7,39 +7,28 @@ import { InvoicesItemComponent } from './invoices-item/invoices-item.component';
 import { InvoicesFilterComponent } from './invoices-header/invoices-filter/invoices-filter.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datepicker.module';
+
 import { InvoicesRoutingModule } from './invoices-routing.module';
-import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+
 import { InvoiceExportComponent } from './invoices-header/invoice-export/invoice-export.component';
-import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
-import { InvoiceExportModule } from './invoices-header/invoice-export/invoice-export.module';
-import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
-import { DropDownModule } from '../../shared/drop-down/drop-down.module';
+
+
+
+
 
 
 
 @NgModule({
-    declarations: [InvoicesComponent,
-        InvoicesHeaderComponent,
-        InvoicesItemComponent,
-        InvoicesFilterComponent
-
-    ],
     imports: [
-        CommonModule,
-        InfiniteScrollModule,
-        FormsModule,
-        NgbModule,
-        MultiDatepickerModule,
-        InvoicesRoutingModule,
-        KeyUpEnterModule,
-        DynamicTooltipModule,
-        InvoiceExportModule,
-        CompanyDropDownModule,
-        DropDownModule
-    ],
-
-
-
+    CommonModule,
+    InfiniteScrollModule,
+    FormsModule,
+    NgbModule,
+    InvoicesRoutingModule,
+    InvoicesComponent,
+    InvoicesHeaderComponent,
+    InvoicesItemComponent,
+    InvoicesFilterComponent
+],
 })
 export class InvoicesModule { }

@@ -3,16 +3,19 @@ import { CommissionService } from '../../../../services/commission/commission.se
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { CHANGE_COMMISSION_SERVICE, DELETE_COMMISSION_SERVICE } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { Subscription } from 'rxjs';
 import { ServiceCommissionFilter } from './class/service-commission-filter';
+import { NgIf, NgFor, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-service',
-  templateUrl: './service.component.html',
-  styleUrls: ['./service.component.scss']
+    selector: 'app-service',
+    templateUrl: './service.component.html',
+    styleUrls: ['./service.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgFor, NgbTooltipModule, NgClass]
 })
 export class ServiceComponent implements OnInit, OnDestroy {
   filter: ServiceCommissionFilter = new ServiceCommissionFilter();

@@ -7,10 +7,11 @@ import { REMOVE_RECORD } from 'src/app/const/confirm';
 import { PasswordRecord } from '../../password-manager/class/password-record';
 
 @Component({
-  selector: 'app-users-details-tab-passwords',
-  templateUrl: './users-details-tab-passwords.component.html',
-  styleUrls: ['./users-details-tab-passwords.component.scss'],
-  providers: [PasswordManagerListService]
+    selector: 'app-users-details-tab-passwords',
+    templateUrl: './users-details-tab-passwords.component.html',
+    styleUrls: ['./users-details-tab-passwords.component.scss'],
+    providers: [PasswordManagerListService],
+    standalone: true
 })
 export class UsersDetailsTabPasswordsComponent extends PasswordManagerComponent {
   @Input() user: User;

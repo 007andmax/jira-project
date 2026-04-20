@@ -44,7 +44,7 @@ describe('ContractsAsideBlockTimeBillingComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         DropDownModule,
         DatePickerModule,
         FormsModule,
@@ -69,21 +69,19 @@ describe('ContractsAsideBlockTimeBillingComponent unit test', () => {
         DatePickerIntervalsModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [ContractsAsideComponent,
+        NoopAnimationsModule, ContractsAsideComponent,
         ContractsAsideSelectTypeComponent,
         ContractsAsideHourlyBillingComponent,
         ContractsAsideBlockTimeBillingComponent,
         ContractsAsideUserDeviceBillingComponent,
         ContractsAsideProductServiceContractsComponent,
         ContractsAsideTopComponent,
-        ContractsAsideHourlyBillingDefaultServiceComponent
-      ]
-    }).compileComponents();
+        ContractsAsideHourlyBillingDefaultServiceComponent]
+}).compileComponents();
 
   });
   it('check "setDefaultTaxes"', () => {

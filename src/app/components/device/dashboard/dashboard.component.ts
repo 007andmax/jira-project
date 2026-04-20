@@ -18,13 +18,14 @@ import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 
 @Component({
-  selector: "app-dashboard",
-  templateUrl: "./dashboard.component.html",
-  styleUrls: ["./dashboard.component.scss"],
-  providers: [
-    { provide: NgbDateAdapter, useClass: CustomAdapter },
-    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
-  ],
+    selector: "app-dashboard",
+    templateUrl: "./dashboard.component.html",
+    styleUrls: ["./dashboard.component.scss"],
+    providers: [
+        { provide: NgbDateAdapter, useClass: CustomAdapter },
+        { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
+    ],
+    standalone: true,
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild(NgbDatepicker, { static: false }) expire: NgbDatepicker;

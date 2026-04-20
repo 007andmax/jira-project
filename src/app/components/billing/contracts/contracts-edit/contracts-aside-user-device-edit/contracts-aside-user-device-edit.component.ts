@@ -13,16 +13,29 @@ import * as moment from "moment";
 import { ServiceAgreementBlockTimeServices } from '../../class/service-agreement-block-time-services';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 import { ContractsAsideUserDeviceServiceComponent } from '../../contracts-aside/contracts-aside-user-device-billing/contracts-aside-user-device-service/contracts-aside-user-device-service.component';
-import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTooltip, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { SubscriptionServicesStateService } from 'src/app/states/subscription-services/subscription-services-state.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { DatePickerIntervalsComponent } from '../../contracts-aside/date-picker-intervals/date-picker-intervals.component';
+import { ContractsAsideBlockTimeBillingDefaultServiceComponent } from '../../contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-default-service/contracts-aside-block-time-billing-default-service.component';
+import { DecimalNumberDirective } from '../../../../../directives/decimal-number/decimal-number.directive';
+import { ContractsAsideBlockTimeBillingAddDefaultServiceComponent } from '../../contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-default-service/contracts-aside-block-time-billing-add-default-service.component';
+import { ContractsAsideBlockTimeBillingCustomerServiceComponent } from '../../contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-customer-service/contracts-aside-block-time-billing-customer-service.component';
+import { TaxesComponent as TaxesComponent_1 } from '../../../../shared/taxes/taxes.component';
+import { ContractsAsideBlockTimeBillingAddSubscriptionServicesComponent } from '../../contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-subscription-services/contracts-aside-block-time-billing-add-subscription-services.component';
+import { MatErrorComponent } from '../../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf, NgFor, CurrencyPipe } from '@angular/common';
+import { DatePickerComponent as DatePickerComponent_1 } from '../../../../shared/date-picker/date-picker.component';
+import { DropDownComponent } from '../../../../shared/drop-down/drop-down.component';
 
 @Component({
-  selector: 'app-contracts-aside-user-device-edit',
-  templateUrl: './contracts-aside-user-device-edit.component.html',
-  styleUrls: ['./contracts-aside-user-device-edit.component.scss']
+    selector: 'app-contracts-aside-user-device-edit',
+    templateUrl: './contracts-aside-user-device-edit.component.html',
+    styleUrls: ['./contracts-aside-user-device-edit.component.scss'],
+    standalone: true,
+    imports: [DropDownComponent, DatePickerComponent_1, DatePickerIntervalsComponent, NgClass, FormsModule, NgIf, MatErrorComponent, NgbTooltipModule, NgFor, ContractsAsideUserDeviceServiceComponent, ContractsAsideBlockTimeBillingAddSubscriptionServicesComponent, TaxesComponent_1, ContractsAsideBlockTimeBillingCustomerServiceComponent, ContractsAsideBlockTimeBillingAddDefaultServiceComponent, DecimalNumberDirective, ContractsAsideBlockTimeBillingDefaultServiceComponent, CurrencyPipe]
 })
 export class ContractsAsideUserDeviceEditComponent implements OnInit, OnDestroy {
   @ViewChild('taxes', { static: true }) taxesDP: TaxesComponent;

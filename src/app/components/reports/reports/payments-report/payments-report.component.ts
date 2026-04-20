@@ -7,9 +7,10 @@ import * as moment from 'moment';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 
 @Component({
-  selector: 'payments-report',
-  templateUrl: './payments-report.component.html',
-  styleUrls: ['./payments-report.component.scss']
+    selector: 'payments-report',
+    templateUrl: './payments-report.component.html',
+    styleUrls: ['./payments-report.component.scss'],
+    standalone: true
 })
 export class PaymentsReportComponent implements OnInit {
 

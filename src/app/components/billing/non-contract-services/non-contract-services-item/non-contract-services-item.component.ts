@@ -6,17 +6,21 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { REMOVE_DEFAULT_SERVICE } from 'src/app/const/confirm';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { NonContractServicesStateService } from 'src/app/states/non-contract-services/non-contract-services-state.service';
 import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
 import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 import { Subscription } from 'rxjs';
+import { NgIf, CurrencyPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-non-contract-services-item',
-  templateUrl: './non-contract-services-item.component.html',
-  styleUrls: ['./non-contract-services-item.component.scss']
+    selector: 'app-non-contract-services-item',
+    templateUrl: './non-contract-services-item.component.html',
+    styleUrls: ['./non-contract-services-item.component.scss'],
+    standalone: true,
+    imports: [DropDownComponent, FormsModule, NgIf, NgbDropdownModule, CurrencyPipe]
 })
 export class NonContractServicesItemComponent implements OnInit, OnDestroy {
   @ViewChild('glNumberSelect', { static: true }) glNumberSelect: DropDownComponent;

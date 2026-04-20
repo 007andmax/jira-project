@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_CRM_INDUSTRIES, DELETE_CRM_JOB_TITLIES, DELETE_CRM_JOB_TYPIES, DELETE_CRM_SERVICE_TYPIES } from 'src/app/const/confirm';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
@@ -9,14 +9,18 @@ import { CrmCompanyJobTitleComponent } from './crm-company-job-title/crm-company
 import { CrmCompanyJobTypeComponent } from './crm-company-job-type/crm-company-job-type.component';
 import { CrmCompanyServiceTypeComponent } from './crm-company-service-type/crm-company-service-type.component';
 import { fadeInAnimation } from 'src/app/animations';
+import { NgIf } from '@angular/common';
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
 
 @Component({
-  selector: 'crm-settings',
-  templateUrl: './crm-settings.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./crm-settings.component.scss']
+    selector: 'crm-settings',
+    templateUrl: './crm-settings.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./crm-settings.component.scss'],
+    standalone: true,
+    imports: [DynamicTooltipComponent, NgIf, NgbNavModule, CrmCompanyIndustryComponent, CrmCompanyServiceTypeComponent, CrmCompanyJobTitleComponent, CrmCompanyJobTypeComponent]
 })
 export class CrmSettingsComponent implements OnInit, OnDestroy {
   activeTab: string = "companyIndustry";

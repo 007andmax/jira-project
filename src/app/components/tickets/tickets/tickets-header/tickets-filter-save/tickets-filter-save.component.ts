@@ -5,11 +5,18 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { TicketsFilterSaveValidate } from './class/tickets-filter-save-validate';
+import { PreloaderTicketComponent } from '../../../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../../../directives/disabled-btn/disabled-btn.directive';
+import { MatErrorComponent } from '../../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'tickets-filter-save',
-  templateUrl: './tickets-filter-save.component.html',
-  styleUrls: ['./tickets-filter-save.component.scss']
+    selector: 'tickets-filter-save',
+    templateUrl: './tickets-filter-save.component.html',
+    styleUrls: ['./tickets-filter-save.component.scss'],
+    standalone: true,
+    imports: [NgClass, FormsModule, NgIf, MatErrorComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class TicketsFilterSaveComponent implements OnInit {
   @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;

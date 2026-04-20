@@ -15,20 +15,18 @@ describe('CompanyDevicesAsideUpdatesComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         NgbModule,
         PreviewPhoneMaskModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [CompanyDevicesAsideUpdatesComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, CompanyDevicesAsideUpdatesComponent],
+}).compileComponents();
 
   });
   it('check "getAntivirusFiled"', () => {

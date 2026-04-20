@@ -11,15 +11,15 @@ import { CompaniesHeaderComponent } from './companies-header/companies-header.co
 import { CompaniesTableComponent } from './companies-table/companies-table.component';
 import { CompanyAddAsideComponent } from './company-add-aside/company-add-aside.component';
 import { CompanyEditAsideModule } from './company-edit-aside/company-edit-aside.module';
-import { CompanySubscriptionModule } from './company-subscription/company-subscription.module';
+
 import { CompaniesFilterComponent } from './companies-header/companies-filter/companies-filter.component';
-import { PhoneModule } from 'src/app/pipe/phone/phone.module';
+
 import { NgxMaskModule } from 'ngx-mask';
-import { PreparePhoneModule } from 'src/app/pipe/prepare-phone/prepare-phone.module';
-import { DynamicTooltipModule } from '../shared/dynamic-tooltip/dynamic-tooltip.module';
-import { DropDownModule } from '../shared/drop-down/drop-down.module';
-import { CompanyTagsModule } from './company-tags/company-tags.module';
-import { RightClickBlankModule } from 'src/app/directives/right-click-blank/right-click-blank.module';
+
+
+
+
+
 import { PreviewPhoneMaskModule } from '../shared/preview-phone-mask/preview-phone-mask.module';
 
 @NgModule({
@@ -29,22 +29,15 @@ import { PreviewPhoneMaskModule } from '../shared/preview-phone-mask/preview-pho
         CompaniesFilterComponent,
     ],
     imports: [
-        CommonModule,
-        CompaniesRoutingModule,
-        InfiniteScrollModule,
-        FormsModule,
-        NgbModule,
-        CompanyEditAsideModule,
-        CompanySubscriptionModule,
-        PhoneModule,
-        NgxMaskModule.forRoot(),
-        PreparePhoneModule,
-        DynamicTooltipModule,
-        DropDownModule,
-        CompanyTagsModule,
-        RightClickBlankModule,
-        PreviewPhoneMaskModule
-    ],
+    CommonModule,
+    CompaniesRoutingModule,
+    InfiniteScrollModule,
+    FormsModule,
+    NgbModule,
+    CompanyEditAsideModule,
+    NgxMaskModule.forRoot(),
+    PreviewPhoneMaskModule
+],
 
 
 

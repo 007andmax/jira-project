@@ -5,11 +5,15 @@ import { InvoiceRevenue } from '../class/invoice-revenue';
 import * as moment from "moment";
 import { MultiDatepickerDashboardComponent } from '../multi-datepicker-dashboard/multi-datepicker-dashboard.component';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { CurrencyPipe } from '@angular/common';
+import { PieChartModule } from '@swimlane/ngx-charts';
 
 @Component({
-  selector: 'app-invoice-revenue',
-  templateUrl: './invoice-revenue.component.html',
-  styleUrls: ['./invoice-revenue.component.scss']
+    selector: 'app-invoice-revenue',
+    templateUrl: './invoice-revenue.component.html',
+    styleUrls: ['./invoice-revenue.component.scss'],
+    standalone: true,
+    imports: [MultiDatepickerDashboardComponent, PieChartModule, CurrencyPipe]
 })
 export class InvoiceRevenueComponent implements OnInit {
   invoiceRevenue: InvoiceRevenue = new InvoiceRevenue();

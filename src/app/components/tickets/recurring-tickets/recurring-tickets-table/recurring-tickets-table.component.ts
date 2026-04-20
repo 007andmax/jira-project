@@ -9,10 +9,10 @@ import { AddAssignedUserComponent } from '../../tickets/ticket-edit-aside/add-as
 
 
 @Component({
-  selector: 'app-recurring-tickets-table',
-  templateUrl: './recurring-tickets-table.component.html',
-  styleUrls: ['./recurring-tickets-table.component.scss'],
-
+    selector: 'app-recurring-tickets-table',
+    templateUrl: './recurring-tickets-table.component.html',
+    styleUrls: ['./recurring-tickets-table.component.scss'],
+    standalone: true,
 })
 export class RecurringTicketsTableComponent implements OnInit {
   @Input() ticket: RecurringTicket;

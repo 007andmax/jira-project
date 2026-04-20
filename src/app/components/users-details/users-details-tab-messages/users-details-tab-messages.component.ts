@@ -8,10 +8,11 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
-  selector: 'app-users-details-tab-messages',
-  templateUrl: './users-details-tab-messages.component.html',
-  styleUrls: ['./users-details-tab-messages.component.scss'],
-  providers: [UserListService]
+    selector: 'app-users-details-tab-messages',
+    templateUrl: './users-details-tab-messages.component.html',
+    styleUrls: ['./users-details-tab-messages.component.scss'],
+    providers: [UserListService],
+    standalone: true
 })
 export class UsersDetailsTabMessagesComponent implements OnInit {
   @Input() user: User;

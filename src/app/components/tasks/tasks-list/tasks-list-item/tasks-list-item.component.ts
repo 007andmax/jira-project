@@ -12,11 +12,16 @@ import { TechUsersComponent } from 'src/app/components/shared/tech-users/tech-us
 import { TicketProfileFormService } from 'src/app/components/tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TasksDatePickerComponent } from '../../tasks-date-picker/tasks-date-picker.component';
+import { TechUsersComponent as TechUsersComponent_1 } from '../../../shared/tech-users/tech-users.component';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-tasks-list-item',
-  templateUrl: './tasks-list-item.component.html',
-  styleUrls: ['./tasks-list-item.component.scss']
+    selector: 'app-tasks-list-item',
+    templateUrl: './tasks-list-item.component.html',
+    styleUrls: ['./tasks-list-item.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, NgbTooltipModule, TasksDatePickerComponent, TechUsersComponent_1]
 })
 export class TasksListItemComponent {
   @Input() item: Task = new Task()

@@ -22,11 +22,12 @@ import { MarketingEmailStateService } from 'src/app/states/marketing-email/marke
 
 
 @Component({
-  selector: 'app-users-header',
-  templateUrl: './users-header.component.html',
-  styleUrls: ['./users-header.component.scss'],
-  providers: [UsersHeaderService],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-users-header',
+    templateUrl: './users-header.component.html',
+    styleUrls: ['./users-header.component.scss'],
+    providers: [UsersHeaderService],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
 })
 export class UsersHeaderComponent implements OnInit, OnDestroy {
   @Output() onChangeFilterField = new EventEmitter<any>();

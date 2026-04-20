@@ -4,10 +4,11 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
 import { TicketsFilterDropDownComponent } from 'src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-drop-down/tickets-filter-drop-down.component';
 
 @Component({
-  selector: 'app-users-filter-custom-subscriptions',
-  templateUrl: './users-filter-custom-subscriptions.component.html',
-  styleUrls: ['./users-filter-custom-subscriptions.component.scss'],
-  providers: [CompanyTagsListService, TicketsListService]
+    selector: 'app-users-filter-custom-subscriptions',
+    templateUrl: './users-filter-custom-subscriptions.component.html',
+    styleUrls: ['./users-filter-custom-subscriptions.component.scss'],
+    providers: [CompanyTagsListService, TicketsListService],
+    standalone: true
 })
 export class UsersFilterCustomSubscriptionsComponent extends TicketsFilterDropDownComponent {
 

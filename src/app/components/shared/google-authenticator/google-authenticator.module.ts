@@ -3,17 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GoogleAuthenticatorComponent } from './google-authenticator.component';
 import { NgxMaskModule } from 'ngx-mask';
-import { MatErrorModule } from '../mat-error/mat-error.module';
+
 @NgModule({
     declarations: [
         GoogleAuthenticatorComponent
     ],
     imports: [
-        CommonModule,
-        FormsModule,
-        NgxMaskModule.forRoot(),
-        MatErrorModule
-    ],
+    CommonModule,
+    FormsModule,
+    NgxMaskModule.forRoot()
+],
     exports: [GoogleAuthenticatorComponent]
 })
 export class GoogleAuthenticatorModule { }

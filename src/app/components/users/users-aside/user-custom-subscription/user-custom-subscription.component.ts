@@ -4,11 +4,18 @@ import { MarketingSubscriptionType } from 'src/app/components/setting/marketing-
 import { MODE_HIDE_ACTIVE } from 'src/app/const/users';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
 import { UserCustomSubscription } from '../../class/user-custom-subscription';
+import { MatChipComponent } from '../../../shared/mat-chip/mat-chip.component';
+import { NgClass, NgFor, NgIf } from '@angular/common';
+import { MatChipListComponent } from '../../../shared/mat-chip-list/mat-chip-list.component';
+import { MatFormFieldComponent } from '../../../shared/mat-form-field/mat-form-field.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'user-custom-subscription',
-  templateUrl: './user-custom-subscription.component.html',
-  styleUrls: ['./user-custom-subscription.component.scss']
+    selector: 'user-custom-subscription',
+    templateUrl: './user-custom-subscription.component.html',
+    styleUrls: ['./user-custom-subscription.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, MatFormFieldComponent, MatChipListComponent, NgClass, NgFor, MatChipComponent, NgIf]
 })
 export class UserCustomSubscriptionComponent implements OnInit, OnDestroy {
   MODE_HIDE_ACTIVE = MODE_HIDE_ACTIVE;

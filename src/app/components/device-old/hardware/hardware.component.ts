@@ -9,11 +9,23 @@ import { CONFIGCONSTANTS } from '../config/app-constants';
 import { Router } from '@angular/router';
 import { System, Graphics, Motherboard, Bios, Processor, Display, LogicalDisk, Memory, Adapter, DeviceDetail } from './class/system';
 import { HardwareHeaderComponent } from './hardware-header/hardware-header.component';
+import { HardwareOperatingSystemComponent } from './hardware-operating-system/hardware-operating-system.component';
+import { HardwareHardDiskComponent } from './hardware-hard-disk/hardware-hard-disk.component';
+import { HardwareDisplayComponent } from './hardware-display/hardware-display.component';
+import { HardwareGraphicsCardComponent } from './hardware-graphics-card/hardware-graphics-card.component';
+import { HardwareNetworkCardComponent } from './hardware-network-card/hardware-network-card.component';
+import { HardwareMemoryComponent } from './hardware-memory/hardware-memory.component';
+import { HardwareProcessorComponent } from './hardware-processor/hardware-processor.component';
+import { HardwareMotherboardComponent } from './hardware-motherboard/hardware-motherboard.component';
+import { HardwareComputerComponent } from './hardware-computer/hardware-computer.component';
+import { NgIf } from '@angular/common';
 declare var $: any;
 @Component({
-  selector: 'app-hardware',
-  templateUrl: './hardware.component.html',
-  styleUrls: ['./hardware.component.scss']
+    selector: 'app-hardware',
+    templateUrl: './hardware.component.html',
+    styleUrls: ['./hardware.component.scss'],
+    standalone: true,
+    imports: [HardwareHeaderComponent, NgIf, HardwareComputerComponent, HardwareMotherboardComponent, HardwareProcessorComponent, HardwareMemoryComponent, HardwareNetworkCardComponent, HardwareGraphicsCardComponent, HardwareDisplayComponent, HardwareHardDiskComponent, HardwareOperatingSystemComponent]
 })
 export class HardwareComponent implements OnInit {
 

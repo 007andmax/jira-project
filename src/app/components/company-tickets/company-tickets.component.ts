@@ -18,13 +18,14 @@ import { TicketsFilterComponent } from '../tickets/tickets/tickets-header/ticket
 import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
-  selector: 'company-tickets',
-  templateUrl: './company-tickets.component.html',
-  styleUrls: ['./company-tickets.component.scss'],
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  providers: [TicketsListService]
+    selector: 'company-tickets',
+    templateUrl: './company-tickets.component.html',
+    styleUrls: ['./company-tickets.component.scss'],
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    providers: [TicketsListService],
+    standalone: true
 })
 export class CompanyTicketsComponent implements OnInit, OnDestroy {
   ticketsFilter: TicketsFilter = new TicketsFilter();

@@ -30,10 +30,11 @@ import { TicketProfileFormUpdateNoteListComponent } from '../ticket-profile-form
 import { TicketDetailProfileFormUpdateHeaderComponent } from './ticket-detail-profile-form-update-header/ticket-detail-profile-form-update-header.component';
 
 @Component({
-  selector: 'ticket-detail-profile-form-update',
-  templateUrl: './ticket-detail-profile-form-update.component.html',
-  styleUrls: ['./ticket-detail-profile-form-update.component.scss'],
-  providers: [TicketsListService]
+    selector: 'ticket-detail-profile-form-update',
+    templateUrl: './ticket-detail-profile-form-update.component.html',
+    styleUrls: ['./ticket-detail-profile-form-update.component.scss'],
+    providers: [TicketsListService],
+    standalone: true
 })
 export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy {
   ticketProfile: TicketProfile = new TicketProfile();

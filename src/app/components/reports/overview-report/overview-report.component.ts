@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-overview-report',
-  templateUrl: './overview-report.component.html',
-  styleUrls: ['./overview-report.component.scss']
+    selector: 'app-overview-report',
+    templateUrl: './overview-report.component.html',
+    styleUrls: ['./overview-report.component.scss'],
+    standalone: true
 })
 export class OverviewReportComponent implements OnInit {
   @Input() classes = [];

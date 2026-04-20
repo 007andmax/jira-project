@@ -1,7 +1,8 @@
 import { Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 
 @Directive({
-  selector: '[appDragMenu]'
+    selector: '[appDragMenu]',
+    standalone: true
 })
 export class DragMenuDirective {
   @Output() dropEnd = new EventEmitter<any>();

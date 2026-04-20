@@ -10,9 +10,10 @@ import { Subscription } from 'rxjs';
 declare var $: any;
 
 @Component({
-  selector: 'app-permission-manage',
-  templateUrl: './permission-manage.component.html',
-  styleUrls: ['./permission-manage.component.scss']
+    selector: 'app-permission-manage',
+    templateUrl: './permission-manage.component.html',
+    styleUrls: ['./permission-manage.component.scss'],
+    standalone: true
 })
 export class PermissionManageComponent implements OnInit, OnDestroy {
   selectedRoleIndex = -1;

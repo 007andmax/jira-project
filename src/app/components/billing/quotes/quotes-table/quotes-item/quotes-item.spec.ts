@@ -17,19 +17,17 @@ describe('QuotesItemComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         MatErrorModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [QuotesItemComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, QuotesItemComponent],
+}).compileComponents();
 
   });
   it('check "getUserName"', () => {

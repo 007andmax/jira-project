@@ -2,7 +2,7 @@ import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { DeviceSettingStateService } from 'src/app/states/device-setting/device-setting-state.service';
 import { DeviceSettingDeviceTypeComponent } from './device-setting-device-type/device-setting-device-type.component';
@@ -14,14 +14,21 @@ import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { fadeInAnimation } from 'src/app/animations';
 import { DeviceSettingTypeComponent } from './device-setting-type/device-setting-type.component';
+import { DeviceSettingAsideComponent } from './device-setting-aside/device-setting-aside.component';
+import { DeviceSettingManufacturesComponent } from './device-setting-manufactures/device-setting-manufactures.component';
+import { AddDeviceSettingTypeComponent } from './device-setting-type/add-device-setting-type/add-device-setting-type.component';
+import { NgIf } from '@angular/common';
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
 
 @Component({
-  selector: 'device-setting',
-  templateUrl: './device-setting.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./device-setting.component.scss']
+    selector: 'device-setting',
+    templateUrl: './device-setting.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./device-setting.component.scss'],
+    standalone: true,
+    imports: [DynamicTooltipComponent, NgIf, AddDeviceSettingTypeComponent, NgbNavModule, DeviceSettingManufacturesComponent, DeviceSettingTypeComponent, DeviceSettingAsideComponent]
 })
 export class DeviceSettingComponent implements OnInit {
   devicebutton: boolean = false;

@@ -5,13 +5,17 @@ import { RecurringTicketUser } from '../../tickets/recurring-tickets/interfaces/
 import { TechUserItem } from './class/tech-user-item';
 import { SINGLE_SELECT, MULTIPLE_SELECT, RECURRING_TICEKTS } from 'src/app/const/users';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { DynamicTooltipComponent } from '../dynamic-tooltip/dynamic-tooltip.component';
+import { NgIf, NgClass, NgStyle, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-tech-users',
-  templateUrl: './tech-users.component.html',
-  styleUrls: ['./tech-users.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-tech-users',
+    templateUrl: './tech-users.component.html',
+    styleUrls: ['./tech-users.component.scss'],
+    providers: [TicketsListService],
+    standalone: true,
+    imports: [NgbDropdownModule, NgIf, NgClass, NgStyle, NgbTooltipModule, DynamicTooltipComponent, NgFor]
 })
 export class TechUsersComponent implements OnInit, OnDestroy {
   @Input('users')

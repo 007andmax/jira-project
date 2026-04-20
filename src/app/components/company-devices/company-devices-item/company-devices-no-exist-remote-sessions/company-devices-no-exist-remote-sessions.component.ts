@@ -5,9 +5,10 @@ import { DeviceCompany } from '../../class/device-company';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
-  selector: 'app-company-devices-no-exist-remote-sessions',
-  templateUrl: './company-devices-no-exist-remote-sessions.component.html',
-  styleUrls: ['./company-devices-no-exist-remote-sessions.component.scss']
+    selector: 'app-company-devices-no-exist-remote-sessions',
+    templateUrl: './company-devices-no-exist-remote-sessions.component.html',
+    styleUrls: ['./company-devices-no-exist-remote-sessions.component.scss'],
+    standalone: true
 })
 export class CompanyDevicesNoExistRemoteSessionsComponent implements OnInit {
   @Input() device: DeviceCompany;

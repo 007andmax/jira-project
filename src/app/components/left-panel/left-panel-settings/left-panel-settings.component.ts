@@ -8,11 +8,14 @@ import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-left-panel-settings',
-  templateUrl: './left-panel-settings.component.html',
-  styleUrls: ['./left-panel-settings.component.scss']
+    selector: 'app-left-panel-settings',
+    templateUrl: './left-panel-settings.component.html',
+    styleUrls: ['./left-panel-settings.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf]
 })
 export class LeftPanelSettingsComponent implements OnInit, OnDestroy {
   open: boolean = false;

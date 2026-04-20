@@ -10,7 +10,7 @@ import * as moment from "moment";
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TechUsersStateService } from 'src/app/components/shared/tech-users/services/tech-users-state.service';
 import { ContractsBlockTimeValidate } from '../class/contracts-block-time-validate';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
 import { Subscription } from 'rxjs';
 import { СontractsBlockTimeShare } from '../class/contracts-block-time-share';
@@ -22,12 +22,26 @@ import { ContractsStateService } from 'src/app/states/contracts/contracts-state.
 import { ContractsListService } from '../../services/contracts-list.service';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 import { DatePickerIntervalsComponent } from '../date-picker-intervals/date-picker-intervals.component';
+import { ContractsAsideBlockTimeBillingDefaultServiceComponent } from './contracts-aside-block-time-billing-default-service/contracts-aside-block-time-billing-default-service.component';
+import { ContractsAsideBlockTimeBillingUsersComponent } from './contracts-aside-block-time-billing-users/contracts-aside-block-time-billing-users.component';
+import { TechUsersComponent } from '../../../../shared/tech-users/tech-users.component';
+import { ContractsAsideBlockTimeBillingAddDefaultServiceComponent } from './contracts-aside-block-time-billing-add-default-service/contracts-aside-block-time-billing-add-default-service.component';
+import { ContractsAsideBlockTimeBillingCustomerServiceComponent } from './contracts-aside-block-time-billing-customer-service/contracts-aside-block-time-billing-customer-service.component';
+import { TaxesComponent as TaxesComponent_1 } from '../../../../shared/taxes/taxes.component';
+import { DecimalNumberDirective } from '../../../../../directives/decimal-number/decimal-number.directive';
+import { MatErrorComponent } from '../../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf, NgFor, CurrencyPipe } from '@angular/common';
+import { DropDownComponent } from '../../../../shared/drop-down/drop-down.component';
+import { DatePickerComponent as DatePickerComponent_1 } from '../../../../shared/date-picker/date-picker.component';
 
 @Component({
-  selector: 'app-contracts-aside-block-time-billing',
-  templateUrl: './contracts-aside-block-time-billing.component.html',
-  styleUrls: ['./contracts-aside-block-time-billing.component.scss'],
-  providers: [ContractsListService]
+    selector: 'app-contracts-aside-block-time-billing',
+    templateUrl: './contracts-aside-block-time-billing.component.html',
+    styleUrls: ['./contracts-aside-block-time-billing.component.scss'],
+    providers: [ContractsListService],
+    standalone: true,
+    imports: [ContractsAsideTopComponent, DatePickerComponent_1, DropDownComponent, DatePickerIntervalsComponent, NgClass, FormsModule, NgIf, MatErrorComponent, DecimalNumberDirective, TaxesComponent_1, NgFor, ContractsAsideBlockTimeBillingCustomerServiceComponent, ContractsAsideBlockTimeBillingAddDefaultServiceComponent, TechUsersComponent, NgbTooltipModule, ContractsAsideBlockTimeBillingUsersComponent, ContractsAsideBlockTimeBillingDefaultServiceComponent, CurrencyPipe]
 })
 export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestroy {
   @Output() onClose = new EventEmitter<any>();

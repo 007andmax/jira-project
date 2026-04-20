@@ -8,15 +8,23 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { catchError, map } from 'rxjs/operators';
 import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { DELETE_TICKET_PRIORITY } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { KeyUpEnterDirective } from '../../../../directives/key-up-enter/key-up-enter.directive';
+import { DynamicTooltipComponent } from '../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { ClickOutsideDirective as ClickOutsideDirective_1 } from '../../../../directives/click-otside/click-otside.directive';
+import { NgIf, NgClass, NgStyle, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-tickets-priority',
-  templateUrl: './tickets-priority.component.html',
-  styleUrls: ['./tickets-priority.component.scss']
+    selector: 'app-tickets-priority',
+    templateUrl: './tickets-priority.component.html',
+    styleUrls: ['./tickets-priority.component.scss'],
+    standalone: true,
+    imports: [NgIf, ClickOutsideDirective_1, FormsModule, NgClass, MatErrorComponent, NgbDropdownModule, NgStyle, NgFor, DynamicTooltipComponent, KeyUpEnterDirective]
 })
 export class TicketsPriorityComponent implements OnInit {
 

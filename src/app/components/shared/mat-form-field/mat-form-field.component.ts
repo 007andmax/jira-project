@@ -1,10 +1,12 @@
 import { Component, ContentChildren, ElementRef, Input, OnChanges, OnInit, QueryList, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-mat-form-field',
-  templateUrl: './mat-form-field.component.html',
-  styleUrls: ['./mat-form-field.component.scss'],
-
+    selector: 'app-mat-form-field',
+    templateUrl: './mat-form-field.component.html',
+    styleUrls: ['./mat-form-field.component.scss'],
+    standalone: true,
+    imports: [NgClass],
 })
 export class MatFormFieldComponent implements OnInit {
   classes = [];

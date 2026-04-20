@@ -5,9 +5,10 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
-  selector: 'app-invoice-form-ticket-edit',
-  templateUrl: './invoice-form-ticket-edit.component.html',
-  styleUrls: ['./invoice-form-ticket-edit.component.scss']
+    selector: 'app-invoice-form-ticket-edit',
+    templateUrl: './invoice-form-ticket-edit.component.html',
+    styleUrls: ['./invoice-form-ticket-edit.component.scss'],
+    standalone: true
 })
 export class InvoiceFormTicketEditComponent implements OnInit {
   @Input() ticket: InvoiceProfileTicket;

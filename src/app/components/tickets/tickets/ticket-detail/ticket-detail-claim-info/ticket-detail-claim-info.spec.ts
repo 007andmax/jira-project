@@ -11,18 +11,17 @@ describe('TicketDetailClaimInfoComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NoopAnimationsModule],
-      declarations: [TicketDetailClaimInfoComponent
-      ],
-      providers: [TicketDetailClaimInfoComponent]
-    }).compileComponents();
+    declarations: [TicketDetailClaimInfoComponent],
+    providers: [TicketDetailClaimInfoComponent]
+}).compileComponents();
 
   });
 

@@ -7,13 +7,13 @@ import { fadeInAnimation } from 'src/app/animations';
 import * as moment from "moment";
 
 @Component({
-  selector: 'app-file-manager-all-customer',
-  templateUrl: './file-manager-all-customer.component.html',
-  styleUrls: ['./file-manager-all-customer.component.scss'],
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-
+    selector: 'app-file-manager-all-customer',
+    templateUrl: './file-manager-all-customer.component.html',
+    styleUrls: ['./file-manager-all-customer.component.scss'],
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    standalone: true,
 })
 export class FileManagerAllCustomerComponent extends FileManagerComponent {
   companyArchived: boolean;

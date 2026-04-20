@@ -1,10 +1,14 @@
 import { Component, OnInit, ChangeDetectorRef, Output, EventEmitter, ElementRef, Input } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
+import { NgClass, NgIf, NgFor, NgStyle } from '@angular/common';
+import { DndDirective } from '../../../directives/dnd/dnd.directive';
 
 @Component({
-  selector: 'app-upload-area',
-  templateUrl: './upload-area.component.html',
-  styleUrls: ['./upload-area.component.scss']
+    selector: 'app-upload-area',
+    templateUrl: './upload-area.component.html',
+    styleUrls: ['./upload-area.component.scss'],
+    standalone: true,
+    imports: [DndDirective, NgClass, NgIf, NgFor, NgStyle]
 })
 export class UploadAreaComponent implements OnInit {
   @Input() uploadType = 'MULTIPLE';

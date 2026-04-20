@@ -10,9 +10,10 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 
 @Component({
-  selector: 'tickets-filter-created-drop-down',
-  templateUrl: './tickets-filter-created-drop-down.component.html',
-  styleUrls: ['./tickets-filter-created-drop-down.component.scss']
+    selector: 'tickets-filter-created-drop-down',
+    templateUrl: './tickets-filter-created-drop-down.component.html',
+    styleUrls: ['./tickets-filter-created-drop-down.component.scss'],
+    standalone: true
 })
 export class TicketsFilterCreatedDropDownComponent extends DropDownComponent {
   @ViewChild('dp', { static: true }) dp: NgbDropdown;

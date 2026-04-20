@@ -8,10 +8,11 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
-  selector: 'app-draft-email-recipients',
-  templateUrl: './draft-email-recipients.component.html',
-  styleUrls: ['./draft-email-recipients.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-draft-email-recipients',
+    templateUrl: './draft-email-recipients.component.html',
+    styleUrls: ['./draft-email-recipients.component.scss'],
+    providers: [TicketsListService],
+    standalone: true
 })
 export class DraftEmailRecipientsComponent implements OnInit {
   reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;

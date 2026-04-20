@@ -8,11 +8,15 @@ import { UsersStateService } from "src/app/states/users/users-state.service";
 import { PermissionsService } from "src/app/services/permissions/permissions.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 import { CompanyCommissionFilter } from "./class/company-commission-filter";
+import { CompanyTechUsersComponent } from "./company-tech-users/company-tech-users.component";
+import { NgFor, NgIf } from "@angular/common";
 
 @Component({
-  selector: "app-company-commission",
-  templateUrl: "./company.component.html",
-  styleUrls: ["./company.component.scss"]
+    selector: "app-company-commission",
+    templateUrl: "./company.component.html",
+    styleUrls: ["./company.component.scss"],
+    standalone: true,
+    imports: [NgFor, CompanyTechUsersComponent, NgIf]
 })
 export class CompanyComponent implements OnInit, OnDestroy {
   clientsCompanies: any;

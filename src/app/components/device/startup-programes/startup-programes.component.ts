@@ -9,12 +9,17 @@ import { CommonHttpServices } from '../_services/common_http.service';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { OnDestroy } from '@angular/core';
+import { StartUpProgramPipe } from 'src/app/pipe/startup-program.pipe';
+import { NgIf, NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
-  selector: 'app-startup-programes',
-  templateUrl: './startup-programes.component.html',
-  styleUrls: ['./startup-programes.component.scss']
+    selector: 'app-startup-programes',
+    templateUrl: './startup-programes.component.html',
+    styleUrls: ['./startup-programes.component.scss'],
+    standalone: true,
+    imports: [FormsModule, NgIf, NgFor, StartUpProgramPipe]
 })
 export class StartupComponent implements OnInit, OnDestroy {
 

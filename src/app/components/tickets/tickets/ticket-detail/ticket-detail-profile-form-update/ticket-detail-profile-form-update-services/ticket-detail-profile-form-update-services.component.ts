@@ -13,9 +13,10 @@ import { TicketProfileUpdatesServiceDurationComponent } from '../../../ticket-ed
 import { TicketProfileUpdatesServiceTimepickerComponent } from '../../../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
 
 @Component({
-  selector: 'ticket-detail-profile-form-update-services',
-  templateUrl: './ticket-detail-profile-form-update-services.component.html',
-  styleUrls: ['./ticket-detail-profile-form-update-services.component.scss']
+    selector: 'ticket-detail-profile-form-update-services',
+    templateUrl: './ticket-detail-profile-form-update-services.component.html',
+    styleUrls: ['./ticket-detail-profile-form-update-services.component.scss'],
+    standalone: true
 })
 export class TicketDetailProfileFormUpdateServicesComponent implements OnInit, OnDestroy {
   isUpdate: boolean = false;

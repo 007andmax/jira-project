@@ -29,13 +29,14 @@ import { fadeInAnimation } from 'src/app/animations';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss'],
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  providers: [UserListService],
+    selector: 'app-users',
+    templateUrl: './users.component.html',
+    styleUrls: ['./users.component.scss'],
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    providers: [UserListService],
+    standalone: true,
 })
 export class UsersComponent implements OnInit, OnDestroy {
   @ViewChild('header', { static: true }) header: UsersHeaderComponent;

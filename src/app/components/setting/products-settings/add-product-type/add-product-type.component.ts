@@ -3,11 +3,17 @@ import { ProductType } from '../class/product-type';
 import { ProductService } from 'src/app/services/product/product.service';
 import { catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
+import { ClickOutsideDirective } from '../../../../directives/click-otside/click-otside.directive';
 
 @Component({
-  selector: 'app-add-product-type',
-  templateUrl: './add-product-type.component.html',
-  styleUrls: ['./add-product-type.component.scss']
+    selector: 'app-add-product-type',
+    templateUrl: './add-product-type.component.html',
+    styleUrls: ['./add-product-type.component.scss'],
+    standalone: true,
+    imports: [ClickOutsideDirective, NgClass, FormsModule, NgIf, MatErrorComponent]
 })
 export class AddProductTypeComponent implements OnInit {
   name: string = "";

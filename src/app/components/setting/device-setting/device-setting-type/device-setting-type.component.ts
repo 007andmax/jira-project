@@ -14,11 +14,19 @@ import { DeviceType } from 'src/app/components/company-devices/class/device-type
 import { DeviceFilterType } from './class/device-filter-type';
 import { DeviceSettingTypeCheckUseComponent } from './device-setting-type-check-use/device-setting-type-check-use.component';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { DynamicTooltipComponent } from '../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { KeyUpEnterDirective } from '../../../../directives/key-up-enter/key-up-enter.directive';
+import { FormsModule } from '@angular/forms';
+import { ClickOutsideDirective } from '../../../../directives/click-otside/click-otside.directive';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-device-setting-type',
-  templateUrl: './device-setting-type.component.html',
-  styleUrls: ['./device-setting-type.component.scss']
+    selector: 'app-device-setting-type',
+    templateUrl: './device-setting-type.component.html',
+    styleUrls: ['./device-setting-type.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, NgFor, ClickOutsideDirective, FormsModule, KeyUpEnterDirective, MatErrorComponent, DynamicTooltipComponent, DeviceSettingTypeCheckUseComponent]
 })
 export class DeviceSettingTypeComponent implements OnInit {
   showPreloader: boolean = true;

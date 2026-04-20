@@ -18,19 +18,17 @@ describe('QuoteAsideEditBodyComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         MatErrorModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [QuoteAsideEditBodyComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, QuoteAsideEditBodyComponent],
+}).compileComponents();
 
   });
   it('check "getQuotePreview"', () => {

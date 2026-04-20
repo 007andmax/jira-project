@@ -1,15 +1,19 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
-import { UntypedFormGroup, Validators, UntypedFormBuilder } from '@angular/forms';
+import { UntypedFormGroup, Validators, UntypedFormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Tax } from 'src/app/interfaces/service/tax';
 import { Subscription } from 'rxjs';
 import { TaxesService } from 'src/app/services/taxes/taxes.service';
+import { NgIf, NgClass, NgFor } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
-  selector: 'app-taxes',
-  templateUrl: './taxes.component.html',
-  styleUrls: ['./taxes.component.scss']
+    selector: 'app-taxes',
+    templateUrl: './taxes.component.html',
+    styleUrls: ['./taxes.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, NgIf, FormsModule, ReactiveFormsModule, NgClass, NgFor]
 })
 export class TaxesComponent implements OnInit, OnDestroy {
   @Input() selectedTax = [];

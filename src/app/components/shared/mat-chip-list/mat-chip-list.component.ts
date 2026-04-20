@@ -1,9 +1,10 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-mat-chip-list',
-  templateUrl: './mat-chip-list.component.html',
-  styleUrls: ['./mat-chip-list.component.scss']
+    selector: 'app-mat-chip-list',
+    templateUrl: './mat-chip-list.component.html',
+    styleUrls: ['./mat-chip-list.component.scss'],
+    standalone: true
 })
 export class MatChipListComponent implements OnInit {
   @Input() items: any = [];

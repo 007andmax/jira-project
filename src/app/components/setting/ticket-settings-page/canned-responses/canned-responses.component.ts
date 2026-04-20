@@ -9,11 +9,15 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { NoteRealTimeService } from 'src/app/states/note/note-real-time.service';
 import { NoteStateService } from 'src/app/states/note/note-state.service';
 import { NoteTemplate } from './class/note-template';
+import { DynamicTooltipComponent } from '../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'canned-responses',
-  templateUrl: './canned-responses.component.html',
-  styleUrls: ['./canned-responses.component.scss']
+    selector: 'canned-responses',
+    templateUrl: './canned-responses.component.html',
+    styleUrls: ['./canned-responses.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, NgFor, DynamicTooltipComponent]
 })
 export class CannedResponsesComponent implements OnInit {
   loading: boolean = true;

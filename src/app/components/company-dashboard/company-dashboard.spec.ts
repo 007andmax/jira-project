@@ -44,7 +44,7 @@ describe('CompanyDashboardComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         CompanyDashboardRoutingModule,
         CompanyTagsModule,
         NgxMaskModule.forRoot(),
@@ -62,13 +62,13 @@ describe('CompanyDashboardComponent unit test', () => {
         HttpClientModule,
         RouterTestingModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NoopAnimationsModule],
-      providers: [{ provide: Router, useValue: mockRouter }],
-      declarations: [CompanyDashboardComponent,
+    providers: [{ provide: Router, useValue: mockRouter }],
+    declarations: [CompanyDashboardComponent,
         CompanyDashDetailComponent,
         CompanyDashAssociateComponent,
         CompanyDashStatsComponent,
@@ -76,9 +76,8 @@ describe('CompanyDashboardComponent unit test', () => {
         CompanyDashRevenueComponent,
         CompanyDashInvoiceComponent,
         CompanyDashContractComponent,
-        CompanyDashAssociateInfoComponent
-      ],
-    }).compileComponents();
+        CompanyDashAssociateInfoComponent],
+}).compileComponents();
 
   });
   it('check "isArchive"', () => {

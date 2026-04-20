@@ -18,9 +18,10 @@ import { UsersRealTimeService } from 'src/app/states/users/users-real-time.servi
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
-  selector: 'app-users-details-tab-companies-item',
-  templateUrl: './users-details-tab-companies-item.component.html',
-  styleUrls: ['./users-details-tab-companies-item.component.scss']
+    selector: 'app-users-details-tab-companies-item',
+    templateUrl: './users-details-tab-companies-item.component.html',
+    styleUrls: ['./users-details-tab-companies-item.component.scss'],
+    standalone: true
 })
 export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy {
   @ViewChild('userRolesDP', { static: false }) userRolesDP: DropDownComponent;

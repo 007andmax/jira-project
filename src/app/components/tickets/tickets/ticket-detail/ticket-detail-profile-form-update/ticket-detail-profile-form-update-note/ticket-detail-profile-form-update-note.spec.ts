@@ -16,22 +16,19 @@ describe('TicketDetailProfileFormUpdateNoteComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         NgbModule,
         FormsModule,
         UploadAreaProgressModule,
         AngularEditorModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule
-      ],
-      declarations: [TicketDetailProfileFormUpdateNoteComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, TicketDetailProfileFormUpdateNoteComponent],
+}).compileComponents();
 
   });
 

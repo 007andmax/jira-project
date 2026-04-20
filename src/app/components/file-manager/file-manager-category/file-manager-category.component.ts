@@ -18,13 +18,13 @@ import { FileManagerFileInfoComponent } from '../file-manager-file-info/file-man
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
-  selector: 'app-file-manager-category',
-  templateUrl: './file-manager-category.component.html',
-  styleUrls: ['./file-manager-category.component.scss'],
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-
+    selector: 'app-file-manager-category',
+    templateUrl: './file-manager-category.component.html',
+    styleUrls: ['./file-manager-category.component.scss'],
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    standalone: true,
 })
 export class FileManagerCategoryComponent implements OnInit, OnDestroy {
   sort: string = "Date";

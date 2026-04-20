@@ -11,10 +11,11 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { NetworkScanCredential } from '../class/network-scan-credential';
 
 @Component({
-  selector: 'app-network-scan-credentials-aside',
-  templateUrl: './network-scan-credentials-aside.component.html',
-  styleUrls: ['./network-scan-credentials-aside.component.scss'],
-  providers: [PasswordManagerListService]
+    selector: 'app-network-scan-credentials-aside',
+    templateUrl: './network-scan-credentials-aside.component.html',
+    styleUrls: ['./network-scan-credentials-aside.component.scss'],
+    providers: [PasswordManagerListService],
+    standalone: true
 })
 export class NetworkScanCredentialsAsideComponent implements OnInit, OnDestroy {
   open: boolean = false;

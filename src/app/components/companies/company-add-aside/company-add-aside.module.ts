@@ -4,21 +4,21 @@ import { CompanyAddAsideComponent } from './company-add-aside.component';
 import { CompanyAddAsideShortComponent } from './company-add-aside-short/company-add-aside-short.component';
 import { CompanyAddAsideFullComponent } from './company-add-aside-full/company-add-aside-full.component';
 import { FormsModule } from '@angular/forms';
-import { DropDownModule } from '../../shared/drop-down/drop-down.module';
-import { CompanySubscriptionModule } from '../company-subscription/company-subscription.module';
-import { CompanyTimeZoneModule } from '../company-time-zone/company-time-zone.module';
-import { CompanyTagsModule } from '../company-tags/company-tags.module';
-import { CompanyAssociateModule } from '../../company-dashboard/company-dash-associate/company-associate/company-associate.module';
-import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+
+
+
+
+
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
-import { UserDefaultSubscriptionModule } from '../../users/users-aside/user-default-subscription/user-default-subscription.module';
-import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
-import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
-import { CompanyUsersDropDownModule } from '../../tickets/tickets/ticket-add-aside/company-users-drop-down/company-users-drop-down.module';
+
+
+
+
 import { ProductListQuoteComponent } from '../../billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component';
-import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
-import { UsersDropDownModule } from '../../shared/users-drop-down/users-drop-down.module';
+
+
 
 
 
@@ -28,23 +28,11 @@ import { UsersDropDownModule } from '../../shared/users-drop-down/users-drop-dow
         CompanyAddAsideFullComponent
     ],
     imports: [
-        CommonModule,
-        FormsModule,
-        DropDownModule,
-        CompanySubscriptionModule,
-        CompanyTimeZoneModule,
-        CompanyTagsModule,
-        CompanyAssociateModule,
-        TextAreaModule,
-        NgbModule,
-        NgxMaskModule.forRoot(),
-        UserDefaultSubscriptionModule,
-        DisabledBtnModule,
-        PreloaderTicketModule,
-        CompanyUsersDropDownModule,
-        MatErrorModule,
-        UsersDropDownModule
-    ],
+    CommonModule,
+    FormsModule,
+    NgbModule,
+    NgxMaskModule.forRoot()
+],
     exports: [CompanyAddAsideComponent]
 
 

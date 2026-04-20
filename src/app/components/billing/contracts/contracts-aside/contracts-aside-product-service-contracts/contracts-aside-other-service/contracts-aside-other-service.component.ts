@@ -6,11 +6,19 @@ import { NonContractServices } from '../../../../non-contract-services/class/non
 import { ContractsOtherService } from '../../class/contracts-other-service';
 import { DefaultServicesHourlyContract } from '../../class/default-service-hourly-contract';
 import { Subscription } from 'rxjs';
+import { DatePickerComponent } from '../../../../../shared/date-picker/date-picker.component';
+import { TicketProfileUpdatesServiceDurationComponent } from '../../../../../tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.component';
+import { FormsModule } from '@angular/forms';
+import { MatErrorComponent } from '../../../../../shared/mat-error/mat-error.component';
+import { NgIf, NgClass } from '@angular/common';
+import { DropDownComponent } from '../../../../../shared/drop-down/drop-down.component';
 
 @Component({
-  selector: 'app-contracts-aside-other-service',
-  templateUrl: './contracts-aside-other-service.component.html',
-  styleUrls: ['./contracts-aside-other-service.component.scss']
+    selector: 'app-contracts-aside-other-service',
+    templateUrl: './contracts-aside-other-service.component.html',
+    styleUrls: ['./contracts-aside-other-service.component.scss'],
+    standalone: true,
+    imports: [DropDownComponent, NgIf, MatErrorComponent, FormsModule, NgClass, TicketProfileUpdatesServiceDurationComponent, DatePickerComponent]
 })
 export class ContractsAsideOtherServiceComponent implements OnInit, OnDestroy {
   formatDate: string = FORMAT_DATE_2;

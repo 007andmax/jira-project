@@ -3,11 +3,15 @@ import { Ticket } from '../../../class/ticket';
 import * as moment from 'moment';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { StatusColor } from '../../../class/status-color';
+import { NgClass, NgIf, NgStyle } from '@angular/common';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-merge-tickets-item',
-  templateUrl: './merge-tickets-item.component.html',
-  styleUrls: ['./merge-tickets-item.component.scss']
+    selector: 'app-merge-tickets-item',
+    templateUrl: './merge-tickets-item.component.html',
+    styleUrls: ['./merge-tickets-item.component.scss'],
+    standalone: true,
+    imports: [NgbTooltipModule, NgClass, NgIf, NgStyle]
 })
 export class MergeTicketsItemComponent implements OnInit {
   @Input() item: Ticket;

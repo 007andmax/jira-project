@@ -2,11 +2,16 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { CompanySetting } from '../../../companies/class/company-setting';
 import { DashboardChartData } from '../class/dashboard-chart-data';
 import * as moment from "moment";
+import { LineChartModule } from '@swimlane/ngx-charts';
+import { NgFor, NgIf, NgStyle } from '@angular/common';
+import { NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-dashboard-sales-analytics',
-  templateUrl: './dashboard-sales-analytics.component.html',
-  styleUrls: ['./dashboard-sales-analytics.component.scss']
+    selector: 'app-dashboard-sales-analytics',
+    templateUrl: './dashboard-sales-analytics.component.html',
+    styleUrls: ['./dashboard-sales-analytics.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, NgbTooltipModule, NgFor, NgIf, LineChartModule, NgStyle]
 })
 export class DashboardSalesAnalyticsComponent implements OnInit {
   @Output() onSelectType = new EventEmitter<any>();

@@ -7,11 +7,15 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { Document } from '../../class/document';
 import { Subscription } from 'rxjs';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'documents-templates-item',
-  templateUrl: './documents-templates-item.component.html',
-  styleUrls: ['./documents-templates-item.component.scss']
+    selector: 'documents-templates-item',
+    templateUrl: './documents-templates-item.component.html',
+    styleUrls: ['./documents-templates-item.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgbDropdownModule]
 })
 export class DocumentsTemplatesItemComponent implements OnInit, OnDestroy {
   @Input() item: Document;

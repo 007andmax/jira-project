@@ -10,12 +10,21 @@ import { ContractsStateService } from 'src/app/states/contracts/contracts-state.
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { ContractsHourlyAddDefaultServiceValidate } from '../class/contracts-hourly-add-default-service-valdiate';
 import { ServiceAgreement } from '../../../class/service-agreement';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../../../../directives/disabled-btn/disabled-btn.directive';
+import { numberDirective } from '../../../../../../directives/number/number.directive';
+import { TaxesComponent } from '../../../../../shared/taxes/taxes.component';
+import { FormsModule } from '@angular/forms';
+import { MatErrorComponent } from '../../../../../shared/mat-error/mat-error.component';
+import { NgIf, NgClass } from '@angular/common';
+import { DropDownComponent as DropDownComponent_1 } from '../../../../../shared/drop-down/drop-down.component';
 
 
 @Component({
-  selector: 'app-contracts-aside-edit-hourly-add-default-service',
-  templateUrl: './contracts-aside-edit-hourly-add-default-service.component.html',
-  styleUrls: ['./contracts-aside-edit-hourly-add-default-service.component.scss']
+    selector: 'app-contracts-aside-edit-hourly-add-default-service',
+    templateUrl: './contracts-aside-edit-hourly-add-default-service.component.html',
+    styleUrls: ['./contracts-aside-edit-hourly-add-default-service.component.scss'],
+    standalone: true,
+    imports: [DropDownComponent_1, NgIf, MatErrorComponent, FormsModule, TaxesComponent, NgClass, numberDirective, DisabledBtnDirective_1]
 })
 export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnInit, OnDestroy {
   service: DefaultServicesHourlyContract = new DefaultServicesHourlyContract();

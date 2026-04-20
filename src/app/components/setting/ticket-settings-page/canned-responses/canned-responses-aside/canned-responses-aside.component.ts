@@ -7,9 +7,10 @@ import { NoteTemplateValidate } from '../class/note-template-validate';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'canned-responses-aside',
-  templateUrl: './canned-responses-aside.component.html',
-  styleUrls: ['./canned-responses-aside.component.scss']
+    selector: 'canned-responses-aside',
+    templateUrl: './canned-responses-aside.component.html',
+    styleUrls: ['./canned-responses-aside.component.scss'],
+    standalone: true
 })
 export class CannedResponsesAsideComponent implements OnInit, OnDestroy {
 

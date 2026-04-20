@@ -7,19 +7,19 @@ import { SuperAdminKnowledgeBaseTableComponent } from './super-admin-knowledge-b
 import { SuperAdminKnowledgeBaseComponent } from './super-admin-knowledge-base.component';
 import { SuperAdminKnowledgeBaseAddComponent } from './super-admin-knowledge-base-add/super-admin-knowledge-base-add.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
-import { DropDownModule } from '../../shared/drop-down/drop-down.module';
+
+
 import { FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SuperAdminKnowledgeBaseNewsComponent } from './super-admin-knowledge-base-news/super-admin-knowledge-base-news.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { SuperAdminKnowledgeBaseEditComponent } from './super-admin-knowledge-base-edit/super-admin-knowledge-base-edit.component';
 import { SuperAdminKnowledgeBaseNewsListComponent } from './super-admin-knowledge-base-news-list/super-admin-knowledge-base-news-list.component';
-import { SuperAdminKnowledgeBaseNewsModule } from './super-admin-knowledge-base-news/super-admin-knowledge-base-news.module';
-import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
-import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
-import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
-import { MatFormFieldModule } from '../../shared/mat-form-field/mat-form-field.module';
+
+
+
+
+
 
 
 
@@ -33,23 +33,15 @@ import { MatFormFieldModule } from '../../shared/mat-form-field/mat-form-field.m
         SuperAdminKnowledgeBaseNewsListComponent
     ],
     imports: [
-        CommonModule,
-        NgbModule,
-        SuperAdminKnowledgeBaseRoutingModule,
-        AngularEditorModule,
-        DatePickerModule,
-        DropDownModule,
-        FormsModule,
-        InfiniteScrollModule,
-        MatFormFieldModule,
-        FroalaEditorModule.forRoot(),
-        FroalaViewModule.forRoot(),
-        SuperAdminKnowledgeBaseNewsModule,
-        DisabledBtnModule,
-        PreloaderTicketModule,
-        MatErrorModule
-
-    ],
+    CommonModule,
+    NgbModule,
+    SuperAdminKnowledgeBaseRoutingModule,
+    AngularEditorModule,
+    FormsModule,
+    InfiniteScrollModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot()
+],
 
 })
 export class SuperAdminKnowledgeBaseModule { }

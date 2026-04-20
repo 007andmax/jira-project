@@ -9,18 +9,14 @@ import { QuoteAsidePreviewBodyModule } from './quote-aside-preview-body/quote-as
 
 
 @NgModule({
-    declarations: [
-        QuoteAsidePreviewComponent
-    ],
     imports: [
         CommonModule,
         FormsModule,
         NgbModule,
         PreviewPhoneMaskModule,
-        QuoteAsidePreviewBodyModule
+        QuoteAsidePreviewBodyModule,
+        QuoteAsidePreviewComponent
     ],
     exports: [QuoteAsidePreviewComponent]
-
-
 })
 export class QuoteAsidePreviewModule { }

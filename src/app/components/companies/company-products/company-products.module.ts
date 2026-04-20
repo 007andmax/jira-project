@@ -4,20 +4,18 @@ import { CommonModule } from '@angular/common';
 
 
 import { CompanyProductsComponent } from './company-products.component';
-import { ReportMenuModule } from '../../reports/report-menu/report-menu.module';
-import { ReportAdditionalActionsModule } from '../../reports/report-additional-actions/report-additional-actions.module';
+
+
 import { FormsModule } from '@angular/forms';
 import { CompanyProductsRoutingModule } from './company-products-routing.module';
 
 @NgModule({
-    declarations: [CompanyProductsComponent
-    ],
     imports: [
-        CommonModule,
-        ReportMenuModule,
-        //  ReportAdditionalActionsModule,
-        FormsModule,
-        CompanyProductsRoutingModule
-    ],
+    CommonModule,
+    //  ReportAdditionalActionsModule,
+    FormsModule,
+    CompanyProductsRoutingModule,
+    CompanyProductsComponent
+],
 })
 export class CompanyProductsModule { }

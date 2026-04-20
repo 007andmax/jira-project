@@ -22,9 +22,10 @@ import { Device } from '../company-devices/class/device';
 declare var $: any;
 
 @Component({
-  selector: 'device-old',
-  templateUrl: './device-old.component.html',
-  styleUrls: ['./device-old.component.scss']
+    selector: 'device-old',
+    templateUrl: './device-old.component.html',
+    styleUrls: ['./device-old.component.scss'],
+    standalone: true
 })
 export class DeviceOldComponent implements OnInit, OnDestroy {
   totalSeconds: any = 0;

@@ -8,11 +8,16 @@ import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
 import { CommonHttpServices } from '../_services/common_http.service';
 import { ExcelService } from '../_services/download_csv.service';
 import { ProcessesFilter } from './Class/processes-filter';
+import { ProcessesPipe } from 'src/app/pipe/processes.pipe';
+import { NgFor, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'processes',
-  templateUrl: './processes.component.html',
-  styleUrls: ['./processes.component.scss']
+    selector: 'processes',
+    templateUrl: './processes.component.html',
+    styleUrls: ['./processes.component.scss'],
+    standalone: true,
+    imports: [FormsModule, NgFor, NgIf, ProcessesPipe]
 })
 export class ProcessesComponent implements OnInit, OnDestroy {
   public processesList: any[] = [];

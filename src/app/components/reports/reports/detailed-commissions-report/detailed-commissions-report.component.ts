@@ -4,9 +4,10 @@ import { DetailedCommissionsReport } from '../../class/detailed-commissions-repo
 import * as moment from "moment";
 
 @Component({
-  selector: 'detailed-commissions-report',
-  templateUrl: './detailed-commissions-report.component.html',
-  styleUrls: ['./detailed-commissions-report.component.css']
+    selector: 'detailed-commissions-report',
+    templateUrl: './detailed-commissions-report.component.html',
+    styleUrls: ['./detailed-commissions-report.component.css'],
+    standalone: true
 })
 export class DetailedCommissionsReportComponent implements OnInit {
   loadingInProgress: boolean = false;

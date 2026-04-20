@@ -24,7 +24,7 @@ describe('FileManagerHeaderComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         DisabledBtnModule,
         PreloaderTicketModule,
@@ -34,14 +34,12 @@ describe('FileManagerHeaderComponent unit test', () => {
         FileManagerAddCategoryModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [FileManagerHeaderComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, FileManagerHeaderComponent],
+}).compileComponents();
 
   });
   it('check "setSort"', () => {

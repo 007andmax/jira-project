@@ -8,11 +8,19 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { MODE_MARKETING_USERS_LIST, TYPE_LIST_MARKETING_USERS } from 'src/app/const/users';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { UserFilterSaveValidate } from './class/user-filter-save-validate';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../directives/disabled-btn/disabled-btn.directive';
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-user-filter-save',
-  templateUrl: './user-filter-save.component.html',
-  styleUrls: ['./user-filter-save.component.scss']
+    selector: 'app-user-filter-save',
+    templateUrl: './user-filter-save.component.html',
+    styleUrls: ['./user-filter-save.component.scss'],
+    standalone: true,
+    imports: [NgClass, FormsModule, NgIf, MatErrorComponent, DynamicTooltipComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class UserFilterSaveComponent implements OnInit {
   @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;

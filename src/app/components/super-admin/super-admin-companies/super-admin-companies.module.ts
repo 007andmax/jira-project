@@ -12,16 +12,15 @@ import { LeftPanelSuperAdminCompaniesComponent } from '../left-panel-super-admin
 
 
 @NgModule({
-    declarations: [SuperAdminCompaniesComponent,
-        SuperAdminCompaniesHeaderComponent,
-        SuperAdminCompaniesItemComponent,
-        LeftPanelSuperAdminCompaniesComponent
-    ],
     imports: [
         CommonModule,
         NgbModule,
         SuperAdminCompaniesRoutingModule,
         InfiniteScrollModule,
+        SuperAdminCompaniesComponent,
+        SuperAdminCompaniesHeaderComponent,
+        SuperAdminCompaniesItemComponent,
+        LeftPanelSuperAdminCompaniesComponent,
     ],
     exports: [SuperAdminCompaniesComponent]
 })

@@ -5,9 +5,10 @@ import { TagsService } from 'src/app/services/tags/tags.service';
 import { ManageTag } from '../class/manage-tag';
 
 @Component({
-  selector: 'manage-tags-add',
-  templateUrl: './manage-tags-add.component.html',
-  styleUrls: ['./manage-tags-add.component.scss']
+    selector: 'manage-tags-add',
+    templateUrl: './manage-tags-add.component.html',
+    styleUrls: ['./manage-tags-add.component.scss'],
+    standalone: true
 })
 export class ManageTagsAddComponent implements OnInit {
   name: string = "";

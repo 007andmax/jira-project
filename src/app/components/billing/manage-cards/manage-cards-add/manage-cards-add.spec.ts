@@ -18,7 +18,7 @@ describe('ManageCardsAddComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         DatePickerModule,
         NumberModule,
         FormsModule,
@@ -27,14 +27,12 @@ describe('ManageCardsAddComponent unit test', () => {
         DisabledBtnModule,
         ReactiveFormsModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [ManageCardsAddComponent
-      ]
-    }).compileComponents();
+        NoopAnimationsModule, ManageCardsAddComponent]
+}).compileComponents();
 
   });
 

@@ -9,14 +9,17 @@ import { TicketProfileFormUpdate } from '../../../ticket-edit-aside/class/ticket
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 import { AddAssignedUserNoteComponent } from './add-assigned-user-note/add-assigned-user-note.component';
 import { AddAssignedUserComponent } from '../../../ticket-edit-aside/add-assigned-user/add-assigned-user.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { TicketDetailProfileFormUpdateComponent } from '../ticket-detail-profile-form-update.component';
+import { NgIf, NgStyle, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'ticket-detail-profile-form-update-header',
-  templateUrl: './ticket-detail-profile-form-update-header.component.html',
-  styleUrls: ['./ticket-detail-profile-form-update-header.component.scss'],
-  providers: [TicketsListService]
+    selector: 'ticket-detail-profile-form-update-header',
+    templateUrl: './ticket-detail-profile-form-update-header.component.html',
+    styleUrls: ['./ticket-detail-profile-form-update-header.component.scss'],
+    providers: [TicketsListService],
+    standalone: true,
+    imports: [NgIf, NgbDropdownModule, NgStyle, NgFor, AddAssignedUserNoteComponent]
 })
 export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   @Input() ticketProfile: TicketProfile = new TicketProfile();

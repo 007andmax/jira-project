@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
+import { NgClass, NgStyle, NgIf, NgFor } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'gl-numbers-drop-down',
-  templateUrl: './gl-numbers-drop-down.component.html',
-  styleUrls: ['./gl-numbers-drop-down.component.scss']
+    selector: 'gl-numbers-drop-down',
+    templateUrl: './gl-numbers-drop-down.component.html',
+    styleUrls: ['./gl-numbers-drop-down.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, NgClass, NgStyle, NgIf, MatErrorComponent, NgFor]
 })
 export class GlNumbersDropDownComponent extends DropDownComponent {
 

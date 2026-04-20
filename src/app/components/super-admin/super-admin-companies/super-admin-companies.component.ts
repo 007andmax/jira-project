@@ -6,10 +6,11 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 import { SuperAdminCompanyFilters } from './class/super-admin-company-filters';
 
 @Component({
-  selector: 'super-admin-companies',
-  templateUrl: './super-admin-companies.component.html',
-  styleUrls: ['./super-admin-companies.component.scss'],
-  providers: [TicketsListService]
+    selector: 'super-admin-companies',
+    templateUrl: './super-admin-companies.component.html',
+    styleUrls: ['./super-admin-companies.component.scss'],
+    providers: [TicketsListService],
+    standalone: true
 })
 export class SuperAdminCompaniesComponent implements OnInit {
   filters: SuperAdminCompanyFilters = new SuperAdminCompanyFilters();

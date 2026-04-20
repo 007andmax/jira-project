@@ -41,9 +41,10 @@ import { Device } from '../../company-devices/class/device';
 
 
 @Component({
-  selector: 'app-report-menu',
-  templateUrl: './report-menu.component.html',
-  styleUrls: ['./report-menu.component.scss']
+    selector: 'app-report-menu',
+    templateUrl: './report-menu.component.html',
+    styleUrls: ['./report-menu.component.scss'],
+    standalone: true
 })
 export class ReportMenuComponent implements OnInit, OnDestroy {
 

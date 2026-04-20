@@ -7,17 +7,13 @@ import { QuoteAsidePreviewBodyComponent } from './quote-aside-preview-body.compo
 
 
 @NgModule({
-    declarations: [
-        QuoteAsidePreviewBodyComponent
-    ],
     imports: [
         CommonModule,
         FormsModule,
         NgbModule,
-        PreviewPhoneMaskModule
+        PreviewPhoneMaskModule,
+        QuoteAsidePreviewBodyComponent
     ],
     exports: [QuoteAsidePreviewBodyComponent]
-
-
 })
 export class QuoteAsidePreviewBodyModule { }

@@ -14,9 +14,10 @@ import { DELETE_DEVICE_TAG } from 'src/app/const/confirm';
 import { ManageTagsDevicesFilter } from './class/manage-tags-devices-filter';
 
 @Component({
-  selector: 'app-manage-tags-devices',
-  templateUrl: './manage-tags-devices.component.html',
-  styleUrls: ['./manage-tags-devices.component.scss']
+    selector: 'app-manage-tags-devices',
+    templateUrl: './manage-tags-devices.component.html',
+    styleUrls: ['./manage-tags-devices.component.scss'],
+    standalone: true
 })
 export class ManageTagsDevicesComponent implements OnInit, OnDestroy {
   tags: Array<DeviceTag> = [];

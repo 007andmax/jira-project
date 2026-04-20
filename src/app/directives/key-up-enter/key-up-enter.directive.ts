@@ -1,7 +1,8 @@
 import { Directive, ElementRef, EventEmitter, Output } from '@angular/core';
 
 @Directive({
-  selector: '[appKeyUpEnter]'
+    selector: '[appKeyUpEnter]',
+    standalone: true
 })
 export class KeyUpEnterDirective {
   @Output() onChange = new EventEmitter<any>();

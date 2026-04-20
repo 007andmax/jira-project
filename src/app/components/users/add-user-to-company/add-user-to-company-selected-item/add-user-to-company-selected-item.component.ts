@@ -3,10 +3,11 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
 import { AssignedTicketUserSelectedItemComponent } from 'src/app/components/tickets/tickets/ticket-add-aside/assigned-ticket-user/assigned-ticket-user-selected-item/assigned-ticket-user-selected-item.component';
 
 @Component({
-  selector: 'app-add-user-to-company-selected-item',
-  templateUrl: './add-user-to-company-selected-item.component.html',
-  styleUrls: ['./add-user-to-company-selected-item.component.scss'],
-  providers: [TicketsListService],
+    selector: 'app-add-user-to-company-selected-item',
+    templateUrl: './add-user-to-company-selected-item.component.html',
+    styleUrls: ['./add-user-to-company-selected-item.component.scss'],
+    providers: [TicketsListService],
+    standalone: true,
 })
 export class AddUserToCompanySelectedItemComponent extends AssignedTicketUserSelectedItemComponent {
   @Output() onSelectUser = new EventEmitter<any>();

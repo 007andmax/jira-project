@@ -20,13 +20,14 @@ import { InventoryHeaderComponent } from './inventory-header/inventory-header.co
 import { InventoryTableComponent } from './inventory-table/inventory-table.component';
 import { fadeInAnimation } from 'src/app/animations';
 @Component({
-  selector: 'app-inventory',
-  templateUrl: './inventory.component.html',
-  styleUrls: ['./inventory.component.scss'],
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  providers: [InventoryListService]
+    selector: 'app-inventory',
+    templateUrl: './inventory.component.html',
+    styleUrls: ['./inventory.component.scss'],
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    providers: [InventoryListService],
+    standalone: true
 })
 export class InventoryComponent implements OnInit {
   selectAll: boolean = false;

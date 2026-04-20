@@ -2,11 +2,15 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ContractStatisticsItem } from '../class/contracts-statistics-item';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { ContractStatisticsFilter } from '../class/contracts-statistics-filter';
+import { ContractsStatisticsTableItemComponent } from './contracts-statistics-table-item/contracts-statistics-table-item.component';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'contracts-statistics-table',
-  templateUrl: './contracts-statistics-table.component.html',
-  styleUrls: ['./contracts-statistics-table.component.scss']
+    selector: 'contracts-statistics-table',
+    templateUrl: './contracts-statistics-table.component.html',
+    styleUrls: ['./contracts-statistics-table.component.scss'],
+    standalone: true,
+    imports: [NgFor, ContractsStatisticsTableItemComponent, NgIf]
 })
 export class ContractsStatisticsTableComponent implements OnInit {
   filter: ContractStatisticsFilter = new ContractStatisticsFilter();

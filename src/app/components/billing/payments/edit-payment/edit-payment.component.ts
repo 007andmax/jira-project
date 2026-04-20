@@ -11,9 +11,10 @@ import { PaymentsService } from 'src/app/services/payments/payments.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
-  selector: 'app-edit-payment',
-  templateUrl: './edit-payment.component.html',
-  styleUrls: ['./edit-payment.component.scss']
+    selector: 'app-edit-payment',
+    templateUrl: './edit-payment.component.html',
+    styleUrls: ['./edit-payment.component.scss'],
+    standalone: true
 })
 export class EditPaymentComponent implements OnInit, OnDestroy {
   @Input() payment: Payment;

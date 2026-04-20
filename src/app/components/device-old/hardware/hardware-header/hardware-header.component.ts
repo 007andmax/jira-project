@@ -5,9 +5,10 @@ import { ToastrService } from 'ngx-toastr';
 import { ExcelService } from '../../_services/download_csv.service';
 
 @Component({
-  selector: 'hardware-header',
-  templateUrl: './hardware-header.component.html',
-  styleUrls: ['./hardware-header.component.scss']
+    selector: 'hardware-header',
+    templateUrl: './hardware-header.component.html',
+    styleUrls: ['./hardware-header.component.scss'],
+    standalone: true
 })
 export class HardwareHeaderComponent implements OnInit {
   @Input() loading: boolean;

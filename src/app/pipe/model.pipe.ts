@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: "modelFilter"
+    name: "modelFilter",
+    standalone: true
 })
 export class ModelPipe implements PipeTransform {
   transform(items: any, args?: any): any {

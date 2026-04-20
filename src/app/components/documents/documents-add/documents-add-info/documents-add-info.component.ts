@@ -18,9 +18,10 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-documents-add-info',
-  templateUrl: './documents-add-info.component.html',
-  styleUrls: ['./documents-add-info.component.scss']
+    selector: 'app-documents-add-info',
+    templateUrl: './documents-add-info.component.html',
+    styleUrls: ['./documents-add-info.component.scss'],
+    standalone: true
 })
 export class DocumentsAddInfoComponent implements OnInit, OnDestroy {
   openAside: boolean = true;

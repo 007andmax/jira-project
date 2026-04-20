@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren } from '@angular/core';
 import { commandModal } from '../../class/device';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbNavModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { TerminalManageCategoryComponent } from '../terminal-manage-category/terminal-manage-category.component';
 import { TerminalService } from '../../_services/terminal.service';
 import { first } from 'rxjs/operators';
@@ -9,11 +9,16 @@ import { CompanySetting } from 'src/app/components/companies/class/company-setti
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { TerminalValidate } from '../class/terminal-validate';
 import { CONFIGCONSTANTS } from '../../config/app-constants';
+import { NgClass, NgIf, NgFor, DatePipe } from '@angular/common';
+import { DropDownComponent as DropDownComponent_1 } from '../../../shared/drop-down/drop-down.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'terminal-aside',
-  templateUrl: './terminal-aside.component.html',
-  styleUrls: ['./terminal-aside.component.scss']
+    selector: 'terminal-aside',
+    templateUrl: './terminal-aside.component.html',
+    styleUrls: ['./terminal-aside.component.scss'],
+    standalone: true,
+    imports: [FormsModule, DropDownComponent_1, NgClass, NgIf, NgFor, NgbNavModule, NgbDropdownModule, DatePipe]
 })
 export class TerminalAsideComponent implements OnInit {
   DateTimeHistoryFormat = CONFIGCONSTANTS.DateTimeHistoryFormat;

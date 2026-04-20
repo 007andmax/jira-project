@@ -3,7 +3,8 @@ import { SupportItemComponent } from 'src/app/components/support/support-item/su
 @Component({
     selector: 'ticket-detail-profile-form-update-support',
     templateUrl: './ticket-detail-profile-form-update-support.component.html',
-    styleUrls: ['./ticket-detail-profile-form-update-support.component.scss']
+    styleUrls: ['./ticket-detail-profile-form-update-support.component.scss'],
+    standalone: true
 })
 export class TicketDetailProfileFormUpdateSupportComponent extends SupportItemComponent {
     @Output() onCreateOneTimeRemoteSession = new EventEmitter();

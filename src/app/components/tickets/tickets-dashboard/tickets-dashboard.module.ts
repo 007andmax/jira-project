@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TicketsDashboardComponent } from './tickets-dashboard.component';
-import { DashboardStatsModule } from '../../billing/dashboard-billing/dashboard-stats/dashboard-stats.module';
+
 import { TicketsAnalyticsWidgetComponent } from './tickets-analytics-widget/tickets-analytics-widget.component';
 import { TicketPriorityWidgetComponent } from './ticket-priority-widget/ticket-priority-widget.component';
 import { RecurringTicketWidgetComponent } from './recurring-ticket-widget/recurring-ticket-widget.component';
@@ -17,25 +17,19 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
-    declarations: [TicketsDashboardComponent,
-        TicketsAnalyticsWidgetComponent,
-        TicketPriorityWidgetComponent,
-        RecurringTicketWidgetComponent,
-        TimeOnTicketsWidgetComponent,
-        TicketsBillableHoursWidgetComponent,
-        TechTicketsWidgetComponent
-
-    ],
     imports: [
-        CommonModule,
-        DashboardStatsModule,
-        NgbModule,
-        FormsModule,
-        TicketsDashboardRoutingModule,
-        NgxChartsModule
-    ],
-
-
-
+    CommonModule,
+    NgbModule,
+    FormsModule,
+    TicketsDashboardRoutingModule,
+    NgxChartsModule,
+    TicketsDashboardComponent,
+    TicketsAnalyticsWidgetComponent,
+    TicketPriorityWidgetComponent,
+    RecurringTicketWidgetComponent,
+    TimeOnTicketsWidgetComponent,
+    TicketsBillableHoursWidgetComponent,
+    TechTicketsWidgetComponent
+],
 })
 export class TicketsDashboardModule { }

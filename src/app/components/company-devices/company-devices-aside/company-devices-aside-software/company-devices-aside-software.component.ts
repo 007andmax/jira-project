@@ -3,9 +3,10 @@ import { DeviceExtended } from '../../class/device-extended';
 import * as moment from "moment";
 
 @Component({
-  selector: 'app-company-devices-aside-software',
-  templateUrl: './company-devices-aside-software.component.html',
-  styleUrls: ['./company-devices-aside-software.component.scss']
+    selector: 'app-company-devices-aside-software',
+    templateUrl: './company-devices-aside-software.component.html',
+    styleUrls: ['./company-devices-aside-software.component.scss'],
+    standalone: true
 })
 export class CompanyDevicesAsideSoftwareComponent implements OnInit {
   @Input() device: DeviceExtended;

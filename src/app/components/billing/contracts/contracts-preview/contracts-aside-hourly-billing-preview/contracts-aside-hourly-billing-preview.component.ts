@@ -6,12 +6,19 @@ import { ServiceAgreement } from '../../class/service-agreement';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/class/taxes/tax';
 import { Subscription } from 'rxjs';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgFor, CurrencyPipe } from '@angular/common';
+import { DatePickerComponent } from '../../../../shared/date-picker/date-picker.component';
+import { DropDownComponent } from '../../../../shared/drop-down/drop-down.component';
 
 
 @Component({
-  selector: 'app-contracts-aside-hourly-billing-preview',
-  templateUrl: './contracts-aside-hourly-billing-preview.component.html',
-  styleUrls: ['./contracts-aside-hourly-billing-preview.component.scss']
+    selector: 'app-contracts-aside-hourly-billing-preview',
+    templateUrl: './contracts-aside-hourly-billing-preview.component.html',
+    styleUrls: ['./contracts-aside-hourly-billing-preview.component.scss'],
+    standalone: true,
+    imports: [DropDownComponent, DatePickerComponent, NgClass, FormsModule, NgbTooltipModule, NgFor, CurrencyPipe]
 })
 export class ContractsAsideHourlyBillingPreviewComponent implements OnInit, OnDestroy {
   selectedCompany: any;

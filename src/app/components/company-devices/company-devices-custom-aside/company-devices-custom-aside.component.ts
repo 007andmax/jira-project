@@ -18,11 +18,18 @@ import { ModelsDropDownComponent } from './models-drop-down/models-drop-down.com
 import { Subscription } from 'rxjs';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { DeviceType } from '../class/device-type';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../directives/disabled-btn/disabled-btn.directive';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
+import { CompanyDevicesAssestTypeDropDownComponent } from './company-devices-assest-type-drop-down/company-devices-assest-type-drop-down.component';
 
 @Component({
-  selector: 'app-company-devices-custom-aside',
-  templateUrl: './company-devices-custom-aside.component.html',
-  styleUrls: ['./company-devices-custom-aside.component.scss']
+    selector: 'app-company-devices-custom-aside',
+    templateUrl: './company-devices-custom-aside.component.html',
+    styleUrls: ['./company-devices-custom-aside.component.scss'],
+    standalone: true,
+    imports: [CompanyDevicesAssestTypeDropDownComponent, NgClass, FormsModule, NgIf, ManufacturesDropDownComponent, ModelsDropDownComponent, DatePickerComponent, CompanyDevicesCustomDropDownComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class CompanyDevicesCustomAsideComponent implements OnInit, OnDestroy {
   device: CustomDevice = new CustomDevice();

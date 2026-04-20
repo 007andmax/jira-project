@@ -1,11 +1,19 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import { MatChipComponent } from '../../../../../shared/mat-chip/mat-chip.component';
+import { NgFor, NgIf, NgClass } from '@angular/common';
+import { DynamicTooltipComponent } from '../../../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatChipListComponent } from '../../../../../shared/mat-chip-list/mat-chip-list.component';
+import { MatFormFieldComponent } from '../../../../../shared/mat-form-field/mat-form-field.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'tickets-filter-companies-drop-down',
-  templateUrl: './tickets-filter-companies-drop-down.component.html',
-  styleUrls: ['./tickets-filter-companies-drop-down.component.scss']
+    selector: 'tickets-filter-companies-drop-down',
+    templateUrl: './tickets-filter-companies-drop-down.component.html',
+    styleUrls: ['./tickets-filter-companies-drop-down.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, MatFormFieldComponent, MatChipListComponent, DynamicTooltipComponent, NgFor, MatChipComponent, NgIf, NgClass]
 })
 export class TicketsFilterCompaniesDropDownComponent extends CompanyDropDownComponent {
   selectable = true;

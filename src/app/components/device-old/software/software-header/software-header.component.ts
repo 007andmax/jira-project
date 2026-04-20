@@ -7,9 +7,10 @@ import { CONFIGCONSTANTS } from '../../config/app-constants';
 import * as moment from "moment";
 
 @Component({
-  selector: 'software-header',
-  templateUrl: './software-header.component.html',
-  styleUrls: ['./software-header.component.scss']
+    selector: 'software-header',
+    templateUrl: './software-header.component.html',
+    styleUrls: ['./software-header.component.scss'],
+    standalone: true
 })
 export class SoftwareHeaderComponent implements OnInit {
   @Input() deviceDetail: any = {};

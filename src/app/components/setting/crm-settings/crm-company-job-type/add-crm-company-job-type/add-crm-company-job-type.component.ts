@@ -3,11 +3,17 @@ import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { CrmService } from 'src/app/services/crm/crm.service';
 import { CrmCompanyJobType } from '../class/crm-company-job-type';
+import { MatErrorComponent } from '../../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
+import { ClickOutsideDirective } from '../../../../../directives/click-otside/click-otside.directive';
 
 @Component({
-  selector: 'add-crm-company-job-type',
-  templateUrl: './add-crm-company-job-type.component.html',
-  styleUrls: ['./add-crm-company-job-type.component.scss']
+    selector: 'add-crm-company-job-type',
+    templateUrl: './add-crm-company-job-type.component.html',
+    styleUrls: ['./add-crm-company-job-type.component.scss'],
+    standalone: true,
+    imports: [ClickOutsideDirective, NgClass, FormsModule, NgIf, MatErrorComponent]
 })
 export class AddCrmCompanyJobTypeComponent implements OnInit {
   name: string = "";

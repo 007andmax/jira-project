@@ -25,7 +25,7 @@ describe('ContractsAsideBlockTimeBillingDefaultServiceComponent unit test', () =
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         NgbModule,
         TaxesModule,
@@ -35,14 +35,12 @@ describe('ContractsAsideBlockTimeBillingDefaultServiceComponent unit test', () =
         ContractsAsideDiscountModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [ContractsAsideBlockTimeBillingDefaultServiceComponent
-      ]
-    }).compileComponents();
+        NoopAnimationsModule, ContractsAsideBlockTimeBillingDefaultServiceComponent]
+}).compileComponents();
 
   });
 
@@ -67,7 +65,7 @@ describe('ContractsAsideBlockTimeBillingDefaultServiceComponent integration test
   let fixture: ComponentFixture<ContractsAsideBlockTimeBillingDefaultServiceComponent>;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         NgbModule,
         TaxesModule,
@@ -77,15 +75,13 @@ describe('ContractsAsideBlockTimeBillingDefaultServiceComponent integration test
         ContractsAsideDiscountModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      providers: [{ provide: CommonService, useValue: undefined }],
-      declarations: [ContractsAsideBlockTimeBillingDefaultServiceComponent
-      ],
-    })
+        NoopAnimationsModule, ContractsAsideBlockTimeBillingDefaultServiceComponent],
+    providers: [{ provide: CommonService, useValue: undefined }],
+})
     fixture = TestBed.createComponent(ContractsAsideBlockTimeBillingDefaultServiceComponent);
     component = fixture.componentInstance;
   });

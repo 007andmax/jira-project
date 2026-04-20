@@ -9,11 +9,16 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { OnDestroy } from '@angular/core';
+import { DeviceServicePipe } from 'src/app/pipe/device-service.pipe';
+import { NgIf, NgFor, NgClass } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-services',
-  templateUrl: './services.component.html',
-  styleUrls: ['./services.component.scss']
+    selector: 'app-services',
+    templateUrl: './services.component.html',
+    styleUrls: ['./services.component.scss'],
+    standalone: true,
+    imports: [FormsModule, NgIf, NgFor, NgClass, DeviceServicePipe]
 })
 export class ServicesComponent implements OnInit, OnDestroy {
 

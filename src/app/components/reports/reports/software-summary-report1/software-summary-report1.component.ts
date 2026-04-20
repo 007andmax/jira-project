@@ -16,9 +16,10 @@ import { SoftwareSummaryReportFilter } from "./Class/software-summary-report1-fi
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "software-summary-report1",
-  templateUrl: "./software-summary-report1.component.html",
-  styleUrls: ["./software-summary-report1.component.scss"],
+    selector: "software-summary-report1",
+    templateUrl: "./software-summary-report1.component.html",
+    styleUrls: ["./software-summary-report1.component.scss"],
+    standalone: true,
 })
 export class SoftwareSummaryReport1Component implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;

@@ -14,9 +14,10 @@ import { DeviceProcessorRamReportFilter } from "./Class/device-processorram-repo
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "report-device-processorram",
-  templateUrl: "./report-device-processorram.component.html",
-  styleUrls: ["./report-device-processorram.component.scss"],
+    selector: "report-device-processorram",
+    templateUrl: "./report-device-processorram.component.html",
+    styleUrls: ["./report-device-processorram.component.scss"],
+    standalone: true,
 })
 export class ReportDeviceProcessorramComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;

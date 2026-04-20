@@ -2,12 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { CompanyUsersDropDownComponent } from '../../tickets/tickets/ticket-add-aside/company-users-drop-down/company-users-drop-down.component';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { CompanyUser } from '../../tickets/tickets/ticket-add-aside/company-users-drop-down/class/company-user';
+import { FormsModule } from '@angular/forms';
+import { MatErrorComponent } from '../mat-error/mat-error.component';
+import { NgClass, NgStyle, NgIf, NgFor } from '@angular/common';
+import { NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-users-drop-down',
-  templateUrl: './users-drop-down.component.html',
-  styleUrls: ['./users-drop-down.component.scss'],
-  providers: [TicketsListService],
+    selector: 'app-users-drop-down',
+    templateUrl: './users-drop-down.component.html',
+    styleUrls: ['./users-drop-down.component.scss'],
+    providers: [TicketsListService],
+    standalone: true,
+    imports: [
+        NgbDropdownModule,
+        NgClass,
+        NgStyle,
+        NgIf,
+        NgbTooltipModule,
+        MatErrorComponent,
+        FormsModule,
+        NgFor,
+    ],
 })
 export class UsersDropDownComponent extends CompanyUsersDropDownComponent {
 

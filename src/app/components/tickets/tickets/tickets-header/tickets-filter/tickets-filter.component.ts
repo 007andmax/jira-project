@@ -28,9 +28,10 @@ import { TitleListType } from '../class/title-list-type';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 @Component({
-  selector: 'app-tickets-filter',
-  templateUrl: './tickets-filter.component.html',
-  styleUrls: ['./tickets-filter.component.scss']
+    selector: 'app-tickets-filter',
+    templateUrl: './tickets-filter.component.html',
+    styleUrls: ['./tickets-filter.component.scss'],
+    standalone: true
 })
 export class TicketsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('usersDp', { static: true }) usersDp: TicketsFilterDropDownComponent;

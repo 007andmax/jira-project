@@ -1,15 +1,18 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { DeviceType } from 'src/app/components/company-devices/class/device-type';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-add-device-setting-type',
-  templateUrl: './add-device-setting-type.component.html',
-  styleUrls: ['./add-device-setting-type.component.scss']
+    selector: 'app-add-device-setting-type',
+    templateUrl: './add-device-setting-type.component.html',
+    styleUrls: ['./add-device-setting-type.component.scss'],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, NgClass, NgIf]
 })
 export class AddDeviceSettingTypeComponent implements OnInit {
   deviceForm: UntypedFormGroup;

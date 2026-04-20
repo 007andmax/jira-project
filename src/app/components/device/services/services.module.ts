@@ -8,17 +8,13 @@ import { DeviceServicePipe } from 'src/app/pipe/device-service.pipe';
 
 
 @NgModule({
-    declarations: [ServicesComponent,
-        DeviceServicePipe
-    ],
     imports: [
         CommonModule,
         ServicesRoutingModule,
         FormsModule,
         ReactiveFormsModule,
+        ServicesComponent,
+        DeviceServicePipe,
     ],
-
-
-
 })
 export class ServicesModule { }

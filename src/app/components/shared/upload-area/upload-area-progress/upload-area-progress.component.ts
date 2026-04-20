@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-upload-area-progress',
-  templateUrl: './upload-area-progress.component.html',
-  styleUrls: ['./upload-area-progress.component.scss']
+    selector: 'app-upload-area-progress',
+    templateUrl: './upload-area-progress.component.html',
+    styleUrls: ['./upload-area-progress.component.scss'],
+    standalone: true
 })
 export class UploadAreaProgressComponent implements OnInit {
   @Input() progress = 0;

@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { TicketsDashboardService } from 'src/app/services/tickets-dashboard/tickets-dashboard.service';
 import { CompanySetting } from '../../../companies/class/company-setting';
 import { DashboardTicketsTime } from '../class/dashboard-tickets-time';
+import { NgFor, NgIf } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-time-on-tickets-widget',
-  templateUrl: './time-on-tickets-widget.component.html',
-  styleUrls: ['./time-on-tickets-widget.component.scss']
+    selector: 'app-time-on-tickets-widget',
+    templateUrl: './time-on-tickets-widget.component.html',
+    styleUrls: ['./time-on-tickets-widget.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, NgFor, NgIf]
 })
 export class TimeOnTicketsWidgetComponent implements OnInit {
   dashboardTicketsTime: DashboardTicketsTime = new DashboardTicketsTime();

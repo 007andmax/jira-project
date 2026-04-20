@@ -6,9 +6,10 @@ import { DeviceIpSummary } from '../../class/device-ip-summary';
 
 
 @Component({
-  selector: 'device-ip-summary-report',
-  templateUrl: './device-ip-summary-report.component.html',
-  styleUrls: ['./device-ip-summary-report.component.scss']
+    selector: 'device-ip-summary-report',
+    templateUrl: './device-ip-summary-report.component.html',
+    styleUrls: ['./device-ip-summary-report.component.scss'],
+    standalone: true
 })
 export class DeviceIpSummaryReportComponent implements OnInit {
   loadingInProgress: boolean = false;

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { NonContractServicesService } from 'src/app/services/non-contract-services/non-contract-services.service';
 import { GlobalSearchService } from 'src/app/services/global-search/global-search.service';
 import { ProductService } from 'src/app/services/product/product.service';
@@ -18,12 +18,16 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { TicketStateService } from '../../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
+import { NgIf, NgFor, NgClass, NgStyle } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-global-search',
-  templateUrl: './global-search.component.html',
-  styleUrls: ['./global-search.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-global-search',
+    templateUrl: './global-search.component.html',
+    styleUrls: ['./global-search.component.scss'],
+    providers: [TicketsListService],
+    standalone: true,
+    imports: [NgbDropdownModule, FormsModule, NgIf, NgFor, NgClass, NgStyle]
 })
 export class GlobalSearchComponent implements OnInit {
   @ViewChild('globalSearch', { static: true }) globalSearch: NgbDropdown;

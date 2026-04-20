@@ -15,20 +15,19 @@ describe('TicketDetailHeaderComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NgbModule,
         DisabledBtnModule,
         PreloaderTicketModule,
         NoopAnimationsModule],
-      declarations: [TicketDetailHeaderComponent
-      ]
-    }).compileComponents();
+    declarations: [TicketDetailHeaderComponent]
+}).compileComponents();
 
   });
 

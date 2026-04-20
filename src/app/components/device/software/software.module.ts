@@ -9,18 +9,13 @@ import { SoftwareRoutingModule } from './software-routing.module';
 
 
 @NgModule({
-    declarations: [SoftwareComponent,
-        SoftwarePipe
-
-    ],
     imports: [
         CommonModule,
         FormsModule,
         DataTablesModule,
-        SoftwareRoutingModule
+        SoftwareRoutingModule,
+        SoftwareComponent,
+        SoftwarePipe
     ],
-
-
-
 })
 export class SoftwareModule { }

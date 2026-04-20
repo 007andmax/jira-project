@@ -16,22 +16,20 @@ describe('UsersDetailsTabTicketsComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         InfiniteScrollModule,
         UserTableCustomSubscriptionModule,
         DropDownModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [UsersDetailsTabTicketsComponent,
-        UsersDetailsTabTicketsItemComponent
-      ]
-    }).compileComponents();
+        NoopAnimationsModule, UsersDetailsTabTicketsComponent,
+        UsersDetailsTabTicketsItemComponent]
+}).compileComponents();
 
   });
 

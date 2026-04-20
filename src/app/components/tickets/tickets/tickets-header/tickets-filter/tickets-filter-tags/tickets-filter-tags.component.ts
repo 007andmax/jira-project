@@ -3,12 +3,20 @@ import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 import { TicketsListService } from '../../../services/tickets-list.service';
 import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
+import { MatChipComponent } from '../../../../../shared/mat-chip/mat-chip.component';
+import { NgFor, NgIf, NgClass } from '@angular/common';
+import { DynamicTooltipComponent } from '../../../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatChipListComponent } from '../../../../../shared/mat-chip-list/mat-chip-list.component';
+import { MatFormFieldComponent as MatFormFieldComponent_1 } from '../../../../../shared/mat-form-field/mat-form-field.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-tickets-filter-tags',
-  templateUrl: './tickets-filter-tags.component.html',
-  styleUrls: ['./tickets-filter-tags.component.scss'],
-  providers: [CompanyTagsListService, TicketsListService]
+    selector: 'app-tickets-filter-tags',
+    templateUrl: './tickets-filter-tags.component.html',
+    styleUrls: ['./tickets-filter-tags.component.scss'],
+    providers: [CompanyTagsListService, TicketsListService],
+    standalone: true,
+    imports: [NgbDropdownModule, MatFormFieldComponent_1, MatChipListComponent, DynamicTooltipComponent, NgFor, MatChipComponent, NgIf, NgClass]
 })
 export class TicketsFilterTagsComponent extends CompanyTagsComponent {
   @Input() placement: string = 'bottom-left';

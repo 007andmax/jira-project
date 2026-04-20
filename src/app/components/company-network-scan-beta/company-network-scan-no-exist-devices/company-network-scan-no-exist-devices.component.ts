@@ -4,9 +4,10 @@ import { CompanyDownlaodAgent } from '../../companies/class/company-download-age
 import { DownloadAgentService } from '../../companies/download-agent/services/download-agent.service';
 
 @Component({
-  selector: 'app-company-network-scan-no-exist-devices',
-  templateUrl: './company-network-scan-no-exist-devices.component.html',
-  styleUrls: ['./company-network-scan-no-exist-devices.component.scss']
+    selector: 'app-company-network-scan-no-exist-devices',
+    templateUrl: './company-network-scan-no-exist-devices.component.html',
+    styleUrls: ['./company-network-scan-no-exist-devices.component.scss'],
+    standalone: true
 })
 export class CompanyNetworkScanNoExistDevicesComponent implements OnInit {
   @Input() companyId: string;

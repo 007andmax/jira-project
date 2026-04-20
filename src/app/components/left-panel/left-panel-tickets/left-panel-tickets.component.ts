@@ -11,14 +11,17 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketGlobalFilter } from '../../tickets/tickets/class/ticket-global-filter';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { DELETE_GLOBAL_FILTER } from 'src/app/const/confirm';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { Subscription } from 'rxjs';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-left-panel-tickets',
-  templateUrl: './left-panel-tickets.component.html',
-  styleUrls: ['./left-panel-tickets.component.scss']
+    selector: 'app-left-panel-tickets',
+    templateUrl: './left-panel-tickets.component.html',
+    styleUrls: ['./left-panel-tickets.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, NgFor, NgbTooltipModule, NgbDropdownModule]
 })
 export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   open: boolean = false;

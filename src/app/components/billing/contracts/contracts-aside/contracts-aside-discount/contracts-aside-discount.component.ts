@@ -1,11 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 import { ContractsUserDeviceService } from '../class/contracts-user-device-service';
+import { NgFor, NgClass } from '@angular/common';
+import { DecimalNumberDirective } from '../../../../../directives/decimal-number/decimal-number.directive';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-contracts-aside-discount',
-  templateUrl: './contracts-aside-discount.component.html',
-  styleUrls: ['./contracts-aside-discount.component.scss']
+    selector: 'app-contracts-aside-discount',
+    templateUrl: './contracts-aside-discount.component.html',
+    styleUrls: ['./contracts-aside-discount.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, DecimalNumberDirective, NgFor, NgClass]
 })
 export class ContractsAsideDiscountComponent implements OnInit {
   @Input() service: ContractsUserDeviceService;

@@ -1,11 +1,14 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DevicesService } from 'src/app/services/devices/devices.service';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-device-setting-manufactures-add',
-  templateUrl: './device-setting-manufactures-add.component.html',
-  styleUrls: ['./device-setting-manufactures-add.component.scss']
+    selector: 'app-device-setting-manufactures-add',
+    templateUrl: './device-setting-manufactures-add.component.html',
+    styleUrls: ['./device-setting-manufactures-add.component.scss'],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, NgClass, NgIf]
 })
 export class DeviceSettingManufacturesAddComponent implements OnInit {
   @Output() onClose = new EventEmitter();

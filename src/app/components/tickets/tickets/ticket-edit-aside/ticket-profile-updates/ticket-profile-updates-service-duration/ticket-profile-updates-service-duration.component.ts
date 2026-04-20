@@ -1,12 +1,15 @@
-import { DOCUMENT } from "@angular/common";
+import { DOCUMENT, NgClass, NgFor } from "@angular/common";
 import { Component, Inject, OnInit, Input, Output, EventEmitter, ElementRef } from "@angular/core";
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ServiceDurationValue } from "./class/service-duration-value";
+import { NgbDropdownModule } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
     selector: 'app-ticket-profile-updates-service-duration',
     templateUrl: './ticket-profile-updates-service-duration.component.html',
-    styleUrls: ['./ticket-profile-updates-service-duration.component.scss']
+    styleUrls: ['./ticket-profile-updates-service-duration.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, NgClass, NgFor]
 })
 export class TicketProfileUpdatesServiceDurationComponent implements OnInit {
     @Output() onChange = new EventEmitter<any>();

@@ -8,10 +8,11 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 
 @Component({
-  selector: 'app-file-manager-add-file',
-  templateUrl: './file-manager-add-file.component.html',
-  styleUrls: ['./file-manager-add-file.component.scss'],
-  providers: [NgbModalConfig, NgbModal]
+    selector: 'app-file-manager-add-file',
+    templateUrl: './file-manager-add-file.component.html',
+    styleUrls: ['./file-manager-add-file.component.scss'],
+    providers: [NgbModalConfig, NgbModal],
+    standalone: true
 })
 export class FileManagerAddFileComponent implements OnInit {
   @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;

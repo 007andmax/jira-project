@@ -1,11 +1,19 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserDefaultSubscription } from '../../class/user-default-subscription';
+import { NgClass, NgIf } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'user-table-default-subscription',
-  templateUrl: './user-table-default-subscription.component.html',
-  styleUrls: ['./user-table-default-subscription.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'user-table-default-subscription',
+    templateUrl: './user-table-default-subscription.component.html',
+    styleUrls: ['./user-table-default-subscription.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgbDropdownModule,
+        NgClass,
+        NgIf,
+    ],
 })
 export class UserTableDefaultSubscriptionComponent implements OnInit {
   @Input() defaultSubscriptions: UserDefaultSubscription;

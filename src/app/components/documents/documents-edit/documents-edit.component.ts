@@ -5,12 +5,13 @@ import { DocumentsAddComponent } from '../documents-add/documents-add.component'
 import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
-  selector: 'documents-edit',
-  templateUrl: './documents-edit.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./documents-edit.component.scss']
+    selector: 'documents-edit',
+    templateUrl: './documents-edit.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./documents-edit.component.scss'],
+    standalone: true
 })
 export class DocumentsEditComponent extends DocumentsAddComponent {
   showPreloader: boolean = true;

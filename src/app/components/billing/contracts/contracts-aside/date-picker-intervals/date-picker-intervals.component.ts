@@ -1,15 +1,20 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
-import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDropdownModule, NgbTooltipModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { DatePickerStateService } from 'src/app/components/shared/date-picker/services/date-picker-state.service';
 import { DatePickerService } from 'src/app/components/shared/date-picker/services/date-picker.service';
+import { FormsModule } from '@angular/forms';
+import { DynamicTooltipComponent } from '../../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { NgIf, NgClass } from '@angular/common';
 declare var $: any;
 
 @Component({
-  selector: 'app-date-picker-intervals',
-  templateUrl: './date-picker-intervals.component.html',
-  styleUrls: ['./date-picker-intervals.component.scss'],
-  providers: [DatePickerService]
+    selector: 'app-date-picker-intervals',
+    templateUrl: './date-picker-intervals.component.html',
+    styleUrls: ['./date-picker-intervals.component.scss'],
+    providers: [DatePickerService],
+    standalone: true,
+    imports: [NgbDropdownModule, NgIf, DynamicTooltipComponent, NgbTooltipModule, NgClass, NgbDatepickerModule, FormsModule]
 })
 export class DatePickerIntervalsComponent extends DatePickerComponent {
   @Input() intervalstring: string = "";

@@ -12,10 +12,20 @@ import { ContractsBlockTimeDefaultService } from '../../contracts-aside/class/co
 import { ContractsAsideHourlyBillingDefaultServiceComponent } from '../../contracts-aside/contracts-aside-hourly-billing/contracts-aside-hourly-billing-default-service/contracts-aside-hourly-billing-default-service.component';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { ContractsAsideEditHourlyAddDefaultServiceComponent } from './contracts-aside-edit-hourly-add-default-service/contracts-aside-edit-hourly-add-default-service.component';
+import { ContractsAsideHourlyBillingEditDefaultServiceComponent } from './contracts-aside-hourly-billing-edit-default-service/contracts-aside-hourly-billing-edit-default-service.component';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatErrorComponent } from '../../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf, NgFor } from '@angular/common';
+import { DatePickerComponent as DatePickerComponent_1 } from '../../../../shared/date-picker/date-picker.component';
+import { DropDownComponent } from '../../../../shared/drop-down/drop-down.component';
 @Component({
-  selector: 'app-contracts-aside-hourly-edit',
-  templateUrl: './contracts-aside-hourly-edit.component.html',
-  styleUrls: ['./contracts-aside-hourly-edit.component.scss']
+    selector: 'app-contracts-aside-hourly-edit',
+    templateUrl: './contracts-aside-hourly-edit.component.html',
+    styleUrls: ['./contracts-aside-hourly-edit.component.scss'],
+    standalone: true,
+    imports: [DropDownComponent, DatePickerComponent_1, NgClass, FormsModule, NgIf, MatErrorComponent, NgbTooltipModule, NgFor, ContractsAsideHourlyBillingEditDefaultServiceComponent, ContractsAsideEditHourlyAddDefaultServiceComponent]
 })
 export class ContractsAsideHourlyEditComponent implements OnInit {
   selectedCompany: any;

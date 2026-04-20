@@ -15,21 +15,19 @@ describe('MarketingSubscriptionsAddComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         MatErrorModule,
         FormsModule,
         HttpClientModule,
         NgbModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [MarketingSubscriptionsAddComponent
-      ],
-      providers: [NgbActiveModal]
-    }).compileComponents();
+        NoopAnimationsModule, MarketingSubscriptionsAddComponent],
+    providers: [NgbActiveModal]
+}).compileComponents();
 
   });
 

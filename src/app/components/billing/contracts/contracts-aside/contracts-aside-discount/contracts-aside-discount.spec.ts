@@ -22,16 +22,14 @@ describe('ContractsAsideDiscountComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         NgbModule,
         NumberModule,
         DecimalNumberModule,
         MatErrorModule,
-        NoopAnimationsModule],
-      declarations: [ContractsAsideDiscountComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, ContractsAsideDiscountComponent],
+}).compileComponents();
 
   });
 

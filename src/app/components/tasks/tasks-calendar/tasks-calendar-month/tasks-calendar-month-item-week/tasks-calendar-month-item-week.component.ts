@@ -4,9 +4,10 @@ import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
-  selector: 'app-tasks-calendar-month-item-week',
-  templateUrl: './tasks-calendar-month-item-week.component.html',
-  styleUrls: ['./tasks-calendar-month-item-week.component.scss']
+    selector: 'app-tasks-calendar-month-item-week',
+    templateUrl: './tasks-calendar-month-item-week.component.html',
+    styleUrls: ['./tasks-calendar-month-item-week.component.scss'],
+    standalone: true
 })
 export class TasksCalendarMonthItemWeekComponent {
   @ViewChild('p', { static: false }) p: any;

@@ -1,7 +1,7 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, Input, OnInit, ViewChild, HostListener, OnDestroy } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
-import { NgbActiveModal, NgbModalConfig, NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbActiveModal, NgbModalConfig, NgbModal, NgbDropdownModule } from "@ng-bootstrap/ng-bootstrap";
 import { USER } from "../../../const/users";
 import { Subject, Subscription } from "rxjs";
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
@@ -15,15 +15,33 @@ import { SupportStateService } from 'src/app/states/support/support-state.servic
 import { QuoteEdit } from 'src/app/components/billing/quotes/class/quote-edit';
 import { QuotePreview } from 'src/app/components/billing/quotes/class/quote-preview';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
+import { TextAreaDirective } from '../../../directives/text-area/text-area.directive';
+import { MatChipComponent } from '../../../components/shared/mat-chip/mat-chip.component';
+import { NgFor, NgStyle, NgIf } from '@angular/common';
+import { MatChipListComponent } from '../../../components/shared/mat-chip-list/mat-chip-list.component';
+import { MatFormFieldComponent } from '../../../components/shared/mat-form-field/mat-form-field.component';
 
 /**
  * Modal quote component
  */
 @Component({
-  selector: 'app-modal-quote',
-  templateUrl: './modal-quote.component.html',
-  styleUrls: ['./modal-quote.component.scss'],
-  providers: [NgbModalConfig, NgbModal, TicketsListService],
+    selector: 'app-modal-quote',
+    templateUrl: './modal-quote.component.html',
+    styleUrls: ['./modal-quote.component.scss'],
+    providers: [NgbModalConfig, NgbModal, TicketsListService],
+    standalone: true,
+    imports: [
+        FormsModule,
+        NgbDropdownModule,
+        MatFormFieldComponent,
+        MatChipListComponent,
+        NgFor,
+        MatChipComponent,
+        ReactiveFormsModule,
+        NgStyle,
+        NgIf,
+        TextAreaDirective,
+    ],
 })
 export class ModalQuoteComponent implements OnInit, OnDestroy {
 

@@ -11,10 +11,11 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'marketing-email-users-add',
-  templateUrl: './marketing-email-users-add.component.html',
-  styleUrls: ['./marketing-email-users-add.component.scss'],
-  providers: [UserListService],
+    selector: 'marketing-email-users-add',
+    templateUrl: './marketing-email-users-add.component.html',
+    styleUrls: ['./marketing-email-users-add.component.scss'],
+    providers: [UserListService],
+    standalone: true,
 })
 export class MarketingEmailUsersAddComponent implements OnInit, OnDestroy {
   opened: boolean = false;

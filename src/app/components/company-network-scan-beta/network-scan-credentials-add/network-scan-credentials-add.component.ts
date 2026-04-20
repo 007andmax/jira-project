@@ -4,9 +4,10 @@ import { PasswordRecordCategories } from '../../password-manager/class/password-
 import { NetworkScanCredentialsAdd } from '../class/network-scan-credentials-add';
 
 @Component({
-  selector: 'app-network-scan-credentials-add',
-  templateUrl: './network-scan-credentials-add.component.html',
-  styleUrls: ['./network-scan-credentials-add.component.scss']
+    selector: 'app-network-scan-credentials-add',
+    templateUrl: './network-scan-credentials-add.component.html',
+    styleUrls: ['./network-scan-credentials-add.component.scss'],
+    standalone: true
 })
 export class NetworkScanCredentialsAddComponent implements OnInit {
   @Input() companyId: string;

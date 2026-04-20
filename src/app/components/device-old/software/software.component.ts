@@ -17,9 +17,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SoftwareHeaderComponent } from './software-header/software-header.component';
 
 @Component({
-  selector: 'app-software',
-  templateUrl: './software.component.html',
-  styleUrls: ['./software.component.scss']
+    selector: 'app-software',
+    templateUrl: './software.component.html',
+    styleUrls: ['./software.component.scss'],
+    standalone: true
 })
 export class SoftwareComponent implements OnInit, OnDestroy {
   url = environment.apiUrl + 'upload';

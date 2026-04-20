@@ -29,13 +29,13 @@ describe('TicketDetailProfileEditUpdatesServicesComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NgbModule,
         DecimalNumberModule,
@@ -44,10 +44,9 @@ describe('TicketDetailProfileEditUpdatesServicesComponent unit test', () => {
         TicketProfileUpdatesServiceTimepickerModule,
         TicketProfileUpdatesServiceDurationModule,
         DatePickerModule
-      ],
-      declarations: [TicketDetailProfileEditUpdatesServicesComponent
-      ],
-    }).compileComponents();
+    ],
+    declarations: [TicketDetailProfileEditUpdatesServicesComponent],
+}).compileComponents();
 
   });
 

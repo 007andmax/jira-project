@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
@@ -8,11 +8,18 @@ import { ManageCardsService } from 'src/app/services/manage-cards/manage-cards.s
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ManageCardsStateService } from 'src/app/states/manage-cards/manage-cards-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { PreloaderTicketComponent } from '../../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../../directives/disabled-btn/disabled-btn.directive';
+import { CompanyDropDownComponent as CompanyDropDownComponent_1 } from '../../../shared/company-drop-down/company-drop-down.component';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-manage-cards-add',
-  templateUrl: './manage-cards-add.component.html',
-  styleUrls: ['./manage-cards-add.component.scss']
+    selector: 'app-manage-cards-add',
+    templateUrl: './manage-cards-add.component.html',
+    styleUrls: ['./manage-cards-add.component.scss'],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, NgClass, NgIf, MatErrorComponent, CompanyDropDownComponent_1, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class ManageCardsAddComponent {
   selectedCompany: Company;

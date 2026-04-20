@@ -16,9 +16,10 @@ import { DeviceIpSummary } from '../../class/device-ip-summary';
 import { ReportValidate } from '../../class/report-validate';
 
 @Component({
-  selector: 'device-ip-summary-device-report',
-  templateUrl: './device-ip-summary-device-report.component.html',
-  styleUrls: ['./device-ip-summary-device-report.component.scss']
+    selector: 'device-ip-summary-device-report',
+    templateUrl: './device-ip-summary-device-report.component.html',
+    styleUrls: ['./device-ip-summary-device-report.component.scss'],
+    standalone: true
 })
 export class DeviceIpSummaryDeviceReportComponent implements OnInit {
 

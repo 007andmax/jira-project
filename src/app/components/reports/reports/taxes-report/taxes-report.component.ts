@@ -2,9 +2,10 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { TaxesReport } from '../../class/taxes';
 
 @Component({
-  selector: 'app-taxes-report',
-  templateUrl: './taxes-report.component.html',
-  styleUrls: ['./taxes-report.component.scss']
+    selector: 'app-taxes-report',
+    templateUrl: './taxes-report.component.html',
+    styleUrls: ['./taxes-report.component.scss'],
+    standalone: true
 })
 export class TaxesReportComponent implements OnInit {
   taxes: TaxesReport = new TaxesReport();

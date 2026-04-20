@@ -16,21 +16,19 @@ describe('NotificationsComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         InfiniteScrollModule,
         FormsModule,
         DisabledBtnModule,
         NgbModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [NotificationsComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, NotificationsComponent],
+}).compileComponents();
 
   });
   it('check "checkMarkAsReadAll"', () => {

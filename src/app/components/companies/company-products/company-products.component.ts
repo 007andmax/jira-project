@@ -10,12 +10,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { fadeInAnimation } from 'src/app/animations';
 @Component({
-  selector: 'company-products',
-  templateUrl: './company-products.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./company-products.component.scss']
+    selector: 'company-products',
+    templateUrl: './company-products.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./company-products.component.scss'],
+    standalone: true
 })
 export class CompanyProductsComponent implements OnInit, OnDestroy {
   productsCompanyReport: ProductCompanyReport = new ProductCompanyReport();

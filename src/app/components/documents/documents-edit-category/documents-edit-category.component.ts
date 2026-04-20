@@ -10,10 +10,10 @@ import { DocumentsStateService } from 'src/app/states/documents/documents-state.
 import { DocumentEditCategory } from './class/document-edit-category';
 
 @Component({
-  selector: 'documents-edit-category',
-  templateUrl: './documents-edit-category.component.html',
-  styleUrls: ['./documents-edit-category.component.scss'],
-
+    selector: 'documents-edit-category',
+    templateUrl: './documents-edit-category.component.html',
+    styleUrls: ['./documents-edit-category.component.scss'],
+    standalone: true,
 })
 export class DocumentsEditCategoryComponent implements OnInit, OnDestroy {
   @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 declare const Mark: any;
 @Component({
-  selector: 'find-within-document',
-  templateUrl: './find-within-document.component.html',
-  styleUrls: ['./find-within-document.component.scss']
+    selector: 'find-within-document',
+    templateUrl: './find-within-document.component.html',
+    styleUrls: ['./find-within-document.component.scss'],
+    standalone: true
 })
 export class FindWithinDocumentComponent implements OnInit {
 

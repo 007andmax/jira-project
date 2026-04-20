@@ -5,11 +5,12 @@ import { CompanyTagsListService } from 'src/app/components/companies/company-tag
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 
 @Component({
-  selector: 'app-file-manager-add-file-tags',
-  templateUrl: './file-manager-add-file-tags.component.html',
-  styleUrls: ['./file-manager-add-file-tags.component.scss'],
-  providers: [CompanyTagsListService, TicketsListService],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-file-manager-add-file-tags',
+    templateUrl: './file-manager-add-file-tags.component.html',
+    styleUrls: ['./file-manager-add-file-tags.component.scss'],
+    providers: [CompanyTagsListService, TicketsListService],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
 })
 export class FileManagerAddFileTagsComponent extends CompanyTagsComponent {
 

@@ -14,11 +14,16 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { Document } from '../class/document';
 import { DocumentTemplateFilter } from '../class/document-template-filter';
 import { DocumentsTemplatesHeaderComponent } from './documents-templates-header/documents-templates-header.component';
+import { DocumentsTemplatesInfoComponent } from './documents-templates-info/documents-templates-info.component';
+import { DocumentsTemplatesItemComponent } from './documents-templates-item/documents-templates-item.component';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'documents-templates',
-  templateUrl: './documents-templates.component.html',
-  styleUrls: ['./documents-templates.component.scss']
+    selector: 'documents-templates',
+    templateUrl: './documents-templates.component.html',
+    styleUrls: ['./documents-templates.component.scss'],
+    standalone: true,
+    imports: [NgClass, DocumentsTemplatesHeaderComponent, NgIf, NgFor, DocumentsTemplatesItemComponent, DocumentsTemplatesInfoComponent]
 })
 export class DocumentsTemplatesComponent implements OnInit, OnDestroy {
   companyId: string;

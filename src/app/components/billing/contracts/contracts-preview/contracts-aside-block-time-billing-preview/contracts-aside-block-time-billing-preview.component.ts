@@ -8,11 +8,20 @@ import { ServiceAgreement } from '../../class/service-agreement';
 import * as moment from "moment";
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatChipComponent } from '../../../../shared/mat-chip/mat-chip.component';
+import { MatChipListComponent } from '../../../../shared/mat-chip-list/mat-chip-list.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgFor, NgIf, NgStyle, CurrencyPipe } from '@angular/common';
+import { DatePickerComponent } from '../../../../shared/date-picker/date-picker.component';
+import { DropDownComponent } from '../../../../shared/drop-down/drop-down.component';
 
 @Component({
-  selector: 'app-contracts-aside-block-time-billing-preview',
-  templateUrl: './contracts-aside-block-time-billing-preview.component.html',
-  styleUrls: ['./contracts-aside-block-time-billing-preview.component.scss']
+    selector: 'app-contracts-aside-block-time-billing-preview',
+    templateUrl: './contracts-aside-block-time-billing-preview.component.html',
+    styleUrls: ['./contracts-aside-block-time-billing-preview.component.scss'],
+    standalone: true,
+    imports: [DropDownComponent, DatePickerComponent, NgClass, FormsModule, NgFor, NgIf, MatChipListComponent, MatChipComponent, NgStyle, NgbTooltipModule, CurrencyPipe]
 })
 export class ContractsAsideBlockTimeBillingPreviewComponent implements OnInit, OnDestroy {
 

@@ -15,20 +15,18 @@ describe('ContractsAsideHourlyBillingPreviewComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         DropDownModule,
         MultiDatepickerModule,
         CompanyDropDownModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [ContractsAsideHourlyBillingPreviewComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, ContractsAsideHourlyBillingPreviewComponent],
+}).compileComponents();
 
   });
 

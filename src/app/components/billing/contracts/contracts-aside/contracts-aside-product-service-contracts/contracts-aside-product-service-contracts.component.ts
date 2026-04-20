@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
@@ -16,12 +16,21 @@ import { ContractsOtherValidate } from '../class/contracts-other-validate';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
 import { ContractsListService } from '../../services/contracts-list.service';
 import { DatePickerIntervalsComponent } from '../date-picker-intervals/date-picker-intervals.component';
+import { ContractsAsideOtherProductComponent } from './contracts-aside-other-product/contracts-aside-other-product.component';
+import { ContractsAsideOtherServiceComponent } from './contracts-aside-other-service/contracts-aside-other-service.component';
+import { MatErrorComponent } from '../../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf, NgFor, CurrencyPipe } from '@angular/common';
+import { DropDownComponent } from '../../../../shared/drop-down/drop-down.component';
+import { DatePickerComponent as DatePickerComponent_1 } from '../../../../shared/date-picker/date-picker.component';
 
 @Component({
-  selector: 'app-contracts-aside-product-service-contracts',
-  templateUrl: './contracts-aside-product-service-contracts.component.html',
-  styleUrls: ['./contracts-aside-product-service-contracts.component.scss'],
-  providers: [ContractsListService]
+    selector: 'app-contracts-aside-product-service-contracts',
+    templateUrl: './contracts-aside-product-service-contracts.component.html',
+    styleUrls: ['./contracts-aside-product-service-contracts.component.scss'],
+    providers: [ContractsListService],
+    standalone: true,
+    imports: [ContractsAsideTopComponent, DatePickerComponent_1, DropDownComponent, DatePickerIntervalsComponent, NgClass, FormsModule, NgIf, MatErrorComponent, NgFor, ContractsAsideOtherServiceComponent, ContractsAsideOtherProductComponent, NgbTooltipModule, CurrencyPipe]
 })
 export class ContractsAsideProductServiceContractsComponent implements OnInit, OnDestroy {
   selectedType = new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER');

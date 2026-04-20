@@ -10,11 +10,17 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { Document } from '../../class/document';
 import { DocumentAdd } from '../class/document-add';
 import { DocumentValidate } from '../class/document-validate';
+import { PreloaderTicketComponent } from '../../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective } from '../../../../directives/disabled-btn/disabled-btn.directive';
+import { NgIf, NgClass } from '@angular/common';
+import { DynamicTooltipComponent } from '../../../shared/dynamic-tooltip/dynamic-tooltip.component';
 
 @Component({
-  selector: 'app-documents-add-footer',
-  templateUrl: './documents-add-footer.component.html',
-  styleUrls: ['./documents-add-footer.component.scss']
+    selector: 'app-documents-add-footer',
+    templateUrl: './documents-add-footer.component.html',
+    styleUrls: ['./documents-add-footer.component.scss'],
+    standalone: true,
+    imports: [DynamicTooltipComponent, NgIf, DisabledBtnDirective, NgClass, PreloaderTicketComponent]
 })
 export class DocumentsAddFooterComponent implements OnInit, OnDestroy {
   @Input() requiredCompanyType: boolean;

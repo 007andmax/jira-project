@@ -8,11 +8,15 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { CompanyAssigned } from '../../companies/class/company-assigned';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { RightClickBlankDirective } from '../../../directives/right-click-blank/right-click-blank.directive';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-left-panel-company',
-  templateUrl: './left-panel-company.component.html',
-  styleUrls: ['./left-panel-company.component.scss']
+    selector: 'app-left-panel-company',
+    templateUrl: './left-panel-company.component.html',
+    styleUrls: ['./left-panel-company.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, RightClickBlankDirective, NgFor]
 })
 export class LeftPanelCompanyComponent implements OnInit, OnDestroy {
   open: boolean = false;

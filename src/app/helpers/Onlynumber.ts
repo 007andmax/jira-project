@@ -2,7 +2,8 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
 @Directive({
-  selector: '[numbersOnly]'
+    selector: '[numbersOnly]',
+    standalone: true
 })
 export class Onlynumber {
   constructor(private _el: ElementRef) {}

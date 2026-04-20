@@ -32,7 +32,7 @@ describe('UsersTableComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         NgbModule,
         PhoneModule,
@@ -45,15 +45,14 @@ describe('UsersTableComponent unit test', () => {
         HttpClientModule,
         RouterTestingModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NoopAnimationsModule],
-      declarations: [UsersTableComponent
-      ],
-      providers: [{ provide: Router, useValue: mockRouter }],
-    }).compileComponents();
+    declarations: [UsersTableComponent],
+    providers: [{ provide: Router, useValue: mockRouter }],
+}).compileComponents();
 
   });
 

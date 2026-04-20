@@ -2,11 +2,15 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { DocumentsTemplatesFilterComponent } from './documents-templates-filter/documents-templates-filter.component';
+import { NgIf, NgClass } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'documents-templates-header',
-  templateUrl: './documents-templates-header.component.html',
-  styleUrls: ['./documents-templates-header.component.scss']
+    selector: 'documents-templates-header',
+    templateUrl: './documents-templates-header.component.html',
+    styleUrls: ['./documents-templates-header.component.scss'],
+    standalone: true,
+    imports: [FormsModule, NgIf, NgClass, DocumentsTemplatesFilterComponent]
 })
 export class DocumentsTemplatesHeaderComponent implements OnInit {
   toggleFilter: boolean = true;

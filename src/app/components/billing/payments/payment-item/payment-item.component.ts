@@ -12,9 +12,10 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
-  selector: 'app-payment-item',
-  templateUrl: './payment-item.component.html',
-  styleUrls: ['./payment-item.component.scss']
+    selector: 'app-payment-item',
+    templateUrl: './payment-item.component.html',
+    styleUrls: ['./payment-item.component.scss'],
+    standalone: true
 })
 export class PaymentItemComponent implements OnInit {
   @Input() payment: Payment;

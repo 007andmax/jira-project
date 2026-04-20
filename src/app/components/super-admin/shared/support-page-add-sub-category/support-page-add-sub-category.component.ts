@@ -3,12 +3,19 @@ import { NgbModalConfig, NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-boots
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { SupportPageCategoriesService } from '../../services/support-page-categories/support-page-categories.service';
 import { CategoryValdiate } from '../support-page-add-category/class/category-validate';
+import { PreloaderTicketComponent } from '../../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../../directives/disabled-btn/disabled-btn.directive';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'support-page-add-sub-category',
-  templateUrl: './support-page-add-sub-category.component.html',
-  styleUrls: ['./support-page-add-sub-category.component.scss'],
-  providers: [NgbModalConfig, NgbModal]
+    selector: 'support-page-add-sub-category',
+    templateUrl: './support-page-add-sub-category.component.html',
+    styleUrls: ['./support-page-add-sub-category.component.scss'],
+    providers: [NgbModalConfig, NgbModal],
+    standalone: true,
+    imports: [NgIf, FormsModule, MatErrorComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class SupportPageAddSubCategoryComponent implements OnInit {
   name: string = "";

@@ -1,10 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { scriptModal } from '../../class/device';
+import { NgIf, NgFor } from '@angular/common';
+import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
+import { FormsModule } from '@angular/forms';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'terminal-run-script',
-  templateUrl: './terminal-run-script.component.html',
-  styleUrls: ['./terminal-run-script.component.scss']
+    selector: 'terminal-run-script',
+    templateUrl: './terminal-run-script.component.html',
+    styleUrls: ['./terminal-run-script.component.scss'],
+    standalone: true,
+    imports: [NgbNavModule, FormsModule, DropDownComponent, NgIf, NgFor]
 })
 export class TerminalRunScriptComponent implements OnInit {
   @Input() runScript: boolean;

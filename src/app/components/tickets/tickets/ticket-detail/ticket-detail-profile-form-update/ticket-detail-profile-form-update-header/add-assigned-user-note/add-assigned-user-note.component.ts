@@ -1,20 +1,27 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { TicketsListService } from '../../../../services/tickets-list.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { UntypedFormControl } from '@angular/forms';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbDropdown, NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketStateService } from '../../../../ticket-edit-aside/services/ticket-state.service';
 import { CompanyUserNote } from './class/company-user-note';
 import { UserNoteValidate } from './class/user-note-validate';
 import { TicketProfileFormUpdate } from '../../../../ticket-edit-aside/class/ticket-profile-form-update';
+import { MatErrorComponent } from '../../../../../../shared/mat-error/mat-error.component';
+import { MatChipComponent } from '../../../../../../shared/mat-chip/mat-chip.component';
+import { NgFor, NgIf, NgStyle, NgClass } from '@angular/common';
+import { MatChipListComponent } from '../../../../../../shared/mat-chip-list/mat-chip-list.component';
+import { MatFormFieldComponent } from '../../../../../../shared/mat-form-field/mat-form-field.component';
 
 @Component({
-  selector: 'add-assigned-user-note',
-  templateUrl: './add-assigned-user-note.component.html',
-  styleUrls: ['./add-assigned-user-note.component.scss'],
-  providers: [TicketsListService]
+    selector: 'add-assigned-user-note',
+    templateUrl: './add-assigned-user-note.component.html',
+    styleUrls: ['./add-assigned-user-note.component.scss'],
+    providers: [TicketsListService],
+    standalone: true,
+    imports: [MatFormFieldComponent, NgbDropdownModule, MatChipListComponent, NgFor, MatChipComponent, NgIf, NgStyle, FormsModule, ReactiveFormsModule, MatErrorComponent, NgClass, NgbTooltipModule]
 })
 export class AddAssignedUserNoteComponent implements OnInit {
   selectable = true;

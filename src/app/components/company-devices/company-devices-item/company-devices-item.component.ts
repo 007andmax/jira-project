@@ -22,9 +22,10 @@ import { DevicesRealTimeService } from 'src/app/states/devices/devices-real-time
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-company-devices-item',
-  templateUrl: './company-devices-item.component.html',
-  styleUrls: ['./company-devices-item.component.scss']
+    selector: 'app-company-devices-item',
+    templateUrl: './company-devices-item.component.html',
+    styleUrls: ['./company-devices-item.component.scss'],
+    standalone: true
 })
 export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   @ViewChild('editLabel', { static: true }) editLabel: CompanyDevicesEditLabelComponent;

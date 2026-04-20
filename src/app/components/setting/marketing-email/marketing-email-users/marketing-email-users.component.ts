@@ -12,10 +12,11 @@ import { MarketingEmailUsers } from './class/marketing-email-user';
 import { MarketingEmailUsersAddComponent } from './marketing-email-users-add/marketing-email-users-add.component';
 
 @Component({
-  selector: 'marketing-email-users',
-  templateUrl: './marketing-email-users.component.html',
-  styleUrls: ['./marketing-email-users.component.scss'],
-  providers: [UserListService]
+    selector: 'marketing-email-users',
+    templateUrl: './marketing-email-users.component.html',
+    styleUrls: ['./marketing-email-users.component.scss'],
+    providers: [UserListService],
+    standalone: true
 })
 export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
   opened: boolean = false;

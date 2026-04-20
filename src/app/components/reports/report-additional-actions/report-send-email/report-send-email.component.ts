@@ -8,9 +8,10 @@ import { ReportSendEmailValidate } from './class/report-send-email-validate';
 import { TYPE_REPORT_INVOICE, TYPE_REPORT_PAYMENT, TYPE_REPORT_PRODUCTS } from 'src/app/const/reports';
 
 @Component({
-  selector: 'app-report-send-email',
-  templateUrl: './report-send-email.component.html',
-  styleUrls: ['./report-send-email.component.scss']
+    selector: 'app-report-send-email',
+    templateUrl: './report-send-email.component.html',
+    styleUrls: ['./report-send-email.component.scss'],
+    standalone: true
 })
 export class ReportSendEmailComponent extends DraftEmailComponent {
   draftReport: ReportEmail = new ReportEmail();

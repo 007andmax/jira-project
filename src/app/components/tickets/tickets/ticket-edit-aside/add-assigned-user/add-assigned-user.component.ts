@@ -1,19 +1,25 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, HostListener, Output, EventEmitter } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { UntypedFormControl } from '@angular/forms';
+import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { TicketStateService } from '../services/ticket-state.service';
 import { TicketsListService } from '../../services/tickets-list.service';
 import { CompanyUser } from '../../ticket-add-aside/company-users-drop-down/class/company-user';
+import { MatChipComponent } from '../../../../shared/mat-chip/mat-chip.component';
+import { MatChipListComponent } from '../../../../shared/mat-chip-list/mat-chip-list.component';
+import { MatFormFieldComponent } from '../../../../shared/mat-form-field/mat-form-field.component';
+import { NgIf, NgFor, NgStyle } from '@angular/common';
 
 
 @Component({
-  selector: 'app-add-assigned-user',
-  templateUrl: './add-assigned-user.component.html',
-  styleUrls: ['./add-assigned-user.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-add-assigned-user',
+    templateUrl: './add-assigned-user.component.html',
+    styleUrls: ['./add-assigned-user.component.scss'],
+    providers: [TicketsListService],
+    standalone: true,
+    imports: [NgIf, MatFormFieldComponent, NgbDropdownModule, MatChipListComponent, NgFor, MatChipComponent, NgStyle, FormsModule, ReactiveFormsModule]
 })
 export class AddAssignedUserComponent implements OnInit {
 

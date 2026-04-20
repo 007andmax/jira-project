@@ -10,9 +10,10 @@ import { Card } from '../class/card';
 import { ManageCardsStateService } from 'src/app/states/manage-cards/manage-cards-state.service';
 
 @Component({
-  selector: 'app-manage-cards-table',
-  templateUrl: './manage-cards-table.component.html',
-  styleUrls: ['./manage-cards-table.component.scss']
+    selector: 'app-manage-cards-table',
+    templateUrl: './manage-cards-table.component.html',
+    styleUrls: ['./manage-cards-table.component.scss'],
+    standalone: true
 })
 export class ManageCardsTableComponent implements OnInit, OnDestroy {
   @Input() item: Card;

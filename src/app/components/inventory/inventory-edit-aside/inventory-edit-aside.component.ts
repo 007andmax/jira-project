@@ -20,11 +20,22 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { TaxesComponent } from '../../shared/taxes/taxes.component';
 import { ProductType } from '../../setting/products-settings/class/product-type';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../directives/disabled-btn/disabled-btn.directive';
+import { GlNumbersDropDownComponent } from '../gl-numbers-drop-down/gl-numbers-drop-down.component';
+import { ToFixedDirective } from '../../../directives/to-fixed/to-fixed.directive';
+import { DecimalNumberDirective } from '../../../directives/decimal-number/decimal-number.directive';
+import { TextAreaDirective as TextAreaDirective_1 } from '../../../directives/text-area/text-area.directive';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
+import { NgClass, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-inventory-edit-aside',
-  templateUrl: './inventory-edit-aside.component.html',
-  styleUrls: ['./inventory-edit-aside.component.scss']
+    selector: 'app-inventory-edit-aside',
+    templateUrl: './inventory-edit-aside.component.html',
+    styleUrls: ['./inventory-edit-aside.component.scss'],
+    standalone: true,
+    imports: [FormsModule, NgClass, NgIf, MatErrorComponent, DropDownComponent, TextAreaDirective_1, DecimalNumberDirective, ToFixedDirective, TaxesComponent, GlNumbersDropDownComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   opened: boolean = false;

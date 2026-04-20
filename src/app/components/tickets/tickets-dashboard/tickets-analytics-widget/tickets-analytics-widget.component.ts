@@ -3,11 +3,16 @@ import * as moment from 'moment';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompanySetting } from '../../../companies/class/company-setting';
 import { DashboardTickets } from '../class/dashboard-tickets';
+import { LineChartModule } from '@swimlane/ngx-charts';
+import { NgFor, NgIf, NgStyle } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-tickets-analytics-widget',
-  templateUrl: './tickets-analytics-widget.component.html',
-  styleUrls: ['./tickets-analytics-widget.component.scss']
+    selector: 'app-tickets-analytics-widget',
+    templateUrl: './tickets-analytics-widget.component.html',
+    styleUrls: ['./tickets-analytics-widget.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, NgFor, NgIf, LineChartModule, NgStyle]
 })
 export class TicketsAnalyticsWidgetComponent implements OnInit {
   @Output() onTicketsAnalyticsReady = new EventEmitter<any>();

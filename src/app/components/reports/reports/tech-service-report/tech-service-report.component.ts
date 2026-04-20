@@ -5,9 +5,10 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { User } from '../../../users/class/user';
 
 @Component({
-  selector: 'app-tech-service-report',
-  templateUrl: './tech-service-report.component.html',
-  styleUrls: ['./tech-service-report.component.scss']
+    selector: 'app-tech-service-report',
+    templateUrl: './tech-service-report.component.html',
+    styleUrls: ['./tech-service-report.component.scss'],
+    standalone: true
 })
 export class TechServiceReportComponent implements OnInit {
   loadingInProgress: boolean = false;

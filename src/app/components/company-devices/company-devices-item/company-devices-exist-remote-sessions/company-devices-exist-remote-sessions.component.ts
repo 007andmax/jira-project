@@ -4,9 +4,10 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DeviceCompany } from '../../class/device-company';
 
 @Component({
-  selector: 'app-company-devices-exist-remote-sessions',
-  templateUrl: './company-devices-exist-remote-sessions.component.html',
-  styleUrls: ['./company-devices-exist-remote-sessions.component.scss']
+    selector: 'app-company-devices-exist-remote-sessions',
+    templateUrl: './company-devices-exist-remote-sessions.component.html',
+    styleUrls: ['./company-devices-exist-remote-sessions.component.scss'],
+    standalone: true
 })
 export class CompanyDevicesExistRemoteSessionsComponent implements OnInit {
   @Input() device: DeviceCompany;

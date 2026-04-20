@@ -24,10 +24,11 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 @Component({
-  selector: 'app-quotes-table',
-  templateUrl: './quotes-table.component.html',
-  styleUrls: ['./quotes-table.component.scss'],
-  providers: [QuotesListService]
+    selector: 'app-quotes-table',
+    templateUrl: './quotes-table.component.html',
+    styleUrls: ['./quotes-table.component.scss'],
+    providers: [QuotesListService],
+    standalone: true
 })
 export class QuotesTableComponent implements OnInit, OnDestroy {
   filter: QuoteFilter = new QuoteFilter();

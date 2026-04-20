@@ -1,7 +1,8 @@
 import { Directive, EventEmitter, Output } from '@angular/core';
 
 @Directive({
-  selector: '[appAfterViewInit]'
+    selector: '[appAfterViewInit]',
+    standalone: true
 })
 export class AfterViewInitDirective {
   @Output() onInit = new EventEmitter<any>();

@@ -3,11 +3,15 @@ import { System } from '../class/system';
 import { HardwareService } from '../../_services/hardware.service';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'hardware-computer',
-  templateUrl: './hardware-computer.component.html',
-  styleUrls: ['./hardware-computer.component.scss']
+    selector: 'hardware-computer',
+    templateUrl: './hardware-computer.component.html',
+    styleUrls: ['./hardware-computer.component.scss'],
+    standalone: true,
+    imports: [FormsModule, NgIf]
 })
 export class HardwareComputerComponent implements OnInit {
   @Input() system: System;

@@ -4,9 +4,10 @@ import { CommonCommissionsReport } from '../../class/common-commissions-report';
 import * as moment from "moment";
 
 @Component({
-  selector: 'common-commissions-report',
-  templateUrl: './common-commissions-report.component.html',
-  styleUrls: ['./common-commissions-report.component.css']
+    selector: 'common-commissions-report',
+    templateUrl: './common-commissions-report.component.html',
+    styleUrls: ['./common-commissions-report.component.css'],
+    standalone: true
 })
 export class CommonCommissionsReportComponent implements OnInit {
   byCustomerChartData;

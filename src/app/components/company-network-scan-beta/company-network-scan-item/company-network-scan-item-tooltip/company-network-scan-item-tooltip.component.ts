@@ -1,12 +1,16 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { NetworkScanDevice } from '../../class/network-scan-device';
 import { CompanyNetworkScanService } from '../../services/company-network-scan.service';
+import { NgClass } from '@angular/common';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-company-network-scan-item-tooltip',
-  templateUrl: './company-network-scan-item-tooltip.component.html',
-  styleUrls: ['./company-network-scan-item-tooltip.component.scss'],
-  providers: [CompanyNetworkScanService]
+    selector: 'app-company-network-scan-item-tooltip',
+    templateUrl: './company-network-scan-item-tooltip.component.html',
+    styleUrls: ['./company-network-scan-item-tooltip.component.scss'],
+    providers: [CompanyNetworkScanService],
+    standalone: true,
+    imports: [NgbTooltipModule, NgClass]
 })
 export class CompanyNetworkScanItemTooltipComponent implements OnInit {
   @Input() device: NetworkScanDevice;

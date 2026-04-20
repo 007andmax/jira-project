@@ -14,13 +14,11 @@ describe('ContractsAsideBlockTimeBillingCustomerServiceComponent unit test', () 
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         MatErrorModule,
-        NoopAnimationsModule],
-      declarations: [ContractsAsideBlockTimeBillingCustomerServiceComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, ContractsAsideBlockTimeBillingCustomerServiceComponent],
+}).compileComponents();
 
   });
 

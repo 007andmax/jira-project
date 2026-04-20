@@ -6,11 +6,15 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { InventoryItem } from 'src/app/components/inventory/class/inventory-item';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
+import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-product-type-check-use',
-  templateUrl: './product-type-check-use.component.html',
-  styleUrls: ['./product-type-check-use.component.scss']
+    selector: 'app-product-type-check-use',
+    templateUrl: './product-type-check-use.component.html',
+    styleUrls: ['./product-type-check-use.component.scss'],
+    standalone: true,
+    imports: [NgIf, DropDownComponent, NgFor]
 })
 export class ProductTypeCheckUseComponent implements OnInit {
   showPreloader: boolean = true;

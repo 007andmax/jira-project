@@ -16,9 +16,10 @@ import { DeviceNetworkAdapterReportFilter } from './Class/network-adapter-report
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'network-adapter-report',
-  templateUrl: './network-adapter-report.component.html',
-  styleUrls: ['./network-adapter-report.component.scss']
+    selector: 'network-adapter-report',
+    templateUrl: './network-adapter-report.component.html',
+    styleUrls: ['./network-adapter-report.component.scss'],
+    standalone: true
 })
 export class NetworkAdapterReportComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;

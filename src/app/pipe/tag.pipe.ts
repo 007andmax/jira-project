@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: "tag"
+    name: "tag",
+    standalone: true
 })
 export class TagPipe implements PipeTransform {
   transform(items: any, args?: any): any {

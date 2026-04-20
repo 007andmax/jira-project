@@ -11,11 +11,21 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { ProductService } from 'src/app/services/product/product.service';
 import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
+import { DynamicTooltipComponent } from '../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { GlNumbersDropDownComponent } from '../../../inventory/gl-numbers-drop-down/gl-numbers-drop-down.component';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { KeyUpEnterDirective } from '../../../../directives/key-up-enter/key-up-enter.directive';
+import { FormsModule } from '@angular/forms';
+import { ClickOutsideDirective } from '../../../../directives/click-otside/click-otside.directive';
+import { AddCategoryProductComponent } from '../add-category-product/add-category-product.component';
+import { NgIf, NgFor, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-products-settings-category',
-  templateUrl: './products-settings-category.component.html',
-  styleUrls: ['./products-settings-category.component.scss']
+    selector: 'app-products-settings-category',
+    templateUrl: './products-settings-category.component.html',
+    styleUrls: ['./products-settings-category.component.scss'],
+    standalone: true,
+    imports: [NgIf, AddCategoryProductComponent, NgFor, ClickOutsideDirective, NgClass, FormsModule, KeyUpEnterDirective, MatErrorComponent, GlNumbersDropDownComponent, DynamicTooltipComponent]
 })
 export class ProductsSettingsCategoryComponent implements OnInit, OnDestroy {
   filter: ProductsCategoryFilter = new ProductsCategoryFilter();

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-mat-option',
-  templateUrl: './mat-option.component.html',
-  styleUrls: ['./mat-option.component.scss']
+    selector: 'app-mat-option',
+    templateUrl: './mat-option.component.html',
+    styleUrls: ['./mat-option.component.scss'],
+    standalone: true
 })
 export class MatOptionComponent implements OnInit {
 

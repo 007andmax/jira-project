@@ -9,12 +9,17 @@ import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/ti
 import { StatusColor } from '../../../class/status-color';
 import { Subscription } from 'rxjs';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgStyle, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-tickets-table-item',
-  templateUrl: './tickets-table-item.component.html',
-  styleUrls: ['./tickets-table-item.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-tickets-table-item',
+    templateUrl: './tickets-table-item.component.html',
+    styleUrls: ['./tickets-table-item.component.scss'],
+    providers: [TicketsListService],
+    standalone: true,
+    imports: [NgClass, FormsModule, NgStyle, NgIf, NgFor, NgbTooltipModule]
 })
 export class TicketsTableItemComponent implements OnInit, OnDestroy {
   ticket: Ticket;

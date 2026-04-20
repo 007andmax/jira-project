@@ -14,21 +14,19 @@ describe('InvoiceFormTicketEditTaxesComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         HttpClientModule,
         NumberModule,
         NgbModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [InvoiceFormTicketEditTaxesComponent
-      ],
-      providers: [UntypedFormBuilder]
-    }).compileComponents();
+        NoopAnimationsModule, InvoiceFormTicketEditTaxesComponent],
+    providers: [UntypedFormBuilder]
+}).compileComponents();
 
   });
 

@@ -1,12 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { AgentService } from 'src/app/services/agent/agent.service';
+import { NgIf, NgClass } from '@angular/common';
+import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 
 @Component({
-  selector: 'add-model',
-  templateUrl: './add-model.component.html',
-  styleUrls: ['./add-model.component.scss']
+    selector: 'add-model',
+    templateUrl: './add-model.component.html',
+    styleUrls: ['./add-model.component.scss'],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, DropDownComponent, NgIf, NgClass]
 })
 export class AddModelComponent implements OnInit {
   manufactureId: string;

@@ -14,9 +14,10 @@ import { HardwareSummaryReportFilter } from './class/hardware-summary-report';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'hardware-summary-device-report',
-  templateUrl: './hardware-summary-device-report.component.html',
-  styleUrls: ['./hardware-summary-device-report.component.scss']
+    selector: 'hardware-summary-device-report',
+    templateUrl: './hardware-summary-device-report.component.html',
+    styleUrls: ['./hardware-summary-device-report.component.scss'],
+    standalone: true
 })
 export class HardwareSummaryDeviceReportComponent implements OnInit, OnDestroy {
   loadingInProgress: boolean = false;

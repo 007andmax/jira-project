@@ -9,12 +9,17 @@ import { BillableStateService } from 'src/app/states/billable/billable-state.ser
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { NgIf, NgStyle, CurrencyPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-billable-item',
-  templateUrl: './billable-item.component.html',
-  styleUrls: ['./billable-item.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-billable-item',
+    templateUrl: './billable-item.component.html',
+    styleUrls: ['./billable-item.component.scss'],
+    providers: [TicketsListService],
+    standalone: true,
+    imports: [NgIf, FormsModule, NgStyle, NgbDropdownModule, CurrencyPipe]
 })
 export class BillableItemComponent implements OnInit {
   @Input() item: BillableProfile;

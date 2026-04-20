@@ -15,11 +15,14 @@ import { PasswordRecordCategories } from '../../class/password-record-categories
 import { PasswoordManagerDevicesUsersComponent } from '../../passwoord-manager-devices-users/passwoord-manager-devices-users.component';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { Device } from 'src/app/components/company-devices/class/device';
+import { CompanyDropDownComponent as CompanyDropDownComponent_1 } from '../../../shared/company-drop-down/company-drop-down.component';
 
 @Component({
-  selector: 'app-passwoord-manager-filters',
-  templateUrl: './passwoord-manager-filters.component.html',
-  styleUrls: ['./passwoord-manager-filters.component.scss']
+    selector: 'app-passwoord-manager-filters',
+    templateUrl: './passwoord-manager-filters.component.html',
+    styleUrls: ['./passwoord-manager-filters.component.scss'],
+    standalone: true,
+    imports: [DropDownComponent, CompanyDropDownComponent_1, PasswoordManagerDevicesUsersComponent]
 })
 export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
 

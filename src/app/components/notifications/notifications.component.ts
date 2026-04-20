@@ -13,10 +13,11 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 
 @Component({
-  selector: 'app-notifications',
-  templateUrl: './notifications.component.html',
-  styleUrls: ['./notifications.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-notifications',
+    templateUrl: './notifications.component.html',
+    styleUrls: ['./notifications.component.scss'],
+    providers: [TicketsListService],
+    standalone: true
 })
 export class NotificationsComponent {
   opened = false;

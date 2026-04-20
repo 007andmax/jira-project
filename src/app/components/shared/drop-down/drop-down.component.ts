@@ -1,17 +1,28 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, OnDestroy } from '@angular/core';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { MatErrorComponent } from '../mat-error/mat-error.component';
+import { NgClass, NgStyle, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-drop-down',
-  templateUrl: './drop-down.component.html',
-  styleUrls: ['./drop-down.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-drop-down',
+    templateUrl: './drop-down.component.html',
+    styleUrls: ['./drop-down.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgbDropdownModule,
+        NgClass,
+        NgStyle,
+        NgIf,
+        NgFor,
+        MatErrorComponent,
+    ],
 })
 export class DropDownComponent implements OnInit, OnDestroy {
   selectedItem = null;

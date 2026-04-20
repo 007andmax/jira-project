@@ -4,9 +4,10 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-users-filter-info',
-  templateUrl: './users-filter-info.component.html',
-  styleUrls: ['./users-filter-info.component.scss']
+    selector: 'app-users-filter-info',
+    templateUrl: './users-filter-info.component.html',
+    styleUrls: ['./users-filter-info.component.scss'],
+    standalone: true
 })
 export class UsersFilterInfoComponent implements OnInit, OnDestroy {
   globalFilter: UserGlobalFilter = new UserGlobalFilter();

@@ -24,7 +24,7 @@ describe('FileManagerItemFileComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         DisabledBtnModule,
         PreloaderTicketModule,
@@ -32,14 +32,12 @@ describe('FileManagerItemFileComponent unit test', () => {
         DblclickModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [FileManagerItemFileComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, FileManagerItemFileComponent],
+}).compileComponents();
 
   });
   it('check "getTypeFile"', () => {

@@ -3,10 +3,11 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
 import { User } from 'src/app/components/users/class/user';
 
 @Component({
-  selector: 'marketing-email-users-item',
-  templateUrl: './marketing-email-users-item.component.html',
-  styleUrls: ['./marketing-email-users-item.component.scss'],
-  providers: [TicketsListService]
+    selector: 'marketing-email-users-item',
+    templateUrl: './marketing-email-users-item.component.html',
+    styleUrls: ['./marketing-email-users-item.component.scss'],
+    providers: [TicketsListService],
+    standalone: true
 })
 export class MarketingEmailUsersItemComponent implements OnInit {
   @Input() user: User;

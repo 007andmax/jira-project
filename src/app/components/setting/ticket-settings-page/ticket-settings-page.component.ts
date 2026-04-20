@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, Subscription } from 'rxjs';
 import { DELETE_LIST_TICKET_PRIORITY, DELETE_LIST_TICKET_STATUS } from 'src/app/const/confirm';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
@@ -15,14 +15,17 @@ import { TicketSettingsComponent } from './ticket-settings/ticket-settings.compo
 import { TicketsStatusComponent } from './tickets-status/tickets-status.component';
 import { TicketsPriorityComponent } from './tickets-priority/tickets-priority.component';
 import { fadeInAnimation } from 'src/app/animations';
+import { NgIf, NgClass } from '@angular/common';
 declare var $: any;
 @Component({
-  selector: 'ticket-settings-page',
-  templateUrl: './ticket-settings-page.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./ticket-settings-page.component.scss']
+    selector: 'ticket-settings-page',
+    templateUrl: './ticket-settings-page.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./ticket-settings-page.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgClass, NgbNavModule, TicketSettingsComponent, TicketsStatusComponent, TicketsPriorityComponent, CannedResponsesComponent]
 })
 export class TicketSettingsPageComponent implements OnInit, OnDestroy {
   loading = false;

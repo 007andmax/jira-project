@@ -3,9 +3,10 @@ import { SuperAdminCompany } from '../class/super-admin-company';
 import * as moment from "moment";
 
 @Component({
-  selector: 'super-admin-companies-item',
-  templateUrl: './super-admin-companies-item.component.html',
-  styleUrls: ['./super-admin-companies-item.component.scss']
+    selector: 'super-admin-companies-item',
+    templateUrl: './super-admin-companies-item.component.html',
+    styleUrls: ['./super-admin-companies-item.component.scss'],
+    standalone: true
 })
 export class SuperAdminCompaniesItemComponent implements OnInit {
   @Input() company: SuperAdminCompany;

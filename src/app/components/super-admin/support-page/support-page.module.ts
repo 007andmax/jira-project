@@ -9,16 +9,16 @@ import { SupportPageHeaderComponent } from './support-page-header/support-page-h
 import { SupportPageHelpCenterComponent } from './support-page-help-center/support-page-help-center.component';
 import { SupportPageInfoTagsComponent } from './support-page-info/support-page-info-tags/support-page-info-tags.component';
 import { SupportPageInfoComponent } from './support-page-info/support-page-info.component';
-import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+
 import { LeftPanelSuperAdminCategoriesComponent } from '../left-panel-super-admin-categories/left-panel-super-admin-categories.component';
-import { DragMenuModule } from 'src/app/directives/drag-menu/drag-menu.module';
+
 import { SortTagsPipe } from './support-page-info/support-page-info-tags/pipe/sort-tags.pipe';
-import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+
 import { LeftPanelSuperAdminCategoriesActionsComponent } from '../left-panel-super-admin-categories/left-panel-super-admin-categories-actions/left-panel-super-admin-categories-actions.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { SupportPageEditCategoryModule } from '../shared/support-page-edit-category/support-page-edit-category.module';
+
 
 
 
@@ -37,16 +37,13 @@ import { SupportPageEditCategoryModule } from '../shared/support-page-edit-categ
         SortTagsPipe
     ],
     imports: [
-        CommonModule,
-        SupportPageRoutingModule,
-        DisabledBtnModule,
-        DragMenuModule,
-        DynamicTooltipModule,
-        FroalaEditorModule.forRoot(),
-        FroalaViewModule.forRoot(),
-        NgbModule,
-        FormsModule,
-    ],
+    CommonModule,
+    SupportPageRoutingModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
+    NgbModule,
+    FormsModule,
+],
 
 })
 export class SupportPageModule { }

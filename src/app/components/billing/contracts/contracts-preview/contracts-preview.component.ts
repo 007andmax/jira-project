@@ -3,11 +3,18 @@ import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { ServiceAgreement } from '../class/service-agreement';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { ContractsAsideProductServicePreviewComponent } from './contracts-aside-product-service-preview/contracts-aside-product-service-preview.component';
+import { ContractsAsideUserDeviceBillingPreviewComponent } from './contracts-aside-user-device-billing-preview/contracts-aside-user-device-billing-preview.component';
+import { ContractsAsideBlockTimeBillingPreviewComponent } from './contracts-aside-block-time-billing-preview/contracts-aside-block-time-billing-preview.component';
+import { ContractsAsideHourlyBillingPreviewComponent } from './contracts-aside-hourly-billing-preview/contracts-aside-hourly-billing-preview.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-contracts-preview',
-  templateUrl: './contracts-preview.component.html',
-  styleUrls: ['./contracts-preview.component.scss']
+    selector: 'app-contracts-preview',
+    templateUrl: './contracts-preview.component.html',
+    styleUrls: ['./contracts-preview.component.scss'],
+    standalone: true,
+    imports: [NgIf, ContractsAsideHourlyBillingPreviewComponent, ContractsAsideBlockTimeBillingPreviewComponent, ContractsAsideUserDeviceBillingPreviewComponent, ContractsAsideProductServicePreviewComponent]
 })
 export class ContractsPreviewComponent implements OnInit {
   @Input() serviceAgreement: ServiceAgreement;

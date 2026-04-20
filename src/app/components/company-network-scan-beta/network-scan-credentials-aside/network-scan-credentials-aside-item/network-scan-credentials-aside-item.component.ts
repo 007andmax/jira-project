@@ -9,9 +9,10 @@ import { ConfirmStateService } from '../../../shared/confirm/services/confirm-st
 import { NetworkScanCredential } from '../../class/network-scan-credential';
 
 @Component({
-  selector: 'app-network-scan-credentials-aside-item',
-  templateUrl: './network-scan-credentials-aside-item.component.html',
-  styleUrls: ['./network-scan-credentials-aside-item.component.scss']
+    selector: 'app-network-scan-credentials-aside-item',
+    templateUrl: './network-scan-credentials-aside-item.component.html',
+    styleUrls: ['./network-scan-credentials-aside-item.component.scss'],
+    standalone: true
 })
 export class NetworkScanCredentialsAsideItemComponent implements OnInit {
   @Input() item: NetworkScanCredential;

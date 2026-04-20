@@ -1,8 +1,9 @@
 import { Directive, HostListener, ElementRef, Output, EventEmitter } from '@angular/core';
 
 @Directive({
-  selector: '[appDisabledBtn]',
-  exportAs: 'disabled'
+    selector: '[appDisabledBtn]',
+    exportAs: 'disabled',
+    standalone: true
 })
 export class DisabledBtnDirective {
   block: boolean = false;

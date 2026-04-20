@@ -24,21 +24,20 @@ describe('CompanyDashDetailComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         ReactiveFormsModule,
         FormsModule,
         HttpClientModule,
         RouterTestingModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NoopAnimationsModule],
-      providers: [{ provide: Router, useValue: mockRouter }],
-      declarations: [CompanyDashDetailComponent
-      ],
-    }).compileComponents();
+    providers: [{ provide: Router, useValue: mockRouter }],
+    declarations: [CompanyDashDetailComponent],
+}).compileComponents();
 
   });
   it('check "isArchive"', () => {

@@ -22,13 +22,13 @@ describe('TicketDetailProfileUpdatesProductEditComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         CommonModule,
         NgbModule,
@@ -40,11 +40,10 @@ describe('TicketDetailProfileUpdatesProductEditComponent unit test', () => {
         NumberModule,
         ToFixedModule,
         NoopAnimationsModule
-      ],
-      declarations: [TicketDetailProfileUpdatesProductEditComponent
-      ],
-      providers: [UntypedFormBuilder, TicketsListService]
-    }).compileComponents();
+    ],
+    declarations: [TicketDetailProfileUpdatesProductEditComponent],
+    providers: [UntypedFormBuilder, TicketsListService]
+}).compileComponents();
 
   });
 

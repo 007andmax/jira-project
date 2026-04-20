@@ -16,9 +16,10 @@ import { ApplicationByCompanyReportFilter } from "./Class/applicationbycompanyRe
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "applicationbycompany-report",
-  templateUrl: "./applicationbycompany-report.component.html",
-  styleUrls: ["./applicationbycompany-report.component.scss"],
+    selector: "applicationbycompany-report",
+    templateUrl: "./applicationbycompany-report.component.html",
+    styleUrls: ["./applicationbycompany-report.component.scss"],
+    standalone: true,
 })
 export class ApplicationbycompanyReportComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;

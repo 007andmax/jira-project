@@ -6,9 +6,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from "moment";
 
 @Component({
-  selector: 'app-users-details-tab-messages-full-body',
-  templateUrl: './users-details-tab-messages-full-body.component.html',
-  styleUrls: ['./users-details-tab-messages-full-body.component.scss']
+    selector: 'app-users-details-tab-messages-full-body',
+    templateUrl: './users-details-tab-messages-full-body.component.html',
+    styleUrls: ['./users-details-tab-messages-full-body.component.scss'],
+    standalone: true
 })
 export class UsersDetailsTabMessagesFullBodyComponent implements OnInit, OnDestroy {
   opened: boolean = false;

@@ -9,9 +9,10 @@ import { DocumentCompanyUser } from '../../documents-add/class/document-company-
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 
 @Component({
-  selector: 'documents-edit-info',
-  templateUrl: './documents-edit-info.component.html',
-  styleUrls: ['./documents-edit-info.component.scss']
+    selector: 'documents-edit-info',
+    templateUrl: './documents-edit-info.component.html',
+    styleUrls: ['./documents-edit-info.component.scss'],
+    standalone: true
 })
 export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
 

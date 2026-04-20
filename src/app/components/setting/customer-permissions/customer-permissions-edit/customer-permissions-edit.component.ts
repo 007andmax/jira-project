@@ -1,13 +1,17 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserPermissions } from 'src/app/components/users/class/user-permissions';
 import { UserRole } from 'src/app/components/users/class/user-role';
 import { UsersService } from 'src/app/services/users/users.service';
+import { FormsModule } from '@angular/forms';
+import { DynamicTooltipComponent } from '../../../shared/dynamic-tooltip/dynamic-tooltip.component';
 
 @Component({
-  selector: 'customer-permissions-edit',
-  templateUrl: './customer-permissions-edit.component.html',
-  styleUrls: ['./customer-permissions-edit.component.scss']
+    selector: 'customer-permissions-edit',
+    templateUrl: './customer-permissions-edit.component.html',
+    styleUrls: ['./customer-permissions-edit.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, DynamicTooltipComponent, FormsModule]
 })
 export class CustomerPermissionsEditComponent implements OnInit {
   @Input() role: UserRole;

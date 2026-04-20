@@ -12,14 +12,22 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { InvoiceRevenueComponent } from './invoice-revenue/invoice-revenue.component';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { TopProductDashboardComponent } from './top-product-dashboard/top-product-dashboard.component';
+import { TopDashboardComponent } from './top-dashboard/top-dashboard.component';
+import { DashboardQuotesComponent } from './dashboard-quotes/dashboard-quotes.component';
+import { DashboardStatsComponent } from './dashboard-stats/dashboard-stats.component';
+import { DatePickerComponent } from '../../shared/date-picker/date-picker.component';
+import { NgIf, CurrencyPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-dashboard-billing',
-  templateUrl: './dashboard-billing.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./dashboard-billing.component.scss']
+    selector: 'app-dashboard-billing',
+    templateUrl: './dashboard-billing.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./dashboard-billing.component.scss'],
+    standalone: true,
+    imports: [NgIf, DatePickerComponent, DashboardStatsComponent, DashboardSalesAnalyticsComponent, InvoiceRevenueComponent, DashboardQuotesComponent, ContractsDashboardComponent, TopDashboardComponent, TopProductDashboardComponent, CurrencyPipe]
 })
 export class DashboardBillingComponent implements OnInit {
   @ViewChild('contractsDb', { static: false }) contractsDb: ContractsDashboardComponent;

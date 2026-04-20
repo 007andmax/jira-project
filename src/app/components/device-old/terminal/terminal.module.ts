@@ -8,19 +8,17 @@ import { TerminalAsideComponent } from './terminal-aside/terminal-aside.componen
 import { TerminalManageCategoryComponent } from './terminal-manage-category/terminal-manage-category.component';
 import { TerminalRunScriptComponent } from './terminal-run-script/terminal-run-script.component';
 import { TerminalScriptDetailComponent } from './terminal-script-detail/terminal-script-detail.component';
-import { DropDownModule } from '../../shared/drop-down/drop-down.module';
+
 
 
 @NgModule({
-    declarations: [TerminalComponent, TerminalAsideComponent, TerminalManageCategoryComponent, TerminalRunScriptComponent, TerminalScriptDetailComponent,
-    ],
     imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        TerminalRoutingOldModule,
-        NgbModule,
-        DropDownModule
-    ]
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TerminalRoutingOldModule,
+    NgbModule,
+    TerminalComponent, TerminalAsideComponent, TerminalManageCategoryComponent, TerminalRunScriptComponent, TerminalScriptDetailComponent
+]
 })
 export class TerminalOldModule { }

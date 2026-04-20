@@ -1,12 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-file-manager-add-category',
-  templateUrl: './file-manager-add-category.component.html',
-  styleUrls: ['./file-manager-add-category.component.scss']
+    selector: 'app-file-manager-add-category',
+    templateUrl: './file-manager-add-category.component.html',
+    styleUrls: ['./file-manager-add-category.component.scss'],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, NgClass, NgIf]
 })
 export class FileManagerAddCategoryComponent implements OnInit {
   @Input() categoryId: string;

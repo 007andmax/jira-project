@@ -3,11 +3,19 @@ import { ContractsBlockTimeDefaultService } from '../../class/contracts-block-ti
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 import { Subscription } from 'rxjs';
+import { numberDirective } from '../../../../../../directives/number/number.directive';
+import { TaxesComponent as TaxesComponent_1 } from '../../../../../shared/taxes/taxes.component';
+import { DecimalNumberDirective } from '../../../../../../directives/decimal-number/decimal-number.directive';
+import { FormsModule } from '@angular/forms';
+import { MatErrorComponent } from '../../../../../shared/mat-error/mat-error.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-contracts-aside-block-time-billing-default-service',
-  templateUrl: './contracts-aside-block-time-billing-default-service.component.html',
-  styleUrls: ['./contracts-aside-block-time-billing-default-service.component.scss']
+    selector: 'app-contracts-aside-block-time-billing-default-service',
+    templateUrl: './contracts-aside-block-time-billing-default-service.component.html',
+    styleUrls: ['./contracts-aside-block-time-billing-default-service.component.scss'],
+    standalone: true,
+    imports: [NgIf, MatErrorComponent, FormsModule, DecimalNumberDirective, TaxesComponent_1, numberDirective]
 })
 export class ContractsAsideBlockTimeBillingDefaultServiceComponent implements OnInit, OnDestroy {
   @Input() service: ContractsBlockTimeDefaultService;

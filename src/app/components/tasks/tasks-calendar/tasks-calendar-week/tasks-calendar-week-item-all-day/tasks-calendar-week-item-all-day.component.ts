@@ -4,9 +4,10 @@ import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
-  selector: 'app-tasks-calendar-week-item-all-day',
-  templateUrl: './tasks-calendar-week-item-all-day.component.html',
-  styleUrls: ['./tasks-calendar-week-item-all-day.component.scss']
+    selector: 'app-tasks-calendar-week-item-all-day',
+    templateUrl: './tasks-calendar-week-item-all-day.component.html',
+    styleUrls: ['./tasks-calendar-week-item-all-day.component.scss'],
+    standalone: true
 })
 export class TasksCalendarWeekItemAllDayComponent {
   @Input() list: any[] = [];

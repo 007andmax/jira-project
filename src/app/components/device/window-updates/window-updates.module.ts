@@ -7,13 +7,12 @@ import { WindowUpdatesRoutingModule } from './window-updates-routing.module';
 
 
 @NgModule({
-    declarations: [WindowUpdatesComponent
-    ],
     imports: [
         CommonModule,
         FormsModule,
         NgbModule,
-        WindowUpdatesRoutingModule
+        WindowUpdatesRoutingModule,
+        WindowUpdatesComponent
     ],
 })
 export class WindowUpdatesModule { }

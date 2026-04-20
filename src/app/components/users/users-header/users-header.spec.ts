@@ -25,7 +25,7 @@ describe('UsersHeaderComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         DropDownModule,
         NgbModule,
@@ -37,16 +37,14 @@ describe('UsersHeaderComponent unit test', () => {
         MatChipModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [UsersHeaderComponent,
+        NoopAnimationsModule, UsersHeaderComponent,
         UsersFilterSubscriptionsComponent,
-        UsersFilterInfoComponent,
-      ]
-    }).compileComponents();
+        UsersFilterInfoComponent]
+}).compileComponents();
 
   });
 

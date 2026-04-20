@@ -4,9 +4,10 @@ import { catchError, map } from 'rxjs/operators';
 import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
 
 @Component({
-  selector: 'app-manage-tags-devices-add',
-  templateUrl: './manage-tags-devices-add.component.html',
-  styleUrls: ['./manage-tags-devices-add.component.scss']
+    selector: 'app-manage-tags-devices-add',
+    templateUrl: './manage-tags-devices-add.component.html',
+    styleUrls: ['./manage-tags-devices-add.component.scss'],
+    standalone: true
 })
 export class ManageTagsDevicesAddComponent implements OnInit {
 

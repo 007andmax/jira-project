@@ -25,7 +25,7 @@ describe('UsersFilterComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         TicketsFilterCompaniesDropDownModule,
         UserDefaultSubscriptionModule,
         FormsModule,
@@ -37,18 +37,16 @@ describe('UsersFilterComponent unit test', () => {
         MatChipListModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [UsersFilterComponent,
+        NoopAnimationsModule, UsersFilterComponent,
         UsersFilterJobTitleComponent,
         UsersFilterDefaultSubscriptionComponent,
         UsersFilterTagsComponent,
-        UsersFilterCustomSubscriptionsComponent
-      ]
-    }).compileComponents();
+        UsersFilterCustomSubscriptionsComponent]
+}).compileComponents();
 
   });
 

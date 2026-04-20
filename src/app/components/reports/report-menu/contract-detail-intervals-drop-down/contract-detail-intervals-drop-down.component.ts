@@ -4,9 +4,10 @@ import { DetailContractInterval } from '../../class/detail-contract-interval';
 import * as moment from "moment";
 
 @Component({
-  selector: 'contract-detail-intervals-drop-down',
-  templateUrl: './contract-detail-intervals-drop-down.component.html',
-  styleUrls: ['./contract-detail-intervals-drop-down.component.scss']
+    selector: 'contract-detail-intervals-drop-down',
+    templateUrl: './contract-detail-intervals-drop-down.component.html',
+    styleUrls: ['./contract-detail-intervals-drop-down.component.scss'],
+    standalone: true
 })
 export class ContractDetailIntervalsDropDownComponent extends DropDownComponent {
   selectedItems = [];

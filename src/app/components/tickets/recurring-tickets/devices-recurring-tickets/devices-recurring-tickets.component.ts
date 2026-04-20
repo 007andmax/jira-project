@@ -8,9 +8,10 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
 
 
 @Component({
-  selector: 'app-devices-recurring-tickets',
-  templateUrl: './devices-recurring-tickets.component.html',
-  styleUrls: ['./devices-recurring-tickets.component.scss']
+    selector: 'app-devices-recurring-tickets',
+    templateUrl: './devices-recurring-tickets.component.html',
+    styleUrls: ['./devices-recurring-tickets.component.scss'],
+    standalone: true
 })
 export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
 

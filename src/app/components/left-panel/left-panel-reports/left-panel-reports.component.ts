@@ -5,11 +5,15 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 import { ReportsLeftMenuItem } from './class/reports-left-menu-item';
 import { ReportsLeftMenuItemReport } from './class/reports-left-menu-item-report';
+import { RightClickBlankDirective } from '../../../directives/right-click-blank/right-click-blank.directive';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-left-panel-reports',
-  templateUrl: './left-panel-reports.component.html',
-  styleUrls: ['./left-panel-reports.component.scss']
+    selector: 'app-left-panel-reports',
+    templateUrl: './left-panel-reports.component.html',
+    styleUrls: ['./left-panel-reports.component.scss'],
+    standalone: true,
+    imports: [NgClass, RightClickBlankDirective, NgFor, NgIf]
 })
 export class LeftPanelReportsComponent implements OnInit {
   @Output() onChangeState = new EventEmitter();

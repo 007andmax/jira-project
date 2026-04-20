@@ -14,19 +14,18 @@ describe('CompanyDashAssociateInfoComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         ReactiveFormsModule,
         FormsModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NoopAnimationsModule],
-      declarations: [CompanyDashAssociateInfoComponent
-      ],
-    }).compileComponents();
+    declarations: [CompanyDashAssociateInfoComponent],
+}).compileComponents();
 
   });
   it('check "getCompanyName"', () => {

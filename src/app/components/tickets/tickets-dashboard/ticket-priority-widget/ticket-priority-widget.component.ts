@@ -4,11 +4,15 @@ import { TicketsPriority } from 'src/app/components/setting/ticket-settings-page
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { StatusColor } from '../../class/status-color';
+import { NgIf, NgFor, NgStyle } from '@angular/common';
+import { PieChartModule } from '@swimlane/ngx-charts';
 
 @Component({
-  selector: 'app-ticket-priority-widget',
-  templateUrl: './ticket-priority-widget.component.html',
-  styleUrls: ['./ticket-priority-widget.component.scss']
+    selector: 'app-ticket-priority-widget',
+    templateUrl: './ticket-priority-widget.component.html',
+    styleUrls: ['./ticket-priority-widget.component.scss'],
+    standalone: true,
+    imports: [PieChartModule, NgIf, NgFor, NgStyle]
 })
 export class TicketPriorityWidgetComponent implements OnInit {
   @Input() dashboardTicketsStats: DashboardTicketsStats = new DashboardTicketsStats();

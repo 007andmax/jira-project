@@ -7,9 +7,10 @@ import { ModalImageCropperStateService } from './services/modal-image-cropper-st
 import { ImageCroper } from './class/image-croper';
 
 @Component({
-  selector: 'modal-image-cropper',
-  templateUrl: './modal-image-cropper.component.html',
-  styleUrls: ['./modal-image-cropper.component.scss']
+    selector: 'modal-image-cropper',
+    templateUrl: './modal-image-cropper.component.html',
+    styleUrls: ['./modal-image-cropper.component.scss'],
+    standalone: true
 })
 export class ModalImageCropperComponent implements OnInit, OnDestroy {
 

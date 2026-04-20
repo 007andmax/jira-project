@@ -14,13 +14,11 @@ describe('ContractsAsideBlockTimeBillingAddDefaultServiceComponent unit test', (
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         NgbModule,
         MatErrorModule,
-        NoopAnimationsModule],
-      declarations: [ContractsAsideBlockTimeBillingAddDefaultServiceComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, ContractsAsideBlockTimeBillingAddDefaultServiceComponent],
+}).compileComponents();
 
   });
 

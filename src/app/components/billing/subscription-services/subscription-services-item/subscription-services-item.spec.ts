@@ -25,7 +25,7 @@ describe('SubscriptionServicesItemComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         NgbModule,
         DropDownModule,
         FormsModule,
@@ -40,15 +40,13 @@ describe('SubscriptionServicesItemComponent unit test', () => {
         ContractsEditModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [SubscriptionServicesItemComponent
-      ],
-      providers: [NgbActiveModal]
-    }).compileComponents();
+        NoopAnimationsModule, SubscriptionServicesItemComponent],
+    providers: [NgbActiveModal]
+}).compileComponents();
 
   });
   it('check "glDropDownItemName"', () => {

@@ -4,9 +4,10 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { TechTicketReport } from '../../class/tech-ticket-report';
 
 @Component({
-  selector: 'tech-ticket-report',
-  templateUrl: './tech-ticket-report.component.html',
-  styleUrls: ['./tech-ticket-report.component.css']
+    selector: 'tech-ticket-report',
+    templateUrl: './tech-ticket-report.component.html',
+    styleUrls: ['./tech-ticket-report.component.css'],
+    standalone: true
 })
 export class TechTicketReportComponent implements OnInit {
   loadingInProgress: boolean = false;

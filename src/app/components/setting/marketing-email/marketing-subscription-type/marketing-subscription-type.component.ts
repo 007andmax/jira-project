@@ -15,9 +15,10 @@ import { MarketingSubscriptionType } from './class/marketing-subscription-type';
 import { MarketingSubscriptionTypeFilter } from './class/marketing-subscription-type-filter';
 
 @Component({
-  selector: 'marketing-subscription-type',
-  templateUrl: './marketing-subscription-type.component.html',
-  styleUrls: ['./marketing-subscription-type.component.scss']
+    selector: 'marketing-subscription-type',
+    templateUrl: './marketing-subscription-type.component.html',
+    styleUrls: ['./marketing-subscription-type.component.scss'],
+    standalone: true
 })
 export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   marketingSubscriptionList: Array<MarketingSubscriptionType> = [];

@@ -8,11 +8,19 @@ import { NonContractServicesService } from 'src/app/services/non-contract-servic
 import { NonContractServiceValidate } from '../class/non-contract-service-validate';
 import { NonContractServicesStateService } from 'src/app/states/non-contract-services/non-contract-services-state.service';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { GlNumbersDropDownComponent } from '../../../inventory/gl-numbers-drop-down/gl-numbers-drop-down.component';
+import { TaxesComponent } from '../../../shared/taxes/taxes.component';
+import { numberDirective } from '../../../../directives/number/number.directive';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgIf, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-non-contract-services-edit',
-  templateUrl: './non-contract-services-edit.component.html',
-  styleUrls: ['./non-contract-services-edit.component.scss']
+    selector: 'app-non-contract-services-edit',
+    templateUrl: './non-contract-services-edit.component.html',
+    styleUrls: ['./non-contract-services-edit.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgClass, FormsModule, MatErrorComponent, numberDirective, TaxesComponent, GlNumbersDropDownComponent]
 })
 export class NonContractServicesEditComponent implements OnInit, OnDestroy {
   open: boolean = false;

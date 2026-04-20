@@ -21,7 +21,7 @@ describe('CompanyTagsComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         ReactiveFormsModule,
         FormsModule,
         MatChipModule,
@@ -31,14 +31,12 @@ describe('CompanyTagsComponent unit test', () => {
         InfiniteScrollModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [CompanyTagsComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, CompanyTagsComponent],
+}).compileComponents();
 
   });
   it('check "setEditItems"', () => {

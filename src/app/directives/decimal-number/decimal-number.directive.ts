@@ -3,8 +3,9 @@ import { CommonService } from 'src/app/services/common/common.service';
 
 
 @Directive({
-  selector: '[decimalNumber]',
-  providers: [CommonService]
+    selector: '[decimalNumber]',
+    providers: [CommonService],
+    standalone: true
 })
 @Injectable()
 export class DecimalNumberDirective {

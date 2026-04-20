@@ -2,11 +2,16 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { Subscription } from 'rxjs';
 import { SubscriptionServices } from 'src/app/components/billing/subscription-services/class/subscription-services';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
+import { MatErrorComponent } from '../../../../../shared/mat-error/mat-error.component';
+import { NgIf, NgFor } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-contracts-aside-block-time-billing-add-subscription-services',
-  templateUrl: './contracts-aside-block-time-billing-add-subscription-services.component.html',
-  styleUrls: ['./contracts-aside-block-time-billing-add-subscription-services.component.scss']
+    selector: 'app-contracts-aside-block-time-billing-add-subscription-services',
+    templateUrl: './contracts-aside-block-time-billing-add-subscription-services.component.html',
+    styleUrls: ['./contracts-aside-block-time-billing-add-subscription-services.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, NgIf, MatErrorComponent, NgFor]
 })
 export class ContractsAsideBlockTimeBillingAddSubscriptionServicesComponent implements OnInit, OnDestroy {
   subscriptionServices: Array<SubscriptionServices> = [];

@@ -7,9 +7,10 @@ import { CompanyDeviceFilter } from '../class/device-company-filter';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-company-devices-header',
-  templateUrl: './company-devices-header.component.html',
-  styleUrls: ['./company-devices-header.component.scss']
+    selector: 'app-company-devices-header',
+    templateUrl: './company-devices-header.component.html',
+    styleUrls: ['./company-devices-header.component.scss'],
+    standalone: true
 })
 export class CompanyDevicesHeaderComponent implements OnInit {
   @Input() devices: Array<DeviceCompany> = [];

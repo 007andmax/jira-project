@@ -9,9 +9,10 @@ import { Subscription } from 'rxjs';
 import { CalendarWeek } from '../../tasks/class/calenadar-week';
 import { TasksFilters } from '../../tasks/class/tasks-filters';
 @Component({
-  selector: 'app-tasks-dashboard-my-calendar',
-  templateUrl: './tasks-dashboard-my-calendar.component.html',
-  styleUrls: ['./tasks-dashboard-my-calendar.component.scss']
+    selector: 'app-tasks-dashboard-my-calendar',
+    templateUrl: './tasks-dashboard-my-calendar.component.html',
+    styleUrls: ['./tasks-dashboard-my-calendar.component.scss'],
+    standalone: true
 })
 export class TasksDashboardMyCalendarComponent {
   @Input() filter: TasksFilters = new TasksFilters();

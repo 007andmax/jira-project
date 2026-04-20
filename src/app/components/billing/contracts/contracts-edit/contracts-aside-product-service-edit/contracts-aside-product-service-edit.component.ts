@@ -12,11 +12,21 @@ import { ServiceAgreementServiceExpenses } from '../../class/service-agreement-s
 import { ContractsOtherProduct } from '../../contracts-aside/class/contracts-other-product';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { DatePickerIntervalsComponent } from '../../contracts-aside/date-picker-intervals/date-picker-intervals.component';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { ContractsAsideOtherProductComponent } from '../../contracts-aside/contracts-aside-product-service-contracts/contracts-aside-other-product/contracts-aside-other-product.component';
+import { ContractsAsideOtherServiceComponent } from '../../contracts-aside/contracts-aside-product-service-contracts/contracts-aside-other-service/contracts-aside-other-service.component';
+import { MatErrorComponent } from '../../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf, NgFor, CurrencyPipe } from '@angular/common';
+import { DatePickerComponent as DatePickerComponent_1 } from '../../../../shared/date-picker/date-picker.component';
+import { DropDownComponent } from '../../../../shared/drop-down/drop-down.component';
 
 @Component({
-  selector: 'app-contracts-aside-product-service-edit',
-  templateUrl: './contracts-aside-product-service-edit.component.html',
-  styleUrls: ['./contracts-aside-product-service-edit.component.scss']
+    selector: 'app-contracts-aside-product-service-edit',
+    templateUrl: './contracts-aside-product-service-edit.component.html',
+    styleUrls: ['./contracts-aside-product-service-edit.component.scss'],
+    standalone: true,
+    imports: [DropDownComponent, DatePickerComponent_1, DatePickerIntervalsComponent, NgClass, FormsModule, NgIf, MatErrorComponent, NgFor, ContractsAsideOtherServiceComponent, ContractsAsideOtherProductComponent, NgbTooltipModule, CurrencyPipe]
 })
 export class ContractsAsideProductServiceEditComponent implements OnInit {
   selectedType = new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER');

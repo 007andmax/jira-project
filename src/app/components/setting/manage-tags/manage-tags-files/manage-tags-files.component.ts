@@ -10,9 +10,10 @@ import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service'
 import { ManageTagsFilter } from '../class/manage-tags-filter';
 
 @Component({
-  selector: 'app-manage-tags-files',
-  templateUrl: './manage-tags-files.component.html',
-  styleUrls: ['./manage-tags-files.component.scss']
+    selector: 'app-manage-tags-files',
+    templateUrl: './manage-tags-files.component.html',
+    styleUrls: ['./manage-tags-files.component.scss'],
+    standalone: true
 })
 export class ManageTagsFilesComponent implements OnInit, OnDestroy {
   filter: ManageTagsFilter = new ManageTagsFilter();

@@ -4,10 +4,11 @@ import { TicketsListService } from '../../../services/tickets-list.service';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 
 @Component({
-  selector: 'tickets-filter-users-drop-down',
-  templateUrl: './tickets-filter-users-drop-down.component.html',
-  styleUrls: ['./tickets-filter-users-drop-down.component.scss'],
-  providers: [CompanyTagsListService, TicketsListService]
+    selector: 'tickets-filter-users-drop-down',
+    templateUrl: './tickets-filter-users-drop-down.component.html',
+    styleUrls: ['./tickets-filter-users-drop-down.component.scss'],
+    providers: [CompanyTagsListService, TicketsListService],
+    standalone: true
 })
 export class TicketsFilterUsersDropDownComponent extends TicketsFilterDropDownComponent {
   @Input() reducerItem: Function = (item) => `${item.firstName} ${item.lastName}`;

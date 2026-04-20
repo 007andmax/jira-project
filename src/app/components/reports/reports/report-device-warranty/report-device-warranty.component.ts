@@ -16,9 +16,10 @@ import { DeviceWarrantyReportFilter } from "./Class/device-warranty-report";
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "report-device-warranty",
-  templateUrl: "./report-device-warranty.component.html",
-  styleUrls: ["./report-device-warranty.component.scss"],
+    selector: "report-device-warranty",
+    templateUrl: "./report-device-warranty.component.html",
+    styleUrls: ["./report-device-warranty.component.scss"],
+    standalone: true,
 })
 export class ReportDeviceWarrantyComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;

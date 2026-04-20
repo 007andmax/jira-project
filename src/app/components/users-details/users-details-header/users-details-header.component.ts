@@ -12,12 +12,17 @@ import { UserCustomerCompaniesInfo } from '../../users/class/user-customer-compa
 import { UsersService } from 'src/app/services/users/users.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../directives/disabled-btn/disabled-btn.directive';
+import { NgIf } from '@angular/common';
 
 
 @Component({
-  selector: 'app-users-details-header',
-  templateUrl: './users-details-header.component.html',
-  styleUrls: ['./users-details-header.component.scss']
+    selector: 'app-users-details-header',
+    templateUrl: './users-details-header.component.html',
+    styleUrls: ['./users-details-header.component.scss'],
+    standalone: true,
+    imports: [NgIf, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class UsersDetailsHeaderComponent implements OnInit {
   @Input() companyId: string;

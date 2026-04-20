@@ -14,9 +14,10 @@ import { DeviceNetworkDetailReportFilter } from "./Class/network-detail-report";
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "network-detail-report",
-  templateUrl: "./network-detail-report.component.html",
-  styleUrls: ["./network-detail-report.component.scss"],
+    selector: "network-detail-report",
+    templateUrl: "./network-detail-report.component.html",
+    styleUrls: ["./network-detail-report.component.scss"],
+    standalone: true,
 })
 export class NetworkDetailReportComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;

@@ -5,11 +5,18 @@ import { NoteService } from 'src/app/services/note/note.service';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { ValidateNote } from 'src/app/components/setting/accounting/custom-notes-settings/class/validate-note';
+import { MatErrorComponent } from '../../../../../shared/mat-error/mat-error.component';
+import { InvoiceAddNoteComponent } from '../invoice-add-note/invoice-add-note.component';
+import { InvoiceSelectNoteComponent } from '../invoice-select-note/invoice-select-note.component';
+import { NgIf, NgClass } from '@angular/common';
+import { NgbTooltipModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-invoice-regular-note',
-  templateUrl: './invoice-regular-note.component.html',
-  styleUrls: ['./invoice-regular-note.component.scss']
+    selector: 'app-invoice-regular-note',
+    templateUrl: './invoice-regular-note.component.html',
+    styleUrls: ['./invoice-regular-note.component.scss'],
+    standalone: true,
+    imports: [NgbTooltipModule, NgIf, NgbDropdownModule, NgClass, InvoiceSelectNoteComponent, InvoiceAddNoteComponent, MatErrorComponent]
 })
 export class InvoiceRegularNoteComponent implements OnInit {
   @Input() invoiceNotes: Array<InvoiceNote> = [];

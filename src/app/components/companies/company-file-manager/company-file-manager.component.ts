@@ -8,12 +8,13 @@ import { BreadcrumbsItem } from '../../file-manager/class/breadcrumbs-item';
 import { REMOVE_CATEGORY_FILES, REMOVE_FILE } from 'src/app/const/confirm';
 
 @Component({
-  selector: 'app-company-file-manager',
-  templateUrl: './company-file-manager.component.html',
-  styleUrls: ['./company-file-manager.component.scss'],
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
+    selector: 'app-company-file-manager',
+    templateUrl: './company-file-manager.component.html',
+    styleUrls: ['./company-file-manager.component.scss'],
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    standalone: true,
 })
 export class CompanyFileManagerComponent extends FileManagerComponent {
   companyId: string;

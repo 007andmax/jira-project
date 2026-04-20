@@ -5,9 +5,10 @@ import * as moment from "moment";
 import { Company } from 'src/app/interfaces/company/company';
 
 @Component({
-  selector: 'app-quote-aside-preview-body',
-  templateUrl: './quote-aside-preview-body.component.html',
-  styleUrls: ['./quote-aside-preview-body.component.scss']
+    selector: 'app-quote-aside-preview-body',
+    templateUrl: './quote-aside-preview-body.component.html',
+    styleUrls: ['./quote-aside-preview-body.component.scss'],
+    standalone: true
 })
 export class QuoteAsidePreviewBodyComponent implements OnInit {
   @Input() quote: QuotePreview;

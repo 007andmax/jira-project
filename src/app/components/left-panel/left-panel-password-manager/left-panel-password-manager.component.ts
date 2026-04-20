@@ -10,14 +10,18 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
 import { PasswordRecordCategories } from '../../password-manager/class/password-record-categories';
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
 import { Subscription } from 'rxjs';
+import { RightClickBlankDirective } from '../../../directives/right-click-blank/right-click-blank.directive';
+import { NgClass, NgFor } from '@angular/common';
 
 /**
  * Left panel password manager component
  */
 @Component({
-  selector: 'app-left-panel-password-manager',
-  templateUrl: './left-panel-password-manager.component.html',
-  styleUrls: ['./left-panel-password-manager.component.scss']
+    selector: 'app-left-panel-password-manager',
+    templateUrl: './left-panel-password-manager.component.html',
+    styleUrls: ['./left-panel-password-manager.component.scss'],
+    standalone: true,
+    imports: [NgClass, RightClickBlankDirective, NgFor]
 })
 export class LeftPanelPasswordManagerComponent implements OnInit {
   @Input() activePage: string = "";

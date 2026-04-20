@@ -3,11 +3,20 @@ import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component'
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { ContractsUserDeviceService } from '../../class/contracts-user-device-service';
 import { Subscription } from 'rxjs';
+import { numberDirective } from '../../../../../../directives/number/number.directive';
+import { FormsModule } from '@angular/forms';
+import { ContractsAsideDiscountComponent } from '../../contracts-aside-discount/contracts-aside-discount.component';
+import { InvoiceFormTicketEditTaxesComponent } from '../../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
+import { DecimalNumberDirective } from '../../../../../../directives/decimal-number/decimal-number.directive';
+import { MatErrorComponent } from '../../../../../shared/mat-error/mat-error.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-contracts-aside-user-device-service',
-  templateUrl: './contracts-aside-user-device-service.component.html',
-  styleUrls: ['./contracts-aside-user-device-service.component.scss']
+    selector: 'app-contracts-aside-user-device-service',
+    templateUrl: './contracts-aside-user-device-service.component.html',
+    styleUrls: ['./contracts-aside-user-device-service.component.scss'],
+    standalone: true,
+    imports: [NgIf, MatErrorComponent, DecimalNumberDirective, InvoiceFormTicketEditTaxesComponent, ContractsAsideDiscountComponent, FormsModule, numberDirective]
 })
 export class ContractsAsideUserDeviceServiceComponent implements OnInit, OnDestroy {
   @Input() invoiceAsSingleItem: boolean = false;

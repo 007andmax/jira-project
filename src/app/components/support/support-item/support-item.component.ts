@@ -12,11 +12,15 @@ import { SupportStateService } from 'src/app/states/support/support-state.servic
 import { SupportService } from 'src/app/services/support/support.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { NgIf, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-support-item',
-  templateUrl: './support-item.component.html',
-  styleUrls: ['./support-item.component.scss']
+    selector: 'app-support-item',
+    templateUrl: './support-item.component.html',
+    styleUrls: ['./support-item.component.scss'],
+    standalone: true,
+    imports: [NgIf, DynamicTooltipComponent, NgClass]
 })
 export class SupportItemComponent implements OnInit {
   @Input() item: RemoteSession;

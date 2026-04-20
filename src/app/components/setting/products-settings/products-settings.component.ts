@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { DELETE_CATEGORIES_PRODUCT, DELETE_CATEGORY_PRODUCT } from 'src/app/const/confirm';
@@ -14,14 +14,17 @@ import { ProductsCategoryFilter } from './class/products-category-filter';
 import { ProductsSettingsTypeComponent } from './products-settings-type/products-settings-type.component';
 import { ProductsSettingsCategoryComponent } from './products-settings-category/products-settings-category.component';
 import { fadeInAnimation } from 'src/app/animations';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'products-settings',
-  templateUrl: './products-settings.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./products-settings.component.scss']
+    selector: 'products-settings',
+    templateUrl: './products-settings.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./products-settings.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgbNavModule, ProductsSettingsCategoryComponent, ProductsSettingsTypeComponent]
 })
 export class ProductsSettingsComponent implements OnInit, OnDestroy {
   activeTab: string = "productCategories";

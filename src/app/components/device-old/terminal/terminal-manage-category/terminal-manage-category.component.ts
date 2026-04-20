@@ -5,12 +5,16 @@ import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { TerminalStateService } from '../../states/terminal-state.service';
 import { isArray } from 'util';
+import { NgFor, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'terminal-manage-category',
-  templateUrl: './terminal-manage-category.component.html',
-  styleUrls: ['./terminal-manage-category.component.scss'],
-  providers: [NgbModalConfig, NgbModal]
+    selector: 'terminal-manage-category',
+    templateUrl: './terminal-manage-category.component.html',
+    styleUrls: ['./terminal-manage-category.component.scss'],
+    providers: [NgbModalConfig, NgbModal],
+    standalone: true,
+    imports: [FormsModule, NgFor, NgIf]
 })
 export class TerminalManageCategoryComponent implements OnInit {
   cmdCategoryList = [];

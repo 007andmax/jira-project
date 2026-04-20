@@ -2,11 +2,16 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DashboardTechTickets } from '../class/dashboard-tech-tickets';
+import { NgIf, NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgbButtonsModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-tech-tickets-widget',
-  templateUrl: './tech-tickets-widget.component.html',
-  styleUrls: ['./tech-tickets-widget.component.scss']
+    selector: 'app-tech-tickets-widget',
+    templateUrl: './tech-tickets-widget.component.html',
+    styleUrls: ['./tech-tickets-widget.component.scss'],
+    standalone: true,
+    imports: [NgbButtonsModule, FormsModule, NgIf, NgFor]
 })
 export class TechTicketsWidgetComponent implements OnInit {
   techTickets: DashboardTechTickets = new DashboardTechTickets();

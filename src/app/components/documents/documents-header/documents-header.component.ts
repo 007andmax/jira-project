@@ -8,9 +8,10 @@ import { DocumentsFilterComponent } from './documents-filter/documents-filter.co
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'documents-header',
-  templateUrl: './documents-header.component.html',
-  styleUrls: ['./documents-header.component.css']
+    selector: 'documents-header',
+    templateUrl: './documents-header.component.html',
+    styleUrls: ['./documents-header.component.css'],
+    standalone: true
 })
 export class DocumentsHeaderComponent implements OnInit {
   toggleFilter: boolean = false;

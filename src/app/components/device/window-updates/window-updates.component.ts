@@ -4,11 +4,15 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgIf, NgFor, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'window-updates',
-  templateUrl: './window-updates.component.html',
-  styleUrls: ['./window-updates.component.scss']
+    selector: 'window-updates',
+    templateUrl: './window-updates.component.html',
+    styleUrls: ['./window-updates.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgbNavModule, NgFor, NgClass]
 })
 export class WindowUpdatesComponent implements OnInit, OnDestroy {
   kafkaMessage: any = "";

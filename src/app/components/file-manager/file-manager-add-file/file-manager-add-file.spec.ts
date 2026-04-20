@@ -28,7 +28,7 @@ describe('FileManagerAddFileComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         DisabledBtnModule,
         PreloaderTicketModule,
@@ -46,15 +46,13 @@ describe('FileManagerAddFileComponent unit test', () => {
         MatErrorModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      providers: [NgbActiveModal],
-      declarations: [FileManagerAddFileComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, FileManagerAddFileComponent],
+    providers: [NgbActiveModal],
+}).compileComponents();
 
   });
   it('check "removeFile"', () => {

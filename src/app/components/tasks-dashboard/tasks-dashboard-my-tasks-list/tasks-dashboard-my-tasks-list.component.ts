@@ -7,10 +7,11 @@ import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { Task } from '../../tasks/class/task';
 
 @Component({
-  selector: 'app-tasks-dashboard-my-tasks-list',
-  templateUrl: './tasks-dashboard-my-tasks-list.component.html',
-  styleUrls: ['./tasks-dashboard-my-tasks-list.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-tasks-dashboard-my-tasks-list',
+    templateUrl: './tasks-dashboard-my-tasks-list.component.html',
+    styleUrls: ['./tasks-dashboard-my-tasks-list.component.scss'],
+    providers: [TicketsListService],
+    standalone: true
 })
 export class TasksDashboardMyTasksListComponent extends TasksListComponent {
   container = document.body.querySelector(".my-task-dashboard__my-task");

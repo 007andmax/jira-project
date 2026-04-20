@@ -8,11 +8,19 @@ import { MergeTickets } from './class/merge-tickets';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { StatusColor } from '../../class/status-color';
+import { PreloaderTicketComponent } from '../../../shared/preloader-ticket/preloader-ticket.component';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../../directives/disabled-btn/disabled-btn.directive';
+import { MergeTicketsEditItemComponent } from './merge-tickets-edit-item/merge-tickets-edit-item.component';
+import { MergeTicketsItemComponent } from './merge-tickets-item/merge-tickets-item.component';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-merge-tickets',
-  templateUrl: './merge-tickets.component.html',
-  styleUrls: ['./merge-tickets.component.scss']
+    selector: 'app-merge-tickets',
+    templateUrl: './merge-tickets.component.html',
+    styleUrls: ['./merge-tickets.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, NgFor, MergeTicketsItemComponent, MergeTicketsEditItemComponent, DisabledBtnDirective_1, NgbTooltipModule, PreloaderTicketComponent]
 })
 export class MergeTicketsComponent implements OnInit, OnDestroy {
   tickets: Array<Ticket> = [];

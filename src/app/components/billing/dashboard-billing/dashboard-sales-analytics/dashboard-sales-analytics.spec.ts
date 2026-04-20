@@ -16,20 +16,18 @@ describe('DashboardSalesAnalyticsComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         NgbModule,
         FormsModule,
         MatErrorModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [DashboardSalesAnalyticsComponent
-      ]
-    }).compileComponents();
+        NoopAnimationsModule, DashboardSalesAnalyticsComponent]
+}).compileComponents();
 
   });
 

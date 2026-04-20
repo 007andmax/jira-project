@@ -14,12 +14,13 @@ import { DocumentFilter } from '../class/document-filter';
 import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
-  selector: 'documents-category',
-  templateUrl: './documents-category.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./documents-category.component.css']
+    selector: 'documents-category',
+    templateUrl: './documents-category.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./documents-category.component.css'],
+    standalone: true
 })
 export class DocumentsCategoryComponent implements OnInit, OnDestroy {
   categoryId: string;

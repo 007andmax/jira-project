@@ -15,9 +15,10 @@ import { NetworkIPReportFilter } from "./Class/network-ip-report";
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "network-ip-report",
-  templateUrl: "./network-ip-report.component.html",
-  styleUrls: ["./network-ip-report.component.scss"],
+    selector: "network-ip-report",
+    templateUrl: "./network-ip-report.component.html",
+    styleUrls: ["./network-ip-report.component.scss"],
+    standalone: true,
 })
 export class NetworkIpReportComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;

@@ -3,12 +3,15 @@ import { Component, EventEmitter, OnInit, Output, Input, OnDestroy } from '@angu
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 
 @Component({
-  selector: 'app-left-panel-devices',
-  templateUrl: './left-panel-devices.component.html',
-  styleUrls: ['./left-panel-devices.component.scss']
+    selector: 'app-left-panel-devices',
+    templateUrl: './left-panel-devices.component.html',
+    styleUrls: ['./left-panel-devices.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, NgFor]
 })
 export class LeftPanelDevicesComponent implements OnInit, OnDestroy {
   type: string = 'Dashboard';

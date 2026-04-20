@@ -19,7 +19,7 @@ describe('TicketDetailEditTagsComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         NgbModule,
         MatChipModule,
         MatFormFieldModule,
@@ -28,14 +28,13 @@ describe('TicketDetailEditTagsComponent unit test', () => {
         HttpClientModule,
         ReactiveFormsModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NoopAnimationsModule],
-      declarations: [TicketDetailEditTagsComponent
-      ]
-    }).compileComponents();
+    declarations: [TicketDetailEditTagsComponent]
+}).compileComponents();
 
   });
 

@@ -14,9 +14,10 @@ import { Ticket } from '../../tickets/class/ticket';
 import { TasksDatePickerComponent } from '../tasks-date-picker/tasks-date-picker.component';
 
 @Component({
-  selector: 'app-tasks-edit',
-  templateUrl: './tasks-edit.component.html',
-  styleUrls: ['./tasks-edit.component.scss']
+    selector: 'app-tasks-edit',
+    templateUrl: './tasks-edit.component.html',
+    styleUrls: ['./tasks-edit.component.scss'],
+    standalone: true
 })
 export class TasksEditComponent extends TasksAddComponent {
   selectedCompany: Company;

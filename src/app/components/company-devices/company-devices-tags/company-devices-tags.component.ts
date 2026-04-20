@@ -12,11 +12,12 @@ import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.serv
 import { catchError, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-company-devices-tags',
-  templateUrl: './company-devices-tags.component.html',
-  styleUrls: ['./company-devices-tags.component.scss'],
-  providers: [CompanyTagsListService, TicketsListService],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-company-devices-tags',
+    templateUrl: './company-devices-tags.component.html',
+    styleUrls: ['./company-devices-tags.component.scss'],
+    providers: [CompanyTagsListService, TicketsListService],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
 })
 export class CompanyDevicesTagsComponent implements OnInit {
   searchName: string = "";

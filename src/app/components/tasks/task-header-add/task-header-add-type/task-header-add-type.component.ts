@@ -1,10 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
+import { NgIf, NgClass, NgFor } from '@angular/common';
+import { NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-task-header-add-type',
-  templateUrl: './task-header-add-type.component.html',
-  styleUrls: ['./task-header-add-type.component.scss']
+    selector: 'app-task-header-add-type',
+    templateUrl: './task-header-add-type.component.html',
+    styleUrls: ['./task-header-add-type.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, NgIf, NgbTooltipModule, NgClass, NgFor]
 })
 export class TaskHeaderAddTypeComponent {
   @Input() isDisabled: boolean = false;

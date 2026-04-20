@@ -5,15 +5,12 @@ import { IntegrationsRoutingModule } from './integrations-routing.module';
 import { IntegrationsComponent } from './integrations.component';
 
 @NgModule({
-    declarations: [IntegrationsComponent
-    ],
     imports: [
         CommonModule,
         FormsModule,
         IntegrationsRoutingModule,
         ReactiveFormsModule,
-
+        IntegrationsComponent,
     ],
-
 })
 export class IntegrationsModule { }

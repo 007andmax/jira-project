@@ -3,11 +3,14 @@ import { Subscription } from 'rxjs';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { SupportStateService } from 'src/app/states/support/support-state.service';
+import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-left-panel-support',
-  templateUrl: './left-panel-support.component.html',
-  styleUrls: ['./left-panel-support.component.scss']
+    selector: 'app-left-panel-support',
+    templateUrl: './left-panel-support.component.html',
+    styleUrls: ['./left-panel-support.component.scss'],
+    standalone: true,
+    imports: [NgClass]
 })
 export class LeftPanelSupportComponent implements OnInit, OnDestroy {
   type: string = 'ALL';

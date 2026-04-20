@@ -4,11 +4,12 @@ import { CompanyTagsListService } from 'src/app/components/companies/company-tag
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 
 @Component({
-  selector: 'app-users-filter-tags',
-  templateUrl: './users-filter-tags.component.html',
-  styleUrls: ['./users-filter-tags.component.scss'],
-  providers: [CompanyTagsListService, TicketsListService],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-users-filter-tags',
+    templateUrl: './users-filter-tags.component.html',
+    styleUrls: ['./users-filter-tags.component.scss'],
+    providers: [CompanyTagsListService, TicketsListService],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
 })
 export class UsersFilterTagsComponent extends CompanyTagsComponent {
   @Input() placement: string = 'bottom-left';

@@ -9,10 +9,11 @@ import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.servi
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
-  selector: 'app-tasks-list',
-  templateUrl: './tasks-list.component.html',
-  styleUrls: ['./tasks-list.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-tasks-list',
+    templateUrl: './tasks-list.component.html',
+    styleUrls: ['./tasks-list.component.scss'],
+    providers: [TicketsListService],
+    standalone: true
 })
 export class TasksListComponent implements OnInit, OnDestroy {
   filter: TasksFilters = new TasksFilters();

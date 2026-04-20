@@ -6,11 +6,15 @@ import { DELETE_COMPANY } from 'src/app/const/confirm';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
+import { RightClickBlankDirective } from '../../../directives/right-click-blank/right-click-blank.directive';
+import { NgClass, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-left-panel-inventory',
-  templateUrl: './left-panel-inventory.component.html',
-  styleUrls: ['./left-panel-inventory.component.scss']
+    selector: 'app-left-panel-inventory',
+    templateUrl: './left-panel-inventory.component.html',
+    styleUrls: ['./left-panel-inventory.component.scss'],
+    standalone: true,
+    imports: [NgClass, RightClickBlankDirective, NgFor]
 })
 export class LeftPanelInventoryComponent implements OnInit {
   inventoryCategoryList: Array<CategoryProduct> = [];

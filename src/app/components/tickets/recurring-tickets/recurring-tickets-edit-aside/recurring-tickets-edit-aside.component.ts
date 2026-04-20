@@ -21,10 +21,11 @@ import { InventoryStateService } from 'src/app/states/inventory/inventory-state.
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 
 @Component({
-  selector: 'app-recurring-tickets-edit-aside',
-  templateUrl: './recurring-tickets-edit-aside.component.html',
-  styleUrls: ['./recurring-tickets-edit-aside.component.scss'],
-  providers: [RecurringTicketsService]
+    selector: 'app-recurring-tickets-edit-aside',
+    templateUrl: './recurring-tickets-edit-aside.component.html',
+    styleUrls: ['./recurring-tickets-edit-aside.component.scss'],
+    providers: [RecurringTicketsService],
+    standalone: true
 })
 export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 

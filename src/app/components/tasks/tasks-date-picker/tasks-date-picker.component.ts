@@ -1,15 +1,21 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MultiDatepickerComponent } from '../../shared/multi-datepicker/multi-datepicker.component';
 import * as moment from "moment";
-import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbDropdownModule, NgbTooltipModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { DateService } from 'src/app/services/date/date.service';
 import { TicketProfileUpdatesServiceTimepickerComponent } from '../../tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
+import { ClickOutsideDirective } from '../../../directives/click-otside/click-otside.directive';
+import { FormsModule } from '@angular/forms';
+import { NgIf, NgClass } from '@angular/common';
 
 
 @Component({
-  selector: 'app-tasks-date-picker',
-  templateUrl: './tasks-date-picker.component.html',
-  styleUrls: ['./tasks-date-picker.component.scss']
+    selector: 'app-tasks-date-picker',
+    templateUrl: './tasks-date-picker.component.html',
+    styleUrls: ['./tasks-date-picker.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, NgIf, FormsModule, NgClass, NgbTooltipModule, ClickOutsideDirective, TicketProfileUpdatesServiceTimepickerComponent, NgbDatepickerModule, MatErrorComponent]
 })
 export class TasksDatePickerComponent extends MultiDatepickerComponent {
   @Input() type: string = "TASKS";

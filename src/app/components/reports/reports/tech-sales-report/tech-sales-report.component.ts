@@ -4,9 +4,10 @@ import { TechSalesReport } from '../../class/tech-sales-report';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'tech-sales-report',
-  templateUrl: './tech-sales-report.component.html',
-  styleUrls: ['./tech-sales-report.component.css']
+    selector: 'tech-sales-report',
+    templateUrl: './tech-sales-report.component.html',
+    styleUrls: ['./tech-sales-report.component.css'],
+    standalone: true
 })
 export class TechSalesReportComponent implements OnInit {
   loadingInProgress: boolean = false;

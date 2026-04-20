@@ -1,11 +1,22 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserCustomSubscription } from '../../class/user-custom-subscription';
+import { DynamicTooltipComponent } from '../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { NgIf, NgFor, NgClass } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'user-table-custom-subscription',
-  templateUrl: './user-table-custom-subscription.component.html',
-  styleUrls: ['./user-table-custom-subscription.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'user-table-custom-subscription',
+    templateUrl: './user-table-custom-subscription.component.html',
+    styleUrls: ['./user-table-custom-subscription.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgbDropdownModule,
+        NgIf,
+        NgFor,
+        NgClass,
+        DynamicTooltipComponent,
+    ],
 })
 export class UserTableCustomSubscriptionComponent implements OnInit {
   @Input() customSubscriptions: Array<UserCustomSubscription> = [];

@@ -7,15 +7,21 @@ import { ActivatedRoute, Router } from "@angular/router";
 import * as moment from "moment";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 import { AgentService } from "src/app/services/agent/agent.service";
-import { DatePipe } from "@angular/common";
+import { DatePipe, NgIf, NgFor } from "@angular/common";
 import { Subscription } from "rxjs";
 import { OnDestroy } from "@angular/core";
 
 declare var $: any;
 @Component({
-  selector: "app-hardware",
-  templateUrl: "./hardware.component.html",
-  styleUrls: ["./hardware.component.scss"],
+    selector: "app-hardware",
+    templateUrl: "./hardware.component.html",
+    styleUrls: ["./hardware.component.scss"],
+    standalone: true,
+    imports: [
+        NgIf,
+        NgFor,
+        DatePipe,
+    ],
 })
 export class HardwareComponent implements OnInit, OnDestroy {
   loading: boolean = false;

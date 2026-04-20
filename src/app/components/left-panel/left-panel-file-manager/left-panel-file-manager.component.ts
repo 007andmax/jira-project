@@ -5,11 +5,15 @@ import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service
 import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { RightClickBlankDirective } from '../../../directives/right-click-blank/right-click-blank.directive';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-left-panel-file-manager',
-  templateUrl: './left-panel-file-manager.component.html',
-  styleUrls: ['./left-panel-file-manager.component.scss']
+    selector: 'app-left-panel-file-manager',
+    templateUrl: './left-panel-file-manager.component.html',
+    styleUrls: ['./left-panel-file-manager.component.scss'],
+    standalone: true,
+    imports: [NgClass, RightClickBlankDirective, NgIf]
 })
 export class LeftPanelFileManagerComponent implements OnInit {
   open: boolean = false;

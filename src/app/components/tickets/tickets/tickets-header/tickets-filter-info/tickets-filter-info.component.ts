@@ -4,9 +4,10 @@ import { TicketGlobalFilter } from '../../class/ticket-global-filter';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'tickets-filter-info',
-  templateUrl: './tickets-filter-info.component.html',
-  styleUrls: ['./tickets-filter-info.component.scss']
+    selector: 'tickets-filter-info',
+    templateUrl: './tickets-filter-info.component.html',
+    styleUrls: ['./tickets-filter-info.component.scss'],
+    standalone: true
 })
 export class TicketsFilterInfoComponent implements OnInit, OnDestroy {
   @Input() title: string;

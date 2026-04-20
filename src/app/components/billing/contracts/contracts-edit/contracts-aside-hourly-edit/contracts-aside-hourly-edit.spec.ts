@@ -34,7 +34,7 @@ describe('ContractsAsideHourlyEditComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         PreloaderTicketModule,
         DisabledBtnModule,
         DatePickerModule,
@@ -57,15 +57,13 @@ describe('ContractsAsideHourlyEditComponent unit test', () => {
         ContractsAsideBlockTimeBillingAddSubscriptionServicesModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [ContractsAsideHourlyEditComponent,
-        ContractsAsideHourlyBillingEditDefaultServiceComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, ContractsAsideHourlyEditComponent,
+        ContractsAsideHourlyBillingEditDefaultServiceComponent],
+}).compileComponents();
 
   });
 

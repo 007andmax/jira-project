@@ -10,9 +10,10 @@ import { TasksFilters } from '../../class/tasks-filters';
 import { Subscription } from 'rxjs';
 import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
 @Component({
-  selector: 'app-tasks-calendar-week',
-  templateUrl: './tasks-calendar-week.component.html',
-  styleUrls: ['./tasks-calendar-week.component.scss']
+    selector: 'app-tasks-calendar-week',
+    templateUrl: './tasks-calendar-week.component.html',
+    styleUrls: ['./tasks-calendar-week.component.scss'],
+    standalone: true
 })
 export class TasksCalendarWeekComponent implements OnInit, OnDestroy {
   @Input() filter: TasksFilters = new TasksFilters();

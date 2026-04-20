@@ -29,12 +29,13 @@ import { fadeInAnimation } from 'src/app/animations';
 declare var $;
 
 @Component({
-  selector: 'app-tech-users-settings',
-  templateUrl: './tech-users-settings.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./tech-users-settings.component.scss']
+    selector: 'app-tech-users-settings',
+    templateUrl: './tech-users-settings.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./tech-users-settings.component.scss'],
+    standalone: true
 })
 export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDestroy {
   selectedIdx = -1;

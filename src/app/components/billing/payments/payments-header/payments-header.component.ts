@@ -8,9 +8,10 @@ import { PaymentsStateService } from 'src/app/states/payments/payments-state.ser
 import { PaymentsFilterComponent } from './payments-filter/payments-filter.component';
 
 @Component({
-  selector: 'app-payments-header',
-  templateUrl: './payments-header.component.html',
-  styleUrls: ['./payments-header.component.scss']
+    selector: 'app-payments-header',
+    templateUrl: './payments-header.component.html',
+    styleUrls: ['./payments-header.component.scss'],
+    standalone: true
 })
 export class PaymentsHeaderComponent implements OnInit {
   @ViewChild('filter', { static: true }) filter: PaymentsFilterComponent;

@@ -8,14 +8,19 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { FilterPasswordManager } from '../class/filter-password-manager';
 import { PasswordManagerStateService } from 'src/app/states/password-manager/password-manager-state.service';
 import { PasswoordManagerFiltersComponent } from './passwoord-manager-filters/passwoord-manager-filters.component';
+import { FormsModule } from '@angular/forms';
+import { PasswordManagerAddCategoryComponent } from '../password-manager-add-category/password-manager-add-category.component';
+import { NgIf, NgClass } from '@angular/common';
 
 /**
  * Password manager header component
  */
 @Component({
-  selector: 'app-passwoord-manager-header',
-  templateUrl: './passwoord-manager-header.component.html',
-  styleUrls: ['./passwoord-manager-header.component.scss']
+    selector: 'app-passwoord-manager-header',
+    templateUrl: './passwoord-manager-header.component.html',
+    styleUrls: ['./passwoord-manager-header.component.scss'],
+    standalone: true,
+    imports: [NgIf, PasswordManagerAddCategoryComponent, NgClass, FormsModule]
 })
 export class PasswoordManagerHeaderComponent implements OnInit, OnDestroy {
   toggleFilter: boolean = false;

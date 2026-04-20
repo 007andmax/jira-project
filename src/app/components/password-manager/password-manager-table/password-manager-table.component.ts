@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ChangeDetectorRef, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { REMOVE_RECORD } from 'src/app/const/confirm';
 import { AppStateService } from 'src/app/states/app/app-state.service';
@@ -11,15 +11,25 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { PasswordRecord } from '../class/password-record';
 import { PasswordRecordCategories } from '../class/password-record-categories';
 import { Subscription } from 'rxjs';
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
 
 /**
  * Password manager data table component
  */
 @Component({
-  selector: 'app-password-manager-table',
-  templateUrl: './password-manager-table.component.html',
-  styleUrls: ['./password-manager-table.component.scss'],
-
+    selector: 'app-password-manager-table',
+    templateUrl: './password-manager-table.component.html',
+    styleUrls: ['./password-manager-table.component.scss'],
+    standalone: true,
+    imports: [
+        NgClass,
+        FormsModule,
+        NgIf,
+        DynamicTooltipComponent,
+        NgbDropdownModule,
+    ],
 })
 export class PasswordManagerTableComponent implements OnInit, OnDestroy {
   @Input() item: PasswordRecord;

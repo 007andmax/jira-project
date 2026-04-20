@@ -2,20 +2,22 @@ import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { EmailSettingService } from "../../../../services/email-settings/email-setting.service";
 import { SettingService } from "src/app/services/setting/setting.service";
 import { ToastrService } from "ngx-toastr";
-import {
-  UntypedFormGroup,
-  UntypedFormBuilder,
-  Validators
-} from "@angular/forms";
+import { UntypedFormGroup, UntypedFormBuilder, Validators, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DisabledBtnDirective } from "src/app/directives/disabled-btn/disabled-btn.directive";
 import { AppStateService } from "src/app/states/app/app-state.service";
 import { TitleListType } from "src/app/components/tickets/tickets/tickets-header/class/title-list-type";
+import { PreloaderTicketComponent } from "../../../shared/preloader-ticket/preloader-ticket.component";
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from "../../../../directives/disabled-btn/disabled-btn.directive";
+import { DropDownComponent } from "../../../shared/drop-down/drop-down.component";
+import { NgIf, NgClass } from "@angular/common";
 
 
 @Component({
-  selector: "app-outgoing-email",
-  templateUrl: "./outgoing-email.component.html",
-  styleUrls: ["./outgoing-email.component.scss"]
+    selector: "app-outgoing-email",
+    templateUrl: "./outgoing-email.component.html",
+    styleUrls: ["./outgoing-email.component.scss"],
+    standalone: true,
+    imports: [NgIf, FormsModule, ReactiveFormsModule, NgClass, DropDownComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class OutgoingEmailComponent implements OnInit {
   smtp: any;

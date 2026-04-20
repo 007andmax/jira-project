@@ -6,12 +6,13 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 
 
 @Component({
-  selector: 'app-item-report',
-  templateUrl: './item-report.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./item-report.component.scss']
+    selector: 'app-item-report',
+    templateUrl: './item-report.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./item-report.component.scss'],
+    standalone: true
 })
 export class ItemReportComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();

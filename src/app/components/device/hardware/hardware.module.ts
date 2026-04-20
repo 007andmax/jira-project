@@ -7,15 +7,11 @@ import { HardwareRoutingModule } from './hardware-routing.module';
 
 
 @NgModule({
-    declarations: [HardwareComponent
-    ],
     imports: [
         CommonModule,
         FormsModule,
-        HardwareRoutingModule
+        HardwareRoutingModule,
+        HardwareComponent
     ],
-
-
-
 })
 export class HardwareModule { }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, ElementRef, EventEmitter, Output, OnDestroy, Input } from '@angular/core';
-import { NgbDropdown, NgbDateStruct, NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbDateStruct, NgbCalendar, NgbDate, NgbDropdownModule, NgbTooltipModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { RecurringTicketsEditAsideDate } from '../../tickets/recurring-tickets/class/recurring-tickets-edit-aside-date';
 import { DatePickerStateService } from './services/date-picker-state.service';
 import { ChangeDatePicker } from './class/change-date-picker';
@@ -7,12 +7,17 @@ import { NgbDatepickerNavigateEvent } from '@ng-bootstrap/ng-bootstrap/datepicke
 import { DatePickerService } from './services/date-picker.service';
 import { TYPE_INPUT, FORMAT_DATE_1 } from 'src/app/const/date-picker';
 import * as moment from 'moment';
+import { FormsModule } from '@angular/forms';
+import { DynamicTooltipComponent } from '../dynamic-tooltip/dynamic-tooltip.component';
+import { NgIf, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-date-picker',
-  templateUrl: './date-picker.component.html',
-  styleUrls: ['./date-picker.component.scss'],
-  providers: [DatePickerService]
+    selector: 'app-date-picker',
+    templateUrl: './date-picker.component.html',
+    styleUrls: ['./date-picker.component.scss'],
+    providers: [DatePickerService],
+    standalone: true,
+    imports: [NgbDropdownModule, NgIf, DynamicTooltipComponent, NgbTooltipModule, NgClass, NgbDatepickerModule, FormsModule]
 })
 export class DatePickerComponent implements OnInit, OnDestroy {
 

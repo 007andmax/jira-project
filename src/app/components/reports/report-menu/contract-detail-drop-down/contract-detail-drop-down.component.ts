@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
-  selector: 'contract-detail-drop-down',
-  templateUrl: './contract-detail-drop-down.component.html',
-  styleUrls: ['./contract-detail-drop-down.component.scss']
+    selector: 'contract-detail-drop-down',
+    templateUrl: './contract-detail-drop-down.component.html',
+    styleUrls: ['./contract-detail-drop-down.component.scss'],
+    standalone: true
 })
 export class ContractDetailDropDownComponent extends DropDownComponent {
   contractTypeDictionary = {

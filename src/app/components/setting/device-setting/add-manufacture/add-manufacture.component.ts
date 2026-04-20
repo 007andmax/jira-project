@@ -1,12 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { AgentService } from 'src/app/services/agent/agent.service';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'add-manufacture',
-  templateUrl: './add-manufacture.component.html',
-  styleUrls: ['./add-manufacture.component.scss']
+    selector: 'add-manufacture',
+    templateUrl: './add-manufacture.component.html',
+    styleUrls: ['./add-manufacture.component.scss'],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, NgClass, NgIf]
 })
 export class AddManufactureComponent implements OnInit {
   @Input() techCompany: any;

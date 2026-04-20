@@ -1,9 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { MatChipComponent } from '../../../../../shared/mat-chip/mat-chip.component';
+import { NgFor, NgStyle } from '@angular/common';
+import { MatChipListComponent } from '../../../../../shared/mat-chip-list/mat-chip-list.component';
 
 @Component({
-  selector: 'app-contracts-aside-block-time-billing-users',
-  templateUrl: './contracts-aside-block-time-billing-users.component.html',
-  styleUrls: ['./contracts-aside-block-time-billing-users.component.scss']
+    selector: 'app-contracts-aside-block-time-billing-users',
+    templateUrl: './contracts-aside-block-time-billing-users.component.html',
+    styleUrls: ['./contracts-aside-block-time-billing-users.component.scss'],
+    standalone: true,
+    imports: [MatChipListComponent, NgFor, MatChipComponent, NgStyle]
 })
 export class ContractsAsideBlockTimeBillingUsersComponent implements OnInit {
   @Input() selectedUsers = [];

@@ -17,9 +17,10 @@ import { Subscription } from 'rxjs';
 import { DeviceType } from '../../class/device-type';
 
 @Component({
-  selector: 'app-company-devices-aside-system',
-  templateUrl: './company-devices-aside-system.component.html',
-  styleUrls: ['./company-devices-aside-system.component.scss']
+    selector: 'app-company-devices-aside-system',
+    templateUrl: './company-devices-aside-system.component.html',
+    styleUrls: ['./company-devices-aside-system.component.scss'],
+    standalone: true
 })
 export class CompanyDevicesAsideSystemComponent implements OnInit, OnDestroy {
   @ViewChild('datePickerInstalledOn', { static: false }) datePickerInstalledOn: DatePickerComponent;

@@ -10,11 +10,21 @@ import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/app/interfaces/service/tax';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { NonContractServicesStateService } from 'src/app/states/non-contract-services/non-contract-services-state.service';
+import { PreloaderTicketComponent } from '../../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../../directives/disabled-btn/disabled-btn.directive';
+import { GlNumbersDropDownComponent } from '../../../inventory/gl-numbers-drop-down/gl-numbers-drop-down.component';
+import { TaxesComponent } from '../../../shared/taxes/taxes.component';
+import { numberDirective } from '../../../../directives/number/number.directive';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgIf, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-non-contract-services-add',
-  templateUrl: './non-contract-services-add.component.html',
-  styleUrls: ['./non-contract-services-add.component.scss']
+    selector: 'app-non-contract-services-add',
+    templateUrl: './non-contract-services-add.component.html',
+    styleUrls: ['./non-contract-services-add.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgClass, FormsModule, MatErrorComponent, numberDirective, TaxesComponent, GlNumbersDropDownComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class NonContractServicesAddComponent implements OnInit, OnDestroy {
   service: NonContractServices = new NonContractServices();

@@ -25,7 +25,7 @@ describe('EditPaymentComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         DatePickerModule,
         NumberModule,
         FormsModule,
@@ -37,14 +37,12 @@ describe('EditPaymentComponent unit test', () => {
         MatErrorModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [EditPaymentComponent
-      ]
-    }).compileComponents();
+        NoopAnimationsModule, EditPaymentComponent]
+}).compileComponents();
 
   });
 

@@ -8,9 +8,10 @@ import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-tasks-dashboard-stats',
-  templateUrl: './tasks-dashboard-stats.component.html',
-  styleUrls: ['./tasks-dashboard-stats.component.scss']
+    selector: 'app-tasks-dashboard-stats',
+    templateUrl: './tasks-dashboard-stats.component.html',
+    styleUrls: ['./tasks-dashboard-stats.component.scss'],
+    standalone: true
 })
 export class TasksDashboardStatsComponent implements OnInit, OnDestroy {
   stats: TasksStats;

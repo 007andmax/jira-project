@@ -2,10 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TicketsListService } from '../../../tickets/services/tickets-list.service';
 
 @Component({
-  selector: 'app-recurring-tickets-table-assigned-user',
-  templateUrl: './recurring-tickets-table-assigned-user.component.html',
-  styleUrls: ['./recurring-tickets-table-assigned-user.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-recurring-tickets-table-assigned-user',
+    templateUrl: './recurring-tickets-table-assigned-user.component.html',
+    styleUrls: ['./recurring-tickets-table-assigned-user.component.scss'],
+    providers: [TicketsListService],
+    standalone: true
 })
 export class RecurringTicketsTableAssignedUserComponent implements OnInit {
   @Input() user: any;

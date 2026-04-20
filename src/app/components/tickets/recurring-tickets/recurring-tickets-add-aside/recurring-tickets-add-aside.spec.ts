@@ -19,7 +19,7 @@ describe('RecurringTicketsAddAsideComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         MatFormFieldModule,
         FormsModule,
         DropDownModule,
@@ -28,14 +28,12 @@ describe('RecurringTicketsAddAsideComponent unit test', () => {
         MatErrorModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [RecurringTicketsAddAsideComponent
-      ]
-    }).compileComponents();
+        NoopAnimationsModule, RecurringTicketsAddAsideComponent]
+}).compileComponents();
 
   });
 

@@ -16,9 +16,10 @@ import { ReportValidate1 } from "../../class/report-validate1";
 import { DeviceSummaryReportFilter } from "./Class/device-summary-report";
 
 @Component({
-  selector: "report-device-summary",
-  templateUrl: "./report-device-summary.component.html",
-  styleUrls: ["./report-device-summary.component.scss"],
+    selector: "report-device-summary",
+    templateUrl: "./report-device-summary.component.html",
+    styleUrls: ["./report-device-summary.component.scss"],
+    standalone: true,
 })
 export class ReportDeviceSummaryComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;

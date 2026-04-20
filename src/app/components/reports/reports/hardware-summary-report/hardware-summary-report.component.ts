@@ -4,9 +4,10 @@ import { HardwareSummaryReport } from '../../class/hardware-summary-report';
 import * as moment from "moment";
 
 @Component({
-  selector: 'hardware-summary-report',
-  templateUrl: './hardware-summary-report.component.html',
-  styleUrls: ['./hardware-summary-report.component.scss']
+    selector: 'hardware-summary-report',
+    templateUrl: './hardware-summary-report.component.html',
+    styleUrls: ['./hardware-summary-report.component.scss'],
+    standalone: true
 })
 export class HardwareSummaryReportComponent implements OnInit {
 

@@ -2,15 +2,18 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/co
 import { CommissionService } from '../../../../services/commission/commission.service';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { CHANGE_COMMISSION_CONTRACT, DELETE_COMMISSION_CONTRACT } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { Subscription } from 'rxjs';
+import { NgIf, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-contract',
-  templateUrl: './contract.component.html',
-  styleUrls: ['./contract.component.scss']
+    selector: 'app-contract',
+    templateUrl: './contract.component.html',
+    styleUrls: ['./contract.component.scss'],
+    standalone: true,
+    imports: [NgbTooltipModule, NgIf, NgClass]
 })
 export class ContractComponent implements OnInit, OnDestroy {
   agreementsCommissions: any;

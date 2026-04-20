@@ -18,7 +18,7 @@ describe('CompanyProfileApiKeysEditAsideComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         DropDownModule,
         NgbModule,
@@ -29,14 +29,13 @@ describe('CompanyProfileApiKeysEditAsideComponent unit test', () => {
         HttpClientModule,
         DisabledBtnModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NoopAnimationsModule],
-      declarations: [CompanyProfileApiKeysEditAsideComponent,
-      ]
-    }).compileComponents();
+    declarations: [CompanyProfileApiKeysEditAsideComponent]
+}).compileComponents();
 
   });
 

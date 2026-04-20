@@ -4,9 +4,10 @@ import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 
 @Component({
-  selector: 'app-users-filter-job-title',
-  templateUrl: './users-filter-job-title.component.html',
-  styleUrls: ['./users-filter-job-title.component.scss']
+    selector: 'app-users-filter-job-title',
+    templateUrl: './users-filter-job-title.component.html',
+    styleUrls: ['./users-filter-job-title.component.scss'],
+    standalone: true
 })
 export class UsersFilterJobTitleComponent implements OnInit {
   jobTitleList: Array<CrmCompanyJobTitle> = [];

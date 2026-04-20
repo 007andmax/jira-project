@@ -7,17 +7,13 @@ import { TerminalRoutingModule } from './terminal-routing.module';
 
 
 @NgModule({
-    declarations: [TerminalComponent
-    ],
     imports: [
         CommonModule,
         FormsModule,
         NgbModule,
         TerminalRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        TerminalComponent
     ],
-
-
-
 })
 export class TerminalModule { }

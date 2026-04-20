@@ -10,18 +10,18 @@ import { EditPaymentComponent } from './edit-payment/edit-payment.component';
 import { PaymentsFilterComponent } from './payments-header/payments-filter/payments-filter.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
-import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
-import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
-import { NumberModule } from 'src/app/directives/number/number.module';
-import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datepicker.module';
+
+
+
+
+
 import { PaymentsRoutingModule } from './payments-routing.module';
 import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-phone-mask.module';
-import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
-import { InvoiceExportModule } from '../invoices/invoices-header/invoice-export/invoice-export.module';
-import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
-import { DropDownModule } from '../../shared/drop-down/drop-down.module';
-import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+
+
+
+
+
 import { PaymentsCardsComponent } from './payments-cards/payments-cards.component';
 
 
@@ -29,35 +29,20 @@ import { PaymentsCardsComponent } from './payments-cards/payments-cards.componen
 
 
 @NgModule({
-    declarations: [PaymentsComponent,
-        PaymentsHeaderComponent,
-        PaymentItemComponent,
-        RefundPaymentComponent,
-        PaymentsAsideComponent,
-        EditPaymentComponent,
-        PaymentsFilterComponent,
-
-    ],
     imports: [
-        CommonModule,
-        InfiniteScrollModule,
-        NgbModule,
-        FormsModule,
-        DisabledBtnModule,
-        PreloaderTicketModule,
-        DatePickerModule,
-        NumberModule,
-        MultiDatepickerModule,
-        PaymentsRoutingModule,
-        PreviewPhoneMaskModule,
-        KeyUpEnterModule,
-        InvoiceExportModule,
-        CompanyDropDownModule,
-        DropDownModule,
-        MatErrorModule
-    ],
-
-
-
+    CommonModule,
+    InfiniteScrollModule,
+    NgbModule,
+    FormsModule,
+    PaymentsRoutingModule,
+    PreviewPhoneMaskModule,
+    PaymentsComponent,
+    PaymentsHeaderComponent,
+    PaymentItemComponent,
+    RefundPaymentComponent,
+    PaymentsAsideComponent,
+    EditPaymentComponent,
+    PaymentsFilterComponent
+],
 })
 export class PaymentsModule { }

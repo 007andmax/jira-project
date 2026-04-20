@@ -7,10 +7,11 @@ import { TitleListType } from '../../../tickets/tickets/tickets-header/class/tit
 import { ProductType } from 'src/app/components/setting/products-settings/class/product-type';
 import { InventoryFilter } from '../../class/inventory-filter';
 @Component({
-  selector: 'inventory-filter',
-  templateUrl: './inventory-filter.component.html',
-  styleUrls: ['./inventory-filter.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'inventory-filter',
+    templateUrl: './inventory-filter.component.html',
+    styleUrls: ['./inventory-filter.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
 })
 export class InventoryFilterComponent implements OnInit {
   showAddCategory: boolean = false;

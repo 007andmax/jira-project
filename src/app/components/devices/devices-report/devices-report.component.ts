@@ -3,9 +3,10 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 @Component({
-  selector: 'devices-report',
-  templateUrl: './devices-report.component.html',
-  styleUrls: ['./devices-report.component.scss']
+    selector: 'devices-report',
+    templateUrl: './devices-report.component.html',
+    styleUrls: ['./devices-report.component.scss'],
+    standalone: true
 })
 export class DevicesReportComponent implements OnInit {
   searchText: string = "";

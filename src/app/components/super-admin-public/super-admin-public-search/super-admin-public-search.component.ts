@@ -5,10 +5,11 @@ import { SupportPageCategoriesService } from '../../super-admin/services/support
 import { SuperAdminPublicSearchListService } from './services/super-admin-public-search-list.service';
 
 @Component({
-  selector: 'super-admin-public-search',
-  templateUrl: './super-admin-public-search.component.html',
-  styleUrls: ['./super-admin-public-search.component.scss'],
-  providers: [SuperAdminPublicSearchListService]
+    selector: 'super-admin-public-search',
+    templateUrl: './super-admin-public-search.component.html',
+    styleUrls: ['./super-admin-public-search.component.scss'],
+    providers: [SuperAdminPublicSearchListService],
+    standalone: true
 })
 export class SuperAdminPublicSearchComponent implements OnInit {
   page: number = 0;

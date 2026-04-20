@@ -3,9 +3,10 @@ import { AccountsReceivable } from '../../class/accounts-receivable';
 import { AccountsReceivableItem } from './class/accounts-receivable-item';
 
 @Component({
-  selector: 'app-accounts-receivable',
-  templateUrl: './accounts-receivable.component.html',
-  styleUrls: ['./accounts-receivable.component.scss']
+    selector: 'app-accounts-receivable',
+    templateUrl: './accounts-receivable.component.html',
+    styleUrls: ['./accounts-receivable.component.scss'],
+    standalone: true
 })
 export class AccountsReceivableComponent implements OnInit {
   accountsReceivable: AccountsReceivable = new AccountsReceivable();

@@ -5,18 +5,25 @@ import { MarketingEmailStateService } from 'src/app/states/marketing-email/marke
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { DELETE_SUBSCRIPTION_TYPE } from 'src/app/const/confirm';
 import { MarketingEmailService } from 'src/app/services/marketing-email/marketing-email.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { MarketingSubscriptionsAddComponent } from './marketing-subscriptions-add/marketing-subscriptions-add.component';
 import { User } from '../../users/class/user';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { catchError, map } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../directives/disabled-btn/disabled-btn.directive';
+import { MarketingSubscriptionsAsideItemEditComponent } from './marketing-subscriptions-aside-item-edit/marketing-subscriptions-aside-item-edit.component';
+import { MarketingSubscriptionsAsideItemInfoComponent } from './marketing-subscriptions-aside-item-info/marketing-subscriptions-aside-item-info.component';
+import { NgIf, NgFor, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-marketing-subscriptions-aside',
-  templateUrl: './marketing-subscriptions-aside.component.html',
-  styleUrls: ['./marketing-subscriptions-aside.component.scss']
+    selector: 'app-marketing-subscriptions-aside',
+    templateUrl: './marketing-subscriptions-aside.component.html',
+    styleUrls: ['./marketing-subscriptions-aside.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgbTooltipModule, NgFor, MarketingSubscriptionsAsideItemInfoComponent, MarketingSubscriptionsAsideItemEditComponent, DisabledBtnDirective_1, NgClass, PreloaderTicketComponent]
 })
 export class MarketingSubscriptionsAsideComponent implements OnInit, OnDestroy {
   opened: boolean = false;

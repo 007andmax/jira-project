@@ -2,12 +2,29 @@ import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, On
 import { CompanyTagsComponent } from '../../companies/company-tags/company-tags.component';
 import { CompanyDropDownComponent } from '../company-drop-down/company-drop-down.component';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatChipComponent } from '../mat-chip/mat-chip.component';
+import { NgFor, NgIf, NgClass } from '@angular/common';
+import { DynamicTooltipComponent } from '../dynamic-tooltip/dynamic-tooltip.component';
+import { MatChipListComponent } from '../mat-chip-list/mat-chip-list.component';
+import { MatFormFieldComponent } from '../mat-form-field/mat-form-field.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-multi-company-drop-down',
-  templateUrl: './multi-company-drop-down.component.html',
-  styleUrls: ['./multi-company-drop-down.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-multi-company-drop-down',
+    templateUrl: './multi-company-drop-down.component.html',
+    styleUrls: ['./multi-company-drop-down.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgbDropdownModule,
+        MatFormFieldComponent,
+        MatChipListComponent,
+        DynamicTooltipComponent,
+        NgFor,
+        MatChipComponent,
+        NgIf,
+        NgClass,
+    ],
 })
 export class MultiCompanyDropDownComponent extends CompanyDropDownComponent {
   @Input() selectedCompanies = [];

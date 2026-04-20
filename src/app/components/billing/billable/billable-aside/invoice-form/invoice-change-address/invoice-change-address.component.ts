@@ -4,9 +4,10 @@ import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
-  selector: 'invoice-change-address',
-  templateUrl: './invoice-change-address.component.html',
-  styleUrls: ['./invoice-change-address.component.scss']
+    selector: 'invoice-change-address',
+    templateUrl: './invoice-change-address.component.html',
+    styleUrls: ['./invoice-change-address.component.scss'],
+    standalone: true
 })
 export class InvoiceChangeAddressComponent implements OnInit {
   @Input() quoteCompany: CompanyProfile = new CompanyProfile();

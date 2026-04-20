@@ -16,9 +16,10 @@ import { IntegrationsStateService } from 'src/app/states/integrations/integratio
 
 
 @Component({
-  selector: 'app-invoices-aside',
-  templateUrl: './invoices-aside.component.html',
-  styleUrls: ['./invoices-aside.component.scss']
+    selector: 'app-invoices-aside',
+    templateUrl: './invoices-aside.component.html',
+    styleUrls: ['./invoices-aside.component.scss'],
+    standalone: true
 })
 export class InvoicesAsideComponent implements OnInit, OnDestroy {
   companies = [];

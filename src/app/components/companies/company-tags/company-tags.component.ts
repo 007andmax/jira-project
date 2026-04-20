@@ -14,11 +14,12 @@ import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.serv
 import { MatFormFieldComponent } from '../../shared/mat-form-field/mat-form-field.component';
 
 @Component({
-  selector: 'app-company-tags',
-  templateUrl: './company-tags.component.html',
-  styleUrls: ['./company-tags.component.scss'],
-  providers: [CompanyTagsListService, TicketsListService],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-company-tags',
+    templateUrl: './company-tags.component.html',
+    styleUrls: ['./company-tags.component.scss'],
+    providers: [CompanyTagsListService, TicketsListService],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
 })
 export class CompanyTagsComponent implements OnInit, OnDestroy {
   page: number = 0;

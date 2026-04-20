@@ -6,13 +6,14 @@ import { RecurringTicketsRealTimeService } from './services/recurring-tickets-re
 import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
-  selector: 'app-recurring-tickets',
-  templateUrl: './recurring-tickets.component.html',
-  styleUrls: ['./recurring-tickets.component.scss'],
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  providers: [RecurringTicketsListService]
+    selector: 'app-recurring-tickets',
+    templateUrl: './recurring-tickets.component.html',
+    styleUrls: ['./recurring-tickets.component.scss'],
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    providers: [RecurringTicketsListService],
+    standalone: true
 })
 export class RecurringTicketsComponent implements OnInit {
   public page_number: number = 0;

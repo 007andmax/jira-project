@@ -17,12 +17,13 @@ import { DocumentFilter } from './class/document-filter';
 import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
-  selector: 'app-documents',
-  templateUrl: './documents.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./documents.component.scss']
+    selector: 'app-documents',
+    templateUrl: './documents.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./documents.component.scss'],
+    standalone: true
 })
 export class DocumentsComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;

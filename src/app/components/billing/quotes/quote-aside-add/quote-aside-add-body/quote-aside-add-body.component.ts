@@ -24,9 +24,10 @@ import { InvoiceTicketsService } from 'src/app/services/accounting/accounting-se
 import { QuoteRealTimeService } from '../../quote-realtime/quote-realtime.service';
 
 @Component({
-  selector: 'app-quote-aside-add-body',
-  templateUrl: './quote-aside-add-body.component.html',
-  styleUrls: ['./quote-aside-add-body.component.scss']
+    selector: 'app-quote-aside-add-body',
+    templateUrl: './quote-aside-add-body.component.html',
+    styleUrls: ['./quote-aside-add-body.component.scss'],
+    standalone: true
 })
 export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
   @ViewChild('companyEdit', { static: false }) companyEdit: InvoiceFormEditCustomerComponent;

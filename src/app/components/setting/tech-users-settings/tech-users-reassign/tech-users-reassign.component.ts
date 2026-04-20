@@ -6,9 +6,10 @@ import { TechUsersService } from 'src/app/services/setting/tech-users.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
-  selector: 'tech-users-reassign',
-  templateUrl: './tech-users-reassign.component.html',
-  styleUrls: ['./tech-users-reassign.component.scss']
+    selector: 'tech-users-reassign',
+    templateUrl: './tech-users-reassign.component.html',
+    styleUrls: ['./tech-users-reassign.component.scss'],
+    standalone: true
 })
 export class TechUsersReassignComponent implements OnInit, OnDestroy {
   namesTechUsersList = [];

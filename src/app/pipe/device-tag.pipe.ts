@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'deviceTag'
+    name: 'deviceTag',
+    standalone: true
 })
 export class DeviceTagPipe implements PipeTransform {
 

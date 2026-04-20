@@ -4,9 +4,10 @@ import { TicketProfileFormUpdate } from '../../../ticket-edit-aside/class/ticket
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
-  selector: 'ticket-detail-profile-form-update-note',
-  templateUrl: './ticket-detail-profile-form-update-note.component.html',
-  styleUrls: ['./ticket-detail-profile-form-update-note.component.scss']
+    selector: 'ticket-detail-profile-form-update-note',
+    templateUrl: './ticket-detail-profile-form-update-note.component.html',
+    styleUrls: ['./ticket-detail-profile-form-update-note.component.scss'],
+    standalone: true
 })
 export class TicketDetailProfileFormUpdateNoteComponent implements OnInit {
   files: any[] = [];

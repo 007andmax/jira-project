@@ -5,9 +5,10 @@ import { SupportPageCategory } from '../../super-admin/left-panel-super-admin-ca
 import { SupportPageCategoriesStateService } from '../../super-admin/state/support-page-categories/support-page-categories-state.service';
 
 @Component({
-  selector: 'super-admin-public-category',
-  templateUrl: './super-admin-public-category.component.html',
-  styleUrls: ['./super-admin-public-category.component.scss']
+    selector: 'super-admin-public-category',
+    templateUrl: './super-admin-public-category.component.html',
+    styleUrls: ['./super-admin-public-category.component.scss'],
+    standalone: true
 })
 export class SuperAdminPublicCategoryComponent implements OnInit, OnDestroy {
   _id: string = '';

@@ -3,9 +3,10 @@ import { DeviceExtended } from '../../class/device-extended';
 import { DeviceCompany } from '../../class/device-company';
 
 @Component({
-  selector: 'app-company-devices-aside-device-icon',
-  templateUrl: './company-devices-aside-device-icon.component.html',
-  styleUrls: ['./company-devices-aside-device-icon.component.scss']
+    selector: 'app-company-devices-aside-device-icon',
+    templateUrl: './company-devices-aside-device-icon.component.html',
+    styleUrls: ['./company-devices-aside-device-icon.component.scss'],
+    standalone: true
 })
 export class CompanyDevicesAsideDeviceIconComponent implements OnInit {
   @Input() device: DeviceExtended;

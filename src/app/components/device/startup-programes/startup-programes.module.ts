@@ -6,16 +6,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StartUpProgramPipe } from 'src/app/pipe/startup-program.pipe';
 
 @NgModule({
-    declarations: [StartupComponent,
-        StartUpProgramPipe
-    ],
     imports: [
         CommonModule,
         StartupRoutingModule,
         FormsModule,
         ReactiveFormsModule,
+        StartupComponent,
+        StartUpProgramPipe,
     ],
-
-
 })
 export class StartupModule { }

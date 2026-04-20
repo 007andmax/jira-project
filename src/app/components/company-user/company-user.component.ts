@@ -28,13 +28,14 @@ import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
-  selector: 'company-user',
-  templateUrl: './company-user.component.html',
-  styleUrls: ['./company-user.component.scss'],
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  providers: [UserListService]
+    selector: 'company-user',
+    templateUrl: './company-user.component.html',
+    styleUrls: ['./company-user.component.scss'],
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    providers: [UserListService],
+    standalone: true
 })
 export class CompanyUserComponent implements OnInit {
   users: Array<User> = [];

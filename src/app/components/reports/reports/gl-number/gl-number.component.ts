@@ -6,9 +6,10 @@ import * as moment from "moment";
 import { GlNumberItem } from '../../class/gl-number-item';
 
 @Component({
-  selector: 'app-gl-number',
-  templateUrl: './gl-number.component.html',
-  styleUrls: ['./gl-number.component.scss']
+    selector: 'app-gl-number',
+    templateUrl: './gl-number.component.html',
+    styleUrls: ['./gl-number.component.scss'],
+    standalone: true
 })
 export class GlNumberComponent implements OnInit {
 

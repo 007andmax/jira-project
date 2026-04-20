@@ -2,11 +2,15 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompanySetting } from '../../../companies/class/company-setting';
 import { DashboardTicketsBillableHours } from '../class/dashboard-tickets-billable-hours';
+import { NgFor, NgStyle } from '@angular/common';
+import { NgbTooltipModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-tickets-billable-hours-widget',
-  templateUrl: './tickets-billable-hours-widget.component.html',
-  styleUrls: ['./tickets-billable-hours-widget.component.scss']
+    selector: 'app-tickets-billable-hours-widget',
+    templateUrl: './tickets-billable-hours-widget.component.html',
+    styleUrls: ['./tickets-billable-hours-widget.component.scss'],
+    standalone: true,
+    imports: [NgbTooltipModule, NgbDropdownModule, NgFor, NgStyle]
 })
 export class TicketsBillableHoursWidgetComponent implements OnInit {
   @Output() onTicketsBillableHoursIsReady = new EventEmitter<any>();

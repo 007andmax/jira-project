@@ -9,10 +9,11 @@ import { Subscription } from 'rxjs';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 
 @Component({
-  selector: 'app-report-additional-actions',
-  templateUrl: './report-additional-actions.component.html',
-  styleUrls: ['./report-additional-actions.component.scss'],
-  providers: [NgbModalConfig, NgbModal]
+    selector: 'app-report-additional-actions',
+    templateUrl: './report-additional-actions.component.html',
+    styleUrls: ['./report-additional-actions.component.scss'],
+    providers: [NgbModalConfig, NgbModal],
+    standalone: true
 })
 export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
   ACION_OPEN_PDF = ACION_OPEN_PDF;

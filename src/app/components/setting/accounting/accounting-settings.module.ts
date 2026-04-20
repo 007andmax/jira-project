@@ -8,19 +8,19 @@ import { AccountingYearComponent } from './accounting-year/accounting-year.compo
 import { AddGlNumberComponent } from './gl-number/add-gl-number/add-gl-number.component';
 import { InvoiceSettingsComponent } from './invoice-settings/invoice-settings.component';
 import { QuotesSettingsComponent } from './quotes-settings/quotes-settings.component';
-import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
-import { DropDownModule } from '../../shared/drop-down/drop-down.module';
-import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+
+
 import { TaxesSettingsComponent } from './taxes/taxes.component';
 import { TaxesAddComponent } from './taxes/taxes-add/taxes-add.component';
-import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
-import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
+
+
 import { CustomNotesSettingsComponent } from './custom-notes-settings/custom-notes-settings.component';
 import { AddCustomNotesSettingsComponent } from './custom-notes-settings/add-custom-notes-settings/add-custom-notes-settings.component';
 import { EditCustomNotesSettingsComponent } from './custom-notes-settings/edit-custom-notes-settings/edit-custom-notes-settings.component';
-import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+
 
 
 
@@ -39,18 +39,12 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         EditCustomNotesSettingsComponent,
     ],
     imports: [
-        CommonModule,
-        NgbModule,
-        AccountingSettingsRoutingModule,
-        ClickOutsideModule,
-        FormsModule,
-        ReactiveFormsModule,
-        NgxMaskModule.forRoot(),
-        DropDownModule,
-        TextAreaModule,
-        DynamicTooltipModule,
-        KeyUpEnterModule,
-        MatErrorModule
-    ],
+    CommonModule,
+    NgbModule,
+    AccountingSettingsRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot()
+],
 })
 export class AccoutingSettingsModule { }

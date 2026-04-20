@@ -21,12 +21,13 @@ import { fadeInAnimation } from 'src/app/animations';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 
 @Component({
-  selector: 'billable-tickets',
-  templateUrl: './billable-tickets.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./billable-tickets.component.scss']
+    selector: 'billable-tickets',
+    templateUrl: './billable-tickets.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./billable-tickets.component.scss'],
+    standalone: true
 })
 export class BillableTicketsComponent implements OnInit, OnDestroy {
   billableProfile: BillableProfile = null;

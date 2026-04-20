@@ -7,16 +7,13 @@ import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-
 
 
 @NgModule({
-    declarations: [InvoiceChangeAddressComponent
-    ],
     imports: [
         CommonModule,
         FormsModule,
         NgbModule,
-        PreviewPhoneMaskModule
+        PreviewPhoneMaskModule,
+        InvoiceChangeAddressComponent
     ],
     exports: [InvoiceChangeAddressComponent]
-
-
 })
 export class InvoiceChangeAddressModule { }

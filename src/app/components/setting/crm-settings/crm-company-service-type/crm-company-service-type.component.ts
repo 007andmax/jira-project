@@ -10,11 +10,20 @@ import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyServiceType } from './class/crm-company-service-type';
 import { CrmCompanyServiceTypeFilter } from './class/crm-company-service-type-filter';
+import { DynamicTooltipComponent } from '../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { KeyUpEnterDirective } from '../../../../directives/key-up-enter/key-up-enter.directive';
+import { FormsModule } from '@angular/forms';
+import { ClickOutsideDirective } from '../../../../directives/click-otside/click-otside.directive';
+import { AddCrmCompanyServiceTypeComponent } from './add-crm-company-service-type/add-crm-company-service-type.component';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'crm-company-service-type',
-  templateUrl: './crm-company-service-type.component.html',
-  styleUrls: ['./crm-company-service-type.component.scss']
+    selector: 'crm-company-service-type',
+    templateUrl: './crm-company-service-type.component.html',
+    styleUrls: ['./crm-company-service-type.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, AddCrmCompanyServiceTypeComponent, NgFor, ClickOutsideDirective, FormsModule, KeyUpEnterDirective, MatErrorComponent, DynamicTooltipComponent]
 })
 export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
 

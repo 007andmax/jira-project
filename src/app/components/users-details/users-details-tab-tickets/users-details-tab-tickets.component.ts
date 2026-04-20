@@ -13,10 +13,11 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { TicketStateService } from '../../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 
 @Component({
-  selector: 'app-users-details-tab-tickets',
-  templateUrl: './users-details-tab-tickets.component.html',
-  styleUrls: ['./users-details-tab-tickets.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-users-details-tab-tickets',
+    templateUrl: './users-details-tab-tickets.component.html',
+    styleUrls: ['./users-details-tab-tickets.component.scss'],
+    providers: [TicketsListService],
+    standalone: true
 })
 export class UsersDetailsTabTicketsComponent implements OnInit {
   user: User;

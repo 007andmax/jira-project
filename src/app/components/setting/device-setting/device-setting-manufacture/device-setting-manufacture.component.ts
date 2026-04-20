@@ -8,11 +8,16 @@ import { AgentService } from 'src/app/services/agent/agent.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DeviceSettingStateService } from 'src/app/states/device-setting/device-setting-state.service';
 import { DeviceSettingFilter } from '../Class/devicesetting-filter';
+import { DynamicTooltipComponent } from '../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'device-setting-manufacture',
-  templateUrl: './device-setting-manufacture.component.html',
-  styleUrls: ['./device-setting-manufacture.component.scss']
+    selector: 'device-setting-manufacture',
+    templateUrl: './device-setting-manufacture.component.html',
+    styleUrls: ['./device-setting-manufacture.component.scss'],
+    standalone: true,
+    imports: [NgClass, FormsModule, NgIf, NgFor, DynamicTooltipComponent]
 })
 export class DeviceSettingManufactureComponent implements OnInit, OnDestroy {
   manufactureIsActiveList: any[] = [];

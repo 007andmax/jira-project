@@ -3,7 +3,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { DocumentAdd } from '../class/document-add';
 import { Document } from '../../class/document';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVE_DOCUMENT } from 'src/app/const/confirm';
@@ -12,11 +12,15 @@ import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Router } from '@angular/router';
+import { FindWithinDocumentComponent } from '../../documents-edit/find-within-document/find-within-document.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-documents-add-header',
-  templateUrl: './documents-add-header.component.html',
-  styleUrls: ['./documents-add-header.component.scss']
+    selector: 'app-documents-add-header',
+    templateUrl: './documents-add-header.component.html',
+    styleUrls: ['./documents-add-header.component.scss'],
+    standalone: true,
+    imports: [NgbTooltipModule, NgIf, NgbDropdownModule, FindWithinDocumentComponent]
 })
 export class DocumentsAddHeaderComponent implements OnInit, OnDestroy {
   hideleLeftPanel: boolean = false;

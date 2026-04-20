@@ -4,14 +4,18 @@ import { PermissionsService } from "../../services/permissions/permissions.servi
 import { LeftPanelStateService } from "../../states/left-panel/left-panel-state.service";
 import { QuoteStateService } from "../../states/quote/quote-state.service";
 import { fadeInAnimation } from "src/app/animations";
+import { ReportListItemComponent } from "./report-list-item/report-list-item.component";
+import { NgIf } from "@angular/common";
 
 @Component({
-  selector: "app-reports",
-  templateUrl: "./reports.component.html",
-  styleUrls: ["./reports.component.scss"],
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
+    selector: "app-reports",
+    templateUrl: "./reports.component.html",
+    styleUrls: ["./reports.component.scss"],
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    standalone: true,
+    imports: [NgIf, ReportListItemComponent],
 })
 export class ReportsComponent implements OnInit {
   listSalesTitles: Array<string> = [];

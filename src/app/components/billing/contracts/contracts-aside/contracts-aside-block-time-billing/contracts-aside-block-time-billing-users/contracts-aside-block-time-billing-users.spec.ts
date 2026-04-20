@@ -13,13 +13,11 @@ describe('ContractsAsideBlockTimeBillingUsersComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         MatChipModule,
         MatChipListModule,
-        NoopAnimationsModule],
-      declarations: [ContractsAsideBlockTimeBillingUsersComponent
-      ]
-    }).compileComponents();
+        NoopAnimationsModule, ContractsAsideBlockTimeBillingUsersComponent]
+}).compileComponents();
 
   });
 

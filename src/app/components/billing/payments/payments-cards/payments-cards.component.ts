@@ -17,10 +17,11 @@ import { ManageCardsRealTimeService } from 'src/app/states/manage-cards/manage-c
 import { IntegrationsStateService } from 'src/app/states/integrations/integrations-state.service';
 
 @Component({
-  selector: 'app-payments-cards',
-  templateUrl: './payments-cards.component.html',
-  styleUrls: ['./payments-cards.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-payments-cards',
+    templateUrl: './payments-cards.component.html',
+    styleUrls: ['./payments-cards.component.scss'],
+    providers: [TicketsListService],
+    standalone: true
 })
 export class PaymentsCardsComponent extends DropDownComponent {
   @Input() selectedCompanies = [];;

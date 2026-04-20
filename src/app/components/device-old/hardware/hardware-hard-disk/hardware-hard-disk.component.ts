@@ -1,10 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LogicalDisk } from '../class/system';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'hardware-hard-disk',
-  templateUrl: './hardware-hard-disk.component.html',
-  styleUrls: ['./hardware-hard-disk.component.scss']
+    selector: 'hardware-hard-disk',
+    templateUrl: './hardware-hard-disk.component.html',
+    styleUrls: ['./hardware-hard-disk.component.scss'],
+    standalone: true,
+    imports: [NgIf]
 })
 export class HardwareHardDiskComponent implements OnInit {
   @Input() logicalDisks: LogicalDisk;

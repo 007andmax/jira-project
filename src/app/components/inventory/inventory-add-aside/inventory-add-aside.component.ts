@@ -7,11 +7,14 @@ import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ProductService } from 'src/app/services/product/product.service';
 import { InventoryAddBodyComponent } from './inventory-add-body/inventory-add-body.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-inventory-add-aside',
-  templateUrl: './inventory-add-aside.component.html',
-  styleUrls: ['./inventory-add-aside.component.scss']
+    selector: 'app-inventory-add-aside',
+    templateUrl: './inventory-add-aside.component.html',
+    styleUrls: ['./inventory-add-aside.component.scss'],
+    standalone: true,
+    imports: [NgIf, InventoryAddBodyComponent]
 })
 export class InventoryAddAsideComponent implements OnInit, OnDestroy {
   @ViewChild('body', { static: false }) body: InventoryAddBodyComponent;

@@ -4,10 +4,11 @@ import { CompanyTagsListService } from 'src/app/components/companies/company-tag
 import { TicketsListService } from '../../../services/tickets-list.service';
 
 @Component({
-  selector: 'tickets-filter-drop-down',
-  templateUrl: './tickets-filter-drop-down.component.html',
-  styleUrls: ['./tickets-filter-drop-down.component.scss'],
-  providers: [CompanyTagsListService, TicketsListService]
+    selector: 'tickets-filter-drop-down',
+    templateUrl: './tickets-filter-drop-down.component.html',
+    styleUrls: ['./tickets-filter-drop-down.component.scss'],
+    providers: [CompanyTagsListService, TicketsListService],
+    standalone: true
 })
 export class TicketsFilterDropDownComponent extends CompanyTagsComponent {
   @Input() placement: string = 'bottom-left';

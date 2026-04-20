@@ -4,9 +4,10 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { QuoteAddService } from '../../class/quote-add-service';
 
 @Component({
-  selector: 'app-service-item-quote',
-  templateUrl: './service-item-quote.component.html',
-  styleUrls: ['./service-item-quote.component.scss']
+    selector: 'app-service-item-quote',
+    templateUrl: './service-item-quote.component.html',
+    styleUrls: ['./service-item-quote.component.scss'],
+    standalone: true
 })
 export class ServiceItemQuoteComponent implements OnInit {
   @Input() service: QuoteAddService;

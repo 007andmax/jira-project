@@ -6,9 +6,10 @@ import { Subscription } from 'rxjs';
 import { UsersDetailsTabCompaniesItemComponent } from './users-details-tab-companies-item/users-details-tab-companies-item.component';
 
 @Component({
-  selector: 'app-users-details-tab-companies',
-  templateUrl: './users-details-tab-companies.component.html',
-  styleUrls: ['./users-details-tab-companies.component.scss']
+    selector: 'app-users-details-tab-companies',
+    templateUrl: './users-details-tab-companies.component.html',
+    styleUrls: ['./users-details-tab-companies.component.scss'],
+    standalone: true
 })
 export class UsersDetailsTabCompaniesComponent implements OnInit, OnDestroy {
   sort = 'ASC';

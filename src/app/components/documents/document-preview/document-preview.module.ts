@@ -6,17 +6,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
-    declarations: [DocumentPreviewComponent
-
-    ],
     imports: [
         CommonModule,
         DocumentPreviewRoutingModule,
-        NgbModule
-
+        NgbModule,
+        DocumentPreviewComponent
     ],
-
-
-
 })
 export class DocumentPreviewModule { }

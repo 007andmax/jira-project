@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -11,11 +11,15 @@ import { IntegrationsService } from 'src/app/services/integrations/integrations.
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { IntegrationsStateService } from 'src/app/states/integrations/integrations-state.service';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-all-integrations-overview',
-  templateUrl: './all-integrations-overview.component.html',
-  styleUrls: ['./all-integrations-overview.component.scss']
+    selector: 'app-all-integrations-overview',
+    templateUrl: './all-integrations-overview.component.html',
+    styleUrls: ['./all-integrations-overview.component.scss'],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, NgbTooltipModule, NgIf, MatErrorComponent]
 })
 export class AllIntegrationsOverviewComponent implements OnDestroy {
   showPreloader: boolean = true;

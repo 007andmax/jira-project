@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InvoiceTicketsService } from '../../../../services/accounting/accounting-settings.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { ToastrService } from 'ngx-toastr';
@@ -8,11 +8,17 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { Subscription } from 'rxjs';
+import { DropDownComponent as DropDownComponent_1 } from '../../../shared/drop-down/drop-down.component';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { NgClass, NgIf } from '@angular/common';
+import { Onlynumber } from '../../../../helpers/Onlynumber';
 
 @Component({
-  selector: 'app-ticket-settings',
-  templateUrl: './ticket-settings.component.html',
-  styleUrls: ['./ticket-settings.component.scss']
+    selector: 'app-ticket-settings',
+    templateUrl: './ticket-settings.component.html',
+    styleUrls: ['./ticket-settings.component.scss'],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, Onlynumber, NgClass, NgIf, MatErrorComponent, DropDownComponent_1]
 })
 export class TicketSettingsComponent implements OnInit, OnDestroy {
   intervals = [new CompanySetting('1 minute', 'ONE_MINUTE'),

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -11,11 +11,19 @@ import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { TicketStatus } from './class/ticket-status';
+import { KeyUpEnterDirective } from '../../../../directives/key-up-enter/key-up-enter.directive';
+import { DynamicTooltipComponent } from '../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { ClickOutsideDirective as ClickOutsideDirective_1 } from '../../../../directives/click-otside/click-otside.directive';
+import { NgIf, NgClass, NgStyle, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'tickets-status',
-  templateUrl: './tickets-status.component.html',
-  styleUrls: ['./tickets-status.component.scss']
+    selector: 'tickets-status',
+    templateUrl: './tickets-status.component.html',
+    styleUrls: ['./tickets-status.component.scss'],
+    standalone: true,
+    imports: [NgbTooltipModule, NgIf, ClickOutsideDirective_1, NgClass, FormsModule, MatErrorComponent, NgbDropdownModule, NgStyle, NgFor, DynamicTooltipComponent, KeyUpEnterDirective]
 })
 export class TicketsStatusComponent implements OnInit, OnDestroy {
   showAddStatus: boolean = false;

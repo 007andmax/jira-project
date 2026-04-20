@@ -11,9 +11,10 @@ import { Subscription } from 'rxjs';
 
 
 @Component({
-  selector: 'app-service-report',
-  templateUrl: './service-report.component.html',
-  styleUrls: ['./service-report.component.scss']
+    selector: 'app-service-report',
+    templateUrl: './service-report.component.html',
+    styleUrls: ['./service-report.component.scss'],
+    standalone: true
 })
 export class ServiceReportComponent implements OnInit, OnDestroy {
   chartData;

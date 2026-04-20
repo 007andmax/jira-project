@@ -3,9 +3,10 @@ import { UserDefaultSubscriptionComponent } from '../../../users-aside/user-defa
 import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
 
 @Component({
-  selector: 'app-users-filter-default-subscription',
-  templateUrl: './users-filter-default-subscription.component.html',
-  styleUrls: ['./users-filter-default-subscription.component.scss']
+    selector: 'app-users-filter-default-subscription',
+    templateUrl: './users-filter-default-subscription.component.html',
+    styleUrls: ['./users-filter-default-subscription.component.scss'],
+    standalone: true
 })
 export class UsersFilterDefaultSubscriptionComponent extends UserDefaultSubscriptionComponent {
 

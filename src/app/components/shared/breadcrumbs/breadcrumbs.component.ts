@@ -4,11 +4,14 @@ import { Company } from 'src/app/interfaces/company/company';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { NgIf, NgClass } from '@angular/common';
 
 @Component({
     selector: 'breadcrumbs',
     templateUrl: './breadcrumbs.component.html',
-    styleUrls: ['./breadcrumbs.component.scss']
+    styleUrls: ['./breadcrumbs.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgClass]
 })
 export class BreadcrumbsComponent implements OnInit, OnDestroy {
     selectedCompany: Company;

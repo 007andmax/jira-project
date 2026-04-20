@@ -36,7 +36,7 @@ describe('CompanyDashboardComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         CompanyDeviceBetaRoutingModule,
         DropDownModule,
         DatePickerModule,
@@ -53,16 +53,15 @@ describe('CompanyDashboardComponent unit test', () => {
         HttpClientModule,
         RouterTestingModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NoopAnimationsModule],
-      providers: [{ provide: Router, useValue: mockRouter }],
-      declarations: [CompanyDeviceBetaComponent,
-        DeviceBeta
-      ],
-    }).compileComponents();
+    providers: [{ provide: Router, useValue: mockRouter }],
+    declarations: [CompanyDeviceBetaComponent,
+        DeviceBeta],
+}).compileComponents();
 
   });
   it('check "isArchive"', () => {

@@ -3,13 +3,17 @@ import { FileManagerCategory } from '../class/file-manager-category';
 import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { FileManagerCategoryRenameComponent } from '../file-manager-category-rename/file-manager-category-rename.component';
-import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbModal, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from "moment";
+import { NgClass, NgIf } from '@angular/common';
+import { DblclickDirective } from '../../../directives/dblclick/dblclick.directive';
 
 @Component({
-  selector: 'app-file-manager-item-category',
-  templateUrl: './file-manager-item-category.component.html',
-  styleUrls: ['./file-manager-item-category.component.scss']
+    selector: 'app-file-manager-item-category',
+    templateUrl: './file-manager-item-category.component.html',
+    styleUrls: ['./file-manager-item-category.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, DblclickDirective, NgClass, NgIf]
 })
 export class FileManagerItemCategoryComponent implements OnInit {
   @ViewChild('db', { static: true }) db: NgbDropdown;

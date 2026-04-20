@@ -3,9 +3,10 @@ import { DetailContractreport } from '../../class/detail-contract-report';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
-  selector: 'detailed-contract-report',
-  templateUrl: './detailed-contract-report.component.html',
-  styleUrls: ['./detailed-contract-report.component.scss']
+    selector: 'detailed-contract-report',
+    templateUrl: './detailed-contract-report.component.html',
+    styleUrls: ['./detailed-contract-report.component.scss'],
+    standalone: true
 })
 export class DetailedContractReportComponent implements OnInit {
   loadingInProgress: boolean = false;

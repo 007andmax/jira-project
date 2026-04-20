@@ -2,12 +2,18 @@ import { Component, Input } from '@angular/core';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { TicketsFilterDropDownComponent } from 'src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-drop-down/tickets-filter-drop-down.component';
+import { MatChipComponent } from '../../../shared/mat-chip/mat-chip.component';
+import { DynamicTooltipComponent } from '../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { NgIf, NgClass, NgFor, NgStyle } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-tasks-add-assigned-users',
-  templateUrl: './tasks-add-assigned-users.component.html',
-  styleUrls: ['./tasks-add-assigned-users.component.scss'],
-  providers: [CompanyTagsListService, TicketsListService]
+    selector: 'app-tasks-add-assigned-users',
+    templateUrl: './tasks-add-assigned-users.component.html',
+    styleUrls: ['./tasks-add-assigned-users.component.scss'],
+    providers: [CompanyTagsListService, TicketsListService],
+    standalone: true,
+    imports: [NgbDropdownModule, NgIf, NgClass, DynamicTooltipComponent, NgFor, MatChipComponent, NgStyle]
 })
 export class TasksAddAssignedUsersComponent extends TicketsFilterDropDownComponent {
   @Input() reducerItem: Function = (item) => `${item.firstName} ${item.lastName}`;

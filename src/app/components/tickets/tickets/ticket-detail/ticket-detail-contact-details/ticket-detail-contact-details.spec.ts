@@ -16,21 +16,20 @@ describe('TicketDetailContactDetailsComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NoopAnimationsModule,
         PreviewPhoneMaskModule,
         InfiniteScrollModule],
-      declarations: [TicketDetailContactDetailsComponent,
-        TicketDetailContactDetailsHistoryComponent
-      ],
-      providers: [TicketDetailContactDetailsComponent]
-    }).compileComponents();
+    declarations: [TicketDetailContactDetailsComponent,
+        TicketDetailContactDetailsHistoryComponent],
+    providers: [TicketDetailContactDetailsComponent]
+}).compileComponents();
 
   });
 

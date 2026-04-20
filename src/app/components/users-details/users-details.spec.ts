@@ -32,7 +32,7 @@ describe('UsersDetailsComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         UsersDetailsHeaderModule,
         UsersDetailsLeftPanelModule,
@@ -44,15 +44,13 @@ describe('UsersDetailsComponent unit test', () => {
         HttpClientModule,
         RouterTestingModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [UsersDetailsComponent
-      ],
-      providers: [{ provide: Router, useValue: mockRouter }],
-    }).compileComponents();
+        NoopAnimationsModule, UsersDetailsComponent],
+    providers: [{ provide: Router, useValue: mockRouter }],
+}).compileComponents();
 
   });
 

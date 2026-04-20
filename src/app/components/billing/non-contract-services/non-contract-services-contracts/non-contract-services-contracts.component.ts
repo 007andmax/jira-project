@@ -4,11 +4,14 @@ import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.s
 import { GlNumberService } from 'src/app/services/gl-number/gl-number.service';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { Subscription } from 'rxjs';
+import { DropDownComponent as DropDownComponent_1 } from '../../../shared/drop-down/drop-down.component';
 
 @Component({
-  selector: 'app-non-contract-services-contracts',
-  templateUrl: './non-contract-services-contracts.component.html',
-  styleUrls: ['./non-contract-services-contracts.component.scss']
+    selector: 'app-non-contract-services-contracts',
+    templateUrl: './non-contract-services-contracts.component.html',
+    styleUrls: ['./non-contract-services-contracts.component.scss'],
+    standalone: true,
+    imports: [DropDownComponent_1]
 })
 export class NonContractServicesContractsComponent implements OnInit, OnDestroy {
   @Input() type: string = '';

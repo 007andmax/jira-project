@@ -11,10 +11,11 @@ import { Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
-  selector: 'app-add-user-to-company',
-  templateUrl: './add-user-to-company.component.html',
-  styleUrls: ['./add-user-to-company.component.scss'],
-  providers: [UserListService, NgbModalConfig, NgbModal],
+    selector: 'app-add-user-to-company',
+    templateUrl: './add-user-to-company.component.html',
+    styleUrls: ['./add-user-to-company.component.scss'],
+    providers: [UserListService, NgbModalConfig, NgbModal],
+    standalone: true,
 })
 export class AddUserToCompanyComponent implements OnInit, OnDestroy {
   @Input() company: Company;

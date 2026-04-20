@@ -46,7 +46,7 @@ describe('ContractsAsideProductServiceContractsComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         DropDownModule,
         DatePickerModule,
         FormsModule,
@@ -71,19 +71,16 @@ describe('ContractsAsideProductServiceContractsComponent unit test', () => {
         DatePickerIntervalsModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [
-        ContractsAsideSelectTypeComponent,
+        NoopAnimationsModule, ContractsAsideSelectTypeComponent,
         ContractsAsideUserDeviceBillingComponent,
         ContractsAsideProductServiceContractsComponent,
         ContractsAsideTopComponent,
-        ContractsAsideHourlyBillingDefaultServiceComponent
-      ],
-    }).compileComponents();
+        ContractsAsideHourlyBillingDefaultServiceComponent],
+}).compileComponents();
 
   });
 

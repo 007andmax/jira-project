@@ -5,11 +5,16 @@ import { Company } from 'src/app/interfaces/company/company';
 import { AppService } from 'src/app/states/app/app.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { Subscription } from 'rxjs';
+import { LeftPanelCompanyComponent } from '../left-panel-company/left-panel-company.component';
+import { RightClickBlankDirective } from '../../../directives/right-click-blank/right-click-blank.directive';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-left-panel-companies',
-  templateUrl: './left-panel-companies.component.html',
-  styleUrls: ['./left-panel-companies.component.scss']
+    selector: 'app-left-panel-companies',
+    templateUrl: './left-panel-companies.component.html',
+    styleUrls: ['./left-panel-companies.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, RightClickBlankDirective, LeftPanelCompanyComponent]
 })
 export class LeftPanelCompaniesComponent implements OnInit, OnDestroy {
   open: boolean = false;

@@ -11,12 +11,11 @@ describe('TicketDetailTotalStatisticsComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         NgbModule,
         NoopAnimationsModule],
-      declarations: [TicketDetailTotalStatisticsComponent
-      ]
-    }).compileComponents();
+    declarations: [TicketDetailTotalStatisticsComponent]
+}).compileComponents();
 
   });
 

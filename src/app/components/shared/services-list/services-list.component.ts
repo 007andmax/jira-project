@@ -1,17 +1,21 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ElementRef, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { TYPE_QUOTE, TYPE_TICKET } from 'src/app/const/services';
 import { TicketStateService } from '../../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { Subscription } from 'rxjs';
+import { ServicePipe } from '../../../pipe/service/service.pipe';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 /**
  *  Service list component
  */
 @Component({
-  selector: 'app-services-list',
-  templateUrl: './services-list.component.html',
-  styleUrls: ['./services-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-services-list',
+    templateUrl: './services-list.component.html',
+    styleUrls: ['./services-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgbDropdownModule, NgClass, NgIf, NgFor, ServicePipe]
 })
 export class ServicesListComponent implements OnInit, OnDestroy {
   @ViewChild('products', { static: true }) products_dropDown: NgbDropdown;

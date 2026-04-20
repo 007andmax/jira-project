@@ -3,9 +3,10 @@ import { RecurringTicketsStateService } from '../services/recurring-tickets-stat
 
 
 @Component({
-  selector: 'app-recurring-tickets-header',
-  templateUrl: './recurring-tickets-header.component.html',
-  styleUrls: ['./recurring-tickets-header.component.scss']
+    selector: 'app-recurring-tickets-header',
+    templateUrl: './recurring-tickets-header.component.html',
+    styleUrls: ['./recurring-tickets-header.component.scss'],
+    standalone: true
 })
 export class RecurringTicketsHeaderComponent implements OnInit {
 

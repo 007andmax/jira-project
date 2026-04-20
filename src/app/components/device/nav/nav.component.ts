@@ -2,15 +2,18 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonHttpServices } from './../_services/common_http.service';
 import { CommonServices } from './../_services/common.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router, RouterLinkActive } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+    selector: 'app-nav',
+    templateUrl: './nav.component.html',
+    styleUrls: ['./nav.component.scss'],
+    standalone: true,
+    imports: [RouterLinkActive, NgIf]
 })
 export class NavComponent implements OnInit, OnDestroy {
 

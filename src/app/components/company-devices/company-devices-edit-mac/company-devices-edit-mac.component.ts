@@ -3,9 +3,10 @@ import { CompanyDevicesEditLabelComponent } from '../company-devices-edit-label/
 import { CompanyDevicesEditMacValidate } from './class/company-devices-edit-mac-validate';
 
 @Component({
-  selector: 'app-company-devices-edit-mac',
-  templateUrl: './company-devices-edit-mac.component.html',
-  styleUrls: ['./company-devices-edit-mac.component.scss']
+    selector: 'app-company-devices-edit-mac',
+    templateUrl: './company-devices-edit-mac.component.html',
+    styleUrls: ['./company-devices-edit-mac.component.scss'],
+    standalone: true
 })
 export class CompanyDevicesEditMacComponent extends CompanyDevicesEditLabelComponent {
 

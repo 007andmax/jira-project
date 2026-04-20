@@ -8,13 +8,14 @@ import { PasswoordManagerFiltersComponent } from '../password-manager/passwoord-
 
 
 @Component({
-  selector: 'company-password-manager',
-  templateUrl: './company-password-manager.component.html',
-  styleUrls: ['./company-password-manager.component.scss'],
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  providers: [PasswordManagerListService]
+    selector: 'company-password-manager',
+    templateUrl: './company-password-manager.component.html',
+    styleUrls: ['./company-password-manager.component.scss'],
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    providers: [PasswordManagerListService],
+    standalone: true
 })
 export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
   @ViewChild('filters', { static: true }) filters: PasswoordManagerFiltersComponent;

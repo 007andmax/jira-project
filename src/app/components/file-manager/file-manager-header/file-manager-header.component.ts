@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
@@ -9,11 +9,17 @@ import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-
 import { BreadcrumbsItem } from '../class/breadcrumbs-item';
 import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { FileManagerAddCategoryComponent } from '../file-manager-add-category/file-manager-add-category.component';
+import { FormsModule } from '@angular/forms';
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { NgIf, NgFor, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-file-manager-header',
-  templateUrl: './file-manager-header.component.html',
-  styleUrls: ['./file-manager-header.component.scss']
+    selector: 'app-file-manager-header',
+    templateUrl: './file-manager-header.component.html',
+    styleUrls: ['./file-manager-header.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgFor, NgClass, DropDownComponent, FormsModule, NgbDropdownModule, FileManagerAddCategoryComponent]
 })
 export class FileManagerHeaderComponent implements OnInit {
   @Input() breadcrumbs: Array<BreadcrumbsItem> = [];

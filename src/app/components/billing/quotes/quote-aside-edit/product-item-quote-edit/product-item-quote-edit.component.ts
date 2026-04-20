@@ -4,9 +4,10 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { QuoteProduct } from '../../class/quote-product';
 
 @Component({
-  selector: 'app-product-item-quote-edit',
-  templateUrl: './product-item-quote-edit.component.html',
-  styleUrls: ['./product-item-quote-edit.component.scss']
+    selector: 'app-product-item-quote-edit',
+    templateUrl: './product-item-quote-edit.component.html',
+    styleUrls: ['./product-item-quote-edit.component.scss'],
+    standalone: true
 })
 export class ProductItemQuoteEditComponent implements OnInit {
   @Input() product: QuoteProduct;

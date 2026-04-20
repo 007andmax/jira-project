@@ -25,13 +25,14 @@ import { fadeInAnimation } from 'src/app/animations';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
-  selector: 'marketing',
-  templateUrl: './marketing.component.html',
-  styleUrls: ['./marketing.component.scss'],
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  providers: [UserListService]
+    selector: 'marketing',
+    templateUrl: './marketing.component.html',
+    styleUrls: ['./marketing.component.scss'],
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    providers: [UserListService],
+    standalone: true
 })
 export class MarketingComponent implements OnInit {
   @ViewChild('header', { static: true }) header: UsersHeaderComponent;

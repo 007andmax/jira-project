@@ -9,11 +9,20 @@ import { DELETE_PRODUCT_TYPE } from 'src/app/const/confirm';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductTypeCheckUseComponent } from '../product-type-check-use/product-type-check-use.component';
+import { DynamicTooltipComponent } from '../../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { KeyUpEnterDirective } from '../../../../directives/key-up-enter/key-up-enter.directive';
+import { FormsModule } from '@angular/forms';
+import { ClickOutsideDirective } from '../../../../directives/click-otside/click-otside.directive';
+import { AddProductTypeComponent } from '../add-product-type/add-product-type.component';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-products-settings-type',
-  templateUrl: './products-settings-type.component.html',
-  styleUrls: ['./products-settings-type.component.scss']
+    selector: 'app-products-settings-type',
+    templateUrl: './products-settings-type.component.html',
+    styleUrls: ['./products-settings-type.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgIf, AddProductTypeComponent, NgFor, ClickOutsideDirective, FormsModule, KeyUpEnterDirective, MatErrorComponent, DynamicTooltipComponent]
 })
 export class ProductsSettingsTypeComponent implements OnInit, OnDestroy {
   list: Array<ProductType> = [];

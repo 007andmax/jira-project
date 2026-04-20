@@ -20,7 +20,7 @@ describe('MarketingSubscriptionsAsideComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         DisabledBtnModule,
         PreloaderTicketModule,
@@ -29,14 +29,12 @@ describe('MarketingSubscriptionsAsideComponent unit test', () => {
         MatErrorModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [MarketingSubscriptionsAsideComponent, MarketingSubscriptionsAsideItemInfoComponent, MarketingSubscriptionsAsideItemEditComponent, MarketingSubscriptionsAddComponent
-      ]
-    }).compileComponents();
+        NoopAnimationsModule, MarketingSubscriptionsAsideComponent, MarketingSubscriptionsAsideItemInfoComponent, MarketingSubscriptionsAsideItemEditComponent, MarketingSubscriptionsAddComponent]
+}).compileComponents();
 
   });
 

@@ -6,11 +6,15 @@ import { ContractsStateService } from 'src/app/states/contracts/contracts-state.
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { RightClickBlankDirective } from '../../../directives/right-click-blank/right-click-blank.directive';
+import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-left-panel-integrations',
-  templateUrl: './left-panel-integrations.component.html',
-  styleUrls: ['./left-panel-integrations.component.scss']
+    selector: 'app-left-panel-integrations',
+    templateUrl: './left-panel-integrations.component.html',
+    styleUrls: ['./left-panel-integrations.component.scss'],
+    standalone: true,
+    imports: [NgClass, RightClickBlankDirective]
 })
 export class LeftPanelIntegrationsComponent {
   open: boolean = false;

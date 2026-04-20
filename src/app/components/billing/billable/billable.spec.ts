@@ -18,7 +18,7 @@ describe('BillableComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         BillableRoutingModule,
         DisabledBtnModule,
         PreloaderTicketModule,
@@ -27,14 +27,12 @@ describe('BillableComponent unit test', () => {
         FormsModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [BillableComponent
-      ]
-    }).compileComponents();
+        NoopAnimationsModule, BillableComponent]
+}).compileComponents();
 
   });
 

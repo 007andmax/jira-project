@@ -13,18 +13,16 @@ describe('TasksHeaderComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [TasksHeaderComponent
-      ]
-    }).compileComponents();
+        NoopAnimationsModule, TasksHeaderComponent]
+}).compileComponents();
 
   });
 

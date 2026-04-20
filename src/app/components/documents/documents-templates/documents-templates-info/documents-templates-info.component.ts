@@ -7,11 +7,15 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { Document } from '../../class/document';
 import { PreviewAttachmentStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgIf, NgStyle } from '@angular/common';
 declare var $: any;
 @Component({
-  selector: 'documents-templates-info',
-  templateUrl: './documents-templates-info.component.html',
-  styleUrls: ['./documents-templates-info.component.scss']
+    selector: 'documents-templates-info',
+    templateUrl: './documents-templates-info.component.html',
+    styleUrls: ['./documents-templates-info.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgbTooltipModule, NgStyle]
 })
 export class DocumentsTemplatesInfoComponent implements OnInit, OnDestroy {
   openAside: boolean = false;

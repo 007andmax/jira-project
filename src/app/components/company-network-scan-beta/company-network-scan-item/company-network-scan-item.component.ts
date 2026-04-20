@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { NETWORK_REMOVE_DEVICE } from 'src/app/const/confirm';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { NetworkScanStateService } from 'src/app/states/network-scan/network-scan-state.service';
@@ -9,11 +9,16 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NetworkScanDevice } from '../class/network-scan-device';
 import { NetworkScanSomeInfoForDevice } from '../class/network-scan-some-info-for-devices';
+import { CompanyNetworkScanItemTooltipComponent } from './company-network-scan-item-tooltip/company-network-scan-item-tooltip.component';
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-company-network-scan-item',
-  templateUrl: './company-network-scan-item.component.html',
-  styleUrls: ['./company-network-scan-item.component.scss']
+    selector: 'app-company-network-scan-item',
+    templateUrl: './company-network-scan-item.component.html',
+    styleUrls: ['./company-network-scan-item.component.scss'],
+    standalone: true,
+    imports: [NgIf, FormsModule, CompanyDevicesEditLabelComponent, CompanyNetworkScanItemTooltipComponent, NgbTooltipModule]
 })
 export class CompanyNetworkScanItemComponent implements OnInit {
   @ViewChild('editLabel', { static: true }) editLabel: CompanyDevicesEditLabelComponent;

@@ -5,9 +5,10 @@ import { ProductService } from 'src/app/services/product/product.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 
 @Component({
-  selector: 'inventory-add-category',
-  templateUrl: './inventory-add-category.component.html',
-  styleUrls: ['./inventory-add-category.component.scss']
+    selector: 'inventory-add-category',
+    templateUrl: './inventory-add-category.component.html',
+    styleUrls: ['./inventory-add-category.component.scss'],
+    standalone: true
 })
 export class InventoryAddCategoryComponent implements OnInit {
   @Output() onClose: EventEmitter<any> = new EventEmitter();

@@ -11,9 +11,10 @@ import { Subscription } from 'rxjs';
 import * as moment from "moment";
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss'],
+    standalone: true
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   url = environment.apiUrl + 'upload';

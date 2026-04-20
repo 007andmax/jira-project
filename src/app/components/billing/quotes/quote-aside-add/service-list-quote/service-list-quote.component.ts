@@ -3,9 +3,10 @@ import { Service } from 'src/app/interfaces/service/service';
 import { QuoteService } from 'src/app/services/quote/quote.service';
 
 @Component({
-  selector: 'app-service-list-quote',
-  templateUrl: './service-list-quote.component.html',
-  styleUrls: ['./service-list-quote.component.scss']
+    selector: 'app-service-list-quote',
+    templateUrl: './service-list-quote.component.html',
+    styleUrls: ['./service-list-quote.component.scss'],
+    standalone: true
 })
 export class ServiceListQuoteComponent implements OnInit {
   @Input() quoteCompany: any;

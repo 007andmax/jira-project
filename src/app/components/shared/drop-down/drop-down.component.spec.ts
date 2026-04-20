@@ -16,20 +16,18 @@ describe('DropDownComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         NgbModule,
         MatErrorModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [DropDownComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, DropDownComponent],
+}).compileComponents();
 
   });
 
@@ -109,20 +107,18 @@ describe('DropDownComponent integration test', () => {
   let fixture: ComponentFixture<DropDownComponent>;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         NgbModule,
         MatErrorModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [DropDownComponent
-      ],
-    })
+        NoopAnimationsModule, DropDownComponent],
+})
     fixture = TestBed.createComponent(DropDownComponent);
     component = fixture.componentInstance;
   });

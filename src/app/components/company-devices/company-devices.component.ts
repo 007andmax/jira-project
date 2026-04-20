@@ -21,12 +21,13 @@ import { fadeInAnimation } from 'src/app/animations';
 import { CompanyDevicesHeaderComponent } from './company-devices-header/company-devices-header.component';
 
 @Component({
-  selector: 'app-company-devices',
-  templateUrl: './company-devices.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./company-devices.component.scss']
+    selector: 'app-company-devices',
+    templateUrl: './company-devices.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./company-devices.component.scss'],
+    standalone: true
 })
 export class CompanyDevicesComponent implements OnInit, OnDestroy {
   devices: Array<DeviceCompany> = [];

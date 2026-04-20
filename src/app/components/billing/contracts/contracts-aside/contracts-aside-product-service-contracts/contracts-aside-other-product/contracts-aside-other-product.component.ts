@@ -1,11 +1,18 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { InventoryItem } from 'src/app/components/inventory/class/inventory-item';
 import { ContractsOtherProduct } from '../../class/contracts-other-product';
+import { CurrencyPipe } from '@angular/common';
+import { ContractsAsideDiscountComponent } from '../../contracts-aside-discount/contracts-aside-discount.component';
+import { ToFixedDirective } from '../../../../../../directives/to-fixed/to-fixed.directive';
+import { DecimalNumberDirective } from '../../../../../../directives/decimal-number/decimal-number.directive';
+import { ProductListComponent } from '../../../../../shared/product-list/product-list.component';
 
 @Component({
-  selector: 'app-contracts-aside-other-product',
-  templateUrl: './contracts-aside-other-product.component.html',
-  styleUrls: ['./contracts-aside-other-product.component.scss']
+    selector: 'app-contracts-aside-other-product',
+    templateUrl: './contracts-aside-other-product.component.html',
+    styleUrls: ['./contracts-aside-other-product.component.scss'],
+    standalone: true,
+    imports: [ProductListComponent, DecimalNumberDirective, ToFixedDirective, ContractsAsideDiscountComponent, CurrencyPipe]
 })
 export class ContractsAsideOtherProductComponent implements OnInit {
   @Input() product: ContractsOtherProduct;

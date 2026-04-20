@@ -16,13 +16,14 @@ import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
-  selector: 'payments',
-  templateUrl: './payments.component.html',
-  styleUrls: ['./payments.component.scss'],
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  providers: [PaymentsListService]
+    selector: 'payments',
+    templateUrl: './payments.component.html',
+    styleUrls: ['./payments.component.scss'],
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    providers: [PaymentsListService],
+    standalone: true
 })
 export class PaymentsComponent implements OnInit, OnDestroy {
 

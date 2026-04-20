@@ -8,9 +8,10 @@ import { InvoicesFilterComponent } from './invoices-filter/invoices-filter.compo
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
-  selector: 'app-invoices-header',
-  templateUrl: './invoices-header.component.html',
-  styleUrls: ['./invoices-header.component.scss']
+    selector: 'app-invoices-header',
+    templateUrl: './invoices-header.component.html',
+    styleUrls: ['./invoices-header.component.scss'],
+    standalone: true
 })
 export class InvoicesHeaderComponent implements OnInit {
   @ViewChild('filter', { static: true }) filter: InvoicesFilterComponent;

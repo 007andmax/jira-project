@@ -7,10 +7,11 @@ import { Company } from 'src/app/interfaces/company/company';
 import { User } from 'src/app/components/users/class/user';
 
 @Component({
-  selector: 'app-ticket-report',
-  templateUrl: './ticket-report.component.html',
-  styleUrls: ['./ticket-report.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-ticket-report',
+    templateUrl: './ticket-report.component.html',
+    styleUrls: ['./ticket-report.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: true
 })
 export class TicketReportComponent implements OnInit, OnDestroy {
   ticketsReport: TicketsReport = new TicketsReport();

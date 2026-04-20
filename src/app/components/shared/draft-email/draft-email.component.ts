@@ -16,9 +16,10 @@ import { ReportsService } from 'src/app/services/reports/reports.service';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { PaymentsStateService } from 'src/app/states/payments/payments-state.service';
 @Component({
-  selector: 'app-draft-email',
-  templateUrl: './draft-email.component.html',
-  styleUrls: ['./draft-email.component.scss']
+    selector: 'app-draft-email',
+    templateUrl: './draft-email.component.html',
+    styleUrls: ['./draft-email.component.scss'],
+    standalone: true
 })
 export class DraftEmailComponent implements OnInit, OnDestroy {
   messageContent: string = '';

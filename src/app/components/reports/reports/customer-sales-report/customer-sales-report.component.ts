@@ -3,9 +3,10 @@ import { CustomerSalesReport } from '../../class/customer-sales-report';
 import * as moment from "moment";
 
 @Component({
-  selector: 'app-customer-sales-report',
-  templateUrl: './customer-sales-report.component.html',
-  styleUrls: ['./customer-sales-report.component.scss']
+    selector: 'app-customer-sales-report',
+    templateUrl: './customer-sales-report.component.html',
+    styleUrls: ['./customer-sales-report.component.scss'],
+    standalone: true
 })
 export class CustomerSalesReportComponent implements OnInit {
   customerSalesReport: CustomerSalesReport = new CustomerSalesReport();

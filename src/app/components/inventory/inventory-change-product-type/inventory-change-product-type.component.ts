@@ -6,11 +6,15 @@ import { InventoryStateService } from 'src/app/states/inventory/inventory-state.
 import { ProductType } from '../../setting/products-settings/class/product-type';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { InventoryItem } from '../class/inventory-item';
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-inventory-change-product-type',
-  templateUrl: './inventory-change-product-type.component.html',
-  styleUrls: ['./inventory-change-product-type.component.scss']
+    selector: 'app-inventory-change-product-type',
+    templateUrl: './inventory-change-product-type.component.html',
+    styleUrls: ['./inventory-change-product-type.component.scss'],
+    standalone: true,
+    imports: [NgIf, DropDownComponent, NgFor]
 })
 export class InventoryChangeProductTypeComponent implements OnInit {
   showPreloader: boolean = false;

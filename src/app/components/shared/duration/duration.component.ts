@@ -8,10 +8,11 @@ import { DurationStateService } from './services/duration-state.service';
 import { DurationService } from './services/duration.service';
 
 @Component({
-  selector: 'app-duration',
-  templateUrl: './duration.component.html',
-  styleUrls: ['./duration.component.scss'],
-  providers: [DurationService]
+    selector: 'app-duration',
+    templateUrl: './duration.component.html',
+    styleUrls: ['./duration.component.scss'],
+    providers: [DurationService],
+    standalone: true
 })
 export class DurationComponent implements OnInit, OnDestroy {
 

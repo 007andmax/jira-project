@@ -11,13 +11,20 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { DELETE_DEVICE_TYPE } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { PreloaderTicketComponent } from '../../../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../../../directives/disabled-btn/disabled-btn.directive';
+import { FormsModule } from '@angular/forms';
+import { CompanyDevicesAssestTypeDropDownComponent } from '../../../../company-devices/company-devices-custom-aside/company-devices-assest-type-drop-down/company-devices-assest-type-drop-down.component';
+import { NgIf, NgClass, NgFor } from '@angular/common';
 
 
 @Component({
-  selector: 'app-device-setting-type-check-use',
-  templateUrl: './device-setting-type-check-use.component.html',
-  styleUrls: ['./device-setting-type-check-use.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-device-setting-type-check-use',
+    templateUrl: './device-setting-type-check-use.component.html',
+    styleUrls: ['./device-setting-type-check-use.component.scss'],
+    providers: [TicketsListService],
+    standalone: true,
+    imports: [NgIf, CompanyDevicesAssestTypeDropDownComponent, NgClass, NgFor, FormsModule, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class DeviceSettingTypeCheckUseComponent implements OnInit {
   @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;

@@ -21,9 +21,10 @@ import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { InvoiceTicketsService } from 'src/app/services/accounting/accounting-settings.service';
 
 @Component({
-  selector: 'app-quote-aside-edit-body',
-  templateUrl: './quote-aside-edit-body.component.html',
-  styleUrls: ['./quote-aside-edit-body.component.scss']
+    selector: 'app-quote-aside-edit-body',
+    templateUrl: './quote-aside-edit-body.component.html',
+    styleUrls: ['./quote-aside-edit-body.component.scss'],
+    standalone: true
 })
 export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
   @ViewChild('servicesList', { static: false }) servicesList: ServiceListQuoteComponent;

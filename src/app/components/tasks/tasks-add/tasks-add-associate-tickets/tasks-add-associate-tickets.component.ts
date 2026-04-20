@@ -8,10 +8,11 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
-  selector: 'app-tasks-add-associate-tickets',
-  templateUrl: './tasks-add-associate-tickets.component.html',
-  styleUrls: ['./tasks-add-associate-tickets.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-tasks-add-associate-tickets',
+    templateUrl: './tasks-add-associate-tickets.component.html',
+    styleUrls: ['./tasks-add-associate-tickets.component.scss'],
+    providers: [TicketsListService],
+    standalone: true
 })
 export class TasksAddAssociateTicketsComponent {
   page_number: number = 0;

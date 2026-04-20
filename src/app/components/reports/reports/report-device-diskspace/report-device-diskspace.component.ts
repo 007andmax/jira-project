@@ -14,9 +14,10 @@ import { DeviceDiskSpaceReportFilter } from "./Class/device-diskspace-report";
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "report-device-diskspace",
-  templateUrl: "./report-device-diskspace.component.html",
-  styleUrls: ["./report-device-diskspace.component.scss"],
+    selector: "report-device-diskspace",
+    templateUrl: "./report-device-diskspace.component.html",
+    styleUrls: ["./report-device-diskspace.component.scss"],
+    standalone: true,
 })
 export class ReportDeviceDiskspaceComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;

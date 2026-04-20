@@ -25,7 +25,7 @@ describe('SubscriptionServicesAddComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         NgbModule,
         DropDownModule,
         FormsModule,
@@ -40,14 +40,12 @@ describe('SubscriptionServicesAddComponent unit test', () => {
         ContractsEditModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [SubscriptionServicesAddComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, SubscriptionServicesAddComponent],
+}).compileComponents();
 
   });
 

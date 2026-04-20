@@ -1,15 +1,18 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ManufactureDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/manufacture-device';
 import { ModelDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/model-device';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
+import { NgIf, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-device-setting-models-add',
-  templateUrl: './device-setting-models-add.component.html',
-  styleUrls: ['./device-setting-models-add.component.scss']
+    selector: 'app-device-setting-models-add',
+    templateUrl: './device-setting-models-add.component.html',
+    styleUrls: ['./device-setting-models-add.component.scss'],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, NgIf, NgClass]
 })
 export class DeviceSettingModelsAddComponent implements OnInit, OnDestroy {
   @Input() manufactureId: string;

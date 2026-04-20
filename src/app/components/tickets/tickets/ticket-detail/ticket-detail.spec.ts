@@ -114,13 +114,13 @@ describe('TicketDetailComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         NgbModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NoopAnimationsModule,
         TicketDetailRoutingModule,
@@ -163,7 +163,7 @@ describe('TicketDetailComponent unit test', () => {
         TicketDetailProfileFormUpdateModule,
         AngularEditorModule,
         RouterTestingModule],
-      declarations: [TicketDetailComponent,
+    declarations: [TicketDetailComponent,
         TicketDetailHeaderComponent,
         TicketDetailInfoStatusComponent,
         TicketDetailTasksComponent,
@@ -179,12 +179,10 @@ describe('TicketDetailComponent unit test', () => {
         TicketDetailLinkedAgentsComponent,
         TicketDetailEditTagsComponent,
         TicketDetailAttachmentsComponent,
-        TicketDetailContactDetailsComponent
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
-      ,
-      providers: [TicketsListService, TicketsPermissionsService, { provide: Router, useValue: mockRouter }]
-    }).compileComponents();
+        TicketDetailContactDetailsComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    providers: [TicketsListService, TicketsPermissionsService, { provide: Router, useValue: mockRouter }]
+}).compileComponents();
 
   });
 

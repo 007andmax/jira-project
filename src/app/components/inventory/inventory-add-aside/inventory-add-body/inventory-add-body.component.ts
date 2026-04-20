@@ -19,11 +19,22 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 import { ProductType } from 'src/app/components/setting/products-settings/class/product-type';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { PreloaderTicketComponent } from '../../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../../directives/disabled-btn/disabled-btn.directive';
+import { TaxesComponent as TaxesComponent_1 } from '../../../shared/taxes/taxes.component';
+import { ToFixedDirective } from '../../../../directives/to-fixed/to-fixed.directive';
+import { DecimalNumberDirective } from '../../../../directives/decimal-number/decimal-number.directive';
+import { TextAreaDirective } from '../../../../directives/text-area/text-area.directive';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-inventory-add-body',
-  templateUrl: './inventory-add-body.component.html',
-  styleUrls: ['./inventory-add-body.component.scss']
+    selector: 'app-inventory-add-body',
+    templateUrl: './inventory-add-body.component.html',
+    styleUrls: ['./inventory-add-body.component.scss'],
+    standalone: true,
+    imports: [NgClass, FormsModule, NgIf, MatErrorComponent, DropDownComponent, TextAreaDirective, DecimalNumberDirective, ToFixedDirective, TaxesComponent_1, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   @ViewChild('addTax', { static: true }) containerAddTax;

@@ -4,10 +4,11 @@ import { TicketDetailEditTagsComponent } from 'src/app/components/tickets/ticket
 import { TicketsPermissionsService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/tickets-permissions.service';
 
 @Component({
-  selector: 'app-file-manager-file-info-tags',
-  templateUrl: './file-manager-file-info-tags.component.html',
-  styleUrls: ['./file-manager-file-info-tags.component.scss'],
-  providers: [TicketsPermissionsService, CompanyTagsListService]
+    selector: 'app-file-manager-file-info-tags',
+    templateUrl: './file-manager-file-info-tags.component.html',
+    styleUrls: ['./file-manager-file-info-tags.component.scss'],
+    providers: [TicketsPermissionsService, CompanyTagsListService],
+    standalone: true
 })
 export class FileManagerFileInfoTagsComponent extends TicketDetailEditTagsComponent {
   public infiniteScrollDisabled = true;

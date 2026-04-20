@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: "soft"
+    name: "soft",
+    standalone: true
 })
 export class SoftwarePipe implements PipeTransform {
   transform(items: any, args?: any): any {

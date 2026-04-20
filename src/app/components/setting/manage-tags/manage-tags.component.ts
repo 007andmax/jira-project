@@ -27,13 +27,14 @@ import { fadeInAnimation } from "src/app/animations";
 import { ManageTagsFilesComponent } from "./manage-tags-files/manage-tags-files.component";
 declare var $: any;
 @Component({
-  selector: "app-manage-tags",
-  templateUrl: "./manage-tags.component.html",
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ["./manage-tags.component.scss"],
-  providers: [ManageTagsListService],
+    selector: "app-manage-tags",
+    templateUrl: "./manage-tags.component.html",
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ["./manage-tags.component.scss"],
+    providers: [ManageTagsListService],
+    standalone: true,
 })
 export class ManageTagsComponent implements OnDestroy, OnInit {
   searchTag = "";

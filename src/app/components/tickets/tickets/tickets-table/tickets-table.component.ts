@@ -17,10 +17,11 @@ import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service
 
 
 @Component({
-  selector: 'app-tickets-table',
-  templateUrl: './tickets-table.component.html',
-  styleUrls: ['./tickets-table.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-tickets-table',
+    templateUrl: './tickets-table.component.html',
+    styleUrls: ['./tickets-table.component.scss'],
+    providers: [TicketsListService],
+    standalone: true
 })
 export class TicketsTableComponent implements OnInit, OnDestroy {
   // @ViewChild('header') header: UsersHeaderComponent;

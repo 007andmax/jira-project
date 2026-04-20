@@ -23,12 +23,21 @@ import { AppService } from 'src/app/states/app/app.service';
 import { DatePickerComponent } from '../../shared/date-picker/date-picker.component';
 import { CompanyDropDownComponent } from '../../shared/company-drop-down/company-drop-down.component';
 import { PasswordRecord } from '../class/password-record';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../directives/disabled-btn/disabled-btn.directive';
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
+import { FormsModule } from '@angular/forms';
+import { PasswordManagerAddCategoryComponent } from '../password-manager-add-category/password-manager-add-category.component';
+import { NgIf, NgClass } from '@angular/common';
 
 
 @Component({
-  selector: 'app-password-manager-add-aside',
-  templateUrl: './password-manager-add-aside.component.html',
-  styleUrls: ['./password-manager-add-aside.component.scss']
+    selector: 'app-password-manager-add-aside',
+    templateUrl: './password-manager-add-aside.component.html',
+    styleUrls: ['./password-manager-add-aside.component.scss'],
+    standalone: true,
+    imports: [CompanyDropDownComponent, NgIf, PasswordManagerAddCategoryComponent, DropDownComponent, FormsModule, NgClass, MatErrorComponent, DynamicTooltipComponent, DatePickerComponent, PasswordManagerLinkedComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class PasswordManagerAddAsideComponent implements OnInit {
   showPassword: boolean = false;

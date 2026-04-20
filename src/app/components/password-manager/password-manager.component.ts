@@ -17,13 +17,14 @@ import { fadeInAnimation } from 'src/app/animations';
  * Password manager component
  */
 @Component({
-  selector: 'app-password-manager',
-  templateUrl: './password-manager.component.html',
-  styleUrls: ['./password-manager.component.scss'],
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  providers: [PasswordManagerListService]
+    selector: 'app-password-manager',
+    templateUrl: './password-manager.component.html',
+    styleUrls: ['./password-manager.component.scss'],
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    providers: [PasswordManagerListService],
+    standalone: true
 })
 
 export class PasswordManagerComponent implements OnInit, OnDestroy {

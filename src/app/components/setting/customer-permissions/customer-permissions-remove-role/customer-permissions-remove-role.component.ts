@@ -9,11 +9,15 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { DropDownComponent as DropDownComponent_1 } from '../../../shared/drop-down/drop-down.component';
+import { NgFor, NgStyle, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'customer-permissions-remove-role',
-  templateUrl: './customer-permissions-remove-role.component.html',
-  styleUrls: ['./customer-permissions-remove-role.component.scss']
+    selector: 'customer-permissions-remove-role',
+    templateUrl: './customer-permissions-remove-role.component.html',
+    styleUrls: ['./customer-permissions-remove-role.component.scss'],
+    standalone: true,
+    imports: [NgFor, NgStyle, NgIf, DropDownComponent_1]
 })
 export class CustomerPermissionsRemoveRoleComponent implements OnInit, OnDestroy {
   @Input() users: Array<CustomerPermissionsRemoveRole> = [];

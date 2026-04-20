@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, ChangeDete
 import { TerminalService } from '../_services/terminal.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { isArray } from 'util';
 import { Subscription } from 'rxjs';
 import { CONFIGCONSTANTS } from '../config/app-constants';
@@ -11,13 +11,17 @@ import { ShellStateService } from 'src/app/states/shell/shell-state.service';
 import { command, script, commandModal, scriptModal } from './../class/device';
 import { AgentService } from 'src/app/services/agent/agent.service';
 import { KafkaStateService } from 'src/app/states/kafka/kafka-state.service';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgStyle, NgFor, NgIf, DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-terminal',
-  templateUrl: './terminal.component.html',
-  styleUrls: ['./terminal.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  providers: [UserListService]
+    selector: 'app-terminal',
+    templateUrl: './terminal.component.html',
+    styleUrls: ['./terminal.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [UserListService],
+    standalone: true,
+    imports: [NgClass, NgStyle, NgFor, NgIf, FormsModule, NgbDropdownModule, NgbNavModule, DatePipe]
 })
 export class TerminalComponent implements OnInit, OnDestroy {
   create = false;

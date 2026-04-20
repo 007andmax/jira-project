@@ -30,7 +30,7 @@ describe('TasksEditComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         ReactiveFormsModule,
         DisabledBtnModule,
@@ -52,14 +52,12 @@ describe('TasksEditComponent unit test', () => {
         HttpClientModule,
         HttpClientTestingModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [TasksEditComponent
-      ]
-    }).compileComponents();
+        NoopAnimationsModule, TasksEditComponent]
+}).compileComponents();
 
   });
 

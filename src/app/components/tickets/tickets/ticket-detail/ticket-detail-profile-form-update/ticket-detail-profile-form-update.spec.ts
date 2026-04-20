@@ -37,13 +37,13 @@ describe('TicketDetailProfileFormUpdateComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         CommonModule,
         NgbModule,
@@ -69,16 +69,13 @@ describe('TicketDetailProfileFormUpdateComponent unit test', () => {
         DynamicTooltipModule,
         TicketDetailProfileFormUpdateHeaderModule,
         TicketDetailProfileFormUpdateNoteModule,
-        NoopAnimationsModule
-      ],
-      declarations: [TicketDetailProfileFormUpdateComponent,
+        NoopAnimationsModule, TicketDetailProfileFormUpdateComponent,
         TicketDetailProfileFormUpdateProductsComponent,
         TicketDetailProfileFormUpdateServicesComponent,
         TicketDetailProfileFormUpdateSupportComponent,
-        TicketDetailProfileFormUpdateVisibleUsersComponent
-      ],
-      providers: [UntypedFormBuilder]
-    }).compileComponents();
+        TicketDetailProfileFormUpdateVisibleUsersComponent],
+    providers: [UntypedFormBuilder]
+}).compileComponents();
 
   });
 

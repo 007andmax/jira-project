@@ -1,11 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { ManufactureDevice } from '../class/manufacture-device';
+import { NgClass, NgStyle, NgIf, NgFor } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-models-drop-down',
-  templateUrl: './models-drop-down.component.html',
-  styleUrls: ['./models-drop-down.component.scss']
+    selector: 'app-models-drop-down',
+    templateUrl: './models-drop-down.component.html',
+    styleUrls: ['./models-drop-down.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, NgClass, NgStyle, NgIf, NgFor]
 })
 export class ModelsDropDownComponent extends DropDownComponent {
   @Input() manufactureId: string;

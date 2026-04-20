@@ -4,14 +4,18 @@ import { EmailSettingService } from '../../../services/email-settings/email-sett
 import { IncomingEmailComponent } from "./incoming-email/incoming-email.component";
 import { OutgoingEmailComponent } from "./outgoing-email/outgoing-email.component";
 import { fadeInAnimation } from "src/app/animations";
+import { NgIf } from "@angular/common";
+import { NgbNavModule } from "@ng-bootstrap/ng-bootstrap";
 declare var $: any;
 @Component({
-  selector: "app-email-setting",
-  templateUrl: "./email-setting.component.html",
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ["./email-setting.component.scss"]
+    selector: "app-email-setting",
+    templateUrl: "./email-setting.component.html",
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ["./email-setting.component.scss"],
+    standalone: true,
+    imports: [NgbNavModule, NgIf, IncomingEmailComponent, OutgoingEmailComponent]
 })
 export class EmailSettingComponent implements OnInit, OnDestroy {
   smtp: any;

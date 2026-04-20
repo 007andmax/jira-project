@@ -10,18 +10,21 @@ import { UserFilters } from '../../users/class/user-filters';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UserGlobalFilter } from '../../users/class/user-global-filters';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from 'src/app/services/users/users.service';
 import { DELETE_GLOBAL_USERS_FILTER } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'left-panel-marketing',
-  templateUrl: './left-panel-marketing.component.html',
-  styleUrls: ['./left-panel-marketing.component.scss'],
-  providers: [LeftPanelUsersService]
+    selector: 'left-panel-marketing',
+    templateUrl: './left-panel-marketing.component.html',
+    styleUrls: ['./left-panel-marketing.component.scss'],
+    providers: [LeftPanelUsersService],
+    standalone: true,
+    imports: [NgClass, NgIf, NgFor, NgbTooltipModule, NgbDropdownModule]
 })
 export class LeftPanelMarketingComponent implements OnInit {
   open: boolean = false;

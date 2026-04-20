@@ -17,7 +17,7 @@ describe('AddAssignedUserNoteComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         NgbModule,
         FormsModule,
         MatChipModule,
@@ -28,14 +28,11 @@ describe('AddAssignedUserNoteComponent unit test', () => {
         NoopAnimationsModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
-        })
-      ],
-      declarations: [AddAssignedUserNoteComponent
-      ],
-    }).compileComponents();
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
+        }), AddAssignedUserNoteComponent],
+}).compileComponents();
 
   });
 

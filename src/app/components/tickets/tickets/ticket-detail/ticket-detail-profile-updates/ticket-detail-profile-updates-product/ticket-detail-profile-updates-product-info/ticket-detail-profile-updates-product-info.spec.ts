@@ -20,13 +20,13 @@ describe('TicketDetailProfileUpdatesProductInfoComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         CommonModule,
         DynamicTooltipModule,
@@ -34,11 +34,10 @@ describe('TicketDetailProfileUpdatesProductInfoComponent unit test', () => {
         NgbModule,
         DatePickerModule,
         NoopAnimationsModule
-      ],
-      declarations: [TicketDetailProfileUpdatesProductInfoComponent
-      ],
-      providers: [TicketsListService]
-    }).compileComponents();
+    ],
+    declarations: [TicketDetailProfileUpdatesProductInfoComponent],
+    providers: [TicketsListService]
+}).compileComponents();
 
   });
 

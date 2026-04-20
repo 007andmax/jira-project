@@ -2,11 +2,16 @@ import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angu
 import { DefaultServicesHourlyContract } from '../../class/default-service-hourly-contract';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { Subscription } from 'rxjs';
+import { MatErrorComponent } from '../../../../../shared/mat-error/mat-error.component';
+import { NgIf, NgFor } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-contracts-aside-block-time-billing-add-default-service',
-  templateUrl: './contracts-aside-block-time-billing-add-default-service.component.html',
-  styleUrls: ['./contracts-aside-block-time-billing-add-default-service.component.scss']
+    selector: 'app-contracts-aside-block-time-billing-add-default-service',
+    templateUrl: './contracts-aside-block-time-billing-add-default-service.component.html',
+    styleUrls: ['./contracts-aside-block-time-billing-add-default-service.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, NgIf, MatErrorComponent, NgFor]
 })
 export class ContractsAsideBlockTimeBillingAddDefaultServiceComponent implements OnInit, OnDestroy {
   defaultServices: Array<DefaultServicesHourlyContract> = [];

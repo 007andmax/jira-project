@@ -1,12 +1,15 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { DateService } from 'src/app/services/date/date.service';
 import * as moment from "moment";
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-multi-datepicker-dashboard',
-  templateUrl: './multi-datepicker-dashboard.component.html',
-  styleUrls: ['./multi-datepicker-dashboard.component.scss']
+    selector: 'app-multi-datepicker-dashboard',
+    templateUrl: './multi-datepicker-dashboard.component.html',
+    styleUrls: ['./multi-datepicker-dashboard.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgbDatepickerModule]
 })
 export class MultiDatepickerDashboardComponent implements OnInit {
 

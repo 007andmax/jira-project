@@ -3,12 +3,19 @@ import { NgbModalConfig, NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-boots
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { SupportPageCategoriesService } from '../../services/support-page-categories/support-page-categories.service';
 import { CategoryValdiate } from '../support-page-add-category/class/category-validate';
+import { PreloaderTicketComponent } from '../../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../../directives/disabled-btn/disabled-btn.directive';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'support-page-edit-category',
-  templateUrl: './support-page-edit-category.component.html',
-  styleUrls: ['./support-page-edit-category.component.scss'],
-  providers: [NgbModalConfig, NgbModal]
+    selector: 'support-page-edit-category',
+    templateUrl: './support-page-edit-category.component.html',
+    styleUrls: ['./support-page-edit-category.component.scss'],
+    providers: [NgbModalConfig, NgbModal],
+    standalone: true,
+    imports: [FormsModule, NgIf, MatErrorComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class SupportPageEditCategoryComponent implements OnInit {
 

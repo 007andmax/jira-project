@@ -13,14 +13,21 @@ import { CustomerPermissionsRemoveRole } from './customer-permissions-remove-rol
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 import { CustomerRoleRealTimeService } from 'src/app/states/customer-role/customer-role-real-time.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { CustomerPermissionsRemoveRoleComponent } from './customer-permissions-remove-role/customer-permissions-remove-role.component';
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { CustomerPermissionsEditComponent } from './customer-permissions-edit/customer-permissions-edit.component';
+import { NgIf, NgFor, NgClass } from '@angular/common';
+import { CustomerPermissionsAddComponent } from './customer-permissions-add/customer-permissions-add.component';
 
 @Component({
-  selector: 'customer-permissions',
-  templateUrl: './customer-permissions.component.html',
-  animations: [fadeInAnimation],
-  // attach the fade in animation to the host (root) element of this component
-  host: { '[@fadeInAnimation]': '' },
-  styleUrls: ['./customer-permissions.component.scss']
+    selector: 'customer-permissions',
+    templateUrl: './customer-permissions.component.html',
+    animations: [fadeInAnimation],
+    // attach the fade in animation to the host (root) element of this component
+    host: { '[@fadeInAnimation]': '' },
+    styleUrls: ['./customer-permissions.component.scss'],
+    standalone: true,
+    imports: [CustomerPermissionsAddComponent, NgIf, NgFor, CustomerPermissionsEditComponent, DynamicTooltipComponent, NgClass, CustomerPermissionsRemoveRoleComponent]
 })
 export class CustomerPermissionsComponent implements OnInit, OnDestroy {
   userRoles: Array<UserRole> = [];

@@ -18,20 +18,18 @@ describe('InvoicesHeaderComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         PreviewPhoneMaskModule,
         DynamicTooltipModule,
         NgbModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [InvoicesHeaderComponent
-      ]
-    }).compileComponents();
+        NoopAnimationsModule, InvoicesHeaderComponent]
+}).compileComponents();
 
   });
 

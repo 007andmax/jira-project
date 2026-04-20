@@ -3,11 +3,14 @@ import { Company } from 'src/app/interfaces/company/company';
 import { AppService } from 'src/app/states/app/app.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { ContractsFilterComponent } from '../contracts-filter/contracts-filter.component';
+import { NgIf, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-contracts-header',
-  templateUrl: './contracts-header.component.html',
-  styleUrls: ['./contracts-header.component.scss']
+    selector: 'app-contracts-header',
+    templateUrl: './contracts-header.component.html',
+    styleUrls: ['./contracts-header.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgClass, ContractsFilterComponent]
 })
 export class ContractsHeaderComponent implements OnInit {
   @Input() companyContracts: Company = null;

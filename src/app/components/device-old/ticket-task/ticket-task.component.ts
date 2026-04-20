@@ -11,9 +11,10 @@ import { Subscription } from 'rxjs';
 declare var $: any;
 
 @Component({
-  selector: 'app-ticket-task',
-  templateUrl: './ticket-task.component.html',
-  styleUrls: ['./ticket-task.component.scss']
+    selector: 'app-ticket-task',
+    templateUrl: './ticket-task.component.html',
+    styleUrls: ['./ticket-task.component.scss'],
+    standalone: true
 })
 export class TicketTaskComponent implements OnInit, OnDestroy {
   DateFormat = CONFIGCONSTANTS.DateFormat;

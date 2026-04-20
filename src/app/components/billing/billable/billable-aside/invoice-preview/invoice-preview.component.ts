@@ -7,9 +7,10 @@ import { CompanyProfile } from 'src/app/components/companies/class/company-profi
 import { InvoiceTaxNumber } from '../../class/invoice-tax-number';
 
 @Component({
-  selector: 'app-invoice-preview',
-  templateUrl: './invoice-preview.component.html',
-  styleUrls: ['./invoice-preview.component.scss']
+    selector: 'app-invoice-preview',
+    templateUrl: './invoice-preview.component.html',
+    styleUrls: ['./invoice-preview.component.scss'],
+    standalone: true
 })
 export class InvoicePreviewComponent implements OnInit {
   @Input() invoiceNumber: string;

@@ -21,9 +21,10 @@ import { ServicesListComponent } from '../../shared/services-list/services-list.
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
-  selector: 'app-tasks-add',
-  templateUrl: './tasks-add.component.html',
-  styleUrls: ['./tasks-add.component.scss']
+    selector: 'app-tasks-add',
+    templateUrl: './tasks-add.component.html',
+    styleUrls: ['./tasks-add.component.scss'],
+    standalone: true
 })
 export class TasksAddComponent implements OnInit, OnDestroy {
   opened: boolean = false;

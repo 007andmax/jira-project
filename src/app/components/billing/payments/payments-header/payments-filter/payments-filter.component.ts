@@ -10,9 +10,10 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
-  selector: 'app-payments-filter',
-  templateUrl: './payments-filter.component.html',
-  styleUrls: ['./payments-filter.component.scss']
+    selector: 'app-payments-filter',
+    templateUrl: './payments-filter.component.html',
+    styleUrls: ['./payments-filter.component.scss'],
+    standalone: true
 })
 export class PaymentsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('companyDp', { static: true }) companyDp: CompanyDropDownComponent;

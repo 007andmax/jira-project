@@ -1,14 +1,20 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbCalendar, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { DateService } from "../../../services/date/date.service";
+import { FormsModule } from '@angular/forms';
+import { MatErrorComponent } from '../mat-error/mat-error.component';
+import { NgIf, NgClass } from '@angular/common';
+import { ClickOutsideDirective } from '../../../directives/click-otside/click-otside.directive';
 
 /**
  * Multi date picker
  */
 @Component({
-  selector: 'app-multi-datepicker',
-  templateUrl: './multi-datepicker.component.html',
-  styleUrls: ['./multi-datepicker.component.scss']
+    selector: 'app-multi-datepicker',
+    templateUrl: './multi-datepicker.component.html',
+    styleUrls: ['./multi-datepicker.component.scss'],
+    standalone: true,
+    imports: [ClickOutsideDirective, NgIf, MatErrorComponent, FormsModule, NgClass, NgbDatepickerModule]
 })
 export class MultiDatepickerComponent implements OnInit {
 

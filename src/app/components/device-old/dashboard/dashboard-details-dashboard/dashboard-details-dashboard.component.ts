@@ -5,9 +5,10 @@ import { HardwareService } from 'src/app/components/device/_services/hardware.se
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 
 @Component({
-  selector: 'dashboard-details-dashboard',
-  templateUrl: './dashboard-details-dashboard.component.html',
-  styleUrls: ['./dashboard-details-dashboard.component.scss']
+    selector: 'dashboard-details-dashboard',
+    templateUrl: './dashboard-details-dashboard.component.html',
+    styleUrls: ['./dashboard-details-dashboard.component.scss'],
+    standalone: true
 })
 export class DashboardDetailsDashboardComponent implements OnInit {
   @Input() label = '';

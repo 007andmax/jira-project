@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { NgClass, NgStyle, NgIf, NgFor } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-manufactures-drop-down',
-  templateUrl: './manufactures-drop-down.component.html',
-  styleUrls: ['./manufactures-drop-down.component.scss']
+    selector: 'app-manufactures-drop-down',
+    templateUrl: './manufactures-drop-down.component.html',
+    styleUrls: ['./manufactures-drop-down.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, NgClass, NgStyle, NgIf, NgFor]
 })
 export class ManufacturesDropDownComponent extends DropDownComponent {
 

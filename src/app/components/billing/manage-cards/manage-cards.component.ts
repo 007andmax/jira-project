@@ -12,10 +12,11 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { IntegrationsStateService } from 'src/app/states/integrations/integrations-state.service';
 
 @Component({
-  selector: 'app-manage-cards',
-  templateUrl: './manage-cards.component.html',
-  styleUrls: ['./manage-cards.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-manage-cards',
+    templateUrl: './manage-cards.component.html',
+    styleUrls: ['./manage-cards.component.scss'],
+    providers: [TicketsListService],
+    standalone: true
 })
 export class ManageCardsComponent {
   showPreloader: boolean = true;

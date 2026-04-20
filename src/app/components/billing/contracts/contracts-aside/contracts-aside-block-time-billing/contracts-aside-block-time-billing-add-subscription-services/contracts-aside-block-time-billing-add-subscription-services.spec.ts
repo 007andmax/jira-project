@@ -15,14 +15,12 @@ describe('ContractsAsideBlockTimeBillingAddSubscriptionServicesComponent unit te
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         NgbModule,
         MatErrorModule,
-        NoopAnimationsModule],
-      declarations: [ContractsAsideBlockTimeBillingAddSubscriptionServicesComponent
-      ],
-    }).compileComponents();
+        NoopAnimationsModule, ContractsAsideBlockTimeBillingAddSubscriptionServicesComponent],
+}).compileComponents();
 
   });
 

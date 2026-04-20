@@ -16,22 +16,21 @@ describe('TicketDetailChangeCompanyComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         NgbModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NoopAnimationsModule,
         DynamicTooltipModule,
         DropDownModule,
         CompanyDropDownModule],
-      declarations: [TicketDetailChangeCompanyComponent
-      ],
-      providers: [TicketsPermissionsService]
-    }).compileComponents();
+    declarations: [TicketDetailChangeCompanyComponent],
+    providers: [TicketsPermissionsService]
+}).compileComponents();
 
   });
 

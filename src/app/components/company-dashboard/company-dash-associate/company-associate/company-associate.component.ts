@@ -1,16 +1,23 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CompanyAssociateItem } from './class/company-associate-item';
 import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
+import { MatChipComponent } from '../../../shared/mat-chip/mat-chip.component';
+import { NgFor, NgClass } from '@angular/common';
+import { MatChipListComponent } from '../../../shared/mat-chip-list/mat-chip-list.component';
+import { MatFormFieldComponent as MatFormFieldComponent_1 } from '../../../shared/mat-form-field/mat-form-field.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'company-associate',
-  templateUrl: './company-associate.component.html',
-  styleUrls: ['./company-associate.component.scss']
+    selector: 'company-associate',
+    templateUrl: './company-associate.component.html',
+    styleUrls: ['./company-associate.component.scss'],
+    standalone: true,
+    imports: [NgbDropdownModule, MatFormFieldComponent_1, MatChipListComponent, NgFor, MatChipComponent, FormsModule, ReactiveFormsModule, NgClass]
 })
 export class CompanyAssociateComponent implements OnInit, OnDestroy {
   @Input() company: any;

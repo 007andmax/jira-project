@@ -4,9 +4,10 @@ import { SoftwareSummaryReport } from '../../class/software-summary-report';
 import * as moment from "moment";
 
 @Component({
-  selector: 'software-summary-report',
-  templateUrl: './software-summary-report.component.html',
-  styleUrls: ['./software-summary-report.component.css']
+    selector: 'software-summary-report',
+    templateUrl: './software-summary-report.component.html',
+    styleUrls: ['./software-summary-report.component.css'],
+    standalone: true
 })
 export class SoftwareSummaryReportComponent implements OnInit {
   loadingInProgress: boolean = false;

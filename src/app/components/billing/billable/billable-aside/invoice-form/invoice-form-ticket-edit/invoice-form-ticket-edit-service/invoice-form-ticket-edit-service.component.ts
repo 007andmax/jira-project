@@ -9,9 +9,10 @@ import { TaxesService } from 'src/app/services/taxes/taxes.service';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 
 @Component({
-  selector: 'app-invoice-form-ticket-edit-service',
-  templateUrl: './invoice-form-ticket-edit-service.component.html',
-  styleUrls: ['./invoice-form-ticket-edit-service.component.scss']
+    selector: 'app-invoice-form-ticket-edit-service',
+    templateUrl: './invoice-form-ticket-edit-service.component.html',
+    styleUrls: ['./invoice-form-ticket-edit-service.component.scss'],
+    standalone: true
 })
 export class InvoiceFormTicketEditServiceComponent implements OnInit, OnDestroy {
   @ViewChild('taxes', { static: true }) taxesDropDown: TaxesComponent;

@@ -6,9 +6,10 @@ import { SupportPageCategoriesStateService } from '../super-admin/state/support-
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'super-admin-public',
-  templateUrl: './super-admin-public.component.html',
-  styleUrls: ['./super-admin-public.component.scss']
+    selector: 'super-admin-public',
+    templateUrl: './super-admin-public.component.html',
+    styleUrls: ['./super-admin-public.component.scss'],
+    standalone: true
 })
 export class SuperAdminPublicComponent implements OnInit, OnDestroy {
   categories: Array<SupportPageCategory> = [];

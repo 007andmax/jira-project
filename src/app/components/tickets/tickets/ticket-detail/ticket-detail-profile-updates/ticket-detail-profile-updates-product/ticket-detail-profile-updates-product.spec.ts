@@ -28,13 +28,13 @@ describe('TicketDetailProfileUpdatesProductComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         CommonModule,
         DynamicTooltipModule,
@@ -48,15 +48,14 @@ describe('TicketDetailProfileUpdatesProductComponent unit test', () => {
         MatChipListModule,
         MatErrorModule,
         NoopAnimationsModule
-      ],
-      declarations: [TicketDetailProfileUpdatesProductComponent,
+    ],
+    declarations: [TicketDetailProfileUpdatesProductComponent,
         TicketDetailProfileUpdatesProductHeaderInfoComponent,
         TicketDetailProfileUpdatesProductItemComponent,
         TicketDetailProfileUpdatesProductInfoComponent,
-        TicketDetailProfileUpdatesProductEditComponent
-      ],
-      providers: [TicketsListService]
-    }).compileComponents();
+        TicketDetailProfileUpdatesProductEditComponent],
+    providers: [TicketsListService]
+}).compileComponents();
 
   });
 

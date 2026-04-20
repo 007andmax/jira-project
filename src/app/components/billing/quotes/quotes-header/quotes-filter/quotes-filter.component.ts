@@ -10,9 +10,10 @@ import { QuoteFilter } from '../../class/quote-filter';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
-  selector: 'app-quotes-filter',
-  templateUrl: './quotes-filter.component.html',
-  styleUrls: ['./quotes-filter.component.scss']
+    selector: 'app-quotes-filter',
+    templateUrl: './quotes-filter.component.html',
+    styleUrls: ['./quotes-filter.component.scss'],
+    standalone: true
 })
 export class QuotesFilterComponent implements OnInit, OnDestroy {
   @ViewChild('companyDp', { static: true }) companyDp: CompanyDropDownComponent;

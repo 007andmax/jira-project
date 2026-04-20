@@ -4,10 +4,11 @@ import { TicketsListService } from '../../tickets/tickets/services/tickets-list.
 import { SuperAdminKnowledgeBaseService } from '../../super-admin/services/super-admin-knowledge-base/super-admin-knowledge-base.service';
 
 @Component({
-  selector: 'app-super-admin-public-list',
-  templateUrl: './super-admin-public-list.component.html',
-  styleUrls: ['./super-admin-public-list.component.scss'],
-  providers: [TicketsListService]
+    selector: 'app-super-admin-public-list',
+    templateUrl: './super-admin-public-list.component.html',
+    styleUrls: ['./super-admin-public-list.component.scss'],
+    providers: [TicketsListService],
+    standalone: true
 })
 export class SuperAdminPublicListComponent implements OnInit {
   list: Array<News> = [];

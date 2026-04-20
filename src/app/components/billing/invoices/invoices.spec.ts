@@ -23,7 +23,7 @@ describe('InvoicesComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         InfiniteScrollModule,
         FormsModule,
         NgbModule,
@@ -36,14 +36,12 @@ describe('InvoicesComponent unit test', () => {
         DropDownModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        NoopAnimationsModule],
-      declarations: [InvoicesComponent
-      ]
-    }).compileComponents();
+        NoopAnimationsModule, InvoicesComponent]
+}).compileComponents();
 
   });
 

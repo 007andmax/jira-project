@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubscriptionServices } from '../class/subscription-services';
 import { Subscription } from 'rxjs';
 import { SubscriptionServicesService } from 'src/app/services/subscription-services/subscription-services.service';
@@ -13,11 +13,21 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { PreloaderTicketComponent } from '../../../shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../../directives/disabled-btn/disabled-btn.directive';
+import { GlNumbersDropDownComponent } from '../../../inventory/gl-numbers-drop-down/gl-numbers-drop-down.component';
+import { TaxesComponent } from '../../../shared/taxes/taxes.component';
+import { ToFixedDirective } from '../../../../directives/to-fixed/to-fixed.directive';
+import { numberDirective } from '../../../../directives/number/number.directive';
+import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
+import { NgIf, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-subscription-services-edit',
-  templateUrl: './subscription-services-edit.component.html',
-  styleUrls: ['./subscription-services-edit.component.scss']
+    selector: 'app-subscription-services-edit',
+    templateUrl: './subscription-services-edit.component.html',
+    styleUrls: ['./subscription-services-edit.component.scss'],
+    standalone: true,
+    imports: [NgIf, FormsModule, ReactiveFormsModule, NgClass, MatErrorComponent, numberDirective, ToFixedDirective, TaxesComponent, GlNumbersDropDownComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class SubscriptionServicesEditComponent implements OnInit, OnDestroy {
   open: boolean = false;
