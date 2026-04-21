@@ -1,3 +1,5 @@
+﻿import { SignatureComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core";
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { AccountComponent } from "./account/account.component";
@@ -10,6 +12,8 @@ import { fadeInAnimation } from "src/app/animations";
 declare var $: any;
 
 @Component({
+  standalone: true,
+  imports: [SignatureComponent, CommonModule],
   selector: "app-my-profile",
   templateUrl: "./my-profile.component.html",
   animations: [fadeInAnimation],

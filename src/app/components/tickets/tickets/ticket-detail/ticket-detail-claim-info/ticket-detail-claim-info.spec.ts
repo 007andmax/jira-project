@@ -18,8 +18,7 @@ describe('TicketDetailClaimInfoComponent unit test', () => {
             timeOut: 5000,
             onActivateTick: true
         }),
-        NoopAnimationsModule],
-    declarations: [TicketDetailClaimInfoComponent],
+        NoopAnimationsModule, TicketDetailClaimInfoComponent],
     providers: [TicketDetailClaimInfoComponent]
 }).compileComponents();
 

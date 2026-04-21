@@ -1,3 +1,7 @@
+﻿import { DropDownComponent } from './';
+import { DynamicTooltipComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PermissionManageService } from '../../../../services/permission-manage/permission-manage.service';
 import { map, catchError } from 'rxjs/operators';
@@ -10,6 +14,8 @@ import { Subscription } from 'rxjs';
 declare var $: any;
 
 @Component({
+  standalone: true,
+  imports: [DropDownComponent, DynamicTooltipComponent, FormsModule, CommonModule],
     selector: 'app-permission-manage',
     templateUrl: './permission-manage.component.html',
     styleUrls: ['./permission-manage.component.scss'],

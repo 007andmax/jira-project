@@ -1,3 +1,8 @@
+﻿import { DynamicTooltipComponent } from './';
+import { PreviewPhoneMaskComponent } from './';
+import { UserTableDefaultSubscriptionComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, Output, EventEmitter, ViewChild, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { User } from '../class/user';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -31,6 +36,8 @@ import { UserProfile } from '../class/user-profile';
 import { Router } from '@angular/router';
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, PreviewPhoneMaskComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'app-users-table',
   templateUrl: './users-table.component.html',
   styleUrls: ['./users-table.component.scss'],

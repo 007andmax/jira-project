@@ -1,3 +1,6 @@
+﻿import { DynamicTooltipComponent } from './';
+import { TicketDetailProfileUpdatesHeaderInfoComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren } from '@angular/core';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { REMOVE_UPDATE_TICKET_DETAIL } from 'src/app/const/confirm';
@@ -11,6 +14,8 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, TicketDetailProfileUpdatesHeaderInfoComponent, CommonModule],
   selector: 'ticket-detail-profile-updates-note',
   templateUrl: './ticket-detail-profile-updates-note.component.html',
   styleUrls: ['./ticket-detail-profile-updates-note.component.scss']

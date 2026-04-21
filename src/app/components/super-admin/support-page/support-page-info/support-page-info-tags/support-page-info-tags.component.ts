@@ -1,3 +1,6 @@
+﻿import { DynamicTooltipComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -12,6 +15,8 @@ import { SupportPageInfoTag } from './class/support-page-info-tag';
 var $ = require("jquery");
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, FormsModule, CommonModule],
   selector: 'support-page-info-tags',
   templateUrl: './support-page-info-tags.component.html',
   styleUrls: ['./support-page-info-tags.component.scss']

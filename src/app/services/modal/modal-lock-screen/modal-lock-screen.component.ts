@@ -1,3 +1,4 @@
+﻿import { MatErrorComponent } from './';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -11,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   standalone: true,
   selector: 'modal-lock-screen',
-  imports: [CommonModule, CommonModule, FormsModule],
+  imports: [MatErrorComponent, CommonModule, CommonModule, FormsModule],
   templateUrl: './modal-lock-screen.component.html',
   styleUrls: ['./modal-lock-screen.component.css'],
 

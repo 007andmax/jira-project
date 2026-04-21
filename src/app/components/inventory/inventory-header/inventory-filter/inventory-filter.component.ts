@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CategoryProduct } from 'src/app/interfaces/product/category-product';
@@ -6,12 +8,15 @@ import { DropDownComponent } from '../../../shared/drop-down/drop-down.component
 import { TitleListType } from '../../../tickets/tickets/tickets-header/class/title-list-type';
 import { ProductType } from 'src/app/components/setting/products-settings/class/product-type';
 import { InventoryFilter } from '../../class/inventory-filter';
+import { InventoryAddCategoryComponent } from '../../inventory-add-category/inventory-add-category.component';
 @Component({
-    selector: 'inventory-filter',
-    templateUrl: './inventory-filter.component.html',
-    styleUrls: ['./inventory-filter.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
+  standalone: true,
+  imports: [InventoryAddCategoryComponent, CommonModule],
+  selector: 'inventory-filter',
+  templateUrl: './inventory-filter.component.html',
+  styleUrls: ['./inventory-filter.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class InventoryFilterComponent implements OnInit {
   showAddCategory: boolean = false;

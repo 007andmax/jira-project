@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { TicketProfileShare } from '../../../../class/ticket-profile-share';
 import * as moment from "moment";
@@ -5,6 +6,8 @@ import { TicketsListService } from '../../../../services/tickets-list.service';
 import { TicketProfileProduct } from '../../../../class/ticket-profile-product';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'ticket-detail-profile-updates-product-header-info',
   templateUrl: './ticket-detail-profile-updates-product-header-info.component.html',
   styleUrls: ['./ticket-detail-profile-updates-product-header-info.component.scss']

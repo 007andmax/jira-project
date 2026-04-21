@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { InvoicesService } from 'src/app/services/invoices/invoices.service';
 import { InvoicesFilter } from './class/invoices-filter';
@@ -14,16 +16,20 @@ import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toast
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { InvoicesHeaderComponent } from './invoices-header/invoices-header.component';
+import { InvoicesItemComponent } from './invoices-item/invoices-item.component';
 
 @Component({
-    selector: 'app-invoices',
-    templateUrl: './invoices.component.html',
-    styleUrls: ['./invoices.component.scss'],
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    providers: [InvoicesListService],
-    standalone: true
+  standalone: true,
+  imports: [InvoicesHeaderComponent, InvoicesItemComponent, CommonModule],
+  selector: 'app-invoices',
+  templateUrl: './invoices.component.html',
+  styleUrls: ['./invoices.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  providers: [InvoicesListService],
+  standalone: true
 })
 export class InvoicesComponent implements OnInit, OnDestroy {
   invoicesFilter: InvoicesFilter = new InvoicesFilter();

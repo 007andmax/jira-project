@@ -1,3 +1,11 @@
+﻿import { DynamicTooltipComponent } from './';
+import { MatErrorComponent } from './';
+import { PreloaderTicketComponent } from './';
+import { CompanyDropDownComponent } from './';
+import { UserCustomSubscriptionComponent } from './';
+import { UserDefaultSubscriptionComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, ViewChild, OnDestroy } from '@angular/core';
 import { UserProfile } from '../class/user-profile';
 import { UserValidate } from '../class/user-validate';
@@ -28,6 +36,8 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, MatErrorComponent, PreloaderTicketComponent, CompanyDropDownComponent, UserCustomSubscriptionComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'users-aside-edit',
   templateUrl: './users-aside-edit.component.html',
   styleUrls: ['./users-aside-edit.component.scss'],

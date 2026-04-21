@@ -1,3 +1,5 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
@@ -10,6 +12,8 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
     selector: 'app-invoices-filter',
     templateUrl: './invoices-filter.component.html',
     styleUrls: ['./invoices-filter.component.scss'],

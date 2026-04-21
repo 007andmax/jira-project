@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { HardwareService } from './../_services/hardware.service';
 import { first } from 'rxjs/operators';
@@ -9,12 +11,18 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DeviceDetailService } from '../_services/device_detail.service';
 import { Subscription } from 'rxjs';
 import * as moment from "moment";
+import { DashboardDetailsDashboardComponent } from './dashboard-details-dashboard/dashboard-details-dashboard.component';
+import { DashboardDiskDrivesComponent } from './dashboard-disk-drives/dashboard-disk-drives.component';
+import { DashboardServicesComponent } from './dashboard-services/dashboard-services.component';
+import { DashboardTagsComponent } from './dashboard-tags/dashboard-tags.component';
 
 @Component({
-    selector: 'app-dashboard',
-    templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [DashboardDetailsDashboardComponent, DashboardDiskDrivesComponent, DashboardServicesComponent, DashboardTagsComponent, CommonModule],
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss'],
+  standalone: true
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   url = environment.apiUrl + 'upload';

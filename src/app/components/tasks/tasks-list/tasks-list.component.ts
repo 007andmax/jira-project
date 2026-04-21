@@ -1,3 +1,5 @@
+﻿import { TasksListItemComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { TasksService } from 'src/app/services/tasks/tasks.service';
 import { Task } from '../class/task';
@@ -9,6 +11,8 @@ import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.servi
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
+  standalone: true,
+  imports: [TasksListItemComponent, CommonModule],
     selector: 'app-tasks-list',
     templateUrl: './tasks-list.component.html',
     styleUrls: ['./tasks-list.component.scss'],

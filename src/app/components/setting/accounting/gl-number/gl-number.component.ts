@@ -1,3 +1,8 @@
+﻿import { AddGlNumberComponent } from './';
+import { DynamicTooltipComponent } from './';
+import { MatErrorComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from "@angular/core";
 import { GlNumberService } from "./gl-number.service";
 import { ToastrService } from "ngx-toastr";
@@ -12,6 +17,8 @@ import { DELETE_GL_NUMBER } from "src/app/const/confirm";
 import { GlNumberCheckUseComponent } from "./gl-number-check-use/gl-number-check-use.component";
 declare var $: any;
 @Component({
+  standalone: true,
+  imports: [AddGlNumberComponent, DynamicTooltipComponent, MatErrorComponent, FormsModule, CommonModule],
   selector: "app-gl-number-settings",
   templateUrl: "./gl-number.component.html",
   styleUrls: ["./gl-number.component.scss"]

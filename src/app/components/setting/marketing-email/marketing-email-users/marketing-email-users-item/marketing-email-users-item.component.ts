@@ -1,8 +1,12 @@
+﻿import { DynamicTooltipComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { User } from 'src/app/components/users/class/user';
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, CommonModule],
     selector: 'marketing-email-users-item',
     templateUrl: './marketing-email-users-item.component.html',
     styleUrls: ['./marketing-email-users-item.component.scss'],

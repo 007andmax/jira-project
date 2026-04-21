@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { UserListService } from '../users/services/user-list.service';
 import { User } from '../users/class/user';
@@ -26,16 +29,19 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { fadeInAnimation } from 'src/app/animations';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { UsersTableComponent } from '../users/users-table/users-table.component';
 
 @Component({
-    selector: 'company-user',
-    templateUrl: './company-user.component.html',
-    styleUrls: ['./company-user.component.scss'],
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    providers: [UserListService],
-    standalone: true
+  standalone: true,
+  imports: [UsersTableComponent, FormsModule, CommonModule],
+  selector: 'company-user',
+  templateUrl: './company-user.component.html',
+  styleUrls: ['./company-user.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  providers: [UserListService],
+  standalone: true
 })
 export class CompanyUserComponent implements OnInit {
   users: Array<User> = [];

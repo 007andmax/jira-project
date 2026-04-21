@@ -1,3 +1,5 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, TemplateRef, OnDestroy } from "@angular/core";
 import { DatePipe } from "@angular/common";
 import { ToastrService } from "ngx-toastr";
@@ -14,6 +16,8 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { SoftwareFilter } from "./class/software-filters";
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
     selector: "app-software",
     templateUrl: "./software.component.html",
     styleUrls: ["./software.component.scss"],

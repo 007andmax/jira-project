@@ -1,14 +1,21 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
+import { MatChipListComponent } from 'src/app/components/shared/mat-chip-list/mat-chip-list.component';
+import { MatChipComponent } from 'src/app/components/shared/mat-chip/mat-chip.component';
+import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
 import { TicketDetailEditTagsComponent } from 'src/app/components/tickets/tickets/ticket-detail/ticket-detail-edit-tags/ticket-detail-edit-tags.component';
 import { TicketsPermissionsService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/tickets-permissions.service';
 
 @Component({
-    selector: 'app-file-manager-file-info-tags',
-    templateUrl: './file-manager-file-info-tags.component.html',
-    styleUrls: ['./file-manager-file-info-tags.component.scss'],
-    providers: [TicketsPermissionsService, CompanyTagsListService],
-    standalone: true
+  standalone: true,
+  imports: [MatChipComponent, MatChipListComponent, MatFormFieldComponent, CommonModule],
+  selector: 'app-file-manager-file-info-tags',
+  templateUrl: './file-manager-file-info-tags.component.html',
+  styleUrls: ['./file-manager-file-info-tags.component.scss'],
+  providers: [TicketsPermissionsService, CompanyTagsListService],
+  standalone: true
 })
 export class FileManagerFileInfoTagsComponent extends TicketDetailEditTagsComponent {
   public infiniteScrollDisabled = true;

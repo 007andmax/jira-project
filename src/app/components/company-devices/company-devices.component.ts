@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,15 +22,21 @@ import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
 import { fadeInAnimation } from 'src/app/animations';
 import { CompanyDevicesHeaderComponent } from './company-devices-header/company-devices-header.component';
+import { CompanyDevicesAsideComponent } from './company-devices-aside/company-devices-aside.component';
+import { CompanyDevicesCustomAsideComponent } from './company-devices-custom-aside/company-devices-custom-aside.component';
+import { CompanyDevicesFilterComponent } from './company-devices-filter/company-devices-filter.component';
+import { CompanyDevicesItemComponent } from './company-devices-item/company-devices-item.component';
 
 @Component({
-    selector: 'app-company-devices',
-    templateUrl: './company-devices.component.html',
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    styleUrls: ['./company-devices.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [CompanyDevicesAsideComponent, CompanyDevicesCustomAsideComponent, CompanyDevicesFilterComponent, CompanyDevicesItemComponent, FormsModule, CommonModule],
+  selector: 'app-company-devices',
+  templateUrl: './company-devices.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  styleUrls: ['./company-devices.component.scss'],
+  standalone: true
 })
 export class CompanyDevicesComponent implements OnInit, OnDestroy {
   devices: Array<DeviceCompany> = [];

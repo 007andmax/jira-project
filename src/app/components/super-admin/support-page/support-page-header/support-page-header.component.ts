@@ -1,3 +1,6 @@
+﻿import { DynamicTooltipComponent } from './';
+import { SupportPageBreadcrumbsComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -10,6 +13,8 @@ import { SupportPageCategoriesStateService } from '../../state/support-page-cate
 import { SupportPageCategoryContent } from '../class/support-page-category-content';
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, SupportPageBreadcrumbsComponent, CommonModule],
   selector: 'support-page-header',
   templateUrl: './support-page-header.component.html',
   styleUrls: ['./support-page-header.component.scss']

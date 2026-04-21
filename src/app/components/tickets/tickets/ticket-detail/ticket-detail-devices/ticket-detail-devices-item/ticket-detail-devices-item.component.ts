@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeviceCompany } from 'src/app/components/company-devices/class/device-company';
@@ -8,6 +9,8 @@ import { REBOOT_DEVICE, REMOVE_DEVICES, SHUTDOWN_DEVICE } from 'src/app/const/co
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'ticket-detail-devices-item',
   templateUrl: './ticket-detail-devices-item.component.html',
   styleUrls: ['./ticket-detail-devices-item.component.scss']

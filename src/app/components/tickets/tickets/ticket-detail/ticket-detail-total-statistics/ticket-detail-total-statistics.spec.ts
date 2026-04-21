@@ -13,8 +13,7 @@ describe('TicketDetailTotalStatisticsComponent unit test', () => {
     TestBed.configureTestingModule({
     imports: [CommonModule,
         NgbModule,
-        NoopAnimationsModule],
-    declarations: [TicketDetailTotalStatisticsComponent]
+        NoopAnimationsModule, TicketDetailTotalStatisticsComponent]
 }).compileComponents();
 
   });

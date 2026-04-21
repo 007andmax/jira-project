@@ -1,3 +1,9 @@
+﻿import { PreloaderTicketComponent } from './';
+import { CompanyDropDownComponent } from './';
+import { PreviewPhoneMaskComponent } from './';
+import { UserTableDefaultSubscriptionComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
@@ -15,6 +21,8 @@ import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
+  standalone: true,
+  imports: [PreloaderTicketComponent, CompanyDropDownComponent, PreviewPhoneMaskComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
     selector: 'app-users-details-tab-companies-add',
     templateUrl: './users-details-tab-companies-add.component.html',
     styleUrls: ['./users-details-tab-companies-add.component.scss'],

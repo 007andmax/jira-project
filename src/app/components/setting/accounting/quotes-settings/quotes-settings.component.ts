@@ -1,3 +1,5 @@
+﻿import { DropDownComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../../../../services/accounting/accounting-settings.service';
@@ -6,6 +8,8 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 
 @Component({
+  standalone: true,
+  imports: [DropDownComponent, CommonModule],
   selector: 'app-quotes-settings',
   templateUrl: './quotes-settings.component.html',
   styleUrls: ['./quotes-settings.component.scss']

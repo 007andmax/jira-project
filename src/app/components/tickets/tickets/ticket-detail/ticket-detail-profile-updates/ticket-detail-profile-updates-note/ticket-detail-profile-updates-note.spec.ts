@@ -32,13 +32,11 @@ describe('TicketDetailProfileUpdatesNoteComponent unit test', () => {
         NgbModule,
         DynamicTooltipModule,
         AngularEditorModule,
-        NoopAnimationsModule
-    ],
-    declarations: [TicketDetailProfileUpdatesNoteComponent,
+        NoopAnimationsModule, TicketDetailProfileUpdatesNoteComponent,
         TicketDetailProfileUpdatesHeaderInfoComponent,
         TicketDetailProfileUpdatesNoteItemComponent,
-        TicketDetailProfileUpdatesNoteInfoComponent,
         TicketDetailProfileUpdatesNoteEditComponent],
+    declarations: [TicketDetailProfileUpdatesNoteInfoComponent],
     providers: [UntypedFormBuilder, TicketsListService]
 }).compileComponents();
 

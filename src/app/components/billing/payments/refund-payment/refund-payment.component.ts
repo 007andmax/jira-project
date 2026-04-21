@@ -1,14 +1,20 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 import { Payment } from '../class/payment';
 import { RefundPayment } from '../class/refund-payment';
 import { PaymentsService } from 'src/app/services/payments/payments.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
 
 @Component({
-    selector: 'app-refund-payment',
-    templateUrl: './refund-payment.component.html',
-    styleUrls: ['./refund-payment.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [PreloaderTicketComponent, FormsModule, CommonModule],
+  selector: 'app-refund-payment',
+  templateUrl: './refund-payment.component.html',
+  styleUrls: ['./refund-payment.component.scss'],
+  standalone: true
 })
 export class RefundPaymentComponent implements OnInit {
   @Input() payment: Payment;

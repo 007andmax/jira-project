@@ -1,8 +1,11 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { UserCustomSubscription } from '../../class/user-custom-subscription';
 import { UserDefaultSubscription } from '../../class/user-default-subscription';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'app-user-table-subscription',
   templateUrl: './user-table-subscription.component.html',
   styleUrls: ['./user-table-subscription.component.scss'],

@@ -1,3 +1,5 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
@@ -10,6 +12,8 @@ import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toast
 import { InventoryFilterComponent } from './inventory-filter/inventory-filter.component';
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
     selector: 'inventory-header',
     templateUrl: './inventory-header.component.html',
     styleUrls: ['./inventory-header.component.scss'],

@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { Document } from '../../class/document';
@@ -5,10 +6,12 @@ import { DocumentHistory } from '../../class/document-history';
 import * as moment from "moment";
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 @Component({
-    selector: 'documents-edit-history',
-    templateUrl: './documents-edit-history.component.html',
-    styleUrls: ['./documents-edit-history.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [CommonModule],
+  selector: 'documents-edit-history',
+  templateUrl: './documents-edit-history.component.html',
+  styleUrls: ['./documents-edit-history.component.scss'],
+  standalone: true
 })
 export class DocumentsEditHistoryComponent implements OnInit {
   @Input() documentEdit: Document;

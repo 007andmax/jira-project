@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, OnDestroy, ViewContainerRef } from '@angular/core';
 import { TicketService } from './../_services/ticket.service';
 import { ToastrService } from 'ngx-toastr';
@@ -11,6 +12,8 @@ import { Subscription } from 'rxjs';
 declare var $: any;
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'app-ticket-task',
     templateUrl: './ticket-task.component.html',
     styleUrls: ['./ticket-task.component.scss'],

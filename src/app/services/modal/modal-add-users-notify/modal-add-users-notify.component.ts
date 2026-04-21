@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
@@ -7,6 +8,8 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { AddUsersNotifyStateService } from './state/add-users-notify-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'modal-add-users-notify',
   templateUrl: './modal-add-users-notify.component.html',
   styleUrls: ['./modal-add-users-notify.component.scss'],

@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { PasswordRecord } from '../../password-manager/class/password-record';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
@@ -10,13 +12,17 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { ManageCardsRealTimeService } from 'src/app/states/manage-cards/manage-cards-real-time.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { IntegrationsStateService } from 'src/app/states/integrations/integrations-state.service';
+import { ManageCardsHeaderComponent } from './manage-cards-header/manage-cards-header.component';
+import { ManageCardsTableComponent } from './manage-cards-table/manage-cards-table.component';
 
 @Component({
-    selector: 'app-manage-cards',
-    templateUrl: './manage-cards.component.html',
-    styleUrls: ['./manage-cards.component.scss'],
-    providers: [TicketsListService],
-    standalone: true
+  standalone: true,
+  imports: [ManageCardsHeaderComponent, ManageCardsTableComponent, CommonModule],
+  selector: 'app-manage-cards',
+  templateUrl: './manage-cards.component.html',
+  styleUrls: ['./manage-cards.component.scss'],
+  providers: [TicketsListService],
+  standalone: true
 })
 export class ManageCardsComponent {
   showPreloader: boolean = true;

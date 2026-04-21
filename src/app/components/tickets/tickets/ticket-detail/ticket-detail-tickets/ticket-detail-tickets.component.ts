@@ -1,3 +1,5 @@
+﻿import { TicketDetailTicketsStatusComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
@@ -9,6 +11,8 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 
 @Component({
+  standalone: true,
+  imports: [TicketDetailTicketsStatusComponent, CommonModule],
   selector: 'ticket-detail-tickets',
   templateUrl: './ticket-detail-tickets.component.html',
   styleUrls: ['./ticket-detail-tickets.component.scss']

@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { CategoryDocument } from 'src/app/components/left-panel/left-panel-documents/class/category-document';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
@@ -16,12 +19,17 @@ import { DocumentsLinkedComponent } from './documents-linked/documents-linked.co
 import { CompanyTagsStateService } from 'src/app/components/companies/company-tags/states/company-tags-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
+import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { DocumentsAddEditCategoriesComponent } from './documents-add-edit-categories/documents-add-edit-categories.component';
 
 @Component({
-    selector: 'app-documents-add-info',
-    templateUrl: './documents-add-info.component.html',
-    styleUrls: ['./documents-add-info.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [CompanyTagsComponent, MatErrorComponent, DocumentsAddEditCategoriesComponent, FormsModule, CommonModule],
+  selector: 'app-documents-add-info',
+  templateUrl: './documents-add-info.component.html',
+  styleUrls: ['./documents-add-info.component.scss'],
+  standalone: true
 })
 export class DocumentsAddInfoComponent implements OnInit, OnDestroy {
   openAside: boolean = true;

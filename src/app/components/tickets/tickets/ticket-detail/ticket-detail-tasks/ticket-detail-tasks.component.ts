@@ -1,3 +1,9 @@
+﻿import { TaskHeaderAddTypeComponent } from './';
+import { TasksDatePickerComponent } from './';
+import { TechUsersComponent } from './';
+import { TicketDetailTasksItemComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -22,6 +28,8 @@ import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.servi
 import { TicketsListService } from '../../services/tickets-list.service';
 
 @Component({
+  standalone: true,
+  imports: [TaskHeaderAddTypeComponent, TasksDatePickerComponent, TechUsersComponent, TicketDetailTasksItemComponent, FormsModule, CommonModule],
   selector: 'ticket-detail-tasks',
   templateUrl: './ticket-detail-tasks.component.html',
   styleUrls: ['./ticket-detail-tasks.component.scss'],

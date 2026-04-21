@@ -1,3 +1,5 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Quote } from '../../class/quote';
 import * as moment from "moment";
@@ -9,11 +11,13 @@ import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toast
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
-    selector: 'app-quotes-item',
-    templateUrl: './quotes-item.component.html',
-    styleUrls: ['./quotes-item.component.scss'],
-    providers: [TicketsListService],
-    standalone: true
+  standalone: true,
+  imports: [FormsModule, CommonModule],
+  selector: 'app-quotes-item',
+  templateUrl: './quotes-item.component.html',
+  styleUrls: ['./quotes-item.component.scss'],
+  providers: [TicketsListService],
+  standalone: true
 })
 export class QuotesItemComponent implements OnInit {
   createdUser: User;

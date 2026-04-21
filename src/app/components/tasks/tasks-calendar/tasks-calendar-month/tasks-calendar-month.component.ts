@@ -1,3 +1,6 @@
+﻿import { TaskHeaderAddComponent } from './';
+import { TasksCalendarMonthItemWeekComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import * as moment from "moment";
 import { CalendarMonth } from '../../class/calenadar-month';
@@ -11,6 +14,8 @@ import { Subscription } from 'rxjs';
 import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
 
 @Component({
+  standalone: true,
+  imports: [TaskHeaderAddComponent, TasksCalendarMonthItemWeekComponent, CommonModule],
     selector: 'app-tasks-calendar-month',
     templateUrl: './tasks-calendar-month.component.html',
     styleUrls: ['./tasks-calendar-month.component.scss'],

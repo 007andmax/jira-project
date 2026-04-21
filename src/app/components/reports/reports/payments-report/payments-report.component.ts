@@ -1,3 +1,5 @@
+﻿import { ReportMenuComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { User } from 'src/app/components/users/class/user';
 import { Company } from 'src/app/interfaces/company/company';
@@ -7,6 +9,8 @@ import * as moment from 'moment';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 
 @Component({
+  standalone: true,
+  imports: [ReportMenuComponent, CommonModule],
     selector: 'payments-report',
     templateUrl: './payments-report.component.html',
     styleUrls: ['./payments-report.component.scss'],

@@ -37,8 +37,7 @@ describe('UsersDetailsLeftPanelComponent unit test', () => {
             timeOut: 5000,
             onActivateTick: true
         }),
-        NoopAnimationsModule],
-    declarations: [UsersDetailsLeftPanelComponent]
+        NoopAnimationsModule, UsersDetailsLeftPanelComponent]
 }).compileComponents();
 
   });

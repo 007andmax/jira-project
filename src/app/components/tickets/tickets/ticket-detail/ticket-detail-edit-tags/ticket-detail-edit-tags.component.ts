@@ -1,3 +1,7 @@
+﻿import { MatChipComponent } from './';
+import { MatChipListComponent } from './';
+import { MatFormFieldComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { UntypedFormControl } from '@angular/forms';
@@ -13,6 +17,8 @@ import { FileManagementStateService } from 'src/app/states/file-management/file-
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 
 @Component({
+  standalone: true,
+  imports: [MatChipComponent, MatChipListComponent, MatFormFieldComponent, CommonModule],
   selector: 'ticket-detail-edit-tags',
   templateUrl: './ticket-detail-edit-tags.component.html',
   styleUrls: ['./ticket-detail-edit-tags.component.scss'],

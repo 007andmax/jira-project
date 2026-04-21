@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { REMOVE_ATTACHMENT } from 'src/app/const/confirm';
@@ -5,6 +6,8 @@ import { TicketProfileAttachmentsComponent } from '../../ticket-edit-aside/ticke
 import { TicketProfile } from '../../class/ticket-profile';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'ticket-detail-attachments',
   templateUrl: './ticket-detail-attachments.component.html',
   styleUrls: ['./ticket-detail-attachments.component.scss']

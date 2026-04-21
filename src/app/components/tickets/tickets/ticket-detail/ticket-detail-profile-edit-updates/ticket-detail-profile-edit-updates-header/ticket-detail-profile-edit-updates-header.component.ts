@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/components/users/class/user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -5,6 +6,8 @@ import { TicketProfileUpdate } from '../../../class/ticket-profile-update';
 import { TicketsListService } from '../../../services/tickets-list.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'ticket-detail-profile-edit-updates-header',
   templateUrl: './ticket-detail-profile-edit-updates-header.component.html',
   styleUrls: ['./ticket-detail-profile-edit-updates-header.component.scss'],

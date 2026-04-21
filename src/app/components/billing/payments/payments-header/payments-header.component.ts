@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { PaymentsService } from 'src/app/services/payments/payments.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
@@ -6,12 +8,15 @@ import { AppService } from 'src/app/states/app/app.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { PaymentsStateService } from 'src/app/states/payments/payments-state.service';
 import { PaymentsFilterComponent } from './payments-filter/payments-filter.component';
+import { InvoiceExportComponent } from '../../invoices/invoices-header/invoice-export/invoice-export.component';
 
 @Component({
-    selector: 'app-payments-header',
-    templateUrl: './payments-header.component.html',
-    styleUrls: ['./payments-header.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [InvoiceExportComponent, CommonModule],
+  selector: 'app-payments-header',
+  templateUrl: './payments-header.component.html',
+  styleUrls: ['./payments-header.component.scss'],
+  standalone: true
 })
 export class PaymentsHeaderComponent implements OnInit {
   @ViewChild('filter', { static: true }) filter: PaymentsFilterComponent;

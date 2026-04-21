@@ -1,9 +1,13 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
     selector: 'app-manage-tags-devices-add',
     templateUrl: './manage-tags-devices-add.component.html',
     styleUrls: ['./manage-tags-devices-add.component.scss'],

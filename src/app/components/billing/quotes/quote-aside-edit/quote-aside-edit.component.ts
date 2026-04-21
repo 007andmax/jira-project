@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -10,12 +12,16 @@ import { QuoteEdit } from '../class/quote-edit';
 import { QuotePreview } from '../class/quote-preview';
 import { QuoteValdiateEdit } from '../class/quote-vildate-edit';
 import { QuoteAsideEditBodyComponent } from './quote-aside-edit-body/quote-aside-edit-body.component';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
+import { QuoteAsidePreviewBodyComponent } from '../quote-aside-preview/quote-aside-preview-body/quote-aside-preview-body.component';
 
 @Component({
-    selector: 'app-quote-aside-edit',
-    templateUrl: './quote-aside-edit.component.html',
-    styleUrls: ['./quote-aside-edit.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [PreloaderTicketComponent, QuoteAsidePreviewBodyComponent, CommonModule],
+  selector: 'app-quote-aside-edit',
+  templateUrl: './quote-aside-edit.component.html',
+  styleUrls: ['./quote-aside-edit.component.scss'],
+  standalone: true
 })
 export class QuoteAsideEditComponent implements OnInit, OnDestroy {
   @ViewChild('saveAndSendBtn', { static: false }) saveAndSendBtn: DisabledBtnDirective;

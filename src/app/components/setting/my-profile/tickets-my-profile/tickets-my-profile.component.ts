@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
@@ -6,6 +7,8 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'tickets-my-profile',
   templateUrl: './tickets-my-profile.component.html',
   styleUrls: ['./tickets-my-profile.component.scss']

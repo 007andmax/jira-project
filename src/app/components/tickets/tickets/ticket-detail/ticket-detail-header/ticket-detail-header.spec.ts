@@ -25,8 +25,7 @@ describe('TicketDetailHeaderComponent unit test', () => {
         NgbModule,
         DisabledBtnModule,
         PreloaderTicketModule,
-        NoopAnimationsModule],
-    declarations: [TicketDetailHeaderComponent]
+        NoopAnimationsModule, TicketDetailHeaderComponent]
 }).compileComponents();
 
   });

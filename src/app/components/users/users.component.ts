@@ -1,3 +1,7 @@
+﻿import { UsersFilterComponent } from './';
+import { UsersTableComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { User } from './class/user';
 import { UsersStateService } from '../../states/users/users-state.service';
@@ -29,6 +33,8 @@ import { fadeInAnimation } from 'src/app/animations';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
+  standalone: true,
+  imports: [UsersFilterComponent, UsersTableComponent, FormsModule, CommonModule],
     selector: 'app-users',
     templateUrl: './users.component.html',
     styleUrls: ['./users.component.scss'],

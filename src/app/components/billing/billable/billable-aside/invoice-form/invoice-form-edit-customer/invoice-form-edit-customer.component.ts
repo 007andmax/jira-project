@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, Input, ChangeDetectorRef, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
 import { CompaniesService } from 'src/app/services/company/companies.service';
@@ -6,9 +9,12 @@ import { CompanyInvoiceValdiate } from './class/company-invoice-validate';
 import { Subscription } from 'rxjs';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 declare const google: any;
 
 @Component({
+  standalone: true,
+  imports: [MatErrorComponent, FormsModule, CommonModule],
   selector: 'app-invoice-form-edit-customer',
   templateUrl: './invoice-form-edit-customer.component.html',
   styleUrls: ['./invoice-form-edit-customer.component.scss']

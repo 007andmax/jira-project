@@ -1,9 +1,12 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { SuperAdminPublicStateService } from 'src/app/states/super-admin-public/super-admin-public-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'help-center-info-aside',
   templateUrl: './help-center-info-aside.component.html',
   styleUrls: ['./help-center-info-aside.component.scss']

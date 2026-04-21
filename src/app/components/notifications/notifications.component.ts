@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NotificationsService } from 'src/app/services/notifications/notifications.service';
@@ -13,6 +14,8 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'app-notifications',
     templateUrl: './notifications.component.html',
     styleUrls: ['./notifications.component.scss'],

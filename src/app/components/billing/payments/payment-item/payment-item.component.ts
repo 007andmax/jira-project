@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Payment } from '../class/payment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +13,8 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'app-payment-item',
     templateUrl: './payment-item.component.html',
     styleUrls: ['./payment-item.component.scss'],

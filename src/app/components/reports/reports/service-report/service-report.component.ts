@@ -1,3 +1,5 @@
+﻿import { ReportMenuComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -11,6 +13,8 @@ import { Subscription } from 'rxjs';
 
 
 @Component({
+  standalone: true,
+  imports: [ReportMenuComponent, CommonModule],
     selector: 'app-service-report',
     templateUrl: './service-report.component.html',
     styleUrls: ['./service-report.component.scss'],

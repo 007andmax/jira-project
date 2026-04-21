@@ -1,3 +1,5 @@
+﻿import { RecurringTicketsTableAssignedUserMoreComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { RecurringTicket } from '../class/recurring-ticket';
 import { MONTHS_SHORT } from 'src/app/const/date';
@@ -9,6 +11,8 @@ import { AddAssignedUserComponent } from '../../tickets/ticket-edit-aside/add-as
 
 
 @Component({
+  standalone: true,
+  imports: [RecurringTicketsTableAssignedUserMoreComponent, CommonModule],
     selector: 'app-recurring-tickets-table',
     templateUrl: './recurring-tickets-table.component.html',
     styleUrls: ['./recurring-tickets-table.component.scss'],

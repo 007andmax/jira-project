@@ -1,12 +1,17 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { InvoiceProfileTicket } from '../../../class/invoice-profile-ticket';
 import * as moment from "moment";
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 
 @Component({
-    selector: 'app-invoice-form-ticket-info',
-    templateUrl: './invoice-form-ticket-info.component.html',
-    styleUrls: ['./invoice-form-ticket-info.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [DynamicTooltipComponent, CommonModule],
+  selector: 'app-invoice-form-ticket-info',
+  templateUrl: './invoice-form-ticket-info.component.html',
+  styleUrls: ['./invoice-form-ticket-info.component.scss'],
+  standalone: true
 })
 export class InvoiceFormTicketInfoComponent implements OnInit {
   @Input() ticket: InvoiceProfileTicket;

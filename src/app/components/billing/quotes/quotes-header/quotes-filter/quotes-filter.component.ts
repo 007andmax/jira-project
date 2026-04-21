@@ -1,3 +1,5 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
@@ -10,10 +12,12 @@ import { QuoteFilter } from '../../class/quote-filter';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
-    selector: 'app-quotes-filter',
-    templateUrl: './quotes-filter.component.html',
-    styleUrls: ['./quotes-filter.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [FormsModule, CommonModule],
+  selector: 'app-quotes-filter',
+  templateUrl: './quotes-filter.component.html',
+  styleUrls: ['./quotes-filter.component.scss'],
+  standalone: true
 })
 export class QuotesFilterComponent implements OnInit, OnDestroy {
   @ViewChild('companyDp', { static: true }) companyDp: CompanyDropDownComponent;

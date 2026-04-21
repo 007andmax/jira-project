@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { BillableProfile } from '../class/billable-profile';
@@ -19,15 +22,18 @@ import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-ed
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { fadeInAnimation } from 'src/app/animations';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
+import { BillableAsideComponent } from '../billable-aside/billable-aside.component';
 
 @Component({
-    selector: 'billable-tickets',
-    templateUrl: './billable-tickets.component.html',
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    styleUrls: ['./billable-tickets.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [BillableAsideComponent, FormsModule, CommonModule],
+  selector: 'billable-tickets',
+  templateUrl: './billable-tickets.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  styleUrls: ['./billable-tickets.component.scss'],
+  standalone: true
 })
 export class BillableTicketsComponent implements OnInit, OnDestroy {
   billableProfile: BillableProfile = null;

@@ -1,3 +1,5 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy } from '@angular/core';
 import { merge, Observable, Subject, Subscription } from "rxjs";
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
@@ -8,6 +10,8 @@ import { DurationStateService } from './services/duration-state.service';
 import { DurationService } from './services/duration.service';
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
     selector: 'app-duration',
     templateUrl: './duration.component.html',
     styleUrls: ['./duration.component.scss'],

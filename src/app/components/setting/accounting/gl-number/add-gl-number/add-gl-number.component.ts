@@ -1,3 +1,6 @@
+﻿import { MatErrorComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -5,6 +8,8 @@ import { GlNumber } from 'src/class/gl-number/gl-number';
 import { GlNumberService } from '../gl-number.service';
 
 @Component({
+  standalone: true,
+  imports: [MatErrorComponent, FormsModule, CommonModule],
   selector: 'add-gl-number',
   templateUrl: './add-gl-number.component.html',
   styleUrls: ['./add-gl-number.component.scss']

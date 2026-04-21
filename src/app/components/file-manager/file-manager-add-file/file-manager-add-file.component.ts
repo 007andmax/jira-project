@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
@@ -6,13 +8,19 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
+import { FileManagementAddFileDragDropComponent } from './file-manager-add-file-drag-drop/file-manager-add-file-drag-drop.component';
+import { FileManagerAddFileTagsComponent } from './file-manager-add-file-tags/file-manager-add-file-tags.component';
 
 @Component({
-    selector: 'app-file-manager-add-file',
-    templateUrl: './file-manager-add-file.component.html',
-    styleUrls: ['./file-manager-add-file.component.scss'],
-    providers: [NgbModalConfig, NgbModal],
-    standalone: true
+  standalone: true,
+  imports: [FileManagementAddFileDragDropComponent, FileManagerAddFileTagsComponent, MatErrorComponent, PreloaderTicketComponent, CommonModule],
+  selector: 'app-file-manager-add-file',
+  templateUrl: './file-manager-add-file.component.html',
+  styleUrls: ['./file-manager-add-file.component.scss'],
+  providers: [NgbModalConfig, NgbModal],
+  standalone: true
 })
 export class FileManagerAddFileComponent implements OnInit {
   @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;

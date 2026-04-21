@@ -1,3 +1,6 @@
+﻿import { MatErrorComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { TicketProfileFormService } from '../../../ticket-edit-aside/class/ticket-profile-form-service';
 import { Subscription } from 'rxjs';
@@ -13,6 +16,8 @@ import { TicketProfileUpdatesServiceDurationComponent } from '../../../ticket-ed
 import { TicketProfileUpdatesServiceTimepickerComponent } from '../../../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
 
 @Component({
+  standalone: true,
+  imports: [MatErrorComponent, FormsModule, CommonModule],
     selector: 'ticket-detail-profile-form-update-services',
     templateUrl: './ticket-detail-profile-form-update-services.component.html',
     styleUrls: ['./ticket-detail-profile-form-update-services.component.scss'],

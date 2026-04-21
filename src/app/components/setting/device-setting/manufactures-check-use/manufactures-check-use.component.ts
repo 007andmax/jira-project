@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { ManufacturesCheckUseItem } from './class/manufactures-check-use-item';
@@ -10,6 +11,8 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { ModelDevice } from 'src/app/components/company-devices/company-devices-custom-aside/class/model-device';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'app-manufactures-check-use',
   templateUrl: './manufactures-check-use.component.html',
   styleUrls: ['./manufactures-check-use.component.scss'],

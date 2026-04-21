@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
@@ -5,6 +6,8 @@ import { TaxesService } from 'src/app/services/taxes/taxes.service';
 
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'taxes-add',
   templateUrl: './taxes-add.component.html',
   styleUrls: ['./taxes-add.component.scss']

@@ -1,8 +1,11 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DeviceExtended } from '../../class/device-extended';
 import { DeviceCompany } from '../../class/device-company';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'app-company-devices-aside-device-icon',
     templateUrl: './company-devices-aside-device-icon.component.html',
     styleUrls: ['./company-devices-aside-device-icon.component.scss'],

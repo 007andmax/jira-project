@@ -33,8 +33,7 @@ describe('CompanyProfileApiKeysAddAsideComponent unit test', () => {
             timeOut: 5000,
             onActivateTick: true
         }),
-        NoopAnimationsModule],
-    declarations: [CompanyProfileApiKeysAddAsideComponent]
+        NoopAnimationsModule, CompanyProfileApiKeysAddAsideComponent]
 }).compileComponents();
 
   });

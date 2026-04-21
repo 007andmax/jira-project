@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DeviceExtended } from '../../class/device-extended';
 import { DeviceCompany } from '../../class/device-company';
@@ -9,6 +10,8 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'app-company-devices-aside-network-tab',
     templateUrl: './company-devices-aside-network-tab.component.html',
     styleUrls: ['./company-devices-aside-network-tab.component.scss'],

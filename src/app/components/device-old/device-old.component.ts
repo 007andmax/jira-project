@@ -1,3 +1,6 @@
+﻿
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonHttpServices } from './_services/common_http.service';
@@ -19,13 +22,16 @@ import { CompanyDevicesRemoteAccessComponent } from '../company-devices/company-
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { Device } from '../company-devices/class/device';
+import { NavOldComponent } from './nav/nav.component';
 declare var $: any;
 
 @Component({
-    selector: 'device-old',
-    templateUrl: './device-old.component.html',
-    styleUrls: ['./device-old.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [NavOldComponent, RouterModule, CommonModule],
+  selector: 'device-old',
+  templateUrl: './device-old.component.html',
+  styleUrls: ['./device-old.component.scss'],
+  standalone: true
 })
 export class DeviceOldComponent implements OnInit, OnDestroy {
   totalSeconds: any = 0;

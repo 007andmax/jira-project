@@ -1,8 +1,13 @@
+﻿import { OverviewReportComponent } from './';
+import { ReportMenuComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProductSalesReport } from '../../class/product-sales-report';
 import * as moment from "moment";
 
 @Component({
+  standalone: true,
+  imports: [OverviewReportComponent, ReportMenuComponent, CommonModule],
     selector: 'app-product-sales-report',
     templateUrl: './product-sales-report.component.html',
     styleUrls: ['./product-sales-report.component.scss'],

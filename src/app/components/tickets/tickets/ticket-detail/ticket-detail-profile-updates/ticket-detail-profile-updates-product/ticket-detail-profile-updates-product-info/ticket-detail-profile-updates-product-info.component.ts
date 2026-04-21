@@ -1,3 +1,6 @@
+﻿import { DynamicTooltipComponent } from './';
+import { TechUsersComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { REMOVE_UPDATE_TICKET_DETAIL_PRODUCT } from 'src/app/const/confirm';
@@ -16,6 +19,8 @@ import { TicketStateService } from '../../../../ticket-edit-aside/services/ticke
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, TechUsersComponent, CommonModule],
   selector: 'ticket-detail-profile-updates-product-info',
   templateUrl: './ticket-detail-profile-updates-product-info.component.html',
   styleUrls: ['./ticket-detail-profile-updates-product-info.component.scss']

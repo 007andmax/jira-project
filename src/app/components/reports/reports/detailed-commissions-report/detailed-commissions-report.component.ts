@@ -1,9 +1,13 @@
+﻿import { ReportMenuComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DetailedCommissionsReport } from '../../class/detailed-commissions-report';
 import * as moment from "moment";
 
 @Component({
+  standalone: true,
+  imports: [ReportMenuComponent, CommonModule],
     selector: 'detailed-commissions-report',
     templateUrl: './detailed-commissions-report.component.html',
     styleUrls: ['./detailed-commissions-report.component.css'],

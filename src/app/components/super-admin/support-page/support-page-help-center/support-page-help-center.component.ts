@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -5,6 +6,8 @@ import { SupportPageCategory } from '../../left-panel-super-admin-categories/cla
 import { SupportPageCategoriesStateService } from '../../state/support-page-categories/support-page-categories-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'support-page-help-center',
   templateUrl: './support-page-help-center.component.html',
   styleUrls: ['./support-page-help-center.component.scss']

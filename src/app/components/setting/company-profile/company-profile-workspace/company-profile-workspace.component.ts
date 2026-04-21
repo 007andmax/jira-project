@@ -1,9 +1,13 @@
+﻿import { MatErrorComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { CompanyProfileService } from 'src/app/services/setting/company-profile.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
+  standalone: true,
+  imports: [MatErrorComponent, CommonModule],
   selector: 'app-company-profile-workspace',
   templateUrl: './company-profile-workspace.component.html',
   styleUrls: ['./company-profile-workspace.component.scss']

@@ -1,3 +1,5 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { TicketProfileService } from '../../../class/ticket-profile-service';
 import { TicketProfileUpdate } from '../../../class/ticket-profile-update';
@@ -15,6 +17,8 @@ import { TicketProfileUpdatesServiceDurationComponent } from '../../../ticket-ed
 import { TicketProfileUpdatesServiceTimepickerComponent } from '../../../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
   selector: 'ticket-detail-profile-edit-updates-services',
   templateUrl: './ticket-detail-profile-edit-updates-services.component.html',
   styleUrls: ['./ticket-detail-profile-edit-updates-services.component.scss']

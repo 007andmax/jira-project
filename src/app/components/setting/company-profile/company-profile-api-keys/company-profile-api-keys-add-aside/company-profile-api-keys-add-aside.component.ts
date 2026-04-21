@@ -1,3 +1,6 @@
+﻿import { MatErrorComponent } from './';
+import { PreloaderTicketComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ApiKeys } from '../class/api-keys';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
@@ -7,6 +10,8 @@ import { ApiKeysService } from 'src/app/services/api-keys/api-keys.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
+  standalone: true,
+  imports: [MatErrorComponent, PreloaderTicketComponent, CommonModule],
   selector: 'app-company-profile-api-keys-add-aside',
   templateUrl: './company-profile-api-keys-add-aside.component.html',
   styleUrls: ['./company-profile-api-keys-add-aside.component.scss']

@@ -27,8 +27,7 @@ describe('TicketDetailChangeCompanyComponent unit test', () => {
         NoopAnimationsModule,
         DynamicTooltipModule,
         DropDownModule,
-        CompanyDropDownModule],
-    declarations: [TicketDetailChangeCompanyComponent],
+        CompanyDropDownModule, TicketDetailChangeCompanyComponent],
     providers: [TicketsPermissionsService]
 }).compileComponents();
 

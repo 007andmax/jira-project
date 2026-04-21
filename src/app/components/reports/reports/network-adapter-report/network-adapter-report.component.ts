@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
@@ -16,6 +17,8 @@ import { DeviceNetworkAdapterReportFilter } from './Class/network-adapter-report
 import { Subscription } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'network-adapter-report',
     templateUrl: './network-adapter-report.component.html',
     styleUrls: ['./network-adapter-report.component.scss'],

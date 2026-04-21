@@ -1,9 +1,12 @@
+﻿import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { environment } from 'src/environments/environment';
 
 declare const CodeMirror: any;
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'app-documents-add-body',
   templateUrl: './documents-add-body.component.html',
   styleUrls: ['./documents-add-body.component.scss']

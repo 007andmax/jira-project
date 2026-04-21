@@ -34,9 +34,8 @@ describe('CompanyDashDetailComponent unit test', () => {
             timeOut: 5000,
             onActivateTick: true
         }),
-        NoopAnimationsModule],
+        NoopAnimationsModule, CompanyDashDetailComponent],
     providers: [{ provide: Router, useValue: mockRouter }],
-    declarations: [CompanyDashDetailComponent],
 }).compileComponents();
 
   });

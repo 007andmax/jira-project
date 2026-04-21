@@ -1,13 +1,19 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Service } from 'src/app/interfaces/service/service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { QuoteAddService } from '../../class/quote-add-service';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
-    selector: 'app-service-item-quote',
-    templateUrl: './service-item-quote.component.html',
-    styleUrls: ['./service-item-quote.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [DropDownComponent, FormsModule, CommonModule],
+  selector: 'app-service-item-quote',
+  templateUrl: './service-item-quote.component.html',
+  styleUrls: ['./service-item-quote.component.scss'],
+  standalone: true
 })
 export class ServiceItemQuoteComponent implements OnInit {
   @Input() service: QuoteAddService;

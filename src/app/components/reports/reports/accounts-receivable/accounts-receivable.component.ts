@@ -1,8 +1,12 @@
+﻿import { ReportMenuComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AccountsReceivable } from '../../class/accounts-receivable';
 import { AccountsReceivableItem } from './class/accounts-receivable-item';
 
 @Component({
+  standalone: true,
+  imports: [ReportMenuComponent, CommonModule],
     selector: 'app-accounts-receivable',
     templateUrl: './accounts-receivable.component.html',
     styleUrls: ['./accounts-receivable.component.scss'],

@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { User } from 'src/app/components/users/class/user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -9,6 +10,8 @@ import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tick
 import { Subscription } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'ticket-detail-add-assigned-user',
   templateUrl: './ticket-detail-add-assigned-user.component.html',
   styleUrls: ['./ticket-detail-add-assigned-user.component.scss']

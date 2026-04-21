@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { CompanyProfile } from '../class/company-profile';
 import { CompaniesService } from 'src/app/services/company/companies.service';
@@ -6,8 +8,13 @@ import { CompanyValdiate } from '../class/company-validate';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/states/app/app.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
+import { CompanyAddAsideFullComponent } from './company-add-aside-full/company-add-aside-full.component';
+import { CompanyAddAsideShortComponent } from './company-add-aside-short/company-add-aside-short.component';
 
 @Component({
+  standalone: true,
+  imports: [PreloaderTicketComponent, CompanyAddAsideFullComponent, CompanyAddAsideShortComponent, CommonModule],
   selector: 'app-company-add-aside',
   templateUrl: './company-add-aside.component.html',
   styleUrls: ['./company-add-aside.component.scss']

@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { BreadcrumbsItem } from 'src/app/components/file-manager/class/breadcrumbs-item';
@@ -6,12 +8,16 @@ import { FileManagerFile } from 'src/app/components/file-manager/class/file-mana
 import { FileManagerCategoryComponent } from 'src/app/components/file-manager/file-manager-category/file-manager-category.component';
 import { FileManagerHeaderComponent } from 'src/app/components/file-manager/file-manager-header/file-manager-header.component';
 import { REMOVE_CATEGORY_FILES, REMOVE_FILE } from 'src/app/const/confirm';
+import { CompanyFileManagerHeaderComponent } from '../company-file-manager-header/company-file-manager-header.component';
+import { FileManagerFileInfoComponent } from 'src/app/components/file-manager/file-manager-file-info/file-manager-file-info.component';
 
 @Component({
-    selector: 'app-company-file-manager-category',
-    templateUrl: './company-file-manager-category.component.html',
-    styleUrls: ['./company-file-manager-category.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [CompanyFileManagerHeaderComponent, FileManagerFileInfoComponent, CommonModule],
+  selector: 'app-company-file-manager-category',
+  templateUrl: './company-file-manager-category.component.html',
+  styleUrls: ['./company-file-manager-category.component.scss'],
+  standalone: true
 })
 export class CompanyFileManagerCategoryComponent extends FileManagerCategoryComponent {
   ngOnInit() {

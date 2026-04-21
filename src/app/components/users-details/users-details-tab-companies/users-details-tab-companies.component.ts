@@ -1,3 +1,6 @@
+﻿import { UsersDetailsTabCompaniesAddComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { UserProfile } from '../../users/class/user-profile';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -6,6 +9,8 @@ import { Subscription } from 'rxjs';
 import { UsersDetailsTabCompaniesItemComponent } from './users-details-tab-companies-item/users-details-tab-companies-item.component';
 
 @Component({
+  standalone: true,
+  imports: [UsersDetailsTabCompaniesAddComponent, FormsModule, CommonModule],
     selector: 'app-users-details-tab-companies',
     templateUrl: './users-details-tab-companies.component.html',
     styleUrls: ['./users-details-tab-companies.component.scss'],

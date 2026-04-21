@@ -1,3 +1,7 @@
+﻿import { DynamicTooltipComponent } from './';
+import { TicketDetailProfileUpdatesProductHeaderInfoComponent } from './';
+import { TicketDetailProfileUpdatesProductItemComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { REMOVE_UPDATE_TICKET_DETAIL, REMOVE_UPDATE_TICKET_DETAIL_PRODUCT } from 'src/app/const/confirm';
@@ -10,6 +14,8 @@ import { TicketsListService } from '../../../services/tickets-list.service';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, TicketDetailProfileUpdatesProductHeaderInfoComponent, TicketDetailProfileUpdatesProductItemComponent, CommonModule],
   selector: 'ticket-detail-profile-updates-product',
   templateUrl: './ticket-detail-profile-updates-product.component.html',
   styleUrls: ['./ticket-detail-profile-updates-product.component.scss']

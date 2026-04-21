@@ -1,3 +1,7 @@
+﻿import { InvoiceFormTicketEditTaxesComponent } from './';
+import { MatErrorComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { TicketProfileFormProduct } from '../../../ticket-edit-aside/class/ticket-profile-form-product';
 import { Subscription } from 'rxjs';
@@ -8,6 +12,8 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
+  standalone: true,
+  imports: [InvoiceFormTicketEditTaxesComponent, MatErrorComponent, FormsModule, CommonModule],
     selector: 'ticket-detail-profile-form-update-products',
     templateUrl: './ticket-detail-profile-form-update-products.component.html',
     styleUrls: ['./ticket-detail-profile-form-update-products.component.scss'],

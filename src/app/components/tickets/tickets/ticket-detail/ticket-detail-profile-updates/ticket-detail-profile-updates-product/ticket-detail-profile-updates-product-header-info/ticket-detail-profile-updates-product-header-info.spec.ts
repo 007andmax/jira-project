@@ -26,9 +26,7 @@ describe('TicketDetailProfileUpdatesProductHeaderInfoComponent unit test', () =>
         }),
         CommonModule,
         NgbModule,
-        NoopAnimationsModule
-    ],
-    declarations: [TicketDetailProfileUpdatesProductHeaderInfoComponent],
+        NoopAnimationsModule, TicketDetailProfileUpdatesProductHeaderInfoComponent],
     providers: [TicketsListService]
 }).compileComponents();
 

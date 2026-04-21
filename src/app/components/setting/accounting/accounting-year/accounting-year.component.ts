@@ -1,3 +1,5 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -5,6 +7,8 @@ import { CompanyProfileService } from 'src/app/services/setting/company-profile.
 import * as moment from "moment";
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
   selector: 'accounting-year',
   templateUrl: './accounting-year.component.html',
   styleUrls: ['./accounting-year.component.scss']

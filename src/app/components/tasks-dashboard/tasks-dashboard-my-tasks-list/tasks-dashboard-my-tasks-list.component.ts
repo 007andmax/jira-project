@@ -1,3 +1,5 @@
+﻿import { TasksListItemComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { TasksListComponent } from '../../tasks/tasks-list/tasks-list.component';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
@@ -7,6 +9,8 @@ import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { Task } from '../../tasks/class/task';
 
 @Component({
+  standalone: true,
+  imports: [TasksListItemComponent, CommonModule],
     selector: 'app-tasks-dashboard-my-tasks-list',
     templateUrl: './tasks-dashboard-my-tasks-list.component.html',
     styleUrls: ['./tasks-dashboard-my-tasks-list.component.scss'],

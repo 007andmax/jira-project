@@ -1,3 +1,5 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { CalendarMonth } from '../class/calenadar-month';
 import { TasksService } from 'src/app/services/tasks/tasks.service';
@@ -11,6 +13,8 @@ import { TasksFilters } from '../class/tasks-filters';
 import { Subscription } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
     selector: 'app-tasks-calendar',
     templateUrl: './tasks-calendar.component.html',
     styleUrls: ['./tasks-calendar.component.scss'],

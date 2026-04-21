@@ -1,8 +1,12 @@
+﻿import { ReportMenuComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DetailContractreport } from '../../class/detail-contract-report';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
+  standalone: true,
+  imports: [ReportMenuComponent, CommonModule],
     selector: 'detailed-contract-report',
     templateUrl: './detailed-contract-report.component.html',
     styleUrls: ['./detailed-contract-report.component.scss'],

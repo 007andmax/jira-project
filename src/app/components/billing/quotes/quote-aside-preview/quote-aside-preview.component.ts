@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { QuotePreview } from '../class/quote-preview';
 import * as moment from "moment";
@@ -12,12 +14,15 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { QUOTE_MODAL_ACTION_PREVIEW } from 'src/app/const/quote';
 import { QuoteRealTimeService } from '../quote-realtime/quote-realtime.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { QuoteAsidePreviewBodyComponent } from './quote-aside-preview-body/quote-aside-preview-body.component';
 
 @Component({
-    selector: 'app-quote-aside-preview',
-    templateUrl: './quote-aside-preview.component.html',
-    styleUrls: ['./quote-aside-preview.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [QuoteAsidePreviewBodyComponent, CommonModule],
+  selector: 'app-quote-aside-preview',
+  templateUrl: './quote-aside-preview.component.html',
+  styleUrls: ['./quote-aside-preview.component.scss'],
+  standalone: true
 })
 export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
   quote: QuotePreview;

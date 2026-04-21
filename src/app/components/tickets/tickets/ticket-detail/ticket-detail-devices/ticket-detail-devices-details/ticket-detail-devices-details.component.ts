@@ -1,3 +1,5 @@
+﻿import { TicketDetailDevicesItemComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DeviceCompany } from 'src/app/components/company-devices/class/device-company';
 import { TicketProfile } from '../../../class/ticket-profile';
@@ -10,6 +12,8 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
 import { DevicesRealTimeService } from 'src/app/states/devices/devices-real-time.service';
 
 @Component({
+  standalone: true,
+  imports: [TicketDetailDevicesItemComponent, CommonModule],
   selector: 'ticket-detail-devices-details',
   templateUrl: './ticket-detail-devices-details.component.html',
   styleUrls: ['./ticket-detail-devices-details.component.scss']

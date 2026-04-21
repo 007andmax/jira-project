@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FileManagerCategoryComponent } from '../file-manager-category/file-manager-category.component';
 import { BreadcrumbsItem } from '../class/breadcrumbs-item';
@@ -6,15 +8,19 @@ import { FileManagerFile } from '../class/file-manager-file';
 import { REMOVE_CATEGORY_FILES, REMOVE_FILE } from 'src/app/const/confirm';
 import { fadeInAnimation } from 'src/app/animations';
 import * as moment from "moment";
+import { FileManagerFileInfoComponent } from '../file-manager-file-info/file-manager-file-info.component';
+import { FileManagerHeaderComponent } from '../file-manager-header/file-manager-header.component';
 
 @Component({
-    selector: 'app-file-manager-all-customer-company',
-    templateUrl: './file-manager-all-customer-company.component.html',
-    styleUrls: ['./file-manager-all-customer-company.component.scss'],
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    standalone: true,
+  standalone: true,
+  imports: [FileManagerFileInfoComponent, FileManagerHeaderComponent, CommonModule],
+  selector: 'app-file-manager-all-customer-company',
+  templateUrl: './file-manager-all-customer-company.component.html',
+  styleUrls: ['./file-manager-all-customer-company.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  standalone: true,
 })
 export class FileManagerAllCustomerCompanyComponent extends FileManagerCategoryComponent {
   companyId: string;

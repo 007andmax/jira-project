@@ -30,8 +30,7 @@ describe('TicketDetailProfileUpdatesServiceInfoComponent unit test', () => {
         DynamicTooltipModule,
         TechUsersModule,
         DatePickerModule,
-        NoopAnimationsModule],
-    declarations: [TicketDetailProfileUpdatesServiceInfoComponent],
+        NoopAnimationsModule, TicketDetailProfileUpdatesServiceInfoComponent],
     providers: [TicketsListService]
 }).compileComponents();
 

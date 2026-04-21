@@ -1,3 +1,8 @@
+﻿import { CompanyTagsComponent } from './';
+import { DynamicTooltipComponent } from './';
+import { MatErrorComponent } from './';
+import { UserCustomSubscriptionComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { UserProfile } from '../../users/class/user-profile';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
@@ -25,6 +30,8 @@ import { Subscription } from 'rxjs';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CompanyTagsComponent, DynamicTooltipComponent, MatErrorComponent, UserCustomSubscriptionComponent, CommonModule],
   selector: 'app-users-details-left-panel',
   templateUrl: './users-details-left-panel.component.html',
   styleUrls: ['./users-details-left-panel.component.scss'],

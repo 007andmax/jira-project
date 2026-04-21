@@ -1,3 +1,8 @@
+﻿import { MatErrorComponent } from './';
+import { PreloaderTicketComponent } from './';
+import { DraftEmailUserRecipientsComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { DraftEmail } from '../../../shared/draft-email/class/draft-email';
 import { FilesInfo } from '../../../shared/draft-email/class/files-Info';
@@ -8,6 +13,8 @@ import { ReportSendEmailValidate } from './class/report-send-email-validate';
 import { TYPE_REPORT_INVOICE, TYPE_REPORT_PAYMENT, TYPE_REPORT_PRODUCTS } from 'src/app/const/reports';
 
 @Component({
+  standalone: true,
+  imports: [MatErrorComponent, PreloaderTicketComponent, DraftEmailUserRecipientsComponent, FormsModule, CommonModule],
     selector: 'app-report-send-email',
     templateUrl: './report-send-email.component.html',
     styleUrls: ['./report-send-email.component.scss'],

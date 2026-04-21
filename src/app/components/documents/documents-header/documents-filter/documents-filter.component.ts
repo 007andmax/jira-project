@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TechUsersListReportComponent } from 'src/app/components/reports/report-menu/tech-users-list-report/tech-users-list-report.component';
@@ -9,12 +11,15 @@ import { DocumentFilter } from '../../class/document-filter';
 import * as moment from "moment";
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 
 @Component({
-    selector: 'documents-filter',
-    templateUrl: './documents-filter.component.html',
-    styleUrls: ['./documents-filter.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [CompanyDropDownComponent, CommonModule],
+  selector: 'documents-filter',
+  templateUrl: './documents-filter.component.html',
+  styleUrls: ['./documents-filter.component.scss'],
+  standalone: true
 })
 export class DocumentsFilterComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;

@@ -1,3 +1,6 @@
+﻿import { DynamicTooltipComponent } from './';
+import { MarketingEmailUsersComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_SUBSCRIPTION_TYPIES } from 'src/app/const/confirm';
@@ -9,6 +12,8 @@ import { MarketingSubscriptionTypeComponent } from './marketing-subscription-typ
 import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, MarketingEmailUsersComponent, CommonModule],
     selector: 'marketing-email',
     templateUrl: './marketing-email.component.html',
     animations: [fadeInAnimation],

@@ -32,8 +32,7 @@ describe('TicketDetailEditTagsComponent unit test', () => {
             timeOut: 5000,
             onActivateTick: true
         }),
-        NoopAnimationsModule],
-    declarations: [TicketDetailEditTagsComponent]
+        NoopAnimationsModule, TicketDetailEditTagsComponent]
 }).compileComponents();
 
   });

@@ -1,9 +1,13 @@
+﻿import { SuperAdminKnowledgeBaseNewsComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { News } from '../../super-admin/super-admin-knowledge-base/super-admin-knowledge-base-table/class/news';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { SuperAdminKnowledgeBaseService } from '../../super-admin/services/super-admin-knowledge-base/super-admin-knowledge-base.service';
 
 @Component({
+  standalone: true,
+  imports: [SuperAdminKnowledgeBaseNewsComponent, CommonModule],
     selector: 'app-super-admin-public-list',
     templateUrl: './super-admin-public-list.component.html',
     styleUrls: ['./super-admin-public-list.component.scss'],

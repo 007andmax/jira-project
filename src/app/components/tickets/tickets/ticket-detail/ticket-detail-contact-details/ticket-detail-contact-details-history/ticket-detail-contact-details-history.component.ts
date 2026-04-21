@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
 import { TicketsListService } from '../../../services/tickets-list.service';
 import * as moment from "moment";
@@ -9,6 +10,8 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'ticket-detail-contact-details-history',
   templateUrl: './ticket-detail-contact-details-history.component.html',
   styleUrls: ['./ticket-detail-contact-details-history.component.scss'],

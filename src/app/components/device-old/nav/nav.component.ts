@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonServices } from './../_services/common.service';
 import { Router } from '@angular/router';
@@ -8,6 +9,8 @@ import { Company } from 'src/app/interfaces/company/company';
 import { Subscription } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'nav-old',
     templateUrl: './nav.component.html',
     styleUrls: ['./nav.component.scss'],

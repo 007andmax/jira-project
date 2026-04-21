@@ -1,3 +1,5 @@
+﻿import { DynamicTooltipComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from "@angular/forms";
@@ -12,6 +14,8 @@ import { TaxesStateService } from "src/app/states/taxes/taxes-state.service";
 import { TaxesService } from "src/app/services/taxes/taxes.service";
 declare var $: any;
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, CommonModule],
   selector: "app-taxes-settings",
   templateUrl: "./taxes.component.html",
   styleUrls: ["./taxes.component.scss"]

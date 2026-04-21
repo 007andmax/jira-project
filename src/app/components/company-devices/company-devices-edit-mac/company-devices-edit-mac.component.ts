@@ -1,12 +1,18 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { CompanyDevicesEditLabelComponent } from '../company-devices-edit-label/company-devices-edit-label.component';
 import { CompanyDevicesEditMacValidate } from './class/company-devices-edit-mac-validate';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
 
 @Component({
-    selector: 'app-company-devices-edit-mac',
-    templateUrl: './company-devices-edit-mac.component.html',
-    styleUrls: ['./company-devices-edit-mac.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [MatErrorComponent, FormsModule, CommonModule],
+  selector: 'app-company-devices-edit-mac',
+  templateUrl: './company-devices-edit-mac.component.html',
+  styleUrls: ['./company-devices-edit-mac.component.scss'],
+  standalone: true
 })
 export class CompanyDevicesEditMacComponent extends CompanyDevicesEditLabelComponent {
 

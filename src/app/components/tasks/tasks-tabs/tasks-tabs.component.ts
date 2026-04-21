@@ -1,7 +1,12 @@
+﻿import { TasksCalendarComponent } from './';
+import { TasksListComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 @Component({
+  standalone: true,
+  imports: [TasksCalendarComponent, TasksListComponent, CommonModule],
     selector: 'app-tasks-tabs',
     templateUrl: './tasks-tabs.component.html',
     styleUrls: ['./tasks-tabs.component.scss'],

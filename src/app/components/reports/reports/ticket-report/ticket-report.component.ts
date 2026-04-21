@@ -1,3 +1,5 @@
+﻿import { ReportMenuComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { TicketsReport } from '../../class/tickets-reports';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -7,6 +9,8 @@ import { Company } from 'src/app/interfaces/company/company';
 import { User } from 'src/app/components/users/class/user';
 
 @Component({
+  standalone: true,
+  imports: [ReportMenuComponent, CommonModule],
     selector: 'app-ticket-report',
     templateUrl: './ticket-report.component.html',
     styleUrls: ['./ticket-report.component.scss'],

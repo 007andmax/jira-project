@@ -1,3 +1,6 @@
+﻿import { CompanyProfileApiKeysAddAsideComponent } from './';
+import { CompanyProfileApiKeysEditAsideComponent } from './';
+import { CommonModule } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -16,6 +19,8 @@ import { CompanyProfileApiKeysComponent } from './company-profile-api-keys/compa
 import { ApiKeysStateService } from 'src/app/states/api-keys/api-keys-state.service';
 declare var $: any;
 @Component({
+  standalone: true,
+  imports: [CompanyProfileApiKeysAddAsideComponent, CompanyProfileApiKeysEditAsideComponent, CommonModule],
   selector: 'app-company-profile',
   templateUrl: './company-profile.component.html',
   animations: [fadeInAnimation],

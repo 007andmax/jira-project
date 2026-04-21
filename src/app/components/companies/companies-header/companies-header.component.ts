@@ -1,3 +1,5 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, Output, EventEmitter, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Input } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
@@ -17,6 +19,8 @@ import { CompanyItem } from '../class/company-item';
 import { CompanyFilter } from '../class/company-filter';
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
   selector: 'app-companies-header',
   templateUrl: './companies-header.component.html',
   styleUrls: ['./companies-header.component.scss'],

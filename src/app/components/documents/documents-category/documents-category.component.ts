@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,15 +14,20 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { Document } from '../class/document';
 import { DocumentFilter } from '../class/document-filter';
 import { fadeInAnimation } from 'src/app/animations';
+import { DocumentsHeaderComponent } from '../documents-header/documents-header.component';
+import { DocumentsTableComponent } from '../documents-table/documents-table.component';
+import { DocumentsTemplatesInfoComponent } from '../documents-templates/documents-templates-info/documents-templates-info.component';
 
 @Component({
-    selector: 'documents-category',
-    templateUrl: './documents-category.component.html',
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    styleUrls: ['./documents-category.component.css'],
-    standalone: true
+  standalone: true,
+  imports: [DocumentsHeaderComponent, DocumentsTableComponent, DocumentsTemplatesInfoComponent, CommonModule],
+  selector: 'documents-category',
+  templateUrl: './documents-category.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  styleUrls: ['./documents-category.component.css'],
+  standalone: true
 })
 export class DocumentsCategoryComponent implements OnInit, OnDestroy {
   categoryId: string;

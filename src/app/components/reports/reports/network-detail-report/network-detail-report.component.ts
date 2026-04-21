@@ -1,3 +1,5 @@
+﻿import { ReportSendEmailComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
@@ -14,6 +16,8 @@ import { DeviceNetworkDetailReportFilter } from "./Class/network-detail-report";
 import { Subscription } from "rxjs";
 
 @Component({
+  standalone: true,
+  imports: [ReportSendEmailComponent, CommonModule],
     selector: "network-detail-report",
     templateUrl: "./network-detail-report.component.html",
     styleUrls: ["./network-detail-report.component.scss"],

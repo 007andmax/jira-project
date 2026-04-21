@@ -1,8 +1,12 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { InvoiceDiscount } from './class/invoice-discount';
 import { BillableService } from 'src/app/services/billable/billable.service';
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
     selector: 'app-invoice-discount',
     templateUrl: './invoice-discount.component.html',
     styleUrls: ['./invoice-discount.component.scss'],

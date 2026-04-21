@@ -1,3 +1,5 @@
+﻿import { ReportSendEmailComponent } from './';
+import { CommonModule } from '@angular/common';
 import { DatePipe } from "@angular/common";
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -16,6 +18,8 @@ import { DeviceAntivirusReportFilter } from "./Class/device-antivirus-report";
 import { Subscription } from "rxjs";
 
 @Component({
+  standalone: true,
+  imports: [ReportSendEmailComponent, CommonModule],
     selector: "report-device-antivirus",
     templateUrl: "./report-device-antivirus.component.html",
     styleUrls: ["./report-device-antivirus.component.scss"],

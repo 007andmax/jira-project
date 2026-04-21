@@ -1,3 +1,8 @@
+﻿import { RecurringTicketsAddAsideComponent } from './';
+import { RecurringTicketsEditAsideComponent } from './';
+import { RecurringTicketsHeaderComponent } from './';
+import { RecurringTicketsTableComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RecurringService } from 'src/app/services/recurring/recurring.service';
 import { RecurringTicket } from './class/recurring-ticket';
@@ -6,6 +11,8 @@ import { RecurringTicketsRealTimeService } from './services/recurring-tickets-re
 import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
+  standalone: true,
+  imports: [RecurringTicketsAddAsideComponent, RecurringTicketsEditAsideComponent, RecurringTicketsHeaderComponent, RecurringTicketsTableComponent, CommonModule],
     selector: 'app-recurring-tickets',
     templateUrl: './recurring-tickets.component.html',
     styleUrls: ['./recurring-tickets.component.scss'],

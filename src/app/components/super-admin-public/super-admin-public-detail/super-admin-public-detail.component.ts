@@ -1,3 +1,5 @@
+﻿import { SuperAdminPublicHeaderComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -9,6 +11,8 @@ import { SupportPageCategoriesStateService } from '../../super-admin/state/suppo
 import { SupportPageCategoryContent } from '../../super-admin/support-page/class/support-page-category-content';
 
 @Component({
+  standalone: true,
+  imports: [SuperAdminPublicHeaderComponent, CommonModule],
     selector: 'super-admin-public-detail',
     templateUrl: './super-admin-public-detail.component.html',
     styleUrls: ['./super-admin-public-detail.component.scss'],

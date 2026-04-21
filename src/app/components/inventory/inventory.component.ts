@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { ProductService } from '../../services/product/product.service';
 import { InventoryListService } from './services/inventory-list.service';
@@ -19,15 +21,18 @@ import { ServiceAgreement } from '../billing/contracts/class/service-agreement';
 import { InventoryHeaderComponent } from './inventory-header/inventory-header.component';
 import { InventoryTableComponent } from './inventory-table/inventory-table.component';
 import { fadeInAnimation } from 'src/app/animations';
+import { ContractsEditComponent } from '../billing/contracts/contracts-edit/contracts-edit.component';
 @Component({
-    selector: 'app-inventory',
-    templateUrl: './inventory.component.html',
-    styleUrls: ['./inventory.component.scss'],
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    providers: [InventoryListService],
-    standalone: true
+  standalone: true,
+  imports: [ContractsEditComponent, CommonModule],
+  selector: 'app-inventory',
+  templateUrl: './inventory.component.html',
+  styleUrls: ['./inventory.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  providers: [InventoryListService],
+  standalone: true
 })
 export class InventoryComponent implements OnInit {
   selectAll: boolean = false;

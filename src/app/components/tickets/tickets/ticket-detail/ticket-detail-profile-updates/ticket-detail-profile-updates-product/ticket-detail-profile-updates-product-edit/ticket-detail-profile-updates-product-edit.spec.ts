@@ -39,9 +39,7 @@ describe('TicketDetailProfileUpdatesProductEditComponent unit test', () => {
         MatErrorModule,
         NumberModule,
         ToFixedModule,
-        NoopAnimationsModule
-    ],
-    declarations: [TicketDetailProfileUpdatesProductEditComponent],
+        NoopAnimationsModule, TicketDetailProfileUpdatesProductEditComponent],
     providers: [UntypedFormBuilder, TicketsListService]
 }).compileComponents();
 

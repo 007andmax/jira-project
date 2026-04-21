@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { InvoicesService } from 'src/app/services/invoices/invoices.service';
 import { ReportsService } from 'src/app/services/reports/reports.service';
@@ -6,12 +8,15 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { InvoicesFilterComponent } from './invoices-filter/invoices-filter.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { InvoiceExportComponent } from './invoice-export/invoice-export.component';
 
 @Component({
-    selector: 'app-invoices-header',
-    templateUrl: './invoices-header.component.html',
-    styleUrls: ['./invoices-header.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [InvoiceExportComponent, CommonModule],
+  selector: 'app-invoices-header',
+  templateUrl: './invoices-header.component.html',
+  styleUrls: ['./invoices-header.component.scss'],
+  standalone: true
 })
 export class InvoicesHeaderComponent implements OnInit {
   @ViewChild('filter', { static: true }) filter: InvoicesFilterComponent;

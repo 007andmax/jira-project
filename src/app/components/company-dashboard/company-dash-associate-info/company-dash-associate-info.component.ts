@@ -1,9 +1,14 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CompanyProfile } from '../../companies/class/company-profile';
+import { PreviewPhoneMaskComponent } from '../../shared/preview-phone-mask/preview-phone-mask.component';
 
 @Component({
+  standalone: true,
+  imports: [PreviewPhoneMaskComponent, CommonModule],
   selector: 'company-dash-associate-info',
   templateUrl: './company-dash-associate-info.component.html',
   styleUrls: ['./company-dash-associate-info.component.scss']

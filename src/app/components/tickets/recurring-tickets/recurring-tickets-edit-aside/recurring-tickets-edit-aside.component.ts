@@ -1,3 +1,14 @@
+﻿import { AssignedTicketUserComponent } from './';
+import { DatePickerComponent } from './';
+import { DurationComponent } from './';
+import { IntervalComponent } from './';
+import { MatErrorComponent } from './';
+import { ProductListComponent } from './';
+import { ServicesListComponent } from './';
+import { TagsComponent } from './';
+import { CompanyDropDownComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from "rxjs";
 import { ProductService } from 'src/app/services/product/product.service';
@@ -21,6 +32,8 @@ import { InventoryStateService } from 'src/app/states/inventory/inventory-state.
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 
 @Component({
+  standalone: true,
+  imports: [AssignedTicketUserComponent, DatePickerComponent, DurationComponent, IntervalComponent, MatErrorComponent, ProductListComponent, ServicesListComponent, TagsComponent, CompanyDropDownComponent, FormsModule, CommonModule],
     selector: 'app-recurring-tickets-edit-aside',
     templateUrl: './recurring-tickets-edit-aside.component.html',
     styleUrls: ['./recurring-tickets-edit-aside.component.scss'],

@@ -1,3 +1,8 @@
+﻿import { AddMarketingSubscriptionTypeComponent } from './';
+import { DynamicTooltipComponent } from './';
+import { MatErrorComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -15,6 +20,8 @@ import { MarketingSubscriptionType } from './class/marketing-subscription-type';
 import { MarketingSubscriptionTypeFilter } from './class/marketing-subscription-type-filter';
 
 @Component({
+  standalone: true,
+  imports: [AddMarketingSubscriptionTypeComponent, DynamicTooltipComponent, MatErrorComponent, FormsModule, CommonModule],
     selector: 'marketing-subscription-type',
     templateUrl: './marketing-subscription-type.component.html',
     styleUrls: ['./marketing-subscription-type.component.scss'],

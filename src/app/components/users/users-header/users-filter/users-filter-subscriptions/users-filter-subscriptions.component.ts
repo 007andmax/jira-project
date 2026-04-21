@@ -1,3 +1,7 @@
+﻿import { MatChipComponent } from './';
+import { MatChipListComponent } from './';
+import { MatFormFieldComponent } from './';
+import { CommonModule } from '@angular/common';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
@@ -10,6 +14,8 @@ import { UserDefaultSubscription } from '../../../class/user-default-subscriptio
 import { UsersFilterSubscriptionsItem } from './class/users-filter-subscriptions-item';
 
 @Component({
+  standalone: true,
+  imports: [MatChipComponent, MatChipListComponent, MatFormFieldComponent, CommonModule],
     selector: 'users-filter-subscriptions',
     templateUrl: './users-filter-subscriptions.component.html',
     styleUrls: ['./users-filter-subscriptions.component.scss'],

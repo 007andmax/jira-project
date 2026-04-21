@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { NgModule, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -8,8 +10,19 @@ import { Company } from '../../interfaces/company/company';
 import { ContractsStateService } from '../../states/contracts/contracts-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { CompanyEditAsideComponent } from '../companies/company-edit-aside/company-edit-aside.component';
+import { CompanyDashAssociateInfoComponent } from './company-dash-associate-info/company-dash-associate-info.component';
+import { CompanyDashAssociateComponent } from './company-dash-associate/company-dash-associate.component';
+import { CompanyDashContractComponent } from './company-dash-contract/company-dash-contract.component';
+import { CompanyDashDetailComponent } from './company-dash-detail/company-dash-detail.component';
+import { CompanyDashInvoiceComponent } from './company-dash-invoice/company-dash-invoice.component';
+import { CompanyDashRevenueComponent } from './company-dash-revenue/company-dash-revenue.component';
+import { CompanyDashStatsComponent } from './company-dash-stats/company-dash-stats.component';
+import { CompanyDashTicketComponent } from './company-dash-ticket/company-dash-ticket.component';
 
 @Component({
+  standalone: true,
+  imports: [CompanyDashContractComponent, CompanyDashDetailComponent, CompanyDashInvoiceComponent, CompanyDashRevenueComponent, CompanyDashStatsComponent, CompanyDashTicketComponent, CompanyEditAsideComponent, CompanyDashAssociateComponent, CompanyDashAssociateInfoComponent, CommonModule],
   selector: 'company-dashboard',
   templateUrl: './company-dashboard.component.html',
   styleUrls: ['./company-dashboard.component.scss'],

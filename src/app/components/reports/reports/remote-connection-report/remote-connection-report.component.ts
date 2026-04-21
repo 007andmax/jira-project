@@ -1,9 +1,13 @@
+﻿import { ReportMenuComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { RemoteConnectionReport } from '../../class/remote-connection-report';
 import * as moment from "moment";
 
 @Component({
+  standalone: true,
+  imports: [ReportMenuComponent, CommonModule],
     selector: 'remote-connection-report',
     templateUrl: './remote-connection-report.component.html',
     styleUrls: ['./remote-connection-report.component.css'],

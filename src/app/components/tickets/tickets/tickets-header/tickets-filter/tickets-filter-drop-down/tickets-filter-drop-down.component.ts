@@ -1,9 +1,16 @@
+﻿import { DynamicTooltipComponent } from './';
+import { MatChipComponent } from './';
+import { MatChipListComponent } from './';
+import { MatFormFieldComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 import { TicketsListService } from '../../../services/tickets-list.service';
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, MatChipComponent, MatChipListComponent, MatFormFieldComponent, CommonModule],
     selector: 'tickets-filter-drop-down',
     templateUrl: './tickets-filter-drop-down.component.html',
     styleUrls: ['./tickets-filter-drop-down.component.scss'],

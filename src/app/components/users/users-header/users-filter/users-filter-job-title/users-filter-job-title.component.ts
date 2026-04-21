@@ -1,9 +1,13 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
     selector: 'app-users-filter-job-title',
     templateUrl: './users-filter-job-title.component.html',
     styleUrls: ['./users-filter-job-title.component.scss'],

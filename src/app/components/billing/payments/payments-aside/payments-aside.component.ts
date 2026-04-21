@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Payment } from '../class/payment';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -11,12 +13,15 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { PaymentsService } from 'src/app/services/payments/payments.service';
 import { AppService } from 'src/app/states/app/app.service';
+import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.component';
 
 @Component({
-    selector: 'app-payments-aside',
-    templateUrl: './payments-aside.component.html',
-    styleUrls: ['./payments-aside.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [PreviewPhoneMaskComponent, CommonModule],
+  selector: 'app-payments-aside',
+  templateUrl: './payments-aside.component.html',
+  styleUrls: ['./payments-aside.component.scss'],
+  standalone: true
 })
 export class PaymentsAsideComponent implements OnInit {
   @Input() payment: Payment;

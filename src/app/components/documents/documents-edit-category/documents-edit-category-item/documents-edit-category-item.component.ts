@@ -1,14 +1,17 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { Company } from 'src/app/interfaces/company/company';
 import { DocumentEditCategory } from '../class/document-edit-category';
 
 @Component({
-    selector: 'documents-edit-category-item',
-    templateUrl: './documents-edit-category-item.component.html',
-    styleUrls: ['./documents-edit-category-item.component.scss'],
-    providers: [TicketsListService],
-    standalone: true,
+  standalone: true,
+  imports: [CommonModule],
+  selector: 'documents-edit-category-item',
+  templateUrl: './documents-edit-category-item.component.html',
+  styleUrls: ['./documents-edit-category-item.component.scss'],
+  providers: [TicketsListService],
+  standalone: true,
 })
 export class DocumentsEditCategoryItemComponent implements OnInit {
   @Input() company: Company;

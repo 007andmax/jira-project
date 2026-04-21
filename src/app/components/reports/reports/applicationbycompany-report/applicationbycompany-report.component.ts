@@ -1,3 +1,5 @@
+﻿import { ReportSendEmailComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
@@ -16,6 +18,8 @@ import { ApplicationByCompanyReportFilter } from "./Class/applicationbycompanyRe
 import { Subscription } from "rxjs";
 
 @Component({
+  standalone: true,
+  imports: [ReportSendEmailComponent, CommonModule],
     selector: "applicationbycompany-report",
     templateUrl: "./applicationbycompany-report.component.html",
     styleUrls: ["./applicationbycompany-report.component.scss"],

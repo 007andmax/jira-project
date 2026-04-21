@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import * as moment from "moment";
 import { ProductCompanyReport } from '../../reports/class/product-company-report';
@@ -9,14 +12,17 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { fadeInAnimation } from 'src/app/animations';
+import { ReportMenuComponent } from '../../reports/report-menu/report-menu.component';
 @Component({
-    selector: 'company-products',
-    templateUrl: './company-products.component.html',
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    styleUrls: ['./company-products.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [ReportMenuComponent, FormsModule, CommonModule],
+  selector: 'company-products',
+  templateUrl: './company-products.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  styleUrls: ['./company-products.component.scss'],
+  standalone: true
 })
 export class CompanyProductsComponent implements OnInit, OnDestroy {
   productsCompanyReport: ProductCompanyReport = new ProductCompanyReport();

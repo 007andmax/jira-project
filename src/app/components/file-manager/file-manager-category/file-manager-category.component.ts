@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FileManagerCategory } from '../class/file-manager-category';
 import { FileManagerFile } from '../class/file-manager-file';
@@ -16,15 +18,18 @@ import { BreadcrumbsItem } from '../class/breadcrumbs-item';
 import { fadeInAnimation } from 'src/app/animations';
 import { FileManagerFileInfoComponent } from '../file-manager-file-info/file-manager-file-info.component';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { FileManagerHeaderComponent } from '../file-manager-header/file-manager-header.component';
 
 @Component({
-    selector: 'app-file-manager-category',
-    templateUrl: './file-manager-category.component.html',
-    styleUrls: ['./file-manager-category.component.scss'],
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    standalone: true,
+  standalone: true,
+  imports: [FileManagerHeaderComponent, CommonModule],
+  selector: 'app-file-manager-category',
+  templateUrl: './file-manager-category.component.html',
+  styleUrls: ['./file-manager-category.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  standalone: true,
 })
 export class FileManagerCategoryComponent implements OnInit, OnDestroy {
   sort: string = "Date";

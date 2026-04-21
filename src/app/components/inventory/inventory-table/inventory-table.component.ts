@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, ElementRef, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { InventoryItem } from '../class/inventory-item';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
@@ -15,13 +18,17 @@ import { CategoryProduct } from 'src/app/interfaces/product/category-product';
 import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { ProductType } from '../../setting/products-settings/class/product-type';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
+import { TaxesComponent } from '../../shared/taxes/taxes.component';
 
 @Component({
-    selector: 'app-inventory-table',
-    templateUrl: './inventory-table.component.html',
-    styleUrls: ['./inventory-table.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
+  standalone: true,
+  imports: [MatErrorComponent, TaxesComponent, FormsModule, CommonModule],
+  selector: 'app-inventory-table',
+  templateUrl: './inventory-table.component.html',
+  styleUrls: ['./inventory-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class InventoryTableComponent implements OnInit {
   inventory: InventoryItem;

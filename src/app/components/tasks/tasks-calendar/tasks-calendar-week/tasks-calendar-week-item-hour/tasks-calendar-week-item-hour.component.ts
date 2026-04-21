@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { CalendarWeek } from '../../../class/calenadar-week';
 import { Task } from '../../../class/task';
@@ -5,6 +6,8 @@ import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'app-tasks-calendar-week-item-hour',
     templateUrl: './tasks-calendar-week-item-hour.component.html',
     styleUrls: ['./tasks-calendar-week-item-hour.component.scss'],

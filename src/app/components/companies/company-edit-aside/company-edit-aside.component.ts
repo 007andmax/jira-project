@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CompanyProfile } from '../class/company-profile';
 import { CompanySetting } from '../class/company-setting';
@@ -30,8 +33,14 @@ import { MODE_EDIT_SUBSCRIPTION, MODE_EDIT_USER_SUBSCRIPTION } from 'src/app/con
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { TimeZone } from '../company-time-zone/class/time-zone';
 import { ThirdPartyApp } from '../class/company-third-party-apps';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
+import { UserDefaultSubscriptionComponent } from '../../users/users-aside/user-default-subscription/user-default-subscription.component';
+import { CompanyTimeZoneComponent } from '../company-time-zone/company-time-zone.component';
 
 @Component({
+  standalone: true,
+  imports: [CompanyTimeZoneComponent, MatErrorComponent, PreloaderTicketComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'app-company-edit-aside',
   templateUrl: './company-edit-aside.component.html',
   styleUrls: ['./company-edit-aside.component.scss']

@@ -1,7 +1,10 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { TicketsListService } from '../../../tickets/services/tickets-list.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'app-recurring-tickets-table-assigned-user',
     templateUrl: './recurring-tickets-table-assigned-user.component.html',
     styleUrls: ['./recurring-tickets-table-assigned-user.component.scss'],

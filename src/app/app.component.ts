@@ -1,3 +1,6 @@
+﻿
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, ViewChild, ApplicationRef } from '@angular/core';
 // @ts-ignore
 import { UpgradeModule } from "@angular/upgrade/static";
@@ -45,12 +48,40 @@ import { PaymentsStateService } from './states/payments/payments-state.service';
 import { DeviceTagsStateService } from './states/device-tags/device-tags-state.service';
 import { NotificationsStateService } from './states/notifications/notifications-state.service';
 import { IntegrationsStateService } from './states/integrations/integrations-state.service';
+import { InvoicesAsidePreviewComponent } from './components/billing/invoices/invoices-aside-preview/invoices-aside-preview.component';
+import { InvoicesAsideComponent } from './components/billing/invoices/invoices-aside/invoices-aside.component';
+import { ManageCardsAddComponent } from './components/billing/manage-cards/manage-cards-add/manage-cards-add.component';
+import { ManageCardsEditComponent } from './components/billing/manage-cards/manage-cards-edit/manage-cards-edit.component';
+import { NonContractServicesAddComponent } from './components/billing/non-contract-services/non-contract-services-add/non-contract-services-add.component';
+import { NonContractServicesEditComponent } from './components/billing/non-contract-services/non-contract-services-edit/non-contract-services-edit.component';
+import { QuoteAsidePreviewComponent } from './components/billing/quotes/quote-aside-preview/quote-aside-preview.component';
+import { CompanyAddAsideComponent } from './components/companies/company-add-aside/company-add-aside.component';
+import { InventoryAddAsideComponent } from './components/inventory/inventory-add-aside/inventory-add-aside.component';
+import { InventoryEditAsideComponent } from './components/inventory/inventory-edit-aside/inventory-edit-aside.component';
+import { MarketingSubscriptionsAsideComponent } from './components/marketing/marketing-subscriptions-aside/marketing-subscriptions-aside.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { ReportSendEmailComponent } from './components/reports/report-additional-actions/report-send-email/report-send-email.component';
+import { CannedResponsesAsideComponent } from './components/setting/ticket-settings-page/canned-responses/canned-responses-aside/canned-responses-aside.component';
+import { BreadcrumbsComponent } from './components/shared/breadcrumbs/breadcrumbs.component';
+import { DraftEmailComponent } from './components/shared/draft-email/draft-email.component';
+import { MapModalComponent } from './components/shared/map-modal/map-modal.component';
+import { PreviewFileComponent } from './components/shared/preview-file/preview-file.component';
+import { HelpCenterInfoAsideComponent } from './components/super-admin-public/help-center-info-aside/help-center-info-aside.component';
+import { TasksAddComponent } from './components/tasks/tasks-add/tasks-add.component';
+import { TasksEditComponent } from './components/tasks/tasks-edit/tasks-edit.component';
+import { TicketAddAsideComponent } from './components/tickets/tickets/ticket-add-aside/ticket-add-aside.component';
+import { PreviewAttachmentComponent } from './components/tickets/tickets/ticket-edit-aside/preview-attachment/preview-attachment.component';
+import { UsersAsideEditComponent } from './components/users/users-aside-edit/users-aside-edit.component';
+import { UsersAsideComponent } from './components/users/users-aside/users-aside.component';
+import { ModalImageCropperComponent } from './services/modal/modal-image-cropper/modal-image-cropper.component';
 
 
 /**
  * Root component
  */
 @Component({
+  standalone: true,
+  imports: [CompanyAddAsideComponent, DraftEmailComponent, InventoryAddAsideComponent, InventoryEditAsideComponent, InvoicesAsideComponent, InvoicesAsidePreviewComponent, ManageCardsAddComponent, ManageCardsEditComponent, MapModalComponent, MarketingSubscriptionsAsideComponent, NonContractServicesAddComponent, NonContractServicesEditComponent, NotificationsComponent, PreviewAttachmentComponent, PreviewFileComponent, QuoteAsidePreviewComponent, ReportSendEmailComponent, TasksAddComponent, TasksEditComponent, TicketAddAsideComponent, UsersAsideComponent, BreadcrumbsComponent, CannedResponsesAsideComponent, HelpCenterInfoAsideComponent, ModalImageCropperComponent, UsersAsideEditComponent, RouterModule, CommonModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { InvoicesService } from 'src/app/services/invoices/invoices.service';
 import { InvoiceProfile } from '../class/invoice-profile';
@@ -12,11 +14,15 @@ import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.servic
 import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.component';
 @Component({
-    selector: 'app-invoices-aside-preview',
-    templateUrl: './invoices-aside-preview.component.html',
-    styleUrls: ['./invoices-aside-preview.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [DynamicTooltipComponent, PreviewPhoneMaskComponent, CommonModule],
+  selector: 'app-invoices-aside-preview',
+  templateUrl: './invoices-aside-preview.component.html',
+  styleUrls: ['./invoices-aside-preview.component.scss'],
+  standalone: true
 })
 export class InvoicesAsidePreviewComponent implements OnInit {
   open: boolean = false;

@@ -26,8 +26,7 @@ describe('CompaniesHeaderComponent unit test', () => {
             timeOut: 5000,
             onActivateTick: true
         }),
-        NoopAnimationsModule],
-    declarations: [CompaniesHeaderComponent],
+        NoopAnimationsModule, CompaniesHeaderComponent],
 }).compileComponents();
 
   });

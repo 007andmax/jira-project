@@ -1,3 +1,5 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NoteService } from 'src/app/services/note/note.service';
@@ -7,6 +9,8 @@ import { NoteTemplateValidate } from '../class/note-template-validate';
 import { Subscription } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
     selector: 'canned-responses-aside',
     templateUrl: './canned-responses-aside.component.html',
     styleUrls: ['./canned-responses-aside.component.scss'],

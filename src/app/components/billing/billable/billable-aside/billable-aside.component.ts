@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output, EventEmitter, ViewChild, NgZone } from '@angular/core';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { BillableService } from 'src/app/services/billable/billable.service';
@@ -17,12 +19,16 @@ import { InvoiceRealTimeService } from 'src/app/states/invoice/invoice-real-time
 import { InvoiceFormComponent } from './invoice-form/invoice-form.component';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { AppService } from 'src/app/states/app/app.service';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
+import { InvoicePreviewComponent } from './invoice-preview/invoice-preview.component';
 
 @Component({
-    selector: 'app-billable-aside',
-    templateUrl: './billable-aside.component.html',
-    styleUrls: ['./billable-aside.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [InvoicePreviewComponent, PreloaderTicketComponent, CommonModule],
+  selector: 'app-billable-aside',
+  templateUrl: './billable-aside.component.html',
+  styleUrls: ['./billable-aside.component.scss'],
+  standalone: true
 })
 export class BillableAsideComponent implements OnInit, OnDestroy {
   @Output() onSetSelectedTickets = new EventEmitter();

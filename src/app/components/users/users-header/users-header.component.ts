@@ -1,3 +1,6 @@
+﻿import { UsersFilterInfoComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { USERS } from 'src/app/const/emails';
@@ -22,6 +25,8 @@ import { MarketingEmailStateService } from 'src/app/states/marketing-email/marke
 
 
 @Component({
+  standalone: true,
+  imports: [UsersFilterInfoComponent, FormsModule, CommonModule],
     selector: 'app-users-header',
     templateUrl: './users-header.component.html',
     styleUrls: ['./users-header.component.scss'],

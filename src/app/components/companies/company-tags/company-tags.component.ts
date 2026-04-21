@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, Input, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { CompanyTagsStateService } from './states/company-tags-state.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
@@ -12,14 +14,17 @@ import { TicketsListService } from '../../tickets/tickets/services/tickets-list.
 import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
 import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
 import { MatFormFieldComponent } from '../../shared/mat-form-field/mat-form-field.component';
+import { MatChipListComponent } from '../../shared/mat-chip-list/mat-chip-list.component';
 
 @Component({
-    selector: 'app-company-tags',
-    templateUrl: './company-tags.component.html',
-    styleUrls: ['./company-tags.component.scss'],
-    providers: [CompanyTagsListService, TicketsListService],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
+  standalone: true,
+  imports: [MatChipListComponent, CommonModule],
+  selector: 'app-company-tags',
+  templateUrl: './company-tags.component.html',
+  styleUrls: ['./company-tags.component.scss'],
+  providers: [CompanyTagsListService, TicketsListService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class CompanyTagsComponent implements OnInit, OnDestroy {
   page: number = 0;

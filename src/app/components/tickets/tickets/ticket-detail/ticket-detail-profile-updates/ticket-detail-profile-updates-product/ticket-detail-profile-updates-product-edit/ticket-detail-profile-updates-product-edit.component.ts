@@ -1,3 +1,7 @@
+﻿import { MatErrorComponent } from './';
+import { ProductListComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
@@ -8,6 +12,8 @@ import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
 import { TicketsListService } from '../../../../services/tickets-list.service';
 
 @Component({
+  standalone: true,
+  imports: [MatErrorComponent, ProductListComponent, FormsModule, CommonModule],
   selector: 'ticket-detail-profile-updates-product-edit',
   templateUrl: './ticket-detail-profile-updates-product-edit.component.html',
   styleUrls: ['./ticket-detail-profile-updates-product-edit.component.scss']

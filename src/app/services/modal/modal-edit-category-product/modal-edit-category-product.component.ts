@@ -1,9 +1,13 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryProduct } from 'src/app/interfaces/product/category-product';
 import { ProductService } from '../../product/product.service';
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
   selector: 'modal-edit-category-product',
   templateUrl: './modal-edit-category-product.component.html',
   styleUrls: ['./modal-edit-category-product.component.scss'],

@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -22,13 +24,17 @@ import { QuoteRealTimeService } from '../quote-realtime/quote-realtime.service';
 import { QuotesListService } from './services/quotes-list.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
+import { QuotesHeaderComponent } from '../quotes-header/quotes-header.component';
+import { QuotesItemComponent } from './quotes-item/quotes-item.component';
 
 @Component({
-    selector: 'app-quotes-table',
-    templateUrl: './quotes-table.component.html',
-    styleUrls: ['./quotes-table.component.scss'],
-    providers: [QuotesListService],
-    standalone: true
+  standalone: true,
+  imports: [QuotesHeaderComponent, QuotesItemComponent, CommonModule],
+  selector: 'app-quotes-table',
+  templateUrl: './quotes-table.component.html',
+  styleUrls: ['./quotes-table.component.scss'],
+  providers: [QuotesListService],
+  standalone: true
 })
 export class QuotesTableComponent implements OnInit, OnDestroy {
   filter: QuoteFilter = new QuoteFilter();

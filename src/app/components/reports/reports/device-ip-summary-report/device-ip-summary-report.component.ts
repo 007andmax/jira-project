@@ -1,3 +1,5 @@
+﻿import { ReportMenuComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from 'moment';
@@ -6,6 +8,8 @@ import { DeviceIpSummary } from '../../class/device-ip-summary';
 
 
 @Component({
+  standalone: true,
+  imports: [ReportMenuComponent, CommonModule],
     selector: 'device-ip-summary-report',
     templateUrl: './device-ip-summary-report.component.html',
     styleUrls: ['./device-ip-summary-report.component.scss'],

@@ -1,3 +1,5 @@
+﻿import { ReportSendEmailComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
@@ -14,6 +16,8 @@ import { DeviceProcessorRamReportFilter } from "./Class/device-processorram-repo
 import { Subscription } from "rxjs";
 
 @Component({
+  standalone: true,
+  imports: [ReportSendEmailComponent, CommonModule],
     selector: "report-device-processorram",
     templateUrl: "./report-device-processorram.component.html",
     styleUrls: ["./report-device-processorram.component.scss"],

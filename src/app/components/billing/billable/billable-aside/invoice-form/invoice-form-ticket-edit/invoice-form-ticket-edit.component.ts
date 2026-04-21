@@ -1,14 +1,20 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { InvoiceProfileTicket } from '../../../class/invoice-profile-ticket';
 import * as moment from "moment";
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { InvoiceFormTicketEditProductComponent } from './invoice-form-ticket-edit-product/invoice-form-ticket-edit-product.component';
+import { InvoiceFormTicketEditServiceComponent } from './invoice-form-ticket-edit-service/invoice-form-ticket-edit-service.component';
 
 @Component({
-    selector: 'app-invoice-form-ticket-edit',
-    templateUrl: './invoice-form-ticket-edit.component.html',
-    styleUrls: ['./invoice-form-ticket-edit.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [InvoiceFormTicketEditProductComponent, InvoiceFormTicketEditServiceComponent, FormsModule, CommonModule],
+  selector: 'app-invoice-form-ticket-edit',
+  templateUrl: './invoice-form-ticket-edit.component.html',
+  styleUrls: ['./invoice-form-ticket-edit.component.scss'],
+  standalone: true
 })
 export class InvoiceFormTicketEditComponent implements OnInit {
   @Input() ticket: InvoiceProfileTicket;

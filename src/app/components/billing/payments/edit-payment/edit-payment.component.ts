@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, OnDestroy } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Payment } from '../class/payment';
@@ -9,12 +12,18 @@ import { Subscription } from 'rxjs';
 import * as moment from "moment";
 import { PaymentsService } from 'src/app/services/payments/payments.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
 
 @Component({
-    selector: 'app-edit-payment',
-    templateUrl: './edit-payment.component.html',
-    styleUrls: ['./edit-payment.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [DatePickerComponent, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, FormsModule, CommonModule],
+  selector: 'app-edit-payment',
+  templateUrl: './edit-payment.component.html',
+  styleUrls: ['./edit-payment.component.scss'],
+  standalone: true
 })
 export class EditPaymentComponent implements OnInit, OnDestroy {
   @Input() payment: Payment;

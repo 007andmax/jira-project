@@ -1,3 +1,5 @@
+﻿import { DropDownComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -6,6 +8,8 @@ import { TechUsersService } from 'src/app/services/setting/tech-users.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
+  standalone: true,
+  imports: [DropDownComponent, CommonModule],
     selector: 'tech-users-reassign',
     templateUrl: './tech-users-reassign.component.html',
     styleUrls: ['./tech-users-reassign.component.scss'],

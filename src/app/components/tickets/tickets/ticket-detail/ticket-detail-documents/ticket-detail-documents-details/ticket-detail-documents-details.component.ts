@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Document } from 'src/app/components/documents/class/document';
 import { DocumentFilter } from 'src/app/components/documents/class/document-filter';
@@ -6,6 +7,8 @@ import { TicketProfile } from '../../../class/ticket-profile';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'ticket-detail-documents-details',
   templateUrl: './ticket-detail-documents-details.component.html',
   styleUrls: ['./ticket-detail-documents-details.component.scss']

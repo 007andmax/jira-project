@@ -47,9 +47,7 @@ describe('TicketDetailProfileUpdatesProductComponent unit test', () => {
         MatFormFieldModule,
         MatChipListModule,
         MatErrorModule,
-        NoopAnimationsModule
-    ],
-    declarations: [TicketDetailProfileUpdatesProductComponent,
+        NoopAnimationsModule, TicketDetailProfileUpdatesProductComponent,
         TicketDetailProfileUpdatesProductHeaderInfoComponent,
         TicketDetailProfileUpdatesProductItemComponent,
         TicketDetailProfileUpdatesProductInfoComponent,

@@ -1,3 +1,7 @@
+﻿import { DynamicTooltipComponent } from './';
+import { ManageTagsAddComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -27,6 +31,8 @@ import { fadeInAnimation } from "src/app/animations";
 import { ManageTagsFilesComponent } from "./manage-tags-files/manage-tags-files.component";
 declare var $: any;
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, ManageTagsAddComponent, FormsModule, CommonModule],
     selector: "app-manage-tags",
     templateUrl: "./manage-tags.component.html",
     animations: [fadeInAnimation],

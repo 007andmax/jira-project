@@ -1,3 +1,5 @@
+﻿import { DropDownComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../../../../services/accounting/accounting-settings.service';
@@ -10,6 +12,8 @@ import { InvoiceSettings } from './class/invoice-settings';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 
 @Component({
+  standalone: true,
+  imports: [DropDownComponent, CommonModule],
   selector: 'app-invoice-settings',
   templateUrl: './invoice-settings.component.html',
   styleUrls: ['./invoice-settings.component.scss']

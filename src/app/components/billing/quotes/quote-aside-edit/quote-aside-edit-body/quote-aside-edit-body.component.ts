@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompanyItem } from 'src/app/components/companies/class/company-item';
@@ -19,12 +22,22 @@ import { ServiceListQuoteComponent } from '../../quote-aside-add/service-list-qu
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { InvoiceTicketsService } from 'src/app/services/accounting/accounting-settings.service';
+import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { InvoiceFormEditCustomerComponent } from '../../../billable/billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.component';
+import { InvoiceRegularNoteComponent } from '../../../billable/billable-aside/invoice-form/invoice-regular-note/invoice-regular-note.component';
+import { ProductListQuoteComponent } from '../../quote-aside-add/product-list-quote/product-list-quote.component';
+import { QuoteAsideAddChangeAddressComponent } from '../../quote-aside-add/quote-aside-add-change-address/quote-aside-add-change-address.component';
+import { ProductItemQuoteEditComponent } from '../product-item-quote-edit/product-item-quote-edit.component';
 
 @Component({
-    selector: 'app-quote-aside-edit-body',
-    templateUrl: './quote-aside-edit-body.component.html',
-    styleUrls: ['./quote-aside-edit-body.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [DatePickerComponent, DropDownComponent, InvoiceFormEditCustomerComponent, InvoiceRegularNoteComponent, MatErrorComponent, ProductItemQuoteEditComponent, ProductListQuoteComponent, QuoteAsideAddChangeAddressComponent, FormsModule, CommonModule],
+  selector: 'app-quote-aside-edit-body',
+  templateUrl: './quote-aside-edit-body.component.html',
+  styleUrls: ['./quote-aside-edit-body.component.scss'],
+  standalone: true
 })
 export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
   @ViewChild('servicesList', { static: false }) servicesList: ServiceListQuoteComponent;

@@ -1,3 +1,8 @@
+﻿import { DropDownComponent } from './';
+import { MatErrorComponent } from './';
+import { PreloaderTicketComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { News } from '../super-admin-knowledge-base-table/class/news';
@@ -12,6 +17,8 @@ import { forkJoin, Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
+  standalone: true,
+  imports: [DropDownComponent, MatErrorComponent, PreloaderTicketComponent, FormsModule, CommonModule],
   selector: 'app-super-admin-knowledge-base-add',
   templateUrl: './super-admin-knowledge-base-add.component.html',
   styleUrls: ['./super-admin-knowledge-base-add.component.scss']

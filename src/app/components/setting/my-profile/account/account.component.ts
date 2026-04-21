@@ -1,3 +1,5 @@
+﻿import { DropDownComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { SettingService } from 'src/app/services/setting/setting.service';
@@ -13,6 +15,8 @@ import { LOG_OUT } from 'src/app/const/confirm';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 
 @Component({
+  standalone: true,
+  imports: [DropDownComponent, CommonModule],
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss']

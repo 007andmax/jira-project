@@ -1,3 +1,6 @@
+﻿import { DropDownComponent } from './';
+import { ReportSendEmailComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
@@ -14,6 +17,8 @@ import { HardwareSummaryReportFilter } from './class/hardware-summary-report';
 import { Subscription } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [DropDownComponent, ReportSendEmailComponent, CommonModule],
     selector: 'hardware-summary-device-report',
     templateUrl: './hardware-summary-device-report.component.html',
     styleUrls: ['./hardware-summary-device-report.component.scss'],

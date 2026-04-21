@@ -1,3 +1,8 @@
+﻿import { DropDownComponent } from './';
+import { MatErrorComponent } from './';
+import { PreloaderTicketComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { SuperAdminKnowledgeBaseAddComponent } from '../super-admin-knowledge-base-add/super-admin-knowledge-base-add.component';
 import { News } from '../super-admin-knowledge-base-table/class/news';
@@ -5,6 +10,8 @@ import { forkJoin } from 'rxjs';
 import { KnowledgeBaseValidate } from '../super-admin-knowledge-base-add/class/knowledge-base-validate';
 
 @Component({
+  standalone: true,
+  imports: [DropDownComponent, MatErrorComponent, PreloaderTicketComponent, FormsModule, CommonModule],
   selector: 'app-super-admin-knowledge-base-edit',
   templateUrl: './super-admin-knowledge-base-edit.component.html',
   styleUrls: ['./super-admin-knowledge-base-edit.component.scss']

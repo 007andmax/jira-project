@@ -1,3 +1,5 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import * as moment from "moment";
 import { Invoice } from '../class/invoice';
@@ -13,6 +15,8 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
     selector: 'app-invoices-item',
     templateUrl: './invoices-item.component.html',
     styleUrls: ['./invoices-item.component.scss'],

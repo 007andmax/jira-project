@@ -1,3 +1,5 @@
+﻿import { TicketDetailPasswordsItemComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FilterPasswordManager } from 'src/app/components/password-manager/class/filter-password-manager';
 import { PasswordRecord } from 'src/app/components/password-manager/class/password-record';
@@ -6,6 +8,8 @@ import { PasswordManagerService } from 'src/app/services/password-manager/passwo
 import { TicketProfile } from '../../../class/ticket-profile';
 
 @Component({
+  standalone: true,
+  imports: [TicketDetailPasswordsItemComponent, CommonModule],
   selector: 'ticket-detail-passwords-details',
   templateUrl: './ticket-detail-passwords-details.component.html',
   styleUrls: ['./ticket-detail-passwords-details.component.scss'],

@@ -1,3 +1,5 @@
+﻿import { DynamicTooltipComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy, TemplateRef } from "@angular/core";
 import { EmailTempleteService } from "../../../services/email-template/email-template.service";
 import { map, catchError } from "rxjs/operators";
@@ -17,6 +19,8 @@ import { ConfirmComponent } from "../../shared/confirm/confirm.component";
 declare var $: any;
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, CommonModule],
     selector: "app-email-template",
     templateUrl: "./email-template.component.html",
     animations: [fadeInAnimation],

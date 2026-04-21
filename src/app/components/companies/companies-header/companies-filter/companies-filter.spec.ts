@@ -26,8 +26,7 @@ describe('CompaniesFilterComponent unit test', () => {
             timeOut: 5000,
             onActivateTick: true
         }),
-        NoopAnimationsModule],
-    declarations: [CompaniesFilterComponent],
+        NoopAnimationsModule, CompaniesFilterComponent],
 }).compileComponents();
 
   });

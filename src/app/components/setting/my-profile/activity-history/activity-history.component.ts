@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { SettingService } from "src/app/services/setting/setting.service";
 import { ToastrService } from "ngx-toastr";
@@ -10,6 +11,8 @@ import { SettingStateService } from "src/app/states/setting/setting-state.servic
 import { Subscription } from "rxjs";
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: "app-activity-history",
   templateUrl: "./activity-history.component.html",
   styleUrls: ["./activity-history.component.scss"]

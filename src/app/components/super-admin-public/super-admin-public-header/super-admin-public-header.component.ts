@@ -1,8 +1,12 @@
+﻿import { SuperAdminPublicSearchComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
+  standalone: true,
+  imports: [SuperAdminPublicSearchComponent, CommonModule],
     selector: 'super-admin-public-header',
     templateUrl: './super-admin-public-header.component.html',
     styleUrls: ['./super-admin-public-header.component.scss'],

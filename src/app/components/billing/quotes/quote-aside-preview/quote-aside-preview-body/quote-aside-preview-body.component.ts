@@ -1,14 +1,19 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { QuotePreview } from '../../class/quote-preview';
 import * as moment from "moment";
 import { Company } from 'src/app/interfaces/company/company';
+import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.component';
 
 @Component({
-    selector: 'app-quote-aside-preview-body',
-    templateUrl: './quote-aside-preview-body.component.html',
-    styleUrls: ['./quote-aside-preview-body.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [PreviewPhoneMaskComponent, CommonModule],
+  selector: 'app-quote-aside-preview-body',
+  templateUrl: './quote-aside-preview-body.component.html',
+  styleUrls: ['./quote-aside-preview-body.component.scss'],
+  standalone: true
 })
 export class QuoteAsidePreviewBodyComponent implements OnInit {
   @Input() quote: QuotePreview;

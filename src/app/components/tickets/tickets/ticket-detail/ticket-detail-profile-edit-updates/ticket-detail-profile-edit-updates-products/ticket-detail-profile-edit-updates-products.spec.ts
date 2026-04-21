@@ -38,8 +38,7 @@ describe('TicketDetailProfileEditUpdatesProductsComponent unit test', () => {
         MatFormFieldModule,
         MatChipListModule,
         MatErrorModule,
-        InvoiceFormTicketEditTaxesModule],
-    declarations: [TicketDetailProfileEditUpdatesProductsComponent],
+        InvoiceFormTicketEditTaxesModule, TicketDetailProfileEditUpdatesProductsComponent],
     providers: [UntypedFormBuilder]
 }).compileComponents();
 

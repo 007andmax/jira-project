@@ -1,3 +1,8 @@
+﻿import { DynamicTooltipComponent } from './';
+import { MatErrorComponent } from './';
+import { ManageTagsAddComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
 import { ManageTag } from '../class/manage-tag';
@@ -10,6 +15,8 @@ import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service'
 import { ManageTagsFilter } from '../class/manage-tags-filter';
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, MatErrorComponent, ManageTagsAddComponent, FormsModule, CommonModule],
     selector: 'app-manage-tags-files',
     templateUrl: './manage-tags-files.component.html',
     styleUrls: ['./manage-tags-files.component.scss'],

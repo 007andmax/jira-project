@@ -1,9 +1,12 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { SettingService } from "src/app/services/setting/setting.service";
 import { map } from "rxjs/operators";
 import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: "app-email-notifications",
   templateUrl: "./email-notifications.component.html",
   styleUrls: ["./email-notifications.component.scss"]

@@ -1,3 +1,6 @@
+﻿import { TicketsFilterComponent } from './';
+import { TicketsTableItemComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketsFilter } from '../class/tickets-filter';
@@ -17,6 +20,8 @@ import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service
 
 
 @Component({
+  standalone: true,
+  imports: [TicketsFilterComponent, TicketsTableItemComponent, CommonModule],
     selector: 'app-tickets-table',
     templateUrl: './tickets-table.component.html',
     styleUrls: ['./tickets-table.component.scss'],

@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import * as moment from "moment";
@@ -9,8 +11,12 @@ import { ServiceAgreement } from '../../billing/contracts/class/service-agreemen
 import { CompanyContractType } from '../../companies/class/company-contract-type';
 import { ActivatedRoute } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { ContractsEditComponent } from '../../billing/contracts/contracts-edit/contracts-edit.component';
+import { ContractsPreviewComponent } from '../../billing/contracts/contracts-preview/contracts-preview.component';
 
 @Component({
+  standalone: true,
+  imports: [ContractsEditComponent, ContractsPreviewComponent, CommonModule],
   selector: 'app-company-dash-contract',
   templateUrl: './company-dash-contract.component.html',
   styleUrls: ['./company-dash-contract.component.scss']

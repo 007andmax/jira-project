@@ -1,3 +1,6 @@
+﻿import { DynamicTooltipComponent } from './';
+import { UploadAreaProgressComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { PasswordRecord } from 'src/app/components/password-manager/class/password-record';
@@ -6,6 +9,8 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, UploadAreaProgressComponent, CommonModule],
   selector: 'ticket-detail-passwords-item',
   templateUrl: './ticket-detail-passwords-item.component.html',
   styleUrls: ['./ticket-detail-passwords-item.component.scss']

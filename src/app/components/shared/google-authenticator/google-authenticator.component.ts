@@ -1,9 +1,13 @@
+﻿import { MatErrorComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
+  standalone: true,
+  imports: [MatErrorComponent, CommonModule],
   selector: 'google-authenticator',
   templateUrl: './google-authenticator.component.html',
   styleUrls: ['./google-authenticator.component.scss'],

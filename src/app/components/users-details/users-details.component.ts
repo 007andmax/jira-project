@@ -1,3 +1,10 @@
+﻿import { UsersDetailsHeaderComponent } from './';
+import { UsersDetailsTabCompaniesComponent } from './';
+import { UsersDetailsTabDocumentsComponent } from './';
+import { UsersDetailsTabMessagesComponent } from './';
+import { UsersDetailsTabPasswordsComponent } from './';
+import { UsersDetailsTabTicketsComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -21,6 +28,8 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { UserChange } from '../users/class/user-change';
 
 @Component({
+  standalone: true,
+  imports: [UsersDetailsHeaderComponent, UsersDetailsTabCompaniesComponent, UsersDetailsTabDocumentsComponent, UsersDetailsTabMessagesComponent, UsersDetailsTabPasswordsComponent, UsersDetailsTabTicketsComponent, CommonModule],
     selector: 'app-users-details',
     templateUrl: './users-details.component.html',
     styleUrls: ['./users-details.component.scss'],

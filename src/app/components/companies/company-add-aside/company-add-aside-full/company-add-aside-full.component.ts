@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -22,8 +25,16 @@ import { CompanyUsersDropDownComponent } from 'src/app/components/tickets/ticket
 import { TimeZone } from '../../company-time-zone/class/time-zone';
 import { CompanyTimeZoneStateService } from '../../company-time-zone/services/company-time-zone-state.service';
 import { ThirdPartyApp } from '../../class/company-third-party-apps';
+import { CompanyAssociateComponent } from 'src/app/components/company-dashboard/company-dash-associate/company-associate/company-associate.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { UsersDropDownComponent } from 'src/app/components/shared/users-drop-down/users-drop-down.component';
+import { UserDefaultSubscriptionComponent } from 'src/app/components/users/users-aside/user-default-subscription/user-default-subscription.component';
+import { CompanyTagsComponent } from '../../company-tags/company-tags.component';
+import { CompanyTimeZoneComponent } from '../../company-time-zone/company-time-zone.component';
 
 @Component({
+  standalone: true,
+  imports: [CompanyTagsComponent, CompanyTimeZoneComponent, MatErrorComponent, UsersDropDownComponent, CompanyAssociateComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'company-add-aside-full',
   templateUrl: './company-add-aside-full.component.html',
   styleUrls: ['./company-add-aside-full.component.scss']

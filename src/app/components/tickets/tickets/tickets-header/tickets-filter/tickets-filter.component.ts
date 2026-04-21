@@ -1,3 +1,6 @@
+﻿import { TicketsFilterSearchComponent } from './';
+import { TicketsFilterUsersDropDownComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ElementRef, ChangeDetectorRef, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { TicketsFilter } from '../../class/tickets-filter';
 import { Company } from 'src/app/interfaces/company/company';
@@ -28,6 +31,8 @@ import { TitleListType } from '../class/title-list-type';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 
 @Component({
+  standalone: true,
+  imports: [TicketsFilterSearchComponent, TicketsFilterUsersDropDownComponent, CommonModule],
     selector: 'app-tickets-filter',
     templateUrl: './tickets-filter.component.html',
     styleUrls: ['./tickets-filter.component.scss'],

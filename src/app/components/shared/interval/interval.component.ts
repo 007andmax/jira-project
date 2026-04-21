@@ -1,3 +1,5 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CronOptions } from 'src/app/components/shared/interval/interfaces/cron/cront-option';
 import { IntervalService } from './services/interval.service';
@@ -8,6 +10,8 @@ import { Subscription } from 'rxjs';
 
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
     selector: 'app-interval',
     templateUrl: './interval.component.html',
     styleUrls: ['./interval.component.scss'],

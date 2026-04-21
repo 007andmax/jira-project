@@ -1,3 +1,8 @@
+﻿import { AddUserToCompanyItemComponent } from './';
+import { AddUserToCompanySelectedItemComponent } from './';
+import { PreloaderTicketComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { User } from '../class/user';
 import { UserFilter } from '../class/user-filter';
@@ -11,6 +16,8 @@ import { Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
+  standalone: true,
+  imports: [AddUserToCompanyItemComponent, AddUserToCompanySelectedItemComponent, PreloaderTicketComponent, FormsModule, CommonModule],
     selector: 'app-add-user-to-company',
     templateUrl: './add-user-to-company.component.html',
     styleUrls: ['./add-user-to-company.component.scss'],

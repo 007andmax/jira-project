@@ -1,3 +1,7 @@
+﻿import { MergeTicketsComponent } from './';
+import { TicketsHeaderComponent } from './';
+import { TicketsTableComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { Subscription } from 'rxjs';
@@ -5,6 +9,8 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { fadeInAnimation } from 'src/app/animations';
 
 @Component({
+  standalone: true,
+  imports: [MergeTicketsComponent, TicketsHeaderComponent, TicketsTableComponent, CommonModule],
     selector: 'app-tickets',
     templateUrl: './tickets.component.html',
     animations: [fadeInAnimation],

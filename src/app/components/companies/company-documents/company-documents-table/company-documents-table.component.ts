@@ -1,11 +1,14 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { DocumentsTableComponent } from 'src/app/components/documents/documents-table/documents-table.component';
 
 @Component({
-    selector: 'company-documents-table',
-    templateUrl: './company-documents-table.component.html',
-    styleUrls: ['./company-documents-table.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [CommonModule],
+  selector: 'company-documents-table',
+  templateUrl: './company-documents-table.component.html',
+  styleUrls: ['./company-documents-table.component.scss'],
+  standalone: true
 })
 export class CompanyDocumentsTableComponent extends DocumentsTableComponent {
 

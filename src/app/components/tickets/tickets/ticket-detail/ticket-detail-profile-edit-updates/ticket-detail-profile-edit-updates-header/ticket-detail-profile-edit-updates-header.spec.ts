@@ -22,8 +22,7 @@ describe('TicketDetailProfileEditUpdatesHeaderComponent unit test', () => {
             onActivateTick: true
         }),
         NgbModule,
-        NoopAnimationsModule],
-    declarations: [TicketDetailProfileEditUpdatesHeaderComponent]
+        NoopAnimationsModule, TicketDetailProfileEditUpdatesHeaderComponent]
 }).compileComponents();
 
   });

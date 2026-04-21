@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeviceCompany } from '../class/device-company';
@@ -20,12 +23,16 @@ import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-s
 import { DeviceTagsRealTimeService } from 'src/app/states/device-tags/device-tags-real-time.service';
 import { DevicesRealTimeService } from 'src/app/states/devices/devices-real-time.service';
 import { Subscription } from 'rxjs';
+import { CompanyDevicesExistRemoteSessionsComponent } from './company-devices-exist-remote-sessions/company-devices-exist-remote-sessions.component';
+import { CompanyDevicesNoExistRemoteSessionsComponent } from './company-devices-no-exist-remote-sessions/company-devices-no-exist-remote-sessions.component';
 
 @Component({
-    selector: 'app-company-devices-item',
-    templateUrl: './company-devices-item.component.html',
-    styleUrls: ['./company-devices-item.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [CompanyDevicesExistRemoteSessionsComponent, CompanyDevicesNoExistRemoteSessionsComponent, FormsModule, CommonModule],
+  selector: 'app-company-devices-item',
+  templateUrl: './company-devices-item.component.html',
+  styleUrls: ['./company-devices-item.component.scss'],
+  standalone: true
 })
 export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   @ViewChild('editLabel', { static: true }) editLabel: CompanyDevicesEditLabelComponent;

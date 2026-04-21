@@ -1,3 +1,5 @@
+﻿import { PreloaderTicketComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
@@ -12,6 +14,8 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { Subscription } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [PreloaderTicketComponent, CommonModule],
   selector: 'ticket-detail-message',
   templateUrl: './ticket-detail-message.component.html',
   styleUrls: ['./ticket-detail-message.component.scss'],

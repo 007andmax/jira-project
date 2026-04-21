@@ -1,7 +1,11 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TicketStatusFilter } from '../../class/ticket-status-filter';
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
     selector: 'tickets-filter-status',
     templateUrl: './tickets-filter-status.component.html',
     styleUrls: ['./tickets-filter-status.component.scss'],

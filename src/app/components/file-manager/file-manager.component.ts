@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { FileManagerCategory } from './class/file-manager-category';
@@ -15,15 +17,18 @@ import { FileManagerFileInfoComponent } from './file-manager-file-info/file-mana
 import { ActivatedRoute } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { FileManagerHeaderComponent } from './file-manager-header/file-manager-header.component';
 
 @Component({
-    selector: 'app-file-manager',
-    templateUrl: './file-manager.component.html',
-    styleUrls: ['./file-manager.component.scss'],
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    standalone: true,
+  standalone: true,
+  imports: [FileManagerHeaderComponent, CommonModule],
+  selector: 'app-file-manager',
+  templateUrl: './file-manager.component.html',
+  styleUrls: ['./file-manager.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  standalone: true,
 })
 export class FileManagerComponent implements OnInit, OnDestroy {
   sort: string = "Date";

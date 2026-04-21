@@ -1,13 +1,19 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { QuoteAddProduct } from '../../class/quote-add-product';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 @Component({
-    selector: 'app-product-item-quote',
-    templateUrl: './product-item-quote.component.html',
-    styleUrls: ['./product-item-quote.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [MatErrorComponent, FormsModule, CommonModule],
+  selector: 'app-product-item-quote',
+  templateUrl: './product-item-quote.component.html',
+  styleUrls: ['./product-item-quote.component.scss'],
+  standalone: true
 })
 export class ProductItemQuoteComponent implements OnInit {
   @Input() product: QuoteAddProduct;

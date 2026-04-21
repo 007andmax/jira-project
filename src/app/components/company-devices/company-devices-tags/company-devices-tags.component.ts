@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DeviceTag } from '../../setting/manage-tags/manage-tags-devices/class/device-tag';
 import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
@@ -10,14 +12,18 @@ import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service'
 import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
 import { catchError, map } from 'rxjs/operators';
+import { MatChipListComponent } from '../../shared/mat-chip-list/mat-chip-list.component';
+import { MatChipComponent } from '../../shared/mat-chip/mat-chip.component';
 
 @Component({
-    selector: 'app-company-devices-tags',
-    templateUrl: './company-devices-tags.component.html',
-    styleUrls: ['./company-devices-tags.component.scss'],
-    providers: [CompanyTagsListService, TicketsListService],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
+  standalone: true,
+  imports: [MatChipComponent, MatChipListComponent, CommonModule],
+  selector: 'app-company-devices-tags',
+  templateUrl: './company-devices-tags.component.html',
+  styleUrls: ['./company-devices-tags.component.scss'],
+  providers: [CompanyTagsListService, TicketsListService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class CompanyDevicesTagsComponent implements OnInit {
   searchName: string = "";

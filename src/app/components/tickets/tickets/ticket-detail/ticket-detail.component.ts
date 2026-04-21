@@ -1,3 +1,18 @@
+﻿import { TicketDetailTotalStatisticsComponent } from './';
+import { TicketDetailAddAssignedUserComponent } from './';
+import { TicketDetailAttachmentsComponent } from './';
+import { TicketDetailChangePriorityComponent } from './';
+import { TicketDetailClaimInfoComponent } from './';
+import { TicketDetailContactComponent } from './';
+import { TicketDetailDevicesComponent } from './';
+import { TicketDetailDevicesDetailsComponent } from './';
+import { TicketDetailDocumentsComponent } from './';
+import { TicketDetailDocumentsPreviewComponent } from './';
+import { TicketDetailInfoStatusComponent } from './';
+import { TicketDetailLinkedAgentsComponent } from './';
+import { TicketDetailPasswordsComponent } from './';
+import { TicketDetailProfileEditUpdatesComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -48,6 +63,8 @@ import { TicketDetailProfileFormUpdateComponent } from './ticket-detail-profile-
 import { TicketDetailNoteModalComponent } from './ticket-detail-note-modal/ticket-detail-note-modal.component';
 
 @Component({
+  standalone: true,
+  imports: [TicketDetailTotalStatisticsComponent, TicketDetailAddAssignedUserComponent, TicketDetailAttachmentsComponent, TicketDetailChangePriorityComponent, TicketDetailClaimInfoComponent, TicketDetailContactComponent, TicketDetailDevicesComponent, TicketDetailDevicesDetailsComponent, TicketDetailDocumentsComponent, TicketDetailDocumentsPreviewComponent, TicketDetailInfoStatusComponent, TicketDetailLinkedAgentsComponent, TicketDetailPasswordsComponent, TicketDetailProfileEditUpdatesComponent, CommonModule],
   selector: 'ticket-detail',
   templateUrl: './ticket-detail.component.html',
   styleUrls: ['./ticket-detail.component.scss'],

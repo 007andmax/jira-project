@@ -1,3 +1,7 @@
+﻿import { DynamicTooltipComponent } from './';
+import { ManageTagsDevicesAddComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DeviceTag } from './class/device-tag';
 import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
@@ -14,6 +18,8 @@ import { DELETE_DEVICE_TAG } from 'src/app/const/confirm';
 import { ManageTagsDevicesFilter } from './class/manage-tags-devices-filter';
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, ManageTagsDevicesAddComponent, FormsModule, CommonModule],
     selector: 'app-manage-tags-devices',
     templateUrl: './manage-tags-devices.component.html',
     styleUrls: ['./manage-tags-devices.component.scss'],

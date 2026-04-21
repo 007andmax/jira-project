@@ -1,3 +1,5 @@
+﻿import { ReportMenuComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import * as moment from 'moment';
 import { TechService } from '../../class/tech-service';
@@ -5,6 +7,8 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { User } from '../../../users/class/user';
 
 @Component({
+  standalone: true,
+  imports: [ReportMenuComponent, CommonModule],
     selector: 'app-tech-service-report',
     templateUrl: './tech-service-report.component.html',
     styleUrls: ['./tech-service-report.component.scss'],

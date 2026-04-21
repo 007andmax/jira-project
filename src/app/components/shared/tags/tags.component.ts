@@ -1,3 +1,7 @@
+﻿import { MatChipComponent } from './';
+import { MatChipListComponent } from './';
+import { MatFormFieldComponent } from './';
+import { CommonModule } from '@angular/common';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, ViewChild, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
@@ -8,6 +12,8 @@ import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 
 
 @Component({
+  standalone: true,
+  imports: [MatChipComponent, MatChipListComponent, MatFormFieldComponent, CommonModule],
     selector: 'app-tags',
     templateUrl: './tags.component.html',
     styleUrls: ['./tags.component.scss'],

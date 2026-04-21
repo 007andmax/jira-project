@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { EventEmitter } from "@angular/core";
 import { UploadInput, UploadFile, humanizeBytes, UploaderOptions } from "ngx-uploader";
@@ -16,16 +19,22 @@ import { ActivatedRoute } from "@angular/router";
 import * as moment from "moment";
 import { KafkaStateService } from "src/app/states/kafka/kafka-state.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { MatChipListComponent } from '../../shared/mat-chip-list/mat-chip-list.component';
+import { MatChipComponent } from '../../shared/mat-chip/mat-chip.component';
+import { MatFormFieldComponent } from '../../shared/mat-form-field/mat-form-field.component';
 
 @Component({
-    selector: "app-dashboard",
-    templateUrl: "./dashboard.component.html",
-    styleUrls: ["./dashboard.component.scss"],
-    providers: [
-        { provide: NgbDateAdapter, useClass: CustomAdapter },
-        { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
-    ],
-    standalone: true,
+  standalone: true,
+  imports: [DropDownComponent, MatChipComponent, MatChipListComponent, MatFormFieldComponent, FormsModule, CommonModule],
+  selector: "app-dashboard",
+  templateUrl: "./dashboard.component.html",
+  styleUrls: ["./dashboard.component.scss"],
+  providers: [
+    { provide: NgbDateAdapter, useClass: CustomAdapter },
+    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
+  ],
+  standalone: true,
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild(NgbDatepicker, { static: false }) expire: NgbDatepicker;

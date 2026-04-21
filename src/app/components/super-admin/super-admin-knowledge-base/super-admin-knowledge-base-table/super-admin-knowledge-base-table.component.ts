@@ -1,3 +1,6 @@
+﻿import { SuperAdminKnowledgeBaseNewsListComponent } from './';
+import { SuperAdminKnowledgeBaseTableItemComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
@@ -10,6 +13,8 @@ import { SuperAdminKnowledgeBaseAddComponent } from '../super-admin-knowledge-ba
 import { SuperAdminKnowledgeBaseEditComponent } from '../super-admin-knowledge-base-edit/super-admin-knowledge-base-edit.component';
 
 @Component({
+  standalone: true,
+  imports: [SuperAdminKnowledgeBaseNewsListComponent, SuperAdminKnowledgeBaseTableItemComponent, CommonModule],
   selector: 'app-super-admin-knowledge-base-table',
   templateUrl: './super-admin-knowledge-base-table.component.html',
   styleUrls: ['./super-admin-knowledge-base-table.component.scss'],

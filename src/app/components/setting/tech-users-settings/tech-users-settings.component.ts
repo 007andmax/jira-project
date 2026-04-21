@@ -1,3 +1,7 @@
+﻿import { DropDownComponent } from './';
+import { DynamicTooltipComponent } from './';
+import { PreloaderTicketComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Observable, Observer, Subscription } from 'rxjs';
@@ -29,6 +33,8 @@ import { fadeInAnimation } from 'src/app/animations';
 declare var $;
 
 @Component({
+  standalone: true,
+  imports: [DropDownComponent, DynamicTooltipComponent, PreloaderTicketComponent, CommonModule],
     selector: 'app-tech-users-settings',
     templateUrl: './tech-users-settings.component.html',
     animations: [fadeInAnimation],

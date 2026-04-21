@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { Card } from '../../manage-cards/class/card';
@@ -15,13 +17,16 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { REMOVE_CARD } from 'src/app/const/confirm';
 import { ManageCardsRealTimeService } from 'src/app/states/manage-cards/manage-cards-real-time.service';
 import { IntegrationsStateService } from 'src/app/states/integrations/integrations-state.service';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 @Component({
-    selector: 'app-payments-cards',
-    templateUrl: './payments-cards.component.html',
-    styleUrls: ['./payments-cards.component.scss'],
-    providers: [TicketsListService],
-    standalone: true
+  standalone: true,
+  imports: [MatErrorComponent, CommonModule],
+  selector: 'app-payments-cards',
+  templateUrl: './payments-cards.component.html',
+  styleUrls: ['./payments-cards.component.scss'],
+  providers: [TicketsListService],
+  standalone: true
 })
 export class PaymentsCardsComponent extends DropDownComponent {
   @Input() selectedCompanies = [];;

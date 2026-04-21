@@ -1,3 +1,6 @@
+﻿import { CompanyTimeZoneComponent } from './';
+import { DropDownComponent } from './';
+import { CommonModule } from '@angular/common';
 import { MapsAPILoader } from '@agm/core';
 import { Component, ElementRef, EventEmitter, NgZone, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
@@ -17,6 +20,8 @@ import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cro
 declare var google: any;
 declare var $: any;
 @Component({
+  standalone: true,
+  imports: [CompanyTimeZoneComponent, DropDownComponent, CommonModule],
   selector: 'app-company-profile-profile',
   templateUrl: './company-profile-profile.component.html',
   styleUrls: ['./company-profile-profile.component.scss']

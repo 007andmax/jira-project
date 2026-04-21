@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
@@ -8,6 +9,8 @@ import { DocumentsFilterComponent } from './documents-filter/documents-filter.co
 import { Subscription } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'documents-header',
     templateUrl: './documents-header.component.html',
     styleUrls: ['./documents-header.component.css'],

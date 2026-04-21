@@ -1,3 +1,5 @@
+﻿import { TaxesAddComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, of, Subscription } from 'rxjs';
@@ -20,6 +22,8 @@ import { BillableStateService } from 'src/app/states/billable/billable-state.ser
 import { fadeInAnimation } from 'src/app/animations';
 declare var $: any;
 @Component({
+  standalone: true,
+  imports: [TaxesAddComponent, CommonModule],
   selector: 'app-accounting-settings',
   templateUrl: './accounting-settings.component.html',
   animations: [fadeInAnimation],

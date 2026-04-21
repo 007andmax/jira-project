@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -10,6 +11,8 @@ import { Card } from '../class/card';
 import { ManageCardsStateService } from 'src/app/states/manage-cards/manage-cards-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'app-manage-cards-table',
     templateUrl: './manage-cards-table.component.html',
     styleUrls: ['./manage-cards-table.component.scss'],

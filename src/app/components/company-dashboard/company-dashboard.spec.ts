@@ -66,17 +66,16 @@ describe('CompanyDashboardComponent unit test', () => {
             timeOut: 5000,
             onActivateTick: true
         }),
-        NoopAnimationsModule],
-    providers: [{ provide: Router, useValue: mockRouter }],
-    declarations: [CompanyDashboardComponent,
+        NoopAnimationsModule, CompanyDashboardComponent,
         CompanyDashDetailComponent,
         CompanyDashAssociateComponent,
-        CompanyDashStatsComponent,
         CompanyDashTicketComponent,
         CompanyDashRevenueComponent,
         CompanyDashInvoiceComponent,
         CompanyDashContractComponent,
         CompanyDashAssociateInfoComponent],
+    providers: [{ provide: Router, useValue: mockRouter }],
+    declarations: [CompanyDashStatsComponent],
 }).compileComponents();
 
   });

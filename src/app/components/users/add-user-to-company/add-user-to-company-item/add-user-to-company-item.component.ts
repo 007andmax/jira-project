@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -13,6 +14,8 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { User } from '../../class/user';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'app-add-user-to-company-item',
     templateUrl: './add-user-to-company-item.component.html',
     styleUrls: ['./add-user-to-company-item.component.scss'],

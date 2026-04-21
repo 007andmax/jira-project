@@ -1,3 +1,5 @@
+﻿import { ReportSendEmailComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
@@ -16,6 +18,8 @@ import { ReportValidate1 } from "../../class/report-validate1";
 import { DeviceSummaryReportFilter } from "./Class/device-summary-report";
 
 @Component({
+  standalone: true,
+  imports: [ReportSendEmailComponent, CommonModule],
     selector: "report-device-summary",
     templateUrl: "./report-device-summary.component.html",
     styleUrls: ["./report-device-summary.component.scss"],

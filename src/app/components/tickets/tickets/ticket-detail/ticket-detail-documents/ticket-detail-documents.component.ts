@@ -1,9 +1,12 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Document } from 'src/app/components/documents/class/document';
 import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
 import { Subscription } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'ticket-detail-documents',
   templateUrl: './ticket-detail-documents.component.html',
   styleUrls: ['./ticket-detail-documents.component.scss']

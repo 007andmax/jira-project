@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from "rxjs";
 import { PasswordManagerService } from "../../services/password-manager/password-manager.service";
@@ -12,19 +15,26 @@ import { CompaniesStateService } from '../../states/company/companies-state.serv
 import { ActivatedRoute } from '@angular/router';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { PasswoordManagerFiltersComponent } from './passwoord-manager-header/passwoord-manager-filters/passwoord-manager-filters.component';
+import { PasswoordManagerHeaderComponent } from './passwoord-manager-header/passwoord-manager-header.component';
+import { PasswordManagerAddAsideComponent } from './password-manager-add-aside/password-manager-add-aside.component';
+import { PasswordManagerEditAsideComponent } from './password-manager-edit-aside/password-manager-edit-aside.component';
+import { PasswordManagerTableComponent } from './password-manager-table/password-manager-table.component';
 
 /**
  * Password manager component
  */
 @Component({
-    selector: 'app-password-manager',
-    templateUrl: './password-manager.component.html',
-    styleUrls: ['./password-manager.component.scss'],
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    providers: [PasswordManagerListService],
-    standalone: true
+  standalone: true,
+  imports: [PasswoordManagerFiltersComponent, PasswoordManagerHeaderComponent, PasswordManagerAddAsideComponent, PasswordManagerEditAsideComponent, PasswordManagerTableComponent, FormsModule, CommonModule],
+  selector: 'app-password-manager',
+  templateUrl: './password-manager.component.html',
+  styleUrls: ['./password-manager.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  providers: [PasswordManagerListService],
+  standalone: true
 })
 
 export class PasswordManagerComponent implements OnInit, OnDestroy {

@@ -1,12 +1,17 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { ReportListItemComponent } from '../../reports/report-list-item/report-list-item.component';
 
 @Component({
-    selector: 'devices-report',
-    templateUrl: './devices-report.component.html',
-    styleUrls: ['./devices-report.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [ReportListItemComponent, CommonModule],
+  selector: 'devices-report',
+  templateUrl: './devices-report.component.html',
+  styleUrls: ['./devices-report.component.scss'],
+  standalone: true
 })
 export class DevicesReportComponent implements OnInit {
   searchText: string = "";

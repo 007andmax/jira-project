@@ -23,8 +23,7 @@ describe('CompanyDashAssociateInfoComponent unit test', () => {
             timeOut: 5000,
             onActivateTick: true
         }),
-        NoopAnimationsModule],
-    declarations: [CompanyDashAssociateInfoComponent],
+        NoopAnimationsModule, CompanyDashAssociateInfoComponent],
 }).compileComponents();
 
   });

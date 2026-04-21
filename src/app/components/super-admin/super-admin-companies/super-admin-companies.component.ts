@@ -1,3 +1,7 @@
+﻿import { LeftPanelSuperAdminCompaniesComponent } from './';
+import { SuperAdminCompaniesHeaderComponent } from './';
+import { SuperAdminCompaniesItemComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { Subscription } from 'rxjs';
@@ -6,6 +10,8 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 import { SuperAdminCompanyFilters } from './class/super-admin-company-filters';
 
 @Component({
+  standalone: true,
+  imports: [LeftPanelSuperAdminCompaniesComponent, SuperAdminCompaniesHeaderComponent, SuperAdminCompaniesItemComponent, CommonModule],
     selector: 'super-admin-companies',
     templateUrl: './super-admin-companies.component.html',
     styleUrls: ['./super-admin-companies.component.scss'],

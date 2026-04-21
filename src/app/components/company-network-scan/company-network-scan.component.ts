@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -22,16 +25,21 @@ import { installationStatuses } from '../company-network-scan-beta/const/const';
 import { CompanyNetworkScanService } from '../company-network-scan-beta/services/company-network-scan.service';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { CompanyNetworkScanItemComponent } from '../company-network-scan-beta/company-network-scan-item/company-network-scan-item.component';
+import { CompanyNetworkScanNoExistDevicesComponent } from '../company-network-scan-beta/company-network-scan-no-exist-devices/company-network-scan-no-exist-devices.component';
+import { NetworkScanCredentialsAsideComponent } from '../company-network-scan-beta/network-scan-credentials-aside/network-scan-credentials-aside.component';
 
 @Component({
-    selector: 'company-network-scan',
-    templateUrl: './company-network-scan.component.html',
-    styleUrls: ['./company-network-scan.component.scss'],
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    providers: [CompanyNetworkScanService],
-    standalone: true
+  standalone: true,
+  imports: [CompanyNetworkScanItemComponent, CompanyNetworkScanNoExistDevicesComponent, NetworkScanCredentialsAsideComponent, FormsModule, CommonModule],
+  selector: 'company-network-scan',
+  templateUrl: './company-network-scan.component.html',
+  styleUrls: ['./company-network-scan.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  providers: [CompanyNetworkScanService],
+  standalone: true
 })
 export class CompanyNetworkScanComponent implements OnInit {
   @ViewChild('btnInstallAgent', { static: false }) btnInstallAgent: DisabledBtnDirective;

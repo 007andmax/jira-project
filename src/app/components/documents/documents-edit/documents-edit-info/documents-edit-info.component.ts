@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, Input, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
@@ -7,12 +10,18 @@ import { DocumentsAddInfoComponent } from '../../documents-add/documents-add-inf
 import { DocumentsLinkedComponent } from '../../documents-add/documents-add-info/documents-linked/documents-linked.component';
 import { DocumentCompanyUser } from '../../documents-add/class/document-company-user';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
+import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { DocumentsAddEditCategoriesComponent } from '../../documents-add/documents-add-info/documents-add-edit-categories/documents-add-edit-categories.component';
+import { DocumentsEditHistoryComponent } from '../documents-edit-history/documents-edit-history.component';
 
 @Component({
-    selector: 'documents-edit-info',
-    templateUrl: './documents-edit-info.component.html',
-    styleUrls: ['./documents-edit-info.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [DatePickerComponent, MatErrorComponent, DocumentsAddEditCategoriesComponent, DocumentsEditHistoryComponent, FormsModule, CommonModule],
+  selector: 'documents-edit-info',
+  templateUrl: './documents-edit-info.component.html',
+  styleUrls: ['./documents-edit-info.component.scss'],
+  standalone: true
 })
 export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
 

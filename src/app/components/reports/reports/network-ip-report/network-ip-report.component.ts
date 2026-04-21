@@ -1,3 +1,5 @@
+﻿import { ReportSendEmailComponent } from './';
+import { CommonModule } from '@angular/common';
 import { DatePipe } from "@angular/common";
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import * as moment from "moment";
@@ -15,6 +17,8 @@ import { NetworkIPReportFilter } from "./Class/network-ip-report";
 import { Subscription } from "rxjs";
 
 @Component({
+  standalone: true,
+  imports: [ReportSendEmailComponent, CommonModule],
     selector: "network-ip-report",
     templateUrl: "./network-ip-report.component.html",
     styleUrls: ["./network-ip-report.component.scss"],

@@ -1,9 +1,12 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TicketChangeStatusComponent } from '../../ticket-edit-aside/ticket-change-status/ticket-change-status.component';
 import { TitleListType } from '../../tickets-header/class/title-list-type';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'ticket-detail-change-status',
   templateUrl: './ticket-detail-change-status.component.html',
   styleUrls: ['./ticket-detail-change-status.component.scss']

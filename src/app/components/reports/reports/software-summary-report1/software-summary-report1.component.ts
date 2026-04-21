@@ -1,3 +1,5 @@
+﻿import { ReportSendEmailComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
@@ -16,6 +18,8 @@ import { SoftwareSummaryReportFilter } from "./Class/software-summary-report1-fi
 import { Subscription } from "rxjs";
 
 @Component({
+  standalone: true,
+  imports: [ReportSendEmailComponent, CommonModule],
     selector: "software-summary-report1",
     templateUrl: "./software-summary-report1.component.html",
     styleUrls: ["./software-summary-report1.component.scss"],

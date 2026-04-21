@@ -1,14 +1,20 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CategoryProduct } from 'src/app/interfaces/product/category-product';
 import { ProductService } from 'src/app/services/product/product.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
 
 @Component({
-    selector: 'inventory-add-category',
-    templateUrl: './inventory-add-category.component.html',
-    styleUrls: ['./inventory-add-category.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [MatErrorComponent, FormsModule, CommonModule],
+  selector: 'inventory-add-category',
+  templateUrl: './inventory-add-category.component.html',
+  styleUrls: ['./inventory-add-category.component.scss'],
+  standalone: true
 })
 export class InventoryAddCategoryComponent implements OnInit {
   @Output() onClose: EventEmitter<any> = new EventEmitter();

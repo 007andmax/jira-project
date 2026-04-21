@@ -1,3 +1,5 @@
+﻿import { PreviewPhoneMaskComponent } from './';
+import { CommonModule } from '@angular/common';
 import { EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -11,6 +13,8 @@ import { TicketDetailContactDetailsHistoryComponent } from './ticket-detail-cont
 import * as moment from "moment";
 
 @Component({
+  standalone: true,
+  imports: [PreviewPhoneMaskComponent, CommonModule],
   selector: 'ticket-detail-contact-details',
   templateUrl: './ticket-detail-contact-details.component.html',
   styleUrls: ['./ticket-detail-contact-details.component.scss'],

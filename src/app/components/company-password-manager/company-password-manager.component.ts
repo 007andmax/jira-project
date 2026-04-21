@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { PasswordManagerComponent } from '../password-manager/password-manager.component';
 import { PasswordRecord } from '../password-manager/class/password-record';
@@ -5,17 +7,23 @@ import { PasswordManagerListService } from '../password-manager/services/passwor
 import { REMOVE_RECORD } from '../../const/confirm';
 import { fadeInAnimation } from 'src/app/animations';
 import { PasswoordManagerFiltersComponent } from '../password-manager/passwoord-manager-header/passwoord-manager-filters/passwoord-manager-filters.component';
+import { PasswoordManagerHeaderComponent } from '../password-manager/passwoord-manager-header/passwoord-manager-header.component';
+import { PasswordManagerAddAsideComponent } from '../password-manager/password-manager-add-aside/password-manager-add-aside.component';
+import { PasswordManagerEditAsideComponent } from '../password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
+import { PasswordManagerTableComponent } from '../password-manager/password-manager-table/password-manager-table.component';
 
 
 @Component({
-    selector: 'company-password-manager',
-    templateUrl: './company-password-manager.component.html',
-    styleUrls: ['./company-password-manager.component.scss'],
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    providers: [PasswordManagerListService],
-    standalone: true
+  standalone: true,
+  imports: [PasswoordManagerHeaderComponent, PasswordManagerAddAsideComponent, PasswordManagerEditAsideComponent, PasswordManagerTableComponent, CommonModule],
+  selector: 'company-password-manager',
+  templateUrl: './company-password-manager.component.html',
+  styleUrls: ['./company-password-manager.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  providers: [PasswordManagerListService],
+  standalone: true
 })
 export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
   @ViewChild('filters', { static: true }) filters: PasswoordManagerFiltersComponent;

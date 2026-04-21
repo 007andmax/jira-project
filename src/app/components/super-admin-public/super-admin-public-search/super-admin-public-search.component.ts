@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { SupportPageCategory } from '../../super-admin/left-panel-super-admin-categories/class/support-page-category';
@@ -5,6 +6,8 @@ import { SupportPageCategoriesService } from '../../super-admin/services/support
 import { SuperAdminPublicSearchListService } from './services/super-admin-public-search-list.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'super-admin-public-search',
     templateUrl: './super-admin-public-search.component.html',
     styleUrls: ['./super-admin-public-search.component.scss'],

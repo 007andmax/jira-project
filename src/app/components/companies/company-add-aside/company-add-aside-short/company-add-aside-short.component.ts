@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompaniesService } from 'src/app/services/company/companies.service';
@@ -9,9 +12,14 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { UsersDropDownComponent } from 'src/app/components/shared/users-drop-down/users-drop-down.component';
 var $ = require("jquery");
 
 @Component({
+  standalone: true,
+  imports: [DropDownComponent, MatErrorComponent, UsersDropDownComponent, FormsModule, CommonModule],
   selector: 'company-add-aside-short',
   templateUrl: './company-add-aside-short.component.html',
   styleUrls: ['./company-add-aside-short.component.scss']

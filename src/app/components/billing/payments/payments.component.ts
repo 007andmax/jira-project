@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Payment } from './class/payment';
 import { PaymentsFilter } from './class/payments-filter';
@@ -14,16 +16,23 @@ import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.servic
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { EditPaymentComponent } from './edit-payment/edit-payment.component';
+import { PaymentItemComponent } from './payment-item/payment-item.component';
+import { PaymentsAsideComponent } from './payments-aside/payments-aside.component';
+import { PaymentsHeaderComponent } from './payments-header/payments-header.component';
+import { RefundPaymentComponent } from './refund-payment/refund-payment.component';
 
 @Component({
-    selector: 'payments',
-    templateUrl: './payments.component.html',
-    styleUrls: ['./payments.component.scss'],
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    providers: [PaymentsListService],
-    standalone: true
+  standalone: true,
+  imports: [EditPaymentComponent, PaymentItemComponent, PaymentsAsideComponent, PaymentsHeaderComponent, RefundPaymentComponent, CommonModule],
+  selector: 'payments',
+  templateUrl: './payments.component.html',
+  styleUrls: ['./payments.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  providers: [PaymentsListService],
+  standalone: true
 })
 export class PaymentsComponent implements OnInit, OnDestroy {
 

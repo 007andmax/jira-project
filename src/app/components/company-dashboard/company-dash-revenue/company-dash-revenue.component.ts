@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import * as moment from "moment";
@@ -5,6 +6,8 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'app-company-dash-revenue',
   templateUrl: './company-dash-revenue.component.html',
   styleUrls: ['./company-dash-revenue.component.scss']

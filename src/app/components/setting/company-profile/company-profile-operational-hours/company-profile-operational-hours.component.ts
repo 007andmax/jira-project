@@ -1,3 +1,6 @@
+﻿import { DropDownComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { WORK_HOURS } from 'src/app/const/time';
@@ -6,6 +9,8 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
+  standalone: true,
+  imports: [DropDownComponent, FormsModule, CommonModule],
   selector: 'app-company-profile-operational-hours',
   templateUrl: './company-profile-operational-hours.component.html',
   styleUrls: ['./company-profile-operational-hours.component.scss']

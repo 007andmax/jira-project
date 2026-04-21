@@ -1,3 +1,8 @@
+﻿import { DynamicTooltipComponent } from './';
+import { PreviewPhoneMaskComponent } from './';
+import { UserTableDefaultSubscriptionComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-company-job-title/class/crm-company-job-title';
@@ -18,6 +23,8 @@ import { UsersRealTimeService } from 'src/app/states/users/users-real-time.servi
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, PreviewPhoneMaskComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
     selector: 'app-users-details-tab-companies-item',
     templateUrl: './users-details-tab-companies-item.component.html',
     styleUrls: ['./users-details-tab-companies-item.component.scss'],

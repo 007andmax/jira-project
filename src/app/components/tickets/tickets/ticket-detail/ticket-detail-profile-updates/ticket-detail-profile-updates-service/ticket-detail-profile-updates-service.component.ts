@@ -1,3 +1,7 @@
+﻿import { DynamicTooltipComponent } from './';
+import { TicketDetailProfileUpdatesServiceHeaderInfoComponent } from './';
+import { TicketDetailProfileUpdatesServiceItemComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { REMOVE_UPDATE_TICKET_DETAIL, REMOVE_UPDATE_TICKET_DETAIL_SERVICE } from 'src/app/const/confirm';
@@ -9,6 +13,8 @@ import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-s
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, TicketDetailProfileUpdatesServiceHeaderInfoComponent, TicketDetailProfileUpdatesServiceItemComponent, CommonModule],
   selector: 'ticket-detail-profile-updates-service',
   templateUrl: './ticket-detail-profile-updates-service.component.html',
   styleUrls: ['./ticket-detail-profile-updates-service.component.scss']

@@ -1,3 +1,13 @@
+﻿import { DatePickerComponent } from './';
+import { DropDownComponent } from './';
+import { MatErrorComponent } from './';
+import { PreloaderTicketComponent } from './';
+import { ServicesListComponent } from './';
+import { TasksAddAssignedUsersComponent } from './';
+import { TasksAddAssociateTicketsComponent } from './';
+import { UploadAreaProgressComponent } from './';
+import { CompanyDropDownComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { TasksAddComponent } from '../tasks-add/tasks-add.component';
 import { Validators } from '@angular/forms';
@@ -14,6 +24,8 @@ import { Ticket } from '../../tickets/class/ticket';
 import { TasksDatePickerComponent } from '../tasks-date-picker/tasks-date-picker.component';
 
 @Component({
+  standalone: true,
+  imports: [DatePickerComponent, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, ServicesListComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
     selector: 'app-tasks-edit',
     templateUrl: './tasks-edit.component.html',
     styleUrls: ['./tasks-edit.component.scss'],

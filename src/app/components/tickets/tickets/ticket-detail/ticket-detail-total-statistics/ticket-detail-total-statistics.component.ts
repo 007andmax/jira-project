@@ -1,7 +1,10 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { TicketProfile } from '../../class/ticket-profile';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'app-ticket-detail-total-statistics',
   templateUrl: './ticket-detail-total-statistics.component.html',
   styleUrls: ['./ticket-detail-total-statistics.component.scss']

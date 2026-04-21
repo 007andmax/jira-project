@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { Subscription } from 'rxjs';
@@ -5,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'app-company-dash-ticket',
   templateUrl: './company-dash-ticket.component.html',
   styleUrls: ['./company-dash-ticket.component.scss']

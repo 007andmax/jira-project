@@ -1,9 +1,13 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { SignatureService } from 'src/app/services/signature/signature.service';
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
   selector: 'add-signature',
   templateUrl: './add-signature.component.html',
   styleUrls: ['./add-signature.component.scss']

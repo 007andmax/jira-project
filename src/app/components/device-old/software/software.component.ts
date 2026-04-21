@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, TemplateRef, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { formatDate, DatePipe } from '@angular/common';
 import { SoftwareListService } from './../_services/software-list.service';
@@ -15,12 +17,15 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SoftwareHeaderComponent } from './software-header/software-header.component';
+import { TicketTaskComponent } from '../ticket-task/ticket-task.component';
 
 @Component({
-    selector: 'app-software',
-    templateUrl: './software.component.html',
-    styleUrls: ['./software.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [TicketTaskComponent, CommonModule],
+  selector: 'app-software',
+  templateUrl: './software.component.html',
+  styleUrls: ['./software.component.scss'],
+  standalone: true
 })
 export class SoftwareComponent implements OnInit, OnDestroy {
   url = environment.apiUrl + 'upload';

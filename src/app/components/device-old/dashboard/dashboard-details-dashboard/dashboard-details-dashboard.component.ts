@@ -1,14 +1,20 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import { HardwareService } from 'src/app/components/device/_services/hardware.service';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
+import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 
 @Component({
-    selector: 'dashboard-details-dashboard',
-    templateUrl: './dashboard-details-dashboard.component.html',
-    styleUrls: ['./dashboard-details-dashboard.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule, CommonModule],
+  selector: 'dashboard-details-dashboard',
+  templateUrl: './dashboard-details-dashboard.component.html',
+  styleUrls: ['./dashboard-details-dashboard.component.scss'],
+  standalone: true
 })
 export class DashboardDetailsDashboardComponent implements OnInit {
   @Input() label = '';

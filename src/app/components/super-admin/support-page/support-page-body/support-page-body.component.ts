@@ -1,9 +1,12 @@
+﻿import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { environment } from 'src/environments/environment';
 
 declare const CodeMirror: any;
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'support-page-body',
   templateUrl: './support-page-body.component.html',
   styleUrls: ['./support-page-body.component.scss']

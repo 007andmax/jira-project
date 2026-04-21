@@ -1,3 +1,7 @@
+﻿import { AddCustomNotesSettingsComponent } from './';
+import { DynamicTooltipComponent } from './';
+import { EditCustomNotesSettingsComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -10,6 +14,8 @@ import { BillableStateService } from 'src/app/states/billable/billable-state.ser
 import { CustomNoteFilter } from './class/custom-note-filter';
 
 @Component({
+  standalone: true,
+  imports: [AddCustomNotesSettingsComponent, DynamicTooltipComponent, EditCustomNotesSettingsComponent, CommonModule],
   selector: 'custom-notes-settings',
   templateUrl: './custom-notes-settings.component.html',
   styleUrls: ['./custom-notes-settings.component.scss']

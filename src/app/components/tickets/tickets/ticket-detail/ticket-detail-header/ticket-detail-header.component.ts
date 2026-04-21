@@ -1,3 +1,5 @@
+﻿import { PreloaderTicketComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -15,6 +17,8 @@ import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tick
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
+  standalone: true,
+  imports: [PreloaderTicketComponent, CommonModule],
   selector: 'ticket-detail-header',
   templateUrl: './ticket-detail-header.component.html',
   styleUrls: ['./ticket-detail-header.component.scss'],

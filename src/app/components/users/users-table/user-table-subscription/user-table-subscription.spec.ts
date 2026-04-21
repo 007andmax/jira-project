@@ -26,8 +26,7 @@ describe('UserTableSubscriptionComponent unit test', () => {
             timeOut: 5000,
             onActivateTick: true
         }),
-        NoopAnimationsModule],
-    declarations: [UserTableSubscriptionComponent]
+        NoopAnimationsModule, UserTableSubscriptionComponent]
 }).compileComponents();
 
   });

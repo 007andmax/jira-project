@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FileManagerCategory } from '../class/file-manager-category';
 import { FileManagerFile } from '../class/file-manager-file';
@@ -11,12 +14,16 @@ import { FileManagementRealTimeService } from 'src/app/states/file-management/fi
 import * as moment from "moment";
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { ToastrService } from 'ngx-toastr';
+import { FileManagerFileInfoTagsComponent } from './file-manager-file-info-tags/file-manager-file-info-tags.component';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
 
 @Component({
-    selector: 'app-file-manager-file-info',
-    templateUrl: './file-manager-file-info.component.html',
-    styleUrls: ['./file-manager-file-info.component.scss'],
-    standalone: true,
+  standalone: true,
+  imports: [FileManagerFileInfoTagsComponent, MatErrorComponent, FormsModule, CommonModule],
+  selector: 'app-file-manager-file-info',
+  templateUrl: './file-manager-file-info.component.html',
+  styleUrls: ['./file-manager-file-info.component.scss'],
+  standalone: true,
 })
 export class FileManagerFileInfoComponent implements OnInit, OnDestroy {
   selectedTags: Array<any> = [];

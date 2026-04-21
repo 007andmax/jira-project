@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, ViewChild, OnDestroy } from '@angular/core';
 import { BillableProfileTicketServiceExpense } from '../../../../class/billable-profile-ticket-service-expense';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -7,12 +8,16 @@ import { Subscription } from 'rxjs';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { TaxesService } from 'src/app/services/taxes/taxes.service';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
+import { TicketProfileUpdatesServiceDurationComponent } from 'src/app/components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.component';
+import { TicketProfileUpdatesServiceTimepickerComponent } from 'src/app/components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
 
 @Component({
-    selector: 'app-invoice-form-ticket-edit-service',
-    templateUrl: './invoice-form-ticket-edit-service.component.html',
-    styleUrls: ['./invoice-form-ticket-edit-service.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [TicketProfileUpdatesServiceDurationComponent, TicketProfileUpdatesServiceTimepickerComponent, CommonModule],
+  selector: 'app-invoice-form-ticket-edit-service',
+  templateUrl: './invoice-form-ticket-edit-service.component.html',
+  styleUrls: ['./invoice-form-ticket-edit-service.component.scss'],
+  standalone: true
 })
 export class InvoiceFormTicketEditServiceComponent implements OnInit, OnDestroy {
   @ViewChild('taxes', { static: true }) taxesDropDown: TaxesComponent;

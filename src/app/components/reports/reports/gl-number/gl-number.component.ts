@@ -1,3 +1,6 @@
+﻿import { OverviewReportComponent } from './';
+import { ReportMenuComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { GlNumber } from '../../class/gl-number';
 import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
@@ -6,6 +9,8 @@ import * as moment from "moment";
 import { GlNumberItem } from '../../class/gl-number-item';
 
 @Component({
+  standalone: true,
+  imports: [OverviewReportComponent, ReportMenuComponent, CommonModule],
     selector: 'app-gl-number',
     templateUrl: './gl-number.component.html',
     styleUrls: ['./gl-number.component.scss'],

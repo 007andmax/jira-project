@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ItemFilterPerson } from 'src/app/components/left-panel/left-panel-companies/class/item-filter-person';
@@ -13,6 +14,8 @@ import { CompanySetting } from '../../class/company-setting';
 import { CompanyTagsComponent } from '../../company-tags/company-tags.component';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'companies-filter',
   templateUrl: './companies-filter.component.html',
   styleUrls: ['./companies-filter.component.scss'],

@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -8,12 +11,16 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { DocumentEditCategory } from './class/document-edit-category';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
+import { DocumentsEditCategoryItemComponent } from './documents-edit-category-item/documents-edit-category-item.component';
 
 @Component({
-    selector: 'documents-edit-category',
-    templateUrl: './documents-edit-category.component.html',
-    styleUrls: ['./documents-edit-category.component.scss'],
-    standalone: true,
+  standalone: true,
+  imports: [PreloaderTicketComponent, DocumentsEditCategoryItemComponent, FormsModule, CommonModule],
+  selector: 'documents-edit-category',
+  templateUrl: './documents-edit-category.component.html',
+  styleUrls: ['./documents-edit-category.component.scss'],
+  standalone: true,
 })
 export class DocumentsEditCategoryComponent implements OnInit, OnDestroy {
   @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;

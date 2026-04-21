@@ -1,3 +1,13 @@
+﻿import { DatePickerComponent } from './';
+import { DropDownComponent } from './';
+import { MatErrorComponent } from './';
+import { PreloaderTicketComponent } from './';
+import { TasksAddAssignedUsersComponent } from './';
+import { TasksAddAssociateTicketsComponent } from './';
+import { TasksDatePickerComponent } from './';
+import { UploadAreaProgressComponent } from './';
+import { CompanyDropDownComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { Task } from '../class/task';
@@ -21,6 +31,8 @@ import { ServicesListComponent } from '../../shared/services-list/services-list.
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
+  standalone: true,
+  imports: [DatePickerComponent, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, TasksDatePickerComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
     selector: 'app-tasks-add',
     templateUrl: './tasks-add.component.html',
     styleUrls: ['./tasks-add.component.scss'],

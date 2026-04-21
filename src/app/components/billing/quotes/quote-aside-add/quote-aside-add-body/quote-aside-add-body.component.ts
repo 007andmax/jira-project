@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompanyItem } from 'src/app/components/companies/class/company-item';
@@ -22,12 +25,21 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { InvoiceTicketsService } from 'src/app/services/accounting/accounting-settings.service';
 import { QuoteRealTimeService } from '../../quote-realtime/quote-realtime.service';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { InvoiceRegularNoteComponent } from '../../../billable/billable-aside/invoice-form/invoice-regular-note/invoice-regular-note.component';
+import { ProductItemQuoteComponent } from '../product-item-quote/product-item-quote.component';
+import { ProductListQuoteComponent } from '../product-list-quote/product-list-quote.component';
+import { QuoteAsideAddChangeAddressComponent } from '../quote-aside-add-change-address/quote-aside-add-change-address.component';
+import { ServiceItemQuoteComponent } from '../service-item-quote/service-item-quote.component';
 
 @Component({
-    selector: 'app-quote-aside-add-body',
-    templateUrl: './quote-aside-add-body.component.html',
-    styleUrls: ['./quote-aside-add-body.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [DropDownComponent, InvoiceRegularNoteComponent, MatErrorComponent, ProductItemQuoteComponent, ProductListQuoteComponent, ServiceItemQuoteComponent, QuoteAsideAddChangeAddressComponent, FormsModule, CommonModule],
+  selector: 'app-quote-aside-add-body',
+  templateUrl: './quote-aside-add-body.component.html',
+  styleUrls: ['./quote-aside-add-body.component.scss'],
+  standalone: true
 })
 export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
   @ViewChild('companyEdit', { static: false }) companyEdit: InvoiceFormEditCustomerComponent;

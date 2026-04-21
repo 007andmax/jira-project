@@ -1,13 +1,24 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { UsersDetailsComponent } from '../../users-details/users-details.component';
 import { UserCustomerCompaniesInfo } from '../../users/class/user-customer-companies-info';
 import { UserCustomSubscription } from '../../users/class/user-custom-subscription';
+import { UsersDetailsHeaderComponent } from '../../users-details/users-details-header/users-details-header.component';
+import { UsersDetailsLeftPanelComponent } from '../../users-details/users-details-left-panel/users-details-left-panel.component';
+import { UsersDetailsTabCompaniesComponent } from '../../users-details/users-details-tab-companies/users-details-tab-companies.component';
+import { UsersDetailsTabDocumentsComponent } from '../../users-details/users-details-tab-documents/users-details-tab-documents.component';
+import { UsersDetailsTabMessagesComponent } from '../../users-details/users-details-tab-messages/users-details-tab-messages.component';
+import { UsersDetailsTabPasswordsComponent } from '../../users-details/users-details-tab-passwords/users-details-tab-passwords.component';
+import { UsersDetailsTabTicketsComponent } from '../../users-details/users-details-tab-tickets/users-details-tab-tickets.component';
 
 @Component({
-    selector: 'app-companies-users-details',
-    templateUrl: './companies-users-details.component.html',
-    styleUrls: ['./companies-users-details.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [UsersDetailsHeaderComponent, UsersDetailsLeftPanelComponent, UsersDetailsTabCompaniesComponent, UsersDetailsTabDocumentsComponent, UsersDetailsTabMessagesComponent, UsersDetailsTabPasswordsComponent, UsersDetailsTabTicketsComponent, CommonModule],
+  selector: 'app-companies-users-details',
+  templateUrl: './companies-users-details.component.html',
+  styleUrls: ['./companies-users-details.component.scss'],
+  standalone: true
 })
 export class CompaniesUsersDetailsComponent extends UsersDetailsComponent {
   companyId: string;

@@ -49,8 +49,7 @@ describe('UsersTableComponent unit test', () => {
             timeOut: 5000,
             onActivateTick: true
         }),
-        NoopAnimationsModule],
-    declarations: [UsersTableComponent],
+        NoopAnimationsModule, UsersTableComponent],
     providers: [{ provide: Router, useValue: mockRouter }],
 }).compileComponents();
 

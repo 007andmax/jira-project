@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { DeviceCompany } from '../class/device-company';
@@ -7,10 +8,12 @@ import { CompanyDeviceFilter } from '../class/device-company-filter';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'app-company-devices-header',
-    templateUrl: './company-devices-header.component.html',
-    styleUrls: ['./company-devices-header.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [CommonModule],
+  selector: 'app-company-devices-header',
+  templateUrl: './company-devices-header.component.html',
+  styleUrls: ['./company-devices-header.component.scss'],
+  standalone: true
 })
 export class CompanyDevicesHeaderComponent implements OnInit {
   @Input() devices: Array<DeviceCompany> = [];

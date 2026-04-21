@@ -1,3 +1,5 @@
+﻿import { DynamicTooltipComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -11,6 +13,8 @@ import { SupportPageCategoriesStateService } from '../../state/support-page-cate
 import { SupportPageCategory } from '../class/support-page-category';
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, CommonModule],
   selector: 'left-panel-super-admin-categories-actions',
   templateUrl: './left-panel-super-admin-categories-actions.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

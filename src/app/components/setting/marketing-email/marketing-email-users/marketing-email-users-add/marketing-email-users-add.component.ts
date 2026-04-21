@@ -1,3 +1,7 @@
+﻿import { PreloaderTicketComponent } from './';
+import { MarketingEmailUsersAddItemComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { User } from 'src/app/components/users/class/user';
 import { UserListService } from 'src/app/components/users/services/user-list.service';
@@ -11,6 +15,8 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 import { Subscription } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [PreloaderTicketComponent, MarketingEmailUsersAddItemComponent, FormsModule, CommonModule],
     selector: 'marketing-email-users-add',
     templateUrl: './marketing-email-users-add.component.html',
     styleUrls: ['./marketing-email-users-add.component.scss'],

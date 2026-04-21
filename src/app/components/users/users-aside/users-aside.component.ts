@@ -1,3 +1,12 @@
+﻿import { CompanyTagsComponent } from './';
+import { DynamicTooltipComponent } from './';
+import { MatErrorComponent } from './';
+import { PreloaderTicketComponent } from './';
+import { CompanyDropDownComponent } from './';
+import { UserCustomSubscriptionComponent } from './';
+import { UserDefaultSubscriptionComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
 import { CROPP_AVATAR_USER } from 'src/app/const/image-cropp';
@@ -22,6 +31,8 @@ import { UserRole } from '../class/user-role';
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CompanyTagsComponent, DynamicTooltipComponent, MatErrorComponent, PreloaderTicketComponent, CompanyDropDownComponent, UserCustomSubscriptionComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'app-users-aside',
   templateUrl: './users-aside.component.html',
   styleUrls: ['./users-aside.component.scss'],

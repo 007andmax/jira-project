@@ -1,3 +1,7 @@
+﻿import { PreloaderTicketComponent } from './';
+import { TicketDetailProfileFormUpdateHeaderComponent } from './';
+import { TicketProfileFormUpdateNoteListComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TicketDetailProfileFormUpdateComponent } from '../ticket-detail-profile-form-update/ticket-detail-profile-form-update.component';
 import { NgbModalConfig, NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -18,6 +22,8 @@ import { TicketStateService } from '../../ticket-edit-aside/services/ticket-stat
 import { TicketDetailProfileFormUpdateNoteComponent } from '../ticket-detail-profile-form-update/ticket-detail-profile-form-update-note/ticket-detail-profile-form-update-note.component';
 
 @Component({
+  standalone: true,
+  imports: [PreloaderTicketComponent, TicketDetailProfileFormUpdateHeaderComponent, TicketProfileFormUpdateNoteListComponent, CommonModule],
     selector: 'app-ticket-detail-note-modal',
     templateUrl: './ticket-detail-note-modal.component.html',
     styleUrls: ['./ticket-detail-note-modal.component.scss'],

@@ -27,8 +27,7 @@ describe('TicketDetailMessageComponent unit test', () => {
         NgbModule,
         DisabledBtnModule,
         PreloaderTicketModule,
-        NoopAnimationsModule],
-    declarations: [TicketDetailMessageComponent]
+        NoopAnimationsModule, TicketDetailMessageComponent]
 }).compileComponents();
 
   });

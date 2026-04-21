@@ -1,3 +1,6 @@
+﻿import { PreloaderTicketComponent } from './';
+import { TicketDetailProfileFormUpdateSupportComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { RemoteSession } from 'src/app/components/support/class/remote-sessions';
 import { User } from 'src/app/components/users/class/user';
@@ -30,6 +33,8 @@ import { TicketProfileFormUpdateNoteListComponent } from '../ticket-profile-form
 import { TicketDetailProfileFormUpdateHeaderComponent } from './ticket-detail-profile-form-update-header/ticket-detail-profile-form-update-header.component';
 
 @Component({
+  standalone: true,
+  imports: [PreloaderTicketComponent, TicketDetailProfileFormUpdateSupportComponent, CommonModule],
     selector: 'ticket-detail-profile-form-update',
     templateUrl: './ticket-detail-profile-form-update.component.html',
     styleUrls: ['./ticket-detail-profile-form-update.component.scss'],

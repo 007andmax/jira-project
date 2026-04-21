@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { TicketsListService } from '../tickets/tickets/services/tickets-list.service';
 import { TicketsFilter } from '../tickets/tickets/class/tickets-filter';
@@ -16,16 +18,20 @@ import { TicketStatus } from '../setting/ticket-settings-page/tickets-status/cla
 import { StatusColor } from '../tickets/class/status-color';
 import { TicketsFilterComponent } from '../tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
 import { fadeInAnimation } from 'src/app/animations';
+import { MergeTicketsComponent } from '../tickets/tickets/merge-tickets/merge-tickets.component';
+import { TicketsTableItemComponent } from '../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item.component';
 
 @Component({
-    selector: 'company-tickets',
-    templateUrl: './company-tickets.component.html',
-    styleUrls: ['./company-tickets.component.scss'],
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    providers: [TicketsListService],
-    standalone: true
+  standalone: true,
+  imports: [MergeTicketsComponent, TicketsTableItemComponent, CommonModule],
+  selector: 'company-tickets',
+  templateUrl: './company-tickets.component.html',
+  styleUrls: ['./company-tickets.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  providers: [TicketsListService],
+  standalone: true
 })
 export class CompanyTicketsComponent implements OnInit, OnDestroy {
   ticketsFilter: TicketsFilter = new TicketsFilter();

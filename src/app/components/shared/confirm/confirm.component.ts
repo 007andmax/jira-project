@@ -1,3 +1,5 @@
+﻿import { PreloaderTicketComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { ConfirmStateService } from './services/confirm-state.service';
 import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
@@ -6,6 +8,8 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { Subscription } from 'rxjs';
 
 @Component({
+  standalone: true,
+  imports: [PreloaderTicketComponent, CommonModule],
   selector: 'app-confirm',
   templateUrl: './confirm.component.html',
   styleUrls: ['./confirm.component.scss']

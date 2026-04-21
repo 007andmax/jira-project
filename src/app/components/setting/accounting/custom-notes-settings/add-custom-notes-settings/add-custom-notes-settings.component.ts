@@ -1,3 +1,6 @@
+﻿import { MatErrorComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { InvoiceNote } from 'src/app/components/billing/billable/class/invoice-note';
 import { BillableService } from 'src/app/services/billable/billable.service';
@@ -5,6 +8,8 @@ import { BillableStateService } from 'src/app/states/billable/billable-state.ser
 import { ValidateNote } from '../class/validate-note';
 
 @Component({
+  standalone: true,
+  imports: [MatErrorComponent, FormsModule, CommonModule],
   selector: 'add-custom-notes-settings',
   templateUrl: './add-custom-notes-settings.component.html',
   styleUrls: ['./add-custom-notes-settings.component.scss']

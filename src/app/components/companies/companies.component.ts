@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { CompaniesService } from '../../services/company/companies.service';
 import { CompaniesListService } from './services/companies-list.service';
@@ -19,8 +22,13 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 import { CompanyDeviceCount } from './class/company-device-count';
 import { CompaniesHeaderComponent } from './companies-header/companies-header.component';
 import { fadeInAnimation } from 'src/app/animations';
+import { CompaniesFilterComponent } from './companies-header/companies-filter/companies-filter.component';
+import { CompaniesTableComponent } from './companies-table/companies-table.component';
+import { CompanyEditAsideComponent } from './company-edit-aside/company-edit-aside.component';
 
 @Component({
+  standalone: true,
+  imports: [CompaniesTableComponent, CompanyEditAsideComponent, CompaniesFilterComponent, FormsModule, CommonModule],
   selector: 'app-companies',
   templateUrl: './companies.component.html',
   styleUrls: ['./companies.component.scss'],

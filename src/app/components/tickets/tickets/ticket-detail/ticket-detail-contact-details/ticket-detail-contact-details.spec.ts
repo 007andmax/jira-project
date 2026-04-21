@@ -25,8 +25,7 @@ describe('TicketDetailContactDetailsComponent unit test', () => {
         }),
         NoopAnimationsModule,
         PreviewPhoneMaskModule,
-        InfiniteScrollModule],
-    declarations: [TicketDetailContactDetailsComponent,
+        InfiniteScrollModule, TicketDetailContactDetailsComponent,
         TicketDetailContactDetailsHistoryComponent],
     providers: [TicketDetailContactDetailsComponent]
 }).compileComponents();

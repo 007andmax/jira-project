@@ -1,3 +1,7 @@
+﻿import { TaskHeaderAddComponent } from './';
+import { TasksCalendarWeekItemAllDayComponent } from './';
+import { TasksCalendarWeekItemHourComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, NgZone, OnDestroy, OnInit } from '@angular/core';
 import * as moment from "moment";
 import { TasksService } from 'src/app/services/tasks/tasks.service';
@@ -10,6 +14,8 @@ import { TasksFilters } from '../../class/tasks-filters';
 import { Subscription } from 'rxjs';
 import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
 @Component({
+  standalone: true,
+  imports: [TaskHeaderAddComponent, TasksCalendarWeekItemAllDayComponent, TasksCalendarWeekItemHourComponent, CommonModule],
     selector: 'app-tasks-calendar-week',
     templateUrl: './tasks-calendar-week.component.html',
     styleUrls: ['./tasks-calendar-week.component.scss'],

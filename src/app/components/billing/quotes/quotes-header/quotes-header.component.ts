@@ -1,3 +1,5 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AppService } from 'src/app/states/app/app.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
@@ -10,10 +12,12 @@ import { ARCHIVE_QUOTES } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 
 @Component({
-    selector: 'app-quotes-header',
-    templateUrl: './quotes-header.component.html',
-    styleUrls: ['./quotes-header.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [FormsModule, CommonModule],
+  selector: 'app-quotes-header',
+  templateUrl: './quotes-header.component.html',
+  styleUrls: ['./quotes-header.component.scss'],
+  standalone: true
 })
 export class QuotesHeaderComponent implements OnInit {
   @ViewChild('filter', { static: true }) filter: QuotesFilterComponent;

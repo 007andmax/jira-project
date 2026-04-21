@@ -26,8 +26,7 @@ describe('CompanyAddAsideShortComponent unit test', () => {
             timeOut: 5000,
             onActivateTick: true
         }),
-        NoopAnimationsModule],
-    declarations: [CompanyAddAsideShortComponent],
+        NoopAnimationsModule, CompanyAddAsideShortComponent],
 }).compileComponents();
 
   });

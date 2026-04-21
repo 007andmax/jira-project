@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -13,6 +14,8 @@ import { InventoryAgreement } from './class/inventory-agreement';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'inventory-check-use',
   templateUrl: './inventory-check-use.component.html',
   styleUrls: ['./inventory-check-use.component.scss'],

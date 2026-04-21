@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, Input, OnDestroy } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import * as moment from "moment";
@@ -6,6 +7,8 @@ import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.servic
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'app-company-dash-invoice',
   templateUrl: './company-dash-invoice.component.html',
   styleUrls: ['./company-dash-invoice.component.scss']

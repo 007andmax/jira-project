@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DeviceExtended } from '../../class/device-extended';
 import * as moment from "moment";
@@ -15,12 +18,15 @@ import { ManufactureDevice } from '../../company-devices-custom-aside/class/manu
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { Subscription } from 'rxjs';
 import { DeviceType } from '../../class/device-type';
+import { CompanyDevicesEditIpComponent } from '../../company-devices-edit-ip/company-devices-edit-ip.component';
 
 @Component({
-    selector: 'app-company-devices-aside-system',
-    templateUrl: './company-devices-aside-system.component.html',
-    styleUrls: ['./company-devices-aside-system.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [CompanyDevicesEditIpComponent, FormsModule, CommonModule],
+  selector: 'app-company-devices-aside-system',
+  templateUrl: './company-devices-aside-system.component.html',
+  styleUrls: ['./company-devices-aside-system.component.scss'],
+  standalone: true
 })
 export class CompanyDevicesAsideSystemComponent implements OnInit, OnDestroy {
   @ViewChild('datePickerInstalledOn', { static: false }) datePickerInstalledOn: DatePickerComponent;

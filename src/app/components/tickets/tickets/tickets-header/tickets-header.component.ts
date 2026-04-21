@@ -1,3 +1,8 @@
+﻿import { MatChipComponent } from './';
+import { MatChipListComponent } from './';
+import { MatFormFieldComponent } from './';
+import { TicketsFilterInfoComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, Input, ViewChild } from '@angular/core';
 import { TitleListType } from './class/title-list-type';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
@@ -10,6 +15,8 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { Ticket } from '../../class/ticket';
 
 @Component({
+  standalone: true,
+  imports: [MatChipComponent, MatChipListComponent, MatFormFieldComponent, TicketsFilterInfoComponent, CommonModule],
     selector: 'app-tickets-header',
     templateUrl: './tickets-header.component.html',
     styleUrls: ['./tickets-header.component.scss'],

@@ -1,3 +1,6 @@
+﻿import { MatErrorComponent } from './';
+import { PreloaderTicketComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -8,6 +11,8 @@ import { ApiKeysStateService } from 'src/app/states/api-keys/api-keys-state.serv
 import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
+  standalone: true,
+  imports: [MatErrorComponent, PreloaderTicketComponent, CommonModule],
   selector: 'app-company-profile-api-keys-edit-aside',
   templateUrl: './company-profile-api-keys-edit-aside.component.html',
   styleUrls: ['./company-profile-api-keys-edit-aside.component.scss']

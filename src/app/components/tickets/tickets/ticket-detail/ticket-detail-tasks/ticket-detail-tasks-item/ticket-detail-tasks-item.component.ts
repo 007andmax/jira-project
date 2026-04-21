@@ -1,3 +1,7 @@
+﻿import { DynamicTooltipComponent } from './';
+import { TaskHeaderAddTypeComponent } from './';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { TicketProfile } from '../../../class/ticket-profile';
 import { TicketsPermissionsService } from '../../../ticket-edit-aside/services/tickets-permissions.service';
@@ -25,6 +29,8 @@ import { TasksDatePickerComponent } from 'src/app/components/tasks/tasks-date-pi
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, TaskHeaderAddTypeComponent, FormsModule, CommonModule],
   selector: 'app-ticket-detail-tasks-item',
   templateUrl: './ticket-detail-tasks-item.component.html',
   styleUrls: ['./ticket-detail-tasks-item.component.scss']

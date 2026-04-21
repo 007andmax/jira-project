@@ -1,3 +1,5 @@
+﻿import { AddSignatureComponent } from './';
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -9,6 +11,8 @@ import { SignatureStateService } from 'src/app/states/signature/signature-state.
 import { EditSignatureComponent } from './edit-signature/edit-signature.component';
 
 @Component({
+  standalone: true,
+  imports: [AddSignatureComponent, CommonModule],
   selector: 'signature',
   templateUrl: './signature.component.html',
   styleUrls: ['./signature.component.scss']

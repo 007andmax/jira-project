@@ -1,3 +1,5 @@
+﻿import { DropDownComponent } from './';
+import { CommonModule } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -32,6 +34,8 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 
 declare var google: any;
 @Component({
+  standalone: true,
+  imports: [DropDownComponent, CommonModule],
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']

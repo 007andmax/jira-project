@@ -1,7 +1,10 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'ticket-detail-profile-form-update-visible-users',
     templateUrl: './ticket-detail-profile-form-update-visible-users.component.html',
     styleUrls: ['./ticket-detail-profile-form-update-visible-users.component.scss'],

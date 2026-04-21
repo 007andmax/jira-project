@@ -1,3 +1,5 @@
+﻿import { MatErrorComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { TitleListType } from '../../class/title-list-type';
@@ -10,6 +12,8 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
 
 @Component({
+  standalone: true,
+  imports: [MatErrorComponent, CommonModule],
     selector: 'tickets-filter-created-drop-down',
     templateUrl: './tickets-filter-created-drop-down.component.html',
     styleUrls: ['./tickets-filter-created-drop-down.component.scss'],

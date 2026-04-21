@@ -1,3 +1,5 @@
+﻿import { SupportPageInfoComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin, Subscription } from 'rxjs';
@@ -13,6 +15,8 @@ import { SupportPageBodyComponent } from '../support-page-body/support-page-body
 import { SupportPageHeaderComponent } from '../support-page-header/support-page-header.component';
 
 @Component({
+  standalone: true,
+  imports: [SupportPageInfoComponent, CommonModule],
   selector: 'support-page-category',
   templateUrl: './support-page-category.component.html',
   styleUrls: ['./support-page-category.component.scss']

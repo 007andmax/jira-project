@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { InvoiceLock } from '../../class/invoice-lock';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
@@ -23,12 +26,22 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompanyProfileAddress } from 'src/app/components/companies/class/company-profile-address';
 import { InvoiceTicketsService } from 'src/app/services/accounting/accounting-settings.service';
+import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
+import { InvoiceChangeAddressComponent } from './invoice-change-address/invoice-change-address.component';
+import { InvoiceDiscountComponent } from './invoice-discount/invoice-discount.component';
+import { InvoiceFormTicketEditComponent } from './invoice-form-ticket-edit/invoice-form-ticket-edit.component';
+import { InvoiceFormTicketInfoComponent } from './invoice-form-ticket-info/invoice-form-ticket-info.component';
+import { InvoiceRegularNoteComponent } from './invoice-regular-note/invoice-regular-note.component';
 
 @Component({
-    selector: 'app-invoice-form',
-    templateUrl: './invoice-form.component.html',
-    styleUrls: ['./invoice-form.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [DatePickerComponent, InvoiceDiscountComponent, InvoiceFormTicketEditComponent, InvoiceFormTicketInfoComponent, InvoiceRegularNoteComponent, MatErrorComponent, PreloaderTicketComponent, InvoiceChangeAddressComponent, FormsModule, CommonModule],
+  selector: 'app-invoice-form',
+  templateUrl: './invoice-form.component.html',
+  styleUrls: ['./invoice-form.component.scss'],
+  standalone: true
 })
 export class InvoiceFormComponent implements OnInit, OnDestroy {
   @ViewChild('companyEdit', { static: true }) companyEdit: InvoiceFormEditCustomerComponent;

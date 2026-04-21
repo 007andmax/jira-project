@@ -1,3 +1,5 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef, OnDestroy } from '@angular/core';
 import { PaymentsFilter } from '../../class/payments-filter';
 import { PaymentsStateService } from 'src/app/states/payments/payments-state.service';
@@ -10,6 +12,8 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
     selector: 'app-payments-filter',
     templateUrl: './payments-filter.component.html',
     styleUrls: ['./payments-filter.component.scss'],

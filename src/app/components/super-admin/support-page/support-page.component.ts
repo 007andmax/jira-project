@@ -1,3 +1,7 @@
+﻿import { LeftPanelSuperAdminCategoriesComponent } from './';
+import { SupportPageHelpCenterComponent } from './';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -7,6 +11,8 @@ import { SupportPageCategory } from '../left-panel-super-admin-categories/class/
 import { SupportPageCategoriesStateService } from '../state/support-page-categories/support-page-categories-state.service';
 var $ = require("jquery");
 @Component({
+  standalone: true,
+  imports: [LeftPanelSuperAdminCategoriesComponent, SupportPageHelpCenterComponent, RouterModule, CommonModule],
   selector: 'support-page',
   templateUrl: './support-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

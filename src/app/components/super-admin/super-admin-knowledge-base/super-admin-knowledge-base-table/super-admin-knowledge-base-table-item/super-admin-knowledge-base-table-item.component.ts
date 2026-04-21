@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { News } from '../class/news';
 import * as moment from "moment";
@@ -9,6 +10,8 @@ import { KnowledgeBaseStateService } from '../../../state/knowledge-base/knowled
 import { SuperAdminKnowledgeBaseService } from '../../../services/super-admin-knowledge-base/super-admin-knowledge-base.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'app-super-admin-knowledge-base-table-item',
   templateUrl: './super-admin-knowledge-base-table-item.component.html',
   styleUrls: ['./super-admin-knowledge-base-table-item.component.scss']

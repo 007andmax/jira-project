@@ -1,6 +1,10 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
   selector: 'preview-phone-mask',
   templateUrl: './preview-phone-mask.component.html',
   styleUrls: ['./preview-phone-mask.component.scss']

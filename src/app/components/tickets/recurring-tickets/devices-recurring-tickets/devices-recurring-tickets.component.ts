@@ -1,3 +1,5 @@
+﻿import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { merge, Observable, Subject, Subscription } from "rxjs";
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
@@ -8,6 +10,8 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
 
 
 @Component({
+  standalone: true,
+  imports: [FormsModule, CommonModule],
     selector: 'app-devices-recurring-tickets',
     templateUrl: './devices-recurring-tickets.component.html',
     styleUrls: ['./devices-recurring-tickets.component.scss'],

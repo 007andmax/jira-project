@@ -1,3 +1,5 @@
+﻿import { MatErrorComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
@@ -16,6 +18,8 @@ import { Subscription } from 'rxjs';
 import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
 
 @Component({
+  standalone: true,
+  imports: [MatErrorComponent, CommonModule],
   selector: 'ticket-detail-change-priority',
   templateUrl: './ticket-detail-change-priority.component.html',
   styleUrls: ['./ticket-detail-change-priority.component.scss']

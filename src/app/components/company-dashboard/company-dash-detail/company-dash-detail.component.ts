@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CompanyProfile } from '../../companies/class/company-profile';
 import { CompaniesService } from 'src/app/services/company/companies.service';
@@ -24,8 +27,11 @@ import { CrmCompanyJobTitle } from '../../setting/crm-settings/crm-company-job-t
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { WORK_HOURS } from 'src/app/const/time';
+import { CompanyTagsComponent } from '../../companies/company-tags/company-tags.component';
 
 @Component({
+  standalone: true,
+  imports: [CompanyTagsComponent, FormsModule, CommonModule],
   selector: 'app-company-dash-detail',
   templateUrl: './company-dash-detail.component.html',
   styleUrls: ['./company-dash-detail.component.scss']

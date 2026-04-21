@@ -28,8 +28,7 @@ describe('CompanyEditAsideComponent unit test', () => {
             timeOut: 5000,
             onActivateTick: true
         }),
-        NoopAnimationsModule],
-    declarations: [CompanyEditAsideComponent],
+        NoopAnimationsModule, CompanyEditAsideComponent],
 }).compileComponents();
 
   });

@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Input } from '@angular/core';
 import { Component } from '@angular/core';
 import { PasswordManagerLinkedComponent } from 'src/app/components/password-manager/password-manager-add-aside/password-manager-linked/password-manager-linked.component';
@@ -6,6 +7,8 @@ import { Device } from 'src/app/components/company-devices/class/device';
 import { DeviceCompany } from 'src/app/components/company-devices/class/device-company';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'ticket-detail-linked-agents',
   templateUrl: './ticket-detail-linked-agents.component.html',
   styleUrls: ['./ticket-detail-linked-agents.component.scss']

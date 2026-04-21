@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 import * as moment from "moment";
@@ -5,12 +7,16 @@ import { InvoiceLock } from '../../class/invoice-lock';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
 import { InvoiceTaxNumber } from '../../class/invoice-tax-number';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.component';
 
 @Component({
-    selector: 'app-invoice-preview',
-    templateUrl: './invoice-preview.component.html',
-    styleUrls: ['./invoice-preview.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [DynamicTooltipComponent, PreviewPhoneMaskComponent, CommonModule],
+  selector: 'app-invoice-preview',
+  templateUrl: './invoice-preview.component.html',
+  styleUrls: ['./invoice-preview.component.scss'],
+  standalone: true
 })
 export class InvoicePreviewComponent implements OnInit {
   @Input() invoiceNumber: string;

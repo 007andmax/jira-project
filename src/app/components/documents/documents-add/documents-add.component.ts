@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -10,15 +12,21 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DocumentAdd } from './class/document-add';
 import { DocumentValidate } from './class/document-validate';
 import { fadeInAnimation } from 'src/app/animations';
+import { DocumentsAddBodyComponent } from './documents-add-body/documents-add-body.component';
+import { DocumentsAddFooterComponent } from './documents-add-footer/documents-add-footer.component';
+import { DocumentsAddHeaderComponent } from './documents-add-header/documents-add-header.component';
+import { DocumentsAddInfoComponent } from './documents-add-info/documents-add-info.component';
 
 @Component({
-    selector: 'app-documents-add',
-    templateUrl: './documents-add.component.html',
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    styleUrls: ['./documents-add.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [DocumentsAddBodyComponent, DocumentsAddFooterComponent, DocumentsAddHeaderComponent, DocumentsAddInfoComponent, CommonModule],
+  selector: 'app-documents-add',
+  templateUrl: './documents-add.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  styleUrls: ['./documents-add.component.scss'],
+  standalone: true
 })
 export class DocumentsAddComponent implements OnInit, OnDestroy {
   companyId: string;

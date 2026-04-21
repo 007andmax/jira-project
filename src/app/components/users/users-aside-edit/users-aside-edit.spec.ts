@@ -50,8 +50,7 @@ describe('UsersAsideEditComponent unit test', () => {
             timeOut: 5000,
             onActivateTick: true
         }),
-        NoopAnimationsModule],
-    declarations: [UsersAsideEditComponent]
+        NoopAnimationsModule, UsersAsideEditComponent]
 }).compileComponents();
 
   });

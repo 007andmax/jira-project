@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { forkJoin, Subscription } from 'rxjs';
 import { ARCHIVE_USER, DEARCHIVE_USER, ARCHIVE_USERS } from 'src/app/const/confirm';
@@ -23,16 +26,20 @@ import { UsersHeaderComponent } from '../users/users-header/users-header.compone
 import { UserFilters } from '../users/class/user-filters';
 import { fadeInAnimation } from 'src/app/animations';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { UsersFilterComponent } from '../users/users-header/users-filter/users-filter.component';
+import { UsersTableComponent } from '../users/users-table/users-table.component';
 
 @Component({
-    selector: 'marketing',
-    templateUrl: './marketing.component.html',
-    styleUrls: ['./marketing.component.scss'],
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    providers: [UserListService],
-    standalone: true
+  standalone: true,
+  imports: [UsersFilterComponent, UsersTableComponent, FormsModule, CommonModule],
+  selector: 'marketing',
+  templateUrl: './marketing.component.html',
+  styleUrls: ['./marketing.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  providers: [UserListService],
+  standalone: true
 })
 export class MarketingComponent implements OnInit {
   @ViewChild('header', { static: true }) header: UsersHeaderComponent;

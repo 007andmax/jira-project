@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
 import { BillableProfileTicketProductExpense } from '../../../../class/billable-profile-ticket-product-expense';
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
@@ -6,12 +9,15 @@ import { Tax } from 'src/app/interfaces/service/tax';
 import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 @Component({
-    selector: 'app-invoice-form-ticket-edit-product',
-    templateUrl: './invoice-form-ticket-edit-product.component.html',
-    styleUrls: ['./invoice-form-ticket-edit-product.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [MatErrorComponent, FormsModule, CommonModule],
+  selector: 'app-invoice-form-ticket-edit-product',
+  templateUrl: './invoice-form-ticket-edit-product.component.html',
+  styleUrls: ['./invoice-form-ticket-edit-product.component.scss'],
+  standalone: true
 })
 export class InvoiceFormTicketEditProductComponent implements OnInit, OnDestroy {
   @Input() product: BillableProfileTicketProductExpense;

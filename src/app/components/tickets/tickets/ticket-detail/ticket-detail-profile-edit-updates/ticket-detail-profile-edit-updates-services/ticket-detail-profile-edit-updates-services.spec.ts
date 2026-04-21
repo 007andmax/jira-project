@@ -43,9 +43,7 @@ describe('TicketDetailProfileEditUpdatesServicesComponent unit test', () => {
         ServicesListModule,
         TicketProfileUpdatesServiceTimepickerModule,
         TicketProfileUpdatesServiceDurationModule,
-        DatePickerModule
-    ],
-    declarations: [TicketDetailProfileEditUpdatesServicesComponent],
+        DatePickerModule, TicketDetailProfileEditUpdatesServicesComponent],
 }).compileComponents();
 
   });

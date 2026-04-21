@@ -1,7 +1,10 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { DeviceExtended } from '../../class/device-extended';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'app-company-devices-aside-updates',
     templateUrl: './company-devices-aside-updates.component.html',
     styleUrls: ['./company-devices-aside-updates.component.scss'],

@@ -1,3 +1,5 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, Subscription } from 'rxjs';
@@ -16,12 +18,17 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DeviceCompany } from '../class/device-company';
 import { CompanyDevicesAsideSystemComponent } from './company-devices-aside-system/company-devices-aside-system.component';
 import { CompanyDevicesAsideNetworkTabComponent } from './company-devices-aside-network-tab/company-devices-aside-network-tab.component';
+import { CompanyDevicesAsideDeviceIconComponent } from './company-devices-aside-device-icon/company-devices-aside-device-icon.component';
+import { CompanyDevicesAsideSoftwareComponent } from './company-devices-aside-software/company-devices-aside-software.component';
+import { CompanyDevicesAsideUpdatesComponent } from './company-devices-aside-updates/company-devices-aside-updates.component';
 
 @Component({
-    selector: 'app-company-devices-aside',
-    templateUrl: './company-devices-aside.component.html',
-    styleUrls: ['./company-devices-aside.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [CompanyDevicesAsideDeviceIconComponent, CompanyDevicesAsideSoftwareComponent, CompanyDevicesAsideUpdatesComponent, CommonModule],
+  selector: 'app-company-devices-aside',
+  templateUrl: './company-devices-aside.component.html',
+  styleUrls: ['./company-devices-aside.component.scss'],
+  standalone: true
 })
 export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
   @Input() companyId: string;

@@ -1,3 +1,7 @@
+﻿import { DropDownComponent } from './';
+import { DynamicTooltipComponent } from './';
+import { CompanyDropDownComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Company } from 'src/app/interfaces/company/company';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
@@ -11,6 +15,8 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
 
 @Component({
+  standalone: true,
+  imports: [DropDownComponent, DynamicTooltipComponent, CompanyDropDownComponent, CommonModule],
   selector: 'ticket-detail-change-company',
   templateUrl: './ticket-detail-change-company.component.html',
   styleUrls: ['./ticket-detail-change-company.component.scss']

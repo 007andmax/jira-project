@@ -1,3 +1,6 @@
+﻿
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CompanyAndressContact } from 'src/app/interfaces/company/company-address-contact';
 import { CompanyAndress } from 'src/app/interfaces/company/company-address';
@@ -17,8 +20,12 @@ import { CompanyItem } from '../class/company-item';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { CompanyDeviceCount } from '../class/company-device-count';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { PreviewPhoneMaskComponent } from '../../shared/preview-phone-mask/preview-phone-mask.component';
 
 @Component({
+  standalone: true,
+  imports: [DynamicTooltipComponent, PreviewPhoneMaskComponent, FormsModule, CommonModule],
   selector: 'app-companies-table',
   templateUrl: './companies-table.component.html',
   styleUrls: ['./companies-table.component.scss'],

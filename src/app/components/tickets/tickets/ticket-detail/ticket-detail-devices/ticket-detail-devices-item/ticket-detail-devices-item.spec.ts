@@ -19,8 +19,7 @@ describe('TicketDetailDevicesItemComponent unit test', () => {
             timeOut: 5000,
             onActivateTick: true
         }),
-        NoopAnimationsModule],
-    declarations: [TicketDetailDevicesItemComponent]
+        NoopAnimationsModule, TicketDetailDevicesItemComponent]
 }).compileComponents();
 
   });

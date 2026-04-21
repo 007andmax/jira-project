@@ -1,18 +1,24 @@
+﻿
+import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { REMOVE_CATEGORY_DOCUMENT, REMOVE_DOCUMENT } from 'src/app/const/confirm';
 import { Document } from '../../documents/class/document';
 import { DocumentsHeaderComponent } from '../../documents/documents-header/documents-header.component';
 import { DocumentsComponent } from '../../documents/documents.component';
 import { fadeInAnimation } from 'src/app/animations';
+import { CompanyDocumentsTableComponent } from './company-documents-table/company-documents-table.component';
+import { DocumentsTemplatesInfoComponent } from '../../documents/documents-templates/documents-templates-info/documents-templates-info.component';
 
 @Component({
-    selector: 'company-documents',
-    templateUrl: './company-documents.component.html',
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    styleUrls: ['./company-documents.component.scss'],
-    standalone: true
+  standalone: true,
+  imports: [CompanyDocumentsTableComponent, DocumentsTemplatesInfoComponent, CommonModule],
+  selector: 'company-documents',
+  templateUrl: './company-documents.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  styleUrls: ['./company-documents.component.scss'],
+  standalone: true
 })
 export class CompanyDocumentsComponent extends DocumentsComponent {
   companyId: string;

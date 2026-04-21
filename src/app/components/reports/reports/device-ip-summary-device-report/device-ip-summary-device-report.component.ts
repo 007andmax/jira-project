@@ -1,3 +1,5 @@
+﻿import { ReportSendEmailComponent } from './';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -16,6 +18,8 @@ import { DeviceIpSummary } from '../../class/device-ip-summary';
 import { ReportValidate } from '../../class/report-validate';
 
 @Component({
+  standalone: true,
+  imports: [ReportSendEmailComponent, CommonModule],
     selector: 'device-ip-summary-device-report',
     templateUrl: './device-ip-summary-device-report.component.html',
     styleUrls: ['./device-ip-summary-device-report.component.scss'],
