@@ -24,7 +24,6 @@ export class PaymentsAsideComponent implements OnInit {
   @Output() onRefundPayment = new EventEmitter<any>();
   currentCompany: any;
   company: any;
-  isExistMultipleCompanies: boolean = false;
   constructor(public companiesStateService: CompaniesStateService,
     private modalService: NgbModal,
     private paymentsStateService: PaymentsStateService,
@@ -39,7 +38,6 @@ export class PaymentsAsideComponent implements OnInit {
   }
   ngOnChanges() {
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.payment.clientCompanyId);
-    this.isExistMultipleCompanies = this.payment.multipleCompanies.length > 0;
 
   }
   getShippingAddressCurrentCompany() {
