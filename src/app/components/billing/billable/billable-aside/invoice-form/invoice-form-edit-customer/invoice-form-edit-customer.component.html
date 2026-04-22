@@ -20,7 +20,7 @@
             <input
                 type="text"
                 #addresstext
-                [(ngModel)]="company.addresses[0].address"
+                [(ngModel)]="company.addresses[1].address"
                 (focus)="onCheckGoogleAutoComplete()"
                 placeholder="Enter Location"
             >
@@ -31,7 +31,7 @@
             <div class="qt-input-block__label">Suite No.</div>
             <input
                 type="text"
-                [(ngModel)]="company.addresses[0].suiteNumber"
+                [(ngModel)]="company.addresses[1].suiteNumber"
                 placeholder="Enter Suite Number"
             >
         </div>
@@ -39,7 +39,7 @@
             <div class="qt-input-block__label">Postal/Zip code</div>
             <input
                 type="text"
-                [(ngModel)]="company.addresses[0].postalCode"
+                [(ngModel)]="company.addresses[1].postalCode"
                 placeholder="Enter Zip"
             >
         </div>
@@ -49,7 +49,7 @@
             <div class="qt-input-block__label">First Name</div>
             <input
                 type="text"
-                [(ngModel)]="company.contacts[0].firstName"
+                [(ngModel)]="company.contacts[1].firstName"
                 (input)="onChangeFirstName()"
                 placeholder="Enter First Name"
             >
@@ -59,7 +59,7 @@
             <div class="qt-input-block__label">Last Name</div>
             <input
                 type="text"
-                [(ngModel)]="company.contacts[0].lastName"
+                [(ngModel)]="company.contacts[1].lastName"
                 (input)="onChangeLastName()"
                 placeholder="Enter Last Name"
             >
@@ -71,7 +71,7 @@
             <div class="qt-input-block__label">Primary Contact Email</div>
             <input
                 type="text"
-                [(ngModel)]="company.contacts[0].primaryEmail"
+                [(ngModel)]="company.contacts[1].primaryEmail"
                 (input)="onChangePrimaryEmail()"
                 placeholder="Primary Email Address"
             >
@@ -83,8 +83,8 @@
             <div class="qt-input-block__label">Phone Number</div>
             <input
                 type="text"
-                *ngIf="company.contacts[0].phoneNumbers.length > 0"
-                [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
+                *ngIf="company.contacts[1].phoneNumbers.length > 0"
+                [(ngModel)]="company.contacts[1].phoneNumbers[0].number"
                 placeholder="Enter Phone Number"
                 (input)="onChangePhoneNumber()"
                 prefix="+1"

@@ -2,30 +2,30 @@
     <div
         class="item-selected-address pointer"
         ngbDropdownItem
-        (click)="selectAddress(company.companyInfo.addresses[0])"
+        (click)="selectAddress(getShippingAddress())"
     >
         <div
             class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-gray-900"
-            [textContent]="company.companyInfo.addresses[0].locationName"
+            [textContent]="getShippingAddress()?.locationName"
         ></div>
         <div
             class="qt-fs-13 qt-lh-154"
-            [textContent]="company.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode"
+            [textContent]="getShippingAddress()?.addressWithSuitNumberAndPostalCode"
         ></div>
     </div>
     <div
         class="item-selected-address pointer"
         ngbDropdownItem
         *ngIf="company.companyInfo.addresses.length == 2"
-        (click)="selectAddress(company.companyInfo.addresses[1])"
+        (click)="selectAddress(getBillingAddress())"
     >
         <div
             class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-gray-900"
-            [textContent]="company.companyInfo.addresses[1].locationName"
+            [textContent]="getBillingAddress()?.locationName"
         ></div>
         <div
             class="qt-fs-13 qt-lh-154"
-            [textContent]="company.companyInfo.addresses[1].addressWithSuitNumberAndPostalCode"
+            [textContent]="getBillingAddress()?.addressWithSuitNumberAndPostalCode"
         ></div>
     </div>
 </div>

@@ -41,12 +41,12 @@
             <div class="ticket-detail-contact-info-line__label">Shipping Address</div>
             <div
                 class="ticket-detail-contact-info-line__text"
-                [textContent]="locationShipping != '' ? locationShipping : 'No information'"
+                [textContent]="getShippingAddress().addressWithSuitNumberAndPostalCode != '' ? getShippingAddress().addressWithSuitNumberAndPostalCode : 'No information'"
             ></div>
             <div
-                *ngIf="company && company.companyInfo.addresses[1].locationLat && company.companyInfo.addresses[1].locationLng"
+                *ngIf="company && getShippingAddress().locationLat && getShippingAddress().locationLng"
                 class="qt-button --gray --sm qt-w100 qt-jc-c qt-mt-8"
-                (click)="onShowMap(company.companyInfo.addresses[1])"
+                (click)="onShowMap(getShippingAddress())"
             >
                 <span class="qt-icon icon__map qt-sz-16 qt-dib qt-mr-4"></span>
                 Get Direction
@@ -64,12 +64,12 @@
             <div class="ticket-detail-contact-info-line__label">Billing Address</div>
             <div
                 class="ticket-detail-contact-info-line__text"
-                [textContent]="locationBilling != '' ? locationBilling : 'No information'"
+                [textContent]="getBillingAddress().addressWithSuitNumberAndPostalCode != '' ? getBillingAddress().addressWithSuitNumberAndPostalCode : 'No information'"
             ></div>
             <div
-                *ngIf="company && company.companyInfo.addresses[0].locationLat && company.companyInfo.addresses[0].locationLng"
+                *ngIf="company && getBillingAddress().locationLat && getBillingAddress().locationLng"
                 class="qt-button --gray --sm qt-w100 qt-jc-c qt-mt-8"
-                (click)="onShowMap(company.companyInfo.addresses[0])"
+                (click)="onShowMap(getBillingAddress())"
             >
                 <span class="qt-icon icon__map qt-sz-16 qt-dib qt-mr-4"></span>
                 Get Direction

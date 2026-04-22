@@ -145,59 +145,59 @@
     >
         <div
             class="other-info-col qt-df"
-            *ngIf="companyDetailing.addresses.length == 2"
+            *ngIf="getShippingAddress()"
         >
             <div class="small-title">Shipping Address</div>
             <span
                 class="qt-fs-13 qt-fw-600"
-                [textContent]="companyDetailing.shippingLocationName"
+                [textContent]="getShippingAddress()?.locationName"
             >
             </span>
-            <p [textContent]="'+1 ' + companyDetailing?.addresses[1]?.phoneNumbers[0]?.number">
+            <p [textContent]="'+1 ' + getShippingAddress()?.phoneNumbers[0]?.number">
             </p>
             <address>
                 <span
-                    *ngIf="companyDetailing.addresses.length > 1 && companyDetailing.addresses[1].suiteNumber"
-                    [textContent]="companyDetailing.addresses[1].suiteNumber + ', '"
+                    *ngIf="getShippingAddress()?.suiteNumber"
+                    [textContent]="getShippingAddress()?.suiteNumber + ', '"
                 ></span>
-                {{companyDetailing.shipping_addresses_name}}
+                {{getShippingAddress().address}}
             </address>
             <span
                 class="qt-fs-13 qt-mb-8 dfn qt-color-gray-900"
-                [textContent]="companyDetailing?.addresses[1]?.postalCode"
+                [textContent]="getShippingAddress()?.postalCode"
             >
             </span>
             <a
-                (click)="openMap(companyDetailing.addresses.length > 1 ? companyDetailing.addresses[1] : null)"
+                (click)="openMap(getShippingAddress())"
                 class="qt-button --outline --sm"
             >
                 <span class="qt-icon icon__map-pin qt-icon__blue-light-600 qt-sz-16 qt-dib qt-mr-4"></span>
                 Get Direction
             </a>
         </div>
-        <div class="other-info-col qt-df">
+        <div class="other-info-col qt-df" *ngIf="getBillingAddress()">
             <div class="small-title">Billing Address</div>
             <span
                 class="qt-fs-13 qt-fw-600"
-                [textContent]="companyDetailing.billingLocationName"
+                [textContent]="getBillingAddress()?.locationName"
             >
             </span>
-            <p  [textContent]="'+1 ' + companyDetailing?.addresses[0]?.phoneNumbers[0]?.number">
+            <p  [textContent]="'+1 ' + getBillingAddress()?.phoneNumbers[0]?.number">
             </p>
             <address>
                 <span
-                    *ngIf="companyDetailing.addresses.length > 0 && companyDetailing.addresses[0].suiteNumber"
-                    [textContent]="companyDetailing.addresses[0].suiteNumber + ', '"
+                    *ngIf="getBillingAddress()?.suiteNumber"
+                    [textContent]="getBillingAddress()?.suiteNumber + ', '"
                 ></span>
-                {{companyDetailing.addresses_name}}
+                {{getBillingAddress()?.address}}
             </address>
             <span
                 class="qt-fs-13 qt-mb-8 dfn qt-color-gray-900"
-                [textContent]="companyDetailing?.addresses[0]?.postalCode"
+                [textContent]="getBillingAddress()?.postalCode"
             >
             </span>
             <a
-                (click)="openMap(companyDetailing.addresses[0])"
+                (click)="openMap(getBillingAddress())"
                 class="qt-button --outline --sm"
             >
                 <span class="qt-icon icon__map-pin qt-icon__blue-light-600 qt-sz-16 qt-dib qt-mr-4"></span>

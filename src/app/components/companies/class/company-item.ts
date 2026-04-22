@@ -32,10 +32,10 @@ export class CompanyItem implements Company {
             for (const key in data) {
                 this[key] = data[key];
             }
-            let billing = (this.companyInfo.addresses.find(item => item.isPrimary)) ? JSON.parse(JSON.stringify(this.companyInfo.addresses.find(item => item.isPrimary))) : null;
-            let shipping = (this.companyInfo.addresses.find(item => !item.isPrimary)) ? JSON.parse(JSON.stringify(this.companyInfo.addresses.find(item => !item.isPrimary))) : null;
-            if (billing) this.companyInfo.addresses = [billing];
-            if (shipping) this.companyInfo.addresses.push(shipping);
+            let shipping = (this.companyInfo.addresses.find(item => item.isPrimary)) ? JSON.parse(JSON.stringify(this.companyInfo.addresses.find(item => item.isPrimary))) : null;
+            let billing = (this.companyInfo.addresses.find(item => !item.isPrimary)) ? JSON.parse(JSON.stringify(this.companyInfo.addresses.find(item => !item.isPrimary))) : null;
+            if (shipping) this.companyInfo.addresses = [shipping];
+            if (billing) this.companyInfo.addresses.push(billing);
         }
     }
 
