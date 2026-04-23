@@ -6,11 +6,11 @@ import { RecurringTicketsTableAssignedUserComponent } from '../recurring-tickets
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'app-recurring-tickets-table-assigned-user-more',
-    templateUrl: './recurring-tickets-table-assigned-user-more.component.html',
-    styleUrls: ['./recurring-tickets-table-assigned-user-more.component.scss'],
-    providers: [TicketsListService],
-    standalone: true
+  selector: 'app-recurring-tickets-table-assigned-user-more',
+  templateUrl: './recurring-tickets-table-assigned-user-more.component.html',
+  styleUrls: ['./recurring-tickets-table-assigned-user-more.component.scss'],
+  providers: [TicketsListService],
+
 })
 export class RecurringTicketsTableAssignedUserMoreComponent extends RecurringTicketsTableAssignedUserComponent {
 

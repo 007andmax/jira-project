@@ -12,10 +12,10 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'app-company-devices-aside-network-tab',
-    templateUrl: './company-devices-aside-network-tab.component.html',
-    styleUrls: ['./company-devices-aside-network-tab.component.scss'],
-    standalone: true
+  selector: 'app-company-devices-aside-network-tab',
+  templateUrl: './company-devices-aside-network-tab.component.html',
+  styleUrls: ['./company-devices-aside-network-tab.component.scss'],
+
 })
 export class CompanyDevicesAsideNetworkTabComponent implements OnInit {
   @ViewChild('ipLabel', { static: false }) ipLabel: CompanyDevicesEditIpComponent;

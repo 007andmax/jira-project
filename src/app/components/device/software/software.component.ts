@@ -18,10 +18,10 @@ import { SoftwareFilter } from "./class/software-filters";
 @Component({
   standalone: true,
   imports: [FormsModule, CommonModule],
-    selector: "app-software",
-    templateUrl: "./software.component.html",
-    styleUrls: ["./software.component.scss"],
-    standalone: true,
+  selector: "app-software",
+  templateUrl: "./software.component.html",
+  styleUrls: ["./software.component.scss"],
+
 })
 export class SoftwareComponent implements OnInit, OnDestroy {
   url = environment.apiUrl + "upload";

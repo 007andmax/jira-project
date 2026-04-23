@@ -11,7 +11,7 @@ import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-toolt
   selector: 'app-invoice-form-ticket-info',
   templateUrl: './invoice-form-ticket-info.component.html',
   styleUrls: ['./invoice-form-ticket-info.component.scss'],
-  standalone: true
+
 })
 export class InvoiceFormTicketInfoComponent implements OnInit {
   @Input() ticket: InvoiceProfileTicket;

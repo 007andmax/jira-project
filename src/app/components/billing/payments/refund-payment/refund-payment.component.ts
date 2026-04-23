@@ -14,7 +14,7 @@ import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ti
   selector: 'app-refund-payment',
   templateUrl: './refund-payment.component.html',
   styleUrls: ['./refund-payment.component.scss'],
-  standalone: true
+
 })
 export class RefundPaymentComponent implements OnInit {
   @Input() payment: Payment;

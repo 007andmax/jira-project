@@ -36,7 +36,7 @@ import { CompanyDevicesItemComponent } from './company-devices-item/company-devi
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./company-devices.component.scss'],
-  standalone: true
+
 })
 export class CompanyDevicesComponent implements OnInit, OnDestroy {
   devices: Array<DeviceCompany> = [];

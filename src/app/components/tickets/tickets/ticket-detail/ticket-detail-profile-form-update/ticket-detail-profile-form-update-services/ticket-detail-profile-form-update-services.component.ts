@@ -1,4 +1,4 @@
-﻿import { MatErrorComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
@@ -14,14 +14,14 @@ import { TicketProfile } from '../../../class/ticket-profile';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 import { TicketProfileUpdatesServiceDurationComponent } from '../../../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.component';
 import { TicketProfileUpdatesServiceTimepickerComponent } from '../../../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 @Component({
   standalone: true,
   imports: [MatErrorComponent, FormsModule, CommonModule],
-    selector: 'ticket-detail-profile-form-update-services',
-    templateUrl: './ticket-detail-profile-form-update-services.component.html',
-    styleUrls: ['./ticket-detail-profile-form-update-services.component.scss'],
-    standalone: true
+  selector: 'ticket-detail-profile-form-update-services',
+  templateUrl: './ticket-detail-profile-form-update-services.component.html',
+  styleUrls: ['./ticket-detail-profile-form-update-services.component.scss'],
 })
 export class TicketDetailProfileFormUpdateServicesComponent implements OnInit, OnDestroy {
   isUpdate: boolean = false;

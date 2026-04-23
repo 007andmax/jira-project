@@ -4,10 +4,10 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'dashboard-disk-drives',
-    templateUrl: './dashboard-disk-drives.component.html',
-    styleUrls: ['./dashboard-disk-drives.component.scss'],
-    standalone: true
+  selector: 'dashboard-disk-drives',
+  templateUrl: './dashboard-disk-drives.component.html',
+  styleUrls: ['./dashboard-disk-drives.component.scss'],
+
 })
 export class DashboardDiskDrivesComponent implements OnInit {
   @Input() logicalDisk: any = [];

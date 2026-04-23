@@ -8,7 +8,7 @@ import { DocumentsTableComponent } from 'src/app/components/documents/documents-
   selector: 'company-documents-table',
   templateUrl: './company-documents-table.component.html',
   styleUrls: ['./company-documents-table.component.scss'],
-  standalone: true
+
 })
 export class CompanyDocumentsTableComponent extends DocumentsTableComponent {
 

@@ -16,7 +16,7 @@ import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-pho
   selector: 'app-invoice-preview',
   templateUrl: './invoice-preview.component.html',
   styleUrls: ['./invoice-preview.component.scss'],
-  standalone: true
+
 })
 export class InvoicePreviewComponent implements OnInit {
   @Input() invoiceNumber: string;

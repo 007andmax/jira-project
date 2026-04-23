@@ -1,4 +1,4 @@
-﻿import { MatErrorComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
@@ -6,6 +6,7 @@ import { InvoiceNote } from 'src/app/components/billing/billable/class/invoice-n
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { ValidateNote } from '../class/validate-note';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 @Component({
   standalone: true,

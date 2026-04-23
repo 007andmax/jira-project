@@ -1,6 +1,4 @@
-﻿import { PreloaderTicketComponent } from './';
-import { TicketDetailProfileFormUpdateHeaderComponent } from './';
-import { TicketProfileFormUpdateNoteListComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TicketDetailProfileFormUpdateComponent } from '../ticket-detail-profile-form-update/ticket-detail-profile-form-update.component';
@@ -20,15 +18,18 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
 import { TicketDetailProfileFormUpdateNoteComponent } from '../ticket-detail-profile-form-update/ticket-detail-profile-form-update-note/ticket-detail-profile-form-update-note.component';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
+import { TicketDetailProfileFormUpdateHeaderComponent } from '../ticket-detail-profile-form-update/ticket-detail-profile-form-update-header/ticket-detail-profile-form-update-header.component';
+import { TicketProfileFormUpdateNoteListComponent } from '../ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
 
 @Component({
   standalone: true,
   imports: [PreloaderTicketComponent, TicketDetailProfileFormUpdateHeaderComponent, TicketProfileFormUpdateNoteListComponent, CommonModule],
-    selector: 'app-ticket-detail-note-modal',
-    templateUrl: './ticket-detail-note-modal.component.html',
-    styleUrls: ['./ticket-detail-note-modal.component.scss'],
-    providers: [TicketsListService, NgbModalConfig, NgbModal],
-    standalone: true
+  selector: 'app-ticket-detail-note-modal',
+  templateUrl: './ticket-detail-note-modal.component.html',
+  styleUrls: ['./ticket-detail-note-modal.component.scss'],
+  providers: [TicketsListService, NgbModalConfig, NgbModal],
+
 })
 export class TicketDetailNoteModalComponent extends TicketDetailProfileFormUpdateComponent {
   @ViewChild('selectNote', { static: true }) selectNote: TicketDetailProfileFormUpdateNoteComponent;

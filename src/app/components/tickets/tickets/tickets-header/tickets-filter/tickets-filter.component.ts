@@ -1,5 +1,4 @@
-﻿import { TicketsFilterSearchComponent } from './';
-import { TicketsFilterUsersDropDownComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ElementRef, ChangeDetectorRef, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { TicketsFilter } from '../../class/tickets-filter';
@@ -29,14 +28,16 @@ import * as moment from "moment";
 import { TicketsFilterCreatedDropDownComponent } from './tickets-filter-created-drop-down/tickets-filter-created-drop-down.component';
 import { TitleListType } from '../class/title-list-type';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { TicketsFilterSearchComponent } from './tickets-filter-search/tickets-filter-search.component';
+import { TicketsFilterUsersDropDownComponent } from './tickets-filter-users-drop-down/tickets-filter-users-drop-down.component';
 
 @Component({
   standalone: true,
   imports: [TicketsFilterSearchComponent, TicketsFilterUsersDropDownComponent, CommonModule],
-    selector: 'app-tickets-filter',
-    templateUrl: './tickets-filter.component.html',
-    styleUrls: ['./tickets-filter.component.scss'],
-    standalone: true
+  selector: 'app-tickets-filter',
+  templateUrl: './tickets-filter.component.html',
+  styleUrls: ['./tickets-filter.component.scss'],
+
 })
 export class TicketsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('usersDp', { static: true }) usersDp: TicketsFilterDropDownComponent;

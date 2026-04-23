@@ -1,7 +1,4 @@
-﻿import { CompanyTagsComponent } from './';
-import { DynamicTooltipComponent } from './';
-import { MatErrorComponent } from './';
-import { UserCustomSubscriptionComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { UserProfile } from '../../users/class/user-profile';
@@ -28,6 +25,10 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { Subscription } from 'rxjs';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
+import { CompanyTagsComponent } from '../../companies/company-tags/company-tags.component';
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
+import { UserCustomSubscriptionComponent } from '../../users/users-aside/user-custom-subscription/user-custom-subscription.component';
 
 @Component({
   standalone: true,
@@ -48,7 +49,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit, OnDestroy {
   @Input() user: UserProfile = new UserProfile();
   @Output() onEdit = new EventEmitter<any>();
   @Output() onDraftEmail = new EventEmitter<any>();
-  sub:Subscription = new Subscription();
+  sub: Subscription = new Subscription();
   constructor(public customerPortalStateService: CustomerPortalStateService,
     private companiesStateService: CompaniesStateService,
     private permissionsService: PermissionsService,
@@ -91,7 +92,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit, OnDestroy {
     this.sub.add(getConfirm);
   }
   private onArchiveUser(id) {
-   this.usersService.onArchiveUsers(id).subscribe(data => {
+    this.usersService.onArchiveUsers(id).subscribe(data => {
       this.confirmStateService.initRequest(false);
       this.leftPanelStateService.goToState('new-users');
     }, err => {
@@ -266,7 +267,7 @@ export class UsersDetailsLeftPanelComponent implements OnInit, OnDestroy {
   public trackById(index, item) {
     return item.id;
   }
-    ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
 

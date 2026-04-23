@@ -1,7 +1,4 @@
-﻿import { MatChipComponent } from './';
-import { MatChipListComponent } from './';
-import { MatFormFieldComponent } from './';
-import { TicketsFilterInfoComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, Input, ViewChild } from '@angular/core';
 import { TitleListType } from './class/title-list-type';
@@ -13,14 +10,18 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { TicketsFilter } from '../class/tickets-filter';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { Ticket } from '../../class/ticket';
+import { MatChipListComponent } from 'src/app/components/shared/mat-chip-list/mat-chip-list.component';
+import { MatChipComponent } from 'src/app/components/shared/mat-chip/mat-chip.component';
+import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
+import { TicketsFilterInfoComponent } from './tickets-filter-info/tickets-filter-info.component';
 
 @Component({
   standalone: true,
   imports: [MatChipComponent, MatChipListComponent, MatFormFieldComponent, TicketsFilterInfoComponent, CommonModule],
-    selector: 'app-tickets-header',
-    templateUrl: './tickets-header.component.html',
-    styleUrls: ['./tickets-header.component.scss'],
-    standalone: true
+  selector: 'app-tickets-header',
+  templateUrl: './tickets-header.component.html',
+  styleUrls: ['./tickets-header.component.scss'],
+
 })
 export class TicketsHeaderComponent implements OnInit, OnDestroy {
   @ViewChild('filter', { static: true }) filter: TicketsFilterComponent;

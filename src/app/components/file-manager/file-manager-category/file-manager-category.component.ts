@@ -29,7 +29,7 @@ import { FileManagerHeaderComponent } from '../file-manager-header/file-manager-
   animations: [fadeInAnimation],
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
-  standalone: true,
+
 })
 export class FileManagerCategoryComponent implements OnInit, OnDestroy {
   sort: string = "Date";

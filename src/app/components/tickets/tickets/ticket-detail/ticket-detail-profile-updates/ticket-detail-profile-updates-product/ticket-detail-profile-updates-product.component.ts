@@ -1,6 +1,4 @@
-﻿import { DynamicTooltipComponent } from './';
-import { TicketDetailProfileUpdatesProductHeaderInfoComponent } from './';
-import { TicketDetailProfileUpdatesProductItemComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -12,6 +10,9 @@ import * as moment from 'moment';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { TicketsListService } from '../../../services/tickets-list.service';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { TicketDetailProfileUpdatesProductHeaderInfoComponent } from './ticket-detail-profile-updates-product-header-info/ticket-detail-profile-updates-product-header-info.component';
+import { TicketDetailProfileUpdatesProductItemComponent } from './ticket-detail-profile-updates-product-item/ticket-detail-profile-updates-product-item.component';
 
 @Component({
   standalone: true,

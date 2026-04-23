@@ -17,10 +17,10 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 @Component({
   standalone: true,
   imports: [FormsModule, CommonModule],
-    selector: 'app-invoices-item',
-    templateUrl: './invoices-item.component.html',
-    styleUrls: ['./invoices-item.component.scss'],
-    standalone: true
+  selector: 'app-invoices-item',
+  templateUrl: './invoices-item.component.html',
+  styleUrls: ['./invoices-item.component.scss'],
+
 })
 export class InvoicesItemComponent implements OnInit {
   @Input() invoice: Invoice;

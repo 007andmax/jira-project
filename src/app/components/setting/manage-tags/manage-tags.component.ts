@@ -1,5 +1,4 @@
-﻿import { DynamicTooltipComponent } from './';
-import { ManageTagsAddComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {
@@ -29,18 +28,20 @@ import { ManageTag } from "./class/manage-tag";
 import { ManageTagsDevicesComponent } from "./manage-tags-devices/manage-tags-devices.component";
 import { fadeInAnimation } from "src/app/animations";
 import { ManageTagsFilesComponent } from "./manage-tags-files/manage-tags-files.component";
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { ManageTagsAddComponent } from './manage-tags-add/manage-tags-add.component';
 declare var $: any;
 @Component({
   standalone: true,
   imports: [DynamicTooltipComponent, ManageTagsAddComponent, FormsModule, CommonModule],
-    selector: "app-manage-tags",
-    templateUrl: "./manage-tags.component.html",
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    styleUrls: ["./manage-tags.component.scss"],
-    providers: [ManageTagsListService],
-    standalone: true,
+  selector: "app-manage-tags",
+  templateUrl: "./manage-tags.component.html",
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  styleUrls: ["./manage-tags.component.scss"],
+  providers: [ManageTagsListService],
+
 })
 export class ManageTagsComponent implements OnDestroy, OnInit {
   searchTag = "";

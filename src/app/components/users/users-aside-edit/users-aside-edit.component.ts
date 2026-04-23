@@ -1,9 +1,4 @@
-﻿import { DynamicTooltipComponent } from './';
-import { MatErrorComponent } from './';
-import { PreloaderTicketComponent } from './';
-import { CompanyDropDownComponent } from './';
-import { UserCustomSubscriptionComponent } from './';
-import { UserDefaultSubscriptionComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, ViewChild, OnDestroy } from '@angular/core';
@@ -34,6 +29,12 @@ import { UserRole } from '../class/user-role';
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { CompanyDropDownComponent } from '../../shared/company-drop-down/company-drop-down.component';
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
+import { UserCustomSubscriptionComponent } from '../users-aside/user-custom-subscription/user-custom-subscription.component';
+import { UserDefaultSubscriptionComponent } from '../users-aside/user-default-subscription/user-default-subscription.component';
 
 @Component({
   standalone: true,

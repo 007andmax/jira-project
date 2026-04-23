@@ -11,7 +11,7 @@ import { ReportListItemComponent } from '../../reports/report-list-item/report-l
   selector: 'devices-report',
   templateUrl: './devices-report.component.html',
   styleUrls: ['./devices-report.component.scss'],
-  standalone: true
+
 })
 export class DevicesReportComponent implements OnInit {
   searchText: string = "";

@@ -13,7 +13,7 @@ import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error
   selector: 'app-product-item-quote',
   templateUrl: './product-item-quote.component.html',
   styleUrls: ['./product-item-quote.component.scss'],
-  standalone: true
+
 })
 export class ProductItemQuoteComponent implements OnInit {
   @Input() product: QuoteAddProduct;

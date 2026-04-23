@@ -27,7 +27,7 @@ import { DocumentsTemplatesInfoComponent } from '../documents-templates/document
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./documents-category.component.css'],
-  standalone: true
+
 })
 export class DocumentsCategoryComponent implements OnInit, OnDestroy {
   categoryId: string;

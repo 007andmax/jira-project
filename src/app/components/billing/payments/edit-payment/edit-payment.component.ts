@@ -23,7 +23,7 @@ import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ti
   selector: 'app-edit-payment',
   templateUrl: './edit-payment.component.html',
   styleUrls: ['./edit-payment.component.scss'],
-  standalone: true
+
 })
 export class EditPaymentComponent implements OnInit, OnDestroy {
   @Input() payment: Payment;

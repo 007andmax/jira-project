@@ -15,10 +15,10 @@ import { AppService } from 'src/app/states/app/app.service';
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'app-payment-item',
-    templateUrl: './payment-item.component.html',
-    styleUrls: ['./payment-item.component.scss'],
-    standalone: true
+  selector: 'app-payment-item',
+  templateUrl: './payment-item.component.html',
+  styleUrls: ['./payment-item.component.scss'],
+
 })
 export class PaymentItemComponent implements OnInit {
   @Input() payment: Payment;

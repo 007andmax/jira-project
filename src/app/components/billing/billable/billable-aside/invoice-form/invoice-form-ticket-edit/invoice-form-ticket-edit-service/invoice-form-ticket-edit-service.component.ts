@@ -17,7 +17,7 @@ import { TicketProfileUpdatesServiceTimepickerComponent } from 'src/app/componen
   selector: 'app-invoice-form-ticket-edit-service',
   templateUrl: './invoice-form-ticket-edit-service.component.html',
   styleUrls: ['./invoice-form-ticket-edit-service.component.scss'],
-  standalone: true
+
 })
 export class InvoiceFormTicketEditServiceComponent implements OnInit, OnDestroy {
   @ViewChild('taxes', { static: true }) taxesDropDown: TaxesComponent;

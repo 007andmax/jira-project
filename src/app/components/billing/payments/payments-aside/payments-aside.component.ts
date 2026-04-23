@@ -21,7 +21,7 @@ import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-pho
   selector: 'app-payments-aside',
   templateUrl: './payments-aside.component.html',
   styleUrls: ['./payments-aside.component.scss'],
-  standalone: true
+
 })
 export class PaymentsAsideComponent implements OnInit {
   @Input() payment: Payment;

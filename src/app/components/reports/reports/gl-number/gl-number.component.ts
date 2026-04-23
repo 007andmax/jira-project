@@ -1,5 +1,4 @@
-﻿import { OverviewReportComponent } from './';
-import { ReportMenuComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { GlNumber } from '../../class/gl-number';
@@ -7,14 +6,16 @@ import { ReportsStateService } from 'src/app/states/reports/reports-state.servic
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import * as moment from "moment";
 import { GlNumberItem } from '../../class/gl-number-item';
+import { OverviewReportComponent } from '../../overview-report/overview-report.component';
+import { ReportMenuComponent } from '../../report-menu/report-menu.component';
 
 @Component({
   standalone: true,
   imports: [OverviewReportComponent, ReportMenuComponent, CommonModule],
-    selector: 'app-gl-number',
-    templateUrl: './gl-number.component.html',
-    styleUrls: ['./gl-number.component.scss'],
-    standalone: true
+  selector: 'app-gl-number',
+  templateUrl: './gl-number.component.html',
+  styleUrls: ['./gl-number.component.scss'],
+
 })
 export class GlNumberComponent implements OnInit {
 

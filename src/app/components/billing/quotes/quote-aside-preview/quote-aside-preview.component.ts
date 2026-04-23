@@ -22,7 +22,7 @@ import { QuoteAsidePreviewBodyComponent } from './quote-aside-preview-body/quote
   selector: 'app-quote-aside-preview',
   templateUrl: './quote-aside-preview.component.html',
   styleUrls: ['./quote-aside-preview.component.scss'],
-  standalone: true
+
 })
 export class QuoteAsidePreviewComponent implements OnInit, OnDestroy {
   quote: QuotePreview;

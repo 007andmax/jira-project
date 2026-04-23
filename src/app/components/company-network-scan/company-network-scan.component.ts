@@ -39,7 +39,7 @@ import { NetworkScanCredentialsAsideComponent } from '../company-network-scan-be
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
   providers: [CompanyNetworkScanService],
-  standalone: true
+
 })
 export class CompanyNetworkScanComponent implements OnInit {
   @ViewChild('btnInstallAgent', { static: false }) btnInstallAgent: DisabledBtnDirective;

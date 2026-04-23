@@ -1,9 +1,13 @@
+﻿import { CommonModule } from '@angular/common';
+import { MatErrorComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
 import { Component } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { DetailContractInterval } from '../../class/detail-contract-interval';
 import * as moment from "moment";
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, MatErrorComponent],
     selector: 'contract-detail-intervals-drop-down',
     templateUrl: './contract-detail-intervals-drop-down.component.html',
     styleUrls: ['./contract-detail-intervals-drop-down.component.scss'],

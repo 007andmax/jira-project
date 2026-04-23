@@ -13,7 +13,7 @@ import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-pho
   selector: 'app-quote-aside-preview-body',
   templateUrl: './quote-aside-preview-body.component.html',
   styleUrls: ['./quote-aside-preview-body.component.scss'],
-  standalone: true
+
 })
 export class QuoteAsidePreviewBodyComponent implements OnInit {
   @Input() quote: QuotePreview;

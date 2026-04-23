@@ -12,7 +12,7 @@ import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
   selector: 'app-company-devices-edit-mac',
   templateUrl: './company-devices-edit-mac.component.html',
   styleUrls: ['./company-devices-edit-mac.component.scss'],
-  standalone: true
+
 })
 export class CompanyDevicesEditMacComponent extends CompanyDevicesEditLabelComponent {
 

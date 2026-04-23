@@ -14,7 +14,7 @@ import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
   selector: 'inventory-add-category',
   templateUrl: './inventory-add-category.component.html',
   styleUrls: ['./inventory-add-category.component.scss'],
-  standalone: true
+
 })
 export class InventoryAddCategoryComponent implements OnInit {
   @Output() onClose: EventEmitter<any> = new EventEmitter();

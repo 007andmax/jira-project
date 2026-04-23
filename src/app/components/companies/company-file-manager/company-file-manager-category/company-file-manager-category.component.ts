@@ -17,7 +17,7 @@ import { FileManagerFileInfoComponent } from 'src/app/components/file-manager/fi
   selector: 'app-company-file-manager-category',
   templateUrl: './company-file-manager-category.component.html',
   styleUrls: ['./company-file-manager-category.component.scss'],
-  standalone: true
+
 })
 export class CompanyFileManagerCategoryComponent extends FileManagerCategoryComponent {
   ngOnInit() {

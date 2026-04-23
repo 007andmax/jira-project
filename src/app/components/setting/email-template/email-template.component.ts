@@ -1,4 +1,4 @@
-﻿import { DynamicTooltipComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy, TemplateRef } from "@angular/core";
 import { EmailTempleteService } from "../../../services/email-template/email-template.service";
@@ -15,19 +15,20 @@ import { AngularEditorConfig } from "@kolkov/angular-editor";
 import { ConfirmStateService } from "../../shared/confirm/services/confirm-state.service";
 import { RESTORE_DEFAULT } from "src/app/const/confirm";
 import { ConfirmComponent } from "../../shared/confirm/confirm.component";
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
 
 declare var $: any;
 
 @Component({
   standalone: true,
   imports: [DynamicTooltipComponent, CommonModule],
-    selector: "app-email-template",
-    templateUrl: "./email-template.component.html",
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    styleUrls: ["./email-template.component.scss"],
-    standalone: true
+  selector: "app-email-template",
+  templateUrl: "./email-template.component.html",
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  styleUrls: ["./email-template.component.scss"],
+
 })
 export class EmailTempleteComponent implements OnInit, OnDestroy {
   loading = true;
@@ -49,14 +50,14 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   openEmailTemplate: string;
   public show = false;
   public buttonName: any = "Show Description";
-  templatesData = { subject: {}, body: {}, isActive: false, header: {},isHeaderEnabled:false };
+  templatesData = { subject: {}, body: {}, isActive: false, header: {}, isHeaderEnabled: false };
   selectedInput: string;
   @ViewChild("body", { static: false }) body: ElementRef;
   @ViewChild("subject", { static: false }) subject: ElementRef;
   @ViewChild("header", { static: false }) header: ElementRef;
   sub: Subscription = new Subscription();
   @ViewChild('editorWrap', { static: false }) editorWrap!: ElementRef<HTMLElement>;
-  templeteKey:any;
+  templeteKey: any;
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: false,
@@ -122,7 +123,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       header: [""],
       body: [""],
       isActive: [false],
-      isHeaderEnabled:[false]
+      isHeaderEnabled: [false]
     });
     this.getEmailPages();
     this.settingStateService.setComponentName('EmailTempleteComponent');
@@ -157,11 +158,11 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     this.sub.add(onChangeEmailTemplates);
 
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-        if (data) {
-          if (this.confirmStateService.getConfirmAction() === RESTORE_DEFAULT) this.onRestoreDefault();
-        }
-      })
-      this.sub.add(getConfirm);
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === RESTORE_DEFAULT) this.onRestoreDefault();
+      }
+    })
+    this.sub.add(getConfirm);
   }
 
   ngOnDestroy() {
@@ -249,7 +250,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
               ]);
             }
             this.templeteForm.controls["body"].clearValidators();
-             if (this.templeteInfo.requiredBodyKeywordsRegExp) {
+            if (this.templeteInfo.requiredBodyKeywordsRegExp) {
               const pattern = this.templeteInfo.requiredBodyKeywordsRegExp;
               this.templeteForm.controls["body"].setValidators([
                 Validators.required,
@@ -257,7 +258,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
               ]);
               this.templeteForm.controls["body"].updateValueAndValidity();
             } else {
-                 this.templeteForm.controls["body"].setValidators([
+              this.templeteForm.controls["body"].setValidators([
                 Validators.required
               ]);
             }
@@ -286,7 +287,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   insertAtCaret(text) {
     var el = document.activeElement;
     this.selectedInput = el.id;
-     if (el.classList.contains("angular-editor-textarea")) this.selectedInput = "textarea";
+    if (el.classList.contains("angular-editor-textarea")) this.selectedInput = "textarea";
     if (el.id === "subject") {
       var startPos = this.subject.nativeElement.selectionStart;
 
@@ -352,10 +353,10 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   }
   restoreFocus(
   ) {
-     if (!this.selectedInput) return;
+    if (!this.selectedInput) return;
     let el = this.selectedInput == "subject" ? this.subject.nativeElement : this.selectedInput == "textarea" ? this.elRef.nativeElement.querySelector(".angular-editor-textarea") : this.header.nativeElement;
     // restore focus
-     (el as HTMLElement).focus({ preventScroll: true });
+    (el as HTMLElement).focus({ preventScroll: true });
   }
 
   insertTextIntoAngularEditor(editorHost: HTMLElement, text: string) {
@@ -410,7 +411,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   }
 
   insertAt(element, text) {
-     if (document['selection']) {
+    if (document['selection']) {
       element.focus();
       var sel = document['selection'].createRange();
       sel.text = text;
@@ -434,7 +435,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   emailPreview(template: TemplateRef<any>) {
     this.emailPreviewHtml = '';
     this.gettingEmailTemplatePreview = true;
-     this.emailService
+    this.emailService
       .getHtmlForPreview(this.type, this.templeteForm.value)
       .pipe(
         map(resp => {
@@ -470,7 +471,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       if (matches === null) {
       }
     }
-     if (this.templeteInfo.requiredBodyKeywordsRegExp) {
+    if (this.templeteInfo.requiredBodyKeywordsRegExp) {
       const matches = this.templeteForm.value.body.match(
         this.templeteInfo.requiredBodyKeywordsRegExp
       );
@@ -506,14 +507,14 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
       return;
     }
     this.templeteKey = templeteKey;
-     this.confirmStateService.setConfirmAction(RESTORE_DEFAULT);
+    this.confirmStateService.setConfirmAction(RESTORE_DEFAULT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-   modalRef.componentInstance.header = "Restore Default Template";
+    modalRef.componentInstance.header = "Restore Default Template";
     modalRef.componentInstance.message = `Are you sure you want to restore the template to the default? <br>The current template will not be recoverable.`;
-   
+
   }
-onRestoreDefault() {
- this.emailService
+  onRestoreDefault() {
+    this.emailService
       .setToDefaultTemplete(this.templeteKey)
       .pipe(
         map((defaultTemplate: any) => {
@@ -535,7 +536,7 @@ onRestoreDefault() {
           this.toastr.error(`Error Occured ${error}`);
         }
       );
-}
+  }
   toggle() {
     this.show = !this.show;
 

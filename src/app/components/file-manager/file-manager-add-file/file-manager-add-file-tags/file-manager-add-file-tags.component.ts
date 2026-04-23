@@ -1,3 +1,7 @@
+﻿import { CommonModule } from '@angular/common';
+import { MatChipComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { MatChipListComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { MatFormFieldComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CompanyTag } from 'src/app/components/companies/company-tags/class/company-tag';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
@@ -5,6 +9,8 @@ import { CompanyTagsListService } from 'src/app/components/companies/company-tag
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, MatChipComponent, MatChipListComponent, MatFormFieldComponent],
     selector: 'app-file-manager-add-file-tags',
     templateUrl: './file-manager-add-file-tags.component.html',
     styleUrls: ['./file-manager-add-file-tags.component.scss'],

@@ -32,7 +32,7 @@ import { RefundPaymentComponent } from './refund-payment/refund-payment.componen
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
   providers: [PaymentsListService],
-  standalone: true
+
 })
 export class PaymentsComponent implements OnInit, OnDestroy {
 

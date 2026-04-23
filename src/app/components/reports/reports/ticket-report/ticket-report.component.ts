@@ -1,4 +1,4 @@
-﻿import { ReportMenuComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { TicketsReport } from '../../class/tickets-reports';
@@ -7,15 +7,16 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import * as moment from "moment";
 import { Company } from 'src/app/interfaces/company/company';
 import { User } from 'src/app/components/users/class/user';
+import { ReportMenuComponent } from '../../report-menu/report-menu.component';
 
 @Component({
   standalone: true,
   imports: [ReportMenuComponent, CommonModule],
-    selector: 'app-ticket-report',
-    templateUrl: './ticket-report.component.html',
-    styleUrls: ['./ticket-report.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: true
+  selector: 'app-ticket-report',
+  templateUrl: './ticket-report.component.html',
+  styleUrls: ['./ticket-report.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+
 })
 export class TicketReportComponent implements OnInit, OnDestroy {
   ticketsReport: TicketsReport = new TicketsReport();

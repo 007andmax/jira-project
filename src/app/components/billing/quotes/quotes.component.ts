@@ -22,7 +22,7 @@ import { QuotesTableComponent } from './quotes-table/quotes-table.component';
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./quotes.component.scss'],
-  standalone: true,
+
 })
 export class QuotesComponent implements OnInit, OnDestroy {
   invoiceId: string;

@@ -1,4 +1,4 @@
-﻿import { SupportPageInfoComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -13,6 +13,7 @@ import { SupportPageCategoriesStateService } from '../../state/support-page-cate
 import { SupportPageCategoryContent } from '../class/support-page-category-content';
 import { SupportPageBodyComponent } from '../support-page-body/support-page-body.component';
 import { SupportPageHeaderComponent } from '../support-page-header/support-page-header.component';
+import { SupportPageInfoComponent } from '../support-page-info/support-page-info.component';
 
 @Component({
   standalone: true,

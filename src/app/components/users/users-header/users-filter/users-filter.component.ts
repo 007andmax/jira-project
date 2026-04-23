@@ -31,11 +31,11 @@ import { UsersFilterDefaultSubscriptionComponent } from './users-filter-default-
 @Component({
   standalone: true,
   imports: [FormsModule, CommonModule],
-    selector: 'app-users-filter',
-    templateUrl: './users-filter.component.html',
-    styleUrls: ['./users-filter.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
+  selector: 'app-users-filter',
+  templateUrl: './users-filter.component.html',
+  styleUrls: ['./users-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+
 })
 export class UsersFilterComponent implements OnInit, OnDestroy {
   @ViewChild('defaultSubscription', { static: true }) defaultSubscription: UsersFilterDefaultSubscriptionComponent;

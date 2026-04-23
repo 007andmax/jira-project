@@ -18,7 +18,7 @@ import { DocumentsTemplatesInfoComponent } from '../../documents/documents-templ
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./company-documents.component.scss'],
-  standalone: true
+
 })
 export class CompanyDocumentsComponent extends DocumentsComponent {
   companyId: string;

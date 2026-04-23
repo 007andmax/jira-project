@@ -25,7 +25,7 @@ import { TicketTaskComponent } from '../ticket-task/ticket-task.component';
   selector: 'app-software',
   templateUrl: './software.component.html',
   styleUrls: ['./software.component.scss'],
-  standalone: true
+
 })
 export class SoftwareComponent implements OnInit, OnDestroy {
   url = environment.apiUrl + 'upload';

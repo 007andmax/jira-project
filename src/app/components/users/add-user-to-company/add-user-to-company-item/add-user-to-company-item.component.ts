@@ -16,10 +16,10 @@ import { User } from '../../class/user';
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'app-add-user-to-company-item',
-    templateUrl: './add-user-to-company-item.component.html',
-    styleUrls: ['./add-user-to-company-item.component.scss'],
-    standalone: true
+  selector: 'app-add-user-to-company-item',
+  templateUrl: './add-user-to-company-item.component.html',
+  styleUrls: ['./add-user-to-company-item.component.scss'],
+
 })
 export class AddUserToCompanyItemComponent implements OnInit {
   @Input() selected: boolean = false;

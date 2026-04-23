@@ -1,5 +1,4 @@
-﻿import { InvoiceFormTicketEditTaxesComponent } from './';
-import { MatErrorComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
@@ -10,14 +9,15 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { InvoiceFormTicketEditTaxesComponent } from 'src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 @Component({
   standalone: true,
   imports: [InvoiceFormTicketEditTaxesComponent, MatErrorComponent, FormsModule, CommonModule],
-    selector: 'ticket-detail-profile-form-update-products',
-    templateUrl: './ticket-detail-profile-form-update-products.component.html',
-    styleUrls: ['./ticket-detail-profile-form-update-products.component.scss'],
-    standalone: true
+  selector: 'ticket-detail-profile-form-update-products',
+  templateUrl: './ticket-detail-profile-form-update-products.component.html',
+  styleUrls: ['./ticket-detail-profile-form-update-products.component.scss'],
 })
 export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, OnDestroy {
   isUpdate: boolean = false;
@@ -94,7 +94,7 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
     this.currentProduct.setTexes(item);
   }
   public addProduct() {
-     this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.currentProduct))));
+    this.addedProductList.push(new TicketProfileFormProduct(JSON.parse(JSON.stringify(this.currentProduct))));
     this.initCurrentProduct();
     this.productDP.clear();
   }

@@ -1,5 +1,4 @@
-﻿import { TaskHeaderAddComponent } from './';
-import { TasksCalendarMonthItemWeekComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import * as moment from "moment";
@@ -12,14 +11,16 @@ import { TaskAddCalendar } from '../../class/task-add-calendar';
 import { TasksFilters } from '../../class/tasks-filters';
 import { Subscription } from 'rxjs';
 import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
+import { TaskHeaderAddComponent } from '../../task-header-add/task-header-add.component';
+import { TasksCalendarMonthItemWeekComponent } from './tasks-calendar-month-item-week/tasks-calendar-month-item-week.component';
 
 @Component({
   standalone: true,
   imports: [TaskHeaderAddComponent, TasksCalendarMonthItemWeekComponent, CommonModule],
-    selector: 'app-tasks-calendar-month',
-    templateUrl: './tasks-calendar-month.component.html',
-    styleUrls: ['./tasks-calendar-month.component.scss'],
-    standalone: true
+  selector: 'app-tasks-calendar-month',
+  templateUrl: './tasks-calendar-month.component.html',
+  styleUrls: ['./tasks-calendar-month.component.scss'],
+
 })
 export class TasksCalendarMonthComponent {
   @Input() filter: TasksFilters = new TasksFilters();

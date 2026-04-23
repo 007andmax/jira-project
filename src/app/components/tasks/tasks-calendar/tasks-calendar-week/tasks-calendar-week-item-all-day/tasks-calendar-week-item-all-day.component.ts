@@ -7,10 +7,10 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'app-tasks-calendar-week-item-all-day',
-    templateUrl: './tasks-calendar-week-item-all-day.component.html',
-    styleUrls: ['./tasks-calendar-week-item-all-day.component.scss'],
-    standalone: true
+  selector: 'app-tasks-calendar-week-item-all-day',
+  templateUrl: './tasks-calendar-week-item-all-day.component.html',
+  styleUrls: ['./tasks-calendar-week-item-all-day.component.scss'],
+
 })
 export class TasksCalendarWeekItemAllDayComponent {
   @Input() list: any[] = [];

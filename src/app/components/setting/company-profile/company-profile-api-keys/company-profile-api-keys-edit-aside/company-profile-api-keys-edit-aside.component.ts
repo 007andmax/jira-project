@@ -1,9 +1,10 @@
-﻿import { MatErrorComponent } from './';
-import { PreloaderTicketComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { ApiKeysService } from 'src/app/services/api-keys/api-keys.service';
 import { PermissionManageService } from 'src/app/services/permission-manage/permission-manage.service';

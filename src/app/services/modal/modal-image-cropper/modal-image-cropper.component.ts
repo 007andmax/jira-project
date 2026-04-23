@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
 import { CompaniesService } from '../../company/companies.service';
@@ -7,6 +8,8 @@ import { ModalImageCropperStateService } from './services/modal-image-cropper-st
 import { ImageCroper } from './class/image-croper';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'modal-image-cropper',
     templateUrl: './modal-image-cropper.component.html',
     styleUrls: ['./modal-image-cropper.component.scss'],

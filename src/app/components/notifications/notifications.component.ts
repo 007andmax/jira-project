@@ -16,11 +16,11 @@ import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'app-notifications',
-    templateUrl: './notifications.component.html',
-    styleUrls: ['./notifications.component.scss'],
-    providers: [TicketsListService],
-    standalone: true
+  selector: 'app-notifications',
+  templateUrl: './notifications.component.html',
+  styleUrls: ['./notifications.component.scss'],
+  providers: [TicketsListService],
+
 })
 export class NotificationsComponent {
   opened = false;

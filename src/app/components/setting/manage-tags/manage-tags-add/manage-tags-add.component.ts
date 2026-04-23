@@ -1,4 +1,4 @@
-﻿import { MatErrorComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -6,14 +6,15 @@ import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { ManageTag } from '../class/manage-tag';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 @Component({
   standalone: true,
   imports: [MatErrorComponent, FormsModule, CommonModule],
-    selector: 'manage-tags-add',
-    templateUrl: './manage-tags-add.component.html',
-    styleUrls: ['./manage-tags-add.component.scss'],
-    standalone: true
+  selector: 'manage-tags-add',
+  templateUrl: './manage-tags-add.component.html',
+  styleUrls: ['./manage-tags-add.component.scss'],
+
 })
 export class ManageTagsAddComponent implements OnInit {
   name: string = "";

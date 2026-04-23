@@ -41,7 +41,7 @@ import { InvoiceRegularNoteComponent } from './invoice-regular-note/invoice-regu
   selector: 'app-invoice-form',
   templateUrl: './invoice-form.component.html',
   styleUrls: ['./invoice-form.component.scss'],
-  standalone: true
+
 })
 export class InvoiceFormComponent implements OnInit, OnDestroy {
   @ViewChild('companyEdit', { static: true }) companyEdit: InvoiceFormEditCustomerComponent;

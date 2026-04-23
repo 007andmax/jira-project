@@ -11,7 +11,7 @@ import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
   selector: 'app-company-devices-edit-ip',
   templateUrl: './company-devices-edit-ip.component.html',
   styleUrls: ['./company-devices-edit-ip.component.scss'],
-  standalone: true
+
 })
 export class CompanyDevicesEditIpComponent extends CompanyDevicesEditLabelComponent {
 

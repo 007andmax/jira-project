@@ -1,7 +1,4 @@
-﻿import { RecurringTicketsAddAsideComponent } from './';
-import { RecurringTicketsEditAsideComponent } from './';
-import { RecurringTicketsHeaderComponent } from './';
-import { RecurringTicketsTableComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RecurringService } from 'src/app/services/recurring/recurring.service';
@@ -9,18 +6,22 @@ import { RecurringTicket } from './class/recurring-ticket';
 import { RecurringTicketsListService } from './services/recurring-tickets-list.service';
 import { RecurringTicketsRealTimeService } from './services/recurring-tickets-real-time.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { RecurringTicketsAddAsideComponent } from './recurring-tickets-add-aside/recurring-tickets-add-aside.component';
+import { RecurringTicketsEditAsideComponent } from './recurring-tickets-edit-aside/recurring-tickets-edit-aside.component';
+import { RecurringTicketsHeaderComponent } from './recurring-tickets-header/recurring-tickets-header.component';
+import { RecurringTicketsTableComponent } from './recurring-tickets-table/recurring-tickets-table.component';
 
 @Component({
   standalone: true,
   imports: [RecurringTicketsAddAsideComponent, RecurringTicketsEditAsideComponent, RecurringTicketsHeaderComponent, RecurringTicketsTableComponent, CommonModule],
-    selector: 'app-recurring-tickets',
-    templateUrl: './recurring-tickets.component.html',
-    styleUrls: ['./recurring-tickets.component.scss'],
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    providers: [RecurringTicketsListService],
-    standalone: true
+  selector: 'app-recurring-tickets',
+  templateUrl: './recurring-tickets.component.html',
+  styleUrls: ['./recurring-tickets.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  providers: [RecurringTicketsListService],
+
 })
 export class RecurringTicketsComponent implements OnInit {
   public page_number: number = 0;

@@ -1,4 +1,4 @@
-﻿import { TasksDashboardMyCalendarItemComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input, NgZone } from '@angular/core';
 import * as moment from "moment";
@@ -10,13 +10,14 @@ import { Task } from '../../tasks/class/task';
 import { Subscription } from 'rxjs';
 import { CalendarWeek } from '../../tasks/class/calenadar-week';
 import { TasksFilters } from '../../tasks/class/tasks-filters';
+import { TasksDashboardMyCalendarItemComponent } from './tasks-dashboard-my-calendar-item/tasks-dashboard-my-calendar-item.component';
 @Component({
   standalone: true,
   imports: [TasksDashboardMyCalendarItemComponent, CommonModule],
-    selector: 'app-tasks-dashboard-my-calendar',
-    templateUrl: './tasks-dashboard-my-calendar.component.html',
-    styleUrls: ['./tasks-dashboard-my-calendar.component.scss'],
-    standalone: true
+  selector: 'app-tasks-dashboard-my-calendar',
+  templateUrl: './tasks-dashboard-my-calendar.component.html',
+  styleUrls: ['./tasks-dashboard-my-calendar.component.scss'],
+
 })
 export class TasksDashboardMyCalendarComponent {
   @Input() filter: TasksFilters = new TasksFilters();

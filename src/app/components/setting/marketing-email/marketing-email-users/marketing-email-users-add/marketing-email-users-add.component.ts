@@ -1,5 +1,4 @@
-﻿import { PreloaderTicketComponent } from './';
-import { MarketingEmailUsersAddItemComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
@@ -13,15 +12,17 @@ import { MarketingSubscriptionType } from '../../marketing-subscription-type/cla
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { Subscription } from 'rxjs';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
+import { MarketingEmailUsersAddItemComponent } from '../marketing-email-users-add-item/marketing-email-users-add-item.component';
 
 @Component({
   standalone: true,
   imports: [PreloaderTicketComponent, MarketingEmailUsersAddItemComponent, FormsModule, CommonModule],
-    selector: 'marketing-email-users-add',
-    templateUrl: './marketing-email-users-add.component.html',
-    styleUrls: ['./marketing-email-users-add.component.scss'],
-    providers: [UserListService],
-    standalone: true,
+  selector: 'marketing-email-users-add',
+  templateUrl: './marketing-email-users-add.component.html',
+  styleUrls: ['./marketing-email-users-add.component.scss'],
+  providers: [UserListService],
+
 })
 export class MarketingEmailUsersAddComponent implements OnInit, OnDestroy {
   opened: boolean = false;

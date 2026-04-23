@@ -31,7 +31,7 @@ import { TicketsTableItemComponent } from '../tickets/tickets/tickets-table/tick
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
   providers: [TicketsListService],
-  standalone: true
+
 })
 export class CompanyTicketsComponent implements OnInit, OnDestroy {
   ticketsFilter: TicketsFilter = new TicketsFilter();

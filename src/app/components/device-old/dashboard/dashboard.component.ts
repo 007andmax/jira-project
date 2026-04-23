@@ -22,7 +22,7 @@ import { DashboardTagsComponent } from './dashboard-tags/dashboard-tags.componen
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  standalone: true
+
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   url = environment.apiUrl + 'upload';

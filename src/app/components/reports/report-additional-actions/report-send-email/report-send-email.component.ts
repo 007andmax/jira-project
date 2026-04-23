@@ -1,6 +1,4 @@
-﻿import { MatErrorComponent } from './';
-import { PreloaderTicketComponent } from './';
-import { DraftEmailUserRecipientsComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
@@ -11,14 +9,17 @@ import { forkJoin, Subscription } from 'rxjs';
 import { DraftEmailComponent } from 'src/app/components/shared/draft-email/draft-email.component';
 import { ReportSendEmailValidate } from './class/report-send-email-validate';
 import { TYPE_REPORT_INVOICE, TYPE_REPORT_PAYMENT, TYPE_REPORT_PRODUCTS } from 'src/app/const/reports';
+import { DraftEmailUserRecipientsComponent } from 'src/app/components/shared/draft-email/draft-email-user-recipients/draft-email-user-recipients.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
 
 @Component({
   standalone: true,
   imports: [MatErrorComponent, PreloaderTicketComponent, DraftEmailUserRecipientsComponent, FormsModule, CommonModule],
-    selector: 'app-report-send-email',
-    templateUrl: './report-send-email.component.html',
-    styleUrls: ['./report-send-email.component.scss'],
-    standalone: true
+  selector: 'app-report-send-email',
+  templateUrl: './report-send-email.component.html',
+  styleUrls: ['./report-send-email.component.scss'],
+
 })
 export class ReportSendEmailComponent extends DraftEmailComponent {
   draftReport: ReportEmail = new ReportEmail();

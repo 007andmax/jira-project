@@ -1,4 +1,4 @@
-﻿import { TaxesAddComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -20,6 +20,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { CustomNotesSettingsComponent } from './custom-notes-settings/custom-notes-settings.component';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { TaxesAddComponent } from './taxes/taxes-add/taxes-add.component';
 declare var $: any;
 @Component({
   standalone: true,

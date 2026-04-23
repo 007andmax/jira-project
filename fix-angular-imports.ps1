@@ -1,514 +1,249 @@
 # ============================================================
-#  fix-angular-imports.ps1
-#  Fixes missing standalone + imports in Angular components
-#  Run from anywhere - path is hardcoded below
+#  fix-angular-imports.ps1  (round 3)
+#  Run: powershell -ExecutionPolicy Bypass -File "C:\Users\007andmax\Desktop\qt-ui\fix-angular-imports.ps1"
 # ============================================================
 
 $projectRoot = "C:\Users\007andmax\Desktop\qt-ui"
+$srcPath = Join-Path $projectRoot "src"
 
+Write-Host "Scanning project for component selectors..." -ForegroundColor Cyan
+
+# ── STEP 1: Build selector map ───────────────────────────────
+$selectorMap = @{}
+Get-ChildItem -Recurse -Path $srcPath -Filter "*.ts" | ForEach-Object {
+    $content = Get-Content $_.FullName -Raw -Encoding UTF8 -ErrorAction SilentlyContinue
+    if (-not $content) { return }
+    if ($content -match "selector\s*:\s*'([^']+)'" -and $content -match "export\s+class\s+(\w+)") {
+        $selectorMap[$Matches[1]] = @{
+            class    = $content -replace '(?s).*export\s+class\s+(\w+).*', '$1'
+            fullPath = $_.FullName
+            relPath  = $_.FullName.Replace($projectRoot + "\", "").Replace("\", "/")
+        }
+        # re-extract class properly
+        if ($content -match "export\s+class\s+(\w+)") {
+            $selectorMap[($content -replace '(?s).*selector\s*:\s*''([^'']+)''.*', '$1')].class = $Matches[1]
+        }
+    }
+}
+
+# Better selector map build
+$selectorMap = @{}
+Get-ChildItem -Recurse -Path $srcPath -Filter "*.ts" | ForEach-Object {
+    $fp = $_.FullName
+    $raw = Get-Content $fp -Raw -Encoding UTF8 -ErrorAction SilentlyContinue
+    if (-not $raw) { return }
+    $selMatch = [regex]::Match($raw, "selector\s*:\s*'([^']+)'")
+    $clsMatch = [regex]::Match($raw, "export\s+class\s+(\w+)")
+    if ($selMatch.Success -and $clsMatch.Success) {
+        $sel = $selMatch.Groups[1].Value
+        $cls = $clsMatch.Groups[1].Value
+        $rel = $fp.Replace($projectRoot + "\", "").Replace("\", "/")
+        $selectorMap[$sel] = @{ class = $cls; fullPath = $fp; relPath = $rel }
+    }
+}
+Write-Host "Found $($selectorMap.Count) selectors" -ForegroundColor Green
+
+# ── STEP 2: Files needing CommonModule / FormsModule ─────────
 $needsCommon = @(
-    "src/app/app.component.ts",
-    "src/app/components/billing/billable/billable-aside/billable-aside.component.ts",
-    "src/app/components/billing/billable/billable-aside/invoice-form/invoice-discount/invoice-discount.component.ts",
-    "src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.component.ts",
-    "src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-product/invoice-form-ticket-edit-product.component.ts",
-    "src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-service/invoice-form-ticket-edit-service.component.ts",
-    "src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit.component.ts",
-    "src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-info/invoice-form-ticket-info.component.ts",
-    "src/app/components/billing/billable/billable-aside/invoice-form/invoice-form.component.ts",
-    "src/app/components/billing/billable/billable-aside/invoice-preview/invoice-preview.component.ts",
-    "src/app/components/billing/billable/billable-tickets/billable-tickets.component.ts",
-    "src/app/components/billing/invoices/invoices-aside-preview/invoices-aside-preview.component.ts",
-    "src/app/components/billing/invoices/invoices-header/invoices-filter/invoices-filter.component.ts",
-    "src/app/components/billing/invoices/invoices-header/invoices-header.component.ts",
-    "src/app/components/billing/invoices/invoices-item/invoices-item.component.ts",
-    "src/app/components/billing/invoices/invoices.component.ts",
-    "src/app/components/billing/manage-cards/manage-cards-table/manage-cards-table.component.ts",
-    "src/app/components/billing/manage-cards/manage-cards.component.ts",
-    "src/app/components/billing/payments/edit-payment/edit-payment.component.ts",
-    "src/app/components/billing/payments/payment-item/payment-item.component.ts",
-    "src/app/components/billing/payments/payments-aside/payments-aside.component.ts",
-    "src/app/components/billing/payments/payments-cards/payments-cards.component.ts",
-    "src/app/components/billing/payments/payments-header/payments-filter/payments-filter.component.ts",
-    "src/app/components/billing/payments/payments-header/payments-header.component.ts",
-    "src/app/components/billing/payments/payments.component.ts",
-    "src/app/components/billing/payments/refund-payment/refund-payment.component.ts",
-    "src/app/components/billing/quotes/quote-aside-add/product-item-quote/product-item-quote.component.ts",
-    "src/app/components/billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component.ts",
-    "src/app/components/billing/quotes/quote-aside-add/quote-aside-add-body/quote-aside-add-body.component.ts",
-    "src/app/components/billing/quotes/quote-aside-add/quote-aside-add.component.ts",
-    "src/app/components/billing/quotes/quote-aside-add/service-item-quote/service-item-quote.component.ts",
-    "src/app/components/billing/quotes/quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component.ts",
-    "src/app/components/billing/quotes/quote-aside-edit/quote-aside-edit-body/quote-aside-edit-body.component.ts",
-    "src/app/components/billing/quotes/quote-aside-edit/quote-aside-edit.component.ts",
-    "src/app/components/billing/quotes/quote-aside-preview/quote-aside-preview-body/quote-aside-preview-body.component.ts",
-    "src/app/components/billing/quotes/quote-aside-preview/quote-aside-preview.component.ts",
-    "src/app/components/billing/quotes/quotes-header/quotes-filter/quotes-filter.component.ts",
-    "src/app/components/billing/quotes/quotes-header/quotes-header.component.ts",
-    "src/app/components/billing/quotes/quotes-table/quotes-item/quotes-item.component.ts",
-    "src/app/components/billing/quotes/quotes-table/quotes-table.component.ts",
-    "src/app/components/billing/quotes/quotes.component.ts",
-    "src/app/components/companies/companies-header/companies-filter/companies-filter.component.ts",
-    "src/app/components/companies/companies-header/companies-header.component.ts",
-    "src/app/components/companies/companies-table/companies-table.component.ts",
-    "src/app/components/companies/companies-users-details/companies-users-details.component.ts",
-    "src/app/components/companies/companies.component.ts",
-    "src/app/components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component.ts",
-    "src/app/components/companies/company-add-aside/company-add-aside-short/company-add-aside-short.component.ts",
-    "src/app/components/companies/company-add-aside/company-add-aside.component.ts",
-    "src/app/components/companies/company-documents/company-documents-table/company-documents-table.component.ts",
-    "src/app/components/companies/company-documents/company-documents.component.ts",
-    "src/app/components/companies/company-edit-aside/company-edit-aside.component.ts",
-    "src/app/components/companies/company-file-manager/company-file-manager-category/company-file-manager-category.component.ts",
-    "src/app/components/companies/company-file-manager/company-file-manager.component.ts",
-    "src/app/components/companies/company-products/company-products.component.ts",
-    "src/app/components/companies/company-tags/company-tags.component.ts",
-    "src/app/components/company-dashboard/company-dash-associate-info/company-dash-associate-info.component.ts",
-    "src/app/components/company-dashboard/company-dash-associate/company-dash-associate.component.ts",
-    "src/app/components/company-dashboard/company-dash-contract/company-dash-contract.component.ts",
-    "src/app/components/company-dashboard/company-dash-detail/company-dash-detail.component.ts",
-    "src/app/components/company-dashboard/company-dash-invoice/company-dash-invoice.component.ts",
-    "src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts",
-    "src/app/components/company-dashboard/company-dash-ticket/company-dash-ticket.component.ts",
-    "src/app/components/company-dashboard/company-dashboard.component.ts",
-    "src/app/components/company-devices/company-devices-aside/company-devices-aside-device-icon/company-devices-aside-device-icon.component.ts",
-    "src/app/components/company-devices/company-devices-aside/company-devices-aside-network-tab/company-devices-aside-network-tab.component.ts",
-    "src/app/components/company-devices/company-devices-aside/company-devices-aside-system/company-devices-aside-system.component.ts",
-    "src/app/components/company-devices/company-devices-aside/company-devices-aside-updates/company-devices-aside-updates.component.ts",
-    "src/app/components/company-devices/company-devices-aside/company-devices-aside.component.ts",
-    "src/app/components/company-devices/company-devices-edit-ip/company-devices-edit-ip.component.ts",
-    "src/app/components/company-devices/company-devices-edit-mac/company-devices-edit-mac.component.ts",
-    "src/app/components/company-devices/company-devices-filter/company-devices-filter-type/company-devices-filter-type.component.ts",
-    "src/app/components/company-devices/company-devices-filter/company-devices-filter.component.ts",
-    "src/app/components/company-devices/company-devices-header/company-devices-header.component.ts",
-    "src/app/components/company-devices/company-devices-item/company-devices-exist-remote-sessions/company-devices-exist-remote-sessions.component.ts",
-    "src/app/components/company-devices/company-devices-item/company-devices-item.component.ts",
-    "src/app/components/company-devices/company-devices-item/company-devices-no-exist-remote-sessions/company-devices-no-exist-remote-sessions.component.ts",
-    "src/app/components/company-devices/company-devices-tags/company-devices-tags.component.ts",
-    "src/app/components/company-devices/company-devices.component.ts",
-    "src/app/components/company-network-scan/company-network-scan.component.ts",
-    "src/app/components/company-password-manager/company-password-manager.component.ts",
-    "src/app/components/company-tickets/company-tickets.component.ts",
-    "src/app/components/company-user/company-user.component.ts",
-    "src/app/components/device-old/dashboard/dashboard-details-dashboard/dashboard-details-dashboard.component.ts",
-    "src/app/components/device-old/dashboard/dashboard-disk-drives/dashboard-disk-drives.component.ts",
-    "src/app/components/device-old/dashboard/dashboard-services/dashboard-services.component.ts",
-    "src/app/components/device-old/dashboard/dashboard.component.ts",
-    "src/app/components/device-old/device-old.component.ts",
-    "src/app/components/device-old/nav/nav.component.ts",
-    "src/app/components/device-old/software/software.component.ts",
-    "src/app/components/device-old/ticket-task/ticket-task.component.ts",
-    "src/app/components/device/dashboard/dashboard.component.ts",
-    "src/app/components/device/software/software.component.ts",
-    "src/app/components/devices/devices-report/devices-report.component.ts",
-    "src/app/components/documents/documents-add/documents-add-body/documents-add-body.component.ts",
-    "src/app/components/documents/documents-add/documents-add-info/documents-add-info.component.ts",
-    "src/app/components/documents/documents-add/documents-add.component.ts",
-    "src/app/components/documents/documents-category/documents-category.component.ts",
-    "src/app/components/documents/documents-edit-category/documents-edit-category-item/documents-edit-category-item.component.ts",
-    "src/app/components/documents/documents-edit-category/documents-edit-category.component.ts",
-    "src/app/components/documents/documents-edit/documents-edit-history/documents-edit-history.component.ts",
-    "src/app/components/documents/documents-edit/documents-edit-info/documents-edit-info.component.ts",
-    "src/app/components/documents/documents-edit/documents-edit.component.ts",
-    "src/app/components/documents/documents-header/documents-filter/documents-filter.component.ts",
-    "src/app/components/documents/documents-header/documents-header.component.ts",
-    "src/app/components/documents/documents.component.ts",
-    "src/app/components/file-manager/file-manager-add-file/file-manager-add-file.component.ts",
-    "src/app/components/file-manager/file-manager-all-customer-company/file-manager-all-customer-company.component.ts",
-    "src/app/components/file-manager/file-manager-all-customer/file-manager-all-customer.component.ts",
-    "src/app/components/file-manager/file-manager-category-rename/file-manager-category-rename.component.ts",
-    "src/app/components/file-manager/file-manager-category/file-manager-category.component.ts",
-    "src/app/components/file-manager/file-manager-file-info/file-manager-file-info-tags/file-manager-file-info-tags.component.ts",
-    "src/app/components/file-manager/file-manager-file-info/file-manager-file-info.component.ts",
-    "src/app/components/file-manager/file-manager.component.ts",
-    "src/app/components/inventory/inventory-add-category/inventory-add-category.component.ts",
-    "src/app/components/inventory/inventory-check-use/inventory-check-use.component.ts",
-    "src/app/components/inventory/inventory-header/inventory-filter/inventory-filter.component.ts",
-    "src/app/components/inventory/inventory-header/inventory-header.component.ts",
-    "src/app/components/inventory/inventory-table/inventory-table.component.ts",
-    "src/app/components/inventory/inventory.component.ts",
-    "src/app/components/marketing/marketing.component.ts",
-    "src/app/components/notifications/notifications.component.ts",
-    "src/app/components/password-manager/password-manager.component.ts",
-    "src/app/components/reports/item-report/item-report.component.ts",
-    "src/app/components/reports/overview-report/overview-report.component.ts",
-    "src/app/components/reports/report-additional-actions/report-send-email/report-send-email.component.ts",
-    "src/app/components/reports/reports/accounting-report/accounting-report.component.ts",
-    "src/app/components/reports/reports/accounts-receivable/accounts-receivable.component.ts",
-    "src/app/components/reports/reports/applicationbycompany-report/applicationbycompany-report.component.ts",
-    "src/app/components/reports/reports/common-commissions-report/common-commissions-report.component.ts",
-    "src/app/components/reports/reports/customer-sales-report/customer-sales-report.component.ts",
-    "src/app/components/reports/reports/detailed-commissions-report/detailed-commissions-report.component.ts",
-    "src/app/components/reports/reports/detailed-contract-report/detailed-contract-report.component.ts",
-    "src/app/components/reports/reports/device-ip-summary-device-report/device-ip-summary-device-report.component.ts",
-    "src/app/components/reports/reports/device-ip-summary-report/device-ip-summary-report.component.ts",
-    "src/app/components/reports/reports/gl-number/gl-number.component.ts",
-    "src/app/components/reports/reports/hardware-summary-device-report/hardware-summary-device-report.component.ts",
-    "src/app/components/reports/reports/hardware-summary-report/hardware-summary-report.component.ts",
-    "src/app/components/reports/reports/network-adapter-report/network-adapter-report.component.ts",
-    "src/app/components/reports/reports/network-detail-report/network-detail-report.component.ts",
-    "src/app/components/reports/reports/network-ip-report/network-ip-report.component.ts",
-    "src/app/components/reports/reports/payments-report/payments-report.component.ts",
-    "src/app/components/reports/reports/product-sales-report/product-sales-report.component.ts",
-    "src/app/components/reports/reports/remote-connection-report/remote-connection-report.component.ts",
-    "src/app/components/reports/reports/report-device-antivirus/report-device-antivirus.component.ts",
-    "src/app/components/reports/reports/report-device-deploymentwarranty/report-device-deploymentwarranty.component.ts",
-    "src/app/components/reports/reports/report-device-diskspace/report-device-diskspace.component.ts",
-    "src/app/components/reports/reports/report-device-processorram/report-device-processorram.component.ts",
-    "src/app/components/reports/reports/report-device-summary/report-device-summary.component.ts",
-    "src/app/components/reports/reports/report-device-warranty/report-device-warranty.component.ts",
-    "src/app/components/reports/reports/service-report/service-report.component.ts",
-    "src/app/components/reports/reports/software-summary-report/software-summary-report.component.ts",
-    "src/app/components/reports/reports/software-summary-report1/software-summary-report1.component.ts",
-    "src/app/components/reports/reports/taxes-report/taxes-report.component.ts",
-    "src/app/components/reports/reports/tech-sales-report/tech-sales-report.component.ts",
-    "src/app/components/reports/reports/tech-service-report/tech-service-report.component.ts",
-    "src/app/components/reports/reports/tech-ticket-report/tech-ticket-report.component.ts",
-    "src/app/components/reports/reports/ticket-report/ticket-report.component.ts",
-    "src/app/components/setting/accounting/accounting-settings.component.ts",
-    "src/app/components/setting/accounting/accounting-year/accounting-year.component.ts",
-    "src/app/components/setting/accounting/custom-notes-settings/add-custom-notes-settings/add-custom-notes-settings.component.ts",
-    "src/app/components/setting/accounting/custom-notes-settings/custom-notes-settings.component.ts",
-    "src/app/components/setting/accounting/custom-notes-settings/edit-custom-notes-settings/edit-custom-notes-settings.component.ts",
-    "src/app/components/setting/accounting/gl-number/add-gl-number/add-gl-number.component.ts",
-    "src/app/components/setting/accounting/gl-number/gl-number.component.ts",
-    "src/app/components/setting/accounting/invoice-settings/invoice-settings.component.ts",
-    "src/app/components/setting/accounting/quotes-settings/quotes-settings.component.ts",
-    "src/app/components/setting/accounting/taxes/taxes-add/taxes-add.component.ts",
-    "src/app/components/setting/accounting/taxes/taxes.component.ts",
-    "src/app/components/setting/company-profile/company-profile-api-keys/company-profile-api-keys-add-aside/company-profile-api-keys-add-aside.component.ts",
-    "src/app/components/setting/company-profile/company-profile-api-keys/company-profile-api-keys-edit-aside/company-profile-api-keys-edit-aside.component.ts",
-    "src/app/components/setting/company-profile/company-profile-operational-hours/company-profile-operational-hours.component.ts",
-    "src/app/components/setting/company-profile/company-profile-profile/company-profile-profile.component.ts",
-    "src/app/components/setting/company-profile/company-profile-workspace/company-profile-workspace.component.ts",
-    "src/app/components/setting/company-profile/company-profile.component.ts",
-    "src/app/components/setting/device-setting/manufactures-check-use/manufactures-check-use.component.ts",
-    "src/app/components/setting/email-template/email-template.component.ts",
-    "src/app/components/setting/manage-tags/manage-tags-add/manage-tags-add.component.ts",
-    "src/app/components/setting/manage-tags/manage-tags-devices/manage-tags-devices-add/manage-tags-devices-add.component.ts",
-    "src/app/components/setting/manage-tags/manage-tags-devices/manage-tags-devices.component.ts",
-    "src/app/components/setting/manage-tags/manage-tags-files/manage-tags-files.component.ts",
-    "src/app/components/setting/manage-tags/manage-tags.component.ts",
-    "src/app/components/setting/marketing-email/marketing-email-users/marketing-email-users-add-item/marketing-email-users-add-item.component.ts",
-    "src/app/components/setting/marketing-email/marketing-email-users/marketing-email-users-add/marketing-email-users-add.component.ts",
-    "src/app/components/setting/marketing-email/marketing-email-users/marketing-email-users-item/marketing-email-users-item.component.ts",
-    "src/app/components/setting/marketing-email/marketing-email-users/marketing-email-users.component.ts",
-    "src/app/components/setting/marketing-email/marketing-email.component.ts",
-    "src/app/components/setting/marketing-email/marketing-subscription-type/marketing-subscription-type.component.ts",
-    "src/app/components/setting/my-profile/account/account.component.ts",
-    "src/app/components/setting/my-profile/activity-history/activity-history.component.ts",
-    "src/app/components/setting/my-profile/email-notifications/email-notifications.component.ts",
-    "src/app/components/setting/my-profile/my-profile.component.ts",
-    "src/app/components/setting/my-profile/profile/profile.component.ts",
-    "src/app/components/setting/my-profile/signature/add-signature/add-signature.component.ts",
-    "src/app/components/setting/my-profile/signature/edit-signature/edit-signature.component.ts",
-    "src/app/components/setting/my-profile/signature/signature.component.ts",
-    "src/app/components/setting/my-profile/tickets-my-profile/tickets-my-profile.component.ts",
-    "src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts",
-    "src/app/components/setting/tech-users-settings/tech-users-reassign/tech-users-reassign.component.ts",
-    "src/app/components/setting/tech-users-settings/tech-users-settings.component.ts",
-    "src/app/components/setting/ticket-settings-page/canned-responses/canned-responses-aside/canned-responses-aside.component.ts",
-    "src/app/components/shared/confirm/confirm.component.ts",
-    "src/app/components/shared/draft-email/draft-email.component.ts",
-    "src/app/components/shared/duration/duration.component.ts",
-    "src/app/components/shared/google-authenticator/google-authenticator.component.ts",
-    "src/app/components/shared/interval/interval.component.ts",
-    "src/app/components/shared/map-modal/map-modal.component.ts",
-    "src/app/components/shared/preview-phone-mask/preview-phone-mask.component.ts",
-    "src/app/components/shared/tags/tags.component.ts",
-    "src/app/components/super-admin-public/help-center-info-aside/help-center-info-aside.component.ts",
-    "src/app/components/super-admin-public/super-admin-public-category/super-admin-public-category.component.ts",
-    "src/app/components/super-admin-public/super-admin-public-detail/super-admin-public-detail.component.ts",
-    "src/app/components/super-admin-public/super-admin-public-header/super-admin-public-header.component.ts",
-    "src/app/components/super-admin-public/super-admin-public-list/super-admin-public-list.component.ts",
-    "src/app/components/super-admin-public/super-admin-public-search/super-admin-public-search.component.ts",
-    "src/app/components/super-admin-public/super-admin-public.component.ts",
-    "src/app/components/super-admin/left-panel-super-admin-categories/left-panel-super-admin-categories-actions/left-panel-super-admin-categories-actions.component.ts",
-    "src/app/components/super-admin/left-panel-super-admin-categories/left-panel-super-admin-categories.component.ts",
-    "src/app/components/super-admin/super-admin-companies/super-admin-companies.component.ts",
-    "src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-add/super-admin-knowledge-base-add.component.ts",
-    "src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-edit/super-admin-knowledge-base-edit.component.ts",
-    "src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-news-list/super-admin-knowledge-base-news-list.component.ts",
-    "src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-table/super-admin-knowledge-base-table-item/super-admin-knowledge-base-table-item.component.ts",
-    "src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-table/super-admin-knowledge-base-table.component.ts",
-    "src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base.component.ts",
-    "src/app/components/super-admin/support-page/support-page-body/support-page-body.component.ts",
-    "src/app/components/super-admin/support-page/support-page-category/support-page-category.component.ts",
-    "src/app/components/super-admin/support-page/support-page-header/support-page-header.component.ts",
-    "src/app/components/super-admin/support-page/support-page-help-center/support-page-help-center.component.ts",
-    "src/app/components/super-admin/support-page/support-page-info/support-page-info-tags/support-page-info-tags.component.ts",
-    "src/app/components/super-admin/support-page/support-page-info/support-page-info.component.ts",
-    "src/app/components/super-admin/support-page/support-page.component.ts",
-    "src/app/components/tasks-dashboard/tasks-dashboard-my-calendar/tasks-dashboard-my-calendar-item/tasks-dashboard-my-calendar-item.component.ts",
-    "src/app/components/tasks-dashboard/tasks-dashboard-my-calendar/tasks-dashboard-my-calendar.component.ts",
-    "src/app/components/tasks-dashboard/tasks-dashboard-my-tasks-list/tasks-dashboard-my-tasks-list.component.ts",
-    "src/app/components/tasks-dashboard/tasks-dashboard-my-tasks/tasks-dashboard-my-tasks.component.ts",
-    "src/app/components/tasks-dashboard/tasks-dashboard.component.ts",
-    "src/app/components/tasks/tasks-add/tasks-add.component.ts",
-    "src/app/components/tasks/tasks-calendar/tasks-calendar-month/tasks-calendar-month-item-week/tasks-calendar-month-item-week.component.ts",
-    "src/app/components/tasks/tasks-calendar/tasks-calendar-month/tasks-calendar-month.component.ts",
-    "src/app/components/tasks/tasks-calendar/tasks-calendar-week/tasks-calendar-week-item-all-day/tasks-calendar-week-item-all-day.component.ts",
-    "src/app/components/tasks/tasks-calendar/tasks-calendar-week/tasks-calendar-week-item-hour/tasks-calendar-week-item-hour.component.ts",
-    "src/app/components/tasks/tasks-calendar/tasks-calendar-week/tasks-calendar-week.component.ts",
-    "src/app/components/tasks/tasks-calendar/tasks-calendar.component.ts",
-    "src/app/components/tasks/tasks-edit/tasks-edit.component.ts",
-    "src/app/components/tasks/tasks-list/tasks-list.component.ts",
-    "src/app/components/tasks/tasks-tabs/tasks-tabs.component.ts",
-    "src/app/components/tasks/tasks.component.ts",
-    "src/app/components/tickets/recurring-tickets/devices-recurring-tickets/devices-recurring-tickets.component.ts",
-    "src/app/components/tickets/recurring-tickets/recurring-tickets-add-aside/recurring-tickets-add-aside.component.ts",
-    "src/app/components/tickets/recurring-tickets/recurring-tickets-edit-aside/recurring-tickets-edit-aside.component.ts",
-    "src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table-assigned-user-more/recurring-tickets-table-assigned-user-more.component.ts",
-    "src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table-assigned-user/recurring-tickets-table-assigned-user.component.ts",
-    "src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component.ts",
-    "src/app/components/tickets/recurring-tickets/recurring-tickets.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-add-assigned-user/ticket-detail-add-assigned-user.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-attachments/ticket-detail-attachments.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-change-company/ticket-detail-change-company.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-change-priority/ticket-detail-change-priority.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-change-status/ticket-detail-change-status.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-claim-info/ticket-detail-claim-info.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-contact-details/ticket-detail-contact-details-history/ticket-detail-contact-details-history.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-contact-details/ticket-detail-contact-details.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-contact/ticket-detail-contact.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-devices/ticket-detail-devices-details/ticket-detail-devices-details.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-devices/ticket-detail-devices-item/ticket-detail-devices-item.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-devices/ticket-detail-devices.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-documents/ticket-detail-documents-details/ticket-detail-documents-details.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-documents/ticket-detail-documents.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-edit-tags/ticket-detail-edit-tags.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-header/ticket-detail-header.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-info-status/ticket-detail-info-status.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-linked-agents/ticket-detail-linked-agents.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-message/ticket-detail-message.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-note-modal/ticket-detail-note-modal.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-passwords/ticket-detail-passwords-details/ticket-detail-passwords-details.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-passwords/ticket-detail-passwords-item/ticket-detail-passwords-item.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-passwords/ticket-detail-passwords.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates-header/ticket-detail-profile-edit-updates-header.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates-products/ticket-detail-profile-edit-updates-products.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates-services/ticket-detail-profile-edit-updates-services.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-note/ticket-detail-profile-form-update-note.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-products/ticket-detail-profile-form-update-products.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-support/ticket-detail-profile-form-update-support.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-visible-users/ticket-detail-profile-form-update-visible-users.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-header-info/ticket-detail-profile-updates-header-info.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-note/ticket-detail-profile-updates-note-edit/ticket-detail-profile-updates-note-edit.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-note/ticket-detail-profile-updates-note-item/ticket-detail-profile-updates-note-item.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-note/ticket-detail-profile-updates-note.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-edit/ticket-detail-profile-updates-product-edit.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-header-info/ticket-detail-profile-updates-product-header-info.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-info/ticket-detail-profile-updates-product-info.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-item/ticket-detail-profile-updates-product-item.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-header-info/ticket-detail-profile-updates-service-header-info.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-info/ticket-detail-profile-updates-service-info.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-item/ticket-detail-profile-updates-service-item.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-tasks/ticket-detail-tasks-item/ticket-detail-tasks-item.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-tasks/ticket-detail-tasks.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-tickets/ticket-detail-tickets-details/ticket-detail-tickets-details.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-tickets/ticket-detail-tickets-status/ticket-detail-tickets-status.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-tickets/ticket-detail-tickets.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-total-statistics/ticket-detail-total-statistics.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail.component.ts",
-    "src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-created-drop-down/tickets-filter-created-drop-down.component.ts",
-    "src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-drop-down/tickets-filter-drop-down.component.ts",
-    "src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-status/tickets-filter-status.component.ts",
-    "src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter.component.ts",
-    "src/app/components/tickets/tickets/tickets-header/tickets-header.component.ts",
-    "src/app/components/tickets/tickets/tickets-table/tickets-table.component.ts",
-    "src/app/components/tickets/tickets/tickets.component.ts",
-    "src/app/components/users-details/users-details-left-panel/users-details-left-panel.component.ts",
-    "src/app/components/users-details/users-details-tab-companies/users-details-tab-companies-add/users-details-tab-companies-add.component.ts",
-    "src/app/components/users-details/users-details-tab-companies/users-details-tab-companies-item/users-details-tab-companies-item.component.ts",
-    "src/app/components/users-details/users-details-tab-companies/users-details-tab-companies.component.ts",
-    "src/app/components/users-details/users-details.component.ts",
-    "src/app/components/users/add-user-to-company/add-user-to-company-item/add-user-to-company-item.component.ts",
-    "src/app/components/users/add-user-to-company/add-user-to-company.component.ts",
-    "src/app/components/users/users-aside-edit/users-aside-edit.component.ts",
-    "src/app/components/users/users-aside/users-aside.component.ts",
-    "src/app/components/users/users-header/users-filter/users-filter-custom-subscriptions/users-filter-custom-subscriptions.component.ts",
-    "src/app/components/users/users-header/users-filter/users-filter-default-subscription/users-filter-default-subscription.component.ts",
-    "src/app/components/users/users-header/users-filter/users-filter-job-title/users-filter-job-title.component.ts",
-    "src/app/components/users/users-header/users-filter/users-filter-subscriptions/users-filter-subscriptions.component.ts",
-    "src/app/components/users/users-header/users-filter/users-filter-tags/users-filter-tags.component.ts",
-    "src/app/components/users/users-header/users-filter/users-filter.component.ts",
-    "src/app/components/users/users-header/users-header.component.ts",
-    "src/app/components/users/users-table/user-table-subscription/user-table-subscription.component.ts",
-    "src/app/components/users/users-table/users-table.component.ts",
-    "src/app/components/users/users.component.ts",
-    "src/app/services/modal/modal-add-users-notify/modal-add-users-notify.component.ts",
-    "src/app/services/modal/modal-edit-category-product/modal-edit-category-product.component.ts",
-    "src/app/services/modal/modal-lock-screen/modal-lock-screen.component.ts"
+    "src/app/components/billing/invoices/invoices-aside/invoices-aside.component.ts",
+    "src/app/components/company-network-scan-beta/network-scan-credentials-aside/network-scan-credentials-aside.component.ts",
+    "src/app/components/file-manager/file-manager-add-file/file-manager-add-file-drag-drop/file-manager-add-file-drag-drop.component.ts",
+    "src/app/components/file-manager/file-manager-add-file/file-manager-add-file-tags/file-manager-add-file-tags.component.ts",
+    "src/app/components/reports/report-menu/contract-detail-drop-down/contract-detail-drop-down.component.ts",
+    "src/app/components/reports/report-menu/contract-detail-intervals-drop-down/contract-detail-intervals-drop-down.component.ts",
+    "src/app/components/reports/report-menu/report-menu.component.ts",
+    "src/app/components/reports/reports/software-summary-report/software-summary-devices-dro-down/software-summary-devices-dro-down.component.ts",
+    "src/app/components/shared/draft-email/draft-email-recipients/draft-email-recipients.component.ts",
+    "src/app/components/tasks/tasks-add/tasks-add-associate-tickets/tasks-add-associate-tickets.component.ts",
+    "src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-users-drop-down/tickets-filter-users-drop-down.component.ts",
+    "src/app/components/users-details/users-details-tab-messages/users-details-tab-messages.component.ts",
+    "src/app/components/users-details/users-details-tab-passwords/users-details-tab-passwords.component.ts",
+    "src/app/components/users-details/users-details-tab-tickets/users-details-tab-tickets.component.ts",
+    "src/app/components/users/add-user-to-company/add-user-to-company-selected-item/add-user-to-company-selected-item.component.ts",
+    "src/app/services/modal/modal-image-cropper/modal-image-cropper.component.ts"
 )
 
 $needsForms = @(
-    "src/app/components/billing/billable/billable-aside/invoice-form/invoice-discount/invoice-discount.component.ts",
-    "src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.component.ts",
-    "src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-product/invoice-form-ticket-edit-product.component.ts",
-    "src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit.component.ts",
-    "src/app/components/billing/billable/billable-aside/invoice-form/invoice-form.component.ts",
-    "src/app/components/billing/billable/billable-tickets/billable-tickets.component.ts",
-    "src/app/components/billing/invoices/invoices-header/invoices-filter/invoices-filter.component.ts",
-    "src/app/components/billing/invoices/invoices-item/invoices-item.component.ts",
-    "src/app/components/billing/payments/edit-payment/edit-payment.component.ts",
-    "src/app/components/billing/payments/payments-header/payments-filter/payments-filter.component.ts",
-    "src/app/components/billing/payments/refund-payment/refund-payment.component.ts",
-    "src/app/components/billing/quotes/quote-aside-add/product-item-quote/product-item-quote.component.ts",
-    "src/app/components/billing/quotes/quote-aside-add/quote-aside-add-body/quote-aside-add-body.component.ts",
-    "src/app/components/billing/quotes/quote-aside-add/service-item-quote/service-item-quote.component.ts",
-    "src/app/components/billing/quotes/quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component.ts",
-    "src/app/components/billing/quotes/quote-aside-edit/quote-aside-edit-body/quote-aside-edit-body.component.ts",
-    "src/app/components/billing/quotes/quotes-header/quotes-filter/quotes-filter.component.ts",
-    "src/app/components/billing/quotes/quotes-header/quotes-header.component.ts",
-    "src/app/components/billing/quotes/quotes-table/quotes-item/quotes-item.component.ts",
-    "src/app/components/companies/companies-header/companies-header.component.ts",
-    "src/app/components/companies/companies-table/companies-table.component.ts",
-    "src/app/components/companies/companies.component.ts",
-    "src/app/components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component.ts",
-    "src/app/components/companies/company-add-aside/company-add-aside-short/company-add-aside-short.component.ts",
-    "src/app/components/companies/company-edit-aside/company-edit-aside.component.ts",
-    "src/app/components/companies/company-products/company-products.component.ts",
-    "src/app/components/company-dashboard/company-dash-detail/company-dash-detail.component.ts",
-    "src/app/components/company-devices/company-devices-aside/company-devices-aside-system/company-devices-aside-system.component.ts",
-    "src/app/components/company-devices/company-devices-edit-ip/company-devices-edit-ip.component.ts",
-    "src/app/components/company-devices/company-devices-edit-mac/company-devices-edit-mac.component.ts",
-    "src/app/components/company-devices/company-devices-filter/company-devices-filter.component.ts",
-    "src/app/components/company-devices/company-devices-item/company-devices-item.component.ts",
-    "src/app/components/company-devices/company-devices.component.ts",
-    "src/app/components/company-network-scan/company-network-scan.component.ts",
-    "src/app/components/company-user/company-user.component.ts",
-    "src/app/components/device-old/dashboard/dashboard-details-dashboard/dashboard-details-dashboard.component.ts",
-    "src/app/components/device/dashboard/dashboard.component.ts",
-    "src/app/components/device/software/software.component.ts",
-    "src/app/components/documents/documents-add/documents-add-info/documents-add-info.component.ts",
-    "src/app/components/documents/documents-edit-category/documents-edit-category.component.ts",
-    "src/app/components/documents/documents-edit/documents-edit-info/documents-edit-info.component.ts",
-    "src/app/components/file-manager/file-manager-file-info/file-manager-file-info.component.ts",
-    "src/app/components/inventory/inventory-add-category/inventory-add-category.component.ts",
-    "src/app/components/inventory/inventory-header/inventory-header.component.ts",
-    "src/app/components/inventory/inventory-table/inventory-table.component.ts",
-    "src/app/components/marketing/marketing.component.ts",
-    "src/app/components/password-manager/password-manager.component.ts",
-    "src/app/components/reports/report-additional-actions/report-send-email/report-send-email.component.ts",
-    "src/app/components/setting/accounting/accounting-year/accounting-year.component.ts",
-    "src/app/components/setting/accounting/custom-notes-settings/add-custom-notes-settings/add-custom-notes-settings.component.ts",
-    "src/app/components/setting/accounting/custom-notes-settings/edit-custom-notes-settings/edit-custom-notes-settings.component.ts",
-    "src/app/components/setting/accounting/gl-number/add-gl-number/add-gl-number.component.ts",
-    "src/app/components/setting/accounting/gl-number/gl-number.component.ts",
-    "src/app/components/setting/company-profile/company-profile-operational-hours/company-profile-operational-hours.component.ts",
-    "src/app/components/setting/manage-tags/manage-tags-add/manage-tags-add.component.ts",
-    "src/app/components/setting/manage-tags/manage-tags-devices/manage-tags-devices-add/manage-tags-devices-add.component.ts",
-    "src/app/components/setting/manage-tags/manage-tags-devices/manage-tags-devices.component.ts",
-    "src/app/components/setting/manage-tags/manage-tags-files/manage-tags-files.component.ts",
-    "src/app/components/setting/manage-tags/manage-tags.component.ts",
-    "src/app/components/setting/marketing-email/marketing-email-users/marketing-email-users-add/marketing-email-users-add.component.ts",
-    "src/app/components/setting/marketing-email/marketing-email-users/marketing-email-users.component.ts",
-    "src/app/components/setting/marketing-email/marketing-subscription-type/marketing-subscription-type.component.ts",
-    "src/app/components/setting/my-profile/signature/add-signature/add-signature.component.ts",
-    "src/app/components/setting/my-profile/signature/edit-signature/edit-signature.component.ts",
-    "src/app/components/setting/tech-users-settings/permission-manage/permission-manage.component.ts",
-    "src/app/components/setting/ticket-settings-page/canned-responses/canned-responses-aside/canned-responses-aside.component.ts",
-    "src/app/components/shared/draft-email/draft-email.component.ts",
-    "src/app/components/shared/duration/duration.component.ts",
-    "src/app/components/shared/interval/interval.component.ts",
-    "src/app/components/shared/preview-phone-mask/preview-phone-mask.component.ts",
-    "src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-add/super-admin-knowledge-base-add.component.ts",
-    "src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-edit/super-admin-knowledge-base-edit.component.ts",
-    "src/app/components/super-admin/support-page/support-page-info/support-page-info-tags/support-page-info-tags.component.ts",
-    "src/app/components/tasks/tasks-calendar/tasks-calendar.component.ts",
-    "src/app/components/tickets/recurring-tickets/devices-recurring-tickets/devices-recurring-tickets.component.ts",
-    "src/app/components/tickets/recurring-tickets/recurring-tickets-add-aside/recurring-tickets-add-aside.component.ts",
-    "src/app/components/tickets/recurring-tickets/recurring-tickets-edit-aside/recurring-tickets-edit-aside.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates-products/ticket-detail-profile-edit-updates-products.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates-services/ticket-detail-profile-edit-updates-services.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-note/ticket-detail-profile-form-update-note.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-products/ticket-detail-profile-form-update-products.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-note/ticket-detail-profile-updates-note-edit/ticket-detail-profile-updates-note-edit.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-edit/ticket-detail-profile-updates-product-edit.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-tasks/ticket-detail-tasks-item/ticket-detail-tasks-item.component.ts",
-    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-tasks/ticket-detail-tasks.component.ts",
-    "src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-status/tickets-filter-status.component.ts",
-    "src/app/components/users-details/users-details-tab-companies/users-details-tab-companies-add/users-details-tab-companies-add.component.ts",
-    "src/app/components/users-details/users-details-tab-companies/users-details-tab-companies-item/users-details-tab-companies-item.component.ts",
-    "src/app/components/users-details/users-details-tab-companies/users-details-tab-companies.component.ts",
-    "src/app/components/users/add-user-to-company/add-user-to-company.component.ts",
-    "src/app/components/users/users-aside-edit/users-aside-edit.component.ts",
-    "src/app/components/users/users-aside/users-aside.component.ts",
-    "src/app/components/users/users-header/users-filter/users-filter-job-title/users-filter-job-title.component.ts",
-    "src/app/components/users/users-header/users-filter/users-filter.component.ts",
-    "src/app/components/users/users-header/users-header.component.ts",
-    "src/app/components/users/users-table/users-table.component.ts",
-    "src/app/components/users/users.component.ts",
-    "src/app/services/modal/modal-edit-category-product/modal-edit-category-product.component.ts"
+    "src/app/components/billing/invoices/invoices-aside/invoices-aside.component.ts",
+    "src/app/components/reports/report-menu/report-menu.component.ts",
+    "src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-search/tickets-filter-search.component.ts"
 )
 
-$needsRouter = @(
-    "src/app/app.component.ts",
-    "src/app/components/device-old/device-old.component.ts",
-    "src/app/components/super-admin/support-page/support-page.component.ts"
-)
+# ── STEP 3: Missing components map ───────────────────────────
+$missingMap = @{
+    "src/app/components/billing/billable/billable-aside/billable-aside.component.ts" = @("app-invoice-form")
+    "src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-product/invoice-form-ticket-edit-product.component.ts" = @("app-taxes")
+    "src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-service/invoice-form-ticket-edit-service.component.ts" = @("app-taxes")
+    "src/app/components/billing/billable/billable-aside/invoice-form/invoice-form.component.ts" = @("app-invoice-form-edit-customer")
+    "src/app/components/billing/invoices/invoices-aside/invoices-aside.component.ts" = @("app-date-picker","app-drop-down","app-mat-error","app-multi-company-drop-down","app-payments-cards","app-preloader-ticket")
+    "src/app/components/billing/invoices/invoices-header/invoices-filter/invoices-filter.component.ts" = @("app-drop-down","app-multi-datepicker","company-drop-down")
+    "src/app/components/billing/invoices/invoices-header/invoices-header.component.ts" = @("app-invoices-filter")
+    "src/app/components/billing/payments/payments-header/payments-filter/payments-filter.component.ts" = @("app-drop-down","app-multi-datepicker","company-drop-down")
+    "src/app/components/billing/payments/payments-header/payments-header.component.ts" = @("app-payments-filter")
+    "src/app/components/billing/quotes/quote-aside-add/quote-aside-add-body/quote-aside-add-body.component.ts" = @("app-date-picker","app-invoice-form-edit-customer","app-service-list-quote")
+    "src/app/components/billing/quotes/quote-aside-add/quote-aside-add.component.ts" = @("app-quote-aside-add-body")
+    "src/app/components/billing/quotes/quote-aside-edit/quote-aside-edit-body/quote-aside-edit-body.component.ts" = @("app-service-list-quote")
+    "src/app/components/billing/quotes/quote-aside-edit/quote-aside-edit.component.ts" = @("app-quote-aside-edit-body")
+    "src/app/components/billing/quotes/quotes-header/quotes-filter/quotes-filter.component.ts" = @("app-drop-down","app-multi-datepicker","company-drop-down")
+    "src/app/components/billing/quotes/quotes-header/quotes-header.component.ts" = @("app-quotes-filter")
+    "src/app/components/companies/companies-header/companies-filter/companies-filter.component.ts" = @("app-company-tags","app-drop-down")
+    "src/app/components/companies/companies.component.ts" = @("app-companies-header")
+    "src/app/components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component.ts" = @("app-drop-down")
+    "src/app/components/companies/company-documents/company-documents.component.ts" = @("documents-header")
+    "src/app/components/companies/company-edit-aside/company-edit-aside.component.ts" = @("app-company-tags","app-drop-down","company-associate")
+    "src/app/components/company-devices/company-devices-aside/company-devices-aside-network-tab/company-devices-aside-network-tab.component.ts" = @("app-company-devices-edit-ip","app-company-devices-edit-label","app-company-devices-edit-mac")
+    "src/app/components/company-devices/company-devices-aside/company-devices-aside-system/company-devices-aside-system.component.ts" = @("app-company-devices-edit-label","app-date-picker","app-drop-down")
+    "src/app/components/company-devices/company-devices-aside/company-devices-aside.component.ts" = @("app-company-devices-aside-network-tab","app-company-devices-aside-system")
+    "src/app/components/company-devices/company-devices-filter/company-devices-filter.component.ts" = @("app-company-devices-filter-type")
+    "src/app/components/company-devices/company-devices-item/company-devices-item.component.ts" = @("app-company-devices-tags")
+    "src/app/components/company-devices/company-devices.component.ts" = @("app-company-devices-header")
+    "src/app/components/company-network-scan-beta/network-scan-credentials-aside/network-scan-credentials-aside.component.ts" = @("app-network-scan-credentials-add","app-network-scan-credentials-aside-item")
+    "src/app/components/company-password-manager/company-password-manager.component.ts" = @("app-passwoord-manager-filters")
+    "src/app/components/company-tickets/company-tickets.component.ts" = @("app-tickets-filter","app-tickets-header")
+    "src/app/components/company-user/company-user.component.ts" = @("app-users-filter","app-users-header")
+    "src/app/components/device-old/software/software.component.ts" = @("software-header")
+    "src/app/components/documents/documents-add/documents-add-info/documents-add-info.component.ts" = @("app-date-picker","app-drop-down","documents-linked")
+    "src/app/components/documents/documents-edit/documents-edit-info/documents-edit-info.component.ts" = @("app-company-tags","app-drop-down","documents-linked")
+    "src/app/components/documents/documents-header/documents-filter/documents-filter.component.ts" = @("app-company-tags","app-multi-datepicker","app-tech-users-list-report")
+    "src/app/components/documents/documents-header/documents-header.component.ts" = @("documents-filter")
+    "src/app/components/file-manager/file-manager-add-file/file-manager-add-file-tags/file-manager-add-file-tags.component.ts" = @("app-mat-chip","app-mat-chip-list","app-mat-form-field")
+    "src/app/components/file-manager/file-manager-category/file-manager-category.component.ts" = @("app-file-manager-file-info")
+    "src/app/components/file-manager/file-manager.component.ts" = @("app-file-manager-file-info")
+    "src/app/components/inventory/inventory-header/inventory-filter/inventory-filter.component.ts" = @("app-drop-down")
+    "src/app/components/inventory/inventory-header/inventory-header.component.ts" = @("inventory-filter")
+    "src/app/components/inventory/inventory-table/inventory-table.component.ts" = @("app-drop-down")
+    "src/app/components/inventory/inventory.component.ts" = @("app-inventory-table","inventory-header")
+    "src/app/components/marketing/marketing.component.ts" = @("app-users-header")
+    "src/app/components/reports/item-report/item-report.component.ts" = @("applicationbycompany-report","network-detail-report","network-ip-report","report-device-antivirus","report-device-diskspace","report-device-processorram","report-device-summary","report-device-warranty","software-summary-report1")
+    "src/app/components/reports/report-menu/contract-detail-drop-down/contract-detail-drop-down.component.ts" = @("app-mat-error")
+    "src/app/components/reports/report-menu/contract-detail-intervals-drop-down/contract-detail-intervals-drop-down.component.ts" = @("app-mat-error")
+    "src/app/components/reports/report-menu/report-menu.component.ts" = @("app-drop-down","app-multi-company-drop-down","app-multi-datepicker","app-product-list","app-report-additional-actions","app-tech-users-list-report","company-drop-down","contract-company-drop-down","contract-detail-drop-down","contract-detail-intervals-drop-down","software-summary-devices-dro-down")
+    "src/app/components/reports/reports/applicationbycompany-report/applicationbycompany-report.component.ts" = @("app-drop-down")
+    "src/app/components/reports/reports/device-ip-summary-device-report/device-ip-summary-device-report.component.ts" = @("app-drop-down")
+    "src/app/components/reports/reports/network-adapter-report/network-adapter-report.component.ts" = @("app-drop-down","app-report-send-email")
+    "src/app/components/reports/reports/network-detail-report/network-detail-report.component.ts" = @("app-drop-down")
+    "src/app/components/reports/reports/network-ip-report/network-ip-report.component.ts" = @("app-drop-down")
+    "src/app/components/reports/reports/report-device-antivirus/report-device-antivirus.component.ts" = @("app-drop-down")
+    "src/app/components/reports/reports/report-device-deploymentwarranty/report-device-deploymentwarranty.component.ts" = @("app-drop-down")
+    "src/app/components/reports/reports/report-device-diskspace/report-device-diskspace.component.ts" = @("app-drop-down")
+    "src/app/components/reports/reports/report-device-processorram/report-device-processorram.component.ts" = @("app-drop-down")
+    "src/app/components/reports/reports/report-device-summary/report-device-summary.component.ts" = @("app-drop-down")
+    "src/app/components/reports/reports/report-device-warranty/report-device-warranty.component.ts" = @("app-drop-down")
+    "src/app/components/reports/reports/software-summary-report/software-summary-devices-dro-down/software-summary-devices-dro-down.component.ts" = @("app-mat-error")
+    "src/app/components/reports/reports/software-summary-report1/software-summary-report1.component.ts" = @("app-drop-down")
+    "src/app/components/setting/accounting/accounting-settings.component.ts" = @("accounting-year","app-gl-number-settings","app-invoice-settings","app-quotes-settings","app-taxes-settings","custom-notes-settings")
+    "src/app/components/setting/company-profile/company-profile.component.ts" = @("app-company-profile-api-keys","app-company-profile-operational-hours","app-company-profile-profile","app-company-profile-workspace")
+    "src/app/components/setting/manage-tags/manage-tags.component.ts" = @("app-manage-tags-devices","app-manage-tags-files")
+    "src/app/components/setting/marketing-email/marketing-email-users/marketing-email-users.component.ts" = @("marketing-email-users-add")
+    "src/app/components/setting/marketing-email/marketing-email.component.ts" = @("marketing-subscription-type")
+    "src/app/components/setting/my-profile/my-profile.component.ts" = @("app-account","app-activity-history","app-email-notifications","app-profile","tickets-my-profile")
+    "src/app/components/setting/my-profile/signature/signature.component.ts" = @("edit-signature")
+    "src/app/components/setting/my-profile/tickets-my-profile/tickets-my-profile.component.ts" = @("app-drop-down")
+    "src/app/components/setting/tech-users-settings/tech-users-settings.component.ts" = @("app-permission-manage")
+    "src/app/components/setting/ticket-settings-page/canned-responses/canned-responses-aside/canned-responses-aside.component.ts" = @("app-mat-error")
+    "src/app/components/shared/draft-email/draft-email-recipients/draft-email-recipients.component.ts" = @("app-mat-chip","app-mat-chip-list","app-mat-error","app-mat-form-field")
+    "src/app/components/shared/draft-email/draft-email.component.ts" = @("app-upload-area")
+    "src/app/components/super-admin-public/help-center-info-aside/help-center-info-aside.component.ts" = @("app-super-admin-public-list")
+    "src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-table/super-admin-knowledge-base-table.component.ts" = @("app-super-admin-knowledge-base-add","app-super-admin-knowledge-base-edit")
+    "src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base.component.ts" = @("app-super-admin-knowledge-base-table")
+    "src/app/components/super-admin/support-page/support-page-category/support-page-category.component.ts" = @("support-page-body","support-page-header")
+    "src/app/components/tasks/tasks-add/tasks-add.component.ts" = @("app-services-list")
+    "src/app/components/tasks/tasks-calendar/tasks-calendar.component.ts" = @("app-tasks-calendar-month","app-tasks-calendar-week")
+    "src/app/components/tasks/tasks-edit/tasks-edit.component.ts" = @("app-tasks-date-picker")
+    "src/app/components/tickets/recurring-tickets/recurring-tickets-add-aside/recurring-tickets-add-aside.component.ts" = @("app-assigned-ticket-user","app-devices-recurring-tickets")
+    "src/app/components/tickets/recurring-tickets/recurring-tickets-edit-aside/recurring-tickets-edit-aside.component.ts" = @("app-devices-recurring-tickets")
+    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-add-assigned-user/ticket-detail-add-assigned-user.component.ts" = @("app-add-assigned-user")
+    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-change-status/ticket-detail-change-status.component.ts" = @("app-drop-down")
+    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-contact-details/ticket-detail-contact-details.component.ts" = @("ticket-detail-contact-details-history")
+    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-note-modal/ticket-detail-note-modal.component.ts" = @("ticket-detail-profile-form-update-note")
+    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates-products/ticket-detail-profile-edit-updates-products.component.ts" = @("app-invoice-form-ticket-edit-taxes","app-product-list")
+    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates-services/ticket-detail-profile-edit-updates-services.component.ts" = @("app-date-picker","app-services-list","app-ticket-profile-updates-service-duration","app-ticket-profile-updates-service-timepicker")
+    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates.component.ts" = @("ticket-detail-profile-edit-updates-products","ticket-detail-profile-edit-updates-services")
+    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-products/ticket-detail-profile-form-update-products.component.ts" = @("app-product-list")
+    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts" = @("app-date-picker","app-ticket-profile-updates-service-duration","app-ticket-profile-updates-service-timepicker")
+    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.ts" = @("ticket-detail-profile-form-update-header","ticket-detail-profile-form-update-note","ticket-detail-profile-form-update-products","ticket-detail-profile-form-update-services","ticket-profile-form-update-note-list")
+    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-note/ticket-detail-profile-updates-note.component.ts" = @("ticket-detail-profile-updates-note-item")
+    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-info/ticket-detail-profile-updates-product-info.component.ts" = @("app-date-picker")
+    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-info/ticket-detail-profile-updates-service-info.component.ts" = @("app-date-picker")
+    "src/app/components/tickets/tickets/ticket-detail/ticket-detail-tasks/ticket-detail-tasks-item/ticket-detail-tasks-item.component.ts" = @("app-tasks-date-picker","app-tech-users")
+    "src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-users-drop-down/tickets-filter-users-drop-down.component.ts" = @("app-dynamic-tooltip","app-mat-chip","app-mat-chip-list","app-mat-form-field")
+    "src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter.component.ts" = @("app-tickets-filter-tags","tickets-filter-companies-drop-down","tickets-filter-created-drop-down","tickets-filter-drop-down","tickets-filter-status")
+    "src/app/components/users-details/users-details-tab-companies/users-details-tab-companies-add/users-details-tab-companies-add.component.ts" = @("app-drop-down")
+    "src/app/components/users-details/users-details-tab-companies/users-details-tab-companies-item/users-details-tab-companies-item.component.ts" = @("app-drop-down")
+    "src/app/components/users-details/users-details-tab-companies/users-details-tab-companies.component.ts" = @("app-users-details-tab-companies-item")
+    "src/app/components/users-details/users-details-tab-messages/users-details-tab-messages.component.ts" = @("app-users-details-tab-messages-full-body")
+    "src/app/components/users-details/users-details-tab-passwords/users-details-tab-passwords.component.ts" = @("app-users-details-tab-passwords-item")
+    "src/app/components/users-details/users-details-tab-tickets/users-details-tab-tickets.component.ts" = @("app-users-details-tab-tickets-item")
+    "src/app/components/users-details/users-details.component.ts" = @("app-users-details-left-panel")
+    "src/app/components/users/users-aside-edit/users-aside-edit.component.ts" = @("app-company-tags","app-drop-down")
+    "src/app/components/users/users-aside/users-aside.component.ts" = @("app-drop-down")
+    "src/app/components/users/users-header/users-filter/users-filter-default-subscription/users-filter-default-subscription.component.ts" = @("app-mat-form-field")
+    "src/app/components/users/users-header/users-filter/users-filter.component.ts" = @("app-users-filter-custom-subscriptions","app-users-filter-default-subscription","app-users-filter-job-title","app-users-filter-tags","tickets-filter-companies-drop-down")
+    "src/app/components/users/users-table/users-table.component.ts" = @("user-table-custom-subscription")
+    "src/app/components/users/users.component.ts" = @("app-users-header")
+}
 
-# ── APPLY FIXES ──────────────────────────────────────────────
+# ── STEP 4: Collect all files to process ─────────────────────
+$allFiles = (@($needsCommon) + @($needsForms) + @($missingMap.Keys)) | Sort-Object -Unique
+
 $fixedCount = 0
-$notFoundCount = 0
-
-Write-Host "Project root: $projectRoot" -ForegroundColor Cyan
-Write-Host "Processing $($needsCommon.Count) files..." -ForegroundColor Cyan
-Write-Host ""
-
-$allFiles = ($needsCommon + $needsForms + $needsRouter) | Sort-Object -Unique
+$skipped = @()
 
 foreach ($relPath in $allFiles) {
     $fullPath = Join-Path $projectRoot $relPath.Replace('/', '\')
-
-    if (-not (Test-Path $fullPath)) {
-        Write-Warning "NOT FOUND: $fullPath"
-        $notFoundCount++
-        continue
-    }
+    if (-not (Test-Path $fullPath)) { Write-Warning "NOT FOUND: $relPath"; continue }
 
     $content = Get-Content $fullPath -Raw -Encoding UTF8
     $changed = $false
+    $addImportLines = @()
+    $addClassNames  = @()
 
-    # Build list of modules to inject
-    $modules = @()
-    if ($needsCommon -contains $relPath) { $modules += "CommonModule" }
-    if ($needsForms  -contains $relPath) { $modules += "FormsModule" }
-    if ($needsRouter -contains $relPath) { $modules += "RouterModule" }
-
-    foreach ($mod in $modules) {
-        # 1. Skip if module already present anywhere in file
-        if ($content -match "\b$mod\b") { continue }
-
-        # 2. Add import statement at top of file
-        $importMap = @{
-            "CommonModule" = "import { CommonModule } from '@angular/common';"
-            "FormsModule"  = "import { FormsModule } from '@angular/forms';"
-            "RouterModule" = "import { RouterModule } from '@angular/router';"
-        }
-        $importLine = $importMap[$mod]
-        $content = $importLine + "`n" + $content
-
-        # 3a. Component HAS an imports array -> insert module into it
-        if ($content -match "imports\s*:\s*\[") {
-            $content = $content -replace "imports\s*:\s*\[", "imports: [$mod, "
-        }
-        # 3b. Component has NO imports array -> add standalone:true + imports after @Component({
-        else {
-            $content = $content -replace "(@Component\(\s*\{)", "`$1`n  standalone: true,`n  imports: [$mod],"
-        }
-
+    # CommonModule
+    if (($needsCommon -contains $relPath) -and ($content -notmatch '\bCommonModule\b')) {
+        $addImportLines += "import { CommonModule } from '@angular/common';"
+        $addClassNames  += "CommonModule"
+        $changed = $true
+    }
+    # FormsModule
+    if (($needsForms -contains $relPath) -and ($content -notmatch '\bFormsModule\b')) {
+        $addImportLines += "import { FormsModule } from '@angular/forms';"
+        $addClassNames  += "FormsModule"
         $changed = $true
     }
 
+    # Missing child components
+    if ($missingMap.ContainsKey($relPath)) {
+        foreach ($sel in $missingMap[$relPath]) {
+            if (-not $selectorMap.ContainsKey($sel)) {
+                $skipped += "$sel (in $relPath)"
+                continue
+            }
+            $info = $selectorMap[$sel]
+            $cls  = $info.class
+            if ($content -match "\b$cls\b") { continue }
+
+            $childFull = $info.fullPath
+            $parentDir = [System.IO.Path]::GetDirectoryName($fullPath)
+            $rel = [System.IO.Path]::GetRelativePath($parentDir, $childFull) -replace '\\','/' -replace '\.ts$',''
+            if (-not $rel.StartsWith('.')) { $rel = "./$rel" }
+
+            $addImportLines += "import { $cls } from '$rel';"
+            $addClassNames  += $cls
+            $changed = $true
+        }
+    }
+
     if ($changed) {
+        $importBlock = ($addImportLines | Select-Object -Unique) -join "`n"
+        $content = $importBlock + "`n" + $content
+
+        $classBlock = ($addClassNames | Select-Object -Unique) -join ", "
+        if ($content -match "imports\s*:\s*\[") {
+            $content = $content -replace "imports\s*:\s*\[", "imports: [$classBlock, "
+        } else {
+            $content = $content -replace "(@Component\(\s*\{)", "`$1`n  standalone: true,`n  imports: [$classBlock],"
+        }
+
         Set-Content $fullPath $content -Encoding UTF8 -NoNewline
         Write-Host "FIXED: $relPath" -ForegroundColor Green
         $fixedCount++
@@ -517,8 +252,11 @@ foreach ($relPath in $allFiles) {
 
 Write-Host ""
 Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Cyan
-Write-Host "Fixed : $fixedCount files" -ForegroundColor Green
-Write-Host "Not found: $notFoundCount files" -ForegroundColor Yellow
-Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Cyan
+Write-Host "Fixed: $fixedCount files" -ForegroundColor Green
+if ($skipped.Count -gt 0) {
+    Write-Host ""
+    Write-Host "Skipped (3rd party / not found) $($skipped.Count):" -ForegroundColor Yellow
+    $skipped | ForEach-Object { Write-Host "  - $_" -ForegroundColor Yellow }
+}
 Write-Host ""
-Write-Host "Next step: ng build 2> build2.log" -ForegroundColor Yellow
+Write-Host "Next: ng build 2> build4.log" -ForegroundColor Cyan

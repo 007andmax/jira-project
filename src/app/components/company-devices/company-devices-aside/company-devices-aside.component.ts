@@ -28,7 +28,7 @@ import { CompanyDevicesAsideUpdatesComponent } from './company-devices-aside-upd
   selector: 'app-company-devices-aside',
   templateUrl: './company-devices-aside.component.html',
   styleUrls: ['./company-devices-aside.component.scss'],
-  standalone: true
+
 })
 export class CompanyDevicesAsideComponent implements OnInit, OnDestroy {
   @Input() companyId: string;

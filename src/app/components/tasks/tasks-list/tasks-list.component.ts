@@ -1,4 +1,4 @@
-﻿import { TasksListItemComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { TasksService } from 'src/app/services/tasks/tasks.service';
@@ -9,15 +9,16 @@ import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { Subscription } from 'rxjs';
 import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { TasksListItemComponent } from './tasks-list-item/tasks-list-item.component';
 
 @Component({
   standalone: true,
   imports: [TasksListItemComponent, CommonModule],
-    selector: 'app-tasks-list',
-    templateUrl: './tasks-list.component.html',
-    styleUrls: ['./tasks-list.component.scss'],
-    providers: [TicketsListService],
-    standalone: true
+  selector: 'app-tasks-list',
+  templateUrl: './tasks-list.component.html',
+  styleUrls: ['./tasks-list.component.scss'],
+  providers: [TicketsListService],
+
 })
 export class TasksListComponent implements OnInit, OnDestroy {
   filter: TasksFilters = new TasksFilters();

@@ -14,10 +14,10 @@ declare var $: any;
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'app-ticket-task',
-    templateUrl: './ticket-task.component.html',
-    styleUrls: ['./ticket-task.component.scss'],
-    standalone: true
+  selector: 'app-ticket-task',
+  templateUrl: './ticket-task.component.html',
+  styleUrls: ['./ticket-task.component.scss'],
+
 })
 export class TicketTaskComponent implements OnInit, OnDestroy {
   DateFormat = CONFIGCONSTANTS.DateFormat;

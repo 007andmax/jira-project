@@ -1,6 +1,4 @@
-﻿import { AddGlNumberComponent } from './';
-import { DynamicTooltipComponent } from './';
-import { MatErrorComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from "@angular/core";
@@ -15,6 +13,9 @@ import { ConfirmStateService } from "src/app/components/shared/confirm/services/
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DELETE_GL_NUMBER } from "src/app/const/confirm";
 import { GlNumberCheckUseComponent } from "./gl-number-check-use/gl-number-check-use.component";
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { AddGlNumberComponent } from './add-gl-number/add-gl-number.component';
 declare var $: any;
 @Component({
   standalone: true,

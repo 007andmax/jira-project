@@ -1,17 +1,18 @@
-﻿import { ReportMenuComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CommonCommissionsReport } from '../../class/common-commissions-report';
 import * as moment from "moment";
+import { ReportMenuComponent } from '../../report-menu/report-menu.component';
 
 @Component({
   standalone: true,
   imports: [ReportMenuComponent, CommonModule],
-    selector: 'common-commissions-report',
-    templateUrl: './common-commissions-report.component.html',
-    styleUrls: ['./common-commissions-report.component.css'],
-    standalone: true
+  selector: 'common-commissions-report',
+  templateUrl: './common-commissions-report.component.html',
+  styleUrls: ['./common-commissions-report.component.css'],
+
 })
 export class CommonCommissionsReportComponent implements OnInit {
   byCustomerChartData;

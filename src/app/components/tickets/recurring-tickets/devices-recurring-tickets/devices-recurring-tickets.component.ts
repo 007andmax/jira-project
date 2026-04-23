@@ -12,10 +12,10 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
 @Component({
   standalone: true,
   imports: [FormsModule, CommonModule],
-    selector: 'app-devices-recurring-tickets',
-    templateUrl: './devices-recurring-tickets.component.html',
-    styleUrls: ['./devices-recurring-tickets.component.scss'],
-    standalone: true
+  selector: 'app-devices-recurring-tickets',
+  templateUrl: './devices-recurring-tickets.component.html',
+  styleUrls: ['./devices-recurring-tickets.component.scss'],
+
 })
 export class DevicesRecurringTicketsComponent implements OnInit, OnDestroy {
 

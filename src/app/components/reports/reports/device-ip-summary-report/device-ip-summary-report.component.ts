@@ -1,19 +1,20 @@
-﻿import { ReportMenuComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from 'moment';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DeviceIpSummary } from '../../class/device-ip-summary';
+import { ReportMenuComponent } from '../../report-menu/report-menu.component';
 
 
 @Component({
   standalone: true,
   imports: [ReportMenuComponent, CommonModule],
-    selector: 'device-ip-summary-report',
-    templateUrl: './device-ip-summary-report.component.html',
-    styleUrls: ['./device-ip-summary-report.component.scss'],
-    standalone: true
+  selector: 'device-ip-summary-report',
+  templateUrl: './device-ip-summary-report.component.html',
+  styleUrls: ['./device-ip-summary-report.component.scss'],
+
 })
 export class DeviceIpSummaryReportComponent implements OnInit {
   loadingInProgress: boolean = false;

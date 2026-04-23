@@ -1,4 +1,4 @@
-﻿import { DynamicTooltipComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
@@ -12,6 +12,7 @@ import { ConfirmComponent } from "../../../shared/confirm/confirm.component";
 import { Subscription } from "rxjs";
 import { TaxesStateService } from "src/app/states/taxes/taxes-state.service";
 import { TaxesService } from "src/app/services/taxes/taxes.service";
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 declare var $: any;
 @Component({
   standalone: true,

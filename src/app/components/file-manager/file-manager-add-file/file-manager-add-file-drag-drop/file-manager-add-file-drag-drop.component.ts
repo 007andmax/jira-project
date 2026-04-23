@@ -1,7 +1,10 @@
+﻿import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { UploadAreaComponent } from 'src/app/components/shared/upload-area/upload-area.component';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'app-file-manager-add-file-drag-drop',
     templateUrl: './file-manager-add-file-drag-drop.component.html',
     styleUrls: ['./file-manager-add-file-drag-drop.component.scss'],

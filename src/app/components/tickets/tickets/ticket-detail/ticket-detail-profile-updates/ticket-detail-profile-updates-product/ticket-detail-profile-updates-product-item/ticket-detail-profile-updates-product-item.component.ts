@@ -1,9 +1,10 @@
-﻿import { TicketDetailProfileUpdatesProductEditComponent } from './';
-import { TicketDetailProfileUpdatesProductInfoComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { TicketProfileProduct } from '../../../../class/ticket-profile-product';
 import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
+import { TicketDetailProfileUpdatesProductEditComponent } from '../ticket-detail-profile-updates-product-edit/ticket-detail-profile-updates-product-edit.component';
+import { TicketDetailProfileUpdatesProductInfoComponent } from '../ticket-detail-profile-updates-product-info/ticket-detail-profile-updates-product-info.component';
 
 @Component({
   standalone: true,

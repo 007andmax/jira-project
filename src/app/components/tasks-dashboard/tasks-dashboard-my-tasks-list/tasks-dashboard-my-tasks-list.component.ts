@@ -1,21 +1,20 @@
-﻿import { TasksListItemComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { TasksListComponent } from '../../tasks/tasks-list/tasks-list.component';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
-import { TasksService } from 'src/app/services/tasks/tasks.service';
-import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
-import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
+
 import { Task } from '../../tasks/class/task';
+import { TasksListItemComponent } from '../../tasks/tasks-list/tasks-list-item/tasks-list-item.component';
 
 @Component({
   standalone: true,
   imports: [TasksListItemComponent, CommonModule],
-    selector: 'app-tasks-dashboard-my-tasks-list',
-    templateUrl: './tasks-dashboard-my-tasks-list.component.html',
-    styleUrls: ['./tasks-dashboard-my-tasks-list.component.scss'],
-    providers: [TicketsListService],
-    standalone: true
+  selector: 'app-tasks-dashboard-my-tasks-list',
+  templateUrl: './tasks-dashboard-my-tasks-list.component.html',
+  styleUrls: ['./tasks-dashboard-my-tasks-list.component.scss'],
+  providers: [TicketsListService],
+
 })
 export class TasksDashboardMyTasksListComponent extends TasksListComponent {
   container = document.body.querySelector(".my-task-dashboard__my-task");

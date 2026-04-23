@@ -1,19 +1,20 @@
-﻿import { DropDownComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { TechUsersService } from 'src/app/services/setting/tech-users.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   standalone: true,
   imports: [DropDownComponent, CommonModule],
-    selector: 'tech-users-reassign',
-    templateUrl: './tech-users-reassign.component.html',
-    styleUrls: ['./tech-users-reassign.component.scss'],
-    standalone: true
+  selector: 'tech-users-reassign',
+  templateUrl: './tech-users-reassign.component.html',
+  styleUrls: ['./tech-users-reassign.component.scss'],
+
 })
 export class TechUsersReassignComponent implements OnInit, OnDestroy {
   namesTechUsersList = [];

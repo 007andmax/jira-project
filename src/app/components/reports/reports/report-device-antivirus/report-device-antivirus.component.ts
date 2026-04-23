@@ -1,4 +1,4 @@
-﻿import { ReportSendEmailComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { DatePipe } from "@angular/common";
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
@@ -16,14 +16,15 @@ import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-stat
 import { DeviceAntivirusReport } from "../../class/device-antivirus-report";
 import { DeviceAntivirusReportFilter } from "./Class/device-antivirus-report";
 import { Subscription } from "rxjs";
+import { ReportSendEmailComponent } from '../../report-additional-actions/report-send-email/report-send-email.component';
 
 @Component({
   standalone: true,
   imports: [ReportSendEmailComponent, CommonModule],
-    selector: "report-device-antivirus",
-    templateUrl: "./report-device-antivirus.component.html",
-    styleUrls: ["./report-device-antivirus.component.scss"],
-    standalone: true,
+  selector: "report-device-antivirus",
+  templateUrl: "./report-device-antivirus.component.html",
+  styleUrls: ["./report-device-antivirus.component.scss"],
+
 })
 export class ReportDeviceAntivirusComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;

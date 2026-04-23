@@ -1,3 +1,6 @@
+﻿import { CommonModule } from '@angular/common';
+import { NetworkScanCredentialsAddComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { NetworkScanCredentialsAsideItemComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { REMOVE_CREDENTIAL } from 'src/app/const/confirm';
@@ -11,6 +14,8 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { NetworkScanCredential } from '../class/network-scan-credential';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, NetworkScanCredentialsAddComponent, NetworkScanCredentialsAsideItemComponent],
     selector: 'app-network-scan-credentials-aside',
     templateUrl: './network-scan-credentials-aside.component.html',
     styleUrls: ['./network-scan-credentials-aside.component.scss'],

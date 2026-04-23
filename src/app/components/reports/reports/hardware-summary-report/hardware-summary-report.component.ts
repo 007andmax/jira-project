@@ -1,17 +1,18 @@
-﻿import { ReportMenuComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { HardwareSummaryReport } from '../../class/hardware-summary-report';
 import * as moment from "moment";
+import { ReportMenuComponent } from '../../report-menu/report-menu.component';
 
 @Component({
   standalone: true,
   imports: [ReportMenuComponent, CommonModule],
-    selector: 'hardware-summary-report',
-    templateUrl: './hardware-summary-report.component.html',
-    styleUrls: ['./hardware-summary-report.component.scss'],
-    standalone: true
+  selector: 'hardware-summary-report',
+  templateUrl: './hardware-summary-report.component.html',
+  styleUrls: ['./hardware-summary-report.component.scss'],
+
 })
 export class HardwareSummaryReportComponent implements OnInit {
 

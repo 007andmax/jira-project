@@ -26,7 +26,7 @@ import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error
   templateUrl: './payments-cards.component.html',
   styleUrls: ['./payments-cards.component.scss'],
   providers: [TicketsListService],
-  standalone: true
+
 })
 export class PaymentsCardsComponent extends DropDownComponent {
   @Input() selectedCompanies = [];;

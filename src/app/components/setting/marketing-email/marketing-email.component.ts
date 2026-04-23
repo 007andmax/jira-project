@@ -1,5 +1,4 @@
-﻿import { DynamicTooltipComponent } from './';
-import { MarketingEmailUsersComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -10,17 +9,19 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { MarketingSubscriptionTypeComponent } from './marketing-subscription-type/marketing-subscription-type.component';
 import { fadeInAnimation } from 'src/app/animations';
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MarketingEmailUsersComponent } from './marketing-email-users/marketing-email-users.component';
 
 @Component({
   standalone: true,
   imports: [DynamicTooltipComponent, MarketingEmailUsersComponent, CommonModule],
-    selector: 'marketing-email',
-    templateUrl: './marketing-email.component.html',
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    styleUrls: ['./marketing-email.component.scss'],
-    standalone: true
+  selector: 'marketing-email',
+  templateUrl: './marketing-email.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  styleUrls: ['./marketing-email.component.scss'],
+
 })
 export class MarketingEmailComponent implements OnInit, OnDestroy {
 

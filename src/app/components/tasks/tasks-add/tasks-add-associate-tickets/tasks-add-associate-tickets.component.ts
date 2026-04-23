@@ -1,3 +1,4 @@
+﻿import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { Ticket } from 'src/app/components/tickets/class/ticket';
@@ -8,6 +9,8 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
     selector: 'app-tasks-add-associate-tickets',
     templateUrl: './tasks-add-associate-tickets.component.html',
     styleUrls: ['./tasks-add-associate-tickets.component.scss'],

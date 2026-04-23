@@ -21,7 +21,7 @@ import { QuoteAsidePreviewBodyComponent } from '../quote-aside-preview/quote-asi
   selector: 'app-quote-aside-edit',
   templateUrl: './quote-aside-edit.component.html',
   styleUrls: ['./quote-aside-edit.component.scss'],
-  standalone: true
+
 })
 export class QuoteAsideEditComponent implements OnInit, OnDestroy {
   @ViewChild('saveAndSendBtn', { static: false }) saveAndSendBtn: DisabledBtnDirective;

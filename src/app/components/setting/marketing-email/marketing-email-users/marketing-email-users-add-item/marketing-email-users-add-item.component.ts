@@ -6,11 +6,11 @@ import { User } from 'src/app/components/users/class/user';
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'marketing-email-users-add-item',
-    templateUrl: './marketing-email-users-add-item.component.html',
-    styleUrls: ['./marketing-email-users-add-item.component.scss'],
-    providers: [TicketsListService],
-    standalone: true
+  selector: 'marketing-email-users-add-item',
+  templateUrl: './marketing-email-users-add-item.component.html',
+  styleUrls: ['./marketing-email-users-add-item.component.scss'],
+  providers: [TicketsListService],
+
 })
 export class MarketingEmailUsersAddItemComponent implements OnInit {
   @Input() user: User;

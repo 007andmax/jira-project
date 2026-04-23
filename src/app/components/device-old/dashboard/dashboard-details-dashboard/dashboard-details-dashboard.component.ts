@@ -14,7 +14,7 @@ import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-
   selector: 'dashboard-details-dashboard',
   templateUrl: './dashboard-details-dashboard.component.html',
   styleUrls: ['./dashboard-details-dashboard.component.scss'],
-  standalone: true
+
 })
 export class DashboardDetailsDashboardComponent implements OnInit {
   @Input() label = '';

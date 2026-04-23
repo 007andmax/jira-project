@@ -1,17 +1,18 @@
-﻿import { ReportMenuComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TechTicketReport } from '../../class/tech-ticket-report';
+import { ReportMenuComponent } from '../../report-menu/report-menu.component';
 
 @Component({
   standalone: true,
   imports: [ReportMenuComponent, CommonModule],
-    selector: 'tech-ticket-report',
-    templateUrl: './tech-ticket-report.component.html',
-    styleUrls: ['./tech-ticket-report.component.css'],
-    standalone: true
+  selector: 'tech-ticket-report',
+  templateUrl: './tech-ticket-report.component.html',
+  styleUrls: ['./tech-ticket-report.component.css'],
+
 })
 export class TechTicketReportComponent implements OnInit {
   loadingInProgress: boolean = false;

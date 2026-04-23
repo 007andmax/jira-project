@@ -1,6 +1,4 @@
-﻿import { DropDownComponent } from './';
-import { MatErrorComponent } from './';
-import { PreloaderTicketComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
@@ -8,6 +6,9 @@ import { SuperAdminKnowledgeBaseAddComponent } from '../super-admin-knowledge-ba
 import { News } from '../super-admin-knowledge-base-table/class/news';
 import { forkJoin } from 'rxjs';
 import { KnowledgeBaseValidate } from '../super-admin-knowledge-base-add/class/knowledge-base-validate';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
 
 @Component({
   standalone: true,

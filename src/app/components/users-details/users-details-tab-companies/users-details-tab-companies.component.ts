@@ -1,4 +1,5 @@
-﻿import { UsersDetailsTabCompaniesAddComponent } from './';
+﻿import { UsersDetailsTabCompaniesItemComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
@@ -6,15 +7,15 @@ import { UserProfile } from '../../users/class/user-profile';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { Subscription } from 'rxjs';
-import { UsersDetailsTabCompaniesItemComponent } from './users-details-tab-companies-item/users-details-tab-companies-item.component';
+import { UsersDetailsTabCompaniesAddComponent } from './users-details-tab-companies-add/users-details-tab-companies-add.component';
 
 @Component({
   standalone: true,
-  imports: [UsersDetailsTabCompaniesAddComponent, FormsModule, CommonModule],
-    selector: 'app-users-details-tab-companies',
-    templateUrl: './users-details-tab-companies.component.html',
-    styleUrls: ['./users-details-tab-companies.component.scss'],
-    standalone: true
+  imports: [UsersDetailsTabCompaniesItemComponent, UsersDetailsTabCompaniesAddComponent, FormsModule, CommonModule],
+  selector: 'app-users-details-tab-companies',
+  templateUrl: './users-details-tab-companies.component.html',
+  styleUrls: ['./users-details-tab-companies.component.scss'],
+
 })
 export class UsersDetailsTabCompaniesComponent implements OnInit, OnDestroy {
   sort = 'ASC';

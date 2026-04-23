@@ -1,18 +1,19 @@
-﻿import { SuperAdminPublicDetailComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { SupportPageCategory } from '../../super-admin/left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesStateService } from '../../super-admin/state/support-page-categories/support-page-categories-state.service';
+import { SuperAdminPublicDetailComponent } from '../super-admin-public-detail/super-admin-public-detail.component';
 
 @Component({
   standalone: true,
   imports: [SuperAdminPublicDetailComponent, CommonModule],
-    selector: 'super-admin-public-category',
-    templateUrl: './super-admin-public-category.component.html',
-    styleUrls: ['./super-admin-public-category.component.scss'],
-    standalone: true
+  selector: 'super-admin-public-category',
+  templateUrl: './super-admin-public-category.component.html',
+  styleUrls: ['./super-admin-public-category.component.scss'],
+
 })
 export class SuperAdminPublicCategoryComponent implements OnInit, OnDestroy {
   _id: string = '';

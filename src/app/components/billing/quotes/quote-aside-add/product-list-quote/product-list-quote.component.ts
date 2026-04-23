@@ -10,7 +10,7 @@ import { ProductListComponent } from 'src/app/components/shared/product-list/pro
   selector: 'app-product-list-quote',
   templateUrl: './product-list-quote.component.html',
   styleUrls: ['./product-list-quote.component.scss'],
-  standalone: true
+
 })
 export class ProductListQuoteComponent extends ProductListComponent {
 

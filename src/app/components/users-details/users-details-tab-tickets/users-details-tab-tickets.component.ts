@@ -1,3 +1,5 @@
+﻿import { CommonModule } from '@angular/common';
+import { UsersDetailsTabTicketsItemComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { User } from '../../users/class/user';
@@ -13,6 +15,8 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { TicketStateService } from '../../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, UsersDetailsTabTicketsItemComponent],
     selector: 'app-users-details-tab-tickets',
     templateUrl: './users-details-tab-tickets.component.html',
     styleUrls: ['./users-details-tab-tickets.component.scss'],

@@ -1,6 +1,4 @@
-﻿import { DropDownComponent } from './';
-import { MatErrorComponent } from './';
-import { PreloaderTicketComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
@@ -15,6 +13,9 @@ import { KnowledgeBaseStateService } from '../../state/knowledge-base/knowledge-
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { forkJoin, Subscription } from 'rxjs';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
 
 @Component({
   standalone: true,

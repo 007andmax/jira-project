@@ -1,4 +1,4 @@
-﻿import { PreloaderTicketComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { ConfirmStateService } from './services/confirm-state.service';
@@ -6,6 +6,7 @@ import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ConfrmData } from './class/confirm-data';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { Subscription } from 'rxjs';
+import { PreloaderTicketComponent } from '../preloader-ticket/preloader-ticket.component';
 
 @Component({
   standalone: true,

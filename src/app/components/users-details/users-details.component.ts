@@ -1,9 +1,4 @@
-﻿import { UsersDetailsHeaderComponent } from './';
-import { UsersDetailsTabCompaniesComponent } from './';
-import { UsersDetailsTabDocumentsComponent } from './';
-import { UsersDetailsTabMessagesComponent } from './';
-import { UsersDetailsTabPasswordsComponent } from './';
-import { UsersDetailsTabTicketsComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -26,14 +21,20 @@ import { StatusColor } from '../tickets/class/status-color';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { UserChange } from '../users/class/user-change';
+import { UsersDetailsHeaderComponent } from './users-details-header/users-details-header.component';
+import { UsersDetailsTabCompaniesComponent } from './users-details-tab-companies/users-details-tab-companies.component';
+import { UsersDetailsTabDocumentsComponent } from './users-details-tab-documents/users-details-tab-documents.component';
+import { UsersDetailsTabMessagesComponent } from './users-details-tab-messages/users-details-tab-messages.component';
+import { UsersDetailsTabPasswordsComponent } from './users-details-tab-passwords/users-details-tab-passwords.component';
+import { UsersDetailsTabTicketsComponent } from './users-details-tab-tickets/users-details-tab-tickets.component';
 
 @Component({
   standalone: true,
   imports: [UsersDetailsHeaderComponent, UsersDetailsTabCompaniesComponent, UsersDetailsTabDocumentsComponent, UsersDetailsTabMessagesComponent, UsersDetailsTabPasswordsComponent, UsersDetailsTabTicketsComponent, CommonModule],
-    selector: 'app-users-details',
-    templateUrl: './users-details.component.html',
-    styleUrls: ['./users-details.component.scss'],
-    standalone: true
+  selector: 'app-users-details',
+  templateUrl: './users-details.component.html',
+  styleUrls: ['./users-details.component.scss'],
+
 })
 export class UsersDetailsComponent implements OnInit {
   tab: string = 'companies';

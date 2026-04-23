@@ -1,5 +1,4 @@
-﻿import { CompanyProfileApiKeysAddAsideComponent } from './';
-import { CompanyProfileApiKeysEditAsideComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import {
   Component,
@@ -17,6 +16,8 @@ import { CompanyProfileOperationalHoursComponent } from './company-profile-opera
 import { fadeInAnimation } from 'src/app/animations';
 import { CompanyProfileApiKeysComponent } from './company-profile-api-keys/company-profile-api-keys.component';
 import { ApiKeysStateService } from 'src/app/states/api-keys/api-keys-state.service';
+import { CompanyProfileApiKeysAddAsideComponent } from './company-profile-api-keys/company-profile-api-keys-add-aside/company-profile-api-keys-add-aside.component';
+import { CompanyProfileApiKeysEditAsideComponent } from './company-profile-api-keys/company-profile-api-keys-edit-aside/company-profile-api-keys-edit-aside.component';
 declare var $: any;
 @Component({
   standalone: true,

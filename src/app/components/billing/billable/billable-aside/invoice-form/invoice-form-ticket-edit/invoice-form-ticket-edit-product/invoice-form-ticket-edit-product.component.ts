@@ -17,7 +17,7 @@ import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error
   selector: 'app-invoice-form-ticket-edit-product',
   templateUrl: './invoice-form-ticket-edit-product.component.html',
   styleUrls: ['./invoice-form-ticket-edit-product.component.scss'],
-  standalone: true
+
 })
 export class InvoiceFormTicketEditProductComponent implements OnInit, OnDestroy {
   @Input() product: BillableProfileTicketProductExpense;

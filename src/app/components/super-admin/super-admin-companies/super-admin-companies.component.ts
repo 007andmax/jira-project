@@ -1,6 +1,4 @@
-﻿import { LeftPanelSuperAdminCompaniesComponent } from './';
-import { SuperAdminCompaniesHeaderComponent } from './';
-import { SuperAdminCompaniesItemComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
@@ -8,15 +6,18 @@ import { Subscription } from 'rxjs';
 import { SuperAdminCompany } from './class/super-admin-company';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { SuperAdminCompanyFilters } from './class/super-admin-company-filters';
+import { LeftPanelSuperAdminCompaniesComponent } from '../left-panel-super-admin-companies/left-panel-super-admin-companies.component';
+import { SuperAdminCompaniesHeaderComponent } from './super-admin-companies-header/super-admin-companies-header.component';
+import { SuperAdminCompaniesItemComponent } from './super-admin-companies-item/super-admin-companies-item.component';
 
 @Component({
   standalone: true,
   imports: [LeftPanelSuperAdminCompaniesComponent, SuperAdminCompaniesHeaderComponent, SuperAdminCompaniesItemComponent, CommonModule],
-    selector: 'super-admin-companies',
-    templateUrl: './super-admin-companies.component.html',
-    styleUrls: ['./super-admin-companies.component.scss'],
-    providers: [TicketsListService],
-    standalone: true
+  selector: 'super-admin-companies',
+  templateUrl: './super-admin-companies.component.html',
+  styleUrls: ['./super-admin-companies.component.scss'],
+  providers: [TicketsListService],
+
 })
 export class SuperAdminCompaniesComponent implements OnInit {
   filters: SuperAdminCompanyFilters = new SuperAdminCompanyFilters();

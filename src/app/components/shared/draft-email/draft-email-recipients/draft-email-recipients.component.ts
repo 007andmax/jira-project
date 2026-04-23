@@ -1,3 +1,8 @@
+﻿import { CommonModule } from '@angular/common';
+import { MatChipComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { MatChipListComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { MatErrorComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { MatFormFieldComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
 import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { UntypedFormControl } from '@angular/forms';
@@ -8,6 +13,8 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, MatChipComponent, MatChipListComponent, MatErrorComponent, MatFormFieldComponent],
     selector: 'app-draft-email-recipients',
     templateUrl: './draft-email-recipients.component.html',
     styleUrls: ['./draft-email-recipients.component.scss'],

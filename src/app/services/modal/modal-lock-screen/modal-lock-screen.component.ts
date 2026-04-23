@@ -1,4 +1,4 @@
-﻿import { MatErrorComponent } from './';
+﻿
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
@@ -8,6 +8,7 @@ import { ModalLockValidate } from './class/modal-lock-validate';
 import { CommonModule } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 @Component({
   standalone: true,

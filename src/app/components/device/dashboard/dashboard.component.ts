@@ -34,7 +34,7 @@ import { MatFormFieldComponent } from '../../shared/mat-form-field/mat-form-fiel
     { provide: NgbDateAdapter, useClass: CustomAdapter },
     { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
   ],
-  standalone: true,
+
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild(NgbDatepicker, { static: false }) expire: NgbDatepicker;

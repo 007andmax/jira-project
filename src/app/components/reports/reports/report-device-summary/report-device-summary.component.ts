@@ -1,4 +1,4 @@
-﻿import { ReportSendEmailComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -16,14 +16,15 @@ import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-stat
 import { DeviceSummaryReport } from "../../class/device-summary-report";
 import { ReportValidate1 } from "../../class/report-validate1";
 import { DeviceSummaryReportFilter } from "./Class/device-summary-report";
+import { ReportSendEmailComponent } from '../../report-additional-actions/report-send-email/report-send-email.component';
 
 @Component({
   standalone: true,
   imports: [ReportSendEmailComponent, CommonModule],
-    selector: "report-device-summary",
-    templateUrl: "./report-device-summary.component.html",
-    styleUrls: ["./report-device-summary.component.scss"],
-    standalone: true,
+  selector: "report-device-summary",
+  templateUrl: "./report-device-summary.component.html",
+  styleUrls: ["./report-device-summary.component.scss"],
+
 })
 export class ReportDeviceSummaryComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;

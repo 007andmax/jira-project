@@ -32,7 +32,7 @@ import { ContractsEditComponent } from '../billing/contracts/contracts-edit/cont
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
   providers: [InventoryListService],
-  standalone: true
+
 })
 export class InventoryComponent implements OnInit {
   selectAll: boolean = false;

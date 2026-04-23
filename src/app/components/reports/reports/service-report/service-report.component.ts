@@ -1,4 +1,4 @@
-﻿import { ReportMenuComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Company } from 'src/app/interfaces/company/company';
@@ -10,15 +10,16 @@ import { ServiceReports } from '../../class/service-reports';
 import { ServiceReportsItem } from '../../class/service-reports-item';
 import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
 import { Subscription } from 'rxjs';
+import { ReportMenuComponent } from '../../report-menu/report-menu.component';
 
 
 @Component({
   standalone: true,
   imports: [ReportMenuComponent, CommonModule],
-    selector: 'app-service-report',
-    templateUrl: './service-report.component.html',
-    styleUrls: ['./service-report.component.scss'],
-    standalone: true
+  selector: 'app-service-report',
+  templateUrl: './service-report.component.html',
+  styleUrls: ['./service-report.component.scss'],
+
 })
 export class ServiceReportComponent implements OnInit, OnDestroy {
   chartData;

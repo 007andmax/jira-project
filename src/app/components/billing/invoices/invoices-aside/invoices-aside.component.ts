@@ -1,3 +1,10 @@
+﻿import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { DropDownComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { MatErrorComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { MultiCompanyDropDownComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { PreloaderTicketComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild, OnDestroy } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
@@ -16,6 +23,8 @@ import { IntegrationsStateService } from 'src/app/states/integrations/integratio
 
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, FormsModule, DatePickerComponent, DropDownComponent, MatErrorComponent, MultiCompanyDropDownComponent, PreloaderTicketComponent],
     selector: 'app-invoices-aside',
     templateUrl: './invoices-aside.component.html',
     styleUrls: ['./invoices-aside.component.scss'],

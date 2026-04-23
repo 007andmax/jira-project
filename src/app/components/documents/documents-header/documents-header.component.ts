@@ -11,10 +11,10 @@ import { Subscription } from 'rxjs';
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'documents-header',
-    templateUrl: './documents-header.component.html',
-    styleUrls: ['./documents-header.component.css'],
-    standalone: true
+  selector: 'documents-header',
+  templateUrl: './documents-header.component.html',
+  styleUrls: ['./documents-header.component.css'],
+
 })
 export class DocumentsHeaderComponent implements OnInit {
   toggleFilter: boolean = false;

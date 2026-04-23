@@ -1,4 +1,4 @@
-﻿import { MatErrorComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
@@ -10,14 +10,15 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { DateService } from 'src/app/services/date/date.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 @Component({
   standalone: true,
   imports: [MatErrorComponent, CommonModule],
-    selector: 'tickets-filter-created-drop-down',
-    templateUrl: './tickets-filter-created-drop-down.component.html',
-    styleUrls: ['./tickets-filter-created-drop-down.component.scss'],
-    standalone: true
+  selector: 'tickets-filter-created-drop-down',
+  templateUrl: './tickets-filter-created-drop-down.component.html',
+  styleUrls: ['./tickets-filter-created-drop-down.component.scss'],
+
 })
 export class TicketsFilterCreatedDropDownComponent extends DropDownComponent {
   @ViewChild('dp', { static: true }) dp: NgbDropdown;

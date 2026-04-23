@@ -1,7 +1,8 @@
-﻿import { SuperAdminKnowledgeBaseNewsComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { News } from '../super-admin-knowledge-base-table/class/news';
+import { SuperAdminKnowledgeBaseNewsComponent } from '../super-admin-knowledge-base-news/super-admin-knowledge-base-news.component';
 
 @Component({
   standalone: true,

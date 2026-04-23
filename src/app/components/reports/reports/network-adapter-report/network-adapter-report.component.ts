@@ -19,10 +19,10 @@ import { Subscription } from 'rxjs';
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'network-adapter-report',
-    templateUrl: './network-adapter-report.component.html',
-    styleUrls: ['./network-adapter-report.component.scss'],
-    standalone: true
+  selector: 'network-adapter-report',
+  templateUrl: './network-adapter-report.component.html',
+  styleUrls: ['./network-adapter-report.component.scss'],
+
 })
 export class NetworkAdapterReportComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;

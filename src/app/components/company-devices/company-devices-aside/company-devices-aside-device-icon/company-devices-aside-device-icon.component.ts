@@ -6,10 +6,10 @@ import { DeviceCompany } from '../../class/device-company';
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'app-company-devices-aside-device-icon',
-    templateUrl: './company-devices-aside-device-icon.component.html',
-    styleUrls: ['./company-devices-aside-device-icon.component.scss'],
-    standalone: true
+  selector: 'app-company-devices-aside-device-icon',
+  templateUrl: './company-devices-aside-device-icon.component.html',
+  styleUrls: ['./company-devices-aside-device-icon.component.scss'],
+
 })
 export class CompanyDevicesAsideDeviceIconComponent implements OnInit {
   @Input() device: DeviceExtended;

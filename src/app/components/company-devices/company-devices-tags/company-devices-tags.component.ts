@@ -23,7 +23,7 @@ import { MatChipComponent } from '../../shared/mat-chip/mat-chip.component';
   styleUrls: ['./company-devices-tags.component.scss'],
   providers: [CompanyTagsListService, TicketsListService],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
+
 })
 export class CompanyDevicesTagsComponent implements OnInit {
   searchName: string = "";

@@ -1,16 +1,17 @@
-﻿import { OverviewReportComponent } from './';
-import { ReportMenuComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { TaxesReport } from '../../class/taxes';
+import { OverviewReportComponent } from '../../overview-report/overview-report.component';
+import { ReportMenuComponent } from '../../report-menu/report-menu.component';
 
 @Component({
   standalone: true,
   imports: [OverviewReportComponent, ReportMenuComponent, CommonModule],
-    selector: 'app-taxes-report',
-    templateUrl: './taxes-report.component.html',
-    styleUrls: ['./taxes-report.component.scss'],
-    standalone: true
+  selector: 'app-taxes-report',
+  templateUrl: './taxes-report.component.html',
+  styleUrls: ['./taxes-report.component.scss'],
+
 })
 export class TaxesReportComponent implements OnInit {
   taxes: TaxesReport = new TaxesReport();

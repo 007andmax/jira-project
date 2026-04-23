@@ -1,5 +1,4 @@
-﻿import { UsersFilterComponent } from './';
-import { UsersTableComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
@@ -31,18 +30,20 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserDeArchiveNotificationComponent } from './user-de-archive-notification/user-de-archive-notification.component';
 import { fadeInAnimation } from 'src/app/animations';
 import { ToastrService } from 'ngx-toastr';
+import { UsersFilterComponent } from './users-header/users-filter/users-filter.component';
+import { UsersTableComponent } from './users-table/users-table.component';
 
 @Component({
   standalone: true,
   imports: [UsersFilterComponent, UsersTableComponent, FormsModule, CommonModule],
-    selector: 'app-users',
-    templateUrl: './users.component.html',
-    styleUrls: ['./users.component.scss'],
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    providers: [UserListService],
-    standalone: true,
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  providers: [UserListService],
+
 })
 export class UsersComponent implements OnInit, OnDestroy {
   @ViewChild('header', { static: true }) header: UsersHeaderComponent;

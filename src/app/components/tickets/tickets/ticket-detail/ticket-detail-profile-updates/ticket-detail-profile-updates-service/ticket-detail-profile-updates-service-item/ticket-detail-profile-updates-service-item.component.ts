@@ -1,8 +1,9 @@
-﻿import { TicketDetailProfileUpdatesServiceInfoComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { TicketProfileService } from '../../../../class/ticket-profile-service';
 import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
+import { TicketDetailProfileUpdatesServiceInfoComponent } from '../ticket-detail-profile-updates-service-info/ticket-detail-profile-updates-service-info.component';
 
 @Component({
   standalone: true,

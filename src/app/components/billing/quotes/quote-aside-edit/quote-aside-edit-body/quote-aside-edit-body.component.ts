@@ -37,7 +37,7 @@ import { ProductItemQuoteEditComponent } from '../product-item-quote-edit/produc
   selector: 'app-quote-aside-edit-body',
   templateUrl: './quote-aside-edit-body.component.html',
   styleUrls: ['./quote-aside-edit-body.component.scss'],
-  standalone: true
+
 })
 export class QuoteAsideEditBodyComponent implements OnInit, OnDestroy {
   @ViewChild('servicesList', { static: false }) servicesList: ServiceListQuoteComponent;

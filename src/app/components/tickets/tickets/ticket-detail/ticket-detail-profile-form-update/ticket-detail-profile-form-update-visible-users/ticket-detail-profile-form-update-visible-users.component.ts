@@ -5,10 +5,10 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'ticket-detail-profile-form-update-visible-users',
-    templateUrl: './ticket-detail-profile-form-update-visible-users.component.html',
-    styleUrls: ['./ticket-detail-profile-form-update-visible-users.component.scss'],
-    standalone: true
+  selector: 'ticket-detail-profile-form-update-visible-users',
+  templateUrl: './ticket-detail-profile-form-update-visible-users.component.html',
+  styleUrls: ['./ticket-detail-profile-form-update-visible-users.component.scss'],
+
 })
 export class TicketDetailProfileFormUpdateVisibleUsersComponent implements OnInit {
   type: string = "PUBLIC";

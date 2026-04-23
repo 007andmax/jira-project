@@ -1,4 +1,4 @@
-﻿import { SuperAdminPublicHeaderComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,14 +9,15 @@ import { SupportPageCategory } from '../../super-admin/left-panel-super-admin-ca
 import { SupportPageCategoriesService } from '../../super-admin/services/support-page-categories/support-page-categories.service';
 import { SupportPageCategoriesStateService } from '../../super-admin/state/support-page-categories/support-page-categories-state.service';
 import { SupportPageCategoryContent } from '../../super-admin/support-page/class/support-page-category-content';
+import { SuperAdminPublicHeaderComponent } from '../super-admin-public-header/super-admin-public-header.component';
 
 @Component({
   standalone: true,
   imports: [SuperAdminPublicHeaderComponent, CommonModule],
-    selector: 'super-admin-public-detail',
-    templateUrl: './super-admin-public-detail.component.html',
-    styleUrls: ['./super-admin-public-detail.component.scss'],
-    standalone: true
+  selector: 'super-admin-public-detail',
+  templateUrl: './super-admin-public-detail.component.html',
+  styleUrls: ['./super-admin-public-detail.component.scss'],
+
 })
 export class SuperAdminPublicDetailComponent implements OnInit, OnDestroy {
   _id: string = '';

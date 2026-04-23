@@ -1,5 +1,4 @@
-﻿import { CompanyTimeZoneComponent } from './';
-import { DropDownComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { MapsAPILoader } from '@agm/core';
 import { Component, ElementRef, EventEmitter, NgZone, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
@@ -16,6 +15,8 @@ import { CompanyProfileService } from 'src/app/services/setting/company-profile.
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
+import { CompanyTimeZoneComponent } from 'src/app/components/companies/company-time-zone/company-time-zone.component';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 declare var google: any;
 declare var $: any;

@@ -1,4 +1,4 @@
-﻿import { DropDownComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import {
   Component,
@@ -31,6 +31,7 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 declare var google: any;
 @Component({

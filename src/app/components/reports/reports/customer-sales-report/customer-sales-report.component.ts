@@ -1,17 +1,18 @@
-﻿import { OverviewReportComponent } from './';
-import { ReportMenuComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CustomerSalesReport } from '../../class/customer-sales-report';
 import * as moment from "moment";
+import { OverviewReportComponent } from '../../overview-report/overview-report.component';
+import { ReportMenuComponent } from '../../report-menu/report-menu.component';
 
 @Component({
   standalone: true,
   imports: [OverviewReportComponent, ReportMenuComponent, CommonModule],
-    selector: 'app-customer-sales-report',
-    templateUrl: './customer-sales-report.component.html',
-    styleUrls: ['./customer-sales-report.component.scss'],
-    standalone: true
+  selector: 'app-customer-sales-report',
+  templateUrl: './customer-sales-report.component.html',
+  styleUrls: ['./customer-sales-report.component.scss'],
+
 })
 export class CustomerSalesReportComponent implements OnInit {
   customerSalesReport: CustomerSalesReport = new CustomerSalesReport();

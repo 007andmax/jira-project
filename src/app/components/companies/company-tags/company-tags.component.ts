@@ -24,7 +24,7 @@ import { MatChipListComponent } from '../../shared/mat-chip-list/mat-chip-list.c
   styleUrls: ['./company-tags.component.scss'],
   providers: [CompanyTagsListService, TicketsListService],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
+
 })
 export class CompanyTagsComponent implements OnInit, OnDestroy {
   page: number = 0;

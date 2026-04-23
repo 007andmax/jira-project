@@ -1,4 +1,4 @@
-﻿import { TicketDetailTicketsStatusComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
@@ -9,6 +9,7 @@ import { TicketsFilter } from '../../class/tickets-filter';
 import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
+import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets-status/ticket-detail-tickets-status.component';
 
 @Component({
   standalone: true,

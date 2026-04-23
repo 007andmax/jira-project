@@ -16,7 +16,7 @@ import { TicketsFilterDropDownComponent } from 'src/app/components/tickets/ticke
   templateUrl: './company-devices-filter-type.component.html',
   styleUrls: ['./company-devices-filter-type.component.scss'],
   providers: [CompanyTagsListService, TicketsListService],
-  standalone: true
+
 })
 export class CompanyDevicesFilterTypeComponent extends TicketsFilterDropDownComponent {
 

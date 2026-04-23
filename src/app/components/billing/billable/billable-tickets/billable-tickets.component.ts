@@ -33,7 +33,7 @@ import { BillableAsideComponent } from '../billable-aside/billable-aside.compone
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./billable-tickets.component.scss'],
-  standalone: true
+
 })
 export class BillableTicketsComponent implements OnInit, OnDestroy {
   billableProfile: BillableProfile = null;

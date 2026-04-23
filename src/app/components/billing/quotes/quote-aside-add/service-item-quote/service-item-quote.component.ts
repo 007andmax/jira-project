@@ -13,7 +13,7 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
   selector: 'app-service-item-quote',
   templateUrl: './service-item-quote.component.html',
   styleUrls: ['./service-item-quote.component.scss'],
-  standalone: true
+
 })
 export class ServiceItemQuoteComponent implements OnInit {
   @Input() service: QuoteAddService;

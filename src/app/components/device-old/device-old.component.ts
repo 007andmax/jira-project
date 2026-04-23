@@ -31,7 +31,7 @@ declare var $: any;
   selector: 'device-old',
   templateUrl: './device-old.component.html',
   styleUrls: ['./device-old.component.scss'],
-  standalone: true
+
 })
 export class DeviceOldComponent implements OnInit, OnDestroy {
   totalSeconds: any = 0;

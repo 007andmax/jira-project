@@ -1,6 +1,4 @@
-﻿import { DropDownComponent } from './';
-import { DynamicTooltipComponent } from './';
-import { PreloaderTicketComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
@@ -30,18 +28,21 @@ import { TechUsersReassignComponent } from './tech-users-reassign/tech-users-rea
 import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 import { UsersService } from 'src/app/services/users/users.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
 declare var $;
 
 @Component({
   standalone: true,
   imports: [DropDownComponent, DynamicTooltipComponent, PreloaderTicketComponent, CommonModule],
-    selector: 'app-tech-users-settings',
-    templateUrl: './tech-users-settings.component.html',
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    styleUrls: ['./tech-users-settings.component.scss'],
-    standalone: true
+  selector: 'app-tech-users-settings',
+  templateUrl: './tech-users-settings.component.html',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  styleUrls: ['./tech-users-settings.component.scss'],
+
 })
 export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDestroy {
   selectedIdx = -1;

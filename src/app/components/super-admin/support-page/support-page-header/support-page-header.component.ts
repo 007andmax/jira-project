@@ -1,5 +1,4 @@
-﻿import { DynamicTooltipComponent } from './';
-import { SupportPageBreadcrumbsComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -11,6 +10,8 @@ import { SupportPageCategoriesService } from '../../services/support-page-catego
 import { SupportPageEditCategoryComponent } from '../../shared/support-page-edit-category/support-page-edit-category.component';
 import { SupportPageCategoriesStateService } from '../../state/support-page-categories/support-page-categories-state.service';
 import { SupportPageCategoryContent } from '../class/support-page-category-content';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { SupportPageBreadcrumbsComponent } from '../support-page-breadcrumbs/support-page-breadcrumbs.component';
 
 @Component({
   standalone: true,

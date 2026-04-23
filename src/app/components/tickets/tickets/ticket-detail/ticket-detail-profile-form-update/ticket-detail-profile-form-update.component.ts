@@ -1,5 +1,4 @@
-﻿import { PreloaderTicketComponent } from './';
-import { TicketDetailProfileFormUpdateSupportComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { RemoteSession } from 'src/app/components/support/class/remote-sessions';
@@ -31,15 +30,17 @@ import { TicketProfileFormUpdate } from '../../ticket-edit-aside/class/ticket-pr
 import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
 import { TicketProfileFormUpdateNoteListComponent } from '../ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
 import { TicketDetailProfileFormUpdateHeaderComponent } from './ticket-detail-profile-form-update-header/ticket-detail-profile-form-update-header.component';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
+import { TicketDetailProfileFormUpdateSupportComponent } from './ticket-detail-profile-form-update-support/ticket-detail-profile-form-update-support.component';
 
 @Component({
   standalone: true,
   imports: [PreloaderTicketComponent, TicketDetailProfileFormUpdateSupportComponent, CommonModule],
-    selector: 'ticket-detail-profile-form-update',
-    templateUrl: './ticket-detail-profile-form-update.component.html',
-    styleUrls: ['./ticket-detail-profile-form-update.component.scss'],
-    providers: [TicketsListService],
-    standalone: true
+  selector: 'ticket-detail-profile-form-update',
+  templateUrl: './ticket-detail-profile-form-update.component.html',
+  styleUrls: ['./ticket-detail-profile-form-update.component.scss'],
+  providers: [TicketsListService],
+
 })
 export class TicketDetailProfileFormUpdateComponent implements OnInit, OnDestroy {
   ticketProfile: TicketProfile = new TicketProfile();

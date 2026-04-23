@@ -1,4 +1,4 @@
-﻿import { DynamicTooltipComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { SupportPageAddSubCategoryComponent } from '../../shared/support-page-ad
 import { SupportPageEditCategoryComponent } from '../../shared/support-page-edit-category/support-page-edit-category.component';
 import { SupportPageCategoriesStateService } from '../../state/support-page-categories/support-page-categories-state.service';
 import { SupportPageCategory } from '../class/support-page-category';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 
 @Component({
   standalone: true,

@@ -1,16 +1,17 @@
-﻿import { ReportMenuComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DetailContractreport } from '../../class/detail-contract-report';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { ReportMenuComponent } from '../../report-menu/report-menu.component';
 
 @Component({
   standalone: true,
   imports: [ReportMenuComponent, CommonModule],
-    selector: 'detailed-contract-report',
-    templateUrl: './detailed-contract-report.component.html',
-    styleUrls: ['./detailed-contract-report.component.scss'],
-    standalone: true
+  selector: 'detailed-contract-report',
+  templateUrl: './detailed-contract-report.component.html',
+  styleUrls: ['./detailed-contract-report.component.scss'],
+
 })
 export class DetailedContractReportComponent implements OnInit {
   loadingInProgress: boolean = false;

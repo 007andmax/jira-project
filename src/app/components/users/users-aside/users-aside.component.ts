@@ -1,10 +1,4 @@
-﻿import { CompanyTagsComponent } from './';
-import { DynamicTooltipComponent } from './';
-import { MatErrorComponent } from './';
-import { PreloaderTicketComponent } from './';
-import { CompanyDropDownComponent } from './';
-import { UserCustomSubscriptionComponent } from './';
-import { UserDefaultSubscriptionComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
@@ -29,6 +23,13 @@ import { CrmCompanyIndustry } from '../../setting/crm-settings/crm-company-indus
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { UserRole } from '../class/user-role';
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
+import { CompanyTagsComponent } from '../../companies/company-tags/company-tags.component';
+import { CompanyDropDownComponent } from '../../shared/company-drop-down/company-drop-down.component';
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
+import { UserCustomSubscriptionComponent } from './user-custom-subscription/user-custom-subscription.component';
+import { UserDefaultSubscriptionComponent } from './user-default-subscription/user-default-subscription.component';
 
 @Component({
   standalone: true,

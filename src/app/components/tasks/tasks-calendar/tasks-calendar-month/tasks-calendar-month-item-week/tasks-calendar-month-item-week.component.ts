@@ -7,10 +7,10 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'app-tasks-calendar-month-item-week',
-    templateUrl: './tasks-calendar-month-item-week.component.html',
-    styleUrls: ['./tasks-calendar-month-item-week.component.scss'],
-    standalone: true
+  selector: 'app-tasks-calendar-month-item-week',
+  templateUrl: './tasks-calendar-month-item-week.component.html',
+  styleUrls: ['./tasks-calendar-month-item-week.component.scss'],
+
 })
 export class TasksCalendarMonthItemWeekComponent {
   @ViewChild('p', { static: false }) p: any;

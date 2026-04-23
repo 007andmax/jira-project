@@ -11,10 +11,10 @@ import { Subscription } from 'rxjs';
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'nav-old',
-    templateUrl: './nav.component.html',
-    styleUrls: ['./nav.component.scss'],
-    standalone: true
+  selector: 'nav-old',
+  templateUrl: './nav.component.html',
+  styleUrls: ['./nav.component.scss'],
+
 })
 export class NavOldComponent implements OnInit, OnDestroy {
 

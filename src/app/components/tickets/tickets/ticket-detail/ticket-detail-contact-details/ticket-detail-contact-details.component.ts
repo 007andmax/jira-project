@@ -1,4 +1,4 @@
-﻿import { PreviewPhoneMaskComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
@@ -11,6 +11,7 @@ import { TicketProfile } from '../../class/ticket-profile';
 import { TicketsListService } from '../../services/tickets-list.service';
 import { TicketDetailContactDetailsHistoryComponent } from './ticket-detail-contact-details-history/ticket-detail-contact-details-history.component';
 import * as moment from "moment";
+import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.component';
 
 @Component({
   standalone: true,

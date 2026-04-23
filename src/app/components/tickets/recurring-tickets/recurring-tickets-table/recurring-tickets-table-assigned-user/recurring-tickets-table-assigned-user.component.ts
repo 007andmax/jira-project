@@ -5,11 +5,11 @@ import { TicketsListService } from '../../../tickets/services/tickets-list.servi
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'app-recurring-tickets-table-assigned-user',
-    templateUrl: './recurring-tickets-table-assigned-user.component.html',
-    styleUrls: ['./recurring-tickets-table-assigned-user.component.scss'],
-    providers: [TicketsListService],
-    standalone: true
+  selector: 'app-recurring-tickets-table-assigned-user',
+  templateUrl: './recurring-tickets-table-assigned-user.component.html',
+  styleUrls: ['./recurring-tickets-table-assigned-user.component.scss'],
+  providers: [TicketsListService],
+
 })
 export class RecurringTicketsTableAssignedUserComponent implements OnInit {
   @Input() user: any;

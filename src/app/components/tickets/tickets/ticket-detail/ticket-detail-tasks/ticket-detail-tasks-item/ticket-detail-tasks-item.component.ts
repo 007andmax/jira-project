@@ -1,5 +1,4 @@
-﻿import { DynamicTooltipComponent } from './';
-import { TaskHeaderAddTypeComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
@@ -27,6 +26,8 @@ import { CompanySetting } from 'src/app/components/companies/class/company-setti
 import { TicketProfileFormService } from '../../../ticket-edit-aside/class/ticket-profile-form-service';
 import { TasksDatePickerComponent } from 'src/app/components/tasks/tasks-date-picker/tasks-date-picker.component';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { TaskHeaderAddTypeComponent } from 'src/app/components/tasks/task-header-add/task-header-add-type/task-header-add-type.component';
 
 @Component({
   standalone: true,

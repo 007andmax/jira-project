@@ -1,5 +1,4 @@
-﻿import { MatErrorComponent } from './';
-import { PreloaderTicketComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ApiKeys } from '../class/api-keys';
@@ -8,6 +7,8 @@ import { PermissionManageService } from 'src/app/services/permission-manage/perm
 import { ApiKeysStateService } from 'src/app/states/api-keys/api-keys-state.service';
 import { ApiKeysService } from 'src/app/services/api-keys/api-keys.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
 
 @Component({
   standalone: true,

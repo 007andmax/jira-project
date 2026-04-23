@@ -13,10 +13,10 @@ import { ManageCardsStateService } from 'src/app/states/manage-cards/manage-card
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'app-manage-cards-table',
-    templateUrl: './manage-cards-table.component.html',
-    styleUrls: ['./manage-cards-table.component.scss'],
-    standalone: true
+  selector: 'app-manage-cards-table',
+  templateUrl: './manage-cards-table.component.html',
+  styleUrls: ['./manage-cards-table.component.scss'],
+
 })
 export class ManageCardsTableComponent implements OnInit, OnDestroy {
   @Input() item: Card;

@@ -1,4 +1,4 @@
-﻿import { ReportSendEmailComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
@@ -16,14 +16,15 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { DeviceDeploymentWarrantyReport } from '../../class/report-device-deploymentwarranty';
 import { DeviceDeploymentWarrantyReportFilter } from './Class/report-device-deploymentwarranty';
 import { Subscription } from 'rxjs';
+import { ReportSendEmailComponent } from '../../report-additional-actions/report-send-email/report-send-email.component';
 
 @Component({
   standalone: true,
   imports: [ReportSendEmailComponent, CommonModule],
-    selector: 'report-device-deploymentwarranty',
-    templateUrl: './report-device-deploymentwarranty.component.html',
-    styleUrls: ['./report-device-deploymentwarranty.component.scss'],
-    standalone: true
+  selector: 'report-device-deploymentwarranty',
+  templateUrl: './report-device-deploymentwarranty.component.html',
+  styleUrls: ['./report-device-deploymentwarranty.component.scss'],
+
 })
 export class ReportDeviceDeploymentwarrantyComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;

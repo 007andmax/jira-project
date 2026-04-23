@@ -6,10 +6,10 @@ import { TicketStatusFilter } from '../../class/ticket-status-filter';
 @Component({
   standalone: true,
   imports: [FormsModule, CommonModule],
-    selector: 'tickets-filter-status',
-    templateUrl: './tickets-filter-status.component.html',
-    styleUrls: ['./tickets-filter-status.component.scss'],
-    standalone: true
+  selector: 'tickets-filter-status',
+  templateUrl: './tickets-filter-status.component.html',
+  styleUrls: ['./tickets-filter-status.component.scss'],
+
 })
 export class TicketsFilterStatusComponent implements OnInit {
   @Input() ticketsStatus: Array<TicketStatusFilter> = [];

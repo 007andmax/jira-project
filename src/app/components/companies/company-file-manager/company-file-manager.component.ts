@@ -20,7 +20,7 @@ import { CompanyFileManagerHeaderComponent } from './company-file-manager-header
   animations: [fadeInAnimation],
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
-  standalone: true,
+
 })
 export class CompanyFileManagerComponent extends FileManagerComponent {
   companyId: string;

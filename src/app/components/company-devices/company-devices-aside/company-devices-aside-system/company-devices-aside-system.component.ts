@@ -26,7 +26,7 @@ import { CompanyDevicesEditIpComponent } from '../../company-devices-edit-ip/com
   selector: 'app-company-devices-aside-system',
   templateUrl: './company-devices-aside-system.component.html',
   styleUrls: ['./company-devices-aside-system.component.scss'],
-  standalone: true
+
 })
 export class CompanyDevicesAsideSystemComponent implements OnInit, OnDestroy {
   @ViewChild('datePickerInstalledOn', { static: false }) datePickerInstalledOn: DatePickerComponent;

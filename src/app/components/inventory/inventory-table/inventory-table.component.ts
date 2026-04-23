@@ -28,7 +28,7 @@ import { TaxesComponent } from '../../shared/taxes/taxes.component';
   templateUrl: './inventory-table.component.html',
   styleUrls: ['./inventory-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
+
 })
 export class InventoryTableComponent implements OnInit {
   inventory: InventoryItem;

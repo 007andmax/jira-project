@@ -1,3 +1,5 @@
+﻿import { CommonModule } from '@angular/common';
+import { UsersDetailsTabMessagesFullBodyComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { UserListService } from '../../users/services/user-list.service';
 import { User } from '../../users/class/user';
@@ -8,6 +10,8 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, UsersDetailsTabMessagesFullBodyComponent],
     selector: 'app-users-details-tab-messages',
     templateUrl: './users-details-tab-messages.component.html',
     styleUrls: ['./users-details-tab-messages.component.scss'],

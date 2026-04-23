@@ -7,10 +7,10 @@ import { BillableService } from 'src/app/services/billable/billable.service';
 @Component({
   standalone: true,
   imports: [FormsModule, CommonModule],
-    selector: 'app-invoice-discount',
-    templateUrl: './invoice-discount.component.html',
-    styleUrls: ['./invoice-discount.component.scss'],
-    standalone: true
+  selector: 'app-invoice-discount',
+  templateUrl: './invoice-discount.component.html',
+  styleUrls: ['./invoice-discount.component.scss'],
+
 })
 export class InvoiceDiscountComponent implements OnInit {
   @Input() lockId: string;

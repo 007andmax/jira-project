@@ -22,7 +22,7 @@ import { ManageCardsTableComponent } from './manage-cards-table/manage-cards-tab
   templateUrl: './manage-cards.component.html',
   styleUrls: ['./manage-cards.component.scss'],
   providers: [TicketsListService],
-  standalone: true
+
 })
 export class ManageCardsComponent {
   showPreloader: boolean = true;

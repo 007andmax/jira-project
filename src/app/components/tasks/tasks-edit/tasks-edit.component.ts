@@ -1,12 +1,4 @@
-﻿import { DatePickerComponent } from './';
-import { DropDownComponent } from './';
-import { MatErrorComponent } from './';
-import { PreloaderTicketComponent } from './';
-import { ServicesListComponent } from './';
-import { TasksAddAssignedUsersComponent } from './';
-import { TasksAddAssociateTicketsComponent } from './';
-import { UploadAreaProgressComponent } from './';
-import { CompanyDropDownComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { TasksAddComponent } from '../tasks-add/tasks-add.component';
@@ -22,14 +14,23 @@ import { TicketProfileFormService } from '../../tickets/tickets/ticket-edit-asid
 import { Task } from '../class/task';
 import { Ticket } from '../../tickets/class/ticket';
 import { TasksDatePickerComponent } from '../tasks-date-picker/tasks-date-picker.component';
+import { CompanyDropDownComponent } from '../../shared/company-drop-down/company-drop-down.component';
+import { DatePickerComponent } from '../../shared/date-picker/date-picker.component';
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
+import { ServicesListComponent } from '../../shared/services-list/services-list.component';
+import { UploadAreaProgressComponent } from '../../shared/upload-area/upload-area-progress/upload-area-progress.component';
+import { TasksAddAssignedUsersComponent } from '../tasks-add/tasks-add-assigned-users/tasks-add-assigned-users.component';
+import { TasksAddAssociateTicketsComponent } from '../tasks-add/tasks-add-associate-tickets/tasks-add-associate-tickets.component';
 
 @Component({
   standalone: true,
   imports: [DatePickerComponent, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, ServicesListComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
-    selector: 'app-tasks-edit',
-    templateUrl: './tasks-edit.component.html',
-    styleUrls: ['./tasks-edit.component.scss'],
-    standalone: true
+  selector: 'app-tasks-edit',
+  templateUrl: './tasks-edit.component.html',
+  styleUrls: ['./tasks-edit.component.scss'],
+
 })
 export class TasksEditComponent extends TasksAddComponent {
   selectedCompany: Company;

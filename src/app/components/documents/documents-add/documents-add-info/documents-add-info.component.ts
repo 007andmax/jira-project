@@ -29,7 +29,7 @@ import { DocumentsAddEditCategoriesComponent } from './documents-add-edit-catego
   selector: 'app-documents-add-info',
   templateUrl: './documents-add-info.component.html',
   styleUrls: ['./documents-add-info.component.scss'],
-  standalone: true
+
 })
 export class DocumentsAddInfoComponent implements OnInit, OnDestroy {
   openAside: boolean = true;

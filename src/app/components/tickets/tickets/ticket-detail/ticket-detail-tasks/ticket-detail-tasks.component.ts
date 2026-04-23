@@ -1,7 +1,4 @@
-﻿import { TaskHeaderAddTypeComponent } from './';
-import { TasksDatePickerComponent } from './';
-import { TechUsersComponent } from './';
-import { TicketDetailTasksItemComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
@@ -26,6 +23,10 @@ import { TasksService } from 'src/app/services/tasks/tasks.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
 import { TicketsListService } from '../../services/tickets-list.service';
+import { TechUsersComponent } from 'src/app/components/shared/tech-users/tech-users.component';
+import { TaskHeaderAddTypeComponent } from 'src/app/components/tasks/task-header-add/task-header-add-type/task-header-add-type.component';
+import { TasksDatePickerComponent } from 'src/app/components/tasks/tasks-date-picker/tasks-date-picker.component';
+import { TicketDetailTasksItemComponent } from './ticket-detail-tasks-item/ticket-detail-tasks-item.component';
 
 @Component({
   standalone: true,

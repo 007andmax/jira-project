@@ -1,4 +1,4 @@
-﻿import { ReportSendEmailComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -16,14 +16,15 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DeviceIpSummary } from '../../class/device-ip-summary';
 import { ReportValidate } from '../../class/report-validate';
+import { ReportSendEmailComponent } from '../../report-additional-actions/report-send-email/report-send-email.component';
 
 @Component({
   standalone: true,
   imports: [ReportSendEmailComponent, CommonModule],
-    selector: 'device-ip-summary-device-report',
-    templateUrl: './device-ip-summary-device-report.component.html',
-    styleUrls: ['./device-ip-summary-device-report.component.scss'],
-    standalone: true
+  selector: 'device-ip-summary-device-report',
+  templateUrl: './device-ip-summary-device-report.component.html',
+  styleUrls: ['./device-ip-summary-device-report.component.scss'],
+
 })
 export class DeviceIpSummaryDeviceReportComponent implements OnInit {
 

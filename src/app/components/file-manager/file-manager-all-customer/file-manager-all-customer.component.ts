@@ -20,7 +20,7 @@ import { FileManagerItemCategoryComponent } from '../file-manager-item-category/
   animations: [fadeInAnimation],
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
-  standalone: true,
+
 })
 export class FileManagerAllCustomerComponent extends FileManagerComponent {
   companyArchived: boolean;

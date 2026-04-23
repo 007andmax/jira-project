@@ -1,6 +1,4 @@
-﻿import { DynamicTooltipComponent } from './';
-import { PreviewPhoneMaskComponent } from './';
-import { UserTableDefaultSubscriptionComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, Output, EventEmitter, ViewChild, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
@@ -34,6 +32,9 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 import { UserProfile } from '../class/user-profile';
 import { Router } from '@angular/router';
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { PreviewPhoneMaskComponent } from '../../shared/preview-phone-mask/preview-phone-mask.component';
+import { UserTableDefaultSubscriptionComponent } from './user-table-default-subscription/user-table-default-subscription.component';
 
 @Component({
   standalone: true,

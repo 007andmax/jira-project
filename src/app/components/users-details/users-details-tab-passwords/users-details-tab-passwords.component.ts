@@ -1,3 +1,5 @@
+﻿import { CommonModule } from '@angular/common';
+import { UsersDetailsTabPasswordsItemComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
 import { Component, Input, OnInit } from '@angular/core';
 import { PasswordManagerListService } from '../../password-manager/services/password-manager-list.service';
 import { User } from '../../users/class/user';
@@ -7,6 +9,8 @@ import { REMOVE_RECORD } from 'src/app/const/confirm';
 import { PasswordRecord } from '../../password-manager/class/password-record';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, UsersDetailsTabPasswordsItemComponent],
     selector: 'app-users-details-tab-passwords',
     templateUrl: './users-details-tab-passwords.component.html',
     styleUrls: ['./users-details-tab-passwords.component.scss'],

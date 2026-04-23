@@ -29,7 +29,7 @@ import { InvoicesItemComponent } from './invoices-item/invoices-item.component';
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
   providers: [InvoicesListService],
-  standalone: true
+
 })
 export class InvoicesComponent implements OnInit, OnDestroy {
   invoicesFilter: InvoicesFilter = new InvoicesFilter();

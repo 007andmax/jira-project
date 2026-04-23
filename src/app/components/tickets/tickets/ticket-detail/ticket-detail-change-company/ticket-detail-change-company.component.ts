@@ -1,6 +1,4 @@
-﻿import { DropDownComponent } from './';
-import { DynamicTooltipComponent } from './';
-import { CompanyDropDownComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Company } from 'src/app/interfaces/company/company';
@@ -13,6 +11,9 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
+import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 
 @Component({
   standalone: true,

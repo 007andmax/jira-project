@@ -1,5 +1,4 @@
-﻿import { DropDownComponent } from './';
-import { ReportSendEmailComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
@@ -15,14 +14,16 @@ import { HardwareSummaryReport } from '../../class/hardware-summary-report';
 import { ReportValidate } from '../../class/report-validate';
 import { HardwareSummaryReportFilter } from './class/hardware-summary-report';
 import { Subscription } from 'rxjs';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { ReportSendEmailComponent } from '../../report-additional-actions/report-send-email/report-send-email.component';
 
 @Component({
   standalone: true,
   imports: [DropDownComponent, ReportSendEmailComponent, CommonModule],
-    selector: 'hardware-summary-device-report',
-    templateUrl: './hardware-summary-device-report.component.html',
-    styleUrls: ['./hardware-summary-device-report.component.scss'],
-    standalone: true
+  selector: 'hardware-summary-device-report',
+  templateUrl: './hardware-summary-device-report.component.html',
+  styleUrls: ['./hardware-summary-device-report.component.scss'],
+
 })
 export class HardwareSummaryDeviceReportComponent implements OnInit, OnDestroy {
   loadingInProgress: boolean = false;

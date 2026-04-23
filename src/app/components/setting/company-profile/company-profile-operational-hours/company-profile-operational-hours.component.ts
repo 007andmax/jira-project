@@ -1,4 +1,4 @@
-﻿import { DropDownComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
@@ -7,6 +7,7 @@ import { WORK_HOURS } from 'src/app/const/time';
 import { CompanyProfileService } from 'src/app/services/setting/company-profile.service';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   standalone: true,

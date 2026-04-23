@@ -26,7 +26,7 @@ import { DocumentsAddInfoComponent } from './documents-add-info/documents-add-in
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./documents-add.component.scss'],
-  standalone: true
+
 })
 export class DocumentsAddComponent implements OnInit, OnDestroy {
   companyId: string;

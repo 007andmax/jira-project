@@ -1,6 +1,4 @@
-﻿import { TaskHeaderAddComponent } from './';
-import { TasksCalendarWeekItemAllDayComponent } from './';
-import { TasksCalendarWeekItemHourComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, NgZone, OnDestroy, OnInit } from '@angular/core';
 import * as moment from "moment";
@@ -13,13 +11,16 @@ import { TaskAddCalendar } from '../../class/task-add-calendar';
 import { TasksFilters } from '../../class/tasks-filters';
 import { Subscription } from 'rxjs';
 import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
+import { TaskHeaderAddComponent } from '../../task-header-add/task-header-add.component';
+import { TasksCalendarWeekItemAllDayComponent } from './tasks-calendar-week-item-all-day/tasks-calendar-week-item-all-day.component';
+import { TasksCalendarWeekItemHourComponent } from './tasks-calendar-week-item-hour/tasks-calendar-week-item-hour.component';
 @Component({
   standalone: true,
   imports: [TaskHeaderAddComponent, TasksCalendarWeekItemAllDayComponent, TasksCalendarWeekItemHourComponent, CommonModule],
-    selector: 'app-tasks-calendar-week',
-    templateUrl: './tasks-calendar-week.component.html',
-    styleUrls: ['./tasks-calendar-week.component.scss'],
-    standalone: true
+  selector: 'app-tasks-calendar-week',
+  templateUrl: './tasks-calendar-week.component.html',
+  styleUrls: ['./tasks-calendar-week.component.scss'],
+
 })
 export class TasksCalendarWeekComponent implements OnInit, OnDestroy {
   @Input() filter: TasksFilters = new TasksFilters();

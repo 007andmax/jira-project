@@ -19,7 +19,7 @@ import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop
   selector: 'documents-filter',
   templateUrl: './documents-filter.component.html',
   styleUrls: ['./documents-filter.component.scss'],
-  standalone: true
+
 })
 export class DocumentsFilterComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;

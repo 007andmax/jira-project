@@ -12,11 +12,11 @@ import { Subscription } from 'rxjs';
 @Component({
   standalone: true,
   imports: [FormsModule, CommonModule],
-    selector: 'app-interval',
-    templateUrl: './interval.component.html',
-    styleUrls: ['./interval.component.scss'],
-    providers: [IntervalService],
-    standalone: true
+  selector: 'app-interval',
+  templateUrl: './interval.component.html',
+  styleUrls: ['./interval.component.scss'],
+  providers: [IntervalService],
+
 })
 export class IntervalComponent implements OnInit, OnDestroy {
 

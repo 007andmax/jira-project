@@ -1,11 +1,4 @@
-﻿import { DatePickerComponent } from './';
-import { DurationComponent } from './';
-import { IntervalComponent } from './';
-import { MatErrorComponent } from './';
-import { ProductListComponent } from './';
-import { ServicesListComponent } from './';
-import { TagsComponent } from './';
-import { CompanyDropDownComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
@@ -29,15 +22,23 @@ import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { DevicesRecurringTicketsComponent } from '../devices-recurring-tickets/devices-recurring-tickets.component';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { AssignedTicketUserComponent } from '../../tickets/ticket-add-aside/assigned-ticket-user/assigned-ticket-user.component';
+import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
+import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { DurationComponent } from 'src/app/components/shared/duration/duration.component';
+import { IntervalComponent } from 'src/app/components/shared/interval/interval.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { ProductListComponent } from 'src/app/components/shared/product-list/product-list.component';
+import { ServicesListComponent } from 'src/app/components/shared/services-list/services-list.component';
+import { TagsComponent } from 'src/app/components/shared/tags/tags.component';
 
 @Component({
   standalone: true,
   imports: [DatePickerComponent, DurationComponent, IntervalComponent, MatErrorComponent, ProductListComponent, ServicesListComponent, TagsComponent, CompanyDropDownComponent, FormsModule, CommonModule],
-    selector: 'app-recurring-tickets-add-aside',
-    templateUrl: './recurring-tickets-add-aside.component.html',
-    styleUrls: ['./recurring-tickets-add-aside.component.scss'],
-    providers: [RecurringTicketsService],
-    standalone: true
+  selector: 'app-recurring-tickets-add-aside',
+  templateUrl: './recurring-tickets-add-aside.component.html',
+  styleUrls: ['./recurring-tickets-add-aside.component.scss'],
+  providers: [RecurringTicketsService],
+
 })
 export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
 

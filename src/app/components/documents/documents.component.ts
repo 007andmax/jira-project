@@ -31,7 +31,7 @@ import { DocumentsTemplatesInfoComponent } from './documents-templates/documents
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./documents.component.scss'],
-  standalone: true
+
 })
 export class DocumentsComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;

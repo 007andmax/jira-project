@@ -1,3 +1,12 @@
+﻿import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MultiCompanyDropDownComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { MultiDatepickerComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { ProductListComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { ReportAdditionalActionsComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { TechUsersListReportComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { CompanyDropDownComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { ContractCompanyDropDownComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild, OnDestroy } from '@angular/core';
 import * as moment from "moment";
 import { GlNumber } from '../class/gl-number';
@@ -41,6 +50,8 @@ import { Device } from '../../company-devices/class/device';
 
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, FormsModule, MultiCompanyDropDownComponent, MultiDatepickerComponent, ProductListComponent, ReportAdditionalActionsComponent, TechUsersListReportComponent, CompanyDropDownComponent, ContractCompanyDropDownComponent],
     selector: 'app-report-menu',
     templateUrl: './report-menu.component.html',
     styleUrls: ['./report-menu.component.scss'],

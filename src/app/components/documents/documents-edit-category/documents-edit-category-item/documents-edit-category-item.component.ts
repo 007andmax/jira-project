@@ -11,7 +11,7 @@ import { DocumentEditCategory } from '../class/document-edit-category';
   templateUrl: './documents-edit-category-item.component.html',
   styleUrls: ['./documents-edit-category-item.component.scss'],
   providers: [TicketsListService],
-  standalone: true,
+
 })
 export class DocumentsEditCategoryItemComponent implements OnInit {
   @Input() company: Company;

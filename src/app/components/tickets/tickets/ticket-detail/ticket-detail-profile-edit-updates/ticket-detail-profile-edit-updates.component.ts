@@ -1,5 +1,4 @@
-﻿import { PreloaderTicketComponent } from './';
-import { TicketDetailProfileEditUpdatesHeaderComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
@@ -8,6 +7,8 @@ import { TicketProfileUpdate } from '../../class/ticket-profile-update';
 import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
 import { TicketDetailProfileEditUpdatesProductsComponent } from './ticket-detail-profile-edit-updates-products/ticket-detail-profile-edit-updates-products.component';
 import { TicketDetailProfileEditUpdatesServicesComponent } from './ticket-detail-profile-edit-updates-services/ticket-detail-profile-edit-updates-services.component';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
+import { TicketDetailProfileEditUpdatesHeaderComponent } from './ticket-detail-profile-edit-updates-header/ticket-detail-profile-edit-updates-header.component';
 
 @Component({
   standalone: true,

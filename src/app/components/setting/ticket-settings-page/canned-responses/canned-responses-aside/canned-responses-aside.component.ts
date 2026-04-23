@@ -1,4 +1,5 @@
-﻿import { FormsModule } from '@angular/forms';
+﻿import { MatErrorComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
@@ -10,11 +11,11 @@ import { Subscription } from 'rxjs';
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
-    selector: 'canned-responses-aside',
-    templateUrl: './canned-responses-aside.component.html',
-    styleUrls: ['./canned-responses-aside.component.scss'],
-    standalone: true
+  imports: [MatErrorComponent, FormsModule, CommonModule],
+  selector: 'canned-responses-aside',
+  templateUrl: './canned-responses-aside.component.html',
+  styleUrls: ['./canned-responses-aside.component.scss'],
+
 })
 export class CannedResponsesAsideComponent implements OnInit, OnDestroy {
 

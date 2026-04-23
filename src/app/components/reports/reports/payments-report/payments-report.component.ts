@@ -1,4 +1,4 @@
-﻿import { ReportMenuComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { User } from 'src/app/components/users/class/user';
@@ -7,14 +7,15 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { PaymentsReport } from './class/payments-report';
 import * as moment from 'moment';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
+import { ReportMenuComponent } from '../../report-menu/report-menu.component';
 
 @Component({
   standalone: true,
   imports: [ReportMenuComponent, CommonModule],
-    selector: 'payments-report',
-    templateUrl: './payments-report.component.html',
-    styleUrls: ['./payments-report.component.scss'],
-    standalone: true
+  selector: 'payments-report',
+  templateUrl: './payments-report.component.html',
+  styleUrls: ['./payments-report.component.scss'],
+
 })
 export class PaymentsReportComponent implements OnInit {
 

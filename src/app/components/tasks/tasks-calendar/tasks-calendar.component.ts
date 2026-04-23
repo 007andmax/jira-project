@@ -15,10 +15,10 @@ import { Subscription } from 'rxjs';
 @Component({
   standalone: true,
   imports: [FormsModule, CommonModule],
-    selector: 'app-tasks-calendar',
-    templateUrl: './tasks-calendar.component.html',
-    styleUrls: ['./tasks-calendar.component.scss'],
-    standalone: true
+  selector: 'app-tasks-calendar',
+  templateUrl: './tasks-calendar.component.html',
+  styleUrls: ['./tasks-calendar.component.scss'],
+
 })
 export class TasksCalendarComponent {
   toggleFilter: boolean = false;

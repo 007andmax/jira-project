@@ -32,7 +32,7 @@ import { CompanyDevicesNoExistRemoteSessionsComponent } from './company-devices-
   selector: 'app-company-devices-item',
   templateUrl: './company-devices-item.component.html',
   styleUrls: ['./company-devices-item.component.scss'],
-  standalone: true
+
 })
 export class CompanyDevicesItemComponent implements OnInit, OnDestroy {
   @ViewChild('editLabel', { static: true }) editLabel: CompanyDevicesEditLabelComponent;

@@ -8,10 +8,10 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'app-tasks-calendar-week-item-hour',
-    templateUrl: './tasks-calendar-week-item-hour.component.html',
-    styleUrls: ['./tasks-calendar-week-item-hour.component.scss'],
-    standalone: true
+  selector: 'app-tasks-calendar-week-item-hour',
+  templateUrl: './tasks-calendar-week-item-hour.component.html',
+  styleUrls: ['./tasks-calendar-week-item-hour.component.scss'],
+
 })
 export class TasksCalendarWeekItemHourComponent {
   @Input() day: CalendarWeek;

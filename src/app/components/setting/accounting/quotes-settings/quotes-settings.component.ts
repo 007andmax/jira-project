@@ -1,4 +1,4 @@
-﻿import { DropDownComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
@@ -6,6 +6,7 @@ import { InvoiceTicketsService } from '../../../../services/accounting/accountin
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   standalone: true,

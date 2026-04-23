@@ -1,22 +1,21 @@
-﻿import { RecurringTicketsTableAssignedUserMoreComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { RecurringTicket } from '../class/recurring-ticket';
 import { MONTHS_SHORT } from 'src/app/const/date';
 import { RecurringTicketsStateService } from '../services/recurring-tickets-state.service';
 import { RecurringService } from 'src/app/services/recurring/recurring.service';
-import { TicketsListService } from '../../tickets/services/tickets-list.service';
-import { AddAssignedUserComponent } from '../../tickets/ticket-edit-aside/add-assigned-user/add-assigned-user.component';
+import { RecurringTicketsTableAssignedUserMoreComponent } from './recurring-tickets-table-assigned-user-more/recurring-tickets-table-assigned-user-more.component';
 
 
 
 @Component({
   standalone: true,
   imports: [RecurringTicketsTableAssignedUserMoreComponent, CommonModule],
-    selector: 'app-recurring-tickets-table',
-    templateUrl: './recurring-tickets-table.component.html',
-    styleUrls: ['./recurring-tickets-table.component.scss'],
-    standalone: true,
+  selector: 'app-recurring-tickets-table',
+  templateUrl: './recurring-tickets-table.component.html',
+  styleUrls: ['./recurring-tickets-table.component.scss'],
+
 })
 export class RecurringTicketsTableComponent implements OnInit {
   @Input() ticket: RecurringTicket;

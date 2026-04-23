@@ -17,7 +17,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   templateUrl: './quotes-item.component.html',
   styleUrls: ['./quotes-item.component.scss'],
   providers: [TicketsListService],
-  standalone: true
+
 })
 export class QuotesItemComponent implements OnInit {
   createdUser: User;

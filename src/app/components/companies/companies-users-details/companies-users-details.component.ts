@@ -18,7 +18,7 @@ import { UsersDetailsTabTicketsComponent } from '../../users-details/users-detai
   selector: 'app-companies-users-details',
   templateUrl: './companies-users-details.component.html',
   styleUrls: ['./companies-users-details.component.scss'],
-  standalone: true
+
 })
 export class CompaniesUsersDetailsComponent extends UsersDetailsComponent {
   companyId: string;

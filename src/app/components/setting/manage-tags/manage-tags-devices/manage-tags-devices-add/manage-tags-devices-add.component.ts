@@ -8,10 +8,10 @@ import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.serv
 @Component({
   standalone: true,
   imports: [FormsModule, CommonModule],
-    selector: 'app-manage-tags-devices-add',
-    templateUrl: './manage-tags-devices-add.component.html',
-    styleUrls: ['./manage-tags-devices-add.component.scss'],
-    standalone: true
+  selector: 'app-manage-tags-devices-add',
+  templateUrl: './manage-tags-devices-add.component.html',
+  styleUrls: ['./manage-tags-devices-add.component.scss'],
+
 })
 export class ManageTagsDevicesAddComponent implements OnInit {
 

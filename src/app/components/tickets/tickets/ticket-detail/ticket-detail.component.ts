@@ -1,17 +1,4 @@
-﻿import { TicketDetailTotalStatisticsComponent } from './';
-import { TicketDetailAddAssignedUserComponent } from './';
-import { TicketDetailAttachmentsComponent } from './';
-import { TicketDetailChangePriorityComponent } from './';
-import { TicketDetailClaimInfoComponent } from './';
-import { TicketDetailContactComponent } from './';
-import { TicketDetailDevicesComponent } from './';
-import { TicketDetailDevicesDetailsComponent } from './';
-import { TicketDetailDocumentsComponent } from './';
-import { TicketDetailDocumentsPreviewComponent } from './';
-import { TicketDetailInfoStatusComponent } from './';
-import { TicketDetailLinkedAgentsComponent } from './';
-import { TicketDetailPasswordsComponent } from './';
-import { TicketDetailProfileEditUpdatesComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -61,6 +48,20 @@ import { TicketDetailEditTagsComponent } from './ticket-detail-edit-tags/ticket-
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketDetailProfileFormUpdateComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.component';
 import { TicketDetailNoteModalComponent } from './ticket-detail-note-modal/ticket-detail-note-modal.component';
+import { TicketDetailAddAssignedUserComponent } from './ticket-detail-add-assigned-user/ticket-detail-add-assigned-user.component';
+import { TicketDetailAttachmentsComponent } from './ticket-detail-attachments/ticket-detail-attachments.component';
+import { TicketDetailChangePriorityComponent } from './ticket-detail-change-priority/ticket-detail-change-priority.component';
+import { TicketDetailClaimInfoComponent } from './ticket-detail-claim-info/ticket-detail-claim-info.component';
+import { TicketDetailContactComponent } from './ticket-detail-contact/ticket-detail-contact.component';
+import { TicketDetailDevicesDetailsComponent } from './ticket-detail-devices/ticket-detail-devices-details/ticket-detail-devices-details.component';
+import { TicketDetailDevicesComponent } from './ticket-detail-devices/ticket-detail-devices.component';
+import { TicketDetailDocumentsPreviewComponent } from './ticket-detail-documents/ticket-detail-documents-preview/ticket-detail-documents-preview.component';
+import { TicketDetailDocumentsComponent } from './ticket-detail-documents/ticket-detail-documents.component';
+import { TicketDetailInfoStatusComponent } from './ticket-detail-info-status/ticket-detail-info-status.component';
+import { TicketDetailLinkedAgentsComponent } from './ticket-detail-linked-agents/ticket-detail-linked-agents.component';
+import { TicketDetailPasswordsComponent } from './ticket-detail-passwords/ticket-detail-passwords.component';
+import { TicketDetailProfileEditUpdatesComponent } from './ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates.component';
+import { TicketDetailTotalStatisticsComponent } from './ticket-detail-total-statistics/ticket-detail-total-statistics.component';
 
 @Component({
   standalone: true,

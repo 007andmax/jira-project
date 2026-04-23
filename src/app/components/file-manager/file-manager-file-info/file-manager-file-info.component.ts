@@ -23,7 +23,7 @@ import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
   selector: 'app-file-manager-file-info',
   templateUrl: './file-manager-file-info.component.html',
   styleUrls: ['./file-manager-file-info.component.scss'],
-  standalone: true,
+
 })
 export class FileManagerFileInfoComponent implements OnInit, OnDestroy {
   selectedTags: Array<any> = [];

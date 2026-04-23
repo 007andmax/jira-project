@@ -1,17 +1,18 @@
-﻿import { MatChipComponent } from './';
-import { MatChipListComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { UserDefaultSubscriptionComponent } from '../../../users-aside/user-default-subscription/user-default-subscription.component';
 import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
+import { MatChipListComponent } from 'src/app/components/shared/mat-chip-list/mat-chip-list.component';
+import { MatChipComponent } from 'src/app/components/shared/mat-chip/mat-chip.component';
 
 @Component({
   standalone: true,
   imports: [MatChipComponent, MatChipListComponent, CommonModule],
-    selector: 'app-users-filter-default-subscription',
-    templateUrl: './users-filter-default-subscription.component.html',
-    styleUrls: ['./users-filter-default-subscription.component.scss'],
-    standalone: true
+  selector: 'app-users-filter-default-subscription',
+  templateUrl: './users-filter-default-subscription.component.html',
+  styleUrls: ['./users-filter-default-subscription.component.scss'],
+
 })
 export class UsersFilterDefaultSubscriptionComponent extends UserDefaultSubscriptionComponent {
 

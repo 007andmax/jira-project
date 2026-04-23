@@ -1,9 +1,10 @@
-﻿import { TicketDetailPasswordsItemComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { PasswordRecord } from 'src/app/components/password-manager/class/password-record';
 import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
 import { Subscription } from 'rxjs';
+import { TicketDetailPasswordsItemComponent } from './ticket-detail-passwords-item/ticket-detail-passwords-item.component';
 
 @Component({
   standalone: true,

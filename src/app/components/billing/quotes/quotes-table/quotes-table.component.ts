@@ -34,7 +34,7 @@ import { QuotesItemComponent } from './quotes-item/quotes-item.component';
   templateUrl: './quotes-table.component.html',
   styleUrls: ['./quotes-table.component.scss'],
   providers: [QuotesListService],
-  standalone: true
+
 })
 export class QuotesTableComponent implements OnInit, OnDestroy {
   filter: QuoteFilter = new QuoteFilter();

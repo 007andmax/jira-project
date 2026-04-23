@@ -1,7 +1,4 @@
-﻿import { DraftEmailRecipientsComponent } from './';
-import { MatErrorComponent } from './';
-import { PreloaderTicketComponent } from './';
-import { DraftEmailUserRecipientsComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef, Input, OnDestroy } from '@angular/core';
@@ -21,13 +18,17 @@ import { ReportsStateService } from 'src/app/states/reports/reports-state.servic
 import { ReportsService } from 'src/app/services/reports/reports.service';
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { PaymentsStateService } from 'src/app/states/payments/payments-state.service';
+import { MatErrorComponent } from '../mat-error/mat-error.component';
+import { PreloaderTicketComponent } from '../preloader-ticket/preloader-ticket.component';
+import { DraftEmailRecipientsComponent } from './draft-email-recipients/draft-email-recipients.component';
+import { DraftEmailUserRecipientsComponent } from './draft-email-user-recipients/draft-email-user-recipients.component';
 @Component({
   standalone: true,
   imports: [DraftEmailRecipientsComponent, MatErrorComponent, PreloaderTicketComponent, DraftEmailUserRecipientsComponent, FormsModule, CommonModule],
-    selector: 'app-draft-email',
-    templateUrl: './draft-email.component.html',
-    styleUrls: ['./draft-email.component.scss'],
-    standalone: true
+  selector: 'app-draft-email',
+  templateUrl: './draft-email.component.html',
+  styleUrls: ['./draft-email.component.scss'],
+
 })
 export class DraftEmailComponent implements OnInit, OnDestroy {
   messageContent: string = '';

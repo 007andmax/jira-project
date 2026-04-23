@@ -12,11 +12,11 @@ import { DurationService } from './services/duration.service';
 @Component({
   standalone: true,
   imports: [FormsModule, CommonModule],
-    selector: 'app-duration',
-    templateUrl: './duration.component.html',
-    styleUrls: ['./duration.component.scss'],
-    providers: [DurationService],
-    standalone: true
+  selector: 'app-duration',
+  templateUrl: './duration.component.html',
+  styleUrls: ['./duration.component.scss'],
+  providers: [DurationService],
+
 })
 export class DurationComponent implements OnInit, OnDestroy {
 

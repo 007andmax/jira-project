@@ -22,7 +22,7 @@ import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-pho
   selector: 'app-invoices-aside-preview',
   templateUrl: './invoices-aside-preview.component.html',
   styleUrls: ['./invoices-aside-preview.component.scss'],
-  standalone: true
+
 })
 export class InvoicesAsidePreviewComponent implements OnInit {
   open: boolean = false;

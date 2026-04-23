@@ -16,7 +16,7 @@ import { InvoiceExportComponent } from './invoice-export/invoice-export.componen
   selector: 'app-invoices-header',
   templateUrl: './invoices-header.component.html',
   styleUrls: ['./invoices-header.component.scss'],
-  standalone: true
+
 })
 export class InvoicesHeaderComponent implements OnInit {
   @ViewChild('filter', { static: true }) filter: InvoicesFilterComponent;

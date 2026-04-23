@@ -1,8 +1,9 @@
-﻿import { SupportPageInfoTagsComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { SupportPageCategory } from '../../left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoryContent } from '../class/support-page-category-content';
+import { SupportPageInfoTagsComponent } from './support-page-info-tags/support-page-info-tags.component';
 
 @Component({
   standalone: true,

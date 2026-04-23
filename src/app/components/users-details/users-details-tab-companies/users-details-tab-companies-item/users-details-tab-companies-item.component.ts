@@ -1,6 +1,4 @@
-﻿import { DynamicTooltipComponent } from './';
-import { PreviewPhoneMaskComponent } from './';
-import { UserTableDefaultSubscriptionComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
@@ -21,14 +19,17 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { CustomerRoleStateService } from 'src/app/states/customer-role/customer-role-state.service';
 import { UsersRealTimeService } from 'src/app/states/users/users-real-time.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.component';
+import { UserTableDefaultSubscriptionComponent } from 'src/app/components/users/users-table/user-table-default-subscription/user-table-default-subscription.component';
 
 @Component({
   standalone: true,
   imports: [DynamicTooltipComponent, PreviewPhoneMaskComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
-    selector: 'app-users-details-tab-companies-item',
-    templateUrl: './users-details-tab-companies-item.component.html',
-    styleUrls: ['./users-details-tab-companies-item.component.scss'],
-    standalone: true
+  selector: 'app-users-details-tab-companies-item',
+  templateUrl: './users-details-tab-companies-item.component.html',
+  styleUrls: ['./users-details-tab-companies-item.component.scss'],
+
 })
 export class UsersDetailsTabCompaniesItemComponent implements OnInit, OnDestroy {
   @ViewChild('userRolesDP', { static: false }) userRolesDP: DropDownComponent;

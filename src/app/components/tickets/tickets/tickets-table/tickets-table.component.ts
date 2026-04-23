@@ -1,5 +1,4 @@
-﻿import { TicketsFilterComponent } from './';
-import { TicketsTableItemComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
@@ -17,16 +16,18 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { TicketsRealTimeService } from 'src/app/states/tickets/tickets-real-time.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
+import { TicketsFilterComponent } from '../tickets-header/tickets-filter/tickets-filter.component';
+import { TicketsTableItemComponent } from './tickets-table-item/tickets-table-item.component';
 
 
 @Component({
   standalone: true,
   imports: [TicketsFilterComponent, TicketsTableItemComponent, CommonModule],
-    selector: 'app-tickets-table',
-    templateUrl: './tickets-table.component.html',
-    styleUrls: ['./tickets-table.component.scss'],
-    providers: [TicketsListService],
-    standalone: true
+  selector: 'app-tickets-table',
+  templateUrl: './tickets-table.component.html',
+  styleUrls: ['./tickets-table.component.scss'],
+  providers: [TicketsListService],
+
 })
 export class TicketsTableComponent implements OnInit, OnDestroy {
   // @ViewChild('header') header: UsersHeaderComponent;

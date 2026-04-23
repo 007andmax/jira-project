@@ -1,4 +1,4 @@
-﻿import { MarketingEmailUsersItemComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
@@ -13,15 +13,16 @@ import { MarketingEmailStateService } from 'src/app/states/marketing-email/marke
 import { MarketingSubscriptionType } from '../marketing-subscription-type/class/marketing-subscription-type';
 import { MarketingEmailUsers } from './class/marketing-email-user';
 import { MarketingEmailUsersAddComponent } from './marketing-email-users-add/marketing-email-users-add.component';
+import { MarketingEmailUsersItemComponent } from './marketing-email-users-item/marketing-email-users-item.component';
 
 @Component({
   standalone: true,
   imports: [MarketingEmailUsersItemComponent, FormsModule, CommonModule],
-    selector: 'marketing-email-users',
-    templateUrl: './marketing-email-users.component.html',
-    styleUrls: ['./marketing-email-users.component.scss'],
-    providers: [UserListService],
-    standalone: true
+  selector: 'marketing-email-users',
+  templateUrl: './marketing-email-users.component.html',
+  styleUrls: ['./marketing-email-users.component.scss'],
+  providers: [UserListService],
+
 })
 export class MarketingEmailUsersComponent implements OnInit, OnDestroy {
   opened: boolean = false;

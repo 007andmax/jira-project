@@ -28,7 +28,7 @@ import { InvoicePreviewComponent } from './invoice-preview/invoice-preview.compo
   selector: 'app-billable-aside',
   templateUrl: './billable-aside.component.html',
   styleUrls: ['./billable-aside.component.scss'],
-  standalone: true
+
 })
 export class BillableAsideComponent implements OnInit, OnDestroy {
   @Output() onSetSelectedTickets = new EventEmitter();

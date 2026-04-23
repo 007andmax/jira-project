@@ -12,10 +12,10 @@ import { DeviceType } from '../class/device-type';
 @Component({
   standalone: true,
   imports: [FormsModule, CommonModule],
-    selector: 'app-company-devices-filter',
-    templateUrl: './company-devices-filter.component.html',
-    styleUrls: ['./company-devices-filter.component.scss'],
-    standalone: true
+  selector: 'app-company-devices-filter',
+  templateUrl: './company-devices-filter.component.html',
+  styleUrls: ['./company-devices-filter.component.scss'],
+
 })
 export class CompanyDevicesFilterComponent implements OnInit {
   assestType: Array<DeviceType> = [];

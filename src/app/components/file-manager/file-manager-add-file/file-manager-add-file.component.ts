@@ -20,7 +20,7 @@ import { FileManagerAddFileTagsComponent } from './file-manager-add-file-tags/fi
   templateUrl: './file-manager-add-file.component.html',
   styleUrls: ['./file-manager-add-file.component.scss'],
   providers: [NgbModalConfig, NgbModal],
-  standalone: true
+
 })
 export class FileManagerAddFileComponent implements OnInit {
   @ViewChild('addBtn', { static: true }) addBtn: DisabledBtnDirective;

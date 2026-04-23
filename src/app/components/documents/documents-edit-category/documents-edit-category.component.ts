@@ -20,7 +20,7 @@ import { DocumentsEditCategoryItemComponent } from './documents-edit-category-it
   selector: 'documents-edit-category',
   templateUrl: './documents-edit-category.component.html',
   styleUrls: ['./documents-edit-category.component.scss'],
-  standalone: true,
+
 })
 export class DocumentsEditCategoryComponent implements OnInit, OnDestroy {
   @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;

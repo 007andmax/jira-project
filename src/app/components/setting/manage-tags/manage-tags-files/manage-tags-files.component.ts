@@ -1,6 +1,4 @@
-﻿import { DynamicTooltipComponent } from './';
-import { MatErrorComponent } from './';
-import { ManageTagsAddComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
@@ -13,14 +11,17 @@ import { TagsService } from 'src/app/services/tags/tags.service';
 import { catchError, map } from 'rxjs/operators';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 import { ManageTagsFilter } from '../class/manage-tags-filter';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { ManageTagsAddComponent } from '../manage-tags-add/manage-tags-add.component';
 
 @Component({
   standalone: true,
   imports: [DynamicTooltipComponent, MatErrorComponent, ManageTagsAddComponent, FormsModule, CommonModule],
-    selector: 'app-manage-tags-files',
-    templateUrl: './manage-tags-files.component.html',
-    styleUrls: ['./manage-tags-files.component.scss'],
-    standalone: true
+  selector: 'app-manage-tags-files',
+  templateUrl: './manage-tags-files.component.html',
+  styleUrls: ['./manage-tags-files.component.scss'],
+
 })
 export class ManageTagsFilesComponent implements OnInit, OnDestroy {
   filter: ManageTagsFilter = new ManageTagsFilter();

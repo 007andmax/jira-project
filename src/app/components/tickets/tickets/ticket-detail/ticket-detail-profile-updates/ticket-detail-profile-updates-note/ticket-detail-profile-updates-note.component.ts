@@ -1,5 +1,4 @@
-﻿import { DynamicTooltipComponent } from './';
-import { TicketDetailProfileUpdatesHeaderInfoComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren } from '@angular/core';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -12,6 +11,8 @@ import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-s
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { TicketDetailProfileUpdatesHeaderInfoComponent } from '../ticket-detail-profile-updates-header-info/ticket-detail-profile-updates-header-info.component';
 
 @Component({
   standalone: true,

@@ -1,4 +1,4 @@
-﻿import { UsersFilterInfoComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
@@ -22,17 +22,18 @@ import { AppService } from 'src/app/states/app/app.service';
 import { AddUserToCompanyComponent } from '../add-user-to-company/add-user-to-company.component';
 import { UserFilters } from '../class/user-filters';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
+import { UsersFilterInfoComponent } from './users-filter-info/users-filter-info.component';
 
 
 @Component({
   standalone: true,
   imports: [UsersFilterInfoComponent, FormsModule, CommonModule],
-    selector: 'app-users-header',
-    templateUrl: './users-header.component.html',
-    styleUrls: ['./users-header.component.scss'],
-    providers: [UsersHeaderService],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
+  selector: 'app-users-header',
+  templateUrl: './users-header.component.html',
+  styleUrls: ['./users-header.component.scss'],
+  providers: [UsersHeaderService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+
 })
 export class UsersHeaderComponent implements OnInit, OnDestroy {
   @Output() onChangeFilterField = new EventEmitter<any>();

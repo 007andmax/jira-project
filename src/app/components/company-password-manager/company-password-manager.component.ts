@@ -23,7 +23,7 @@ import { PasswordManagerTableComponent } from '../password-manager/password-mana
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
   providers: [PasswordManagerListService],
-  standalone: true
+
 })
 export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
   @ViewChild('filters', { static: true }) filters: PasswoordManagerFiltersComponent;

@@ -1,6 +1,4 @@
-﻿import { AddMarketingSubscriptionTypeComponent } from './';
-import { DynamicTooltipComponent } from './';
-import { MatErrorComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
@@ -18,14 +16,17 @@ import { MarketingEmailStateService } from 'src/app/states/marketing-email/marke
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { MarketingSubscriptionType } from './class/marketing-subscription-type';
 import { MarketingSubscriptionTypeFilter } from './class/marketing-subscription-type-filter';
+import { AddMarketingSubscriptionTypeComponent } from './add-marketing-subscription-type/add-marketing-subscription-type.component';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 @Component({
   standalone: true,
   imports: [AddMarketingSubscriptionTypeComponent, DynamicTooltipComponent, MatErrorComponent, FormsModule, CommonModule],
-    selector: 'marketing-subscription-type',
-    templateUrl: './marketing-subscription-type.component.html',
-    styleUrls: ['./marketing-subscription-type.component.scss'],
-    standalone: true
+  selector: 'marketing-subscription-type',
+  templateUrl: './marketing-subscription-type.component.html',
+  styleUrls: ['./marketing-subscription-type.component.scss'],
+
 })
 export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   marketingSubscriptionList: Array<MarketingSubscriptionType> = [];

@@ -1,5 +1,4 @@
-﻿import { DynamicTooltipComponent } from './';
-import { ManageTagsDevicesAddComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
@@ -16,14 +15,16 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { DELETE_DEVICE_TAG } from 'src/app/const/confirm';
 import { ManageTagsDevicesFilter } from './class/manage-tags-devices-filter';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { ManageTagsDevicesAddComponent } from './manage-tags-devices-add/manage-tags-devices-add.component';
 
 @Component({
   standalone: true,
   imports: [DynamicTooltipComponent, ManageTagsDevicesAddComponent, FormsModule, CommonModule],
-    selector: 'app-manage-tags-devices',
-    templateUrl: './manage-tags-devices.component.html',
-    styleUrls: ['./manage-tags-devices.component.scss'],
-    standalone: true
+  selector: 'app-manage-tags-devices',
+  templateUrl: './manage-tags-devices.component.html',
+  styleUrls: ['./manage-tags-devices.component.scss'],
+
 })
 export class ManageTagsDevicesComponent implements OnInit, OnDestroy {
   tags: Array<DeviceTag> = [];

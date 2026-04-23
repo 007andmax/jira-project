@@ -21,7 +21,7 @@ import { DocumentsEditHistoryComponent } from '../documents-edit-history/documen
   selector: 'documents-edit-info',
   templateUrl: './documents-edit-info.component.html',
   styleUrls: ['./documents-edit-info.component.scss'],
-  standalone: true
+
 })
 export class DocumentsEditInfoComponent extends DocumentsAddInfoComponent {
 

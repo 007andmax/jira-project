@@ -1,5 +1,4 @@
-﻿import { LeftPanelSuperAdminCategoriesComponent } from './';
-import { SupportPageHelpCenterComponent } from './';
+﻿
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
@@ -9,6 +8,8 @@ import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { SupportPageCategory } from '../left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesStateService } from '../state/support-page-categories/support-page-categories-state.service';
+import { LeftPanelSuperAdminCategoriesComponent } from '../left-panel-super-admin-categories/left-panel-super-admin-categories.component';
+import { SupportPageHelpCenterComponent } from './support-page-help-center/support-page-help-center.component';
 var $ = require("jquery");
 @Component({
   standalone: true,

@@ -19,7 +19,7 @@ import { DocumentsEditInfoComponent } from './documents-edit-info/documents-edit
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./documents-edit.component.scss'],
-  standalone: true
+
 })
 export class DocumentsEditComponent extends DocumentsAddComponent {
   showPreloader: boolean = true;

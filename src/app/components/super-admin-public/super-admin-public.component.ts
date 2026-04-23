@@ -1,4 +1,4 @@
-﻿import { SuperAdminPublicHeaderComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -6,14 +6,15 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { SupportPageCategory } from '../super-admin/left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesStateService } from '../super-admin/state/support-page-categories/support-page-categories-state.service';
 import { Subscription } from 'rxjs';
+import { SuperAdminPublicHeaderComponent } from './super-admin-public-header/super-admin-public-header.component';
 
 @Component({
   standalone: true,
   imports: [SuperAdminPublicHeaderComponent, CommonModule],
-    selector: 'super-admin-public',
-    templateUrl: './super-admin-public.component.html',
-    styleUrls: ['./super-admin-public.component.scss'],
-    standalone: true
+  selector: 'super-admin-public',
+  templateUrl: './super-admin-public.component.html',
+  styleUrls: ['./super-admin-public.component.scss'],
+
 })
 export class SuperAdminPublicComponent implements OnInit, OnDestroy {
   categories: Array<SupportPageCategory> = [];

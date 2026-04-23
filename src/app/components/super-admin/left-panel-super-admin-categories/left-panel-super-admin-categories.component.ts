@@ -1,5 +1,4 @@
-﻿import { DynamicTooltipComponent } from './';
-import { LeftPanelSuperAdminCategoriesActionsComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,6 +11,8 @@ import { SupportPageCategoriesService } from '../services/support-page-categorie
 import { SupportPageAddCategoryComponent } from '../shared/support-page-add-category/support-page-add-category.component';
 import { SupportPageCategoriesStateService } from '../state/support-page-categories/support-page-categories-state.service';
 import { SupportPageCategory } from './class/support-page-category';
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { LeftPanelSuperAdminCategoriesActionsComponent } from './left-panel-super-admin-categories-actions/left-panel-super-admin-categories-actions.component';
 
 @Component({
   standalone: true,

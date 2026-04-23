@@ -1,3 +1,4 @@
+﻿import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { Ticket } from 'src/app/components/tickets/class/ticket';
@@ -8,6 +9,8 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { TicketsListService } from '../../../services/tickets-list.service';
 
 @Component({
+  standalone: true,
+  imports: [FormsModule],
     selector: 'tickets-filter-search',
     templateUrl: './tickets-filter-search.component.html',
     styleUrls: ['./tickets-filter-search.component.scss'],

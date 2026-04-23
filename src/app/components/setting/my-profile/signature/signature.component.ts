@@ -1,4 +1,4 @@
-﻿import { AddSignatureComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -9,6 +9,7 @@ import { DELETE_SIGNATURE } from 'src/app/const/confirm';
 import { SignatureService } from 'src/app/services/signature/signature.service';
 import { SignatureStateService } from 'src/app/states/signature/signature-state.service';
 import { EditSignatureComponent } from './edit-signature/edit-signature.component';
+import { AddSignatureComponent } from './add-signature/add-signature.component';
 
 @Component({
   standalone: true,

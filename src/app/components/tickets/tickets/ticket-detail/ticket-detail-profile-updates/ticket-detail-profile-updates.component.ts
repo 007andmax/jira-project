@@ -1,6 +1,4 @@
-﻿import { TicketDetailProfileUpdatesNoteComponent } from './';
-import { TicketDetailProfileUpdatesProductComponent } from './';
-import { TicketDetailProfileUpdatesServiceComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { REMOVE_UPDATE_TICKET_DETAIL_SERVICE, REMOVE_UPDATE_TICKET_DETAIL_PRODUCT, REMOVE_UPDATE_TICKET_DETAIL } from 'src/app/const/confirm';
@@ -14,6 +12,9 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { TicketsListService } from '../../services/tickets-list.service';
+import { TicketDetailProfileUpdatesNoteComponent } from './ticket-detail-profile-updates-note/ticket-detail-profile-updates-note.component';
+import { TicketDetailProfileUpdatesProductComponent } from './ticket-detail-profile-updates-product/ticket-detail-profile-updates-product.component';
+import { TicketDetailProfileUpdatesServiceComponent } from './ticket-detail-profile-updates-service/ticket-detail-profile-updates-service.component';
 
 @Component({
   standalone: true,

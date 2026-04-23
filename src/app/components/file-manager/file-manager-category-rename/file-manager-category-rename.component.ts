@@ -9,10 +9,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'app-file-manager-category-rename',
-    templateUrl: './file-manager-category-rename.component.html',
-    styleUrls: ['./file-manager-category-rename.component.scss'],
-    standalone: true
+  selector: 'app-file-manager-category-rename',
+  templateUrl: './file-manager-category-rename.component.html',
+  styleUrls: ['./file-manager-category-rename.component.scss'],
+
 })
 export class FileManagerCategoryRenameComponent implements OnInit {
   @Input() item: FileManagerCategory;

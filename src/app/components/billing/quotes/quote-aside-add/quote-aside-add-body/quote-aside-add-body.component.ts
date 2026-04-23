@@ -39,7 +39,7 @@ import { ServiceItemQuoteComponent } from '../service-item-quote/service-item-qu
   selector: 'app-quote-aside-add-body',
   templateUrl: './quote-aside-add-body.component.html',
   styleUrls: ['./quote-aside-add-body.component.scss'],
-  standalone: true
+
 })
 export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
   @ViewChild('companyEdit', { static: false }) companyEdit: InvoiceFormEditCustomerComponent;

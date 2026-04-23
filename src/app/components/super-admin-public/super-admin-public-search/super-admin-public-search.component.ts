@@ -8,11 +8,11 @@ import { SuperAdminPublicSearchListService } from './services/super-admin-public
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'super-admin-public-search',
-    templateUrl: './super-admin-public-search.component.html',
-    styleUrls: ['./super-admin-public-search.component.scss'],
-    providers: [SuperAdminPublicSearchListService],
-    standalone: true
+  selector: 'super-admin-public-search',
+  templateUrl: './super-admin-public-search.component.html',
+  styleUrls: ['./super-admin-public-search.component.scss'],
+  providers: [SuperAdminPublicSearchListService],
+
 })
 export class SuperAdminPublicSearchComponent implements OnInit {
   page: number = 0;

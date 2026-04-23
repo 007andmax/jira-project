@@ -39,7 +39,7 @@ import { UsersTableComponent } from '../users/users-table/users-table.component'
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
   providers: [UserListService],
-  standalone: true
+
 })
 export class MarketingComponent implements OnInit {
   @ViewChild('header', { static: true }) header: UsersHeaderComponent;

@@ -1,4 +1,4 @@
-﻿import { ReportSendEmailComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -16,14 +16,15 @@ import { ReportValidate1 } from "../../class/report-validate1";
 import { SoftwareSummaryReport1 } from "../../class/software-summary-report1";
 import { SoftwareSummaryReportFilter } from "./Class/software-summary-report1-filter";
 import { Subscription } from "rxjs";
+import { ReportSendEmailComponent } from '../../report-additional-actions/report-send-email/report-send-email.component';
 
 @Component({
   standalone: true,
   imports: [ReportSendEmailComponent, CommonModule],
-    selector: "software-summary-report1",
-    templateUrl: "./software-summary-report1.component.html",
-    styleUrls: ["./software-summary-report1.component.scss"],
-    standalone: true,
+  selector: "software-summary-report1",
+  templateUrl: "./software-summary-report1.component.html",
+  styleUrls: ["./software-summary-report1.component.scss"],
+
 })
 export class SoftwareSummaryReport1Component implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;

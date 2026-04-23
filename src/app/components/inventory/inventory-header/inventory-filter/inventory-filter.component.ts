@@ -16,7 +16,7 @@ import { InventoryAddCategoryComponent } from '../../inventory-add-category/inve
   templateUrl: './inventory-filter.component.html',
   styleUrls: ['./inventory-filter.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
+
 })
 export class InventoryFilterComponent implements OnInit {
   showAddCategory: boolean = false;

@@ -1,4 +1,4 @@
-﻿import { ReportSendEmailComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import * as moment from "moment";
@@ -14,14 +14,15 @@ import { LeftPanelStateService } from "src/app/states/left-panel/left-panel-stat
 import { DeviceProcessorRamReport } from "../../class/report-device-processorram";
 import { DeviceProcessorRamReportFilter } from "./Class/device-processorram-report";
 import { Subscription } from "rxjs";
+import { ReportSendEmailComponent } from '../../report-additional-actions/report-send-email/report-send-email.component';
 
 @Component({
   standalone: true,
   imports: [ReportSendEmailComponent, CommonModule],
-    selector: "report-device-processorram",
-    templateUrl: "./report-device-processorram.component.html",
-    styleUrls: ["./report-device-processorram.component.scss"],
-    standalone: true,
+  selector: "report-device-processorram",
+  templateUrl: "./report-device-processorram.component.html",
+  styleUrls: ["./report-device-processorram.component.scss"],
+
 })
 export class ReportDeviceProcessorramComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownDevice', { static: true }) dropdownDevice: DropDownComponent;

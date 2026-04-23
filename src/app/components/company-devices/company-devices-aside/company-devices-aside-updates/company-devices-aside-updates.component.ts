@@ -5,10 +5,10 @@ import { DeviceExtended } from '../../class/device-extended';
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'app-company-devices-aside-updates',
-    templateUrl: './company-devices-aside-updates.component.html',
-    styleUrls: ['./company-devices-aside-updates.component.scss'],
-    standalone: true
+  selector: 'app-company-devices-aside-updates',
+  templateUrl: './company-devices-aside-updates.component.html',
+  styleUrls: ['./company-devices-aside-updates.component.scss'],
+
 })
 export class CompanyDevicesAsideUpdatesComponent implements OnInit {
   @Input() device: DeviceExtended;

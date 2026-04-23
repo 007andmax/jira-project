@@ -1,4 +1,4 @@
-﻿import { SignatureComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core";
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
@@ -9,6 +9,7 @@ import { ProfileComponent } from "./profile/profile.component";
 import { TicketsMyProfileComponent } from "./tickets-my-profile/tickets-my-profile.component";
 import { CustomerPortalStateService } from "src/app/states/customer-portal/customer-portal-state.service";
 import { fadeInAnimation } from "src/app/animations";
+import { SignatureComponent } from './signature/signature.component';
 declare var $: any;
 
 @Component({

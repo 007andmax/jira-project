@@ -1,21 +1,22 @@
-﻿import { DynamicTooltipComponent } from './';
-import { MatChipComponent } from './';
-import { MatChipListComponent } from './';
-import { MatFormFieldComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 import { TicketsListService } from '../../../services/tickets-list.service';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatChipListComponent } from 'src/app/components/shared/mat-chip-list/mat-chip-list.component';
+import { MatChipComponent } from 'src/app/components/shared/mat-chip/mat-chip.component';
+import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
 
 @Component({
   standalone: true,
   imports: [DynamicTooltipComponent, MatChipComponent, MatChipListComponent, MatFormFieldComponent, CommonModule],
-    selector: 'tickets-filter-drop-down',
-    templateUrl: './tickets-filter-drop-down.component.html',
-    styleUrls: ['./tickets-filter-drop-down.component.scss'],
-    providers: [CompanyTagsListService, TicketsListService],
-    standalone: true
+  selector: 'tickets-filter-drop-down',
+  templateUrl: './tickets-filter-drop-down.component.html',
+  styleUrls: ['./tickets-filter-drop-down.component.scss'],
+  providers: [CompanyTagsListService, TicketsListService],
+
 })
 export class TicketsFilterDropDownComponent extends CompanyTagsComponent {
   @Input() placement: string = 'bottom-left';

@@ -1,6 +1,4 @@
-﻿import { AddCustomNotesSettingsComponent } from './';
-import { DynamicTooltipComponent } from './';
-import { EditCustomNotesSettingsComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +10,9 @@ import { DELETE_NOTE } from 'src/app/const/confirm';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { CustomNoteFilter } from './class/custom-note-filter';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { AddCustomNotesSettingsComponent } from './add-custom-notes-settings/add-custom-notes-settings.component';
+import { EditCustomNotesSettingsComponent } from './edit-custom-notes-settings/edit-custom-notes-settings.component';
 
 @Component({
   standalone: true,

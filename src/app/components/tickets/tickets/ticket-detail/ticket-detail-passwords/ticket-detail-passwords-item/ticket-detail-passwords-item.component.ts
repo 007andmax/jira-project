@@ -1,9 +1,10 @@
-﻿import { DynamicTooltipComponent } from './';
-import { UploadAreaProgressComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { PasswordRecord } from 'src/app/components/password-manager/class/password-record';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { UploadAreaProgressComponent } from 'src/app/components/shared/upload-area/upload-area-progress/upload-area-progress.component';
 import { PasswordManagerService } from 'src/app/services/password-manager/password-manager.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppStateService } from 'src/app/states/app/app-state.service';

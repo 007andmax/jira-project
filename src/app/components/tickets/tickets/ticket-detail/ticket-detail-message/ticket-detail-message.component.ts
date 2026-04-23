@@ -1,4 +1,4 @@
-﻿import { PreloaderTicketComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
@@ -12,6 +12,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { DELETE_FOREVER, MOVE_TO_SPAM_OR_REPORT_TICKET } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { Subscription } from 'rxjs';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
 
 @Component({
   standalone: true,

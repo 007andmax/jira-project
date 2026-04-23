@@ -1,5 +1,4 @@
-﻿import { DynamicTooltipComponent } from './';
-import { TechUsersComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -16,6 +15,8 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsListService } from '../../../../services/tickets-list.service';
 import { TicketStateService } from '../../../../ticket-edit-aside/services/ticket-state.service';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { TechUsersComponent } from 'src/app/components/shared/tech-users/tech-users.component';
 
 @Component({
   standalone: true,

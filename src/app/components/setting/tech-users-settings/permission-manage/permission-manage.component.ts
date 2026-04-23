@@ -1,5 +1,4 @@
-﻿import { DropDownComponent } from './';
-import { DynamicTooltipComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -11,15 +10,17 @@ import { ToastrService } from 'ngx-toastr';
 import { SettingStateService } from 'src/app/states/setting/setting-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 declare var $: any;
 
 @Component({
   standalone: true,
   imports: [DropDownComponent, DynamicTooltipComponent, FormsModule, CommonModule],
-    selector: 'app-permission-manage',
-    templateUrl: './permission-manage.component.html',
-    styleUrls: ['./permission-manage.component.scss'],
-    standalone: true
+  selector: 'app-permission-manage',
+  templateUrl: './permission-manage.component.html',
+  styleUrls: ['./permission-manage.component.scss'],
+
 })
 export class PermissionManageComponent implements OnInit, OnDestroy {
   selectedRoleIndex = -1;

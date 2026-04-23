@@ -1,5 +1,4 @@
-﻿import { SuperAdminKnowledgeBaseNewsListComponent } from './';
-import { SuperAdminKnowledgeBaseTableItemComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -11,6 +10,8 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { DELETE_NEWS } from 'src/app/const/confirm';
 import { SuperAdminKnowledgeBaseAddComponent } from '../super-admin-knowledge-base-add/super-admin-knowledge-base-add.component';
 import { SuperAdminKnowledgeBaseEditComponent } from '../super-admin-knowledge-base-edit/super-admin-knowledge-base-edit.component';
+import { SuperAdminKnowledgeBaseNewsListComponent } from '../super-admin-knowledge-base-news-list/super-admin-knowledge-base-news-list.component';
+import { SuperAdminKnowledgeBaseTableItemComponent } from './super-admin-knowledge-base-table-item/super-admin-knowledge-base-table-item.component';
 
 @Component({
   standalone: true,

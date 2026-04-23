@@ -1,4 +1,4 @@
-﻿import { DynamicTooltipComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
@@ -12,6 +12,7 @@ import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service'
 import { SupportPageCategoriesService } from '../../../services/support-page-categories/support-page-categories.service';
 import { SupportPageCategoriesStateService } from '../../../state/support-page-categories/support-page-categories-state.service';
 import { SupportPageInfoTag } from './class/support-page-info-tag';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 var $ = require("jquery");
 
 @Component({

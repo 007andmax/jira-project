@@ -22,7 +22,7 @@ import { ReportMenuComponent } from '../../reports/report-menu/report-menu.compo
   // attach the fade in animation to the host (root) element of this component
   host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./company-products.component.scss'],
-  standalone: true
+
 })
 export class CompanyProductsComponent implements OnInit, OnDestroy {
   productsCompanyReport: ProductCompanyReport = new ProductCompanyReport();

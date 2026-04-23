@@ -1,12 +1,4 @@
-﻿import { DatePickerComponent } from './';
-import { DropDownComponent } from './';
-import { MatErrorComponent } from './';
-import { PreloaderTicketComponent } from './';
-import { TasksAddAssignedUsersComponent } from './';
-import { TasksAddAssociateTicketsComponent } from './';
-import { TasksDatePickerComponent } from './';
-import { UploadAreaProgressComponent } from './';
-import { CompanyDropDownComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
@@ -29,14 +21,23 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { PreviewAttachmentStateService } from '../../tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
 import { ServicesListComponent } from '../../shared/services-list/services-list.component';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { CompanyDropDownComponent } from '../../shared/company-drop-down/company-drop-down.component';
+import { DatePickerComponent } from '../../shared/date-picker/date-picker.component';
+import { DropDownComponent } from '../../shared/drop-down/drop-down.component';
+import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
+import { UploadAreaProgressComponent } from '../../shared/upload-area/upload-area-progress/upload-area-progress.component';
+import { TasksDatePickerComponent } from '../tasks-date-picker/tasks-date-picker.component';
+import { TasksAddAssignedUsersComponent } from './tasks-add-assigned-users/tasks-add-assigned-users.component';
+import { TasksAddAssociateTicketsComponent } from './tasks-add-associate-tickets/tasks-add-associate-tickets.component';
 
 @Component({
   standalone: true,
   imports: [DatePickerComponent, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, TasksDatePickerComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
-    selector: 'app-tasks-add',
-    templateUrl: './tasks-add.component.html',
-    styleUrls: ['./tasks-add.component.scss'],
-    standalone: true
+  selector: 'app-tasks-add',
+  templateUrl: './tasks-add.component.html',
+  styleUrls: ['./tasks-add.component.scss'],
+
 })
 export class TasksAddComponent implements OnInit, OnDestroy {
   opened: boolean = false;

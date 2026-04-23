@@ -14,10 +14,10 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 @Component({
   standalone: true,
   imports: [FormsModule, CommonModule],
-    selector: 'app-invoices-filter',
-    templateUrl: './invoices-filter.component.html',
-    styleUrls: ['./invoices-filter.component.scss'],
-    standalone: true
+  selector: 'app-invoices-filter',
+  templateUrl: './invoices-filter.component.html',
+  styleUrls: ['./invoices-filter.component.scss'],
+
 })
 export class InvoicesFilterComponent implements OnInit, OnDestroy {
   @ViewChild('companyDp', { static: true }) companyDp: CompanyDropDownComponent;

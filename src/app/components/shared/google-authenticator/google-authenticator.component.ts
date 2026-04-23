@@ -1,9 +1,10 @@
-﻿import { MatErrorComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { MatErrorComponent } from '../mat-error/mat-error.component';
 
 @Component({
   standalone: true,

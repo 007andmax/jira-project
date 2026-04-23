@@ -1,6 +1,4 @@
-﻿import { MatChipComponent } from './';
-import { MatChipListComponent } from './';
-import { MatFormFieldComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
@@ -15,6 +13,9 @@ import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tick
 import { TicketProfile } from '../../class/ticket-profile';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
+import { MatChipListComponent } from 'src/app/components/shared/mat-chip-list/mat-chip-list.component';
+import { MatChipComponent } from 'src/app/components/shared/mat-chip/mat-chip.component';
+import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
 
 @Component({
   standalone: true,

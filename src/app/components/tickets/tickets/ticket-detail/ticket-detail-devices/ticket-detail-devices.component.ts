@@ -1,4 +1,4 @@
-﻿import { TicketDetailDevicesItemComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { DeviceCompany } from 'src/app/components/company-devices/class/device-company';
@@ -10,6 +10,7 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { DevicesRealTimeService } from 'src/app/states/devices/devices-real-time.service';
 import { TicketProfile } from '../../class/ticket-profile';
+import { TicketDetailDevicesItemComponent } from './ticket-detail-devices-item/ticket-detail-devices-item.component';
 
 @Component({
   standalone: true,

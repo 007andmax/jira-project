@@ -1,5 +1,4 @@
-﻿import { MatErrorComponent } from './';
-import { ProductListComponent } from './';
+﻿
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -10,6 +9,8 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketProfileProduct } from '../../../../class/ticket-profile-product';
 import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
 import { TicketsListService } from '../../../../services/tickets-list.service';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { ProductListComponent } from 'src/app/components/shared/product-list/product-list.component';
 
 @Component({
   standalone: true,

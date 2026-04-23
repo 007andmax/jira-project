@@ -1,4 +1,5 @@
-﻿import { CommonModule } from '@angular/common';
+﻿import { SuperAdminPublicListComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
@@ -6,7 +7,7 @@ import { SuperAdminPublicStateService } from 'src/app/states/super-admin-public/
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [SuperAdminPublicListComponent, CommonModule],
   selector: 'help-center-info-aside',
   templateUrl: './help-center-info-aside.component.html',
   styleUrls: ['./help-center-info-aside.component.scss']

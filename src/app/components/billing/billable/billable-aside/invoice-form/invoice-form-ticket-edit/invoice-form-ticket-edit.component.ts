@@ -14,7 +14,7 @@ import { InvoiceFormTicketEditServiceComponent } from './invoice-form-ticket-edi
   selector: 'app-invoice-form-ticket-edit',
   templateUrl: './invoice-form-ticket-edit.component.html',
   styleUrls: ['./invoice-form-ticket-edit.component.scss'],
-  standalone: true
+
 })
 export class InvoiceFormTicketEditComponent implements OnInit {
   @Input() ticket: InvoiceProfileTicket;

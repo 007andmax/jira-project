@@ -1,4 +1,4 @@
-﻿import { DropDownComponent } from './';
+﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
@@ -10,6 +10,7 @@ import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { InvoiceSettings } from './class/invoice-settings';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 
 @Component({
   standalone: true,
