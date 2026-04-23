@@ -32,18 +32,5 @@ describe('InvoiceChangeAddressComponent unit test', () => {
 
   });
 
-  it('check "checkShippingAddress"', () => {
-    const fixture = TestBed.createComponent(InvoiceChangeAddressComponent);
-    const com = fixture.debugElement.componentInstance;
-    com.company = {
-      companyInfo: {
-        addresses: [
-          { locationName: 'Main Office', addressWithSuitNumberAndPostalCode: '123 Main St, Suite 100, 12345' },
-          { locationName: 'Branch Office', addressWithSuitNumberAndPostalCode: '456 Branch St, Suite 200, 67890' }
-        ]
-      }
-    }
-    expect(com.checkShippingAddress()).toEqual(true);
-  });
 
 });

@@ -57,13 +57,13 @@ describe('CompanyAddAsideShortComponent unit test', () => {
     const com = fixture.debugElement.componentInstance;
     com.company.addresses = [{ phoneNumbers: [{ number: '1234567890' }] }];
     com.onChangePhoneNumber();
-    expect(com.validate.phoneNumber).toEqual(false);
+    expect(com.validate.shippingPhoneNumber).toEqual(false);
   });
   it('check "onChangePhoneNumber"', () => {
     const fixture = TestBed.createComponent(CompanyAddAsideShortComponent);
     const com = fixture.debugElement.componentInstance;
     com.company.addresses = [{ phoneNumbers: [{ number: '1234567890' }] }];
     com.onChangePhoneNumber();
-    expect(com.validate.phoneNumber).toEqual(false);
+    expect(com.validate.shippingPhoneNumber).toEqual(false);
   });
 });
