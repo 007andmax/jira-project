@@ -42,6 +42,7 @@ import { HardwareSummaryDeviceReportComponent } from '../reports/hardware-summar
 import { DeviceIpSummaryDeviceReportComponent } from '../reports/device-ip-summary-device-report/device-ip-summary-device-report.component';
 import { DetailedContractReportComponent } from '../reports/detailed-contract-report/detailed-contract-report.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { OverviewProductSalesReportComponent } from '../overview-report/overview-product-sales-report/overview-product-sales-report.component';
 
 @NgModule({
     declarations: [ItemReportComponent,
@@ -76,7 +77,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
         ReportDeviceProcessorramComponent,
         ReportDeviceDiskspaceComponent,
         ApplicationbycompanyReportComponent,
-        DetailedContractReportComponent
+        DetailedContractReportComponent,
+        OverviewProductSalesReportComponent
     ],
     imports: [
         CommonModule,
