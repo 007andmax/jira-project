@@ -1,15 +1,15 @@
 ﻿import { CommonModule } from '@angular/common';
-import { MatErrorComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
 import { Component } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 @Component({
   standalone: true,
   imports: [CommonModule, MatErrorComponent],
-    selector: 'contract-detail-drop-down',
-    templateUrl: './contract-detail-drop-down.component.html',
-    styleUrls: ['./contract-detail-drop-down.component.scss'],
-    standalone: true
+  selector: 'contract-detail-drop-down',
+  templateUrl: './contract-detail-drop-down.component.html',
+  styleUrls: ['./contract-detail-drop-down.component.scss'],
+
 })
 export class ContractDetailDropDownComponent extends DropDownComponent {
   contractTypeDictionary = {

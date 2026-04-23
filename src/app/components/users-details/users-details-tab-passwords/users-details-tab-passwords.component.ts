@@ -1,5 +1,4 @@
 ﻿import { CommonModule } from '@angular/common';
-import { UsersDetailsTabPasswordsItemComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
 import { Component, Input, OnInit } from '@angular/core';
 import { PasswordManagerListService } from '../../password-manager/services/password-manager-list.service';
 import { User } from '../../users/class/user';
@@ -7,15 +6,16 @@ import { PasswordManagerComponent } from '../../password-manager/password-manage
 import { PasswordDeviceUser } from '../../password-manager/class/password-device-user';
 import { REMOVE_RECORD } from 'src/app/const/confirm';
 import { PasswordRecord } from '../../password-manager/class/password-record';
+import { UsersDetailsTabPasswordsItemComponent } from './users-details-tab-passwords-item/users-details-tab-passwords-item.component';
 
 @Component({
   standalone: true,
   imports: [CommonModule, UsersDetailsTabPasswordsItemComponent],
-    selector: 'app-users-details-tab-passwords',
-    templateUrl: './users-details-tab-passwords.component.html',
-    styleUrls: ['./users-details-tab-passwords.component.scss'],
-    providers: [PasswordManagerListService],
-    standalone: true
+  selector: 'app-users-details-tab-passwords',
+  templateUrl: './users-details-tab-passwords.component.html',
+  styleUrls: ['./users-details-tab-passwords.component.scss'],
+  providers: [PasswordManagerListService],
+
 })
 export class UsersDetailsTabPasswordsComponent extends PasswordManagerComponent {
   @Input() user: User;

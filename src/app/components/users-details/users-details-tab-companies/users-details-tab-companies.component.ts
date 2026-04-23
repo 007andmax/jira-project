@@ -1,6 +1,4 @@
-﻿import { UsersDetailsTabCompaniesItemComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
-
-import { FormsModule } from '@angular/forms';
+﻿import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { UserProfile } from '../../users/class/user-profile';
@@ -8,6 +6,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { Subscription } from 'rxjs';
 import { UsersDetailsTabCompaniesAddComponent } from './users-details-tab-companies-add/users-details-tab-companies-add.component';
+import { UsersDetailsTabCompaniesItemComponent } from './users-details-tab-companies-item/users-details-tab-companies-item.component';
 
 @Component({
   standalone: true,

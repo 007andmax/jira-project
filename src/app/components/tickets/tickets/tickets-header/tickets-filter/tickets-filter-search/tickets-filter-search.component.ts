@@ -11,11 +11,11 @@ import { TicketsListService } from '../../../services/tickets-list.service';
 @Component({
   standalone: true,
   imports: [FormsModule],
-    selector: 'tickets-filter-search',
-    templateUrl: './tickets-filter-search.component.html',
-    styleUrls: ['./tickets-filter-search.component.scss'],
-    providers: [TicketsListService],
-    standalone: true
+  selector: 'tickets-filter-search',
+  templateUrl: './tickets-filter-search.component.html',
+  styleUrls: ['./tickets-filter-search.component.scss'],
+  providers: [TicketsListService],
+
 })
 export class TicketsFilterSearchComponent implements OnInit {
   page_number: number = 0;

@@ -5,10 +5,10 @@ import { UploadAreaComponent } from 'src/app/components/shared/upload-area/uploa
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'app-file-manager-add-file-drag-drop',
-    templateUrl: './file-manager-add-file-drag-drop.component.html',
-    styleUrls: ['./file-manager-add-file-drag-drop.component.scss'],
-    standalone: true
+  selector: 'app-file-manager-add-file-drag-drop',
+  templateUrl: './file-manager-add-file-drag-drop.component.html',
+  styleUrls: ['./file-manager-add-file-drag-drop.component.scss'],
+
 })
 export class FileManagementAddFileDragDropComponent extends UploadAreaComponent {
   isUploading: boolean = false;

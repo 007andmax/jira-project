@@ -1,5 +1,4 @@
 ﻿import { CommonModule } from '@angular/common';
-import { UsersDetailsTabMessagesFullBodyComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { UserListService } from '../../users/services/user-list.service';
 import { User } from '../../users/class/user';
@@ -8,15 +7,16 @@ import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from 'moment';
 import { UsersService } from 'src/app/services/users/users.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { UsersDetailsTabMessagesFullBodyComponent } from './users-details-tab-messages-full-body/users-details-tab-messages-full-body.component';
 
 @Component({
   standalone: true,
   imports: [CommonModule, UsersDetailsTabMessagesFullBodyComponent],
-    selector: 'app-users-details-tab-messages',
-    templateUrl: './users-details-tab-messages.component.html',
-    styleUrls: ['./users-details-tab-messages.component.scss'],
-    providers: [UserListService],
-    standalone: true
+  selector: 'app-users-details-tab-messages',
+  templateUrl: './users-details-tab-messages.component.html',
+  styleUrls: ['./users-details-tab-messages.component.scss'],
+  providers: [UserListService],
+
 })
 export class UsersDetailsTabMessagesComponent implements OnInit {
   @Input() user: User;

@@ -6,11 +6,11 @@ import { AssignedTicketUserSelectedItemComponent } from 'src/app/components/tick
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'app-add-user-to-company-selected-item',
-    templateUrl: './add-user-to-company-selected-item.component.html',
-    styleUrls: ['./add-user-to-company-selected-item.component.scss'],
-    providers: [TicketsListService],
-    standalone: true,
+  selector: 'app-add-user-to-company-selected-item',
+  templateUrl: './add-user-to-company-selected-item.component.html',
+  styleUrls: ['./add-user-to-company-selected-item.component.scss'],
+  providers: [TicketsListService],
+
 })
 export class AddUserToCompanySelectedItemComponent extends AssignedTicketUserSelectedItemComponent {
   @Output() onSelectUser = new EventEmitter<any>();

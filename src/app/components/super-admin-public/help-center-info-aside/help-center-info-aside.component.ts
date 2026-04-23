@@ -1,9 +1,9 @@
-﻿import { SuperAdminPublicListComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
-import { CommonModule } from '@angular/common';
+﻿import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { SuperAdminPublicStateService } from 'src/app/states/super-admin-public/super-admin-public-state.service';
+import { SuperAdminPublicListComponent } from '../super-admin-public-list/super-admin-public-list.component';
 
 @Component({
   standalone: true,

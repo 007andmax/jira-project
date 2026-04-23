@@ -11,11 +11,11 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 @Component({
   standalone: true,
   imports: [CommonModule],
-    selector: 'app-tasks-add-associate-tickets',
-    templateUrl: './tasks-add-associate-tickets.component.html',
-    styleUrls: ['./tasks-add-associate-tickets.component.scss'],
-    providers: [TicketsListService],
-    standalone: true
+  selector: 'app-tasks-add-associate-tickets',
+  templateUrl: './tasks-add-associate-tickets.component.html',
+  styleUrls: ['./tasks-add-associate-tickets.component.scss'],
+  providers: [TicketsListService],
+
 })
 export class TasksAddAssociateTicketsComponent {
   page_number: number = 0;

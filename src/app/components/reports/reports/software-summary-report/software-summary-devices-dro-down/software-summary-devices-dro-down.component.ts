@@ -1,15 +1,15 @@
 ﻿import { CommonModule } from '@angular/common';
-import { MatErrorComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
 import { Component, Input, OnInit } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 @Component({
   standalone: true,
   imports: [CommonModule, MatErrorComponent],
-    selector: 'software-summary-devices-dro-down',
-    templateUrl: './software-summary-devices-dro-down.component.html',
-    styleUrls: ['./software-summary-devices-dro-down.component.scss'],
-    standalone: true
+  selector: 'software-summary-devices-dro-down',
+  templateUrl: './software-summary-devices-dro-down.component.html',
+  styleUrls: ['./software-summary-devices-dro-down.component.scss'],
+
 })
 export class SoftwareSummaryDevicesDroDownComponent extends DropDownComponent {
 

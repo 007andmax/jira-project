@@ -1,6 +1,4 @@
 ﻿import { CommonModule } from '@angular/common';
-import { NetworkScanCredentialsAddComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
-import { NetworkScanCredentialsAsideItemComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { REMOVE_CREDENTIAL } from 'src/app/const/confirm';
@@ -12,15 +10,17 @@ import { PasswordRecordCategories } from '../../password-manager/class/password-
 import { PasswordManagerListService } from '../../password-manager/services/password-manager-list.service';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NetworkScanCredential } from '../class/network-scan-credential';
+import { NetworkScanCredentialsAddComponent } from '../network-scan-credentials-add/network-scan-credentials-add.component';
+import { NetworkScanCredentialsAsideItemComponent } from './network-scan-credentials-aside-item/network-scan-credentials-aside-item.component';
 
 @Component({
   standalone: true,
   imports: [CommonModule, NetworkScanCredentialsAddComponent, NetworkScanCredentialsAsideItemComponent],
-    selector: 'app-network-scan-credentials-aside',
-    templateUrl: './network-scan-credentials-aside.component.html',
-    styleUrls: ['./network-scan-credentials-aside.component.scss'],
-    providers: [PasswordManagerListService],
-    standalone: true
+  selector: 'app-network-scan-credentials-aside',
+  templateUrl: './network-scan-credentials-aside.component.html',
+  styleUrls: ['./network-scan-credentials-aside.component.scss'],
+  providers: [PasswordManagerListService],
+
 })
 export class NetworkScanCredentialsAsideComponent implements OnInit, OnDestroy {
   open: boolean = false;

@@ -1,8 +1,4 @@
 ﻿import { CommonModule } from '@angular/common';
-import { MatChipComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
-import { MatChipListComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
-import { MatErrorComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
-import { MatFormFieldComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
 import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { UntypedFormControl } from '@angular/forms';
@@ -11,15 +7,19 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { Company } from 'src/app/interfaces/company/company';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { MatChipListComponent } from '../../mat-chip-list/mat-chip-list.component';
+import { MatChipComponent } from '../../mat-chip/mat-chip.component';
+import { MatErrorComponent } from '../../mat-error/mat-error.component';
+import { MatFormFieldComponent } from '../../mat-form-field/mat-form-field.component';
 
 @Component({
   standalone: true,
   imports: [CommonModule, MatChipComponent, MatChipListComponent, MatErrorComponent, MatFormFieldComponent],
-    selector: 'app-draft-email-recipients',
-    templateUrl: './draft-email-recipients.component.html',
-    styleUrls: ['./draft-email-recipients.component.scss'],
-    providers: [TicketsListService],
-    standalone: true
+  selector: 'app-draft-email-recipients',
+  templateUrl: './draft-email-recipients.component.html',
+  styleUrls: ['./draft-email-recipients.component.scss'],
+  providers: [TicketsListService],
+
 })
 export class DraftEmailRecipientsComponent implements OnInit {
   reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;

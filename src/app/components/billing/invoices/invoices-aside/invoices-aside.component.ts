@@ -1,10 +1,6 @@
 ﻿import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DatePickerComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
-import { DropDownComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
-import { MatErrorComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
-import { MultiCompanyDropDownComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
-import { PreloaderTicketComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
+
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild, OnDestroy } from '@angular/core';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
@@ -20,15 +16,20 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.service';
 import { PaymentsCardsComponent } from '../../payments/payments-cards/payments-cards.component';
 import { IntegrationsStateService } from 'src/app/states/integrations/integrations-state.service';
+import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { MultiCompanyDropDownComponent } from 'src/app/components/shared/multi-company-drop-down/multi-company-drop-down.component';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
 
 
 @Component({
   standalone: true,
   imports: [CommonModule, FormsModule, DatePickerComponent, DropDownComponent, MatErrorComponent, MultiCompanyDropDownComponent, PreloaderTicketComponent],
-    selector: 'app-invoices-aside',
-    templateUrl: './invoices-aside.component.html',
-    styleUrls: ['./invoices-aside.component.scss'],
-    standalone: true
+  selector: 'app-invoices-aside',
+  templateUrl: './invoices-aside.component.html',
+  styleUrls: ['./invoices-aside.component.scss'],
+
 })
 export class InvoicesAsideComponent implements OnInit, OnDestroy {
   companies = [];

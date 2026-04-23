@@ -1,5 +1,4 @@
 ﻿import { CommonModule } from '@angular/common';
-import { UsersDetailsTabTicketsItemComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { User } from '../../users/class/user';
@@ -13,15 +12,16 @@ import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { TicketStateService } from '../../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
+import { UsersDetailsTabTicketsItemComponent } from './users-details-tab-tickets-item/users-details-tab-tickets-item.component';
 
 @Component({
   standalone: true,
   imports: [CommonModule, UsersDetailsTabTicketsItemComponent],
-    selector: 'app-users-details-tab-tickets',
-    templateUrl: './users-details-tab-tickets.component.html',
-    styleUrls: ['./users-details-tab-tickets.component.scss'],
-    providers: [TicketsListService],
-    standalone: true
+  selector: 'app-users-details-tab-tickets',
+  templateUrl: './users-details-tab-tickets.component.html',
+  styleUrls: ['./users-details-tab-tickets.component.scss'],
+  providers: [TicketsListService],
+
 })
 export class UsersDetailsTabTicketsComponent implements OnInit {
   user: User;

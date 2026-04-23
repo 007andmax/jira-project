@@ -1,21 +1,21 @@
 ﻿import { CommonModule } from '@angular/common';
-import { DynamicTooltipComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
-import { MatChipComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
-import { MatChipListComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
-import { MatFormFieldComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
 import { Component, Input } from '@angular/core';
 import { TicketsFilterDropDownComponent } from '../tickets-filter-drop-down/tickets-filter-drop-down.component';
 import { TicketsListService } from '../../../services/tickets-list.service';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatChipListComponent } from 'src/app/components/shared/mat-chip-list/mat-chip-list.component';
+import { MatChipComponent } from 'src/app/components/shared/mat-chip/mat-chip.component';
+import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
 
 @Component({
   standalone: true,
   imports: [CommonModule, DynamicTooltipComponent, MatChipComponent, MatChipListComponent, MatFormFieldComponent],
-    selector: 'tickets-filter-users-drop-down',
-    templateUrl: './tickets-filter-users-drop-down.component.html',
-    styleUrls: ['./tickets-filter-users-drop-down.component.scss'],
-    providers: [CompanyTagsListService, TicketsListService],
-    standalone: true
+  selector: 'tickets-filter-users-drop-down',
+  templateUrl: './tickets-filter-users-drop-down.component.html',
+  styleUrls: ['./tickets-filter-users-drop-down.component.scss'],
+  providers: [CompanyTagsListService, TicketsListService],
+
 })
 export class TicketsFilterUsersDropDownComponent extends TicketsFilterDropDownComponent {
   @Input() reducerItem: Function = (item) => `${item.firstName} ${item.lastName}`;

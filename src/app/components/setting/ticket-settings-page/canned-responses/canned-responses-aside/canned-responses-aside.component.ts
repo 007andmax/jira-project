@@ -1,5 +1,4 @@
-﻿import { MatErrorComponent } from './src/app/services/modal/modal-session-screen/modal-session-screen.component.ts';
-import { FormsModule } from '@angular/forms';
+﻿import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
@@ -8,6 +7,7 @@ import { NoteStateService } from 'src/app/states/note/note-state.service';
 import { NoteTemplate } from '../class/note-template';
 import { NoteTemplateValidate } from '../class/note-template-validate';
 import { Subscription } from 'rxjs';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 @Component({
   standalone: true,
