@@ -20,6 +20,12 @@ export class QuoteAsideAddChangeAddressComponent implements OnInit {
   ngDoCheck() {
     this.company = this.companiesStateService.getCompanies().find(item => item.id == this.quoteCompany.id);
   }
+  getShippingAddress() {
+    return this.company.companyInfo.addresses.find(item => item.isPrimary);
+  }
+  getBillingAddress() {
+    return this.company.companyInfo.addresses.find(item => !item.isPrimary);
+  }
   selectAddress(data) {
     this.onSelectAddress.emit(data)
   }

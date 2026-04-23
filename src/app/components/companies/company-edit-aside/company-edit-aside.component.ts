@@ -158,12 +158,12 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.invokeEvent(place, event, index);
     });
   }
-  onChangeBillingLocationName(data) {
-    if (this.company.addresses[1].sameAsBilling) {
+  onChangeShippingLocationName(data) {
+    if (this.company.addresses[1].sameAsShipping) {
       this.company.addresses[1].locationName = JSON.parse(JSON.stringify(this.company.addresses[0].locationName));
-      this.validate.resetShippingAddress()
+      this.validate.resetBillindAddress();
     }
-    this.validate.resetBillindAddress();
+    this.validate.resetShippingAddress()
   }
   invokeEvent(place: any, event, index) {
     this.company.addresses[index].locationLat = place.geometry.location.lat();
@@ -179,7 +179,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       }
       this.cd.detectChanges();
     })
-    if (this.company.addresses[1].sameAsBilling && index == 0) {
+    if (this.company.addresses[1].sameAsShipping && index == 0) {
       this.company.addresses[1].locationLat = JSON.parse(JSON.stringify(place.geometry.location.lat()));
       this.company.addresses[1].locationLng = JSON.parse(JSON.stringify(place.geometry.location.lng()));
       this.company.addresses[1].address = JSON.parse(JSON.stringify(event.target.value));
@@ -189,20 +189,20 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     }
   }
-  onChangeBillingSuiteNo(data) {
-    if (this.company.addresses[1].sameAsBilling) this.company.addresses[1].suiteNumber = JSON.parse(JSON.stringify(this.company.addresses[0].suiteNumber));
+  onChangeShippingSuiteNo(data) {
+    if (this.company.addresses[1].sameAsShipping) this.company.addresses[1].suiteNumber = JSON.parse(JSON.stringify(this.company.addresses[0].suiteNumber));
   }
-  onChangeBillingZip(data) {
-    if (this.company.addresses[1].sameAsBilling) this.company.addresses[1].postalCode = JSON.parse(JSON.stringify(this.company.addresses[0].postalCode));
+  onChangeShippingZip(data) {
+    if (this.company.addresses[1].sameAsShipping) this.company.addresses[1].postalCode = JSON.parse(JSON.stringify(this.company.addresses[0].postalCode));
 
   }
-  public onChangeShippingPhoneNumber() {
-    this.validate.checkValidShippingPhoneNumber(this.company.addresses[1].phoneNumbers[0].number);
+  public onChangeBillingPhoneNumber() {
+    this.validate.checkValidBillingPhoneNumber(this.company.addresses[1].phoneNumbers[0].number);
   }
   public onCheckGoogleAutoComplete(event, index) {
     if (event.target.getAttribute("location-is-init") == "false") this.getPlaceAutocomplete(event, index);
   }
-  onCheckShippingAddress() {
+  onCheckBillingAddress() {
     if (this.company.addresses[1].address.length == 0) this.company.addresses[1].addressWithSuitNumberAndPostalCode = "";
   }
   close() {
@@ -258,11 +258,11 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
     let indexServiceType = this.serviceTypes.findIndex(item => item.name === this.company.serviceType);
     if (indexServiceType > -1) this.onSelectServiceTypes(this.serviceTypes[indexServiceType]);
   }
-  onSameAsBilling(event) {
+  onSameAsShipping(event) {
     if (event.target.checked) {
-      this.company.addresses[1].initSameAsBilling(this.company.addresses[0]);
-      this.validate.resetShippingAddress();
-      this.onChangeShippingPhoneNumber();
+      this.company.addresses[1].initSameAsShipping(this.company.addresses[0]);
+      this.validate.resetBillindAddress();
+      this.onChangeBillingPhoneNumber();
     }
   }
   public onSelectCompanyTypes(type) {
@@ -346,7 +346,7 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
           this.validate.resetName();
           this.validate.resetNameIsExist();
           this.company.addresses[0].locationName = JSON.parse(JSON.stringify(this.company.name));
-          if (this.company.addresses[1].sameAsBilling) {
+          if (this.company.addresses[1].sameAsShipping) {
             this.company.addresses[1].locationName = JSON.parse(JSON.stringify(this.company.name));
             this.validate.resetShippingAddress();
           }
@@ -360,12 +360,12 @@ export class CompanyEditAsideComponent implements OnInit, OnDestroy {
       this.validate.checkValidName(this.company.name);
     }
   }
-  public onChangePhoneNumber() {
-    if (this.company.addresses[1].sameAsBilling) {
+  public onChangeShippingPhoneNumber() {
+    if (this.company.addresses[1].sameAsShipping) {
       this.company.addresses[1].phoneNumbers[0].number = JSON.parse(JSON.stringify(this.company.addresses[0].phoneNumbers[0].number));
-      this.onChangeShippingPhoneNumber();
+      this.onChangeBillingPhoneNumber();
     }
-    this.validate.checkValidPhoneNumber(this.company.addresses[0].phoneNumbers[0].number);
+    this.validate.checkValidShippingPhoneNumber(this.company.addresses[0].phoneNumbers[0].number);
   }
   public onChangeFirstName() {
     this.validate.checkValidFirstname(this.company.contacts[0].firstName);

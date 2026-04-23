@@ -100,34 +100,6 @@
                             [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"
                         ></div>
                     </div>
-                    <div *ngIf="!isExistMultipleCompanies">
-                        <div class="qt-fs-10 qt-mt-25 qt-lh-12 qt-fw-600  qt-mb-8 qt-text-upper qt-color-gray-400">Received From</div>
-                        <div
-                            class="qt-fs-13 qt-fw-600 qt-color-gray-900 qt-lh-154"
-                            [textContent]="company.name"
-                        ></div>
-                        <div
-                            class="qt-fs-13 qt-color-dark-light qt-lh-154"
-                            *ngIf="company.companyInfo.contacts"
-                            [textContent]="company.companyInfo.contacts[0].firstName + ' ' +
-              company.companyInfo.contacts[0].lastName"
-                        ></div>
-                        <div
-                            class="qt-fs-13 qt-color-gray-600 qt-lh-154"
-                            [textContent]="company.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode"
-                        ></div>
-                        <div
-                            class="qt-fs-13 qt-color-dark-light qt-lh-154"
-                            *ngIf="company.companyInfo.contacts"
-                            [textContent]="company.companyInfo.contacts[0].primaryEmail"
-                        ></div>
-                        <div
-                            class="qt-fs-13 qt-color-dark-light qt-lh-154"
-                            *ngIf="company.companyInfo.contacts && company.companyInfo.contacts[0].phoneNumbers && company.companyInfo.contacts[0].phoneNumbers.length > 0"
-                        >
-                            <preview-phone-mask [number]="company.companyInfo.contacts[0].phoneNumbers[0].number"></preview-phone-mask>
-                        </div>
-                    </div>
                 </div>
                 <div class="qt-pl-40 qt-w100">
                     <div class="payment-info-lines qt-mb-16">

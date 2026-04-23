@@ -57,7 +57,7 @@ export class CompanyProfile {
     public initShippingAdress() {
         let address: CompanyProfileAddress = new CompanyProfileAddress();
         address.fullVersion();
-        address.sameAsBilling = false;
+        address.sameAsShipping = false;
         address.isPrimary = false;
         this.addresses.push(address);
     }
@@ -79,7 +79,7 @@ export class CompanyProfile {
             address.fullVersion();
             this.addresses.push(address);
         }
-        this.addresses[0].sameAsBilling = undefined;
+        this.addresses[0].sameAsShipping = undefined;
         this.agentLinkToEmail = company.agentLinkToEmail;
         this.clientIndustry = company.clientIndustry;
         this.clientType = company.clientType;

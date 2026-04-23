@@ -9,9 +9,9 @@ export class CompanyValdiate {
     domainValid: boolean = true;
     firstName: boolean = true;
     primaryContactEmail: boolean = true;
-    phoneNumber: boolean = true;
-    primaryPhoneNumber: boolean = true;
     shippingPhoneNumber: boolean = true;
+    primaryPhoneNumber: boolean = true;
+    billingPhoneNumber: boolean = true;
     billindAddress: boolean = true;
     shippingAddress: boolean = true;
     user: boolean = true;
@@ -114,11 +114,11 @@ export class CompanyValdiate {
     public getPrimaryContactEmail() {
         return this.primaryContactEmail;
     }
-    public getPhoneNumber() {
-        return this.phoneNumber;
-    }
     public getShippingPhoneNumber() {
         return this.shippingPhoneNumber;
+    }
+    public getBillingPhoneNumber() {
+        return this.billingPhoneNumber;
     }
     public checkValidName(name) {
         if (!name || name.length === 0) {
@@ -142,15 +142,15 @@ export class CompanyValdiate {
             this.primaryPhoneNumber = true;
         }
     }
-    public checkValidShippingPhoneNumber(number) {
+    public checkValidBillingPhoneNumber(number) {
         if (number.length > 0) {
             if (number.length < 14) {
-                this.shippingPhoneNumber = false;
+                this.billingPhoneNumber = false;
             } else {
-                this.shippingPhoneNumber = true;
+                this.billingPhoneNumber = true;
             }
         } else {
-            this.shippingPhoneNumber = true;
+            this.billingPhoneNumber = true;
         }
     }
     public checkValidDomain(domain) {
@@ -181,11 +181,11 @@ export class CompanyValdiate {
             this.firstName = true;
         }
     }
-    public checkValidPhoneNumber(number) {
+    public checkValidShippingPhoneNumber(number) {
         if (!number || number.length < 14) {
-            this.phoneNumber = false;
+            this.shippingPhoneNumber = false;
         } else {
-            this.phoneNumber = true;
+            this.shippingPhoneNumber = true;
         }
     }
     public isValidate(company: CompanyProfile) {
@@ -194,13 +194,13 @@ export class CompanyValdiate {
         if (company.clientType === "") this.type = false;
         if (company.isUseSelectedUser && !company.contacts[0].id) this.user = false;
         if (!company.isUseSelectedUser && (!company.contacts[0].primaryEmail || !company.contacts[0].primaryEmail.match(this.reEmail))) this.primaryContactEmail = false;
-        if (!company.addresses[0].phoneNumbers[0].number || company.addresses[0].phoneNumbers[0].number.length < 14) this.phoneNumber = false;
-        if (company.addresses.length > 1 && (!company.addresses[1].phoneNumbers[0].number || company.addresses[1].phoneNumbers[0].number.length < 14)) this.shippingPhoneNumber = false;
+        if (!company.addresses[0].phoneNumbers[0].number || company.addresses[0].phoneNumbers[0].number.length < 14) this.shippingPhoneNumber = false;
+        if (company.addresses.length > 1 && (!company.addresses[1].phoneNumbers[0].number || company.addresses[1].phoneNumbers[0].number.length < 14)) this.billingPhoneNumber = false;
         if (!company.domain) this.domain = false;
         if (company.domain && !company.domain.match(this.reDomain)) this.domainValid = false;
         if (company.addresses.length > 0 && company.addresses[0].locationName != undefined && company.addresses[0].locationName.length == 0) this.billindAddress = false;
         if (company.addresses.length > 1 && company.addresses[1].locationName != undefined && company.addresses[1].locationName.length == 0) this.shippingAddress = false;
-        return this.name && this.type && this.primaryPhoneNumber && this.primaryContactEmail && this.phoneNumber && this.firstName && this.domain && this.domainValid && !this.domainIsExist && this.shippingPhoneNumber && this.billindAddress && this.user && this.existPrimaryContactEmail && !this.isCheckingEmail && this.shippingAddress && !this.nameIsExist && !this.isChangingName;
+        return this.name && this.type && this.primaryPhoneNumber && this.primaryContactEmail && this.shippingPhoneNumber && this.firstName && this.domain && this.domainValid && !this.domainIsExist && this.billingPhoneNumber && this.billindAddress && this.user && this.existPrimaryContactEmail && !this.isCheckingEmail && this.shippingAddress && !this.nameIsExist && !this.isChangingName;
     }
 
 

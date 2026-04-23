@@ -115,13 +115,13 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       this.paymentMethod.selectItemWithOutChanges(this.paymentMethods.find(item => item.value == this.companiesStateService.getCurrentCompany().defaultPaymentMethod));
       this.company.defaultPaymentMethod = JSON.parse(JSON.stringify(this.companiesStateService.getCurrentCompany().defaultPaymentMethod));
     }
-    this.company.addresses[1].sameAsBilling = true;
+    this.company.addresses[1].sameAsShipping = true;
     this.company.addresses[1].isPrimary = false;
     this.company.addresses[1].phoneNumbers[0].number = JSON.parse(JSON.stringify(this.company.addresses[0].phoneNumbers[0].number));
     this.company.addresses[1].locationName = JSON.parse(JSON.stringify(this.company.name));
     if (this.company.contacts[0].customerCompaniesInfo[0].jobTitleDto) this.selectedJobTitle = this.jobTitleList.find(item => item.id === this.company.contacts[0].customerCompaniesInfo[0].jobTitleDto.id);
 
-    this.validate.resetShippingAddress();
+    this.validate.resetBillindAddress();
     this.onCroppImage();
     if (this.companyTimeZoneState.getTimeZone().length > 0) this.setTimeZone(this.companyTimeZoneState.getTimeZone());
     if (this.companyTimeZoneState.getTimeZone().length == 0) this.companyTimeZoneState.onGetTimeZone();
@@ -165,19 +165,20 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       }
     })
   }
-  onChangeBillingLocationName(data) {
-    if (this.company.addresses[1].sameAsBilling) {
+  onChangeShippingLocationName(data) {
+    if (this.company.addresses[1].sameAsShipping) {
       this.company.addresses[1].locationName = JSON.parse(JSON.stringify(this.company.addresses[0].locationName));
-      this.validate.resetShippingAddress()
+      this.validate.resetBillindAddress();
+
     }
-    this.validate.resetBillindAddress();
+    this.validate.resetShippingAddress()
   }
 
-  onChangeBillingSuiteNo(data) {
-    if (this.company.addresses[1].sameAsBilling) this.company.addresses[1].suiteNumber = JSON.parse(JSON.stringify(this.company.addresses[0].suiteNumber));
+  onChangeShippingSuiteNo(data) {
+    if (this.company.addresses[1].sameAsShipping) this.company.addresses[1].suiteNumber = JSON.parse(JSON.stringify(this.company.addresses[0].suiteNumber));
   }
-  onChangeBillingZip(data) {
-    if (this.company.addresses[1].sameAsBilling) this.company.addresses[1].postalCode = JSON.parse(JSON.stringify(this.company.addresses[0].postalCode));
+  onChangeShippingZip(data) {
+    if (this.company.addresses[1].sameAsShipping) this.company.addresses[1].postalCode = JSON.parse(JSON.stringify(this.company.addresses[0].postalCode));
 
   }
   addThirdParty() {
@@ -189,13 +190,13 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
   removeThirdParty(i) {
     this.company.thirdPartyApps.splice(i, 1);
   }
-  onSameAsBilling(event) {
+  onSameAsShipping(event) {
     if (event.target.checked) {
       this.company.addresses[1] = new CompanyProfileAddress(JSON.parse(JSON.stringify(this.company.addresses[0])));
-      this.company.addresses[1].sameAsBilling = true;
+      this.company.addresses[1].sameAsShipping = true;
       this.company.addresses[1].isPrimary = false;
-      this.validate.resetShippingAddress();
-      this.onChangeShippingPhoneNumber();
+      this.validate.resetBillindAddress();
+      this.onChangeBillingPhoneNumber();
     }
   }
   removeLogo() {
@@ -219,11 +220,11 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
           this.validate.resetName();
           this.validate.resetNameIsExist();
           this.company.addresses[0].locationName = JSON.parse(JSON.stringify(this.company.name));
-          if (this.company.addresses[1].sameAsBilling) {
+          if (this.company.addresses[1].sameAsShipping) {
             this.company.addresses[1].locationName = JSON.parse(JSON.stringify(this.company.name));
-            this.validate.resetShippingAddress();
+            this.validate.resetBillindAddress();
           }
-          this.validate.resetBillindAddress();
+          this.validate.resetShippingAddress();
         } else {
           this.validate.setNameIsExist();
         }
@@ -311,7 +312,7 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       }
       this.cd.detectChanges();
     })
-    if (this.company.addresses[1].sameAsBilling && index == 0) {
+    if (this.company.addresses[1].sameAsShipping && index == 0) {
       this.company.addresses[1].locationLat = JSON.parse(JSON.stringify(place.geometry.location.lat()));
       this.company.addresses[1].locationLng = JSON.parse(JSON.stringify(place.geometry.location.lng()));
       this.company.addresses[1].address = JSON.parse(JSON.stringify(event.target.value));
@@ -327,15 +328,15 @@ export class CompanyAddAsideFullComponent implements OnInit, OnDestroy {
       return { id: item };
     })
   }
-  public onChangePhoneNumber() {
-    if (this.company.addresses[1].sameAsBilling) {
-      this.company.addresses[1].phoneNumbers[0].number = JSON.parse(JSON.stringify(this.company.addresses[0].phoneNumbers[0].number));
-      this.onChangeShippingPhoneNumber();
-    }
-    this.validate.checkValidPhoneNumber(this.company.addresses[0].phoneNumbers[0].number);
-  }
   public onChangeShippingPhoneNumber() {
-    this.validate.checkValidShippingPhoneNumber(this.company.addresses[1].phoneNumbers[0].number);
+    if (this.company.addresses[1].sameAsShipping) {
+      this.company.addresses[1].phoneNumbers[0].number = JSON.parse(JSON.stringify(this.company.addresses[0].phoneNumbers[0].number));
+      this.onChangeBillingPhoneNumber();
+    }
+    this.validate.checkValidShippingPhoneNumber(this.company.addresses[0].phoneNumbers[0].number);
+  }
+  public onChangeBillingPhoneNumber() {
+    this.validate.checkValidBillingPhoneNumber(this.company.addresses[1].phoneNumbers[0].number);
   }
   public onChangeFirstName() {
     this.validate.checkValidFirstname(this.company.contacts[0].firstName);

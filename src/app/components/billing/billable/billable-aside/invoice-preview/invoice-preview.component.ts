@@ -24,6 +24,13 @@ export class InvoicePreviewComponent implements OnInit {
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
   }
+
+  getShippingAddress() {
+    return this.company.addresses.find(item => item.isPrimary);
+  }
+  getBillingAddress() {
+    return this.company.addresses.find(item => !item.isPrimary);
+  }
   getCurrentCompanyPhone() {
     return (this.currentCompany.addresses[0].phoneNumbers.length > 0) ? this.currentCompany.addresses[0].phoneNumbers[0].number : ''
   }

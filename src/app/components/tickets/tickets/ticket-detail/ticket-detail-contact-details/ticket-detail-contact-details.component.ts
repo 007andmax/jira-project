@@ -45,6 +45,12 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnCompanies);
   }
+  getShippingAddress() {
+    return this.company.companyInfo.addresses.find(item => item.isPrimary);
+  }
+  getBillingAddress() {
+    return this.company.companyInfo.addresses.find(item => !item.isPrimary);
+  }
   public resetCompany() {
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.company.id);
     this.getDataCompany();

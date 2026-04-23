@@ -158,6 +158,12 @@ export class CompanyDashDetailComponent implements OnInit, OnDestroy {
         1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
     }
   }
+  getShippingAddress() {
+    return this.companyDetailing?.addresses.find(item => item.isPrimary);
+  }
+  getBillingAddress() {
+    return this.companyDetailing?.addresses.find(item => !item.isPrimary);
+  }
   public getJobTitle(user) {
     let find = this.jobTitleList.find(item => item.id === user.jobTitleId);
     return (find) ? find.name : "";
