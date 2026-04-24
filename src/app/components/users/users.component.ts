@@ -53,7 +53,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   toggleFilter: boolean = false;
   showPendingPreloader: boolean = false;
   container = document.body.querySelector(".main-container");
-  sortBy: TicketSortBy = new TicketSortBy('NAME', 'asc');
+  sortBy: TicketSortBy = new TicketSortBy('NAME', 'ASC');
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private confirmStateService: ConfirmStateService,
@@ -304,12 +304,9 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
   public onFilter(field) {
     this.sortBy.sortBy = field;
-    if (this.sortBy.sortDirection === 'desc') {
-      this.sortBy.sortDirection = 'asc';
-    } else {
-      this.sortBy.sortDirection = 'desc';
-    }
     this.filter.setSortBy(field);
+    this.sortBy.sortDirection = (this.filter.sortBy ? this.filter.sortBy : 'DESC').includes('DESC') ? 'DESC' : 'ASC';
+
     this.filter.page = 0;
     this.userListService.setBlockList(false);
     this.users = [];

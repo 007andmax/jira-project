@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-overview-report',
@@ -10,7 +10,7 @@ export class OverviewReportComponent implements OnInit {
   @Input() styles = [];
   @Input() headers = [];
   @Input() list = [];
-  constructor() { }
+  constructor(public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
   }

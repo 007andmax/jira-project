@@ -3,6 +3,7 @@ import { Tag } from "src/app/interfaces/tag/tag";
 import { CompanyFilterTop } from "./company-filter-top";
 import { CompanyDeviceCount } from "./company-device-count";
 import { CompanyItem } from "./company-item";
+import { TicketSortBy } from "../../tickets/tickets/class/ticket-sort-by";
 
 export class CompanyFilter {
     clientType: string;
@@ -23,6 +24,7 @@ export class CompanyFilter {
         new CompanyFilterTop('devices', ''),
         new CompanyFilterTop('users', '')];
     search: string;
+    sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
     constructor() {
 
     }
@@ -166,6 +168,8 @@ export class CompanyFilter {
                     list.reverse();
                 }
             }
+            this.sortBy.sortDirection = this.filter[index].filter;
+            console.log("this.filter[index].filter", this.filter[index].filter);;
         }
     }
     private clearFilter() {

@@ -46,7 +46,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   devicesCounts: Array<CompanyDeviceCount> = [];
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   container = document.body.querySelector(".main-container");
-  sortBy: TicketSortBy = new TicketSortBy('name', 'asc');
+
   constructor(private companiesService: CompaniesService,
     private companiesList: CompaniesListService,
     private companiesStateService: CompaniesStateService,
@@ -172,13 +172,9 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   onFilter(data) {
-    this.sortBy.sortBy = data;
-    if (this.sortBy.sortDirection === 'desc') {
-      this.sortBy.sortDirection = 'asc';
-    } else {
-      this.sortBy.sortDirection = 'desc';
-    }
+    this.companyFilter.sortBy.sortBy = data;
     this.companyFilter.onFilter(data, this.reqCompaniesList);
+    console.log("sortBy.sortDirection", this.companyFilter.sortBy.sortDirection);
     this.page_number = 0;
     this.companiesList.setBlockList(false);
     this.CompaniesList = [];

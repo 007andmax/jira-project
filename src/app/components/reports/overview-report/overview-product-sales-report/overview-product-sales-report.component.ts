@@ -10,7 +10,7 @@ import { CompanyFilterTop } from 'src/app/components/companies/class/company-fil
 })
 export class OverviewProductSalesReportComponent extends OverviewReportComponent {
   @Input() type!: string;
-  sortBy: TicketSortBy = new TicketSortBy('Date', 'asc');
+  sortBy: TicketSortBy = new TicketSortBy('Date', 'ASC');
   filter: Array<CompanyFilterTop> = [
     new CompanyFilterTop('Date', 'ASC'),
     new CompanyFilterTop('Client', ''),
@@ -25,12 +25,8 @@ export class OverviewProductSalesReportComponent extends OverviewReportComponent
 
   onFilter(data) {
     this.sortBy.sortBy = data;
-    if (this.sortBy.sortDirection === 'desc') {
-      this.sortBy.sortDirection = 'asc';
-    } else {
-      this.sortBy.sortDirection = 'desc';
-    }
     let index = this.filter.findIndex(item => item.field === data);
+    console.log("onFilter", data, index, this.filter);
     if (index > -1) {
       let sort = this.filter[index].filter;
       if (data === 'Date') {
@@ -56,6 +52,7 @@ export class OverviewProductSalesReportComponent extends OverviewReportComponent
       if (data === 'MFG#') {
         this.clearFilter();
         if (sort === '' || sort === 'DESC') {
+          console.log("sort");
           this.filter[index].filter = 'ASC';
           this.onFilterMFG(this.list);
         } else {
@@ -123,7 +120,9 @@ export class OverviewProductSalesReportComponent extends OverviewReportComponent
           this.list.reverse();
         }
       }
+      this.sortBy.sortDirection = JSON.parse(JSON.stringify(this.filter[index].filter));
     }
+    this.cd.detectChanges();
   }
   private onFilterDate(list) {
     list.sort((a, b) => (a[0].toLowerCase() > b[0].toLowerCase()) ?
@@ -132,14 +131,15 @@ export class OverviewProductSalesReportComponent extends OverviewReportComponent
   private onFilterClient(list) {
     list.sort((a, b) => (a[1].toLowerCase() > b[1].toLowerCase()) ?
       1 : ((b[1].toLowerCase() > a[1].toLowerCase()) ? -1 : 0));
+    console.log("list", list);
   }
   private onFilterMFG(list) {
     if (this.type === 'SUMMARY') {
-      list.sort((a, b) => (a[2].toLowerCase() > b[2].toLowerCase()) ?
-        1 : ((b[2].toLowerCase() > a[2].toLowerCase()) ? -1 : 0));
+      list.sort((a, b) => ((a[2] ? a[2] : '').toLowerCase() > (b[2] ? b[2] : '').toLowerCase()) ?
+        1 : ((b[2] ? b[2] : '').toLowerCase() > (a[2] ? a[2] : '').toLowerCase()) ? -1 : 0);
     } else {
-      list.sort((a, b) => (a[1].toLowerCase() > b[1].toLowerCase()) ?
-        1 : ((b[1].toLowerCase() > a[1].toLowerCase()) ? -1 : 0));
+      list.sort((a, b) => ((a[1] ? a[1] : '').toLowerCase() > (b[1] ? b[1] : '').toLowerCase()) ?
+        1 : ((b[1] ? b[1] : '').toLowerCase() > (a[1] ? a[1] : '').toLowerCase()) ? -1 : 0);
     }
   }
   private onFilterDescription(list) {
@@ -162,11 +162,11 @@ export class OverviewProductSalesReportComponent extends OverviewReportComponent
   }
   private onFilterInvoiceNumber(list) {
     if (this.type === 'SUMMARY') {
-      list.sort((a, b) => (a[5].toLowerCase() > b[5].toLowerCase()) ?
-        1 : ((b[5].toLowerCase() > a[5].toLowerCase()) ? -1 : 0));
+      list.sort((a, b) => ((a[5] ? a[5] : '').toLowerCase() > (b[5] ? b[5] : '').toLowerCase()) ?
+        1 : ((b[5] ? b[5] : '').toLowerCase() > (a[5] ? a[5] : '').toLowerCase()) ? -1 : 0);
     } else {
-      list.sort((a, b) => (a[4].toLowerCase() > b[4].toLowerCase()) ?
-        1 : ((b[4].toLowerCase() > a[4].toLowerCase()) ? -1 : 0));
+      list.sort((a, b) => ((a[4] ? a[4] : '').toLowerCase() > (b[4] ? b[4] : '').toLowerCase()) ?
+        1 : ((b[4] ? b[4] : '').toLowerCase() > (a[4] ? a[4] : '').toLowerCase()) ? -1 : 0);
     }
   }
   private onFilterPurchaseCost(list) {
