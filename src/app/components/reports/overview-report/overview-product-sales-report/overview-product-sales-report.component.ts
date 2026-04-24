@@ -10,9 +10,9 @@ import { CompanyFilterTop } from 'src/app/components/companies/class/company-fil
 })
 export class OverviewProductSalesReportComponent extends OverviewReportComponent {
   @Input() type!: string;
-  sortBy: TicketSortBy = new TicketSortBy('Date', 'ASC');
+  sortBy: TicketSortBy = new TicketSortBy('Date', 'DESC');
   filter: Array<CompanyFilterTop> = [
-    new CompanyFilterTop('Date', 'ASC'),
+    new CompanyFilterTop('Date', 'DESC'),
     new CompanyFilterTop('Client', ''),
     new CompanyFilterTop('MFG#', ''),
     new CompanyFilterTop('Description', ''),
@@ -171,29 +171,29 @@ export class OverviewProductSalesReportComponent extends OverviewReportComponent
   }
   private onFilterPurchaseCost(list) {
     if (this.type === 'SUMMARY') {
-      list.sort((a, b) => (a[6].toLowerCase() > b[6].toLowerCase()) ?
-        1 : ((b[6].toLowerCase() > a[6].toLowerCase()) ? -1 : 0));
+      list.sort((a, b) => (Number(a[6].replace("$", "")) > Number(b[6].replace("$", ""))) ?
+        1 : ((Number(b[6].replace("$", "")) > Number(a[6].replace("$", ""))) ? -1 : 0));
     } else {
-      list.sort((a, b) => (a[5].toLowerCase() > b[5].toLowerCase()) ?
-        1 : ((b[5].toLowerCase() > a[5].toLowerCase()) ? -1 : 0));
+      list.sort((a, b) => (Number(a[5].replace("$", "")) > Number(b[5].replace("$", ""))) ?
+        1 : ((Number(b[5].replace("$", "")) > Number(a[5].replace("$", ""))) ? -1 : 0));
     }
   }
   private onFilterSalePrice(list) {
     if (this.type === 'SUMMARY') {
-      list.sort((a, b) => (a[7].toLowerCase() > b[7].toLowerCase()) ?
-        1 : ((b[7].toLowerCase() > a[7].toLowerCase()) ? -1 : 0));
+      list.sort((a, b) => (Number(a[7].replace("$", "")) > Number(b[7].replace("$", ""))) ?
+        1 : ((Number(b[7].replace("$", "")) > Number(a[7].replace("$", ""))) ? -1 : 0));
     } else {
-      list.sort((a, b) => (a[6].toLowerCase() > b[6].toLowerCase()) ?
-        1 : ((b[6].toLowerCase() > a[6].toLowerCase()) ? -1 : 0));
+      list.sort((a, b) => (Number(a[6].replace("$", "")) > Number(b[6].replace("$", ""))) ?
+        1 : ((Number(b[6].replace("$", "")) > Number(a[6].replace("$", ""))) ? -1 : 0));
     }
   }
   private onFilterDiscount(list) {
     if (this.type === 'SUMMARY') {
-      list.sort((a, b) => (a[8].toLowerCase() > b[8].toLowerCase()) ?
-        1 : ((b[8].toLowerCase() > a[8].toLowerCase()) ? -1 : 0));
+      list.sort((a, b) => (Number(a[8].replace("$", "")) > Number(b[8].replace("$", ""))) ?
+        1 : ((Number(b[8].replace("$", "")) > Number(a[8].replace("$", ""))) ? -1 : 0));
     } else {
-      list.sort((a, b) => (a[7].toLowerCase() > b[7].toLowerCase()) ?
-        1 : ((b[7].toLowerCase() > a[7].toLowerCase()) ? -1 : 0));
+      list.sort((a, b) => (Number(a[7].replace("$", "")) > Number(b[7].replace("$", ""))) ?
+        1 : ((Number(b[7].replace("$", "")) > Number(a[7].replace("$", ""))) ? -1 : 0));
     }
   }
   private clearFilter() {
