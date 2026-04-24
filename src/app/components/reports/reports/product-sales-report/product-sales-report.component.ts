@@ -30,7 +30,8 @@ export class ProductSalesReportComponent implements OnInit {
     this.headers = [];
     this.list = [];
     this.styles = [];
-    this.classes = [];
+    if (this.productSalesReport.type === 'SUMMARY') this.classes = ['', '', '', '', 'ticket_number', 'invoice_number', 'cost', 'price', 'discount'];
+    if (this.productSalesReport.type !== 'SUMMARY') this.classes = ['', '', '', 'ticket_number', 'invoice_number', 'cost', 'price', 'discount'];
     this.headers.push("Date");
     if (this.productSalesReport.type === 'SUMMARY') this.headers.push("Client");
     this.headers.push("MFG#");
