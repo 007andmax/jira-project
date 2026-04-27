@@ -4,6 +4,7 @@ export class SubscriptionServicesFilter {
     filterTop: Array<FilterListTop> = [new FilterListTop('name', 'ASC'),
     new FilterListTop('rate', ''),
     new FilterListTop('taxes', '')];
+    direction: string;
     constructor() { }
 
     public onFilter(field, servicesList, taxes) {
@@ -44,6 +45,7 @@ export class SubscriptionServicesFilter {
                     servicesList.reverse();
                 }
             }
+            this.direction = this.filterTop[index].filter;
         }
     }
     getSelectedTaxNames(taxes, listTaxes) {

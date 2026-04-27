@@ -19,7 +19,7 @@ export class InvoicesHeaderComponent implements OnInit {
   toggleFilter: boolean = false;
   @Output() onCreateInvoice = new EventEmitter<any>();
   @Output() onSortBy = new EventEmitter<any>();
-  sortBy: TicketSortBy = new TicketSortBy('ticketNumber', '');
+  sortBy: TicketSortBy = new TicketSortBy('INVOICE_NUMBER', '');
   constructor(public appService: AppService,
     private invoicesService: InvoicesService,
     private reportsService: ReportsService,

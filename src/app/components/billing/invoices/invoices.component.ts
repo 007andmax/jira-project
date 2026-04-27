@@ -55,6 +55,10 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.leftPanelStateService.setBillingPage('new-billable-invoices');
     document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.direction = this.invoicesListService.getDirection(this.direction, this.sort, "INVOICE_NUMBER");
+    this.sort = "INVOICE_NUMBER";
+    this.invoicesFilter.setSortBy(`${this.sort}_${this.direction}`);
+    this.invoiceHeader.sortBy.sortDirection = this.direction;
     if (this.companiesStateService.getCompanies().length > 0) this.onScroll();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.onScroll();
