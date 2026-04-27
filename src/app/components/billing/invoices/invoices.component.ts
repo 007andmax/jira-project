@@ -32,11 +32,11 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   showPendingPreloader: boolean = false;
   showPreloader: boolean = true;
   selectedCompanyIds: Array<string> = [];
-  public sort: string = '';
+  public sort: string = 'INVOICE_NUMBER';
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   offset: number = 40;
-  public direction: string = 'ASC';
+  public direction: string = 'DESC';
   selectedInvoices: Array<Invoice> = [];
   sub: Subscription = new Subscription();
   container = document.body.querySelector(".main-container");
@@ -55,8 +55,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.leftPanelStateService.setBillingPage('new-billable-invoices');
     document.body.querySelector(".main-container").scrollTo(0, 0);
-    this.direction = this.invoicesListService.getDirection(this.direction, this.sort, "INVOICE_NUMBER");
-    this.sort = "INVOICE_NUMBER";
     this.invoicesFilter.setSortBy(`${this.sort}_${this.direction}`);
     this.invoiceHeader.sortBy.sortDirection = this.direction;
     if (this.companiesStateService.getCompanies().length > 0) this.onScroll();
