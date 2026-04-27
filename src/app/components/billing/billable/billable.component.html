@@ -54,6 +54,10 @@
                   >
                     Company Name
                     <span class="qt-table-modern__sorting"></span>
+                      <div *ngIf="sortBy.sortBy == 'name'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                   </div>
                   <div
                     class="billable-table__tickets"
@@ -61,6 +65,10 @@
                   >
                     Sales Person
                     <span class="qt-table-modern__sorting"></span>
+                      <div *ngIf="sortBy.sortBy == 'salesPerson'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                   </div>
                   <div
                     class="billable-table__sales"
@@ -68,6 +76,10 @@
                   >
                     Tickets
                     <span class="qt-table-modern__sorting"></span>
+                      <div *ngIf="sortBy.sortBy == 'countTickets'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                   </div>
                   <div
                     class="billable-table__billable"
@@ -75,6 +87,10 @@
                   >
                     Billable Amount
                     <span class="qt-table-modern__sorting"></span>
+                      <div *ngIf="sortBy.sortBy == 'total'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                   </div>
                   <div
                     class="billable-table__menu"

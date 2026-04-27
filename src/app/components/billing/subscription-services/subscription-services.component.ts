@@ -13,6 +13,7 @@ import { SubscriptionServicesFilter } from './class/subscription-services-filter
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { ServiceAgreement } from '../contracts/class/service-agreement';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
+import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-subscription-services',
@@ -29,6 +30,7 @@ export class SubscriptionServicesComponent implements OnInit, OnDestroy {
   filter: SubscriptionServicesFilter = new SubscriptionServicesFilter();
   list: Array<SubscriptionServices> = [];
   sub: Subscription = new Subscription();
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   constructor(private subscriptionServicesService: SubscriptionServicesService,
     private confirmStateService: ConfirmStateService,
     private leftPanelStateService: LeftPanelStateService,
@@ -107,7 +109,9 @@ export class SubscriptionServicesComponent implements OnInit, OnDestroy {
     })
   }
   public onFilter(field) {
+    this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.list, this.taxesStateService.getTaxes());
+    this.sortBy.sortDirection
     this.cd.detectChanges();
   }
 

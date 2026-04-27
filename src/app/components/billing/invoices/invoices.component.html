@@ -2,6 +2,7 @@
     <div class="qt-df qt-fd-c qt-jc-sb invoices-page__list-container">
         <div>
             <app-invoices-header
+                #invoiceHeader
                 (onCreateInvoice)="onCreatePayment()"
                 (onSortBy)="sortBy($event)"
             ></app-invoices-header>

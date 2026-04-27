@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild, Input } from '@angular/core';
 import { InvoicesService } from 'src/app/services/invoices/invoices.service';
 import { InvoicesFilter } from './class/invoices-filter';
 import { InvoicesListService } from './services/invoices-list.service';
@@ -14,6 +14,7 @@ import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toast
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { InvoicesHeaderComponent } from './invoices-header/invoices-header.component';
 
 @Component({
   selector: 'app-invoices',
@@ -25,6 +26,7 @@ import { fadeInAnimation } from 'src/app/animations';
   providers: [InvoicesListService]
 })
 export class InvoicesComponent implements OnInit, OnDestroy {
+  @ViewChild('invoiceHeader', { static: true }) invoiceHeader: InvoicesHeaderComponent;
   invoicesFilter: InvoicesFilter = new InvoicesFilter();
   invoices: Array<Invoice> = [];
   showPendingPreloader: boolean = false;
@@ -65,6 +67,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       this.selectedCompanyIds = [];
       this.invoicesFilter = data;
       this.invoicesFilter.resetSortBy();
+      this.direction = '';
+      this.invoiceHeader.sortBy.sortDirection = this.direction;
       this.showPreloader = true;
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
@@ -178,6 +182,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.direction = this.invoicesListService.getDirection(this.direction, this.sort, sort);
     this.sort = sort;
     this.invoicesFilter.setSortBy(`${this.sort}_${this.direction}`);
+    this.invoiceHeader.sortBy.sortDirection = this.direction;
     this.setDefaultScoll();
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.onScroll();

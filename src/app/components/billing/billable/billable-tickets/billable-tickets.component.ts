@@ -19,6 +19,7 @@ import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-ed
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { fadeInAnimation } from 'src/app/animations';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'billable-tickets',
@@ -40,6 +41,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
   ticketsForRemove: Array<BillableProfileTicket> = [];
   isCurrentCompanyAddressEmpty: boolean = true;
   sub: Subscription = new Subscription();
+  sortBy: TicketSortBy = new TicketSortBy('ticketNumber', 'DESC');
   constructor(private billableStateService: BillableStateService,
     private ticketsService: TicketsService,
     private confirmStateService: ConfirmStateService,
@@ -188,6 +190,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     let index = this.filter.findIndex(item => item.filter !== '');
     let sort = this.filter[index].filter;
     let field = this.filter[index].field;
+    this.sortBy.sortBy = field;
     if (field === 'closedAt') {
       if (sort === 'ASC') {
         this.onFilterСlosedAt();
@@ -220,11 +223,13 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
         this.billableProfile.tickets.reverse();
       }
     }
+    this.sortBy.sortDirection = sort;
   }
   onFilter(field) {
     let index = this.filter.findIndex(item => item.field === field);
     if (index > -1) {
       let sort = this.filter[index].filter;
+      this.sortBy.sortBy = field;
       if (field === 'closedAt') {
         if (sort === '') this.clearFilter();
         if (sort === '' || sort === 'DESC') {
@@ -265,6 +270,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
           this.billableProfile.tickets.reverse();
         }
       }
+      this.sortBy.sortDirection = this.filter[index].filter;
     }
     this.cd.detectChanges();
   }

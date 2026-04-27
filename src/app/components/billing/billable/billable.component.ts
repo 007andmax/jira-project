@@ -13,6 +13,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class BillableComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
   count: number = 0;
   sub: Subscription = new Subscription();
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   constructor(private billableService: BillableService,
     private companiesStateService: CompaniesStateService,
     public ticketsListService: TicketsListService,
@@ -187,6 +189,7 @@ export class BillableComponent implements OnInit, OnDestroy {
     })
   }
   onFilter(field) {
+    this.sortBy.sortBy = field;
     let index = this.filter.findIndex(item => item.field === field);
     if (index > -1) {
       let sort = this.filter[index].filter;
@@ -230,6 +233,7 @@ export class BillableComponent implements OnInit, OnDestroy {
           this.list.reverse();
         }
       }
+      this.sortBy.sortDirection = this.filter[index].filter;
     }
     this.cd.detectChanges();
   }

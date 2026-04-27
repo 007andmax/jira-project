@@ -1,7 +1,7 @@
 import { FilterListTop } from "src/class/list/filter-list-top";
 
 export class SubscriptionServicesFilter {
-    filterTop: Array<FilterListTop> = [new FilterListTop('name', ''),
+    filterTop: Array<FilterListTop> = [new FilterListTop('name', 'ASC'),
     new FilterListTop('rate', ''),
     new FilterListTop('taxes', '')];
     constructor() { }

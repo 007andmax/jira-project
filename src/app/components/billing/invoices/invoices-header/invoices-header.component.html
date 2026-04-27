@@ -53,46 +53,70 @@
                     <div class="invoice-table__check"></div>
                     <div
                         class="invoce-table__date pointer"
-                        (click)="sortBy('INVOICE_DATE')"
+                        (click)="sortList('INVOICE_DATE')"
                     >
                         Date
                         <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'INVOICE_DATE'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="invoce-table__invoice pointer"
-                        (click)="sortBy('INVOICE_NUMBER')"
+                        (click)="sortList('INVOICE_NUMBER')"
                     >
                         Invoice#
                         <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'INVOICE_NUMBER'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="invoce-table__company pointer"
-                        (click)="sortBy('COMPANY_NAME')"
+                        (click)="sortList('COMPANY_NAME')"
                     >
                         Company
                         <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'COMPANY_NAME'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div class="invoce-table__status">Status</div>
                     <div
                         class="invoce-table__read-on pointer"
-                        (click)="sortBy('READ_ON')"
+                        (click)="sortList('READ_ON')"
                     >
                         Read On
                         <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'READ_ON'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="invoce-table__amount pointer"
-                        (click)="sortBy('AMOUNT')"
+                        (click)="sortList('AMOUNT')"
                     >
                         Amount
                         <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'AMOUNT'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="invoce-table__balance-due pointer"
-                        (click)="sortBy('BALANCE')"
+                        (click)="sortList('BALANCE')"
                     >
                         Balance Due
                         <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'BALANCE'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div class="invoce-table__menu"></div>
                 </div>

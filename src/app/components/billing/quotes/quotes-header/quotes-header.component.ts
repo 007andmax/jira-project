@@ -8,6 +8,7 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ARCHIVE_QUOTES } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-quotes-header',
@@ -23,6 +24,7 @@ export class QuotesHeaderComponent implements OnInit {
   @Output() onCreatePayment = new EventEmitter<any>();
   @Output() onSelectAllQuotes = new EventEmitter<any>();
   @Output() onSortBy = new EventEmitter<any>();
+  sortBy: TicketSortBy = new TicketSortBy('ticketNumber', '');
   constructor(private quoteStateService: QuoteStateService,
     public customerPortalStateService: CustomerPortalStateService,
     private confirmStateService: ConfirmStateService,
@@ -48,7 +50,7 @@ export class QuotesHeaderComponent implements OnInit {
   getTextCountFilters() {
     return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
   }
-  sortBy(data) {
+  sortByItems(data) {
     this.onSortBy.emit(data);
   }
   clearAll() {

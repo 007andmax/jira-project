@@ -76,44 +76,64 @@
                     </div>
                     <div
                         class="quotes-table__date pointer"
-                        (click)="sortBy('date')"
+                        (click)="sortByItems('date')"
                     >
                         Date
                         <span class="qt-table-modern__sorting"></span>
+                           <div *ngIf="sortBy.sortBy == 'INVOICE_DATE'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="quotes-table__number"
-                        (click)="sortBy('number')"
+                        (click)="sortByItems('number')"
                     >
                         Quote#
+                          <span class="qt-table-modern__sorting"></span>
+                           <div *ngIf="sortBy.sortBy == 'INVOICE_DATE'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="quotes-table__company pointer"
-                        (click)="sortBy('customerName')"
+                        (click)="sortByItems('customerName')"
                     >
                         Company
                         <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'INVOICE_DATE'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div class="quotes-table__description pointer">
                         Description
-                        <span class="qt-table-modern__sorting"></span>
                     </div>
                     <div class="quotes-table__recipients">Recipients</div>
                     <div class="quotes-table__create-by">Created By</div>
                     <div class="quotes-table__status">Status</div>
                     <div
                         class="quotes-table__valid pointer"
-                        (click)="sortBy('validUntil')"
+                        (click)="sortByItems('validUntil')"
                     >
                         Valid Until
                         <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'INVOICE_DATE'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="quotes-table__total pointer"
-                        (click)="sortBy('amount')"
+                        (click)="sortByItems('amount')"
                     >
                         Amount
                         <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'INVOICE_DATE'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div class="quotes-table__menu"></div>
                 </div>

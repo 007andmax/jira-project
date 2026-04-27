@@ -10,6 +10,7 @@ import { NonContractServicesRealTimeService } from 'src/app/states/non-contract-
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'non-contract-services',
@@ -26,6 +27,7 @@ export class NonContractServicesComponent implements OnInit, OnDestroy {
   list: Array<NonContractServices> = [];
   filter: NonContractServicesFilter = new NonContractServicesFilter();
   sub: Subscription = new Subscription();
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   constructor(private nonContractServicesService: NonContractServicesService,
     private nonContractServicesStateService: NonContractServicesStateService,
     private nonContractServicesRealTimeService: NonContractServicesRealTimeService,
@@ -39,7 +41,9 @@ export class NonContractServicesComponent implements OnInit, OnDestroy {
     this.leftPanelStateService.setBillingPage('non-contract-services');
     this.nonContractServicesService.getNonContractServices().subscribe((data: Array<NonContractServices>) => {
       this.list = data;
+      this.sortBy.sortBy = 'name';
       this.filter.onFilter('name', this.list);
+      this.sortBy.sortDirection = this.filter.direction;
       this.showPreloader = false;
       this.cd.detectChanges();
     })
@@ -81,7 +85,9 @@ export class NonContractServicesComponent implements OnInit, OnDestroy {
     this.showEditService = true;
   }
   public onFilter(field) {
+    this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.list);
+    this.sortBy.sortDirection = this.filter.direction;
     this.cd.detectChanges();
   }
   public trackById(index, item) {
