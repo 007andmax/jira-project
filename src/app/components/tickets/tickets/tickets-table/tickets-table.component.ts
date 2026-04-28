@@ -89,7 +89,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.ticketsFilter = data;
       this.showPreloader = true;
       this.sortBy.sortDirection = (this.ticketsFilter.sortBy ? this.ticketsFilter.sortBy : 'DESC').includes('DESC') ? 'DESC' : 'ASC';
-      console.log("this.sortBy", this.sortBy);
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.tickets.forEach(item => item.selected = false);
       this.ticketsStateService.resetSelectedTicketsForMerge();
@@ -136,7 +135,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   }
   getCurrentCompany(res) {
     this.sortBy = new TicketSortBy(res.defaulTticketSortOrder.replace('_DESC', '').replace('_ASC', '').toLowerCase(), res.defaulTticketSortOrder.includes('_DESC') ? 'DESC' : 'ASC');
-    console.log("this.sortBy", this.sortBy);
   }
   onSelectTicket(ticket) {
     this.tickets.find(item => item.id === ticket.id).selected = ticket.selected;

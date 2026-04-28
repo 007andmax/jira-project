@@ -169,7 +169,6 @@ export class CompanyFilter {
                 }
             }
             this.sortBy.sortDirection = this.filter[index].filter;
-            console.log("this.filter[index].filter", this.filter[index].filter);;
         }
     }
     private clearFilter() {

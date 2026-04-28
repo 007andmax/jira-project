@@ -174,7 +174,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   onFilter(data) {
     this.companyFilter.sortBy.sortBy = data;
     this.companyFilter.onFilter(data, this.reqCompaniesList);
-    console.log("sortBy.sortDirection", this.companyFilter.sortBy.sortDirection);
     this.page_number = 0;
     this.companiesList.setBlockList(false);
     this.CompaniesList = [];

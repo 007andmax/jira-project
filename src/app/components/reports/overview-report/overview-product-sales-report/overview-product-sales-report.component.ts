@@ -26,7 +26,6 @@ export class OverviewProductSalesReportComponent extends OverviewReportComponent
   onFilter(data) {
     this.sortBy.sortBy = data;
     let index = this.filter.findIndex(item => item.field === data);
-    console.log("onFilter", data, index, this.filter);
     if (index > -1) {
       let sort = this.filter[index].filter;
       if (data === 'Date') {
@@ -52,7 +51,6 @@ export class OverviewProductSalesReportComponent extends OverviewReportComponent
       if (data === 'MFG#') {
         this.clearFilter();
         if (sort === '' || sort === 'DESC') {
-          console.log("sort");
           this.filter[index].filter = 'ASC';
           this.onFilterMFG(this.list);
         } else {
@@ -131,7 +129,6 @@ export class OverviewProductSalesReportComponent extends OverviewReportComponent
   private onFilterClient(list) {
     list.sort((a, b) => (a[1].toLowerCase() > b[1].toLowerCase()) ?
       1 : ((b[1].toLowerCase() > a[1].toLowerCase()) ? -1 : 0));
-    console.log("list", list);
   }
   private onFilterMFG(list) {
     if (this.type === 'SUMMARY') {
