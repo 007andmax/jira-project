@@ -24,7 +24,7 @@ export class QuotesHeaderComponent implements OnInit {
   @Output() onCreatePayment = new EventEmitter<any>();
   @Output() onSelectAllQuotes = new EventEmitter<any>();
   @Output() onSortBy = new EventEmitter<any>();
-  sortBy: TicketSortBy = new TicketSortBy('ticketNumber', '');
+  sortBy: TicketSortBy = new TicketSortBy('date', 'DESC');
   constructor(private quoteStateService: QuoteStateService,
     public customerPortalStateService: CustomerPortalStateService,
     private confirmStateService: ConfirmStateService,
@@ -51,6 +51,7 @@ export class QuotesHeaderComponent implements OnInit {
     return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
   }
   sortByItems(data) {
+    this.sortBy.sortBy = data;
     this.onSortBy.emit(data);
   }
   clearAll() {

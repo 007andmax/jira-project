@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
@@ -22,6 +22,7 @@ import { QuoteRealTimeService } from '../quote-realtime/quote-realtime.service';
 import { QuotesListService } from './services/quotes-list.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
+import { QuotesHeaderComponent } from '../quotes-header/quotes-header.component';
 
 @Component({
   selector: 'app-quotes-table',
@@ -30,6 +31,7 @@ import { WebsocketService } from 'src/app/services/websocket/websocket.service';
   providers: [QuotesListService]
 })
 export class QuotesTableComponent implements OnInit, OnDestroy {
+  @ViewChild('header', { static: true }) header: QuotesHeaderComponent;
   filter: QuoteFilter = new QuoteFilter();
   sort: QuoteSort = new QuoteSort();
   quotes: Array<Quote> = [];
@@ -55,6 +57,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.filter.sortBy = "DATE_DESC";
     this.onScroll();
     let getOnInitFilter = this.quoteStateService.getOnInitFilter().subscribe(data => {
       this.filter.setData(data);
@@ -117,6 +120,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.setDefaultScoll();
     this.filter.sortBy = this.sort.getSortType(value);
+    this.header.sortBy.sortDirection = this.filter.sortBy.includes("DESC") ? "DESC" : "ASC";
     this.getQuotes()
   }
   public setDefaultScoll() {

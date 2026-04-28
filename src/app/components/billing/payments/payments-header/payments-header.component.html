@@ -52,28 +52,40 @@
                 <div class="qt-page-list__header-thead__row">
                     <div
                         class="billable-payment-table__date pointer"
-                        (click)="sortBy('PAYMENT_DATE')"
+                        (click)="sortItems('PAYMENT_DATE')"
                     >
                         Date
                         <span class="qt-table-modern__sorting"></span>
+                           <div *ngIf="sortBy.sortBy == 'PAYMENT_DATE'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div class="billable-payment-table__invoice">Invoice#</div>
                     <div class="billable-payment-table__company">Company</div>
                     <div
                         class="billable-payment-table__payment-mode pointer"
-                        (click)="sortBy('PAYMENT_METHOD')"
+                        (click)="sortItems('PAYMENT_METHOD')"
                     >
                         PaymentMode
                         <span class="qt-table-modern__sorting"></span>
+                           <div *ngIf="sortBy.sortBy == 'PAYMENT_METHOD'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div class="billable-payment-table__reference">Reference#</div>
                     <div class="billable-payment-table__payment">Payment#</div>
                     <div
                         class="billable-payment-table__amount pointer"
-                        (click)="sortBy('AMOUNT')"
+                        (click)="sortItems('AMOUNT')"
                     >
                         Amount
                         <span class="qt-table-modern__sorting"></span>
+                           <div *ngIf="sortBy.sortBy == 'AMOUNT'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="billable-payment-table__status"

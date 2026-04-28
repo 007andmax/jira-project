@@ -6,6 +6,7 @@ import { AppService } from 'src/app/states/app/app.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { PaymentsStateService } from 'src/app/states/payments/payments-state.service';
 import { PaymentsFilterComponent } from './payments-filter/payments-filter.component';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-payments-header',
@@ -18,6 +19,7 @@ export class PaymentsHeaderComponent implements OnInit {
   toggleFilter: boolean = false;
   @Output() onCreatePayment = new EventEmitter<any>();
   @Output() onSortBy = new EventEmitter<any>();
+  sortBy: TicketSortBy = new TicketSortBy('PAYMENT_DATE', 'DESC');
   constructor(private permissionsService: PermissionsService,
     public appService: AppService,
     private reportsService: ReportsService,
@@ -63,7 +65,8 @@ export class PaymentsHeaderComponent implements OnInit {
   sendEmail() {
     this.draftEmailStateService.toogleAsideSendReportPayment();
   }
-  sortBy(data) {
+  sortItems(data) {
+    this.sortBy.sortBy = data;
     this.onSortBy.emit(data);
   }
   clearAll() {
