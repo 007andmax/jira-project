@@ -94,6 +94,10 @@
                     >
                         Product Name
                         <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'description'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="products-table__category pointer"
@@ -101,6 +105,10 @@
                     >
                         Category
                         <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'category'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="products-table__cost pointer"
@@ -109,6 +117,10 @@
                     >
                         Cost
                         <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'cost'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="products-table__cost pointer"
@@ -116,6 +128,10 @@
                     >
                         Markup
                         <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'markup'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="products-table__sale-price pointer"
@@ -123,6 +139,10 @@
                     >
                         Sale Price
                         <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'sale'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="products-table__mfg pointer"
@@ -130,6 +150,10 @@
                     >
                         #Mfg
                         <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'manufacture'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div class="products-table__tac">Tax</div>
                     <div
@@ -138,6 +162,10 @@
                     >
                         ILC
                         <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'ilc'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="products-table__gl pointer"
@@ -145,6 +173,10 @@
                     >
                         GL
                         <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'glNumber'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="products-table__product-type pointer"
@@ -152,6 +184,10 @@
                     >
                         Product Type
                         <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'productType'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div class="products-table__menu pointer"></div>
                 </div>

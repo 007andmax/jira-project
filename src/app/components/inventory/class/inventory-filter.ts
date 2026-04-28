@@ -11,11 +11,13 @@ export class InventoryFilter {
     new FilterListTop('manufacture', ''),
     new FilterListTop('ilc', ''),
     new FilterListTop('glNumber', ''),
-    new FilterListTop('productType', '')];
+    new FilterListTop('productType', ''),
+    new FilterListTop('markup', '')];
     sortCategoty: CategoryProductitem = null;
     sortType: ProductType = null;
     active: boolean = true;
     productSearchName: string = "";
+    direction: string;
     constructor() { }
     public setSortCategoty(data) {
         this.sortCategoty = data;
@@ -109,6 +111,14 @@ export class InventoryFilter {
                     this.filterTop[index].filter = 'DESC';
                 }
             }
+            if (field === 'markup') {
+                if (sort === '' || sort === 'DESC') {
+                    this.filterTop[index].filter = 'ASC';
+                } else {
+                    this.filterTop[index].filter = 'DESC';
+                }
+            }
+            this.direction = this.filterTop[index].filter;
         }
     }
     public onFilter(reqInventory, companies, glNumbers) {
@@ -148,6 +158,10 @@ export class InventoryFilter {
                 this.onFilterProductType(reqInventory);
                 if (sort !== 'ASC') reqInventory.reverse();
             }
+            if (field === 'markup') {
+                this.onFilterMarkup(reqInventory);
+                if (sort !== 'ASC') reqInventory.reverse();
+            }
         }
     }
     private getCompanyName(inventory, companies) {
@@ -164,6 +178,12 @@ export class InventoryFilter {
         reqInventory.sort((a, b) => {
             return (a.sale > b.sale) ?
                 1 : ((b.sale > a.sale) ? -1 : 0)
+        });
+    }
+    private onFilterMarkup(reqInventory) {
+        reqInventory.sort((a, b) => {
+            return (a.markup > b.markup) ?
+                1 : ((b.markup > a.markup) ? -1 : 0)
         });
     }
     private onFilterCompany(reqInventory, companies) {

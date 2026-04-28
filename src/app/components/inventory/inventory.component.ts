@@ -223,6 +223,7 @@ export class InventoryComponent implements OnInit {
     this.productService.getProducts(this.filter.getActive(), this.filter.getSortTypeId()).subscribe((res: Array<InventoryItem>) => {
       this.reqInventoryList = res;
       this.onScroll();
+      this.filter.onFilter(this.inventoryList, this.companies, this.glNumbers);
       this.showPreloader = false;
       this.cd.detectChanges();
     });
@@ -260,6 +261,7 @@ export class InventoryComponent implements OnInit {
   }
   public onFilter(field) {
     this.filter.onSetFilter(field);
+    this.header.sortBy.sortDirection = this.filter.direction;
     this.page_number = 0;
     this.inventoryListService.setBlockList(false);
     this.inventoryList = [];
