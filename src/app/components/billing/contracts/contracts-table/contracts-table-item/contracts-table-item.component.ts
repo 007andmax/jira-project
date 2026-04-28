@@ -57,6 +57,9 @@ export class ContractsTableItemComponent implements OnInit {
     this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
     this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.contract.companyId);
+    this.companiesStateService.getOnCompanies().subscribe(res => {
+      this.company = this.companiesStateService.getCompanies().find(item => item.id === this.contract.companyId);
+    })
   }
   checkLogo() {
     return (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id || this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id)
