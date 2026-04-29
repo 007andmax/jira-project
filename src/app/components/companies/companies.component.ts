@@ -148,7 +148,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.sub.add(onToggleFilter);
   }
   onSearch(value) {
-    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.companyFilter.setSearch((value !== "") ? value : null);
     this.setDefaultScoll();
     this.onScroll();
@@ -175,9 +174,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.companyFilter.sortBy.sortBy = data;
     this.companyFilter.onFilter(data, this.reqCompaniesList);
     console.log("sortBy.sortDirection", this.companyFilter.sortBy.sortDirection);
-    this.page_number = 0;
-    this.companiesList.setBlockList(false);
-    this.CompaniesList = [];
+    this.setDefaultScoll();
     this.onScroll();
   }
   onSelectAllCompanies(data) {
@@ -230,6 +227,8 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     })
   }
   private getCompanies() {
+    console.log("this.infiniteScrollDisabled", this.infiniteScrollDisabled);
+    console.log("this.companiesList.getBlockList()", this.companiesList.getBlockList());
     if (this.companiesList.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
@@ -248,6 +247,9 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.CompaniesList = [...this.CompaniesList, ...CompaniesList];
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.companiesList.setBlockList(true);
+
+    console.log("this.infiniteScrollDisabled", this.infiniteScrollDisabled);
+    console.log("this.companiesList.getBlockList()", this.companiesList.getBlockList());
     this.showPreloader = false;
   }
   public isSelectedConpanies() {
@@ -255,6 +257,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
 
   public setDefaultScoll() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.page_number = 0;
     this.companiesList.setBlockList(false);
     this.CompaniesList = [];
