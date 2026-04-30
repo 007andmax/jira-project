@@ -123,7 +123,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     this.getQuotes()
   }
   public setDefaultScoll() {
-    document.body.querySelector(".main-container").scrollTo(0, 0);
+    if (document.body.querySelector(".main-container")) document.body.querySelector(".main-container").scrollTo(0, 0);
     this.page_number = 0;
     this.quotesListService.setBlockList(false);
     this.quotes = [];

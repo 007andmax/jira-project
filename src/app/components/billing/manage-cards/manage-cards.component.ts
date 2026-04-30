@@ -113,7 +113,7 @@ export class ManageCardsComponent {
     this.onScroll();
   }
   public setDefaultScoll() {
-    document.body.querySelector(".main-container").scrollTo(0, 0);
+    if (document.body.querySelector(".main-container")) document.body.querySelector(".main-container").scrollTo(0, 0);
     this.showPreloader = true;
     this.page = 0;
     this.ticketsListService.setBlockList(false);

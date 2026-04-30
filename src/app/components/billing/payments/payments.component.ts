@@ -170,7 +170,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     })
   }
   public setDefaultScoll() {
-    document.body.querySelector(".main-container").scrollTo(0, 0);
+    if (document.body.querySelector(".main-container")) document.body.querySelector(".main-container").scrollTo(0, 0);
     this.page_number = 0;
     this.paymentsListService.setBlockList(false);
     this.payments = [];

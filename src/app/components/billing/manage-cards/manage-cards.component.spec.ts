@@ -31,7 +31,7 @@ describe('ManageCardsComponent unit test', () => {
   });
 
 
-  it('check "getExpiredStatus"', () => {
+  it('check "setDefaultScoll"', () => {
     const fixture = TestBed.createComponent(ManageCardsComponent);
     const com = fixture.debugElement.componentInstance;
     com.setDefaultScoll();
