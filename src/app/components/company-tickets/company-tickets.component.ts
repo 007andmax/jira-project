@@ -16,6 +16,7 @@ import { TicketStatus } from '../setting/ticket-settings-page/tickets-status/cla
 import { StatusColor } from '../tickets/class/status-color';
 import { TicketsFilterComponent } from '../tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
 import { fadeInAnimation } from 'src/app/animations';
+import { TicketSortBy } from '../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'company-tickets',
@@ -43,6 +44,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   container = document.body.querySelector(".main-container");
   isInitTickets: boolean = false;
   toggleFilter: boolean = false;
+  sortBy: TicketSortBy = new TicketSortBy('created_date', 'DESC');
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
@@ -96,6 +98,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     this.sub.add(getOnRemoveTicket);
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter = data;
+      this.sortBy.sortDirection = (this.ticketsFilter.sortBy ? this.ticketsFilter.sortBy : 'DESC').includes('DESC') ? 'DESC' : 'ASC';
       this.showPreloader = true;
       this.setDefaultScoll();
       this.onScroll();
@@ -138,6 +141,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     this.ticketsStateService.changeToggleFilter(data);
   }
   onFilter(data) {
+    this.sortBy.sortBy = data;
     this.ticketsStateService.changeFilterField(data);
   }
   private getCount() {

@@ -10,6 +10,7 @@ import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyServiceType } from './class/crm-company-service-type';
 import { CrmCompanyServiceTypeFilter } from './class/crm-company-service-type-filter';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'crm-company-service-type',
@@ -23,6 +24,7 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
   filter: CrmCompanyServiceTypeFilter = new CrmCompanyServiceTypeFilter();
   showPreloader: boolean = true;
   sub: Subscription = new Subscription();
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   constructor(private crmService: CrmService,
     private confirmStateService: ConfirmStateService,
     private crmStateService: CrmStateService,
@@ -58,7 +60,9 @@ export class CrmCompanyServiceTypeComponent implements OnInit, OnDestroy {
     this.showAdd = data;
   }
   onFilter(field) {
+    this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.serviceTypeList);
+    this.sortBy.sortDirection = this.filter.direction;
   }
   onEditServiceType(item, event) {
     if (item.isInitEdit) {

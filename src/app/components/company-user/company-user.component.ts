@@ -26,6 +26,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { fadeInAnimation } from 'src/app/animations';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { TicketSortBy } from '../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'company-user',
@@ -52,6 +53,7 @@ export class CompanyUserComponent implements OnInit {
   sub: Subscription = new Subscription();
   showPendingPreloader: boolean = false;
   container = document.body.querySelector(".main-container");
+  sortBy: TicketSortBy = new TicketSortBy('NAME', 'ASC');
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private companiesStateService: CompaniesStateService,
@@ -310,7 +312,9 @@ export class CompanyUserComponent implements OnInit {
 
   }
   public onFilter(field) {
+    this.sortBy.sortBy = field;
     this.filter.setSortBy(field);
+    this.sortBy.sortDirection = (this.filter.sortBy ? this.filter.sortBy : 'DESC').includes('DESC') ? 'DESC' : 'ASC';
     this.showPreloader = true;
     this.setDefaultScoll();
     this.onScroll();

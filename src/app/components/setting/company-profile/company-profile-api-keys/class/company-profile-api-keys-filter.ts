@@ -4,6 +4,7 @@ export class CompanyProfileApiKeysFilter {
     filter: Array<CompanyFilterTop> = [
         new CompanyFilterTop('title', 'ASC')
     ];
+    direction: string;
 
     constructor() { }
     onFilter(field, list) {
@@ -20,6 +21,7 @@ export class CompanyProfileApiKeysFilter {
                     list.reverse();
                 }
             }
+            this.direction = this.filter[index].filter;
         }
     }
     onFilterByField(field, list) {

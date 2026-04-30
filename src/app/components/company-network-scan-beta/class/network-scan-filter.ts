@@ -7,6 +7,7 @@ export class NetworkScanFilter {
     new CompanyFilterTop('manufacturer', ''),
     new CompanyFilterTop('macAddress', ''),
     new CompanyFilterTop('agentStatus', '')];
+    direction: string;
     constructor(private companyNetworkScanService: CompanyNetworkScanService) { }
 
     sortByCurrentFilter(list) {
@@ -109,6 +110,7 @@ export class NetworkScanFilter {
                     list.reverse();
                 }
             }
+            this.direction = this.filter[index].filter;
         }
     }
 

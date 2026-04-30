@@ -36,6 +36,10 @@
                         >
                             Device Name
                             <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'name'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                         </div>
                         <div class="company-devices-table__tags">Tags</div>
                         <div
@@ -44,10 +48,13 @@
                         >
                             Logged in user
                             <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'user_name'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                         </div>
                         <div class="company-devices-table__up-time">
                             Up time
-                            <span class="qt-table-modern__sorting"></span>
                         </div>
                         <div class="company-devices-table__windows">Windows</div>
                         <div class="company-devices-table__ip-address">

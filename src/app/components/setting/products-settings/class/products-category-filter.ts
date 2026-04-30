@@ -5,7 +5,7 @@ export class ProductsCategoryFilter {
         new CompanyFilterTop('name', 'ASC'),
         new CompanyFilterTop('count', '')
     ];
-
+    direction: string;
     constructor() { }
     onFilter(field, list) {
         let index = this.filter.findIndex(item => item.field === field);
@@ -31,6 +31,7 @@ export class ProductsCategoryFilter {
                     list.reverse();
                 }
             }
+            this.direction = this.filter[index].filter;
         }
     }
     public clearFilter() {

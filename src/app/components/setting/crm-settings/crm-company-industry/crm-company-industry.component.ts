@@ -9,6 +9,7 @@ import { CrmService } from 'src/app/services/crm/crm.service';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { CrmCompanyIndustry } from './class/crm-company-industry';
 import { CrmCompanyIndustryFilter } from './class/crm-company-industry-filter';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'crm-company-industry',
@@ -21,6 +22,7 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
   filter: CrmCompanyIndustryFilter = new CrmCompanyIndustryFilter();
   showPreloader: boolean = true;
   sub: Subscription = new Subscription();
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   constructor(private crmService: CrmService,
     private confirmStateService: ConfirmStateService,
     private crmStateService: CrmStateService,
@@ -54,7 +56,9 @@ export class CrmCompanyIndustryComponent implements OnInit, OnDestroy {
     this.showAdd = data;
   }
   onFilter(field) {
+    this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.industryList);
+    this.sortBy.sortDirection = this.filter.direction;
   }
   onSelectAll(event) {
     if (event.target.checked) {

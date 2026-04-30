@@ -12,6 +12,7 @@ import { ApiKeys } from './class/api-keys';
 import { ApiKeysStateService } from 'src/app/states/api-keys/api-keys-state.service';
 import { CompanyProfileApiKeysFilter } from './class/company-profile-api-keys-filter';
 import { ApiKeysRealTimeService } from 'src/app/states/api-keys/api-keys-real-time.service';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-company-profile-api-keys',
@@ -19,7 +20,7 @@ import { ApiKeysRealTimeService } from 'src/app/states/api-keys/api-keys-real-ti
   styleUrls: ['./company-profile-api-keys.component.scss']
 })
 export class CompanyProfileApiKeysComponent implements OnInit {
-
+  sortBy: TicketSortBy = new TicketSortBy('title', 'ASC');
   filter: CompanyProfileApiKeysFilter = new CompanyProfileApiKeysFilter();
   loading = true;
   list: Array<ApiKeys> = [];
@@ -93,7 +94,9 @@ export class CompanyProfileApiKeysComponent implements OnInit {
   }
 
   onFilter(field) {
+    this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.list);
+    this.sortBy.sortDirection = this.filter.direction;
   }
 
   /**
