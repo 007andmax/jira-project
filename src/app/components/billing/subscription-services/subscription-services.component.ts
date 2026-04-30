@@ -109,6 +109,7 @@ export class SubscriptionServicesComponent implements OnInit, OnDestroy {
     })
   }
   public onFilter(field) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.list, this.taxesStateService.getTaxes());
     this.sortBy.sortDirection = this.filter.direction;

@@ -260,6 +260,7 @@ export class InventoryComponent implements OnInit {
     this.onScroll();
   }
   public onFilter(field) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.filter.onSetFilter(field);
     this.header.sortBy.sortDirection = this.filter.direction;
     this.page_number = 0;

@@ -41,7 +41,6 @@ export class CompanyPasswordManagerComponent extends PasswordManagerComponent {
     })
     this.sub.add(getConfirm);
     let geLefttFilter = this.passwordManagerStateService.getOnFilter().subscribe((data) => {
-      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.filter.setFilter(data);
       this.setDefaultScoll();
       this.onScroll();

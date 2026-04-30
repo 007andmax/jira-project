@@ -189,6 +189,7 @@ export class BillableComponent implements OnInit, OnDestroy {
     })
   }
   onFilter(field) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.sortBy.sortBy = field;
     let index = this.filter.findIndex(item => item.field === field);
     if (index > -1) {

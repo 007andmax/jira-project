@@ -71,7 +71,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.sub.add(getOnCompanies);
     if (this.left_filter) {
       if (this.left_filter !== "ARCHIVE") this.companyFilter.setClientType(this.left_filter);
-      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.showArchivedCompanies = (this.left_filter === "ARCHIVE");
       this.companyFilter.setShowArchivedCompanies(this.showArchivedCompanies);

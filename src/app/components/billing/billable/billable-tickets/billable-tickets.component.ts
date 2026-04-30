@@ -226,6 +226,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     this.sortBy.sortDirection = sort;
   }
   onFilter(field) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     let index = this.filter.findIndex(item => item.field === field);
     if (index > -1) {
       let sort = this.filter[index].filter;

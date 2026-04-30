@@ -6,6 +6,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DocumentsFilterComponent } from './documents-filter/documents-filter.component';
 import { Subscription } from 'rxjs';
+import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'documents-header',
@@ -23,7 +24,7 @@ export class DocumentsHeaderComponent implements OnInit {
   @Input() selectAll: boolean = false;
   @Input() companyId: string;
   @Input() showAssignedCompanies: boolean = false;
-
+  sortBy: TicketSortBy = new TicketSortBy('title', 'ASC');
   sub: Subscription = new Subscription();
   searchText: string = "";
   /**
@@ -64,6 +65,7 @@ export class DocumentsHeaderComponent implements OnInit {
     this.onSelectAll.emit(data);
   }
   public onFilter(field) {
+    this.sortBy.sortBy = field;
     this.onChangeFilterField.emit(field);
   }
   clearAll() {

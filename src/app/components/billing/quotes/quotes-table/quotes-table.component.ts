@@ -63,7 +63,6 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
       this.filter.setData(data);
       this.filter.clearSortBy();
       this.showPreloader = true;
-      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -116,14 +115,15 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     this.quoteStateService.setInvoice(invoiceId);
   }
   public sortBy(value) {
-    this.showPreloader = true;
     document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.showPreloader = true;
     this.setDefaultScoll();
     this.filter.sortBy = this.sort.getSortType(value);
     this.header.sortBy.sortDirection = this.filter.sortBy.includes("DESC") ? "DESC" : "ASC";
     this.getQuotes()
   }
   public setDefaultScoll() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.page_number = 0;
     this.quotesListService.setBlockList(false);
     this.quotes = [];

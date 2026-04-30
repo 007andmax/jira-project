@@ -285,6 +285,7 @@ export class MarketingComponent implements OnInit {
     this.getUsers();
   }
   public onFilter(field) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.sortBy.sortBy = field;
     if (this.sortBy.sortDirection === 'desc') {
       this.sortBy.sortDirection = 'asc';

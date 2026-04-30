@@ -85,6 +85,7 @@ export class NonContractServicesComponent implements OnInit, OnDestroy {
     this.showEditService = true;
   }
   public onFilter(field) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.list);
     this.sortBy.sortDirection = this.filter.direction;

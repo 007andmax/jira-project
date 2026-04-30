@@ -72,7 +72,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       this.direction = '';
       this.invoiceHeader.sortBy.sortDirection = this.direction;
       this.showPreloader = true;
-      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -186,7 +185,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.invoicesFilter.setSortBy(`${this.sort}_${this.direction}`);
     this.invoiceHeader.sortBy.sortDirection = this.direction;
     this.setDefaultScoll();
-    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.onScroll();
   }
   onSelectInvoice() {
@@ -217,6 +215,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     })
   }
   public setDefaultScoll() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.page_number = 0;
     this.invoicesListService.setBlockList(false);
     this.invoices = [];

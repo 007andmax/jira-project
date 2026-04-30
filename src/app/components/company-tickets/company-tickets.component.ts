@@ -97,7 +97,6 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter = data;
       this.showPreloader = true;
-      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -201,6 +200,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
 
   }
   public setDefaultScoll() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.page_number = 0;
     this.ticketsListService.setBlockList(false);
     this.tickets = [];

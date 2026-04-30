@@ -100,6 +100,7 @@ export class RecurringTicketsComponent implements OnInit {
  * @param sort - type sort
  */
   public sortBy(sort) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.direction = this.listSerivce.getDirection(this.direction, this.sort, sort);
     this.sort = sort;
     this.refreshTicketList();

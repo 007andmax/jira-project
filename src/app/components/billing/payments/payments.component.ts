@@ -75,7 +75,6 @@ export class PaymentsComponent implements OnInit, OnDestroy {
       this.paymentsFilter = data;
       this.paymentsFilter.resetSortBy();
       this.showPreloader = true;
-      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -150,7 +149,6 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     this.sort = sort;
     this.paymentsFilter.setSortBy(`${this.sort}_${this.direction}`);
     this.setDefaultScoll();
-    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.onScroll();
   }
   getInvoices() {
@@ -172,6 +170,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     })
   }
   public setDefaultScoll() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.page_number = 0;
     this.paymentsListService.setBlockList(false);
     this.payments = [];
