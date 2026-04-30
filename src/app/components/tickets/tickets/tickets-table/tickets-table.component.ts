@@ -144,6 +144,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.ticketsStateService.changeToggleFilter(data);
   }
   onFilter(data) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.sortBy.sortBy = data;
     this.ticketsStateService.changeFilterField(data);
   }

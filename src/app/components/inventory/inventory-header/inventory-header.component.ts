@@ -8,6 +8,7 @@ import { InventoryChangeProductTypeComponent } from '../inventory-change-product
 import { ProductService } from 'src/app/services/product/product.service';
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { InventoryFilterComponent } from './inventory-filter/inventory-filter.component';
+import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'inventory-header',
@@ -25,6 +26,7 @@ export class InventoryHeaderComponent implements OnInit {
   @Output() onFilter: EventEmitter<any> = new EventEmitter();
   @Output() onSelectAllIventory: EventEmitter<any> = new EventEmitter();
   toggleFilter: boolean = false;
+  sortBy: TicketSortBy = new TicketSortBy('description', 'ASC');
   constructor(private permissionsService: PermissionsService,
     private inventoryStateService: InventoryStateService,
     public cd: ChangeDetectorRef,
@@ -74,6 +76,7 @@ export class InventoryHeaderComponent implements OnInit {
     return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
   }
   filter(data) {
+    this.sortBy.sortBy = data;
     this.onFilter.emit(data);
     this.cd.detectChanges();
   }

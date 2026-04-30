@@ -28,20 +28,14 @@
 ::ng-deep contracts-statistics {
   .qt-table-modern {
     .ticket-table {
-      &__status {
-        flex: 0 0 177px;
-      }
       &__created-date {
-        flex: 0 0 175px;
+        flex: 0 0 195px;
       }
       &__status {
-        flex: 0 0 177px;
-      }
-      &__created-date {
-        flex: 0 0 175px;
+        flex: 0 0 200px;
       }
       &__assignee {
-        flex: 0 0 150px;
+        flex: 0 0 162px;
         max-width: 100%;
       }
       &__сontract-type {

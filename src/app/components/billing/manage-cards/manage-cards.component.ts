@@ -103,18 +103,17 @@ export class ManageCardsComponent {
     });
   }
   public onFilter(field) {
-    document.body.querySelector(".main-container").scrollTo(0, 0);
     //  this.filter.setSort(field);
     this.setDefaultScoll();
     this.onScroll();
   }
   onSearch(value) {
-    document.body.querySelector(".main-container").scrollTo(0, 0);
     // this.filter.setSearch((value !== "") ? value : null);
     this.setDefaultScoll();
     this.onScroll();
   }
   public setDefaultScoll() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.showPreloader = true;
     this.page = 0;
     this.ticketsListService.setBlockList(false);

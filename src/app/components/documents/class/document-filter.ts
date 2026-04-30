@@ -12,6 +12,7 @@ export class DocumentFilter {
     reviewDateEnd: string;
     companyId: string;
     isCompanyScope: boolean;
+    direction: string;
     constructor() {
 
     }
@@ -59,6 +60,7 @@ export class DocumentFilter {
                     reqList.reverse();
                 }
             }
+            this.direction = this.filterTop[index].filter;
         }
     }
     public clearFilter() {

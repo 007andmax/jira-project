@@ -16,6 +16,9 @@
                     [infiniteScrollThrottle]="50"
                     [infiniteScrollDisabled]="infiniteScrollDisabled"
                     (scrolled)="onScroll()"
+                      [fromRoot]="true"
+                        [scrollWindow]="false"
+                        [alwaysCallback]="true"
                 >
                     <ng-template
                         ngFor

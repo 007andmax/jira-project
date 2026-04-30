@@ -12,6 +12,7 @@ import { CompaniesStateService } from '../../states/company/companies-state.serv
 import { ActivatedRoute } from '@angular/router';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { TicketSortBy } from '../tickets/tickets/class/ticket-sort-by';
 
 /**
  * Password manager component
@@ -36,6 +37,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
   public showPendingPreloader: boolean = false;
   public sub: Subscription = new Subscription();
   container = document.body.querySelector(".main-container");
+  sortBy: TicketSortBy = new TicketSortBy('COMPANY_NAME', 'ASC');
   constructor(
     public passwordManagerService: PasswordManagerService,
     private permissionsService: PermissionsService,
@@ -89,12 +91,12 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     this.sub.add(onToggleFilter);
   }
   onSearch(value) {
-    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.filter.setSearch((value !== "") ? value : null);
     this.setDefaultScoll();
     this.onScroll();
   }
   public setDefaultScoll() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.showPreloader = true;
     this.filter.page = 0;
     this.passwordManagerListService.setBlockList(false);
@@ -153,8 +155,9 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     }
   }
   public onFilter(field) {
-    document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.sortBy.sortBy = field;
     this.filter.setSort(field);
+    this.sortBy.sortDirection = this.filter.direction;
     this.setDefaultScoll();
     this.onScroll();
   }

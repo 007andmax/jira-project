@@ -18,6 +18,7 @@ export class FilterPasswordManager {
     preloaderDevices: boolean = false;
     page: number = 0;
     limit: number = 30;
+    direction: string;
     constructor() {
 
     }
@@ -112,6 +113,7 @@ export class FilterPasswordManager {
                 } else {
                     item.filter = 'DESC';
                 }
+                this.direction = item.filter;
             } else {
                 item.filter = '';
             }

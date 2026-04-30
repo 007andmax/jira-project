@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -15,6 +15,7 @@ import { ConfirmStateService } from '../shared/confirm/services/confirm-state.se
 import { Document } from './class/document';
 import { DocumentFilter } from './class/document-filter';
 import { fadeInAnimation } from 'src/app/animations';
+import { DocumentsHeaderComponent } from './documents-header/documents-header.component';
 
 @Component({
   selector: 'app-documents',
@@ -25,6 +26,7 @@ import { fadeInAnimation } from 'src/app/animations';
   styleUrls: ['./documents.component.scss']
 })
 export class DocumentsComponent implements OnInit, OnDestroy {
+  @ViewChild('header', { static: true }) header: DocumentsHeaderComponent;
   showPreloader: boolean = true;
   list: Array<Document> = [];
   filter: DocumentFilter = new DocumentFilter();
@@ -125,7 +127,9 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     })
   }
   public onFilter(field) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.filter.onFilter(field, this.list, this.usersStateService.getAllUsers())
+    this.header.sortBy.sortDirection = this.filter.direction;
   }
   removeCategory(item) {
     this.documentsService.removeCategories(item.categoryId).subscribe(data => {

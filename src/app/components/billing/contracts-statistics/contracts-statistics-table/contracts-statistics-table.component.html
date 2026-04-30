@@ -9,6 +9,10 @@
                     >
                         Company name
                         <span class="qt-table-modern__sorting"></span>
+                          <div *ngIf="sortBy.sortBy == 'company-name'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="ticket-table__сontract-type pointer"
@@ -16,6 +20,10 @@
                     >
                         Contract type
                         <span class="qt-table-modern__sorting"></span>
+                          <div *ngIf="sortBy.sortBy == 'type'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="ticket-table__contract-description pointer"
@@ -23,6 +31,10 @@
                     >
                         Contract description
                         <span class="qt-table-modern__sorting"></span>
+                          <div *ngIf="sortBy.sortBy == 'description'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="ticket-table__assignee pointer"
@@ -30,6 +42,10 @@
                     >
                         Purchased hours
                         <span class="qt-table-modern__sorting"></span>
+                          <div *ngIf="sortBy.sortBy == 'purchased'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="ticket-table__status pointer"
@@ -37,6 +53,10 @@
                     >
                         Block-time used hours
                         <span class="qt-table-modern__sorting"></span>
+                          <div *ngIf="sortBy.sortBy == 'used-hours'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="ticket-table__created-date pointer"
@@ -44,6 +64,10 @@
                     >
                         Block-time hours left
                         <span class="qt-table-modern__sorting"></span>
+                          <div *ngIf="sortBy.sortBy == 'left-hours'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="ticket-table__created-date pointer"
@@ -51,6 +75,10 @@
                     >
                         Exceeding hours
                         <span class="qt-table-modern__sorting"></span>
+                          <div *ngIf="sortBy.sortBy == 'exceeding-hours'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="ticket-table__created-date pointer"
@@ -58,6 +86,10 @@
                     >
                         Other billable hours
                         <span class="qt-table-modern__sorting"></span>
+                          <div *ngIf="sortBy.sortBy == 'billable-hours'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                 </div>
             </div>

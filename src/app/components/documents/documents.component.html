@@ -1,6 +1,7 @@
 <div class="qt-page-list documents-page ">
     <documents-header
-        [showAssignedCompanies]="true"
+    #header
+    [showAssignedCompanies]="true"
         (onChangeFilterField)="onFilter($event)"
     ></documents-header>
     <div class="qt-page-list__body">

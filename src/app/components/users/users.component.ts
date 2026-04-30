@@ -212,7 +212,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.header.clearSearch(false);
   }
   onSearch(value) {
-    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.filter.setUserName((value !== "") ? value : null);
     this.setDefaultScoll();
     this.onScroll();
@@ -306,11 +305,8 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.sortBy.sortBy = field;
     this.filter.setSortBy(field);
     this.sortBy.sortDirection = (this.filter.sortBy ? this.filter.sortBy : 'DESC').includes('DESC') ? 'DESC' : 'ASC';
-
-    this.filter.page = 0;
-    this.userListService.setBlockList(false);
-    this.users = [];
     this.showPreloader = true;
+    this.setDefaultScoll();
     this.onScroll();
   }
   private getUsers() {
@@ -332,6 +328,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   public setDefaultScoll() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.filter.page = 0;
     this.userListService.setBlockList(false);
     this.users = [];
