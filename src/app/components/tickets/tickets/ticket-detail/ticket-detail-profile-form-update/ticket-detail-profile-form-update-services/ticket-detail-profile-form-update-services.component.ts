@@ -45,7 +45,7 @@ export class TicketDetailProfileFormUpdateServicesComponent implements OnInit, O
       this.addedServiceList = [];
       this.elRef.nativeElement.querySelector('#service-description').value = "";
       this.currentService = new TicketProfileFormService();
-
+      if (this.companiesStateService.getCurrentCompany().addItemsAsNotCompleted) this.currentService.completed = false;
       this.serviceDP.clear();
       this.datePicker.reset();
       if (this.currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER') this.timePicker.refresh();
@@ -61,7 +61,7 @@ export class TicketDetailProfileFormUpdateServicesComponent implements OnInit, O
     this.sub.add(getOnGetServicesList);
     let currentDate = new Date();
     this.currentService.setDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-
+    if (this.companiesStateService.getCurrentCompany().addItemsAsNotCompleted) this.currentService.completed = false;
   }
   initUpdateMobile() {
     this.isUpdate = true;
@@ -78,17 +78,19 @@ export class TicketDetailProfileFormUpdateServicesComponent implements OnInit, O
   public onChangeDatePicker(data) {
     this.currentService.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.currentService.setComplated(data.day, data.month, data.year);
+    if (this.companiesStateService.getCurrentCompany().addItemsAsNotCompleted) this.currentService.completed = false;
   }
   public onChangeDatePickerService(data, i) {
     this.addedServiceList[i].setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.addedServiceList[i].setComplated(data.day, data.month, data.year);
+    if (this.companiesStateService.getCurrentCompany().addItemsAsNotCompleted) this.addedServiceList[i].completed = false;
   }
   public addService() {
     this.addedServiceList.push(new TicketProfileFormService(JSON.parse(JSON.stringify(this.currentService))));
     this.currentService = new TicketProfileFormService();
     let currentDate = new Date();
     this.currentService.setDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-
+    if (this.companiesStateService.getCurrentCompany().addItemsAsNotCompleted) this.currentService.completed = false;
     this.serviceDP.clear();
     this.elRef.nativeElement.querySelector('#service-description').value = "";
     if (this.currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER') this.durationPicker.refresh();
@@ -186,6 +188,7 @@ export class TicketDetailProfileFormUpdateServicesComponent implements OnInit, O
 
   clearForm() {
     this.currentService = new TicketProfileFormService(JSON.parse(JSON.stringify(this.addedServiceList[0])));
+    if (this.companiesStateService.getCurrentCompany().addItemsAsNotCompleted) this.currentService.completed = false;
     if (this.currentService.item) this.serviceDP.setEditItem(this.currentService.item);
     if (this.timePicker) this.timePicker.setEditItem(this.currentService.durationStart, this.currentService.durationEnd);
     if (this.durationPicker) {

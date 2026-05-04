@@ -145,6 +145,21 @@
                         </label>
                     </div>
                 </div>
+                    <div class="tab-pane__row">
+                <div class="tab-pane__subtitle">Add items as not completed</div>
+                <div class="tab-pane-input__row">
+                    <div class="qt-input-block">
+                        <div
+                            class="qt-toggle qt-mr-8"
+                            [ngClass]="{'--on':f.addItemsAsNotCompleted.value}"
+                             formControlName="addItemsAsNotCompleted"
+                             (click)="onChangeAsNotCompleted()"
+                        >
+                            <div class="qt-toggle__circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </form>
         </div>
     </div>
