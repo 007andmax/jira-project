@@ -4,7 +4,7 @@
              <ng-template #popContent let-greeting="greeting"
 	>
             <app-tickets-table-item-requested-by
-            [requestedUser]="getUserById(update.user.id)"
+            [requestedUser]="getUserById(update.user ? update.user.id : null)"
             [indexNoAvatar]="indexNoAvatar"
             [listColorNoAvatar]="listColorNoAvatar"
              [ticket]="ticketProfile"
@@ -13,8 +13,8 @@
         >
             <div
                 class="ticket-updates__ticket-photo qt-pointer"
-                [textContent]="ticketsListService.getAssignedUserNameForAvatar(update.user)"
-                [ngStyle]="{'background': ticketsListService.getStyleAvatar(update.user)}"
+                [textContent]="ticketsListService.getAssignedUserNameForAvatar(update.user ? update.user : null)"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(update.user ? update.user : null)}"
                   [ngbPopover]="popContent"
                 [popoverClass]="'requested-by-popover'"
                  [autoClose]="'outside'"
@@ -22,7 +22,7 @@
                 #p="ngbPopover"
                 triggers="manual"
                 appUserLogoPopover
-                [user]="getUserById(update.user.id)"
+                [user]="getUserById(update.user ? update.user.id : null)"
                 [popover]="p"
                 [disabled]="!update.user"
                 [disablePopover]="!update.user"
