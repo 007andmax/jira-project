@@ -10,6 +10,7 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ManufacturesCheckUseComponent } from '../manufactures-check-use/manufactures-check-use.component';
 import { DeviceSettingModelsComponent } from '../device-setting-models/device-setting-models.component';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-device-setting-manufactures',
@@ -23,6 +24,7 @@ export class DeviceSettingManufacturesComponent implements OnInit, OnDestroy {
   manufactures: Array<ManufactureDevice> = [];
   sub: Subscription = new Subscription();
   @ViewChild("models", { static: true }) models: DeviceSettingModelsComponent;
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   constructor(private devicesStateService: DevicesStateService,
     public cd: ChangeDetectorRef,
     private confirmStateService: ConfirmStateService,
@@ -88,7 +90,9 @@ export class DeviceSettingManufacturesComponent implements OnInit, OnDestroy {
     return this.manufactures.filter(item => item.selected).length;
   }
   onFilter(field) {
-    this.filter.onFilter(field, this.manufactures)
+    this.sortBy.sortBy = field;
+    this.filter.onFilter(field, this.manufactures);
+    this.sortBy.sortDirection = this.filter.direction;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

@@ -8,6 +8,7 @@ import { DELETE_NOTE } from 'src/app/const/confirm';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { CustomNoteFilter } from './class/custom-note-filter';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'custom-notes-settings',
@@ -19,6 +20,7 @@ export class CustomNotesSettingsComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
   filter: CustomNoteFilter = new CustomNoteFilter();
   sub: Subscription = new Subscription();
+  sortBy: TicketSortBy = new TicketSortBy('title', 'ASC');
   constructor(private billableService: BillableService,
     private billableStateService: BillableStateService,
     private confirmStateService: ConfirmStateService,
@@ -41,7 +43,9 @@ export class CustomNotesSettingsComponent implements OnInit, OnDestroy {
     this.sub.add(getConfirm);
   }
   onFilter(field) {
+    this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.invoiceNotes);
+    this.sortBy.sortDirection = this.filter.direction;
   }
   onRemoveNote() {
     this.billableService.deleteNote(this.billableStateService.getNoteForRemove().id).subscribe(data => {

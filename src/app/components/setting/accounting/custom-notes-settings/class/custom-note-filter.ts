@@ -4,6 +4,7 @@ export class CustomNoteFilter {
     filter: Array<CompanyFilterTop> = [
         new CompanyFilterTop('title', 'ASC')
     ];
+    direction: string;
 
     constructor() { }
     onFilter(field, list) {
@@ -20,6 +21,7 @@ export class CustomNoteFilter {
                     list.reverse();
                 }
             }
+            this.direction = this.filter[index].filter;
         }
     }
     public clearFilter() {

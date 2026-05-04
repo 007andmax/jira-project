@@ -11,6 +11,7 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_DEVICE_MODEL } from 'src/app/const/confirm';
 import { ManufacturesCheckUseComponent } from '../manufactures-check-use/manufactures-check-use.component';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-device-setting-models',
@@ -26,6 +27,7 @@ export class DeviceSettingModelsComponent implements OnInit, OnDestroy {
   addModel: boolean = false;
   filter: DeviceSettingFilter = new DeviceSettingFilter();
   sub: Subscription = new Subscription();
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   constructor(private devicesStateService: DevicesStateService,
     private devicesRealTimeService: DevicesRealTimeService,
     public cd: ChangeDetectorRef,
@@ -123,7 +125,9 @@ export class DeviceSettingModelsComponent implements OnInit, OnDestroy {
     this.devicesStateService.setModelForRemove(model);
   }
   onFilter(field) {
+    this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.models)
+    this.sortBy.sortDirection = this.filter.direction;
   }
   public getSelectedCount() {
     return this.models.filter(item => item.selected).length;
