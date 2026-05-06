@@ -24,7 +24,8 @@ export class TicketsTableItemStatusComponent {
   @Input() listColors: Array<StatusColor> = [];
   selectedTicketStatus: TitleListType;
   list: Array<TitleListType> = [new TitleListType('In Progress', 'IN_PROGRESS'),
-  new TitleListType('On Hold', 'ON_HOLD')];
+  new TitleListType('On Hold', 'ON_HOLD'),
+  new TitleListType('Pending Review', 'PENDING REVIEW')];
   sub: Subscription = new Subscription();
   constructor(public ticketsService: TicketsService,
     public toastrService: ToastrService,
@@ -54,6 +55,7 @@ export class TicketsTableItemStatusComponent {
     this.ticketsStatus.forEach(item => {
       if (item.name !== 'COMPLETED' && item.name !== 'UNASSIGNED') this.list.push(new TitleListType(this.parseStatus(item.name), item.name));
     })
+    console.log("this.ticketsStatus", this.ticketsStatus);
     this.selectedTicketStatus = this.list.find(item => item.type == (this.ticket.customStatus ? this.ticket.customStatus : this.ticket.status));
     if (this.ticket.status === null) this.selectedTicketStatus = new TitleListType(this.parseStatus("UNASSIGNED"), "UNASSIGNED");
     if (this.ticket.status === "COMPLETED") this.selectedTicketStatus = new TitleListType(this.parseStatus("COMPLETED"), "COMPLETED");
@@ -70,6 +72,7 @@ export class TicketsTableItemStatusComponent {
     if (name === "ON_HOLD") return "On hold";
     if (name === "COMPLETED") return "Completed";
     if (name === "UNASSIGNED") return "Unassigned";
+    if (name === "PENDING REVIEW") return "Pending Review";
     return name;
   }
   getStyleStatus(name) {

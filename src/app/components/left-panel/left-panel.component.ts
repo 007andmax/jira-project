@@ -100,6 +100,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
       .subscribe((event: any) => {
         if (event.navigationTrigger === "popstate") this.isInitPopStateNaviate = true;
         if (this.state === '' || (event instanceof NavigationEnd && this.isInitPopStateNaviate)) {
+          if (window.location.href.includes(`/ticket-preview-report`)) this.state = 'ticket-preview-report';
           if (window.location.href.includes(`/manage-cards`)) this.state = 'manage-cards';
           if (window.location.href.includes(`/integrations/all-integrations`)) this.state = 'all-integrations';
           if (window.location.href.includes(`/tasks`)) this.state = 'my-tasks';
@@ -332,6 +333,7 @@ export class LeftPanelComponent implements OnInit, OnDestroy {
   onChangeState(data) {
     if (this.state !== data) {
       this.state = data;
+      if (this.state === 'ticket-preview-report') this.goToLink(`ticket-preview-report`);
       if (this.state === 'manage-cards') this.goToLink(`manage-cards`);
       if (this.state === 'all-integrations') this.goToLink(`integrations/all-integrations`);
       if (this.state === 'tasks-dashboard') this.goToLink(`tasks-dashboard`);

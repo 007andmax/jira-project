@@ -442,6 +442,11 @@ const routes: Routes = [
     loadChildren: () => import('./components/billing/manage-cards/manage-cards.module').then(m => m.ManageCardsModule),
     canActivate: [PermissionBillableService, PermissionNoSuperAdminService]
   },
+  {
+    path: ':domain/ticket-preview-report',
+    loadChildren: () => import('./components/billing/ticket-preview-report/ticket-preview-report.module').then(m => m.TicketPreviewReportModule),
+    canActivate: [PermissionBillableService, PermissionNoSuperAdminService]
+  },
 ];
 
 /**

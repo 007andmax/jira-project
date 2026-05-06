@@ -169,6 +169,7 @@ import { DisabledBtnModule } from './directives/disabled-btn/disabled-btn.module
 import { UserLogoPopoverDirective } from './directives/user-logo-popover/user-logo-popover.directive';
 import { GetDirectionComponent } from './components/shared/get-direction/get-direction.component';
 import { CompanyLogoPopoverDirective } from './directives/company-logo-popover/company-logo-popover.directive';
+import { TicketPreviewReportComponent } from './components/billing/ticket-preview-report/ticket-preview-report.component';
 declare var $: any;
 /**
  * This module represents the main application module

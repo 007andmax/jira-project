@@ -84,7 +84,8 @@ export class LeftPanelService {
       || state === 'new-payments-ng2'
       || state == 'contract-statistics'
       || state === 'new-contracts'
-      || state === 'manage-cards')
+      || state === 'manage-cards'
+      || state === 'ticket-preview-report')
   }
   isInventoryState(state) {
     return (state === 'inventory')

@@ -51,7 +51,8 @@ export class TicketsFilterComponent implements OnInit, OnDestroy {
   listsStatus = [new ItemStatus('Unassigned', 'unassigned', 'UNASSIGNED'),
   new ItemStatus('Completed', 'completed', 'CLOSED'),
   new ItemStatus('In Progress', 'inProgress', 'OPEN'),
-  new ItemStatus('On Hold', 'onHold', 'ON_HOLD')];
+  new ItemStatus('On Hold', 'onHold', 'ON_HOLD'),
+  new ItemStatus('Pending Review', 'PENDING REVIEW', 'PENDING REVIEW')];
   ticketPriorities: Array<TicketsPriority> = [];
   ticketsStatus: Array<TicketStatusFilter> = [];
   ticketsCounts: TicketsCounts;

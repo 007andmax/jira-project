@@ -34,6 +34,8 @@ export class PermissionManageService {
   editCategoryDocumentsRelatedPermissions = ['DELETE_CATEGORY'];
   sections = {
     'Tickets Area': [
+      'COMPLETE_EXPENSE',
+      'TICKET_REVIEW',
       'EDIT_TICKETS',
       'EDIT_ANOTHER_USERS_TICKET',
       'REOPEN_CLOSED_TICKETS',
