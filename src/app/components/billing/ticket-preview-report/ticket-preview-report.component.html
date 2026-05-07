@@ -74,38 +74,10 @@
             <ng-template
                 ngFor
                 let-product
-                [ngForOf]="ticket.productExpenses"
+                [ngForOf]="ticket.products"
                 [ngForTrackBy]="trackById"
             >
-                <tr>
-                    <td></td>
-                    <td
-                        class="invoice-item__col-item"
-                        [textContent]="product.item.manufacture"
-                    >
-                    </td>
-                    <td class="invoice-item__col-desc">
-                        <pre [textContent]="product.item.description"></pre>
-                    </td>
-                    <td class="invoice-item__col-price">
-                        <div class="qt-df qt-ai-c qt-jc-fe">
-                            {{product.item.sale | currency}}
-                        </div>
-                    </td>
-                    <td
-                        class="invoice-item__col-quentity"
-                        [textContent]="product.billableQuantity"
-                    ></td>
-                    <td
-                        class="invoice-item__col-tax"
-                      
-                    ></td>
-                    <td class="invoice-item__col-amount">
-                        {{product.sum | currency}}
-                       
-                    </td>
-                    <td></td>
-                </tr>
+              <app-ticket-preview-report-product-item [product]="product"></app-ticket-preview-report-product-item>
             </ng-template>
         </tbody>
     </table>

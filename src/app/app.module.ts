@@ -170,6 +170,7 @@ import { UserLogoPopoverDirective } from './directives/user-logo-popover/user-lo
 import { GetDirectionComponent } from './components/shared/get-direction/get-direction.component';
 import { CompanyLogoPopoverDirective } from './directives/company-logo-popover/company-logo-popover.directive';
 import { TicketPreviewReportComponent } from './components/billing/ticket-preview-report/ticket-preview-report.component';
+import { PermissionTicketPreviewReportService } from './components/billing/ticket-preview-report/permission-ticket-preview-report.service';
 declare var $: any;
 /**
  * This module represents the main application module
@@ -299,7 +300,8 @@ declare var $: any;
         PermissionClientUserService,
         PermissionMyProfileService,
         SuperAdminKnowledgeBaseService,
-        PermissionIntegrationsService
+        PermissionIntegrationsService,
+        PermissionTicketPreviewReportService
     ],
     bootstrap: [AppComponent]
 })

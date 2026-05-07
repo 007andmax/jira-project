@@ -14,6 +14,7 @@ export class TicketPreviewReportComponent implements OnInit {
   ngOnInit(): void {
     this.peportsService.getTicketPreivew().subscribe((res: any) => {
       this.list = res.map(item => new TicketPreview(item));
+      console.log("this.list", this.list);
     })
   }
   getDuration(input) {

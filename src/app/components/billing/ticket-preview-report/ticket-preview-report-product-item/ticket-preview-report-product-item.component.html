@@ -1,0 +1,80 @@
+  <tr>
+        <td></td>
+        <td
+            class="invoice-item__col-item"
+            [textContent]="product.item.manufacture"
+        >
+        </td>
+        <td class="invoice-item__col-desc">
+            <pre [textContent]="product.item.description"></pre>
+        </td>
+        <td class="invoice-item__col-price">
+                <input
+                type="text"
+                decimalNumber
+                [useFixed]="true"
+                appToFixed
+                [ngClass]="{'--input-error' : !validate.getCostSale()}"
+                (blur)="validate.checkPriceCost(product.item.sale,product.item.cost)"
+                [value]="product.item.cost"
+                (onChange)="onChangeCost($event)"
+                placeholder="Enter Cost"
+            >
+            <app-mat-error
+                class="invalid-feedback --pos-static"
+                *ngIf="!validate.getCostSale()"
+            >
+                Cost cannot be higher than Price
+            </app-mat-error>
+        </td>
+            <td class="invoice-item__col-price">
+            <input
+                type="text"
+                decimalNumber
+                [useFixed]="true"
+                [ngClass]="{'--input-error' : !validate.getSale()}"
+                appToFixed
+                [value]="product.item.sale"
+                (input)="validate.resetSale()"
+                (blur)="validate.checkPriceCost(product.item.sale,product.item.cost)"
+                (onChange)="onChangeSale($event)"
+                placeholder="Enter Price"
+            >
+            <app-mat-error
+                class="invalid-feedback"
+                *ngIf="!validate.getSale()"
+            >
+                Price is required
+            </app-mat-error>
+        </td>
+            <td class="invoice-item__col-price">
+            <input
+                type="text"
+                decimalNumber
+                (blur)="validate.checkPriceCost(product.item.sale,product.item.cost)"
+                (onChange)="changeMarkup($event)"
+                [value]="markup"
+                placeholder="Enter Cost"
+            >
+        </td>
+        <td
+            class="invoice-item__col-quentity"   
+        >
+        <input
+                type="text"
+                decimalNumber
+                [useFixed]="true"
+                appToFixed
+                [value]="product.quantity"
+                placeholder="Enter Cost"
+            ></td>
+        <td
+            class="invoice-item__col-tax"
+            
+        ></td>
+        <td class="invoice-item__col-amount">
+            
+            
+        </td>
+        <td></td>
+    </tr>
