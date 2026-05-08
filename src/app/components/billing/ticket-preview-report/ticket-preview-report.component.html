@@ -34,18 +34,22 @@
     <table class="invoice-item__table">
         <thead>
             <tr>
-                <th></th>
-                <th class="invoice-item__col-item  qt-fw-600 service-date">Item</th>
+               
+                <th class="invoice-item__col-item  qt-fw-600 service-date">Date</th>
+                   <th class="invoice-item__col-desc  qt-fw-600">Item</th>
                 <th class="invoice-item__col-desc  qt-fw-600">Description</th>
-                <th class="invoice-item__col-price qt-fw-600">Unit Price</th>
-                <th class="invoice-item__col-quentity qt-fw-600">Quantity</th>
-                <th class="invoice-item__col-tax qt-fw-600">Tax</th>
-                <th class="invoice-item__col-amount qt-fw-600">Amount</th>
+                  <th class="invoice-item__col-quentity qt-fw-600">Quantity</th>
+                <th class="invoice-item__col-price qt-fw-600">Cost</th>
+              <th class="invoice-item__col-price qt-fw-600">Markup</th>
+              <th class="invoice-item__col-price qt-fw-600">Price</th>
+                <th class="invoice-item__col-tax qt-fw-600">Discount</th>
+                <th class="invoice-item__col-amount qt-fw-600">Serial Number</th>
                 <th></th>
+                  <th></th>
             </tr>
         </thead>
         <tbody>
-            <ng-template
+          <!--   <ng-template
                 ngFor
                 let-service
                 [ngForOf]="ticket.services"
@@ -70,7 +74,7 @@
                     ></td>
                     <td></td>
                 </tr>
-            </ng-template>
+            </ng-template> -->
             <ng-template
                 ngFor
                 let-product

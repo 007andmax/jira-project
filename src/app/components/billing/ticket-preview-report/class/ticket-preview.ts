@@ -1,12 +1,13 @@
 import { TicketProfileProduct } from "src/app/components/tickets/tickets/class/ticket-profile-product";
 import { TicketProfileService } from "src/app/components/tickets/tickets/class/ticket-profile-service";
+import { TicketPreviewProduct } from "./ticket-preview-product";
 
 export class TicketPreview {
     companyId: string;
     companyName: string;
     id: string;
     number: string;
-    products: Array<TicketProfileProduct> = [];
+    products: Array<TicketPreviewProduct> = [];
     services: Array<TicketProfileService> = [];
     status: string;
     constructor(data: any) {
@@ -14,7 +15,7 @@ export class TicketPreview {
             for (const key in data) {
                 this[key] = data[key];
             }
-            this.products = data.products.map(item => new TicketProfileProduct(item));
+            this.products = data.products.map(item => new TicketPreviewProduct(item));
             this.services = data.services.map(item => new TicketProfileService(item));
         }
     }

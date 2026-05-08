@@ -7,11 +7,17 @@ import { TicketPreviewReportProductItemComponent } from './ticket-preview-report
 import { DecimalNumberModule } from 'src/app/directives/decimal-number/decimal-number.module';
 import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
+import { DatePickerModule } from '../../shared/date-picker/date-picker.module';
+import { TicketPreviewReportProductItemDropDownComponent } from './ticket-preview-report-product-item/ticket-preview-report-product-item-drop-down/ticket-preview-report-product-item-drop-down.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FilterModule } from 'src/app/pipe/filter/filter.module';
+import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
+import { ContractsAsideDiscountModule } from '../contracts/contracts-aside/contracts-aside-discount/contracts-aside-discount.module';
 
 
 
 @NgModule({
-    declarations: [TicketPreviewReportComponent, TicketPreviewReportProductItemComponent
+    declarations: [TicketPreviewReportComponent, TicketPreviewReportProductItemComponent, TicketPreviewReportProductItemDropDownComponent
 
     ],
     imports: [
@@ -20,7 +26,12 @@ import { MatErrorModule } from '../../shared/mat-error/mat-error.module';
         TicketPreviewReportRoutingModule,
         DecimalNumberModule,
         ToFixedModule,
-        MatErrorModule
+        MatErrorModule,
+        DatePickerModule,
+        NgbModule,
+        FilterModule,
+        DynamicTooltipModule,
+        ContractsAsideDiscountModule
     ],
 
 })
