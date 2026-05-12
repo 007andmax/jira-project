@@ -81,7 +81,7 @@
                 [ngForOf]="ticket.products"
                 [ngForTrackBy]="trackById"
             >
-              <app-ticket-preview-report-product-item [product]="product"></app-ticket-preview-report-product-item>
+              <app-ticket-preview-report-product-item [product]="product" [ticket]="ticket"></app-ticket-preview-report-product-item>
             </ng-template>
         </tbody>
     </table>

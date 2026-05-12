@@ -13,6 +13,8 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { TicketPreviewProduct } from '../class/ticket-preview-product';
 import { TicketPreviewValidate } from '../class/ticket-preview-validate';
+import { TicketPreview } from '../class/ticket-preview';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-ticket-preview-report-product-item',
@@ -21,9 +23,11 @@ import { TicketPreviewValidate } from '../class/ticket-preview-validate';
 })
 export class TicketPreviewReportProductItemComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;
+  @Input() ticket: TicketPreview;
   @Input() product: TicketPreviewProduct;
   markup: number;
   validate: TicketPreviewValidate = new TicketPreviewValidate();
+  sub: Subscription = new Subscription();
   constructor(
     public confirmStateService: ConfirmStateService,
     public modalService: NgbModal,
@@ -88,8 +92,8 @@ export class TicketPreviewReportProductItemComponent implements OnInit {
     return this.permissionsService.isAllowed(action)
   }
   removeProduct() {
-    //  this.ticketStateService.setUpdateForRemove(this.update);
-    this.ticketStateService.setProductForRemove(this.product);
+    this.ticketStateService.setTicketPreviewForRemove(this.ticket);
+    this.ticketStateService.setProductTicketPreviewForRemove(this.product);
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET_DETAIL_PRODUCT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
     modalRef.componentInstance.header = `Delete Ticket`;
