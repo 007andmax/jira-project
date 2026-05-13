@@ -113,7 +113,7 @@
 >
         <div
             class="tooltip__circle-avatar"
-            [textContent]="getCompanyById().name[0].toUpperCase()"
+            [textContent]="getCompanyById() ? getCompanyById().name[0].toUpperCase() : ''"
             [ngStyle]="{'background': parseLogo() }"
              [ngbPopover]="popCompanyContent"
             [popoverClass]="'requested-by-popover'"
