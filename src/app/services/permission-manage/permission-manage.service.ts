@@ -35,7 +35,6 @@ export class PermissionManageService {
   sections = {
     'Tickets Area': [
       'MANAGE_EXPENSE_COMPLETION_STATUS',
-      'VIEW_TICKET_REVIEW_REPORT',
       'EDIT_TICKETS',
       'EDIT_ANOTHER_USERS_TICKET',
       'REOPEN_CLOSED_TICKETS',
@@ -67,7 +66,8 @@ export class PermissionManageService {
       'VIEW_SERVICE_AGREEMENTS',
       'EDIT_SERVICE_AGREEMENTS',
       'DELETE_SERVICE_AGREEMENTS',
-      'VIEW_ACCOUNTING_DASHBOARD'
+      'VIEW_ACCOUNTING_DASHBOARD',
+      'VIEW_TICKET_REVIEW_REPORT',
     ],
     Devices: ['NETWORK_SCAN_CLIENTS', 'REMOTE_CONNECTIONS', 'MODIFY_SETTINGS'],
     Passwords: [

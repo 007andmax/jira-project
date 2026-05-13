@@ -25,7 +25,7 @@ export class TicketsTableItemStatusComponent {
   selectedTicketStatus: TitleListType;
   list: Array<TitleListType> = [new TitleListType('In Progress', 'IN_PROGRESS'),
   new TitleListType('On Hold', 'ON_HOLD'),
-  new TitleListType('Pending Review', 'PENDING REVIEW')];
+  new TitleListType('Pending Review', 'PENDING_REVIEW')];
   sub: Subscription = new Subscription();
   constructor(public ticketsService: TicketsService,
     public toastrService: ToastrService,
@@ -72,7 +72,7 @@ export class TicketsTableItemStatusComponent {
     if (name === "ON_HOLD") return "On hold";
     if (name === "COMPLETED") return "Completed";
     if (name === "UNASSIGNED") return "Unassigned";
-    if (name === "PENDING REVIEW") return "Pending Review";
+    if (name === "PENDING_REVIEW") return "Pending Review";
     return name;
   }
   getStyleStatus(name) {

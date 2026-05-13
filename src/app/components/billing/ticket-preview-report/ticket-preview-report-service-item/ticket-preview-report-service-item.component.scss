@@ -1,0 +1,36 @@
+ @import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/breakpoint";
+
+.input-price  {
+      margin-top: 8px;
+      display: block;
+      max-width: 100px;
+      border: none;
+      box-shadow: inset 0px 0px 2px 0px #00000047;
+      width: 100%;
+      padding-left: 6px;
+      padding-right: 6px;
+      text-align: right;
+      font-size: 12px;
+      color: $gray-900;
+      margin-bottom: 8px;
+    }
+    .input-qty {
+      text-align: right;
+      width: 100%;
+      border: none;
+      box-shadow: inset 0px 0px 2px 0px #00000047;
+    }
+td {
+    border: solid 1px $gray-200;
+    padding: 0 12px;
+    &:first-child, &:last-child  {
+        border: none;
+        width: 30px;
+        background: transparent;
+        padding: 0;
+        .icon__dot-vertical {
+            margin-left: auto;
+        }
+        }
+}

@@ -6,35 +6,41 @@
             [ngForTrackBy]="trackByIndex"
         >
 <div class="invoice-item qt-mb-16 qt-w100">
-    <div class="qt-df qt-ai-c">
-        <div class="invoice-item__header qt-w100 qt-ml-30 qt-df qt-ai-c qt-pt-10 qt-pb-10">
+   <div class="qt-df qt-ai-c">
+        <div class="invoice-item__header qt-w100 qt-ml-30 qt-df qt-ai-c qt-pt-10 qt-pb-10 qt-h40">
             <div
                 class="invoice-item__number qt-color-white qt-fs-10 qt-pt-4 qt-pb-4 qt-pl-4 qt-pr-4 qt-mr-16"
                 [textContent]="'Tkt# ' + ticket.number"
             ></div>
-          <!--  <div class="qt-fs-12 qt-mr-16">
+            <!--<div class="qt-fs-12 qt-mr-16">
                 <span class="qt-fs-11 qt-fw-600">Date</span>
                 {{getDate(ticket.closedAt)}}
             </div>
-            <div class="qt-fs-12 invoice-item__subject">
+            <div
+                class="qt-fs-12 qt-df qt-ai-c qt-fg"
+                *ngIf="getPermissions('EDIT_TICKETS')"
+            >
+                <span class="qt-fs-11 qt-fw-600">Subject:</span>
+                <input
+                    class="qt-mr-10 qt-ml-10 qt-fg"
+                    [(ngModel)]="ticket.newSubject"
+                    (input)="onChangeSubject()"
+                >
+            </div>
+            <div
+                class="qt-fs-12 invoice-item__subject"
+                *ngIf="!getPermissions('EDIT_TICKETS')"
+            >
                 <span class="qt-fs-11 qt-fw-600">Subject:</span>
                 {{ticket.subject}}
             </div> -->
         </div>
-       <!-- <div class="delete-item-container qt-pl-4">
-            <div
-                class="qt-pointer  qt-sz-16 qt-icon icon__inactive qt-ic-c "
-                *ngIf="ticketsLength > 1"
-                placement="left"
-                ngbTooltip="Remove Ticket"
-                (click)="delete()"
-            ></div>
-        </div>-->
+        <div class="delete-item-container qt-pl-4"></div>
     </div>
     <table class="invoice-item__table">
         <thead>
             <tr>
-               
+                <th></th>
                 <th class="invoice-item__col-item  qt-fw-600 service-date">Date</th>
                    <th class="invoice-item__col-desc  qt-fw-600">Item</th>
                 <th class="invoice-item__col-desc  qt-fw-600">Description</th>
@@ -49,32 +55,14 @@
             </tr>
         </thead>
         <tbody>
-          <!--   <ng-template
+         <ng-template
                 ngFor
                 let-service
                 [ngForOf]="ticket.services"
                 [ngForTrackBy]="trackById"
             >
-                <tr>
-                    <td></td>
-                    <td class="invoice-item__col-desc">
-                        <pre [textContent]="service.description"></pre>
-                    </td>
-                    <td
-                        class="invoice-item__col-price"
-                        [textContent]="service.item.rate | currency"
-                    ></td>
-                    <td
-                        class="invoice-item__col-quentity"
-                         [textContent]="getDuration(service.quantity)"
-                    ></td>
-                    <td
-                        class="invoice-item__col-tax"
-                        [innerHTML]="service.date"
-                    ></td>
-                    <td></td>
-                </tr>
-            </ng-template> -->
+              <app-ticket-preview-report-service-item [service]="service"  [ticket]="ticket"></app-ticket-preview-report-service-item>
+            </ng-template>
             <ng-template
                 ngFor
                 let-product

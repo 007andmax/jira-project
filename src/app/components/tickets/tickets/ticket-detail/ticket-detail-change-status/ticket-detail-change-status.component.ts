@@ -12,6 +12,7 @@ export class TicketDetailChangeStatusComponent extends TicketChangeStatusCompone
   @ViewChild('dp', { static: true }) dp: DropDownComponent;
   selectedTicketStatus: TitleListType;
   list: Array<TitleListType> = [new TitleListType('In Progress', 'IN_PROGRESS'),
+  new TitleListType('Pending Review', 'PENDING_REVIEW'),
   new TitleListType('On Hold', 'ON_HOLD')];
 
   ngOnInit() {

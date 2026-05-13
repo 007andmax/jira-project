@@ -1,6 +1,7 @@
 import { TicketProfileProduct } from "src/app/components/tickets/tickets/class/ticket-profile-product";
 import { TicketProfileService } from "src/app/components/tickets/tickets/class/ticket-profile-service";
 import { TicketPreviewProduct } from "./ticket-preview-product";
+import { TicketPreviewService } from "./ticket-preview-service";
 
 export class TicketPreview {
     companyId: string;
@@ -8,7 +9,7 @@ export class TicketPreview {
     id: string;
     number: string;
     products: Array<TicketPreviewProduct> = [];
-    services: Array<TicketProfileService> = [];
+    services: Array<TicketPreviewService> = [];
     status: string;
     constructor(data: any) {
         if (data) {
@@ -16,7 +17,7 @@ export class TicketPreview {
                 this[key] = data[key];
             }
             this.products = data.products.map(item => new TicketPreviewProduct(item));
-            this.services = data.services.map(item => new TicketProfileService(item));
+            this.services = data.services.map(item => new TicketPreviewService(item));
         }
     }
 }

@@ -1,4 +1,5 @@
   <tr>
+    <td></td>
         <td> <app-date-picker
                 #startDateDP
                 [dropdownClass]="['date-picker']"
@@ -18,6 +19,7 @@
             class="invoice-item__col-quentity"   
         >
         <input
+        class="input-default input-qty"
                 type="text"
                 decimalNumber
                 [useFixed]="true"
@@ -27,6 +29,7 @@
             ></td>
         <td class="invoice-item__col-price">
                 <input
+                class="input-default input-price"
                 type="text"
                 decimalNumber
                 [useFixed]="true"
@@ -46,6 +49,7 @@
         </td>
           <td class="invoice-item__col-price">
             <input
+            class="input-default input-price"
                 type="text"
                 decimalNumber
                 (blur)="validate.checkPriceCost(product.item.sale,product.item.cost);updateProduct()"
@@ -56,6 +60,7 @@
         </td>
             <td class="invoice-item__col-price">
             <input
+            class="input-default input-price"
                 type="text"
                 decimalNumber
                 [useFixed]="true"
@@ -81,7 +86,7 @@
         >
          <input
             type="text"
-            class="qt-input-in-table qt-text-right"
+            class="input-default input-price"
             decimalNumber
             placeholder="0.00"
             [defaultValue]="''"
@@ -93,6 +98,7 @@
         <td class="invoice-item__col-amount">
             
                <input
+               class="input-default input-qty"
                 type="text"
                  [(ngModel)]="product.serialNumber"
                 placeholder="Enter Cost"

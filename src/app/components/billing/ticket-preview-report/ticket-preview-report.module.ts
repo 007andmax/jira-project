@@ -13,11 +13,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterModule } from 'src/app/pipe/filter/filter.module';
 import { DynamicTooltipModule } from '../../shared/dynamic-tooltip/dynamic-tooltip.module';
 import { ContractsAsideDiscountModule } from '../contracts/contracts-aside/contracts-aside-discount/contracts-aside-discount.module';
+import { TicketPreviewReportServiceItemComponent } from './ticket-preview-report-service-item/ticket-preview-report-service-item.component';
+import { ServicesListModule } from '../../shared/services-list/services-list.module';
+import { TicketProfileUpdatesServiceTimepickerModule } from '../../tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.module';
+import { TicketProfileUpdatesServiceDurationModule } from '../../tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.module';
 
 
 
 @NgModule({
-    declarations: [TicketPreviewReportComponent, TicketPreviewReportProductItemComponent, TicketPreviewReportProductItemDropDownComponent
+    declarations: [TicketPreviewReportComponent, TicketPreviewReportProductItemComponent, TicketPreviewReportProductItemDropDownComponent, TicketPreviewReportServiceItemComponent
 
     ],
     imports: [
@@ -31,7 +35,10 @@ import { ContractsAsideDiscountModule } from '../contracts/contracts-aside/contr
         NgbModule,
         FilterModule,
         DynamicTooltipModule,
-        ContractsAsideDiscountModule
+        ContractsAsideDiscountModule,
+        ServicesListModule,
+        TicketProfileUpdatesServiceTimepickerModule,
+        TicketProfileUpdatesServiceDurationModule
     ],
 
 })

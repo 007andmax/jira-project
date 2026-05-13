@@ -13,4 +13,25 @@ import { CategoryProductitem } from 'src/class/category-product-item';
 })
 export class TicketPreviewReportProductItemDropDownComponent extends ProductListComponent {
 
+
+  ngOnInit() {
+    if (this.type === 'QUOTE') this.classAddProduct = 'quote-add-product';
+    if (this.type === 'REPORT') this.classAddProduct = 'report-add-product';
+    if (this.type === 'RECURRING-TICKET') this.classAddProduct = 'recurring-ticket-add-product';
+    if (this.type === 'TICKET' || this.type === 'PRODUCTS_TICKET') this.classAddProduct = 'ticket-add-product';
+    if (this.inventoryStateService.getListProducts().length > 0) this.itemList = this.inventoryStateService.getListProducts();
+    let getOnProducts = this.inventoryStateService.getOnProducts().subscribe(data => {
+      this.itemList = data;
+      this.onUpdateList();
+      this.cd.detectChanges();
+    })
+    this.sub.add(getOnProducts);
+    this.onUpdateList();
+    if (this.editItem) {
+      let value = this.getNameOrDescription(this.editItem);
+      this.elRef.nativeElement.querySelector('#dropdownProducts').value = value;
+      if (value !== '') this.selectedItem = true;
+      console.log("value", value);
+    }
+  }
 }

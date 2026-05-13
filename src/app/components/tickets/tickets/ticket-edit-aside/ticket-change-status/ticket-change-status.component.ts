@@ -72,6 +72,7 @@ export class TicketChangeStatusComponent implements OnInit, OnDestroy {
     if (name === "ON_HOLD") return "On hold";
     if (name === "COMPLETED") return "Completed";
     if (name === "UNASSIGNED") return "Unassigned";
+    if (name === "PENDING_REVIEW") return "Pending Review";
     return name;
   }
   ngOnDestroy(): void {
