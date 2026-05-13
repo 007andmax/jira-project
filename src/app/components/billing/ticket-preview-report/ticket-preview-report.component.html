@@ -10,24 +10,35 @@
         <div class="invoice-item__header qt-w100 qt-ml-30 qt-df qt-ai-c qt-pt-10 qt-pb-10 qt-h40">
             <div
                 class="invoice-item__number qt-color-white qt-fs-10 qt-pt-4 qt-pb-4 qt-pl-4 qt-pr-4 qt-mr-16"
-                [textContent]="'Tkt# ' + ticket.number"
+                [textContent]="'Tkt# ' + ticket.number + ' Status - Pending Review'"
             ></div>
-            <!--<div class="qt-fs-12 qt-mr-16">
-                <span class="qt-fs-11 qt-fw-600">Date</span>
-                {{getDate(ticket.closedAt)}}
+            <div class="qt-fs-12 qt-mr-16">
+                <span class="qt-fs-11 qt-fw-600">Company</span>
+                {{ticket.companyName}}
             </div>
-            <div
+           <div
                 class="qt-fs-12 qt-df qt-ai-c qt-fg"
-                *ngIf="getPermissions('EDIT_TICKETS')"
+               
             >
-                <span class="qt-fs-11 qt-fw-600">Subject:</span>
-                <input
-                    class="qt-mr-10 qt-ml-10 qt-fg"
-                    [(ngModel)]="ticket.newSubject"
-                    (input)="onChangeSubject()"
-                >
-            </div>
             <div
+             class="qt-button qt-ml-12"
+            placement="left"
+            ngbTooltip="You cannot close the ticket. It contains incomplete products / services / tasks."
+            [disableTooltip]="checkClose(ticket)"
+            appDisabledBtn
+            #update_closeBtn="disabled"
+            (onClick)="close(ticket)"
+            [ngClass]="{'--disabled':!checkClose(ticket), '--loading':isUpdateAndClose}"
+        >
+            <span
+                class="qt-icon icon__check qt-icon__white qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
+                *ngIf="!isUpdateAndClose"
+            ></span>
+            <span>Close Ticket</span>
+            <app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket>
+        </div>
+            </div>
+           <!--  <div
                 class="qt-fs-12 invoice-item__subject"
                 *ngIf="!getPermissions('EDIT_TICKETS')"
             >
@@ -75,3 +86,8 @@
     </table>
 </div>
 </ng-template>
+
+  <div
+        class="loading"
+        *ngIf="showPreloader"
+    ></div>

@@ -17,6 +17,9 @@ import { TicketPreviewReportServiceItemComponent } from './ticket-preview-report
 import { ServicesListModule } from '../../shared/services-list/services-list.module';
 import { TicketProfileUpdatesServiceTimepickerModule } from '../../tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.module';
 import { TicketProfileUpdatesServiceDurationModule } from '../../tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.module';
+import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
+import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
+import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 
 
 
@@ -38,7 +41,10 @@ import { TicketProfileUpdatesServiceDurationModule } from '../../tickets/tickets
         ContractsAsideDiscountModule,
         ServicesListModule,
         TicketProfileUpdatesServiceTimepickerModule,
-        TicketProfileUpdatesServiceDurationModule
+        TicketProfileUpdatesServiceDurationModule,
+        TextAreaModule,
+        DisabledBtnModule,
+        PreloaderTicketModule
     ],
 
 })

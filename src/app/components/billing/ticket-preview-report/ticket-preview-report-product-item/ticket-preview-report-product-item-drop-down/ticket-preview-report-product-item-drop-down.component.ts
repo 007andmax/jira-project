@@ -34,4 +34,10 @@ export class TicketPreviewReportProductItemDropDownComponent extends ProductList
       console.log("value", value);
     }
   }
+  public onChangeDescription(event) {
+    this.editItem.description = event.target.value;
+  }
+  public onPastDescription(event) {
+    this.editItem.description = event.target.value;;
+  }
 }

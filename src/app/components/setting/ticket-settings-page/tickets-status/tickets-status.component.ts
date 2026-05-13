@@ -76,6 +76,7 @@ export class TicketsStatusComponent implements OnInit, OnDestroy {
     if (name === "ON_HOLD") return "On hold";
     if (name === "UNASSIGNED") return "Unassigned";
     if (name === "COMPLETED") return "Completed";
+    if (name === "PENDING_REVIEW") return "Pending Review";
     return name;
   }
   toggleAddStatus(data) {

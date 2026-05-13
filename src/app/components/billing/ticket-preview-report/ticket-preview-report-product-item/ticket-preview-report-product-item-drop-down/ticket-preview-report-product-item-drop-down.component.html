@@ -5,7 +5,15 @@
     #products="ngbDropdown"
     (openChange)="onCloseProducts($event)"
     >
-            <pre id="dropdownProducts" [textContent]="getNameOrDescription(editItem)" ngbDropdownToggle></pre>
+      <textarea
+                        appTextArea
+                        [height]="'100px'"
+                        rows="5"
+                        id="dropdownProducts"
+                        placeholder="Write Product Description"
+                        (input)="onChangeDescription($event)"
+                        (paste)="onPastDescription($event)"
+                    ></textarea>
                <div
         class=select-product__dropdown
         ngbDropdownMenu
