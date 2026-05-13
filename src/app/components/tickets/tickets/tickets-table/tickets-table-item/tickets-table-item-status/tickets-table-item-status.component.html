@@ -18,6 +18,15 @@
         ngbDropdownToggle
             class="tag__modern"
             [ngStyle]="getStyleStatus(ticket.status)"
+            *ngIf="ticket.status === 'PENDING_REVIEW'"
+             [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal,'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
+        >
+            Pending Review
+        </span>
+          <span
+        ngbDropdownToggle
+            class="tag__modern"
+            [ngStyle]="getStyleStatus(ticket.status)"
             *ngIf="ticket.status === 'COMPLETED'"
              [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal,'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
         >

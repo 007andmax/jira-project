@@ -20,6 +20,13 @@
         >
             Completed
         </span>
+          <span
+            class="tag__modern"
+            [ngStyle]="getStyleStatus(ticket.status)"
+            *ngIf="ticket.status === 'PENDING_REVIEW'"
+        >
+            Pending Review
+        </span>
         <span
             class="tag__modern"
             [ngStyle]="getStyleStatus('UNASSIGNED')"
