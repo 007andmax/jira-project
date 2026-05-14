@@ -1,98 +1,91 @@
-  <tr>
-     <td></td>
-        <td> <app-date-picker
-                #startDateDP
-                [dropdownClass]="['date-picker']"
-                [formatDate]="formatDate"
-                [editMode]="true"
-                [editDate]="service.date"
-                [container]="'body'"
-                (onChange)="onChangeStartDate($event)"
-            ></app-date-picker></td>
-              <td   >
-                <app-services-list
-                    #serviceDP
-                    [itemList]="servicesList"
-                    [editItem]="service.item"
-                    [type]="'TICKET'"
-                    (selectedServicesItem)="selectService($event)"
-                ></app-services-list>
-              </td>
-        <td class="invoice-item__col-desc"   
-  
-    >
-            <div class="editable-description editable-chat">
-                <textarea
-                    name="cps-chat"
-                    (blur)="updateService()"
-                    appTextArea
-                    [(ngModel)]="service.description"
-                    maxlength="500"
-                    cols="5"
-                    rows="1"
-                    id="service-description"
-                    placeholder="Write ticket conversation here…"
-                ></textarea>
-            </div>  </td>
-          <td
-            class="invoice-item__col-quentity"   
-             
-        >
-                <app-ticket-profile-updates-service-duration
-                    #durationPicker
-                    [validate]="service.validateQuantity"
-                    [errorMessage]="'You have to set any time value'"
-                    (onChange)="onChangeDuration($event)"
-                    [hour]="getHours(service)"
-                    [minute]="getMinutes(service)"
-                ></app-ticket-profile-updates-service-duration>  
-    </td>
-        <td class="invoice-item__col-price">
-               
-        </td>
-          <td class="invoice-item__col-price">
-           
-        </td>
-            <td class="invoice-item__col-price">
-            
-        </td>
-          
-        <td
-            class="invoice-item__col-tax"
-            
-        >
-        
-    </td>
-        <td class="invoice-item__col-amount">
-          
-        </td>
-        <td> <div
-                    class="qt-button qt-button--with-icon --sm --gray qt-ml-8"
-                    (click)="setComplete()"
-                    [ngClass]="{
+<tr>
+  <td>
+    <app-date-picker
+      #startDateDP
+      [dropdownClass]="['date-picker']"
+      [formatDate]="formatDate"
+      [editMode]="true"
+      [editDate]="service.date"
+      [container]="'body'"
+      (onChange)="onChangeStartDate($event)"
+    ></app-date-picker>
+  </td>
+  <td>
+    <app-services-list
+      #serviceDP
+      [itemList]="servicesList"
+      [editItem]="service.item"
+      [type]="'TICKET'"
+      (selectedServicesItem)="selectService($event)"
+    ></app-services-list>
+  </td>
+  <td class="invoice-item__col-desc"
+
+  >
+    <div class="editable-description editable-chat">
+      <textarea
+        name="cps-chat"
+        (blur)="updateService()"
+        appTextArea
+        [(ngModel)]="service.description"
+        maxlength="500"
+        cols="5"
+        rows="1"
+        id="service-description"
+        placeholder="Write ticket conversation here…"
+      ></textarea>
+    </div>
+  </td>
+  <td
+    class="invoice-item__col-quentity"
+
+  >
+    <app-ticket-profile-updates-service-duration
+      #durationPicker
+      [validate]="service.validateQuantity"
+      [errorMessage]="'You have to set any time value'"
+      (onChange)="onChangeDuration($event)"
+      [hour]="getHours(service)"
+      [minute]="getMinutes(service)"
+    ></app-ticket-profile-updates-service-duration>
+  </td>
+  <td class="invoice-item__col-price"></td>
+  <td class="invoice-item__col-price"></td>
+  <td class="invoice-item__col-price"></td>
+  <td class="invoice-item__col-tax"></td>
+  <td class="invoice-item__col-amount"></td>
+  <td>
+    <div
+      class="qt-button qt-button--with-icon --sm --gray"
+      (click)="setComplete()"
+      [ngClass]="{
                     'no-click':!getPermissions('MANAGE_EXPENSE_COMPLETION_STATUS'),
                 'button-mark-complete': service.completed}"
-                >
-                    <i
-                        class="qt-icon icon__check qt-icon__green-600 qt-mr-6 icn-16"
-                        *ngIf="service.completed"
-                    ></i>
-                    <i
-                        class="qt-icon icon__check qt-mr-6 icn-16"
-                        *ngIf="!service.completed"
-                    ></i>
-                    <span [textContent]="(!service.completed) ? 'Mark completed' : 'Сompleted'"></span>
-                </div></td>
-                <td>  <app-dynamic-tooltip
-                    [content]="'Delete Product'"
-                    [position]="'top'"
-                    #deleteProduct
-                ></app-dynamic-tooltip> <div
-                    class="qt-button-square pointer qt-ml-24"
-                    (click)="removeService()"
-                    (mouseenter)="deleteProduct.show($event.target)"
-                    (mouseleave)="deleteProduct.hide()"
-                >
-                    <div class="qt-icon icon__delete qt-icon__red-600 qt-sz-16"></div>
-                </div></td>
-    </tr>
+    >
+      <i
+        class="qt-icon icon__check qt-icon__green-600 qt-mr-6 icn-16"
+        *ngIf="service.completed"
+      ></i>
+      <i
+        class="qt-icon icon__check qt-mr-6 icn-16"
+        *ngIf="!service.completed"
+      ></i>
+      <span [textContent]="(!service.completed) ? 'Mark completed' : 'Сompleted'"></span>
+    </div>
+  </td>
+  <td>
+    <app-dynamic-tooltip
+      [content]="'Delete Product'"
+      [position]="'top'"
+      #deleteProduct
+    ></app-dynamic-tooltip>
+    <div
+      class="qt-button-square pointer"
+      (click)="removeService()"
+      (mouseenter)="deleteProduct.show($event.target)"
+      (mouseleave)="deleteProduct.hide()"
+    >
+      <div class="qt-icon icon__delete qt-icon__red-600 qt-sz-16"></div>
+    </div>
+  </td>
+</tr>

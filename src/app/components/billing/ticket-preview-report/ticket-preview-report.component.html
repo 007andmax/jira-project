@@ -1,27 +1,27 @@
-  <ng-template
-            ngFor
-            let-ticket
-            [ngForOf]="list"
-            let-i="index"
-            [ngForTrackBy]="trackByIndex"
+<ng-template
+  ngFor
+  let-ticket
+  [ngForOf]="list"
+  let-i="index"
+  [ngForTrackBy]="trackByIndex"
+>
+  <div class="invoice-item qt-mb-16 qt-w100">
+    <div class="qt-df qt-ai-c">
+      <div class="invoice-item__header qt-w100 qt-ml-30 qt-df qt-ai-c qt-pt-10 qt-pb-10">
+        <div
+          class="invoice-item__number qt-color-white qt-fs-10 qt-pt-4 qt-pb-4 qt-pl-4 qt-pr-4 qt-mr-16"
+          [textContent]="'Tkt# ' + ticket.number + ' Status - Pending Review'"
+        ></div>
+        <div class="qt-fs-12 qt-mr-16">
+          <span class="qt-fs-11 qt-fw-600">Company</span>
+          {{ ticket.companyName }}
+        </div>
+        <div
+          class="qt-fs-12 qt-df qt-ai-c qt-fg"
+
         >
-<div class="invoice-item qt-mb-16 qt-w100">
-   <div class="qt-df qt-ai-c">
-        <div class="invoice-item__header qt-w100 qt-ml-30 qt-df qt-ai-c qt-pt-10 qt-pb-10 qt-h40">
-            <div
-                class="invoice-item__number qt-color-white qt-fs-10 qt-pt-4 qt-pb-4 qt-pl-4 qt-pr-4 qt-mr-16"
-                [textContent]="'Tkt# ' + ticket.number + ' Status - Pending Review'"
-            ></div>
-            <div class="qt-fs-12 qt-mr-16">
-                <span class="qt-fs-11 qt-fw-600">Company</span>
-                {{ticket.companyName}}
-            </div>
-           <div
-                class="qt-fs-12 qt-df qt-ai-c qt-fg"
-               
-            >
-            <div
-             class="qt-button qt-ml-12"
+          <div
+            class="qt-button --gray --md qt-ml-12"
             placement="left"
             ngbTooltip="You cannot close the ticket. It contains incomplete products / services / tasks."
             [disableTooltip]="checkClose(ticket)"
@@ -29,65 +29,66 @@
             #update_closeBtn="disabled"
             (onClick)="close(ticket)"
             [ngClass]="{'--disabled':!checkClose(ticket), '--loading':isUpdateAndClose}"
-        >
+          >
             <span
-                class="qt-icon icon__check qt-icon__white qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
-                *ngIf="!isUpdateAndClose"
+              class="qt-icon icon__check qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
+              *ngIf="!isUpdateAndClose"
             ></span>
             <span>Close Ticket</span>
             <app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket>
+          </div>
         </div>
-            </div>
-           <!--  <div
-                class="qt-fs-12 invoice-item__subject"
-                *ngIf="!getPermissions('EDIT_TICKETS')"
-            >
-                <span class="qt-fs-11 qt-fw-600">Subject:</span>
-                {{ticket.subject}}
-            </div> -->
-        </div>
-        <div class="delete-item-container qt-pl-4"></div>
+        <!--  <div
+             class="qt-fs-12 invoice-item__subject"
+             *ngIf="!getPermissions('EDIT_TICKETS')"
+         >
+             <span class="qt-fs-11 qt-fw-600">Subject:</span>
+             {{ticket.subject}}
+         </div> -->
+      </div>
+      <div class="delete-item-container qt-pl-4"></div>
     </div>
     <table class="invoice-item__table">
-        <thead>
-            <tr>
-                <th></th>
-                <th class="invoice-item__col-item  qt-fw-600 service-date">Date</th>
-                   <th class="invoice-item__col-desc  qt-fw-600">Item</th>
-                <th class="invoice-item__col-desc  qt-fw-600">Description</th>
-                  <th class="invoice-item__col-quentity qt-fw-600">Quantity</th>
-                <th class="invoice-item__col-price qt-fw-600">Cost</th>
-              <th class="invoice-item__col-price qt-fw-600">Markup</th>
-              <th class="invoice-item__col-price qt-fw-600">Price</th>
-                <th class="invoice-item__col-tax qt-fw-600">Discount</th>
-                <th class="invoice-item__col-amount qt-fw-600">Serial Number</th>
-                <th></th>
-                  <th></th>
-            </tr>
-        </thead>
-        <tbody>
-         <ng-template
-                ngFor
-                let-service
-                [ngForOf]="ticket.services"
-                [ngForTrackBy]="trackById"
-            >
-              <app-ticket-preview-report-service-item [service]="service"  [ticket]="ticket"></app-ticket-preview-report-service-item>
-            </ng-template>
-            <ng-template
-                ngFor
-                let-product
-                [ngForOf]="ticket.products"
-                [ngForTrackBy]="trackById"
-            >
-              <app-ticket-preview-report-product-item [product]="product" [ticket]="ticket"></app-ticket-preview-report-product-item>
-            </ng-template>
-        </tbody>
+      <thead>
+      <tr>
+        <th class="invoice-item__col-item  qt-fw-600 service-date">Date</th>
+        <th class="invoice-item__col-servers  qt-fw-600">Item</th>
+        <th class="invoice-item__col-desc  qt-fw-600">Description</th>
+        <th class="invoice-item__col-quentity qt-fw-600">Quantity</th>
+        <th class="invoice-item__col-price qt-fw-600">Cost</th>
+        <th class="invoice-item__col-price qt-fw-600">Markup</th>
+        <th class="invoice-item__col-price qt-fw-600">Price</th>
+        <th class="invoice-item__col-tax qt-fw-600">Discount</th>
+        <th class="invoice-item__col-amount qt-fw-600">Serial Number</th>
+        <th class="invoice-item__col-status"></th>
+        <th class="invoice-item__col-remove"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-template
+        ngFor
+        let-service
+        [ngForOf]="ticket.services"
+        [ngForTrackBy]="trackById"
+      >
+        <app-ticket-preview-report-service-item [service]="service"
+                                                [ticket]="ticket"></app-ticket-preview-report-service-item>
+      </ng-template>
+      <ng-template
+        ngFor
+        let-product
+        [ngForOf]="ticket.products"
+        [ngForTrackBy]="trackById"
+      >
+        <app-ticket-preview-report-product-item [product]="product"
+                                                [ticket]="ticket"></app-ticket-preview-report-product-item>
+      </ng-template>
+      </tbody>
     </table>
-</div>
+  </div>
 </ng-template>
 
-  <div
-        class="loading"
-        *ngIf="showPreloader"
-    ></div>
+<div
+  class="loading"
+  *ngIf="showPreloader"
+></div>

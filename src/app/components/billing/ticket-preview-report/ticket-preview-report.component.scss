@@ -1,151 +1,176 @@
- @import './src/assets/styles/variable';
+@import './src/assets/styles/variable';
 @import "./src/assets/styles/mixin/breakpoint";
- .invoice-items {
-      color: $gray-900;
-      border-radius: 4px;
-    }
-    .invoice-item  {
-      &__header {
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-        border: solid 1px $gray-200;
-        background-color: $white;
-        padding-top: 7px;
-        padding-bottom: 7px;
-      }
 
-      &__number {
-        background-color: $gray-500;
-        line-height: 1.2;
-      }
+.invoice-items {
+  color: $gray-900;
+  border-radius: 4px;
+}
 
-      &__subject {
-        max-width: 680px;
-      }
+.invoice-item {
+  min-width: 1574px;
 
-      .delete-item-container {
-        min-width: 30px;
-        width: 30px;
-      }
+  &__header {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+    border: solid 1px $gray-200;
+    background-color: $white;
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
 
-      &__table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        table-layout: fixed;
+  &__number {
+    background-color: $gray-500;
+    line-height: 1.2;
+  }
 
-        th, td {
-          background-color: $gray-25;
-          border: solid 1px $gray-200;
-          border-left: none;
-          height: 36px;
-          padding: 0 12px;
-          font-weight: 600;
-          font-size: 11px;
-          border-top: none;
-          &:first-child, &:last-child  {
-            border: none;
-            width: 30px;
-            background: transparent;
-            padding: 0;
-            .icon__dot-vertical {
-              margin-left: auto;
-            }
-          }
-          &:nth-child(2) {
-            border-left: solid 1px $gray-200;
-          }
-        }
+  &__subject {
+    max-width: 680px;
+  }
 
-        td {
-          background-color: $white;
-          font-size: 12px;
-          font-weight: 500;
-        }
-        tbody {
-          tr:last-child {
-            // td:nth-child(2) {
-              // border-bottom-left-radius: 4px;
-            // }
-            td:last-child {
-              border-bottom-right-radius: 4px;
-            }
-          }
-        }
-      }
-      &__col-item {
-        text-align: left;
-        width: 148px;
-      }
-      &__col-desc {
-        text-align: left;
-        max-width: 345px;
-        overflow-wrap: break-word;
-      }
-      &__col-price {
-        text-align: right;
-        width: 94px;
+  .delete-item-container {
+    min-width: 30px;
+    width: 30px;
+  }
 
-      }
-      &__col-quentity {
-        text-align: right;
-        width: 135px;
-      }
-      &__col-tax {
-        text-align: right;
-        width: 80px;
-      }
-      &__col-amount {
-        text-align: right;
-        width: 109px;
-      }
-    }
+  &__table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    padding-inline: 30px;
 
-    .summary-info {
-      &__notes {
-        width: 447px;
-      }
-      &__textarea {
-        min-height: 72px;
-      }
-    }
-
-    .invoice-total {
-      width: 275px;
-      border-radius: 6px;
-      border: dashed 1px #637381;
-      padding: 15px 20px;
-
-      &__total-line {
-        border-top: dashed 1px #637381;
-      }
-    }
-
-
-    .info-button-sm {
-      display: flex;
-      font-size: 12px;
-      align-items: center;
-      height: 28px;
-      border-radius: 4px;
-      border: solid 1px $blue-light-600;
-      background-color: $white;
-      padding: 0 8px;
-      width: fit-content;
-      color: $blue-light-600;
-      cursor: pointer;
-    }
-
-    .terms-n-conditions {
+    th {
       background-color: $gray-25;
+      border-bottom: solid 1px $gray-200;
+      border-right: solid 1px $gray-200;
+      border-left: none;
+      height: 36px;
+      padding: 10px 8px;
+      font-weight: 600;
+      font-size: 11px;
+      border-top: none;
 
-      &__textarea  {
-        width: 541px;
-        min-height: 72px;
+      &:first-child {
+        border-left: 1px solid $gray-200;
+      }
+
+      &:last-child {
+        border-right: 1px solid $gray-200;
       }
     }
 
-    .save-billable-aside-btn{
-      min-width: 91px;
+    td {
+      border-bottom: solid 1px $gray-200;
+      padding: 10px 8px;
+
+      &:first-child {
+        border-left: 1px solid $gray-200;
+      }
+
+      &:last-child {
+        border-right: 1px solid $gray-200;
+      }
     }
+
+    tbody {
+      tr:last-child {
+        td:last-child {
+          border-bottom-right-radius: 4px;
+        }
+      }
+    }
+  }
+
+  &__col-item {
+    text-align: left;
+    width: 156px;
+  }
+
+  &__col-servers {
+    width: 186px;
+  }
+
+  &__col-desc {
+    text-align: left;
+    width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  &__col-price {
+    text-align: right;
+    width: 94px;
+  }
+
+  &__col-quentity {
+    text-align: right;
+    width: 120px;
+  }
+
+  &__col-tax {
+    text-align: right;
+    width: 80px;
+  }
+
+  &__col-amount {
+    text-align: right;
+    width: 109px;
+  }
+
+  &__col-status {
+    width: 170px;
+  }
+
+  &__col-remove {
+    width: 60px;
+  }
+}
+
+.summary-info {
+  &__notes {
+    width: 447px;
+  }
+
+  &__textarea {
+    min-height: 72px;
+  }
+}
+
+.invoice-total {
+  width: 275px;
+  border-radius: 6px;
+  border: dashed 1px #637381;
+  padding: 15px 20px;
+
+  &__total-line {
+    border-top: dashed 1px #637381;
+  }
+}
+
+
+.info-button-sm {
+  display: flex;
+  font-size: 12px;
+  align-items: center;
+  height: 28px;
+  border-radius: 4px;
+  border: solid 1px $blue-light-600;
+  background-color: $white;
+  padding: 0 8px;
+  width: fit-content;
+  color: $blue-light-600;
+  cursor: pointer;
+}
+
+.terms-n-conditions {
+  background-color: $gray-25;
+
+  &__textarea {
+    width: 541px;
+    min-height: 72px;
+  }
+}
+
+.save-billable-aside-btn {
+  min-width: 91px;
+}
