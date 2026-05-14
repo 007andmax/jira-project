@@ -1,3 +1,5 @@
+<div class="tikcet-preview-container">
+<div  *ngIf="!showPreloader">
 <ng-template
   ngFor
   let-ticket
@@ -28,14 +30,14 @@
             appDisabledBtn
             #update_closeBtn="disabled"
             (onClick)="close(ticket)"
-            [ngClass]="{'--disabled':!checkClose(ticket), '--loading':isUpdateAndClose}"
+            [ngClass]="{'--disabled':!checkClose(ticket), '--loading':ticket.isUpdateAndClose}"
           >
             <span
               class="qt-icon icon__check qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
-              *ngIf="!isUpdateAndClose"
+              *ngIf="!ticket.isUpdateAndClose"
             ></span>
             <span>Close Ticket</span>
-            <app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket>
+            <app-preloader-ticket *ngIf="ticket.isUpdateAndClose"></app-preloader-ticket>
           </div>
         </div>
         <!--  <div
@@ -72,6 +74,7 @@
         [ngForTrackBy]="trackById"
       >
         <app-ticket-preview-report-service-item [service]="service"
+        [servicesCompany]="servicesCompany"
                                                 [ticket]="ticket"></app-ticket-preview-report-service-item>
       </ng-template>
       <ng-template
@@ -87,8 +90,9 @@
     </table>
   </div>
 </ng-template>
-
+</div>
 <div
   class="loading"
   *ngIf="showPreloader"
 ></div>
+</div>

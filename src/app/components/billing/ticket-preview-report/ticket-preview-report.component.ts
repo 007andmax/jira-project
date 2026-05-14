@@ -5,10 +5,12 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { REMOVE_UPDATE_TICKET_DETAIL, REMOVE_UPDATE_TICKET_DETAIL_PRODUCT, REMOVE_UPDATE_TICKET_DETAIL_SERVICE } from 'src/app/const/confirm';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketStateService } from '../../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TicketPreviewServicesCompany } from './class/ticket-preview-services-company';
+import { RecurringService } from 'src/app/services/recurring/recurring.service';
 
 @Component({
   selector: 'app-ticket-preview-report',
@@ -17,14 +19,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class TicketPreviewReportComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
-  isUpdateAndClose: boolean = false;
   list: Array<TicketPreview> = [];
+  servicesCompany: Array<TicketPreviewServicesCompany> = [];
   sub: Subscription = new Subscription();
   constructor(private peportsService: ReportsService,
     public confirmStateService: ConfirmStateService,
     private ticketsService: TicketsService,
     private ticketStateService: TicketStateService,
     public inventoryStateService: InventoryStateService,
+    private recurringService: RecurringService,
     public modalService: NgbModal
   ) { }
 
@@ -32,7 +35,21 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
     this.inventoryStateService.getProducts();
     this.peportsService.getTicketPreivew().subscribe((res: any) => {
       this.list = res.map(item => new TicketPreview(item));
-      this.showPreloader = false;
+      let companyesIds = this.list.map(item => item.companyId);
+      this.servicesCompany = companyesIds.filter((item, index) => companyesIds.indexOf(item) === index).map(item => new TicketPreviewServicesCompany(item, []));
+      forkJoin(
+        this.servicesCompany.map(item => this.recurringService.getServiceList(item.companyId))
+      )
+        .subscribe(result => {
+          result.forEach((services: any, i) => {
+            let servicesList = services.filter(item => item.canUseInTicket);
+            servicesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+              1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+            this.servicesCompany[i].services = servicesList;
+          })
+          this.showPreloader = false;
+        });
+
       console.log("this.list", this.list);
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
@@ -57,13 +74,13 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
   close(ticket) {
     if (!this.checkClose(ticket)) return;
     // this.update_closeBtn.setDisabled(true);
-    this.isUpdateAndClose = true;
+    ticket.isUpdateAndClose = true;
     this.ticketsService.updateTicket(this.getDataForClose(ticket), true).subscribe(data => {
-      this.isUpdateAndClose = false;
+      ticket.isUpdateAndClose = false;
       let index = this.list.findIndex(item => item.id == ticket.id);
       if (index > -1) this.list.splice(index, 1);
     }, err => {
-      this.isUpdateAndClose = false;
+      ticket.isUpdateAndClose = false;
       //   this.update_closeBtn.setDisabled(false);
     })
   }

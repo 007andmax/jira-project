@@ -14,6 +14,7 @@ import { TicketPreview } from '../class/ticket-preview';
 import { RecurringService } from 'src/app/services/recurring/recurring.service';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { REMOVE_UPDATE_TICKET_DETAIL_SERVICE } from 'src/app/const/confirm';
+import { TicketPreviewServicesCompany } from '../class/ticket-preview-services-company';
 
 @Component({
   selector: 'app-ticket-preview-report-service-item',
@@ -23,8 +24,9 @@ import { REMOVE_UPDATE_TICKET_DETAIL_SERVICE } from 'src/app/const/confirm';
 export class TicketPreviewReportServiceItemComponent {
   @Input() ticket: TicketPreview;
   @Input() service: TicketPreviewService;
+  @Input() servicesCompany: Array<TicketPreviewServicesCompany> = [];
   currentCompany: any;
-  servicesList = [];
+  @Input() servicesList = [];
   formatDate: string = FORMAT_DATE_2;
   sub: Subscription = new Subscription();
   constructor(
@@ -40,11 +42,7 @@ export class TicketPreviewReportServiceItemComponent {
 
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
-    this.recurringService.getServiceList(this.ticket.companyId).subscribe((res: any) => {
-      this.servicesList = res.filter(item => item.canUseInTicket);
-      this.servicesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-    })
+    this.servicesList = this.servicesCompany.find(item => item.companyId == this.ticket.companyId)?.services;
   }
   onChangeStartDate(data) {
     this.service.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

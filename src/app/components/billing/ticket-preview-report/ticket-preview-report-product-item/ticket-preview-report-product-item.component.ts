@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryValidate } from 'src/app/components/inventory/class/inventory-validate';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -35,6 +35,7 @@ export class TicketPreviewReportProductItemComponent implements OnInit {
     private quoteStateService: QuoteStateService,
     private permissionsService: PermissionsService,
     public ticketsService: TicketsService,
+    public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService) { }
   ngOnInit(): void {
     this.markup = this.getMarkups();
@@ -54,27 +55,78 @@ export class TicketPreviewReportProductItemComponent implements OnInit {
     this.product.discountAmount = event;
 
   }
-
+  onBlurCost() {
+    if (this.product.isEdit) {
+      this.validate.checkPriceCost(this.product.item.sale, this.product.item.cost);
+      this.updateProduct();
+    }
+    this.cd.markForCheck();
+  }
   onChangeCost(val) {
     let value = Number(val);
-    this.product.item.cost = value;
-    this.product.item.cost_str = value.toFixed(2);
-    this.markup = this.getMarkups();
-
+    if (this.product.item.cost !== value) {
+      this.product.item.cost = value;
+      this.markup = this.getMarkups();
+      this.validate.checkPriceCost(this.product.item.sale, this.product.item.cost);
+      this.product.setIsEdit(true);
+    }
+    this.cd.markForCheck();
   }
-  onChangeSale(val) {
-    let value = Number(val);
-    this.product.item.sale = value;
-    this.product.item.sale_str = value.toFixed(2);
-    this.markup = this.getMarkups();
-
+  onEnterCost(event) {
+    if (event.keyCode === 13 && this.product.isEdit) {
+      this.onChangeCost(event.target.value);
+      this.updateProduct();
+      event.target.blur();
+      this.cd.markForCheck();
+    }
   }
-  changeMarkup(val) {
+  onBlurSale() {
+    if (this.product.isEdit) {
+      this.validate.checkPriceCost(this.product.item.sale, this.product.item.cost);
+      this.updateProduct();
+    }
+    this.cd.markForCheck();
+  }
+  changeSales(val) {
     let value = Number(val);
-    this.product.item.sale = Number(this.quoteStateService.roundToTwo((value * this.product.item.cost / 100 + this.product.item.cost)));
-    this.product.item.sale_str = this.product.item.sale.toFixed(2);
-    this.markup = value;
-
+    if (this.product.item.sale != value) {
+      this.product.item.sale = value;
+      this.markup = this.getMarkups();
+      this.product.setIsEdit(true);
+    }
+    this.cd.markForCheck();
+  }
+  onBlurMarkup() {
+    if (this.product.isEdit) {
+      this.validate.checkPriceCost(this.product.item.sale, this.product.item.cost);
+      this.updateProduct();
+    }
+    this.cd.markForCheck();
+  }
+  onEnterSale(event) {
+    if (event.keyCode === 13 && this.product.isEdit) {
+      this.changeSales(event.target.value);
+      this.updateProduct();
+      event.target.blur();
+      this.cd.markForCheck();
+    }
+  }
+  onChangeMarkup(val) {
+    let value = Number(val);
+    if (this.markup != value) {
+      this.product.item.sale = Number(this.quoteStateService.roundToTwo((value * this.product.item.cost / 100 + this.product.item.cost)));
+      this.markup = value;
+      this.product.setIsEdit(true);
+      this.cd.markForCheck();
+    }
+  }
+  onEnterMarkup(event) {
+    if (event.keyCode === 13) {
+      this.onChangeMarkup(event.target.value);
+      this.updateProduct();
+      event.target.blur();
+      this.cd.markForCheck();
+    }
   }
   public getMarkups() {
     if (this.product.item.sale > 0 && this.product.item.cost > 0) return Number(this.quoteStateService.roundToTwo((this.product.item.sale - this.product.item.cost) / this.product.item.cost * 100));

@@ -23,9 +23,9 @@
     <input
       class="input-default input-qty"
       type="text"
-      decimalNumber
-      [useFixed]="true"
-      appToFixed
+     number
+      [money]="true"
+      [useFixed]="false"
       [value]="product.quantity"
       placeholder="Enter Cost"
     ></td>
@@ -36,11 +36,13 @@
       decimalNumber
       [useFixed]="true"
       appToFixed
-      [ngClass]="{'--input-error' : !validate.getCostSale()}"
-      (blur)="validate.checkPriceCost(product.item.sale,product.item.cost);updateProduct()"
+      (blur)="onBlurCost()"
       [value]="product.item.cost"
       (onChange)="onChangeCost($event)"
+      (keyup)="onEnterCost($event)"
       placeholder="Enter Cost"
+ [ngClass]="{'--input-error' : !validate.getCostSale()}"
+
     >
     <app-mat-error
       class="invalid-feedback --pos-static"
@@ -54,10 +56,11 @@
       class="input-default input-price"
       type="text"
       decimalNumber
-      (blur)="validate.checkPriceCost(product.item.sale,product.item.cost);updateProduct()"
-      (onChange)="changeMarkup($event)"
+      (blur)="onBlurMarkup()"
+      (onChange)="onChangeMarkup($event)"
       [value]="markup"
-      placeholder="Enter Cost"
+      (keyup)="onEnterMarkup($event)"
+      placeholder="Enter Markup"
     >
   </td>
   <td class="invoice-item__col-price">
@@ -66,12 +69,12 @@
       type="text"
       decimalNumber
       [useFixed]="true"
-      [ngClass]="{'--input-error' : !validate.getSale()}"
       appToFixed
       [value]="product.item.sale"
+      (blur)="onBlurSale()"
       (input)="validate.resetSale()"
-      (blur)="validate.checkPriceCost(product.item.sale,product.item.cost);updateProduct()"
-      (onChange)="onChangeSale($event)"
+      (onChange)="changeSales($event)"
+      (keyup)="onEnterSale($event)"
       placeholder="Enter Price"
     >
     <app-mat-error
@@ -90,7 +93,7 @@
       type="text"
       class="input-default input-price"
       decimalNumber
-      placeholder="0.00"
+      placeholder="0%"
       [defaultValue]="''"
       [value]="product.discountAmount ? product.discountAmount : ''"
       (onChange)="onChangeDiscountAmount($event)"
@@ -103,7 +106,7 @@
       class="input-default input-qty"
       type="text"
       [(ngModel)]="product.serialNumber"
-      placeholder="Enter Cost"
+      placeholder="Enter Serial Number"
       (blur)="updateProduct()"
     >
   </td>

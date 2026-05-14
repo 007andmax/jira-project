@@ -20,6 +20,7 @@ import { TicketProfileUpdatesServiceDurationModule } from '../../tickets/tickets
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
+import { NumberModule } from 'src/app/directives/number/number.module';
 
 
 
@@ -44,7 +45,8 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
         TicketProfileUpdatesServiceDurationModule,
         TextAreaModule,
         DisabledBtnModule,
-        PreloaderTicketModule
+        PreloaderTicketModule,
+        NumberModule
     ],
 
 })

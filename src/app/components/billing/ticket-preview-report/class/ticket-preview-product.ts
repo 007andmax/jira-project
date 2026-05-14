@@ -2,4 +2,9 @@ import { TicketProfileProduct } from "src/app/components/tickets/tickets/class/t
 
 export class TicketPreviewProduct extends TicketProfileProduct {
     ticketUpdateId: string;
+    isEdit: boolean = false;
+
+    public setIsEdit(data) {
+        this.isEdit = data;
+    }
 }

@@ -11,6 +11,8 @@ export class TicketPreview {
     products: Array<TicketPreviewProduct> = [];
     services: Array<TicketPreviewService> = [];
     status: string;
+    isUpdateAndClose: boolean = false;
+
     constructor(data: any) {
         if (data) {
             for (const key in data) {
