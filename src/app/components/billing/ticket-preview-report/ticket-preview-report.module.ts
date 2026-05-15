@@ -21,6 +21,8 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
+import { IntegerModule } from 'src/app/directives/integer/integer.module';
+import { TicketsTableItemStatusModule } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-status/tickets-table-item-status.module';
 
 
 
@@ -46,7 +48,9 @@ import { NumberModule } from 'src/app/directives/number/number.module';
         TextAreaModule,
         DisabledBtnModule,
         PreloaderTicketModule,
-        NumberModule
+        NumberModule,
+        IntegerModule,
+        TicketsTableItemStatusModule
     ],
 
 })

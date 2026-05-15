@@ -29,7 +29,6 @@ export class TicketPreviewReportProductItemDropDownComponent extends ProductList
     this.onUpdateList();
     if (this.editItem) {
       let value = this.getNameOrDescription(this.editItem);
-      this.elRef.nativeElement.querySelector('#dropdownProducts').value = value;
       if (value !== '') this.selectedItem = true;
       console.log("value", value);
     }

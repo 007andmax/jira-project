@@ -177,6 +177,6 @@
 }
 .tikcet-preview-container {
     width: 100%;
-    max-height: calc(100vh - 66px);
+    min-height: calc(100vh - 66px);
     overflow: auto;
 }

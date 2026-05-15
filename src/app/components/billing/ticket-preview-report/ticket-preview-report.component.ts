@@ -11,6 +11,11 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketPreviewServicesCompany } from './class/ticket-preview-services-company';
 import { RecurringService } from 'src/app/services/recurring/recurring.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
+import { TicketStatus } from '../../setting/ticket-settings-page/tickets-status/class/ticket-status';
+import { StatusColor } from '../../tickets/class/status-color';
+import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 
 @Component({
   selector: 'app-ticket-preview-report',
@@ -20,6 +25,8 @@ import { RecurringService } from 'src/app/services/recurring/recurring.service';
 export class TicketPreviewReportComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
   list: Array<TicketPreview> = [];
+  ticketsStatus: Array<TicketStatus> = [];
+  listColors: Array<StatusColor> = [];
   servicesCompany: Array<TicketPreviewServicesCompany> = [];
   sub: Subscription = new Subscription();
   constructor(private peportsService: ReportsService,
@@ -28,7 +35,10 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
     private ticketStateService: TicketStateService,
     public inventoryStateService: InventoryStateService,
     private recurringService: RecurringService,
-    public modalService: NgbModal
+    private companiesStateService: CompaniesStateService,
+    public modalService: NgbModal,
+    private ticketsStateService: TicketsStateService,
+    private leftPanelService: LeftPanelService,
   ) { }
 
   ngOnInit(): void {
@@ -65,6 +75,25 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    this.ticketsStatus = this.ticketsStateService.getTicketsStatus();
+    let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
+      this.ticketsStatus = data;
+    })
+    this.sub.add(onGetTicketsStatus);
+    if (this.ticketsStateService.getListStatusColor().length === 0) {
+      this.leftPanelService.getColors().subscribe((data: any) => {
+        this.listColors = data.map(item => {
+          return new StatusColor(item.borderColor, item.textColor);
+        })
+        this.ticketsStateService.onColorStatus(this.listColors);
+      })
+    } else {
+      this.listColors = this.ticketsStateService.getListStatusColor();
+    }
+    let getOnInitColor = this.ticketsStateService.getOnInitColor().subscribe(data => {
+      this.listColors = data;
+    })
+    this.sub.add(getOnInitColor);
   }
   checkClose(ticket) {
     let completeServices = (ticket.services.find(item => !item.completed) ? false : true);
@@ -93,6 +122,11 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
       ticket: { id: ticket.id },
       attachments: []
     }
+  }
+  editTicket(id) {
+    this.ticketStateService.setTicketRoutingId(id);
+    const url = `/#/${this.companiesStateService.getCurrentCompany().techDomain}/ticket/${id}`;
+    window.open(url, '_blank');
   }
   remove(ticket) {
     this.ticketStateService.setUpdateForRemove(ticket);

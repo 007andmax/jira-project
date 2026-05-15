@@ -22,6 +22,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./ticket-preview-report-product-item.component.scss']
 })
 export class TicketPreviewReportProductItemComponent implements OnInit {
+
   formatDate: string = FORMAT_DATE_2;
   @Input() ticket: TicketPreview;
   @Input() product: TicketPreviewProduct;
@@ -51,9 +52,32 @@ export class TicketPreviewReportProductItemComponent implements OnInit {
     this.product.valdiateSaleCost = true;
     this.updateProduct();
   }
-  onChangeDiscountAmount(event) {
-    this.product.discountAmount = event;
-
+  onChangeDiscountAmount(val) {
+    console.log("onChangeDiscountAmount", val);
+    let value = val;
+    if (this.product.discountAmount != value) {
+      this.product.discountAmount = value;
+      this.product.setIsEdit(true);
+      this.cd.markForCheck();
+    }
+  }
+  onEnterDiscountAmount(event) {
+    if (event.keyCode === 13 && this.product.isEdit) {
+      event.target.blur();
+      this.cd.markForCheck();
+    }
+  }
+  onBlurDiscountAmount() {
+    if (this.product.isEdit) {
+      this.updateProduct();
+    }
+    this.cd.markForCheck();
+  }
+  onBlurQuantity() {
+    if (this.product.isEdit) {
+      this.updateProduct();
+    }
+    this.cd.markForCheck();
   }
   onBlurCost() {
     if (this.product.isEdit) {
@@ -62,8 +86,19 @@ export class TicketPreviewReportProductItemComponent implements OnInit {
     }
     this.cd.markForCheck();
   }
+  onChangeQuantity(event) {
+    console.log("val", event.target.value);
+    let value = Number(event.target.value);
+    console.log("value", value);
+    if (this.product.quantity !== value) {
+      this.product.quantity = value;
+      this.product.setIsEdit(true);
+    }
+    this.cd.markForCheck();
+  }
   onChangeCost(val) {
     let value = Number(val);
+
     if (this.product.item.cost !== value) {
       this.product.item.cost = value;
       this.markup = this.getMarkups();
@@ -72,11 +107,17 @@ export class TicketPreviewReportProductItemComponent implements OnInit {
     }
     this.cd.markForCheck();
   }
+  onEnterQuantity(event) {
+    if (event.keyCode === 13 && this.product.isEdit) {
+      this.onChangeQuantity(event);
+      this.updateProduct();
+      this.cd.markForCheck();
+    }
+  }
   onEnterCost(event) {
     if (event.keyCode === 13 && this.product.isEdit) {
       this.onChangeCost(event.target.value);
       this.updateProduct();
-      event.target.blur();
       this.cd.markForCheck();
     }
   }
@@ -107,7 +148,6 @@ export class TicketPreviewReportProductItemComponent implements OnInit {
     if (event.keyCode === 13 && this.product.isEdit) {
       this.changeSales(event.target.value);
       this.updateProduct();
-      event.target.blur();
       this.cd.markForCheck();
     }
   }
@@ -121,10 +161,9 @@ export class TicketPreviewReportProductItemComponent implements OnInit {
     }
   }
   onEnterMarkup(event) {
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && this.product.isEdit) {
       this.onChangeMarkup(event.target.value);
       this.updateProduct();
-      event.target.blur();
       this.cd.markForCheck();
     }
   }
@@ -137,6 +176,7 @@ export class TicketPreviewReportProductItemComponent implements OnInit {
     if (this.validate.isValidate(this.product.item)) this.updateProduct();
   }
   updateProduct() {
+    this.product.setIsEdit(false);
     if (this.validate.isValidate(this.product.item)) this.ticketsService.updateExpense(this.product.getDateForUpdate(this.product.ticketUpdateId)).subscribe(data => {
     })
   }

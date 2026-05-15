@@ -11,9 +11,15 @@
     <div class="qt-df qt-ai-c">
       <div class="invoice-item__header qt-w100 qt-ml-30 qt-df qt-ai-c qt-pt-10 qt-pb-10">
         <div
-          class="invoice-item__number qt-fs-16 qt-ml-24 qt-mr-16"
-          [textContent]="'Tkt# ' + ticket.number + ' Status - Pending Review'"
-        ></div>
+          class="invoice-item__number qt-fs-16 qt-ml-24 qt-mr-16 qt-pointer"
+          [textContent]="'Tkt# ' + ticket.number"
+          (click)="editTicket(ticket.id)"
+        >
+      </div>
+        <app-tickets-table-item-status [ticket]="ticket"
+    [ticketsStatus]="ticketsStatus"
+    [listColors]="listColors"
+    ></app-tickets-table-item-status>
         <div class="qt-fs-12 qt-mr-16">
           <span class="qt-fs-11 qt-fw-600">Company</span>
           {{ ticket.companyName }}

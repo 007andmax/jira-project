@@ -10,11 +10,11 @@
       (onChange)="onChangeStartDate($event)"
     ></app-date-picker>
   </td>
-  <td [textContent]="product.item.manufacture"></td>
+  <td class="invoice-item__col-manufacture qt-pointer" [textContent]="product.manufacture" (click)="productsDd.products_dropDown.open()"></td>
   <td class="invoice-item__col-desc"
 
   >
-    <app-ticket-preview-report-product-item-drop-down [type]="'TICKET'" [editItem]="product.item"
+    <app-ticket-preview-report-product-item-drop-down #productsDd [type]="'TICKET'" [editItem]="product.item"
                                                       (selectedProductItem)="selectProduct($event)"></app-ticket-preview-report-product-item-drop-down>
   </td>
   <td
@@ -23,10 +23,11 @@
     <input
       class="input-default input-qty"
       type="text"
-     number
-      [money]="true"
-      [useFixed]="false"
+      appInteger
       [value]="product.quantity"
+      (blur)="onBlurQuantity()"
+      (change)="onChangeQuantity($event)"
+      (keyup)="onEnterQuantity($event)"
       placeholder="Enter Cost"
     ></td>
   <td class="invoice-item__col-price">
@@ -97,7 +98,8 @@
       [defaultValue]="''"
       [value]="product.discountAmount ? product.discountAmount : ''"
       (onChange)="onChangeDiscountAmount($event)"
-      (blur)="updateProduct()"
+      (blur)="onBlurDiscountAmount()"
+      (keyup)="onEnterDiscountAmount($event)"
     >
   </td>
   <td class="invoice-item__col-amount">

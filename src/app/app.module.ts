@@ -171,6 +171,7 @@ import { GetDirectionComponent } from './components/shared/get-direction/get-dir
 import { CompanyLogoPopoverDirective } from './directives/company-logo-popover/company-logo-popover.directive';
 import { TicketPreviewReportComponent } from './components/billing/ticket-preview-report/ticket-preview-report.component';
 import { PermissionTicketPreviewReportService } from './components/billing/ticket-preview-report/permission-ticket-preview-report.service';
+import { IntegerDirective } from './directives/integer/integer.directive';
 declare var $: any;
 /**
  * This module represents the main application module

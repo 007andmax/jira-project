@@ -16,7 +16,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   selector: 'app-tickets-table-item-status',
   templateUrl: './tickets-table-item-status.component.html',
   styleUrls: ['./tickets-table-item-status.component.scss'],
-  providers: [TicketsPermissionsService]
+  // providers: [TicketsPermissionsService]
 })
 export class TicketsTableItemStatusComponent {
   @Input() ticket: Ticket;
