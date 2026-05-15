@@ -10,11 +10,13 @@
       (onChange)="onChangeStartDate($event)"
     ></app-date-picker>
   </td>
-  <td class="invoice-item__col-manufacture qt-pointer" [textContent]="product.manufacture" (click)="productsDd.products_dropDown.open()"></td>
+  <td class="invoice-item__col-manufacture "  >
+    <app-ticket-preview-report-product-item-manufacture #manufactureDb [type]="'TICKET'" [editItem]="product.item" [product]="product" (selectedProductItem)="selectProduct($event)"></app-ticket-preview-report-product-item-manufacture>
+  </td>
   <td class="invoice-item__col-desc"
 
   >
-    <app-ticket-preview-report-product-item-drop-down #productsDd [type]="'TICKET'" [editItem]="product.item"
+    <app-ticket-preview-report-product-item-drop-down #productDb  [type]="'TICKET'" [editItem]="product.item"
                                                       (selectedProductItem)="selectProduct($event)"></app-ticket-preview-report-product-item-drop-down>
   </td>
   <td
@@ -103,13 +105,14 @@
     >
   </td>
   <td class="invoice-item__col-amount">
-
     <input
       class="input-default input-qty"
       type="text"
-      [(ngModel)]="product.serialNumber"
+      [value]="product.serialNumber"
       placeholder="Enter Serial Number"
-      (blur)="updateProduct()"
+       (input)="onChangeSerialNumber($event)"
+      (blur)="onBlurSerialNumber()"
+      (keyup)="onEnterSerialNumber($event)"
     >
   </td>
   <td>

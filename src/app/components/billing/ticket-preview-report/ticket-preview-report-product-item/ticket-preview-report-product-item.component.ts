@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryValidate } from 'src/app/components/inventory/class/inventory-validate';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -15,6 +15,9 @@ import { TicketPreviewProduct } from '../class/ticket-preview-product';
 import { TicketPreviewValidate } from '../class/ticket-preview-validate';
 import { TicketPreview } from '../class/ticket-preview';
 import { Subscription } from 'rxjs';
+import { TicketPreviewReportProductItemDropDownComponent } from './ticket-preview-report-product-item-drop-down/ticket-preview-report-product-item-drop-down.component';
+import { TicketPreviewReportProductItemManufactureComponent } from './ticket-preview-report-product-item-manufacture/ticket-preview-report-product-item-manufacture.component';
+
 
 @Component({
   selector: 'app-ticket-preview-report-product-item',
@@ -22,7 +25,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./ticket-preview-report-product-item.component.scss']
 })
 export class TicketPreviewReportProductItemComponent implements OnInit {
-
+  @ViewChild('manufactureDb', { static: true }) manufactureDb: TicketPreviewReportProductItemManufactureComponent;
+  @ViewChild('productDb', { static: true }) productDb: TicketPreviewReportProductItemDropDownComponent;
   formatDate: string = FORMAT_DATE_2;
   @Input() ticket: TicketPreview;
   @Input() product: TicketPreviewProduct;
@@ -49,6 +53,8 @@ export class TicketPreviewReportProductItemComponent implements OnInit {
     if (item) {
       this.product.setData(item, 0);
     }
+    this.manufactureDb.setEditItem(this.product.item);
+    this.productDb.setEditItem(this.product.item);
     this.product.valdiateSaleCost = true;
     this.updateProduct();
   }
@@ -61,8 +67,30 @@ export class TicketPreviewReportProductItemComponent implements OnInit {
       this.cd.markForCheck();
     }
   }
+  onChangeSerialNumber(event) {
+    let value = event.target.value;
+    if (this.product.serialNumber != value) {
+      this.product.serialNumber = value;
+      this.product.setIsEdit(true);
+      this.cd.markForCheck();
+    }
+  }
+  onBlurSerialNumber() {
+    if (this.product.isEdit) {
+      this.updateProduct();
+    }
+    this.cd.markForCheck();
+  }
+  onEnterSerialNumber(event) {
+    if (event.keyCode === 13 && this.product.isEdit) {
+      this.onChangeSerialNumber(event);
+      event.target.blur();
+      this.cd.markForCheck();
+    }
+  }
   onEnterDiscountAmount(event) {
     if (event.keyCode === 13 && this.product.isEdit) {
+      this.onChangeDiscountAmount(event.target.value);
       event.target.blur();
       this.cd.markForCheck();
     }

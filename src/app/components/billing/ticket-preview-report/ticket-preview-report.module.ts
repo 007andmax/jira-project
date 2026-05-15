@@ -23,11 +23,12 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { IntegerModule } from 'src/app/directives/integer/integer.module';
 import { TicketsTableItemStatusModule } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-status/tickets-table-item-status.module';
+import { TicketPreviewReportProductItemManufactureComponent } from './ticket-preview-report-product-item/ticket-preview-report-product-item-manufacture/ticket-preview-report-product-item-manufacture.component';
 
 
 
 @NgModule({
-    declarations: [TicketPreviewReportComponent, TicketPreviewReportProductItemComponent, TicketPreviewReportProductItemDropDownComponent, TicketPreviewReportServiceItemComponent
+    declarations: [TicketPreviewReportComponent, TicketPreviewReportProductItemComponent, TicketPreviewReportProductItemDropDownComponent, TicketPreviewReportServiceItemComponent, TicketPreviewReportProductItemManufactureComponent
 
     ],
     imports: [
