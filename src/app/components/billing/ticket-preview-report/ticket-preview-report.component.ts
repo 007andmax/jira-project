@@ -95,6 +95,10 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnInitColor);
   }
+  onChangedStatus(ticket) {
+    let index = this.list.findIndex(item => item.id == ticket.id);
+    if (index > -1) this.list.splice(index, 1);
+  }
   checkClose(ticket) {
     let completeServices = (ticket.services.find(item => !item.completed) ? false : true);
     let completeProducts = (ticket.products.find(item => !item.completed) ? false : true);

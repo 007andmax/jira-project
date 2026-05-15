@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { TitleListType } from '../../../tickets-header/class/title-list-type';
 import { Ticket } from 'src/app/components/tickets/class/ticket';
 import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
@@ -19,6 +19,8 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   providers: [TicketsPermissionsService]
 })
 export class TicketsTableItemStatusComponent {
+  @Output() onChangedStatus = new EventEmitter<any>();
+  @Input() type: string = 'TICKET';
   @Input() ticket: Ticket;
   @Input() ticketsStatus: Array<TicketStatus> = [];
   @Input() listColors: Array<StatusColor> = [];
@@ -97,6 +99,7 @@ export class TicketsTableItemStatusComponent {
       }
       this.toastrService.success(`The tickets “${this.ticket.number}” status has been changed`);
       this.appStateService.changeDetectorRef();
+      this.onChangedStatus.emit(null);
     })
 
   }

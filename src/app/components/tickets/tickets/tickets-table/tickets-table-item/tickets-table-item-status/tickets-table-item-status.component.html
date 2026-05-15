@@ -10,7 +10,7 @@
             class="tag__modern"
             [ngStyle]="getStyleStatus((ticket.customStatus) ? ticket.customStatus : ticket.status)"
             *ngIf="ticket.status === 'IN_PROGRESS'"
-            [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal,'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
+            [ngClass]="{'no-click':type == 'TICKET' && !ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal,'qt-pointer':type == 'TICKET' && ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
         >
             {{(!ticket.customStatus) ? 'In Progress' : ticket.customStatus}}
         </span>
@@ -19,7 +19,7 @@
             class="tag__modern"
             [ngStyle]="getStyleStatus(ticket.status)"
             *ngIf="ticket.status === 'PENDING_REVIEW'"
-             [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal,'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
+             [ngClass]="{'no-click':type == 'TICKET' && !ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal,'qt-pointer':type == 'TICKET' && ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
         >
             Pending Review
         </span>
@@ -28,7 +28,7 @@
             class="tag__modern"
             [ngStyle]="getStyleStatus(ticket.status)"
             *ngIf="ticket.status === 'COMPLETED'"
-             [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal,'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
+             [ngClass]="{'no-click':type == 'TICKET' && !ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal,'qt-pointer':type == 'TICKET' && ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
         >
             Completed
         </span>
@@ -46,7 +46,7 @@
             class="tag__modern"
             [ngStyle]="getStyleStatus(ticket.status)"
             *ngIf="ticket.status === 'ON_HOLD'"
-             [ngClass]="{'no-click':!ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal,'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
+             [ngClass]="{'no-click':type == 'TICKET' && !ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal,'qt-pointer':type == 'TICKET' && ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
         >
             On Hold
         </span>
