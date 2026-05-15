@@ -1,11 +1,6 @@
 @import './src/assets/styles/variable';
 @import "./src/assets/styles/mixin/breakpoint";
 
-.input-qty,
-.input-price {
-  text-align: right;
-}
-
 td {
   border-bottom: solid 1px $gray-200;
   padding: 10px 8px;
@@ -13,10 +8,12 @@ td {
 
   &:first-child {
     border-left: 1px solid $gray-200;
+    padding-left: 24px;
   }
 
   &:last-child {
     border-right: 1px solid $gray-200;
+    padding-right: 24px;
   }
 
   input {
@@ -55,6 +52,15 @@ td {
         border-color: $gray-200;
       }
     }
+  }
+
+  pre {
+    font-family: Inter, sans-serif;
+    color: $gray-900;
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 400;
+    margin: 0;
   }
 }
 

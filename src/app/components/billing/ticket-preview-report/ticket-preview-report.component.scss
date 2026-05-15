@@ -19,11 +19,6 @@
     padding-bottom: 7px;
   }
 
-  &__number {
-    background-color: $gray-500;
-    line-height: 1.2;
-  }
-
   &__subject {
     max-width: 680px;
   }
@@ -37,26 +32,26 @@
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    table-layout: fixed;
     padding-inline: 30px;
 
     th {
-      background-color: $gray-25;
+      background-color: $gray-50;
       border-bottom: solid 1px $gray-200;
-      border-right: solid 1px $gray-200;
       border-left: none;
-      height: 36px;
-      padding: 10px 8px;
-      font-weight: 600;
-      font-size: 11px;
-      border-top: none;
+      padding: 11px 8px 12px;
+      font-weight: 500;
+      font-size: 14px;
+      text-transform: unset;
+      color: $gray-500;
 
       &:first-child {
         border-left: 1px solid $gray-200;
+        padding-left: 24px;
       }
 
       &:last-child {
         border-right: 1px solid $gray-200;
+        padding-right: 24px;
       }
     }
 
@@ -66,10 +61,12 @@
 
       &:first-child {
         border-left: 1px solid $gray-200;
+        padding-left: 24px;
       }
 
       &:last-child {
         border-right: 1px solid $gray-200;
+        padding-right: 24px;
       }
     }
 
@@ -84,11 +81,13 @@
 
   &__col-item {
     text-align: left;
-    width: 156px;
+    width: 172px;
+    min-width: 172px;
   }
 
   &__col-servers {
     width: 186px;
+    min-width: 186px;
   }
 
   &__col-desc {
@@ -98,31 +97,33 @@
   }
 
   &__col-price {
-    text-align: right;
     width: 94px;
+    min-width: 94px;
   }
 
   &__col-quentity {
-    text-align: right;
     width: 120px;
+    min-width: 120px;
   }
 
   &__col-tax {
-    text-align: right;
     width: 80px;
+    min-width: 80px;
   }
 
   &__col-amount {
-    text-align: right;
-    width: 109px;
+    width: 114px;
+    min-width: 114px;
   }
 
   &__col-status {
     width: 170px;
+    min-width: 170px;
   }
 
   &__col-remove {
-    width: 60px;
+    width: 70px;
+    min-width: 70px;
   }
 }
 
@@ -176,6 +177,6 @@
 }
 .tikcet-preview-container {
     width: 100%;
-    min-height: 100vh;
+    max-height: calc(100vh - 66px);
     overflow: auto;
 }
