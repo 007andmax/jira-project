@@ -31,19 +31,16 @@
         >
           <div
             class="qt-button --gray --md qt-ml-12"
-            placement="left"
-            ngbTooltip="You cannot close the ticket. It contains incomplete products / services / tasks."
-            [disableTooltip]="checkClose(ticket)"
             appDisabledBtn
             #update_closeBtn="disabled"
-            (onClick)="close(ticket)"
-            [ngClass]="{'--disabled':!checkClose(ticket), '--loading':ticket.isUpdateAndClose}"
+            (onClick)="approveAndClose(ticket)"
+            [ngClass]="{'--loading':ticket.isUpdateAndClose}"
           >
             <span
               class="qt-icon icon__check qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
               *ngIf="!ticket.isUpdateAndClose"
             ></span>
-            <span>Close Ticket</span>
+            <span>Approve and Close Ticket</span>
             <app-preloader-ticket *ngIf="ticket.isUpdateAndClose"></app-preloader-ticket>
           </div>
         </div>
@@ -90,7 +87,7 @@
         [ngForOf]="ticket.products"
         [ngForTrackBy]="trackById"
       >
-        <app-ticket-preview-report-product-item [product]="product"
+        <app-ticket-preview-report-product-item #productItem [product]="product"
                                                 [ticket]="ticket"></app-ticket-preview-report-product-item>
       </ng-template>
       </tbody>

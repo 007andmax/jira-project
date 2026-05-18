@@ -26,15 +26,20 @@
       <textarea
         name="cps-chat"
         (blur)="updateService()"
-        appTextArea
+        
         [(ngModel)]="service.description"
         maxlength="500"
         cols="5"
-        rows="1"
+        [attr.rows]="shortVersion ? 1 : rowTextArea"
         id="service-description"
         placeholder="Write ticket conversation here…"
       ></textarea>
     </div>
+     <div
+            class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info pointer short"
+            [textContent]="(shortVersion ? ' more' : 'show less')"
+            (click)="shortVersion = !shortVersion"
+        ></div>
   </td>
   <td
     class="invoice-item__col-quentity"
@@ -75,7 +80,7 @@
   </td>
   <td>
     <app-dynamic-tooltip
-      [content]="'Delete Product'"
+      [content]="'Delete Service'"
       [position]="'top'"
       #deleteProduct
     ></app-dynamic-tooltip>

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ReportsService } from 'src/app/services/reports/reports.service';
 import { TicketPreview } from './class/ticket-preview';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
@@ -16,6 +16,7 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { TicketStatus } from '../../setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { StatusColor } from '../../tickets/class/status-color';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
+import { TicketPreviewReportProductItemComponent } from './ticket-preview-report-product-item/ticket-preview-report-product-item.component';
 
 @Component({
   selector: 'app-ticket-preview-report',
@@ -23,6 +24,8 @@ import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service
   styleUrls: ['./ticket-preview-report.component.scss']
 })
 export class TicketPreviewReportComponent implements OnInit, OnDestroy {
+  @ViewChildren("productItem", { emitDistinctChangesOnly: false }) productItems: QueryList<TicketPreviewReportProductItemComponent>;
+
   showPreloader: boolean = true;
   list: Array<TicketPreview> = [];
   ticketsStatus: Array<TicketStatus> = [];
@@ -104,10 +107,28 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
     let completeProducts = (ticket.products.find(item => !item.completed) ? false : true);
     return completeServices && completeProducts;
   }
-  close(ticket) {
-    if (!this.checkClose(ticket)) return;
+  approveAndClose(ticket) {
+    this.productItems.toArray().forEach(item => item.validate.isValidate(item.product.item));
+    if (this.productItems.toArray().find(item => !item.validate.isValidate(item.product.item))) return;
+    if (!this.checkClose(ticket)) {
+      let services = ticket.services.filter(item => !item.completed);
+      services.forEach(element => element.setCompleted(true));
+      let products = ticket.products.filter(item => !item.completed);
+      products.forEach(element => element.setCompleted(true));
+      forkJoin(
+        [...services.map(service => this.ticketsService.updateExpense(service.getDateForUpdate(service.ticketUpdateId))), ...products.map(product => this.ticketsService.updateExpense(product.getDateForUpdate(product.ticketUpdateId)))]
+      )
+        .subscribe(result => {
+          this.close(ticket);
+        });
+    } else {
+      this.close(ticket);
+    }
     // this.update_closeBtn.setDisabled(true);
     ticket.isUpdateAndClose = true;
+
+  }
+  close(ticket) {
     this.ticketsService.updateTicket(this.getDataForClose(ticket), true).subscribe(data => {
       ticket.isUpdateAndClose = false;
       let index = this.list.findIndex(item => item.id == ticket.id);

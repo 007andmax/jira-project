@@ -5,7 +5,12 @@
     #products="ngbDropdown"
     (openChange)="onCloseProducts($event)"
     >
-     <pre [textContent]="getNameOrDescription(editItem)" ngbDropdownToggle></pre>
+     <pre [ngClass]="{'short-version':shortVersion}" [textContent]="getNameOrDescription(editItem)" ngbDropdownToggle></pre>
+      <div
+            class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info pointer short"
+            [textContent]="(shortVersion ? ' more' : 'show less')"
+            (click)="shortVersion = !shortVersion"
+        ></div>
                <div
         class=select-product__dropdown
         ngbDropdownMenu

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
@@ -29,6 +29,8 @@ export class TicketPreviewReportServiceItemComponent {
   @Input() servicesList = [];
   formatDate: string = FORMAT_DATE_2;
   sub: Subscription = new Subscription();
+  rowTextArea: number = 0;
+  shortVersion: boolean = true;
   constructor(
     public confirmStateService: ConfirmStateService,
     public modalService: NgbModal,
@@ -37,12 +39,22 @@ export class TicketPreviewReportServiceItemComponent {
     private permissionsService: PermissionsService,
     public ticketsService: TicketsService,
     private recurringService: RecurringService,
+    private elRef: ElementRef,
     private companiesStateService: CompaniesStateService) { }
 
 
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.servicesList = this.servicesCompany.find(item => item.companyId == this.ticket.companyId)?.services;
+  }
+  ngDoCheck() {
+
+    const textarea = this.elRef.nativeElement.querySelector('#service-description');
+    const styles = window.getComputedStyle(textarea);
+    const lineHeight = parseFloat(styles.lineHeight);
+
+    this.rowTextArea = Math.round(textarea.scrollHeight / lineHeight);
+    console.log('lines', Math.round(textarea.scrollHeight / lineHeight)); // Outputs 4
   }
   onChangeStartDate(data) {
     this.service.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

@@ -12,7 +12,7 @@ import { CategoryProductitem } from 'src/class/category-product-item';
   styleUrls: ['./ticket-preview-report-product-item-drop-down.component.scss']
 })
 export class TicketPreviewReportProductItemDropDownComponent extends ProductListComponent {
-
+  shortVersion: boolean = true;
 
   ngOnInit() {
     if (this.type === 'QUOTE') this.classAddProduct = 'quote-add-product';
