@@ -69,7 +69,7 @@ export class TicketPreviewReportServiceItemComponent {
     this.cd.markForCheck();
   }
   onEnterDescription(event) {
-    if (event.keyCode === 13 && this.service.isEdit) {
+    if (!event.shiftKey && event.keyCode === 13 && this.service.isEdit) {
       this.onChangeDescription(event);
       event.target.blur();
       this.cd.markForCheck();
