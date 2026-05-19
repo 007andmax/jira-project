@@ -1,19 +1,20 @@
   <div  
-  class="product-dropdown-new-ng light-dropdown select-product"
+  class="product-dropdown-new-ng light-dropdown"
      ngbDropdown
+     container="body"
     [autoClose]="'outside'"
     #products="ngbDropdown"
     (openChange)="onCloseProducts($event)"
     >
      <div [textContent]="product.manufacture" ngbDropdownToggle></div>
                <div
-        class=select-product__dropdown
+        class="ticket-preview-manufacture__dropdown"
         ngbDropdownMenu
         aria-labelledby="dropdownProducts"
     >
-        <div class="select-product__header">
+        <div class="ticket-preview-manufacture__header">
             <div class="qt-df qt-jc-sb qt-mb-8 qt-ai-c">
-                <div class="select-product__header-title">Product list</div>
+                <div class="ticket-preview-manufacture__header-title">Product list</div>
             </div>
             <div class="qt-input-search">
                 <input
@@ -39,7 +40,7 @@
                 >
                     <button
                         ngbPanelToggle
-                        class="select-product__item-title"
+                        class="ticket-preview-manufacture__item-title"
                         (click)="togglePanel(opened,$event)"
                     >
                         <div>

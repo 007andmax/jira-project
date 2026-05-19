@@ -1,17 +1,13 @@
 @import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/dropdown";
+@import "./src/assets/styles/mixin/breakpoint";
 
-.products-accordion {
+
+::ng-deep .ticket-preview-manufacture {
+  .products-accordion {
   position: static;
   margin-bottom: 8px;
 }
-
-.dropdown-menu {
-  min-height: 350px;
-  width: 100%;
-}
-
-
-.select-product {
   &__dropdown {
     border-radius: 6px;
     box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
@@ -19,7 +15,8 @@
     min-height: 360px;
     position: absolute;
     display: none;
-    padding: 0;
+    padding: 0px;
+    width: 572px;
   }
 
   &__header {
@@ -52,13 +49,31 @@
     align-items: center;
     justify-content: space-between;
     font-weight: 500;
+
+     
+      font-size: 14px;
+      line-height: 17px;
+      color: $gray-900;
+      padding: 12px;
+      border-radius: 6px;
+
+      &:active {
+        box-shadow: unset;
+      }
+
+      &:hover {
+        background-color: $gray-50 !important;
+        color: $blue-light-600 !important;
+      }
   }
 
-  ::ng-deep .card {
+  .card {
+     margin: 0 16px;
+    border-bottom: 1px solid $gray-200;
     &.opened-card {
       padding: 0;
 
-      .select-product {
+      .ticket-preview-manufacture {
         &__item-title {
           background: transparent;
           color: $gray-900;
@@ -134,32 +149,6 @@
     display: none;
   }
  }
-
-::ng-deep .product-dropdown-new-ng {
-  .item-list .card {
-    margin: 0 16px;
-    border-bottom: 1px solid $gray-200;
-
-    .select-product__item-title,
-    .select-product__item-title {
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 17px;
-      color: $gray-900;
-      padding: 12px;
-      border-radius: 6px;
-
-      &:active {
-        box-shadow: unset;
-      }
-
-      &.collapsed:hover {
-        background-color: $gray-50;
-        color: $blue-light-600;
-      }
-    }
-  }
-}
 .loading {
   top: 10px !important;
 }

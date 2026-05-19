@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
@@ -40,6 +40,7 @@ export class TicketPreviewReportServiceItemComponent {
     public ticketsService: TicketsService,
     private recurringService: RecurringService,
     private elRef: ElementRef,
+    public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService) { }
 
 
@@ -55,6 +56,27 @@ export class TicketPreviewReportServiceItemComponent {
 
     this.rowTextArea = Math.round(textarea.scrollHeight / lineHeight);
     console.log('lines', Math.round(textarea.scrollHeight / lineHeight)); // Outputs 4
+  }
+  onChangeDescription(event) {
+    let value = event.target.value;
+    if (this.service.description != value) {
+      this.service.description = value;
+      this.service.setIsEdit(true);
+      this.cd.markForCheck();
+    }
+  }
+  onBlurDescription() {
+    if (this.service.isEdit) {
+      this.updateService();
+    }
+    this.cd.markForCheck();
+  }
+  onEnterDescription(event) {
+    if (event.keyCode === 13 && this.service.isEdit) {
+      this.onChangeDescription(event);
+      event.target.blur();
+      this.cd.markForCheck();
+    }
   }
   onChangeStartDate(data) {
     this.service.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
@@ -92,6 +114,7 @@ export class TicketPreviewReportServiceItemComponent {
     this.updateService();
   }
   updateService() {
+    this.service.setIsEdit(false);
     this.ticketsService.updateExpense(this.service.getDateForUpdate(this.service.ticketUpdateId)).subscribe(data => {
 
     })

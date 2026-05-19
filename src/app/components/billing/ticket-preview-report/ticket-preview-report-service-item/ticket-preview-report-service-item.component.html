@@ -5,6 +5,7 @@
       [dropdownClass]="['date-picker']"
       [formatDate]="formatDate"
       [editMode]="true"
+       [useMinDate]="false"
       [editDate]="service.date"
       [container]="'body'"
       (onChange)="onChangeStartDate($event)"
@@ -25,14 +26,15 @@
     <div class="editable-description editable-chat">
       <textarea
         name="cps-chat"
-        (blur)="updateService()"
-        
-        [(ngModel)]="service.description"
         maxlength="500"
         cols="5"
         [attr.rows]="shortVersion ? 1 : rowTextArea"
         id="service-description"
         placeholder="Write ticket conversation here…"
+          [value]="service.description"
+       (input)="onChangeDescription($event)"
+      (blur)="onBlurDescription()"
+      (keyup)="onEnterDescription($event)"
       ></textarea>
     </div>
      <div
