@@ -62,15 +62,18 @@ export class TicketPreviewReportServiceItemComponent {
       this.cd.markForCheck();
     }
   }
-  onBlurDescription() {
+  onBlurDescription(event) {
     if (this.service.isEdit) {
+      this.onChangeDescription(event);
       this.updateService();
+      this.cd.markForCheck();
     }
-    this.cd.markForCheck();
   }
   onEnterDescription(event) {
     if (!event.shiftKey && event.keyCode === 13 && this.service.isEdit) {
+      event.preventDefault();
       this.onChangeDescription(event);
+      this.updateService();
       event.target.blur();
       this.cd.markForCheck();
     }

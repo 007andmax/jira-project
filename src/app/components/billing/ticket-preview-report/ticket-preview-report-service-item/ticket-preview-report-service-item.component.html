@@ -27,14 +27,14 @@
       <textarea
         name="cps-chat"
         maxlength="500"
-        cols="5"
+          appTextArea
         [attr.rows]="shortVersion ? 3 : rowTextArea"
         id="service-description"
         placeholder="Write ticket conversation here…"
           [value]="service.description"
-       (input)="onChangeDescription($event)"
-      (blur)="onBlurDescription()"
-      (keyup)="onEnterDescription($event)"
+           (input)="onChangeDescription($event)"
+            (keydown)="onEnterDescription($event)"
+            (blur)="onBlurDescription($event)"
       ></textarea>
     </div>
      <div
