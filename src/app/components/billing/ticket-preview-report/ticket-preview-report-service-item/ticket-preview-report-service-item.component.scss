@@ -83,7 +83,7 @@ max-height: none;
     max-height: none;
     visibility: visible;
     outline: none;
-    overflow: hidden;
+    overflow: hidden !important;
     border: 1px solid transparent;
     padding: 2px;
     min-height: 40px;
