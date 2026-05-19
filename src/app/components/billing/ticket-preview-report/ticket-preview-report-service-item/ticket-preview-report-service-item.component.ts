@@ -49,13 +49,10 @@ export class TicketPreviewReportServiceItemComponent {
     this.servicesList = this.servicesCompany.find(item => item.companyId == this.ticket.companyId)?.services;
   }
   ngDoCheck() {
-
     const textarea = this.elRef.nativeElement.querySelector('#service-description');
     const styles = window.getComputedStyle(textarea);
     const lineHeight = parseFloat(styles.lineHeight);
-
     this.rowTextArea = Math.round(textarea.scrollHeight / lineHeight);
-    console.log('lines', Math.round(textarea.scrollHeight / lineHeight)); // Outputs 4
   }
   onChangeDescription(event) {
     let value = event.target.value;
