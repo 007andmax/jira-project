@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ReportsService } from 'src/app/services/reports/reports.service';
 import { TicketPreview } from './class/ticket-preview';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
@@ -17,21 +17,27 @@ import { TicketStatus } from '../../setting/ticket-settings-page/tickets-status/
 import { StatusColor } from '../../tickets/class/status-color';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { TicketPreviewReportProductItemComponent } from './ticket-preview-report-product-item/ticket-preview-report-product-item.component';
+import { TicketPreviewReportFilter } from './class/ticket-preview-report-filter';
+import { InventoryListService } from '../../inventory/services/inventory-list.service';
 
 @Component({
   selector: 'app-ticket-preview-report',
   templateUrl: './ticket-preview-report.component.html',
-  styleUrls: ['./ticket-preview-report.component.scss']
+  styleUrls: ['./ticket-preview-report.component.scss'],
+  providers: [InventoryListService]
 })
 export class TicketPreviewReportComponent implements OnInit, OnDestroy {
   @ViewChildren("productItem", { emitDistinctChangesOnly: false }) productItems: QueryList<TicketPreviewReportProductItemComponent>;
-
+  filter: TicketPreviewReportFilter = new TicketPreviewReportFilter();
   showPreloader: boolean = true;
   list: Array<TicketPreview> = [];
   ticketsStatus: Array<TicketStatus> = [];
   listColors: Array<StatusColor> = [];
   servicesCompany: Array<TicketPreviewServicesCompany> = [];
   sub: Subscription = new Subscription();
+  container = document.body.querySelector(".main-container");
+  public infiniteScrollDisabled = true;
+  showPendingPreloader: boolean = false;
   constructor(private peportsService: ReportsService,
     public confirmStateService: ConfirmStateService,
     private ticketsService: TicketsService,
@@ -42,29 +48,12 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
     public modalService: NgbModal,
     private ticketsStateService: TicketsStateService,
     private leftPanelService: LeftPanelService,
+    private inventoryListService: InventoryListService,
+    public cd: ChangeDetectorRef,
   ) { }
 
   ngOnInit(): void {
     this.inventoryStateService.getProducts();
-    this.peportsService.getTicketPreivew().subscribe((res: any) => {
-      this.list = res.map(item => new TicketPreview(item));
-      let companyesIds = this.list.map(item => item.companyId);
-      this.servicesCompany = companyesIds.filter((item, index) => companyesIds.indexOf(item) === index).map(item => new TicketPreviewServicesCompany(item, []));
-      forkJoin(
-        this.servicesCompany.map(item => this.recurringService.getServiceList(item.companyId))
-      )
-        .subscribe(result => {
-          result.forEach((services: any, i) => {
-            let servicesList = services.filter(item => item.canUseInTicket);
-            servicesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-              1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-            this.servicesCompany[i].services = servicesList;
-          })
-          this.showPreloader = false;
-        });
-
-      console.log("this.list", this.list);
-    })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
 
@@ -79,8 +68,14 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
     this.ticketsStatus = this.ticketsStateService.getTicketsStatus();
+    if (this.ticketsStatus.length > 0) {
+      this.filter.setTicketStatusIds([this.ticketsStatus.find(item => item.name == "PENDING_REVIEW")?.id]);
+      this.getList();
+    }
     let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
       this.ticketsStatus = data;
+      this.filter.setTicketStatusIds([this.ticketsStatus.find(item => item.name == "PENDING_REVIEW")?.id]);
+      this.getList();
     })
     this.sub.add(onGetTicketsStatus);
     if (this.ticketsStateService.getListStatusColor().length === 0) {
@@ -97,6 +92,55 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
       this.listColors = data;
     })
     this.sub.add(getOnInitColor);
+  }
+  onFilter(data) {
+    this.filter = data;
+    this.showPreloader = true;
+    this.setDefaultScoll();
+    this.onScroll();
+  }
+  public setDefaultScoll() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.filter.page = 0;
+    this.inventoryListService.setBlockList(false);
+    this.list = [];
+    this.cd.detectChanges();
+  }
+  public onScroll() {
+    this.infiniteScrollDisabled = true;
+    this.getList();
+  }
+  getList() {
+    if (this.inventoryListService.getBlockList()) {
+      this.infiniteScrollDisabled = false;
+      this.cd.detectChanges();
+      return;
+    }
+    if (this.filter.page > 0) this.showPendingPreloader = true;
+    this.peportsService.getTicketPreivew(this.filter.getDataForRequest()).subscribe((res: any) => {
+      this.list = [...this.list, ...res.map(item => new TicketPreview(item))];
+      this.infiniteScrollDisabled = false;
+      if (res.length < this.filter.size) this.inventoryListService.setBlockList(true);
+      this.filter.page += 1;
+      let companyesIds = this.list.map(item => item.companyId);
+      this.servicesCompany = companyesIds.filter((item, index) => companyesIds.indexOf(item) === index).map(item => new TicketPreviewServicesCompany(item, []));
+      forkJoin(
+        this.servicesCompany.map(item => this.recurringService.getServiceList(item.companyId))
+      )
+        .subscribe(result => {
+          result.forEach((services: any, i) => {
+            let servicesList = services.filter(item => item.canUseInTicket);
+            servicesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+              1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+            this.servicesCompany[i].services = servicesList;
+          })
+          this.showPreloader = false;
+          this.showPendingPreloader = false;
+          this.cd.detectChanges();
+        });
+
+      console.log("this.list", this.list);
+    })
   }
   onChangedStatus(ticket) {
     let index = this.list.findIndex(item => item.id == ticket.id);

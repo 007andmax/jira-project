@@ -24,11 +24,19 @@ import { NumberModule } from 'src/app/directives/number/number.module';
 import { IntegerModule } from 'src/app/directives/integer/integer.module';
 import { TicketsTableItemStatusModule } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-status/tickets-table-item-status.module';
 import { TicketPreviewReportProductItemManufactureComponent } from './ticket-preview-report-product-item/ticket-preview-report-product-item-manufacture/ticket-preview-report-product-item-manufacture.component';
+import { TicketPreviewReportHeaderComponent } from './ticket-preview-report-header/ticket-preview-report-header.component';
+import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datepicker.module';
+import { DropDownModule } from '../../shared/drop-down/drop-down.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { TicketPreviewReportStatusDropDownComponent } from './ticket-preview-report-status-drop-down/ticket-preview-report-status-drop-down.component';
+import { MatChipListModule } from '../../shared/mat-chip-list/mat-chip-list.module';
+import { MatChipModule } from '../../shared/mat-chip/mat-chip.module';
+import { MatFormFieldModule } from '../../shared/mat-form-field/mat-form-field.module';
 
 
 
 @NgModule({
-    declarations: [TicketPreviewReportComponent, TicketPreviewReportProductItemComponent, TicketPreviewReportProductItemDropDownComponent, TicketPreviewReportServiceItemComponent, TicketPreviewReportProductItemManufactureComponent
+    declarations: [TicketPreviewReportComponent, TicketPreviewReportProductItemComponent, TicketPreviewReportProductItemDropDownComponent, TicketPreviewReportServiceItemComponent, TicketPreviewReportProductItemManufactureComponent, TicketPreviewReportHeaderComponent, TicketPreviewReportStatusDropDownComponent
 
     ],
     imports: [
@@ -51,7 +59,13 @@ import { TicketPreviewReportProductItemManufactureComponent } from './ticket-pre
         PreloaderTicketModule,
         NumberModule,
         IntegerModule,
-        TicketsTableItemStatusModule
+        TicketsTableItemStatusModule,
+        MultiDatepickerModule,
+        DropDownModule,
+        InfiniteScrollModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
     ],
 
 })

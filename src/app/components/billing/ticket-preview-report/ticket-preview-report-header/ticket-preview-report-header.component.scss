@@ -1,0 +1,6 @@
+@import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/breakpoint";
+
+.qt-page-list__header {
+    background-color: $white;
+}
