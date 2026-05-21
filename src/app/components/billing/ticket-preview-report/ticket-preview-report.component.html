@@ -44,23 +44,18 @@
                                 {{ ticket.companyName }}
                               </div>
                               <div
-                                class="qt-fs-12 qt-df qt-ai-c qt-fg"
-
+                                class="qt-button --green --md qt-ml-auto"
+                                appDisabledBtn
+                                #update_closeBtn="disabled"
+                                (onClick)="approveAndClose(ticket)"
+                                [ngClass]="{'--loading':ticket.isUpdateAndClose}"
                               >
-                                <div
-                                  class="qt-button --gray --md qt-ml-12"
-                                  appDisabledBtn
-                                  #update_closeBtn="disabled"
-                                  (onClick)="approveAndClose(ticket)"
-                                  [ngClass]="{'--loading':ticket.isUpdateAndClose}"
-                                >
                                   <span
-                                    class="qt-icon icon__check qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
+                                    class="qt-icon qt-icon__green-700 icon__check qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
                                     *ngIf="!ticket.isUpdateAndClose"
                                   ></span>
-                                  <span>Approve and Close Ticket</span>
-                                  <app-preloader-ticket *ngIf="ticket.isUpdateAndClose"></app-preloader-ticket>
-                                </div>
+                                <span>Approve and Close</span>
+                                <app-preloader-ticket *ngIf="ticket.isUpdateAndClose"></app-preloader-ticket>
                               </div>
                               <!--  <div
                                   class="qt-fs-12 invoice-item__subject"

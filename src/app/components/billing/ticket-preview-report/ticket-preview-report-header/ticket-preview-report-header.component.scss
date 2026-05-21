@@ -9,6 +9,9 @@
   padding: 14px 14px 14px 24px;
 }
 
+::ng-deep .multi-datepicker-container {
+  min-width: 260px;
+}
 
 ::ng-deep .mat-form-field-infix {
   min-width: 180px !important;

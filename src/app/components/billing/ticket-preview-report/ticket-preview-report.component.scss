@@ -43,13 +43,13 @@
 
       &:first-child {
         border-left: 1px solid $gray-200;
-        padding-left: 24px;
+        padding-left: 16px;
         border-radius: 8px 0 0 0;
       }
 
       &:last-child {
         border-right: 1px solid $gray-200;
-        padding-right: 24px;
+        padding-right: 16px;
         border-radius: 0 8px 0 0;
       }
     }
@@ -60,7 +60,7 @@
 
       &:first-child {
         border-left: 1px solid $gray-200;
-        padding-left: 24px;
+        padding-left: 16px;
       }
 
       &:last-child {
@@ -68,30 +68,23 @@
         padding-right: 24px;
       }
     }
-
-    tbody {
-      tr:last-child {
-        td:last-child {
-          border-bottom-right-radius: 4px;
-        }
-      }
-    }
   }
 
   &__col-item {
     text-align: left;
-    width: 172px;
-    min-width: 172px;
+    width: 166px;
+    min-width: 166px;
   }
 
   &__col-servers {
-    width: 186px;
+    width: 100%;
     min-width: 186px;
   }
 
   &__col-desc {
     text-align: left;
-    width: 100%;
+    width: 572px;
+    min-width: 572px;
     overflow-wrap: break-word;
   }
 
@@ -121,8 +114,8 @@
   }
 
   &__col-remove {
-    width: 70px;
-    min-width: 70px;
+    width: 60px;
+    min-width: 60px;
   }
 }
 
@@ -177,4 +170,26 @@
 .qt-page-list {
     background-color: $white;
     padding: 0;
+}
+
+::ng-deep {
+  tbody {
+    & > *:last-child {
+      td:first-of-type {
+        border-radius: 0 0 0 8px;
+      }
+      td:last-of-type {
+        border-radius: 0 0 8px 0;
+      }
+    }
+  }
+
+  .light-dropdown {
+    .qt-input-block__input {
+      padding-right: 32px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
 }

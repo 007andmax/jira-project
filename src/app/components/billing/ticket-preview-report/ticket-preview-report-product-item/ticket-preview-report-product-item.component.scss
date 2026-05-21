@@ -3,17 +3,17 @@
 
 td {
   border-bottom: solid 1px $gray-200;
-  padding: 10px 8px;
+  padding: 8px 8px;
   vertical-align: top;
 
   &:first-child {
     border-left: 1px solid $gray-200;
-    padding-left: 24px;
+    padding-left: 16px;
   }
 
   &:last-child {
     border-right: 1px solid $gray-200;
-    padding-right: 24px;
+    padding-right: 16px;
   }
 
   input {
@@ -61,6 +61,7 @@ td {
     line-height: 17px;
     font-weight: 400;
     margin: 0;
+    max-width: 556px;
   }
 }
 
