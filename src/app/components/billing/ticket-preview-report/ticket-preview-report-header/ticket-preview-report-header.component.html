@@ -1,29 +1,31 @@
-<div class="qt-page-list__header --sticky">
-    <div class="qt-page-list__header-title-line">
-        <div class="qt-page-list__header-title-line--left">
-            <app-multi-datepicker
-                #dp
-                [validate]="validate.date"
-                [errorMessage]="'Please select the dates'"
-                (selectedDate)="filterByDate($event)"
-            ></app-multi-datepicker>
-            <app-ticket-preview-report-status-drop-down
-                [placeholder]="'Select status'"
-                [placement]="'bottom-left'"
-                [field]="'title'"
-                (filterChange)="onSelectStatus($event)"
-            >
-            </app-ticket-preview-report-status-drop-down>
-            <button
-            class="qt-button --md --gray qt-fs-0"
-            (click)="applyFilter()"
-            [disabled]="!validate.date"
-            [ngClass]="{'--disabled':!validate.date}"
+<div class="qt-page-list__header">
+  <div class="qt-page-list__header-title-line">
+    <div class="qt-df qt-ai-c qt-jc-c qt-ml-auto qt-mr-auto">
+      <div class="qt-input-block qt-mr-8">
+        <app-multi-datepicker
+          #dp
+          [validate]="validate.date"
+          [errorMessage]="'Please select the dates'"
+          (selectedDate)="filterByDate($event)"
+        ></app-multi-datepicker>
+      </div>
+      <div class="qt-input-block">
+        <app-ticket-preview-report-status-drop-down
+          [placeholder]="'Select status'"
+          [placement]="'bottom-left'"
+          [field]="'title'"
+          (filterChange)="onSelectStatus($event)"
         >
-            Apply
-        </button>
-        </div>
-        <div class="qt-page-list__header-title-line--right">
-        </div>
+        </app-ticket-preview-report-status-drop-down>
+      </div>
+      <button
+        class="qt-button --md --gray qt-fs-0 qt-ml-8"
+        (click)="applyFilter()"
+        [disabled]="!validate.date"
+        [ngClass]="{'--disabled':!validate.date}"
+      >
+        Apply
+      </button>
     </div>
+  </div>
 </div>

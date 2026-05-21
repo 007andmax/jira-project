@@ -11,8 +11,8 @@
 
   &__header {
     background-color: $white;
-    padding-top: 7px;
-    padding-bottom: 7px;
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
 
   &__subject {
@@ -176,4 +176,5 @@
 }
 .qt-page-list {
     background-color: $white;
+    padding: 0;
 }

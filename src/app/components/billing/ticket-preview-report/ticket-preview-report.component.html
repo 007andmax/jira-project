@@ -25,11 +25,11 @@
                         let-i="index"
                         [ngForTrackBy]="trackByIndex"
                       >
-                        <div class="invoice-item qt-mb-16 qt-w100">
+                        <div class="invoice-item qt-w100">
                           <div class="qt-df qt-ai-c">
                             <div class="invoice-item__header qt-w100 qt-ml-30 qt-df qt-ai-c qt-pt-10 qt-pb-10">
                               <div
-                                class="invoice-item__number qt-fs-16 qt-ml-24 qt-mr-16 qt-pointer"
+                                class="invoice-item__number qt-fs-14 qt-fw-500 qt-color-gray-900 qt-mr-16 qt-pointer"
                                 [textContent]="'Tkt# ' + ticket.number"
                                 (click)="editTicket(ticket.id)"
                               >
