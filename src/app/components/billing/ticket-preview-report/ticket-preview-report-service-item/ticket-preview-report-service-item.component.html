@@ -18,6 +18,7 @@
       [editItem]="service.item"
       [type]="'TICKET'"
       (selectedServicesItem)="selectService($event)"
+      (onOpenDropDown)="onOpenServiceDropDown($event)"
     ></app-services-list>
   </td>
   <td class="invoice-item__col-desc"

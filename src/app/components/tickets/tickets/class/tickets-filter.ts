@@ -485,7 +485,7 @@ export class TicketsFilter {
                             values: [
                                 "FROM_RECURRING_TICKET"
                             ]
-                        }
+                        },
                     ]
                 }
             ]
@@ -537,7 +537,7 @@ export class TicketsFilter {
                             "path": "ticketSource",
                             "operator": "NOT_EQ",
                             "values": [
-                                "FROM_RECURRING_TICKET"
+                                "FROM_RECURRING_TICKET",
                             ]
                         }
                     ]
@@ -548,13 +548,22 @@ export class TicketsFilter {
                             "path": "status",
                             "operator": "NOT_EQ",
                             "values": [
-                                "COMPLETED"
+                                "COMPLETED",
+                                "PENDING_REVIEW"
                             ]
                         },
                         {
                             "path": "status",
                             "operator": "IN",
                             values: ["UNASSIGNED"]
+                        },
+                        {
+                            "path": "ticketSource",
+                            "operator": "NOT_EQ",
+                            "values": [
+                                "FROM_RECURRING_TICKET",
+
+                            ]
                         }
                     ],
                     "predicateRule": "OR"
@@ -625,7 +634,8 @@ export class TicketsFilter {
                             path: "status",
                             operator: "EQ",
                             values: [
-                                "COMPLETED"
+                                "COMPLETED",
+                                "PENDING_REVIEW"
                             ]
                         },
                         {
@@ -731,6 +741,14 @@ export class TicketsFilter {
             groupFieldFilters: [
                 {
                     fieldFilterDtos: [
+                        {
+
+                            "path": "status",
+                            "operator": "NOT_EQ",
+                            "values": [
+                                "PENDING_REVIEW"
+                            ]
+                        }
                     ]
                 }
             ],

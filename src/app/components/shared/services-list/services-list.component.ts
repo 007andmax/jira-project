@@ -17,13 +17,14 @@ export class ServicesListComponent implements OnInit, OnDestroy {
   @ViewChild('products', { static: true }) products_dropDown: NgbDropdown;
   @Input() isDisabled: boolean = false;
   @Input() isBlock: boolean = false;
-  preloader: boolean = false;
+  @Input() preloader: boolean = false;
   @Input() selectedItem: any = null;
   @Input() editItem: any;
   @Input() isBlockClear: boolean = true;
   @Input() itemList: any;
   @Output() serviceList: any;
   @Output() selectedServicesItem = new EventEmitter<any>();
+  @Output() onOpenDropDown = new EventEmitter<any>();
   @Input() type: string;
   searchName: string = null;
   public client: any;
@@ -54,6 +55,9 @@ export class ServicesListComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(onServicePreloader);
+  }
+  openChange(data) {
+    this.onOpenDropDown.emit(data);
   }
   public onFocus(event) {
     if (!this.products_dropDown.isOpen()) this.products_dropDown.open();

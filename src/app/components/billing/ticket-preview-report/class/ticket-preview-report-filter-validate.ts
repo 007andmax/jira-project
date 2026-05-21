@@ -8,8 +8,8 @@ export class TicketPreviewReportFilterValidate {
         return this.date;
     }
     public isValidate(status, date) {
-        if (status.type == "PENDING_REVIEW") this.date = true;
-        if (status.type != "PENDING_REVIEW" && !date.dateFrom && !date.dateTo) this.date = false;
+        if (status.length == 1 && status[0].type == "PENDING_REVIEW") this.date = true;
+        if ((status.length == 1 && status[0].type != "PENDING_REVIEW" || status.length > 1) && !date.dateFrom && !date.dateTo) this.date = false;
         return this.date;
     }
 
