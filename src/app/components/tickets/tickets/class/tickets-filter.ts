@@ -548,8 +548,18 @@ export class TicketsFilter {
                             "path": "status",
                             "operator": "NOT_EQ",
                             "values": [
-                                "COMPLETED",
                                 "PENDING_REVIEW"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "fieldFilterDtos": [
+                        {
+                            "path": "status",
+                            "operator": "NOT_EQ",
+                            "values": [
+                                "COMPLETED",
                             ]
                         },
                         {
