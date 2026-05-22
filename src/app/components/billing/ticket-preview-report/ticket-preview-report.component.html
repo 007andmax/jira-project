@@ -41,7 +41,7 @@
                               <app-tickets-table-item-status [type]="'TICKET_PREVIEW'" [ticket]="ticket"
                           [ticketsStatus]="ticketsStatus"
                           [listColors]="listColors"
-                          (onChangedStatus)="onChangedStatus(ticket)"
+                          (onChangedStatus)="onChangedStatus(ticket,$event)"
                           ></app-tickets-table-item-status>
                               <div
                                 class="qt-button --green --md qt-ml-auto"

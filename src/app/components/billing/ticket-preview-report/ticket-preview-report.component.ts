@@ -127,30 +127,17 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
       this.showPreloader = false;
       this.showPendingPreloader = false;
       this.cd.detectChanges();
-
-      /*let companyesIds = this.list.map(item => item.companyId);
-      this.servicesCompany = companyesIds.filter((item, index) => companyesIds.indexOf(item) === index).map(item => new TicketPreviewServicesCompany(item, []));
-      forkJoin(
-        this.servicesCompany.map(item => this.recurringService.getServiceList(item.companyId))
-      )
-        .subscribe(result => {
-          result.forEach((services: any, i) => {
-            let servicesList = services.filter(item => item.canUseInTicket);
-            servicesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-              1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-            this.servicesCompany[i].services = servicesList;
-          })
-          this.showPreloader = false;
-          this.showPendingPreloader = false;
-          this.cd.detectChanges();
-        });*/
-
       console.log("this.list", this.list);
     })
   }
-  onChangedStatus(ticket) {
-    let index = this.list.findIndex(item => item.id == ticket.id);
-    if (index > -1) this.list.splice(index, 1);
+  onChangedStatus(ticket, data) {
+    let status = this.ticketsStateService.getTicketsStatus().find(item => item.name == data.type);
+    console.log("status", status);
+    console.log("this.filter.ticketStatusIds", this.filter.ticketStatusIds);
+    if (!this.filter.ticketStatusIds.find(id => id == status?.id)) {
+      let index = this.list.findIndex(item => item.id == ticket.id);
+      if (index > -1) this.list.splice(index, 1);
+    }
   }
   checkClose(ticket) {
     let completeServices = (ticket.services.find(item => !item.completed) ? false : true);

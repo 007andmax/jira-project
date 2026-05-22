@@ -103,7 +103,7 @@ export class TicketsTableItemStatusComponent {
       }
       this.toastrService.success(`The tickets “${this.ticket.number}” status has been changed`);
       this.appStateService.changeDetectorRef();
-      this.onChangedStatus.emit(null);
+      this.onChangedStatus.emit(item);
     })
 
   }
