@@ -64,6 +64,7 @@ export class TicketProfile {
     "totalProductsPrice": number;
     "companyServiceType": string;
     updatesCount: number;
+    hasIncompleteItems: boolean;
     constructor(data = null) {
         if (data) {
             for (const key in data) {

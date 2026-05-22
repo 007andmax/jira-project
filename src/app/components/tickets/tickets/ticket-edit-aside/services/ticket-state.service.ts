@@ -25,6 +25,7 @@ import { Task } from 'src/app/components/tasks/class/task';
 })
 export class TicketStateService {
   servicesList: EventEmitter<any> = new EventEmitter();
+  onCloseTicketForReview: EventEmitter<any> = new EventEmitter();
   onSetTabUpdate: EventEmitter<any> = new EventEmitter();
   onSetNoteType: EventEmitter<any> = new EventEmitter();
   onOpenModalNote: EventEmitter<any> = new EventEmitter();

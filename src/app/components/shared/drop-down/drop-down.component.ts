@@ -14,7 +14,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropDownComponent implements OnInit, OnDestroy {
-  selectedItem = null;
+  selectedItem: any = null;
   @ViewChild('dp', { static: true }) dp: NgbDropdown;
   @Input() dropdownWidth: string = null;
   @Input() dropdownHeight: string = null;

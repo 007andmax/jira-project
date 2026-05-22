@@ -86,6 +86,9 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
   }
+  closeForPeview() {
+    this.ticketStateService.onCloseTicketForReview.emit(null);
+  }
   getUserById(id) {
     return this.usersStateService.getAllUsers().find(item => item.id == id);
   }

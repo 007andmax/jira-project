@@ -11,6 +11,7 @@ import { StatusColor } from '../../../class/status-color';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { TicketsPermissionsService } from '../services/tickets-permissions.service';
+import { TicketStateService } from '../services/ticket-state.service';
 
 @Component({
   selector: 'app-ticket-change-status',
@@ -32,6 +33,7 @@ export class TicketChangeStatusComponent implements OnInit, OnDestroy {
     public ticketsService: TicketsService,
     public cd: ChangeDetectorRef,
     public ticketsPermissionsService: TicketsPermissionsService,
+    public ticketStateService: TicketStateService,
     private leftPanelService: LeftPanelService,) { }
 
 

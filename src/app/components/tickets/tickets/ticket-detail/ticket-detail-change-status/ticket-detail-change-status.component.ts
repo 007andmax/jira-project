@@ -30,6 +30,11 @@ export class TicketDetailChangeStatusComponent extends TicketChangeStatusCompone
       this.cd.detectChanges();
     })
     this.sub.add(getOnUpdateTicket);
+    let onCloseTicketForReview = this.ticketStateService.onCloseTicketForReview.subscribe(res => {
+      this.dp.selectedItem = this.list.find(item => item.type == "PENDING_REVIEW");
+      this.changeTicketStatus(this.dp.selectedItem);
+    })
+    this.sub.add(onCloseTicketForReview);
   }
   setList() {
     this.list = [];

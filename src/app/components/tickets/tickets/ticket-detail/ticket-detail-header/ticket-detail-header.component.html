@@ -13,22 +13,36 @@
             <span class="qt-icon icon__timer qt-sz-16 qt-dib qt-mr-8 qt-button-icon qt-fs-0"></span>
             {{dateTxt}}
         </div>
-        <div
+         <div
             [hidden]="!(ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal))"
             class="qt-button qt-ml-12"
-            placement="left"
-            ngbTooltip="You cannot close the ticket. It contains incomplete products / services / tasks."
-            [disableTooltip]="checkClose()"
+            *ngIf="!ticketProfile.hasIncompleteItems"
             appDisabledBtn
             #update_closeBtn="disabled"
             (onClick)="close()"
-            [ngClass]="{'--disabled':!checkClose(), '--loading':isUpdateAndClose}"
+            [ngClass]="{ '--loading':isUpdateAndClose}"
         >
             <span
                 class="qt-icon icon__check qt-icon__white qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
                 *ngIf="!isUpdateAndClose"
             ></span>
             <span>Close Ticket</span>
+            <app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket>
+        </div>
+        <div
+            [hidden]="!(ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal))"
+            class="qt-button qt-ml-12"
+            *ngIf="ticketProfile.hasIncompleteItems"
+            appDisabledBtn
+            #update_closeBtn="disabled"
+            (onClick)="closeForPeview()"
+            [ngClass]="{'--loading':isUpdateAndClose}"
+        >
+            <span
+                class="qt-icon icon__check qt-icon__white qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
+                *ngIf="!isUpdateAndClose"
+            ></span>
+            <span>Close for preview</span>
             <app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket>
         </div>
     </div>
