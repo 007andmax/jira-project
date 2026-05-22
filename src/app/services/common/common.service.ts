@@ -7,6 +7,7 @@ export class CommonService {
   public validateNumber(value, type = 'string') {
     if (type === 'string') return value.replace(/[^0-9\.\-]/g, '');
     if (type === 'number') return Number(value.replace(/[^0-9\.\-]/g, ''));
+    if (type === 'integer') return parseInt(value.replace(/[^0-9\.\-]/g, ''));
   }
 
 }

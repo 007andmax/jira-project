@@ -19,6 +19,9 @@ import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { TicketProfileFormUpdate } from '../class/ticket-profile-form-update';
 import { Task } from 'src/app/components/tasks/class/task';
+import { TicketPreview } from 'src/app/components/billing/ticket-preview-report/class/ticket-preview';
+import { TicketPreviewProduct } from 'src/app/components/billing/ticket-preview-report/class/ticket-preview-product';
+import { TicketPreviewService } from 'src/app/components/billing/ticket-preview-report/class/ticket-preview-service';
 
 @Injectable({
   providedIn: 'root'
@@ -38,8 +41,11 @@ export class TicketStateService {
   onDocumentForPreview: EventEmitter<any> = new EventEmitter();
   onServicePreloader: EventEmitter<any> = new EventEmitter();
   updateForRemove: TicketProfileUpdate = null;
+  ticketPreviewForRemove: TicketPreview = null;
   serviceForRemove: TicketProfileService = null;
   productForRemove: TicketProfileProduct = null;
+  productTicketPreviewForRemove: TicketPreviewProduct = null;
+  serviceTicketPreviewForRemove: TicketPreviewService = null;
   areTicketsPresented: boolean = false;
   areTicketsTerminated: boolean = false;
   servicePreloader: boolean = false;
@@ -73,6 +79,15 @@ export class TicketStateService {
     this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
       this.changeUpdatesTicket.emit(newChange);
     });
+  }
+  public setServiceTicketPreviewForRemove(data) {
+    this.serviceTicketPreviewForRemove = data;
+  }
+  public setTicketPreviewForRemove(data) {
+    this.ticketPreviewForRemove = data;
+  }
+  public setProductTicketPreviewForRemove(data) {
+    this.productTicketPreviewForRemove = data;
   }
   public openModalNote() {
     this.onOpenModalNote.emit(null);

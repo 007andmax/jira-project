@@ -66,7 +66,8 @@ export class TicketSettingsComponent implements OnInit, OnDestroy {
       outliersTime: ['', Validators.compose([Validators.required, Validators.min(1)])],
       timepickerType: ['DURATION_PICKER'],
       interval: ['FIVE_MINUTES'],
-      defaultTicketSortOrder: ['']
+      defaultTicketSortOrder: [''],
+      addItemsAsNotCompleted: [false]
     });
     if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
     let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe(res => {
@@ -100,7 +101,8 @@ export class TicketSettingsComponent implements OnInit, OnDestroy {
         : null,
       timepickerType: timepickerType,
       interval: serviceExpenseDurationPickerInterval,
-      defaultTicketSortOrder: res.defaulTticketSortOrder
+      defaultTicketSortOrder: res.defaulTticketSortOrder,
+      addItemsAsNotCompleted: res.addItemsAsNotCompleted
     });
     this.resetListIntervals(timepickerType);
   }
@@ -189,7 +191,8 @@ export class TicketSettingsComponent implements OnInit, OnDestroy {
           ? this.ticketForm.value.outliersTime * 3600
           : null
       },
-      "defaultTicketSortOrder": this.ticketForm.value.defaultTicketSortOrder
+      "defaultTicketSortOrder": this.ticketForm.value.defaultTicketSortOrder,
+      addItemsAsNotCompleted: this.ticketForm.value.addItemsAsNotCompleted,
     };
     this.invoiceTicketsService.updateTicketsetting(objTicket).subscribe(
       (res: any) => {
@@ -204,6 +207,9 @@ export class TicketSettingsComponent implements OnInit, OnDestroy {
         this.toastr.error('Bad Request');
       }
     );
+  }
+  onChangeAsNotCompleted() {
+    this.ticketForm.controls["addItemsAsNotCompleted"].setValue(!this.ticketForm.value.addItemsAsNotCompleted);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

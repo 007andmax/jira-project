@@ -40,6 +40,7 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
     let currentDate = new Date();
     this.currentProduct.setDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.currentProduct.uuId = uuidv4();
+    if (this.companiesStateService.getCurrentCompany().addItemsAsNotCompleted) this.currentProduct.completed = false;
   }
   initUpdateMobile() {
     this.isUpdate = true;
@@ -152,5 +153,6 @@ export class TicketDetailProfileFormUpdateProductsComponent implements OnInit, O
     this.productDP.setEditItem(this.currentProduct.item);
     taxesDropDown.setEditItems(this.currentProduct.taxes);
     this.addedProductList = [];
+    if (this.companiesStateService.getCurrentCompany().addItemsAsNotCompleted) this.currentProduct.completed = false;
   }
 }

@@ -159,4 +159,20 @@
             Manage Cards
         </a>
     </li>
+     <li
+        href
+        [link]="'ticket-preview-report'"
+        target="_blank"
+        appRightClickBlank
+        *ngIf="!customerPortalStateService.isCustomerPortal"
+    >
+        <a
+          *ngIf="getPermissions('VIEW_TICKET_REVIEW_REPORT')"
+            [ngClass]="{'--active':activePage === 'ticket-preview-report'}"
+            (click)="goToState('ticket-preview-report')"
+            class="app-left-panel__menu-expand-link"
+        >
+            Ticket Preview Report
+        </a>
+    </li>
 </ul>

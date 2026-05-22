@@ -13,6 +13,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsListService } from '../../../../services/tickets-list.service';
 import { TicketStateService } from '../../../../ticket-edit-aside/services/ticket-state.service';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'ticket-detail-profile-updates-service-info',
@@ -37,6 +38,7 @@ export class TicketDetailProfileUpdatesServiceInfoComponent implements OnInit, O
     public ticketStateService: TicketStateService,
     private ticketsService: TicketsService,
     private companiesStateService: CompaniesStateService,
+    private permissionsService: PermissionsService,
     public modalService: NgbModal) { }
   ngOnInit() {
     if (this.service.date) {
@@ -83,6 +85,9 @@ export class TicketDetailProfileUpdatesServiceInfoComponent implements OnInit, O
   }
   public isIOSDevice() {
     return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   setComplete() {
     if (this.isBlockChange) return;

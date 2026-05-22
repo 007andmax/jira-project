@@ -3,6 +3,7 @@
     ngbDropdown
     [autoClose]="'outside'"
     #products="ngbDropdown"
+    (openChange)="openChange($event)"
 >
     <input
         class="pointer qt-input-block__input qt-dropdown-input"

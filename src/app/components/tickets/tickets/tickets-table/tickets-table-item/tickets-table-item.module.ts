@@ -16,9 +16,10 @@ import { TicketsTableItemAssignedUserItemComponent } from './tickets-table-item-
 import { TicketsTableItemAssignedUserMoreItemComponent } from './tickets-table-item-assigned-user/tickets-table-item-assigned-user-more-item/tickets-table-item-assigned-user-more-item.component';
 import { CompanyLogoPopoverModule } from 'src/app/directives/company-logo-popover/company-logo-popover.module';
 import { UsersTableCompanyByModule } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.module';
+import { TicketsTableItemStatusModule } from './tickets-table-item-status/tickets-table-item-status.module';
 
 @NgModule({
-    declarations: [TicketsTableItemComponent, TicketsTableItemAssignedUserComponent, TicketsTableItemStatusComponent, TicketsTableItemAssignedUserItemComponent, TicketsTableItemAssignedUserMoreItemComponent
+    declarations: [TicketsTableItemComponent, TicketsTableItemAssignedUserComponent, TicketsTableItemAssignedUserItemComponent, TicketsTableItemAssignedUserMoreItemComponent
     ],
     imports: [
         CommonModule,
@@ -30,7 +31,8 @@ import { UsersTableCompanyByModule } from 'src/app/components/users/users-table/
         TicketsTableItemRequestedByModule,
         UserLogoPopoverModule,
         CompanyLogoPopoverModule,
-        UsersTableCompanyByModule
+        UsersTableCompanyByModule,
+        TicketsTableItemStatusModule,
     ],
     exports: [TicketsTableItemComponent]
 

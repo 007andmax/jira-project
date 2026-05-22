@@ -29,6 +29,7 @@ import { PermissionNoSuperAdminService } from './services/users/permission-no-su
 import { PermissionClientUserService } from './services/users/permission-client-user.service';
 import { PermissionMyProfileService } from './components/setting/my-profile/permission-my-profile.service';
 import { PermissionIntegrationsService } from './components/integrations/integrations.service';
+import { PermissionTicketPreviewReportService } from './components/billing/ticket-preview-report/permission-ticket-preview-report.service';
 
 const routes: Routes = [
 
@@ -441,6 +442,11 @@ const routes: Routes = [
     path: ':domain/manage-cards',
     loadChildren: () => import('./components/billing/manage-cards/manage-cards.module').then(m => m.ManageCardsModule),
     canActivate: [PermissionBillableService, PermissionNoSuperAdminService]
+  },
+  {
+    path: ':domain/ticket-preview-report',
+    loadChildren: () => import('./components/billing/ticket-preview-report/ticket-preview-report.module').then(m => m.TicketPreviewReportModule),
+    canActivate: [PermissionBillableService, PermissionNoSuperAdminService, PermissionTicketPreviewReportService]
   },
 ];
 

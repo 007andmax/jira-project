@@ -70,6 +70,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
       let value = this.getNameOrDescription(this.editItem);
       this.elRef.nativeElement.querySelector('#dropdownProducts').value = value;
       if (value !== '') this.selectedItem = true;
+      console.log("value", value);
     }
   }
   public onFocus(event) {

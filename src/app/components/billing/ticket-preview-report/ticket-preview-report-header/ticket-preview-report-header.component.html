@@ -1,0 +1,33 @@
+<div class="qt-page-list__header">
+  <div class="qt-page-list__header-title-line">
+    <div class="qt-df qt-ai-c qt-jc-c qt-ml-auto qt-mr-auto">
+      <div class="qt-input-block qt-mr-8">
+        <app-multi-datepicker
+          #dp
+          [validate]="validate.date"
+          [errorMessage]="'Please select the dates'"
+          (selectedDate)="filterByDate($event)"
+        ></app-multi-datepicker>
+      </div>
+      <div class="qt-input-block">
+        <app-ticket-preview-report-status-drop-down
+          [placeholder]="'Select status'"
+          [placement]="'bottom-left'"
+          [field]="'title'"
+          [errorMessage]="'Please select status'"
+           [validate]="validate.status"
+          (filterChange)="onSelectStatus($event)"
+        >
+        </app-ticket-preview-report-status-drop-down>
+      </div>
+      <button
+        class="qt-button --md --gray qt-fs-0 qt-ml-8"
+        (click)="applyFilter()"
+        [disabled]="!validate.date || !validate.status"
+        [ngClass]="{'--disabled':!validate.date || !validate.status}"
+      >
+        Get Report
+      </button>
+    </div>
+  </div>
+</div>

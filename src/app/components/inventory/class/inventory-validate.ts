@@ -84,7 +84,7 @@ export class InventoryValidate {
         }
     }
 
-    public isValidate(inventory: InventoryItem) {
+    public isValidate(inventory: any) {
         if (!inventory.description || inventory.description.length === 0) this.description = false;
         if (!inventory.sale) this.sale = false;
         if (!inventory.category) this.category = false;

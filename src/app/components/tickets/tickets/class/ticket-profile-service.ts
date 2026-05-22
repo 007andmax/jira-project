@@ -17,6 +17,7 @@ export class TicketProfileService {
     taxes: any;
     user: CurrentUser;
     validateQuantity: boolean = true;
+
     constructor(data = null) {
         if (data) {
             for (const key in data) {

@@ -14,6 +14,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsListService } from '../../../../services/tickets-list.service';
 import { TicketStateService } from '../../../../ticket-edit-aside/services/ticket-state.service';
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   selector: 'ticket-detail-profile-updates-product-info',
@@ -38,6 +39,7 @@ export class TicketDetailProfileUpdatesProductInfoComponent implements OnInit, O
     private ticketsService: TicketsService,
     private usersStateService: UsersStateService,
     public companiesStateService: CompaniesStateService,
+    private permissionsService: PermissionsService,
     public modalService: NgbModal) { }
 
   ngOnInit() {
@@ -62,6 +64,9 @@ export class TicketDetailProfileUpdatesProductInfoComponent implements OnInit, O
   }
   public getPrice() {
     return this.product.price.toFixed(2);
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   public setDateWithTimeOffset() {
     this.product.date = this.product.date + this.getTimeOffSet();

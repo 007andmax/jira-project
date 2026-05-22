@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { TitleListType } from '../../../tickets-header/class/title-list-type';
 import { Ticket } from 'src/app/components/tickets/class/ticket';
 import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
@@ -19,12 +19,15 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   providers: [TicketsPermissionsService]
 })
 export class TicketsTableItemStatusComponent {
+  @Output() onChangedStatus = new EventEmitter<any>();
+  @Input() type: string = 'TICKET';
   @Input() ticket: Ticket;
   @Input() ticketsStatus: Array<TicketStatus> = [];
   @Input() listColors: Array<StatusColor> = [];
   selectedTicketStatus: TitleListType;
   list: Array<TitleListType> = [new TitleListType('In Progress', 'IN_PROGRESS'),
-  new TitleListType('On Hold', 'ON_HOLD')];
+  new TitleListType('On Hold', 'ON_HOLD'),
+  new TitleListType('Pending Review', 'PENDING_REVIEW')];
   sub: Subscription = new Subscription();
   constructor(public ticketsService: TicketsService,
     public toastrService: ToastrService,
@@ -54,7 +57,9 @@ export class TicketsTableItemStatusComponent {
     this.ticketsStatus.forEach(item => {
       if (item.name !== 'COMPLETED' && item.name !== 'UNASSIGNED') this.list.push(new TitleListType(this.parseStatus(item.name), item.name));
     })
+    console.log("this.ticketsStatus", this.ticketsStatus);
     this.selectedTicketStatus = this.list.find(item => item.type == (this.ticket.customStatus ? this.ticket.customStatus : this.ticket.status));
+    console.log("this.selectedTicketStatus", this.selectedTicketStatus);
     if (this.ticket.status === null) this.selectedTicketStatus = new TitleListType(this.parseStatus("UNASSIGNED"), "UNASSIGNED");
     if (this.ticket.status === "COMPLETED") this.selectedTicketStatus = new TitleListType(this.parseStatus("COMPLETED"), "COMPLETED");
     this.list.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
@@ -70,6 +75,7 @@ export class TicketsTableItemStatusComponent {
     if (name === "ON_HOLD") return "On hold";
     if (name === "COMPLETED") return "Completed";
     if (name === "UNASSIGNED") return "Unassigned";
+    if (name === "PENDING_REVIEW") return "Pending Review";
     return name;
   }
   getStyleStatus(name) {
@@ -81,6 +87,9 @@ export class TicketsTableItemStatusComponent {
   }
   public isSelected(item) {
     return this.selectedTicketStatus && this.selectedTicketStatus.type == item.type;
+  }
+  isCustomStatus(name) {
+    return this.ticketsStatus.find(item => item.name == name)?.custom;
   }
   changeTicketStatus(item) {
     this.selectedTicketStatus = item;
@@ -94,6 +103,7 @@ export class TicketsTableItemStatusComponent {
       }
       this.toastrService.success(`The tickets “${this.ticket.number}” status has been changed`);
       this.appStateService.changeDetectorRef();
+      this.onChangedStatus.emit(null);
     })
 
   }

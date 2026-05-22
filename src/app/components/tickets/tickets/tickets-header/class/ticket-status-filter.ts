@@ -15,7 +15,8 @@ export class TicketStatusFilter extends TicketStatus {
         let title = [new ItemStatus('Unassigned', 'unassigned', 'UNASSIGNED'),
         new ItemStatus('Completed', 'completed', 'COMPLETED'),
         new ItemStatus('In Progress', 'inProgress', 'IN_PROGRESS'),
-        new ItemStatus('On Hold', 'onHold', 'ON_HOLD')].find(item => item.status === this.name)
+        new ItemStatus('On Hold', 'onHold', 'ON_HOLD'),
+        new ItemStatus('Pending Review', 'pendingReview', 'PENDING_REVIEW')].find(item => item.status === this.name)
         if (title) {
             this.title = title.title;
         } else {

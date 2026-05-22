@@ -1,0 +1,27 @@
+@import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/breakpoint";
+
+.qt-page-list__header {
+  background-color: $white;
+  border-left: 1px solid $gray-100;
+  border-bottom: 1px solid $gray-100;
+  border-right: 1px solid $gray-100;
+  padding: 14px 14px 14px 24px;
+}
+
+::ng-deep .multi-datepicker-container {
+  min-width: 260px;
+}
+
+::ng-deep .mat-form-field-infix {
+  min-width: 180px !important;
+  max-width: 500px !important;
+  width: 100% !important;
+}
+
+::ng-deep .mat-chip-list .mat-input-element {
+    width: 0 !important;
+    min-width: 60px !important;
+    flex-grow: 1 !important;
+    flex-shrink: 1 !important;
+}
