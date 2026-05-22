@@ -50,7 +50,7 @@ export class TicketPreviewReportStatusDropDownComponent extends TicketsFilterCom
   setList() {
     this.list = [];
     this.ticketsStatus.forEach(item => {
-      if (item.name !== 'UNASSIGNED') this.list.push(new TicketPreviewReportStatus(item.id, this.parseStatus(item.name), item.name));
+      if (item.name !== 'COMPLETED' && item.name !== 'UNASSIGNED') this.list.push(new TicketPreviewReportStatus(item.id, this.parseStatus(item.name), item.name));
     })
     if (this.selectedItems.length == 0) this.selectedItems = [this.list.find(item => item.type == "PENDING_REVIEW")];
   }

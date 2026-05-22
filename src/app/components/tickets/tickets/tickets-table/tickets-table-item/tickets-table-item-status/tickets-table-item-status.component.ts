@@ -59,6 +59,7 @@ export class TicketsTableItemStatusComponent {
     })
     console.log("this.ticketsStatus", this.ticketsStatus);
     this.selectedTicketStatus = this.list.find(item => item.type == (this.ticket.customStatus ? this.ticket.customStatus : this.ticket.status));
+    console.log("this.selectedTicketStatus", this.selectedTicketStatus);
     if (this.ticket.status === null) this.selectedTicketStatus = new TitleListType(this.parseStatus("UNASSIGNED"), "UNASSIGNED");
     if (this.ticket.status === "COMPLETED") this.selectedTicketStatus = new TitleListType(this.parseStatus("COMPLETED"), "COMPLETED");
     this.list.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ?
@@ -86,6 +87,9 @@ export class TicketsTableItemStatusComponent {
   }
   public isSelected(item) {
     return this.selectedTicketStatus && this.selectedTicketStatus.type == item.type;
+  }
+  isCustomStatus(name) {
+    return this.ticketsStatus.find(item => item.name == name)?.custom;
   }
   changeTicketStatus(item) {
     this.selectedTicketStatus = item;

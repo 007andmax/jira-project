@@ -7,6 +7,15 @@
     <div class="qt-pos-rel dropdown-wrap">
      <span
      ngbDropdownToggle
+            class="tag__modern qt-pointer"
+            [ngStyle]="getStyleStatus(ticket.status)"
+            *ngIf="type === 'TICKET_PREVIEW' && isCustomStatus(ticket.status)"
+            [ngClass]="{'no-click':  customerPortalStateService.isCustomerPortal}"
+        >
+            {{ticket.status}}
+        </span>
+          <span
+     ngbDropdownToggle
             class="tag__modern"
             [ngStyle]="getStyleStatus((ticket.customStatus) ? ticket.customStatus : ticket.status)"
             *ngIf="ticket.status === 'IN_PROGRESS'"
