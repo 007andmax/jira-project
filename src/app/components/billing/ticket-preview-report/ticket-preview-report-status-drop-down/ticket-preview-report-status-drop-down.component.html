@@ -38,6 +38,7 @@
                 </div>
             </app-mat-chip>
             <input
+                 [ngClass]="{'--input-error' : !validate}"
                 id="dropdownServices"
                 ngbDropdownToggle
                 placeholder="Select Company"
@@ -47,6 +48,12 @@
                 (input)="onSearch($event)"
                 [disabled]="isDisabled"
             >
+                    <app-mat-error
+            class="invalid-feedback"
+            *ngIf="!validate"
+            [textContent]="errorMessage"
+            >
+            </app-mat-error>
         </app-mat-chip-list>
     </app-mat-form-field>
     <div

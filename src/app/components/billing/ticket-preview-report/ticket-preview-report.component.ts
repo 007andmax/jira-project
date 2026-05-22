@@ -126,22 +126,22 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
       this.showPendingPreloader = false;
       this.cd.detectChanges();
 
-      /*  let companyesIds = this.list.map(item => item.companyId);
-        this.servicesCompany = companyesIds.filter((item, index) => companyesIds.indexOf(item) === index).map(item => new TicketPreviewServicesCompany(item, []));
-        forkJoin(
-          this.servicesCompany.map(item => this.recurringService.getServiceList(item.companyId))
-        )
-          .subscribe(result => {
-            result.forEach((services: any, i) => {
-              let servicesList = services.filter(item => item.canUseInTicket);
-              servicesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-                1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-              this.servicesCompany[i].services = servicesList;
-            })
-            this.showPreloader = false;
-            this.showPendingPreloader = false;
-            this.cd.detectChanges();
-          });*/
+      /*let companyesIds = this.list.map(item => item.companyId);
+      this.servicesCompany = companyesIds.filter((item, index) => companyesIds.indexOf(item) === index).map(item => new TicketPreviewServicesCompany(item, []));
+      forkJoin(
+        this.servicesCompany.map(item => this.recurringService.getServiceList(item.companyId))
+      )
+        .subscribe(result => {
+          result.forEach((services: any, i) => {
+            let servicesList = services.filter(item => item.canUseInTicket);
+            servicesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+              1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+            this.servicesCompany[i].services = servicesList;
+          })
+          this.showPreloader = false;
+          this.showPendingPreloader = false;
+          this.cd.detectChanges();
+        });*/
 
       console.log("this.list", this.list);
     })

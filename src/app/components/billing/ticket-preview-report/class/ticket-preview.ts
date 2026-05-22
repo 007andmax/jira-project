@@ -20,7 +20,7 @@ export class TicketPreview {
             }
             this.products = data.products.map(item => new TicketPreviewProduct(item));
             this.services = data.services.map(item => new TicketPreviewService(item));
-            this.status = 'PENDING_REVIEW';
+
         }
     }
 }

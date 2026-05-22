@@ -14,6 +14,8 @@
           [placeholder]="'Select status'"
           [placement]="'bottom-left'"
           [field]="'title'"
+          [errorMessage]="'Please select status'"
+           [validate]="validate.status"
           (filterChange)="onSelectStatus($event)"
         >
         </app-ticket-preview-report-status-drop-down>
@@ -21,8 +23,8 @@
       <button
         class="qt-button --md --gray qt-fs-0 qt-ml-8"
         (click)="applyFilter()"
-        [disabled]="!validate.date"
-        [ngClass]="{'--disabled':!validate.date}"
+        [disabled]="!validate.date || !validate.status"
+        [ngClass]="{'--disabled':!validate.date || !validate.status}"
       >
         Get Report
       </button>

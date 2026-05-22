@@ -16,6 +16,7 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { REMOVE_UPDATE_TICKET_DETAIL_SERVICE } from 'src/app/const/confirm';
 import { TicketPreviewServicesCompany } from '../class/ticket-preview-services-company';
 import { ServicesListComponent } from 'src/app/components/shared/services-list/services-list.component';
+import { TicketPreviewReportStateService } from 'src/app/states/ticket-preview-report/ticket-preview-report-state.service';
 
 @Component({
   selector: 'app-ticket-preview-report-service-item',
@@ -43,12 +44,13 @@ export class TicketPreviewReportServiceItemComponent {
     private recurringService: RecurringService,
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
+    private ticketPreviewReportStateService: TicketPreviewReportStateService,
     private companiesStateService: CompaniesStateService) { }
 
 
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
-    //this.servicesList = this.servicesCompany.find(item => item.companyId == this.ticket.companyId)?.services;
+    this.servicesList = this.ticketPreviewReportStateService.servicesCompany.find(item => item.companyId == this.ticket.companyId)?.services || [];
   }
   ngDoCheck() {
     const textarea = this.elRef.nativeElement.querySelector('#service-description');
@@ -72,15 +74,18 @@ export class TicketPreviewReportServiceItemComponent {
     }
   }
   onOpenServiceDropDown(data) {
-    if (data && this.servicesList.length == 0) {
+    if (data && this.ticketPreviewReportStateService.getServicesCompany(this.ticket.companyId).length == 0) {
       this.serviceDP.preloader = true;
       this.recurringService.getServiceList(this.ticket.companyId).subscribe((res: any) => {
         let servicesList = res.filter(item => item.canUseInTicket);
         servicesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
           1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
         this.servicesList = servicesList;
+        this.ticketPreviewReportStateService.setServicesCompany(this.ticket.companyId, servicesList);
         this.serviceDP.preloader = false;
       })
+    } else {
+      this.servicesList = this.ticketPreviewReportStateService.servicesCompany.find(item => item.companyId == this.ticket.companyId)?.services || [];
     }
   }
   onEnterDescription(event) {

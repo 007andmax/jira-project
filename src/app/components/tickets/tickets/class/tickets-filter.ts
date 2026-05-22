@@ -642,7 +642,7 @@ export class TicketsFilter {
                     fieldFilterDtos: [
                         {
                             path: "status",
-                            operator: "EQ",
+                            operator: "IN",
                             values: [
                                 "COMPLETED",
                                 "PENDING_REVIEW"

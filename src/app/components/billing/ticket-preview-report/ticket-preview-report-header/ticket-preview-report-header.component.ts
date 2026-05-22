@@ -29,8 +29,10 @@ export class TicketPreviewReportHeaderComponent {
   }
 
   onSelectStatus(items) {
+    console.log("items", items);
     this.selectedTicketStatus = items;
     this.filter.setTicketStatusIds(items.map(item => item.id));
+    this.validate.setStatus(true);
   }
 
   applyFilter() {

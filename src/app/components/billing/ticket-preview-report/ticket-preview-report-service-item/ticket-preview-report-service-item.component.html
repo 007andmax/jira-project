@@ -38,11 +38,13 @@
             (blur)="onBlurDescription($event)"
       ></textarea>
     </div>
-     <div
+    <div class="qt-df qt-jc-fe">
+     <span
             class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info pointer short"
             [textContent]="(shortVersion ? ' more' : 'show less')"
             (click)="shortVersion = !shortVersion"
-        ></div>
+        ></span>
+        </div>
   </td>
   <td
     class="invoice-item__col-quentity"
@@ -57,11 +59,11 @@
       [minute]="getMinutes(service)"
     ></app-ticket-profile-updates-service-duration>
   </td>
-  <td class="invoice-item__col-price"></td>
-  <td class="invoice-item__col-price"></td>
-  <td class="invoice-item__col-price"></td>
-  <td class="invoice-item__col-tax"></td>
-  <td class="invoice-item__col-amount"></td>
+  <td class="invoice-item__col-price"><div class="qt-df qt-ai-c ">-</div></td>
+  <td class="invoice-item__col-price"><div class="qt-df qt-ai-c ">-</div></td>
+  <td class="invoice-item__col-price"><div class="qt-df qt-ai-c ">-</div></td>
+  <td class="invoice-item__col-tax"><div class="qt-df qt-ai-c ">-</div></td>
+  <td class="invoice-item__col-amount"><div class="qt-df qt-ai-c ">-</div></td>
   <td>
     <div
       class="qt-button qt-button--with-icon --sm --gray"

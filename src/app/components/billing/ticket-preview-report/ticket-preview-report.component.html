@@ -34,15 +34,15 @@
                                 (click)="editTicket(ticket.id)"
                               >
                             </div>
-                              <app-tickets-table-item-status [type]="'TICKET_PREVIEW'" class="qt-mr-16" [ticket]="ticket"
-                          [ticketsStatus]="ticketsStatus"
-                          [listColors]="listColors"
-                          (onChangedStatus)="onChangedStatus(ticket)"
-                          ></app-tickets-table-item-status>
                               <div class="qt-fs-12 qt-mr-16">
                                 <span class="qt-fs-11 qt-fw-600">Company</span>
                                 {{ ticket.companyName }}
                               </div>
+                              <app-tickets-table-item-status [type]="'TICKET_PREVIEW'" [ticket]="ticket"
+                          [ticketsStatus]="ticketsStatus"
+                          [listColors]="listColors"
+                          (onChangedStatus)="onChangedStatus(ticket)"
+                          ></app-tickets-table-item-status>
                               <div
                                 class="qt-button --green --md qt-ml-auto"
                                 appDisabledBtn
