@@ -1,11 +1,11 @@
-  <div  
+  <div
   class="product-dropdown-new-ng light-dropdown select-product"
      ngbDropdown
     [autoClose]="'outside'"
     #products="ngbDropdown"
     (openChange)="onCloseProducts($event)"
     >
-     <pre [ngClass]="{'short-version':shortVersion}" [textContent]="getNameOrDescription(editItem)" ngbDropdownToggle></pre>
+     <pre class="qt-pointer" [ngClass]="{'short-version':shortVersion}" [textContent]="getNameOrDescription(editItem)" ngbDropdownToggle></pre>
       <div class="qt-df qt-jc-fe">
      <span
             class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info pointer short"
