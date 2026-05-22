@@ -24,7 +24,21 @@ export class TicketPreviewReportHeaderComponent {
   constructor(public ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef,) { }
   ngOnInit() {
-
+    let ticketsStatus = this.ticketsStateService.getTicketsStatus();
+    if (ticketsStatus.length > 0) {
+      let pending = ticketsStatus.find(item => item.name == "PENDING_REVIEW");
+      this.selectedTicketStatus = [new TicketPreviewReportStatus(pending?.id, pending?.name, pending?.name)];
+      this.filter.setTicketStatusIds(this.selectedTicketStatus.map(item => item.id));
+    }
+    let onGetTicketsStatus = this.ticketsStateService.onGetTicketsStatus.subscribe(data => {
+      if (ticketsStatus.length == 0) {
+        let pending = data.find(item => item.name == "PENDING_REVIEW");
+        this.selectedTicketStatus = [new TicketPreviewReportStatus(pending?.id, pending?.name, pending?.name)];
+        this.filter.setTicketStatusIds(this.selectedTicketStatus.map(item => item.id));
+      }
+      ticketsStatus = data;
+    })
+    this.sub.add(onGetTicketsStatus);
 
   }
 

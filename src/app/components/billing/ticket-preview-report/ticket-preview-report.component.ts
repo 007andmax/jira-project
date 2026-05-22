@@ -19,6 +19,7 @@ import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service
 import { TicketPreviewReportProductItemComponent } from './ticket-preview-report-product-item/ticket-preview-report-product-item.component';
 import { TicketPreviewReportFilter } from './class/ticket-preview-report-filter';
 import { InventoryListService } from '../../inventory/services/inventory-list.service';
+import { TicketPreviewReportStateService } from 'src/app/states/ticket-preview-report/ticket-preview-report-state.service';
 
 @Component({
   selector: 'app-ticket-preview-report',
@@ -49,6 +50,7 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
     private ticketsStateService: TicketsStateService,
     private leftPanelService: LeftPanelService,
     private inventoryListService: InventoryListService,
+    private ticketPreviewReportStateService: TicketPreviewReportStateService,
     public cd: ChangeDetectorRef,
   ) { }
 
@@ -244,6 +246,7 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
     return index;
   }
   ngOnDestroy(): void {
+    this.ticketPreviewReportStateService.servicesCompany = [];
     this.sub.unsubscribe();
   }
 }
