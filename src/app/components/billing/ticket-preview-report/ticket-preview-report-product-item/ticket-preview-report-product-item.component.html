@@ -31,9 +31,9 @@
       (blur)="onBlurQuantity()"
       (change)="onChangeQuantity($event)"
       (keyup)="onEnterQuantity($event)"
-      placeholder="Enter Cost"
+      placeholder="QTY"
     ></td>
-  <td class="invoice-item__col-price">
+  <td class="invoice-item__col-price with-dollar">
     <input
       class="input-default input-price"
       type="text"
@@ -44,7 +44,7 @@
       [value]="product.item.cost"
       (onChange)="onChangeCost($event)"
       (keyup)="onEnterCost($event)"
-      placeholder="Enter Cost"
+      placeholder="Cost"
  [ngClass]="{'--input-error' : !validate.getCostSale()}"
 
     >
@@ -55,7 +55,7 @@
       Cost cannot be higher than Price
     </app-mat-error>
   </td>
-  <td class="invoice-item__col-price">
+  <td class="invoice-item__col-price with-dollar">
     <input
       class="input-default input-price"
       type="text"
@@ -64,10 +64,10 @@
       (onChange)="onChangeMarkup($event)"
       [value]="markup"
       (keyup)="onEnterMarkup($event)"
-      placeholder="Enter Markup"
+      placeholder="Markup"
     >
   </td>
-  <td class="invoice-item__col-price">
+  <td class="invoice-item__col-price with-dollar">
     <input
       class="input-default input-price"
       type="text"
@@ -79,7 +79,7 @@
       (input)="validate.resetSale()"
       (onChange)="changeSales($event)"
       (keyup)="onEnterSale($event)"
-      placeholder="Enter Price"
+      placeholder="Price"
     >
     <app-mat-error
       class="invalid-feedback"

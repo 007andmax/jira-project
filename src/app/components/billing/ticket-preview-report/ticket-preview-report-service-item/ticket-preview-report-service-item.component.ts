@@ -143,7 +143,7 @@ export class TicketPreviewReportServiceItemComponent {
     this.ticketStateService.setServiceTicketPreviewForRemove(this.service);
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET_DETAIL_SERVICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.header = `Delete Ticket`;
+    modalRef.componentInstance.header = `Delete Item`;
     modalRef.componentInstance.message = `Are you sure you want to remove the item?`;
   }
   public getPermissions(action) {

@@ -37,6 +37,12 @@ export class TicketPreviewReportProductItemDropDownComponent extends ProductList
     this.editItem = data;
     let value = this.getNameOrDescription(this.editItem);
     if (value !== '') this.selectedItem = true;
+  }
+  setProduct(productItem) {
 
+    this.products_dropDown.close();
+    this.selectedProductItem.next(productItem);
+    this.selectedItem = true;
+    this.elRef.nativeElement.querySelector("#search-drop-down").value = "";
   }
 }

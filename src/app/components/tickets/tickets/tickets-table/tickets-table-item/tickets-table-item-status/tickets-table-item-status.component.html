@@ -28,7 +28,7 @@
             class="tag__modern"
             [ngStyle]="getStyleStatus(ticket.status)"
             *ngIf="ticket.status === 'PENDING_REVIEW'"
-             [ngClass]="{'no-click':type == 'TICKET' && !ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal,'qt-pointer':type == 'TICKET' && ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
+             [ngClass]="{'no-click':type == 'TICKET' && !ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal,'qt-pointer':type == 'TICKET' && ticketsPermissionsService.isActionVisible('update', ticket,null,null) || type == 'TICKET_PREVIEW'}"
         >
             Pending Review
         </span>
