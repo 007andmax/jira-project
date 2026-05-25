@@ -87,10 +87,18 @@ td {
 }
 .with-dollar,.with-percent {
   position: relative;
+  input {
+    padding-left: 18px !important;
+  }
   &::before {
     left: 14px;
     top: 21px;
     font-size: 14px;
     font-weight: 400;
+  }
+}
+.with-percent  {
+  input {
+    padding-left: 19px !important;
   }
 }
