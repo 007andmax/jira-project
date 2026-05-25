@@ -85,11 +85,11 @@ td {
   line-height: 17px;
   font-weight: 400;
 }
-.with-dollar {
+.with-dollar,.with-percent {
   position: relative;
   &::before {
     left: 14px;
-    top: 20px;
+    top: 21px;
     font-size: 14px;
     font-weight: 400;
   }

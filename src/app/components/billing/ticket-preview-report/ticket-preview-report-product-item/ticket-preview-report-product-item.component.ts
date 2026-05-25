@@ -52,6 +52,7 @@ export class TicketPreviewReportProductItemComponent implements OnInit {
   public selectProduct(item) {
     if (item) {
       this.product.setData(item, 0);
+      this.markup = this.getMarkups();
     }
     this.manufactureDb.setEditItem(this.product.item);
     this.productDb.setEditItem(this.product.item);
