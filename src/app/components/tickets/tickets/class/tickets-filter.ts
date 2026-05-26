@@ -567,14 +567,6 @@ export class TicketsFilter {
                             "operator": "IN",
                             values: ["UNASSIGNED"]
                         },
-                        {
-                            "path": "ticketSource",
-                            "operator": "NOT_EQ",
-                            "values": [
-                                "FROM_RECURRING_TICKET",
-
-                            ]
-                        }
                     ],
                     "predicateRule": "OR"
                 }
