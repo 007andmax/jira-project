@@ -24,13 +24,15 @@ export class MatFormFieldComponent implements OnInit {
     }
   }
   ngAfterViewInit() {
-    this.elRef.nativeElement.querySelector("input").onfocus = () => {
-      if (!this.classes.some(item => item == "mat-focused")) this.classes.push("mat-focused");
-    }
-    this.elRef.nativeElement.querySelector("input").onblur = () => {
-      if (this.classes.some(item => item == "mat-focused")) {
-        let index = this.classes.findIndex(item => item == "mat-focused");
-        this.classes.splice(index, 1);
+    if (this.elRef.nativeElement.querySelector("input")) {
+      this.elRef.nativeElement.querySelector("input").onfocus = () => {
+        if (!this.classes.some(item => item == "mat-focused")) this.classes.push("mat-focused");
+      }
+      this.elRef.nativeElement.querySelector("input").onblur = () => {
+        if (this.classes.some(item => item == "mat-focused")) {
+          let index = this.classes.findIndex(item => item == "mat-focused");
+          this.classes.splice(index, 1);
+        }
       }
     }
   }
