@@ -1,23 +1,42 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 import { TicketPreviewReportHeaderComponent } from './ticket-preview-report-header.component';
 
-describe('TicketPreviewReportHeaderComponent', () => {
+
+
+describe('TicketPreviewReportHeaderComponent unit test', () => {
   let component: TicketPreviewReportHeaderComponent;
   let fixture: ComponentFixture<TicketPreviewReportHeaderComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ TicketPreviewReportHeaderComponent ]
-    })
-    .compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [CommonModule,
+        HttpClientModule,
+        ToastrModule.forRoot({
+          closeButton: true,
+          timeOut: 5000,
+          onActivateTick: true
+        }),
+        NoopAnimationsModule],
+      declarations: [TicketPreviewReportHeaderComponent
+      ]
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(TicketPreviewReportHeaderComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('check "onSelectStatus"', () => {
+    const fixture = TestBed.createComponent(TicketPreviewReportHeaderComponent);
+    const com = fixture.debugElement.componentInstance;
+    com.onSelectStatus([{ id: "test" }]);
+    expect(com.selectedTicketStatus).toEqual([{ id: "test" }]);
+  });
+  it('check "parseStatus"', () => {
+    const fixture = TestBed.createComponent(TicketPreviewReportHeaderComponent);
+    const com = fixture.debugElement.componentInstance;
+    expect(com.parseStatus("IN_PROGRESS")).toEqual("In progress");
   });
 });

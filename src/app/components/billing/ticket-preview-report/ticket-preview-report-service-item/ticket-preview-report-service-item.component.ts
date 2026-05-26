@@ -105,14 +105,6 @@ export class TicketPreviewReportServiceItemComponent {
     this.service.setItem(item);
     this.updateService();
   }
-  public onChangeStartTimePicker(data) {
-    this.service.setDurationStart(data);
-    this.service.calculateQuantity();
-  }
-  public onChangeEndTimePicker(data) {
-    this.service.setDurationEnd(data);
-    this.service.calculateQuantity();
-  }
   public onChangeDuration(data) {
     this.service.setQuantity(data);
     let durationEnd = (3600000 * data) + this.service.durationStart;
