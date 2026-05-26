@@ -14,9 +14,8 @@
             {{dateTxt}}
         </div>
          <div
-            [hidden]="!(ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal))"
+            [hidden]="!(ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal) && ticketProfile.hasIncompleteItems)"
             class="qt-button qt-ml-12"
-            *ngIf="!ticketProfile.hasIncompleteItems"
             appDisabledBtn
             #update_closeBtn="disabled"
             (onClick)="close()"
@@ -30,20 +29,11 @@
             <app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket>
         </div>
         <div
-            [hidden]="!(ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal))"
+            [hidden]="!(ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal) && !ticketProfile.hasIncompleteItems)"
             class="qt-button qt-ml-12"
-            *ngIf="ticketProfile.hasIncompleteItems"
-            appDisabledBtn
-            #update_closeBtn="disabled"
-            (onClick)="closeForPeview()"
-            [ngClass]="{'--loading':isUpdateAndClose}"
+            (click)="closeForPeview()" 
         >
-            <span
-                class="qt-icon icon__check qt-icon__white qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
-                *ngIf="!isUpdateAndClose"
-            ></span>
             <span>Close For Preview</span>
-            <app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket>
         </div>
     </div>
 </div>
