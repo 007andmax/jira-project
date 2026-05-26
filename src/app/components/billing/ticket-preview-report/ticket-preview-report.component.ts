@@ -34,7 +34,6 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
   list: Array<TicketPreview> = [];
   ticketsStatus: Array<TicketStatus> = [];
   listColors: Array<StatusColor> = [];
-  servicesCompany: Array<TicketPreviewServicesCompany> = [];
   sub: Subscription = new Subscription();
   container = document.body.querySelector(".main-container");
   public infiniteScrollDisabled = true;
@@ -44,7 +43,6 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
     private ticketsService: TicketsService,
     private ticketStateService: TicketStateService,
     public inventoryStateService: InventoryStateService,
-    private recurringService: RecurringService,
     private companiesStateService: CompaniesStateService,
     public modalService: NgbModal,
     private ticketsStateService: TicketsStateService,
@@ -127,13 +125,10 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
       this.showPreloader = false;
       this.showPendingPreloader = false;
       this.cd.detectChanges();
-      console.log("this.list", this.list);
     })
   }
   onChangedStatus(ticket, data) {
     let status = this.ticketsStateService.getTicketsStatus().find(item => item.name == data.type);
-    console.log("status", status);
-    console.log("this.filter.ticketStatusIds", this.filter.ticketStatusIds);
     if (!this.filter.ticketStatusIds.find(id => id == status?.id)) {
       let index = this.list.findIndex(item => item.id == ticket.id);
       if (index > -1) this.list.splice(index, 1);
@@ -161,7 +156,6 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
     } else {
       this.close(ticket);
     }
-    // this.update_closeBtn.setDisabled(true);
     ticket.isUpdateAndClose = true;
 
   }
@@ -172,7 +166,6 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
       if (index > -1) this.list.splice(index, 1);
     }, err => {
       ticket.isUpdateAndClose = false;
-      //   this.update_closeBtn.setDisabled(false);
     })
   }
   public getDataForClose(ticket) {

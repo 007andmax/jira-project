@@ -60,7 +60,6 @@ export class TicketPreviewReportProductItemComponent implements OnInit {
     this.updateProduct();
   }
   onChangeDiscountAmount(val) {
-    console.log("onChangeDiscountAmount", val);
     let value = val;
     if (this.product.discountAmount != value) {
       this.product.discountAmount = value;
@@ -116,9 +115,7 @@ export class TicketPreviewReportProductItemComponent implements OnInit {
     this.cd.markForCheck();
   }
   onChangeQuantity(event) {
-    console.log("val", event.target.value);
     let value = Number(event.target.value);
-    console.log("value", value);
     if (this.product.quantity !== value) {
       this.product.quantity = value;
       this.product.setIsEdit(true);

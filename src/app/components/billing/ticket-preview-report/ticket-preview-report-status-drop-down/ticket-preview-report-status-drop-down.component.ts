@@ -29,7 +29,6 @@ export class TicketPreviewReportStatusDropDownComponent extends TicketsFilterCom
   }
 
   ngOnInit() {
-    console.log("field", this.field);
     if (this.class.length > 0) this.class = this.class;
     if (this.uiType) this.class.push(this.uiType);
     if (this.ref) this.ref.markForCheck();

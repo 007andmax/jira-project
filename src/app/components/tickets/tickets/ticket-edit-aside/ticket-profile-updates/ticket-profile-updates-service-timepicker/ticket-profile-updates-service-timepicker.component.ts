@@ -116,7 +116,6 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit, O
       this.inputTarget = null;
       this.onToggleDropDown.emit(false);
     });
-    console.log("this.timePickerStart", this.timePickerStart);
     if (this.editMode) {
       let startDate = new Date(this.start);
       let endDate = new Date(this.end);

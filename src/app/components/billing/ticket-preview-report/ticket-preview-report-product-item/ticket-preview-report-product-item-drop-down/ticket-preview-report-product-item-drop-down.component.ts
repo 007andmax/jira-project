@@ -30,7 +30,6 @@ export class TicketPreviewReportProductItemDropDownComponent extends ProductList
     if (this.editItem) {
       let value = this.getNameOrDescription(this.editItem);
       if (value !== '') this.selectedItem = true;
-      console.log("value", value);
     }
   }
   public setEditItem(data) {

@@ -14,7 +14,6 @@ export class TicketPreviewReportFilterValidate {
         return this.status;
     }
     public isValidate(status, date) {
-        console.log("status", status);
         if (status.length == 1 && status[0].type == "PENDING_REVIEW") this.date = true;
         if ((status.length == 1 && status[0].type != "PENDING_REVIEW" || status.length > 1) && !date.dateFrom && !date.dateTo) this.date = false;
         if (status.length == 0) this.status = false;
