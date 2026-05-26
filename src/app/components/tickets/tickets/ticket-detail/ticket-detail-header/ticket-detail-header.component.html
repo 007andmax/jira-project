@@ -14,7 +14,7 @@
             {{dateTxt}}
         </div>
          <div
-            [hidden]="!(ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal) && ticketProfile.hasIncompleteItems)"
+            [hidden]="!(ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal) && !ticketProfile.hasIncompleteItems)"
             class="qt-button qt-ml-12"
             appDisabledBtn
             #update_closeBtn="disabled"
@@ -29,7 +29,7 @@
             <app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket>
         </div>
         <div
-            [hidden]="!(ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal) && !ticketProfile.hasIncompleteItems)"
+            [hidden]="!(ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal) && ticketProfile.hasIncompleteItems)"
             class="qt-button qt-ml-12"
             (click)="closeForPeview()" 
         >
