@@ -24,6 +24,7 @@ export class TicketsTableItemStatusComponent {
   @Input() ticket: Ticket;
   @Input() ticketsStatus: Array<TicketStatus> = [];
   @Input() listColors: Array<StatusColor> = [];
+  @Input() isDisabled: boolean = false;
   selectedTicketStatus: TitleListType;
   list: Array<TitleListType> = [new TitleListType('In Progress', 'IN_PROGRESS'),
   new TitleListType('On Hold', 'ON_HOLD'),

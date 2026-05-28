@@ -79,6 +79,10 @@
   &__col-servers {
     width: 100%;
     min-width: 186px;
+     @include media-breakpoint-up($lg) {
+        width: 350px;
+        max-width: 350px;
+      }
   }
 
   &__col-desc {
@@ -86,6 +90,9 @@
     width: 566px;
     min-width: 566px;
     overflow-wrap: break-word;
+     @include media-breakpoint-up($lg) {
+        width: 100%;
+      }
   }
 
   &__col-price {

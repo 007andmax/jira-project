@@ -5,7 +5,7 @@
 >
     <input
         type="text"
-        [ngClass]="{'--input-error-validate':!validate}"
+        [ngClass]="{'--input-error-validate':!validate,'--disabled':isDisabled}"
         class="duration-container-input"
         id="dropdownDuration"
         [value]="getParseDate()"
