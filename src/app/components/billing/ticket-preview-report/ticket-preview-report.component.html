@@ -66,13 +66,14 @@
                                   class="qt-button --md --gray qt-fs-0 qt-ml-auto"
                                 appDisabledBtn
                                  *ngIf="ticket.status == 'COMPLETED' && !ticket.hasInvoice"
-                                (onClick)="markAsOpen(ticket)"
+                                (onClick)="markAsOpen(ticket,markAsOpenBtn)"
                                  (mouseenter)="!getPermissions('REOPEN_CLOSED_TICKETS') ? ticketTooltip.show($event.target) : null"
                                 (mouseleave)="!getPermissions('REOPEN_CLOSED_TICKETS') ? ticketTooltip.hide() : null"
-                                [ngClass]="{'--loading':ticket.isUpdateAndClose,'--disabled':!getPermissions('REOPEN_CLOSED_TICKETS')}"
+                                [ngClass]="{'--loading':markAsOpenBtn.isBlock(),'--disabled':!getPermissions('REOPEN_CLOSED_TICKETS')}"
+                                   #markAsOpenBtn="disabled"
                               >
                                 <span>Mark as Open</span>
-                                <app-preloader-ticket *ngIf="ticket.isUpdateAndClose"></app-preloader-ticket>
+                                <app-preloader-ticket *ngIf="markAsOpenBtn.isBlock()"></app-preloader-ticket>
                               </div>
                               <!--  <div
                                   class="qt-fs-12 invoice-item__subject"

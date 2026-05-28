@@ -101,12 +101,14 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnInitColor);
   }
-  markAsOpen(ticket) {
+  markAsOpen(ticket, markAsOpenBtn) {
     if (!this.getPermissions('REOPEN_CLOSED_TICKETS')) return;
+    markAsOpenBtn.setDisabled(true);
     this.ticketsService.changeStatus(ticket.id, 'IN_PROGRESS').subscribe((data: any) => {
       ticket.status = 'IN_PROGRESS';
       this.toastrService.success(`The tickets “${ticket.number}” status has been changed`);
       this.appStateService.changeDetectorRef();
+      markAsOpenBtn.setDisabled(false);
     })
   }
   onFilter(data) {

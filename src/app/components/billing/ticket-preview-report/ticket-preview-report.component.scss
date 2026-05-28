@@ -82,6 +82,7 @@
      @include media-breakpoint-up($lg) {
         width: 350px;
         max-width: 350px;
+        min-width: 350px;
       }
   }
 
@@ -98,6 +99,10 @@
   &__col-price {
     width: 102px;
     min-width: 102px;
+      @include media-breakpoint-up($lg) {
+        width: 125px;
+        min-width: 125px;
+      }
   }
 
   &__col-quentity {
