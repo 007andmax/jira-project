@@ -8,22 +8,24 @@
       [editDate]="product.date"
        [useMinDate]="false"
       [container]="'body'"
+      [isDisabled]="ticket.status == 'COMPLETED'"
       (onChange)="onChangeStartDate($event)"
     ></app-date-picker>
   </td>
   <td class="invoice-item__col-manufacture "  >
-    <app-ticket-preview-report-product-item-manufacture #manufactureDb [type]="'TICKET'" [editItem]="product.item" [product]="product" (selectedProductItem)="selectProduct($event)"></app-ticket-preview-report-product-item-manufacture>
+    <app-ticket-preview-report-product-item-manufacture #manufactureDb [type]="'TICKET'" [isDisabled]="ticket.status == 'COMPLETED'" [editItem]="product.item" [product]="product" (selectedProductItem)="selectProduct($event)"></app-ticket-preview-report-product-item-manufacture>
   </td>
   <td class="invoice-item__col-desc"
 
   >
-    <app-ticket-preview-report-product-item-drop-down #productDb  [type]="'TICKET'" [editItem]="product.item"
+    <app-ticket-preview-report-product-item-drop-down #productDb [isDisabled]="ticket.status == 'COMPLETED'"  [type]="'TICKET'" [editItem]="product.item"
                                                       (selectedProductItem)="selectProduct($event)"></app-ticket-preview-report-product-item-drop-down>
   </td>
   <td
     class="invoice-item__col-quentity"
   >
     <input
+      [disabled]="ticket.status == 'COMPLETED'"
       class="input-default input-qty"
       type="text"
       appInteger
@@ -35,6 +37,7 @@
     ></td>
   <td class="invoice-item__col-price with-dollar">
     <input
+      [disabled]="ticket.status == 'COMPLETED'"
       class="input-default input-price"
       type="text"
       decimalNumber
@@ -57,6 +60,7 @@
   </td>
   <td class="invoice-item__col-price with-percent">
     <input
+      [disabled]="ticket.status == 'COMPLETED'"
       class="input-default input-price"
       type="text"
       decimalNumber
@@ -69,6 +73,7 @@
   </td>
   <td class="invoice-item__col-price with-dollar">
     <input
+      [disabled]="ticket.status == 'COMPLETED'"
       class="input-default input-price"
       type="text"
       decimalNumber
@@ -94,6 +99,7 @@
 
   >
     <input
+      [disabled]="ticket.status == 'COMPLETED'"
       type="text"
       class="input-default input-price"
       decimalNumber
@@ -107,6 +113,7 @@
   </td>
   <td class="invoice-item__col-amount">
     <input
+      [disabled]="ticket.status == 'COMPLETED'"
       class="input-default input-qty"
       type="text"
       [value]="product.serialNumber"
@@ -121,7 +128,7 @@
       class="qt-button qt-button--with-icon --sm --gray"
       (click)="setComplete()"
       [ngClass]="{
-                    'no-click':!getPermissions('MANAGE_EXPENSE_COMPLETION_STATUS'),
+                    'no-click':!getPermissions('MANAGE_EXPENSE_COMPLETION_STATUS') || ticket.status == 'COMPLETED',
                 'button-mark-complete': product.completed}"
     >
       <i
@@ -142,6 +149,7 @@
       #deleteProduct
     ></app-dynamic-tooltip>
     <div
+    *ngIf="ticket.status != 'COMPLETED'"
       class="qt-button-square pointer"
       (click)="removeProduct()"
       (mouseenter)="deleteProduct.show($event.target)"

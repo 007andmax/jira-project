@@ -32,8 +32,10 @@ export class TicketDetailChangeStatusComponent extends TicketChangeStatusCompone
     })
     this.sub.add(getOnUpdateTicket);
     let onCloseTicketForReview = this.ticketStateService.onCloseTicketForReview.subscribe(res => {
-      this.dp.selectedItem = this.list.find(item => item.type == "PENDING_REVIEW");
-      this.changeTicketStatus(this.dp.selectedItem);
+      if (res == true) {
+        this.dp.selectedItem = this.list.find(item => item.type == "PENDING_REVIEW");
+        this.changeTicketStatus(this.dp.selectedItem);
+      }
     })
     this.sub.add(onCloseTicketForReview);
   }
@@ -55,6 +57,7 @@ export class TicketDetailChangeStatusComponent extends TicketChangeStatusCompone
     this.ticketsService.changeStatus(this.ticketProfile.id, item.type).subscribe((data: any) => {
       this.toastrService.success(`The tickets “${this.ticketProfile.number}” status has been changed`);
       this.appStateService.changeDetectorRef();
+      this.ticketStateService.onCloseTicketForReview.emit(false);
     })
 
   }

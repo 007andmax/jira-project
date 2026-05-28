@@ -20,6 +20,10 @@ import { TicketPreviewReportProductItemComponent } from './ticket-preview-report
 import { TicketPreviewReportFilter } from './class/ticket-preview-report-filter';
 import { InventoryListService } from '../../inventory/services/inventory-list.service';
 import { TicketPreviewReportStateService } from 'src/app/states/ticket-preview-report/ticket-preview-report-state.service';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { ToastrService } from 'ngx-toastr';
+import { AppStateService } from 'src/app/states/app/app-state.service';
+import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
   selector: 'app-ticket-preview-report',
@@ -50,6 +54,10 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
     private inventoryListService: InventoryListService,
     private ticketPreviewReportStateService: TicketPreviewReportStateService,
     public cd: ChangeDetectorRef,
+    private permissionsService: PermissionsService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
+    public appService: AppService,
   ) { }
 
   ngOnInit(): void {
@@ -92,6 +100,14 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
       this.listColors = data;
     })
     this.sub.add(getOnInitColor);
+  }
+  markAsOpen(ticket) {
+    if (!this.getPermissions('REOPEN_CLOSED_TICKETS')) return;
+    this.ticketsService.changeStatus(ticket.id, 'IN_PROGRESS').subscribe((data: any) => {
+      ticket.status = 'IN_PROGRESS';
+      this.toastrService.success(`The tickets “${ticket.number}” status has been changed`);
+      this.appStateService.changeDetectorRef();
+    })
   }
   onFilter(data) {
     this.filter = data;
@@ -218,6 +234,9 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
       minutes = Math.round(timeInMinutes - (hours * 60));
     return (hours >= 10 ? hours : '0' + hours) + ':' + (minutes >= 10 ? minutes : '0' + minutes) + ' hr(s)';
 
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   public trackById(index, item) {
     return item.id;

@@ -46,6 +46,7 @@ export class TicketPreviewReportHeaderComponent {
     this.selectedTicketStatus = items;
     this.filter.setTicketStatusIds(items.map(item => item.id));
     this.validate.setStatus(true);
+    if (this.selectedTicketStatus.length == 1 && this.selectedTicketStatus[0].type == "PENDING_REVIEW") this.validate.setDate(true);
   }
 
   applyFilter() {

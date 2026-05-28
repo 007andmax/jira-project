@@ -28,6 +28,7 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
   @Output() onMoveToTrash = new EventEmitter();
   @Output() onToggleRigthPanel = new EventEmitter();
   @ViewChild('update_closeBtn', { static: true }) update_closeBtn: DisabledBtnDirective;
+  @ViewChild('review_closeBtn', { static: true }) review_closeBtn: DisabledBtnDirective;
   isUpdateAndClose: boolean = false;
   currentUser: CurrentUser;
   dateTxt: string = "";
@@ -85,9 +86,13 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    let onCloseTicketForReview = this.ticketStateService.onCloseTicketForReview.subscribe(res => {
+      this.review_closeBtn.setDisabled(res);
+    })
+    this.sub.add(onCloseTicketForReview);
   }
   closeForPeview() {
-    this.ticketStateService.onCloseTicketForReview.emit(null);
+    this.ticketStateService.onCloseTicketForReview.emit(true);
   }
   getUserById(id) {
     return this.usersStateService.getAllUsers().find(item => item.id == id);

@@ -34,19 +34,18 @@
                                 (click)="editTicket(ticket.id)"
                               >
                             </div>
-                              <div class="qt-fs-12 qt-mr-16">
-                                <span class="qt-fs-11 qt-fw-600">Company</span>
-                                {{ ticket.companyName }}
+                              <div class="qt-fs-14 qt-fw-500 qt-color-gray-900 qt-mr-16" [textContent]="'Company ' + ticket.companyName">
                               </div>
                               <app-tickets-table-item-status [type]="'TICKET_PREVIEW'" [ticket]="ticket"
                           [ticketsStatus]="ticketsStatus"
                           [listColors]="listColors"
                           (onChangedStatus)="onChangedStatus(ticket,$event)"
                           ></app-tickets-table-item-status>
+                            <div *ngIf="ticket.hasInvoice" class="qt-fs-14 qt-fw-500 qt-color-gray-900 qt-ml-16">Invoiced</div>
                               <div
                                 class="qt-button --green --md qt-ml-auto"
                                 appDisabledBtn
-                                #update_closeBtn="disabled"
+                                *ngIf="ticket.status != 'COMPLETED'"
                                 (onClick)="approveAndClose(ticket)"
                                 [ngClass]="{'--loading':ticket.isUpdateAndClose}"
                               >
@@ -55,6 +54,23 @@
                                     *ngIf="!ticket.isUpdateAndClose"
                                   ></span>
                                 <span>Approve and Close</span>
+                                <app-preloader-ticket *ngIf="ticket.isUpdateAndClose"></app-preloader-ticket>
+                              </div>
+                               <app-dynamic-tooltip
+                                [content]="'You do not have the permission to reopen tickets.'"
+                                [position]="'top'"
+                                #ticketTooltip
+                            ></app-dynamic-tooltip>
+                               <div
+                                class="qt-button --green --md qt-ml-auto"
+                                appDisabledBtn
+                                 *ngIf="ticket.status == 'COMPLETED' && !ticket.hasInvoice"
+                                (onClick)="markAsOpen(ticket)"
+                                 (mouseenter)="!getPermissions('REOPEN_CLOSED_TICKETS') ? ticketTooltip.show($event.target) : null"
+                                (mouseleave)="!getPermissions('REOPEN_CLOSED_TICKETS') ? ticketTooltip.hide() : null"
+                                [ngClass]="{'--loading':ticket.isUpdateAndClose,'--disabled':!getPermissions('REOPEN_CLOSED_TICKETS')}"
+                              >
+                                <span>Mark as Open</span>
                                 <app-preloader-ticket *ngIf="ticket.isUpdateAndClose"></app-preloader-ticket>
                               </div>
                               <!--  <div

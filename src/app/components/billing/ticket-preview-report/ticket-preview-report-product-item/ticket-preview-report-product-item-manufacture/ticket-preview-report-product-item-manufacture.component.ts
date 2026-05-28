@@ -9,4 +9,5 @@ import { TicketPreviewProduct } from '../../class/ticket-preview-product';
 })
 export class TicketPreviewReportProductItemManufactureComponent extends TicketPreviewReportProductItemDropDownComponent {
   @Input() product: TicketPreviewProduct;
+  @Input() isDisabled: boolean = false;
 }

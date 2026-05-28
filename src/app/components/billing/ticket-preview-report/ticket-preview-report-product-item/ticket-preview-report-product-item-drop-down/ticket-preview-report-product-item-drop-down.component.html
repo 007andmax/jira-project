@@ -5,7 +5,7 @@
     #products="ngbDropdown"
     (openChange)="onCloseProducts($event)"
     >
-     <pre class="qt-pointer" [ngClass]="{'short-version':shortVersion}" [textContent]="getNameOrDescription(editItem)" ngbDropdownToggle></pre>
+     <pre class="qt-pointer" [ngClass]="{'short-version':shortVersion,'no-click':isDisabled}" [textContent]="getNameOrDescription(editItem)" ngbDropdownToggle></pre>
       <div class="qt-df qt-jc-fe">
      <span
             class="qt-fw-600 qt-fs-12 qt-lh-133 qt-color-info pointer short"

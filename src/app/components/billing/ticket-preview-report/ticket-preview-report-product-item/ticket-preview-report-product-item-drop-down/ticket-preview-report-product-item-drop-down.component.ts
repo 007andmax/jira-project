@@ -13,7 +13,7 @@ import { CategoryProductitem } from 'src/class/category-product-item';
 })
 export class TicketPreviewReportProductItemDropDownComponent extends ProductListComponent {
   shortVersion: boolean = true;
-
+  @Input() isDisabled: boolean = false;
   ngOnInit() {
     if (this.type === 'QUOTE') this.classAddProduct = 'quote-add-product';
     if (this.type === 'REPORT') this.classAddProduct = 'report-add-product';

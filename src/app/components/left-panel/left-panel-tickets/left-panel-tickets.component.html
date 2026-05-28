@@ -109,6 +109,14 @@
             {{getCountByField('RECURRING_TICKETS_CLOSED')}}
         </div>
     </li>
+     <li
+        [ngClass]="{'--active':  activePage === 'ticket-preview-report'}"
+         *ngIf="getPermissions('VIEW_TICKET_REVIEW_REPORT')"
+         class="app-left-panel__menu-expand-link"
+        (click)="goToState('ticket-preview-report')"
+    >
+        <div>Ticket Preview Report</div>
+    </li>
 </ul>
 <hr class="app-left-panel__ticket-menu-line">
 <ul

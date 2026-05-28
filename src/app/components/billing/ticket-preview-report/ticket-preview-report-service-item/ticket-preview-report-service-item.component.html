@@ -8,6 +8,7 @@
        [useMinDate]="false"
       [editDate]="service.date"
       [container]="'body'"
+       [isDisabled]="ticket.status == 'COMPLETED'"
       (onChange)="onChangeStartDate($event)"
     ></app-date-picker>
   </td>
@@ -17,6 +18,7 @@
       [itemList]="servicesList"
       [editItem]="service.item"
       [type]="'TICKET'"
+       [isDisabled]="ticket.status == 'COMPLETED'"
       (selectedServicesItem)="selectService($event)"
       (onOpenDropDown)="onOpenServiceDropDown($event)"
     ></app-services-list>
@@ -26,6 +28,7 @@
   >
     <div class="editable-description editable-chat">
       <textarea
+      [disabled]="ticket.status == 'COMPLETED'"
         name="cps-chat"
         maxlength="500"
           appTextArea
@@ -36,6 +39,7 @@
            (input)="onChangeDescription($event)"
             (keydown)="onEnterDescription($event)"
             (blur)="onBlurDescription($event)"
+
       ></textarea>
     </div>
     <div class="qt-df qt-jc-fe">
@@ -57,6 +61,7 @@
       (onChange)="onChangeDuration($event)"
       [hour]="getHours(service)"
       [minute]="getMinutes(service)"
+      [isDisabled]="ticket.status == 'COMPLETED'"
     ></app-ticket-profile-updates-service-duration>
   </td>
   <td class="invoice-item__col-price"><div class="qt-df qt-ai-c ">-</div></td>
@@ -69,7 +74,7 @@
       class="qt-button qt-button--with-icon --sm --gray"
       (click)="setComplete()"
       [ngClass]="{
-                    'no-click':!getPermissions('MANAGE_EXPENSE_COMPLETION_STATUS'),
+                    'no-click':!getPermissions('MANAGE_EXPENSE_COMPLETION_STATUS') || ticket.status == 'COMPLETED',
                 'button-mark-complete': service.completed}"
     >
       <i
@@ -90,6 +95,7 @@
       #deleteProduct
     ></app-dynamic-tooltip>
     <div
+    *ngIf="ticket.status != 'COMPLETED'"
       class="qt-button-square pointer"
       (click)="removeService()"
       (mouseenter)="deleteProduct.show($event.target)"

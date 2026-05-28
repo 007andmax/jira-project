@@ -1,12 +1,12 @@
   <div
-  class="product-dropdown-new-ng light-dropdown qt-pointer"
+  class="product-dropdown-new-ng light-dropdown"
      ngbDropdown
      container="body"
     [autoClose]="'outside'"
     #products="ngbDropdown"
     (openChange)="onCloseProducts($event)"
     >
-     <div [textContent]="product.manufacture" ngbDropdownToggle></div>
+     <div class="qt-pointer" [textContent]="product.manufacture" ngbDropdownToggle [ngClass]="{'no-click':isDisabled}"></div>
                <div
         class="ticket-preview-manufacture__dropdown"
         ngbDropdownMenu

@@ -14,12 +14,16 @@
             {{dateTxt}}
         </div>
          <div
-            [hidden]="!(ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal) && !ticketProfile.hasIncompleteItems)"
+            [hidden]="!(ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal) && (!ticketProfile.hasIncompleteItems || ticketProfile.hasIncompleteItems && ticketProfile.status === 'PENDING_REVIEW'))"
             class="qt-button qt-ml-12"
             appDisabledBtn
             #update_closeBtn="disabled"
             (onClick)="close()"
-            [ngClass]="{ '--loading':isUpdateAndClose}"
+             placement="left"
+            ngbTooltip="You cannot close the ticket. It contains incomplete products / services / tasks."
+            [disableTooltip]="!ticketProfile.hasIncompleteItems"
+            [ngClass]="{ '--loading':isUpdateAndClose,'--disabled':ticketProfile.hasIncompleteItems && ticketProfile.status === 'PENDING_REVIEW'}"
+            
         >
             <span
                 class="qt-icon icon__check qt-icon__white qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
@@ -29,11 +33,15 @@
             <app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket>
         </div>
         <div
-            [hidden]="!(ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal) && ticketProfile.hasIncompleteItems)"
+            [hidden]="!(ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null) && (customerPortalStateService.isCustomerPortal && isAddNoteForCustomerUser() || !customerPortalStateService.isCustomerPortal) && ticketProfile.hasIncompleteItems && ticketProfile.status !== 'PENDING_REVIEW')"
             class="qt-button qt-ml-12"
-            (click)="closeForPeview()" 
+              appDisabledBtn
+            #review_closeBtn="disabled"
+            (onClick)="closeForPeview()"
+              [ngClass]="{ '--loading':review_closeBtn.isBlock()}"
         >
-            <span>Close For Preview</span>
+                <span>Close For Review</span>
+            <app-preloader-ticket *ngIf="review_closeBtn.isBlock()"></app-preloader-ticket>
         </div>
     </div>
 </div>
