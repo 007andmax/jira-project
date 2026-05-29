@@ -95,7 +95,7 @@ export class BillableService {
       }));
   }
   public getTaxNumber() {
-    return this.http.get(this.apiUrl + `settings/emailPages/taxNumber`).pipe(map((data: any) => new InvoiceTaxNumber(data)));
+    return this.http.get(this.apiUrl + `settings/emailPages/taxNumber`);
   }
   public editTaxNumber(data) {
     return this.http.put(this.apiUrl + `settings/emailPages/taxNumber`, data);

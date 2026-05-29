@@ -11,6 +11,8 @@ import { CrmRealTimeService } from 'src/app/states/crm/crm-real-time.service';
   providedIn: 'root',
 })
 export class CrmStateService {
+  isInitGetIndustry = false;
+  isInitGetJobTitle = false;
   industryForRemove;
   jobTitleForRemove;
   serviceTypeForRemove;
@@ -35,11 +37,13 @@ export class CrmStateService {
       this.industryList = data.map(item => new CrmCompanyIndustry(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       this.onGetIndustry.emit(this.industryList);
+      this.isInitGetIndustry = true;
     })
     this.crmService.getJobTitleList().subscribe((data: any) => {
       this.jobTitleList = data.map(item => new CrmCompanyJobTitle(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       this.onGetJobTitle.emit(this.jobTitleList);
+      this.isInitGetJobTitle = true;
     })
     this.crmRealTimeService.changeCrmArray.subscribe(data => {
       if (data.action === "INDUSTRY_SAVED") this.industryList.push(new CrmCompanyIndustry(data.data));

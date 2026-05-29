@@ -189,8 +189,9 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     })
   }
   private getTaxNumber() {
-    this.billableService.getTaxNumber().subscribe(data => {
-      this.invoiceTaxNumber = data;
+    this.billableService.getTaxNumber().subscribe((data: any) => {
+      if (data) this.invoiceTaxNumber = data.map(item => new InvoiceTaxNumber(item))
+
     })
   }
   public getActualNumber() {

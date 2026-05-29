@@ -30,7 +30,7 @@ export class CrmCompanyJobTitleComponent implements OnInit {
 
   ngOnInit() {
     this.jobTitleList = JSON.parse(JSON.stringify(this.crmStateService.getJobTitleList())).map(item => new CrmCompanyJobTitle(item));
-    if (this.jobTitleList.length > 0) this.showPreloader = false;
+    if (this.crmStateService.isInitGetJobTitle) this.showPreloader = false;
     let onGetJobTitle = this.crmStateService.onGetJobTitle.subscribe(data => {
       this.jobTitleList = JSON.parse(JSON.stringify(data)).map(item => new CrmCompanyJobTitle(item)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
         1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));;
