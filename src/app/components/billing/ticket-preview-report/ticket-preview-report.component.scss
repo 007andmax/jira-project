@@ -79,6 +79,9 @@
   &__col-servers {
      max-width: 350px;
      min-width: 350px;
+      @include media-breakpoint-up($lg) {
+        width: auto;
+      }
   }
 
   &__col-desc {
@@ -87,17 +90,13 @@
     min-width: 566px;
     overflow-wrap: break-word;
      @include media-breakpoint-up($lg) {
-        width: 100%;
+        width: auto;
       }
   }
 
   &__col-price {
-    width: 100%;
-    max-width: 102px;
-      @include media-breakpoint-up($lg) {
-        width: 125px;
-        min-width: 125px;
-      }
+    width: 102px;
+    min-width: 102px;
   }
 
   &__col-quentity {
