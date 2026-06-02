@@ -221,6 +221,12 @@
                                     </div>
                                 </div>
                             </div>
+                                 <div
+                class="no-exist-elements"
+                *ngIf="!loading && techUsers.length == 0"
+            >
+                We couldn't find any results
+            </div>
                         </div>
                     </ng-template>
                 </li>
@@ -344,6 +350,12 @@
                                     </div>
                                 </div>
                             </div>
+                              <div
+                class="no-exist-elements"
+                *ngIf="!loading && userlist.length == 0"
+            >
+                We couldn't find any results
+            </div>
                         </div>
                     </ng-template>
                 </li>

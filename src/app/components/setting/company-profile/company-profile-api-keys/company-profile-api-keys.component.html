@@ -68,3 +68,9 @@
 >
     <div class="loading"></div>
 </div>
+<div
+    class="no-exist-elements"
+    *ngIf="!loading && list.length == 0"
+>
+    We couldn't find any results
+</div>

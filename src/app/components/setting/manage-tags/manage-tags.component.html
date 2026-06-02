@@ -196,6 +196,12 @@
                                 class="loading pengind-loading"
                                 *ngIf="showPendingPreloader"
                             ></div>
+                             <div
+                class="no-exist-elements"
+                *ngIf="!showPendingPreloader && companyTags.length == 0"
+            >
+                We couldn't find any results
+            </div>
                         </div>
                     </div>
                 </ng-template>
@@ -351,6 +357,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                 <div
+                class="no-exist-elements"
+                *ngIf="!showPendingPreloader && ticketTags.length == 0"
+            >
+                We couldn't find any results
+            </div>
                             </div>
                         </div>
                     </div>
