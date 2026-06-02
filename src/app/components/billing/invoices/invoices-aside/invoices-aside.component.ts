@@ -56,6 +56,7 @@ export class InvoicesAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnCompanies);
     let getOpenAside = this.invoiceStateService.getOpenAside().subscribe(data => {
+      if (!this.integrationsStateService.isInit) this.integrationsStateService.onInit();
       this.opened = true;
       this.selectedInvoices = data;
       if (this.selectedInvoices.length > 0) {
