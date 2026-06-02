@@ -24,12 +24,7 @@
             </div>
         </div>
         <div class="data-table-wrap mteh-data">
-            <div
-                class="loading-container"
-                *ngIf="loading"
-            >
-                <div class="loading"></div>
-            </div>
+           
             <ul
                 ngbNav
                 #nav="ngbNav"
@@ -375,6 +370,10 @@
             ></div>
         </div>
     </div>
+     <div
+            class="loading"
+            *ngIf="loading"
+        ></div>
 </div>
 <div
     class="qt-aside-modern --sm"

@@ -195,7 +195,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
   getCompanies(companys) {
     this.clientsCompanies = companys.filter(
       (company: any) =>
-        company.clientType.toLowerCase() !== "vendor" &&
+        company.clientType && company.clientType.toLowerCase() !== "vendor" &&
         company.deletedAt === null &&
         !company.isDefault
     ).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?

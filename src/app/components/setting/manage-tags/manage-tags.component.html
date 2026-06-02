@@ -23,12 +23,6 @@
                 </a>
             </div>
         </div>
-        <div
-            class="loading-container"
-            *ngIf="loading"
-        >
-            <div class="loading"></div>
-        </div>
         <ul
             ngbNav
             #nav="ngbNav"
@@ -394,4 +388,8 @@
             class="mt-2"
         ></div>
     </div>
+      <div
+            class="loading"
+            *ngIf="loading"
+        ></div>
 </div>
