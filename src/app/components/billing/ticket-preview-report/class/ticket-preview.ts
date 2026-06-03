@@ -12,7 +12,8 @@ export class TicketPreview {
     services: Array<TicketPreviewService> = [];
     status: string;
     isUpdateAndClose: boolean = false;
-
+    subject: string;
+    modeSubject = 'view';
     constructor(data: any) {
         if (data) {
             for (const key in data) {

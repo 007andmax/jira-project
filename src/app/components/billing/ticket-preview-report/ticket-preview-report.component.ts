@@ -111,6 +111,24 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
       markAsOpenBtn.setDisabled(false);
     })
   }
+  onBlurSubject(ticket, event) {
+    if (ticket.subject != event.target.value) {
+      this.onChangeSubjectNote(ticket, event.target.value);
+    }
+
+  }
+  onEnterSubject(ticket, event) {
+    if (event.keyCode === 13 && ticket.subject != event.target.value) {
+      this.onChangeSubjectNote(ticket, event.target.value);
+      event.target.blur();
+      this.cd.markForCheck();
+    }
+  }
+  onChangeSubjectNote(ticket, subject) {
+    this.ticketsService.changeSubjectNoteTicket(ticket.id, subject).subscribe(data => {
+      ticket.modeSubject = 'view';
+    })
+  }
   onFilter(data) {
     this.filter = data;
     this.showPreloader = true;
@@ -127,6 +145,9 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
   public onScroll() {
     this.infiniteScrollDisabled = true;
     this.getList();
+  }
+  toggleSubject(ticket) {
+    ticket.modeSubject = (ticket.modeSubject === 'view') ? 'edit' : 'view';
   }
   getList() {
     if (this.inventoryListService.getBlockList()) {

@@ -29,22 +29,41 @@
                           <div class="qt-df qt-ai-c">
                             <div class="invoice-item__header qt-w100 qt-ml-30 qt-df qt-ai-c qt-pt-10 qt-pb-10">
                               <div
-                                class="invoice-item__number qt-fs-14 qt-fw-500 qt-color-gray-900 qt-mr-16 qt-pointer"
+                                class="invoice-item__number qt-fs-14 qt-fw-500 qt-color-gray-900 qt-mr-16 qt-pointer qt-ws-nowrap"
                                 [textContent]="'Tkt# ' + ticket.number"
                                 (click)="editTicket(ticket.id)"
                               >
                             </div>
-                              <div class="qt-fs-14 qt-fw-500 qt-color-gray-900 qt-mr-16" [textContent]="'Company - ' + ticket.companyName">
+                              <div class="qt-fs-14 qt-fw-500 qt-color-gray-900 qt-mr-16 qt-ws-nowrap" [textContent]="'Company - ' + ticket.companyName + ', '">
                               </div>
-                              <app-tickets-table-item-status [type]="'TICKET_PREVIEW'" [ticket]="ticket"
+                               <div
+                            class="ticket-detail-page-title__text "
+                            [ngClass]="{'pointer':ticket.status != 'COMPLETED'}"
+                            [hidden]="ticket.modeSubject === 'edit'"
+                            (click)="toggleSubject(ticket)"
+                        >
+                            <span class="qt-fs-14 qt-fw-500 qt-color-gray-900" [textContent]="ticket.subject"></span>
+                        </div>
+                                 <input
+                                   *ngIf="ticket.modeSubject == 'edit'"
+                                [disabled]="ticket.status == 'COMPLETED'"
+                                class="input-default input-qty qt-w100"
+                                type="text"
+                                [value]="ticket.subject"
+                                placeholder="Enter Subject"
+                                (blur)="onBlurSubject(ticket,$event)"
+                                (keyup)="onEnterSubject(ticket,$event)"
+                              >
+                               <div *ngIf="ticket.hasInvoice" class="qt-fs-14 qt-fw-500 qt-color-gray-900 qt-ml-16">The Ticket is already billed to the client. You cannot re-open it</div>
+                           <div class="qt-df qt-ai-c qt-ml-auto">
+                               <app-tickets-table-item-status class="qt-mr-16" [type]="'TICKET_PREVIEW'" [ticket]="ticket"
                           [ticketsStatus]="ticketsStatus"
                           [listColors]="listColors"
                           [isDisabled]="ticket.hasInvoice || !getPermissions('REOPEN_CLOSED_TICKETS')"
                           (onChangedStatus)="onChangedStatus(ticket,$event)"
                           ></app-tickets-table-item-status>
-                            <div *ngIf="ticket.hasInvoice" class="qt-fs-14 qt-fw-500 qt-color-gray-900 qt-ml-16">The Ticket is already billed to the client. You cannot re-open it</div>
                               <div
-                                class="qt-button --green --md qt-ml-auto"
+                                class="qt-button --green --md"
                                 appDisabledBtn
                                 *ngIf="ticket.status != 'COMPLETED'"
                                 (onClick)="approveAndClose(ticket)"
@@ -63,7 +82,7 @@
                                 #ticketTooltip
                             ></app-dynamic-tooltip>
                                <div
-                                  class="qt-button --md --gray qt-fs-0 qt-ml-auto"
+                                  class="qt-button --md --gray qt-fs-0"
                                 appDisabledBtn
                                  *ngIf="ticket.status == 'COMPLETED' && !ticket.hasInvoice"
                                 (onClick)="markAsOpen(ticket,markAsOpenBtn)"
@@ -74,6 +93,7 @@
                               >
                                 <span>Mark as Open</span>
                                 <app-preloader-ticket *ngIf="markAsOpenBtn.isBlock()"></app-preloader-ticket>
+                              </div>
                               </div>
                               <!--  <div
                                   class="qt-fs-12 invoice-item__subject"
