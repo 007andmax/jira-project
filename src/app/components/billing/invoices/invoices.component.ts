@@ -18,10 +18,11 @@ import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { fadeInAnimation } from 'src/app/animations';
 import { InvoicesHeaderComponent } from './invoices-header/invoices-header.component';
 import { InvoicesItemComponent } from './invoices-item/invoices-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [InvoicesHeaderComponent, InvoicesItemComponent, CommonModule],
+  imports: [InvoicesHeaderComponent, InvoicesItemComponent, CommonModule, InfiniteScrollModule],
   selector: 'app-invoices',
   templateUrl: './invoices.component.html',
   styleUrls: ['./invoices.component.scss'],

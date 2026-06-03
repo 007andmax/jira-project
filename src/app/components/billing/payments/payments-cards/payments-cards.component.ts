@@ -18,10 +18,11 @@ import { REMOVE_CARD } from 'src/app/const/confirm';
 import { ManageCardsRealTimeService } from 'src/app/states/manage-cards/manage-cards-real-time.service';
 import { IntegrationsStateService } from 'src/app/states/integrations/integrations-state.service';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, CommonModule],
+  imports: [MatErrorComponent, CommonModule, InfiniteScrollModule],
   selector: 'app-payments-cards',
   templateUrl: './payments-cards.component.html',
   styleUrls: ['./payments-cards.component.scss'],

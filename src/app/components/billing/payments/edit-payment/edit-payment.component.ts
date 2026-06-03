@@ -16,10 +16,11 @@ import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
+import { numberDirective } from 'src/app/directives/number/number.directive';
 
 @Component({
   standalone: true,
-  imports: [DatePickerComponent, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, FormsModule, CommonModule],
+  imports: [DatePickerComponent, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, FormsModule, DisabledBtnDirective, CommonModule, numberDirective],
   selector: 'app-edit-payment',
   templateUrl: './edit-payment.component.html',
   styleUrls: ['./edit-payment.component.scss'],

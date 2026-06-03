@@ -13,7 +13,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, CompanyDropDownComponent, DropDownComponent, MultiDatepickerComponent],
   selector: 'app-invoices-filter',
   templateUrl: './invoices-filter.component.html',
   styleUrls: ['./invoices-filter.component.scss'],

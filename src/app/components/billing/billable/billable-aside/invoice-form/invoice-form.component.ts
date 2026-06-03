@@ -34,10 +34,11 @@ import { InvoiceDiscountComponent } from './invoice-discount/invoice-discount.co
 import { InvoiceFormTicketEditComponent } from './invoice-form-ticket-edit/invoice-form-ticket-edit.component';
 import { InvoiceFormTicketInfoComponent } from './invoice-form-ticket-info/invoice-form-ticket-info.component';
 import { InvoiceRegularNoteComponent } from './invoice-regular-note/invoice-regular-note.component';
+import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
 
 @Component({
   standalone: true,
-  imports: [DatePickerComponent, InvoiceDiscountComponent, InvoiceFormTicketEditComponent, InvoiceFormTicketInfoComponent, InvoiceRegularNoteComponent, MatErrorComponent, PreloaderTicketComponent, InvoiceChangeAddressComponent, FormsModule, CommonModule],
+  imports: [DatePickerComponent, InvoiceDiscountComponent, TextAreaDirective, InvoiceFormTicketEditComponent, InvoiceFormTicketInfoComponent, InvoiceRegularNoteComponent, MatErrorComponent, PreloaderTicketComponent, InvoiceChangeAddressComponent, FormsModule, CommonModule, InvoiceFormEditCustomerComponent],
   selector: 'app-invoice-form',
   templateUrl: './invoice-form.component.html',
   styleUrls: ['./invoice-form.component.scss'],

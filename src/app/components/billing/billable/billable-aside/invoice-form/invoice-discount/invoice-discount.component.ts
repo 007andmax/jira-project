@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { InvoiceDiscount } from './class/invoice-discount';
 import { BillableService } from 'src/app/services/billable/billable.service';
+import { numberDirective } from 'src/app/directives/number/number.directive';
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, numberDirective],
   selector: 'app-invoice-discount',
   templateUrl: './invoice-discount.component.html',
   styleUrls: ['./invoice-discount.component.scss'],

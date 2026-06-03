@@ -21,11 +21,12 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 import { MultiCompanyDropDownComponent } from 'src/app/components/shared/multi-company-drop-down/multi-company-drop-down.component';
 import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
+import { numberDirective } from 'src/app/directives/number/number.directive';
 
 
 @Component({
   standalone: true,
-  imports: [CommonModule, FormsModule, DatePickerComponent, DropDownComponent, MatErrorComponent, MultiCompanyDropDownComponent, PreloaderTicketComponent],
+  imports: [CommonModule, FormsModule, DatePickerComponent, numberDirective, DisabledBtnDirective, PaymentsCardsComponent, DropDownComponent, MatErrorComponent, MultiCompanyDropDownComponent, PreloaderTicketComponent],
   selector: 'app-invoices-aside',
   templateUrl: './invoices-aside.component.html',
   styleUrls: ['./invoices-aside.component.scss'],

@@ -32,22 +32,21 @@ import { InvoiceChangeAddressModule } from '../billable-aside/invoice-form/invoi
 
 @NgModule({
     imports: [
-    CommonModule,
-    FormsModule,
-    NgbModule,
-    InvoiceFormEditCustomerModule,
-    BillableTicketsRoutingModule,
-    PreviewPhoneMaskModule,
-    InvoiceChangeAddressModule,
-    BillableTicketsComponent,
-    BillableAsideComponent,
-    InvoiceFormComponent,
-    InvoicePreviewComponent,
-    InvoiceFormTicketInfoComponent,
-    InvoiceFormTicketEditComponent,
-    InvoiceDiscountComponent,
-    InvoiceFormTicketEditServiceComponent,
-    InvoiceFormTicketEditProductComponent
-],
+        CommonModule,
+        FormsModule,
+        NgbModule,
+
+        BillableTicketsRoutingModule,
+
+        BillableTicketsComponent,
+        BillableAsideComponent,
+        InvoiceFormComponent,
+        InvoicePreviewComponent,
+        InvoiceFormTicketInfoComponent,
+        InvoiceFormTicketEditComponent,
+        InvoiceDiscountComponent,
+        InvoiceFormTicketEditServiceComponent,
+        InvoiceFormTicketEditProductComponent
+    ],
 })
 export class BillableTicketsModule { }

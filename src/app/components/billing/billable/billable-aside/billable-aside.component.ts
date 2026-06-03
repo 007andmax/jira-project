@@ -21,10 +21,11 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { AppService } from 'src/app/states/app/app.service';
 import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
 import { InvoicePreviewComponent } from './invoice-preview/invoice-preview.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [InvoicePreviewComponent, PreloaderTicketComponent, CommonModule],
+  imports: [InvoicePreviewComponent, PreloaderTicketComponent, CommonModule, InvoiceFormComponent, DisabledBtnDirective],
   selector: 'app-billable-aside',
   templateUrl: './billable-aside.component.html',
   styleUrls: ['./billable-aside.component.scss'],

@@ -13,7 +13,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, CompanyDropDownComponent, DropDownComponent, MultiDatepickerComponent],
   selector: 'app-payments-filter',
   templateUrl: './payments-filter.component.html',
   styleUrls: ['./payments-filter.component.scss'],

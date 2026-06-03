@@ -10,10 +10,11 @@ import { Subscription } from 'rxjs';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { TaxesComponent } from 'src/app/components/shared/taxes/taxes.component';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { numberDirective } from 'src/app/directives/number/number.directive';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, FormsModule, CommonModule],
+  imports: [MatErrorComponent, FormsModule, CommonModule, numberDirective, TaxesComponent],
   selector: 'app-invoice-form-ticket-edit-product',
   templateUrl: './invoice-form-ticket-edit-product.component.html',
   styleUrls: ['./invoice-form-ticket-edit-product.component.scss'],
