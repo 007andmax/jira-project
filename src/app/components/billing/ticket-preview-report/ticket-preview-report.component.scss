@@ -199,3 +199,8 @@
     }
   }
 }
+::ng-deep  .ticket-preview-status {
+  .tag__modern {
+    padding: 10px 16px;
+  }
+}

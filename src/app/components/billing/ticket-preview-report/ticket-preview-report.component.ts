@@ -127,6 +127,7 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
   onChangeSubjectNote(ticket, subject) {
     this.ticketsService.changeSubjectNoteTicket(ticket.id, subject).subscribe(data => {
       ticket.modeSubject = 'view';
+      ticket.subject = subject;
     })
   }
   onFilter(data) {

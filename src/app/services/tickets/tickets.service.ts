@@ -107,9 +107,10 @@ export class TicketsService {
     return this.http.get(this.apiUrl + `v2/tickets/${ticketId}/updates?page=${page}&size=10`);
   }
   public changeSubjectNoteTicket(id, subject, note = null, companyId = null, createdBy = null) {
-    let data: any = { id: id, subject: subject, createdBy: createdBy };
+    let data: any = { id: id, subject: subject };
     if (companyId) data.companyId = companyId;
     if (note) data.note = note;
+    if (createdBy) data.createdBy = createdBy;
     this.appStateService.setServerError(true);
     return this.http.put(this.apiUrl + `v2/tickets/edit`, data).pipe(
       tap(data => {

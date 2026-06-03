@@ -56,7 +56,7 @@
                               >
                                <div *ngIf="ticket.hasInvoice" class="qt-fs-14 qt-fw-500 qt-color-gray-900 qt-ml-16">The Ticket is already billed to the client. You cannot re-open it</div>
                            <div class="qt-df qt-ai-c qt-ml-auto">
-                               <app-tickets-table-item-status class="qt-mr-16" [type]="'TICKET_PREVIEW'" [ticket]="ticket"
+                               <app-tickets-table-item-status class="qt-mr-16 ticket-preview-status" [type]="'TICKET_PREVIEW'" [ticket]="ticket"
                           [ticketsStatus]="ticketsStatus"
                           [listColors]="listColors"
                           [isDisabled]="ticket.hasInvoice || !getPermissions('REOPEN_CLOSED_TICKETS')"
