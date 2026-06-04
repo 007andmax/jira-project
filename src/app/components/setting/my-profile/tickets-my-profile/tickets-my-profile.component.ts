@@ -8,7 +8,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DropDownComponent],
   selector: 'tickets-my-profile',
   templateUrl: './tickets-my-profile.component.html',
   styleUrls: ['./tickets-my-profile.component.scss']

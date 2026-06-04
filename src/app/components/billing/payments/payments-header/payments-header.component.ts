@@ -12,7 +12,7 @@ import { InvoiceExportComponent } from '../../invoices/invoices-header/invoice-e
 
 @Component({
   standalone: true,
-  imports: [InvoiceExportComponent, CommonModule],
+  imports: [InvoiceExportComponent, CommonModule, PaymentsFilterComponent],
   selector: 'app-payments-header',
   templateUrl: './payments-header.component.html',
   styleUrls: ['./payments-header.component.scss'],

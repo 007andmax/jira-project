@@ -11,7 +11,7 @@ import { InventoryFilter } from '../../class/inventory-filter';
 import { InventoryAddCategoryComponent } from '../../inventory-add-category/inventory-add-category.component';
 @Component({
   standalone: true,
-  imports: [InventoryAddCategoryComponent, CommonModule],
+  imports: [InventoryAddCategoryComponent, CommonModule, DropDownComponent],
   selector: 'inventory-filter',
   templateUrl: './inventory-filter.component.html',
   styleUrls: ['./inventory-filter.component.css'],

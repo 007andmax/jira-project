@@ -22,7 +22,7 @@ import { FileManagerHeaderComponent } from '../file-manager-header/file-manager-
 
 @Component({
   standalone: true,
-  imports: [FileManagerHeaderComponent, CommonModule],
+  imports: [FileManagerHeaderComponent, CommonModule, FileManagerFileInfoComponent],
   selector: 'app-file-manager-category',
   templateUrl: './file-manager-category.component.html',
   styleUrls: ['./file-manager-category.component.scss'],

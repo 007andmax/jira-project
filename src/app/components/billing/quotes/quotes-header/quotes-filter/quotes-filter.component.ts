@@ -13,7 +13,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, CompanyDropDownComponent, DropDownComponent, MultiDatepickerComponent],
   selector: 'app-quotes-filter',
   templateUrl: './quotes-filter.component.html',
   styleUrls: ['./quotes-filter.component.scss'],

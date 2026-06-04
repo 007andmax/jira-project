@@ -18,7 +18,7 @@ import { TicketProfileUpdatesServiceTimepickerComponent } from '../../../ticket-
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, DatePickerComponent],
   selector: 'ticket-detail-profile-edit-updates-services',
   templateUrl: './ticket-detail-profile-edit-updates-services.component.html',
   styleUrls: ['./ticket-detail-profile-edit-updates-services.component.scss']

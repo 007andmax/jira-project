@@ -33,7 +33,7 @@ import { UserDefaultSubscriptionComponent } from './user-default-subscription/us
 
 @Component({
   standalone: true,
-  imports: [CompanyTagsComponent, DynamicTooltipComponent, MatErrorComponent, PreloaderTicketComponent, CompanyDropDownComponent, UserCustomSubscriptionComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
+  imports: [CompanyTagsComponent, DropDownComponent, DynamicTooltipComponent, MatErrorComponent, PreloaderTicketComponent, CompanyDropDownComponent, UserCustomSubscriptionComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'app-users-aside',
   templateUrl: './users-aside.component.html',
   styleUrls: ['./users-aside.component.scss'],

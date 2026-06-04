@@ -25,7 +25,7 @@ import { UserTableDefaultSubscriptionComponent } from 'src/app/components/users/
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, PreviewPhoneMaskComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
+  imports: [DynamicTooltipComponent, PreviewPhoneMaskComponent, DropDownComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'app-users-details-tab-companies-item',
   templateUrl: './users-details-tab-companies-item.component.html',
   styleUrls: ['./users-details-tab-companies-item.component.scss'],

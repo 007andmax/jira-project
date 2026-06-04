@@ -40,7 +40,7 @@ import { CompanyTimeZoneComponent } from '../company-time-zone/company-time-zone
 
 @Component({
   standalone: true,
-  imports: [CompanyTimeZoneComponent, MatErrorComponent, PreloaderTicketComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
+  imports: [CompanyTimeZoneComponent, MatErrorComponent, DropDownComponent, PreloaderTicketComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'app-company-edit-aside',
   templateUrl: './company-edit-aside.component.html',
   styleUrls: ['./company-edit-aside.component.scss']

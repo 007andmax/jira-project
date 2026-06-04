@@ -18,7 +18,7 @@ import { ReportSendEmailComponent } from '../../report-additional-actions/report
 
 @Component({
   standalone: true,
-  imports: [ReportSendEmailComponent, CommonModule],
+  imports: [ReportSendEmailComponent, CommonModule, DropDownComponent],
   selector: "report-device-diskspace",
   templateUrl: "./report-device-diskspace.component.html",
   styleUrls: ["./report-device-diskspace.component.scss"],

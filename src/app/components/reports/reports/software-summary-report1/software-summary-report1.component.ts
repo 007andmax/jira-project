@@ -20,7 +20,7 @@ import { ReportSendEmailComponent } from '../../report-additional-actions/report
 
 @Component({
   standalone: true,
-  imports: [ReportSendEmailComponent, CommonModule],
+  imports: [ReportSendEmailComponent, CommonModule, DropDownComponent],
   selector: "software-summary-report1",
   templateUrl: "./software-summary-report1.component.html",
   styleUrls: ["./software-summary-report1.component.scss"],

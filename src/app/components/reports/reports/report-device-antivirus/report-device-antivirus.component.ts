@@ -20,7 +20,7 @@ import { ReportSendEmailComponent } from '../../report-additional-actions/report
 
 @Component({
   standalone: true,
-  imports: [ReportSendEmailComponent, CommonModule],
+  imports: [ReportSendEmailComponent, CommonModule, DropDownComponent],
   selector: "report-device-antivirus",
   templateUrl: "./report-device-antivirus.component.html",
   styleUrls: ["./report-device-antivirus.component.scss"],

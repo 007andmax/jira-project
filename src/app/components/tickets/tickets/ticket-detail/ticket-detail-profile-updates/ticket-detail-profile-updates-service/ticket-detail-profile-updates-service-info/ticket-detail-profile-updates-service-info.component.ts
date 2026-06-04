@@ -20,7 +20,7 @@ import { TechUsersComponent } from 'src/app/components/shared/tech-users/tech-us
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, TechUsersComponent, CommonModule],
+  imports: [DynamicTooltipComponent, TechUsersComponent, CommonModule, DatePickerComponent],
   selector: 'ticket-detail-profile-updates-service-info',
   templateUrl: './ticket-detail-profile-updates-service-info.component.html',
   styleUrls: ['./ticket-detail-profile-updates-service-info.component.scss']

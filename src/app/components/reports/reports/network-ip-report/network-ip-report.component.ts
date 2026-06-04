@@ -19,7 +19,7 @@ import { ReportSendEmailComponent } from '../../report-additional-actions/report
 
 @Component({
   standalone: true,
-  imports: [ReportSendEmailComponent, CommonModule],
+  imports: [ReportSendEmailComponent, CommonModule, DropDownComponent],
   selector: "network-ip-report",
   templateUrl: "./network-ip-report.component.html",
   styleUrls: ["./network-ip-report.component.scss"],

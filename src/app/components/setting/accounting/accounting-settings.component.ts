@@ -21,10 +21,11 @@ import { CustomNotesSettingsComponent } from './custom-notes-settings/custom-not
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { fadeInAnimation } from 'src/app/animations';
 import { TaxesAddComponent } from './taxes/taxes-add/taxes-add.component';
+import { TaxesComponent } from '../../shared/taxes/taxes.component';
 declare var $: any;
 @Component({
   standalone: true,
-  imports: [TaxesAddComponent, CommonModule],
+  imports: [TaxesAddComponent, CommonModule, TaxesSettingsComponent, InvoiceSettingsComponent, QuotesSettingsComponent, GlNumberSettingsComponent, AccountingYearComponent, CustomNotesSettingsComponent],
   selector: 'app-accounting-settings',
   templateUrl: './accounting-settings.component.html',
   animations: [fadeInAnimation],

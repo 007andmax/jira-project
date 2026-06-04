@@ -34,7 +34,7 @@ import { CompanyTimeZoneComponent } from '../../company-time-zone/company-time-z
 
 @Component({
   standalone: true,
-  imports: [CompanyTagsComponent, CompanyTimeZoneComponent, MatErrorComponent, UsersDropDownComponent, CompanyAssociateComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
+  imports: [CompanyTagsComponent, CompanyTimeZoneComponent, DropDownComponent, MatErrorComponent, UsersDropDownComponent, CompanyAssociateComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'company-add-aside-full',
   templateUrl: './company-add-aside-full.component.html',
   styleUrls: ['./company-add-aside-full.component.scss']

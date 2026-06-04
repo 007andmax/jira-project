@@ -17,7 +17,7 @@ import { DocumentsEditHistoryComponent } from '../documents-edit-history/documen
 
 @Component({
   standalone: true,
-  imports: [DatePickerComponent, MatErrorComponent, DocumentsAddEditCategoriesComponent, DocumentsEditHistoryComponent, FormsModule, CommonModule],
+  imports: [DatePickerComponent, MatErrorComponent, DropDownComponent, DocumentsAddEditCategoriesComponent, DocumentsEditHistoryComponent, FormsModule, CommonModule],
   selector: 'documents-edit-info',
   templateUrl: './documents-edit-info.component.html',
   styleUrls: ['./documents-edit-info.component.scss'],

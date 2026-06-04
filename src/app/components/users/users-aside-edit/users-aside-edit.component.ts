@@ -38,7 +38,7 @@ import { UserDefaultSubscriptionComponent } from '../users-aside/user-default-su
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, MatErrorComponent, PreloaderTicketComponent, CompanyDropDownComponent, UserCustomSubscriptionComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
+  imports: [DynamicTooltipComponent, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, CompanyDropDownComponent, UserCustomSubscriptionComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'users-aside-edit',
   templateUrl: './users-aside-edit.component.html',
   styleUrls: ['./users-aside-edit.component.scss'],

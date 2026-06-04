@@ -51,7 +51,7 @@ import { TechUsersListReportComponent } from './tech-users-list-report/tech-user
 
 @Component({
   standalone: true,
-  imports: [CommonModule, FormsModule, MultiCompanyDropDownComponent, MultiDatepickerComponent, ProductListComponent, ReportAdditionalActionsComponent, TechUsersListReportComponent, CompanyDropDownComponent, ContractCompanyDropDownComponent],
+  imports: [CommonModule, FormsModule, DropDownComponent, MultiCompanyDropDownComponent, MultiDatepickerComponent, ProductListComponent, ReportAdditionalActionsComponent, TechUsersListReportComponent, CompanyDropDownComponent, ContractCompanyDropDownComponent],
   selector: 'app-report-menu',
   templateUrl: './report-menu.component.html',
   styleUrls: ['./report-menu.component.scss'],

@@ -23,7 +23,7 @@ import { UserTableDefaultSubscriptionComponent } from 'src/app/components/users/
 
 @Component({
   standalone: true,
-  imports: [PreloaderTicketComponent, CompanyDropDownComponent, PreviewPhoneMaskComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
+  imports: [PreloaderTicketComponent, DropDownComponent, CompanyDropDownComponent, PreviewPhoneMaskComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'app-users-details-tab-companies-add',
   templateUrl: './users-details-tab-companies-add.component.html',
   styleUrls: ['./users-details-tab-companies-add.component.scss'],

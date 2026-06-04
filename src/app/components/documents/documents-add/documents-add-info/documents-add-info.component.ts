@@ -25,7 +25,7 @@ import { DocumentsAddEditCategoriesComponent } from './documents-add-edit-catego
 
 @Component({
   standalone: true,
-  imports: [CompanyTagsComponent, MatErrorComponent, DocumentsAddEditCategoriesComponent, FormsModule, CommonModule],
+  imports: [CompanyTagsComponent, MatErrorComponent, DropDownComponent, DatePickerComponent, DocumentsAddEditCategoriesComponent, FormsModule, CommonModule],
   selector: 'app-documents-add-info',
   templateUrl: './documents-add-info.component.html',
   styleUrls: ['./documents-add-info.component.scss'],

@@ -13,7 +13,7 @@ import { InventoryFilterComponent } from './inventory-filter/inventory-filter.co
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, InventoryFilterComponent],
   selector: 'inventory-header',
   templateUrl: './inventory-header.component.html',
   styleUrls: ['./inventory-header.component.scss'],

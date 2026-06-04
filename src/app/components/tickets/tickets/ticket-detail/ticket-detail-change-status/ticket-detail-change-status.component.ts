@@ -6,7 +6,7 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DropDownComponent],
   selector: 'ticket-detail-change-status',
   templateUrl: './ticket-detail-change-status.component.html',
   styleUrls: ['./ticket-detail-change-status.component.scss']

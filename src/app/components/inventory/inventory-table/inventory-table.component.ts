@@ -23,7 +23,7 @@ import { TaxesComponent } from '../../shared/taxes/taxes.component';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, TaxesComponent, FormsModule, CommonModule],
+  imports: [MatErrorComponent, TaxesComponent, FormsModule, CommonModule, DropDownComponent],
   selector: 'app-inventory-table',
   templateUrl: './inventory-table.component.html',
   styleUrls: ['./inventory-table.component.scss'],

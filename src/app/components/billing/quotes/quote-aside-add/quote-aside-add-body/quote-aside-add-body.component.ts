@@ -35,7 +35,7 @@ import { ServiceItemQuoteComponent } from '../service-item-quote/service-item-qu
 
 @Component({
   standalone: true,
-  imports: [DropDownComponent, InvoiceRegularNoteComponent, MatErrorComponent, ProductItemQuoteComponent, ProductListQuoteComponent, ServiceItemQuoteComponent, QuoteAsideAddChangeAddressComponent, FormsModule, CommonModule],
+  imports: [DropDownComponent, InvoiceRegularNoteComponent, MatErrorComponent, InvoiceFormEditCustomerComponent, ProductItemQuoteComponent, ProductListQuoteComponent, ServiceItemQuoteComponent, QuoteAsideAddChangeAddressComponent, FormsModule, CommonModule],
   selector: 'app-quote-aside-add-body',
   templateUrl: './quote-aside-add-body.component.html',
   styleUrls: ['./quote-aside-add-body.component.scss'],

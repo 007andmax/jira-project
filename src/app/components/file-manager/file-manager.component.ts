@@ -21,7 +21,7 @@ import { FileManagerHeaderComponent } from './file-manager-header/file-manager-h
 
 @Component({
   standalone: true,
-  imports: [FileManagerHeaderComponent, CommonModule],
+  imports: [FileManagerHeaderComponent, CommonModule, FileManagerFileInfoComponent],
   selector: 'app-file-manager',
   templateUrl: './file-manager.component.html',
   styleUrls: ['./file-manager.component.scss'],

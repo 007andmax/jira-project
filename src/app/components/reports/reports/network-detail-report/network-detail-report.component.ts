@@ -18,7 +18,7 @@ import { ReportSendEmailComponent } from '../../report-additional-actions/report
 
 @Component({
   standalone: true,
-  imports: [ReportSendEmailComponent, CommonModule],
+  imports: [ReportSendEmailComponent, CommonModule, DropDownComponent],
   selector: "network-detail-report",
   templateUrl: "./network-detail-report.component.html",
   styleUrls: ["./network-detail-report.component.scss"],

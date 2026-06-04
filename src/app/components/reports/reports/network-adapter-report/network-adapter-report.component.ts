@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DropDownComponent],
   selector: 'network-adapter-report',
   templateUrl: './network-adapter-report.component.html',
   styleUrls: ['./network-adapter-report.component.scss'],

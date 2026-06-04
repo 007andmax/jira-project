@@ -13,7 +13,7 @@ import { TicketProfileUpdatesServiceTimepickerComponent } from 'src/app/componen
 
 @Component({
   standalone: true,
-  imports: [TicketProfileUpdatesServiceDurationComponent, TicketProfileUpdatesServiceTimepickerComponent, CommonModule],
+  imports: [TicketProfileUpdatesServiceDurationComponent, TicketProfileUpdatesServiceTimepickerComponent, TaxesComponent, CommonModule],
   selector: 'app-invoice-form-ticket-edit-service',
   templateUrl: './invoice-form-ticket-edit-service.component.html',
   styleUrls: ['./invoice-form-ticket-edit-service.component.scss'],

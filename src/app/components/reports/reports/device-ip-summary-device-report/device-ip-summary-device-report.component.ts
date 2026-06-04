@@ -20,7 +20,7 @@ import { ReportSendEmailComponent } from '../../report-additional-actions/report
 
 @Component({
   standalone: true,
-  imports: [ReportSendEmailComponent, CommonModule],
+  imports: [ReportSendEmailComponent, CommonModule, DropDownComponent],
   selector: 'device-ip-summary-device-report',
   templateUrl: './device-ip-summary-device-report.component.html',
   styleUrls: ['./device-ip-summary-device-report.component.scss'],

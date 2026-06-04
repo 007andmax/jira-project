@@ -18,7 +18,7 @@ import { ReportSendEmailComponent } from '../../report-additional-actions/report
 
 @Component({
   standalone: true,
-  imports: [ReportSendEmailComponent, CommonModule],
+  imports: [ReportSendEmailComponent, CommonModule, DropDownComponent],
   selector: "report-device-processorram",
   templateUrl: "./report-device-processorram.component.html",
   styleUrls: ["./report-device-processorram.component.scss"],
