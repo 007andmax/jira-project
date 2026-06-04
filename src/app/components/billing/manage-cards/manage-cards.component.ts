@@ -37,6 +37,7 @@ export class ManageCardsComponent {
     public cd: ChangeDetectorRef,
   ) { }
   ngOnInit() {
+    if (!this.integrationsStateService.isInit) this.integrationsStateService.onInit();
     if (this.companiesStateService.currentCompany && this.integrationsStateService.isInit && this.integrationsStateService.connected) {
       this.setDefaultScoll();
       this.onScroll();
