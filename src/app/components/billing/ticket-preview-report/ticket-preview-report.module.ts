@@ -32,6 +32,7 @@ import { TicketPreviewReportStatusDropDownComponent } from './ticket-preview-rep
 import { MatChipListModule } from '../../shared/mat-chip-list/mat-chip-list.module';
 import { MatChipModule } from '../../shared/mat-chip/mat-chip.module';
 import { MatFormFieldModule } from '../../shared/mat-form-field/mat-form-field.module';
+import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside.module';
 
 
 
@@ -66,6 +67,7 @@ import { MatFormFieldModule } from '../../shared/mat-form-field/mat-form-field.m
         MatChipModule,
         MatFormFieldModule,
         MatChipListModule,
+        ClickOutsideModule
     ],
 
 })

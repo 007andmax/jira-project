@@ -34,23 +34,23 @@
                                 (click)="editTicket(ticket.id)"
                               >
                             </div>
-                              <div class="qt-fs-14 qt-fw-500 qt-color-gray-900 qt-mr-16 qt-ws-nowrap" [textContent]="'Company - ' + ticket.companyName + ', '">
+                              <div class="qt-fs-14 qt-fw-500 qt-color-gray-900 qt-mr-16 qt-ws-nowrap" [textContent]="'Company - ' + ticket.companyName + ','">
                               </div>
-                               <div
+                            <!--   <div
                             class="ticket-detail-page-title__text "
                             [ngClass]="{'pointer':ticket.status != 'COMPLETED'}"
                             [hidden]="ticket.modeSubject === 'edit'"
                             (click)="toggleSubject(ticket)"
                         >
                             <span class="qt-fs-14 qt-fw-500 qt-color-gray-900" [textContent]="ticket.subject"></span>
-                        </div>
+                        </div>-->
                                  <input
-                                   *ngIf="ticket.modeSubject == 'edit'"
                                 [disabled]="ticket.status == 'COMPLETED'"
-                                class="input-default input-qty qt-w100"
+                                class="input-default input-qty qt-w100 qt-mr-16"
                                 type="text"
                                 [value]="ticket.subject"
                                 placeholder="Enter Subject"
+                                 (input)="onChangeSubject(ticket,$event)"
                                 (blur)="onBlurSubject(ticket,$event)"
                                 (keyup)="onEnterSubject(ticket,$event)"
                               >
