@@ -14,6 +14,7 @@ export class TicketPreview {
     isUpdateAndClose: boolean = false;
     subject: string;
     modeSubject = 'view';
+    isEdit: boolean = false;
     constructor(data: any) {
         if (data) {
             for (const key in data) {
@@ -23,5 +24,8 @@ export class TicketPreview {
             this.services = data.services.map(item => new TicketPreviewService(item));
 
         }
+    }
+    public setIsEdit(data) {
+        this.isEdit = data;
     }
 }

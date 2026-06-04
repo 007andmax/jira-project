@@ -112,15 +112,25 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
     })
   }
   onBlurSubject(ticket, event) {
-    if (ticket.subject != event.target.value) {
+    console.log("ticket", ticket);
+    if (ticket.isEdit) {
       this.onChangeSubjectNote(ticket, event.target.value);
+    } else {
+      ticket.modeSubject = 'view';
     }
-
+    this.cd.markForCheck();
   }
   onEnterSubject(ticket, event) {
-    if (event.keyCode === 13 && ticket.subject != event.target.value) {
-      this.onChangeSubjectNote(ticket, event.target.value);
+    if (event.keyCode === 13 && ticket.isEdit) {
+      this.onChangeSubject(ticket, event);
       event.target.blur();
+      this.cd.markForCheck();
+    }
+  }
+  onChangeSubject(ticket, event) {
+    let value = event.target.value;
+    if (ticket.subject != value) {
+      ticket.setIsEdit(true);
       this.cd.markForCheck();
     }
   }
@@ -149,6 +159,7 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
   }
   toggleSubject(ticket) {
     ticket.modeSubject = (ticket.modeSubject === 'view') ? 'edit' : 'view';
+    (<any>document.body.querySelector(`#ticket-preview-report-${ticket.id}`))?.focus();
   }
   getList() {
     if (this.inventoryListService.getBlockList()) {
