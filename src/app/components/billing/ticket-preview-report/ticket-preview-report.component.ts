@@ -115,8 +115,6 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
     console.log("ticket", ticket);
     if (ticket.isEdit) {
       this.onChangeSubjectNote(ticket, event.target.value);
-    } else {
-      ticket.modeSubject = 'view';
     }
     this.cd.markForCheck();
   }
@@ -129,12 +127,14 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
   }
   onChangeSubject(ticket, event) {
     let value = event.target.value;
+    console.log("value", value);
     if (ticket.subject != value) {
       ticket.setIsEdit(true);
       this.cd.markForCheck();
     }
   }
   onChangeSubjectNote(ticket, subject) {
+    ticket.setIsEdit(false);
     this.ticketsService.changeSubjectNoteTicket(ticket.id, subject).subscribe(data => {
       ticket.modeSubject = 'view';
       ticket.subject = subject;
