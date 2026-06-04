@@ -159,3 +159,9 @@
         </div>
     </div>
 </div>
+     <div
+    class="no-exist-elements"
+    *ngIf="!loading && taxes.length == 0"
+>
+    We couldn't find any results
+</div>

@@ -64,10 +64,10 @@
             <div class="ticket-detail-contact-info-line__label">Billing Address</div>
             <div
                 class="ticket-detail-contact-info-line__text"
-                [textContent]="getBillingAddress().addressWithSuitNumberAndPostalCode != '' ? getBillingAddress().addressWithSuitNumberAndPostalCode : 'No information'"
+                [textContent]="getBillingAddress() && getBillingAddress().addressWithSuitNumberAndPostalCode != '' ? getBillingAddress().addressWithSuitNumberAndPostalCode : 'No information'"
             ></div>
             <div
-                *ngIf="company && getBillingAddress().locationLat && getBillingAddress().locationLng"
+                *ngIf="company && getBillingAddress() && getBillingAddress().locationLat && getBillingAddress().locationLng"
                 class="qt-button --gray --sm qt-w100 qt-jc-c qt-mt-8"
                 (click)="onShowMap(getBillingAddress())"
             >
