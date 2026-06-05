@@ -31,7 +31,7 @@ import { TaskHeaderAddTypeComponent } from 'src/app/components/tasks/task-header
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, TaskHeaderAddTypeComponent, FormsModule, CommonModule],
+  imports: [DynamicTooltipComponent, TechUsersComponent, TasksDatePickerComponent, TaskHeaderAddTypeComponent, FormsModule, CommonModule],
   selector: 'app-ticket-detail-tasks-item',
   templateUrl: './ticket-detail-tasks-item.component.html',
   styleUrls: ['./ticket-detail-tasks-item.component.scss']

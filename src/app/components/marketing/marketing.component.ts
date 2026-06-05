@@ -31,7 +31,7 @@ import { UsersTableComponent } from '../users/users-table/users-table.component'
 
 @Component({
   standalone: true,
-  imports: [UsersFilterComponent, UsersTableComponent, FormsModule, CommonModule],
+  imports: [UsersFilterComponent, UsersHeaderComponent, UsersTableComponent, FormsModule, CommonModule],
   selector: 'marketing',
   templateUrl: './marketing.component.html',
   styleUrls: ['./marketing.component.scss'],

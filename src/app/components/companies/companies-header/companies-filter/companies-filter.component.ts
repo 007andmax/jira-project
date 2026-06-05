@@ -15,7 +15,7 @@ import { CompanyTagsComponent } from '../../company-tags/company-tags.component'
 
 @Component({
   standalone: true,
-  imports: [CommonModule, DropDownComponent],
+  imports: [CommonModule, DropDownComponent, CompanyTagsComponent],
   selector: 'companies-filter',
   templateUrl: './companies-filter.component.html',
   styleUrls: ['./companies-filter.component.scss'],

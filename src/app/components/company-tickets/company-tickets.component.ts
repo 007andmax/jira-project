@@ -23,7 +23,7 @@ import { TicketsTableItemComponent } from '../tickets/tickets/tickets-table/tick
 
 @Component({
   standalone: true,
-  imports: [MergeTicketsComponent, TicketsTableItemComponent, CommonModule],
+  imports: [MergeTicketsComponent, TicketsFilterComponent, TicketsHeaderComponent, TicketsTableItemComponent, CommonModule],
   selector: 'company-tickets',
   templateUrl: './company-tickets.component.html',
   styleUrls: ['./company-tickets.component.scss'],

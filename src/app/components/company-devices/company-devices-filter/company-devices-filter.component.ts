@@ -11,7 +11,7 @@ import { DeviceType } from '../class/device-type';
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, CompanyDevicesFilterTypeComponent],
   selector: 'app-company-devices-filter',
   templateUrl: './company-devices-filter.component.html',
   styleUrls: ['./company-devices-filter.component.scss'],

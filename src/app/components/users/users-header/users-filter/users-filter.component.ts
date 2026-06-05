@@ -30,7 +30,7 @@ import { UsersFilterDefaultSubscriptionComponent } from './users-filter-default-
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, UsersFilterJobTitleComponent, UsersFilterCustomSubscriptionsComponent, UsersFilterTagsComponent, TicketsFilterCompaniesDropDownComponent, UsersFilterDefaultSubscriptionComponent],
   selector: 'app-users-filter',
   templateUrl: './users-filter.component.html',
   styleUrls: ['./users-filter.component.scss'],

@@ -24,7 +24,7 @@ import { fadeInAnimation } from 'src/app/animations';
 import { ContractsEditComponent } from '../billing/contracts/contracts-edit/contracts-edit.component';
 @Component({
   standalone: true,
-  imports: [ContractsEditComponent, CommonModule],
+  imports: [ContractsEditComponent, InventoryTableComponent, CommonModule],
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.scss'],

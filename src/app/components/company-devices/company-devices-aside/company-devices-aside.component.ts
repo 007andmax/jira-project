@@ -24,7 +24,7 @@ import { CompanyDevicesAsideUpdatesComponent } from './company-devices-aside-upd
 
 @Component({
   standalone: true,
-  imports: [CompanyDevicesAsideDeviceIconComponent, CompanyDevicesAsideSoftwareComponent, CompanyDevicesAsideUpdatesComponent, CommonModule],
+  imports: [CompanyDevicesAsideDeviceIconComponent, CompanyDevicesAsideNetworkTabComponent, CompanyDevicesAsideSystemComponent, CompanyDevicesAsideSoftwareComponent, CompanyDevicesAsideUpdatesComponent, CommonModule],
   selector: 'app-company-devices-aside',
   templateUrl: './company-devices-aside.component.html',
   styleUrls: ['./company-devices-aside.component.scss'],

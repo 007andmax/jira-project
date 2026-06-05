@@ -35,7 +35,7 @@ declare var $;
 
 @Component({
   standalone: true,
-  imports: [DropDownComponent, DynamicTooltipComponent, PreloaderTicketComponent, CommonModule],
+  imports: [DropDownComponent, PermissionManageComponent, DynamicTooltipComponent, PreloaderTicketComponent, CommonModule],
   selector: 'app-tech-users-settings',
   templateUrl: './tech-users-settings.component.html',
   animations: [fadeInAnimation],

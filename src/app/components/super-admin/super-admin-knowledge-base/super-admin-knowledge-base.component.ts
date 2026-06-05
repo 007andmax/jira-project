@@ -4,7 +4,7 @@ import { SuperAdminKnowledgeBaseTableComponent } from './super-admin-knowledge-b
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SuperAdminKnowledgeBaseTableComponent],
   selector: 'app-super-admin-knowledge-base',
   templateUrl: './super-admin-knowledge-base.component.html',
   styleUrls: ['./super-admin-knowledge-base.component.scss']

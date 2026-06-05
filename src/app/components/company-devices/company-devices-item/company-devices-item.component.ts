@@ -28,7 +28,7 @@ import { CompanyDevicesNoExistRemoteSessionsComponent } from './company-devices-
 
 @Component({
   standalone: true,
-  imports: [CompanyDevicesExistRemoteSessionsComponent, CompanyDevicesNoExistRemoteSessionsComponent, FormsModule, CommonModule],
+  imports: [CompanyDevicesExistRemoteSessionsComponent, CompanyDevicesTagsComponent, CompanyDevicesNoExistRemoteSessionsComponent, FormsModule, CommonModule],
   selector: 'app-company-devices-item',
   templateUrl: './company-devices-item.component.html',
   styleUrls: ['./company-devices-item.component.scss'],

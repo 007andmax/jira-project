@@ -29,7 +29,7 @@ import { CompanyDevicesItemComponent } from './company-devices-item/company-devi
 
 @Component({
   standalone: true,
-  imports: [CompanyDevicesAsideComponent, CompanyDevicesCustomAsideComponent, CompanyDevicesFilterComponent, CompanyDevicesItemComponent, FormsModule, CommonModule],
+  imports: [CompanyDevicesAsideComponent, CompanyDevicesHeaderComponent, CompanyDevicesCustomAsideComponent, CompanyDevicesFilterComponent, CompanyDevicesItemComponent, FormsModule, CommonModule],
   selector: 'app-company-devices',
   templateUrl: './company-devices.component.html',
   animations: [fadeInAnimation],

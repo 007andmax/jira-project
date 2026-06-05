@@ -26,7 +26,7 @@ import { TasksAddAssociateTicketsComponent } from '../tasks-add/tasks-add-associ
 
 @Component({
   standalone: true,
-  imports: [DatePickerComponent, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, ServicesListComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
+  imports: [DatePickerComponent, DropDownComponent, TasksDatePickerComponent, MatErrorComponent, PreloaderTicketComponent, ServicesListComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
   selector: 'app-tasks-edit',
   templateUrl: './tasks-edit.component.html',
   styleUrls: ['./tasks-edit.component.scss'],

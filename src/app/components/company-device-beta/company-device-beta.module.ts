@@ -13,7 +13,8 @@ import { DropDownComponent } from '../shared/drop-down/drop-down.component';
     declarations: [
         CompanyDeviceBetaComponent,
         DeviceBeta,
-        DropDownComponent
+        DropDownComponent,
+        DatePickerComponent
     ],
     imports: [
         CommonModule,

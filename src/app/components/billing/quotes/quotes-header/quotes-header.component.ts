@@ -13,7 +13,7 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, QuotesFilterComponent],
   selector: 'app-quotes-header',
   templateUrl: './quotes-header.component.html',
   styleUrls: ['./quotes-header.component.scss'],

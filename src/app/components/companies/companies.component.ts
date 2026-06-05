@@ -28,7 +28,7 @@ import { CompanyEditAsideComponent } from './company-edit-aside/company-edit-asi
 
 @Component({
   standalone: true,
-  imports: [CompaniesTableComponent, CompanyEditAsideComponent, CompaniesFilterComponent, FormsModule, CommonModule],
+  imports: [CompaniesTableComponent, CompanyEditAsideComponent, CompaniesHeaderComponent, CompaniesFilterComponent, FormsModule, CommonModule],
   selector: 'app-companies',
   templateUrl: './companies.component.html',
   styleUrls: ['./companies.component.scss'],

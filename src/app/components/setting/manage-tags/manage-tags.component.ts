@@ -33,7 +33,7 @@ import { ManageTagsAddComponent } from './manage-tags-add/manage-tags-add.compon
 declare var $: any;
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, ManageTagsAddComponent, FormsModule, CommonModule],
+  imports: [DynamicTooltipComponent, ManageTagsFilesComponent, ManageTagsDevicesComponent, ManageTagsAddComponent, FormsModule, CommonModule],
   selector: "app-manage-tags",
   templateUrl: "./manage-tags.component.html",
   animations: [fadeInAnimation],

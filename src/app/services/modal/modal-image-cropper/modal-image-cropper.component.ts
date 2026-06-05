@@ -2,14 +2,14 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
 import { CompaniesService } from '../../company/companies.service';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 import { ImageCropper } from 'src/app/components/shared/image-cropper/class/image-cropper';
 import { ModalImageCropperStateService } from './services/modal-image-cropper-state.service';
 import { ImageCroper } from './class/image-croper';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ImageCropperComponent],
   selector: 'modal-image-cropper',
   templateUrl: './modal-image-cropper.component.html',
   styleUrls: ['./modal-image-cropper.component.scss'],

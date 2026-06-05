@@ -11,7 +11,7 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CompanyDevicesEditIpComponent, CompanyDevicesEditLabelComponent, CompanyDevicesEditMacComponent],
   selector: 'app-company-devices-aside-network-tab',
   templateUrl: './company-devices-aside-network-tab.component.html',
   styleUrls: ['./company-devices-aside-network-tab.component.scss'],

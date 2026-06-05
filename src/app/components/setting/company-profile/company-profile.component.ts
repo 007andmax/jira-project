@@ -21,7 +21,7 @@ import { CompanyProfileApiKeysEditAsideComponent } from './company-profile-api-k
 declare var $: any;
 @Component({
   standalone: true,
-  imports: [CompanyProfileApiKeysAddAsideComponent, CompanyProfileApiKeysEditAsideComponent, CommonModule],
+  imports: [CompanyProfileApiKeysAddAsideComponent, CompanyProfileApiKeysComponent, CompanyProfileProfileComponent, CompanyProfileOperationalHoursComponent, CompanyProfileWorkspaceComponent, CompanyProfileApiKeysEditAsideComponent, CommonModule],
   selector: 'app-company-profile',
   templateUrl: './company-profile.component.html',
   animations: [fadeInAnimation],

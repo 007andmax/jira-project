@@ -15,7 +15,7 @@ import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop
 
 @Component({
   standalone: true,
-  imports: [CompanyDropDownComponent, CommonModule, MultiDatepickerComponent],
+  imports: [CompanyDropDownComponent, CommonModule, TechUsersListReportComponent, CompanyTagsComponent, MultiDatepickerComponent],
   selector: 'documents-filter',
   templateUrl: './documents-filter.component.html',
   styleUrls: ['./documents-filter.component.scss'],

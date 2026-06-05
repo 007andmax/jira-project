@@ -33,7 +33,7 @@ import { UsersTableComponent } from '../users/users-table/users-table.component'
 
 @Component({
   standalone: true,
-  imports: [UsersTableComponent, FormsModule, CommonModule],
+  imports: [UsersTableComponent, UsersFilterComponent, UsersHeaderComponent, FormsModule, CommonModule],
   selector: 'company-user',
   templateUrl: './company-user.component.html',
   styleUrls: ['./company-user.component.scss'],

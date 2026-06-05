@@ -17,7 +17,7 @@ import { QuoteAsidePreviewBodyComponent } from '../quote-aside-preview/quote-asi
 
 @Component({
   standalone: true,
-  imports: [PreloaderTicketComponent, QuoteAsidePreviewBodyComponent, CommonModule],
+  imports: [PreloaderTicketComponent, QuoteAsideEditBodyComponent, QuoteAsidePreviewBodyComponent, CommonModule],
   selector: 'app-quote-aside-edit',
   templateUrl: './quote-aside-edit.component.html',
   styleUrls: ['./quote-aside-edit.component.scss'],

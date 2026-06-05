@@ -33,7 +33,7 @@ import { TicketsFilterUsersDropDownComponent } from './tickets-filter-users-drop
 
 @Component({
   standalone: true,
-  imports: [TicketsFilterSearchComponent, TicketsFilterUsersDropDownComponent, CommonModule],
+  imports: [TicketsFilterSearchComponent, TicketsFilterDropDownComponent, TicketsFilterCreatedDropDownComponent, TicketsFilterTagsComponent, TicketsFilterStatusComponent, TicketsFilterCompaniesDropDownComponent, TicketsFilterUsersDropDownComponent, CommonModule],
   selector: 'app-tickets-filter',
   templateUrl: './tickets-filter.component.html',
   styleUrls: ['./tickets-filter.component.scss'],

@@ -8,7 +8,7 @@ import { MatChipComponent } from 'src/app/components/shared/mat-chip/mat-chip.co
 
 @Component({
   standalone: true,
-  imports: [MatChipComponent, MatChipListComponent, CommonModule],
+  imports: [MatChipComponent, MatChipListComponent, CommonModule, MatFormFieldComponent],
   selector: 'app-users-filter-default-subscription',
   templateUrl: './users-filter-default-subscription.component.html',
   styleUrls: ['./users-filter-default-subscription.component.scss'],

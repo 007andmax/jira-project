@@ -15,7 +15,7 @@ import { SuperAdminKnowledgeBaseTableItemComponent } from './super-admin-knowled
 
 @Component({
   standalone: true,
-  imports: [SuperAdminKnowledgeBaseNewsListComponent, SuperAdminKnowledgeBaseTableItemComponent, CommonModule],
+  imports: [SuperAdminKnowledgeBaseNewsListComponent, SuperAdminKnowledgeBaseEditComponent, SuperAdminKnowledgeBaseAddComponent, SuperAdminKnowledgeBaseTableItemComponent, CommonModule],
   selector: 'app-super-admin-knowledge-base-table',
   templateUrl: './super-admin-knowledge-base-table.component.html',
   styleUrls: ['./super-admin-knowledge-base-table.component.scss'],

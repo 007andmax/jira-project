@@ -30,7 +30,7 @@ import { UsersDetailsTabTicketsComponent } from './users-details-tab-tickets/use
 
 @Component({
   standalone: true,
-  imports: [UsersDetailsHeaderComponent, UsersDetailsTabCompaniesComponent, UsersDetailsTabDocumentsComponent, UsersDetailsTabMessagesComponent, UsersDetailsTabPasswordsComponent, UsersDetailsTabTicketsComponent, CommonModule],
+  imports: [UsersDetailsHeaderComponent, UsersDetailsLeftPanelComponent, UsersDetailsTabCompaniesComponent, UsersDetailsTabDocumentsComponent, UsersDetailsTabMessagesComponent, UsersDetailsTabPasswordsComponent, UsersDetailsTabTicketsComponent, CommonModule],
   selector: 'app-users-details',
   templateUrl: './users-details.component.html',
   styleUrls: ['./users-details.component.scss'],

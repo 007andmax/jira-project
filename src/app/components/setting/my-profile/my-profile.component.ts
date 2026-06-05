@@ -14,7 +14,7 @@ declare var $: any;
 
 @Component({
   standalone: true,
-  imports: [SignatureComponent, CommonModule],
+  imports: [SignatureComponent, ProfileComponent, TicketsMyProfileComponent, ActivityHistoryComponent, EmailNotificationsComponent, AccountComponent, CommonModule],
   selector: "app-my-profile",
   templateUrl: "./my-profile.component.html",
   animations: [fadeInAnimation],

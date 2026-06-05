@@ -4,12 +4,14 @@ import { Subscription } from 'rxjs';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from "moment";
+import { TicketProfileAttachmentsComponent } from 'src/app/components/tickets/tickets/ticket-edit-aside/ticket-profile-attachments/ticket-profile-attachments.component';
 
 @Component({
-    selector: 'app-users-details-tab-messages-full-body',
-    templateUrl: './users-details-tab-messages-full-body.component.html',
-    styleUrls: ['./users-details-tab-messages-full-body.component.scss'],
-    standalone: true
+  selector: 'app-users-details-tab-messages-full-body',
+  templateUrl: './users-details-tab-messages-full-body.component.html',
+  styleUrls: ['./users-details-tab-messages-full-body.component.scss'],
+  standalone: true,
+  imports: [TicketProfileAttachmentsComponent]
 })
 export class UsersDetailsTabMessagesFullBodyComponent implements OnInit, OnDestroy {
   opened: boolean = false;

@@ -22,7 +22,7 @@ import { CompanyDevicesEditIpComponent } from '../../company-devices-edit-ip/com
 
 @Component({
   standalone: true,
-  imports: [CompanyDevicesEditIpComponent, FormsModule, CommonModule, DropDownComponent],
+  imports: [CompanyDevicesEditIpComponent, FormsModule, DatePickerComponent, CompanyDevicesEditLabelComponent, CommonModule, DropDownComponent],
   selector: 'app-company-devices-aside-system',
   templateUrl: './company-devices-aside-system.component.html',
   styleUrls: ['./company-devices-aside-system.component.scss'],
