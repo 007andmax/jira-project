@@ -143,6 +143,7 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     // this.elRef.nativeElement.querySelector("#description-create-password").value = "";
   }
   generatePassword() {
+    this.showPassword = true;
     this.passwordRecordAdd.password = this.generateSecurePassword(10);
   }
   generateSecurePassword(length: number = 16): string {
