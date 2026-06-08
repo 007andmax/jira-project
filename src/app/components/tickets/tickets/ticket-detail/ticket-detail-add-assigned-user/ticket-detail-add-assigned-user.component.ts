@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AddAssignedUserComponent],
   selector: 'ticket-detail-add-assigned-user',
   templateUrl: './ticket-detail-add-assigned-user.component.html',
   styleUrls: ['./ticket-detail-add-assigned-user.component.scss']

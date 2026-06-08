@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, TasksCalendarMonthComponent, TasksCalendarWeekComponent],
   selector: 'app-tasks-calendar',
   templateUrl: './tasks-calendar.component.html',
   styleUrls: ['./tasks-calendar.component.scss'],

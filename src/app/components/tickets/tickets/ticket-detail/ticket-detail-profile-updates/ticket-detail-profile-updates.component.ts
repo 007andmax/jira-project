@@ -15,10 +15,11 @@ import { TicketsListService } from '../../services/tickets-list.service';
 import { TicketDetailProfileUpdatesNoteComponent } from './ticket-detail-profile-updates-note/ticket-detail-profile-updates-note.component';
 import { TicketDetailProfileUpdatesProductComponent } from './ticket-detail-profile-updates-product/ticket-detail-profile-updates-product.component';
 import { TicketDetailProfileUpdatesServiceComponent } from './ticket-detail-profile-updates-service/ticket-detail-profile-updates-service.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [TicketDetailProfileUpdatesNoteComponent, TicketDetailProfileUpdatesProductComponent, TicketDetailProfileUpdatesServiceComponent, CommonModule],
+  imports: [TicketDetailProfileUpdatesNoteComponent, InfiniteScrollModule, TicketDetailProfileUpdatesProductComponent, TicketDetailProfileUpdatesServiceComponent, CommonModule],
   selector: 'ticket-detail-profile-updates',
   templateUrl: './ticket-detail-profile-updates.component.html',
   styleUrls: ['./ticket-detail-profile-updates.component.scss'],

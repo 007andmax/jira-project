@@ -4,10 +4,11 @@ import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { SupportPageCategory } from '../../super-admin/left-panel-super-admin-categories/class/support-page-category';
 import { SupportPageCategoriesService } from '../../super-admin/services/support-page-categories/support-page-categories.service';
 import { SuperAdminPublicSearchListService } from './services/super-admin-public-search-list.service';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, InfiniteScrollModule],
   selector: 'super-admin-public-search',
   templateUrl: './super-admin-public-search.component.html',
   styleUrls: ['./super-admin-public-search.component.scss'],

@@ -22,9 +22,10 @@ import { InventoryHeaderComponent } from './inventory-header/inventory-header.co
 import { InventoryTableComponent } from './inventory-table/inventory-table.component';
 import { fadeInAnimation } from 'src/app/animations';
 import { ContractsEditComponent } from '../billing/contracts/contracts-edit/contracts-edit.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 @Component({
   standalone: true,
-  imports: [ContractsEditComponent, InventoryTableComponent, CommonModule],
+  imports: [ContractsEditComponent, InfiniteScrollModule, InventoryTableComponent, CommonModule],
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.scss'],

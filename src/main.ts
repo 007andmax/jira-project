@@ -52,7 +52,7 @@ import { HttpInterceptorService } from './app/services/http/http-interceptor.ser
 import { HTTP_INTERCEPTORS, withInterceptorsFromDi, provideHttpClient } from '@angular/common/http';
 
 if (environment.production) {
-  enableProdMode();
+    enableProdMode();
 }
 
 
@@ -101,6 +101,6 @@ bootstrapApplication(AppComponent, {
         provideHttpClient(withInterceptorsFromDi())
     ]
 }).then(() => {
-  document.body.classList.add('ready');
+    document.body.classList.add('ready');
 })
-  .catch(err => console.error(err));
+    .catch(err => console.error(err));

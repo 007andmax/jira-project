@@ -1,6 +1,7 @@
 ﻿import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { Ticket } from 'src/app/components/tickets/class/ticket';
 import { TicketsFilter } from 'src/app/components/tickets/tickets/class/tickets-filter';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
@@ -10,7 +11,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, InfiniteScrollModule],
   selector: 'app-tasks-add-associate-tickets',
   templateUrl: './tasks-add-associate-tickets.component.html',
   styleUrls: ['./tasks-add-associate-tickets.component.scss'],

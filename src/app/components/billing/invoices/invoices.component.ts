@@ -20,6 +20,7 @@ import { InvoicesHeaderComponent } from './invoices-header/invoices-header.compo
 import { InvoicesItemComponent } from './invoices-item/invoices-item.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
+
 @Component({
   standalone: true,
   imports: [InvoicesHeaderComponent, InvoicesItemComponent, CommonModule, InfiniteScrollModule],

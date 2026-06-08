@@ -12,10 +12,11 @@ import { NotificationsRealTimeService } from 'src/app/states/notifications/notif
 import { id } from '@swimlane/ngx-charts';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, InfiniteScrollModule],
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.scss'],

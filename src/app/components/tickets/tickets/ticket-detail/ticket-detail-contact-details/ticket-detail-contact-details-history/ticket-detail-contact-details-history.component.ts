@@ -9,9 +9,10 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, InfiniteScrollModule],
   selector: 'ticket-detail-contact-details-history',
   templateUrl: './ticket-detail-contact-details-history.component.html',
   styleUrls: ['./ticket-detail-contact-details-history.component.scss'],

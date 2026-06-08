@@ -1,6 +1,7 @@
 ﻿
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 import { MatChipListComponent } from 'src/app/components/shared/mat-chip-list/mat-chip-list.component';
 import { MatChipComponent } from 'src/app/components/shared/mat-chip/mat-chip.component';
@@ -10,7 +11,7 @@ import { TicketsPermissionsService } from 'src/app/components/tickets/tickets/ti
 
 @Component({
   standalone: true,
-  imports: [MatChipComponent, MatChipListComponent, MatFormFieldComponent, CommonModule],
+  imports: [MatChipComponent, MatChipListComponent, InfiniteScrollModule, MatFormFieldComponent, CommonModule],
   selector: 'app-file-manager-file-info-tags',
   templateUrl: './file-manager-file-info-tags.component.html',
   styleUrls: ['./file-manager-file-info-tags.component.scss'],

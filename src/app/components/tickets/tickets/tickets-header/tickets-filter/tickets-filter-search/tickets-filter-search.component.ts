@@ -7,10 +7,11 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TicketsListService } from '../../../services/tickets-list.service';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, InfiniteScrollModule],
   selector: 'tickets-filter-search',
   templateUrl: './tickets-filter-search.component.html',
   styleUrls: ['./tickets-filter-search.component.scss'],

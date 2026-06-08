@@ -28,10 +28,11 @@ import { fadeInAnimation } from 'src/app/animations';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { UsersFilterComponent } from '../users/users-header/users-filter/users-filter.component';
 import { UsersTableComponent } from '../users/users-table/users-table.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [UsersFilterComponent, UsersHeaderComponent, UsersTableComponent, FormsModule, CommonModule],
+  imports: [UsersFilterComponent, InfiniteScrollModule, UsersHeaderComponent, UsersTableComponent, FormsModule, CommonModule],
   selector: 'marketing',
   templateUrl: './marketing.component.html',
   styleUrls: ['./marketing.component.scss'],

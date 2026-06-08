@@ -15,10 +15,11 @@ import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-s
 import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.service';
 import { MatFormFieldComponent } from '../../shared/mat-form-field/mat-form-field.component';
 import { MatChipListComponent } from '../../shared/mat-chip-list/mat-chip-list.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [MatChipListComponent, CommonModule],
+  imports: [MatChipListComponent, CommonModule, InfiniteScrollModule],
   selector: 'app-company-tags',
   templateUrl: './company-tags.component.html',
   styleUrls: ['./company-tags.component.scss'],

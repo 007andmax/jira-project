@@ -27,10 +27,11 @@ import { TechUsersComponent } from 'src/app/components/shared/tech-users/tech-us
 import { TaskHeaderAddTypeComponent } from 'src/app/components/tasks/task-header-add/task-header-add-type/task-header-add-type.component';
 import { TasksDatePickerComponent } from 'src/app/components/tasks/tasks-date-picker/tasks-date-picker.component';
 import { TicketDetailTasksItemComponent } from './ticket-detail-tasks-item/ticket-detail-tasks-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [TaskHeaderAddTypeComponent, TasksDatePickerComponent, TechUsersComponent, TicketDetailTasksItemComponent, FormsModule, CommonModule],
+  imports: [TaskHeaderAddTypeComponent, InfiniteScrollModule, TasksDatePickerComponent, TechUsersComponent, TicketDetailTasksItemComponent, FormsModule, CommonModule],
   selector: 'ticket-detail-tasks',
   templateUrl: './ticket-detail-tasks.component.html',
   styleUrls: ['./ticket-detail-tasks.component.scss'],

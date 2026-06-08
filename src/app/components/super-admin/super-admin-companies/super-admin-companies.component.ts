@@ -9,10 +9,11 @@ import { SuperAdminCompanyFilters } from './class/super-admin-company-filters';
 import { LeftPanelSuperAdminCompaniesComponent } from '../left-panel-super-admin-companies/left-panel-super-admin-companies.component';
 import { SuperAdminCompaniesHeaderComponent } from './super-admin-companies-header/super-admin-companies-header.component';
 import { SuperAdminCompaniesItemComponent } from './super-admin-companies-item/super-admin-companies-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [LeftPanelSuperAdminCompaniesComponent, SuperAdminCompaniesHeaderComponent, SuperAdminCompaniesItemComponent, CommonModule],
+  imports: [LeftPanelSuperAdminCompaniesComponent, InfiniteScrollModule, SuperAdminCompaniesHeaderComponent, SuperAdminCompaniesItemComponent, CommonModule],
   selector: 'super-admin-companies',
   templateUrl: './super-admin-companies.component.html',
   styleUrls: ['./super-admin-companies.component.scss'],

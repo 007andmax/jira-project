@@ -18,7 +18,7 @@ import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, FormsModule, CommonModule],
+  imports: [MatErrorComponent, TicketProfileUpdatesServiceTimepickerComponent, TicketProfileUpdatesServiceDurationComponent, ServicesListComponent, FormsModule, CommonModule],
   selector: 'ticket-detail-profile-form-update-services',
   templateUrl: './ticket-detail-profile-form-update-services.component.html',
   styleUrls: ['./ticket-detail-profile-form-update-services.component.scss'],

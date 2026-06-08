@@ -12,10 +12,11 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { NetworkScanCredential } from '../class/network-scan-credential';
 import { NetworkScanCredentialsAddComponent } from '../network-scan-credentials-add/network-scan-credentials-add.component';
 import { NetworkScanCredentialsAsideItemComponent } from './network-scan-credentials-aside-item/network-scan-credentials-aside-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, NetworkScanCredentialsAddComponent, NetworkScanCredentialsAsideItemComponent],
+  imports: [CommonModule, NetworkScanCredentialsAddComponent, InfiniteScrollModule, NetworkScanCredentialsAsideItemComponent],
   selector: 'app-network-scan-credentials-aside',
   templateUrl: './network-scan-credentials-aside.component.html',
   styleUrls: ['./network-scan-credentials-aside.component.scss'],

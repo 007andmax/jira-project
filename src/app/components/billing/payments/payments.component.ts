@@ -21,10 +21,11 @@ import { PaymentItemComponent } from './payment-item/payment-item.component';
 import { PaymentsAsideComponent } from './payments-aside/payments-aside.component';
 import { PaymentsHeaderComponent } from './payments-header/payments-header.component';
 import { RefundPaymentComponent } from './refund-payment/refund-payment.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [EditPaymentComponent, PaymentItemComponent, PaymentsAsideComponent, PaymentsHeaderComponent, RefundPaymentComponent, CommonModule],
+  imports: [EditPaymentComponent, PaymentItemComponent, InfiniteScrollModule, PaymentsAsideComponent, PaymentsHeaderComponent, RefundPaymentComponent, CommonModule],
   selector: 'payments',
   templateUrl: './payments.component.html',
   styleUrls: ['./payments.component.scss'],

@@ -13,10 +13,11 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { TicketStateService } from '../../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 import { UsersDetailsTabTicketsItemComponent } from './users-details-tab-tickets-item/users-details-tab-tickets-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, UsersDetailsTabTicketsItemComponent],
+  imports: [CommonModule, InfiniteScrollModule, UsersDetailsTabTicketsItemComponent],
   selector: 'app-users-details-tab-tickets',
   templateUrl: './users-details-tab-tickets.component.html',
   styleUrls: ['./users-details-tab-tickets.component.scss'],

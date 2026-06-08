@@ -10,10 +10,11 @@ import { RecurringTicketsAddAsideComponent } from './recurring-tickets-add-aside
 import { RecurringTicketsEditAsideComponent } from './recurring-tickets-edit-aside/recurring-tickets-edit-aside.component';
 import { RecurringTicketsHeaderComponent } from './recurring-tickets-header/recurring-tickets-header.component';
 import { RecurringTicketsTableComponent } from './recurring-tickets-table/recurring-tickets-table.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [RecurringTicketsAddAsideComponent, RecurringTicketsEditAsideComponent, RecurringTicketsHeaderComponent, RecurringTicketsTableComponent, CommonModule],
+  imports: [RecurringTicketsAddAsideComponent, InfiniteScrollModule, RecurringTicketsEditAsideComponent, RecurringTicketsHeaderComponent, RecurringTicketsTableComponent, CommonModule],
   selector: 'app-recurring-tickets',
   templateUrl: './recurring-tickets.component.html',
   styleUrls: ['./recurring-tickets.component.scss'],

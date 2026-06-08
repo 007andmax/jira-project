@@ -5,10 +5,11 @@ import { News } from '../../super-admin/super-admin-knowledge-base/super-admin-k
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { SuperAdminKnowledgeBaseService } from '../../super-admin/services/super-admin-knowledge-base/super-admin-knowledge-base.service';
 import { SuperAdminKnowledgeBaseNewsComponent } from '../../super-admin/super-admin-knowledge-base/super-admin-knowledge-base-news/super-admin-knowledge-base-news.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [SuperAdminKnowledgeBaseNewsComponent, CommonModule],
+  imports: [SuperAdminKnowledgeBaseNewsComponent, InfiniteScrollModule, CommonModule],
   selector: 'app-super-admin-public-list',
   templateUrl: './super-admin-public-list.component.html',
   styleUrls: ['./super-admin-public-list.component.scss'],

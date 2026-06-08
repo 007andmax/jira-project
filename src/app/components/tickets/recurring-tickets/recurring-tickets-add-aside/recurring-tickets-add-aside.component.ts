@@ -33,7 +33,7 @@ import { TagsComponent } from 'src/app/components/shared/tags/tags.component';
 
 @Component({
   standalone: true,
-  imports: [DatePickerComponent, DurationComponent, IntervalComponent, MatErrorComponent, ProductListComponent, ServicesListComponent, TagsComponent, CompanyDropDownComponent, FormsModule, CommonModule],
+  imports: [DatePickerComponent, AssignedTicketUserComponent, DevicesRecurringTicketsComponent, DurationComponent, IntervalComponent, MatErrorComponent, ProductListComponent, ServicesListComponent, TagsComponent, CompanyDropDownComponent, FormsModule, CommonModule],
   selector: 'app-recurring-tickets-add-aside',
   templateUrl: './recurring-tickets-add-aside.component.html',
   styleUrls: ['./recurring-tickets-add-aside.component.scss'],

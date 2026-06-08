@@ -15,7 +15,7 @@ import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, FormsModule, CommonModule],
+  imports: [MatErrorComponent, InvoiceFormTicketEditTaxesComponent, FormsModule, ProductListComponent, CommonModule],
   selector: 'ticket-detail-profile-edit-updates-products',
   templateUrl: './ticket-detail-profile-edit-updates-products.component.html',
   styleUrls: ['./ticket-detail-profile-edit-updates-products.component.scss']

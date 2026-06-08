@@ -12,10 +12,11 @@ import { SuperAdminKnowledgeBaseAddComponent } from '../super-admin-knowledge-ba
 import { SuperAdminKnowledgeBaseEditComponent } from '../super-admin-knowledge-base-edit/super-admin-knowledge-base-edit.component';
 import { SuperAdminKnowledgeBaseNewsListComponent } from '../super-admin-knowledge-base-news-list/super-admin-knowledge-base-news-list.component';
 import { SuperAdminKnowledgeBaseTableItemComponent } from './super-admin-knowledge-base-table-item/super-admin-knowledge-base-table-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [SuperAdminKnowledgeBaseNewsListComponent, SuperAdminKnowledgeBaseEditComponent, SuperAdminKnowledgeBaseAddComponent, SuperAdminKnowledgeBaseTableItemComponent, CommonModule],
+  imports: [SuperAdminKnowledgeBaseNewsListComponent, InfiniteScrollModule, SuperAdminKnowledgeBaseEditComponent, SuperAdminKnowledgeBaseAddComponent, SuperAdminKnowledgeBaseTableItemComponent, CommonModule],
   selector: 'app-super-admin-knowledge-base-table',
   templateUrl: './super-admin-knowledge-base-table.component.html',
   styleUrls: ['./super-admin-knowledge-base-table.component.scss'],

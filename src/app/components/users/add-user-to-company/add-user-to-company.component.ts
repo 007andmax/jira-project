@@ -15,10 +15,11 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
 import { AddUserToCompanyItemComponent } from './add-user-to-company-item/add-user-to-company-item.component';
 import { AddUserToCompanySelectedItemComponent } from './add-user-to-company-selected-item/add-user-to-company-selected-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [AddUserToCompanyItemComponent, AddUserToCompanySelectedItemComponent, PreloaderTicketComponent, FormsModule, CommonModule],
+  imports: [AddUserToCompanyItemComponent, InfiniteScrollModule, AddUserToCompanySelectedItemComponent, PreloaderTicketComponent, FormsModule, CommonModule],
   selector: 'app-add-user-to-company',
   templateUrl: './add-user-to-company.component.html',
   styleUrls: ['./add-user-to-company.component.scss'],

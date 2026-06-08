@@ -7,10 +7,11 @@ import { PasswordDeviceUser } from '../../password-manager/class/password-device
 import { REMOVE_RECORD } from 'src/app/const/confirm';
 import { PasswordRecord } from '../../password-manager/class/password-record';
 import { UsersDetailsTabPasswordsItemComponent } from './users-details-tab-passwords-item/users-details-tab-passwords-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, UsersDetailsTabPasswordsItemComponent],
+  imports: [CommonModule, InfiniteScrollModule, UsersDetailsTabPasswordsItemComponent],
   selector: 'app-users-details-tab-passwords',
   templateUrl: './users-details-tab-passwords.component.html',
   styleUrls: ['./users-details-tab-passwords.component.scss'],

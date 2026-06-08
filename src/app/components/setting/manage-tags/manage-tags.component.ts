@@ -30,10 +30,11 @@ import { fadeInAnimation } from "src/app/animations";
 import { ManageTagsFilesComponent } from "./manage-tags-files/manage-tags-files.component";
 import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
 import { ManageTagsAddComponent } from './manage-tags-add/manage-tags-add.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 declare var $: any;
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, ManageTagsFilesComponent, ManageTagsDevicesComponent, ManageTagsAddComponent, FormsModule, CommonModule],
+  imports: [DynamicTooltipComponent, InfiniteScrollModule, ManageTagsFilesComponent, ManageTagsDevicesComponent, ManageTagsAddComponent, FormsModule, CommonModule],
   selector: "app-manage-tags",
   templateUrl: "./manage-tags.component.html",
   animations: [fadeInAnimation],

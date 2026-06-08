@@ -14,10 +14,11 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { IntegrationsStateService } from 'src/app/states/integrations/integrations-state.service';
 import { ManageCardsHeaderComponent } from './manage-cards-header/manage-cards-header.component';
 import { ManageCardsTableComponent } from './manage-cards-table/manage-cards-table.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [ManageCardsHeaderComponent, ManageCardsTableComponent, CommonModule],
+  imports: [ManageCardsHeaderComponent, ManageCardsTableComponent, CommonModule, InfiniteScrollModule],
   selector: 'app-manage-cards',
   templateUrl: './manage-cards.component.html',
   styleUrls: ['./manage-cards.component.scss'],

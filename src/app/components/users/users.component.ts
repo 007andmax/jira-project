@@ -32,10 +32,11 @@ import { fadeInAnimation } from 'src/app/animations';
 import { ToastrService } from 'ngx-toastr';
 import { UsersFilterComponent } from './users-header/users-filter/users-filter.component';
 import { UsersTableComponent } from './users-table/users-table.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [UsersFilterComponent, UsersHeaderComponent, UsersTableComponent, FormsModule, CommonModule],
+  imports: [UsersFilterComponent, InfiniteScrollModule, UsersHeaderComponent, UsersTableComponent, FormsModule, CommonModule],
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],

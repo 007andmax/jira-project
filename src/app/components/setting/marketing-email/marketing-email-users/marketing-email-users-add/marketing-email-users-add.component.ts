@@ -14,10 +14,11 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 import { Subscription } from 'rxjs';
 import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
 import { MarketingEmailUsersAddItemComponent } from '../marketing-email-users-add-item/marketing-email-users-add-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [PreloaderTicketComponent, MarketingEmailUsersAddItemComponent, FormsModule, CommonModule],
+  imports: [PreloaderTicketComponent, InfiniteScrollModule, MarketingEmailUsersAddItemComponent, FormsModule, CommonModule],
   selector: 'marketing-email-users-add',
   templateUrl: './marketing-email-users-add.component.html',
   styleUrls: ['./marketing-email-users-add.component.scss'],

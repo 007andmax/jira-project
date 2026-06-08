@@ -1,6 +1,7 @@
 ﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
@@ -11,7 +12,7 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, MatChipComponent, MatChipListComponent, MatFormFieldComponent, CommonModule],
+  imports: [DynamicTooltipComponent, InfiniteScrollModule, MatChipComponent, MatChipListComponent, MatFormFieldComponent, CommonModule],
   selector: 'app-users-filter-tags',
   templateUrl: './users-filter-tags.component.html',
   styleUrls: ['./users-filter-tags.component.scss'],

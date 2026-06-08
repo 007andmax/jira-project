@@ -18,11 +18,12 @@ import { TicketsRealTimeService } from 'src/app/states/tickets/tickets-real-time
 import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service';
 import { TicketsFilterComponent } from '../tickets-header/tickets-filter/tickets-filter.component';
 import { TicketsTableItemComponent } from './tickets-table-item/tickets-table-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @Component({
   standalone: true,
-  imports: [TicketsFilterComponent, TicketsTableItemComponent, CommonModule],
+  imports: [TicketsFilterComponent, InfiniteScrollModule, TicketsTableItemComponent, CommonModule],
   selector: 'app-tickets-table',
   templateUrl: './tickets-table.component.html',
   styleUrls: ['./tickets-table.component.scss'],

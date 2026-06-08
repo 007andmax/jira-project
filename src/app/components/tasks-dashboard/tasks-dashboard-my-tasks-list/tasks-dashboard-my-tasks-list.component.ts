@@ -6,10 +6,11 @@ import { TicketsListService } from '../../tickets/tickets/services/tickets-list.
 
 import { Task } from '../../tasks/class/task';
 import { TasksListItemComponent } from '../../tasks/tasks-list/tasks-list-item/tasks-list-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [TasksListItemComponent, CommonModule],
+  imports: [TasksListItemComponent, CommonModule, InfiniteScrollModule],
   selector: 'app-tasks-dashboard-my-tasks-list',
   templateUrl: './tasks-dashboard-my-tasks-list.component.html',
   styleUrls: ['./tasks-dashboard-my-tasks-list.component.scss'],

@@ -29,6 +29,7 @@ import { PermissionNoSuperAdminService } from './services/users/permission-no-su
 import { PermissionClientUserService } from './services/users/permission-client-user.service';
 import { PermissionMyProfileService } from './components/setting/my-profile/permission-my-profile.service';
 import { PermissionIntegrationsService } from './components/integrations/integrations.service';
+import { InvoicesComponent } from './components/billing/invoices/invoices.component';
 
 const routes: Routes = [
 
@@ -281,10 +282,8 @@ const routes: Routes = [
   },
   {
     path: ':domain/invoices',
-    loadChildren: () => import('./components/billing/invoices/invoices.module').then(m => m.InvoicesModule),
+    component: InvoicesComponent,
     canActivate: [PermissionInvoicesService, PermissionNoSuperAdminService]
-
-
   },
   {
     path: ':domain/billable-tickets',

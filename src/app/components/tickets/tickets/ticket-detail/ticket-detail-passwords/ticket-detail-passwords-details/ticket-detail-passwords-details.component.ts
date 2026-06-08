@@ -7,10 +7,11 @@ import { PasswordManagerListService } from 'src/app/components/password-manager/
 import { PasswordManagerService } from 'src/app/services/password-manager/password-manager.service';
 import { TicketProfile } from '../../../class/ticket-profile';
 import { TicketDetailPasswordsItemComponent } from '../ticket-detail-passwords-item/ticket-detail-passwords-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [TicketDetailPasswordsItemComponent, CommonModule],
+  imports: [TicketDetailPasswordsItemComponent, CommonModule, InfiniteScrollModule],
   selector: 'ticket-detail-passwords-details',
   templateUrl: './ticket-detail-passwords-details.component.html',
   styleUrls: ['./ticket-detail-passwords-details.component.scss'],

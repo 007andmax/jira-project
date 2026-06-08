@@ -34,7 +34,7 @@ import { AssignedTicketUserComponent } from '../../tickets/ticket-add-aside/assi
 
 @Component({
   standalone: true,
-  imports: [AssignedTicketUserComponent, DatePickerComponent, DurationComponent, IntervalComponent, MatErrorComponent, ProductListComponent, ServicesListComponent, TagsComponent, CompanyDropDownComponent, FormsModule, CommonModule],
+  imports: [AssignedTicketUserComponent, DevicesRecurringTicketsComponent, DatePickerComponent, DurationComponent, IntervalComponent, MatErrorComponent, ProductListComponent, ServicesListComponent, TagsComponent, CompanyDropDownComponent, FormsModule, CommonModule],
   selector: 'app-recurring-tickets-edit-aside',
   templateUrl: './recurring-tickets-edit-aside.component.html',
   styleUrls: ['./recurring-tickets-edit-aside.component.scss'],

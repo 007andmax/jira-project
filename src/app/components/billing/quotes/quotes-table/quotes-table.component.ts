@@ -26,10 +26,11 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { QuotesHeaderComponent } from '../quotes-header/quotes-header.component';
 import { QuotesItemComponent } from './quotes-item/quotes-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [QuotesHeaderComponent, QuotesItemComponent, CommonModule],
+  imports: [QuotesHeaderComponent, QuotesItemComponent, InfiniteScrollModule, CommonModule],
   selector: 'app-quotes-table',
   templateUrl: './quotes-table.component.html',
   styleUrls: ['./quotes-table.component.scss'],

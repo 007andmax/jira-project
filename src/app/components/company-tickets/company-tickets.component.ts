@@ -20,10 +20,11 @@ import { TicketsFilterComponent } from '../tickets/tickets/tickets-header/ticket
 import { fadeInAnimation } from 'src/app/animations';
 import { MergeTicketsComponent } from '../tickets/tickets/merge-tickets/merge-tickets.component';
 import { TicketsTableItemComponent } from '../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [MergeTicketsComponent, TicketsFilterComponent, TicketsHeaderComponent, TicketsTableItemComponent, CommonModule],
+  imports: [MergeTicketsComponent, InfiniteScrollModule, TicketsFilterComponent, TicketsHeaderComponent, TicketsTableItemComponent, CommonModule],
   selector: 'company-tickets',
   templateUrl: './company-tickets.component.html',
   styleUrls: ['./company-tickets.component.scss'],

@@ -20,13 +20,14 @@ import { PasswoordManagerHeaderComponent } from './passwoord-manager-header/pass
 import { PasswordManagerAddAsideComponent } from './password-manager-add-aside/password-manager-add-aside.component';
 import { PasswordManagerEditAsideComponent } from './password-manager-edit-aside/password-manager-edit-aside.component';
 import { PasswordManagerTableComponent } from './password-manager-table/password-manager-table.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 /**
  * Password manager component
  */
 @Component({
   standalone: true,
-  imports: [PasswoordManagerFiltersComponent, PasswoordManagerHeaderComponent, PasswordManagerAddAsideComponent, PasswordManagerEditAsideComponent, PasswordManagerTableComponent, FormsModule, CommonModule],
+  imports: [PasswoordManagerFiltersComponent, InfiniteScrollModule, PasswoordManagerHeaderComponent, PasswordManagerAddAsideComponent, PasswordManagerEditAsideComponent, PasswordManagerTableComponent, FormsModule, CommonModule],
   selector: 'app-password-manager',
   templateUrl: './password-manager.component.html',
   styleUrls: ['./password-manager.component.scss'],

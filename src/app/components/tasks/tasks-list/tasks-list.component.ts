@@ -10,10 +10,11 @@ import { Subscription } from 'rxjs';
 import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TasksListItemComponent } from './tasks-list-item/tasks-list-item.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [TasksListItemComponent, CommonModule],
+  imports: [TasksListItemComponent, CommonModule, InfiniteScrollModule],
   selector: 'app-tasks-list',
   templateUrl: './tasks-list.component.html',
   styleUrls: ['./tasks-list.component.scss'],

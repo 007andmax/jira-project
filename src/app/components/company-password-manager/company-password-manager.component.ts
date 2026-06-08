@@ -11,11 +11,12 @@ import { PasswoordManagerHeaderComponent } from '../password-manager/passwoord-m
 import { PasswordManagerAddAsideComponent } from '../password-manager/password-manager-add-aside/password-manager-add-aside.component';
 import { PasswordManagerEditAsideComponent } from '../password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
 import { PasswordManagerTableComponent } from '../password-manager/password-manager-table/password-manager-table.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @Component({
   standalone: true,
-  imports: [PasswoordManagerHeaderComponent, PasswordManagerAddAsideComponent, PasswordManagerEditAsideComponent, PasswordManagerTableComponent, CommonModule],
+  imports: [PasswoordManagerHeaderComponent, InfiniteScrollModule, PasswoordManagerFiltersComponent, PasswordManagerAddAsideComponent, PasswordManagerEditAsideComponent, PasswordManagerTableComponent, CommonModule],
   selector: 'company-password-manager',
   templateUrl: './company-password-manager.component.html',
   styleUrls: ['./company-password-manager.component.scss'],

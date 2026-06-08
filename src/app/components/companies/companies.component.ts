@@ -25,10 +25,11 @@ import { fadeInAnimation } from 'src/app/animations';
 import { CompaniesFilterComponent } from './companies-header/companies-filter/companies-filter.component';
 import { CompaniesTableComponent } from './companies-table/companies-table.component';
 import { CompanyEditAsideComponent } from './company-edit-aside/company-edit-aside.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [CompaniesTableComponent, CompanyEditAsideComponent, CompaniesHeaderComponent, CompaniesFilterComponent, FormsModule, CommonModule],
+  imports: [CompaniesTableComponent, InfiniteScrollModule, CompanyEditAsideComponent, CompaniesHeaderComponent, CompaniesFilterComponent, FormsModule, CommonModule],
   selector: 'app-companies',
   templateUrl: './companies.component.html',
   styleUrls: ['./companies.component.scss'],

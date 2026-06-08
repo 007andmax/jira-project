@@ -1,11 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 @Component({
-    selector: 'contract-company-drop-down',
-    templateUrl: './contract-company-drop-down.component.html',
-    styleUrls: ['./contract-company-drop-down.component.scss'],
-    standalone: true
+  selector: 'contract-company-drop-down',
+  templateUrl: './contract-company-drop-down.component.html',
+  styleUrls: ['./contract-company-drop-down.component.scss'],
+  standalone: true,
+  imports: [MatErrorComponent]
 })
 export class ContractCompanyDropDownComponent extends DropDownComponent {
   @Input() clientType: string;

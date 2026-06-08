@@ -8,10 +8,11 @@ import * as moment from 'moment';
 import { UsersService } from 'src/app/services/users/users.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { UsersDetailsTabMessagesFullBodyComponent } from './users-details-tab-messages-full-body/users-details-tab-messages-full-body.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, UsersDetailsTabMessagesFullBodyComponent],
+  imports: [CommonModule, InfiniteScrollModule, UsersDetailsTabMessagesFullBodyComponent],
   selector: 'app-users-details-tab-messages',
   templateUrl: './users-details-tab-messages.component.html',
   styleUrls: ['./users-details-tab-messages.component.scss'],
