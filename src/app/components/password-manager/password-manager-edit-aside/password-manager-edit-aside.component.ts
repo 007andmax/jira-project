@@ -188,6 +188,43 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     this.validate.resetAuthenticationKeyBase32();
     this.editItem.setResetAuthenticationKey(false)
   }
+  generatePassword() {
+    this.editItem.password = this.generateSecurePassword(10);
+  }
+  generateSecurePassword(length: number = 16): string {
+    const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const lower = 'abcdefghijklmnopqrstuvwxyz';
+    const numbers = '0123456789';
+    const symbols = '!@#$%^&*()_+[]{}|;:,.<>?';
+
+    const allChars = upper + lower + numbers + symbols;
+
+    const getRandomChar = (chars: string): string => {
+      const array = new Uint32Array(1);
+      crypto.getRandomValues(array);
+
+      return chars[array[0] % chars.length];
+    };
+
+    let password = '';
+
+    // Required chars
+    password += getRandomChar(upper);
+    password += getRandomChar(lower);
+    password += getRandomChar(numbers);
+    password += getRandomChar(symbols);
+
+    // Remaining chars
+    for (let i = password.length; i < length; i++) {
+      password += getRandomChar(allChars);
+    }
+
+    // Shuffle
+    return password
+      .split('')
+      .sort(() => 0.5 - Math.random())
+      .join('');
+  }
   clearSecretKey() {
     this.editItem.setAuthenticationKey("");
     this.editItem.setResetAuthenticationKey(true);
