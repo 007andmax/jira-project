@@ -146,7 +146,18 @@
                     </div>
                 </div>
                     <div class="tab-pane__row">
-                <div class="tab-pane__subtitle">Add items as not completed</div>
+                <div class="tab-pane__subtitle">All tickets pending review  <ng-template
+                                #tipContent
+                                class="tooltip"
+                            >
+                                When enabled, any product or service added to a ticket by a tech user will be added with the “Not Completed” status.
+                            </ng-template>
+                            <span
+                                class="qt-icon icon__help default-services-page__question-icon qt-sz-12 qt-ic-c"
+                                placement="top"
+                                [ngbTooltip]="tipContent"
+                                container="body"
+                            ></span></div>
                 <div class="tab-pane-input__row">
                     <div class="qt-input-block">
                         <div
