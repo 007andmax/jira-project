@@ -112,7 +112,6 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
     })
   }
   onBlurSubject(ticket, event) {
-    console.log("ticket", ticket);
     if (ticket.isEdit) {
       this.onChangeSubjectNote(ticket, event.target.value);
     }
@@ -127,7 +126,6 @@ export class TicketPreviewReportComponent implements OnInit, OnDestroy {
   }
   onChangeSubject(ticket, event) {
     let value = event.target.value;
-    console.log("value", value);
     if (ticket.subject != value) {
       ticket.setIsEdit(true);
       this.cd.markForCheck();
