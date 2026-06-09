@@ -189,6 +189,7 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     this.editItem.setResetAuthenticationKey(false)
   }
   generatePassword() {
+    this.showPassword = true;
     this.editItem.password = this.generateSecurePassword(10);
   }
   generateSecurePassword(length: number = 16): string {
