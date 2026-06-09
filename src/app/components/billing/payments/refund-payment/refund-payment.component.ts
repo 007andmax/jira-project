@@ -10,7 +10,7 @@ import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ti
 
 @Component({
   standalone: true,
-  imports: [PreloaderTicketComponent, FormsModule, CommonModule],
+  imports: [PreloaderTicketComponent, FormsModule, CommonModule, DisabledBtnDirective],
   selector: 'app-refund-payment',
   templateUrl: './refund-payment.component.html',
   styleUrls: ['./refund-payment.component.scss'],

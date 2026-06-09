@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
@@ -7,7 +8,7 @@ import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error
   templateUrl: './contract-company-drop-down.component.html',
   styleUrls: ['./contract-company-drop-down.component.scss'],
   standalone: true,
-  imports: [MatErrorComponent]
+  imports: [MatErrorComponent, NgbDropdownModule]
 })
 export class ContractCompanyDropDownComponent extends DropDownComponent {
   @Input() clientType: string;

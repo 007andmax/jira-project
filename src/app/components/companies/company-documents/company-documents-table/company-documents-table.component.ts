@@ -1,10 +1,11 @@
 ﻿import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { DocumentsTableComponent } from 'src/app/components/documents/documents-table/documents-table.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgbDropdownModule],
   selector: 'company-documents-table',
   templateUrl: './company-documents-table.component.html',
   styleUrls: ['./company-documents-table.component.scss'],

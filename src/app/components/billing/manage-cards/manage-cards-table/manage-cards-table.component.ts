@@ -1,6 +1,6 @@
 ﻿import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -12,7 +12,7 @@ import { ManageCardsStateService } from 'src/app/states/manage-cards/manage-card
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgbDropdownModule],
   selector: 'app-manage-cards-table',
   templateUrl: './manage-cards-table.component.html',
   styleUrls: ['./manage-cards-table.component.scss'],

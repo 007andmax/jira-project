@@ -19,7 +19,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [AddUserToCompanyItemComponent, InfiniteScrollModule, AddUserToCompanySelectedItemComponent, PreloaderTicketComponent, FormsModule, CommonModule],
+  imports: [AddUserToCompanyItemComponent, DisabledBtnDirective, InfiniteScrollModule, AddUserToCompanySelectedItemComponent, PreloaderTicketComponent, FormsModule, CommonModule],
   selector: 'app-add-user-to-company',
   templateUrl: './add-user-to-company.component.html',
   styleUrls: ['./add-user-to-company.component.scss'],

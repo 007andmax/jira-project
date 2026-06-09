@@ -9,10 +9,11 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, NgbDropdownModule],
   selector: 'app-quotes-item',
   templateUrl: './quotes-item.component.html',
   styleUrls: ['./quotes-item.component.scss'],

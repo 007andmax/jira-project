@@ -1,10 +1,11 @@
 ﻿import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { TicketsListService } from '../../../tickets/services/tickets-list.service';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgbDropdownModule],
   selector: 'app-recurring-tickets-table-assigned-user',
   templateUrl: './recurring-tickets-table-assigned-user.component.html',
   styleUrls: ['./recurring-tickets-table-assigned-user.component.scss'],

@@ -16,7 +16,7 @@ import { DocumentsEditCategoryItemComponent } from './documents-edit-category-it
 
 @Component({
   standalone: true,
-  imports: [PreloaderTicketComponent, DocumentsEditCategoryItemComponent, FormsModule, CommonModule],
+  imports: [PreloaderTicketComponent, DocumentsEditCategoryItemComponent, DisabledBtnDirective, FormsModule, CommonModule],
   selector: 'documents-edit-category',
   templateUrl: './documents-edit-category.component.html',
   styleUrls: ['./documents-edit-category.component.scss'],

@@ -5,10 +5,11 @@ import { UserDefaultSubscriptionComponent } from '../../../users-aside/user-defa
 import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
 import { MatChipListComponent } from 'src/app/components/shared/mat-chip-list/mat-chip-list.component';
 import { MatChipComponent } from 'src/app/components/shared/mat-chip/mat-chip.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [MatChipComponent, MatChipListComponent, CommonModule, MatFormFieldComponent],
+  imports: [MatChipComponent, MatChipListComponent, NgbDropdownModule, CommonModule, MatFormFieldComponent],
   selector: 'app-users-filter-default-subscription',
   templateUrl: './users-filter-default-subscription.component.html',
   styleUrls: ['./users-filter-default-subscription.component.scss'],

@@ -21,10 +21,11 @@ import { TicketDetailProfileFormUpdateNoteComponent } from '../ticket-detail-pro
 import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
 import { TicketDetailProfileFormUpdateHeaderComponent } from '../ticket-detail-profile-form-update/ticket-detail-profile-form-update-header/ticket-detail-profile-form-update-header.component';
 import { TicketProfileFormUpdateNoteListComponent } from '../ticket-profile-form-update-note-list/ticket-profile-form-update-note-list.component';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   standalone: true,
-  imports: [PreloaderTicketComponent, TicketDetailProfileFormUpdateHeaderComponent, TicketProfileFormUpdateNoteListComponent, CommonModule],
+  imports: [PreloaderTicketComponent, DisabledBtnDirective, TicketDetailProfileFormUpdateHeaderComponent, TicketProfileFormUpdateNoteListComponent, CommonModule],
   selector: 'app-ticket-detail-note-modal',
   templateUrl: './ticket-detail-note-modal.component.html',
   styleUrls: ['./ticket-detail-note-modal.component.scss'],

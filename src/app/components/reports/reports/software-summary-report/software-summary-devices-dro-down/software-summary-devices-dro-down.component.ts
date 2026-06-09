@@ -1,11 +1,12 @@
 ﻿import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, MatErrorComponent],
+  imports: [CommonModule, MatErrorComponent, NgbDropdownModule],
   selector: 'software-summary-devices-dro-down',
   templateUrl: './software-summary-devices-dro-down.component.html',
   styleUrls: ['./software-summary-devices-dro-down.component.scss'],

@@ -11,7 +11,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { ManageCardsService } from 'src/app/services/manage-cards/manage-cards.service';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { ManageCardsStateService } from 'src/app/states/manage-cards/manage-cards-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVE_CARD } from 'src/app/const/confirm';
@@ -22,7 +22,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, CommonModule, InfiniteScrollModule],
+  imports: [MatErrorComponent, CommonModule, InfiniteScrollModule, NgbDropdownModule],
   selector: 'app-payments-cards',
   templateUrl: './payments-cards.component.html',
   styleUrls: ['./payments-cards.component.scss'],

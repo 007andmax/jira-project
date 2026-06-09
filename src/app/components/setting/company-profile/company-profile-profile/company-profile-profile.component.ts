@@ -17,12 +17,13 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
 import { CompanyTimeZoneComponent } from 'src/app/components/companies/company-time-zone/company-time-zone.component';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 declare var google: any;
 declare var $: any;
 @Component({
   standalone: true,
-  imports: [CompanyTimeZoneComponent, DropDownComponent, CommonModule],
+  imports: [CompanyTimeZoneComponent, NgxMaskModule.forRoot(), DropDownComponent, CommonModule],
   selector: 'app-company-profile-profile',
   templateUrl: './company-profile-profile.component.html',
   styleUrls: ['./company-profile-profile.component.scss']

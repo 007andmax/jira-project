@@ -18,7 +18,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [PreloaderTicketComponent, InfiniteScrollModule, MarketingEmailUsersAddItemComponent, FormsModule, CommonModule],
+  imports: [PreloaderTicketComponent, InfiniteScrollModule, DisabledBtnDirective, MarketingEmailUsersAddItemComponent, FormsModule, CommonModule],
   selector: 'marketing-email-users-add',
   templateUrl: './marketing-email-users-add.component.html',
   styleUrls: ['./marketing-email-users-add.component.scss'],

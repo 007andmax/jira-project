@@ -2,7 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MarketingSubscriptionType } from 'src/app/components/setting/marketing-email/marketing-subscription-type/class/marketing-subscription-type';
 import { USER_SUBSCRIPTION_TYPE_CUSTOM, USER_SUBSCRIPTION_TYPE_DEFAULT } from 'src/app/const/user-subscription';
@@ -13,10 +13,11 @@ import { UsersFilterSubscriptionsItem } from './class/users-filter-subscriptions
 import { MatChipListComponent } from 'src/app/components/shared/mat-chip-list/mat-chip-list.component';
 import { MatChipComponent } from 'src/app/components/shared/mat-chip/mat-chip.component';
 import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [MatChipComponent, MatChipListComponent, MatFormFieldComponent, CommonModule],
+  imports: [MatChipComponent, ReactiveFormsModule, NgbDropdownModule, MatChipListComponent, MatFormFieldComponent, CommonModule],
   selector: 'users-filter-subscriptions',
   templateUrl: './users-filter-subscriptions.component.html',
   styleUrls: ['./users-filter-subscriptions.component.scss'],

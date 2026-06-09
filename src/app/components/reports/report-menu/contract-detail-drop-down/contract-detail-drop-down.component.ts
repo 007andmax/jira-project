@@ -1,11 +1,12 @@
 ﻿import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, MatErrorComponent],
+  imports: [CommonModule, MatErrorComponent, NgbDropdownModule],
   selector: 'contract-detail-drop-down',
   templateUrl: './contract-detail-drop-down.component.html',
   styleUrls: ['./contract-detail-drop-down.component.scss'],

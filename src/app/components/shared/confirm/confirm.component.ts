@@ -10,7 +10,7 @@ import { PreloaderTicketComponent } from '../preloader-ticket/preloader-ticket.c
 
 @Component({
   standalone: true,
-  imports: [PreloaderTicketComponent, CommonModule],
+  imports: [PreloaderTicketComponent, CommonModule, DisabledBtnDirective],
   selector: 'app-confirm',
   templateUrl: './confirm.component.html',
   styleUrls: ['./confirm.component.scss']

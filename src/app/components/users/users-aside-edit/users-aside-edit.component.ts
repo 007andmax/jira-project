@@ -35,10 +35,11 @@ import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
 import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
 import { UserCustomSubscriptionComponent } from '../users-aside/user-custom-subscription/user-custom-subscription.component';
 import { UserDefaultSubscriptionComponent } from '../users-aside/user-default-subscription/user-default-subscription.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, CompanyTagsComponent, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, CompanyDropDownComponent, UserCustomSubscriptionComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
+  imports: [DynamicTooltipComponent, NgxMaskModule.forRoot(), DisabledBtnDirective, CompanyTagsComponent, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, CompanyDropDownComponent, UserCustomSubscriptionComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'users-aside-edit',
   templateUrl: './users-aside-edit.component.html',
   styleUrls: ['./users-aside-edit.component.scss'],

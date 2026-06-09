@@ -1,7 +1,7 @@
 ﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { QUOTE_MODAL_ACTION_ADD } from 'src/app/const/quote';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
@@ -18,7 +18,7 @@ import { QuoteAsidePreviewBodyComponent } from '../quote-aside-preview/quote-asi
 
 @Component({
   standalone: true,
-  imports: [PreloaderTicketComponent, QuoteAsidePreviewBodyComponent, CommonModule, QuoteAsideAddBodyComponent],
+  imports: [PreloaderTicketComponent, DisabledBtnDirective, NgbDropdownModule, QuoteAsidePreviewBodyComponent, CommonModule, QuoteAsideAddBodyComponent],
   selector: 'app-quote-aside-add',
   templateUrl: './quote-aside-add.component.html',
   styleUrls: ['./quote-aside-add.component.scss'],

@@ -15,7 +15,7 @@ import { AbstractControl, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup
 import { PhoneNumber } from 'src/class/phone-number';
 import { UserCustomerCompaniesInfo } from '../../users/class/user-customer-companies-info';
 import { TechUsersService } from 'src/app/services/setting/tech-users.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsersCheckUseComponent } from '../../users/users-check-use/users-check-use.component';
 import { UsersTableService } from '../../users/users-table/services/users-table.service';
 import { AlertComponent } from '../../shared/alert/alert.component';
@@ -29,10 +29,11 @@ import { CompanyTagsComponent } from '../../companies/company-tags/company-tags.
 import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
 import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
 import { UserCustomSubscriptionComponent } from '../../users/users-aside/user-custom-subscription/user-custom-subscription.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @Component({
   standalone: true,
-  imports: [CompanyTagsComponent, DynamicTooltipComponent, MatErrorComponent, UserCustomSubscriptionComponent, CommonModule],
+  imports: [CompanyTagsComponent, NgxMaskModule.forRoot(), NgbDropdownModule, DynamicTooltipComponent, MatErrorComponent, UserCustomSubscriptionComponent, CommonModule],
   selector: 'app-users-details-left-panel',
   templateUrl: './users-details-left-panel.component.html',
   styleUrls: ['./users-details-left-panel.component.scss'],

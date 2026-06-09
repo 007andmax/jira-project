@@ -17,10 +17,11 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 import { Subscription } from 'rxjs';
 import { TicketStateService } from '../../ticket-edit-aside/services/ticket-state.service';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, CommonModule],
+  imports: [MatErrorComponent, CommonModule, NgbDropdownModule],
   selector: 'ticket-detail-change-priority',
   templateUrl: './ticket-detail-change-priority.component.html',
   styleUrls: ['./ticket-detail-change-priority.component.scss']

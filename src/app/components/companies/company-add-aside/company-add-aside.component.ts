@@ -14,7 +14,7 @@ import { CompanyAddAsideShortComponent } from './company-add-aside-short/company
 
 @Component({
   standalone: true,
-  imports: [PreloaderTicketComponent, CompanyAddAsideFullComponent, CompanyAddAsideShortComponent, CommonModule],
+  imports: [PreloaderTicketComponent, CompanyAddAsideFullComponent, DisabledBtnDirective, CompanyAddAsideShortComponent, CommonModule],
   selector: 'app-company-add-aside',
   templateUrl: './company-add-aside.component.html',
   styleUrls: ['./company-add-aside.component.scss']

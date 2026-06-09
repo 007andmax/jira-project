@@ -23,10 +23,11 @@ import { ServicesListComponent } from '../../shared/services-list/services-list.
 import { UploadAreaProgressComponent } from '../../shared/upload-area/upload-area-progress/upload-area-progress.component';
 import { TasksAddAssignedUsersComponent } from '../tasks-add/tasks-add-assigned-users/tasks-add-assigned-users.component';
 import { TasksAddAssociateTicketsComponent } from '../tasks-add/tasks-add-associate-tickets/tasks-add-associate-tickets.component';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   standalone: true,
-  imports: [DatePickerComponent, DropDownComponent, TasksDatePickerComponent, MatErrorComponent, PreloaderTicketComponent, ServicesListComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
+  imports: [DatePickerComponent, DropDownComponent, DisabledBtnDirective, TasksDatePickerComponent, MatErrorComponent, PreloaderTicketComponent, ServicesListComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
   selector: 'app-tasks-edit',
   templateUrl: './tasks-edit.component.html',
   styleUrls: ['./tasks-edit.component.scss'],

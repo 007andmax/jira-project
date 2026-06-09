@@ -24,7 +24,7 @@ import { DraftEmailRecipientsComponent } from './draft-email-recipients/draft-em
 import { DraftEmailUserRecipientsComponent } from './draft-email-user-recipients/draft-email-user-recipients.component';
 @Component({
   standalone: true,
-  imports: [DraftEmailRecipientsComponent, UploadAreaComponent, MatErrorComponent, PreloaderTicketComponent, DraftEmailUserRecipientsComponent, FormsModule, CommonModule],
+  imports: [DraftEmailRecipientsComponent, UploadAreaComponent, DisabledBtnDirective, MatErrorComponent, PreloaderTicketComponent, DraftEmailUserRecipientsComponent, FormsModule, CommonModule],
   selector: 'app-draft-email',
   templateUrl: './draft-email.component.html',
   styleUrls: ['./draft-email.component.scss'],

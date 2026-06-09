@@ -9,16 +9,15 @@ import { Subscription } from 'rxjs';
 import { SubscriptionServicesService } from 'src/app/services/subscription-services/subscription-services.service';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { PreloaderTicketComponent } from '../../../shared/preloader-ticket/preloader-ticket.component';
-import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../../directives/disabled-btn/disabled-btn.directive';
 import { ContractsAsideSelectTypeComponent } from './contracts-aside-select-type/contracts-aside-select-type.component';
 import { NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-contracts-aside',
-    templateUrl: './contracts-aside.component.html',
-    styleUrls: ['./contracts-aside.component.scss'],
-    standalone: true,
-    imports: [NgIf, ContractsAsideSelectTypeComponent, ContractsAsideHourlyBillingComponent, ContractsAsideBlockTimeBillingComponent, ContractsAsideUserDeviceBillingComponent, ContractsAsideProductServiceContractsComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
+  selector: 'app-contracts-aside',
+  templateUrl: './contracts-aside.component.html',
+  styleUrls: ['./contracts-aside.component.scss'],
+  standalone: true,
+  imports: [NgIf, ContractsAsideSelectTypeComponent, DisabledBtnDirective, ContractsAsideHourlyBillingComponent, ContractsAsideBlockTimeBillingComponent, ContractsAsideUserDeviceBillingComponent, ContractsAsideProductServiceContractsComponent, PreloaderTicketComponent]
 })
 export class ContractsAsideComponent implements OnInit, OnDestroy {
   @ViewChild('hourlyContract', { static: false }) hourlyContract: ContractsAsideHourlyBillingComponent;

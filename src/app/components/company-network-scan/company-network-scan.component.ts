@@ -31,7 +31,7 @@ import { NetworkScanCredentialsAsideComponent } from '../company-network-scan-be
 
 @Component({
   standalone: true,
-  imports: [CompanyNetworkScanItemComponent, CompanyNetworkScanNoExistDevicesComponent, NetworkScanCredentialsAsideComponent, FormsModule, CommonModule],
+  imports: [CompanyNetworkScanItemComponent, DisabledBtnDirective, CompanyNetworkScanNoExistDevicesComponent, NetworkScanCredentialsAsideComponent, FormsModule, CommonModule],
   selector: 'company-network-scan',
   templateUrl: './company-network-scan.component.html',
   styleUrls: ['./company-network-scan.component.scss'],

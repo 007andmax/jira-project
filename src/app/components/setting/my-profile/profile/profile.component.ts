@@ -32,11 +32,12 @@ import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 declare var google: any;
 @Component({
   standalone: true,
-  imports: [DropDownComponent, CommonModule],
+  imports: [DropDownComponent, NgxMaskModule.forRoot(), CommonModule],
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']

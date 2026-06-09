@@ -33,21 +33,24 @@ For more info see: https://angular.io/guide/build#configuring-commonjs-dependenc
 
 
 
+./src/app/components/tickets/tickets-dashboard/tech-tickets-widget/tech-tickets-widget.component.ts:48:12-28 - Error: export 'NgbButtonsModule' (imported as 'NgbButtonsModule') was not found in '@ng-bootstrap/ng-bootstrap' (possible exports: ModalDismissReasons, NgbAccordion, NgbAccordionBody, NgbAccordionButton, NgbAccordionCollapse, NgbAccordionConfig, NgbAccordionDirective, NgbAccordionHeader, NgbAccordionItem, NgbAccordionModule, NgbAccordionToggle, NgbActiveModal, NgbActiveOffcanvas, NgbAlert, NgbAlertConfig, NgbAlertModule, NgbCalendar, NgbCalendarBuddhist, NgbCalendarGregorian, NgbCalendarHebrew, NgbCalendarIslamicCivil, NgbCalendarIslamicUmalqura, NgbCalendarPersian, NgbCarousel, NgbCarouselConfig, NgbCarouselModule, NgbCollapse, NgbCollapseConfig, NgbCollapseModule, NgbConfig, NgbDate, NgbDateAdapter, NgbDateNativeAdapter, NgbDateNativeUTCAdapter, NgbDateParserFormatter, NgbDateStructAdapter, NgbDatepicker, NgbDatepickerConfig, NgbDatepickerContent, NgbDatepickerI18n, NgbDatepickerI18nDefault, NgbDatepickerI18nHebrew, NgbDatepickerKeyboardService, NgbDatepickerModule, NgbDatepickerMonth, NgbDropdown, NgbDropdownAnchor, NgbDropdownConfig, NgbDropdownItem, NgbDropdownMenu, NgbDropdownModule, NgbDropdownToggle, NgbHighlight, NgbInputDatepicker, NgbInputDatepickerConfig, NgbModal, NgbModalConfig, NgbModalModule, NgbModalRef, NgbModule, NgbNav, NgbNavConfig, NgbNavContent, NgbNavItem, NgbNavItemRole, NgbNavLink, NgbNavLinkBase, NgbNavLinkButton, NgbNavModule, NgbNavOutlet, NgbNavPane, NgbNavbar, NgbOffcanvas, NgbOffcanvasConfig, NgbOffcanvasModule, NgbOffcanvasRef, NgbPagination, NgbPaginationConfig, NgbPaginationEllipsis, NgbPaginationFirst, NgbPaginationLast, NgbPaginationModule, NgbPaginationNext, NgbPaginationNumber, NgbPaginationPages, NgbPaginationPrevious, NgbPanel, NgbPanelContent, NgbPanelHeader, NgbPanelTitle, NgbPanelToggle, NgbPopover, NgbPopoverConfig, NgbPopoverModule, NgbProgressbar, NgbProgressbarConfig, NgbProgressbarModule, NgbRating, NgbRatingConfig, NgbRatingModule, NgbScrollSpy, NgbScrollSpyConfig, NgbScrollSpyFragment, NgbScrollSpyItem, NgbScrollSpyMenu, NgbScrollSpyModule, NgbScrollSpyService, NgbSlide, NgbSlideEventDirection, NgbSlideEventSource, NgbTimeAdapter, NgbTimepicker, NgbTimepickerConfig, NgbTimepickerI18n, NgbTimepickerModule, NgbToast, NgbToastConfig, NgbToastHeader, NgbToastModule, NgbTooltip, NgbTooltipConfig, NgbTooltipModule, NgbTypeahead, NgbTypeaheadConfig, NgbTypeaheadModule, OffcanvasDismissReasons)
+
 Error: src/app/app.component.ts:84:399 - error NG2011: The component 'PreviewFileComponent' appears in 'imports', but is not standalone and cannot be imported directly. It must be imported via an NgModule.
 
 84   imports: [CompanyAddAsideComponent, DraftEmailComponent, InventoryAddAsideComponent, InventoryEditAsideComponent, InvoicesAsideComponent, InvoicesAsidePreviewComponent, ManageCardsAddComponent, ManageCardsEditComponent, MapModalComponent, MarketingSubscriptionsAsideComponent, NonContractServicesAddComponent, NonContractServicesEditComponent, NotificationsComponent, PreviewAttachmentComponent, PreviewFileComponent, QuoteAsidePreviewComponent, ReportSendEmailComponent, TasksAddComponent, TasksEditComponent, TicketAddAsideComponent, UsersAsideComponent, BreadcrumbsComponent, CannedResponsesAsideComponent, HelpCenterInfoAsideComponent, ModalImageCropperComponent, UsersAsideEditComponent, RouterModule, CommonModule],
                                                                                                                                                                                                                                                                                                                                                                                                                  ~~~~~~~~~~~~~~~~~~~~
 
 
-Error: src/app/components/billing/billable/billable-aside/billable-aside.component.html:76:17 - error NG8002: Can't bind to 'placement' since it isn't a known property of 'div'.
+Error: src/app/app.component.ts:84:539 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
-76                 [placement]="'top-right'"
-                   ~~~~~~~~~~~~~~~~~~~~~~~~~
+84   imports: [CompanyAddAsideComponent, DraftEmailComponent, InventoryAddAsideComponent, InventoryEditAsideComponent, InvoicesAsideComponent, InvoicesAsidePreviewComponent, ManageCardsAddComponent, ManageCardsEditComponent, MapModalComponent, MarketingSubscriptionsAsideComponent, NonContractServicesAddComponent, NonContractServicesEditComponent, NotificationsComponent, PreviewAttachmentComponent, PreviewFileComponent, QuoteAsidePreviewComponent, ReportSendEmailComponent, TasksAddComponent, TasksEditComponent, TicketAddAsideComponent, UsersAsideComponent, BreadcrumbsComponent, CannedResponsesAsideComponent, HelpCenterInfoAsideComponent, ModalImageCropperComponent, UsersAsideEditComponent, RouterModule, CommonModule],
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/billing/billable/billable-aside/billable-aside.component.ts:30:16
-    30   templateUrl: './billable-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component BillableAsideComponent.
+
+Error: src/app/app.component.ts:84:671 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
+
+84   imports: [CompanyAddAsideComponent, DraftEmailComponent, InventoryAddAsideComponent, InventoryEditAsideComponent, InvoicesAsideComponent, InvoicesAsidePreviewComponent, ManageCardsAddComponent, ManageCardsEditComponent, MapModalComponent, MarketingSubscriptionsAsideComponent, NonContractServicesAddComponent, NonContractServicesEditComponent, NotificationsComponent, PreviewAttachmentComponent, PreviewFileComponent, QuoteAsidePreviewComponent, ReportSendEmailComponent, TasksAddComponent, TasksEditComponent, TicketAddAsideComponent, UsersAsideComponent, BreadcrumbsComponent, CannedResponsesAsideComponent, HelpCenterInfoAsideComponent, ModalImageCropperComponent, UsersAsideEditComponent, RouterModule, CommonModule],
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/billing/billable/billable-aside/invoice-form/invoice-change-address/invoice-change-address.module.ts:14:9 - error NG6002: 'PreviewPhoneMaskModule' does not appear to be an NgModule class.
@@ -61,16 +64,28 @@ Error: src/app/components/billing/billable/billable-aside/invoice-form/invoice-c
     Is it missing an @NgModule annotation?
 
 
-Error: src/app/components/billing/billable/billable-aside/invoice-form/invoice-form.component.ts:41:275 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
+Error: src/app/components/billing/billable/billable-aside/invoice-form/invoice-form.component.ts:41:297 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
-41   imports: [DatePickerComponent, InvoiceDiscountComponent, TextAreaDirective, InvoiceFormTicketEditComponent, InvoiceFormTicketInfoComponent, InvoiceRegularNoteComponent, MatErrorComponent, PreloaderTicketComponent, InvoiceChangeAddressComponent, FormsModule, CommonModule, InvoiceFormEditCustomerComponent],
-                                                                                                                                                                                                                                                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+41   imports: [DatePickerComponent, DisabledBtnDirective, InvoiceDiscountComponent, TextAreaDirective, InvoiceFormTicketEditComponent, InvoiceFormTicketInfoComponent, InvoiceRegularNoteComponent, MatErrorComponent, PreloaderTicketComponent, InvoiceChangeAddressComponent, FormsModule, CommonModule, InvoiceFormEditCustomerComponent],
+                                                                                                                                                                                                                                                                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/billing/billable/billable-aside/invoice-preview/invoice-preview.component.ts:15:38 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
+
+15   imports: [DynamicTooltipComponent, PreviewPhoneMaskComponent, CommonModule],
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/billing/billable/billable-tickets/billable-tickets.module.ts:11:47 - error TS2307: Cannot find module '../billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.module' or its corresponding type declarations.
 
 11 import { InvoiceFormEditCustomerModule } from '../billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.module';
                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/billing/invoices/invoices-aside-preview/invoices-aside-preview.component.ts:21:38 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
+
+21   imports: [DynamicTooltipComponent, PreviewPhoneMaskComponent, CommonModule],
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/billing/invoices/invoices-aside-preview/invoices-aside-preview.module.ts:14:5 - error NG6002: 'PreviewPhoneMaskModule' does not appear to be an NgModule class.
@@ -84,28 +99,6 @@ Error: src/app/components/billing/invoices/invoices-aside-preview/invoices-aside
     Is it missing an @NgModule annotation?
 
 
-Error: src/app/components/billing/invoices/invoices-item/invoices-item.component.html:83:9 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
-
-83         [container]="'body'"
-           ~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/billing/invoices/invoices-item/invoices-item.component.ts:21:16
-    21   templateUrl: './invoices-item.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component InvoicesItemComponent.
-
-
-Error: src/app/components/billing/manage-cards/manage-cards-table/manage-cards-table.component.html:35:13 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
-
-35             [container]="'body'"
-               ~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/billing/manage-cards/manage-cards-table/manage-cards-table.component.ts:17:16
-    17   templateUrl: './manage-cards-table.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ManageCardsTableComponent.
-
-
 Error: src/app/components/billing/payments/payment-item/payment-item.component.html:59:13 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
 
 59             [ngbTooltip]="tipContent"
@@ -117,37 +110,10 @@ Error: src/app/components/billing/payments/payment-item/payment-item.component.h
     Error occurs in the template of component PaymentItemComponent.
 
 
-Error: src/app/components/billing/payments/payment-item/payment-item.component.html:81:9 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
+Error: src/app/components/billing/payments/payments-aside/payments-aside.component.ts:20:13 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
-81         [container]="'body'"
-           ~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/billing/payments/payment-item/payment-item.component.ts:19:16
-    19   templateUrl: './payment-item.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component PaymentItemComponent.
-
-
-Error: src/app/components/billing/payments/payments-cards/payments-cards.component.html:3:10 - error NG8003: No directive found with exportAs 'ngbDropdown'.
-
-3     #dp="ngbDropdown"
-           ~~~~~~~~~~~
-
-  src/app/components/billing/payments/payments-cards/payments-cards.component.ts:27:16
-    27   templateUrl: './payments-cards.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component PaymentsCardsComponent.
-
-
-Error: src/app/components/billing/payments/payments-cards/payments-cards.component.html:5:5 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
-
-5     [container]="container"
-      ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/billing/payments/payments-cards/payments-cards.component.ts:27:16
-    27   templateUrl: './payments-cards.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component PaymentsCardsComponent.
+20   imports: [PreviewPhoneMaskComponent, CommonModule],
+               ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/billing/payments/payments.module.ts:38:5 - error NG6002: 'PreviewPhoneMaskModule' does not appear to be an NgModule class.
@@ -159,17 +125,6 @@ Error: src/app/components/billing/payments/payments.module.ts:38:5 - error NG600
     22 export class PreviewPhoneMaskModule { }
                     ~~~~~~~~~~~~~~~~~~~~~~
     Is it missing an @NgModule annotation?
-
-
-Error: src/app/components/billing/payments/refund-payment/refund-payment.component.html:85:36 - error NG8003: No directive found with exportAs 'disabled'.
-
-85                 #refundPaymentBtn="disabled"
-                                      ~~~~~~~~
-
-  src/app/components/billing/payments/refund-payment/refund-payment.component.ts:15:16
-    15   templateUrl: './refund-payment.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component RefundPaymentComponent.
 
 
 Error: src/app/components/billing/quotes/quote-aside-add/product-item-quote/product-item-quote.component.html:14:13 - error NG8002: Can't bind to 'money' since it isn't a known property of 'input'.
@@ -194,28 +149,6 @@ Error: src/app/components/billing/quotes/quote-aside-add/product-item-quote/prod
     Error occurs in the template of component ProductItemQuoteComponent.
 
 
-Error: src/app/components/billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component.html:4:5 - error NG8002: Can't bind to 'autoClose' since it isn't a known property of 'div'.
-
-4     [autoClose]="'outside'"
-      ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component.ts:11:16
-    11   templateUrl: './product-list-quote.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ProductListQuoteComponent.
-
-
-Error: src/app/components/billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component.html:5:16 - error NG8003: No directive found with exportAs 'ngbDropdown'.
-
-5     #products="ngbDropdown"
-                 ~~~~~~~~~~~
-
-  src/app/components/billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component.ts:11:16
-    11   templateUrl: './product-list-quote.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ProductListQuoteComponent.
-
-
 Error: src/app/components/billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component.html:48:9 - error NG8001: 'ngb-accordion' is not a known element:
 1. If 'ngb-accordion' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
 2. If 'ngb-accordion' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
@@ -229,8 +162,8 @@ Error: src/app/components/billing/quotes/quote-aside-add/product-list-quote/prod
 51         >
    ~~~~~~~~~
 
-  src/app/components/billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component.ts:11:16
-    11   templateUrl: './product-list-quote.component.html',
+  src/app/components/billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component.ts:12:16
+    12   templateUrl: './product-list-quote.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component ProductListQuoteComponent.
 
@@ -240,8 +173,8 @@ Error: src/app/components/billing/quotes/quote-aside-add/product-list-quote/prod
 49             #acc="ngbAccordion"
                      ~~~~~~~~~~~~
 
-  src/app/components/billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component.ts:11:16
-    11   templateUrl: './product-list-quote.component.html',
+  src/app/components/billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component.ts:12:16
+    12   templateUrl: './product-list-quote.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component ProductListQuoteComponent.
 
@@ -253,8 +186,8 @@ Error: src/app/components/billing/quotes/quote-aside-add/product-list-quote/prod
 52             <ngb-panel *ngFor="let item of itemList | filter : resetSearch : search">
                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component.ts:11:16
-    11   templateUrl: './product-list-quote.component.html',
+  src/app/components/billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component.ts:12:16
+    12   templateUrl: './product-list-quote.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component ProductListQuoteComponent.
 
@@ -264,8 +197,8 @@ Error: src/app/components/billing/quotes/quote-aside-add/product-list-quote/prod
 52             <ngb-panel *ngFor="let item of itemList | filter : resetSearch : search">
                                                          ~~~~~~
 
-  src/app/components/billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component.ts:11:16
-    11   templateUrl: './product-list-quote.component.html',
+  src/app/components/billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component.ts:12:16
+    12   templateUrl: './product-list-quote.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component ProductListQuoteComponent.
 
@@ -274,61 +207,6 @@ Error: src/app/components/billing/quotes/quote-aside-add/quote-aside-add-body/qu
 
 38   imports: [DropDownComponent, InvoiceRegularNoteComponent, MatErrorComponent, InvoiceFormEditCustomerComponent, ProductItemQuoteComponent, ProductListQuoteComponent, ServiceItemQuoteComponent, QuoteAsideAddChangeAddressComponent, FormsModule, CommonModule],
                                                                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/billing/quotes/quote-aside-add/quote-aside-add.component.html:27:17 - error NG8002: Can't bind to 'placement' since it isn't a known property of 'div'.
-
-27                 [placement]="'top-right'"
-                   ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/billing/quotes/quote-aside-add/quote-aside-add.component.ts:23:16
-    23   templateUrl: './quote-aside-add.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component QuoteAsideAddComponent.
-
-
-Error: src/app/components/billing/quotes/quote-aside-add/quote-aside-add.component.html:37:45 - error NG8003: No directive found with exportAs 'disabled'.
-
-37                         #saveAndApproveBtn="disabled"
-                                               ~~~~~~~~
-
-  src/app/components/billing/quotes/quote-aside-add/quote-aside-add.component.ts:23:16
-    23   templateUrl: './quote-aside-add.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component QuoteAsideAddComponent.
-
-
-Error: src/app/components/billing/quotes/quote-aside-add/quote-aside-add.component.html:46:46 - error NG8003: No directive found with exportAs 'disabled'.
-
-46                         #saveAndDownloadBtn="disabled"
-                                                ~~~~~~~~
-
-  src/app/components/billing/quotes/quote-aside-add/quote-aside-add.component.ts:23:16
-    23   templateUrl: './quote-aside-add.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component QuoteAsideAddComponent.
-
-
-Error: src/app/components/billing/quotes/quote-aside-add/quote-aside-add.component.html:55:42 - error NG8003: No directive found with exportAs 'disabled'.
-
-55                         #saveAndSendBtn="disabled"
-                                            ~~~~~~~~
-
-  src/app/components/billing/quotes/quote-aside-add/quote-aside-add.component.ts:23:16
-    23   templateUrl: './quote-aside-add.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component QuoteAsideAddComponent.
-
-
-Error: src/app/components/billing/quotes/quote-aside-add/quote-aside-add.component.html:66:46 - error NG8003: No directive found with exportAs 'disabled'.
-
-66                         #saveAndContinueBtn="disabled"
-                                                ~~~~~~~~
-
-  src/app/components/billing/quotes/quote-aside-add/quote-aside-add.component.ts:23:16
-    23   templateUrl: './quote-aside-add.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component QuoteAsideAddComponent.
 
 
 Error: src/app/components/billing/quotes/quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component.html:14:13 - error NG8002: Can't bind to 'money' since it isn't a known property of 'input'.
@@ -370,48 +248,10 @@ Error: src/app/components/billing/quotes/quote-aside-edit/quote-aside-edit.compo
     Error occurs in the template of component QuoteAsideEditComponent.
 
 
-Error: src/app/components/billing/quotes/quote-aside-edit/quote-aside-edit.component.html:43:41 - error NG8003: No directive found with exportAs 'disabled'.
+Error: src/app/components/billing/quotes/quote-aside-preview/quote-aside-preview-body/quote-aside-preview-body.component.ts:12:13 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
-43                     #saveAndApproveBtn="disabled"
-                                           ~~~~~~~~
-
-  src/app/components/billing/quotes/quote-aside-edit/quote-aside-edit.component.ts:22:16
-    22   templateUrl: './quote-aside-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component QuoteAsideEditComponent.
-
-
-Error: src/app/components/billing/quotes/quote-aside-edit/quote-aside-edit.component.html:52:42 - error NG8003: No directive found with exportAs 'disabled'.
-
-52                     #saveAndDownloadBtn="disabled"
-                                            ~~~~~~~~
-
-  src/app/components/billing/quotes/quote-aside-edit/quote-aside-edit.component.ts:22:16
-    22   templateUrl: './quote-aside-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component QuoteAsideEditComponent.
-
-
-Error: src/app/components/billing/quotes/quote-aside-edit/quote-aside-edit.component.html:61:38 - error NG8003: No directive found with exportAs 'disabled'.
-
-61                     #saveAndSendBtn="disabled"
-                                        ~~~~~~~~
-
-  src/app/components/billing/quotes/quote-aside-edit/quote-aside-edit.component.ts:22:16
-    22   templateUrl: './quote-aside-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component QuoteAsideEditComponent.
-
-
-Error: src/app/components/billing/quotes/quote-aside-edit/quote-aside-edit.component.html:72:42 - error NG8003: No directive found with exportAs 'disabled'.
-
-72                     #saveAndContinueBtn="disabled"
-                                            ~~~~~~~~
-
-  src/app/components/billing/quotes/quote-aside-edit/quote-aside-edit.component.ts:22:16
-    22   templateUrl: './quote-aside-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component QuoteAsideEditComponent.
+12   imports: [PreviewPhoneMaskComponent, CommonModule],
+               ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/billing/quotes/quote-aside-preview/quote-aside-preview-body/quote-aside-preview-body.module.ts:14:9 - error NG6002: 'PreviewPhoneMaskModule' does not appear to be an NgModule class.
@@ -440,17 +280,6 @@ Error: src/app/components/billing/quotes/quote-aside-preview/quote-aside-preview
 
 17         QuoteAsidePreviewBodyModule,
            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/billing/quotes/quotes-table/quotes-item/quotes-item.component.html:85:9 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
-
-85         [container]="'body'"
-           ~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/billing/quotes/quotes-table/quotes-item/quotes-item.component.ts:17:16
-    17   templateUrl: './quotes-item.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component QuotesItemComponent.
 
 
 Error: src/app/components/billing/quotes/quotes.module.ts:19:47 - error TS2307: Cannot find module '../billable/billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.module' or its corresponding type declarations.
@@ -482,103 +311,16 @@ Error: src/app/components/billing/quotes/quotes.module.ts:54:9 - error NG6002: T
            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Error: src/app/components/companies/companies-table/companies-table.component.html:22:13 - error NG8002: Can't bind to 'link' since it isn't a known property of 'a'.
+Error: src/app/components/companies/companies-table/companies-table.component.ts:28:57 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
-22             [link]="getCompanyDashboardLink()"
-               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/companies-table/companies-table.component.ts:30:16
-    30   templateUrl: './companies-table.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompaniesTableComponent.
+28   imports: [DynamicTooltipComponent, NgbDropdownModule, PreviewPhoneMaskComponent, FormsModule, CommonModule],
+                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Error: src/app/components/companies/companies-table/companies-table.component.html:57:13 - error NG8002: Can't bind to 'link' since it isn't a known property of 'a'.
+Error: src/app/components/companies/companies-users-details/companies-users-details.component.ts:17:42 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
-57             [link]="getCompanyDashboardLink()"
-               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/companies-table/companies-table.component.ts:30:16
-    30   templateUrl: './companies-table.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompaniesTableComponent.
-
-
-Error: src/app/components/companies/companies-table/companies-table.component.html:71:13 - error NG8002: Can't bind to 'link' since it isn't a known property of 'a'.
-
-71             [link]="getCompanyDashboardLink()"
-               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/companies-table/companies-table.component.ts:30:16
-    30   templateUrl: './companies-table.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompaniesTableComponent.
-
-
-Error: src/app/components/companies/companies-table/companies-table.component.html:85:13 - error NG8002: Can't bind to 'link' since it isn't a known property of 'a'.
-
-85             [link]="getCompanyDashboardLink()"
-               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/companies-table/companies-table.component.ts:30:16
-    30   templateUrl: './companies-table.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompaniesTableComponent.
-
-
-Error: src/app/components/companies/companies-table/companies-table.component.html:108:13 - error NG8002: Can't bind to 'link' since it isn't a known property of 'a'.
-
-108             [link]="getCompanyDashboardLink()"
-                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/companies-table/companies-table.component.ts:30:16
-    30   templateUrl: './companies-table.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompaniesTableComponent.
-
-
-Error: src/app/components/companies/companies-table/companies-table.component.html:122:13 - error NG8002: Can't bind to 'link' since it isn't a known property of 'a'.
-
-122             [link]="getCompanyDashboardLink()"
-                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/companies-table/companies-table.component.ts:30:16
-    30   templateUrl: './companies-table.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompaniesTableComponent.
-
-
-Error: src/app/components/companies/companies-table/companies-table.component.html:136:13 - error NG8002: Can't bind to 'link' since it isn't a known property of 'a'.
-
-136             [link]="getCompanyDashboardLink()"
-                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/companies-table/companies-table.component.ts:30:16
-    30   templateUrl: './companies-table.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompaniesTableComponent.
-
-
-Error: src/app/components/companies/companies-table/companies-table.component.html:150:13 - error NG8002: Can't bind to 'link' since it isn't a known property of 'a'.
-
-150             [link]="getCompanyDashboardLink()"
-                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/companies-table/companies-table.component.ts:30:16
-    30   templateUrl: './companies-table.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompaniesTableComponent.
-
-
-Error: src/app/components/companies/companies-table/companies-table.component.html:186:13 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
-
-186             [container]="'body'"
-                ~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/companies-table/companies-table.component.ts:30:16
-    30   templateUrl: './companies-table.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompaniesTableComponent.
+17   imports: [UsersDetailsHeaderComponent, UsersDetailsLeftPanelComponent, UsersDetailsTabCompaniesComponent, UsersDetailsTabDocumentsComponent, UsersDetailsTabMessagesComponent, UsersDetailsTabPasswordsComponent, UsersDetailsTabTicketsComponent, CommonModule],
+                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/companies/companies-users-details/companies-users-details.module.ts:20:5 - error NG6002: 'UsersDetailsLeftPanelModule' does not appear to be an NgModule class.
@@ -598,158 +340,22 @@ Error: src/app/components/companies/companies-users-details/companies-users-deta
        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Error: src/app/components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component.html:187:17 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
+Error: src/app/components/companies/companies.component.ts:32:60 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
-187                 [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component.ts:39:16
-    39   templateUrl: './company-add-aside-full.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyAddAsideFullComponent.
+32   imports: [CompaniesTableComponent, InfiniteScrollModule, CompanyEditAsideComponent, CompaniesHeaderComponent, CompaniesFilterComponent, FormsModule, CommonModule],
+                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Error: src/app/components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component.html:188:17 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
+Error: src/app/components/companies/company-add-aside/company-add-aside.component.ts:17:39 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
-188                 [dropSpecialCharacters]="false"
-                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component.ts:39:16
-    39   templateUrl: './company-add-aside-full.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyAddAsideFullComponent.
+17   imports: [PreloaderTicketComponent, CompanyAddAsideFullComponent, DisabledBtnDirective, CompanyAddAsideShortComponent, CommonModule],
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Error: src/app/components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component.html:300:17 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
+Error: src/app/components/companies/company-add-aside/company-add-aside.component.ts:17:91 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
-300                 [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component.ts:39:16
-    39   templateUrl: './company-add-aside-full.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyAddAsideFullComponent.
-
-
-Error: src/app/components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component.html:301:17 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-301                 [dropSpecialCharacters]="false"
-                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component.ts:39:16
-    39   templateUrl: './company-add-aside-full.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyAddAsideFullComponent.
-
-
-Error: src/app/components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component.html:422:29 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-422                             [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component.ts:39:16
-    39   templateUrl: './company-add-aside-full.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyAddAsideFullComponent.
-
-
-Error: src/app/components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component.html:423:29 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-423                             [dropSpecialCharacters]="false"
-                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component.ts:39:16
-    39   templateUrl: './company-add-aside-full.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyAddAsideFullComponent.
-
-
-Error: src/app/components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component.html:639:21 - error NG8002: Can't bind to 'maxHeight' since it isn't a known property of 'textarea'.
-
-639                     [maxHeight]="200"
-                        ~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-add-aside/company-add-aside-full/company-add-aside-full.component.ts:39:16
-    39   templateUrl: './company-add-aside-full.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyAddAsideFullComponent.
-
-
-Error: src/app/components/companies/company-add-aside/company-add-aside-short/company-add-aside-short.component.html:54:17 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-54                 [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-add-aside/company-add-aside-short/company-add-aside-short.component.ts:24:16
-    24   templateUrl: './company-add-aside-short.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyAddAsideShortComponent.
-
-
-Error: src/app/components/companies/company-add-aside/company-add-aside-short/company-add-aside-short.component.html:55:17 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-55                 [dropSpecialCharacters]="false"
-                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-add-aside/company-add-aside-short/company-add-aside-short.component.ts:24:16
-    24   templateUrl: './company-add-aside-short.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyAddAsideShortComponent.
-
-
-Error: src/app/components/companies/company-add-aside/company-add-aside-short/company-add-aside-short.component.html:196:29 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-196                             [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-add-aside/company-add-aside-short/company-add-aside-short.component.ts:24:16
-    24   templateUrl: './company-add-aside-short.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyAddAsideShortComponent.
-
-
-Error: src/app/components/companies/company-add-aside/company-add-aside-short/company-add-aside-short.component.html:197:29 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-197                             [dropSpecialCharacters]="false"
-                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-add-aside/company-add-aside-short/company-add-aside-short.component.ts:24:16
-    24   templateUrl: './company-add-aside-short.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyAddAsideShortComponent.
-
-
-Error: src/app/components/companies/company-add-aside/company-add-aside.component.html:35:26 - error NG8003: No directive found with exportAs 'disabled'.
-
-35                 #addBtn="disabled"
-                            ~~~~~~~~
-
-  src/app/components/companies/company-add-aside/company-add-aside.component.ts:19:16
-    19   templateUrl: './company-add-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyAddAsideComponent.
-
-
-Error: src/app/components/companies/company-add-aside/company-add-aside.component.html:46:26 - error NG8003: No directive found with exportAs 'disabled'.
-
-46                 #addBtn="disabled"
-                            ~~~~~~~~
-
-  src/app/components/companies/company-add-aside/company-add-aside.component.ts:19:16
-    19   templateUrl: './company-add-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyAddAsideComponent.
-
-
-Error: src/app/components/companies/company-documents/company-documents-table/company-documents-table.component.html:57:13 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
-
-57             [container]="'body'"
-               ~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-documents/company-documents-table/company-documents-table.component.ts:9:16
-    9   templateUrl: './company-documents-table.component.html',
-                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyDocumentsTableComponent.
+17   imports: [PreloaderTicketComponent, CompanyAddAsideFullComponent, DisabledBtnDirective, CompanyAddAsideShortComponent, CommonModule],
+                                                                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/companies/company-documents/company-documents.component.html:2:5 - error NG8001: 'documents-header' is not a known element:
@@ -798,94 +404,6 @@ Error: src/app/components/companies/company-documents/company-documents.componen
     16   templateUrl: './company-documents.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component CompanyDocumentsComponent.
-
-
-Error: src/app/components/companies/company-edit-aside/company-edit-aside.component.html:200:21 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-200                     [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-edit-aside/company-edit-aside.component.ts:45:16
-    45   templateUrl: './company-edit-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyEditAsideComponent.
-
-
-Error: src/app/components/companies/company-edit-aside/company-edit-aside.component.html:201:21 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-201                     [dropSpecialCharacters]="false"
-                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-edit-aside/company-edit-aside.component.ts:45:16
-    45   templateUrl: './company-edit-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyEditAsideComponent.
-
-
-Error: src/app/components/companies/company-edit-aside/company-edit-aside.component.html:314:21 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-314                     [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-edit-aside/company-edit-aside.component.ts:45:16
-    45   templateUrl: './company-edit-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyEditAsideComponent.
-
-
-Error: src/app/components/companies/company-edit-aside/company-edit-aside.component.html:315:21 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-315                     [dropSpecialCharacters]="false"
-                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-edit-aside/company-edit-aside.component.ts:45:16
-    45   templateUrl: './company-edit-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyEditAsideComponent.
-
-
-Error: src/app/components/companies/company-edit-aside/company-edit-aside.component.html:393:29 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-393                             [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-edit-aside/company-edit-aside.component.ts:45:16
-    45   templateUrl: './company-edit-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyEditAsideComponent.
-
-
-Error: src/app/components/companies/company-edit-aside/company-edit-aside.component.html:394:29 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-394                             [dropSpecialCharacters]="false"
-                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-edit-aside/company-edit-aside.component.ts:45:16
-    45   templateUrl: './company-edit-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyEditAsideComponent.
-
-
-Error: src/app/components/companies/company-edit-aside/company-edit-aside.component.html:616:25 - error NG8002: Can't bind to 'height' since it isn't a known property of 'textarea'.
-
-616                         [height]="'75px'"
-                            ~~~~~~~~~~~~~~~~~
-
-  src/app/components/companies/company-edit-aside/company-edit-aside.component.ts:45:16
-    45   templateUrl: './company-edit-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyEditAsideComponent.
-
-
-Error: src/app/components/companies/company-edit-aside/company-edit-aside.component.html:636:26 - error NG8003: No directive found with exportAs 'disabled'.
-
-636                 #addBtn="disabled"
-                             ~~~~~~~~
-
-  src/app/components/companies/company-edit-aside/company-edit-aside.component.ts:45:16
-    45   templateUrl: './company-edit-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyEditAsideComponent.
 
 
 Error: src/app/components/companies/company-file-manager/company-file-manager-category/company-file-manager-category.component.html:28:37 - error NG8002: Can't bind to 'item' since it isn't a known property of 'app-company-file-manager-item-category'.
@@ -1163,6 +681,12 @@ Error: src/app/components/companies/company-tags/company-tags.component.html:27:
     24   templateUrl: './company-tags.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component CompanyTagsComponent.
+
+
+Error: src/app/components/company-dashboard/company-dash-associate-info/company-dash-associate-info.component.ts:11:13 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
+
+11   imports: [PreviewPhoneMaskComponent, CommonModule],
+               ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/company-dashboard/company-dash-contract/company-dash-contract.component.html:60:37 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'span'.
@@ -1507,6 +1031,12 @@ Error: src/app/components/company-dashboard/company-dashboard.component.ts:25:12
                                                                                                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+Error: src/app/components/company-dashboard/company-dashboard.component.ts:25:184 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
+
+25   imports: [CompanyDashContractComponent, CompanyDashDetailComponent, CompanyDashInvoiceComponent, CompanyDashRevenueComponent, CompanyDashStatsComponent, CompanyDashTicketComponent, CompanyEditAsideComponent, CompanyDashAssociateComponent, CompanyDashAssociateInfoComponent, CommonModule],
+                                                                                                                                                                                          ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 Error: src/app/components/company-devices/company-devices-aside/company-devices-aside-device-icon/company-devices-aside-device-icon.component.html:14:9 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
 
 14         [ngbTooltip]="asideMenuItem"
@@ -1753,17 +1283,6 @@ Error: src/app/components/company-network-scan/company-network-scan.component.ht
 
 28                         [disableTooltip]="masterAgent && masterAgent.online"
                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/company-network-scan/company-network-scan.component.ts:36:16
-    36   templateUrl: './company-network-scan.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyNetworkScanComponent.
-
-
-Error: src/app/components/company-network-scan/company-network-scan.component.html:102:39 - error NG8003: No directive found with exportAs 'disabled'.
-
-102                     #btnInstallAgent="disabled"
-                                          ~~~~~~~~
 
   src/app/components/company-network-scan/company-network-scan.component.ts:36:16
     36   templateUrl: './company-network-scan.component.html',
@@ -2185,17 +1704,6 @@ Error: src/app/components/documents/documents-add/documents-add.module.ts:23:5 -
     Is it missing an @NgModule annotation?
 
 
-Error: src/app/components/documents/documents-edit-category/documents-edit-category.component.html:111:26 - error NG8003: No directive found with exportAs 'disabled'.
-
-111                 #addBtn="disabled"
-                             ~~~~~~~~
-
-  src/app/components/documents/documents-edit-category/documents-edit-category.component.ts:21:16
-    21   templateUrl: './documents-edit-category.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component DocumentsEditCategoryComponent.
-
-
 Error: src/app/components/documents/documents-edit/documents-edit.module.ts:24:5 - error NG6002: 'DocumentsAddBodyModule' does not appear to be an NgModule class.
 
 24     DocumentsAddBodyModule,
@@ -2278,17 +1786,6 @@ Error: src/app/components/file-manager/file-manager-add-file/file-manager-add-fi
 
 67                                 [height]="'100px'"
                                    ~~~~~~~~~~~~~~~~~~
-
-  src/app/components/file-manager/file-manager-add-file/file-manager-add-file.component.ts:20:16
-    20   templateUrl: './file-manager-add-file.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component FileManagerAddFileComponent.
-
-
-Error: src/app/components/file-manager/file-manager-add-file/file-manager-add-file.component.html:104:26 - error NG8003: No directive found with exportAs 'disabled'.
-
-104                 #addBtn="disabled"
-                             ~~~~~~~~
 
   src/app/components/file-manager/file-manager-add-file/file-manager-add-file.component.ts:20:16
     20   templateUrl: './file-manager-add-file.component.html',
@@ -2647,19 +2144,8 @@ Error: src/app/components/reports/report-additional-actions/report-send-email/re
 73                         [config]="editorConfig"
                            ~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/reports/report-additional-actions/report-send-email/report-send-email.component.ts:20:16
-    20   templateUrl: './report-send-email.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ReportSendEmailComponent.
-
-
-Error: src/app/components/reports/report-additional-actions/report-send-email/report-send-email.component.html:90:26 - error NG8003: No directive found with exportAs 'disabled'.
-
-90                 #addBtn="disabled"
-                            ~~~~~~~~
-
-  src/app/components/reports/report-additional-actions/report-send-email/report-send-email.component.ts:20:16
-    20   templateUrl: './report-send-email.component.html',
+  src/app/components/reports/report-additional-actions/report-send-email/report-send-email.component.ts:21:16
+    21   templateUrl: './report-send-email.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component ReportSendEmailComponent.
 
@@ -2669,19 +2155,8 @@ Error: src/app/components/reports/report-menu/contract-company-drop-down/contrac
 3     [ngClass]="class"
       ~~~~~~~~~~~~~~~~~
 
-  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:7:16
-    7   templateUrl: './contract-company-drop-down.component.html',
-                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ContractCompanyDropDownComponent.
-
-
-Error: src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.html:4:5 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
-
-4     [container]="container"
-      ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:7:16
-    7   templateUrl: './contract-company-drop-down.component.html',
+  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:8:16
+    8   templateUrl: './contract-company-drop-down.component.html',
                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component ContractCompanyDropDownComponent.
 
@@ -2691,8 +2166,8 @@ Error: src/app/components/reports/report-menu/contract-company-drop-down/contrac
 5     [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:7:16
-    7   templateUrl: './contract-company-drop-down.component.html',
+  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:8:16
+    8   templateUrl: './contract-company-drop-down.component.html',
                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component ContractCompanyDropDownComponent.
 
@@ -2702,8 +2177,8 @@ Error: src/app/components/reports/report-menu/contract-company-drop-down/contrac
 22             [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:7:16
-    7   templateUrl: './contract-company-drop-down.component.html',
+  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:8:16
+    8   templateUrl: './contract-company-drop-down.component.html',
                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component ContractCompanyDropDownComponent.
 
@@ -2713,8 +2188,8 @@ Error: src/app/components/reports/report-menu/contract-company-drop-down/contrac
 23             [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:7:16
-    7   templateUrl: './contract-company-drop-down.component.html',
+  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:8:16
+    8   templateUrl: './contract-company-drop-down.component.html',
                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component ContractCompanyDropDownComponent.
 
@@ -2724,8 +2199,8 @@ Error: src/app/components/reports/report-menu/contract-company-drop-down/contrac
 37             [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '20px' }"
                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:7:16
-    7   templateUrl: './contract-company-drop-down.component.html',
+  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:8:16
+    8   templateUrl: './contract-company-drop-down.component.html',
                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component ContractCompanyDropDownComponent.
 
@@ -2735,8 +2210,8 @@ Error: src/app/components/reports/report-menu/contract-company-drop-down/contrac
 60             [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'max-height': dropdownHeight ? dropdownHeight : '192px'}"
                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:7:16
-    7   templateUrl: './contract-company-drop-down.component.html',
+  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:8:16
+    8   templateUrl: './contract-company-drop-down.component.html',
                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component ContractCompanyDropDownComponent.
 
@@ -2746,43 +2221,10 @@ Error: src/app/components/reports/report-menu/contract-company-drop-down/contrac
 75                     [ngClass]="{'--selected':isSelected(item)}"
                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:7:16
-    7   templateUrl: './contract-company-drop-down.component.html',
+  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:8:16
+    8   templateUrl: './contract-company-drop-down.component.html',
                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component ContractCompanyDropDownComponent.
-
-
-Error: src/app/components/reports/report-menu/contract-detail-drop-down/contract-detail-drop-down.component.html:4:5 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
-
-4     [container]="container"
-      ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/reports/report-menu/contract-detail-drop-down/contract-detail-drop-down.component.ts:10:16
-    10   templateUrl: './contract-detail-drop-down.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ContractDetailDropDownComponent.
-
-
-Error: src/app/components/reports/report-menu/contract-detail-intervals-drop-down/contract-detail-intervals-drop-down.component.html:4:5 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
-
-4     [container]="container"
-      ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/reports/report-menu/contract-detail-intervals-drop-down/contract-detail-intervals-drop-down.component.ts:12:16
-    12   templateUrl: './contract-detail-intervals-drop-down.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ContractDetailIntervalsDropDownComponent.
-
-
-Error: src/app/components/reports/report-menu/contract-detail-intervals-drop-down/contract-detail-intervals-drop-down.component.html:6:5 - error NG8002: Can't bind to 'autoClose' since it isn't a known property of 'div'.
-
-6     [autoClose]="'outside'"
-      ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/reports/report-menu/contract-detail-intervals-drop-down/contract-detail-intervals-drop-down.component.ts:12:16
-    12   templateUrl: './contract-detail-intervals-drop-down.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ContractDetailIntervalsDropDownComponent.
 
 
 Error: src/app/components/reports/report-menu/report-menu.component.html:147:29 - error NG8001: 'software-summary-devices-dro-down' is not a known element:
@@ -4213,180 +3655,10 @@ Error: src/app/components/reports/reports/service-report/service-report.componen
     Error occurs in the template of component ServiceReportComponent.
 
 
-Error: src/app/components/reports/reports/software-summary-report/software-summary-devices-dro-down/software-summary-devices-dro-down.component.html:4:5 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
+Error: src/app/components/setting/accounting/accounting-settings.component.ts:28:70 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
-4     [container]="container"
-      ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/reports/reports/software-summary-report/software-summary-devices-dro-down/software-summary-devices-dro-down.component.ts:10:16
-    10   templateUrl: './software-summary-devices-dro-down.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component SoftwareSummaryDevicesDroDownComponent.
-
-
-Error: src/app/components/setting/accounting/accounting-settings.component.html:59:19 - error NG8003: No directive found with exportAs 'ngbNav'.
-
-59             #nav="ngbNav"
-                     ~~~~~~
-
-  src/app/components/setting/accounting/accounting-settings.component.ts:30:16
-    30   templateUrl: './accounting-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component AccountingSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/accounting-settings.component.html:62:13 - error NG8002: Can't bind to 'activeId' since it isn't a known property of 'ul'.
-
-62             [(activeId)]="activeTab"
-               ~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/accounting-settings.component.ts:30:16
-    30   templateUrl: './accounting-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component AccountingSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/accounting-settings.component.html:66:17 - error NG8002: Can't bind to 'ngbNavItem' since it isn't a known property of 'li'.
-
-66                 [ngbNavItem]="'invoiceSettings'"
-                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/accounting-settings.component.ts:30:16
-    30   templateUrl: './accounting-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component AccountingSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/accounting-settings.component.html:67:17 - error NG8002: Can't bind to 'destroyOnHide' since it isn't a known property of 'li'.
-
-67                 [destroyOnHide]="true"
-                   ~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/accounting-settings.component.ts:30:16
-    30   templateUrl: './accounting-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component AccountingSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/accounting-settings.component.html:75:17 - error NG8002: Can't bind to 'ngbNavItem' since it isn't a known property of 'li'.
-
-75                 [ngbNavItem]="'quoteSettings'"
-                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/accounting-settings.component.ts:30:16
-    30   templateUrl: './accounting-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component AccountingSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/accounting-settings.component.html:76:17 - error NG8002: Can't bind to 'destroyOnHide' since it isn't a known property of 'li'.
-
-76                 [destroyOnHide]="true"
-                   ~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/accounting-settings.component.ts:30:16
-    30   templateUrl: './accounting-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component AccountingSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/accounting-settings.component.html:84:17 - error NG8002: Can't bind to 'ngbNavItem' since it isn't a known property of 'li'.
-
-84                 [ngbNavItem]="'gLNumbers'"
-                   ~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/accounting-settings.component.ts:30:16
-    30   templateUrl: './accounting-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component AccountingSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/accounting-settings.component.html:85:17 - error NG8002: Can't bind to 'destroyOnHide' since it isn't a known property of 'li'.
-
-85                 [destroyOnHide]="true"
-                   ~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/accounting-settings.component.ts:30:16
-    30   templateUrl: './accounting-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component AccountingSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/accounting-settings.component.html:93:17 - error NG8002: Can't bind to 'ngbNavItem' since it isn't a known property of 'li'.
-
-93                 [ngbNavItem]="'accountingYear'"
-                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/accounting-settings.component.ts:30:16
-    30   templateUrl: './accounting-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component AccountingSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/accounting-settings.component.html:94:17 - error NG8002: Can't bind to 'destroyOnHide' since it isn't a known property of 'li'.
-
-94                 [destroyOnHide]="true"
-                   ~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/accounting-settings.component.ts:30:16
-    30   templateUrl: './accounting-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component AccountingSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/accounting-settings.component.html:102:17 - error NG8002: Can't bind to 'ngbNavItem' since it isn't a known property of 'li'.
-
-102                 [ngbNavItem]="'taxes'"
-                    ~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/accounting-settings.component.ts:30:16
-    30   templateUrl: './accounting-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component AccountingSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/accounting-settings.component.html:103:17 - error NG8002: Can't bind to 'destroyOnHide' since it isn't a known property of 'li'.
-
-103                 [destroyOnHide]="true"
-                    ~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/accounting-settings.component.ts:30:16
-    30   templateUrl: './accounting-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component AccountingSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/accounting-settings.component.html:112:17 - error NG8002: Can't bind to 'ngbNavItem' since it isn't a known property of 'li'.
-
-112                 [ngbNavItem]="'notes'"
-                    ~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/accounting-settings.component.ts:30:16
-    30   templateUrl: './accounting-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component AccountingSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/accounting-settings.component.html:113:17 - error NG8002: Can't bind to 'destroyOnHide' since it isn't a known property of 'li'.
-
-113                 [destroyOnHide]="true"
-                    ~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/accounting-settings.component.ts:30:16
-    30   templateUrl: './accounting-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component AccountingSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/accounting-settings.component.html:122:13 - error NG8002: Can't bind to 'ngbNavOutlet' since it isn't a known property of 'div'.
-
-122             [ngbNavOutlet]="nav"
-                ~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/accounting-settings.component.ts:30:16
-    30   templateUrl: './accounting-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component AccountingSettingsComponent.
+28   imports: [TaxesAddComponent, CommonModule, TaxesSettingsComponent, InvoiceSettingsComponent, QuotesSettingsComponent, GlNumberSettingsComponent, AccountingYearComponent, CustomNotesSettingsComponent],
+                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/setting/accounting/accounting-year/accounting-year.component.html:19:27 - error NG8003: No directive found with exportAs 'ngbDatepicker'.
@@ -4466,105 +3738,6 @@ Error: src/app/components/setting/accounting/gl-number/gl-number.component.html:
     Error occurs in the template of component GlNumberSettingsComponent.
 
 
-Error: src/app/components/setting/accounting/invoice-settings/invoice-settings.component.html:9:15 - error NG8002: Can't bind to 'formGroup' since it isn't a known property of 'form'.
-
-9         <form [formGroup]="invoiceForm">
-                ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/invoice-settings/invoice-settings.component.ts:19:16
-    19   templateUrl: './invoice-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component InvoiceSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/invoice-settings/invoice-settings.component.html:122:29 - error NG8002: Can't bind to 'checkScrollHeight' since it isn't a known property of 'textarea'.
-
-122                             [checkScrollHeight]="true"
-                                ~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/invoice-settings/invoice-settings.component.ts:19:16
-    19   templateUrl: './invoice-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component InvoiceSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/invoice-settings/invoice-settings.component.html:124:29 - error NG8002: Can't bind to 'maxHeight' since it isn't a known property of 'textarea'.
-
-124                             [maxHeight]="200"
-                                ~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/invoice-settings/invoice-settings.component.ts:19:16
-    19   templateUrl: './invoice-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component InvoiceSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/invoice-settings/invoice-settings.component.html:306:33 - error NG8002: Can't bind to 'validation' since it isn't a known property of 'input'.
-
-306                                 [validation]="false"
-                                    ~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/invoice-settings/invoice-settings.component.ts:19:16
-    19   templateUrl: './invoice-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component InvoiceSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/invoice-settings/invoice-settings.component.html:308:33 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-308                                 [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/invoice-settings/invoice-settings.component.ts:19:16
-    19   templateUrl: './invoice-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component InvoiceSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/invoice-settings/invoice-settings.component.html:309:33 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-309                                 [dropSpecialCharacters]="false"
-                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/invoice-settings/invoice-settings.component.ts:19:16
-    19   templateUrl: './invoice-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component InvoiceSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/invoice-settings/invoice-settings.component.html:350:33 - error NG8002: Can't bind to 'validation' since it isn't a known property of 'input'.
-
-350                                 [validation]="false"
-                                    ~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/invoice-settings/invoice-settings.component.ts:19:16
-    19   templateUrl: './invoice-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component InvoiceSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/invoice-settings/invoice-settings.component.html:351:33 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-351                                 [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/invoice-settings/invoice-settings.component.ts:19:16
-    19   templateUrl: './invoice-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component InvoiceSettingsComponent.
-
-
-Error: src/app/components/setting/accounting/invoice-settings/invoice-settings.component.html:352:33 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-352                                 [dropSpecialCharacters]="false"
-                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/accounting/invoice-settings/invoice-settings.component.ts:19:16
-    19   templateUrl: './invoice-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component InvoiceSettingsComponent.
-
-
 Error: src/app/components/setting/accounting/quotes-settings/quotes-settings.component.html:9:15 - error NG8002: Can't bind to 'formGroup' since it isn't a known property of 'form'.
 
 9         <form [formGroup]="quotesForm">
@@ -4609,17 +3782,6 @@ Error: src/app/components/setting/company-profile/company-profile-api-keys/compa
     Error occurs in the template of component CompanyProfileApiKeysAddAsideComponent.
 
 
-Error: src/app/components/setting/company-profile/company-profile-api-keys/company-profile-api-keys-add-aside/company-profile-api-keys-add-aside.component.html:95:30 - error NG8003: No directive found with exportAs 'disabled'.
-
-95                     #addBtn="disabled"
-                                ~~~~~~~~
-
-  src/app/components/setting/company-profile/company-profile-api-keys/company-profile-api-keys-add-aside/company-profile-api-keys-add-aside.component.ts:17:16
-    17   templateUrl: './company-profile-api-keys-add-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyProfileApiKeysAddAsideComponent.
-
-
 Error: src/app/components/setting/company-profile/company-profile-api-keys/company-profile-api-keys-edit-aside/company-profile-api-keys-edit-aside.component.html:5:11 - error NG8002: Can't bind to 'formGroup' since it isn't a known property of 'form'.
 
 5     <form [formGroup]="modelForm">
@@ -4629,94 +3791,6 @@ Error: src/app/components/setting/company-profile/company-profile-api-keys/compa
     18   templateUrl: './company-profile-api-keys-edit-aside.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component CompanyProfileApiKeysEditAsideComponent.
-
-
-Error: src/app/components/setting/company-profile/company-profile-api-keys/company-profile-api-keys-edit-aside/company-profile-api-keys-edit-aside.component.html:133:30 - error NG8003: No directive found with exportAs 'disabled'.
-
-133                     #addBtn="disabled"
-                                 ~~~~~~~~
-
-  src/app/components/setting/company-profile/company-profile-api-keys/company-profile-api-keys-edit-aside/company-profile-api-keys-edit-aside.component.ts:18:16
-    18   templateUrl: './company-profile-api-keys-edit-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyProfileApiKeysEditAsideComponent.
-
-
-Error: src/app/components/setting/company-profile/company-profile-profile/company-profile-profile.component.html:15:15 - error NG8002: Can't bind to 'formGroup' since it isn't a known property of 'form'.
-
-15         <form [formGroup]="cProfileForm">
-                 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/company-profile/company-profile-profile/company-profile-profile.component.ts:27:16
-    27   templateUrl: './company-profile-profile.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyProfileProfileComponent.
-
-
-Error: src/app/components/setting/company-profile/company-profile-profile/company-profile-profile.component.html:163:33 - error NG8002: Can't bind to 'validation' since it isn't a known property of 'input'.
-
-163                                 [validation]="true"
-                                    ~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/company-profile/company-profile-profile/company-profile-profile.component.ts:27:16
-    27   templateUrl: './company-profile-profile.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyProfileProfileComponent.
-
-
-Error: src/app/components/setting/company-profile/company-profile-profile/company-profile-profile.component.html:166:33 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-166                                 [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/company-profile/company-profile-profile/company-profile-profile.component.ts:27:16
-    27   templateUrl: './company-profile-profile.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyProfileProfileComponent.
-
-
-Error: src/app/components/setting/company-profile/company-profile-profile/company-profile-profile.component.html:167:33 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-167                                 [dropSpecialCharacters]="false"
-                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/company-profile/company-profile-profile/company-profile-profile.component.ts:27:16
-    27   templateUrl: './company-profile-profile.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyProfileProfileComponent.
-
-
-Error: src/app/components/setting/company-profile/company-profile-profile/company-profile-profile.component.html:209:37 - error NG8002: Can't bind to 'validation' since it isn't a known property of 'input'.
-
-209                                     [validation]="true"
-                                        ~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/company-profile/company-profile-profile/company-profile-profile.component.ts:27:16
-    27   templateUrl: './company-profile-profile.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyProfileProfileComponent.
-
-
-Error: src/app/components/setting/company-profile/company-profile-profile/company-profile-profile.component.html:214:37 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-214                                     [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/company-profile/company-profile-profile/company-profile-profile.component.ts:27:16
-    27   templateUrl: './company-profile-profile.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyProfileProfileComponent.
-
-
-Error: src/app/components/setting/company-profile/company-profile-profile/company-profile-profile.component.html:215:37 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-215                                     [dropSpecialCharacters]="false"
-                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/company-profile/company-profile-profile/company-profile-profile.component.ts:27:16
-    27   templateUrl: './company-profile-profile.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyProfileProfileComponent.
 
 
 Error: src/app/components/setting/company-profile/company-profile-workspace/company-profile-workspace.component.html:7:13 - error NG8002: Can't bind to 'formGroup' since it isn't a known property of 'form'.
@@ -4734,6 +3808,12 @@ Error: src/app/components/setting/company-profile/company-profile.component.ts:2
 
 24   imports: [CompanyProfileApiKeysAddAsideComponent, CompanyProfileApiKeysComponent, CompanyProfileProfileComponent, CompanyProfileOperationalHoursComponent, CompanyProfileWorkspaceComponent, CompanyProfileApiKeysEditAsideComponent, CommonModule],
                                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/setting/company-profile/company-profile.component.ts:24:85 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
+
+24   imports: [CompanyProfileApiKeysAddAsideComponent, CompanyProfileApiKeysComponent, CompanyProfileProfileComponent, CompanyProfileOperationalHoursComponent, CompanyProfileWorkspaceComponent, CompanyProfileApiKeysEditAsideComponent, CommonModule],
+                                                                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/setting/email-template/email-template.component.html:15:19 - error NG8003: No directive found with exportAs 'ngbNav'.
@@ -5157,17 +4237,6 @@ Error: src/app/components/setting/manage-tags/manage-tags.component.html:381:13 
     Error occurs in the template of component ManageTagsComponent.
 
 
-Error: src/app/components/setting/marketing-email/marketing-email-users/marketing-email-users-add/marketing-email-users-add.component.html:53:22 - error NG8003: No directive found with exportAs 'disabled'.
-
-53             #addBtn="disabled"
-                        ~~~~~~~~
-
-  src/app/components/setting/marketing-email/marketing-email-users/marketing-email-users-add/marketing-email-users-add.component.ts:23:16
-    23   templateUrl: './marketing-email-users-add.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component MarketingEmailUsersAddComponent.
-
-
 Error: src/app/components/setting/marketing-email/marketing-email-users/marketing-email-users.component.html:37:17 - error NG8001: 'marketing-email-users-add' is not a known element:
 1. If 'marketing-email-users-add' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
 2. If 'marketing-email-users-add' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
@@ -5487,180 +4556,10 @@ Error: src/app/components/setting/my-profile/email-notifications/email-notificat
     Error occurs in the template of component EmailNotificationsComponent.
 
 
-Error: src/app/components/setting/my-profile/my-profile.component.html:19:11 - error NG8003: No directive found with exportAs 'ngbNav'.
+Error: src/app/components/setting/my-profile/my-profile.component.ts:17:33 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
-19     #nav="ngbNav"
-             ~~~~~~
-
-  src/app/components/setting/my-profile/my-profile.component.ts:19:16
-    19   templateUrl: "./my-profile.component.html",
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component MyProfileComponent.
-
-
-Error: src/app/components/setting/my-profile/my-profile.component.html:20:5 - error NG8002: Can't bind to 'activeId' since it isn't a known property of 'ul'.
-
-20     [(activeId)]="activeTab"
-       ~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/my-profile/my-profile.component.ts:19:16
-    19   templateUrl: "./my-profile.component.html",
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component MyProfileComponent.
-
-
-Error: src/app/components/setting/my-profile/my-profile.component.html:25:9 - error NG8002: Can't bind to 'ngbNavItem' since it isn't a known property of 'li'.
-
-25     <li [ngbNavItem]="'profile'">
-           ~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/my-profile/my-profile.component.ts:19:16
-    19   templateUrl: "./my-profile.component.html",
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component MyProfileComponent.
-
-
-Error: src/app/components/setting/my-profile/my-profile.component.html:31:9 - error NG8002: Can't bind to 'ngbNavItem' since it isn't a known property of 'li'.
-
-31     <li [ngbNavItem]="'account'">
-           ~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/my-profile/my-profile.component.ts:19:16
-    19   templateUrl: "./my-profile.component.html",
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component MyProfileComponent.
-
-
-Error: src/app/components/setting/my-profile/my-profile.component.html:39:9 - error NG8002: Can't bind to 'ngbNavItem' since it isn't a known property of 'li'.
-
-39         [ngbNavItem]="'notifications'"
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/my-profile/my-profile.component.ts:19:16
-    19   templateUrl: "./my-profile.component.html",
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component MyProfileComponent.
-
-
-Error: src/app/components/setting/my-profile/my-profile.component.html:49:9 - error NG8002: Can't bind to 'ngbNavItem' since it isn't a known property of 'li'.
-
-49         [ngbNavItem]="'history'"
-           ~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/my-profile/my-profile.component.ts:19:16
-    19   templateUrl: "./my-profile.component.html",
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component MyProfileComponent.
-
-
-Error: src/app/components/setting/my-profile/my-profile.component.html:59:9 - error NG8002: Can't bind to 'ngbNavItem' since it isn't a known property of 'li'.
-
-59         [ngbNavItem]="'signature'"
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/my-profile/my-profile.component.ts:19:16
-    19   templateUrl: "./my-profile.component.html",
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component MyProfileComponent.
-
-
-Error: src/app/components/setting/my-profile/my-profile.component.html:69:9 - error NG8002: Can't bind to 'ngbNavItem' since it isn't a known property of 'li'.
-
-69         [ngbNavItem]="'tickets'"
-           ~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/my-profile/my-profile.component.ts:19:16
-    19   templateUrl: "./my-profile.component.html",
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component MyProfileComponent.
-
-
-Error: src/app/components/setting/my-profile/my-profile.component.html:80:5 - error NG8002: Can't bind to 'ngbNavOutlet' since it isn't a known property of 'div'.
-
-80     [ngbNavOutlet]="nav"
-       ~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/my-profile/my-profile.component.ts:19:16
-    19   templateUrl: "./my-profile.component.html",
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component MyProfileComponent.
-
-
-Error: src/app/components/setting/my-profile/profile/profile.component.html:9:15 - error NG8002: Can't bind to 'formGroup' since it isn't a known property of 'form'.
-
-9         <form [formGroup]="profileForm">
-                ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/my-profile/profile/profile.component.ts:41:16
-    41   templateUrl: './profile.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ProfileComponent.
-
-
-Error: src/app/components/setting/my-profile/profile/profile.component.html:210:33 - error NG8002: Can't bind to 'validation' since it isn't a known property of 'input'.
-
-210                                 [validation]="true"
-                                    ~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/my-profile/profile/profile.component.ts:41:16
-    41   templateUrl: './profile.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ProfileComponent.
-
-
-Error: src/app/components/setting/my-profile/profile/profile.component.html:213:33 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-213                                 [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/my-profile/profile/profile.component.ts:41:16
-    41   templateUrl: './profile.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ProfileComponent.
-
-
-Error: src/app/components/setting/my-profile/profile/profile.component.html:214:33 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-214                                 [dropSpecialCharacters]="false"
-                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/my-profile/profile/profile.component.ts:41:16
-    41   templateUrl: './profile.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ProfileComponent.
-
-
-Error: src/app/components/setting/my-profile/profile/profile.component.html:256:37 - error NG8002: Can't bind to 'validation' since it isn't a known property of 'input'.
-
-256                                     [validation]="true"
-                                        ~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/my-profile/profile/profile.component.ts:41:16
-    41   templateUrl: './profile.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ProfileComponent.
-
-
-Error: src/app/components/setting/my-profile/profile/profile.component.html:261:37 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-261                                     [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/my-profile/profile/profile.component.ts:41:16
-    41   templateUrl: './profile.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ProfileComponent.
-
-
-Error: src/app/components/setting/my-profile/profile/profile.component.html:262:37 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-262                                     [dropSpecialCharacters]="false"
-                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/my-profile/profile/profile.component.ts:41:16
-    41   templateUrl: './profile.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ProfileComponent.
+17   imports: [SignatureComponent, ProfileComponent, TicketsMyProfileComponent, ActivityHistoryComponent, EmailNotificationsComponent, AccountComponent, CommonModule],
+                                   ~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/setting/my-profile/signature/add-signature/add-signature.component.html:9:13 - error NG8002: Can't bind to 'config' since it isn't a known property of 'angular-editor'.
@@ -5868,32 +4767,10 @@ Error: src/app/components/setting/tech-users-settings/tech-users-settings.compon
     Error occurs in the template of component TechUsersSettingsComponent.
 
 
-Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:587:26 - error NG8003: No directive found with exportAs 'disabled'.
-
-587                 #addBtn="disabled"
-                             ~~~~~~~~
-
-  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:40:16
-    40   templateUrl: './tech-users-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TechUsersSettingsComponent.
-
-
 Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:720:15 - error NG8002: Can't bind to 'formGroup' since it isn't a known property of 'form'.
 
 720         <form [formGroup]="techUserForm">
                   ~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:40:16
-    40   templateUrl: './tech-users-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TechUsersSettingsComponent.
-
-
-Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:886:27 - error NG8003: No directive found with exportAs 'disabled'.
-
-886                 #editBtn="disabled"
-                              ~~~~~~~~
 
   src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:40:16
     40   templateUrl: './tech-users-settings.component.html',
@@ -5926,17 +4803,6 @@ Error: src/app/components/setting/ticket-settings-page/canned-responses/canned-r
     Error occurs in the template of component CannedResponsesAsideComponent.
 
 
-Error: src/app/components/shared/confirm/confirm.component.html:22:30 - error NG8003: No directive found with exportAs 'disabled'.
-
-22                 #approveBtn="disabled"
-                                ~~~~~~~~
-
-  src/app/components/shared/confirm/confirm.component.ts:15:16
-    15   templateUrl: './confirm.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ConfirmComponent.
-
-
 Error: src/app/components/shared/draft-email/draft-email-recipients/draft-email-recipients.component.html:4:16 - error NG8003: No directive found with exportAs 'ngbDropdown'.
 
 4     #products="ngbDropdown"
@@ -5966,17 +4832,6 @@ Error: src/app/components/shared/draft-email/draft-email.component.html:88:25 - 
 
 88                         [config]="editorConfig"
                            ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/shared/draft-email/draft-email.component.ts:29:16
-    29   templateUrl: './draft-email.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component DraftEmailComponent.
-
-
-Error: src/app/components/shared/draft-email/draft-email.component.html:189:26 - error NG8003: No directive found with exportAs 'disabled'.
-
-189                 #addBtn="disabled"
-                             ~~~~~~~~
 
   src/app/components/shared/draft-email/draft-email.component.ts:29:16
     29   templateUrl: './draft-email.component.html',
@@ -6237,28 +5092,6 @@ Error: src/app/components/shared/map-modal/map-modal.component.html:6:39 - error
     Error occurs in the template of component MapModalComponent.
 
 
-Error: src/app/components/shared/preview-phone-mask/preview-phone-mask.component.html:8:5 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-8     [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/shared/preview-phone-mask/preview-phone-mask.component.ts:9:16
-    9   templateUrl: './preview-phone-mask.component.html',
-                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component PreviewPhoneMaskComponent.
-
-
-Error: src/app/components/shared/preview-phone-mask/preview-phone-mask.component.html:9:5 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-9     [dropSpecialCharacters]="false"
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/shared/preview-phone-mask/preview-phone-mask.component.ts:9:16
-    9   templateUrl: './preview-phone-mask.component.html',
-                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component PreviewPhoneMaskComponent.
-
-
 Error: src/app/components/shared/tags/tags.component.html:4:16 - error NG8003: No directive found with exportAs 'ngbDropdown'.
 
 4     #products="ngbDropdown"
@@ -6413,24 +5246,13 @@ Error: src/app/components/super-admin/super-admin-knowledge-base/super-admin-kno
     Error occurs in the template of component SuperAdminKnowledgeBaseAddComponent.
 
 
-Error: src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-add/super-admin-knowledge-base-add.component.html:84:30 - error NG8003: No directive found with exportAs 'disabled'.
-
-84                     #addBtn="disabled"
-                                ~~~~~~~~
-
-  src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-add/super-admin-knowledge-base-add.component.ts:24:16
-    24   templateUrl: './super-admin-knowledge-base-add.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component SuperAdminKnowledgeBaseAddComponent.
-
-
 Error: src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-edit/super-admin-knowledge-base-edit.component.html:42:25 - error NG8002: Can't bind to 'froalaEditor' since it isn't a known property of 'div'.
 
 42                         [froalaEditor]="options"
                            ~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-edit/super-admin-knowledge-base-edit.component.ts:17:16
-    17   templateUrl: './super-admin-knowledge-base-edit.component.html',
+  src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-edit/super-admin-knowledge-base-edit.component.ts:18:16
+    18   templateUrl: './super-admin-knowledge-base-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component SuperAdminKnowledgeBaseEditComponent.
 
@@ -6440,19 +5262,8 @@ Error: src/app/components/super-admin/super-admin-knowledge-base/super-admin-kno
 43                         [(froalaModel)]="content"
                            ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-edit/super-admin-knowledge-base-edit.component.ts:17:16
-    17   templateUrl: './super-admin-knowledge-base-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component SuperAdminKnowledgeBaseEditComponent.
-
-
-Error: src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-edit/super-admin-knowledge-base-edit.component.html:87:30 - error NG8003: No directive found with exportAs 'disabled'.
-
-87                     #addBtn="disabled"
-                                ~~~~~~~~
-
-  src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-edit/super-admin-knowledge-base-edit.component.ts:17:16
-    17   templateUrl: './super-admin-knowledge-base-edit.component.html',
+  src/app/components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base-edit/super-admin-knowledge-base-edit.component.ts:18:16
+    18   templateUrl: './super-admin-knowledge-base-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component SuperAdminKnowledgeBaseEditComponent.
 
@@ -6721,17 +5532,6 @@ Error: src/app/components/tasks/tasks-add/tasks-add.component.html:7:9 - error N
     Error occurs in the template of component TasksAddComponent.
 
 
-Error: src/app/components/tasks/tasks-add/tasks-add.component.html:16:35 - error NG8003: No directive found with exportAs 'disabled'.
-
-16                         #saveBtn="disabled"
-                                     ~~~~~~~~
-
-  src/app/components/tasks/tasks-add/tasks-add.component.ts:38:16
-    38   templateUrl: './tasks-add.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TasksAddComponent.
-
-
 Error: src/app/components/tasks/tasks-add/tasks-add.component.html:216:23 - error NG8003: No directive found with exportAs 'ngbNav'.
 
 216                 #nav="ngbNav"
@@ -6924,30 +5724,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:7:9 - error
 7         [formGroup]="modelForm"
           ~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:31:16
-    31   templateUrl: './tasks-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TasksEditComponent.
-
-
-Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:31:35 - error NG8003: No directive found with exportAs 'disabled'.
-
-31                         #saveBtn="disabled"
-                                     ~~~~~~~~
-
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:31:16
-    31   templateUrl: './tasks-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TasksEditComponent.
-
-
-Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:42:35 - error NG8003: No directive found with exportAs 'disabled'.
-
-42                         #saveBtn="disabled"
-                                     ~~~~~~~~
-
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:31:16
-    31   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
+    32   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -6957,8 +5735,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:78:33 - err
 78                                 [disableTooltip]="!currentService.item"
                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:31:16
-    31   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
+    32   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -6968,8 +5746,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:122:33 - er
 122                                 [disableTooltip]="!currentService.item"
                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:31:16
-    31   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
+    32   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -6979,8 +5757,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:372:23 - er
 372                 #nav="ngbNav"
                           ~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:31:16
-    31   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
+    32   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -6990,8 +5768,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:373:17 - er
 373                 [(activeId)]="activeTab"
                     ~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:31:16
-    31   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
+    32   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -7001,8 +5779,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:378:21 - er
 378                 <li [ngbNavItem]="'description'">
                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:31:16
-    31   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
+    32   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -7021,8 +5799,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:394:25 - er
 403                         ></angular-editor>
     ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:31:16
-    31   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
+    32   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -7035,8 +5813,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:397:29 - er
 397                             [init]="isInitEditNote"
                                 ~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:31:16
-    31   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
+    32   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -7049,8 +5827,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:399:29 - er
 399                             [classParent]="'.edit-note-container'"
                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:31:16
-    31   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
+    32   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -7063,8 +5841,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:402:29 - er
 402                             [config]="editorConfig"
                                 ~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:31:16
-    31   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
+    32   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -7074,8 +5852,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:416:17 - er
 416                 [ngbNavOutlet]="nav"
                     ~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:31:16
-    31   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
+    32   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -7085,8 +5863,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:457:41 - er
 457                                         [ngbTooltip]="file.error"
                                             ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:31:16
-    31   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
+    32   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -7250,9 +6028,9 @@ Error: src/app/components/tickets/recurring-tickets/recurring-tickets-table/recu
 5     [ngbTooltip]="user.firstName + ' ' + user.lastName"
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table-assigned-user/recurring-tickets-table-assigned-user.component.ts:9:16
-    9   templateUrl: './recurring-tickets-table-assigned-user.component.html',
-                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table-assigned-user/recurring-tickets-table-assigned-user.component.ts:10:16
+    10   templateUrl: './recurring-tickets-table-assigned-user.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component RecurringTicketsTableAssignedUserComponent.
 
 
@@ -7261,9 +6039,9 @@ Error: src/app/components/tickets/recurring-tickets/recurring-tickets-table/recu
 6     [container]="'body'"
       ~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table-assigned-user/recurring-tickets-table-assigned-user.component.ts:9:16
-    9   templateUrl: './recurring-tickets-table-assigned-user.component.html',
-                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table-assigned-user/recurring-tickets-table-assigned-user.component.ts:10:16
+    10   templateUrl: './recurring-tickets-table-assigned-user.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component RecurringTicketsTableAssignedUserComponent.
 
 
@@ -7275,8 +6053,8 @@ Error: src/app/components/tickets/recurring-tickets/recurring-tickets-table/recu
 58                     [user]="user"
                        ~~~~~~~~~~~~~
 
-  src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component.ts:16:16
-    16   templateUrl: './recurring-tickets-table.component.html',
+  src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component.ts:17:16
+    17   templateUrl: './recurring-tickets-table.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component RecurringTicketsTableComponent.
 
@@ -7286,8 +6064,8 @@ Error: src/app/components/tickets/recurring-tickets/recurring-tickets-table/recu
 64                 [ngbTooltip]="tipContent"
                    ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component.ts:16:16
-    16   templateUrl: './recurring-tickets-table.component.html',
+  src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component.ts:17:16
+    17   templateUrl: './recurring-tickets-table.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component RecurringTicketsTableComponent.
 
@@ -7297,91 +6075,35 @@ Error: src/app/components/tickets/recurring-tickets/recurring-tickets-table/recu
 65                 [container]="'body'"
                    ~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component.ts:16:16
-    16   templateUrl: './recurring-tickets-table.component.html',
+  src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component.ts:17:16
+    17   templateUrl: './recurring-tickets-table.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component RecurringTicketsTableComponent.
 
 
-Error: src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component.html:92:13 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
+Error: src/app/components/tickets/tickets-dashboard/tech-tickets-widget/tech-tickets-widget.component.ts:7:10 - error TS2724: '"@ng-bootstrap/ng-bootstrap"' has no exported member named 'NgbButtonsModule'. Did you mean 'NgbToastModule'?
 
-92             [container]="'body'"
-               ~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component.ts:16:16
-    16   templateUrl: './recurring-tickets-table.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component RecurringTicketsTableComponent.
+7 import { NgbButtonsModule } from '@ng-bootstrap/ng-bootstrap';
+           ~~~~~~~~~~~~~~~~
 
 
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-attachments/ticket-detail-attachments.component.html:28:17 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
+Error: src/app/components/tickets/tickets-dashboard/tech-tickets-widget/tech-tickets-widget.component.ts:14:14 - error NG1010: 'imports' must be an array of components, directives, pipes, or NgModules.
+  Value is of type '[(not statically analyzable), FormsModule, NgIf, NgForOf]'.
 
-28                 [container]="'body'"
-                   ~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-attachments/ticket-detail-attachments.component.ts:12:16
-    12   templateUrl: './ticket-detail-attachments.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailAttachmentsComponent.
+14     imports: [NgbButtonsModule, FormsModule, NgIf, NgFor]
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-change-priority/ticket-detail-change-priority.component.html:6:9 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
+Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-contact-details/ticket-detail-contact-details.component.ts:18:13 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
-6         [container]="container"
-          ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-change-priority/ticket-detail-change-priority.component.ts:25:16
-    25   templateUrl: './ticket-detail-change-priority.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailChangePriorityComponent.
+18   imports: [PreviewPhoneMaskComponent, CommonModule],
+               ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-contact-details/ticket-detail-contact-details.component.html:154:13 - error NG8001: 'ticket-detail-contact-details-history' is not a known element:
-1. If 'ticket-detail-contact-details-history' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
-2. If 'ticket-detail-contact-details-history' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
+Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-contact/ticket-detail-contact.component.ts:13:13 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
-154             <ticket-detail-contact-details-history
-                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-155                 #companyHistory
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-... 
-158                 [hidden]="!ticketProfile.createdUser"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-159             ></ticket-detail-contact-details-history>
-    ~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-contact-details/ticket-detail-contact-details.component.ts:20:16
-    20   templateUrl: './ticket-detail-contact-details.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailContactDetailsComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-contact-details/ticket-detail-contact-details.component.html:156:17 - error NG8002: Can't bind to 'user' since it isn't a known property of 'ticket-detail-contact-details-history'.
-1. If 'ticket-detail-contact-details-history' is an Angular component and it has 'user' input, then verify that it is included in the '@Component.imports' of this component.
-2. If 'ticket-detail-contact-details-history' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
-3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
-
-156                 [user]="ticketProfile.createdUser"
-                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-contact-details/ticket-detail-contact-details.component.ts:20:16
-    20   templateUrl: './ticket-detail-contact-details.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailContactDetailsComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-contact-details/ticket-detail-contact-details.component.html:157:17 - error NG8002: Can't bind to 'company' since it isn't a known property of 'ticket-detail-contact-details-history'.
-1. If 'ticket-detail-contact-details-history' is an Angular component and it has 'company' input, then verify that it is included in the '@Component.imports' of this component.
-2. If 'ticket-detail-contact-details-history' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
-3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
-
-157                 [company]="company"
-                    ~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-contact-details/ticket-detail-contact-details.component.ts:20:16
-    20   templateUrl: './ticket-detail-contact-details.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailContactDetailsComponent.
+13   imports: [PreviewPhoneMaskComponent, CommonModule],
+               ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-edit-tags/ticket-detail-edit-tags.component.html:4:14 - error NG8003: No directive found with exportAs 'ngbDropdown'.
@@ -7417,39 +6139,6 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-header/tic
     Error occurs in the template of component TicketDetailHeaderComponent.
 
 
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-header/ticket-detail-header.component.html:23:31 - error NG8003: No directive found with exportAs 'disabled'.
-
-23             #update_closeBtn="disabled"
-                                 ~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-header/ticket-detail-header.component.ts:24:16
-    24   templateUrl: './ticket-detail-header.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailHeaderComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-message/ticket-detail-message.component.html:19:37 - error NG8003: No directive found with exportAs 'disabled'.
-
-19             #markAsOpenBillableBtn="disabled"
-                                       ~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-message/ticket-detail-message.component.ts:21:16
-    21   templateUrl: './ticket-detail-message.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailMessageComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-message/ticket-detail-message.component.html:41:30 - error NG8003: No directive found with exportAs 'disabled'.
-
-41             #claimTicketBtn="disabled"
-                                ~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-message/ticket-detail-message.component.ts:21:16
-    21   templateUrl: './ticket-detail-message.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailMessageComponent.
-
-
 Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-note-modal/ticket-detail-note-modal.component.html:13:9 - error NG8001: 'ticket-detail-profile-form-update-note' is not a known element:
 1. If 'ticket-detail-profile-form-update-note' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
 2. If 'ticket-detail-profile-form-update-note' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
@@ -7463,8 +6152,8 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-note-modal
 16         ></ticket-detail-profile-form-update-note>
    ~~~~~~~~~
 
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-note-modal/ticket-detail-note-modal.component.ts:29:16
-    29   templateUrl: './ticket-detail-note-modal.component.html',
+  src/app/components/tickets/tickets/ticket-detail/ticket-detail-note-modal/ticket-detail-note-modal.component.ts:30:16
+    30   templateUrl: './ticket-detail-note-modal.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketDetailNoteModalComponent.
 
@@ -7477,19 +6166,8 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-note-modal
 15             [ticketProfileFormUpdate]="ticketProfileFormUpdate"
                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-note-modal/ticket-detail-note-modal.component.ts:29:16
-    29   templateUrl: './ticket-detail-note-modal.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailNoteModalComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-note-modal/ticket-detail-note-modal.component.html:54:25 - error NG8003: No directive found with exportAs 'disabled'.
-
-54             #updateBtn="disabled"
-                           ~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-note-modal/ticket-detail-note-modal.component.ts:29:16
-    29   templateUrl: './ticket-detail-note-modal.component.html',
+  src/app/components/tickets/tickets/ticket-detail/ticket-detail-note-modal/ticket-detail-note-modal.component.ts:30:16
+    30   templateUrl: './ticket-detail-note-modal.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketDetailNoteModalComponent.
 
@@ -7577,17 +6255,6 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-ed
 
 16             [update]="update"
                ~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates.component.ts:17:16
-    17   templateUrl: './ticket-detail-profile-edit-updates.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileEditUpdatesComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates.component.html:33:25 - error NG8003: No directive found with exportAs 'disabled'.
-
-33             #updateBtn="disabled"
-                           ~~~~~~~~
 
   src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-edit-updates/ticket-detail-profile-edit-updates.component.ts:17:16
     17   templateUrl: './ticket-detail-profile-edit-updates.component.html',
@@ -8140,17 +6807,6 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-fo
     Error occurs in the template of component TicketDetailProfileFormUpdateComponent.
 
 
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.html:73:25 - error NG8003: No directive found with exportAs 'disabled'.
-
-73             #updateBtn="disabled"
-                           ~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.ts:40:16
-    40   templateUrl: './ticket-detail-profile-form-update.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileFormUpdateComponent.
-
-
 Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-header-info/ticket-detail-profile-updates-header-info.component.html:25:17 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
 
 25                 [ngbTooltip]="tipContent"
@@ -8371,39 +7027,6 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail.component.
                                                                                                                                                                                                                                                                                                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Error: src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-created-drop-down/tickets-filter-created-drop-down.component.html:4:5 - error NG8002: Can't bind to 'placement' since it isn't a known property of 'div'.
-
-4     [placement]="placement"
-      ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-created-drop-down/tickets-filter-created-drop-down.component.ts:19:16
-    19   templateUrl: './tickets-filter-created-drop-down.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketsFilterCreatedDropDownComponent.
-
-
-Error: src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-created-drop-down/tickets-filter-created-drop-down.component.html:5:5 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
-
-5     [container]="container"
-      ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-created-drop-down/tickets-filter-created-drop-down.component.ts:19:16
-    19   templateUrl: './tickets-filter-created-drop-down.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketsFilterCreatedDropDownComponent.
-
-
-Error: src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-created-drop-down/tickets-filter-created-drop-down.component.html:6:10 - error NG8003: No directive found with exportAs 'ngbDropdown'.
-
-6     #dp="ngbDropdown"
-           ~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-created-drop-down/tickets-filter-created-drop-down.component.ts:19:16
-    19   templateUrl: './tickets-filter-created-drop-down.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketsFilterCreatedDropDownComponent.
-
-
 Error: src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-created-drop-down/tickets-filter-created-drop-down.component.html:65:13 - error NG8001: 'ngb-datepicker' is not a known element:
 1. If 'ngb-datepicker' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
 2. If 'ngb-datepicker' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
@@ -8543,114 +7166,16 @@ Error: src/app/components/tickets/tickets/tickets-header/tickets-header.componen
     Error occurs in the template of component TicketsHeaderComponent.
 
 
-Error: src/app/components/users-details/users-details-left-panel/users-details-left-panel.component.html:50:17 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
+Error: src/app/components/users-details/users-details-tab-companies/users-details-tab-companies-add/users-details-tab-companies-add.component.ts:26:106 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
-50                 [container]="'body'"
-                   ~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users-details/users-details-left-panel/users-details-left-panel.component.ts:37:16
-    37   templateUrl: './users-details-left-panel.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersDetailsLeftPanelComponent.
+26   imports: [PreloaderTicketComponent, DisabledBtnDirective, DropDownComponent, CompanyDropDownComponent, PreviewPhoneMaskComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
+                                                                                                            ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Error: src/app/components/users-details/users-details-left-panel/users-details-left-panel.component.html:101:13 - error NG8002: Can't bind to 'formGroup' since it isn't a known property of 'form'.
+Error: src/app/components/users-details/users-details-tab-companies/users-details-tab-companies-item/users-details-tab-companies-item.component.ts:28:38 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
-101             [formGroup]="modelForm"
-                ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users-details/users-details-left-panel/users-details-left-panel.component.ts:37:16
-    37   templateUrl: './users-details-left-panel.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersDetailsLeftPanelComponent.
-
-
-Error: src/app/components/users-details/users-details-left-panel/users-details-left-panel.component.html:108:25 - error NG8002: Can't bind to 'formGroupName' since it isn't a known property of 'div'.
-
-108                         [formGroupName]="i"
-                            ~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users-details/users-details-left-panel/users-details-left-panel.component.ts:37:16
-    37   templateUrl: './users-details-left-panel.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersDetailsLeftPanelComponent.
-
-
-Error: src/app/components/users-details/users-details-left-panel/users-details-left-panel.component.html:135:37 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-135                                     [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users-details/users-details-left-panel/users-details-left-panel.component.ts:37:16
-    37   templateUrl: './users-details-left-panel.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersDetailsLeftPanelComponent.
-
-
-Error: src/app/components/users-details/users-details-left-panel/users-details-left-panel.component.html:136:37 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-136                                     [dropSpecialCharacters]="false"
-                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users-details/users-details-left-panel/users-details-left-panel.component.ts:37:16
-    37   templateUrl: './users-details-left-panel.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersDetailsLeftPanelComponent.
-
-
-Error: src/app/components/users-details/users-details-left-panel/users-details-left-panel.component.html:272:21 - error NG8002: Can't bind to 'maxHeight' since it isn't a known property of 'textarea'.
-
-272                     [maxHeight]="100"
-                        ~~~~~~~~~~~~~~~~~
-
-  src/app/components/users-details/users-details-left-panel/users-details-left-panel.component.ts:37:16
-    37   templateUrl: './users-details-left-panel.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersDetailsLeftPanelComponent.
-
-
-Error: src/app/components/users-details/users-details-left-panel/users-details-left-panel.component.html:274:21 - error NG8002: Can't bind to 'height' since it isn't a known property of 'textarea'.
-
-274                     [height]="'80px'"
-                        ~~~~~~~~~~~~~~~~~
-
-  src/app/components/users-details/users-details-left-panel/users-details-left-panel.component.ts:37:16
-    37   templateUrl: './users-details-left-panel.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersDetailsLeftPanelComponent.
-
-
-Error: src/app/components/users-details/users-details-tab-companies/users-details-tab-companies-add/users-details-tab-companies-add.component.html:9:13 - error NG8002: Can't bind to 'disableTooltip' since it isn't a known property of 'div'.
-
-9             [disableTooltip]="customerCompaniesInfo.companyId"
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users-details/users-details-tab-companies/users-details-tab-companies-add/users-details-tab-companies-add.component.ts:28:16
-    28   templateUrl: './users-details-tab-companies-add.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersDetailsTabCompaniesAddComponent.
-
-
-Error: src/app/components/users-details/users-details-tab-companies/users-details-tab-companies-add/users-details-tab-companies-add.component.html:11:22 - error NG8003: No directive found with exportAs 'disabled'.
-
-11             #addBtn="disabled"
-                        ~~~~~~~~
-
-  src/app/components/users-details/users-details-tab-companies/users-details-tab-companies-add/users-details-tab-companies-add.component.ts:28:16
-    28   templateUrl: './users-details-tab-companies-add.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersDetailsTabCompaniesAddComponent.
-
-
-Error: src/app/components/users-details/users-details-tab-companies/users-details-tab-companies-item/users-details-tab-companies-item.component.html:11:13 - error NG8002: Can't bind to 'disableTooltip' since it isn't a known property of 'div'.
-
-11             [disableTooltip]="!isPrimaryContact()"
-               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users-details/users-details-tab-companies/users-details-tab-companies-item/users-details-tab-companies-item.component.ts:30:16
-    30   templateUrl: './users-details-tab-companies-item.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersDetailsTabCompaniesItemComponent.
+28   imports: [DynamicTooltipComponent, PreviewPhoneMaskComponent, DropDownComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/users-details/users-details-tab-companies/users-details-tab-companies.module.ts:22:5 - error NG6002: 'PreviewPhoneMaskModule' does not appear to be an NgModule class.
@@ -8741,6 +7266,12 @@ Error: src/app/components/users-details/users-details-tab-tickets/users-details-
     Error occurs in the template of component UsersDetailsTabTicketsItemComponent.
 
 
+Error: src/app/components/users-details/users-details.component.ts:33:42 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
+
+33   imports: [UsersDetailsHeaderComponent, UsersDetailsLeftPanelComponent, UsersDetailsTabCompaniesComponent, UsersDetailsTabDocumentsComponent, UsersDetailsTabMessagesComponent, UsersDetailsTabPasswordsComponent, UsersDetailsTabTicketsComponent, CommonModule],
+                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 Error: src/app/components/users-details/users-details.module.ts:20:5 - error NG6002: 'UsersDetailsLeftPanelModule' does not appear to be an NgModule class.
 
 20     UsersDetailsLeftPanelModule,
@@ -8756,138 +7287,6 @@ Error: src/app/components/users-details/users-details.module.ts:21:5 - error NG6
 
 21     UsersDetailsTabCompaniesModule,
        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/users/add-user-to-company/add-user-to-company.component.html:89:26 - error NG8003: No directive found with exportAs 'disabled'.
-
-89                 #addBtn="disabled"
-                            ~~~~~~~~
-
-  src/app/components/users/add-user-to-company/add-user-to-company.component.ts:24:16
-    24   templateUrl: './add-user-to-company.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component AddUserToCompanyComponent.
-
-
-Error: src/app/components/users/users-aside-edit/users-aside-edit.component.html:152:29 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-152                             [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users/users-aside-edit/users-aside-edit.component.ts:43:16
-    43   templateUrl: './users-aside-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersAsideEditComponent.
-
-
-Error: src/app/components/users/users-aside-edit/users-aside-edit.component.html:153:29 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-153                             [dropSpecialCharacters]="false"
-                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users/users-aside-edit/users-aside-edit.component.ts:43:16
-    43   templateUrl: './users-aside-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersAsideEditComponent.
-
-
-Error: src/app/components/users/users-aside-edit/users-aside-edit.component.html:241:29 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-241                             [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users/users-aside-edit/users-aside-edit.component.ts:43:16
-    43   templateUrl: './users-aside-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersAsideEditComponent.
-
-
-Error: src/app/components/users/users-aside-edit/users-aside-edit.component.html:242:29 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-242                             [dropSpecialCharacters]="false"
-                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users/users-aside-edit/users-aside-edit.component.ts:43:16
-    43   templateUrl: './users-aside-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersAsideEditComponent.
-
-
-Error: src/app/components/users/users-aside-edit/users-aside-edit.component.html:313:25 - error NG8002: Can't bind to 'disableTooltip' since it isn't a known property of 'div'.
-
-313                         [disableTooltip]="!companyInfo.isPrimaryContact"
-                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users/users-aside-edit/users-aside-edit.component.ts:43:16
-    43   templateUrl: './users-aside-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersAsideEditComponent.
-
-
-Error: src/app/components/users/users-aside-edit/users-aside-edit.component.html:500:27 - error NG8003: No directive found with exportAs 'disabled'.
-
-500                 #editBtn="disabled"
-                              ~~~~~~~~
-
-  src/app/components/users/users-aside-edit/users-aside-edit.component.ts:43:16
-    43   templateUrl: './users-aside-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersAsideEditComponent.
-
-
-Error: src/app/components/users/users-aside/users-aside.component.html:142:25 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-142                         [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users/users-aside/users-aside.component.ts:38:16
-    38   templateUrl: './users-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersAsideComponent.
-
-
-Error: src/app/components/users/users-aside/users-aside.component.html:143:25 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-143                         [dropSpecialCharacters]="false"
-                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users/users-aside/users-aside.component.ts:38:16
-    38   templateUrl: './users-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersAsideComponent.
-
-
-Error: src/app/components/users/users-aside/users-aside.component.html:231:29 - error NG8002: Can't bind to 'specialCharacters' since it isn't a known property of 'input'.
-
-231                             [specialCharacters]="['(',')',' ','-','E','x','t',':']"
-                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users/users-aside/users-aside.component.ts:38:16
-    38   templateUrl: './users-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersAsideComponent.
-
-
-Error: src/app/components/users/users-aside/users-aside.component.html:232:29 - error NG8002: Can't bind to 'dropSpecialCharacters' since it isn't a known property of 'input'.
-
-232                             [dropSpecialCharacters]="false"
-                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users/users-aside/users-aside.component.ts:38:16
-    38   templateUrl: './users-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersAsideComponent.
-
-
-Error: src/app/components/users/users-aside/users-aside.component.html:481:26 - error NG8003: No directive found with exportAs 'disabled'.
-
-481                 #addBtn="disabled"
-                             ~~~~~~~~
-
-  src/app/components/users/users-aside/users-aside.component.ts:38:16
-    38   templateUrl: './users-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersAsideComponent.
 
 
 Error: src/app/components/users/users-header/users-filter/users-filter-custom-subscriptions/users-filter-custom-subscriptions.component.html:4:16 - error NG8003: No directive found with exportAs 'ngbDropdown'.
@@ -8912,118 +7311,10 @@ Error: src/app/components/users/users-header/users-filter/users-filter-custom-su
     Error occurs in the template of component UsersFilterCustomSubscriptionsComponent.
 
 
-Error: src/app/components/users/users-header/users-filter/users-filter-default-subscription/users-filter-default-subscription.component.html:4:16 - error NG8003: No directive found with exportAs 'ngbDropdown'.
+Error: src/app/components/users/users-table/users-table.component.ts:41:95 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
-4     #products="ngbDropdown"
-                 ~~~~~~~~~~~
-
-  src/app/components/users/users-header/users-filter/users-filter-default-subscription/users-filter-default-subscription.component.ts:13:16
-    13   templateUrl: './users-filter-default-subscription.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersFilterDefaultSubscriptionComponent.
-
-
-Error: src/app/components/users/users-header/users-filter/users-filter-subscriptions/users-filter-subscriptions.component.html:4:10 - error NG8003: No directive found with exportAs 'ngbDropdown'.
-
-4     #dp="ngbDropdown"
-           ~~~~~~~~~~~
-
-  src/app/components/users/users-header/users-filter/users-filter-subscriptions/users-filter-subscriptions.component.ts:21:16
-    21   templateUrl: './users-filter-subscriptions.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersFilterSubscriptionsComponent.
-
-
-Error: src/app/components/users/users-header/users-filter/users-filter-subscriptions/users-filter-subscriptions.component.html:30:17 - error NG8002: Can't bind to 'formControl' since it isn't a known property of 'input'.
-
-30                 [formControl]="tagCtrl"
-                   ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users/users-header/users-filter/users-filter-subscriptions/users-filter-subscriptions.component.ts:21:16
-    21   templateUrl: './users-filter-subscriptions.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersFilterSubscriptionsComponent.
-
-
-Error: src/app/components/users/users-header/users-filter/users-filter-tags/users-filter-tags.component.html:4:10 - error NG8003: No directive found with exportAs 'ngbDropdown'.
-
-4     #dp="ngbDropdown"
-           ~~~~~~~~~~~
-
-  src/app/components/users/users-header/users-filter/users-filter-tags/users-filter-tags.component.ts:17:16
-    17   templateUrl: './users-filter-tags.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersFilterTagsComponent.
-
-
-Error: src/app/components/users/users-header/users-filter/users-filter-tags/users-filter-tags.component.html:6:5 - error NG8002: Can't bind to 'placement' since it isn't a known property of 'div'.
-
-6     [placement]="placement"
-      ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users/users-header/users-filter/users-filter-tags/users-filter-tags.component.ts:17:16
-    17   templateUrl: './users-filter-tags.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersFilterTagsComponent.
-
-
-Error: src/app/components/users/users-table/users-table.component.html:155:9 - error NG8001: 'user-table-custom-subscription' is not a known element:
-1. If 'user-table-custom-subscription' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
-2. If 'user-table-custom-subscription' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
-
-155         <user-table-custom-subscription
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-156             #customSubscription
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-... 
-160             [customSubscriptions]="user.customSubscriptions"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-161         >
-    ~~~~~~~~~
-
-  src/app/components/users/users-table/users-table.component.ts:43:16
-    43   templateUrl: './users-table.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersTableComponent.
-
-
-Error: src/app/components/users/users-table/users-table.component.html:159:13 - error NG8002: Can't bind to 'listCustomSubscription' since it isn't a known property of 'user-table-custom-subscription'.
-1. If 'user-table-custom-subscription' is an Angular component and it has 'listCustomSubscription' input, then verify that it is included in the '@Component.imports' of this component.
-2. If 'user-table-custom-subscription' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
-3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
-
-159             [listCustomSubscription]="listCustomSubscription"
-                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users/users-table/users-table.component.ts:43:16
-    43   templateUrl: './users-table.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersTableComponent.
-
-
-Error: src/app/components/users/users-table/users-table.component.html:160:13 - error NG8002: Can't bind to 'customSubscriptions' since it isn't a known property of 'user-table-custom-subscription'.
-1. If 'user-table-custom-subscription' is an Angular component and it has 'customSubscriptions' input, then verify that it is included in the '@Component.imports' of this component.
-2. If 'user-table-custom-subscription' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
-3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
-
-160             [customSubscriptions]="user.customSubscriptions"
-                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users/users-table/users-table.component.ts:43:16
-    43   templateUrl: './users-table.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersTableComponent.
-
-
-Error: src/app/components/users/users-table/users-table.component.html:224:17 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
-
-224                 [container]="'body'"
-                    ~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users/users-table/users-table.component.ts:43:16
-    43   templateUrl: './users-table.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersTableComponent.
+41   imports: [DynamicTooltipComponent, NgbDropdownModule, UserTableCustomSubscriptionComponent, PreviewPhoneMaskComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
+                                                                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Error: src/app/components/users/users.module.ts:22:5 - error NG6002: 'UsersTableModule' does not appear to be an NgModule class.

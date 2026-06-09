@@ -19,7 +19,7 @@ import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ti
 
 @Component({
   standalone: true,
-  imports: [DropDownComponent, MatErrorComponent, PreloaderTicketComponent, FormsModule, CommonModule],
+  imports: [DropDownComponent, MatErrorComponent, DisabledBtnDirective, PreloaderTicketComponent, FormsModule, CommonModule],
   selector: 'app-super-admin-knowledge-base-add',
   templateUrl: './super-admin-knowledge-base-add.component.html',
   styleUrls: ['./super-admin-knowledge-base-add.component.scss']

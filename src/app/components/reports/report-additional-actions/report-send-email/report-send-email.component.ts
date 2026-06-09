@@ -12,10 +12,11 @@ import { TYPE_REPORT_INVOICE, TYPE_REPORT_PAYMENT, TYPE_REPORT_PRODUCTS } from '
 import { DraftEmailUserRecipientsComponent } from 'src/app/components/shared/draft-email/draft-email-user-recipients/draft-email-user-recipients.component';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, PreloaderTicketComponent, DraftEmailUserRecipientsComponent, FormsModule, CommonModule],
+  imports: [MatErrorComponent, PreloaderTicketComponent, DisabledBtnDirective, DraftEmailUserRecipientsComponent, FormsModule, CommonModule],
   selector: 'app-report-send-email',
   templateUrl: './report-send-email.component.html',
   styleUrls: ['./report-send-email.component.scss'],

@@ -25,11 +25,11 @@ import { NgClass, NgIf } from '@angular/common';
 import { CompanyDevicesAssestTypeDropDownComponent } from './company-devices-assest-type-drop-down/company-devices-assest-type-drop-down.component';
 
 @Component({
-    selector: 'app-company-devices-custom-aside',
-    templateUrl: './company-devices-custom-aside.component.html',
-    styleUrls: ['./company-devices-custom-aside.component.scss'],
-    standalone: true,
-    imports: [CompanyDevicesAssestTypeDropDownComponent, NgClass, FormsModule, NgIf, ManufacturesDropDownComponent, ModelsDropDownComponent, DatePickerComponent, CompanyDevicesCustomDropDownComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
+  selector: 'app-company-devices-custom-aside',
+  templateUrl: './company-devices-custom-aside.component.html',
+  styleUrls: ['./company-devices-custom-aside.component.scss'],
+  standalone: true,
+  imports: [CompanyDevicesAssestTypeDropDownComponent, NgClass, FormsModule, NgIf, ManufacturesDropDownComponent, ModelsDropDownComponent, DatePickerComponent, CompanyDevicesCustomDropDownComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class CompanyDevicesCustomAsideComponent implements OnInit, OnDestroy {
   device: CustomDevice = new CustomDevice();

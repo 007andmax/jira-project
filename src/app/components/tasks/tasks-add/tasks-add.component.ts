@@ -33,7 +33,7 @@ import { TasksAddAssociateTicketsComponent } from './tasks-add-associate-tickets
 
 @Component({
   standalone: true,
-  imports: [DatePickerComponent, ServicesListComponent, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, TasksDatePickerComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
+  imports: [DatePickerComponent, ServicesListComponent, DisabledBtnDirective, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, TasksDatePickerComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
   selector: 'app-tasks-add',
   templateUrl: './tasks-add.component.html',
   styleUrls: ['./tasks-add.component.scss'],

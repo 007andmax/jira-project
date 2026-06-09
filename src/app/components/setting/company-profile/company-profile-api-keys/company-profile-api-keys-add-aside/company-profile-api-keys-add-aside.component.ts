@@ -12,7 +12,7 @@ import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ti
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, PreloaderTicketComponent, CommonModule],
+  imports: [MatErrorComponent, PreloaderTicketComponent, DisabledBtnDirective, CommonModule],
   selector: 'app-company-profile-api-keys-add-aside',
   templateUrl: './company-profile-api-keys-add-aside.component.html',
   styleUrls: ['./company-profile-api-keys-add-aside.component.scss']

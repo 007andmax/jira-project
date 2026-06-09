@@ -5,7 +5,7 @@ import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ElementRef, 
 import { CompanyAndressContact } from 'src/app/interfaces/company/company-address-contact';
 import { CompanyAndress } from 'src/app/interfaces/company/company-address';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
@@ -25,7 +25,7 @@ import { PreviewPhoneMaskComponent } from '../../shared/preview-phone-mask/previ
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, PreviewPhoneMaskComponent, FormsModule, CommonModule],
+  imports: [DynamicTooltipComponent, NgbDropdownModule, PreviewPhoneMaskComponent, FormsModule, CommonModule],
   selector: 'app-companies-table',
   templateUrl: './companies-table.component.html',
   styleUrls: ['./companies-table.component.scss'],

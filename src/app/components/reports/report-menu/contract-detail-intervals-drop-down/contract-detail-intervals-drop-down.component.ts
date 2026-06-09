@@ -4,10 +4,11 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
 import { DetailContractInterval } from '../../class/detail-contract-interval';
 import * as moment from "moment";
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, MatErrorComponent],
+  imports: [CommonModule, MatErrorComponent, NgbDropdownModule],
   selector: 'contract-detail-intervals-drop-down',
   templateUrl: './contract-detail-intervals-drop-down.component.html',
   styleUrls: ['./contract-detail-intervals-drop-down.component.scss'],

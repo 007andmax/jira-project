@@ -38,7 +38,7 @@ import { TextAreaDirective } from 'src/app/directives/text-area/text-area.direct
 
 @Component({
   standalone: true,
-  imports: [DatePickerComponent, InvoiceDiscountComponent, TextAreaDirective, InvoiceFormTicketEditComponent, InvoiceFormTicketInfoComponent, InvoiceRegularNoteComponent, MatErrorComponent, PreloaderTicketComponent, InvoiceChangeAddressComponent, FormsModule, CommonModule, InvoiceFormEditCustomerComponent],
+  imports: [DatePickerComponent, DisabledBtnDirective, InvoiceDiscountComponent, TextAreaDirective, InvoiceFormTicketEditComponent, InvoiceFormTicketInfoComponent, InvoiceRegularNoteComponent, MatErrorComponent, PreloaderTicketComponent, InvoiceChangeAddressComponent, FormsModule, CommonModule, InvoiceFormEditCustomerComponent],
   selector: 'app-invoice-form',
   templateUrl: './invoice-form.component.html',
   styleUrls: ['./invoice-form.component.scss'],

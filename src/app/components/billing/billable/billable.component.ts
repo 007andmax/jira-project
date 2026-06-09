@@ -15,20 +15,19 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { fadeInAnimation } from 'src/app/animations';
 import { BillableItemComponent } from './billable-item/billable-item.component';
 import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
-import { DisabledBtnDirective as DisabledBtnDirective_1 } from '../../../directives/disabled-btn/disabled-btn.directive';
 import { NgIf, NgFor } from '@angular/common';
 
 
 @Component({
-    selector: 'billable',
-    templateUrl: './billable.component.html',
-    styleUrls: ['./billable.component.scss'],
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    providers: [TicketsListService],
-    standalone: true,
-    imports: [NgIf, DisabledBtnDirective_1, PreloaderTicketComponent, NgFor, BillableItemComponent]
+  selector: 'billable',
+  templateUrl: './billable.component.html',
+  styleUrls: ['./billable.component.scss'],
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  providers: [TicketsListService],
+  standalone: true,
+  imports: [NgIf, DisabledBtnDirective, PreloaderTicketComponent, NgFor, BillableItemComponent]
 })
 export class BillableComponent implements OnInit, OnDestroy {
   @ViewChild('saveAndDownloadBtn', { static: false }) saveAndDownloadBtn: DisabledBtnDirective;

@@ -16,7 +16,7 @@ import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ti
 
 @Component({
   standalone: true,
-  imports: [PreloaderTicketComponent, CommonModule],
+  imports: [PreloaderTicketComponent, CommonModule, DisabledBtnDirective],
   selector: 'ticket-detail-message',
   templateUrl: './ticket-detail-message.component.html',
   styleUrls: ['./ticket-detail-message.component.scss'],

@@ -4,10 +4,11 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { REMOVE_ATTACHMENT } from 'src/app/const/confirm';
 import { TicketProfileAttachmentsComponent } from '../../ticket-edit-aside/ticket-profile-attachments/ticket-profile-attachments.component';
 import { TicketProfile } from '../../class/ticket-profile';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgbDropdownModule],
   selector: 'ticket-detail-attachments',
   templateUrl: './ticket-detail-attachments.component.html',
   styleUrls: ['./ticket-detail-attachments.component.scss']

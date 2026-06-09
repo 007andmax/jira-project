@@ -15,7 +15,7 @@ import { FileManagerAddFileTagsComponent } from './file-manager-add-file-tags/fi
 
 @Component({
   standalone: true,
-  imports: [FileManagementAddFileDragDropComponent, FileManagerAddFileTagsComponent, MatErrorComponent, PreloaderTicketComponent, CommonModule],
+  imports: [FileManagementAddFileDragDropComponent, DisabledBtnDirective, FileManagerAddFileTagsComponent, MatErrorComponent, PreloaderTicketComponent, CommonModule],
   selector: 'app-file-manager-add-file',
   templateUrl: './file-manager-add-file.component.html',
   styleUrls: ['./file-manager-add-file.component.scss'],

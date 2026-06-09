@@ -11,10 +11,11 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 import { InvoiceSettings } from './class/invoice-settings';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @Component({
   standalone: true,
-  imports: [DropDownComponent, CommonModule],
+  imports: [DropDownComponent, NgxMaskModule.forRoot(), CommonModule],
   selector: 'app-invoice-settings',
   templateUrl: './invoice-settings.component.html',
   styleUrls: ['./invoice-settings.component.scss']

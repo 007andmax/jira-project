@@ -12,7 +12,7 @@ import { TicketDetailProfileEditUpdatesHeaderComponent } from './ticket-detail-p
 
 @Component({
   standalone: true,
-  imports: [PreloaderTicketComponent, TicketDetailProfileEditUpdatesHeaderComponent, CommonModule],
+  imports: [PreloaderTicketComponent, TicketDetailProfileEditUpdatesHeaderComponent, DisabledBtnDirective, CommonModule],
   selector: 'ticket-detail-profile-edit-updates',
   templateUrl: './ticket-detail-profile-edit-updates.component.html',
   styleUrls: ['./ticket-detail-profile-edit-updates.component.scss']

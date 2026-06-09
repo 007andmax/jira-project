@@ -11,7 +11,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { ARCHIVE_USER, DEARCHIVE_USER } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { UsersTableService } from './services/users-table.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
@@ -38,7 +38,7 @@ import { UserTableDefaultSubscriptionComponent } from './user-table-default-subs
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, PreviewPhoneMaskComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
+  imports: [DynamicTooltipComponent, NgbDropdownModule, UserTableCustomSubscriptionComponent, PreviewPhoneMaskComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'app-users-table',
   templateUrl: './users-table.component.html',
   styleUrls: ['./users-table.component.scss'],

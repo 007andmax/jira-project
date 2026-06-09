@@ -9,10 +9,11 @@ import { KnowledgeBaseValidate } from '../super-admin-knowledge-base-add/class/k
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   standalone: true,
-  imports: [DropDownComponent, MatErrorComponent, PreloaderTicketComponent, FormsModule, CommonModule],
+  imports: [DropDownComponent, MatErrorComponent, DisabledBtnDirective, PreloaderTicketComponent, FormsModule, CommonModule],
   selector: 'app-super-admin-knowledge-base-edit',
   templateUrl: './super-admin-knowledge-base-edit.component.html',
   styleUrls: ['./super-admin-knowledge-base-edit.component.scss']
