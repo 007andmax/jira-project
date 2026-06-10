@@ -1916,83 +1916,6 @@ Error: src/app/components/reports/report-additional-actions/report-send-email/re
     Error occurs in the template of component ReportSendEmailComponent.
 
 
-Error: src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.html:3:5 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'div'.
-
-3     [ngClass]="class"
-      ~~~~~~~~~~~~~~~~~
-
-  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:8:16
-    8   templateUrl: './contract-company-drop-down.component.html',
-                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ContractCompanyDropDownComponent.
-
-
-Error: src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.html:5:5 - error NG8002: Can't bind to 'ngStyle' since it isn't a known property of 'div'.
-
-5     [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:8:16
-    8   templateUrl: './contract-company-drop-down.component.html',
-                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ContractCompanyDropDownComponent.
-
-
-Error: src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.html:22:13 - error NG8002: Can't bind to 'ngStyle' since it isn't a known property of 'input'.
-
-22             [ngStyle]="{'width': '100%', 'height': heightInput ? heightInput : '40px' }"
-               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:8:16
-    8   templateUrl: './contract-company-drop-down.component.html',
-                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ContractCompanyDropDownComponent.
-
-
-Error: src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.html:23:13 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'input'.
-
-23             [ngClass]="{'disabled': isDisabled, '--input-error' : !validate}"
-               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:8:16
-    8   templateUrl: './contract-company-drop-down.component.html',
-                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ContractCompanyDropDownComponent.
-
-
-Error: src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.html:37:13 - error NG8002: Can't bind to 'ngStyle' since it isn't a known property of 'span'.
-
-37             [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '20px' }"
-               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:8:16
-    8   templateUrl: './contract-company-drop-down.component.html',
-                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ContractCompanyDropDownComponent.
-
-
-Error: src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.html:60:13 - error NG8002: Can't bind to 'ngStyle' since it isn't a known property of 'div'.
-
-60             [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'max-height': dropdownHeight ? dropdownHeight : '192px'}"
-               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:8:16
-    8   templateUrl: './contract-company-drop-down.component.html',
-                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ContractCompanyDropDownComponent.
-
-
-Error: src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.html:75:21 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'button'.
-
-75                     [ngClass]="{'--selected':isSelected(item)}"
-                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/reports/report-menu/contract-company-drop-down/contract-company-drop-down.component.ts:8:16
-    8   templateUrl: './contract-company-drop-down.component.html',
-                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ContractCompanyDropDownComponent.
-
-
 Error: src/app/components/reports/report-menu/report-menu.component.html:147:29 - error NG8001: 'software-summary-devices-dro-down' is not a known element:
 1. If 'software-summary-devices-dro-down' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
 2. If 'software-summary-devices-dro-down' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
@@ -6450,36 +6373,14 @@ Error: src/app/components/users-details/users-details-tab-companies/users-detail
     Is it missing an @NgModule annotation?
 
 
-Error: src/app/components/users-details/users-details-tab-messages/users-details-tab-messages-full-body/users-details-tab-messages-full-body.component.html:45:21 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'div'.
-
-45                     [ngClass]="{'hide-all-user':!toggleAllUsers}"
-                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users-details/users-details-tab-messages/users-details-tab-messages-full-body/users-details-tab-messages-full-body.component.ts:11:16
-    11   templateUrl: './users-details-tab-messages-full-body.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersDetailsTabMessagesFullBodyComponent.
-
-
-Error: src/app/components/users-details/users-details-tab-messages/users-details-tab-messages-full-body/users-details-tab-messages-full-body.component.html:57:37 - error NG8002: Can't bind to 'ngStyle' since it isn't a known property of 'div'.
-
-57                                     [ngStyle]="{'background':  usersStateService.getUserAvatarUrl(user)}"
-                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users-details/users-details-tab-messages/users-details-tab-messages-full-body/users-details-tab-messages-full-body.component.ts:11:16
-    11   templateUrl: './users-details-tab-messages-full-body.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersDetailsTabMessagesFullBodyComponent.
-
-
 Error: src/app/components/users-details/users-details-tab-tickets/users-details-tab-tickets-item/users-details-tab-tickets-item.component.html:6:15 - error NG8002: Can't bind to 'ngClass' since it isn't a known property of 'span'.
 
 6         <span [ngClass]="getClassType()"></span>
                 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/users-details/users-details-tab-tickets/users-details-tab-tickets-item/users-details-tab-tickets-item.component.ts:10:18
-    10     templateUrl: './users-details-tab-tickets-item.component.html',
-                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  src/app/components/users-details/users-details-tab-tickets/users-details-tab-tickets-item/users-details-tab-tickets-item.component.ts:11:16
+    11   templateUrl: './users-details-tab-tickets-item.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component UsersDetailsTabTicketsItemComponent.
 
 
@@ -6488,9 +6389,9 @@ Error: src/app/components/users-details/users-details-tab-tickets/users-details-
 11             [ngStyle]="getStyleStatus((ticket.customStatus) ? ticket.customStatus : ticket.status)"
                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/users-details/users-details-tab-tickets/users-details-tab-tickets-item/users-details-tab-tickets-item.component.ts:10:18
-    10     templateUrl: './users-details-tab-tickets-item.component.html',
-                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  src/app/components/users-details/users-details-tab-tickets/users-details-tab-tickets-item/users-details-tab-tickets-item.component.ts:11:16
+    11   templateUrl: './users-details-tab-tickets-item.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component UsersDetailsTabTicketsItemComponent.
 
 
@@ -6499,9 +6400,9 @@ Error: src/app/components/users-details/users-details-tab-tickets/users-details-
 18             [ngStyle]="getStyleStatus(ticket.status)"
                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/users-details/users-details-tab-tickets/users-details-tab-tickets-item/users-details-tab-tickets-item.component.ts:10:18
-    10     templateUrl: './users-details-tab-tickets-item.component.html',
-                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  src/app/components/users-details/users-details-tab-tickets/users-details-tab-tickets-item/users-details-tab-tickets-item.component.ts:11:16
+    11   templateUrl: './users-details-tab-tickets-item.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component UsersDetailsTabTicketsItemComponent.
 
 
@@ -6510,9 +6411,9 @@ Error: src/app/components/users-details/users-details-tab-tickets/users-details-
 25             [ngStyle]="getStyleStatus('UNASSIGNED')"
                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/users-details/users-details-tab-tickets/users-details-tab-tickets-item/users-details-tab-tickets-item.component.ts:10:18
-    10     templateUrl: './users-details-tab-tickets-item.component.html',
-                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  src/app/components/users-details/users-details-tab-tickets/users-details-tab-tickets-item/users-details-tab-tickets-item.component.ts:11:16
+    11   templateUrl: './users-details-tab-tickets-item.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component UsersDetailsTabTicketsItemComponent.
 
 
@@ -6521,9 +6422,9 @@ Error: src/app/components/users-details/users-details-tab-tickets/users-details-
 32             [ngStyle]="getStyleStatus(ticket.status)"
                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/users-details/users-details-tab-tickets/users-details-tab-tickets-item/users-details-tab-tickets-item.component.ts:10:18
-    10     templateUrl: './users-details-tab-tickets-item.component.html',
-                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  src/app/components/users-details/users-details-tab-tickets/users-details-tab-tickets-item/users-details-tab-tickets-item.component.ts:11:16
+    11   templateUrl: './users-details-tab-tickets-item.component.html',
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component UsersDetailsTabTicketsItemComponent.
 
 

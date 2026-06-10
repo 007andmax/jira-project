@@ -21,7 +21,7 @@ import { TicketTaskComponent } from '../ticket-task/ticket-task.component';
 
 @Component({
   standalone: true,
-  imports: [TicketTaskComponent, CommonModule],
+  imports: [TicketTaskComponent, CommonModule, SoftwareHeaderComponent],
   selector: 'app-software',
   templateUrl: './software.component.html',
   styleUrls: ['./software.component.scss'],

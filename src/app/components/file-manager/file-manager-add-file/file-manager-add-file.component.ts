@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { FileManagementStateService } from 'src/app/states/file-management/file-management-state.service';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
@@ -15,7 +15,7 @@ import { FileManagerAddFileTagsComponent } from './file-manager-add-file-tags/fi
 
 @Component({
   standalone: true,
-  imports: [FileManagementAddFileDragDropComponent, DisabledBtnDirective, FileManagerAddFileTagsComponent, MatErrorComponent, PreloaderTicketComponent, CommonModule],
+  imports: [FileManagementAddFileDragDropComponent, ReactiveFormsModule, DisabledBtnDirective, FileManagerAddFileTagsComponent, MatErrorComponent, PreloaderTicketComponent, CommonModule],
   selector: 'app-file-manager-add-file',
   templateUrl: './file-manager-add-file.component.html',
   styleUrls: ['./file-manager-add-file.component.scss'],

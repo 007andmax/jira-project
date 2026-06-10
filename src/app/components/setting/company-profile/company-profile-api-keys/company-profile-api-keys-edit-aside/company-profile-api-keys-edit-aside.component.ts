@@ -1,7 +1,7 @@
 ﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
@@ -13,7 +13,7 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, PreloaderTicketComponent, DisabledBtnDirective, CommonModule],
+  imports: [MatErrorComponent, PreloaderTicketComponent, ReactiveFormsModule, DisabledBtnDirective, CommonModule],
   selector: 'app-company-profile-api-keys-edit-aside',
   templateUrl: './company-profile-api-keys-edit-aside.component.html',
   styleUrls: ['./company-profile-api-keys-edit-aside.component.scss']

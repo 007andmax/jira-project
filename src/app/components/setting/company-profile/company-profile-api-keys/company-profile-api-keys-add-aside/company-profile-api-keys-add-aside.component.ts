@@ -2,7 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ApiKeys } from '../class/api-keys';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { PermissionManageService } from 'src/app/services/permission-manage/permission-manage.service';
 import { ApiKeysStateService } from 'src/app/states/api-keys/api-keys-state.service';
 import { ApiKeysService } from 'src/app/services/api-keys/api-keys.service';
@@ -12,7 +12,7 @@ import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ti
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, PreloaderTicketComponent, DisabledBtnDirective, CommonModule],
+  imports: [MatErrorComponent, PreloaderTicketComponent, ReactiveFormsModule, DisabledBtnDirective, CommonModule],
   selector: 'app-company-profile-api-keys-add-aside',
   templateUrl: './company-profile-api-keys-add-aside.component.html',
   styleUrls: ['./company-profile-api-keys-add-aside.component.scss']

@@ -1,5 +1,5 @@
 ﻿
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FileManagerCategory } from '../class/file-manager-category';
@@ -19,7 +19,7 @@ import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
 
 @Component({
   standalone: true,
-  imports: [FileManagerFileInfoTagsComponent, MatErrorComponent, FormsModule, CommonModule],
+  imports: [FileManagerFileInfoTagsComponent, ReactiveFormsModule, MatErrorComponent, FormsModule, CommonModule],
   selector: 'app-file-manager-file-info',
   templateUrl: './file-manager-file-info.component.html',
   styleUrls: ['./file-manager-file-info.component.scss'],

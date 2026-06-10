@@ -11,7 +11,7 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, NgbDropdownModule],
+  imports: [CommonModule, NgbDropdownModule, DocumentsFilterComponent],
   selector: 'documents-header',
   templateUrl: './documents-header.component.html',
   styleUrls: ['./documents-header.component.css'],

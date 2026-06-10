@@ -25,7 +25,7 @@ import { ContractsEditComponent } from '../billing/contracts/contracts-edit/cont
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 @Component({
   standalone: true,
-  imports: [ContractsEditComponent, InfiniteScrollModule, InventoryTableComponent, CommonModule],
+  imports: [ContractsEditComponent, InventoryHeaderComponent, InfiniteScrollModule, InventoryTableComponent, CommonModule],
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.scss'],

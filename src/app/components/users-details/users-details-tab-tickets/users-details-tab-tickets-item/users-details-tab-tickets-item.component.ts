@@ -4,13 +4,14 @@ import * as moment from 'moment';
 import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/tickets-status/class/ticket-status';
 import { StatusColor } from 'src/app/components/tickets/class/status-color';
 import { Ticket } from 'src/app/components/tickets/class/ticket';
+import { CommonModule, NgStyle } from '@angular/common';
 
 @Component({
-    selector: 'app-users-details-tab-tickets-item',
-    templateUrl: './users-details-tab-tickets-item.component.html',
-    styleUrls: ['./users-details-tab-tickets-item.component.scss'],
-    providers: [TicketsListService],
-    standalone: true
+  selector: 'app-users-details-tab-tickets-item',
+  templateUrl: './users-details-tab-tickets-item.component.html',
+  styleUrls: ['./users-details-tab-tickets-item.component.scss'],
+  providers: [TicketsListService, CommonModule],
+  standalone: true
 })
 export class UsersDetailsTabTicketsItemComponent implements OnInit {
   @Input() ticket: Ticket;
