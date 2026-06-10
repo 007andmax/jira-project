@@ -126,7 +126,7 @@ export class InventoryComponent implements OnInit {
           this.inventoryList.push(new InventoryItem(data.data));
           this.inventoryList = this.filter.getFilterList(this.inventoryList);
           // this.inventoryList = this.inventoryList.filter(item => (this.productSearchName.length > 0) ? item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) : true);
-          this.filter.onFilter(this.inventoryList, this.companies, this.glNumbers);
+          this.filter.onFilter(this.inventoryList, this.companies, this.glNumbers, this.taxes);
         }
       }
       if (data.action === 'PRODUCT_DELETED') {
@@ -223,7 +223,7 @@ export class InventoryComponent implements OnInit {
     this.productService.getProducts(this.filter.getActive(), this.filter.getSortTypeId()).subscribe((res: Array<InventoryItem>) => {
       this.reqInventoryList = res;
       this.onScroll();
-      this.filter.onFilter(this.inventoryList, this.companies, this.glNumbers);
+      this.filter.onFilter(this.inventoryList, this.companies, this.glNumbers, this.taxes);
       this.showPreloader = false;
       this.cd.detectChanges();
     });
@@ -235,7 +235,7 @@ export class InventoryComponent implements OnInit {
     }
     this.page_number += 1;
     let listFilter = this.filter.getFilterList(this.reqInventoryList);
-    this.filter.onFilter(listFilter, this.companies, this.glNumbers);
+    this.filter.onFilter(listFilter, this.companies, this.glNumbers, this.taxes);
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let inventoryList = [];
