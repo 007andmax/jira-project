@@ -2,7 +2,7 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { DeviceCompany } from '../class/device-company';
 import { CompanyDevicesRemoteAccessComponent } from '../company-devices-remote-access/company-devices-remote-access.component';
 import { DevicesService } from 'src/app/services/devices/devices.service';
@@ -28,7 +28,7 @@ import { CompanyDevicesNoExistRemoteSessionsComponent } from './company-devices-
 
 @Component({
   standalone: true,
-  imports: [CompanyDevicesExistRemoteSessionsComponent, CompanyDevicesTagsComponent, CompanyDevicesNoExistRemoteSessionsComponent, FormsModule, CommonModule],
+  imports: [CompanyDevicesExistRemoteSessionsComponent, NgbTooltipModule, CompanyDevicesTagsComponent, CompanyDevicesNoExistRemoteSessionsComponent, FormsModule, CommonModule],
   selector: 'app-company-devices-item',
   templateUrl: './company-devices-item.component.html',
   styleUrls: ['./company-devices-item.component.scss'],

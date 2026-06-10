@@ -1,7 +1,7 @@
 ﻿import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Payment } from '../class/payment';
-import { NgbDropdownModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { PaymentsStateService } from 'src/app/states/payments/payments-state.service';
 import * as moment from "moment";
@@ -14,7 +14,7 @@ import { AppService } from 'src/app/states/app/app.service';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, NgbDropdownModule],
+  imports: [CommonModule, NgbDropdownModule, NgbTooltipModule],
   selector: 'app-payment-item',
   templateUrl: './payment-item.component.html',
   styleUrls: ['./payment-item.component.scss'],

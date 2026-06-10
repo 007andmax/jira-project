@@ -3,10 +3,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DeviceCompany } from '../../class/device-company';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgbTooltipModule],
   selector: 'app-company-devices-exist-remote-sessions',
   templateUrl: './company-devices-exist-remote-sessions.component.html',
   styleUrls: ['./company-devices-exist-remote-sessions.component.scss'],

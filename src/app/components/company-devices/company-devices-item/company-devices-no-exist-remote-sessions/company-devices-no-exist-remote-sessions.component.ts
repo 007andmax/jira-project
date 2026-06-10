@@ -4,10 +4,11 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DeviceCompany } from '../../class/device-company';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgbTooltipModule],
   selector: 'app-company-devices-no-exist-remote-sessions',
   templateUrl: './company-devices-no-exist-remote-sessions.component.html',
   styleUrls: ['./company-devices-no-exist-remote-sessions.component.scss'],

@@ -6,10 +6,11 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { QuoteAddProduct } from '../../class/quote-add-product';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { numberDirective } from 'src/app/directives/number/number.directive';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, FormsModule, CommonModule],
+  imports: [MatErrorComponent, FormsModule, CommonModule, numberDirective],
   selector: 'app-product-item-quote',
   templateUrl: './product-item-quote.component.html',
   styleUrls: ['./product-item-quote.component.scss'],

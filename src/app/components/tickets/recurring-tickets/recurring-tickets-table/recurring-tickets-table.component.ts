@@ -6,13 +6,13 @@ import { MONTHS_SHORT } from 'src/app/const/date';
 import { RecurringTicketsStateService } from '../services/recurring-tickets-state.service';
 import { RecurringService } from 'src/app/services/recurring/recurring.service';
 import { RecurringTicketsTableAssignedUserMoreComponent } from './recurring-tickets-table-assigned-user-more/recurring-tickets-table-assigned-user-more.component';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
 @Component({
   standalone: true,
-  imports: [RecurringTicketsTableAssignedUserMoreComponent, NgbDropdownModule, CommonModule],
+  imports: [RecurringTicketsTableAssignedUserMoreComponent, NgbTooltipModule, NgbDropdownModule, CommonModule],
   selector: 'app-recurring-tickets-table',
   templateUrl: './recurring-tickets-table.component.html',
   styleUrls: ['./recurring-tickets-table.component.scss'],

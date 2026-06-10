@@ -8,10 +8,11 @@ import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-toolt
 import { MatChipListComponent } from 'src/app/components/shared/mat-chip-list/mat-chip-list.component';
 import { MatChipComponent } from 'src/app/components/shared/mat-chip/mat-chip.component';
 import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, MatChipComponent, MatChipListComponent, MatFormFieldComponent, CommonModule],
+  imports: [DynamicTooltipComponent, NgbDropdownModule, MatChipComponent, MatChipListComponent, MatFormFieldComponent, CommonModule],
   selector: 'tickets-filter-drop-down',
   templateUrl: './tickets-filter-drop-down.component.html',
   styleUrls: ['./tickets-filter-drop-down.component.scss'],

@@ -19,12 +19,14 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { Device } from '../company-devices/class/device';
 import { DevicesService } from 'src/app/services/devices/devices.service';
-
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'devices',
+  standalone: true,
   templateUrl: './devices.component.html',
-  styleUrls: ['./devices.component.scss']
+  styleUrls: ['./devices.component.scss'],
+  imports: [NgbTooltipModule]
 })
 export class DevicesComponent implements OnInit, OnDestroy {
   @ViewChild("templatePowersell", { static: true }) template;

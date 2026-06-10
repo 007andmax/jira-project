@@ -16,7 +16,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { TicketProfileFormService } from '../../tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { PreviewAttachmentStateService } from '../../tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
 import { ServicesListComponent } from '../../shared/services-list/services-list.component';
@@ -33,7 +33,7 @@ import { TasksAddAssociateTicketsComponent } from './tasks-add-associate-tickets
 
 @Component({
   standalone: true,
-  imports: [DatePickerComponent, ServicesListComponent, DisabledBtnDirective, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, TasksDatePickerComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
+  imports: [DatePickerComponent, NgbTooltipModule, ServicesListComponent, DisabledBtnDirective, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, TasksDatePickerComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
   selector: 'app-tasks-add',
   templateUrl: './tasks-add.component.html',
   styleUrls: ['./tasks-add.component.scss'],

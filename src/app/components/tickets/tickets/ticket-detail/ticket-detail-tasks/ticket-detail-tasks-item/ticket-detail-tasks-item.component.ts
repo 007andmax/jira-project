@@ -17,7 +17,7 @@ import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-
 import { TechUsersComponent } from 'src/app/components/shared/tech-users/tech-users.component';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVE_TASK_TICKET } from 'src/app/const/confirm';
@@ -31,7 +31,7 @@ import { TaskHeaderAddTypeComponent } from 'src/app/components/tasks/task-header
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, TechUsersComponent, TasksDatePickerComponent, TaskHeaderAddTypeComponent, FormsModule, CommonModule],
+  imports: [DynamicTooltipComponent, NgbTooltipModule, TechUsersComponent, TasksDatePickerComponent, TaskHeaderAddTypeComponent, FormsModule, CommonModule],
   selector: 'app-ticket-detail-tasks-item',
   templateUrl: './ticket-detail-tasks-item.component.html',
   styleUrls: ['./ticket-detail-tasks-item.component.scss']

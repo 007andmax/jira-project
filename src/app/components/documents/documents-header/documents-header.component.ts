@@ -7,10 +7,11 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { DocumentsFilterComponent } from './documents-filter/documents-filter.component';
 import { Subscription } from 'rxjs';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgbDropdownModule],
   selector: 'documents-header',
   templateUrl: './documents-header.component.html',
   styleUrls: ['./documents-header.component.css'],

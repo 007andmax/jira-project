@@ -2,7 +2,7 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -22,7 +22,7 @@ import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error
 
 @Component({
   standalone: true,
-  imports: [AddMarketingSubscriptionTypeComponent, DynamicTooltipComponent, MatErrorComponent, FormsModule, CommonModule],
+  imports: [AddMarketingSubscriptionTypeComponent, NgbTooltipModule, DynamicTooltipComponent, MatErrorComponent, FormsModule, CommonModule],
   selector: 'marketing-subscription-type',
   templateUrl: './marketing-subscription-type.component.html',
   styleUrls: ['./marketing-subscription-type.component.scss'],

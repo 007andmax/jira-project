@@ -11,10 +11,11 @@ import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
 import { TicketsListService } from '../../../../services/tickets-list.service';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 import { ProductListComponent } from 'src/app/components/shared/product-list/product-list.component';
+import { numberDirective } from 'src/app/directives/number/number.directive';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, ProductListComponent, FormsModule, CommonModule],
+  imports: [MatErrorComponent, ProductListComponent, FormsModule, CommonModule, numberDirective],
   selector: 'ticket-detail-profile-updates-product-edit',
   templateUrl: './ticket-detail-profile-updates-product-edit.component.html',
   styleUrls: ['./ticket-detail-profile-updates-product-edit.component.scss']

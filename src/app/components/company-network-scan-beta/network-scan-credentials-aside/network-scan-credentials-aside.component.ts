@@ -13,10 +13,11 @@ import { NetworkScanCredential } from '../class/network-scan-credential';
 import { NetworkScanCredentialsAddComponent } from '../network-scan-credentials-add/network-scan-credentials-add.component';
 import { NetworkScanCredentialsAsideItemComponent } from './network-scan-credentials-aside-item/network-scan-credentials-aside-item.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, NetworkScanCredentialsAddComponent, InfiniteScrollModule, NetworkScanCredentialsAsideItemComponent],
+  imports: [CommonModule, NetworkScanCredentialsAddComponent, NgbDropdownModule, InfiniteScrollModule, NetworkScanCredentialsAsideItemComponent],
   selector: 'app-network-scan-credentials-aside',
   templateUrl: './network-scan-credentials-aside.component.html',
   styleUrls: ['./network-scan-credentials-aside.component.scss'],

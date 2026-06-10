@@ -2,10 +2,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DeviceExtended } from '../../class/device-extended';
 import { DeviceCompany } from '../../class/device-company';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgbTooltipModule],
   selector: 'app-company-devices-aside-device-icon',
   templateUrl: './company-devices-aside-device-icon.component.html',
   styleUrls: ['./company-devices-aside-device-icon.component.scss'],

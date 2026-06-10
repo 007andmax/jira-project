@@ -35,7 +35,7 @@ import { TicketDetailProfileFormUpdateSupportComponent } from './ticket-detail-p
 
 @Component({
   standalone: true,
-  imports: [PreloaderTicketComponent, DisabledBtnDirective, TicketDetailProfileFormUpdateSupportComponent, CommonModule],
+  imports: [PreloaderTicketComponent, TicketDetailProfileFormUpdateProductsComponent, TicketDetailProfileFormUpdateServicesComponent, TicketDetailProfileFormUpdateNoteComponent, TicketProfileFormUpdateNoteListComponent, TicketDetailProfileFormUpdateHeaderComponent, DisabledBtnDirective, TicketDetailProfileFormUpdateSupportComponent, CommonModule],
   selector: 'ticket-detail-profile-form-update',
   templateUrl: './ticket-detail-profile-form-update.component.html',
   styleUrls: ['./ticket-detail-profile-form-update.component.scss'],

@@ -28,9 +28,6 @@ src\app\components\device\window-updates\window-updates.component.scss 2:9  root
 Warning: C:\Users\007andmax\Desktop\qt-ui\node_modules\@swimlane\ngx-charts\fesm2020\swimlane-ngx-charts.mjs depends on 'clone-deep'. CommonJS or AMD dependencies can cause optimization bailouts.
 For more info see: https://angular.io/guide/build#configuring-commonjs-dependencies
 
-Warning: C:\Users\007andmax\Desktop\qt-ui\src\app\components\billing\billable\billable-aside\invoice-form\invoice-form-ticket-edit\invoice-form-ticket-edit-service\invoice-form-ticket-edit-service.component.ts depends on 'src/app/components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component'. CommonJS or AMD dependencies can cause optimization bailouts.
-For more info see: https://angular.io/guide/build#configuring-commonjs-dependencies
-
 
 
 ./src/app/components/tickets/tickets-dashboard/tech-tickets-widget/tech-tickets-widget.component.ts:48:12-28 - Error: export 'NgbButtonsModule' (imported as 'NgbButtonsModule') was not found in '@ng-bootstrap/ng-bootstrap' (possible exports: ModalDismissReasons, NgbAccordion, NgbAccordionBody, NgbAccordionButton, NgbAccordionCollapse, NgbAccordionConfig, NgbAccordionDirective, NgbAccordionHeader, NgbAccordionItem, NgbAccordionModule, NgbAccordionToggle, NgbActiveModal, NgbActiveOffcanvas, NgbAlert, NgbAlertConfig, NgbAlertModule, NgbCalendar, NgbCalendarBuddhist, NgbCalendarGregorian, NgbCalendarHebrew, NgbCalendarIslamicCivil, NgbCalendarIslamicUmalqura, NgbCalendarPersian, NgbCarousel, NgbCarouselConfig, NgbCarouselModule, NgbCollapse, NgbCollapseConfig, NgbCollapseModule, NgbConfig, NgbDate, NgbDateAdapter, NgbDateNativeAdapter, NgbDateNativeUTCAdapter, NgbDateParserFormatter, NgbDateStructAdapter, NgbDatepicker, NgbDatepickerConfig, NgbDatepickerContent, NgbDatepickerI18n, NgbDatepickerI18nDefault, NgbDatepickerI18nHebrew, NgbDatepickerKeyboardService, NgbDatepickerModule, NgbDatepickerMonth, NgbDropdown, NgbDropdownAnchor, NgbDropdownConfig, NgbDropdownItem, NgbDropdownMenu, NgbDropdownModule, NgbDropdownToggle, NgbHighlight, NgbInputDatepicker, NgbInputDatepickerConfig, NgbModal, NgbModalConfig, NgbModalModule, NgbModalRef, NgbModule, NgbNav, NgbNavConfig, NgbNavContent, NgbNavItem, NgbNavItemRole, NgbNavLink, NgbNavLinkBase, NgbNavLinkButton, NgbNavModule, NgbNavOutlet, NgbNavPane, NgbNavbar, NgbOffcanvas, NgbOffcanvasConfig, NgbOffcanvasModule, NgbOffcanvasRef, NgbPagination, NgbPaginationConfig, NgbPaginationEllipsis, NgbPaginationFirst, NgbPaginationLast, NgbPaginationModule, NgbPaginationNext, NgbPaginationNumber, NgbPaginationPages, NgbPaginationPrevious, NgbPanel, NgbPanelContent, NgbPanelHeader, NgbPanelTitle, NgbPanelToggle, NgbPopover, NgbPopoverConfig, NgbPopoverModule, NgbProgressbar, NgbProgressbarConfig, NgbProgressbarModule, NgbRating, NgbRatingConfig, NgbRatingModule, NgbScrollSpy, NgbScrollSpyConfig, NgbScrollSpyFragment, NgbScrollSpyItem, NgbScrollSpyMenu, NgbScrollSpyModule, NgbScrollSpyService, NgbSlide, NgbSlideEventDirection, NgbSlideEventSource, NgbTimeAdapter, NgbTimepicker, NgbTimepickerConfig, NgbTimepickerI18n, NgbTimepickerModule, NgbToast, NgbToastConfig, NgbToastHeader, NgbToastModule, NgbTooltip, NgbTooltipConfig, NgbTooltipModule, NgbTypeahead, NgbTypeaheadConfig, NgbTypeaheadModule, OffcanvasDismissReasons)
@@ -99,17 +96,6 @@ Error: src/app/components/billing/invoices/invoices-aside-preview/invoices-aside
     Is it missing an @NgModule annotation?
 
 
-Error: src/app/components/billing/payments/payment-item/payment-item.component.html:59:13 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-59             [ngbTooltip]="tipContent"
-               ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/billing/payments/payment-item/payment-item.component.ts:19:16
-    19   templateUrl: './payment-item.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component PaymentItemComponent.
-
-
 Error: src/app/components/billing/payments/payments-aside/payments-aside.component.ts:20:13 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
 20   imports: [PreviewPhoneMaskComponent, CommonModule],
@@ -125,28 +111,6 @@ Error: src/app/components/billing/payments/payments.module.ts:38:5 - error NG600
     22 export class PreviewPhoneMaskModule { }
                     ~~~~~~~~~~~~~~~~~~~~~~
     Is it missing an @NgModule annotation?
-
-
-Error: src/app/components/billing/quotes/quote-aside-add/product-item-quote/product-item-quote.component.html:14:13 - error NG8002: Can't bind to 'money' since it isn't a known property of 'input'.
-
-14             [money]="true"
-               ~~~~~~~~~~~~~~
-
-  src/app/components/billing/quotes/quote-aside-add/product-item-quote/product-item-quote.component.ts:14:16
-    14   templateUrl: './product-item-quote.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ProductItemQuoteComponent.
-
-
-Error: src/app/components/billing/quotes/quote-aside-add/product-item-quote/product-item-quote.component.html:44:13 - error NG8002: Can't bind to 'money' since it isn't a known property of 'input'.
-
-44             [money]="true"
-               ~~~~~~~~~~~~~~
-
-  src/app/components/billing/quotes/quote-aside-add/product-item-quote/product-item-quote.component.ts:14:16
-    14   templateUrl: './product-item-quote.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ProductItemQuoteComponent.
 
 
 Error: src/app/components/billing/quotes/quote-aside-add/product-list-quote/product-list-quote.component.html:48:9 - error NG8001: 'ngb-accordion' is not a known element:
@@ -209,43 +173,10 @@ Error: src/app/components/billing/quotes/quote-aside-add/quote-aside-add-body/qu
                                                                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Error: src/app/components/billing/quotes/quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component.html:14:13 - error NG8002: Can't bind to 'money' since it isn't a known property of 'input'.
-
-14             [money]="true"
-               ~~~~~~~~~~~~~~
-
-  src/app/components/billing/quotes/quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component.ts:14:16
-    14   templateUrl: './product-item-quote-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ProductItemQuoteEditComponent.
-
-
-Error: src/app/components/billing/quotes/quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component.html:44:13 - error NG8002: Can't bind to 'money' since it isn't a known property of 'input'.
-
-44             [money]="true"
-               ~~~~~~~~~~~~~~
-
-  src/app/components/billing/quotes/quote-aside-edit/product-item-quote-edit/product-item-quote-edit.component.ts:14:16
-    14   templateUrl: './product-item-quote-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component ProductItemQuoteEditComponent.
-
-
 Error: src/app/components/billing/quotes/quote-aside-edit/quote-aside-edit-body/quote-aside-edit-body.component.ts:36:53 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
 
 36   imports: [DatePickerComponent, DropDownComponent, InvoiceFormEditCustomerComponent, InvoiceRegularNoteComponent, MatErrorComponent, ProductItemQuoteEditComponent, ProductListQuoteComponent, QuoteAsideAddChangeAddressComponent, FormsModule, CommonModule],
                                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/billing/quotes/quote-aside-edit/quote-aside-edit.component.html:32:13 - error NG8002: Can't bind to 'placement' since it isn't a known property of 'div'.
-
-32             [placement]="'top-right'"
-               ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/billing/quotes/quote-aside-edit/quote-aside-edit.component.ts:22:16
-    22   templateUrl: './quote-aside-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component QuoteAsideEditComponent.
 
 
 Error: src/app/components/billing/quotes/quote-aside-preview/quote-aside-preview-body/quote-aside-preview-body.component.ts:12:13 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.
@@ -689,17 +620,6 @@ Error: src/app/components/company-dashboard/company-dash-associate-info/company-
                ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Error: src/app/components/company-dashboard/company-dash-contract/company-dash-contract.component.html:60:37 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'span'.
-
-60                                     [ngbTooltip]="tipContent"
-                                       ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/company-dashboard/company-dash-contract/company-dash-contract.component.ts:21:16
-    21   templateUrl: './company-dash-contract.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyDashContractComponent.
-
-
 Error: src/app/components/company-dashboard/company-dash-detail/company-dash-detail.component.html:291:17 - error NG8002: Can't bind to 'height' since it isn't a known property of 'textarea'.
 
 291                 [height]="'80px'"
@@ -722,17 +642,6 @@ Error: src/app/components/company-dashboard/company-dash-detail/company-dash-det
     Error occurs in the template of component CompanyDashDetailComponent.
 
 
-Error: src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.html:6:13 - error NG8002: Can't bind to 'placement' since it isn't a known property of 'div'.
-
-6             [placement]="'bottom-right'"
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts:12:16
-    12   templateUrl: './company-dash-revenue.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyDashRevenueComponent.
-
-
 Error: src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.html:45:9 - error NG8001: 'ngx-charts-pie-chart' is not a known element:
 1. If 'ngx-charts-pie-chart' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
 2. If 'ngx-charts-pie-chart' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
@@ -747,8 +656,8 @@ Error: src/app/components/company-dashboard/company-dash-revenue/company-dash-re
  54         >
     ~~~~~~~~~
 
-  src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts:12:16
-    12   templateUrl: './company-dash-revenue.component.html',
+  src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts:13:16
+    13   templateUrl: './company-dash-revenue.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component CompanyDashRevenueComponent.
 
@@ -761,8 +670,8 @@ Error: src/app/components/company-dashboard/company-dash-revenue/company-dash-re
 47             [view]="[210,210]"
                ~~~~~~~~~~~~~~~~~~
 
-  src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts:12:16
-    12   templateUrl: './company-dash-revenue.component.html',
+  src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts:13:16
+    13   templateUrl: './company-dash-revenue.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component CompanyDashRevenueComponent.
 
@@ -775,8 +684,8 @@ Error: src/app/components/company-dashboard/company-dash-revenue/company-dash-re
 48             [scheme]="chartColors"
                ~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts:12:16
-    12   templateUrl: './company-dash-revenue.component.html',
+  src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts:13:16
+    13   templateUrl: './company-dash-revenue.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component CompanyDashRevenueComponent.
 
@@ -789,8 +698,8 @@ Error: src/app/components/company-dashboard/company-dash-revenue/company-dash-re
 49             [results]="data"
                ~~~~~~~~~~~~~~~~
 
-  src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts:12:16
-    12   templateUrl: './company-dash-revenue.component.html',
+  src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts:13:16
+    13   templateUrl: './company-dash-revenue.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component CompanyDashRevenueComponent.
 
@@ -803,8 +712,8 @@ Error: src/app/components/company-dashboard/company-dash-revenue/company-dash-re
 50             [legend]="false"
                ~~~~~~~~~~~~~~~~
 
-  src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts:12:16
-    12   templateUrl: './company-dash-revenue.component.html',
+  src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts:13:16
+    13   templateUrl: './company-dash-revenue.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component CompanyDashRevenueComponent.
 
@@ -817,8 +726,8 @@ Error: src/app/components/company-dashboard/company-dash-revenue/company-dash-re
 51             [labels]="false"
                ~~~~~~~~~~~~~~~~
 
-  src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts:12:16
-    12   templateUrl: './company-dash-revenue.component.html',
+  src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts:13:16
+    13   templateUrl: './company-dash-revenue.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component CompanyDashRevenueComponent.
 
@@ -831,8 +740,8 @@ Error: src/app/components/company-dashboard/company-dash-revenue/company-dash-re
 52             [doughnut]="true"
                ~~~~~~~~~~~~~~~~~
 
-  src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts:12:16
-    12   templateUrl: './company-dash-revenue.component.html',
+  src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts:13:16
+    13   templateUrl: './company-dash-revenue.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component CompanyDashRevenueComponent.
 
@@ -845,8 +754,8 @@ Error: src/app/components/company-dashboard/company-dash-revenue/company-dash-re
 53             [arcWidth]="0.2"
                ~~~~~~~~~~~~~~~~
 
-  src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts:12:16
-    12   templateUrl: './company-dash-revenue.component.html',
+  src/app/components/company-dashboard/company-dash-revenue/company-dash-revenue.component.ts:13:16
+    13   templateUrl: './company-dash-revenue.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component CompanyDashRevenueComponent.
 
@@ -1037,17 +946,6 @@ Error: src/app/components/company-dashboard/company-dashboard.component.ts:25:18
                                                                                                                                                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Error: src/app/components/company-devices/company-devices-aside/company-devices-aside-device-icon/company-devices-aside-device-icon.component.html:14:9 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-14         [ngbTooltip]="asideMenuItem"
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/company-devices/company-devices-aside/company-devices-aside-device-icon/company-devices-aside-device-icon.component.ts:10:16
-    10   templateUrl: './company-devices-aside-device-icon.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyDevicesAsideDeviceIconComponent.
-
-
 Error: src/app/components/company-devices/company-devices-aside/company-devices-aside-system/company-devices-aside-system.component.html:248:17 - error NG8002: Can't bind to 'init' since it isn't a known property of 'div'.
 
 248                 [init]="isInitEditNote"
@@ -1114,105 +1012,6 @@ Error: src/app/components/company-devices/company-devices-edit-mac/company-devic
     Error occurs in the template of component CompanyDevicesEditMacComponent.
 
 
-Error: src/app/components/company-devices/company-devices-filter/company-devices-filter-type/company-devices-filter-type.component.html:4:10 - error NG8003: No directive found with exportAs 'ngbDropdown'.
-
-4     #dp="ngbDropdown"
-           ~~~~~~~~~~~
-
-  src/app/components/company-devices/company-devices-filter/company-devices-filter-type/company-devices-filter-type.component.ts:16:16
-    16   templateUrl: './company-devices-filter-type.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyDevicesFilterTypeComponent.
-
-
-Error: src/app/components/company-devices/company-devices-filter/company-devices-filter-type/company-devices-filter-type.component.html:5:5 - error NG8002: Can't bind to 'placement' since it isn't a known property of 'div'.
-
-5     [placement]="placement"
-      ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/company-devices/company-devices-filter/company-devices-filter-type/company-devices-filter-type.component.ts:16:16
-    16   templateUrl: './company-devices-filter-type.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyDevicesFilterTypeComponent.
-
-
-Error: src/app/components/company-devices/company-devices-item/company-devices-exist-remote-sessions/company-devices-exist-remote-sessions.component.html:37:9 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-37         [ngbTooltip]="tipConnected"
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/company-devices/company-devices-item/company-devices-exist-remote-sessions/company-devices-exist-remote-sessions.component.ts:11:16
-    11   templateUrl: './company-devices-exist-remote-sessions.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyDevicesExistRemoteSessionsComponent.
-
-
-Error: src/app/components/company-devices/company-devices-item/company-devices-exist-remote-sessions/company-devices-exist-remote-sessions.component.html:44:9 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-44         [ngbTooltip]="tipConnected"
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/company-devices/company-devices-item/company-devices-exist-remote-sessions/company-devices-exist-remote-sessions.component.ts:11:16
-    11   templateUrl: './company-devices-exist-remote-sessions.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyDevicesExistRemoteSessionsComponent.
-
-
-Error: src/app/components/company-devices/company-devices-item/company-devices-item.component.html:47:17 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-47                 [ngbTooltip]="getTextForTooltip(device.getFieldForCheckIcon())"
-                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/company-devices/company-devices-item/company-devices-item.component.ts:33:16
-    33   templateUrl: './company-devices-item.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyDevicesItemComponent.
-
-
-Error: src/app/components/company-devices/company-devices-item/company-devices-item.component.html:237:17 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'span'.
-
-237                 [ngbTooltip]="tipOfflineDevice"
-                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/company-devices/company-devices-item/company-devices-item.component.ts:33:16
-    33   templateUrl: './company-devices-item.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyDevicesItemComponent.
-
-
-Error: src/app/components/company-devices/company-devices-item/company-devices-item.component.html:303:13 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-303             [ngbTooltip]="tipDeviceDetail"
-                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/company-devices/company-devices-item/company-devices-item.component.ts:33:16
-    33   templateUrl: './company-devices-item.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyDevicesItemComponent.
-
-
-Error: src/app/components/company-devices/company-devices-item/company-devices-no-exist-remote-sessions/company-devices-no-exist-remote-sessions.component.html:12:9 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-12         [ngbTooltip]="tipRemoteAccess"
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/company-devices/company-devices-item/company-devices-no-exist-remote-sessions/company-devices-no-exist-remote-sessions.component.ts:12:16
-    12   templateUrl: './company-devices-no-exist-remote-sessions.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyDevicesNoExistRemoteSessionsComponent.
-
-
-Error: src/app/components/company-devices/company-devices-item/company-devices-no-exist-remote-sessions/company-devices-no-exist-remote-sessions.component.html:21:9 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-21         [ngbTooltip]="tipRemoteAccess"
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/company-devices/company-devices-item/company-devices-no-exist-remote-sessions/company-devices-no-exist-remote-sessions.component.ts:12:16
-    12   templateUrl: './company-devices-no-exist-remote-sessions.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyDevicesNoExistRemoteSessionsComponent.
-
-
 Error: src/app/components/company-devices/company-devices-tags/company-devices-tags.component.html:4:10 - error NG8003: No directive found with exportAs 'ngbDropdown'.
 
 4     #dp="ngbDropdown"
@@ -1257,35 +1056,13 @@ Error: src/app/components/company-network-scan-beta/network-scan-credentials-add
     Error occurs in the template of component NetworkScanCredentialsAddComponent.
 
 
-Error: src/app/components/company-network-scan-beta/network-scan-credentials-aside/network-scan-credentials-aside.component.html:17:9 - error NG8002: Can't bind to 'placement' since it isn't a known property of 'div'.
-
-17         [placement]="'bottom-right'"
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/company-network-scan-beta/network-scan-credentials-aside/network-scan-credentials-aside.component.ts:21:16
-    21   templateUrl: './network-scan-credentials-aside.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component NetworkScanCredentialsAsideComponent.
-
-
-Error: src/app/components/company-network-scan/company-network-scan.component.html:21:21 - error NG8002: Can't bind to 'placement' since it isn't a known property of 'div'.
-
-21                     [placement]="'bottom-right'"
-                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/company-network-scan/company-network-scan.component.ts:36:16
-    36   templateUrl: './company-network-scan.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component CompanyNetworkScanComponent.
-
-
 Error: src/app/components/company-network-scan/company-network-scan.component.html:28:25 - error NG8002: Can't bind to 'disableTooltip' since it isn't a known property of 'button'.
 
 28                         [disableTooltip]="masterAgent && masterAgent.online"
                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/company-network-scan/company-network-scan.component.ts:36:16
-    36   templateUrl: './company-network-scan.component.html',
+  src/app/components/company-network-scan/company-network-scan.component.ts:37:16
+    37   templateUrl: './company-network-scan.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component CompanyNetworkScanComponent.
 
@@ -1715,17 +1492,6 @@ Error: src/app/components/documents/documents-edit/documents-edit.module.ts:24:5
     Is it missing an @NgModule annotation?
 
 
-Error: src/app/components/documents/documents-header/documents-header.component.html:50:25 - error NG8002: Can't bind to 'placement' since it isn't a known property of 'div'.
-
-50                         [placement]="'bottom-right'"
-                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/documents/documents-header/documents-header.component.ts:15:16
-    15   templateUrl: './documents-header.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component DocumentsHeaderComponent.
-
-
 Error: src/app/components/documents/documents-header/documents-header.component.html:89:9 - error NG8001: 'documents-filter' is not a known element:
 1. If 'documents-filter' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
 2. If 'documents-filter' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
@@ -1740,8 +1506,8 @@ Error: src/app/components/documents/documents-header/documents-header.component.
  94         ></documents-filter>
     ~~~~~~~~~
 
-  src/app/components/documents/documents-header/documents-header.component.ts:15:16
-    15   templateUrl: './documents-header.component.html',
+  src/app/components/documents/documents-header/documents-header.component.ts:16:16
+    16   templateUrl: './documents-header.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component DocumentsHeaderComponent.
 
@@ -4367,50 +4133,6 @@ Error: src/app/components/setting/marketing-email/marketing-subscription-type/ma
     Error occurs in the template of component MarketingSubscriptionTypeComponent.
 
 
-Error: src/app/components/setting/marketing-email/marketing-subscription-type/marketing-subscription-type.component.html:98:29 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-98                             [ngbTooltip]="getUserFirstLastName(item.subscribeUserIds[0])"
-                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/marketing-email/marketing-subscription-type/marketing-subscription-type.component.ts:27:16
-    27   templateUrl: './marketing-subscription-type.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component MarketingSubscriptionTypeComponent.
-
-
-Error: src/app/components/setting/marketing-email/marketing-subscription-type/marketing-subscription-type.component.html:107:29 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-107                             [ngbTooltip]="getUserFirstLastName(item.subscribeUserIds[1])"
-                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/marketing-email/marketing-subscription-type/marketing-subscription-type.component.ts:27:16
-    27   templateUrl: './marketing-subscription-type.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component MarketingSubscriptionTypeComponent.
-
-
-Error: src/app/components/setting/marketing-email/marketing-subscription-type/marketing-subscription-type.component.html:125:29 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-125                             [ngbTooltip]="getUserFirstLastName(item.unsubscribeUserIds[0])"
-                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/marketing-email/marketing-subscription-type/marketing-subscription-type.component.ts:27:16
-    27   templateUrl: './marketing-subscription-type.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component MarketingSubscriptionTypeComponent.
-
-
-Error: src/app/components/setting/marketing-email/marketing-subscription-type/marketing-subscription-type.component.html:134:29 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-134                             [ngbTooltip]="getUserFirstLastName(item.unsubscribeUserIds[1])"
-                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/marketing-email/marketing-subscription-type/marketing-subscription-type.component.ts:27:16
-    27   templateUrl: './marketing-subscription-type.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component MarketingSubscriptionTypeComponent.
-
-
 Error: src/app/components/setting/my-profile/account/account.component.html:10:21 - error NG8002: Can't bind to 'formGroup' since it isn't a known property of 'form'.
 
 10                     [formGroup]="passwordForm"
@@ -4683,17 +4405,6 @@ Error: src/app/components/setting/tech-users-settings/tech-users-settings.compon
 
 43                     [destroyOnHide]="true"
                        ~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:40:16
-    40   templateUrl: './tech-users-settings.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TechUsersSettingsComponent.
-
-
-Error: src/app/components/setting/tech-users-settings/tech-users-settings.component.html:158:53 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-158                                                     [ngbTooltip]="techUser.getTooltipsListUserEmailForTechusers()[u]"
-                                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   src/app/components/setting/tech-users-settings/tech-users-settings.component.ts:40:16
     40   templateUrl: './tech-users-settings.component.html',
@@ -5609,17 +5320,6 @@ Error: src/app/components/tasks/tasks-add/tasks-add.component.html:249:17 - erro
     Error occurs in the template of component TasksAddComponent.
 
 
-Error: src/app/components/tasks/tasks-add/tasks-add.component.html:289:41 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-289                                         [ngbTooltip]="file.error"
-                                            ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tasks/tasks-add/tasks-add.component.ts:38:16
-    38   templateUrl: './tasks-add.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TasksAddComponent.
-
-
 Error: src/app/components/tasks/tasks-calendar/tasks-calendar-month/tasks-calendar-month-item-week/tasks-calendar-month-item-week.component.html:43:5 - error NG8002: Can't bind to 'ngbPopover' since it isn't a known property of 'div'.
 
 43     [ngbPopover]="popContent"
@@ -5675,28 +5375,6 @@ Error: src/app/components/tasks/tasks-calendar/tasks-calendar-month/tasks-calend
     Error occurs in the template of component TasksCalendarMonthComponent.
 
 
-Error: src/app/components/tasks/tasks-calendar/tasks-calendar-week/tasks-calendar-week-item-hour/tasks-calendar-week-item-hour.component.html:22:9 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-22         [ngbTooltip]="task.title"
-           ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tasks/tasks-calendar/tasks-calendar-week/tasks-calendar-week-item-hour/tasks-calendar-week-item-hour.component.ts:12:16
-    12   templateUrl: './tasks-calendar-week-item-hour.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TasksCalendarWeekItemHourComponent.
-
-
-Error: src/app/components/tasks/tasks-calendar/tasks-calendar-week/tasks-calendar-week-item-hour/tasks-calendar-week-item-hour.component.html:23:9 - error NG8002: Can't bind to 'tooltipClass' since it isn't a known property of 'div'.
-
-23         [tooltipClass]="'my-tasks__week-hour-tooltip'"
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tasks/tasks-calendar/tasks-calendar-week/tasks-calendar-week-item-hour/tasks-calendar-week-item-hour.component.ts:12:16
-    12   templateUrl: './tasks-calendar-week-item-hour.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TasksCalendarWeekItemHourComponent.
-
-
 Error: src/app/components/tasks/tasks-calendar/tasks-calendar-week/tasks-calendar-week.component.html:76:25 - error NG8002: Can't bind to 'autoClose' since it isn't a known property of 'div'.
 
 76                         [autoClose]="false"
@@ -5724,30 +5402,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:7:9 - error
 7         [formGroup]="modelForm"
           ~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
-    32   templateUrl: './tasks-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TasksEditComponent.
-
-
-Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:78:33 - error NG8002: Can't bind to 'disableTooltip' since it isn't a known property of 'li'.
-
-78                                 [disableTooltip]="!currentService.item"
-                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
-    32   templateUrl: './tasks-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TasksEditComponent.
-
-
-Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:122:33 - error NG8002: Can't bind to 'disableTooltip' since it isn't a known property of 'li'.
-
-122                                 [disableTooltip]="!currentService.item"
-                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
-    32   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:33:16
+    33   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -5757,8 +5413,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:372:23 - er
 372                 #nav="ngbNav"
                           ~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
-    32   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:33:16
+    33   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -5768,8 +5424,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:373:17 - er
 373                 [(activeId)]="activeTab"
                     ~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
-    32   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:33:16
+    33   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -5779,8 +5435,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:378:21 - er
 378                 <li [ngbNavItem]="'description'">
                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
-    32   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:33:16
+    33   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -5799,8 +5455,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:394:25 - er
 403                         ></angular-editor>
     ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
-    32   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:33:16
+    33   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -5813,8 +5469,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:397:29 - er
 397                             [init]="isInitEditNote"
                                 ~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
-    32   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:33:16
+    33   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -5827,8 +5483,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:399:29 - er
 399                             [classParent]="'.edit-note-container'"
                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
-    32   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:33:16
+    33   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -5841,8 +5497,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:402:29 - er
 402                             [config]="editorConfig"
                                 ~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
-    32   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:33:16
+    33   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -5852,19 +5508,8 @@ Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:416:17 - er
 416                 [ngbNavOutlet]="nav"
                     ~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
-    32   templateUrl: './tasks-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TasksEditComponent.
-
-
-Error: src/app/components/tasks/tasks-edit/tasks-edit.component.html:457:41 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-457                                         [ngbTooltip]="file.error"
-                                            ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:32:16
-    32   templateUrl: './tasks-edit.component.html',
+  src/app/components/tasks/tasks-edit/tasks-edit.component.ts:33:16
+    33   templateUrl: './tasks-edit.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TasksEditComponent.
 
@@ -6023,28 +5668,6 @@ Error: src/app/components/tickets/recurring-tickets/recurring-tickets-edit-aside
     Error occurs in the template of component RecurringTicketsEditAsideComponent.
 
 
-Error: src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table-assigned-user/recurring-tickets-table-assigned-user.component.html:5:5 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-5     [ngbTooltip]="user.firstName + ' ' + user.lastName"
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table-assigned-user/recurring-tickets-table-assigned-user.component.ts:10:16
-    10   templateUrl: './recurring-tickets-table-assigned-user.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component RecurringTicketsTableAssignedUserComponent.
-
-
-Error: src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table-assigned-user/recurring-tickets-table-assigned-user.component.html:6:5 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
-
-6     [container]="'body'"
-      ~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table-assigned-user/recurring-tickets-table-assigned-user.component.ts:10:16
-    10   templateUrl: './recurring-tickets-table-assigned-user.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component RecurringTicketsTableAssignedUserComponent.
-
-
 Error: src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component.html:58:21 - error NG8002: Can't bind to 'user' since it isn't a known property of 'app-recurring-tickets-table-assigned-user'.
 1. If 'app-recurring-tickets-table-assigned-user' is an Angular component and it has 'user' input, then verify that it is included in the '@Component.imports' of this component.
 2. If 'app-recurring-tickets-table-assigned-user' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
@@ -6052,28 +5675,6 @@ Error: src/app/components/tickets/recurring-tickets/recurring-tickets-table/recu
 
 58                     [user]="user"
                        ~~~~~~~~~~~~~
-
-  src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component.ts:17:16
-    17   templateUrl: './recurring-tickets-table.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component RecurringTicketsTableComponent.
-
-
-Error: src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component.html:64:17 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-64                 [ngbTooltip]="tipContent"
-                   ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component.ts:17:16
-    17   templateUrl: './recurring-tickets-table.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component RecurringTicketsTableComponent.
-
-
-Error: src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component.html:65:17 - error NG8002: Can't bind to 'container' since it isn't a known property of 'div'.
-
-65                 [container]="'body'"
-                   ~~~~~~~~~~~~~~~~~~~~
 
   src/app/components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component.ts:17:16
     17   templateUrl: './recurring-tickets-table.component.html',
@@ -6416,8 +6017,8 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-fo
  65                     ></app-date-picker>
     ~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:23:16
-    23   templateUrl: './ticket-detail-profile-form-update-services.component.html',
+  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:24:16
+    24   templateUrl: './ticket-detail-profile-form-update-services.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketDetailProfileFormUpdateServicesComponent.
 
@@ -6430,8 +6031,8 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-fo
 58                         [dropdownClass]="['date-picker']"
                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:23:16
-    23   templateUrl: './ticket-detail-profile-form-update-services.component.html',
+  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:24:16
+    24   templateUrl: './ticket-detail-profile-form-update-services.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketDetailProfileFormUpdateServicesComponent.
 
@@ -6444,8 +6045,8 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-fo
 59                         [placement]="'bottom-left'"
                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:23:16
-    23   templateUrl: './ticket-detail-profile-form-update-services.component.html',
+  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:24:16
+    24   templateUrl: './ticket-detail-profile-form-update-services.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketDetailProfileFormUpdateServicesComponent.
 
@@ -6458,8 +6059,8 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-fo
 60                         [editMode]="true"
                            ~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:23:16
-    23   templateUrl: './ticket-detail-profile-form-update-services.component.html',
+  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:24:16
+    24   templateUrl: './ticket-detail-profile-form-update-services.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketDetailProfileFormUpdateServicesComponent.
 
@@ -6472,8 +6073,8 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-fo
 61                         [editDate]="service.getDateTimeWithTimeOffset(companiesStateService.getCurrentCompany())"
                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:23:16
-    23   templateUrl: './ticket-detail-profile-form-update-services.component.html',
+  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:24:16
+    24   templateUrl: './ticket-detail-profile-form-update-services.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketDetailProfileFormUpdateServicesComponent.
 
@@ -6486,8 +6087,8 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-fo
 62                         [useMinDate]="false"
                            ~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:23:16
-    23   templateUrl: './ticket-detail-profile-form-update-services.component.html',
+  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:24:16
+    24   templateUrl: './ticket-detail-profile-form-update-services.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketDetailProfileFormUpdateServicesComponent.
 
@@ -6500,8 +6101,8 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-fo
 64                         [container]="'body'"
                            ~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:23:16
-    23   templateUrl: './ticket-detail-profile-form-update-services.component.html',
+  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:24:16
+    24   templateUrl: './ticket-detail-profile-form-update-services.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketDetailProfileFormUpdateServicesComponent.
 
@@ -6520,8 +6121,8 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-fo
 132                 ></app-date-picker>
     ~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:23:16
-    23   templateUrl: './ticket-detail-profile-form-update-services.component.html',
+  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:24:16
+    24   templateUrl: './ticket-detail-profile-form-update-services.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketDetailProfileFormUpdateServicesComponent.
 
@@ -6534,8 +6135,8 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-fo
 125                     [dropdownClass]="['date-picker']"
                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:23:16
-    23   templateUrl: './ticket-detail-profile-form-update-services.component.html',
+  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:24:16
+    24   templateUrl: './ticket-detail-profile-form-update-services.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketDetailProfileFormUpdateServicesComponent.
 
@@ -6548,8 +6149,8 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-fo
 126                     [placement]="'top-left'"
                         ~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:23:16
-    23   templateUrl: './ticket-detail-profile-form-update-services.component.html',
+  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:24:16
+    24   templateUrl: './ticket-detail-profile-form-update-services.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketDetailProfileFormUpdateServicesComponent.
 
@@ -6562,8 +6163,8 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-fo
 127                     [editMode]="true"
                         ~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:23:16
-    23   templateUrl: './ticket-detail-profile-form-update-services.component.html',
+  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:24:16
+    24   templateUrl: './ticket-detail-profile-form-update-services.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketDetailProfileFormUpdateServicesComponent.
 
@@ -6576,8 +6177,8 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-fo
 128                     [editDate]="currentService.getDateTimeWithTimeOffset(companiesStateService.getCurrentCompany())"
                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:23:16
-    23   templateUrl: './ticket-detail-profile-form-update-services.component.html',
+  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:24:16
+    24   templateUrl: './ticket-detail-profile-form-update-services.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketDetailProfileFormUpdateServicesComponent.
 
@@ -6590,8 +6191,8 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-fo
 129                     [useMinDate]="false"
                         ~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:23:16
-    23   templateUrl: './ticket-detail-profile-form-update-services.component.html',
+  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:24:16
+    24   templateUrl: './ticket-detail-profile-form-update-services.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketDetailProfileFormUpdateServicesComponent.
 
@@ -6604,229 +6205,10 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-fo
 130                     [container]="'body'"
                         ~~~~~~~~~~~~~~~~~~~~
 
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:23:16
-    23   templateUrl: './ticket-detail-profile-form-update-services.component.html',
+  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update-services/ticket-detail-profile-form-update-services.component.ts:24:16
+    24   templateUrl: './ticket-detail-profile-form-update-services.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketDetailProfileFormUpdateServicesComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.html:2:5 - error NG8001: 'ticket-detail-profile-form-update-header' is not a known element:
-1. If 'ticket-detail-profile-form-update-header' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
-2. If 'ticket-detail-profile-form-update-header' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
-
-  2     <ticket-detail-profile-form-update-header
-        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  3         #updateHeader
-    ~~~~~~~~~~~~~~~~~~~~~
-... 
- 10         (onAddService)="selectServices.addService();"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 11     ></ticket-detail-profile-form-update-header>
-    ~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.ts:40:16
-    40   templateUrl: './ticket-detail-profile-form-update.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileFormUpdateComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.html:5:9 - error NG8002: Can't bind to 'ticketProfileFormUpdate' since it isn't a known property of 'ticket-detail-profile-form-update-header'.
-1. If 'ticket-detail-profile-form-update-header' is an Angular component and it has 'ticketProfileFormUpdate' input, then verify that it is included in the '@Component.imports' of this component.
-2. If 'ticket-detail-profile-form-update-header' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
-3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
-
-5         [ticketProfileFormUpdate]="ticketProfileFormUpdate"
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.ts:40:16
-    40   templateUrl: './ticket-detail-profile-form-update.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileFormUpdateComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.html:6:9 - error NG8002: Can't bind to 'currentUser' since it isn't a known property of 'ticket-detail-profile-form-update-header'.
-1. If 'ticket-detail-profile-form-update-header' is an Angular component and it has 'currentUser' input, then verify that it is included in the '@Component.imports' of this component.
-2. If 'ticket-detail-profile-form-update-header' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
-3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
-
-6         [currentUser]="currentUser"
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.ts:40:16
-    40   templateUrl: './ticket-detail-profile-form-update.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileFormUpdateComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.html:7:9 - error NG8002: Can't bind to 'tab' since it isn't a known property of 'ticket-detail-profile-form-update-header'.
-1. If 'ticket-detail-profile-form-update-header' is an Angular component and it has 'tab' input, then verify that it is included in the '@Component.imports' of this component.
-2. If 'ticket-detail-profile-form-update-header' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
-3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
-
-7         [tab]="tab"
-          ~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.ts:40:16
-    40   templateUrl: './ticket-detail-profile-form-update.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileFormUpdateComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.html:8:9 - error NG8002: Can't bind to 'ticketProfile' since it isn't a known property of 'ticket-detail-profile-form-update-header'.
-1. If 'ticket-detail-profile-form-update-header' is an Angular component and it has 'ticketProfile' input, then verify that it is included in the '@Component.imports' of this component.
-2. If 'ticket-detail-profile-form-update-header' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
-3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
-
-8         [ticketProfile]="ticketProfile"
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.ts:40:16
-    40   templateUrl: './ticket-detail-profile-form-update.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileFormUpdateComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.html:13:9 - error NG8001: 'ticket-detail-profile-form-update-note' is not a known element:
-1. If 'ticket-detail-profile-form-update-note' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
-2. If 'ticket-detail-profile-form-update-note' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
-
- 13         <ticket-detail-profile-form-update-note
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 14             *ngIf="tab === 'NOTE'"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-... 
- 16             [ticketProfileFormUpdate]="ticketProfileFormUpdate"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 17         ></ticket-detail-profile-form-update-note>
-    ~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.ts:40:16
-    40   templateUrl: './ticket-detail-profile-form-update.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileFormUpdateComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.html:16:13 - error NG8002: Can't bind to 'ticketProfileFormUpdate' since it isn't a known property of 'ticket-detail-profile-form-update-note'.
-1. If 'ticket-detail-profile-form-update-note' is an Angular component and it has 'ticketProfileFormUpdate' input, then verify that it is included in the '@Component.imports' of this component.
-2. If 'ticket-detail-profile-form-update-note' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
-3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
-
-16             [ticketProfileFormUpdate]="ticketProfileFormUpdate"
-               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.ts:40:16
-    40   templateUrl: './ticket-detail-profile-form-update.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileFormUpdateComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.html:18:9 - error NG8001: 'ticket-detail-profile-form-update-services' is not a known element:
-1. If 'ticket-detail-profile-form-update-services' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
-2. If 'ticket-detail-profile-form-update-services' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
-
- 18         <ticket-detail-profile-form-update-services
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 19             #selectServices
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-... 
- 21             *ngIf="tab === 'SERVICE'"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 22         ></ticket-detail-profile-form-update-services>
-    ~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.ts:40:16
-    40   templateUrl: './ticket-detail-profile-form-update.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileFormUpdateComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.html:20:13 - error NG8002: Can't bind to 'ticketProfile' since it isn't a known property of 'ticket-detail-profile-form-update-services'.
-1. If 'ticket-detail-profile-form-update-services' is an Angular component and it has 'ticketProfile' input, then verify that it is included in the '@Component.imports' of this component.
-2. If 'ticket-detail-profile-form-update-services' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
-3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
-
-20             [ticketProfile]="ticketProfile"
-               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.ts:40:16
-    40   templateUrl: './ticket-detail-profile-form-update.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileFormUpdateComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.html:23:9 - error NG8001: 'ticket-detail-profile-form-update-products' is not a known element:
-1. If 'ticket-detail-profile-form-update-products' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
-2. If 'ticket-detail-profile-form-update-products' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
-
-23         <ticket-detail-profile-form-update-products
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-24             #selectProducts
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-25             *ngIf="tab === 'PRODUCT'"
-   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-26         ></ticket-detail-profile-form-update-products>
-   ~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.ts:40:16
-    40   templateUrl: './ticket-detail-profile-form-update.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileFormUpdateComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.html:38:9 - error NG8001: 'ticket-profile-form-update-note-list' is not a known element:
-1. If 'ticket-profile-form-update-note-list' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
-2. If 'ticket-profile-form-update-note-list' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
-
- 38         <ticket-profile-form-update-note-list
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 39             [hidden]="tab !== 'NOTE'"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-... 
- 43             (onSelected)="onSelectedNote($event)"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 44         ></ticket-profile-form-update-note-list>
-    ~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.ts:40:16
-    40   templateUrl: './ticket-detail-profile-form-update.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileFormUpdateComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.html:41:13 - error NG8002: Can't bind to 'placement' since it isn't a known property of 'ticket-profile-form-update-note-list'.
-1. If 'ticket-profile-form-update-note-list' is an Angular component and it has 'placement' input, then verify that it is included in the '@Component.imports' of this component.
-2. If 'ticket-profile-form-update-note-list' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.
-3. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
-
-41             [placement]="'top-left'"
-               ~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-form-update/ticket-detail-profile-form-update.component.ts:40:16
-    40   templateUrl: './ticket-detail-profile-form-update.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileFormUpdateComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-header-info/ticket-detail-profile-updates-header-info.component.html:25:17 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-25                 [ngbTooltip]="tipContent"
-                   ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-header-info/ticket-detail-profile-updates-header-info.component.ts:11:16
-    11   templateUrl: './ticket-detail-profile-updates-header-info.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileUpdatesHeaderInfoComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-header-info/ticket-detail-profile-updates-header-info.component.html:45:17 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-45                 [ngbTooltip]="tipContent"
-                   ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-header-info/ticket-detail-profile-updates-header-info.component.ts:11:16
-    11   templateUrl: './ticket-detail-profile-updates-header-info.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileUpdatesHeaderInfoComponent.
 
 
 Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-note/ticket-detail-profile-updates-note-edit/ticket-detail-profile-updates-note-edit.component.html:5:13 - error NG8002: Can't bind to 'config' since it isn't a known property of 'angular-editor'.
@@ -6909,83 +6291,6 @@ Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-up
     21   templateUrl: './ticket-detail-profile-updates-note.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketDetailProfileUpdatesNoteComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-edit/ticket-detail-profile-updates-product-edit.component.html:26:25 - error NG8002: Can't bind to 'money' since it isn't a known property of 'input'.
-
-26                         [money]="true"
-                           ~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-edit/ticket-detail-profile-updates-product-edit.component.ts:19:16
-    19   templateUrl: './ticket-detail-profile-updates-product-edit.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileUpdatesProductEditComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-header-info/ticket-detail-profile-updates-product-header-info.component.html:25:17 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-25                 [ngbTooltip]="tipContent"
-                   ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-header-info/ticket-detail-profile-updates-product-header-info.component.ts:12:16
-    12   templateUrl: './ticket-detail-profile-updates-product-header-info.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileUpdatesProductHeaderInfoComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-header-info/ticket-detail-profile-updates-product-header-info.component.html:45:17 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-45                 [ngbTooltip]="tipContent"
-                   ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-header-info/ticket-detail-profile-updates-product-header-info.component.ts:12:16
-    12   templateUrl: './ticket-detail-profile-updates-product-header-info.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileUpdatesProductHeaderInfoComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-info/ticket-detail-profile-updates-product-info.component.html:114:21 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'i'.
-
-114                     [ngbTooltip]="product.serialNumber"
-                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-product/ticket-detail-profile-updates-product-info/ticket-detail-profile-updates-product-info.component.ts:26:16
-    26   templateUrl: './ticket-detail-profile-updates-product-info.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileUpdatesProductInfoComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-header-info/ticket-detail-profile-updates-service-header-info.component.html:25:17 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-25                 [ngbTooltip]="tipContent"
-                   ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-header-info/ticket-detail-profile-updates-service-header-info.component.ts:12:16
-    12   templateUrl: './ticket-detail-profile-updates-service-header-info.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileUpdatesServiceHeaderInfoComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-header-info/ticket-detail-profile-updates-service-header-info.component.html:45:17 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-45                 [ngbTooltip]="tipContent"
-                   ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-profile-updates/ticket-detail-profile-updates-service/ticket-detail-profile-updates-service-header-info/ticket-detail-profile-updates-service-header-info.component.ts:12:16
-    12   templateUrl: './ticket-detail-profile-updates-service-header-info.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailProfileUpdatesServiceHeaderInfoComponent.
-
-
-Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-tasks/ticket-detail-tasks-item/ticket-detail-tasks-item.component.html:126:9 - error NG8002: Can't bind to 'ngbTooltip' since it isn't a known property of 'div'.
-
-126         [ngbTooltip]="item.taskStatus == 'CLOSED' ? 'You cannot delete the closed task' : 'Delete task'"
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/ticket-detail/ticket-detail-tasks/ticket-detail-tasks-item/ticket-detail-tasks-item.component.ts:36:16
-    36   templateUrl: './ticket-detail-tasks-item.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketDetailTasksItemComponent.
 
 
 Error: src/app/components/tickets/tickets/ticket-detail/ticket-detail-tasks/ticket-detail-tasks.component.html:31:26 - error NG8003: No directive found with exportAs 'click'.
@@ -7089,28 +6394,6 @@ Error: src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-
     Error occurs in the template of component TicketsFilterCreatedDropDownComponent.
 
 
-Error: src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-drop-down/tickets-filter-drop-down.component.html:4:10 - error NG8003: No directive found with exportAs 'ngbDropdown'.
-
-4     #dp="ngbDropdown"
-           ~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-drop-down/tickets-filter-drop-down.component.ts:16:16
-    16   templateUrl: './tickets-filter-drop-down.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketsFilterDropDownComponent.
-
-
-Error: src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-drop-down/tickets-filter-drop-down.component.html:5:5 - error NG8002: Can't bind to 'placement' since it isn't a known property of 'div'.
-
-5     [placement]="placement"
-      ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-drop-down/tickets-filter-drop-down.component.ts:16:16
-    16   templateUrl: './tickets-filter-drop-down.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketsFilterDropDownComponent.
-
-
 Error: src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-search/tickets-filter-search.component.html:4:5 - error NG8002: Can't bind to 'autoClose' since it isn't a known property of 'div'.
 
 4     [autoClose]="'outside'"
@@ -7131,28 +6414,6 @@ Error: src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-
     16   templateUrl: './tickets-filter-search.component.html',
                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Error occurs in the template of component TicketsFilterSearchComponent.
-
-
-Error: src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-users-drop-down/tickets-filter-users-drop-down.component.html:4:10 - error NG8003: No directive found with exportAs 'ngbDropdown'.
-
-4     #dp="ngbDropdown"
-           ~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-users-drop-down/tickets-filter-users-drop-down.component.ts:15:16
-    15   templateUrl: './tickets-filter-users-drop-down.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketsFilterUsersDropDownComponent.
-
-
-Error: src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-users-drop-down/tickets-filter-users-drop-down.component.html:5:5 - error NG8002: Can't bind to 'placement' since it isn't a known property of 'div'.
-
-5     [placement]="placement"
-      ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/tickets/tickets/tickets-header/tickets-filter/tickets-filter-users-drop-down/tickets-filter-users-drop-down.component.ts:15:16
-    15   templateUrl: './tickets-filter-users-drop-down.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component TicketsFilterUsersDropDownComponent.
 
 
 Error: src/app/components/tickets/tickets/tickets-header/tickets-header.component.html:34:21 - error NG8002: Can't bind to 'disableTooltip' since it isn't a known property of 'button'.
@@ -7287,28 +6548,6 @@ Error: src/app/components/users-details/users-details.module.ts:21:5 - error NG6
 
 21     UsersDetailsTabCompaniesModule,
        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Error: src/app/components/users/users-header/users-filter/users-filter-custom-subscriptions/users-filter-custom-subscriptions.component.html:4:16 - error NG8003: No directive found with exportAs 'ngbDropdown'.
-
-4     #products="ngbDropdown"
-                 ~~~~~~~~~~~
-
-  src/app/components/users/users-header/users-filter/users-filter-custom-subscriptions/users-filter-custom-subscriptions.component.ts:16:16
-    16   templateUrl: './users-filter-custom-subscriptions.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersFilterCustomSubscriptionsComponent.
-
-
-Error: src/app/components/users/users-header/users-filter/users-filter-custom-subscriptions/users-filter-custom-subscriptions.component.html:5:5 - error NG8002: Can't bind to 'placement' since it isn't a known property of 'div'.
-
-5     [placement]="placement"
-      ~~~~~~~~~~~~~~~~~~~~~~~
-
-  src/app/components/users/users-header/users-filter/users-filter-custom-subscriptions/users-filter-custom-subscriptions.component.ts:16:16
-    16   templateUrl: './users-filter-custom-subscriptions.component.html',
-                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Error occurs in the template of component UsersFilterCustomSubscriptionsComponent.
 
 
 Error: src/app/components/users/users-table/users-table.component.ts:41:95 - error NG2012: Component imports must be standalone components, directives, pipes, or must be NgModules.

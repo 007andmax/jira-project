@@ -11,7 +11,7 @@ import { SettingStateService } from 'src/app/states/setting/setting-state.servic
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DELETE_TECH_USER, RESTORE_USER } from 'src/app/const/confirm';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
@@ -35,7 +35,7 @@ declare var $;
 
 @Component({
   standalone: true,
-  imports: [DropDownComponent, PermissionManageComponent, DisabledBtnDirective, DynamicTooltipComponent, PreloaderTicketComponent, CommonModule],
+  imports: [DropDownComponent, NgbTooltipModule, PermissionManageComponent, DisabledBtnDirective, DynamicTooltipComponent, PreloaderTicketComponent, CommonModule],
   selector: 'app-tech-users-settings',
   templateUrl: './tech-users-settings.component.html',
   animations: [fadeInAnimation],

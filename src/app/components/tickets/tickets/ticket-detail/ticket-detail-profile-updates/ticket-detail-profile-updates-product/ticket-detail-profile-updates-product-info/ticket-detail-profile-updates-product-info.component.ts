@@ -5,7 +5,7 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { REMOVE_UPDATE_TICKET_DETAIL_PRODUCT } from 'src/app/const/confirm';
 import { TicketProfileProduct } from '../../../../class/ticket-profile-product';
 import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
@@ -21,7 +21,7 @@ import { TechUsersComponent } from 'src/app/components/shared/tech-users/tech-us
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, TechUsersComponent, DatePickerComponent, CommonModule],
+  imports: [DynamicTooltipComponent, NgbTooltipModule, TechUsersComponent, DatePickerComponent, CommonModule],
   selector: 'ticket-detail-profile-updates-product-info',
   templateUrl: './ticket-detail-profile-updates-product-info.component.html',
   styleUrls: ['./ticket-detail-profile-updates-product-info.component.scss']

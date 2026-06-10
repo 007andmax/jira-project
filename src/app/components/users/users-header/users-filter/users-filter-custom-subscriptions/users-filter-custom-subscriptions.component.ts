@@ -1,6 +1,7 @@
 ﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyTagsListService } from 'src/app/components/companies/company-tags/services/company-tags-list.service';
 import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 import { MatChipListComponent } from 'src/app/components/shared/mat-chip-list/mat-chip-list.component';
@@ -11,7 +12,7 @@ import { TicketsFilterDropDownComponent } from 'src/app/components/tickets/ticke
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, MatChipComponent, MatChipListComponent, MatFormFieldComponent, CommonModule],
+  imports: [DynamicTooltipComponent, NgbDropdownModule, MatChipComponent, MatChipListComponent, MatFormFieldComponent, CommonModule],
   selector: 'app-users-filter-custom-subscriptions',
   templateUrl: './users-filter-custom-subscriptions.component.html',
   styleUrls: ['./users-filter-custom-subscriptions.component.scss'],

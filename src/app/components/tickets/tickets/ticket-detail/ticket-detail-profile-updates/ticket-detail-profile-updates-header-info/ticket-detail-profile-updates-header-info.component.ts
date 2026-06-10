@@ -3,10 +3,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TicketProfileShare } from '../../../class/ticket-profile-share';
 import { TicketsListService } from '../../../services/tickets-list.service';
 import * as moment from "moment";
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgbTooltipModule],
   selector: 'ticket-detail-profile-updates-header-info',
   templateUrl: './ticket-detail-profile-updates-header-info.component.html',
   styleUrls: ['./ticket-detail-profile-updates-header-info.component.scss']

@@ -13,10 +13,11 @@ import { ActivatedRoute } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ContractsEditComponent } from '../../billing/contracts/contracts-edit/contracts-edit.component';
 import { ContractsPreviewComponent } from '../../billing/contracts/contracts-preview/contracts-preview.component';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [ContractsEditComponent, ContractsPreviewComponent, CommonModule],
+  imports: [ContractsEditComponent, NgbTooltipModule, ContractsPreviewComponent, CommonModule],
   selector: 'app-company-dash-contract',
   templateUrl: './company-dash-contract.component.html',
   styleUrls: ['./company-dash-contract.component.scss']

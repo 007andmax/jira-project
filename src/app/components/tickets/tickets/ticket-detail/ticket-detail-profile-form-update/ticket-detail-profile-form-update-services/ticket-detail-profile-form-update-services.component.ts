@@ -15,10 +15,11 @@ import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-s
 import { TicketProfileUpdatesServiceDurationComponent } from '../../../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.component';
 import { TicketProfileUpdatesServiceTimepickerComponent } from '../../../ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, TicketProfileUpdatesServiceTimepickerComponent, TicketProfileUpdatesServiceDurationComponent, ServicesListComponent, FormsModule, CommonModule],
+  imports: [MatErrorComponent, NgbDropdownModule, TicketProfileUpdatesServiceTimepickerComponent, TicketProfileUpdatesServiceDurationComponent, ServicesListComponent, FormsModule, CommonModule],
   selector: 'ticket-detail-profile-form-update-services',
   templateUrl: './ticket-detail-profile-form-update-services.component.html',
   styleUrls: ['./ticket-detail-profile-form-update-services.component.scss'],

@@ -4,10 +4,11 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 import * as moment from "moment";
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgbDropdownModule],
   selector: 'app-company-dash-revenue',
   templateUrl: './company-dash-revenue.component.html',
   styleUrls: ['./company-dash-revenue.component.scss']
