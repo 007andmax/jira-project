@@ -66,9 +66,9 @@
         <div class="qt-df">
             <div class="qt-w100 qt-mb-16">
                 <div class="qt-input-block">
-                    <label>GL Number 123</label>
-                    <gl-numbers-drop-down
+                     <gl-numbers-drop-down
                         [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']"
+                         [title]="'GL Number'"
                         [list]="glNumbers"
                         [placeholder]="'Select GL'"
                         [container]="'body'"
@@ -76,6 +76,7 @@
                         [search]="true"
                         [change]="true"
                         [field]="'glNumber'"
+                        [editItem]="service.glNumber"
                         [reducerItem]="glDropDownItemName"
                         (onAddItem)="onAddGlNumber($event)"
                         (onSelectedItem)="onSelectGlNumbers($event)"
