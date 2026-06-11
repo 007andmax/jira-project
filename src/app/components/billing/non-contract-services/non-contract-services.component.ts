@@ -10,6 +10,11 @@ import { NonContractServicesRealTimeService } from 'src/app/states/non-contract-
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { NgIf, NgFor } from '@angular/common';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
+import { NonContractServicesContractsComponent } from './non-contract-services-contracts/non-contract-services-contracts.component';
+import { NonContractServicesItemComponent } from './non-contract-services-item/non-contract-services-item.component';
 
 @Component({
   selector: 'non-contract-services',
