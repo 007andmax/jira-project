@@ -9,6 +9,8 @@ export class ProductSalesReportLine {
     purchaseCost: number;
     salePrice: number;
     discount: number;
+    quantity: number;
+    discountPercent: number;
     constructor(data) {
         this.date = data.date;
         this.client = data.client;
@@ -20,7 +22,9 @@ export class ProductSalesReportLine {
         this.purchaseCost = data.purchaseCost;
         this.salePrice = data.salePrice;
         this.discount = data.discount;
+        this.quantity = data.quantity;
+        this.discountPercent = data.discountPercent;
     }
 
- 
+
 }

@@ -15,6 +15,7 @@ export class ProductSalesReport {
     purchaseCostSum: number;
     salePriceSum: number;
     discountSum: number;
+    quantitySum: number;
     init: boolean = false;
 
     public setData(data) {
@@ -30,6 +31,7 @@ export class ProductSalesReport {
         this.purchaseCostSum = data.purchaseCostSum;
         this.salePriceSum = data.salePriceSum;
         this.discountSum = data.discountSum;
+        this.quantitySum = data.quantitySum;
         this.init = true;
     }
 

@@ -30,8 +30,8 @@ export class ProductSalesReportComponent implements OnInit {
     this.headers = [];
     this.list = [];
     this.styles = [];
-    if (this.productSalesReport.type === 'SUMMARY') this.classes = ['', '', '', '', 'ticket_number', 'invoice_number', 'cost', 'price', 'discount'];
-    if (this.productSalesReport.type !== 'SUMMARY') this.classes = ['', '', '', 'ticket_number', 'invoice_number', 'cost', 'price', 'discount'];
+    if (this.productSalesReport.type === 'SUMMARY') this.classes = ['', '', '', '', 'ticket_number', 'invoice_number', 'cost', 'quantity', 'price', 'discount'];
+    if (this.productSalesReport.type !== 'SUMMARY') this.classes = ['', '', '', 'ticket_number', 'invoice_number', 'cost', 'quantity', 'price', 'discount'];
     this.headers.push("Date");
     if (this.productSalesReport.type === 'SUMMARY') this.headers.push("Client");
     this.headers.push("MFG#");
@@ -39,6 +39,7 @@ export class ProductSalesReportComponent implements OnInit {
     this.headers.push("Ticket number");
     this.headers.push("Invoice number");
     this.headers.push("Purchase cost");
+    this.headers.push("QTY");
     this.headers.push("Sale price");
     this.headers.push("Discount");
     this.productSalesReport.lines.forEach((line, index) => {
@@ -50,9 +51,9 @@ export class ProductSalesReportComponent implements OnInit {
       list.push(line.ticketNumber);
       list.push(line.invoiceNumber);
       list.push((line.purchaseCost) ? `$${this.parseTotal(line.purchaseCost)}` : '');
-
+      list.push(line.quantity);
       list.push(`$${this.parseTotal(line.salePrice)}`);
-      list.push(`$${this.parseTotal(line.discount)}`);
+      list.push(line.discountPercent ? `${line.discountPercent}%` : `$${this.parseTotal(line.discount)}`);
       this.list.push(list);
       this.styles.push({ 'color': !line.invoiceNumber ? 'red' : 'none' });
     })
@@ -61,6 +62,7 @@ export class ProductSalesReportComponent implements OnInit {
       list.push("");
     }
     list.push(`$${this.parseTotal((this.productSalesReport.purchaseCostSum) ? this.productSalesReport.purchaseCostSum : 0)}`);
+    list.push(`${this.parseTotal((this.productSalesReport.quantitySum) ? this.productSalesReport.quantitySum : 0)}`);
     list.push(`$${this.parseTotal((this.productSalesReport.salePriceSum) ? this.productSalesReport.salePriceSum : 0)}`);
     list.push(`$${this.parseTotal((this.productSalesReport.discountSum) ? this.productSalesReport.discountSum : 0)}`);
     this.list.push(list);

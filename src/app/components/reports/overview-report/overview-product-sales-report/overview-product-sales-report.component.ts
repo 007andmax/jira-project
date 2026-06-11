@@ -19,6 +19,7 @@ export class OverviewProductSalesReportComponent extends OverviewReportComponent
     new CompanyFilterTop('Ticket number', ''),
     new CompanyFilterTop('Invoice number', ''),
     new CompanyFilterTop('Purchase cost', ''),
+    new CompanyFilterTop('QTY', ''),
     new CompanyFilterTop('Sale price', ''),
     new CompanyFilterTop('Discount', '')];
 
@@ -93,6 +94,16 @@ export class OverviewProductSalesReportComponent extends OverviewReportComponent
         if (sort === '' || sort === 'DESC') {
           this.filter[index].filter = 'ASC';
           this.onFilterPurchaseCost(this.list);
+        } else {
+          this.filter[index].filter = 'DESC';
+          this.list.reverse();
+        }
+      }
+      if (data === 'QTY') {
+        this.clearFilter();
+        if (sort === '' || sort === 'DESC') {
+          this.filter[index].filter = 'ASC';
+          this.onFilterPurchaseQTY(this.list);
         } else {
           this.filter[index].filter = 'DESC';
           this.list.reverse();
@@ -175,22 +186,31 @@ export class OverviewProductSalesReportComponent extends OverviewReportComponent
         1 : ((Number(b[5].replace("$", "")) > Number(a[5].replace("$", ""))) ? -1 : 0));
     }
   }
-  private onFilterSalePrice(list) {
+  private onFilterPurchaseQTY(list) {
     if (this.type === 'SUMMARY') {
-      list.sort((a, b) => (Number(a[7].replace("$", "")) > Number(b[7].replace("$", ""))) ?
-        1 : ((Number(b[7].replace("$", "")) > Number(a[7].replace("$", ""))) ? -1 : 0));
+      list.sort((a, b) => (Number(a[7]) > Number(b[7])) ?
+        1 : ((Number(b[7]) > Number(a[7])) ? -1 : 0));
     } else {
-      list.sort((a, b) => (Number(a[6].replace("$", "")) > Number(b[6].replace("$", ""))) ?
-        1 : ((Number(b[6].replace("$", "")) > Number(a[6].replace("$", ""))) ? -1 : 0));
+      list.sort((a, b) => (Number(a[6]) > Number(b[6])) ?
+        1 : ((Number(b[6]) > Number(a[6])) ? -1 : 0));
     }
   }
-  private onFilterDiscount(list) {
+  private onFilterSalePrice(list) {
     if (this.type === 'SUMMARY') {
       list.sort((a, b) => (Number(a[8].replace("$", "")) > Number(b[8].replace("$", ""))) ?
         1 : ((Number(b[8].replace("$", "")) > Number(a[8].replace("$", ""))) ? -1 : 0));
     } else {
       list.sort((a, b) => (Number(a[7].replace("$", "")) > Number(b[7].replace("$", ""))) ?
         1 : ((Number(b[7].replace("$", "")) > Number(a[7].replace("$", ""))) ? -1 : 0));
+    }
+  }
+  private onFilterDiscount(list) {
+    if (this.type === 'SUMMARY') {
+      list.sort((a, b) => (Number(a[9].replace("$", "").replace("%", "")) > Number(b[9].replace("$", "").replace("%", ""))) ?
+        1 : ((Number(b[9].replace("$", "").replace("%", "")) > Number(a[9].replace("$", "").replace("%", ""))) ? -1 : 0));
+    } else {
+      list.sort((a, b) => (Number(a[8].replace("$", "").replace("%", "")) > Number(b[8].replace("$", "").replace("%", ""))) ?
+        1 : ((Number(b[8].replace("$", "").replace("%", "")) > Number(a[8].replace("$", "").replace("%", ""))) ? -1 : 0));
     }
   }
   private clearFilter() {

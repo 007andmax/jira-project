@@ -19,7 +19,7 @@
   <ng-template ngFor let-item [ngForOf]="list" let-i="index" [ngForTrackBy]="trackByIndex">
     <tr class="qt-report__body-row ng-star-inserted" [ngStyle]="(styles.length > 0) ? styles[i] : null">
       <ng-template ngFor let-child [ngForOf]="item" let-u="index" [ngForTrackBy]="trackByIndex">
-        <td   [textContent]="child"></td>
+        <td   [textContent]="child" ></td>
       </ng-template>
     </tr>
   </ng-template>
