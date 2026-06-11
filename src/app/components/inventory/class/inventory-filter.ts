@@ -9,6 +9,7 @@ export class InventoryFilter {
     new FilterListTop('cost', ''),
     new FilterListTop('sale', ''),
     new FilterListTop('manufacture', ''),
+    new FilterListTop('tax', ''),
     new FilterListTop('ilc', ''),
     new FilterListTop('glNumber', ''),
     new FilterListTop('productType', ''),
@@ -90,6 +91,13 @@ export class InventoryFilter {
                     this.filterTop[index].filter = 'DESC';
                 }
             }
+            if (field === 'tax') {
+                if (sort === '' || sort === 'DESC') {
+                    this.filterTop[index].filter = 'ASC';
+                } else {
+                    this.filterTop[index].filter = 'DESC';
+                }
+            }
             if (field === 'ilc') {
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';
@@ -121,7 +129,7 @@ export class InventoryFilter {
             this.direction = this.filterTop[index].filter;
         }
     }
-    public onFilter(reqInventory, companies, glNumbers) {
+    public onFilter(reqInventory, companies, glNumbers, taxes) {
         let index = this.filterTop.findIndex(item => item.filter !== '');
         if (index > -1) {
             let sort = this.filterTop[index].filter;
@@ -144,6 +152,10 @@ export class InventoryFilter {
             }
             if (field === 'manufacture') {
                 this.onFilterManufacture(reqInventory);
+                if (sort !== 'ASC') reqInventory.reverse();
+            }
+            if (field === 'tax') {
+                this.onFilterTaxes(reqInventory, taxes);
                 if (sort !== 'ASC') reqInventory.reverse();
             }
             if (field === 'ilc') {
@@ -194,12 +206,23 @@ export class InventoryFilter {
                 1 : ((next.toLowerCase() > first.toLowerCase()) ? -1 : 0)
         });
     }
+    private getTax(taxesIds, taxes) {
+        return taxesIds.map(item => taxes.find(tax => tax.id == item));
+    }
     private onFilterGlNumber(reqInventory, glNumbers) {
         reqInventory.sort((a, b) => {
             let first = (a.glNumber && a.glNumber.glNumber) ? a.glNumber.glNumber : '';
             let next = (b.glNumber && b.glNumber.glNumber) ? b.glNumber.glNumber : '';
             return (first.toLowerCase() > next.toLowerCase()) ?
                 1 : ((next.toLowerCase() > first.toLowerCase()) ? -1 : 0)
+        });
+    }
+    private onFilterTaxes(reqInventory, taxes) {
+        reqInventory.sort((a, b) => {
+            let first = this.getTax(a.taxIds, taxes).reduce((accumulator, currentItem) => accumulator + currentItem.rate, 0);
+            let next = this.getTax(b.taxIds, taxes).reduce((accumulator, currentItem) => accumulator + currentItem.rate, 0);
+            return (first > next) ?
+                1 : ((next > first) ? -1 : 0)
         });
     }
     private onFilterProductType(reqInventory) {

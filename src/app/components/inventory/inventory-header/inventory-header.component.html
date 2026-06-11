@@ -155,7 +155,13 @@
                 class="qt-icon__background-unset qt-bg-contain qt-sz-20"
             ></div>
                     </div>
-                    <div class="products-table__tac">Tax</div>
+                    <div class="products-table__tac pointer"    (click)="filter('tax')">Tax
+                           <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'tax'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
                     <div
                         class="products-table__ilc pointer"
                         (click)="filter('ilc')"
