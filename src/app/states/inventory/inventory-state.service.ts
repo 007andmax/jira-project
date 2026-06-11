@@ -64,6 +64,16 @@ export class InventoryStateService {
       }
       this.onInitGetProducts(this.productList);
       this.onChangeProducts.emit(new InventoryChange(newChange.action, newChange.data, []));
+      if (newChange.action === "PRODUCT_TYPE_SAVED") this.listTypes.push(new ProductType(newChange.data));
+      if (newChange.action === "PRODUCT_TYPE_EDITED") {
+        let index = this.listTypes.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.listTypes[index] = new ProductType(newChange.data);
+      }
+      if (newChange.action === "PRODUCT_TYPE_REMOVED") {
+        let index = this.listTypes.findIndex(item => item.id === newChange.data);
+        if (index > -1) this.listTypes.splice(index, 1);
+      }
+      this.onGetListType.emit(this.listTypes);
     })
     // this.getProducts();
   }
@@ -71,18 +81,6 @@ export class InventoryStateService {
     this.productService.getProductsTypes().subscribe((data: any) => {
       this.listTypes = data.productTypeDtos.map(item => new ProductType(item));
       this.onGetListType.emit(this.listTypes)
-    })
-    this.inventoryRealTimeService.changeProductsArray.subscribe(data => {
-      if (data.action === "PRODUCT_TYPE_SAVED") this.listTypes.push(new ProductType(data.data));
-      if (data.action === "PRODUCT_TYPE_EDITED") {
-        let index = this.listTypes.findIndex(item => item.id === data.data.id);
-        if (index > -1) this.listTypes[index] = new ProductType(data.data);
-      }
-      if (data.action === "PRODUCT_TYPE_REMOVED") {
-        let index = this.listTypes.findIndex(item => item.id === data.data);
-        if (index > -1) this.listTypes.splice(index, 1);
-      }
-      this.onGetListType.emit(this.listTypes);
     })
   }
   public clearFilters() {
