@@ -11,6 +11,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   standalone: true,
@@ -22,7 +23,6 @@ import { AppService } from 'src/app/states/app/app.service';
 })
 export class PaymentItemComponent implements OnInit {
   @Input() payment: Payment;
-  company: any;
   @Output() onDetailsPayment = new EventEmitter<any>();
   @Output() onRefundPayment = new EventEmitter<any>();
   @Output() onPreviewInvoice = new EventEmitter<any>();
@@ -38,10 +38,14 @@ export class PaymentItemComponent implements OnInit {
     public customerPortalStateService: CustomerPortalStateService,
     private usersStateService: UsersStateService,
     private permissionsService: PermissionsService,
+    private companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,) { }
 
   ngOnInit() {
 
+  }
+  getCompany(company) {
+    return this.companiesStateService.getCompanies().find(item => item.id == company.id);
   }
   downloadPDF() {
     this.appService.download(`/payments/pdf/${this.payment.id}`, `${this.payment.clientCompanyName}.pdf`);
@@ -68,7 +72,7 @@ export class PaymentItemComponent implements OnInit {
     this.onPreviewInvoice.emit(this.payment.paymentData[index].invoiceId);
   }
   public getCompanyInfoPermissions(action) {
-    return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole.getPermission(action)));
+    return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole && compnayInfo.customerUserRole.getPermission(action)));
   }
   parseStatus() {
     return this.payment.paymentStatus ? this.payment.paymentStatus.split('_').map((el) => el[0].toUpperCase() + el.slice(1).toLowerCase()).join(' ') : '';

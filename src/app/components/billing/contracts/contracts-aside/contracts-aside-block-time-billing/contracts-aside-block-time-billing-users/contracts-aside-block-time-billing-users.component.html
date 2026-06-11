@@ -7,10 +7,30 @@
             (onClose)="remove(i)"
         >
             <div class="qt-df qt-ai-c">
+                 <ng-template #popContent let-greeting="greeting"
+                >
+                        <app-tickets-table-item-requested-by
+                        [requestedUser]="user"
+                        [indexNoAvatar]="indexNoAvatar"
+                        [listColorNoAvatar]="listColorNoAvatar"
+                        ></app-tickets-table-item-requested-by>
+                        </ng-template
+                    >
                 <div
-                    class="app-mat-tags-with-avatar__avatar"
+                    class="app-mat-tags-with-avatar__avatar qt-pointer"
                     [textContent]="getAssignedUserNameForAvatar(user)"
                     [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'contain'}"
+                     [ngbPopover]="popContent"
+                    [popoverClass]="'requested-by-popover'"
+                    [autoClose]="'outside'"
+                    [container]="'body'"
+                    #p="ngbPopover"
+                    triggers="manual"
+                    appUserLogoPopover
+                    [user]="user"
+                    [popover]="p"
+                    [disabled]="!user"
+                    [disablePopover]="!user"
                 ></div>
                 <div
                     [textContent]="getUserName(user)"

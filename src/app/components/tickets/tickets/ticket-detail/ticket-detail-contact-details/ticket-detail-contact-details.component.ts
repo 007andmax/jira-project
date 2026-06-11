@@ -33,6 +33,8 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
   locationShipping: string;
   locationBilling: string;
   companyOpen: string = 'Close';
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   sub: Subscription = new Subscription();
   constructor(public companiesStateService: CompaniesStateService,
     private mapModalStateService: MapModalStateService,
@@ -40,11 +42,19 @@ export class TicketDetailContactDetailsComponent implements OnInit, OnDestroy {
     private usersStateService: UsersStateService) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     this.resetCompany();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.resetCompany();
     })
     this.sub.add(getOnCompanies);
+  }
+  getShippingAddress() {
+    return this.company.companyInfo.addresses.find(item => item.isPrimary);
+  }
+  getBillingAddress() {
+    return this.company.companyInfo.addresses.find(item => !item.isPrimary);
   }
   public resetCompany() {
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.company.id);

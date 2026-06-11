@@ -8,6 +8,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { DocumentsFilterComponent } from './documents-filter/documents-filter.component';
 import { Subscription } from 'rxjs';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   standalone: true,
@@ -28,7 +29,7 @@ export class DocumentsHeaderComponent implements OnInit {
   @Input() selectAll: boolean = false;
   @Input() companyId: string;
   @Input() showAssignedCompanies: boolean = false;
-
+  sortBy: TicketSortBy = new TicketSortBy('title', 'ASC');
   sub: Subscription = new Subscription();
   searchText: string = "";
   /**
@@ -69,6 +70,7 @@ export class DocumentsHeaderComponent implements OnInit {
     this.onSelectAll.emit(data);
   }
   public onFilter(field) {
+    this.sortBy.sortBy = field;
     this.onChangeFilterField.emit(field);
   }
   clearAll() {

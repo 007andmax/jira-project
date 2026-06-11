@@ -149,6 +149,7 @@
         [link]="'manage-cards'"
         target="_blank"
         appRightClickBlank
+        *ngIf="!customerPortalStateService.isCustomerPortal"
     >
         <a
             [ngClass]="{'--active':activePage === 'manage-cards'}"

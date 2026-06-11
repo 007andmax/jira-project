@@ -99,6 +99,8 @@ import { TicketsPermissionsService } from '../ticket-edit-aside/services/tickets
 import { of } from 'rxjs';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TicketProfile } from '../class/ticket-profile';
+import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
+import { TicketsTableItemRequestedByModule } from '../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
 declare var jasmine;
 const mockRouter = {
   navigate: jasmine.createSpy('navigate'),
@@ -114,13 +116,13 @@ describe('TicketDetailComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [CommonModule,
+      imports: [CommonModule,
         NgbModule,
         HttpClientModule,
         ToastrModule.forRoot({
-            closeButton: true,
-            timeOut: 5000,
-            onActivateTick: true
+          closeButton: true,
+          timeOut: 5000,
+          onActivateTick: true
         }),
         NoopAnimationsModule,
         TicketDetailRoutingModule,
@@ -179,9 +181,9 @@ describe('TicketDetailComponent unit test', () => {
         TicketDetailEditTagsComponent,
         TicketDetailAttachmentsComponent,
         TicketDetailContactDetailsComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers: [TicketsListService, TicketsPermissionsService, { provide: Router, useValue: mockRouter }]
-}).compileComponents();
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [TicketsListService, TicketsPermissionsService, { provide: Router, useValue: mockRouter }]
+    }).compileComponents();
 
   });
 

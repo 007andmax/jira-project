@@ -17,6 +17,7 @@ export class TicketProfileUpdatesServiceDurationComponent implements OnInit {
     @Input() minute: number = 0;
     @Input() validate: boolean = true;
     @Input() errorMessage: string = "";
+    @Input() isDisabled: boolean = false;
     step = 1;
     hours: Array<ServiceDurationValue> = [];
     minutes: Array<ServiceDurationValue> = [];

@@ -15,13 +15,14 @@ import { NgbModal, NgbTooltipModule, NgbDropdownModule } from '@ng-bootstrap/ng-
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { Subscription } from 'rxjs';
 import { NgClass, NgIf, NgFor } from '@angular/common';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
-    selector: 'app-left-panel-tickets',
-    templateUrl: './left-panel-tickets.component.html',
-    styleUrls: ['./left-panel-tickets.component.scss'],
-    standalone: true,
-    imports: [NgClass, NgIf, NgFor, NgbTooltipModule, NgbDropdownModule]
+  selector: 'app-left-panel-tickets',
+  templateUrl: './left-panel-tickets.component.html',
+  styleUrls: ['./left-panel-tickets.component.scss'],
+  standalone: true,
+  imports: [NgClass, NgIf, NgFor, NgbTooltipModule, NgbDropdownModule]
 })
 export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   open: boolean = false;
@@ -46,6 +47,7 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
     public customerPortalStateService: CustomerPortalStateService,
     private usersStateService: UsersStateService,
     private modalService: NgbModal,
+    private permissionsService: PermissionsService,
     private confirmStateService: ConfirmStateService,
     private leftPanelService: LeftPanelService) { }
 
@@ -206,6 +208,9 @@ export class LeftPanelTicketsComponent implements OnInit, OnDestroy {
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   removeFilter(filter) {
     this.confirmStateService.setConfirmAction(DELETE_GLOBAL_FILTER);

@@ -9,15 +9,16 @@ import { NgbModal, NgbTooltipModule, NgbDropdownModule } from '@ng-bootstrap/ng-
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { ContractsListService } from '../../services/contracts-list.service';
 import { NgClass, NgIf, CurrencyPipe } from '@angular/common';
+import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 
 
 @Component({
-    selector: 'app-contracts-table-item',
-    templateUrl: './contracts-table-item.component.html',
-    styleUrls: ['./contracts-table-item.component.scss'],
-    providers: [ContractsListService],
-    standalone: true,
-    imports: [NgClass, NgIf, NgbTooltipModule, NgbDropdownModule, CurrencyPipe]
+  selector: 'app-contracts-table-item',
+  templateUrl: './contracts-table-item.component.html',
+  styleUrls: ['./contracts-table-item.component.scss'],
+  providers: [ContractsListService, TicketsListService],
+  standalone: true,
+  imports: [NgClass, NgIf, NgbTooltipModule, NgbDropdownModule, CurrencyPipe]
 })
 export class ContractsTableItemComponent implements OnInit {
   @Input() contract: ContractItem;
@@ -26,6 +27,9 @@ export class ContractsTableItemComponent implements OnInit {
   @Output() onCopy = new EventEmitter();
   @Output() onForceCreate = new EventEmitter();
   @Output() onTerminate = new EventEmitter();
+  company: any;
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   contractTypeDictionary = {
     HOURLY: 'Custom Hourly',
     BLOCK_TIME: 'Block Time',
@@ -47,10 +51,27 @@ export class ContractsTableItemComponent implements OnInit {
     private contractsListService: ContractsListService,
     private contractsStateService: ContractsStateService,
     private permissionsService: PermissionsService,
+    public ticketsListService: TicketsListService,
+    private companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
-
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
+    this.company = this.companiesStateService.getCompanies().find(item => item.id === this.contract.companyId);
+    this.companiesStateService.getOnCompanies().subscribe(res => {
+      this.company = this.companiesStateService.getCompanies().find(item => item.id === this.contract.companyId);
+    })
+  }
+  checkLogo() {
+    return (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id || this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id)
+  }
+  parseLogo() {
+    if (this.checkLogo()) {
+      return `url(${this.companiesStateService.getCompanyLogoUrl(this.company)}) center / cover no-repeat`;
+    } else {
+      return this.ticketsListService.getStyleAvatar(null, this.listColorNoAvatar[this.indexNoAvatar]);
+    }
   }
   ngDoCheck() {
     this.showNotificationReview = this.contractsListService.isShowUpdateNotificationReview(this.contract.reviewDate);

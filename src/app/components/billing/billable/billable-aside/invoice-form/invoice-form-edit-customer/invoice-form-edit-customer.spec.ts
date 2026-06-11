@@ -153,6 +153,6 @@ describe('InvoiceFormEditCustomerComponent unit test', () => {
       ]
     };
     com.onChangePhoneNumber();
-    expect(com.validate.phoneNumber).toEqual(false);
+    expect(com.validate.shippingPhoneNumber).toEqual(false);
   });
 });

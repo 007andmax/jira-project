@@ -18,34 +18,68 @@
     >
         <a
             href
-            class="link-style"
+             class="link-style"
             [link]="getCompanyDashboardLink()"
             target="_blank"
             appRightClickBlank
         >
-            <div class="qt-df qt-ai-c">
+            <div class="companies-table__name-row qt-df qt-ai-c">
+                 <ng-template #popContent let-greeting="greeting"
+	>
+    <app-users-table-company-by
+    [company]="company"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    ></app-users-table-company-by>
+    </ng-template
+>
+
                 <div
-                    class="circle-avatar qt-mr-10"
+                    class="circle-avatar qt-mr-8"
                     [ngClass]="{'with-logo': checkLogo()}"
-                >
+                     [ngStyle]="{'background': ticketsListService.getStyleAvatar(primaryContact,listColorNoAvatar[indexNoAvatar]) }"
+                   [ngbPopover]="popContent"
+                    [popoverClass]="'requested-by-popover'"
+                        [autoClose]="'outside'"
+                        [container]="'body'"
+                    #p="ngbPopover"
+                    triggers="manual"
+                    appCompanyLogoPopover
+                    [company]="company"
+                    [popover]="p"
+                    [disabled]="!company"
+                    [disablePopover]="!company"
+                     >
                     <img
                         [src]="companiesStateService.getCompanyLogoUrl(company)"
                         alt
                         *ngIf="checkLogo()"
                     >
                     <span
+                    class="qt-fs-13 qt-fw-500"
                         *ngIf="!checkLogo()"
                         [textContent]="company.name[0].toUpperCase()"
                     ></span>
                 </div>
                 <div class="mob-styles">
-                    <p
-                        class="qt-fw-500"
+                    <div
+                        placement="top"
+                        [disableTooltip]="company.name.length < 50"
+                        [ngbTooltip]="company.name"
+                        class="ellipsis ellipsis-name qt-fs-14 qt-fw-500 qt-color-gray-900 qt-mb-4"
                         [textContent]="company.name"
-                    ></p>
+                    ></div>
+                       <ng-template
+                        ngFor
+                        let-item
+                        [ngForOf]="primaryAddress ? primaryAddress.phoneNumbers : []"
+                        [ngForTrackBy]="trackById"
+                    >
+                       <div class="qt-fs-12 qt-fw-400 qt-color-gray-500" [textContent]="item.number"></div>
+                    </ng-template>
                 </div>
             </div>
-        </a>
+                </a>
     </div>
     <div
         (click)="goToDashboard()"
@@ -62,20 +96,6 @@
         </a>
     </div>
     <div
-        class="companies-table__address pointer"
-        (click)="goToDashboard()"
-    >
-        <a
-            href
-            class="link-style"
-            [link]="getCompanyDashboardLink()"
-            target="_blank"
-            appRightClickBlank
-            [textContent]="location"
-        >
-        </a>
-    </div>
-    <div
         class="companies-table__primary-contact pointer"
         (click)="goToDashboard()"
     >
@@ -86,30 +106,41 @@
             target="_blank"
             appRightClickBlank
         >
-            <div class="mobile__primary-contact">
-                <p
-                    class="name"
+        <div class="companies-table__primary-contact__row qt-df qt-ai-c">
+               <ng-template #popContent let-greeting="greeting"
+	>
+    <app-tickets-table-item-requested-by
+    [requestedUser]="primaryContact"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    ></app-tickets-table-item-requested-by>
+    </ng-template
+>
+                <div
+                    class="qt-table-modern__circle-avatar"
+                    [ngClass]="!usersStateService.getNameForAvatar(primaryContact).length ? 'transparent-text' : ''"
+                    [textContent]="usersStateService.getNameForAvatar(primaryContact)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(primaryContact,listColorNoAvatar[indexNoAvatar]) }"
+                 [ngbPopover]="popContent"
+                [popoverClass]="'requested-by-popover'"
+                 [autoClose]="'outside'"
+                 [container]="'body'"
+                #p="ngbPopover"
+                triggers="manual"
+                 appUserLogoPopover
+                [user]="primaryContact"
+                [popover]="p"
+                [disabled]="!primaryContact"
+                [disablePopover]="!primaryContact"
+                    ></div>
+                <div class="mob-styles">
+                   <div
                     [textContent]="getUserName()"
-                ></p>
-                <preview-phone-mask
-                    *ngIf="primaryPhone && primaryPhone.number"
-                    [number]="primaryPhone.number"
-                ></preview-phone-mask>
+                    class="ellipsis ellipsis-primary-contact qt-fw-500 qt-fs-14 qt-color-gray-900 qt-mb-8"
+                ></div>
+                <div  class="ellipsis ellipsis-primary-contact qt-fs-12 qt-fw-400 qt-color-gray-500" [textContent]="(primaryContact) ? primaryContact.primaryEmail : ''"></div>
+                </div>
             </div>
-        </a>
-    </div>
-    <div
-        (click)="goToDashboard()"
-        class="companies-table__email-address pointer"
-    >
-        <a
-            href
-            class="link-style"
-            [link]="getCompanyDashboardLink()"
-            target="_blank"
-            appRightClickBlank
-            [textContent]="(primaryContact) ? primaryContact.primaryEmail : ''"
-        >
         </a>
     </div>
     <div
@@ -153,65 +184,75 @@
             [textContent]="countUsers"
         ></a>
     </div>
-    <div class="companies-table__download-btn  pointer">
-        <button
-            class="mob-hidden qt-df"
-            (click)="downloadAgent()"
-            *ngIf="!showArchivedCompanies && !customerPortalStateService.isCustomerPortal"
+    <div class="companies-table__menu">
+      <div class="qt-df qt-button-square-wrap">
+        <div
+          class="qt-button-square qt-button-square__prepend pointer"
+          (click)="downloadAgent()"
+          *ngIf="!showArchivedCompanies && !customerPortalStateService.isCustomerPortal"
         >
+          <button
+            class="mob-hidden qt-df"
+          >
             <i class="qt-icon icon__download qt-za-16 qt-sz-16 qt-dib"></i>
-        </button>
-        <app-dynamic-tooltip
+          </button>
+          <app-dynamic-tooltip
             [content]="'Restore Company'"
             [position]="'top'"
             #restoreTooltip
-        ></app-dynamic-tooltip>
-        <button
+          ></app-dynamic-tooltip>
+          <button
             (click)="onRestore()"
             *ngIf="showArchivedCompanies"
             (mouseenter)="restoreTooltip.show($event.target)"
             (mouseleave)="restoreTooltip.hide()"
-        >
+          >
             <i
-                style="height: 19px;"
-                class="icn-16 qt-icon icon__updates"
+              style="height: 19px;"
+              class="icn-16 qt-icon icon__updates"
             ></i>
-        </button>
-    </div>
-    <div class="companies-table__menu pointer">
+          </button>
+        </div>
+
         <div
             class="grey-dropdown right with-icons"
             *ngIf="!showArchivedCompanies && !customerPortalStateService.isCustomerPortal"
             ngbDropdown
             [container]="'body'"
-        >
+
+          >
+          <div
+            class="dropdown-toggle qt-button-square qt-button-square__afterpend pointer"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          >
             <i
-                class="icn-16 qt-bg-contain qt-icon icon__more pointer"
-                id="dropdownBasic1"
-                ngbDropdownToggle
+              class="icn-16 qt-bg-contain qt-icon icon__more pointer"
             ></i>
             <div
-                class="qt-dropdown-menu"
-                ngbDropdownMenu
-                aria-labelledby="dropdownBasic1"
+              class="qt-dropdown-menu"
+              ngbDropdownMenu
+              aria-labelledby="dropdownBasic1"
             >
-                <li
-                    ngbDropdownItem
-                    (click)="edit()"
-                    *ngIf="getPermissions('EDIT_COMPANIES')"
-                >
-                    <i class="qt-sz-20 qt-mr-12 qt-bg-contain qt-icon icon__edit"></i>
-                    Edit
-                </li>
-                <li
-                    ngbDropdownItem
-                    (click)="remove()"
-                    *ngIf="getPermissions('ARCHIVE_COMPANIES')"
-                >
-                    <i class="qt-sz-20 qt-mr-12 qt-icon icon__delete qt-icon__red-600"></i>
-                    {{company.isExample ? 'Delete' : 'Archive'}}
-                </li>
+              <li
+                ngbDropdownItem
+                (click)="edit()"
+                *ngIf="getPermissions('EDIT_COMPANIES')"
+              >
+                <i class="qt-sz-20 qt-mr-12 qt-bg-contain qt-icon icon__edit"></i>
+                Edit
+              </li>
+              <li
+                ngbDropdownItem
+                (click)="remove()"
+                *ngIf="getPermissions('ARCHIVE_COMPANIES')"
+              >
+                <i class="qt-sz-20 qt-mr-12 qt-icon icon__delete qt-icon__red-600"></i>
+                {{company.isExample ? 'Delete' : 'Archive'}}
+              </li>
             </div>
+          </div>
         </div>
+      </div>
     </div>
 </div>

@@ -37,15 +37,17 @@ import { PriorityLevelDropDownComponent } from './priority-level-drop-down/prior
 import { MatErrorComponent } from '../../../shared/mat-error/mat-error.component';
 import { NgClass, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { User } from 'src/app/components/users/class/user';
+import { CurrentUser } from 'src/class/current-user/current-user';
 
 
 
 @Component({
-    selector: 'app-ticket-add-aside',
-    templateUrl: './ticket-add-aside.component.html',
-    styleUrls: ['./ticket-add-aside.component.scss'],
-    standalone: true,
-    imports: [FormsModule, NgClass, NgIf, MatErrorComponent, PriorityLevelDropDownComponent, CompanyUsersDropDownComponent, CompanyDropDownComponent, UsersDropDownComponent_1, DropDownComponent, UploadAreaComponent, AssignedTicketUserComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
+  selector: 'app-ticket-add-aside',
+  templateUrl: './ticket-add-aside.component.html',
+  styleUrls: ['./ticket-add-aside.component.scss'],
+  standalone: true,
+  imports: [FormsModule, NgClass, NgIf, MatErrorComponent, PriorityLevelDropDownComponent, CompanyUsersDropDownComponent, CompanyDropDownComponent, UsersDropDownComponent_1, DropDownComponent, UploadAreaComponent, AssignedTicketUserComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class TicketAddAsideComponent implements OnInit, OnDestroy {
   @ViewChild('userDP', { static: false }) userDP: CompanyUsersDropDownComponent;
@@ -66,6 +68,8 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   techUsersList = [];
   namesTechUsersList = [];
   shareUsersList = [];
+  selectedTechUser: CurrentUser;
+  selectedUser: User;
   selectedCompany: Company;
   selectedCustomerCompany: UserCustomerCompaniesInfo;
   statusColors: Array<StatusColor> = [];
@@ -112,6 +116,18 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getToggleAddTicket);
+    let addTicketWithSelectedUser = this.ticketsStateService.addTicketWithSelectedUser.subscribe(data => {
+      this.selectedCompany = data.company;
+      this.selectedCustomerCompany = data.customerCompaniesInfo;
+      this.selectedUser = data.user;
+      this.selectedTechUser = data.techUser;
+      this.opened = true;
+      this.getTicketPriority();
+      this.getColors();
+      this.onSelectTechUser(this.getNameSelectedTechUser());
+      if (this.selectedUser && this.selectedCustomerCompany) this.onSelectUser(this.selectedUser, this.selectedCustomerCompany);
+    })
+    this.sub.add(addTicketWithSelectedUser);
     let onChangeAssignedUser = this.addUsersNotifyStateService.onChangeAssignedUser.subscribe(data => {
       if (this.addUsersNotifyStateService.getAction() === USERS_TO_ADD_TICKET) this.onChangeShareUsers(data);
     })
@@ -172,6 +188,8 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
 
       });
     }
+    this.selectedTechUser = null;
+    this.selectedUser = null;
     this.selectedCustomerCompany = null;
     this.selectedCompany = null;
     this.ticketAdd = new TicketAdd();
@@ -259,6 +277,8 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
   onSelectUser(selectedUser, customerCompany) {
     let shareUser = this.shareUsersList.find(item => item.id === this.ticketAdd.createdUser.id);
     if (selectedUser) {
+      this.selectedUser = selectedUser;
+      this.selectedCustomerCompany = customerCompany;
       this.onSelectCompany(this.companiesState.getCompanies().find(company => company.id === customerCompany.companyId));
       if (!(shareUser && shareUser.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === customerCompany.companyId) && shareUser.customerCompaniesInfo.find(clientCompany => clientCompany.companyId === customerCompany.companyId).defaultSubscriptions.ticketManagerSubscription.enabled) && this.ticketAdd.createdUser.id) this.removeShareUser(this.ticketAdd.createdUser.id);
       let indexhUser = this.users.findIndex(user => user.id === selectedUser.id);
@@ -272,6 +292,8 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
       this.ticketValidate.resetClientUser();
       this.techUsersDp.selectItemsWithOutChanges(this.shareUsersList);
     } else {
+      this.selectedUser = null;
+      this.selectedCustomerCompany = null;
       this.ticketAdd.createdUser.clearUserData();
       this.onSelectCompany(null);
     }
@@ -308,9 +330,11 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
         user.selected = true;
         this.shareUsersList.push(user);
         this.techUsersDp.selectItemsWithOutChanges(this.shareUsersList);
+        this.selectedTechUser = this.techUsersList[indexTechUser];
       }
 
     } else {
+      this.selectedTechUser = null;
       this.removeShareUser(this.ticketAdd.assignedUser);
       this.ticketAdd.clearAssignedUser();
     }
@@ -340,6 +364,9 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
       1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
+  getNameSelectedTechUser() {
+    return this.selectedTechUser ? `${this.selectedTechUser.firstName} ${this.selectedTechUser.lastName}` : '';
+  }
 
   onGetDevices() {
     this.ticketAdd.setPreloaderDevices(true);
@@ -360,7 +387,9 @@ export class TicketAddAsideComponent implements OnInit, OnDestroy {
     this.clientUserDP.reset(this.users);
   }
   changeToggleAddCompany(data) {
-    this.selectedCompany = null;
+    this.selectedCustomerCompany = null;
+    this.selectedUser = null;
+    this.selectedTechUser = null;
     this.toggleAddCompany = data;
     this.selectedCompany = null;
     this.ticketAdd.createdUser = new TicketCreatedUser();

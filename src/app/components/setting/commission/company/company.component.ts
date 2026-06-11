@@ -25,7 +25,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
   loading = true;
   users: any[] = [];
   usersByCompanies = [];
-  activeTechUsers: any;
+  activeTechUsers = [];
   filterTechUsers = "";
   selectedIdx = -1;
   filter: CompanyCommissionFilter = new CompanyCommissionFilter();
@@ -56,6 +56,11 @@ export class CompanyComponent implements OnInit, OnDestroy {
       this.currentUser = data;
     })
     this.sub.add(getOnGetCurrentuser);
+    if (this.companiesStateService.getCompanies().length > 0) this.getCompanies(this.companiesStateService.getCompanies());
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.getCompanies(data);
+    })
+    this.sub.add(getOnCompanies);
     // this.getClientCompanies();
 
     this.getUsers();
@@ -81,11 +86,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
         (techUsers: any) => {
           this.loading = false;
           this.activeTechUsers = techUsers;
-          if (this.companiesStateService.getCompanies().length > 0) this.getCompanies(this.companiesStateService.getCompanies());
-          let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-            this.getCompanies(data);
-          })
-          this.sub.add(getOnCompanies);
+
 
         },
         error => {
@@ -198,7 +199,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
   getCompanies(companys) {
     this.clientsCompanies = companys.filter(
       (company: any) =>
-        company.clientType.toLowerCase() !== "vendor" &&
+        company.clientType && company.clientType.toLowerCase() !== "vendor" &&
         company.deletedAt === null &&
         !company.isDefault
     ).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?

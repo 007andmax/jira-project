@@ -23,12 +23,6 @@
                 </a>
             </div>
         </div>
-        <div
-            class="loading-container"
-            *ngIf="loading"
-        >
-            <div class="loading"></div>
-        </div>
         <ul
             ngbNav
             #nav="ngbNav"
@@ -196,6 +190,12 @@
                                 class="loading pengind-loading"
                                 *ngIf="showPendingPreloader"
                             ></div>
+                             <div
+                class="no-exist-elements"
+                *ngIf="!showPendingPreloader && companyTags.length == 0"
+            >
+                We couldn't find any results
+            </div>
                         </div>
                     </div>
                 </ng-template>
@@ -351,6 +351,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                 <div
+                class="no-exist-elements"
+                *ngIf="!showPendingPreloader && ticketTags.length == 0"
+            >
+                We couldn't find any results
+            </div>
                             </div>
                         </div>
                     </div>
@@ -382,4 +388,8 @@
             class="mt-2"
         ></div>
     </div>
+      <div
+            class="loading"
+            *ngIf="loading"
+        ></div>
 </div>

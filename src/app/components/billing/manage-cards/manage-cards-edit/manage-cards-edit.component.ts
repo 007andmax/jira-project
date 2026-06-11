@@ -6,17 +6,24 @@ import { PreloaderTicketComponent } from '../../../shared/preloader-ticket/prelo
 import { DisabledBtnDirective } from '../../../../directives/disabled-btn/disabled-btn.directive';
 import { CompanyDropDownComponent } from '../../../shared/company-drop-down/company-drop-down.component';
 import { NgIf, NgClass } from '@angular/common';
+import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 
 @Component({
-    selector: 'app-manage-cards-edit',
-    templateUrl: './manage-cards-edit.component.html',
-    styleUrls: ['./manage-cards-edit.component.scss'],
-    standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, NgIf, NgClass, CompanyDropDownComponent, DisabledBtnDirective, PreloaderTicketComponent]
+  selector: 'app-manage-cards-edit',
+  templateUrl: './manage-cards-edit.component.html',
+  styleUrls: ['./manage-cards-edit.component.scss'],
+  standalone: true,
+  imports: [FormsModule, ReactiveFormsModule, NgIf, NgClass, CompanyDropDownComponent, DisabledBtnDirective, PreloaderTicketComponent]
 })
 export class ManageCardsEditComponent extends ManageCardsAddComponent {
   maskedCardNumber: string
   ngOnInit() {
+    for (let i = 1; i <= 12; i++) {
+      this.months.push(new TitleListType(`${i < 10 ? '0' + i : i}`, `${i < 10 ? '0' + i : i}`));
+    }
+    for (let i = new Date().getFullYear() - 1; i <= new Date().getFullYear() + 20; i++) {
+      this.years.push(new TitleListType(`${i}`, `${i}`.substring(2, 4)));
+    }
     let getShowAsideForAdd = this.manageCardsStateService.showAsideForEdit.subscribe(data => {
       this.manageCardsService.getCard(data.id).subscribe((res: any) => {
         this.maskedCardNumber = res.maskedCardNumber;
@@ -34,10 +41,12 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
           country: res.country,
           companyId: res.companyId,
         });
+        this.selectedMonth = this.months.find(month => month.type == res.expiryDate.substring(2, 4));
+        this.selectedYear = this.years.find(year => year.type == res.expiryDate.substring(0, 2));
         this.selectedCompany = this.companiesStateService.allCompanies.find(company => company.id === res.companyId);
         this.showAdd = true;
         this.cd.detectChanges();
-        });
+      });
     });
     this.sub.add(getShowAsideForAdd);
 
@@ -96,7 +105,7 @@ export class ManageCardsEditComponent extends ManageCardsAddComponent {
   }
   save() {
     this.submitted = true;
-      if (this.modelForm.invalid) {
+    if (this.modelForm.invalid) {
       return;
     }
     this.addBtn.setDisabled(true);

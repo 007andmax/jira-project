@@ -2,22 +2,28 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatChipComponent } from '../../../../../shared/mat-chip/mat-chip.component';
 import { NgFor, NgStyle } from '@angular/common';
 import { MatChipListComponent } from '../../../../../shared/mat-chip-list/mat-chip-list.component';
+import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 
 @Component({
-    selector: 'app-contracts-aside-block-time-billing-users',
-    templateUrl: './contracts-aside-block-time-billing-users.component.html',
-    styleUrls: ['./contracts-aside-block-time-billing-users.component.scss'],
-    standalone: true,
-    imports: [MatChipListComponent, NgFor, MatChipComponent, NgStyle]
+  selector: 'app-contracts-aside-block-time-billing-users',
+  templateUrl: './contracts-aside-block-time-billing-users.component.html',
+  styleUrls: ['./contracts-aside-block-time-billing-users.component.scss'],
+  standalone: true,
+  imports: [MatChipListComponent, NgFor, MatChipComponent, NgStyle],
+  providers: [TicketsListService]
 })
 export class ContractsAsideBlockTimeBillingUsersComponent implements OnInit {
   @Input() selectedUsers = [];
   @Output() onSelected = new EventEmitter<any>();
   selectable = true;
   removable = true;
-  constructor() { }
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
+  constructor(public ticketsListService: TicketsListService,) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
   }
   public remove(index): void {
     if (index >= 0) {

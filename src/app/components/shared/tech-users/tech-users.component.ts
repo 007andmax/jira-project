@@ -8,14 +8,15 @@ import { TicketsListService } from '../../tickets/tickets/services/tickets-list.
 import { NgbDropdown, NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicTooltipComponent } from '../dynamic-tooltip/dynamic-tooltip.component';
 import { NgIf, NgClass, NgStyle, NgFor } from '@angular/common';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
-    selector: 'app-tech-users',
-    templateUrl: './tech-users.component.html',
-    styleUrls: ['./tech-users.component.scss'],
-    providers: [TicketsListService],
-    standalone: true,
-    imports: [NgbDropdownModule, NgIf, NgClass, NgStyle, NgbTooltipModule, DynamicTooltipComponent, NgFor]
+  selector: 'app-tech-users',
+  templateUrl: './tech-users.component.html',
+  styleUrls: ['./tech-users.component.scss'],
+  providers: [TicketsListService],
+  standalone: true,
+  imports: [NgbDropdownModule, NgIf, NgClass, NgStyle, NgbTooltipModule, DynamicTooltipComponent, NgFor]
 })
 export class TechUsersComponent implements OnInit, OnDestroy {
   @Input('users')
@@ -36,7 +37,8 @@ export class TechUsersComponent implements OnInit, OnDestroy {
   users: Array<TechUserItem> = [];
   sub = new Subscription();
   @Output() usersChange = new EventEmitter();
-
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   /**
   * Creates an instance of the TechUsersComponent with the injected services
   * @param {techService} TechUsersService Service to work with tech users
@@ -46,6 +48,7 @@ export class TechUsersComponent implements OnInit, OnDestroy {
     private techState: TechUsersStateService,
     public cd: ChangeDetectorRef,
     public ticketsListService: TicketsListService,
+    public usersStateService: UsersStateService,
     private elRef: ElementRef,
   ) { }
 
@@ -53,6 +56,8 @@ export class TechUsersComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     if (this.editMode) {
       this.selectedUsers = [];
       this.usersList.forEach(item => {

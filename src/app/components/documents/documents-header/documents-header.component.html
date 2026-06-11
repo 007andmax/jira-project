@@ -102,6 +102,10 @@
                 >
                     Title
                     <span class="qt-table-modern__sorting"></span>
+                        <div *ngIf="sortBy.sortBy == 'title'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                 </div>
                 <div
                     class="documents-table__create-by pointer"
@@ -109,6 +113,10 @@
                 >
                     Created By
                     <span class="qt-table-modern__sorting"></span>
+                        <div *ngIf="sortBy.sortBy == 'createBy'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                 </div>
                 <div
                     class="documents-table__created-date pointer"
@@ -116,6 +124,10 @@
                 >
                     Created Date
                     <span class="qt-table-modern__sorting"></span>
+                        <div *ngIf="sortBy.sortBy == 'createdDate'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                 </div>
                 <div
                     class="documents-table__review-date pointer"
@@ -123,6 +135,10 @@
                 >
                     Review Date
                     <span class="qt-table-modern__sorting"></span>
+                        <div *ngIf="sortBy.sortBy == 'reviewDate'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                 </div>
                 <div class="documents-table__company">Company</div>
                 <div

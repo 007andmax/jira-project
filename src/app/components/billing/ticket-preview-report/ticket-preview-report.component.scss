@@ -1,0 +1,214 @@
+@import './src/assets/styles/variable';
+@import "./src/assets/styles/mixin/breakpoint";
+
+.invoice-items {
+  color: $gray-900;
+  border-radius: 4px;
+}
+
+.invoice-item {
+  min-width: 1574px;
+
+  &__header {
+    background-color: $white;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  &__subject {
+    max-width: 680px;
+  }
+
+  .delete-item-container {
+    min-width: 30px;
+    width: 30px;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    padding-inline: 30px;
+
+    th {
+      background-color: $gray-50;
+      border-top: solid 1px $gray-200;
+      border-bottom: solid 1px $gray-200;
+      border-left: none;
+      padding: 11px 8px 12px;
+      font-weight: 500;
+      font-size: 14px;
+      text-transform: unset;
+      color: $gray-500;
+
+      &:first-child {
+        border-left: 1px solid $gray-200;
+        padding-left: 16px;
+        border-radius: 8px 0 0 0;
+      }
+
+      &:last-child {
+        border-right: 1px solid $gray-200;
+        padding-right: 16px;
+        border-radius: 0 8px 0 0;
+      }
+    }
+
+    td {
+      border-bottom: solid 1px $gray-200;
+      padding: 10px 8px;
+
+      &:first-child {
+        border-left: 1px solid $gray-200;
+        padding-left: 16px;
+      }
+
+      &:last-child {
+        border-right: 1px solid $gray-200;
+        padding-right: 24px;
+      }
+    }
+  }
+
+  &__col-item {
+    text-align: left;
+    width: 166px;
+    min-width: 166px;
+  }
+
+  &__col-servers {
+     max-width: 350px;
+     min-width: 350px;
+      @include media-breakpoint-up($lg) {
+        width: auto;
+      }
+  }
+
+  &__col-desc {
+    text-align: left;
+    width: 566px;
+    min-width: 566px;
+    overflow-wrap: break-word;
+     @include media-breakpoint-up($lg) {
+        width: auto;
+      }
+  }
+
+  &__col-price {
+    width: 102px;
+    min-width: 102px;
+  }
+
+  &__col-quentity {
+    width: 120px;
+    min-width: 120px;
+  }
+
+  &__col-tax {
+    width: 80px;
+    min-width: 80px;
+  }
+
+  &__col-amount {
+    width: 182px;
+    min-width: 182px;
+  }
+
+  &__col-status {
+    width: 170px;
+    min-width: 170px;
+  }
+
+  &__col-remove {
+    width: 60px;
+    min-width: 60px;
+  }
+}
+
+.summary-info {
+  &__notes {
+    width: 447px;
+  }
+
+  &__textarea {
+    min-height: 72px;
+  }
+}
+
+.invoice-total {
+  width: 275px;
+  border-radius: 6px;
+  border: dashed 1px #637381;
+  padding: 15px 20px;
+
+  &__total-line {
+    border-top: dashed 1px #637381;
+  }
+}
+
+
+.info-button-sm {
+  display: flex;
+  font-size: 12px;
+  align-items: center;
+  height: 28px;
+  border-radius: 4px;
+  border: solid 1px $blue-light-600;
+  background-color: $white;
+  padding: 0 8px;
+  width: fit-content;
+  color: $blue-light-600;
+  cursor: pointer;
+}
+
+.terms-n-conditions {
+  background-color: $gray-25;
+
+  &__textarea {
+    width: 541px;
+    min-height: 72px;
+  }
+}
+
+.save-billable-aside-btn {
+  min-width: 91px;
+}
+.qt-page-list {
+    background-color: $white;
+    padding: 0;
+}
+
+::ng-deep {
+  tbody {
+    & > *:last-child {
+      td:first-of-type {
+        border-radius: 0 0 0 8px;
+      }
+      td:last-of-type {
+        border-radius: 0 0 8px 0;
+      }
+    }
+  }
+
+  .light-dropdown {
+    .qt-input-block__input {
+      padding-right: 32px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+}
+::ng-deep  .ticket-preview-status {
+  .tag__modern {
+  //  padding: 10px 16px;
+    font-size: 14px;
+  }
+}
+.input-default {
+  border-color: transparent;
+  &:focus {
+    border-color: $blue-light-600;
+    outline: 2px solid rgba($blue-light-600, 0.1);
+  }
+}

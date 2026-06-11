@@ -12,6 +12,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 import { TicketDetailProfileUpdatesServiceHeaderInfoComponent } from './ticket-detail-profile-updates-service-header-info/ticket-detail-profile-updates-service-header-info.component';
 import { TicketDetailProfileUpdatesServiceItemComponent } from './ticket-detail-profile-updates-service-item/ticket-detail-profile-updates-service-item.component';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { TicketProfile } from '../../../class/ticket-profile';
 
 @Component({
   standalone: true,
@@ -21,16 +23,25 @@ import { TicketDetailProfileUpdatesServiceItemComponent } from './ticket-detail-
   styleUrls: ['./ticket-detail-profile-updates-service.component.scss']
 })
 export class TicketDetailProfileUpdatesServiceComponent implements OnInit {
+  @Input() ticketProfile: TicketProfile = new TicketProfile();
   @Input() update: TicketProfileUpdate;
   @Input() isBlockChange: boolean;
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
+  classActions: string = '';
   constructor(public ticketsListService: TicketsListService,
     public confirmStateService: ConfirmStateService,
     public ticketStateService: TicketStateService,
+    public usersStateService: UsersStateService,
     public modalService: NgbModal) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
   }
-  classActions: string = '';
+  getUserById(id) {
+    return this.usersStateService.getAllUsers().find(item => item.id == id);
+  }
   isIOSDevice() {
     return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
   }
@@ -44,7 +55,7 @@ export class TicketDetailProfileUpdatesServiceComponent implements OnInit {
     this.ticketStateService.setServiceForRemove(this.update.services[0]);
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET_DETAIL_SERVICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.header = `Delete Ticket`;
+    modalRef.componentInstance.header = `Delete Item`;
     modalRef.componentInstance.message = `Are you sure you want to remove the item?`;
   }
   remove() {

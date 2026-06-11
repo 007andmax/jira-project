@@ -118,10 +118,10 @@ export class QuoteAdd {
             termsAndConditions: termsAndConditions,
             note: this.note,
             message: this.message,
-            billingAddress: company.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode,
-            shippingAddress: (company.companyInfo.addresses.length == 2) ? company.companyInfo.addresses[1].addressWithSuitNumberAndPostalCode : null,
-            shippingLocationName: (company.companyInfo.addresses.length == 2) ? company.companyInfo.addresses[1].locationName : null,
-            billingLocationName: company.companyInfo.addresses[0].locationName
+            shippingAddress: company.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode,
+            billingAddress: (company.companyInfo.addresses.length == 2) ? company.companyInfo.addresses[1].addressWithSuitNumberAndPostalCode : null,
+            billingLocationName: (company.companyInfo.addresses.length == 2) ? company.companyInfo.addresses[1].locationName : null,
+            shippingLocationName: company.companyInfo.addresses[0].locationName
         }
     }
     public setRegulatNote(data) {

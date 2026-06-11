@@ -31,19 +31,24 @@ export class TicketsFilter {
     filter: Array<CompanyFilterTop> = [
         new CompanyFilterTop('company', ''),
         new CompanyFilterTop('created', ''),
+        new CompanyFilterTop('number', ''),
         new CompanyFilterTop('subject', ''),
         new CompanyFilterTop('status', ''),
         new CompanyFilterTop('created_date', ''),
-        new CompanyFilterTop('last_updated', '')];
+        new CompanyFilterTop('last_updated_date', '')];
     searchText = "";
     customDateRange: string = null;
     startDate: string = null;
     endDate: string = null;
+    isCompanyFilter: boolean = false;
     constructor() {
         this.onInitUser();
     }
     public checkUse() {
         return this.selectedCompanies.length > 0 || (this.customDateRange || this.startDate && this.endDate) || this.selectedTechUsers.length > 0 || this.selectedUsers.length > 0 || this.selectedStatus.length > 0 || this.selectedPriorityLevels.length > 0 || this.tags.length > 0;
+    }
+    public setIsCompanyFilter(data: boolean) {
+        this.isCompanyFilter = data;
     }
     public clearDates() {
         this.startDate = null;
@@ -153,7 +158,7 @@ export class TicketsFilter {
                     this.sortBy = 'CREATED_DATE_DESC';
                 }
             }
-            if (field === 'last_updated') {
+            if (field === 'last_updated_date') {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
                     this.filter[index].filter = 'ASC';
@@ -162,6 +167,17 @@ export class TicketsFilter {
                 } else {
                     this.filter[index].filter = 'DESC';
                     this.sortBy = 'LAST_UPDATED_DATE_DESC';
+                }
+            }
+            if (field === 'number') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filter[index].filter = 'ASC';
+                    this.sortBy = 'NUMBER_ASC';
+
+                } else {
+                    this.filter[index].filter = 'DESC';
+                    this.sortBy = 'NUMBER_DESC';
                 }
             }
         }
@@ -395,6 +411,7 @@ export class TicketsFilter {
             payload.startDate = this.startDate;
             payload.endDate = this.endDate;
         }
+        if (this.isCompanyFilter) payload.isCompanyFilter = this.isCompanyFilter;
         return payload;
     }
 
@@ -468,7 +485,7 @@ export class TicketsFilter {
                             values: [
                                 "FROM_RECURRING_TICKET"
                             ]
-                        }
+                        },
                     ]
                 }
             ]
@@ -520,7 +537,7 @@ export class TicketsFilter {
                             "path": "ticketSource",
                             "operator": "NOT_EQ",
                             "values": [
-                                "FROM_RECURRING_TICKET"
+                                "FROM_RECURRING_TICKET",
                             ]
                         }
                     ]
@@ -531,14 +548,25 @@ export class TicketsFilter {
                             "path": "status",
                             "operator": "NOT_EQ",
                             "values": [
-                                "COMPLETED"
+                                "PENDING_REVIEW"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "fieldFilterDtos": [
+                        {
+                            "path": "status",
+                            "operator": "NOT_EQ",
+                            "values": [
+                                "COMPLETED",
                             ]
                         },
                         {
                             "path": "status",
                             "operator": "IN",
                             values: ["UNASSIGNED"]
-                        }
+                        },
                     ],
                     "predicateRule": "OR"
                 }
@@ -606,9 +634,10 @@ export class TicketsFilter {
                     fieldFilterDtos: [
                         {
                             path: "status",
-                            operator: "EQ",
+                            operator: "IN",
                             values: [
-                                "COMPLETED"
+                                "COMPLETED",
+                                "PENDING_REVIEW"
                             ]
                         },
                         {
@@ -714,6 +743,14 @@ export class TicketsFilter {
             groupFieldFilters: [
                 {
                     fieldFilterDtos: [
+                        {
+
+                            "path": "status",
+                            "operator": "NOT_EQ",
+                            "values": [
+                                "PENDING_REVIEW"
+                            ]
+                        }
                     ]
                 }
             ],

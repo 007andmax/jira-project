@@ -6,6 +6,7 @@ import { ReportsRoutingModule } from './reports-routing.module';
 
 
 import { DetailedContractReportComponent } from './reports/detailed-contract-report/detailed-contract-report.component';
+import { OverviewProductSalesReportComponent } from './overview-report/overview-product-sales-report/overview-product-sales-report.component';
 
 
 @NgModule({

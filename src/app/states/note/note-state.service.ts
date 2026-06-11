@@ -6,6 +6,7 @@ import { NoteRealTimeService } from './note-real-time.service';
   providedIn: 'root',
 })
 export class NoteStateService {
+  keywords = [];
   isGetActiveNoteTemplates: boolean = false;
   noteTemplate: Array<NoteTemplate> = [];
   activeNoteTemplate: Array<NoteTemplate> = [];
@@ -35,6 +36,9 @@ export class NoteStateService {
         1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
       this.onUpdateActiveNotes.emit(this.activeNoteTemplate);
     })
+  }
+  public setKeywords(data) {
+    this.keywords = data;
   }
   public getActiveNoteTemplate() {
     return this.activeNoteTemplate;

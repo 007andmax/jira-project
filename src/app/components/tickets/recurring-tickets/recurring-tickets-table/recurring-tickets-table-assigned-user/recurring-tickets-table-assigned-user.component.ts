@@ -2,6 +2,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TicketsListService } from '../../../tickets/services/tickets-list.service';
 import { NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
   standalone: true,
@@ -17,7 +18,9 @@ export class RecurringTicketsTableAssignedUserComponent implements OnInit {
   indexNoAvatar: number = 0;
   listColorNoAvatar = [];
 
-  constructor(public ticketsListService: TicketsListService,) { }
+  constructor(public ticketsListService: TicketsListService,
+    private usersStateService: UsersStateService
+  ) { }
 
   ngOnInit() {
     this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
@@ -27,6 +30,9 @@ export class RecurringTicketsTableAssignedUserComponent implements OnInit {
     if (!user) return '';
     if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
     return '';
+  }
+  getUserById(userId) {
+    return this.usersStateService.getAllUsers().find(item => item.id == userId);
   }
   getStyleNetAvatar(i) {
     return `${12 * i}px`;

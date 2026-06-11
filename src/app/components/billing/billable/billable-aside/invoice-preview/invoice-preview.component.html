@@ -41,11 +41,11 @@
                 <div class="qt-fs-10 qt-color-gray-400 qt-mb-8 qt-fw-600 qt-lh-12">BILLING ADDRESS</div>
                 <div
                     class="qt-fs-13 qt-color-gray-900 qt-fw-600"
-                    [textContent]="company.addresses[0].locationName"
+                    [textContent]="company.addresses[1].locationName"
                 ></div>
                 <div
                     class="qt-fs-13"
-                    [textContent]="company.addresses[0].addressWithSuitNumberAndPostalCode"
+                    [textContent]="company.addresses[1].addressWithSuitNumberAndPostalCode"
                 ></div>
             </div>
             <div
@@ -55,11 +55,11 @@
                 <div class="qt-fs-10 qt-color-gray-400 qt-mb-8 qt-fw-600 qt-lh-12">SHIPPING ADDRESS</div>
                 <div
                     class="qt-fs-13 qt-color-gray-900 qt-fw-600"
-                    [textContent]="company.addresses[1].locationName"
+                    [textContent]="company.addresses[0].locationName"
                 ></div>
                 <div
                     class="qt-fs-13"
-                    [textContent]="company.addresses[1].addressWithSuitNumberAndPostalCode"
+                    [textContent]="company.addresses[0].addressWithSuitNumberAndPostalCode"
                 ></div>
             </div>
             <div class="qt-fs-13 qt-text-right qt-lh-154">
@@ -288,7 +288,7 @@
           currency"
                     ></div>
                 </div>
-                <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12">
+                <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12" *ngIf="invoice.invoiceDataDto.hasDiscount || invoice.invoiceDataDto.invoiceDiscount || invoice.invoiceDataDto.discountSum">
                     <div class="qt-text-left">Subtotal with discount</div>
                     <div
                         class="invoice-info-value qt-text-right"

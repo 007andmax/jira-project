@@ -1,0 +1,27 @@
+<table class="qt-report__body-table-body">
+  <thead>
+  <tr>
+    <ng-template ngFor let-item [ngForOf]="headers" let-i="index" [ngForTrackBy]="trackByIndex">
+      <th [ngClass]="(classes.length > 0) ? classes[i] : ''"   class="qt-fw-600 qt-color-gray-900 qt-pointer"  (click)="onFilter(item)">
+        <div class="qt-df qt-ai-c">
+        {{item}}
+         <div class="qt-table-modern__sorting"></div>
+            <div *ngIf="sortBy.sortBy == item"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+            </div>
+      </th>
+    </ng-template>
+  </tr>
+  </thead>
+  <tbody class="qt-report__body-table-body">
+  <ng-template ngFor let-item [ngForOf]="list" let-i="index" [ngForTrackBy]="trackByIndex">
+    <tr class="qt-report__body-row ng-star-inserted" [ngStyle]="(styles.length > 0) ? styles[i] : null">
+      <ng-template ngFor let-child [ngForOf]="item" let-u="index" [ngForTrackBy]="trackByIndex">
+        <td   [textContent]="child"></td>
+      </ng-template>
+    </tr>
+  </ng-template>
+  </tbody>
+</table>

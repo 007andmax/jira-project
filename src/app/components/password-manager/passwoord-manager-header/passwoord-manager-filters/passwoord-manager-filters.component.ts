@@ -119,6 +119,12 @@ export class PasswoordManagerFiltersComponent implements OnInit, OnDestroy {
       devices.forEach(item => {
         this.devicesUsers.push(new PasswordDeviceUser(item.deviceId, this.getLabelDevice(item), 'DEVICE'));
       })
+
+      this.devicesUsers = this.devicesUsers.filter((value, index, self) =>
+        index === self.findIndex((t) => (
+          t.name === value.name && t.type === value.type
+        ))
+      )
     }, err => {
       this.filter.setPreloaderDevices(false);
       this.disabledDevicesUsers = false;

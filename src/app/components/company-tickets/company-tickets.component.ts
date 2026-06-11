@@ -105,7 +105,6 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter = data;
       this.showPreloader = true;
-      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -162,6 +161,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
     this.filter.setTypeFilterWithoutChange("ALL");
     this.filter.companyDp.isDisabled = true;
+    this.filter.ticketsFilter.isDisbledCompany = true;
     this.filter.companyDp.selectedItems = [company];
     this.filter.companyDp.removable = false;
     this.filter.ticketsFilter.setCompanies([company]);
@@ -188,6 +188,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     }
     this.ticketsFilter.setOffset(this.page_number * this.offset);
     this.ticketsFilter.setSize(30);
+    this.ticketsFilter.setIsCompanyFilter(true);
     if (this.page_number > 0) this.showPendingPreloader = true;
     this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
       this.tickets = [...this.tickets, ...data];
@@ -207,6 +208,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
 
   }
   public setDefaultScoll() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.page_number = 0;
     this.ticketsListService.setBlockList(false);
     this.tickets = [];

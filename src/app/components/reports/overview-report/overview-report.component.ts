@@ -1,5 +1,5 @@
-﻿import { CommonModule } from '@angular/common';
-import { Component, OnInit, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -14,7 +14,7 @@ export class OverviewReportComponent implements OnInit {
   @Input() styles = [];
   @Input() headers = [];
   @Input() list = [];
-  constructor() { }
+  constructor(public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
   }

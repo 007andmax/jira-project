@@ -141,7 +141,7 @@ export class CompanyAddAsideShortComponent implements OnInit, OnDestroy {
     this.validate.checkValidFirstname(this.company.contacts[0].firstName);
   }
   public onChangePhoneNumber() {
-    this.validate.checkValidPhoneNumber(this.company.addresses[0].phoneNumbers[0].number);
+    this.validate.checkValidShippingPhoneNumber(this.company.addresses[0].phoneNumbers[0].number);
   }
   public onChangePrimaryEmail() {
     this.validate.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail);

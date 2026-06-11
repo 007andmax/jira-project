@@ -182,7 +182,6 @@ export class AppComponent implements OnInit {
         this.websocketService.initializeWebSocketConnection();
         this.deviceTagsStateService.onInit();
         this.notificationsStateService.onInit();
-        this.integrationsStateService.onInit();
       } else {
         this.supportPageCategoriesStateService.onInit();
         this.websocketService.initializeWebSocketConnection();

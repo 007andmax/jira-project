@@ -28,11 +28,11 @@ export class QuotePreview extends Quote {
             this.services = data.services.map(item => new QuoteService(item));
             this.reviewNotes = data.reviewNotes.map(item => new QuoteReviewNotes(item));
             if (this.company.addresses) {
-                let billing = (this.company.addresses.find(item => item.isPrimary)) ? JSON.parse(JSON.stringify(this.company.addresses.find(item => item.isPrimary))) : null;
-                let shipping = (this.company.addresses.find(item => !item.isPrimary)) ? JSON.parse(JSON.stringify(this.company.addresses.find(item => !item.isPrimary))) : null;
+                let shipping = (this.company.addresses.find(item => item.isPrimary)) ? JSON.parse(JSON.stringify(this.company.addresses.find(item => item.isPrimary))) : null;
+                let billing = (this.company.addresses.find(item => !item.isPrimary)) ? JSON.parse(JSON.stringify(this.company.addresses.find(item => !item.isPrimary))) : null;
                 this.company.addresses = [];
-                if (billing) this.company.addresses = [billing];
-                if (shipping) this.company.addresses.push(shipping);
+                if (shipping) this.company.addresses = [shipping];
+                if (billing) this.company.addresses.push(billing);
             }
         }
     }

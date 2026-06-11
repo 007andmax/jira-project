@@ -11,18 +11,18 @@ import { CommissionRoutingModule } from './commission-routing.module';
 import { CompanyTechUsersComponent } from './company/company-tech-users/company-tech-users.component';
 
 
-
 @NgModule({
     imports: [
-    CommonModule,
-    NgbModule,
-    CommissionRoutingModule,
-    CommissionComponent,
-    CompanyComponent,
-    ProductComponent,
-    ContractComponent,
-    ServiceComponent,
-    CompanyTechUsersComponent
-],
+        CommonModule,
+        NgbModule,
+        CommissionRoutingModule,
+        CommissionComponent,
+        CompanyComponent,
+        ProductComponent,
+        ContractComponent,
+        ServiceComponent,
+        CompanyTechUsersComponent
+    ],
+
 })
 export class CommissionModule { }

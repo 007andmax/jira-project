@@ -259,6 +259,13 @@ Example:
   &__payment-method-visa {
     background-image: url("/assets/img/icons/payment-method-visa.svg");
   }
+  &__arrow_narrow_up {
+    background-image: url("/assets/img/icons/arrow_narrow_up.svg");
+  }
+  &__arrow_narrow_down {
+    background-image: url("/assets/img/icons/arrow_narrow_up.svg");
+    transform: rotate(180deg);
+  }
   // END Color Icon
 
   // Start Monochrome image
@@ -342,6 +349,9 @@ Example:
   }
   &__map-pin {
     mask-image: url("/assets/img/icons/map-pin.svg");
+  }
+   &__company-map-pin {
+    mask-image: url("/assets/img/icons/company-map-pin.svg");
   }
   &__pages {
     mask-image: url("/assets/img/icons/pages.svg");
@@ -924,6 +934,9 @@ Example:
   }
   &__green-600 {
     background-color: $green-600;
+  }
+  &__green-700 {
+    background-color: $green-700;
   }
   &__background {
     background-color: $background;

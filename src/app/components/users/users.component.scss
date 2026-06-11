@@ -105,7 +105,7 @@
   }
 }
 .users-table__portal-status {
-  flex: 0 0 118px;
+  flex: 0 0 135px;
 }
 .qt-page-list__header-thead-container {
     position: sticky;
@@ -130,9 +130,12 @@
 .page-list-users {
     padding: 0;
     background-color: $white;
+    min-width: unset;
+
     ::ng-deep .qt-page-list {
         background-color: $white;
         padding: 0;
+        min-width: unset;
     }
     ::ng-deep table.qt-table-modern tbody tr td:first-child {
         border-left: 1px solid $gray-200;

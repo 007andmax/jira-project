@@ -89,3 +89,8 @@
     border: solid 1px $red-600;
   }
 }
+.--ofline {
+  .device-type-icon__status {
+    background-color: $red-600
+  }
+}

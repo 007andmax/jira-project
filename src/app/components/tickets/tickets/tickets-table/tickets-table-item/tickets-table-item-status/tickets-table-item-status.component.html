@@ -1,0 +1,84 @@
+<div
+    ngbDropdown
+    #dp="ngbDropdown"
+    [ngClass]="['qt-dropdown']"
+    [ngStyle]="{'width':'100%'}"
+>
+    <div class="qt-pos-rel dropdown-wrap">
+     <span
+     ngbDropdownToggle
+            class="tag__modern qt-pointer"
+            [ngStyle]="getStyleStatus(ticket.status)"
+            *ngIf="type === 'TICKET_PREVIEW' && isCustomStatus(ticket.status)"
+            [ngClass]="{'no-click':  customerPortalStateService.isCustomerPortal || isDisabled}"
+        >
+            {{ticket.status}}
+        </span>
+          <span
+     ngbDropdownToggle
+            class="tag__modern"
+            [ngStyle]="getStyleStatus((ticket.customStatus) ? ticket.customStatus : ticket.status)"
+            *ngIf="ticket.status === 'IN_PROGRESS'"
+            [ngClass]="{'no-click':type == 'TICKET' && !ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal || isDisabled,'qt-pointer':type == 'TICKET' && ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
+        >
+            {{(!ticket.customStatus) ? 'In Progress' : ticket.customStatus}}
+        </span>
+        <span
+        ngbDropdownToggle
+            class="tag__modern"
+            [ngStyle]="getStyleStatus(ticket.status)"
+            *ngIf="ticket.status === 'PENDING_REVIEW'"
+             [ngClass]="{'no-click':type == 'TICKET' && !ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal || isDisabled,'qt-pointer':type == 'TICKET' && ticketsPermissionsService.isActionVisible('update', ticket,null,null) || type == 'TICKET_PREVIEW'}"
+        >
+            Pending Review
+        </span>
+          <span
+        ngbDropdownToggle
+            class="tag__modern"
+            [ngStyle]="getStyleStatus(ticket.status)"
+            *ngIf="ticket.status === 'COMPLETED'"
+             [ngClass]="{'no-click':type == 'TICKET' && !ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal || isDisabled,'qt-pointer':type == 'TICKET' && ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
+        >
+            Completed
+        </span>
+        <span
+           [ngClass]="{'no-click':customerPortalStateService.isCustomerPortal || isDisabled}"
+            class="tag__modern qt-pointer"
+            [ngStyle]="getStyleStatus('UNASSIGNED')"
+            *ngIf="ticket.status === null"
+            (click)="claimTicket()"
+        >
+            Unassigned
+        </span>
+        <span
+        ngbDropdownToggle
+            class="tag__modern"
+            [ngStyle]="getStyleStatus(ticket.status)"
+            *ngIf="ticket.status === 'ON_HOLD'"
+             [ngClass]="{'no-click':type == 'TICKET' && !ticketsPermissionsService.isActionVisible('update', ticket,null,null) || customerPortalStateService.isCustomerPortal || isDisabled,'qt-pointer':type == 'TICKET' && ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
+        >
+            On Hold
+        </span>
+      <div
+        ngbDropdownMenu
+        [ngStyle]="{'width': '100%','min-width': '160px','max-height': '192px'}"
+        aria-labelledby="dropdown1"
+        class="app-drop-down__dropdown"
+      >
+        <ng-template
+          ngFor
+          let-item
+          [ngForOf]="list"
+          let-i="index"
+        >
+          <button
+            ngbDropdownItem
+            [textContent]="item.title"
+            (click)="changeTicketStatus(item)"
+            [title]="item.title"
+            [ngClass]="{'--selected':isSelected(item)}"
+          ></button>
+        </ng-template>
+      </div>
+    </div>
+</div>

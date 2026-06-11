@@ -122,6 +122,7 @@
                 class="qt-button qt-button--with-icon --sm --gray qt-ml-8"
                 (click)="setComplete()"
                 [ngClass]="{'no-pointer':isBlockChange,
+                 'no-click':!getPermissions('MANAGE_EXPENSE_COMPLETION_STATUS'),
                 'button-mark-complete': service.completed}"
             >
                 <i

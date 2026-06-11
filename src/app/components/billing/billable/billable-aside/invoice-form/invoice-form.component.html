@@ -25,16 +25,16 @@
                 [quoteCompany]="company"
                 aria-labelledby="dropdownForm2"
                 ngbDropdownMenu
-                (onSelectAddress)="selectAddress(0,$event)"
+                (onSelectAddress)="selectAddress(1,$event)"
             ></invoice-change-address>
         </div>
         <div
             class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-gray-900"
-            [textContent]="company.addresses[0].locationName"
+            [textContent]="company.addresses[1].locationName"
         ></div>
         <div
             class="qt-fs-13 qt-lh-154"
-            [textContent]="company.addresses[0].addressWithSuitNumberAndPostalCode"
+            [textContent]="company.addresses[1].addressWithSuitNumberAndPostalCode"
         ></div>
         <div
             class="qt-fs-13 qt-color-info  qt-pointer"
@@ -73,16 +73,16 @@
             </div>
             <div
                 class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-gray-900"
-                [textContent]="company.addresses[1].locationName"
+                [textContent]="company.addresses[0].locationName"
             ></div>
             <div
                 class="qt-fs-13 qt-lh-154"
-                [textContent]="company.addresses[1].addressWithSuitNumberAndPostalCode"
+                [textContent]="company.addresses[0].addressWithSuitNumberAndPostalCode"
             ></div>
             <invoice-change-address
                 ngbDropdownMenu
                 [quoteCompany]="company"
-                (onSelectAddress)="selectAddress(1,$event)"
+                (onSelectAddress)="selectAddress(0,$event)"
             ></invoice-change-address>
         </div>
     </div>
@@ -243,7 +243,7 @@
                 <div [textContent]="getTotalDiscount() |
           currency"></div>
             </div>
-            <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15">
+            <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15" *ngIf="invoice.invoiceDataDto.hasDiscount || toggleDiscount">
                 <div>Subtotal with discount</div>
                 <div [textContent]="getSubTotalWithDiscount() |
           currency"></div>

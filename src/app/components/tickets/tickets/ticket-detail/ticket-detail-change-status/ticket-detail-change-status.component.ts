@@ -15,6 +15,7 @@ export class TicketDetailChangeStatusComponent extends TicketChangeStatusCompone
   @ViewChild('dp', { static: true }) dp: DropDownComponent;
   selectedTicketStatus: TitleListType;
   list: Array<TitleListType> = [new TitleListType('In Progress', 'IN_PROGRESS'),
+  new TitleListType('Pending Review', 'PENDING_REVIEW'),
   new TitleListType('On Hold', 'ON_HOLD')];
 
   ngOnInit() {
@@ -33,6 +34,13 @@ export class TicketDetailChangeStatusComponent extends TicketChangeStatusCompone
       this.cd.detectChanges();
     })
     this.sub.add(getOnUpdateTicket);
+    let onCloseTicketForReview = this.ticketStateService.onCloseTicketForReview.subscribe(res => {
+      if (res == true) {
+        this.dp.selectedItem = this.list.find(item => item.type == "PENDING_REVIEW");
+        this.changeTicketStatus(this.dp.selectedItem);
+      }
+    })
+    this.sub.add(onCloseTicketForReview);
   }
   setList() {
     this.list = [];
@@ -52,6 +60,7 @@ export class TicketDetailChangeStatusComponent extends TicketChangeStatusCompone
     this.ticketsService.changeStatus(this.ticketProfile.id, item.type).subscribe((data: any) => {
       this.toastrService.success(`The tickets “${this.ticketProfile.number}” status has been changed`);
       this.appStateService.changeDetectorRef();
+      this.ticketStateService.onCloseTicketForReview.emit(false);
     })
 
   }

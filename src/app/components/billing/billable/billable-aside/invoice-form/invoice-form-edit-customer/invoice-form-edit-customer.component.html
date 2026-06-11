@@ -1,4 +1,4 @@
-<div class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24 billable-edit-customer qt-pos-rel">
+<div class="qt-pt-24 qt-pb-24 qt-pl-24 qt-pr-24 billable-edit-customer qt-pos-rel" *ngIf="company.addresses.length > 1">
     <div class="qt-popup-arrow"></div>
     <div class="qt-mb-16 qt-fs-15 qt-fw-600">Edit Customer</div>
     <div class="qt-inputs-row">
@@ -20,7 +20,7 @@
             <input
                 type="text"
                 #addresstext
-                [(ngModel)]="company.addresses[0].address"
+                [(ngModel)]="company.addresses[1].address"
                 (focus)="onCheckGoogleAutoComplete()"
                 placeholder="Enter Location"
             >
@@ -31,7 +31,7 @@
             <div class="qt-input-block__label">Suite No.</div>
             <input
                 type="text"
-                [(ngModel)]="company.addresses[0].suiteNumber"
+                [(ngModel)]="company.addresses[1].suiteNumber"
                 placeholder="Enter Suite Number"
             >
         </div>
@@ -39,7 +39,7 @@
             <div class="qt-input-block__label">Postal/Zip code</div>
             <input
                 type="text"
-                [(ngModel)]="company.addresses[0].postalCode"
+                [(ngModel)]="company.addresses[1].postalCode"
                 placeholder="Enter Zip"
             >
         </div>
@@ -92,7 +92,7 @@
                 [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                 [dropSpecialCharacters]="false"
             >
-            <app-mat-error *ngIf="!validate.getPhoneNumber()">Phone number is required</app-mat-error>
+            <app-mat-error *ngIf="!validate.getShippingPhoneNumber()">Phone number is required</app-mat-error>
         </div>
     </div>
     <div class="qt-df">

@@ -1,0 +1,32 @@
+ <div>
+ <ng-template #popContentM 
+	>
+    <app-tickets-table-item-requested-by  
+    [requestedUser]="getUserById(user.id)"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    [ticket]="ticket"
+    ></app-tickets-table-item-requested-by>
+    </ng-template
+>
+    <div
+        class="qt-table-modern__circle-avatar multi-assign-user"
+        *ngIf="i < 5"
+        [ngClass]="{'qt-pointer':ticketsPermissionsService.isActionVisible('update', ticket,null,null)}"
+        [textContent]="getAssignedUserNameForAvatar(user)"
+        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) ,
+    'left': getStyleNetAvatar(i)}"
+            [ngbPopover]="popContentM"
+    [popoverClass]="'requested-by-popover'"
+        [autoClose]="'outside'"
+        [container]="'body'"
+    #pM="ngbPopover"
+    triggers="manual"
+    appUserLogoPopover
+    [user]="getUserById(user.id)"
+    [popover]="pM"
+    [disabled]="!getUserById(user.id)"
+    [disablePopover]="!getUserById(user.id)"
+       
+    ></div>
+    </div>

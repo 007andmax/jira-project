@@ -24,6 +24,10 @@
                         >
                             Service Name
                             <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'name'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                         </div>
                         <div
                             class="default-service-table__rate pointer"
@@ -31,6 +35,10 @@
                         >
                             Price/Rate
                             <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'rate'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                         </div>
                         <div
                             class="default-service-table__taxes pointer"
@@ -38,6 +46,10 @@
                         >
                             Taxes
                             <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'taxes'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                         </div>
                         <div class="default-service-table__gl">
                             GL Number

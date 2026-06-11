@@ -1,0 +1,28 @@
+ <ng-template #popContent let-greeting="greeting"
+	>
+    <app-users-table-company-by
+    [company]="getCompany(company)"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    ></app-users-table-company-by>
+    </ng-template
+>
+
+<div
+    class="qt-table-modern__circle-avatar multi-assign-user"
+    *ngIf="i < 3"
+    [textContent]="company.clientCompanyName[0].toUpperCase()"
+    [ngStyle]="{'background': listColorNoAvatar[indexNoAvatar] ,
+'left': getStyleNetAvatar(i)}"
+    [ngbPopover]="popContent"
+    [popoverClass]="'requested-by-popover'"
+        [autoClose]="'outside'"
+        [container]="'body'"
+    #p="ngbPopover"
+    triggers="manual"
+    appCompanyLogoPopover
+    [company]="getCompany(company)"
+    [popover]="p"
+    [disabled]="!getCompany(company)"
+    [disablePopover]="!getCompany(company)"
+></div>

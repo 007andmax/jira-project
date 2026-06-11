@@ -29,6 +29,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { UsersFilterComponent } from '../users/users-header/users-filter/users-filter.component';
 import { UsersTableComponent } from '../users/users-table/users-table.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { TicketSortBy } from '../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   standalone: true,
@@ -57,6 +58,7 @@ export class MarketingComponent implements OnInit {
   toggleFilter: boolean = false;
   showPendingPreloader: boolean = false;
   container = document.body.querySelector(".main-container");
+  sortBy: TicketSortBy = new TicketSortBy('NAME', 'asc');
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private confirmStateService: ConfirmStateService,
@@ -292,6 +294,13 @@ export class MarketingComponent implements OnInit {
     this.getUsers();
   }
   public onFilter(field) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.sortBy.sortBy = field;
+    if (this.sortBy.sortDirection === 'desc') {
+      this.sortBy.sortDirection = 'asc';
+    } else {
+      this.sortBy.sortDirection = 'desc';
+    }
     this.filter.setSortBy(field);
     this.filter.page = 0;
     this.userListService.setBlockList(false);

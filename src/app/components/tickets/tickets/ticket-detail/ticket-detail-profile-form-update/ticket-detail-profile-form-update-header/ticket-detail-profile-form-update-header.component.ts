@@ -33,6 +33,8 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   usersForUpdate: Array<User> = [];
   selectedUsers: Array<CurrentUser> = [];
   listTechUsers: Array<User> = [];
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   constructor(public ticketsListService: TicketsListService,
     public ticketStateService: TicketStateService,
     private modalService: NgbModal,
@@ -41,6 +43,8 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
 
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     if (this.ticketProfileFormUpdate.shares.length > 0) {
       this.ticketProfileFormUpdate.shares.forEach(element => {
         let user = this.usersStateService.getAllUsers().find(item => item.id == element.user.id);
@@ -100,6 +104,9 @@ export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
     }
     this.ticketProfileFormUpdate.setShares(this.selectedUsers);
 
+  }
+  getUserById(id) {
+    return this.usersStateService.getAllUsers().find(item => item.id == id);
   }
   getUsersForUpdate(type) {
     let userList = this.usersStateService.getAllUsers();

@@ -24,14 +24,26 @@
                 <!-- > -->
                 <!-- <span [textContent]="getTextCountFilters()"></span> -->
                 <!-- </button> -->
+                  <button
+                  *ngIf="ticketsStateService.getTicketsForMerge().length > 0 && checkClaimTickets() && !customerPortalStateService.isCustomerPortal"
+                    class="qt-button --gray --md qt-button-filter qt-mr-8 qt-df claim-tickets-btn"
+                     appDisabledBtn
+                #claimTicketsBtn="disabled"
+                (onClick)="claimTicket()"
+                [ngClass]="{'--loading':claimTicketsBtn.isBlock()}"
+                >
+                     <span *ngIf="!claimTicketsBtn.isBlock()">Claim Ticket</span>
+                <app-preloader-ticket *ngIf="claimTicketsBtn.isBlock()"></app-preloader-ticket>
+                </button>
                 <button
+                *ngIf="!customerPortalStateService.isCustomerPortal"
                     class="qt-button --gray --md qt-button-filter qt-mr-8 qt-df"
-                    [ngClass]="{'--disabled':ticketsStateService.getTicketsForMerge().length < 2}"
+                    [ngClass]="{'--disabled':ticketsStateService.getTicketsForMerge().length < 2 || checkDisableSelect().length > 0}"
                     (click)="mergeTicket()"
                     placement="top"
                     container="body"
                     ngbTooltip="You have to select at least two tickets from the same company"
-                    [disableTooltip]="ticketsStateService.getTicketsForMerge().length >= 2"
+                    [disableTooltip]="ticketsStateService.getTicketsForMerge().length >= 2 && checkDisableSelect().length == 0"
                 >
                     <span class="qt-icon icon__merge qt-sz-16 qt-bg-contain qt-button-icon qt-dib qt-mr-8"></span>
                     <span>Merge Ticket</span>

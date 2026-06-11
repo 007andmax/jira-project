@@ -6,7 +6,7 @@
         <div class="qt-df">
             <label
                 class="qt-checkbox"
-                [ngClass]="{'--disabled':ticket.checkDisableSelect(ticketsStateService.getTicketsForMerge())}"
+               
                 [attr.for]="'ticket-' + ticket.id"
             >
                 <input
@@ -14,7 +14,7 @@
                     [(ngModel)]="ticket.selected"
                     type="checkbox"
                     (change)="selectTicket($event)"
-                    [disabled]="ticket.checkDisableSelect(ticketsStateService.getTicketsForMerge())"
+                   
                 >
                 <span></span>
             </label>
@@ -24,17 +24,65 @@
         class="ticket-table__requested-by"
         (click)="selectForDetail()"
     >
-        <div class="qt-df qt-ai-c ticket-table__requested-by-inner">
+    <ng-template #popContent let-greeting="greeting"
+	>
+    <app-tickets-table-item-requested-by  
+    [requestedUser]="requestedUser"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    [ticket]="ticket"
+    ></app-tickets-table-item-requested-by>
+    </ng-template
+>
+        <div class="qt-df qt-ai-c ticket-table__requested-by-inner" 
+        >
             <div
                 class="qt-table-modern__circle-avatar"
                 [ngClass]="!usersStateService.getNameForAvatar(requestedUser).length ? 'transparent-text' : ''"
                 [textContent]="usersStateService.getNameForAvatar(requestedUser)"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(requestedUser,listColorNoAvatar[indexNoAvatar]) }"
-            ></div>
+                [ngbPopover]="popContent"
+                [popoverClass]="'requested-by-popover'"
+                 [autoClose]="'outside'"
+                 [container]="'body'"
+                #p="ngbPopover"
+                triggers="manual"
+                 appUserLogoPopover
+                [user]="requestedUser"
+                [popover]="p"
+                [disabled]="!requestedUser"
+                [disablePopover]="!requestedUser"
+                ></div>
             <div
                 [textContent]="getUserName(requestedUser)"
                 class="ellipsis"
             ></div>
+        </div>
+    </div>
+    <div class="ticket-table__update">
+         <div
+            *ngIf="ticket.hasServiceUpdate"
+           placement="top"
+                    ngbTooltip="Time Added to the ticket"
+                    container="body"
+                class="qt-icon icon__time qt-sz-20 qt-ic-c qt-mr-4"
+               
+            ></div>
+             <div
+           *ngIf="ticket.hasProductUpdate"
+                placement="top"
+                    ngbTooltip="Product Added to the Ticket"
+                    container="body"
+                class="qt-icon icon__taxes qt-sz-20 qt-ic-c"
+               
+            ></div>
+    </div>
+     <div
+        class="ticket-table__number"
+            (click)="selectForDetail()"
+    >
+        <div class="ellipsis">
+            {{'Tkt# ' + ticket.number}}
         </div>
     </div>
     <div
@@ -42,12 +90,11 @@
         (click)="selectForDetail()"
     >
         <div class="ellipsis">
-            {{'Tkt# ' + ticket.number + ' - ' + ticket.subject}}
+            {{ticket.subject}}
             <span
                 *ngIf="ticket.priorityLevel && ticket.priorityLevel.isDisplay"
                 class="priority-icon"
-                [ngStyle]="{'background-color':  listColors[ticket.priorityLevel.color] && listColors[ticket.priorityLevel.color].textColor ,
-                            'border-color':  listColors[ticket.priorityLevel.color] && listColors[ticket.priorityLevel.color].textColor}"
+                [ngStyle]="{'background-color':  listColors[ticket.priorityLevel.color] && listColors[ticket.priorityLevel.color].textColor,'border-color':  listColors[ticket.priorityLevel.color] && listColors[ticket.priorityLevel.color].textColor}"
             ></span>
         </div>
     </div>
@@ -55,6 +102,31 @@
         class="ticket-table__company"
         (click)="selectForDetail()"
     >
+     <ng-template #popCompanyContent let-greeting="greeting"
+	>
+    <app-users-table-company-by
+    [company]="getCompanyById()"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    ></app-users-table-company-by>
+    </ng-template
+>
+        <div
+            class="tooltip__circle-avatar"
+            [textContent]="getCompanyById() ? getCompanyById().name[0].toUpperCase() : ''"
+            [ngStyle]="{'background': parseLogo() }"
+             [ngbPopover]="popCompanyContent"
+            [popoverClass]="'requested-by-popover'"
+                [autoClose]="'outside'"
+                [container]="'body'"
+            #pCompany="ngbPopover"
+            triggers="manual"
+            appCompanyLogoPopover
+            [company]="getCompanyById()"
+            [popover]="pCompany"
+            [disabled]="!getCompanyById()"
+            [disablePopover]="!getCompanyById()"
+        ></div>
         <div
             class="ellipsis"
             [ngClass]="{'qt-color-red-600':ticket.isCompanyDeleted}"
@@ -70,116 +142,25 @@
     </div>
     <div
         class="ticket-table__assignee"
-        *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0"
-        (click)="selectForDetail()"
     >
-        <div class="qt-df multi-assign-user-container">
-            <ng-template
-                ngFor
-                let-user
-                let-i="index"
-                [ngForOf]="ticket.multiAssignedUsers"
-                [ngForTrackBy]="trackById"
-            >
-                <div
-                    class="qt-table-modern__circle-avatar multi-assign-user"
-                    *ngIf="i < 5"
-                    [textContent]="getAssignedUserNameForAvatar(user)"
-                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) ,
-                'left': getStyleNetAvatar(i)}"
-                    [ngbTooltip]="user.firstName + ' ' + user.lastName"
-                    [container]="'body'"
-                ></div>
-            </ng-template>
-            <div
-                class="more-users qt-table-modern__circle-avatar"
-                [ngbTooltip]="tipContent"
-                [container]="'body'"
-                *ngIf="ticket.multiAssignedUsers.length > 5"
-                [ngStyle]="{'left': getStyleNetAvatar(5)}"
-            >
-                <span [textContent]="'+' + (ticket.multiAssignedUsers.length - 5)"></span>
-            </div>
-        </div>
-        <ng-template #tipContent>
-            <ng-template
-                ngFor
-                let-user
-                let-i="index"
-                [ngForOf]="ticket.multiAssignedUsers"
-                [ngForTrackBy]="trackById"
-            >
-                <div
-                    class="qt-df qt-ai-c qt-mb-8"
-                    *ngIf="i >= 5"
-                >
-                    <div
-                        class="tooltip__circle-avatar"
-                        [textContent]="getAssignedUserNameForAvatar(user)"
-                        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user,listColorNoAvatar[indexNoAvatar]) }"
-                    ></div>
-                    <span
-                        class="qt-ml-8"
-                        [textContent]="user.firstName + ' ' + user.lastName"
-                    ></span>
-                </div>
-            </ng-template>
-        </ng-template>
-    </div>
-    <div
-        class="ticket-table__assignee"
-        *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || !ticket.assignedUserId && !ticket.multiAssignedUsers"
-        (click)="selectForDetail()"
-    ></div>
-    <div
-        class="ticket-table__assignee"
-        *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers"
-        (click)="selectForDetail()"
-    >
-        <div class="qt-df">
-            <div
-                class="qt-table-modern__circle-avatar"
-                [textContent]="getAssignedUserNameForAvatar(assignedUser)"
-                [ngStyle]="{'background': ticketsListService.getStyleAvatar(assignedUser,listColorNoAvatar[indexNoAvatar])}"
-            ></div>
-            <div
-                class="ellipsis"
-                [textContent]="getUserName(assignedUser)"
-            ></div>
-        </div>
-    </div>
+    <app-tickets-table-item-assigned-user 
+     class="assigned-user-ticket-detail"
+    [reqUserList]="userList"
+    [ticket]="ticket"
+    [assignedUser]="assignedUser"
+    [listColorNoAvatar]="listColorNoAvatar"
+    [indexNoAvatar]="indexNoAvatar"
+    [listAssignedUser]="listAssignedUser"
+    ></app-tickets-table-item-assigned-user>
+    </div> 
     <div
         class="ticket-table__status"
-        (click)="selectForDetail()"
+         
     >
-        <span
-            class="tag__modern"
-            [ngStyle]="getStyleStatus((ticket.customStatus) ? ticket.customStatus : ticket.status)"
-            *ngIf="ticket.status === 'IN_PROGRESS'"
-        >
-            {{(!ticket.customStatus) ? 'In Progress' : ticket.customStatus}}
-        </span>
-        <span
-            class="tag__modern"
-            [ngStyle]="getStyleStatus(ticket.status)"
-            *ngIf="ticket.status === 'COMPLETED'"
-        >
-            Completed
-        </span>
-        <span
-            class="tag__modern"
-            [ngStyle]="getStyleStatus('UNASSIGNED')"
-            *ngIf="ticket.status === null"
-        >
-            Unassigned
-        </span>
-        <span
-            class="tag__modern"
-            [ngStyle]="getStyleStatus(ticket.status)"
-            *ngIf="ticket.status === 'ON_HOLD'"
-        >
-            On Hold
-        </span>
+    <app-tickets-table-item-status [ticket]="ticket"
+    [ticketsStatus]="ticketsStatus"
+    [listColors]="listColors"
+    ></app-tickets-table-item-status>
     </div>
     <div
         (click)="selectForDetail()"

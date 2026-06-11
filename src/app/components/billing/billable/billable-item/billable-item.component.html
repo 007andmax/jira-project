@@ -20,9 +20,40 @@
     </div>
     <div
         class="billable-table__company-name --strong"
-        [textContent]="item.name"
         (click)="moToBillableTickets()"
-    ></div>
+    >
+<ng-template #popCompanyContent let-greeting="greeting"
+	>
+    <app-users-table-company-by
+    [company]="company"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    ></app-users-table-company-by>
+    </ng-template
+>
+        <div
+            class="tooltip__circle-avatar"
+            [textContent]="company.name[0].toUpperCase()"
+            [ngStyle]="{'background': parseLogo() }"
+             [ngbPopover]="popCompanyContent"
+            [popoverClass]="'requested-by-popover'"
+                [autoClose]="'outside'"
+                [container]="'body'"
+            #pCompany="ngbPopover"
+            triggers="manual"
+            appCompanyLogoPopover
+            [company]="company"
+            [popover]="pCompany"
+            [disabled]="!company"
+            [disablePopover]="!company"
+        ></div>
+        <div
+            class="ellipsis"
+            [textContent]="company.name"
+        >
+        </div>
+
+</div>
     <div
         class="billable-table__tickets"
         (click)="moToBillableTickets()"
@@ -31,10 +62,30 @@
             class="qt-df billable-table__user"
             *ngIf="salesPerson"
         >
+         <ng-template #popContent let-greeting="greeting"
+	>
+    <app-tickets-table-item-requested-by  
+    [requestedUser]="salesPerson"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    ></app-tickets-table-item-requested-by>
+    </ng-template
+>
             <div
                 class="qt-table-modern__circle-avatar"
                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(salesPerson)"
                 [ngStyle]="{'background': getStyleAvatar(salesPerson)}"
+                [ngbPopover]="popContent"
+                [popoverClass]="'requested-by-popover'"
+                 [autoClose]="'outside'"
+                 [container]="'body'"
+                #p="ngbPopover"
+                triggers="manual"
+                 appUserLogoPopover
+                [user]="salesPerson"
+                [popover]="p"
+                [disabled]="!salesPerson"
+                [disablePopover]="!salesPerson"
             >
             </div>
             <div [textContent]="ticketsListService.getUserName(salesPerson)"></div>

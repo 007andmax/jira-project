@@ -41,7 +41,7 @@
                 Title value must be unique
             </app-mat-error>
         </div>
-        <div class="qt-input-block qt-w100 editor-container qt-mt-0">
+        <div class="qt-input-block qt-w100 editor-container qt-mt-0 qt-mb-16" #editorWrap>
             <label
                 for="add-ticket-subject"
                 class="qt-input-block__label"
@@ -61,6 +61,57 @@
                 Description is required field
             </app-mat-error>
         </div>
+            <div class="f-row">
+                <div class="f-col col-100">
+                    <div class="qt-df qt-ai-c qt-jc-sb qt-mb-16">
+                        <label class="qt-fw-600 qt-color-gray-900">Available keywords</label>
+                        <a
+                            class="qt-button --sm --gray"
+                            href="javascript:;"
+                            (click)="toggle()"
+                        >
+                            <span
+                                class="qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
+                                [ngClass]="{'qt-icon icon__show':!showKeywords, 'qt-icon icon__hide':showKeywords}"
+                            ></span>
+                            {{ showKeywords ? "Hide Description" : "Show Description" }}
+                        </a>
+                    </div>
+                    <div class="company-info-block --light qt-mb-16">
+                        <div class="qt-icon icon__info qt-sz-20 qt-ic-c qt-mr-8 qt-fs-0 qt-mt-2"></div>
+                        <span class="qt-f-1">
+                            By clicking on each keyword will be apply to Template Descripition above
+                        </span>
+                    </div>
+                    <div
+                        class="form-row tgs-list"
+                        *ngIf="!showKeywords"
+                    >
+                        <span
+                            class="tags pointer"
+                            *ngFor="let key of keywords"
+                            (mousedown)="insertAtCaret(key.keyName)"
+                            (mouseup)="restoreFocus()"
+                        >
+                            {{ key.keyName }}
+                        </span>
+                    </div>
+                    <div
+                        class="key-area"
+                        *ngIf="showKeywords"
+                    >
+                        <p
+                            class="key-area__text"
+                            *ngFor="let key of keywords"
+                            (mousedown)="insertAtCaret(key.keyName)"
+                            (mouseup)="restoreFocus()"
+                        >
+                            <strong class="key-area__text-strong">{{ key.keyName }} -</strong>
+                            {{ key.description }}
+                        </p>
+                    </div>
+                </div>
+            </div>
         <div class="qt-df qt-ai-c qt-mt-16">
             <label
                 class="qt-checkbox active-note pointer"

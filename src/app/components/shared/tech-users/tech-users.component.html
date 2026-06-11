@@ -151,14 +151,32 @@
                 [ngForOf]="selectedUsers"
                 [ngForTrackBy]="trackById"
             >
+               <ng-template #popContent let-greeting="greeting"
+                    >
+                    <app-tickets-table-item-requested-by
+                    [requestedUser]="user"
+                    [indexNoAvatar]="indexNoAvatar"
+                    [listColorNoAvatar]="listColorNoAvatar"
+                    ></app-tickets-table-item-requested-by>
+                    </ng-template
+                >
                 <div
                     class="qt-table-modern__circle-avatar multi-assign-user"
                     *ngIf="i < 2"
                     [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
                     [ngStyle]="{'background': ticketsListService.getStyleAvatar(user) ,
                 'left': getStyleNetAvatar(i)}"
-                    [ngbTooltip]="user.firstName + ' ' + user.lastName"
-                    [container]="'body'"
+                     [ngbPopover]="popContent"
+                [popoverClass]="'requested-by-popover'"
+                 [autoClose]="'outside'"
+                 [container]="'body'"
+                #p="ngbPopover"
+                triggers="manual"
+                appUserLogoPopover
+                [user]="user"
+                [popover]="p"
+                [disabled]="!user"
+                [disablePopover]="!user"
                 ></div>
             </ng-template>
             <div

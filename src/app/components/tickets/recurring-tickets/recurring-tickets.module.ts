@@ -36,23 +36,34 @@ import { RecurringTicketsTableAssignedUserMoreComponent } from './recurring-tick
 
 @NgModule({
     imports: [
-    CommonModule,
-    InfiniteScrollModule,
-    FormsModule,
-    NgbModule,
-    ReactiveFormsModule,
-    RecurringTicketsRoutingModule,
-    RecurringTicketsComponent,
-    RecurringTicketsHeaderComponent,
-    RecurringTicketsTableComponent,
-    RecurringTicketsEditAsideComponent,
-    RecurringTicketsAddAsideComponent,
-    DevicesRecurringTicketsComponent,
-    IntervalComponent,
-    DurationComponent,
-    TagsComponent,
-    RecurringTicketsTableAssignedUserComponent,
-    RecurringTicketsTableAssignedUserMoreComponent
-],
+        CommonModule,
+        InfiniteScrollModule,
+        TextAreaModule,
+        DatePickerModule,
+        ProductListModule,
+        FormsModule,
+        NumberModule,
+        ServicesListModule,
+        TechUsersModule,
+        NgbModule,
+        ReactiveFormsModule,
+        RecurringTicketsRoutingModule,
+        CompanyDropDownModule,
+        AssignedTicketUserModule,
+        MatErrorModule,
+        MatChipModule,
+        MatFormFieldModule,
+        MatChipListModule,
+        MatOptionModule,
+        DecimalNumberModule,
+        ToFixedModule,
+        TicketsTableItemRequestedByModule,
+        UserLogoPopoverModule,
+        DisabledBtnModule,
+        PreloaderTicketModule,
+    ],
+
+
+
 })
 export class RecurringTicketsModule { }

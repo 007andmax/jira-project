@@ -15,13 +15,15 @@ import { FormsModule } from '@angular/forms';
 import { NgClass, NgFor, NgIf, NgStyle, CurrencyPipe } from '@angular/common';
 import { DatePickerComponent } from '../../../../shared/date-picker/date-picker.component';
 import { DropDownComponent } from '../../../../shared/drop-down/drop-down.component';
+import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 
 @Component({
-    selector: 'app-contracts-aside-block-time-billing-preview',
-    templateUrl: './contracts-aside-block-time-billing-preview.component.html',
-    styleUrls: ['./contracts-aside-block-time-billing-preview.component.scss'],
-    standalone: true,
-    imports: [DropDownComponent, DatePickerComponent, NgClass, FormsModule, NgFor, NgIf, MatChipListComponent, MatChipComponent, NgStyle, NgbTooltipModule, CurrencyPipe]
+  selector: 'app-contracts-aside-block-time-billing-preview',
+  templateUrl: './contracts-aside-block-time-billing-preview.component.html',
+  styleUrls: ['./contracts-aside-block-time-billing-preview.component.scss'],
+  standalone: true,
+  providers: [TicketsListService],
+  imports: [DropDownComponent, DatePickerComponent, NgClass, FormsModule, NgFor, NgIf, MatChipListComponent, MatChipComponent, NgStyle, NgbTooltipModule, CurrencyPipe]
 })
 export class ContractsAsideBlockTimeBillingPreviewComponent implements OnInit, OnDestroy {
 
@@ -35,13 +37,17 @@ export class ContractsAsideBlockTimeBillingPreviewComponent implements OnInit, O
   formatDate: string = FORMAT_DATE_2;
   toggleTimeRollover: boolean = false;
   sub: Subscription = new Subscription();
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   constructor(private companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,
     private taxesStateService: TaxesStateService,
+    public ticketsListService: TicketsListService,
   ) { }
 
   ngOnInit() {
-
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
 
   }
   ngDoCheck() {

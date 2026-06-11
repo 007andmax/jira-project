@@ -2,6 +2,8 @@ import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
+import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
+import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header/class/title-list-type';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { Company } from 'src/app/interfaces/company/company';
 import { ManageCardsService } from 'src/app/services/manage-cards/manage-cards.service';
@@ -29,6 +31,12 @@ export class ManageCardsAddComponent {
   showAdd: boolean = false;
   @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
   @ViewChild('companyDP', { static: true }) companyDP: CompanyDropDownComponent;
+  @ViewChild('monthDP', { static: true }) monthDP: DropDownComponent;
+  @ViewChild('yearDP', { static: true }) yearDP: DropDownComponent;
+  months = [];
+  years = [];
+  selectedMonth: TitleListType;
+  selectedYear: TitleListType;
   constructor(
     public manageCardsStateService: ManageCardsStateService,
     public cd: ChangeDetectorRef,
@@ -40,6 +48,12 @@ export class ManageCardsAddComponent {
 
   ) { }
   ngOnInit() {
+    for (let i = 1; i <= 12; i++) {
+      this.months.push(new TitleListType(`${i < 10 ? '0' + i : i}`, `${i < 10 ? '0' + i : i}`));
+    }
+    for (let i = new Date().getFullYear() - 1; i <= new Date().getFullYear() + 20; i++) {
+      this.years.push(new TitleListType(`${i}`, `${i}`.substring(2, 4)));
+    }
     let getShowAsideForAdd = this.manageCardsStateService.showAsideForAdd.subscribe(data => {
       this.showAdd = true;
 
@@ -84,13 +98,21 @@ export class ManageCardsAddComponent {
     })
 
   }
+  onSelectMonth(event) {
+    this.selectedMonth = event;
+    if (this.selectedYear) this.modelForm.controls['expiryDate'].setValue(this.selectedYear.type + this.selectedMonth.type);
+  }
+  onSelectYear(event) {
+    this.selectedYear = event;
+    if (this.selectedMonth) this.modelForm.controls['expiryDate'].setValue(this.selectedYear.type + this.selectedMonth.type);
+  }
   onSelectCompany(data) {
     this.selectedCompany = data;
     this.modelForm.controls['companyId'].setValue(data.id);
   }
   add() {
     this.submitted = true;
-    if (this.modelForm.invalid) {
+     if (this.modelForm.invalid) {
       return;
     }
     this.addBtn.setDisabled(true);
@@ -113,6 +135,10 @@ export class ManageCardsAddComponent {
     this.submitted = false;
     this.showAdd = false;
     this.modelForm.reset();
+    this.monthDP.clearWithOutChanges();
+    this.yearDP.clearWithOutChanges();
+    this.selectedMonth = null;
+    this.selectedYear = null;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

@@ -38,14 +38,32 @@ export class QuotesItemComponent implements OnInit {
   @Output() onCopy = new EventEmitter<any>();
   @Output() onTicket = new EventEmitter<any>();
   @Output() onInvoice = new EventEmitter<any>();
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   constructor(public usersStateService: UsersStateService,
     private permissionsService: PermissionsService,
     public ticketsListService: TicketsListService,
     public customerPortalStateService: CustomerPortalStateService,
+    private companiesStateService: CompaniesStateService,
     private toastrProgressStateService: ToastrProgressStateService) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     this.createdUser = this.usersStateService.getAllUsers().find(item => item.id === this.quote.createdBy);
+  }
+  checkLogo() {
+    return (this.getCompany(this.quote.company) && this.getCompany(this.quote.company).logo && this.getCompany(this.quote.company).logo.cropped && this.getCompany(this.quote.company).logo.cropped.id || this.getCompany(this.quote.company) && this.getCompany(this.quote.company).logo && this.getCompany(this.quote.company).logo.origin && this.getCompany(this.quote.company).logo.origin.id)
+  }
+  getCompany(company) {
+    return this.companiesStateService.getCompanies().find(item => item.id == company.id);
+  }
+  parseLogo() {
+    if (this.checkLogo()) {
+      return `url(${this.companiesStateService.getCompanyLogoUrl(this.getCompany(this.quote.company))}) center / cover no-repeat`;
+    } else {
+      return this.ticketsListService.getStyleAvatar(null, this.listColorNoAvatar[this.indexNoAvatar]);
+    }
   }
   openInvoiceTikcet() {
     if (this.quote.status === "TICKETED" && !this.customerPortalStateService.isCustomerPortal) this.onTicket.emit(this.quote.ticketId);

@@ -31,7 +31,11 @@ export class ContractsStateService {
   onFastAdd: EventEmitter<any> = new EventEmitter();
   onFastEdit: EventEmitter<any> = new EventEmitter();
   onFastRemove: EventEmitter<any> = new EventEmitter();
+  onSortDiraction: EventEmitter<any> = new EventEmitter();
   constructor() { }
+  public changeSortDirection(data) {
+    this.onSortDiraction.next(data);
+  }
   public fastEditContract(data) {
     this.onFastEdit.emit(data);
   }

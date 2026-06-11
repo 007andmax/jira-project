@@ -123,11 +123,11 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit, O
     if (this.editMode) {
       let startDate = new Date(this.start);
       let endDate = new Date(this.end);
-      this.timePickerStart.timepicker('setTime', startDate);
-      this.timePickerEnd.timepicker('setTime', endDate);
+      if (this.timePickerStart) this.timePickerStart.timepicker('setTime', startDate);
+      if (this.timePickerEnd) this.timePickerEnd.timepicker('setTime', endDate);
     } else {
-      this.timePickerStart.timepicker('setTime', new Date());
-      this.timePickerEnd.timepicker('setTime', new Date());
+      if (this.timePickerStart) this.timePickerStart.timepicker('setTime', new Date());
+      if (this.timePickerEnd) this.timePickerEnd.timepicker('setTime', new Date());
     }
     this.timePickerEnd.timepicker('option', 'minTime', this.timePickerStart.val());
     $(".ticket-edit-aside__body").scroll(() => {

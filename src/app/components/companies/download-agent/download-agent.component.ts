@@ -4,6 +4,8 @@ import { DownloadAgentStateService } from 'src/app/states/download-agent/downloa
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { CompanyDownlaodAgent } from '../class/company-download-agent';
+import { AppStateService } from 'src/app/states/app/app-state.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-download-agent',
@@ -12,7 +14,10 @@ import { CompanyDownlaodAgent } from '../class/company-download-agent';
 })
 export class DownloadAgentComponent implements OnInit {
   downloadLink: string;
+  toggleWingetCommand: boolean = false;
   constructor(private downloadAgentService: DownloadAgentService, private downloadAgentStateService: DownloadAgentStateService,
+    private toastrService: ToastrService,
+    private appStateService: AppStateService,
     public activeModal: NgbActiveModal, private companiesService: CompaniesService) { }
 
   ngOnInit() {
@@ -23,6 +28,45 @@ export class DownloadAgentComponent implements OnInit {
   }
   closeModal() {
     this.activeModal.close();
+  }
+  onToggleWingetCommand() {
+    this.toggleWingetCommand = !this.toggleWingetCommand;
+  }
+  getWingetRepositoryLink() {
+    return `winget source add -n Winget-Repo -t "Microsoft.Rest" -a https://update.quicktech.com/winget/api/`;
+  }
+  copyWingetRepositoryLink() {
+    let textArea: any = document.createElement("textarea");
+    textArea.style.opacity = 0;
+    textArea.value = this.getWingetRepositoryLink();;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      let successful = document.execCommand('copy');
+    } catch (err) {
+      //  UserNotificationService.show('Copy failed', true);
+    }
+    document.body.removeChild(textArea);
+    this.toastrService.success("The value is copied to clipboard");
+    this.appStateService.changeDetectorRef();
+  }
+  getWinGetCommand() {
+    return `winget install QuicktechAgentSetup --version 1.0.1.3891 --source Winget-Repo --override "--company_id ${this.downloadAgentStateService.getCompany().id} --silent"`;
+  }
+  copyWinGetCommand() {
+    let textArea: any = document.createElement("textarea");
+    textArea.style.opacity = 0;
+    textArea.value = this.getWinGetCommand();
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      let successful = document.execCommand('copy');
+    } catch (err) {
+      //  UserNotificationService.show('Copy failed', true);
+    }
+    document.body.removeChild(textArea);
+    this.toastrService.success("The value is copied to clipboard");
+    this.appStateService.changeDetectorRef();
   }
   getDonwloadLink() {
     let textArea: any = document.createElement("textarea");
@@ -36,6 +80,8 @@ export class DownloadAgentComponent implements OnInit {
       //  UserNotificationService.show('Copy failed', true);
     }
     document.body.removeChild(textArea);
+    this.toastrService.success("The value is copied to clipboard");
+    this.appStateService.changeDetectorRef();
   }
   downloadAgent() {
     this.downloadAgentService.download(this.downloadAgentStateService.getCompany().id, "", "", false).subscribe((data: any) => {

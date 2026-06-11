@@ -13,14 +13,15 @@ import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service
 import { TicketsPermissionsService } from '../services/tickets-permissions.service';
 import { NgIf, NgStyle, NgFor } from '@angular/common';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { TicketStateService } from '../services/ticket-state.service';
 
 @Component({
-    selector: 'app-ticket-change-status',
-    templateUrl: './ticket-change-status.component.html',
-    styleUrls: ['./ticket-change-status.component.scss'],
-    providers: [TicketsPermissionsService],
-    standalone: true,
-    imports: [NgbDropdownModule, NgIf, NgStyle, NgFor]
+  selector: 'app-ticket-change-status',
+  templateUrl: './ticket-change-status.component.html',
+  styleUrls: ['./ticket-change-status.component.scss'],
+  providers: [TicketsPermissionsService],
+  standalone: true,
+  imports: [NgbDropdownModule, NgIf, NgStyle, NgFor]
 })
 export class TicketChangeStatusComponent implements OnInit, OnDestroy {
   @Input() ticketProfile: TicketProfile = new TicketProfile();
@@ -36,6 +37,7 @@ export class TicketChangeStatusComponent implements OnInit, OnDestroy {
     public ticketsService: TicketsService,
     public cd: ChangeDetectorRef,
     public ticketsPermissionsService: TicketsPermissionsService,
+    public ticketStateService: TicketStateService,
     private leftPanelService: LeftPanelService,) { }
 
 
@@ -76,6 +78,7 @@ export class TicketChangeStatusComponent implements OnInit, OnDestroy {
     if (name === "ON_HOLD") return "On hold";
     if (name === "COMPLETED") return "Completed";
     if (name === "UNASSIGNED") return "Unassigned";
+    if (name === "PENDING_REVIEW") return "Pending Review";
     return name;
   }
   ngOnDestroy(): void {

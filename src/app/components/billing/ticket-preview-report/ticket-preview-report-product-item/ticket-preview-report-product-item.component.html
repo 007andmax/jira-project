@@ -1,0 +1,161 @@
+<tr>
+  <td>
+    <app-date-picker
+      #startDateDP
+      [dropdownClass]="['date-picker']"
+      [formatDate]="formatDate"
+      [editMode]="true"
+      [editDate]="product.date"
+       [useMinDate]="false"
+      [container]="'body'"
+      [isDisabled]="ticket.status == 'COMPLETED'"
+      (onChange)="onChangeStartDate($event)"
+    ></app-date-picker>
+  </td>
+  <td class="invoice-item__col-manufacture "  >
+    <app-ticket-preview-report-product-item-manufacture #manufactureDb [type]="'TICKET'" [isDisabled]="ticket.status == 'COMPLETED'" [editItem]="product.item" [product]="product" (selectedProductItem)="selectProduct($event)"></app-ticket-preview-report-product-item-manufacture>
+  </td>
+  <td class="invoice-item__col-desc"
+
+  >
+    <app-ticket-preview-report-product-item-drop-down #productDb [isDisabled]="ticket.status == 'COMPLETED'"  [type]="'TICKET'" [editItem]="product.item"
+                                                      (selectedProductItem)="selectProduct($event)"></app-ticket-preview-report-product-item-drop-down>
+  </td>
+  <td
+    class="invoice-item__col-quentity"
+  >
+    <input
+      [disabled]="ticket.status == 'COMPLETED'"
+      class="input-default input-qty"
+      type="text"
+      appInteger
+      [value]="product.quantity"
+      (blur)="onBlurQuantity()"
+      (change)="onChangeQuantity($event)"
+      (keyup)="onEnterQuantity($event)"
+      placeholder="QTY"
+    ></td>
+  <td class="invoice-item__col-price with-dollar">
+    <input
+      [disabled]="ticket.status == 'COMPLETED'"
+      class="input-default input-price"
+      type="text"
+      decimalNumber
+      [useFixed]="true"
+      appToFixed
+      (blur)="onBlurCost()"
+      [value]="product.item.cost"
+      (onChange)="onChangeCost($event)"
+      (keyup)="onEnterCost($event)"
+      placeholder="Cost"
+ [ngClass]="{'--input-error' : !validate.getCostSale()}"
+
+    >
+    <app-mat-error
+      class="invalid-feedback --pos-static"
+      *ngIf="!validate.getCostSale()"
+    >
+      Cost cannot be higher than Price
+    </app-mat-error>
+  </td>
+  <td class="invoice-item__col-price with-percent">
+    <input
+      [disabled]="ticket.status == 'COMPLETED'"
+      class="input-default input-price"
+      type="text"
+      decimalNumber
+      (blur)="onBlurMarkup()"
+      (onChange)="onChangeMarkup($event)"
+      [value]="markup"
+      (keyup)="onEnterMarkup($event)"
+      placeholder="Markup"
+    >
+  </td>
+  <td class="invoice-item__col-price with-dollar">
+    <input
+      [disabled]="ticket.status == 'COMPLETED'"
+      class="input-default input-price"
+      type="text"
+      decimalNumber
+      [useFixed]="true"
+      appToFixed
+      [value]="product.item.sale"
+      (blur)="onBlurSale()"
+      (input)="validate.resetSale()"
+      (onChange)="changeSales($event)"
+      (keyup)="onEnterSale($event)"
+      placeholder="Price"
+    >
+    <app-mat-error
+      class="invalid-feedback"
+      *ngIf="!validate.getSale()"
+    >
+      Price is required
+    </app-mat-error>
+  </td>
+
+  <td
+    class="invoice-item__col-tax"
+
+  >
+    <input
+      [disabled]="ticket.status == 'COMPLETED'"
+      type="text"
+      class="input-default input-price"
+      decimalNumber
+      placeholder="0%"
+      [defaultValue]="''"
+      [value]="product.discountAmount ? product.discountAmount : ''"
+      (onChange)="onChangeDiscountAmount($event)"
+      (blur)="onBlurDiscountAmount()"
+      (keyup)="onEnterDiscountAmount($event)"
+    >
+  </td>
+  <td class="invoice-item__col-amount">
+    <input
+      [disabled]="ticket.status == 'COMPLETED'"
+      class="input-default input-qty"
+      type="text"
+      [value]="product.serialNumber"
+      placeholder="Enter Serial Number"
+       (input)="onChangeSerialNumber($event)"
+      (blur)="onBlurSerialNumber()"
+      (keyup)="onEnterSerialNumber($event)"
+    >
+  </td>
+  <td>
+    <div
+      class="qt-button qt-button--with-icon --sm --gray"
+      (click)="setComplete()"
+      [ngClass]="{
+                    'no-click':!getPermissions('MANAGE_EXPENSE_COMPLETION_STATUS') || ticket.status == 'COMPLETED',
+                'button-mark-complete': product.completed}"
+    >
+      <i
+        class="qt-icon icon__check qt-icon__green-600 qt-mr-6 icn-16"
+        *ngIf="product.completed"
+      ></i>
+      <i
+        class="qt-icon icon__check qt-mr-6 icn-16"
+        *ngIf="!product.completed"
+      ></i>
+      <span [textContent]="(!product.completed) ? 'Mark completed' : 'Сompleted'"></span>
+    </div>
+  </td>
+  <td>
+    <app-dynamic-tooltip
+      [content]="'Delete Product'"
+      [position]="'top'"
+      #deleteProduct
+    ></app-dynamic-tooltip>
+    <div
+    *ngIf="ticket.status != 'COMPLETED'"
+      class="qt-button-square pointer"
+      (click)="removeProduct()"
+      (mouseenter)="deleteProduct.show($event.target)"
+      (mouseleave)="deleteProduct.hide()"
+    >
+      <div class="qt-icon icon__delete qt-icon__red-600 qt-sz-16"></div>
+    </div>
+  </td>
+</tr>

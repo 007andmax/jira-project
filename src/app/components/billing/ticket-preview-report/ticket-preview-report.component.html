@@ -1,0 +1,161 @@
+<div class="qt-page-list products-page">
+    <app-ticket-preview-report-header
+        #header
+        (onFilter)="onFilter($event)"
+    ></app-ticket-preview-report-header>
+    <div class="qt-page-list__body">
+        <div class="qt-page-list__body-table-container">
+            <div class="qt-page-list__body-tbody qt-table-modern products-table">
+                <div
+                    class="tbody"
+                    infiniteScroll
+                    [infiniteScrollContainer]="container"
+                    [infiniteScrollDistance]="2"
+                    [infiniteScrollThrottle]="50"
+                    [infiniteScrollDisabled]="infiniteScrollDisabled"
+                    (scrolled)="onScroll()"
+                      [fromRoot]="true"
+                        [scrollWindow]="false"
+                        [alwaysCallback]="true"
+                >
+                     <ng-template
+                        ngFor
+                        let-ticket
+                        [ngForOf]="list"
+                        let-i="index"
+                        [ngForTrackBy]="trackByIndex"
+                      >
+                        <div class="invoice-item qt-w100">
+                          <div class="qt-df qt-ai-c">
+                            <div class="invoice-item__header qt-w100 qt-ml-30 qt-df qt-ai-c qt-pt-10 qt-pb-10">
+                              <div
+                                class="invoice-item__number qt-fs-14 qt-fw-500 qt-color-gray-900 qt-mr-16 qt-pointer qt-ws-nowrap"
+                                [textContent]="'Tkt# ' + ticket.number"
+                                (click)="editTicket(ticket.id)"
+                              >
+                            </div>
+                              <div class="qt-fs-14 qt-fw-500 qt-color-gray-900 qt-mr-16 qt-ws-nowrap" [textContent]="'Company - ' + ticket.companyName + ','">
+                              </div>
+                            <!--   <div
+                            class="ticket-detail-page-title__text "
+                            [ngClass]="{'pointer':ticket.status != 'COMPLETED'}"
+                            [hidden]="ticket.modeSubject === 'edit'"
+                            (click)="toggleSubject(ticket)"
+                        >
+                            <span class="qt-fs-14 qt-fw-500 qt-color-gray-900" [textContent]="ticket.subject"></span>
+                        </div>-->
+                                 <input
+                                [disabled]="ticket.status == 'COMPLETED'"
+                                class="input-default input-qty qt-w100 qt-mr-16"
+                                type="text"
+                                [value]="ticket.subject"
+                                placeholder="Enter Subject"
+                                 (input)="onChangeSubject(ticket,$event)"
+                                (blur)="onBlurSubject(ticket,$event)"
+                                (keyup)="onEnterSubject(ticket,$event)"
+                              >
+                               <div *ngIf="ticket.hasInvoice" class="qt-fs-14 qt-fw-500 qt-color-gray-900 qt-ml-16">The Ticket is already billed to the client. You cannot re-open it</div>
+                           <div class="qt-df qt-ai-c qt-ml-auto">
+                               <app-tickets-table-item-status class="qt-mr-16 ticket-preview-status" [type]="'TICKET_PREVIEW'" [ticket]="ticket"
+                          [ticketsStatus]="ticketsStatus"
+                          [listColors]="listColors"
+                          [isDisabled]="ticket.hasInvoice || !getPermissions('REOPEN_CLOSED_TICKETS')"
+                          (onChangedStatus)="onChangedStatus(ticket,$event)"
+                          ></app-tickets-table-item-status>
+                              <div
+                                class="qt-button --green --md"
+                                appDisabledBtn
+                                *ngIf="ticket.status != 'COMPLETED'"
+                                (onClick)="approveAndClose(ticket)"
+                                [ngClass]="{'--loading':ticket.isUpdateAndClose}"
+                              >
+                                  <span
+                                    class="qt-icon qt-icon__green-700 icon__check qt-sz-16 qt-dib qt-mr-8 qt-button-icon"
+                                    *ngIf="!ticket.isUpdateAndClose"
+                                  ></span>
+                                <span>Approve and Close</span>
+                                <app-preloader-ticket *ngIf="ticket.isUpdateAndClose"></app-preloader-ticket>
+                              </div>
+                               <app-dynamic-tooltip
+                                [content]="'You do not have the permission to reopen tickets.'"
+                                [position]="'top'"
+                                #ticketTooltip
+                            ></app-dynamic-tooltip>
+                               <div
+                                  class="qt-button --md --gray qt-fs-0"
+                                appDisabledBtn
+                                 *ngIf="ticket.status == 'COMPLETED' && !ticket.hasInvoice"
+                                (onClick)="markAsOpen(ticket,markAsOpenBtn)"
+                                 (mouseenter)="!getPermissions('REOPEN_CLOSED_TICKETS') ? ticketTooltip.show($event.target) : null"
+                                (mouseleave)="!getPermissions('REOPEN_CLOSED_TICKETS') ? ticketTooltip.hide() : null"
+                                [ngClass]="{'--loading':markAsOpenBtn.isBlock(),'--disabled':!getPermissions('REOPEN_CLOSED_TICKETS')}"
+                                   #markAsOpenBtn="disabled"
+                              >
+                                <span>Mark as Open</span>
+                                <app-preloader-ticket *ngIf="markAsOpenBtn.isBlock()"></app-preloader-ticket>
+                              </div>
+                              </div>
+                              <!--  <div
+                                  class="qt-fs-12 invoice-item__subject"
+                                  *ngIf="!getPermissions('EDIT_TICKETS')"
+                              >
+                                  <span class="qt-fs-11 qt-fw-600">Subject:</span>
+                                  {{ticket.subject}}
+                              </div> -->
+                            </div>
+                            <div class="delete-item-container qt-pl-4"></div>
+                          </div>
+                          <table class="invoice-item__table">
+                            <thead>
+                            <tr>
+                              <th class="invoice-item__col-item  qt-fw-600 service-date">Date</th>
+                              <th class="invoice-item__col-servers  qt-fw-600">Item</th>
+                              <th class="invoice-item__col-desc  qt-fw-600">Description</th>
+                              <th class="invoice-item__col-quentity qt-fw-600">Quantity</th>
+                              <th class="invoice-item__col-price qt-fw-600">Cost</th>
+                              <th class="invoice-item__col-price qt-fw-600">Markup</th>
+                              <th class="invoice-item__col-price qt-fw-600">Price</th>
+                              <th class="invoice-item__col-tax qt-fw-600">Discount</th>
+                              <th class="invoice-item__col-amount qt-fw-600">Serial Number</th>
+                              <th class="invoice-item__col-status"></th>
+                              <th class="invoice-item__col-remove"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <ng-template
+                              ngFor
+                              let-service
+                              [ngForOf]="ticket.services"
+                              [ngForTrackBy]="trackById"
+                            >
+                              <app-ticket-preview-report-service-item [service]="service"
+                                                                      [ticket]="ticket"></app-ticket-preview-report-service-item>
+                            </ng-template>
+                            <ng-template
+                              ngFor
+                              let-product
+                              [ngForOf]="ticket.products"
+                              [ngForTrackBy]="trackById"
+                            >
+                              <app-ticket-preview-report-product-item #productItem [product]="product"
+                                                                      [ticket]="ticket"></app-ticket-preview-report-product-item>
+                            </ng-template>
+                            </tbody>
+                          </table>
+                        </div>
+                      </ng-template>
+                    <div
+                        class="no-exist-elements"
+                        *ngIf="!showPreloader && list.length == 0"
+                    >
+                        We couldn't find any results
+                    </div>
+                    <div
+                        class="loading"
+                        *ngIf="showPreloader"
+                    ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

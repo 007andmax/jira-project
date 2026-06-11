@@ -20,4 +20,7 @@ export interface Product {
     billable: boolean;
     taxes: Array<Tax>;
     oldVersion: boolean;
+    active: boolean;
+    productType: any;
+    companyId: string;
 }

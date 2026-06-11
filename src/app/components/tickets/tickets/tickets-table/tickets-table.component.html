@@ -10,6 +10,26 @@
                     >
                         Requested By
                         <span class="qt-table-modern__sorting"></span>
+                  <div *ngIf="sortBy.sortBy == 'created'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                      <div
+                        class="ticket-table__update"
+                        
+                    >
+                    </div>
+                       <div
+                        class="ticket-table__number  pointer"
+                        (click)="onFilter('number')"
+                    >
+                        Ticket #
+                            <span class="qt-table-modern__sorting"></span>
+                           <div *ngIf="sortBy.sortBy == 'number'"
+                             [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="ticket-table__subject pointer"
@@ -17,6 +37,10 @@
                     >
                         Subject
                         <span class="qt-table-modern__sorting"></span>
+                           <div *ngIf="sortBy.sortBy == 'subject'"
+                             [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="ticket-table__company pointer"
@@ -24,6 +48,10 @@
                     >
                         Company
                         <span class="qt-table-modern__sorting"></span>
+                           <div *ngIf="sortBy.sortBy == 'company'"
+                             [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div class="ticket-table__assignee">Assignee</div>
                     <div
@@ -32,6 +60,10 @@
                     >
                         Status
                         <span class="qt-table-modern__sorting"></span>
+                           <div *ngIf="sortBy.sortBy == 'status'"
+                             [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="ticket-table__created-date pointer"
@@ -39,13 +71,21 @@
                     >
                         Created Date
                         <span class="qt-table-modern__sorting"></span>
+                           <div *ngIf="sortBy.sortBy == 'created_date'"
+                             [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20 "
+            ></div>
                     </div>
                     <div
                         class="ticket-table__created-date pointer"
-                        (click)="onFilter('last_updated')"
+                        (click)="onFilter('last_updated_date')"
                     >
                         Last Updated
                         <span class="qt-table-modern__sorting"></span>
+                           <div *ngIf="sortBy.sortBy == 'last_updated_date'"
+                             [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                 </div>
             </div>

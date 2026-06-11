@@ -1,6 +1,5 @@
-﻿
+
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { TicketStateService } from 'src/app/components/tickets/tickets/ticket-edit-aside/services/ticket-state.service';
@@ -27,17 +26,18 @@ import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { QuotesHeaderComponent } from '../quotes-header/quotes-header.component';
 import { QuotesItemComponent } from './quotes-item/quotes-item.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { Component, ViewChild } from '@angular/core';
+
 
 @Component({
   standalone: true,
-  imports: [QuotesHeaderComponent, QuotesItemComponent, InfiniteScrollModule, CommonModule],
-  selector: 'app-quotes-table',
   templateUrl: './quotes-table.component.html',
   styleUrls: ['./quotes-table.component.scss'],
   providers: [QuotesListService],
 
 })
 export class QuotesTableComponent implements OnInit, OnDestroy {
+  @ViewChild('header', { static: true }) header: QuotesHeaderComponent;
   filter: QuoteFilter = new QuoteFilter();
   sort: QuoteSort = new QuoteSort();
   quotes: Array<Quote> = [];
@@ -63,12 +63,12 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.filter.sortBy = "DATE_DESC";
     this.onScroll();
     let getOnInitFilter = this.quoteStateService.getOnInitFilter().subscribe(data => {
       this.filter.setData(data);
       this.filter.clearSortBy();
       this.showPreloader = true;
-      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -121,13 +121,15 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     this.quoteStateService.setInvoice(invoiceId);
   }
   public sortBy(value) {
-    this.showPreloader = true;
     document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.showPreloader = true;
     this.setDefaultScoll();
     this.filter.sortBy = this.sort.getSortType(value);
+    this.header.sortBy.sortDirection = this.filter.sortBy.includes("DESC") ? "DESC" : "ASC";
     this.getQuotes()
   }
   public setDefaultScoll() {
+    if (document.body.querySelector(".main-container")) document.body.querySelector(".main-container").scrollTo(0, 0);
     this.page_number = 0;
     this.quotesListService.setBlockList(false);
     this.quotes = [];

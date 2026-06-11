@@ -13,6 +13,8 @@ import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-s
 import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 import { TicketDetailProfileUpdatesProductHeaderInfoComponent } from './ticket-detail-profile-updates-product-header-info/ticket-detail-profile-updates-product-header-info.component';
 import { TicketDetailProfileUpdatesProductItemComponent } from './ticket-detail-profile-updates-product-item/ticket-detail-profile-updates-product-item.component';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { TicketProfile } from '../../../class/ticket-profile';
 
 @Component({
   standalone: true,
@@ -23,14 +25,23 @@ import { TicketDetailProfileUpdatesProductItemComponent } from './ticket-detail-
 })
 export class TicketDetailProfileUpdatesProductComponent implements OnInit {
   classActions: string = '';
+  @Input() ticketProfile: TicketProfile = new TicketProfile();
   @Input() update: TicketProfileUpdate;
   @Input() isBlockChange: boolean;
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   constructor(public ticketsListService: TicketsListService,
     public confirmStateService: ConfirmStateService,
     public ticketStateService: TicketStateService,
+    public usersStateService: UsersStateService,
     public modalService: NgbModal) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
+  }
+  getUserById(id) {
+    return this.usersStateService.getAllUsers().find(item => item.id == id);
   }
   public getTotal(price, quantity) {
     return price * quantity;
@@ -60,7 +71,7 @@ export class TicketDetailProfileUpdatesProductComponent implements OnInit {
     this.ticketStateService.setProductForRemove(this.update.products[0]);
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET_DETAIL_PRODUCT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.header = `Delete Ticket`;
+    modalRef.componentInstance.header = `Delete Item`;
     modalRef.componentInstance.message = `Are you sure you want to remove the item?`;
 
   }

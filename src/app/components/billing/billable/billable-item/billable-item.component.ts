@@ -12,14 +12,16 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { NgIf, NgStyle, CurrencyPipe } from '@angular/common';
+import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
-    selector: 'app-billable-item',
-    templateUrl: './billable-item.component.html',
-    styleUrls: ['./billable-item.component.scss'],
-    providers: [TicketsListService],
-    standalone: true,
-    imports: [NgIf, FormsModule, NgStyle, NgbDropdownModule, CurrencyPipe]
+  selector: 'app-billable-item',
+  templateUrl: './billable-item.component.html',
+  styleUrls: ['./billable-item.component.scss'],
+  providers: [TicketsListService],
+  standalone: true,
+  imports: [NgIf, FormsModule, NgStyle, NgbDropdownModule, CurrencyPipe]
 })
 export class BillableItemComponent implements OnInit {
   @Input() item: BillableProfile;
@@ -35,16 +37,24 @@ export class BillableItemComponent implements OnInit {
     private leftPanelStateService: LeftPanelStateService,
     private billableService: BillableService,
     private permissionsService: PermissionsService,
+    private appStateService: AppStateService,
     private usersStateService: UsersStateService) { }
 
   ngOnInit() {
     this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
     this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
-    let company = this.companiesStateService.getCompanies().find(item => item.id === this.item.id);
-    this.salesPerson = this.usersStateService.getAllUsers().find(item => item.id === company.techLeadId);
+    this.company = this.companiesStateService.getCompanies().find(item => item.id === this.item.id);
+    this.salesPerson = this.usersStateService.getAllUsers().find(item => item.id === this.company.techLeadId);
   }
-  ngDocheck() {
-
+  checkLogo() {
+    return (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id || this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id)
+  }
+  parseLogo() {
+    if (this.checkLogo()) {
+      return `url(${this.companiesStateService.getCompanyLogoUrl(this.company)}) center / cover no-repeat`;
+    } else {
+      return this.ticketsListService.getStyleAvatar(null, this.listColorNoAvatar[this.indexNoAvatar]);
+    }
   }
   parseTotal(value) {
     return parseFloat(value.toString()).toFixed(2)
@@ -76,5 +86,9 @@ export class BillableItemComponent implements OnInit {
   moToBillableTickets() {
     this.billableStateService.setBillableProfile(this.item);
     this.leftPanelStateService.goToState('new-billable-tickets');
+  }
+
+  ngOnDestroy(): void {
+
   }
 }

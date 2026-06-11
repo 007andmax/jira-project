@@ -108,8 +108,8 @@ export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
   onInitCopy() {
     this.quote.setCopyData(this.quoteStateService.getQuoteForCopy());
     this.quoteCompany = new CompanyItem(JSON.parse(JSON.stringify(this.companiesState.getCompanies().find(item => item.id === this.quote.companyId))));
-    this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
-    if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
+    this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[0].id);
+    if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[1].id);
     this.cd.detectChanges();
     this.getServicesList();
   }
@@ -243,8 +243,8 @@ export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
       this.validate.resetCompany();
       //  this.servicesList.getServicesList();
       this.getServicesList();
-      this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
-      if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
+      this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[0].id);
+      if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[1].id);
     } else {
       this.quote.setBillTo(null);
       this.quote.setShipTo(null);
@@ -255,8 +255,8 @@ export class QuoteAsideAddBodyComponent implements OnInit, OnDestroy {
   }
   selectAddress(index, newAddress) {
     this.quoteCompany.companyInfo.addresses[index] = newAddress;
-    this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[0].id);
-    if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[1].id);
+    this.quote.setShipTo(this.quoteCompany.companyInfo.addresses[0].id);
+    if (this.quoteCompany.companyInfo.addresses.length == 2) this.quote.setBillTo(this.quoteCompany.companyInfo.addresses[1].id);
 
   }
   public getPermissions(action) {

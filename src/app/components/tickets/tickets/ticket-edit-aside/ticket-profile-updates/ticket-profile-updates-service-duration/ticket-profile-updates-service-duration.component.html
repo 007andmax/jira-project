@@ -5,14 +5,16 @@
 >
     <input
         type="text"
-        [ngClass]="{'--input-error-validate':!validate}"
+        [ngClass]="{'--input-error-validate':!validate,'--disabled':isDisabled}"
         class="duration-container-input"
         id="dropdownDuration"
         [value]="getParseDate()"
         readonly
         ngbDropdownToggle
+        [disabled]="isDisabled"
     >
     <i
+    *ngIf="!isDisabled"
         class="icn-remove-old qt-icon icon__close qt-icon__gray-400 qt-sz-20 pointer"
         (click)="reset()"
     ></i>

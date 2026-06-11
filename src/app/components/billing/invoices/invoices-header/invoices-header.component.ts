@@ -9,6 +9,7 @@ import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.servic
 import { InvoicesFilterComponent } from './invoices-filter/invoices-filter.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { InvoiceExportComponent } from './invoice-export/invoice-export.component';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   standalone: true,
@@ -24,6 +25,7 @@ export class InvoicesHeaderComponent implements OnInit {
   toggleFilter: boolean = false;
   @Output() onCreateInvoice = new EventEmitter<any>();
   @Output() onSortBy = new EventEmitter<any>();
+  sortBy: TicketSortBy = new TicketSortBy('INVOICE_NUMBER', 'DESC');
   constructor(public appService: AppService,
     private invoicesService: InvoicesService,
     private reportsService: ReportsService,
@@ -69,7 +71,8 @@ export class InvoicesHeaderComponent implements OnInit {
   sendEmail() {
     this.draftEmailStateService.toogleAsideAddReportInvoice();
   }
-  sortBy(data) {
+  sortList(data) {
+    this.sortBy.sortBy = data;
     this.onSortBy.emit(data);
   }
   clearAll() {

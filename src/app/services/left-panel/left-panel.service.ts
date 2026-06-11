@@ -29,7 +29,8 @@ export class LeftPanelService {
   isTicketsPage(state) {
     return (state === 'new-tickets'
       || state === 'new-tickets-dashboard'
-      || state === 'recurring-tickets')
+      || state === 'recurring-tickets'
+      || state === 'ticket-preview-report')
   }
   isTicketDetailPage(state) {
     return (state === 'ticket-detail')

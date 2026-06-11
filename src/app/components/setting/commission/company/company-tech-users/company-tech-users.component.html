@@ -39,10 +39,27 @@
         ngbDropdownAnchor
     >
         <div class="user-tech-dp">
+              <ng-template #popContent let-greeting="greeting"
+                >
+                <app-tickets-table-item-requested-by
+                [requestedUser]="getUserById(selectedUsers[0].id)"
+                [indexNoAvatar]="indexNoAvatar"
+                [listColorNoAvatar]="listColorNoAvatar"
+                ></app-tickets-table-item-requested-by>
+                </ng-template>
             <div
-                class="tab-pane__table-avatar user-dp"
+                class="tab-pane__table-avatar user-dp qt-pointer"
                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(selectedUsers[0])"
                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(selectedUsers[0])}"
+                    [ngbPopover]="popContent"
+                [popoverClass]="'requested-by-popover'"
+                [autoClose]="'outside'"
+                [container]="'body'"
+                #p="ngbPopover"
+                triggers="manual"
+                appUserLogoPopover
+                [user]="getUserById(selectedUsers[0].id)"
+                [popover]="p"
             >
             </div>
         </div>

@@ -19,6 +19,7 @@ export class ContractsFilter {
   selectedEndDate: number = null;
   enableInvoiceAutoCreate: boolean = null;
   manualCreateBillableItem: boolean = null;
+  direction: string;
   constructor() { }
 
   public clearOptions() {
@@ -155,6 +156,7 @@ export class ContractsFilter {
           list.reverse();
         }
       }
+      this.direction = this.filter[index].filter;
     }
   }
   public onSortList(reqList) {

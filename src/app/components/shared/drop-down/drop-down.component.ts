@@ -25,7 +25,7 @@ import { NgClass, NgStyle, NgIf, NgFor } from '@angular/common';
     ],
 })
 export class DropDownComponent implements OnInit, OnDestroy {
-  selectedItem = null;
+  selectedItem: any = null;
   @ViewChild('dp', { static: true }) dp: NgbDropdown;
   @Input() dropdownWidth: string = null;
   @Input() dropdownHeight: string = null;

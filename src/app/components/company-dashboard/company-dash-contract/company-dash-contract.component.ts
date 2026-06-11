@@ -89,7 +89,7 @@ export class CompanyDashContractComponent implements OnInit, OnDestroy {
       data.forEach(element => {
         let obj = element;
         obj.serviceAgreement.startDateName = moment(new Date(obj.serviceAgreement.startDate)).format('DD MMM YYYY');
-        obj.serviceAgreement.endDateName = moment(new Date(obj.serviceAgreement.endDate)).format('DD MMM YYYY');
+        obj.serviceAgreement.endDateName = moment(new Date(obj.serviceAgreement.reviewDate)).format('DD MMM YYYY');
         this.contractsList.push(obj);
         if (element.statistics !== null)
           statistics = statistics.concat(element.statistics);

@@ -33,7 +33,12 @@ export class IntegrationsService {
       }));
   }
   public getConnected() {
-    return this.http.get(`${this.apiUrl}moneris/settings/connected`);
+    this.appStateService.setIsShowError(false);
+    return this.http.get(`${this.apiUrl}moneris/settings/connected`).pipe(
+      tap((data: any) => {
+        this.appStateService.setIsShowError(true);
+        return data;
+      }));
   }
   public setSettings(data) {
     this.appStateService.setServerError(true);

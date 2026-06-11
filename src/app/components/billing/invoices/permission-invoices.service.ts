@@ -20,7 +20,7 @@ export class PermissionInvoicesService  {
         });
     }
     public getCompanyInfoPermissions(action) {
-        return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole.getPermission(action)));
+        return (this.usersStateService.getCurrentUser() && this.usersStateService.getCurrentUser().accountType == "CLIENT" && this.usersStateService.getCurrentUser().customerCompaniesInfo.some(compnayInfo => compnayInfo.customerUserRole && compnayInfo.customerUserRole.getPermission(action)));
     }
     public getPermissions(action) {
         return this.permissionsService.isAllowed(action)

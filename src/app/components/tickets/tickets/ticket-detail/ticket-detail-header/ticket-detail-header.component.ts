@@ -33,6 +33,7 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
   @Output() onMoveToTrash = new EventEmitter();
   @Output() onToggleRigthPanel = new EventEmitter();
   @ViewChild('update_closeBtn', { static: true }) update_closeBtn: DisabledBtnDirective;
+  @ViewChild('review_closeBtn', { static: true }) review_closeBtn: DisabledBtnDirective;
   isUpdateAndClose: boolean = false;
   currentUser: CurrentUser;
   dateTxt: string = "";
@@ -42,6 +43,8 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
   second: number = 0;
   movedWay: boolean = false;
   sub = new Subscription();
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   constructor(private usersStateService: UsersStateService,
     public cd: ChangeDetectorRef,
     public ticketsPermissionsService: TicketsPermissionsService,
@@ -54,6 +57,8 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     if (this.usersStateService.getCurrentUser()) this.currentUser = this.usersStateService.getCurrentUser();
     let getOnGetCurrentuser = this.usersStateService.getOnGetCurrentuser().subscribe(data => {
       this.currentUser = data;
@@ -86,6 +91,16 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    let onCloseTicketForReview = this.ticketStateService.onCloseTicketForReview.subscribe(res => {
+      this.review_closeBtn.setDisabled(res);
+    })
+    this.sub.add(onCloseTicketForReview);
+  }
+  closeForPeview() {
+    this.ticketStateService.onCloseTicketForReview.emit(true);
+  }
+  getUserById(id) {
+    return this.usersStateService.getAllUsers().find(item => item.id == id);
   }
   isAddNoteForCustomerUser() {
     return this.customerPortalStateService.checkEditTicket(this.usersStateService.getCurrentUser(), this.ticketProfile.createdUserId, this.ticketProfile.companyId);
@@ -102,7 +117,6 @@ export class TicketDetailHeaderComponent implements OnInit, OnDestroy {
     return completeServices && completeProducts;
   }
   close() {
-    if (!this.checkClose()) return;
     this.update_closeBtn.setDisabled(true);
     this.isUpdateAndClose = true;
     this.ticketsService.updateTicket(this.getDataForClose(), true).subscribe(data => {

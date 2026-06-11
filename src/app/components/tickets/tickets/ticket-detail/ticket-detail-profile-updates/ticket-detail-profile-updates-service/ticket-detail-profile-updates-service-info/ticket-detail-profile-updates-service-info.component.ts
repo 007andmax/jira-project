@@ -17,6 +17,7 @@ import { TicketStateService } from '../../../../ticket-edit-aside/services/ticke
 import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
 import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 import { TechUsersComponent } from 'src/app/components/shared/tech-users/tech-users.component';
+import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 
 @Component({
   standalone: true,
@@ -43,6 +44,7 @@ export class TicketDetailProfileUpdatesServiceInfoComponent implements OnInit, O
     public ticketStateService: TicketStateService,
     private ticketsService: TicketsService,
     private companiesStateService: CompaniesStateService,
+    private permissionsService: PermissionsService,
     public modalService: NgbModal) { }
   ngOnInit() {
     if (this.service.date) {
@@ -89,6 +91,9 @@ export class TicketDetailProfileUpdatesServiceInfoComponent implements OnInit, O
   }
   public isIOSDevice() {
     return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+  }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
   }
   setComplete() {
     if (this.isBlockChange) return;
@@ -139,7 +144,7 @@ export class TicketDetailProfileUpdatesServiceInfoComponent implements OnInit, O
     this.ticketStateService.setServiceForRemove(this.service);
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET_DETAIL_SERVICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });
-    modalRef.componentInstance.header = `Delete Ticket`;
+    modalRef.componentInstance.header = `Delete Item`;
     modalRef.componentInstance.message = `Are you sure you want to remove the item?`;
   }
 }

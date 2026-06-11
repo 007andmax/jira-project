@@ -149,7 +149,45 @@ export class PasswordManagerAddAsideComponent implements OnInit {
     this.selectedCompany = null;
     this.categoriesSelect.clearWithOutChanges();
     this.datePicker.reset();
-   // this.elRef.nativeElement.querySelector("#description-create-password").value = "";
+    // this.elRef.nativeElement.querySelector("#description-create-password").value = "";
+  }
+  generatePassword() {
+    this.showPassword = true;
+    this.passwordRecordAdd.password = this.generateSecurePassword(10);
+  }
+  generateSecurePassword(length: number = 16): string {
+    const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const lower = 'abcdefghijklmnopqrstuvwxyz';
+    const numbers = '0123456789';
+    const symbols = '!@#$%^&*()_+[]{}|;:,.<>?';
+
+    const allChars = upper + lower + numbers + symbols;
+
+    const getRandomChar = (chars: string): string => {
+      const array = new Uint32Array(1);
+      crypto.getRandomValues(array);
+
+      return chars[array[0] % chars.length];
+    };
+
+    let password = '';
+
+    // Required chars
+    password += getRandomChar(upper);
+    password += getRandomChar(lower);
+    password += getRandomChar(numbers);
+    password += getRandomChar(symbols);
+
+    // Remaining chars
+    for (let i = password.length; i < length; i++) {
+      password += getRandomChar(allChars);
+    }
+
+    // Shuffle
+    return password
+      .split('')
+      .sort(() => 0.5 - Math.random())
+      .join('');
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)

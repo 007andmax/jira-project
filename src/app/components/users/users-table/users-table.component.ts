@@ -35,14 +35,16 @@ import { Router } from '@angular/router';
 import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
 import { PreviewPhoneMaskComponent } from '../../shared/preview-phone-mask/preview-phone-mask.component';
 import { UserTableDefaultSubscriptionComponent } from './user-table-default-subscription/user-table-default-subscription.component';
+import { UserCustomerCompaniesInfo } from '../class/user-customer-companies-info';
+import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
+import { AppStateService } from 'src/app/states/app/app-state.service';
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, NgbDropdownModule, UserTableCustomSubscriptionComponent, PreviewPhoneMaskComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'app-users-table',
   templateUrl: './users-table.component.html',
   styleUrls: ['./users-table.component.scss'],
-  providers: [UsersTableService],
+  providers: [UsersTableService, TicketsListService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersTableComponent implements OnInit, OnDestroy {
@@ -63,6 +65,10 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   TYPE_LIST_ALL_USERS = TYPE_LIST_ALL_USERS;
   TYPE_LIST_MARKETING_USERS = TYPE_LIST_MARKETING_USERS;
   TYPE_LIST_COMPANY_USERS = TYPE_LIST_COMPANY_USERS;
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
+  private closeTimer: any;
+  private openTimer: any;
   constructor(private companiesStateService: CompaniesStateService,
     private usersService: UsersService,
     public usersStateService: UsersStateService,
@@ -76,6 +82,8 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     private techUsersService: TechUsersService,
     public customerPortalStateService: CustomerPortalStateService,
     private router: Router,
+    public ticketsListService: TicketsListService,
+    private appStateService: AppStateService,
     private usersRealTimeService: UsersRealTimeService) { }
 
 
@@ -128,6 +136,22 @@ export class UsersTableComponent implements OnInit, OnDestroy {
         [`${this.companiesStateService.getCurrentCompany().techDomain}/users/`, this.user.id]);
     }
   }
+  getCompany(customerCompaniesInfo: UserCustomerCompaniesInfo) {
+    return this.companiesStateService.getCompanies().find(item => item.id == customerCompaniesInfo.companyId);
+  }
+  getStyleAvatarCompany(company, color = null) {
+    if (!this.checkLogo(company)) {
+      return (color) ? color : '#16a4fa';
+    }
+    if (this.checkLogo(company)) {
+      return `url(${this.companiesStateService.getCompanyLogoUrl(company)}) center / cover no-repeat`
+    } else {
+      return (color) ? color : '#16a4fa';
+    }
+  };
+  checkLogo(company) {
+    return (company && company.logo && company.logo.cropped && company.logo.cropped.id || company && company.logo && company.logo.origin && company.logo.origin.id)
+  }
   isPrimaryContact() {
     if (!this.customerPortalStateService.isCustomerPortal && this.companyId) return this.user.customerCompaniesInfo.find(item => item.companyId === this.companyId).isPrimaryContact;
     return false
@@ -152,7 +176,12 @@ export class UsersTableComponent implements OnInit, OnDestroy {
     this.usersStateService.onOpenEditAsige();
     this.cd.markForCheck();
   }
+  getStyleNetAvatar(i) {
+    return `${18 * i}px`;
+  }
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = data;
@@ -237,7 +266,49 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
+
+
+  openTooltip(popover: NgbTooltip): void {
+    clearTimeout(this.closeTimer);
+
+    if (!popover.isOpen()) {
+      popover.open();
+      this.appStateService.changeDetectorRef();
+      // Wait until popover is added to <body>
+      setTimeout(() => {
+        const popoverEl: any = document.querySelector('.users-tooltip');
+
+        if (!popoverEl) {
+          return;
+        }
+        popoverEl.style.opacity = "1";
+        popoverEl.addEventListener('mouseenter', this.onPopoverMouseEnter);
+        popoverEl.addEventListener('mouseleave', () => {
+          if (!this.usersStateService.isOpenDropDownRequestedBy) popover.close();
+        });
+      });
+    }
+  }
+
+  startCloseTooltipTimer(popover: NgbTooltip): void {
+    if (!this.user || this.usersStateService.isOpenDropDownRequestedBy) return;
+    clearTimeout(this.closeTimer);
+    clearTimeout(this.openTimer);
+    this.closeTimer = setTimeout(() => {
+      const popoverEl = document.querySelector('.users-tooltip:hover');
+
+      // close only if mouse is not over popover body
+      if (!popoverEl) {
+        popover.close();
+      }
+    }, 150);
+  }
+
+  onPopoverMouseEnter = (): void => {
+    clearTimeout(this.closeTimer);
+  };
   ngOnDestroy(): void {
+    clearTimeout(this.closeTimer);
     this.sub.unsubscribe();
   }
 }

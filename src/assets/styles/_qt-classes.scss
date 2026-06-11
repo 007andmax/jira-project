@@ -486,6 +486,32 @@ input.qt-dropdown-input {
     }
   }
 
+  &.--green {
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    border: solid 1px $gray-200;
+    color: $green-700;
+    background-color: $white;
+    font-weight: 500;
+
+    &:hover {
+      color: $green-600;
+
+      .qt-button-icon {
+        background-color: $green-600;
+      }
+    }
+
+    &:focus {
+      outline: none;
+      background: inherit;
+    }
+
+    &:focus-visible {
+      outline: none;
+      background-color: $gray-50;
+    }
+  }
+
   &.--red {
     color: $white;
     border: solid 1px $red-600;
@@ -1463,6 +1489,12 @@ button.qt-button.--gray:focus {
 .qt-w70{
   width: 70%
 }
+.qt-maw-100 {
+  max-width: 100%;
+}
+.qt-miw-0 {
+  min-width: 0;
+}
 .qt-color-gray-900 {
   color: $gray-900;
 }
@@ -1486,6 +1518,9 @@ button.qt-button.--gray:focus {
 }
 .qt-color-red-600 {
   color: $red-600;
+}
+.qt-color-green-700 {
+  color: $green-700;
 }
 .qt-color-sky-blue-800 {
   color: $sky-blue-800;

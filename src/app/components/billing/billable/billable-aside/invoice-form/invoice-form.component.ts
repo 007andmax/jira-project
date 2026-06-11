@@ -114,6 +114,12 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     this.invoice.setInvoiceDataDto(data.invoiceDataDto);
     this.cd.detectChanges();
   }
+  getShippingAddress() {
+    return this.company.addresses.find(item => item.isPrimary);
+  }
+  getBillingAddress() {
+    return this.company.addresses.find(item => !item.isPrimary);
+  }
   parseDateFromDatePicker(due) {
     let date = new Date(due); // timestamp from calendar	
     let timeOffset = this.currentCompany.addresses[0].timeZone.timeOffset;

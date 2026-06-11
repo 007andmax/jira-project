@@ -25,6 +25,12 @@ export class QuoteAsidePreviewBodyComponent implements OnInit {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     if (this.quote.company) this.quoteCompany = this.companiesStateService.getCompanies().find(item => item.id === this.quote.company.id);
   }
+  getShippingAddress() {
+    return this.quoteCompany.companyInfo.addresses.find(item => item.isPrimary);
+  }
+  getBillingAddress() {
+    return this.quoteCompany.companyInfo.addresses.find(item => !item.isPrimary);
+  }
   public getDate(date) {
     return moment(new Date(date)).format('DD MMM YYYY');
   }

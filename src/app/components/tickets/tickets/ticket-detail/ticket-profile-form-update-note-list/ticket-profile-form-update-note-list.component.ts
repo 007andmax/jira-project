@@ -6,15 +6,17 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { NoteStateService } from 'src/app/states/note/note-state.service';
 import { NgIf, NgFor } from '@angular/common';
 import { NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { TicketProfile } from '../../class/ticket-profile';
 
 @Component({
-    selector: 'ticket-profile-form-update-note-list',
-    templateUrl: './ticket-profile-form-update-note-list.component.html',
-    styleUrls: ['./ticket-profile-form-update-note-list.component.scss'],
-    standalone: true,
-    imports: [NgbDropdownModule, NgbTooltipModule, NgIf, NgFor]
+  selector: 'ticket-profile-form-update-note-list',
+  templateUrl: './ticket-profile-form-update-note-list.component.html',
+  styleUrls: ['./ticket-profile-form-update-note-list.component.scss'],
+  standalone: true,
+  imports: [NgbDropdownModule, NgbTooltipModule, NgIf, NgFor]
 })
 export class TicketProfileFormUpdateNoteListComponent implements OnInit, OnDestroy {
+  @Input() ticketProfile: TicketProfile = new TicketProfile();
   noteTemplate: Array<NoteTemplate> = [];
   @Output() onSelected = new EventEmitter();
   sub: Subscription = new Subscription();
@@ -47,7 +49,7 @@ export class TicketProfileFormUpdateNoteListComponent implements OnInit, OnDestr
     }
   }
   onSelect(item) {
-    this.noteService.getNoteTemplate(item.id).subscribe((data: any) => {
+    this.noteService.getNoteTemplate(item.id, this.ticketProfile.id).subscribe((data: any) => {
       this.onSelected.emit(data.note);
     })
 

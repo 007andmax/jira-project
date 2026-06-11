@@ -19,12 +19,16 @@ import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { TicketProfileFormUpdate } from '../class/ticket-profile-form-update';
 import { Task } from 'src/app/components/tasks/class/task';
+import { TicketPreview } from 'src/app/components/billing/ticket-preview-report/class/ticket-preview';
+import { TicketPreviewProduct } from 'src/app/components/billing/ticket-preview-report/class/ticket-preview-product';
+import { TicketPreviewService } from 'src/app/components/billing/ticket-preview-report/class/ticket-preview-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketStateService {
   servicesList: EventEmitter<any> = new EventEmitter();
+  onCloseTicketForReview: EventEmitter<any> = new EventEmitter();
   onSetTabUpdate: EventEmitter<any> = new EventEmitter();
   onSetNoteType: EventEmitter<any> = new EventEmitter();
   onOpenModalNote: EventEmitter<any> = new EventEmitter();
@@ -37,8 +41,11 @@ export class TicketStateService {
   onDocumentForPreview: EventEmitter<any> = new EventEmitter();
   onServicePreloader: EventEmitter<any> = new EventEmitter();
   updateForRemove: TicketProfileUpdate = null;
+  ticketPreviewForRemove: TicketPreview = null;
   serviceForRemove: TicketProfileService = null;
   productForRemove: TicketProfileProduct = null;
+  productTicketPreviewForRemove: TicketPreviewProduct = null;
+  serviceTicketPreviewForRemove: TicketPreviewService = null;
   areTicketsPresented: boolean = false;
   areTicketsTerminated: boolean = false;
   servicePreloader: boolean = false;
@@ -72,6 +79,15 @@ export class TicketStateService {
     this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
       this.changeUpdatesTicket.emit(newChange);
     });
+  }
+  public setServiceTicketPreviewForRemove(data) {
+    this.serviceTicketPreviewForRemove = data;
+  }
+  public setTicketPreviewForRemove(data) {
+    this.ticketPreviewForRemove = data;
+  }
+  public setProductTicketPreviewForRemove(data) {
+    this.productTicketPreviewForRemove = data;
   }
   public openModalNote() {
     this.onOpenModalNote.emit(null);
@@ -131,7 +147,6 @@ export class TicketStateService {
         this.devices.sort((a, b) => (a.getLabelForEdit().toLowerCase() > b.getLabelForEdit().toLowerCase()) ?
           1 : ((b.getLabelForEdit().toLowerCase() > a.getLabelForEdit().toLowerCase()) ? -1 : 0));
         this.onGetDevices.emit(this.devices);
-        if (this.devices.filter(item => !item.isCustom).length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(companyID, this.devices.filter(item => item.agentId).map(item => item.agentId));
       }
     });
     let onDeviceUninstalled = this.devicesStateService.onChangeDevice.subscribe(newChange => {
@@ -141,10 +156,10 @@ export class TicketStateService {
       }
     })
     this.sub.add(onDeviceUninstalled);
-    let onInitWebSocket = this.devicesStateService.onInitWebSocket.subscribe(data => {
-      if (this.devices.filter(item => !item.isCustom).length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(companyID, this.devices.filter(item => item.agentId).map(item => item.agentId));
-    })
-    this.sub.add(onInitWebSocket);
+    /*  let onInitWebSocket = this.devicesStateService.onInitWebSocket.subscribe(data => {
+        if (this.devices.filter(item => !item.isCustom).length > 0 && this.devicesStateService.getIsInitWebSocket()) this.sendDeviceStatusRequest(companyID, this.devices.filter(item => item.agentId).map(item => item.agentId));
+      })
+      this.sub.add(onInitWebSocket);*/
     let getOnUpdateAgentActivityStatus = this.devicesStateService.getOnUpdateAgentActivityStatus().subscribe(newChange => {
       var isCurrentCompany = this.devices.find(item => item.agentId === newChange.data.agentId);
       if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle')) {

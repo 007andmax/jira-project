@@ -54,6 +54,8 @@
     border: unset;
     font-size: 14px;
     color: $gray-900;
+    min-height: 60px;
+
     &.--selected > div {
       background-color: $blue-dark-25;
     }
@@ -128,6 +130,8 @@
 
     &__contract-no {
       flex: 1 0 216px;
+      padding-block: 8px;
+
       @include media-breakpoint-up($lg) {
         flex: 1 0 180px;
       }
@@ -154,12 +158,12 @@
       }
     }
     &__tickets {
-      flex: 0 0 110px;
+      flex: 0 0 125px;
     }
 
     &__menu {
-      flex: 0 0 106px;
-      padding: 23px 24px 23px 8px;
+      flex: 0 0 98px;
+      padding: 13px 24px 14px 8px;
     }
   }
   .qt-table-modern__sorting {

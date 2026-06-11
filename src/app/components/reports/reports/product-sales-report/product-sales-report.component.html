@@ -42,13 +42,14 @@
             </div>
         </div>
         <div>
-            <app-overview-report
+            <app-overview-product-sales-report
                 class="product-sales-report-table"
                 [classes]="classes"
                 [styles]="styles"
                 [headers]="headers"
                 [list]="list"
-            ></app-overview-report>
+                [type]="productSalesReport.type"
+            ></app-overview-product-sales-report>
         </div>
     </div>
 </div>

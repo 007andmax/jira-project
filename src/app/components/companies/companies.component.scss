@@ -47,18 +47,18 @@
   background-color: $gray-50;
 
   & > div {
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     font-weight: 500;
     font-size: 14px;
     text-transform: unset;
     color: $gray-500;
 
     &:first-child {
-      padding-left: 25px;
+      padding-left: 16px;
     }
     &:last-child {
-      padding-right: 25px;
+      padding-right: 16px;
     }
   }
 }

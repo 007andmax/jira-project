@@ -37,6 +37,8 @@ export class Ticket {
     updatesCount: number;
     lastUpdatedAt: number;
     lastUpdatedAt_text: string;
+    hasServiceUpdate: boolean;
+    hasProductUpdate: boolean;
     constructor(data) {
         this.assignedUserId = data.assignedUserId;
         this.attachmentsCount = data.attachmentsCount;
@@ -85,6 +87,8 @@ export class Ticket {
             }
         } //this.lastUpdatedAt_text = new Date().getTime() - data.lastUpdatedAt < 3600000 ? moment(new Date().getTime() - data.lastUpdatedAt).format('m') + " mins ago" : new Date().getTime() - data.lastUpdatedAt < 3600000 * 24 ? moment(new Date().getTime() - data.lastUpdatedAt).format('H') + "h " + moment(new Date().getTime() - data.lastUpdatedAt).format('m') + " mins ago" : moment(new Date().getTime() - data.lastUpdatedAt).format('D') + " days ago";
         if (!data.lastUpdatedAt) this.lastUpdatedAt_text = "N/A";
+        this.hasServiceUpdate = data.hasServiceUpdate;
+        this.hasProductUpdate = data.hasProductUpdate;
     }
     public calculateLastUpdatedAt() {
         var today = Date.now();

@@ -87,6 +87,10 @@
                     >
                         Date
                         <span class="qt-table-modern__sorting"></span>
+                           <div *ngIf="sortBy.sortBy == 'closedAt'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="billable-item-table__ticket"
@@ -94,6 +98,10 @@
                     >
                         Ticket#
                         <span class="qt-table-modern__sorting"></span>
+                           <div *ngIf="sortBy.sortBy == 'ticketNumber'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="billable-item-table__subject"
@@ -101,6 +109,10 @@
                     >
                         Ticket Subject
                         <span class="qt-table-modern__sorting"></span>
+                           <div *ngIf="sortBy.sortBy == 'subject'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="billable-item-table__amount"
@@ -108,6 +120,10 @@
                     >
                         Amount
                         <span class="qt-table-modern__sorting"></span>
+                           <div *ngIf="sortBy.sortBy == 'sum'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                 </div>
             </div>

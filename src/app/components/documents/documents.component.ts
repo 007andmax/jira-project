@@ -1,4 +1,4 @@
-﻿
+
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -19,11 +19,11 @@ import { DocumentFilter } from './class/document-filter';
 import { fadeInAnimation } from 'src/app/animations';
 import { DocumentsEditCategoryComponent } from './documents-edit-category/documents-edit-category.component';
 import { DocumentsHeaderComponent } from './documents-header/documents-header.component';
-import { DocumentsTableComponent } from './documents-table/documents-table.component';
 import { DocumentsTemplatesInfoComponent } from './documents-templates/documents-templates-info/documents-templates-info.component';
+import { DocumentsTableComponent } from './documents-table/documents-table.component';
+
 
 @Component({
-  standalone: true,
   imports: [DocumentsEditCategoryComponent, DocumentsHeaderComponent, DocumentsTableComponent, DocumentsTemplatesInfoComponent, CommonModule],
   selector: 'app-documents',
   templateUrl: './documents.component.html',
@@ -34,6 +34,7 @@ import { DocumentsTemplatesInfoComponent } from './documents-templates/documents
 
 })
 export class DocumentsComponent implements OnInit, OnDestroy {
+  @ViewChild('header', { static: true }) header: DocumentsHeaderComponent;
   showPreloader: boolean = true;
   list: Array<Document> = [];
   filter: DocumentFilter = new DocumentFilter();
@@ -134,7 +135,9 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     })
   }
   public onFilter(field) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.filter.onFilter(field, this.list, this.usersStateService.getAllUsers())
+    this.header.sortBy.sortDirection = this.filter.direction;
   }
   removeCategory(item) {
     this.documentsService.removeCategories(item.categoryId).subscribe(data => {

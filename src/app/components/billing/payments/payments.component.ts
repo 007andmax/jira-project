@@ -1,4 +1,4 @@
-﻿
+
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Payment } from './class/payment';
@@ -23,6 +23,7 @@ import { PaymentsHeaderComponent } from './payments-header/payments-header.compo
 import { RefundPaymentComponent } from './refund-payment/refund-payment.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
+
 @Component({
   standalone: true,
   imports: [EditPaymentComponent, PaymentItemComponent, InfiniteScrollModule, PaymentsAsideComponent, PaymentsHeaderComponent, RefundPaymentComponent, CommonModule],
@@ -36,20 +37,20 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 })
 export class PaymentsComponent implements OnInit, OnDestroy {
-
+  @ViewChild('header', { static: true }) header: PaymentsHeaderComponent;
   paymentsFilter: PaymentsFilter = new PaymentsFilter();
   payments: Array<Payment> = [];
   showPendingPreloader: boolean = false;
   showPreloader: boolean = true;
   selectedCompanyId: string = null;
-  public sort: string = '';
+  public sort: string = 'PAYMENT_DATE';
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   showDetailsPayment: boolean = false;
   showRefundPayment: boolean = false;
   showEditPayment: boolean = false;
   offset: number = 40;
-  public direction: string = 'ASC';
+  public direction: string = 'DESC';
   detailsPayment: Payment;
   refundPayment: Payment;
   editPayment: Payment;
@@ -69,6 +70,8 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     private paymentsListService: PaymentsListService) { }
 
   ngOnInit() {
+
+    this.paymentsFilter.setSortBy(`${this.sort}_${this.direction}`);
     this.leftPanelStateService.setBillingPage('new-payments-ng2');
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.paymentsFilter.setPaymentStatus('PAYMENT_COMPLETED');
@@ -83,7 +86,6 @@ export class PaymentsComponent implements OnInit, OnDestroy {
       this.paymentsFilter = data;
       this.paymentsFilter.resetSortBy();
       this.showPreloader = true;
-      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -154,10 +156,10 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     this.selectedPayments = [];
     this.selectedCompanyId = null;
     this.direction = this.paymentsListService.getDirection(this.direction, this.sort, sort);
+    this.header.sortBy.sortDirection = this.direction;
     this.sort = sort;
     this.paymentsFilter.setSortBy(`${this.sort}_${this.direction}`);
     this.setDefaultScoll();
-    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.onScroll();
   }
   getInvoices() {
@@ -179,6 +181,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     })
   }
   public setDefaultScoll() {
+    if (document.body.querySelector(".main-container")) document.body.querySelector(".main-container").scrollTo(0, 0);
     this.page_number = 0;
     this.paymentsListService.setBlockList(false);
     this.payments = [];

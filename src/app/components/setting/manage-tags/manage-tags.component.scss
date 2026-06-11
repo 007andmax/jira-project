@@ -24,3 +24,6 @@
     margin-top: 0px !important;  
     border-top: none !important;
 }
+.page-container {
+    min-height: calc(100vh - 96px);
+}

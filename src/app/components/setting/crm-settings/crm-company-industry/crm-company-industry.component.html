@@ -107,5 +107,11 @@
             class="loading"
             *ngIf="showPreloader"
         ></div>
+          <div
+                class="no-exist-elements"
+                *ngIf="!showPreloader && industryList.length == 0"
+            >
+                We couldn't find any results
+            </div>
     </div>
 </div>

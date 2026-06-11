@@ -33,6 +33,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UsersFilterComponent } from './users-header/users-filter/users-filter.component';
 import { UsersTableComponent } from './users-table/users-table.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { TicketSortBy } from '../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   standalone: true,
@@ -61,6 +62,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   toggleFilter: boolean = false;
   showPendingPreloader: boolean = false;
   container = document.body.querySelector(".main-container");
+  sortBy: TicketSortBy = new TicketSortBy('NAME', 'ASC');
   constructor(private usersStateService: UsersStateService,
     private userListService: UserListService,
     private confirmStateService: ConfirmStateService,
@@ -219,7 +221,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.header.clearSearch(false);
   }
   onSearch(value) {
-    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.filter.setUserName((value !== "") ? value : null);
     this.setDefaultScoll();
     this.onScroll();
@@ -310,11 +311,11 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.getUsers();
   }
   public onFilter(field) {
+    this.sortBy.sortBy = field;
     this.filter.setSortBy(field);
-    this.filter.page = 0;
-    this.userListService.setBlockList(false);
-    this.users = [];
+    this.sortBy.sortDirection = (this.filter.sortBy ? this.filter.sortBy : 'DESC').includes('DESC') ? 'DESC' : 'ASC';
     this.showPreloader = true;
+    this.setDefaultScoll();
     this.onScroll();
   }
   private getUsers() {
@@ -336,6 +337,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   public setDefaultScoll() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.filter.page = 0;
     this.userListService.setBlockList(false);
     this.users = [];

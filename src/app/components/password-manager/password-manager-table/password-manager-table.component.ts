@@ -14,26 +14,34 @@ import { Subscription } from 'rxjs';
 import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
 import { FormsModule } from '@angular/forms';
 import { NgClass, NgIf } from '@angular/common';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
+import { Company } from 'src/app/interfaces/company/company';
 
 /**
  * Password manager data table component
  */
 @Component({
-    selector: 'app-password-manager-table',
-    templateUrl: './password-manager-table.component.html',
-    styleUrls: ['./password-manager-table.component.scss'],
-    standalone: true,
-    imports: [
-        NgClass,
-        FormsModule,
-        NgIf,
-        DynamicTooltipComponent,
-        NgbDropdownModule,
-    ],
+  selector: 'app-password-manager-table',
+  templateUrl: './password-manager-table.component.html',
+  styleUrls: ['./password-manager-table.component.scss'],
+  providers: [TicketsListService],
+  standalone: true,
+  imports: [
+    NgClass,
+    FormsModule,
+    NgIf,
+    DynamicTooltipComponent,
+    NgbDropdownModule,
+  ],
+
 })
 export class PasswordManagerTableComponent implements OnInit, OnDestroy {
   @Input() item: PasswordRecord;
   @Output() onSelectRecord = new EventEmitter<any>();
+  company: Company;
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   togglePassword: boolean = false;
   categories: Array<PasswordRecordCategories> = [];
   sub: Subscription = new Subscription();
@@ -44,9 +52,14 @@ export class PasswordManagerTableComponent implements OnInit, OnDestroy {
     private passwordManagerService: PasswordManagerService,
     public cd: ChangeDetectorRef,
     private toastrService: ToastrService,
+    private companiesStateService: CompaniesStateService,
+    public ticketsListService: TicketsListService,
     private appStateService: AppStateService) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
+    this.company = this.companiesStateService.getCompanies().find(item => item.id === this.item.companyId);
     this.categories = this.passwordManagerStateService.getCategories();
     this.passwordManagerStateService.onGetCategories.subscribe((data: Array<PasswordRecordCategories>) => {
       this.categories = data;
@@ -61,6 +74,16 @@ export class PasswordManagerTableComponent implements OnInit, OnDestroy {
       if (!this.cd['destroyed']) this.cd.detectChanges();
     })
     this.sub.add(onChangeRealTime);
+  }
+  checkLogo() {
+    return (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id || this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id)
+  }
+  parseLogo() {
+    if (this.checkLogo()) {
+      return `url(${this.companiesStateService.getCompanyLogoUrl(this.company)}) center / cover no-repeat`;
+    } else {
+      return this.ticketsListService.getStyleAvatar(null, this.listColorNoAvatar[this.indexNoAvatar]);
+    }
   }
   selectRecord(event) {
     this.onSelectRecord.emit(this.item);

@@ -7,6 +7,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NumberModule } from 'src/app/directives/number/number.module';
 import { ToFixedModule } from 'src/app/directives/to-fixed/to-fixed.module';
 import { BillableItemComponent } from './billable-item.component';
+import { UsersTableCompanyByModule } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.module';
+import { CompanyLogoPopoverModule } from 'src/app/directives/company-logo-popover/company-logo-popover.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 describe('BillableItemComponent unit test', () => {
@@ -20,6 +23,9 @@ describe('BillableItemComponent unit test', () => {
         HttpClientModule,
         NumberModule,
         ToFixedModule,
+        CompanyLogoPopoverModule,
+        UsersTableCompanyByModule,
+        NgbModule,
         ToastrModule.forRoot({
             closeButton: true,
             timeOut: 5000,

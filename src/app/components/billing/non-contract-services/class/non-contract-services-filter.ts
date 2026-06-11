@@ -4,6 +4,7 @@ export class NonContractServicesFilter {
     filterTop: Array<FilterListTop> = [new FilterListTop('name', ''),
     new FilterListTop('rate', ''),
     new FilterListTop('taxes', '')];
+    direction: string;
     constructor() { }
 
     public onFilter(field, servicesList) {
@@ -44,6 +45,7 @@ export class NonContractServicesFilter {
                     servicesList.reverse();
                 }
             }
+            this.direction = this.filterTop[index].filter;
         }
     }
     getSelectedTaxNames(taxes) {

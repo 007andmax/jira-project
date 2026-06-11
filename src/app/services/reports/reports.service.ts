@@ -36,6 +36,9 @@ export class ReportsService {
   public getAccountingStartDate() {
     return this.http.get(this.apiUrl + `settings/companyProfile/accountingStartDate`);
   }
+  public getTicketPreivew(data) {
+    return this.http.post(this.apiUrl + `reports/tickets/review`, data);
+  }
   public setAccountingStartDate(data) {
     const options = {
       headers: new HttpHeaders({

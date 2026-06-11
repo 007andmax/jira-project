@@ -21,6 +21,7 @@ import { PasswordManagerAddAsideComponent } from './password-manager-add-aside/p
 import { PasswordManagerEditAsideComponent } from './password-manager-edit-aside/password-manager-edit-aside.component';
 import { PasswordManagerTableComponent } from './password-manager-table/password-manager-table.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { TicketSortBy } from '../tickets/tickets/class/ticket-sort-by';
 
 /**
  * Password manager component
@@ -48,6 +49,7 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
   public showPendingPreloader: boolean = false;
   public sub: Subscription = new Subscription();
   container = document.body.querySelector(".main-container");
+  sortBy: TicketSortBy = new TicketSortBy('COMPANY_NAME', 'ASC');
   constructor(
     public passwordManagerService: PasswordManagerService,
     private permissionsService: PermissionsService,
@@ -101,12 +103,12 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     this.sub.add(onToggleFilter);
   }
   onSearch(value) {
-    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.filter.setSearch((value !== "") ? value : null);
     this.setDefaultScoll();
     this.onScroll();
   }
   public setDefaultScoll() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.showPreloader = true;
     this.filter.page = 0;
     this.passwordManagerListService.setBlockList(false);
@@ -165,8 +167,9 @@ export class PasswordManagerComponent implements OnInit, OnDestroy {
     }
   }
   public onFilter(field) {
-    document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.sortBy.sortBy = field;
     this.filter.setSort(field);
+    this.sortBy.sortDirection = this.filter.direction;
     this.setDefaultScoll();
     this.onScroll();
   }

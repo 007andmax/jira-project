@@ -211,7 +211,6 @@ export class CompanyUserComponent implements OnInit {
     this.header.clearSearch(false);
   }
   onSearch(value) {
-    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.filter.setUserName((value !== "") ? value : null);
     this.setDefaultScoll();
     this.onScroll();
@@ -320,10 +319,8 @@ export class CompanyUserComponent implements OnInit {
   }
   public onFilter(field) {
     this.filter.setSortBy(field);
-    this.filter.page = 0;
-    this.userListService.setBlockList(false);
-    this.users = [];
     this.showPreloader = true;
+    this.setDefaultScoll();
     this.onScroll();
   }
   private getUsers() {
@@ -346,6 +343,7 @@ export class CompanyUserComponent implements OnInit {
     })
   }
   public setDefaultScoll() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.filter.page = 0;
     this.userListService.setBlockList(false);
     this.users = [];

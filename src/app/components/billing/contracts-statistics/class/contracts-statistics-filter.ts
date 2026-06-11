@@ -10,7 +10,7 @@ export class ContractStatisticsFilter {
     new FilterListTop('left-hours', ''),
     new FilterListTop('exceeding-hours', ''),
     new FilterListTop('billable-hours', '')];
-
+    direction: string;
     /**
      * @description Sort contracts list by field
      * @param  {string} field  - field for sort
@@ -117,7 +117,7 @@ export class ContractStatisticsFilter {
 
 
             }
-
+            this.direction = this.filterTop[index].filter;
         }
     }
     /**

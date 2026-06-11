@@ -1,0 +1,130 @@
+<div >
+<div class="qt-df header-container"   >
+<div
+    class="qt-table-modern__circle-avatar"
+    [ngClass]="checkLogo() ? 'transparent-text' : ''"
+    [textContent]="!checkLogo() ? company.name[0].toUpperCase() : ''"
+    [ngStyle]="{'background':parseLogo()}"
+></div>
+<div>
+<div
+    [textContent]="company.name"
+    class="ellipsis qt-fw-500 qt-fs-20 qt-color-gray-900 qt-mb-8"
+></div>
+<div class="qt-df qt-ai-c" 
+  >
+    <a  [attr.href]="getPrimaryPhoneNumber() ?'tel:+1' + getPrimaryPhoneNumber() : null"> 
+  <div
+  [ngClass]="{'disabled-action': !getPrimaryPhoneNumber()}"
+    class="qt-button-square pointer qt-mr-4 draft-email-btn"  
+      placement="top"
+    [ngbTooltip]="getPrimaryPhoneNumber() ? 'Call +1' + getPrimaryPhoneNumber() : 'No Phone Numbers'"
+>
+    <div class="qt-icon icon__phone qt-sz-16 pointer qt-bg-contain"></div>
+</div>
+</a>
+
+  <div
+    class="qt-button-square pointer qt-mr-4 draft-email-btn"
+       placement="top"
+    ngbTooltip="Tickets page"
+    
+    (click)="goToCompanySection('tickets')"
+>
+    <div class="qt-icon icon__tickets qt-sz-16 pointer qt-bg-contain"></div>
+</div>
+ <div
+    class="qt-button-square pointer qt-mr-4 draft-email-btn"
+       placement="top"
+    ngbTooltip="Users page"
+    
+    (click)="goToCompanySection('user')"
+>
+    <div class="qt-icon icon__users qt-sz-16 pointer qt-bg-contain"></div>
+</div>
+ <div
+    class="qt-button-square pointer qt-mr-4 draft-email-btn"
+       placement="top"
+    ngbTooltip="Devices page"
+    
+    (click)="goToCompanySection('devices')"
+>
+    <div class="qt-icon icon__devices qt-sz-16 pointer qt-bg-contain"></div>
+</div>
+  <div
+   [ngClass]="{'disabled-action': !(getPrimaryShippingAddress()?.locationLat && getPrimaryShippingAddress()?.locationLng)}"
+     class="qt-button-square pointer qt-mr-4 draft-email-btn"
+     placement="top"
+    ngbTooltip="Get Direction"
+    (click)="openMap()"
+>
+    <div class="qt-icon icon__company-map-pin qt-sz-16 pointer qt-bg-contain"></div>
+</div> 
+</div>
+</div>
+</div>
+<div class="qt-df qt-fd-c"   >
+ <div
+    class="ellipsis qt-fw-500 qt-fs-13 qt-color-gray-500 qt-mb-8"
+>Primary Contact</div>
+<div
+*ngIf="getContact()"
+    [textContent]="getUserName(getContact())"
+    class="ellipsis qt-fw-500 qt-fs-14 qt-color-gray-900 qt-mb-8"
+></div>
+</div>
+ <div  *ngIf="getContact()">
+<div
+    *ngFor="let item of getContact().phoneNumbers; let i = index"
+>
+    <div class="qt-df qt-ai-c qt-jc-sb qt-mb-8 relative">
+        <div class="left-panel-contact__details-title qt-df qt-ai-c">
+            <span
+                class="qt-color-gray-500 qt-fw-500 qt-fs-13"
+                [textContent]="item.typeNumber == 'OFFICE' ? 'Phone' : item.typeNumber == 'MOBILE' ? 'Mobile' : item.typeNumber == 'FAX' ? 'Fax' : ''"
+            ></span>
+        </div>
+        <div class="qt-df qt-ai-c">
+          <div class="qt-color-gray-900 qt-fw-400 qt-fs-14">
+             <preview-phone-mask
+                    [class]="'users-table__contract-no--number'"
+                    [number]="item.number"
+                ></preview-phone-mask></div>
+                    <div
+    class="qt-button-square pointer qt-ml-4 draft-email-btn"  
+      placement="top"
+    ngbTooltip="Copy"
+     (click)="copy(item.number)"
+>
+    <div class="qt-icon icon__copy  qt-sz-16 pointer qt-bg-contain"></div>
+</div>
+ <a *ngIf="getContact()" [attr.href]="'tel:+1' + item.number"> 
+  <div
+    class="qt-button-square pointer qt-ml-4 draft-email-btn"  
+      placement="top"
+    [ngbTooltip]="'Call +1' + item.number"
+>
+    <div class="qt-icon icon__phone qt-sz-16 pointer qt-bg-contain"></div>
+</div>
+</a>
+        </div>
+    </div>
+</div>
+</div>
+ <div class="qt-df qt-ai-c qt-jc-sb relative" *ngIf="getContact() && getContact().primaryEmail">
+<div class="left-panel-contact__details-title">
+    <span   class="qt-color-gray-500 qt-fw-500 qt-fs-13">Email</span>
+</div>
+<div class="left-panel-contact__details-input-wrap qt-pos-rel qt-df qt-ai-c qt-jc-fe" >
+  <span   class="qt-color-gray-900 qt-fw-400 qt-fs-14 ellipsis primary-email" [textContent]="getContact().primaryEmail"></span>
+    <div
+    class="qt-button-square pointer qt-ml-4 draft-email-btn "  
+      placement="top"
+    ngbTooltip="Copy"
+    (click)="copy(getContact().primaryEmail)"
+>
+    <div class="qt-icon icon__copy  qt-sz-16 pointer qt-bg-contain"></div>
+</div>
+</div>
+</div>
+</div>

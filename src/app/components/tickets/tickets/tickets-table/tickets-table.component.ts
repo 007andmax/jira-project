@@ -19,6 +19,7 @@ import { LeftPanelService } from 'src/app/services/left-panel/left-panel.service
 import { TicketsFilterComponent } from '../tickets-header/tickets-filter/tickets-filter.component';
 import { TicketsTableItemComponent } from './tickets-table-item/tickets-table-item.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { TicketSortBy } from '../class/ticket-sort-by';
 
 
 @Component({
@@ -45,6 +46,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   ticketsStatus: Array<TicketStatus> = [];
   toggleFilter: boolean = false;
   container = document.body.querySelector(".main-container");
+  sortBy: TicketSortBy = new TicketSortBy('created', 'DESC');
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     private ticketStateService: TicketStateService,
@@ -94,6 +96,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter = data;
       this.showPreloader = true;
+      this.sortBy.sortDirection = (this.ticketsFilter.sortBy ? this.ticketsFilter.sortBy : 'DESC').includes('DESC') ? 'DESC' : 'ASC';
       document.body.querySelector(".main-container").scrollTo(0, 0);
       this.tickets.forEach(item => item.selected = false);
       this.ticketsStateService.resetSelectedTicketsForMerge();
@@ -132,6 +135,14 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.tickets.forEach(item => item.selected = false);
     })
     this.sub.add(onResetlistTicketsPrioritiesForRemove);
+    if (this.companiesStateService.getCurrentCompany()) this.getCurrentCompany(this.companiesStateService.getCurrentCompany());
+    let onCurrentCompany = this.companiesStateService.onCurrentCompany.subscribe(res => {
+      this.getCurrentCompany(res);
+    })
+    this.sub.add(onCurrentCompany);
+  }
+  getCurrentCompany(res) {
+    this.sortBy = new TicketSortBy(res.defaulTticketSortOrder.replace('_DESC', '').replace('_ASC', '').toLowerCase(), res.defaulTticketSortOrder.includes('_DESC') ? 'DESC' : 'ASC');
   }
   onSelectTicket(ticket) {
     this.tickets.find(item => item.id === ticket.id).selected = ticket.selected;
@@ -141,6 +152,8 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.ticketsStateService.changeToggleFilter(data);
   }
   onFilter(data) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.sortBy.sortBy = data;
     this.ticketsStateService.changeFilterField(data);
   }
   editTicket(id) {

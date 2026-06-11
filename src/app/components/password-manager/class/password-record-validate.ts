@@ -72,6 +72,11 @@ export class PasswordRecordValidate {
     public resetSsid() {
         this.ssid = true;
     }
+    isValidPort(value) {
+        const port = Number(value);
+
+        return /^[0-9]+$/.test(value) && port >= 0 && port <= 65535;
+    }
     public isValidate(record: PasswordRecordAdd, selectedUserAndDevices) {
         if (!record.client) this.company = false;
         if (!record.password || record.password === "") this.password = false;

@@ -17,17 +17,27 @@ import { DocumentsEditRoutingModule } from './documents-edit-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
-
 @NgModule({
     imports: [
-    CommonModule,
-    DocumentsAddBodyModule,
-    FormsModule,
-    DocumentsEditRoutingModule,
-    NgbModule,
-    DocumentsEditComponent,
-    DocumentsEditInfoComponent,
-    DocumentsEditHistoryComponent
-],
+        CommonModule,
+        DocumentsAddHeaderModule,
+        DocumentsAddBodyModule,
+        DocumentsAddFooterModule,
+        FormsModule,
+        TextAreaModule,
+        DropDownModule,
+        DocumentsLinkedModule,
+        CompanyTagsModule,
+        DatePickerModule,
+        DocumentsAddEditCategoriesModule,
+        DocumentsEditRoutingModule,
+        NgbModule,
+        MatErrorModule,
+        TicketsTableItemRequestedByModule,
+        UserLogoPopoverModule,
+    ],
+
+
+
 })
 export class DocumentsEditModule { }

@@ -1,0 +1,23 @@
+<div
+    class="map-modal"
+>
+    <button
+        type="button"
+        class="qt-icon icon__close qt-sz-20 close"
+        aria-label="Close"
+        (click)="close()"
+    >
+        close
+    </button>
+    <div class="modal-body qt-df">
+        <div class="h1">Get Direction</div>
+        <iframe
+            frameborder="0"
+            scrolling="no"
+            marginheight="0"
+            marginwidth="0"
+            [src]="src"
+        >
+        </iframe>
+    </div>
+</div>

@@ -4,6 +4,12 @@ import { MatChipListModule } from 'src/app/components/shared/mat-chip-list/mat-c
 import { MatChipModule } from 'src/app/components/shared/mat-chip/mat-chip.module';
 import { ContractsAsideBlockTimeBillingUsersComponent } from './contracts-aside-block-time-billing-users.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { TicketsTableItemRequestedByModule } from 'src/app/components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
+import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
+import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -13,11 +19,23 @@ describe('ContractsAsideBlockTimeBillingUsersComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [CommonModule,
+      imports: [CommonModule,
         MatChipModule,
         MatChipListModule,
-        NoopAnimationsModule, ContractsAsideBlockTimeBillingUsersComponent]
-}).compileComponents();
+        NoopAnimationsModule,
+        TicketsTableItemRequestedByModule,
+        UserLogoPopoverModule,
+        NgbModule,
+        ToastrModule.forRoot({
+          closeButton: true,
+          timeOut: 5000,
+          onActivateTick: true
+        }),
+        HttpClientModule],
+      declarations: [ContractsAsideBlockTimeBillingUsersComponent
+      ],
+      providers: [TicketsListService]
+    }).compileComponents();
 
   });
 

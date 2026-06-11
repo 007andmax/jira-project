@@ -124,7 +124,7 @@
                                 <input
                                     type="text"
                                     class="qt-editable-input qt-fw-400"
-                                    [value]="item.value.value"
+                                    formControlName="value"
                                     appKeyUpEnter
                                     (onChange)="updateUser()"
                                     (input)="changePhoneNumber(item,$event)"
@@ -244,7 +244,7 @@
                         <div class="icon__map-pin qt-za-16 qt-sz-16 qt-bg-contain qt-fs-0 qt-mr-8 qt-icon"></div>
                         <span
                             class="company-details-field qt-fw-500"
-                            [textContent]="item.isPrimary ? 'Billing address' : 'Shipping address'"
+                            [textContent]="item.isPrimary ? 'Shipping address' : 'Billing address'"
                         >
                         </span>
                     </div>

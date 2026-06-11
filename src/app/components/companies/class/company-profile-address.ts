@@ -2,7 +2,7 @@ import { CompanyProfileContact } from './company-profile-contact';
 
 export class CompanyProfileAddress {
     id: string;
-    sameAsBilling: boolean;
+    sameAsShipping: boolean;
     locationName: string;
     isPrimary: boolean;
     address: string;
@@ -37,9 +37,9 @@ export class CompanyProfileAddress {
             || this.phoneNumbers.length > 0 && this.phoneNumbers[0].number.length > 0) return true;
         return false;
     }
-    public initSameAsBilling(data) {
+    public initSameAsShipping(data) {
         let phoneNumbers = JSON.parse(JSON.stringify(this.phoneNumbers));
-        this.sameAsBilling = true;
+        this.sameAsShipping = true;
         this.locationName = data.locationName;
         this.isPrimary = false;
         this.address = data.address;

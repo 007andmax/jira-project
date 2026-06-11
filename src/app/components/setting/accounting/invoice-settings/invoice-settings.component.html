@@ -201,7 +201,7 @@
                             class="form-input"
                             formControlName="firstName"
                             placeholder="Enter Your First name"
-                            maxlength="15"
+                            maxlength="100"
                         >
                         <div
                             *ngIf="submitted && f.firstName.errors"
@@ -219,7 +219,7 @@
                             class="form-input"
                             formControlName="lastName"
                             placeholder="Enter Your Last Name"
-                            maxlength="15"
+                            maxlength="100"
                         >
                         <div
                             *ngIf="submitted && f.lastName.errors"
@@ -308,6 +308,12 @@
                                 [specialCharacters]="['(',')',' ','-','E','x','t',':']"
                                 [dropSpecialCharacters]="false"
                             >
+                             <div
+                            *ngIf="submitted && f.primaryPhone.errors"
+                            class="invalid-feedback"
+                        >
+                            <div *ngIf="f.primaryPhone.errors.required">Phone is required</div>
+                           </div>
                         </div>
                     </div>
                     <div

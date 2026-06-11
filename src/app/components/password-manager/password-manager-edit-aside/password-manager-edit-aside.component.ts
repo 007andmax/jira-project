@@ -34,32 +34,34 @@ import { AfterViewInitDirective } from '../../../directives/after-view-init.dire
 import { CompanyDropDownComponent } from '../../shared/company-drop-down/company-drop-down.component';
 import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
 import { NgIf, NgClass, NgFor, NgStyle } from '@angular/common';
+import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 declare var URL: any;
 /**
  * Password manager edit aside component
  */
 @Component({
-    selector: 'app-password-manager-edit-aside',
-    templateUrl: './password-manager-edit-aside.component.html',
-    styleUrls: ['./password-manager-edit-aside.component.scss'],
-    standalone: true,
-    imports: [
-        NgIf,
-        NgClass,
-        MatErrorComponent,
-        CompanyDropDownComponent,
-        AfterViewInitDirective,
-        DropDownComponent,
-        FormsModule,
-        DynamicTooltipComponent,
-        DatePickerComponent,
-        UploadAreaProgressComponent,
-        PasswordManagerEditLinkedComponent,
-        NgFor,
-        NgStyle,
-        DisabledBtnDirective_1,
-        PreloaderTicketComponent,
-    ],
+  selector: 'app-password-manager-edit-aside',
+  templateUrl: './password-manager-edit-aside.component.html',
+  styleUrls: ['./password-manager-edit-aside.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    NgClass,
+    MatErrorComponent,
+    CompanyDropDownComponent,
+    AfterViewInitDirective,
+    DropDownComponent,
+    FormsModule,
+    DynamicTooltipComponent,
+    DatePickerComponent,
+    UploadAreaProgressComponent,
+    PasswordManagerEditLinkedComponent,
+    NgFor,
+    NgStyle,
+    DisabledBtnDirective_1,
+    PreloaderTicketComponent,
+  ],
+  providers: [TicketsListService]
 })
 export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   public selectedClient: any;
@@ -83,6 +85,8 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   public gadgetsList: Array<PasswordDeviceUser> = [];
   sub: Subscription = new Subscription();
   @ViewChild('saveRecord', { static: false }) saveRecord: DisabledBtnDirective;
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   /**
    * Creates an instance of the PasswordManagerEditAsideComponent with the injected services
      * @param {FormBuilder} fb Service to work with form
@@ -107,12 +111,15 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     public devicesService: DevicesService,
     private appStateService: AppStateService,
     public devicesStateService: DevicesStateService,
+    public ticketsListService: TicketsListService,
   ) { }
 
   /**
    * Initializes Password manager edit aside. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     if (this.companiesState.isInitLightAllCompanies && this.editItem) this.selectedClient = this.companiesState.getLightCompanies().find(item => item.id === this.editItem.companyId);
     let getOnCompanies = this.companiesState.onLightCompanies.subscribe((data) => {
       if (this.editItem) this.selectedClient = data.find(item => item.id === this.editItem.companyId);
@@ -208,6 +215,44 @@ export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
     this.validate.resetAuthenticationKeyLen();
     this.validate.resetAuthenticationKeyBase32();
     this.editItem.setResetAuthenticationKey(false)
+  }
+  generatePassword() {
+    this.showPassword = true;
+    this.editItem.password = this.generateSecurePassword(10);
+  }
+  generateSecurePassword(length: number = 16): string {
+    const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const lower = 'abcdefghijklmnopqrstuvwxyz';
+    const numbers = '0123456789';
+    const symbols = '!@#$%^&*()_+[]{}|;:,.<>?';
+
+    const allChars = upper + lower + numbers + symbols;
+
+    const getRandomChar = (chars: string): string => {
+      const array = new Uint32Array(1);
+      crypto.getRandomValues(array);
+
+      return chars[array[0] % chars.length];
+    };
+
+    let password = '';
+
+    // Required chars
+    password += getRandomChar(upper);
+    password += getRandomChar(lower);
+    password += getRandomChar(numbers);
+    password += getRandomChar(symbols);
+
+    // Remaining chars
+    for (let i = password.length; i < length; i++) {
+      password += getRandomChar(allChars);
+    }
+
+    // Shuffle
+    return password
+      .split('')
+      .sort(() => 0.5 - Math.random())
+      .join('');
   }
   clearSecretKey() {
     this.editItem.setAuthenticationKey("");

@@ -31,6 +31,7 @@ import { ProductListComponent } from 'src/app/components/shared/product-list/pro
 import { ServicesListComponent } from 'src/app/components/shared/services-list/services-list.component';
 import { TagsComponent } from 'src/app/components/shared/tags/tags.component';
 import { AssignedTicketUserComponent } from '../../tickets/ticket-add-aside/assigned-ticket-user/assigned-ticket-user.component';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   standalone: true,
@@ -64,6 +65,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.description = directive;
   };
   @ViewChild('deviceDp', { static: true }) deviceDp: DevicesRecurringTicketsComponent;
+  @ViewChild('saveBtn', { static: false }) saveBtn: DisabledBtnDirective;
   sub: Subscription = new Subscription();
   /**
    * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
@@ -396,10 +398,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
         })
       })
     }
-
     if (this.recurringState.getEditProducts().length > 0) {
       this.recurringService.onInitEditProducts(this.recurringState.getEditProducts()).subscribe(responseList => {
-
         responseList.forEach((item, index) => {
           this.products[index].versionedId.id = item.id;
           this.products[index].versionedId.version = item.version;
@@ -437,10 +437,12 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
       this.recurringState.getCreateTicket().checkForEdit(this.ticketForEdit);
       this.recurringService.editTicket(this.ticketForEdit, this.recurringState.getCreateTicket()).subscribe((res) => {
+        this.saveBtn.setDisabled(false);
         this.close();
       })
     } else {
       this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {
+        this.saveBtn.setDisabled(false);
         this.close();
       })
     }
@@ -452,6 +454,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public save() {
     this.validate.checkValidat(this.recurringState.getCreateTicket());
     if (!this.validate.getCompany() || !this.validate.getInterval()) return;
+    this.saveBtn.setDisabled(true);
     this.onInitCheckProduct();
   }
 

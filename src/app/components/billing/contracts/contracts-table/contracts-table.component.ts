@@ -41,16 +41,20 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.getServiceAgreements();
     let getSort = this.contractsStateService.getSort().subscribe(data => {
+      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.filter.onSort(data, this.list);
+      this.contractsStateService.changeSortDirection(this.filter.direction);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
     })
     this.sub.add(getSort);
     let getFilter = this.contractsStateService.getFilter().subscribe(data => {
+      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.filter.setFilters(data)
       this.list = this.filter.getFilterList(this.reqList);
       this.filter.onSort('company', this.list);
+      this.contractsStateService.changeSortDirection(this.filter.direction);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
@@ -116,6 +120,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
       if (showNotificationReview) this.contractsStateService.showNotificationReview();
       this.list = JSON.parse(JSON.stringify(this.reqList));
       this.filter.onSort('company', this.list);
+      this.contractsStateService.changeSortDirection(this.filter.direction);
       this.showPreloader = false;
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();

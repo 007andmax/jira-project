@@ -21,7 +21,7 @@ export class ContractsAsideOtherProductComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (this.product.productId.length > 0) this.editProduct = new InventoryItem(this.product);
+    if (this.product.versionedId) this.editProduct = new InventoryItem(this.product);
   }
   public onChangeProduct(data) {
     this.editProduct = data;
@@ -29,7 +29,7 @@ export class ContractsAsideOtherProductComponent implements OnInit {
       this.product.quantity = 1;
       this.product.salePrice = data.sale;
       this.product.salePrice_str = data.sale.toFixed(2);
-      this.product.productId = data.versionedId.id;
+      this.product.versionedId = data.versionedId;
       this.product.validate = true;
       this.product.description = data.description;
       this.product.taxes = data.taxes;
@@ -37,7 +37,7 @@ export class ContractsAsideOtherProductComponent implements OnInit {
       this.product.quantity = 0;
       this.product.salePrice = 0;
       this.product.salePrice_str = "0.00";
-      this.product.productId = "";
+      this.product.versionedId = null;
       this.product.description = null;
       this.product.taxSum = 0;
       this.product.taxes = [];

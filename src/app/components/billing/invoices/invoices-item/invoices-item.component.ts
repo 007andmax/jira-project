@@ -14,13 +14,14 @@ import { AppService } from 'src/app/states/app/app.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 @Component({
   standalone: true,
   imports: [FormsModule, CommonModule, NgbDropdownModule],
   selector: 'app-invoices-item',
   templateUrl: './invoices-item.component.html',
   styleUrls: ['./invoices-item.component.scss'],
-
+  providers: [TicketsListService]
 })
 export class InvoicesItemComponent implements OnInit {
   @Input() invoice: Invoice;
@@ -30,6 +31,8 @@ export class InvoicesItemComponent implements OnInit {
   allPayments = [];
   paymentSum: number;
   allPaymentsSum: number = 0;
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = [];
   constructor(private companiesStateService: CompaniesStateService,
     private modalService: NgbModal,
     private invoiceStateService: InvoiceStateService,
@@ -38,9 +41,12 @@ export class InvoicesItemComponent implements OnInit {
     private permissionsService: PermissionsService,
     private toastrProgressStateService: ToastrProgressStateService,
     public customerPortalStateService: CustomerPortalStateService,
+    public ticketsListService: TicketsListService,
     private invoicesService: InvoicesService) { }
 
   ngOnInit() {
+    this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.invoice.companyId);
     if (this.invoice.payment) {
       this.paymentSum = this.invoice.payment.totalSum;
@@ -61,6 +67,16 @@ export class InvoicesItemComponent implements OnInit {
       this.invoice.partialPayments.forEach((el) => {
         this.allPaymentsSum += el.partialPaidAmount;
       })
+    }
+  }
+  checkLogo() {
+    return (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id || this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id)
+  }
+  parseLogo() {
+    if (this.checkLogo()) {
+      return `url(${this.companiesStateService.getCompanyLogoUrl(this.company)}) center / cover no-repeat`;
+    } else {
+      return this.ticketsListService.getStyleAvatar(null, this.listColorNoAvatar[this.indexNoAvatar]);
     }
   }
   onChangeSelect() {

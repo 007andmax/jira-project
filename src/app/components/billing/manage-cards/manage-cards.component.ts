@@ -45,6 +45,7 @@ export class ManageCardsComponent {
     public cd: ChangeDetectorRef,
   ) { }
   ngOnInit() {
+    if (!this.integrationsStateService.isInit) this.integrationsStateService.onInit();
     if (this.companiesStateService.currentCompany && this.integrationsStateService.isInit && this.integrationsStateService.connected) {
       this.setDefaultScoll();
       this.onScroll();
@@ -111,18 +112,17 @@ export class ManageCardsComponent {
     });
   }
   public onFilter(field) {
-    document.body.querySelector(".main-container").scrollTo(0, 0);
     //  this.filter.setSort(field);
     this.setDefaultScoll();
     this.onScroll();
   }
   onSearch(value) {
-    document.body.querySelector(".main-container").scrollTo(0, 0);
     // this.filter.setSearch((value !== "") ? value : null);
     this.setDefaultScoll();
     this.onScroll();
   }
   public setDefaultScoll() {
+    if (document.body.querySelector(".main-container")) document.body.querySelector(".main-container").scrollTo(0, 0);
     this.showPreloader = true;
     this.page = 0;
     this.ticketsListService.setBlockList(false);

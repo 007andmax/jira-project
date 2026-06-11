@@ -19,16 +19,17 @@ import { SubscriptionServicesAddComponent } from './subscription-services-add/su
 import { SubscriptionServicesItemComponent } from './subscription-services-item/subscription-services-item.component';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgIf, NgFor } from '@angular/common';
+import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
 
 @Component({
-    selector: 'app-subscription-services',
-    animations: [fadeInAnimation],
-    // attach the fade in animation to the host (root) element of this component
-    host: { '[@fadeInAnimation]': '' },
-    templateUrl: './subscription-services.component.html',
-    styleUrls: ['./subscription-services.component.scss'],
-    standalone: true,
-    imports: [NgIf, NgbTooltipModule, NgFor, SubscriptionServicesItemComponent, SubscriptionServicesAddComponent, SubscriptionServicesEditComponent, ContractsEditComponent]
+  selector: 'app-subscription-services',
+  animations: [fadeInAnimation],
+  // attach the fade in animation to the host (root) element of this component
+  host: { '[@fadeInAnimation]': '' },
+  templateUrl: './subscription-services.component.html',
+  styleUrls: ['./subscription-services.component.scss'],
+  standalone: true,
+  imports: [NgIf, NgbTooltipModule, NgFor, SubscriptionServicesItemComponent, SubscriptionServicesAddComponent, SubscriptionServicesEditComponent, ContractsEditComponent]
 })
 export class SubscriptionServicesComponent implements OnInit, OnDestroy {
   serviceAgreement: ServiceAgreement;
@@ -37,6 +38,7 @@ export class SubscriptionServicesComponent implements OnInit, OnDestroy {
   filter: SubscriptionServicesFilter = new SubscriptionServicesFilter();
   list: Array<SubscriptionServices> = [];
   sub: Subscription = new Subscription();
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   constructor(private subscriptionServicesService: SubscriptionServicesService,
     private confirmStateService: ConfirmStateService,
     private leftPanelStateService: LeftPanelStateService,
@@ -115,7 +117,10 @@ export class SubscriptionServicesComponent implements OnInit, OnDestroy {
     })
   }
   public onFilter(field) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.list, this.taxesStateService.getTaxes());
+    this.sortBy.sortDirection = this.filter.direction;
     this.cd.detectChanges();
   }
 

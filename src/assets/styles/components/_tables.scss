@@ -176,7 +176,7 @@ table.qt-table-modern {
     }
 
     &__subject {
-      flex: 2 1 345px;
+      flex: 2 1 260px;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -209,9 +209,14 @@ table.qt-table-modern {
     &__status {
       flex: 0 0 162px;
     }
-
+    &__number {
+      flex: 0 0 105px;
+    }
+     &__update {
+      flex: 0 0 65px;
+    }
     &__created-date {
-      flex: 0 0 135px;
+      flex: 0 0 155px;
     }
   }
 
@@ -235,6 +240,7 @@ table.qt-table-modern {
 
 .qt-page-list__header-thead__row {
   display: flex;
+  min-height: 40px;
 
   & > div {
     display: flex;
@@ -244,11 +250,11 @@ table.qt-table-modern {
     text-transform: uppercase;
 
     &:first-child {
-      padding: 12px 8px 12px 24px;
+      padding: 10px 8px 10px 24px;
     }
 
     &:last-child {
-      padding: 23px 24px 23px 8px;
+      padding: 20px 24px 20px 8px;
     }
   }
 

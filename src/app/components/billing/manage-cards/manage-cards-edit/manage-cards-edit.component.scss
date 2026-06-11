@@ -211,3 +211,12 @@
     right: 0px;
     z-index: 999;
 }
+.splite-icon {
+    position: relative;
+    &::after {
+        content: "/";
+        position: absolute;
+        top: 36px;
+        left: 100px;
+    }
+}

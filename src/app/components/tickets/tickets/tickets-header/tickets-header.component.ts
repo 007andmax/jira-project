@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, Input, ViewChild } from '@angular/core';
 import { TitleListType } from './class/title-list-type';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { TicketsFilterComponent } from './tickets-filter/tickets-filter.component';
 import { AppService } from 'src/app/states/app/app.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
@@ -14,6 +14,12 @@ import { MatChipListComponent } from 'src/app/components/shared/mat-chip-list/ma
 import { MatChipComponent } from 'src/app/components/shared/mat-chip/mat-chip.component';
 import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
 import { TicketsFilterInfoComponent } from './tickets-filter-info/tickets-filter-info.component';
+import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { TicketsPermissionsService } from '../ticket-edit-aside/services/tickets-permissions.service';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { AppStateService } from 'src/app/states/app/app-state.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   standalone: true,
@@ -21,10 +27,11 @@ import { TicketsFilterInfoComponent } from './tickets-filter-info/tickets-filter
   selector: 'app-tickets-header',
   templateUrl: './tickets-header.component.html',
   styleUrls: ['./tickets-header.component.scss'],
-
+  providers: [TicketsPermissionsService]
 })
 export class TicketsHeaderComponent implements OnInit, OnDestroy {
   @ViewChild('filter', { static: true }) filter: TicketsFilterComponent;
+  @ViewChild('claimTicketsBtn', { static: false }) claimTicketsBtn: DisabledBtnDirective;
   ticketsFilter: TicketsFilter = new TicketsFilter();
   titleListTypes: Array<TitleListType> = [new TitleListType('All Tickets', 'ALL'),
   new TitleListType('Unassigned', 'UNASSIGNED'),
@@ -46,6 +53,11 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   constructor(public ticketsStateService: TicketsStateService,
     public appService: AppService,
     public customerPortalStateService: CustomerPortalStateService,
+    private ticketsService: TicketsService,
+    private usersStateService: UsersStateService,
+    public ticketsPermissionsService: TicketsPermissionsService,
+    private appStateService: AppStateService,
+    private toastrService: ToastrService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -171,7 +183,40 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     this.ticketsStateService.onToggleAddTicket();
   }
   mergeTicket() {
-    if (this.ticketsStateService.getTicketsForMerge().length > 1) this.ticketsStateService.mergeTicket();
+    if (this.ticketsStateService.getTicketsForMerge().length > 1 && this.checkDisableSelect().length == 0) this.ticketsStateService.mergeTicket();
+  }
+  claimTicket() {
+    this.claimTicketsBtn.setDisabled(true);
+    let currentUser = this.usersStateService.getCurrentUser();
+    forkJoin(
+      this.ticketsStateService.getTicketsForMerge().filter(item => this.ticketsPermissionsService.isActionVisible('claim_ticket', item, null, null)).map(item => this.ticketsService.assignUserToTicket(item.id, currentUser.id))
+    )
+      .subscribe(result => {
+        this.toastrService.success("The ticket has been claimed");
+        this.appStateService.changeDetectorRef();
+        this.claimTicketsBtn.setDisabled(false);
+        this.ticketsStateService.getTicketsForMerge().filter(item => this.ticketsPermissionsService.isActionVisible('claim_ticket', item, null, null)).forEach(item => {
+          const index = this.ticketsStateService.getTicketsForMerge().findIndex(tikcet => tikcet.id == item.id);
+          if (index > -1) this.ticketsStateService.removeSelectedTicketForMerge(index);
+        })
+        this.cd.detectChanges();
+      }, err => {
+        this.claimTicketsBtn.setDisabled(false);
+      });
+  }
+  public checkClaimTickets() {
+    return this.ticketsStateService.getTicketsForMerge().some(item => {
+      return (item.status == null)
+    });
+  }
+  public checkDisableSelect() {
+    return this.ticketsStateService.getTicketsForMerge().filter((item, i, list) => {
+      if (item.status == 'IN_PROGRESS' || item.status == 'ON_HOLD' || item.status == null || item.customStatus != null) {
+        return (list.length > 0 ? list[0].companyId != item.companyId : false);
+      } else {
+        return true;
+      }
+    })
   }
 
   /**

@@ -1,10 +1,31 @@
 <div class="qt-df ticket-updates__update-block">
     <div class="ticket-updates__content">
         <div class="qt-df qt-ai-fs">
+             <ng-template #popContent let-greeting="greeting"
+	>
+            <app-tickets-table-item-requested-by
+            [requestedUser]="getUserById(update.user ? update.user.id : null)"
+            [indexNoAvatar]="indexNoAvatar"
+            [listColorNoAvatar]="listColorNoAvatar"
+             [ticket]="ticketProfile"
+            ></app-tickets-table-item-requested-by>
+            </ng-template
+        >
             <div
-                class="ticket-updates__ticket-photo"
-                [textContent]="ticketsListService.getAssignedUserNameForAvatar(update.user)"
-                [ngStyle]="{'background': ticketsListService.getStyleAvatar(update.user)}"
+                class="ticket-updates__ticket-photo qt-pointer"
+                [textContent]="ticketsListService.getAssignedUserNameForAvatar(update.user ? update.user : null)"
+                [ngStyle]="{'background': ticketsListService.getStyleAvatar(update.user ? update.user : null)}"
+                  [ngbPopover]="popContent"
+                [popoverClass]="'requested-by-popover'"
+                 [autoClose]="'outside'"
+                 [container]="'body'"
+                #p="ngbPopover"
+                triggers="manual"
+                appUserLogoPopover
+                [user]="getUserById(update.user ? update.user.id : null)"
+                [popover]="p"
+                [disabled]="!update.user"
+                [disablePopover]="!update.user"
             ></div>
             <div class="ticket-updates__author-line qt-df jc-sb qt-ai-c ">
                 <div>
@@ -19,6 +40,7 @@
                         [date]="update.createdAt"
                         [otherRecipients]="update.otherRecipients"
                         [shares]="update.shares"
+                         [ticketProfile]="ticketProfile"
                     ></ticket-detail-profile-updates-header-info>
                 </div>
                 <app-dynamic-tooltip

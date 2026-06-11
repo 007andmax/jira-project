@@ -26,6 +26,7 @@ import { CompaniesFilterComponent } from './companies-header/companies-filter/co
 import { CompaniesTableComponent } from './companies-table/companies-table.component';
 import { CompanyEditAsideComponent } from './company-edit-aside/company-edit-aside.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { TicketSortBy } from '../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   standalone: true,
@@ -54,6 +55,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   devicesCounts: Array<CompanyDeviceCount> = [];
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   container = document.body.querySelector(".main-container");
+
   constructor(private companiesService: CompaniesService,
     private companiesList: CompaniesListService,
     private companiesStateService: CompaniesStateService,
@@ -78,7 +80,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.sub.add(getOnCompanies);
     if (this.left_filter) {
       if (this.left_filter !== "ARCHIVE") this.companyFilter.setClientType(this.left_filter);
-      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.setDefaultScoll();
       this.showArchivedCompanies = (this.left_filter === "ARCHIVE");
       this.companyFilter.setShowArchivedCompanies(this.showArchivedCompanies);
@@ -155,7 +156,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.sub.add(onToggleFilter);
   }
   onSearch(value) {
-    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.companyFilter.setSearch((value !== "") ? value : null);
     this.setDefaultScoll();
     this.onScroll();
@@ -179,10 +179,9 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   onFilter(data) {
+    this.companyFilter.sortBy.sortBy = data;
     this.companyFilter.onFilter(data, this.reqCompaniesList);
-    this.page_number = 0;
-    this.companiesList.setBlockList(false);
-    this.CompaniesList = [];
+    this.setDefaultScoll();
     this.onScroll();
   }
   onSelectAllCompanies(data) {
@@ -260,6 +259,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
 
   public setDefaultScoll() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
     this.page_number = 0;
     this.companiesList.setBlockList(false);
     this.CompaniesList = [];

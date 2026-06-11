@@ -59,21 +59,45 @@
                     </div>
                     <div class="ticket-detail-page-content__body-header qt-pl-24 qt-pr-24">
                         <div class="qt-df qt-ai-fs">
+                             <ng-template #popContent let-greeting="greeting"
+                        >
+                                <app-tickets-table-item-requested-by
+                                [requestedUser]="getCreatedUser()"
+                                [indexNoAvatar]="indexNoAvatar"
+                                [listColorNoAvatar]="listColorNoAvatar"
+                                  [ticket]="ticketProfile"
+                                ></app-tickets-table-item-requested-by>
+                                </ng-template
+                            >
                             <div
-                                class="ticket-edit-aside__header-avatar"
+                                class="ticket-edit-aside__header-avatar qt-pointer"
                                 [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfile.createdUser)"
                                 [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser)}"
+                                 [ngbPopover]="popContent"
+                                [popoverClass]="'requested-by-popover'"
+                                [autoClose]="'outside'"
+                                [container]="'body'"
+                                #p="ngbPopover"
+                                triggers="manual"
+                                appUserLogoPopover
+                                [user]="getCreatedUser()"
+                                [popover]="p"
+                                [disabled]="!getCreatedUser()"
+                                [disablePopover]="!getCreatedUser()"
                             ></div>
                             <div>
                                 <div class="qt-df qt-ai-c">
                                     <div
                                         class
-                                        ngbDropdown
-                                        (openChange)="onOpenCompaniesDropDown()"
-                                        placement="bottom-left"
+                                    >
+                                     <div
+                                          ngbDropdown
+                                            container="body"
+                                            placement="bottom-right"
                                     >
                                         <!-- <span [textContent]="parseTicketSource() + getAgentName()"></span> -->
-                                        <div class="ticket-detail-page-content__body-header-info qt-mb-6">
+                                        <div class="ticket-detail-page-content__body-header-info qt-mb-6" 
+                                        >
                                             <span
                                                 class="pointer"
                                                 [textContent]="getNameCreateUser()"
@@ -89,17 +113,44 @@
                                                 class="ticket-detail-page-content__body-header-info-email"
                                                 [textContent]="'sent ' + parseTicketSource() + getAgentName()"
                                             ></span>
+                                            <i *ngIf="getAgentName() !== '' && getAgent() && (getAgent().remoteSessions.length == 0 && getAgent().online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.isCustomerPortal))"  placement="top"
+                                              (click)="remoteAccess()"
+        ngbTooltip="Remote Access" class="qt-icon icon__remote-access qt-sz-16 qt-ml-6 qt-fs-0 qt-dib qt-pointer"  ></i>
                                         </div>
-                                        <div class="ticket-detail-page-content__body-header-data">
+                                          </div>
+                                        <div class="ticket-detail-page-content__body-header-data"   
+                                        ngbDropdown
+                                        (openChange)="onOpenCompaniesDropDown()"
+                                        placement="bottom-left">
                                             <span [textContent]="getCreatAt()"></span>
                                             <div class="ticket-detail-page-content__body-header-data-divider"></div>
                                             <span class="qt-icon icon__companies qt-sz-16 qt-dib qt-mr-8"></span>
+                                             <ng-template #popCompanyContent let-greeting="greeting"
+                                                >
+                                                <app-users-table-company-by
+                                                [company]="getCompany(ticketProfile.company.id)"
+                                                [indexNoAvatar]="indexNoAvatar"
+                                                [listColorNoAvatar]="listColorNoAvatar"
+                                                ></app-users-table-company-by>
+                                                </ng-template
+                                            >
                                             <span
                                                 class="pointer"
                                                 [textContent]="getCompanyName()"
                                                 (click)="goToCompanyDashboard()"
                                                 id="dropdownCompany"
                                                 ngbDropdownToggle
+                                            [ngbPopover]="popCompanyContent"
+                                        [popoverClass]="'requested-by-popover'"
+                                            [autoClose]="'outside'"
+                                            [container]="'body'"
+                                        #pCompany="ngbPopover"
+                                        triggers="manual"
+                                        appCompanyLogoPopover
+                                        [company]="getCompany(ticketProfile.company.id)"
+                                        [popover]="pCompany"
+                                        [disabled]="!getCompany(ticketProfile.company.id)"
+                                        [disablePopover]="!getCompany(ticketProfile.company.id)"
                                             ></span>
                                             <span
                                                 class="qt-color-red-600"
@@ -275,13 +326,14 @@
                         [ticketProfile]="ticketProfile"
                         (onClose)="onCloseDetails()"
                     ></ticket-detail-contact-details>
+                    <!--  *ngIf="toggleRigthPanel"-->
                     <ticket-detail-contact
                         #contact
-                        *ngIf="toggleRigthPanel"
+                        *ngIf="!typeRigthDetailAside"
                         [ticketProfile]="ticketProfile"
                         (onShowMore)="onShowMore('CONTACT')"
                     ></ticket-detail-contact>
-                    <ticket-detail-passwords
+                   <!-- <ticket-detail-passwords
                         *ngIf="toggleRigthPanel"
                         (onShowMore)="onShowMore('PASSWORD')"
                     ></ticket-detail-passwords>
@@ -294,10 +346,10 @@
                         [ticketProfile]="ticketProfile"
                         *ngIf="toggleRigthPanel"
                         (onShowMore)="onShowMore('DEVICES')"
-                    ></ticket-detail-devices>
-                    <ticket-detail-tickets
+                    ></ticket-detail-devices>-->
+                     <ticket-detail-tickets
                         #ticketsDetail
-                        *ngIf="toggleRigthPanel"
+                        *ngIf="!typeRigthDetailAside"
                         [ticketProfile]="ticketProfile"
                         (onShowMore)="onShowMore('TICKETS')"
                     ></ticket-detail-tickets>
@@ -338,30 +390,40 @@
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('CONTACT')"
+                    placement="top"
+                    ngbTooltip="Contact Details"
                 >
                     <div class="qt-icon icon__info qt-sz-20 qt-bg-contain"></div>
                 </div>
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('PASSWORD')"
+                        placement="top"
+                    ngbTooltip="Passwords"
                 >
                     <div class="qt-icon icon__password qt-sz-20 qt-bg-contain"></div>
                 </div>
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('DEVICES')"
+                        placement="top"
+                    ngbTooltip="Devices"
                 >
                     <div class="qt-icon icon__devices qt-sz-20"></div>
                 </div>
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('DOCUMENT')"
+                       placement="top"
+                    ngbTooltip="Documents"
                 >
                     <div class="qt-icon icon__documents qt-sz-20 qt-bg-contain"></div>
                 </div>
                 <div
                     class="ticket-detail-page-content__sidebar-menu-button"
                     (click)="openDetailRigthPanel('TICKETS')"
+                       placement="top"
+                    ngbTooltip="Open Tickets"
                 >
                     <div class="qt-icon icon__tickets qt-sz-20"></div>
                 </div>

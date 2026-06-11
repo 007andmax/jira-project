@@ -42,7 +42,7 @@ describe('ContractsAsideOtherProductComponent unit test', () => {
   it('check "product"', () => {
     const fixture = TestBed.createComponent(ContractsAsideOtherProductComponent);
     const com = fixture.debugElement.componentInstance;
-    com.product = new ContractsOtherProduct("123", 10, 12, "test");
+    com.product = new ContractsOtherProduct({ id: 500 }, 10, 12, "test");
     com.onChangeProduct(new InventoryItem({
       sale: 100,
       versionedId: { id: 500 },
@@ -52,13 +52,13 @@ describe('ContractsAsideOtherProductComponent unit test', () => {
     expect(com.product.quantity).toEqual(1);
     expect(com.product.salePrice).toEqual(100);
     expect(com.product.salePrice_str).toEqual("100.00");
-    expect(com.product.productId).toEqual(500);
+    expect(com.product.versionedId).toEqual({ id: 500 });
     expect(com.product.description).toEqual("description");
     com.onChangeProduct(null);
     expect(com.product.quantity).toEqual(0);
     expect(com.product.salePrice).toEqual(0);
     expect(com.product.salePrice_str).toEqual("0.00");
-    expect(com.product.productId).toEqual("");
+    expect(com.product.versionedId).toEqual(null);
     expect(com.product.description).toEqual(null);
   });
 });

@@ -30,6 +30,7 @@ import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error
 import { ProductListComponent } from 'src/app/components/shared/product-list/product-list.component';
 import { ServicesListComponent } from 'src/app/components/shared/services-list/services-list.component';
 import { TagsComponent } from 'src/app/components/shared/tags/tags.component';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 
 @Component({
   standalone: true,
@@ -58,6 +59,8 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   @ViewChild('deviceDp', { static: false }) deviceDp: DevicesRecurringTicketsComponent;
   sub: Subscription = new Subscription();
   @ViewChild('techUsersDp', { static: false }) techUsersDp: AssignedTicketUserComponent;
+  @ViewChild('saveBtn', { static: false }) saveBtn: DisabledBtnDirective;
+  @ViewChild('copyBtn', { static: false }) copyBtn: DisabledBtnDirective;
   /**
    * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
    * @param {ProductService} productService Service to work with products
@@ -438,10 +441,8 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
         category.products.forEach((prod, prodIndex) => {
           let index = this.products.findIndex(item => item.versionedId.id === prod.versionedId.id);
           if (index > (-1)) {
-
             if (this.products[index].manufacture !== prod.manufacture || Number(this.products[index].sale) !== prod.sale || Number(this.products[index].cost) !== prod.cost) {
               this.recurringState.addEditProduct(category, this.products[index]);
-
             }
           }
         })
@@ -486,6 +487,8 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.products.forEach((item: ForCreateProduct) => (item.name || item.description) && this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.versionedId.id, item.quantity, item.discount)));
     this.services.forEach((item: ForCreateService) => (item.name) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration, item.discountAmount)));
     this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {
+      this.saveBtn.setDisabled(false);
+      this.copyBtn.setDisabled(false);
       if (!this.copy) {
         this.close();
       } else {
@@ -502,6 +505,8 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.validate.checkValidat(this.recurringState.getCreateTicket());
     //  if (this.createService.getCloneMode() && this.checkServices()) return; 
     if (!this.validate.getCompany() || !this.validate.getInterval() || this.createService.getCloneMode() && this.checkServices()) return;
+    this.saveBtn.setDisabled(true);
+    this.copyBtn.setDisabled(true);
     this.onInitCheckProduct();
   }
 
