@@ -99,6 +99,16 @@ export class InventoryComponent implements OnInit {
       this.getListProducts();
     })
     this.sub.add(onSortActive);
+    let onSetLastSold = this.inventoryStateService.onSetLastSold.subscribe(data => {
+      this.filter.setLastSold(data);
+      document.body.querySelector(".main-container").scrollTo(0, 0);
+      this.page_number = 0;
+      this.inventoryListService.setBlockList(false);
+      this.inventoryList = [];
+      this.showPreloader = true;
+      this.getListProducts();
+    })
+    this.sub.add(onSetLastSold);
     let onSortType = this.inventoryStateService.onSortType.subscribe(data => {
       this.filter.setSortType(data);
       document.body.querySelector(".main-container").scrollTo(0, 0);
@@ -220,7 +230,7 @@ export class InventoryComponent implements OnInit {
     return this.permissionsService.isAllowed(action)
   }
   public getListProducts() {
-    this.productService.getProducts(this.filter.getActive(), this.filter.getSortTypeId()).subscribe((res: Array<InventoryItem>) => {
+    this.productService.getProducts(this.filter.getActive(), this.filter.lastSold, this.filter.getSortTypeId()).subscribe((res: Array<InventoryItem>) => {
       this.reqInventoryList = res;
       this.onScroll();
       this.filter.onFilter(this.inventoryList, this.companies, this.glNumbers, this.taxes);

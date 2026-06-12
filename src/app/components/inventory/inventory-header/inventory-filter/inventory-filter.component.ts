@@ -16,12 +16,14 @@ export class InventoryFilterComponent implements OnInit {
   showAddCategory: boolean = false;
   categories: Array<CategoryProduct> = [];
   sub: Subscription = new Subscription();
+  lastSold: Array<TitleListType> = [new TitleListType('30 days', 'DAYS_30'), new TitleListType('60 days', 'DAYS_60'), new TitleListType('90 days', 'DAYS_90'), new TitleListType('180 days', 'DAYS_180'), new TitleListType('1 year', 'YEAR_1')];
   listActive: Array<TitleListType> = [new TitleListType('Active products', 'ACTIVE'), new TitleListType('Inactive products', 'NO_ACTIVE')];
   selectedActive = new TitleListType('Active products', 'ACTIVE');
   listTypes: Array<ProductType> = [];
   filter: InventoryFilter = new InventoryFilter();
   @ViewChild('categoriesSelect', { static: true }) categoriesSelect: DropDownComponent;
   @ViewChild('productTypeSelect', { static: true }) productTypeSelect: DropDownComponent;
+  @ViewChild('lastSoldDb', { static: true }) lastSoldDb: DropDownComponent;
   @Output() onResetSelected: EventEmitter<any> = new EventEmitter();
   constructor(private inventoryStateService: InventoryStateService,
     public cd: ChangeDetectorRef,) { }
@@ -64,6 +66,12 @@ export class InventoryFilterComponent implements OnInit {
     this.onResetSelected.emit(null);
     this.cd.detectChanges();
   }
+  selectLastSold(data) {
+    this.filter.setLastSold(data.type);
+    this.inventoryStateService.setLastSold(data.type);
+    this.onResetSelected.emit(null);
+    this.cd.detectChanges();
+  }
   onSelectCategory(category) {
     this.filter.setSortCategoty(category);
     this.inventoryStateService.setSortCategory(category);
@@ -74,6 +82,7 @@ export class InventoryFilterComponent implements OnInit {
     this.filter = new InventoryFilter();
     this.categoriesSelect.clearWithOutChanges();
     this.productTypeSelect.clearWithOutChanges();
+    this.lastSoldDb.clearWithOutChanges();
     this.inventoryStateService.resetSortCategoty();
     this.inventoryStateService.clearFilters();
   }

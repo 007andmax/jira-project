@@ -71,6 +71,7 @@ export class InventoryHeaderComponent implements OnInit {
     this.countFilter = 0;
     if (this.filtes.filter.sortType) this.countFilter++;
     if (this.filtes.filter.sortCategoty) this.countFilter++;
+    if (this.filtes.filter.lastSold) this.countFilter++;
   }
   getTextCountFilters() {
     return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;

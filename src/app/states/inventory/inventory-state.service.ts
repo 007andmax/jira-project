@@ -19,6 +19,7 @@ export class InventoryStateService {
   onSortCategory: EventEmitter<any> = new EventEmitter();
   onSortType: EventEmitter<any> = new EventEmitter();
   onSortActive: EventEmitter<any> = new EventEmitter();
+  onSetLastSold: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
   onGetProducts: EventEmitter<any> = new EventEmitter();
   onRefreshProductsAgreements: EventEmitter<any> = new EventEmitter();
@@ -176,6 +177,9 @@ export class InventoryStateService {
   }
   public setSortActive(data) {
     this.onSortActive.emit(data);
+  }
+  public setLastSold(data) {
+    this.onSetLastSold.emit(data);
   }
   public getOnSortCategory() {
     return this.onSortCategory;

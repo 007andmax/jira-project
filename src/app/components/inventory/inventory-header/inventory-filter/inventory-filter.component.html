@@ -34,7 +34,7 @@
         (onSelectedItem)="onSelectProuctType($event)"
     ></app-drop-down>
     <app-drop-down
-        class="qt-w100 dropdown"
+        class="active-drop-down qt-mr-8"
         [placeholder]="'Select Active'"
         [editItem]="selectedActive"
         [list]="listActive"
@@ -44,6 +44,17 @@
         [isBlockClear]="true"
         (onSelectedItem)="selectActive($event)"
         heightInput="36px"
-        widthInput="30%"
+    ></app-drop-down>
+      <app-drop-down
+      #lastSoldDb
+        class="active-drop-down"
+        [placeholder]="'Select Interval'"
+        [list]="lastSold"
+        [field]="'title'"
+        [search]="true"
+        [change]="true"
+        [isBlockClear]="true"
+        (onSelectedItem)="selectLastSold($event)"
+        heightInput="36px"
     ></app-drop-down>
 </div>

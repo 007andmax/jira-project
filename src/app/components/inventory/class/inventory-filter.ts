@@ -19,6 +19,7 @@ export class InventoryFilter {
     active: boolean = true;
     productSearchName: string = "";
     direction: string;
+    lastSold: string = null;
     constructor() { }
     public setSortCategoty(data) {
         this.sortCategoty = data;
@@ -31,6 +32,9 @@ export class InventoryFilter {
     }
     public setActive(data) {
         this.active = data;
+    }
+    public setLastSold(data) {
+        this.lastSold = data;
     }
     public setProductSearchName(data) {
         this.productSearchName = data;
