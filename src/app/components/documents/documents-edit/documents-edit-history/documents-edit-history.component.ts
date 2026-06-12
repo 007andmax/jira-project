@@ -6,9 +6,10 @@ import { DocumentHistory } from '../../class/document-history';
 import * as moment from "moment";
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
+import { TicketsTableItemRequestedByComponent } from 'src/app/components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TicketsTableItemRequestedByComponent],
   selector: 'documents-edit-history',
   templateUrl: './documents-edit-history.component.html',
   styleUrls: ['./documents-edit-history.component.scss'],

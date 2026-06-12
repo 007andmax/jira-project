@@ -25,13 +25,14 @@ import { PreviewPhoneMaskComponent } from '../../shared/preview-phone-mask/previ
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { UsersTableCompanyByComponent } from '../../users/users-table/users-table-company-by/users-table-company-by.component';
+import { TicketsTableItemRequestedByComponent } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 @Component({
   standalone: true,
   selector: 'app-companies-table',
   templateUrl: './companies-table.component.html',
   styleUrls: ['./companies-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [UsersTableCompanyByComponent],
+  imports: [UsersTableCompanyByComponent, TicketsTableItemRequestedByComponent],
   providers: [TicketsListService]
 })
 export class CompaniesTableComponent implements OnInit, OnDestroy {

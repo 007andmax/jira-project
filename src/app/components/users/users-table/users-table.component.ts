@@ -38,6 +38,7 @@ import { UserTableDefaultSubscriptionComponent } from './user-table-default-subs
 import { UserCustomerCompaniesInfo } from '../class/user-customer-companies-info';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { AppStateService } from 'src/app/states/app/app-state.service';
+import { TicketsTableItemRequestedByComponent } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
   standalone: true,
@@ -46,6 +47,7 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
   styleUrls: ['./users-table.component.scss'],
   providers: [UsersTableService, TicketsListService],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TicketsTableItemRequestedByComponent]
 })
 export class UsersTableComponent implements OnInit, OnDestroy {
   @Input() selected: boolean = false;

@@ -35,6 +35,7 @@ import { CompanyDropDownComponent } from '../../shared/company-drop-down/company
 import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
 import { NgIf, NgClass, NgFor, NgStyle } from '@angular/common';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
+import { TicketsTableItemRequestedByComponent } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 declare var URL: any;
 /**
  * Password manager edit aside component
@@ -60,6 +61,7 @@ declare var URL: any;
     NgStyle,
     DisabledBtnDirective_1,
     PreloaderTicketComponent,
+    TicketsTableItemRequestedByComponent
   ],
   providers: [TicketsListService]
 })

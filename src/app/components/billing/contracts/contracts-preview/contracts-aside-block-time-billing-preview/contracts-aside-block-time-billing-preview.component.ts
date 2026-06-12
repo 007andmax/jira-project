@@ -16,6 +16,7 @@ import { NgClass, NgFor, NgIf, NgStyle, CurrencyPipe } from '@angular/common';
 import { DatePickerComponent } from '../../../../shared/date-picker/date-picker.component';
 import { DropDownComponent } from '../../../../shared/drop-down/drop-down.component';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
+import { TicketsTableItemRequestedByComponent } from 'src/app/components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing-preview',
@@ -23,7 +24,7 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
   styleUrls: ['./contracts-aside-block-time-billing-preview.component.scss'],
   standalone: true,
   providers: [TicketsListService],
-  imports: [DropDownComponent, DatePickerComponent, NgClass, FormsModule, NgFor, NgIf, MatChipListComponent, MatChipComponent, NgStyle, NgbTooltipModule, CurrencyPipe]
+  imports: [DropDownComponent, TicketsTableItemRequestedByComponent, DatePickerComponent, NgClass, FormsModule, NgFor, NgIf, MatChipListComponent, MatChipComponent, NgStyle, NgbTooltipModule, CurrencyPipe]
 })
 export class ContractsAsideBlockTimeBillingPreviewComponent implements OnInit, OnDestroy {
 

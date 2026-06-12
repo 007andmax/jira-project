@@ -16,10 +16,11 @@ import { TicketStateService } from '../../ticket-edit-aside/services/ticket-stat
 import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
+import { TicketsTableItemRequestedByComponent } from '../../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
   standalone: true,
-  imports: [PreloaderTicketComponent, CommonModule, DisabledBtnDirective],
+  imports: [PreloaderTicketComponent, TicketsTableItemRequestedByComponent, CommonModule, DisabledBtnDirective],
   selector: 'ticket-detail-header',
   templateUrl: './ticket-detail-header.component.html',
   styleUrls: ['./ticket-detail-header.component.scss'],

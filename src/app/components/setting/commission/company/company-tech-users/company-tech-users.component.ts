@@ -5,14 +5,15 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
 import { SINGLE_SELECT } from 'src/app/const/users';
 import { DynamicTooltipComponent } from '../../../../shared/dynamic-tooltip/dynamic-tooltip.component';
 import { NgIf, NgStyle, NgFor, NgClass } from '@angular/common';
+import { TicketsTableItemRequestedByComponent } from 'src/app/components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
-    selector: 'company-tech-users',
-    templateUrl: './company-tech-users.component.html',
-    styleUrls: ['./company-tech-users.component.scss'],
-    providers: [TicketsListService],
-    standalone: true,
-    imports: [NgbDropdownModule, NgIf, NgStyle, DynamicTooltipComponent, NgFor, NgClass]
+  selector: 'company-tech-users',
+  templateUrl: './company-tech-users.component.html',
+  styleUrls: ['./company-tech-users.component.scss'],
+  providers: [TicketsListService],
+  standalone: true,
+  imports: [NgbDropdownModule, NgIf, NgStyle, DynamicTooltipComponent, NgFor, NgClass, TicketsTableItemRequestedByComponent]
 })
 export class CompanyTechUsersComponent extends TechUsersComponent {
   @ViewChild('dp', { static: true }) dp: NgbDropdown;

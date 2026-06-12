@@ -12,10 +12,11 @@ import { TicketsListService } from '../../services/tickets-list.service';
 import { TicketDetailContactDetailsHistoryComponent } from './ticket-detail-contact-details-history/ticket-detail-contact-details-history.component';
 import * as moment from "moment";
 import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.component';
+import { TicketsTableItemRequestedByComponent } from '../../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
   standalone: true,
-  imports: [PreviewPhoneMaskComponent, CommonModule],
+  imports: [PreviewPhoneMaskComponent, TicketsTableItemRequestedByComponent, CommonModule],
   selector: 'ticket-detail-contact-details',
   templateUrl: './ticket-detail-contact-details.component.html',
   styleUrls: ['./ticket-detail-contact-details.component.scss'],

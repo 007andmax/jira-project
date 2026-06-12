@@ -11,10 +11,11 @@ import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toast
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersTableCompanyByComponent } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.component';
+import { TicketsTableItemRequestedByComponent } from 'src/app/components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule, NgbDropdownModule, UsersTableCompanyByComponent],
+  imports: [FormsModule, CommonModule, NgbDropdownModule, UsersTableCompanyByComponent, TicketsTableItemRequestedByComponent],
   selector: 'app-quotes-item',
   templateUrl: './quotes-item.component.html',
   styleUrls: ['./quotes-item.component.scss'],

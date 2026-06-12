@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { NgClass, NgStyle, NgIf, NgFor } from '@angular/common';
 import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
 import { UsersTableCompanyByComponent } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.component';
+import { TicketsTableItemRequestedByComponent } from './tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
   selector: 'app-tickets-table-item',
@@ -21,7 +22,7 @@ import { UsersTableCompanyByComponent } from 'src/app/components/users/users-tab
   styleUrls: ['./tickets-table-item.component.scss'],
   providers: [TicketsListService, TicketsPermissionsService],
   standalone: true,
-  imports: [NgClass, FormsModule, NgStyle, NgIf, NgFor, NgbTooltipModule, UsersTableCompanyByComponent]
+  imports: [NgClass, FormsModule, TicketsTableItemRequestedByComponent, NgStyle, NgIf, NgFor, NgbTooltipModule, UsersTableCompanyByComponent]
 })
 export class TicketsTableItemComponent implements OnInit, OnDestroy {
   ticket: Ticket;

@@ -3,10 +3,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TicketsListService } from '../../../tickets/services/tickets-list.service';
 import { NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { TicketsTableItemRequestedByComponent } from '../../../tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, NgbDropdownModule, NgbTooltipModule],
+  imports: [CommonModule, NgbDropdownModule, NgbTooltipModule, TicketsTableItemRequestedByComponent],
   selector: 'app-recurring-tickets-table-assigned-user',
   templateUrl: './recurring-tickets-table-assigned-user.component.html',
   styleUrls: ['./recurring-tickets-table-assigned-user.component.scss'],

@@ -16,6 +16,8 @@ import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { UsersTableCompanyByModule } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.module';
 import { UsersTableCompanyByComponent } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.component';
+import { TicketsTableItemRequestedByComponent } from 'src/app/components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { TicketsTableItemRequestedByModule } from 'src/app/components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
 
 @Component({
   selector: 'app-billable-item',
@@ -23,7 +25,7 @@ import { UsersTableCompanyByComponent } from 'src/app/components/users/users-tab
   styleUrls: ['./billable-item.component.scss'],
   providers: [TicketsListService],
   standalone: true,
-  imports: [NgIf, FormsModule, NgStyle, NgbDropdownModule, CurrencyPipe, UsersTableCompanyByComponent]
+  imports: [NgIf, FormsModule, NgStyle, NgbDropdownModule, CurrencyPipe, UsersTableCompanyByComponent, TicketsTableItemRequestedByComponent]
 })
 export class BillableItemComponent implements OnInit {
   @Input() item: BillableProfile;

@@ -14,10 +14,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 import { TicketDetailProfileUpdatesHeaderInfoComponent } from '../ticket-detail-profile-updates-header-info/ticket-detail-profile-updates-header-info.component';
 import { TicketProfile } from '../../../class/ticket-profile';
+import { TicketsTableItemRequestedByComponent } from '../../../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, TicketDetailProfileUpdatesHeaderInfoComponent, CommonModule],
+  imports: [DynamicTooltipComponent, TicketsTableItemRequestedByComponent, TicketDetailProfileUpdatesHeaderInfoComponent, CommonModule],
   selector: 'ticket-detail-profile-updates-note',
   templateUrl: './ticket-detail-profile-updates-note.component.html',
   styleUrls: ['./ticket-detail-profile-updates-note.component.scss']

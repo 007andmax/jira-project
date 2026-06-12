@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, Input, ViewChild } from '@angular/core';
 import { User } from 'src/app/components/users/class/user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsListService } from '../../../services/tickets-list.service';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
@@ -12,12 +12,22 @@ import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { Ticket } from 'src/app/components/tickets/class/ticket';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgxMaskModule } from 'ngx-mask';
+import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.module';
 
 @Component({
+  standalone: true,
   selector: 'app-tickets-table-item-requested-by',
   templateUrl: './tickets-table-item-requested-by.component.html',
   styleUrls: ['./tickets-table-item-requested-by.component.scss'],
-  providers: [TicketsListService]
+  providers: [TicketsListService],
+  imports: [CommonModule,
+    FormsModule,
+    NgbModule,
+    PreviewPhoneMaskModule,
+    NgxMaskModule.forRoot(),]
 })
 export class TicketsTableItemRequestedByComponent {
   @Input() ticket: any;

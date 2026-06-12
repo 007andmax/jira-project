@@ -9,6 +9,7 @@ import { NgbDropdown, NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/
 import { DynamicTooltipComponent } from '../dynamic-tooltip/dynamic-tooltip.component';
 import { NgIf, NgClass, NgStyle, NgFor } from '@angular/common';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { TicketsTableItemRequestedByComponent } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
   selector: 'app-tech-users',
@@ -16,7 +17,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
   styleUrls: ['./tech-users.component.scss'],
   providers: [TicketsListService],
   standalone: true,
-  imports: [NgbDropdownModule, NgIf, NgClass, NgStyle, NgbTooltipModule, DynamicTooltipComponent, NgFor]
+  imports: [NgbDropdownModule, NgIf, NgClass, NgStyle, NgbTooltipModule, DynamicTooltipComponent, NgFor, TicketsTableItemRequestedByComponent]
 })
 export class TechUsersComponent implements OnInit, OnDestroy {
   @Input('users')

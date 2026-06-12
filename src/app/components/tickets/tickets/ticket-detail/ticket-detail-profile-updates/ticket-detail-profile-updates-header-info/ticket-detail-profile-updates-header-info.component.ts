@@ -6,10 +6,11 @@ import * as moment from "moment";
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketProfile } from '../../../class/ticket-profile';
+import { TicketsTableItemRequestedByComponent } from '../../../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, NgbTooltipModule],
+  imports: [CommonModule, NgbTooltipModule, TicketsTableItemRequestedByComponent],
   selector: 'ticket-detail-profile-updates-header-info',
   templateUrl: './ticket-detail-profile-updates-header-info.component.html',
   styleUrls: ['./ticket-detail-profile-updates-header-info.component.scss']

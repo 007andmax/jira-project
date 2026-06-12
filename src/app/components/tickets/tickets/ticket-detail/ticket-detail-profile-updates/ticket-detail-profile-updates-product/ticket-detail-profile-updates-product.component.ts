@@ -15,10 +15,11 @@ import { TicketDetailProfileUpdatesProductHeaderInfoComponent } from './ticket-d
 import { TicketDetailProfileUpdatesProductItemComponent } from './ticket-detail-profile-updates-product-item/ticket-detail-profile-updates-product-item.component';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketProfile } from '../../../class/ticket-profile';
+import { TicketsTableItemRequestedByComponent } from '../../../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, TicketDetailProfileUpdatesProductHeaderInfoComponent, TicketDetailProfileUpdatesProductItemComponent, CommonModule],
+  imports: [DynamicTooltipComponent, TicketsTableItemRequestedByComponent, TicketDetailProfileUpdatesProductHeaderInfoComponent, TicketDetailProfileUpdatesProductItemComponent, CommonModule],
   selector: 'ticket-detail-profile-updates-product',
   templateUrl: './ticket-detail-profile-updates-product.component.html',
   styleUrls: ['./ticket-detail-profile-updates-product.component.scss']

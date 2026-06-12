@@ -64,10 +64,11 @@ import { TicketDetailProfileEditUpdatesComponent } from './ticket-detail-profile
 import { TicketDetailTotalStatisticsComponent } from './ticket-detail-total-statistics/ticket-detail-total-statistics.component';
 import { CompanyDevicesRemoteAccessComponent } from 'src/app/components/company-devices/company-devices-remote-access/company-devices-remote-access.component';
 import { UsersTableCompanyByComponent } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.component';
+import { TicketsTableItemRequestedByComponent } from '../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
   standalone: true,
-  imports: [TicketDetailTotalStatisticsComponent, UsersTableCompanyByComponent, TicketDetailAddAssignedUserComponent, TicketDetailAttachmentsComponent, TicketDetailChangePriorityComponent, TicketDetailClaimInfoComponent, TicketDetailContactComponent, TicketDetailDevicesComponent, TicketDetailDevicesDetailsComponent, TicketDetailDocumentsComponent, TicketDetailDocumentsPreviewComponent, TicketDetailInfoStatusComponent, TicketDetailLinkedAgentsComponent, TicketDetailPasswordsComponent, TicketDetailProfileEditUpdatesComponent, CommonModule],
+  imports: [TicketDetailTotalStatisticsComponent, TicketsTableItemRequestedByComponent, UsersTableCompanyByComponent, TicketDetailAddAssignedUserComponent, TicketDetailAttachmentsComponent, TicketDetailChangePriorityComponent, TicketDetailClaimInfoComponent, TicketDetailContactComponent, TicketDetailDevicesComponent, TicketDetailDevicesDetailsComponent, TicketDetailDocumentsComponent, TicketDetailDocumentsPreviewComponent, TicketDetailInfoStatusComponent, TicketDetailLinkedAgentsComponent, TicketDetailPasswordsComponent, TicketDetailProfileEditUpdatesComponent, CommonModule],
   selector: 'ticket-detail',
   templateUrl: './ticket-detail.component.html',
   styleUrls: ['./ticket-detail.component.scss'],

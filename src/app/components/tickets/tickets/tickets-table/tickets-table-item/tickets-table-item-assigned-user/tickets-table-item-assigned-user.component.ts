@@ -10,12 +10,14 @@ import { NgbDropdown, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { ToastrService } from 'ngx-toastr';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { TicketsTableItemRequestedByComponent } from '../tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
   selector: 'app-tickets-table-item-assigned-user',
   templateUrl: './tickets-table-item-assigned-user.component.html',
   styleUrls: ['./tickets-table-item-assigned-user.component.scss'],
-  providers: [TicketsPermissionsService]
+  providers: [TicketsPermissionsService],
+  imports: [TicketsTableItemRequestedByComponent]
 
 })
 export class TicketsTableItemAssignedUserComponent {

@@ -12,14 +12,15 @@ import { AddAssignedUserComponent } from '../../../ticket-edit-aside/add-assigne
 import { NgbModal, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { TicketDetailProfileFormUpdateComponent } from '../ticket-detail-profile-form-update.component';
 import { NgIf, NgStyle, NgFor } from '@angular/common';
+import { TicketsTableItemRequestedByComponent } from '../../../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
-    selector: 'ticket-detail-profile-form-update-header',
-    templateUrl: './ticket-detail-profile-form-update-header.component.html',
-    styleUrls: ['./ticket-detail-profile-form-update-header.component.scss'],
-    providers: [TicketsListService],
-    standalone: true,
-    imports: [NgIf, NgbDropdownModule, NgStyle, NgFor, AddAssignedUserNoteComponent]
+  selector: 'ticket-detail-profile-form-update-header',
+  templateUrl: './ticket-detail-profile-form-update-header.component.html',
+  styleUrls: ['./ticket-detail-profile-form-update-header.component.scss'],
+  providers: [TicketsListService],
+  standalone: true,
+  imports: [NgIf, NgbDropdownModule, TicketsTableItemRequestedByComponent, NgStyle, NgFor, AddAssignedUserNoteComponent]
 })
 export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   @Input() ticketProfile: TicketProfile = new TicketProfile();

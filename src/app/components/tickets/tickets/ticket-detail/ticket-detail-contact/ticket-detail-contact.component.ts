@@ -7,10 +7,11 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketProfile } from '../../class/ticket-profile';
 import { TicketsListService } from '../../services/tickets-list.service';
 import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.component';
+import { TicketsTableItemRequestedByComponent } from '../../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
   standalone: true,
-  imports: [PreviewPhoneMaskComponent, CommonModule],
+  imports: [PreviewPhoneMaskComponent, TicketsTableItemRequestedByComponent, CommonModule],
   selector: 'ticket-detail-contact',
   templateUrl: './ticket-detail-contact.component.html',
   styleUrls: ['./ticket-detail-contact.component.scss'],

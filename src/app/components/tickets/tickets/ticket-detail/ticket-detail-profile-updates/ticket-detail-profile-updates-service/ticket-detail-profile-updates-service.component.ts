@@ -14,10 +14,11 @@ import { TicketDetailProfileUpdatesServiceHeaderInfoComponent } from './ticket-d
 import { TicketDetailProfileUpdatesServiceItemComponent } from './ticket-detail-profile-updates-service-item/ticket-detail-profile-updates-service-item.component';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketProfile } from '../../../class/ticket-profile';
+import { TicketsTableItemRequestedByComponent } from '../../../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, TicketDetailProfileUpdatesServiceHeaderInfoComponent, TicketDetailProfileUpdatesServiceItemComponent, CommonModule],
+  imports: [DynamicTooltipComponent, TicketsTableItemRequestedByComponent, TicketDetailProfileUpdatesServiceHeaderInfoComponent, TicketDetailProfileUpdatesServiceItemComponent, CommonModule],
   selector: 'ticket-detail-profile-updates-service',
   templateUrl: './ticket-detail-profile-updates-service.component.html',
   styleUrls: ['./ticket-detail-profile-updates-service.component.scss']

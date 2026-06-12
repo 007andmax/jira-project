@@ -7,11 +7,13 @@ import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { TicketsPermissionsService } from '../../../../ticket-edit-aside/services/tickets-permissions.service';
+import { TicketsTableItemRequestedByComponent } from '../../tickets-table-item-requested-by/tickets-table-item-requested-by.component';
 
 @Component({
   selector: 'app-tickets-table-item-assigned-user-item',
   templateUrl: './tickets-table-item-assigned-user-item.component.html',
-  styleUrls: ['./tickets-table-item-assigned-user-item.component.scss']
+  styleUrls: ['./tickets-table-item-assigned-user-item.component.scss'],
+  imports: [TicketsTableItemRequestedByComponent]
 })
 export class TicketsTableItemAssignedUserItemComponent implements OnInit {
   @Input() ticket: Ticket;
