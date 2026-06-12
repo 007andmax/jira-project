@@ -10,10 +10,11 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { UsersTableCompanyByComponent } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.component';
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule, NgbDropdownModule],
+  imports: [FormsModule, CommonModule, NgbDropdownModule, UsersTableCompanyByComponent],
   selector: 'app-quotes-item',
   templateUrl: './quotes-item.component.html',
   styleUrls: ['./quotes-item.component.scss'],

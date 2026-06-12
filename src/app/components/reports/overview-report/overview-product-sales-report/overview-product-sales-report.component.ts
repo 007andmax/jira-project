@@ -4,9 +4,10 @@ import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-so
 import { CompanyFilterTop } from 'src/app/components/companies/class/company-filter-top';
 
 @Component({
-  selector: 'app-overview-product-sales-report',
-  templateUrl: './overview-product-sales-report.component.html',
-  styleUrls: ['./overview-product-sales-report.component.scss']
+    selector: 'app-overview-product-sales-report',
+    templateUrl: './overview-product-sales-report.component.html',
+    styleUrls: ['./overview-product-sales-report.component.scss'],
+    standalone: true
 })
 export class OverviewProductSalesReportComponent extends OverviewReportComponent {
   @Input() type!: string;

@@ -17,6 +17,7 @@ import { NgClass, NgIf } from '@angular/common';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { Company } from 'src/app/interfaces/company/company';
+import { UsersTableCompanyByComponent } from '../../users/users-table/users-table-company-by/users-table-company-by.component';
 
 /**
  * Password manager data table component
@@ -33,6 +34,7 @@ import { Company } from 'src/app/interfaces/company/company';
     NgIf,
     DynamicTooltipComponent,
     NgbDropdownModule,
+    UsersTableCompanyByComponent
   ],
 
 })

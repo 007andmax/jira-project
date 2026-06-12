@@ -1,12 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
+import { UsersTableCompanyByComponent } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.component';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-payment-item-company',
   templateUrl: './payment-item-company.component.html',
   styleUrls: ['./payment-item-company.component.scss'],
-  providers: [TicketsListService]
+  providers: [TicketsListService, UsersTableCompanyByComponent]
 })
 export class PaymentItemCompanyComponent {
   @Input() company: any;

@@ -13,6 +13,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { NgClass, NgStyle, NgIf, NgFor } from '@angular/common';
 import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
+import { UsersTableCompanyByComponent } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.component';
 
 @Component({
   selector: 'app-tickets-table-item',
@@ -20,7 +21,7 @@ import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tick
   styleUrls: ['./tickets-table-item.component.scss'],
   providers: [TicketsListService, TicketsPermissionsService],
   standalone: true,
-  imports: [NgClass, FormsModule, NgStyle, NgIf, NgFor, NgbTooltipModule]
+  imports: [NgClass, FormsModule, NgStyle, NgIf, NgFor, NgbTooltipModule, UsersTableCompanyByComponent]
 })
 export class TicketsTableItemComponent implements OnInit, OnDestroy {
   ticket: Ticket;

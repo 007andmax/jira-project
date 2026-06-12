@@ -24,12 +24,14 @@ import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-to
 import { PreviewPhoneMaskComponent } from '../../shared/preview-phone-mask/preview-phone-mask.component';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
+import { UsersTableCompanyByComponent } from '../../users/users-table/users-table-company-by/users-table-company-by.component';
 @Component({
   standalone: true,
   selector: 'app-companies-table',
   templateUrl: './companies-table.component.html',
   styleUrls: ['./companies-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [UsersTableCompanyByComponent],
   providers: [TicketsListService]
 })
 export class CompaniesTableComponent implements OnInit, OnDestroy {

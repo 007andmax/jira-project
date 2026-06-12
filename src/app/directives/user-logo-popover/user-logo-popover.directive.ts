@@ -4,7 +4,8 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Directive({
-  selector: '[appUserLogoPopover]'
+    selector: '[appUserLogoPopover]',
+    standalone: true
 })
 export class UserLogoPopoverDirective {
   @Input() popover: NgbPopover;

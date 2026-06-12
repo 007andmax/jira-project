@@ -19,7 +19,7 @@ describe('ContractsAsideBlockTimeBillingUsersComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         MatChipModule,
         MatChipListModule,
         NoopAnimationsModule,
@@ -27,15 +27,13 @@ describe('ContractsAsideBlockTimeBillingUsersComponent unit test', () => {
         UserLogoPopoverModule,
         NgbModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
-        HttpClientModule],
-      declarations: [ContractsAsideBlockTimeBillingUsersComponent
-      ],
-      providers: [TicketsListService]
-    }).compileComponents();
+        HttpClientModule, ContractsAsideBlockTimeBillingUsersComponent],
+    providers: [TicketsListService]
+}).compileComponents();
 
   });
 

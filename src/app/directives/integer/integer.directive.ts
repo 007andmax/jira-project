@@ -2,8 +2,9 @@ import { Directive, ElementRef, Injectable } from '@angular/core';
 import { CommonService } from 'src/app/services/common/common.service';
 
 @Directive({
-  selector: '[appInteger]',
-  providers: [CommonService]
+    selector: '[appInteger]',
+    providers: [CommonService],
+    standalone: true
 })
 @Injectable()
 export class IntegerDirective {

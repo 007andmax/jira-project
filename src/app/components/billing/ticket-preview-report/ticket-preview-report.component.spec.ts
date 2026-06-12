@@ -43,7 +43,7 @@ describe('TicketPreviewReportComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         TicketPreviewReportRoutingModule,
         DecimalNumberModule,
@@ -71,14 +71,13 @@ describe('TicketPreviewReportComponent unit test', () => {
         MatChipListModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NoopAnimationsModule],
-      declarations: [TicketPreviewReportComponent, TicketPreviewReportProductItemComponent, TicketPreviewReportProductItemDropDownComponent, TicketPreviewReportServiceItemComponent, TicketPreviewReportProductItemManufactureComponent, TicketPreviewReportHeaderComponent, TicketPreviewReportStatusDropDownComponent
-      ]
-    }).compileComponents();
+    declarations: [TicketPreviewReportComponent, TicketPreviewReportProductItemComponent, TicketPreviewReportProductItemDropDownComponent, TicketPreviewReportServiceItemComponent, TicketPreviewReportProductItemManufactureComponent, TicketPreviewReportHeaderComponent, TicketPreviewReportStatusDropDownComponent]
+}).compileComponents();
 
   });
 

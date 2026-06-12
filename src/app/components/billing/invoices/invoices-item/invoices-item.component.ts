@@ -15,9 +15,10 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
+import { UsersTableCompanyByComponent } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.component';
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule, NgbDropdownModule],
+  imports: [FormsModule, CommonModule, NgbDropdownModule, UsersTableCompanyByComponent],
   selector: 'app-invoices-item',
   templateUrl: './invoices-item.component.html',
   styleUrls: ['./invoices-item.component.scss'],

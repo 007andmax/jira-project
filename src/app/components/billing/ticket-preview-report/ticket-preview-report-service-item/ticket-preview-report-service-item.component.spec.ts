@@ -14,17 +14,16 @@ describe('TicketPreviewReportServiceItemComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CommonModule,
+    imports: [CommonModule,
         HttpClientModule,
         ToastrModule.forRoot({
-          closeButton: true,
-          timeOut: 5000,
-          onActivateTick: true
+            closeButton: true,
+            timeOut: 5000,
+            onActivateTick: true
         }),
         NoopAnimationsModule],
-      declarations: [TicketPreviewReportServiceItemComponent
-      ]
-    }).compileComponents();
+    declarations: [TicketPreviewReportServiceItemComponent]
+}).compileComponents();
 
   });
   it('check "onChangeDescription"', () => {

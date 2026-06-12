@@ -21,8 +21,8 @@ import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
 import { NumberModule } from 'src/app/directives/number/number.module';
-import { IntegerModule } from 'src/app/directives/integer/integer.module';
-import { TicketsTableItemStatusModule } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-status/tickets-table-item-status.module';
+
+
 import { TicketPreviewReportProductItemManufactureComponent } from './ticket-preview-report-product-item/ticket-preview-report-product-item-manufacture/ticket-preview-report-product-item-manufacture.component';
 import { TicketPreviewReportHeaderComponent } from './ticket-preview-report-header/ticket-preview-report-header.component';
 import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datepicker.module';
@@ -41,34 +41,32 @@ import { ClickOutsideModule } from 'src/app/directives/click-otside/click-otside
 
     ],
     imports: [
-        CommonModule,
-        FormsModule,
-        TicketPreviewReportRoutingModule,
-        DecimalNumberModule,
-        ToFixedModule,
-        MatErrorModule,
-        DatePickerModule,
-        NgbModule,
-        FilterModule,
-        DynamicTooltipModule,
-        ContractsAsideDiscountModule,
-        ServicesListModule,
-        TicketProfileUpdatesServiceTimepickerModule,
-        TicketProfileUpdatesServiceDurationModule,
-        TextAreaModule,
-        DisabledBtnModule,
-        PreloaderTicketModule,
-        NumberModule,
-        IntegerModule,
-        TicketsTableItemStatusModule,
-        MultiDatepickerModule,
-        DropDownModule,
-        InfiniteScrollModule,
-        MatChipModule,
-        MatFormFieldModule,
-        MatChipListModule,
-        ClickOutsideModule
-    ],
+    CommonModule,
+    FormsModule,
+    TicketPreviewReportRoutingModule,
+    DecimalNumberModule,
+    ToFixedModule,
+    MatErrorModule,
+    DatePickerModule,
+    NgbModule,
+    FilterModule,
+    DynamicTooltipModule,
+    ContractsAsideDiscountModule,
+    ServicesListModule,
+    TicketProfileUpdatesServiceTimepickerModule,
+    TicketProfileUpdatesServiceDurationModule,
+    TextAreaModule,
+    DisabledBtnModule,
+    PreloaderTicketModule,
+    NumberModule,
+    MultiDatepickerModule,
+    DropDownModule,
+    InfiniteScrollModule,
+    MatChipModule,
+    MatFormFieldModule,
+    MatChipListModule,
+    ClickOutsideModule
+],
 
 })
 export class TicketPreviewReportModule { }

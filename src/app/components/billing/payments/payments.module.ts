@@ -24,7 +24,7 @@ import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-
 
 import { PaymentsCardsComponent } from './payments-cards/payments-cards.component';
 import { PaymentItemCompanyComponent } from './payment-item/payment-item-company/payment-item-company.component';
-import { CompanyLogoPopoverModule } from 'src/app/directives/company-logo-popover/company-logo-popover.module';
+
 import { UsersTableCompanyByModule } from '../../users/users-table/users-table-company-by/users-table-company-by.module';
 
 
@@ -43,25 +43,24 @@ import { UsersTableCompanyByModule } from '../../users/users-table/users-table-c
 
     ],
     imports: [
-        CommonModule,
-        InfiniteScrollModule,
-        NgbModule,
-        FormsModule,
-        DisabledBtnModule,
-        PreloaderTicketModule,
-        DatePickerModule,
-        NumberModule,
-        MultiDatepickerModule,
-        PaymentsRoutingModule,
-        PreviewPhoneMaskModule,
-        KeyUpEnterModule,
-        InvoiceExportModule,
-        CompanyDropDownModule,
-        DropDownModule,
-        MatErrorModule,
-        CompanyLogoPopoverModule,
-        UsersTableCompanyByModule
-    ],
+    CommonModule,
+    InfiniteScrollModule,
+    NgbModule,
+    FormsModule,
+    DisabledBtnModule,
+    PreloaderTicketModule,
+    DatePickerModule,
+    NumberModule,
+    MultiDatepickerModule,
+    PaymentsRoutingModule,
+    PreviewPhoneMaskModule,
+    KeyUpEnterModule,
+    InvoiceExportModule,
+    CompanyDropDownModule,
+    DropDownModule,
+    MatErrorModule,
+    UsersTableCompanyByModule
+],
 
 
 

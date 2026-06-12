@@ -10,6 +10,7 @@ import { ContractsStateService } from 'src/app/states/contracts/contracts-state.
 import { ContractsListService } from '../../services/contracts-list.service';
 import { NgClass, NgIf, CurrencyPipe } from '@angular/common';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
+import { UsersTableCompanyByComponent } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.component';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
   styleUrls: ['./contracts-table-item.component.scss'],
   providers: [ContractsListService, TicketsListService],
   standalone: true,
-  imports: [NgClass, NgIf, NgbTooltipModule, NgbDropdownModule, CurrencyPipe]
+  imports: [NgClass, NgIf, NgbTooltipModule, NgbDropdownModule, CurrencyPipe, UsersTableCompanyByComponent]
 })
 export class ContractsTableItemComponent implements OnInit {
   @Input() contract: ContractItem;

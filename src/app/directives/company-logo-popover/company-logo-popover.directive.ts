@@ -5,7 +5,8 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Directive({
-  selector: '[appCompanyLogoPopover]'
+    selector: '[appCompanyLogoPopover]',
+    standalone: true
 })
 export class CompanyLogoPopoverDirective {
 

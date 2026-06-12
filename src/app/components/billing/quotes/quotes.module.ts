@@ -39,8 +39,8 @@ import { QuoteAsideAddChangeAddressComponent } from './quote-aside-add/quote-asi
 
 import { QuoteAsidePreviewBodyModule } from './quote-aside-preview/quote-aside-preview-body/quote-aside-preview-body.module';
 import { TicketsTableItemRequestedByModule } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
-import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
-import { CompanyLogoPopoverModule } from 'src/app/directives/company-logo-popover/company-logo-popover.module';
+
+
 import { UsersTableCompanyByModule } from '../../users/users-table/users-table-company-by/users-table-company-by.module';
 
 
@@ -73,33 +73,31 @@ import { UsersTableCompanyByModule } from '../../users/users-table/users-table-c
         QuoteAsideAddChangeAddressComponent
     ],
     imports: [
-        CommonModule,
-        InfiniteScrollModule,
-        NgbModule,
-        DisabledBtnModule,
-        PreloaderTicketModule,
-        DropDownModule,
-        InvoiceFormEditCustomerModule,
-        FormsModule,
-        DatePickerModule,
-        InvoiceRegularNoteModule,
-        MultiDatepickerModule,
-        DecimalNumberModule,
-        FilterModule,
-        QuotesRoutingModule,
-        PreviewPhoneMaskModule,
-        KeyUpEnterModule,
-        InvoiceChangeAddressModule,
-        CompanyDropDownModule,
-        NumberModule,
-        MatErrorModule,
-        TextAreaModule,
-        QuoteAsidePreviewBodyModule,
-        TicketsTableItemRequestedByModule,
-        UserLogoPopoverModule,
-        CompanyLogoPopoverModule,
-        UsersTableCompanyByModule
-    ],
+    CommonModule,
+    InfiniteScrollModule,
+    NgbModule,
+    DisabledBtnModule,
+    PreloaderTicketModule,
+    DropDownModule,
+    InvoiceFormEditCustomerModule,
+    FormsModule,
+    DatePickerModule,
+    InvoiceRegularNoteModule,
+    MultiDatepickerModule,
+    DecimalNumberModule,
+    FilterModule,
+    QuotesRoutingModule,
+    PreviewPhoneMaskModule,
+    KeyUpEnterModule,
+    InvoiceChangeAddressModule,
+    CompanyDropDownModule,
+    NumberModule,
+    MatErrorModule,
+    TextAreaModule,
+    QuoteAsidePreviewBodyModule,
+    TicketsTableItemRequestedByModule,
+    UsersTableCompanyByModule
+],
 
 })
 export class QuotesModule { }

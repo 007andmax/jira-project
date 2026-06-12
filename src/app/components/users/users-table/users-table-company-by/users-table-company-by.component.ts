@@ -1,8 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbActiveModal, NgbConfig, NgbDropdown, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbConfig, NgbDropdown, NgbModal, NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxMaskModule } from 'ngx-mask';
 import { ToastrService } from 'ngx-toastr';
 import { GetDirectionComponent } from 'src/app/components/shared/get-direction/get-direction.component';
+import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.module';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { USERS } from 'src/app/const/emails';
 import { Company } from 'src/app/interfaces/company/company';
@@ -18,6 +22,12 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
   selector: 'app-users-table-company-by',
   templateUrl: './users-table-company-by.component.html',
   styleUrls: ['./users-table-company-by.component.scss'],
+  standalone: true,
+  imports: [CommonModule,
+    FormsModule,
+    NgbModule,
+    PreviewPhoneMaskModule,
+    NgxMaskModule.forRoot(),],
   providers: [TicketsListService]
 })
 export class UsersTableCompanyByComponent {
