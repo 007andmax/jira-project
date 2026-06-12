@@ -67,8 +67,8 @@ export class InventoryFilterComponent implements OnInit {
     this.cd.detectChanges();
   }
   selectLastSold(data) {
-    this.filter.setLastSold(data.type);
-    this.inventoryStateService.setLastSold(data.type);
+    this.filter.setLastSold(data ? data.type : null);
+    this.inventoryStateService.setLastSold(data ? data.type : null);
     this.onResetSelected.emit(null);
     this.cd.detectChanges();
   }
