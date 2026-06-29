@@ -16,7 +16,7 @@ export class InventoryFilterComponent implements OnInit {
   showAddCategory: boolean = false;
   categories: Array<CategoryProduct> = [];
   sub: Subscription = new Subscription();
-  lastSold: Array<TitleListType> = [new TitleListType('30 days', 'DAYS_30'), new TitleListType('60 days', 'DAYS_60'), new TitleListType('90 days', 'DAYS_90'), new TitleListType('180 days', 'DAYS_180'), new TitleListType('1 year', 'YEAR_1')];
+  lastSold: Array<TitleListType> = [new TitleListType('Last sold over 30 days ago', 'DAYS_30'), new TitleListType('Last sold over 60 days ago', 'DAYS_60'), new TitleListType('Last sold over 90 days ago', 'DAYS_90'), new TitleListType('Last sold over 180 days ago', 'DAYS_180'), new TitleListType('Last sold over 1 year ago', 'YEAR_1')];
   listActive: Array<TitleListType> = [new TitleListType('Active products', 'ACTIVE'), new TitleListType('Inactive products', 'NO_ACTIVE')];
   selectedActive = new TitleListType('Active products', 'ACTIVE');
   listTypes: Array<ProductType> = [];
