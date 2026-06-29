@@ -202,8 +202,9 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     });
   }
   public checkDisableSelect() {
+    console.log("this.ticketsStateService.getTicketsForMerge()", this.ticketsStateService.getTicketsForMerge());
     return this.ticketsStateService.getTicketsForMerge().filter((item, i, list) => {
-      if (item.status == 'IN_PROGRESS' || item.status == 'ON_HOLD' || item.status == null || item.customStatus != null) {
+      if (item.status == 'IN_PROGRESS' || item.status == 'ON_HOLD' || item.status == 'PENDING_REVIEW' || item.status == null || item.customStatus != null) {
         return (list.length > 0 ? list[0].companyId != item.companyId : false);
       } else {
         return true;
