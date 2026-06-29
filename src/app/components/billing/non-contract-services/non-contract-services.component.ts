@@ -10,7 +10,7 @@ import { NonContractServicesRealTimeService } from 'src/app/states/non-contract-
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { fadeInAnimation } from 'src/app/animations';
-import { NgIf, NgFor } from '@angular/common';
+import { NgIf, NgFor, CommonModule } from '@angular/common';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
 import { NonContractServicesContractsComponent } from './non-contract-services-contracts/non-contract-services-contracts.component';
@@ -24,7 +24,7 @@ import { NonContractServicesItemComponent } from './non-contract-services-item/n
   host: { '[@fadeInAnimation]': '' },
   styleUrls: ['./non-contract-services.component.scss'],
   standalone: true,
-  imports: [NgIf, NgbTooltipModule, NgFor, NonContractServicesItemComponent, NonContractServicesContractsComponent]
+  imports: [NgIf, NgbTooltipModule, CommonModule, NgFor, NonContractServicesItemComponent, NonContractServicesContractsComponent]
 })
 export class NonContractServicesComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;

@@ -1,5 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
+import { NgbAccordionModule, NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 import { ProductListComponent } from 'src/app/components/shared/product-list/product-list.component';
+import { ModelPipe } from 'src/app/pipe/model.pipe';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { ProductService } from 'src/app/services/product/product.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
@@ -9,7 +13,9 @@ import { CategoryProductitem } from 'src/class/category-product-item';
 @Component({
   selector: 'app-ticket-preview-report-product-item-drop-down',
   templateUrl: './ticket-preview-report-product-item-drop-down.component.html',
-  styleUrls: ['./ticket-preview-report-product-item-drop-down.component.scss']
+  styleUrls: ['./ticket-preview-report-product-item-drop-down.component.scss'],
+  standalone: true,
+  imports: [NgbModule, CommonModule, DynamicTooltipComponent]
 })
 export class TicketPreviewReportProductItemDropDownComponent extends ProductListComponent {
   shortVersion: boolean = true;

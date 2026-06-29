@@ -15,7 +15,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { fadeInAnimation } from 'src/app/animations';
 import { BillableItemComponent } from './billable-item/billable-item.component';
 import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
-import { NgIf, NgFor } from '@angular/common';
+import { NgIf, NgFor, CommonModule } from '@angular/common';
 import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
 
 
@@ -28,7 +28,7 @@ import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
   host: { '[@fadeInAnimation]': '' },
   providers: [TicketsListService],
   standalone: true,
-  imports: [NgIf, DisabledBtnDirective, PreloaderTicketComponent, NgFor, BillableItemComponent]
+  imports: [NgIf, CommonModule, DisabledBtnDirective, PreloaderTicketComponent, NgFor, BillableItemComponent]
 })
 export class BillableComponent implements OnInit, OnDestroy {
   @ViewChild('saveAndDownloadBtn', { static: false }) saveAndDownloadBtn: DisabledBtnDirective;

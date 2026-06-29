@@ -3,7 +3,7 @@ import { ContractStatisticsItem } from '../class/contracts-statistics-item';
 import { ContractsService } from 'src/app/services/contracts/contracts.service';
 import { ContractStatisticsFilter } from '../class/contracts-statistics-filter';
 import { ContractsStatisticsTableItemComponent } from './contracts-statistics-table-item/contracts-statistics-table-item.component';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
@@ -11,7 +11,7 @@ import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-so
   templateUrl: './contracts-statistics-table.component.html',
   styleUrls: ['./contracts-statistics-table.component.scss'],
   standalone: true,
-  imports: [NgFor, ContractsStatisticsTableItemComponent, NgIf]
+  imports: [NgFor, ContractsStatisticsTableItemComponent, NgIf, CommonModule]
 })
 export class ContractsStatisticsTableComponent implements OnInit {
   filter: ContractStatisticsFilter = new ContractStatisticsFilter();

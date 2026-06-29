@@ -7,11 +7,16 @@ import { TicketPreviewReportFilterValidate } from '../class/ticket-preview-repor
 import { TicketPreviewReportFilter } from '../class/ticket-preview-report-filter';
 import * as moment from "moment";
 import { TicketPreviewReportStatus } from '../class/ticket-preview-report-status';
+import { CommonModule } from '@angular/common';
+import { MultiDatepickerComponent } from 'src/app/components/shared/multi-datepicker/multi-datepicker.component';
+import { TicketPreviewReportStatusDropDownComponent } from '../ticket-preview-report-status-drop-down/ticket-preview-report-status-drop-down.component';
 
 @Component({
   selector: 'app-ticket-preview-report-header',
   templateUrl: './ticket-preview-report-header.component.html',
   styleUrls: ['./ticket-preview-report-header.component.scss'],
+  standalone: true,
+  imports: [CommonModule, MultiDatepickerComponent, TicketPreviewReportStatusDropDownComponent]
 
 })
 export class TicketPreviewReportHeaderComponent {

@@ -18,7 +18,7 @@ import { SubscriptionServicesEditComponent } from './subscription-services-edit/
 import { SubscriptionServicesAddComponent } from './subscription-services-add/subscription-services-add.component';
 import { SubscriptionServicesItemComponent } from './subscription-services-item/subscription-services-item.component';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgIf, NgFor } from '@angular/common';
+import { NgIf, NgFor, CommonModule } from '@angular/common';
 import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
 
 @Component({
@@ -29,7 +29,7 @@ import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
   templateUrl: './subscription-services.component.html',
   styleUrls: ['./subscription-services.component.scss'],
   standalone: true,
-  imports: [NgIf, NgbTooltipModule, NgFor, SubscriptionServicesItemComponent, SubscriptionServicesAddComponent, SubscriptionServicesEditComponent, ContractsEditComponent]
+  imports: [NgIf, NgbTooltipModule, CommonModule, NgFor, SubscriptionServicesItemComponent, SubscriptionServicesAddComponent, SubscriptionServicesEditComponent, ContractsEditComponent]
 })
 export class SubscriptionServicesComponent implements OnInit, OnDestroy {
   serviceAgreement: ServiceAgreement;

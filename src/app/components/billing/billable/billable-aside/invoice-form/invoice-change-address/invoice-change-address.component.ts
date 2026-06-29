@@ -1,13 +1,24 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
+import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.component';
 import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
-    selector: 'invoice-change-address',
-    templateUrl: './invoice-change-address.component.html',
-    styleUrls: ['./invoice-change-address.component.scss'],
-    standalone: true
+  selector: 'invoice-change-address',
+  templateUrl: './invoice-change-address.component.html',
+  styleUrls: ['./invoice-change-address.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    NgbModule,
+    PreviewPhoneMaskComponent,
+    InvoiceChangeAddressComponent
+  ]
 })
 export class InvoiceChangeAddressComponent implements OnInit {
   @Input() quoteCompany: CompanyProfile = new CompanyProfile();

@@ -8,11 +8,20 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatChipListComponent } from 'src/app/components/shared/mat-chip-list/mat-chip-list.component';
+import { MatChipComponent } from 'src/app/components/shared/mat-chip/mat-chip.component';
+import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-ticket-preview-report-status-drop-down',
   templateUrl: './ticket-preview-report-status-drop-down.component.html',
-  styleUrls: ['./ticket-preview-report-status-drop-down.component.scss']
+  styleUrls: ['./ticket-preview-report-status-drop-down.component.scss'],
+  standalone: true,
+  imports: [NgbDropdown, CommonModule, MatFormFieldComponent, MatChipListComponent, DynamicTooltipComponent, MatChipComponent, MatErrorComponent]
 })
 export class TicketPreviewReportStatusDropDownComponent extends TicketsFilterCompaniesDropDownComponent {
   ticketsStatus: Array<TicketStatus> = [];
