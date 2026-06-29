@@ -22,11 +22,15 @@
         <div class="tab-pane__table-header">
             <div class="tab-pane__table-row">
                 <div
-                    class="tab-pane__table-cell crm-settings-company-industry-table__count pointer"
+                    class="tab-pane__table-cell crm-settings-company-industry-table__count pointer qt-df"
                     (click)="onFilter('name')"
                 >
                     Model
                     <div class="qt-table-modern__sorting--new"></div>
+                       <div *ngIf="sortBy.sortBy == 'name'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                 </div>
                 <div class="tab-pane__table-cell crm-settings-company-industry-table__action"></div>
             </div>

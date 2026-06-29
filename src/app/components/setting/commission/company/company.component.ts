@@ -8,6 +8,7 @@ import { UsersStateService } from "src/app/states/users/users-state.service";
 import { PermissionsService } from "src/app/services/permissions/permissions.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 import { CompanyCommissionFilter } from "./class/company-commission-filter";
+import { TicketSortBy } from "src/app/components/tickets/tickets/class/ticket-sort-by";
 
 @Component({
   selector: "app-company-commission",
@@ -25,7 +26,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
   filterTechUsers = "";
   selectedIdx = -1;
   filter: CompanyCommissionFilter = new CompanyCommissionFilter();
-
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   sub: Subscription = new Subscription();
   config = {
     displayKey: "firstName",
@@ -62,7 +63,9 @@ export class CompanyComponent implements OnInit, OnDestroy {
     this.getUsers();
   }
   onFilter(field) {
+    this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.clientsCompanies);
+    this.sortBy.sortDirection = this.filter.direction;
   }
   /**
  * get users list

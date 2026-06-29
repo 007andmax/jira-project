@@ -7,6 +7,7 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ProductsCategoryFilter } from '../../products-settings/class/products-category-filter';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-product',
@@ -24,6 +25,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   category: any;
   factItem = false;
   sub: Subscription = new Subscription();
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   constructor(
     private commissionService: CommissionService,
     private toastrService: ToastrService,
@@ -57,7 +59,9 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   onFilter(field) {
+    this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.categories);
+    this.sortBy.sortDirection = this.filter.direction;
   }
 
   /**

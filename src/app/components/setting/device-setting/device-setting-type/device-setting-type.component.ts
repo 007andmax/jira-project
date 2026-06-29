@@ -14,6 +14,7 @@ import { DeviceType } from 'src/app/components/company-devices/class/device-type
 import { DeviceFilterType } from './class/device-filter-type';
 import { DeviceSettingTypeCheckUseComponent } from './device-setting-type-check-use/device-setting-type-check-use.component';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-device-setting-type',
@@ -23,11 +24,11 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 export class DeviceSettingTypeComponent implements OnInit {
   showPreloader: boolean = true;
   addDeviceType: boolean = false;
-
   filter: DeviceFilterType = new DeviceFilterType();
   deviceTypes: Array<DeviceType> = [];
   sub: Subscription = new Subscription();
   @ViewChild("models", { static: true }) models: DeviceSettingModelsComponent;
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   constructor(private devicesStateService: DevicesStateService,
     public cd: ChangeDetectorRef,
     private confirmStateService: ConfirmStateService,
@@ -99,7 +100,9 @@ export class DeviceSettingTypeComponent implements OnInit {
     return this.deviceTypes.filter(item => item.selected).length;
   }
   onFilter(field) {
-    this.filter.onFilter(field, this.deviceTypes)
+    this.sortBy.sortBy = field;
+    this.filter.onFilter(field, this.deviceTypes);
+    this.sortBy.sortDirection = this.filter.direction;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

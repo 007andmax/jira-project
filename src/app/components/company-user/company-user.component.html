@@ -42,6 +42,10 @@
                         >
                             Name
                             <span class="qt-table-modern__sorting"></span>
+                                <div *ngIf="sortBy.sortBy == 'NAME'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                         </div>
                         <div class="users-table__industry">Job Title</div>
                         <div class="users-table__contract-no">Contact No</div>
@@ -52,6 +56,10 @@
                         >
                             Tickets
                             <span class="qt-table-modern__sorting"></span>
+                                <div *ngIf="sortBy.sortBy == 'TICKET_NUMBER'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                         </div>
                         <div class="users-table__tickets pointer">Display</div>
                         <div
@@ -60,6 +68,10 @@
                         >
                             Portal Status
                             <span class="qt-table-modern__sorting"></span>
+                                <div *ngIf="sortBy.sortBy == 'PORTAL_STATUS'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                         </div>
                         <div class="users-table__menu"></div>
                     </div>

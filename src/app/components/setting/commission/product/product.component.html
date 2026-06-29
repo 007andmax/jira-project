@@ -12,11 +12,15 @@
                     </label>
                 </div>
                 <div
-                    class="tab-pane__table-cell commissions-product__company-name pointer"
+                    class="tab-pane__table-cell commissions-product__company-name pointer qt-df"
                     (click)="onFilter('name')"
                 >
                     Product Name
                     <div class="qt-table-modern__sorting--new"></div>
+                      <div *ngIf="sortBy.sortBy == 'name'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                 </div>
                 <div class="tab-pane__table-cell commissions-product__rate">Commission Rate (%)</div>
                 <div class="tab-pane__table-cell commissions-product__action"></div>

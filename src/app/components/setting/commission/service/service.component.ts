@@ -8,6 +8,7 @@ import { CHANGE_COMMISSION_SERVICE, DELETE_COMMISSION_SERVICE } from 'src/app/co
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { Subscription } from 'rxjs';
 import { ServiceCommissionFilter } from './class/service-commission-filter';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-service',
@@ -29,6 +30,8 @@ export class ServiceComponent implements OnInit, OnDestroy {
   rate: any;
   id: string;
   sub: Subscription = new Subscription();
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
+  sortSpecialBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   constructor(
     private commissionService: CommissionService,
     private toastrService: ToastrService,
@@ -63,11 +66,15 @@ export class ServiceComponent implements OnInit, OnDestroy {
   }
 
   onFilter(field) {
+    this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.services);
+    this.sortBy.sortDirection = this.filter.direction;
   }
 
   onFilterSpecial(field) {
+    this.sortSpecialBy.sortBy = field;
     this.filter.onFilter(field, this.specialService);
+    this.sortSpecialBy.sortDirection = this.filter.direction;
   }
 
   /**

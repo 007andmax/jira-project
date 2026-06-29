@@ -19,6 +19,7 @@ import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { DeviceTagsStateService } from 'src/app/states/device-tags/device-tags-state.service';
 import { fadeInAnimation } from 'src/app/animations';
 import { CompanyDevicesHeaderComponent } from './company-devices-header/company-devices-header.component';
+import { TicketSortBy } from '../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-company-devices',
@@ -38,6 +39,7 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
   toggleFilter: boolean = false;
   sub: Subscription = new Subscription();
   @ViewChild('header', { static: true }) header: CompanyDevicesHeaderComponent;
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   constructor(private devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private confirmStateService: ConfirmStateService,
@@ -251,7 +253,10 @@ export class CompanyDevicesComponent implements OnInit, OnDestroy {
     });
   }
   public onFilter(field) {
-    this.filter.onFilter(field, this.devices)
+    document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.sortBy.sortBy = field;
+    this.filter.onFilter(field, this.devices);
+    this.sortBy.sortDirection = this.filter.direction;
   }
   sendDeviceStatusRequest(companyId, ids) {
     this.devicesService.sendDeviceStatusRequest(companyId, ids, ["idle", "norestart", "online"]).subscribe(data => {

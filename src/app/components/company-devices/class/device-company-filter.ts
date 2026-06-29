@@ -8,6 +8,7 @@ export class CompanyDeviceFilter {
     assestType: Array<DeviceType> = [];
     isCustomDevices: boolean = true;
     isAgent: boolean = true;
+    direction: string;
     constructor() { }
 
     public setAssestType(data) {
@@ -48,6 +49,7 @@ export class CompanyDeviceFilter {
                     devices.reverse();
                 }
             }
+            this.direction = this.filterTop[index].filter;
         }
     }
     public onCurrentFilter(devices) {

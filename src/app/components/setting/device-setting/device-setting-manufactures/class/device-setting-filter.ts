@@ -5,6 +5,7 @@ export class DeviceSettingFilter {
   filterTop: Array<FilterListTop> = [
     new FilterListTop("name", "ASC"),
   ];
+  direction: string;
   constructor() { }
 
   public onFilter(field, service) {
@@ -20,6 +21,7 @@ export class DeviceSettingFilter {
           this.filterTop[index].filter = "DESC";
           service.reverse();
         }
+        this.direction = this.filterTop[index].filter;
       }
     }
   }

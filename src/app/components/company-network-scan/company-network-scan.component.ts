@@ -22,6 +22,7 @@ import { installationStatuses } from '../company-network-scan-beta/const/const';
 import { CompanyNetworkScanService } from '../company-network-scan-beta/services/company-network-scan.service';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { TicketSortBy } from '../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'company-network-scan',
@@ -48,6 +49,7 @@ export class CompanyNetworkScanComponent implements OnInit {
   isScaning: boolean = false;
   networkScanFilter: NetworkScanFilter = new NetworkScanFilter(new CompanyNetworkScanService);
   sub: Subscription = new Subscription();
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   constructor(public devicesStateService: DevicesStateService,
     private devicesService: DevicesService,
     private permissionsService: PermissionsService,
@@ -211,7 +213,10 @@ export class CompanyNetworkScanComponent implements OnInit {
     })
   }
   setSort(data) {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.sortBy.sortBy = data;
     this.networkScanFilter.onSort(data, this.networkScanDevices.devices);
+    this.sortBy.sortDirection = this.networkScanFilter.direction;
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }

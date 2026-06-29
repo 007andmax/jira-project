@@ -135,6 +135,10 @@
                         >
                             Device Name
                             <span class="qt-table-modern__sorting"></span>
+                              <div *ngIf="sortBy.sortBy == 'name'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                         </div>
                         <div
                             class="network-scan-table__lan-ip pointer"
@@ -142,6 +146,10 @@
                         >
                             Lan ip
                             <span class="qt-table-modern__sorting"></span>
+                              <div *ngIf="sortBy.sortBy == 'ipAddress'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                         </div>
                         <div
                             class="network-scan-table__manufacturer pointer"
@@ -149,6 +157,10 @@
                         >
                             Manufacturer
                             <span class="qt-table-modern__sorting"></span>
+                              <div *ngIf="sortBy.sortBy == 'manufacturer'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                         </div>
                         <div
                             class="network-scan-table__mac-address pointer"
@@ -156,6 +168,10 @@
                         >
                             Mac address
                             <span class="qt-table-modern__sorting"></span>
+                              <div *ngIf="sortBy.sortBy == 'macAddress'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                         </div>
                         <div
                             class="network-scan-table__status pointer"
@@ -163,6 +179,10 @@
                         >
                             Status
                             <span class="qt-table-modern__sorting"></span>
+                              <div *ngIf="sortBy.sortBy == 'agentStatus'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                         </div>
                         <div class="network-scan-table__delete"></div>
                     </div>
