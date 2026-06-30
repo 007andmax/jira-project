@@ -25,6 +25,9 @@ import { ManageTag } from "./class/manage-tag";
 import { ManageTagsDevicesComponent } from "./manage-tags-devices/manage-tags-devices.component";
 import { fadeInAnimation } from "src/app/animations";
 import { ManageTagsFilesComponent } from "./manage-tags-files/manage-tags-files.component";
+import { TicketSortBy } from "../../tickets/tickets/class/ticket-sort-by";
+import { ManageTagsFilter } from "./class/manage-tags-filter";
+import { ManageTagsCompaniesFilter } from "./class/manage-tags-filter-companies";
 declare var $: any;
 @Component({
   selector: "app-manage-tags",
@@ -59,6 +62,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     paging: false,
     info: false
   };
+  filter: ManageTagsCompaniesFilter = new ManageTagsCompaniesFilter();
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   @ViewChild("tickets", { static: false }) tickets: ElementRef;
   @ViewChild("devicesTags", { static: false }) devicesTags: ManageTagsDevicesComponent;
   @ViewChild("filesTags", { static: false }) filesTags: ManageTagsFilesComponent;
@@ -260,9 +265,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       this.searchTag = "";
       this.companyTags = [];
       this.reqcompanyTags = [];
+      this.sortBy = new TicketSortBy('name', 'ASC');
       this.setDefaultScoll();
       this.onScroll();
     } else if (data['nextId'] === 'ticket') {
+      this.sortBy = new TicketSortBy('name', 'ASC');
       this.infiniteScrollDisabled = true;
     } else if (data['nextId'] === 'device') {
       this.infiniteScrollDisabled = true;
@@ -329,6 +336,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
         this.confirmStateService.initRequest(false);
       }
     );
+  }
+  onFilter(field) {
+    this.sortBy.sortBy = field;
+    this.filter.onFilter(field, this.setActiveTab == "company" ? this.companyTags : this.ticketTags);
+    this.sortBy.sortDirection = this.filter.direction;
   }
 
   /**

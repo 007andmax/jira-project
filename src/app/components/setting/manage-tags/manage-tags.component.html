@@ -59,13 +59,21 @@
                             <div class="tab-pane__body">
                                 <div class="tab-pane__table-header">
                                     <div class="tab-pane__table-row">
-                                        <div class="tab-pane__table-cell manage-tags-table__custom-tags pointer">
+                                        <div class="tab-pane__table-cell manage-tags-table__custom-tags pointer qt-df qt-ai-c"  (click)="onFilter('name')">
                                             Custom Tag Name
-                                            <div class="qt-table-modern__sorting--new"></div>
+                                             <div class="qt-table-modern__sorting--new"></div>
+                        <div *ngIf="sortBy.sortBy == 'name'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                                         </div>
-                                        <div class="tab-pane__table-cell manage-tags-table__count pointer">
+                                        <div class="tab-pane__table-cell manage-tags-table__count pointer qt-df qt-ai-c"  (click)="onFilter('count')">
                                             Count
-                                            <div class="qt-table-modern__sorting--new"></div>
+                                             <div class="qt-table-modern__sorting--new"></div>
+                        <div *ngIf="sortBy.sortBy == 'count'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                                         </div>
                                         <div class="tab-pane__table-cell manage-tags-table__action pointer"></div>
                                     </div>
@@ -232,13 +240,21 @@
                         <div class="tab-pane__table dataTable">
                             <div class="tab-pane__table-header">
                                 <div class="tab-pane__table-row">
-                                    <div class="tab-pane__table-cell manage-tags-table__custom-tags pointer">
+                                    <div class="tab-pane__table-cell manage-tags-table__custom-tags pointer qt-df qt-ai-c" (click)="onFilter('name')">
                                         <span>Custom Tags</span>
-                                        <div class="qt-table-modern__sorting--new"></div>
+                                           <div class="qt-table-modern__sorting--new"></div>
+                        <div *ngIf="sortBy.sortBy == 'name'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                                     </div>
-                                    <div class="tab-pane__table-cell manage-tags-table__count pointer">
+                                    <div class="tab-pane__table-cell manage-tags-table__count pointer qt-df qt-ai-c" (click)="onFilter('count')">
                                         Count
-                                        <div class="qt-table-modern__sorting--new"></div>
+                                         <div class="qt-table-modern__sorting--new"></div>
+                        <div *ngIf="sortBy.sortBy == 'count'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                                     </div>
                                     <th class="tab-pane__table-cell manage-tags-table__action pointer"></th>
                                 </div>
