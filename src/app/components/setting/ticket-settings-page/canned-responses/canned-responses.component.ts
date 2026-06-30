@@ -69,11 +69,11 @@ export class CannedResponsesComponent implements OnInit {
     this.sub.add(changeNoteArray);
   }
   getNoteList() {
-    this.showPreloader = true;
+    this.loading = true;
     this.noteService.getNotesTemplates(this.sort.toLocaleLowerCase()).subscribe((data: any) => {
       this.noteTemplate = data.map(item => new NoteTemplate(item));
       this.noteStateService.setNoteTemplate(this.noteTemplate);
-      this.showPreloader = false;
+      this.loading = false;
     })
   }
   sortByName() {
