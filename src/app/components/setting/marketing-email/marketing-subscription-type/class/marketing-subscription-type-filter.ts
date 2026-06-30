@@ -7,6 +7,7 @@ export class MarketingSubscriptionTypeFilter extends ProductsCategoryFilter {
         new CompanyFilterTop('subscribedCount', ''),
         new CompanyFilterTop('unsubscribedCount', '')
     ];
+    direction!: string;
     onFilter(field, list) {
         let index = this.filter.findIndex(item => item.field === field);
         if (index > -1) {
@@ -41,6 +42,7 @@ export class MarketingSubscriptionTypeFilter extends ProductsCategoryFilter {
                     list.reverse();
                 }
             }
+            this.direction = this.filter[index].filter;
         }
     }
     public onFilterSubscribedCount(list) {

@@ -12,6 +12,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { DELETE_DEVICE_TAG } from 'src/app/const/confirm';
 import { ManageTagsDevicesFilter } from './class/manage-tags-devices-filter';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-manage-tags-devices',
@@ -23,6 +24,7 @@ export class ManageTagsDevicesComponent implements OnInit, OnDestroy {
   loading: boolean = true;
   create: boolean = false;
   filter: ManageTagsDevicesFilter = new ManageTagsDevicesFilter();
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   @Input() searchTag = "";
   sub: Subscription = new Subscription();
   constructor(private deviceTagsStateService: DeviceTagsStateService,
@@ -66,7 +68,9 @@ export class ManageTagsDevicesComponent implements OnInit, OnDestroy {
     })
   }
   onFilter(field) {
+    this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.tags);
+    this.sortBy.sortDirection = this.filter.direction;
   }
   public onAdd() {
     this.create = true;

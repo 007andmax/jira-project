@@ -10,6 +10,8 @@ import { ConfirmStateService } from "src/app/components/shared/confirm/services/
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DELETE_GL_NUMBER } from "src/app/const/confirm";
 import { GlNumberCheckUseComponent } from "./gl-number-check-use/gl-number-check-use.component";
+import { TicketSortBy } from "src/app/components/tickets/tickets/class/ticket-sort-by";
+import { GlNumberFilter } from "./class/gl-number-filter";
 declare var $: any;
 @Component({
   selector: "app-gl-number-settings",
@@ -22,6 +24,8 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
   gl: any;
   popup: boolean;
   showAddGl: boolean = false;
+  sortBy: TicketSortBy = new TicketSortBy('glNumber', 'ASC');
+  filter: GlNumberFilter = new GlNumberFilter();
   sub: Subscription = new Subscription();
   constructor(
     private glNumberService: GlNumberService,
@@ -45,10 +49,10 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
 
     this.settingStateService.setComponentName('GlNumberSettingsComponent');
     this.loading = true; $(".loading").css("display", "block");
-    this.numberList = this.glNumberStateService.getGLNumbers().sort((a, b) => a.glNumber.toLowerCase().localeCompare(b.glNumber.toLowerCase()));
+    this.numberList = JSON.parse(JSON.stringify(this.glNumberStateService.getGLNumbers())).map(item => new GlNumber(item)).sort((a, b) => a.glNumber.toLowerCase().localeCompare(b.glNumber.toLowerCase()));
     this.loading = false; $(".loading").css("display", "none");
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe(data => {
-      this.numberList = data.sort((a, b) => a.glNumber.toLowerCase().localeCompare(b.glNumber.toLowerCase()));
+      this.numberList = JSON.parse(JSON.stringify(data)).map(item => new GlNumber(item)).sort((a, b) => a.glNumber.toLowerCase().localeCompare(b.glNumber.toLowerCase()));
       this.loading = false; $(".loading").css("display", "none");
       this.cd.detectChanges();
     })
@@ -116,7 +120,15 @@ export class GlNumberSettingsComponent implements OnInit, OnDestroy {
     }
     this.cd.detectChanges();
   }
-
+  public trackById(index, item) {
+    return item.id;
+  }
+  onFilter(field) {
+    this.sortBy.sortBy = field;
+    this.filter.onFilter(field, this.numberList);
+    this.sortBy.sortDirection = this.filter.direction;
+    this.cd.detectChanges();
+  }
 
   onEditGl(item) {
     if (item.isInitEdit) {

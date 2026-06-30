@@ -53,11 +53,15 @@
                                             </label>
                                         </div>
                                         <div
-                                            class="tab-pane__table-cell active-users-table__user-name pointer"
+                                            class="tab-pane__table-cell active-users-table__user-name pointer qt-df qt-ai-c"
                                             (click)="onFilter('name',techUsers)"
                                         >
                                             User Name
-                                            <div class="qt-table-modern__sorting--new"></div>
+                                                <div class="qt-table-modern__sorting--new"></div>
+                        <div *ngIf="sortBy.sortBy == 'name'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__role">Role</div>
                                         <div class="tab-pane__table-cell active-users-table__last-login">Last Login</div>
@@ -245,11 +249,15 @@
                                             </label>
                                         </div>
                                         <div
-                                            class="tab-pane__table-cell active-users-table__user-name pointer"
+                                            class="tab-pane__table-cell active-users-table__user-name pointer qt-df qt-ai-c"
                                             (click)="onFilter('name',userlist)"
                                         >
                                             User Name
-                                            <div class="qt-table-modern__sorting--new"></div>
+                                             <div class="qt-table-modern__sorting--new"></div>
+                        <div *ngIf="sortBy.sortBy == 'name'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                                         </div>
                                         <div class="tab-pane__table-cell active-users-table__role">Role</div>
                                         <div class="tab-pane__table-cell active-users-table__last-login">Last Login</div>

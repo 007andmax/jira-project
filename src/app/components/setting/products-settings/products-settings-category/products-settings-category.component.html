@@ -17,25 +17,32 @@
                         </label>
                     </div>
                     <div
-                        class="tab-pane__table-cell product-category-table__category-name pointer"
+                        class="tab-pane__table-cell product-category-table__category-name pointer qt-df qt-ai-c"
                         (click)="onFilter('name')"
                     >
                         Category Name
-                        <div class="qt-table-modern__sorting--new"></div>
+                         <div class="qt-table-modern__sorting--new"></div>
+                        <div *ngIf="sortBy.sortBy == 'name'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
-                        class="tab-pane__table-cell product-category-table__count pointer"
+                        class="tab-pane__table-cell product-category-table__count pointer qt-df qt-ai-c"
                         (click)="onFilter('count')"
                     >
                         Count
-                        <div class="qt-table-modern__sorting--new"></div>
+                         <div class="qt-table-modern__sorting--new"></div>
+                        <div *ngIf="sortBy.sortBy == 'count'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
-                        class="tab-pane__table-cell product-category-table__gl-number pointer"
-                        (click)="onFilter('gl-number')"
+                        class="tab-pane__table-cell product-category-table__gl-number"
+                       
                     >
                         GL Number
-                        <div class="qt-table-modern__sorting--new"></div>
                     </div>
                     <div class="tab-pane__table-cell product-category-table__action"></div>
                 </div>

@@ -14,11 +14,15 @@
             <div class="tab-pane__table-header">
                 <div class="tab-pane__table-row">
                     <div
-                        class="tab-pane__table-cell canned-responses-table__template-name pointer"
+                        class="tab-pane__table-cell canned-responses-table__template-name pointer qt-df qt-ai-c"
                         (click)="sortByName()"
                     >
                         Template Name
-                        <div class="qt-table-modern__sorting--new"></div>
+                           <div class="qt-table-modern__sorting--new"></div>
+                        <div *ngIf="sortBy.sortBy == 'name'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div class="tab-pane__table-cell canned-responses-table__status">Status</div>
                     <div class="tab-pane__table-cell canned-responses-table__action">&nbsp;</div>

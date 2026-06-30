@@ -13,6 +13,7 @@ import { MarketingEmailStateService } from 'src/app/states/marketing-email/marke
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { MarketingSubscriptionType } from './class/marketing-subscription-type';
 import { MarketingSubscriptionTypeFilter } from './class/marketing-subscription-type-filter';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'marketing-subscription-type',
@@ -26,6 +27,7 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
   sub: Subscription = new Subscription();
   colors = ["#16A4FA", "#2BC7C6", "#155EEF", "#D92D20", "#7839EE", "#D92D20", "#2EC866"];
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   @Output() onSelect: EventEmitter<any> = new EventEmitter();
   constructor(private marketingEmailService: MarketingEmailService,
     private confirmStateService: ConfirmStateService,
@@ -62,7 +64,9 @@ export class MarketingSubscriptionTypeComponent implements OnInit, OnDestroy {
     this.showAdd = data;
   }
   onFilter(field) {
+    this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.marketingSubscriptionList);
+    this.sortBy.sortDirection = this.filter.direction;
   }
   getUser(id) {
     return this.usersStateService.getAllUsers().find(user => user.id === id);

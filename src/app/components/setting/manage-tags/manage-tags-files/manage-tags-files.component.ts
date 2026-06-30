@@ -8,6 +8,7 @@ import { TagsService } from 'src/app/services/tags/tags.service';
 import { catchError, map } from 'rxjs/operators';
 import { TagsRealTimeService } from 'src/app/states/tags/tags-real-time.service';
 import { ManageTagsFilter } from '../class/manage-tags-filter';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-manage-tags-files',
@@ -22,6 +23,7 @@ export class ManageTagsFilesComponent implements OnInit, OnDestroy {
   tags: Array<ManageTag> = [];
   loading: boolean = true;
   sub: Subscription = new Subscription();
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   @Output() onRemove: EventEmitter<any> = new EventEmitter();
   @Output() onPreloader: EventEmitter<any> = new EventEmitter();
   constructor(private fileManagementStateService: FileManagementStateService,
@@ -97,7 +99,9 @@ export class ManageTagsFilesComponent implements OnInit, OnDestroy {
     }
   }
   onFilter(field) {
+    this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.tags);
+    this.sortBy.sortDirection = this.filter.direction;
   }
   ConfirmDelete(tID: string, name) {
     this.onRemove.emit({ id: tID, word: name })

@@ -26,6 +26,7 @@ export class ProductTypeFilter extends ProductsCategoryFilter {
                     list.reverse();
                 }
             }
+            this.direction = this.filter[index].filter;
         }
     }
     public onFilterName(list) {

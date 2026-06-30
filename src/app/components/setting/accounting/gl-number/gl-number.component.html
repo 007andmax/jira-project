@@ -3,8 +3,20 @@
         <div class="tab-pane__table">
             <div class="tab-pane__table-header">
                 <div class="tab-pane__table-row">
-                    <div class="tab-pane__table-cell gl-numbers__table-account-number">Income Account Number</div>
-                    <div class="tab-pane__table-cell gl-numbers__table-description">Description</div>
+                    <div class="tab-pane__table-cell gl-numbers__table-account-number qt-df qt-ai-c"  (click)="onFilter('glNumber')">Income Account Number
+                           <div class="qt-table-modern__sorting--new"></div>
+                      <div *ngIf="sortBy.sortBy == 'glNumber'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div class="tab-pane__table-cell gl-numbers__table-description qt-df qt-ai-c"  (click)="onFilter('description')">Description
+                           <div class="qt-table-modern__sorting--new"></div>
+                      <div *ngIf="sortBy.sortBy == 'description'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
                     <div class="tab-pane__table-cell gl-numbers__table-action"></div>
                 </div>
             </div>

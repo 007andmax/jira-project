@@ -11,6 +11,7 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { ProductService } from 'src/app/services/product/product.service';
 import { GlNumberStateService } from 'src/app/states/gl-number/gl-number-state.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-products-settings-category',
@@ -24,6 +25,7 @@ export class ProductsSettingsCategoryComponent implements OnInit, OnDestroy {
   showAddCategory: boolean = false;
   loading: boolean = true;
   sub: Subscription = new Subscription();
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   @Output() onPreloader = new EventEmitter();
   constructor(private inventoryStateService: InventoryStateService,
     private confirmStateService: ConfirmStateService,
@@ -151,7 +153,9 @@ export class ProductsSettingsCategoryComponent implements OnInit, OnDestroy {
     this.inventoryStateService.setCategoryForDelete(data);
   }
   onFilter(field) {
+    this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.categoriesProducts);
+    this.sortBy.sortDirection = this.filter.direction;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

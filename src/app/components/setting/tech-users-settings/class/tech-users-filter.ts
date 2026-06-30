@@ -2,6 +2,7 @@ import { FilterListTop } from "src/class/list/filter-list-top";
 
 export class TechUsersFilter {
     filterTop: Array<FilterListTop> = [new FilterListTop('name', 'ASC')];
+    direction: string;
     constructor() { }
     public onFilter(field, reqUsers) {
         let index = this.filterTop.findIndex(item => item.field === field);
@@ -17,6 +18,7 @@ export class TechUsersFilter {
                     reqUsers.reverse();
                 }
             }
+            this.direction = this.filterTop[index].filter;
         }
     }
     public clearFilter() {

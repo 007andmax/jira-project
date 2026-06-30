@@ -4,6 +4,7 @@ export class ManageTagsDevicesFilter {
     filter: Array<CompanyFilterTop> = [
         new CompanyFilterTop('name', 'ASC')
     ];
+    direction!: string;
     constructor() { }
     onFilter(field, list) {
         let index = this.filter.findIndex(item => item.field === field);
@@ -19,6 +20,7 @@ export class ManageTagsDevicesFilter {
                     list.reverse();
                 }
             }
+            this.direction = this.filter[index].filter;
         }
     }
     public clearFilter() {

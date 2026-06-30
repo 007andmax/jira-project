@@ -26,6 +26,7 @@ import { TechUsersReassignComponent } from './tech-users-reassign/tech-users-rea
 import { TitleListType } from '../../tickets/tickets/tickets-header/class/title-list-type';
 import { UsersService } from 'src/app/services/users/users.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
 declare var $;
 
 @Component({
@@ -66,6 +67,7 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   new TitleListType("Secure two-factor authentication - by email", "SECURE"),
   new TitleListType("Secure two-factor authentication - Google authenticator", "GOOGLE_SECURE")];
   authenticationTypesType = new TitleListType("Password only", "DISABLED");
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   @ViewChild('addBtn', { static: false }) addBtn: DisabledBtnDirective;
   @ViewChild('editBtn', { static: false }) editBtn: DisabledBtnDirective;
   @ViewChild('userPermissions', { static: false }) userPermissions: PermissionManageComponent;
@@ -420,8 +422,9 @@ export class TechUsersSettingsComponent implements AfterViewInit, OnInit, OnDest
   }
 
   public onFilter(field, list) {
+    this.sortBy.sortBy = field;
     this.filter.onFilter(field, list)
-
+    this.sortBy.sortDirection = this.filter.direction;
   }
 
 

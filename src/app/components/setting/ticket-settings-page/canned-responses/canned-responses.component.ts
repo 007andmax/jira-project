@@ -9,6 +9,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { NoteRealTimeService } from 'src/app/states/note/note-real-time.service';
 import { NoteStateService } from 'src/app/states/note/note-state.service';
 import { NoteTemplate } from './class/note-template';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'canned-responses',
@@ -20,6 +21,7 @@ export class CannedResponsesComponent implements OnInit {
   showPreloader: boolean = true;
   sort = "ASC";
   noteTemplate: Array<NoteTemplate> = [];
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   sub: Subscription = new Subscription();
   constructor(
     public cd: ChangeDetectorRef,
@@ -82,6 +84,8 @@ export class CannedResponsesComponent implements OnInit {
       this.sort = 'DESC';
       this.getNoteList();
     }
+    this.sortBy.sortBy = 'name';
+    this.sortBy.sortDirection = this.sort;
   }
   onRemoveNoteTemplate(id) {
     this.noteService.removeNoteTemplate(id).subscribe(data => {

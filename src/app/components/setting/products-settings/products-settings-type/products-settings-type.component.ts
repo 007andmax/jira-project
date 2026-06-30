@@ -9,6 +9,7 @@ import { DELETE_PRODUCT_TYPE } from 'src/app/const/confirm';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductTypeCheckUseComponent } from '../product-type-check-use/product-type-check-use.component';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-products-settings-type',
@@ -20,6 +21,7 @@ export class ProductsSettingsTypeComponent implements OnInit, OnDestroy {
   showAdd: boolean = false;
   showPreloader: boolean = true;
   filter: ProductTypeFilter = new ProductTypeFilter();
+  sortBy: TicketSortBy = new TicketSortBy('name', 'ASC');
   sub: Subscription = new Subscription();
   constructor(private productService: ProductService,
     private inventoryStateService: InventoryStateService,
@@ -44,7 +46,9 @@ export class ProductsSettingsTypeComponent implements OnInit, OnDestroy {
   }
 
   onFilter(field) {
+    this.sortBy.sortBy = field;
     this.filter.onFilter(field, this.list);
+    this.sortBy.sortDirection = this.filter.direction;
   }
   onEditType(item, event) {
     if (item.isInitEdit) {

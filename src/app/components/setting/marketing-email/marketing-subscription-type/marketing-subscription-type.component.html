@@ -15,25 +15,37 @@
                     </label>
                 </div>
                 <div
-                    class="tab-pane__table-cell marketing-email-table__subscription-type pointer"
+                    class="tab-pane__table-cell marketing-email-table__subscription-type pointer qt-df qt-ai-c"
                     (click)="onFilter('name')"
                 >
                     Subscription Type
-                    <div class="qt-table-modern__sorting--new"></div>
+                       <div class="qt-table-modern__sorting--new"></div>
+                        <div *ngIf="sortBy.sortBy == 'name'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                 </div>
                 <div
-                    class="tab-pane__table-cell marketing-email-table__subscribed-users pointer"
+                    class="tab-pane__table-cell marketing-email-table__subscribed-users pointer qt-df qt-ai-c"
                     (click)="onFilter('subscribedCount')"
                 >
                     Subscribed  Users
-                    <div class="qt-table-modern__sorting--new"></div>
+                       <div class="qt-table-modern__sorting--new"></div>
+                       <div *ngIf="sortBy.sortBy == 'subscribedCount'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                 </div>
                 <div
-                    class="tab-pane__table-cell marketing-email-table__unsubscribed-users pointer"
+                    class="tab-pane__table-cell marketing-email-table__unsubscribed-users pointer qt-df qt-ai-c"
                     (click)="onFilter('unsubscribedCount')"
                 >
                     Unsubscribed Users
-                    <div class="qt-table-modern__sorting--new"></div>
+                       <div class="qt-table-modern__sorting--new"></div>
+                      <div *ngIf="sortBy.sortBy == 'unsubscribedCount'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                 </div>
                 <div class="tab-pane__table-cell marketing-email-table__action"></div>
             </div>
