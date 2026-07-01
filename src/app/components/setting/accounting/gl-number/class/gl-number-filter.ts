@@ -14,7 +14,6 @@ export class GlNumberFilter {
         if (index > -1) {
             let sort = this.filterTop[index].filter;
             if (field === "glNumber") {
-                console.log("1", sort);
                 this.clearFilter();
                 if (sort === "" || sort === "DESC") {
                     this.filterTop[index].filter = "ASC";
@@ -25,7 +24,6 @@ export class GlNumberFilter {
                 }
             }
             if (field === "description") {
-                console.log("2", sort);
                 this.clearFilter();
                 if (sort === "" || sort === "DESC") {
                     this.filterTop[index].filter = "ASC";
@@ -42,7 +40,6 @@ export class GlNumberFilter {
 
 
     private onFilterGlNumber(service) {
-        console.log("onFilterGlNumber");
         service.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
             1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
     }
