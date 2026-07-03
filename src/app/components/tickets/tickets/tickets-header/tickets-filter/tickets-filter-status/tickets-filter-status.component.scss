@@ -1,3 +1,10 @@
 .count-ticket-status {
     text-decoration: underline;
 }
+.receive-full-amount-check {
+    position: relative;
+    input {
+        top: 0;
+        left: 0;
+    }
+}
