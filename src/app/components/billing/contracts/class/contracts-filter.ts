@@ -2,6 +2,7 @@ import { CompanyFilterTop } from '../../../companies/class/company-filter-top';
 import { Company } from 'src/app/interfaces/company/company';
 import { ContractsFilterType } from './contracts-filter-type';
 import { ContractsFilterStatus } from './contracts-filter-status';
+import * as moment from "moment";
 
 export class ContractsFilter {
   filter: Array<CompanyFilterTop> = [new CompanyFilterTop('company', ''),
@@ -20,8 +21,15 @@ export class ContractsFilter {
   enableInvoiceAutoCreate: boolean = null;
   manualCreateBillableItem: boolean = null;
   direction: string;
+  sortOrder: string = "COMPANY_ASC";
+  offset: number = 0;
+  pageSize: number = 30;
   constructor() { }
 
+
+  public setSortOrder(data) {
+    this.sortOrder = data;
+  }
   public clearOptions() {
     this.setEnableInvoiceAutoCreate(null);
     this.setManualCreateBillableItem(null);
@@ -71,6 +79,23 @@ export class ContractsFilter {
       && ((this.selectedType) ? item.type === this.selectedType.type && item.billType === this.selectedType.billType : true)
       && ((this.enableInvoiceAutoCreate != null) ? item.enableInvoiceAutoCreate === this.enableInvoiceAutoCreate : true)
       && ((this.manualCreateBillableItem != null) ? item.manualCreateBillableItem === this.manualCreateBillableItem : true)
+  }
+  public getDataForRequest() {
+    let data: any = {};
+    if (this.selectedCompany) data.companyId = this.selectedCompany.id;
+    if (this.selectedStartDate) data.dateFrom = moment(new Date(this.selectedStartDate)).format('YYYY/MM/DD');
+    if (this.selectedEndDate) data.dateTo = moment(new Date(this.selectedEndDate)).format('YYYY/MM/DD');
+    if (this.selectedType) data.types = [this.selectedType.type];
+    if (this.selectedStatus) data.statuses = [this.selectedStatus.status];
+    if (this.manualCreateBillableItem) data.manualCreateBillableItem = true;
+    if (this.enableInvoiceAutoCreate) data.enableInvoiceAutoCreate = true;
+    return {
+      ...data,
+      "forReport": false,
+      "offset": this.offset,
+      "pageSize": this.pageSize,
+      "sortOrder": this.sortOrder,
+    }
   }
   onSort(field, list) {
     let index = this.filter.findIndex(item => item.field === field);

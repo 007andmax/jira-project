@@ -20,10 +20,13 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 })
 export class ContractsTableComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
+  showPendingPreloader: boolean = false;
   filter: ContractsFilter = new ContractsFilter();
   list: Array<ContractItem> = [];
   reqList: Array<ContractItem> = [];
   @Input() companyContracts: Company = null;
+  public infiniteScrollDisabled = false;
+  container = document.body.querySelector(".main-container");
   sub: Subscription = new Subscription();
   constructor(private contractsService: ContractsService,
     private contractsStateService: ContractsStateService,
@@ -35,25 +38,23 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
-    this.getServiceAgreements();
+    this.showPreloader = true;
+    this.onScroll();
+    this.cd.detectChanges();
     let getSort = this.contractsStateService.getSort().subscribe(data => {
-      document.body.querySelector(".main-container").scrollTo(0, 0);
-      this.filter.onSort(data, this.list);
-      this.contractsStateService.changeSortDirection(this.filter.direction);
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
+      this.filter.setSortOrder(data);
+      //  this.filter.onSort(data, this.list);
+      //  this.contractsStateService.changeSortDirection(this.filter.direction);
+      this.showPreloader = true;
+      this.setDefaultScoll();
+      this.onScroll();
     })
     this.sub.add(getSort);
     let getFilter = this.contractsStateService.getFilter().subscribe(data => {
-      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.filter.setFilters(data)
-      this.list = this.filter.getFilterList(this.reqList);
-      this.filter.onSort('company', this.list);
-      this.contractsStateService.changeSortDirection(this.filter.direction);
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
+      this.showPreloader = true;
+      this.setDefaultScoll();
+      this.onScroll();
     })
     this.sub.add(getFilter);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
@@ -80,6 +81,40 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     })
     this.sub.add(changeContractsArray);
   }
+  public setDefaultScoll() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.filter.offset = 0;
+    this.contractsListService.setBlockList(false);
+    this.list = [];
+    this.cd.detectChanges();
+  }
+  public onScroll() {
+    this.infiniteScrollDisabled = true;
+    this.getList();
+  }
+  private getList() {
+    if (this.contractsListService.getBlockList()) {
+      this.infiniteScrollDisabled = false;
+      this.cd.detectChanges();
+      return;
+    }
+    if (this.filter.offset > 0) this.showPendingPreloader = true;
+    this.contractsService.getServiceAgreements(this.filter.getDataForRequest()).subscribe((data: any) => {
+      let showNotificationReview = false;
+      this.list = [...this.list, ...data.serviceAgreements.map(item => new ContractItem(item))];
+      this.infiniteScrollDisabled = false;
+      this.list.forEach(item => {
+        if (!showNotificationReview) showNotificationReview = this.contractsListService.isShowNotificationReview(item.reviewDate);
+      })
+      if (showNotificationReview) this.contractsStateService.showNotificationReview();
+      if (data.serviceAgreements < this.filter.pageSize) this.contractsListService.setBlockList(true);
+      this.filter.offset += this.filter.pageSize;
+      this.showPreloader = false;
+      this.showPendingPreloader = false;
+      this.cd.detectChanges();
+    })
+    this.cd.detectChanges();
+  }
   removeContract(id) {
     let findIndexReq = this.reqList.findIndex(item => item.id === id);
     let findIndex = this.list.findIndex(item => item.id === id);
@@ -104,25 +139,6 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     }
   }
 
-  getServiceAgreements() {
-    let subscribe = (this.companyContracts) ? this.contractsService.getServiceAgreementsByCompany(this.companyContracts.id) : this.contractsService.getServiceAgreements();
-    subscribe.subscribe(data => {
-      let showNotificationReview = false;
-      this.reqList = data;
-      //  if (this.companyContracts) this.reqList = this.reqList.filter(item => item.company.id === this.companyContracts.id);
-      this.reqList.forEach(item => {
-        if (!showNotificationReview) showNotificationReview = this.contractsListService.isShowNotificationReview(item.reviewDate);
-      })
-      if (showNotificationReview) this.contractsStateService.showNotificationReview();
-      this.list = JSON.parse(JSON.stringify(this.reqList));
-      this.filter.onSort('company', this.list);
-      this.contractsStateService.changeSortDirection(this.filter.direction);
-      this.showPreloader = false;
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
-    })
-  }
   onForceCreate(data) {
     this.contractsService.forceCreate(data.id).subscribe(data => {
 
