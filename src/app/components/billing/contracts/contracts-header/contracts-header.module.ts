@@ -7,6 +7,7 @@ import { ContractsFilterComponent } from '../contracts-filter/contracts-filter.c
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
 import { MultiDatepickerModule } from 'src/app/components/shared/multi-datepicker/multi-datepicker.module';
 import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-down/company-drop-down.module';
+import { ContractsFilterStatusModule } from '../contracts-filter/contracts-filter-status/contracts-filter-status.module';
 
 @NgModule({
     declarations: [ContractsHeaderComponent,
@@ -16,7 +17,8 @@ import { CompanyDropDownModule } from 'src/app/components/shared/company-drop-do
         CommonModule,
         DropDownModule,
         MultiDatepickerModule,
-        CompanyDropDownModule
+        CompanyDropDownModule,
+        ContractsFilterStatusModule
 
     ],
     exports: [ContractsHeaderComponent]

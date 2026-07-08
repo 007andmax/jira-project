@@ -34,7 +34,7 @@ export class ContractsHeaderComponent implements OnInit, OnDestroy {
   }
   public setSort(name) {
     this.sortBy.sortBy = name;
-    this.sortBy.sortDirection = (this.sortBy.sortBy ? this.sortBy.sortBy : 'DESC').includes('DESC') ? 'DESC' : 'ASC';
+    this.sortBy.sortDirection = this.sortBy.sortDirection == 'DESC' ? 'ASC' : 'DESC';
     this.contractsStateService.setSort(`${name}_${this.sortBy.sortDirection}`);
   }
   clearAll() {

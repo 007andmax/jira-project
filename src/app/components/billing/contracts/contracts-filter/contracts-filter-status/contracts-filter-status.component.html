@@ -1,0 +1,69 @@
+<div
+    class="light-dropdown"
+    ngbDropdown
+    #dp="ngbDropdown"
+>
+    <app-mat-form-field
+        ngbDropdownAnchor
+        #formField
+    >
+        <app-mat-chip-list
+            [items]="selected"
+            (onChangeItems)="formField.checkSelectedItems(selected)"
+        >
+            <app-dynamic-tooltip
+                [position]="'top'"
+                #productTooltip
+            ></app-dynamic-tooltip>
+            <app-mat-chip
+                [value]="tag.title"
+                [isRemove]="true"
+                *ngFor="let tag of selected; let i = index"
+                (onClose)="remove(i)"
+            >
+                <div
+                    class="clip-text"
+                >
+                    {{tag.title}}
+                </div>
+            </app-mat-chip>
+            <input
+                id="mat-form-field"
+                ngbDropdownToggle
+                placeholder="Select Tag"
+                #userInput
+                class="pointer mat-chip-input mat-input-element"
+                autocomplete="off"
+                (input)="onSearch($event)"
+                
+            >
+        </app-mat-chip-list>
+    </app-mat-form-field>
+    <div
+        class="dropdown-menu"
+        ngbDropdownMenu
+        aria-labelledby="mat-form-field"
+    >
+        <ng-template
+            ngFor
+            let-tag
+            [ngForOf]="list"
+            [ngForTrackBy]="trackById"
+        >
+            <div class="qt-pos-rel">
+                <button
+                    ngbDropdownItem
+                    class="dropdown-item"
+                    (click)="toggleItem(tag)"
+                    [textContent]="tag.title"
+                    [ngClass]="{'--selected':isSelected(tag.status)}"
+                >
+                </button>
+                <div
+                    *ngIf="isSelected(tag.status)"
+                    class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain filter-tags-check"
+                ></div>
+            </div>
+        </ng-template>
+    </div>
+</div>

@@ -15,7 +15,10 @@ export class ContractsFilter {
   new CompanyFilterTop('amount', '')];
   selectedCompany: Company = null;
   selectedType: ContractsFilterType = null;
-  selectedStatus: ContractsFilterStatus = null;
+  selectedStatus: Array<ContractsFilterStatus> = [new ContractsFilterStatus('Current', 'CURRENT'),
+  new ContractsFilterStatus('Pending', 'PENDING'),
+  new ContractsFilterStatus('Terminated', 'TERMINATED'),
+  new ContractsFilterStatus('Expired', 'EXPIRED')];
   selectedStartDate: number = null;
   selectedEndDate: number = null;
   enableInvoiceAutoCreate: boolean = null;
@@ -74,7 +77,7 @@ export class ContractsFilter {
   }
   public checkFilterItem(item) {
     return ((this.selectedCompany) ? item.companyId === this.selectedCompany.id : true)
-      && ((this.selectedStatus) ? item.status === this.selectedStatus.status : true)
+      && ((this.selectedStatus) ? this.selectedStatus.some(status => status.status == item.status) : true)
       && ((this.selectedStartDate && this.selectedEndDate) ? item.getStartDateByMilliseconds() >= this.selectedStartDate && item.getStartDateByMilliseconds() <= this.selectedEndDate : true)
       && ((this.selectedType) ? item.type === this.selectedType.type && item.billType === this.selectedType.billType : true)
       && ((this.enableInvoiceAutoCreate != null) ? item.enableInvoiceAutoCreate === this.enableInvoiceAutoCreate : true)
@@ -86,7 +89,7 @@ export class ContractsFilter {
     if (this.selectedStartDate) data.dateFrom = moment(new Date(this.selectedStartDate)).format('YYYY/MM/DD');
     if (this.selectedEndDate) data.dateTo = moment(new Date(this.selectedEndDate)).format('YYYY/MM/DD');
     if (this.selectedType) data.types = [this.selectedType.type];
-    if (this.selectedStatus) data.statuses = [this.selectedStatus.status];
+    if (this.selectedStatus.length > 0) data.statuses = this.selectedStatus.map(item => item.status);
     if (this.manualCreateBillableItem) data.manualCreateBillableItem = true;
     if (this.enableInvoiceAutoCreate) data.enableInvoiceAutoCreate = true;
     return {

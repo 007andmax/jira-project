@@ -39,6 +39,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.showPreloader = true;
+    if (this.companyContracts) this.filter.setCompany(this.companyContracts);
     this.onScroll();
     this.cd.detectChanges();
     let getSort = this.contractsStateService.getSort().subscribe(data => {
@@ -64,7 +65,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
     let onFastAdd = this.contractsStateService.onFastAdd.subscribe(data => {
-      if (this.companyContracts && this.companyContracts.id == data.companyId || !this.companyContracts) this.addContract(data);
+      if ((this.companyContracts && this.companyContracts.id == data.companyId || !this.companyContracts) && this.list.length < 30) this.addContract(data);
     })
     this.sub.add(onFastAdd);
     let onFastEdit = this.contractsStateService.onFastEdit.subscribe(data => {
@@ -73,7 +74,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     this.sub.add(onFastEdit);
     let changeContractsArray = this.contractsRealTimeService.changeContractsArray.subscribe(data => {
       if (data.action === 'SERVICE_AGREEMENT_SAVED') {
-        if (this.companyContracts && this.companyContracts.id == data.data.companyId || !this.companyContracts) this.addContract(data.data);
+        if ((this.companyContracts && this.companyContracts.id == data.data.companyId || !this.companyContracts) && this.list.length < 30) this.addContract(data.data);
       } else if (data.action === 'SERVICE_AGREEMENT_DELETED') {
         this.removeContract(data.data.id);
       }

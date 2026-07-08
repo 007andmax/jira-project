@@ -10,6 +10,7 @@ import { DropDownComponent } from '../../../shared/drop-down/drop-down.component
 import { Company } from 'src/app/interfaces/company/company';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { ContractsFilterStatusComponent } from './contracts-filter-status/contracts-filter-status.component';
 
 @Component({
   selector: 'app-contracts-filter',
@@ -21,7 +22,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('typesDp', { static: true }) typesDp: DropDownComponent;
   @ViewChild('companyDp', { static: true }) companyDp: CompanyDropDownComponent;
   @ViewChild('datesDp', { static: true }) datesDp: MultiDatepickerComponent;
-  @ViewChild('statusDp', { static: true }) statusDp: DropDownComponent;
+  @ViewChild('statusDp', { static: true }) statusDp: ContractsFilterStatusComponent;
   @ViewChild('optionsDp', { static: true }) optionsDp: DropDownComponent;
   public contractsFilter: ContractsFilter = new ContractsFilter();
   listsOptions = [new ContractsFilterType('Manual create billable item', 'manualCreateBillableItem', null),
