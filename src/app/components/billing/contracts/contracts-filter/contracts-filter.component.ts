@@ -49,10 +49,13 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
       this.onSelectCompany(this.companyContracts);
       this.cd.detectChanges();
     }
+    this.onChangeCounterFilter();
   }
   public onClearAll() {
     if (!this.companyContracts) this.contractsFilter.setCompany(null);
-    this.contractsFilter.setStatus(null);
+    this.contractsFilter.setStatus([new ContractsFilterStatus('Current', 'CURRENT'),
+    new ContractsFilterStatus('Pending', 'PENDING'),
+    new ContractsFilterStatus('Expired', 'EXPIRED')]);
     this.contractsFilter.setType(null);
     this.contractsFilter.resetDates();
     this.contractsFilter.clearOptions();
@@ -61,6 +64,9 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     this.datesDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
     this.optionsDp.clearWithOutChanges();
+    this.statusDp.selected = [new ContractsFilterStatus('Current', 'CURRENT'),
+    new ContractsFilterStatus('Pending', 'PENDING'),
+    new ContractsFilterStatus('Expired', 'EXPIRED')];
     this.contractsStateService.setFilter(this.contractsFilter);
     this.onChangeCounterFilter();
 

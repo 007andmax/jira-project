@@ -23,7 +23,6 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
   showPendingPreloader: boolean = false;
   filter: ContractsFilter = new ContractsFilter();
   list: Array<ContractItem> = [];
-  reqList: Array<ContractItem> = [];
   @Input() companyContracts: Company = null;
   public infiniteScrollDisabled = false;
   container = document.body.querySelector(".main-container");
@@ -65,7 +64,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
     let onFastAdd = this.contractsStateService.onFastAdd.subscribe(data => {
-      if ((this.companyContracts && this.companyContracts.id == data.companyId || !this.companyContracts) && this.list.length < 30) this.addContract(data);
+      if ((this.companyContracts && this.companyContracts.id == data.companyId || !this.companyContracts)) this.addContract(data);
     })
     this.sub.add(onFastAdd);
     let onFastEdit = this.contractsStateService.onFastEdit.subscribe(data => {
@@ -74,7 +73,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     this.sub.add(onFastEdit);
     let changeContractsArray = this.contractsRealTimeService.changeContractsArray.subscribe(data => {
       if (data.action === 'SERVICE_AGREEMENT_SAVED') {
-        if ((this.companyContracts && this.companyContracts.id == data.data.companyId || !this.companyContracts) && this.list.length < 30) this.addContract(data.data);
+        if ((this.companyContracts && this.companyContracts.id == data.data.companyId || !this.companyContracts)) this.addContract(data.data);
       } else if (data.action === 'SERVICE_AGREEMENT_DELETED') {
         this.removeContract(data.data.id);
       }
@@ -103,6 +102,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     this.contractsService.getServiceAgreements(this.filter.getDataForRequest()).subscribe((data: any) => {
       let showNotificationReview = false;
       this.list = [...this.list, ...data.serviceAgreements.map(item => new ContractItem(item))];
+      this.list = Array.from(new Map(this.list.map(item => [item.id, item])).values());
       this.infiniteScrollDisabled = false;
       this.list.forEach(item => {
         if (!showNotificationReview) showNotificationReview = this.contractsListService.isShowNotificationReview(item.reviewDate);
@@ -117,25 +117,16 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   removeContract(id) {
-    let findIndexReq = this.reqList.findIndex(item => item.id === id);
     let findIndex = this.list.findIndex(item => item.id === id);
-    if (findIndexReq > -1) this.reqList.splice(findIndexReq, 1);
     if (findIndex > -1) this.list.splice(findIndex, 1);
   }
   addContract(data) {
-    let findIndexReq = this.reqList.findIndex(item => item.id === data.id);
     let findIndex = this.list.findIndex(item => item.id === data.id);
-    if (findIndexReq > -1) {
-      this.reqList[findIndexReq] = new ContractItem(data);
-    } else {
-      this.reqList.push(new ContractItem(data));
-    }
     if (findIndex > -1) {
       this.list[findIndex] = new ContractItem(data);
     } else {
       if (this.filter.checkFilterItem(data)) {
-        this.list.push(new ContractItem(data));
-        this.filter.onSortList(this.list);
+        this.list.unshift(new ContractItem(data));
       }
     }
   }

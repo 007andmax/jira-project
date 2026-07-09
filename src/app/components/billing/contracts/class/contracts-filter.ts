@@ -17,7 +17,6 @@ export class ContractsFilter {
   selectedType: ContractsFilterType = null;
   selectedStatus: Array<ContractsFilterStatus> = [new ContractsFilterStatus('Current', 'CURRENT'),
   new ContractsFilterStatus('Pending', 'PENDING'),
-  new ContractsFilterStatus('Terminated', 'TERMINATED'),
   new ContractsFilterStatus('Expired', 'EXPIRED')];
   selectedStartDate: number = null;
   selectedEndDate: number = null;
@@ -88,7 +87,10 @@ export class ContractsFilter {
     if (this.selectedCompany) data.companyId = this.selectedCompany.id;
     if (this.selectedStartDate) data.dateFrom = moment(new Date(this.selectedStartDate)).format('YYYY/MM/DD');
     if (this.selectedEndDate) data.dateTo = moment(new Date(this.selectedEndDate)).format('YYYY/MM/DD');
-    if (this.selectedType) data.types = [this.selectedType.type];
+    if (this.selectedType) {
+      data.types = [this.selectedType.type];
+      data.billType = this.selectedType.billType;
+    }
     if (this.selectedStatus.length > 0) data.statuses = this.selectedStatus.map(item => item.status);
     if (this.manualCreateBillableItem) data.manualCreateBillableItem = true;
     if (this.enableInvoiceAutoCreate) data.enableInvoiceAutoCreate = true;
