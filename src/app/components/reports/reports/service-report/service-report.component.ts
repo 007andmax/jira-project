@@ -160,7 +160,7 @@ export class ServiceReportComponent implements OnInit, OnDestroy {
   };
   public getUserName(data) {
     let user = this.usersStateService.getAllUsers().find(item => item.id === data);
-    return (user) ? `${user.firstName} ${user.lastName}` : "";
+    return (user) ? `${user.firstName} ${user.lastName}` : "-";
   }
 
   onSelectedClient(client) {
