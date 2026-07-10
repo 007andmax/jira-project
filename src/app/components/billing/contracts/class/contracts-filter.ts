@@ -89,7 +89,7 @@ export class ContractsFilter {
     if (this.selectedEndDate) data.dateTo = moment(new Date(this.selectedEndDate)).format('YYYY/MM/DD');
     if (this.selectedType) {
       data.types = [this.selectedType.type];
-      data.billType = this.selectedType.billType;
+      if (this.selectedType.billType) data.billType = this.selectedType.billType;
     }
     if (this.selectedStatus.length > 0) data.statuses = this.selectedStatus.map(item => item.status);
     if (this.manualCreateBillableItem) data.manualCreateBillableItem = true;
