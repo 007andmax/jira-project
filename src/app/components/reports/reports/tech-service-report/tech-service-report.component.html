@@ -64,7 +64,7 @@
                         >
                             <tr class="qt-report__body-row">
                                 <td>{{getDate(item.serviceExpenseDate)}}</td>
-                                <td>{{'tkt# ' + item.ticketNumber}}</td>
+                                <td>{{item.isTask ? item.taskType :'tkt# ' +   item.ticketNumber}}</td>
                                 <td>{{item.companyName}}</td>
                                 <td>{{item.user}}</td>
                                 <td>{{item.serviceName}}</td>

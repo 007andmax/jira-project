@@ -151,7 +151,7 @@
                             [ngForTrackBy]="trackByIndex"
                         >
                             <tr class="qt-report__body-row">
-                                <td>{{ticket.ticketNumber}}</td>
+                                <td>{{ticket.isTask ? ticket.taskType : ticket.ticketNumber}}</td>
                                 <td>
                                     {{ parseDateTicket(ticket.expenseDate) }}
                                 </td>
@@ -165,6 +165,7 @@
                                 </td>
                                 <td>{{ ticket.expenseName }}</td>
                                 <td>
+                                     <div *ngIf="ticket.isTask" [textContent]="ticket.status"></div>
                                     <div *ngIf="ticket.status === 'ON_HOLD'">On Hold</div>
                                     <div *ngIf="ticket.status === 'COMPLETED'">Completed</div>
                                     <div *ngIf="ticket.status === 'IN_PROGRESS'">In Progress</div>

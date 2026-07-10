@@ -5,6 +5,8 @@ export class TechServiceItem {
     serviceName: string;
     ticketNumber: string;
     user: string;
+    isTask: boolean;
+    taskType: string;
     constructor(data) {
         this.companyName = data.companyName;
         this.quantity = data.quantity;
@@ -12,5 +14,7 @@ export class TechServiceItem {
         this.serviceName = data.serviceName;
         this.ticketNumber = data.ticketNumber;
         this.user = data.user;
+        this.isTask = data.isTask;
+        this.taskType = data.taskType;
     }
 }
