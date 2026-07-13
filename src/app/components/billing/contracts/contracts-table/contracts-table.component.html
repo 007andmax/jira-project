@@ -1,7 +1,12 @@
 <div class="qt-page-list__body">
-    <div class="qt-page-list__body-table-container">
+    <div class="qt-page-list__body-table-container"   [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}">
         <div class="qt-page-list__body-tbody qt-table-modern contracts-table">
-            <div class="tbody">
+            <div class="tbody"   infiniteScroll
+                                [infiniteScrollContainer]="container"
+                                [infiniteScrollDistance]="2"
+                                [infiniteScrollThrottle]="50"
+                                [infiniteScrollDisabled]="infiniteScrollDisabled"
+                                (scrolled)="onScroll()">
                 <ng-template
                     ngFor
                     let-item
@@ -29,5 +34,9 @@
         >
             We couldn't find any results
         </div>
+          <div
+                            class="loading pengind-loading"
+                            *ngIf="showPendingPreloader"
+                        ></div>
     </div>
 </div>

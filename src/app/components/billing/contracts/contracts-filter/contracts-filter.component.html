@@ -18,7 +18,7 @@
         (onSelectedItem)="onSelectType($event)"
     ></app-drop-down>
     <app-drop-down
-        class="contracts-company-filter search-users "
+        class="contracts-company-filter search-option "
         #optionsDp
         [placeholder]="'Select by Option'"
         [change]="false"
@@ -31,13 +31,9 @@
         #datesDp
         (selectedDate)="filterByDate($event)"
     ></app-multi-datepicker>
-    <app-drop-down
+    <app-contracts-filter-status
         class="contracts-status-filter search-status "
         #statusDp
-        [placeholder]="'Select by Status'"
-        [change]="false"
-        [list]="listsStatus"
-        [field]="'title'"
-        (onSelectedItem)="onSelectStatus($event)"
-    ></app-drop-down>
+        (onChange)="onSelectStatus($event)"
+    ></app-contracts-filter-status>
 </div>

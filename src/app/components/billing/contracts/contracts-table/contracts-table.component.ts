@@ -20,10 +20,12 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 })
 export class ContractsTableComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;
+  showPendingPreloader: boolean = false;
   filter: ContractsFilter = new ContractsFilter();
   list: Array<ContractItem> = [];
-  reqList: Array<ContractItem> = [];
   @Input() companyContracts: Company = null;
+  public infiniteScrollDisabled = false;
+  container = document.body.querySelector(".main-container");
   sub: Subscription = new Subscription();
   constructor(private contractsService: ContractsService,
     private contractsStateService: ContractsStateService,
@@ -35,25 +37,24 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
-    this.getServiceAgreements();
+    this.showPreloader = true;
+    if (this.companyContracts) this.filter.setCompany(this.companyContracts);
+    this.onScroll();
+    this.cd.detectChanges();
     let getSort = this.contractsStateService.getSort().subscribe(data => {
-      document.body.querySelector(".main-container").scrollTo(0, 0);
-      this.filter.onSort(data, this.list);
-      this.contractsStateService.changeSortDirection(this.filter.direction);
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
+      this.filter.setSortOrder(data);
+      //  this.filter.onSort(data, this.list);
+      //  this.contractsStateService.changeSortDirection(this.filter.direction);
+      this.showPreloader = true;
+      this.setDefaultScoll();
+      this.onScroll();
     })
     this.sub.add(getSort);
     let getFilter = this.contractsStateService.getFilter().subscribe(data => {
-      document.body.querySelector(".main-container").scrollTo(0, 0);
       this.filter.setFilters(data)
-      this.list = this.filter.getFilterList(this.reqList);
-      this.filter.onSort('company', this.list);
-      this.contractsStateService.changeSortDirection(this.filter.direction);
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
+      this.showPreloader = true;
+      this.setDefaultScoll();
+      this.onScroll();
     })
     this.sub.add(getFilter);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
@@ -63,7 +64,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
     let onFastAdd = this.contractsStateService.onFastAdd.subscribe(data => {
-      if (this.companyContracts && this.companyContracts.id == data.companyId || !this.companyContracts) this.addContract(data);
+      if ((this.companyContracts && this.companyContracts.id == data.companyId || !this.companyContracts)) this.addContract(data);
     })
     this.sub.add(onFastAdd);
     let onFastEdit = this.contractsStateService.onFastEdit.subscribe(data => {
@@ -72,7 +73,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     this.sub.add(onFastEdit);
     let changeContractsArray = this.contractsRealTimeService.changeContractsArray.subscribe(data => {
       if (data.action === 'SERVICE_AGREEMENT_SAVED') {
-        if (this.companyContracts && this.companyContracts.id == data.data.companyId || !this.companyContracts) this.addContract(data.data);
+        if ((this.companyContracts && this.companyContracts.id == data.data.companyId || !this.companyContracts)) this.addContract(data.data);
       } else if (data.action === 'SERVICE_AGREEMENT_DELETED') {
         this.removeContract(data.data.id);
       }
@@ -80,49 +81,56 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     })
     this.sub.add(changeContractsArray);
   }
+  public setDefaultScoll() {
+    document.body.querySelector(".main-container").scrollTo(0, 0);
+    this.filter.offset = 0;
+    this.contractsListService.setBlockList(false);
+    this.list = [];
+    this.cd.detectChanges();
+  }
+  public onScroll() {
+    this.infiniteScrollDisabled = true;
+    this.getList();
+  }
+  private getList() {
+    if (this.contractsListService.getBlockList()) {
+      this.infiniteScrollDisabled = false;
+      this.cd.detectChanges();
+      return;
+    }
+    if (this.filter.offset > 0) this.showPendingPreloader = true;
+    this.contractsService.getServiceAgreements(this.filter.getDataForRequest()).subscribe((data: any) => {
+      let showNotificationReview = false;
+      this.list = [...this.list, ...data.serviceAgreements.map(item => new ContractItem(item))];
+      this.list = Array.from(new Map(this.list.map(item => [item.id, item])).values());
+      this.infiniteScrollDisabled = false;
+      this.list.forEach(item => {
+        if (!showNotificationReview) showNotificationReview = this.contractsListService.isShowNotificationReview(item.reviewDate);
+      })
+      if (showNotificationReview) this.contractsStateService.showNotificationReview();
+      if (data.serviceAgreements < this.filter.pageSize) this.contractsListService.setBlockList(true);
+      this.filter.offset += this.filter.pageSize;
+      this.showPreloader = false;
+      this.showPendingPreloader = false;
+      this.cd.detectChanges();
+    })
+    this.cd.detectChanges();
+  }
   removeContract(id) {
-    let findIndexReq = this.reqList.findIndex(item => item.id === id);
     let findIndex = this.list.findIndex(item => item.id === id);
-    if (findIndexReq > -1) this.reqList.splice(findIndexReq, 1);
     if (findIndex > -1) this.list.splice(findIndex, 1);
   }
   addContract(data) {
-    let findIndexReq = this.reqList.findIndex(item => item.id === data.id);
     let findIndex = this.list.findIndex(item => item.id === data.id);
-    if (findIndexReq > -1) {
-      this.reqList[findIndexReq] = new ContractItem(data);
-    } else {
-      this.reqList.push(new ContractItem(data));
-    }
     if (findIndex > -1) {
       this.list[findIndex] = new ContractItem(data);
     } else {
       if (this.filter.checkFilterItem(data)) {
-        this.list.push(new ContractItem(data));
-        this.filter.onSortList(this.list);
+        this.list.unshift(new ContractItem(data));
       }
     }
   }
 
-  getServiceAgreements() {
-    let subscribe = (this.companyContracts) ? this.contractsService.getServiceAgreementsByCompany(this.companyContracts.id) : this.contractsService.getServiceAgreements();
-    subscribe.subscribe(data => {
-      let showNotificationReview = false;
-      this.reqList = data;
-      //  if (this.companyContracts) this.reqList = this.reqList.filter(item => item.company.id === this.companyContracts.id);
-      this.reqList.forEach(item => {
-        if (!showNotificationReview) showNotificationReview = this.contractsListService.isShowNotificationReview(item.reviewDate);
-      })
-      if (showNotificationReview) this.contractsStateService.showNotificationReview();
-      this.list = JSON.parse(JSON.stringify(this.reqList));
-      this.filter.onSort('company', this.list);
-      this.contractsStateService.changeSortDirection(this.filter.direction);
-      this.showPreloader = false;
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
-    })
-  }
   onForceCreate(data) {
     this.contractsService.forceCreate(data.id).subscribe(data => {
 

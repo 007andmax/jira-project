@@ -2,6 +2,7 @@ import { CompanyFilterTop } from '../../../companies/class/company-filter-top';
 import { Company } from 'src/app/interfaces/company/company';
 import { ContractsFilterType } from './contracts-filter-type';
 import { ContractsFilterStatus } from './contracts-filter-status';
+import * as moment from "moment";
 
 export class ContractsFilter {
   filter: Array<CompanyFilterTop> = [new CompanyFilterTop('company', ''),
@@ -14,14 +15,21 @@ export class ContractsFilter {
   new CompanyFilterTop('amount', '')];
   selectedCompany: Company = null;
   selectedType: ContractsFilterType = null;
-  selectedStatus: ContractsFilterStatus = null;
+  selectedStatus: Array<ContractsFilterStatus> = [];
   selectedStartDate: number = null;
   selectedEndDate: number = null;
   enableInvoiceAutoCreate: boolean = null;
   manualCreateBillableItem: boolean = null;
   direction: string;
+  sortOrder: string = "COMPANY_ASC";
+  offset: number = 0;
+  pageSize: number = 30;
   constructor() { }
 
+
+  public setSortOrder(data) {
+    this.sortOrder = data;
+  }
   public clearOptions() {
     this.setEnableInvoiceAutoCreate(null);
     this.setManualCreateBillableItem(null);
@@ -66,11 +74,31 @@ export class ContractsFilter {
   }
   public checkFilterItem(item) {
     return ((this.selectedCompany) ? item.companyId === this.selectedCompany.id : true)
-      && ((this.selectedStatus) ? item.status === this.selectedStatus.status : true)
+      && ((this.selectedStatus) ? this.selectedStatus.some(status => status.status == item.status) : true)
       && ((this.selectedStartDate && this.selectedEndDate) ? item.getStartDateByMilliseconds() >= this.selectedStartDate && item.getStartDateByMilliseconds() <= this.selectedEndDate : true)
       && ((this.selectedType) ? item.type === this.selectedType.type && item.billType === this.selectedType.billType : true)
       && ((this.enableInvoiceAutoCreate != null) ? item.enableInvoiceAutoCreate === this.enableInvoiceAutoCreate : true)
       && ((this.manualCreateBillableItem != null) ? item.manualCreateBillableItem === this.manualCreateBillableItem : true)
+  }
+  public getDataForRequest() {
+    let data: any = {};
+    if (this.selectedCompany) data.companyId = this.selectedCompany.id;
+    if (this.selectedStartDate) data.dateFrom = moment(new Date(this.selectedStartDate)).format('YYYY/MM/DD');
+    if (this.selectedEndDate) data.dateTo = moment(new Date(this.selectedEndDate)).format('YYYY/MM/DD');
+    if (this.selectedType) {
+      data.types = [this.selectedType.type];
+      if (this.selectedType.billType) data.billType = this.selectedType.billType;
+    }
+    if (this.selectedStatus.length > 0) data.statuses = this.selectedStatus.map(item => item.status);
+    if (this.manualCreateBillableItem) data.manualCreateBillableItem = true;
+    if (this.enableInvoiceAutoCreate) data.enableInvoiceAutoCreate = true;
+    return {
+      ...data,
+      "forReport": false,
+      "offset": this.offset,
+      "pageSize": this.pageSize,
+      "sortOrder": this.sortOrder,
+    }
   }
   onSort(field, list) {
     let index = this.filter.findIndex(item => item.field === field);

@@ -2,8 +2,22 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ContractsListService {
-
+  blockList: boolean = false;
   constructor() { }
+
+  /**
+  * @description Set new value field "blockList"
+  * @param  {boolean} data  - new value "blockList"
+  */
+  public setBlockList(data) {
+    this.blockList = data;
+  }
+  /**
+   * @description Return value field "blockList"
+   */
+  public getBlockList() {
+    return this.blockList;
+  }
   public compareDateNowWithDate(date) {
     let d = new Date(date);
     let t = d.getTime();

@@ -17,7 +17,7 @@ export class ContractsHeaderComponent implements OnInit, OnDestroy {
   count = 0;
   toggleFilter: boolean = false;
   countFilter: number = 0;
-  sortBy: TicketSortBy = new TicketSortBy('company', 'ASC');
+  sortBy: TicketSortBy = new TicketSortBy('COMPANY', 'ASC');
   sub: Subscription = new Subscription();
   constructor(private contractsStateService: ContractsStateService,
     public appService: AppService) { }
@@ -25,20 +25,17 @@ export class ContractsHeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let getFilter = this.contractsStateService.getFilter().subscribe(data => {
-      this.sortBy.sortBy = 'company';
+      this.sortBy.sortBy = 'COMPANY';
     })
     this.sub.add(getFilter);
-    let onSortDiraction = this.contractsStateService.onSortDiraction.subscribe(data => {
-      this.sortBy.sortDirection = data;
-    })
-    this.sub.add(onSortDiraction);
   }
   public showCreate() {
     this.contractsStateService.toggleCreate(true);
   }
   public setSort(name) {
     this.sortBy.sortBy = name;
-    this.contractsStateService.setSort(name);
+    this.sortBy.sortDirection = this.sortBy.sortDirection == 'DESC' ? 'ASC' : 'DESC';
+    this.contractsStateService.setSort(`${name}_${this.sortBy.sortDirection}`);
   }
   clearAll() {
     this.filter.onClearAll();

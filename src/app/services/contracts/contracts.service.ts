@@ -99,11 +99,8 @@ export class ContractsService {
   public validateCrossingDatesHourly(startDate, endDate, companyId, agreementId) {
     return this.http.get(this.apiUrl + `serviceAgreements/validateCrossingDates?companyId=${companyId}&startDate=${startDate}${endDate ? `&endDate=${endDate}` : ''}${(agreementId) ? '&agreementId=' + agreementId : ''}`);
   }
-  public getServiceAgreements() {
-    return this.http.post(this.apiUrl + 'serviceAgreements/filtered', {
-      "offset": 0,
-      "pageSize": 2000,
-    }).pipe(map((data: any) => data.map(item => new ContractItem(item))));
+  public getServiceAgreements(data) {
+    return this.http.post(this.apiUrl + 'serviceAgreements/filtered', data);
   }
   public getServiceAgreementsByCompany(id) {
     return this.http.post(this.apiUrl + `serviceAgreements/filtered`, {

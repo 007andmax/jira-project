@@ -9,6 +9,7 @@ import { ContractsEditModule } from './contracts-edit/contracts-edit.module';
 import { ContractsRoutingModule } from './contracts-routing.module';
 import { ContractsReviewComponent } from './contracts-review/contracts-review.component';
 import { ContractsReviewModule } from './contracts-review/contracts-review.module';
+import { ContractsFilterStatusComponent } from './contracts-filter/contracts-filter-status/contracts-filter-status.component';
 
 
 

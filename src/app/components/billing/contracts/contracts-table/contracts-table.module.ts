@@ -6,6 +6,7 @@ import { ContractsTableItemComponent } from './contracts-table-item/contracts-ta
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyLogoPopoverModule } from 'src/app/directives/company-logo-popover/company-logo-popover.module';
 import { UsersTableCompanyByModule } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { UsersTableCompanyByModule } from 'src/app/components/users/users-table/
         CommonModule,
         NgbModule,
         CompanyLogoPopoverModule,
-        UsersTableCompanyByModule
+        UsersTableCompanyByModule,
+        InfiniteScrollModule
 
     ],
     exports: [ContractsTableComponent]

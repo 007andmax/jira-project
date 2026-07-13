@@ -10,6 +10,7 @@ import { DropDownComponent } from '../../../shared/drop-down/drop-down.component
 import { Company } from 'src/app/interfaces/company/company';
 import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop-down/company-drop-down.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { ContractsFilterStatusComponent } from './contracts-filter-status/contracts-filter-status.component';
 
 @Component({
   selector: 'app-contracts-filter',
@@ -21,7 +22,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('typesDp', { static: true }) typesDp: DropDownComponent;
   @ViewChild('companyDp', { static: true }) companyDp: CompanyDropDownComponent;
   @ViewChild('datesDp', { static: true }) datesDp: MultiDatepickerComponent;
-  @ViewChild('statusDp', { static: true }) statusDp: DropDownComponent;
+  @ViewChild('statusDp', { static: true }) statusDp: ContractsFilterStatusComponent;
   @ViewChild('optionsDp', { static: true }) optionsDp: DropDownComponent;
   public contractsFilter: ContractsFilter = new ContractsFilter();
   listsOptions = [new ContractsFilterType('Manual create billable item', 'manualCreateBillableItem', null),
@@ -31,10 +32,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
   new ContractsFilterType('Service Contract/by device', 'SERVICE_CONTRACT', 'DEVICE'),
   new ContractsFilterType('Service Contract/by user', 'SERVICE_CONTRACT', 'USER'),
   new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER')];
-  listsStatus = [new ContractsFilterStatus('Current', 'CURRENT'),
-  new ContractsFilterStatus('Pending', 'PENDING'),
-  new ContractsFilterStatus('Terminated', 'TERMINATED'),
-  new ContractsFilterStatus('Expired', 'EXPIRED')]
+  listsStatus = []
   sub: Subscription = new Subscription();
   @Output() changeCountFilter = new EventEmitter<any>();
   constructor(private contractsStateService: ContractsStateService,
@@ -48,15 +46,19 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
       this.onSelectCompany(this.companyContracts);
       this.cd.detectChanges();
     }
+    this.onChangeCounterFilter();
   }
   public onClearAll() {
-    if (!this.companyContracts) this.contractsFilter.setCompany(null);
-    this.contractsFilter.setStatus(null);
+    if (!this.companyContracts) {
+      this.contractsFilter.setCompany(null);
+      this.companyDp.clearWithOutChanges();
+    }
+    this.contractsFilter.setStatus([]);
     this.contractsFilter.setType(null);
     this.contractsFilter.resetDates();
     this.contractsFilter.clearOptions();
     this.typesDp.clearWithOutChanges();
-    this.companyDp.clearWithOutChanges();
+
     this.datesDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
     this.optionsDp.clearWithOutChanges();
@@ -69,7 +71,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     if (this.contractsFilter.selectedCompany) count++;
     if (this.contractsFilter.selectedType) count++;
     if (this.contractsFilter.selectedStartDate && this.contractsFilter.selectedEndDate) count++;
-    if (this.contractsFilter.selectedStatus) count++;
+    if (this.contractsFilter.selectedStatus.length > 0) count++;
     if (this.contractsFilter.enableInvoiceAutoCreate || this.contractsFilter.manualCreateBillableItem) count++;
     this.changeCountFilter.emit(count);
   }
