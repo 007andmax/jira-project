@@ -565,7 +565,7 @@ describe('ContractsService', () => {
       "taxSum": null
     },];
     // Call the service method
-    service.getServiceAgreements().subscribe((contracts: any) => {
+    service.getServiceAgreements({ test: "mull" }).subscribe((contracts: any) => {
       expect(contracts[0].id).toEqual("06967cdb-e982-4ccb-bb39-a674c0580823");
     });
 

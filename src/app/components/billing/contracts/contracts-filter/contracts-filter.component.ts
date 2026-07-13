@@ -96,7 +96,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
 
   onSelectStatus(item) {
     if (!item) {
-      this.contractsFilter.setStatus(null);
+      this.contractsFilter.setStatus([]);
     } else {
       this.contractsFilter.setStatus(item);
     }

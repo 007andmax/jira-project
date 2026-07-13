@@ -48,8 +48,8 @@ describe('ContractsFilterComponent unit test', () => {
   it('check "onSelectStatus"', () => {
     const fixture = TestBed.createComponent(ContractsFilterComponent);
     const com = fixture.debugElement.componentInstance;
-    com.onSelectStatus(null);
-    expect(com.contractsFilter.selectedStatus).toEqual(null);
+    com.onSelectStatus([]);
+    expect(com.contractsFilter.selectedStatus.length).toEqual(0);
   });
   it('check "onSelectStatus"', () => {
     const fixture = TestBed.createComponent(ContractsFilterComponent);
