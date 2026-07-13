@@ -10,6 +10,8 @@ export class ServiceReportsItem {
     description: string;
     serviceTime: number;
     serviceUser: string;
+    isTask: boolean;
+    taskType: string;
     constructor(data) {
         if (data) {
             this.ticketNumber = data.ticketNumber;
@@ -23,6 +25,9 @@ export class ServiceReportsItem {
             this.description = data.description;
             this.serviceTime = data.serviceTime;
             this.serviceUser = data.serviceUser;
+            this.isTask = data.isTask;
+            this.taskType = data.taskType;
+            this.ticketCreatedBy = data.ticketCreatedBy;
         }
     }
 }
