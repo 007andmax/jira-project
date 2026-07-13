@@ -32,10 +32,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
   new ContractsFilterType('Service Contract/by device', 'SERVICE_CONTRACT', 'DEVICE'),
   new ContractsFilterType('Service Contract/by user', 'SERVICE_CONTRACT', 'USER'),
   new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER')];
-  listsStatus = [new ContractsFilterStatus('Current', 'CURRENT'),
-  new ContractsFilterStatus('Pending', 'PENDING'),
-  new ContractsFilterStatus('Terminated', 'TERMINATED'),
-  new ContractsFilterStatus('Expired', 'EXPIRED')]
+  listsStatus = []
   sub: Subscription = new Subscription();
   @Output() changeCountFilter = new EventEmitter<any>();
   constructor(private contractsStateService: ContractsStateService,
@@ -56,9 +53,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
       this.contractsFilter.setCompany(null);
       this.companyDp.clearWithOutChanges();
     }
-    this.contractsFilter.setStatus([new ContractsFilterStatus('Current', 'CURRENT'),
-    new ContractsFilterStatus('Pending', 'PENDING'),
-    new ContractsFilterStatus('Expired', 'EXPIRED')]);
+    this.contractsFilter.setStatus([]);
     this.contractsFilter.setType(null);
     this.contractsFilter.resetDates();
     this.contractsFilter.clearOptions();
@@ -67,9 +62,6 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     this.datesDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
     this.optionsDp.clearWithOutChanges();
-    this.statusDp.selected = [new ContractsFilterStatus('Current', 'CURRENT'),
-    new ContractsFilterStatus('Pending', 'PENDING'),
-    new ContractsFilterStatus('Expired', 'EXPIRED')];
     this.contractsStateService.setFilter(this.contractsFilter);
     this.onChangeCounterFilter();
 
@@ -79,7 +71,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     if (this.contractsFilter.selectedCompany) count++;
     if (this.contractsFilter.selectedType) count++;
     if (this.contractsFilter.selectedStartDate && this.contractsFilter.selectedEndDate) count++;
-    if (this.contractsFilter.selectedStatus) count++;
+    if (this.contractsFilter.selectedStatus.length > 0) count++;
     if (this.contractsFilter.enableInvoiceAutoCreate || this.contractsFilter.manualCreateBillableItem) count++;
     this.changeCountFilter.emit(count);
   }

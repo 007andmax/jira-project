@@ -22,9 +22,7 @@ import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 })
 export class ContractsFilterStatusComponent implements OnInit, OnDestroy {
 
-  selected: Array<ContractsFilterStatus> = [new ContractsFilterStatus('Current', 'CURRENT'),
-  new ContractsFilterStatus('Pending', 'PENDING'),
-  new ContractsFilterStatus('Expired', 'EXPIRED')];
+  selected: Array<ContractsFilterStatus> = [];
   list: Array<ContractsFilterStatus> = [];
   reqList: Array<ContractsFilterStatus> = [new ContractsFilterStatus('Current', 'CURRENT'),
   new ContractsFilterStatus('Pending', 'PENDING'),

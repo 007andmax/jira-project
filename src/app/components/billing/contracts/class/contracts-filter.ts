@@ -15,9 +15,7 @@ export class ContractsFilter {
   new CompanyFilterTop('amount', '')];
   selectedCompany: Company = null;
   selectedType: ContractsFilterType = null;
-  selectedStatus: Array<ContractsFilterStatus> = [new ContractsFilterStatus('Current', 'CURRENT'),
-  new ContractsFilterStatus('Pending', 'PENDING'),
-  new ContractsFilterStatus('Expired', 'EXPIRED')];
+  selectedStatus: Array<ContractsFilterStatus> = [];
   selectedStartDate: number = null;
   selectedEndDate: number = null;
   enableInvoiceAutoCreate: boolean = null;
