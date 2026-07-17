@@ -8,6 +8,7 @@ import { ContractsHeaderComponent } from './contracts-header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ContractsFilterModule } from '../contracts-filter/contracts-filter.module';
 
 
 describe('ContractsHeaderComponent unit test', () => {
@@ -21,6 +22,7 @@ describe('ContractsHeaderComponent unit test', () => {
         MultiDatepickerModule,
         CompanyDropDownModule,
         HttpClientModule,
+        ContractsFilterModule,
         ToastrModule.forRoot({
           closeButton: true,
           timeOut: 5000,
@@ -28,7 +30,7 @@ describe('ContractsHeaderComponent unit test', () => {
         }),
         NoopAnimationsModule],
       declarations: [ContractsHeaderComponent,
-        ContractsFilterComponent
+
       ],
     }).compileComponents();
 

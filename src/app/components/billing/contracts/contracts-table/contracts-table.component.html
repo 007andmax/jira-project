@@ -1,4 +1,105 @@
-<div class="qt-page-list__body">
+<div class="qt-page-list__body qt-pl-32"   [ngClass]="{'qt-pr-32':!toggleFilter,
+        '--open-filters':toggleFilter}">
+         <div class="qt-page-list__container">
+                <div class="qt-page-list__body">
+          <div class="qt-page-list__header-thead-container">
+        <div class="qt-table-modern qt-page-list__header-thead contracts-table">
+            <div class="qt-table-modern qt-page-list__header-thead">
+                <div class="qt-page-list__header-thead__row contracts-table-row-item">
+                    <div
+                        class="contracts-table__company pointer"
+                        (click)="setSort('COMPANY')"
+                    >
+                        Company
+                        <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'COMPANY'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="contracts-table__description pointer"
+                        (click)="setSort('DESCRIPTION')"
+                    >
+                        Description
+                        <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'DESCRIPTION'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="contracts-table__contract-type pointer"
+                        (click)="setSort('TYPE')"
+                    >
+                        Contract Type
+                        <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'TYPE'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div class="contracts-table__status  ">Options</div>
+                    <div
+                        class="contracts-table__status pointer"
+                        (click)="setSort('STATUS')"
+                    >
+                        Status
+                        <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'STATUS'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="contracts-table__start-date pointer"
+                        (click)="setSort('START_DATE')"
+                    >
+                        Start Date
+                        <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'START_DATE'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="contracts-table__review-date pointer"
+                        (click)="setSort('REVIEW_DATE')"
+                    >
+                        Review Date
+                        <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'REVIEW_DATE'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="contracts-table__review-date pointer"
+                        (click)="setSort('END_DATE')"
+                    >
+                        End Date
+                        <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'END_DATE'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="contracts-table__amount pointer"
+                        (click)="setSort('AMOUNT')"
+                    >
+                        Amount
+                        <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'AMOUNT'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div class="contracts-table__menu"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="qt-page-list__body-table-container"   [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}">
         <div class="qt-page-list__body-tbody qt-table-modern contracts-table">
             <div class="tbody"   infiniteScroll
@@ -38,5 +139,30 @@
                             class="loading pengind-loading"
                             *ngIf="showPendingPreloader"
                         ></div>
+    </div>
+    </div>
+     <!-- <div
+            class="aside-filters qt-ml-16"
+            [hidden]="!toggleFilter"
+        >
+            <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
+                <div class="aside-filters-header__title">Filters</div>
+                <div
+                    class="qt-button --square-md --gray pointer"
+                    (click)="onCloseFilters()"
+                >
+                    <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+                </div>
+            </div>
+            <div class="aside-filters-content">
+                <app-contracts-filter
+                [companyContracts]="companyContracts"
+                (onClose)="onCloseFilters()"
+                    class="qt-w100"
+                ></app-contracts-filter>
+            </div>
+        </div>
+
+-->
     </div>
 </div>

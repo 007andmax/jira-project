@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { Company } from 'src/app/interfaces/company/company';
 import { AppService } from 'src/app/states/app/app.service';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { ContractsFilterComponent } from '../contracts-filter/contracts-filter.component';
 import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 import { Subscription } from 'rxjs';
+import { ContractsFilter } from '../class/contracts-filter';
 
 @Component({
   selector: 'app-contracts-header',
@@ -13,32 +14,47 @@ import { Subscription } from 'rxjs';
 })
 export class ContractsHeaderComponent implements OnInit, OnDestroy {
   @Input() companyContracts: Company = null;
-  @ViewChild('filter', { static: true }) filter: ContractsFilterComponent;
-  count = 0;
+  filter: ContractsFilter = new ContractsFilter();
   toggleFilter: boolean = false;
   countFilter: number = 0;
-  sortBy: TicketSortBy = new TicketSortBy('COMPANY', 'ASC');
   sub: Subscription = new Subscription();
   constructor(private contractsStateService: ContractsStateService,
     public appService: AppService) { }
 
 
   ngOnInit() {
+    /* let getFilter = this.contractsStateService.getFilter().subscribe(data => {
+       this.sortBy.sortBy = 'COMPANY';
+     })
+     this.sub.add(getFilter);*/
+    let onCloseFitler = this.contractsStateService.onToggleFitler.subscribe(res => {
+      this.toggleFilter = res;
+    })
+    this.sub.add(onCloseFitler);
     let getFilter = this.contractsStateService.getFilter().subscribe(data => {
-      this.sortBy.sortBy = 'COMPANY';
+      this.filter.setFilters(data)
+      this.onChangeCounterFilter();
     })
     this.sub.add(getFilter);
+  }
+  public onChangeCounterFilter() {
+    this.countFilter = 0;
+    if (this.filter.selectedCompany) this.countFilter++;
+    if (this.filter.selectedType) this.countFilter++;
+    if (this.filter.selectedStartDate && this.filter.selectedEndDate) this.countFilter++;
+    if (this.filter.selectedStatus.length > 0) this.countFilter++;
+    if (this.filter.enableInvoiceAutoCreate || this.filter.manualCreateBillableItem) this.countFilter++;
+
   }
   public showCreate() {
     this.contractsStateService.toggleCreate(true);
   }
-  public setSort(name) {
-    this.sortBy.sortBy = name;
-    this.sortBy.sortDirection = this.sortBy.sortDirection == 'DESC' ? 'ASC' : 'DESC';
-    this.contractsStateService.setSort(`${name}_${this.sortBy.sortDirection}`);
+  public onToggleFilters(data) {
+    this.toggleFilter = data;
+    this.contractsStateService.onToggleFitler.emit(data);
   }
   clearAll() {
-    this.filter.onClearAll();
+    this.contractsStateService.onClearFitler.emit(null);
   }
   onChangeCountFilter(data) {
     this.countFilter = data;

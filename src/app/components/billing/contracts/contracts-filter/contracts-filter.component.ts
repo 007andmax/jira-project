@@ -34,7 +34,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
   new ContractsFilterType('Subscriptions', 'SERVICE_CONTRACT', 'OTHER')];
   listsStatus = []
   sub: Subscription = new Subscription();
-  @Output() changeCountFilter = new EventEmitter<any>();
+  @Output() onClose = new EventEmitter<any>();
   constructor(private contractsStateService: ContractsStateService,
     private companiesState: CompaniesStateService,
     private customerPortalStateService: CustomerPortalStateService,
@@ -46,7 +46,10 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
       this.onSelectCompany(this.companyContracts);
       this.cd.detectChanges();
     }
-    this.onChangeCounterFilter();
+    let onClearFitler = this.contractsStateService.onClearFitler.subscribe(res => {
+      this.onClearAll();
+    })
+    this.sub.add(onClearFitler);
   }
   public onClearAll() {
     if (!this.companyContracts) {
@@ -63,26 +66,16 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     this.statusDp.clearWithOutChanges();
     this.optionsDp.clearWithOutChanges();
     this.contractsStateService.setFilter(this.contractsFilter);
-    this.onChangeCounterFilter();
+  }
 
-  }
-  public onChangeCounterFilter() {
-    let count = 0;
-    if (this.contractsFilter.selectedCompany) count++;
-    if (this.contractsFilter.selectedType) count++;
-    if (this.contractsFilter.selectedStartDate && this.contractsFilter.selectedEndDate) count++;
-    if (this.contractsFilter.selectedStatus.length > 0) count++;
-    if (this.contractsFilter.enableInvoiceAutoCreate || this.contractsFilter.manualCreateBillableItem) count++;
-    this.changeCountFilter.emit(count);
-  }
   public onSelectOption(item) {
     this.contractsFilter.clearOptions();
     if (item) {
       if (item.type == 'manualCreateBillableItem') this.contractsFilter.setManualCreateBillableItem(true);
       if (item.type == 'enableInvoiceAutoCreate') this.contractsFilter.setEnableInvoiceAutoCreate(true);
     }
-    this.contractsStateService.setFilter(this.contractsFilter);
-    this.onChangeCounterFilter();
+    // this.contractsStateService.setFilter(this.contractsFilter);
+    // this.onChangeCounterFilter();
   }
   public onSelectCompany(item) {
     if (!item) {
@@ -90,8 +83,8 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     } else {
       this.contractsFilter.setCompany(item);
     }
-    this.contractsStateService.setFilter(this.contractsFilter);
-    this.onChangeCounterFilter();
+    //  this.contractsStateService.setFilter(this.contractsFilter);
+    // this.onChangeCounterFilter();
   }
 
   onSelectStatus(item) {
@@ -100,8 +93,8 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     } else {
       this.contractsFilter.setStatus(item);
     }
-    this.contractsStateService.setFilter(this.contractsFilter);
-    this.onChangeCounterFilter();
+    //  this.contractsStateService.setFilter(this.contractsFilter);
+    // this.onChangeCounterFilter();
   }
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {
@@ -110,8 +103,8 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     } else {
       this.contractsFilter.resetDates();
     }
-    this.contractsStateService.setFilter(this.contractsFilter);
-    this.onChangeCounterFilter();
+    //  this.contractsStateService.setFilter(this.contractsFilter);
+    //  this.onChangeCounterFilter();
   }
   onSelectType(item) {
     if (!item) {
@@ -119,8 +112,29 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     } else {
       this.contractsFilter.setType(item);
     }
+    //  this.contractsStateService.setFilter(this.contractsFilter);
+    // this.onChangeCounterFilter();
+  }
+  public clearAll() {
+    if (!this.companyDp.isDisabled) {
+      this.contractsFilter.setCompany(null);
+      this.companyDp.clearWithOutChanges();
+    }
+    this.contractsFilter.setType(null);
+    this.contractsFilter.clearOptions();
+    this.contractsFilter.resetDates();
+    this.contractsFilter.setStatus([]);
+    this.typesDp.clearWithOutChanges();
+    this.optionsDp.clearWithOutChanges();
+    this.datesDp.clearWithOutChanges();
+    this.statusDp.clearWithOutChanges();
     this.contractsStateService.setFilter(this.contractsFilter);
-    this.onChangeCounterFilter();
+  }
+  applyFilters() {
+    this.contractsStateService.setFilter(this.contractsFilter);
+  }
+  close() {
+    this.onClose.emit(null);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

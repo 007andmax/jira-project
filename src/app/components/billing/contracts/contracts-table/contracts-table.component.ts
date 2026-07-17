@@ -11,6 +11,7 @@ import { ContractsRealTimeService } from 'src/app/states/contracts/contracts-rea
 import { ContractsListService } from '../services/contracts-list.service';
 import { Company } from 'src/app/interfaces/company/company';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-contracts-table',
@@ -19,11 +20,13 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
   providers: [ContractsListService]
 })
 export class ContractsTableComponent implements OnInit, OnDestroy {
+  toggleFilter: boolean = false;
   showPreloader: boolean = true;
   showPendingPreloader: boolean = false;
   filter: ContractsFilter = new ContractsFilter();
   list: Array<ContractItem> = [];
   @Input() companyContracts: Company = null;
+  sortBy: TicketSortBy = new TicketSortBy('COMPANY', 'ASC');
   public infiniteScrollDisabled = false;
   container = document.body.querySelector(".main-container");
   sub: Subscription = new Subscription();
@@ -80,7 +83,17 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(changeContractsArray);
+    let onToggleFitler = this.contractsStateService.onToggleFitler.subscribe(res => {
+      this.toggleFilter = res;
+    })
+    this.sub.add(onToggleFitler);
   }
+  public setSort(name) {
+    this.sortBy.sortBy = name;
+    this.sortBy.sortDirection = this.sortBy.sortDirection == 'DESC' ? 'ASC' : 'DESC';
+    this.contractsStateService.setSort(`${name}_${this.sortBy.sortDirection}`);
+  }
+
   public setDefaultScoll() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.filter.offset = 0;
@@ -107,6 +120,7 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
       this.list.forEach(item => {
         if (!showNotificationReview) showNotificationReview = this.contractsListService.isShowNotificationReview(item.reviewDate);
       })
+      console.log("this.list", this.list);
       if (showNotificationReview) this.contractsStateService.showNotificationReview();
       if (data.serviceAgreements < this.filter.pageSize) this.contractsListService.setBlockList(true);
       this.filter.offset += this.filter.pageSize;

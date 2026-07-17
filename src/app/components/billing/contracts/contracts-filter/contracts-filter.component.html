@@ -1,6 +1,14 @@
-<div class="qt-df qt-ai-c">
-    <company-drop-down
+<div class="left-panel-ng2__content--filters aside-filters-content__main">
+    <div class="content-filters-header">
+        <div
+            class="qt-icon icon__close qt-icon__white qt-sz-20"
+            (click)="close()"
+        ></div>
+        <div class="content-filters-header__title pointer">Filters</div>
+    </div>
+   <company-drop-down
         class="contracts-company-filter search-company"
+        [title]="'Company'"
         [search]="true"
         #companyDp
         [placeholder]="'Select Company'"
@@ -11,6 +19,7 @@
     <app-drop-down
         class="contracts-company-filter search-users "
         #typesDp
+         [title]="'Contract Type'"
         [placeholder]="'Contract Type'"
         [change]="false"
         [list]="listsTypes"
@@ -20,20 +29,47 @@
     <app-drop-down
         class="contracts-company-filter search-option "
         #optionsDp
+          [title]="'Contract Generation Option'"
         [placeholder]="'Select by Option'"
         [change]="false"
         [list]="listsOptions"
         [field]="'title'"
         (onSelectedItem)="onSelectOption($event)"
     ></app-drop-down>
-    <app-multi-datepicker
+      <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f100">
+            <div class="qt-input-block__label">Start Date</div>
+             <app-multi-datepicker
         class="qt-input-block contracts-date-filter search-type"
         #datesDp
         (selectedDate)="filterByDate($event)"
     ></app-multi-datepicker>
-    <app-contracts-filter-status
+        </div>
+        </div>
+         <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f100">
+            <div class="qt-input-block__label">Status</div>
+          <app-contracts-filter-status
         class="contracts-status-filter search-status "
         #statusDp
         (onChange)="onSelectStatus($event)"
     ></app-contracts-filter-status>
+        </div>
+        </div>
+</div>
+<div class="aside-filters-content__footer">
+    <div class="qt-df">
+        <button
+            class="qt-button --md --gray qt-mr-12 qt-w100 qt-jc-c"
+            (click)="clearAll()"
+        >
+            Clear All
+        </button>
+        <button
+            class="qt-button --md qt-w100 qt-jc-c"
+            (click)="applyFilters()"
+        >
+            Apply
+        </button>
+    </div>
 </div>

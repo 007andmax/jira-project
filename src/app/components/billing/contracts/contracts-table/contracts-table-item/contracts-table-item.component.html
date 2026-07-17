@@ -15,7 +15,7 @@
     ></app-users-table-company-by>
     </ng-template
 >
-        <div
+       <div
             class="tooltip__circle-avatar"
             [textContent]="company ? company.name[0].toUpperCase() : ''"
             [ngStyle]="{'background': parseLogo() }"
@@ -30,7 +30,7 @@
             [popover]="pCompany"
             [disabled]="!company"
             [disablePopover]="!company"
-        ></div>
+        ></div> 
         <div
             class="ellipsis"
             [textContent]="company?.name"

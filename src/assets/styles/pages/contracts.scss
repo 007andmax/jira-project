@@ -3,6 +3,9 @@
 @import "./src/assets/styles/mixin/breakpoint";
 
 .contracts-page {
+      padding: 0;
+    background-color: $white;
+    min-width: unset;
   .contracts-list-header,
   .contracts-list-table-header {
     z-index: 1;
@@ -558,8 +561,8 @@ app-contracts-filter {
   width: 100%;
 }
 .contracts-company-filter {
-  width: 35%;
-  margin-right: 8px;
+  width: 100%;
+  margin-bottom: 8px;
   input {
     color: $gray-900;
   }
@@ -570,7 +573,7 @@ app-contracts-filter {
 }
 
 .contracts-status-filter {
-  width: 21%;
+  width: 100%;
 
   input {
     color: $gray-900;
@@ -591,8 +594,8 @@ app-contracts-filter {
 }
 
 .contracts-date-filter {
-  width: 23%;
-  margin-right: 8px;
+  width: 100%;
+  margin-bottom: 8px;
   input {
     color: $gray-900;
   }

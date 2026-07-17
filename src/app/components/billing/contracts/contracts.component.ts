@@ -6,6 +6,7 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { ActivatedRoute } from '@angular/router';
 import { fadeInAnimation } from 'src/app/animations';
+import { Company } from 'src/app/interfaces/company/company';
 
 @Component({
   selector: 'contracts',
@@ -16,6 +17,8 @@ import { fadeInAnimation } from 'src/app/animations';
   styleUrls: ['./contracts.component.scss'],
 })
 export class ContractsComponent implements OnInit, OnDestroy {
+  companyContracts: Company = null;
+  toggleFilter: boolean = false;
   showCreate = false;
   showPreview = false;
   showEdit = false;
@@ -71,6 +74,13 @@ export class ContractsComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getOnToggleEdit);
+    this.contractsStateService.onToggleFitler.subscribe(res => {
+      this.toggleFilter = res;
+    })
+  }
+  onCloseFilters() {
+    this.toggleFilter = false;
+    this.contractsStateService.onToggleFitler.emit(false);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

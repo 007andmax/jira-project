@@ -31,6 +31,8 @@ export class ContractsStateService {
   onFastAdd: EventEmitter<any> = new EventEmitter();
   onFastEdit: EventEmitter<any> = new EventEmitter();
   onFastRemove: EventEmitter<any> = new EventEmitter();
+  onToggleFitler: EventEmitter<any> = new EventEmitter();
+  onClearFitler: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 

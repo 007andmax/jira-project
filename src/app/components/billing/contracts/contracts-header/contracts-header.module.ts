@@ -11,7 +11,7 @@ import { ContractsFilterStatusModule } from '../contracts-filter/contracts-filte
 
 @NgModule({
     declarations: [ContractsHeaderComponent,
-        ContractsFilterComponent
+
     ],
     imports: [
         CommonModule,

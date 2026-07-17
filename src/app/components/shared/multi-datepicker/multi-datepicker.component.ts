@@ -11,7 +11,7 @@ import { DateService } from "../../../services/date/date.service";
   styleUrls: ['./multi-datepicker.component.scss']
 })
 export class MultiDatepickerComponent implements OnInit {
-
+  @Input() container: string = null;
   hoveredDate: NgbDate;
   fromDate: NgbDate;
   toDate: NgbDate;

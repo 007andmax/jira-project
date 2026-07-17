@@ -10,6 +10,8 @@ import { ContractsRoutingModule } from './contracts-routing.module';
 import { ContractsReviewComponent } from './contracts-review/contracts-review.component';
 import { ContractsReviewModule } from './contracts-review/contracts-review.module';
 import { ContractsFilterStatusComponent } from './contracts-filter/contracts-filter-status/contracts-filter-status.component';
+import { ContractsFilterStatusModule } from './contracts-filter/contracts-filter-status/contracts-filter-status.module';
+import { ContractsFilterModule } from './contracts-filter/contracts-filter.module';
 
 
 
@@ -26,7 +28,9 @@ import { ContractsFilterStatusComponent } from './contracts-filter/contracts-fil
         ContractsAsideModule,
         ContractsEditModule,
         ContractsRoutingModule,
-        ContractsReviewModule
+        ContractsReviewModule,
+        ContractsFilterStatusModule,
+        ContractsFilterModule
 
     ],
 
