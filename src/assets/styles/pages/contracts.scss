@@ -60,7 +60,7 @@
   }
 
   .contracts-table__company {
-    flex: 0 0 230px;
+    flex: 0 0 245px;
     @include media-breakpoint-down($md) {
       flex: 0 0 180px;
     }
@@ -74,10 +74,7 @@
   }
 
   .qt-table-modern__row {
-    > div:first-child {
-      padding-left: 16px !important;
-      padding-right: 0px;
-    }
+   
     > div:last-child {
       padding: 12px 24px 12px 8px;
     }
