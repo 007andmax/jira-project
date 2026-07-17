@@ -75,7 +75,8 @@
 
   .qt-table-modern__row {
     > div:first-child {
-      padding: 12px 8px 12px 24px;
+      padding-left: 16px !important;
+      padding-right: 0px;
     }
     > div:last-child {
       padding: 12px 24px 12px 8px;
@@ -565,10 +566,10 @@ app-contracts-filter {
   margin-bottom: 8px;
   input {
     color: $gray-900;
-  }
-  input::placeholder {
-    color: $gray-600;
-    font-size: 12px;
+    &::placeholder {
+          font-size: inherit;
+          color: $gray-400;
+      }
   }
 }
 

@@ -9,21 +9,21 @@
   text-transform: uppercase;
 
   &.--success {
-    color: $green-600;
-    border-color: $green-600;
+    color: $green-600 !important;
+    border-color: $green-600 !important;
   }
 
   &.--info {
-    color: $blue-light-600;
-    border-color: $blue-light-600;
+    color: $blue-light-600 !important;
+    border-color: $blue-light-600 !important;
   }
 
   &.--warning {
-    color: $yellow-600;
-    border-color: $yellow-600;
+    color: $yellow-600 !important;
+    border-color: $yellow-600 !important;
   }
   &.--error {
-    color: $red-600;
-    border-color: $red-600;
+    color: $red-600 !important;
+    border-color: $red-600 !important;
   }
 }
