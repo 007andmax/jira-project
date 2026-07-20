@@ -5,7 +5,7 @@
 .contracts-page {
       padding: 0;
     background-color: $white;
-    min-width: unset;
+    min-width: fit-content;
   .contracts-list-header,
   .contracts-list-table-header {
     z-index: 1;
@@ -566,6 +566,7 @@ app-contracts-filter {
     &::placeholder {
           font-size: inherit;
           color: $gray-400;
+          font-size: 13px !important;
       }
   }
 }
@@ -578,7 +579,7 @@ app-contracts-filter {
   }
   input::placeholder {
     color: $gray-600;
-    font-size: 12px;
+    font-size: 13px;
   }
 }
 .contracts-number-filter {
@@ -599,18 +600,9 @@ app-contracts-filter {
   }
   input::placeholder {
     color: $gray-600;
-    font-size: 12px;
+    font-size: 13px;
   }
-  .date-picker {
-    position: relative;
-    display: table;
-    border-collapse: separate;
-  }
-  .dropdown-menu {
-    left: auto;
-    right: 0;
-    margin-top: 0;
-  }
+   
 }
 
 .contracts-page__aside {

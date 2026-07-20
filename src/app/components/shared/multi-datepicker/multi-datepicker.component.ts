@@ -11,7 +11,9 @@ import { DateService } from "../../../services/date/date.service";
   styleUrls: ['./multi-datepicker.component.scss']
 })
 export class MultiDatepickerComponent implements OnInit {
+  @Input() class = ['qt-dropdown'];
   @Input() container: string = null;
+  @Input() placement: string = 'bottom-right';
   hoveredDate: NgbDate;
   fromDate: NgbDate;
   toDate: NgbDate;

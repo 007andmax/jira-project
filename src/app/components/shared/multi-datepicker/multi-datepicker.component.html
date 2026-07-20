@@ -1,9 +1,10 @@
 <div
     class="date-picker multi-datepicker-container"
-    appClickOtside
-    [classParent]="'.date-picker'"
-    [init]="true"
-    (onOutSide)="hideDatePicker()"
+    [ngClass]="class"
+    ngbDropdown
+    [container]="container"
+     [placement]="placement"
+    #dp="ngbDropdown"
 >
     <app-mat-error
         class="app-drop-down__error invalid-feedback mat-error"
@@ -16,9 +17,10 @@
         [attr.placeholder]="placeholder"
         (click)="toggleDatePicker()"
         [(ngModel)]="selectedDateModel"
-        [ngClass]="{'disabled': isDisabled,'--input-error' : !validate}"
+        [ngClass]="{'disabled': isDisabled,'no-click':isDisabled,'--input-error' : !validate}"
         [disabled]="isDisabled"
         class="pointer"
+        ngbDropdownToggle
     >
     <i
         *ngIf="selectedDateModel"
@@ -30,8 +32,10 @@
         class="icn-16 qt-icon icon__calendar pointer"
     ></i>
     <div
-        class="dropdown-menu"
-        [ngClass]="{'show': showDatePicker}"
+         ngbDropdownMenu
+        [ngStyle]="{'width':   '100%', 'max-height':  'initial'}"
+        aria-labelledby="dropdown1"
+        class="app-drop-down__dropdown date-picker"
     >
         <ngb-datepicker
             #dp

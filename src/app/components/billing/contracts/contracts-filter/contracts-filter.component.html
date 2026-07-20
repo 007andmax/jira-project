@@ -42,6 +42,7 @@
              <app-multi-datepicker
         class="qt-input-block contracts-date-filter search-type"
         #datesDp
+        [container]="'body'"
         (selectedDate)="filterByDate($event)"
     ></app-multi-datepicker>
         </div>
