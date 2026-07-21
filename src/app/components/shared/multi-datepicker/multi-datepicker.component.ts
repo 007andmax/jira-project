@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { NgbDate, NgbCalendar, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { DateService } from "../../../services/date/date.service";
 
 /**
@@ -11,6 +11,7 @@ import { DateService } from "../../../services/date/date.service";
   styleUrls: ['./multi-datepicker.component.scss']
 })
 export class MultiDatepickerComponent implements OnInit {
+  @ViewChild('dp', { static: true }) dp: NgbDropdown;
   @Input() class = ['qt-dropdown'];
   @Input() container: string = null;
   @Input() placement: string = 'bottom-right';
@@ -110,6 +111,7 @@ export class MultiDatepickerComponent implements OnInit {
       const endDate = new Date(this.dateService.getDateFromBootstrap(end));
 
       this.selectedDateModel = `${this.dateService.getInvoiceDate(startDate)} - ${this.dateService.getInvoiceDate(endDate)}`;
+      this.dp.close();
     } else {
       this.selectedDateModel = '';
     }
