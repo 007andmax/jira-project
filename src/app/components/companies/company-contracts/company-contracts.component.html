@@ -1,18 +1,39 @@
 <div class="qt-page-list contracts-page --sticky-breadcrumbs">
-    <div class="qt-df qt-fd-c qt-jc-sb contracts-page__list-container">
-        <div class="qt-w100">
+    
             <contracts-review></contracts-review>
             <app-contracts-header
                 *ngIf="companyContracts"
                 [companyContracts]="companyContracts"
             ></app-contracts-header>
+             <div class="qt-page-list users-page qt-df">
             <app-contracts-table
                 *ngIf="companyContracts"
                 [companyContracts]="companyContracts"
             ></app-contracts-table>
+              <div
+            class="aside-filters qt-ml-16"
+            [hidden]="!toggleFilter"
+        >
+            <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
+                <div class="aside-filters-header__title">Filters</div>
+                <div
+                    class="qt-button --square-md --gray pointer"
+                    (click)="onCloseFilters()"
+                >
+                    <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+                </div>
+            </div>
+            <div class="aside-filters-content">
+                <app-contracts-filter
+                *ngIf="toggleFilter"
+                [companyContracts]="companyContracts"
+                (onClose)="onCloseFilters()"
+                    class="qt-w100"
+                ></app-contracts-filter>
+            </div>
         </div>
-    </div>
-</div>
+        </div>
+        </div>
 <app-contracts-preview
     *ngIf="showPreview"
     [serviceAgreement]="serviceAgreement"

@@ -18,11 +18,12 @@ export class CompanyContractsComponent extends ContractsComponent implements OnI
     let subscription = this.activateRoute.params.subscribe(params => {
       id = params['id'];
       if (id) this.companiesStateService.setCompanyRoutingId(id);
-      this.companyContracts = this.companiesStateService.getCompanies().find(item => item.id === id);
+      console.log("id", id);
+      if (this.companiesStateService.getCompanies().find(item => item.id === id)) this.companyContracts = this.companiesStateService.getCompanies().find(item => item.id === id);
     });
     this.sub.add(subscription);
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe(res => {
-      this.companyContracts = res.find(item => item.id === id);
+      if (res.find(item => item.id === id)) this.companyContracts = res.find(item => item.id === id);
     })
     this.sub.add(getOnCompanies);
     let getOnShowNotificationReview = this.contractsStateService.getOnShowNotificationReview().subscribe(data => {
@@ -67,6 +68,9 @@ export class CompanyContractsComponent extends ContractsComponent implements OnI
       }
     })
     this.sub.add(getOnToggleEdit);
+    this.contractsStateService.onToggleFitler.subscribe(res => {
+      this.toggleFilter = res;
+    })
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
