@@ -40,6 +40,7 @@
     <app-multi-datepicker
         class="qt-input-block invoices-date-filter qt-mr-8"
         #datesDp
+         [container]="'body'"
         (selectedDate)="filterByDate($event)"
     ></app-multi-datepicker>
     <input

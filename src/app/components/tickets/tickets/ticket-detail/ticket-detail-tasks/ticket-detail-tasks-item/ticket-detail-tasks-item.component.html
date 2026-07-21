@@ -90,7 +90,7 @@
     ></div>
     <app-tasks-date-picker
         #dateDp
-        [class]="['date-picker-invisible', '--sm']"
+        [ngClass]="['date-picker-invisible', '--sm']"
         [container]="'body'"
         [type]="'DETAIL_TICKET'"
         [editStart]="item.startDate"

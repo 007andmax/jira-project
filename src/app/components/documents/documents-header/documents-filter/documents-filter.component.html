@@ -30,6 +30,7 @@
     <app-multi-datepicker
         class="qt-input-block qt-header-date-filter filter-documents-date"
         #datesDp
+        [container]="'body'"
         [placeholder]="'Review Date'"
         (selectedDate)="filterByDate($event)"
     ></app-multi-datepicker>

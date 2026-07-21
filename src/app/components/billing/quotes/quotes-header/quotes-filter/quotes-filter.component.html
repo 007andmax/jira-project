@@ -30,6 +30,7 @@
     <app-multi-datepicker
         class="qt-input-block qt-header-date-filter quotes-date-filter"
         #datesDp
+          [container]="'body'"
         (selectedDate)="filterByDate($event)"
     ></app-multi-datepicker>
 </div>

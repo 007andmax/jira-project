@@ -325,7 +325,7 @@
                     <div class="qt-input-block__label">Start - End Date</div>
                     <app-tasks-date-picker
                         #datePicker
-                        [class]="['date-picker-invisible', '--sm']"
+                        [ngClass]="['date-picker-invisible', '--sm']"
                         [container]="'body'"
                         [editStart]="modelForm?.value.startDate"
                         [editEnd]="modelForm?.value.endDate"
