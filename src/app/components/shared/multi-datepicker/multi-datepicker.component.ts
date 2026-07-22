@@ -14,7 +14,6 @@ export class MultiDatepickerComponent implements OnInit {
   @ViewChild('dp', { static: true }) dp: NgbDropdown;
   @Input() class = ['qt-dropdown'];
   @Input() container: string = null;
-  @Input() placement: string = 'bottom-right';
   hoveredDate: NgbDate;
   fromDate: NgbDate;
   toDate: NgbDate;

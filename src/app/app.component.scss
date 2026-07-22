@@ -135,6 +135,7 @@ aside {
   height: calc(100vh - 64px);
   overflow-y: auto;
   overflow-x: auto;
+  display: flex;
 
   &::-webkit-scrollbar {
     height: 8px;
