@@ -2,7 +2,7 @@
     class="breadcrumbs"
     *ngIf="isCompanyState()"
     [ngClass]="{
-'breadcrumbs-company-password-manager':state === 'company-password-manager',
+'breadcrumbs-company-password-manager':state === 'company-password-manager' || state == 'company-contracts',
 'breadcrumbs-company-products':state === 'company-products',
 '--sticky':leftPanelService.isCompanyPage(state)}"
 >
