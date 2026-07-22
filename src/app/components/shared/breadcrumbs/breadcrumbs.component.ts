@@ -21,6 +21,8 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {
+        this.state = this.leftPanelStateService.activePage;
+        console.log("this.state", this.state);
         let onChangeState = this.leftPanelStateService.onChangeState.subscribe(data => {
             this.state = data;
             if (!this.cd['destroyed']) {
