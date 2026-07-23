@@ -120,7 +120,6 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
       this.list.forEach(item => {
         if (!showNotificationReview) showNotificationReview = this.contractsListService.isShowNotificationReview(item.reviewDate);
       })
-      console.log("this.list", this.list);
       if (showNotificationReview) this.contractsStateService.showNotificationReview();
       if (data.serviceAgreements < this.filter.pageSize) this.contractsListService.setBlockList(true);
       this.filter.offset += this.filter.pageSize;

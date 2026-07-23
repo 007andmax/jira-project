@@ -40,7 +40,6 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     private customerPortalStateService: CustomerPortalStateService,
     public cd: ChangeDetectorRef,) { }
   ngOnInit() {
-    console.log("this.companyContracts", this.companyContracts);
     if (this.companyContracts) {
 
       this.companyDp.editItem = this.companyContracts;
