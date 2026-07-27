@@ -26,6 +26,8 @@ export class InventoryStateService {
   onChangeProducts: EventEmitter<InventoryChange> = new EventEmitter();
   onGetListType: EventEmitter<any> = new EventEmitter();
   onClearFilters: EventEmitter<any> = new EventEmitter();
+  onFilter: EventEmitter<any> = new EventEmitter();
+  onToggleFitler: EventEmitter<any> = new EventEmitter();
   listCategoriesForRemove = [];
   categories = [];
   productList: Array<CategoryProductitem> = [];
@@ -77,6 +79,9 @@ export class InventoryStateService {
       this.onGetListType.emit(this.listTypes);
     })
     // this.getProducts();
+  }
+  public setFilter(name) {
+    this.onFilter.emit(name);
   }
   public onInitGetServiceTypeList() {
     this.productService.getProductsTypes().subscribe((data: any) => {

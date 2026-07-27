@@ -19,3 +19,10 @@
          line-height: 16px;
      }
  }
+ .qt-page-list__header {
+    margin: 0;
+    padding: 10px 32px;
+    min-height: 57.1px;
+    background-color: $gray-50;
+    border-bottom: 1px solid $gray-200;
+ }

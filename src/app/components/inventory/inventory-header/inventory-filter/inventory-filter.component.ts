@@ -9,7 +9,7 @@ import { InventoryFilter } from '../../class/inventory-filter';
 @Component({
   selector: 'inventory-filter',
   templateUrl: './inventory-filter.component.html',
-  styleUrls: ['./inventory-filter.component.css'],
+  styleUrls: ['./inventory-filter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InventoryFilterComponent implements OnInit {
@@ -25,6 +25,7 @@ export class InventoryFilterComponent implements OnInit {
   @ViewChild('productTypeSelect', { static: true }) productTypeSelect: DropDownComponent;
   @ViewChild('lastSoldDb', { static: true }) lastSoldDb: DropDownComponent;
   @Output() onResetSelected: EventEmitter<any> = new EventEmitter();
+  @Output() onClose: EventEmitter<any> = new EventEmitter();
   constructor(private inventoryStateService: InventoryStateService,
     public cd: ChangeDetectorRef,) { }
   ngOnInit() {
@@ -53,29 +54,37 @@ export class InventoryFilterComponent implements OnInit {
       this.cd.detectChanges();
     })
     this.sub.add(getOnSortCategory);
+    let onClearFitler = this.inventoryStateService.onClearFilters.subscribe(res => {
+      this.onClearAll();
+    })
+    this.sub.add(onClearFitler);
   }
   onSelectProuctType(data) {
     this.filter.setSortType(data);
-    this.inventoryStateService.setSortType(data);
-    this.onResetSelected.emit(null);
+    //  this.inventoryStateService.setSortType(data);
+    //  this.onResetSelected.emit(null);
   }
   selectActive(data) {
     this.selectedActive = data;
     this.filter.setActive(data.type === 'ACTIVE');
-    this.inventoryStateService.setSortActive(data.type === 'ACTIVE');
-    this.onResetSelected.emit(null);
-    this.cd.detectChanges();
+    //   this.inventoryStateService.setSortActive(data.type === 'ACTIVE');
+    //  this.onResetSelected.emit(null);
+    // this.cd.detectChanges();
   }
   selectLastSold(data) {
     this.filter.setLastSold(data ? data.type : null);
-    this.inventoryStateService.setLastSold(data ? data.type : null);
-    this.onResetSelected.emit(null);
-    this.cd.detectChanges();
+    // this.inventoryStateService.setLastSold(data ? data.type : null);
+    // this.onResetSelected.emit(null);
+    //this.cd.detectChanges();
   }
   onSelectCategory(category) {
     this.filter.setSortCategoty(category);
-    this.inventoryStateService.setSortCategory(category);
-    this.onResetSelected.emit(null);
+    // this.inventoryStateService.setSortCategory(category);
+    //  this.onResetSelected.emit(null);
+    // this.cd.detectChanges();
+  }
+  applyFilters() {
+    this.inventoryStateService.setFilter(this.filter);
     this.cd.detectChanges();
   }
   public onClearAll() {
@@ -84,6 +93,9 @@ export class InventoryFilterComponent implements OnInit {
     this.productTypeSelect.clearWithOutChanges();
     this.lastSoldDb.clearWithOutChanges();
     this.inventoryStateService.resetSortCategoty();
-    this.inventoryStateService.clearFilters();
+    this.inventoryStateService.setFilter(this.filter);
+  }
+  close() {
+    this.onClose.emit(null);
   }
 }

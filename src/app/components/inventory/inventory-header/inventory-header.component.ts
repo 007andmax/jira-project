@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
@@ -9,6 +9,8 @@ import { ProductService } from 'src/app/services/product/product.service';
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { InventoryFilterComponent } from './inventory-filter/inventory-filter.component';
 import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
+import { InventoryFilter } from '../class/inventory-filter';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'inventory-header',
@@ -16,17 +18,17 @@ import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
   styleUrls: ['./inventory-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InventoryHeaderComponent implements OnInit {
+export class InventoryHeaderComponent implements OnInit, OnDestroy {
   productSearchName: string = '';
   reqInventoryList: Array<InventoryItem> = [];
   selectAll: boolean = false;
   countFilter: number = 0;
-  @ViewChild('filtes', { static: true }) filtes: InventoryFilterComponent;
   @Output() onSearch: EventEmitter<any> = new EventEmitter();
   @Output() onFilter: EventEmitter<any> = new EventEmitter();
   @Output() onSelectAllIventory: EventEmitter<any> = new EventEmitter();
+  filter: InventoryFilter = new InventoryFilter();
   toggleFilter: boolean = false;
-  sortBy: TicketSortBy = new TicketSortBy('description', 'ASC');
+  sub: Subscription = new Subscription();
   constructor(private permissionsService: PermissionsService,
     private inventoryStateService: InventoryStateService,
     public cd: ChangeDetectorRef,
@@ -35,12 +37,26 @@ export class InventoryHeaderComponent implements OnInit {
     private toastrProgressStateService: ToastrProgressStateService,
     public appService: AppService) { }
 
+
   ngOnInit() {
     this.cd.markForCheck();
+    let onCloseFitler = this.inventoryStateService.onToggleFitler.subscribe(res => {
+      this.toggleFilter = res;
+    })
+    this.sub.add(onCloseFitler);
+    let getFilter = this.inventoryStateService.onFilter.subscribe(data => {
+      this.filter = data;
+      this.onChangeCountFilter();
+    })
+    this.sub.add(getFilter);
   }
   onBlurSearch(event) {
     this.onSearch.emit(event.target.value);
     this.cd.detectChanges();
+  }
+  public onToggleFilters(data) {
+    this.toggleFilter = data;
+    this.inventoryStateService.onToggleFitler.emit(data);
   }
   onKeyUp(event) {
     if (event.keyCode === 13) this.onSearch.emit(event.target.value); this.cd.detectChanges();
@@ -63,24 +79,21 @@ export class InventoryHeaderComponent implements OnInit {
     this.onSelectAllIventory.emit(false);
     this.onChangeCountFilter();
   }
+
   clearAll() {
-    this.filtes.onClearAll();
+    this.inventoryStateService.onClearFilters.emit(null);
     this.countFilter = 0;
   }
   onChangeCountFilter() {
     this.countFilter = 0;
-    if (this.filtes.filter.sortType) this.countFilter++;
-    if (this.filtes.filter.sortCategoty) this.countFilter++;
-    if (this.filtes.filter.lastSold) this.countFilter++;
+    if (this.filter.sortType) this.countFilter++;
+    if (this.filter.sortCategoty) this.countFilter++;
+    if (this.filter.lastSold) this.countFilter++;
   }
   getTextCountFilters() {
     return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
   }
-  filter(data) {
-    this.sortBy.sortBy = data;
-    this.onFilter.emit(data);
-    this.cd.detectChanges();
-  }
+
   public setReqInventoryList(data) {
     this.reqInventoryList = data;
     this.cd.markForCheck();
@@ -97,11 +110,15 @@ export class InventoryHeaderComponent implements OnInit {
     this.onSelectAllIventory.emit(event.target.checked);
     this.cd.detectChanges();
   }
+
   addProduct() {
     this.inventoryStateService.toggleAsideForAdd();
     this.cd.detectChanges();
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

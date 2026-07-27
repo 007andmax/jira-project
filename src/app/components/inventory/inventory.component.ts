@@ -19,6 +19,7 @@ import { ServiceAgreement } from '../billing/contracts/class/service-agreement';
 import { InventoryHeaderComponent } from './inventory-header/inventory-header.component';
 import { InventoryTableComponent } from './inventory-table/inventory-table.component';
 import { fadeInAnimation } from 'src/app/animations';
+import { TicketSortBy } from '../tickets/tickets/class/ticket-sort-by';
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
@@ -29,6 +30,7 @@ import { fadeInAnimation } from 'src/app/animations';
   providers: [InventoryListService]
 })
 export class InventoryComponent implements OnInit {
+  toggleFilter: boolean = false;
   selectAll: boolean = false;
   inventoryList: Array<InventoryItem> = [];
   reqInventoryList: Array<InventoryItem> = [];
@@ -43,6 +45,7 @@ export class InventoryComponent implements OnInit {
   showEdit = false;
   serviceAgreement: ServiceAgreement;
   container = document.body.querySelector(".main-container");
+  sortBy: TicketSortBy = new TicketSortBy('description', 'ASC');
   @ViewChildren('inventoryItem', { emitDistinctChangesOnly: false }) inventoryItem: QueryList<InventoryTableComponent>;
   @ViewChild('header', { static: true }) header: InventoryHeaderComponent;
   constructor(private productService: ProductService,
@@ -182,6 +185,36 @@ export class InventoryComponent implements OnInit {
       this.getListProducts();
     });
     this.sub.add(onClearFilters);
+    let getFilter = this.inventoryStateService.onFilter.subscribe(data => {
+      document.body.querySelector(".main-container").scrollTo(0, 0);
+      this.filter = data;
+      this.inventoryListService.setBlockList(false);
+      this.page_number = 0;
+      this.inventoryList = [];
+      this.reqInventoryList.forEach(item => {
+        item.selected = false;
+      });
+      this.showPreloader = true;
+      this.getListProducts();
+    })
+    this.sub.add(getFilter);
+    this.inventoryStateService.onToggleFitler.subscribe(res => {
+      this.toggleFilter = res;
+    })
+  }
+  toggleAllCompanies(event) {
+    this.selectAll = event.target.checked;
+    this.onSelectAllIventory(event.target.checked);
+    this.cd.detectChanges();
+  }
+  sort(data) {
+    this.sortBy.sortBy = data;
+    this.onFilter(data);
+    this.cd.detectChanges();
+  }
+  onCloseFilters() {
+    this.toggleFilter = false;
+    this.inventoryStateService.onToggleFitler.emit(false);
   }
   onRemoveProduct(id) {
     this.productService.removeProduct(id).subscribe(data => {
@@ -272,7 +305,7 @@ export class InventoryComponent implements OnInit {
   public onFilter(field) {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.filter.onSetFilter(field);
-    this.header.sortBy.sortDirection = this.filter.direction;
+    this.sortBy.sortDirection = this.filter.direction;
     this.page_number = 0;
     this.inventoryListService.setBlockList(false);
     this.inventoryList = [];

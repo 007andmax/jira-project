@@ -19,14 +19,13 @@ import { TaxesModule } from '../shared/taxes/taxes.module';
 import { InventoryChangeProductTypeComponent } from './inventory-change-product-type/inventory-change-product-type.component';
 import { InventoryChangeProductTypeModule } from './inventory-change-product-type/inventory-change-product-type.module';
 import { MatErrorModule } from '../shared/mat-error/mat-error.module';
+import { InventoryFilterModule } from './inventory-header/inventory-filter/inventory-filter.module';
 
 
 @NgModule({
     declarations: [InventoryComponent,
         InventoryHeaderComponent,
         InventoryTableComponent,
-        InventoryFilterComponent,
-        InventoryAddCategoryComponent
     ],
     imports: [
         CommonModule,
@@ -41,7 +40,8 @@ import { MatErrorModule } from '../shared/mat-error/mat-error.module';
         TaxesModule,
         TextAreaModule,
         InventoryChangeProductTypeModule,
-        MatErrorModule
+        MatErrorModule,
+        InventoryFilterModule
 
     ],
 

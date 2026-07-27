@@ -5,7 +5,140 @@
         (onFilter)="onFilter($event)"
         (onSelectAllIventory)="onSelectAllIventory($event)"
     ></inventory-header>
-    <div class="qt-page-list__body">
+    <div class="qt-page-list users-page qt-df">
+    <div class="qt-page-list__body qt-pl-32"    [ngClass]="{'qt-pr-32':!toggleFilter,
+        '--open-filters':toggleFilter}">
+         <div class="qt-page-list__container">
+                <div class="qt-page-list__body">
+            <div class="qt-page-list__header-thead-container">
+        <div class="qt-table-modern qt-page-list__header-thead">
+            <div class="qt-table-modern qt-page-list__header-thead">
+                <div class="qt-page-list__header-thead__row">
+                    <div class="companies-table__check">
+                        <div class="qt-df qt-jc-fe">
+                            <label class="qt-checkbox">
+                                <input
+                                    type="checkbox"
+                                    class="ng-untouched ng-pristine ng-valid"
+                                    [(ngModel)]="selectAll"
+                                    (change)="toggleAllCompanies($event)"
+                                >
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div
+                        class="products-table__product-name pointer"
+                        (click)="sort('description')"
+                    >
+                        Product Name
+                        <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'description'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="products-table__category pointer"
+                        (click)="sort('category')"
+                    >
+                        Category
+                        <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'category'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="products-table__cost pointer"
+                        (click)="sort('cost')"
+                        *ngIf="getPermissions('VIEW_PRODUCT_COST')"
+                    >
+                        Cost
+                        <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'cost'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="products-table__cost pointer"
+                        (click)="sort('markup')"
+                    >
+                        Markup
+                        <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'markup'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="products-table__sale-price pointer"
+                        (click)="sort('sale')"
+                    >
+                        Sale Price
+                        <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'sale'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="products-table__mfg pointer"
+                        (click)="sort('manufacture')"
+                    >
+                        #Mfg
+                        <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'manufacture'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div class="products-table__tac pointer"    (click)="sort('tax')">Tax
+                           <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'tax'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="products-table__ilc pointer"
+                        (click)="sort('ilc')"
+                    >
+                        ILC
+                        <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'ilc'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="products-table__gl pointer"
+                        (click)="sort('glNumber')"
+                    >
+                        GL
+                        <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'glNumber'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="products-table__product-type pointer"
+                        (click)="sort('productType')"
+                    >
+                        Product Type
+                        <span class="qt-table-modern__sorting"></span>
+                             <div *ngIf="sortBy.sortBy == 'productType'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div class="products-table__menu pointer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
         <div class="qt-page-list__body-table-container">
             <div class="qt-page-list__body-tbody qt-table-modern products-table">
                 <div
@@ -46,6 +179,29 @@
                         *ngIf="showPreloader"
                     ></div>
                 </div>
+            </div>
+        </div>
+    </div>
+     </div>
+      </div>
+      <div
+            class="aside-filters qt-ml-16"
+            [hidden]="!toggleFilter"
+        >
+            <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
+                <div class="aside-filters-header__title">Filters</div>
+                <div
+                    class="qt-button --square-md --gray pointer"
+                    (click)="onCloseFilters()"
+                >
+                    <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+                </div>
+            </div>
+            <div class="aside-filters-content">
+                <inventory-filter
+                    class="qt-w100"
+                    (onClose)="onCloseFilters()"
+                ></inventory-filter>
             </div>
         </div>
     </div>
