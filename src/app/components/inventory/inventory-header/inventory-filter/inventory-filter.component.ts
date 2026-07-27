@@ -13,7 +13,6 @@ import { InventoryFilter } from '../../class/inventory-filter';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InventoryFilterComponent implements OnInit {
-  showAddCategory: boolean = false;
   categories: Array<CategoryProduct> = [];
   sub: Subscription = new Subscription();
   lastSold: Array<TitleListType> = [new TitleListType('Last sold within 30 days', 'WITHIN_30'), new TitleListType('Last sold within 60 Days', 'WITHIN_60'), new TitleListType('Last sold over 30 days ago', 'DAYS_30'), new TitleListType('Last sold over 60 days ago', 'DAYS_60'), new TitleListType('Last sold over 90 days ago', 'DAYS_90'), new TitleListType('Last sold over 180 days ago', 'DAYS_180'), new TitleListType('Last sold over 1 year ago', 'YEAR_1')];

@@ -26,6 +26,7 @@ import { InventoryFilterModule } from './inventory-header/inventory-filter/inven
     declarations: [InventoryComponent,
         InventoryHeaderComponent,
         InventoryTableComponent,
+        InventoryAddCategoryComponent
     ],
     imports: [
         CommonModule,

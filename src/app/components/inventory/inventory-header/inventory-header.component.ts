@@ -19,6 +19,7 @@ import { Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InventoryHeaderComponent implements OnInit, OnDestroy {
+  showAddCategory: boolean = false;
   productSearchName: string = '';
   reqInventoryList: Array<InventoryItem> = [];
   selectAll: boolean = false;

@@ -9,8 +9,7 @@ import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.mo
 
 
 @NgModule({
-    declarations: [InventoryFilterComponent,
-        InventoryAddCategoryComponent
+    declarations: [InventoryFilterComponent
     ],
     imports: [
         CommonModule,

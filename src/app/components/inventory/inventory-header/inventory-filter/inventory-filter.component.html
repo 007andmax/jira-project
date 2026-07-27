@@ -9,32 +9,22 @@
     <app-drop-down
         #categoriesSelect
         [sort]="true"
-        class="products-page__category-btn qt-mr-8"
+        class="qt-mr-8"
         [heightInput]="'36px'"
         [placeholder]="'Select Category'"
         [list]="categories"
+        [title]="'Category'"
         [field]="'name'"
         [search]="true"
         [change]="true"
         (onSelectedItem)="onSelectCategory($event)"
     ></app-drop-down>
-   <div class="inventory-add-category qt-pos-rel qt-mr-8">
-        <button
-            class="qt-button --md"
-            (click)="showAddCategory = true"
-        >
-            Add Category
-        </button>
-        <inventory-add-category
-            *ngIf="showAddCategory"
-            (onClose)="showAddCategory = false"
-        ></inventory-add-category>
-    </div>
     <app-drop-down
         #productTypeSelect
-        class="products-page__category-btn qt-mr-8"
+        class="qt-mr-8"
         [placeholder]="'Select Product Type'"
         [field]="'title'"
+          [title]="'Product Type'"
         [list]="listTypes"
         [search]="true"
         [change]="true"
@@ -44,6 +34,7 @@
         class="active-drop-down qt-mr-8"
         [placeholder]="'Select Active'"
         [editItem]="selectedActive"
+          [title]="'Status'"
         [list]="listActive"
         [field]="'title'"
         [search]="true"
@@ -58,6 +49,7 @@
         [placeholder]="'Select Interval'"
         [list]="lastSold"
         [field]="'title'"
+          [title]="'Last Sold Product'"
         [search]="true"
         [sort]="false"
         [change]="true"

@@ -32,6 +32,18 @@
                         ></div>
                     </div>
                 </div>
+                 <div class="password-add-category qt-pos-rel">
+                    <button
+                        class="plus-btn qt-mr-8"
+                          (click)="showAddCategory = true"
+                    >
+                        +
+                    </button>
+                    <inventory-add-category
+            *ngIf="showAddCategory"
+            (onClose)="showAddCategory = false"
+        ></inventory-add-category>
+                </div>
                 <div class="qt-input-search">
                     <input
                         type="text"
