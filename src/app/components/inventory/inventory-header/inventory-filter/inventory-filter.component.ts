@@ -92,6 +92,8 @@ export class InventoryFilterComponent implements OnInit {
     this.productTypeSelect.clearWithOutChanges();
     this.lastSoldDb.clearWithOutChanges();
     this.inventoryStateService.resetSortCategoty();
+    this.selectedActive = new TitleListType('Active products', 'ACTIVE');
+    this.filter.setActive(true);
     this.inventoryStateService.setFilter(this.filter);
   }
   close() {

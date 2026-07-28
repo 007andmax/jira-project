@@ -47,11 +47,16 @@
                 <div class="qt-input-search">
                     <input
                         type="text"
-                        placeholder="Search Products…"
+                        placeholder="Search Products"
                         (blur)="onBlurSearch($event)"
                         (keyup)="onKeyUp($event)"
                         [(ngModel)]="productSearchName"
                     >
+                     <span
+                class="global-search__close qt-icon icon__close-round qt-icon__gray-400"
+                *ngIf="productSearchName.length > 0"
+                (click)="clearWord()"
+            ></span>
                 </div>
                 <button
                     class="qt-button --gray --md qt-ml-8"

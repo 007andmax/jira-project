@@ -111,7 +111,11 @@ export class InventoryHeaderComponent implements OnInit, OnDestroy {
     this.onSelectAllIventory.emit(event.target.checked);
     this.cd.detectChanges();
   }
-
+  clearWord() {
+    this.productSearchName = "";
+    this.onSearch.emit(this.productSearchName);
+    this.cd.detectChanges();
+  }
   addProduct() {
     this.inventoryStateService.toggleAsideForAdd();
     this.cd.detectChanges();
