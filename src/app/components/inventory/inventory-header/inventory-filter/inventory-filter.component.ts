@@ -60,27 +60,16 @@ export class InventoryFilterComponent implements OnInit {
   }
   onSelectProuctType(data) {
     this.filter.setSortType(data);
-    //  this.inventoryStateService.setSortType(data);
-    //  this.onResetSelected.emit(null);
   }
   selectActive(data) {
     this.selectedActive = data;
     this.filter.setActive(data.type === 'ACTIVE');
-    //   this.inventoryStateService.setSortActive(data.type === 'ACTIVE');
-    //  this.onResetSelected.emit(null);
-    // this.cd.detectChanges();
   }
   selectLastSold(data) {
     this.filter.setLastSold(data ? data.type : null);
-    // this.inventoryStateService.setLastSold(data ? data.type : null);
-    // this.onResetSelected.emit(null);
-    //this.cd.detectChanges();
   }
   onSelectCategory(category) {
     this.filter.setSortCategoty(category);
-    // this.inventoryStateService.setSortCategory(category);
-    //  this.onResetSelected.emit(null);
-    // this.cd.detectChanges();
   }
   applyFilters() {
     this.inventoryStateService.setFilter(this.filter);
