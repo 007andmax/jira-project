@@ -4,6 +4,7 @@
 .qt-report__control-panel-btn {
     position: relative;
     background-color: $white;
+     border: solid 1px $gray-200;
     .mask-dp {
         position: absolute;
         width: 36px;

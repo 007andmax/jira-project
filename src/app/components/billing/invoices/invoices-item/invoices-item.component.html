@@ -82,7 +82,7 @@
             [textContent]="'Paid ' + invoice.getPaidOnDate() + ' days ago'"
         ></span>
         <span
-            class="tag__modern saved"
+            class="tag__modern --saved"
             *ngIf="invoice.status == 'DELETED'"
             [textContent]="'Deleted'"
         ></span>

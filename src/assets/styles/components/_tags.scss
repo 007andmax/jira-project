@@ -17,7 +17,10 @@
     color: $blue-light-600 !important;
     border-color: $blue-light-600 !important;
   }
-
+ &.--saved {
+      color: $gray-900 !important;
+      border-color: $gray-900 !important;
+  }
   &.--warning {
     color: $yellow-600 !important;
     border-color: $yellow-600 !important;

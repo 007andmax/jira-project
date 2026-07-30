@@ -143,6 +143,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   }
   sortList(data) {
     this.sortBy.sortBy = data;
+    this.sortBy.sortDirection = this.invoicesListService.getDirection(this.direction, this.sort, data);
     this.onSortBy(data);
   }
   getTotal() {
