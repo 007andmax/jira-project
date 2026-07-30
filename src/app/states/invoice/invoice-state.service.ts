@@ -12,6 +12,8 @@ export class InvoiceStateService {
   closedAside: EventEmitter<any> = new EventEmitter();
   filter: EventEmitter<any> = new EventEmitter();
   openPreviewAside: EventEmitter<any> = new EventEmitter();
+  onToggleFitler: EventEmitter<any> = new EventEmitter();
+  onClearFitler: EventEmitter<any> = new EventEmitter();
   invoices: Array<Invoice> = [];
 
   constructor() { }

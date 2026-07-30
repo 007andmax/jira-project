@@ -1,12 +1,93 @@
-<div class="qt-page-list invoices-page">
+<div class="qt-page-list invoices-page ">
     <div class="qt-df qt-fd-c qt-jc-sb invoices-page__list-container">
         <div>
             <app-invoices-header
                 #invoiceHeader
                 (onCreateInvoice)="onCreatePayment()"
-                (onSortBy)="sortBy($event)"
+               
             ></app-invoices-header>
-            <div class="qt-page-list__body">
+             <div class="qt-page-list users-page qt-df">
+            <div class="qt-page-list__body qt-pl-32"  [ngClass]="{'qt-pr-32':!toggleFilter,
+        '--open-filters':toggleFilter}">
+         <div class="qt-page-list__container">
+                <div class="qt-page-list__body">
+          <div class="qt-page-list__header-thead-container">
+        <div class="qt-table-modern qt-page-list__header-thead">
+            <div class="qt-table-modern qt-page-list__header-thead">
+                <div class="qt-page-list__header-thead__row">
+                    <div class="invoice-table__check"></div>
+                    <div
+                        class="invoce-table__date pointer"
+                        (click)="sortList('INVOICE_DATE')"
+                    >
+                        Date
+                        <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'INVOICE_DATE'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="invoce-table__invoice pointer"
+                        (click)="sortList('INVOICE_NUMBER')"
+                    >
+                        Invoice#
+                        <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'INVOICE_NUMBER'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="invoce-table__company pointer"
+                        (click)="sortList('COMPANY_NAME')"
+                    >
+                        Company
+                        <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'COMPANY_NAME'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div class="invoce-table__status">Status</div>
+                    <div
+                        class="invoce-table__read-on pointer"
+                        (click)="sortList('READ_ON')"
+                    >
+                        Read On
+                        <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'READ_ON'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="invoce-table__amount pointer"
+                        (click)="sortList('AMOUNT')"
+                    >
+                        Amount
+                        <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'AMOUNT'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div
+                        class="invoce-table__balance-due pointer"
+                        (click)="sortList('BALANCE')"
+                    >
+                        Balance Due
+                        <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'BALANCE'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                    </div>
+                    <div class="invoce-table__menu"></div>
+                </div>
+            </div>
+        </div>
+    </div>
                 <div class="qt-page-list__body-table-container">
                     <div class="qt-page-list__body-tbody qt-table-modern invoice-table">
                         <div class="tbody"
@@ -66,6 +147,29 @@
                     </div>
                 </div>
             </div>
+             </div>
+             </div>
+              <div
+            class="aside-filters qt-ml-16"
+            [hidden]="!toggleFilter"
+        >
+            <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
+                <div class="aside-filters-header__title">Filters</div>
+                <div
+                    class="qt-button --square-md --gray pointer"
+                    (click)="onCloseFilters()"
+                >
+                    <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+                </div>
+            </div>
+            <div class="aside-filters-content">
+                <app-invoices-filter
+                    class="qt-w100"
+                    (onClose)="onCloseFilters()"
+                ></app-invoices-filter>
+            </div>
+        </div>
+        </div>
         </div>
     </div>
 </div>

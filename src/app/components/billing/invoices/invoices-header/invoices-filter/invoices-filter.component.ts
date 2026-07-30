@@ -20,7 +20,7 @@ export class InvoicesFilterComponent implements OnInit, OnDestroy {
   @ViewChild('datesDp', { static: true }) datesDp: MultiDatepickerComponent;
   sub: Subscription = new Subscription();
   invoicesFilter: InvoicesFilter = new InvoicesFilter();
-  @Output() changeCountFilter = new EventEmitter<any>();
+  @Output() onCloseFilters = new EventEmitter<any>();
   statusTypes = [new CompanySetting('Paid invoices', 'PAID'), new CompanySetting('Unpaid invoices', 'UNPAID'), new CompanySetting('Overdue invoices', 'OVERDUE'), new CompanySetting('Deleted invoices', 'DELETED')];
   constructor(private companiesState: CompaniesStateService,
     private elRef: ElementRef,
@@ -29,12 +29,15 @@ export class InvoicesFilterComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-
+    let onClearFitler = this.invoiceStateService.onClearFitler.subscribe(res => {
+      this.onClearAll();
+    })
+    this.sub.add(onClearFitler);
   }
   onSelectStatus(status) {
     this.invoicesFilter.setStatus((status) ? status.value : null);
-    this.invoiceStateService.onInitFilter(this.invoicesFilter);
-    this.onChangeCounterFilter();
+    //    this.invoiceStateService.onInitFilter(this.invoicesFilter);
+    //   this.onChangeCounterFilter();
   }
   public onClearAll() {
     if (!this.customerPortalStateService.isCustomerPortal) this.companyDp.clearWithOutChanges();
@@ -48,7 +51,7 @@ export class InvoicesFilterComponent implements OnInit, OnDestroy {
     this.invoicesFilter.setAmount(null);
     this.elRef.nativeElement.querySelector("#amount-filter").value = "";
     this.invoiceStateService.onInitFilter(this.invoicesFilter);
-    this.onChangeCounterFilter();
+
   }
 
   public onSelectCompany(item) {
@@ -57,19 +60,19 @@ export class InvoicesFilterComponent implements OnInit, OnDestroy {
     } else {
       this.invoicesFilter.setCompanyIds([item.id]);
     }
-    this.invoiceStateService.onInitFilter(this.invoicesFilter);
-    this.onChangeCounterFilter();
+    // this.invoiceStateService.onInitFilter(this.invoicesFilter);
+    // this.onChangeCounterFilter();
   }
   public onSetAmountInvoice(event) {
     this.invoicesFilter.setAmount((event.target.value.length > 0) ? parseFloat(event.target.value).toFixed(2) : null);
     if (event.target.value.length > 0) this.elRef.nativeElement.querySelector("#amount-filter").value = this.invoicesFilter.amount;
-    this.invoiceStateService.onInitFilter(this.invoicesFilter);
-    this.onChangeCounterFilter();
+    //  this.invoiceStateService.onInitFilter(this.invoicesFilter);
+    // this.onChangeCounterFilter();
   }
   public onSetNumberInvoice(event) {
     this.invoicesFilter.setInvoiceNumber((event.target.value.length > 0) ? event.target.value : null);
-    this.invoiceStateService.onInitFilter(this.invoicesFilter);
-    this.onChangeCounterFilter();
+    // this.invoiceStateService.onInitFilter(this.invoicesFilter);
+    // this.onChangeCounterFilter();
   }
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {
@@ -79,17 +82,16 @@ export class InvoicesFilterComponent implements OnInit, OnDestroy {
       this.invoicesFilter.setStartDate(null);
       this.invoicesFilter.setEndDate(null);
     }
-    this.invoiceStateService.onInitFilter(this.invoicesFilter);
-    this.onChangeCounterFilter();
+    //   this.invoiceStateService.onInitFilter(this.invoicesFilter);
+    //  this.onChangeCounterFilter();
   }
-  public onChangeCounterFilter() {
-    let count = 0;
-    if (this.invoicesFilter.companyIds.length > 0) count++;
-    if (this.invoicesFilter.endDate && this.invoicesFilter.startDate) count++;
-    if (this.invoicesFilter.invoiceNumber) count++;
-    if (this.invoicesFilter.status) count++;
-    if (this.invoicesFilter.amount) count++;
-    this.changeCountFilter.emit(count);
+  applyFilters() {
+    this.invoiceStateService.onInitFilter(this.invoicesFilter);
+
+  }
+
+  close() {
+    this.onCloseFilters.emit(null);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

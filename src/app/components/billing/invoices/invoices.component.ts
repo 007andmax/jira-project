@@ -15,6 +15,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { fadeInAnimation } from 'src/app/animations';
 import { InvoicesHeaderComponent } from './invoices-header/invoices-header.component';
+import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-invoices',
@@ -39,6 +40,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   public direction: string = 'DESC';
   selectedInvoices: Array<Invoice> = [];
   sub: Subscription = new Subscription();
+  toggleFilter: boolean = false;
+  sortBy: TicketSortBy = new TicketSortBy('INVOICE_NUMBER', 'DESC');
   container = document.body.querySelector(".main-container");
   constructor(private invoicesService: InvoicesService,
     public cd: ChangeDetectorRef,
@@ -55,8 +58,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.leftPanelStateService.setBillingPage('new-billable-invoices');
     document.body.querySelector(".main-container").scrollTo(0, 0);
-    this.invoicesFilter.setSortBy(`${this.sort}_${this.direction}`);
-    this.invoiceHeader.sortBy.sortDirection = this.direction;
     if (this.companiesStateService.getCompanies().length > 0) this.onScroll();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.onScroll();
@@ -70,7 +71,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       this.invoicesFilter = data;
       this.invoicesFilter.resetSortBy();
       this.direction = '';
-      this.invoiceHeader.sortBy.sortDirection = this.direction;
       this.showPreloader = true;
       this.setDefaultScoll();
       this.onScroll();
@@ -137,6 +137,13 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       })
     })
     this.sub.add(getClosedAside);
+    this.invoiceStateService.onToggleFitler.subscribe(res => {
+      this.toggleFilter = res;
+    })
+  }
+  sortList(data) {
+    this.sortBy.sortBy = data;
+    this.onSortBy(data);
   }
   getTotal() {
     let total = 0;
@@ -176,14 +183,17 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       this.toastrProgressStateService.clear(invoice.id);
     })
   }
-  public sortBy(sort) {
+  onCloseFilters() {
+    this.toggleFilter = false;
+    this.invoiceStateService.onToggleFitler.emit(false);
+  }
+  public onSortBy(sort) {
     this.showPreloader = true;
     this.selectedInvoices = [];
     this.selectedCompanyIds = [];
     this.direction = this.invoicesListService.getDirection(this.direction, this.sort, sort);
     this.sort = sort;
     this.invoicesFilter.setSortBy(`${this.sort}_${this.direction}`);
-    this.invoiceHeader.sortBy.sortDirection = this.direction;
     this.setDefaultScoll();
     this.onScroll();
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { InvoicesService } from 'src/app/services/invoices/invoices.service';
 import { ReportsService } from 'src/app/services/reports/reports.service';
 import { AppService } from 'src/app/states/app/app.service';
@@ -7,19 +7,21 @@ import { InvoiceStateService } from 'src/app/states/invoice/invoice-state.servic
 import { InvoicesFilterComponent } from './invoices-filter/invoices-filter.component';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
+import { InvoicesFilter } from '../class/invoices-filter';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-invoices-header',
   templateUrl: './invoices-header.component.html',
   styleUrls: ['./invoices-header.component.scss']
 })
-export class InvoicesHeaderComponent implements OnInit {
-  @ViewChild('filter', { static: true }) filter: InvoicesFilterComponent;
+export class InvoicesHeaderComponent implements OnInit, OnDestroy {
   countFilter: number = 0;
   toggleFilter: boolean = false;
   @Output() onCreateInvoice = new EventEmitter<any>();
   @Output() onSortBy = new EventEmitter<any>();
-  sortBy: TicketSortBy = new TicketSortBy('INVOICE_NUMBER', 'DESC');
+  invoicesFilter: InvoicesFilter = new InvoicesFilter();
+  sub: Subscription = new Subscription();
   constructor(public appService: AppService,
     private invoicesService: InvoicesService,
     private reportsService: ReportsService,
@@ -27,7 +29,29 @@ export class InvoicesHeaderComponent implements OnInit {
     public customerPortalStateService: CustomerPortalStateService,
     private invoiceStateService: InvoiceStateService) { }
 
+
   ngOnInit() {
+    let onCloseFitler = this.invoiceStateService.onToggleFitler.subscribe(res => {
+      this.toggleFilter = res;
+    })
+    this.sub.add(onCloseFitler);
+    let getFilter = this.invoiceStateService.getOnInitFilter().subscribe(data => {
+      this.invoicesFilter = data;
+      this.onChangeCounterFilter();
+    })
+    this.sub.add(getFilter);
+  }
+  public onChangeCounterFilter() {
+    this.countFilter = 0;
+    if (this.invoicesFilter.companyIds.length > 0) this.countFilter++;
+    if (this.invoicesFilter.endDate && this.invoicesFilter.startDate) this.countFilter++;
+    if (this.invoicesFilter.invoiceNumber) this.countFilter++;
+    if (this.invoicesFilter.status) this.countFilter++;
+    if (this.invoicesFilter.amount) this.countFilter++;
+
+  }
+  clearAll() {
+    this.invoiceStateService.onClearFitler.emit(null);
   }
   export(type) {
     return new Promise((resolve, reject) => {
@@ -41,6 +65,10 @@ export class InvoicesHeaderComponent implements OnInit {
     this.export(type).then((data: any) => {
       window.open(data);
     })
+  }
+  public onToggleFilters(data) {
+    this.toggleFilter = data;
+    this.invoiceStateService.onToggleFitler.emit(data);
   }
   onSelectExport(type) {
     if (type == "PDF") this.export(type.toLowerCase()).then((data: any) => {
@@ -65,17 +93,14 @@ export class InvoicesHeaderComponent implements OnInit {
   sendEmail() {
     this.draftEmailStateService.toogleAsideAddReportInvoice();
   }
-  sortList(data) {
-    this.sortBy.sortBy = data;
-    this.onSortBy.emit(data);
-  }
-  clearAll() {
-    this.filter.onClearAll();
-  }
+
   onChangeCountFilter(data) {
     this.countFilter = data;
   }
   onShowCreateInvoice() {
     this.onCreateInvoice.emit(null);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

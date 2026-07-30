@@ -1,46 +1,87 @@
-<div class="qt-df qt-ai-c">
+<div class="left-panel-ng2__content--filters aside-filters-content__main">
+    <div class="content-filters-header">
+        <div
+            class="qt-icon icon__close qt-icon__white qt-sz-20"
+            (click)="close()"
+        ></div>
+        <div class="content-filters-header__title pointer">Filters</div>
+    </div>
     <company-drop-down
-        class="search-company invoices-company-filter"
+        class="search-company"
         #companyDp
         [placeholder]="'Select Company'"
         [change]="true"
         [search]="true"
+        [title]="'Company'"
         [class]="['qt-dropdown']"
         [field]="'name'"
         (onSelectedItem)="onSelectCompany($event)"
     ></company-drop-down>
     <app-drop-down
-        class="search-company invoices-status-filter"
+        class="search-company"
         #statusDp
         [placeholder]="'Select Status'"
         [change]="false"
         [class]="['qt-dropdown']"
         [field]="'title'"
+          [title]="'Status'"
         [list]="statusTypes"
         (onSelectedItem)="onSelectStatus($event)"
     ></app-drop-down>
-    <input
+        <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f100">
+            <div class="qt-input-block__label">Invoice Number</div>
+            <input
         type="text"
         appKeyUpEnter
         (onChange)="onSetNumberInvoice($event)"
         placeholder="Enter Invoice #"
-        class="qt-mr-8 qt-input-block__input filter-invoice invoices-number-filter"
+        class="qt-input-block__input filter-invoice"
         [(ngModel)]="invoicesFilter.invoiceNumber"
     >
-    <app-multi-datepicker
-        class="qt-input-block invoices-date-filter qt-mr-8"
+        </div>
+        </div>
+   
+      <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f100">
+            <div class="qt-input-block__label">Date</div>
+             <app-multi-datepicker
+        class="qt-input-block"
         #datesDp
+          [title]="'Date'"
         [container]="'body'"
         (selectedDate)="filterByDate($event)"
     ></app-multi-datepicker>
-    <input
+        </div>
+        </div>
+            <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f100">
+            <div class="qt-input-block__label">Amount</div>
+             <input
         number
         appKeyUpEnter
         (onChange)="onSetAmountInvoice($event)"
         placeholder="Enter Amount"
-        class="qt-mr-8 qt-input-block__input filter-invoice invoices-number-filter"
+        class="qt-mr-8 qt-input-block__input filter-invoice"
         id="amount-filter"
     >
-    <!-- <div class="qt-circle qt-sz-32 qt-icon icon__print qt-ic-c qt-mr-8 filters-icon"></div>
-  <div class="qt-circle qt-sz-32 icon__download qt-ic-c filters-icon"></div> -->
+        </div>
+        </div>
+  
+</div>
+<div class="aside-filters-content__footer">
+    <div class="qt-df">
+        <button
+            class="qt-button --md --gray qt-mr-12 qt-w100 qt-jc-c"
+            (click)="onClearAll()"
+        >
+            Clear All
+        </button>
+        <button
+            class="qt-button --md qt-w100 qt-jc-c"
+            (click)="applyFilters()"
+        >
+            Apply
+        </button>
+    </div>
 </div>
