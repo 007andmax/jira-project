@@ -70,7 +70,7 @@ export class QuotesItemComponent implements OnInit {
   preview() {
     this.onPreview.emit(this.quote);
   }
-  getStatusClass(status) {
+  getStatusClass(status: string) {
     return status.toLowerCase();
   }
   public getDate(date) {

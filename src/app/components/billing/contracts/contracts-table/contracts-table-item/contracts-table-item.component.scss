@@ -22,6 +22,9 @@ tr {
     width: calc(200px - 16px);
     flex: 1;
 }
-.tag__modern {
-  background-color: transparent !important;
+ 
+.--terminated {
+      color: $gray-500 !important;
+      border-color: $gray-300 !important;
+      background-color: $gray-50 !important;
 }

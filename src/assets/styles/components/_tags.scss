@@ -7,26 +7,31 @@
   padding: 5px 6px;
   white-space: nowrap;
   text-transform: uppercase;
+  border-radius: 6px;
 
   &.--success {
-    color: $green-600 !important;
-    border-color: $green-600 !important;
-  }
+    color: $green-700 !important;
+    border-color: $green-200 !important;
+  } background-color: $green-25 !important;
 
   &.--info {
-    color: $blue-light-600 !important;
-    border-color: $blue-light-600 !important;
+     color:$blue-light-700 !important;
+      border-color: $blue-light-200 !important;
+      background-color: $blue-light-25 !important;
   }
  &.--saved {
-      color: $gray-900 !important;
-      border-color: $gray-900 !important;
+      color: $red-600 !important;
+      border-color: $red-200 !important;
+      background-color: $red-25 !important;
   }
   &.--warning {
-    color: $yellow-600 !important;
-    border-color: $yellow-600 !important;
+    color: $yellow-700 !important;
+    border-color: $yellow-200 !important;
+     background-color: $yellow-25 !important;
   }
   &.--error {
-    color: $red-600 !important;
-    border-color: $red-600 !important;
+   color: $red-600 !important;
+    border-color: $red-200 !important;
+     background-color: $red-25 !important;
   }
 }

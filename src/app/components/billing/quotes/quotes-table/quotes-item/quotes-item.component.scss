@@ -1,32 +1,38 @@
 @import './src/assets/styles/variable';
 
 .approved {
-  color: $green-600;
-  border-color: $green-600;
+  color: $green-700 !important;
+    border-color: $green-200 !important;
+    background-color: $green-25 !important;
 }
-.archived,
-.canceled,
-.expired {
-  color: $red-600;
-  border-color: $red-600;
+.archived,.invoiced,.unread  {
+   color: $gray-500 !important;
+      border-color: $gray-300 !important;
+      background-color: $gray-50 !important;
 }
-.invoiced,
+
+.canceled,.expired {
+  color: $red-600 !important;
+  border-color: $red-200 !important;
+  background-color: $red-25 !important;
+}
+ 
 .ticketed {
-  color: $blue-light-600;
-  border-color: $blue-light-600;
+  color:$blue-light-700 !important;
+      border-color: $blue-light-200 !important;
+      background-color: $blue-light-25 !important;
 }
-.read {
-  color: $purple-400;
-  border-color: $purple-400;
+ .read,.billed {
+  color:$blue-dark-600 !important;
+      border-color: $blue-dark-200 !important;
+      background-color: $blue-dark-50 !important;
 }
 .saved {
-  color: $gray-600;
-  border-color: $gray-600;
+ color:$purple-600 !important;
+      border-color: $purple-200 !important;
+      background-color: $purple-50 !important;
 }
-.unread {
-  color: $yellow-600;
-  border-color: $yellow-600;
-}
+ 
 .cursor-default {
   cursor: default;
 }

@@ -80,8 +80,9 @@
     >
         <span
             class="tag__modern"
-            [ngClass]="{'--error' : contract.status === 'TERMINATED',
-    '--warning' : contract.status === 'EXPIRED' || contract.status === 'PENDING',
+            [ngClass]="{'--terminated' : contract.status === 'TERMINATED',
+    '--warning' :  contract.status === 'PENDING',
+     '--error' : contract.status === 'EXPIRED',
     '--info' : contract.status === 'CURRENT'}"
             [textContent]="contractStatusDictionary[contract.status]"
         ></span>
