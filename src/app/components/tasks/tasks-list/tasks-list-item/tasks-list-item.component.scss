@@ -90,21 +90,21 @@
     display: none;
   }
   &.--meeting {
-    border-color: $purple-200;
-    background-color: $purple-50;
-    color: $purple-600;
+    border-color: $purple-200 !important;
+    background-color: $purple-50 !important;
+    color: $purple-600 !important;
   }
 
   &.--phone-call {
-    border-color: $primary-blue-200;
-    background-color: $primary-blue-25;
-    color: $primary-blue-700;
+    border-color: $primary-blue-200 !important;
+    background-color: $primary-blue-25 !important;
+    color: $primary-blue-700 !important;
   }
 
   &.--to-do {
-    border-color: $gray-300;
-    background-color: $gray-50;
-    color: $gray-500;
+    border-color: $gray-300 !important;
+    background-color: $gray-50 !important;
+    color: $gray-500 !important;
   }
 }
 
