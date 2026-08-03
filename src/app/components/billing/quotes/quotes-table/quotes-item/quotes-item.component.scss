@@ -1,5 +1,7 @@
 @import './src/assets/styles/variable';
-
+.tag__modern  {
+  text-transform: capitalize;
+}
 .approved {
   color: $green-700 !important;
     border-color: $green-200 !important;
