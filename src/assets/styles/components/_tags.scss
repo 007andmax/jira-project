@@ -1,12 +1,12 @@
 @import './src/assets/styles/variable';
 
 .tag__modern {
-  @include label-m__sb;
+  @include сaption-l__sb;
   border: 1px solid;
   border-radius: 3px;
   padding: 5px 6px;
   white-space: nowrap;
-  text-transform: uppercase;
+  text-transform: capitalize;
   border-radius: 6px;
 
   &.--success {

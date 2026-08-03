@@ -80,12 +80,6 @@
 }
 
 .tag__modern {
-  font-size: 12px;
-  font-weight: 500;
-  padding: 4px 6px;
-  text-transform: capitalize;
-  border-radius: 6px;
-
   &:empty {
     display: none;
   }
