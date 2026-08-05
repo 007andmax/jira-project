@@ -12,6 +12,8 @@ export class PaymentsStateService {
   paymentForRefund: Payment;
   filter: EventEmitter<any> = new EventEmitter();
   payments: Array<Payment> = [];
+  onClearFitler: EventEmitter<any> = new EventEmitter();
+  onToggleFitler: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
   public setPaymentsFilter(data) {

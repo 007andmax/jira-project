@@ -22,8 +22,8 @@
                 </button>
                 <button
                     class="qt-button qt-button-filter --gray --md qt-ml-8"
-                    [ngClass]="{'active':!toggleFilter}"
-                    (click)="toggleFilter  = !toggleFilter"
+                       [ngClass]="{'active':!toggleFilter}"
+                    (click)="onToggleFilters(!toggleFilter)"
                 >
                     <span class="qt-icon icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                     <span [textContent]="getTextCountFilters()"></span>
@@ -38,63 +38,5 @@
             </div>
         </div>
     </div>
-    <div class="qt-page-list__header-filters">
-        <app-payments-filter
-            class="qt-w100"
-            #filter
-            (changeCountFilter)="onChangeCountFilter($event)"
-            [hidden]="toggleFilter"
-        ></app-payments-filter>
-    </div>
-    <div class="qt-page-list__header-thead-container">
-        <div class="qt-table-modern qt-page-list__header-thead">
-            <div class="qt-table-modern qt-page-list__header-thead">
-                <div class="qt-page-list__header-thead__row">
-                    <div
-                        class="billable-payment-table__date pointer"
-                        (click)="sortItems('PAYMENT_DATE')"
-                    >
-                        Date
-                        <span class="qt-table-modern__sorting"></span>
-                           <div *ngIf="sortBy.sortBy == 'PAYMENT_DATE'"
-                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
-                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
-            ></div>
-                    </div>
-                    <div class="billable-payment-table__invoice">Invoice#</div>
-                    <div class="billable-payment-table__company">Company</div>
-                    <div
-                        class="billable-payment-table__payment-mode pointer"
-                        (click)="sortItems('PAYMENT_METHOD')"
-                    >
-                        PaymentMode
-                        <span class="qt-table-modern__sorting"></span>
-                           <div *ngIf="sortBy.sortBy == 'PAYMENT_METHOD'"
-                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
-                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
-            ></div>
-                    </div>
-                    <div class="billable-payment-table__reference">Reference#</div>
-                    <div class="billable-payment-table__payment">Payment#</div>
-                    <div
-                        class="billable-payment-table__amount pointer"
-                        (click)="sortItems('AMOUNT')"
-                    >
-                        Amount
-                        <span class="qt-table-modern__sorting"></span>
-                           <div *ngIf="sortBy.sortBy == 'AMOUNT'"
-                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
-                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
-            ></div>
-                    </div>
-                    <div
-                        class="billable-payment-table__status"
-                    >
-                        Status
-                    </div>
-                    <div class="billable-payment-table__menu"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+   
 </div>

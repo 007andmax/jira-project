@@ -46,7 +46,7 @@ tr.--selected {
   }
 }
 .billable-payment-table__status {
-  flex: 0 0 150px;
+  flex: 0 0 150px !important;
 }
 .billable-payment-table__company {
   position: relative;

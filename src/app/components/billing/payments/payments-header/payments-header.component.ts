@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { PaymentsService } from 'src/app/services/payments/payments.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { ReportsService } from 'src/app/services/reports/reports.service';
@@ -7,19 +7,20 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { PaymentsStateService } from 'src/app/states/payments/payments-state.service';
 import { PaymentsFilterComponent } from './payments-filter/payments-filter.component';
 import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
+import { PaymentsFilter } from '../class/payments-filter';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-payments-header',
   templateUrl: './payments-header.component.html',
   styleUrls: ['./payments-header.component.scss']
 })
-export class PaymentsHeaderComponent implements OnInit {
-  @ViewChild('filter', { static: true }) filter: PaymentsFilterComponent;
+export class PaymentsHeaderComponent implements OnInit, OnDestroy {
   countFilter: number = 0;
   toggleFilter: boolean = false;
   @Output() onCreatePayment = new EventEmitter<any>();
-  @Output() onSortBy = new EventEmitter<any>();
-  sortBy: TicketSortBy = new TicketSortBy('PAYMENT_DATE', 'DESC');
+  paymentsFilter: PaymentsFilter = new PaymentsFilter();
+  sub: Subscription = new Subscription();
   constructor(private permissionsService: PermissionsService,
     public appService: AppService,
     private reportsService: ReportsService,
@@ -27,7 +28,29 @@ export class PaymentsHeaderComponent implements OnInit {
     private paymentsStateService: PaymentsStateService,
     public draftEmailStateService: DraftEmailStateService) { }
 
+
   ngOnInit() {
+    let onCloseFitler = this.paymentsStateService.onToggleFitler.subscribe(res => {
+      this.toggleFilter = res;
+    })
+    this.sub.add(onCloseFitler);
+    let getFilter = this.paymentsStateService.filter.subscribe(data => {
+      this.paymentsFilter = data;
+      this.onChangeCounterFilter();
+    })
+    this.sub.add(getFilter);
+  }
+  public onChangeCounterFilter() {
+    this.countFilter = 0;
+    if (this.paymentsFilter.companyId) this.countFilter++;
+    if (this.paymentsFilter.endDate && this.paymentsFilter.startDate) this.countFilter++;
+    if (this.paymentsFilter.invoiceNumber) this.countFilter++;
+    if (this.paymentsFilter.paymentStatus) this.countFilter++;
+    if (this.paymentsFilter.paymentMethod) this.countFilter++;
+    if (this.paymentsFilter.amount) this.countFilter++;
+  }
+  clearAll() {
+    this.paymentsStateService.onClearFitler.emit(null);
   }
   export(type) {
     return new Promise((resolve, reject) => {
@@ -65,12 +88,12 @@ export class PaymentsHeaderComponent implements OnInit {
   sendEmail() {
     this.draftEmailStateService.toogleAsideSendReportPayment();
   }
-  sortItems(data) {
-    this.sortBy.sortBy = data;
-    this.onSortBy.emit(data);
+  public onToggleFilters(data) {
+    this.toggleFilter = data;
+    this.paymentsStateService.onToggleFitler.emit(data);
   }
-  clearAll() {
-    this.filter.onClearAll();
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
   onChangeCountFilter(data) {
     this.countFilter = data;

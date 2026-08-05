@@ -15,6 +15,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { fadeInAnimation } from 'src/app/animations';
 import { PaymentsHeaderComponent } from './payments-header/payments-header.component';
+import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'payments',
@@ -26,6 +27,7 @@ import { PaymentsHeaderComponent } from './payments-header/payments-header.compo
   providers: [PaymentsListService]
 })
 export class PaymentsComponent implements OnInit, OnDestroy {
+  toggleFilter: boolean = false;
   @ViewChild('header', { static: true }) header: PaymentsHeaderComponent;
   paymentsFilter: PaymentsFilter = new PaymentsFilter();
   payments: Array<Payment> = [];
@@ -45,6 +47,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
   editPayment: Payment;
   selectedPayments: Array<Payment> = [];
   sub: Subscription = new Subscription();
+  sortBy: TicketSortBy = new TicketSortBy('PAYMENT_DATE', 'DESC');
   container = document.body.querySelector(".main-container");
   constructor(private paymentsService: PaymentsService,
     public cd: ChangeDetectorRef,
@@ -107,6 +110,13 @@ export class PaymentsComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     })
     this.sub.add(changePaymentsArray);
+    this.paymentsStateService.onToggleFitler.subscribe(res => {
+      this.toggleFilter = res;
+    })
+  }
+  sortItems(data) {
+    this.sortBy.sortBy = data;
+    this.setSortBy(data);
   }
   onCreatePayment() {
     this.invoiceStateService.onOpenAsige([]);
@@ -131,6 +141,10 @@ export class PaymentsComponent implements OnInit, OnDestroy {
 
     })
   }
+  onCloseFilters() {
+    this.toggleFilter = false;
+    this.paymentsStateService.onToggleFitler.emit(false);
+  }
   onRemovePayment(payment) {
     this.paymentsService.deletePayment(payment).subscribe(data => {
       this.confirmStateService.initRequest(false);
@@ -140,12 +154,11 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     this.showDetailsPayment = false;
     this.cd.detectChanges();
   }
-  public sortBy(sort) {
+  public setSortBy(sort) {
     this.showPreloader = true;
     this.selectedPayments = [];
     this.selectedCompanyId = null;
     this.direction = this.paymentsListService.getDirection(this.direction, this.sort, sort);
-    this.header.sortBy.sortDirection = this.direction;
     this.sort = sort;
     this.paymentsFilter.setSortBy(`${this.sort}_${this.direction}`);
     this.setDefaultScoll();

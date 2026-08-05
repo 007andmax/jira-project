@@ -18,6 +18,8 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('companyDp', { static: true }) companyDp: CompanyDropDownComponent;
   @ViewChild('statusDp', { static: true }) statusDp: DropDownComponent;
   @ViewChild('datesDp', { static: true }) datesDp: MultiDatepickerComponent;
+
+  @Output() onClose = new EventEmitter<any>();
   sub: Subscription = new Subscription();
   paymentsFilter: PaymentsFilter = new PaymentsFilter();
   @Output() changeCountFilter = new EventEmitter<any>();
@@ -39,16 +41,24 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
     this.paymentsFilter.setPaymentStatus('PAYMENT_COMPLETED');
     this.statusDp.selectItemWithOutChanges(new CompanySetting('Payment Completed', 'PAYMENT_COMPLETED'));
     this.onChangeCounterFilter();
+    let onClearFitler = this.paymentsStateService.onClearFitler.subscribe(res => {
+      this.onClearAll();
+    })
+    this.sub.add(onClearFitler);
   }
   onSelectStatus(status) {
     this.paymentsFilter.setPaymentStatus((status) ? status.value : null);
-    this.paymentsStateService.onInitFilter(this.paymentsFilter);
-    this.onChangeCounterFilter();
+    //   this.paymentsStateService.onInitFilter(this.paymentsFilter);
+    //  this.onChangeCounterFilter();
   }
   onSelectPaymentMode(mode) {
     this.paymentsFilter.setPaymentMethod((mode) ? mode.value : null);
+    //   this.paymentsStateService.onInitFilter(this.paymentsFilter);
+    //  this.onChangeCounterFilter();
+  }
+  applyFilters() {
     this.paymentsStateService.onInitFilter(this.paymentsFilter);
-    this.onChangeCounterFilter();
+
   }
   public onClearAll() {
     if (!this.customerPortalStateService.isCustomerPortal) this.companyDp.clearWithOutChanges();
@@ -71,13 +81,13 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
     } else {
       this.paymentsFilter.setCompanyId(item.id);
     }
-    this.paymentsStateService.onInitFilter(this.paymentsFilter);
-    this.onChangeCounterFilter();
+    //  this.paymentsStateService.onInitFilter(this.paymentsFilter);
+    // this.onChangeCounterFilter();
   }
   public onSetNumberInvoice(event) {
     this.paymentsFilter.setInvoiceNumber((event.target.value.length > 0) ? event.target.value : null);
-    this.paymentsStateService.onInitFilter(this.paymentsFilter);
-    this.onChangeCounterFilter();
+    //   this.paymentsStateService.onInitFilter(this.paymentsFilter);
+    //  this.onChangeCounterFilter();
   }
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {
@@ -87,8 +97,8 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
       this.paymentsFilter.setStartDate(null);
       this.paymentsFilter.setEndDate(null);
     }
-    this.paymentsStateService.onInitFilter(this.paymentsFilter);
-    this.onChangeCounterFilter();
+    //   this.paymentsStateService.onInitFilter(this.paymentsFilter);
+    //  this.onChangeCounterFilter();
   }
   public onChangeCounterFilter() {
     let count = 0;
@@ -103,8 +113,11 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
   public onSetAmountInvoice(event) {
     this.paymentsFilter.setAmount((event.target.value.length > 0) ? parseFloat(event.target.value).toFixed(2) : null);
     if (event.target.value.length > 0) this.elRef.nativeElement.querySelector("#amount-filter").value = this.paymentsFilter.amount;
-    this.paymentsStateService.onInitFilter(this.paymentsFilter);
-    this.onChangeCounterFilter();
+    //   this.paymentsStateService.onInitFilter(this.paymentsFilter);
+    //  this.onChangeCounterFilter();
+  }
+  close() {
+    this.onClose.emit(null);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
