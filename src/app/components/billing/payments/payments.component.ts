@@ -116,6 +116,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
   }
   sortItems(data) {
     this.sortBy.sortBy = data;
+    this.sortBy.sortDirection = this.paymentsListService.getDirection(this.direction, this.sort, data);
     this.setSortBy(data);
   }
   onCreatePayment() {

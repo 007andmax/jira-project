@@ -12,6 +12,7 @@
         [placeholder]="'Select Company'"
         [change]="true"
         [search]="true"
+        [title]="'Company'"
         [class]="['qt-dropdown']"
         [field]="'name'"
         (onSelectedItem)="onSelectCompany($event)"
@@ -23,6 +24,7 @@
         [change]="false"
         [class]="['qt-dropdown']"
         [field]="'title'"
+        [title]="'Payment Status'"
         [list]="statusTypes"
         (onSelectedItem)="onSelectStatus($event)"
     ></app-drop-down>
@@ -33,24 +35,39 @@
         [change]="false"
         [class]="['qt-dropdown']"
         [field]="'title'"
+        [title]="'Payment Mode'"
         [list]="paymentModes"
         (onSelectedItem)="onSelectPaymentMode($event)"
     ></app-drop-down>
-    <input
+           <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f100">
+            <div class="qt-input-block__label">Invoice Number</div>
+          <input
         type="text"
         appKeyUpEnter
         (onChange)="onSetNumberInvoice($event)"
         placeholder="Enter Invoice #"
-        class="qt-mr-8 qt-input-block__input filter-invoice"
+        class="qt-input-block__input filter-invoice"
         [(ngModel)]="paymentsFilter.invoiceNumber"
     >
-    <app-multi-datepicker
-        class="qt-input-block qt-mr-8"
+        </div>
+        </div>
+      <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f100">
+            <div class="qt-input-block__label">Date</div>
+       <app-multi-datepicker
+        class="qt-input-block"
         #datesDp
          [container]="'body'"
         (selectedDate)="filterByDate($event)"
     ></app-multi-datepicker>
-    <input
+        </div>
+        </div>
+   
+       <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f100">
+            <div class="qt-input-block__label">Amount</div>
+         <input
         number
         appKeyUpEnter
         (onChange)="onSetAmountInvoice($event)"
@@ -58,6 +75,9 @@
         class="qt-input-block__input filter-invoice"
         id="amount-filter"
     >
+        </div>
+        </div>
+   
 </div>
 <div class="aside-filters-content__footer">
     <div class="qt-df">
