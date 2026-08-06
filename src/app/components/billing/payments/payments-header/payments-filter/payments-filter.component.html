@@ -30,7 +30,7 @@
     ></app-drop-down>
      <app-drop-down
         class="search-company"
-        #statusDp
+        #paymentModeDp
         [placeholder]="'Select Payment Mode'"
         [change]="false"
         [class]="['qt-dropdown']"
@@ -71,6 +71,7 @@
         number
         appKeyUpEnter
         (onChange)="onSetAmountInvoice($event)"
+        (input)="onSetAmountInvoice($event)"
         placeholder="Enter Amount"
         class="qt-input-block__input filter-invoice"
         id="amount-filter"

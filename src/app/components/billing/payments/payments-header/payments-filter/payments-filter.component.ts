@@ -17,6 +17,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 export class PaymentsFilterComponent implements OnInit, OnDestroy {
   @ViewChild('companyDp', { static: true }) companyDp: CompanyDropDownComponent;
   @ViewChild('statusDp', { static: true }) statusDp: DropDownComponent;
+  @ViewChild('paymentModeDp', { static: true }) paymentModeDp: DropDownComponent;
   @ViewChild('datesDp', { static: true }) datesDp: MultiDatepickerComponent;
 
   @Output() onClose = new EventEmitter<any>();
@@ -66,10 +67,12 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
     this.statusDp.clearWithOutChanges();
     this.paymentsFilter.setPaymentStatus(null);
     this.paymentsFilter.setAmount(null);
+    this.paymentModeDp.clearWithOutChanges();
     if (!this.customerPortalStateService.isCustomerPortal) this.paymentsFilter.setCompanyId(null);
     this.paymentsFilter.setStartDate(null);
     this.paymentsFilter.setEndDate(null);
     this.paymentsFilter.setInvoiceNumber(null);
+    this.paymentsFilter.setPaymentMethod(null);
     this.paymentsStateService.onInitFilter(this.paymentsFilter);
     this.onChangeCounterFilter();
     this.elRef.nativeElement.querySelector("#amount-filter").value = "";
@@ -111,8 +114,11 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
     this.changeCountFilter.emit(count);
   }
   public onSetAmountInvoice(event) {
+    console.log("event.target.value", event.target.value);
+    console.log("event.target.value", event);
     this.paymentsFilter.setAmount((event.target.value.length > 0) ? parseFloat(event.target.value).toFixed(2) : null);
-    if (event.target.value.length > 0) this.elRef.nativeElement.querySelector("#amount-filter").value = this.paymentsFilter.amount;
+    console.log("this.paymentsFilter", this.paymentsFilter);
+    //  if (event.target.value.length > 0) this.elRef.nativeElement.querySelector("#amount-filter").value = this.paymentsFilter.amount;
     //   this.paymentsStateService.onInitFilter(this.paymentsFilter);
     //  this.onChangeCounterFilter();
   }
