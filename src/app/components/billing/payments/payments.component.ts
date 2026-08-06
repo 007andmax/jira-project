@@ -34,14 +34,14 @@ export class PaymentsComponent implements OnInit, OnDestroy {
   showPendingPreloader: boolean = false;
   showPreloader: boolean = true;
   selectedCompanyId: string = null;
-  public sort: string = 'PAYMENT_DATE';
+  // public sort: string = 'PAYMENT_DATE';
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   showDetailsPayment: boolean = false;
   showRefundPayment: boolean = false;
   showEditPayment: boolean = false;
   offset: number = 40;
-  public direction: string = 'DESC';
+  // public direction: string = 'DESC';
   detailsPayment: Payment;
   refundPayment: Payment;
   editPayment: Payment;
@@ -63,7 +63,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.paymentsFilter.setSortBy(`${this.sort}_${this.direction}`);
+    this.paymentsFilter.setSortBy(`${this.sortBy.sortBy}_${this.sortBy.sortDirection}`);
     this.leftPanelStateService.setBillingPage('new-payments-ng2');
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.paymentsFilter.setPaymentStatus('PAYMENT_COMPLETED');
@@ -77,6 +77,8 @@ export class PaymentsComponent implements OnInit, OnDestroy {
       this.selectedCompanyId = null;
       this.paymentsFilter = data;
       this.paymentsFilter.resetSortBy();
+      this.sortBy = new TicketSortBy('PAYMENT_DATE', 'DESC');
+      this.paymentsFilter.setSortBy(`${this.sortBy.sortBy}_${this.sortBy.sortDirection}`);
       this.showPreloader = true;
       this.setDefaultScoll();
       this.onScroll();
@@ -115,8 +117,8 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     })
   }
   sortItems(data) {
+    this.sortBy.sortDirection = this.paymentsListService.getDirection(this.sortBy.sortDirection, this.sortBy.sortBy, data);
     this.sortBy.sortBy = data;
-    this.sortBy.sortDirection = this.paymentsListService.getDirection(this.direction, this.sort, data);
     this.setSortBy(data);
   }
   onCreatePayment() {
@@ -159,9 +161,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     this.showPreloader = true;
     this.selectedPayments = [];
     this.selectedCompanyId = null;
-    this.direction = this.paymentsListService.getDirection(this.direction, this.sort, sort);
-    this.sort = sort;
-    this.paymentsFilter.setSortBy(`${this.sort}_${this.direction}`);
+    this.paymentsFilter.setSortBy(`${this.sortBy.sortBy}_${this.sortBy.sortDirection}`);
     this.setDefaultScoll();
     this.onScroll();
   }

@@ -97,7 +97,7 @@
             [textContent]="invoice.totalSum | currency"
         ></span>
     </div>
-    <div class="invoce-table__balance-due no-pointer">
+    <div class="invoce-table__balance-due no-pointer ellipsis">
         <span
             class="ellipsis"
             [textContent]="((invoice.totalSum || invoice.sum) - invoice.paidSum) | currency"
