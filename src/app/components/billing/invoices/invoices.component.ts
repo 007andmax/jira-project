@@ -33,11 +33,9 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   showPendingPreloader: boolean = false;
   showPreloader: boolean = true;
   selectedCompanyIds: Array<string> = [];
-  public sort: string = 'INVOICE_NUMBER';
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   offset: number = 40;
-  public direction: string = 'DESC';
   selectedInvoices: Array<Invoice> = [];
   sub: Subscription = new Subscription();
   toggleFilter: boolean = false;
@@ -56,6 +54,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     private invoicesListService: InvoicesListService) { }
 
   ngOnInit() {
+    this.invoicesFilter.setSortBy(`${this.sortBy.sortBy}_${this.sortBy.sortDirection}`);
     this.leftPanelStateService.setBillingPage('new-billable-invoices');
     document.body.querySelector(".main-container").scrollTo(0, 0);
     if (this.companiesStateService.getCompanies().length > 0) this.onScroll();
@@ -70,7 +69,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       this.selectedCompanyIds = [];
       this.invoicesFilter = data;
       this.invoicesFilter.resetSortBy();
-      this.direction = '';
+      this.sortBy = new TicketSortBy('INVOICE_NUMBER', 'DESC');
+      this.invoicesFilter.setSortBy(`${this.sortBy.sortBy}_${this.sortBy.sortDirection}`);
       this.showPreloader = true;
       this.setDefaultScoll();
       this.onScroll();
@@ -142,8 +142,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     })
   }
   sortList(data) {
+    this.sortBy.sortDirection = this.invoicesListService.getDirection(this.sortBy.sortDirection, this.sortBy.sortBy, data);
     this.sortBy.sortBy = data;
-    this.sortBy.sortDirection = this.invoicesListService.getDirection(this.direction, this.sort, data);
     this.onSortBy(data);
   }
   getTotal() {
@@ -192,9 +192,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.showPreloader = true;
     this.selectedInvoices = [];
     this.selectedCompanyIds = [];
-    this.direction = this.invoicesListService.getDirection(this.direction, this.sort, sort);
-    this.sort = sort;
-    this.invoicesFilter.setSortBy(`${this.sort}_${this.direction}`);
+    this.invoicesFilter.setSortBy(`${this.sortBy.sortBy}_${this.sortBy.sortDirection}`);
     this.setDefaultScoll();
     this.onScroll();
   }
