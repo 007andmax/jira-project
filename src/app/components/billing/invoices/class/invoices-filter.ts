@@ -43,7 +43,6 @@ export class InvoicesFilter {
             status: this.status,
             excludeDeleted: this.excludeDeleted
         };
-        console.log("this.amount", this.amount);
         if (this.amount) data.amount = this.amount;
         if (this.endDate) data.endDate = moment(endDate).format('YYYY-MM-DD');
         if (this.startDate) data.startDate = moment(this.startDate).format('YYYY-MM-DD');

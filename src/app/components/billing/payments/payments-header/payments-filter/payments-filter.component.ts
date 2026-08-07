@@ -49,13 +49,9 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
   }
   onSelectStatus(status) {
     this.paymentsFilter.setPaymentStatus((status) ? status.value : null);
-    //   this.paymentsStateService.onInitFilter(this.paymentsFilter);
-    //  this.onChangeCounterFilter();
   }
   onSelectPaymentMode(mode) {
     this.paymentsFilter.setPaymentMethod((mode) ? mode.value : null);
-    //   this.paymentsStateService.onInitFilter(this.paymentsFilter);
-    //  this.onChangeCounterFilter();
   }
   applyFilters() {
     this.paymentsStateService.onInitFilter(this.paymentsFilter);
@@ -84,13 +80,9 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
     } else {
       this.paymentsFilter.setCompanyId(item.id);
     }
-    //  this.paymentsStateService.onInitFilter(this.paymentsFilter);
-    // this.onChangeCounterFilter();
   }
   public onSetNumberInvoice(event) {
     this.paymentsFilter.setInvoiceNumber((event.target.value.length > 0) ? event.target.value : null);
-    //   this.paymentsStateService.onInitFilter(this.paymentsFilter);
-    //  this.onChangeCounterFilter();
   }
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {
@@ -100,8 +92,6 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
       this.paymentsFilter.setStartDate(null);
       this.paymentsFilter.setEndDate(null);
     }
-    //   this.paymentsStateService.onInitFilter(this.paymentsFilter);
-    //  this.onChangeCounterFilter();
   }
   public onChangeCounterFilter() {
     let count = 0;
@@ -114,13 +104,7 @@ export class PaymentsFilterComponent implements OnInit, OnDestroy {
     this.changeCountFilter.emit(count);
   }
   public onSetAmountInvoice(event) {
-    console.log("event.target.value", event.target.value);
-    console.log("event.target.value", event);
     this.paymentsFilter.setAmount((event.target.value.length > 0) ? parseFloat(event.target.value).toFixed(2) : null);
-    console.log("this.paymentsFilter", this.paymentsFilter);
-    //  if (event.target.value.length > 0) this.elRef.nativeElement.querySelector("#amount-filter").value = this.paymentsFilter.amount;
-    //   this.paymentsStateService.onInitFilter(this.paymentsFilter);
-    //  this.onChangeCounterFilter();
   }
   close() {
     this.onClose.emit(null);
