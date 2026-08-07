@@ -12,11 +12,13 @@ import { TicketsTableItemRequestedByModule } from '../../tickets/tickets/tickets
 import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user-logo-popover.module';
 import { CompanyLogoPopoverModule } from 'src/app/directives/company-logo-popover/company-logo-popover.module';
 import { UsersTableCompanyByModule } from '../../users/users-table/users-table-company-by/users-table-company-by.module';
+import { InvoiceDiscountPreivewComponent } from './billable-aside/invoice-form/invoice-discount-preivew/invoice-discount-preivew.component';
 
 
 @NgModule({
     declarations: [BillableComponent,
         BillableItemComponent,
+
     ],
     imports: [
         CommonModule,

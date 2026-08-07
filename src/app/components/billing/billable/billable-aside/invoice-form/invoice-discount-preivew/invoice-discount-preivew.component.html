@@ -1,0 +1,29 @@
+   <table class="invoice-preview__table">
+                        <thead class=" qt-lh-127">
+                            <tr>
+                                <th class="invoice-preview__col-item service-date">Item</th>
+                                <th class="invoice-preview__col-desc">Description</th>
+                                <th class="invoice-preview__col-qty">Quantity</th>
+                                <th class="invoice-preview__col-amount">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody class=" qt-lh-133">
+                          
+                                <tr>
+                                    <td class="invoice-preview__col-item service-date">
+                                          <div class="qt-green-label">Discount</div>
+                                    </td>
+                                    <td class="invoice-preview__col-desc">
+                                        <pre [textContent]="invoiceDiscount.description"></pre>
+                                    </td>
+                                    <td
+                                        class="invoice-preview__col-qty"
+                                         
+                                    >1</td>
+                                    <td class="invoice-preview__col-amount">
+                                        {{invoiceDiscount.amount | currency}}
+                                    </td>
+                                </tr>
+                            
+                        </tbody>
+                    </table>
