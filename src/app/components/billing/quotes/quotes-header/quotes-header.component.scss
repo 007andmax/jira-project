@@ -1,4 +1,14 @@
+@import "./src/assets/styles/variable";
+
+
 .qt-page-list__header-thead__row {
   border-left: 1px solid transparent;
   border-right: 1px solid transparent;
+}
+.--sticky {
+    margin: 0;
+    padding: 10px 32px;
+    min-height: 57.1px;
+    background-color: $gray-50;
+    border-bottom: 1px solid $gray-200;
 }

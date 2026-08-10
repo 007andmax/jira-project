@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { AppService } from 'src/app/states/app/app.service';
 import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { QuotesFilterComponent } from './quotes-filter/quotes-filter.component';
@@ -9,14 +9,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ARCHIVE_QUOTES } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
+import { QuoteFilter } from '../class/quote-filter';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-quotes-header',
   templateUrl: './quotes-header.component.html',
   styleUrls: ['./quotes-header.component.scss']
 })
-export class QuotesHeaderComponent implements OnInit {
-  @ViewChild('filter', { static: true }) filter: QuotesFilterComponent;
+export class QuotesHeaderComponent implements OnInit, OnDestroy {
   countFilter: number = 0;
   toggleFilter: boolean = false;
   @Input() selectAll: boolean = false;
@@ -24,21 +25,35 @@ export class QuotesHeaderComponent implements OnInit {
   @Output() onCreatePayment = new EventEmitter<any>();
   @Output() onSelectAllQuotes = new EventEmitter<any>();
   @Output() onSortBy = new EventEmitter<any>();
-  sortBy: TicketSortBy = new TicketSortBy('date', 'DESC');
+  filter: QuoteFilter = new QuoteFilter();
+  sub: Subscription = new Subscription();
   constructor(private quoteStateService: QuoteStateService,
     public customerPortalStateService: CustomerPortalStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     public appService: AppService,) { }
 
+
   ngOnInit() {
+    let onCloseFitler = this.quoteStateService.onToggleFitler.subscribe(res => {
+      this.toggleFilter = res;
+    })
+    this.sub.add(onCloseFitler);
+    let getFilter = this.quoteStateService.getOnInitFilter().subscribe(data => {
+      this.filter.setData(data)
+      this.onChangeCounterFilter();
+    })
+    this.sub.add(getFilter);
   }
   getSelectedCount() {
     return this.quotes.filter(item => item.selected).length;
   }
-  toggleAllQuotes(data) {
-    this.selectAll = true;
-    this.onSelectAllQuotes.emit(data);
+  public onChangeCounterFilter() {
+    this.countFilter = 0;
+    if (this.filter.companyId) this.countFilter++;
+    if (this.filter.endDate && this.filter.date) this.countFilter++;
+    if (this.filter.quoteNumber) this.countFilter++;
+    if (this.filter.status) this.countFilter++;
   }
   delete() {
     this.confirmStateService.setConfirmAction(ARCHIVE_QUOTES);
@@ -50,12 +65,9 @@ export class QuotesHeaderComponent implements OnInit {
   getTextCountFilters() {
     return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
   }
-  sortByItems(data) {
-    this.sortBy.sortBy = data;
-    this.onSortBy.emit(data);
-  }
-  clearAll() {
-    this.filter.onClearAll();
+  public onToggleFilters(data) {
+    this.toggleFilter = data;
+    this.quoteStateService.onToggleFitler.emit(data);
   }
   onChangeCountFilter(data) {
     this.countFilter = data;
@@ -63,8 +75,13 @@ export class QuotesHeaderComponent implements OnInit {
   onShowCreatePayment() {
     this.onCreatePayment.emit(null);
   }
+  clearAll() {
+    this.quoteStateService.onClearFitler.emit(null);
+  }
   onShowCreateQuote() {
     this.quoteStateService.onInitAdd();
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

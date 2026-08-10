@@ -1,36 +1,71 @@
-<div class="qt-df qt-ai-c">
-    <company-drop-down
-        class="search-company quotes-company-filter"
+<div class="left-panel-ng2__content--filters aside-filters-content__main">
+    <div class="content-filters-header">
+        <div
+            class="qt-icon icon__close qt-icon__white qt-sz-20"
+            (click)="close()"
+        ></div>
+        <div class="content-filters-header__title pointer">Filters</div>
+    </div>
+   <company-drop-down
+        class="search-company"
         #companyDp
         [placeholder]="'Select Company'"
         [change]="true"
         [search]="true"
+        [title]="'Company'"
         [class]="['qt-dropdown']"
         [field]="'name'"
         (onSelectedItem)="onSelectCompany($event)"
     ></company-drop-down>
     <app-drop-down
-        class="search-company quotes-status-filter"
+        class="search-company"
         #statusDp
         [placeholder]="'Sort by Status'"
         [change]="false"
         [class]="['qt-dropdown']"
         [field]="'title'"
+         [title]="'Status'"
         [list]="statusTypes"
         (onSelectedItem)="onSelectStatus($event)"
     ></app-drop-down>
-    <input
+      <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f100">
+            <div class="qt-input-block__label">Quote Number</div>
+            <input
         type="text"
         appKeyUpEnter
         (onChange)="onSetNumberQuote($event)"
         placeholder="Enter Quote #"
-        class="qt-mr-8 qt-input-block__input filter-quotes quotes-number-filter"
+        class="qt-input-block__input filter-quotes"
         [(ngModel)]="quotesFilter.quoteNumber"
     >
-    <app-multi-datepicker
-        class="qt-input-block qt-header-date-filter quotes-date-filter"
+        </div>
+        </div>
+   <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f100">
+            <div class="qt-input-block__label">Date</div>
+           <app-multi-datepicker
+        class="qt-input-block qt-header-date-filter"
         #datesDp
           [container]="'body'"
         (selectedDate)="filterByDate($event)"
     ></app-multi-datepicker>
+        </div>
+        </div>
+</div>
+<div class="aside-filters-content__footer">
+    <div class="qt-df">
+        <button
+            class="qt-button --md --gray qt-mr-12 qt-w100 qt-jc-c"
+            (click)="onClearAll()"
+        >
+            Clear All
+        </button>
+        <button
+            class="qt-button --md qt-w100 qt-jc-c"
+            (click)="applyFilters()"
+        >
+            Apply
+        </button>
+    </div>
 </div>

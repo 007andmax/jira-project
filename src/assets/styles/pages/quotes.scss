@@ -2,6 +2,9 @@
 @import "./src/assets/styles/mixin/breakpoint";
 
 .quotes-page {
+     padding: 0;
+    background-color: $white;
+    min-width: fit-content;
   .qt-table-modern__row {
     min-height: 48px;
     height: auto;

@@ -27,20 +27,26 @@ export class QuotesFilterComponent implements OnInit, OnDestroy {
   new CompanySetting('Canceled', 'CANCELED'), new CompanySetting('Saved', 'SAVED'),
   new CompanySetting('Ticketed', 'TICKETED'), new CompanySetting('Unread', 'UNREAD'),
   new CompanySetting('Billed', 'BILLED')];
+  @Output() onClose = new EventEmitter<any>();
   constructor(private companiesState: CompaniesStateService,
     private customerPortalStateService: CustomerPortalStateService,
     private quoteStateService: QuoteStateService) { }
 
 
   ngOnInit() {
-
+    let onClearFitler = this.quoteStateService.onClearFitler.subscribe(res => {
+      this.onClearAll();
+    })
+    this.sub.add(onClearFitler);
   }
   onSelectStatus(status) {
     this.quotesFilter.setStatus((status) ? status.value : null);
-    this.quoteStateService.onInitFilter(this.quotesFilter);
-    this.onChangeCounterFilter();
+    //   this.quoteStateService.onInitFilter(this.quotesFilter);
+    //  this.onChangeCounterFilter();
   }
-
+  close() {
+    this.onClose.emit(null);
+  }
   public onClearAll() {
     if (!this.customerPortalStateService.isCustomerPortal) this.companyDp.clearWithOutChanges();
     this.datesDp.clearWithOutChanges();
@@ -51,7 +57,7 @@ export class QuotesFilterComponent implements OnInit, OnDestroy {
     this.quotesFilter.setEndDate(null);
     this.quotesFilter.setQuoteNumber(null);
     this.quoteStateService.onInitFilter(this.quotesFilter);
-    this.onChangeCounterFilter();
+
   }
   public onSelectCompany(item) {
     if (!item) {
@@ -59,13 +65,16 @@ export class QuotesFilterComponent implements OnInit, OnDestroy {
     } else {
       this.quotesFilter.setCompanyId(item.id);
     }
+    //  this.quoteStateService.onInitFilter(this.quotesFilter);
+    // this.onChangeCounterFilter();
+  }
+  applyFilters() {
     this.quoteStateService.onInitFilter(this.quotesFilter);
-    this.onChangeCounterFilter();
   }
   public onSetNumberQuote(event) {
     this.quotesFilter.setQuoteNumber((event.target.value.length > 0) ? event.target.value : null);
-    this.quoteStateService.onInitFilter(this.quotesFilter);
-    this.onChangeCounterFilter();
+    // this.quoteStateService.onInitFilter(this.quotesFilter);
+    //this.onChangeCounterFilter();
   }
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {
@@ -75,8 +84,8 @@ export class QuotesFilterComponent implements OnInit, OnDestroy {
       this.quotesFilter.setStartDate(null);
       this.quotesFilter.setEndDate(null);
     }
-    this.quoteStateService.onInitFilter(this.quotesFilter);
-    this.onChangeCounterFilter();
+    //  this.quoteStateService.onInitFilter(this.quotesFilter);
+    // this.onChangeCounterFilter();
   }
   public onChangeCounterFilter() {
     let count = 0;

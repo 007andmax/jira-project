@@ -13,6 +13,8 @@ export class QuoteStateService {
   onCopy: EventEmitter<any> = new EventEmitter();
   onCreate: EventEmitter<any> = new EventEmitter();
   onInvoice: EventEmitter<any> = new EventEmitter();
+  onClearFitler: EventEmitter<any> = new EventEmitter();
+  onToggleFitler: EventEmitter<any> = new EventEmitter();
   quoteForCopy: QuotePreview;
   quoteForArchive: QuotePreview;
   quotesForArchive: Array<QuotePreview>;

@@ -23,6 +23,7 @@ import { QuotesListService } from './services/quotes-list.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { QuotesHeaderComponent } from '../quotes-header/quotes-header.component';
+import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-quotes-table',
@@ -31,6 +32,7 @@ import { QuotesHeaderComponent } from '../quotes-header/quotes-header.component'
   providers: [QuotesListService]
 })
 export class QuotesTableComponent implements OnInit, OnDestroy {
+  toggleFilter: boolean = false;
   @ViewChild('header', { static: true }) header: QuotesHeaderComponent;
   filter: QuoteFilter = new QuoteFilter();
   sort: QuoteSort = new QuoteSort();
@@ -41,6 +43,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   public page_number: number = 0;
   public infiniteScrollDisabled = true;
   sub: Subscription = new Subscription();
+  sortBy: TicketSortBy = new TicketSortBy('date', 'DESC');
   container = document.body.querySelector(".main-container");
   constructor(private quotesListService: QuotesListService,
     private quoteRealTimeService: QuoteRealTimeService,
@@ -96,6 +99,13 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    let onToggleFitler = this.quoteStateService.onToggleFitler.subscribe(res => {
+      this.toggleFilter = res;
+    })
+    this.sub.add(onToggleFitler);
+  }
+  toggleAllQuotes(data) {
+    this.onSelectAllQuotes(data);
   }
   onSelectAllQuotes(event) {
     if (event.target.checked) {
@@ -111,15 +121,18 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     }
     this.cd.detectChanges();
   }
+  sortByItems(data) {
+    this.sortBy.sortBy = data;
+    this.sortBy.sortDirection = this.filter.sortBy.includes("DESC") ? "DESC" : "ASC";
+    this.setSortBy(data);
+  }
   onInvoice(invoiceId) {
     this.quoteStateService.setInvoice(invoiceId);
   }
-  public sortBy(value) {
+  public setSortBy(value) {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.showPreloader = true;
     this.setDefaultScoll();
-    this.filter.sortBy = this.sort.getSortType(value);
-    this.header.sortBy.sortDirection = this.filter.sortBy.includes("DESC") ? "DESC" : "ASC";
     this.getQuotes()
   }
   public setDefaultScoll() {
@@ -133,6 +146,10 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     this.selectAll = (this.quotes.find(item => !item.selected)) ? false : true;
     this.quotes = [...this.quotes.map(item => new Quote(item))];
     this.cd.detectChanges();
+  }
+  onCloseFilters() {
+    this.toggleFilter = false;
+    this.quoteStateService.onToggleFitler.emit(false);
   }
   getQuotes() {
     if (this.quotesListService.getBlockList()) {
