@@ -64,7 +64,9 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     this.onScroll();
     let getOnInitFilter = this.quoteStateService.getOnInitFilter().subscribe(data => {
       this.filter.setData(data);
-      this.filter.clearSortBy();
+      this.filter.sortBy = "DATE_DESC";
+      this.sortBy = new TicketSortBy('date', 'DESC');
+      // this.filter.clearSortBy();
       this.showPreloader = true;
       this.setDefaultScoll();
       this.onScroll();
@@ -123,7 +125,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   }
   sortByItems(data) {
     this.sortBy.sortBy = data;
-    this.sortBy.sortDirection = this.filter.sortBy.includes("DESC") ? "DESC" : "ASC";
+    this.sortBy.sortDirection = this.sortBy.sortDirection.includes("ASC") ? "DESC" : "ASC";
     this.setSortBy(data);
   }
   onInvoice(invoiceId) {
@@ -132,6 +134,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
   public setSortBy(value) {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.showPreloader = true;
+    this.filter.sortBy = this.sort.getSortType(value);
     this.setDefaultScoll();
     this.getQuotes()
   }
@@ -152,6 +155,7 @@ export class QuotesTableComponent implements OnInit, OnDestroy {
     this.quoteStateService.onToggleFitler.emit(false);
   }
   getQuotes() {
+
     if (this.quotesListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
