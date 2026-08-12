@@ -426,6 +426,11 @@
                             </table>
                         </div>
                     </ng-template>
+                      <app-invoice-discount-preivew
+             class="qt-mb-8 qt-db"
+        [invoiceDiscount]="invoiceProfile.invoiceDiscount"
+        *ngIf="invoiceProfile.invoiceDiscount"
+    ></app-invoice-discount-preivew>
                 </div>
                 <div class="qt-df qt-w100 qt-jc-sb qt-color-gray-900 qt-fs-12 qt-fw-600 qt-mb-20 qt-lh-133">
                     <div class="qt-mb-20 invoice-preview-notes">

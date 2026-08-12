@@ -28,6 +28,8 @@ import { TaxesModule } from 'src/app/components/shared/taxes/taxes.module';
 import { InvoiceChangeAddressComponent } from '../billable-aside/invoice-form/invoice-change-address/invoice-change-address.component';
 import { InvoiceChangeAddressModule } from '../billable-aside/invoice-form/invoice-change-address/invoice-change-address.module';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
+import { InvoiceDiscountPreivewComponent } from '../billable-aside/invoice-form/invoice-discount-preivew/invoice-discount-preivew.component';
+import { InvoiceDiscountPreivewModule } from '../billable-aside/invoice-form/invoice-discount-preivew/invoice-regular-note.module';
 
 
 @NgModule({
@@ -39,7 +41,7 @@ import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.mo
         InvoiceFormTicketEditComponent,
         InvoiceDiscountComponent,
         InvoiceFormTicketEditServiceComponent,
-        InvoiceFormTicketEditProductComponent,
+        InvoiceFormTicketEditProductComponent
 
     ],
     imports: [
@@ -60,7 +62,8 @@ import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.mo
         PreviewPhoneMaskModule,
         DynamicTooltipModule,
         InvoiceChangeAddressModule,
-        MatErrorModule
+        MatErrorModule,
+        InvoiceDiscountPreivewModule
     ],
 
 

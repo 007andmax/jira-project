@@ -5,6 +5,7 @@ import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-
 import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { InvoiceDiscountPreivewModule } from '../../billable/billable-aside/invoice-form/invoice-discount-preivew/invoice-regular-note.module';
 
 
 
@@ -16,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         PreviewPhoneMaskModule,
         DynamicTooltipModule,
         NgbModule,
+        InvoiceDiscountPreivewModule
     ],
     exports: [InvoicesAsidePreviewComponent]
 })
