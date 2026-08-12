@@ -86,7 +86,7 @@
                             {{item.name}}
                             <span *ngIf="item.products.length">({{item.products.length}})</span>
                         </div>
-                        <div class="qt-icon icon__add qt-sz-16 qt-dib qt-mr-8 qt-sz-16"></div>
+                        <div [ngClass]="{'icon__add':!opened,'icon__minus':opened}" class="qt-icon  qt-sz-16 qt-dib qt-mr-8 qt-sz-16"></div>
                     </button>
                 </ng-template>
                 <ng-template ngbPanelContent>

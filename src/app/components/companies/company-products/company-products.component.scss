@@ -1,4 +1,6 @@
-@import './src/assets/styles/variable';
+@import "./src/assets/styles/variable";
+@import "./src/assets/scss/mixin";
+@import "./src/assets/styles/mixin/breakpoint";
 
 .product-list-report {
   padding-top: 0;
@@ -47,10 +49,6 @@
   .run-report-content i {
     top: calc(50% - 7px);
   }
-
-   .report-caret-icon {
-    top: calc(50% - 4px) !important;
-   }
 }
 .product-list-ticket {
   width: 100%;
@@ -132,5 +130,14 @@ pre {
   }
   > div {
     padding: 0 8px 0 8px;
+  }
+}
+::ng-deep .select-product__dropdown {
+  @include media-breakpoint-up($sm) {
+    min-width: 570px;
+  }
+
+  @include media-breakpoint-up($lg) {
+    min-width: 670px;
   }
 }

@@ -10,6 +10,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketProfile } from '../../../class/ticket-profile';
+import { PreviewAttachmentStateService } from '../../../ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
 
 @Component({
   selector: 'ticket-detail-profile-updates-note',
@@ -30,11 +31,15 @@ export class TicketDetailProfileUpdatesNoteComponent implements OnInit {
     public ticketStateService: TicketStateService,
     public usersStateService: UsersStateService,
     public customerPortalStateService: CustomerPortalStateService,
+    private previewAttachmentStateService: PreviewAttachmentStateService,
     public modalService: NgbModal,) { }
 
   ngOnInit() {
     this.listColorNoAvatar = this.ticketsListService.getListColorNoAvatar();
     this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
+  }
+  preview(file) {
+    this.previewAttachmentStateService.onInitPreview(`/file/${file.id}`);
   }
   getUserById(id) {
     return this.usersStateService.getAllUsers().find(item => item.id == id);
