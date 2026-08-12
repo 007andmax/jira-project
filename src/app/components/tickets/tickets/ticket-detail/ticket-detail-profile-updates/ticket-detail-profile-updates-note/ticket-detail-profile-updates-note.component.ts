@@ -39,7 +39,7 @@ export class TicketDetailProfileUpdatesNoteComponent implements OnInit {
     this.indexNoAvatar = this.ticketsListService.randomInteger(0, 6);
   }
   preview(file) {
-    this.previewAttachmentStateService.onInitPreview(`/file/${file.id}`);
+    this.ticketStateService.onPreviewAttachment.emit(file);
   }
   getUserById(id) {
     return this.usersStateService.getAllUsers().find(item => item.id == id);

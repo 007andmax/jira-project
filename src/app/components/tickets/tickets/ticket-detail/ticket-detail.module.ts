@@ -104,6 +104,7 @@ import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user
 import { TicketsTableItemRequestedByModule } from '../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
 import { CompanyLogoPopoverModule } from 'src/app/directives/company-logo-popover/company-logo-popover.module';
 import { UsersTableCompanyByModule } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.module';
+import { PreviewAttachmentTicketComponent } from './preview-attachment-ticket/preview-attachment-ticket.component';
 
 
 
@@ -166,6 +167,7 @@ import { UsersTableCompanyByModule } from 'src/app/components/users/users-table/
         TicketDetailTicketsStatusComponent,
         TicketDetailTotalStatisticsComponent,
         TicketDetailTasksItemComponent,
+        PreviewAttachmentTicketComponent,
 
     ],
     imports: [
