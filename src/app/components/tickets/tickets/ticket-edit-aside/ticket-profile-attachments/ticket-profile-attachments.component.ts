@@ -31,8 +31,8 @@ export class TicketProfileAttachmentsComponent implements OnInit, OnDestroy {
 
   ngOnInit() { }
 
-  preview(attachmentId, contentType) {
-    if (contentType === "image/jpg" || contentType === "image/png" || contentType === "image/jpeg") this.previewAttachmentStateService.onInitPreview(`/file/${attachmentId}`);
+  preview(file, contentType) {
+    if (contentType === "image/jpg" || contentType === "image/png" || contentType === "image/jpeg") this.ticketStateService.onPreviewAttachment.emit(file);
   }
   public getTypeFile(name: string) {
     if (!name) return "attachment";
