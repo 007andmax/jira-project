@@ -40,6 +40,7 @@ export class TicketStateService {
   closedTicket: EventEmitter<any> = new EventEmitter();
   onDocumentForPreview: EventEmitter<any> = new EventEmitter();
   onServicePreloader: EventEmitter<any> = new EventEmitter();
+  onPreviewAttachment: EventEmitter<any> = new EventEmitter();
   updateForRemove: TicketProfileUpdate = null;
   ticketPreviewForRemove: TicketPreview = null;
   serviceForRemove: TicketProfileService = null;

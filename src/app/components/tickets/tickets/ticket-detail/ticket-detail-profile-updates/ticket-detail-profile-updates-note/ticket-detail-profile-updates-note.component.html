@@ -104,6 +104,7 @@
                 <div
                     class="preview-attachment qt-mr-8"
                     *ngIf="attachment.file.contentType === 'image/jpg' || attachment.file.contentType === 'image/png' || attachment.file.contentType === 'image/jpeg'"
+                     (click)="preview(attachment.file)"
                 >
                     <img [src]="'/file/' + attachment.file.id">
                 </div>

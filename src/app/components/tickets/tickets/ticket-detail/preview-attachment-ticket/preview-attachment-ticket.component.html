@@ -1,0 +1,18 @@
+<div
+    class="preview-attachment"
+    *ngIf="show"
+>
+ <button
+        class="qt-button --gray download"
+        (click)="download()"
+    >
+        Download
+    </button>
+    <button
+        class="qt-button --gray closed"
+        (click)="show = false"
+    >
+        Close
+    </button>
+    <img [src]="src">
+</div>

@@ -21,6 +21,7 @@ export class PreviewAttachmentComponent implements OnInit, OnDestroy {
     })
     this.sub.unsubscribe();
   }
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

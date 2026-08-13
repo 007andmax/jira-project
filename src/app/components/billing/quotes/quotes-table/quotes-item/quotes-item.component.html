@@ -19,8 +19,9 @@
         </div>
     </div>
     <div
-        class="quotes-table__date cursor-default"
+        class="quotes-table__date pointer"
         [textContent]="getDate(quote.date)"
+        (click)="preview()"
     >
     </div>
     <div
@@ -29,7 +30,8 @@
         (click)="preview()"
     ></div>
     <div
-        class="quotes-table__company cursor-default ellipsis"
+        class="quotes-table__company pointer ellipsis"
+        (click)="preview()"
     >
   <ng-template #popCompanyContent let-greeting="greeting"
 	>
@@ -63,16 +65,17 @@
         </div>
 </div>
     <div
-        class="quotes-table__description cursor-default"
+        class="quotes-table__description pointer"
         [textContent]="quote.description"
+        (click)="preview()"
     ></div>
-    <div class="quotes-table__recipients ellipsis cursor-default">
+    <div class="quotes-table__recipients ellipsis pointer" (click)="preview()">
         <div
             class="ellipsis"
             [innerHtml]="quote.parseRecipients()"
         ></div>
     </div>
-    <div class="quotes-table__create-by ellipsis cursor-default">
+    <div class="quotes-table__create-by ellipsis pointer" (click)="preview()">
         <div class="qt-df qt-ai-c qt-w100">
              <ng-template #popContent let-greeting="greeting"
                 >
@@ -121,13 +124,15 @@
         </span>
     </div>
     <div
-        class="quotes-table__valid cursor-default"
+        class="quotes-table__valid pointer"
         [textContent]="getDate(quote.validUntil)"
+        (click)="preview()"
     >
     </div>
     <div
-        class="quotes-table__total cursor-default"
+        class="quotes-table__total pointer"
         [textContent]="quote.totalAmount | currency"
+        (click)="preview()"
     ></div>
     <div
         class="quotes-table__menu"
