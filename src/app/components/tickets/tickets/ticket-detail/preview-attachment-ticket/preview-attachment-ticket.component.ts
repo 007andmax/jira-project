@@ -18,7 +18,6 @@ export class PreviewAttachmentTicketComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let getOnPreview = this.ticketStateService.onPreviewAttachment.subscribe(data => {
-      console.log("data", data);
       this.file = data;
       this.src = `/file/${data.id}`;
       this.show = true;
