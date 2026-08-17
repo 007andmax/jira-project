@@ -1,6 +1,13 @@
-<div class="qt-df qt-ai-fs">
-    <company-drop-down
-        class="search-company documents-company-filter qt-mr-8"
+<div class="left-panel-ng2__content--filters aside-filters-content__main">
+    <div class="content-filters-header">
+        <div
+            class="qt-icon icon__close qt-icon__white qt-sz-20"
+            (click)="close()"
+        ></div>
+        <div class="content-filters-header__title pointer">Filters</div>
+    </div>
+  <company-drop-down
+        class="search-company documents-company-filter"
         #companyDp
         [placeholder]="'Select By Company'"
         [change]="true"
@@ -8,14 +15,20 @@
         [heightInput]="'36px'"
         [class]="['qt-dropdown']"
         [field]="'name'"
+        [title]="'Company'"
         (onSelectedItem)="onSelectCompany($event)"
     ></company-drop-down>
-    <app-company-tags
+        <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f100">
+            <div class="qt-input-block__label">Tags</div>
+       <app-company-tags
         #tagsDp
-        class="documents-filter-tags qt-mr-8 app-mat-tags-wrapper--sm"
+        class="documents-filter-tags app-mat-tags-wrapper--sm"
         (tagsChange)="onSelectTags($event)"
     ></app-company-tags>
-    <div class="grey-dropdown form-group content qt-mr-8">
+        </div>
+        </div>
+    <div class="grey-dropdown content">
         <app-tech-users-list-report
             #usersDp
             [class]="['filter-users-documents']"
@@ -24,14 +37,37 @@
             [search]="true"
             [change]="true"
             [errorMessage]="'Select any user'"
+              [title]="'Tech User'"
             (onSelectedItem)="onSelectTechUser($event)"
         ></app-tech-users-list-report>
     </div>
-    <app-multi-datepicker
+     <div class="qt-inputs-row">
+        <div class="qt-input-block qt-f100">
+            <div class="qt-input-block__label">Date</div>
+       <app-multi-datepicker
         class="qt-input-block qt-header-date-filter filter-documents-date"
         #datesDp
         [container]="'body'"
         [placeholder]="'Review Date'"
         (selectedDate)="filterByDate($event)"
     ></app-multi-datepicker>
+        </div>
+        </div>
 </div>
+<div class="aside-filters-content__footer">
+    <div class="qt-df">
+        <button
+            class="qt-button --md --gray qt-mr-12 qt-w100 qt-jc-c"
+            (click)="onClearAll()"
+        >
+            Clear All
+        </button>
+        <button
+            class="qt-button --md qt-w100 qt-jc-c"
+            (click)="applyFilters()"
+        >
+            Apply
+        </button>
+    </div>
+</div>
+ 

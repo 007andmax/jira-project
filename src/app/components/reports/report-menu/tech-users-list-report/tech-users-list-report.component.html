@@ -9,6 +9,12 @@
         [textContent]="errorMessage"
     >
     </app-mat-error>
+     <div class="qt-pos-rel dropdown-wrap" >
+      <div
+        *ngIf="title"
+        class="qt-input-block__label"
+        [textContent]="title"
+      ></div>
     <input
         [ngClass]="{'--input-error' : !validate}"
         type="text"
@@ -20,7 +26,7 @@
         ngbDropdownToggle
         class="qt-input-block__input"
     >
-    <span *ngIf="list">
+    <span *ngIf="list" [ngClass]="{'exist-title-icon':title}">
         <i
             *ngIf="selectedItem"
             class="icn-remove-old qt-icon icon__close qt-icon__gray-400 qt-sz-20"
@@ -87,4 +93,5 @@
             </div>
         </ng-template>
     </div>
+</div>
 </div>

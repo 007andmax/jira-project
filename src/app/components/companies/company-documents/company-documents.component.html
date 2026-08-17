@@ -5,7 +5,63 @@
         [showAssignedCompanies]="false"
         (onChangeFilterField)="onFilter($event)"
     ></documents-header>
+     <div class="qt-page-list users-page qt-df">
+    <div class="qt-page-list__body qt-pl-32"   [ngClass]="{'qt-pr-32':!toggleFilter,
+        '--open-filters':toggleFilter}">
+         <div class="qt-page-list__container">
     <div class="qt-page-list__body">
+          <div class="qt-page-list__header-thead-container">
+        <div class="qt-table-modern qt-page-list__header-thead">
+            <div class="qt-page-list__header-thead__row">
+                <div
+                    class="documents-table__title pointer"
+                    (click)="onFilter('title')"
+                >
+                    Title
+                    <span class="qt-table-modern__sorting"></span>
+                        <div *ngIf="sortBy.sortBy == 'title'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                </div>
+                <div
+                    class="documents-table__create-by pointer"
+                    (click)="onFilter('createBy')"
+                >
+                    Created By
+                    <span class="qt-table-modern__sorting"></span>
+                        <div *ngIf="sortBy.sortBy == 'createBy'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                </div>
+                <div
+                    class="documents-table__created-date pointer"
+                    (click)="onFilter('createdDate')"
+                >
+                    Created Date
+                    <span class="qt-table-modern__sorting"></span>
+                        <div *ngIf="sortBy.sortBy == 'createdDate'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                </div>
+                <div
+                    class="documents-table__review-date pointer"
+                    (click)="onFilter('reviewDate')"
+                >
+                    Review Date
+                    <span class="qt-table-modern__sorting"></span>
+                        <div *ngIf="sortBy.sortBy == 'reviewDate'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
+                </div>
+                <div class="documents-table__company">Company</div>
+                <div class="documents-table__menu pointer"></div>
+            </div>
+        </div>
+    </div>
         <div class="qt-page-list__body-table-container">
             <div class="qt-page-list__body-tbody qt-table-modern documents-table">
                 <div class="tbody">
@@ -16,7 +72,6 @@
                         [ngForTrackBy]="trackById"
                     >
                         <company-documents-table
-                            [companyId]="companyId"
                             [item]="item"
                             (onRemoveCategory)="onRemoveCategory($event)"
                             (onRemoveDocument)="onRemoveDocument($event)"
@@ -26,14 +81,38 @@
                 </div>
             </div>
             <div
+                class="no-exist-elements"
+                *ngIf="!showPreloader && list.length == 0"
+            >
+                We couldn't find any results
+            </div>
+            <div
                 class="loading"
                 *ngIf="showPreloader"
             ></div>
-            <div
-                class="no-exist-documents"
-                *ngIf="!showPreloader && list.length === 0"
-            >
-                No documents
+        </div>
+    </div>
+    </div>
+    </div>
+      <div
+            class="aside-filters qt-ml-16"
+            [hidden]="!toggleFilter"
+        >
+            <div class="aside-filters-header qt-df qt-ai-c qt-jc-sb">
+                <div class="aside-filters-header__title">Filters</div>
+                <div
+                    class="qt-button --square-md --gray pointer"
+                    (click)="onCloseFilters()"
+                >
+                    <div class="qt-icon icon__close qt-sz-16 pointer"></div>
+                </div>
+            </div>
+            <div class="aside-filters-content">
+                <documents-filter
+                #filter
+                 (onClose)="onCloseFilters()"
+                    class="qt-w100"
+                ></documents-filter>
             </div>
         </div>
     </div>

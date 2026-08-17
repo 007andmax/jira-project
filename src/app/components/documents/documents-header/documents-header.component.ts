@@ -7,23 +7,25 @@ import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-stat
 import { DocumentsFilterComponent } from './documents-filter/documents-filter.component';
 import { Subscription } from 'rxjs';
 import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
+import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
+import { DocumentFilter } from '../class/document-filter';
 
 @Component({
   selector: 'documents-header',
   templateUrl: './documents-header.component.html',
-  styleUrls: ['./documents-header.component.css']
+  styleUrls: ['./documents-header.component.scss']
 })
 export class DocumentsHeaderComponent implements OnInit {
   toggleFilter: boolean = false;
   countFilter: number = 0;
   activePage: string = "";
-  @ViewChild('filter', { static: true }) filter: DocumentsFilterComponent;
   @Output() onChangeFilterField = new EventEmitter<any>();
   @Output() onSelectAll = new EventEmitter<any>();
   @Output() onSearch = new EventEmitter<any>();
   @Input() selectAll: boolean = false;
   @Input() companyId: string;
   @Input() showAssignedCompanies: boolean = false;
+  filter: DocumentFilter = new DocumentFilter();
   sortBy: TicketSortBy = new TicketSortBy('title', 'ASC');
   sub: Subscription = new Subscription();
   searchText: string = "";
@@ -38,6 +40,7 @@ export class DocumentsHeaderComponent implements OnInit {
     private router: Router,
     public appService: AppService,
     private companiesStateService: CompaniesStateService,
+    private documentsStateService: DocumentsStateService
   ) { }
 
   /**
@@ -49,10 +52,27 @@ export class DocumentsHeaderComponent implements OnInit {
       this.activePage = data;
     })
     this.sub.add(onFirstOpen);
+    let onCloseFitler = this.documentsStateService.onToggleFitler.subscribe(res => {
+      this.toggleFilter = res;
+    })
+    this.sub.add(onCloseFitler);
+    let getFilter = this.documentsStateService.filter.subscribe(data => {
+      this.filter.setFilters(data)
+      this.onChangeCounterFilter();
+    })
+    this.sub.add(getFilter);
   }
   clearSearch() {
     this.searchText = "";
     this.onSearch.emit("");
+  }
+  public onChangeCounterFilter() {
+    this.countFilter = 0;
+    if (this.filter.categoryId) this.countFilter++;
+    if (this.filter.reviewDateStart && this.filter.reviewDateEnd) this.countFilter++;
+    if (this.filter.tags.length > 0) this.countFilter++;
+    if (this.filter.userId) this.countFilter++;
+    if (this.filter.companyId) this.countFilter++;
   }
   back() {
     this.leftPanelStateService.goToState('new-documents');
@@ -64,12 +84,13 @@ export class DocumentsHeaderComponent implements OnInit {
     this.selectAll = true;
     this.onSelectAll.emit(data);
   }
-  public onFilter(field) {
-    this.sortBy.sortBy = field;
-    this.onChangeFilterField.emit(field);
-  }
+
   clearAll() {
-    this.filter.onClearAll();
+    this.documentsStateService.onClearFitler.emit(null);
+  }
+  public onToggleFilters(data) {
+    this.toggleFilter = data;
+    this.documentsStateService.onToggleFitler.emit(data);
   }
   search(event) {
     this.onSearch.emit(event.target.value);

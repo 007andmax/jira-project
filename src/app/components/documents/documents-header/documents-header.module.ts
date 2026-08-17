@@ -10,8 +10,7 @@ import { MultiDatepickerModule } from '../../shared/multi-datepicker/multi-datep
 import { CompanyDropDownModule } from '../../shared/company-drop-down/company-drop-down.module';
 
 @NgModule({
-    declarations: [DocumentsHeaderComponent,
-        DocumentsFilterComponent
+    declarations: [DocumentsHeaderComponent
     ],
     imports: [
         CommonModule,

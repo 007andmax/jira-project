@@ -6,6 +6,7 @@ import { CompanyDocumentsTableComponent } from './company-documents-table/compan
 import { DocumentsTemplatesInfoModule } from '../../documents/documents-templates/documents-templates-info/documents-templates-info.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyDocumentsRoutingModule } from './company-documents-routing.module';
+import { DocumentsFilterModule } from '../../documents/documents-header/documents-filter/documents-filter.module';
 
 @NgModule({
     declarations: [CompanyDocumentsComponent,
@@ -16,7 +17,8 @@ import { CompanyDocumentsRoutingModule } from './company-documents-routing.modul
         DocumentsHeaderModule,
         DocumentsTemplatesInfoModule,
         NgbModule,
-        CompanyDocumentsRoutingModule
+        CompanyDocumentsRoutingModule,
+        DocumentsFilterModule
 
     ],
 

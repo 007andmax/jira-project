@@ -20,6 +20,8 @@ export class DocumentsStateService {
   onGetCategories: EventEmitter<any> = new EventEmitter();
   categories: Array<CategoryDocument> = [];
   onChangeDocument: EventEmitter<any> = new EventEmitter();
+  onClearFitler: EventEmitter<any> = new EventEmitter();
+  onToggleFitler: EventEmitter<any> = new EventEmitter();
   constructor(private documentsService: DocumentsService,
     private documentsRealTimeService: DocumentsRealTimeService) { }
 

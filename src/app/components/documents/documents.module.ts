@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../shared/preloader-ticket/preloader-ticket.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DocumentsFilterModule } from './documents-header/documents-filter/documents-filter.module';
 
 @NgModule({
     declarations: [DocumentsComponent,
@@ -29,6 +30,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         DisabledBtnModule,
         PreloaderTicketModule,
         NgbModule,
+        DocumentsFilterModule
+
     ],
 })
 export class DocumentsModule { }

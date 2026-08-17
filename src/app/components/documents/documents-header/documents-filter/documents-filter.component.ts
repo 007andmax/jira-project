@@ -24,12 +24,16 @@ export class DocumentsFilterComponent implements OnInit {
   @ViewChild('tagsDp', { static: true }) tagsDp: CompanyTagsComponent;
   sub: Subscription = new Subscription();
   documentsFilter: DocumentFilter = new DocumentFilter();
+  @Output() onClose = new EventEmitter<any>();
   @Output() changeCountFilter = new EventEmitter<any>();
   constructor(private companiesState: CompaniesStateService,
     private documentsStateService: DocumentsStateService) { }
 
   ngOnInit() {
-
+    let onClearFitler = this.documentsStateService.onClearFitler.subscribe(res => {
+      this.onClearAll();
+    })
+    this.sub.add(onClearFitler);
   }
   public onClearAll() {
     if (!this.companyDp.isDisabled) this.companyDp.clearWithOutChanges();
@@ -45,20 +49,23 @@ export class DocumentsFilterComponent implements OnInit {
     this.documentsStateService.onInitFilter(this.documentsFilter);
     this.onChangeCounterFilter();
   }
+  applyFilters() {
+    this.documentsStateService.onInitFilter(this.documentsFilter);
+  }
   public onSelectCompany(data) {
     this.documentsFilter.setCompanyId((data) ? data.id : null);
-    this.documentsStateService.onInitFilter(this.documentsFilter);
-    this.onChangeCounterFilter();
+    //  this.documentsStateService.onInitFilter(this.documentsFilter);
+    // this.onChangeCounterFilter();
   }
   public onSelectTags(data) {
     this.documentsFilter.setTags(data.map(item => item.id));
-    this.documentsStateService.onInitFilter(this.documentsFilter);
-    this.onChangeCounterFilter();
+    // this.documentsStateService.onInitFilter(this.documentsFilter);
+    // this.onChangeCounterFilter();
   }
   onSelectTechUser(data) {
     this.documentsFilter.setUserId((data) ? data.id : null);
-    this.documentsStateService.onInitFilter(this.documentsFilter);
-    this.onChangeCounterFilter();
+    //   this.documentsStateService.onInitFilter(this.documentsFilter);
+    //  this.onChangeCounterFilter();
   }
 
   public filterByDate(value) {
@@ -69,8 +76,8 @@ export class DocumentsFilterComponent implements OnInit {
       this.documentsFilter.setReviewDateStart(null);
       this.documentsFilter.setReviewDateEnd(null);
     }
-    this.documentsStateService.onInitFilter(this.documentsFilter);
-    this.onChangeCounterFilter();
+    // this.documentsStateService.onInitFilter(this.documentsFilter);
+    // this.onChangeCounterFilter();
   }
   public onChangeCounterFilter() {
     let count = 0;
@@ -81,5 +88,7 @@ export class DocumentsFilterComponent implements OnInit {
     if (this.documentsFilter.companyId) count++;
     this.changeCountFilter.emit(count);
   }
-
+  close() {
+    this.onClose.emit(null);
+  }
 }

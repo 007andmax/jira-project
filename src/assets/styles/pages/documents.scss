@@ -2,6 +2,9 @@
 @import "./src/assets/styles/mixin/breakpoint";
 
 .documents-page {
+   padding: 0;
+    background-color: $white;
+    min-width: fit-content;
   .qt-page-list__header-thead__row {
     border-left: 1px solid transparent;
     border-right: 1px solid transparent;

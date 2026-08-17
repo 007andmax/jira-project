@@ -16,6 +16,7 @@ import { Document } from './class/document';
 import { DocumentFilter } from './class/document-filter';
 import { fadeInAnimation } from 'src/app/animations';
 import { DocumentsHeaderComponent } from './documents-header/documents-header.component';
+import { TicketSortBy } from '../tickets/tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-documents',
@@ -26,6 +27,8 @@ import { DocumentsHeaderComponent } from './documents-header/documents-header.co
   styleUrls: ['./documents.component.scss']
 })
 export class DocumentsComponent implements OnInit, OnDestroy {
+  toggleFilter: boolean = false;
+  sortBy: TicketSortBy = new TicketSortBy('title', 'ASC');
   @ViewChild('header', { static: true }) header: DocumentsHeaderComponent;
   showPreloader: boolean = true;
   list: Array<Document> = [];
@@ -101,6 +104,9 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
     this.getList();
+    this.documentsStateService.onToggleFitler.subscribe(res => {
+      this.toggleFilter = res;
+    })
   }
 
   getList() {
@@ -127,6 +133,7 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     })
   }
   public onFilter(field) {
+    this.sortBy.sortBy = field;
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.filter.onFilter(field, this.list, this.usersStateService.getAllUsers())
     this.header.sortBy.sortDirection = this.filter.direction;
@@ -151,7 +158,10 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     if (item.categoryId) return item.categoryName;
     return item.title;
   }
-
+  onCloseFilters() {
+    this.toggleFilter = false;
+    this.documentsStateService.onToggleFitler.emit(false);
+  }
   onRemoveCategory(data) {
     this.confirmStateService.setConfirmAction(REMOVE_CATEGORY_DOCUMENT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal', backdrop: 'static', keyboard: false });

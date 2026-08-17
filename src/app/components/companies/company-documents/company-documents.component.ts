@@ -4,6 +4,7 @@ import { Document } from '../../documents/class/document';
 import { DocumentsHeaderComponent } from '../../documents/documents-header/documents-header.component';
 import { DocumentsComponent } from '../../documents/documents.component';
 import { fadeInAnimation } from 'src/app/animations';
+import { DocumentsFilterComponent } from '../../documents/documents-header/documents-filter/documents-filter.component';
 
 @Component({
   selector: 'company-documents',
@@ -16,7 +17,7 @@ import { fadeInAnimation } from 'src/app/animations';
 export class CompanyDocumentsComponent extends DocumentsComponent {
   companyId: string;
   @ViewChild('header', { static: true }) header: DocumentsHeaderComponent;
-
+  @ViewChild('filters', { static: true }) filters: DocumentsFilterComponent;
   ngOnInit() {
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.companyId = this.activateRoute.snapshot.params['id'];
@@ -30,10 +31,10 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
       this.filter.setCompanyScope(true);
       this.getFilterList();
       let company = this.companiesStateService.getCompanies().find(item => item.id === this.companyId);
-      this.header.filter.companyDp.isDisabled = true;
-      this.header.filter.companyDp.editItem = company;
-      this.header.filter.documentsFilter.setCompanyId(this.companyId);
-      this.header.filter.onChangeCounterFilter();
+      this.filters.companyDp.isDisabled = true;
+      this.filters.companyDp.editItem = company;
+      this.filters.documentsFilter.setCompanyId(this.companyId);
+      this.filters.onChangeCounterFilter();
     });
     this.sub.add(subscription);
     let queryParams = this.activateRoute.queryParams.subscribe(

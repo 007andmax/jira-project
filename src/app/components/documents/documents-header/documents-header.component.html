@@ -37,8 +37,8 @@
                 </button>
                 <button
                     class="qt-button qt-button-filter --gray --md qt-ml-8"
-                    [ngClass]="{'active':!toggleFilter}"
-                    (click)="toggleFilter  = !toggleFilter"
+                     [ngClass]="{'active':!toggleFilter}"
+                    (click)="onToggleFilters(!toggleFilter)"
                 >
                     <span class="qt-icon icon__filter qt-sz-16 qt-bg-contain qt-dib qt-mr-8"></span>
                     <span [textContent]="getTextCountFilters()"></span>
@@ -84,71 +84,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="qt-page-list__header-filters">
-        <documents-filter
-            class="qt-w100"
-            #filter
-            (changeCountFilter)="onChangeCountFilter($event)"
-            [hidden]="toggleFilter"
-        ></documents-filter>
-    </div>
-    <div class="qt-page-list__header-thead-container">
-        <div class="qt-table-modern qt-page-list__header-thead">
-            <div class="qt-page-list__header-thead__row">
-                <div
-                    class="documents-table__title pointer"
-                    (click)="onFilter('title')"
-                >
-                    Title
-                    <span class="qt-table-modern__sorting"></span>
-                        <div *ngIf="sortBy.sortBy == 'title'"
-                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
-                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
-            ></div>
-                </div>
-                <div
-                    class="documents-table__create-by pointer"
-                    (click)="onFilter('createBy')"
-                >
-                    Created By
-                    <span class="qt-table-modern__sorting"></span>
-                        <div *ngIf="sortBy.sortBy == 'createBy'"
-                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
-                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
-            ></div>
-                </div>
-                <div
-                    class="documents-table__created-date pointer"
-                    (click)="onFilter('createdDate')"
-                >
-                    Created Date
-                    <span class="qt-table-modern__sorting"></span>
-                        <div *ngIf="sortBy.sortBy == 'createdDate'"
-                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
-                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
-            ></div>
-                </div>
-                <div
-                    class="documents-table__review-date pointer"
-                    (click)="onFilter('reviewDate')"
-                >
-                    Review Date
-                    <span class="qt-table-modern__sorting"></span>
-                        <div *ngIf="sortBy.sortBy == 'reviewDate'"
-                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
-                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
-            ></div>
-                </div>
-                <div class="documents-table__company">Company</div>
-                <div
-                    class="documents-table__assigned-companies pointer"
-                    *ngIf="showAssignedCompanies"
-                >
-                    assigned to companies
-                </div>
-                <div class="documents-table__menu pointer"></div>
-            </div>
-        </div>
-    </div>
+    </div>  
 </div>
