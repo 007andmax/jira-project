@@ -6,16 +6,18 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { DevicesService } from 'src/app/services/devices/devices.service';
+import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 
 @Component({
   selector: 'app-tech-users-list-report',
   templateUrl: './tech-users-list-report.component.html',
   styleUrls: ['./tech-users-list-report.component.scss'],
+  providers: [TicketsListService]
 })
 export class TechUsersListReportComponent extends DropDownComponent {
   sub: Subscription = new Subscription();
   @Input() placeholder: string = 'Tech users';
-
+  @Input() reducerItem: Function = (item) => `${item.firstName} ${item.lastName}`;
   constructor(
     public elRef: ElementRef,
     public companiesStateService: CompaniesStateService,
@@ -23,7 +25,8 @@ export class TechUsersListReportComponent extends DropDownComponent {
     public customerPortalStateService: CustomerPortalStateService,
     public ref: ChangeDetectorRef,
     public devicesService: DevicesService,
-    public companiesService: CompaniesService) {
+    public companiesService: CompaniesService,
+    public ticketsListService: TicketsListService,) {
     super(elRef, companiesStateService, usersStateService, customerPortalStateService, companiesService, devicesService, ref);
   }
 

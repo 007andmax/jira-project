@@ -136,7 +136,7 @@ export class DocumentsComponent implements OnInit, OnDestroy {
     this.sortBy.sortBy = field;
     document.body.querySelector(".main-container").scrollTo(0, 0);
     this.filter.onFilter(field, this.list, this.usersStateService.getAllUsers())
-    this.header.sortBy.sortDirection = this.filter.direction;
+    this.sortBy.sortDirection = this.filter.direction;
   }
   removeCategory(item) {
     this.documentsService.removeCategories(item.categoryId).subscribe(data => {

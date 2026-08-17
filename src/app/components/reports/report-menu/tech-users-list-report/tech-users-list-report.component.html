@@ -40,6 +40,7 @@
     <div
         ngbDropdownMenu
         aria-labelledby="dropdown1"
+         class="dropdown-menu"
     >
         <ng-template
             ngFor
@@ -49,47 +50,24 @@
             [ngForTrackBy]="trackByIndex"
         >
             <div
-                class="user-item"
-                data-index="1"
-                ngbDropdownItem
+               class="assigne-user-item"
+               ngbDropdownItem
+                [ngClass]="{'--selected':isSelected(user)}"
                 (click)="onSelect(user)"
             >
-                <a
-                    href="javascript:void(0)"
-                    [id]="user.id"
-                    class="dropdown-link"
-                >
                     <div
-                        class="default-user-avatar avatar-background-color-odd ng-scope"
-                        *ngIf="!user.avatar"
-                    >
-                        <span [textContent]="(user.firstName.length > 0) ? user.firstName[0].toUpperCase() : ''"></span>
-                        <span [textContent]="(user.lastName.length > 0) ? user.lastName[0].toUpperCase() : ''"></span>
-                    </div>
-                    <div
-                        class="default-user-avatar avatar-background-color-odd ng-scope"
-                        *ngIf="user.avatar"
-                    >
-                        <img
-                            ng-if="user.avatar"
-                            class="qt-circle report-user-avatar"
-                            style="margin: 0;"
-                            [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
-                            alt="..."
-                        >
-                    </div>
-                    <span>
-                        <p
-                            class="report-user-name"
-                            [textContent]="user.firstName + ' ' + user.lastName"
-                        ></p>
-                        <p
-                            class="report-user-email"
-                            [textContent]="user.primaryEmail"
-                            style="margin: 0;"
-                        ></p>
-                    </span>
-                </a>
+                    class="assigne-user-avatar"
+                    [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+                    [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+                ></div>
+                <div
+                    class="assigne-user-name"
+                    [textContent]="reduceItemName(user)"
+                ></div>
+                <div
+                    *ngIf="isSelected(user)"
+                    class="qt-icon icon__done qt-za-20 qt-sz-20 qt-bg-contain filter-users-check"
+                ></div>
             </div>
         </ng-template>
     </div>

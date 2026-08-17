@@ -26,7 +26,6 @@ export class DocumentsHeaderComponent implements OnInit {
   @Input() companyId: string;
   @Input() showAssignedCompanies: boolean = false;
   filter: DocumentFilter = new DocumentFilter();
-  sortBy: TicketSortBy = new TicketSortBy('title', 'ASC');
   sub: Subscription = new Subscription();
   searchText: string = "";
   /**
