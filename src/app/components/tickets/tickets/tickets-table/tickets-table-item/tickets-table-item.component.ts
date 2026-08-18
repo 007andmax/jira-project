@@ -128,7 +128,8 @@ export class TicketsTableItemComponent implements OnInit, OnDestroy {
     if (date.getFullYear() === currentDate.getFullYear() && date.getMonth() === currentDate.getMonth() && date.getDate() === currentDate.getDate()) {
       return moment(date).format('hh:mm A')
     }
-    return moment(date).format('DD MMM')
+    if (new Date().getTime() - this.ticket.createdAt < 31536000000) return moment(date).format('DD MMM')
+    return moment(date).format('MMM DD, YYYY')
   }
   selectTicket(event) {
     event.preventDefault();

@@ -45,3 +45,10 @@
     position: absolute;
     right: 8px;
   }
+input {
+    white-space: nowrap;
+    overflow: hidden ! IMPORTANT;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    padding: 11px 30px 11px 14px !important;
+}
