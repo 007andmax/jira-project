@@ -14,3 +14,10 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+input {
+    white-space: nowrap;
+    overflow: hidden ! IMPORTANT;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    padding: 11px 30px 11px 14px !important;
+}

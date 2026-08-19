@@ -163,3 +163,10 @@
 .loading {
   top: 10px !important;
 }
+input {
+    white-space: nowrap;
+    overflow: hidden ! IMPORTANT;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    padding: 11px 30px 11px 14px !important;
+}

@@ -29,8 +29,7 @@ pre {
 ::ng-deep .products-table__category, ::ng-deep .products-table__tac, ::ng-deep .products-table__gl {
 
         input {
-        padding: 4px 24px 4px 8px !important;
-        border: unset !important;
+         border: unset !important;
         &:hover {
             background: $gray-50;
         }
