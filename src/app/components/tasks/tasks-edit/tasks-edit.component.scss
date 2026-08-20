@@ -25,7 +25,9 @@
       height: calc(100% - 14px);
     }
   }
-
+company-drop-down {
+  width: 300px;
+}
   ::ng-deep app-drop-down,
   ::ng-deep app-tasks-date-picker {
     .dropdown-wrap {

@@ -132,6 +132,7 @@
 .page-list-users {
     padding: 0;
     background-color: $white;
+    min-width: fit-content;
 
     ::ng-deep .qt-page-list {
         background-color: $white;

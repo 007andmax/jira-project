@@ -211,7 +211,9 @@
     }
   }
 }
-
+company-drop-down {
+  width: 300px;
+}
 ::ng-deep company-drop-down {
   .dropdown-menu {
     .dropdown-item {

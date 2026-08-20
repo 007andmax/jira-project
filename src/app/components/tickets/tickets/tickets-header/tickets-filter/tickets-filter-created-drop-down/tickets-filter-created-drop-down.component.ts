@@ -16,7 +16,6 @@ import { DevicesService } from 'src/app/services/devices/devices.service';
 })
 export class TicketsFilterCreatedDropDownComponent extends DropDownComponent {
   @ViewChild('dp', { static: true }) dp: NgbDropdown;
-  @Input() placement: string;
   @Input() list = [new TitleListType('Custom Date range', 'CUSTOM'),
   new TitleListType('Today', 'TODAY'),
   new TitleListType('Yesterday', 'YESTERDAY'),
