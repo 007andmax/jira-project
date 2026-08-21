@@ -4,6 +4,7 @@ import { RecurringTicket } from './class/recurring-ticket';
 import { RecurringTicketsListService } from './services/recurring-tickets-list.service';
 import { RecurringTicketsRealTimeService } from './services/recurring-tickets-real-time.service';
 import { fadeInAnimation } from 'src/app/animations';
+import { TicketSortBy } from '../tickets/class/ticket-sort-by';
 
 @Component({
   selector: 'app-recurring-tickets',
@@ -17,12 +18,10 @@ import { fadeInAnimation } from 'src/app/animations';
 export class RecurringTicketsComponent implements OnInit {
   public page_number: number = 0;
   public items_per_page: number = 30;
-  public sort: string = 'company_name';
   public infiniteScrollDisabled = true;
-  public direction: string = 'ASC';
   public showPreloader: boolean = true;
   public ticketList: Array<RecurringTicket> = [];
-
+  sortBy: TicketSortBy = new TicketSortBy('company_name', 'ASC');
   /**
    * Creates an instance of the RecurringTicketsComponent with the injected services
    * @param {RecurringService} recurringService Service to work with recurring tickets
@@ -55,7 +54,7 @@ export class RecurringTicketsComponent implements OnInit {
       this.infiniteScrollDisabled = false;
       return;
     }
-    this.recurringService.getTicketsList(this.page_number, this.items_per_page, this.sort, this.direction).subscribe((res: Array<RecurringTicket>) => {
+    this.recurringService.getTicketsList(this.page_number, this.items_per_page, this.sortBy.sortBy, this.sortBy.sortDirection).subscribe((res: Array<RecurringTicket>) => {
       if (res.length < 30) this.listSerivce.setBlockList(true);
       this.ticketList = [...this.ticketList, ...res];
       this.page_number += 1;
@@ -99,10 +98,10 @@ export class RecurringTicketsComponent implements OnInit {
  * Sort 
  * @param sort - type sort
  */
-  public sortBy(sort) {
+  public setSortBy(sort) {
     document.body.querySelector(".main-container").scrollTo(0, 0);
-    this.direction = this.listSerivce.getDirection(this.direction, this.sort, sort);
-    this.sort = sort;
+    this.sortBy.sortDirection = this.listSerivce.getDirection(this.sortBy.sortDirection, this.sortBy.sortBy, sort);
+    this.sortBy.sortBy = sort;
     this.refreshTicketList();
     this.getTicket();
   }

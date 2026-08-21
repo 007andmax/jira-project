@@ -1,32 +1,57 @@
 <div class="qt-page-list recurring-tickets-page">
     <div class="qt-page-list__header --sticky">
         <app-recurring-tickets-header></app-recurring-tickets-header>
-        <div class="qt-page-list__header-thead-container">
+    </div>
+    <div class="qt-page-list users-page qt-df">
+    <div class="qt-page-list__body qt-pl-32 qt-pr-32">
+         <div class="qt-page-list__container">
+    <div class="qt-page-list__body">
+          <div class="qt-page-list__header-thead-container">
             <div class="qt-table-modern qt-page-list__header-thead">
                 <div class="qt-page-list__header-thead__row">
                     <div
                         class="recurring-tickets__company-name pointer"
-                        (click)="sortBy('company_name')"
+                        (click)="setSortBy('company_name')"
                     >
                         Company Name
+                          <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'company_name'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="recurring-tickets__device pointer"
-                        (click)="sortBy('agent_label')"
+                        (click)="setSortBy('agent_label')"
                     >
                         Device
+                          <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'agent_label'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="recurring-tickets__description pointer"
-                        (click)="sortBy('description')"
+                        (click)="setSortBy('description')"
                     >
                         Description
+                          <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'description'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div
                         class="recurring-tickets__start-date pointer"
-                        (click)="sortBy('startDate')"
+                        (click)="setSortBy('startDate')"
                     >
                         Start Date
+                          <span class="qt-table-modern__sorting"></span>
+                         <div *ngIf="sortBy.sortBy == 'startDate'"
+                  [ngClass]="{'icon__arrow_narrow_down': sortBy.sortDirection === 'DESC', 'icon__arrow_narrow_up': sortBy.sortDirection === 'ASC'}"
+                class="qt-icon__background-unset qt-bg-contain qt-sz-20"
+            ></div>
                     </div>
                     <div class="recurring-tickets__interval">Interval</div>
                     <div class="recurring-tickets__assigned-user">Assigned User</div>
@@ -34,8 +59,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="qt-page-list__body">
         <div class="qt-page-list__body-table-container">
             <div class="qt-page-list__body-tbody qt-table-modern">
                 <div
@@ -67,6 +90,9 @@
             </div>
         </div>
     </div>
+     </div>
+     </div>
+      </div>
 </div>
 <app-recurring-tickets-edit-aside></app-recurring-tickets-edit-aside>
 <app-recurring-tickets-add-aside></app-recurring-tickets-add-aside>
