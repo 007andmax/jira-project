@@ -12,12 +12,12 @@
     ></i>
       <div
             class="circle-avatar qt-ml-16 qt-mr-16"
-            [textContent]="company ? company.name[0].toUpperCase() : ''"
+            [textContent]="!checkLogo() && company ? company.name[0].toUpperCase() : ''"
             [ngStyle]="{'background': parseLogo() }"
         ></div> 
         <div
             class="ellipsis"
-            [textContent]="company.name"
+             [textContent]="company.name"
         >
         </div>
     </div>
