@@ -10,10 +10,30 @@
         class="icon__new-update qt-db no-valid-label"
         *ngIf="(ticket.noValid)"
     ></i>
+        <ng-template #popContent let-greeting="greeting"
+	>
+    <app-users-table-company-by
+    [company]="company"
+    [indexNoAvatar]="indexNoAvatar"
+    [listColorNoAvatar]="listColorNoAvatar"
+    ></app-users-table-company-by>
+    </ng-template
+>
       <div
             class="circle-avatar qt-ml-16 qt-mr-16"
             [textContent]="!checkLogo() && company ? company.name[0].toUpperCase() : ''"
             [ngStyle]="{'background': parseLogo() }"
+              [ngbPopover]="popContent"
+                    [popoverClass]="'requested-by-popover'"
+                        [autoClose]="'outside'"
+                        [container]="'body'"
+                    #p="ngbPopover"
+                    triggers="manual"
+                    appCompanyLogoPopover
+                    [company]="company"
+                    [popover]="p"
+                    [disabled]="!company"
+                    [disablePopover]="!company"
         ></div> 
         <div
             class="ellipsis"

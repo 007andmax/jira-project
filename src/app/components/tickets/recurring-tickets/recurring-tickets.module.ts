@@ -34,6 +34,8 @@ import { UserLogoPopoverModule } from 'src/app/directives/user-logo-popover/user
 import { TicketsTableItemRequestedByModule } from '../tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-ticket.module';
+import { CompanyLogoPopoverModule } from 'src/app/directives/company-logo-popover/company-logo-popover.module';
+import { UsersTableCompanyByModule } from '../../users/users-table/users-table-company-by/users-table-company-by.module';
 
 
 
@@ -78,6 +80,8 @@ import { PreloaderTicketModule } from '../../shared/preloader-ticket/preloader-t
         UserLogoPopoverModule,
         DisabledBtnModule,
         PreloaderTicketModule,
+        CompanyLogoPopoverModule,
+        UsersTableCompanyByModule
     ],
 
 
