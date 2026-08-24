@@ -6,11 +6,20 @@
         class="recurring-tickets__company-name pointer"
         (click)="editTicket()"
     >
-        <div
+     <i
+        class="icon__new-update qt-db no-valid-label"
+        *ngIf="(ticket.noValid)"
+    ></i>
+      <div
             class="circle-avatar qt-ml-16 qt-mr-16"
-            [textContent]="getParseShortName(ticket.company.name)"
-        ></div>
-        <p [textContent]="ticket.company.name"></p>
+            [textContent]="company ? company.name[0].toUpperCase() : ''"
+            [ngStyle]="{'background': parseLogo() }"
+        ></div> 
+        <div
+            class="ellipsis"
+            [textContent]="company.name"
+        >
+        </div>
     </div>
     <div
         class="recurring-tickets__device pointer"
@@ -135,8 +144,4 @@
             </div>
         </div>
     </div>
-    <i
-        class="icon__new-update qt-db no-valid-label"
-        *ngIf="(ticket.noValid)"
-    ></i>
 </div>

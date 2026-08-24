@@ -62,9 +62,6 @@
       border: unset;
       > div {
         background-color: $blue-dark-25;
-        @include media-breakpoint-down($md) {
-          word-break: break-all;
-        }
       }
     }
     & > div {
