@@ -17,7 +17,7 @@
   }
 
   &__company-name {
-    width: 25%;
+       flex: 0 0 280px;
 
     &-text {
       padding: 8px;
@@ -29,20 +29,21 @@
     }
   }
   &__device {
-    width: 16.66666667%
+    flex: 0 0 170px;
   }
   &__description {
-    width: 25%;
+   flex: 1 0 260px;
   }
   &__start-date {
-    width: 8.33333333%;
+   flex: 0 0 155px;
   }
   &__interval {
-    width: 8.33333333%;
+    flex: 0 0 100px;
   }
   &__assigned-user {
-    width: 16.66666667%
+    flex: 0 0 170px;
   }
+
   &__menu {
     flex: 0 0 42px;
   }
