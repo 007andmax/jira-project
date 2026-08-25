@@ -2,6 +2,9 @@
 @import "./src/assets/styles/mixin/dropdown";
 
 .default-services-page {
+    padding: 0;
+    background-color: $white;
+    min-width: fit-content;
   min-height: calc(100vh - #{$header-height});
   position: relative;
   .qt-table-modern__row {

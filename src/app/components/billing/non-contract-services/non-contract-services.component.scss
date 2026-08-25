@@ -6,3 +6,31 @@
     text-transform: none;
     text-align: left;
 }
+.--sticky {
+    margin: 0;
+    padding: 10px 32px;
+    min-height: 57.1px;
+    background-color: $gray-50;
+    border-bottom: 1px solid $gray-200;
+}
+.qt-page-list__header-thead-container {
+    position: sticky;
+    top: 57px;
+    z-index: 1;
+    background-color: $white;
+    padding-top: 32px;
+
+    .qt-page-list__header-thead {
+        border: 1px solid $gray-200;
+        border-radius: 8px 8px 0 0;
+        overflow: hidden;
+    }
+    .qt-page-list__header-thead {
+        background-color: $gray-50;
+    }
+}
+.users-page {
+    background-color: $white;
+    padding: 0;
+    min-width: unset;
+}
