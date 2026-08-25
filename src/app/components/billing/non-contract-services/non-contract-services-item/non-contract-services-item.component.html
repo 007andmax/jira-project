@@ -2,14 +2,17 @@
     <div
         class="default-service-table__service-name"
         [textContent]="service.name"
+        (click)="edit()"
     ></div>
     <div
         class="default-service-table__rate"
         [textContent]="service.rate | currency"
+        (click)="edit()"
     ></div>
     <div
         class="default-service-table__taxes"
         [textContent]="getSelectedTaxNames(service.taxes)"
+        (click)="edit()"
     ></div>
     <div class="default-service-table__gl">
         <app-drop-down
