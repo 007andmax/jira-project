@@ -11,6 +11,10 @@
     z-index: 9999 !important;
 }
 }
+.qt-table-modern__row>div {
+    padding-top: 13px;
+    padding-bottom: 14px;
+}
 .--sticky {
     margin: 0;
     padding: 10px 32px;
@@ -38,4 +42,7 @@
     background-color: $white;
     padding: 0;
     min-width: unset;
+}
+.qt-table-modern__sorting {
+    transform: none;
 }
