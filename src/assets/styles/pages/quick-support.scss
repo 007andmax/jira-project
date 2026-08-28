@@ -1,27 +1,30 @@
 @import './src/assets/styles/variable';
 
 .quick-support-page {
-  background-color: $background;
+  padding: 0;
+    background-color: $white;
+    min-width: fit-content;
   min-height: calc(100vh - #{$header-height});
 
+  
+
   &__header {
-    max-width: 1128px;
-    margin: 0 auto 20px;
+     margin: 0 auto;
+    border-right: 1px solid $gray-200;
+    padding: 10px 32px;
+    background-color: #f9fafb;
+    border-bottom: 1px solid $gray-200;
+    border-left: 1px solid $gray-200;
   }
 
   .support-tickets-list {
-    max-width: 1128px;
-    width: 100%;
+     width: 100%;
     overflow: auto;
     margin: 0 auto;
+    padding: 0px 32px;
     &__item {
       width: 100%;
-      border-radius: 6px;
       background-color: $white;
-      margin-bottom: 8px;
-      min-width: 1128px;
-      max-width: 1128px;
-      width: 1128px;
     }
     &__item-top {
       min-height: 80px;
@@ -32,8 +35,7 @@
     }
     &__status-msg {
       height: 24px;
-      background-color: $gray-25;
-      border-bottom-left-radius: 6px;
+        border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
       padding: 0 16px;
       display: flex;

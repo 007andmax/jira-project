@@ -2,7 +2,9 @@
 @import "./src/assets/styles/mixin/breakpoint";
 
 .page-list-billable {
-
+ padding: 0;
+    background-color: $white;
+    min-width: fit-content;
   // ***** billable list
   .billable-list-search {
     width: 300px;
@@ -96,6 +98,9 @@
 
 // billing aside
 .billing-page {
+   padding: 0;
+    background-color: $white;
+    min-width: fit-content;
   &__aside{
     .invoice-items {
       color: $gray-900;

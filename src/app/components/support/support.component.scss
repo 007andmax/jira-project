@@ -1,5 +1,11 @@
+@import './src/assets/styles/variable';
+
 .no-exist-remote-sessions {
     position: absolute;
     top: 50%;
     left: calc(50% - 100px);
+}
+.qt-list-header {
+        background-color: $gray-50;
+    border-bottom: 1px solid $gray-200;
 }
