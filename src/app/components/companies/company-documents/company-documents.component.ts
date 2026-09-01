@@ -92,6 +92,9 @@ export class CompanyDocumentsComponent extends DocumentsComponent {
       }
     })
     this.sub.add(getConfirm);
+    this.documentsStateService.onToggleFitler.subscribe(res => {
+      this.toggleFilter = res;
+    })
   }
   getFilterList() {
     this.showPreloader = true;

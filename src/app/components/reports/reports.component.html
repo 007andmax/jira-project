@@ -30,13 +30,14 @@
                 [listTitles]="getListTitles('SALES',searchText)"
                 [listStates]="getListStates('SALES',searchText)"
             ></app-report-list-item>
-            <app-report-list-item
-                *ngIf="getPermissions('VIEW_TAXES_REPORT')"
-                 [img]="'icon__report_taxes'"
-                [title]="'Taxes'"
-                [listTitles]="getListTitles('TAXES',searchText)"
-                [listStates]="getListStates('TAXES',searchText)"
+               <app-report-list-item
+                *ngIf="getPermissions('VIEW_FINANCIAL_REPORT')"
+                 [img]="'icon__report_financial'"
+                [title]="'Financial'"
+                [listTitles]="getListTitles('FINANCIAL',searchText)"
+                [listStates]="getListStates('FINANCIAL',searchText)"
             ></app-report-list-item>
+          
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_SALES_REPORT')"
                [img]="'icon__commissions'"
@@ -45,12 +46,12 @@
                 [listStates]="getListStates('COMMISSIONS',searchText)"
             ></app-report-list-item>
       
-            <app-report-list-item
-                *ngIf="getPermissions('VIEW_FINANCIAL_REPORT')"
-                 [img]="'icon__report_financial'"
-                [title]="'Financial'"
-                [listTitles]="getListTitles('FINANCIAL',searchText)"
-                [listStates]="getListStates('FINANCIAL',searchText)"
+           <app-report-list-item
+                *ngIf="getPermissions('VIEW_TAXES_REPORT')"
+                 [img]="'icon__report_taxes'"
+                [title]="'Taxes'"
+                [listTitles]="getListTitles('TAXES',searchText)"
+                [listStates]="getListStates('TAXES',searchText)"
             ></app-report-list-item>
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_REMOTE_ACCESS_REPORT')"
