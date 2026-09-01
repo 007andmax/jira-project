@@ -2,7 +2,11 @@
 
 .--sticky {
   margin-top: 0 !important;
-  padding: 24px 24px 0 24px !important;
+  padding: 10px 32px !important;
+}
+.qt-list-header {
+        background-color: $gray-50;
+    border-bottom: 1px solid $gray-200;
 }
 .search-clear {
   width: 12px;
@@ -21,28 +25,24 @@ max-width: unset;
 }
 
 .outsideheader {
-  padding: 30px;
-  background-color: $background;
-  padding-right: 17px;
-  padding-left: 16px;
-  min-height: calc(100vh - 124px);
+ 
+  background-color: $white;
+     width: 100%;
+    overflow: auto;
+    margin: 0 auto;
+    padding: 16px 32px 0px 32px;
 }
-
-.reports-all{
-  border-radius: 15px;
-   height: auto !important;
-  padding-top: 32px !important;
-  padding-left: 1px;
-}
-
 .qt-page-list__search input {
   width: 360px !important;
   border: 1px solid $gray-200;
   box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
 }
-
-
-
-
-
-
+.reports-page {
+    padding: 0;
+    background-color: $white;
+    min-width: fit-content;
+  min-height: calc(100vh - #{$header-height});
+}
+app-report-list-item {
+  display: contents;
+}

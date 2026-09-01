@@ -1,7 +1,10 @@
 <div class="report">
-    <div>
-        <p [textContent]="title"></p>
-        <img [src]="img">
+    <div class="report-header qt-df qt-ai-c qt-jc-sb">
+  <div class="report-header-name" [textContent]="title"></div>
+       <div class="qt-icon qt-sz-20" [ngClass]="img"></div>
+    </div>
+    <div class="report-body">
+      
         <ul>
             <!-- ui-sref="byProducts" -->
             <ng-template

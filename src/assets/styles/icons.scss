@@ -764,8 +764,23 @@ Example:
   &__key {
     mask-image: url("/assets/img/icons/key.svg");
   }
-  &__copy {
+   &__copy {
     mask-image: url("/assets/img/icons/copy.svg");
+  }
+  &__report_sales {
+    mask-image: url("/assets/img/icons/Report-sales.svg");
+  }
+   &__report_taxes {
+    mask-image: url("/assets/img/icons/Report-Taxes.svg");
+  }
+    &__report_financial {
+    mask-image: url("/assets/img/icons/Report-Financial.svg");
+  }
+    &__report_remote_access {
+    mask-image: url("/assets/img/icons/Report-Remoteaccess.svg");
+  }
+  &__report_report_perforrmance {
+    mask-image: url("/assets/img/icons/Report-Perforrmance.svg");
   }
   &__network {
     mask-image: url("/assets/img/icons/network.svg");

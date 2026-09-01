@@ -1,4 +1,4 @@
-<div>
+<div class="reports-page">
     <div class="report-page qt-page-list__header --sticky">
         <div class="qt-page-list__header-title-line">
             <div class="qt-page-list__header-title-line--left">
@@ -20,77 +20,75 @@
             </div>
         </div>
     </div>
-</div>
+
 <div class="outsideheader">
     <div class="reports-all">
-        <div class="reports-col">
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_SALES_REPORT')"
-                [img]="'/html/assets/img/icons/Report-sales.svg'"
+                [img]="'icon__report_sales'"
                 [title]="'Sales'"
                 [listTitles]="getListTitles('SALES',searchText)"
                 [listStates]="getListStates('SALES',searchText)"
             ></app-report-list-item>
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_TAXES_REPORT')"
-                [img]="'/html/assets/img/icons/Report-Taxes.svg'"
+                 [img]="'icon__report_taxes'"
                 [title]="'Taxes'"
                 [listTitles]="getListTitles('TAXES',searchText)"
                 [listStates]="getListStates('TAXES',searchText)"
             ></app-report-list-item>
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_SALES_REPORT')"
-                [img]="'/html/assets/img/icons/Report-Perforrmance.svg'"
+               [img]="'icon__commissions'"
                 [title]="'Commissions'"
                 [listTitles]="getListTitles('COMMISSIONS',searchText)"
                 [listStates]="getListStates('COMMISSIONS',searchText)"
             ></app-report-list-item>
-        </div>
-        <div class="reports-col">
+      
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_FINANCIAL_REPORT')"
-                [img]="'/html/assets/img/icons/Report-Financial.svg'"
+                 [img]="'icon__report_financial'"
                 [title]="'Financial'"
                 [listTitles]="getListTitles('FINANCIAL',searchText)"
                 [listStates]="getListStates('FINANCIAL',searchText)"
             ></app-report-list-item>
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_REMOTE_ACCESS_REPORT')"
-                [img]="'/html/assets/img/icons/Report-Remoteaccess.svg'"
+                  [img]="'icon__report_remote_access'"
                 [title]="'Remote Access'"
                 [listTitles]="getListTitles('REMOTE_ACCESS',searchText)"
                 [listStates]="getListStates('REMOTE_ACCESS',searchText)"
             ></app-report-list-item>
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_DEVICES_REPORTS')"
-                [img]="'/html/assets/img/icons/Report-Perforrmance.svg'"
+                [img]="'icon__devices'"
                 [title]="'Devices'"
                 [listTitles]="getListTitles('DEVICES',searchText)"
                 [listStates]="getListStates('DEVICES',searchText)"
             ></app-report-list-item>
-        </div>
-        <div class="reports-col">
+      
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT')"
-                [img]="'/html/assets/img/icons/Report-Perforrmance.svg'"
+                [img]="'icon__report_report_perforrmance'"
                 [title]="'Performance'"
                 [listTitles]="getListTitles('PERFORMANCE',searchText)"
                 [listStates]="getListStates('PERFORMANCE',searchText)"
             ></app-report-list-item>
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_TICKET_REPORT')"
-                [img]="'/html/assets/img/icons/report-tickets.svg'"
+                [img]="'icon__tickets'"
                 [title]="'Tickets'"
                 [listTitles]="getListTitles('TICKETS',searchText)"
                 [listStates]="getListStates('TICKETS',searchText)"
             ></app-report-list-item>
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_SALES_REPORT')"
-                [img]="'/html/assets/img/icons/report-tickets.svg'"
+                   [img]="'icon__taxes'"
                 [title]="'Income accounts'"
                 [listTitles]="getListTitles('INCOME_ACCOUNTS',searchText)"
                 [listStates]="getListStates('INCOME_ACCOUNTS',searchText)"
             ></app-report-list-item>
-        </div>
+      
     </div>
+</div>
 </div>
