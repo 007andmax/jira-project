@@ -37,15 +37,14 @@
                 [listTitles]="getListTitles('FINANCIAL',searchText)"
                 [listStates]="getListStates('FINANCIAL',searchText)"
             ></app-report-list-item>
-          
-            <app-report-list-item
-                *ngIf="getPermissions('VIEW_SALES_REPORT')"
-               [img]="'icon__commissions'"
-                [title]="'Commissions'"
-                [listTitles]="getListTitles('COMMISSIONS',searchText)"
-                [listStates]="getListStates('COMMISSIONS',searchText)"
+             <app-report-list-item
+                *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT')"
+                [img]="'icon__report_report_perforrmance'"
+                [title]="'Performance'"
+                [listTitles]="getListTitles('PERFORMANCE',searchText)"
+                [listStates]="getListStates('PERFORMANCE',searchText)"
             ></app-report-list-item>
-      
+         
            <app-report-list-item
                 *ngIf="getPermissions('VIEW_TAXES_REPORT')"
                  [img]="'icon__report_taxes'"
@@ -67,14 +66,15 @@
                 [listTitles]="getListTitles('DEVICES',searchText)"
                 [listStates]="getListStates('DEVICES',searchText)"
             ></app-report-list-item>
-      
-            <app-report-list-item
-                *ngIf="getPermissions('VIEW_PERFORMANCE_REPORT')"
-                [img]="'icon__report_report_perforrmance'"
-                [title]="'Performance'"
-                [listTitles]="getListTitles('PERFORMANCE',searchText)"
-                [listStates]="getListStates('PERFORMANCE',searchText)"
+         <app-report-list-item
+                *ngIf="getPermissions('VIEW_SALES_REPORT')"
+               [img]="'icon__commissions'"
+                [title]="'Commissions'"
+                [listTitles]="getListTitles('COMMISSIONS',searchText)"
+                [listStates]="getListStates('COMMISSIONS',searchText)"
             ></app-report-list-item>
+      
+         
             <app-report-list-item
                 *ngIf="getPermissions('VIEW_TICKET_REPORT')"
                 [img]="'icon__tickets'"
