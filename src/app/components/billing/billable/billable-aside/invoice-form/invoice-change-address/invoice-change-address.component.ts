@@ -3,7 +3,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyProfile } from 'src/app/components/companies/class/company-profile';
-import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.component';
 import { Company } from 'src/app/interfaces/company/company';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
@@ -15,9 +14,7 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
   imports: [
     CommonModule,
     FormsModule,
-    NgbModule,
-    PreviewPhoneMaskComponent,
-    InvoiceChangeAddressComponent
+    NgbModule
   ]
 })
 export class InvoiceChangeAddressComponent implements OnInit {

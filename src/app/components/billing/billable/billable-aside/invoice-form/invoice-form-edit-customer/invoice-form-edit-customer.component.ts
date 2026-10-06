@@ -10,12 +10,14 @@ import { Subscription } from 'rxjs';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { BillableStateService } from 'src/app/states/billable/billable-state.service';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+
 declare const google: any;
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, FormsModule, CommonModule, NgxMaskModule.forRoot()],
+  imports: [MatErrorComponent, FormsModule, CommonModule, NgxMaskDirective],
+  providers: [provideNgxMask()],
   selector: 'app-invoice-form-edit-customer',
   templateUrl: './invoice-form-edit-customer.component.html',
   styleUrls: ['./invoice-form-edit-customer.component.scss']

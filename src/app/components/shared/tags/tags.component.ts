@@ -2,7 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, ViewChild, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { Subscription } from 'rxjs';
@@ -10,11 +10,12 @@ import { TagsStateService } from 'src/app/states/tags/tags-state.service';
 import { MatChipListComponent } from '../mat-chip-list/mat-chip-list.component';
 import { MatChipComponent } from '../mat-chip/mat-chip.component';
 import { MatFormFieldComponent } from '../mat-form-field/mat-form-field.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
   standalone: true,
-  imports: [MatChipComponent, MatChipListComponent, MatFormFieldComponent, CommonModule],
+  imports: [MatChipComponent, MatChipListComponent, MatFormFieldComponent, CommonModule, NgbModule, ReactiveFormsModule],
   selector: 'app-tags',
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.scss'],

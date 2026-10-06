@@ -4,11 +4,11 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@ang
 import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketStateService } from '../../../../ticket-edit-aside/services/ticket-state.service';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, AngularEditorModule],
   selector: 'ticket-detail-profile-updates-note-edit',
   templateUrl: './ticket-detail-profile-updates-note-edit.component.html',
   styleUrls: ['./ticket-detail-profile-updates-note-edit.component.scss']

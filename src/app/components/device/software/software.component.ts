@@ -14,10 +14,11 @@ import { CompaniesStateService } from "src/app/states/company/companies-state.se
 import { AgentService } from "src/app/services/agent/agent.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { SoftwareFilter } from "./class/software-filters";
+import { SoftwarePipe } from 'src/app/pipe/software.pipe';
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, SoftwarePipe],
   selector: "app-software",
   templateUrl: "./software.component.html",
   styleUrls: ["./software.component.scss"],

@@ -3,10 +3,11 @@ import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core
 import { CalendarMonth } from '../../../class/calenadar-month';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgbModule],
   selector: 'app-tasks-calendar-month-item-week',
   templateUrl: './tasks-calendar-month-item-week.component.html',
   styleUrls: ['./tasks-calendar-month-item-week.component.scss'],

@@ -17,7 +17,7 @@ import { SupportPageInfoComponent } from '../support-page-info/support-page-info
 
 @Component({
   standalone: true,
-  imports: [SupportPageInfoComponent, CommonModule],
+  imports: [SupportPageInfoComponent, CommonModule, SupportPageHeaderComponent, SupportPageBodyComponent],
   selector: 'support-page-category',
   templateUrl: './support-page-category.component.html',
   styleUrls: ['./support-page-category.component.scss']

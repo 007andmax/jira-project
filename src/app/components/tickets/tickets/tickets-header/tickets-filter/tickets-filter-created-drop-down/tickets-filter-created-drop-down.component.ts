@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { TitleListType } from '../../class/title-list-type';
-import { NgbDate, NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbDropdown, NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
@@ -14,7 +14,7 @@ import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, CommonModule, NgbDropdownModule],
+  imports: [MatErrorComponent, CommonModule, NgbDropdownModule, NgbModule],
   selector: 'tickets-filter-created-drop-down',
   templateUrl: './tickets-filter-created-drop-down.component.html',
   styleUrls: ['./tickets-filter-created-drop-down.component.scss'],

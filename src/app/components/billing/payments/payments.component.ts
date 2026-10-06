@@ -1,6 +1,6 @@
 
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { Payment } from './class/payment';
 import { PaymentsFilter } from './class/payments-filter';
 import { Subscription } from 'rxjs';

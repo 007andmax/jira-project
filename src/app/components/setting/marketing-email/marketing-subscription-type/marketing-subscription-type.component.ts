@@ -2,7 +2,7 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -19,10 +19,11 @@ import { MarketingSubscriptionTypeFilter } from './class/marketing-subscription-
 import { AddMarketingSubscriptionTypeComponent } from './add-marketing-subscription-type/add-marketing-subscription-type.component';
 import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
 
 @Component({
   standalone: true,
-  imports: [AddMarketingSubscriptionTypeComponent, NgbTooltipModule, DynamicTooltipComponent, MatErrorComponent, FormsModule, CommonModule],
+  imports: [AddMarketingSubscriptionTypeComponent, NgbModule, ClickOutsideDirective, DynamicTooltipComponent, MatErrorComponent, FormsModule, CommonModule],
   selector: 'marketing-subscription-type',
   templateUrl: './marketing-subscription-type.component.html',
   styleUrls: ['./marketing-subscription-type.component.scss'],

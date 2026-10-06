@@ -14,10 +14,11 @@ import { ManageTagsFilter } from '../class/manage-tags-filter';
 import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 import { ManageTagsAddComponent } from '../manage-tags-add/manage-tags-add.component';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, MatErrorComponent, ManageTagsAddComponent, FormsModule, CommonModule],
+  imports: [DynamicTooltipComponent, ClickOutsideDirective, MatErrorComponent, ManageTagsAddComponent, FormsModule, CommonModule],
   selector: 'app-manage-tags-files',
   templateUrl: './manage-tags-files.component.html',
   styleUrls: ['./manage-tags-files.component.scss'],

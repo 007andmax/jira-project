@@ -50,6 +50,7 @@ import { PermissionManageTagsService } from './app/components/setting/manage-tag
 import { PermissionDasnboardBillingService } from './app/services/dashboard-billing/permission-dasnboard-billing.service';
 import { HttpInterceptorService } from './app/services/http/http-interceptor.service';
 import { HTTP_INTERCEPTORS, withInterceptorsFromDi, provideHttpClient } from '@angular/common/http';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
 
 if (environment.production) {
     enableProdMode();
@@ -98,7 +99,8 @@ bootstrapApplication(AppComponent, {
         SuperAdminKnowledgeBaseService,
         PermissionIntegrationsService,
         provideAnimations(),
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient(withInterceptorsFromDi()),
+        provideEnvironmentNgxMask()
     ]
 }).then(() => {
     document.body.classList.add('ready');

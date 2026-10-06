@@ -10,10 +10,12 @@ import { FileManagerHeaderComponent } from 'src/app/components/file-manager/file
 import { REMOVE_CATEGORY_FILES, REMOVE_FILE } from 'src/app/const/confirm';
 import { CompanyFileManagerHeaderComponent } from '../company-file-manager-header/company-file-manager-header.component';
 import { FileManagerFileInfoComponent } from 'src/app/components/file-manager/file-manager-file-info/file-manager-file-info.component';
+import { FileManagerItemFileComponent } from 'src/app/components/file-manager/file-manager-item-file/file-manager-item-file.component';
+import { CompanyFileManagerItemCategoryComponent } from '../company-file-manager-item-category/company-file-manager-item-category.component';
 
 @Component({
   standalone: true,
-  imports: [CompanyFileManagerHeaderComponent, FileManagerFileInfoComponent, CommonModule],
+  imports: [CompanyFileManagerHeaderComponent, FileManagerItemFileComponent, FileManagerFileInfoComponent, CommonModule, CompanyFileManagerItemCategoryComponent],
   selector: 'app-company-file-manager-category',
   templateUrl: './company-file-manager-category.component.html',
   styleUrls: ['./company-file-manager-category.component.scss'],

@@ -12,10 +12,11 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { TicketDetailTicketsStatusComponent } from './ticket-detail-tickets-status/ticket-detail-tickets-status.component';
 import { TicketDetailTicketsDetailsComponent } from './ticket-detail-tickets-details/ticket-detail-tickets-details.component';
 import { TicketsListService } from '../../services/tickets-list.service';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [TicketDetailTicketsStatusComponent, CommonModule],
+  imports: [TicketDetailTicketsStatusComponent, InfiniteScrollModule, CommonModule],
   selector: 'ticket-detail-tickets',
   templateUrl: './ticket-detail-tickets.component.html',
   styleUrls: ['./ticket-detail-tickets.component.scss'],

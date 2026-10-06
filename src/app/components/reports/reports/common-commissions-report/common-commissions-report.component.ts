@@ -5,10 +5,12 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { CommonCommissionsReport } from '../../class/common-commissions-report';
 import * as moment from "moment";
 import { ReportMenuComponent } from '../../report-menu/report-menu.component';
+import { ToFixedPipe } from 'src/app/pipe/to-fixed/to-fixed.pipe';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
   standalone: true,
-  imports: [ReportMenuComponent, CommonModule],
+  imports: [ReportMenuComponent, CommonModule, ToFixedPipe, NgxChartsModule],
   selector: 'common-commissions-report',
   templateUrl: './common-commissions-report.component.html',
   styleUrls: ['./common-commissions-report.component.css'],

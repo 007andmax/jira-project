@@ -5,10 +5,11 @@ import * as moment from "moment";
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, NgbDropdownModule],
+  imports: [CommonModule, NgbDropdownModule, NgxChartsModule],
   selector: 'app-company-dash-revenue',
   templateUrl: './company-dash-revenue.component.html',
   styleUrls: ['./company-dash-revenue.component.scss']

@@ -13,10 +13,11 @@ import { Subscription } from 'rxjs';
 import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.service';
 import { TaskHeaderAddComponent } from '../../task-header-add/task-header-add.component';
 import { TasksCalendarMonthItemWeekComponent } from './tasks-calendar-month-item-week/tasks-calendar-month-item-week.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [TaskHeaderAddComponent, TasksCalendarMonthItemWeekComponent, CommonModule],
+  imports: [TaskHeaderAddComponent, TasksCalendarMonthItemWeekComponent, CommonModule, NgbModule],
   selector: 'app-tasks-calendar-month',
   templateUrl: './tasks-calendar-month.component.html',
   styleUrls: ['./tasks-calendar-month.component.scss'],

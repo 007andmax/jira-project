@@ -4,10 +4,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CompanyDevicesEditIpValidate } from './class/company-devices-edit-ip-validate';
 import { CompanyDevicesEditLabelComponent } from '../company-devices-edit-label/company-devices-edit-label.component';
 import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, FormsModule, CommonModule],
+  imports: [MatErrorComponent, FormsModule, CommonModule, ClickOutsideDirective],
   selector: 'app-company-devices-edit-ip',
   templateUrl: './company-devices-edit-ip.component.html',
   styleUrls: ['./company-devices-edit-ip.component.scss'],

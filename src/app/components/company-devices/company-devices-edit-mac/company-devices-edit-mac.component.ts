@@ -5,10 +5,11 @@ import { Component } from '@angular/core';
 import { CompanyDevicesEditLabelComponent } from '../company-devices-edit-label/company-devices-edit-label.component';
 import { CompanyDevicesEditMacValidate } from './class/company-devices-edit-mac-validate';
 import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, FormsModule, CommonModule],
+  imports: [MatErrorComponent, FormsModule, CommonModule, ClickOutsideDirective],
   selector: 'app-company-devices-edit-mac',
   templateUrl: './company-devices-edit-mac.component.html',
   styleUrls: ['./company-devices-edit-mac.component.scss'],

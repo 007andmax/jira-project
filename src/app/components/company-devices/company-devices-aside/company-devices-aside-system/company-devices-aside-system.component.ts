@@ -19,10 +19,11 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
 import { Subscription } from 'rxjs';
 import { DeviceType } from '../../class/device-type';
 import { CompanyDevicesEditIpComponent } from '../../company-devices-edit-ip/company-devices-edit-ip.component';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
 
 @Component({
   standalone: true,
-  imports: [CompanyDevicesEditIpComponent, FormsModule, DatePickerComponent, CompanyDevicesEditLabelComponent, CommonModule, DropDownComponent],
+  imports: [CompanyDevicesEditIpComponent, ClickOutsideDirective, FormsModule, DatePickerComponent, CompanyDevicesEditLabelComponent, CommonModule, DropDownComponent],
   selector: 'app-company-devices-aside-system',
   templateUrl: './company-devices-aside-system.component.html',
   styleUrls: ['./company-devices-aside-system.component.scss'],

@@ -1,7 +1,7 @@
 ﻿import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { UntypedFormControl } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
 import { Company } from 'src/app/interfaces/company/company';
@@ -11,10 +11,11 @@ import { MatChipListComponent } from '../../mat-chip-list/mat-chip-list.componen
 import { MatChipComponent } from '../../mat-chip/mat-chip.component';
 import { MatErrorComponent } from '../../mat-error/mat-error.component';
 import { MatFormFieldComponent } from '../../mat-form-field/mat-form-field.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, MatChipComponent, MatChipListComponent, MatErrorComponent, MatFormFieldComponent],
+  imports: [CommonModule, MatChipComponent, MatChipListComponent, MatErrorComponent, MatFormFieldComponent, NgbModule, ReactiveFormsModule],
   selector: 'app-draft-email-recipients',
   templateUrl: './draft-email-recipients.component.html',
   styleUrls: ['./draft-email-recipients.component.scss'],

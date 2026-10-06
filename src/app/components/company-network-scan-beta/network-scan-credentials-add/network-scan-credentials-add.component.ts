@@ -2,12 +2,15 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PasswordManagerService } from 'src/app/services/password-manager/password-manager.service';
 import { PasswordRecordCategories } from '../../password-manager/class/password-record-categories';
 import { NetworkScanCredentialsAdd } from '../class/network-scan-credentials-add';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-    selector: 'app-network-scan-credentials-add',
-    templateUrl: './network-scan-credentials-add.component.html',
-    styleUrls: ['./network-scan-credentials-add.component.scss'],
-    standalone: true
+  selector: 'app-network-scan-credentials-add',
+  templateUrl: './network-scan-credentials-add.component.html',
+  styleUrls: ['./network-scan-credentials-add.component.scss'],
+  standalone: true,
+  imports: [CommonModule, FormsModule]
 })
 export class NetworkScanCredentialsAddComponent implements OnInit {
   @Input() companyId: string;

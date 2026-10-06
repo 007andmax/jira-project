@@ -1,7 +1,7 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
 import { NoteService } from 'src/app/services/note/note.service';
 import { NoteStateService } from 'src/app/states/note/note-state.service';
 import { NoteTemplate } from '../class/note-template';
@@ -12,7 +12,7 @@ import { CustomerPortalStateService } from 'src/app/states/customer-portal/custo
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, FormsModule, CommonModule],
+  imports: [MatErrorComponent, FormsModule, CommonModule, AngularEditorModule],
   selector: 'canned-responses-aside',
   templateUrl: './canned-responses-aside.component.html',
   styleUrls: ['./canned-responses-aside.component.scss'],

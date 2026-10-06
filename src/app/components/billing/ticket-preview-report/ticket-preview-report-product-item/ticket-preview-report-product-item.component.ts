@@ -17,12 +17,23 @@ import { TicketPreview } from '../class/ticket-preview';
 import { Subscription } from 'rxjs';
 import { TicketPreviewReportProductItemDropDownComponent } from './ticket-preview-report-product-item-drop-down/ticket-preview-report-product-item-drop-down.component';
 import { TicketPreviewReportProductItemManufactureComponent } from './ticket-preview-report-product-item-manufacture/ticket-preview-report-product-item-manufacture.component';
+import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { DecimalNumberDirective } from 'src/app/directives/decimal-number/decimal-number.directive';
+import { CommonModule } from '@angular/common';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 
 @Component({
   selector: 'app-ticket-preview-report-product-item',
   templateUrl: './ticket-preview-report-product-item.component.html',
-  styleUrls: ['./ticket-preview-report-product-item.component.scss']
+  styleUrls: ['./ticket-preview-report-product-item.component.scss'],
+  standalone: true,
+  imports: [DatePickerComponent, TicketPreviewReportProductItemManufactureComponent, TicketPreviewReportProductItemDropDownComponent,
+    DecimalNumberDirective, CommonModule,
+    DynamicTooltipComponent,
+    MatErrorComponent
+  ]
 })
 export class TicketPreviewReportProductItemComponent implements OnInit {
   @ViewChild('manufactureDb', { static: true }) manufactureDb: TicketPreviewReportProductItemManufactureComponent;

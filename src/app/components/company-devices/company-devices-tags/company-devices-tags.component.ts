@@ -14,10 +14,11 @@ import { DeviceTagsService } from 'src/app/services/device-tags/device-tags.serv
 import { catchError, map } from 'rxjs/operators';
 import { MatChipListComponent } from '../../shared/mat-chip-list/mat-chip-list.component';
 import { MatChipComponent } from '../../shared/mat-chip/mat-chip.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [MatChipComponent, MatChipListComponent, CommonModule],
+  imports: [MatChipComponent, MatChipListComponent, CommonModule, NgbModule],
   selector: 'app-company-devices-tags',
   templateUrl: './company-devices-tags.component.html',
   styleUrls: ['./company-devices-tags.component.scss'],

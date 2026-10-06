@@ -12,10 +12,12 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { TaxesStateService } from 'src/app/states/taxes/taxes-state.service';
 import { InvoiceFormTicketEditTaxesComponent } from 'src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { DecimalNumberDirective } from 'src/app/directives/decimal-number/decimal-number.directive';
+import { ToFixedDirective } from 'src/app/directives/to-fixed/to-fixed.directive';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, InvoiceFormTicketEditTaxesComponent, FormsModule, ProductListComponent, CommonModule],
+  imports: [MatErrorComponent, InvoiceFormTicketEditTaxesComponent, DecimalNumberDirective, ToFixedDirective, FormsModule, ProductListComponent, CommonModule],
   selector: 'ticket-detail-profile-edit-updates-products',
   templateUrl: './ticket-detail-profile-edit-updates-products.component.html',
   styleUrls: ['./ticket-detail-profile-edit-updates-products.component.scss']

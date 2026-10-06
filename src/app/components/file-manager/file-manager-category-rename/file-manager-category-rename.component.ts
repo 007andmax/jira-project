@@ -1,6 +1,6 @@
 ﻿import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { FileManagementService } from 'src/app/services/file-management/file-management.service';
 import { FileManagerCategory } from '../class/file-manager-category';
 import { map } from 'rxjs/operators';
@@ -8,7 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   selector: 'app-file-manager-category-rename',
   templateUrl: './file-manager-category-rename.component.html',
   styleUrls: ['./file-manager-category-rename.component.scss'],

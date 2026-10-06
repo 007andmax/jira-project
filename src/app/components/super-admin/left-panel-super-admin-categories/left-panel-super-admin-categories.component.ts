@@ -13,10 +13,11 @@ import { SupportPageCategoriesStateService } from '../state/support-page-categor
 import { SupportPageCategory } from './class/support-page-category';
 import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
 import { LeftPanelSuperAdminCategoriesActionsComponent } from './left-panel-super-admin-categories-actions/left-panel-super-admin-categories-actions.component';
+import { DragMenuDirective } from 'src/app/directives/drag-menu/drag-menu.directive';
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, LeftPanelSuperAdminCategoriesActionsComponent, CommonModule],
+  imports: [DynamicTooltipComponent, DragMenuDirective, LeftPanelSuperAdminCategoriesActionsComponent, CommonModule],
   selector: 'left-panel-super-admin-categories',
   templateUrl: './left-panel-super-admin-categories.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

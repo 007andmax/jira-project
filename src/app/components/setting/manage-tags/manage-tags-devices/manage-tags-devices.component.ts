@@ -17,10 +17,12 @@ import { DELETE_DEVICE_TAG } from 'src/app/const/confirm';
 import { ManageTagsDevicesFilter } from './class/manage-tags-devices-filter';
 import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 import { ManageTagsDevicesAddComponent } from './manage-tags-devices-add/manage-tags-devices-add.component';
+import { DeviceTagPipe } from 'src/app/pipe/device-tag.pipe';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, ManageTagsDevicesAddComponent, FormsModule, CommonModule],
+  imports: [DynamicTooltipComponent, DeviceTagPipe, ClickOutsideDirective, ManageTagsDevicesAddComponent, FormsModule, CommonModule],
   selector: 'app-manage-tags-devices',
   templateUrl: './manage-tags-devices.component.html',
   styleUrls: ['./manage-tags-devices.component.scss'],

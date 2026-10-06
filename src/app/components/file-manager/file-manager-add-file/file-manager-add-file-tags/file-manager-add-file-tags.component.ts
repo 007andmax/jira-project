@@ -1,6 +1,7 @@
 ﻿import { CommonModule } from '@angular/common';
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { CompanyTag } from 'src/app/components/companies/company-tags/class/company-tag';
 import { CompanyTagsComponent } from 'src/app/components/companies/company-tags/company-tags.component';
@@ -12,7 +13,7 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
 
 @Component({
   standalone: true,
-  imports: [CommonModule, MatChipComponent, InfiniteScrollModule, MatChipListComponent, MatFormFieldComponent],
+  imports: [CommonModule, MatChipComponent, NgbModule, InfiniteScrollModule, MatChipListComponent, MatFormFieldComponent],
   selector: 'app-file-manager-add-file-tags',
   templateUrl: './file-manager-add-file-tags.component.html',
   styleUrls: ['./file-manager-add-file-tags.component.scss'],

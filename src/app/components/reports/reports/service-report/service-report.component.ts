@@ -11,11 +11,12 @@ import { ServiceReportsItem } from '../../class/service-reports-item';
 import { ReportsStateService } from 'src/app/states/reports/reports-state.service';
 import { Subscription } from 'rxjs';
 import { ReportMenuComponent } from '../../report-menu/report-menu.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @Component({
   standalone: true,
-  imports: [ReportMenuComponent, CommonModule],
+  imports: [ReportMenuComponent, CommonModule, NgxChartsModule],
   selector: 'app-service-report',
   templateUrl: './service-report.component.html',
   styleUrls: ['./service-report.component.scss'],

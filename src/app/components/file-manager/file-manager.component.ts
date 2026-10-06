@@ -18,10 +18,12 @@ import { ActivatedRoute } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { FileManagerHeaderComponent } from './file-manager-header/file-manager-header.component';
+import { FileManagerItemFileComponent } from './file-manager-item-file/file-manager-item-file.component';
+import { FileManagerItemCategoryComponent } from './file-manager-item-category/file-manager-item-category.component';
 
 @Component({
   standalone: true,
-  imports: [FileManagerHeaderComponent, CommonModule, FileManagerFileInfoComponent],
+  imports: [FileManagerHeaderComponent, FileManagerItemCategoryComponent, CommonModule, FileManagerFileInfoComponent, FileManagerItemFileComponent],
   selector: 'app-file-manager',
   templateUrl: './file-manager.component.html',
   styleUrls: ['./file-manager.component.scss'],

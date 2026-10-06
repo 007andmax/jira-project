@@ -28,11 +28,11 @@ import { fadeInAnimation } from 'src/app/animations';
 import { CompanyNetworkScanItemComponent } from '../company-network-scan-beta/company-network-scan-item/company-network-scan-item.component';
 import { CompanyNetworkScanNoExistDevicesComponent } from '../company-network-scan-beta/company-network-scan-no-exist-devices/company-network-scan-no-exist-devices.component';
 import { NetworkScanCredentialsAsideComponent } from '../company-network-scan-beta/network-scan-credentials-aside/network-scan-credentials-aside.component';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [CompanyNetworkScanItemComponent, NgbDropdownModule, DisabledBtnDirective, CompanyNetworkScanNoExistDevicesComponent, NetworkScanCredentialsAsideComponent, FormsModule, CommonModule],
+  imports: [CompanyNetworkScanItemComponent, NgbModule, DisabledBtnDirective, CompanyNetworkScanNoExistDevicesComponent, NetworkScanCredentialsAsideComponent, FormsModule, CommonModule],
   selector: 'company-network-scan',
   templateUrl: './company-network-scan.component.html',
   styleUrls: ['./company-network-scan.component.scss'],

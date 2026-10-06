@@ -3,25 +3,33 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy, TemplateRef } from "@angular/core";
 import { EmailTempleteService } from "../../../services/email-template/email-template.service";
 import { map, catchError } from "rxjs/operators";
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from "@angular/forms";
+import { UntypedFormGroup, UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { of, Subscription } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { DomSanitizer } from '@angular/platform-browser';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { EmailTemplateStateService } from "src/app/states/email-template/email-template-state.service";
 import { fadeInAnimation } from "src/app/animations";
-import { AngularEditorConfig } from "@kolkov/angular-editor";
+import { AngularEditorConfig, AngularEditorModule } from "@kolkov/angular-editor";
 import { ConfirmStateService } from "../../shared/confirm/services/confirm-state.service";
 import { RESTORE_DEFAULT } from "src/app/const/confirm";
 import { ConfirmComponent } from "../../shared/confirm/confirm.component";
 import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { SanitizeHtmlPipe } from 'src/app/pipe/sanitize-html.pipe';
+import { EmailTemplateRoutingModule } from './email-template-routing.module';
 
 declare var $: any;
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, CommonModule],
+  imports: [CommonModule,
+    NgbModule,
+    ReactiveFormsModule,
+    EmailTemplateRoutingModule,
+    AngularEditorModule,
+    EmailTempleteComponent,
+    SanitizeHtmlPipe],
   selector: "app-email-template",
   templateUrl: "./email-template.component.html",
   animations: [fadeInAnimation],

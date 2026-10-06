@@ -2,12 +2,15 @@ import { Component, Input, OnInit } from '@angular/core';
 import { UserCustomerCompaniesInfo } from '../../class/user-customer-companies-info';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { CommonModule, NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-users-table-company-info-item',
   templateUrl: './users-table-company-info-item.component.html',
   styleUrls: ['./users-table-company-info-item.component.scss'],
-  providers: [TicketsListService]
+  providers: [TicketsListService],
+  standalone: true,
+  imports: [CommonModule, NgStyle]
 })
 export class UsersTableCompanyInfoItemComponent implements OnInit {
   @Input() company: UserCustomerCompaniesInfo;

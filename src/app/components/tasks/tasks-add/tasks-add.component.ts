@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
 import { Task } from '../class/task';
-import { UntypedFormGroup, UntypedFormBuilder, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { forkJoin, Subscription } from 'rxjs';
 import { TicketStateService } from '../../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
@@ -11,12 +11,12 @@ import { CompanySetting } from '../../companies/class/company-setting';
 import { FORMAT_DATE_2 } from 'src/app/const/date-picker';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { TasksService } from 'src/app/services/tasks/tasks.service';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TicketProfileFormService } from '../../tickets/tickets/ticket-edit-aside/class/ticket-profile-form-service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { PreviewAttachmentStateService } from '../../tickets/tickets/ticket-edit-aside/preview-attachment/services/preview-attachment-state.service';
 import { ServicesListComponent } from '../../shared/services-list/services-list.component';
@@ -35,7 +35,7 @@ import { Ticket } from '../../tickets/class/ticket';
 
 @Component({
   standalone: true,
-  imports: [DatePickerComponent, NgbTooltipModule, ServicesListComponent, DisabledBtnDirective, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, TasksDatePickerComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
+  imports: [DatePickerComponent, AngularEditorModule, ReactiveFormsModule, NgbModule, ServicesListComponent, DisabledBtnDirective, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, TasksDatePickerComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
   selector: 'app-tasks-add',
   templateUrl: './tasks-add.component.html',
   styleUrls: ['./tasks-add.component.scss'],

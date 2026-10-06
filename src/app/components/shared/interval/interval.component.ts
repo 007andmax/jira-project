@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CronOptions } from 'src/app/components/shared/interval/interfaces/cron/cront-option';
 import { IntervalService } from './services/interval.service';
-import { NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IntervalStateService } from './services/interval-state.service';
 import { RecurringTicketsStateService } from '../../tickets/recurring-tickets/services/recurring-tickets-state.service';
 import { Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, NgbModule],
   selector: 'app-interval',
   templateUrl: './interval.component.html',
   styleUrls: ['./interval.component.scss'],

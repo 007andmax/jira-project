@@ -15,6 +15,10 @@ import { NgClass, NgStyle, NgIf, NgFor } from '@angular/common';
 import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
 import { UsersTableCompanyByComponent } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.component';
 import { TicketsTableItemRequestedByComponent } from './tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { AddAssignedUserComponent } from '../../ticket-edit-aside/add-assigned-user/add-assigned-user.component';
+import { AppStateService } from 'src/app/states/app/app-state.service';
+import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
+import { CurrentUser } from 'src/class/current-user/current-user';
 
 @Component({
   selector: 'app-tickets-table-item',
@@ -22,7 +26,7 @@ import { TicketsTableItemRequestedByComponent } from './tickets-table-item-reque
   styleUrls: ['./tickets-table-item.component.scss'],
   providers: [TicketsListService, TicketsPermissionsService],
   standalone: true,
-  imports: [NgClass, FormsModule, TicketsTableItemRequestedByComponent, NgStyle, NgIf, NgFor, NgbTooltipModule, UsersTableCompanyByComponent]
+  imports: [NgClass, FormsModule, AddAssignedUserComponent, TicketsTableItemRequestedByComponent, NgStyle, NgIf, NgFor, NgbTooltipModule, UsersTableCompanyByComponent]
 })
 export class TicketsTableItemComponent implements OnInit, OnDestroy {
   ticket: Ticket;

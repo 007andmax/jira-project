@@ -4,12 +4,12 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
 import { CompaniesService } from 'src/app/services/company/companies.service';
 import { TicketProfileFormUpdate } from '../../../ticket-edit-aside/class/ticket-profile-form-update';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
 import { UploadAreaProgressComponent } from 'src/app/components/shared/upload-area/upload-area-progress/upload-area-progress.component';
 
 @Component({
   standalone: true,
-  imports: [UploadAreaProgressComponent, FormsModule, CommonModule],
+  imports: [UploadAreaProgressComponent, FormsModule, CommonModule, AngularEditorModule],
   selector: 'ticket-detail-profile-form-update-note',
   templateUrl: './ticket-detail-profile-form-update-note.component.html',
   styleUrls: ['./ticket-detail-profile-form-update-note.component.scss'],

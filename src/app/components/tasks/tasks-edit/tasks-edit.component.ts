@@ -24,11 +24,13 @@ import { UploadAreaProgressComponent } from '../../shared/upload-area/upload-are
 import { TasksAddAssignedUsersComponent } from '../tasks-add/tasks-add-assigned-users/tasks-add-assigned-users.component';
 import { TasksAddAssociateTicketsComponent } from '../tasks-add/tasks-add-associate-tickets/tasks-add-associate-tickets.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
-import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @Component({
   standalone: true,
-  imports: [DatePickerComponent, NgbTooltipModule, DropDownComponent, DisabledBtnDirective, TasksDatePickerComponent, MatErrorComponent, PreloaderTicketComponent, ServicesListComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
+  imports: [DatePickerComponent, NgbModule, AngularEditorModule, ClickOutsideDirective, DropDownComponent, DisabledBtnDirective, TasksDatePickerComponent, MatErrorComponent, PreloaderTicketComponent, ServicesListComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
   selector: 'app-tasks-edit',
   templateUrl: './tasks-edit.component.html',
   styleUrls: ['./tasks-edit.component.scss'],

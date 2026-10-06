@@ -32,10 +32,13 @@ import { ServicesListComponent } from 'src/app/components/shared/services-list/s
 import { TagsComponent } from 'src/app/components/shared/tags/tags.component';
 import { AssignedTicketUserComponent } from '../../tickets/ticket-add-aside/assigned-ticket-user/assigned-ticket-user.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
+import { DecimalNumberDirective } from 'src/app/directives/decimal-number/decimal-number.directive';
+import { ToFixedDirective } from 'src/app/directives/to-fixed/to-fixed.directive';
 
 @Component({
   standalone: true,
-  imports: [AssignedTicketUserComponent, DevicesRecurringTicketsComponent, DatePickerComponent, DurationComponent, IntervalComponent, MatErrorComponent, ProductListComponent, ServicesListComponent, TagsComponent, CompanyDropDownComponent, FormsModule, CommonModule],
+  imports: [AssignedTicketUserComponent, DecimalNumberDirective, ToFixedDirective, DisabledBtnDirective, PreloaderTicketComponent, DevicesRecurringTicketsComponent, DatePickerComponent, DurationComponent, IntervalComponent, MatErrorComponent, ProductListComponent, ServicesListComponent, TagsComponent, CompanyDropDownComponent, FormsModule, CommonModule],
   selector: 'app-recurring-tickets-edit-aside',
   templateUrl: './recurring-tickets-edit-aside.component.html',
   styleUrls: ['./recurring-tickets-edit-aside.component.scss'],

@@ -5,10 +5,11 @@ import { ProductSalesReport } from '../../class/product-sales-report';
 import * as moment from "moment";
 import { OverviewReportComponent } from '../../overview-report/overview-report.component';
 import { ReportMenuComponent } from '../../report-menu/report-menu.component';
+import { OverviewProductSalesReportComponent } from '../../overview-report/overview-product-sales-report/overview-product-sales-report.component';
 
 @Component({
   standalone: true,
-  imports: [OverviewReportComponent, ReportMenuComponent, CommonModule],
+  imports: [ReportMenuComponent, CommonModule, OverviewProductSalesReportComponent],
   selector: 'app-product-sales-report',
   templateUrl: './product-sales-report.component.html',
   styleUrls: ['./product-sales-report.component.scss'],

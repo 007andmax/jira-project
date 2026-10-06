@@ -7,7 +7,7 @@ import { UploadInput, UploadFile, humanizeBytes, UploaderOptions } from "ngx-upl
 import { ToastrService } from "ngx-toastr";
 import { CONFIGCONSTANTS } from "../config/app-constants";
 import { environment } from "../../../../environments/environment";
-import { ModalDismissReasons, NgbDatepicker, NgbDropdown, NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
+import { ModalDismissReasons, NgbDatepicker, NgbDropdown, NgbModal, NgbModalRef, NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgbDateAdapter, NgbDateParserFormatter } from "@ng-bootstrap/ng-bootstrap";
 import { AgentService } from "src/app/services/agent/agent.service";
 import { Subscription } from "rxjs";
@@ -26,7 +26,7 @@ import { MatFormFieldComponent } from '../../shared/mat-form-field/mat-form-fiel
 
 @Component({
   standalone: true,
-  imports: [DropDownComponent, MatChipComponent, MatChipListComponent, MatFormFieldComponent, FormsModule, CommonModule],
+  imports: [DropDownComponent, NgbModule, MatChipComponent, MatChipListComponent, MatFormFieldComponent, FormsModule, CommonModule],
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
   styleUrls: ["./dashboard.component.scss"],

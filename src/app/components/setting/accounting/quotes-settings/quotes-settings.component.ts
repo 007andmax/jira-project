@@ -1,7 +1,7 @@
 ﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { InvoiceTicketsService } from '../../../../services/accounting/accounting-settings.service';
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
@@ -10,7 +10,7 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
 
 @Component({
   standalone: true,
-  imports: [DropDownComponent, CommonModule],
+  imports: [DropDownComponent, CommonModule, ReactiveFormsModule],
   selector: 'app-quotes-settings',
   templateUrl: './quotes-settings.component.html',
   styleUrls: ['./quotes-settings.component.scss']

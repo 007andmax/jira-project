@@ -26,10 +26,11 @@ import { CompanyDevicesAsideComponent } from './company-devices-aside/company-de
 import { CompanyDevicesCustomAsideComponent } from './company-devices-custom-aside/company-devices-custom-aside.component';
 import { CompanyDevicesFilterComponent } from './company-devices-filter/company-devices-filter.component';
 import { CompanyDevicesItemComponent } from './company-devices-item/company-devices-item.component';
+import { FilterDevicesPipe } from './pipe/filter-devices.pipe';
 
 @Component({
   standalone: true,
-  imports: [CompanyDevicesAsideComponent, CompanyDevicesHeaderComponent, CompanyDevicesCustomAsideComponent, CompanyDevicesFilterComponent, CompanyDevicesItemComponent, FormsModule, CommonModule],
+  imports: [CompanyDevicesAsideComponent, FilterDevicesPipe, CompanyDevicesHeaderComponent, CompanyDevicesCustomAsideComponent, CompanyDevicesFilterComponent, CompanyDevicesItemComponent, FormsModule, CommonModule],
   selector: 'app-company-devices',
   templateUrl: './company-devices.component.html',
   animations: [fadeInAnimation],

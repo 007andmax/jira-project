@@ -25,7 +25,7 @@ import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-b
 
 @Component({
   standalone: true,
-  imports: [PreloaderTicketComponent, DisabledBtnDirective, TicketDetailProfileFormUpdateHeaderComponent, TicketProfileFormUpdateNoteListComponent, CommonModule],
+  imports: [PreloaderTicketComponent, DisabledBtnDirective, TicketDetailProfileFormUpdateNoteComponent, TicketDetailProfileFormUpdateHeaderComponent, TicketProfileFormUpdateNoteListComponent, CommonModule],
   selector: 'app-ticket-detail-note-modal',
   templateUrl: './ticket-detail-note-modal.component.html',
   styleUrls: ['./ticket-detail-note-modal.component.scss'],

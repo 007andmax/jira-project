@@ -2,7 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from "@angular/forms";
+import { UntypedFormGroup, UntypedFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { map } from "rxjs/operators";
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { ConfirmStateService } from "../../../shared/confirm/services/confirm-state.service";
@@ -16,7 +16,7 @@ import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-toolt
 declare var $: any;
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, CommonModule],
+  imports: [DynamicTooltipComponent, CommonModule, ReactiveFormsModule],
   selector: "app-taxes-settings",
   templateUrl: "./taxes.component.html",
   styleUrls: ["./taxes.component.scss"]

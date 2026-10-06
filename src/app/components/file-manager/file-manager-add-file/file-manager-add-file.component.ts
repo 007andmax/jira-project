@@ -12,10 +12,11 @@ import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
 import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
 import { FileManagementAddFileDragDropComponent } from './file-manager-add-file-drag-drop/file-manager-add-file-drag-drop.component';
 import { FileManagerAddFileTagsComponent } from './file-manager-add-file-tags/file-manager-add-file-tags.component';
+import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
 
 @Component({
   standalone: true,
-  imports: [FileManagementAddFileDragDropComponent, ReactiveFormsModule, DisabledBtnDirective, FileManagerAddFileTagsComponent, MatErrorComponent, PreloaderTicketComponent, CommonModule],
+  imports: [FileManagementAddFileDragDropComponent, TextAreaDirective, ReactiveFormsModule, DisabledBtnDirective, FileManagerAddFileTagsComponent, MatErrorComponent, PreloaderTicketComponent, CommonModule],
   selector: 'app-file-manager-add-file',
   templateUrl: './file-manager-add-file.component.html',
   styleUrls: ['./file-manager-add-file.component.scss'],

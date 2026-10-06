@@ -9,11 +9,11 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
-    selector: 'app-taxes',
-    templateUrl: './taxes.component.html',
-    styleUrls: ['./taxes.component.scss'],
-    standalone: true,
-    imports: [NgbDropdownModule, NgIf, FormsModule, ReactiveFormsModule, NgClass, NgFor]
+  selector: 'app-taxes',
+  templateUrl: './taxes.component.html',
+  styleUrls: ['./taxes.component.scss'],
+  standalone: true,
+  imports: [NgbDropdownModule, NgIf, FormsModule, ReactiveFormsModule, NgClass, NgFor, ReactiveFormsModule]
 })
 export class TaxesComponent implements OnInit, OnDestroy {
   @Input() selectedTax = [];

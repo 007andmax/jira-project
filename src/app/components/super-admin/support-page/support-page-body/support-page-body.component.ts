@@ -2,11 +2,11 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { environment } from 'src/environments/environment';
-
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 declare const CodeMirror: any;
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FroalaEditorModule, FroalaViewModule],
   selector: 'support-page-body',
   templateUrl: './support-page-body.component.html',
   styleUrls: ['./support-page-body.component.scss']

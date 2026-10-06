@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { ReportsService } from 'src/app/services/reports/reports.service';
 import { TicketPreview } from './class/ticket-preview';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
@@ -24,6 +24,11 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { ToastrService } from 'ngx-toastr';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { AppService } from 'src/app/states/app/app.service';
+import { TicketPreviewReportHeaderComponent } from './ticket-preview-report-header/ticket-preview-report-header.component';
+import { TicketPreviewReportProductItemDropDownComponent } from './ticket-preview-report-product-item/ticket-preview-report-product-item-drop-down/ticket-preview-report-product-item-drop-down.component';
+import { TicketPreviewReportProductItemManufactureComponent } from './ticket-preview-report-product-item/ticket-preview-report-product-item-manufacture/ticket-preview-report-product-item-manufacture.component';
+import { TicketPreviewReportServiceItemComponent } from './ticket-preview-report-service-item/ticket-preview-report-service-item.component';
+import { TicketPreviewReportStatusDropDownComponent } from './ticket-preview-report-status-drop-down/ticket-preview-report-status-drop-down.component';
 
 @Component({
   selector: 'app-ticket-preview-report',

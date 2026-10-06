@@ -1,5 +1,5 @@
 ﻿
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {
   Component,
@@ -15,7 +15,7 @@ import { forkJoin, Observable, of, Subject, Subscription } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { CompaniesStateService } from "src/app/states/company/companies-state.service";
 import { TagsService } from "src/app/services/tags/tags.service";
@@ -31,10 +31,12 @@ import { ManageTagsFilesComponent } from "./manage-tags-files/manage-tags-files.
 import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
 import { ManageTagsAddComponent } from './manage-tags-add/manage-tags-add.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
+import { TagPipe } from 'src/app/pipe/tag.pipe';
 declare var $: any;
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, InfiniteScrollModule, ManageTagsFilesComponent, ManageTagsDevicesComponent, ManageTagsAddComponent, FormsModule, CommonModule],
+  imports: [DynamicTooltipComponent, ReactiveFormsModule, TagPipe, ClickOutsideDirective, NgbModule, InfiniteScrollModule, ManageTagsFilesComponent, ManageTagsDevicesComponent, ManageTagsAddComponent, FormsModule, CommonModule],
   selector: "app-manage-tags",
   templateUrl: "./manage-tags.component.html",
   animations: [fadeInAnimation],

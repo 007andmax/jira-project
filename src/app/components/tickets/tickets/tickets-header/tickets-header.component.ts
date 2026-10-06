@@ -20,10 +20,12 @@ import { TicketsPermissionsService } from '../ticket-edit-aside/services/tickets
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
 
 @Component({
   standalone: true,
-  imports: [MatChipComponent, MatChipListComponent, MatFormFieldComponent, TicketsFilterInfoComponent, CommonModule],
+  imports: [MatChipComponent, MatChipListComponent, DisabledBtnDirective, PreloaderTicketComponent, MatFormFieldComponent, TicketsFilterInfoComponent, CommonModule, NgbModule],
   selector: 'app-tickets-header',
   templateUrl: './tickets-header.component.html',
   styleUrls: ['./tickets-header.component.scss'],

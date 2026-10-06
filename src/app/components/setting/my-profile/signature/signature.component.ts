@@ -1,7 +1,7 @@
 ﻿
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
@@ -13,7 +13,7 @@ import { AddSignatureComponent } from './add-signature/add-signature.component';
 
 @Component({
   standalone: true,
-  imports: [AddSignatureComponent, CommonModule],
+  imports: [AddSignatureComponent, CommonModule, NgbModule, EditSignatureComponent],
   selector: 'signature',
   templateUrl: './signature.component.html',
   styleUrls: ['./signature.component.scss']

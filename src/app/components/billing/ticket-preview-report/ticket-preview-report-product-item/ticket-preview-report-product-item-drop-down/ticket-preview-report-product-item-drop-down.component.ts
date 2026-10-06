@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angula
 import { NgbAccordionModule, NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 import { ProductListComponent } from 'src/app/components/shared/product-list/product-list.component';
+import { FilterPipe } from 'src/app/pipe/filter/filter.pipe';
 import { ModelPipe } from 'src/app/pipe/model.pipe';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { ProductService } from 'src/app/services/product/product.service';
@@ -15,7 +16,7 @@ import { CategoryProductitem } from 'src/class/category-product-item';
   templateUrl: './ticket-preview-report-product-item-drop-down.component.html',
   styleUrls: ['./ticket-preview-report-product-item-drop-down.component.scss'],
   standalone: true,
-  imports: [NgbModule, CommonModule, DynamicTooltipComponent]
+  imports: [NgbModule, FilterPipe, CommonModule, DynamicTooltipComponent]
 })
 export class TicketPreviewReportProductItemDropDownComponent extends ProductListComponent {
   shortVersion: boolean = true;

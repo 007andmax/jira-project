@@ -2,7 +2,7 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
@@ -13,11 +13,12 @@ import { SupportPageCategoriesService } from '../../../services/support-page-cat
 import { SupportPageCategoriesStateService } from '../../../state/support-page-categories/support-page-categories-state.service';
 import { SupportPageInfoTag } from './class/support-page-info-tag';
 import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
+import { SortTagsPipe } from './pipe/sort-tags.pipe';
 var $ = require("jquery");
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, FormsModule, CommonModule],
+  imports: [DynamicTooltipComponent, FormsModule, CommonModule, NgbModule, SortTagsPipe],
   selector: 'support-page-info-tags',
   templateUrl: './support-page-info-tags.component.html',
   styleUrls: ['./support-page-info-tags.component.scss']

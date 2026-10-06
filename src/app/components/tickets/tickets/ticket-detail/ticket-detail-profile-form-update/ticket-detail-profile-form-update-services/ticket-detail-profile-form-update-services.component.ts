@@ -19,7 +19,7 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, NgbDropdownModule, TicketProfileUpdatesServiceTimepickerComponent, TicketProfileUpdatesServiceDurationComponent, ServicesListComponent, FormsModule, CommonModule],
+  imports: [MatErrorComponent, NgbDropdownModule, DatePickerComponent, TicketProfileUpdatesServiceTimepickerComponent, TicketProfileUpdatesServiceDurationComponent, ServicesListComponent, FormsModule, CommonModule],
   selector: 'ticket-detail-profile-form-update-services',
   templateUrl: './ticket-detail-profile-form-update-services.component.html',
   styleUrls: ['./ticket-detail-profile-form-update-services.component.scss'],

@@ -1,16 +1,17 @@
 ﻿import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonServices } from './../_services/common.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { User } from '../../users/class/user';
 import { Company } from 'src/app/interfaces/company/company';
 import { Subscription } from 'rxjs';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgbModule, RouterModule],
   selector: 'nav-old',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],

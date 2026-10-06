@@ -9,11 +9,12 @@ import { TicketsStateService } from 'src/app/states/tickets/tickets-state.servic
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 declare var $: any;
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgbModule],
   selector: 'app-ticket-task',
   templateUrl: './ticket-task.component.html',
   styleUrls: ['./ticket-task.component.scss'],

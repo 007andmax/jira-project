@@ -13,10 +13,11 @@ import { DraftEmailUserRecipientsComponent } from 'src/app/components/shared/dra
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, PreloaderTicketComponent, DisabledBtnDirective, DraftEmailUserRecipientsComponent, FormsModule, CommonModule],
+  imports: [MatErrorComponent, AngularEditorModule, PreloaderTicketComponent, DisabledBtnDirective, DraftEmailUserRecipientsComponent, FormsModule, CommonModule],
   selector: 'app-report-send-email',
   templateUrl: './report-send-email.component.html',
   styleUrls: ['./report-send-email.component.scss'],

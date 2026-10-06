@@ -19,10 +19,12 @@ import { fadeInAnimation } from 'src/app/animations';
 import { FileManagerFileInfoComponent } from '../file-manager-file-info/file-manager-file-info.component';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { FileManagerHeaderComponent } from '../file-manager-header/file-manager-header.component';
+import { FileManagerItemCategoryComponent } from '../file-manager-item-category/file-manager-item-category.component';
+import { FileManagerItemFileComponent } from '../file-manager-item-file/file-manager-item-file.component';
 
 @Component({
   standalone: true,
-  imports: [FileManagerHeaderComponent, CommonModule, FileManagerFileInfoComponent],
+  imports: [FileManagerHeaderComponent, FileManagerItemFileComponent, FileManagerItemCategoryComponent, CommonModule, FileManagerFileInfoComponent],
   selector: 'app-file-manager-category',
   templateUrl: './file-manager-category.component.html',
   styleUrls: ['./file-manager-category.component.scss'],

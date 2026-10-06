@@ -11,7 +11,7 @@ import { DocumentsTemplatesInfoComponent } from '../../documents/documents-templ
 
 @Component({
   standalone: true,
-  imports: [CompanyDocumentsTableComponent, DocumentsTemplatesInfoComponent, CommonModule],
+  imports: [CompanyDocumentsTableComponent, DocumentsHeaderComponent, DocumentsTemplatesInfoComponent, CommonModule],
   selector: 'company-documents',
   templateUrl: './company-documents.component.html',
   animations: [fadeInAnimation],

@@ -12,10 +12,11 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { AppService } from 'src/app/states/app/app.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { PaymentItemCompanyComponent } from './payment-item-company/payment-item-company.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, NgbDropdownModule, NgbTooltipModule],
+  imports: [CommonModule, NgbDropdownModule, NgbTooltipModule, PaymentItemCompanyComponent],
   selector: 'app-payment-item',
   templateUrl: './payment-item.component.html',
   styleUrls: ['./payment-item.component.scss'],

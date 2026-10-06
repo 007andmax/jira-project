@@ -1,6 +1,6 @@
 ﻿import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ticket } from 'src/app/components/tickets/class/ticket';
 import { TicketsFilter } from '../../../class/tickets-filter';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
@@ -11,7 +11,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [FormsModule, InfiniteScrollModule],
+  imports: [FormsModule, InfiniteScrollModule, NgbModule],
   selector: 'tickets-filter-search',
   templateUrl: './tickets-filter-search.component.html',
   styleUrls: ['./tickets-filter-search.component.scss'],

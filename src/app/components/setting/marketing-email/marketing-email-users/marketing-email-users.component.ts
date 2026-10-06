@@ -17,7 +17,7 @@ import { MarketingEmailUsersItemComponent } from './marketing-email-users-item/m
 
 @Component({
   standalone: true,
-  imports: [MarketingEmailUsersItemComponent, FormsModule, CommonModule],
+  imports: [MarketingEmailUsersItemComponent, MarketingEmailUsersAddComponent, FormsModule, CommonModule],
   selector: 'marketing-email-users',
   templateUrl: './marketing-email-users.component.html',
   styleUrls: ['./marketing-email-users.component.scss'],

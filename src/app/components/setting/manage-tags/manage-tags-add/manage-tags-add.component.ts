@@ -7,10 +7,11 @@ import { catchError, map } from 'rxjs/operators';
 import { TagsService } from 'src/app/services/tags/tags.service';
 import { ManageTag } from '../class/manage-tag';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, FormsModule, CommonModule],
+  imports: [MatErrorComponent, FormsModule, CommonModule, ClickOutsideDirective],
   selector: 'manage-tags-add',
   templateUrl: './manage-tags-add.component.html',
   styleUrls: ['./manage-tags-add.component.scss'],

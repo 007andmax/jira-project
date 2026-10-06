@@ -2,12 +2,14 @@ import { Component, Input } from '@angular/core';
 import { OverviewReportComponent } from '../overview-report.component';
 import { TicketSortBy } from 'src/app/components/tickets/tickets/class/ticket-sort-by';
 import { CompanyFilterTop } from 'src/app/components/companies/class/company-filter-top';
+import { CommonModule, NgStyle } from '@angular/common';
 
 @Component({
-    selector: 'app-overview-product-sales-report',
-    templateUrl: './overview-product-sales-report.component.html',
-    styleUrls: ['./overview-product-sales-report.component.scss'],
-    standalone: true
+  selector: 'app-overview-product-sales-report',
+  templateUrl: './overview-product-sales-report.component.html',
+  styleUrls: ['./overview-product-sales-report.component.scss'],
+  standalone: true,
+  imports: [CommonModule]
 })
 export class OverviewProductSalesReportComponent extends OverviewReportComponent {
   @Input() type!: string;

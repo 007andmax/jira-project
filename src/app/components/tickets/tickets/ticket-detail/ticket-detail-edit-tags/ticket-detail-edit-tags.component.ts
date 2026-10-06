@@ -2,7 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { UntypedFormControl } from '@angular/forms';
+import { NgModel, ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Tag } from 'src/app/interfaces/tag/tag';
 import { TagsService } from 'src/app/services/tags/tags.service';
@@ -16,10 +16,11 @@ import { CompanyTagsListService } from 'src/app/components/companies/company-tag
 import { MatChipListComponent } from 'src/app/components/shared/mat-chip-list/mat-chip-list.component';
 import { MatChipComponent } from 'src/app/components/shared/mat-chip/mat-chip.component';
 import { MatFormFieldComponent } from 'src/app/components/shared/mat-form-field/mat-form-field.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [MatChipComponent, MatChipListComponent, MatFormFieldComponent, CommonModule],
+  imports: [MatChipComponent, MatChipListComponent, ReactiveFormsModule, MatFormFieldComponent, NgModel, NgbModule, CommonModule],
   selector: 'ticket-detail-edit-tags',
   templateUrl: './ticket-detail-edit-tags.component.html',
   styleUrls: ['./ticket-detail-edit-tags.component.scss'],

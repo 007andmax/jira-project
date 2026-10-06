@@ -1,7 +1,7 @@
 ﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Observable, Observer, Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { TechUsersService } from 'src/app/services/setting/tech-users.service';
@@ -11,7 +11,7 @@ import { SettingStateService } from 'src/app/states/setting/setting-state.servic
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DELETE_TECH_USER, RESTORE_USER } from 'src/app/const/confirm';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
 import { ImageCroper } from 'src/app/services/modal/modal-image-cropper/class/image-croper';
@@ -35,7 +35,7 @@ declare var $;
 
 @Component({
   standalone: true,
-  imports: [DropDownComponent, NgbTooltipModule, PermissionManageComponent, DisabledBtnDirective, DynamicTooltipComponent, PreloaderTicketComponent, CommonModule],
+  imports: [DropDownComponent, NgbModule, ReactiveFormsModule, PermissionManageComponent, DisabledBtnDirective, DynamicTooltipComponent, PreloaderTicketComponent, CommonModule],
   selector: 'app-tech-users-settings',
   templateUrl: './tech-users-settings.component.html',
   animations: [fadeInAnimation],

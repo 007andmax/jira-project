@@ -14,9 +14,10 @@ import { TasksRealTimeService } from 'src/app/states/tasks/tasks-real-time.servi
 import { TaskHeaderAddComponent } from '../../task-header-add/task-header-add.component';
 import { TasksCalendarWeekItemAllDayComponent } from './tasks-calendar-week-item-all-day/tasks-calendar-week-item-all-day.component';
 import { TasksCalendarWeekItemHourComponent } from './tasks-calendar-week-item-hour/tasks-calendar-week-item-hour.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   standalone: true,
-  imports: [TaskHeaderAddComponent, TasksCalendarWeekItemAllDayComponent, TasksCalendarWeekItemHourComponent, CommonModule],
+  imports: [TaskHeaderAddComponent, TasksCalendarWeekItemAllDayComponent, TasksCalendarWeekItemHourComponent, CommonModule, NgbModule],
   selector: 'app-tasks-calendar-week',
   templateUrl: './tasks-calendar-week.component.html',
   styleUrls: ['./tasks-calendar-week.component.scss'],

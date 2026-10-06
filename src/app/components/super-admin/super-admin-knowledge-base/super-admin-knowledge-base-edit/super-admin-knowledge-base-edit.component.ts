@@ -10,10 +10,11 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
 import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 @Component({
   standalone: true,
-  imports: [DropDownComponent, MatErrorComponent, DisabledBtnDirective, PreloaderTicketComponent, FormsModule, CommonModule],
+  imports: [DropDownComponent, FroalaEditorModule, FroalaViewModule, MatErrorComponent, DisabledBtnDirective, PreloaderTicketComponent, FormsModule, CommonModule],
   selector: 'app-super-admin-knowledge-base-edit',
   templateUrl: './super-admin-knowledge-base-edit.component.html',
   styleUrls: ['./super-admin-knowledge-base-edit.component.scss']

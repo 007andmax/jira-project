@@ -1,7 +1,7 @@
 
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Input, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, ReactiveFormsModule, NgModel } from '@angular/forms';
 import { InvoiceTicketsService } from '../../../../services/accounting/accounting-settings.service';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin, of } from 'rxjs';
@@ -12,9 +12,12 @@ import { InvoiceSettings } from './class/invoice-settings';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
 
 @Component({
   selector: 'app-invoice-settings',
+  standalone: true,
+  imports: [ReactiveFormsModule, DropDownComponent, CommonModule, TextAreaDirective, NgxMaskModule.forRoot()],
   templateUrl: './invoice-settings.component.html',
   styleUrls: ['./invoice-settings.component.scss']
 })

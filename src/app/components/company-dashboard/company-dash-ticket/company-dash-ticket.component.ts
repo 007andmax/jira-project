@@ -4,10 +4,11 @@ import { CompaniesService } from 'src/app/services/company/companies.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgxChartsModule],
   selector: 'app-company-dash-ticket',
   templateUrl: './company-dash-ticket.component.html',
   styleUrls: ['./company-dash-ticket.component.scss']

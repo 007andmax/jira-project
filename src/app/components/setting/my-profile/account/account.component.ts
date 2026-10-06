@@ -1,7 +1,7 @@
 ﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
@@ -17,7 +17,7 @@ import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down
 
 @Component({
   standalone: true,
-  imports: [DropDownComponent, CommonModule],
+  imports: [DropDownComponent, CommonModule, ReactiveFormsModule],
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss']

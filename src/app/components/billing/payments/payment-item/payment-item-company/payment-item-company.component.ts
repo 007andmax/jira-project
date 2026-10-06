@@ -5,6 +5,8 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 
 @Component({
   selector: 'app-payment-item-company',
+  standalone: true,
+  imports: [],
   templateUrl: './payment-item-company.component.html',
   styleUrls: ['./payment-item-company.component.scss'],
   providers: [TicketsListService, UsersTableCompanyByComponent]

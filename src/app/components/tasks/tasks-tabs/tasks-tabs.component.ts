@@ -4,10 +4,11 @@ import { Component } from '@angular/core';
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { TasksCalendarComponent } from '../tasks-calendar/tasks-calendar.component';
 import { TasksListComponent } from '../tasks-list/tasks-list.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [TasksCalendarComponent, TasksListComponent, CommonModule],
+  imports: [TasksCalendarComponent, TasksListComponent, CommonModule, NgbModule],
   selector: 'app-tasks-tabs',
   templateUrl: './tasks-tabs.component.html',
   styleUrls: ['./tasks-tabs.component.scss'],

@@ -9,10 +9,13 @@ import { CLOSE_SESSION } from "src/app/const/confirm";
 import { ConfirmComponent } from "src/app/components/shared/confirm/confirm.component";
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { Subscription } from "rxjs";
+import { AgmCoreModule } from '@agm/core';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AgmCoreModule.forRoot({
+    apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
+  })],
   selector: "app-activity-history",
   templateUrl: "./activity-history.component.html",
   styleUrls: ["./activity-history.component.scss"]

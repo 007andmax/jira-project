@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy } from '@angular/core';
 import { merge, Observable, Subject, Subscription } from "rxjs";
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
-import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModule, NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import { HOURS, MINUTES } from 'src/app/const/duration';
 import { Duration } from './class/duration';
 import { DurationStateService } from './services/duration-state.service';
@@ -11,7 +11,7 @@ import { DurationService } from './services/duration.service';
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, NgbModule],
   selector: 'app-duration',
   templateUrl: './duration.component.html',
   styleUrls: ['./duration.component.scss'],

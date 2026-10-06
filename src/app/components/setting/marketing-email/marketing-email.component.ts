@@ -1,7 +1,7 @@
 ﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_SUBSCRIPTION_TYPIES } from 'src/app/const/confirm';
 import { CrmStateService } from 'src/app/states/crm/crm-state.service';
 import { MarketingEmailStateService } from 'src/app/states/marketing-email/marketing-email-state.service';
@@ -14,7 +14,7 @@ import { MarketingEmailUsersComponent } from './marketing-email-users/marketing-
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, MarketingEmailUsersComponent, CommonModule],
+  imports: [DynamicTooltipComponent, MarketingSubscriptionTypeComponent, MarketingEmailUsersComponent, CommonModule, NgbModule],
   selector: 'marketing-email',
   templateUrl: './marketing-email.component.html',
   animations: [fadeInAnimation],

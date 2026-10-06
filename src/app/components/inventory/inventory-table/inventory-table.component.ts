@@ -7,7 +7,7 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { InventoryStateService } from 'src/app/states/inventory/inventory-state.service';
 import { ProductService } from 'src/app/services/product/product.service';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_PRODUCT } from 'src/app/const/confirm';
 import { InventoryCheckUseComponent } from '../inventory-check-use/inventory-check-use.component';
 import { InventoryValidate } from '../class/inventory-validate';
@@ -20,10 +20,13 @@ import { QuoteStateService } from 'src/app/states/quote/quote-state.service';
 import { ProductType } from '../../setting/products-settings/class/product-type';
 import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
 import { TaxesComponent } from '../../shared/taxes/taxes.component';
+import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
+import { DecimalNumberDirective } from 'src/app/directives/decimal-number/decimal-number.directive';
+import { ToFixedDirective } from 'src/app/directives/to-fixed/to-fixed.directive';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, TaxesComponent, FormsModule, CommonModule, DropDownComponent],
+  imports: [MatErrorComponent, NgbModule, DecimalNumberDirective, ToFixedDirective, TextAreaDirective, TaxesComponent, FormsModule, CommonModule, DropDownComponent],
   selector: 'app-inventory-table',
   templateUrl: './inventory-table.component.html',
   styleUrls: ['./inventory-table.component.scss'],

@@ -270,7 +270,7 @@ const routes: Routes = [
   },
   {
     path: ':domain/billable',
-    loadChildren: () => import('./components/billing/billable/billable.module').then(m => m.BillableModule),
+    loadComponent: () => import('./components/billing/billable/billable.component').then(m => m.BillableComponent),
     canActivate: [PermissionBillableService, PermissionNoSuperAdminService]
 
   },
@@ -287,7 +287,7 @@ const routes: Routes = [
   },
   {
     path: ':domain/billable-tickets',
-    loadChildren: () => import('./components/billing/billable/billable-tickets/billable-tickets.module').then(m => m.BillableTicketsModule),
+    loadChildren: () => import('./components/billing/billable/billable-tickets/billable-tickets.component').then(m => m.BillableTicketsComponent),
     canActivate: [PermissionBillableService, PermissionNoSuperAdminService]
   },
   {

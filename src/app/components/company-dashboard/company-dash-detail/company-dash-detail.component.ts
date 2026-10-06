@@ -29,10 +29,11 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { WORK_HOURS } from 'src/app/const/time';
 import { CompanyTagsComponent } from '../../companies/company-tags/company-tags.component';
 import { GetDirectionComponent } from '../../shared/get-direction/get-direction.component';
+import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
 
 @Component({
   standalone: true,
-  imports: [CompanyTagsComponent, FormsModule, CommonModule],
+  imports: [CompanyTagsComponent, FormsModule, CommonModule, TextAreaDirective],
   selector: 'app-company-dash-detail',
   templateUrl: './company-dash-detail.component.html',
   styleUrls: ['./company-dash-detail.component.scss']

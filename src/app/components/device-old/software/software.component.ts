@@ -18,10 +18,12 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SoftwareHeaderComponent } from './software-header/software-header.component';
 import { TicketTaskComponent } from '../ticket-task/ticket-task.component';
+import { SoftwarePipe } from '../_pipe/software.pipe';
+import { DataTablesModule } from 'angular-datatables';
 
 @Component({
   standalone: true,
-  imports: [TicketTaskComponent, CommonModule, SoftwareHeaderComponent],
+  imports: [TicketTaskComponent, DataTablesModule, SoftwarePipe, CommonModule, SoftwareHeaderComponent],
   selector: 'app-software',
   templateUrl: './software.component.html',
   styleUrls: ['./software.component.scss'],

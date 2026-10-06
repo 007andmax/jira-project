@@ -3,10 +3,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MapModalStateService } from 'src/app/states/map-modal/map-modal-state.service';
 import { MapModal } from 'src/app/interfaces/map-modal/map-modal';
 import { Subscription } from 'rxjs';
+import { AgmCoreModule } from '@agm/core';
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AgmCoreModule.forRoot({
+    apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
+  })],
   selector: 'app-map-modal',
   templateUrl: './map-modal.component.html',
   styleUrls: ['./map-modal.component.scss']

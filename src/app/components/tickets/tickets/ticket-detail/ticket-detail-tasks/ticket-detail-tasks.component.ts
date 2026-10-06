@@ -31,7 +31,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   standalone: true,
-  imports: [TaskHeaderAddTypeComponent, InfiniteScrollModule, TasksDatePickerComponent, TechUsersComponent, TicketDetailTasksItemComponent, FormsModule, CommonModule],
+  imports: [TaskHeaderAddTypeComponent, ClickOutsideDirective, InfiniteScrollModule, TasksDatePickerComponent, TechUsersComponent, TicketDetailTasksItemComponent, FormsModule, CommonModule],
   selector: 'ticket-detail-tasks',
   templateUrl: './ticket-detail-tasks.component.html',
   styleUrls: ['./ticket-detail-tasks.component.scss'],

@@ -5,10 +5,11 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { DetailedCommissionsReport } from '../../class/detailed-commissions-report';
 import * as moment from "moment";
 import { ReportMenuComponent } from '../../report-menu/report-menu.component';
+import { ToFixedPipe } from 'src/app/pipe/to-fixed/to-fixed.pipe';
 
 @Component({
   standalone: true,
-  imports: [ReportMenuComponent, CommonModule],
+  imports: [ReportMenuComponent, CommonModule, ToFixedPipe],
   selector: 'detailed-commissions-report',
   templateUrl: './detailed-commissions-report.component.html',
   styleUrls: ['./detailed-commissions-report.component.css'],

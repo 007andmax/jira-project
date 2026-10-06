@@ -16,10 +16,11 @@ import { GlNumberCheckUseComponent } from "./gl-number-check-use/gl-number-check
 import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 import { AddGlNumberComponent } from './add-gl-number/add-gl-number.component';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
 declare var $: any;
 @Component({
   standalone: true,
-  imports: [AddGlNumberComponent, DynamicTooltipComponent, MatErrorComponent, FormsModule, CommonModule],
+  imports: [AddGlNumberComponent, DynamicTooltipComponent, MatErrorComponent, ClickOutsideDirective, FormsModule, CommonModule],
   selector: "app-gl-number-settings",
   templateUrl: "./gl-number.component.html",
   styleUrls: ["./gl-number.component.scss"]

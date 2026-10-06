@@ -17,11 +17,17 @@ import { REMOVE_UPDATE_TICKET_DETAIL_SERVICE } from 'src/app/const/confirm';
 import { TicketPreviewServicesCompany } from '../class/ticket-preview-services-company';
 import { ServicesListComponent } from 'src/app/components/shared/services-list/services-list.component';
 import { TicketPreviewReportStateService } from 'src/app/states/ticket-preview-report/ticket-preview-report-state.service';
+import { DatePickerComponent } from 'src/app/components/shared/date-picker/date-picker.component';
+import { CommonModule } from '@angular/common';
+import { TicketProfileUpdatesServiceDurationComponent } from 'src/app/components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.component';
+import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 
 @Component({
   selector: 'app-ticket-preview-report-service-item',
   templateUrl: './ticket-preview-report-service-item.component.html',
-  styleUrls: ['./ticket-preview-report-service-item.component.scss']
+  styleUrls: ['./ticket-preview-report-service-item.component.scss'],
+  imports: [ServicesListComponent, DatePickerComponent, TicketProfileUpdatesServiceDurationComponent, CommonModule, DynamicTooltipComponent],
+  standalone: true
 })
 export class TicketPreviewReportServiceItemComponent {
   @ViewChild('serviceDP', { static: true }) serviceDP: ServicesListComponent;

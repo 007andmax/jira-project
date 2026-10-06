@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { merge, Observable, Subject, Subscription } from "rxjs";
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
-import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModule, NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import { DevicesService } from 'src/app/services/devices/devices.service';
 import { DevicesRecurringTicketsStateService } from './services/devices-recurring-tickets-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
@@ -11,7 +11,7 @@ import { DevicesStateService } from 'src/app/states/devices/devices-state.servic
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, NgbModule],
   selector: 'app-devices-recurring-tickets',
   templateUrl: './devices-recurring-tickets.component.html',
   styleUrls: ['./devices-recurring-tickets.component.scss'],

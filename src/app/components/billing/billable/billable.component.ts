@@ -17,6 +17,10 @@ import { BillableItemComponent } from './billable-item/billable-item.component';
 import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
 import { NgIf, NgFor, CommonModule } from '@angular/common';
 import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
+import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TicketsTableItemRequestedByComponent } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { UsersTableCompanyByComponent } from '../../users/users-table/users-table-company-by/users-table-company-by.component';
 
 
 @Component({
@@ -28,7 +32,13 @@ import { TicketSortBy } from '../../tickets/tickets/class/ticket-sort-by';
   host: { '[@fadeInAnimation]': '' },
   providers: [TicketsListService],
   standalone: true,
-  imports: [NgIf, CommonModule, DisabledBtnDirective, PreloaderTicketComponent, NgFor, BillableItemComponent]
+  imports: [CommonModule,
+    DisabledBtnDirective,
+    PreloaderTicketComponent,
+    FormsModule,
+    NgbModule,
+    TicketsTableItemRequestedByComponent,
+    UsersTableCompanyByComponent]
 })
 export class BillableComponent implements OnInit, OnDestroy {
   @ViewChild('saveAndDownloadBtn', { static: false }) saveAndDownloadBtn: DisabledBtnDirective;

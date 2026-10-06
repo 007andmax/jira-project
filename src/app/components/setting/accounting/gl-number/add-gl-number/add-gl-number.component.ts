@@ -7,10 +7,11 @@ import { catchError, map } from 'rxjs/operators';
 import { GlNumber } from 'src/class/gl-number/gl-number';
 import { GlNumberService } from '../gl-number.service';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, FormsModule, CommonModule],
+  imports: [MatErrorComponent, FormsModule, CommonModule, ClickOutsideDirective],
   selector: 'add-gl-number',
   templateUrl: './add-gl-number.component.html',
   styleUrls: ['./add-gl-number.component.scss']
