@@ -1,8 +1,11 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'ticket-detail-profile-updates-note-info',
   templateUrl: './ticket-detail-profile-updates-note-info.component.html',
   styleUrls: ['./ticket-detail-profile-updates-note-info.component.scss']

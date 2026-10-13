@@ -9,10 +9,11 @@ import { TicketProfileFormUpdate } from '../../../ticket-edit-aside/class/ticket
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 import { AddAssignedUserNoteComponent } from './add-assigned-user-note/add-assigned-user-note.component';
 import { AddAssignedUserComponent } from '../../../ticket-edit-aside/add-assigned-user/add-assigned-user.component';
-import { NgbModal, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TicketDetailProfileFormUpdateComponent } from '../ticket-detail-profile-form-update.component';
-import { NgIf, NgStyle, NgFor } from '@angular/common';
+import { NgIf, NgStyle, NgFor, CommonModule } from '@angular/common';
 import { TicketsTableItemRequestedByComponent } from '../../../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
 
 @Component({
   selector: 'ticket-detail-profile-form-update-header',
@@ -20,7 +21,7 @@ import { TicketsTableItemRequestedByComponent } from '../../../tickets-table/tic
   styleUrls: ['./ticket-detail-profile-form-update-header.component.scss'],
   providers: [TicketsListService],
   standalone: true,
-  imports: [NgIf, NgbDropdownModule, TicketsTableItemRequestedByComponent, NgStyle, NgFor, AddAssignedUserNoteComponent]
+  imports: [NgbModule, TicketsTableItemRequestedByComponent, CommonModule, UserLogoPopoverDirective, AddAssignedUserNoteComponent]
 })
 export class TicketDetailProfileFormUpdateHeaderComponent implements OnInit {
   @Input() ticketProfile: TicketProfile = new TicketProfile();

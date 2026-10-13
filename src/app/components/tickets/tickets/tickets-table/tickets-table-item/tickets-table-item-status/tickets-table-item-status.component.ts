@@ -11,16 +11,16 @@ import { Subscription } from 'rxjs';
 import { TicketsPermissionsService } from '../../../ticket-edit-aside/services/tickets-permissions.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
-import { NgClass, NgStyle, NgIf, NgFor } from '@angular/common';
+import { NgClass, NgStyle, NgIf, NgFor, CommonModule } from '@angular/common';
 import { NgbDropdown, NgbDropdownToggle, NgbDropdownMenu, NgbDropdownItem } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-    selector: 'app-tickets-table-item-status',
-    templateUrl: './tickets-table-item-status.component.html',
-    styleUrls: ['./tickets-table-item-status.component.scss'],
-    providers: [TicketsPermissionsService],
-    standalone: true,
-    imports: [NgbDropdown, NgClass, NgStyle, NgIf, NgbDropdownToggle, NgbDropdownMenu, NgFor, NgbDropdownItem]
+  selector: 'app-tickets-table-item-status',
+  templateUrl: './tickets-table-item-status.component.html',
+  styleUrls: ['./tickets-table-item-status.component.scss'],
+  providers: [TicketsPermissionsService],
+  standalone: true,
+  imports: [NgbDropdown, CommonModule, NgbDropdownToggle, NgbDropdownMenu, NgbDropdownItem]
 })
 export class TicketsTableItemStatusComponent {
   @Output() onChangedStatus = new EventEmitter<any>();

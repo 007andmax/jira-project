@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ChangeDetectorRef, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { NgbModal, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { REMOVE_RECORD } from 'src/app/const/confirm';
 import { AppStateService } from 'src/app/states/app/app-state.service';
@@ -13,11 +13,12 @@ import { PasswordRecordCategories } from '../class/password-record-categories';
 import { Subscription } from 'rxjs';
 import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
 import { FormsModule } from '@angular/forms';
-import { NgClass, NgIf } from '@angular/common';
+import { CommonModule, NgClass, NgIf } from '@angular/common';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { Company } from 'src/app/interfaces/company/company';
 import { UsersTableCompanyByComponent } from '../../users/users-table/users-table-company-by/users-table-company-by.component';
+import { CompanyLogoPopoverDirective } from 'src/app/directives/company-logo-popover/company-logo-popover.directive';
 
 /**
  * Password manager data table component
@@ -29,12 +30,13 @@ import { UsersTableCompanyByComponent } from '../../users/users-table/users-tabl
   providers: [TicketsListService],
   standalone: true,
   imports: [
-    NgClass,
+    CommonModule,
     FormsModule,
-    NgIf,
     DynamicTooltipComponent,
     NgbDropdownModule,
-    UsersTableCompanyByComponent
+    UsersTableCompanyByComponent,
+    CompanyLogoPopoverDirective,
+    NgbModule
   ],
 
 })

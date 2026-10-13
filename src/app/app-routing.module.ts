@@ -30,241 +30,242 @@ import { PermissionClientUserService } from './services/users/permission-client-
 import { PermissionMyProfileService } from './components/setting/my-profile/permission-my-profile.service';
 import { PermissionIntegrationsService } from './components/integrations/integrations.service';
 import { InvoicesComponent } from './components/billing/invoices/invoices.component';
+import { PermissionTicketPreviewReportService } from './components/billing/ticket-preview-report/permission-ticket-preview-report.service';
 
 const routes: Routes = [
 
   {
     path: ':domain/tickets',
-    loadChildren: () => import('./components/tickets/tickets/tickets.module').then(m => m.TicketsModule),
+    loadComponent: () => import('./components/tickets/tickets/tickets.component').then(m => m.TicketsComponent),
     canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/ticket/:id',
-    loadChildren: () => import('./components/tickets/tickets/ticket-detail/ticket-detail.module').then(m => m.TicketDetailModule),
+    loadComponent: () => import('./components/tickets/tickets/ticket-detail/ticket-detail.component').then(m => m.TicketDetailComponent),
     canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/support-page',
-    loadChildren: () => import('./components/super-admin/support-page/support-page.module').then(m => m.SupportPageModule),
+    loadComponent: () => import('./components/super-admin/support-page/support-page.component').then(m => m.SupportPageComponent),
     canActivate: [PermissionSuperAdminService]
   },
   {
     path: ':domain/tech-companies',
-    loadChildren: () => import('./components/super-admin/super-admin-companies/super-admin-companies.module').then(m => m.SuperAdminCompaniesModule),
+    loadComponent: () => import('./components/super-admin/super-admin-companies/super-admin-companies.component').then(m => m.SuperAdminCompaniesComponent),
     canActivate: [PermissionSuperAdminService]
   },
   {
     path: ':domain/knowledge-base',
-    loadChildren: () => import('./components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base.module').then(m => m.SuperAdminKnowledgeBaseModule),
+    loadComponent: () => import('./components/super-admin/super-admin-knowledge-base/super-admin-knowledge-base.component').then(m => m.SuperAdminKnowledgeBaseComponent),
     canActivate: [PermissionSuperAdminService]
   },
   {
     path: ':domain/password-manager',
-    loadChildren: () => import('./components/password-manager/password-manager.module').then(m => m.PasswordManagerModule),
+    loadComponent: () => import('./components/password-manager/password-manager.component').then(m => m.PasswordManagerComponent),
     canActivate: [PermissionPasswordManagerService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/company/:id/password-manager',
-    loadChildren: () => import('./components/company-password-manager/company-password-manager.module').then(m => m.CompanyPasswordManagerModule),
+    loadComponent: () => import('./components/company-password-manager/company-password-manager.component').then(m => m.CompanyPasswordManagerComponent),
     canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/company/:id/user',
-    loadChildren: () => import('./components/company-user/company-user.module').then(m => m.CompanyUserModule),
+    loadComponent: () => import('./components/company-user/company-user.component').then(m => m.CompanyUserComponent),
     canActivate: [PermissionCompanyService, PermissionUsersService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/company/:id/user/:iduser',
-    loadChildren: () => import('./components/companies/companies-users-details/companies-users-details.module').then(m => m.CompaniesUsersDetailsModule),
+    loadComponent: () => import('./components/companies/companies-users-details/companies-users-details.component').then(m => m.CompaniesUsersDetailsComponent),
     canActivate: [PermissionCompanyService, PermissionUsersService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/company/:id/tickets',
-    loadChildren: () => import('./components/company-tickets/company-tickets.module').then(m => m.CompanyTicketsModule),
+    loadComponent: () => import('./components/company-tickets/company-tickets.component').then(m => m.CompanyTicketsComponent),
     canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/company/:id/dashboard',
-    loadChildren: () => import('./components/company-dashboard/company-dashboard.module').then(m => m.CompanyDashboardModule),
+    loadComponent: () => import('./components/company-dashboard/company-dashboard.component').then(m => m.CompanyDashboardComponent),
     canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/quotes',
-    loadChildren: () => import('./components/billing/quotes/quotes.module').then(m => m.QuotesModule),
+    loadComponent: () => import('./components/billing/quotes/quotes.component').then(m => m.QuotesComponent),
     canActivate: [PermissionQuotesService, PermissionNoSuperAdminService]
 
 
   },
   {
     path: ':domain/recurring-tickets',
-    loadChildren: () => import('./components/tickets/recurring-tickets/recurring-tickets.module').then(m => m.RecurringTicketsModule),
+    loadComponent: () => import('./components/tickets/recurring-tickets/recurring-tickets.component').then(m => m.RecurringTicketsComponent),
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/companies',
-    loadChildren: () => import('./components/companies/companies.module').then(m => m.CompaniesModule),
+    loadComponent: () => import('./components/companies/companies.component').then(m => m.CompaniesComponent),
     canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
 
   }, {
     path: ':domain/users',
-    loadChildren: () => import('./components/users/users.module').then(m => m.UsersModule),
+    loadComponent: () => import('./components/users/users.component').then(m => m.UsersComponent),
     canActivate: [PermissionUsersService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/users/:id',
-    loadChildren: () => import('./components/users-details/users-details.module').then(m => m.UsersDetailsModule),
+    loadComponent: () => import('./components/users-details/users-details.component').then(m => m.UsersDetailsComponent),
     canActivate: [PermissionUsersService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/reports',
-    loadChildren: () => import('./components/reports/reports.module').then(m => m.ReportsModule),
+    loadComponent: () => import('./components/reports/reports.component').then(m => m.ReportsComponent),
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/report/:id',
-    loadChildren: () => import('./components/reports/item-report/item-report.module').then(m => m.ItemReportModule),
+    loadComponent: () => import('./components/reports/item-report/item-report.component').then(m => m.ItemReportComponent),
     canActivate: [PermissionReportsService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/setting/myprofile',
-    loadChildren: () => import('./components/setting/my-profile/my-profile.module').then(m => m.MyProfileModule),
+    loadComponent: () => import('./components/setting/my-profile/my-profile.component').then(m => m.MyProfileComponent),
     canActivate: [PermissionMyProfileService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/setting/tags',
-    loadChildren: () => import('./components/setting/manage-tags/manage-tags.module').then(m => m.ManageTagsModule),
+    loadComponent: () => import('./components/setting/manage-tags/manage-tags.component').then(m => m.ManageTagsComponent),
     canActivate: [PermissionManageTagsService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/setting/customer-portal',
-    loadChildren: () => import('./components/setting/customer-permissions/customer-permissions.module').then(m => m.CustomerPermissionsModule),
+    loadComponent: () => import('./components/setting/customer-permissions/customer-permissions.component').then(m => m.CustomerPermissionsComponent),
     canActivate: [PermissionCustomerPermissionsService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/setting/products-settings',
-    loadChildren: () => import('./components/setting/products-settings/products-settings.module').then(m => m.ProductsSettingsModule),
+    loadComponent: () => import('./components/setting/products-settings/products-settings.component').then(m => m.ProductsSettingsComponent),
     canActivate: [PermissionProductsSettingsService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/setting/companyprofile',
-    loadChildren: () => import('./components/setting/company-profile/company-profile.module').then(m => m.CompanyProfileModule),
+    loadComponent: () => import('./components/setting/company-profile/company-profile.component').then(m => m.CompanyProfileComponent),
     canActivate: [PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/setting/techUsers',
-    loadChildren: () => import('./components/setting/tech-users-settings/tech-users-settings.module').then(m => m.TechUsersSettingsModule),
+    loadComponent: () => import('./components/setting/tech-users-settings/tech-users-settings.component').then(m => m.TechUsersSettingsComponent),
     canActivate: [PermissionsTechUsersService, PermissionNoSuperAdminService]
 
 
   },
   {
     path: ':domain/setting/emailSetting',
-    loadChildren: () => import('./components/setting/email-setting/email-setting.module').then(m => m.EmailSettingModule),
+    loadComponent: () => import('./components/setting/email-setting/email-setting.component').then(m => m.EmailSettingComponent),
     canActivate: [PermissionEmailSettingService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/setting/ticket-settings',
-    loadChildren: () => import('./components/setting/ticket-settings-page/ticket-settings-page.module').then(m => m.TicketSettingsPageModule),
+    loadComponent: () => import('./components/setting/ticket-settings-page/ticket-settings-page.component').then(m => m.TicketSettingsPageComponent),
     canActivate: [PermissionTicketSettingsService, PermissionNoSuperAdminService]
 
   },
   /* {
      path: ':domain/setting/permission',
-     loadChildren: './components/setting/permission-manage/permission-manage.module#PermissionManageModule',
+     loadComponent: './components/setting/permission-manage/permission-manage.module#PermissionManageModule',
      canActivate: [PermissionNoSuperAdminService]
    },*/
   {
     path: ':domain/setting/emailTemplate',
-    loadChildren: () => import('./components/setting/email-template/email-template.module').then(m => m.EmailTemplateModule),
+    loadComponent: () => import('./components/setting/email-template/email-template.component').then(m => m.EmailTempleteComponent),
     canActivate: [PermissionEmailTemplateService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/setting/marketing-email',
-    loadChildren: () => import('./components/setting/marketing-email/marketing-email.module').then(m => m.MarketingEmailModule),
+    loadComponent: () => import('./components/setting/marketing-email/marketing-email.component').then(m => m.MarketingEmailComponent),
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/setting/finance',
-    loadChildren: () => import('./components/setting/accounting/accounting-settings.module').then(m => m.AccoutingSettingsModule),
+    loadComponent: () => import('./components/setting/accounting/accounting-settings.component').then(m => m.AccountingSettingsComponent),
     canActivate: [PermissionAccountingSettingsService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/setting/crm-settings',
-    loadChildren: () => import('./components/setting/crm-settings/crm-settings.module').then(m => m.CrmSettingsModule),
+    loadComponent: () => import('./components/setting/crm-settings/crm-settings.component').then(m => m.CrmSettingsComponent),
     canActivate: [PermissionCrmSettingsService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/setting/commission',
-    loadChildren: () => import('./components/setting/commission/commission.module').then(m => m.CommissionModule),
+    loadComponent: () => import('./components/setting/commission/commission.component').then(m => m.CommissionComponent),
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/setting/deviceSetting',
-    loadChildren: () => import('./components/setting/device-setting/device-setting.module').then(m => m.DeviceSettingModule),
+    loadComponent: () => import('./components/setting/device-setting/device-setting.component').then(m => m.DeviceSettingComponent),
     // canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/inventory/products',
-    loadChildren: () => import('./components/inventory/inventory.module').then(m => m.InventoryModule),
+    loadComponent: () => import('./components/inventory/inventory.component').then(m => m.InventoryComponent),
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/documents/add',
-    loadChildren: () => import('./components/documents/documents-add/documents-add.module').then(m => m.DocumentsAddModule),
+    loadComponent: () => import('./components/documents/documents-add/documents-add.component').then(m => m.DocumentsAddComponent),
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/documents/edit/:id',
-    loadChildren: () => import('./components/documents/documents-edit/documents-edit.module').then(m => m.DocumentsEditModule),
+    loadComponent: () => import('./components/documents/documents-edit/documents-edit.component').then(m => m.DocumentsEditComponent),
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/documents/category/:id',
-    loadChildren: () => import('./components/documents/documents-category/documents-category.module').then(m => m.DocumentsCategoryModule),
+    loadComponent: () => import('./components/documents/documents-category/documents-category.component').then(m => m.DocumentsCategoryComponent),
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/company/:id/documents',
-    loadChildren: () => import('./components/companies/company-documents/company-documents.module').then(m => m.CompanyDocumentsModule),
+    loadComponent: () => import('./components/companies/company-documents/company-documents.component').then(m => m.CompanyDocumentsComponent),
     canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/company/:id/file-manager',
-    loadChildren: () => import('./components/companies/company-file-manager/company-file-manager.module').then(m => m.CompanyFileManagerModule),
+    loadComponent: () => import('./components/companies/company-file-manager/company-file-manager.component').then(m => m.CompanyFileManagerComponent),
     canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/company/:id/file-manager/category/:categoryId',
-    loadChildren: () => import('./components/companies/company-file-manager/company-file-manager-category/company-file-manager-category.module').then(m => m.CompanyFileManagerCategoryModule),
+    loadComponent: () => import('./components/companies/company-file-manager/company-file-manager-category/company-file-manager-category.component').then(m => m.CompanyFileManagerCategoryComponent),
     canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/documents/preview/:id',
-    loadChildren: () => import('./components/documents/document-preview/document-preview.module').then(m => m.DocumentPreviewModule),
+    loadComponent: () => import('./components/documents/document-preview/document-preview.component').then(m => m.DocumentPreviewComponent),
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/company/:id/products',
-    loadChildren: () => import('./components/companies/company-products/company-products.module').then(m => m.CompanyProductsModule),
+    loadComponent: () => import('./components/companies/company-products/company-products.component').then(m => m.CompanyProductsComponent),
     canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
 
   },
@@ -276,7 +277,7 @@ const routes: Routes = [
   },
   {
     path: ':domain/non-contract-services',
-    loadChildren: () => import('./components/billing/non-contract-services/non-contract-services.module').then(m => m.NonContractServicesModule),
+    loadComponent: () => import('./components/billing/non-contract-services/non-contract-services.component').then(m => m.NonContractServicesComponent),
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
@@ -287,163 +288,235 @@ const routes: Routes = [
   },
   {
     path: ':domain/billable-tickets',
-    loadChildren: () => import('./components/billing/billable/billable-tickets/billable-tickets.component').then(m => m.BillableTicketsComponent),
+    loadComponent: () => import('./components/billing/billable/billable-tickets/billable-tickets.component').then(m => m.BillableTicketsComponent),
     canActivate: [PermissionBillableService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/contracts',
-    loadChildren: () => import('./components/billing/contracts/contracts.module').then(m => m.ContractsModule),
+    loadComponent: () => import('./components/billing/contracts/contracts.component').then(m => m.ContractsComponent),
     canActivate: [PermissionContractsService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/payments',
-    loadChildren: () => import('./components/billing/payments/payments.module').then(m => m.PaymentsModule),
+    loadComponent: () => import('./components/billing/payments/payments.component').then(m => m.PaymentsComponent),
     canActivate: [PermissionNoSuperAdminService, PermissionPaymentsService]
 
 
   },
   {
     path: ':domain/device',
-    loadChildren: () => import('./components/device/device-root.module').then(m => m.DeviceModule),
+    loadComponent: () => import('./components/device/device.component').then(m => m.DeviceComponent),
+    children: [
+      {
+        path: 'dashboard/:type/:id',
+        loadComponent: () => import('./components/device/dashboard/dashboard.component').then(m => m.DashboardComponent),
+        canActivate: [PermissionNoSuperAdminService]
+      },
+      {
+        path: 'hardware/:type/:id',
+        loadComponent: () => import('./components/device/hardware/hardware.component').then(m => m.HardwareComponent),
+        canActivate: [PermissionNoSuperAdminService]
+      },
+      {
+        path: 'software/:type/:id',
+        loadComponent: () => import('./components/device/software/software.component').then(m => m.SoftwareComponent),
+        canActivate: [PermissionNoSuperAdminService]
+      },
+      {
+        path: 'service/:type/:id',
+        loadComponent: () => import('./components/device/services/services.component').then(m => m.ServicesComponent),
+        canActivate: [PermissionNoSuperAdminService]
+      },
+      {
+        path: 'terminal/:type/:id',
+        loadComponent: () => import('./components/device/terminal/terminal.component').then(m => m.TerminalComponent),
+        canActivate: [PermissionNoSuperAdminService]
+      },
+      {
+        path: 'startup/:type/:id',
+        loadComponent: () => import('./components/device/startup-programes/startup-programes.component').then(m => m.StartupComponent),
+        canActivate: [PermissionNoSuperAdminService]
+      },
+      {
+        path: 'windows/:type/:id',
+        loadComponent: () => import('./components/device/window-updates/window-updates.component').then(m => m.WindowUpdatesComponent),
+        canActivate: [PermissionNoSuperAdminService]
+      },
+      {
+        path: 'processes/:type/:id',
+        loadComponent: () => import('./components/device/processes/processes.component').then(m => m.ProcessesComponent),
+        canActivate: [PermissionNoSuperAdminService]
+
+      },
+    ],
     canActivate: [PermissionTechUserService, TestPermissionService]
   },
   {
     path: ':company/device-old',
-    loadChildren: () => import('./components/device-old/device-old.module').then(m => m.DevicesOldModule),
+    loadComponent: () => import('./components/device-old/device-old.component').then(m => m.DeviceOldComponent),
+    children: [
+      {
+        path: 'dashboard/:type/:id',
+        loadComponent: () => import('./components/device-old/dashboard/dashboard.component').then(m => m.DashboardComponent),
+        canActivate: [PermissionNoSuperAdminService]
+      },
+      {
+        path: 'hardware/:type/:id',
+        loadComponent: () => import('./components/device-old/hardware/hardware.component').then(m => m.HardwareComponent),
+        canActivate: [PermissionNoSuperAdminService]
+      },
+      {
+        path: 'software/:type/:id',
+        loadComponent: () => import('./components/device-old/software/software.component').then(m => m.SoftwareComponent),
+        canActivate: [PermissionNoSuperAdminService]
+      },
+      {
+        path: 'terminal/:type/:id',
+        loadComponent: () => import('./components/device-old/terminal/terminal.component').then(m => m.TerminalComponent),
+        canActivate: [PermissionNoSuperAdminService]
+      },
+    ],
     canActivate: [PermissionTechUserService]
   },
   {
     path: ':domain/billing-dashboard',
-    loadChildren: () => import('./components/billing/dashboard-billing/dashboard-billing.module').then(m => m.DashboardBillingModule),
+    loadComponent: () => import('./components/billing/dashboard-billing/dashboard-billing.component').then(m => m.DashboardBillingComponent),
     canActivate: [PermissionDasnboardBillingService]
 
   },
   {
     path: ':domain/company/:id/contracts',
-    loadChildren: () => import('./components/companies/company-contracts/company-contracts.module').then(m => m.CompanyContractsModule),
+    loadComponent: () => import('./components/companies/company-contracts/company-contracts.component').then(m => m.CompanyContractsComponent),
     canActivate: [PermissionContractsService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/tickets-dashboard',
-    loadChildren: () => import('./components/tickets/tickets-dashboard/tickets-dashboard.module').then(m => m.TicketsDashboardModule),
+    loadComponent: () => import('./components/tickets/tickets-dashboard/tickets-dashboard.component').then(m => m.TicketsDashboardComponent),
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
   },
   /* {
      path: ':domain/company/:id/network-scan-beta',
-     loadChildren: './components/company-network-scan-beta/company-network-scan-beta.module#CompanyNetworkScanBetaModule',
+     loadComponent: './components/company-network-scan-beta/company-network-scan-beta.module#CompanyNetworkScanBetaModule',
      // canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
      canActivate: [TestPermissionService]
    },*/
   {
     path: ':domain/company/:id/network-scan',
-    loadChildren: () => import('./components/company-network-scan/company-network-scan.module').then(m => m.CompanyNetworkScanModule),
+    loadComponent: () => import('./components/company-network-scan/company-network-scan.component').then(m => m.CompanyNetworkScanComponent),
     canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/company/:id/devices',
-    loadChildren: () => import('./components/company-devices/company-devices.module').then(m => m.CompanyDevicesModule),
+    loadComponent: () => import('./components/company-devices/company-devices.component').then(m => m.CompanyDevicesComponent),
     canActivate: [PermissionNoSuperAdminService, PermissionCompanyDevicesService]
   },
   /* {
      path: ':domain/company/:id/devices-beta',
-     loadChildren: './components/company-device-beta/company-device-beta.module#CompanyDeviceBetaModule',
+     loadComponent: './components/company-device-beta/company-device-beta.module#CompanyDeviceBetaModule',
      //canActivate: [PermissionCompanyService, PermissionNoSuperAdminService]
      canActivate: [TestPermissionService]
    },*/
   /* {
      path: ':domain/devices',
-     loadChildren: './components/devices/devices.module#DevicesModule',
+     loadComponent: './components/devices/devices.module#DevicesModule',
      // canActivate: [PermissionNoSuperAdminService],
      canActivate: [TestPermissionService]
    },*/
   {
     path: ':domain/quickSupport',
-    loadChildren: () => import('./components/support/support.module').then(m => m.SupportModule),
+    loadComponent: () => import('./components/support/support.component').then(m => m.SupportComponent),
     canActivate: [PermissionSupportService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/documents/templates',
-    loadChildren: () => import('./components/documents/documents-templates/documents-templates.module').then(m => m.DocumentsTemplatesModule),
+    loadComponent: () => import('./components/documents/documents-templates/documents-templates.component').then(m => m.DocumentsTemplatesComponent),
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
 
   },
   {
     path: ':domain/documents',
-    loadChildren: () => import('./components/documents/documents.module').then(m => m.DocumentsModule),
+    loadComponent: () => import('./components/documents/documents.component').then(m => m.DocumentsComponent),
     canActivate: [PermissionTechUserService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/marketing',
-    loadChildren: () => import('./components/marketing/marketing.module').then(m => m.MarketingModule),
+    loadComponent: () => import('./components/marketing/marketing.component').then(m => m.MarketingComponent),
     canActivate: [PermissionUsersService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/help-center',
-    loadChildren: () => import('./components/super-admin-public/super-admin-public.module').then(m => m.SupperAdminPublicModule),
+    loadComponent: () => import('./components/super-admin-public/super-admin-public.component').then(m => m.SuperAdminPublicComponent),
   },
   {
     path: ':domain/help-center/:id',
-    loadChildren: () => import('./components/super-admin-public/super-admin-public-category/super-admin-public-category.module').then(m => m.SuperAdminPublicCategoryModule),
+    loadComponent: () => import('./components/super-admin-public/super-admin-public-category/super-admin-public-category.component').then(m => m.SuperAdminPublicCategoryComponent),
   },
   {
     path: ':domain/devices/reports',
-    loadChildren: () => import('./components/devices/devices-report/devices-report.module').then(m => m.DevicesReportModule),
+    loadComponent: () => import('./components/devices/devices-report/devices-report.component').then(m => m.DevicesReportComponent),
     //canActivate: [PermissionNoSuperAdminService]
     canActivate: [PermissionTechUserService, TestPermissionService]
   },
   {
     path: ':domain/contract-statistics',
-    loadChildren: () => import('./components/billing/contracts-statistics/contracts-statistics.module').then(m => m.ContractsStatisticsModule),
+    loadComponent: () => import('./components/billing/contracts-statistics/contracts-statistics.component').then(m => m.ContractsStatisticsComponent),
     canActivate: [PermissionContractsService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/file-manager',
-    loadChildren: () => import('./components/file-manager/file-manager.module').then(m => m.FileManagementModule),
+    loadComponent: () => import('./components/file-manager/file-manager.component').then(m => m.FileManagerComponent),
     canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/file-manager/all-customer',
-    loadChildren: () => import('./components/file-manager/file-manager-all-customer/file-manager-all-customer.module').then(m => m.FileManagementAllCustomerModule),
+    loadComponent: () => import('./components/file-manager/file-manager-all-customer/file-manager-all-customer.component').then(m => m.FileManagerAllCustomerComponent),
     canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/file-manager/all-customer/:id',
-    loadChildren: () => import('./components/file-manager/file-manager-all-customer-company/file-manager-all-customer-company.module').then(m => m.FileManagementAllCustomerCompanyModule),
+    loadComponent: () => import('./components/file-manager/file-manager-all-customer-company/file-manager-all-customer-company.component').then(m => m.FileManagerAllCustomerCompanyComponent),
     canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/file-manager/category/:id',
-    loadChildren: () => import('./components/file-manager/file-manager-category/file-manager-category.module').then(m => m.FileManagementCategoryModule),
+    loadComponent: () => import('./components/file-manager/file-manager-category/file-manager-category.component').then(m => m.FileManagerCategoryComponent),
     canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/subscription-services',
-    loadChildren: () => import('./components/billing/subscription-services/subscription-services.module').then(m => m.SubscriptionServicesModule),
+    loadComponent: () => import('./components/billing/subscription-services/subscription-services.component').then(m => m.SubscriptionServicesComponent),
     canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/tasks',
-    loadChildren: () => import('./components/tasks/tasks.module').then(m => m.TasksModule),
+    loadComponent: () => import('./components/tasks/tasks.component').then(m => m.TasksComponent),
     canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/tasks-dashboard',
-    loadChildren: () => import('./components/tasks-dashboard/tasks-dashboard.module').then(m => m.TasksDashboardModule),
+    loadComponent: () => import('./components/tasks-dashboard/tasks-dashboard.component').then(m => m.TasksDashboardComponent),
     canActivate: [PermissionNoSuperAdminService]
   },
   {
     path: ':domain/integrations',
-    loadChildren: () => import('./components/integrations/integrations.module').then(m => m.IntegrationsModule),
+    loadComponent: () => import('./components/integrations/integrations.component').then(m => m.IntegrationsComponent),
+    children: [
+      {
+        path: 'all-integrations',
+        loadComponent: () => import('./components/integrations/all-integrations/all-integrations.component').then(m => m.AllIntegrationsComponent),
+
+      }
+    ],
     canActivate: [PermissionNoSuperAdminService, PermissionIntegrationsService]
   },
   {
     path: ':domain/manage-cards',
-    loadChildren: () => import('./components/billing/manage-cards/manage-cards.module').then(m => m.ManageCardsModule),
+    loadComponent: () => import('./components/billing/manage-cards/manage-cards.component').then(m => m.ManageCardsComponent),
     canActivate: [PermissionBillableService, PermissionNoSuperAdminService]
   },
   {
     path: ':domain/ticket-preview-report',
-    loadChildren: () => import('./components/billing/ticket-preview-report/ticket-preview-report.module').then(m => m.TicketPreviewReportModule),
+    loadComponent: () => import('./components/billing/ticket-preview-report/ticket-preview-report.component').then(m => m.TicketPreviewReportComponent),
     canActivate: [PermissionBillableService, PermissionNoSuperAdminService, PermissionTicketPreviewReportService]
   },
 ];

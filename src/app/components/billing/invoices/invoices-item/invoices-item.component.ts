@@ -5,7 +5,7 @@ import * as moment from "moment";
 import { Invoice } from '../class/invoice';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { InvoicesService } from 'src/app/services/invoices/invoices.service';
-import { NgbDropdownModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
@@ -16,9 +16,10 @@ import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toast
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { UsersTableCompanyByComponent } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.component';
+import { CompanyLogoPopoverDirective } from 'src/app/directives/company-logo-popover/company-logo-popover.directive';
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule, NgbDropdownModule, UsersTableCompanyByComponent],
+  imports: [FormsModule, CompanyLogoPopoverDirective, CommonModule, NgbModule, UsersTableCompanyByComponent],
   selector: 'app-invoices-item',
   templateUrl: './invoices-item.component.html',
   styleUrls: ['./invoices-item.component.scss'],

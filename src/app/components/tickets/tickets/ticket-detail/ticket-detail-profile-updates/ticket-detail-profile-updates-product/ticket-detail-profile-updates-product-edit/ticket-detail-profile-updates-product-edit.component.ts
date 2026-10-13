@@ -15,10 +15,12 @@ import { numberDirective } from 'src/app/directives/number/number.directive';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketProfile } from '../../../../class/ticket-profile';
 import { TicketsTableItemRequestedByComponent } from '../../../../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, TicketsTableItemRequestedByComponent, ProductListComponent, FormsModule, CommonModule, numberDirective],
+  imports: [MatErrorComponent, UserLogoPopoverDirective, NgbModule, TicketsTableItemRequestedByComponent, ProductListComponent, FormsModule, CommonModule, numberDirective],
   selector: 'ticket-detail-profile-updates-product-edit',
   templateUrl: './ticket-detail-profile-updates-product-edit.component.html',
   styleUrls: ['./ticket-detail-profile-updates-product-edit.component.scss']

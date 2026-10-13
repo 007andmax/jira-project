@@ -11,7 +11,7 @@ import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-s
 import { USERS } from 'src/app/const/emails';
 import { UsersService } from 'src/app/services/users/users.service';
 import { TagsService } from 'src/app/services/tags/tags.service';
-import { AbstractControl, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, ReactiveFormsModule, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { PhoneNumber } from 'src/class/phone-number';
 import { UserCustomerCompaniesInfo } from '../../users/class/user-customer-companies-info';
 import { TechUsersService } from 'src/app/services/setting/tech-users.service';
@@ -29,15 +29,16 @@ import { CompanyTagsComponent } from '../../companies/company-tags/company-tags.
 import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
 import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
 import { UserCustomSubscriptionComponent } from '../../users/users-aside/user-custom-subscription/user-custom-subscription.component';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
 
 @Component({
   standalone: true,
-  imports: [CompanyTagsComponent, NgxMaskModule.forRoot(), NgbDropdownModule, DynamicTooltipComponent, MatErrorComponent, UserCustomSubscriptionComponent, CommonModule],
+  imports: [CompanyTagsComponent, TextAreaDirective, ReactiveFormsModule, NgxMaskDirective, NgbDropdownModule, DynamicTooltipComponent, MatErrorComponent, UserCustomSubscriptionComponent, CommonModule],
   selector: 'app-users-details-left-panel',
   templateUrl: './users-details-left-panel.component.html',
   styleUrls: ['./users-details-left-panel.component.scss'],
-  providers: [TicketsListService, UsersTableService]
+  providers: [provideNgxMask(), TicketsListService, UsersTableService]
 })
 export class UsersDetailsLeftPanelComponent implements OnInit, OnDestroy {
   companyId: string;

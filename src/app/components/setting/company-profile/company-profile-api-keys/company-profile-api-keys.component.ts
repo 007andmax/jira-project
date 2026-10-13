@@ -12,8 +12,11 @@ import { ApiKeys } from './class/api-keys';
 import { ApiKeysStateService } from 'src/app/states/api-keys/api-keys-state.service';
 import { CompanyProfileApiKeysFilter } from './class/company-profile-api-keys-filter';
 import { ApiKeysRealTimeService } from 'src/app/states/api-keys/api-keys-real-time.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'app-company-profile-api-keys',
   templateUrl: './company-profile-api-keys.component.html',
   styleUrls: ['./company-profile-api-keys.component.scss']

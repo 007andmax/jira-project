@@ -5,7 +5,7 @@ import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ElementRef, 
 import { CompanyAndressContact } from 'src/app/interfaces/company/company-address-contact';
 import { CompanyAndress } from 'src/app/interfaces/company/company-address';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
-import { NgbDropdownModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { CompaniesService } from 'src/app/services/company/companies.service';
@@ -26,13 +26,16 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { UsersTableCompanyByComponent } from '../../users/users-table/users-table-company-by/users-table-company-by.component';
 import { TicketsTableItemRequestedByComponent } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { CompanyLogoPopoverDirective } from 'src/app/directives/company-logo-popover/company-logo-popover.directive';
+import { RightClickBlankDirective } from 'src/app/directives/right-click-blank/right-click-blank.directive';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
 @Component({
   standalone: true,
   selector: 'app-companies-table',
   templateUrl: './companies-table.component.html',
   styleUrls: ['./companies-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [UsersTableCompanyByComponent, TicketsTableItemRequestedByComponent],
+  imports: [UsersTableCompanyByComponent, DynamicTooltipComponent, UserLogoPopoverDirective, CommonModule, FormsModule, RightClickBlankDirective, CompanyLogoPopoverDirective, NgbModule, TicketsTableItemRequestedByComponent],
   providers: [TicketsListService]
 })
 export class CompaniesTableComponent implements OnInit, OnDestroy {

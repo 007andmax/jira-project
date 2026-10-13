@@ -1,5 +1,5 @@
 ﻿
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, ElementRef, ChangeDetectorRef, Output, EventEmitter, ViewChild, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { User } from '../class/user';
@@ -11,7 +11,7 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { ARCHIVE_USER, DEARCHIVE_USER } from 'src/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
-import { NgbDropdownModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModal, NgbModule, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { UsersTableService } from './services/users-table.service';
 import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
@@ -39,15 +39,19 @@ import { UserCustomerCompaniesInfo } from '../class/user-customer-companies-info
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { TicketsTableItemRequestedByComponent } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
+import { provideNgxMask, NgxMaskDirective } from 'ngx-mask';
+import { UsersTableCompanyInfoItemComponent } from './users-table-company-info-item/users-table-company-info-item.component';
+import { UsersTableCompanyInfoSingleComponent } from './users-table-company-info-single/users-table-company-info-single.component';
 
 @Component({
   standalone: true,
   selector: 'app-users-table',
   templateUrl: './users-table.component.html',
   styleUrls: ['./users-table.component.scss'],
-  providers: [UsersTableService, TicketsListService],
+  providers: [UsersTableService, TicketsListService, provideNgxMask()],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TicketsTableItemRequestedByComponent]
+  imports: [TicketsTableItemRequestedByComponent, PreviewPhoneMaskComponent, UserTableDefaultSubscriptionComponent, NgbModule, UsersTableCompanyInfoSingleComponent, UsersTableCompanyInfoItemComponent, NgxMaskDirective, UserTableCustomSubscriptionComponent, CommonModule, UserLogoPopoverDirective, DynamicTooltipComponent, FormsModule]
 })
 export class UsersTableComponent implements OnInit, OnDestroy {
   @Input() selected: boolean = false;

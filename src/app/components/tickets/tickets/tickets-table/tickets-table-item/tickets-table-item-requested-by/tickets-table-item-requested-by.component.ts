@@ -14,20 +14,20 @@ import { Ticket } from 'src/app/components/tickets/class/ticket';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgxMaskModule } from 'ngx-mask';
-import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.module';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.component';
 
 @Component({
   standalone: true,
   selector: 'app-tickets-table-item-requested-by',
   templateUrl: './tickets-table-item-requested-by.component.html',
   styleUrls: ['./tickets-table-item-requested-by.component.scss'],
-  providers: [TicketsListService],
+  providers: [provideNgxMask(), TicketsListService],
   imports: [CommonModule,
     FormsModule,
     NgbModule,
-    PreviewPhoneMaskModule,
-    NgxMaskModule.forRoot(),]
+    PreviewPhoneMaskComponent,
+    NgxMaskDirective,]
 })
 export class TicketsTableItemRequestedByComponent {
   @Input() ticket: any;

@@ -1,7 +1,7 @@
 ﻿
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { DELETE_LIST_GL_NUMBERS } from 'src/app/const/confirm';
@@ -25,7 +25,7 @@ import { TaxesComponent } from '../../shared/taxes/taxes.component';
 declare var $: any;
 @Component({
   standalone: true,
-  imports: [TaxesAddComponent, CommonModule, TaxesSettingsComponent, InvoiceSettingsComponent, QuotesSettingsComponent, GlNumberSettingsComponent, AccountingYearComponent, CustomNotesSettingsComponent],
+  imports: [TaxesAddComponent, NgbModule, CommonModule, TaxesSettingsComponent, InvoiceSettingsComponent, QuotesSettingsComponent, GlNumberSettingsComponent, AccountingYearComponent, CustomNotesSettingsComponent],
   selector: 'app-accounting-settings',
   templateUrl: './accounting-settings.component.html',
   animations: [fadeInAnimation],

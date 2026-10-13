@@ -7,15 +7,15 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { Router } from '@angular/router';
 import { DocumentsStateService } from 'src/app/states/documents/documents-state.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgClass, NgIf } from '@angular/common';
+import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule, NgClass, NgIf } from '@angular/common';
 
 @Component({
-    selector: 'documents-table',
-    templateUrl: './documents-table.component.html',
-    styleUrls: ['./documents-table.component.scss'],
-    standalone: true,
-    imports: [NgClass, NgIf, NgbDropdownModule]
+  selector: 'documents-table',
+  templateUrl: './documents-table.component.html',
+  styleUrls: ['./documents-table.component.scss'],
+  standalone: true,
+  imports: [CommonModule, NgbModule]
 })
 export class DocumentsTableComponent implements OnInit {
   @Input() item: Document;

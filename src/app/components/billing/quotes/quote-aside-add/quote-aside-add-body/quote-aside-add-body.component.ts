@@ -32,10 +32,12 @@ import { ProductItemQuoteComponent } from '../product-item-quote/product-item-qu
 import { ProductListQuoteComponent } from '../product-list-quote/product-list-quote.component';
 import { QuoteAsideAddChangeAddressComponent } from '../quote-aside-add-change-address/quote-aside-add-change-address.component';
 import { ServiceItemQuoteComponent } from '../service-item-quote/service-item-quote.component';
+import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [DropDownComponent, InvoiceRegularNoteComponent, MatErrorComponent, InvoiceFormEditCustomerComponent, ProductItemQuoteComponent, ProductListQuoteComponent, ServiceItemQuoteComponent, QuoteAsideAddChangeAddressComponent, FormsModule, CommonModule],
+  imports: [DropDownComponent, NgbModule, TextAreaDirective, ServiceListQuoteComponent, DatePickerComponent, InvoiceRegularNoteComponent, MatErrorComponent, InvoiceFormEditCustomerComponent, ProductItemQuoteComponent, ProductListQuoteComponent, ServiceItemQuoteComponent, QuoteAsideAddChangeAddressComponent, FormsModule, CommonModule],
   selector: 'app-quote-aside-add-body',
   templateUrl: './quote-aside-add-body.component.html',
   styleUrls: ['./quote-aside-add-body.component.scss'],

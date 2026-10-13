@@ -31,11 +31,13 @@ import { UsersDropDownComponent } from 'src/app/components/shared/users-drop-dow
 import { UserDefaultSubscriptionComponent } from 'src/app/components/users/users-aside/user-default-subscription/user-default-subscription.component';
 import { CompanyTagsComponent } from '../../company-tags/company-tags.component';
 import { CompanyTimeZoneComponent } from '../../company-time-zone/company-time-zone.component';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
 
 @Component({
+  providers: [provideNgxMask()],
   standalone: true,
-  imports: [CompanyTagsComponent, NgxMaskModule.forRoot(), CompanyTimeZoneComponent, DropDownComponent, MatErrorComponent, UsersDropDownComponent, CompanyAssociateComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
+  imports: [CompanyTagsComponent, TextAreaDirective, NgxMaskDirective, CompanyTimeZoneComponent, DropDownComponent, MatErrorComponent, UsersDropDownComponent, CompanyAssociateComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'company-add-aside-full',
   templateUrl: './company-add-aside-full.component.html',
   styleUrls: ['./company-add-aside-full.component.scss']

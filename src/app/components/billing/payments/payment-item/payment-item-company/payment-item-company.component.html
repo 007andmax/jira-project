@@ -10,7 +10,7 @@
 >
 <div
     class="qt-table-modern__circle-avatar multi-assign-user"
-    [textContent]="getCompany().name[0].toUpperCase()"
+    [textContent]="getCompany()?.name[0].toUpperCase()"
     [ngStyle]="{'background': parseLogo()}"
       [ngbPopover]="popContent"
     [popoverClass]="'requested-by-popover'"

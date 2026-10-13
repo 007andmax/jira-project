@@ -9,13 +9,16 @@ import { TicketsListService } from 'src/app/components/tickets/tickets/services/
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
 import { ToastrProgressStateService } from 'src/app/states/toastr-progress/toastr-progress-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersTableCompanyByComponent } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.component';
 import { TicketsTableItemRequestedByComponent } from 'src/app/components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
+import { CompanyLogoPopoverDirective } from 'src/app/directives/company-logo-popover/company-logo-popover.directive';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
 
 @Component({
   standalone: true,
-  imports: [FormsModule, CommonModule, NgbDropdownModule, UsersTableCompanyByComponent, TicketsTableItemRequestedByComponent],
+  imports: [FormsModule, CommonModule, UserLogoPopoverDirective, CompanyLogoPopoverDirective, NgbModule, UsersTableCompanyByComponent, TicketsTableItemRequestedByComponent],
   selector: 'app-quotes-item',
   templateUrl: './quotes-item.component.html',
   styleUrls: ['./quotes-item.component.scss'],

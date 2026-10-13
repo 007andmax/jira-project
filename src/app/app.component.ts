@@ -65,7 +65,6 @@ import { CannedResponsesAsideComponent } from './components/setting/ticket-setti
 import { BreadcrumbsComponent } from './components/shared/breadcrumbs/breadcrumbs.component';
 import { DraftEmailComponent } from './components/shared/draft-email/draft-email.component';
 import { MapModalComponent } from './components/shared/map-modal/map-modal.component';
-import { PreviewFileComponent } from './components/shared/preview-file/preview-file.component';
 import { HelpCenterInfoAsideComponent } from './components/super-admin-public/help-center-info-aside/help-center-info-aside.component';
 import { TasksAddComponent } from './components/tasks/tasks-add/tasks-add.component';
 import { TasksEditComponent } from './components/tasks/tasks-edit/tasks-edit.component';
@@ -74,6 +73,9 @@ import { PreviewAttachmentComponent } from './components/tickets/tickets/ticket-
 import { UsersAsideEditComponent } from './components/users/users-aside-edit/users-aside-edit.component';
 import { UsersAsideComponent } from './components/users/users-aside/users-aside.component';
 import { ModalImageCropperComponent } from './services/modal/modal-image-cropper/modal-image-cropper.component';
+import { PreviewFileComponent } from './components/shared/preview-file/preview-file.component';
+import { MainComponent } from './components/main/main.component';
+import { HeaderComponent } from './components/header/header.component';
 
 
 /**
@@ -81,7 +83,7 @@ import { ModalImageCropperComponent } from './services/modal/modal-image-cropper
  */
 @Component({
   standalone: true,
-  imports: [CompanyAddAsideComponent, DraftEmailComponent, InventoryAddAsideComponent, InventoryEditAsideComponent, InvoicesAsideComponent, InvoicesAsidePreviewComponent, ManageCardsAddComponent, ManageCardsEditComponent, MapModalComponent, MarketingSubscriptionsAsideComponent, NonContractServicesAddComponent, NonContractServicesEditComponent, NotificationsComponent, PreviewAttachmentComponent, PreviewFileComponent, QuoteAsidePreviewComponent, ReportSendEmailComponent, TasksAddComponent, TasksEditComponent, TicketAddAsideComponent, UsersAsideComponent, BreadcrumbsComponent, CannedResponsesAsideComponent, HelpCenterInfoAsideComponent, ModalImageCropperComponent, UsersAsideEditComponent, RouterModule, CommonModule],
+  imports: [CompanyAddAsideComponent, MainComponent, HeaderComponent, ModalLockScreenComponent, ModalSessionScreenComponent, PreviewFileComponent, DraftEmailComponent, InventoryAddAsideComponent, InventoryEditAsideComponent, InvoicesAsideComponent, InvoicesAsidePreviewComponent, ManageCardsAddComponent, ManageCardsEditComponent, MapModalComponent, MarketingSubscriptionsAsideComponent, NonContractServicesAddComponent, NonContractServicesEditComponent, NotificationsComponent, PreviewAttachmentComponent, QuoteAsidePreviewComponent, ReportSendEmailComponent, TasksAddComponent, TasksEditComponent, TicketAddAsideComponent, UsersAsideComponent, BreadcrumbsComponent, CannedResponsesAsideComponent, HelpCenterInfoAsideComponent, ModalImageCropperComponent, UsersAsideEditComponent, RouterModule, CommonModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

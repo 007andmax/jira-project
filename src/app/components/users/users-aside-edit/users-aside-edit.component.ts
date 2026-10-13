@@ -35,15 +35,16 @@ import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
 import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
 import { UserCustomSubscriptionComponent } from '../users-aside/user-custom-subscription/user-custom-subscription.component';
 import { UserDefaultSubscriptionComponent } from '../users-aside/user-default-subscription/user-default-subscription.component';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, NgxMaskModule.forRoot(), DisabledBtnDirective, CompanyTagsComponent, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, CompanyDropDownComponent, UserCustomSubscriptionComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
+  imports: [DynamicTooltipComponent, NgbModule, NgxMaskDirective, DisabledBtnDirective, CompanyTagsComponent, DropDownComponent, MatErrorComponent, PreloaderTicketComponent, CompanyDropDownComponent, UserCustomSubscriptionComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'users-aside-edit',
   templateUrl: './users-aside-edit.component.html',
   styleUrls: ['./users-aside-edit.component.scss'],
-  providers: [UsersAsideService, TicketsListService]
+  providers: [provideNgxMask(), UsersAsideService, TicketsListService]
 })
 export class UsersAsideEditComponent implements OnInit, OnDestroy {
   public opened = false;

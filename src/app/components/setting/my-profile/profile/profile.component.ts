@@ -12,7 +12,8 @@ import {
   UntypedFormGroup,
   Validators,
   UntypedFormBuilder,
-  UntypedFormControl
+  UntypedFormControl,
+  ReactiveFormsModule
 } from '@angular/forms';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -32,12 +33,14 @@ import { TitleListType } from 'src/app/components/tickets/tickets/tickets-header
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 declare var google: any;
 @Component({
+  providers: [provideNgxMask()],
   standalone: true,
-  imports: [DropDownComponent, NgxMaskModule.forRoot(), CommonModule],
+  imports: [DropDownComponent, NgbModule, ReactiveFormsModule, NgxMaskDirective, CommonModule],
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']

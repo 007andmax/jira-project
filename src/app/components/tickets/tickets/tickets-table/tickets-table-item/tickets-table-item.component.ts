@@ -9,7 +9,7 @@ import { TicketStatus } from 'src/app/components/setting/ticket-settings-page/ti
 import { StatusColor } from '../../../class/status-color';
 import { Subscription } from 'rxjs';
 import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
-import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { NgClass, NgStyle, NgIf, NgFor } from '@angular/common';
 import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tickets-permissions.service';
@@ -19,6 +19,10 @@ import { AddAssignedUserComponent } from '../../ticket-edit-aside/add-assigned-u
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { CurrentUser } from 'src/class/current-user/current-user';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
+import { TicketsTableItemAssignedUserComponent } from './tickets-table-item-assigned-user/tickets-table-item-assigned-user.component';
+import { TicketsTableItemStatusComponent } from './tickets-table-item-status/tickets-table-item-status.component';
+import { CompanyLogoPopoverDirective } from 'src/app/directives/company-logo-popover/company-logo-popover.directive';
 
 @Component({
   selector: 'app-tickets-table-item',
@@ -26,7 +30,7 @@ import { CurrentUser } from 'src/class/current-user/current-user';
   styleUrls: ['./tickets-table-item.component.scss'],
   providers: [TicketsListService, TicketsPermissionsService],
   standalone: true,
-  imports: [NgClass, FormsModule, AddAssignedUserComponent, TicketsTableItemRequestedByComponent, NgStyle, NgIf, NgFor, NgbTooltipModule, UsersTableCompanyByComponent]
+  imports: [NgClass, FormsModule, CompanyLogoPopoverDirective, NgbModule, UserLogoPopoverDirective, TicketsTableItemStatusComponent, TicketsTableItemAssignedUserComponent, AddAssignedUserComponent, TicketsTableItemRequestedByComponent, NgStyle, NgIf, NgFor, NgbTooltipModule, UsersTableCompanyByComponent]
 })
 export class TicketsTableItemComponent implements OnInit, OnDestroy {
   ticket: Ticket;

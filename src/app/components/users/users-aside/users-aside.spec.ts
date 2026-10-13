@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { DisabledBtnModule } from 'src/app/directives/disabled-btn/disabled-btn.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { CompanySubscriptionModule } from '../../companies/company-subscription/company-subscription.module';
@@ -30,6 +30,7 @@ describe('UsersAsideComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+    providers: [provideNgxMask()],
     imports: [CommonModule,
         FormsModule,
         DropDownModule,
@@ -40,7 +41,7 @@ describe('UsersAsideComponent unit test', () => {
         UserDefaultSubscriptionModule,
         UserCustomSubscriptionModule,
         NgbModule,
-        NgxMaskModule.forRoot(),
+        NgxMaskDirective,
         CompanyDropDownModule,
         PreloaderTicketModule,
         DynamicTooltipModule,

@@ -1,13 +1,13 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { createPopper } from '@popperjs/core';
-import { NgClass } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 
 @Component({
-    selector: 'app-dynamic-tooltip',
-    templateUrl: './dynamic-tooltip.component.html',
-    styleUrls: ['./dynamic-tooltip.component.scss'],
-    standalone: true,
-    imports: [NgClass]
+  selector: 'app-dynamic-tooltip',
+  templateUrl: './dynamic-tooltip.component.html',
+  styleUrls: ['./dynamic-tooltip.component.scss'],
+  standalone: true,
+  imports: [CommonModule]
 })
 export class DynamicTooltipComponent implements OnInit {
   @Input() content: string;

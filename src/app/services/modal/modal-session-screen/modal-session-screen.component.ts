@@ -1,7 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'app-modal-session-screen',
   templateUrl: './modal-session-screen.component.html',
   styleUrls: ['./modal-session-screen.component.scss']

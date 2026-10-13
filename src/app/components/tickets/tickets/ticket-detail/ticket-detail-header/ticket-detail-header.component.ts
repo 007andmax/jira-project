@@ -1,7 +1,7 @@
 ﻿
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
@@ -17,10 +17,11 @@ import { TicketsPermissionsService } from '../../ticket-edit-aside/services/tick
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
 import { TicketsTableItemRequestedByComponent } from '../../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
 
 @Component({
   standalone: true,
-  imports: [PreloaderTicketComponent, TicketsTableItemRequestedByComponent, CommonModule, DisabledBtnDirective],
+  imports: [PreloaderTicketComponent, NgbModule, UserLogoPopoverDirective, TicketsTableItemRequestedByComponent, CommonModule, DisabledBtnDirective],
   selector: 'ticket-detail-header',
   templateUrl: './ticket-detail-header.component.html',
   styleUrls: ['./ticket-detail-header.component.scss'],

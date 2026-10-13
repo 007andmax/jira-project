@@ -12,6 +12,7 @@
         *ngIf="show"
     >
         <image-cropper
+        output="base64"
             #imageCroper
             [imageBase64]="imageBase64"
             [maintainAspectRatio]="true"

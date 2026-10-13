@@ -113,7 +113,7 @@
                                                 class="ticket-detail-page-content__body-header-info-email"
                                                 [textContent]="'sent ' + parseTicketSource() + getAgentName()"
                                             ></span>
-                                            <i *ngIf="getAgentName() !== '' && getAgent() && (getAgent().remoteSessions.length == 0 && getAgent().online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.isCustomerPortal))"  placement="top"
+                                            <i *ngIf="getAgentName() !== '' && getAgent() && (getAgent()?.remoteSessions.length == 0 && getAgent().online && (getPermissions('REMOTE_CONNECTIONS') || customerPortalStateService.isCustomerPortal))"  placement="top"
                                               (click)="remoteAccess()"
         ngbTooltip="Remote Access" class="qt-icon icon__remote-access qt-sz-16 qt-ml-6 qt-fs-0 qt-dib qt-pointer"  ></i>
                                         </div>

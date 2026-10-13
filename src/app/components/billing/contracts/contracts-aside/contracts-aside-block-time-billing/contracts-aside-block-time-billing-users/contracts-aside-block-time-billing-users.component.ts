@@ -4,13 +4,15 @@ import { NgFor, NgStyle } from '@angular/common';
 import { MatChipListComponent } from '../../../../../shared/mat-chip-list/mat-chip-list.component';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { TicketsTableItemRequestedByComponent } from 'src/app/components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing-users',
   templateUrl: './contracts-aside-block-time-billing-users.component.html',
   styleUrls: ['./contracts-aside-block-time-billing-users.component.scss'],
   standalone: true,
-  imports: [MatChipListComponent, NgFor, MatChipComponent, NgStyle, TicketsTableItemRequestedByComponent],
+  imports: [MatChipListComponent, UserLogoPopoverDirective, NgbModule, NgFor, MatChipComponent, NgStyle, TicketsTableItemRequestedByComponent],
   providers: [TicketsListService]
 })
 export class ContractsAsideBlockTimeBillingUsersComponent implements OnInit {

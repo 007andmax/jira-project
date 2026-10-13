@@ -3,19 +3,16 @@ import { ChangeDetectorRef, Component, Input, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal, NgbConfig, NgbDropdown, NgbModal, NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { ToastrService } from 'ngx-toastr';
 import { GetDirectionComponent } from 'src/app/components/shared/get-direction/get-direction.component';
-import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.module';
+import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.component';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { USERS } from 'src/app/const/emails';
 import { Company } from 'src/app/interfaces/company/company';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
-import { DraftEmailStateService } from 'src/app/states/draft-email/draft-email-state.service';
-import { TasksStateService } from 'src/app/states/tasks/tasks-state.service';
-import { TicketsStateService } from 'src/app/states/tickets/tickets-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 
 @Component({
@@ -26,9 +23,9 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
   imports: [CommonModule,
     FormsModule,
     NgbModule,
-    PreviewPhoneMaskModule,
-    NgxMaskModule.forRoot(),],
-  providers: [TicketsListService]
+    PreviewPhoneMaskComponent,
+    NgxMaskDirective],
+  providers: [provideNgxMask(), TicketsListService]
 })
 export class UsersTableCompanyByComponent {
   @Input() ticket: any;

@@ -2,7 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { TasksAddComponent } from '../tasks-add/tasks-add.component';
-import { Validators } from '@angular/forms';
+import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { Company } from 'src/app/interfaces/company/company';
 import { Service } from 'src/app/interfaces/service/service';
 import { CompanySetting } from '../../companies/class/company-setting';
@@ -30,7 +30,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @Component({
   standalone: true,
-  imports: [DatePickerComponent, NgbModule, AngularEditorModule, ClickOutsideDirective, DropDownComponent, DisabledBtnDirective, TasksDatePickerComponent, MatErrorComponent, PreloaderTicketComponent, ServicesListComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
+  imports: [DatePickerComponent, ReactiveFormsModule, NgbModule, AngularEditorModule, ClickOutsideDirective, DropDownComponent, DisabledBtnDirective, TasksDatePickerComponent, MatErrorComponent, PreloaderTicketComponent, ServicesListComponent, TasksAddAssignedUsersComponent, TasksAddAssociateTicketsComponent, UploadAreaProgressComponent, CompanyDropDownComponent, CommonModule],
   selector: 'app-tasks-edit',
   templateUrl: './tasks-edit.component.html',
   styleUrls: ['./tasks-edit.component.scss'],

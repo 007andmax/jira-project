@@ -2,7 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { MapsAPILoader } from '@agm/core';
 import { Component, ElementRef, EventEmitter, NgZone, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { TimeZone } from 'src/app/components/companies/company-time-zone/class/time-zone';
@@ -17,13 +17,14 @@ import { CompaniesStateService } from 'src/app/states/company/companies-state.se
 import { ImageCropperStateService } from 'src/app/states/image-cropper/image-cropper-state.service';
 import { CompanyTimeZoneComponent } from 'src/app/components/companies/company-time-zone/company-time-zone.component';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 declare var google: any;
 declare var $: any;
 @Component({
+  providers: [provideNgxMask()],
   standalone: true,
-  imports: [CompanyTimeZoneComponent, NgxMaskModule.forRoot(), DropDownComponent, CommonModule],
+  imports: [CompanyTimeZoneComponent, ReactiveFormsModule, NgxMaskDirective, DropDownComponent, CommonModule],
   selector: 'app-company-profile-profile',
   templateUrl: './company-profile-profile.component.html',
   styleUrls: ['./company-profile-profile.component.scss']

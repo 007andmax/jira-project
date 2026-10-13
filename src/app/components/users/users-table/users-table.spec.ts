@@ -6,7 +6,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { DynamicTooltipModule } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.module';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { PhoneModule } from 'src/app/pipe/phone/phone.module';
 import { PreparePhoneModule } from 'src/app/pipe/prepare-phone/prepare-phone.module';
 import { PreviewPhoneMaskModule } from '../../shared/preview-phone-mask/preview-phone-mask.module';
@@ -36,7 +36,7 @@ describe('UsersTableComponent unit test', () => {
         FormsModule,
         NgbModule,
         PhoneModule,
-        NgxMaskModule.forRoot(),
+        NgxMaskDirective,
         PreparePhoneModule,
         DynamicTooltipModule,
         PreviewPhoneMaskModule,
@@ -50,7 +50,7 @@ describe('UsersTableComponent unit test', () => {
             onActivateTick: true
         }),
         NoopAnimationsModule, UsersTableComponent],
-    providers: [{ provide: Router, useValue: mockRouter }],
+    providers: [provideNgxMask(), { provide: Router, useValue: mockRouter }],
 }).compileComponents();
 
   });

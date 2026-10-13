@@ -22,10 +22,11 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.component';
 import { UserTableDefaultSubscriptionComponent } from 'src/app/components/users/users-table/user-table-default-subscription/user-table-default-subscription.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, PreviewPhoneMaskComponent, DropDownComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
+  imports: [DynamicTooltipComponent, NgbModule, PreviewPhoneMaskComponent, DropDownComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'app-users-details-tab-companies-item',
   templateUrl: './users-details-tab-companies-item.component.html',
   styleUrls: ['./users-details-tab-companies-item.component.scss'],

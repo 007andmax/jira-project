@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { PreviewPhoneMaskModule } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.module';
 import { UsersTableCompanyByComponent } from './users-table-company-by.component';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
@@ -21,7 +21,7 @@ describe('UsersTableCompanyByComponent unit test', () => {
         FormsModule,
         NgbModule,
         PreviewPhoneMaskModule,
-        NgxMaskModule.forRoot(),
+        NgxMaskDirective,
         HttpClientModule,
         ToastrModule.forRoot({
             closeButton: true,
@@ -29,7 +29,7 @@ describe('UsersTableCompanyByComponent unit test', () => {
             onActivateTick: true
         }),
         NoopAnimationsModule],
-    providers: [TicketsListService],
+    providers: [provideNgxMask(), TicketsListService],
     declarations: [UsersTableCompanyByComponent],
 }).compileComponents();
 

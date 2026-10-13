@@ -6,9 +6,12 @@ import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { DevicesStateService } from 'src/app/states/devices/devices-state.service';
 import { ActivatedRoute } from '@angular/router';
 import { DevicesService } from 'src/app/services/devices/devices.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-company-dash-stats',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './company-dash-stats.component.html',
   styleUrls: ['./company-dash-stats.component.scss']
 })

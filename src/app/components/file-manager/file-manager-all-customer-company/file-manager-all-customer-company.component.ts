@@ -11,10 +11,11 @@ import * as moment from "moment";
 import { FileManagerFileInfoComponent } from '../file-manager-file-info/file-manager-file-info.component';
 import { FileManagerHeaderComponent } from '../file-manager-header/file-manager-header.component';
 import { FileManagerItemCategoryComponent } from '../file-manager-item-category/file-manager-item-category.component';
+import { FileManagerItemFileComponent } from '../file-manager-item-file/file-manager-item-file.component';
 
 @Component({
   standalone: true,
-  imports: [FileManagerFileInfoComponent, FileManagerItemCategoryComponent, FileManagerHeaderComponent, CommonModule],
+  imports: [FileManagerFileInfoComponent, FileManagerItemFileComponent, FileManagerItemCategoryComponent, FileManagerHeaderComponent, CommonModule],
   selector: 'app-file-manager-all-customer-company',
   templateUrl: './file-manager-all-customer-company.component.html',
   styleUrls: ['./file-manager-all-customer-company.component.scss'],

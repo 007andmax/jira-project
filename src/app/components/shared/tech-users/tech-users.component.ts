@@ -5,11 +5,12 @@ import { RecurringTicketUser } from '../../tickets/recurring-tickets/interfaces/
 import { TechUserItem } from './class/tech-user-item';
 import { SINGLE_SELECT, MULTIPLE_SELECT, RECURRING_TICEKTS } from 'src/app/const/users';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
-import { NgbDropdown, NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbDropdownModule, NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicTooltipComponent } from '../dynamic-tooltip/dynamic-tooltip.component';
-import { NgIf, NgClass, NgStyle, NgFor } from '@angular/common';
+import { NgIf, NgClass, NgStyle, NgFor, CommonModule } from '@angular/common';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsTableItemRequestedByComponent } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
 
 @Component({
   selector: 'app-tech-users',
@@ -17,7 +18,7 @@ import { TicketsTableItemRequestedByComponent } from '../../tickets/tickets/tick
   styleUrls: ['./tech-users.component.scss'],
   providers: [TicketsListService],
   standalone: true,
-  imports: [NgbDropdownModule, NgIf, NgClass, NgStyle, NgbTooltipModule, DynamicTooltipComponent, NgFor, TicketsTableItemRequestedByComponent]
+  imports: [NgbModule, CommonModule, UserLogoPopoverDirective, DynamicTooltipComponent, TicketsTableItemRequestedByComponent]
 })
 export class TechUsersComponent implements OnInit, OnDestroy {
   @Input('users')

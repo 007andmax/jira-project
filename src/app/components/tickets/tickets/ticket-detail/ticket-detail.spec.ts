@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterTestingModule } from '@angular/router/testing';
 import { InvoiceFormTicketEditTaxesModule } from 'src/app/components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.module';
@@ -138,7 +138,7 @@ describe('TicketDetailComponent unit test', () => {
         TicketProfileUpdatesServiceTimepickerModule,
         TicketProfileUpdatesServiceDurationModule,
         DatePickerModule,
-        NgxMaskModule.forRoot(),
+        NgxMaskDirective,
         PreparePhoneModule,
         PhoneModule,
         InfiniteScrollModule,
@@ -182,7 +182,7 @@ describe('TicketDetailComponent unit test', () => {
         TicketDetailAttachmentsComponent,
         TicketDetailContactDetailsComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [TicketsListService, TicketsPermissionsService, { provide: Router, useValue: mockRouter }]
+      providers: [provideNgxMask(), TicketsListService, TicketsPermissionsService, { provide: Router, useValue: mockRouter }]
     }).compileComponents();
 
   });

@@ -1,4 +1,5 @@
 
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Renderer2, Inject, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -8,6 +9,8 @@ import { Subscription } from 'rxjs';
  */
 @Component({
   selector: 'app-main',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })

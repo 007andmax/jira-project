@@ -5,7 +5,7 @@ import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.comp
 import { REMOVE_UPDATE_TICKET_DETAIL, REMOVE_UPDATE_TICKET_DETAIL_PRODUCT } from 'src/app/const/confirm';
 import { TicketProfileProduct } from '../../../class/ticket-profile-product';
 import { TicketProfileUpdate } from '../../../class/ticket-profile-update';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { TicketsListService } from '../../../services/tickets-list.service';
@@ -16,10 +16,11 @@ import { TicketDetailProfileUpdatesProductItemComponent } from './ticket-detail-
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketProfile } from '../../../class/ticket-profile';
 import { TicketsTableItemRequestedByComponent } from '../../../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, TicketsTableItemRequestedByComponent, TicketDetailProfileUpdatesProductHeaderInfoComponent, TicketDetailProfileUpdatesProductItemComponent, CommonModule],
+  imports: [DynamicTooltipComponent, UserLogoPopoverDirective, NgbModule, TicketsTableItemRequestedByComponent, TicketDetailProfileUpdatesProductHeaderInfoComponent, TicketDetailProfileUpdatesProductItemComponent, CommonModule],
   selector: 'ticket-detail-profile-updates-product',
   templateUrl: './ticket-detail-profile-updates-product.component.html',
   styleUrls: ['./ticket-detail-profile-updates-product.component.scss']

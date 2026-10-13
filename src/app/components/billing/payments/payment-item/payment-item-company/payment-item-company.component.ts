@@ -1,15 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { UsersTableCompanyByComponent } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.component';
+import { CompanyLogoPopoverDirective } from 'src/app/directives/company-logo-popover/company-logo-popover.directive';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-payment-item-company',
   standalone: true,
-  imports: [],
+  imports: [CompanyLogoPopoverDirective, CommonModule, NgbModule, UsersTableCompanyByComponent],
   templateUrl: './payment-item-company.component.html',
   styleUrls: ['./payment-item-company.component.scss'],
-  providers: [TicketsListService, UsersTableCompanyByComponent]
+  providers: [TicketsListService]
 })
 export class PaymentItemCompanyComponent {
   @Input() company: any;

@@ -2,14 +2,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { GlNumbersDropDownModule } from 'src/app/components/inventory/gl-numbers-drop-down/gl-numbers-drop-down.module';
-import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
-import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
+
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { QuoteEdit } from '../../class/quote-edit';
 import { QuoteAsidePreviewBodyComponent } from './quote-aside-preview-body.component';
+import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 
 
 describe('QuoteAsidePreviewBodyComponent unit test', () => {
@@ -18,17 +17,17 @@ describe('QuoteAsidePreviewBodyComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [CommonModule,
+      imports: [CommonModule,
         FormsModule,
-        MatErrorModule,
+        MatErrorComponent,
         HttpClientModule,
         ToastrModule.forRoot({
-            closeButton: true,
-            timeOut: 5000,
-            onActivateTick: true
+          closeButton: true,
+          timeOut: 5000,
+          onActivateTick: true
         }),
         NoopAnimationsModule, QuoteAsidePreviewBodyComponent],
-}).compileComponents();
+    }).compileComponents();
 
   });
   it('check "getSubTotalServices"', () => {

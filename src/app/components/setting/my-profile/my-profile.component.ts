@@ -10,11 +10,13 @@ import { TicketsMyProfileComponent } from "./tickets-my-profile/tickets-my-profi
 import { CustomerPortalStateService } from "src/app/states/customer-portal/customer-portal-state.service";
 import { fadeInAnimation } from "src/app/animations";
 import { SignatureComponent } from './signature/signature.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 declare var $: any;
 
 @Component({
   standalone: true,
-  imports: [SignatureComponent, ProfileComponent, TicketsMyProfileComponent, ActivityHistoryComponent, EmailNotificationsComponent, AccountComponent, CommonModule],
+  imports: [SignatureComponent, ReactiveFormsModule, ProfileComponent, TicketsMyProfileComponent, NgbModule, ActivityHistoryComponent, EmailNotificationsComponent, AccountComponent, CommonModule],
   selector: "app-my-profile",
   templateUrl: "./my-profile.component.html",
   animations: [fadeInAnimation],

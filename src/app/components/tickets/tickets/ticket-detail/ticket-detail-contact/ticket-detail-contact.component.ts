@@ -8,10 +8,12 @@ import { TicketProfile } from '../../class/ticket-profile';
 import { TicketsListService } from '../../services/tickets-list.service';
 import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.component';
 import { TicketsTableItemRequestedByComponent } from '../../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
 
 @Component({
   standalone: true,
-  imports: [PreviewPhoneMaskComponent, TicketsTableItemRequestedByComponent, CommonModule],
+  imports: [PreviewPhoneMaskComponent, UserLogoPopoverDirective, NgbModule, TicketsTableItemRequestedByComponent, CommonModule],
   selector: 'ticket-detail-contact',
   templateUrl: './ticket-detail-contact.component.html',
   styleUrls: ['./ticket-detail-contact.component.scss'],

@@ -17,8 +17,8 @@ import { CompanyDashContractComponent } from './company-dash-contract/company-da
 import { CompanyDashDetailComponent } from './company-dash-detail/company-dash-detail.component';
 import { CompanyDashInvoiceComponent } from './company-dash-invoice/company-dash-invoice.component';
 import { CompanyDashRevenueComponent } from './company-dash-revenue/company-dash-revenue.component';
-import { CompanyDashStatsComponent } from './company-dash-stats/company-dash-stats.component';
 import { CompanyDashTicketComponent } from './company-dash-ticket/company-dash-ticket.component';
+import { CompanyDashStatsComponent } from './company-dash-stats/company-dash-stats.component';
 
 @Component({
   standalone: true,

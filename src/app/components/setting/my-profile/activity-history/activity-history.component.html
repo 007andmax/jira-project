@@ -5,18 +5,20 @@
     <div class="tab-pane__body">
         <div class="tab-pane__row map-area">
             <div class="qt-w100">
-                <agm-map
-                    [latitude]="selectedDevice.latitude"
-                    [longitude]="selectedDevice.longitude"
-                    [mapTypeControl]='true'
+                <google-map
+                    *ngIf="selectedDevice"
+                    height="340px"
+                    width="100%"
+                    [center]="{ lat: selectedDevice.latitude, lng: selectedDevice.longitude }"
+                    [options]="{ mapTypeControl: true }"
                     [zoom]="15"
-                    [title]="(selectedDevice.city ? selectedDevice.city + ', ' : '') + selectedDevice.country "
+                    [attr.aria-label]="(selectedDevice.city ? selectedDevice.city + ', ' : '') + selectedDevice.country"
                 >
-                    <agm-marker
-                        [latitude]="selectedDevice.latitude"
-                        [longitude]="selectedDevice.longitude"
-                    ></agm-marker>
-                </agm-map>
+                    <map-marker
+                        [position]="{ lat: selectedDevice.latitude, lng: selectedDevice.longitude }"
+                        [title]="(selectedDevice.city ? selectedDevice.city + ', ' : '') + selectedDevice.country"
+                    ></map-marker>
+                </google-map>
             </div>
         </div>
         <div class="activity-history__table">

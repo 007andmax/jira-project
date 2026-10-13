@@ -29,12 +29,20 @@ import { TicketPreviewReportProductItemDropDownComponent } from './ticket-previe
 import { TicketPreviewReportProductItemManufactureComponent } from './ticket-preview-report-product-item/ticket-preview-report-product-item-manufacture/ticket-preview-report-product-item-manufacture.component';
 import { TicketPreviewReportServiceItemComponent } from './ticket-preview-report-service-item/ticket-preview-report-service-item.component';
 import { TicketPreviewReportStatusDropDownComponent } from './ticket-preview-report-status-drop-down/ticket-preview-report-status-drop-down.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { CommonModule } from '@angular/common';
+import { TicketsTableItemStatusComponent } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-status/tickets-table-item-status.component';
+import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { DisabledBtnDirective } from 'src/app/directives/disabled-btn/disabled-btn.directive';
+import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
 
 @Component({
+  standalone: true,
   selector: 'app-ticket-preview-report',
   templateUrl: './ticket-preview-report.component.html',
   styleUrls: ['./ticket-preview-report.component.scss'],
-  providers: [InventoryListService]
+  providers: [InventoryListService],
+  imports: [InfiniteScrollModule, TicketPreviewReportServiceItemComponent, PreloaderTicketComponent, DisabledBtnDirective, DynamicTooltipComponent, TicketsTableItemStatusComponent, CommonModule, TicketPreviewReportHeaderComponent, TicketPreviewReportProductItemComponent]
 })
 export class TicketPreviewReportComponent implements OnInit, OnDestroy {
   @ViewChildren("productItem", { emitDistinctChangesOnly: false }) productItems: QueryList<TicketPreviewReportProductItemComponent>;

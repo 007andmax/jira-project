@@ -5,12 +5,14 @@ import { PermissionsService } from 'src/app/services/permissions/permissions.ser
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVE_CONTRACT } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
-import { NgbModal, NgbTooltipModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltipModule, NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContractsStateService } from 'src/app/states/contracts/contracts-state.service';
 import { ContractsListService } from '../../services/contracts-list.service';
-import { NgClass, NgIf, CurrencyPipe } from '@angular/common';
+import { NgClass, NgIf, CurrencyPipe, CommonModule } from '@angular/common';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { UsersTableCompanyByComponent } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.component';
+import { CompanyLogoPopoverDirective } from 'src/app/directives/company-logo-popover/company-logo-popover.directive';
+import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 
 
 @Component({
@@ -19,7 +21,7 @@ import { UsersTableCompanyByComponent } from 'src/app/components/users/users-tab
   styleUrls: ['./contracts-table-item.component.scss'],
   providers: [ContractsListService, TicketsListService],
   standalone: true,
-  imports: [NgClass, NgIf, NgbTooltipModule, NgbDropdownModule, CurrencyPipe, UsersTableCompanyByComponent]
+  imports: [CommonModule, NgbModule, CurrencyPipe, UsersTableCompanyByComponent, CompanyLogoPopoverDirective]
 })
 export class ContractsTableItemComponent implements OnInit {
   @Input() contract: ContractItem;

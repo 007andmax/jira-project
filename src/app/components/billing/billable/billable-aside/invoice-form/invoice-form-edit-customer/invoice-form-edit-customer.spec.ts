@@ -4,7 +4,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { DropDownModule } from 'src/app/components/shared/drop-down/drop-down.module';
 import { MatErrorModule } from 'src/app/components/shared/mat-error/mat-error.module';
 import { InvoiceFormEditCustomerComponent } from './invoice-form-edit-customer.component';
@@ -16,10 +16,11 @@ describe('InvoiceFormEditCustomerComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      providers: [provideNgxMask()],
       imports: [CommonModule,
         FormsModule,
         DropDownModule,
-        NgxMaskModule.forRoot(),
+        NgxMaskDirective,
         MatErrorModule,
         HttpClientModule,
         ToastrModule.forRoot({

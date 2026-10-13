@@ -13,7 +13,7 @@ import { PartialUpdate } from './class/partial-update';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { InvoiceTaxNumber } from '../../class/invoice-tax-number';
 import * as moment from "moment";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmStateService } from 'src/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVE_TICKET_INVOICE } from 'src/app/const/confirm';
 import { ConfirmComponent } from 'src/app/components/shared/confirm/confirm.component';
@@ -38,7 +38,7 @@ import { TextAreaDirective } from 'src/app/directives/text-area/text-area.direct
 
 @Component({
   standalone: true,
-  imports: [DatePickerComponent, DisabledBtnDirective, InvoiceDiscountComponent, TextAreaDirective, InvoiceFormTicketEditComponent, InvoiceFormTicketInfoComponent, InvoiceRegularNoteComponent, MatErrorComponent, PreloaderTicketComponent, InvoiceChangeAddressComponent, FormsModule, CommonModule, InvoiceFormEditCustomerComponent],
+  imports: [DatePickerComponent, NgbModule, DisabledBtnDirective, InvoiceDiscountComponent, TextAreaDirective, InvoiceFormTicketEditComponent, InvoiceFormTicketInfoComponent, InvoiceRegularNoteComponent, MatErrorComponent, PreloaderTicketComponent, InvoiceChangeAddressComponent, FormsModule, CommonModule, InvoiceFormEditCustomerComponent],
   selector: 'app-invoice-form',
   templateUrl: './invoice-form.component.html',
   styleUrls: ['./invoice-form.component.scss'],

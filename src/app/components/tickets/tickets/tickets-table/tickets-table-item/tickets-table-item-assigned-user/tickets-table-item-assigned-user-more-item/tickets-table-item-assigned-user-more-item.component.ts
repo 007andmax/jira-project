@@ -7,11 +7,14 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsListService } from '../../../../services/tickets-list.service';
 import { TicketsPermissionsService } from '../../../../ticket-edit-aside/services/tickets-permissions.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-tickets-table-item-assigned-user-more-item',
   templateUrl: './tickets-table-item-assigned-user-more-item.component.html',
-  styleUrls: ['./tickets-table-item-assigned-user-more-item.component.scss']
+  styleUrls: ['./tickets-table-item-assigned-user-more-item.component.scss'],
+  standalone: true,
+  imports: [CommonModule]
 })
 export class TicketsTableItemAssignedUserMoreItemComponent implements OnInit {
   @Input() user: User;

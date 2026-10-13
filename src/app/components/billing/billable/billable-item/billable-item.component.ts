@@ -9,15 +9,15 @@ import { BillableStateService } from 'src/app/states/billable/billable-state.ser
 import { LeftPanelStateService } from 'src/app/states/left-panel/left-panel-state.service';
 import { BillableService } from 'src/app/services/billable/billable.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { NgIf, NgStyle, CurrencyPipe } from '@angular/common';
+import { NgIf, NgStyle, CurrencyPipe, CommonModule } from '@angular/common';
 import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { AppStateService } from 'src/app/states/app/app-state.service';
-import { UsersTableCompanyByModule } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.module';
-import { UsersTableCompanyByComponent } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.component';
 import { TicketsTableItemRequestedByComponent } from 'src/app/components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
-import { TicketsTableItemRequestedByModule } from 'src/app/components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.module';
+import { UsersTableCompanyByComponent } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.component';
+import { CompanyLogoPopoverDirective } from 'src/app/directives/company-logo-popover/company-logo-popover.directive';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
 
 @Component({
   selector: 'app-billable-item',
@@ -25,7 +25,7 @@ import { TicketsTableItemRequestedByModule } from 'src/app/components/tickets/ti
   styleUrls: ['./billable-item.component.scss'],
   providers: [TicketsListService],
   standalone: true,
-  imports: [NgIf, FormsModule, NgStyle, NgbDropdownModule, CurrencyPipe, UsersTableCompanyByComponent, TicketsTableItemRequestedByComponent]
+  imports: [FormsModule, UserLogoPopoverDirective, CommonModule, CompanyLogoPopoverDirective, NgbModule, CurrencyPipe, UsersTableCompanyByComponent, TicketsTableItemRequestedByComponent]
 })
 export class BillableItemComponent implements OnInit {
   @Input() item: BillableProfile;

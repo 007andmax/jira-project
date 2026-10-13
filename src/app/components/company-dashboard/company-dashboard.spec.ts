@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { PhoneModule } from 'src/app/pipe/phone/phone.module';
 import { PreparePhoneModule } from 'src/app/pipe/prepare-phone/prepare-phone.module';
@@ -47,7 +47,7 @@ describe('CompanyDashboardComponent unit test', () => {
     imports: [CommonModule,
         CompanyDashboardRoutingModule,
         CompanyTagsModule,
-        NgxMaskModule.forRoot(),
+        NgxMaskDirective,
         NgbModule,
         FormsModule,
         CompanyEditAsideModule,
@@ -74,7 +74,7 @@ describe('CompanyDashboardComponent unit test', () => {
         CompanyDashInvoiceComponent,
         CompanyDashContractComponent,
         CompanyDashAssociateInfoComponent],
-    providers: [{ provide: Router, useValue: mockRouter }],
+    providers: [provideNgxMask(), { provide: Router, useValue: mockRouter }],
     declarations: [CompanyDashStatsComponent],
 }).compileComponents();
 

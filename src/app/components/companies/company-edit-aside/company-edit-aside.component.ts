@@ -37,11 +37,13 @@ import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
 import { PreloaderTicketComponent } from '../../shared/preloader-ticket/preloader-ticket.component';
 import { UserDefaultSubscriptionComponent } from '../../users/users-aside/user-default-subscription/user-default-subscription.component';
 import { CompanyTimeZoneComponent } from '../company-time-zone/company-time-zone.component';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
 
 @Component({
+  providers: [provideNgxMask()],
   standalone: true,
-  imports: [CompanyTimeZoneComponent, NgxMaskModule.forRoot(), CompanyTagsComponent, DisabledBtnDirective, CompanyAssociateComponent, MatErrorComponent, DropDownComponent, PreloaderTicketComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
+  imports: [CompanyTimeZoneComponent, TextAreaDirective, NgxMaskDirective, CompanyTagsComponent, DisabledBtnDirective, CompanyAssociateComponent, MatErrorComponent, DropDownComponent, PreloaderTicketComponent, UserDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'app-company-edit-aside',
   templateUrl: './company-edit-aside.component.html',
   styleUrls: ['./company-edit-aside.component.scss']

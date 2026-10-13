@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TechUsersComponent } from 'src/app/components/shared/tech-users/tech-users.component';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { SINGLE_SELECT } from 'src/app/const/users';
 import { DynamicTooltipComponent } from '../../../../shared/dynamic-tooltip/dynamic-tooltip.component';
-import { NgIf, NgStyle, NgFor, NgClass } from '@angular/common';
+import { NgIf, NgStyle, NgFor, NgClass, CommonModule } from '@angular/common';
 import { TicketsTableItemRequestedByComponent } from 'src/app/components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
 
 @Component({
   selector: 'company-tech-users',
@@ -13,7 +14,7 @@ import { TicketsTableItemRequestedByComponent } from 'src/app/components/tickets
   styleUrls: ['./company-tech-users.component.scss'],
   providers: [TicketsListService],
   standalone: true,
-  imports: [NgbDropdownModule, NgIf, NgStyle, DynamicTooltipComponent, NgFor, NgClass, TicketsTableItemRequestedByComponent]
+  imports: [NgbModule, CommonModule, UserLogoPopoverDirective, DynamicTooltipComponent, TicketsTableItemRequestedByComponent]
 })
 export class CompanyTechUsersComponent extends TechUsersComponent {
   @ViewChild('dp', { static: true }) dp: NgbDropdown;

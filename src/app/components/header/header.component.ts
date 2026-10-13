@@ -13,18 +13,18 @@ import { User } from '../users/class/user';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { Subscription } from 'rxjs';
 import { NotificationsStateService } from 'src/app/states/notifications/notifications-state.service';
-import { NgbDropdown, NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbDropdownModule, NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TaskHeaderAddComponent } from '../tasks/task-header-add/task-header-add.component';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { GlobalSearchComponent } from './global-search/global-search.component';
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss'],
-    standalone: true,
-    imports: [NgIf, GlobalSearchComponent, NgbDropdownModule, NgbTooltipModule, TaskHeaderAddComponent]
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
+  standalone: true,
+  imports: [CommonModule, GlobalSearchComponent, NgbModule, TaskHeaderAddComponent]
 })
 export class HeaderComponent implements OnInit {
   @ViewChild('addTask', { static: true }) addTask: NgbDropdown;

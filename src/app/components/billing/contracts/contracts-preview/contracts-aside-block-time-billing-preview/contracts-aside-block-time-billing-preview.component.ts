@@ -8,7 +8,7 @@ import { ServiceAgreement } from '../../class/service-agreement';
 import * as moment from "moment";
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { Subscription } from 'rxjs';
-import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatChipComponent } from '../../../../shared/mat-chip/mat-chip.component';
 import { MatChipListComponent } from '../../../../shared/mat-chip-list/mat-chip-list.component';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +17,7 @@ import { DatePickerComponent } from '../../../../shared/date-picker/date-picker.
 import { DropDownComponent } from '../../../../shared/drop-down/drop-down.component';
 import { TicketsListService } from 'src/app/components/tickets/tickets/services/tickets-list.service';
 import { TicketsTableItemRequestedByComponent } from 'src/app/components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing-preview',
@@ -24,7 +25,7 @@ import { TicketsTableItemRequestedByComponent } from 'src/app/components/tickets
   styleUrls: ['./contracts-aside-block-time-billing-preview.component.scss'],
   standalone: true,
   providers: [TicketsListService],
-  imports: [DropDownComponent, TicketsTableItemRequestedByComponent, DatePickerComponent, NgClass, FormsModule, NgFor, NgIf, MatChipListComponent, MatChipComponent, NgStyle, NgbTooltipModule, CurrencyPipe]
+  imports: [DropDownComponent, UserLogoPopoverDirective, NgbModule, TicketsTableItemRequestedByComponent, DatePickerComponent, NgClass, FormsModule, NgFor, NgIf, MatChipListComponent, MatChipComponent, NgStyle, NgbTooltipModule, CurrencyPipe]
 })
 export class ContractsAsideBlockTimeBillingPreviewComponent implements OnInit, OnDestroy {
 

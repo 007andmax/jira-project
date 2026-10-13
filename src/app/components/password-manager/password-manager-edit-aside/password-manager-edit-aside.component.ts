@@ -1,5 +1,6 @@
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, OnDestroy } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
@@ -33,9 +34,10 @@ import { FormsModule } from '@angular/forms';
 import { AfterViewInitDirective } from '../../../directives/after-view-init.directive';
 import { CompanyDropDownComponent } from '../../shared/company-drop-down/company-drop-down.component';
 import { MatErrorComponent } from '../../shared/mat-error/mat-error.component';
-import { NgIf, NgClass, NgFor, NgStyle } from '@angular/common';
+import { NgIf, NgClass, NgFor, NgStyle, CommonModule } from '@angular/common';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { TicketsTableItemRequestedByComponent } from '../../tickets/tickets/tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
 declare var URL: any;
 /**
  * Password manager edit aside component
@@ -45,9 +47,9 @@ declare var URL: any;
   templateUrl: './password-manager-edit-aside.component.html',
   styleUrls: ['./password-manager-edit-aside.component.scss'],
   standalone: true,
-  imports: [
-    NgIf,
-    NgClass,
+  imports: [NgxMaskDirective,
+    CommonModule,
+    UserLogoPopoverDirective,
     MatErrorComponent,
     CompanyDropDownComponent,
     AfterViewInitDirective,
@@ -57,13 +59,12 @@ declare var URL: any;
     DatePickerComponent,
     UploadAreaProgressComponent,
     PasswordManagerEditLinkedComponent,
-    NgFor,
-    NgStyle,
-    DisabledBtnDirective_1,
+    DisabledBtnDirective,
+    NgbModule,
     PreloaderTicketComponent,
     TicketsTableItemRequestedByComponent
   ],
-  providers: [TicketsListService]
+  providers: [provideNgxMask(), TicketsListService]
 })
 export class PasswordManagerEditAsideComponent implements OnInit, OnDestroy {
   public selectedClient: any;

@@ -12,15 +12,15 @@ import { ContractsListService } from '../services/contracts-list.service';
 import { Company } from 'src/app/interfaces/company/company';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { ContractsTableItemComponent } from './contracts-table-item/contracts-table-item.component';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-contracts-table',
-    templateUrl: './contracts-table.component.html',
-    styleUrls: ['./contracts-table.component.scss'],
-    providers: [ContractsListService],
-    standalone: true,
-    imports: [NgFor, ContractsTableItemComponent, NgIf]
+  selector: 'app-contracts-table',
+  templateUrl: './contracts-table.component.html',
+  styleUrls: ['./contracts-table.component.scss'],
+  providers: [ContractsListService],
+  standalone: true,
+  imports: [CommonModule, ContractsTableItemComponent, NgIf]
 })
 export class ContractsTableComponent implements OnInit, OnDestroy {
   showPreloader: boolean = true;

@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { KeyUpEnterModule } from 'src/app/directives/key-up-enter/key-up-enter.module';
 import { TextAreaModule } from 'src/app/directives/text-area/text-area.module';
 import { CompanyTagsModule } from '../../companies/company-tags/company-tags.module';
@@ -20,6 +20,7 @@ describe('UsersDetailsLeftPanelComponent unit test', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+    providers: [provideNgxMask()],
     imports: [CommonModule,
         DynamicTooltipModule,
         MatErrorModule,
@@ -28,7 +29,7 @@ describe('UsersDetailsLeftPanelComponent unit test', () => {
         CompanyTagsModule,
         ReactiveFormsModule,
         UserCustomSubscriptionModule,
-        NgxMaskModule.forRoot(),
+        NgxMaskDirective,
         TextAreaModule,
         KeyUpEnterModule,
         HttpClientModule,

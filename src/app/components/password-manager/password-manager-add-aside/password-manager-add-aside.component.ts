@@ -1,3 +1,4 @@
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import * as moment from 'moment';
 import { PasswordManagerService } from "../../../services/password-manager/password-manager.service";
@@ -37,7 +38,8 @@ import { NgIf, NgClass } from '@angular/common';
     templateUrl: './password-manager-add-aside.component.html',
     styleUrls: ['./password-manager-add-aside.component.scss'],
     standalone: true,
-    imports: [CompanyDropDownComponent, NgIf, PasswordManagerAddCategoryComponent, DropDownComponent, FormsModule, NgClass, MatErrorComponent, DynamicTooltipComponent, DatePickerComponent, PasswordManagerLinkedComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
+    providers: [provideNgxMask()],
+    imports: [NgxMaskDirective, CompanyDropDownComponent, NgIf, PasswordManagerAddCategoryComponent, DropDownComponent, FormsModule, NgClass, MatErrorComponent, DynamicTooltipComponent, DatePickerComponent, PasswordManagerLinkedComponent, DisabledBtnDirective_1, PreloaderTicketComponent]
 })
 export class PasswordManagerAddAsideComponent implements OnInit {
   showPassword: boolean = false;

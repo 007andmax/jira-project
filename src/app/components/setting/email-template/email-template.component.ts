@@ -17,7 +17,7 @@ import { RESTORE_DEFAULT } from "src/app/const/confirm";
 import { ConfirmComponent } from "../../shared/confirm/confirm.component";
 import { DynamicTooltipComponent } from '../../shared/dynamic-tooltip/dynamic-tooltip.component';
 import { SanitizeHtmlPipe } from 'src/app/pipe/sanitize-html.pipe';
-import { EmailTemplateRoutingModule } from './email-template-routing.module';
+import { KeysValuePipe } from 'src/app/pipe/keys-value/keys-value.pipe';
 
 declare var $: any;
 
@@ -26,9 +26,9 @@ declare var $: any;
   imports: [CommonModule,
     NgbModule,
     ReactiveFormsModule,
-    EmailTemplateRoutingModule,
     AngularEditorModule,
-    EmailTempleteComponent,
+    DynamicTooltipComponent,
+    KeysValuePipe,
     SanitizeHtmlPipe],
   selector: "app-email-template",
   templateUrl: "./email-template.component.html",

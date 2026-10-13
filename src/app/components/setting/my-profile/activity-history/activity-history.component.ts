@@ -9,13 +9,11 @@ import { CLOSE_SESSION } from "src/app/const/confirm";
 import { ConfirmComponent } from "src/app/components/shared/confirm/confirm.component";
 import { SettingStateService } from "src/app/states/setting/setting-state.service";
 import { Subscription } from "rxjs";
-import { AgmCoreModule } from '@agm/core';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, AgmCoreModule.forRoot({
-    apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
-  })],
+  imports: [CommonModule, GoogleMapsModule],
   selector: "app-activity-history",
   templateUrl: "./activity-history.component.html",
   styleUrls: ["./activity-history.component.scss"]

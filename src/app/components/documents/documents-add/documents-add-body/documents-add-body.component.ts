@@ -8,8 +8,8 @@ declare const CodeMirror: any;
 @Component({
   standalone: true,
   imports: [CommonModule,
-    FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot()],
+    FroalaEditorModule,
+    FroalaViewModule,],
   selector: 'app-documents-add-body',
   templateUrl: './documents-add-body.component.html',
   styleUrls: ['./documents-add-body.component.scss']

@@ -24,6 +24,7 @@ import { DocumentsTableComponent } from './documents-table/documents-table.compo
 
 
 @Component({
+  standalone: true,
   imports: [DocumentsEditCategoryComponent, DocumentsHeaderComponent, DocumentsTableComponent, DocumentsTemplatesInfoComponent, CommonModule],
   selector: 'app-documents',
   templateUrl: './documents.component.html',

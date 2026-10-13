@@ -13,10 +13,12 @@ import { TicketDetailContactDetailsHistoryComponent } from './ticket-detail-cont
 import * as moment from "moment";
 import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.component';
 import { TicketsTableItemRequestedByComponent } from '../../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
 
 @Component({
   standalone: true,
-  imports: [PreviewPhoneMaskComponent, TicketsTableItemRequestedByComponent, CommonModule],
+  imports: [PreviewPhoneMaskComponent, TicketsTableItemRequestedByComponent, CommonModule, TicketDetailContactDetailsHistoryComponent, UserLogoPopoverDirective, NgbModule],
   selector: 'ticket-detail-contact-details',
   templateUrl: './ticket-detail-contact-details.component.html',
   styleUrls: ['./ticket-detail-contact-details.component.scss'],

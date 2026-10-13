@@ -1,16 +1,10 @@
+// Legacy NgModules still need JIT compilation with standalone bootstrapping.
+import '@angular/compiler';
 import { enableProdMode, importProvidersFrom } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 
 import { environment } from './environments/environment';
 import { AppComponent } from './app/app.component';
-import { QuoteAsidePreviewModule } from './app/components/billing/quotes/quote-aside-preview/quote-aside-preview.module';
-import { GoogleAuthenticatorModule } from './app/components/shared/google-authenticator/google-authenticator.module';
-import { InvoicesAsidePreviewModule } from './app/components/billing/invoices/invoices-aside-preview/invoices-aside-preview.module';
-import { MapModalModule } from './app/components/shared/map-modal/map-modal.module';
-import { UsersAsideEditModule } from './app/components/users/users-aside-edit/users-aside-edit.module';
-import { UsersAsideModule } from './app/components/users/users-aside/users-aside.module';
-import { CompanyAddAsideModule } from './app/components/companies/company-add-aside/company-add-aside.module';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
@@ -63,7 +57,7 @@ bootstrapApplication(AppComponent, {
             closeButton: true,
             timeOut: 5000,
             onActivateTick: true
-        }), RouterModule, AngularEditorModule, CompanyAddAsideModule, UsersAsideModule, UsersAsideEditModule, MapModalModule, InvoicesAsidePreviewModule, GoogleAuthenticatorModule, QuoteAsidePreviewModule),
+        }), RouterModule, AngularEditorModule),
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HttpInterceptorService,

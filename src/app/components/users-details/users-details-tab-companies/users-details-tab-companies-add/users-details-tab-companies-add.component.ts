@@ -20,10 +20,11 @@ import { CompanyDropDownComponent } from 'src/app/components/shared/company-drop
 import { PreloaderTicketComponent } from 'src/app/components/shared/preloader-ticket/preloader-ticket.component';
 import { PreviewPhoneMaskComponent } from 'src/app/components/shared/preview-phone-mask/preview-phone-mask.component';
 import { UserTableDefaultSubscriptionComponent } from 'src/app/components/users/users-table/user-table-default-subscription/user-table-default-subscription.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [PreloaderTicketComponent, DisabledBtnDirective, DropDownComponent, CompanyDropDownComponent, PreviewPhoneMaskComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
+  imports: [PreloaderTicketComponent, NgbModule, DisabledBtnDirective, DropDownComponent, CompanyDropDownComponent, PreviewPhoneMaskComponent, UserTableDefaultSubscriptionComponent, FormsModule, CommonModule],
   selector: 'app-users-details-tab-companies-add',
   templateUrl: './users-details-tab-companies-add.component.html',
   styleUrls: ['./users-details-tab-companies-add.component.scss'],

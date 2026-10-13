@@ -11,13 +11,14 @@ import { AppStateService } from 'src/app/states/app/app-state.service';
 import { InvoiceSettings } from './class/invoice-settings';
 import { CompanySetting } from 'src/app/components/companies/class/company-setting';
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { TextAreaDirective } from 'src/app/directives/text-area/text-area.directive';
 
 @Component({
+  providers: [provideNgxMask()],
   selector: 'app-invoice-settings',
   standalone: true,
-  imports: [ReactiveFormsModule, DropDownComponent, CommonModule, TextAreaDirective, NgxMaskModule.forRoot()],
+  imports: [ReactiveFormsModule, DropDownComponent, CommonModule, TextAreaDirective, NgxMaskDirective],
   templateUrl: './invoice-settings.component.html',
   styleUrls: ['./invoice-settings.component.scss']
 })

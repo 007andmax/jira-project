@@ -1,3 +1,4 @@
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 ﻿
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, OnInit, Output } from '@angular/core';
@@ -8,11 +9,11 @@ import { MatErrorComponent } from '../mat-error/mat-error.component';
 
 @Component({
   standalone: true,
-  imports: [MatErrorComponent, CommonModule],
+  imports: [NgxMaskDirective, MatErrorComponent, CommonModule],
   selector: 'google-authenticator',
   templateUrl: './google-authenticator.component.html',
   styleUrls: ['./google-authenticator.component.scss'],
-  providers: [NgbModalConfig, NgbModal]
+  providers: [provideNgxMask(), NgbModalConfig, NgbModal]
 })
 export class GoogleAuthenticatorComponent implements OnInit {
   @Output() onReset = new EventEmitter();

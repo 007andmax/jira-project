@@ -18,10 +18,11 @@ import { CompanyProfileApiKeysComponent } from './company-profile-api-keys/compa
 import { ApiKeysStateService } from 'src/app/states/api-keys/api-keys-state.service';
 import { CompanyProfileApiKeysAddAsideComponent } from './company-profile-api-keys/company-profile-api-keys-add-aside/company-profile-api-keys-add-aside.component';
 import { CompanyProfileApiKeysEditAsideComponent } from './company-profile-api-keys/company-profile-api-keys-edit-aside/company-profile-api-keys-edit-aside.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 declare var $: any;
 @Component({
   standalone: true,
-  imports: [CompanyProfileApiKeysAddAsideComponent, CompanyProfileApiKeysComponent, CompanyProfileProfileComponent, CompanyProfileOperationalHoursComponent, CompanyProfileWorkspaceComponent, CompanyProfileApiKeysEditAsideComponent, CommonModule],
+  imports: [CompanyProfileApiKeysAddAsideComponent, NgbModule, CompanyProfileApiKeysComponent, CompanyProfileProfileComponent, CompanyProfileOperationalHoursComponent, CompanyProfileWorkspaceComponent, CompanyProfileApiKeysEditAsideComponent, CommonModule],
   selector: 'app-company-profile',
   templateUrl: './company-profile.component.html',
   animations: [fadeInAnimation],

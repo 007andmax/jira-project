@@ -37,6 +37,7 @@ import { UsersTableCompanyByComponent } from '../../users/users-table/users-tabl
     PreloaderTicketComponent,
     FormsModule,
     NgbModule,
+    BillableItemComponent,
     TicketsTableItemRequestedByComponent,
     UsersTableCompanyByComponent]
 })

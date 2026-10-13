@@ -15,12 +15,13 @@ import { CrmCompanyJobTitle } from 'src/app/components/setting/crm-settings/crm-
 import { DropDownComponent } from 'src/app/components/shared/drop-down/drop-down.component';
 import { MatErrorComponent } from 'src/app/components/shared/mat-error/mat-error.component';
 import { UsersDropDownComponent } from 'src/app/components/shared/users-drop-down/users-drop-down.component';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 var $ = require("jquery");
 
 @Component({
+  providers: [provideNgxMask()],
   standalone: true,
-  imports: [DropDownComponent, NgxMaskModule.forRoot(), MatErrorComponent, UsersDropDownComponent, FormsModule, CommonModule],
+  imports: [DropDownComponent, NgxMaskDirective, MatErrorComponent, UsersDropDownComponent, FormsModule, CommonModule],
   selector: 'company-add-aside-short',
   templateUrl: './company-add-aside-short.component.html',
   styleUrls: ['./company-add-aside-short.component.scss']

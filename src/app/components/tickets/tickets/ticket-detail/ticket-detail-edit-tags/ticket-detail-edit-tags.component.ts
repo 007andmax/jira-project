@@ -20,7 +20,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [MatChipComponent, MatChipListComponent, ReactiveFormsModule, MatFormFieldComponent, NgModel, NgbModule, CommonModule],
+  imports: [MatChipComponent, MatChipListComponent, ReactiveFormsModule, MatFormFieldComponent, NgbModule, CommonModule],
   selector: 'ticket-detail-edit-tags',
   templateUrl: './ticket-detail-edit-tags.component.html',
   styleUrls: ['./ticket-detail-edit-tags.component.scss'],

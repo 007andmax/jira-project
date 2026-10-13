@@ -3,8 +3,12 @@ import { Subscription } from 'rxjs';
 import { PreviewFileStateService } from 'src/app/states/file-management/preview-file-state.service';
 import { FileManagerFile } from '../../file-manager/class/file-manager-file';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   selector: 'app-preview-file',
   templateUrl: './preview-file.component.html',
   styleUrls: ['./preview-file.component.scss']

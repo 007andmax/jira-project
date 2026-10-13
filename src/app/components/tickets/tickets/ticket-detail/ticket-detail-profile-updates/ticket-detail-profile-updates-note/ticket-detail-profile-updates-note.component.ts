@@ -10,15 +10,16 @@ import { ConfirmStateService } from 'src/app/components/shared/confirm/services/
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicTooltipComponent } from 'src/app/components/shared/dynamic-tooltip/dynamic-tooltip.component';
 import { TicketDetailProfileUpdatesHeaderInfoComponent } from '../ticket-detail-profile-updates-header-info/ticket-detail-profile-updates-header-info.component';
 import { TicketProfile } from '../../../class/ticket-profile';
 import { TicketsTableItemRequestedByComponent } from '../../../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
 
 @Component({
   standalone: true,
-  imports: [DynamicTooltipComponent, TicketsTableItemRequestedByComponent, TicketDetailProfileUpdatesHeaderInfoComponent, CommonModule],
+  imports: [DynamicTooltipComponent, NgbModule, UserLogoPopoverDirective, TicketDetailProfileUpdatesNoteItemComponent, TicketsTableItemRequestedByComponent, TicketDetailProfileUpdatesHeaderInfoComponent, CommonModule],
   selector: 'ticket-detail-profile-updates-note',
   templateUrl: './ticket-detail-profile-updates-note.component.html',
   styleUrls: ['./ticket-detail-profile-updates-note.component.scss']

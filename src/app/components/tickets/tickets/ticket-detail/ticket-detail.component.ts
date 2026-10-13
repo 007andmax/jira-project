@@ -45,7 +45,7 @@ import { TicketDetailPasswordsDetailsComponent } from './ticket-detail-passwords
 import { TicketDetailDocumentsDetailsComponent } from './ticket-detail-documents/ticket-detail-documents-details/ticket-detail-documents-details.component';
 import { TicketDetailTicketsDetailsComponent } from './ticket-detail-tickets/ticket-detail-tickets-details/ticket-detail-tickets-details.component';
 import { TicketDetailEditTagsComponent } from './ticket-detail-edit-tags/ticket-detail-edit-tags.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TicketDetailProfileFormUpdateComponent } from './ticket-detail-profile-form-update/ticket-detail-profile-form-update.component';
 import { TicketDetailNoteModalComponent } from './ticket-detail-note-modal/ticket-detail-note-modal.component';
 import { TicketDetailAddAssignedUserComponent } from './ticket-detail-add-assigned-user/ticket-detail-add-assigned-user.component';
@@ -65,10 +65,13 @@ import { TicketDetailTotalStatisticsComponent } from './ticket-detail-total-stat
 import { CompanyDevicesRemoteAccessComponent } from 'src/app/components/company-devices/company-devices-remote-access/company-devices-remote-access.component';
 import { UsersTableCompanyByComponent } from 'src/app/components/users/users-table/users-table-company-by/users-table-company-by.component';
 import { TicketsTableItemRequestedByComponent } from '../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { ClickOutsideDirective } from 'src/app/directives/click-otside/click-otside.directive';
+import { CompanyLogoPopoverDirective } from 'src/app/directives/company-logo-popover/company-logo-popover.directive';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
 
 @Component({
   standalone: true,
-  imports: [TicketDetailTotalStatisticsComponent, TicketsTableItemRequestedByComponent, UsersTableCompanyByComponent, TicketDetailAddAssignedUserComponent, TicketDetailAttachmentsComponent, TicketDetailChangePriorityComponent, TicketDetailClaimInfoComponent, TicketDetailContactComponent, TicketDetailDevicesComponent, TicketDetailDevicesDetailsComponent, TicketDetailDocumentsComponent, TicketDetailDocumentsPreviewComponent, TicketDetailInfoStatusComponent, TicketDetailLinkedAgentsComponent, TicketDetailPasswordsComponent, TicketDetailProfileEditUpdatesComponent, CommonModule],
+  imports: [TicketDetailTotalStatisticsComponent, UserLogoPopoverDirective, NgbModule, CompanyLogoPopoverDirective, ClickOutsideDirective, TicketDetailMessageComponent, TicketDetailTasksComponent, TicketDetailEditTagsComponent, TicketDetailTicketsDetailsComponent, TicketDetailDocumentsDetailsComponent, TicketDetailPasswordsDetailsComponent, TicketDetailContactDetailsComponent, TicketDetailTicketsComponent, TicketDetailChangeCompanyComponent, CompanyUsersDropDownComponent, TicketDetailHeaderComponent, TicketDetailChangeStatusComponent, TicketDetailProfileUpdatesComponent, TicketDetailProfileFormUpdateComponent, TicketsTableItemRequestedByComponent, UsersTableCompanyByComponent, TicketDetailAddAssignedUserComponent, TicketDetailAttachmentsComponent, TicketDetailChangePriorityComponent, TicketDetailClaimInfoComponent, TicketDetailContactComponent, TicketDetailDevicesComponent, TicketDetailDevicesDetailsComponent, TicketDetailDocumentsComponent, TicketDetailDocumentsPreviewComponent, TicketDetailInfoStatusComponent, TicketDetailLinkedAgentsComponent, TicketDetailPasswordsComponent, TicketDetailProfileEditUpdatesComponent, CommonModule],
   selector: 'ticket-detail',
   templateUrl: './ticket-detail.component.html',
   styleUrls: ['./ticket-detail.component.scss'],

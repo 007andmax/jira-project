@@ -26,11 +26,13 @@ import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { QuotesHeaderComponent } from '../quotes-header/quotes-header.component';
 import { QuotesItemComponent } from './quotes-item/quotes-item.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 
 @Component({
   standalone: true,
+  selector: 'app-quotes-table',
+  imports: [QuotesHeaderComponent, InfiniteScrollModule, QuotesItemComponent],
   templateUrl: './quotes-table.component.html',
   styleUrls: ['./quotes-table.component.scss'],
   providers: [QuotesListService],

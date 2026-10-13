@@ -3,14 +3,15 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TicketProfileShare } from '../../../class/ticket-profile-share';
 import { TicketsListService } from '../../../services/tickets-list.service';
 import * as moment from "moment";
-import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketProfile } from '../../../class/ticket-profile';
 import { TicketsTableItemRequestedByComponent } from '../../../tickets-table/tickets-table-item/tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, NgbTooltipModule, TicketsTableItemRequestedByComponent],
+  imports: [CommonModule, NgbModule, UserLogoPopoverDirective, TicketsTableItemRequestedByComponent],
   selector: 'ticket-detail-profile-updates-header-info',
   templateUrl: './ticket-detail-profile-updates-header-info.component.html',
   styleUrls: ['./ticket-detail-profile-updates-header-info.component.scss']

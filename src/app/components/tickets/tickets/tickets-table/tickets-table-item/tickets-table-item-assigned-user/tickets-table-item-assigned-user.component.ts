@@ -6,18 +6,24 @@ import { CurrentUser } from 'src/class/current-user/current-user';
 import { UsersStateService } from 'src/app/states/users/users-state.service';
 import { TicketsService } from 'src/app/services/tickets/tickets.service';
 import { TicketsPermissionsService } from '../../../ticket-edit-aside/services/tickets-permissions.service';
-import { NgbDropdown, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbModule, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { AppStateService } from 'src/app/states/app/app-state.service';
 import { ToastrService } from 'ngx-toastr';
 import { CustomerPortalStateService } from 'src/app/states/customer-portal/customer-portal-state.service';
 import { TicketsTableItemRequestedByComponent } from '../tickets-table-item-requested-by/tickets-table-item-requested-by.component';
+import { MatChipComponent } from 'src/app/components/shared/mat-chip/mat-chip.component';
+import { TicketsTableItemAssignedUserItemComponent } from './tickets-table-item-assigned-user-item/tickets-table-item-assigned-user-item.component';
+import { TicketsTableItemAssignedUserMoreItemComponent } from './tickets-table-item-assigned-user-more-item/tickets-table-item-assigned-user-more-item.component';
+import { CommonModule } from '@angular/common';
+import { UserLogoPopoverDirective } from 'src/app/directives/user-logo-popover/user-logo-popover.directive';
 
 @Component({
+  standalone: true,
   selector: 'app-tickets-table-item-assigned-user',
   templateUrl: './tickets-table-item-assigned-user.component.html',
   styleUrls: ['./tickets-table-item-assigned-user.component.scss'],
   providers: [TicketsPermissionsService],
-  imports: [TicketsTableItemRequestedByComponent]
+  imports: [TicketsTableItemRequestedByComponent, CommonModule, UserLogoPopoverDirective, NgbModule, MatChipComponent, TicketsTableItemAssignedUserMoreItemComponent, TicketsTableItemAssignedUserItemComponent]
 
 })
 export class TicketsTableItemAssignedUserComponent {

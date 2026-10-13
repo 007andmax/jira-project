@@ -6,8 +6,11 @@ import { Document } from 'src/app/components/documents/class/document';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { CompaniesStateService } from 'src/app/states/company/companies-state.service';
 import { TicketStateService } from '../../../ticket-edit-aside/services/ticket-state.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule],
   selector: 'ticket-detail-documents-preview',
   templateUrl: './ticket-detail-documents-preview.component.html',
   styleUrls: ['./ticket-detail-documents-preview.component.scss'],
