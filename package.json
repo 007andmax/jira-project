@@ -6,7 +6,7 @@
     "dev": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve --live-reload false",
     "dev-front": "ng serve",
     "build": "node --openssl-legacy-provider --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --configuration production --configuration=dev",
-    "build-prod": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build -c production > build.log 2>&1",
+    "build-prod": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build -c production",
     "test": "node --openssl-legacy-provider ./node_modules/@angular/cli/bin/ng test --watch --code-coverage --source-map=true",
     "lint": "ng lint",
     "compodoc": "npx compodoc -p src/tsconfig.app.json",
