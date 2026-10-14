@@ -1,3 +1,5 @@
+import { LeftPanelComponent } from './components/left-panel/left-panel.component';
+import { LeftPanelSuperAdminComponent } from './components/super-admin/left-panel-super-admin/left-panel-super-admin.component';
 ﻿
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -83,7 +85,7 @@ import { HeaderComponent } from './components/header/header.component';
  */
 @Component({
   standalone: true,
-  imports: [CompanyAddAsideComponent, MainComponent, HeaderComponent, ModalLockScreenComponent, ModalSessionScreenComponent, PreviewFileComponent, DraftEmailComponent, InventoryAddAsideComponent, InventoryEditAsideComponent, InvoicesAsideComponent, InvoicesAsidePreviewComponent, ManageCardsAddComponent, ManageCardsEditComponent, MapModalComponent, MarketingSubscriptionsAsideComponent, NonContractServicesAddComponent, NonContractServicesEditComponent, NotificationsComponent, PreviewAttachmentComponent, QuoteAsidePreviewComponent, ReportSendEmailComponent, TasksAddComponent, TasksEditComponent, TicketAddAsideComponent, UsersAsideComponent, BreadcrumbsComponent, CannedResponsesAsideComponent, HelpCenterInfoAsideComponent, ModalImageCropperComponent, UsersAsideEditComponent, RouterModule, CommonModule],
+  imports: [CompanyAddAsideComponent, MainComponent, HeaderComponent, ModalLockScreenComponent, ModalSessionScreenComponent, PreviewFileComponent, DraftEmailComponent, InventoryAddAsideComponent, InventoryEditAsideComponent, InvoicesAsideComponent, InvoicesAsidePreviewComponent, ManageCardsAddComponent, ManageCardsEditComponent, MapModalComponent, MarketingSubscriptionsAsideComponent, NonContractServicesAddComponent, NonContractServicesEditComponent, NotificationsComponent, PreviewAttachmentComponent, QuoteAsidePreviewComponent, ReportSendEmailComponent, TasksAddComponent, TasksEditComponent, TicketAddAsideComponent, UsersAsideComponent, BreadcrumbsComponent, CannedResponsesAsideComponent, HelpCenterInfoAsideComponent, ModalImageCropperComponent, UsersAsideEditComponent, RouterModule, CommonModule, LeftPanelComponent, LeftPanelSuperAdminComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

@@ -1,4 +1,5 @@
-﻿
+﻿import { MatFormFieldComponent } from '../../shared/mat-form-field/mat-form-field.component';
+
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DeviceTag } from '../../setting/manage-tags/manage-tags-devices/class/device-tag';
@@ -18,7 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   standalone: true,
-  imports: [MatChipComponent, MatChipListComponent, CommonModule, NgbModule],
+  imports: [MatChipComponent, MatChipListComponent, CommonModule, NgbModule, MatFormFieldComponent],
   selector: 'app-company-devices-tags',
   templateUrl: './company-devices-tags.component.html',
   styleUrls: ['./company-devices-tags.component.scss'],

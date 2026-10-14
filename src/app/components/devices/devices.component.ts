@@ -1,3 +1,9 @@
+import { MatFormFieldComponent } from '../shared/mat-form-field/mat-form-field.component';
+import { MatChipListComponent } from '../shared/mat-chip-list/mat-chip-list.component';
+import { MatChipComponent } from '../shared/mat-chip/mat-chip.component';
+import { MatOptionComponent } from '../shared/mat-option/mat-option.component';
+import { DynamicTooltipComponent } from '../shared/dynamic-tooltip/dynamic-tooltip.component';
+import { ReportSendEmailComponent } from '../reports/report-additional-actions/report-send-email/report-send-email.component';
 import { Subscription } from 'rxjs';
 import { ChangeDetectorRef, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -26,7 +32,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
   standalone: true,
   templateUrl: './devices.component.html',
   styleUrls: ['./devices.component.scss'],
-  imports: [NgbTooltipModule]
+  imports: [NgbTooltipModule, MatFormFieldComponent, MatChipListComponent, MatChipComponent, MatOptionComponent, DynamicTooltipComponent, DropDownComponent, DatePickerComponent, ReportSendEmailComponent]
 })
 export class DevicesComponent implements OnInit, OnDestroy {
   @ViewChild("templatePowersell", { static: true }) template;
